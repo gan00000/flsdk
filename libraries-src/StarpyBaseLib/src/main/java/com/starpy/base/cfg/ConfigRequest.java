@@ -128,6 +128,7 @@ public class ConfigRequest{
 //        }else{
 //            mUrl = ResConfig.getCdnPreferredUrl(context) + "android/ifm/" + lanuage + "/s_sdk_login_terms.txt";
 //        }
+        // TODO: 2018/4/10 用户条款地址
         mUrl = "https://www.gamamobi.com/member/archive.html";
 
         baseReqeustBean.setCompleteUrl(mUrl);

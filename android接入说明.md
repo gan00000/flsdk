@@ -56,10 +56,10 @@
 
 
     }
- ```
+    ```
  ------------------------------
 
-<h2 id="101">SDK api说明</h2> 
+<h2 id="101">SDK api说明</h2>
 以下为sdk api使用示例,具体请查看SDK demo 
 
 * <h3 id="1">实例SDK接口IStarpy对象</h3>  
@@ -134,7 +134,7 @@
       	PL.i("activity onRequestPermissionsResult");
       	iStarpy.onRequestPermissionsResult(this,requestCode,permissions,grantResults);
     }  
-```
+    ```
  
 * <h3 id="3">初始化sdk</h3>
 ```
@@ -153,7 +153,7 @@
     * SGameLanguage.en_US  游戏为英文语言时使用
     * */
     iStarpy.setGameLanguage(this, SGameLanguage.zh_TW);
-    ```
+ ```
 	
 * <h3 id="5">设置角色信息</h3> 
 
