@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+>
+
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:layout_centerInParent="true"
+                  android:background="@android:color/white"
+                  android:orientation="vertical"
+                  android:gravity="center_vertical"
+    >
+
+        <!--标题-->
+        <include layout="@layout/py_title_layout"/>
+
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:paddingRight="@dimen/px_36"
+                      android:paddingLeft="@dimen/px_36"
+                      android:layout_centerInParent="true"
+                      android:orientation="vertical"
+                      android:gravity="center_horizontal">
+
+            <ScrollView android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scrollbars="none"
+
+            >
+
+                <TextView android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:id="@+id/py_terms_text_id"
+                          android:textColor="@android:color/black"
+                />
+
+            </ScrollView>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

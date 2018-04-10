@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+>
+
+
+    <LinearLayout android:layout_width="@dimen/px_600"
+                  android:layout_height="@dimen/px_480"
+                  android:background="@drawable/py_page_bg"
+                  android:orientation="vertical"
+                  android:gravity="center_horizontal"
+                  android:layout_centerVertical="true"
+                  android:layout_centerHorizontal="true">
+
+        <!--标题-->
+        <include layout="@layout/py_title_layout"/>
+
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:paddingLeft="@dimen/px_36"
+                      android:paddingRight="@dimen/px_36"
+                      android:layout_centerInParent="true"
+                      android:orientation="vertical"
+                      android:gravity="center_horizontal">
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="@dimen/px_80"
+                          android:orientation="horizontal"
+                          android:background="@drawable/py_edit_text_rectangle_bg"
+                          android:paddingLeft="@dimen/px_10"
+                          android:paddingRight="@dimen/px_10"
+            >
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="match_parent"
+                          android:text="@string/py_account"
+                          android:gravity="center_vertical"
+                          android:textSize="@dimen/sp_24"
+                          android:textColor="@android:color/black"
+                />
+
+                <EditText android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:paddingLeft="@dimen/px_10"
+                          android:paddingRight="@dimen/px_10"
+                          android:hint="@string/py_register_account_hit"
+                          android:background="@null"
+                          android:gravity="center_vertical"
+                          android:maxLines="1"
+                          android:textSize="@dimen/sp_22"
+                          android:id="@+id/py_register_account"
+
+                />
+
+            </LinearLayout>
+
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="@dimen/px_80"
+                          android:orientation="horizontal"
+                          android:background="@drawable/py_edit_text_rectangle_bg"
+                          android:paddingLeft="@dimen/px_10"
+                          android:paddingRight="@dimen/px_10"
+                          android:layout_marginTop="@dimen/px_15"
+                          android:gravity="center_vertical"
+            >
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="match_parent"
+                          android:text="@string/py_password"
+                          android:gravity="center_vertical"
+                          android:textSize="@dimen/sp_24"
+                          android:textColor="@android:color/black"
+                />
+
+                <EditText android:layout_width="0dp"
+                          android:layout_height="match_parent"
+                          android:layout_weight="1.0"
+                          android:paddingLeft="@dimen/px_10"
+                          android:paddingRight="@dimen/px_10"
+                          android:hint="@string/py_register_account_hit"
+                          android:background="@null"
+                          android:gravity="center_vertical"
+                          android:textSize="@dimen/sp_22"
+                          android:maxLines="1"
+                          android:inputType="textPassword"
+                          android:id="@+id/py_register_password"
+                />
+
+
+                <include layout="@layout/py_eye_layout"/>
+
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="@dimen/px_50"
+                          android:orientation="horizontal"
+                          android:paddingLeft="@dimen/px_10"
+                          android:paddingRight="@dimen/px_10"
+                          android:layout_marginTop="@dimen/px_20"
+                          android:gravity="center_vertical"
+            >
+
+                <ImageView android:layout_width="@dimen/px_30"
+                           android:layout_height="@dimen/px_30"
+                           android:src="@drawable/py_terms_checkbox_selector"
+                           android:id="@+id/py_register_account_terms_check"
+
+                />
+
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="match_parent"
+                          android:text="@string/py_register_account_terms"
+                          android:gravity="center_vertical"
+                          android:textSize="@dimen/sp_18"
+                          android:layout_marginLeft="@dimen/px_15"
+                          android:maxLines="1"
+                          android:id="@+id/py_register_terms_text_id"
+                          android:textColor="@android:color/black"
+                />
+
+
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="@dimen/px_80"
+                          android:orientation="horizontal"
+                          android:background="@drawable/py_login_btn_bg"
+                          android:paddingLeft="@dimen/px_10"
+                          android:paddingRight="@dimen/px_10"
+                          android:layout_marginTop="@dimen/px_20"
+                          android:gravity="center"
+                          android:id="@+id/doLogin"
+            >
+                <TextView android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:text="@string/py_confire"
+                          android:textStyle="bold"
+                          android:gravity="center"
+                          android:textSize="@dimen/sp_24"
+                          android:id="@+id/py_register_account_confirm"
+                          android:textColor="@android:color/black"
+                />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

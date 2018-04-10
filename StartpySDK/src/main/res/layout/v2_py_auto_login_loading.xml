@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:id="@+id/py_auto_login_page"
+    android:visibility="visible"
+    >
+
+
+    <LinearLayout
+        android:layout_width="@dimen/px_700"
+        android:layout_height="@dimen/px_400"
+        android:layout_centerInParent="true"
+        android:background="@drawable/v2_login_bg"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="@dimen/sp_24"
+            android:textColor="@android:color/black"
+            android:paddingLeft="@dimen/px_10"
+            android:paddingRight="@dimen/px_10"
+            android:id="@+id/py_auto_login_tips"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/px_20"
+            android:gravity="center"
+            android:textSize="@dimen/sp_24"
+            android:textColor="@android:color/black"
+            android:id="@+id/py_auto_login_wait_time"
+            />
+
+        <TextView
+            android:layout_width="@dimen/px_280"
+            android:layout_height="@dimen/px_80"
+            android:layout_marginTop="@dimen/px_40"
+            android:gravity="center"
+            android:textSize="@dimen/sp_24"
+            android:textColor="@android:color/black"
+            android:background="@drawable/py_edit_text_rectangle_bg"
+            android:text="@string/py_auto_login_change"
+            android:id="@+id/py_auto_login_change"
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>

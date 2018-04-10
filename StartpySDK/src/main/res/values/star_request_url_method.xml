@@ -1,0 +1,11 @@
+<resources>
+
+
+    <string name="star_pay_third_method">dynamic_change</string>
+    <string name="star_cs_method">player_entrance</string>
+    <string name="star_act_dynamic_method">act_dynamic</string>
+
+    <string name="star_ads_install_activation">ads_install_activation</string>
+
+
+</resources>

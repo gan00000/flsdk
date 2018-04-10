@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/py_title_layout_id"
+    >
+
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="@dimen/px_100">
+
+        <LinearLayout android:layout_width="@dimen/px_100"
+                      android:layout_height="match_parent"
+                      android:layout_centerVertical="true"
+                      android:gravity="center_vertical"
+                      android:id="@+id/py_back_button"
+        >
+
+            <ImageView android:layout_width="@dimen/px_40"
+                       android:layout_height="@dimen/px_40"
+                       android:layout_marginLeft="@dimen/px_10"
+                       android:src="@drawable/py_back_button"
+
+            />
+        </LinearLayout>
+
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/py_account_login"
+                android:textStyle="bold"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:textSize="@dimen/sp_30"
+                android:textColor="@android:color/black"
+                android:id="@+id/py_title_id"
+        />
+
+        <LinearLayout android:layout_width="@dimen/px_100"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:id="@+id/py_title_right_button"
+            android:visibility="gone"
+            >
+
+            <ImageView android:layout_width="@dimen/px_40"
+                android:layout_height="@dimen/px_40"
+                android:layout_marginLeft="@dimen/px_10"
+                android:src="@drawable/py_title_btn_close"
+
+                />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

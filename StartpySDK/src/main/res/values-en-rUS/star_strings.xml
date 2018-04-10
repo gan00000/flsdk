@@ -1,0 +1,64 @@
+<resources>
+
+    <string name="py_success">success</string>
+
+    <string name="py_account_login">Account Login</string>
+    <string name="py_account">Account:</string>
+    <string name="py_account_hit">Account</string>
+    <string name="py_password">Password:</string>
+    <string name="py_password_hit">Password</string>
+    <string name="py_login">Login</string>
+    <string name="py_register_account">Sign Up</string>
+    <string name="py_login_fb">Facebook Login</string>
+    <string name="py_login_star">Account Login</string>
+    <string name="py_login_mac">Free Login</string>
+    <string name="py_register_account_hit">6~18 Characters</string>
+    <string name="py_confire">Confirm</string>
+    <string name="py_register_account_terms">License Agreement And Privacy Policy</string>
+    <string name="py_password_error">Password Format Error</string>
+    <string name="py_account_error">Account Format Error</string>
+    <string name="py_account_empty">Account Can Not Be Blank</string>
+    <string name="py_password_empty">Password Can Not Be Blank</string>
+    <string name="py_password_equal_account"> Account And Password Can’t Be The Same</string>
+    <string name="py_select_terms">Please Check To Agree Service Terms</string>
+    <string name="py_register_success">Register Succeed</string>
+    <string name="py_login_success">Login Succeed</string>
+    <string name="py_login_terms"> User License Agreement</string>
+    <string name="py_error_occur">Error Occurred, Please Try Again</string>
+    <string name="py_error_time_out">Connection Timeout, Please Try Again</string>
+    <string name="py_auto_login_change">Switch Account</string>
+    <string name="py_pay_title">Prepaid</string>
+    <string name="py_login_mac_tips">You Logged In to %1$s ‘s Account And Following Is The Password:\nAccount: %2$s Password: %3$s</string>
+    <string name="py_login_mac_saveimage_tips">Your Account And Password Are Saved To The Album</string>
+    <string name="py_login_autologin_tips">Account %1$s Is Logging In</string>
+    <string name="py_login_autologin_fblogining_tips">facebook account logging in</string>
+    <string name="py_login_autologin_logining_tips">Account Is Logging In</string>
+
+    <string name="py_register_email_hit">Optional E-mail address, to find password</string>
+    <string name="py_findpwd_email_hit">Required E-mail address, to find password</string>
+    <string name="py_login_save_account">Remember Account</string>
+    <string name="py_login_by_members">Member login</string>
+    <string name="py_email_format_error">Wrong E-mail format</string>
+    <string name="py_email_empty">Cannot be empty</string>
+    <string name="py_old_pwd">Old password</string>
+    <string name="py_new_pwd">New password</string>
+    <string name="py_change_pwd">Alter password</string>
+    <string name="py_old_equel_new_pwd">New password and old password cannot be the same</string>
+    <string name="py_findpwd_success">Success!</string>
+    <string name="py_findpwd">Forget password</string>
+    <string name="py_bind_unique">Reg-Free binding</string>
+    <string name="py_bind_fb">Facebook binding</string>
+    <string name="py_bind_google">Google binding</string>
+    <string name="py_bind_phone_area_num">+86</string>
+    <string name="py_account_center">Member Center</string>
+    <string name="py_send_new_pwd">Send new password</string>
+
+    <string name="py_free_reg">guest login</string>
+
+    <string name="py_login_page_account_login">Login</string>
+    <string name="py_login_page_account_reg">Register</string>
+    <string name="py_login_page_account_bind">Account Bind</string>
+    <string name="py_login_page_change_pwd">Change Password</string>
+    <string name="py_login_page_forgot_pwd">Forgot Password</string>
+
+</resources>

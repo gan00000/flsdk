@@ -1,0 +1,84 @@
+apply plugin: 'com.android.library'
+android {
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
+
+    defaultConfig {
+        minSdkVersion 18
+        targetSdkVersion 25
+
+        //设置改jar版本
+        buildConfigField "String", JAR_VERSION, SDK_VERSION_NAME_PY_PAY
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    compile project(':libraries-src:StarpyBaseLib')
+}
+
+
+//./gradlew makeJar 出现env: bash\r: No such file or directory的话是由
+// 于window生成的工程gradlew文件在mac下换行符有问题
+
+
+//打包之前，删除以前的文件
+task clearJar(type: Delete) {
+    delete 'build/libs/'+ getJarName() + '.jar'
+}
+
+//打包生成test.jar
+task makeLibraryJar(type:org.gradle.api.tasks.bundling.Jar) {
+    //指定生成的jar名
+    baseName getJarName()
+
+    //去掉不需要打包的目录和文件
+    exclude 'META-INF/LICENSE.txt'
+    exclude 'META-INF/NOTICE.txt'
+    //过滤不需要的class
+//    exclude "**/**/BuildConfig.class"
+//    exclude "**/**/BuildConfig\$*.class"
+    exclude "**/R.class"
+    exclude "**/R\$*.class"
+
+    //从哪里打包class文件,可以指定文件和目录
+    from('build/intermediates/classes/release/')
+    //打包到jar后的目录结构
+//    into('./')
+}
+
+makeLibraryJar.dependsOn(clearJar,build)
+
+def getJarName(){
+    return SDK_VERSION_NAME_PY_PAY.replace("\"","")
+}
+
+task copyJar(type: Copy) {
+
+    from('build/libs/')
+
+    into('../../libs/')
+    include(getJarName() + '.jar')
+}
+
+copyJar.dependsOn(makeLibraryJar)
+
+task createPayJar(type: Copy) {
+
+    from('build/libs/')
+
+    into('../../libs/')
+    include(getJarName() + '.jar')
+}
+
+createPayJar.dependsOn(makeLibraryJar)

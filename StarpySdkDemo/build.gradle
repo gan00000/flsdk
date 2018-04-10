@@ -1,0 +1,72 @@
+apply plugin: 'com.android.application'
+
+android {
+
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            //定义一个文件
+//            outputFileName = "${variant.name}-${variant.versionName}.apk"
+//            def outputFile = output.outputFile
+            //定义存储apk的位置和文件名，这里文件名格式定义为 [applicationId_版本号_ReleaseTime_apk]
+            if (outputFileName != null && outputFileName.contains("release") && outputFileName.endsWith('.apk')) {
+
+                outputFileName = "${variant.applicationId}_${variant.versionCode}_${variant.versionName}_${getReleaseTime()}_release.apk"
+
+            }else  if (outputFile != null && outputFile.name.contains("debug") && outputFile.name.endsWith('.apk')) {
+
+                outputFileName = "${variant.applicationId}_${variant.versionCode}_${variant.versionName}_${getReleaseTime()}_debug.apk"
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+//            multiDexEnabled true //Add this
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+        }
+    }
+    productFlavors {
+
+        erge {
+            applicationId "com.gama.myapplication"
+            minSdkVersion 18
+            targetSdkVersion 26
+            versionCode 1
+            versionName "1.0"
+            flavorDimensions "1"
+
+//            resValue "string", "facebook_app_name", ""
+            resValue "string", "facebook_app_id", "180494902571206"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider180494902571206"
+        }
+
+
+    }
+
+    android {
+        lintOptions {
+            checkReleaseBuilds false
+            // Or, if you prefer, you can continue to check for errors in release builds,
+            // but continue the build even when errors are found:
+            abortOnError false
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile project(':StartpySDK')
+    //    compile 'com.android.support:multidex:1.0.2'
+}
+
+
+def getReleaseTime() {
+    return new Date().format("yyyy-MM-dd-HH-mm", TimeZone.getDefault())
+}

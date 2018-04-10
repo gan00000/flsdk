@@ -1,0 +1,65 @@
+<resources>
+
+    <string name="py_account_login">账号登入</string>
+    <string name="py_account">账号:</string>
+    <string name="py_account_hit">账号</string>
+    <string name="py_password">密码:</string>
+    <string name="py_password_hit">密码</string>
+    <string name="py_login">登入</string>
+    <string name="py_register_account">注册账号</string>
+    <string name="py_login_fb">Facebook登入</string>
+    <string name="py_login_star">Starpy账号登入</string>
+    <string name="py_login_mac">免注册登入</string>
+    <string name="py_register_account_hit">6~18字符,仅限字母或数字</string>
+    <string name="py_confire">确认</string>
+    <string name="py_register_account_terms">我已阅读并同意《会员条款及管理规章》</string>
+    <string name="py_password_error">密码格式错误</string>
+    <string name="py_account_error">账号格式错误</string>
+    <string name="py_account_empty">账号不能为空</string>
+    <string name="py_password_empty">密码不能为空</string>
+    <string name="py_password_equal_account">账号、密码不能一样</string>
+    <string name="py_select_terms">请勾选同意服务条款</string>
+    <string name="py_register_success">注册成功</string>
+    <string name="py_login_success">登入成功</string>
+    <string name="py_login_terms">会员条款及管理规章</string>
+    <string name="py_error_occur">发生错误，请重试</string>
+    <string name="py_error_time_out">连接超时，请重试</string>
+    <string name="py_auto_login_change">切换账号</string>
+    <string name="py_pay_title">充值</string>
+    <string name="py_login_mac_tips">你登入 %1$s 的账号和密码如下:\n账号: %2$s 密码: %3$s</string>
+    <string name="py_login_mac_saveimage_tips">你的账号密码已经保存到相册中</string>
+    <string name="py_login_autologin_tips">账号 %1$s 正在登录</string>
+    <string name="py_login_autologin_fblogining_tips">facebook账号正在登录</string>
+
+
+    <string name="py_success">成功</string>
+
+    <string name="py_login_autologin_logining_tips">账号正在登录</string>
+
+    <string name="py_register_email_hit">邮箱,选填,用于找回密码</string>
+    <string name="py_findpwd_email_hit">邮箱,必填,用于找回密码</string>
+    <string name="py_login_save_account">记住账号</string>
+    <string name="py_login_by_members">会员登入</string>
+    <string name="py_email_format_error">邮箱格式错误</string>
+    <string name="py_email_empty">邮箱不能为空</string>
+    <string name="py_old_pwd">旧密码</string>
+    <string name="py_new_pwd">新密码</string>
+    <string name="py_change_pwd">修改密码</string>
+    <string name="py_old_equel_new_pwd">新旧密码不能一致</string>
+    <string name="py_findpwd_success">找回密码成功</string>
+    <string name="py_findpwd">忘记密码</string>
+    <string name="py_bind_unique">游客绑定</string>
+    <string name="py_bind_fb">Facebook绑定</string>
+    <string name="py_bind_google">Google绑定</string>
+    <string name="py_bind_phone_area_num">+86</string>
+    <string name="py_account_center">会员中心</string>
+    <string name="py_send_new_pwd">发送新密码</string>
+    <string name="py_free_reg">游客登入</string>
+
+    <string name="py_login_page_account_login">会员登入页</string>
+    <string name="py_login_page_account_reg">会员注册</string>
+    <string name="py_login_page_account_bind">绑定账号</string>
+    <string name="py_login_page_change_pwd">修改密码</string>
+    <string name="py_login_page_forgot_pwd">忘记密码</string>
+
+</resources>

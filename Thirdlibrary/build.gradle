@@ -1,0 +1,91 @@
+apply plugin: 'com.android.library'
+
+android {
+
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
+
+    defaultConfig {
+        minSdkVersion 18
+        targetSdkVersion 25
+
+        //设置改jar版本
+        buildConfigField "String", JAR_VERSION, SDK_VERSION_NAME_PY_THIRD
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.google.android.gms:play-services-auth:11.0.1'
+    compile 'com.google.android.gms:play-services-plus:11.0.1'
+    compile 'com.google.android.gms:play-services-base:11.0.1'
+    compile 'com.google.android.gms:play-services-games:11.0.1'
+    //    compile 'com.facebook.fresco:fresco:1.4.0'
+    //    compile 'com.facebook.android:facebook-android-sdk:4.+'
+    //facebookfresco合并到fb sdk中
+    compile project(':facebook:starpy-fb-4.25')
+    compile project(':libraries-src:StarpyBaseLib')
+}
+
+
+//打包之前，删除以前的文件
+task clearJar(type: Delete) {
+    delete 'build/libs/'+ getJarName() + '.jar'
+}
+
+//打包生成test.jar
+task makeLibraryJar(type:org.gradle.api.tasks.bundling.Jar) {
+    //指定生成的jar名
+    baseName getJarName()
+
+    //去掉不需要打包的目录和文件
+    exclude 'META-INF/LICENSE.txt'
+    exclude 'META-INF/NOTICE.txt'
+    //过滤不需要的class
+//    exclude "**/**/BuildConfig.class"
+//    exclude "**/**/BuildConfig\$*.class"
+    exclude "**/R.class"
+    exclude "**/R\$*.class"
+
+    //从哪里打包class文件,可以指定文件和目录
+    from('build/intermediates/classes/release/')
+    //打包到jar后的目录结构
+//    into('./')
+}
+
+makeLibraryJar.dependsOn(clearJar,build)
+
+def getJarName(){
+    return SDK_VERSION_NAME_PY_THIRD.replace("\"","")
+}
+
+
+task copyJar(type: Copy) {
+
+    from('build/libs/')
+
+    into('../libs/')
+    include(getJarName() + '.jar')
+}
+
+copyJar.dependsOn(makeLibraryJar)
+
+task pyThird(type: Copy) {
+
+    from('build/libs/')
+
+    into('../libs/')
+    include(getJarName() + '.jar')
+}
+
+pyThird.dependsOn(makeLibraryJar)
