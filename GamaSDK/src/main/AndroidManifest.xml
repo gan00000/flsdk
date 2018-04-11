@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.starpy.sdk">
+    package="com.gama.sdk">
 
     <!--需要添加以下配置 start-->
 
@@ -38,13 +38,13 @@
     <application>
 
         <activity
-            android:name="com.starpy.sdk.SWebViewActivity"
+            android:name="com.gama.sdk.SWebViewActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|fontScale"
             android:screenOrientation="sensorLandscape"
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:theme="@style/Gama.Theme.AppCompat.Light.NoActionBar.FullScreen"></activity>
         <activity
-            android:name="com.starpy.pay.gp.GooglePayActivity2"
+            android:name="com.gama.pay.gp.GooglePayActivity2"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|fontScale"
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:screenOrientation="sensorLandscape"
@@ -107,7 +107,7 @@
             </intent-filter>
         </receiver>
 
-        <receiver android:name="com.starpy.sdk.GamaBroadcastReceiver" android:exported="true">
+        <receiver android:name="com.gama.sdk.GamaBroadcastReceiver" android:exported="true">
             <intent-filter>
                 <action android:name="com.android.vending.INSTALL_REFERRER" />
             </intent-filter>

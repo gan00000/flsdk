@@ -29,7 +29,7 @@
 	    compile fileTree(include: ['*.jar'], dir: 'libs')
 	
 	    //SDK   添加以下配置以依赖SDK,具体版本对接的时候与SDK人员沟通确定
-	    compile 'com.starpy.sdk:starpy-sdk:2.+'
+	    compile 'com.gama.sdk:starpy-sdk:2.+'
 
 	}		
 	```
