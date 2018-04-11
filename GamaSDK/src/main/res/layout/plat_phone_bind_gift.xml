@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+
+    <include layout="@layout/plat_menu_content_title_layout"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_2"
+        android:layout_marginLeft="@dimen/px_12"
+        android:layout_marginRight="@dimen/px_12"
+        android:background="@android:color/white"/>
+
+
+    <LinearLayout
+        android:layout_width="@dimen/px_600"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/px_60"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/plat_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/px_12"
+            android:layout_marginRight="@dimen/px_12"
+            android:text="@string/plat_starpy_account"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/sp_24" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/plat_has_bind_phone_layout"
+        android:layout_width="@dimen/px_600"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/px_40"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_60"
+            android:layout_marginTop="@dimen/px_10"
+            android:background="@drawable/plat_white_rectangle_bg"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="@dimen/px_200"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/plat_bind_phone_has_bind"
+                android:textColor="@color/e_e68f33"
+                android:textSize="@dimen/sp_20" />
+
+            <include layout="@layout/plat_line" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/bind_phone_num_tv"
+                android:textColor="@color/e_bcbcbc"
+                android:textSize="@dimen/sp_20" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/bind_phone_get_gift_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/px_65"
+            android:background="@drawable/plat_confirm_bg"
+            android:gravity="center"
+            android:text="@string/plat_bind_phone_get_gift"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/sp_30"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="@dimen/px_600"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/px_40"
+        android:id="@+id/plat_bind_phone_layout"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_60"
+            android:layout_marginTop="@dimen/px_10"
+            android:background="@drawable/plat_white_rectangle_bg"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/bind_phone_area_num"
+                android:layout_width="@dimen/px_200"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/py_bind_phone_area_num"
+                android:textColor="@color/e_e68f33"
+                android:textSize="@dimen/sp_20" />
+
+            <include layout="@layout/plat_line" />
+
+            <EditText
+                android:id="@+id/bind_phone_num_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:gravity="center"
+                android:maxLines="1"
+                android:inputType="number"
+                android:hint="@string/plat_bind_phone_tips"
+                android:textColor="@color/e_bcbcbc"
+                android:textSize="@dimen/sp_20" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_60"
+            android:layout_marginTop="@dimen/px_10"
+            android:background="@drawable/plat_white_rectangle_bg"
+            android:gravity="center">
+
+
+
+            <EditText
+                android:id="@+id/bind_phone_vf_code_et"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:background="@null"
+                android:gravity="center"
+                android:hint="@string/plat_bind_phone_vf_code"
+                android:textColor="@color/e_bcbcbc"
+                android:maxLines="1"
+                android:inputType="number"
+                android:textSize="@dimen/sp_20" />
+
+            <include layout="@layout/plat_line" />
+
+            <TextView
+                android:layout_width="@dimen/px_200"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/bind_phone_get_vf_code_tv"
+                android:text="@string/plat_bind_phone_get_vf_code"
+                android:textColor="@color/e_e68f33"
+                android:textSize="@dimen/sp_20" />
+
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/bind_phone_confirm_bind"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/px_20"
+            android:background="@drawable/plat_confirm_bg"
+            android:text="@string/plat_bind_phone_confirm_bind"
+            android:textSize="@dimen/sp_30"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:gravity="center" />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/bind_phone_get_gift_tips"
+        android:layout_width="@dimen/px_600"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/px_10"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/sp_20"
+        android:textStyle="bold" />
+
+
+</LinearLayout>

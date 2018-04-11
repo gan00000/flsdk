@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/plat_confirm_btn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_80"
+        android:layout_marginTop="@dimen/px_20"
+        android:background="@drawable/plat_confirm_bg"
+        android:text="@string/plat_confire_btn"
+        android:textSize="@dimen/sp_30"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:gravity="center" />
+
+</LinearLayout>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:id="@+id/drawer_layout"
+    android:background="@android:color/transparent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:layout_marginBottom="@dimen/px_40"
+    android:layout_marginLeft="@dimen/px_80"
+    android:layout_marginRight="@dimen/px_80"
+    android:layout_marginTop="@dimen/px_40">
+    <!-- The main content view -->
+
+    <FrameLayout
+        android:id="@+id/main_content_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/plat_content_bg"
+        >
+
+        <FrameLayout
+            android:id="@+id/content_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/px_4"
+            android:paddingRight="@dimen/px_4"
+            android:paddingBottom="@dimen/px_4"
+            >
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/plat_menu_switch_view"
+            android:layout_width="@dimen/px_50"
+            android:layout_height="@dimen/px_200"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/plat_menu_closeleft">
+
+        </FrameLayout>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/plat_menu_drawer"
+        android:layout_width="@dimen/px_400"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@android:color/transparent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <GridView
+                android:id="@+id/plat_menu_drawer_gridview"
+                android:layout_width="0dp"
+                android:layout_weight="1.0"
+                android:layout_height="match_parent"
+                android:background="@color/e_66000000"
+                android:scrollbars="none"
+                android:numColumns="2">
+
+            </GridView>
+
+            <FrameLayout
+                android:layout_width="@dimen/px_50"
+                android:layout_height="@dimen/px_200"
+                android:layout_gravity="center_vertical"
+                android:id="@+id/plat_menu__right_switch_view"
+                android:background="@drawable/plat_menu_closeleft"
+                >
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+
+</android.support.v4.widget.DrawerLayout>

@@ -53,7 +53,11 @@
                     android:layout_height="wrap_content"
                     android:text="打开页面" />
 
-
+                <Button
+                    android:id="@+id/showPlatform"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="显示平台" />
             </LinearLayout>
 
 

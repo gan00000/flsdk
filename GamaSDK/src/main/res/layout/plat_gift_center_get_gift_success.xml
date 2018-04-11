@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+   >
+
+    <LinearLayout
+        android:layout_width="@dimen/px_480"
+        android:layout_height="@dimen/px_320"
+        android:layout_centerInParent="true"
+        android:background="@drawable/plat_black_rectangle_bg"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/px_20"
+            android:gravity="center"
+            android:text="@string/plat_gift_get_success"
+            android:textColor="@color/e_e68f33"
+            android:textSize="@dimen/sp_28" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/px_20"
+            android:layout_marginRight="@dimen/px_20"
+            android:layout_marginTop="@dimen/px_45"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/plat_gift_serial_num"
+                android:textColor="@color/e_e68f33"
+                android:textSize="@dimen/sp_24" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/e_e68f33"
+                android:id="@+id/gift_get_success_mun"
+                android:textSize="@dimen/sp_24" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="@dimen/px_220"
+            android:layout_height="@dimen/px_60"
+            android:layout_marginTop="@dimen/px_50"
+            android:background="@drawable/plat_yellow_rectangle_bg"
+            android:id="@+id/gift_get_success_confirm"
+            android:gravity="center"
+            android:text="@string/plat_confire_btn"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/sp_28" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

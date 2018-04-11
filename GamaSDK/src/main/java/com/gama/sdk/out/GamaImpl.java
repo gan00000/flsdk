@@ -11,6 +11,7 @@ import com.core.base.utils.AppUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.SignatureUtil;
+import com.core.base.utils.ToastUtils;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.gama.base.bean.SGameBaseRequestBean;
 import com.gama.base.bean.SGameLanguage;
@@ -30,6 +31,7 @@ import com.gama.sdk.SWebViewDialog;
 import com.gama.sdk.ads.StarEventLogger;
 import com.gama.sdk.login.DialogLoginImpl;
 import com.gama.sdk.login.ILogin;
+import com.gama.sdk.plat.PlatMainActivity;
 import com.gama.thirdlib.facebook.SFacebookProxy;
 import com.gama.thirdlib.google.SGooglePlayGameServices;
 
@@ -411,5 +413,23 @@ public class GamaImpl implements IGama {
         sWebViewDialog.setWebUrl(url);
 
         sWebViewDialog.show();
+    }
+
+    @Override
+    public void openPlatform(final Activity activity, final String roleLevel, final String roleVipLevel) {
+        PL.i("IStarpy pay roleLevel:" + roleLevel + ",roleVipLevel:" + roleVipLevel);
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                StarPyUtil.saveRoleLevelVip(activity,roleLevel,roleVipLevel);
+                if (StarPyUtil.isLogin(activity)){
+                    activity.startActivity(new Intent(activity, PlatMainActivity.class));
+                }else {
+                    ToastUtils.toast(activity,"please login game first");
+                }
+            }
+        });
+
     }
 }

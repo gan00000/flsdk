@@ -10,7 +10,7 @@
     <string name="py_login">登入</string>
     <string name="py_register_account">註冊帳號</string>
     <string name="py_login_fb">Facebook登入</string>
-    <string name="py_login_star">Gama帳號登入</string>
+    <string name="py_login_star">Starpy帳號登入</string>
     <string name="py_login_mac">免註冊登入</string>
     <string name="py_register_account_hit">6~18字符,僅限字母或數字</string>
     <string name="py_confire">確認</string>

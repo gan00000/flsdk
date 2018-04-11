@@ -18,7 +18,7 @@ import com.gama.sdk.out.GamaFactory;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button loginButton, othersPayButton,googlePayBtn,shareButton;
+    private Button loginButton, othersPayButton,googlePayBtn,shareButton, showPlatform;
 
 
     private IGama iGama;
@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         othersPayButton = (Button) findViewById(R.id.demo_pay);
         googlePayBtn = (Button) findViewById(R.id.demo_pay_google);
         shareButton = (Button) findViewById(R.id.demo_share);
+        showPlatform = findViewById(R.id.showPlatform);
 
         iGama = GamaFactory.create();
 
@@ -152,7 +153,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        showPlatform.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                iGama.openPlatform(MainActivity.this, "10", "2");
+            }
+        });
     }
 
 
