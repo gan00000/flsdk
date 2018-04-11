@@ -1,7 +1,6 @@
 apply plugin: 'com.android.library'
 
 android {
-
     compileSdkVersion 26
     buildToolsVersion '26.0.2'
 
@@ -10,7 +9,7 @@ android {
         targetSdkVersion 25
 
         //设置改jar版本
-        buildConfigField "String", JAR_VERSION, SDK_VERSION_NAME_PY_THIRD
+        buildConfigField "String", JAR_VERSION, SDK_VERSION_NAME_PY_BASE
     }
     buildTypes {
         release {
@@ -26,16 +25,13 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.google.android.gms:play-services-auth:11.0.1'
-    compile 'com.google.android.gms:play-services-plus:11.0.1'
-    compile 'com.google.android.gms:play-services-base:11.0.1'
-    compile 'com.google.android.gms:play-services-games:11.0.1'
-    //    compile 'com.facebook.fresco:fresco:1.4.0'
-    //    compile 'com.facebook.android:facebook-android-sdk:4.+'
-    //facebookfresco合并到fb sdk中
-    compile project(':facebook:gama-fb-4.25')
-    compile project(':libraries-src:GamaBaseLib')
+    compile project(':libraries-src:gama-core')
 }
+
+
+
+//./gradlew makeJar 出现env: bash\r: No such file or directory的话是由
+// 于window生成的工程gradlew文件在mac下换行符有问题
 
 
 //打包之前，删除以前的文件
@@ -66,26 +62,25 @@ task makeLibraryJar(type:org.gradle.api.tasks.bundling.Jar) {
 makeLibraryJar.dependsOn(clearJar,build)
 
 def getJarName(){
-    return SDK_VERSION_NAME_PY_THIRD.replace("\"","")
+    return SDK_VERSION_NAME_PY_BASE.replace("\"","")
 }
-
 
 task copyJar(type: Copy) {
 
     from('build/libs/')
 
-    into('../libs/')
+    into('../../libs/')
     include(getJarName() + '.jar')
 }
 
 copyJar.dependsOn(makeLibraryJar)
 
-task pyThird(type: Copy) {
+task pyBase(type: Copy) {
 
     from('build/libs/')
 
-    into('../libs/')
+    into('../../libs/')
     include(getJarName() + '.jar')
 }
 
-pyThird.dependsOn(makeLibraryJar)
+pyBase.dependsOn(makeLibraryJar)

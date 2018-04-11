@@ -77,7 +77,7 @@ public class FriendProfile {
 		this.userId = userId;
 	}
 
-	public boolean isStarpyUser() {
+	public boolean isGamaUser() {
 		return !TextUtils.isEmpty(userId);
 	}
 

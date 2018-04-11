@@ -2,7 +2,7 @@
 
 * [一. SDK接入配置](#100)
 * [二. SDK api说明](#101)
-	* [1. 实例SDK接口IStarpy对象](#1)
+	* [1. 实例SDK接口IGama对象](#1)
 	* [2. Activity生命周期调用](#2)
 	* [3. 初始化sdk](#3)
 	* [4. 设置SDK语言版本](#4)
@@ -62,8 +62,8 @@
 <h2 id="101">SDK api说明</h2>
 以下为sdk api使用示例,具体请查看SDK demo 
 
-* <h3 id="1">实例SDK接口IStarpy对象</h3>  
-`iStarpy = StarpyFactory.create(); ` 
+* <h3 id="1">实例SDK接口IGama对象</h3>  
+`iGama = GamaFactory.create(); ` 
  
 * <h3 id="2">Activity生命周期调用</h3> 
 
@@ -74,17 +74,17 @@
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		iStarpy = StarpyFactory.create();
+		iGama = GamaFactory.create();
 	    //初始化sdk
-	    iStarpy.initSDK(this);
+	    iGama.initSDK(this);
 		//在游戏Activity的onCreate生命周期中调用
-	    iStarpy.onCreate(this);
+	    iGama.onCreate(this);
 	}
    @Override
     protected void onResume() {
         super.onResume();
         PL.i("activity onResume");
-        iStarpy.onResume(this);
+        iGama.onResume(this);
     }
 
 
@@ -92,13 +92,13 @@
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        iStarpy.onActivityResult(this, requestCode, resultCode, data);
+        iGama.onActivityResult(this, requestCode, resultCode, data);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        iStarpy.onPause(this);
+        iGama.onPause(this);
         PL.i("activity onPause");
     }
 
@@ -106,20 +106,20 @@
     protected void onStop() {
         super.onStop();
         PL.i("activity onStop");
-        iStarpy.onStop(this);
+        iGama.onStop(this);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         PL.i("activity onDestroy");
-        iStarpy.onDestroy(this);
+        iGama.onDestroy(this);
     } 
     
      @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        iStarpy.onWindowFocusChanged(this,hasFocus);
+        iGama.onWindowFocusChanged(this,hasFocus);
     }
     
      /**
@@ -132,7 +132,7 @@
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) { 
     	super.onRequestPermissionsResult(requestCode, permissions, grantResults);
       	PL.i("activity onRequestPermissionsResult");
-      	iStarpy.onRequestPermissionsResult(this,requestCode,permissions,grantResults);
+      	iGama.onRequestPermissionsResult(this,requestCode,permissions,grantResults);
     }  
     ```
  
@@ -140,7 +140,7 @@
 ```
 	游戏启动的时候调用，通常在游戏activity oncreate中调用
 	
-	iStarpy.initSDK(this);
+	iGama.initSDK(this);
 ```
 
 * <h3 id="4">设置SDK语言版本</h3> 
@@ -152,7 +152,7 @@
     * SGameLanguage.zh_TW 游戏为繁体语言时使用
     * SGameLanguage.en_US  游戏为英文语言时使用
     * */
-    iStarpy.setGameLanguage(this, SGameLanguage.zh_TW);
+    iGama.setGameLanguage(this, SGameLanguage.zh_TW);
  ```
 	
 * <h3 id="5">设置角色信息</h3> 
@@ -169,14 +169,14 @@
      * severCode 角色伺服器id
      * serverName 角色伺服器名称
      */
-iStarpy.registerRoleInfo(this, "roleid_1", "roleName", "rolelevel", "s1001", "serverName");
+iGama.registerRoleInfo(this, "roleid_1", "roleName", "rolelevel", "s1001", "serverName");
 ```
 
 * <h3 id="6">登录接口</h3>  
 
  ```
 //登陆接口 ILoginCallBack为登录成功后的回调
-iStarpy.login(MainActivity.this, new ILoginCallBack() {
+iGama.login(MainActivity.this, new ILoginCallBack() {
         @Override
         public void onLogin(SLoginResponse sLoginResponse) {
             if (sLoginResponse != null){
@@ -203,7 +203,7 @@ roleLevel 角色等级
 customize 自定义透传字段（从服务端回调到cp）
 注意：设置SPayType.OTHERS为第三方储值时不需要传cpOrderId，productId，customize，传了会被忽略掉
 */
-iStarpy.pay(MainActivity.this, SPayType.GOOGLE, “cpOrderId”, "productId", "roleLevel", "customize");
+iGama.pay(MainActivity.this, SPayType.GOOGLE, “cpOrderId”, "productId", "roleLevel", "customize");
 ```
 
 * <h3 id="9">分享接口</h3>
@@ -225,7 +225,7 @@ iStarpy.pay(MainActivity.this, SPayType.GOOGLE, “cpOrderId”, "productId", "r
         }
     };
 
-    iStarpy.share(MainActivity.this,iSdkCallBack,shareUrl);
+    iGama.share(MainActivity.this,iSdkCallBack,shareUrl);
  ```
  
 * <h3 id="10">打开SDK活动页面接口</h3>
@@ -238,7 +238,7 @@ iStarpy.pay(MainActivity.this, SPayType.GOOGLE, “cpOrderId”, "productId", "r
  * vipLevel：vip等级，没有就写""
  */  
  
- iStarpy.openWebview(MainActivity.this,"roleLevel","vipLevel");
+ iGama.openWebview(MainActivity.this,"roleLevel","vipLevel");
  ```
 
 

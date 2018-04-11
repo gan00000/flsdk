@@ -2,40 +2,40 @@ apply plugin: 'com.android.library'
 
 android {
 
+    lintOptions {
+        abortOnError false
+    }
+
     compileSdkVersion 26
     buildToolsVersion '26.0.2'
-
     defaultConfig {
         minSdkVersion 18
         targetSdkVersion 25
 
         //设置改jar版本
-        buildConfigField "String", JAR_VERSION, SDK_VERSION_NAME_PY_THIRD
+        buildConfigField "String", JAR_VERSION, SDK_VERSION_NAME_STARPY_SDK
     }
-    buildTypes {
+   buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 
-    lintOptions {
-        abortOnError false
-    }
+
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.google.android.gms:play-services-auth:11.0.1'
-    compile 'com.google.android.gms:play-services-plus:11.0.1'
-    compile 'com.google.android.gms:play-services-base:11.0.1'
-    compile 'com.google.android.gms:play-services-games:11.0.1'
-    //    compile 'com.facebook.fresco:fresco:1.4.0'
-    //    compile 'com.facebook.android:facebook-android-sdk:4.+'
-    //facebookfresco合并到fb sdk中
-    compile project(':facebook:gama-fb-4.25')
     compile project(':libraries-src:GamaBaseLib')
+    compile project(':libraries-src:gama-pay')
+    compile project(':Thirdlibrary')
+    //    compile 'com.android.support:recyclerview-v7:25.3.1'
 }
+
+
+//./gradlew makeJar 出现env: bash\r: No such file or directory的话是由
+// 于window生成的工程gradlew文件在mac下换行符有问题
 
 
 //打包之前，删除以前的文件
@@ -52,8 +52,8 @@ task makeLibraryJar(type:org.gradle.api.tasks.bundling.Jar) {
     exclude 'META-INF/LICENSE.txt'
     exclude 'META-INF/NOTICE.txt'
     //过滤不需要的class
-//    exclude "**/**/BuildConfig.class"
-//    exclude "**/**/BuildConfig\$*.class"
+    exclude "**/**/BuildConfig.class"
+    exclude "**/**/BuildConfig\$*.class"
     exclude "**/R.class"
     exclude "**/R\$*.class"
 
@@ -66,10 +66,8 @@ task makeLibraryJar(type:org.gradle.api.tasks.bundling.Jar) {
 makeLibraryJar.dependsOn(clearJar,build)
 
 def getJarName(){
-    return SDK_VERSION_NAME_PY_THIRD.replace("\"","")
+    return SDK_VERSION_NAME_STARPY_SDK.replace("\"","")
 }
-
-
 task copyJar(type: Copy) {
 
     from('build/libs/')
@@ -80,7 +78,7 @@ task copyJar(type: Copy) {
 
 copyJar.dependsOn(makeLibraryJar)
 
-task pyThird(type: Copy) {
+task createPySdk(type: Copy) {
 
     from('build/libs/')
 
@@ -88,4 +86,4 @@ task pyThird(type: Copy) {
     include(getJarName() + '.jar')
 }
 
-pyThird.dependsOn(makeLibraryJar)
+createPySdk.dependsOn(makeLibraryJar)
