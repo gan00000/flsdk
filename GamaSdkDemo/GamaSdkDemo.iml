@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module external.linked.project.id=":StarpySdkDemo" external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$/.." external.system.id="GRADLE" type="JAVA_MODULE" version="4">
+<module external.linked.project.id=":GamaSdkDemo" external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$/.." external.system.id="GRADLE" type="JAVA_MODULE" version="4">
   <component name="FacetManager">
     <facet type="android-gradle" name="Android-Gradle">
       <configuration>
-        <option name="GRADLE_PROJECT_PATH" value=":StarpySdkDemo" />
+        <option name="GRADLE_PROJECT_PATH" value=":GamaSdkDemo" />
       </configuration>
     </facet>
     <facet type="android" name="Android">
@@ -70,13 +70,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src/erge/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/erge/rs" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/erge/shaders" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testErge/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testErge/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testErge/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testErge/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testErge/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testErge/rs" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testErge/shaders" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestErge/res" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestErge/resources" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestErge/assets" type="java-test-resource" />
@@ -84,6 +77,13 @@
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestErge/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestErge/rs" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestErge/shaders" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testErge/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testErge/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testErge/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testErge/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testErge/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testErge/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testErge/shaders" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/assets" type="java-resource" />
@@ -91,13 +91,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src/debug/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/rs" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/shaders" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/rs" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/shaders" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/testDebug/res" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/testDebug/resources" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/testDebug/assets" type="java-test-resource" />
@@ -105,6 +98,13 @@
       <sourceFolder url="file://$MODULE_DIR$/src/testDebug/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/testDebug/rs" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/testDebug/shaders" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/shaders" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/assets" type="java-resource" />
@@ -128,15 +128,12 @@
       <sourceFolder url="file://$MODULE_DIR$/src/test/shaders" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/assets" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/blame" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/check-manifest" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/classes" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/javaPrecompile" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/jniLibs" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/manifests" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/prebuild" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/res" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/rs" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/shaders" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/splits-support" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/symbols" />
@@ -146,46 +143,46 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 26 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Gradle: __local_aars__:F.\GamaSDK\SLibrarys-Baoshu\facebook\starpy-fb-4.25\libs\fbcore-1.5.0.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:animated-vector-drawable-26.0.2" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-auth-base-11.0.1" level="project" />
-    <orderEntry type="library" name="Gradle: __local_aars__:F.\GamaSDK\SLibrarys-Baoshu\facebook\starpy-fb-4.25\libs\bolts-applinks-1.4.0.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:F.\GamaSDK\SLibrarys-Baoshu\facebook\gama-fb-4.25\libs\infer-annotation-0.11.0.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:F.\GamaSDK\SLibrarys-Baoshu\facebook\gama-fb-4.25\libs\bolts-applinks-1.4.0.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:F.\GamaSDK\SLibrarys-Baoshu\facebook\gama-fb-4.25\libs\imagepipeline-base-1.5.0.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-games-11.0.1" level="project" />
-    <orderEntry type="library" name="Gradle: __local_aars__:F.\GamaSDK\SLibrarys-Baoshu\StartpySDK\libs\GoogleConversionTrackingSdk-2.2.4.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-fragment-26.0.2" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-basement-11.0.1" level="project" />
-    <orderEntry type="library" name="Gradle: __local_aars__:F.\GamaSDK\SLibrarys-Baoshu\facebook\starpy-fb-4.25\libs\jsr305-3.0.1.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:F.\GamaSDK\SLibrarys-Baoshu\facebook\gama-fb-4.25\libs\imagepipeline-1.5.0.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-drive-11.0.1" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-media-compat-26.0.2" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:F.\GamaSDK\SLibrarys-Baoshu\facebook\gama-fb-4.25\libs\bolts-android-1.4.0.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-v4-26.0.2" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-compat-26.0.2" level="project" />
-    <orderEntry type="library" name="Gradle: __local_aars__:F.\GamaSDK\SLibrarys-Baoshu\facebook\starpy-fb-4.25\libs\bolts-tasks-1.4.0.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:F.\GamaSDK\SLibrarys-Baoshu\facebook\gama-fb-4.25\libs\fresco-1.5.0.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:appcompat-v7-26.0.2" level="project" />
-    <orderEntry type="library" name="Gradle: __local_aars__:F.\GamaSDK\SLibrarys-Baoshu\facebook\starpy-fb-4.25\libs\infer-annotation-0.11.0.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-annotations:26.0.2@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:recyclerview-v7-26.0.2" level="project" />
-    <orderEntry type="library" name="Gradle: __local_aars__:F.\GamaSDK\SLibrarys-Baoshu\StartpySDK\libs\nineoldandroids-library-2.4.0.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:F.\GamaSDK\SLibrarys-Baoshu\GamaSDK\libs\takephoto_library_3.0.1.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:F.\GamaSDK\SLibrarys-Baoshu\GamaSDK\libs\GoogleConversionTrackingSdk-2.2.4.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:F.\GamaSDK\SLibrarys-Baoshu\GamaSDK\libs\nineoldandroids-library-2.4.0.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:F.\GamaSDK\SLibrarys-Baoshu\facebook\gama-fb-4.25\libs\bolts-tasks-1.4.0.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-base-11.0.1" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-vector-drawable-26.0.2" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-core-ui-26.0.2" level="project" />
-    <orderEntry type="library" name="Gradle: __local_aars__:F.\GamaSDK\SLibrarys-Baoshu\StartpySDK\libs\AF-Android-SDK.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-auth-11.0.1" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-core-utils-26.0.2" level="project" />
-    <orderEntry type="library" name="Gradle: __local_aars__:F.\GamaSDK\SLibrarys-Baoshu\StartpySDK\libs\takephoto_library_3.0.1.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.code.gson:gson:2.8.2@jar" level="project" />
-    <orderEntry type="library" name="Gradle: __local_aars__:F.\GamaSDK\SLibrarys-Baoshu\facebook\starpy-fb-4.25\libs\imagepipeline-1.5.0.jar:unspecified@jar" level="project" />
-    <orderEntry type="library" name="Gradle: __local_aars__:F.\GamaSDK\SLibrarys-Baoshu\facebook\starpy-fb-4.25\libs\bolts-android-1.4.0.jar:unspecified@jar" level="project" />
-    <orderEntry type="library" name="Gradle: __local_aars__:F.\GamaSDK\SLibrarys-Baoshu\facebook\starpy-fb-4.25\libs\imagepipeline-base-1.5.0.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:cardview-v7-26.0.2" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:F.\GamaSDK\SLibrarys-Baoshu\facebook\gama-fb-4.25\libs\jsr305-3.0.1.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-tasks-11.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:F.\GamaSDK\SLibrarys-Baoshu\facebook\gama-fb-4.25\libs\fbcore-1.5.0.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:F.\GamaSDK\SLibrarys-Baoshu\GamaSDK\libs\AF-Android-SDK.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-plus-11.0.1" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:customtabs-26.0.2" level="project" />
-    <orderEntry type="library" name="Gradle: __local_aars__:F.\GamaSDK\SLibrarys-Baoshu\facebook\starpy-fb-4.25\libs\fresco-1.5.0.jar:unspecified@jar" level="project" />
-    <orderEntry type="module" module-name="StarpyBaseLib" />
-    <orderEntry type="module" module-name="StartpySDK" />
+    <orderEntry type="module" module-name="GamaSDK" />
+    <orderEntry type="module" module-name="gama-core" />
     <orderEntry type="module" module-name="Thirdlibrary" />
-    <orderEntry type="module" module-name="star-pay" />
-    <orderEntry type="module" module-name="star-core" />
-    <orderEntry type="module" module-name="starpy-fb-4.25" />
+    <orderEntry type="module" module-name="gama-fb-4.25" />
+    <orderEntry type="module" module-name="gama-pay" />
+    <orderEntry type="module" module-name="GamaBaseLib" />
   </component>
 </module>
