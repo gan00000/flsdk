@@ -240,7 +240,7 @@ public class ResConfig {
 	public static String getConfigInAssets(Context context, String key){
 
 		if (SStringUtil.isEmpty(gameConfig)){
-			gameConfig = FileUtil.readAssetsTxtFile(context,"starpy/starpy_game_config");
+			gameConfig = FileUtil.readAssetsTxtFile(context,"gama/gama_game_config");
 			PL.i("gameConfig:" + gameConfig);
 		}
 		String mVaule = "";
