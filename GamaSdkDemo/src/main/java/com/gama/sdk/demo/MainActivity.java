@@ -1,6 +1,8 @@
 package com.gama.sdk.demo;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PermissionInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         //在游戏Activity的onCreate生命周期中调用
         iGama.onCreate(this);
 
+        this.requestPermissions(new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
 
         /**
          * 在游戏获得角色信息的时候调用
