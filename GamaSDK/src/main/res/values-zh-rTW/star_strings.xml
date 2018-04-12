@@ -29,7 +29,7 @@
     <string name="py_auto_login_change">切換帳號</string>
     <string name="py_pay_title">儲值</string>
     <string name="py_login_mac_tips">你登入 %1$s 的帳號和密碼如下:\n帳號: %2$s 密碼: %3$s</string>
-    <string name="py_login_mac_saveimage_tips">你的帳號密碼已經保存到相冊中</string>
+    <string name="py_login_mac_saveimage_tips">你的帳號密碼已經保存到相簿中</string>
     <string name="py_login_autologin_tips">帳號 %1$s 正在登錄</string>
     <string name="py_login_autologin_fblogining_tips">Facebook帳號正在登錄</string>
     <string name="py_login_autologin_logining_tips">帳號正在登錄</string>

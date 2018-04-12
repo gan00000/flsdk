@@ -516,4 +516,12 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
     public void setSFacebookProxy(SFacebookProxy sFacebookProxy) {
         this.sFacebookProxy = sFacebookProxy;
     }
+
+    @Override
+    public void dismiss() {
+        super.dismiss();
+        if(sGoogleSignIn != null) {
+            sGoogleSignIn.handleActivityDestroy(this.getContext());
+        }
+    }
 }

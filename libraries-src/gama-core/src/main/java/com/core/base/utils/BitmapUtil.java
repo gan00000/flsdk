@@ -93,7 +93,7 @@ public class BitmapUtil {
         }
         PL.i("save bitmap:" + bitmapPath);
         if (!TextUtils.isEmpty(bitmapPath)){
-            return saveImageToGallery(context, bm,fileName, bitmapPath + File.separator + "starpy" + File.separator + context.getPackageName());
+            return saveImageToGallery(context, bm,fileName, bitmapPath + File.separator + "gamamobi" + File.separator + context.getPackageName());
         }
         return null;
     }

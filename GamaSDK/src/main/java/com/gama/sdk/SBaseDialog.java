@@ -20,6 +20,7 @@ import com.gama.base.utils.Localization;
 
 public class SBaseDialog extends Dialog {
 
+    private static String TAG = SBaseDialog.class.getSimpleName();
 
     public SBaseDialog(@NonNull Context context) {
         super(context);
@@ -103,5 +104,11 @@ public class SBaseDialog extends Dialog {
         if (hasFocus) {
             AppUtil.hideDialogBottomBar(this);
         }
+    }
+
+    @Override
+    public void dismiss() {
+        super.dismiss();
+        PL.i(TAG, "Dialog dismiss");
     }
 }

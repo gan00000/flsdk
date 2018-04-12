@@ -28,6 +28,21 @@ android {
         }
     }
 
+    signingConfigs {//签名的配置
+        release {
+            storeFile file('hsg')
+            storePassword 'huangshaoguang'
+            keyAlias 'hsg'
+            keyPassword 'huangshaoguang'
+        }
+        debug {
+            storeFile file('hsg')
+            storePassword 'huangshaoguang'
+            keyAlias 'hsg'
+            keyPassword 'huangshaoguang'
+        }
+    }
+
     buildTypes {
         release {
 //            multiDexEnabled true //Add this
