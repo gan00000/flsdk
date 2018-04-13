@@ -27,6 +27,7 @@ public class MacLoginRegRequestTask extends BaseLoginRequestTask {
         sdkBaseRequestBean = macLoginRegRequestBean;
 
         macLoginRegRequestBean.setRegistPlatform(SLoginType.LOGIN_TYPE_UNIQUE);
+        //生成免注册登入账密
         String uniqueId = StarPyUtil.getCustomizedUniqueId1AndroidId1Adid(context);
         if(TextUtils.isEmpty(uniqueId)){
             PL.d("uniqueId:" + uniqueId);

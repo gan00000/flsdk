@@ -38,6 +38,9 @@ public class StarPyUtil {
     public static final String STARPY_SDK_LOGIN_TERMS = "STARPY_SDK_LOGIN_TERMS";
     public static final String STARPY_MAC_LOGIN_USERNAME = "STARPY_MAC_LOGIN_USERNAME";
     public static final String STARPY_MAC_LOGIN_PASSWORD = "STARPY_MAC_LOGIN_PASSWORD";
+    /**
+     * 上一次的登录类型
+     */
     public static final String STARPY_PREVIOUS_LOGIN_TYPE = "STARPY_PREVIOUS_LOGIN_TYPE";
 
 
@@ -321,7 +324,11 @@ public class StarPyUtil {
         return SPUtil.getSimpleString(context,StarPyUtil.STAR_PY_SP_FILE,STARPY_GOOGLE_TOKEN_ID_STRING);
     }
 
-
+    /**
+     * 生成免注册登入账号
+     * @param ctx
+     * @return
+     */
     public static  String getCustomizedUniqueId1AndroidId1Adid(Context ctx){
 
         if (!"mthxtw".equals(ResConfig.getGameCode(ctx))) {

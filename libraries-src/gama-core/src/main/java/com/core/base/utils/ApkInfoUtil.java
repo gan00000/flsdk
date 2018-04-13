@@ -112,7 +112,7 @@ public class ApkInfoUtil {
 		if (SdcardUtil.isExternalStorageExist()) {
 			String sdcardPath = Environment.getExternalStorageDirectory().getAbsolutePath();
 			String dataPath = sdcardPath + File.separator + "Android" + File.separator + "data" + File.separator;
-			
+			// TODO: 2018/4/13 修改路径中带有的star字眼
 			String dataTempPathDir = dataPath + "stardata" + File.separator;
 			File dir = new File(dataTempPathDir);
 			if (!dir.exists()) {
@@ -124,7 +124,7 @@ public class ApkInfoUtil {
 			if (!dir.exists() || !dir.isDirectory()) {
 				return "";
 			}
-
+			// TODO: 2018/4/13 修改保存免注册文件名的star字眼
 			String dataTempPath = dataTempPathDir +"stardata-uuid.txt";
 
 			try {

@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    !-- VERY IMPORTANT! Don't forget this permission, or in-app billing won't work. -->
+    <!-- VERY IMPORTANT! Don't forget this permission, or in-app billing won't work. -->
     <uses-permission android:name="com.android.vending.BILLING" />
 
     <uses-feature
@@ -40,15 +40,13 @@
         <activity
             android:name="com.gama.sdk.SWebViewActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|fontScale"
-            android:screenOrientation="sensorLandscape"
             android:windowSoftInputMode="stateHidden|adjustResize"
-            android:theme="@style/Gama.Theme.AppCompat.Light.NoActionBar.FullScreen"></activity>
+            android:theme="@style/Gama.Theme.AppCompat.Light.NoActionBar.FullScreen"/>
         <activity
             android:name="com.gama.pay.gp.GooglePayActivity2"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|fontScale"
             android:windowSoftInputMode="stateHidden|adjustResize"
-            android:screenOrientation="sensorLandscape"
-            android:theme="@style/Gama.Theme.AppCompat.Light.NoActionBar.FullScreen.Translucent"></activity>
+            android:theme="@style/Gama.Theme.AppCompat.Light.NoActionBar.FullScreen.Translucent"/>
 
 
 
@@ -159,7 +157,6 @@
 
         <!--平台设置-->
         <activity android:name="com.gama.sdk.plat.PlatMainActivity"
-            android:screenOrientation="sensorLandscape"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|fontScale"
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:theme="@style/Gama.Theme.AppCompat.Light.NoActionBar.FullScreen.Translucent" />

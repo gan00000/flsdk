@@ -6,11 +6,11 @@ android {
         abortOnError false
     }
 
-    compileSdkVersion 26
+    compileSdkVersion 27
     buildToolsVersion '26.0.2'
     defaultConfig {
         minSdkVersion 18
-        targetSdkVersion 25
+        targetSdkVersion 27
 
         //设置改jar版本
         buildConfigField "String", JAR_VERSION, SDK_VERSION_NAME_STARPY_SDK

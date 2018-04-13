@@ -34,6 +34,9 @@ public class LoginContract {
         public void showMainLoginView();
     }
 
+    /**
+     * 处理登录事物
+     */
     public interface ILoginPresenter extends IBasePresenter<ILoginView> {
 
         public void starpyAccountLogin(Activity activity, String account, String pwd);

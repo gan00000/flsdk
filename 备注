@@ -1,3 +1,16 @@
 1.com.core.base.bean.AbsReqeustBean  用于所有网络请求，不可混淆
 
-2.修改平台activity显示。
+2.修改平台activity显示，竖屏显示问题。
+
+3.调整loginType、payType，待确认最终标识
+
+4.修改com.gama.base.utils.StarPyUtil类名，暂定GamaUtil
+
+5.免注册流程，由客户端生成免注册登录id（首先取广告id，其次取uuid），进行登录。服务端根据免注册登录id，生成账号和密码，与登录信息一同返回到客户端。
+    如：
+    https://login.gamamobi.com/freeRegister?appKey=6b17ada1e0908a25d6f0437edb2053bc&packageName=com.gama.myapplication&versionCode=1&osLanguage=zh&referrer=&signature=fbe07b56e5d33df372cbdd67f6408980&loginTimestamp=&mac=02%3A00%3A00%3A00%3A00%3A00&deviceType=Huawei%40%40Nexus+6P&uniqueId=922ab357-0d61-47ed-b86c-32b37c84d791&phone=&operatingSystem=android&accessToken=&timestamp=1523589525322&spy_advertiser=&gameCode=dodi&versionName=1.0&systemVersion=6.0.1&androidId=bfa2e46d0cd1158a&imei=&registPlatform=unique&adId=922ab357-0d61-47ed-b86c-32b37c84d791&gameLanguage=zh-TW&phoneAreaCode=&spy_platForm=
+    返回：
+    {"code":1000,"freeRegisterPwd":"57384900","accessToken":"83e123e4472bf94119eaaae3d136ab5f","message":"成功","userId":"14","freeRegisterName":"0ype2ww3i5","timestamp":"1523589525522"}
+
+6.当targetSdkVersion >= 27时，在26系统的设备上运行，activity有指定android:screenOrientation为任何明确横竖方向，且主题属性中包含"android:windowIsTranslucent"、"android:windowSwipeToDismiss"、"android:windowIsFloating"之一，在Activity的onCreate会发生闪退
+    java.lang.IllegalStateException: Only fullscreen opaque activities can request orientation

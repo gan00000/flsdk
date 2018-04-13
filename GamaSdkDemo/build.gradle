@@ -2,10 +2,12 @@ apply plugin: 'com.android.application'
 
 android {
 
-    compileSdkVersion 26
+    compileSdkVersion 27
     buildToolsVersion '26.0.2'
 
     defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 27
         ndk {
             abiFilters "armeabi", "armeabi-v7a", "x86"  // 指定要ndk需要兼容的架构(这样其他依赖包里mips之类的.so会被过滤掉)
         }
@@ -58,7 +60,7 @@ android {
         erge {
             applicationId "com.gama.myapplication"
             minSdkVersion 18
-            targetSdkVersion 26
+            targetSdkVersion 27
             versionCode 1
             versionName "1.0"
             flavorDimensions "1"
