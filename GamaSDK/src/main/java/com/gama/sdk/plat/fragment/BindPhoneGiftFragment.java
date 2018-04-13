@@ -22,7 +22,7 @@ import com.core.base.utils.ToastUtils;
 import com.gama.base.bean.SGameBaseRequestBean;
 import com.gama.base.bean.SSdkBaseRequestBean;
 import com.gama.base.cfg.ResConfig;
-import com.gama.base.utils.StarPyUtil;
+import com.gama.base.utils.GamaUtil;
 import com.gama.data.login.execute.BaseLoginRequestTask;
 import com.gama.data.login.request.AccountBindPhoneEmailBean;
 import com.gama.data.login.response.SLoginResponse;
@@ -454,7 +454,7 @@ public class BindPhoneGiftFragment extends SSdkBaseFragment {
         sSdkBaseRequestBean.setPhone(phone);
         sSdkBaseRequestBean.setVfCode(vfCode);
         sSdkBaseRequestBean.setPhoneAreaCode(areaCode);
-        sSdkBaseRequestBean.setUserId(StarPyUtil.getUid(getActivity()));
+        sSdkBaseRequestBean.setUserId(GamaUtil.getUid(getActivity()));
         sSdkBaseRequestBean.setRequestMethod("bindpe_phone_email");
         BaseLoginRequestTask requestTask = new BaseLoginRequestTask(getActivity()) {
             @Override

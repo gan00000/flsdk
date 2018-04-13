@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-import com.gama.base.utils.StarPyUtil;
+import com.gama.base.utils.GamaUtil;
 import com.gama.sdk.R;
 import com.gama.sdk.login.widget.SLoginBaseRelativeLayout;
 
@@ -54,7 +54,7 @@ public class AccountManagerLayoutV2 extends SLoginBaseRelativeLayout implements 
         fbRegBindBtn.setOnClickListener(this);
         googleRegBindBtn.setOnClickListener(this);
 
-        if (StarPyUtil.isMainland(getContext())){
+        if (GamaUtil.isMainland(getContext())){
             fbRegBindBtn.setVisibility(GONE);
             googleRegBindBtn.setVisibility(GONE);
 

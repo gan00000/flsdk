@@ -20,7 +20,7 @@ public class Localization {
             gameLanguage = SGameLanguage.zh_TW;
         }
         if (!gameLanguage.getLanguage().equals(ResConfig.getGameLanguage(context))){//如果语言改变，从新更新服务条款
-            StarPyUtil.saveSdkLoginTerms(context,"");
+            GamaUtil.saveSdkLoginTerms(context,"");
         }
         ResConfig.saveGameLanguage(context,gameLanguage.getLanguage());
 

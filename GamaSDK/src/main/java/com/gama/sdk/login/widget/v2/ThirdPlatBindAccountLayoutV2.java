@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
 import com.gama.base.bean.SLoginType;
-import com.gama.base.utils.StarPyUtil;
+import com.gama.base.utils.GamaUtil;
 import com.gama.sdk.R;
 import com.gama.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.gama.sdk.utils.Validator;
@@ -161,11 +161,11 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
             return;
         }
 
-        if (!StarPyUtil.checkAccount(account)) {
+        if (!GamaUtil.checkAccount(account)) {
             ToastUtils.toast(getActivity(), R.string.py_account_error);
             return;
         }
-        if (!StarPyUtil.checkPassword(password)) {
+        if (!GamaUtil.checkPassword(password)) {
             ToastUtils.toast(getActivity(), R.string.py_password_error);
             return;
         }

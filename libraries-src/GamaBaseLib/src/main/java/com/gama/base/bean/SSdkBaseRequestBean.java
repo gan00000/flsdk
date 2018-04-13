@@ -6,7 +6,7 @@ import com.core.base.bean.BaseReqeustBean;
 import com.core.base.utils.ResUtil;
 import com.core.base.utils.SStringUtil;
 import com.gama.base.cfg.ResConfig;
-import com.gama.base.utils.StarPyUtil;
+import com.gama.base.utils.GamaUtil;
 
 /**
  * <p>Title: SSdkBaseRequestBean</p> <p>Description: SDK接口请求参数实体</p>
@@ -51,21 +51,21 @@ public class SSdkBaseRequestBean extends BaseReqeustBean {
     private void initSdkField(Context context) {
 
         appKey = ResConfig.getAppKey(context);
-        accessToken = StarPyUtil.getSdkAccessToken(context);
-        loginTimestamp = StarPyUtil.getSdkTimestamp(context);
+        accessToken = GamaUtil.getSdkAccessToken(context);
+        loginTimestamp = GamaUtil.getSdkTimestamp(context);
         gameCode = ResConfig.getGameCode(context);
         gameLanguage = ResConfig.getGameLanguage(context);
 
         if (SStringUtil.isEmpty(signature)) {
             signature = SStringUtil.toMd5(ResConfig.getAppKey(context) + gameCode + timestamp);
         }
-        adId = StarPyUtil.getGoogleAdId(context);
+        adId = GamaUtil.getGoogleAdId(context);
 //        if (SStringUtil.isEmpty(uniqueId) && SStringUtil.isNotEmpty(adId)){//确保免注册不受干扰
 //            uniqueId = adId;
 //        }
 
-        uniqueId = StarPyUtil.getCustomizedUniqueId1AndroidId1Adid(context);
-        referrer = StarPyUtil.getReferrer(context);
+        uniqueId = GamaUtil.getCustomizedUniqueId1AndroidId1Adid(context);
+        referrer = GamaUtil.getReferrer(context);
 
         spy_platForm = ResUtil.findStringByName(context,"spy_platForm");
         spy_advertiser = ResUtil.findStringByName(context,"spy_advertiser");

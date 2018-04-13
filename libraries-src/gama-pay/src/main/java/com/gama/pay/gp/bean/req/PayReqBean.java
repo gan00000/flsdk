@@ -3,7 +3,7 @@ package com.gama.pay.gp.bean.req;
 import android.content.Context;
 
 import com.core.base.utils.SStringUtil;
-import com.gama.base.utils.StarPyUtil;
+import com.gama.base.utils.GamaUtil;
 import com.gama.pay.gp.constants.GooglePayContant;
 
 public class PayReqBean extends BPayReqBean {
@@ -29,12 +29,12 @@ public class PayReqBean extends BPayReqBean {
 	}
 
 	private void initm(Context context) {
-		userId = StarPyUtil.getUid(context);
+		userId = GamaUtil.getUid(context);
 
-		serverCode = StarPyUtil.getServerCode(context);
-		serverName = StarPyUtil.getServerName(context);
-		roleName = StarPyUtil.getRoleName(context);
-		roleId = StarPyUtil.getRoleId(context);
+		serverCode = GamaUtil.getServerCode(context);
+		serverName = GamaUtil.getServerName(context);
+		roleName = GamaUtil.getRoleName(context);
+		roleId = GamaUtil.getRoleId(context);
 	}
 
 	public boolean isInitOk(){

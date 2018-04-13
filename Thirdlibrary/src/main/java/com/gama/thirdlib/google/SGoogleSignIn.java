@@ -27,7 +27,7 @@ import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
-import com.gama.base.utils.StarPyUtil;
+import com.gama.base.utils.GamaUtil;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -170,7 +170,7 @@ public class SGoogleSignIn implements GoogleApiClient.OnConnectionFailedListener
 				if (idToken == null){
 					idToken = "";
 				}
-				StarPyUtil.saveGoogleIdToken(context,idToken);
+				GamaUtil.saveGoogleIdToken(context,idToken);
 				if (googleSignInCallBack != null) {
 	            	googleSignInCallBack.success(id, mFullName, mEmail, idToken);
 				}

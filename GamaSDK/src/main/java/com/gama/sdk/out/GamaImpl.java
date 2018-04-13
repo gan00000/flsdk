@@ -19,7 +19,7 @@ import com.gama.base.bean.SPayType;
 import com.gama.base.cfg.ConfigRequest;
 import com.gama.base.cfg.ResConfig;
 import com.gama.base.utils.Localization;
-import com.gama.base.utils.StarPyUtil;
+import com.gama.base.utils.GamaUtil;
 import com.gama.data.login.ILoginCallBack;
 import com.gama.pay.gp.GooglePayActivity2;
 import com.gama.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
@@ -60,7 +60,7 @@ public class GamaImpl implements IGama {
     public void initSDK(final Activity activity) {
         PL.i("IGama initSDK");
         //清除上一次登录成功的返回值
-        StarPyUtil.saveSdkLoginData(activity,"");
+        GamaUtil.saveSdkLoginData(activity,"");
 
         activity.runOnUiThread(new Runnable() {
             @Override
@@ -110,7 +110,7 @@ public class GamaImpl implements IGama {
     public void registerRoleInfo(Activity activity, String roleId, String roleName, String roleLevel, String severCode, String serverName) {
         PL.i("IGama registerRoleInfo");
         PL.i("roleId:" + roleId + ",roleName:" + roleName + ",severCode:" + severCode + ",serverName:" + serverName);
-        StarPyUtil.saveRoleInfo(activity, roleId, roleName, severCode, serverName);//保存角色信息
+        GamaUtil.saveRoleInfo(activity, roleId, roleName, severCode, serverName);//保存角色信息
     }
 
     @Override
@@ -123,7 +123,7 @@ public class GamaImpl implements IGama {
                 PL.i("google sha1:" + SignatureUtil.getSignatureSHA1WithColon(activity, activity.getPackageName()));
                 if (iLogin != null){
                     //清除上一次登录成功的返回值
-                    StarPyUtil.saveSdkLoginData(activity,"");
+                    GamaUtil.saveSdkLoginData(activity,"");
 
                     iLogin.initFacebookPro(activity,sFacebookProxy);
                     iLogin.startLogin(activity, iLoginCallBack);
@@ -212,11 +212,11 @@ public class GamaImpl implements IGama {
                     }
                 }
             };
-            if (SStringUtil.isNotEmpty(StarPyUtil.getServerCode(activity)) && SStringUtil.isNotEmpty(StarPyUtil.getRoleId(activity))) {
+            if (SStringUtil.isNotEmpty(GamaUtil.getServerCode(activity)) && SStringUtil.isNotEmpty(GamaUtil.getRoleId(activity))) {
                 if (shareLinkUrl.contains("?")){//userId+||S||+serverCode+||S||+roleId
-                    shareLinkUrl = shareLinkUrl + "&campaign=" + URLEncoder.encode(StarPyUtil.getUid(activity)+ "||S||" + StarPyUtil.getServerCode(activity)+"||S||"+StarPyUtil.getRoleId(activity));
+                    shareLinkUrl = shareLinkUrl + "&campaign=" + URLEncoder.encode(GamaUtil.getUid(activity)+ "||S||" + GamaUtil.getServerCode(activity)+"||S||"+GamaUtil.getRoleId(activity));
                 }else {
-                    shareLinkUrl = shareLinkUrl + "?campaign=" + URLEncoder.encode(StarPyUtil.getUid(activity)+ "||S||" + StarPyUtil.getServerCode(activity)+"||S||"+StarPyUtil.getRoleId(activity));
+                    shareLinkUrl = shareLinkUrl + "?campaign=" + URLEncoder.encode(GamaUtil.getUid(activity)+ "||S||" + GamaUtil.getServerCode(activity)+"||S||"+GamaUtil.getRoleId(activity));
                 }
             }
             sFacebookProxy.fbShare(activity, fbShareCallBack,title,message,shareLinkUrl,sharePictureUrl);
@@ -232,7 +232,7 @@ public class GamaImpl implements IGama {
 
         }else{//默认Google储值
 
-            if (StarPyUtil.getSdkCfg(activity) != null && StarPyUtil.getSdkCfg(activity).openOthersPay(activity)){//假若Google包侵权被下架，次配置可以启动三方储值
+            if (GamaUtil.getSdkCfg(activity) != null && GamaUtil.getSdkCfg(activity).openOthersPay(activity)){//假若Google包侵权被下架，此配置可以启动三方储值
                 PL.i("转第三方储值");
                 othersPay(activity, cpOrderId, roleLevel, extra);
 
@@ -260,9 +260,9 @@ public class GamaImpl implements IGama {
         WebPayReqBean webPayReqBean = PayHelper.buildWebPayBean(activity,cpOrderId,roleLevel,extra);
 
         String payThirdUrl = null;
-        if (StarPyUtil.getSdkCfg(activity) != null) {
+        if (GamaUtil.getSdkCfg(activity) != null) {
 
-            payThirdUrl = StarPyUtil.getSdkCfg(activity).getS_Third_PayUrl();
+            payThirdUrl = GamaUtil.getSdkCfg(activity).getS_Third_PayUrl();
         }
         if (TextUtils.isEmpty(payThirdUrl)){
             payThirdUrl = ResConfig.getPayPreferredUrl(activity) + ResConfig.getPayThirdMethod(activity);
@@ -422,8 +422,8 @@ public class GamaImpl implements IGama {
             @Override
             public void run() {
 
-                StarPyUtil.saveRoleLevelVip(activity,roleLevel,roleVipLevel);
-                if (StarPyUtil.isLogin(activity)){
+                GamaUtil.saveRoleLevelVip(activity,roleLevel,roleVipLevel);
+                if (GamaUtil.isLogin(activity)){
                     activity.startActivity(new Intent(activity, PlatMainActivity.class));
                 }else {
                     ToastUtils.toast(activity,"please login game first");

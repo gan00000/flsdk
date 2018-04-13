@@ -10,7 +10,7 @@ import com.core.base.utils.JsonUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.gama.base.bean.SGameLanguage;
-import com.gama.base.utils.StarPyUtil;
+import com.gama.base.utils.GamaUtil;
 
 import org.json.JSONArray;
 
@@ -46,7 +46,7 @@ public class ConfigRequest{
                 if (TextUtils.isEmpty(rawResult)){
                     return;
                 }
-                rawResult = StarPyUtil.decryptDyUrl(context,rawResult);
+                rawResult = GamaUtil.decryptDyUrl(context,rawResult);
                 PL.i("sdk cfg:" + rawResult);
                 JSONArray a = JsonUtil.getArrayObjByKey(rawResult,"S_Is_Reload_Cfg");
                 if (a != null && a.length() > 0){
@@ -58,7 +58,7 @@ public class ConfigRequest{
                         }
                     }
                 }
-                StarPyUtil.saveSdkCfg(context,rawResult);
+                GamaUtil.saveSdkCfg(context,rawResult);
             }
 
             @Override
@@ -88,11 +88,11 @@ public class ConfigRequest{
         cfgFileRequest.setReqCallBack(new ISReqCallBack() {
             @Override
             public void success(Object o, String rawResult) {
-                rawResult = StarPyUtil.decryptDyUrl(context,rawResult);
+                rawResult = GamaUtil.decryptDyUrl(context,rawResult);
                 PL.d("sdk cfg:" + rawResult);
 
                 if (!TextUtils.isEmpty(rawResult)) {
-                    StarPyUtil.saveSdkCfg(context,rawResult);
+                    GamaUtil.saveSdkCfg(context,rawResult);
                 }
             }
 
@@ -137,7 +137,7 @@ public class ConfigRequest{
             @Override
             public void success(Object o, String rawResult) {
                 PL.d("sdk cfg:" + rawResult);
-                StarPyUtil.saveSdkLoginTerms(context,rawResult);
+                GamaUtil.saveSdkLoginTerms(context,rawResult);
             }
 
             @Override

@@ -9,7 +9,7 @@ import com.core.base.utils.PL;
 import com.core.base.utils.ResUtil;
 import com.core.base.utils.SPUtil;
 import com.core.base.utils.SStringUtil;
-import com.gama.base.utils.StarPyUtil;
+import com.gama.base.utils.GamaUtil;
 
 public class ResConfig {
 
@@ -25,8 +25,8 @@ public class ResConfig {
 	 * @return
 	 */
 	public static String getGameCode(Context context) {
-		if (StarPyUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(StarPyUtil.getSdkCfg(context).getS_GameCode())){
-			return StarPyUtil.getSdkCfg(context).getS_GameCode();
+		if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_GameCode())){
+			return GamaUtil.getSdkCfg(context).getS_GameCode();
 		}
 //		return getResStringByName(context, "star_game_code");
 		return getConfigInAssets(context, "star_game_code");
@@ -40,8 +40,8 @@ public class ResConfig {
 	 * @return
 	 */
 	public static String getAppKey(Context context) {
-		if (StarPyUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(StarPyUtil.getSdkCfg(context).getS_AppKey())){
-			return StarPyUtil.getSdkCfg(context).getS_AppKey();
+		if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_AppKey())){
+			return GamaUtil.getSdkCfg(context).getS_AppKey();
 		}
 		return getConfigInAssets(context, "star_app_key");
 	}
@@ -52,8 +52,8 @@ public class ResConfig {
 
 
 	public static String getGameLanguage(Context context) {
-		String language = SPUtil.getSimpleString(context, StarPyUtil.STAR_PY_SP_FILE, StarPyUtil.STARPY_GAME_LANGUAGE);
-//		if (TextUtils.isEmpty(language) && StarPyUtil.isMainland(context)) {
+		String language = SPUtil.getSimpleString(context, GamaUtil.GAMA_SP_FILE, GamaUtil.GAMA_GAME_LANGUAGE);
+//		if (TextUtils.isEmpty(language) && GamaUtil.isMainland(context)) {
 //			language = SGameLanguage.zh_CH.getLanguage();
 //		}
 		return language;
@@ -63,7 +63,7 @@ public class ResConfig {
 		if (TextUtils.isEmpty(language)) {
 			return;
 		}
-		SPUtil.saveSimpleInfo(context, StarPyUtil.STAR_PY_SP_FILE, StarPyUtil.STARPY_GAME_LANGUAGE,language);
+		SPUtil.saveSimpleInfo(context, GamaUtil.GAMA_SP_FILE, GamaUtil.GAMA_GAME_LANGUAGE,language);
 	}
 	
 	public static String getGameLanguageLower(Context context){
@@ -92,15 +92,15 @@ public class ResConfig {
 	 * @return
 	 */
 	public static String getLoginPreferredUrl(Context context) {
-		if (StarPyUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(StarPyUtil.getSdkCfg(context).getS_Login_Pre_Url())){
-			return StarPyUtil.getSdkCfg(context).getS_Login_Pre_Url();
+		if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_Login_Pre_Url())){
+			return GamaUtil.getSdkCfg(context).getS_Login_Pre_Url();
 		}
 		return getConfigUrl(context, "star_py_login_pre_url");
 	}
 
 	public static String getLoginSpareUrl(Context context) {
-		if (StarPyUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(StarPyUtil.getSdkCfg(context).getS_Login_Spa_Url())){
-			return StarPyUtil.getSdkCfg(context).getS_Login_Spa_Url();
+		if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_Login_Spa_Url())){
+			return GamaUtil.getSdkCfg(context).getS_Login_Spa_Url();
 		}
 		return getConfigUrl(context, "star_py_login_spa_url");
 	}
@@ -112,14 +112,14 @@ public class ResConfig {
 	 * @date 2015年2月5日
 	 */
 	public static String getPayPreferredUrl(Context context) {
-		if (StarPyUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(StarPyUtil.getSdkCfg(context).getS_Pay_Pre_Url())){
-			return StarPyUtil.getSdkCfg(context).getS_Pay_Pre_Url();
+		if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_Pay_Pre_Url())){
+			return GamaUtil.getSdkCfg(context).getS_Pay_Pre_Url();
 		}
 		return getConfigUrl(context, "star_py_pay_pre_url");
 	}
 	public static String getPaySpareUrl(Context context) {
-		if (StarPyUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(StarPyUtil.getSdkCfg(context).getS_Pay_Spa_Url())){
-			return StarPyUtil.getSdkCfg(context).getS_Pay_Spa_Url();
+		if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_Pay_Spa_Url())){
+			return GamaUtil.getSdkCfg(context).getS_Pay_Spa_Url();
 		}
 		return getConfigUrl(context, "star_py_pay_spa_url");
 	}
@@ -132,14 +132,14 @@ public class ResConfig {
 	}
 
 	public static String getActivityPreferredUrl(Context context) {
-		if (StarPyUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(StarPyUtil.getSdkCfg(context).getS_Act_Pre_Url())){
-			return StarPyUtil.getSdkCfg(context).getS_Act_Pre_Url();
+		if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_Act_Pre_Url())){
+			return GamaUtil.getSdkCfg(context).getS_Act_Pre_Url();
 		}
 		return getConfigUrl(context, "star_py_act_pre_url");
 	}
 	public static String getActivitySpareUrl(Context context) {
-		if (StarPyUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(StarPyUtil.getSdkCfg(context).getS_Act_Spa_Url())){
-			return StarPyUtil.getSdkCfg(context).getS_Act_Spa_Url();
+		if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_Act_Spa_Url())){
+			return GamaUtil.getSdkCfg(context).getS_Act_Spa_Url();
 		}
 		return getConfigUrl(context, "star_py_act_spa_url");
 	}
@@ -151,6 +151,9 @@ public class ResConfig {
 		return getConfigUrl(context, "star_py_cdn_spa_url");
 	}
 
+	/**
+	 * 是否侵权
+	 */
 	public static boolean isInfringement(Context context){
 		return SStringUtil.isEqual(getConfigInAssets(context, "star_infringement"),"true");
 	}
@@ -191,7 +194,7 @@ public class ResConfig {
 	 */
 	public static String getCdnLocalUrl(Context context,String resName) {
 
-		String url = StarPyUtil.getCfgValueByKey(context,resName,"");
+		String url = GamaUtil.getCfgValueByKey(context,resName,"");
 		if (SStringUtil.isEmpty(url)){
 			url = getConfigUrl(context, resName);
 		}

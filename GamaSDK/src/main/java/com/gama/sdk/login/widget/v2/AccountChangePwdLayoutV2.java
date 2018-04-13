@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
-import com.gama.base.utils.StarPyUtil;
+import com.gama.base.utils.GamaUtil;
 import com.gama.sdk.R;
 import com.gama.sdk.login.widget.SLoginBaseRelativeLayout;
 
@@ -124,11 +124,11 @@ public class AccountChangePwdLayoutV2 extends SLoginBaseRelativeLayout implement
             return;
         }
 
-        if (!StarPyUtil.checkAccount(account)) {
+        if (!GamaUtil.checkAccount(account)) {
             ToastUtils.toast(getActivity(), R.string.py_account_error);
             return;
         }
-        if (!StarPyUtil.checkPassword(newPassword)) {
+        if (!GamaUtil.checkPassword(newPassword)) {
             ToastUtils.toast(getActivity(), R.string.py_password_error);
             return;
         }

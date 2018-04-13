@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
-import com.gama.base.utils.StarPyUtil;
+import com.gama.base.utils.GamaUtil;
 import com.gama.sdk.R;
 import com.gama.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.gama.sdk.utils.Validator;
@@ -72,7 +72,7 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
         backView.setOnClickListener(this);
         registerConfirm.setOnClickListener(this);
 
-//        if (StarPyUtil.isXM(getContext())){//星盟标题
+//        if (GamaUtil.isXM(getContext())){//星盟标题
 //            ((ImageView)contentView.findViewById(R.id.v2_bg_title_register_iv)).setImageResource(R.drawable.bg_xm_title_register);
 //        }
 //
@@ -158,11 +158,11 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
             return;
         }
 
-        if (!StarPyUtil.checkAccount(account)) {
+        if (!GamaUtil.checkAccount(account)) {
             ToastUtils.toast(getActivity(), R.string.py_account_error);
             return;
         }
-        if (!StarPyUtil.checkPassword(password)) {
+        if (!GamaUtil.checkPassword(password)) {
             ToastUtils.toast(getActivity(), R.string.py_password_error);
             return;
         }

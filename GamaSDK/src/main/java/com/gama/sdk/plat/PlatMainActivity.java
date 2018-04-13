@@ -26,7 +26,7 @@ import com.gama.base.bean.SGameBaseRequestBean;
 import com.gama.base.bean.SSdkBaseRequestBean;
 import com.gama.base.cfg.ResConfig;
 import com.gama.base.utils.Localization;
-import com.gama.base.utils.StarPyUtil;
+import com.gama.base.utils.GamaUtil;
 import com.gama.data.login.execute.BaseLoginRequestTask;
 import com.gama.data.login.request.AccountInjectionRequestBean;
 import com.gama.pay.gp.bean.req.WebPayReqBean;
@@ -204,12 +204,12 @@ public class PlatMainActivity extends SBaseSdkActivity implements PlatContract.I
                     }else if (platMenuModel.getItemId().equals("storedValue")){
 
                         WebPayReqBean webPayReqBean = PayHelper.buildWebPayBean(PlatMainActivity.this,"",
-                                StarPyUtil.getRoleLevel(PlatMainActivity.this),"");
+                                GamaUtil.getRoleLevel(PlatMainActivity.this),"");
 
                         String payThirdUrl = null;
-                        if (StarPyUtil.getSdkCfg(PlatMainActivity.this) != null) {
+                        if (GamaUtil.getSdkCfg(PlatMainActivity.this) != null) {
 
-                            payThirdUrl = StarPyUtil.getSdkCfg(PlatMainActivity.this).getS_Third_PayUrl();
+                            payThirdUrl = GamaUtil.getSdkCfg(PlatMainActivity.this).getS_Third_PayUrl();
                         }
                         if (TextUtils.isEmpty(payThirdUrl)){
                             payThirdUrl = ResConfig.getPayPreferredUrl(PlatMainActivity.this) + ResConfig.getPayThirdMethod(PlatMainActivity.this);
@@ -465,7 +465,7 @@ public class PlatMainActivity extends SBaseSdkActivity implements PlatContract.I
     private void requestUserBindInfo() {
 
         final AccountInjectionRequestBean accountInjectionRequest = new AccountInjectionRequestBean(this);
-        accountInjectionRequest.setUserId(StarPyUtil.getUid(this));
+        accountInjectionRequest.setUserId(GamaUtil.getUid(this));
 //        accountInjectionRequest.setGameCode(ResConfig.getGameCode(this));
 
         BaseLoginRequestTask baseRequestTask = new BaseLoginRequestTask(this){

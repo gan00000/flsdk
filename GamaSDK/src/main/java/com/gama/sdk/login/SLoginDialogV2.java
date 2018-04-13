@@ -132,7 +132,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 
         viewPageList = new ArrayList<>();
 
-//        isXM = StarPyUtil.isXM(activity);
+//        isXM = GamaUtil.isXM(activity);
 
         toMainLoginView();
 

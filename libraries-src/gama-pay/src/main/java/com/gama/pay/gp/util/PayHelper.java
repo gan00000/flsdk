@@ -7,7 +7,7 @@ import android.text.TextUtils;
 import com.core.base.utils.ApkInfoUtil;
 import com.core.base.utils.SStringUtil;
 import com.gama.base.cfg.ResConfig;
-import com.gama.base.utils.StarPyUtil;
+import com.gama.base.utils.GamaUtil;
 import com.gama.pay.gp.bean.req.WebPayReqBean;
 import com.gama.pay.gp.constants.GooglePayContant;
 
@@ -39,7 +39,7 @@ public class PayHelper {
 			webPayReqBean.setIswifi(simOperator);
 		}
 
-		webPayReqBean.setUserId(StarPyUtil.getUid(context));
+		webPayReqBean.setUserId(GamaUtil.getUid(context));
 		webPayReqBean.setCpOrderId(cpOrderId);
 		webPayReqBean.setRoleLevel(roleLevel);
 		webPayReqBean.setExtra(extra);

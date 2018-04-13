@@ -6,7 +6,7 @@ import android.content.Intent;
 
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
-import com.gama.base.utils.StarPyUtil;
+import com.gama.base.utils.GamaUtil;
 
 /**
  * Created by gan on 2017/8/29.
@@ -23,7 +23,7 @@ public class GamaBroadcastReceiver extends BroadcastReceiver {
             String referrer = intent.getStringExtra("referrer");
             PL.i("referrer:" + referrer);
             if (SStringUtil.isNotEmpty(referrer)){
-                StarPyUtil.saveReferrer(context,referrer);
+                GamaUtil.saveReferrer(context,referrer);
             }
         }
     }

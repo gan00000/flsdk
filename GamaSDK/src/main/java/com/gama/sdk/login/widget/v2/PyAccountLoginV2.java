@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
-import com.gama.base.utils.StarPyUtil;
+import com.gama.base.utils.GamaUtil;
 import com.gama.sdk.R;
 import com.gama.sdk.login.widget.SLoginBaseRelativeLayout;
 
@@ -86,7 +86,7 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
         loginMainLoginBtn = (TextView) contentView.findViewById(R.id.v2_member_btn_login);
 
 
-        if (StarPyUtil.isMainland(getContext())){
+        if (GamaUtil.isMainland(getContext())){
             loginMainFreeRegLogin.setVisibility(View.VISIBLE);
             backView.setVisibility(GONE);
         }
@@ -169,11 +169,11 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
             }
         });
 
-        account = StarPyUtil.getAccount(getContext());
-        password = StarPyUtil.getPassword(getContext());
+        account = GamaUtil.getAccount(getContext());
+        password = GamaUtil.getPassword(getContext());
         if (TextUtils.isEmpty(account)){
-            account = StarPyUtil.getMacAccount(getContext());
-            password = StarPyUtil.getMacPassword(getContext());
+            account = GamaUtil.getMacAccount(getContext());
+            password = GamaUtil.getMacPassword(getContext());
         }
         if (!TextUtils.isEmpty(account)){
             loginAccountEditText.setText(account);
@@ -203,11 +203,11 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
             return;
         }
 
-        if (!StarPyUtil.checkAccount(account)) {
+        if (!GamaUtil.checkAccount(account)) {
             ToastUtils.toast(getActivity(), R.string.py_account_error);
             return;
         }
-        if (!StarPyUtil.checkPassword(password)) {
+        if (!GamaUtil.checkPassword(password)) {
             ToastUtils.toast(getActivity(), R.string.py_password_error);
             return;
         }

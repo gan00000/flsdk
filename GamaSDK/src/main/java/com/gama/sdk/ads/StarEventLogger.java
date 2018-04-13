@@ -14,7 +14,7 @@ import com.core.base.utils.SStringUtil;
 import com.google.ads.conversiontracking.AdWordsConversionReporter;
 import com.gama.base.bean.AdsRequestBean;
 import com.gama.base.cfg.ResConfig;
-import com.gama.base.utils.StarPyUtil;
+import com.gama.base.utils.GamaUtil;
 import com.gama.sdk.R;
 import com.gama.thirdlib.facebook.SFacebookProxy;
 import com.gama.thirdlib.google.SGoogleProxy;
@@ -76,7 +76,7 @@ public class StarEventLogger {
             @Override
             public void run() {
                 String googleAdId = SGoogleProxy.getAdvertisingId(context.getApplicationContext());
-                StarPyUtil.saveGoogleAdId(context,googleAdId);
+                GamaUtil.saveGoogleAdId(context,googleAdId);
                 PL.i("save google ad id-->" + googleAdId);
             }
         }).start();
@@ -85,7 +85,7 @@ public class StarEventLogger {
     private static final String STAR_PY_ADSINSTALLACTIVATION = "STAR_PY_ADSINSTALLACTIVATION";
     public static void reportInstallActivation(final Context context){
 
-        if (SStringUtil.isNotEmpty(SPUtil.getSimpleString(context,StarPyUtil.STAR_PY_SP_FILE,STAR_PY_ADSINSTALLACTIVATION))){
+        if (SStringUtil.isNotEmpty(SPUtil.getSimpleString(context,GamaUtil.GAMA_SP_FILE,STAR_PY_ADSINSTALLACTIVATION))){
             return;
         }
         Handler handler = new Handler();
@@ -109,7 +109,7 @@ public class StarEventLogger {
             public void success(BaseResponseModel responseModel, String rawResult) {
                 PL.i("ADS rawResult:" + rawResult);
                 if (responseModel != null && responseModel.isRequestSuccess()){
-                    SPUtil.saveSimpleInfo(context,StarPyUtil.STAR_PY_SP_FILE,STAR_PY_ADSINSTALLACTIVATION,"adsInstallActivation");
+                    SPUtil.saveSimpleInfo(context,GamaUtil.GAMA_SP_FILE,STAR_PY_ADSINSTALLACTIVATION,"adsInstallActivation");
                 }
             }
 

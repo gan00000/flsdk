@@ -7,7 +7,7 @@ import com.core.base.bean.BaseReqeustBean;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.gama.base.bean.SLoginType;
-import com.gama.base.utils.StarPyUtil;
+import com.gama.base.utils.GamaUtil;
 import com.gama.data.login.request.MacLoginRegRequestBean;
 
 /**
@@ -28,7 +28,7 @@ public class MacLoginRegRequestTask extends BaseLoginRequestTask {
 
         macLoginRegRequestBean.setRegistPlatform(SLoginType.LOGIN_TYPE_UNIQUE);
         //生成免注册登入账密
-        String uniqueId = StarPyUtil.getCustomizedUniqueId1AndroidId1Adid(context);
+        String uniqueId = GamaUtil.getCustomizedUniqueId1AndroidId1Adid(context);
         if(TextUtils.isEmpty(uniqueId)){
             PL.d("uniqueId:" + uniqueId);
             return;

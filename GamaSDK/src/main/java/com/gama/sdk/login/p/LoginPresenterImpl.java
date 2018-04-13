@@ -17,7 +17,7 @@ import com.core.base.utils.ToastUtils;
 import com.facebook.AccessToken;
 import com.gama.base.bean.SLoginType;
 import com.gama.base.cfg.ResConfig;
-import com.gama.base.utils.StarPyUtil;
+import com.gama.base.utils.GamaUtil;
 import com.gama.data.login.execute.AccountInjectionRequestTask;
 import com.gama.data.login.execute.AccountLoginRequestTask;
 import com.gama.data.login.execute.AccountRegisterRequestTask;
@@ -84,16 +84,16 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     @Override
     public void autoLogin(Activity activity) {
         this.mActivity = activity;
-        String previousLoginType = StarPyUtil.getPreviousLoginType(activity);
+        String previousLoginType = GamaUtil.getPreviousLoginType(activity);
 
         if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_STARPY, previousLoginType)) {//自動登錄
-            String account = StarPyUtil.getAccount(activity);
-            String password = StarPyUtil.getPassword(activity);
+            String account = GamaUtil.getAccount(activity);
+            String password = GamaUtil.getPassword(activity);
             startAutoLogin(activity, SLoginType.LOGIN_TYPE_STARPY, account, password);
 
         } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_MAC, previousLoginType)) {//自動登錄
-            String account = StarPyUtil.getMacAccount(activity);
-            String password = StarPyUtil.getMacPassword(activity);
+            String account = GamaUtil.getMacAccount(activity);
+            String password = GamaUtil.getMacPassword(activity);
             startAutoLogin(activity, SLoginType.LOGIN_TYPE_STARPY, account, password);
 
         } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_FB, previousLoginType)) {//自動登錄
@@ -107,7 +107,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             }
 
         }  else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GOOGLE, previousLoginType)) {//自動登錄
-//           thirdPlatLogin(mActivity,StarPyUtil.getGoogleId(mActivity),SLoginType.LOGIN_TYPE_GOOGLE);
+//           thirdPlatLogin(mActivity,GamaUtil.getGoogleId(mActivity),SLoginType.LOGIN_TYPE_GOOGLE);
             startAutoLogin(activity, SLoginType.LOGIN_TYPE_GOOGLE, "", "");
 
         }else {//進入登錄頁面
@@ -149,7 +149,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             public void success(String id, String mFullName, String mEmail, String idTokenString) {
                 PL.i("google sign in : " + id);
                 if (SStringUtil.isNotEmpty(id)) {
-                    StarPyUtil.saveGoogleId(activity,id);
+                    GamaUtil.saveGoogleId(activity,id);
                     ThirdLoginRegRequestBean thirdLoginRegRequestBean = new ThirdLoginRegRequestBean(activity);
                     thirdLoginRegRequestBean.setThirdPlatId(id);
                     thirdLoginRegRequestBean.setRegistPlatform(SLoginType.LOGIN_TYPE_GOOGLE);
@@ -237,11 +237,11 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     @Override
     public boolean hasAccountLogin() {
 
-        String account = StarPyUtil.getAccount(mActivity);
-        String password = StarPyUtil.getPassword(mActivity);
+        String account = GamaUtil.getAccount(mActivity);
+        String password = GamaUtil.getPassword(mActivity);
         if (TextUtils.isEmpty(account)) {
-            account = StarPyUtil.getMacAccount(mActivity);
-            password = StarPyUtil.getMacPassword(mActivity);
+            account = GamaUtil.getMacAccount(mActivity);
+            password = GamaUtil.getMacPassword(mActivity);
         }
 
         if (SStringUtil.hasEmpty(account,password)) {
@@ -273,8 +273,8 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     if (sLoginResponse.isRequestSuccess()) {
 
                         ToastUtils.toast(getActivity(), sLoginResponse.getMessage());
-                        if (account.equals(StarPyUtil.getAccount(getContext()))){
-                            StarPyUtil.savePassword(getContext(),"");
+                        if (account.equals(GamaUtil.getAccount(getContext()))){
+                            GamaUtil.savePassword(getContext(),"");
                         }
                         iLoginView.changePwdSuccess(sLoginResponse);
 
@@ -351,7 +351,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         final String mPwd = pwd;
         final String mEmail = email;
         if (bindType == SLoginType.bind_unique){
-            String uniqueId = StarPyUtil.getCustomizedUniqueId1AndroidId1Adid(activity);
+            String uniqueId = GamaUtil.getCustomizedUniqueId1AndroidId1Adid(activity);
             if(TextUtils.isEmpty(uniqueId)){
                 PL.d("thirdPlatId:" + uniqueId);
                 return;
@@ -476,7 +476,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 if (sLoginResponse != null) {
                     if (sLoginResponse.isRequestSuccess()) {
 //                        ToastUtils.toast(getActivity(), R.string.py_login_success);
-//                        StarPyUtil.saveSdkLoginData(getContext(),rawResult);
+//                        GamaUtil.saveSdkLoginData(getContext(),rawResult);
 
                         //1001 注册成功    1000登入成功
                         if (SStringUtil.isEqual("1001", sLoginResponse.getCode())) {//注册写一次
@@ -484,13 +484,13 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                             cteateUserImage(getActivity(),sLoginResponse.getFreeRegisterName(),sLoginResponse.getFreeRegisterPwd());
 
                             //mac登录第一次写一次
-                        }else if(SStringUtil.isEqual("1000", sLoginResponse.getCode()) && SStringUtil.isEmpty(StarPyUtil.getMacAccount(getContext()))) {
+                        }else if(SStringUtil.isEqual("1000", sLoginResponse.getCode()) && SStringUtil.isEmpty(GamaUtil.getMacAccount(getContext()))) {
 
                             cteateUserImage(getActivity(),sLoginResponse.getFreeRegisterName(),sLoginResponse.getFreeRegisterPwd());
                         }
 
-                        StarPyUtil.saveMacAccount(getContext(),sLoginResponse.getFreeRegisterName());
-                        StarPyUtil.saveMacPassword(getContext(),sLoginResponse.getFreeRegisterPwd());
+                        GamaUtil.saveMacAccount(getContext(),sLoginResponse.getFreeRegisterName());
+                        GamaUtil.saveMacPassword(getContext(),sLoginResponse.getFreeRegisterPwd());
                         handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_MAC);
 
                     }else {
@@ -633,8 +633,8 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             public void success(SLoginResponse sLoginResponse, String rawResult) {
                 if (sLoginResponse != null){
                     if (sLoginResponse.isRequestSuccess()) {
-                        StarPyUtil.saveAccount(getContext(),account);
-                        StarPyUtil.savePassword(getContext(),password);
+                        GamaUtil.saveAccount(getContext(),account);
+                        GamaUtil.savePassword(getContext(),password);
                         handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_STARPY);
                     }else{
 
@@ -670,8 +670,8 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     if (sLoginResponse.isRequestSuccess()) {
                         ToastUtils.toast(getActivity(), R.string.py_register_success);
 
-                        StarPyUtil.saveAccount(getContext(),account);
-                        StarPyUtil.savePassword(getContext(),password);
+                        GamaUtil.saveAccount(getContext(),account);
+                        GamaUtil.savePassword(getContext(),password);
                         handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_STARPY);
 
                     }else{
@@ -714,11 +714,11 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 return;
             }
 
-            if (!StarPyUtil.checkAccount(account)) {
+            if (!GamaUtil.checkAccount(account)) {
                 showLoginView();
                 return;
             }
-            if (!StarPyUtil.checkPassword(password)) {
+            if (!GamaUtil.checkPassword(password)) {
                 showLoginView();
                 return;
             }
@@ -765,10 +765,10 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                             }else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GOOGLE, registPlatform)){//Google登录
 
                                 ThirdLoginRegRequestBean thirdLoginRegRequestBean = new ThirdLoginRegRequestBean(activity);
-                                thirdLoginRegRequestBean.setThirdPlatId(StarPyUtil.getGoogleId(activity));
+                                thirdLoginRegRequestBean.setThirdPlatId(GamaUtil.getGoogleId(activity));
                                 thirdLoginRegRequestBean.setRegistPlatform(SLoginType.LOGIN_TYPE_GOOGLE);
                                 thirdLoginRegRequestBean.setGoogleClientId(ResConfig.getGoogleClientId(activity));
-                                thirdLoginRegRequestBean.setGoogleIdToken(StarPyUtil.getGoogleIdToken(activity));
+                                thirdLoginRegRequestBean.setGoogleIdToken(GamaUtil.getGoogleIdToken(activity));
                                 thirdPlatLogin(activity, thirdLoginRegRequestBean);
                             }
 
@@ -801,11 +801,11 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
     private void handleRegisteOrLoginSuccess(SLoginResponse loginResponse, String rawResult, String loginType) {
 
-        StarPyUtil.saveSdkLoginData(getContext(), loginResponse.getRawResponse());
+        GamaUtil.saveSdkLoginData(getContext(), loginResponse.getRawResponse());
         loginResponse.setLoginType(loginType);
         if (SStringUtil.isNotEmpty(loginType)) {//loginType为空时是账号注入登录，不能空时是其他普通登入
 
-            StarPyUtil.savePreviousLoginType(mActivity, loginType);
+            GamaUtil.savePreviousLoginType(mActivity, loginType);
             try {
                 if (loginResponse != null) {
                     //1001 注册成功    1000登入成功

@@ -10,20 +10,49 @@ import com.core.base.utils.SStringUtil;
 
 public class ConfigBean {
 
+    /**
+     * 登录的AppKey
+     */
     private String S_AppKey = "";
+    /**
+     * 游戏的GameCode
+     */
     private String S_GameCode = "";
+    /**
+     * 支付主域名
+     */
     private String S_Pay_Pre_Url = "";
+    /**
+     * 支付备用域名
+     */
     private String S_Pay_Spa_Url = "";
+    /**
+     * 登录主域名
+     */
     private String S_Login_Pre_Url = "";
+    /**
+     * 登录备用域名
+     */
     private String S_Login_Spa_Url = "";
+    /**
+     * 活动主域名
+     */
     private String S_Act_Pre_Url = "";
+    /**
+     * 活动备用域名
+     */
     private String S_Act_Spa_Url = "";
-
+    /**
+     * 第三方支付域名
+     */
     private String S_Third_PayUrl = "";
     private String S_Login_password_Regularly = "";
     private String S_Login_account_Regularly = "";
     private boolean GoogleToOthersPay = false;//Google储值是否转移为第三方储值,废弃
-    private String OpenOthersPay = "";//Google储值是否转移为第三方储值
+    /**
+     * Google储值是否转移为第三方储值；假若Google包侵权被下架，此配置可以启动三方储值
+     */
+    private String OpenOthersPay = "";
 
     private String star_py_cs_pre_url;
     private String star_py_cs_spa_url;
@@ -80,7 +109,9 @@ public class ConfigBean {
         return GoogleToOthersPay;
     }
 
-
+    /**
+     * Google储值是否转移为第三方储值.假若Google包侵权被下架，此配置可以启动三方储值
+     */
     public boolean openOthersPay(Context context){
         if (SStringUtil.isNotEmpty(OpenOthersPay) && OpenOthersPay.contains(context.getPackageName())){
             return true;

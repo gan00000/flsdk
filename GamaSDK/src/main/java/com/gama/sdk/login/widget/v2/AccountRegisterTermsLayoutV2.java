@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-import com.gama.base.utils.StarPyUtil;
+import com.gama.base.utils.GamaUtil;
 import com.gama.sdk.R;
 import com.gama.sdk.login.widget.SLoginBaseRelativeLayout;
 
@@ -60,7 +60,7 @@ public class AccountRegisterTermsLayoutV2 extends SLoginBaseRelativeLayout {
             }
         });
 
-        String serverTermsContent = StarPyUtil.getSdkLoginTerms(getContext());//优先设置服务器获取的配置
+        String serverTermsContent = GamaUtil.getSdkLoginTerms(getContext());//优先设置服务器获取的配置
         if (!TextUtils.isEmpty(serverTermsContent)){
             termsTextView.setText(serverTermsContent);
         }

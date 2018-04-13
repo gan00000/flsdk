@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.core.base.utils.SStringUtil;
 import com.gama.base.cfg.ResConfig;
-import com.gama.base.utils.StarPyUtil;
+import com.gama.base.utils.GamaUtil;
 
 public class GoogleExchangeReqBean extends BPayReqBean {
 

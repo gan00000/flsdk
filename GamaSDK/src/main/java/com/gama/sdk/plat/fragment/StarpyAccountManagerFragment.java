@@ -15,7 +15,7 @@ import com.core.base.callback.ISReqCallBack;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
-import com.gama.base.utils.StarPyUtil;
+import com.gama.base.utils.GamaUtil;
 import com.gama.data.login.execute.ChangePwdRequestTask;
 import com.gama.data.login.response.SLoginResponse;
 import com.gama.sdk.R;
@@ -155,11 +155,11 @@ public class StarpyAccountManagerFragment extends SSdkBaseFragment {
             return;
         }
 
-        if (!StarPyUtil.checkAccount(userBindInfoModel.getName())) {
+        if (!GamaUtil.checkAccount(userBindInfoModel.getName())) {
             ToastUtils.toast(getActivity(), R.string.py_account_error);
             return;
         }
-        if (!StarPyUtil.checkPassword(newPassword)) {
+        if (!GamaUtil.checkPassword(newPassword)) {
             ToastUtils.toast(getActivity(), R.string.py_password_error);
             return;
         }

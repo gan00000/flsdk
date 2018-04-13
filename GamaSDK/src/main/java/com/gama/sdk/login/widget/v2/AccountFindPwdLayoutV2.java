@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.core.base.utils.ToastUtils;
-import com.gama.base.utils.StarPyUtil;
+import com.gama.base.utils.GamaUtil;
 import com.gama.sdk.R;
 import com.gama.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.gama.sdk.utils.Validator;
@@ -110,7 +110,7 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
             return;
         }
 
-        if (!StarPyUtil.checkAccount(account)) {
+        if (!GamaUtil.checkAccount(account)) {
             ToastUtils.toast(getActivity(), R.string.py_account_error);
             return;
         }

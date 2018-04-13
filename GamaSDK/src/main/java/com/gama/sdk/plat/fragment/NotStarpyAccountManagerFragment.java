@@ -15,7 +15,7 @@ import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
 import com.gama.base.bean.SLoginType;
-import com.gama.base.utils.StarPyUtil;
+import com.gama.base.utils.GamaUtil;
 import com.gama.data.login.response.SLoginResponse;
 import com.gama.sdk.R;
 import com.gama.sdk.SSdkBaseFragment;
@@ -182,11 +182,11 @@ public class NotStarpyAccountManagerFragment extends SSdkBaseFragment implements
             return;
         }
 
-        if (!StarPyUtil.checkAccount(account)) {
+        if (!GamaUtil.checkAccount(account)) {
             ToastUtils.toast(getActivity(), R.string.py_account_error);
             return;
         }
-        if (!StarPyUtil.checkPassword(password)) {
+        if (!GamaUtil.checkPassword(password)) {
             ToastUtils.toast(getActivity(), R.string.py_password_error);
             return;
         }

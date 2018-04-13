@@ -5,7 +5,7 @@ import android.content.Context;
 import com.core.base.bean.BaseReqeustBean;
 import com.core.base.utils.SStringUtil;
 import com.gama.base.cfg.ResConfig;
-import com.gama.base.utils.StarPyUtil;
+import com.gama.base.utils.GamaUtil;
 
 public class BPayReqBean extends BaseReqeustBean {
 
@@ -32,7 +32,7 @@ public class BPayReqBean extends BaseReqeustBean {
 	private void init(Context context) {
 
 
-		accessToken = StarPyUtil.getSdkAccessToken(context);
+		accessToken = GamaUtil.getSdkAccessToken(context);
 		gameCode = ResConfig.getGameCode(context);
 		gameLanguage = ResConfig.getGameLanguage(context);
 
