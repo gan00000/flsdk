@@ -32,18 +32,33 @@ android {
 
     signingConfigs {//签名的配置
         release {
-            storeFile file('hsg')
+            storeFile file('../signkey/hsg')  //第一个游戏，豆丁使用，临时用
             storePassword 'huangshaoguang'
             keyAlias 'hsg'
             keyPassword 'huangshaoguang'
         }
         debug {
-            storeFile file('hsg')
+            storeFile file('../signkey/hsg')
             storePassword 'huangshaoguang'
             keyAlias 'hsg'
             keyPassword 'huangshaoguang'
         }
     }
+
+//    signingConfigs {//签名的配置
+//        release {
+//            storeFile file('../signkey/gamamobi.jks') //正式签名，以后使用
+//            storePassword 'gamamobi'
+//            keyAlias 'gamamobi'
+//            keyPassword 'gamamobi'
+//        }
+//        debug {
+//            storeFile file('../signkey/gamamobi.jks')
+//            storePassword 'gamamobi'
+//            keyAlias 'gamamobi'
+//            keyPassword 'gamamobi'
+//        }
+//    }
 
     buildTypes {
         release {
