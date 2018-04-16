@@ -3,10 +3,9 @@ package com.gama.base.bean;
 public class SLoginType {
 
 	/**
-	 * starpy登入
+	 * Gama登入
 	 */
-	// TODO: 2018/4/13 修改登录类型，待确认
-	public static final String LOGIN_TYPE_STARPY = "starpy";
+	public static final String LOGIN_TYPE_GAMA = "gamamobi";
 	/**
 	 * facebook登入
 	 */

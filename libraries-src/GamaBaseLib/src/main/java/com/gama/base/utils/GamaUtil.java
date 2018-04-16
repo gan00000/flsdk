@@ -23,6 +23,9 @@ import org.json.JSONObject;
 
 public class GamaUtil {
 
+    /**
+     * 本地SharePreference数据库名
+     */
     public static final String GAMA_SP_FILE = "gama_sp_file.xml";
     public static final String GAMA_SDK_LOGIN_TERMS_FILE = "gama_sdk_login_terms_file.xml";
 
@@ -144,11 +147,6 @@ public class GamaUtil {
         }
         return encryptText;
     }
-
-  /*  public static void saveUid(Context context,String uid){
-        SPUtil.saveSimpleInfo(context,GAMA_SP_FILE, STARPY_LOGIN_USER_ID, uid);
-    }*/
-
 
     public static void saveSdkLoginData(Context context,String data){
         SPUtil.saveSimpleInfo(context,GAMA_SP_FILE,GAMA_LOGIN_SERVER_RETURN_DATA,data);
@@ -329,10 +327,10 @@ public class GamaUtil {
     }
 
     public static boolean isXM(Context context){
-       return ResConfig.getConfigInAssets(context,"star_login_type").equals("100");
+       return ResConfig.getConfigInAssets(context,"gama_login_type").equals("100");
     }
     public static boolean isMainland(Context context){//100為大陸sdk,其他為海外
-       return ResConfig.getConfigInAssets(context,"star_sdk_area").equals("100");
+       return ResConfig.getConfigInAssets(context,"gama_sdk_area").equals("100");
     }
 
     private static final String GAMA_GOOGLE_ADVERTISING_ID = "GAMA_GOOGLE_ADVERTISING_ID";

@@ -46,22 +46,24 @@ public class ConfigBean {
      * 第三方支付域名
      */
     private String S_Third_PayUrl = "";
+
+    @Deprecated
     private String S_Login_password_Regularly = "";
+    @Deprecated
     private String S_Login_account_Regularly = "";
-    private boolean GoogleToOthersPay = false;//Google储值是否转移为第三方储值,废弃
     /**
      * Google储值是否转移为第三方储值；假若Google包侵权被下架，此配置可以启动三方储值
      */
     private String OpenOthersPay = "";
 
-    private String star_py_cs_pre_url;
-    private String star_py_cs_spa_url;
+    private String gama_cs_pre_url;
+    private String gama_cs_spa_url;
 
-    private String star_plat_pre_url;
-    private String star_plat_spa_url;
+    private String gama_plat_pre_url;
+    private String gama_plat_spa_url;
 
-    private String star_ads_pre_url;
-    private String star_ads_spa_url;
+    private String gama_ads_pre_url;
+    private String gama_ads_spa_url;
 
     public String getS_AppKey() {
         return S_AppKey;
@@ -71,42 +73,49 @@ public class ConfigBean {
         return S_GameCode;
     }
 
-
+    /**
+     * 获取支付主域名
+     */
     public String getS_Pay_Pre_Url() {
         return S_Pay_Pre_Url;
     }
 
-
+    /**
+     * 获取支付备用域名
+     */
     public String getS_Pay_Spa_Url() {
         return S_Pay_Spa_Url;
     }
 
-
+    /**
+     * 获取登录主域名
+     */
     public String getS_Login_Pre_Url() {
         return S_Login_Pre_Url;
     }
 
-
+    /**
+     * 获取登录备用域名
+     */
     public String getS_Login_Spa_Url() {
         return S_Login_Spa_Url;
     }
 
-
+    /**
+     * 获取第三方支付域名
+     */
     public String getS_Third_PayUrl() {
         return S_Third_PayUrl;
     }
 
+    @Deprecated
     public String getS_Login_password_Regularly() {
         return S_Login_password_Regularly;
     }
 
-
+    @Deprecated
     public String getS_Login_account_Regularly() {
         return S_Login_account_Regularly;
-    }
-
-    public boolean isGoogleToOthersPay() {
-        return GoogleToOthersPay;
     }
 
     /**
@@ -119,11 +128,16 @@ public class ConfigBean {
         return false;
     }
 
-
+    /**
+     * 获取活动主域名
+     */
     public String getS_Act_Pre_Url() {
         return S_Act_Pre_Url;
     }
 
+    /**
+     * 获取活动备用域名
+     */
     public String getS_Act_Spa_Url() {
         return S_Act_Spa_Url;
     }

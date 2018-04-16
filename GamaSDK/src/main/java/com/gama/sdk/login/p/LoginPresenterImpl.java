@@ -86,15 +86,15 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         this.mActivity = activity;
         String previousLoginType = GamaUtil.getPreviousLoginType(activity);
 
-        if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_STARPY, previousLoginType)) {//自動登錄
+        if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GAMA, previousLoginType)) {//自動登錄
             String account = GamaUtil.getAccount(activity);
             String password = GamaUtil.getPassword(activity);
-            startAutoLogin(activity, SLoginType.LOGIN_TYPE_STARPY, account, password);
+            startAutoLogin(activity, SLoginType.LOGIN_TYPE_GAMA, account, password);
 
         } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_MAC, previousLoginType)) {//自動登錄
             String account = GamaUtil.getMacAccount(activity);
             String password = GamaUtil.getMacPassword(activity);
-            startAutoLogin(activity, SLoginType.LOGIN_TYPE_STARPY, account, password);
+            startAutoLogin(activity, SLoginType.LOGIN_TYPE_GAMA, account, password);
 
         } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_FB, previousLoginType)) {//自動登錄
             String fbScopeId = FbSp.getFbId(activity);
@@ -315,7 +315,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     if (sLoginResponse.isRequestSuccess()) {
                         ToastUtils.toast(getActivity(), R.string.py_findpwd_success);
 
-//                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_STARPY);
+//                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GAMA);
                         if (iLoginView != null){
                             iLoginView.findPwdSuccess(sLoginResponse);
                         }
@@ -438,7 +438,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     if (sLoginResponse.isRequestSuccess()) {
                         ToastUtils.toast(getActivity(), R.string.py_success);
 
-//                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_STARPY);
+//                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GAMA);
                         if (iLoginView != null){
                             iLoginView.accountBindSuccess(sLoginResponse);
                         }
@@ -635,7 +635,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     if (sLoginResponse.isRequestSuccess()) {
                         GamaUtil.saveAccount(getContext(),account);
                         GamaUtil.savePassword(getContext(),password);
-                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_STARPY);
+                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GAMA);
                     }else{
 
                         ToastUtils.toast(getActivity(),sLoginResponse.getMessage());
@@ -672,7 +672,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
                         GamaUtil.saveAccount(getContext(),account);
                         GamaUtil.savePassword(getContext(),password);
-                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_STARPY);
+                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GAMA);
 
                     }else{
 
@@ -702,7 +702,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     private void startAutoLogin(final Activity activity, final String registPlatform, final String account, final String password) {
 
 
-        if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_STARPY, registPlatform)) {
+        if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GAMA, registPlatform)) {
 
             if (SStringUtil.hasEmpty(account, password)) {
 
@@ -752,7 +752,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         iLoginView.showAutoLoginWaitTime("(" + count +  ")");
                         if (count == 0){
 
-                            if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_STARPY, registPlatform)) {//免注册或者平台用户自动登录
+                            if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GAMA, registPlatform)) {//免注册或者平台用户自动登录
 //                                autoLogin22(mActivity, account, password);
 
                                 starpyAccountLogin(activity,account,password);
@@ -823,7 +823,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
 
 
-    /*    if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_STARPY, loginType)) {
+    /*    if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GAMA, loginType)) {
 
         } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_MAC, loginType)) {
 

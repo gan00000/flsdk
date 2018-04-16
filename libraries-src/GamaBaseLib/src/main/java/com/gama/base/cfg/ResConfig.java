@@ -29,7 +29,7 @@ public class ResConfig {
 			return GamaUtil.getSdkCfg(context).getS_GameCode();
 		}
 //		return getResStringByName(context, "star_game_code");
-		return getConfigInAssets(context, "star_game_code");
+		return getConfigInAssets(context, "gama_game_code");
 	}
 	
 
@@ -43,7 +43,7 @@ public class ResConfig {
 		if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_AppKey())){
 			return GamaUtil.getSdkCfg(context).getS_AppKey();
 		}
-		return getConfigInAssets(context, "star_app_key");
+		return getConfigInAssets(context, "gama_app_key");
 	}
 
 	public static String getApplicationId(Context context) {
@@ -95,14 +95,14 @@ public class ResConfig {
 		if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_Login_Pre_Url())){
 			return GamaUtil.getSdkCfg(context).getS_Login_Pre_Url();
 		}
-		return getConfigUrl(context, "star_py_login_pre_url");
+		return getConfigUrl(context, "gama_login_pre_url");
 	}
 
 	public static String getLoginSpareUrl(Context context) {
 		if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_Login_Spa_Url())){
 			return GamaUtil.getSdkCfg(context).getS_Login_Spa_Url();
 		}
-		return getConfigUrl(context, "star_py_login_spa_url");
+		return getConfigUrl(context, "gama_login_spa_url");
 	}
 
 	/**
@@ -115,13 +115,13 @@ public class ResConfig {
 		if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_Pay_Pre_Url())){
 			return GamaUtil.getSdkCfg(context).getS_Pay_Pre_Url();
 		}
-		return getConfigUrl(context, "star_py_pay_pre_url");
+		return getConfigUrl(context, "gama_pay_pre_url");
 	}
 	public static String getPaySpareUrl(Context context) {
 		if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_Pay_Spa_Url())){
 			return GamaUtil.getSdkCfg(context).getS_Pay_Spa_Url();
 		}
-		return getConfigUrl(context, "star_py_pay_spa_url");
+		return getConfigUrl(context, "gama_pay_spa_url");
 	}
 
 	public static String getCsPreferredUrl(Context context) {
@@ -131,35 +131,52 @@ public class ResConfig {
 		return getCdnLocalUrl(context,"star_py_cs_spa_url");
 	}
 
+	/**
+	 * 获取活动主域名
+	 */
 	public static String getActivityPreferredUrl(Context context) {
 		if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_Act_Pre_Url())){
 			return GamaUtil.getSdkCfg(context).getS_Act_Pre_Url();
 		}
-		return getConfigUrl(context, "star_py_act_pre_url");
+		return getConfigUrl(context, "gama_act_pre_url");
 	}
+
+	/**
+	 * 获取活动备用域名
+	 */
 	public static String getActivitySpareUrl(Context context) {
 		if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_Act_Spa_Url())){
 			return GamaUtil.getSdkCfg(context).getS_Act_Spa_Url();
 		}
-		return getConfigUrl(context, "star_py_act_spa_url");
+		return getConfigUrl(context, "gama_act_spa_url");
 	}
 
+	/**
+	 * 获取CDN动态域名的主域名
+	 */
 	public static String getCdnPreferredUrl(Context context) {
-		return getConfigUrl(context, "star_py_cdn_pre_url");
+		return getConfigUrl(context, "gama_cdn_pre_url");
 	}
+
+	/**
+	 * 获取CDN动态域名的备用域名
+	 */
 	public static String getCdnSpareUrl(Context context) {
-		return getConfigUrl(context, "star_py_cdn_spa_url");
+		return getConfigUrl(context, "gama_cdn_spa_url");
 	}
 
 	/**
 	 * 是否侵权
 	 */
 	public static boolean isInfringement(Context context){
-		return SStringUtil.isEqual(getConfigInAssets(context, "star_infringement"),"true");
+		return SStringUtil.isEqual(getConfigInAssets(context, "gama_infringement"),"true");
 	}
 
+	/**
+	 * 获取第三方支付的接口名
+	 */
 	public static String getPayThirdMethod(Context context) {
-		return getResStringByName(context, "star_pay_third_method");
+		return getResStringByName(context, "gama_third_method");
 	}
 
 
@@ -171,19 +188,19 @@ public class ResConfig {
 	 * @date 2015年2月5日
 	 */
 	public static String getAdsPreferredUrl(Context context) {
-		return getCdnLocalUrl(context, "star_ads_pre_url");
+		return getCdnLocalUrl(context, "gama_ads_pre_url");
 	}
 	
 	public static String getAdsSpareUrl(Context context) {
-		return getCdnLocalUrl(context, "star_ads_spa_url");
+		return getCdnLocalUrl(context, "gama_ads_spa_url");
 	}
 
 	public static String getPlatPreferredUrl(Context context) {
-		return getCdnLocalUrl(context, "star_plat_pre_url");
+		return getCdnLocalUrl(context, "gama_plat_pre_url");
 	}
 
 	public static String getPlatSpareUrl(Context context) {
-		return getCdnLocalUrl(context, "star_plat_spa_url");
+		return getCdnLocalUrl(context, "gama_plat_spa_url");
 	}
 
 
@@ -210,7 +227,7 @@ public class ResConfig {
 
 	private static String getConfigUrl(Context context, String xmlSchemaName){
 
-		String isGlobal = getConfigInAssets(context, "star_url_is_global");
+		String isGlobal = getConfigInAssets(context, "gama_url_is_global");
 		if ("100".equals(isGlobal)){
 			xmlSchemaName = "g_" + xmlSchemaName;
 		}

@@ -8,7 +8,7 @@ public class GooglePayContant {
 	/**
 	 * PAY_FROM payform 参数默认值
 	 */
-	public static final String PAY_FROM = "starpy";
+	public static final String PAY_FROM = "gamamobi";
 	/**
 	 * WIFI wifi参数值
 	 */

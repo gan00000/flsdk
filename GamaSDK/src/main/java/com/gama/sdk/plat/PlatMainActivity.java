@@ -226,7 +226,6 @@ public class PlatMainActivity extends SBaseSdkActivity implements PlatContract.I
                     }
                 }
 
-
             }
         });
 

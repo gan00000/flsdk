@@ -14,3 +14,6 @@
 
 6.当targetSdkVersion >= 27时，在26系统的设备上运行，activity有指定android:screenOrientation为任何明确横竖方向，且主题属性中包含"android:windowIsTranslucent"、"android:windowSwipeToDismiss"、"android:windowIsFloating"之一，在Activity的onCreate会发生闪退
     java.lang.IllegalStateException: Only fullscreen opaque activities can request orientation
+
+7.注册
+    https://login.gamamobi.com/register?appKey=6b17ada1e0908a25d6f0437edb2053bc&packageName=com.gama.myapplication&versionCode=1&osLanguage=zh&referrer=&uniqueId=922ab357-0d61-47ed-b86c-32b37c84d791&phone=&timestamp=1523850885078&gameCode=dodi&androidId=bfa2e46d0cd1158a&imei=&adId=922ab357-0d61-47ed-b86c-32b37c84d791&gameLanguage=zh-TW&phoneAreaCode=&signature=489abc7fc5710e83c69948155aa5823c&loginTimestamp=&mac=02%3A00%3A00%3A00%3A00%3A00&deviceType=Huawei%40%40Nexus+6P&operatingSystem=android&accessToken=&email=&pwd=0b4e7a0e5fe84ad35fb5f95b9ceeac79&spy_advertiser=&versionName=1.0&systemVersion=6.0.1&name=testaaa&spy_platForm=

@@ -65,8 +65,9 @@ public class GamaImpl implements IGama {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-
+                //获取Google 广告ID
                 StarEventLogger.registerGoogleAdId(activity);
+                //Gama平台安装上报
                 StarEventLogger.reportInstallActivation(activity.getApplicationContext());
                 try {
                     Fresco.initialize(activity.getApplicationContext());//初始化fb Fresco库
@@ -146,7 +147,7 @@ public class GamaImpl implements IGama {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                starPay(activity, payType, cpOrderId, productId, roleLevel, extra);
+                startPay(activity, payType, cpOrderId, productId, roleLevel, extra);
             }
         });
 
@@ -170,7 +171,7 @@ public class GamaImpl implements IGama {
 
                 webviewReqeustBean.setRequestUrl(ResConfig.getActivityPreferredUrl(activity));//活动域名
                 webviewReqeustBean.setRequestSpaUrl(ResConfig.getActivitySpareUrl(activity));
-                webviewReqeustBean.setRequestMethod(activity.getResources().getString(R.string.star_act_dynamic_method));
+                webviewReqeustBean.setRequestMethod(activity.getResources().getString(R.string.gama_act_dynamic_method));
 
                 SWebViewDialog sWebViewDialog = new SWebViewDialog(activity, R.style.Gama_Theme_AppCompat_Dialog_Notitle_Fullscreen);
 
@@ -225,7 +226,7 @@ public class GamaImpl implements IGama {
 
 
 
-    private void starPay(Activity activity, SPayType payType, String cpOrderId, String productId, String roleLevel, String extra) {
+    private void startPay(Activity activity, SPayType payType, String cpOrderId, String productId, String roleLevel, String extra) {
         if (payType == SPayType.OTHERS){//第三方储值
 
             othersPay(activity, cpOrderId, roleLevel, extra);
