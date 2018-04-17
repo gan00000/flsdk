@@ -17,12 +17,8 @@ public class ResConfig {
 	//===========================================每個遊戲每個渠道都可能不一樣=======================================
 	//===========================================参数配置start================================================
 
-	
 	/**
 	 * 获取gameCode
-	 * 
-	 * @param context
-	 * @return
 	 */
 	public static String getGameCode(Context context) {
 		if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_GameCode())){
@@ -31,13 +27,9 @@ public class ResConfig {
 //		return getResStringByName(context, "star_game_code");
 		return getConfigInAssets(context, "gama_game_code");
 	}
-	
 
 	/**
 	 * 获取秘钥
-	 * 
-	 * @param context
-	 * @return
 	 */
 	public static String getAppKey(Context context) {
 		if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_AppKey())){
@@ -69,6 +61,9 @@ public class ResConfig {
 	public static String getGameLanguageLower(Context context){
 		return getGameLanguage(context).toLowerCase();
 	}
+	/**
+	 * 获取Google游戏服务ID
+	 */
 	public static String getGoogleClientId(Context context){
 		return getConfigInAssets(context,"google_client_id");
 	}
@@ -86,10 +81,7 @@ public class ResConfig {
 	//===========================================域名获取start===============================================	
 
 	/**
-	 * 获取登录域名地址
-	 * 
-	 * @param context
-	 * @return
+	 * 获取登录主域名地址
 	 */
 	public static String getLoginPreferredUrl(Context context) {
 		if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_Login_Pre_Url())){
@@ -97,7 +89,9 @@ public class ResConfig {
 		}
 		return getConfigUrl(context, "gama_login_pre_url");
 	}
-
+	/**
+	 * 获取登录备用域名地址
+	 */
 	public static String getLoginSpareUrl(Context context) {
 		if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_Login_Spa_Url())){
 			return GamaUtil.getSdkCfg(context).getS_Login_Spa_Url();
@@ -106,10 +100,7 @@ public class ResConfig {
 	}
 
 	/**
-	 * <p>Description: 获取储值域名</p>
-	 * @param context
-	 * @return
-	 * @date 2015年2月5日
+	 * 获取储值主域名
 	 */
 	public static String getPayPreferredUrl(Context context) {
 		if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_Pay_Pre_Url())){
@@ -117,16 +108,24 @@ public class ResConfig {
 		}
 		return getConfigUrl(context, "gama_pay_pre_url");
 	}
+	/**
+	 * 获取储值备用域名
+	 */
 	public static String getPaySpareUrl(Context context) {
 		if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_Pay_Spa_Url())){
 			return GamaUtil.getSdkCfg(context).getS_Pay_Spa_Url();
 		}
 		return getConfigUrl(context, "gama_pay_spa_url");
 	}
-
+	/**
+	 * 获取客服主域名
+	 */
 	public static String getCsPreferredUrl(Context context) {
 		return getCdnLocalUrl(context,"star_py_cs_pre_url");
 	}
+	/**
+	 * 获取客服备用域名
+	 */
 	public static String getCsSpareUrl(Context context) {
 		return getCdnLocalUrl(context,"star_py_cs_spa_url");
 	}
@@ -182,23 +181,29 @@ public class ResConfig {
 
 
 	/**
-	 * <p>Description: 获取广告域名</p>
-	 * @param context
-	 * @return
-	 * @date 2015年2月5日
+	 * 获取广告主域名
 	 */
 	public static String getAdsPreferredUrl(Context context) {
 		return getCdnLocalUrl(context, "gama_ads_pre_url");
 	}
-	
+
+	/**
+	 * 获取广告备用域名
+	 */
 	public static String getAdsSpareUrl(Context context) {
 		return getCdnLocalUrl(context, "gama_ads_spa_url");
 	}
 
+	/**
+	 * 获取平台主域名
+	 */
 	public static String getPlatPreferredUrl(Context context) {
 		return getCdnLocalUrl(context, "gama_plat_pre_url");
 	}
 
+	/**
+	 * 获取平台备用域名
+	 */
 	public static String getPlatSpareUrl(Context context) {
 		return getCdnLocalUrl(context, "gama_plat_spa_url");
 	}
@@ -206,8 +211,6 @@ public class ResConfig {
 
 	/**
 	 * <p>Description: 先获取动态域名，然后获取本地域名，配置文件的key和本地的xml key需要一致</p>
-	 * @param context
-	 * @return
 	 */
 	public static String getCdnLocalUrl(Context context,String resName) {
 

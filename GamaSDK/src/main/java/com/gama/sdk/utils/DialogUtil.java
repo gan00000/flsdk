@@ -24,7 +24,7 @@ public class DialogUtil {
      */
     public static Dialog createLoadingDialog(Context context, String msg) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View v = inflater.inflate(R.layout.py_loading, null);
+        View v = inflater.inflate(R.layout.gama_loading, null);
         TextView msgTv = (TextView) v.findViewById(R.id.dialog_loading_text);
         msgTv.setText(msg);
         Dialog loadingDialog = new Dialog(context, R.style.Gama_Theme_AppCompat_Dialog_NoTitle);

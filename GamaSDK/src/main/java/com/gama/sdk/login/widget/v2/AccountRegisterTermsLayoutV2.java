@@ -34,7 +34,7 @@ public class AccountRegisterTermsLayoutV2 extends SLoginBaseRelativeLayout {
 
 
     public View onCreateView(LayoutInflater inflater) {
-        contentView = inflater.inflate(R.layout.v2_py_account_register_terms, null);
+        contentView = inflater.inflate(R.layout.v2_gama_account_register_terms, null);
         backView = contentView.findViewById(R.id.py_back_button);
 
         termsTextView = (TextView) contentView.findViewById(R.id.py_terms_text_id);

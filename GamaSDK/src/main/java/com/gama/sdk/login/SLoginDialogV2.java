@@ -121,7 +121,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
         contentFrameLayout.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,FrameLayout.LayoutParams.MATCH_PARENT));
 
         autoLoginLayout = new RelativeLayout(context);
-        autoLoginPage = getLayoutInflater().inflate(R.layout.v2_py_auto_login_loading,null,false);
+        autoLoginPage = getLayoutInflater().inflate(R.layout.v2_gama_auto_login_loading,null,false);
         autoLoginLayout.addView(autoLoginPage,new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.MATCH_PARENT));
 
         rootFrameLayout = new FrameLayout(context);

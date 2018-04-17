@@ -38,7 +38,7 @@ public class AccountManagerLayoutV2 extends SLoginBaseRelativeLayout implements 
     }
 
     private View onCreateView(LayoutInflater inflater) {
-        contentView = inflater.inflate(R.layout.v2_py_account_manager, null);
+        contentView = inflater.inflate(R.layout.v2_gama_account_manager, null);
 
         backView = contentView.findViewById(R.id.py_back_button_v2);
         backView.setOnClickListener(this);

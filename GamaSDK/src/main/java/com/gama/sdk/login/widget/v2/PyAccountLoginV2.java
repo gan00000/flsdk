@@ -62,7 +62,7 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
 
     public View onCreateView(LayoutInflater inflater) {
 
-        contentView = inflater.inflate(R.layout.v2_py_account_login, null);
+        contentView = inflater.inflate(R.layout.v2_gama_account_login, null);
 
         backView = contentView.findViewById(R.id.py_back_button_v2);
         backView.setOnClickListener(new OnClickListener() {

@@ -43,7 +43,7 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
     }
 
     private View onCreateView(LayoutInflater inflater) {
-        contentView = inflater.inflate(R.layout.v2_py_findpwd, null);
+        contentView = inflater.inflate(R.layout.v2_gama_findpwd, null);
 
         backView = contentView.findViewById(R.id.py_back_button_v2);
 

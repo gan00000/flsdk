@@ -1,42 +1,12 @@
 <resources>
 
-    <!--&lt;!&ndash; fb配置 &ndash;&gt;-->
-    <!--&lt;!&ndash; 必须跟fb后台一致的名字 &ndash;&gt;-->
+    <!-- Facebook应用名 -->
     <string name="facebook_app_name"></string>
+    <!-- Facebook应用ID -->
     <string name="facebook_app_id"></string>
+    <!-- Facebook Provider -->
     <string name="facebook_authorities"></string>
-    <!--&lt;!&ndash; fb配置end &ndash;&gt;-->
-
-    <!--<string name="star_game_code">twzj</string>-->
-    <!--&lt;!&ndash;是否侵权 true为侵权，默认为非侵权&ndash;&gt;-->
-    <!--<string name="star_infringement"></string>-->
-    <!--<string name="star_app_key">a981bc91f5702e8816a3567715061948</string>-->
-
-    <!--&lt;!&ndash;语言默认繁体zh-TW，用来设置UI界面语言，提示等&ndash;&gt;-->
-    <!--&lt;!&ndash;<string name="star_game_language">zh-TW</string>&ndash;&gt;-->
-
-    <!--&lt;!&ndash;adword ads  String conversionId, String label  "858913995", "lniQCKDX5G4Qy_nHmQM"&ndash;&gt;-->
-    <!--<string name="star_ads_adword_conversionId"></string>-->
-    <!--<string name="star_ads_adword_label"></string>-->
-
-    <!--<string name="star_ads_appflyer_dev_key">BLFVxBvnUi2zH7iwEb72jB</string>-->
-
-    <!--&lt;!&ndash;100登录页为星盟，默认是星彼&ndash;&gt;-->
-    <!--<string name="star_login_type">100</string>-->
-
-    <!--&lt;!&ndash;<integer name="google_play_services_version">11011000</integer>&ndash;&gt;-->
-
-    <!--&lt;!&ndash; google play game services app_id &ndash;&gt;-->
+    <!-- Google游戏服务ID -->
     <string name="google_app_id"></string>
-
-    <!--<string name="google_client_id">605752434859-1sdr2hltdugd8kuk11h8mrjj492smmq9.apps.googleusercontent.com</string>-->
-
-    <!--&lt;!&ndash;默认为为港台域名，100为全球&ndash;&gt;-->
-    <!--<string name="star_url_is_global">100</string>-->
-
-
-    <!--&lt;!&ndash;<data android:scheme="starpy" android:host="@string/star_game_code"/>&ndash;&gt;-->
-    <!--&lt;!&ndash;<scheme>://<host>:<port>[<path>|<pathPrefix>|<pathPattern>]&ndash;&gt;-->
-    <!--<string name="star_android_scheme">starpy</string>-->
 
 </resources>

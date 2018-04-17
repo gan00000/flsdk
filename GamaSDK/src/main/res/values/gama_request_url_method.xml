@@ -2,6 +2,7 @@
 
     <!-- 第三方支付接口 -->
     <string name="gama_third_method">dynamic_change</string>
+    <!-- 未知接口 -->
     <string name="gama_cs_method">player_entrance</string>
     <!-- 活动接口 -->
     <string name="gama_act_dynamic_method">act_dynamic</string>
