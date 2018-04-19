@@ -1,3 +1,9 @@
 .gradle/
 .idea/
 build/
+libraries-src/GamaBaseLib/GamaBaseLib.iml
+Thirdlibrary/Thirdlibrary.iml
+libraries-src/gama-core/gama-core.iml
+GamaSDK/GamaSDK.iml
+libraries-src/gama-pay/gama-pay.iml
+facebook/gama-fb-4.25/gama-fb-4.25.iml
