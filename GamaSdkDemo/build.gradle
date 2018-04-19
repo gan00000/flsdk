@@ -73,7 +73,7 @@ android {
     productFlavors {
 
         erge {
-            applicationId "com.gama.myapplication"
+                applicationId "com.gama.myapplication"
             minSdkVersion 18
             targetSdkVersion 27
             versionCode 1

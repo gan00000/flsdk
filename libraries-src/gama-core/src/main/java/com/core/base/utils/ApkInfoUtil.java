@@ -90,6 +90,9 @@ public class ApkInfoUtil {
 	}
 
 
+	/**
+	 * 获取保存在SDcard的uuid
+	 */
 	public static  String getCustomizedUniqueIdOrAndroidId(Context ctx){
 		String s = getCustomizedUniqueId(ctx);
 		if (TextUtils.isEmpty(s)){
@@ -124,6 +127,7 @@ public class ApkInfoUtil {
 			if (!dir.exists() || !dir.isDirectory()) {
 				return "";
 			}
+
 			// TODO: 2018/4/13 修改保存免注册文件名的star字眼
 			String dataTempPath = dataTempPathDir +"gamadata-uuid.txt";
 

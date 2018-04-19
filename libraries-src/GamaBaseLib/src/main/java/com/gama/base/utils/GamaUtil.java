@@ -327,10 +327,10 @@ public class GamaUtil {
     }
 
     public static boolean isXM(Context context){
-       return ResConfig.getConfigInAssets(context,"gama_login_type").equals("100");
+       return ResConfig.getConfigInAssetsProperties(context,"gama_login_type").equals("100");
     }
     public static boolean isMainland(Context context){//100為大陸sdk,其他為海外
-       return ResConfig.getConfigInAssets(context,"gama_sdk_area").equals("100");
+       return ResConfig.getConfigInAssetsProperties(context,"gama_sdk_area").equals("100");
     }
 
     private static final String GAMA_GOOGLE_ADVERTISING_ID = "GAMA_GOOGLE_ADVERTISING_ID";
@@ -358,27 +358,13 @@ public class GamaUtil {
 
     /**
      * 生成免注册登入账号
-     * @param ctx
-     * @return
      */
     public static  String getCustomizedUniqueId1AndroidId1Adid(Context ctx){
-
-        if (!"mthxtw".equals(ResConfig.getGameCode(ctx))) {
-
-            String adId = GamaUtil.getGoogleAdId(ctx);
-            if (SStringUtil.isNotEmpty(adId)){//先Google id
-                return adId;
-            }
-
-            return ApkInfoUtil.getCustomizedUniqueIdOrAndroidId(ctx);
-        }else {//以前魔塔是这么写，这里为了兼容魔塔游戏
-
-            String uniqueId = ApkInfoUtil.getCustomizedUniqueIdOrAndroidId(ctx);
-            if (SStringUtil.isNotEmpty(uniqueId)){
-                return uniqueId;
-            }
-            return GamaUtil.getGoogleAdId(ctx);
-
+        String adId = GamaUtil.getGoogleAdId(ctx);
+        if (SStringUtil.isNotEmpty(adId)){//先Google id
+            return adId;
         }
+
+        return ApkInfoUtil.getCustomizedUniqueIdOrAndroidId(ctx);
     }
 }

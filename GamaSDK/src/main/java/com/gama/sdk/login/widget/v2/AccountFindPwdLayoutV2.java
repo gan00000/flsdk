@@ -81,8 +81,6 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        findPwdAccountEditText.setText("");
-        findPwdEmailEditText.setText("");
     }
 
     @Override

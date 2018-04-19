@@ -11,8 +11,8 @@
 
     <!--平台CND的主域名：autocdn-palt.starb168.com-->
     <!--备用域名：autocdn-paltsl.starb168.com-->
-    <string name="gama_cdn_pre_url">https://sdk_download.gamamobi.com</string>
-    <string name="gama_cdn_spa_url">https://sdk_download.gamamobi.com</string>
+    <string name="gama_cdn_pre_url">https://sdk_download.gamamobi.com/</string>
+    <string name="gama_cdn_spa_url">https://sdk_download.gamamobi.com/</string>
 
     <string name="gama_ads_pre_url">https://ads.gamamobi.com/</string>
     <string name="gama_ads_spa_url">https://ads.gamamobi.com/</string>

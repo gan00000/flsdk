@@ -252,7 +252,9 @@ public class FileUtil {
 		}
 	}
 
-
+	/**
+	 * 读取assets中的文本
+	 */
 	public static String readAssetsTxtFile(Context context,String fileName){
 		try {
 			InputStream is = context.getAssets().open(fileName);
@@ -269,5 +271,28 @@ public class FileUtil {
 			e.printStackTrace();
 		}
 		return "";
+	}
+
+	/**
+	 * 读取assets中的properties配置文件
+	 */
+	public static Properties readAssetsPropertiestFile(Context context,String fileName){
+		try {
+			InputStream is = context.getAssets().open(fileName);
+			if (is != null) {
+//				int lenght = is.available();
+//
+//				byte[] buffer = new byte[lenght];
+//				is.read(buffer);
+
+				Properties properties = new Properties();
+				properties.load(is);
+				is.close();
+				return properties;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

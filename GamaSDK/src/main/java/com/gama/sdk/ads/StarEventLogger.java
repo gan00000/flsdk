@@ -32,16 +32,16 @@ public class StarEventLogger {
 
         try {
 
-            AppsFlyerLib.getInstance().startTracking(activity.getApplication(), ResConfig.getConfigInAssets(activity,"gama_ads_appflyer_dev_key"));
+            AppsFlyerLib.getInstance().startTracking(activity.getApplication(), ResConfig.getConfigInAssetsProperties(activity,"gama_ads_appflyer_dev_key"));
 
             SFacebookProxy.activateApp(activity.getApplicationContext());
 
             // Google Android first open conversion tracking snippet
             // Add this code to the onCreate() method of your application activity
-            String gama_ads_adword_conversionId = ResConfig.getConfigInAssets(activity,"gama_ads_adword_conversionId");
+            String gama_ads_adword_conversionId = ResConfig.getConfigInAssetsProperties(activity,"gama_ads_adword_conversionId");
             if (SStringUtil.isNotEmpty(gama_ads_adword_conversionId)) {
                 AdWordsConversionReporter.reportWithConversionId(activity.getApplicationContext(),
-                        gama_ads_adword_conversionId, ResConfig.getConfigInAssets(activity,"gama_ads_adword_label"), "0.00", false);
+                        gama_ads_adword_conversionId, ResConfig.getConfigInAssetsProperties(activity,"gama_ads_adword_label"), "0.00", false);
             }
 
         } catch (Exception e) {

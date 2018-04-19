@@ -11,7 +11,10 @@ import com.core.base.utils.SPUtil;
 import com.core.base.utils.SStringUtil;
 import com.gama.base.utils.GamaUtil;
 
+import java.util.Properties;
+
 public class ResConfig {
+	private static final String TAG = ResConfig.class.getSimpleName();
 
 	//===========================================参数配置start===============================================
 	//===========================================每個遊戲每個渠道都可能不一樣=======================================
@@ -25,7 +28,7 @@ public class ResConfig {
 			return GamaUtil.getSdkCfg(context).getS_GameCode();
 		}
 //		return getResStringByName(context, "star_game_code");
-		return getConfigInAssets(context, "gama_game_code");
+		return getConfigInAssetsProperties(context, "gama_game_code");
 	}
 
 	/**
@@ -35,11 +38,11 @@ public class ResConfig {
 		if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_AppKey())){
 			return GamaUtil.getSdkCfg(context).getS_AppKey();
 		}
-		return getConfigInAssets(context, "gama_app_key");
+		return getConfigInAssetsProperties(context, "gama_app_key");
 	}
 
 	public static String getApplicationId(Context context) {
-		return getConfigInAssets(context, "facebook_app_id");
+		return getConfigInAssetsProperties(context, "facebook_app_id");
 	}
 
 
@@ -62,10 +65,10 @@ public class ResConfig {
 		return getGameLanguage(context).toLowerCase();
 	}
 	/**
-	 * 获取Google游戏服务ID
+	 * 获取Google Client Id用于G+登录验证
 	 */
 	public static String getGoogleClientId(Context context){
-		return getConfigInAssets(context,"google_client_id");
+		return getConfigInAssetsProperties(context,"google_client_id");
 	}
 
 
@@ -168,7 +171,7 @@ public class ResConfig {
 	 * 是否侵权
 	 */
 	public static boolean isInfringement(Context context){
-		return SStringUtil.isEqual(getConfigInAssets(context, "gama_infringement"),"true");
+		return SStringUtil.isEqual(getConfigInAssetsProperties(context, "gama_infringement"),"true");
 	}
 
 	/**
@@ -230,7 +233,7 @@ public class ResConfig {
 
 	private static String getConfigUrl(Context context, String xmlSchemaName){
 
-		String isGlobal = getConfigInAssets(context, "gama_url_is_global");
+		String isGlobal = getConfigInAssetsProperties(context, "gama_url_is_global");
 		if ("100".equals(isGlobal)){
 			xmlSchemaName = "g_" + xmlSchemaName;
 		}
@@ -274,6 +277,24 @@ public class ResConfig {
 			mVaule = getResStringByName(context, key);
 		}
 		return mVaule;
+	}
+
+
+	private static Properties properties;
+	/**
+	 * 从assets/gama/gama_gameconfig.properties中获取游戏配置信息
+	 */
+	public static String getConfigInAssetsProperties(Context context, String key){
+
+		if (properties == null){
+			properties = FileUtil.readAssetsPropertiestFile(context,"gama/gama_gameconfig.properties");
+			PL.i(TAG, "获取游戏assets配置文件: " + (properties != null ? properties.toString() : "失败"));
+		}
+		if(properties == null) {
+			PL.e(TAG, "获取游戏assets配置文件失败");
+			return "";
+		}
+		return properties.getProperty(key, "");
 	}
 
 }
