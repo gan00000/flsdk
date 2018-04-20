@@ -24,6 +24,9 @@ public class SSdkBaseRequestBean extends BaseReqeustBean {
     private String accessToken;
     private String loginTimestamp;
 
+    /**
+     * 用于进行免注册登录的ID（首选广告ID，备用UUID）
+     */
     private String uniqueId;
 
     private String timestamp = System.currentTimeMillis() + "";
@@ -136,6 +139,9 @@ public class SSdkBaseRequestBean extends BaseReqeustBean {
         return uniqueId;
     }
 
+    /**
+     * 获取用于进行免注册登录的ID（首选广告ID，备用UUID）
+     */
     public void setUniqueId(String uniqueId) {
         this.uniqueId = uniqueId;
     }
