@@ -18,8 +18,8 @@ import com.gama.base.bean.SGameLanguage;
 import com.gama.base.bean.SPayType;
 import com.gama.base.cfg.ConfigRequest;
 import com.gama.base.cfg.ResConfig;
-import com.gama.base.utils.Localization;
 import com.gama.base.utils.GamaUtil;
+import com.gama.base.utils.Localization;
 import com.gama.data.login.ILoginCallBack;
 import com.gama.pay.gp.GooglePayActivity2;
 import com.gama.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
@@ -106,12 +106,11 @@ public class GamaImpl implements IGama {
 
     }
 
-
     @Override
-    public void registerRoleInfo(Activity activity, String roleId, String roleName, String roleLevel, String severCode, String serverName) {
+    public void registerRoleInfo(Activity activity, String roleId, String roleName, String roleLevel, String vipLevel, String severCode, String serverName) {
         PL.i("IGama registerRoleInfo");
-        PL.i("roleId:" + roleId + ",roleName:" + roleName + ",severCode:" + severCode + ",serverName:" + serverName);
-        GamaUtil.saveRoleInfo(activity, roleId, roleName, severCode, serverName);//保存角色信息
+        PL.i("roleId:" + roleId + ",roleName:" + roleName + ",roleLevel:" + roleLevel + ",vipLevel:" + vipLevel + ",severCode:" + severCode + ",serverName:" + serverName);
+        GamaUtil.saveRoleInfo(activity, roleId, roleName, roleLevel, vipLevel, severCode, serverName);//保存角色信息
     }
 
     @Override
@@ -136,8 +135,8 @@ public class GamaImpl implements IGama {
     }
 
     @Override
-    public void pay(final Activity activity, final SPayType payType, final String cpOrderId, final String productId, final String roleLevel, final String extra) {
-        PL.i("IGama pay cpOrderId:" + cpOrderId + ",productId:" + productId + ",roleLevel:" + roleLevel + ",extra:" + extra);
+    public void pay(final Activity activity, final SPayType payType, final String cpOrderId, final String productId, final String extra) {
+        PL.i("IGama pay payType:" + payType.toString() + " ,cpOrderId:" + cpOrderId + ",productId:" + productId + ",extra:" + extra);
         if ((System.currentTimeMillis() - firstClickTime) < 1000){//防止连续点击
             PL.i("点击过快，无效");
             return;
@@ -147,22 +146,18 @@ public class GamaImpl implements IGama {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                startPay(activity, payType, cpOrderId, productId, roleLevel, extra);
+                startPay(activity, payType, cpOrderId, productId, extra);
             }
         });
-
     }
 
-
     @Override
-    public void openWebview(final Activity activity, final String roleLevel, final String roleVipLevel) {
+    public void openWebview(final Activity activity) {
 
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 SGameBaseRequestBean webviewReqeustBean = new SGameBaseRequestBean(activity);
-                webviewReqeustBean.setRoleLevel(roleLevel);
-                webviewReqeustBean.setRoleVipLevel(roleVipLevel);
 
                 //设置签名
 //        appkey+gameCode+userId+roleId+timestamp
@@ -226,30 +221,30 @@ public class GamaImpl implements IGama {
 
 
 
-    private void startPay(Activity activity, SPayType payType, String cpOrderId, String productId, String roleLevel, String extra) {
+    private void startPay(Activity activity, SPayType payType, String cpOrderId, String productId, String extra) {
         if (payType == SPayType.OTHERS){//第三方储值
 
-            othersPay(activity, cpOrderId, roleLevel, extra);
+            othersPay(activity, cpOrderId, extra);
 
         }else{//默认Google储值
 
             if (GamaUtil.getSdkCfg(activity) != null && GamaUtil.getSdkCfg(activity).openOthersPay(activity)){//假若Google包侵权被下架，此配置可以启动三方储值
                 PL.i("转第三方储值");
-                othersPay(activity, cpOrderId, roleLevel, extra);
+                othersPay(activity, cpOrderId, extra);
 
             }else{
 
-                googlePay(activity, cpOrderId, productId, roleLevel, extra);
+                googlePay(activity, cpOrderId, productId, extra);
             }
 
         }
     }
 
-    private void googlePay(Activity activity, String cpOrderId, String productId, String roleLevel, String extra) {
+    private void googlePay(Activity activity, String cpOrderId, String productId, String extra) {
         GooglePayCreateOrderIdReqBean googlePayCreateOrderIdReqBean = new GooglePayCreateOrderIdReqBean(activity);
         googlePayCreateOrderIdReqBean.setCpOrderId(cpOrderId);
         googlePayCreateOrderIdReqBean.setProductId(productId);
-        googlePayCreateOrderIdReqBean.setRoleLevel(roleLevel);
+//        googlePayCreateOrderIdReqBean.setRoleLevel(roleLevel);
         googlePayCreateOrderIdReqBean.setExtra(extra);
 
         Intent i = new Intent(activity, GooglePayActivity2.class);
@@ -257,8 +252,8 @@ public class GamaImpl implements IGama {
         activity.startActivityForResult(i,GooglePayActivity2.GooglePayReqeustCode);
     }
 
-    private void othersPay(Activity activity, String cpOrderId, String roleLevel, String extra) {
-        WebPayReqBean webPayReqBean = PayHelper.buildWebPayBean(activity,cpOrderId,roleLevel,extra);
+    private void othersPay(Activity activity, String cpOrderId, String extra) {
+        WebPayReqBean webPayReqBean = PayHelper.buildWebPayBean(activity,cpOrderId,extra);
 
         String payThirdUrl = null;
         if (GamaUtil.getSdkCfg(activity) != null) {
@@ -417,13 +412,12 @@ public class GamaImpl implements IGama {
     }
 
     @Override
-    public void openPlatform(final Activity activity, final String roleLevel, final String roleVipLevel) {
-        PL.i("IStarpy pay roleLevel:" + roleLevel + ",roleVipLevel:" + roleVipLevel);
+    public void openPlatform(final Activity activity) {
+        PL.i("IGama openPlatform");
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
 
-                GamaUtil.saveRoleLevelVip(activity,roleLevel,roleVipLevel);
                 if (GamaUtil.isLogin(activity)){
                     activity.startActivity(new Intent(activity, PlatMainActivity.class));
                 }else {

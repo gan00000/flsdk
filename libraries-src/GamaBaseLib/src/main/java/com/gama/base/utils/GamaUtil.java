@@ -201,38 +201,66 @@ public class GamaUtil {
     private static final String GAMA_LOGIN_ROLE_LEVEL = "GAMA_LOGIN_ROLE_LEVEL";
     private static final String GAMA_LOGIN_ROLE_VIP = "GAMA_LOGIN_ROLE_VIP";
 
-
+    /**
+     * 获取Json形式保存的角色信息
+     */
     public static String getRoleInfo(Context context){
         return SPUtil.getSimpleString(context,GAMA_SP_FILE,GAMA_LOGIN_ROLE_INFO);
     }
 
+    /**
+     * 以Json形式保存角色信息
+     */
     private static void saveRoleInfoJson(Context context,String roleInfo){
         SPUtil.saveSimpleInfo(context,GAMA_SP_FILE,GAMA_LOGIN_ROLE_INFO,roleInfo);
     }
 
+    /**
+     * 获取角色id
+     */
     public static String getRoleId(Context context){
         return JsonUtil.getValueByKey(context,getRoleInfo(context), GAMA_LOGIN_ROLE_ID, "");
     }
 
+    /**
+     * 获取角色名
+     */
     public static String getRoleName(Context context){
         return JsonUtil.getValueByKey(context,getRoleInfo(context), GAMA_LOGIN_ROLE_NAME, "");
     }
 
+    /**
+     * 获取服务器id
+     */
     public static String getServerCode(Context context) {
         return JsonUtil.getValueByKey(context,getRoleInfo(context), GAMA_LOGIN_ROLE_SERVER_CODE, "");
     }
 
+    /**
+     * 获取服务器名
+     */
     public static String getServerName(Context context){
         return JsonUtil.getValueByKey(context,getRoleInfo(context), GAMA_LOGIN_ROLE_SERVER_NAME, "");
     }
 
-    public static void saveRoleInfo(Context context, String roleId, String roleName, String severCode, String serverName) {
+    /**
+     * 保存角色信息
+     * @param roleId 角色id
+     * @param roleName 角色名
+     * @param roleLevel 角色等级
+     * @param vipLevel 角色VIP等级
+     * @param severCode 服务器code
+     * @param serverName 服务器名
+     */
+    public static void saveRoleInfo(Context context, String roleId, String roleName, String roleLevel, String vipLevel, String severCode, String serverName) {
         try {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put(GAMA_LOGIN_ROLE_ID,roleId);
             jsonObject.put(GAMA_LOGIN_ROLE_NAME,roleName);
             jsonObject.put(GAMA_LOGIN_ROLE_SERVER_CODE,severCode);
             jsonObject.put(GAMA_LOGIN_ROLE_SERVER_NAME,serverName);
+            jsonObject.put(GAMA_LOGIN_ROLE_LEVEL, roleLevel);
+            jsonObject.put(GAMA_LOGIN_ROLE_VIP, vipLevel);
             saveRoleInfoJson(context, jsonObject.toString());
 
         } catch (JSONException e) {
@@ -240,20 +268,18 @@ public class GamaUtil {
         }
     }
 
-    public static void saveRoleLevelVip(Context context,String roleLevel,String roleVip){
-        if (SStringUtil.isNotEmpty(roleLevel)) {
-            SPUtil.saveSimpleInfo(context,GAMA_SP_FILE,GAMA_LOGIN_ROLE_LEVEL,roleLevel);
-        }
-        if (SStringUtil.isNotEmpty(roleVip)) {
-            SPUtil.saveSimpleInfo(context,GAMA_SP_FILE,GAMA_LOGIN_ROLE_VIP,roleVip);
-        }
+    /**
+     * 获取角色等级
+     */
+    public static String getRoleLevel(Context context){
+        return JsonUtil.getValueByKey(context, getRoleInfo(context), GAMA_LOGIN_ROLE_LEVEL, "");
     }
 
-    public static String getRoleLevel(Context context){
-        return SPUtil.getSimpleString(context,GAMA_SP_FILE,GAMA_LOGIN_ROLE_LEVEL);
-    }
+    /**
+     * 获取角色VIP等级
+     */
     public static String getRoleVip(Context context){
-        return SPUtil.getSimpleString(context,GAMA_SP_FILE,GAMA_LOGIN_ROLE_VIP);
+        return JsonUtil.getValueByKey(context, getRoleInfo(context), GAMA_LOGIN_ROLE_VIP, "");
     }
 
     public static String getCfgValueByKey(Context context, String key, String defaultValue) {

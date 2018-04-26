@@ -35,6 +35,7 @@ public class PayReqBean extends BPayReqBean {
 		serverName = GamaUtil.getServerName(context);
 		roleName = GamaUtil.getRoleName(context);
 		roleId = GamaUtil.getRoleId(context);
+		roleLevel = GamaUtil.getRoleLevel(context);
 	}
 
 	public boolean isInitOk(){

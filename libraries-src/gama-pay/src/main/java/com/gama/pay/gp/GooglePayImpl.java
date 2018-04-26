@@ -135,7 +135,7 @@ public class GooglePayImpl implements IPay {
         PL.w("google set paying...");
         isPaying = true;
 
-
+        //由GooglePayActivity2传入
         this.createOrderIdReqBean = (GooglePayCreateOrderIdReqBean) payReqBean;
         //设置储值主域名
         this.createOrderIdReqBean.setRequestUrl(PayHelper.getPreferredUrl(activity));
@@ -220,12 +220,14 @@ public class GooglePayImpl implements IPay {
                         callbackFail(result.getMessage());
                         return;
                     }
+                    //开始从Google商店查询所有商品状态
                     mHelper.queryInventoryAsync(queryInventoryFinishedListener);
 
                 }
 
             });
         } else {
+            //开始从Google商店查询所有商品状态
             mHelper.queryInventoryAsync(queryInventoryFinishedListener);
 
         }
@@ -412,7 +414,9 @@ public class GooglePayImpl implements IPay {
         }
     };
 
-
+    /**
+     * 查询商品状态的回调
+     */
     private IabHelper.QueryInventoryFinishedListener queryInventoryFinishedListener = new IabHelper.QueryInventoryFinishedListener() {
 
         @Override
@@ -424,6 +428,9 @@ public class GooglePayImpl implements IPay {
         }
     };
 
+    /**
+     * 查询商品状态结果处理
+     */
     private void handleQueryResult(IabResult result, Inventory inventory) {
 
         if (result.isFailure()) {
@@ -436,7 +443,7 @@ public class GooglePayImpl implements IPay {
             List<Purchase> purchaseList = inventory.getAllPurchases();
 
             if (null == purchaseList || purchaseList.isEmpty()) {
-
+                //没有未消费的商品
               //  callbackFail();
                 SLog.logD("purchases is empty");
 

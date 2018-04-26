@@ -84,7 +84,18 @@ android {
             resValue "string", "facebook_app_id", "180494902571206"
             resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider180494902571206"
         }
+        ezfy {
+            applicationId "com.gamamobi.ezfy"
+            minSdkVersion 18
+            targetSdkVersion 27
+            versionCode 1
+            versionName "1.0"
+            flavorDimensions "1"
 
+//            resValue "string", "facebook_app_name", ""
+            resValue "string", "facebook_app_id", "1040235646130047"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1040235646130047"
+        }
 
     }
 

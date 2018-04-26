@@ -46,14 +46,15 @@ public class MainActivity extends AppCompatActivity {
         iGama.onCreate(this);
 
         /**
-         * 在游戏获得角色信息的时候调用
-         * roleId 角色id
-         * roleName  角色名
-         * rolelevel 角色等级
-         * severCode 角色伺服器id
-         * serverName 角色伺服器名称
+         * 同步角色信息
          */
-        iGama.registerRoleInfo(this, "roleid_1", "roleName", "rolelevel", "1", "serverName");
+        String roleId = "123"; //角色id
+        String roleName = "角色名"; //角色名
+        String roleLevel = "10"; //角色等级
+        String vipLevel = "5"; //角色vip等级
+        String serverCode = "1003"; //角色伺服器id
+        String serverName = "S1"; //角色伺服器名称
+        iGama.registerRoleInfo(this, roleId, roleName, roleLevel, vipLevel, serverCode, serverName);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,10 +86,9 @@ public class MainActivity extends AppCompatActivity {
                 SPayType SPayType.OTHERS为第三方储值，SPayType.GOOGLE为Google储值
                 cpOrderId cp订单号，请保持每次的值都是不会重复的
                 productId 充值的商品id
-                roleLevel 觉得等级
                 customize 自定义透传字段（从服务端回调到cp）
                 */
-                iGama.pay(MainActivity.this, SPayType.OTHERS, "" + System.currentTimeMillis(), "payone", "roleLevel", "customize");
+                iGama.pay(MainActivity.this, SPayType.OTHERS, "" + System.currentTimeMillis(), "payone", "customize");
 
 
             }
@@ -103,17 +103,16 @@ public class MainActivity extends AppCompatActivity {
                 SPayType SPayType.OTHERS为第三方储值，SPayType.GOOGLE为Google储值
                 cpOrderId cp订单号，请保持每次的值都是不会重复的
                 productId 充值的商品id
-                roleLevel 觉得等级
                 customize 自定义透传字段（从服务端回调到cp）
                 */
-                iGama.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(), "com.dodi.payone", "roleLevel", "customize");
+                iGama.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(), "com.dodi.payone", "customize");
 
             }
         });
 
 
-
-
+        // String shareUrl = "http://ads.starb168.com/ads_scanner?gameCode=mthxtw&adsPlatForm=star_event&advertiser=share";
+        // https://dodi.gamamobi.com/share/index.html?gameCode=dodi&userId=1&roleId=123&roleName=erge&serverCode=1000&serverName=testServer&package=com.xxx.xxx&
         shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -157,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
         showPlatform.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                iGama.openPlatform(MainActivity.this, "10", "2");
+                iGama.openPlatform(MainActivity.this);
             }
         });
     }

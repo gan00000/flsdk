@@ -203,8 +203,7 @@ public class PlatMainActivity extends SBaseSdkActivity implements PlatContract.I
 
                     }else if (platMenuModel.getItemId().equals("storedValue")){
 
-                        WebPayReqBean webPayReqBean = PayHelper.buildWebPayBean(PlatMainActivity.this,"",
-                                GamaUtil.getRoleLevel(PlatMainActivity.this),"");
+                        WebPayReqBean webPayReqBean = PayHelper.buildWebPayBean(PlatMainActivity.this,"", "");
 
                         String payThirdUrl = null;
                         if (GamaUtil.getSdkCfg(PlatMainActivity.this) != null) {

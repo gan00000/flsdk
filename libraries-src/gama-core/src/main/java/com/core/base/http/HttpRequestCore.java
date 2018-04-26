@@ -197,7 +197,7 @@ public class HttpRequestCore{
 //				});
 //			}
 
-			if (!TextUtils.isEmpty(sendData) && HttpReuqestMethod.GET != requestMethod) {
+			if (!TextUtils.isEmpty(sendData) && !HttpReuqestMethod.GET.equals(requestMethod)) {
 				urlConnection.setDoOutput(true);
 			}
 			//urlConnection.setChunkedStreamingMode(0);
@@ -221,9 +221,9 @@ public class HttpRequestCore{
 			}
 			urlConnection.connect();
 			
-			if (!TextUtils.isEmpty(sendData) && HttpReuqestMethod.GET != requestMethod) {//post请求需要写文件流
+			if (!TextUtils.isEmpty(sendData) && !HttpReuqestMethod.GET.equals(requestMethod)) {//post请求需要写文件流
 				writeStream(urlConnection.getOutputStream(), sendData);
-			}else if(postByteData != null && HttpReuqestMethod.GET != requestMethod){
+			}else if(postByteData != null && !HttpReuqestMethod.GET.equals(requestMethod)){
 				writeStream(urlConnection.getOutputStream(), postByteData);
 			}
 			

@@ -13,8 +13,7 @@ public interface ISRqeust {
     void excute();
 
     /**
-     * 子线程执行
-     * @return
+     * 从各Task对象中获取对应的请求Bean。子线程执行
      */
     BaseReqeustBean createRequestBean();
 

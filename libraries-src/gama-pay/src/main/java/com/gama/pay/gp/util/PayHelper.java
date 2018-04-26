@@ -30,7 +30,7 @@ public class PayHelper {
 		return checkUrl(spareUrl);
 	}
 
-	public static WebPayReqBean buildWebPayBean(Context context, String cpOrderId, String roleLevel, String extra){
+	public static WebPayReqBean buildWebPayBean(Context context, String cpOrderId, String extra){
 		WebPayReqBean webPayReqBean = new WebPayReqBean(context);
 
 		if (SStringUtil.isEmpty(webPayReqBean.getIswifi())) {
@@ -45,7 +45,7 @@ public class PayHelper {
 
 		webPayReqBean.setUserId(GamaUtil.getUid(context));
 		webPayReqBean.setCpOrderId(cpOrderId);
-		webPayReqBean.setRoleLevel(roleLevel);
+//		webPayReqBean.setRoleLevel(roleLevel);
 		webPayReqBean.setExtra(extra);
 
 		webPayReqBean.setPsid("62");

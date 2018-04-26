@@ -50,7 +50,9 @@ public class BaseReqeustBean extends AbsReqeustBean {
         }
     }
 
-
+    /**
+     * 将请求的Bean转换成Map
+     */
     public Map<String, String> fieldValueToMap() {
 
         Map<String, String> postParams = new HashMap<String, String>();

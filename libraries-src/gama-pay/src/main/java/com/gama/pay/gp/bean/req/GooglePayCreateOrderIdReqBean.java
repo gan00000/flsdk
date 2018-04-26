@@ -46,6 +46,7 @@ public class GooglePayCreateOrderIdReqBean extends PayReqBean {
 		setGameCode("");
 		setCpOrderId("");
 		setServerCode("");
+		setRoleId("");
 	}
 
 
