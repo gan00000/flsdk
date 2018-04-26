@@ -15,12 +15,16 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class PayHelper {
-	
+	/**
+	 * 获取储值主域名
+	 */
 	public static String getPreferredUrl(Activity payActivity){
 		String preferredUrl = ResConfig.getPayPreferredUrl(payActivity);
 		return checkUrl(preferredUrl);
 	}
-	
+	/**
+	 * 获取储值备用域名
+	 */
 	public static String getSpareUrl(Activity payActivity){
 		String spareUrl = ResConfig.getPaySpareUrl(payActivity);
 		return checkUrl(spareUrl);

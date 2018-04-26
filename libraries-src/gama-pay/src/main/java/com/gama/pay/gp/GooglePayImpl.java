@@ -46,12 +46,18 @@ public class GooglePayImpl implements IPay {
 
     private LoadingDialog loadingDialog;
 
+    /**
+     * 创单的请求参数Bean
+     */
     private GooglePayCreateOrderIdReqBean createOrderIdReqBean;
 
     private Activity activity;
 
     private IPayCallBack iPayCallBack;
-    boolean isPaying = false;//防止连续快速点击储值出现未知异常
+    /**
+     * 防止连续快速点击储值出现未知异常
+     */
+    boolean isPaying = false;
 
 
     private void callbackSuccess(){
@@ -98,6 +104,9 @@ public class GooglePayImpl implements IPay {
 
     }
 
+    /**
+     * 设置Google储值的回调
+     */
     public void setIPayCallBack(IPayCallBack iPayCallBack) {
         this.iPayCallBack = iPayCallBack;
     }
@@ -128,10 +137,13 @@ public class GooglePayImpl implements IPay {
 
 
         this.createOrderIdReqBean = (GooglePayCreateOrderIdReqBean) payReqBean;
+        //设置储值主域名
         this.createOrderIdReqBean.setRequestUrl(PayHelper.getPreferredUrl(activity));
+        //设置储值备用域名
         this.createOrderIdReqBean.setRequestSpaUrl(PayHelper.getSpareUrl(activity));
+        //设置储值接口名
         this.createOrderIdReqBean.setRequestMethod(GooglePayDomainSite.google_order_create);
-
+        //创建Loading窗
         loadingDialog = new LoadingDialog(activity);
 
         if (mHelper == null) {
@@ -142,7 +154,7 @@ public class GooglePayImpl implements IPay {
         }
 
         if (this.createOrderIdReqBean.isInitOk()){
-
+            //开始Google储值
             googlePaySetUp();
         }else{
             ToastUtils.toast(activity,"please log in to the game first");
@@ -198,6 +210,7 @@ public class GooglePayImpl implements IPay {
         }
         loadingDialog.showProgressDialog();
         if (!mHelper.isSetupDone()) {
+            //进行Google支付的初始化，只能进行一次，如果已经初始化则不用再次初始化
             mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
 
                 public void onIabSetupFinished(IabResult result) {

@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import com.gama.base.utils.SLog;
 
 /**
+ * Loading窗工具
  * Created by gan on 2017/2/23.
  */
 

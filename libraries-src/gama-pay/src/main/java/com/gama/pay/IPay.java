@@ -11,7 +11,13 @@ import com.gama.pay.gp.bean.req.PayReqBean;
 
 public interface IPay extends IGameLifeCycle{
 
-    public void startPay(Activity activity,PayReqBean payReqBean);
+    /**
+     * 进入Google储值流程
+     */
+    void startPay(Activity activity,PayReqBean payReqBean);
 
-    public void setIPayCallBack(IPayCallBack iPayCallBack);
+    /**
+     * 设置Google储值的回调
+     */
+    void setIPayCallBack(IPayCallBack iPayCallBack);
 }

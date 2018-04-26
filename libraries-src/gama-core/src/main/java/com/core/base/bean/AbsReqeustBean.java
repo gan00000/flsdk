@@ -5,16 +5,31 @@ import android.text.TextUtils;
 import java.io.Serializable;
 
 /**
+ * 网络请求的基础设置
  * Created by gan on 2016/11/24.
  */
 
 public abstract class AbsReqeustBean implements Serializable{
 
+    /**
+     * 请求的主域名
+     */
     private String requestUrl = "";
+    /**
+     * 请求的备用域名
+     */
     private String requestSpaUrl = "";
+    /**
+     * 请求的接口名
+     */
     private String requestMethod = "";
+    /**
+     * 主域名的完整请求链接
+     */
     private String completeUrl = "";
-
+    /**
+     * 备用域名的完整请求链接
+     */
     private String completeSpaUrl = "";
 
     public String getRequestMethod() {

@@ -9,16 +9,16 @@ import android.content.Intent;
 
 public interface IGameLifeCycle {
 
-    public void onCreate(Activity activity);
+    void onCreate(Activity activity);
 
-    public void onResume(Activity activity);
+    void onResume(Activity activity);
 
-    public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data);
+    void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data);
 
-    public void onPause(Activity activity);
+    void onPause(Activity activity);
     
-    public void onStop(Activity activity);
+    void onStop(Activity activity);
 
-    public void onDestroy(Activity activity);
+    void onDestroy(Activity activity);
 
 }
