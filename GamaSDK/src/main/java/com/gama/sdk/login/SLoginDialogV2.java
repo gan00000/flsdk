@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 登录界面，用Dialog实现
  * Created by gan on 2017/4/12.
  */
 
@@ -98,6 +99,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
         }
         setCanceledOnTouchOutside(false);
         setFullScreen();
+        //创建登录控制类
         iLoginPresenter = new LoginPresenterImpl();
         iLoginPresenter.setBaseView(this);
 
@@ -132,10 +134,9 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 
         viewPageList = new ArrayList<>();
 
-//        isXM = GamaUtil.isXM(activity);
-
+        //初始化主登录界面
         toMainLoginView();
-
+        //初始化自动登录界面
         initAutoLoginView();
 
 

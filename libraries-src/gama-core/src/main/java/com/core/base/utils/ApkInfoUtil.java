@@ -68,26 +68,18 @@ public class ApkInfoUtil {
 	    return height;
 	}
 	
-	/**
-	 * <p>Description: </p>
-	 * @param ctx  
-	 * @return
-	 * @date 2015年10月12日
-	 * 
-	 */
-	
-	public static String getMacAddress(Context ctx) {
-
-		String macTmp = "";
-		try {
-			WifiManager wifi = (WifiManager) ctx.getSystemService(Context.WIFI_SERVICE);
-			WifiInfo info = wifi.getConnectionInfo();
-			macTmp = info.getMacAddress();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return macTmp;
-	}
+//	public static String getMacAddress(Context ctx) {
+//
+//		String macTmp = "";
+//		try {
+//			WifiManager wifi = (WifiManager) ctx.getSystemService(Context.WIFI_SERVICE);
+//			WifiInfo info = wifi.getConnectionInfo();
+//			macTmp = info.getMacAddress();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return macTmp;
+//	}
 
 
 	/**
@@ -151,19 +143,19 @@ public class ApkInfoUtil {
 	}
 	
 
-	public static String getImeiAddress(Context ctx) {
-		String imei = "";
-		try {
-			if (PermissionUtil.hasSelfPermission(ctx, Manifest.permission.READ_PHONE_STATE)) {
-				TelephonyManager telephonyManager = (TelephonyManager) ctx.getSystemService(Context.TELEPHONY_SERVICE);
-				imei = telephonyManager.getDeviceId();
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return imei;
-	}
+//	public static String getImeiAddress(Context ctx) {
+//		String imei = "";
+//		try {
+//			if (PermissionUtil.hasSelfPermission(ctx, Manifest.permission.READ_PHONE_STATE)) {
+//				TelephonyManager telephonyManager = (TelephonyManager) ctx.getSystemService(Context.TELEPHONY_SERVICE);
+//				imei = telephonyManager.getDeviceId();
+//			}
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return imei;
+//	}
 
 	public static String getLocalIpAddress(Context ctx){
 		WifiManager wifi = (WifiManager) ctx.getSystemService(Context.WIFI_SERVICE);

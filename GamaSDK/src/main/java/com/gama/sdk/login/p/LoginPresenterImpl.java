@@ -40,6 +40,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
+ * 登录功能控制器类
  * Created by gan on 2017/4/13.
  */
 

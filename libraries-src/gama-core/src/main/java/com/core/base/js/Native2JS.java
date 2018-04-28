@@ -91,7 +91,8 @@ public class Native2JS {
 	
 	@JavascriptInterface
 	public String getImei(){
-		return ApkInfoUtil.getImeiAddress(context);
+		//因Google警告，不再获取imei信息
+		return "";
 	}
 	
 	@JavascriptInterface
@@ -101,7 +102,8 @@ public class Native2JS {
 	
 	@JavascriptInterface
 	public String getMac(){
-		return ApkInfoUtil.getMacAddress(context);
+		//因Google警告，不再获取imei信息
+		return "";
 	}
 	
 	@JavascriptInterface
@@ -134,9 +136,9 @@ public class Native2JS {
 		JSONObject jsonObject = new JSONObject();
 		try {
 			jsonObject.put("systemVersion", ApkInfoUtil.getOsVersion());
-			jsonObject.put("mac", ApkInfoUtil.getMacAddress(context));
+			jsonObject.put("mac", "");//因Google警告，不再获取imei信息
 			jsonObject.put("deviceType", ApkInfoUtil.getDeviceType());
-			jsonObject.put("imei", ApkInfoUtil.getImeiAddress(context));
+			jsonObject.put("imei", "");//因Google警告，不再获取imei信息
 			jsonObject.put("ip", ApkInfoUtil.getLocalIpAddress(context));
 			jsonObject.put("androidid", ApkInfoUtil.getAndroidId(context));
 			return jsonObject.toString();

@@ -20,10 +20,10 @@ import java.util.Map;
 public class BaseReqeustBean extends AbsReqeustBean {
 
     private String androidId = "";
-    private String imei = "";
+    private String imei = "";//因Google警告，不再获取imei信息
     private String systemVersion = "";
     private String deviceType = "";
-    private String mac = "";
+    private String mac = "";//因Google警告，不再获取mac信息
     private String osLanguage = "";//系统语言
 
 
@@ -41,8 +41,8 @@ public class BaseReqeustBean extends AbsReqeustBean {
         osLanguage = ApkInfoUtil.getOsLanguage();
 
         if (context != null) {
-            imei = ApkInfoUtil.getImeiAddress(context);
-            mac = ApkInfoUtil.getMacAddress(context);
+            imei = "";
+            mac = "";
 
             packageName = context.getPackageName();
             versionCode = ApkInfoUtil.getVersionCode(context);
