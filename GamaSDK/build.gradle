@@ -6,6 +6,14 @@ android {
         abortOnError false
     }
 
+    libraryVariants.all { variant ->
+        variant.outputs.all { output ->
+            if (outputFile != null && outputFileName.endsWith('.aar')) {
+                outputFileName = "${archivesBaseName}-${SDK_VERSION_NAME_AAR}.aar"
+            }
+        }
+    }
+
     compileSdkVersion 27
     buildToolsVersion '26.0.2'
     defaultConfig {
@@ -23,6 +31,10 @@ android {
     }
 
 
+}
+
+def getAarVersion() {
+    return 'v1.0.1.0'
 }
 
 dependencies {
