@@ -3,7 +3,6 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/bg"
     android:orientation="vertical">
 
     <ScrollView
@@ -51,7 +50,13 @@
                     android:id="@+id/open_page"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="打开页面" />
+                    android:text="打开活动页面" />
+
+                <Button
+                    android:id="@+id/open_url"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="打开链接页面" />
 
                 <Button
                     android:id="@+id/showPlatform"

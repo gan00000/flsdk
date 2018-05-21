@@ -13,7 +13,7 @@
 
             android:name=".MainActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|fontScale"
-            android:screenOrientation="sensorLandscape"
+            android:screenOrientation="sensor"
             android:theme="@style/Gama.Theme.AppCompat.Light.NoActionBar.FullScreen"
             android:windowSoftInputMode="stateHidden|adjustResize">
 

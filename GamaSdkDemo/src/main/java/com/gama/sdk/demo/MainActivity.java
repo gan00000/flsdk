@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         String roleName = "角色名"; //角色名
         String roleLevel = "10"; //角色等级
         String vipLevel = "5"; //角色vip等级
-        String serverCode = "1003"; //角色伺服器id
+        String serverCode = "1"; //角色伺服器id
         String serverName = "S1"; //角色伺服器名称
         iGama.registerRoleInfo(this, roleId, roleName, roleLevel, vipLevel, serverCode, serverName);
 
@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
                 productId 充值的商品id
                 customize 自定义透传字段（从服务端回调到cp）
                 */
-                iGama.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(), "com.dodi.payone", "customize");
+                iGama.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(), "com.ezfy.1usd", "customize");
 
             }
         });
@@ -145,11 +145,19 @@ public class MainActivity extends AppCompatActivity {
 
                 /**
                  * 打开一个活动页面接口
-                 * level：游戏等级
-                 * vipLevel：vip等级，没有就写""
                  */
-//                iGama.openWebview(MainActivity.this,"roleLevel","10");
-                iGama.openWebPage(MainActivity.this, "https://www.baidu.com/?tn=47018152_dg");
+                iGama.openWebview(MainActivity.this);
+            }
+        });
+
+        findViewById(R.id.open_url).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /**
+                 * 打开一个指定的url
+                 * String url: 打开的url
+                 */
+                iGama.openWebPage(MainActivity.this, "https://dodi.gamamobi.com/news/index.html");
             }
         });
 

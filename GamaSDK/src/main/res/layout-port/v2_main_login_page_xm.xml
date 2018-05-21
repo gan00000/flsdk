@@ -9,18 +9,18 @@
     <LinearLayout android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:layout_centerInParent="true"
-                  android:orientation="horizontal"
+                  android:orientation="vertical"
                   android:gravity="center"
     >
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="@dimen/px_334"
-                android:layout_height="@dimen/px_300"
+                android:layout_width="@dimen/px_300"
+                android:layout_height="@dimen/px_269"
                 android:src="@drawable/btn_xm_google_login"
                 android:scaleType="centerCrop"
                 android:id="@+id/btn_xm_google_login_iv"
@@ -34,8 +34,8 @@
                 android:id="@+id/btn_xm_facebook_login_iv"
                 />-->
             <ImageView
-                android:layout_width="@dimen/px_334"
-                android:layout_height="@dimen/px_300"
+                android:layout_width="@dimen/px_300"
+                android:layout_height="@dimen/px_269"
                 android:src="@drawable/btn_xm_member_login"
                 android:scaleType="centerCrop"
                 android:id="@+id/btn_xm_member_login_iv"
@@ -66,13 +66,13 @@
                 />-->
 
             <ImageView
-                android:layout_width="@dimen/px_334"
-                android:layout_height="@dimen/px_600"
+                android:layout_width="@dimen/px_600"
+                android:layout_height="@dimen/px_200"
                 android:src="@drawable/gama_fb_login"
                 android:scaleType="centerInside"
                 android:id="@+id/btn_xm_facebook_login_iv"
-                android:paddingLeft="@dimen/px_100"
-                android:paddingRight="@dimen/px_100"
+                android:paddingTop="@dimen/px_20"
+                android:paddingBottom="@dimen/px_20"
                 android:background="@drawable/gama_fb_login_bg"
                 />
 
@@ -84,13 +84,13 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="@dimen/px_334"
-                android:layout_height="@dimen/px_600"
+                android:layout_width="@dimen/px_600"
+                android:layout_height="@dimen/px_200"
                 android:src="@drawable/gama_guest_login"
                 android:scaleType="centerInside"
                 android:id="@+id/btn_xm_guest_login_iv"
-                android:paddingLeft="@dimen/px_100"
-                android:paddingRight="@dimen/px_100"
+                android:paddingTop="@dimen/px_20"
+                android:paddingBottom="@dimen/px_20"
                 android:background="@drawable/gama_guest_login_bg"
                 />
 

@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
+
+
+    <LinearLayout
+        android:layout_width="@dimen/px_700"
+        android:layout_height="@dimen/px_600"
+        android:layout_centerInParent="true"
+        android:background="@drawable/v2_login_bg"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_60"
+            android:layout_marginTop="@dimen/px_15">
+
+            <include layout="@layout/v2_login_back_layout"/>
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_60"
+            android:gravity="center"
+            android:paddingLeft="@dimen/px_30"
+            android:paddingRight="@dimen/px_30"
+            android:orientation="horizontal">
+
+            <!--<ImageView-->
+                <!--android:layout_width="@dimen/px_400"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:id="@+id/v2_bg_title_register_iv"-->
+                <!--android:src="@drawable/v2_bg_title_register"/>-->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/sp_30"
+                android:textColor="@android:color/white"
+                android:text="@string/py_login_page_account_reg"
+                android:textStyle="bold"
+                android:shadowColor="#FF000000"
+                android:shadowRadius="3.0"
+                android:shadowDx="5"
+                android:shadowDy="5"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/sp_15"
+                android:textColor="@android:color/white"
+                android:text="New Account"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="@dimen/px_5"
+                android:layout_marginLeft="@dimen/px_8"
+                />
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/px_15"
+            android:gravity="center_horizontal">
+
+            <LinearLayout
+                android:layout_width="@dimen/px_600"
+                android:layout_height="@dimen/px_80"
+                android:background="@drawable/v2_editetext_view_bg"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/px_30"
+                android:paddingRight="@dimen/px_30"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/v2_bg_icon_account"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/px_15"
+                    android:maxLines="1"
+                    android:inputType="text"
+                    android:background="@null"
+                    android:hint="@string/py_register_account_hit"
+                    android:textSize="@dimen/sp_18"
+                    android:id="@+id/py_register_account"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="@dimen/px_600"
+                android:layout_height="@dimen/px_80"
+                android:layout_marginTop="@dimen/px_15"
+                android:background="@drawable/v2_editetext_view_bg"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/px_30"
+                android:paddingRight="@dimen/px_15"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/v2_bg_icon_pwd"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.0"
+                    android:layout_marginLeft="@dimen/px_15"
+                    android:maxLines="1"
+                    android:inputType="text"
+                    android:background="@null"
+                    android:hint="@string/py_register_account_hit"
+                    android:textSize="@dimen/sp_18"
+                    android:id="@+id/py_register_password"
+                    />
+
+
+                <ImageView
+                    android:layout_width="@dimen/px_60"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/px_15"
+                    android:padding="@dimen/px_8"
+                    android:id="@+id/py_eye_imageview_id"
+                    android:src="@drawable/py_eye_selector_v2"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="@dimen/px_600"
+                android:layout_height="@dimen/px_80"
+                android:layout_marginTop="@dimen/px_15"
+                android:background="@drawable/v2_editetext_view_bg"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/px_30"
+                android:paddingRight="@dimen/px_30"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/v2_bg_icon_email"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/px_15"
+                    android:maxLines="1"
+                    android:inputType="text"
+                    android:background="@null"
+                    android:hint="@string/py_register_email_hit"
+                    android:textSize="@dimen/sp_18"
+                    android:id="@+id/py_register_account_mail"
+                    />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_60"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/px_10"
+            android:paddingRight="@dimen/px_10"
+            android:layout_marginTop="@dimen/px_15"
+            android:gravity="center"
+            >
+
+            <ImageView android:layout_width="@dimen/px_30"
+                android:layout_height="@dimen/px_30"
+                android:src="@drawable/py_btn_checkbox_selector"
+                android:id="@+id/py_register_account_terms_check"
+
+                />
+
+            <TextView android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/py_register_account_terms"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/sp_18"
+                android:layout_marginLeft="@dimen/px_15"
+                android:maxLines="1"
+                android:id="@+id/py_register_terms_text_id"
+                android:textColor="@android:color/white"
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="@dimen/px_15">
+
+            <!--<Button-->
+                <!--android:layout_width="@dimen/px_420"-->
+                <!--android:layout_height="@dimen/px_60"-->
+                <!--android:background="@drawable/v2_login_sure"-->
+                <!--android:id="@+id/py_register_account_confirm"/>-->
+
+            <TextView
+                android:layout_width="@dimen/px_420"
+                android:layout_height="@dimen/px_60"
+                android:id="@+id/py_register_account_confirm"
+                android:text="@string/py_confire"
+                android:textStyle="bold"
+                android:textSize="@dimen/sp_24"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:background="@drawable/bg_192d3f_46" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
