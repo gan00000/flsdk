@@ -124,13 +124,13 @@ public class ResConfig {
 	 * 获取客服主域名
 	 */
 	public static String getCsPreferredUrl(Context context) {
-		return getCdnLocalUrl(context,"star_py_cs_pre_url");
+		return getCdnLocalUrl(context,"gama_cs_pre_url");
 	}
 	/**
 	 * 获取客服备用域名
 	 */
 	public static String getCsSpareUrl(Context context) {
-		return getCdnLocalUrl(context,"star_py_cs_spa_url");
+		return getCdnLocalUrl(context,"gama_cs_spa_url");
 	}
 
 	/**

@@ -1,25 +1,31 @@
 <resources>
 
+    <!--登录域名-->
     <string name="gama_login_pre_url">https://login.gamamobi.com/</string>
     <string name="gama_login_spa_url">https://login.gamamobi.com/</string>
 
+    <!--支付域名-->
     <string name="gama_pay_pre_url">https://pay.gamamobi.com/</string>
     <string name="gama_pay_spa_url">https://pay.gamamobi.com/</string>
 
+    <!--活动域名-->
     <string name="gama_act_pre_url">https://activity.gamamobi.com/</string>
     <string name="gama_act_spa_url">https://activity.gamamobi.com/</string>
 
-    <!--平台CND的主域名：autocdn-palt.starb168.com-->
-    <!--备用域名：autocdn-paltsl.starb168.com-->
-    <string name="gama_cdn_pre_url">https://sdk_download.gamamobi.com/</string>
-    <string name="gama_cdn_spa_url">https://sdk_download.gamamobi.com/</string>
+    <!--cdn域名-->
+    <string name="gama_cdn_pre_url">https://sdk-download.gamamobi.com/</string>
+    <string name="gama_cdn_spa_url">https://sdk-download.gamamobi.com/</string>
 
+    <!--广告域名-->
     <string name="gama_ads_pre_url">https://ads.gamamobi.com/</string>
     <string name="gama_ads_spa_url">https://ads.gamamobi.com/</string>
 
-
+    <!--平台域名-->
     <string name="gama_plat_pre_url">https://platform.gamamobi.com/</string>
     <string name="gama_plat_spa_url">https://platform.gamamobi.com/</string>
 
+    <!--客服域名-->
+    <string name="gama_cs_pre_url"></string>
+    <string name="gama_cs_spa_url"></string>
 
 </resources>
