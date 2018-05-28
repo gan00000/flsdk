@@ -31,7 +31,8 @@ public class StarEventLogger {
     public static void activateApp(Activity activity){
 
         try {
-
+            AppsFlyerLib.getInstance().setCollectIMEI(false);
+            AppsFlyerLib.getInstance().setCollectAndroidID(false);
             AppsFlyerLib.getInstance().startTracking(activity.getApplication(), ResConfig.getConfigInAssetsProperties(activity,"gama_ads_appflyer_dev_key"));
 
             SFacebookProxy.activateApp(activity.getApplicationContext());
