@@ -6,6 +6,7 @@ import com.core.base.callback.IGameLifeCycle;
 import com.gama.base.bean.SGameLanguage;
 import com.gama.base.bean.SPayType;
 import com.gama.data.login.ILoginCallBack;
+import com.gama.sdk.callback.IPayListener;
 
 /**
  * Created by gan on 2017/2/13.
@@ -24,7 +25,7 @@ public interface IGama extends IGameLifeCycle {
 
     void login(Activity activity,ILoginCallBack iLoginCallBack);
 
-    void pay(Activity activity, SPayType payType, String cpOrderId, String productId, String extra);
+    void pay(Activity activity, SPayType payType, String cpOrderId, String productId, String extra, IPayListener listener);
 
     void share(Activity activity, ISdkCallBack iSdkCallBack, String shareLinkUrl);
 

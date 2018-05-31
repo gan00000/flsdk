@@ -474,6 +474,9 @@ public class GooglePayImpl implements IPay {
         startPurchase();
     }
 
+    /**
+     * 补单
+     */
     private void replacement(Purchase mPurchase) {
         GoogleExchangeReqBean exchangeReqBean = new GoogleExchangeReqBean(activity);
         exchangeReqBean.setDataSignature(mPurchase.getSignature());

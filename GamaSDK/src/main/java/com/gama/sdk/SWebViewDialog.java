@@ -74,18 +74,18 @@ public class SWebViewDialog extends SBaseDialog {
             return;
         }
 
-        setOnDismissListener(new OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                if (sWebView != null){
-                    sWebView.clearCache(true);
-                    sWebView.clearHistory();
-                    sWebView.destroy();
-                    sWebView = null;
-                    PL.i("dialog destory webview");
-                }
-            }
-        });
+//        setOnDismissListener(new OnDismissListener() {
+//            @Override
+//            public void onDismiss(DialogInterface dialog) {
+//                if (sWebView != null){
+//                    sWebView.clearCache(true);
+//                    sWebView.clearHistory();
+//                    sWebView.destroy();
+//                    sWebView = null;
+//                    PL.i("dialog destory webview");
+//                }
+//            }
+//        });
 
         sWebViewLayout = new SWebViewLayout(activity);
         this.setContentView(sWebViewLayout);
@@ -153,4 +153,15 @@ public class SWebViewDialog extends SBaseDialog {
         }
     }
 
+    @Override
+    public void dismiss() {
+        super.dismiss();
+        if (sWebView != null){
+            sWebView.clearCache(true);
+            sWebView.clearHistory();
+            sWebView.destroy();
+            sWebView = null;
+            PL.i("dialog destory webview");
+        }
+    }
 }

@@ -30,35 +30,35 @@ android {
         }
     }
 
-    signingConfigs {//签名的配置
-        release {
-            storeFile file('../signkey/hsg')  //第一个游戏，豆丁使用，临时用
-            storePassword 'huangshaoguang'
-            keyAlias 'hsg'
-            keyPassword 'huangshaoguang'
-        }
-        debug {
-            storeFile file('../signkey/hsg')
-            storePassword 'huangshaoguang'
-            keyAlias 'hsg'
-            keyPassword 'huangshaoguang'
-        }
-    }
-
 //    signingConfigs {//签名的配置
 //        release {
-//            storeFile file('../signkey/gamamobi.jks') //正式签名，以后使用
-//            storePassword 'gamamobi'
-//            keyAlias 'gamamobi'
-//            keyPassword 'gamamobi'
+//            storeFile file('../signkey/hsg')  //第一个游戏，豆丁使用，临时用
+//            storePassword 'huangshaoguang'
+//            keyAlias 'hsg'
+//            keyPassword 'huangshaoguang'
 //        }
 //        debug {
-//            storeFile file('../signkey/gamamobi.jks')
-//            storePassword 'gamamobi'
-//            keyAlias 'gamamobi'
-//            keyPassword 'gamamobi'
+//            storeFile file('../signkey/hsg')
+//            storePassword 'huangshaoguang'
+//            keyAlias 'hsg'
+//            keyPassword 'huangshaoguang'
 //        }
 //    }
+
+    signingConfigs {//签名的配置
+        release {
+            storeFile file('../signkey/gamamobi.jks') //正式签名，以后使用
+            storePassword 'gamamobi'
+            keyAlias 'gamamobi'
+            keyPassword 'gamamobi'
+        }
+        debug {
+            storeFile file('../signkey/gamamobi.jks')
+            storePassword 'gamamobi'
+            keyAlias 'gamamobi'
+            keyPassword 'gamamobi'
+        }
+    }
 
     buildTypes {
         release {
@@ -71,15 +71,13 @@ android {
         }
     }
     productFlavors {
-
         erge {
-                applicationId "com.gama.myapplication"
+            applicationId "com.gama.myapplication"
             minSdkVersion 18
             targetSdkVersion 27
             versionCode 1
             versionName "1.0"
             flavorDimensions "1"
-
 //            resValue "string", "facebook_app_name", ""
             resValue "string", "facebook_app_id", "180494902571206"
             resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider180494902571206"
@@ -91,12 +89,27 @@ android {
             versionCode 1
             versionName "1.0"
             flavorDimensions "1"
-
 //            resValue "string", "facebook_app_name", ""
             resValue "string", "facebook_app_id", "1040235646130047"
             resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1040235646130047"
+            signingConfig signingConfigs.release
         }
-
+        ezfytest {
+            applicationId "com.gamamobi.ezfy"
+            minSdkVersion 18
+            targetSdkVersion 27
+            versionCode 1
+            versionName "1.0"
+            flavorDimensions "1"
+//            resValue "string", "facebook_app_name", ""
+            resValue "string", "facebook_app_id", "1040235646130047"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1040235646130047"
+            resValue "string", "gama_login_pre_url", "http://200.200.200.106:8080/login/"
+            resValue "string", "gama_login_spa_url", "http://200.200.200.106:8080/login/"
+            resValue "string", "gama_pay_pre_url", "http://200.200.200.106:8080/pay/"
+            resValue "string", "gama_pay_spa_url", "http://200.200.200.106:8080/pay/"
+            signingConfig signingConfigs.release
+        }
     }
 
     android {

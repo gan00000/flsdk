@@ -1,6 +1,8 @@
 package com.gama.sdk.out;
 
 import android.app.Activity;
+import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -21,6 +23,7 @@ import com.gama.base.cfg.ResConfig;
 import com.gama.base.utils.GamaUtil;
 import com.gama.base.utils.Localization;
 import com.gama.data.login.ILoginCallBack;
+import com.gama.pay.IPayCallBack;
 import com.gama.pay.gp.GooglePayActivity2;
 import com.gama.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
 import com.gama.pay.gp.bean.req.WebPayReqBean;
@@ -29,6 +32,7 @@ import com.gama.sdk.BuildConfig;
 import com.gama.sdk.R;
 import com.gama.sdk.SWebViewDialog;
 import com.gama.sdk.ads.StarEventLogger;
+import com.gama.sdk.callback.IPayListener;
 import com.gama.sdk.login.DialogLoginImpl;
 import com.gama.sdk.login.ILogin;
 import com.gama.sdk.plat.PlatMainActivity;
@@ -39,7 +43,7 @@ import java.net.URLEncoder;
 
 
 public class GamaImpl implements IGama {
-
+    private static final String TAG = GamaImpl.class.getSimpleName();
     private static final int PERMISSION_REQUEST_CODE = 401;
     private ILogin iLogin;
 
@@ -51,6 +55,8 @@ public class GamaImpl implements IGama {
     private SGooglePlayGameServices sGooglePlayGameServices;
 
     private SWebViewDialog otherPayWebViewDialog;
+
+    private IPayListener iPayListener;
 
     public GamaImpl() {
         iLogin = ObjFactory.create(DialogLoginImpl.class);
@@ -135,12 +141,13 @@ public class GamaImpl implements IGama {
     }
 
     @Override
-    public void pay(final Activity activity, final SPayType payType, final String cpOrderId, final String productId, final String extra) {
-        PL.i("IGama pay payType:" + payType.toString() + " ,cpOrderId:" + cpOrderId + ",productId:" + productId + ",extra:" + extra);
+    public void pay(final Activity activity, final SPayType payType, final String cpOrderId, final String productId, final String extra, IPayListener listener) {
+        PL.i("IGama pay payType:" + payType.toString() + " ,cpOrderId:" + cpOrderId + ",productId:" + productId + ",extra:" + extra + ", IPayListener: " + listener);
         if ((System.currentTimeMillis() - firstClickTime) < 1000){//防止连续点击
             PL.i("点击过快，无效");
             return;
         }
+        iPayListener = listener;
         firstClickTime = System.currentTimeMillis();
 
         activity.runOnUiThread(new Runnable() {
@@ -268,9 +275,18 @@ public class GamaImpl implements IGama {
         String webUrl = webPayReqBean.createPreRequestUrl();
 
         otherPayWebViewDialog = new SWebViewDialog(activity, R.style.Gama_Theme_AppCompat_Dialog_Notitle_Fullscreen);
-
         otherPayWebViewDialog.setWebUrl(webUrl);
-
+        otherPayWebViewDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                if(iPayListener != null) {
+                    PL.i(TAG, "OtherPay支付回调");
+                    iPayListener.onPayFinish(new Bundle());
+                } else {
+                    PL.i(TAG, "OtherPay支付回调为空");
+                }
+            }
+        });
         otherPayWebViewDialog.show();
     }
 
@@ -330,6 +346,17 @@ public class GamaImpl implements IGama {
             otherPayWebViewDialog.onActivityResult(activity, requestCode, resultCode, data);
         }
         if (requestCode == GooglePayActivity2.GooglePayReqeustCode && resultCode == GooglePayActivity2.GooglePayResultCode){
+            if(iPayListener != null) { //支付刷新的回调
+                PL.i(TAG, "GooglePay支付回调");
+                if (data != null && data.getExtras() != null) {
+                    Bundle b = data.getExtras();
+                    iPayListener.onPayFinish(b);
+                } else {
+                    iPayListener.onPayFinish(new Bundle());
+                }
+            } else {
+                PL.i(TAG, "GooglePay支付回调为空");
+            }
             if (data != null && data.getExtras() != null){
                 Bundle b = data.getExtras();
                 GooglePayCreateOrderIdReqBean g = (GooglePayCreateOrderIdReqBean) data.getSerializableExtra("GooglePayCreateOrderIdReqBean");

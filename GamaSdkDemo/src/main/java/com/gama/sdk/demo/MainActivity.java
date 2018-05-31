@@ -12,23 +12,35 @@ import android.widget.Button;
 import com.core.base.utils.PL;
 import com.gama.base.bean.SGameLanguage;
 import com.gama.base.bean.SPayType;
+import com.gama.base.utils.SLog;
 import com.gama.data.login.ILoginCallBack;
 import com.gama.data.login.response.SLoginResponse;
+import com.gama.pay.gp.GooglePayActivity2;
+import com.gama.pay.gp.util.IabHelper;
+import com.gama.pay.gp.util.IabResult;
+import com.gama.pay.gp.util.Inventory;
+import com.gama.pay.gp.util.Purchase;
+import com.gama.sdk.callback.IPayListener;
 import com.gama.sdk.out.ISdkCallBack;
 import com.gama.sdk.out.IGama;
 import com.gama.sdk.out.GamaFactory;
 
+import java.util.Iterator;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     private Button loginButton, othersPayButton,googlePayBtn,shareButton, showPlatform;
-
-
+    IabHelper mHelper;
     private IGama iGama;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        SLog.enableDebug(true);
+
         loginButton = (Button) findViewById(R.id.demo_login);
         othersPayButton = (Button) findViewById(R.id.demo_pay);
         googlePayBtn = (Button) findViewById(R.id.demo_pay_google);
@@ -88,7 +100,12 @@ public class MainActivity extends AppCompatActivity {
                 productId 充值的商品id
                 customize 自定义透传字段（从服务端回调到cp）
                 */
-                iGama.pay(MainActivity.this, SPayType.OTHERS, "" + System.currentTimeMillis(), "payone", "customize");
+                iGama.pay(MainActivity.this, SPayType.OTHERS, "" + System.currentTimeMillis(), "payone", "customize", new IPayListener() {
+                    @Override
+                    public void onPayFinish(Bundle bundle) {
+                        PL.i("OtherPay支付结束");
+                    }
+                });
 
 
             }
@@ -105,7 +122,15 @@ public class MainActivity extends AppCompatActivity {
                 productId 充值的商品id
                 customize 自定义透传字段（从服务端回调到cp）
                 */
-                iGama.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(), "com.ezfy.1usd", "customize");
+                iGama.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(), "com.ezfy.1usd", "customize", new IPayListener() {
+                    @Override
+                    public void onPayFinish(Bundle bundle) {
+                        PL.i("GooglePay结束");
+                        for (String next : bundle.keySet()) {
+                            PL.i(next + " : " + bundle.get(next));
+                        }
+                    }
+                });
 
             }
         });
@@ -167,9 +192,95 @@ public class MainActivity extends AppCompatActivity {
                 iGama.openPlatform(MainActivity.this);
             }
         });
+
+        mHelper = new IabHelper(MainActivity.this.getApplicationContext());
+        findViewById(R.id.xiaofei).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!mHelper.isSetupDone()) {
+                    mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
+                        @Override
+                        public void onIabSetupFinished(IabResult result) {
+                            if(result.isSuccess()) {
+                                SLog.logD("初始化iabHelper成功，开始消费");
+                                consume();
+                            } else {
+                                SLog.logD("初始化iabHelper失败，消费结束");
+                            }
+                        }
+                    });
+                } else {
+                    SLog.logD("已经初始化iabHelper，开始消费");
+                    consume();
+                }
+            }
+        });
     }
 
+    private void consume() {
+        mHelper.queryInventoryAsync(new IabHelper.QueryInventoryFinishedListener() {
+            @Override
+            public void onQueryInventoryFinished(IabResult result, Inventory inventory) {
+                if (result.isFailure()) {
+                    // callbackFail();
+                    PL.i("query result:" + result.getMessage());
+                    SLog.logD("getQueryInventoryState is null");
+                } else {
 
+                    SLog.logD("Query inventory was successful.");
+                    List<Purchase> purchaseList = inventory.getAllPurchases();
+
+                    if (null == purchaseList || purchaseList.isEmpty()) {
+                        //没有未消费的商品
+                        //  callbackFail();
+                        SLog.logD("purchases is empty");
+
+                    } else {
+                        SLog.logD("purchases size: " + purchaseList.size());
+
+                        if (purchaseList.size() == 1) {
+                            SLog.logD("mConsumeFinishedListener. 消费一个");
+                            mHelper.consumeAsync(purchaseList.get(0), new IabHelper.OnConsumeFinishedListener() {
+                                @Override
+                                public void onConsumeFinished(Purchase purchase, IabResult result) {
+                                    if (null != purchase) {
+                                        SLog.logD("Purchase: " + purchase.toString() + ", result: " + result);
+                                    } else {
+                                        SLog.logD("Purchase is null");
+                                    }
+                                    if (result.isSuccess()) {
+                                        SLog.logD("Consumption successful.");
+                                        if (purchase != null) {
+                                            SLog.logD("sku: " + purchase.getSku() + " Consume finished success");
+                                        }
+                                    } else {
+                                        SLog.logD("consumption is not success, yet to be consumed.");
+                                    }
+                                }
+                            });
+                        } else if (purchaseList.size() > 1) {
+                            SLog.logD("mConsumeMultiFinishedListener.消费多个");
+                            mHelper.consumeAsync(purchaseList, new IabHelper.OnConsumeMultiFinishedListener() {
+                                @Override
+                                public void onConsumeMultiFinished(List<Purchase> purchases, List<IabResult> results) {
+                                    SLog.logD("Consume Multiple finished.");
+                                    for (int i = 0; i < purchases.size(); i++) {
+                                        if (results.get(i).isSuccess()) {
+                                            SLog.logD("sku: " + purchases.get(i).getSku() + " Consume finished success");
+                                        } else {
+                                            SLog.logD("sku: " + purchases.get(i).getSku() + " Consume finished fail");
+                                            SLog.logD(purchases.get(i).getSku() + "consumption is not success, yet to be consumed.");
+                                        }
+                                    }
+                                    SLog.logD("End consumption flow.");
+                                }
+                            });
+                        }
+                    }
+                }
+            }
+        });
+    }
 
     @Override
     protected void onResume() {
