@@ -56,7 +56,8 @@ public class SFacebookProxy {
 
 	private static DefaultAudience defaultAudience = DefaultAudience.FRIENDS;
 	private static LoginBehavior loginBehavior = LoginBehavior.NATIVE_WITH_FALLBACK;
-	private static List<String> permissions = Arrays.asList(new String[]{"public_profile", "user_friends","email"});
+//	private static List<String> permissions = Arrays.asList("public_profile", "email", "user_friends");
+	private static List<String> permissions = Arrays.asList("public_profile");
 	private static final int REQUEST_TOMESSENGER = 16;
 	FbShareCallBack shareCallBack;
 	
@@ -164,25 +165,11 @@ public class SFacebookProxy {
 			@Override
 			public void onSuccess(LoginResult result) {
 				Log.d(FB_TAG, "onSuccess");
-
 				if (fbLoginCallBack == null){
 					return;
 				}
-				Profile.fetchProfileForCurrentAccessToken();
-				Profile p = Profile.getCurrentProfile();
 				User user = new User();
-				if (p != null) {
-					user.setUserId(p.getId());
-					user.setFirstName(p.getFirstName());
-					user.setLastName(p.getLastName());
-					user.setName(p.getName());
-					user.setMiddleName(p.getMiddleName());
-					user.setLinkUri(p.getLinkUri());
-
-				}else{
-					user.setUserId(result.getAccessToken().getUserId());
-				}
-				//fbLoginCallBack.onSuccess(user);
+				user.setUserId(result.getAccessToken().getUserId());
 				FbSp.saveFbId(fragment.getActivity(),user.getUserId());
 				requestTokenForBusines(fragment.getActivity(),user, fbLoginCallBack);
 			}
@@ -209,28 +196,32 @@ public class SFacebookProxy {
 			Log.d(FB_TAG, "accessToken == null");
 			loginManager.setDefaultAudience(defaultAudience);
 			loginManager.setLoginBehavior(loginBehavior);
-			// loginManager.logInWithReadPermissions(MainActivity.this,
-			// permissions);
-
-			//loginManager.logInWithPublishPermissions(activity, permissions);
 			loginManager.logInWithReadPermissions(fragment, permissions);
 
 		} else {
-			Profile p = Profile.getCurrentProfile();
-			if (p != null) {
-				if (fbLoginCallBack != null) {
-					User user = new User();
-					user.setUserId(p.getId());
-					user.setFirstName(p.getFirstName());
-					user.setLastName(p.getLastName());
-					user.setName(p.getName());
-					user.setMiddleName(p.getMiddleName());
-					user.setLinkUri(p.getLinkUri());
-//					fbLoginCallBack.onSuccess(user);
+			getMyProfile(fragment.getActivity(), new FbLoginCallBack() {
+				@Override
+				public void onCancel() {
+					Log.d(FB_TAG, "onCancel");
+					if (fbLoginCallBack != null) {
+						fbLoginCallBack.onCancel();
+					}
+				}
+
+				@Override
+				public void onError(String message) {
+					Log.d(FB_TAG, "onError:" + message);
+					if (fbLoginCallBack != null) {
+						fbLoginCallBack.onError(message);
+					}
+				}
+
+				@Override
+				public void onSuccess(User user) {
 					FbSp.saveFbId(fragment.getActivity(),user.getUserId());
 					requestTokenForBusines(fragment.getActivity(),user, fbLoginCallBack);
 				}
-			}
+			});
 		}
 
 	}
@@ -255,26 +246,12 @@ public class SFacebookProxy {
 			@Override
 			public void onSuccess(LoginResult result) {
 				Log.d(FB_TAG, "onSuccess");
-			
 				if (fbLoginCallBack == null){
 					return;
 				}
-				Profile.fetchProfileForCurrentAccessToken();
-				Profile p = Profile.getCurrentProfile();
 				User user = new User();
-				if (p != null) {
-					user.setUserId(p.getId());
-					user.setFirstName(p.getFirstName());
-					user.setLastName(p.getLastName());
-					user.setName(p.getName());
-					user.setMiddleName(p.getMiddleName());
-					user.setLinkUri(p.getLinkUri());
-
-				}else{
-					user.setUserId(result.getAccessToken().getUserId());
-				}
+				user.setUserId(result.getAccessToken().getUserId());
 				user.setAccessTokenString(AccessToken.getCurrentAccessToken().getToken());
-				//fbLoginCallBack.onSuccess(user);
 				FbSp.saveFbId(activity,user.getUserId());
 				requestTokenForBusines(activity,user, fbLoginCallBack);
 			}
@@ -301,29 +278,32 @@ public class SFacebookProxy {
 			Log.d(FB_TAG, "accessToken == null");
 			loginManager.setDefaultAudience(defaultAudience);
 			loginManager.setLoginBehavior(loginBehavior);
-			// loginManager.logInWithReadPermissions(MainActivity.this,
-			// permissions);
-		
-			//loginManager.logInWithPublishPermissions(activity, permissions);
 			loginManager.logInWithReadPermissions(activity, permissions);
-
 		} else {
-			Profile p = Profile.getCurrentProfile();
-			if (p != null) {
-				if (fbLoginCallBack != null) {
-					User user = new User();
-					user.setUserId(p.getId());
-					user.setFirstName(p.getFirstName());
-					user.setLastName(p.getLastName());
-					user.setName(p.getName());
-					user.setMiddleName(p.getMiddleName());
-					user.setLinkUri(p.getLinkUri());
-					user.setAccessTokenString(accessToken.getToken());
-//					fbLoginCallBack.onSuccess(user);
+			Log.d(FB_TAG, "accessToken == " + accessToken);
+			getMyProfile(activity, new FbLoginCallBack() {
+				@Override
+				public void onCancel() {
+					Log.d(FB_TAG, "onCancel");
+					if (fbLoginCallBack != null) {
+						fbLoginCallBack.onCancel();
+					}
+				}
+
+				@Override
+				public void onError(String message) {
+					Log.d(FB_TAG, "onError:" + message);
+					if (fbLoginCallBack != null) {
+						fbLoginCallBack.onError(message);
+					}
+				}
+
+				@Override
+				public void onSuccess(User user) {
 					FbSp.saveFbId(activity,user.getUserId());
 					requestTokenForBusines(activity,user, fbLoginCallBack);
 				}
-			}
+			});
 		}
 
 	}
@@ -857,7 +837,7 @@ public class SFacebookProxy {
 	public void getMyProfile(Activity activity, final FbLoginCallBack callBack) {
 		// me?fields=name,id,first_name,last_name
 		Bundle b = new Bundle();
-		b.putString("fields", "name,first_name,last_name,id,gender,link,middle_name,picture.width(300)");
+		b.putString("fields", "name,id,picture.width(300)");
 		AccessToken accessToken = AccessToken.getCurrentAccessToken();
 		new GraphRequest(accessToken, "/me", b, HttpMethod.GET, new GraphRequest.Callback() {
 
@@ -882,23 +862,13 @@ public class SFacebookProxy {
 					}
 					String id = userInfo.optString("id", "");
 					String name = userInfo.optString("name", "");
-					String first_name = userInfo.optString("first_name", "");
-					String last_name = userInfo.optString("last_name", "");
-					String gender = userInfo.optString("gender", "");
-					String link = userInfo.optString("link", "");
-					String middle_name = userInfo.optString("middle_name", "");
 					String picture = "";
 					if(userInfo.optJSONObject("picture") != null && userInfo.optJSONObject("picture").optJSONObject("data") != null) {
 						picture = userInfo.optJSONObject("picture").optJSONObject("data").optString("url", "");
 					}
 					User user = new User();
 					user.setUserId(id);
-					user.setFirstName(first_name);
-					user.setLastName(last_name);
 					user.setName(name);
-					user.setGender(gender);
-					user.setMiddleName(middle_name);
-					user.setLinkUri(Uri.parse(link));
 					user.setPictureUri(Uri.parse(picture));
 					if (callBack != null) {
 						callBack.onSuccess(user);
@@ -934,7 +904,7 @@ public class SFacebookProxy {
 				if (accessToken != null) {
 					if (bundle == null) {
 						bundle = new Bundle();
-						bundle.putString("fields", "friends.limit(2000){name,gender,picture.width(300)}");
+						bundle.putString("fields", "friends.limit(2000){name,picture.width(300)}");
 					}
 					new GraphRequest(accessToken, "/me", bundle, HttpMethod.GET, new GraphRequest.Callback() {
 
@@ -1123,13 +1093,13 @@ public class SFacebookProxy {
 			this.userId = userId;
 		}
 		
-	    private  String firstName;
-	    private  String middleName;
-	    private  String lastName;
+//	    private  String firstName;
+//	    private  String middleName;
+//	    private  String lastName;
 	    private  String name;
-	    private  Uri linkUri;
+//	    private  Uri linkUri;
 	    
-	    private String gender;
+//	    private String gender;
 		private Uri pictureUri;
 
 		private String tokenForBusiness;
@@ -1139,44 +1109,44 @@ public class SFacebookProxy {
 		/**
 		 * @return the firstName
 		 */
-		public String getFirstName() {
-			return firstName;
-		}
+//		public String getFirstName() {
+//			return firstName;
+//		}
 
 		/**
 		 * @param firstName the firstName to set
 		 */
-		public void setFirstName(String firstName) {
-			this.firstName = firstName;
-		}
+//		public void setFirstName(String firstName) {
+//			this.firstName = firstName;
+//		}
 
 		/**
 		 * @return the middleName
 		 */
-		public String getMiddleName() {
-			return middleName;
-		}
+//		public String getMiddleName() {
+//			return middleName;
+//		}
 
 		/**
 		 * @param middleName the middleName to set
 		 */
-		public void setMiddleName(String middleName) {
-			this.middleName = middleName;
-		}
+//		public void setMiddleName(String middleName) {
+//			this.middleName = middleName;
+//		}
 
 		/**
 		 * @return the lastName
 		 */
-		public String getLastName() {
-			return lastName;
-		}
+//		public String getLastName() {
+//			return lastName;
+//		}
 
 		/**
 		 * @param lastName the lastName to set
 		 */
-		public void setLastName(String lastName) {
-			this.lastName = lastName;
-		}
+//		public void setLastName(String lastName) {
+//			this.lastName = lastName;
+//		}
 
 		/**
 		 * @return the name
@@ -1195,25 +1165,25 @@ public class SFacebookProxy {
 		/**
 		 * @return the linkUri
 		 */
-		public Uri getLinkUri() {
-			return linkUri;
-		}
-
-		/**
-		 * @param linkUri the linkUri to set
-		 */
-		public void setLinkUri(Uri linkUri) {
-			this.linkUri = linkUri;
-		}
-	    
-
-		public String getGender() {
-			return gender;
-		}
-
-		public void setGender(String gender) {
-			this.gender = gender;
-		}
+//		public Uri getLinkUri() {
+//			return linkUri;
+//		}
+//
+//		/**
+//		 * @param linkUri the linkUri to set
+//		 */
+//		public void setLinkUri(Uri linkUri) {
+//			this.linkUri = linkUri;
+//		}
+//
+//
+//		public String getGender() {
+//			return gender;
+//		}
+//
+//		public void setGender(String gender) {
+//			this.gender = gender;
+//		}
 
 		public Uri getPictureUri() {
 			return pictureUri;
@@ -1235,12 +1205,7 @@ public class SFacebookProxy {
 		public String toString() {
 			return "User{" +
 					"userId='" + userId + '\'' +
-					", firstName='" + firstName + '\'' +
-					", middleName='" + middleName + '\'' +
-					", lastName='" + lastName + '\'' +
 					", name='" + name + '\'' +
-					", linkUri=" + linkUri +
-					", gender='" + gender + '\'' +
 					", pictureUri=" + pictureUri +
 					", tokenForBusiness='" + tokenForBusiness + '\'' +
 					'}';

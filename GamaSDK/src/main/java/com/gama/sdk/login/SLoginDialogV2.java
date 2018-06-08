@@ -139,14 +139,10 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
         //初始化自动登录界面
         initAutoLoginView();
 
-
-        iLoginPresenter.autoLogin(activity);
-
-
         iLoginPresenter.setSFacebookProxy(sFacebookProxy);
         iLoginPresenter.setSGoogleSignIn(sGoogleSignIn);
 
-
+        iLoginPresenter.autoLogin(activity);
     }
 
     private void initAutoLoginView() {

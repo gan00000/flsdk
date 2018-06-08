@@ -46,8 +46,12 @@ import java.util.TimerTask;
 
 public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
+    private static final String TAG = LoginPresenterImpl.class.getSimpleName();
     private Activity mActivity;
 
+    /**
+     * SLoginDialogV2
+     */
     private LoginContract.ILoginView iLoginView;
 
     private Timer autoLoginTimer;
@@ -231,6 +235,12 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         this.mActivity = activity;
         if (autoLoginTimer != null){
             autoLoginTimer.cancel();
+        }
+        if(sFacebookProxy != null) {
+            PL.i(TAG, "取消自動登錄，進行Facebook登出");
+            sFacebookProxy.fbLogout(activity);
+        } else {
+            PL.i(TAG, "取消自動登錄，進行Facebook登出");
         }
         showLoginView();
     }
@@ -543,12 +553,12 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         SFacebookProxy.FbLoginCallBack fbLoginCallBack1 = new SFacebookProxy.FbLoginCallBack() {
             @Override
             public void onCancel() {
-
+                PL.d(TAG, "sFbLogin cancel");
             }
 
             @Override
             public void onError(String message) {
-
+                PL.d(TAG, "sFbLogin error: " + message);
             }
 
             @Override

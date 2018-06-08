@@ -126,6 +126,11 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onPayFinish(Bundle bundle) {
                         PL.i("GooglePay结束");
+                        int status = 0;
+                        if(bundle != null) {
+                            status = bundle.getInt("status");
+
+                        }
                         for (String next : bundle.keySet()) {
                             PL.i(next + " : " + bundle.get(next));
                         }

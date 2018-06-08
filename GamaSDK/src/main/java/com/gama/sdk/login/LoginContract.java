@@ -15,6 +15,9 @@ import com.gama.thirdlib.google.SGoogleSignIn;
 
 public class LoginContract {
 
+    /**
+     * 登录View的控制器
+     */
     public interface ILoginView extends BaseView {
 
         void LoginSuccess(SLoginResponse sLoginResponse);

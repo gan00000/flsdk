@@ -79,8 +79,9 @@ android {
             versionName "1.0"
             flavorDimensions "1"
 //            resValue "string", "facebook_app_name", ""
-            resValue "string", "facebook_app_id", "180494902571206"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider180494902571206"
+            resValue "string", "facebook_app_id", "759907540811551"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider759907540811551"
+            signingConfig signingConfigs.release
         }
         ezfy {
             applicationId "com.gamamobi.ezfy"

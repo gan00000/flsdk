@@ -9,6 +9,18 @@
         android:supportsRtl="true"
         android:resizeableActivity="false"
        >
+        <activity android:name=".DoPermissionReq"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|fontScale"
+            android:screenOrientation="sensor"
+            android:theme="@style/Gama.Theme.AppCompat.Light.NoActionBar.FullScreen"
+            android:windowSoftInputMode="stateHidden|adjustResize" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity
 
             android:name=".MainActivity"
@@ -16,13 +28,6 @@
             android:screenOrientation="sensor"
             android:theme="@style/Gama.Theme.AppCompat.Light.NoActionBar.FullScreen"
             android:windowSoftInputMode="stateHidden|adjustResize">
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
 
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.VIEW" />-->
