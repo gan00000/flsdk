@@ -48,6 +48,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class SFacebookProxy {
@@ -57,7 +58,7 @@ public class SFacebookProxy {
 	private static DefaultAudience defaultAudience = DefaultAudience.FRIENDS;
 	private static LoginBehavior loginBehavior = LoginBehavior.NATIVE_WITH_FALLBACK;
 //	private static List<String> permissions = Arrays.asList("public_profile", "email", "user_friends");
-	private static List<String> permissions = Arrays.asList("public_profile");
+	private static List<String> permissions = Collections.singletonList("public_profile");
 	private static final int REQUEST_TOMESSENGER = 16;
 	FbShareCallBack shareCallBack;
 	
