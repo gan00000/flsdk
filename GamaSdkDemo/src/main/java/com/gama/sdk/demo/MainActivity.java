@@ -1,8 +1,12 @@
 package com.gama.sdk.demo;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PermissionInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -81,6 +85,30 @@ public class MainActivity extends AppCompatActivity {
                             String accessToken = sLoginResponse.getAccessToken();
                             String timestamp = sLoginResponse.getTimestamp();
                             PL.i("uid:" + uid);
+                        } else {
+                            PL.i("从登录界面返回");
+                            AlertDialog.Builder builder;
+                            if (Build.VERSION.SDK_INT >= 21) {
+                                builder = new AlertDialog.Builder(MainActivity.this, android.R.style.Theme_Material_Dialog);
+                            } else if (Build.VERSION.SDK_INT >= 14) {
+                                builder = new AlertDialog.Builder(MainActivity.this, android.R.style.Theme_Holo_Dialog);
+                            } else {
+                                builder = new AlertDialog.Builder(MainActivity.this);
+                            }
+                            AlertDialog dialog = builder.setNegativeButton("確定", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    MainActivity.this.finish();
+                                }
+                            }).setPositiveButton("取消", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    loginButton.performClick();
+                                }
+                            }).setCancelable(false)
+                                    .setMessage("是否退出遊戲")
+                                    .create();
+                            dialog.show();
                         }
                     }
                 });

@@ -28,4 +28,7 @@
     <string name="gama_cs_pre_url"></string>
     <string name="gama_cs_spa_url"></string>
 
+    <!-- 服务条款 -->
+    <string name="gama_terms_url">https://member.gamamobi.com/member/archive.html</string>
+
 </resources>

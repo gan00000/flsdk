@@ -79,4 +79,11 @@ public abstract class SLoginBaseRelativeLayout extends SBaseRelativeLayout {
     public void setLoginDialogV2(SLoginDialogV2 sLoginDialog) {
         this.sLoginDialogv2 = sLoginDialog;
     }
+
+    /**
+     * 各界面的返回按钮
+     */
+    public View getBackView() {
+        return backView;
+    }
 }

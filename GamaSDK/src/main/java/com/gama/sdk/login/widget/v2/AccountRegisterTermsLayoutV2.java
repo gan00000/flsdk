@@ -5,6 +5,9 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 import com.gama.base.utils.GamaUtil;
@@ -18,7 +21,7 @@ import com.gama.sdk.login.widget.SLoginBaseRelativeLayout;
 public class AccountRegisterTermsLayoutV2 extends SLoginBaseRelativeLayout {
 
     private View contentView;
-    private TextView termsTextView;
+    private WebView termsView;
 
     public AccountRegisterTermsLayoutV2(Context context) {
         super(context);
@@ -37,7 +40,12 @@ public class AccountRegisterTermsLayoutV2 extends SLoginBaseRelativeLayout {
         contentView = inflater.inflate(R.layout.v2_gama_account_register_terms, null);
         backView = contentView.findViewById(R.id.py_back_button);
 
-        termsTextView = (TextView) contentView.findViewById(R.id.py_terms_text_id);
+        termsView = (WebView) contentView.findViewById(R.id.gama_terms);
+        termsView.clearCache(true);
+        termsView.setWebChromeClient(new WebChromeClient());
+        termsView.setWebViewClient(new WebViewClient());
+        String termsUrl = this.getResources().getString(R.string.gama_terms_url);
+        termsView.loadUrl(termsUrl);
 
         backView.setOnClickListener(new OnClickListener() {
             @Override
@@ -60,10 +68,10 @@ public class AccountRegisterTermsLayoutV2 extends SLoginBaseRelativeLayout {
             }
         });
 
-        String serverTermsContent = GamaUtil.getSdkLoginTerms(getContext());//优先设置服务器获取的配置
-        if (!TextUtils.isEmpty(serverTermsContent)){
-            termsTextView.setText(serverTermsContent);
-        }
+//        String serverTermsContent = GamaUtil.getSdkLoginTerms(getContext());//优先设置服务器获取的配置
+//        if (!TextUtils.isEmpty(serverTermsContent)){
+//            termsTextView.setText(serverTermsContent);
+//        }
 
         return contentView;
     }

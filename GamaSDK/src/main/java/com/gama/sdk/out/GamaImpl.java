@@ -84,7 +84,7 @@ public class GamaImpl implements IGama {
                 setGameLanguage(activity,SGameLanguage.zh_TW);
 
                 ConfigRequest.requestBaseCfg(activity.getApplicationContext());//下载配置文件
-                ConfigRequest.requestTermsCfg(activity.getApplicationContext());//下载服务条款
+//                ConfigRequest.requestTermsCfg(activity.getApplicationContext());//下载服务条款
                 // 1.初始化fb sdk
                 SFacebookProxy.initFbSdk(activity.getApplicationContext());
                 sFacebookProxy = new SFacebookProxy(activity.getApplicationContext());

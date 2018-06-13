@@ -107,7 +107,8 @@ public class DoPermissionReq extends Activity implements ActivityCompat.OnReques
 
     private void requestPermission() {
         String[] pers = new String[]{
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_PHONE_STATE
         };
         ActivityCompat.requestPermissions(this, pers, WRITE_READ_PERMISSION);
     }

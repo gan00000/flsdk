@@ -54,31 +54,13 @@ s
         </RelativeLayout>
 
 
-        <LinearLayout android:layout_width="match_parent"
-                      android:layout_height="match_parent"
-                      android:paddingRight="@dimen/px_36"
-                      android:paddingLeft="@dimen/px_36"
-                      android:layout_centerInParent="true"
-                      android:orientation="vertical"
-                      android:gravity="center_horizontal">
-
-            <ScrollView android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scrollbars="none"
-
-            >
-
-                <TextView android:layout_width="match_parent"
-                          android:layout_height="match_parent"
-                          android:id="@+id/py_terms_text_id"
-                          android:textColor="@android:color/black"
-                />
-
-            </ScrollView>
-
-
-        </LinearLayout>
-
+        <WebView
+            android:id="@+id/gama_terms"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:paddingLeft="@dimen/px_36"
+            android:paddingRight="@dimen/px_36" />
 
     </LinearLayout>
 
