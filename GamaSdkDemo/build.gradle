@@ -127,6 +127,7 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':GamaSDK')
     //    compile 'com.android.support:multidex:1.0.2'
+//    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
 }
 
 

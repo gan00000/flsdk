@@ -166,6 +166,9 @@ public class SFacebookProxy {
 			@Override
 			public void onSuccess(LoginResult result) {
 				Log.d(FB_TAG, "onSuccess");
+				if(result != null) {
+					Log.d(FB_TAG, "login result: " + result.toString());
+				}
 				if (fbLoginCallBack == null){
 					return;
 				}
@@ -247,14 +250,23 @@ public class SFacebookProxy {
 			@Override
 			public void onSuccess(LoginResult result) {
 				Log.d(FB_TAG, "onSuccess");
+				if(result != null && result.getAccessToken() != null) {
+					PL.d(FB_TAG, "login result: " + result.getAccessToken().getUserId() + "  token: " + result.getAccessToken().getToken());
+					PL.d(FB_TAG, "getApplicationId: " + result.getAccessToken().getApplicationId());
+				}
 				if (fbLoginCallBack == null){
+					PL.d(FB_TAG, "fbLoginCallBack null, return");
 					return;
 				}
 				User user = new User();
 				user.setUserId(result.getAccessToken().getUserId());
 				user.setAccessTokenString(AccessToken.getCurrentAccessToken().getToken());
+				user.setFacebookAppId(result.getAccessToken().getApplicationId());
 				FbSp.saveFbId(activity,user.getUserId());
-				requestTokenForBusines(activity,user, fbLoginCallBack);
+//				requestTokenForBusines(activity,user, fbLoginCallBack);
+				if(fbLoginCallBack != null) {
+					fbLoginCallBack.onSuccess(user);
+				}
 			}
 
 			@Override
@@ -275,36 +287,48 @@ public class SFacebookProxy {
 		});
 
 		AccessToken accessToken = AccessToken.getCurrentAccessToken();
-		if (accessToken == null) {
+		if (accessToken != null && !accessToken.isExpired()) {
+			Log.d(FB_TAG, "login result: onSuccess: accessToken != null" );
+			String fbThirdId = accessToken.getUserId();
+			String appId = accessToken.getApplicationId();
+			String token = accessToken.getToken();
+			Log.d(FB_TAG, "fbThirdId: " + fbThirdId + "  appId: " + appId + "  token: " + token);
+			User user = new User();
+			user.setUserId(fbThirdId);
+			user.setAccessTokenString(token);
+			user.setFacebookAppId(appId);
+			if(fbLoginCallBack != null) {
+				fbLoginCallBack.onSuccess(user);
+			}
+		} else {
 			Log.d(FB_TAG, "accessToken == null");
 			loginManager.setDefaultAudience(defaultAudience);
 			loginManager.setLoginBehavior(loginBehavior);
 			loginManager.logInWithReadPermissions(activity, permissions);
-		} else {
-			Log.d(FB_TAG, "accessToken == " + accessToken);
-			getMyProfile(activity, new FbLoginCallBack() {
-				@Override
-				public void onCancel() {
-					Log.d(FB_TAG, "onCancel");
-					if (fbLoginCallBack != null) {
-						fbLoginCallBack.onCancel();
-					}
-				}
-
-				@Override
-				public void onError(String message) {
-					Log.d(FB_TAG, "onError:" + message);
-					if (fbLoginCallBack != null) {
-						fbLoginCallBack.onError(message);
-					}
-				}
-
-				@Override
-				public void onSuccess(User user) {
-					FbSp.saveFbId(activity,user.getUserId());
-					requestTokenForBusines(activity,user, fbLoginCallBack);
-				}
-			});
+//			Log.d(FB_TAG, "accessToken == " + accessToken);
+//			getMyProfile(activity, new FbLoginCallBack() {
+//				@Override
+//				public void onCancel() {
+//					Log.d(FB_TAG, "onCancel");
+//					if (fbLoginCallBack != null) {
+//						fbLoginCallBack.onCancel();
+//					}
+//				}
+//
+//				@Override
+//				public void onError(String message) {
+//					Log.d(FB_TAG, "onError:" + message);
+//					if (fbLoginCallBack != null) {
+//						fbLoginCallBack.onError(message);
+//					}
+//				}
+//
+//				@Override
+//				public void onSuccess(User user) {
+//					FbSp.saveFbId(activity,user.getUserId());
+//					requestTokenForBusines(activity,user, fbLoginCallBack);
+//				}
+//			});
 		}
 
 	}
@@ -1105,6 +1129,7 @@ public class SFacebookProxy {
 
 		private String tokenForBusiness;
 		private String accessTokenString;
+		private String facebookAppId;
 
 
 		/**
@@ -1202,13 +1227,22 @@ public class SFacebookProxy {
 			this.accessTokenString = accessTokenString;
 		}
 
+		public String getFacebookAppId() {
+			return facebookAppId;
+		}
+
+		public void setFacebookAppId(String facebookAppId) {
+			this.facebookAppId = facebookAppId;
+		}
+
 		@Override
 		public String toString() {
 			return "User{" +
 					"userId='" + userId + '\'' +
 					", name='" + name + '\'' +
-					", pictureUri=" + pictureUri +
+					", pictureUri=" + pictureUri + '\'' +
 					", tokenForBusiness='" + tokenForBusiness + '\'' +
+					", facebookAppId='" + facebookAppId + '\'' +
 					'}';
 		}
 

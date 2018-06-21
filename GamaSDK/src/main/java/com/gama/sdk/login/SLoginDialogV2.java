@@ -173,8 +173,17 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 
     @Override
     public void onBackPressed() {
-        //返回键的回退逻辑，如果主界面显示就退出登录
-        if(mainLoginView != null && mainLoginView.getVisibility() == View.VISIBLE) {
+        //返回键的回退逻辑
+        if(autoLoginLayout != null && autoLoginLayout.getVisibility() == View.VISIBLE) {
+            if(iLoginPresenter != null) { //如果自动登录就返回登录界面
+                iLoginPresenter.autoLoginChangeAccount(activity);
+            } else { //无法返回登录界面就回调退出登录界面状态
+                super.onBackPressed();
+                if(iLoginCallBack != null) { //回调退出登录界面的状态
+                    iLoginCallBack.onLogin(null);
+                }
+            }
+        } else if(mainLoginView != null && mainLoginView.getVisibility() == View.VISIBLE) { //如果主界面显示就退出登录
             super.onBackPressed();
             if(iLoginCallBack != null) { //回调退出登录界面的状态
                 iLoginCallBack.onLogin(null);

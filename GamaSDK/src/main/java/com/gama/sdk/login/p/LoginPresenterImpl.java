@@ -565,21 +565,28 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             public void onSuccess(SFacebookProxy.User user) {
                 PL.d("fb uid:" + user.getUserId());
 
-                final String fbScopeId = user.getUserId();
-                sFacebookProxy.requestBusinessId(activity, new SFacebookProxy.FbBusinessIdCallBack() {
-                    @Override
-                    public void onError() {
-
-                    }
-
-                    @Override
-                    public void onSuccess(String businessId) {
-                        PL.d("fb businessId:" + businessId);
-                        if (fbLoginCallBack != null){
-                            fbLoginCallBack.loginSuccess(fbScopeId,businessId,FbSp.getTokenForBusiness(getActivity()));
-                        }
-                    }
-                });
+                String businessId = user.getUserId() + "_" + user.getFacebookAppId();
+                PL.d("fb businessId:" + businessId);
+                FbSp.saveAppsBusinessId(activity, businessId);
+                if (fbLoginCallBack != null){
+                    fbLoginCallBack.loginSuccess(user.getUserId(), businessId, FbSp.getTokenForBusiness(getActivity()));
+                }
+                // TODO: 2018/6/21 手动拼写businessId
+//                final String fbScopeId = user.getUserId();
+//                sFacebookProxy.requestBusinessId(activity, new SFacebookProxy.FbBusinessIdCallBack() {
+//                    @Override
+//                    public void onError() {
+//
+//                    }
+//
+//                    @Override
+//                    public void onSuccess(String businessId) {
+//                        PL.d("fb businessId:" + businessId);
+//                        if (fbLoginCallBack != null){
+//                            fbLoginCallBack.loginSuccess(fbScopeId,businessId,FbSp.getTokenForBusiness(getActivity()));
+//                        }
+//                    }
+//                });
 
             }
         };
