@@ -32,6 +32,7 @@ import com.gama.sdk.R;
 import com.gama.sdk.ads.StarEventLogger;
 import com.gama.sdk.login.LoginContract;
 import com.gama.sdk.utils.DialogUtil;
+import com.gama.thirdlib.facebook.FbResUtil;
 import com.gama.thirdlib.facebook.FbSp;
 import com.gama.thirdlib.facebook.SFacebookProxy;
 import com.gama.thirdlib.google.SGoogleSignIn;
@@ -103,9 +104,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
         } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_FB, previousLoginType)) {//自動登錄
             String fbScopeId = FbSp.getFbId(activity);
-            String fbApps = FbSp.getAppsBusinessId(activity);
-//            String fbToken = FbSp.getTokenForBusiness(this);
-            if (SStringUtil.hasEmpty(fbScopeId,fbApps)){
+            if (TextUtils.isEmpty(fbScopeId)){
                 showLoginView();
             }else{
                 startAutoLogin(activity, SLoginType.LOGIN_TYPE_FB, "", "");
@@ -236,12 +235,12 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         if (autoLoginTimer != null){
             autoLoginTimer.cancel();
         }
-        if(sFacebookProxy != null) {
-            PL.i(TAG, "取消自動登錄，進行Facebook登出");
-            sFacebookProxy.fbLogout(activity);
-        } else {
-            PL.i(TAG, "取消自動登錄，進行Facebook登出");
-        }
+//        if(sFacebookProxy != null) {
+//            PL.i(TAG, "取消自動登錄，進行Facebook登出");
+//            sFacebookProxy.fbLogout(activity);
+//        } else {
+//            PL.i(TAG, "取消自動登錄，進行Facebook登出");
+//        }
         showLoginView();
     }
 
@@ -544,12 +543,35 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         }
     }
 
-
+    /**
+     * Facebook登录实现
+     */
     private void sFbLogin(final Activity activity, final SFacebookProxy sFacebookProxy, final FbLoginCallBack fbLoginCallBack) {
-        if (sFacebookProxy == null) {
+        String fbThirdId = FbSp.getFbId(activity);
+        String businessId = FbSp.getAppsBusinessId(activity);
+        String tokenBusiness = FbSp.getTokenForBusiness(activity);
+        if(!TextUtils.isEmpty(fbThirdId)) {
+            PL.i(TAG, "Facebook登入使用緩存登入");
+            if(TextUtils.isEmpty(businessId)) {
+                businessId = fbThirdId + "_" + FbResUtil.findStringByName(activity,"facebook_app_id");
+            }
+            PL.i(TAG, "Facebook ThirdId: " + fbThirdId);
+            PL.i(TAG, "Facebook businessId: " + businessId);
+            PL.i(TAG, "Facebook tokenBusiness: " + tokenBusiness);
+            if(fbLoginCallBack != null) {
+                fbLoginCallBack.loginSuccess(fbThirdId, businessId, tokenBusiness);
+            } else {
+                PL.i(TAG, "Facebook 登入回調為空");
+            }
             return;
+        } else {
+            PL.i(TAG, "沒有Facebook緩存，正式登入");
         }
 
+        if (sFacebookProxy == null) {
+            PL.i(TAG, "Facebook Proxy為null");
+            return;
+        }
         SFacebookProxy.FbLoginCallBack fbLoginCallBack1 = new SFacebookProxy.FbLoginCallBack() {
             @Override
             public void onCancel() {
@@ -600,6 +622,12 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         }
     }
 
+    /**
+     * 使用FacebookId进行平台登录
+     * @param fbScopeId
+     * @param fbApps
+     * @param fbTokenBusiness
+     */
     private void fbThirdLogin(String fbScopeId, String fbApps, String fbTokenBusiness) {
 
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
@@ -778,6 +806,9 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                             }else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_FB, registPlatform)){//fb自动的登录
                                 String fbScopeId = FbSp.getFbId(activity);
                                 String fbApps = FbSp.getAppsBusinessId(activity);
+                                if(TextUtils.isEmpty(fbApps)) {
+                                    fbApps = fbScopeId + "_" + FbResUtil.findStringByName(activity,"facebook_app_id");
+                                }
                                 fbThirdLogin(fbScopeId, fbApps,FbSp.getTokenForBusiness(activity));
 
                             }else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GOOGLE, registPlatform)){//Google登录
