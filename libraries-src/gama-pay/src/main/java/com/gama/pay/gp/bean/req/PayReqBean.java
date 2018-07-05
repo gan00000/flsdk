@@ -19,6 +19,9 @@ public class PayReqBean extends BPayReqBean {
 	private String extra = "";
 
 	private String roleLevel = "";
+	/**
+	 * 原厂订单号
+	 */
 	private String cpOrderId = "";
 
 	public PayReqBean(Context context) {
@@ -99,6 +102,9 @@ public class PayReqBean extends BPayReqBean {
 		this.roleId = roleId;
 	}
 
+	/**
+	 * 返回原厂订单号
+	 */
 	public String getCpOrderId() {
 		return cpOrderId;
 	}

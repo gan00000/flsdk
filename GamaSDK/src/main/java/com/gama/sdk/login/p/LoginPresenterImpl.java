@@ -859,9 +859,9 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 if (loginResponse != null) {
                     //1001 注册成功    1000登入成功
                     if (SStringUtil.isEqual("1000", loginResponse.getCode())) {
-                        StarEventLogger.trackinLoginEvent(mActivity);
+                        StarEventLogger.trackinLoginEvent(mActivity, loginResponse);
                     } else if (SStringUtil.isEqual("1001", loginResponse.getCode())) {
-                        StarEventLogger.trackinRegisterEvent(mActivity);
+                        StarEventLogger.trackinRegisterEvent(mActivity, loginResponse);
                     }
                 }
 

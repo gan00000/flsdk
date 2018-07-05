@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
 
 android {
 
@@ -80,6 +81,7 @@ android {
             flavorDimensions "1"
 //            resValue "string", "facebook_app_name", ""
             resValue "string", "facebook_app_id", "759907540811551"
+            resValue "string", "fb_login_protocol_scheme", "fb759907540811551"
             resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider759907540811551"
             signingConfig signingConfigs.release
         }
@@ -92,6 +94,7 @@ android {
             flavorDimensions "1"
 //            resValue "string", "facebook_app_name", ""
             resValue "string", "facebook_app_id", "1040235646130047"
+            resValue "string", "fb_login_protocol_scheme", "fb1040235646130047"
             resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1040235646130047"
             signingConfig signingConfigs.release
         }
@@ -104,11 +107,25 @@ android {
             flavorDimensions "1"
 //            resValue "string", "facebook_app_name", ""
             resValue "string", "facebook_app_id", "1040235646130047"
+            resValue "string", "fb_login_protocol_scheme", "fb1040235646130047"
             resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1040235646130047"
             resValue "string", "gama_login_pre_url", "http://200.200.200.106:8080/login/"
             resValue "string", "gama_login_spa_url", "http://200.200.200.106:8080/login/"
             resValue "string", "gama_pay_pre_url", "http://200.200.200.106:8080/pay/"
             resValue "string", "gama_pay_spa_url", "http://200.200.200.106:8080/pay/"
+            signingConfig signingConfigs.release
+        }
+        mytest {
+            applicationId "com.gamamobi.ezfy"
+            minSdkVersion 18
+            targetSdkVersion 27
+            versionCode 1
+            versionName "1.0"
+            flavorDimensions "1"
+//            resValue "string", "facebook_app_name", ""
+//            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider812834892144520"
+            resValue "string", "facebook_app_id", "812834892144520"
+            resValue "string", "fb_login_protocol_scheme", "fb812834892144520"
             signingConfig signingConfigs.release
         }
     }
@@ -134,3 +151,5 @@ dependencies {
 def getReleaseTime() {
     return new Date().format("yyyy-MM-dd-HH-mm", TimeZone.getDefault())
 }
+
+apply plugin: 'com.google.gms.google-services'

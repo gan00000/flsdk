@@ -181,6 +181,9 @@ public class GamaUtil {
         return m;
     }
 
+    /**
+     * 获取当次登入的userId
+     */
     public static String getUid(Context context){
         return JsonUtil.getValueByKey(context,getSdkLoginData(context), "userId", "");
     }

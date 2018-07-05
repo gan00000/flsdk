@@ -2,8 +2,12 @@ package com.gama.sdk.ads;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 
+import com.appsflyer.AFInAppEventParameterName;
+import com.appsflyer.AFInAppEventType;
 import com.appsflyer.AppsFlyerLib;
 import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.ISReqCallBack;
@@ -11,6 +15,9 @@ import com.core.base.request.SimpleHttpRequest;
 import com.core.base.utils.PL;
 import com.core.base.utils.SPUtil;
 import com.core.base.utils.SStringUtil;
+import com.gama.data.login.response.SLoginResponse;
+import com.gama.pay.gp.bean.res.GPCreateOrderIdRes;
+import com.gama.pay.gp.util.Purchase;
 import com.google.ads.conversiontracking.AdWordsConversionReporter;
 import com.gama.base.bean.AdsRequestBean;
 import com.gama.base.cfg.ResConfig;
@@ -27,6 +34,7 @@ import java.util.Map;
  */
 
 public class StarEventLogger {
+    private static final String TAG = StarEventLogger.class.getSimpleName();
 
     public static void activateApp(Activity activity){
 
@@ -35,7 +43,7 @@ public class StarEventLogger {
             AppsFlyerLib.getInstance().setCollectAndroidID(false);
             AppsFlyerLib.getInstance().startTracking(activity.getApplication(), ResConfig.getConfigInAssetsProperties(activity,"gama_ads_appflyer_dev_key"));
 
-            SFacebookProxy.activateApp(activity.getApplicationContext());
+//            SFacebookProxy.activateApp(activity.getApplicationContext());
 
             // Google Android first open conversion tracking snippet
             // Add this code to the onCreate() method of your application activity
@@ -54,30 +62,93 @@ public class StarEventLogger {
     /**
      * Android登录事件上报
      */
-    public static void trackinLoginEvent(Activity activity){
-        // TODO: 2018/4/16 Android登录事件名 gama_login_event_android
-        SFacebookProxy.trackingEvent(activity,"gama_login_event_android");
+    public static void trackinLoginEvent(Activity activity, SLoginResponse loginResponse){
+        try {
+            PL.i(TAG, "登入上報");
+            // TODO: 2018/4/16 Android登录事件名 gama_login_event_android
+            String userId = loginResponse.getUserId();
+            //Facebook上报
+            Bundle b = new Bundle();
+            b.putString("userId", userId);
+            SFacebookProxy.trackingEvent(activity, GamaAdsConstant.GAMA_EVENT_LOGIN, null, b);
 
-        Map<String, Object> eventValue = new HashMap<String, Object>();
-        AppsFlyerLib.getInstance().trackEvent(activity.getApplicationContext(),"gama_login_event_android",eventValue);
+            //firebase上报
+            SGoogleProxy.firebaseAnalytics(activity, GamaAdsConstant.GAMA_EVENT_LOGIN, b);
 
+            //AppsFlyer上报
+            Map<String, Object> eventValue = new HashMap<String, Object>();
+            eventValue.put("userId", userId);
+            AppsFlyerLib.getInstance().trackEvent(activity.getApplicationContext(), GamaAdsConstant.GAMA_EVENT_LOGIN, eventValue);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * Android注册事件上报
      */
-    public static void trackinRegisterEvent(Activity activity){
-        // TODO: 2018/4/16 Android注册事件名 gama_register_event_android
-        SFacebookProxy.trackingEvent(activity,"gama_register_event_android");
+    public static void trackinRegisterEvent(Activity activity, SLoginResponse loginResponse){
+        try {
+            PL.i(TAG, "註冊上報");
+            // TODO: 2018/4/16 Android注册事件名 gama_register_event_android
+            String userId = loginResponse.getUserId();
+            //Facebook上报
+            Bundle b = new Bundle();
+            b.putString("userId", userId);
+            SFacebookProxy.trackingEvent(activity, GamaAdsConstant.GAMA_EVENT_REGISTER, null, b);
 
-        Map<String, Object> eventValue = new HashMap<String, Object>();
-//        eventValue.put(AFInAppEventParameterName.REVENUE,1);
-        AppsFlyerLib.getInstance().trackEvent(activity.getApplicationContext(),"gama_register_event_android",eventValue);
+            //firebase上报
+            SGoogleProxy.firebaseAnalytics(activity, GamaAdsConstant.GAMA_EVENT_REGISTER, b);
 
+            //AppsFlyer上报
+            Map<String, Object> eventValue = new HashMap<String, Object>();
+            eventValue.put("userId", userId);
+            AppsFlyerLib.getInstance().trackEvent(activity.getApplicationContext(), GamaAdsConstant.GAMA_EVENT_REGISTER, eventValue);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public static void trackinPayEvent(Activity activity, double payVaule){
-        SFacebookProxy.trackingEvent(activity,"pay_android", payVaule);
+    /**
+     * Android角色信息上报
+     */
+    public static void trackingRoleInfo(Activity activity, Map<String, Object> map) {
+        try {
+            String userId = GamaUtil.getUid(activity);
+            if (map == null || map.isEmpty() || TextUtils.isEmpty(userId)) {
+                PL.i(TAG, "沒有角色信息");
+                return;
+            } else {
+                PL.i(TAG, "角色信息上報");
+            }
+            //Facebook上报
+            Bundle b = new Bundle();
+            b.putString("userId", userId);
+            for (Map.Entry<String, Object> entry : map.entrySet()) {
+                b.putString(entry.getKey(), entry.getValue().toString());
+            }
+            SFacebookProxy.trackingEvent(activity, GamaAdsConstant.GAMA_EVENT_ROLE_INFO, null, b);
+
+            //firebase上报
+            SGoogleProxy.firebaseAnalytics(activity, GamaAdsConstant.GAMA_EVENT_ROLE_INFO, b);
+
+            //AppsFlyer上报
+            map.put("userId", userId);
+            AppsFlyerLib.getInstance().trackEvent(activity.getApplicationContext(), GamaAdsConstant.GAMA_EVENT_ROLE_INFO, map);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 统计储值数据
+     */
+    public static void trackinPayEvent(Activity activity, GPCreateOrderIdRes createOrderIdRes, Purchase purchase){
+        //Appsflyer上报
+        Map<String,Object> eventValues = new HashMap<>();
+        eventValues.put(AFInAppEventParameterName.REVENUE, "1200");
+        eventValues.put(AFInAppEventParameterName.CURRENCY, "JPY");
+        AppsFlyerLib.getInstance().trackEvent(activity, AFInAppEventType.PURCHASE, eventValues);
     }
 
     /**

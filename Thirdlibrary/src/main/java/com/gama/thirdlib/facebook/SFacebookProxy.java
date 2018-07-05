@@ -80,36 +80,28 @@ public class SFacebookProxy {
 		});*/
 		PL.i("the jar version:" + BuildConfig.JAR_VERSION);//打印版本号
 	}
-	
-	public static void initFbSdk(Context context){
-		FacebookSdk.sdkInitialize(context.getApplicationContext());
-	}
-	
-	public static void activateApp(Context context){
 
-		if (TextUtils.isEmpty(FbResUtil.findStringByName(context,"facebook_app_id"))) {
-			Toast.makeText(context, "fb applicationId is empty", Toast.LENGTH_LONG).show();
-		}else{
-			activateApp(context, FbResUtil.findStringByName(context,"facebook_app_id"));
-		}
-		
-	}
+//	public static void initFbSdk(Context context){
+//		FacebookSdk.sdkInitialize(context.getApplicationContext());
+//	}
 	
-	public static void activateApp(final Context context,final String appId){
-//		FacebookSdk.sdkInitialize(context.getApplicationContext(),new InitializeCallback() {
+//	public static void activateApp(Context context){
 //
-//			@Override
-//			public void onInitialized() {
-//				Log.d(FB_TAG, "InitializeCallback");
-//				AppEventsLogger.activateApp(context, appId);
-//			}
-//		});
-		if (context instanceof Activity) {
-			AppEventsLogger.activateApp(((Activity)context).getApplication(), appId);
-		}else {
-			AppEventsLogger.activateApp(context, appId);
-		}
-	}
+//		if (TextUtils.isEmpty(FbResUtil.findStringByName(context,"facebook_app_id"))) {
+//			Toast.makeText(context, "fb applicationId is empty", Toast.LENGTH_LONG).show();
+//		}else{
+//			activateApp(context, FbResUtil.findStringByName(context,"facebook_app_id"));
+//		}
+//
+//	}
+	
+//	public static void activateApp(final Context context,final String appId){
+//		if (context instanceof Activity) {
+//			AppEventsLogger.activateApp(((Activity)context).getApplication(), appId);
+//		}else {
+//			AppEventsLogger.activateApp(context, appId);
+//		}
+//	}
 	
 	public static void trackingEvent(Activity activity,String eventName){
 		trackingEvent(activity, eventName,null,null);
@@ -1038,9 +1030,11 @@ public class SFacebookProxy {
 
 	
 	public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
-		 if (callbackManager != null) {
-			callbackManager.onActivityResult(requestCode, resultCode, data);
+		if (callbackManager == null) {
+			callbackManager = CallbackManager.Factory.create();
 		}
+		callbackManager.onActivityResult(requestCode, resultCode, data);
+
 		 if(requestCode == REQUEST_TOMESSENGER) {
 			 Log.d(FB_TAG, "to messenger 回调");
 			 if(shareCallBack != null) {

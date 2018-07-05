@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.core.base.SBaseActivity;
+import com.facebook.CallbackManager;
 import com.gama.pay.IPay;
 import com.gama.pay.IPayCallBack;
 import com.gama.pay.IPayFactory;
@@ -65,6 +66,8 @@ public class GooglePayActivity2 extends SBaseActivity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		iPay.onActivityResult(this,requestCode,resultCode,data);
+		// TODO: 2018/7/5  Facebook统计储值数据
+		CallbackManager.Factory.create().onActivityResult(requestCode, resultCode, data);
 	}
 
 	@Override

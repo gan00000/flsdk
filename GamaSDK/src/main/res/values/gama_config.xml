@@ -4,6 +4,8 @@
     <string name="facebook_app_name"></string>
     <!-- Facebook应用ID -->
     <string name="facebook_app_id"></string>
+    <!-- 用于Facebook的自訂頁籤 -->
+    <string name="fb_login_protocol_scheme"></string>
     <!-- Facebook Provider -->
     <string name="facebook_authorities"></string>
     <!-- Google游戏服务ID -->

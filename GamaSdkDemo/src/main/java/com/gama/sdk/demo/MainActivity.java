@@ -14,6 +14,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.core.base.utils.PL;
+import com.crashlytics.android.Crashlytics;
+import com.facebook.CallbackManager;
 import com.gama.base.bean.SGameLanguage;
 import com.gama.base.bean.SPayType;
 import com.gama.base.utils.SLog;
@@ -28,13 +30,14 @@ import com.gama.sdk.callback.IPayListener;
 import com.gama.sdk.out.ISdkCallBack;
 import com.gama.sdk.out.IGama;
 import com.gama.sdk.out.GamaFactory;
+import com.google.firebase.FirebaseApiNotAvailableException;
 
 import java.util.Iterator;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button loginButton, othersPayButton,googlePayBtn,shareButton, showPlatform;
+    private Button loginButton, othersPayButton,googlePayBtn,shareButton, showPlatform, crashlytics;
     IabHelper mHelper;
     private IGama iGama;
 
@@ -50,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         googlePayBtn = (Button) findViewById(R.id.demo_pay_google);
         shareButton = (Button) findViewById(R.id.demo_share);
         showPlatform = findViewById(R.id.showPlatform);
+        crashlytics = findViewById(R.id.Crashlytics);
 
         iGama = GamaFactory.create();
 
@@ -60,17 +64,6 @@ public class MainActivity extends AppCompatActivity {
 
         //在游戏Activity的onCreate生命周期中调用
         iGama.onCreate(this);
-
-        /**
-         * 同步角色信息
-         */
-        String roleId = "123"; //角色id
-        String roleName = "角色名"; //角色名
-        String roleLevel = "10"; //角色等级
-        String vipLevel = "5"; //角色vip等级
-        String serverCode = "1"; //角色伺服器id
-        String serverName = "S1"; //角色伺服器名称
-        iGama.registerRoleInfo(this, roleId, roleName, roleLevel, vipLevel, serverCode, serverName);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +78,16 @@ public class MainActivity extends AppCompatActivity {
                             String accessToken = sLoginResponse.getAccessToken();
                             String timestamp = sLoginResponse.getTimestamp();
                             PL.i("uid:" + uid);
+                            /**
+                             * 同步角色信息(以下均为测试信息)
+                             */
+                            String roleId = "123"; //角色id
+                            String roleName = "角色名"; //角色名
+                            String roleLevel = "10"; //角色等级
+                            String vipLevel = "5"; //角色vip等级
+                            String serverCode = "666"; //角色伺服器id
+                            String serverName = "S1"; //角色伺服器名称
+                            iGama.registerRoleInfo(MainActivity.this, roleId, roleName, roleLevel, vipLevel, serverCode, serverName);
                         } else {
                             PL.i("从登录界面返回");
                             AlertDialog.Builder builder;
@@ -115,7 +118,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
 
         othersPayButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -246,6 +248,13 @@ public class MainActivity extends AppCompatActivity {
                     SLog.logD("已经初始化iabHelper，开始消费");
                     consume();
                 }
+            }
+        });
+
+        crashlytics.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Crashlytics.getInstance().crash(); // Force a crash
             }
         });
     }

@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.text.TextUtils;
 
 import com.core.base.utils.ToastUtils;
@@ -14,6 +15,7 @@ import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.plus.PlusShare;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.io.IOException;
 
@@ -137,6 +139,10 @@ public class SGoogleProxy {
 	      activity.startActivityForResult(shareIntent, GOOGLE_SHARE_CODE);
 	}
 
+	public static void firebaseAnalytics(Activity activity, String eventName, Bundle params) {
+		FirebaseAnalytics analytics = FirebaseAnalytics.getInstance(activity);
+		analytics.logEvent(eventName, params);
+	}
 
 /*
 

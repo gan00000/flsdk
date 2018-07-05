@@ -68,7 +68,7 @@ public class GooglePayImpl implements IPay {
 
         if (iPayCallBack != null){
             Bundle b = new Bundle();
-            b.putInt("status",93);
+            b.putInt(PAY_STATUS, PAY_SUCCESS);
             b.putSerializable("GooglePayCreateOrderIdReqBean", createOrderIdReqBean);
             iPayCallBack.success(b);
         }
@@ -80,7 +80,7 @@ public class GooglePayImpl implements IPay {
             loadingDialog.dismissProgressDialog();
         }
         final Bundle b = new Bundle();
-        b.putInt("status",94);
+        b.putInt(PAY_STATUS, PAY_FAIL);
         if (SStringUtil.isNotEmpty(message)){//提示错误信息
 
             loadingDialog.alert(message, new DialogInterface.OnClickListener() {
@@ -348,6 +348,7 @@ public class GooglePayImpl implements IPay {
                             return;
 
                         } else {
+
                             GoogleExchangeReqBean exchangeReqBean = new GoogleExchangeReqBean(activity);
                             exchangeReqBean.setDataSignature(purchase.getSignature());
                             exchangeReqBean.setPurchaseData(purchase.getOriginalJson());
@@ -392,6 +393,7 @@ public class GooglePayImpl implements IPay {
                                     callbackFail("server error, please try again");
                                 }
                             });
+                            // TODO: 2018/7/5 测试支付上报时注释，不进行发币请求，正式版本必须去除注释
                             googleExchangeReqTask.excute(GPExchangeRes.class);
 
                         }
@@ -509,6 +511,7 @@ public class GooglePayImpl implements IPay {
 
             }
         });
+        // TODO: 2018/7/5 测试支付上报时注释，不进行发币请求，正式版本必须去除注释
         googleExchangeReqTask.excute(GPExchangeRes.class);
     }
 

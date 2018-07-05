@@ -31,6 +31,7 @@ import com.gama.pay.gp.util.PayHelper;
 import com.gama.sdk.BuildConfig;
 import com.gama.sdk.R;
 import com.gama.sdk.SWebViewDialog;
+import com.gama.sdk.ads.GamaAdsConstant;
 import com.gama.sdk.ads.StarEventLogger;
 import com.gama.sdk.callback.IPayListener;
 import com.gama.sdk.login.DialogLoginImpl;
@@ -40,6 +41,8 @@ import com.gama.thirdlib.facebook.SFacebookProxy;
 import com.gama.thirdlib.google.SGooglePlayGameServices;
 
 import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class GamaImpl implements IGama {
@@ -81,12 +84,15 @@ public class GamaImpl implements IGama {
                     e.printStackTrace();
                 }
 
+                //广告
+                StarEventLogger.activateApp(activity);
+
                 setGameLanguage(activity,SGameLanguage.zh_TW);
 
                 ConfigRequest.requestBaseCfg(activity.getApplicationContext());//下载配置文件
 //                ConfigRequest.requestTermsCfg(activity.getApplicationContext());//下载服务条款
                 // 1.初始化fb sdk
-                SFacebookProxy.initFbSdk(activity.getApplicationContext());
+//                SFacebookProxy.initFbSdk(activity.getApplicationContext());
                 sFacebookProxy = new SFacebookProxy(activity.getApplicationContext());
                 isInitSdk = true;
             }
@@ -117,6 +123,15 @@ public class GamaImpl implements IGama {
         PL.i("IGama registerRoleInfo");
         PL.i("roleId:" + roleId + ",roleName:" + roleName + ",roleLevel:" + roleLevel + ",vipLevel:" + vipLevel + ",severCode:" + severCode + ",serverName:" + serverName);
         GamaUtil.saveRoleInfo(activity, roleId, roleName, roleLevel, vipLevel, severCode, serverName);//保存角色信息
+
+        HashMap<String, Object> map = new HashMap<>();
+        map.put(GamaAdsConstant.GAMA_EVENT_ROLEID, roleId);
+        map.put(GamaAdsConstant.GAMA_EVENT_ROLENAME, roleName);
+        map.put(GamaAdsConstant.GAMA_EVENT_ROLE_LEVEL, roleLevel);
+        map.put(GamaAdsConstant.GAMA_EVENT_ROLE_VIP_LEVEL, vipLevel);
+        map.put(GamaAdsConstant.GAMA_EVENT_SERVERCODE, severCode);
+        map.put(GamaAdsConstant.GAMA_EVENT_SERVERNAME, serverName);
+        StarEventLogger.trackingRoleInfo(activity, map);
     }
 
     @Override
@@ -306,9 +321,6 @@ public class GamaImpl implements IGama {
                     }
                 });
 
-                //广告
-                StarEventLogger.activateApp(activity);
-
                 if (!isInitSdk){
                     initSDK(activity);
                 }
@@ -356,30 +368,6 @@ public class GamaImpl implements IGama {
                 }
             } else {
                 PL.i(TAG, "GooglePay支付回调为空");
-            }
-            if (data != null && data.getExtras() != null){
-                Bundle b = data.getExtras();
-                GooglePayCreateOrderIdReqBean g = (GooglePayCreateOrderIdReqBean) data.getSerializableExtra("GooglePayCreateOrderIdReqBean");
-                if (b.getInt("status") == 93 && g != null){//充值成功
-                    /*try {
-                        if (g.getGameCode().equals("gbmmd")) {//全球萌萌哒特殊处理
-                            PL.i("google pay success,value:" + g.getPayValue());
-                            Map<String,Double> id_price = new HashMap<>();
-                            id_price.put("com.brmmd.3.99.month",3.99);
-                            id_price.put("com.brmmd.19.99.month",19.99);
-                            id_price.put("py.brmmd.1.99",1.99);
-                            id_price.put("py.brmmd.4.99",4.99);
-                            id_price.put("py.brmmd.9.99",9.99);
-                            id_price.put("py.brmmd.29.99",29.99);
-                            id_price.put("py.brmmd.49.99",49.99);
-                            id_price.put("py.brmmd.99.99",99.99);
-                            StarEventLogger.trackinPayEvent(activity,id_price.get(g.getProductId()));
-                        }
-                    } catch (NumberFormatException e) {
-                        e.printStackTrace();
-                    }*/
-                    PL.i("google pay success");
-                }
             }
             return;
         }

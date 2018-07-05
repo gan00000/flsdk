@@ -10,6 +10,9 @@ import com.gama.pay.gp.bean.req.PayReqBean;
  */
 
 public interface IPay extends IGameLifeCycle{
+    String PAY_STATUS = "status";
+    int PAY_SUCCESS = 93;
+    int PAY_FAIL = 94;
 
     /**
      * 进入Google储值流程

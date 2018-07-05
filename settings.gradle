@@ -3,7 +3,7 @@ include ':GamaSDK', ':GamaSdkDemo', ':Thirdlibrary'
 //include ':google:google-play-service-demo'
 
 
-include ':facebook:gama-fb-4.25'
+//include ':facebook:gama-fb-4.25'
 
 
 include ':libraries-src:gama-core'
