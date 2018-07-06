@@ -4,6 +4,9 @@ import android.content.Context;
 
 import com.gama.pay.gp.constants.GooglePayContant;
 
+/**
+ * 用于请求创单接口的参数集
+ */
 public class GooglePayCreateOrderIdReqBean extends PayReqBean {
 
 	private String payValue = "0";

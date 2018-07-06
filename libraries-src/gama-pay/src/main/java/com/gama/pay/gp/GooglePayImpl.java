@@ -60,7 +60,7 @@ public class GooglePayImpl implements IPay {
     boolean isPaying = false;
 
 
-    private void callbackSuccess(){
+    private void callbackSuccess(Purchase purchase){
 
         if (loadingDialog != null){
             loadingDialog.dismissProgressDialog();
@@ -70,6 +70,7 @@ public class GooglePayImpl implements IPay {
             Bundle b = new Bundle();
             b.putInt(PAY_STATUS, PAY_SUCCESS);
             b.putSerializable("GooglePayCreateOrderIdReqBean", createOrderIdReqBean);
+            b.putSerializable("Purchase", purchase);
             iPayCallBack.success(b);
         }
     }
@@ -348,6 +349,23 @@ public class GooglePayImpl implements IPay {
                             return;
 
                         } else {
+                            // TODO: 2018/7/6 测试上报代码 
+//                            Purchase p = null;
+//                            try {
+//                                JSONObject jsonObject = new JSONObject();
+//                                jsonObject.put("orderId", "orderId");
+//                                jsonObject.put("packageName", "packageName");
+//                                jsonObject.put("productId", "productId");
+//                                jsonObject.put("purchaseTime", "purchaseTime");
+//                                jsonObject.put("purchaseState", "purchaseState");
+//                                jsonObject.put("developerPayload", "developerPayload");
+//                                jsonObject.put("token", "token");
+//                                jsonObject.put("", "");
+//                                p = new Purchase("itemType", jsonObject.toString(), "signature");
+//                            } catch (JSONException e) {
+//                                e.printStackTrace();
+//                            }
+//                            callbackSuccess(p);
 
                             GoogleExchangeReqBean exchangeReqBean = new GoogleExchangeReqBean(activity);
                             exchangeReqBean.setDataSignature(purchase.getSignature());
@@ -412,7 +430,7 @@ public class GooglePayImpl implements IPay {
             } else {
                 SLog.logI("消费失败");
             }
-            callbackSuccess();
+            callbackSuccess(purchase);
         }
     };
 

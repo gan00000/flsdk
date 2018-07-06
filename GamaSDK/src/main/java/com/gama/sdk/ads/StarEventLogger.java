@@ -16,7 +16,7 @@ import com.core.base.utils.PL;
 import com.core.base.utils.SPUtil;
 import com.core.base.utils.SStringUtil;
 import com.gama.data.login.response.SLoginResponse;
-import com.gama.pay.gp.bean.res.GPCreateOrderIdRes;
+import com.gama.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
 import com.gama.pay.gp.util.Purchase;
 import com.google.ads.conversiontracking.AdWordsConversionReporter;
 import com.gama.base.bean.AdsRequestBean;
@@ -69,7 +69,7 @@ public class StarEventLogger {
             String userId = loginResponse.getUserId();
             //Facebook上报
             Bundle b = new Bundle();
-            b.putString("userId", userId);
+            b.putString(GamaAdsConstant.GAMA_EVENT_USER_ID, userId);
             SFacebookProxy.trackingEvent(activity, GamaAdsConstant.GAMA_EVENT_LOGIN, null, b);
 
             //firebase上报
@@ -77,7 +77,7 @@ public class StarEventLogger {
 
             //AppsFlyer上报
             Map<String, Object> eventValue = new HashMap<String, Object>();
-            eventValue.put("userId", userId);
+            eventValue.put(GamaAdsConstant.GAMA_EVENT_USER_ID, userId);
             AppsFlyerLib.getInstance().trackEvent(activity.getApplicationContext(), GamaAdsConstant.GAMA_EVENT_LOGIN, eventValue);
         } catch (Exception e) {
             e.printStackTrace();
@@ -94,7 +94,7 @@ public class StarEventLogger {
             String userId = loginResponse.getUserId();
             //Facebook上报
             Bundle b = new Bundle();
-            b.putString("userId", userId);
+            b.putString(GamaAdsConstant.GAMA_EVENT_USER_ID, userId);
             SFacebookProxy.trackingEvent(activity, GamaAdsConstant.GAMA_EVENT_REGISTER, null, b);
 
             //firebase上报
@@ -102,7 +102,7 @@ public class StarEventLogger {
 
             //AppsFlyer上报
             Map<String, Object> eventValue = new HashMap<String, Object>();
-            eventValue.put("userId", userId);
+            eventValue.put(GamaAdsConstant.GAMA_EVENT_USER_ID, userId);
             AppsFlyerLib.getInstance().trackEvent(activity.getApplicationContext(), GamaAdsConstant.GAMA_EVENT_REGISTER, eventValue);
         } catch (Exception e) {
             e.printStackTrace();
@@ -123,7 +123,7 @@ public class StarEventLogger {
             }
             //Facebook上报
             Bundle b = new Bundle();
-            b.putString("userId", userId);
+            b.putString(GamaAdsConstant.GAMA_EVENT_USER_ID, userId);
             for (Map.Entry<String, Object> entry : map.entrySet()) {
                 b.putString(entry.getKey(), entry.getValue().toString());
             }
@@ -133,7 +133,7 @@ public class StarEventLogger {
             SGoogleProxy.firebaseAnalytics(activity, GamaAdsConstant.GAMA_EVENT_ROLE_INFO, b);
 
             //AppsFlyer上报
-            map.put("userId", userId);
+            map.put(GamaAdsConstant.GAMA_EVENT_USER_ID, userId);
             AppsFlyerLib.getInstance().trackEvent(activity.getApplicationContext(), GamaAdsConstant.GAMA_EVENT_ROLE_INFO, map);
         } catch (Exception e) {
             e.printStackTrace();
@@ -143,11 +143,30 @@ public class StarEventLogger {
     /**
      * 统计储值数据
      */
-    public static void trackinPayEvent(Activity activity, GPCreateOrderIdRes createOrderIdRes, Purchase purchase){
+    public static void trackinPayEvent(Activity activity, Bundle bundle){
+        if(bundle == null) {
+            PL.i(TAG, "trackinPay bundle null");
+            return;
+        }
+        GooglePayCreateOrderIdReqBean createOrderIdReqBean = (GooglePayCreateOrderIdReqBean) bundle.getSerializable("GooglePayCreateOrderIdReqBean");
+        if(createOrderIdReqBean == null) {
+            PL.i(TAG, "trackinPay createOrderIdReqBean null");
+            return;
+        }
+        Purchase purchase = (Purchase) bundle.getSerializable("Purchase");
+        if(purchase == null) {
+            PL.i(TAG, "trackinPay Purchase null");
+            return;
+        }
         //Appsflyer上报
         Map<String,Object> eventValues = new HashMap<>();
-        eventValues.put(AFInAppEventParameterName.REVENUE, "1200");
-        eventValues.put(AFInAppEventParameterName.CURRENCY, "JPY");
+        eventValues.put(GamaAdsConstant.GAMA_EVENT_USER_ID, createOrderIdReqBean.getUserId());
+        eventValues.put(GamaAdsConstant.GAMA_EVENT_PRODUCT_ID, createOrderIdReqBean.getProductId());
+        eventValues.put(GamaAdsConstant.GAMA_EVENT_PAY_VALUE, createOrderIdReqBean.getPayValue());
+        eventValues.put(GamaAdsConstant.GAMA_EVENT_PAY_TYPE, createOrderIdReqBean.getPayType());
+        eventValues.put(GamaAdsConstant.GAMA_EVENT_ORDERID, purchase.getOrderId());
+        eventValues.put(GamaAdsConstant.GAMA_EVENT_PURCHASE_TIME, purchase.getPurchaseTime());
+        eventValues.put(AFInAppEventParameterName.REVENUE, purchase.getPurchaseTime());
         AppsFlyerLib.getInstance().trackEvent(activity, AFInAppEventType.PURCHASE, eventValues);
     }
 

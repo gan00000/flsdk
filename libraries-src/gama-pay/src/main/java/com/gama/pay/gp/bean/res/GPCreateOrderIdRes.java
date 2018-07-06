@@ -3,9 +3,8 @@ package com.gama.pay.gp.bean.res;
 import com.core.base.bean.BaseResponseModel;
 
 /**
- * Created by ganyuanrong on 2017/2/23.
+ * 请求创单接口返回的数据
  */
-
 public class GPCreateOrderIdRes extends BaseResponseModel {
 
     private String orderId;

@@ -358,14 +358,19 @@ public class GamaImpl implements IGama {
             otherPayWebViewDialog.onActivityResult(activity, requestCode, resultCode, data);
         }
         if (requestCode == GooglePayActivity2.GooglePayReqeustCode && resultCode == GooglePayActivity2.GooglePayResultCode){
+            Bundle bundle = null;
+            if(data != null) {
+                bundle = data.getExtras();
+            }
+            if(bundle == null){
+                bundle = new Bundle();
+            } else {
+                StarEventLogger.trackinPayEvent(activity, bundle);
+            }
+
             if(iPayListener != null) { //支付刷新的回调
                 PL.i(TAG, "GooglePay支付回调");
-                if (data != null && data.getExtras() != null) {
-                    Bundle b = data.getExtras();
-                    iPayListener.onPayFinish(b);
-                } else {
-                    iPayListener.onPayFinish(new Bundle());
-                }
+                iPayListener.onPayFinish(bundle);
             } else {
                 PL.i(TAG, "GooglePay支付回调为空");
             }
