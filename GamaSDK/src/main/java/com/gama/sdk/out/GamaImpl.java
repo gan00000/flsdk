@@ -1,7 +1,6 @@
 package com.gama.sdk.out;
 
 import android.app.Activity;
-import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,9 +21,10 @@ import com.gama.base.cfg.ConfigRequest;
 import com.gama.base.cfg.ResConfig;
 import com.gama.base.utils.GamaUtil;
 import com.gama.base.utils.Localization;
+import com.gama.base.utils.SLog;
 import com.gama.data.login.ILoginCallBack;
-import com.gama.pay.IPayCallBack;
 import com.gama.pay.gp.GooglePayActivity2;
+import com.gama.pay.gp.GooglePayHelper;
 import com.gama.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
 import com.gama.pay.gp.bean.req.WebPayReqBean;
 import com.gama.pay.gp.util.PayHelper;
@@ -42,7 +42,6 @@ import com.gama.thirdlib.google.SGooglePlayGameServices;
 
 import java.net.URLEncoder;
 import java.util.HashMap;
-import java.util.Map;
 
 
 public class GamaImpl implements IGama {
@@ -95,6 +94,10 @@ public class GamaImpl implements IGama {
 //                SFacebookProxy.initFbSdk(activity.getApplicationContext());
                 sFacebookProxy = new SFacebookProxy(activity.getApplicationContext());
                 isInitSdk = true;
+                //进行启动的查单
+                SLog.logD(TAG, "Start launch query.");
+                GooglePayHelper.getInstance().queryConsumablePurchase(activity);
+
             }
         });
 
@@ -343,6 +346,7 @@ public class GamaImpl implements IGama {
         if (iLogin != null) {
             iLogin.onResume(activity);
         }
+        GooglePayHelper.getInstance().setForeground(true);
     }
 
     @Override
@@ -396,6 +400,7 @@ public class GamaImpl implements IGama {
         if (iLogin != null) {
             iLogin.onStop(activity);
         }
+        GooglePayHelper.getInstance().setForeground(false);
     }
 
     @Override
@@ -407,6 +412,8 @@ public class GamaImpl implements IGama {
         if (sFacebookProxy != null){
             sFacebookProxy.onDestroy(activity);
         }
+        //退出游戏时停止定时查单
+        GooglePayHelper.getInstance().stopQueryTask();
     }
 
     @Override

@@ -44,4 +44,5 @@ public class GooglePayContant {
 	 */
 	public static final String PURCHASE_SIGN_ONE = "GOOGLE_PURCHASE_SIGN_ONE";
 
+	public static final String PURCHASE_OBJECT = "PURCHASE";
 }

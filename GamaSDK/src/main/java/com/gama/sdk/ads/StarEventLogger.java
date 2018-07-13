@@ -15,19 +15,21 @@ import com.core.base.request.SimpleHttpRequest;
 import com.core.base.utils.PL;
 import com.core.base.utils.SPUtil;
 import com.core.base.utils.SStringUtil;
-import com.gama.data.login.response.SLoginResponse;
-import com.gama.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
-import com.gama.pay.gp.util.Purchase;
-import com.google.ads.conversiontracking.AdWordsConversionReporter;
 import com.gama.base.bean.AdsRequestBean;
 import com.gama.base.cfg.ResConfig;
 import com.gama.base.utils.GamaUtil;
+import com.gama.data.login.response.SLoginResponse;
+import com.gama.pay.gp.constants.GooglePayContant;
+import com.gama.pay.gp.util.Purchase;
 import com.gama.sdk.R;
 import com.gama.thirdlib.facebook.SFacebookProxy;
 import com.gama.thirdlib.google.SGoogleProxy;
+import com.google.ads.conversiontracking.AdWordsConversionReporter;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by gan on 2017/3/3.
@@ -143,31 +145,39 @@ public class StarEventLogger {
     /**
      * 统计储值数据
      */
-    public static void trackinPayEvent(Activity activity, Bundle bundle){
+    public static void trackinPayEvent(Context context, Bundle bundle){
         if(bundle == null) {
             PL.i(TAG, "trackinPay bundle null");
             return;
         }
-        GooglePayCreateOrderIdReqBean createOrderIdReqBean = (GooglePayCreateOrderIdReqBean) bundle.getSerializable("GooglePayCreateOrderIdReqBean");
-        if(createOrderIdReqBean == null) {
-            PL.i(TAG, "trackinPay createOrderIdReqBean null");
-            return;
-        }
-        Purchase purchase = (Purchase) bundle.getSerializable("Purchase");
+        Purchase purchase = (Purchase) bundle.getSerializable(GooglePayContant.PURCHASE_OBJECT);
         if(purchase == null) {
             PL.i(TAG, "trackinPay Purchase null");
             return;
         }
+        String productId = purchase.getSku();
+        int price = 0;
+        try {
+            Pattern p = Pattern.compile("\\d+(usd|USD)");
+            Matcher m = p.matcher(productId);
+            if(m.find()) {
+                price = Integer.parseInt(m.group().toLowerCase().replace("usd", ""));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         //Appsflyer上报
         Map<String,Object> eventValues = new HashMap<>();
-        eventValues.put(GamaAdsConstant.GAMA_EVENT_USER_ID, createOrderIdReqBean.getUserId());
-        eventValues.put(GamaAdsConstant.GAMA_EVENT_PRODUCT_ID, createOrderIdReqBean.getProductId());
-        eventValues.put(GamaAdsConstant.GAMA_EVENT_PAY_VALUE, createOrderIdReqBean.getPayValue());
-        eventValues.put(GamaAdsConstant.GAMA_EVENT_PAY_TYPE, createOrderIdReqBean.getPayType());
+        //下面是自定义的事件名
+        eventValues.put(GamaAdsConstant.GAMA_EVENT_USER_ID, GamaUtil.getUid(context));
+        eventValues.put(GamaAdsConstant.GAMA_EVENT_PRODUCT_ID, productId);
         eventValues.put(GamaAdsConstant.GAMA_EVENT_ORDERID, purchase.getOrderId());
         eventValues.put(GamaAdsConstant.GAMA_EVENT_PURCHASE_TIME, purchase.getPurchaseTime());
-        eventValues.put(AFInAppEventParameterName.REVENUE, purchase.getPurchaseTime());
-        AppsFlyerLib.getInstance().trackEvent(activity, AFInAppEventType.PURCHASE, eventValues);
+        //下面是AppsFlyer自己的事件名
+        eventValues.put(AFInAppEventParameterName.REVENUE, price);
+        eventValues.put(AFInAppEventParameterName.CURRENCY, "USD");
+        eventValues.put(AFInAppEventParameterName.CONTENT_ID, productId);
+        AppsFlyerLib.getInstance().trackEvent(context, AFInAppEventType.PURCHASE, eventValues);
     }
 
     /**

@@ -12,7 +12,6 @@ import android.text.TextUtils;
 public class HttpRequest {
 	
 	public HttpRequest() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public static String get(String urlStr,Map<String, String> dataMap) {

@@ -1,6 +1,7 @@
 package com.gama.pay.gp.task;
 
 import android.app.Activity;
+import android.content.Context;
 
 import com.core.base.request.AbsHttpRequest;
 import com.core.base.bean.BaseReqeustBean;
@@ -11,11 +12,11 @@ import com.core.base.bean.BaseReqeustBean;
 
 public class GoogleExchangeReqTask extends AbsHttpRequest {
 
-    private Activity activity;
+    private Context activity;
     private BaseReqeustBean baseReqeustBean;
 
 
-    public GoogleExchangeReqTask(Activity activity, BaseReqeustBean baseReqeustBean) {
+    public GoogleExchangeReqTask(Context activity, BaseReqeustBean baseReqeustBean) {
         this.activity = activity;
         this.baseReqeustBean = baseReqeustBean;
     }

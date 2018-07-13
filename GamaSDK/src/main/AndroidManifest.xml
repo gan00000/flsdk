@@ -123,6 +123,14 @@
             </intent-filter>
         </receiver>
 
+        <receiver
+            android:name="com.gama.sdk.receiver.GamaReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.gamamobi.PAY_REPLACE_OK" />
+            </intent-filter>
+        </receiver>
+
         <!--play-services config start-->
 
         <!--<activity-->

@@ -1152,7 +1152,6 @@ public class IabHelper {
 				try {
 					int result = mService.consumePurchase(3, packageName, purchaseToken);
 				} catch (RemoteException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -1218,4 +1217,19 @@ public class IabHelper {
 		}
 
 	}
+
+	public void queryPurchasesHistory() {
+		try {
+			Bundle history = mService.getPurchaseHistory(6, context.getPackageName(),
+					ITEM_TYPE_INAPP, "", null);
+			Log.i("queryPurchasesHistory", "result: " + history.toString());
+			for(String key : history.keySet()) {
+				Object o = history.get(key);
+				Log.i("queryPurchasesHistory", "key: " + key + " -- value: " + o);
+			}
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
+
 }

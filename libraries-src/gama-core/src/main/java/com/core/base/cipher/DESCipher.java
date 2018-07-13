@@ -62,16 +62,12 @@ public class DESCipher {
 		} catch (InvalidKeyException e) {
 			e.printStackTrace();
 		} catch (InvalidKeySpecException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IllegalBlockSizeException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (BadPaddingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (RuntimeException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return result;
@@ -102,13 +98,10 @@ public class DESCipher {
 		} catch (InvalidKeyException e) {
 			e.printStackTrace();
 		} catch (InvalidKeySpecException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IllegalBlockSizeException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (BadPaddingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return result;

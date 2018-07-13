@@ -163,10 +163,8 @@ public class ResUtil {
 				}
 			}
 		} catch (NameNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return dataObject;
@@ -184,7 +182,6 @@ public class ResUtil {
 		try {
 			appInfo = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
 		} catch (NameNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if (appInfo != null) {
@@ -205,7 +202,6 @@ public class ResUtil {
 		try {
 			info = activity.getPackageManager().getActivityInfo(activity.getComponentName(), PackageManager.GET_META_DATA);
 		} catch (NameNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if (info != null) {
@@ -226,7 +222,6 @@ public class ResUtil {
 		try {
 			info = context.getPackageManager().getActivityInfo(new ComponentName(context, clazz), PackageManager.GET_META_DATA);
 		} catch (NameNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if (info != null) {
@@ -254,10 +249,8 @@ public class ResUtil {
 				}
 			}
 		} catch (NameNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return dataObject;
@@ -277,7 +270,6 @@ public class ResUtil {
 		try {
 			info = context.getPackageManager().getServiceInfo(cn, PackageManager.GET_META_DATA);
 		} catch (NameNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if (info != null) {
@@ -299,7 +291,6 @@ public class ResUtil {
 		try {
 			info = context.getPackageManager().getReceiverInfo(cn, PackageManager.GET_META_DATA);
 		} catch (NameNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if (info != null) {

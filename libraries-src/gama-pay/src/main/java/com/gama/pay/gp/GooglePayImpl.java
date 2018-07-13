@@ -40,6 +40,7 @@ import java.util.List;
  */
 
 public class GooglePayImpl implements IPay {
+    private static final String TAG = GooglePayImpl.class.getSimpleName();
 
     // The helper object
     private IabHelper mHelper;
@@ -70,7 +71,7 @@ public class GooglePayImpl implements IPay {
             Bundle b = new Bundle();
             b.putInt(PAY_STATUS, PAY_SUCCESS);
             b.putSerializable("GooglePayCreateOrderIdReqBean", createOrderIdReqBean);
-            b.putSerializable("Purchase", purchase);
+            b.putSerializable(GooglePayContant.PURCHASE_OBJECT, purchase);
             iPayCallBack.success(b);
         }
     }
@@ -211,6 +212,7 @@ public class GooglePayImpl implements IPay {
         }
         loadingDialog.showProgressDialog();
         if (!mHelper.isSetupDone()) {
+            PL.i(TAG, "初始化iabHelper开始");
             //进行Google支付的初始化，只能进行一次，如果已经初始化则不用再次初始化
             mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
 
@@ -228,6 +230,7 @@ public class GooglePayImpl implements IPay {
 
             });
         } else {
+            PL.i(TAG, "已经初始化iabHelper");
             //开始从Google商店查询所有商品状态
             mHelper.queryInventoryAsync(queryInventoryFinishedListener);
 
@@ -335,9 +338,10 @@ public class GooglePayImpl implements IPay {
                         SLog.logI("onIabPurchaseFinished");
 
                         if (purchase == null || result.isFailure()) {
-
                             SLog.logI("purchase is null.");
-
+                            //进行定时查单
+                            GooglePayHelper.getInstance().startQueryTask(activity);
+                            //用户取消支付
                             if (result.getResponse() == IabHelper.IABHELPER_USER_CANCELLED) {
                                 PL.i("info: " + result.getMessage());
                                 callbackFail("");//用户去掉不提示
@@ -346,10 +350,8 @@ public class GooglePayImpl implements IPay {
                             callbackFail(result.getMessage());
 //                            loadingDialog.complain(result.getMessage());
 //                            ToastUtils.toast();
-                            return;
-
                         } else {
-                            // TODO: 2018/7/6 测试上报代码 
+                            // TODO: 2018/7/6 测试上报代码
 //                            Purchase p = null;
 //                            try {
 //                                JSONObject jsonObject = new JSONObject();
@@ -497,7 +499,7 @@ public class GooglePayImpl implements IPay {
     /**
      * 补单
      */
-    private void replacement(Purchase mPurchase) {
+    private void replacement(final Purchase mPurchase) {
         GoogleExchangeReqBean exchangeReqBean = new GoogleExchangeReqBean(activity);
         exchangeReqBean.setDataSignature(mPurchase.getSignature());
         exchangeReqBean.setPurchaseData(mPurchase.getOriginalJson());
@@ -512,11 +514,13 @@ public class GooglePayImpl implements IPay {
             @Override
             public void success(GPExchangeRes gpExchangeRes, String rawResult) {
                 PL.i("exchange callback");
-                // 消费
-        /*if (mHelper != null) {
-            PL.i("google pay consumeAsync");
-            mHelper.consumeAsync(mPurchase, mConsumeFinishedListener);
-        }*/
+                try {//补发上报
+                    Intent intent = new Intent(GooglePayHelper.ACTION_PAY_REPLACE_OK);
+                    intent.putExtra(GooglePayContant.PURCHASE_OBJECT, mPurchase);
+                    activity.sendBroadcast(intent);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override

@@ -164,10 +164,8 @@ public class FbResUtil {
 				}
 			}
 		} catch (NameNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return dataObject;
@@ -185,7 +183,6 @@ public class FbResUtil {
 		try {
 			appInfo = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
 		} catch (NameNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if (appInfo != null) {
@@ -205,7 +202,6 @@ public class FbResUtil {
 		try {
 			info = activity.getPackageManager().getActivityInfo(activity.getComponentName(), PackageManager.GET_META_DATA);
 		} catch (NameNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if (info != null) {
@@ -226,7 +222,6 @@ public class FbResUtil {
 		try {
 			info = context.getPackageManager().getActivityInfo(new ComponentName(context, clazz), PackageManager.GET_META_DATA);
 		} catch (NameNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if (info != null) {
@@ -253,10 +248,8 @@ public class FbResUtil {
 				}
 			}
 		} catch (NameNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return dataObject;
@@ -276,7 +269,6 @@ public class FbResUtil {
 		try {
 			info = context.getPackageManager().getServiceInfo(cn, PackageManager.GET_META_DATA);
 		} catch (NameNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if (info != null) {
@@ -298,7 +290,6 @@ public class FbResUtil {
 		try {
 			info = context.getPackageManager().getReceiverInfo(cn, PackageManager.GET_META_DATA);
 		} catch (NameNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if (info != null) {

@@ -84,7 +84,6 @@ public class SGooglePlayGameServices implements GoogleApiClient.OnConnectionFail
 
 	@Override
 	public void onConnectionFailed(ConnectionResult result) {
-		// TODO Auto-generated method stub
 		Log.d(TAG, "onConnectionFailed");
 		hasConnnected = false;
 		if (mResolvingError) {

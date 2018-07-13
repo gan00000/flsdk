@@ -143,7 +143,6 @@ public class Native2JS {
 			jsonObject.put("androidid", ApkInfoUtil.getAndroidId(context));
 			return jsonObject.toString();
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return "";

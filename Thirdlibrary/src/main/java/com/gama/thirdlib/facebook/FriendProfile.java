@@ -5,7 +5,6 @@ import android.text.TextUtils;
 public class FriendProfile {
 
 	public FriendProfile() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	

@@ -294,7 +294,6 @@ public class SGoogleSignIn implements GoogleApiClient.OnConnectionFailedListener
 
 	@Override
 	public void onConnectionFailed(ConnectionResult result) {
-		// TODO Auto-generated method stub
 		Log.d(TAG, "onConnectionFailed");
 		if (isCancel) {
 			return;

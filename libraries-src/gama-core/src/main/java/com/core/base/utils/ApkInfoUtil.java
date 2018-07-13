@@ -133,7 +133,6 @@ public class ApkInfoUtil {
 					customizedUniqueId = uuid;
 				}
 			} catch (IOException e) {
-				// TODO: handle exception
 				e.printStackTrace();
 			}
 			return customizedUniqueId;
@@ -255,7 +254,6 @@ public class ApkInfoUtil {
 			PackageInfo info = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
 			return info.versionName;
 		} catch (NameNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return "";

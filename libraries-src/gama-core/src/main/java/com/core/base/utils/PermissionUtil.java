@@ -29,7 +29,6 @@ public class PermissionUtil {
 	private static final String TAG = "PermissionUtil";
 
 	public PermissionUtil() {
-		// TODO Auto-generated constructor stub
 	}
 
 	/**

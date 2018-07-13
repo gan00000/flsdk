@@ -37,7 +37,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button loginButton, othersPayButton,googlePayBtn,shareButton, showPlatform, crashlytics;
+    private Button loginButton, othersPayButton,googlePayBtn,shareButton, showPlatform, crashlytics, PurchasesHistory;
     IabHelper mHelper;
     private IGama iGama;
 
@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         shareButton = (Button) findViewById(R.id.demo_share);
         showPlatform = findViewById(R.id.showPlatform);
         crashlytics = findViewById(R.id.Crashlytics);
+        PurchasesHistory = findViewById(R.id.PurchasesHistory);
 
         iGama = GamaFactory.create();
 
@@ -257,6 +258,28 @@ public class MainActivity extends AppCompatActivity {
                 Crashlytics.getInstance().crash(); // Force a crash
             }
         });
+
+        PurchasesHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!mHelper.isSetupDone()) {
+                    mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
+                        @Override
+                        public void onIabSetupFinished(IabResult result) {
+                            if(result.isSuccess()) {
+                                SLog.logD("初始化iabHelper成功，开始查历史记录");
+                                mHelper.queryPurchasesHistory();
+                            } else {
+                                SLog.logD("初始化iabHelper失败，查历史记录结束");
+                            }
+                        }
+                    });
+                } else {
+                    SLog.logD("已经初始化iabHelper，开始查历史记录");
+                    mHelper.queryPurchasesHistory();
+                }
+            }
+        });
     }
 
     private void consume() {
@@ -358,6 +381,9 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         PL.i("activity onDestroy");
         iGama.onDestroy(this);
+        if(mHelper != null) {
+            mHelper.dispose();
+        }
     }
 
     @Override

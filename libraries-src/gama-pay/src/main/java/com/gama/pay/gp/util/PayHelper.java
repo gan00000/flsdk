@@ -18,14 +18,14 @@ public class PayHelper {
 	/**
 	 * 获取储值主域名
 	 */
-	public static String getPreferredUrl(Activity payActivity){
+	public static String getPreferredUrl(Context payActivity){
 		String preferredUrl = ResConfig.getPayPreferredUrl(payActivity);
 		return checkUrl(preferredUrl);
 	}
 	/**
 	 * 获取储值备用域名
 	 */
-	public static String getSpareUrl(Activity payActivity){
+	public static String getSpareUrl(Context payActivity){
 		String spareUrl = ResConfig.getPaySpareUrl(payActivity);
 		return checkUrl(spareUrl);
 	}

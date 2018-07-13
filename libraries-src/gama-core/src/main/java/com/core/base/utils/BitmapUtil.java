@@ -139,7 +139,6 @@ public class BitmapUtil {
             }
 
         }catch (Exception e) {
-            // TODO Auto-generated catch block
             if (e != null)
                 e.printStackTrace();
         }

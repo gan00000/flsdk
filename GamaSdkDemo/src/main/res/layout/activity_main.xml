@@ -75,6 +75,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Crashlytics" />
+
+                <Button
+                    android:id="@+id/PurchasesHistory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PurchasesHistory" />
             </LinearLayout>
 
 

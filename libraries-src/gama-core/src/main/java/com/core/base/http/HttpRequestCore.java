@@ -387,7 +387,6 @@ public class HttpRequestCore{
 				try {
 					is.close();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -395,7 +394,6 @@ public class HttpRequestCore{
 				try {
 					fileOutputStream.close();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
