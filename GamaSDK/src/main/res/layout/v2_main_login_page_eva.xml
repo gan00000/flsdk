@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/transparent">
+
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -12,31 +12,24 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/iv_back"
-            android:layout_width="@dimen/px_88"
-            android:layout_height="@dimen/px_128"
-            app:srcCompat="@drawable/btn_web_pre_normal" />
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/btn_xm_google_login_iv"
+                android:id="@+id/iv_google_login"
                 android:layout_width="@dimen/px_334"
                 android:layout_height="@dimen/px_300"
                 android:scaleType="centerCrop"
                 android:src="@drawable/btn_xm_google_login" />
+
             <ImageView
-                android:id="@+id/btn_xm_member_login_iv"
+                android:id="@+id/iv_gama_login"
                 android:layout_width="@dimen/px_334"
                 android:layout_height="@dimen/px_300"
                 android:scaleType="centerCrop"
-                android:src="@drawable/btn_xm_member_login"
-
-                />
+                android:src="@drawable/btn_xm_member_login" />
         </LinearLayout>
 
         <LinearLayout
@@ -45,32 +38,38 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/btn_xm_facebook_login_iv"
+                android:id="@+id/iv_evatar_login"
                 android:layout_width="@dimen/px_334"
                 android:layout_height="@dimen/px_600"
-                android:background="@drawable/gama_fb_login_bg"
+                android:background="@android:color/darker_gray"
                 android:paddingLeft="@dimen/px_100"
                 android:paddingRight="@dimen/px_100"
+                android:scaleType="centerInside" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_facebook_login"
+                android:layout_width="@dimen/px_334"
+                android:layout_height="@dimen/px_300"
                 android:scaleType="centerInside"
+                android:padding="20dp"
+                android:background="@drawable/gama_fb_login_bg"
                 android:src="@drawable/gama_fb_login" />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
             <ImageView
-                android:id="@+id/btn_xm_guest_login_iv"
+                android:id="@+id/iv_free_login"
                 android:layout_width="@dimen/px_334"
-                android:layout_height="@dimen/px_600"
-                android:background="@drawable/gama_guest_login_bg"
-                android:paddingLeft="@dimen/px_100"
-                android:paddingRight="@dimen/px_100"
+                android:layout_height="@dimen/px_300"
                 android:scaleType="centerInside"
+                android:padding="20dp"
+                android:background="@drawable/gama_guest_login_bg"
                 android:src="@drawable/gama_guest_login" />
-
         </LinearLayout>
 
     </LinearLayout>

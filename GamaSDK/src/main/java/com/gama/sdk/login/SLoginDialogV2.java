@@ -19,12 +19,14 @@ import com.gama.data.login.response.SLoginResponse;
 import com.gama.sdk.R;
 import com.gama.sdk.SBaseDialog;
 import com.gama.sdk.login.p.LoginPresenterImpl;
+import com.gama.sdk.login.utils.GamaDataHelper;
 import com.gama.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.gama.sdk.login.widget.v2.AccountChangePwdLayoutV2;
 import com.gama.sdk.login.widget.v2.AccountFindPwdLayoutV2;
 import com.gama.sdk.login.widget.v2.AccountManagerLayoutV2;
 import com.gama.sdk.login.widget.v2.AccountRegisterLayoutV2;
 import com.gama.sdk.login.widget.v2.AccountRegisterTermsLayoutV2;
+import com.gama.sdk.login.widget.v2.GamaLoginLayoutV2;
 import com.gama.sdk.login.widget.v2.PyAccountLoginV2;
 import com.gama.sdk.login.widget.v2.ThirdPlatBindAccountLayoutV2;
 import com.gama.sdk.login.widget.v2.XMMainLoginLayoutV2;
@@ -55,7 +57,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
     private TextView autoLoginChangeAccount;
 
     private SLoginBaseRelativeLayout mainLoginView;
-    private SLoginBaseRelativeLayout accountLoginView;
+    private PyAccountLoginV2 accountLoginView;
     private SLoginBaseRelativeLayout registerView;
     private SLoginBaseRelativeLayout registerTermsView;
     private SLoginBaseRelativeLayout changePwdView;
@@ -65,6 +67,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
     private SLoginBaseRelativeLayout bindGoogleView;
     private SLoginBaseRelativeLayout injectionView;
     private SLoginBaseRelativeLayout accountManagerCenterView;
+    private SLoginBaseRelativeLayout gamaLoginView;
 
     private List<SLoginBaseRelativeLayout> viewPageList;
 
@@ -188,6 +191,8 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
             if(iLoginCallBack != null) { //回调退出登录界面的状态
                 iLoginCallBack.onLogin(null);
             }
+        } else if( gamaLoginView != null && gamaLoginView.getVisibility() == View.VISIBLE) {
+            toMainLoginView();
         } else if (viewPageList != null) { //如果在其他页面，就复用当前显示页面的返回按钮
             for (View childView : viewPageList) {
                 if (childView == null){
@@ -232,13 +237,21 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
             }
         }
     }
-    public void toAccountLoginView() {
 
+
+    public void toAccountLoginView() {
         if (accountLoginView == null || !viewPageList.contains(accountLoginView)){
             accountLoginView = new PyAccountLoginV2(context);
             accountLoginView.setLoginDialogV2(this);
             contentFrameLayout.addView(accountLoginView);
             viewPageList.add(accountLoginView);
+        }
+        String platform = GamaDataHelper.getGamaSelectedPlatform(getContext());
+        accountLoginView.setPlatform(platform);
+        if(GamaDataHelper.PLATFORM_EVATAR.equals(platform)) {
+            accountLoginView.setRegisterVisible(true);
+        } else {
+            accountLoginView.setRegisterVisible(false);
         }
 
         for (View childView : viewPageList) {
@@ -248,6 +261,28 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
             }
 
             if (childView == accountLoginView){
+                childView.setVisibility(View.VISIBLE);
+            }else{
+                childView.setVisibility(View.GONE);
+            }
+        }
+    }
+
+    public void toGamaLoginView() {
+        if (gamaLoginView == null || !viewPageList.contains(gamaLoginView)){
+            gamaLoginView = new GamaLoginLayoutV2(context);
+            gamaLoginView.setLoginDialogV2(this);
+            contentFrameLayout.addView(gamaLoginView);
+            viewPageList.add(gamaLoginView);
+        }
+
+        for (View childView : viewPageList) {
+
+            if (childView == null){
+                continue;
+            }
+
+            if (childView == gamaLoginView){
                 childView.setVisibility(View.VISIBLE);
             }else{
                 childView.setVisibility(View.GONE);
@@ -350,7 +385,6 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
         }
 
     }
-
 
     public void toBindUniqueView() {
 

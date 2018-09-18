@@ -33,6 +33,12 @@ android {
 
 }
 
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
 def getAarVersion() {
     return 'v1.0.1.0'
 }
@@ -42,7 +48,9 @@ dependencies {
     compile project(':libraries-src:GamaBaseLib')
     compile project(':libraries-src:gama-pay')
     compile project(':Thirdlibrary')
+    compile(name: 'GamaMobiSDK_20180914_3', ext: 'aar')
     //    compile 'com.android.support:recyclerview-v7:25.3.1'
+//    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
 }
 
 

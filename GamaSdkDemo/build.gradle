@@ -12,6 +12,8 @@ android {
         ndk {
             abiFilters "armeabi", "armeabi-v7a", "x86"  // 指定要ndk需要兼容的架构(这样其他依赖包里mips之类的.so会被过滤掉)
         }
+
+        multiDexEnabled true
     }
 
     android.applicationVariants.all { variant ->
@@ -109,10 +111,11 @@ android {
             resValue "string", "facebook_app_id", "1040235646130047"
             resValue "string", "fb_login_protocol_scheme", "fb1040235646130047"
             resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1040235646130047"
-            resValue "string", "gama_login_pre_url", "http://200.200.200.106:8080/login/"
-            resValue "string", "gama_login_spa_url", "http://200.200.200.106:8080/login/"
-            resValue "string", "gama_pay_pre_url", "http://200.200.200.106:8080/pay/"
-            resValue "string", "gama_pay_spa_url", "http://200.200.200.106:8080/pay/"
+            //测试工程地址
+            resValue "string", "gama_login_pre_url", "http://200.200.200.105:8080/login/"
+            resValue "string", "gama_login_spa_url", "http://200.200.200.105:8080/login/"
+            resValue "string", "gama_pay_pre_url", "http://200.200.200.105:8080/pay/"
+            resValue "string", "gama_pay_spa_url", "http://200.200.200.105:8080/pay/"
             signingConfig signingConfigs.release
         }
         mytest {
@@ -140,9 +143,16 @@ android {
     }
 }
 
+repositories {
+    flatDir {
+        dirs 'libs', '../GamaSDK/libs'
+    }
+}
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':GamaSDK')
+    compile 'com.android.support:multidex:1.0.1'
     //    compile 'com.android.support:multidex:1.0.2'
 //    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
 }

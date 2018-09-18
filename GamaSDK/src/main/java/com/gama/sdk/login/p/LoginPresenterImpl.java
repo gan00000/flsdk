@@ -1,7 +1,10 @@
 package com.gama.sdk.login.p;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v4.app.Fragment;
@@ -15,6 +18,7 @@ import com.core.base.utils.SStringUtil;
 import com.core.base.utils.SignatureUtil;
 import com.core.base.utils.ToastUtils;
 import com.facebook.AccessToken;
+import com.facebook.FacebookSdk;
 import com.gama.base.bean.SLoginType;
 import com.gama.base.cfg.ResConfig;
 import com.gama.base.utils.GamaUtil;
@@ -129,13 +133,14 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     }
 
     @Override
-    public void fbLogin(Activity activity) {
+    public void fbLogin(final Activity activity) {
         this.mActivity = activity;
         if (sFacebookProxy != null) {
             sFbLogin(activity, sFacebookProxy, new FbLoginCallBack() {
                 @Override
                 public void loginSuccess(String fbScopeId, String businessId, String tokenForBusiness) {
                     fbThirdLogin(fbScopeId, businessId, tokenForBusiness);
+                    sFacebookProxy.fbLogout(activity);
                 }
             });
         }
@@ -170,6 +175,11 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 PL.i("google sign in failure");
             }
         });
+    }
+
+    @Override
+    public void evaLogin(Activity activity) {
+
     }
 
     //目前Google登录使用到，fb登录没有使用
@@ -547,32 +557,33 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
      * Facebook登录实现
      */
     private void sFbLogin(final Activity activity, final SFacebookProxy sFacebookProxy, final FbLoginCallBack fbLoginCallBack) {
-        String fbThirdId = FbSp.getFbId(activity);
-        String businessId = FbSp.getAppsBusinessId(activity);
-        String tokenBusiness = FbSp.getTokenForBusiness(activity);
-        if(!TextUtils.isEmpty(fbThirdId)) {
-            PL.i(TAG, "Facebook登入使用緩存登入");
-            if(TextUtils.isEmpty(businessId)) {
-                businessId = fbThirdId + "_" + FbResUtil.findStringByName(activity,"facebook_app_id");
-            }
-            PL.i(TAG, "Facebook ThirdId: " + fbThirdId);
-            PL.i(TAG, "Facebook businessId: " + businessId);
-            PL.i(TAG, "Facebook tokenBusiness: " + tokenBusiness);
-            if(fbLoginCallBack != null) {
-                fbLoginCallBack.loginSuccess(fbThirdId, businessId, tokenBusiness);
-            } else {
-                PL.i(TAG, "Facebook 登入回調為空");
-            }
-            return;
-        } else {
-            PL.i(TAG, "沒有Facebook緩存，正式登入");
-        }
+//        String fbThirdId = FbSp.getFbId(activity);
+//        String businessId = FbSp.getAppsBusinessId(activity);
+//        String tokenBusiness = FbSp.getTokenForBusiness(activity);
+//        if(!TextUtils.isEmpty(fbThirdId)) {
+//            PL.i(TAG, "Facebook登入使用緩存登入");
+//            if(TextUtils.isEmpty(businessId)) {
+//                businessId = fbThirdId + "_" + FbResUtil.findStringByName(activity,"facebook_app_id");
+//            }
+//            PL.i(TAG, "Facebook ThirdId: " + fbThirdId);
+//            PL.i(TAG, "Facebook businessId: " + businessId);
+//            PL.i(TAG, "Facebook tokenBusiness: " + tokenBusiness);
+//            if(fbLoginCallBack != null) {
+//                fbLoginCallBack.loginSuccess(fbThirdId, businessId, tokenBusiness);
+//            } else {
+//                PL.i(TAG, "Facebook 登入回調為空");
+//            }
+//            return;
+//        } else {
+//            PL.i(TAG, "沒有Facebook緩存，正式登入");
+//        }
+//
+//        if (sFacebookProxy == null) {
+//            PL.i(TAG, "Facebook Proxy為null");
+//            return;
+//        }
 
-        if (sFacebookProxy == null) {
-            PL.i(TAG, "Facebook Proxy為null");
-            return;
-        }
-        SFacebookProxy.FbLoginCallBack fbLoginCallBack1 = new SFacebookProxy.FbLoginCallBack() {
+        final SFacebookProxy.FbLoginCallBack fbLoginCallBack1 = new SFacebookProxy.FbLoginCallBack() {
             @Override
             public void onCancel() {
                 PL.d(TAG, "sFbLogin cancel");
@@ -613,13 +624,40 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             }
         };
 
-        if (fragment == null) {
-            sFacebookProxy.fbLogin(activity, fbLoginCallBack1);
-        }else {
+        // TODO: 2018/9/13 测试两个applicationId
+        AlertDialog dialog = new AlertDialog.Builder(getActivity())
+                .setPositiveButton("使用Application ID 1", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        FacebookSdk.setApplicationId("1040235646130047");
+                        if (fragment == null) {
+                            sFacebookProxy.fbLogin(activity, fbLoginCallBack1);
+                        }else {
+                            sFacebookProxy.fbLogin(fragment, fbLoginCallBack1);
 
-            sFacebookProxy.fbLogin(fragment, fbLoginCallBack1);
+                        }
+                    }
+                })
+                .setNegativeButton("使用Application ID 2", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        FacebookSdk.setApplicationId("812834892144520");
+                        if (fragment == null) {
+                            sFacebookProxy.fbLogin(activity, fbLoginCallBack1);
+                        }else {
+                            sFacebookProxy.fbLogin(fragment, fbLoginCallBack1);
 
-        }
+                        }
+                    }
+                }).create();
+        dialog.show();
+//        if (fragment == null) {
+//            sFacebookProxy.fbLogin(activity, fbLoginCallBack1);
+//        }else {
+//
+//            sFacebookProxy.fbLogin(fragment, fbLoginCallBack1);
+//
+//        }
     }
 
     /**

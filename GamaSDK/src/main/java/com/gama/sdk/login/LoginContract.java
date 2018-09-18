@@ -46,10 +46,11 @@ public class LoginContract {
 
         void fbLogin(Activity activity);
         void googleLogin(Activity activity);
+        void evaLogin(Activity activity);
+        void macLogin(Activity activity);
 
         void thirdPlatLogin(Activity activity, ThirdLoginRegRequestBean thirdLoginRegRequestBean);
 
-        void macLogin(Activity activity);
 
         void register(Activity activity, String account, String pwd, String email);
         void changePwd(Activity activity, String account, String oldPwd, String newPwd);
