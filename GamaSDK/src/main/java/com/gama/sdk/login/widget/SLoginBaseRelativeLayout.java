@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.baplay.newbaplaysdk.core.tag.Constant;
 import com.gama.base.utils.Localization;
 import com.gama.sdk.SBaseRelativeLayout;
 import com.gama.sdk.login.SLoginDialogV2;
@@ -24,7 +23,6 @@ public abstract class SLoginBaseRelativeLayout extends SBaseRelativeLayout {
     Context context;
     LayoutInflater inflater;
 
-    protected String platform;
     protected SLoginDialogV2 sLoginDialogv2;
 
     protected View backView;
@@ -87,13 +85,5 @@ public abstract class SLoginBaseRelativeLayout extends SBaseRelativeLayout {
      */
     public View getBackView() {
         return backView;
-    }
-
-    public String getPlatform() {
-        return platform;
-    }
-
-    public void setPlatform(String platform) {
-        this.platform = platform;
     }
 }

@@ -16,11 +16,10 @@ import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
 import com.gama.base.utils.GamaUtil;
 import com.gama.sdk.R;
-import com.gama.sdk.login.utils.GamaDataHelper;
 import com.gama.sdk.login.widget.SLoginBaseRelativeLayout;
 
 /**
- * 平台登入，输入登录账密主页面
+ * Created by GanYuanrong on 2017/2/6.
  */
 
 public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
@@ -39,6 +38,8 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
     private View loginMainGoFindPwd;
     private View loginMainFreeRegLogin;
     private View loginMainGoAccountCenter;
+
+
 
     public PyAccountLoginV2(Context context) {
         super(context);
@@ -109,22 +110,18 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
             @Override
             public void onClick(View v) {
 //                sLoginActivity.replaceFragment(new AccountLoginFragment());
-                if(GamaDataHelper.PLATFORM_EVATAR.equals(platform)) {
-                    sLoginDialogv2.toMainLoginView();
-                } else if(GamaDataHelper.PLATFORM_GAMAMOBI.equals(platform)) {
-                    sLoginDialogv2.toGamaLoginView();
-                }
+                sLoginDialogv2.toMainLoginView();
             }
         });
 
-//        if(GamaDataHelper.PLATFORM_EVATAR.equals(platform) && loginMainGoRegisterBtn != null) {
         loginMainGoRegisterBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+//                sLoginActivity.replaceFragmentBackToStack(new AccountRegisterFragment());
+
                 sLoginDialogv2.toRegisterView(2);
             }
         });
-//        }
 
         loginMainGoFindPwd.setOnClickListener(new OnClickListener() {
             @Override
@@ -219,12 +216,5 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
 
     }
 
-    public void setRegisterVisible(boolean visible) {
-        if(visible && loginMainGoRegisterBtn != null) {
-            loginMainGoRegisterBtn.setVisibility(VISIBLE);
-        } else if(!visible && loginMainGoRegisterBtn != null) {
-            loginMainGoRegisterBtn.setVisibility(INVISIBLE);
-        }
-    }
 
 }

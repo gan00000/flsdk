@@ -269,8 +269,6 @@
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/sp_20"
                     android:textStyle="bold"
-                    android:visibility="invisible"
-                    android:clickable="false"
                     android:layout_marginLeft="@dimen/px_20"
                     />
 

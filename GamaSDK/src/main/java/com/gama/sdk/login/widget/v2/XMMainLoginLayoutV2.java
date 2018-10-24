@@ -9,18 +9,17 @@ import android.widget.ImageView;
 import com.gama.base.bean.SGameLanguage;
 import com.gama.base.utils.Localization;
 import com.gama.sdk.R;
-import com.gama.sdk.login.utils.GamaDataHelper;
 import com.gama.sdk.login.widget.SLoginBaseRelativeLayout;
 
 /**
- * evatar选择登入方式主页
+ * Created by GanYuanrong on 2017/2/6.
  */
 
 public class XMMainLoginLayoutV2 extends SLoginBaseRelativeLayout implements View.OnClickListener {
 
     private View contentView;
 
-    private View fbLoginView, starLoginView, macLoginView, googleLoginView, evaLoginView;
+    private View fbLoginView, starLoginView, macLoginView, googleLoginView;
 //    private View starpyRegView;
 
     public XMMainLoginLayoutV2(Context context) {
@@ -42,30 +41,20 @@ public class XMMainLoginLayoutV2 extends SLoginBaseRelativeLayout implements Vie
 
     public View onCreateView(LayoutInflater inflater) {
 
-        contentView = inflater.inflate(R.layout.v2_main_login_page_eva, null);
-//        contentView = inflater.inflate(R.layout.v2_main_login_page_xm, null);
+        contentView = inflater.inflate(R.layout.v2_main_login_page_xm, null);
 
-        fbLoginView = contentView.findViewById(R.id.iv_facebook_login);
-        starLoginView = contentView.findViewById(R.id.iv_gama_login);
-        macLoginView = contentView.findViewById(R.id.iv_free_login);
-        googleLoginView = contentView.findViewById(R.id.iv_google_login);
-        evaLoginView = contentView.findViewById(R.id.iv_evatar_login);
+        fbLoginView = contentView.findViewById(R.id.btn_xm_facebook_login_iv);
+        starLoginView = contentView.findViewById(R.id.btn_xm_member_login_iv);
+        macLoginView = contentView.findViewById(R.id.btn_xm_guest_login_iv);
+
+//        starpyRegView = contentView.findViewById(R.id.btn_xm_member_register_iv);
+        googleLoginView = contentView.findViewById(R.id.btn_xm_google_login_iv);
 
         fbLoginView.setOnClickListener(this);
         starLoginView.setOnClickListener(this);
         macLoginView.setOnClickListener(this);
+//        starpyRegView.setOnClickListener(this);
         googleLoginView.setOnClickListener(this);
-        evaLoginView.setOnClickListener(this);
-
-//        fbLoginView = contentView.findViewById(R.id.btn_xm_facebook_login_iv);
-//        starLoginView = contentView.findViewById(R.id.btn_xm_member_login_iv);
-//        macLoginView = contentView.findViewById(R.id.btn_xm_guest_login_iv);
-//        googleLoginView = contentView.findViewById(R.id.btn_xm_google_login_iv);
-
-//        fbLoginView.setOnClickListener(this);
-//        starLoginView.setOnClickListener(this);
-//        macLoginView.setOnClickListener(this);
-//        googleLoginView.setOnClickListener(this);
 
         if (Localization.getSGameLanguage(getActivity()) == SGameLanguage.en_US){
             ((ImageView)macLoginView).setImageResource(R.drawable.btn_xm_guest_login_en);
@@ -83,18 +72,15 @@ public class XMMainLoginLayoutV2 extends SLoginBaseRelativeLayout implements Vie
         if (v == fbLoginView){
             sLoginDialogv2.getLoginPresenter().fbLogin(sLoginDialogv2.getActivity());
         }else if (v == starLoginView) {
-            GamaDataHelper.saveSelectPlatform(getContext(), GamaDataHelper.PLATFORM_GAMAMOBI);
-            sLoginDialogv2.toGamaLoginView();
+
+            sLoginDialogv2.toAccountLoginView();
         }else if(v == macLoginView){
             sLoginDialogv2.getLoginPresenter().macLogin(sLoginDialogv2.getActivity());
         }else if (v == googleLoginView){
             //google+登录
             sLoginDialogv2.getLoginPresenter().googleLogin(sLoginDialogv2.getActivity());
-        } else if(v == evaLoginView) {
-            GamaDataHelper.saveSelectPlatform(getContext(), GamaDataHelper.PLATFORM_EVATAR);
-            sLoginDialogv2.toAccountLoginView();
-        }
 
+        }
     }
 
 

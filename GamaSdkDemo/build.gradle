@@ -131,6 +131,19 @@ android {
             resValue "string", "fb_login_protocol_scheme", "fb812834892144520"
             signingConfig signingConfigs.release
         }
+        fsztm {
+            applicationId "com.baplay.fsztm"
+            minSdkVersion 18
+            targetSdkVersion 27
+            versionCode 1
+            versionName "1.0"
+            flavorDimensions "1"
+//            resValue "string", "facebook_app_name", ""
+            resValue "string", "facebook_app_id", "1040235646130047"
+            resValue "string", "fb_login_protocol_scheme", "fb1040235646130047"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1040235646130047"
+            signingConfig signingConfigs.release
+        }
     }
 
     android {

@@ -279,25 +279,49 @@ public class SFacebookProxy {
 		});
 
 		AccessToken accessToken = AccessToken.getCurrentAccessToken();
-//		if (accessToken != null && !accessToken.isExpired()) {
-//			Log.d(FB_TAG, "login result: onSuccess: accessToken != null" );
-//			String fbThirdId = accessToken.getUserId();
-//			String appId = accessToken.getApplicationId();
-//			String token = accessToken.getToken();
-//			Log.d(FB_TAG, "fbThirdId: " + fbThirdId + "  appId: " + appId + "  token: " + token);
-//			User user = new User();
-//			user.setUserId(fbThirdId);
-//			user.setAccessTokenString(token);
-//			user.setFacebookAppId(appId);
-//			if(fbLoginCallBack != null) {
-//				fbLoginCallBack.onSuccess(user);
-//			}
-//		} else {
+		if (accessToken != null && !accessToken.isExpired()) {
+			Log.d(FB_TAG, "login result: onSuccess: accessToken != null" );
+			String fbThirdId = accessToken.getUserId();
+			String appId = accessToken.getApplicationId();
+			String token = accessToken.getToken();
+			Log.d(FB_TAG, "fbThirdId: " + fbThirdId + "  appId: " + appId + "  token: " + token);
+			User user = new User();
+			user.setUserId(fbThirdId);
+			user.setAccessTokenString(token);
+			user.setFacebookAppId(appId);
+			if(fbLoginCallBack != null) {
+				fbLoginCallBack.onSuccess(user);
+			}
+		} else {
 			Log.d(FB_TAG, "accessToken == null");
 			loginManager.setDefaultAudience(defaultAudience);
 			loginManager.setLoginBehavior(loginBehavior);
 			loginManager.logInWithReadPermissions(activity, permissions);
-//		}
+//			Log.d(FB_TAG, "accessToken == " + accessToken);
+//			getMyProfile(activity, new FbLoginCallBack() {
+//				@Override
+//				public void onCancel() {
+//					Log.d(FB_TAG, "onCancel");
+//					if (fbLoginCallBack != null) {
+//						fbLoginCallBack.onCancel();
+//					}
+//				}
+//
+//				@Override
+//				public void onError(String message) {
+//					Log.d(FB_TAG, "onError:" + message);
+//					if (fbLoginCallBack != null) {
+//						fbLoginCallBack.onError(message);
+//					}
+//				}
+//
+//				@Override
+//				public void onSuccess(User user) {
+//					FbSp.saveFbId(activity,user.getUserId());
+//					requestTokenForBusines(activity,user, fbLoginCallBack);
+//				}
+//			});
+		}
 
 	}
 

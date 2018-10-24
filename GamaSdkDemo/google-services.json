@@ -1,35 +1,35 @@
 {
   "project_info": {
-    "project_number": "312577620199",
-    "firebase_url": "https://ezfy-7dedb.firebaseio.com",
-    "project_id": "ezfy-7dedb",
-    "storage_bucket": "ezfy-7dedb.appspot.com"
+    "project_number": "296083768851",
+    "firebase_url": "https://play-fsztm.firebaseio.com",
+    "project_id": "play-fsztm",
+    "storage_bucket": "play-fsztm.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:312577620199:android:c00c34d0d91ef49e",
+        "mobilesdk_app_id": "1:296083768851:android:831c7e380a4299a7",
         "android_client_info": {
-          "package_name": "com.gamamobi.ezfy"
+          "package_name": "com.baplay.fsztm"
         }
       },
       "oauth_client": [
         {
-          "client_id": "312577620199-if9h3q62vm7kkhfp4qcgqspj0uk9d188.apps.googleusercontent.com",
+          "client_id": "296083768851-c8qm1355i27rd11r89kgmea2gf7iceg6.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.gamamobi.ezfy",
-            "certificate_hash": "f70eda06327547eaac632d14e9617217224420f2"
+            "package_name": "com.baplay.fsztm",
+            "certificate_hash": "1049634c34c7a85cf7981ae512e2dc905e4b8da2"
           }
         },
         {
-          "client_id": "312577620199-oar3l6vrh69icvr37ekm18g0jkh7t7s1.apps.googleusercontent.com",
+          "client_id": "296083768851-e29dkc0uuklqfgkocqjj5ricon5oja43.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDHuODEmy-K_5Kg_sUPpVT-FqzGia8tXQM"
+          "current_key": "AIzaSyBBOXkTvCaY2QGb0cCGiJ662ySR36BQyzs"
         }
       ],
       "services": {
@@ -40,51 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "312577620199-oar3l6vrh69icvr37ekm18g0jkh7t7s1.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:312577620199:android:55d062b5c953e470",
-        "android_client_info": {
-          "package_name": "com.gamamobi.ezfy.wp"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "312577620199-nh7fkn25me9uv81bpm3gh23feh40rn36.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.gamamobi.ezfy.wp",
-            "certificate_hash": "f70eda06327547eaac632d14e9617217224420f2"
-          }
-        },
-        {
-          "client_id": "312577620199-oar3l6vrh69icvr37ekm18g0jkh7t7s1.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDHuODEmy-K_5Kg_sUPpVT-FqzGia8tXQM"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "312577620199-oar3l6vrh69icvr37ekm18g0jkh7t7s1.apps.googleusercontent.com",
+              "client_id": "296083768851-e29dkc0uuklqfgkocqjj5ricon5oja43.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
