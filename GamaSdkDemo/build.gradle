@@ -139,9 +139,9 @@ android {
             versionName "1.0"
             flavorDimensions "1"
 //            resValue "string", "facebook_app_name", ""
-            resValue "string", "facebook_app_id", "1040235646130047"
-            resValue "string", "fb_login_protocol_scheme", "fb1040235646130047"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1040235646130047"
+            resValue "string", "facebook_app_id", "278115919495359"
+            resValue "string", "fb_login_protocol_scheme", "fb278115919495359"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider278115919495359"
             signingConfig signingConfigs.release
         }
     }

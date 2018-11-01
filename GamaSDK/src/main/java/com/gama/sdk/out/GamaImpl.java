@@ -37,6 +37,7 @@ import com.gama.sdk.callback.IPayListener;
 import com.gama.sdk.login.DialogLoginImpl;
 import com.gama.sdk.login.ILogin;
 import com.gama.sdk.plat.PlatMainActivity;
+import com.gama.sdk.utils.LogTimer;
 import com.gama.thirdlib.facebook.SFacebookProxy;
 import com.gama.thirdlib.google.SGooglePlayGameServices;
 
@@ -85,6 +86,9 @@ public class GamaImpl implements IGama {
 
                 //广告
                 StarEventLogger.activateApp(activity);
+
+                //时间打点开始
+                LogTimer.getInstance().start(activity);
 
                 setGameLanguage(activity,SGameLanguage.zh_TW);
 
@@ -412,6 +416,8 @@ public class GamaImpl implements IGama {
         if (sFacebookProxy != null){
             sFacebookProxy.onDestroy(activity);
         }
+        //时间打点结束
+        LogTimer.getInstance().cancel();
         //退出游戏时停止定时查单
         GooglePayHelper.getInstance().stopQueryTask();
     }
