@@ -1,11 +1,11 @@
 apply plugin: 'com.android.library'
 android {
     compileSdkVersion 26
-    buildToolsVersion '26.0.2'
+    buildToolsVersion '28.0.2'
 
     defaultConfig {
         minSdkVersion 18
-        targetSdkVersion 25
+        targetSdkVersion 27
 
         //设置改jar版本
         buildConfigField "String", JAR_VERSION, SDK_VERSION_NAME_PY_PAY
@@ -24,7 +24,7 @@ android {
 }
 
 dependencies {
-    compile project(':libraries-src:GamaBaseLib')
+    api project(':libraries-src:GamaBaseLib')
 }
 
 

@@ -2,6 +2,11 @@ apply plugin: 'com.android.library'
 
 android {
 
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 27
+    }
+
     lintOptions {
         abortOnError false
     }
@@ -15,7 +20,7 @@ android {
     }
 
     compileSdkVersion 27
-    buildToolsVersion '26.0.2'
+    buildToolsVersion '28.0.2'
     defaultConfig {
         minSdkVersion 18
         targetSdkVersion 27
@@ -44,10 +49,10 @@ def getAarVersion() {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(':libraries-src:GamaBaseLib')
-    compile project(':libraries-src:gama-pay')
-    compile project(':Thirdlibrary')
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    api project(':libraries-src:GamaBaseLib')
+    api project(':libraries-src:gama-pay')
+    api project(':Thirdlibrary')
     //    compile 'com.android.support:recyclerview-v7:25.3.1'
 //    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
 }
@@ -63,9 +68,13 @@ task clearJar(type: Delete) {
 }
 
 //打包生成test.jar
-task makeLibraryJar(type:org.gradle.api.tasks.bundling.Jar) {
+task makeLibraryJar(type: Copy) {
     //指定生成的jar名
-    baseName getJarName()
+//    baseName getJarName()
+
+    //从哪里打包class文件,可以指定文件和目录
+    from('build/intermediates/packaged-classes/release/')
+    include ('classes.jar')
 
     //去掉不需要打包的目录和文件
     exclude 'META-INF/LICENSE.txt'
@@ -75,9 +84,10 @@ task makeLibraryJar(type:org.gradle.api.tasks.bundling.Jar) {
     exclude "**/**/BuildConfig\$*.class"
     exclude "**/R.class"
     exclude "**/R\$*.class"
-
-    //从哪里打包class文件,可以指定文件和目录
-    from('build/intermediates/classes/release/')
+    exclude "com/gama/sdk/BuildConfig.class"
+    exclude('test/', 'BuildConfig.class', 'R.class')
+    into('build/outputs/libs/')
+    rename ('classes.jar', "${getJarName()}.jar")
     //打包到jar后的目录结构
 //    into('./')
 }

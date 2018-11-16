@@ -1,11 +1,14 @@
 package com.gama.sdk.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.core.base.utils.PL;
 import com.facebook.appevents.AppEventsLogger;
+import com.gama.sdk.ads.GamaAdsConstant;
+import com.gama.sdk.ads.StarEventLogger;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -20,9 +23,8 @@ public class LogTimer {
 
     private static LogTimer instance;
     private long startTime;
-    private Context context;
+    private Activity context;
     private boolean isCanceled = true;
-    private AppEventsLogger logger;
 
     public static LogTimer getInstance() {
         if (instance == null) {
@@ -33,10 +35,9 @@ public class LogTimer {
 
     private Timer timer;
 
-    public void start(Context context) {
+    public void start(Activity context) {
         this.context = context;
         if (isCanceled) {
-            logger = AppEventsLogger.newLogger(context);
             startTime = System.currentTimeMillis();
             timer = new Timer(true);
             TimerTask task = new TimerTask() {
@@ -70,17 +71,17 @@ public class LogTimer {
     private void log(SharedPreferences sp, long time) {
         if(time >= 10000 * 60 && !sp.getBoolean("log_1", false)) {
 //            Log.i("LogTimer", "此程式從第一次啟動後，運作了 10 秒");
-            logger.logEvent("10min");
+            StarEventLogger.trackingWithEventName(context, GamaAdsConstant.GAMA_EVENT_10_MIN);
             sp.edit().putBoolean("log_1", true).apply();
         }
         if(time >= 20000 * 60 && !sp.getBoolean("log_2", false)) {
 //            Log.i("LogTimer", "此程式從第一次啟動後，運作了 20 秒");
-            logger.logEvent("20min");
+            StarEventLogger.trackingWithEventName(context, GamaAdsConstant.GAMA_EVENT_20_MIN);
             sp.edit().putBoolean("log_2", true).apply();
         }
         if(time >= 30000 * 60 && !sp.getBoolean("log_3", false)) {
 //            Log.i("LogTimer", "此程式從第一次啟動後，運作了 30 秒，任務完成。");
-            logger.logEvent("30min");
+            StarEventLogger.trackingWithEventName(context, GamaAdsConstant.GAMA_EVENT_30_MIN);
             sp.edit().putBoolean("log_3", true).apply();
             cancel();
         } else if (time >= 30000 * 60) {

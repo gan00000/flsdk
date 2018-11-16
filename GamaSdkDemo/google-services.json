@@ -1,35 +1,35 @@
 {
   "project_info": {
-    "project_number": "296083768851",
-    "firebase_url": "https://play-fsztm.firebaseio.com",
-    "project_id": "play-fsztm",
-    "storage_bucket": "play-fsztm.appspot.com"
+    "project_number": "1004969904571",
+    "firebase_url": "https://gamamobi-sds.firebaseio.com",
+    "project_id": "gamamobi-sds",
+    "storage_bucket": "gamamobi-sds.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:296083768851:android:831c7e380a4299a7",
+        "mobilesdk_app_id": "1:1004969904571:android:fda4bedcfafb8f53",
         "android_client_info": {
-          "package_name": "com.baplay.fsztm"
+          "package_name": "com.gamamobi.sds"
         }
       },
       "oauth_client": [
         {
-          "client_id": "296083768851-c8qm1355i27rd11r89kgmea2gf7iceg6.apps.googleusercontent.com",
+          "client_id": "1004969904571-s8hl65r1jhcqokc9hbvn0p61msamvi21.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.baplay.fsztm",
-            "certificate_hash": "1049634c34c7a85cf7981ae512e2dc905e4b8da2"
+            "package_name": "com.gamamobi.sds",
+            "certificate_hash": "f70eda06327547eaac632d14e9617217224420f2"
           }
         },
         {
-          "client_id": "296083768851-e29dkc0uuklqfgkocqjj5ricon5oja43.apps.googleusercontent.com",
+          "client_id": "1004969904571-cqr2hgjfargge5no0jropq9vkgn7pge8.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBBOXkTvCaY2QGb0cCGiJ662ySR36BQyzs"
+          "current_key": "AIzaSyCdSapmAjJxVaQvAdy6FVV3Ex8FbhnxQ-8"
         }
       ],
       "services": {
@@ -40,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "296083768851-e29dkc0uuklqfgkocqjj5ricon5oja43.apps.googleusercontent.com",
+              "client_id": "1004969904571-cqr2hgjfargge5no0jropq9vkgn7pge8.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

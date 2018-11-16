@@ -180,6 +180,36 @@ public class StarEventLogger {
         AppsFlyerLib.getInstance().trackEvent(context, AFInAppEventType.PURCHASE, eventValues);
     }
 
+    public static void trackingWithEventName(Activity context, String eventName) {
+        try {
+            String userId = GamaUtil.getUid(context);
+            HashMap<String, Object> map = new HashMap<>();
+            map.put(GamaAdsConstant.GAMA_EVENT_ROLEID, GamaUtil.getRoleId(context));
+            map.put(GamaAdsConstant.GAMA_EVENT_ROLENAME, GamaUtil.getRoleName(context));
+            map.put(GamaAdsConstant.GAMA_EVENT_ROLE_LEVEL, GamaUtil.getRoleLevel(context));
+            map.put(GamaAdsConstant.GAMA_EVENT_ROLE_VIP_LEVEL, GamaUtil.getRoleVip(context));
+            map.put(GamaAdsConstant.GAMA_EVENT_SERVERCODE, GamaUtil.getServerCode(context));
+            map.put(GamaAdsConstant.GAMA_EVENT_SERVERNAME, GamaUtil.getServerName(context));
+
+            //Facebook上报
+            Bundle b = new Bundle();
+            b.putString(GamaAdsConstant.GAMA_EVENT_USER_ID, userId);
+            for (Map.Entry<String, Object> entry : map.entrySet()) {
+                b.putString(entry.getKey(), entry.getValue().toString());
+            }
+            SFacebookProxy.trackingEvent(context, eventName, null, b);
+
+            //firebase上报,
+            SGoogleProxy.firebaseAnalytics(context, eventName, b);
+
+            //AppsFlyer上报
+            map.put(GamaAdsConstant.GAMA_EVENT_USER_ID, userId);
+            AppsFlyerLib.getInstance().trackEvent(context.getApplicationContext(), eventName, map);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * 获取Google ads id，不能在主线程调用
      */

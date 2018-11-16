@@ -4,7 +4,7 @@ apply plugin: 'io.fabric'
 android {
 
     compileSdkVersion 27
-    buildToolsVersion '26.0.2'
+    buildToolsVersion '28.0.2'
 
     defaultConfig {
         minSdkVersion 15
@@ -144,6 +144,19 @@ android {
             resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider278115919495359"
             signingConfig signingConfigs.release
         }
+        sds {
+            applicationId "com.gamamobi.sds"
+            minSdkVersion 18
+            targetSdkVersion 27
+            versionCode 1
+            versionName "1.0"
+            flavorDimensions "1"
+//            resValue "string", "facebook_app_name", ""
+            resValue "string", "facebook_app_id", "362739184296670"
+            resValue "string", "fb_login_protocol_scheme", "fb362739184296670"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider362739184296670"
+            signingConfig signingConfigs.release
+        }
     }
 
     android {
@@ -163,9 +176,12 @@ repositories {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(':GamaSDK')
-    compile 'com.android.support:multidex:1.0.1'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation project(':GamaSDK')
+    implementation 'com.android.support:multidex:1.0.1'
+//    implementation 'com.google.android.gms:play-services-base:15.0.1'
+//    implementation 'com.android.support:recyclerview-v7:27.0.2'
+//    implementation 'com.android.support:support-v4:27.0.2'
     //    compile 'com.android.support:multidex:1.0.2'
 //    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
 }

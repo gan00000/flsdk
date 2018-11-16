@@ -14,6 +14,19 @@ public class GamaAdsConstant {
      */
     public static final String GAMA_EVENT_ROLE_INFO = "gama_role_info";
     /**
+     * 10分钟事件
+     */
+    public static final String GAMA_EVENT_10_MIN = "10min";
+    /**
+     * 20分钟事件
+     */
+    public static final String GAMA_EVENT_20_MIN = "20min";
+    /**
+     * 30分钟事件
+     */
+    public static final String GAMA_EVENT_30_MIN = "30min";
+
+    /**
      * 角色名
      */
     public static final String GAMA_EVENT_ROLENAME = "gama_role_name";
