@@ -1,4 +1,4 @@
-include ':GamaSDK', ':GamaSdkDemo', ':Thirdlibrary'
+include ':GamaSDK', ':GamaSdkDemo', ':Thirdlibrary', ':youzu'
 //include ':google:google-play-service-src'
 //include ':google:google-play-service-demo'
 
