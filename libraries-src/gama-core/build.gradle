@@ -25,22 +25,22 @@ android {
 }
 
 dependencies {
-    api 'com.google.code.gson:gson:2.8.2'
-    api 'com.android.support:recyclerview-v7:27.0.2'
+//    api 'com.google.code.gson:gson:2.8.2'
+//    api 'com.android.support:recyclerview-v7:27.0.2'
     //Google库
-    api 'com.google.android.gms:play-services-auth:15.0.1'
-    api 'com.google.android.gms:play-services-plus:15.0.1'
-    api 'com.google.android.gms:play-services-base:15.0.1'
-    api 'com.google.android.gms:play-services-games:15.0.1'
-    api 'com.google.firebase:firebase-core:16.0.1'
-    api 'com.crashlytics.sdk.android:crashlytics:2.9.4'
-    api 'com.google.firebase:firebase-messaging:17.1.0'
+//    api 'com.google.android.gms:play-services-auth:15.0.1'
+//    api 'com.google.android.gms:play-services-plus:15.0.1'
+//    api 'com.google.android.gms:play-services-base:15.0.1'
+//    api 'com.google.android.gms:play-services-games:15.0.1'
+//    api 'com.google.firebase:firebase-core:16.0.1'
+//    api 'com.crashlytics.sdk.android:crashlytics:2.9.4'
+//    api 'com.google.firebase:firebase-messaging:17.1.0'
     //Facebook库
-    api 'com.facebook.fresco:fresco:1.9.0'
+//    api 'com.facebook.fresco:fresco:1.9.0'
     api 'com.facebook.android:facebook-login:4.34.0'
     api 'com.facebook.android:facebook-share:4.34.0'
     api 'com.facebook.android:facebook-messenger:4.34.0'
-//    compile project(':facebook:gama-fb-4.25')
+    api project(':youzu')
 }
 
 //./gradlew makeJar 出现env: bash\r: No such file or directory的话是由
@@ -53,9 +53,13 @@ task clearJar(type: Delete) {
 }
 
 //打包生成test.jar
-task makeLibraryJar(type:org.gradle.api.tasks.bundling.Jar) {
-    //指定生成的jar名
-    baseName getJarName()
+task makeLibraryJar(type: Copy) {
+//    指定生成的jar名
+//    baseName getJarName()
+
+    //从哪里打包class文件,可以指定文件和目录
+    from('build/intermediates/packaged-classes/release/')
+    include ('classes.jar')
 
     //去掉不需要打包的目录和文件
     exclude 'META-INF/LICENSE.txt'
@@ -66,8 +70,8 @@ task makeLibraryJar(type:org.gradle.api.tasks.bundling.Jar) {
     exclude "**/R.class"
     exclude "**/R\$*.class"
 
-    //从哪里打包class文件,可以指定文件和目录
-    from('build/intermediates/classes/release/')
+    into('build/outputs/libs/')
+    rename ('classes.jar', "${getJarName()}.jar")
     //打包到jar后的目录结构
 //    into('./')
 }

@@ -49,7 +49,9 @@ def getAarVersion() {
 }
 
 dependencies {
-    api fileTree(include: ['*.jar'], dir: 'libs')
+//    api fileTree(include: ['*.jar'], dir: 'libs')
+    api files('libs/takephoto_library_3.0.1.jar')
+    api files('libs/nineoldandroids-library-2.4.0.jar')
     api project(':libraries-src:GamaBaseLib')
     api project(':libraries-src:gama-pay')
     api project(':Thirdlibrary')
@@ -85,6 +87,8 @@ task makeLibraryJar(type: Copy) {
     exclude "**/R.class"
     exclude "**/R\$*.class"
     exclude "com/gama/sdk/BuildConfig.class"
+    exclude ('com/gama/sdk/BuildConfig.class')
+    exclude ("com/gama/sdk/BuildConfig.class")
     exclude('test/', 'BuildConfig.class', 'R.class')
     into('build/outputs/libs/')
     rename ('classes.jar', "${getJarName()}.jar")

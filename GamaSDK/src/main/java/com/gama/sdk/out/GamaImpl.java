@@ -12,8 +12,6 @@ import com.core.base.utils.AppUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.SignatureUtil;
-import com.core.base.utils.ToastUtils;
-import com.facebook.drawee.backends.pipeline.Fresco;
 import com.gama.base.bean.SGameBaseRequestBean;
 import com.gama.base.bean.SGameLanguage;
 import com.gama.base.bean.SPayType;
@@ -36,7 +34,6 @@ import com.gama.sdk.ads.StarEventLogger;
 import com.gama.sdk.callback.IPayListener;
 import com.gama.sdk.login.DialogLoginImpl;
 import com.gama.sdk.login.ILogin;
-import com.gama.sdk.plat.PlatMainActivity;
 import com.gama.sdk.utils.LogTimer;
 import com.gama.thirdlib.facebook.SFacebookProxy;
 import com.gama.thirdlib.google.SGooglePlayGameServices;
@@ -78,11 +75,11 @@ public class GamaImpl implements IGama {
                 StarEventLogger.registerGoogleAdId(activity);
                 //Gama平台安装上报
                 StarEventLogger.reportInstallActivation(activity.getApplicationContext());
-                try {
-                    Fresco.initialize(activity.getApplicationContext());//初始化fb Fresco库
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+//                try {
+//                    Fresco.initialize(activity.getApplicationContext());//初始化fb Fresco库
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
 
                 //广告
                 StarEventLogger.activateApp(activity);
@@ -447,17 +444,17 @@ public class GamaImpl implements IGama {
     @Override
     public void openPlatform(final Activity activity) {
         PL.i("IGama openPlatform");
-        activity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-
-                if (GamaUtil.isLogin(activity)){
-                    activity.startActivity(new Intent(activity, PlatMainActivity.class));
-                }else {
-                    ToastUtils.toast(activity,"please login game first");
-                }
-            }
-        });
+//        activity.runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//                if (GamaUtil.isLogin(activity)){
+//                    activity.startActivity(new Intent(activity, PlatMainActivity.class));
+//                }else {
+//                    ToastUtils.toast(activity,"please login game first");
+//                }
+//            }
+//        });
 
     }
 }

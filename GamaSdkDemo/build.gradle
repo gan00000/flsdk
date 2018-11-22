@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin: 'io.fabric'
+//apply plugin: 'io.fabric'
 
 android {
 
@@ -132,7 +132,7 @@ android {
             signingConfig signingConfigs.release
         }
         fsztm {
-            applicationId "com.baplay.fsztm"
+            applicationId "com.gamamobi.fsztm"
             minSdkVersion 18
             targetSdkVersion 27
             versionCode 1
@@ -178,7 +178,7 @@ repositories {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':GamaSDK')
-    implementation 'com.android.support:multidex:1.0.1'
+//    implementation 'com.android.support:multidex:1.0.1'
 //    implementation 'com.google.android.gms:play-services-base:15.0.1'
 //    implementation 'com.android.support:recyclerview-v7:27.0.2'
 //    implementation 'com.android.support:support-v4:27.0.2'
@@ -191,4 +191,4 @@ def getReleaseTime() {
     return new Date().format("yyyy-MM-dd-HH-mm", TimeZone.getDefault())
 }
 
-apply plugin: 'com.google.gms.google-services'
+//apply plugin: 'com.google.gms.google-services'

@@ -1,43 +1,46 @@
 package com.gama.sdk.demo;
 
-import android.Manifest;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PermissionInfo;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import com.core.base.utils.PL;
 import com.crashlytics.android.Crashlytics;
-import com.facebook.CallbackManager;
 import com.gama.base.bean.SGameLanguage;
 import com.gama.base.bean.SPayType;
 import com.gama.base.utils.SLog;
 import com.gama.data.login.ILoginCallBack;
 import com.gama.data.login.response.SLoginResponse;
-import com.gama.pay.gp.GooglePayActivity2;
 import com.gama.pay.gp.util.IabHelper;
 import com.gama.pay.gp.util.IabResult;
 import com.gama.pay.gp.util.Inventory;
 import com.gama.pay.gp.util.Purchase;
 import com.gama.sdk.callback.IPayListener;
-import com.gama.sdk.out.ISdkCallBack;
-import com.gama.sdk.out.IGama;
 import com.gama.sdk.out.GamaFactory;
-import com.google.firebase.FirebaseApiNotAvailableException;
+import com.gama.sdk.out.IGama;
+import com.gama.sdk.out.ISdkCallBack;
+import com.gama.thirdlib.facebook.FriendProfile;
+import com.gama.thirdlib.facebook.SFacebookProxy;
 
-import java.util.Iterator;
+import org.json.JSONObject;
+
+import java.io.File;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button loginButton, othersPayButton,googlePayBtn,shareButton, showPlatform, crashlytics, PurchasesHistory;
+    private Button loginButton, othersPayButton,googlePayBtn,shareButton, showPlatform, crashlytics,
+            PurchasesHistory, getFriend, invite, sendText;
     IabHelper mHelper;
     private IGama iGama;
 
@@ -52,9 +55,13 @@ public class MainActivity extends AppCompatActivity {
         othersPayButton = (Button) findViewById(R.id.demo_pay);
         googlePayBtn = (Button) findViewById(R.id.demo_pay_google);
         shareButton = (Button) findViewById(R.id.demo_share);
-        showPlatform = findViewById(R.id.showPlatform);
-        crashlytics = findViewById(R.id.Crashlytics);
-        PurchasesHistory = findViewById(R.id.PurchasesHistory);
+        showPlatform = (Button) findViewById(R.id.showPlatform);
+        crashlytics = (Button) findViewById(R.id.Crashlytics);
+        PurchasesHistory = (Button) findViewById(R.id.PurchasesHistory);
+
+        getFriend = (Button) findViewById(R.id.getFriend);
+        invite = (Button) findViewById(R.id.invite);
+        sendText = (Button) findViewById(R.id.sendText);
 
         iGama = GamaFactory.create();
 
@@ -153,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
                 productId 充值的商品id
                 customize 自定义透传字段（从服务端回调到cp）
                 */
-                iGama.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(), "com.ezfy.1usd", "customize", new IPayListener() {
+                iGama.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(), "com.fsztm.1usd", "customize", new IPayListener() {
                     @Override
                     public void onPayFinish(Bundle bundle) {
                         PL.i("GooglePay结束");
@@ -280,6 +287,85 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        SFacebookProxy.initFbSdk(this);
+        final SFacebookProxy proxy = new SFacebookProxy(MainActivity.this);
+
+        getFriend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                proxy.requestMyFriends(MainActivity.this, new SFacebookProxy.RequestFriendsCallBack() {
+                    @Override
+                    public void onError() {
+                        Log.i("facebook", "error");
+                    }
+
+                    @Override
+                    public void onSuccess(JSONObject graphObject, List<FriendProfile> friendProfiles) {
+                        if(graphObject != null) {
+                            Log.i("facebook", graphObject.toString());
+                        }
+                        if(friendProfiles != null) {
+                            for(FriendProfile profile : friendProfiles) {
+                                Log.i("facebook", "profile: " + profile.toString());
+                            }
+                        }
+                    }
+                });
+            }
+        });
+
+        invite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                proxy.inviteFriends(MainActivity.this, "529074447599533", "标题啊",
+                        "消息内容啊", new SFacebookProxy.FbInviteFriendsCallBack() {
+                            @Override
+                            public void onCancel() {
+                                Log.i("facebook", "cancel");
+                            }
+
+                            @Override
+                            public void onError(String message) {
+                                Log.i("facebook", "error " + message);
+                            }
+
+                            @Override
+                            public void onSuccess(String requestId, List<String> requestRecipients) {
+                                Log.i("facebook", "requestId: " + requestId);
+                                if(requestRecipients != null) {
+                                    for(String s : requestRecipients) {
+                                        Log.i("facebook", "requestRecipients: " +  s);
+                                    }
+                                }
+                            }
+                        });
+            }
+        });
+
+        sendText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Uri linkUri = Uri.parse("https://www.facebook.com/");
+                Uri uri = Uri.fromFile(new File(Environment.getExternalStorageDirectory() + File.separator + "1.jpg"));
+                proxy.shareToMessenger(MainActivity.this, uri, new SFacebookProxy.FbShareCallBack() {
+                    @Override
+                    public void onCancel() {
+                        Log.i("facebook", "cancel");
+                    }
+
+                    @Override
+                    public void onError(String message) {
+                        Log.i("facebook", "error " + message);
+                    }
+
+                    @Override
+                    public void onSuccess() {
+                        Log.i("facebook", "success");
+                    }
+                });
+            }
+        });
     }
 
     private void consume() {
@@ -345,6 +431,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
 
     @Override

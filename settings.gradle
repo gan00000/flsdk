@@ -1,4 +1,4 @@
-include ':GamaSDK', ':GamaSdkDemo', ':Thirdlibrary', ':youzu'
+include ':GamaSDK', ':GamaSdkDemo', ':Thirdlibrary'
 //include ':google:google-play-service-src'
 //include ':google:google-play-service-demo'
 
@@ -10,3 +10,5 @@ include ':libraries-src:gama-core'
 include ':libraries-src:gama-pay'
 //include ':libraries-src:star-ads'
 include ':libraries-src:GamaBaseLib'
+include ':youzu'
+//include ':gamaplatform'

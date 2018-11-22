@@ -38,9 +38,13 @@ task clearJar(type: Delete) {
 }
 
 //打包生成test.jar
-task makeLibraryJar(type:org.gradle.api.tasks.bundling.Jar) {
-    //指定生成的jar名
-    baseName getJarName()
+task makeLibraryJar(type: Copy) {
+//    指定生成的jar名
+//    baseName getJarName()
+
+    //从哪里打包class文件,可以指定文件和目录
+    from('build/intermediates/packaged-classes/release/')
+    include ('classes.jar')
 
     //去掉不需要打包的目录和文件
     exclude 'META-INF/LICENSE.txt'
@@ -51,8 +55,8 @@ task makeLibraryJar(type:org.gradle.api.tasks.bundling.Jar) {
     exclude "**/R.class"
     exclude "**/R\$*.class"
 
-    //从哪里打包class文件,可以指定文件和目录
-    from('build/intermediates/classes/release/')
+    into('build/outputs/libs/')
+    rename ('classes.jar', "${getJarName()}.jar")
     //打包到jar后的目录结构
 //    into('./')
 }

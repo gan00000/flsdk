@@ -1,13 +1,11 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 28
-
-
+    compileSdkVersion 25
 
     defaultConfig {
         minSdkVersion 17
-        targetSdkVersion 28
+        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
 
@@ -25,43 +23,51 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:28.0.0-alpha1'
+//    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    //    implementation 'com.android.support:appcompat-v7:28.0.0-alpha1'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation files('libs/AF-Android-SDK.jar')
-    implementation files('libs/android-support-multidex.jar')
-    implementation files('libs/bolts-android-1.1.2.jar')
-    implementation files('libs/com-crashlytics-sdk-android_answers-classes.jar')
-    implementation files('libs/com-crashlytics-sdk-android_beta-classes.jar')
-    implementation files('libs/com-crashlytics-sdk-android_crashlytics-classes.jar')
-    implementation files('libs/com-crashlytics-sdk-android_crashlytics-core-classes.jar')
-    implementation files('libs/com-google-code-gson_gson.jar')
-    implementation files('libs/com-twitter-sdk-android_twitter-core-classes.jar')
-    implementation files('libs/facebook_4.5.1.jar')
-    implementation files('libs/firebase-analytics-11.0.4.jar')
-    implementation files('libs/firebase-analytics-impl-11.0.4.jar')
-    implementation files('libs/firebase-common-11.0.4.jar')
-    implementation files('libs/firebase-iid-11.0.4.jar')
-    implementation files('libs/framework_common.jar')
-    implementation files('libs/GoogleConversionTrackingSdk-2.2.4.jar')
-    implementation files('libs/io-fabric-sdk-android_fabric-classes.jar')
-    implementation files('libs/module_advert.jar')
-    implementation files('libs/okhttp-3.9.0.jar')
-    implementation files('libs/okio-1.14.1.jar')
-    implementation files('libs/play-services-basement-11.0.4.jar')
-    implementation files('libs/play-services-tasks-11.0.4.jar')
-    implementation files('libs/supersdk.jar')
-    implementation files('libs/support-compatclasses.jar')
-    implementation files('libs/support-compatinternal_impl-25.0.0.jar')
-    implementation files('libs/support-core-uiclasses.jar')
-    implementation files('libs/support-core-uiinternal_impl-25.0.0.jar')
-    implementation files('libs/support-core-utilsclasses.jar')
-    implementation files('libs/support-core-utilsinternal_impl-25.0.0.jar')
-    implementation files('libs/support-fragmentclasses.jar')
-    implementation files('libs/support-fragmentinternal_impl-25.0.0.jar')
-    implementation files('libs/support-media-compatclasses.jar')
-    implementation files('libs/support-media-compatinternal_impl-25.0.0.jar')
-    implementation files('libs/support-vector-drawableclasses.jar')
+    api files('libs/AF-Android-SDK.jar')
+//    api files('libs/android-support-multidex.jar')
+    api files('libs/com-crashlytics-sdk-android_answers-classes.jar')
+    api files('libs/com-crashlytics-sdk-android_beta-classes.jar')
+    api files('libs/com-crashlytics-sdk-android_crashlytics-classes.jar')
+    api files('libs/com-crashlytics-sdk-android_crashlytics-core-classes.jar')
+    api files('libs/com-google-code-gson_gson.jar')
+    api files('libs/com-twitter-sdk-android_twitter-core-classes.jar')
+//    api files('libs/bolts-android-1.1.2.jar')
+//    api files('libs/facebook_4.5.1.jar')
+    api files('libs/firebase-analytics-11.0.4.jar')
+    api files('libs/firebase-analytics-impl-11.0.4.jar')
+    api files('libs/firebase-common-11.0.4.jar')
+    api files('libs/firebase-iid-11.0.4.jar')
+    api files('libs/framework_common.jar')
+    api files('libs/GoogleConversionTrackingSdk-2.2.4.jar')
+    api files('libs/io-fabric-sdk-android_fabric-classes.jar')
+    api files('libs/module_advert.jar')
+    api files('libs/okhttp-3.9.0.jar')
+    api files('libs/okio-1.14.1.jar')
+//    api files('libs/play-services-basement-11.0.4.jar')
+//    api files('libs/play-services-tasks-11.0.4.jar')
+    api files('libs/supersdk.jar')
+//    api files('libs/support-compatclasses.jar')
+//    api files('libs/support-compatinternal_impl-25.0.0.jar')
+//    api files('libs/support-core-uiclasses.jar')
+//    api files('libs/support-core-uiinternal_impl-25.0.0.jar')
+//    api files('libs/support-core-utilsclasses.jar')
+//    api files('libs/support-core-utilsinternal_impl-25.0.0.jar')
+//    api files('libs/support-fragmentclasses.jar')
+//    api files('libs/support-fragmentinternal_impl-25.0.0.jar')
+//    api files('libs/support-media-compatclasses.jar')
+//    api files('libs/support-media-compatinternal_impl-25.0.0.jar')
+//    api files('libs/support-vector-drawableclasses.jar')
+    //游族版本
+    api 'com.android.support:appcompat-v7:25.0.0'
+    api 'com.android.support:recyclerview-v7:25.0.0'
+    //游族版本
+    api 'com.google.android.gms:play-services-auth:11.0.4'
+    api 'com.google.android.gms:play-services-plus:11.0.4'
+    api 'com.google.android.gms:play-services-base:11.0.4'
+    api 'com.google.android.gms:play-services-games:11.0.4'
 }

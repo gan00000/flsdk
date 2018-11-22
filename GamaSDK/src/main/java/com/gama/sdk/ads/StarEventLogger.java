@@ -43,9 +43,9 @@ public class StarEventLogger {
         try {
             AppsFlyerLib.getInstance().setCollectIMEI(false);
             AppsFlyerLib.getInstance().setCollectAndroidID(false);
-            AppsFlyerLib.getInstance().startTracking(activity.getApplication(), ResConfig.getConfigInAssetsProperties(activity,"gama_ads_appflyer_dev_key"));
+//            AppsFlyerLib.getInstance().startTracking(activity.getApplication(), ResConfig.getConfigInAssetsProperties(activity,"gama_ads_appflyer_dev_key"));
 
-//            SFacebookProxy.activateApp(activity.getApplicationContext());
+//            SFacebookProxy.initFbSdk(activity.getApplicationContext());
 
             // Google Android first open conversion tracking snippet
             // Add this code to the onCreate() method of your application activity
@@ -166,18 +166,22 @@ public class StarEventLogger {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //Appsflyer上报
-        Map<String,Object> eventValues = new HashMap<>();
-        //下面是自定义的事件名
-        eventValues.put(GamaAdsConstant.GAMA_EVENT_USER_ID, GamaUtil.getUid(context));
-        eventValues.put(GamaAdsConstant.GAMA_EVENT_PRODUCT_ID, productId);
-        eventValues.put(GamaAdsConstant.GAMA_EVENT_ORDERID, purchase.getOrderId());
-        eventValues.put(GamaAdsConstant.GAMA_EVENT_PURCHASE_TIME, purchase.getPurchaseTime());
-        //下面是AppsFlyer自己的事件名
-        eventValues.put(AFInAppEventParameterName.REVENUE, price);
-        eventValues.put(AFInAppEventParameterName.CURRENCY, "USD");
-        eventValues.put(AFInAppEventParameterName.CONTENT_ID, productId);
-        AppsFlyerLib.getInstance().trackEvent(context, AFInAppEventType.PURCHASE, eventValues);
+        try {
+            //Appsflyer上报
+            Map<String, Object> eventValues = new HashMap<>();
+            //下面是自定义的事件名
+            eventValues.put(GamaAdsConstant.GAMA_EVENT_USER_ID, GamaUtil.getUid(context));
+            eventValues.put(GamaAdsConstant.GAMA_EVENT_PRODUCT_ID, productId);
+            eventValues.put(GamaAdsConstant.GAMA_EVENT_ORDERID, purchase.getOrderId());
+            eventValues.put(GamaAdsConstant.GAMA_EVENT_PURCHASE_TIME, purchase.getPurchaseTime());
+            //下面是AppsFlyer自己的事件名
+            eventValues.put(AFInAppEventParameterName.REVENUE, price);
+            eventValues.put(AFInAppEventParameterName.CURRENCY, "USD");
+            eventValues.put(AFInAppEventParameterName.CONTENT_ID, productId);
+            AppsFlyerLib.getInstance().trackEvent(context, AFInAppEventType.PURCHASE, eventValues);
+        } catch (Exception e1) {
+            e1.printStackTrace();
+        }
     }
 
     public static void trackingWithEventName(Activity context, String eventName) {

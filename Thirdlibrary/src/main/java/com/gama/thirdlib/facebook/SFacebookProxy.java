@@ -57,8 +57,9 @@ public class SFacebookProxy {
 
 	private static DefaultAudience defaultAudience = DefaultAudience.FRIENDS;
 	private static LoginBehavior loginBehavior = LoginBehavior.NATIVE_WITH_FALLBACK;
+	private static List<String> permissions = Arrays.asList("public_profile", "user_friends");
 //	private static List<String> permissions = Arrays.asList("public_profile", "email", "user_friends");
-	private static List<String> permissions = Collections.singletonList("public_profile");
+//	private static List<String> permissions = Collections.singletonList("public_profile");
 	private static final int REQUEST_TOMESSENGER = 16;
 	FbShareCallBack shareCallBack;
 	
@@ -81,9 +82,9 @@ public class SFacebookProxy {
 		PL.i("the jar version:" + BuildConfig.JAR_VERSION);//打印版本号
 	}
 
-//	public static void initFbSdk(Context context){
-//		FacebookSdk.sdkInitialize(context.getApplicationContext());
-//	}
+	public static void initFbSdk(Context context){
+		FacebookSdk.sdkInitialize(context.getApplicationContext());
+	}
 	
 //	public static void activateApp(Context context){
 //
@@ -699,24 +700,24 @@ public class SFacebookProxy {
 	}
 	
 	
-	public void inviteFriends(Activity activity, List<FriendProfile> friendProfileIdsList, String message, final FbInviteFriendsCallBack fbInviteFriendsCallBack) {
-		
+	public void inviteFriends(Activity activity, List<FriendProfile> friendProfileIdsList, String title,
+							  String message, final FbInviteFriendsCallBack fbInviteFriendsCallBack) {
+		List<FriendProfile> invitingList = new ArrayList<>();
 		if (friendProfileIdsList != null && !friendProfileIdsList.isEmpty()) {
 
-			List<FriendProfile> invitingList = new ArrayList<>();
 			for (FriendProfile friend : friendProfileIdsList){
 				if(!TextUtils.isEmpty(friend.getId())){
 					invitingList.add(friend);
 				}
 			}
 
-			inviteFriendinBatches(activity,invitingList,message, fbInviteFriendsCallBack);
 		}
+		inviteFriendinBatches(activity,invitingList, title, message, fbInviteFriendsCallBack);
 	}
 
 	/* 处理分批次邀请的逻辑*/
-	private void inviteFriendinBatches(final Activity activity, final List<FriendProfile>
-			invitingList, final String message, final FbInviteFriendsCallBack callback) {
+	private void inviteFriendinBatches(final Activity activity, final List<FriendProfile> invitingList,
+									   final String title, final String message, final FbInviteFriendsCallBack callback) {
 
 		final List<FriendProfile> currentList = new ArrayList<FriendProfile>();
 		while (currentList.size() < 40 && invitingList.size() > 0) {
@@ -730,12 +731,13 @@ public class SFacebookProxy {
 
 //		final List<String> requestRecipientsId = new ArrayList<String>();
 
-		inviteFriends(activity, stringBuilder.toString(), message, callback);
+		inviteFriends(activity, title, stringBuilder.toString(), message, callback);
 
 	}
 	
 	
-	public void inviteFriends(final Activity activity,final String inviteFriendIds,final String message,final FbInviteFriendsCallBack fbInviteFriendsCallBack) {
+	public void inviteFriends(final Activity activity,final String inviteFriendIds, final String title,
+							  final String message,final FbInviteFriendsCallBack fbInviteFriendsCallBack) {
 		if (TextUtils.isEmpty(message)) {
 			Toast.makeText(activity, "request message is empty", Toast.LENGTH_SHORT).show();
 			return;
@@ -772,13 +774,17 @@ public class SFacebookProxy {
 						}
 					}
 				});
-				
-				 GameRequestContent content = new GameRequestContent.Builder()
-			                .setMessage(message)
-			                .setTo(inviteFriendIds)
-			                
-			                //.setActionType(ActionType.SEND)
-			                .build();
+
+				GameRequestContent.Builder builder = new GameRequestContent.Builder()
+						.setMessage(message);
+				if(!TextUtils.isEmpty(inviteFriendIds)) {
+					builder.setTo(inviteFriendIds);
+				}
+				if (!TextUtils.isEmpty(title)) {
+					builder.setTitle(title);
+				}
+				//.setActionType(ActionType.SEND)
+				GameRequestContent content = builder.build();
 			     requestDialog.show(content);
 				
 			}
@@ -1004,18 +1010,25 @@ public class SFacebookProxy {
 
 		requestMyFriends(activity,null, fbMyFiendsCallBack);
 	}
-	
-	public void shareToMessenger(Activity activity, String picPath, FbShareCallBack fbShareCallBack) {
-		if(TextUtils.isEmpty(picPath)) {
-			Log.e(FB_TAG, "shareToMessenger 图片路径为空");
-			return;
-		}
-		File tempFile = new File(picPath);
-		Uri picUri = Uri.fromFile(tempFile);
-		shareToMessenger(activity, picUri, fbShareCallBack);
-	}
+
+//	@Deprecated
+//	public void shareToMessenger(Activity activity, String picPath, FbShareCallBack fbShareCallBack) {
+//		if(TextUtils.isEmpty(picPath)) {
+//			Log.e(FB_TAG, "shareToMessenger 图片路径为空");
+//			return;
+//		}
+//		File tempFile = new File(picPath);
+//		Uri picUri = Uri.fromFile(tempFile);
+//		shareToMessenger(activity, picUri, null, fbShareCallBack);
+//	}
 	
 	public void shareToMessenger(Activity activity, Uri picUri, FbShareCallBack fbShareCallBack) {
+		if(!MessengerUtils.hasMessengerInstalled(activity)) {
+			if(fbShareCallBack != null) {
+				fbShareCallBack.onError("app not install.");
+			}
+			return;
+		}
 		if(picUri == null) {
 			Log.e(FB_TAG, "shareToMessenger 图片Uri为空");
 			return;
@@ -1023,6 +1036,9 @@ public class SFacebookProxy {
 		this.shareCallBack = fbShareCallBack;
 		String mimeType = "image/*";
 		ShareToMessengerParamsBuilder newBuilder = ShareToMessengerParams.newBuilder(picUri, mimeType);
+//		if(linkUri != null) {
+//			newBuilder.setExternalUri(linkUri);
+//		}
 		ShareToMessengerParams shareToMessengerParams = newBuilder.build();
 		
 		MessengerUtils.shareToMessenger(activity, REQUEST_TOMESSENGER, shareToMessengerParams);
