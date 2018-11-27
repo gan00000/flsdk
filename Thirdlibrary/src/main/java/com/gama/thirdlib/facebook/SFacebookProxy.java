@@ -7,11 +7,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.core.base.callback.ISReqCallBack;
 import com.core.base.utils.PL;
 import com.core.base.utils.ToastUtils;
 import com.facebook.AccessToken;
@@ -22,8 +22,8 @@ import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
-import com.facebook.Profile;
 import com.facebook.appevents.AppEventsLogger;
+import com.facebook.internal.ImageRequest;
 import com.facebook.login.DefaultAudience;
 import com.facebook.login.LoginBehavior;
 import com.facebook.login.LoginManager;
@@ -41,14 +41,14 @@ import com.facebook.share.model.SharePhotoContent;
 import com.facebook.share.widget.GameRequestDialog;
 import com.facebook.share.widget.ShareDialog;
 import com.gama.thirdlib.BuildConfig;
+import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class SFacebookProxy {
@@ -57,7 +57,7 @@ public class SFacebookProxy {
 
 	private static DefaultAudience defaultAudience = DefaultAudience.FRIENDS;
 	private static LoginBehavior loginBehavior = LoginBehavior.NATIVE_WITH_FALLBACK;
-	private static List<String> permissions = Arrays.asList("public_profile", "user_friends");
+	private static List<String> permissions = Arrays.asList("public_profile", "user_friends", "user_birthday", "user_gender");
 //	private static List<String> permissions = Arrays.asList("public_profile", "email", "user_friends");
 //	private static List<String> permissions = Collections.singletonList("public_profile");
 	private static final int REQUEST_TOMESSENGER = 16;
@@ -147,7 +147,7 @@ public class SFacebookProxy {
 		
 	}
 
-	public void fbLogin(final Fragment fragment, final FbLoginCallBack fbLoginCallBack) {
+	/*public void fbLogin(final Fragment fragment, final FbLoginCallBack fbLoginCallBack) {
 		if (loginManager == null) {
 			loginManager = LoginManager.getInstance();
 		}
@@ -221,6 +221,10 @@ public class SFacebookProxy {
 			});
 		}
 
+	}*/
+
+	public void fbLogin(final Activity activity, final FbLoginCallBack fbLoginCallBack) {
+		fbLogin(activity, permissions, fbLoginCallBack);
 	}
 
 
@@ -230,7 +234,7 @@ public class SFacebookProxy {
          * @param fbLoginCallBack
          * @date 2015年11月20日
          */
-	public void fbLogin(final Activity activity, final FbLoginCallBack fbLoginCallBack) {
+	public void fbLogin(final Activity activity, List<String> permissions, final FbLoginCallBack fbLoginCallBack) {
 
 		if (loginManager == null) {
 			loginManager = LoginManager.getInstance();
@@ -251,11 +255,11 @@ public class SFacebookProxy {
 					PL.d(FB_TAG, "fbLoginCallBack null, return");
 					return;
 				}
-				User user = new User();
-				user.setUserId(result.getAccessToken().getUserId());
+				FaceBookUser user = new FaceBookUser();
+				user.setUserFbId(result.getAccessToken().getUserId());
 				user.setAccessTokenString(AccessToken.getCurrentAccessToken().getToken());
 				user.setFacebookAppId(result.getAccessToken().getApplicationId());
-				FbSp.saveFbId(activity,user.getUserId());
+				FbSp.saveFbId(activity,user.getUserFbId());
 //				requestTokenForBusines(activity,user, fbLoginCallBack);
 				if(fbLoginCallBack != null) {
 					fbLoginCallBack.onSuccess(user);
@@ -286,8 +290,8 @@ public class SFacebookProxy {
 			String appId = accessToken.getApplicationId();
 			String token = accessToken.getToken();
 			Log.d(FB_TAG, "fbThirdId: " + fbThirdId + "  appId: " + appId + "  token: " + token);
-			User user = new User();
-			user.setUserId(fbThirdId);
+			FaceBookUser user = new FaceBookUser();
+			user.setUserFbId(fbThirdId);
 			user.setAccessTokenString(token);
 			user.setFacebookAppId(appId);
 			if(fbLoginCallBack != null) {
@@ -332,7 +336,7 @@ public class SFacebookProxy {
 	 * @param user
 	 * @param fbLoginCallBack
 	 */
-	public void requestTokenForBusines(final Activity activity, final User user, final FbLoginCallBack fbLoginCallBack){
+	public void requestTokenForBusines(final Activity activity, final FaceBookUser user, final FbLoginCallBack fbLoginCallBack){
 		AccessToken accessToken =  AccessToken.getCurrentAccessToken();
 		if (accessToken != null) {
 			GraphRequest request = GraphRequest.newMeRequest(
@@ -558,7 +562,7 @@ public class SFacebookProxy {
 			callbackManager = CallbackManager.Factory.create();
 		}
 		shareDialog.registerCallback(callbackManager, shareCallback);
-		if (canPresentShareDialogWithPhotos) {
+		if (shareDialog.canShow(content)) {
 			shareDialog.show(content);
 		}else if(hasPublishPermission()){
 			 ShareApi.share(content, shareCallback);
@@ -646,13 +650,13 @@ public class SFacebookProxy {
 		
 	}*/
 	
-	public void requestInviteFriends(Activity activity,final Bundle b, final RequestFriendsCallBack requestFriendsCallBack){
+/*	public void requestInviteFriends(Activity activity,final Bundle b, final RequestFriendsCallBack requestFriendsCallBack){
 		
-		fbLogin(activity, new FbLoginCallBack() {
+		fbLogin(activity, permissions, new FbLoginCallBack() {
 			
 			
 			@Override
-			public void onSuccess(User user) {
+			public void onSuccess(FaceBookUser user) {
 				
 				Bundle bundle = b;
 				AccessToken accessToken = AccessToken.getCurrentAccessToken();
@@ -697,7 +701,7 @@ public class SFacebookProxy {
 		});
 		
 		
-	}
+	}*/
 	
 	
 	public void inviteFriends(Activity activity, List<FriendProfile> friendProfileIdsList, String title,
@@ -706,7 +710,7 @@ public class SFacebookProxy {
 		if (friendProfileIdsList != null && !friendProfileIdsList.isEmpty()) {
 
 			for (FriendProfile friend : friendProfileIdsList){
-				if(!TextUtils.isEmpty(friend.getId())){
+				if(!TextUtils.isEmpty(friend.getThirdId())){
 					invitingList.add(friend);
 				}
 			}
@@ -726,12 +730,12 @@ public class SFacebookProxy {
 
 		StringBuilder stringBuilder = new StringBuilder();
 		for (FriendProfile friendProfile : currentList) {
-			stringBuilder.append(friendProfile.getId()).append(",");
+			stringBuilder.append(friendProfile.getThirdId()).append(",");
 		}
 
 //		final List<String> requestRecipientsId = new ArrayList<String>();
 
-		inviteFriends(activity, title, stringBuilder.toString(), message, callback);
+		inviteFriends(activity, stringBuilder.toString(), title, message, callback);
 
 	}
 	
@@ -742,10 +746,10 @@ public class SFacebookProxy {
 			Toast.makeText(activity, "request message is empty", Toast.LENGTH_SHORT).show();
 			return;
 		}
-		fbLogin(activity, new FbLoginCallBack() {
+		fbLogin(activity, permissions, new FbLoginCallBack() {
 			
 			@Override
-			public void onSuccess(User user) {
+			public void onSuccess(FaceBookUser user) {
 				GameRequestDialog requestDialog = new GameRequestDialog(activity);
 				if (callbackManager == null) {
 					callbackManager = CallbackManager.Factory.create();
@@ -857,11 +861,11 @@ public class SFacebookProxy {
 	}
 	
 	
-	public void getMyProfile(Activity activity, final FbLoginCallBack callBack) {
+	public void getMyProfile(final Activity activity, final FbLoginCallBack callBack) {
 		// me?fields=name,id,first_name,last_name
-		Bundle b = new Bundle();
-		b.putString("fields", "name,id,picture.width(300)");
-		AccessToken accessToken = AccessToken.getCurrentAccessToken();
+		final Bundle b = new Bundle();
+		b.putString("fields", "name,id,gender,birthday,picture.width(300)");
+		final AccessToken accessToken = AccessToken.getCurrentAccessToken();
 		new GraphRequest(accessToken, "/me", b, HttpMethod.GET, new GraphRequest.Callback() {
 
 			@Override
@@ -885,14 +889,21 @@ public class SFacebookProxy {
 					}
 					String id = userInfo.optString("id", "");
 					String name = userInfo.optString("name", "");
-					String picture = "";
-					if(userInfo.optJSONObject("picture") != null && userInfo.optJSONObject("picture").optJSONObject("data") != null) {
-						picture = userInfo.optJSONObject("picture").optJSONObject("data").optString("url", "");
-					}
-					User user = new User();
-					user.setUserId(id);
+					String gender = userInfo.optString("gender", "");
+					String birthday = userInfo.optString("birthday", "");
+
+					FbSp.saveFbGender(activity, gender);
+					FbSp.saveFbBirthday(activity, birthday);
+					FbSp.saveFbName(activity, name);
+
+					FaceBookUser user = new FaceBookUser();
+					user.setUserFbId(id);
 					user.setName(name);
-					user.setPictureUri(Uri.parse(picture));
+					user.setGender(gender);
+					user.setBirthday(birthday);
+					user.setPictureUri(ImageRequest.getProfilePictureUri(id, 300, 300));
+					user.setFacebookAppId(accessToken.getApplicationId());
+					user.setAccessTokenString(accessToken.getToken());
 					if (callBack != null) {
 						callBack.onSuccess(user);
 					}
@@ -900,10 +911,15 @@ public class SFacebookProxy {
 			}
 		}).executeAsync();
 	}
-	
-	public void requestMyFriends(Activity activity, final Bundle mBundle, final RequestFriendsCallBack myFiendsCallBack) {
 
-		fbLogin(activity, new FbLoginCallBack() {
+	public void requestMyFriends(Activity activity, String paging, final RequestFriendsCallBack fbMyFiendsCallBack){
+		requestMyFriends(activity,null, paging, fbMyFiendsCallBack);
+	}
+
+
+	public void requestMyFriends(final Activity activity, final Bundle mBundle, final String paging, final RequestFriendsCallBack myFiendsCallBack) {
+
+		fbLogin(activity, permissions, new FbLoginCallBack() {
 			@Override
 			public void onCancel() {
 				if (myFiendsCallBack != null) {
@@ -919,7 +935,7 @@ public class SFacebookProxy {
 			}
 
 			@Override
-			public void onSuccess(User user) {
+			public void onSuccess(FaceBookUser user) {
 
 				Bundle bundle = mBundle;
 
@@ -929,29 +945,51 @@ public class SFacebookProxy {
 						bundle = new Bundle();
 						bundle.putString("fields", "friends.limit(2000){name,picture.width(300)}");
 					}
-					new GraphRequest(accessToken, "/me", bundle, HttpMethod.GET, new GraphRequest.Callback() {
+					if (!TextUtils.isEmpty(paging)) {
+						fetchFriendsWithUrl(activity, paging, myFiendsCallBack);
+					} else {
+						new GraphRequest(accessToken, "/me", bundle, HttpMethod.GET, new GraphRequest.Callback() {
 
-						@Override
-						public void onCompleted(GraphResponse response) {
-							if (response == null) {
-								if (myFiendsCallBack != null) {
-									myFiendsCallBack.onError();
+							@Override
+							public void onCompleted(GraphResponse response) {
+								if (response == null) {
+									if (myFiendsCallBack != null) {
+										myFiendsCallBack.onError();
+									}
+								} else if (response.getError() != null) {
+									Log.e(FB_TAG, response.getError().getErrorMessage() + "");
+									if (myFiendsCallBack != null) {
+										myFiendsCallBack.onError();
+									}
+								} else {
+									Log.d(FB_TAG, "response:" + response.toString());
+									try {
+										JSONObject fri = response.getJSONObject().optJSONObject("friends");
+										JSONObject paging = fri.optJSONObject("paging");
+										String next = "", previous = "";
+										if (paging != null) {
+											next = paging.optString("next");
+											previous = paging.optString("previous");
+										}
+										JSONObject summary = fri.optJSONObject("summary");
+										int count = 0;
+										if(summary != null) {
+											count = summary.optInt("total_count");
+										}
+										PL.i("next : " + next);
+										PL.i("previous : " + previous);
+										if (myFiendsCallBack != null) {
+											List<FriendProfile> friends = JsonUtil.parseMyFriendsJson(response.getJSONObject());
+											myFiendsCallBack.onSuccess(response.getJSONObject(), friends, next, previous, count);
+										}
+									} catch (Exception e) {
+										e.printStackTrace();
+									}
 								}
-							} else if (response.getError() != null) {
-								Log.e(FB_TAG, response.getError().getErrorMessage() + "");
-								if (myFiendsCallBack != null) {
-									myFiendsCallBack.onError();
-								}
-							} else {
-								Log.d(FB_TAG, "response:" + response.toString());
-								if (myFiendsCallBack != null) {
-									List<FriendProfile>  friends = JsonUtil.parseMyFriendsJson(response.getJSONObject());
-									myFiendsCallBack.onSuccess(response.getJSONObject(), friends);
-								}
+
 							}
-
-						}
-					}).executeAsync();
+						}).executeAsync();
+					}
 				} else {
 					if (myFiendsCallBack != null) {
 						myFiendsCallBack.onError();
@@ -962,53 +1000,75 @@ public class SFacebookProxy {
 
 	}
 
-	public void requestMyFriends(Activity activity,final RequestFriendsCallBack fbMyFiendsCallBack){
-
-		/*fbLogin(activity, new FbLoginCallBack() {
+	private void fetchFriendsWithUrl(final Activity activity, String url, final RequestFriendsCallBack callBack){
+		FetchFriendsTask invitableFriendsCmd = new FetchFriendsTask(activity, url);
+		invitableFriendsCmd.setReqCallBack(new ISReqCallBack() {
+			@Override
+			public void success(Object o, String rawResult) {
+				if (TextUtils.isEmpty(rawResult)) {
+					callBack.onError();
+				} else {
+					try {
+						JSONObject resjson = new JSONObject(rawResult);
+                        JSONObject paging = resjson.optJSONObject("paging");
+                        String next = "", previous = "";
+                        if (paging != null) {
+                            next = paging.optString("next");
+                            previous = paging.optString("previous");
+                        }
+                        JSONObject summary = resjson.optJSONObject("summary");
+                        int count = 0;
+                        if(summary != null) {
+                            count = summary.optInt("total_count");
+                        }
+						PL.i("next : " + next);
+						PL.i("previous : " + previous);
+						List<FriendProfile> friends = JsonUtil.parseInviteFriendsJson(resjson);
+						callBack.onSuccess(resjson,friends,next,previous, count);
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+				}
+			}
 
 			@Override
-			public void onSuccess(User user) {
+			public void timeout(String code) {
 
-				AccessToken accessToken =  AccessToken.getCurrentAccessToken();
+			}
 
-				if (accessToken != null) {
-					GraphRequest.newMyFriendsRequest(accessToken, new GraphRequest.GraphJSONArrayCallback() {
+			@Override
+			public void noData() {
 
-						@Override
-						public void onCompleted(JSONArray objects, GraphResponse response) {
-							Log.d(FB_TAG, "objects:" + objects.toString());
-							Log.d(FB_TAG, "response:" + response.toString());
-							if (fbMyFiendsCallBack != null) {
-								fbMyFiendsCallBack.onSuccess(objects, response.getJSONObject());
-							}
+			}
+		});
+		invitableFriendsCmd.excute();
+				/*new EfunCommandCallBack() {
+
+			@Override
+			public void cmdCallBack(EfunCommand paramEfunCommand) {
+				if (TextUtils.isEmpty(paramEfunCommand.getResponse())) {
+					callBack.onError();
+				} else {
+					try {
+						JSONObject resjson = new JSONObject(paramEfunCommand.getResponse());
+						String paging = resjson.optString("paging");
+						if (!TextUtils.isEmpty(paging)) {
+							JSONObject pagjson = new JSONObject(paging);
+							next = pagjson.optString("next");
+							previous = pagjson.optString("previous");
 						}
-					}).executeAsync();
-				}else{
-					if (fbMyFiendsCallBack != null) {
-						fbMyFiendsCallBack.onError();
+						EfunLogUtil.logI("next : " + next);
+						EfunLogUtil.logI("previous : " + previous);
+						List<InviteFriend> friends = JsonUtil.parseInviteFriendsJson(resjson);
+						callBack.onSuccess(resjson,friends,next,previous);
+					} catch (JSONException e) {
+						e.printStackTrace();
 					}
 				}
 
 			}
-
-			@Override
-			public void onError(String message) {
-				Log.d(FB_TAG, "onError:" + message);
-				if (fbMyFiendsCallBack != null) {
-					fbMyFiendsCallBack.onError();
-				}
-
-			}
-
-			@Override
-			public void onCancel() {
-				if (fbMyFiendsCallBack != null) {
-					fbMyFiendsCallBack.onError();
-				}
-			}
-		});*/
-
-		requestMyFriends(activity,null, fbMyFiendsCallBack);
+		});
+		EfunCommandExecute.getInstance().asynExecute(activity, invitableFriendsCmd);*/
 	}
 
 //	@Deprecated
@@ -1073,7 +1133,7 @@ public class SFacebookProxy {
 	public interface FbLoginCallBack {
 		public void onCancel();
 		public void onError(String message);
-		public void onSuccess(User user);
+		public void onSuccess(FaceBookUser user);
 	}
 	
 	/**
@@ -1096,7 +1156,7 @@ public class SFacebookProxy {
 	*/
 	public interface RequestFriendsCallBack {
 		public void onError();
-		public void onSuccess(JSONObject graphObject, List<FriendProfile> friendProfiles);
+		public void onSuccess(JSONObject graphObject, List<FriendProfile> friendProfiles, String next, String previous, int count);
 	}
 	
 //	public interface FbMyFriendsCallBack {
@@ -1110,159 +1170,4 @@ public class SFacebookProxy {
 	
 	
 	
-	public class User{
-		
-		String userId;
-
-		/**
-		 * @return the userId
-		 */
-		public String getUserId() {
-			return userId;
-		}
-
-		/**
-		 * @param userId the userId to set
-		 */
-		public void setUserId(String userId) {
-			this.userId = userId;
-		}
-		
-//	    private  String firstName;
-//	    private  String middleName;
-//	    private  String lastName;
-	    private  String name;
-//	    private  Uri linkUri;
-	    
-//	    private String gender;
-		private Uri pictureUri;
-
-		private String tokenForBusiness;
-		private String accessTokenString;
-		private String facebookAppId;
-
-
-		/**
-		 * @return the firstName
-		 */
-//		public String getFirstName() {
-//			return firstName;
-//		}
-
-		/**
-		 * @param firstName the firstName to set
-		 */
-//		public void setFirstName(String firstName) {
-//			this.firstName = firstName;
-//		}
-
-		/**
-		 * @return the middleName
-		 */
-//		public String getMiddleName() {
-//			return middleName;
-//		}
-
-		/**
-		 * @param middleName the middleName to set
-		 */
-//		public void setMiddleName(String middleName) {
-//			this.middleName = middleName;
-//		}
-
-		/**
-		 * @return the lastName
-		 */
-//		public String getLastName() {
-//			return lastName;
-//		}
-
-		/**
-		 * @param lastName the lastName to set
-		 */
-//		public void setLastName(String lastName) {
-//			this.lastName = lastName;
-//		}
-
-		/**
-		 * @return the name
-		 */
-		public String getName() {
-			return name;
-		}
-
-		/**
-		 * @param name the name to set
-		 */
-		public void setName(String name) {
-			this.name = name;
-		}
-
-		/**
-		 * @return the linkUri
-		 */
-//		public Uri getLinkUri() {
-//			return linkUri;
-//		}
-//
-//		/**
-//		 * @param linkUri the linkUri to set
-//		 */
-//		public void setLinkUri(Uri linkUri) {
-//			this.linkUri = linkUri;
-//		}
-//
-//
-//		public String getGender() {
-//			return gender;
-//		}
-//
-//		public void setGender(String gender) {
-//			this.gender = gender;
-//		}
-
-		public Uri getPictureUri() {
-			return pictureUri;
-		}
-
-		public void setPictureUri(Uri pictureUri) {
-			this.pictureUri = pictureUri;
-		}
-
-		public String getAccessTokenString() {
-			return accessTokenString;
-		}
-
-		public void setAccessTokenString(String accessTokenString) {
-			this.accessTokenString = accessTokenString;
-		}
-
-		public String getFacebookAppId() {
-			return facebookAppId;
-		}
-
-		public void setFacebookAppId(String facebookAppId) {
-			this.facebookAppId = facebookAppId;
-		}
-
-		@Override
-		public String toString() {
-			return "User{" +
-					"userId='" + userId + '\'' +
-					", name='" + name + '\'' +
-					", pictureUri=" + pictureUri + '\'' +
-					", tokenForBusiness='" + tokenForBusiness + '\'' +
-					", facebookAppId='" + facebookAppId + '\'' +
-					'}';
-		}
-
-		public String getTokenForBusiness() {
-			return tokenForBusiness;
-		}
-
-		public void setTokenForBusiness(String tokenForBusiness) {
-			this.tokenForBusiness = tokenForBusiness;
-		}
-	}
-
 }

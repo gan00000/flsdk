@@ -3,6 +3,7 @@ package com.gama.sdk.out;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -14,6 +15,7 @@ import com.core.base.utils.SStringUtil;
 import com.core.base.utils.SignatureUtil;
 import com.gama.base.bean.SGameBaseRequestBean;
 import com.gama.base.bean.SGameLanguage;
+import com.gama.base.bean.SLoginType;
 import com.gama.base.bean.SPayType;
 import com.gama.base.cfg.ConfigRequest;
 import com.gama.base.cfg.ResConfig;
@@ -34,12 +36,21 @@ import com.gama.sdk.ads.StarEventLogger;
 import com.gama.sdk.callback.IPayListener;
 import com.gama.sdk.login.DialogLoginImpl;
 import com.gama.sdk.login.ILogin;
+import com.gama.sdk.social.bean.UserInfo;
+import com.gama.sdk.social.callback.FetchFriendsCallback;
+import com.gama.sdk.social.callback.InviteFriendsCallback;
+import com.gama.sdk.social.callback.UserProfileCallback;
 import com.gama.sdk.utils.LogTimer;
+import com.gama.thirdlib.facebook.FaceBookUser;
+import com.gama.thirdlib.facebook.FriendProfile;
 import com.gama.thirdlib.facebook.SFacebookProxy;
 import com.gama.thirdlib.google.SGooglePlayGameServices;
 
+import org.json.JSONObject;
+
 import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.List;
 
 
 public class GamaImpl implements IGama {
@@ -202,50 +213,6 @@ public class GamaImpl implements IGama {
             }
         });
     }
-
-    @Override
-    public void share(Activity activity, ISdkCallBack iSdkCallBack, String shareLinkUrl) {
-        share(activity, iSdkCallBack,"","", shareLinkUrl,"");
-    }
-
-    @Override
-    public void share(Activity activity, final ISdkCallBack iSdkCallBack, String title, String message, String shareLinkUrl, String sharePictureUrl) {
-        if (sFacebookProxy != null){
-
-            SFacebookProxy.FbShareCallBack fbShareCallBack = new SFacebookProxy.FbShareCallBack() {
-                @Override
-                public void onCancel() {
-                    if (iSdkCallBack != null){
-                        iSdkCallBack.failure();
-                    }
-                }
-
-                @Override
-                public void onError(String message) {
-                    if (iSdkCallBack != null){
-                        iSdkCallBack.failure();
-                    }
-                }
-
-                @Override
-                public void onSuccess() {
-                    if (iSdkCallBack != null){
-                        iSdkCallBack.success();
-                    }
-                }
-            };
-            if (SStringUtil.isNotEmpty(GamaUtil.getServerCode(activity)) && SStringUtil.isNotEmpty(GamaUtil.getRoleId(activity))) {
-                if (shareLinkUrl.contains("?")){//userId+||S||+serverCode+||S||+roleId
-                    shareLinkUrl = shareLinkUrl + "&campaign=" + URLEncoder.encode(GamaUtil.getUid(activity)+ "||S||" + GamaUtil.getServerCode(activity)+"||S||"+GamaUtil.getRoleId(activity));
-                }else {
-                    shareLinkUrl = shareLinkUrl + "?campaign=" + URLEncoder.encode(GamaUtil.getUid(activity)+ "||S||" + GamaUtil.getServerCode(activity)+"||S||"+GamaUtil.getRoleId(activity));
-                }
-            }
-            sFacebookProxy.fbShare(activity, fbShareCallBack,title,message,shareLinkUrl,sharePictureUrl);
-        }
-    }
-
-
 
     private void startPay(Activity activity, SPayType payType, String cpOrderId, String productId, String extra) {
         if (payType == SPayType.OTHERS){//第三方储值
@@ -457,4 +424,271 @@ public class GamaImpl implements IGama {
 //        });
 
     }
+
+    @Override
+    public void gamaGetUserProfile(final Activity activity, final UserProfileCallback callBack) {
+        String loginType = GamaUtil.getPreviousLoginType(activity);
+        if(SLoginType.LOGIN_TYPE_FB.equals(loginType)) {
+            if (sFacebookProxy != null) {
+                sFacebookProxy.getMyProfile(activity, new SFacebookProxy.FbLoginCallBack() {
+                    @Override
+                    public void onCancel() {
+                        if(callBack != null) {
+                            callBack.onCancel();
+                        }
+                    }
+
+                    @Override
+                    public void onError(String message) {
+                        sFacebookProxy.fbLogin(activity, new SFacebookProxy.FbLoginCallBack() {
+                            @Override
+                            public void onCancel() {
+                                if(callBack != null) {
+                                    callBack.onCancel();
+                                }
+                            }
+
+                            @Override
+                            public void onError(String message) {
+                                if(callBack != null) {
+                                    callBack.onError(message);
+                                }
+                            }
+
+                            @Override
+                            public void onSuccess(FaceBookUser user) {
+                                sFacebookProxy.getMyProfile(activity, new SFacebookProxy.FbLoginCallBack() {
+                                    @Override
+                                    public void onCancel() {
+                                        if(callBack != null) {
+                                            callBack.onCancel();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onError(String message) {
+                                        if(callBack != null) {
+                                            callBack.onError(message);
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onSuccess(FaceBookUser user) {
+                                        UserInfo userInfo = new UserInfo();
+                                        userInfo.setName(user.getName());
+                                        userInfo.setGender(user.getGender());
+                                        userInfo.setBirthday(user.getBirthday());
+                                        userInfo.setUserThirdId(user.getUserFbId());
+                                        userInfo.setPictureUri(user.getPictureUri());
+                                        userInfo.setAccessTokenString(user.getAccessTokenString());
+                                        userInfo.setTokenForBusiness(user.getTokenForBusiness());
+                                        if(callBack != null) {
+                                            callBack.onSuccess(userInfo);
+                                        }
+                                    }
+                                });
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onSuccess(FaceBookUser user) {
+                        UserInfo userInfo = new UserInfo();
+                        userInfo.setName(user.getName());
+                        userInfo.setGender(user.getGender());
+                        userInfo.setBirthday(user.getBirthday());
+                        userInfo.setUserThirdId(user.getUserFbId());
+                        userInfo.setPictureUri(user.getPictureUri());
+                        userInfo.setAccessTokenString(user.getAccessTokenString());
+                        userInfo.setTokenForBusiness(user.getTokenForBusiness());
+                        if(callBack != null) {
+                            callBack.onSuccess(userInfo);
+                        }
+                    }
+                });
+            }
+        } else {
+            if(callBack != null) {
+                callBack.onSuccess(new UserInfo());
+            }
+        }
+    }
+
+    @Override
+    public void gamaFetchFriends(Activity activity, GamaThirdPartyType type, String paging, int limit, final FetchFriendsCallback callback) {
+        switch (type) {
+            case FACEBOOK:
+                if(sFacebookProxy != null) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("fields", "friends.limit(" + limit + "){name,picture.width(300)}");
+                    sFacebookProxy.requestMyFriends(activity, bundle, paging, new SFacebookProxy.RequestFriendsCallBack() {
+                        @Override
+                        public void onError() {
+                            if(callback != null) {
+                                callback.onError();
+                            }
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject graphObject, List<FriendProfile> friendProfiles, String next, String previous, int count) {
+                            if(callback != null) {
+                                callback.onSuccess(graphObject, friendProfiles, next, previous, count);
+                            }
+                        }
+                    });
+                }
+        }
+    }
+
+    @Override
+    public void gamaShare(Activity activity, GamaThirdPartyType type, String shareLinkUrl, Uri picUri, final ISdkCallBack iSdkCallBack) {
+        switch (type) {
+            case FACEBOOK:
+                if(!TextUtils.isEmpty(shareLinkUrl)) {
+                    if (sFacebookProxy != null){
+
+                        SFacebookProxy.FbShareCallBack fbShareCallBack = new SFacebookProxy.FbShareCallBack() {
+                            @Override
+                            public void onCancel() {
+                                if (iSdkCallBack != null){
+                                    iSdkCallBack.failure();
+                                }
+                            }
+
+                            @Override
+                            public void onError(String message) {
+                                if (iSdkCallBack != null){
+                                    iSdkCallBack.failure();
+                                }
+                            }
+
+                            @Override
+                            public void onSuccess() {
+                                if (iSdkCallBack != null) {
+                                    iSdkCallBack.success();
+                                }
+                            }
+                        };
+                        if (SStringUtil.isNotEmpty(GamaUtil.getServerCode(activity)) && SStringUtil.isNotEmpty(GamaUtil.getRoleId(activity))) {
+                            if (shareLinkUrl.contains("?")){//userId+||S||+serverCode+||S||+roleId
+                                shareLinkUrl = shareLinkUrl + "&campaign=" + URLEncoder.encode(GamaUtil.getUid(activity)+ "||S||" + GamaUtil.getServerCode(activity)+"||S||"+GamaUtil.getRoleId(activity));
+                            }else {
+                                shareLinkUrl = shareLinkUrl + "?campaign=" + URLEncoder.encode(GamaUtil.getUid(activity)+ "||S||" + GamaUtil.getServerCode(activity)+"||S||"+GamaUtil.getRoleId(activity));
+                            }
+                        }
+                        sFacebookProxy.fbShare(activity, fbShareCallBack,"",  "", shareLinkUrl, "");
+                    } else {
+                        if (iSdkCallBack != null){
+                            iSdkCallBack.failure();
+                        }
+                    }
+                } else if(picUri != null) {
+                    if(sFacebookProxy != null) {
+                        sFacebookProxy.shareLocalPhoto(activity, new SFacebookProxy.FbShareCallBack() {
+                            @Override
+                            public void onCancel() {
+                                if (iSdkCallBack != null){
+                                    iSdkCallBack.failure();
+                                }
+                            }
+
+                            @Override
+                            public void onError(String message) {
+                                if (iSdkCallBack != null){
+                                    iSdkCallBack.failure();
+                                }
+                            }
+
+                            @Override
+                            public void onSuccess() {
+                                if (iSdkCallBack != null){
+                                    iSdkCallBack.success();
+                                }
+                            }
+                        }, picUri);
+                    } else {
+                        if (iSdkCallBack != null){
+                            iSdkCallBack.failure();
+                        }
+                    }
+                } else {
+                    if (iSdkCallBack != null){
+                        iSdkCallBack.failure();
+                    }
+                }
+        }
+    }
+
+    @Override
+    public void gamaSentMessageToSpecifiedFriends(Activity activity, GamaThirdPartyType type, Uri picUri, final ISdkCallBack iSdkCallBack) {
+        switch (type) {
+            case FACEBOOK:
+                if(sFacebookProxy != null) {
+                    sFacebookProxy.shareToMessenger(activity, picUri, new SFacebookProxy.FbShareCallBack() {
+                        @Override
+                        public void onCancel() {
+                            if (iSdkCallBack != null){
+                                iSdkCallBack.failure();
+                            }
+                        }
+
+                        @Override
+                        public void onError(String message) {
+                            if (iSdkCallBack != null){
+                                iSdkCallBack.failure();
+                            }
+                        }
+
+                        @Override
+                        public void onSuccess() {
+                            if (iSdkCallBack != null){
+                                iSdkCallBack.success();
+                            }
+                        }
+                    });
+                } else {
+                    if (iSdkCallBack != null){
+                        iSdkCallBack.failure();
+                    }
+                }
+        }
+    }
+
+    @Override
+    public void gamaInviteFriends(Activity activity, GamaThirdPartyType type, List<FriendProfile> invitingList,
+                                  String message, String title, final InviteFriendsCallback callback) {
+        switch (type) {
+            case FACEBOOK:
+                if(sFacebookProxy != null) {
+                    sFacebookProxy.inviteFriends(activity, invitingList, title, message, new SFacebookProxy.FbInviteFriendsCallBack() {
+                        @Override
+                        public void onCancel() {
+                            if (callback != null){
+                                callback.failure();
+                            }
+                        }
+
+                        @Override
+                        public void onError(String message) {
+                            if (callback != null){
+                                callback.failure();
+                            }
+                        }
+
+                        @Override
+                        public void onSuccess(String requestId, List<String> requestRecipients) {
+                            if(callback != null) {
+                                callback.success(requestId, requestRecipients);
+                            }
+                        }
+                    });
+                } else {
+                    if (callback != null){
+                        callback.failure();
+                    }
+                }
+        }
+    }
+
+
 }

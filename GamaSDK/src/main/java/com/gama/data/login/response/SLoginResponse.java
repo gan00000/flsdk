@@ -1,5 +1,7 @@
 package com.gama.data.login.response;
 
+import android.net.Uri;
+
 import com.core.base.bean.BaseResponseModel;
 
 /**
@@ -21,6 +23,26 @@ public class SLoginResponse extends BaseResponseModel {
     private String gameCode = "";
 
     private String loginType = "";
+
+    /**
+     * 性别
+     */
+    private String gender = "";
+
+    /**
+     * 头像
+     */
+    private Uri iconUri;
+
+    /**
+     * 生日
+     */
+    private String birthday = "";
+
+    /**
+     * 三方平台id
+     */
+    private String thirdId = "";
 
     public boolean isRequestSuccess(){//1001为注册成功
         return SUCCESS_CODE.equals(getCode()) || "1001".equals(getCode());
@@ -84,5 +106,37 @@ public class SLoginResponse extends BaseResponseModel {
 
     public void setLoginType(String loginType) {
         this.loginType = loginType;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public Uri getIconUri() {
+        return iconUri;
+    }
+
+    public void setIconUri(Uri iconUri) {
+        this.iconUri = iconUri;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getThirdId() {
+        return thirdId;
+    }
+
+    public void setThirdId(String thirdId) {
+        this.thirdId = thirdId;
     }
 }

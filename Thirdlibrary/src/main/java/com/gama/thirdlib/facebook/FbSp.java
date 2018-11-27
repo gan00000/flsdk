@@ -47,6 +47,38 @@ public class FbSp {
         return sharedPreferences.getString(S_FB_LOGIN_ID,"");
     }
 
+    public static final String S_FB_GENDER = "S_FB_GENDER";
+    public static final String S_FB_BIRTHDAY = "S_FB_BIRTHDAY";
+    public static final String S_FB_NAME = "S_FB_NAME";
 
+    public static void saveFbGender(Context context, String gender){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(S_FACEBOOK_FILE,Context.MODE_PRIVATE);
+        sharedPreferences.edit().putString(S_FB_GENDER,gender).commit();
+    }
+
+    public static String getFbGender(Context context){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(S_FACEBOOK_FILE,Context.MODE_PRIVATE);
+        return sharedPreferences.getString(S_FB_GENDER,"");
+    }
+
+    public static void saveFbBirthday(Context context, String birthday){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(S_FACEBOOK_FILE,Context.MODE_PRIVATE);
+        sharedPreferences.edit().putString(S_FB_BIRTHDAY,birthday).commit();
+    }
+
+    public static String getFbBirthday(Context context){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(S_FACEBOOK_FILE,Context.MODE_PRIVATE);
+        return sharedPreferences.getString(S_FB_BIRTHDAY,"");
+    }
+
+    public static void saveFbName(Context context, String name){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(S_FACEBOOK_FILE,Context.MODE_PRIVATE);
+        sharedPreferences.edit().putString(S_FB_NAME,name).commit();
+    }
+
+    public static String getFbName(Context context){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(S_FACEBOOK_FILE,Context.MODE_PRIVATE);
+        return sharedPreferences.getString(S_FB_NAME,"");
+    }
 
 }

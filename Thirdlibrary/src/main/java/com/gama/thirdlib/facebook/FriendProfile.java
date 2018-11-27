@@ -34,14 +34,14 @@ public class FriendProfile {
 	/**
 	 * @return the id
 	 */
-	public String getId() {
+	public String getThirdId() {
 		return id;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(String id) {
+	public void setThirdId(String id) {
 		this.id = id;
 	}
 

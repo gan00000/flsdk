@@ -3,18 +3,20 @@ package com.gama.sdk.demo;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.core.base.utils.PL;
+import com.core.base.utils.ToastUtils;
 import com.crashlytics.android.Crashlytics;
 import com.gama.base.bean.SGameLanguage;
 import com.gama.base.bean.SPayType;
@@ -27,22 +29,29 @@ import com.gama.pay.gp.util.Inventory;
 import com.gama.pay.gp.util.Purchase;
 import com.gama.sdk.callback.IPayListener;
 import com.gama.sdk.out.GamaFactory;
+import com.gama.sdk.out.GamaThirdPartyType;
 import com.gama.sdk.out.IGama;
 import com.gama.sdk.out.ISdkCallBack;
+import com.gama.sdk.social.bean.UserInfo;
+import com.gama.sdk.social.callback.FetchFriendsCallback;
+import com.gama.sdk.social.callback.InviteFriendsCallback;
+import com.gama.sdk.social.callback.UserProfileCallback;
 import com.gama.thirdlib.facebook.FriendProfile;
 import com.gama.thirdlib.facebook.SFacebookProxy;
 
 import org.json.JSONObject;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private Button loginButton, othersPayButton,googlePayBtn,shareButton, showPlatform, crashlytics,
-            PurchasesHistory, getFriend, invite, sendText;
+            PurchasesHistory, getFriend, invite, sendText, getInfo, getFriendNext, getFriendPrevious;
     IabHelper mHelper;
     private IGama iGama;
+    private String nextUrl, previousUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +68,10 @@ public class MainActivity extends AppCompatActivity {
         crashlytics = (Button) findViewById(R.id.Crashlytics);
         PurchasesHistory = (Button) findViewById(R.id.PurchasesHistory);
 
+        getInfo = (Button) findViewById(R.id.getInfo);
         getFriend = (Button) findViewById(R.id.getFriend);
+        getFriendNext = (Button) findViewById(R.id.getFriendNext);
+        getFriendPrevious = (Button) findViewById(R.id.getFriendPrevious);
         invite = (Button) findViewById(R.id.invite);
         sendText = (Button) findViewById(R.id.sendText);
 
@@ -85,7 +97,14 @@ public class MainActivity extends AppCompatActivity {
                             String uid = sLoginResponse.getUserId();
                             String accessToken = sLoginResponse.getAccessToken();
                             String timestamp = sLoginResponse.getTimestamp();
-                            PL.i("uid:" + uid);
+                            Log.i("gamaLogin", "uid:" + uid);
+                            Log.i("gamaLogin", "sLoginResponse: " + sLoginResponse.getBirthday());
+                            Log.i("gamaLogin", "sLoginResponse: " + sLoginResponse.getAccessToken());
+                            Log.i("gamaLogin", "sLoginResponse: " + sLoginResponse.getGender());
+                            Log.i("gamaLogin", "sLoginResponse: " + sLoginResponse.getThirdId());
+                            Log.i("gamaLogin", "sLoginResponse: " + sLoginResponse.getLoginType());
+                            Log.i("gamaLogin", "sLoginResponse: " + sLoginResponse.getTimestamp());
+                            Log.i("gamaLogin", "sLoginResponse: " + sLoginResponse.getIconUri());
                             /**
                              * 同步角色信息(以下均为测试信息)
                              */
@@ -187,22 +206,35 @@ public class MainActivity extends AppCompatActivity {
 
                 //下面的参数请按照实际传值
                 String shareUrl = "http://www.gamamobi.com/";
+                Uri uri = Uri.fromFile(new File(Environment.getExternalStorageDirectory() + File.separator + "1.jpg"));
                 //分享回调
-                ISdkCallBack iSdkCallBack = new ISdkCallBack() {
+//                ISdkCallBack iSdkCallBack = new ISdkCallBack() {
+//                    @Override
+//                    public void success() {
+//                        PL.i("share  success");
+//                    }
+//
+//                    @Override
+//                    public void failure() {
+//                        PL.i("share  failure");
+//                    }
+//                };
+//
+//                iGama.share(MainActivity.this,iSdkCallBack,shareUrl);
+
+//                iGama.share(MainActivity.this,iSdkCallBack,"", "", shareUrl, "");
+
+                iGama.gamaShare(MainActivity.this, GamaThirdPartyType.FACEBOOK, "", uri, new ISdkCallBack() {
                     @Override
                     public void success() {
-                        PL.i("share  success");
+                        Log.i("facebook", "success");
                     }
 
                     @Override
                     public void failure() {
-                        PL.i("share  failure");
+                        Log.i("facebook", "failure");
                     }
-                };
-
-                iGama.share(MainActivity.this,iSdkCallBack,shareUrl);
-
-//                iGama.share(MainActivity.this,iSdkCallBack,"", "", shareUrl, "");
+                });
 
             }
         });
@@ -288,28 +320,103 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        SFacebookProxy.initFbSdk(this);
-        final SFacebookProxy proxy = new SFacebookProxy(MainActivity.this);
 
         getFriend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                proxy.requestMyFriends(MainActivity.this, new SFacebookProxy.RequestFriendsCallBack() {
+                iGama.gamaFetchFriends(MainActivity.this, GamaThirdPartyType.FACEBOOK, "", 1, new FetchFriendsCallback() {
                     @Override
                     public void onError() {
-                        Log.i("facebook", "error");
+
                     }
 
                     @Override
-                    public void onSuccess(JSONObject graphObject, List<FriendProfile> friendProfiles) {
-                        if(graphObject != null) {
-                            Log.i("facebook", graphObject.toString());
-                        }
+                    public void onSuccess(JSONObject graphObject, List<FriendProfile> friendProfiles, String next, String previous, int count) {
+                        Log.i("facebook", "graphObject: " + graphObject.toString());
                         if(friendProfiles != null) {
                             for(FriendProfile profile : friendProfiles) {
-                                Log.i("facebook", "profile: " + profile.toString());
+                                Log.i("facebook", "profile: " +  profile.getThirdId());
+                                Log.i("facebook", "profile: " +  profile.getGender());
+                                Log.i("facebook", "profile: " +  profile.getName());
+                                Log.i("facebook", "profile: " +  profile.getIconUrl());
                             }
+                            Log.i("facebook", "next: " +  next);
+                            Log.i("facebook", "previous: " +  previous);
+                            Log.i("facebook", "count: " +  count);
+                            nextUrl = next;
+                            previousUrl = previous;
                         }
+
+                    }
+                });
+            }
+        });
+
+        getFriendNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(TextUtils.isEmpty(nextUrl)) {
+                    Toast.makeText(MainActivity.this, "没有下一页", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                iGama.gamaFetchFriends(MainActivity.this, GamaThirdPartyType.FACEBOOK, nextUrl, 1, new FetchFriendsCallback() {
+                    @Override
+                    public void onError() {
+
+                    }
+
+                    @Override
+                    public void onSuccess(JSONObject graphObject, List<FriendProfile> friendProfiles, String next, String previous, int count) {
+                        Log.i("facebook", "graphObject: " + graphObject.toString());
+                        if(friendProfiles != null) {
+                            for(FriendProfile profile : friendProfiles) {
+                                Log.i("facebook", "profile: " +  profile.getThirdId());
+                                Log.i("facebook", "profile: " +  profile.getGender());
+                                Log.i("facebook", "profile: " +  profile.getName());
+                                Log.i("facebook", "profile: " +  profile.getIconUrl());
+                            }
+                            Log.i("facebook", "next: " +  next);
+                            Log.i("facebook", "previous: " +  previous);
+                            Log.i("facebook", "count: " +  count);
+                            nextUrl = next;
+                            previousUrl = previous;
+                        }
+
+                    }
+                });
+            }
+        });
+
+        getFriendPrevious.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(TextUtils.isEmpty(previousUrl)) {
+                    Toast.makeText(MainActivity.this, "没有上一页", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                iGama.gamaFetchFriends(MainActivity.this, GamaThirdPartyType.FACEBOOK, previousUrl, 1, new FetchFriendsCallback() {
+                    @Override
+                    public void onError() {
+
+                    }
+
+                    @Override
+                    public void onSuccess(JSONObject graphObject, List<FriendProfile> friendProfiles, String next, String previous, int count) {
+                        Log.i("facebook", "graphObject: " + graphObject.toString());
+                        if(friendProfiles != null) {
+                            for(FriendProfile profile : friendProfiles) {
+                                Log.i("facebook", "profile: " +  profile.getThirdId());
+                                Log.i("facebook", "profile: " +  profile.getGender());
+                                Log.i("facebook", "profile: " +  profile.getName());
+                                Log.i("facebook", "profile: " +  profile.getIconUrl());
+                            }
+                            Log.i("facebook", "next: " +  next);
+                            Log.i("facebook", "previous: " +  previous);
+                            Log.i("facebook", "count: " +  count);
+                            nextUrl = next;
+                            previousUrl = previous;
+                        }
+
                     }
                 });
             }
@@ -318,28 +425,28 @@ public class MainActivity extends AppCompatActivity {
         invite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                proxy.inviteFriends(MainActivity.this, "529074447599533", "标题啊",
-                        "消息内容啊", new SFacebookProxy.FbInviteFriendsCallBack() {
-                            @Override
-                            public void onCancel() {
-                                Log.i("facebook", "cancel");
-                            }
 
-                            @Override
-                            public void onError(String message) {
-                                Log.i("facebook", "error " + message);
-                            }
+                List<FriendProfile> invitingList = new ArrayList<>();
+                FriendProfile profile = new FriendProfile();
+                profile.setThirdId("116973872645819");
 
-                            @Override
-                            public void onSuccess(String requestId, List<String> requestRecipients) {
-                                Log.i("facebook", "requestId: " + requestId);
-                                if(requestRecipients != null) {
-                                    for(String s : requestRecipients) {
-                                        Log.i("facebook", "requestRecipients: " +  s);
-                                    }
-                                }
+                iGama.gamaInviteFriends(MainActivity.this, GamaThirdPartyType.FACEBOOK, invitingList, "消息內容", "標題", new InviteFriendsCallback() {
+                    @Override
+                    public void failure() {
+                        Log.i("facebook", "failure");
+                    }
+
+                    @Override
+                    public void success(String requestId, List<String> requestRecipients) {
+                        Log.i("facebook", "requestId: " + requestId);
+                        if(requestRecipients != null) {
+                            for(String s : requestRecipients) {
+                                Log.i("facebook", "requestRecipients: " +  s);
                             }
-                        });
+                        }
+
+                    }
+                });
             }
         });
 
@@ -348,20 +455,58 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 //                Uri linkUri = Uri.parse("https://www.facebook.com/");
                 Uri uri = Uri.fromFile(new File(Environment.getExternalStorageDirectory() + File.separator + "1.jpg"));
-                proxy.shareToMessenger(MainActivity.this, uri, new SFacebookProxy.FbShareCallBack() {
+                iGama.gamaSentMessageToSpecifiedFriends(MainActivity.this, GamaThirdPartyType.FACEBOOK, uri, new ISdkCallBack() {
+                    @Override
+                    public void success() {
+                        Log.i("facebook", "success");
+                    }
+
+                    @Override
+                    public void failure() {
+                        Log.i("facebook", "failure");
+                    }
+                });
+//                proxy.shareToMessenger(MainActivity.this, uri, new SFacebookProxy.FbShareCallBack() {
+//                    @Override
+//                    public void onCancel() {
+//                        Log.i("facebook", "cancel");
+//                    }
+//
+//                    @Override
+//                    public void onError(String message) {
+//                        Log.i("facebook", "error " + message);
+//                    }
+//
+//                    @Override
+//                    public void onSuccess() {
+//                        Log.i("facebook", "success");
+//                    }
+//                });
+            }
+        });
+
+        getInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                iGama.gamaGetUserProfile(MainActivity.this, new UserProfileCallback() {
                     @Override
                     public void onCancel() {
-                        Log.i("facebook", "cancel");
+                        Log.i("facebook", "onCancel");
                     }
 
                     @Override
                     public void onError(String message) {
-                        Log.i("facebook", "error " + message);
+                        Log.i("facebook", "onError " + message);
                     }
 
                     @Override
-                    public void onSuccess() {
-                        Log.i("facebook", "success");
+                    public void onSuccess(UserInfo user) {
+                        Log.i("facebook", "UserInfo: " +  user.getAccessTokenString());
+                        Log.i("facebook", "UserInfo: " +  user.getBirthday());
+                        Log.i("facebook", "UserInfo: " +  user.getGender());
+                        Log.i("facebook", "UserInfo: " +  user.getName());
+                        Log.i("facebook", "UserInfo: " +  user.getPictureUri());
+                        Log.i("facebook", "UserInfo: " +  user.getUserThirdId());
                     }
                 });
             }

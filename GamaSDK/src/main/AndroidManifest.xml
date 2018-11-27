@@ -91,15 +91,15 @@
             <!--android:exported="false" />-->
 
         <!-- 如需要从Facebook进行本地图片分享，需要开启以下两项 -->
-        <!--<meta-data-->
-            <!--android:name="com.facebook.sdk.ApplicationName"-->
-            <!--android:value="@string/facebook_app_name" />-->
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationName"
+            android:value="@string/facebook_app_name" />
 
         <!--如果要通过 Android 版 Facebook 应用分享链接、图片或视频，还需要在清单文件中声明 FacebookContentProvider-->
-        <!--<provider-->
-            <!--android:name="com.facebook.FacebookContentProvider"-->
-            <!--android:authorities="@string/facebook_authorities"-->
-            <!--android:exported="true" />-->
+        <provider
+            android:name="com.facebook.FacebookContentProvider"
+            android:authorities="@string/facebook_authorities"
+            android:exported="true" />
         <!-- 以上 -->
 
         <!--The AppsFlyer Install Receiver is first and will broadcast to all receivers placed below it-->

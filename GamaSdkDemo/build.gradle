@@ -151,7 +151,7 @@ android {
             versionCode 1
             versionName "1.0"
             flavorDimensions "1"
-//            resValue "string", "facebook_app_name", ""
+            resValue "string", "facebook_app_name", "聖鬥士"
             resValue "string", "facebook_app_id", "362739184296670"
             resValue "string", "fb_login_protocol_scheme", "fb362739184296670"
             resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider362739184296670"

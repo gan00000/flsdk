@@ -15,6 +15,7 @@ import com.core.base.utils.SStringUtil;
 import com.core.base.utils.SignatureUtil;
 import com.core.base.utils.ToastUtils;
 import com.facebook.AccessToken;
+import com.facebook.internal.ImageRequest;
 import com.gama.base.bean.SLoginType;
 import com.gama.base.cfg.ResConfig;
 import com.gama.base.utils.GamaUtil;
@@ -32,6 +33,7 @@ import com.gama.sdk.R;
 import com.gama.sdk.ads.StarEventLogger;
 import com.gama.sdk.login.LoginContract;
 import com.gama.sdk.utils.DialogUtil;
+import com.gama.thirdlib.facebook.FaceBookUser;
 import com.gama.thirdlib.facebook.FbResUtil;
 import com.gama.thirdlib.facebook.FbSp;
 import com.gama.thirdlib.facebook.SFacebookProxy;
@@ -68,6 +70,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
     private SFacebookProxy sFacebookProxy;
     private SGoogleSignIn sGoogleSignIn;
+    private FaceBookUser faceBookUser;
 
     public void setFragment(Fragment fragment) {
         this.fragment = fragment;
@@ -134,8 +137,8 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         if (sFacebookProxy != null) {
             sFbLogin(activity, sFacebookProxy, new FbLoginCallBack() {
                 @Override
-                public void loginSuccess(String fbScopeId, String businessId, String tokenForBusiness) {
-                    fbThirdLogin(fbScopeId, businessId, tokenForBusiness);
+                public void loginSuccess(FaceBookUser user) {
+                    fbThirdLogin(user.getUserFbId(), user.getBusinessId(), "");
                 }
             });
         }
@@ -372,8 +375,9 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         }else if (bindType == SLoginType.bind_fb){
             sFbLogin(activity, sFacebookProxy, new FbLoginCallBack() {
                 @Override
-                public void loginSuccess(String fbScopeId, String businessId, String tokenForBusiness) {
-                    ThirdAccountBindRequestTask bindRequestTask = new ThirdAccountBindRequestTask(getActivity(), mAccount,mPwd, mEmail,fbScopeId,businessId,tokenForBusiness);
+                public void loginSuccess(FaceBookUser user) {
+                    ThirdAccountBindRequestTask bindRequestTask = new ThirdAccountBindRequestTask(getActivity(),
+                            mAccount,mPwd, mEmail, user.getUserFbId(), user.getBusinessId(), "");
                     sAccountBind(bindRequestTask);
                 }
             });
@@ -550,16 +554,37 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         String fbThirdId = FbSp.getFbId(activity);
         String businessId = FbSp.getAppsBusinessId(activity);
         String tokenBusiness = FbSp.getTokenForBusiness(activity);
+        String gender = FbSp.getFbGender(activity);
+        String birthday = FbSp.getFbBirthday(activity);
+        String name = FbSp.getFbName(activity);
+        String fbId = FbResUtil.findStringByName(activity,"facebook_app_id");
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        String token = "";
+        if(accessToken != null) {
+            token = accessToken.getToken();
+        }
         if(!TextUtils.isEmpty(fbThirdId)) {
             PL.i(TAG, "Facebook登入使用緩存登入");
             if(TextUtils.isEmpty(businessId)) {
-                businessId = fbThirdId + "_" + FbResUtil.findStringByName(activity,"facebook_app_id");
+                businessId = fbThirdId + "_" + fbId;
             }
             PL.i(TAG, "Facebook ThirdId: " + fbThirdId);
             PL.i(TAG, "Facebook businessId: " + businessId);
             PL.i(TAG, "Facebook tokenBusiness: " + tokenBusiness);
+            PL.i(TAG, "Facebook gender: " + gender);
+            PL.i(TAG, "Facebook birthday: " + birthday);
+            PL.i(TAG, "Facebook name: " + name);
+            PL.i(TAG, "Facebook token: " + token);
             if(fbLoginCallBack != null) {
-                fbLoginCallBack.loginSuccess(fbThirdId, businessId, tokenBusiness);
+                faceBookUser = new FaceBookUser();
+                faceBookUser.setUserFbId(fbThirdId);
+                faceBookUser.setBusinessId(businessId);
+                faceBookUser.setName(name);
+                faceBookUser.setGender(gender);
+                faceBookUser.setBirthday(birthday);
+                faceBookUser.setPictureUri(ImageRequest.getProfilePictureUri(fbThirdId, 300, 300));
+                faceBookUser.setAccessTokenString(token);
+                fbLoginCallBack.loginSuccess(faceBookUser);
             } else {
                 PL.i(TAG, "Facebook 登入回調為空");
             }
@@ -584,15 +609,34 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             }
 
             @Override
-            public void onSuccess(SFacebookProxy.User user) {
-                PL.d("fb uid:" + user.getUserId());
+            public void onSuccess(FaceBookUser user) {
+                PL.d("fb uid:" + user.getUserFbId());
 
-                String businessId = user.getUserId() + "_" + user.getFacebookAppId();
+                final String businessId = user.getUserFbId() + "_" + user.getFacebookAppId();
                 PL.d("fb businessId:" + businessId);
                 FbSp.saveAppsBusinessId(activity, businessId);
-                if (fbLoginCallBack != null){
-                    fbLoginCallBack.loginSuccess(user.getUserId(), businessId, FbSp.getTokenForBusiness(getActivity()));
-                }
+
+                sFacebookProxy.getMyProfile(activity, new SFacebookProxy.FbLoginCallBack() {
+                    @Override
+                    public void onCancel() {
+
+                    }
+
+                    @Override
+                    public void onError(String message) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(FaceBookUser user) {
+                        user.setBusinessId(businessId);
+                        faceBookUser = user;
+                        if (fbLoginCallBack != null){
+                            fbLoginCallBack.loginSuccess(user);
+                        }
+                    }
+                });
+
                 // TODO: 2018/6/21 手动拼写businessId
 //                final String fbScopeId = user.getUserId();
 //                sFacebookProxy.requestBusinessId(activity, new SFacebookProxy.FbBusinessIdCallBack() {
@@ -617,7 +661,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             sFacebookProxy.fbLogin(activity, fbLoginCallBack1);
         }else {
 
-            sFacebookProxy.fbLogin(fragment, fbLoginCallBack1);
+            sFacebookProxy.fbLogin(fragment.getActivity(), fbLoginCallBack1);
 
         }
     }
@@ -804,12 +848,13 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                                 starpyAccountLogin(activity,account,password);
 
                             }else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_FB, registPlatform)){//fb自动的登录
-                                String fbScopeId = FbSp.getFbId(activity);
+                                /*String fbScopeId = FbSp.getFbId(activity);
                                 String fbApps = FbSp.getAppsBusinessId(activity);
                                 if(TextUtils.isEmpty(fbApps)) {
                                     fbApps = fbScopeId + "_" + FbResUtil.findStringByName(activity,"facebook_app_id");
                                 }
-                                fbThirdLogin(fbScopeId, fbApps,FbSp.getTokenForBusiness(activity));
+                                fbThirdLogin(fbScopeId, fbApps,FbSp.getTokenForBusiness(activity));*/
+                                fbLogin(mActivity);
 
                             }else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GOOGLE, registPlatform)){//Google登录
 
@@ -864,6 +909,13 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         StarEventLogger.trackinRegisterEvent(mActivity, loginResponse);
                     }
                 }
+                if(SLoginType.LOGIN_TYPE_FB.equals(loginType) && faceBookUser != null) {
+                    loginResponse.setAccessToken(faceBookUser.getAccessTokenString());
+                    loginResponse.setGender(FbSp.getFbGender(mActivity));
+                    loginResponse.setBirthday(FbSp.getFbBirthday(mActivity));
+                    loginResponse.setIconUri(faceBookUser.getPictureUri());
+                    loginResponse.setThirdId(faceBookUser.getUserFbId());
+                }
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -880,7 +932,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
         }*/
 
-        ToastUtils.toast(mActivity, R.string.py_login_success);
+//        ToastUtils.toast(mActivity, R.string.py_login_success);
 
         if (iLoginView != null){
             iLoginView.LoginSuccess(loginResponse);
@@ -890,7 +942,8 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
     interface FbLoginCallBack{
 
-        void loginSuccess(String fbScopeId, String businessId, String tokenForBusiness);
+//        void loginSuccess(String fbScopeId, String businessId, String tokenForBusiness);
+        void loginSuccess(FaceBookUser user);
     }
 
 }

@@ -36,7 +36,7 @@ dependencies {
 //    api 'com.crashlytics.sdk.android:crashlytics:2.9.4'
 //    api 'com.google.firebase:firebase-messaging:17.1.0'
     //Facebook库
-//    api 'com.facebook.fresco:fresco:1.9.0'
+    api 'com.facebook.fresco:fresco:1.9.0'
     api 'com.facebook.android:facebook-login:4.34.0'
     api 'com.facebook.android:facebook-share:4.34.0'
     api 'com.facebook.android:facebook-messenger:4.34.0'

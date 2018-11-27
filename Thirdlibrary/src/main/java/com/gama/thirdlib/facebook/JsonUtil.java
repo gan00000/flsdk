@@ -39,7 +39,7 @@ public class JsonUtil {
 
 					FriendProfile friendProfile = new FriendProfile();
 					friendProfile.setName(name);
-					friendProfile.setId(id);
+					friendProfile.setThirdId(id);
 					friendProfile.setFriendPicture(friendPicture);
 
 					friendProfiles.add(friendProfile);
@@ -86,7 +86,7 @@ public class JsonUtil {
 
 					FriendProfile friendProfile = new FriendProfile();
 					friendProfile.setName(name);
-					friendProfile.setId(id);
+					friendProfile.setThirdId(id);
 					friendProfile.setFriendPicture(friendPicture);
 
 					friendProfiles.add(friendProfile);

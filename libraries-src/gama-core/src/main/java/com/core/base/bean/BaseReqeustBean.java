@@ -31,6 +31,8 @@ public class BaseReqeustBean extends AbsReqeustBean {
     private String versionCode = "";
     private String versionName = "";
 
+    public BaseReqeustBean() {}
+
     public BaseReqeustBean(Context context) {
 
         PL.i("the jar version:" + BuildConfig.JAR_VERSION);//打印版本号

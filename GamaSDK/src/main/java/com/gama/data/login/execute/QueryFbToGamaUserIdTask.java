@@ -1,3 +1,4 @@
+/*
 package com.gama.data.login.execute;
 
 import android.app.Activity;
@@ -23,9 +24,11 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+*/
 /**
  * Created by gan on 2018/1/31.
- */
+ *//*
+
 
 public class QueryFbToGamaUserIdTask {
 
@@ -118,7 +121,7 @@ public class QueryFbToGamaUserIdTask {
 
         StringBuffer idsStringBuffer = new StringBuffer();
         for (FriendProfile theGameFriendProfile : friendProfiles) {
-            idsStringBuffer.append(theGameFriendProfile.getId()).append(",");
+            idsStringBuffer.append(theGameFriendProfile.getThirdId()).append(",");
         }
         String theGameFbUserId = idsStringBuffer.substring(0, idsStringBuffer.lastIndexOf(","));
 
@@ -150,7 +153,7 @@ public class QueryFbToGamaUserIdTask {
                             String userId = fbUser.getUserId();//设置 starpy user id
                             if (SStringUtil.isNotEmpty(fbUserId) && SStringUtil.isNotEmpty(userId) && allFriendProfiles != null && !allFriendProfiles.isEmpty()) {
                                 for (FriendProfile friendProfile : allFriendProfiles) {
-                                    if (fbUserId.equals(friendProfile.getId())){
+                                    if (fbUserId.equals(friendProfile.getThirdId())){
                                         friendProfile.setUserId(userId);
                                         break;
                                     }
@@ -200,3 +203,4 @@ public class QueryFbToGamaUserIdTask {
     }
 
 }
+*/

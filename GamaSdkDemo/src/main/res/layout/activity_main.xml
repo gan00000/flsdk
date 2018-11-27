@@ -83,10 +83,28 @@
                     android:text="PurchasesHistory" />
 
                 <Button
+                    android:id="@+id/getInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="获取信息" />
+
+                <Button
                     android:id="@+id/getFriend"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="获取好友" />
+
+                <Button
+                    android:id="@+id/getFriendNext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="下一页" />
+
+                <Button
+                    android:id="@+id/getFriendPrevious"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="上一页" />
 
                 <Button
                     android:id="@+id/invite"
