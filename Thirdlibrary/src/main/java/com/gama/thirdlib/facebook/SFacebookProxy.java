@@ -704,7 +704,7 @@ public class SFacebookProxy {
 	}*/
 	
 	
-	public void inviteFriends(Activity activity, List<FriendProfile> friendProfileIdsList, String title,
+	public void rinviteFriends(Activity activity, List<FriendProfile> friendProfileIdsList, String title,
 							  String message, final FbInviteFriendsCallBack fbInviteFriendsCallBack) {
 		List<FriendProfile> invitingList = new ArrayList<>();
 		if (friendProfileIdsList != null && !friendProfileIdsList.isEmpty()) {

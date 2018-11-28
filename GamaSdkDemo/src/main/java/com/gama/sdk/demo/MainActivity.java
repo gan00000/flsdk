@@ -428,7 +428,8 @@ public class MainActivity extends AppCompatActivity {
 
                 List<FriendProfile> invitingList = new ArrayList<>();
                 FriendProfile profile = new FriendProfile();
-                profile.setThirdId("116973872645819");
+                profile.setThirdId("529074447599533");
+                invitingList.add(profile);
 
                 iGama.gamaInviteFriends(MainActivity.this, GamaThirdPartyType.FACEBOOK, invitingList, "消息內容", "標題", new InviteFriendsCallback() {
                     @Override
