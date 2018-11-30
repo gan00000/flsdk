@@ -45,7 +45,7 @@ public class StarEventLogger {
             AppsFlyerLib.getInstance().setCollectAndroidID(false);
 //            AppsFlyerLib.getInstance().startTracking(activity.getApplication(), ResConfig.getConfigInAssetsProperties(activity,"gama_ads_appflyer_dev_key"));
 
-//            SFacebookProxy.initFbSdk(activity.getApplicationContext());
+            SFacebookProxy.initFbSdk(activity.getApplicationContext());
 
             // Google Android first open conversion tracking snippet
             // Add this code to the onCreate() method of your application activity
