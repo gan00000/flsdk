@@ -163,10 +163,5 @@
     <orderEntry type="module" module-name="gama-core" />
     <orderEntry type="module" module-name="gama-pay" />
     <orderEntry type="module" module-name="GamaBaseLib" />
-    <orderEntry type="module" module-name="youzu" />
-    <orderEntry type="module" module-name="Thirdlibrary" />
-    <orderEntry type="module" module-name="gama-core" />
-    <orderEntry type="module" module-name="gama-pay" />
-    <orderEntry type="module" module-name="GamaBaseLib" />
   </component>
 </module>

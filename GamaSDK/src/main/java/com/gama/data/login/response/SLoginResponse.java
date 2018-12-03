@@ -12,6 +12,9 @@ import com.core.base.bean.BaseResponseModel;
 public class SLoginResponse extends BaseResponseModel {
 
     private String userId = "";
+    /**
+     * gama的accesstoken
+     */
     private String accessToken = "";
     /**
      * 登陆成功时间戳
@@ -43,6 +46,19 @@ public class SLoginResponse extends BaseResponseModel {
      * 三方平台id
      */
     private String thirdId = "";
+
+    /**
+     * 第三方的accesstoken
+     */
+    private String thirdToken = "";
+
+    public String getThirdToken() {
+        return thirdToken;
+    }
+
+    public void setThirdToken(String thirdToken) {
+        this.thirdToken = thirdToken;
+    }
 
     public boolean isRequestSuccess(){//1001为注册成功
         return SUCCESS_CODE.equals(getCode()) || "1001".equals(getCode());

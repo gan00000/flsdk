@@ -910,7 +910,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     }
                 }
                 if(SLoginType.LOGIN_TYPE_FB.equals(loginType) && faceBookUser != null) {
-                    loginResponse.setAccessToken(faceBookUser.getAccessTokenString());
+                    loginResponse.setThirdToken(faceBookUser.getAccessTokenString());
                     loginResponse.setGender(FbSp.getFbGender(mActivity));
                     loginResponse.setBirthday(FbSp.getFbBirthday(mActivity));
                     loginResponse.setIconUri(faceBookUser.getPictureUri());
