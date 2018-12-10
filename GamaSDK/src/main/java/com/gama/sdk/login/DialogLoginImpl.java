@@ -68,15 +68,21 @@ public class DialogLoginImpl implements ILogin {
         boolean isTermRead = GamaUtil.getStartTermRead(activity);
 
         if(!isTermRead) {
-            StartTermsLayoutV2 termsLayoutV2 = new StartTermsLayoutV2(activity, com.gama.sdk.R.style.Gama_Theme_AppCompat_Dialog_Notitle_Fullscreen);
-            termsLayoutV2.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            StartTermsLayoutV2 termsLayoutV2 = new StartTermsLayoutV2(activity, com.gama.sdk.R.style.Gama_Theme_AppCompat_Dialog_Notitle_Fullscreen, new StartTermsLayoutV2.ViewListener() {
                 @Override
-                public void onDismiss(DialogInterface dialogInterface) {
+                public void onSuccess() {
                     SLoginDialogV2 sLoginDialog = new SLoginDialogV2(activity, com.gama.sdk.R.style.Gama_Theme_AppCompat_Dialog_Notitle_Fullscreen);
                     sLoginDialog.setSFacebookProxy(sFacebookProxy);
                     sLoginDialog.setSGoogleSignIn(sGoogleSignIn);
                     sLoginDialog.setLoginCallBack(iLoginCallBack);
                     sLoginDialog.show();
+                }
+
+                @Override
+                public void onFailure() {
+                    if(iLoginCallBack != null) { //回调退出登录界面的状态
+                        iLoginCallBack.onLogin(null);
+                    }
                 }
             });
             termsLayoutV2.show();

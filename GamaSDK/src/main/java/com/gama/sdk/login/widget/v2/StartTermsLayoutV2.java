@@ -36,22 +36,26 @@ public class StartTermsLayoutV2 extends SBaseDialog {
     private String serviceUrl, privateUrl;
     private FrameLayout layout;
     private Context mContext;
+    private ViewListener viewListener;
 
-    public StartTermsLayoutV2(@NonNull Context context) {
+    public StartTermsLayoutV2(@NonNull Context context, ViewListener listener) {
         super(context);
         this.mContext = context;
+        this.viewListener = listener;
         setFullScreen();
     }
 
-    public StartTermsLayoutV2(@NonNull Context context, int themeResId) {
+    public StartTermsLayoutV2(@NonNull Context context, int themeResId, ViewListener listener) {
         super(context, themeResId);
         this.mContext = context;
+        this.viewListener = listener;
         setFullScreen();
     }
 
-    protected StartTermsLayoutV2(@NonNull Context context, boolean cancelable, @Nullable OnCancelListener cancelListener) {
+    protected StartTermsLayoutV2(@NonNull Context context, boolean cancelable, @Nullable OnCancelListener cancelListener, ViewListener listener) {
         super(context, cancelable, cancelListener);
         this.mContext = context;
+        this.viewListener = listener;
         setFullScreen();
     }
 
@@ -59,7 +63,7 @@ public class StartTermsLayoutV2 extends SBaseDialog {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.v2_start_term);
-        this.setCancelable(false);
+//        this.setCancelable(false);
         this.setCanceledOnTouchOutside(false);
 
         ScreenHelper screenHelper = new ScreenHelper((Activity) mContext);
@@ -114,6 +118,9 @@ public class StartTermsLayoutV2 extends SBaseDialog {
 //                        ToastUtils.toast(getContext(), "已勾选，进行下一步流程");
                         GamaUtil.saveStartTermRead(getContext(), true);
                         StartTermsLayoutV2.this.dismiss();
+                        if(viewListener != null) {
+                            viewListener.onSuccess();
+                        }
                     }
                 } else {
                     if(!checkBox1.isChecked() || !checkBox2.isChecked()) {
@@ -122,10 +129,26 @@ public class StartTermsLayoutV2 extends SBaseDialog {
 //                        ToastUtils.toast(getContext(), "已勾选，进行下一步流程");
                         GamaUtil.saveStartTermRead(getContext(), true);
                         StartTermsLayoutV2.this.dismiss();
+                        if(viewListener != null) {
+                            viewListener.onSuccess();
+                        }
                     }
                 }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if(viewListener != null) {
+            viewListener.onFailure();
+        }
+    }
+
+    public interface ViewListener {
+        void onSuccess();
+        void onFailure();
     }
 
 }
