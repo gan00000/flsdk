@@ -113,10 +113,10 @@
                     android:text="发消息到游戏中心" />
 
                 <Button
-                    android:id="@+id/sendText"
+                    android:id="@+id/checkShare"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="发消息到messager" />
+                    android:text="判断能否分享" />
 
             </LinearLayout>
 

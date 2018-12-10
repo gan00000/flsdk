@@ -2,6 +2,7 @@ package com.gama.sdk.out;
 
 import android.app.Activity;
 import android.net.Uri;
+import android.os.Bundle;
 
 import com.core.base.callback.IGameLifeCycle;
 import com.gama.base.bean.SGameLanguage;
@@ -52,21 +53,23 @@ public interface IGama extends IGameLifeCycle {
     /**
      * 获取好友
      */
-    void gamaFetchFriends(Activity activity, GamaThirdPartyType type, String paging, int limit, FetchFriendsCallback callback);
+    void gamaFetchFriends(Activity activity, GamaThirdPartyType type, Bundle bundle, String paging, int limit, FetchFriendsCallback callback);
 
     /**
      * 分享
      */
-    void gamaShare(Activity activity, GamaThirdPartyType type, String linkUrl, Uri picUri, ISdkCallBack callback);
+    void gamaShare(Activity activity, GamaThirdPartyType type, String message, String linkUrl, String picPath, ISdkCallBack callback);
 
-    /**
-     * 给好友发送消息
-     */
-    void gamaSentMessageToSpecifiedFriends(Activity activity, GamaThirdPartyType type, Uri uri, ISdkCallBack callback);
+//    void gamaSentMessageToSpecifiedFriends(Activity activity, GamaThirdPartyType type, Uri uri, ISdkCallBack callback);
 
     /**
      * 发消息至游戏中心
      */
     void gamaInviteFriends(Activity activity, GamaThirdPartyType type, List<FriendProfile> invitingList, String msg, String title, InviteFriendsCallback callback);
+
+    /**
+     * 检查是否支持分享
+     */
+    boolean gamaShouldShareWithType(Activity activity, GamaThirdPartyType type);
 
 }

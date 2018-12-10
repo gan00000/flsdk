@@ -59,4 +59,7 @@
     <string name="py_login_page_change_pwd">修改密碼</string>
     <string name="py_login_page_forgot_pwd">忘記密碼</string>
 
+    <!--SDK功能提示-->
+    <string name="gama_toast_msg_app_not_install" translatable="false">由於您沒有安裝%s，請先裝APP後再進行分享</string>
+
 </resources>

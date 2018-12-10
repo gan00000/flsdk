@@ -48,7 +48,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private Button loginButton, othersPayButton,googlePayBtn,shareButton, showPlatform, crashlytics,
-            PurchasesHistory, getFriend, invite, sendText, getInfo, getFriendNext, getFriendPrevious;
+            PurchasesHistory, getFriend, invite, checkShare, getInfo, getFriendNext, getFriendPrevious;
     IabHelper mHelper;
     private IGama iGama;
     private String nextUrl, previousUrl;
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         getFriendNext = (Button) findViewById(R.id.getFriendNext);
         getFriendPrevious = (Button) findViewById(R.id.getFriendPrevious);
         invite = (Button) findViewById(R.id.invite);
-        sendText = (Button) findViewById(R.id.sendText);
+        checkShare = (Button) findViewById(R.id.checkShare);
 
         iGama = GamaFactory.create();
 
@@ -205,9 +205,71 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                //下面的参数请按照实际传值
-                String shareUrl = "http://www.gamamobi.com/";
-                Uri uri = Uri.fromFile(new File(Environment.getExternalStorageDirectory() + File.separator + "1.jpg"));
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this)
+                        .setItems(new String[]{"facebook", "line", "whatsapp", "facebook-messenger"}, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                GamaThirdPartyType type = null;
+                                if(i == 0) {
+                                    type = GamaThirdPartyType.FACEBOOK;
+                                } else if(i == 1) {
+                                    type = GamaThirdPartyType.LINE;
+                                } else if(i == 2) {
+                                    type = GamaThirdPartyType.WHATSAPP;
+                                } else if(i == 3) {
+                                    type = GamaThirdPartyType.FACEBOOK_MESSENGER;
+                                }
+                                //下面的参数请按照实际传值
+                                final String message = "分享内容啊";
+                                final String shareUrl = "http://www.gamamobi.com/";
+                                final String picPath = Environment.getExternalStorageDirectory() + File.separator + "1.jpg";
+//                                final Uri uri = Uri.fromFile(new File(Environment.getExternalStorageDirectory() + File.separator + "1.jpg"));
+
+                                final GamaThirdPartyType finalType = type;
+                                AlertDialog.Builder builder2 = new AlertDialog.Builder(MainActivity.this)
+                                        .setItems(new String[]{"分享图片", "分享文字/链接"}, new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int index) {
+                                                if(index == 0) {
+                                                    iGama.gamaShare(MainActivity.this, finalType, message, "", picPath, new ISdkCallBack() {
+                                                        @Override
+                                                        public void success() {
+                                                            Log.i("facebook", "success");
+                                                        }
+
+                                                        @Override
+                                                        public void failure() {
+                                                            Log.i("facebook", "failure");
+                                                        }
+                                                    });
+                                                } else if(index == 1) {
+                                                    if(finalType == GamaThirdPartyType.FACEBOOK_MESSENGER) {
+                                                        ToastUtils.toast(MainActivity.this, "facebook-messenger只支持图片分享");
+                                                        return;
+                                                    }
+                                                    iGama.gamaShare(MainActivity.this, finalType, message, shareUrl, null, new ISdkCallBack() {
+                                                        @Override
+                                                        public void success() {
+                                                            Log.i("facebook", "success");
+                                                        }
+
+                                                        @Override
+                                                        public void failure() {
+                                                            Log.i("facebook", "failure");
+                                                        }
+                                                    });
+                                                }
+                                            }
+                                        })
+                                        .setTitle("选择分享内容");
+                                builder2.create().show();
+
+                            }
+                        })
+                        .setTitle("选择分享方式");
+
+                builder.create().show();
+
                 //分享回调
 //                ISdkCallBack iSdkCallBack = new ISdkCallBack() {
 //                    @Override
@@ -224,18 +286,6 @@ public class MainActivity extends AppCompatActivity {
 //                iGama.share(MainActivity.this,iSdkCallBack,shareUrl);
 
 //                iGama.share(MainActivity.this,iSdkCallBack,"", "", shareUrl, "");
-
-                iGama.gamaShare(MainActivity.this, GamaThirdPartyType.FACEBOOK, "", uri, new ISdkCallBack() {
-                    @Override
-                    public void success() {
-                        Log.i("facebook", "success");
-                    }
-
-                    @Override
-                    public void failure() {
-                        Log.i("facebook", "failure");
-                    }
-                });
 
             }
         });
@@ -321,11 +371,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        final int limit = 1;
+        final Bundle bundle = new Bundle();
+        bundle.putString("fields", "friends.limit(" + limit + ")");
 
         getFriend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                iGama.gamaFetchFriends(MainActivity.this, GamaThirdPartyType.FACEBOOK, "", 1, new FetchFriendsCallback() {
+                iGama.gamaFetchFriends(MainActivity.this, GamaThirdPartyType.FACEBOOK, bundle, "", limit, new FetchFriendsCallback() {
                     @Override
                     public void onError() {
 
@@ -360,7 +413,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "没有下一页", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                iGama.gamaFetchFriends(MainActivity.this, GamaThirdPartyType.FACEBOOK, nextUrl, 1, new FetchFriendsCallback() {
+                iGama.gamaFetchFriends(MainActivity.this, GamaThirdPartyType.FACEBOOK, null, nextUrl, limit, new FetchFriendsCallback() {
                     @Override
                     public void onError() {
 
@@ -395,7 +448,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "没有上一页", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                iGama.gamaFetchFriends(MainActivity.this, GamaThirdPartyType.FACEBOOK, previousUrl, 1, new FetchFriendsCallback() {
+                iGama.gamaFetchFriends(MainActivity.this, GamaThirdPartyType.FACEBOOK, null, previousUrl, limit, new FetchFriendsCallback() {
                     @Override
                     public void onError() {
 
@@ -430,7 +483,7 @@ public class MainActivity extends AppCompatActivity {
                 List<FriendProfile> invitingList = new ArrayList<>();
                 FriendProfile profile = new FriendProfile();
                 profile.setThirdId("529074447599533");
-                invitingList.add(profile);
+//                invitingList.add(profile);
 
                 iGama.gamaInviteFriends(MainActivity.this, GamaThirdPartyType.FACEBOOK, invitingList, "消息內容", "標題", new InviteFriendsCallback() {
                     @Override
@@ -452,38 +505,35 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        sendText.setOnClickListener(new View.OnClickListener() {
+        checkShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Uri linkUri = Uri.parse("https://www.facebook.com/");
-                Uri uri = Uri.fromFile(new File(Environment.getExternalStorageDirectory() + File.separator + "1.jpg"));
-                iGama.gamaSentMessageToSpecifiedFriends(MainActivity.this, GamaThirdPartyType.FACEBOOK, uri, new ISdkCallBack() {
-                    @Override
-                    public void success() {
-                        Log.i("facebook", "success");
-                    }
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this)
+                        .setItems(new String[]{"facebook", "line", "whatsapp", "facebook-messenger"}, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                GamaThirdPartyType type = null;
+                                if(i == 0) {
+                                    type = GamaThirdPartyType.FACEBOOK;
+                                } else if(i == 1) {
+                                    type = GamaThirdPartyType.LINE;
+                                } else if(i == 2) {
+                                    type = GamaThirdPartyType.WHATSAPP;
+                                } else if(i == 3) {
+                                    type = GamaThirdPartyType.FACEBOOK_MESSENGER;
+                                }
+                                boolean canShare = iGama.gamaShouldShareWithType(MainActivity.this, type);
+                                if(canShare) {
+                                    ToastUtils.toast(MainActivity.this, "支持分享");
+                                } else {
+                                    ToastUtils.toast(MainActivity.this, "不支持分享");
+                                }
 
-                    @Override
-                    public void failure() {
-                        Log.i("facebook", "failure");
-                    }
-                });
-//                proxy.shareToMessenger(MainActivity.this, uri, new SFacebookProxy.FbShareCallBack() {
-//                    @Override
-//                    public void onCancel() {
-//                        Log.i("facebook", "cancel");
-//                    }
-//
-//                    @Override
-//                    public void onError(String message) {
-//                        Log.i("facebook", "error " + message);
-//                    }
-//
-//                    @Override
-//                    public void onSuccess() {
-//                        Log.i("facebook", "success");
-//                    }
-//                });
+                            }
+                        })
+                        .setTitle("选择分享方式");
+
+                builder.create().show();
             }
         });
 

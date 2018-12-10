@@ -8,17 +8,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1004969904571:android:fda4bedcfafb8f53",
+        "mobilesdk_app_id": "1:1004969904571:android:c660d68c9217ba82",
         "android_client_info": {
-          "package_name": "com.gamamobi.sds"
+          "package_name": "com.tencent.tmgp.ssktw"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1004969904571-s8hl65r1jhcqokc9hbvn0p61msamvi21.apps.googleusercontent.com",
+          "client_id": "1004969904571-f5nc1ffeb8qhv1vb079qbn6ieqs4lmql.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.gamamobi.sds",
+            "package_name": "com.tencent.tmgp.ssktw",
             "certificate_hash": "f70eda06327547eaac632d14e9617217224420f2"
           }
         },
@@ -42,6 +42,14 @@
             {
               "client_id": "1004969904571-cqr2hgjfargge5no0jropq9vkgn7pge8.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "1004969904571-16ujmtufi76cmsad2fifrimp4qn83g3c.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.tencent.tmgp.ssktw",
+                "app_store_id": "1444385242"
+              }
             }
           ]
         },

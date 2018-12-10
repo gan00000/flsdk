@@ -12,6 +12,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.core.base.callback.ISReqCallBack;
+import com.core.base.utils.FileUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.ToastUtils;
 import com.facebook.AccessToken;
@@ -23,6 +24,7 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
 import com.facebook.appevents.AppEventsLogger;
+import com.facebook.common.file.FileUtils;
 import com.facebook.internal.ImageRequest;
 import com.facebook.login.DefaultAudience;
 import com.facebook.login.LoginBehavior;
@@ -47,6 +49,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -750,6 +753,7 @@ public class SFacebookProxy {
 			
 			@Override
 			public void onSuccess(FaceBookUser user) {
+				Log.i(FB_TAG, "已经登录了");
 				GameRequestDialog requestDialog = new GameRequestDialog(activity);
 				if (callbackManager == null) {
 					callbackManager = CallbackManager.Factory.create();
@@ -1071,16 +1075,15 @@ public class SFacebookProxy {
 		EfunCommandExecute.getInstance().asynExecute(activity, invitableFriendsCmd);*/
 	}
 
-//	@Deprecated
-//	public void shareToMessenger(Activity activity, String picPath, FbShareCallBack fbShareCallBack) {
-//		if(TextUtils.isEmpty(picPath)) {
-//			Log.e(FB_TAG, "shareToMessenger 图片路径为空");
-//			return;
-//		}
+	public void shareToMessenger(Activity activity, String picPath, FbShareCallBack fbShareCallBack) {
+		if(TextUtils.isEmpty(picPath)) {
+			Log.e(FB_TAG, "shareToMessenger 图片路径为空");
+			return;
+		}
 //		File tempFile = new File(picPath);
-//		Uri picUri = Uri.fromFile(tempFile);
-//		shareToMessenger(activity, picUri, null, fbShareCallBack);
-//	}
+		Uri picUri = FileUtil.getContentUri(activity, picPath);
+		shareToMessenger(activity, picUri, fbShareCallBack);
+	}
 	
 	public void shareToMessenger(Activity activity, Uri picUri, FbShareCallBack fbShareCallBack) {
 		if(!MessengerUtils.hasMessengerInstalled(activity)) {

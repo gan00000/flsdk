@@ -4,11 +4,11 @@ public class GamaAdsConstant {
     /**
      * 登入事件
      */
-    public static final String GAMA_EVENT_LOGIN = "gama_login_event_android";
+    public static final String GAMA_EVENT_LOGIN = "gama_login_event";
     /**
      *注册事件
      */
-    public static final String GAMA_EVENT_REGISTER = "gama_register_event_android";
+    public static final String GAMA_EVENT_REGISTER = "gama_register_event";
     /**
      * 角色信息事件
      */
