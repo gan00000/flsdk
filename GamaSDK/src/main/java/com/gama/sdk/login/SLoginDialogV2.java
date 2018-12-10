@@ -26,7 +26,6 @@ import com.gama.sdk.login.widget.v2.AccountManagerLayoutV2;
 import com.gama.sdk.login.widget.v2.AccountRegisterLayoutV2;
 import com.gama.sdk.login.widget.v2.AccountRegisterTermsLayoutV2;
 import com.gama.sdk.login.widget.v2.PyAccountLoginV2;
-import com.gama.sdk.login.widget.v2.StartTermsLayoutV2;
 import com.gama.sdk.login.widget.v2.ThirdPlatBindAccountLayoutV2;
 import com.gama.sdk.login.widget.v2.XMMainLoginLayoutV2;
 import com.gama.thirdlib.facebook.SFacebookProxy;
@@ -136,10 +135,8 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 
         viewPageList = new ArrayList<>();
 
-        //初始化条款界面
-        toFirstTermView();
         //初始化主登录界面
-//        toMainLoginView();
+        toMainLoginView();
         //初始化自动登录界面
         initAutoLoginView();
 
@@ -192,9 +189,6 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
             if(iLoginCallBack != null) { //回调退出登录界面的状态
                 iLoginCallBack.onLogin(null);
             }
-        } else if(firstTermView != null && firstTermView.getVisibility() == View.VISIBLE) { //如果主界面显示就退出登录
-            super.onBackPressed();
-
         } else if (viewPageList != null) { //如果在其他页面，就复用当前显示页面的返回按钮
             for (View childView : viewPageList) {
                 if (childView == null){
@@ -213,27 +207,6 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
     public void popBackStack(SLoginBaseRelativeLayout baseRelativeLayout) {
 
     }
-
-    public void toFirstTermView() {
-        if (firstTermView == null || !viewPageList.contains(firstTermView)){
-
-            firstTermView = new StartTermsLayoutV2(context);
-            firstTermView.setLoginDialogV2(this);
-            contentFrameLayout.addView(firstTermView);
-            viewPageList.add(firstTermView);
-        }
-        for (View childView : viewPageList) {
-            if (childView == null){
-                continue;
-            }
-            if (childView == firstTermView){
-                childView.setVisibility(View.VISIBLE);
-            }else{
-                childView.setVisibility(View.GONE);
-            }
-        }
-    }
-
 
     public void toMainLoginView() {
         if (mainLoginView == null || !viewPageList.contains(mainLoginView)){
@@ -515,9 +488,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
         if (iLoginPresenter.hasAccountLogin()){
             toAccountLoginView();
         }else{
-            // TODO: 2018/11/30 跳转启动条款
-//            toMainLoginView();
-            toFirstTermView();
+            toMainLoginView();
         }
     }
 
