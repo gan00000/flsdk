@@ -54,6 +54,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
     private TextView autoLoginWaitTime;
     private TextView autoLoginChangeAccount;
 
+    private SLoginBaseRelativeLayout firstTermView;
     private SLoginBaseRelativeLayout mainLoginView;
     private SLoginBaseRelativeLayout accountLoginView;
     private SLoginBaseRelativeLayout registerView;
@@ -206,7 +207,6 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
     public void popBackStack(SLoginBaseRelativeLayout baseRelativeLayout) {
 
     }
-
 
     public void toMainLoginView() {
         if (mainLoginView == null || !viewPageList.contains(mainLoginView)){

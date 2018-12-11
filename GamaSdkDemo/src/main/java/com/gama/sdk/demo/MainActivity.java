@@ -29,6 +29,7 @@ import com.gama.pay.gp.util.Inventory;
 import com.gama.pay.gp.util.Purchase;
 import com.gama.sdk.callback.IPayListener;
 import com.gama.sdk.out.GamaFactory;
+import com.gama.sdk.out.GamaOpenWebType;
 import com.gama.sdk.out.GamaThirdPartyType;
 import com.gama.sdk.out.IGama;
 import com.gama.sdk.out.ISdkCallBack;
@@ -48,7 +49,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private Button loginButton, othersPayButton,googlePayBtn,shareButton, showPlatform, crashlytics,
-            PurchasesHistory, getFriend, invite, checkShare, getInfo, getFriendNext, getFriendPrevious;
+            PurchasesHistory, getFriend, invite, checkShare, getInfo, getFriendNext, getFriendPrevious,
+            service;
     IabHelper mHelper;
     private IGama iGama;
     private String nextUrl, previousUrl;
@@ -74,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
         getFriendPrevious = (Button) findViewById(R.id.getFriendPrevious);
         invite = (Button) findViewById(R.id.invite);
         checkShare = (Button) findViewById(R.id.checkShare);
+        service = (Button) findViewById(R.id.service);
 
         iGama = GamaFactory.create();
 
@@ -98,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
                             String accessToken = sLoginResponse.getAccessToken();
                             String timestamp = sLoginResponse.getTimestamp();
                             Log.i("gamaLogin", "uid:" + uid);
+                            Log.i("gamaLogin", "sLoginResponse: " + sLoginResponse.getNickName());
                             Log.i("gamaLogin", "sLoginResponse: " + sLoginResponse.getBirthday());
                             Log.i("gamaLogin", "sLoginResponse: " + sLoginResponse.getAccessToken());
                             Log.i("gamaLogin", "sLoginResponse: " + sLoginResponse.getGender());
@@ -308,7 +312,7 @@ public class MainActivity extends AppCompatActivity {
                  * 打开一个指定的url
                  * String url: 打开的url
                  */
-                iGama.openWebPage(MainActivity.this, "https://dodi.gamamobi.com/news/index.html");
+                iGama.openWebPage(MainActivity.this, GamaOpenWebType.CUSTOM_URL, "https://dodi.gamamobi.com/news/index.html");
             }
         });
 
@@ -561,6 +565,13 @@ public class MainActivity extends AppCompatActivity {
                         Log.i("facebook", "UserInfo: " +  user.getUserThirdId());
                     }
                 });
+            }
+        });
+
+        service.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                iGama.openWebPage(MainActivity.this, GamaOpenWebType.SERVICE, "");
             }
         });
     }

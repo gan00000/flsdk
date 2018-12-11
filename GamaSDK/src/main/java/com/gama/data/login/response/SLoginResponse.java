@@ -52,6 +52,11 @@ public class SLoginResponse extends BaseResponseModel {
      */
     private String thirdToken = "";
 
+    /**
+     * 第三方的昵称
+     */
+    private String nickName = "";
+
     public String getThirdToken() {
         return thirdToken;
     }
@@ -154,5 +159,13 @@ public class SLoginResponse extends BaseResponseModel {
 
     public void setThirdId(String thirdId) {
         this.thirdId = thirdId;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 }

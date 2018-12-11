@@ -223,6 +223,10 @@ public class ResConfig {
 		}
 		return url;
 	}
+
+	public static String getServiceUrl(Context context) {
+		return getResStringByName(context, "gama_service_url");
+	}
 	
 
 

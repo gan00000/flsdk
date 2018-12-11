@@ -43,6 +43,7 @@ import com.gama.sdk.social.callback.InviteFriendsCallback;
 import com.gama.sdk.social.callback.UserProfileCallback;
 import com.gama.sdk.social.share.GamaShare;
 import com.gama.sdk.utils.LogTimer;
+import com.gama.sdk.webpage.GamaWebPageHelper;
 import com.gama.thirdlib.facebook.FaceBookUser;
 import com.gama.thirdlib.facebook.FriendProfile;
 import com.gama.thirdlib.facebook.SFacebookProxy;
@@ -450,15 +451,26 @@ public class GamaImpl implements IGama {
     }
 
     @Override
-    public void openWebPage(final Activity activity, final String url) {
+    public void openWebPage(final Activity activity, final GamaOpenWebType type, final String url) {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                SWebViewDialog sWebViewDialog = new SWebViewDialog(activity, R.style.Gama_Theme_AppCompat_Dialog_Notitle_Fullscreen);
+                switch (type) {
 
-                sWebViewDialog.setWebUrl(url);
+                    case CUSTOM_URL:
+                        if(!TextUtils.isEmpty(url)) {
+                            SWebViewDialog sWebViewDialog = new SWebViewDialog(activity, R.style.Gama_Theme_AppCompat_Dialog_Notitle_Fullscreen);
 
-                sWebViewDialog.show();
+                            sWebViewDialog.setWebUrl(url);
+
+                            sWebViewDialog.show();
+                        }
+                        break;
+
+                    case SERVICE:
+                        GamaWebPageHelper.startService(activity);
+                        break;
+                }
             }
         });
     }

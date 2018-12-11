@@ -915,6 +915,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     loginResponse.setBirthday(FbSp.getFbBirthday(mActivity));
                     loginResponse.setIconUri(faceBookUser.getPictureUri());
                     loginResponse.setThirdId(faceBookUser.getUserFbId());
+                    loginResponse.setNickName(faceBookUser.getName());
                 }
 
             } catch (Exception e) {

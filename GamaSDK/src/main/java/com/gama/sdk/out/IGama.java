@@ -41,7 +41,7 @@ public interface IGama extends IGameLifeCycle {
 
     void onWindowFocusChanged(Activity activity, boolean hasFocus);
 
-    void openWebPage(Activity activity, String url);
+    void openWebPage(Activity activity, GamaOpenWebType type, String url);
 
     void openPlatform(Activity activity);
 

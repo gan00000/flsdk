@@ -396,4 +396,12 @@ public class GamaUtil {
 
         return ApkInfoUtil.getCustomizedUniqueIdOrAndroidId(ctx);
     }
+
+    private static final String GAMA_START_TERM_STATUS = "GAMA_START_TERM_STATUS";
+    public static void saveStartTermRead(Context context, boolean isRead){
+        SPUtil.saveSimpleInfo(context, GamaUtil.GAMA_SP_FILE,GAMA_START_TERM_STATUS, isRead);
+    }
+    public static boolean getStartTermRead(Context context){
+        return SPUtil.getSimpleBoolean(context, GamaUtil.GAMA_SP_FILE, GAMA_START_TERM_STATUS);
+    }
 }

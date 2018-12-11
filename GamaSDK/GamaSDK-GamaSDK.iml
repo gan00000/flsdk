@@ -125,6 +125,7 @@
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-games-11.0.4" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-vector-drawable-27.0.2" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/Users/evatar/Documents/AS/GamaSDK/youzu/libs/com-crashlytics-sdk-android_answers-classes.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support.constraint:constraint-layout-1.1.2" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-core-utils-27.0.2" level="project" />
     <orderEntry type="library" name="Gradle: com.facebook.android:facebook-core-4.34.0" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-drive-11.0.4" level="project" />
@@ -133,6 +134,7 @@
     <orderEntry type="library" name="Gradle: __local_aars__:/Users/evatar/Documents/AS/GamaSDK/youzu/libs/com-crashlytics-sdk-android_crashlytics-classes.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.facebook.soloader:soloader-0.3.0" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/Users/evatar/Documents/AS/GamaSDK/GamaSDK/libs/takephoto_library_3.0.1.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support.constraint:constraint-layout-solver:1.1.2@jar" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/Users/evatar/Documents/AS/GamaSDK/youzu/libs/GoogleConversionTrackingSdk-2.2.4.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/Users/evatar/Documents/AS/GamaSDK/youzu/libs/com-crashlytics-sdk-android_crashlytics-core-classes.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/Users/evatar/Documents/AS/GamaSDK/GamaSDK/libs/nineoldandroids-library-2.4.0.jar:unspecified@jar" level="project" />

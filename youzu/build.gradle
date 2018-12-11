@@ -70,4 +70,6 @@ dependencies {
     api 'com.google.android.gms:play-services-plus:11.0.4'
     api 'com.google.android.gms:play-services-base:11.0.4'
     api 'com.google.android.gms:play-services-games:11.0.4'
+
+    api 'com.android.support:customtabs:25.0.0'
 }

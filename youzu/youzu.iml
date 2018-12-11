@@ -149,6 +149,7 @@
     <orderEntry type="library" name="Gradle: com.android.support:support-v4-25.2.0" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/Users/evatar/Documents/AS/GamaSDK/youzu/libs/AF-Android-SDK.jar:unspecified@jar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.android.support.test.espresso:espresso-idling-resource-3.0.2" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:customtabs-25.0.0" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/Users/evatar/Documents/AS/GamaSDK/youzu/libs/firebase-iid-11.0.4.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-auth-11.0.4" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.hamcrest:hamcrest-integration:1.3@jar" level="project" />

@@ -1,34 +1,43 @@
 <resources>
 
     <!--登录域名-->
-    <string name="gama_login_pre_url">https://login.gamamobi.com/</string>
-    <string name="gama_login_spa_url">https://login.gamamobi.com/</string>
+    <string name="gama_login_pre_url" translatable="false">https://login.gamamobi.com/</string>
+    <string name="gama_login_spa_url" translatable="false">https://login.gamamobi.com/</string>
 
     <!--支付域名-->
-    <string name="gama_pay_pre_url">https://pay.gamamobi.com/</string>
-    <string name="gama_pay_spa_url">https://pay.gamamobi.com/</string>
+    <string name="gama_pay_pre_url" translatable="false">https://pay.gamamobi.com/</string>
+    <string name="gama_pay_spa_url" translatable="false">https://pay.gamamobi.com/</string>
 
     <!--活动域名-->
-    <string name="gama_act_pre_url">https://activity.gamamobi.com/</string>
-    <string name="gama_act_spa_url">https://activity.gamamobi.com/</string>
+    <string name="gama_act_pre_url" translatable="false">https://activity.gamamobi.com/</string>
+    <string name="gama_act_spa_url" translatable="false">https://activity.gamamobi.com/</string>
 
     <!--cdn域名-->
-    <string name="gama_cdn_pre_url">https://sdk-download.gamamobi.com/</string>
-    <string name="gama_cdn_spa_url">https://sdk-download.gamamobi.com/</string>
+    <string name="gama_cdn_pre_url" translatable="false">https://sdk-download.gamamobi.com/</string>
+    <string name="gama_cdn_spa_url" translatable="false">https://sdk-download.gamamobi.com/</string>
 
     <!--广告域名-->
-    <string name="gama_ads_pre_url">https://ads.gamamobi.com/</string>
-    <string name="gama_ads_spa_url">https://ads.gamamobi.com/</string>
+    <string name="gama_ads_pre_url" translatable="false">https://ads.gamamobi.com/</string>
+    <string name="gama_ads_spa_url" translatable="false">https://ads.gamamobi.com/</string>
 
     <!--平台域名-->
-    <string name="gama_plat_pre_url">https://platform.gamamobi.com/</string>
-    <string name="gama_plat_spa_url">https://platform.gamamobi.com/</string>
+    <string name="gama_plat_pre_url" translatable="false">https://platform.gamamobi.com/</string>
+    <string name="gama_plat_spa_url" translatable="false">https://platform.gamamobi.com/</string>
 
     <!--客服域名-->
-    <string name="gama_cs_pre_url"></string>
-    <string name="gama_cs_spa_url"></string>
+    <string name="gama_cs_pre_url" translatable="false"></string>
+    <string name="gama_cs_spa_url" translatable="false"></string>
 
     <!-- 服务条款 -->
-    <string name="gama_terms_url">https://member.gamamobi.com/member/archive.html</string>
+    <string name="gama_terms_url" translatable="false">https://member.gamamobi.com/member/archive.html</string>
+
+    <!--使用者條款 - 服務條款-->
+    <string name="gama_start_terms_service_url" translatable="false">https://member.gamamobi.com/member/archivemb.html</string>
+
+    <!--使用者條款 - 隱私規章-->
+    <string name="gama_start_terms_private_url" translatable="false">https://member.gamamobi.com/member/privacymb.html</string>
+
+    <!--客服链接-->
+    <string name="gama_service_url" translatable="false">https://member.gamamobi.com/service/turn.html</string>
 
 </resources>
