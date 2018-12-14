@@ -124,6 +124,12 @@
                     android:layout_height="wrap_content"
                     android:text="客服" />
 
+                <Button
+                    android:id="@+id/announcement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="公告" />
+
             </LinearLayout>
 
 

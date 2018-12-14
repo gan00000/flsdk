@@ -455,22 +455,7 @@ public class GamaImpl implements IGama {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                switch (type) {
-
-                    case CUSTOM_URL:
-                        if(!TextUtils.isEmpty(url)) {
-                            SWebViewDialog sWebViewDialog = new SWebViewDialog(activity, R.style.Gama_Theme_AppCompat_Dialog_Notitle_Fullscreen);
-
-                            sWebViewDialog.setWebUrl(url);
-
-                            sWebViewDialog.show();
-                        }
-                        break;
-
-                    case SERVICE:
-                        GamaWebPageHelper.startService(activity);
-                        break;
-                }
+                GamaWebPageHelper.openWebPage(activity, type, url);
             }
         });
     }

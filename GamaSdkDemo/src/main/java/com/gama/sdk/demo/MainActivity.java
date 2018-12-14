@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button loginButton, othersPayButton,googlePayBtn,shareButton, showPlatform, crashlytics,
             PurchasesHistory, getFriend, invite, checkShare, getInfo, getFriendNext, getFriendPrevious,
-            service;
+            service, announcement;
     IabHelper mHelper;
     private IGama iGama;
     private String nextUrl, previousUrl;
@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
         invite = (Button) findViewById(R.id.invite);
         checkShare = (Button) findViewById(R.id.checkShare);
         service = (Button) findViewById(R.id.service);
+        announcement = (Button) findViewById(R.id.announcement);
 
         iGama = GamaFactory.create();
 
@@ -572,6 +573,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 iGama.openWebPage(MainActivity.this, GamaOpenWebType.SERVICE, "");
+            }
+        });
+
+        announcement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                iGama.openWebPage(MainActivity.this, GamaOpenWebType.ANNOUNCEMENT, "");
             }
         });
     }
