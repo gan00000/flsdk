@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-//apply plugin: 'io.fabric'
+apply plugin: 'io.fabric'
 
 android {
 
@@ -191,4 +191,4 @@ def getReleaseTime() {
     return new Date().format("yyyy-MM-dd-HH-mm", TimeZone.getDefault())
 }
 
-//apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.gms.google-services'

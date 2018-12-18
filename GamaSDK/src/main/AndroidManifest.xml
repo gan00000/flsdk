@@ -63,18 +63,18 @@
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation" />
 
-        <!--<activity android:name="com.facebook.CustomTabMainActivity" />-->
+        <activity android:name="com.facebook.CustomTabMainActivity" />
 
-        <!--<activity-->
-            <!--android:name="com.facebook.CustomTabActivity"-->
-            <!--android:exported="true">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.VIEW" />-->
-                <!--<category android:name="android.intent.category.DEFAULT" />-->
-                <!--<category android:name="android.intent.category.BROWSABLE" />-->
-                <!--<data android:scheme="@string/fb_login_protocol_scheme" />-->
-            <!--</intent-filter>-->
-        <!--</activity>-->
+        <activity
+            android:name="com.facebook.CustomTabActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="@string/fb_login_protocol_scheme" />
+            </intent-filter>
+        </activity>
 
         <!--
          The initialization ContentProvider will call FacebookSdk.sdkInitialize automatically
@@ -85,10 +85,10 @@
          following placeholder in the authority to identify each host application as if it was
          a completely different provider.
         -->
-        <!--<provider-->
-            <!--android:name="com.facebook.internal.FacebookInitProvider"-->
-            <!--android:authorities="${applicationId}.FacebookInitProvider"-->
-            <!--android:exported="false" />-->
+        <provider
+            android:name="com.facebook.internal.FacebookInitProvider"
+            android:authorities="${applicationId}.FacebookInitProvider"
+            android:exported="false" />
 
         <!-- 如需要从Facebook进行本地图片分享，需要开启以下两项 -->
         <meta-data
@@ -133,33 +133,28 @@
 
         <!--play-services config start-->
 
-        <!--<activity-->
-        <!--android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"-->
-        <!--android:excludeFromRecents="true"-->
-        <!--android:exported="false"-->
-        <!--android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|fontScale"-->
-        <!--android:screenOrientation="sensorLandscape"-->
-        <!--android:theme="@android:style/Theme.Translucent.NoTitleBar" />-->
-        <!--&lt;!&ndash;-->
-        <!--Service handling Google Sign-In user revocation. For apps that do not integrate with-->
-        <!--Google Sign-In, this service will never be started.-->
-        <!--&ndash;&gt;-->
-        <!--<service-->
-        <!--android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"-->
-        <!--android:exported="true"-->
-        <!--android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION" />-->
+        <activity
+            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|fontScale"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:screenOrientation="sensorLandscape"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <!--
+        Service handling Google Sign-In user revocation. For apps that do not integrate with
+        Google Sign-In, this service will never be started.
+        -->
+        <service
+            android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
+            android:exported="true"
+            android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION" />
 
-        <!--<activity-->
-        <!--android:name="com.google.android.gms.common.api.GoogleApiActivity"-->
-        <!--android:exported="false"-->
-        <!--android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|fontScale"-->
-        <!--android:screenOrientation="sensorLandscape"-->
-        <!--android:theme="@android:style/Theme.Translucent.NoTitleBar" />-->
-
-        <!--&lt;!&ndash;g+ login&ndash;&gt;-->
-        <!--<meta-data-->
-        <!--android:name="com.google.android.gms.version"-->
-        <!--android:value="@integer/google_play_services_version" />-->
+        <activity
+            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|fontScale"
+            android:exported="false"
+            android:screenOrientation="sensorLandscape"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <!--play game services-->
         <meta-data android:name="com.google.android.gms.games.APP_ID"
@@ -172,12 +167,6 @@
             <!--android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|fontScale"-->
             <!--android:windowSoftInputMode="stateHidden|adjustResize"-->
             <!--android:theme="@style/Gama.Theme.AppCompat.Light.NoActionBar.FullScreen.Translucent" />-->
-
-        <!--<service android:name="com.gama.sdk.fcm.GamaFirebaseMessagingService">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="com.google.firebase.MESSAGING_EVENT" />-->
-            <!--</intent-filter>-->
-        <!--</service>-->
 
         <provider
             android:authorities="${applicationId}.GamaProvider"
