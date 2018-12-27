@@ -3,8 +3,6 @@ package com.gama.thirdlib.google;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 
@@ -14,7 +12,6 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
-import com.google.android.gms.plus.PlusShare;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.io.IOException;
@@ -131,12 +128,12 @@ public class SGoogleProxy {
 
 	public void share(Activity activity,String text,String url){
 		// Launch the Google+ share dialog with attribution to your app.
-	      Intent shareIntent = new PlusShare.Builder(activity)
-	          .setType("text/plain")
-	          .setText(text)
-	          .setContentUrl(Uri.parse(url))
-	          .getIntent();
-	      activity.startActivityForResult(shareIntent, GOOGLE_SHARE_CODE);
+//	      Intent shareIntent = new PlusShare.Builder(activity)
+//	          .setType("text/plain")
+//	          .setText(text)
+//	          .setContentUrl(Uri.parse(url))
+//	          .getIntent();
+//	      activity.startActivityForResult(shareIntent, GOOGLE_SHARE_CODE);
 	}
 
 	public static void firebaseAnalytics(Activity activity, String eventName, Bundle params) {

@@ -72,14 +72,6 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
         backView.setOnClickListener(this);
         registerConfirm.setOnClickListener(this);
 
-//        if (GamaUtil.isXM(getContext())){//星盟标题
-//            ((ImageView)contentView.findViewById(R.id.v2_bg_title_register_iv)).setImageResource(R.drawable.bg_xm_title_register);
-//        }
-//
-//        if (Localization.getSGameLanguage(getActivity()) == SGameLanguage.en_US){//星盟--星彼英文一样
-//            ((ImageView)contentView.findViewById(R.id.v2_bg_title_register_iv)).setImageResource(R.drawable.bg_xm_title_register_en);
-//        }
-
         return contentView;
     }
 

@@ -52,10 +52,6 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
 
         findPwdConfireBtn = (TextView) contentView.findViewById(R.id.v2_findpwd_btn);
 
-//        if (Localization.getSGameLanguage(getActivity()) == SGameLanguage.en_US){
-//            ((ImageView)contentView.findViewById(R.id.py_findpwd_account_title)).setImageResource(R.drawable.bg_title_forgot_pwd_en);
-//        }
-
         backView.setOnClickListener(this);
         findPwdConfireBtn.setOnClickListener(this);
 

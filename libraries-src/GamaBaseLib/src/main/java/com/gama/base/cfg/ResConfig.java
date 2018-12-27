@@ -9,6 +9,7 @@ import com.core.base.utils.PL;
 import com.core.base.utils.ResUtil;
 import com.core.base.utils.SPUtil;
 import com.core.base.utils.SStringUtil;
+import com.gama.base.bean.SGameLanguage;
 import com.gama.base.utils.GamaUtil;
 
 import java.util.Properties;
@@ -48,9 +49,9 @@ public class ResConfig {
 
 	public static String getGameLanguage(Context context) {
 		String language = SPUtil.getSimpleString(context, GamaUtil.GAMA_SP_FILE, GamaUtil.GAMA_GAME_LANGUAGE);
-//		if (TextUtils.isEmpty(language) && GamaUtil.isMainland(context)) {
-//			language = SGameLanguage.zh_CH.getLanguage();
-//		}
+		if (TextUtils.isEmpty(language)) {
+			language = SGameLanguage.zh_TW.getLanguage();
+		}
 		return language;
 	}
 

@@ -24,7 +24,6 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
 import com.facebook.appevents.AppEventsLogger;
-import com.facebook.common.file.FileUtils;
 import com.facebook.internal.ImageRequest;
 import com.facebook.login.DefaultAudience;
 import com.facebook.login.LoginBehavior;
@@ -43,13 +42,11 @@ import com.facebook.share.model.SharePhotoContent;
 import com.facebook.share.widget.GameRequestDialog;
 import com.facebook.share.widget.ShareDialog;
 import com.gama.thirdlib.BuildConfig;
-import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

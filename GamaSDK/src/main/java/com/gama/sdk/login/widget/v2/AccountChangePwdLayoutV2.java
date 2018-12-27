@@ -54,11 +54,6 @@ public class AccountChangePwdLayoutV2 extends SLoginBaseRelativeLayout implement
 
         changePwdConfireBtn = (TextView) contentView.findViewById(R.id.py_changepwd_confirm);
 
-
-//        if (Localization.getSGameLanguage(getActivity()) == SGameLanguage.en_US){
-//            ((ImageView)contentView.findViewById(R.id.py_change_pwd_title)).setImageResource(R.drawable.bg_title_chang_pwd_en);
-//        }
-
         backView.setOnClickListener(this);
         changePwdConfireBtn.setOnClickListener(this);
 

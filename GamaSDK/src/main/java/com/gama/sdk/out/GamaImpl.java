@@ -105,7 +105,7 @@ public class GamaImpl implements IGama {
                         //时间打点开始
                         LogTimer.getInstance().start(activity);
 
-                        setGameLanguage(activity,SGameLanguage.zh_TW);
+//                        setGameLanguage(activity,SGameLanguage.zh_TW);
 
                         ConfigRequest.requestBaseCfg(activity.getApplicationContext());//下载配置文件
 //                ConfigRequest.requestTermsCfg(activity.getApplicationContext());//下载服务条款
@@ -332,6 +332,7 @@ public class GamaImpl implements IGama {
                     iLogin.onResume(activity);
                 }
                 GooglePayHelper.getInstance().setForeground(true);
+                GamaWebPageHelper.onResume(activity);
             }
         });
     }
@@ -450,12 +451,23 @@ public class GamaImpl implements IGama {
         });
     }
 
+    @Deprecated
     @Override
     public void openWebPage(final Activity activity, final GamaOpenWebType type, final String url) {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                GamaWebPageHelper.openWebPage(activity, type, url);
+                openWebPage(activity, type, url, null);
+            }
+        });
+    }
+
+    @Override
+    public void openWebPage(final Activity activity, final GamaOpenWebType type, final String url, final ISdkCallBack callBack) {
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                GamaWebPageHelper.openWebPage(activity, type, url, callBack);
             }
         });
     }

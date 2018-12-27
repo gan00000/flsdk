@@ -1,11 +1,15 @@
 package com.gama.sdk.webpage;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.support.customtabs.CustomTabsIntent;
 import android.text.TextUtils;
 
+import com.core.base.callback.IGameLifeCycle;
 import com.core.base.callback.ISReqCallBack;
 import com.core.base.utils.PL;
 import com.gama.base.bean.unify.UnifiedSwitchResponseBean;
@@ -15,14 +19,18 @@ import com.gama.base.utils.GamaUtil;
 import com.gama.sdk.R;
 import com.gama.sdk.SWebViewDialog;
 import com.gama.sdk.out.GamaOpenWebType;
+import com.gama.sdk.out.ISdkCallBack;
 import com.gama.sdk.utils.DialogUtil;
 
 public class GamaWebPageHelper {
+    private static ISdkCallBack iSdkCallBack;
+    private static boolean isLaunch = false;
 
-    public static void openWebPage(Context context, GamaOpenWebType type, String url) {
+    public static void openWebPage(Context context, GamaOpenWebType type, String url, ISdkCallBack callBack) {
+        iSdkCallBack = callBack;
         switch (type) {
             case CUSTOM_URL:
-                    openWebPageWithDefaultDialog(context, url);
+                openWebPageWithDefaultDialog(context, url);
                 break;
 
             case SERVICE:
@@ -46,12 +54,20 @@ public class GamaWebPageHelper {
                         if(responseBean.getData() != null && responseBean.getData().getNotice() != null) {
                             String url = responseBean.getData().getNotice().getUrl();
                             openWebPageWithDefaultDialog(context, url);
+                        } else {
+                            if(iSdkCallBack != null) {
+                                iSdkCallBack.success();
+                            }
                         }
                     } else {
-
+                        if(iSdkCallBack != null) {
+                            iSdkCallBack.success();
+                        }
                     }
                 } else {
-
+                    if(iSdkCallBack != null) {
+                        iSdkCallBack.success();
+                    }
                 }
             }
 
@@ -71,16 +87,25 @@ public class GamaWebPageHelper {
     public static void startService(Context context) {
         String servicesUrl = ResConfig.getServiceUrl(context);
         if(TextUtils.isEmpty(servicesUrl)){
+            PL.e("没有找到客服URL");
+            if(iSdkCallBack != null) {
+                iSdkCallBack.failure();
+            }
             return;
         }
         String url = addInfoToUrl(context, servicesUrl);
         try {
+            isLaunch = true;
             CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
             builder.setToolbarColor(Color.WHITE);
             CustomTabsIntent customTabsIntent = builder.build();
             customTabsIntent.launchUrl(context, Uri.parse(url));
         } catch (Exception e) {
             e.printStackTrace();
+            PL.e("打开customtab失败");
+            if(iSdkCallBack != null) {
+                iSdkCallBack.failure();
+            }
         }
 
     }
@@ -111,14 +136,35 @@ public class GamaWebPageHelper {
     private static void openWebPageWithDefaultDialog(Context context, String url) {
         if(TextUtils.isEmpty(url)) {
             PL.e("Open Web Page url null");
+            if(iSdkCallBack != null) {
+                iSdkCallBack.failure();
+            }
             return;
         }
         try {
             SWebViewDialog sWebViewDialog = new SWebViewDialog(context, R.style.Gama_Theme_AppCompat_Dialog_Notitle_Fullscreen);
             sWebViewDialog.setWebUrl(url);
+            sWebViewDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialogInterface) {
+                    if(iSdkCallBack != null) {
+                        iSdkCallBack.success();
+                    }
+                }
+            });
             sWebViewDialog.show();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    public static void onResume(Activity activity) {
+        if(isLaunch) {
+            isLaunch = false;
+            if(iSdkCallBack != null) {
+                iSdkCallBack.success();
+            }
+        }
+    }
+
 }

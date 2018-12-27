@@ -7,7 +7,7 @@
             android:layout_width="@dimen/px_220"
             android:layout_height="@dimen/px_100"
             android:layout_centerInParent="true"
-            android:background="@drawable/py_cons_gray_bg"
+            android:background="@drawable/gama_cons_gray_bg"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -16,7 +16,7 @@
                 android:layout_width="@dimen/px_60"
                 android:layout_height="@dimen/px_60"
                 android:layout_marginLeft="@dimen/px_10"
-                android:indeterminateDrawable="@drawable/py_progress_dialog_rotate"/>
+                android:indeterminateDrawable="@drawable/gama_progress_dialog_rotate"/>
 
         <TextView
                 android:id="@+id/dialog_loading_text"

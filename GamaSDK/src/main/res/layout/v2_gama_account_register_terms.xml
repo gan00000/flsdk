@@ -33,7 +33,7 @@ s
                 <ImageView android:layout_width="@dimen/px_40"
                     android:layout_height="@dimen/px_40"
                     android:layout_marginLeft="@dimen/px_10"
-                    android:src="@drawable/py_back_button"
+                    android:src="@drawable/gama_back_button"
 
                     />
             </LinearLayout>

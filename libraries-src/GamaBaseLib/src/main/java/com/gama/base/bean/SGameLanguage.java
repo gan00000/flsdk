@@ -10,6 +10,8 @@ public enum SGameLanguage {
 
     en_US("en-US"),
 
+    ko_KR("ko"),
+
     zh_CH("zh-CH");
 
     private String lang;

@@ -211,11 +211,6 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
     public void toMainLoginView() {
         if (mainLoginView == null || !viewPageList.contains(mainLoginView)){
 
-//            if (isXM) {
-//                mainLoginView = new XMMainLoginLayoutV2(context);//星盟
-//            }else {
-//                mainLoginView = new MainLoginLayoutV2(context);//舊的新玩意
-//            }
             mainLoginView = new XMMainLoginLayoutV2(context);//星盟
             mainLoginView.setLoginDialogV2(this);
             contentFrameLayout.addView(mainLoginView);

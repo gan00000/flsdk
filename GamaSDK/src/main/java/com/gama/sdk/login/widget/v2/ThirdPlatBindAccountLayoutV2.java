@@ -68,10 +68,6 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
 
         bindConfirm = (TextView) contentView.findViewById(R.id.py_bind_account_confirm);
 
-//        if (Localization.getSGameLanguage(getActivity()) == SGameLanguage.en_US){
-//            ((ImageView)contentView.findViewById(R.id.py_bind_account_title)).setImageResource(R.drawable.bg_title_bind_account_en);
-//        }
-
         termsSelectImageView.setSelected(true);
 
         termsSelectImageView.setOnClickListener(this);

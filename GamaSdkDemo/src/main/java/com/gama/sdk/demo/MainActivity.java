@@ -45,6 +45,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -81,10 +82,11 @@ public class MainActivity extends AppCompatActivity {
 
         iGama = GamaFactory.create();
 
-        iGama.setGameLanguage(this, SGameLanguage.zh_TW);
+        iGama.setGameLanguage(this, SGameLanguage.ko_KR);
 
         //初始化sdk
         iGama.initSDK(this);
+        //设置语言
 
         //在游戏Activity的onCreate生命周期中调用
         iGama.onCreate(this);
@@ -313,7 +315,17 @@ public class MainActivity extends AppCompatActivity {
                  * 打开一个指定的url
                  * String url: 打开的url
                  */
-                iGama.openWebPage(MainActivity.this, GamaOpenWebType.CUSTOM_URL, "https://dodi.gamamobi.com/news/index.html");
+                iGama.openWebPage(MainActivity.this, GamaOpenWebType.CUSTOM_URL, "https://dodi.gamamobi.com/news/index.html", new ISdkCallBack() {
+                    @Override
+                    public void success() {
+                        Log.i("gama", "关闭web页面");
+                    }
+
+                    @Override
+                    public void failure() {
+
+                    }
+                });
             }
         });
 
@@ -572,14 +584,34 @@ public class MainActivity extends AppCompatActivity {
         service.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                iGama.openWebPage(MainActivity.this, GamaOpenWebType.SERVICE, "");
+                iGama.openWebPage(MainActivity.this, GamaOpenWebType.SERVICE, "", new ISdkCallBack() {
+                    @Override
+                    public void success() {
+                        Log.i("gama", "关闭客服页面");
+                    }
+
+                    @Override
+                    public void failure() {
+
+                    }
+                });
             }
         });
 
         announcement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                iGama.openWebPage(MainActivity.this, GamaOpenWebType.ANNOUNCEMENT, "");
+                iGama.openWebPage(MainActivity.this, GamaOpenWebType.ANNOUNCEMENT, "", new ISdkCallBack() {
+                    @Override
+                    public void success() {
+                        Log.i("gama", "关闭公告页面");
+                    }
+
+                    @Override
+                    public void failure() {
+
+                    }
+                });
             }
         });
     }

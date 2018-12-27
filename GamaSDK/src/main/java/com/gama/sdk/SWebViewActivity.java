@@ -63,7 +63,7 @@ public class SWebViewActivity extends SBaseSdkActivity {
        View titleLayout = findViewById(R.id.py_title_layout_id);
         if (SStringUtil.isNotEmpty(webTitle)){
             titleLayout.setVisibility(View.VISIBLE);
-            titleLayout.setBackgroundResource(R.drawable.py_title_sdk_bg);
+            titleLayout.setBackgroundResource(R.drawable.gama_title_sdk_bg);
         }else{
             titleLayout.setVisibility(View.GONE);
             return;

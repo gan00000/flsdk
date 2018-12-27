@@ -48,23 +48,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!--<ImageView
-                android:layout_width="@dimen/px_334"
-                android:layout_height="@dimen/px_300"
-                android:src="@drawable/btn_xm_member_register"
-                android:scaleType="centerCrop"
-                android:id="@+id/btn_xm_member_register_iv"
-                />
-
-            <ImageView
-                android:layout_width="@dimen/px_334"
-                android:layout_height="@dimen/px_300"
-                android:src="@drawable/btn_xm_member_login"
-                android:scaleType="centerCrop"
-                android:id="@+id/btn_xm_member_login_iv"
-
-                />-->
-
             <ImageView
                 android:layout_width="@dimen/px_600"
                 android:layout_height="@dimen/px_200"

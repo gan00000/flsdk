@@ -45,7 +45,7 @@
             android:gravity="center"
             android:textSize="@dimen/sp_24"
             android:textColor="@android:color/black"
-            android:background="@drawable/py_edit_text_rectangle_bg"
+            android:background="@drawable/gama_edit_text_rectangle_bg"
             android:text="@string/py_auto_login_change"
             android:id="@+id/py_auto_login_change"
             />
