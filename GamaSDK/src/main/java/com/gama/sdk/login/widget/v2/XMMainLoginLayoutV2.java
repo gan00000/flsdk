@@ -19,7 +19,7 @@ public class XMMainLoginLayoutV2 extends SLoginBaseRelativeLayout implements Vie
 
     private View contentView;
 
-    private View fbLoginView, starLoginView, macLoginView, googleLoginView;
+    private ImageView fbLoginView, starLoginView, macLoginView, googleLoginView;
 //    private View starpyRegView;
 
     public XMMainLoginLayoutV2(Context context) {
@@ -48,6 +48,15 @@ public class XMMainLoginLayoutV2 extends SLoginBaseRelativeLayout implements Vie
         macLoginView = contentView.findViewById(R.id.btn_xm_guest_login_iv);
 
         googleLoginView = contentView.findViewById(R.id.btn_xm_google_login_iv);
+
+        SGameLanguage sGameLanguage = Localization.getSGameLanguage(getContext());
+        if(SGameLanguage.ko_KR == sGameLanguage) {
+            starLoginView.setImageResource(R.drawable.btn_xm_member_login_kr);
+            macLoginView.setImageResource(R.drawable.gama_guest_login_kr);
+        } else if(SGameLanguage.zh_TW == sGameLanguage) {
+            starLoginView.setImageResource(R.drawable.btn_xm_member_login);
+            macLoginView.setImageResource(R.drawable.gama_guest_login);
+        }
 
         fbLoginView.setOnClickListener(this);
         starLoginView.setOnClickListener(this);
