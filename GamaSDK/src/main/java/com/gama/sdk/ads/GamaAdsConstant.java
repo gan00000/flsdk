@@ -16,15 +16,20 @@ public class GamaAdsConstant {
     /**
      * 10分钟事件
      */
-    public static final String GAMA_EVENT_10_MIN = "10min";
+    public static final String GAMA_EVENT_10_MIN = "gama_10min";
     /**
      * 20分钟事件
      */
-    public static final String GAMA_EVENT_20_MIN = "20min";
+    public static final String GAMA_EVENT_20_MIN = "gama_20min";
     /**
      * 30分钟事件
      */
-    public static final String GAMA_EVENT_30_MIN = "30min";
+    public static final String GAMA_EVENT_30_MIN = "gama_30min";
+    /**
+     * 留存事件
+     */
+    public static final String GAMA_RETENTION = "gama_%dretention";
+
 
     /**
      * 角色名

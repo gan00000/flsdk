@@ -404,4 +404,17 @@ public class GamaUtil {
     public static boolean getStartTermRead(Context context){
         return SPUtil.getSimpleBoolean(context, GamaUtil.GAMA_SP_FILE, GAMA_START_TERM_STATUS);
     }
+
+    /**
+     * 保存首次登入时间,userid为key
+     */
+    public static void saveFirstLoginDate(Context context, String userid){
+        SPUtil.saveSimpleInfo(context, GamaUtil.GAMA_SP_FILE, userid, System.currentTimeMillis());
+    }
+    /**
+     * 保存首次登入时间,userid为key
+     */
+    public static long getFirstLoginDate(Context context, String userid){
+        return SPUtil.getSimpleLong(context, GamaUtil.GAMA_SP_FILE, userid);
+    }
 }

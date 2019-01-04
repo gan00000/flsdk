@@ -137,6 +137,8 @@ public class StarEventLogger {
             //AppsFlyer上报
             map.put(GamaAdsConstant.GAMA_EVENT_USER_ID, userId);
             AppsFlyerLib.getInstance().trackEvent(activity.getApplicationContext(), GamaAdsConstant.GAMA_EVENT_ROLE_INFO, map);
+
+            GamaAdsUtils.caculateRetention(activity, userId);
         } catch (Exception e) {
             e.printStackTrace();
         }
