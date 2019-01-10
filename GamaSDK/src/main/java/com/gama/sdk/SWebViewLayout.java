@@ -15,6 +15,7 @@ import com.core.base.SWebView;
 import com.core.base.utils.SStringUtil;
 
 /**
+ * SWebViewDialog的内容布局
  * Created by gan on 2017/4/7.
  */
 

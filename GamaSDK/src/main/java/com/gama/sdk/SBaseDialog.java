@@ -1,5 +1,6 @@
 package com.gama.sdk;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -12,6 +13,7 @@ import android.view.WindowManager;
 import com.core.base.utils.ApkInfoUtil;
 import com.core.base.utils.AppUtil;
 import com.core.base.utils.PL;
+import com.core.base.utils.ScreenHelper;
 import com.gama.base.utils.Localization;
 
 /**
@@ -41,14 +43,25 @@ public class SBaseDialog extends Dialog {
     private void initContentLayout(Context context){
         //获得dialog的window窗口
         Window window = this.getWindow();
-
-        int padDimension = ApkInfoUtil.getNavBarHeight(context);
-        if (padDimension <= 0){
-            padDimension = context.getResources().getDimensionPixelSize(R.dimen.px_15);
-            window.getDecorView().setPadding(padDimension, padDimension, padDimension, padDimension);
-        }else {
-            window.getDecorView().setPadding(padDimension, padDimension/2, padDimension, padDimension/2);
+        if(window == null) {
+            return;
         }
+        window.getDecorView().setPadding(0, 0, 0, 0);
+//        ScreenHelper screenHelper = new ScreenHelper((Activity) context);
+//        int screenWidth = screenHelper.getScreenWidth();
+//        int screenHeight = screenHelper.getScreenHeight();
+//        if(screenWidth >= screenHeight) {
+//            int padDimension = ApkInfoUtil.getNavBarHeight(context);
+//
+//            if (padDimension <= 0) {
+//                padDimension = context.getResources().getDimensionPixelSize(R.dimen.px_15);
+//                window.getDecorView().setPadding(padDimension, padDimension, padDimension, padDimension);
+//            } else {
+//                window.getDecorView().setPadding(padDimension, padDimension / 2, padDimension, padDimension / 2);
+//            }
+//        } else {
+//            window.getDecorView().setPadding(0, 0, 0, 0);
+//        }
 
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE|
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);

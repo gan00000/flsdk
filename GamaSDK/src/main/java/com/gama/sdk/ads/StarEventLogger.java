@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.view.TextureView;
 
 import com.appsflyer.AFInAppEventParameterName;
 import com.appsflyer.AFInAppEventType;
@@ -43,7 +44,12 @@ public class StarEventLogger {
         try {
             AppsFlyerLib.getInstance().setCollectIMEI(false);
             AppsFlyerLib.getInstance().setCollectAndroidID(false);
-//            AppsFlyerLib.getInstance().startTracking(activity.getApplication(), ResConfig.getConfigInAssetsProperties(activity,"gama_ads_appflyer_dev_key"));
+            String afDevKey = ResConfig.getConfigInAssetsProperties(activity,"gama_ads_appflyer_dev_key");
+            if(TextUtils.isEmpty(afDevKey)) {
+                PL.e("af dev key empty!");
+            } else {
+                AppsFlyerLib.getInstance().startTracking(activity.getApplication(), afDevKey);
+            }
 
             SFacebookProxy.initFbSdk(activity.getApplicationContext());
 

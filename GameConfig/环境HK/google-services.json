@@ -1,0 +1,143 @@
+{
+  "project_info": {
+    "project_number": "313841676851",
+    "firebase_url": "https://hjsk-4a39f.firebaseio.com",
+    "project_id": "hjsk-4a39f",
+    "storage_bucket": "hjsk-4a39f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:313841676851:android:f058cd1c9db3290c",
+        "android_client_info": {
+          "package_name": "com.gamamobi.hjsk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "313841676851-q4q6to8iqs9sqgmbmlds2up0lqct8qro.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gamamobi.hjsk",
+            "certificate_hash": "f70eda06327547eaac632d14e9617217224420f2"
+          }
+        },
+        {
+          "client_id": "313841676851-04cfor7cahbdplfda4ra1g9crbcp5ksh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2H6Ux2P0wTPSBtsGd4lTC8PijqDsdeoQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "313841676851-04cfor7cahbdplfda4ra1g9crbcp5ksh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:313841676851:android:ec271636870527b5",
+        "android_client_info": {
+          "package_name": "com.gamamobi.hjsk.wp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "313841676851-0r74fbe21v2bofbft667kag9v7jde2dr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gamamobi.hjsk.wp",
+            "certificate_hash": "f70eda06327547eaac632d14e9617217224420f2"
+          }
+        },
+        {
+          "client_id": "313841676851-04cfor7cahbdplfda4ra1g9crbcp5ksh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2H6Ux2P0wTPSBtsGd4lTC8PijqDsdeoQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "313841676851-04cfor7cahbdplfda4ra1g9crbcp5ksh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:313841676851:android:4342319aa79070d6",
+        "android_client_info": {
+          "package_name": "com.gamamobi.hkhjsk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "313841676851-naaescb2bvp1seh5d2t8pjvr1cp2bl38.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gamamobi.hkhjsk",
+            "certificate_hash": "f70eda06327547eaac632d14e9617217224420f2"
+          }
+        },
+        {
+          "client_id": "313841676851-04cfor7cahbdplfda4ra1g9crbcp5ksh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2H6Ux2P0wTPSBtsGd4lTC8PijqDsdeoQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "313841676851-04cfor7cahbdplfda4ra1g9crbcp5ksh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

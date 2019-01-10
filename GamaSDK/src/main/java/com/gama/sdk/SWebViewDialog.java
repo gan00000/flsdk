@@ -20,6 +20,7 @@ import com.core.base.utils.PL;
 import com.core.base.utils.ToastUtils;
 
 /**
+ * 公共的Dialog WebView视窗
  * Created by gan on 2017/3/31.
  */
 
