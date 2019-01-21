@@ -138,7 +138,7 @@
 
         <TextView
             android:id="@+id/gama_gama_start_term_tv1"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
@@ -147,6 +147,7 @@
             android:textSize="13sp"
             app:layout_constraintBottom_toBottomOf="@id/gama_gama_start_term_cb1"
             app:layout_constraintStart_toEndOf="@id/gama_gama_start_term_cb1"
+            app:layout_constraintEnd_toEndOf="@id/gama_start_term_wv1"
             app:layout_constraintTop_toTopOf="@id/gama_gama_start_term_cb1" />
 
         <CheckBox
@@ -163,7 +164,7 @@
 
         <TextView
             android:id="@+id/gama_gama_start_term_tv2"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
@@ -172,6 +173,7 @@
             android:textSize="13sp"
             app:layout_constraintBottom_toBottomOf="@id/gama_gama_start_term_cb2"
             app:layout_constraintStart_toEndOf="@id/gama_gama_start_term_cb2"
+            app:layout_constraintEnd_toEndOf="@id/gama_start_term_wv2"
             app:layout_constraintTop_toTopOf="@id/gama_gama_start_term_cb2" />
 
         <Button

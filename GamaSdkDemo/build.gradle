@@ -99,6 +99,8 @@ android {
             resValue "string", "fb_login_protocol_scheme", "fb1040235646130047"
             resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1040235646130047"
             signingConfig signingConfigs.release
+            //测试商品id
+            resValue "string", "test_sku", "com.ezfy.1usd"
         }
         ezfytest {
             applicationId "com.gamamobi.ezfy"
@@ -143,6 +145,8 @@ android {
             resValue "string", "fb_login_protocol_scheme", "fb278115919495359"
             resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider278115919495359"
             signingConfig signingConfigs.release
+            //测试商品id
+            resValue "string", "test_sku", "com.fsztm.1usd"
         }
         sds {
             applicationId "com.tencent.tmgp.ssktw"
@@ -156,6 +160,8 @@ android {
             resValue "string", "fb_login_protocol_scheme", "fb362739184296670"
             resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider362739184296670"
             signingConfig signingConfigs.release
+            //测试商品id
+            resValue "string", "test_sku", "com.sds.1usd"
         }
     }
 

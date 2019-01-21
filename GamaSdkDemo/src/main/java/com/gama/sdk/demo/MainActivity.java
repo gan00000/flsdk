@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
         iGama = GamaFactory.create();
 
-//        iGama.setGameLanguage(this, SGameLanguage.ko_KR);
+        iGama.setGameLanguage(this, SGameLanguage.ko_KR);
 
         //初始化sdk
         iGama.initSDK(this);
@@ -187,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
                 productId 充值的商品id
                 customize 自定义透传字段（从服务端回调到cp）
                 */
-                iGama.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(), "com.fsztm.1usd", "customize", new IPayListener() {
+                iGama.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(), getResources().getString(R.string.test_sku), "customize", new IPayListener() {
                     @Override
                     public void onPayFinish(Bundle bundle) {
                         PL.i("GooglePay结束");
