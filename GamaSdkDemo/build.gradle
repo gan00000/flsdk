@@ -101,6 +101,7 @@ android {
             signingConfig signingConfigs.release
             //测试商品id
             resValue "string", "test_sku", "com.ezfy.1usd"
+            resValue "string", "sdk_name", "二战SDK"
         }
         ezfytest {
             applicationId "com.gamamobi.ezfy"
@@ -147,6 +148,7 @@ android {
             signingConfig signingConfigs.release
             //测试商品id
             resValue "string", "test_sku", "com.fsztm.1usd"
+            resValue "string", "sdk_name", "封神SDK"
         }
         sds {
             applicationId "com.tencent.tmgp.ssktw"
@@ -162,6 +164,7 @@ android {
             signingConfig signingConfigs.release
             //测试商品id
             resValue "string", "test_sku", "com.sds.1usd"
+            resValue "string", "sdk_name", "圣斗士SDK"
         }
         smzy {
             applicationId "com.gamamobi.smzy"
@@ -176,6 +179,7 @@ android {
             resValue "string", "facebook_app_name", "神魔之翼"
             //每个游戏的demo设置
             resValue "string", "test_sku", "com.smzy.1usd"
+            resValue "string", "sdk_name", "神魔SDK"
             signingConfig signingConfigs.release
         }
     }
