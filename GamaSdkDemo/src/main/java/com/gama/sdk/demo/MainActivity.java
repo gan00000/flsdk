@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
         iGama = GamaFactory.create();
 
-        iGama.setGameLanguage(this, SGameLanguage.ko_KR);
+//        iGama.setGameLanguage(this, SGameLanguage.ko_KR);
 
         //初始化sdk
         iGama.initSDK(this);
