@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.core.base.utils.GamaTimeUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.ToastUtils;
 import com.crashlytics.android.Crashlytics;
@@ -333,6 +334,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 iGama.openPlatform(MainActivity.this);
+
+                GamaTimeUtil.getBeiJingTime(MainActivity.this);
+                GamaTimeUtil.getDisplayTime(MainActivity.this);
             }
         });
 

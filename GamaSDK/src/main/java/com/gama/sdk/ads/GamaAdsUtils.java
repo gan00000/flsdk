@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 
 import com.core.base.utils.PL;
+import com.gama.base.excute.GamaRoleInfoRequestTask;
 import com.gama.base.utils.GamaUtil;
 import com.gama.sdk.R;
 
@@ -11,6 +12,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Map;
 
 public class GamaAdsUtils {
 
@@ -55,5 +57,11 @@ public class GamaAdsUtils {
         }
 
         return between;
+    }
+
+    //上报角色信息
+    public static void upLoadRoleInfo(Context context, Map<String, Object> map) {
+        GamaRoleInfoRequestTask task = new GamaRoleInfoRequestTask(context, map);
+        task.excute();
     }
 }

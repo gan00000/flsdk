@@ -7,4 +7,9 @@ public class RequestDomain {
      */
     public static final String UNIFIED_SWITCH = "app/unified/unifiedSwitch";
 
+    /**
+     * 角色信息上报
+     */
+    public static final String SEPARATE_SERVER = "separateServer/";
+
 }

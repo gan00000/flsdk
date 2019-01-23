@@ -18,6 +18,7 @@ import com.core.base.utils.SPUtil;
 import com.core.base.utils.SStringUtil;
 import com.gama.base.bean.AdsRequestBean;
 import com.gama.base.cfg.ResConfig;
+import com.gama.base.excute.GamaRoleInfoRequestTask;
 import com.gama.base.utils.GamaUtil;
 import com.gama.data.login.response.SLoginResponse;
 import com.gama.pay.gp.constants.GooglePayContant;
@@ -143,8 +144,10 @@ public class StarEventLogger {
             //AppsFlyer上报
             map.put(GamaAdsConstant.GAMA_EVENT_USER_ID, userId);
             AppsFlyerLib.getInstance().trackEvent(activity.getApplicationContext(), GamaAdsConstant.GAMA_EVENT_ROLE_INFO, map);
-
+            //计算留存
             GamaAdsUtils.caculateRetention(activity, userId);
+            //上报给gama服务器
+            GamaAdsUtils.upLoadRoleInfo(activity, map);
         } catch (Exception e) {
             e.printStackTrace();
         }
