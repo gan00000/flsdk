@@ -40,6 +40,11 @@ import com.gama.sdk.social.callback.InviteFriendsCallback;
 import com.gama.sdk.social.callback.UserProfileCallback;
 import com.gama.thirdlib.facebook.FriendProfile;
 import com.gama.thirdlib.facebook.SFacebookProxy;
+import com.gama.thirdlib.twitter.GamaTwitterLogin;
+import com.twitter.sdk.android.core.DefaultLogger;
+import com.twitter.sdk.android.core.Twitter;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
+import com.twitter.sdk.android.core.TwitterConfig;
 
 import org.json.JSONObject;
 
@@ -52,10 +57,11 @@ public class MainActivity extends AppCompatActivity {
 
     private Button loginButton, othersPayButton,googlePayBtn,shareButton, showPlatform, crashlytics,
             PurchasesHistory, getFriend, invite, checkShare, getInfo, getFriendNext, getFriendPrevious,
-            service, announcement;
+            service, announcement, twitterLogin;
     IabHelper mHelper;
     private IGama iGama;
     private String nextUrl, previousUrl;
+    private GamaTwitterLogin gamaTwitterLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,14 +86,15 @@ public class MainActivity extends AppCompatActivity {
         checkShare = (Button) findViewById(R.id.checkShare);
         service = (Button) findViewById(R.id.service);
         announcement = (Button) findViewById(R.id.announcement);
+        twitterLogin = (Button) findViewById(R.id.twitterLogin);
 
         iGama = GamaFactory.create();
 
-//        iGama.setGameLanguage(this, SGameLanguage.ko_KR);
+        //设置语言
+        iGama.setGameLanguage(this, SGameLanguage.ja_JP);
 
         //初始化sdk
         iGama.initSDK(this);
-        //设置语言
 
         //在游戏Activity的onCreate生命周期中调用
         iGama.onCreate(this);
@@ -618,6 +625,24 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
+
+//        TwitterConfig config = new TwitterConfig.Builder(this)
+//                .logger(new DefaultLogger(Log.DEBUG))
+//                .twitterAuthConfig(new TwitterAuthConfig(getResources().getString(R.string.com_twitter_sdk_android_CONSUMER_KEY),
+//                        getResources().getString(R.string.com_twitter_sdk_android_CONSUMER_SECRET)))
+//                .debug(true)
+//                .build();
+//        Twitter.initialize(config);
+//
+//        gamaTwitterLogin = new GamaTwitterLogin(MainActivity.this);
+//
+//        twitterLogin.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                gamaTwitterLogin.startLogin();
+//            }
+//        });
+
     }
 
     private void consume() {
@@ -699,6 +724,10 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         iGama.onActivityResult(this, requestCode, resultCode, data);
+
+        if(gamaTwitterLogin != null) {
+            gamaTwitterLogin.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     @Override

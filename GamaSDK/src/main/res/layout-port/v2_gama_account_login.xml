@@ -98,7 +98,7 @@
                     android:textColorHint="@android:color/darker_gray"
                     android:inputType="text"
                     android:maxLines="1"
-                    android:textSize="@dimen/sp_18" />
+                    android:textSize="@dimen/sp_14" />
 
             </LinearLayout>
 
@@ -129,7 +129,7 @@
                     android:textColorHint="@android:color/darker_gray"
                     android:inputType="text"
                     android:maxLines="1"
-                    android:textSize="@dimen/sp_18" />
+                    android:textSize="@dimen/sp_14" />
 
 
                 <ImageView
@@ -171,7 +171,7 @@
                 android:maxLines="1"
                 android:text="@string/py_login_save_account"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/sp_18" />
+                android:textSize="@dimen/sp_16" />
 
 
         </LinearLayout>
@@ -215,7 +215,7 @@
                     android:layout_marginLeft="@dimen/px_10"
                     android:text="@string/py_free_reg"
                     android:textColor="@android:color/white"
-                    android:textSize="@dimen/sp_20"
+                    android:textSize="@dimen/sp_14"
                     android:textStyle="bold"
                     android:visibility="gone" />
 
@@ -226,7 +226,7 @@
                     android:layout_marginLeft="@dimen/px_20"
                     android:text="@string/py_findpwd"
                     android:textColor="@android:color/white"
-                    android:textSize="@dimen/sp_20"
+                    android:textSize="@dimen/sp_14"
                     android:textStyle="bold" />
 
                 <!-- <TextView
@@ -235,7 +235,7 @@
                      android:id="@+id/py_login_go_bindUnique_v2"
                      android:text="@string/py_bind_unique"
                      android:textColor="@android:color/white"
-                     android:textSize="@dimen/sp_20"
+                     android:textSize="@dimen/sp_14"
                      android:textStyle="bold"
                      android:layout_marginLeft="@dimen/px_20"
                      />
@@ -246,7 +246,7 @@
                      android:id="@+id/py_login_go_bindFb_v2"
                      android:text="@string/py_bind_fb"
                      android:textColor="@android:color/white"
-                     android:textSize="@dimen/sp_20"
+                     android:textSize="@dimen/sp_14"
                      android:textStyle="bold"
                      android:layout_marginLeft="@dimen/px_20"
                      />-->
@@ -258,7 +258,7 @@
                     android:layout_marginLeft="@dimen/px_20"
                     android:text="@string/py_register_account"
                     android:textColor="@android:color/white"
-                    android:textSize="@dimen/sp_20"
+                    android:textSize="@dimen/sp_14"
                     android:textStyle="bold" />
 
                 <TextView
@@ -268,7 +268,7 @@
                     android:layout_marginLeft="@dimen/px_20"
                     android:text="@string/py_account_center"
                     android:textColor="@android:color/white"
-                    android:textSize="@dimen/sp_20"
+                    android:textSize="@dimen/sp_14"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -295,7 +295,7 @@
                      android:id="@+id/py_login_go_bindGoogle"
                      android:text="@string/py_bind_google"
                      android:textColor="@android:color/white"
-                     android:textSize="@dimen/sp_20"
+                     android:textSize="@dimen/sp_14"
                      android:textStyle="bold"
                      />
 
@@ -306,7 +306,7 @@
                      android:layout_marginLeft="@dimen/px_20"
                      android:text="@string/py_findpwd"
                      android:textColor="@android:color/white"
-                     android:textSize="@dimen/sp_20"
+                     android:textSize="@dimen/sp_14"
                      android:visibility="invisible"
                      android:textStyle="bold" />
 
@@ -315,7 +315,7 @@
                      android:layout_height="wrap_content"
                      android:text="@string/py_bind_unique"
                      android:textColor="@android:color/white"
-                     android:textSize="@dimen/sp_20"
+                     android:textSize="@dimen/sp_14"
                      android:textStyle="bold"
                      android:layout_marginLeft="@dimen/px_20"
                      android:visibility="invisible"
@@ -326,7 +326,7 @@
                      android:layout_height="wrap_content"
                      android:text="acebook綁定"
                      android:textColor="@android:color/white"
-                     android:textSize="@dimen/sp_20"
+                     android:textSize="@dimen/sp_14"
                      android:textStyle="bold"
                      android:layout_marginLeft="@dimen/px_20"
                      android:visibility="invisible"
@@ -337,7 +337,7 @@
                      android:layout_height="wrap_content"
                      android:text="@string/py_register_account"
                      android:textColor="@android:color/white"
-                     android:textSize="@dimen/sp_20"
+                     android:textSize="@dimen/sp_14"
                      android:textStyle="bold"
                      android:layout_marginLeft="@dimen/px_20"
                      android:visibility="invisible"

@@ -7,6 +7,7 @@ import com.gama.base.bean.SSdkBaseRequestBean;
 public class GamaRestfulRequestBean extends SSdkBaseRequestBean {
     private String logingServerSignature;
     private String json;
+    private String age;
 
     public GamaRestfulRequestBean(Context context) {
         super(context);
@@ -27,4 +28,13 @@ public class GamaRestfulRequestBean extends SSdkBaseRequestBean {
     public void setJson(String json) {
         this.json = json;
     }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
 }

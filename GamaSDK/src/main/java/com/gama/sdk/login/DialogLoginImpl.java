@@ -6,13 +6,18 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.View;
 
+import com.facebook.internal.CallbackManagerImpl;
+import com.gama.base.bean.SGameLanguage;
 import com.gama.base.utils.GamaUtil;
+import com.gama.base.utils.Localization;
 import com.gama.data.login.ILoginCallBack;
 import com.gama.sdk.R;
 import com.gama.sdk.login.widget.v2.StartTermsLayoutV2;
 import com.gama.sdk.utils.DialogUtil;
 import com.gama.thirdlib.facebook.SFacebookProxy;
 import com.gama.thirdlib.google.SGoogleSignIn;
+import com.gama.thirdlib.twitter.GamaTwitterLogin;
+import com.twitter.sdk.android.core.Twitter;
 
 /**
  * Created by gan on 2017/4/12.
@@ -24,12 +29,18 @@ public class DialogLoginImpl implements ILogin {
 
     private SGoogleSignIn sGoogleSignIn;
 
+    private GamaTwitterLogin twitterLogin;
+
 
     @Override
     public void onCreate(Activity activity) {
 
         sGoogleSignIn = new SGoogleSignIn(activity, DialogUtil.createLoadingDialog(activity, "Loading..."));
 
+        if(SGameLanguage.ja_JP == Localization.getSGameLanguage(activity)) {
+            Twitter.initialize(activity);
+            twitterLogin = new GamaTwitterLogin(activity);
+        }
     }
 
     @Override
@@ -39,11 +50,14 @@ public class DialogLoginImpl implements ILogin {
 
     @Override
     public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
-//        if (sFacebookProxy != null && requestCode == CallbackManagerImpl.RequestCodeOffset.Login.toRequestCode()) {
-//            sFacebookProxy.onActivityResult(activity, requestCode, resultCode, data);
-//        }
+        if (sFacebookProxy != null && requestCode == CallbackManagerImpl.RequestCodeOffset.Login.toRequestCode()) {
+            sFacebookProxy.onActivityResult(activity, requestCode, resultCode, data);
+        }
         if (sGoogleSignIn != null){
             sGoogleSignIn.handleActivityResult(activity,requestCode,resultCode,data);
+        }
+        if(twitterLogin != null) {
+            twitterLogin.onActivityResult(requestCode, resultCode, data);
         }
     }
 
@@ -74,6 +88,9 @@ public class DialogLoginImpl implements ILogin {
                     SLoginDialogV2 sLoginDialog = new SLoginDialogV2(activity, com.gama.sdk.R.style.Gama_Theme_AppCompat_Dialog_Notitle_Fullscreen);
                     sLoginDialog.setSFacebookProxy(sFacebookProxy);
                     sLoginDialog.setSGoogleSignIn(sGoogleSignIn);
+                    if(twitterLogin != null) {
+                        sLoginDialog.setTwitterLogin(twitterLogin);
+                    }
                     sLoginDialog.setLoginCallBack(iLoginCallBack);
                     sLoginDialog.show();
                 }
@@ -90,6 +107,9 @@ public class DialogLoginImpl implements ILogin {
             SLoginDialogV2 sLoginDialog = new SLoginDialogV2(activity, com.gama.sdk.R.style.Gama_Theme_AppCompat_Dialog_Notitle_Fullscreen);
             sLoginDialog.setSFacebookProxy(sFacebookProxy);
             sLoginDialog.setSGoogleSignIn(sGoogleSignIn);
+            if(twitterLogin != null) {
+                sLoginDialog.setTwitterLogin(twitterLogin);
+            }
             sLoginDialog.setLoginCallBack(iLoginCallBack);
             sLoginDialog.show();
         }

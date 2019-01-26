@@ -49,6 +49,7 @@
     <string name="py_bind_unique">게스트 연동</string>
     <string name="py_bind_fb">Facebook 연동</string>
     <string name="py_bind_google">Google 연동</string>
+    <string name="py_bind_twitter" translatable="false">Twitter 연동</string>
     <string name="py_bind_phone_area_num">+82</string>
     <string name="py_account_center">고객센터</string>
     <string name="py_send_new_pwd">새 비밀번호 전송</string>

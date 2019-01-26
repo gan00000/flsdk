@@ -6,7 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.gama.base.bean.SGameLanguage;
 import com.gama.base.utils.GamaUtil;
+import com.gama.base.utils.Localization;
 import com.gama.sdk.R;
 import com.gama.sdk.login.widget.SLoginBaseRelativeLayout;
 
@@ -18,6 +20,7 @@ public class AccountManagerLayoutV2 extends SLoginBaseRelativeLayout implements 
     private TextView uniqueRegBindBtn;
     private TextView fbRegBindBtn;
     private TextView googleRegBindBtn;
+    private TextView twitterRegBindBtn;
 
 
     public AccountManagerLayoutV2(Context context) {
@@ -47,17 +50,24 @@ public class AccountManagerLayoutV2 extends SLoginBaseRelativeLayout implements 
         uniqueRegBindBtn = (TextView) contentView.findViewById(R.id.v2_account_manager_free_reg_bind_btn);
         fbRegBindBtn = (TextView) contentView.findViewById(R.id.v2_account_manager_fb_reg_bind_btn);
         googleRegBindBtn = (TextView) contentView.findViewById(R.id.v2_account_manager_google_reg_bind_btn);
-
+        twitterRegBindBtn = (TextView) contentView.findViewById(R.id.v2_account_manager_twitter_reg_bind_btn);
 
         changePwdBtn.setOnClickListener(this);
         uniqueRegBindBtn.setOnClickListener(this);
         fbRegBindBtn.setOnClickListener(this);
         googleRegBindBtn.setOnClickListener(this);
+        twitterRegBindBtn.setOnClickListener(this);
 
         if (GamaUtil.isMainland(getContext())){
             fbRegBindBtn.setVisibility(GONE);
             googleRegBindBtn.setVisibility(GONE);
 
+        }
+
+        if(GamaUtil.hasTwitter(getContext())) {
+            twitterRegBindBtn.setVisibility(VISIBLE);
+        } else {
+            twitterRegBindBtn.setVisibility(GONE);
         }
 
         return contentView;
@@ -102,6 +112,8 @@ public class AccountManagerLayoutV2 extends SLoginBaseRelativeLayout implements 
 
         } else if (v == backView) {//返回键
             sLoginDialogv2.toAccountLoginView();
+        } else if(v == twitterRegBindBtn) {
+            sLoginDialogv2.toBindTwitterView();
         }
 
     }

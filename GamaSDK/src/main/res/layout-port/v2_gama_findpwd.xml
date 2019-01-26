@@ -86,7 +86,7 @@
                     android:textColorHint="@android:color/darker_gray"
                     android:inputType="text"
                     android:maxLines="1"
-                    android:textSize="@dimen/sp_18" />
+                    android:textSize="@dimen/sp_14" />
 
             </LinearLayout>
 
@@ -116,7 +116,7 @@
                     android:textColorHint="@android:color/darker_gray"
                     android:inputType="text"
                     android:maxLines="1"
-                    android:textSize="@dimen/sp_18" />
+                    android:textSize="@dimen/sp_14" />
 
             </LinearLayout>
 
@@ -143,7 +143,7 @@
                      android:maxLines="1"
                      android:background="@null"
                      android:hint="@string/py_register_account_hit"
-                     android:textSize="@dimen/sp_18"
+                     android:textSize="@dimen/sp_14"
                      android:inputType="textPassword"
                      android:id="@+id/py_login_password_v2"
                      />

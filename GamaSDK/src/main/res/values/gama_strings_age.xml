@@ -1,0 +1,24 @@
+<resources>
+
+    <!--一个按钮界面-->
+    <string name="gama_age_style_one_title" translatable="false">メッセージ</string>
+    <string name="gama_age_style_one_content" translatable="false">今月の購入限度額を超えているため、購入することができません。</string>
+    <string name="gama_age_style_one_btn" translatable="false">戻る</string>
+
+    <!--两个按钮界面-->
+    <string name="gama_age_style_two_title" translatable="false">ご確認</string>
+    <string name="gama_age_style_two_content" translatable="false">未成年の方は必ず保護者「おとうさん」や「おかあさん」の同意を得てから購入してください。</string>
+    <string name="gama_age_style_two_btn1" translatable="false">はい</string>
+    <string name="gama_age_style_two_btn2" translatable="false">いいえ</string>
+
+    <!--三格界面-->
+    <string name="gama_age_style_three_title" translatable="false">年齢確認</string>
+    <string name="gama_age_style_three_content" translatable="false">あなたの年齢(ねんれい)によって有料アイテムを買える金額が決まっています。必ず正しい年齢を選んでください。</string>
+    <string name="gama_age_style_three_btn1" translatable="false">～15才</string>
+    <string name="gama_age_style_three_btn2" translatable="false">16～19才</string>
+    <string name="gama_age_style_three_btn3" translatable="false">20才以上</string>
+    <string name="gama_age_style_three_des1" translatable="false">(一ヶ月につき　5,000円まで)</string>
+    <string name="gama_age_style_three_des2" translatable="false">(一ヶ月につき　20,000円まで)</string>
+    <string name="gama_age_style_three_des3" translatable="false">(制限なし)</string>
+
+</resources>

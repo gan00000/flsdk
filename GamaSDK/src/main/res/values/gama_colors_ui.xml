@@ -4,29 +4,10 @@
     <color name="gama_color_ui_term_confirm">#FFBB00</color>
     <color name="gama_color_ui_term_select_bg">#FFBB66</color>
 
+    <color name="gama_color_ui_mainpage_line_jp">#dedede</color>
+    <color name="gama_color_ui_mainpage_bg_jp">#373737</color>
+    <color name="gama_color_ui_mainpage_text_jp">#ffffff</color>
+
+    <color name="gama_color_ui_age_text_jp">#C9C298</color>
+
 </resources>
-
-    <!--透明度百分比-开头字母-->
-    <!--100% —FF-->
-    <!--95% — F2-->
-    <!--90% — E6-->
-    <!--85% — D9-->
-    <!--80% — CC-->
-    <!--75% — BF-->
-    <!--70% — B3-->
-    <!--65% — A6-->
-    <!--60% — 99-->
-    <!--55% — 8C-->
-    <!--50% — 80-->
-    <!--45% — 73-->
-    <!--40% — 66-->
-    <!--35% — 59-->
-    <!--30% — 4D-->
-    <!--25% — 40-->
-    <!--20% — 33-->
-    <!--15% — 26-->
-    <!--10% — 1A-->
-    <!--5% — 0D-->
-    <!--0% — 00-->
-
-    <!-- 全透明的颜色 #00000000-->

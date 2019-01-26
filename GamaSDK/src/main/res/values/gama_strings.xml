@@ -49,6 +49,7 @@
     <string name="py_bind_unique">免註冊綁定</string>
     <string name="py_bind_fb">Facebook綁定</string>
     <string name="py_bind_google">Google綁定</string>
+    <string name="py_bind_twitter" translatable="false">Twitter綁定</string>
     <string name="py_bind_phone_area_num">+86</string>
     <string name="py_account_center">會員中心</string>
     <string name="py_send_new_pwd">發送新密碼</string>
@@ -58,6 +59,7 @@
     <string name="py_login_page_account_bind">綁定帳號</string>
     <string name="py_login_page_change_pwd">修改密碼</string>
     <string name="py_login_page_forgot_pwd">忘記密碼</string>
+    <string name="py_login_guset" translatable="false">遊客登入</string>
 
     <!--SDK功能提示-->
     <string name="gama_toast_msg_app_not_install" translatable="false">由於您沒有安裝%s，請先裝APP後再進行分享</string>

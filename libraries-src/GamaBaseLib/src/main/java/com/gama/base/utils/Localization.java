@@ -34,6 +34,8 @@ public class Localization {
 
         } else if(gameLanguage == SGameLanguage.ko_KR) {
             ApkInfoUtil.updateConfigurationLocale(context, Locale.KOREAN);//韩国
+        } else if(gameLanguage == SGameLanguage.ja_JP) {
+            ApkInfoUtil.updateConfigurationLocale(context, Locale.JAPANESE);//日本
         }
         else{
 
@@ -52,6 +54,9 @@ public class Localization {
         }
         if (SStringUtil.isEqual(SGameLanguage.ko_KR.getLanguage(), language)){
             return SGameLanguage.ko_KR;
+        }
+        if (SStringUtil.isEqual(SGameLanguage.ja_JP.getLanguage(), language)){
+            return SGameLanguage.ja_JP;
         }
         return SGameLanguage.zh_TW;//默认设置为繁体中文
     }

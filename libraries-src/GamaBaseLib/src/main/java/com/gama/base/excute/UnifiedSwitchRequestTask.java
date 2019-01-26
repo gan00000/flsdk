@@ -10,7 +10,7 @@ import com.gama.base.bean.unify.UnifiedSwitchRequestBean;
 import com.gama.base.cfg.ResConfig;
 import com.gama.base.constant.RequestDomain;
 
-public class UnifiedSwitchRequestTask extends AbsHttpRequest {
+public class UnifiedSwitchRequestTask extends GamaBaseRestRequestTask {
 
     private static final String TAG = UnifiedSwitchRequestTask.class.getSimpleName();
     private Context context;

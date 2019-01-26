@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/transparent">
+
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_age_style_one_guideline1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.3"/>
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_age_style_one_guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.7"/>
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_age_style_one_guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.36" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_age_style_one_guideline4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.41" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_age_style_one_guideline5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.45" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_age_style_one_guideline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.55" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_age_style_one_guideline7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.59" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_age_style_one_guideline8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.65" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/gama_jp_age_bg_1"
+            app:layout_constraintDimensionRatio="1037:503"
+            app:layout_constraintTop_toTopOf="@id/gama_age_style_one_guideline1"
+            app:layout_constraintBottom_toBottomOf="@id/gama_age_style_one_guideline2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/gama_age_style_one_title"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="6:1"
+            android:text="@string/gama_age_style_one_title"
+            android:textColor="@color/gama_color_ui_age_text_jp"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/gama_age_style_one_guideline3"
+            app:layout_constraintBottom_toBottomOf="@id/gama_age_style_one_guideline4"/>
+
+        <TextView
+            android:id="@+id/gama_age_style_one_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="7:1"
+            android:text="@string/gama_age_style_one_content"
+            android:textColor="@color/gama_color_ui_age_text_jp"
+            android:textSize="10sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/gama_age_style_one_guideline5"
+            app:layout_constraintBottom_toBottomOf="@id/gama_age_style_one_guideline6"/>
+
+        <TextView
+            android:id="@+id/gama_age_style_one_confirm"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="4:1"
+            android:text="@string/gama_age_style_one_btn"
+            android:textColor="@color/gama_color_ui_age_text_jp"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/gama_age_style_one_guideline7"
+            app:layout_constraintBottom_toBottomOf="@id/gama_age_style_one_guideline8"/>
+
+
+    </android.support.constraint.ConstraintLayout>
+
+</RelativeLayout>

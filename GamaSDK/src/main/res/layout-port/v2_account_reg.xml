@@ -86,7 +86,7 @@
                     android:textColorHint="@android:color/darker_gray"
                     android:inputType="text"
                     android:maxLines="1"
-                    android:textSize="@dimen/sp_18" />
+                    android:textSize="@dimen/sp_14" />
 
             </LinearLayout>
 
@@ -117,7 +117,7 @@
                     android:textColorHint="@android:color/darker_gray"
                     android:inputType="text"
                     android:maxLines="1"
-                    android:textSize="@dimen/sp_18" />
+                    android:textSize="@dimen/sp_14" />
 
 
                 <ImageView
@@ -156,7 +156,7 @@
                     android:textColorHint="@android:color/darker_gray"
                     android:inputType="text"
                     android:maxLines="1"
-                    android:textSize="@dimen/sp_18" />
+                    android:textSize="@dimen/sp_12" />
 
             </LinearLayout>
 
@@ -189,7 +189,7 @@
                 android:maxLines="1"
                 android:text="@string/py_register_account_terms"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/sp_18" />
+                android:textSize="@dimen/sp_16" />
 
 
         </LinearLayout>

@@ -14,6 +14,11 @@ public class SLoginType {
 	 * Google登入
 	 */
 	public static final String LOGIN_TYPE_GOOGLE = "google";
+
+	/**
+	 * Twitter登入
+	 */
+	public static final String LOGIN_TYPE_TWITTER = "twitter";
 	/**
 	 * 用于mac登入，用于本地登录类型判断，回传原厂登录类型
 	 */
@@ -26,5 +31,6 @@ public class SLoginType {
 	public static final int bind_unique = 1;
 	public static final int bind_fb = 2;
 	public static final int bind_google = 3;
+	public static final int bind_twitter = 4;
 
 }

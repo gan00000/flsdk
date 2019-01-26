@@ -12,4 +12,13 @@ public class RequestDomain {
      */
     public static final String SEPARATE_SERVER = "separateServer/";
 
+    /**
+     * 角色信息上报
+     */
+    public static final String USER_UPDATE_MESSAGE = "userUpdateMessage/updateMessage/";
+
+    /**
+     * 支付年龄判断
+     */
+    public static final String AGE_VALIDATION = "validation/ageValidation/";
 }

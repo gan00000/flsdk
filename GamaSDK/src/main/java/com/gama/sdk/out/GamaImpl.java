@@ -346,9 +346,6 @@ public class GamaImpl implements IGama {
                 if (iLogin != null) {
                     iLogin.onActivityResult(activity, requestCode, resultCode, data);
                 }
-                if (sFacebookProxy != null){
-                    sFacebookProxy.onActivityResult(activity, requestCode, resultCode, data);
-                }
                 if (otherPayWebViewDialog != null){
                     otherPayWebViewDialog.onActivityResult(activity, requestCode, resultCode, data);
                 }

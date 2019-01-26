@@ -130,6 +130,12 @@
                     android:layout_height="wrap_content"
                     android:text="公告" />
 
+                <Button
+                    android:id="@+id/twitterLogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Twitter登入" />
+
             </LinearLayout>
 
 

@@ -17,7 +17,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Map;
 
-public class GamaRoleInfoRequestTask extends AbsHttpRequest {
+public class GamaRoleInfoRequestTask extends GamaBaseRestRequestTask {
 
     private static final String TAG = GamaRoleInfoRequestTask.class.getSimpleName();
     private Context context;
@@ -51,8 +51,8 @@ public class GamaRoleInfoRequestTask extends AbsHttpRequest {
         url = url.replace("userId", userId)
                 .replace("gameCode", gameCode)
                 .replace("packageName", packageName)
-                .replace("beijingTime", beijingTime)
-                .replace("localTime", localTime);
+                .replace("beijingTime", encode2Utf8(beijingTime))
+                .replace("localTime", encode2Utf8(localTime));
 
         PL.i(TAG, "completeUrl = " + url);
         requestBean.setCompleteUrl(url);

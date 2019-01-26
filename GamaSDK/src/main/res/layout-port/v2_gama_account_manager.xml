@@ -17,67 +17,87 @@
             android:layout_height="@dimen/px_60"
             android:layout_marginTop="@dimen/px_15">
 
-            <include layout="@layout/v2_login_back_layout"/>
+            <include layout="@layout/v2_login_back_layout" />
 
         </LinearLayout>
 
-
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:layout_marginTop="@dimen/px_25">
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="@dimen/px_460"
-                android:layout_height="@dimen/px_80"
-                android:id="@+id/v2_account_manager_changepwd_btn"
-                android:layout_marginTop="@dimen/px_20"
-                android:text="@string/py_change_pwd"
-                android:textStyle="bold"
-                android:textSize="@dimen/sp_26"
-                android:gravity="center"
-                android:textColor="@android:color/white"
-                android:background="@drawable/v2_py_account_manger_btn_bg" />
-            <TextView
-                android:layout_width="@dimen/px_460"
-                android:layout_height="@dimen/px_80"
-                android:layout_marginTop="@dimen/px_20"
-                android:id="@+id/v2_account_manager_free_reg_bind_btn"
-                android:text="@string/py_bind_unique"
-                android:textStyle="bold"
-                android:textSize="@dimen/sp_26"
-                android:gravity="center"
-                android:textColor="@android:color/white"
-                android:background="@drawable/v2_py_account_manger_btn_bg" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/px_25"
+                android:layout_marginBottom="@dimen/px_25"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
-            <TextView
-                android:layout_width="@dimen/px_460"
-                android:layout_height="@dimen/px_80"
-                android:layout_marginTop="@dimen/px_20"
-                android:id="@+id/v2_account_manager_fb_reg_bind_btn"
-                android:text="@string/py_bind_fb"
-                android:textStyle="bold"
-                android:textSize="@dimen/sp_26"
-                android:gravity="center"
-                android:textColor="@android:color/white"
-                android:background="@drawable/v2_py_account_manger_btn_bg"  />
-            <TextView
-                android:layout_width="@dimen/px_460"
-                android:layout_height="@dimen/px_80"
-                android:layout_marginTop="@dimen/px_20"
-                android:id="@+id/v2_account_manager_google_reg_bind_btn"
-                android:text="@string/py_bind_google"
-                android:textStyle="bold"
-                android:textSize="@dimen/sp_26"
-                android:gravity="center"
-                android:textColor="@android:color/white"
-                android:background="@drawable/v2_py_account_manger_btn_bg" />
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/v2_account_manager_changepwd_btn"
+                    android:layout_width="@dimen/px_520"
+                    android:layout_height="@dimen/px_70"
+                    android:layout_marginTop="@dimen/px_20"
+                    android:background="@drawable/v2_py_account_manger_btn_bg"
+                    android:gravity="center"
+                    android:text="@string/py_change_pwd"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/sp_20"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/v2_account_manager_free_reg_bind_btn"
+                    android:layout_width="@dimen/px_520"
+                    android:layout_height="@dimen/px_70"
+                    android:layout_marginTop="@dimen/px_20"
+                    android:background="@drawable/v2_py_account_manger_btn_bg"
+                    android:gravity="center"
+                    android:text="@string/py_bind_unique"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/sp_20"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/v2_account_manager_fb_reg_bind_btn"
+                    android:layout_width="@dimen/px_520"
+                    android:layout_height="@dimen/px_70"
+                    android:layout_marginTop="@dimen/px_20"
+                    android:background="@drawable/v2_py_account_manger_btn_bg"
+                    android:gravity="center"
+                    android:text="@string/py_bind_fb"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/sp_20"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/v2_account_manager_google_reg_bind_btn"
+                    android:layout_width="@dimen/px_520"
+                    android:layout_height="@dimen/px_70"
+                    android:layout_marginTop="@dimen/px_20"
+                    android:background="@drawable/v2_py_account_manger_btn_bg"
+                    android:gravity="center"
+                    android:text="@string/py_bind_google"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/sp_20"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/v2_account_manager_twitter_reg_bind_btn"
+                    android:layout_width="@dimen/px_520"
+                    android:layout_height="@dimen/px_70"
+                    android:layout_marginTop="@dimen/px_20"
+                    android:background="@drawable/v2_py_account_manger_btn_bg"
+                    android:gravity="center"
+                    android:text="@string/py_bind_twitter"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/sp_20"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+        </ScrollView>
 
     </LinearLayout>
-
 
 
 </RelativeLayout>

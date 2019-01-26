@@ -8,6 +8,7 @@ import com.gama.BaseView;
 import com.gama.IBasePresenter;
 import com.gama.data.login.response.SLoginResponse;
 import com.gama.thirdlib.google.SGoogleSignIn;
+import com.gama.thirdlib.twitter.GamaTwitterLogin;
 
 /**
  * Created by gan on 2017/4/13.
@@ -67,7 +68,12 @@ public class LoginContract {
 
         void setSGoogleSignIn(SGoogleSignIn sGoogleSignIn);
         void setSFacebookProxy(SFacebookProxy sFacebookProxy);
+        void setTwitterLogin(GamaTwitterLogin twitterLogin);
 
+        /**
+         * Twitter登入
+         */
+        void twitterLogin(Activity activity);
     }
 
 }

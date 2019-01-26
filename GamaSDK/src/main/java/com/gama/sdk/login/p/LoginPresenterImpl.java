@@ -38,6 +38,7 @@ import com.gama.thirdlib.facebook.FbResUtil;
 import com.gama.thirdlib.facebook.FbSp;
 import com.gama.thirdlib.facebook.SFacebookProxy;
 import com.gama.thirdlib.google.SGoogleSignIn;
+import com.gama.thirdlib.twitter.GamaTwitterLogin;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -70,6 +71,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
     private SFacebookProxy sFacebookProxy;
     private SGoogleSignIn sGoogleSignIn;
+    private GamaTwitterLogin twitterLogin;
     private FaceBookUser faceBookUser;
 
     public void setFragment(Fragment fragment) {
@@ -88,6 +90,39 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     @Override
     public void setSFacebookProxy(SFacebookProxy sFacebookProxy) {
         this.sFacebookProxy = sFacebookProxy;
+    }
+
+    @Override
+    public void setTwitterLogin(GamaTwitterLogin twitterLogin) {
+        this.twitterLogin = twitterLogin;
+    }
+
+    @Override
+    public void twitterLogin(final Activity activity) {
+        if(twitterLogin != null) {
+            twitterLogin.startLogin(new GamaTwitterLogin.TwitterLoginCallBack() {
+                @Override
+                public void success(String id, String mFullName, String mEmail, String idTokenString) {
+                    PL.i("twitter login : " + id);
+                    PL.i("google sign in : " + id);
+                    if (SStringUtil.isNotEmpty(id)) {
+                        GamaUtil.saveTwitterId(activity,id);
+                        ThirdLoginRegRequestBean thirdLoginRegRequestBean = new ThirdLoginRegRequestBean(activity);
+                        thirdLoginRegRequestBean.setThirdPlatId(id);
+                        thirdLoginRegRequestBean.setRegistPlatform(SLoginType.LOGIN_TYPE_TWITTER);
+                        thirdLoginRegRequestBean.setGoogleClientId(ResConfig.getGoogleClientId(activity));
+                        thirdLoginRegRequestBean.setGoogleIdToken(idTokenString);
+
+                        thirdPlatLogin(activity, thirdLoginRegRequestBean);
+                    }
+                }
+
+                @Override
+                public void failure(String msg) {
+
+                }
+            });
+        }
     }
 
     @Override
@@ -117,7 +152,9 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 //           thirdPlatLogin(mActivity,GamaUtil.getGoogleId(mActivity),SLoginType.LOGIN_TYPE_GOOGLE);
             startAutoLogin(activity, SLoginType.LOGIN_TYPE_GOOGLE, "", "");
 
-        }else {//進入登錄頁面
+        } else if(SStringUtil.isEqual(SLoginType.LOGIN_TYPE_TWITTER, previousLoginType)) {
+            startAutoLogin(activity, SLoginType.LOGIN_TYPE_TWITTER, "", "");
+        } else {//進入登錄頁面
             showLoginView();
         }
 
@@ -403,6 +440,24 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     PL.i("google sign in failure");
                 }
             });
+        } else if(bindType == SLoginType.bind_twitter) {
+            if(twitterLogin != null) {
+                twitterLogin.startLogin(new GamaTwitterLogin.TwitterLoginCallBack() {
+                    @Override
+                    public void success(String id, String mFullName, String mEmail, String idTokenString) {
+                        PL.i("twitter login : " + id);
+                        if (SStringUtil.isNotEmpty(id)) {
+                            ThirdAccountBindRequestTask bindGoogleRequestTask = new ThirdAccountBindRequestTask(getActivity(), mAccount,mPwd, mEmail,SLoginType.LOGIN_TYPE_TWITTER,id);
+                            sAccountBind(bindGoogleRequestTask);
+                        }
+                    }
+
+                    @Override
+                    public void failure(String msg) {
+
+                    }
+                });
+            }
         }
 
 
@@ -818,8 +873,10 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             String autoLoginTips = activity.getResources().getString(R.string.py_login_autologin_logining_tips);
             if (registPlatform.equals(SLoginType.LOGIN_TYPE_FB)){
                 autoLoginTips = "Facebook" + autoLoginTips;
-            }else if (registPlatform.equals(SLoginType.LOGIN_TYPE_GOOGLE)){
+            } else if (registPlatform.equals(SLoginType.LOGIN_TYPE_GOOGLE)){
                 autoLoginTips = "Google" + autoLoginTips;
+            } else if (registPlatform.equals(SLoginType.LOGIN_TYPE_TWITTER)){
+                autoLoginTips = "Twitter" + autoLoginTips;
             }
             iLoginView.showAutoLoginTips(autoLoginTips);
         }
@@ -856,11 +913,19 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                                 fbThirdLogin(fbScopeId, fbApps,FbSp.getTokenForBusiness(activity));*/
                                 fbLogin(mActivity);
 
-                            }else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GOOGLE, registPlatform)){//Google登录
+                            } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GOOGLE, registPlatform)){//Google登录
 
                                 ThirdLoginRegRequestBean thirdLoginRegRequestBean = new ThirdLoginRegRequestBean(activity);
                                 thirdLoginRegRequestBean.setThirdPlatId(GamaUtil.getGoogleId(activity));
                                 thirdLoginRegRequestBean.setRegistPlatform(SLoginType.LOGIN_TYPE_GOOGLE);
+                                thirdLoginRegRequestBean.setGoogleClientId(ResConfig.getGoogleClientId(activity));
+                                thirdLoginRegRequestBean.setGoogleIdToken(GamaUtil.getGoogleIdToken(activity));
+                                thirdPlatLogin(activity, thirdLoginRegRequestBean);
+                            } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_TWITTER, registPlatform)){//Google登录
+
+                                ThirdLoginRegRequestBean thirdLoginRegRequestBean = new ThirdLoginRegRequestBean(activity);
+                                thirdLoginRegRequestBean.setThirdPlatId(GamaUtil.getTwitterId(activity));
+                                thirdLoginRegRequestBean.setRegistPlatform(SLoginType.LOGIN_TYPE_TWITTER);
                                 thirdLoginRegRequestBean.setGoogleClientId(ResConfig.getGoogleClientId(activity));
                                 thirdLoginRegRequestBean.setGoogleIdToken(GamaUtil.getGoogleIdToken(activity));
                                 thirdPlatLogin(activity, thirdLoginRegRequestBean);

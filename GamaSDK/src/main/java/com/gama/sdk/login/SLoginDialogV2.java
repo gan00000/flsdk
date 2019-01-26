@@ -12,7 +12,9 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.gama.base.bean.SGameLanguage;
 import com.gama.base.bean.SLoginType;
+import com.gama.base.utils.GamaUtil;
 import com.gama.base.utils.Localization;
 import com.gama.data.login.ILoginCallBack;
 import com.gama.data.login.response.SLoginResponse;
@@ -27,9 +29,11 @@ import com.gama.sdk.login.widget.v2.AccountRegisterLayoutV2;
 import com.gama.sdk.login.widget.v2.AccountRegisterTermsLayoutV2;
 import com.gama.sdk.login.widget.v2.PyAccountLoginV2;
 import com.gama.sdk.login.widget.v2.ThirdPlatBindAccountLayoutV2;
+import com.gama.sdk.login.widget.v2.XMMainLoginLayoutJP;
 import com.gama.sdk.login.widget.v2.XMMainLoginLayoutV2;
 import com.gama.thirdlib.facebook.SFacebookProxy;
 import com.gama.thirdlib.google.SGoogleSignIn;
+import com.gama.thirdlib.twitter.GamaTwitterLogin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,6 +68,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
     private SLoginBaseRelativeLayout bindUniqueView;
     private SLoginBaseRelativeLayout bindFbView;
     private SLoginBaseRelativeLayout bindGoogleView;
+    private SLoginBaseRelativeLayout bindTwitterView;
     private SLoginBaseRelativeLayout injectionView;
     private SLoginBaseRelativeLayout accountManagerCenterView;
 
@@ -71,6 +76,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 
     private SFacebookProxy sFacebookProxy;
     private SGoogleSignIn sGoogleSignIn;
+    private GamaTwitterLogin twitterLogin;
 
     private LoginContract.ILoginPresenter iLoginPresenter;
 
@@ -142,6 +148,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 
         iLoginPresenter.setSFacebookProxy(sFacebookProxy);
         iLoginPresenter.setSGoogleSignIn(sGoogleSignIn);
+        iLoginPresenter.setTwitterLogin(twitterLogin);
 
         iLoginPresenter.autoLogin(activity);
     }
@@ -210,8 +217,11 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 
     public void toMainLoginView() {
         if (mainLoginView == null || !viewPageList.contains(mainLoginView)){
-
-            mainLoginView = new XMMainLoginLayoutV2(context);//星盟
+            if(GamaUtil.hasTwitter(context)) {
+                mainLoginView = new XMMainLoginLayoutJP(context);//星盟
+            } else {
+                mainLoginView = new XMMainLoginLayoutV2(context);//星盟
+            }
             mainLoginView.setLoginDialogV2(this);
             contentFrameLayout.addView(mainLoginView);
             viewPageList.add(mainLoginView);
@@ -421,6 +431,30 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
         }
 
     }
+
+    public void toBindTwitterView() {
+        if (bindTwitterView == null || !viewPageList.contains(bindTwitterView)){
+            bindTwitterView = new ThirdPlatBindAccountLayoutV2(context);
+            ((ThirdPlatBindAccountLayoutV2)bindTwitterView).setBindTpye(SLoginType.bind_twitter);
+            bindTwitterView.setLoginDialogV2(this);
+            contentFrameLayout.addView(bindTwitterView);
+            viewPageList.add(bindTwitterView);
+        }
+
+        for (View childView : viewPageList) {
+
+            if (childView == null){
+                continue;
+            }
+
+            if (childView == bindTwitterView){
+                childView.setVisibility(View.VISIBLE);
+            }else{
+                childView.setVisibility(View.GONE);
+            }
+        }
+    }
+
     public void toAccountManagerCenter() {//AccountManagerLayoutV2
 
         if (accountManagerCenterView == null || !viewPageList.contains(accountManagerCenterView)){
@@ -533,6 +567,14 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 
     public void setSFacebookProxy(SFacebookProxy sFacebookProxy) {
         this.sFacebookProxy = sFacebookProxy;
+    }
+
+    public void setTwitterLogin(GamaTwitterLogin twitterLogin) {
+        this.twitterLogin = twitterLogin;
+    }
+
+    public GamaTwitterLogin getTwitterLogin() {
+        return this.twitterLogin;
     }
 
     @Override

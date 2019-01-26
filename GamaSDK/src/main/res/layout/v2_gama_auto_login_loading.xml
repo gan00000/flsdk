@@ -43,7 +43,7 @@
             android:layout_height="@dimen/px_80"
             android:layout_marginTop="@dimen/px_40"
             android:gravity="center"
-            android:textSize="@dimen/sp_24"
+            android:textSize="@dimen/sp_18"
             android:textColor="@android:color/black"
             android:background="@drawable/gama_edit_text_rectangle_bg"
             android:text="@string/py_auto_login_change"

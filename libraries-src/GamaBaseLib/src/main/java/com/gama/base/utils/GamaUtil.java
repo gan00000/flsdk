@@ -9,6 +9,7 @@ import com.core.base.utils.FileUtil;
 import com.core.base.utils.JsonUtil;
 import com.core.base.utils.SPUtil;
 import com.core.base.utils.SStringUtil;
+import com.gama.base.bean.SGameLanguage;
 import com.gama.base.cfg.ConfigBean;
 import com.gama.base.cfg.ResConfig;
 import com.google.gson.Gson;
@@ -355,6 +356,25 @@ public class GamaUtil {
        return SPUtil.getSimpleString(context, GamaUtil.GAMA_SP_FILE,GAMA_LOGIN_GOOGLE_ID);
     }
 
+    /**
+     * Twitter登录的三方ID
+     */
+    private static final String GAMA_LOGIN_TWITTER_ID = "GAMA_LOGIN_TWITTER_ID";
+
+    /**
+     * 保存Twitter登录的三方ID
+     */
+    public static void saveTwitterId(Context context, String googleId){
+        SPUtil.saveSimpleInfo(context, GamaUtil.GAMA_SP_FILE,GAMA_LOGIN_TWITTER_ID,googleId);
+    }
+
+    /**
+     * 获取保存的Twitter登录的三方ID
+     */
+    public static String getTwitterId(Context context){
+        return SPUtil.getSimpleString(context, GamaUtil.GAMA_SP_FILE,GAMA_LOGIN_TWITTER_ID);
+    }
+
     public static boolean isXM(Context context){
        return ResConfig.getConfigInAssetsProperties(context,"gama_login_type").equals("100");
     }
@@ -416,5 +436,18 @@ public class GamaUtil {
      */
     public static long getFirstLoginDate(Context context, String userid){
         return SPUtil.getSimpleLong(context, GamaUtil.GAMA_SP_FILE, userid);
+    }
+
+    /**
+     * 判断是否有Twitter相关功能
+     * @param context
+     * @return
+     */
+    public static boolean hasTwitter(Context context) {
+        SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
+        if(SGameLanguage.ja_JP == sGameLanguage) {
+            return true;
+        }
+        return false;
     }
 }
