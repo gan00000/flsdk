@@ -34,7 +34,7 @@
     <string name="py_login_autologin_fblogining_tips">Facebookアカウントでログイン中です</string>
     <string name="py_login_autologin_logining_tips">アカウントはログイン中です</string>
 
-    <string name="py_register_email_hit">メールアドレス、パスワードをお忘れの場合に使用されます</string>
+    <string name="py_register_email_hit">メールアドレスを入力してください</string>
     <string name="py_findpwd_email_hit">メールアドレスを入力してください</string>
     <string name="py_login_save_account">デフォルトアカウントに設定する</string>
     <string name="py_login_by_members">会員ログイン</string>

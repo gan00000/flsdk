@@ -3,7 +3,6 @@ package com.gama.sdk.out;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -37,6 +36,9 @@ import com.gama.sdk.ads.StarEventLogger;
 import com.gama.sdk.callback.IPayListener;
 import com.gama.sdk.login.DialogLoginImpl;
 import com.gama.sdk.login.ILogin;
+import com.gama.sdk.login.widget.v2.age.IGamaAgePresenter;
+import com.gama.sdk.login.widget.v2.age.callback.GamaAgeCallback;
+import com.gama.sdk.login.widget.v2.age.impl.GamaAgeImpl;
 import com.gama.sdk.social.bean.UserInfo;
 import com.gama.sdk.social.callback.FetchFriendsCallback;
 import com.gama.sdk.social.callback.InviteFriendsCallback;
@@ -84,7 +86,7 @@ public class GamaImpl implements IGama {
             public void run() {
                 PL.i("IGama initSDK");
                 //清除上一次登录成功的返回值
-                GamaUtil.saveSdkLoginData(activity,"");
+                GamaUtil.saveSdkLoginData(activity, "");
 
                 activity.runOnUiThread(new Runnable() {
                     @Override
@@ -171,11 +173,11 @@ public class GamaImpl implements IGama {
             public void run() {
                 PL.i("fb keyhash:" + SignatureUtil.getHashKey(activity, activity.getPackageName()));
                 PL.i("google sha1:" + SignatureUtil.getSignatureSHA1WithColon(activity, activity.getPackageName()));
-                if (iLogin != null){
+                if (iLogin != null) {
                     //清除上一次登录成功的返回值
-                    GamaUtil.saveSdkLoginData(activity,"");
+                    GamaUtil.saveSdkLoginData(activity, "");
 
-                    iLogin.initFacebookPro(activity,sFacebookProxy);
+                    iLogin.initFacebookPro(activity, sFacebookProxy);
                     iLogin.startLogin(activity, iLoginCallBack);
                 }
             }
@@ -187,7 +189,7 @@ public class GamaImpl implements IGama {
     @Override
     public void pay(final Activity activity, final SPayType payType, final String cpOrderId, final String productId, final String extra, IPayListener listener) {
         PL.i("IGama pay payType:" + payType.toString() + " ,cpOrderId:" + cpOrderId + ",productId:" + productId + ",extra:" + extra + ", IPayListener: " + listener);
-        if ((System.currentTimeMillis() - firstClickTime) < 1000){//防止连续点击
+        if ((System.currentTimeMillis() - firstClickTime) < 1000) {//防止连续点击
             PL.i("点击过快，无效");
             return;
         }
@@ -197,7 +199,50 @@ public class GamaImpl implements IGama {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                startPay(activity, payType, cpOrderId, productId, extra);
+                if (GamaUtil.needShowAgePage(activity)) {
+                    final IGamaAgePresenter presenter = new GamaAgeImpl();
+                    ((GamaAgeImpl) presenter).setAgeCallback(new GamaAgeCallback() {
+                        @Override
+                        public void onSuccess() {
+                            PL.i("上报年龄成功");
+                            presenter.requestAgeLimit(activity);
+                        }
+
+                        @Override
+                        public void onFailure() {
+
+                        }
+
+                        @Override
+                        public void canBuy() {
+                            PL.i("未达到年龄购买限制");
+                            startPay(activity, payType, cpOrderId, productId, extra);
+                        }
+                    });
+                    presenter.goAgeStyleThree(activity);
+                } else if (GamaUtil.needRequestAgeLimit(activity)) {
+                    IGamaAgePresenter presenter = new GamaAgeImpl();
+                    ((GamaAgeImpl) presenter).setAgeCallback(new GamaAgeCallback() {
+                        @Override
+                        public void onSuccess() {
+
+                        }
+
+                        @Override
+                        public void onFailure() {
+
+                        }
+
+                        @Override
+                        public void canBuy() {
+                            PL.i("未达到年龄购买限制");
+                            startPay(activity, payType, cpOrderId, productId, extra);
+                        }
+                    });
+                    presenter.requestAgeLimit(activity);
+                } else {
+                    startPay(activity, payType, cpOrderId, productId, extra);
+                }
             }
         });
     }
@@ -229,17 +274,17 @@ public class GamaImpl implements IGama {
     }
 
     private void startPay(Activity activity, SPayType payType, String cpOrderId, String productId, String extra) {
-        if (payType == SPayType.OTHERS){//第三方储值
+        if (payType == SPayType.OTHERS) {//第三方储值
 
             othersPay(activity, cpOrderId, extra);
 
-        }else{//默认Google储值
+        } else {//默认Google储值
 
-            if (GamaUtil.getSdkCfg(activity) != null && GamaUtil.getSdkCfg(activity).openOthersPay(activity)){//假若Google包侵权被下架，此配置可以启动三方储值
+            if (GamaUtil.getSdkCfg(activity) != null && GamaUtil.getSdkCfg(activity).openOthersPay(activity)) {//假若Google包侵权被下架，此配置可以启动三方储值
                 PL.i("转第三方储值");
                 othersPay(activity, cpOrderId, extra);
 
-            }else{
+            } else {
 
                 googlePay(activity, cpOrderId, productId, extra);
             }
@@ -256,18 +301,18 @@ public class GamaImpl implements IGama {
 
         Intent i = new Intent(activity, GooglePayActivity2.class);
         i.putExtra(GooglePayActivity2.GooglePayReqBean_Extra_Key, googlePayCreateOrderIdReqBean);
-        activity.startActivityForResult(i,GooglePayActivity2.GooglePayReqeustCode);
+        activity.startActivityForResult(i, GooglePayActivity2.GooglePayReqeustCode);
     }
 
     private void othersPay(Activity activity, String cpOrderId, String extra) {
-        WebPayReqBean webPayReqBean = PayHelper.buildWebPayBean(activity,cpOrderId,extra);
+        WebPayReqBean webPayReqBean = PayHelper.buildWebPayBean(activity, cpOrderId, extra);
 
         String payThirdUrl = null;
         if (GamaUtil.getSdkCfg(activity) != null) {
 
             payThirdUrl = GamaUtil.getSdkCfg(activity).getS_Third_PayUrl();
         }
-        if (TextUtils.isEmpty(payThirdUrl)){
+        if (TextUtils.isEmpty(payThirdUrl)) {
             payThirdUrl = ResConfig.getPayPreferredUrl(activity) + ResConfig.getPayThirdMethod(activity);
         }
         webPayReqBean.setCompleteUrl(payThirdUrl);
@@ -279,7 +324,7 @@ public class GamaImpl implements IGama {
         otherPayWebViewDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
-                if(iPayListener != null) {
+                if (iPayListener != null) {
                     PL.i(TAG, "OtherPay支付回调");
                     iPayListener.onPayFinish(new Bundle());
                 } else {
@@ -306,7 +351,7 @@ public class GamaImpl implements IGama {
                     }
                 });
 
-                if (!isInitSdk){
+                if (!isInitSdk) {
                     initSDK(activity);
                 }
                 if (iLogin != null) {
@@ -315,7 +360,7 @@ public class GamaImpl implements IGama {
                 sGooglePlayGameServices = new SGooglePlayGameServices(activity);
 
                 //permission授权
-    //        PermissionUtil.requestPermissions_STORAGE(activity,PERMISSION_REQUEST_CODE);
+                //        PermissionUtil.requestPermissions_STORAGE(activity,PERMISSION_REQUEST_CODE);
             }
         });
 
@@ -346,21 +391,21 @@ public class GamaImpl implements IGama {
                 if (iLogin != null) {
                     iLogin.onActivityResult(activity, requestCode, resultCode, data);
                 }
-                if (otherPayWebViewDialog != null){
+                if (otherPayWebViewDialog != null) {
                     otherPayWebViewDialog.onActivityResult(activity, requestCode, resultCode, data);
                 }
-                if (requestCode == GooglePayActivity2.GooglePayReqeustCode && resultCode == GooglePayActivity2.GooglePayResultCode){
+                if (requestCode == GooglePayActivity2.GooglePayReqeustCode && resultCode == GooglePayActivity2.GooglePayResultCode) {
                     Bundle bundle = null;
-                    if(data != null) {
+                    if (data != null) {
                         bundle = data.getExtras();
                     }
-                    if(bundle == null){
+                    if (bundle == null) {
                         bundle = new Bundle();
                     } else {
                         StarEventLogger.trackinPayEvent(activity, bundle);
                     }
 
-                    if(iPayListener != null) { //支付刷新的回调
+                    if (iPayListener != null) { //支付刷新的回调
                         PL.i(TAG, "GooglePay支付回调");
                         iPayListener.onPayFinish(bundle);
                     } else {
@@ -369,7 +414,7 @@ public class GamaImpl implements IGama {
                     return;
                 }
 
-                if (sGooglePlayGameServices != null){
+                if (sGooglePlayGameServices != null) {
                     sGooglePlayGameServices.handleActivityResult(activity, requestCode, resultCode, data);
                 }
 
@@ -414,7 +459,7 @@ public class GamaImpl implements IGama {
                 if (iLogin != null) {
                     iLogin.onDestroy(activity);
                 }
-                if (sFacebookProxy != null){
+                if (sFacebookProxy != null) {
                     sFacebookProxy.onDestroy(activity);
                 }
                 //时间打点结束
@@ -491,12 +536,12 @@ public class GamaImpl implements IGama {
             @Override
             public void run() {
                 String loginType = GamaUtil.getPreviousLoginType(activity);
-                if(SLoginType.LOGIN_TYPE_FB.equals(loginType)) {
+                if (SLoginType.LOGIN_TYPE_FB.equals(loginType)) {
                     if (sFacebookProxy != null) {
                         sFacebookProxy.getMyProfile(activity, new SFacebookProxy.FbLoginCallBack() {
                             @Override
                             public void onCancel() {
-                                if(callBack != null) {
+                                if (callBack != null) {
                                     callBack.onCancel();
                                 }
                             }
@@ -506,14 +551,14 @@ public class GamaImpl implements IGama {
                                 sFacebookProxy.fbLogin(activity, new SFacebookProxy.FbLoginCallBack() {
                                     @Override
                                     public void onCancel() {
-                                        if(callBack != null) {
+                                        if (callBack != null) {
                                             callBack.onCancel();
                                         }
                                     }
 
                                     @Override
                                     public void onError(String message) {
-                                        if(callBack != null) {
+                                        if (callBack != null) {
                                             callBack.onError(message);
                                         }
                                     }
@@ -523,14 +568,14 @@ public class GamaImpl implements IGama {
                                         sFacebookProxy.getMyProfile(activity, new SFacebookProxy.FbLoginCallBack() {
                                             @Override
                                             public void onCancel() {
-                                                if(callBack != null) {
+                                                if (callBack != null) {
                                                     callBack.onCancel();
                                                 }
                                             }
 
                                             @Override
                                             public void onError(String message) {
-                                                if(callBack != null) {
+                                                if (callBack != null) {
                                                     callBack.onError(message);
                                                 }
                                             }
@@ -545,7 +590,7 @@ public class GamaImpl implements IGama {
                                                 userInfo.setPictureUri(user.getPictureUri());
                                                 userInfo.setAccessTokenString(user.getAccessTokenString());
                                                 userInfo.setTokenForBusiness(user.getTokenForBusiness());
-                                                if(callBack != null) {
+                                                if (callBack != null) {
                                                     callBack.onSuccess(userInfo);
                                                 }
                                             }
@@ -564,14 +609,14 @@ public class GamaImpl implements IGama {
                                 userInfo.setPictureUri(user.getPictureUri());
                                 userInfo.setAccessTokenString(user.getAccessTokenString());
                                 userInfo.setTokenForBusiness(user.getTokenForBusiness());
-                                if(callBack != null) {
+                                if (callBack != null) {
                                     callBack.onSuccess(userInfo);
                                 }
                             }
                         });
                     }
                 } else {
-                    if(callBack != null) {
+                    if (callBack != null) {
                         callBack.onSuccess(new UserInfo());
                     }
                 }
@@ -587,9 +632,9 @@ public class GamaImpl implements IGama {
                 Log.i(TAG, "type : " + type.name() + "  paging : " + paging + "  limit : " + limit + "  bundle : " + bundle);
                 switch (type) {
                     case FACEBOOK:
-                        if(sFacebookProxy != null) {
+                        if (sFacebookProxy != null) {
                             Bundle newBundle;
-                            if(bundle == null) {
+                            if (bundle == null) {
                                 newBundle = new Bundle();
                                 newBundle.putString("fields", "friends.limit(" + limit + "){name,picture.width(300)}");
                             } else {
@@ -598,14 +643,14 @@ public class GamaImpl implements IGama {
                             sFacebookProxy.requestMyFriends(activity, newBundle, paging, new SFacebookProxy.RequestFriendsCallBack() {
                                 @Override
                                 public void onError() {
-                                    if(callback != null) {
+                                    if (callback != null) {
                                         callback.onError();
                                     }
                                 }
 
                                 @Override
                                 public void onSuccess(JSONObject graphObject, List<FriendProfile> friendProfiles, String next, String previous, int count) {
-                                    if(callback != null) {
+                                    if (callback != null) {
                                         callback.onSuccess(graphObject, friendProfiles, next, previous, count);
                                     }
                                 }
@@ -624,20 +669,20 @@ public class GamaImpl implements IGama {
                 Log.i(TAG, "type : " + type.name() + "  message : " + message + "  shareLinkUrl : " + shareLinkUrl + "  picPath : " + picPath);
                 switch (type) {
                     case FACEBOOK:
-                        if(!TextUtils.isEmpty(shareLinkUrl)) {
+                        if (!TextUtils.isEmpty(shareLinkUrl)) {
                             String newShareLinkUrl = shareLinkUrl;
-                            if (sFacebookProxy != null){
+                            if (sFacebookProxy != null) {
                                 SFacebookProxy.FbShareCallBack fbShareCallBack = new SFacebookProxy.FbShareCallBack() {
                                     @Override
                                     public void onCancel() {
-                                        if (iSdkCallBack != null){
+                                        if (iSdkCallBack != null) {
                                             iSdkCallBack.failure();
                                         }
                                     }
 
                                     @Override
                                     public void onError(String message) {
-                                        if (iSdkCallBack != null){
+                                        if (iSdkCallBack != null) {
                                             iSdkCallBack.failure();
                                         }
                                     }
@@ -651,80 +696,80 @@ public class GamaImpl implements IGama {
                                 };
 
                                 if (SStringUtil.isNotEmpty(GamaUtil.getServerCode(activity)) && SStringUtil.isNotEmpty(GamaUtil.getRoleId(activity))) {
-                                    if (newShareLinkUrl.contains("?")){//userId+||S||+serverCode+||S||+roleId
-                                        newShareLinkUrl = newShareLinkUrl + "&campaign=" + URLEncoder.encode(GamaUtil.getUid(activity)+ "||S||" + GamaUtil.getServerCode(activity)+"||S||"+GamaUtil.getRoleId(activity));
-                                    }else {
-                                        newShareLinkUrl = newShareLinkUrl + "?campaign=" + URLEncoder.encode(GamaUtil.getUid(activity)+ "||S||" + GamaUtil.getServerCode(activity)+"||S||"+GamaUtil.getRoleId(activity));
+                                    if (newShareLinkUrl.contains("?")) {//userId+||S||+serverCode+||S||+roleId
+                                        newShareLinkUrl = newShareLinkUrl + "&campaign=" + URLEncoder.encode(GamaUtil.getUid(activity) + "||S||" + GamaUtil.getServerCode(activity) + "||S||" + GamaUtil.getRoleId(activity));
+                                    } else {
+                                        newShareLinkUrl = newShareLinkUrl + "?campaign=" + URLEncoder.encode(GamaUtil.getUid(activity) + "||S||" + GamaUtil.getServerCode(activity) + "||S||" + GamaUtil.getRoleId(activity));
                                     }
                                 }
-                                sFacebookProxy.fbShare(activity, fbShareCallBack,"",  "", shareLinkUrl, "");
+                                sFacebookProxy.fbShare(activity, fbShareCallBack, "", "", shareLinkUrl, "");
                             } else {
-                                if (iSdkCallBack != null){
+                                if (iSdkCallBack != null) {
                                     iSdkCallBack.failure();
                                 }
                             }
-                        } else if(!TextUtils.isEmpty(picPath)) {
-                            if(sFacebookProxy != null) {
+                        } else if (!TextUtils.isEmpty(picPath)) {
+                            if (sFacebookProxy != null) {
                                 sFacebookProxy.shareLocalPhoto(activity, new SFacebookProxy.FbShareCallBack() {
                                     @Override
                                     public void onCancel() {
-                                        if (iSdkCallBack != null){
+                                        if (iSdkCallBack != null) {
                                             iSdkCallBack.failure();
                                         }
                                     }
 
                                     @Override
                                     public void onError(String message) {
-                                        if (iSdkCallBack != null){
+                                        if (iSdkCallBack != null) {
                                             iSdkCallBack.failure();
                                         }
                                     }
 
                                     @Override
                                     public void onSuccess() {
-                                        if (iSdkCallBack != null){
+                                        if (iSdkCallBack != null) {
                                             iSdkCallBack.success();
                                         }
                                     }
                                 }, picPath);
                             } else {
-                                if (iSdkCallBack != null){
+                                if (iSdkCallBack != null) {
                                     iSdkCallBack.failure();
                                 }
                             }
                         } else {
-                            if (iSdkCallBack != null){
+                            if (iSdkCallBack != null) {
                                 iSdkCallBack.failure();
                             }
                         }
                         break;
 
                     case FACEBOOK_MESSENGER:
-                        if(sFacebookProxy != null) {
+                        if (sFacebookProxy != null) {
                             sFacebookProxy.shareToMessenger(activity, picPath, new SFacebookProxy.FbShareCallBack() {
                                 @Override
                                 public void onCancel() {
-                                    if (iSdkCallBack != null){
+                                    if (iSdkCallBack != null) {
                                         iSdkCallBack.failure();
                                     }
                                 }
 
                                 @Override
                                 public void onError(String message) {
-                                    if (iSdkCallBack != null){
+                                    if (iSdkCallBack != null) {
                                         iSdkCallBack.failure();
                                     }
                                 }
 
                                 @Override
                                 public void onSuccess() {
-                                    if (iSdkCallBack != null){
+                                    if (iSdkCallBack != null) {
                                         iSdkCallBack.success();
                                     }
                                 }
                             });
                         } else {
-                            if (iSdkCallBack != null){
+                            if (iSdkCallBack != null) {
                                 iSdkCallBack.failure();
                             }
                         }
@@ -783,31 +828,31 @@ public class GamaImpl implements IGama {
                 Log.i(TAG, "type : " + type.name() + "  message : " + message + "  title : " + title + "  invitingList : " + invitingList);
                 switch (type) {
                     case FACEBOOK:
-                        if(sFacebookProxy != null) {
+                        if (sFacebookProxy != null) {
                             sFacebookProxy.inviteFriends(activity, invitingList, title, message, new SFacebookProxy.FbInviteFriendsCallBack() {
                                 @Override
                                 public void onCancel() {
-                                    if (callback != null){
+                                    if (callback != null) {
                                         callback.failure();
                                     }
                                 }
 
                                 @Override
                                 public void onError(String message) {
-                                    if (callback != null){
+                                    if (callback != null) {
                                         callback.failure();
                                     }
                                 }
 
                                 @Override
                                 public void onSuccess(String requestId, List<String> requestRecipients) {
-                                    if(callback != null) {
+                                    if (callback != null) {
                                         callback.success(requestId, requestRecipients);
                                     }
                                 }
                             });
                         } else {
-                            if (callback != null){
+                            if (callback != null) {
                                 callback.failure();
                             }
                         }

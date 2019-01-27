@@ -5,7 +5,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
@@ -20,6 +19,7 @@ import com.core.base.utils.ToastUtils;
 import com.gama.base.utils.GamaUtil;
 import com.gama.sdk.R;
 import com.gama.sdk.SBaseDialog;
+import com.gama.sdk.callback.GamaCommonViewCallback;
 
 /**
  * Created by GanYuanrong on 2017/2/6.
@@ -36,23 +36,23 @@ public class StartTermsLayoutV2 extends SBaseDialog {
     private String serviceUrl, privateUrl;
     private FrameLayout layout;
     private Context mContext;
-    private ViewListener viewListener;
+    private GamaCommonViewCallback viewListener;
 
-    public StartTermsLayoutV2(@NonNull Context context, ViewListener listener) {
+    public StartTermsLayoutV2(@NonNull Context context, GamaCommonViewCallback listener) {
         super(context);
         this.mContext = context;
         this.viewListener = listener;
         setFullScreen();
     }
 
-    public StartTermsLayoutV2(@NonNull Context context, int themeResId, ViewListener listener) {
+    public StartTermsLayoutV2(@NonNull Context context, int themeResId, GamaCommonViewCallback listener) {
         super(context, themeResId);
         this.mContext = context;
         this.viewListener = listener;
         setFullScreen();
     }
 
-    protected StartTermsLayoutV2(@NonNull Context context, boolean cancelable, @Nullable OnCancelListener cancelListener, ViewListener listener) {
+    protected StartTermsLayoutV2(@NonNull Context context, boolean cancelable, @Nullable OnCancelListener cancelListener, GamaCommonViewCallback listener) {
         super(context, cancelable, cancelListener);
         this.mContext = context;
         this.viewListener = listener;
@@ -144,11 +144,6 @@ public class StartTermsLayoutV2 extends SBaseDialog {
         if(viewListener != null) {
             viewListener.onFailure();
         }
-    }
-
-    public interface ViewListener {
-        void onSuccess();
-        void onFailure();
     }
 
 }

@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import com.core.base.cipher.DESCipher;
 import com.core.base.utils.ApkInfoUtil;
 import com.core.base.utils.FileUtil;
+import com.core.base.utils.GamaTimeUtil;
 import com.core.base.utils.JsonUtil;
 import com.core.base.utils.SPUtil;
 import com.core.base.utils.SStringUtil;
@@ -447,6 +448,85 @@ public class GamaUtil {
         SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
         if(SGameLanguage.ja_JP == sGameLanguage) {
             return true;
+        }
+        return false;
+    }
+
+    /**
+     * 同时保存年龄和时间
+     * @param context
+     * @param age
+     */
+    public static void saveAgeAndTime(Context context, int age) {
+        saveAgeTime(context);
+        saveAge(context, age);
+    }
+
+    private static final String PREFIX_AGE_TIME = "GAMA_AGE_TIME_";
+
+    /**
+     * 保存当次年龄日期
+     * @param context
+     */
+    public static void saveAgeTime(Context context) {
+        SPUtil.saveSimpleInfo(context, GamaUtil.GAMA_SP_FILE, PREFIX_AGE_TIME + getUid(context), System.currentTimeMillis());
+    }
+
+    /**
+     * 获取上次年龄日期
+     * @param context
+     * @return
+     */
+    public static long getAgeTime(Context context) {
+        return SPUtil.getSimpleLong(context, GamaUtil.GAMA_SP_FILE, PREFIX_AGE_TIME + getUid(context));
+    }
+
+    private static final String PREFIX_AGE_ = "GAMA_AGE_";
+
+    /**
+     * 保存当次年龄日期
+     * @param context
+     */
+    public static void saveAge(Context context, int age) {
+        SPUtil.saveSimpleInteger(context, GamaUtil.GAMA_SP_FILE, PREFIX_AGE_ + getUid(context), age);
+    }
+
+    /**
+     * 获取上次年龄日期
+     * @param context
+     * @return
+     */
+    public static int getAge(Context context) {
+        return SPUtil.getSimpleInteger(context, GamaUtil.GAMA_SP_FILE, PREFIX_AGE_ + getUid(context));
+    }
+
+    /**
+     * 判断是否有需要显示年齡限制页面
+     * @param context
+     * @return
+     */
+    public static boolean needShowAgePage(Context context) {
+        SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
+        if(SGameLanguage.ja_JP == sGameLanguage) {
+            if(getAge(context) >= 20) {
+                return false;
+            } else if(GamaTimeUtil.isSameMonth(getAgeTime(context))) {
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 判断是否有需要查询年齡限制
+     * @param context
+     * @return
+     */
+    public static boolean needRequestAgeLimit(Context context) {
+        SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
+        if(SGameLanguage.ja_JP == sGameLanguage) {
+            return getAge(context) < 20;
         }
         return false;
     }

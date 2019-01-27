@@ -3,7 +3,6 @@ package com.gama.sdk.demo;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -21,6 +20,7 @@ import com.core.base.utils.ToastUtils;
 import com.crashlytics.android.Crashlytics;
 import com.gama.base.bean.SGameLanguage;
 import com.gama.base.bean.SPayType;
+import com.gama.base.utils.GamaUtil;
 import com.gama.base.utils.SLog;
 import com.gama.data.login.ILoginCallBack;
 import com.gama.data.login.response.SLoginResponse;
@@ -29,6 +29,9 @@ import com.gama.pay.gp.util.IabResult;
 import com.gama.pay.gp.util.Inventory;
 import com.gama.pay.gp.util.Purchase;
 import com.gama.sdk.callback.IPayListener;
+import com.gama.sdk.login.widget.v2.age.IGamaAgePresenter;
+import com.gama.sdk.login.widget.v2.age.callback.GamaAgeCallback;
+import com.gama.sdk.login.widget.v2.age.impl.GamaAgeImpl;
 import com.gama.sdk.out.GamaFactory;
 import com.gama.sdk.out.GamaOpenWebType;
 import com.gama.sdk.out.GamaThirdPartyType;
@@ -39,25 +42,19 @@ import com.gama.sdk.social.callback.FetchFriendsCallback;
 import com.gama.sdk.social.callback.InviteFriendsCallback;
 import com.gama.sdk.social.callback.UserProfileCallback;
 import com.gama.thirdlib.facebook.FriendProfile;
-import com.gama.thirdlib.facebook.SFacebookProxy;
 import com.gama.thirdlib.twitter.GamaTwitterLogin;
-import com.twitter.sdk.android.core.DefaultLogger;
-import com.twitter.sdk.android.core.Twitter;
-import com.twitter.sdk.android.core.TwitterAuthConfig;
-import com.twitter.sdk.android.core.TwitterConfig;
 
 import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button loginButton, othersPayButton,googlePayBtn,shareButton, showPlatform, crashlytics,
+    private Button loginButton, othersPayButton, googlePayBtn, shareButton, showPlatform, crashlytics,
             PurchasesHistory, getFriend, invite, checkShare, getInfo, getFriendNext, getFriendPrevious,
-            service, announcement, twitterLogin;
+            service, announcement, age;
     IabHelper mHelper;
     private IGama iGama;
     private String nextUrl, previousUrl;
@@ -86,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         checkShare = (Button) findViewById(R.id.checkShare);
         service = (Button) findViewById(R.id.service);
         announcement = (Button) findViewById(R.id.announcement);
-        twitterLogin = (Button) findViewById(R.id.twitterLogin);
+        age = (Button) findViewById(R.id.age);
 
         iGama = GamaFactory.create();
 
@@ -107,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                 iGama.login(MainActivity.this, new ILoginCallBack() {
                     @Override
                     public void onLogin(SLoginResponse sLoginResponse) {
-                        if (sLoginResponse != null){
+                        if (sLoginResponse != null) {
                             String uid = sLoginResponse.getUserId();
                             String accessToken = sLoginResponse.getAccessToken();
                             String timestamp = sLoginResponse.getTimestamp();
@@ -200,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onPayFinish(Bundle bundle) {
                         PL.i("GooglePay结束");
                         int status = 0;
-                        if(bundle != null) {
+                        if (bundle != null) {
                             status = bundle.getInt("status");
 
                         }
@@ -225,13 +222,13 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 GamaThirdPartyType type = null;
-                                if(i == 0) {
+                                if (i == 0) {
                                     type = GamaThirdPartyType.FACEBOOK;
-                                } else if(i == 1) {
+                                } else if (i == 1) {
                                     type = GamaThirdPartyType.LINE;
-                                } else if(i == 2) {
+                                } else if (i == 2) {
                                     type = GamaThirdPartyType.WHATSAPP;
-                                } else if(i == 3) {
+                                } else if (i == 3) {
                                     type = GamaThirdPartyType.FACEBOOK_MESSENGER;
                                 }
                                 //下面的参数请按照实际传值
@@ -245,7 +242,7 @@ public class MainActivity extends AppCompatActivity {
                                         .setItems(new String[]{"分享图片", "分享文字/链接"}, new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int index) {
-                                                if(index == 0) {
+                                                if (index == 0) {
                                                     iGama.gamaShare(MainActivity.this, finalType, message, "", picPath, new ISdkCallBack() {
                                                         @Override
                                                         public void success() {
@@ -257,8 +254,8 @@ public class MainActivity extends AppCompatActivity {
                                                             Log.i("facebook", "failure");
                                                         }
                                                     });
-                                                } else if(index == 1) {
-                                                    if(finalType == GamaThirdPartyType.FACEBOOK_MESSENGER) {
+                                                } else if (index == 1) {
+                                                    if (finalType == GamaThirdPartyType.FACEBOOK_MESSENGER) {
                                                         ToastUtils.toast(MainActivity.this, "facebook-messenger只支持图片分享");
                                                         return;
                                                     }
@@ -351,11 +348,11 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.xiaofei).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!mHelper.isSetupDone()) {
+                if (!mHelper.isSetupDone()) {
                     mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
                         @Override
                         public void onIabSetupFinished(IabResult result) {
-                            if(result.isSuccess()) {
+                            if (result.isSuccess()) {
                                 SLog.logD("初始化iabHelper成功，开始消费");
                                 consume();
                             } else {
@@ -380,11 +377,11 @@ public class MainActivity extends AppCompatActivity {
         PurchasesHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!mHelper.isSetupDone()) {
+                if (!mHelper.isSetupDone()) {
                     mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
                         @Override
                         public void onIabSetupFinished(IabResult result) {
-                            if(result.isSuccess()) {
+                            if (result.isSuccess()) {
                                 SLog.logD("初始化iabHelper成功，开始查历史记录");
                                 mHelper.queryPurchasesHistory();
                             } else {
@@ -415,16 +412,16 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(JSONObject graphObject, List<FriendProfile> friendProfiles, String next, String previous, int count) {
                         Log.i("facebook", "graphObject: " + graphObject.toString());
-                        if(friendProfiles != null) {
-                            for(FriendProfile profile : friendProfiles) {
-                                Log.i("facebook", "profile: " +  profile.getThirdId());
-                                Log.i("facebook", "profile: " +  profile.getGender());
-                                Log.i("facebook", "profile: " +  profile.getName());
-                                Log.i("facebook", "profile: " +  profile.getIconUrl());
+                        if (friendProfiles != null) {
+                            for (FriendProfile profile : friendProfiles) {
+                                Log.i("facebook", "profile: " + profile.getThirdId());
+                                Log.i("facebook", "profile: " + profile.getGender());
+                                Log.i("facebook", "profile: " + profile.getName());
+                                Log.i("facebook", "profile: " + profile.getIconUrl());
                             }
-                            Log.i("facebook", "next: " +  next);
-                            Log.i("facebook", "previous: " +  previous);
-                            Log.i("facebook", "count: " +  count);
+                            Log.i("facebook", "next: " + next);
+                            Log.i("facebook", "previous: " + previous);
+                            Log.i("facebook", "count: " + count);
                             nextUrl = next;
                             previousUrl = previous;
                         }
@@ -437,7 +434,7 @@ public class MainActivity extends AppCompatActivity {
         getFriendNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(TextUtils.isEmpty(nextUrl)) {
+                if (TextUtils.isEmpty(nextUrl)) {
                     Toast.makeText(MainActivity.this, "没有下一页", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -450,16 +447,16 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(JSONObject graphObject, List<FriendProfile> friendProfiles, String next, String previous, int count) {
                         Log.i("facebook", "graphObject: " + graphObject.toString());
-                        if(friendProfiles != null) {
-                            for(FriendProfile profile : friendProfiles) {
-                                Log.i("facebook", "profile: " +  profile.getThirdId());
-                                Log.i("facebook", "profile: " +  profile.getGender());
-                                Log.i("facebook", "profile: " +  profile.getName());
-                                Log.i("facebook", "profile: " +  profile.getIconUrl());
+                        if (friendProfiles != null) {
+                            for (FriendProfile profile : friendProfiles) {
+                                Log.i("facebook", "profile: " + profile.getThirdId());
+                                Log.i("facebook", "profile: " + profile.getGender());
+                                Log.i("facebook", "profile: " + profile.getName());
+                                Log.i("facebook", "profile: " + profile.getIconUrl());
                             }
-                            Log.i("facebook", "next: " +  next);
-                            Log.i("facebook", "previous: " +  previous);
-                            Log.i("facebook", "count: " +  count);
+                            Log.i("facebook", "next: " + next);
+                            Log.i("facebook", "previous: " + previous);
+                            Log.i("facebook", "count: " + count);
                             nextUrl = next;
                             previousUrl = previous;
                         }
@@ -472,7 +469,7 @@ public class MainActivity extends AppCompatActivity {
         getFriendPrevious.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(TextUtils.isEmpty(previousUrl)) {
+                if (TextUtils.isEmpty(previousUrl)) {
                     Toast.makeText(MainActivity.this, "没有上一页", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -485,16 +482,16 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(JSONObject graphObject, List<FriendProfile> friendProfiles, String next, String previous, int count) {
                         Log.i("facebook", "graphObject: " + graphObject.toString());
-                        if(friendProfiles != null) {
-                            for(FriendProfile profile : friendProfiles) {
-                                Log.i("facebook", "profile: " +  profile.getThirdId());
-                                Log.i("facebook", "profile: " +  profile.getGender());
-                                Log.i("facebook", "profile: " +  profile.getName());
-                                Log.i("facebook", "profile: " +  profile.getIconUrl());
+                        if (friendProfiles != null) {
+                            for (FriendProfile profile : friendProfiles) {
+                                Log.i("facebook", "profile: " + profile.getThirdId());
+                                Log.i("facebook", "profile: " + profile.getGender());
+                                Log.i("facebook", "profile: " + profile.getName());
+                                Log.i("facebook", "profile: " + profile.getIconUrl());
                             }
-                            Log.i("facebook", "next: " +  next);
-                            Log.i("facebook", "previous: " +  previous);
-                            Log.i("facebook", "count: " +  count);
+                            Log.i("facebook", "next: " + next);
+                            Log.i("facebook", "previous: " + previous);
+                            Log.i("facebook", "count: " + count);
                             nextUrl = next;
                             previousUrl = previous;
                         }
@@ -522,9 +519,9 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void success(String requestId, List<String> requestRecipients) {
                         Log.i("facebook", "requestId: " + requestId);
-                        if(requestRecipients != null) {
-                            for(String s : requestRecipients) {
-                                Log.i("facebook", "requestRecipients: " +  s);
+                        if (requestRecipients != null) {
+                            for (String s : requestRecipients) {
+                                Log.i("facebook", "requestRecipients: " + s);
                             }
                         }
 
@@ -541,17 +538,17 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 GamaThirdPartyType type = null;
-                                if(i == 0) {
+                                if (i == 0) {
                                     type = GamaThirdPartyType.FACEBOOK;
-                                } else if(i == 1) {
+                                } else if (i == 1) {
                                     type = GamaThirdPartyType.LINE;
-                                } else if(i == 2) {
+                                } else if (i == 2) {
                                     type = GamaThirdPartyType.WHATSAPP;
-                                } else if(i == 3) {
+                                } else if (i == 3) {
                                     type = GamaThirdPartyType.FACEBOOK_MESSENGER;
                                 }
                                 boolean canShare = iGama.gamaShouldShareWithType(MainActivity.this, type);
-                                if(canShare) {
+                                if (canShare) {
                                     ToastUtils.toast(MainActivity.this, "支持分享");
                                 } else {
                                     ToastUtils.toast(MainActivity.this, "不支持分享");
@@ -581,12 +578,12 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onSuccess(UserInfo user) {
-                        Log.i("facebook", "UserInfo: " +  user.getAccessTokenString());
-                        Log.i("facebook", "UserInfo: " +  user.getBirthday());
-                        Log.i("facebook", "UserInfo: " +  user.getGender());
-                        Log.i("facebook", "UserInfo: " +  user.getName());
-                        Log.i("facebook", "UserInfo: " +  user.getPictureUri());
-                        Log.i("facebook", "UserInfo: " +  user.getUserThirdId());
+                        Log.i("facebook", "UserInfo: " + user.getAccessTokenString());
+                        Log.i("facebook", "UserInfo: " + user.getBirthday());
+                        Log.i("facebook", "UserInfo: " + user.getGender());
+                        Log.i("facebook", "UserInfo: " + user.getName());
+                        Log.i("facebook", "UserInfo: " + user.getPictureUri());
+                        Log.i("facebook", "UserInfo: " + user.getUserThirdId());
                     }
                 });
             }
@@ -636,12 +633,49 @@ public class MainActivity extends AppCompatActivity {
 //
 //        gamaTwitterLogin = new GamaTwitterLogin(MainActivity.this);
 //
-//        twitterLogin.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                gamaTwitterLogin.startLogin();
-//            }
-//        });
+        age.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!isLogin()) {
+                    ToastUtils.toast(MainActivity.this, "请先登入");
+                    return;
+                }
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this)
+                        .setItems(new String[]{"选择年龄页面", "达到上限页面", "发送年龄请求", "判断购买上限"}, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                IGamaAgePresenter presenter = new GamaAgeImpl();
+                                ((GamaAgeImpl) presenter).setAgeCallback(new GamaAgeCallback() {
+                                    @Override
+                                    public void onSuccess() {
+
+                                    }
+
+                                    @Override
+                                    public void onFailure() {
+
+                                    }
+
+                                    @Override
+                                    public void canBuy() {
+
+                                    }
+                                });
+                                if (i == 0) {
+                                    presenter.goAgeStyleThree(MainActivity.this);
+                                } else if (i == 1) {
+                                    presenter.goAgeStyleOne(MainActivity.this);
+                                } else if (i == 2) {
+                                    presenter.sendAgeRequest(MainActivity.this, null);
+                                } else if (i == 3) {
+                                    presenter.requestAgeLimit(MainActivity.this);
+                                }
+                            }
+                        });
+                builder.create().show();
+
+            }
+        });
 
     }
 
@@ -725,7 +759,7 @@ public class MainActivity extends AppCompatActivity {
 
         iGama.onActivityResult(this, requestCode, resultCode, data);
 
-        if(gamaTwitterLogin != null) {
+        if (gamaTwitterLogin != null) {
             gamaTwitterLogin.onActivityResult(requestCode, resultCode, data);
         }
     }
@@ -749,7 +783,7 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         PL.i("activity onDestroy");
         iGama.onDestroy(this);
-        if(mHelper != null) {
+        if (mHelper != null) {
             mHelper.dispose();
         }
     }
@@ -758,12 +792,16 @@ public class MainActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         PL.i("activity onRequestPermissionsResult");
-        iGama.onRequestPermissionsResult(this,requestCode,permissions,grantResults);
+        iGama.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
     }
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        iGama.onWindowFocusChanged(this,hasFocus);
+        iGama.onWindowFocusChanged(this, hasFocus);
+    }
+
+    private boolean isLogin() {
+        return !TextUtils.isEmpty(GamaUtil.getUid(this));
     }
 }

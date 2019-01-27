@@ -131,10 +131,10 @@
                     android:text="公告" />
 
                 <Button
-                    android:id="@+id/twitterLogin"
+                    android:id="@+id/age"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Twitter登入" />
+                    android:text="年龄" />
 
             </LinearLayout>
 
