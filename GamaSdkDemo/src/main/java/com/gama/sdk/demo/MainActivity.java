@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         iGama = GamaFactory.create();
 
         //设置语言
-        iGama.setGameLanguage(this, SGameLanguage.ja_JP);
+        iGama.setGameLanguage(this, SGameLanguage.zh_TW);
 
         //初始化sdk
         iGama.initSDK(this);
@@ -218,7 +218,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this)
-                        .setItems(new String[]{"facebook", "line", "whatsapp", "facebook-messenger"}, new DialogInterface.OnClickListener() {
+                        .setItems(new String[]{"facebook", "line", "whatsapp", "facebook-messenger", "Twitter"}, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 GamaThirdPartyType type = null;
@@ -230,6 +230,8 @@ public class MainActivity extends AppCompatActivity {
                                     type = GamaThirdPartyType.WHATSAPP;
                                 } else if (i == 3) {
                                     type = GamaThirdPartyType.FACEBOOK_MESSENGER;
+                                } else if (i == 4) {
+                                    type = GamaThirdPartyType.TWITTER;
                                 }
                                 //下面的参数请按照实际传值
                                 final String message = "分享内容啊";
@@ -239,7 +241,7 @@ public class MainActivity extends AppCompatActivity {
 
                                 final GamaThirdPartyType finalType = type;
                                 AlertDialog.Builder builder2 = new AlertDialog.Builder(MainActivity.this)
-                                        .setItems(new String[]{"分享图片", "分享文字/链接"}, new DialogInterface.OnClickListener() {
+                                        .setItems(new String[]{"分享图片", "分享文字/链接", "同时分享图片、文字/链接"}, new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int index) {
                                                 if (index == 0) {
@@ -268,6 +270,23 @@ public class MainActivity extends AppCompatActivity {
                                                         @Override
                                                         public void failure() {
                                                             Log.i("facebook", "failure");
+                                                        }
+                                                    });
+                                                } else if(index == 2) {
+                                                    if (finalType != GamaThirdPartyType.WHATSAPP &&
+                                                            finalType != GamaThirdPartyType.TWITTER) {
+                                                        ToastUtils.toast(MainActivity.this, "当前类型不支持同时分享图片和文字");
+                                                        return;
+                                                    }
+                                                    iGama.gamaShare(MainActivity.this, finalType, message, shareUrl, picPath, new ISdkCallBack() {
+                                                        @Override
+                                                        public void success() {
+                                                            Log.i("twitter", "success");
+                                                        }
+
+                                                        @Override
+                                                        public void failure() {
+                                                            Log.i("twitter", "failure");
                                                         }
                                                     });
                                                 }

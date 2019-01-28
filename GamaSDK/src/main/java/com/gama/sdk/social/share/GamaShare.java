@@ -1,8 +1,13 @@
 package com.gama.sdk.social.share;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
+import android.os.Build;
+import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
 
 import com.core.base.utils.ApkInstallUtil;
@@ -14,6 +19,11 @@ import com.gama.sdk.R;
 import com.gama.sdk.out.GamaThirdPartyType;
 import com.gama.sdk.out.ISdkCallBack;
 
+import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.List;
+
 public class GamaShare {
 
     private static ISdkCallBack iSdkCallBack;
@@ -21,6 +31,7 @@ public class GamaShare {
 
     private static final int SHARE_LINE = 60;
     private static final int SHARE_WHATSAPP = 61;
+    private static final int SHARE_TWITTER = 62;
 
     public static void share(Activity activity, GamaThirdPartyType type, String message, String linkUrl, String picPath, ISdkCallBack callBack) {
         iSdkCallBack = callBack;
@@ -32,6 +43,9 @@ public class GamaShare {
             case WHATSAPP:
                 shareWhatsapp(activity, message, linkUrl, picPath);
                 break;
+
+            case TWITTER:
+                startTwitterShare(activity, message, linkUrl, picPath);
         }
     }
 
@@ -88,6 +102,79 @@ public class GamaShare {
         }
     }
 
+    private static void startTwitterShare(Activity activity, String msg, String linkUrl, String picUrl) {
+        Intent twitterIntent = createTwitterIntent(activity, msg, linkUrl, picUrl);
+        if (twitterIntent != null) {
+            PL.i("使用twitter客戶端分享");
+            activity.startActivityForResult(twitterIntent, SHARE_TWITTER);
+        } else {
+            PL.i("使用web分享");
+            Intent webIntent = createWebIntent(msg, linkUrl);
+            activity.startActivityForResult(webIntent, SHARE_TWITTER);
+        }
+    }
+
+
+    private static Intent createTwitterIntent(Activity activity, String msg, String linkUrl, String imageUri) {
+        Intent intent = new Intent("android.intent.action.SEND");
+
+        StringBuilder builder = new StringBuilder();
+
+        if (!TextUtils.isEmpty(msg)) {
+            builder.append(msg);
+        }
+
+        if (!TextUtils.isEmpty(linkUrl)) {
+            if (builder.length() > 0) {
+                builder.append(' ');
+            }
+            builder.append(linkUrl);
+        }
+
+        intent.putExtra("android.intent.extra.TEXT", builder.toString());
+        intent.setType("text/plain");
+
+        if (!TextUtils.isEmpty(imageUri)) {
+            Uri picUri = FileUtil.getContentUri(activity, imageUri);
+            intent.putExtra("android.intent.extra.STREAM", picUri);
+            intent.setType("image/jpeg");
+        }
+
+        PackageManager packManager = activity.getPackageManager();
+        List<ResolveInfo> resolvedInfoList = packManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+
+        for (ResolveInfo resolveInfo : resolvedInfoList) {
+            if (resolveInfo.activityInfo.packageName.startsWith("com.twitter.android")) {
+                intent.setClassName(resolveInfo.activityInfo.packageName, resolveInfo.activityInfo.name);
+
+                return intent;
+            }
+        }
+
+        return null;
+    }
+
+    private static Intent createWebIntent(String msg, String linkUrl) {
+        String url = TextUtils.isEmpty(linkUrl) ? "" : linkUrl;
+        String message = TextUtils.isEmpty(msg) ? "" : msg;
+
+        String tweetUrl = String.format("https://twitter.com/intent/tweet?text=%s&url=%s",
+                urlEncode(message), urlEncode(url));
+
+        return new Intent("android.intent.action.VIEW", Uri.parse(tweetUrl));
+    }
+
+    public static String urlEncode(String s) {
+        if (s == null) {
+            return "";
+        }
+        try {
+            return URLEncoder.encode(s, "UTF8");
+        } catch (UnsupportedEncodingException unlikely) {
+            throw new RuntimeException(unlikely.getMessage(), unlikely);
+        }
+    }
+
     public static boolean shouldShareWithType(Activity activity, GamaThirdPartyType type) {
         switch (type) {
             case LINE:
@@ -102,6 +189,9 @@ public class GamaShare {
             case FACEBOOK:
                 return true;
 
+            case TWITTER:
+                return true;
+
             default:
                 return false;
         }
@@ -113,6 +203,10 @@ public class GamaShare {
                 iSdkCallBack.success();
             }
         } else if(requestCode == SHARE_WHATSAPP) {
+            if(iSdkCallBack != null) {
+                iSdkCallBack.success();
+            }
+        } else if(requestCode == SHARE_TWITTER) {
             if(iSdkCallBack != null) {
                 iSdkCallBack.success();
             }

@@ -62,7 +62,7 @@
     <string name="py_login_guset" translatable="false">ゲストプレイ</string>
 
     <!--SDK功能提示-->
-    <string name="gama_toast_msg_app_not_install" translatable="false">%s をインストールしていませんので、%sアプリをインストールしてからシェアしてみてください</string>
+    <string name="gama_toast_msg_app_not_install" translatable="false">%s をインストールしていませんので、当アプリをインストールしてからシェアしてみてください</string>
 
     <string name="gama_ui_term_title" translatable="false">利用規約</string>
     <string name="gama_ui_term_confirm" translatable="false">ログインする</string>

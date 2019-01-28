@@ -777,6 +777,7 @@ public class GamaImpl implements IGama {
 
                     case LINE:
                     case WHATSAPP:
+                    case TWITTER:
                         GamaShare.share(activity, type, message, shareLinkUrl, picPath, iSdkCallBack);
                         break;
                 }

@@ -4,5 +4,6 @@ public enum  GamaThirdPartyType {
     FACEBOOK,
     FACEBOOK_MESSENGER,
     LINE,
-    WHATSAPP
+    WHATSAPP,
+    TWITTER
 }
