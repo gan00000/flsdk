@@ -22,7 +22,10 @@ import java.util.List;
 
 public interface IGama extends IGameLifeCycle {
 
+    @Deprecated
     void initSDK(Activity activity);
+
+    void initSDK(Activity activity, SGameLanguage language);
 
     void setGameLanguage(Activity activity,SGameLanguage gameLanguage);
 

@@ -88,10 +88,10 @@ public class MainActivity extends AppCompatActivity {
         iGama = GamaFactory.create();
 
         //设置语言
-        iGama.setGameLanguage(this, SGameLanguage.zh_TW);
+//        iGama.setGameLanguage(this, SGameLanguage.zh_TW);
 
         //初始化sdk
-        iGama.initSDK(this);
+        iGama.initSDK(this, SGameLanguage.zh_TW);
 
         //在游戏Activity的onCreate生命周期中调用
         iGama.onCreate(this);

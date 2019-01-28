@@ -79,51 +79,52 @@ public class GamaImpl implements IGama {
         iLogin = ObjFactory.create(DialogLoginImpl.class);
     }
 
+    @Deprecated
     @Override
     public void initSDK(final Activity activity) {
+        initSDK(activity, SGameLanguage.zh_TW);
+    }
+
+    @Override
+    public void initSDK(final Activity activity, final SGameLanguage gameLanguage) {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 PL.i("IGama initSDK");
+                Localization.gameLanguage(activity, gameLanguage);
                 //清除上一次登录成功的返回值
                 GamaUtil.saveSdkLoginData(activity, "");
 
-                activity.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        //获取Google 广告ID
-                        StarEventLogger.registerGoogleAdId(activity);
-                        //Gama平台安装上报
-                        StarEventLogger.reportInstallActivation(activity.getApplicationContext());
+                //获取Google 广告ID
+                StarEventLogger.registerGoogleAdId(activity);
+                //Gama平台安装上报
+                StarEventLogger.reportInstallActivation(activity.getApplicationContext());
 //                try {
 //                    Fresco.initialize(activity.getApplicationContext());//初始化fb Fresco库
 //                } catch (Exception e) {
 //                    e.printStackTrace();
 //                }
 
-                        //广告
-                        StarEventLogger.activateApp(activity);
+                //广告
+                StarEventLogger.activateApp(activity);
 
-                        //时间打点开始
-                        LogTimer.getInstance().start(activity);
+                //时间打点开始
+                LogTimer.getInstance().start(activity);
 
 //                        setGameLanguage(activity,SGameLanguage.zh_TW);
 
-                        ConfigRequest.requestBaseCfg(activity.getApplicationContext());//下载配置文件
+                ConfigRequest.requestBaseCfg(activity.getApplicationContext());//下载配置文件
 //                ConfigRequest.requestTermsCfg(activity.getApplicationContext());//下载服务条款
-                        // 1.初始化fb sdk
+                // 1.初始化fb sdk
 //                SFacebookProxy.initFbSdk(activity.getApplicationContext());
-                        sFacebookProxy = new SFacebookProxy(activity.getApplicationContext());
-                        isInitSdk = true;
-                        //进行启动的查单
-                        SLog.logD(TAG, "Start launch query.");
-                        GooglePayHelper.getInstance().queryConsumablePurchase(activity);
+                sFacebookProxy = new SFacebookProxy(activity.getApplicationContext());
+                isInitSdk = true;
+                //进行启动的查单
+                SLog.logD(TAG, "Start launch query.");
+                GooglePayHelper.getInstance().queryConsumablePurchase(activity);
 
-                    }
-                });
             }
         });
-
     }
 
     /*
@@ -352,7 +353,7 @@ public class GamaImpl implements IGama {
                 });
 
                 if (!isInitSdk) {
-                    initSDK(activity);
+                    initSDK(activity, SGameLanguage.zh_TW);
                 }
                 if (iLogin != null) {
                     iLogin.onCreate(activity);
