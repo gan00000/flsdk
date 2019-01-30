@@ -50,6 +50,7 @@ public class FbSp {
     public static final String S_FB_GENDER = "S_FB_GENDER";
     public static final String S_FB_BIRTHDAY = "S_FB_BIRTHDAY";
     public static final String S_FB_NAME = "S_FB_NAME";
+    public static final String S_FB_PIC_URL = "S_FB_PIC_URL";
 
     public static void saveFbGender(Context context, String gender){
         SharedPreferences sharedPreferences = context.getSharedPreferences(S_FACEBOOK_FILE,Context.MODE_PRIVATE);
@@ -79,6 +80,16 @@ public class FbSp {
     public static String getFbName(Context context){
         SharedPreferences sharedPreferences = context.getSharedPreferences(S_FACEBOOK_FILE,Context.MODE_PRIVATE);
         return sharedPreferences.getString(S_FB_NAME,"");
+    }
+
+    public static void saveFbPicUrl(Context context, String picUrl){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(S_FACEBOOK_FILE,Context.MODE_PRIVATE);
+        sharedPreferences.edit().putString(S_FB_PIC_URL,picUrl).commit();
+    }
+
+    public static String getFbPicUrl(Context context){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(S_FACEBOOK_FILE,Context.MODE_PRIVATE);
+        return sharedPreferences.getString(S_FB_PIC_URL,"");
     }
 
 }

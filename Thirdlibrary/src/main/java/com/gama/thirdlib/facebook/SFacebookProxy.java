@@ -57,7 +57,7 @@ public class SFacebookProxy {
 
 	private static DefaultAudience defaultAudience = DefaultAudience.FRIENDS;
 	private static LoginBehavior loginBehavior = LoginBehavior.NATIVE_WITH_FALLBACK;
-	private static List<String> permissions = Arrays.asList("public_profile", "user_friends", "user_birthday", "user_gender");
+	private static List<String> permissions = Arrays.asList("public_profile", "user_friends");
 //	private static List<String> permissions = Arrays.asList("public_profile", "email", "user_friends");
 //	private static List<String> permissions = Collections.singletonList("public_profile");
 	private static final int REQUEST_TOMESSENGER = 16;
@@ -892,6 +892,16 @@ public class SFacebookProxy {
 					String name = userInfo.optString("name", "");
 					String gender = userInfo.optString("gender", "");
 					String birthday = userInfo.optString("birthday", "");
+					Uri picUri = null;
+
+					JSONObject picObject = userInfo.optJSONObject("picture");
+					if(picObject != null) {
+						JSONObject picData = picObject.optJSONObject("data");
+						if(picData != null && !TextUtils.isEmpty(picData.optString("url"))) {
+							picUri = Uri.parse(picData.optString("url"));
+							FbSp.saveFbPicUrl(activity, picData.optString("url"));
+						}
+					}
 
 					FbSp.saveFbGender(activity, gender);
 					FbSp.saveFbBirthday(activity, birthday);
@@ -902,7 +912,7 @@ public class SFacebookProxy {
 					user.setName(name);
 					user.setGender(gender);
 					user.setBirthday(birthday);
-					user.setPictureUri(ImageRequest.getProfilePictureUri(id, 300, 300));
+					user.setPictureUri(picUri);
 					user.setFacebookAppId(accessToken.getApplicationId());
 					user.setAccessTokenString(accessToken.getToken());
 					if (callBack != null) {

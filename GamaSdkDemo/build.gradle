@@ -115,10 +115,13 @@ android {
             resValue "string", "fb_login_protocol_scheme", "fb1040235646130047"
             resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1040235646130047"
             //测试工程地址
-            resValue "string", "gama_login_pre_url", "http://200.200.200.105:8080/login/"
-            resValue "string", "gama_login_spa_url", "http://200.200.200.105:8080/login/"
-            resValue "string", "gama_pay_pre_url", "http://200.200.200.105:8080/pay/"
-            resValue "string", "gama_pay_spa_url", "http://200.200.200.105:8080/pay/"
+            resValue "string", "gama_login_pre_url", "http://35.185.146.77/login/"
+            resValue "string", "gama_login_spa_url", "http://35.185.146.77/login/"
+            resValue "string", "gama_pay_pre_url", "http://35.185.146.77:8080/pay/"
+            resValue "string", "gama_pay_spa_url", "http://35.185.146.77:8080/pay/"
+            //测试商品id
+            resValue "string", "test_sku", "com.ezfy.1usd"
+            resValue "string", "sdk_name", "二战SDK"
             signingConfig signingConfigs.release
         }
         mytest {
@@ -133,33 +136,6 @@ android {
             resValue "string", "facebook_app_id", "812834892144520"
             resValue "string", "fb_login_protocol_scheme", "fb812834892144520"
             signingConfig signingConfigs.release
-        }
-        fsztm {
-            applicationId "com.gamamobi.fsztm"
-            minSdkVersion 18
-            targetSdkVersion 27
-            versionCode 1
-            versionName "1.0"
-            flavorDimensions "1"
-//            resValue "string", "facebook_app_name", ""
-            resValue "string", "facebook_app_id", "278115919495359"
-            resValue "string", "fb_login_protocol_scheme", "fb278115919495359"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider278115919495359"
-            signingConfig signingConfigs.release
-            //测试商品id
-            resValue "string", "test_sku", "com.fsztm.1usd"
-            resValue "string", "sdk_name", "封神测试SDK"
-            resValue "string", "gama_login_pre_url", "http://35.185.146.77/"
-            resValue "string", "gama_login_spa_url", "http://35.185.146.77/"
-            resValue "string", "gama_pay_pre_url", "http://35.185.146.77/"
-            resValue "string", "gama_pay_spa_url", "http://35.185.146.77/"
-            resValue "string", "gama_ads_pre_url", "http://35.185.146.77/"
-            resValue "string", "gama_ads_spa_url", "http://35.185.146.77/"
-            resValue "string", "gama_act_pre_url", "http://35.185.146.77/"
-            resValue "string", "gama_act_spa_url", "http://35.185.146.77/"
-            resValue "string", "gama_plat_pre_url", "http://35.185.146.77/"
-            resValue "string", "gama_plat_spa_url", "http://35.185.146.77/"
-
         }
 
         fsztmtest {

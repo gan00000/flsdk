@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 
@@ -612,6 +613,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         String gender = FbSp.getFbGender(activity);
         String birthday = FbSp.getFbBirthday(activity);
         String name = FbSp.getFbName(activity);
+        String picUrl = FbSp.getFbPicUrl(activity);
         String fbId = FbResUtil.findStringByName(activity,"facebook_app_id");
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         String token = "";
@@ -629,6 +631,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             PL.i(TAG, "Facebook gender: " + gender);
             PL.i(TAG, "Facebook birthday: " + birthday);
             PL.i(TAG, "Facebook name: " + name);
+            PL.i(TAG, "Facebook picUrl: " + picUrl);
             PL.i(TAG, "Facebook token: " + token);
             if(fbLoginCallBack != null) {
                 faceBookUser = new FaceBookUser();
@@ -637,7 +640,9 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 faceBookUser.setName(name);
                 faceBookUser.setGender(gender);
                 faceBookUser.setBirthday(birthday);
-                faceBookUser.setPictureUri(ImageRequest.getProfilePictureUri(fbThirdId, 300, 300));
+                if(!TextUtils.isEmpty(picUrl)) {
+                    faceBookUser.setPictureUri(Uri.parse(picUrl));
+                }
                 faceBookUser.setAccessTokenString(token);
                 fbLoginCallBack.loginSuccess(faceBookUser);
             } else {
