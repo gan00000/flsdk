@@ -205,6 +205,23 @@ android {
             resValue "string", "sdk_name", "圣光SDK"
             signingConfig signingConfigs.release
         }
+
+        sslj {
+            applicationId "com.gamamobi.sslj"
+            minSdkVersion 18
+            targetSdkVersion 27
+            versionCode 1
+            versionName "1.0"
+            flavorDimensions "1"
+            resValue "string", "facebook_app_id", "2151838211540508"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider2151838211540508"
+            resValue "string", "fb_login_protocol_scheme", "fb2151838211540508"
+            resValue "string", "facebook_app_name", "36計"
+            //每个游戏的demo设置
+            resValue "string", "test_sku", "com.sslj.1usd"
+            resValue "string", "sdk_name", "36计SDK"
+            signingConfig signingConfigs.release
+        }
     }
 
     android {
