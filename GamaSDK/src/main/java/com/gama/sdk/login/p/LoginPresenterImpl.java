@@ -276,12 +276,12 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         if (autoLoginTimer != null){
             autoLoginTimer.cancel();
         }
-//        if(sFacebookProxy != null) {
-//            PL.i(TAG, "取消自動登錄，進行Facebook登出");
-//            sFacebookProxy.fbLogout(activity);
-//        } else {
-//            PL.i(TAG, "取消自動登錄，進行Facebook登出");
-//        }
+        if(sFacebookProxy != null) {
+            PL.i(TAG, "取消自動登錄，進行Facebook登出");
+            sFacebookProxy.fbLogout(activity);
+        } else {
+            PL.i(TAG, "sFacebookProxy为null，无法進行Facebook登出");
+        }
         showLoginView();
     }
 
@@ -607,51 +607,51 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
      * Facebook登录实现
      */
     private void sFbLogin(final Activity activity, final SFacebookProxy sFacebookProxy, final FbLoginCallBack fbLoginCallBack) {
-        String fbThirdId = FbSp.getFbId(activity);
-        String businessId = FbSp.getAppsBusinessId(activity);
-        String tokenBusiness = FbSp.getTokenForBusiness(activity);
-        String gender = FbSp.getFbGender(activity);
-        String birthday = FbSp.getFbBirthday(activity);
-        String name = FbSp.getFbName(activity);
-        String picUrl = FbSp.getFbPicUrl(activity);
-        String fbId = FbResUtil.findStringByName(activity,"facebook_app_id");
-        AccessToken accessToken = AccessToken.getCurrentAccessToken();
-        String token = "";
-        if(accessToken != null) {
-            token = accessToken.getToken();
-        }
-        if(!TextUtils.isEmpty(fbThirdId)) {
-            PL.i(TAG, "Facebook登入使用緩存登入");
-            if(TextUtils.isEmpty(businessId)) {
-                businessId = fbThirdId + "_" + fbId;
-            }
-            PL.i(TAG, "Facebook ThirdId: " + fbThirdId);
-            PL.i(TAG, "Facebook businessId: " + businessId);
-            PL.i(TAG, "Facebook tokenBusiness: " + tokenBusiness);
-            PL.i(TAG, "Facebook gender: " + gender);
-            PL.i(TAG, "Facebook birthday: " + birthday);
-            PL.i(TAG, "Facebook name: " + name);
-            PL.i(TAG, "Facebook picUrl: " + picUrl);
-            PL.i(TAG, "Facebook token: " + token);
-            if(fbLoginCallBack != null) {
-                faceBookUser = new FaceBookUser();
-                faceBookUser.setUserFbId(fbThirdId);
-                faceBookUser.setBusinessId(businessId);
-                faceBookUser.setName(name);
-                faceBookUser.setGender(gender);
-                faceBookUser.setBirthday(birthday);
-                if(!TextUtils.isEmpty(picUrl)) {
-                    faceBookUser.setPictureUri(Uri.parse(picUrl));
-                }
-                faceBookUser.setAccessTokenString(token);
-                fbLoginCallBack.loginSuccess(faceBookUser);
-            } else {
-                PL.i(TAG, "Facebook 登入回調為空");
-            }
-            return;
-        } else {
-            PL.i(TAG, "沒有Facebook緩存，正式登入");
-        }
+//        String fbThirdId = FbSp.getFbId(activity);
+//        String businessId = FbSp.getAppsBusinessId(activity);
+//        String tokenBusiness = FbSp.getTokenForBusiness(activity);
+//        String gender = FbSp.getFbGender(activity);
+//        String birthday = FbSp.getFbBirthday(activity);
+//        String name = FbSp.getFbName(activity);
+//        String picUrl = FbSp.getFbPicUrl(activity);
+//        String fbId = FbResUtil.findStringByName(activity,"facebook_app_id");
+//        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+//        String token = "";
+//        if(accessToken != null) {
+//            token = accessToken.getToken();
+//        }
+//        if(!TextUtils.isEmpty(fbThirdId)) {
+//            PL.i(TAG, "Facebook登入使用緩存登入");
+//            if(TextUtils.isEmpty(businessId)) {
+//                businessId = fbThirdId + "_" + fbId;
+//            }
+//            PL.i(TAG, "Facebook ThirdId: " + fbThirdId);
+//            PL.i(TAG, "Facebook businessId: " + businessId);
+//            PL.i(TAG, "Facebook tokenBusiness: " + tokenBusiness);
+//            PL.i(TAG, "Facebook gender: " + gender);
+//            PL.i(TAG, "Facebook birthday: " + birthday);
+//            PL.i(TAG, "Facebook name: " + name);
+//            PL.i(TAG, "Facebook picUrl: " + picUrl);
+//            PL.i(TAG, "Facebook token: " + token);
+//            if(fbLoginCallBack != null) {
+//                faceBookUser = new FaceBookUser();
+//                faceBookUser.setUserFbId(fbThirdId);
+//                faceBookUser.setBusinessId(businessId);
+//                faceBookUser.setName(name);
+//                faceBookUser.setGender(gender);
+//                faceBookUser.setBirthday(birthday);
+//                if(!TextUtils.isEmpty(picUrl)) {
+//                    faceBookUser.setPictureUri(Uri.parse(picUrl));
+//                }
+//                faceBookUser.setAccessTokenString(token);
+//                fbLoginCallBack.loginSuccess(faceBookUser);
+//            } else {
+//                PL.i(TAG, "Facebook 登入回調為空");
+//            }
+//            return;
+//        } else {
+//            PL.i(TAG, "沒有Facebook緩存，正式登入");
+//        }
 
         if (sFacebookProxy == null) {
             PL.i(TAG, "Facebook Proxy為null");
@@ -666,6 +666,48 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             @Override
             public void onError(String message) {
                 PL.d(TAG, "sFbLogin error: " + message);
+                String fbThirdId = FbSp.getFbId(activity);
+                if(!TextUtils.isEmpty(fbThirdId)) {
+                    PL.i(TAG, "Facebook登入使用緩存登入");
+                    String businessId = FbSp.getAppsBusinessId(activity);
+                    String tokenBusiness = FbSp.getTokenForBusiness(activity);
+                    String gender = FbSp.getFbGender(activity);
+                    String birthday = FbSp.getFbBirthday(activity);
+                    String name = FbSp.getFbName(activity);
+                    String picUrl = FbSp.getFbPicUrl(activity);
+                    String fbId = FbResUtil.findStringByName(activity,"facebook_app_id");
+                    AccessToken accessToken = AccessToken.getCurrentAccessToken();
+                    String token = "";
+                    if(accessToken != null) {
+                        token = accessToken.getToken();
+                    }
+                    if(TextUtils.isEmpty(businessId)) {
+                        businessId = fbThirdId + "_" + fbId;
+                    }
+                    PL.i(TAG, "Facebook ThirdId: " + fbThirdId);
+                    PL.i(TAG, "Facebook businessId: " + businessId);
+                    PL.i(TAG, "Facebook tokenBusiness: " + tokenBusiness);
+                    PL.i(TAG, "Facebook gender: " + gender);
+                    PL.i(TAG, "Facebook birthday: " + birthday);
+                    PL.i(TAG, "Facebook name: " + name);
+                    PL.i(TAG, "Facebook picUrl: " + picUrl);
+                    PL.i(TAG, "Facebook token: " + token);
+                    if(fbLoginCallBack != null) {
+                        faceBookUser = new FaceBookUser();
+                        faceBookUser.setUserFbId(fbThirdId);
+                        faceBookUser.setBusinessId(businessId);
+                        faceBookUser.setName(name);
+                        faceBookUser.setGender(gender);
+                        faceBookUser.setBirthday(birthday);
+                        if(!TextUtils.isEmpty(picUrl)) {
+                            faceBookUser.setPictureUri(Uri.parse(picUrl));
+                        }
+                        faceBookUser.setAccessTokenString(token);
+                        fbLoginCallBack.loginSuccess(faceBookUser);
+                    } else {
+                        PL.i(TAG, "Facebook 登入回調為空");
+                    }
+                }
             }
 
             @Override

@@ -188,7 +188,7 @@ public class GamaImpl implements IGama {
     }
 
     @Override
-    public void pay(final Activity activity, final SPayType payType, final String cpOrderId, final String productId, final String extra, IPayListener listener) {
+    public void pay(final Activity activity, final SPayType payType, final String cpOrderId, final String productId, final String extra, final IPayListener listener) {
         PL.i("IGama pay payType:" + payType.toString() + " ,cpOrderId:" + cpOrderId + ",productId:" + productId + ",extra:" + extra + ", IPayListener: " + listener);
         if ((System.currentTimeMillis() - firstClickTime) < 1000) {//防止连续点击
             PL.i("点击过快，无效");
@@ -211,7 +211,9 @@ public class GamaImpl implements IGama {
 
                         @Override
                         public void onFailure() {
-
+                            if(listener != null) {
+                                listener.onPayFinish(null);
+                            }
                         }
 
                         @Override
@@ -231,7 +233,9 @@ public class GamaImpl implements IGama {
 
                         @Override
                         public void onFailure() {
-
+                            if(listener != null) {
+                                listener.onPayFinish(null);
+                            }
                         }
 
                         @Override

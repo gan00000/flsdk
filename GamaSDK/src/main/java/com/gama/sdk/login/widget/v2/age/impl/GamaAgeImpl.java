@@ -87,11 +87,17 @@ public class GamaAgeImpl implements IGamaAgePresenter {
             @Override
             public void timeout(String code) {
                 ToastUtils.toast(context, R.string.py_error_time_out);
+                if(ageCallback != null) {
+                    ageCallback.onFailure();
+                }
             }
 
             @Override
             public void noData() {
                 ToastUtils.toast(context, R.string.py_error_occur);
+                if(ageCallback != null) {
+                    ageCallback.onFailure();
+                }
             }
         });
         task.excute(BaseResponseModel.class);

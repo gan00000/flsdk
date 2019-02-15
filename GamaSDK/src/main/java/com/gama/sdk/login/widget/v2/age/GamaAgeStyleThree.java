@@ -72,6 +72,9 @@ public class GamaAgeStyleThree extends GamaAgeSyleBase implements View.OnClickLi
             dismissSelf();
         } else if (i == R.id.gama_age_style_three_close) {
             dismissSelf();
+            if(presenter.getAgeCallback() != null) {
+                presenter.getAgeCallback().onFailure();
+            }
         }
     }
 }

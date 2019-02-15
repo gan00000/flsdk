@@ -6,8 +6,14 @@ import com.gama.sdk.SBaseDialog;
 
 public interface IGamaAgePresenter {
 
+    /**
+     * 上报年龄
+     */
     void sendAgeRequest(Context context, SBaseDialog dialog);
 
+    /**
+     * 检测购买上限
+     */
     void requestAgeLimit(Context context);
 
     void goAgeStyleOne(Context context);

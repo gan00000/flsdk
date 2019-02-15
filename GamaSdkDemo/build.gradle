@@ -197,7 +197,7 @@ android {
             resValue "string", "facebook_app_id", "2315962615313320"
             resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider2315962615313320"
             resValue "string", "fb_login_protocol_scheme", "fb2315962615313320"
-            resValue "string", "facebook_app_name", "圣光之誓"
+            resValue "string", "facebook_app_name", "ヴァリアントフォース"
             resValue "string", "com.twitter.sdk.android.CONSUMER_KEY", "5FwA0veZVe6eQNJz05v2tZbBw"
             resValue "string", "com.twitter.sdk.android.CONSUMER_SECRET", "ARuTLsf9Mb7gvVfR946q6C5Q765A2G6uvQIjwiUUQxMWKRaVcX"
             //每个游戏的demo设置

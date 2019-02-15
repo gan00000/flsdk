@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
 //        iGama.setGameLanguage(this, SGameLanguage.zh_TW);
 
         //初始化sdk
-        iGama.initSDK(this, SGameLanguage.zh_TW);
+        iGama.initSDK(this, SGameLanguage.ja_JP);
 
         //在游戏Activity的onCreate生命周期中调用
         iGama.onCreate(this);
@@ -200,9 +200,9 @@ public class MainActivity extends AppCompatActivity {
                         if (bundle != null) {
                             status = bundle.getInt("status");
 
-                        }
-                        for (String next : bundle.keySet()) {
-                            PL.i(next + " : " + bundle.get(next));
+                            for (String next : bundle.keySet()) {
+                                PL.i(next + " : " + bundle.get(next));
+                            }
                         }
                     }
                 });

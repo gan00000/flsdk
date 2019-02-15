@@ -38,6 +38,9 @@ public class GamaAgeStyleOne extends GamaAgeSyleBase implements View.OnClickList
         int i = view.getId();
         if (i == R.id.gama_age_style_one_confirm) {
             dismissSelf();
+            if(presenter.getAgeCallback() != null) {
+                presenter.getAgeCallback().onFailure();
+            }
         }
     }
 }
