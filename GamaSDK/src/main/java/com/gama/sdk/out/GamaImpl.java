@@ -53,6 +53,7 @@ import com.gama.thirdlib.google.SGooglePlayGameServices;
 
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
@@ -701,10 +702,14 @@ public class GamaImpl implements IGama {
                                 };
 
                                 if (SStringUtil.isNotEmpty(GamaUtil.getServerCode(activity)) && SStringUtil.isNotEmpty(GamaUtil.getRoleId(activity))) {
-                                    if (newShareLinkUrl.contains("?")) {//userId+||S||+serverCode+||S||+roleId
-                                        newShareLinkUrl = newShareLinkUrl + "&campaign=" + URLEncoder.encode(GamaUtil.getUid(activity) + "||S||" + GamaUtil.getServerCode(activity) + "||S||" + GamaUtil.getRoleId(activity));
-                                    } else {
-                                        newShareLinkUrl = newShareLinkUrl + "?campaign=" + URLEncoder.encode(GamaUtil.getUid(activity) + "||S||" + GamaUtil.getServerCode(activity) + "||S||" + GamaUtil.getRoleId(activity));
+                                    try {
+                                        if (newShareLinkUrl.contains("?")) {//userId+||S||+serverCode+||S||+roleId
+                                            newShareLinkUrl = newShareLinkUrl + "&campaign=" + URLEncoder.encode(GamaUtil.getUid(activity) + "||S||" + GamaUtil.getServerCode(activity) + "||S||" + GamaUtil.getRoleId(activity), "UTF-8");
+                                        } else {
+                                            newShareLinkUrl = newShareLinkUrl + "?campaign=" + URLEncoder.encode(GamaUtil.getUid(activity) + "||S||" + GamaUtil.getServerCode(activity) + "||S||" + GamaUtil.getRoleId(activity), "UTF-8");
+                                        }
+                                    } catch (UnsupportedEncodingException e) {
+                                        e.printStackTrace();
                                     }
                                 }
                                 sFacebookProxy.fbShare(activity, fbShareCallBack, "", "", shareLinkUrl, "");

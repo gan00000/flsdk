@@ -2,7 +2,6 @@ package com.gama.sdk;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -15,7 +14,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ProgressBar;
 
-import com.core.base.SWebView;
+import com.gama.base.widget.SWebView;
 import com.core.base.utils.PL;
 import com.core.base.utils.ToastUtils;
 

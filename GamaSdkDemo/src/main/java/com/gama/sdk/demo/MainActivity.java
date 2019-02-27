@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button loginButton, othersPayButton, googlePayBtn, shareButton, showPlatform, crashlytics,
             PurchasesHistory, getFriend, invite, checkShare, getInfo, getFriendNext, getFriendPrevious,
-            service, announcement, age;
+            service, announcement, age, demo_language;
     IabHelper mHelper;
     private IGama iGama;
     private String nextUrl, previousUrl;
@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         SLog.enableDebug(true);
 
         loginButton = (Button) findViewById(R.id.demo_login);
+        demo_language = (Button) findViewById(R.id.demo_language);
         othersPayButton = (Button) findViewById(R.id.demo_pay);
         googlePayBtn = (Button) findViewById(R.id.demo_pay_google);
         shareButton = (Button) findViewById(R.id.demo_share);
@@ -95,6 +96,33 @@ public class MainActivity extends AppCompatActivity {
 
         //在游戏Activity的onCreate生命周期中调用
         iGama.onCreate(this);
+
+        demo_language.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this)
+                        .setItems(new String[]{"繁中", "日语", "韩语"}, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                SGameLanguage language = null;
+                                    switch (which) {
+                                        case 0:
+                                            language = SGameLanguage.zh_TW;
+                                            break;
+                                        case 1:
+                                            language = SGameLanguage.ja_JP;
+                                            break;
+                                        case 2:
+                                            language = SGameLanguage.ko_KR;
+                                            break;
+                                    }
+                                    iGama.setGameLanguage(MainActivity.this, language);
+                            }
+                        })
+                        .setTitle("选择语言");
+                builder.create().show();
+            }
+        });
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override

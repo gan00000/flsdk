@@ -138,7 +138,7 @@ android {
             signingConfig signingConfigs.release
         }
 
-        fsztmtest {
+        fsztm {
             applicationId "com.gamamobi.fsztm"
             minSdkVersion 18
             targetSdkVersion 27
@@ -220,6 +220,23 @@ android {
             //每个游戏的demo设置
             resValue "string", "test_sku", "com.sslj.1usd"
             resValue "string", "sdk_name", "36计SDK"
+            signingConfig signingConfigs.release
+        }
+
+        twsd {
+            applicationId "com.gamamobi.twsd"
+            minSdkVersion 18
+            targetSdkVersion 27
+            versionCode 1
+            versionName "1.0"
+            flavorDimensions "1"
+            resValue "string", "facebook_app_id", "822949071390949"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider822949071390949"
+            resValue "string", "fb_login_protocol_scheme", "fb822949071390949"
+            resValue "string", "facebook_app_name", "神都"
+            //每个游戏的demo设置
+            resValue "string", "test_sku", "com.twsd.1usd"
+            resValue "string", "sdk_name", "神都"
             signingConfig signingConfigs.release
         }
     }

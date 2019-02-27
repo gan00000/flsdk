@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.core.base.BaseWebChromeClient;
 import com.core.base.BaseWebViewClient;
-import com.core.base.SWebView;
+import com.gama.base.widget.SWebView;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
