@@ -5,7 +5,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
-import android.view.TextureView;
 
 import com.appsflyer.AFInAppEventParameterName;
 import com.appsflyer.AFInAppEventType;
@@ -18,7 +17,6 @@ import com.core.base.utils.SPUtil;
 import com.core.base.utils.SStringUtil;
 import com.gama.base.bean.AdsRequestBean;
 import com.gama.base.cfg.ResConfig;
-import com.gama.base.excute.GamaRoleInfoRequestTask;
 import com.gama.base.utils.GamaUtil;
 import com.gama.data.login.response.SLoginResponse;
 import com.gama.pay.gp.constants.GooglePayContant;
@@ -29,7 +27,9 @@ import com.gama.thirdlib.google.SGoogleProxy;
 import com.google.ads.conversiontracking.AdWordsConversionReporter;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -195,31 +195,66 @@ public class StarEventLogger {
         }
     }
 
-    public static void trackingWithEventName(Activity context, String eventName) {
+    public static void trackingWithEventName(Activity activity, String eventName, Map<String, Object> map, Set<GamaAdsConstant.GamaEventReportChannel> mediaSet) {
+        if(TextUtils.isEmpty(eventName)) {
+            PL.e("上報事件名為空");
+            return;
+        }
         try {
-            String userId = GamaUtil.getUid(context);
-            HashMap<String, Object> map = new HashMap<>();
-            map.put(GamaAdsConstant.GAMA_EVENT_ROLEID, GamaUtil.getRoleId(context));
-            map.put(GamaAdsConstant.GAMA_EVENT_ROLENAME, GamaUtil.getRoleName(context));
-            map.put(GamaAdsConstant.GAMA_EVENT_ROLE_LEVEL, GamaUtil.getRoleLevel(context));
-            map.put(GamaAdsConstant.GAMA_EVENT_ROLE_VIP_LEVEL, GamaUtil.getRoleVip(context));
-            map.put(GamaAdsConstant.GAMA_EVENT_SERVERCODE, GamaUtil.getServerCode(context));
-            map.put(GamaAdsConstant.GAMA_EVENT_SERVERNAME, GamaUtil.getServerName(context));
+            String userId = GamaUtil.getUid(activity);
+            if(map == null) { //appsflyer的属性列表
+                map = new HashMap<>();
+            }
+            map.put(GamaAdsConstant.GAMA_EVENT_ROLEID, GamaUtil.getRoleId(activity));
+            map.put(GamaAdsConstant.GAMA_EVENT_ROLENAME, GamaUtil.getRoleName(activity));
+            map.put(GamaAdsConstant.GAMA_EVENT_ROLE_LEVEL, GamaUtil.getRoleLevel(activity));
+            map.put(GamaAdsConstant.GAMA_EVENT_ROLE_VIP_LEVEL, GamaUtil.getRoleVip(activity));
+            map.put(GamaAdsConstant.GAMA_EVENT_SERVERCODE, GamaUtil.getServerCode(activity));
+            map.put(GamaAdsConstant.GAMA_EVENT_SERVERNAME, GamaUtil.getServerName(activity));
+            map.put(GamaAdsConstant.GAMA_EVENT_USER_ID, userId);
 
-            //Facebook上报
+            //facebook和firebase的属性列表
             Bundle b = new Bundle();
-            b.putString(GamaAdsConstant.GAMA_EVENT_USER_ID, userId);
             for (Map.Entry<String, Object> entry : map.entrySet()) {
                 b.putString(entry.getKey(), entry.getValue().toString());
             }
-            SFacebookProxy.trackingEvent(context, eventName, null, b);
+
+            if(mediaSet == null || mediaSet.isEmpty() || mediaSet.contains(GamaAdsConstant.GamaEventReportChannel.GamaEventReportAllChannel)) {
+                PL.i("上报全部媒体");
+                //Facebook上报
+                SFacebookProxy.trackingEvent(activity, eventName, null, b);
+
+                //firebase上报,
+                SGoogleProxy.firebaseAnalytics(activity, eventName, b);
+
+                //AppsFlyer上报
+                AppsFlyerLib.getInstance().trackEvent(activity.getApplicationContext(), eventName, map);
+            } else {
+                if(mediaSet.contains(GamaAdsConstant.GamaEventReportChannel.GamaEventReportFacebook)) {
+                    PL.i("上报媒体1");
+                    //Facebook上报
+                    SFacebookProxy.trackingEvent(activity, eventName, null, b);
+                }
+                if(mediaSet.contains(GamaAdsConstant.GamaEventReportChannel.GamaEventReportFirebase)) {
+                    PL.i("上报媒体2");
+                    //firebase上报,
+                    SGoogleProxy.firebaseAnalytics(activity, eventName, b);
+                }
+                if(mediaSet.contains(GamaAdsConstant.GamaEventReportChannel.GamaEventReportAppsflyer)) {
+                    PL.i("上报媒体3");
+                    //AppsFlyer上报
+                    AppsFlyerLib.getInstance().trackEvent(activity.getApplicationContext(), eventName, map);
+                }
+            }
+
+            //Facebook上报
+            SFacebookProxy.trackingEvent(activity, eventName, null, b);
 
             //firebase上报,
-            SGoogleProxy.firebaseAnalytics(context, eventName, b);
+            SGoogleProxy.firebaseAnalytics(activity, eventName, b);
 
             //AppsFlyer上报
-            map.put(GamaAdsConstant.GAMA_EVENT_USER_ID, userId);
-            AppsFlyerLib.getInstance().trackEvent(context.getApplicationContext(), eventName, map);
+            AppsFlyerLib.getInstance().trackEvent(activity.getApplicationContext(), eventName, map);
         } catch (Exception e) {
             e.printStackTrace();
         }

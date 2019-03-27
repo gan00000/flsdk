@@ -64,4 +64,11 @@ public class GamaAdsConstant {
     public static final String GAMA_EVENT_PAY_VALUE = "gama_pay_value";
     public static final String GAMA_EVENT_ORDERID = "gama_orderId";
     public static final String GAMA_EVENT_PURCHASE_TIME = "gama_purchase_time";
+
+    public enum GamaEventReportChannel {
+        GamaEventReportAllChannel,
+        GamaEventReportFacebook,
+        GamaEventReportFirebase,
+        GamaEventReportAppsflyer
+    }
 }

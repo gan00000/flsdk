@@ -57,6 +57,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 
 public class GamaImpl implements IGama {
@@ -876,6 +878,16 @@ public class GamaImpl implements IGama {
     public boolean gamaShouldShareWithType(Activity activity, GamaThirdPartyType type) {
         Log.i(TAG, "type : " + type.name());
         return GamaShare.shouldShareWithType(activity, type);
+    }
+
+    @Override
+    public void gamaTrack(final Activity activity, final String eventName, final Map<String, Object> map, final Set<GamaAdsConstant.GamaEventReportChannel> channelSet) {
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                StarEventLogger.trackingWithEventName(activity, eventName, map, channelSet);
+            }
+        });
     }
 
 }

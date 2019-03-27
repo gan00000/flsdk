@@ -28,6 +28,7 @@ import com.gama.pay.gp.util.IabHelper;
 import com.gama.pay.gp.util.IabResult;
 import com.gama.pay.gp.util.Inventory;
 import com.gama.pay.gp.util.Purchase;
+import com.gama.sdk.ads.GamaAdsConstant;
 import com.gama.sdk.callback.IPayListener;
 import com.gama.sdk.login.widget.v2.age.IGamaAgePresenter;
 import com.gama.sdk.login.widget.v2.age.callback.GamaAgeCallback;
@@ -48,13 +49,17 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
     private Button loginButton, othersPayButton, googlePayBtn, shareButton, showPlatform, crashlytics,
             PurchasesHistory, getFriend, invite, checkShare, getInfo, getFriendNext, getFriendPrevious,
-            service, announcement, age, demo_language;
+            service, announcement, age, demo_language, track;
     IabHelper mHelper;
     private IGama iGama;
     private String nextUrl, previousUrl;
@@ -85,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
         service = (Button) findViewById(R.id.service);
         announcement = (Button) findViewById(R.id.announcement);
         age = (Button) findViewById(R.id.age);
+        track = (Button) findViewById(R.id.track);
 
         iGama = GamaFactory.create();
 
@@ -92,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
 //        iGama.setGameLanguage(this, SGameLanguage.zh_TW);
 
         //初始化sdk
-        iGama.initSDK(this, SGameLanguage.ja_JP);
+        iGama.initSDK(this, SGameLanguage.zh_TW);
 
         //在游戏Activity的onCreate生命周期中调用
         iGama.onCreate(this);
@@ -721,6 +727,19 @@ public class MainActivity extends AppCompatActivity {
                         });
                 builder.create().show();
 
+            }
+        });
+
+        track.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String eventName = "eventName"; //事件名
+                Map map = new HashMap(); //事件属性列表,如没有可传空
+                Set<GamaAdsConstant.GamaEventReportChannel> set = new HashSet<>();
+                set.add(GamaAdsConstant.GamaEventReportChannel.GamaEventReportFacebook);
+                set.add(GamaAdsConstant.GamaEventReportChannel.GamaEventReportFirebase);
+                set.add(GamaAdsConstant.GamaEventReportChannel.GamaEventReportAllChannel);
+                iGama.gamaTrack(MainActivity.this, eventName, map, set);
             }
         });
 

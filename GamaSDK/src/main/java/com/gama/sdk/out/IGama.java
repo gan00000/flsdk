@@ -1,13 +1,13 @@
 package com.gama.sdk.out;
 
 import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 
 import com.core.base.callback.IGameLifeCycle;
 import com.gama.base.bean.SGameLanguage;
 import com.gama.base.bean.SPayType;
 import com.gama.data.login.ILoginCallBack;
+import com.gama.sdk.ads.GamaAdsConstant;
 import com.gama.sdk.callback.IPayListener;
 import com.gama.sdk.social.callback.FetchFriendsCallback;
 import com.gama.sdk.social.callback.InviteFriendsCallback;
@@ -15,6 +15,8 @@ import com.gama.sdk.social.callback.UserProfileCallback;
 import com.gama.thirdlib.facebook.FriendProfile;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by gan on 2017/2/13.
@@ -77,5 +79,13 @@ public interface IGama extends IGameLifeCycle {
      * 检查是否支持分享
      */
     boolean gamaShouldShareWithType(Activity activity, GamaThirdPartyType type);
+
+    /**
+     * 事件上报接口
+     * @param activity
+     * @param eventName
+     * @param map
+     */
+    void gamaTrack(Activity activity, String eventName, Map<String, Object> map, Set<GamaAdsConstant.GamaEventReportChannel> mediaSet);
 
 }

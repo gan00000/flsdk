@@ -9,11 +9,11 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
-import android.provider.MediaStore;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.text.TextUtils;
+import android.util.Log;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -87,13 +87,13 @@ public class BitmapUtil {
         String fileName = System.currentTimeMillis() + ".jpg";
         String bitmapPath = "";
         if (PermissionUtil.hasSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE)){
-            bitmapPath = SdcardUtil.getPath();
+            bitmapPath = SdcardUtil.getPath() + File.separator + "gamamobi" + File.separator + context.getPackageName();
         }else {
              bitmapPath = context.getExternalCacheDir().getAbsolutePath();
         }
         PL.i("save bitmap:" + bitmapPath);
         if (!TextUtils.isEmpty(bitmapPath)){
-            return saveImageToGallery(context, bm,fileName, bitmapPath + File.separator + "gamamobi" + File.separator + context.getPackageName());
+            return saveImageToGallery(context, bm,fileName, bitmapPath);
         }
         return null;
     }
@@ -114,68 +114,45 @@ public class BitmapUtil {
             bos.flush();
             bos.close();
 
-            String insertImage = MediaStore.Images.Media.insertImage(context.getContentResolver(), imageFile.getAbsolutePath(), fileName, null);
-            PL.i("mImageUrl:" + insertImage);
-            if (SStringUtil.isNotEmpty(insertImage)){
-                //如果图片内容相同，即使文件名称不同，在相册里面只会显示一个
-                mediaScannerConnection = new MediaScannerConnection(context, new MediaScannerConnection.MediaScannerConnectionClient() {
+            MediaScannerConnection.scanFile(context,
+                    new String[]{imageFile.getAbsolutePath()},
+                    new String[] {"image/jpeg"},
+                    new MediaScannerConnection.OnScanCompletedListener() {
+                @Override
+                public void onScanCompleted(String path, Uri uri) {
+                    Log.i("Gama","path: " + path + " uri: " + uri);
+                }
+            });
 
-                    public void onMediaScannerConnected() {
-                        try {
-                            PL.i("onMediaScannerConnected");
-                            mediaScannerConnection.scanFile(imageFile.getAbsolutePath(), "image/jpeg");
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    public void onScanCompleted(String path, Uri uri) {
-                        PL.i("onScanCompleted");
-                        mediaScannerConnection.disconnect();
-                    }
-                });
-                mediaScannerConnection.connect();
-                return insertImage;
-            }
-
+//            String insertImage = MediaStore.Images.Media.insertImage(context.getContentResolver(), imageFile.getAbsolutePath(), fileName, null);
+//            PL.i("mImageUrl:" + insertImage);
+//            if (SStringUtil.isNotEmpty(insertImage)){
+////                如果图片内容相同，即使文件名称不同，在相册里面只会显示一个
+//                mediaScannerConnection = new MediaScannerConnection(context, new MediaScannerConnection.MediaScannerConnectionClient() {
+//
+//                    public void onMediaScannerConnected() {
+//                        try {
+//                            PL.i("onMediaScannerConnected");
+//                            mediaScannerConnection.scanFile(imageFile.getAbsolutePath(), "image/jpeg");
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//
+//                    public void onScanCompleted(String path, Uri uri) {
+//                        PL.i("onScanCompleted");
+//                        mediaScannerConnection.disconnect();
+//                    }
+//                });
+//                mediaScannerConnection.connect();
+//                return insertImage;
+//            }
+//
         }catch (Exception e) {
-            if (e != null)
                 e.printStackTrace();
         }
         return null;
 
-        // 其次把文件插入到系统图库
-//        try {
-//            MediaStore.Images.Media.insertImage(context.getContentResolver(), imageFile.getAbsolutePath(), fileName, null);
-//
-//            Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-//            Uri uri = Uri.fromFile(imageFile);
-//            intent.setData(uri);
-//            context.sendBroadcast(intent);
-//
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
-
-
-//        if (SStringUtil.isNotEmpty(imageFilePath)){
-//            msc = new MediaScannerConnection(context, new MediaScannerConnection.MediaScannerConnectionClient() {
-//
-//                public void onMediaScannerConnected() {
-//                    try {
-//                        PL.i("onMediaScannerConnected");
-//                        msc.scanFile(imageFilePath, "image/jpeg");
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//
-//                public void onScanCompleted(String path, Uri uri) {
-//                    PL.i("onScanCompleted");
-//                    msc.disconnect();
-//                }
-//            });
-//            msc.connect();
 
     }
 

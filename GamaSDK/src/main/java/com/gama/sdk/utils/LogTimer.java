@@ -71,17 +71,17 @@ public class LogTimer {
     private void log(SharedPreferences sp, long time) {
         if(time >= 10000 * 60 && !sp.getBoolean("log_1", false)) {
 //            Log.i("LogTimer", "此程式從第一次啟動後，運作了 10 秒");
-            StarEventLogger.trackingWithEventName(context, GamaAdsConstant.GAMA_EVENT_10_MIN);
+            StarEventLogger.trackingWithEventName(context, GamaAdsConstant.GAMA_EVENT_10_MIN, null, null);
             sp.edit().putBoolean("log_1", true).apply();
         }
         if(time >= 20000 * 60 && !sp.getBoolean("log_2", false)) {
 //            Log.i("LogTimer", "此程式從第一次啟動後，運作了 20 秒");
-            StarEventLogger.trackingWithEventName(context, GamaAdsConstant.GAMA_EVENT_20_MIN);
+            StarEventLogger.trackingWithEventName(context, GamaAdsConstant.GAMA_EVENT_20_MIN, null, null);
             sp.edit().putBoolean("log_2", true).apply();
         }
         if(time >= 30000 * 60 && !sp.getBoolean("log_3", false)) {
 //            Log.i("LogTimer", "此程式從第一次啟動後，運作了 30 秒，任務完成。");
-            StarEventLogger.trackingWithEventName(context, GamaAdsConstant.GAMA_EVENT_30_MIN);
+            StarEventLogger.trackingWithEventName(context, GamaAdsConstant.GAMA_EVENT_30_MIN, null, null);
             sp.edit().putBoolean("log_3", true).apply();
             cancel();
         } else if (time >= 30000 * 60) {

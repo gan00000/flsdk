@@ -595,9 +595,9 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             PL.i("cteateUserImage:" + text);
             Bitmap bitmap = BitmapUtil.bitmapAddText(BitmapFactory.decodeResource(context.getResources(),R.drawable.v2_mac_pwd_bg),text);
             String m = BitmapUtil.saveImageToGallery(getContext(),bitmap);
-            if (SStringUtil.isNotEmpty(m)){
+//            if (SStringUtil.isNotEmpty(m)){
                 ToastUtils.toast(context, context.getResources().getString(R.string.py_login_mac_saveimage_tips));
-            }
+//            }
         } catch (Exception e) {
             e.printStackTrace();
         }

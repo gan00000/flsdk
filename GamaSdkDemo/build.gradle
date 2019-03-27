@@ -171,6 +171,31 @@ android {
             resValue "string", "test_sku", "com.sds.1usd"
             resValue "string", "sdk_name", "圣斗士SDK"
         }
+
+        sdstest {
+            applicationId "com.tencent.tmgp.ssktw"
+            minSdkVersion 18
+            targetSdkVersion 27
+            versionCode 1
+            versionName "1.0"
+            flavorDimensions "1"
+            resValue "string", "facebook_app_name", "聖鬥士"
+            resValue "string", "facebook_app_id", "362739184296670"
+            resValue "string", "fb_login_protocol_scheme", "fb362739184296670"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider362739184296670"
+            signingConfig signingConfigs.release
+            //测试工程地址
+            resValue "string", "gama_login_pre_url", "https://t-login.gamamobi.com/"
+            resValue "string", "gama_login_spa_url", "https://t-login.gamamobi.com/"
+            resValue "string", "gama_pay_pre_url", "https://t-pay.gamamobi.com/"
+            resValue "string", "gama_pay_spa_url", "https://t-pay.gamamobi.com/"
+            resValue "string", "gama_ads_pre_url", "https://t-ads.gamamobi.com/"
+            resValue "string", "gama_ads_spa_url", "https://t-ads.gamamobi.com/"
+            //测试商品id
+            resValue "string", "test_sku", "com.sds.1usd"
+            resValue "string", "sdk_name", "圣斗士SDK"
+        }
+
         smzy {
             applicationId "com.gamamobi.smzy"
             minSdkVersion 18
