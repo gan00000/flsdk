@@ -246,15 +246,6 @@ public class StarEventLogger {
                     AppsFlyerLib.getInstance().trackEvent(activity.getApplicationContext(), eventName, map);
                 }
             }
-
-            //Facebook上报
-            SFacebookProxy.trackingEvent(activity, eventName, null, b);
-
-            //firebase上报,
-            SGoogleProxy.firebaseAnalytics(activity, eventName, b);
-
-            //AppsFlyer上报
-            AppsFlyerLib.getInstance().trackEvent(activity.getApplicationContext(), eventName, map);
         } catch (Exception e) {
             e.printStackTrace();
         }
