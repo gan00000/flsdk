@@ -22,6 +22,8 @@ public class BPayReqBean extends BaseReqeustBean {
 
 	private String signature = "";
 
+	private String adId = "";//advertisingId
+
 	public BPayReqBean(Context context) {
 		super(context);
 
@@ -31,6 +33,7 @@ public class BPayReqBean extends BaseReqeustBean {
 
 	private void init(Context context) {
 
+		adId = GamaUtil.getGoogleAdId(context);
 
 		accessToken = GamaUtil.getSdkAccessToken(context);
 		gameCode = ResConfig.getGameCode(context);
@@ -75,5 +78,11 @@ public class BPayReqBean extends BaseReqeustBean {
 		this.psid = psid;
 	}
 
+	public String getAdId() {
+		return adId;
+	}
 
+	public void setAdId(String adId) {
+		this.adId = adId;
+	}
 }

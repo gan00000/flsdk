@@ -192,7 +192,7 @@ android {
             resValue "string", "gama_ads_pre_url", "https://t-ads.gamamobi.com/"
             resValue "string", "gama_ads_spa_url", "https://t-ads.gamamobi.com/"
             //测试商品id
-            resValue "string", "test_sku", "com.sds.1usd"
+            resValue "string", "test_sku", "com.tencent.tmgp.ssktw.1usd"
             resValue "string", "sdk_name", "圣斗士SDK"
         }
 
@@ -264,6 +264,24 @@ android {
             resValue "string", "sdk_name", "神都"
             signingConfig signingConfigs.release
         }
+
+        got {
+            applicationId "com.yoozoo.got.gama"
+            minSdkVersion 18
+            targetSdkVersion 27
+            versionCode 1
+            versionName "1.0"
+            flavorDimensions "1"
+            resValue "string", "facebook_app_id", "688175108304011"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider688175108304011"
+            resValue "string", "fb_login_protocol_scheme", "fb688175108304011"
+            resValue "string", "facebook_app_name", "權力的遊戲"
+            //每个游戏的demo设置
+            resValue "string", "test_sku", "com.twsd.1usd"
+            resValue "string", "sdk_name", "got sdk"
+            signingConfig signingConfigs.release
+        }
+
     }
 
     android {
