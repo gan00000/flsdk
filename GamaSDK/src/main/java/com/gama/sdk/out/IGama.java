@@ -7,6 +7,7 @@ import com.core.base.callback.IGameLifeCycle;
 import com.gama.base.bean.SGameLanguage;
 import com.gama.base.bean.SPayType;
 import com.gama.data.login.ILoginCallBack;
+import com.gama.pay.utils.GamaQueryProductListener;
 import com.gama.sdk.ads.GamaAdsConstant;
 import com.gama.sdk.callback.IPayListener;
 import com.gama.sdk.social.callback.FetchFriendsCallback;
@@ -88,4 +89,6 @@ public interface IGama extends IGameLifeCycle {
      */
     void gamaTrack(Activity activity, String eventName, Map<String, Object> map, Set<GamaAdsConstant.GamaEventReportChannel> mediaSet);
 
+
+    void gamaQueryProductDetail(Activity activity, SPayType payType, List<String> skus, GamaQueryProductListener listener);
 }

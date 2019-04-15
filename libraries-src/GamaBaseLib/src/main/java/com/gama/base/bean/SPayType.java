@@ -7,6 +7,6 @@ package com.gama.base.bean;
 public enum SPayType {
 
     GOOGLE,
-
-    OTHERS;
+    LINE,
+    OTHERS
 }

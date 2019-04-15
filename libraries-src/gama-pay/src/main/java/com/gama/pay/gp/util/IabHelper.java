@@ -665,13 +665,13 @@ public class IabHelper {
 				throw new IabException(r, "Error refreshing inventory (querying owned items).");
 			}
 
-		/*	if (querySkuDetails) {
+			if (querySkuDetails) {
 				r = querySkuDetails(ITEM_TYPE_INAPP, inv, moreItemSkus);
 				if (r != BILLING_RESPONSE_RESULT_OK) {
 					throw new IabException(r, "Error refreshing inventory (querying prices of items).");
 				}
 			}
-
+/*
 			// if subscriptions are supported, then also query for subscriptions
 			if (mSubscriptionsSupported) {
 				r = queryPurchases(inv, ITEM_TYPE_SUBS);

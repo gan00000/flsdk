@@ -28,6 +28,7 @@ import com.gama.pay.gp.GooglePayHelper;
 import com.gama.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
 import com.gama.pay.gp.bean.req.WebPayReqBean;
 import com.gama.pay.gp.util.PayHelper;
+import com.gama.pay.utils.GamaQueryProductListener;
 import com.gama.sdk.BuildConfig;
 import com.gama.sdk.R;
 import com.gama.sdk.SWebViewDialog;
@@ -886,6 +887,18 @@ public class GamaImpl implements IGama {
             @Override
             public void run() {
                 StarEventLogger.trackingWithEventName(activity, eventName, map, channelSet);
+            }
+        });
+    }
+
+    @Override
+    public void gamaQueryProductDetail(final Activity activity, final SPayType payType, final List<String> skus, final GamaQueryProductListener listener) {
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if(payType == SPayType.GOOGLE) {
+                    GooglePayHelper.getInstance().queryProductDetail(activity, skus, listener);
+                }
             }
         });
     }

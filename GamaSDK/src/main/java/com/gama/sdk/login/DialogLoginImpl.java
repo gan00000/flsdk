@@ -35,7 +35,6 @@ public class DialogLoginImpl implements ILogin {
         sGoogleSignIn = new SGoogleSignIn(activity, DialogUtil.createLoadingDialog(activity, "Loading..."));
 
         if(SGameLanguage.ja_JP == Localization.getSGameLanguage(activity)) {
-            Twitter.initialize(activity);
             twitterLogin = new GamaTwitterLogin(activity);
         }
     }
@@ -76,6 +75,9 @@ public class DialogLoginImpl implements ILogin {
     @Override
     public void startLogin(final Activity activity, final ILoginCallBack iLoginCallBack) {
 
+        if(SGameLanguage.ja_JP == Localization.getSGameLanguage(activity) && twitterLogin == null) {
+            twitterLogin = new GamaTwitterLogin(activity);
+        }
         boolean isTermRead = GamaUtil.getStartTermRead(activity);
 
         if(!isTermRead) {

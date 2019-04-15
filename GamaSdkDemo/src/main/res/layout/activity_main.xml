@@ -147,6 +147,12 @@
                     android:layout_height="wrap_content"
                     android:text="事件上报" />
 
+                <Button
+                    android:id="@+id/chaxun"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="查商品" />
+
             </LinearLayout>
 
 

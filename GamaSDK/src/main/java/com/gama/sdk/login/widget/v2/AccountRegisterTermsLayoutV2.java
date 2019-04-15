@@ -10,6 +10,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
 
+import com.gama.base.cfg.ResConfig;
 import com.gama.base.utils.GamaUtil;
 import com.gama.sdk.R;
 import com.gama.sdk.login.widget.SLoginBaseRelativeLayout;
@@ -44,7 +45,7 @@ public class AccountRegisterTermsLayoutV2 extends SLoginBaseRelativeLayout {
         termsView.clearCache(true);
         termsView.setWebChromeClient(new WebChromeClient());
         termsView.setWebViewClient(new WebViewClient());
-        String termsUrl = this.getResources().getString(R.string.gama_terms_url);
+        String termsUrl = ResConfig.getRegisterTermUrl(getContext());
         termsView.loadUrl(termsUrl);
 
         backView.setOnClickListener(new OnClickListener() {

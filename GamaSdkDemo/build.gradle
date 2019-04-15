@@ -216,7 +216,7 @@ android {
             applicationId "com.gamamobi.vfjp"
             minSdkVersion 18
             targetSdkVersion 27
-            versionCode 1
+            versionCode 60
             versionName "1.0"
             flavorDimensions "1"
             resValue "string", "facebook_app_id", "2315962615313320"

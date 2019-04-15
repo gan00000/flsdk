@@ -40,4 +40,8 @@ public enum SGameLanguage {
     public String getLanguage(){
         return lang;
     }
+
+    public String getPrefixName() {
+        return lang.replaceAll("-", "_").toLowerCase();
+    }
 }

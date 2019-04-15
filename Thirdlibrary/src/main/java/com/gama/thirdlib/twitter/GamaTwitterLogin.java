@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
+import com.twitter.sdk.android.core.Twitter;
 import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
@@ -24,6 +25,7 @@ public class GamaTwitterLogin {
     public GamaTwitterLogin(Activity activity) {
         this.mActivity = activity;
         try {
+            Twitter.initialize(activity);
             TwitterCore.getInstance();
         } catch (IllegalStateException ex) {
             Log.e(TAG, "twitter init failed");

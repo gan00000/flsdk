@@ -18,8 +18,11 @@ import com.gama.pay.gp.util.IabResult;
 import com.gama.pay.gp.util.Inventory;
 import com.gama.pay.gp.util.PayHelper;
 import com.gama.pay.gp.util.Purchase;
+import com.gama.pay.gp.util.SkuDetails;
+import com.gama.pay.utils.GamaQueryProductListener;
 
 import java.util.List;
+import java.util.Map;
 
 public class GooglePayHelper {
     private static final String TAG = GooglePayHelper.class.getSimpleName();
@@ -46,21 +49,23 @@ public class GooglePayHelper {
      */
     public void queryConsumablePurchase(final Context context) {
         if (iabHelper == null) {
-            iabHelper = new IabHelper(context);
+            iabHelper = new IabHelper(context.getApplicationContext());
         }
         if (!iabHelper.isSetupDone()) {
             iabHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
                 @Override
                 public void onIabSetupFinished(IabResult result) {
-                    SLog.logI(TAG, "startSetup onIabSetupFinished.");
+                    PL.i(TAG, "startSetup onIabSetupFinished.");
                     if (!result.isSuccess()) {
-                        SLog.logI(TAG, "Your phone or Google account does not support In-app Billing");
+                        PL.i(TAG, "Your phone or Google account does not support In-app Billing");
                         return;
                     }
                     //开始从Google商店查询所有商品状态
                     iabHelper.queryInventoryAsync(new MyQueryInventoryFinishedListener(context, iabHelper));
                 }
             });
+        } else {
+            PL.e("iabhelper null !!!!!!");
         }
     }
 
@@ -246,7 +251,7 @@ public class GooglePayHelper {
      */
     private void recycleIab() {
         SLog.logD(TAG, "Start recycle IabHelper");
-        if(iabHelper != null) {
+        if (iabHelper != null) {
             iabHelper.dispose();
         }
         iabHelper = null;
@@ -267,7 +272,42 @@ public class GooglePayHelper {
             } else {
                 Log.i(TAG, "Application in background, stop query.");
             }
-            mHandler.postDelayed(this, 60 * 1000 * 5);
+            mHandler.postDelayed(this, 60 * 100 * 5);
+        }
+    }
+
+    public void queryProductDetail(final Context context, final List<String> skus, final GamaQueryProductListener listener) {
+        if (iabHelper == null) {
+            iabHelper = new IabHelper(context.getApplicationContext());
+        }
+        if (!iabHelper.isSetupDone()) {
+            iabHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
+                @Override
+                public void onIabSetupFinished(IabResult result) {
+                    PL.i(TAG, "startSetup onIabSetupFinished.");
+                    if (!result.isSuccess()) {
+                        PL.i(TAG, "Your phone or Google account does not support In-app Billing");
+                        return;
+                    }
+                    iabHelper.queryInventoryAsync(true, skus, new IabHelper.QueryInventoryFinishedListener() {
+                        @Override
+                        public void onQueryInventoryFinished(IabResult result, Inventory inventory) {
+                            if (listener != null) {
+                                Map<String, SkuDetails> allSkuDetail = inventory.getAllSkuDetail();
+                                if (allSkuDetail != null && !allSkuDetail.isEmpty()) {
+                                    listener.onQueryResult(allSkuDetail);
+                                } else {
+                                    listener.onQueryResult(null);
+                                }
+                            }
+                            recycleIab();
+                        }
+                    });
+
+                }
+            });
+        } else {
+            PL.e("iabhelper null !!!!!!");
         }
     }
 }

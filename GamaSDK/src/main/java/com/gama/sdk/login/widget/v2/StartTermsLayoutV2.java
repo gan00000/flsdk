@@ -16,6 +16,7 @@ import android.widget.RadioGroup;
 
 import com.core.base.utils.ScreenHelper;
 import com.core.base.utils.ToastUtils;
+import com.gama.base.cfg.ResConfig;
 import com.gama.base.utils.GamaUtil;
 import com.gama.sdk.R;
 import com.gama.sdk.SBaseDialog;
@@ -73,8 +74,8 @@ public class StartTermsLayoutV2 extends SBaseDialog {
             isPort = true;
         }
 
-        serviceUrl = mContext.getResources().getString(R.string.gama_start_terms_service_url);
-        privateUrl = mContext.getResources().getString(R.string.gama_start_terms_private_url);
+        serviceUrl = ResConfig.getServiceTermUrl(getContext());
+        privateUrl = ResConfig.getPrivateTermUrl(getContext());
 
         termsView1 = (WebView) findViewById(R.id.gama_start_term_wv1);
         termsView1.clearCache(true);

@@ -1,6 +1,7 @@
 package com.gama.sdk.demo;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
@@ -24,10 +25,13 @@ import com.gama.base.utils.GamaUtil;
 import com.gama.base.utils.SLog;
 import com.gama.data.login.ILoginCallBack;
 import com.gama.data.login.response.SLoginResponse;
+import com.gama.pay.gp.util.IabException;
 import com.gama.pay.gp.util.IabHelper;
 import com.gama.pay.gp.util.IabResult;
 import com.gama.pay.gp.util.Inventory;
 import com.gama.pay.gp.util.Purchase;
+import com.gama.pay.gp.util.SkuDetails;
+import com.gama.pay.utils.GamaQueryProductListener;
 import com.gama.sdk.ads.GamaAdsConstant;
 import com.gama.sdk.callback.IPayListener;
 import com.gama.sdk.login.widget.v2.age.IGamaAgePresenter;
@@ -59,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button loginButton, othersPayButton, googlePayBtn, shareButton, showPlatform, crashlytics,
             PurchasesHistory, getFriend, invite, checkShare, getInfo, getFriendNext, getFriendPrevious,
-            service, announcement, age, demo_language, track;
+            service, announcement, age, demo_language, track, chaxun;
     IabHelper mHelper;
     private IGama iGama;
     private String nextUrl, previousUrl;
@@ -80,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
         showPlatform = (Button) findViewById(R.id.showPlatform);
         crashlytics = (Button) findViewById(R.id.Crashlytics);
         PurchasesHistory = (Button) findViewById(R.id.PurchasesHistory);
+        chaxun = (Button) findViewById(R.id.chaxun);
 
         getInfo = (Button) findViewById(R.id.getInfo);
         getFriend = (Button) findViewById(R.id.getFriend);
@@ -111,18 +116,18 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 SGameLanguage language = null;
-                                    switch (which) {
-                                        case 0:
-                                            language = SGameLanguage.zh_TW;
-                                            break;
-                                        case 1:
-                                            language = SGameLanguage.ja_JP;
-                                            break;
-                                        case 2:
-                                            language = SGameLanguage.ko_KR;
-                                            break;
-                                    }
-                                    iGama.setGameLanguage(MainActivity.this, language);
+                                switch (which) {
+                                    case 0:
+                                        language = SGameLanguage.zh_TW;
+                                        break;
+                                    case 1:
+                                        language = SGameLanguage.ja_JP;
+                                        break;
+                                    case 2:
+                                        language = SGameLanguage.ko_KR;
+                                        break;
+                                }
+                                iGama.setGameLanguage(MainActivity.this, language);
                             }
                         })
                         .setTitle("选择语言");
@@ -306,7 +311,7 @@ public class MainActivity extends AppCompatActivity {
                                                             Log.i("facebook", "failure");
                                                         }
                                                     });
-                                                } else if(index == 2) {
+                                                } else if (index == 2) {
                                                     if (finalType != GamaThirdPartyType.WHATSAPP &&
                                                             finalType != GamaThirdPartyType.TWITTER) {
                                                         ToastUtils.toast(MainActivity.this, "当前类型不支持同时分享图片和文字");
@@ -689,7 +694,7 @@ public class MainActivity extends AppCompatActivity {
         age.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!isLogin()) {
+                if (!isLogin()) {
                     ToastUtils.toast(MainActivity.this, "请先登入");
                     return;
                 }
@@ -743,6 +748,95 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        chaxun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!mHelper.isSetupDone()) {
+                    mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
+                        @Override
+                        public void onIabSetupFinished(IabResult result) {
+                            if (result.isSuccess()) {
+                                SLog.logD("初始化iabHelper成功，开始查商品信息");
+                                querySku();
+                            } else {
+                                SLog.logD("初始化iabHelper失败，查商品信息结束");
+                            }
+                        }
+                    });
+                } else {
+                    SLog.logD("已经初始化iabHelper，开始查商品信息");
+                    querySku();
+                }
+            }
+        });
+
+    }
+
+    private void querySku() {
+        final ArrayList<String> list = new ArrayList<>();
+        list.add(getResources().getString(R.string.test_sku));
+        list.add("com.sslj.100usd");
+        iGama.gamaQueryProductDetail(this, SPayType.GOOGLE, list, new GamaQueryProductListener() {
+            @Override
+            public void onQueryResult(Map<String, SkuDetails> details) {
+                String detail = "";
+                if(details != null) {
+                    for (Map.Entry<String, SkuDetails> entry : details.entrySet()) {
+                        SkuDetails skuDetails = entry.getValue();
+                        String title = skuDetails.getTitle();//名称
+                        String sku = skuDetails.getSku();//产品ID
+                        String type = skuDetails.getType();//类型
+                        String priceCurrencyCode = skuDetails.getPrice_currency_code();//价格编号
+                        String price = skuDetails.getPrice();//价格
+                        String description = skuDetails.getDescription();//商品描述
+
+                        detail += "title: " + title
+                                + "\n sku: " + sku
+                                + "\n type: " + type
+                                + "\n priceCurrencyCode: " + priceCurrencyCode
+                                + "\n price: " + price
+                                + "\n description: " + description
+                                + "\n\n";
+                    }
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    builder.setTitle("商品信息")
+                            .setMessage(detail);
+                    builder.create().show();
+                } else {
+                    ToastUtils.toast(MainActivity.this, "没有查到商品信息");
+                }
+            }
+        });
+
+//        mHelper.mQuerySkuDetails(getResources().getString(R.string.test_sku), new IabHelper.QueryInventoryFinishedListener() {
+//            @Override
+//            public void onQueryInventoryFinished(IabResult result, Inventory inv) {
+//
+//                SkuDetails skuDetails = inv.getSkuDetails(getResources().getString(R.string.test_sku));
+//                String title = skuDetails.getTitle();//名称
+//                String sku = skuDetails.getSku();//产品ID
+//                String type = skuDetails.getType();//类型
+//                String priceCurrencyCode = skuDetails.getPrice_currency_code();//价格编号
+//                String price = skuDetails.getPrice();//价格
+//                String description = skuDetails.getDescription();//商品描述
+//                Log.d("gama", "title: " + title);
+//                Log.d("gama", "sku: " + sku);
+//                Log.d("gama", "type: " + type);
+//                Log.d("gama", "priceCurrencyCode: " + priceCurrencyCode);
+//                Log.d("gama", "price: " + price);
+//                Log.d("gama", "description: " + description);
+//
+//                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+//                builder.setTitle("商品信息")
+//                        .setMessage("title: " + title
+//                                + "\n sku: " + sku
+//                                + "\n type: " + type
+//                                + "\n priceCurrencyCode: " + priceCurrencyCode
+//                                + "\n price: " + price
+//                                + "\n description: " + description);
+//                builder.create().show();
+//            }
+//        });
     }
 
     private void consume() {
