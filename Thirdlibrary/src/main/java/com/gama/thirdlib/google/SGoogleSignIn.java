@@ -176,6 +176,9 @@ public class SGoogleSignIn implements GoogleApiClient.OnConnectionFailedListener
 				}
 			} else {
 				Log.d(TAG, "失败");
+				if(result != null) {
+					Log.d(TAG, result.getStatus() + "");
+				}
 				if (googleSignInCallBack != null) {
 					googleSignInCallBack.failure();
 				}

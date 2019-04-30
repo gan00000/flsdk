@@ -287,6 +287,9 @@ public class GooglePayHelper {
                     PL.i(TAG, "startSetup onIabSetupFinished.");
                     if (!result.isSuccess()) {
                         PL.i(TAG, "Your phone or Google account does not support In-app Billing");
+                        if(listener != null) {
+                            listener.onQueryResult(null);
+                        }
                         return;
                     }
                     iabHelper.queryInventoryAsync(true, skus, new IabHelper.QueryInventoryFinishedListener() {
@@ -307,7 +310,10 @@ public class GooglePayHelper {
                 }
             });
         } else {
-            PL.e("iabhelper null !!!!!!");
+            recycleIab();
+            if(listener != null) {
+                listener.onQueryResult(null);
+            }
         }
     }
 }
