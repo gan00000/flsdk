@@ -295,11 +295,17 @@ public class GooglePayHelper {
                     iabHelper.queryInventoryAsync(true, skus, new IabHelper.QueryInventoryFinishedListener() {
                         @Override
                         public void onQueryInventoryFinished(IabResult result, Inventory inventory) {
-                            if (listener != null) {
-                                Map<String, SkuDetails> allSkuDetail = inventory.getAllSkuDetail();
-                                if (allSkuDetail != null && !allSkuDetail.isEmpty()) {
-                                    listener.onQueryResult(allSkuDetail);
-                                } else {
+                            if(inventory != null) {
+                                if (listener != null) {
+                                    Map<String, SkuDetails> allSkuDetail = inventory.getAllSkuDetail();
+                                    if (allSkuDetail != null && !allSkuDetail.isEmpty()) {
+                                        listener.onQueryResult(allSkuDetail);
+                                    } else {
+                                        listener.onQueryResult(null);
+                                    }
+                                }
+                            } else {
+                                if (listener != null) {
                                     listener.onQueryResult(null);
                                 }
                             }

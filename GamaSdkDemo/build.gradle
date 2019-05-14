@@ -26,7 +26,7 @@ android {
 
                 outputFileName = "${variant.applicationId}_${variant.versionCode}_${variant.versionName}_${getReleaseTime()}_release.apk"
 
-            }else  if (outputFile != null && outputFile.name.contains("debug") && outputFile.name.endsWith('.apk')) {
+            } else if (outputFile != null && outputFile.name.contains("debug") && outputFile.name.endsWith('.apk')) {
 
                 outputFileName = "${variant.applicationId}_${variant.versionCode}_${variant.versionName}_${getReleaseTime()}_debug.apk"
             }
@@ -309,6 +309,7 @@ dependencies {
     //    implementation 'com.android.support:support-v4:27.0.2'
     //    compile 'com.android.support:multidex:1.0.2'
     //    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 }
 
 
