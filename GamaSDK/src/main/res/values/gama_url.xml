@@ -2,128 +2,128 @@
 
     <!--港台域名列表 开始-->
     <!--登录域名-->
-    <string name="zh_tw_gama_login_pre_url" translatable="false">https://login.gamamobi.com/</string>
-    <string name="zh_tw_gama_login_spa_url" translatable="false">https://login.gamamobi.com/</string>
+    <string name="zh_tw_gama_login_pre_url" translatable="false">http://login.utmostgaming.com/</string>
+    <string name="zh_tw_gama_login_spa_url" translatable="false">https://login.utmostgaming.com/</string>
 
     <!--支付域名-->
-    <string name="zh_tw_gama_pay_pre_url" translatable="false">https://pay.gamamobi.com/</string>
-    <string name="zh_tw_gama_pay_spa_url" translatable="false">https://pay.gamamobi.com/</string>
+    <string name="zh_tw_gama_pay_pre_url" translatable="false">http://pay.utmostgaming.com/</string>
+    <string name="zh_tw_gama_pay_spa_url" translatable="false">https://pay.utmostgaming.com/</string>
 
     <!--活动域名-->
-    <string name="zh_tw_gama_act_pre_url" translatable="false">https://activity.gamamobi.com/</string>
-    <string name="zh_tw_gama_act_spa_url" translatable="false">https://activity.gamamobi.com/</string>
+    <string name="zh_tw_gama_act_pre_url" translatable="false">http://activity.utmostgaming.com/</string>
+    <string name="zh_tw_gama_act_spa_url" translatable="false">https://activity.utmostgaming.com/</string>
 
     <!--cdn域名-->
-    <string name="zh_tw_gama_cdn_pre_url" translatable="false">https://sdk-download.gamamobi.com/</string>
-    <string name="zh_tw_gama_cdn_spa_url" translatable="false">https://sdk-download.gamamobi.com/</string>
+    <string name="zh_tw_gama_cdn_pre_url" translatable="false">http://sdk-download.utmostgaming.com/</string>
+    <string name="zh_tw_gama_cdn_spa_url" translatable="false">https://sdk-download.utmostgaming.com/</string>
 
     <!--广告域名-->
-    <string name="zh_tw_gama_ads_pre_url" translatable="false">https://ads.gamamobi.com/</string>
-    <string name="zh_tw_gama_ads_spa_url" translatable="false">https://ads.gamamobi.com/</string>
+    <string name="zh_tw_gama_ads_pre_url" translatable="false">http://ads.utmostgaming.com/</string>
+    <string name="zh_tw_gama_ads_spa_url" translatable="false">https://ads.utmostgaming.com/</string>
 
     <!--平台域名-->
-    <string name="zh_tw_gama_plat_pre_url" translatable="false">https://platform.gamamobi.com/</string>
-    <string name="zh_tw_gama_plat_spa_url" translatable="false">https://platform.gamamobi.com/</string>
+    <string name="zh_tw_gama_plat_pre_url" translatable="false">http://platform.utmostgaming.com/</string>
+    <string name="zh_tw_gama_plat_spa_url" translatable="false">https://platform.utmostgaming.com/</string>
 
     <!--客服域名-->
     <string name="zh_tw_gama_cs_pre_url" translatable="false"></string>
     <string name="zh_tw_gama_cs_spa_url" translatable="false"></string>
 
     <!-- 服务条款 -->
-    <string name="zh_tw_gama_terms_url" translatable="false">https://member.gamamobi.com/member/archive.html</string>
+    <string name="zh_tw_gama_terms_url" translatable="false">https://member.utmostgaming.com/member/archive.html</string>
 
     <!--使用者條款 - 服務條款-->
-    <string name="zh_tw_gama_start_terms_service_url" translatable="false">https://member.gamamobi.com/member/archivemb.html</string>
+    <string name="zh_tw_gama_start_terms_service_url" translatable="false">https://member.utmostgaming.com/member/archivemb.html</string>
 
     <!--使用者條款 - 隱私規章-->
-    <string name="zh_tw_gama_start_terms_private_url" translatable="false">https://member.gamamobi.com/member/privacymb.html</string>
+    <string name="zh_tw_gama_start_terms_private_url" translatable="false">https://member.utmostgaming.com/member/privacymb.html</string>
 
     <!--客服链接-->
-    <string name="zh_tw_gama_service_url" translatable="false">https://member.gamamobi.com/service/turn.html</string>
+    <string name="zh_tw_gama_service_url" translatable="false">https://member.utmostgaming.com/service/turn.html</string>
     <!--港台域名列表 结束-->
 
-    <!--日本域名列表 开始-->
-    <!--登录域名-->
-    <string name="ja_jp_gama_login_pre_url" translatable="false">https://loginjp.gamamobi.com/</string>
-    <string name="ja_jp_gama_login_spa_url" translatable="false">https://loginjp.gamamobi.com/</string>
+    <!--&lt;!&ndash;日本域名列表 开始&ndash;&gt;-->
+    <!--&lt;!&ndash;登录域名&ndash;&gt;-->
+    <!--<string name="ja_jp_gama_login_pre_url" translatable="false">https://loginjp.gamamobi.com/</string>-->
+    <!--<string name="ja_jp_gama_login_spa_url" translatable="false">https://loginjp.gamamobi.com/</string>-->
 
-    <!--支付域名-->
-    <string name="ja_jp_gama_pay_pre_url" translatable="false">https://payjp.gamamobi.com/</string>
-    <string name="ja_jp_gama_pay_spa_url" translatable="false">https://payjp.gamamobi.com/</string>
+    <!--&lt;!&ndash;支付域名&ndash;&gt;-->
+    <!--<string name="ja_jp_gama_pay_pre_url" translatable="false">https://payjp.gamamobi.com/</string>-->
+    <!--<string name="ja_jp_gama_pay_spa_url" translatable="false">https://payjp.gamamobi.com/</string>-->
 
-    <!--活动域名-->
-    <string name="ja_jp_gama_act_pre_url" translatable="false">https://activitykr.gamamobi.com/</string>
-    <string name="ja_jp_gama_act_spa_url" translatable="false">https://activitykr.gamamobi.com/</string>
+    <!--&lt;!&ndash;活动域名&ndash;&gt;-->
+    <!--<string name="ja_jp_gama_act_pre_url" translatable="false">https://activitykr.gamamobi.com/</string>-->
+    <!--<string name="ja_jp_gama_act_spa_url" translatable="false">https://activitykr.gamamobi.com/</string>-->
 
-    <!--cdn域名-->
-    <string name="ja_jp_gama_cdn_pre_url" translatable="false">https://sdk-download.gamamobi.com/</string>
-    <string name="ja_jp_gama_cdn_spa_url" translatable="false">https://sdk-download.gamamobi.com/</string>
+    <!--&lt;!&ndash;cdn域名&ndash;&gt;-->
+    <!--<string name="ja_jp_gama_cdn_pre_url" translatable="false">https://sdk-download.gamamobi.com/</string>-->
+    <!--<string name="ja_jp_gama_cdn_spa_url" translatable="false">https://sdk-download.gamamobi.com/</string>-->
 
-    <!--广告域名-->
-    <string name="ja_jp_gama_ads_pre_url" translatable="false">https://adsjp.gamamobi.com/</string>
-    <string name="ja_jp_gama_ads_spa_url" translatable="false">https://adsjp.gamamobi.com/</string>
+    <!--&lt;!&ndash;广告域名&ndash;&gt;-->
+    <!--<string name="ja_jp_gama_ads_pre_url" translatable="false">https://adsjp.gamamobi.com/</string>-->
+    <!--<string name="ja_jp_gama_ads_spa_url" translatable="false">https://adsjp.gamamobi.com/</string>-->
 
-    <!--平台域名-->
-    <string name="ja_jp_gama_plat_pre_url" translatable="false">https://platformjp.gamamobi.com/</string>
-    <string name="ja_jp_gama_plat_spa_url" translatable="false">https://platformjp.gamamobi.com/</string>
+    <!--&lt;!&ndash;平台域名&ndash;&gt;-->
+    <!--<string name="ja_jp_gama_plat_pre_url" translatable="false">https://platformjp.gamamobi.com/</string>-->
+    <!--<string name="ja_jp_gama_plat_spa_url" translatable="false">https://platformjp.gamamobi.com/</string>-->
 
-    <!--客服域名-->
-    <string name="ja_jp_gama_cs_pre_url" translatable="false"></string>
-    <string name="ja_jp_gama_cs_spa_url" translatable="false"></string>
+    <!--&lt;!&ndash;客服域名&ndash;&gt;-->
+    <!--<string name="ja_jp_gama_cs_pre_url" translatable="false"></string>-->
+    <!--<string name="ja_jp_gama_cs_spa_url" translatable="false"></string>-->
 
-    <!-- 服务条款 -->
-    <string name="ja_jp_gama_terms_url" translatable="false">https://memberjp.gamamobi.com/member/archive.html</string>
+    <!--&lt;!&ndash; 服务条款 &ndash;&gt;-->
+    <!--<string name="ja_jp_gama_terms_url" translatable="false">https://memberjp.gamamobi.com/member/archive.html</string>-->
 
-    <!--使用者條款 - 服務條款-->
-    <string name="ja_jp_gama_start_terms_service_url" translatable="false">https://memberjp.gamamobi.com/member/archivemb.html</string>
+    <!--&lt;!&ndash;使用者條款 - 服務條款&ndash;&gt;-->
+    <!--<string name="ja_jp_gama_start_terms_service_url" translatable="false">https://memberjp.gamamobi.com/member/archivemb.html</string>-->
 
-    <!--使用者條款 - 隱私規章-->
-    <string name="ja_jp_gama_start_terms_private_url" translatable="false">https://memberjp.gamamobi.com/member/privacymb.html</string>
+    <!--&lt;!&ndash;使用者條款 - 隱私規章&ndash;&gt;-->
+    <!--<string name="ja_jp_gama_start_terms_private_url" translatable="false">https://memberjp.gamamobi.com/member/privacymb.html</string>-->
 
-    <!--客服链接-->
-    <string name="ja_jp_gama_service_url" translatable="false">https://memberjp.gamamobi.com/service/turn.html</string>
-    <!--日本域名列表 结束-->
+    <!--&lt;!&ndash;客服链接&ndash;&gt;-->
+    <!--<string name="ja_jp_gama_service_url" translatable="false">https://memberjp.gamamobi.com/service/turn.html</string>-->
+    <!--&lt;!&ndash;日本域名列表 结束&ndash;&gt;-->
 
-    <!--韩国域名列表 开始-->
-    <!--登录域名-->
-    <string name="ko_gama_login_pre_url" translatable="false">https://loginkr.gamamobi.com/</string>
-    <string name="ko_gama_login_spa_url" translatable="false">https://loginkr.gamamobi.com/</string>
+    <!--&lt;!&ndash;韩国域名列表 开始&ndash;&gt;-->
+    <!--&lt;!&ndash;登录域名&ndash;&gt;-->
+    <!--<string name="ko_gama_login_pre_url" translatable="false">https://loginkr.gamamobi.com/</string>-->
+    <!--<string name="ko_gama_login_spa_url" translatable="false">https://loginkr.gamamobi.com/</string>-->
 
-    <!--支付域名-->
-    <string name="ko_gama_pay_pre_url" translatable="false">https://paykr.gamamobi.com/</string>
-    <string name="ko_gama_pay_spa_url" translatable="false">https://paykr.gamamobi.com/</string>
+    <!--&lt;!&ndash;支付域名&ndash;&gt;-->
+    <!--<string name="ko_gama_pay_pre_url" translatable="false">https://paykr.gamamobi.com/</string>-->
+    <!--<string name="ko_gama_pay_spa_url" translatable="false">https://paykr.gamamobi.com/</string>-->
 
-    <!--活动域名-->
-    <string name="ko_gama_act_pre_url" translatable="false">https://activitykr.gamamobi.com/</string>
-    <string name="ko_gama_act_spa_url" translatable="false">https://activitykr.gamamobi.com/</string>
+    <!--&lt;!&ndash;活动域名&ndash;&gt;-->
+    <!--<string name="ko_gama_act_pre_url" translatable="false">https://activitykr.gamamobi.com/</string>-->
+    <!--<string name="ko_gama_act_spa_url" translatable="false">https://activitykr.gamamobi.com/</string>-->
 
-    <!--cdn域名-->
-    <string name="ko_gama_cdn_pre_url" translatable="false">https://sdk-download.gamamobi.com/</string>
-    <string name="ko_gama_cdn_spa_url" translatable="false">https://sdk-download.gamamobi.com/</string>
+    <!--&lt;!&ndash;cdn域名&ndash;&gt;-->
+    <!--<string name="ko_gama_cdn_pre_url" translatable="false">https://sdk-download.gamamobi.com/</string>-->
+    <!--<string name="ko_gama_cdn_spa_url" translatable="false">https://sdk-download.gamamobi.com/</string>-->
 
-    <!--广告域名-->
-    <string name="ko_gama_ads_pre_url" translatable="false">https://adskr.gamamobi.com/</string>
-    <string name="ko_gama_ads_spa_url" translatable="false">https://adskr.gamamobi.com/</string>
+    <!--&lt;!&ndash;广告域名&ndash;&gt;-->
+    <!--<string name="ko_gama_ads_pre_url" translatable="false">https://adskr.gamamobi.com/</string>-->
+    <!--<string name="ko_gama_ads_spa_url" translatable="false">https://adskr.gamamobi.com/</string>-->
 
-    <!--平台域名-->
-    <string name="ko_gama_plat_pre_url" translatable="false">https://platformkr.gamamobi.com/</string>
-    <string name="ko_gama_plat_spa_url" translatable="false">https://platformkr.gamamobi.com/</string>
+    <!--&lt;!&ndash;平台域名&ndash;&gt;-->
+    <!--<string name="ko_gama_plat_pre_url" translatable="false">https://platformkr.gamamobi.com/</string>-->
+    <!--<string name="ko_gama_plat_spa_url" translatable="false">https://platformkr.gamamobi.com/</string>-->
 
-    <!--客服域名-->
-    <string name="ko_gama_cs_pre_url" translatable="false"></string>
-    <string name="ko_gama_cs_spa_url" translatable="false"></string>
+    <!--&lt;!&ndash;客服域名&ndash;&gt;-->
+    <!--<string name="ko_gama_cs_pre_url" translatable="false"></string>-->
+    <!--<string name="ko_gama_cs_spa_url" translatable="false"></string>-->
 
-    <!-- 服务条款 -->
-    <string name="ko_gama_terms_url" translatable="false">https://memberkr.gamamobi.com/member/archive.html</string>
+    <!--&lt;!&ndash; 服务条款 &ndash;&gt;-->
+    <!--<string name="ko_gama_terms_url" translatable="false">https://memberkr.gamamobi.com/member/archive.html</string>-->
 
-    <!--使用者條款 - 服務條款-->
-    <string name="ko_gama_start_terms_service_url" translatable="false">https://memberkr.gamamobi.com/member/archivemb.html</string>
+    <!--&lt;!&ndash;使用者條款 - 服務條款&ndash;&gt;-->
+    <!--<string name="ko_gama_start_terms_service_url" translatable="false">https://memberkr.gamamobi.com/member/archivemb.html</string>-->
 
-    <!--使用者條款 - 隱私規章-->
-    <string name="ko_gama_start_terms_private_url" translatable="false">https://memberkr.gamamobi.com/member/privacymb.html</string>
+    <!--&lt;!&ndash;使用者條款 - 隱私規章&ndash;&gt;-->
+    <!--<string name="ko_gama_start_terms_private_url" translatable="false">https://memberkr.gamamobi.com/member/privacymb.html</string>-->
 
-    <!--客服链接-->
-    <string name="ko_gama_service_url" translatable="false">https://memberkr.gamamobi.com/service/turn.html</string>
+    <!--&lt;!&ndash;客服链接&ndash;&gt;-->
+    <!--<string name="ko_gama_service_url" translatable="false">https://memberkr.gamamobi.com/service/turn.html</string>-->
     <!--韩国域名列表 结束-->
 
 </resources>

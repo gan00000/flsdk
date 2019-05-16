@@ -50,16 +50,16 @@ android {
 
     signingConfigs {//签名的配置
         release {
-            storeFile file('../signkey/gamamobi.jks') //正式签名，以后使用
-            storePassword 'gamamobi'
-            keyAlias 'gamamobi'
-            keyPassword 'gamamobi'
+            storeFile file('../signkey/utgkey.keystore') //正式签名，以后使用
+            storePassword 'utg0000'
+            keyAlias 'utg'
+            keyPassword 'utg0000'
         }
         debug {
-            storeFile file('../signkey/gamamobi.jks')
-            storePassword 'gamamobi'
-            keyAlias 'gamamobi'
-            keyPassword 'gamamobi'
+            storeFile file('../signkey/utgkey.keystore')
+            storePassword 'utg0000'
+            keyAlias 'utg'
+            keyPassword 'utg0000'
         }
     }
 
@@ -68,9 +68,11 @@ android {
 //            multiDexEnabled true //Add this
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
 
         debug {
+            signingConfig signingConfigs.release
         }
     }
     productFlavors {
@@ -279,6 +281,23 @@ android {
             //每个游戏的demo设置
             resValue "string", "test_sku", "com.twsd.1usd"
             resValue "string", "sdk_name", "got sdk"
+            signingConfig signingConfigs.release
+        }
+
+        sgcb {
+            applicationId "com.utg.combo"
+            minSdkVersion 18
+            targetSdkVersion 27
+            versionCode 1
+            versionName "1.0"
+            flavorDimensions "1"
+            resValue "string", "facebook_app_id", "2366274230317300 "
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider2366274230317300"
+            resValue "string", "fb_login_protocol_scheme", "fb2366274230317300"
+            resValue "string", "facebook_app_name", "三國combo"
+            //每个游戏的demo设置
+            resValue "string", "test_sku", "com.sgcb.1usd"
+            resValue "string", "sdk_name", "sgcb sdk"
             signingConfig signingConfigs.release
         }
 
