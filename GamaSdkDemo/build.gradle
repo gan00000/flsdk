@@ -297,7 +297,7 @@ android {
             resValue "string", "facebook_app_name", "三國combo"
             //每个游戏的demo设置
             resValue "string", "test_sku", "com.sgcb.1usd"
-            resValue "string", "sdk_name", "sgcb sdk"
+            resValue "string", "sdk_name", "三國combo demo"
             signingConfig signingConfigs.release
         }
 
