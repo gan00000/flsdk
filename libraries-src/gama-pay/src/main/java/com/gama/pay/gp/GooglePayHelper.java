@@ -21,6 +21,8 @@ import com.gama.pay.gp.util.Purchase;
 import com.gama.pay.gp.util.SkuDetails;
 import com.gama.pay.utils.GamaQueryProductListener;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -287,27 +289,33 @@ public class GooglePayHelper {
                     PL.i(TAG, "startSetup onIabSetupFinished.");
                     if (!result.isSuccess()) {
                         PL.i(TAG, "Your phone or Google account does not support In-app Billing");
-                        if(listener != null) {
+                        if (listener != null) {
                             listener.onQueryResult(null);
                         }
                         return;
                     }
-                    iabHelper.queryInventoryAsync(true, skus, new IabHelper.QueryInventoryFinishedListener() {
+
+                    if (skus == null || skus.isEmpty()) {
+                        PL.i(TAG, "query list is empty.");
+                        if (listener != null) {
+                            listener.onQueryResult(null);
+                        }
+                        return;
+                    }
+
+                    ArrayList<String> transList = new ArrayList<>();
+                    String skusString = "";
+                    for (String sku : skus) {
+                        transList.add(sku);
+                        skusString += sku + "\n";
+                    }
+                    PL.i(TAG, "query list is : " + skusString);
+
+                    queryProductDetailBatch(context, transList, new HashMap<String, SkuDetails>(), new GamaQueryProductListener() {
                         @Override
-                        public void onQueryInventoryFinished(IabResult result, Inventory inventory) {
-                            if(inventory != null) {
-                                if (listener != null) {
-                                    Map<String, SkuDetails> allSkuDetail = inventory.getAllSkuDetail();
-                                    if (allSkuDetail != null && !allSkuDetail.isEmpty()) {
-                                        listener.onQueryResult(allSkuDetail);
-                                    } else {
-                                        listener.onQueryResult(null);
-                                    }
-                                }
-                            } else {
-                                if (listener != null) {
-                                    listener.onQueryResult(null);
-                                }
+                        public void onQueryResult(Map<String, SkuDetails> details) {
+                            if (listener != null) {
+                                listener.onQueryResult(details);
                             }
                             recycleIab();
                         }
@@ -317,9 +325,38 @@ public class GooglePayHelper {
             });
         } else {
             recycleIab();
-            if(listener != null) {
+            if (listener != null) {
                 listener.onQueryResult(null);
             }
         }
+    }
+
+    private void queryProductDetailBatch(final Context context, final List<String> skus, final Map<String, SkuDetails> allSkuDetail, final GamaQueryProductListener listener) {
+        ArrayList<String> curSkus = new ArrayList<>(skus.subList(0, Math.min(15, skus.size())));//单次最多查询20个商品
+        skus.removeAll(curSkus);
+
+        iabHelper.queryInventoryAsync(true, curSkus, new IabHelper.QueryInventoryFinishedListener() {
+            @Override
+            public void onQueryInventoryFinished(IabResult result, Inventory inventory) {
+                if (inventory != null) {
+                    if (listener != null) {
+                        allSkuDetail.putAll(inventory.getAllSkuDetail());
+                        if (skus.size() > 0) {
+                            queryProductDetailBatch(context, skus, allSkuDetail, listener);
+                        } else if (allSkuDetail != null && !allSkuDetail.isEmpty()) {
+                            listener.onQueryResult(allSkuDetail);
+                        } else {
+                            listener.onQueryResult(null);
+                        }
+                    }
+                } else {
+                    if (listener != null) {
+                        listener.onQueryResult(null);
+                    }
+                }
+//                recycleIab();
+            }
+        });
+
     }
 }

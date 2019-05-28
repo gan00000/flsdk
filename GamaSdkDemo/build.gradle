@@ -185,12 +185,12 @@ android {
             resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider362739184296670"
             signingConfig signingConfigs.release
             //测试工程地址
-            resValue "string", "gama_login_pre_url", "https://t-login.gamamobi.com/"
-            resValue "string", "gama_login_spa_url", "https://t-login.gamamobi.com/"
-            resValue "string", "gama_pay_pre_url", "https://t-pay.gamamobi.com/"
-            resValue "string", "gama_pay_spa_url", "https://t-pay.gamamobi.com/"
-            resValue "string", "gama_ads_pre_url", "https://t-ads.gamamobi.com/"
-            resValue "string", "gama_ads_spa_url", "https://t-ads.gamamobi.com/"
+            resValue "string", "zh_tw_gama_login_pre_url", "https://t-login.gamamobi.com/"
+            resValue "string", "zh_tw_gama_login_spa_url", "https://t-login.gamamobi.com/"
+            resValue "string", "zh_tw_gama_pay_pre_url", "https://t-pay.gamamobi.com/"
+            resValue "string", "zh_tw_gama_pay_spa_url", "https://t-pay.gamamobi.com/"
+            resValue "string", "zh_tw_gama_ads_pre_url", "https://track.gamamobi.com/"
+            resValue "string", "zh_tw_gama_ads_spa_url", "https://track.gamamobi.com/"
             //测试商品id
             resValue "string", "test_sku", "com.tencent.tmgp.ssktw.1usd"
             resValue "string", "sdk_name", "圣斗士SDK"
@@ -260,7 +260,7 @@ android {
             resValue "string", "fb_login_protocol_scheme", "fb822949071390949"
             resValue "string", "facebook_app_name", "神都"
             //每个游戏的demo设置
-            resValue "string", "test_sku", "com.twsd.1usd"
+            resValue "string", "test_sku", "com.sd.1usd"
             resValue "string", "sdk_name", "神都"
             signingConfig signingConfigs.release
         }
@@ -279,6 +279,23 @@ android {
             //每个游戏的demo设置
             resValue "string", "test_sku", "com.twsd.1usd"
             resValue "string", "sdk_name", "got sdk"
+            signingConfig signingConfigs.release
+        }
+
+        krezfy {
+            applicationId "com.gamamobi.krezfy"
+            minSdkVersion 18
+            targetSdkVersion 28
+            versionCode 1
+            versionName "1.0"
+            flavorDimensions "1"
+            resValue "string", "facebook_app_id", "2298531553511644"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider2298531553511644"
+            resValue "string", "fb_login_protocol_scheme", "fb2298531553511644"
+            resValue "string", "facebook_app_name", "kr硬汉"
+            //每个游戏的demo设置
+            resValue "string", "test_sku", "com.krezfy.1usd"
+            resValue "string", "sdk_name", "kr硬汉Demo"
             signingConfig signingConfigs.release
         }
 

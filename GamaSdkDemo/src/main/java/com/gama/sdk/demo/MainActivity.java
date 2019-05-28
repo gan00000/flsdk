@@ -53,6 +53,7 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -773,14 +774,30 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void querySku() {
-        final ArrayList<String> list = new ArrayList<>();
-        list.add(getResources().getString(R.string.test_sku));
-        list.add("com.sslj.100usd");
+//        final ArrayList<String> list = new ArrayList<>();
+//        list.add(getResources().getString(R.string.test_sku));
+//        list.add("com.sd.zshk");
+//        list.add("com.sd.xcpb");
+//        list.add("com.sd.1usd");
+//        list.add("com.sd.5usd");
+//        list.add("com.sd.10usd'");
+//        list.add("com.sd.20usd");
+//        list.add("com.sd.50usd");
+//        list.add("com.sd.100usd");
+//        list.add("com.sd.cz");
+//        list.add("com.sd.tzlb");
+//        list.add("com.sd.sslb");
+        List<String> list = Arrays.asList("com.sd.qmlb.5usd","com.sd.qmlb.25usd","com.sd.qmlb.50usd","com.sd.ztlb.5usd","com.sd.ztlb.25usd","com.sd.ztlb.50usd",
+                "com.sd.sjlb.5usd","com.sd.sjlb.25usd","com.sd.sjlb.50usd","com.sd.xslb.5usd","com.sd.xslb.25usd","com.sd.xslb.50usd","com.sd.chlb.5usd",
+                "com.sd.chlb.25usd","com.sd.chlb.50usd","com.sd.zshk","com.sd.xcpb","com.sd.1usd","com.sd.5usd","com.sd.10usd");  //20
+//                ,"com.sd.20usd"  //21
+//                , "com.sd.50usd","com.sd.100usd","com.sd.cz","com.sd.tzlb","com.sd.sslb");
         iGama.gamaQueryProductDetail(this, SPayType.GOOGLE, list, new GamaQueryProductListener() {
             @Override
             public void onQueryResult(Map<String, SkuDetails> details) {
                 String detail = "";
                 if(details != null) {
+                    detail += "查询总数： " + details.size() + "\n\n";
                     for (Map.Entry<String, SkuDetails> entry : details.entrySet()) {
                         SkuDetails skuDetails = entry.getValue();
                         String title = skuDetails.getTitle();//名称
