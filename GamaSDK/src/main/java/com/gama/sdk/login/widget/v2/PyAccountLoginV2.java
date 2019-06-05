@@ -36,7 +36,6 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
 
     private View loginMainGoRegisterBtn;
     private View loginMainGoFindPwd;
-    private View loginMainFreeRegLogin;
     private View loginMainGoAccountCenter;
 
 
@@ -75,8 +74,6 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
         loginMainGoRegisterBtn = contentView.findViewById(R.id.py_login_go_reg_v2);
         loginMainGoFindPwd = contentView.findViewById(R.id.py_login_go_findpwd_v2);
         loginMainGoAccountCenter = contentView.findViewById(R.id.py_login_go_account_center);
-        loginMainFreeRegLogin = contentView.findViewById(R.id.py_login_free_reg_login);//遊客登錄
-
 
         eyeImageView = (ImageView) contentView.findViewById(R.id.py_login_password_eye_v2);
 
@@ -84,12 +81,6 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
         loginPasswordEditText = (EditText) contentView.findViewById(R.id.py_login_password_v2);
 
         loginMainLoginBtn = (TextView) contentView.findViewById(R.id.v2_member_btn_login);
-
-
-        if (GamaUtil.isMainland(getContext())){
-            loginMainFreeRegLogin.setVisibility(View.VISIBLE);
-            backView.setVisibility(GONE);
-        }
 
         savePwdCheckBox = (ImageView) contentView.findViewById(R.id.py_save_pwd_text_check_id);
 
@@ -127,13 +118,6 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
             @Override
             public void onClick(View v) {
                 sLoginDialogv2.toFindPwdView();
-            }
-        });
-
-        loginMainFreeRegLogin.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sLoginDialogv2.getLoginPresenter().macLogin(sLoginDialogv2.getActivity());
             }
         });
 

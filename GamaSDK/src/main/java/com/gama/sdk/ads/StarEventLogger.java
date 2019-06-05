@@ -62,6 +62,8 @@ public class StarEventLogger {
                         gama_ads_adword_conversionId, ResConfig.getConfigInAssetsProperties(activity,"gama_ads_adword_label"), "0.00", false);
             }
 
+            trackingWithEventName(activity, GamaAdsConstant.GAMA_EVENT_OPEN, null, null);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -190,6 +192,12 @@ public class StarEventLogger {
             eventValues.put(AFInAppEventParameterName.CURRENCY, "USD");
             eventValues.put(AFInAppEventParameterName.CONTENT_ID, productId);
             AppsFlyerLib.getInstance().trackEvent(context, AFInAppEventType.PURCHASE, eventValues);
+
+            if(!GamaUtil.getFirstPay(context)) {
+                trackingWithEventName((Activity) context, GamaAdsConstant.GAMA_EVENT_FIRSTPAY, null, null);
+                GamaUtil.saveFirstPay(context);
+            }
+
         } catch (Exception e1) {
             e1.printStackTrace();
         }

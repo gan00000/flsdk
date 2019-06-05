@@ -2,6 +2,10 @@ package com.gama.sdk.ads;
 
 public class GamaAdsConstant {
     /**
+     * 每次启动事件
+     */
+    public static final String GAMA_EVENT_OPEN = "gama_open";
+    /**
      * 登入事件
      */
     public static final String GAMA_EVENT_LOGIN = "gama_login_event";
@@ -13,6 +17,14 @@ public class GamaAdsConstant {
      * 角色信息事件
      */
     public static final String GAMA_EVENT_ROLE_INFO = "gama_role_info";
+    /**
+     * 在线时长事件
+     */
+    public static final String GAMA_EVENT_MINUTE = "gama_%dmin";
+    /**
+     * 8分钟事件
+     */
+    public static final String GAMA_EVENT_8_MIN = "gama_8min";
     /**
      * 10分钟事件
      */
@@ -29,6 +41,10 @@ public class GamaAdsConstant {
      * 留存事件
      */
     public static final String GAMA_RETENTION = "gama_%dretention";
+    /**
+     * 首储事件
+     */
+    public static final String GAMA_EVENT_FIRSTPAY = "gama_firstpay";
 
 
     /**

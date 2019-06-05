@@ -296,6 +296,29 @@ android {
             //每个游戏的demo设置
             resValue "string", "test_sku", "com.krezfy.1usd"
             resValue "string", "sdk_name", "kr硬汉Demo"
+
+            resValue "string", "zh_tw_gama_login_pre_url", "https://t-login.gamamobi.com/"
+            resValue "string", "zh_tw_gama_login_spa_url", "https://t-login.gamamobi.com/"
+            resValue "string", "zh_tw_gama_pay_pre_url", "https://t-com.gama.pay.gamamobi.com/"
+            resValue "string", "zh_tw_gama_pay_spa_url", "https://t-com.gama.pay.gamamobi.com/"
+
+            signingConfig signingConfigs.release
+        }
+
+        twsm {
+            applicationId "com.gama.twsm"
+            minSdkVersion 18
+            targetSdkVersion 28
+            versionCode 1
+            versionName "1.0"
+            flavorDimensions "1"
+            resValue "string", "facebook_app_id", "404025320186326"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider404025320186326"
+            resValue "string", "fb_login_protocol_scheme", "fb404025320186326"
+            resValue "string", "facebook_app_name", "神魔大陸2"
+            //每个游戏的demo设置
+            resValue "string", "test_sku", "com.twsm.1usd"
+            resValue "string", "sdk_name", "神魔大陸2Demo"
             signingConfig signingConfigs.release
         }
 

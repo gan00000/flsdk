@@ -153,6 +153,18 @@
                     android:layout_height="wrap_content"
                     android:text="查商品" />
 
+                <Button
+                    android:id="@+id/onecreate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="one创单" />
+
+                <Button
+                    android:id="@+id/onesend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="one发币" />
+
             </LinearLayout>
 
 

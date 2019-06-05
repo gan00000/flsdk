@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "36085075925",
+    "firebase_url": "https://gamamobi-twsm.firebaseio.com",
+    "project_id": "gamamobi-twsm",
+    "storage_bucket": "gamamobi-twsm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:36085075925:android:a42dd67a67be3939",
+        "android_client_info": {
+          "package_name": "com.gama.twsm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "36085075925-2evaalbijvo755hhokmr34muo6bnml7i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gama.twsm",
+            "certificate_hash": "f70eda06327547eaac632d14e9617217224420f2"
+          }
+        },
+        {
+          "client_id": "36085075925-h9bvop5om1hcpoblvfnkv4f7okeftk95.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8pyzeeTiDCoiKMQtB8iF_HgSYEejxaVc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "36085075925-h9bvop5om1hcpoblvfnkv4f7okeftk95.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "36085075925-e77rrcv35b0kdg1aern5rvi1ntj776fq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.gamamobi.twsm",
+                "app_store_id": "1466758956"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

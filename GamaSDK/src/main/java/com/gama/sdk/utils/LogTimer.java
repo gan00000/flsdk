@@ -7,9 +7,11 @@ import android.util.Log;
 
 import com.core.base.utils.PL;
 import com.facebook.appevents.AppEventsLogger;
+import com.gama.sdk.R;
 import com.gama.sdk.ads.GamaAdsConstant;
 import com.gama.sdk.ads.StarEventLogger;
 
+import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -25,6 +27,7 @@ public class LogTimer {
     private long startTime;
     private Activity context;
     private boolean isCanceled = true;
+    private static final String TAG = "Gama LogTimer";
 
     public static LogTimer getInstance() {
         if (instance == null) {
@@ -46,7 +49,7 @@ public class LogTimer {
                     end();
                 }
             };
-            timer.schedule(task, 1000, 60000);
+            timer.schedule(task, 1000, 1000 * 60);
         }
     }
 
@@ -59,7 +62,7 @@ public class LogTimer {
         startTime = System.currentTimeMillis();
 
         sp.edit().putLong("previous_time", result).apply();
-        Log.d("LogTimer", String.valueOf(result));
+        Log.d(TAG, String.valueOf(result));
         log(sp, result);
     }
 
@@ -69,28 +72,32 @@ public class LogTimer {
     }
 
     private void log(SharedPreferences sp, long time) {
-        if(time >= 10000 * 60 && !sp.getBoolean("log_1", false)) {
-//            Log.i("LogTimer", "此程式從第一次啟動後，運作了 10 秒");
-            StarEventLogger.trackingWithEventName(context, GamaAdsConstant.GAMA_EVENT_10_MIN, null, null);
-            sp.edit().putBoolean("log_1", true).apply();
-        }
-        if(time >= 20000 * 60 && !sp.getBoolean("log_2", false)) {
-//            Log.i("LogTimer", "此程式從第一次啟動後，運作了 20 秒");
-            StarEventLogger.trackingWithEventName(context, GamaAdsConstant.GAMA_EVENT_20_MIN, null, null);
-            sp.edit().putBoolean("log_2", true).apply();
-        }
-        if(time >= 30000 * 60 && !sp.getBoolean("log_3", false)) {
-//            Log.i("LogTimer", "此程式從第一次啟動後，運作了 30 秒，任務完成。");
-            StarEventLogger.trackingWithEventName(context, GamaAdsConstant.GAMA_EVENT_30_MIN, null, null);
-            sp.edit().putBoolean("log_3", true).apply();
+        int[] intArray = context.getResources().getIntArray(R.array.gama_minute);
+        if (intArray.length < 1) {
+            PL.e(TAG, "no minute event set!");
             cancel();
-        } else if (time >= 30000 * 60) {
-            PL.i("LogTimer", "任務完成，不用再執行。");
-            cancel();
+            return;
+        }
+        for (int i = 0; i < intArray.length; i++) {
+            int minute = intArray[i];
+            String eventName = String.format(GamaAdsConstant.GAMA_EVENT_MINUTE, minute);
+            if (time >= minute * 1000 * 60 && !sp.getBoolean(eventName, false)) {
+                StarEventLogger.trackingWithEventName(context, eventName, null, null);
+                sp.edit().putBoolean(eventName, true).apply();
+//                if(i == intArray.length - 1) {
+//                    PL.i(TAG, "任務完成，不用再執行。");
+//                    cancel();
+//                }
+            }
+            if(i == intArray.length - 1 && sp.getBoolean(eventName, false)) {
+                PL.i(TAG, "任務完成，不用再執行。");
+                cancel();
+            }
         }
     }
 
     public void cancel() {
+        PL.i(TAG, "cancel logTimer。");
         timer.cancel();
         isCanceled = true;
     }

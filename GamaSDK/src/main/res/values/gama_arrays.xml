@@ -5,6 +5,15 @@
         <item>1</item>
         <item>3</item>
         <item>7</item>
+        <item>15</item>
+        <item>30</item>
+    </integer-array>
+
+    <integer-array name="gama_minute">
+        <item>8</item>
+        <item>10</item>
+        <item>20</item>
+        <item>30</item>
     </integer-array>
 
 </resources>

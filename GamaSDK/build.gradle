@@ -54,6 +54,7 @@ dependencies {
 //    api files('libs/nineoldandroids-library-2.4.0.jar')
     api project(':libraries-src:GamaBaseLib')
     api project(':libraries-src:gama-pay')
+    api project(':libraries-src:gama_onestore_plug')
     api project(':Thirdlibrary')
     //    compile 'com.android.support:recyclerview-v7:25.3.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'

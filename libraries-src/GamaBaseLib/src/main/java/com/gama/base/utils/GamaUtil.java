@@ -530,4 +530,23 @@ public class GamaUtil {
         }
         return false;
     }
+
+    private static final String PREFIX_FIRSTPAY_ = "GAMA_FIRSTPAY_";
+
+    /**
+     * 保存用户首储状态
+     * @param context
+     */
+    public static void saveFirstPay(Context context) {
+        SPUtil.saveSimpleInfo(context, GamaUtil.GAMA_SP_FILE, PREFIX_FIRSTPAY_ + getUid(context), true);
+    }
+
+    /**
+     * 获取用户首储状态
+     * @param context
+     * @return
+     */
+    public static boolean getFirstPay(Context context) {
+        return SPUtil.getSimpleBoolean(context, GamaUtil.GAMA_SP_FILE, PREFIX_FIRSTPAY_ + getUid(context));
+    }
 }
