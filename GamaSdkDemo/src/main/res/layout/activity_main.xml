@@ -44,6 +44,12 @@
                     android:layout_height="wrap_content"
                     android:text="google储值" />
 
+                <Button
+                    android:id="@+id/demo_pay_one"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="one储值" />
+
 
                 <Button
                     android:id="@+id/demo_share"
@@ -164,6 +170,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="one发币" />
+
+                <Button
+                    android:id="@+id/plat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="显示平台" />
 
             </LinearLayout>
 

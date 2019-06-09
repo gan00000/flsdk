@@ -1,4 +1,4 @@
-package com.gama.pay.onestore.bean.res;
+package com.gamamobi.onestore.pay.bean.res;
 
 import com.core.base.bean.BaseResponseModel;
 
@@ -9,7 +9,7 @@ public class OneStoreCreateOrderIdRes extends BaseResponseModel {
 
     private String orderId;
     private String payId;
-
+    private String developerPayload;
 
     public String getOrderId() {
         return orderId;
@@ -25,5 +25,13 @@ public class OneStoreCreateOrderIdRes extends BaseResponseModel {
 
     public void setPayId(String payId) {
         this.payId = payId;
+    }
+
+    public String getDeveloperPayload() {
+        return developerPayload;
+    }
+
+    public void setDeveloperPayload(String developerPayload) {
+        this.developerPayload = developerPayload;
     }
 }

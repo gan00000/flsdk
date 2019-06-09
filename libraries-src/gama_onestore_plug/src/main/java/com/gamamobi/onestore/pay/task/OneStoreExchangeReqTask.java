@@ -1,4 +1,4 @@
-package com.gama.pay.onestore.task;
+package com.gamamobi.onestore.pay.task;
 
 import android.content.Context;
 

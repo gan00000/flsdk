@@ -5,7 +5,9 @@
 
 package com.gamamobi.onestore.api;
 
-public class PurchaseData {
+import java.io.Serializable;
+
+public class PurchaseData implements Serializable {
     private String orderId;
     private String packageName;
     private String productId;

@@ -1,8 +1,8 @@
-package com.gama.pay.onestore.bean.req;
+package com.gamamobi.onestore.pay.bean.req;
 
 import android.content.Context;
 
-import com.gama.pay.onestore.constants.OneStoreContant;
+import com.gamamobi.onestore.pay.constants.OneStoreContant;
 
 /**
  * 用于请求创单接口的参数集

@@ -24,6 +24,7 @@ import com.gama.pay.gp.util.Purchase;
 import com.gama.sdk.R;
 import com.gama.thirdlib.facebook.SFacebookProxy;
 import com.gama.thirdlib.google.SGoogleProxy;
+import com.gamamobi.onestore.pay.OneStoreActivity;
 import com.google.ads.conversiontracking.AdWordsConversionReporter;
 
 import java.util.HashMap;
@@ -164,29 +165,54 @@ public class StarEventLogger {
             return;
         }
         Purchase purchase = (Purchase) bundle.getSerializable(GooglePayContant.PURCHASE_OBJECT);
-        if(purchase == null) {
+        Purchase purchaseOne = (Purchase) bundle.getSerializable(OneStoreActivity.ONESTORE_PURCHASE_DATA);
+
+        String orderId = "";
+        String productId = "";
+        long purchaseTime;
+        int price = 0;
+
+        if(purchase != null) {
+            PL.i(TAG, "trackinPay Purchase Google");
+            orderId = purchase.getOrderId();
+            purchaseTime = purchase.getPurchaseTime();
+            productId = purchase.getSku();
+            try {
+                Pattern p = Pattern.compile("\\d+(usd|USD)");
+                Matcher m = p.matcher(productId);
+                if(m.find()) {
+                    price = Integer.parseInt(m.group().toLowerCase().replace("usd", ""));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (purchaseOne != null) {
+            PL.i(TAG, "trackinPay Purchase One");
+            orderId = purchaseOne.getOrderId();
+            purchaseTime = purchaseOne.getPurchaseTime();
+            productId = purchaseOne.getSku();
+            try {
+                Pattern p = Pattern.compile("\\d+(usd|USD)");
+                Matcher m = p.matcher(productId);
+                if(m.find()) {
+                    price = Integer.parseInt(m.group().toLowerCase().replace("usd", ""));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
             PL.i(TAG, "trackinPay Purchase null");
             return;
         }
-        String productId = purchase.getSku();
-        int price = 0;
-        try {
-            Pattern p = Pattern.compile("\\d+(usd|USD)");
-            Matcher m = p.matcher(productId);
-            if(m.find()) {
-                price = Integer.parseInt(m.group().toLowerCase().replace("usd", ""));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
         try {
             //Appsflyer上报
             Map<String, Object> eventValues = new HashMap<>();
             //下面是自定义的事件名
             eventValues.put(GamaAdsConstant.GAMA_EVENT_USER_ID, GamaUtil.getUid(context));
             eventValues.put(GamaAdsConstant.GAMA_EVENT_PRODUCT_ID, productId);
-            eventValues.put(GamaAdsConstant.GAMA_EVENT_ORDERID, purchase.getOrderId());
-            eventValues.put(GamaAdsConstant.GAMA_EVENT_PURCHASE_TIME, purchase.getPurchaseTime());
+            eventValues.put(GamaAdsConstant.GAMA_EVENT_ORDERID, orderId);
+            eventValues.put(GamaAdsConstant.GAMA_EVENT_PURCHASE_TIME, purchaseTime);
             //下面是AppsFlyer自己的事件名
             eventValues.put(AFInAppEventParameterName.REVENUE, price);
             eventValues.put(AFInAppEventParameterName.CURRENCY, "USD");

@@ -1,4 +1,4 @@
-package com.gama.pay.onestore.constants;
+package com.gamamobi.onestore.pay.constants;
 
 
 public class OneStoreContant {

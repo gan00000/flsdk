@@ -1,4 +1,4 @@
-package com.gama.pay;
+package com.gamamobi.onestore;
 
 import android.os.Bundle;
 

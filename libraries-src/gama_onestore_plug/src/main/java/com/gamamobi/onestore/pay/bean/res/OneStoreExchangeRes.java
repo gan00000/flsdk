@@ -1,4 +1,4 @@
-package com.gama.pay.onestore.bean.res;
+package com.gamamobi.onestore.pay.bean.res;
 
 import com.core.base.bean.BaseResponseModel;
 

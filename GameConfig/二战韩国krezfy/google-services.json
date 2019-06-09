@@ -23,7 +23,7 @@
           }
         },
         {
-          "client_id": "420241542250-q1gqr9asi3dg2p5evg9hhp8c4h0cc8op.apps.googleusercontent.com",
+          "client_id": "420241542250-26j0n8lpefr1sr1e3foanhmjg8h5jm0v.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -33,20 +33,66 @@
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "420241542250-q1gqr9asi3dg2p5evg9hhp8c4h0cc8op.apps.googleusercontent.com",
+              "client_id": "420241542250-26j0n8lpefr1sr1e3foanhmjg8h5jm0v.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "420241542250-8fb6jkukln1tkke276dkj28idgm77v2k.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.gamamobi.krezfy",
+                "app_store_id": "1452789128"
+              }
             }
           ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:420241542250:android:41868c3decec53db",
+        "android_client_info": {
+          "package_name": "com.gamamobi.krezfy.one"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "420241542250-r15hkbno0egf9rpcb1t94bt9sg0lbvr1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gamamobi.krezfy.one",
+            "certificate_hash": "f70eda06327547eaac632d14e9617217224420f2"
+          }
         },
-        "ads_service": {
-          "status": 2
+        {
+          "client_id": "420241542250-26j0n8lpefr1sr1e3foanhmjg8h5jm0v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEJ3kpWbHxmbsSyrCIjv4tEPpN__CE5AA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "420241542250-26j0n8lpefr1sr1e3foanhmjg8h5jm0v.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "420241542250-8fb6jkukln1tkke276dkj28idgm77v2k.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.gamamobi.krezfy",
+                "app_store_id": "1452789128"
+              }
+            }
+          ]
         }
       }
     },
@@ -67,7 +113,7 @@
           }
         },
         {
-          "client_id": "420241542250-q1gqr9asi3dg2p5evg9hhp8c4h0cc8op.apps.googleusercontent.com",
+          "client_id": "420241542250-26j0n8lpefr1sr1e3foanhmjg8h5jm0v.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -77,20 +123,21 @@
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "420241542250-q1gqr9asi3dg2p5evg9hhp8c4h0cc8op.apps.googleusercontent.com",
+              "client_id": "420241542250-26j0n8lpefr1sr1e3foanhmjg8h5jm0v.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "420241542250-8fb6jkukln1tkke276dkj28idgm77v2k.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.gamamobi.krezfy",
+                "app_store_id": "1452789128"
+              }
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     }

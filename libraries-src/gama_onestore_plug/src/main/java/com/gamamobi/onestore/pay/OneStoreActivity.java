@@ -1,19 +1,21 @@
-package com.gama.pay.onestore;
+package com.gamamobi.onestore.pay;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.core.base.SBaseActivity;
-import com.gama.pay.IOneStorePay;
-import com.gama.pay.IPayCallBack;
-import com.gama.pay.IPayFactory;
-import com.gama.pay.onestore.bean.req.OneStoreCreateOrderIdReqBean;
+import com.gamamobi.onestore.IOneStorePay;
+import com.gamamobi.onestore.IPayCallBack;
+import com.gamamobi.onestore.IPayFactory;
+import com.gamamobi.onestore.pay.bean.req.OneStoreCreateOrderIdReqBean;
 
 public class OneStoreActivity extends SBaseActivity {
 
 	public static final String OneStorePayReqBean_Extra_Key = "OneStorePayReqBean_Extra_Key";
-	public static final int OneStorePayResultCode = 92;
+	public static final String ONESTORE_PURCHASE_DATA = "ONESTORE_PURCHASE_DATA";
+	public static final int ONESTOREPAYRESULTCODE = 92;
+	public static final int ONESTOREPAYREQEUSTCODE = 93;
 
 
 	private IOneStorePay iPay;
@@ -56,7 +58,7 @@ public class OneStoreActivity extends SBaseActivity {
 	private void setResultForPay(Bundle bundle) {
 		Intent resultIntent = new Intent();
 		resultIntent.putExtras(bundle);
-		setResult(OneStorePayResultCode,resultIntent);
+		setResult(ONESTOREPAYRESULTCODE,resultIntent);
 	}
 
 

@@ -1,8 +1,8 @@
-package com.gama.pay;
+package com.gamamobi.onestore;
 
 import android.app.Activity;
 
-import com.gama.pay.onestore.OneStoreImpl;
+import com.gamamobi.onestore.pay.OneStoreImpl;
 
 /**
  * Created by gan on 2017/2/23.

@@ -1,10 +1,10 @@
-package com.gama.pay.onestore.bean.req;
+package com.gamamobi.onestore.pay.bean.req;
 
 import android.content.Context;
 
 import com.core.base.utils.SStringUtil;
 import com.gama.base.utils.GamaUtil;
-import com.gama.pay.onestore.constants.OneStoreContant;
+import com.gamamobi.onestore.pay.constants.OneStoreContant;
 
 public class PayReqBean extends BPayReqBean {
 

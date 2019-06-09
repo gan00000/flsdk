@@ -1,4 +1,4 @@
-package com.gama.pay.onestore.bean.req;
+package com.gamamobi.onestore.pay.bean.req;
 
 import android.content.Context;
 

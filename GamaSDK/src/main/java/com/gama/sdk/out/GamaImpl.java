@@ -51,6 +51,9 @@ import com.gama.thirdlib.facebook.FaceBookUser;
 import com.gama.thirdlib.facebook.FriendProfile;
 import com.gama.thirdlib.facebook.SFacebookProxy;
 import com.gama.thirdlib.google.SGooglePlayGameServices;
+import com.gamamobi.cafe.GamaCafeHelper;
+import com.gamamobi.onestore.pay.OneStoreActivity;
+import com.gamamobi.onestore.pay.bean.req.OneStoreCreateOrderIdReqBean;
 
 import org.json.JSONObject;
 
@@ -215,7 +218,7 @@ public class GamaImpl implements IGama {
 
                         @Override
                         public void onFailure() {
-                            if(listener != null) {
+                            if (listener != null) {
                                 listener.onPayFinish(null);
                             }
                         }
@@ -237,7 +240,7 @@ public class GamaImpl implements IGama {
 
                         @Override
                         public void onFailure() {
-                            if(listener != null) {
+                            if (listener != null) {
                                 listener.onPayFinish(null);
                             }
                         }
@@ -287,6 +290,8 @@ public class GamaImpl implements IGama {
 
             othersPay(activity, cpOrderId, extra);
 
+        } else if (payType == SPayType.ONESTORE) {
+            oneStorePay(activity, cpOrderId, productId, extra);
         } else {//默认Google储值
 
             if (GamaUtil.getSdkCfg(activity) != null && GamaUtil.getSdkCfg(activity).openOthersPay(activity)) {//假若Google包侵权被下架，此配置可以启动三方储值
@@ -305,12 +310,22 @@ public class GamaImpl implements IGama {
         GooglePayCreateOrderIdReqBean googlePayCreateOrderIdReqBean = new GooglePayCreateOrderIdReqBean(activity);
         googlePayCreateOrderIdReqBean.setCpOrderId(cpOrderId);
         googlePayCreateOrderIdReqBean.setProductId(productId);
-//        googlePayCreateOrderIdReqBean.setRoleLevel(roleLevel);
         googlePayCreateOrderIdReqBean.setExtra(extra);
 
         Intent i = new Intent(activity, GooglePayActivity2.class);
         i.putExtra(GooglePayActivity2.GooglePayReqBean_Extra_Key, googlePayCreateOrderIdReqBean);
         activity.startActivityForResult(i, GooglePayActivity2.GooglePayReqeustCode);
+    }
+
+    private void oneStorePay(Activity activity, String cpOrderId, String productId, String extra) {
+        OneStoreCreateOrderIdReqBean oneStoreCreateOrderIdReqBean = new OneStoreCreateOrderIdReqBean(activity);
+        oneStoreCreateOrderIdReqBean.setCpOrderId(cpOrderId);
+        oneStoreCreateOrderIdReqBean.setProductId(productId);
+        oneStoreCreateOrderIdReqBean.setExtra(extra);
+
+        Intent i = new Intent(activity, OneStoreActivity.class);
+        i.putExtra(OneStoreActivity.OneStorePayReqBean_Extra_Key, oneStoreCreateOrderIdReqBean);
+        activity.startActivityForResult(i, OneStoreActivity.ONESTOREPAYREQEUSTCODE);
     }
 
     private void othersPay(Activity activity, String cpOrderId, String extra) {
@@ -423,6 +438,26 @@ public class GamaImpl implements IGama {
                     return;
                 }
 
+                if (requestCode == OneStoreActivity.ONESTOREPAYREQEUSTCODE && resultCode == OneStoreActivity.ONESTOREPAYRESULTCODE) {
+                    Bundle bundle = null;
+                    if (data != null) {
+                        bundle = data.getExtras();
+                    }
+                    if (bundle == null) {
+                        bundle = new Bundle();
+                    } else {
+                        StarEventLogger.trackinPayEvent(activity, bundle);
+                    }
+
+                    if (iPayListener != null) { //支付刷新的回调
+                        PL.i(TAG, "支付回调");
+                        iPayListener.onPayFinish(bundle);
+                    } else {
+                        PL.i(TAG, "支付回调为空");
+                    }
+                    return;
+                }
+
                 if (sGooglePlayGameServices != null) {
                     sGooglePlayGameServices.handleActivityResult(activity, requestCode, resultCode, data);
                 }
@@ -455,6 +490,9 @@ public class GamaImpl implements IGama {
                     iLogin.onStop(activity);
                 }
                 GooglePayHelper.getInstance().setForeground(false);
+                if (Localization.getSGameLanguage(activity) == SGameLanguage.ko_KR) {
+                    GamaCafeHelper.stopCafe(activity);
+                }
             }
         });
     }
@@ -896,11 +934,22 @@ public class GamaImpl implements IGama {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                if(payType == SPayType.GOOGLE) {
+                if (payType == SPayType.GOOGLE) {
                     GooglePayHelper.getInstance().queryProductDetail(activity, skus, listener);
                 }
             }
         });
     }
 
+    @Override
+    public void gamaOpenCafeHome(final Activity activity) {
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                PL.i("IGama openPlatform");
+                GamaCafeHelper.initCafe(activity);
+                GamaCafeHelper.showCafe(activity);
+            }
+        });
+    }
 }

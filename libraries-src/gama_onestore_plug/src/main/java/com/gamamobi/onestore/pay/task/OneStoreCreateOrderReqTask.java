@@ -1,8 +1,8 @@
-package com.gama.pay.onestore.task;
+package com.gamamobi.onestore.pay.task;
 
 import com.core.base.bean.BaseReqeustBean;
 import com.core.base.request.AbsHttpRequest;
-import com.gama.pay.onestore.bean.req.OneStoreCreateOrderIdReqBean;
+import com.gamamobi.onestore.pay.bean.req.OneStoreCreateOrderIdReqBean;
 
 /**
  * Created by gan on 2017/2/23.

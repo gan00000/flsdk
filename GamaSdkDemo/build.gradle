@@ -294,13 +294,16 @@ android {
             resValue "string", "fb_login_protocol_scheme", "fb2298531553511644"
             resValue "string", "facebook_app_name", "kr硬汉"
             //每个游戏的demo设置
-            resValue "string", "test_sku", "com.krezfy.1usd"
+            resValue "string", "test_sku", "com.krezfy.test1"
             resValue "string", "sdk_name", "kr硬汉Demo"
+            resValue "string", "cafeId", "29776183"
+            resValue "string", "clientSecret", "xVuRpMfmrd"
+            resValue "string", "clientId", "w_RDicK0dqZ3f_iyrdqv"
 
-            resValue "string", "zh_tw_gama_login_pre_url", "https://t-login.gamamobi.com/"
-            resValue "string", "zh_tw_gama_login_spa_url", "https://t-login.gamamobi.com/"
-            resValue "string", "zh_tw_gama_pay_pre_url", "https://t-com.gama.pay.gamamobi.com/"
-            resValue "string", "zh_tw_gama_pay_spa_url", "https://t-com.gama.pay.gamamobi.com/"
+            resValue "string", "ko_gama_login_pre_url", "https://t-login.gamamobi.com/"
+            resValue "string", "ko_gama_login_spa_url", "https://t-login.gamamobi.com/"
+            resValue "string", "ko_gama_pay_pre_url", "https://t-pay.gamamobi.com/"
+            resValue "string", "ko_gama_pay_spa_url", "https://t-pay.gamamobi.com/"
 
             signingConfig signingConfigs.release
         }
