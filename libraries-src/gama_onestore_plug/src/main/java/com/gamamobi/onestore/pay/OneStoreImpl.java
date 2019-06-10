@@ -30,6 +30,7 @@ import com.gamamobi.onestore.pay.task.OneStoreCreateOrderReqTask;
 import com.gamamobi.onestore.pay.task.OneStoreExchangeReqTask;
 
 import java.util.List;
+import java.util.concurrent.LinkedBlockingDeque;
 
 /**
  * Created by gan on 2017/2/23.
@@ -406,7 +407,7 @@ public class OneStoreImpl implements IOneStorePay {
             hideProgress();
             if (purchaseDataList != null && purchaseDataList.size() > 0) {
                 for (PurchaseData data : purchaseDataList) {
-                    sendRequest(data, true);
+                    replaceRequest(data);
                 }
             }
             createOrder(createOrderIdReqBean);
@@ -452,7 +453,7 @@ public class OneStoreImpl implements IOneStorePay {
             hideProgress();
 
             //购买完成请求发币，由服务端验证和消费
-            sendRequest(purchaseData, false);
+            sendRequest(purchaseData);
         }
 
         @Override
@@ -492,9 +493,8 @@ public class OneStoreImpl implements IOneStorePay {
      * 发币请求
      *
      * @param data
-     * @param isCheck 是否补单请求
      */
-    private void sendRequest(final PurchaseData data, final boolean isCheck) {
+    private void sendRequest(final PurchaseData data) {
         OneStoreExchangeReqBean oneStoreExchangeReqBean = new OneStoreExchangeReqBean(mActivity);
 
         oneStoreExchangeReqBean.setOneStoreOrderId(data.getOrderId());
@@ -519,32 +519,65 @@ public class OneStoreImpl implements IOneStorePay {
                 PL.i(TAG, "exchange callback");
                 // 消费
                 if (response != null && response.isRequestSuccess()) {
-                    PL.i(TAG, "one pay success, isCheck : " + isCheck);
-                    if (!isCheck) {
-                        callbackSuccess(data);
-                    }
+//                    PL.i(TAG, "one pay success, isCheck : " + isCheck);
+                    callbackSuccess(data);
                 } else {
-                    if (!isCheck) {
-                        if (response != null && !TextUtils.isEmpty(response.getMessage())) {
-                            ToastUtils.toast(mActivity, response.getMessage());
-                        }
-                        callbackFail("error, please contact customer service");
+                    if (response != null && !TextUtils.isEmpty(response.getMessage())) {
+                        ToastUtils.toast(mActivity, response.getMessage());
                     }
+                    callbackFail("error, please contact customer service");
                 }
             }
 
             @Override
             public void timeout(String code) {
-                if (!isCheck) {
-                    callbackFail("connect timeout, please try again");
-                }
+                callbackFail("connect timeout, please try again");
             }
 
             @Override
             public void noData() {
-                if (!isCheck) {
-                    callbackFail("server error, please try again");
-                }
+                callbackFail("server error, please try again");
+            }
+        });
+        oneStoreExchangeReqTask.excute(OneStoreExchangeRes.class);
+    }
+
+    /**
+     * 补单请求
+     *
+     * @param data
+     */
+    private void replaceRequest(final PurchaseData data) {
+        OneStoreExchangeReqBean oneStoreExchangeReqBean = new OneStoreExchangeReqBean(mActivity);
+
+        oneStoreExchangeReqBean.setOneStoreOrderId(data.getOrderId());
+        oneStoreExchangeReqBean.setOneStorePackageName(data.getPackageName());
+        oneStoreExchangeReqBean.setOneStoreProductId(data.getProductId());
+        oneStoreExchangeReqBean.setOneStorePurchaseTime(data.getPurchaseTime());
+        oneStoreExchangeReqBean.setOneStorePeveloperPayload(data.getDeveloperPayload());
+        oneStoreExchangeReqBean.setOneStorePurchaseId(data.getPurchaseId());
+        oneStoreExchangeReqBean.setOneStorePurchaseState(data.getPurchaseState());
+        oneStoreExchangeReqBean.setOneStoreSignature(data.getSignature());
+        oneStoreExchangeReqBean.setOneStoreRecurringState(data.getRecurringState());
+        oneStoreExchangeReqBean.setOneStoreOriginPurchaseData(data.getPurchaseData());
+
+        oneStoreExchangeReqBean.setRequestUrl(ResConfig.getPayPreferredUrl(mActivity));
+        oneStoreExchangeReqBean.setRequestSpaUrl(ResConfig.getPaySpareUrl(mActivity));
+        oneStoreExchangeReqBean.setRequestMethod(OneStoreDomainSite.ONESTORE_SEND);
+
+        OneStoreExchangeReqTask oneStoreExchangeReqTask = new OneStoreExchangeReqTask(mActivity, oneStoreExchangeReqBean);
+        oneStoreExchangeReqTask.setReqCallBack(new ISReqCallBack<OneStoreExchangeRes>() {
+            @Override
+            public void success(OneStoreExchangeRes response, String rawResult) {
+                PL.i(TAG, "replace callback");
+            }
+
+            @Override
+            public void timeout(String code) {
+            }
+
+            @Override
+            public void noData() {
             }
         });
         oneStoreExchangeReqTask.excute(OneStoreExchangeRes.class);
@@ -573,6 +606,10 @@ public class OneStoreImpl implements IOneStorePay {
                 }
             });
             bld.create().show();
+        } else {
+            if (iPayCallBack != null) {
+                iPayCallBack.fail(bundle);
+            }
         }
 
     }
