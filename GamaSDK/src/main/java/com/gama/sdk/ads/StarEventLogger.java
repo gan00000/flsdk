@@ -24,11 +24,11 @@ import com.gama.pay.gp.util.Purchase;
 import com.gama.sdk.R;
 import com.gama.thirdlib.facebook.SFacebookProxy;
 import com.gama.thirdlib.google.SGoogleProxy;
+import com.gamamobi.onestore.api.PurchaseData;
 import com.gamamobi.onestore.pay.OneStoreActivity;
 import com.google.ads.conversiontracking.AdWordsConversionReporter;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -165,7 +165,7 @@ public class StarEventLogger {
             return;
         }
         Purchase purchase = (Purchase) bundle.getSerializable(GooglePayContant.PURCHASE_OBJECT);
-        Purchase purchaseOne = (Purchase) bundle.getSerializable(OneStoreActivity.ONESTORE_PURCHASE_DATA);
+        PurchaseData purchaseOne = (PurchaseData) bundle.getSerializable(OneStoreActivity.ONESTORE_PURCHASE_DATA);
 
         String orderId = "";
         String productId = "";
@@ -190,7 +190,7 @@ public class StarEventLogger {
             PL.i(TAG, "trackinPay Purchase One");
             orderId = purchaseOne.getOrderId();
             purchaseTime = purchaseOne.getPurchaseTime();
-            productId = purchaseOne.getSku();
+            productId = purchaseOne.getProductId();
             try {
                 Pattern p = Pattern.compile("\\d+(usd|USD)");
                 Matcher m = p.matcher(productId);
