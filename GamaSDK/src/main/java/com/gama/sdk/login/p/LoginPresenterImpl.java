@@ -674,8 +674,8 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     String gender = FbSp.getFbGender(activity);
                     String birthday = FbSp.getFbBirthday(activity);
                     String name = FbSp.getFbName(activity);
-                    String picUrl = FbSp.getFbPicUrl(activity);
                     String fbId = FbResUtil.findStringByName(activity,"facebook_app_id");
+                    String picUrl = ImageRequest.getProfilePictureUri(fbId, 300, 300).toString();
                     AccessToken accessToken = AccessToken.getCurrentAccessToken();
                     String token = "";
                     if(accessToken != null) {
@@ -711,33 +711,44 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             }
 
             @Override
-            public void onSuccess(FaceBookUser user) {
+            public void onSuccess(final FaceBookUser user) {
                 PL.d("fb uid:" + user.getUserFbId());
 
                 final String businessId = user.getUserFbId() + "_" + user.getFacebookAppId();
                 PL.d("fb businessId:" + businessId);
                 FbSp.saveAppsBusinessId(activity, businessId);
+                user.setBusinessId(businessId);
+                user.setPictureUri(ImageRequest.getProfilePictureUri(user.getUserFbId(), 300, 300));
+                faceBookUser = user;
+                if (fbLoginCallBack != null) {
+                    fbLoginCallBack.loginSuccess(user);
+                }
 
-                sFacebookProxy.getMyProfile(activity, new SFacebookProxy.FbLoginCallBack() {
-                    @Override
-                    public void onCancel() {
 
-                    }
-
-                    @Override
-                    public void onError(String message) {
-
-                    }
-
-                    @Override
-                    public void onSuccess(FaceBookUser user) {
-                        user.setBusinessId(businessId);
-                        faceBookUser = user;
-                        if (fbLoginCallBack != null){
-                            fbLoginCallBack.loginSuccess(user);
-                        }
-                    }
-                });
+//                sFacebookProxy.getMyProfile(activity, new SFacebookProxy.FbLoginCallBack() {
+//                    @Override
+//                    public void onCancel() {
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(String message) {
+//                        user.setBusinessId(businessId);
+//                        faceBookUser = user;
+//                        if (fbLoginCallBack != null){
+//                            fbLoginCallBack.loginSuccess(user);
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onSuccess(FaceBookUser user1) {
+//                        user1.setBusinessId(businessId);
+//                        faceBookUser = user1;
+//                        if (fbLoginCallBack != null){
+//                            fbLoginCallBack.loginSuccess(user1);
+//                        }
+//                    }
+//                });
 
                 // TODO: 2018/6/21 手动拼写businessId
 //                final String fbScopeId = user.getUserId();
