@@ -7,6 +7,7 @@ include ':GamaSDK', ':GamaSdkDemo', ':Thirdlibrary'
 
 
 include ':libraries-src:gama-core'
+include ':libraries-src:gama_onestore_plug'
 include ':libraries-src:gama-pay'
 //include ':libraries-src:star-ads'
 include ':libraries-src:GamaBaseLib'

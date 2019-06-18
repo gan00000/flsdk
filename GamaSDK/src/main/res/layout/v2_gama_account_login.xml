@@ -207,18 +207,6 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-
-                <TextView
-                    android:id="@+id/py_login_free_reg_login"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/px_10"
-                    android:text="@string/py_free_reg"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/sp_20"
-                    android:textStyle="bold"
-                    android:visibility="gone" />
-
                 <TextView
                     android:id="@+id/py_login_go_findpwd_v2"
                     android:layout_width="wrap_content"

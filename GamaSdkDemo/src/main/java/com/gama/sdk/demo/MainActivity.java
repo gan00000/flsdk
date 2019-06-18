@@ -1,7 +1,6 @@
 package com.gama.sdk.demo;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
@@ -15,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.core.base.callback.ISReqCallBack;
 import com.core.base.utils.GamaTimeUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.ToastUtils;
@@ -25,12 +25,16 @@ import com.gama.base.utils.GamaUtil;
 import com.gama.base.utils.SLog;
 import com.gama.data.login.ILoginCallBack;
 import com.gama.data.login.response.SLoginResponse;
-import com.gama.pay.gp.util.IabException;
+import com.gama.pay.gp.constants.GooglePayDomainSite;
 import com.gama.pay.gp.util.IabHelper;
 import com.gama.pay.gp.util.IabResult;
 import com.gama.pay.gp.util.Inventory;
+import com.gama.pay.gp.util.PayHelper;
 import com.gama.pay.gp.util.Purchase;
 import com.gama.pay.gp.util.SkuDetails;
+import com.gamamobi.onestore.pay.bean.req.OneStoreCreateOrderIdReqBean;
+import com.gamamobi.onestore.pay.bean.res.OneStoreCreateOrderIdRes;
+import com.gamamobi.onestore.pay.task.OneStoreCreateOrderReqTask;
 import com.gama.pay.utils.GamaQueryProductListener;
 import com.gama.sdk.ads.GamaAdsConstant;
 import com.gama.sdk.callback.IPayListener;
@@ -104,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
 //        iGama.setGameLanguage(this, SGameLanguage.zh_TW);
 
         //初始化sdk
-        iGama.initSDK(this, SGameLanguage.zh_TW);
+        iGama.initSDK(this, SGameLanguage.ko_KR);
 
         //在游戏Activity的onCreate生命周期中调用
         iGama.onCreate(this);
@@ -247,6 +251,26 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
+            }
+        });
+
+        findViewById(R.id.demo_pay_one).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iGama.pay(MainActivity.this, SPayType.ONESTORE, "" + System.currentTimeMillis(), getResources().getString(R.string.test_sku), "customize", new IPayListener() {
+                    @Override
+                    public void onPayFinish(Bundle bundle) {
+                        PL.i("OneStore Pay结束");
+                        int status = 0;
+                        if (bundle != null) {
+                            status = bundle.getInt("status");
+
+                            for (String next : bundle.keySet()) {
+                                PL.i(next + " : " + bundle.get(next));
+                            }
+                        }
+                    }
+                });
             }
         });
 
@@ -768,6 +792,64 @@ public class MainActivity extends AppCompatActivity {
                     SLog.logD("已经初始化iabHelper，开始查商品信息");
                     querySku();
                 }
+            }
+        });
+
+        findViewById(R.id.onecreate).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OneStoreCreateOrderIdReqBean createOrderIdReqBean = new OneStoreCreateOrderIdReqBean(MainActivity.this);
+                createOrderIdReqBean.setCpOrderId("123456789");
+                createOrderIdReqBean.setProductId("com.krezfy.test1");
+                createOrderIdReqBean.setRequestUrl(PayHelper.getPreferredUrl(MainActivity.this));
+                //设置储值备用域名
+                createOrderIdReqBean.setRequestSpaUrl(PayHelper.getSpareUrl(MainActivity.this));
+                //设置储值接口名
+                createOrderIdReqBean.setRequestMethod(GooglePayDomainSite.google_order_create);
+                OneStoreCreateOrderReqTask googleCreateOrderReqTask = new OneStoreCreateOrderReqTask(createOrderIdReqBean);
+                googleCreateOrderReqTask.setReqCallBack(new ISReqCallBack<OneStoreCreateOrderIdRes>() {
+
+                    @Override
+                    public void success(OneStoreCreateOrderIdRes createOrderIdRes, String rawResult) {
+                        Log.i("gama one", "create result = " + rawResult);
+                        if (createOrderIdRes != null && createOrderIdRes.isRequestSuccess() && !TextUtils.isEmpty(createOrderIdRes.getOrderId())) {
+
+                        } else {
+                            if (createOrderIdRes!=null && !TextUtils.isEmpty(createOrderIdRes.getMessage())){
+                                ToastUtils.toast(MainActivity.this,createOrderIdRes.getMessage());
+                            }
+//                            callbackFail("create orderId error, please try again");
+                        }
+                    }
+
+                    @Override
+                    public void timeout(String code) {
+
+//                ToastUtils.toast(activity, "connect timeout, please try again");
+//                        callbackFail("connect timeout, please try again");
+                    }
+
+                    @Override
+                    public void noData() {
+//                        callbackFail("server error, please try again");
+                    }
+                });
+                googleCreateOrderReqTask.excute(OneStoreCreateOrderIdRes.class);
+
+            }
+        });
+
+        findViewById(R.id.onesend).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        findViewById(R.id.plat).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iGama.gamaOpenCafeHome(MainActivity.this);
             }
         });
 

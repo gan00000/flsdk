@@ -91,4 +91,6 @@ public interface IGama extends IGameLifeCycle {
 
 
     void gamaQueryProductDetail(Activity activity, SPayType payType, List<String> skus, GamaQueryProductListener listener);
+
+    void gamaOpenCafeHome(Activity activity);
 }

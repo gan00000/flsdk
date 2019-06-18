@@ -20,3 +20,17 @@
 
 8.创单
     https://pay.gamamobi.com/dynamic_creation?roleName=%E8%A7%92%E8%89%B2%E5%90%8D&packageName=com.gamamobi.ezfy&versionCode=1&osLanguage=zh&userId=13&timestamp=1524900852661&gameCode=ezfy&serverName=S1&androidId=bfa2e46d0cd1158a&roleId=123&imei=&gameLanguage=zh-TW&payFrom=gamamobi&serverCode=1003&signature=632efa4f192ae1630e7d01c419f21d41&mac=02%3A00%3A00%3A00%3A00%3A00&deviceType=Huawei%40%40Nexus+6P&accessToken=a9d43f910da1cb9ebd78c6d968e390bc&versionName=1.0&extra=customize&payType=SDK&systemVersion=6.0.1&productId=com.dodi.payone&roleLevel=10&payValue=0&psid=61&cpOrderId=1524900852657
+
+
+9.已使用的startActivityForResult reqeust code
+    Google支付： GooglePayActivity2.GooglePayReqeustCode = 90
+    One支付： OneStoreActivity.ONESTOREPAYREQEUSTCODE = 93
+    Google登入： SGoogleSignIn.RC_SIGN_IN = 9001
+    Google分享： SGoogleSignIn.GOOGLE_SHARE_CODE = 9002
+    Line分享： GamaShare.SHARE_LINE = 60;
+    Whatsapp分享： GamaShare.SHARE_WHATSAPP = 61;
+    Twitter分享： GamaShare.SHARE_TWITTER = 62;
+
+10.已使用的activity result code
+    Google支付： GooglePayActivity2.GooglePayResultCode = 91
+    One支付： OneStoreActivity.ONESTOREPAYRESULTCODE = 92

@@ -86,7 +86,8 @@
     <!--未使用-->
     <string name="py_login_success">登入成功</string>
     <string name="py_pay_title">儲值</string>
-    <string name="py_login_autologin_fblogining_tips">Facebook帳號正在登錄</string>    <string name="py_account_login">帳號登入</string>
+    <string name="py_login_autologin_fblogining_tips">Facebook帳號正在登錄</string>
+    <string name="py_account_login">帳號登入</string>
     <string name="py_account">帳號:</string>
     <string name="py_password">密碼:</string>
     <string name="py_password_hit">密碼</string>

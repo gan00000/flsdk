@@ -47,6 +47,11 @@
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|fontScale"
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:theme="@style/Gama.Theme.AppCompat.Light.NoActionBar.FullScreen.Translucent"/>
+        <activity
+            android:name="com.gamamobi.onestore.pay.OneStoreActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|fontScale"
+            android:windowSoftInputMode="stateHidden|adjustResize"
+            android:theme="@style/Gama.Theme.AppCompat.Light.NoActionBar.FullScreen.Translucent"/>
 
 
 
@@ -177,6 +182,14 @@
                 android:resource="@xml/filepaths"/>
 
         </provider>
+
+        <!-- 18：9的宽屏 -->
+        <meta-data android:name="android.max_aspect" android:value="2.1" />
+
+        <!-- ONE store 支付版本 -->
+        <meta-data
+            android:name="iap:api_version"
+            android:value="5"/>
 
     </application>
 
