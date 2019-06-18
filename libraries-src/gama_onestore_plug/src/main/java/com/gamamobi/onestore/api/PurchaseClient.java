@@ -41,8 +41,8 @@ public class PurchaseClient {
 //        this.mBase64PublicKey = base64PublicKey;
     }
 
-    public static void launchUpdateOrInstallFlow(Activity activity) {
-        AppInstaller.updateOrInstall(activity);
+    public static void launchUpdateOrInstallFlow(Activity activity, UpdateFlowListener listener) {
+        AppInstaller.updateOrInstall(activity, listener);
     }
 
     public void connect(final PurchaseClient.ServiceConnectionListener listener) {
@@ -534,6 +534,10 @@ public class PurchaseClient {
 
     public interface PurchaseFlowListener extends PurchaseClient.ErrorListener {
         void onSuccess(PurchaseData var1);
+    }
+
+    public interface UpdateFlowListener {
+        void onSelect();
     }
 
     public interface ServiceConnectionListener {

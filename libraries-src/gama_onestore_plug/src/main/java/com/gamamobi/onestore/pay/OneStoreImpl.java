@@ -30,7 +30,6 @@ import com.gamamobi.onestore.pay.task.OneStoreCreateOrderReqTask;
 import com.gamamobi.onestore.pay.task.OneStoreExchangeReqTask;
 
 import java.util.List;
-import java.util.concurrent.LinkedBlockingDeque;
 
 /**
  * Created by gan on 2017/2/23.
@@ -217,12 +216,18 @@ public class OneStoreImpl implements IOneStorePay {
             Log.e(TAG, "connect onError, 我需要更新我的OneStore服务应用程序");
             hideProgress();
             updateOrInstallOneStoreService();
-            callbackFail(null);
+//            callbackFail(null);
         }
     };
 
     private void updateOrInstallOneStoreService() {
-        PurchaseClient.launchUpdateOrInstallFlow(mActivity);
+        PurchaseClient.launchUpdateOrInstallFlow(mActivity, new PurchaseClient.UpdateFlowListener() {
+            @Override
+            public void onSelect() {
+                PL.i(TAG, "更新完成");
+                callbackFail(null);
+            }
+        });
     }
 
     /**
@@ -272,7 +277,7 @@ public class OneStoreImpl implements IOneStorePay {
             Log.e(TAG, "isBillingSupportedAsync onErrorNeedUpdateException, 我需要更新我的OneStore服务应用程序");
             hideProgress();
             updateOrInstallOneStoreService();
-            callbackFail(null);
+//            callbackFail(null);
         }
     };
 
@@ -392,7 +397,7 @@ public class OneStoreImpl implements IOneStorePay {
 
             hideProgress();
             updateOrInstallOneStoreService();
-            callbackFail(null);
+//            callbackFail(null);
         }
 
     };
@@ -434,7 +439,7 @@ public class OneStoreImpl implements IOneStorePay {
             Log.e(TAG, "queryPurchasesAsync onError, 我需要更新我的OneStore服务应用程序");
             hideProgress();
             updateOrInstallOneStoreService();
-            callbackFail(null);
+//            callbackFail(null);
         }
 
         @Override
@@ -485,7 +490,7 @@ public class OneStoreImpl implements IOneStorePay {
             Log.e(TAG, "launchPurchaseFlowAsync onError, 我需要更新我的OneStore服务应用程序");
             hideProgress();
             updateOrInstallOneStoreService();
-            callbackFail(null);
+//            callbackFail(null);
         }
     };
 

@@ -283,7 +283,7 @@ android {
         }
 
         krezfy {
-            applicationId "com.gamamobi.krezfy.one"
+            applicationId "com.gamamobi.krezfy"
             minSdkVersion 18
             targetSdkVersion 28
             versionCode 1
@@ -300,10 +300,80 @@ android {
             resValue "string", "clientSecret", "xVuRpMfmrd"
             resValue "string", "clientId", "w_RDicK0dqZ3f_iyrdqv"
 
+            buildConfigField "String[]", "PRODUCE_LIST",
+                    "{" +
+                            "\"com.krezfy.1usd\"," +
+                            "\"com.krezfy.2usd\"," +
+                            "\"com.krezfy.3usd\"," +
+                            "\"com.krezfy.4usd\"," +
+                            "\"com.krezfy.5usd\"," +
+                            "\"com.krezfy.8usd\"," +
+                            "\"com.krezfy.10usd\"," +
+                            "\"com.krezfy.15usd\"," +
+                            "\"com.krezfy20usd\"," +
+                            "\"com.krezfy.30usd\"," +
+                            "\"com.krezfy.40usd\"," +
+                            "\"com.krezfy.50usd\"," +
+                            "\"com.krezfy.60usd\"," +
+                            "\"com.krezfy.70usd\"," +
+                            "\"com.krezfy.80usd\"," +
+                            "\"com.krezfy.90usd\"," +
+                            "\"com.krezfy.100usd\"," +
+                            "\"com.krezfy.2usd.30day\"" +
+                            "}"
+
             resValue "string", "ko_gama_login_pre_url", "https://t-login.gamamobi.com/"
             resValue "string", "ko_gama_login_spa_url", "https://t-login.gamamobi.com/"
             resValue "string", "ko_gama_pay_pre_url", "https://t-pay.gamamobi.com/"
             resValue "string", "ko_gama_pay_spa_url", "https://t-pay.gamamobi.com/"
+
+            signingConfig signingConfigs.release
+        }
+
+        krezfyone {
+            applicationId "com.gamamobi.krezfy.one"
+            minSdkVersion 18
+            targetSdkVersion 28
+            versionCode 1
+            versionName "1.0"
+            flavorDimensions "1"
+            resValue "string", "facebook_app_id", "2298531553511644"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider2298531553511644"
+            resValue "string", "fb_login_protocol_scheme", "fb2298531553511644"
+            resValue "string", "facebook_app_name", "kr硬汉"
+            //每个游戏的demo设置
+            resValue "string", "test_sku", "com.krezfy.1usd"
+            resValue "string", "sdk_name", "kr硬汉Demo"
+            resValue "string", "cafeId", "29776183"
+            resValue "string", "clientSecret", "xVuRpMfmrd"
+            resValue "string", "clientId", "w_RDicK0dqZ3f_iyrdqv"
+
+            buildConfigField "String[]", "PRODUCE_LIST",
+                    "{" +
+                            "\"com.krezfy.1usd\"," +
+                            "\"com.krezfy.2usd\"," +
+                            "\"com.krezfy.3usd\"," +
+                            "\"com.krezfy.4usd\"," +
+                            "\"com.krezfy.5usd\"," +
+                            "\"com.krezfy.8usd\"," +
+                            "\"com.krezfy.10usd\"," +
+                            "\"com.krezfy.15usd\"," +
+                            "\"com.krezfy20usd\"," +
+                            "\"com.krezfy.30usd\"," +
+                            "\"com.krezfy.40usd\"," +
+                            "\"com.krezfy.50usd\"," +
+                            "\"com.krezfy.60usd\"," +
+                            "\"com.krezfy.70usd\"," +
+                            "\"com.krezfy.80usd\"," +
+                            "\"com.krezfy.90usd\"," +
+                            "\"com.krezfy.100usd\"," +
+                            "\"com.krezfy.2usd.30day\"" +
+                            "}"
+
+//            resValue "string", "ko_gama_login_pre_url", "https://t-login.gamamobi.com/"
+//            resValue "string", "ko_gama_login_spa_url", "https://t-login.gamamobi.com/"
+//            resValue "string", "ko_gama_pay_pre_url", "https://t-pay.gamamobi.com/"
+//            resValue "string", "ko_gama_pay_spa_url", "https://t-pay.gamamobi.com/"
 
             signingConfig signingConfigs.release
         }

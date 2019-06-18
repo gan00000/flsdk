@@ -144,15 +144,15 @@ public class AppInstaller {
         return marketMap;
     }
 
-    public static void updateOrInstall(Activity activity) {
+    public static void updateOrInstall(Activity activity, PurchaseClient.UpdateFlowListener listener) {
         AppInstaller.STATE state = getOneStoreServiceState(activity);
         if (state != AppInstaller.STATE.INSTALLED) {
-            showDialog(activity, state);
+            showDialog(activity, state, listener);
         }
 
     }
 
-    private static void showDialog(final Activity activity, AppInstaller.STATE state) {
+    private static void showDialog(final Activity activity, AppInstaller.STATE state, final PurchaseClient.UpdateFlowListener listener) {
         String msg = "";
         String okStr = "";
         if (state == AppInstaller.STATE.NEED_UPDATE) {
@@ -172,12 +172,18 @@ public class AppInstaller {
                 } else {
                     AppInstaller.requestMobileWebInstall(activity);
                 }
+                if(listener != null) {
+                    listener.onSelect();
+                }
 
             }
         });
         alertDialog.setNegativeButton("취소", new OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 Log.d(AppInstaller.TAG, "설치/업데이트를 취소하였습니다.");
+                if(listener != null) {
+                    listener.onSelect();
+                }
             }
         });
         alertDialog.setCancelable(false);
