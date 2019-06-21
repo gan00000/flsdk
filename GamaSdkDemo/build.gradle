@@ -393,6 +393,12 @@ android {
             resValue "string", "test_sku", "com.twsm.1usd"
             resValue "string", "sdk_name", "神魔大陸2Demo"
             signingConfig signingConfigs.release
+
+            buildConfigField "String[]", "PRODUCE_LIST",
+                    "{" +
+                            "\"com.twsm.1usd\"," +
+                            "\"com.twsm.100usd\"," +
+                            "}"
         }
 
     }

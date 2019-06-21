@@ -67,7 +67,7 @@ public class OneStoreImpl implements IOneStorePay {
     }
 
     private void launchPurchaseFlowAsync(OneStoreCreateOrderIdReqBean bean, OneStoreCreateOrderIdRes response) {
-        showProgress(mActivity);
+//        showProgress(mActivity);
         client.launchPurchaseFlowAsync(IAP_API_VERSION, mActivity, PURCHASE_REQUEST_CODE, bean.getProductId(), "",
                 IapEnum.ProductType.IN_APP.getType(), response.getDeveloperPayload(), "", false, mPurchaseFlowListener);
     }
@@ -200,21 +200,21 @@ public class OneStoreImpl implements IOneStorePay {
         @Override
         public void onConnected() {
             Log.d(TAG, "Service connected");
-            hideProgress();
+            //hideProgress();
             checkIsBillingSupport();
         }
 
         @Override
         public void onDisconnected() {
             Log.d(TAG, "Service disconnected");
-            hideProgress();
+            //hideProgress();
             callbackFail(null);
         }
 
         @Override
         public void onErrorNeedUpdateException() {
             Log.e(TAG, "connect onError, 我需要更新我的OneStore服务应用程序");
-            hideProgress();
+            //hideProgress();
             updateOrInstallOneStoreService();
 //            callbackFail(null);
         }
@@ -238,7 +238,7 @@ public class OneStoreImpl implements IOneStorePay {
         @Override
         public void onSuccess() {
             Log.d(TAG, "isBillingSupportedAsync onSuccess");
-            hideProgress();
+            //hideProgress();
 
             queryPurchases();
         }
@@ -246,7 +246,7 @@ public class OneStoreImpl implements IOneStorePay {
         @Override
         public void onError(IapResult result) {
             Log.e(TAG, "isBillingSupportedAsync onError, " + result.toString());
-            hideProgress();
+            //hideProgress();
 
             // RESULT_NEED_LOGIN 에러시에 개발사의 애플리키에션 life cycle에 맞춰 명시적으로 원스토어 로그인을 호출합니다.
             if (IapResult.RESULT_NEED_LOGIN == result) {
@@ -259,7 +259,7 @@ public class OneStoreImpl implements IOneStorePay {
         @Override
         public void onErrorRemoteException() {
             Log.e(TAG, "isBillingSupportedAsync onErrorRemoteException, 无法连接一个商店服务");
-            hideProgress();
+            //hideProgress();
 //            alert("无法连接一个商店服务");
             callbackFail(null);
         }
@@ -267,7 +267,7 @@ public class OneStoreImpl implements IOneStorePay {
         @Override
         public void onErrorSecurityException() {
             Log.e(TAG, "isBillingSupportedAsync onErrorSecurityException, 异常应用请求付款");
-            hideProgress();
+            //hideProgress();
 //            alert("异常应用请求付款");
             callbackFail(null);
         }
@@ -275,7 +275,7 @@ public class OneStoreImpl implements IOneStorePay {
         @Override
         public void onErrorNeedUpdateException() {
             Log.e(TAG, "isBillingSupportedAsync onErrorNeedUpdateException, 我需要更新我的OneStore服务应用程序");
-            hideProgress();
+            //hideProgress();
             updateOrInstallOneStoreService();
 //            callbackFail(null);
         }
@@ -313,18 +313,28 @@ public class OneStoreImpl implements IOneStorePay {
     }
 
     private void showProgress(final Activity activity) {
-        activity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (progressDialog != null && progressDialog.isShowing()) {
-                    return;
-                } else {
-                    progressDialog = new ProgressDialog(activity);
-                    progressDialog.setMessage("Server connection...");
-                    progressDialog.show();
+        if(activity == null || activity.isFinishing()) {
+            PL.i(TAG, "onestore activity alread finish");
+            return;
+        }
+        try {
+            activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (progressDialog != null && progressDialog.isShowing()) {
+                        return;
+                    } else {
+                        progressDialog = new ProgressDialog(activity);
+                        progressDialog.setCancelable(false);
+                        progressDialog.setCanceledOnTouchOutside(false);
+                        progressDialog.setMessage("Please Wait...");
+                        progressDialog.show();
+                    }
                 }
-            }
-        });
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void hideProgress() {
@@ -360,7 +370,7 @@ public class OneStoreImpl implements IOneStorePay {
         @Override
         public void onSuccess() {
             Log.d(TAG, "launchLoginFlowAsync onSuccess");
-            hideProgress();
+            //hideProgress();
             // 登入成功后继续下一步支付流程--查丢单
             queryPurchases();
         }
@@ -368,7 +378,7 @@ public class OneStoreImpl implements IOneStorePay {
         @Override
         public void onError(IapResult result) {
             Log.e(TAG, "launchLoginFlowAsync onError, " + result.toString());
-            hideProgress();
+            //hideProgress();
 //            alert(result.getDescription());
             callbackFail(null);
         }
@@ -377,7 +387,7 @@ public class OneStoreImpl implements IOneStorePay {
         public void onErrorRemoteException() {
             Log.e(TAG, "launchLoginFlowAsync onError, 无法连接一个商店服务");
 
-            hideProgress();
+            //hideProgress();
 //            alert("无法连接一个商店服务");
             callbackFail(null);
         }
@@ -386,7 +396,7 @@ public class OneStoreImpl implements IOneStorePay {
         public void onErrorSecurityException() {
             Log.e(TAG, "launchLoginFlowAsync onError, 异常应用请求付款");
 
-            hideProgress();
+            //hideProgress();
 //            alert("异常应用请求付款");
             callbackFail(null);
         }
@@ -395,7 +405,7 @@ public class OneStoreImpl implements IOneStorePay {
         public void onErrorNeedUpdateException() {
             Log.e(TAG, "launchLoginFlowAsync onError, 我需要更新我的OneStore服务应用程序");
 
-            hideProgress();
+            //hideProgress();
             updateOrInstallOneStoreService();
 //            callbackFail(null);
         }
@@ -409,7 +419,7 @@ public class OneStoreImpl implements IOneStorePay {
         @Override
         public void onSuccess(List<PurchaseData> purchaseDataList, String productType) {
             Log.d(TAG, "queryPurchasesAsync onSuccess, " + purchaseDataList.toString());
-            hideProgress();
+            //hideProgress();
             if (purchaseDataList != null && purchaseDataList.size() > 0) {
                 for (PurchaseData data : purchaseDataList) {
                     replaceRequest(data);
@@ -421,7 +431,7 @@ public class OneStoreImpl implements IOneStorePay {
         @Override
         public void onErrorRemoteException() {
             Log.e(TAG, "queryPurchasesAsync onError, 无法连接一个商店服务");
-            hideProgress();
+            //hideProgress();
 //            alert("无法连接一个商店服务");
             callbackFail(null);
         }
@@ -429,7 +439,7 @@ public class OneStoreImpl implements IOneStorePay {
         @Override
         public void onErrorSecurityException() {
             Log.e(TAG, "queryPurchasesAsync onError, 异常应用请求付款");
-            hideProgress();
+            //hideProgress();
 //            alert("异常应用请求付款");
             callbackFail(null);
         }
@@ -437,7 +447,7 @@ public class OneStoreImpl implements IOneStorePay {
         @Override
         public void onErrorNeedUpdateException() {
             Log.e(TAG, "queryPurchasesAsync onError, 我需要更新我的OneStore服务应用程序");
-            hideProgress();
+            //hideProgress();
             updateOrInstallOneStoreService();
 //            callbackFail(null);
         }
@@ -445,7 +455,7 @@ public class OneStoreImpl implements IOneStorePay {
         @Override
         public void onError(IapResult result) {
             Log.e(TAG, "queryPurchasesAsync onError, " + result.toString());
-            hideProgress();
+            //hideProgress();
 //            alert(result.getDescription());
             callbackFail(null);
         }
@@ -455,7 +465,7 @@ public class OneStoreImpl implements IOneStorePay {
         @Override
         public void onSuccess(PurchaseData purchaseData) {
             Log.d(TAG, "launchPurchaseFlowAsync onSuccess, " + purchaseData.toString());
-            hideProgress();
+            //hideProgress();
 
             //购买完成请求发币，由服务端验证和消费
             sendRequest(purchaseData);
@@ -464,7 +474,7 @@ public class OneStoreImpl implements IOneStorePay {
         @Override
         public void onError(IapResult result) {
             Log.e(TAG, "launchPurchaseFlowAsync onError, " + result.toString());
-            hideProgress();
+            //hideProgress();
 //            alert(result.getDescription());
             callbackFail(null);
         }
@@ -472,7 +482,7 @@ public class OneStoreImpl implements IOneStorePay {
         @Override
         public void onErrorRemoteException() {
             Log.e(TAG, "launchPurchaseFlowAsync onError, 无法连接一个商店服务");
-            hideProgress();
+            //hideProgress();
 //            alert("无法连接一个商店服务");
             callbackFail(null);
         }
@@ -480,7 +490,7 @@ public class OneStoreImpl implements IOneStorePay {
         @Override
         public void onErrorSecurityException() {
             Log.e(TAG, "launchPurchaseFlowAsync onError, 异常应用请求付款");
-            hideProgress();
+            //hideProgress();
 //            alert("异常应用请求付款");
             callbackFail(null);
         }
@@ -488,7 +498,7 @@ public class OneStoreImpl implements IOneStorePay {
         @Override
         public void onErrorNeedUpdateException() {
             Log.e(TAG, "launchPurchaseFlowAsync onError, 我需要更新我的OneStore服务应用程序");
-            hideProgress();
+            //hideProgress();
             updateOrInstallOneStoreService();
 //            callbackFail(null);
         }
@@ -589,6 +599,7 @@ public class OneStoreImpl implements IOneStorePay {
     }
 
     private void callbackSuccess(PurchaseData data) {
+        hideProgress();
         Bundle bundle = new Bundle();
         bundle.putSerializable(OneStoreActivity.ONESTORE_PURCHASE_DATA, data);
         if (iPayCallBack != null) {
@@ -597,6 +608,7 @@ public class OneStoreImpl implements IOneStorePay {
     }
 
     private void callbackFail(String msg) {
+        hideProgress();
         final Bundle bundle = new Bundle();
         if (!TextUtils.isEmpty(msg)) {
             AlertDialog.Builder bld = new AlertDialog.Builder(mActivity);
