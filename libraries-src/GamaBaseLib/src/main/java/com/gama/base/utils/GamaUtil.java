@@ -76,10 +76,20 @@ public class GamaUtil {
         return null;
     }
 
+    /**
+     * 保存gama登入的账号
+     * @param context
+     * @param account
+     */
     public static void saveAccount(Context context,String account){
         SPUtil.saveSimpleInfo(context,GAMA_SP_FILE, GAMA_LOGIN_USERNAME, account);
     }
 
+    /**
+     * 获取gama登入的账号
+     * @param context
+     * @return
+     */
     public static String getAccount(Context context){
         return SPUtil.getSimpleString(context,GAMA_SP_FILE, GAMA_LOGIN_USERNAME);
     }
@@ -106,10 +116,20 @@ public class GamaUtil {
         return decryptPassword(SPUtil.getSimpleString(context,GAMA_SP_FILE, GAMA_MAC_LOGIN_PASSWORD));
     }
 
+    /**
+     * 保存登入方式
+     * @param context
+     * @param loginType
+     */
     public static void savePreviousLoginType(Context context,String loginType){
         SPUtil.saveSimpleInfo(context,GAMA_SP_FILE, GAMA_PREVIOUS_LOGIN_TYPE, loginType);
     }
 
+    /**
+     * 获取登入方式
+     * @param context
+     * @return
+     */
     public static String getPreviousLoginType(Context context){
         return SPUtil.getSimpleString(context,GAMA_SP_FILE, GAMA_PREVIOUS_LOGIN_TYPE);
     }
@@ -194,6 +214,11 @@ public class GamaUtil {
         return JsonUtil.getValueByKey(context,getSdkLoginData(context), "timestamp", "");
     }
 
+    /**
+     * 获取登入的token
+     * @param context
+     * @return
+     */
     public static String getSdkAccessToken(Context context){
         return JsonUtil.getValueByKey(context,getSdkLoginData(context), "accessToken", "");
     }

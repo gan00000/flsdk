@@ -109,7 +109,7 @@ public class GamaFirebaseMessagingService extends FirebaseMessagingService {
         if (Build.VERSION.SDK_INT >= 26) {
 
             // The id of the channel.
-            String id = "baplay_notify_channel";
+            String id = "gama_notify_channel";
             // The user-visible name of the channel.
 //            String name = context.getApplicationInfo().name;
             String name = "new message";

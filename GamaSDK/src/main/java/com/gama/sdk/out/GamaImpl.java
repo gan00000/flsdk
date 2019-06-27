@@ -13,6 +13,7 @@ import com.core.base.utils.AppUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.SignatureUtil;
+import com.core.base.utils.ToastUtils;
 import com.gama.base.bean.SGameBaseRequestBean;
 import com.gama.base.bean.SGameLanguage;
 import com.gama.base.bean.SLoginType;
@@ -29,6 +30,8 @@ import com.gama.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
 import com.gama.pay.gp.bean.req.WebPayReqBean;
 import com.gama.pay.gp.util.PayHelper;
 import com.gama.pay.utils.GamaQueryProductListener;
+import com.gama.plat.bean.PlatformData;
+import com.gama.plat.entrance.PlatformManager;
 import com.gama.sdk.BuildConfig;
 import com.gama.sdk.R;
 import com.gama.sdk.SWebViewDialog;
@@ -402,6 +405,8 @@ public class GamaImpl implements IGama {
                 }
                 GooglePayHelper.getInstance().setForeground(true);
                 GamaWebPageHelper.onResume(activity);
+                //平台
+                PlatformManager.getInstance().resume(activity);
             }
         });
     }
@@ -463,6 +468,9 @@ public class GamaImpl implements IGama {
                 }
 
                 GamaShare.onActivityResult(activity, requestCode, resultCode, data);
+
+                //平台
+                PlatformManager.getInstance().onActivityResult(activity, requestCode, resultCode, data);
             }
         });
     }
@@ -476,6 +484,8 @@ public class GamaImpl implements IGama {
                 if (iLogin != null) {
                     iLogin.onPause(activity);
                 }
+                //平台
+                PlatformManager.getInstance().pauseAndStop(activity);
             }
         });
     }
@@ -493,6 +503,8 @@ public class GamaImpl implements IGama {
                 if (Localization.getSGameLanguage(activity) == SGameLanguage.ko_KR) {
                     GamaCafeHelper.stopCafe(activity);
                 }
+                //平台
+                PlatformManager.getInstance().pauseAndStop(activity);
             }
         });
     }
@@ -513,6 +525,8 @@ public class GamaImpl implements IGama {
                 LogTimer.getInstance().cancel();
                 //退出游戏时停止定时查单
                 GooglePayHelper.getInstance().stopQueryTask();
+                //平台
+                PlatformManager.getInstance().destory(activity);
             }
         });
     }
@@ -563,17 +577,32 @@ public class GamaImpl implements IGama {
 
     @Override
     public void openPlatform(final Activity activity) {
-//        activity.runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//                PL.i("IGama openPlatform");
-//                if (GamaUtil.isLogin(activity)){
-//                    activity.startActivity(new Intent(activity, PlatMainActivity.class));
-//                }else {
-//                    ToastUtils.toast(activity,"please login game first");
-//                }
-//            }
-//        });
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                PL.i("IGama openPlatform");
+                if (GamaUtil.isLogin(activity)){
+                    PlatformData platformData = new PlatformData();
+                    platformData.setAppKey(ResConfig.getAppKey(activity));
+                    platformData.setGameCode(ResConfig.getGameCode(activity));
+                    platformData.setLanguage(SGameLanguage.zh_TW.getLanguage()); //设置语言
+                    platformData.setLoginTimestamp(GamaUtil.getSdkTimestamp(activity)); //登录完成timestamp
+                    platformData.setLoginToken(GamaUtil.getSdkAccessToken(activity));//登录完成accessToken
+                    platformData.setRoleId(GamaUtil.getRoleId(activity));
+                    platformData.setRoleLevel(GamaUtil.getRoleLevel(activity));
+                    platformData.setRoleName(GamaUtil.getRoleName(activity));
+                    platformData.setUserId(GamaUtil.getUid(activity));
+                    platformData.setUname(GamaUtil.getAccount(activity));//账号名,第三方没有传空值
+                    platformData.setServerCode(GamaUtil.getServerCode(activity));
+                    platformData.setServerName(GamaUtil.getServerName(activity));
+                    platformData.setLoginType(GamaUtil.getPreviousLoginType(activity)); //登录方式，fb登录 “fb”,Google登录 "google", 免注册登录 "mac"
+
+                    PlatformManager.getInstance().startPlatform(activity, platformData);
+                }else {
+                    ToastUtils.toast(activity,"please login game first");
+                }
+            }
+        });
 
     }
 

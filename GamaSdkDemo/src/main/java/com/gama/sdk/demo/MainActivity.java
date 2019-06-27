@@ -22,6 +22,7 @@ import com.crashlytics.android.Crashlytics;
 import com.gama.base.bean.SGameLanguage;
 import com.gama.base.bean.SPayType;
 import com.gama.base.utils.GamaUtil;
+import com.gama.base.utils.Localization;
 import com.gama.base.utils.SLog;
 import com.gama.data.login.ILoginCallBack;
 import com.gama.data.login.response.SLoginResponse;
@@ -108,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
 //        iGama.setGameLanguage(this, SGameLanguage.zh_TW);
 
         //初始化sdk
-        iGama.initSDK(this, SGameLanguage.ko_KR);
+        iGama.initSDK(this, SGameLanguage.zh_TW);
 
         //在游戏Activity的onCreate生命周期中调用
         iGama.onCreate(this);
@@ -849,7 +850,11 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.plat).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                iGama.gamaOpenCafeHome(MainActivity.this);
+                if(SGameLanguage.ko_KR == Localization.getSGameLanguage(MainActivity.this)) {
+                    iGama.gamaOpenCafeHome(MainActivity.this);
+                } else if(SGameLanguage.zh_TW == Localization.getSGameLanguage(MainActivity.this)) {
+                    iGama.openPlatform(MainActivity.this);
+                }
             }
         });
 

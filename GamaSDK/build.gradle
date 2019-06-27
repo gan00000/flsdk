@@ -49,6 +49,7 @@ def getAarVersion() {
 }
 
 dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.aar'])
     api fileTree(include: ['*.jar'], dir: 'libs')
 //    api files('libs/takephoto_library_3.0.1.jar')
 //    api files('libs/nineoldandroids-library-2.4.0.jar')
