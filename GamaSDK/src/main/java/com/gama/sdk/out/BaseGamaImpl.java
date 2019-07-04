@@ -1,7 +1,6 @@
 package com.gama.sdk.out;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -13,7 +12,6 @@ import com.core.base.utils.AppUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.SignatureUtil;
-import com.core.base.utils.ToastUtils;
 import com.gama.base.bean.SGameBaseRequestBean;
 import com.gama.base.bean.SGameLanguage;
 import com.gama.base.bean.SLoginType;
@@ -22,16 +20,8 @@ import com.gama.base.cfg.ConfigRequest;
 import com.gama.base.cfg.ResConfig;
 import com.gama.base.utils.GamaUtil;
 import com.gama.base.utils.Localization;
-import com.gama.base.utils.SLog;
 import com.gama.data.login.ILoginCallBack;
-import com.gama.pay.gp.GooglePayActivity2;
-import com.gama.pay.gp.GooglePayHelper;
-import com.gama.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
-import com.gama.pay.gp.bean.req.WebPayReqBean;
-import com.gama.pay.gp.util.PayHelper;
 import com.gama.pay.utils.GamaQueryProductListener;
-import com.gama.plat.bean.PlatformData;
-import com.gama.plat.entrance.PlatformManager;
 import com.gama.sdk.BuildConfig;
 import com.gama.sdk.R;
 import com.gama.sdk.SWebViewDialog;
@@ -54,9 +44,6 @@ import com.gama.thirdlib.facebook.FaceBookUser;
 import com.gama.thirdlib.facebook.FriendProfile;
 import com.gama.thirdlib.facebook.SFacebookProxy;
 import com.gama.thirdlib.google.SGooglePlayGameServices;
-import com.gamamobi.cafe.GamaCafeHelper;
-import com.gamamobi.onestore.pay.OneStoreActivity;
-import com.gamamobi.onestore.pay.bean.req.OneStoreCreateOrderIdReqBean;
 
 import org.json.JSONObject;
 
@@ -68,8 +55,8 @@ import java.util.Map;
 import java.util.Set;
 
 
-public class GamaImpl implements IGama {
-    private static final String TAG = GamaImpl.class.getSimpleName();
+public class BaseGamaImpl implements IGama {
+    private static final String TAG = BaseGamaImpl.class.getSimpleName();
     private static final int PERMISSION_REQUEST_CODE = 401;
     private ILogin iLogin;
 
@@ -81,11 +68,11 @@ public class GamaImpl implements IGama {
     private SGooglePlayGameServices sGooglePlayGameServices;
     private GamaShare gamaShare;
 
-    private SWebViewDialog otherPayWebViewDialog;
+    protected SWebViewDialog otherPayWebViewDialog;
 
-    private IPayListener iPayListener;
+    protected IPayListener iPayListener;
 
-    public GamaImpl() {
+    public BaseGamaImpl() {
         iLogin = ObjFactory.create(DialogLoginImpl.class);
     }
 
@@ -129,10 +116,6 @@ public class GamaImpl implements IGama {
 //                SFacebookProxy.initFbSdk(activity.getApplicationContext());
                 sFacebookProxy = new SFacebookProxy(activity.getApplicationContext());
                 isInitSdk = true;
-                //进行启动的查单
-                SLog.logD(TAG, "Start launch query.");
-                GooglePayHelper.getInstance().queryConsumablePurchase(activity);
-
             }
         });
     }
@@ -288,79 +271,71 @@ public class GamaImpl implements IGama {
         });
     }
 
-    private void startPay(Activity activity, SPayType payType, String cpOrderId, String productId, String extra) {
-        if (payType == SPayType.OTHERS) {//第三方储值
+    protected void startPay(Activity activity, SPayType payType, String cpOrderId, String productId, String extra) {}
 
-            othersPay(activity, cpOrderId, extra);
+//    private void startPay(Activity activity, SPayType payType, String cpOrderId, String productId, String extra) {
+//        if (payType == SPayType.OTHERS) {//第三方储值
+//
+//            othersPay(activity, cpOrderId, extra);
+//
+//        } else if (payType == SPayType.ONESTORE) {
+//            oneStorePay(activity, cpOrderId, productId, extra);
+//        } else {//默认Google储值
+//
+//            if (GamaUtil.getSdkCfg(activity) != null && GamaUtil.getSdkCfg(activity).openOthersPay(activity)) {//假若Google包侵权被下架，此配置可以启动三方储值
+//                PL.i("转第三方储值");
+//                othersPay(activity, cpOrderId, extra);
+//
+//            } else {
+//
+//                googlePay(activity, cpOrderId, productId, extra);
+//            }
+//
+//        }
+//    }
 
-        } else if (payType == SPayType.ONESTORE) {
-            oneStorePay(activity, cpOrderId, productId, extra);
-        } else {//默认Google储值
+//    private void googlePay(Activity activity, String cpOrderId, String productId, String extra) {
+//        GooglePayCreateOrderIdReqBean googlePayCreateOrderIdReqBean = new GooglePayCreateOrderIdReqBean(activity);
+//        googlePayCreateOrderIdReqBean.setCpOrderId(cpOrderId);
+//        googlePayCreateOrderIdReqBean.setProductId(productId);
+//        googlePayCreateOrderIdReqBean.setExtra(extra);
+//
+//        Intent i = new Intent(activity, GooglePayActivity2.class);
+//        i.putExtra(GooglePayActivity2.GooglePayReqBean_Extra_Key, googlePayCreateOrderIdReqBean);
+//        activity.startActivityForResult(i, GooglePayActivity2.GooglePayReqeustCode);
+//    }
 
-            if (GamaUtil.getSdkCfg(activity) != null && GamaUtil.getSdkCfg(activity).openOthersPay(activity)) {//假若Google包侵权被下架，此配置可以启动三方储值
-                PL.i("转第三方储值");
-                othersPay(activity, cpOrderId, extra);
 
-            } else {
-
-                googlePay(activity, cpOrderId, productId, extra);
-            }
-
-        }
-    }
-
-    private void googlePay(Activity activity, String cpOrderId, String productId, String extra) {
-        GooglePayCreateOrderIdReqBean googlePayCreateOrderIdReqBean = new GooglePayCreateOrderIdReqBean(activity);
-        googlePayCreateOrderIdReqBean.setCpOrderId(cpOrderId);
-        googlePayCreateOrderIdReqBean.setProductId(productId);
-        googlePayCreateOrderIdReqBean.setExtra(extra);
-
-        Intent i = new Intent(activity, GooglePayActivity2.class);
-        i.putExtra(GooglePayActivity2.GooglePayReqBean_Extra_Key, googlePayCreateOrderIdReqBean);
-        activity.startActivityForResult(i, GooglePayActivity2.GooglePayReqeustCode);
-    }
-
-    private void oneStorePay(Activity activity, String cpOrderId, String productId, String extra) {
-        OneStoreCreateOrderIdReqBean oneStoreCreateOrderIdReqBean = new OneStoreCreateOrderIdReqBean(activity);
-        oneStoreCreateOrderIdReqBean.setCpOrderId(cpOrderId);
-        oneStoreCreateOrderIdReqBean.setProductId(productId);
-        oneStoreCreateOrderIdReqBean.setExtra(extra);
-
-        Intent i = new Intent(activity, OneStoreActivity.class);
-        i.putExtra(OneStoreActivity.OneStorePayReqBean_Extra_Key, oneStoreCreateOrderIdReqBean);
-        activity.startActivityForResult(i, OneStoreActivity.ONESTOREPAYREQEUSTCODE);
-    }
-
-    private void othersPay(Activity activity, String cpOrderId, String extra) {
-        WebPayReqBean webPayReqBean = PayHelper.buildWebPayBean(activity, cpOrderId, extra);
-
-        String payThirdUrl = null;
-        if (GamaUtil.getSdkCfg(activity) != null) {
-
-            payThirdUrl = GamaUtil.getSdkCfg(activity).getS_Third_PayUrl();
-        }
-        if (TextUtils.isEmpty(payThirdUrl)) {
-            payThirdUrl = ResConfig.getPayPreferredUrl(activity) + ResConfig.getPayThirdMethod(activity);
-        }
-        webPayReqBean.setCompleteUrl(payThirdUrl);
-
-        String webUrl = webPayReqBean.createPreRequestUrl();
-
-        otherPayWebViewDialog = new SWebViewDialog(activity, R.style.Gama_Theme_AppCompat_Dialog_Notitle_Fullscreen);
-        otherPayWebViewDialog.setWebUrl(webUrl);
-        otherPayWebViewDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                if (iPayListener != null) {
-                    PL.i(TAG, "OtherPay支付回调");
-                    iPayListener.onPayFinish(new Bundle());
-                } else {
-                    PL.i(TAG, "OtherPay支付回调为空");
-                }
-            }
-        });
-        otherPayWebViewDialog.show();
-    }
+//    private void othersPay(Activity activity, String cpOrderId, String extra) {
+//        WebPayReqBean webPayReqBean = PayHelper.buildWebPayBean(activity, cpOrderId, extra);
+//
+//        String payThirdUrl = null;
+//        if (GamaUtil.getSdkCfg(activity) != null) {
+//
+//            payThirdUrl = GamaUtil.getSdkCfg(activity).getS_Third_PayUrl();
+//        }
+//        if (TextUtils.isEmpty(payThirdUrl)) {
+//            payThirdUrl = ResConfig.getPayPreferredUrl(activity) + ResConfig.getPayThirdMethod(activity);
+//        }
+//        webPayReqBean.setCompleteUrl(payThirdUrl);
+//
+//        String webUrl = webPayReqBean.createPreRequestUrl();
+//
+//        otherPayWebViewDialog = new SWebViewDialog(activity, R.style.Gama_Theme_AppCompat_Dialog_Notitle_Fullscreen);
+//        otherPayWebViewDialog.setWebUrl(webUrl);
+//        otherPayWebViewDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+//            @Override
+//            public void onDismiss(DialogInterface dialog) {
+//                if (iPayListener != null) {
+//                    PL.i(TAG, "OtherPay支付回调");
+//                    iPayListener.onPayFinish(new Bundle());
+//                } else {
+//                    PL.i(TAG, "OtherPay支付回调为空");
+//                }
+//            }
+//        });
+//        otherPayWebViewDialog.show();
+//    }
 
     @Override
     public void onCreate(final Activity activity) {
@@ -403,10 +378,8 @@ public class GamaImpl implements IGama {
                 if (iLogin != null) {
                     iLogin.onResume(activity);
                 }
-                GooglePayHelper.getInstance().setForeground(true);
                 GamaWebPageHelper.onResume(activity);
-                //平台
-                PlatformManager.getInstance().resume(activity);
+
             }
         });
     }
@@ -423,54 +396,11 @@ public class GamaImpl implements IGama {
                 if (otherPayWebViewDialog != null) {
                     otherPayWebViewDialog.onActivityResult(activity, requestCode, resultCode, data);
                 }
-                if (requestCode == GooglePayActivity2.GooglePayReqeustCode && resultCode == GooglePayActivity2.GooglePayResultCode) {
-                    Bundle bundle = null;
-                    if (data != null) {
-                        bundle = data.getExtras();
-                    }
-                    if (bundle == null) {
-                        bundle = new Bundle();
-                    } else {
-                        StarEventLogger.trackinPayEvent(activity, bundle);
-                    }
-
-                    if (iPayListener != null) { //支付刷新的回调
-                        PL.i(TAG, "GooglePay支付回调");
-                        iPayListener.onPayFinish(bundle);
-                    } else {
-                        PL.i(TAG, "GooglePay支付回调为空");
-                    }
-                    return;
-                }
-
-                if (requestCode == OneStoreActivity.ONESTOREPAYREQEUSTCODE && resultCode == OneStoreActivity.ONESTOREPAYRESULTCODE) {
-                    Bundle bundle = null;
-                    if (data != null) {
-                        bundle = data.getExtras();
-                    }
-                    if (bundle == null) {
-                        bundle = new Bundle();
-                    } else {
-                        StarEventLogger.trackinPayEvent(activity, bundle);
-                    }
-
-                    if (iPayListener != null) { //支付刷新的回调
-                        PL.i(TAG, "支付回调");
-                        iPayListener.onPayFinish(bundle);
-                    } else {
-                        PL.i(TAG, "支付回调为空");
-                    }
-                    return;
-                }
-
                 if (sGooglePlayGameServices != null) {
                     sGooglePlayGameServices.handleActivityResult(activity, requestCode, resultCode, data);
                 }
-
                 GamaShare.onActivityResult(activity, requestCode, resultCode, data);
 
-                //平台
-                PlatformManager.getInstance().onActivityResult(activity, requestCode, resultCode, data);
             }
         });
     }
@@ -484,8 +414,7 @@ public class GamaImpl implements IGama {
                 if (iLogin != null) {
                     iLogin.onPause(activity);
                 }
-                //平台
-                PlatformManager.getInstance().pauseAndStop(activity);
+
             }
         });
     }
@@ -499,12 +428,10 @@ public class GamaImpl implements IGama {
                 if (iLogin != null) {
                     iLogin.onStop(activity);
                 }
-                GooglePayHelper.getInstance().setForeground(false);
-                if (Localization.getSGameLanguage(activity) == SGameLanguage.ko_KR) {
-                    GamaCafeHelper.stopCafe(activity);
-                }
-                //平台
-                PlatformManager.getInstance().pauseAndStop(activity);
+//                if (Localization.getSGameLanguage(activity) == SGameLanguage.ko_KR) {
+//                    GamaCafeHelper.stopCafe(activity);
+//                }
+
             }
         });
     }
@@ -523,10 +450,7 @@ public class GamaImpl implements IGama {
                 }
                 //时间打点结束
                 LogTimer.getInstance().cancel();
-                //退出游戏时停止定时查单
-                GooglePayHelper.getInstance().stopQueryTask();
-                //平台
-                PlatformManager.getInstance().destory(activity);
+
             }
         });
     }
@@ -577,32 +501,6 @@ public class GamaImpl implements IGama {
 
     @Override
     public void openPlatform(final Activity activity) {
-        activity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                PL.i("IGama openPlatform");
-                if (GamaUtil.isLogin(activity)){
-                    PlatformData platformData = new PlatformData();
-                    platformData.setAppKey(ResConfig.getAppKey(activity));
-                    platformData.setGameCode(ResConfig.getGameCode(activity));
-                    platformData.setLanguage(SGameLanguage.zh_TW.getLanguage()); //设置语言
-                    platformData.setLoginTimestamp(GamaUtil.getSdkTimestamp(activity)); //登录完成timestamp
-                    platformData.setLoginToken(GamaUtil.getSdkAccessToken(activity));//登录完成accessToken
-                    platformData.setRoleId(GamaUtil.getRoleId(activity));
-                    platformData.setRoleLevel(GamaUtil.getRoleLevel(activity));
-                    platformData.setRoleName(GamaUtil.getRoleName(activity));
-                    platformData.setUserId(GamaUtil.getUid(activity));
-                    platformData.setUname(GamaUtil.getAccount(activity));//账号名,第三方没有传空值
-                    platformData.setServerCode(GamaUtil.getServerCode(activity));
-                    platformData.setServerName(GamaUtil.getServerName(activity));
-                    platformData.setLoginType(GamaUtil.getPreviousLoginType(activity)); //登录方式，fb登录 “fb”,Google登录 "google", 免注册登录 "mac"
-
-                    PlatformManager.getInstance().startPlatform(activity, platformData);
-                }else {
-                    ToastUtils.toast(activity,"please login game first");
-                }
-            }
-        });
 
     }
 
@@ -959,26 +857,9 @@ public class GamaImpl implements IGama {
     }
 
     @Override
-    public void gamaQueryProductDetail(final Activity activity, final SPayType payType, final List<String> skus, final GamaQueryProductListener listener) {
-        activity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (payType == SPayType.GOOGLE) {
-                    GooglePayHelper.getInstance().queryProductDetail(activity, skus, listener);
-                }
-            }
-        });
-    }
+    public void gamaQueryProductDetail(final Activity activity, final SPayType payType, final List<String> skus, final GamaQueryProductListener listener) {}
 
     @Override
     public void gamaOpenCafeHome(final Activity activity) {
-        activity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                PL.i("IGama openPlatform");
-                GamaCafeHelper.initCafe(activity);
-                GamaCafeHelper.showCafe(activity);
-            }
-        });
     }
 }

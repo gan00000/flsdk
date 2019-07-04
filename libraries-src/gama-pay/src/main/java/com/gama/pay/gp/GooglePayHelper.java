@@ -334,29 +334,31 @@ public class GooglePayHelper {
     private void queryProductDetailBatch(final Context context, final List<String> skus, final Map<String, SkuDetails> allSkuDetail, final GamaQueryProductListener listener) {
         ArrayList<String> curSkus = new ArrayList<>(skus.subList(0, Math.min(15, skus.size())));//单次最多查询20个商品
         skus.removeAll(curSkus);
-
-        iabHelper.queryInventoryAsync(true, curSkus, new IabHelper.QueryInventoryFinishedListener() {
-            @Override
-            public void onQueryInventoryFinished(IabResult result, Inventory inventory) {
-                if (inventory != null) {
-                    if (listener != null) {
-                        allSkuDetail.putAll(inventory.getAllSkuDetail());
-                        if (skus.size() > 0) {
-                            queryProductDetailBatch(context, skus, allSkuDetail, listener);
-                        } else if (allSkuDetail != null && !allSkuDetail.isEmpty()) {
+        if (iabHelper != null) {
+            iabHelper.queryInventoryAsync(true, curSkus, new IabHelper.QueryInventoryFinishedListener() {
+                @Override
+                public void onQueryInventoryFinished(IabResult result, Inventory inventory) {
+                    if (skus.size() > 0) {
+                        if (listener != null && inventory != null) {
+                            allSkuDetail.putAll(inventory.getAllSkuDetail());
+                        }
+                        queryProductDetailBatch(context, skus, allSkuDetail, listener);
+                    } else {
+                        if (listener != null) {
+                            if(inventory != null) {
+                                allSkuDetail.putAll(inventory.getAllSkuDetail());
+                            }
                             listener.onQueryResult(allSkuDetail);
-                        } else {
-                            listener.onQueryResult(null);
                         }
                     }
-                } else {
-                    if (listener != null) {
-                        listener.onQueryResult(null);
-                    }
                 }
-//                recycleIab();
-            }
-        });
+            });
 
+        } else {
+            if (listener != null) {
+                listener.onQueryResult(null);
+            }
+        }
     }
+
 }

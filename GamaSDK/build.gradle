@@ -1,3 +1,6 @@
+import java.util.regex.Matcher
+import java.util.regex.Pattern
+
 apply plugin: 'com.android.library'
 
 android {
@@ -28,13 +31,43 @@ android {
         //设置改jar版本
         buildConfigField "String", JAR_VERSION, SDK_VERSION_NAME_STARPY_SDK
     }
-   buildTypes {
+
+    buildTypes {
         release {
+//            multiDexEnabled true //Add this
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
+        debug {
+        }
     }
 
+    productFlavors {
+        krone {
+            minSdkVersion 18
+            targetSdkVersion 27
+            versionCode 1
+            versionName "1.0"
+            flavorDimensions "1"
+        }
+
+        krgoogle {
+            minSdkVersion 18
+            targetSdkVersion 27
+            versionCode 1
+            versionName "1.0"
+            flavorDimensions "1"
+        }
+
+        twgoogle {
+            minSdkVersion 18
+            targetSdkVersion 27
+            versionCode 1
+            versionName "1.0"
+            flavorDimensions "1"
+        }
+    }
 
 }
 
@@ -49,16 +82,23 @@ def getAarVersion() {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.aar'])
+//    implementation fileTree(dir: 'libs', include: ['*.aar'])
     api fileTree(include: ['*.jar'], dir: 'libs')
 //    api files('libs/takephoto_library_3.0.1.jar')
 //    api files('libs/nineoldandroids-library-2.4.0.jar')
     api project(':libraries-src:GamaBaseLib')
     api project(':libraries-src:gama-pay')
-    api project(':libraries-src:gama_onestore_plug')
+    kroneApi project(':libraries-src:gama_onestore_plug')
+    kroneApi project(':libraries-src:gama_cafe_plug')
+    krgoogleApi project(':libraries-src:gama_cafe_plug')
     api project(':Thirdlibrary')
     //    compile 'com.android.support:recyclerview-v7:25.3.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+
+    twgoogleImplementation(name: 'TW-V3-SDK-release', ext: 'aar')
+    twgoogleImplementation ('com.zhihu.android:matisse:0.5.1') {
+        exclude group: 'com.android.support'
+    }
 
 }
 
@@ -78,7 +118,7 @@ task makeLibraryJar(type: Copy) {
 //    baseName getJarName()
 
     //从哪里打包class文件,可以指定文件和目录
-    from('build/intermediates/packaged-classes/release/')
+    from('build/intermediates/packaged-classes/' + 'twgoogle' + '/release/')
     include ('classes.jar')
 
     //去掉不需要打包的目录和文件
@@ -104,6 +144,34 @@ makeLibraryJar.dependsOn(clearJar,build)
 def getJarName(){
     return SDK_VERSION_NAME_STARPY_SDK.replace("\"","")
 }
+
+task getxxx(){
+    println getCurrentFlavor()
+}
+
+def getCurrentFlavor() {
+
+    Gradle gradle = getGradle()
+    String  tskReqStr = gradle.getStartParameter().getIncludedBuilds().toString()
+    println "str is " + tskReqStr
+    Pattern pattern;
+
+    if( tskReqStr.contains( "assemble" ) )
+        pattern = Pattern.compile("assemble(\\w+)(Release|Debug)")
+    else
+        pattern = Pattern.compile("generate(\\w+)(Release|Debug)")
+
+    Matcher matcher = pattern.matcher( tskReqStr )
+
+    if( matcher.find() )
+        return matcher.group(1).toLowerCase()
+    else
+    {
+        println "NO MATCH FOUND"
+        return "";
+    }
+}
+
 task copyJar(type: Copy) {
 
     from('build/libs/')

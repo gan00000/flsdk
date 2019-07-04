@@ -74,215 +74,215 @@ android {
         }
     }
     productFlavors {
-        erge {
-            applicationId "com.gama.myapplication"
-            minSdkVersion 18
-            targetSdkVersion 27
-            versionCode 1
-            versionName "1.0"
-            flavorDimensions "1"
-//            resValue "string", "facebook_app_name", ""
-            resValue "string", "facebook_app_id", "759907540811551"
-            resValue "string", "fb_login_protocol_scheme", "fb759907540811551"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider759907540811551"
-            signingConfig signingConfigs.release
-        }
-        ezfy {
-            applicationId "com.gamamobi.ezfy"
-            minSdkVersion 18
-            targetSdkVersion 27
-            versionCode 1
-            versionName "1.0"
-            flavorDimensions "1"
-//            resValue "string", "facebook_app_name", ""
-            resValue "string", "facebook_app_id", "1040235646130047"
-            resValue "string", "fb_login_protocol_scheme", "fb1040235646130047"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1040235646130047"
-            signingConfig signingConfigs.release
-            //测试商品id
-            resValue "string", "test_sku", "com.ezfy.1usd"
-            resValue "string", "sdk_name", "二战SDK"
-        }
-        ezfytest {
-            applicationId "com.gamamobi.ezfy"
-            minSdkVersion 18
-            targetSdkVersion 27
-            versionCode 1
-            versionName "1.0"
-            flavorDimensions "1"
-//            resValue "string", "facebook_app_name", ""
-            resValue "string", "facebook_app_id", "1040235646130047"
-            resValue "string", "fb_login_protocol_scheme", "fb1040235646130047"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1040235646130047"
-            //测试工程地址
-            resValue "string", "gama_login_pre_url", "http://35.185.146.77/login/"
-            resValue "string", "gama_login_spa_url", "http://35.185.146.77/login/"
-            resValue "string", "gama_pay_pre_url", "http://35.185.146.77:8080/pay/"
-            resValue "string", "gama_pay_spa_url", "http://35.185.146.77:8080/pay/"
-            //测试商品id
-            resValue "string", "test_sku", "com.ezfy.1usd"
-            resValue "string", "sdk_name", "二战SDK"
-            signingConfig signingConfigs.release
-        }
-        mytest {
-            applicationId "com.gamamobi.ezfy"
-            minSdkVersion 18
-            targetSdkVersion 27
-            versionCode 1
-            versionName "1.0"
-            flavorDimensions "1"
-//            resValue "string", "facebook_app_name", ""
-//            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider812834892144520"
-            resValue "string", "facebook_app_id", "812834892144520"
-            resValue "string", "fb_login_protocol_scheme", "fb812834892144520"
-            signingConfig signingConfigs.release
-        }
+//        erge {
+//            applicationId "com.gama.myapplication"
+//            minSdkVersion 18
+//            targetSdkVersion 27
+//            versionCode 1
+//            versionName "1.0"
+//            flavorDimensions "1"
+////            resValue "string", "facebook_app_name", ""
+//            resValue "string", "facebook_app_id", "759907540811551"
+//            resValue "string", "fb_login_protocol_scheme", "fb759907540811551"
+//            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider759907540811551"
+//            signingConfig signingConfigs.release
+//        }
+//        ezfy {
+//            applicationId "com.gamamobi.ezfy"
+//            minSdkVersion 18
+//            targetSdkVersion 27
+//            versionCode 1
+//            versionName "1.0"
+//            flavorDimensions "1"
+////            resValue "string", "facebook_app_name", ""
+//            resValue "string", "facebook_app_id", "1040235646130047"
+//            resValue "string", "fb_login_protocol_scheme", "fb1040235646130047"
+//            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1040235646130047"
+//            signingConfig signingConfigs.release
+//            //测试商品id
+//            resValue "string", "test_sku", "com.ezfy.1usd"
+//            resValue "string", "sdk_name", "二战SDK"
+//        }
+//        ezfytest {
+//            applicationId "com.gamamobi.ezfy"
+//            minSdkVersion 18
+//            targetSdkVersion 27
+//            versionCode 1
+//            versionName "1.0"
+//            flavorDimensions "1"
+////            resValue "string", "facebook_app_name", ""
+//            resValue "string", "facebook_app_id", "1040235646130047"
+//            resValue "string", "fb_login_protocol_scheme", "fb1040235646130047"
+//            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1040235646130047"
+//            //测试工程地址
+//            resValue "string", "gama_login_pre_url", "http://35.185.146.77/login/"
+//            resValue "string", "gama_login_spa_url", "http://35.185.146.77/login/"
+//            resValue "string", "gama_pay_pre_url", "http://35.185.146.77:8080/pay/"
+//            resValue "string", "gama_pay_spa_url", "http://35.185.146.77:8080/pay/"
+//            //测试商品id
+//            resValue "string", "test_sku", "com.ezfy.1usd"
+//            resValue "string", "sdk_name", "二战SDK"
+//            signingConfig signingConfigs.release
+//        }
+//        mytest {
+//            applicationId "com.gamamobi.ezfy"
+//            minSdkVersion 18
+//            targetSdkVersion 27
+//            versionCode 1
+//            versionName "1.0"
+//            flavorDimensions "1"
+////            resValue "string", "facebook_app_name", ""
+////            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider812834892144520"
+//            resValue "string", "facebook_app_id", "812834892144520"
+//            resValue "string", "fb_login_protocol_scheme", "fb812834892144520"
+//            signingConfig signingConfigs.release
+//        }
+//
+//        fsztm {
+//            applicationId "com.gamamobi.fsztm"
+//            minSdkVersion 18
+//            targetSdkVersion 27
+//            versionCode 1
+//            versionName "1.0"
+//            flavorDimensions "1"
+////            resValue "string", "facebook_app_name", ""
+//            resValue "string", "facebook_app_id", "278115919495359"
+//            resValue "string", "fb_login_protocol_scheme", "fb278115919495359"
+//            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider278115919495359"
+//            signingConfig signingConfigs.release
+//            //测试商品id
+//            resValue "string", "test_sku", "com.fsztm.1usd"
+//            resValue "string", "sdk_name", "封神SDK"
+//        }
+//
+//        sds {
+//            applicationId "com.tencent.tmgp.ssktw"
+//            minSdkVersion 18
+//            targetSdkVersion 27
+//            versionCode 1
+//            versionName "1.0"
+//            flavorDimensions "1"
+//            resValue "string", "facebook_app_name", "聖鬥士"
+//            resValue "string", "facebook_app_id", "362739184296670"
+//            resValue "string", "fb_login_protocol_scheme", "fb362739184296670"
+//            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider362739184296670"
+//            signingConfig signingConfigs.release
+//            //测试商品id
+//            resValue "string", "test_sku", "com.sds.1usd"
+//            resValue "string", "sdk_name", "圣斗士SDK"
+//        }
+//
+//        sdstest {
+//            applicationId "com.tencent.tmgp.ssktw"
+//            minSdkVersion 18
+//            targetSdkVersion 27
+//            versionCode 1
+//            versionName "1.0"
+//            flavorDimensions "1"
+//            resValue "string", "facebook_app_name", "聖鬥士"
+//            resValue "string", "facebook_app_id", "362739184296670"
+//            resValue "string", "fb_login_protocol_scheme", "fb362739184296670"
+//            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider362739184296670"
+//            signingConfig signingConfigs.release
+//            //测试工程地址
+//            resValue "string", "zh_tw_gama_login_pre_url", "https://t-login.gamamobi.com/"
+//            resValue "string", "zh_tw_gama_login_spa_url", "https://t-login.gamamobi.com/"
+//            resValue "string", "zh_tw_gama_pay_pre_url", "https://t-pay.gamamobi.com/"
+//            resValue "string", "zh_tw_gama_pay_spa_url", "https://t-pay.gamamobi.com/"
+//            resValue "string", "zh_tw_gama_ads_pre_url", "https://track.gamamobi.com/"
+//            resValue "string", "zh_tw_gama_ads_spa_url", "https://track.gamamobi.com/"
+//            //测试商品id
+//            resValue "string", "test_sku", "com.tencent.tmgp.ssktw.1usd"
+//            resValue "string", "sdk_name", "圣斗士SDK"
+//        }
+//
+//        smzy {
+//            applicationId "com.gamamobi.smzy"
+//            minSdkVersion 18
+//            targetSdkVersion 27
+//            versionCode 1
+//            versionName "1.0"
+//            flavorDimensions "1"
+//            resValue "string", "facebook_app_id", "505283513308156"
+//            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider505283513308156"
+//            resValue "string", "fb_login_protocol_scheme", "fb505283513308156"
+//            resValue "string", "facebook_app_name", "神魔之翼"
+//            //每个游戏的demo设置
+//            resValue "string", "test_sku", "com.smzy.1usd"
+//            resValue "string", "sdk_name", "神魔SDK"
+//            signingConfig signingConfigs.release
+//        }
+//        vfjp {
+//            applicationId "com.gamamobi.vfjp"
+//            minSdkVersion 18
+//            targetSdkVersion 27
+//            versionCode 60
+//            versionName "1.0"
+//            flavorDimensions "1"
+//            resValue "string", "facebook_app_id", "2315962615313320"
+//            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider2315962615313320"
+//            resValue "string", "fb_login_protocol_scheme", "fb2315962615313320"
+//            resValue "string", "facebook_app_name", "ヴァリアントフォース"
+//            resValue "string", "com.twitter.sdk.android.CONSUMER_KEY", "5FwA0veZVe6eQNJz05v2tZbBw"
+//            resValue "string", "com.twitter.sdk.android.CONSUMER_SECRET", "ARuTLsf9Mb7gvVfR946q6C5Q765A2G6uvQIjwiUUQxMWKRaVcX"
+//            //每个游戏的demo设置
+//            resValue "string", "test_sku", "com.vfjp.1usd"
+//            resValue "string", "sdk_name", "圣光SDK"
+//            signingConfig signingConfigs.release
+//        }
+//
+//        sslj {
+//            applicationId "com.gamamobi.sslj"
+//            minSdkVersion 18
+//            targetSdkVersion 27
+//            versionCode 1
+//            versionName "1.0"
+//            flavorDimensions "1"
+//            resValue "string", "facebook_app_id", "2151838211540508"
+//            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider2151838211540508"
+//            resValue "string", "fb_login_protocol_scheme", "fb2151838211540508"
+//            resValue "string", "facebook_app_name", "36計"
+//            //每个游戏的demo设置
+//            resValue "string", "test_sku", "com.sslj.1usd"
+//            resValue "string", "sdk_name", "36计SDK"
+//            signingConfig signingConfigs.release
+//        }
+//
+//        twsd {
+//            applicationId "com.gamamobi.twsd"
+//            minSdkVersion 18
+//            targetSdkVersion 27
+//            versionCode 1
+//            versionName "1.0"
+//            flavorDimensions "1"
+//            resValue "string", "facebook_app_id", "822949071390949"
+//            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider822949071390949"
+//            resValue "string", "fb_login_protocol_scheme", "fb822949071390949"
+//            resValue "string", "facebook_app_name", "神都"
+//            //每个游戏的demo设置
+//            resValue "string", "test_sku", "com.sd.1usd"
+//            resValue "string", "sdk_name", "神都"
+//            signingConfig signingConfigs.release
+//        }
+//
+//        got {
+//            applicationId "com.yoozoo.got.gama"
+//            minSdkVersion 18
+//            targetSdkVersion 27
+//            versionCode 1
+//            versionName "1.0"
+//            flavorDimensions "1"
+//            resValue "string", "facebook_app_id", "688175108304011"
+//            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider688175108304011"
+//            resValue "string", "fb_login_protocol_scheme", "fb688175108304011"
+//            resValue "string", "facebook_app_name", "權力的遊戲"
+//            //每个游戏的demo设置
+//            resValue "string", "test_sku", "com.twsd.1usd"
+//            resValue "string", "sdk_name", "got sdk"
+//            signingConfig signingConfigs.release
+//        }
 
-        fsztm {
-            applicationId "com.gamamobi.fsztm"
-            minSdkVersion 18
-            targetSdkVersion 27
-            versionCode 1
-            versionName "1.0"
-            flavorDimensions "1"
-//            resValue "string", "facebook_app_name", ""
-            resValue "string", "facebook_app_id", "278115919495359"
-            resValue "string", "fb_login_protocol_scheme", "fb278115919495359"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider278115919495359"
-            signingConfig signingConfigs.release
-            //测试商品id
-            resValue "string", "test_sku", "com.fsztm.1usd"
-            resValue "string", "sdk_name", "封神SDK"
-        }
-
-        sds {
-            applicationId "com.tencent.tmgp.ssktw"
-            minSdkVersion 18
-            targetSdkVersion 27
-            versionCode 1
-            versionName "1.0"
-            flavorDimensions "1"
-            resValue "string", "facebook_app_name", "聖鬥士"
-            resValue "string", "facebook_app_id", "362739184296670"
-            resValue "string", "fb_login_protocol_scheme", "fb362739184296670"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider362739184296670"
-            signingConfig signingConfigs.release
-            //测试商品id
-            resValue "string", "test_sku", "com.sds.1usd"
-            resValue "string", "sdk_name", "圣斗士SDK"
-        }
-
-        sdstest {
-            applicationId "com.tencent.tmgp.ssktw"
-            minSdkVersion 18
-            targetSdkVersion 27
-            versionCode 1
-            versionName "1.0"
-            flavorDimensions "1"
-            resValue "string", "facebook_app_name", "聖鬥士"
-            resValue "string", "facebook_app_id", "362739184296670"
-            resValue "string", "fb_login_protocol_scheme", "fb362739184296670"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider362739184296670"
-            signingConfig signingConfigs.release
-            //测试工程地址
-            resValue "string", "zh_tw_gama_login_pre_url", "https://t-login.gamamobi.com/"
-            resValue "string", "zh_tw_gama_login_spa_url", "https://t-login.gamamobi.com/"
-            resValue "string", "zh_tw_gama_pay_pre_url", "https://t-pay.gamamobi.com/"
-            resValue "string", "zh_tw_gama_pay_spa_url", "https://t-pay.gamamobi.com/"
-            resValue "string", "zh_tw_gama_ads_pre_url", "https://track.gamamobi.com/"
-            resValue "string", "zh_tw_gama_ads_spa_url", "https://track.gamamobi.com/"
-            //测试商品id
-            resValue "string", "test_sku", "com.tencent.tmgp.ssktw.1usd"
-            resValue "string", "sdk_name", "圣斗士SDK"
-        }
-
-        smzy {
-            applicationId "com.gamamobi.smzy"
-            minSdkVersion 18
-            targetSdkVersion 27
-            versionCode 1
-            versionName "1.0"
-            flavorDimensions "1"
-            resValue "string", "facebook_app_id", "505283513308156"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider505283513308156"
-            resValue "string", "fb_login_protocol_scheme", "fb505283513308156"
-            resValue "string", "facebook_app_name", "神魔之翼"
-            //每个游戏的demo设置
-            resValue "string", "test_sku", "com.smzy.1usd"
-            resValue "string", "sdk_name", "神魔SDK"
-            signingConfig signingConfigs.release
-        }
-        vfjp {
-            applicationId "com.gamamobi.vfjp"
-            minSdkVersion 18
-            targetSdkVersion 27
-            versionCode 60
-            versionName "1.0"
-            flavorDimensions "1"
-            resValue "string", "facebook_app_id", "2315962615313320"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider2315962615313320"
-            resValue "string", "fb_login_protocol_scheme", "fb2315962615313320"
-            resValue "string", "facebook_app_name", "ヴァリアントフォース"
-            resValue "string", "com.twitter.sdk.android.CONSUMER_KEY", "5FwA0veZVe6eQNJz05v2tZbBw"
-            resValue "string", "com.twitter.sdk.android.CONSUMER_SECRET", "ARuTLsf9Mb7gvVfR946q6C5Q765A2G6uvQIjwiUUQxMWKRaVcX"
-            //每个游戏的demo设置
-            resValue "string", "test_sku", "com.vfjp.1usd"
-            resValue "string", "sdk_name", "圣光SDK"
-            signingConfig signingConfigs.release
-        }
-
-        sslj {
-            applicationId "com.gamamobi.sslj"
-            minSdkVersion 18
-            targetSdkVersion 27
-            versionCode 1
-            versionName "1.0"
-            flavorDimensions "1"
-            resValue "string", "facebook_app_id", "2151838211540508"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider2151838211540508"
-            resValue "string", "fb_login_protocol_scheme", "fb2151838211540508"
-            resValue "string", "facebook_app_name", "36計"
-            //每个游戏的demo设置
-            resValue "string", "test_sku", "com.sslj.1usd"
-            resValue "string", "sdk_name", "36计SDK"
-            signingConfig signingConfigs.release
-        }
-
-        twsd {
-            applicationId "com.gamamobi.twsd"
-            minSdkVersion 18
-            targetSdkVersion 27
-            versionCode 1
-            versionName "1.0"
-            flavorDimensions "1"
-            resValue "string", "facebook_app_id", "822949071390949"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider822949071390949"
-            resValue "string", "fb_login_protocol_scheme", "fb822949071390949"
-            resValue "string", "facebook_app_name", "神都"
-            //每个游戏的demo设置
-            resValue "string", "test_sku", "com.sd.1usd"
-            resValue "string", "sdk_name", "神都"
-            signingConfig signingConfigs.release
-        }
-
-        got {
-            applicationId "com.yoozoo.got.gama"
-            minSdkVersion 18
-            targetSdkVersion 27
-            versionCode 1
-            versionName "1.0"
-            flavorDimensions "1"
-            resValue "string", "facebook_app_id", "688175108304011"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider688175108304011"
-            resValue "string", "fb_login_protocol_scheme", "fb688175108304011"
-            resValue "string", "facebook_app_name", "權力的遊戲"
-            //每个游戏的demo设置
-            resValue "string", "test_sku", "com.twsd.1usd"
-            resValue "string", "sdk_name", "got sdk"
-            signingConfig signingConfigs.release
-        }
-
-        krezfy {
+        krgoogle {
             applicationId "com.gamamobi.krezfy"
             minSdkVersion 18
             targetSdkVersion 28
@@ -330,7 +330,7 @@ android {
             signingConfig signingConfigs.release
         }
 
-        krezfyone {
+        krone {
             applicationId "com.gamamobi.krezfy.one"
             minSdkVersion 18
             targetSdkVersion 28
@@ -378,26 +378,26 @@ android {
             signingConfig signingConfigs.release
         }
 
-        twsm {
-            applicationId "com.gama.twsm"
+        twgoogle {
+            applicationId "com.gamamobi.ezfy"
             minSdkVersion 18
             targetSdkVersion 28
             versionCode 1
             versionName "1.0"
             flavorDimensions "1"
-            resValue "string", "facebook_app_id", "404025320186326"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider404025320186326"
-            resValue "string", "fb_login_protocol_scheme", "fb404025320186326"
-            resValue "string", "facebook_app_name", "神魔大陸2"
+            resValue "string", "facebook_app_id", "1040235646130047"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1040235646130047"
+            resValue "string", "fb_login_protocol_scheme", "fb1040235646130047"
+            resValue "string", "facebook_app_name", "硬漢部隊"
             //每个游戏的demo设置
-            resValue "string", "test_sku", "com.twsm.1usd"
-            resValue "string", "sdk_name", "神魔大陸2Demo"
+            resValue "string", "test_sku", "com.ezfy.1usd"
+            resValue "string", "sdk_name", "硬汉Demo"
             signingConfig signingConfigs.release
 
             buildConfigField "String[]", "PRODUCE_LIST",
                     "{" +
-                            "\"com.twsm.1usd\"," +
-                            "\"com.twsm.100usd\"," +
+                            "\"com.ezfy.1usd\"," +
+                            "\"com.ezfy.100usd\"," +
                             "}"
         }
 

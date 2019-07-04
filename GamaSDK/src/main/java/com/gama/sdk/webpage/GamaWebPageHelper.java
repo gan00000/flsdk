@@ -119,9 +119,11 @@ public class GamaWebPageHelper {
         if(TextUtils.isEmpty(url)) {
             return null;
         }
+        if(!url.endsWith("?")) {
+            url += "?";
+        }
         StringBuilder builder = new StringBuilder(url);
-        builder.append("?")
-                .append("gameCode=").append(ResConfig.getGameCode(context))
+        builder.append("gameCode=").append(ResConfig.getGameCode(context))
                 .append("&userId=").append(GamaUtil.getUid(context))
                 .append("&accessToken=").append(GamaUtil.getSdkAccessToken(context))
                 .append("&packageName=").append(context.getPackageName())
@@ -142,6 +144,7 @@ public class GamaWebPageHelper {
             return;
         }
         try {
+            url = addInfoToUrl(context, url);
             SWebViewDialog sWebViewDialog = new SWebViewDialog(context, R.style.Gama_Theme_AppCompat_Dialog_Notitle_Fullscreen);
             sWebViewDialog.setWebUrl(url);
             sWebViewDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {

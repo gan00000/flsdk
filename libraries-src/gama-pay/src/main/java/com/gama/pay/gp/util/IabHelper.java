@@ -148,6 +148,7 @@ public class IabHelper {
 	public static final int IABHELPER_UNKNOWN_ERROR = -1008;
 	public static final int IABHELPER_SUBSCRIPTIONS_NOT_AVAILABLE = -1009;
 	public static final int IABHELPER_INVALID_CONSUMPTION = -1010;
+	public static final int IABHELPER_NULL = -1011;  //手动添加的
 
 	// Keys for the responses from InAppBillingService
 	public static final String RESPONSE_CODE = "RESPONSE_CODE";
@@ -1059,9 +1060,12 @@ public class IabHelper {
 
 		Bundle querySkus = new Bundle();
 		querySkus.putStringArrayList(GET_SKU_DETAILS_ITEM_LIST, skuList);
+		if(mService == null) {
+			return IABHELPER_NULL;
+		}
 		Bundle skuDetails = mService.getSkuDetails(3, context.getPackageName(), itemType, querySkus);
 
-		if (!skuDetails.containsKey(RESPONSE_GET_SKU_DETAILS_LIST)) {
+		if (skuDetails != null && !skuDetails.containsKey(RESPONSE_GET_SKU_DETAILS_LIST)) {
 			int response = getResponseCodeFromBundle(skuDetails);
 			if (response != BILLING_RESPONSE_RESULT_OK) {
 				logDebug("getSkuDetails() failed: " + getResponseDesc(response));
@@ -1072,7 +1076,15 @@ public class IabHelper {
 			}
 		}
 
+		if(skuDetails == null) {
+			return IABHELPER_NULL;
+		}
+
 		ArrayList<String> responseList = skuDetails.getStringArrayList(RESPONSE_GET_SKU_DETAILS_LIST);
+
+		if(responseList == null) {
+			return IABHELPER_NULL;
+		}
 
 		for (String thisResponse : responseList) {
 			SkuDetails d = new SkuDetails(itemType, thisResponse);

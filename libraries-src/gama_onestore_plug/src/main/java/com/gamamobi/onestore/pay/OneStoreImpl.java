@@ -12,7 +12,9 @@ import android.util.Log;
 import com.core.base.callback.ISReqCallBack;
 import com.core.base.utils.PL;
 import com.core.base.utils.ToastUtils;
+import com.gama.base.bean.BasePayBean;
 import com.gama.base.cfg.ResConfig;
+import com.gama.base.constant.GamaCommonKey;
 import com.gama.onestore.plug.BuildConfig;
 import com.gamamobi.onestore.IOneStorePay;
 import com.gamamobi.onestore.IPayCallBack;
@@ -600,8 +602,19 @@ public class OneStoreImpl implements IOneStorePay {
 
     private void callbackSuccess(PurchaseData data) {
         hideProgress();
+        BasePayBean payBean = new BasePayBean();
+        payBean.setOrderId(data.getOrderId());
+        payBean.setPackageName(data.getPackageName());
+        payBean.setProductId(data.getProductId());
+        payBean.setPurchaseId(data.getPurchaseId());
+        payBean.setOriginPurchaseData(data.getPurchaseData());
+        payBean.setPurchaseState(data.getPurchaseState());
+        payBean.setPurchaseTime(data.getPurchaseTime());
+        payBean.setRecurringState(data.getRecurringState());
+        payBean.setSignature(data.getSignature());
+        payBean.setDeveloperPayload(data.getDeveloperPayload());
         Bundle bundle = new Bundle();
-        bundle.putSerializable(OneStoreActivity.ONESTORE_PURCHASE_DATA, data);
+        bundle.putSerializable(GamaCommonKey.PURCHASE_DATA, payBean);
         if (iPayCallBack != null) {
             iPayCallBack.success(bundle);
         }

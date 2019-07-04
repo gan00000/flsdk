@@ -14,7 +14,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.core.base.callback.ISReqCallBack;
 import com.core.base.utils.GamaTimeUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.ToastUtils;
@@ -26,16 +25,12 @@ import com.gama.base.utils.Localization;
 import com.gama.base.utils.SLog;
 import com.gama.data.login.ILoginCallBack;
 import com.gama.data.login.response.SLoginResponse;
-import com.gama.pay.gp.constants.GooglePayDomainSite;
+import com.gama.pay.gp.GooglePayHelper;
 import com.gama.pay.gp.util.IabHelper;
 import com.gama.pay.gp.util.IabResult;
 import com.gama.pay.gp.util.Inventory;
-import com.gama.pay.gp.util.PayHelper;
 import com.gama.pay.gp.util.Purchase;
 import com.gama.pay.gp.util.SkuDetails;
-import com.gamamobi.onestore.pay.bean.req.OneStoreCreateOrderIdReqBean;
-import com.gamamobi.onestore.pay.bean.res.OneStoreCreateOrderIdRes;
-import com.gamamobi.onestore.pay.task.OneStoreCreateOrderReqTask;
 import com.gama.pay.utils.GamaQueryProductListener;
 import com.gama.sdk.ads.GamaAdsConstant;
 import com.gama.sdk.callback.IPayListener;
@@ -796,57 +791,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.onecreate).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                OneStoreCreateOrderIdReqBean createOrderIdReqBean = new OneStoreCreateOrderIdReqBean(MainActivity.this);
-                createOrderIdReqBean.setCpOrderId("123456789");
-                createOrderIdReqBean.setProductId("com.krezfy.test1");
-                createOrderIdReqBean.setRequestUrl(PayHelper.getPreferredUrl(MainActivity.this));
-                //设置储值备用域名
-                createOrderIdReqBean.setRequestSpaUrl(PayHelper.getSpareUrl(MainActivity.this));
-                //设置储值接口名
-                createOrderIdReqBean.setRequestMethod(GooglePayDomainSite.google_order_create);
-                OneStoreCreateOrderReqTask googleCreateOrderReqTask = new OneStoreCreateOrderReqTask(createOrderIdReqBean);
-                googleCreateOrderReqTask.setReqCallBack(new ISReqCallBack<OneStoreCreateOrderIdRes>() {
-
-                    @Override
-                    public void success(OneStoreCreateOrderIdRes createOrderIdRes, String rawResult) {
-                        Log.i("gama one", "create result = " + rawResult);
-                        if (createOrderIdRes != null && createOrderIdRes.isRequestSuccess() && !TextUtils.isEmpty(createOrderIdRes.getOrderId())) {
-
-                        } else {
-                            if (createOrderIdRes!=null && !TextUtils.isEmpty(createOrderIdRes.getMessage())){
-                                ToastUtils.toast(MainActivity.this,createOrderIdRes.getMessage());
-                            }
-//                            callbackFail("create orderId error, please try again");
-                        }
-                    }
-
-                    @Override
-                    public void timeout(String code) {
-
-//                ToastUtils.toast(activity, "connect timeout, please try again");
-//                        callbackFail("connect timeout, please try again");
-                    }
-
-                    @Override
-                    public void noData() {
-//                        callbackFail("server error, please try again");
-                    }
-                });
-                googleCreateOrderReqTask.excute(OneStoreCreateOrderIdRes.class);
-
-            }
-        });
-
-        findViewById(R.id.onesend).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
         findViewById(R.id.plat).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -858,10 +802,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.onecreate).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                GooglePayHelper.getInstance().queryConsumablePurchase(MainActivity.this);
+//                GooglePayHelper.getInstance().queryConsumablePurchase(MainActivity.this);
+//                GooglePayHelper.getInstance().queryConsumablePurchase(MainActivity.this);
+                querySku();
+                querySku();
+                querySku();
+
+            }
+        });
+
     }
 
     private void querySku() {
-//        final ArrayList<String> list = new ArrayList<>();
+//        final List<String> list = Arrays.asList(BuildConfig.PRODUCE_LIST);
 //        list.add(getResources().getString(R.string.test_sku));
 //        list.add("com.sd.zshk");
 //        list.add("com.sd.xcpb");
@@ -874,16 +831,16 @@ public class MainActivity extends AppCompatActivity {
 //        list.add("com.sd.cz");
 //        list.add("com.sd.tzlb");
 //        list.add("com.sd.sslb");
-        List<String> list = Arrays.asList("com.sd.qmlb.5usd","com.sd.qmlb.25usd","com.sd.qmlb.50usd","com.sd.ztlb.5usd","com.sd.ztlb.25usd","com.sd.ztlb.50usd",
+        List<String> list = Arrays.asList("com.ezfy.1usd", "com.sd.qmlb.5usd","com.sd.qmlb.25usd","com.sd.qmlb.50usd","com.sd.ztlb.5usd","com.sd.ztlb.25usd","com.sd.ztlb.50usd",
                 "com.sd.sjlb.5usd","com.sd.sjlb.25usd","com.sd.sjlb.50usd","com.sd.xslb.5usd","com.sd.xslb.25usd","com.sd.xslb.50usd","com.sd.chlb.5usd",
-                "com.sd.chlb.25usd","com.sd.chlb.50usd","com.sd.zshk","com.sd.xcpb","com.sd.1usd","com.sd.5usd","com.sd.10usd");  //20
+                "com.sd.chlb.25usd","com.sd.chlb.50usd","com.sd.zshk","com.sd.xcpb","com.sd.1usd","com.sd.5usd","com.sd.10usd", "com.ezfy.100usd");  //20
 //                ,"com.sd.20usd"  //21
 //                , "com.sd.50usd","com.sd.100usd","com.sd.cz","com.sd.tzlb","com.sd.sslb");
         iGama.gamaQueryProductDetail(this, SPayType.GOOGLE, list, new GamaQueryProductListener() {
             @Override
             public void onQueryResult(Map<String, SkuDetails> details) {
                 String detail = "";
-                if(details != null) {
+                if(details != null && details.size() > 0) {
                     detail += "查询总数： " + details.size() + "\n\n";
                     for (Map.Entry<String, SkuDetails> entry : details.entrySet()) {
                         SkuDetails skuDetails = entry.getValue();

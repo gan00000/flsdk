@@ -13,7 +13,6 @@ import com.gamamobi.onestore.pay.bean.req.OneStoreCreateOrderIdReqBean;
 public class OneStoreActivity extends SBaseActivity {
 
 	public static final String OneStorePayReqBean_Extra_Key = "OneStorePayReqBean_Extra_Key";
-	public static final String ONESTORE_PURCHASE_DATA = "ONESTORE_PURCHASE_DATA";
 	public static final int ONESTOREPAYRESULTCODE = 92;
 	public static final int ONESTOREPAYREQEUSTCODE = 93;
 

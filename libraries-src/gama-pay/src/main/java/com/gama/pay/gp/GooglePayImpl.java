@@ -10,6 +10,8 @@ import com.core.base.callback.ISReqCallBack;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
+import com.gama.base.bean.BasePayBean;
+import com.gama.base.constant.GamaCommonKey;
 import com.gama.base.utils.SLog;
 import com.gama.pay.BuildConfig;
 import com.gama.pay.IPay;
@@ -68,10 +70,21 @@ public class GooglePayImpl implements IPay {
         }
 
         if (iPayCallBack != null){
+            BasePayBean payBean = new BasePayBean();
+            payBean.setOrderId(purchase.getOrderId());
+            payBean.setPackageName(purchase.getPackageName());
+            payBean.setProductId(purchase.getSku());
+            payBean.setmItemType(purchase.getItemType());
+            payBean.setOriginPurchaseData(purchase.getOriginalJson());
+            payBean.setPurchaseState(purchase.getPurchaseState());
+            payBean.setPurchaseTime(purchase.getPurchaseTime());
+            payBean.setSignature(purchase.getSignature());
+            payBean.setDeveloperPayload(purchase.getDeveloperPayload());
+            payBean.setmToken(purchase.getToken());
             Bundle b = new Bundle();
             b.putInt(PAY_STATUS, PAY_SUCCESS);
             b.putSerializable("GooglePayCreateOrderIdReqBean", createOrderIdReqBean);
-            b.putSerializable(GooglePayContant.PURCHASE_OBJECT, purchase);
+            b.putSerializable(GamaCommonKey.PURCHASE_DATA, payBean);
             iPayCallBack.success(b);
         }
     }

@@ -16,16 +16,14 @@ import com.core.base.utils.PL;
 import com.core.base.utils.SPUtil;
 import com.core.base.utils.SStringUtil;
 import com.gama.base.bean.AdsRequestBean;
+import com.gama.base.bean.BasePayBean;
 import com.gama.base.cfg.ResConfig;
+import com.gama.base.constant.GamaCommonKey;
 import com.gama.base.utils.GamaUtil;
 import com.gama.data.login.response.SLoginResponse;
-import com.gama.pay.gp.constants.GooglePayContant;
-import com.gama.pay.gp.util.Purchase;
 import com.gama.sdk.R;
 import com.gama.thirdlib.facebook.SFacebookProxy;
 import com.gama.thirdlib.google.SGoogleProxy;
-import com.gamamobi.onestore.api.PurchaseData;
-import com.gamamobi.onestore.pay.OneStoreActivity;
 import com.google.ads.conversiontracking.AdWordsConversionReporter;
 
 import java.util.HashMap;
@@ -164,33 +162,18 @@ public class StarEventLogger {
             PL.i(TAG, "trackinPay bundle null");
             return;
         }
-        Purchase purchase = (Purchase) bundle.getSerializable(GooglePayContant.PURCHASE_OBJECT);
-        PurchaseData purchaseOne = (PurchaseData) bundle.getSerializable(OneStoreActivity.ONESTORE_PURCHASE_DATA);
+        BasePayBean payBean = (BasePayBean) bundle.getSerializable(GamaCommonKey.PURCHASE_DATA);
 
         String orderId = "";
         String productId = "";
         long purchaseTime;
         int price = 0;
 
-        if(purchase != null) {
-            PL.i(TAG, "trackinPay Purchase Google");
-            orderId = purchase.getOrderId();
-            purchaseTime = purchase.getPurchaseTime();
-            productId = purchase.getSku();
-            try {
-                Pattern p = Pattern.compile("\\d+(usd|USD)");
-                Matcher m = p.matcher(productId);
-                if(m.find()) {
-                    price = Integer.parseInt(m.group().toLowerCase().replace("usd", ""));
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else if (purchaseOne != null) {
-            PL.i(TAG, "trackinPay Purchase One");
-            orderId = purchaseOne.getOrderId();
-            purchaseTime = purchaseOne.getPurchaseTime();
-            productId = purchaseOne.getProductId();
+        if(payBean != null) {
+            PL.i(TAG, "trackinPay Purchase");
+            orderId = payBean.getOrderId();
+            purchaseTime = payBean.getPurchaseTime();
+            productId = payBean.getProductId();
             try {
                 Pattern p = Pattern.compile("\\d+(usd|USD)");
                 Matcher m = p.matcher(productId);
