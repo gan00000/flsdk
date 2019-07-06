@@ -112,8 +112,8 @@ public class SFacebookProxy {
 		trackingEvent(activity, eventName,valueToSum,null);
 	}
 	
-	public static void trackingEvent(final Activity activity,final String eventName, final Double valueToSum, final Bundle parameters){
-		if (activity == null || TextUtils.isEmpty(eventName)) {
+	public static void trackingEvent(final Context context,final String eventName, final Double valueToSum, final Bundle parameters){
+		if (context == null || TextUtils.isEmpty(eventName)) {
 			return;
 		}
 		
@@ -134,7 +134,7 @@ public class SFacebookProxy {
 				}
 			}
 		});*/
-		AppEventsLogger logger = AppEventsLogger.newLogger(activity);
+		AppEventsLogger logger = AppEventsLogger.newLogger(context);
 		if (valueToSum == null && parameters == null){
 			logger.logEvent(eventName);
 		}else if (valueToSum == null && parameters != null){

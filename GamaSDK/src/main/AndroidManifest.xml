@@ -133,6 +133,7 @@
             android:exported="false">
             <intent-filter>
                 <action android:name="com.gamamobi.PAY_REPLACE_OK" />
+                <action android:name="com.gamamobi.PAY_QUERY_TASK_START" />
             </intent-filter>
         </receiver>
 

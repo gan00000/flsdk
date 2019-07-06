@@ -7,6 +7,8 @@ import android.util.Log;
 
 import com.core.base.callback.ISReqCallBack;
 import com.core.base.utils.PL;
+import com.gama.base.bean.BasePayBean;
+import com.gama.base.constant.GamaCommonKey;
 import com.gama.base.utils.SLog;
 import com.gama.pay.gp.bean.req.GoogleExchangeReqBean;
 import com.gama.pay.gp.bean.res.GPExchangeRes;
@@ -33,8 +35,10 @@ public class GooglePayHelper {
     private static GooglePayHelper payHelper;
     private IabHelper iabHelper;
     private boolean isForeground = true;
+    private boolean isWorking = false;
 
     public static final String ACTION_PAY_REPLACE_OK = "com.gamamobi.PAY_REPLACE_OK";
+    public static final String ACTION_PAY_QUERY_TASK_START = "com.gamamobi.PAY_QUERY_TASK_START";
 
     public static GooglePayHelper getInstance() {
         if (payHelper == null) {
@@ -50,6 +54,11 @@ public class GooglePayHelper {
      * 查询单次未消费商品
      */
     public void queryConsumablePurchase(final Context context) {
+        if(isWorking) {
+            PL.i(TAG, "iab is working,ignore this request");
+            return;
+        }
+        lockWorking("queryConsumablePurchase");
         if (iabHelper == null) {
             iabHelper = new IabHelper(context.getApplicationContext());
         }
@@ -75,6 +84,9 @@ public class GooglePayHelper {
      * 定时查询未消费商品
      */
     public void startQueryTask(Context context) {
+        Intent intent = new Intent(ACTION_PAY_QUERY_TASK_START);
+        intent.setPackage(context.getPackageName());
+        context.sendBroadcast(intent);
         if (queryTask == null) {
             queryTask = new GoogleQueryTask(context);
         }
@@ -91,6 +103,7 @@ public class GooglePayHelper {
      * 停止定时查单
      */
     public void stopQueryTask() {
+        PL.i(TAG, "stop query task!");
         recycleIab();
         if (mHandler != null) {
             mHandler.removeCallbacksAndMessages(null);
@@ -152,10 +165,10 @@ public class GooglePayHelper {
     /**
      * 补单
      */
-    private void replacement(final Context context, final Purchase mPurchase) {
+    private void replacement(final Context context, final Purchase purchase) {
         GoogleExchangeReqBean exchangeReqBean = new GoogleExchangeReqBean(context);
-        exchangeReqBean.setDataSignature(mPurchase.getSignature());
-        exchangeReqBean.setPurchaseData(mPurchase.getOriginalJson());
+        exchangeReqBean.setDataSignature(purchase.getSignature());
+        exchangeReqBean.setPurchaseData(purchase.getOriginalJson());
         exchangeReqBean.setRequestUrl(PayHelper.getPreferredUrl(context));
         exchangeReqBean.setRequestSpaUrl(PayHelper.getSpareUrl(context));
         exchangeReqBean.setRequestMethod(GooglePayDomainSite.google_send);
@@ -166,8 +179,20 @@ public class GooglePayHelper {
             public void success(GPExchangeRes gpExchangeRes, String rawResult) {
                 PL.i(TAG, "exchange callback");
                 try {//补发上报
+                    BasePayBean payBean = new BasePayBean();
+                    payBean.setOrderId(purchase.getOrderId());
+                    payBean.setPackageName(purchase.getPackageName());
+                    payBean.setProductId(purchase.getSku());
+                    payBean.setmItemType(purchase.getItemType());
+                    payBean.setOriginPurchaseData(purchase.getOriginalJson());
+                    payBean.setPurchaseState(purchase.getPurchaseState());
+                    payBean.setPurchaseTime(purchase.getPurchaseTime());
+                    payBean.setSignature(purchase.getSignature());
+                    payBean.setDeveloperPayload(purchase.getDeveloperPayload());
+                    payBean.setmToken(purchase.getToken());
                     Intent intent = new Intent(ACTION_PAY_REPLACE_OK);
-                    intent.putExtra(GooglePayContant.PURCHASE_OBJECT, mPurchase);
+                    intent.putExtra(GamaCommonKey.PURCHASE_DATA, payBean);
+                    intent.setPackage(context.getPackageName());
                     context.sendBroadcast(intent);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -257,6 +282,16 @@ public class GooglePayHelper {
             iabHelper.dispose();
         }
         iabHelper = null;
+        isWorking = false;
+    }
+
+    private void lockWorking(String work) {
+        if(isWorking) {
+            PL.i(TAG, "iab is working!");
+            return;
+        }
+        isWorking = true;
+        PL.i(TAG, work + " begin.");
     }
 
     private class GoogleQueryTask implements Runnable {
@@ -274,11 +309,16 @@ public class GooglePayHelper {
             } else {
                 Log.i(TAG, "Application in background, stop query.");
             }
-            mHandler.postDelayed(this, 60 * 100 * 5);
+            mHandler.postDelayed(this, 60 * 1000 * 5);
         }
     }
 
     public void queryProductDetail(final Context context, final List<String> skus, final GamaQueryProductListener listener) {
+        if(isWorking) {
+            PL.i(TAG, "iab is working,ignore this request");
+            return;
+        }
+        lockWorking("queryProductDetail");
         if (iabHelper == null) {
             iabHelper = new IabHelper(context.getApplicationContext());
         }

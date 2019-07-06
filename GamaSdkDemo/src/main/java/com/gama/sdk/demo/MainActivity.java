@@ -69,6 +69,10 @@ public class MainActivity extends AppCompatActivity {
     private IGama iGama;
     private String nextUrl, previousUrl;
     private GamaTwitterLogin gamaTwitterLogin;
+    private int iabCount = 0;
+    private int iabIndex = 0;
+    private int maxCount = 5;
+    private IabHelper[] helpers = new IabHelper[maxCount];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -416,7 +420,11 @@ public class MainActivity extends AppCompatActivity {
         showPlatform.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                iGama.openPlatform(MainActivity.this);
+                if(SGameLanguage.ko_KR == Localization.getSGameLanguage(MainActivity.this)) {
+                    iGama.gamaOpenCafeHome(MainActivity.this);
+                } else if(SGameLanguage.zh_TW == Localization.getSGameLanguage(MainActivity.this)) {
+                    iGama.openPlatform(MainActivity.this);
+                }
 
                 GamaTimeUtil.getBeiJingTime(MainActivity.this);
                 GamaTimeUtil.getDisplayTime(MainActivity.this);
@@ -772,49 +780,77 @@ public class MainActivity extends AppCompatActivity {
         chaxun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!mHelper.isSetupDone()) {
-                    mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
-                        @Override
-                        public void onIabSetupFinished(IabResult result) {
-                            if (result.isSuccess()) {
-                                SLog.logD("初始化iabHelper成功，开始查商品信息");
-                                querySku();
-                            } else {
-                                SLog.logD("初始化iabHelper失败，查商品信息结束");
-                            }
-                        }
-                    });
-                } else {
-                    SLog.logD("已经初始化iabHelper，开始查商品信息");
-                    querySku();
-                }
+//                if (!mHelper.isSetupDone()) {
+//                    mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
+//                        @Override
+//                        public void onIabSetupFinished(IabResult result) {
+//                            if (result.isSuccess()) {
+//                                SLog.logD("初始化iabHelper成功，开始查商品信息");
+//                                querySku();
+//                            } else {
+//                                SLog.logD("初始化iabHelper失败，查商品信息结束");
+//                            }
+//                        }
+//                    });
+//                } else {
+//                    SLog.logD("已经初始化iabHelper，开始查商品信息");
+//                    querySku();
+//                }
+
+                querySku();
             }
         });
 
         findViewById(R.id.plat).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(SGameLanguage.ko_KR == Localization.getSGameLanguage(MainActivity.this)) {
-                    iGama.gamaOpenCafeHome(MainActivity.this);
-                } else if(SGameLanguage.zh_TW == Localization.getSGameLanguage(MainActivity.this)) {
-                    iGama.openPlatform(MainActivity.this);
-                }
+//                if(iabIndex <= maxCount) {
+//                    helpers[iabIndex].dispose();
+//                    iabIndex++;
+//                }
+                GooglePayHelper.getInstance().startQueryTask(MainActivity.this);
             }
         });
 
         findViewById(R.id.onecreate).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                GooglePayHelper.getInstance().queryConsumablePurchase(MainActivity.this);
-//                GooglePayHelper.getInstance().queryConsumablePurchase(MainActivity.this);
-//                GooglePayHelper.getInstance().queryConsumablePurchase(MainActivity.this);
-                querySku();
-                querySku();
-                querySku();
+//                iabCount = 0;
+//                iabIndex = 0;
+//                maxCount = 5;
+//                do {
+//
+//                    IabHelper helper = new IabHelper(MainActivity.this);
+//                    helper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
+//                        @Override
+//                        public void onIabSetupFinished(IabResult result) {
+//
+//                        }
+//                    });
+//                    helpers[iabCount] = helper;
+//
+//                    iabCount++;
+//                } while (iabCount < maxCount);
 
             }
         });
 
+        findViewById(R.id.onesend).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                for(IabHelper helper : helpers) {
+//                    Log.i("igama", helper.isSetupDone() + "");
+//                    if(helper.isSetupDone()) {
+//                        helper.queryInventoryAsync(new IabHelper.QueryInventoryFinishedListener() {
+//                            @Override
+//                            public void onQueryInventoryFinished(IabResult result, Inventory inv) {
+//                                Log.i("igama", result.getMessage());
+//                            }
+//                        });
+//                    }
+//                }
+            }
+        });
     }
 
     private void querySku() {

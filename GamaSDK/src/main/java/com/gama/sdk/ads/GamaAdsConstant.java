@@ -45,6 +45,10 @@ public class GamaAdsConstant {
      * 首储事件
      */
     public static final String GAMA_EVENT_FIRSTPAY = "gama_firstpay";
+    /**
+     * Google支付轮询事件
+     */
+    public static final String GAMA_EVENT_PAY_QUERY = "gama_pay_query";
 
 
     /**

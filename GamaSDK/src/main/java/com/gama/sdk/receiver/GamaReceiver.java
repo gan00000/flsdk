@@ -8,8 +8,7 @@ import android.text.TextUtils;
 
 import com.gama.base.utils.SLog;
 import com.gama.pay.gp.GooglePayHelper;
-import com.gama.pay.gp.constants.GooglePayContant;
-import com.gama.pay.gp.util.Purchase;
+import com.gama.sdk.ads.GamaAdsConstant;
 import com.gama.sdk.ads.StarEventLogger;
 
 /**
@@ -29,15 +28,17 @@ public class GamaReceiver extends BroadcastReceiver {
         }
         switch (action) {
             case GooglePayHelper.ACTION_PAY_REPLACE_OK:
-                Purchase purchase = (Purchase) intent.getSerializableExtra(GooglePayContant.PURCHASE_OBJECT);
-                if(purchase != null) {
+                Bundle extras = intent.getExtras();
+                if(extras != null) {
                     SLog.logI(TAG, "Pay replace success, start event tracking");
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable(GooglePayContant.PURCHASE_OBJECT, purchase);
-                    StarEventLogger.trackinPayEvent(context, bundle);
+                    StarEventLogger.trackinPayEvent(context, extras);
                 } else {
                     SLog.logI(TAG, "Pay replace success, but purchase null, stop event tracking");
                 }
+                break;
+
+            case GooglePayHelper.ACTION_PAY_QUERY_TASK_START:
+                StarEventLogger.trackingWithEventName(context, GamaAdsConstant.GAMA_EVENT_PAY_QUERY, null, null);
                 break;
         }
     }

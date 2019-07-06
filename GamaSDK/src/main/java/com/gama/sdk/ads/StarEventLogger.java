@@ -72,7 +72,7 @@ public class StarEventLogger {
     /**
      * Android登录事件上报
      */
-    public static void trackinLoginEvent(Activity activity, SLoginResponse loginResponse){
+    public static void trackinLoginEvent(Context activity, SLoginResponse loginResponse){
         try {
             PL.i(TAG, "登入上報");
             // TODO: 2018/4/16 Android登录事件名 gama_login_event_android
@@ -97,7 +97,7 @@ public class StarEventLogger {
     /**
      * Android注册事件上报
      */
-    public static void trackinRegisterEvent(Activity activity, SLoginResponse loginResponse){
+    public static void trackinRegisterEvent(Context activity, SLoginResponse loginResponse){
         try {
             PL.i(TAG, "註冊上報");
             // TODO: 2018/4/16 Android注册事件名 gama_register_event_android
@@ -122,7 +122,7 @@ public class StarEventLogger {
     /**
      * Android角色信息上报
      */
-    public static void trackingRoleInfo(Activity activity, Map<String, Object> map) {
+    public static void trackingRoleInfo(Context activity, Map<String, Object> map) {
         try {
             String userId = GamaUtil.getUid(activity);
             if (map == null || map.isEmpty() || TextUtils.isEmpty(userId)) {
@@ -212,22 +212,22 @@ public class StarEventLogger {
         }
     }
 
-    public static void trackingWithEventName(Activity activity, String eventName, Map<String, Object> map, Set<GamaAdsConstant.GamaEventReportChannel> mediaSet) {
+    public static void trackingWithEventName(Context context, String eventName, Map<String, Object> map, Set<GamaAdsConstant.GamaEventReportChannel> mediaSet) {
         if(TextUtils.isEmpty(eventName)) {
             PL.e("上報事件名為空");
             return;
         }
         try {
-            String userId = GamaUtil.getUid(activity);
+            String userId = GamaUtil.getUid(context);
             if(map == null) { //appsflyer的属性列表
                 map = new HashMap<>();
             }
-            map.put(GamaAdsConstant.GAMA_EVENT_ROLEID, GamaUtil.getRoleId(activity));
-            map.put(GamaAdsConstant.GAMA_EVENT_ROLENAME, GamaUtil.getRoleName(activity));
-            map.put(GamaAdsConstant.GAMA_EVENT_ROLE_LEVEL, GamaUtil.getRoleLevel(activity));
-            map.put(GamaAdsConstant.GAMA_EVENT_ROLE_VIP_LEVEL, GamaUtil.getRoleVip(activity));
-            map.put(GamaAdsConstant.GAMA_EVENT_SERVERCODE, GamaUtil.getServerCode(activity));
-            map.put(GamaAdsConstant.GAMA_EVENT_SERVERNAME, GamaUtil.getServerName(activity));
+            map.put(GamaAdsConstant.GAMA_EVENT_ROLEID, GamaUtil.getRoleId(context));
+            map.put(GamaAdsConstant.GAMA_EVENT_ROLENAME, GamaUtil.getRoleName(context));
+            map.put(GamaAdsConstant.GAMA_EVENT_ROLE_LEVEL, GamaUtil.getRoleLevel(context));
+            map.put(GamaAdsConstant.GAMA_EVENT_ROLE_VIP_LEVEL, GamaUtil.getRoleVip(context));
+            map.put(GamaAdsConstant.GAMA_EVENT_SERVERCODE, GamaUtil.getServerCode(context));
+            map.put(GamaAdsConstant.GAMA_EVENT_SERVERNAME, GamaUtil.getServerName(context));
             map.put(GamaAdsConstant.GAMA_EVENT_USER_ID, userId);
 
             //facebook和firebase的属性列表
@@ -239,28 +239,28 @@ public class StarEventLogger {
             if(mediaSet == null || mediaSet.isEmpty() || mediaSet.contains(GamaAdsConstant.GamaEventReportChannel.GamaEventReportAllChannel)) {
                 PL.i("上报全部媒体");
                 //Facebook上报
-                SFacebookProxy.trackingEvent(activity, eventName, null, b);
+                SFacebookProxy.trackingEvent(context, eventName, null, b);
 
                 //firebase上报,
-                SGoogleProxy.firebaseAnalytics(activity, eventName, b);
+                SGoogleProxy.firebaseAnalytics(context, eventName, b);
 
                 //AppsFlyer上报
-                AppsFlyerLib.getInstance().trackEvent(activity.getApplicationContext(), eventName, map);
+                AppsFlyerLib.getInstance().trackEvent(context.getApplicationContext(), eventName, map);
             } else {
                 if(mediaSet.contains(GamaAdsConstant.GamaEventReportChannel.GamaEventReportFacebook)) {
                     PL.i("上报媒体1");
                     //Facebook上报
-                    SFacebookProxy.trackingEvent(activity, eventName, null, b);
+                    SFacebookProxy.trackingEvent(context, eventName, null, b);
                 }
                 if(mediaSet.contains(GamaAdsConstant.GamaEventReportChannel.GamaEventReportFirebase)) {
                     PL.i("上报媒体2");
                     //firebase上报,
-                    SGoogleProxy.firebaseAnalytics(activity, eventName, b);
+                    SGoogleProxy.firebaseAnalytics(context, eventName, b);
                 }
                 if(mediaSet.contains(GamaAdsConstant.GamaEventReportChannel.GamaEventReportAppsflyer)) {
                     PL.i("上报媒体3");
                     //AppsFlyer上报
-                    AppsFlyerLib.getInstance().trackEvent(activity.getApplicationContext(), eventName, map);
+                    AppsFlyerLib.getInstance().trackEvent(context.getApplicationContext(), eventName, map);
                 }
             }
         } catch (Exception e) {

@@ -136,8 +136,8 @@ public class SGoogleProxy {
 //	      activity.startActivityForResult(shareIntent, GOOGLE_SHARE_CODE);
 	}
 
-	public static void firebaseAnalytics(Activity activity, String eventName, Bundle params) {
-		FirebaseAnalytics analytics = FirebaseAnalytics.getInstance(activity);
+	public static void firebaseAnalytics(Context context, String eventName, Bundle params) {
+		FirebaseAnalytics analytics = FirebaseAnalytics.getInstance(context);
 		analytics.logEvent(eventName, params);
 	}
 
