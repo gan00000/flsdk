@@ -1,8 +1,10 @@
 package com.gama.sdk.out;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 
 import com.core.base.utils.PL;
 import com.core.base.utils.ToastUtils;
@@ -14,9 +16,13 @@ import com.gama.base.utils.SLog;
 import com.gama.pay.gp.GooglePayActivity2;
 import com.gama.pay.gp.GooglePayHelper;
 import com.gama.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
+import com.gama.pay.gp.bean.req.WebPayReqBean;
+import com.gama.pay.gp.util.PayHelper;
 import com.gama.pay.utils.GamaQueryProductListener;
 import com.gama.plat.bean.PlatformData;
 import com.gama.plat.entrance.PlatformManager;
+import com.gama.sdk.R;
+import com.gama.sdk.SWebViewDialog;
 import com.gama.sdk.ads.StarEventLogger;
 
 import java.util.List;
@@ -141,6 +147,8 @@ public class GamaImpl extends BaseGamaImpl {
             public void run() {
                 if (payType == SPayType.GOOGLE) {
                     googlePay(activity, cpOrderId, productId, extra);
+                } else if(payType == SPayType.OTHERS) {
+                    a(activity, cpOrderId, extra);
                 } else {//默认Google储值
                     PL.i("不支持當前類型： " + payType.name());
                 }
@@ -157,6 +165,36 @@ public class GamaImpl extends BaseGamaImpl {
         Intent i = new Intent(activity, GooglePayActivity2.class);
         i.putExtra(GooglePayActivity2.GooglePayReqBean_Extra_Key, googlePayCreateOrderIdReqBean);
         activity.startActivityForResult(i, GooglePayActivity2.GooglePayReqeustCode);
+    }
+
+
+    private void a(Activity activity, String cpOrderId, String extra) {
+        WebPayReqBean webPayReqBean = PayHelper.buildWebPayBean(activity, cpOrderId, extra);
+
+        String payThirdUrl = null;
+        if (GamaUtil.getSdkCfg(activity) != null) {
+            payThirdUrl = GamaUtil.getSdkCfg(activity).getS_Third_PayUrl();
+        }
+        if (TextUtils.isEmpty(payThirdUrl)) {
+            payThirdUrl = ResConfig.getPayPreferredUrl(activity) + ResConfig.getPayThirdMethod(activity);
+        }
+        webPayReqBean.setCompleteUrl(payThirdUrl);
+
+        String webUrl = webPayReqBean.createPreRequestUrl();
+
+        otherPayWebViewDialog = new SWebViewDialog(activity, R.style.Gama_Theme_AppCompat_Dialog_Notitle_Fullscreen);
+        otherPayWebViewDialog.setWebUrl(webUrl);
+        otherPayWebViewDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                if (iPayListener != null) {
+                    iPayListener.onPayFinish(new Bundle());
+                } else {
+                    PL.i(TAG, "a null occour");
+                }
+            }
+        });
+        otherPayWebViewDialog.show();
     }
 
     @Override

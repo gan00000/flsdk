@@ -127,11 +127,18 @@ public class GamaImpl extends BaseGamaImpl {
     }
 
     @Override
-    protected void startPay(Activity activity, SPayType payType, String cpOrderId, String productId, String extra) {
+    protected void startPay(final Activity activity, final SPayType payType, final String cpOrderId, final String productId, final String extra) {
         super.startPay(activity, payType, cpOrderId, productId, extra);
-        if (payType == SPayType.GOOGLE) {//第三方储值
-            googlePay(activity, cpOrderId, productId, extra);
-        }
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (payType == SPayType.GOOGLE) {//第三方储值
+                    googlePay(activity, cpOrderId, productId, extra);
+                } else {
+                    PL.i("不支持當前類型： " + payType.name());
+                }
+            }
+        });
     }
 
     private void googlePay(Activity activity, String cpOrderId, String productId, String extra) {

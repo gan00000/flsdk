@@ -24,6 +24,7 @@
                     android:id="@+id/demo_language"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:text="设置语言" />
 
                 <Button
@@ -36,18 +37,21 @@
                     android:id="@+id/demo_pay"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:text="MyCard等其他储值" />
 
                 <Button
                     android:id="@+id/demo_pay_google"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:text="google储值" />
 
                 <Button
                     android:id="@+id/demo_pay_one"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:text="one储值" />
 
 
@@ -79,6 +83,7 @@
                     android:id="@+id/xiaofei"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:text="消费" />
 
                 <Button
@@ -91,6 +96,7 @@
                     android:id="@+id/PurchasesHistory"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:text="PurchasesHistory" />
 
                 <Button
@@ -157,25 +163,8 @@
                     android:id="@+id/chaxun"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:text="查商品" />
-
-                <Button
-                    android:id="@+id/onecreate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="iab创建" />
-
-                <Button
-                    android:id="@+id/onesend"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="iab状态" />
-
-                <Button
-                    android:id="@+id/plat"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="iab释放" />
 
             </LinearLayout>
 

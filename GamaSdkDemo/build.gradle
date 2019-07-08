@@ -1,3 +1,6 @@
+import java.util.regex.Matcher
+import java.util.regex.Pattern
+
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
 
@@ -322,10 +325,10 @@ android {
                             "\"com.krezfy.2usd.30day\"" +
                             "}"
 
-            resValue "string", "ko_gama_login_pre_url", "https://t-login.gamamobi.com/"
-            resValue "string", "ko_gama_login_spa_url", "https://t-login.gamamobi.com/"
-            resValue "string", "ko_gama_pay_pre_url", "https://t-pay.gamamobi.com/"
-            resValue "string", "ko_gama_pay_spa_url", "https://t-pay.gamamobi.com/"
+//            resValue "string", "ko_gama_login_pre_url", "https://t-login.gamamobi.com/"
+//            resValue "string", "ko_gama_login_spa_url", "https://t-login.gamamobi.com/"
+//            resValue "string", "ko_gama_pay_pre_url", "https://t-pay.gamamobi.com/"
+//            resValue "string", "ko_gama_pay_spa_url", "https://t-pay.gamamobi.com/"
 
             signingConfig signingConfigs.release
         }
@@ -401,6 +404,29 @@ android {
                             "}"
         }
 
+        twweb {
+            applicationId "com.gamamobi.ezfy"
+            minSdkVersion 18
+            targetSdkVersion 28
+            versionCode 1
+            versionName "1.0"
+            flavorDimensions "1"
+            resValue "string", "facebook_app_id", "1040235646130047"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1040235646130047"
+            resValue "string", "fb_login_protocol_scheme", "fb1040235646130047"
+            resValue "string", "facebook_app_name", "硬漢部隊"
+            //每个游戏的demo设置
+            resValue "string", "test_sku", "com.ezfy.1usd"
+            resValue "string", "sdk_name", "硬汉Demo"
+            signingConfig signingConfigs.release
+
+            buildConfigField "String[]", "PRODUCE_LIST",
+                    "{" +
+                            "\"com.ezfy.1usd\"," +
+                            "\"com.ezfy.100usd\"," +
+                            "}"
+        }
+
     }
 
     android {
@@ -434,6 +460,29 @@ dependencies {
 
 def getReleaseTime() {
     return new Date().format("yyyy-MM-dd-HH-mm", TimeZone.getDefault())
+}
+
+def getCurrentFlavor() {
+
+    Gradle gradle = getGradle()
+    String  tskReqStr = gradle.getStartParameter().getTaskRequests().toString()
+    println "str is " + tskReqStr
+    Pattern pattern;
+
+    if( tskReqStr.contains( "assemble" ) )
+        pattern = Pattern.compile("assemble(\\w+)(Release|Debug)")
+    else
+        pattern = Pattern.compile("generate(\\w+)(Release|Debug)")
+
+    Matcher matcher = pattern.matcher( tskReqStr )
+
+    if( matcher.find() )
+        return matcher.group(1).toLowerCase()
+    else
+    {
+        println "NO MATCH FOUND"
+        return "";
+    }
 }
 
 apply plugin: 'com.google.gms.google-services'
