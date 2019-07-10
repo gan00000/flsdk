@@ -179,207 +179,80 @@ task clearJar(type: Delete) {
     delete 'build/libs/'+ '*.jar'
 }
 
-//打包生成test.jar
-task makeLibraryJar() {
-    //指定生成的jar名
-//    baseName getJarName()
-    println 'mmmmmmmmm'
+@Field String tempVar
 
-    android.productFlavors.all {
-        flavor ->
-            println flavor.name
+//打包生成test.jar
+task makeLibraryJar {
+
+    group 'aaa'
+
+//    println android.productFlavors
+
+    doLast {
+        android.productFlavors.each {
+            flavor ->
+                println flavor.name
+                def mtask = tasks.findByName("task$flavor.name")
+//            mtask.description = flavor.name
+                mtask.execute()
+        }
+
     }
 
-//    task.makeLibraryJarKrgoogle.execute()
-//    task.makeLibraryJarKrone().execute()
-//    task.makeLibraryJarTwgoogle().execute()
-//    task.makeLibraryJarTwweb().execute()
 
-    println 'kkkkkkkkkkk'
-    //打包到jar后的目录结构
-//    into('./')
 }
 
-//打包生成test.jar
-task makeLibraryJarTwgoogle(type: Copy) {
-    //指定生成的jar名
-//    baseName getJarName()
+android.productFlavors.each {
+    flavor ->
+        println flavor.name
+        task "task$flavor.name"(type:org.gradle.api.tasks.bundling.Jar) {
+            group 'aaa'
 
-    //从哪里打包class文件,可以指定文件和目录
-    from('build/intermediates/packaged-classes/' + 'twgoogle' + '/release/')
-    include ('classes.jar')
+            //指定生成的jar名
+            baseName 'gama-sdk-' + flavor.name + '-' + SDK_VERSION_NAME_SDK.replace("\"","")
 
-    //去掉不需要打包的目录和文件
-    exclude 'META-INF/LICENSE.txt'
-    exclude 'META-INF/NOTICE.txt'
-    //过滤不需要的class
-    exclude "**/**/BuildConfig.class"
-    exclude "**/**/BuildConfig\$*.class"
-    exclude "**/R.class"
-    exclude "**/R\$*.class"
-    exclude "com/gama/sdk/BuildConfig.class"
-    exclude ('com/gama/sdk/BuildConfig.class')
-    exclude ("com/gama/sdk/BuildConfig.class")
-    exclude('test/', 'BuildConfig.class', 'R.class')
-    into('build/outputs/libs/')
-    rename ('classes.jar', "${getJarName(SDK_VERSION_NAME_SDK_TWGOOGLE)}.jar")
-    //打包到jar后的目录结构
-//    into('./')
-}
+            println baseName
+            include "com/gama/**"
+            include "com/lhh/**"
+            exclude "com/gama/connector/**"
+            exclude "com/gama/pay/**"
+            exclude "com/gama/cafe/**"
+            exclude "com/gama/onestore/**"
+            exclude "com/gama/thirdlib/**"
+            exclude "**/R.class"
+            exclude "**/R\$*.class"
+            exclude "**/**/BuildConfig.class"
+            exclude "**/**/BuildConfig\$*.class"
 
+            println 'ddd -- ' + flavor.name.charAt(0).toUpperCase()
+            println 'ddd -- ' + flavor.name.substring(1)
 
-task makeLibraryJarddd(type:org.gradle.api.tasks.bundling.Jar) {
-    //指定生成的jar名
-    baseName getJarName()
-
-    //去掉不需要打包的目录和文件
-//    exclude 'META-INF/LICENSE.txt'
-//    exclude 'META-INF/NOTICE.txt'
-//    //过滤不需要的class
-////    exclude "**/**/BuildConfig.class"
-////    exclude "**/**/BuildConfig\$*.class"
-//
-//    exclude "android/"
-//    exclude "com/google/"
-//    exclude "com/facebook/"
-//    exclude "**/R.class"
-//    exclude "**/R\$*.class"
-
-    include "com/gama/**"
-    include "com/lhh/**"
-    exclude "**/R.class"
-    exclude "**/R\$*.class"
-    exclude "**/**/BuildConfig.class"
-    exclude "**/**/BuildConfig\$*.class"
-
-    //从哪里打包class文件,可以指定文件和目录
-//    from('build/intermediates/classes/release/')
-    from('build/intermediates/javac/kroneRelease/compileKroneReleaseJavaWithJavac/classes')
-
-    //打包到jar后的目录结构
-//    into('./')
+            //从哪里打包class文件,可以指定文件和目录
+            from('build/intermediates/javac/' + flavor.name +'Release/compile' + flavor.name.charAt(0).toUpperCase() + flavor.name.substring(1) + 'ReleaseJavaWithJavac/classes')
+        }
 }
 
 task createJar(type: Copy){
+
+    group 'aaa'
     from('build/libs/')
 
     into('../libs/')
-    include(getJarName() + '.jar')
-}
-createJar.dependsOn(makeLibraryJarddd)
-
-def getJarName(){
-    return "sdk"
+//    include(getJarName() + '.jar')
 }
 
-//打包生成test.jar
-task makeLibraryJarTwweb(type: Copy) {
-    //指定生成的jar名
-//    baseName getJarName()
+task deleteJar(type: Delete){
 
-    //从哪里打包class文件,可以指定文件和目录
-    from('build/intermediates/packaged-classes/' + 'twweb' + '/release/')
-    include ('classes.jar')
+    group 'aaa'
+    delete('build/libs')
+    delete('../libs')
 
-    //去掉不需要打包的目录和文件
-    exclude 'META-INF/LICENSE.txt'
-    exclude 'META-INF/NOTICE.txt'
-    //过滤不需要的class
-    exclude "**/**/BuildConfig.class"
-    exclude "**/**/BuildConfig\$*.class"
-    exclude "**/R.class"
-    exclude "**/R\$*.class"
-    exclude "com/gama/sdk/BuildConfig.class"
-    exclude ('com/gama/sdk/BuildConfig.class')
-    exclude ("com/gama/sdk/BuildConfig.class")
-    exclude('test/', 'BuildConfig.class', 'R.class')
-    into('build/outputs/libs/')
-    rename ('classes.jar', "${getJarName(SDK_VERSION_NAME_SDK_TWWEB)}.jar")
-    //打包到jar后的目录结构
-//    into('./')
 }
 
-//打包生成test.jar
-task makeLibraryJarKrone(type: Copy) {
-    //指定生成的jar名
-//    baseName getJarName()
-
-    //从哪里打包class文件,可以指定文件和目录
-    from('build/intermediates/packaged-classes/' + 'krone' + '/release/')
-    include ('classes.jar')
-
-    //去掉不需要打包的目录和文件
-    exclude 'META-INF/LICENSE.txt'
-    exclude 'META-INF/NOTICE.txt'
-    //过滤不需要的class
-    exclude "**/**/BuildConfig.class"
-    exclude "**/**/BuildConfig\$*.class"
-    exclude "**/R.class"
-    exclude "**/R\$*.class"
-    exclude "com/gama/sdk/BuildConfig.class"
-    exclude ('com/gama/sdk/BuildConfig.class')
-    exclude ("com/gama/sdk/BuildConfig.class")
-    exclude('test/', 'BuildConfig.class', 'R.class')
-    into('build/outputs/libs/')
-    rename ('classes.jar', "${getJarName(SDK_VERSION_NAME_SDK_KRONE)}.jar")
-    //打包到jar后的目录结构
-//    into('./')
-}
-
-//打包生成test.jar
-task makeLibraryJarKrgoogle(type: Copy) {
-    //指定生成的jar名
-//    baseName getJarName()
-
-    //从哪里打包class文件,可以指定文件和目录
-    from('build/intermediates/packaged-classes/' + 'krgoogle' + '/release/')
-    include ('classes.jar')
-
-    //去掉不需要打包的目录和文件
-    exclude 'META-INF/LICENSE.txt'
-    exclude 'META-INF/NOTICE.txt'
-    //过滤不需要的class
-    exclude "**/**/BuildConfig.class"
-    exclude "**/**/BuildConfig\$*.class"
-    exclude "**/R.class"
-    exclude "**/R\$*.class"
-    exclude "com/gama/sdk/BuildConfig.class"
-    exclude ('com/gama/sdk/BuildConfig.class')
-    exclude ("com/gama/sdk/BuildConfig.class")
-    exclude('test/', 'BuildConfig.class', 'R.class')
-    into('build/outputs/libs/')
-    rename ('classes.jar', "${getJarName(SDK_VERSION_NAME_SDK_KRGOOGLE)}.jar")
-    //打包到jar后的目录结构
-//    into('./')
-}
-
-//makeLibraryJar.dependsOn(clearJar,build)
-makeLibraryJarTwgoogle.dependsOn(clearJar,build)
-makeLibraryJarTwweb.dependsOn(clearJar,build)
-makeLibraryJarKrone.dependsOn(clearJar,build)
-makeLibraryJarKrgoogle.dependsOn(clearJar,build)
+createJar.dependsOn(deleteJar,makeLibraryJar)
+//createJar.dependsOn(clean,build,makeLibraryJar)
+//createJar.dependsOn(clean,build,makeLibraryJarKrone,makeLibraryJarKrgoogle,makeLibraryJarTwweb,makeLibraryJarTwgoogle)
 
 def getJarName(name){
-    return name.replace("\"","")
+    return name.replace("\"","")+'.jar'
 }
-
-
-task copyJar(type: Copy) {
-
-    from('build/libs/')
-
-    into('../libs/')
-    include(getVariant() + '.jar')
-}
-
-copyJar.dependsOn(makeLibraryJar)
-
-task createPySdk(type: Copy) {
-
-    from('build/libs/')
-
-    into('../libs/')
-    include(getVariant() + '.jar')
-}
-
-createPySdk.dependsOn(makeLibraryJar)
