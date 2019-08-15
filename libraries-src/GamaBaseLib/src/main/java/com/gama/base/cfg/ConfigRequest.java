@@ -70,6 +70,11 @@ public class ConfigRequest{
             public void noData() {
 
             }
+
+            @Override
+            public void cancel() {
+
+            }
         });
         cfgFileRequest.excute();
     }
@@ -103,6 +108,11 @@ public class ConfigRequest{
 
             @Override
             public void noData() {
+
+            }
+
+            @Override
+            public void cancel() {
 
             }
         });
@@ -147,6 +157,11 @@ public class ConfigRequest{
 
             @Override
             public void noData() {
+
+            }
+
+            @Override
+            public void cancel() {
 
             }
         });

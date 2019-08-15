@@ -8,6 +8,7 @@ import com.core.base.utils.ApkInfoUtil;
 import com.core.base.utils.FileUtil;
 import com.core.base.utils.GamaTimeUtil;
 import com.core.base.utils.JsonUtil;
+import com.core.base.utils.PL;
 import com.core.base.utils.SPUtil;
 import com.core.base.utils.SStringUtil;
 import com.gama.base.bean.SGameLanguage;
@@ -223,13 +224,14 @@ public class GamaUtil {
         return JsonUtil.getValueByKey(context,getSdkLoginData(context), "accessToken", "");
     }
 
-    private static final String GAMA_LOGIN_ROLE_ID = "GAMA_LOGIN_ROLE_ID";
-    private static final String GAMA_LOGIN_ROLE_NAME = "GAMA_LOGIN_ROLE_NAME";
-    private static final String GAMA_LOGIN_ROLE_SERVER_CODE = "GAMA_LOGIN_ROLE_SERVER_CODE";
-    private static final String GAMA_LOGIN_ROLE_SERVER_NAME = "GAMA_LOGIN_ROLE_SERVER_NAME";
+    public static final String GAMA_LOGIN_USER_ID = "GAMA_LOGIN_USER_ID";
+    public static final String GAMA_LOGIN_ROLE_ID = "GAMA_LOGIN_ROLE_ID";
+    public static final String GAMA_LOGIN_ROLE_NAME = "GAMA_LOGIN_ROLE_NAME";
+    public static final String GAMA_LOGIN_ROLE_SERVER_CODE = "GAMA_LOGIN_ROLE_SERVER_CODE";
+    public static final String GAMA_LOGIN_ROLE_SERVER_NAME = "GAMA_LOGIN_ROLE_SERVER_NAME";
     private static final String GAMA_LOGIN_ROLE_INFO = "GAMA_LOGIN_ROLE_INFO";
-    private static final String GAMA_LOGIN_ROLE_LEVEL = "GAMA_LOGIN_ROLE_LEVEL";
-    private static final String GAMA_LOGIN_ROLE_VIP = "GAMA_LOGIN_ROLE_VIP";
+    public static final String GAMA_LOGIN_ROLE_LEVEL = "GAMA_LOGIN_ROLE_LEVEL";
+    public static final String GAMA_LOGIN_ROLE_VIP = "GAMA_LOGIN_ROLE_VIP";
 
     /**
      * 获取Json形式保存的角色信息
@@ -285,6 +287,7 @@ public class GamaUtil {
     public static void saveRoleInfo(Context context, String roleId, String roleName, String roleLevel, String vipLevel, String severCode, String serverName) {
         try {
             JSONObject jsonObject = new JSONObject();
+            jsonObject.put(GAMA_LOGIN_USER_ID,getUid(context));
             jsonObject.put(GAMA_LOGIN_ROLE_ID,roleId);
             jsonObject.put(GAMA_LOGIN_ROLE_NAME,roleName);
             jsonObject.put(GAMA_LOGIN_ROLE_SERVER_CODE,severCode);
@@ -573,5 +576,51 @@ public class GamaUtil {
      */
     public static boolean getFirstPay(Context context) {
         return SPUtil.getSimpleBoolean(context, GamaUtil.GAMA_SP_FILE, PREFIX_FIRSTPAY_ + getUid(context));
+    }
+
+    private static final String PREFIX_ONLINE = "GAMA_ONLINE";
+    /**
+     * 保存活跃时间戳
+     * @param context
+     */
+    public static void saveOnlineTimeInfo(Context context, long timeStamp) {
+        if(TextUtils.isEmpty(getUid(context))
+                || TextUtils.isEmpty(getRoleId(context))
+                || TextUtils.isEmpty(getServerCode(context))) {
+            PL.i("没有角色信息，不保存在线时间");
+            return;
+        }
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put(GAMA_LOGIN_USER_ID, getUid(context));
+            jsonObject.put(GAMA_LOGIN_ROLE_NAME, getRoleName(context));
+            jsonObject.put(GAMA_LOGIN_ROLE_SERVER_CODE, getServerCode(context));
+            jsonObject.put(GAMA_LOGIN_ROLE_SERVER_NAME, getServerName(context));
+            jsonObject.put(GAMA_LOGIN_ROLE_ID, getRoleId(context));
+            jsonObject.put(GAMA_LOGIN_ROLE_LEVEL, getRoleLevel(context));
+            jsonObject.put(GAMA_LOGIN_ROLE_VIP, getRoleVip(context));
+            jsonObject.put("timestamp", timeStamp);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        SPUtil.saveSimpleInfo(context, GamaUtil.GAMA_SP_FILE, PREFIX_ONLINE, jsonObject.toString());
+    }
+
+    /**
+     * 获取在线时长
+     * @param context
+     * @return
+     */
+    public static String getOnlineTimeInfo(Context context) {
+        return SPUtil.getSimpleString(context, GamaUtil.GAMA_SP_FILE, PREFIX_ONLINE);
+    }
+
+    /**
+     * 重置在线时长
+     * @param context
+     * @return
+     */
+    public static void resetOnlineTimeInfo(Context context) {
+        SPUtil.saveSimpleInfo(context, GamaUtil.GAMA_SP_FILE, PREFIX_ONLINE, "");
     }
 }

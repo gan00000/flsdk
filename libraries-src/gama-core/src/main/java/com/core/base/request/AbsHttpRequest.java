@@ -1,6 +1,7 @@
 package com.core.base.request;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.text.TextUtils;
 
 import com.core.base.callback.ISReqCallBack;
@@ -28,6 +29,7 @@ public abstract class AbsHttpRequest implements ISRqeust {
         this.reqCallBack = reqCallBack;
     }
 
+    protected boolean isCancel = false; //是否取消请求。
 
     public <T> void excute(final Type mTypeOfT) {
 
@@ -46,6 +48,9 @@ public abstract class AbsHttpRequest implements ISRqeust {
 
             @Override
             protected String doInBackground(String... params) {
+                if(isCancel) {
+                    return null;
+                }
                 BaseReqeustBean baseReqeustBean = createRequestBean();
                 if (baseReqeustBean == null) {
                     return "";
@@ -69,6 +74,10 @@ public abstract class AbsHttpRequest implements ISRqeust {
                 super.onPostExecute(result);
                 if (loadDialog != null && loadDialog.isShowing()){
                     loadDialog.dismiss();
+                }
+
+                if(isCancel) {
+                    return;
                 }
 
                 if (coreHttpResponse != null) {
@@ -119,6 +128,9 @@ public abstract class AbsHttpRequest implements ISRqeust {
 
             @Override
             protected String doInBackground(String... params) {
+                if(isCancel) {
+                    return null;
+                }
                 BaseReqeustBean baseReqeustBean = createRequestBean();
                 if (baseReqeustBean == null) {
                     return "";
@@ -142,6 +154,9 @@ public abstract class AbsHttpRequest implements ISRqeust {
                 super.onPostExecute(result);
                 if (loadDialog != null && loadDialog.isShowing()){
                     loadDialog.dismiss();
+                }
+                if(isCancel) {
+                    return;
                 }
 
                 if (coreHttpResponse != null) {
@@ -196,6 +211,17 @@ public abstract class AbsHttpRequest implements ISRqeust {
 
     public void setLoadDialog(Dialog loadDialog) {
         this.loadDialog = loadDialog;
+        if(this.loadDialog != null) {
+            this.loadDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                @Override
+                public void onCancel(DialogInterface dialog) {
+                    isCancel = true;
+                    if(reqCallBack != null) {
+                        reqCallBack.cancel();
+                    }
+                }
+            });
+        }
     }
 
     private boolean isGetMethod = false;
@@ -221,4 +247,9 @@ public abstract class AbsHttpRequest implements ISRqeust {
     public void onNoData(String result) {
 
     }
+
+//    @Override
+//    public void cancelTask() {
+//        this.isCancel = true;
+//    }
 }

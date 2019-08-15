@@ -147,6 +147,8 @@ public class StarEventLogger {
             AppsFlyerLib.getInstance().trackEvent(activity.getApplicationContext(), GamaAdsConstant.GAMA_EVENT_ROLE_INFO, map);
             //计算留存
             GamaAdsUtils.caculateRetention(activity, userId);
+            //计算在线时长
+            GamaAdsUtils.uploadOnlineTime(activity, GamaAdsUtils.GamaOnlineType.TYPE_CHANGE_ROLE);
             //上报给gama服务器
             GamaAdsUtils.upLoadRoleInfo(activity, map);
         } catch (Exception e) {
@@ -327,6 +329,11 @@ public class StarEventLogger {
 
             @Override
             public void noData() {
+
+            }
+
+            @Override
+            public void cancel() {
 
             }
         });

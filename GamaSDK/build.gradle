@@ -151,13 +151,13 @@ dependencies {
     kroneApi project(':libraries-src:gama_cafe_plug')
     //twgoogle应用库
     twgoogleApi project(':libraries-src:gama-pay')
-    twgoogleImplementation(name: 'TW-V3-SDK-release', ext: 'aar')
+    twgoogleImplementation(name: 'gama-platform-release-1.2', ext: 'aar')
     twgoogleImplementation ('com.zhihu.android:matisse:0.5.1') {
         exclude group: 'com.android.support'
     }
     //twweb引用库
     twwebApi project(':libraries-src:gama-pay')
-    twwebImplementation(name: 'TW-V3-SDK-release', ext: 'aar')
+    twwebImplementation(name: 'gama-platform-release-1.2', ext: 'aar')
     twwebImplementation ('com.zhihu.android:matisse:0.5.1') {
         exclude group: 'com.android.support'
     }

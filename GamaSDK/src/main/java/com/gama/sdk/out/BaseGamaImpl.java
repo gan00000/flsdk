@@ -26,6 +26,7 @@ import com.gama.sdk.BuildConfig;
 import com.gama.sdk.R;
 import com.gama.sdk.SWebViewDialog;
 import com.gama.sdk.ads.GamaAdsConstant;
+import com.gama.sdk.ads.GamaAdsUtils;
 import com.gama.sdk.ads.StarEventLogger;
 import com.gama.sdk.callback.IPayListener;
 import com.gama.sdk.login.DialogLoginImpl;
@@ -91,7 +92,8 @@ public class BaseGamaImpl implements IGama {
                 Localization.gameLanguage(activity, gameLanguage);
                 //清除上一次登录成功的返回值
                 GamaUtil.saveSdkLoginData(activity, "");
-
+                //重置用户登入时长
+                GamaUtil.resetOnlineTimeInfo(activity);
                 //获取Google 广告ID
                 StarEventLogger.registerGoogleAdId(activity);
                 //Gama平台安装上报
@@ -380,6 +382,8 @@ public class BaseGamaImpl implements IGama {
                 }
                 GamaWebPageHelper.onResume(activity);
 
+                //上报在线时长-记录时间戳
+                GamaUtil.saveOnlineTimeInfo(activity, System.currentTimeMillis());
             }
         });
     }
@@ -428,10 +432,9 @@ public class BaseGamaImpl implements IGama {
                 if (iLogin != null) {
                     iLogin.onStop(activity);
                 }
-//                if (Localization.getSGameLanguage(activity) == SGameLanguage.ko_KR) {
-//                    GamaCafeHelper.stopCafe(activity);
-//                }
 
+                //上报在线时长
+                GamaAdsUtils.uploadOnlineTime(activity, GamaAdsUtils.GamaOnlineType.TYPE_EXIT_GAME);
             }
         });
     }

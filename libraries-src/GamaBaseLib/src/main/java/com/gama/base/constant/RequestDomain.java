@@ -21,4 +21,9 @@ public class RequestDomain {
      * 支付年龄判断
      */
     public static final String AGE_VALIDATION = "validation/ageValidation/";
+
+    /**
+     * 在线时长
+     */
+    public static final String ONLINE_TIME = "online/api";
 }

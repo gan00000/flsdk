@@ -11,5 +11,6 @@ public interface ISReqCallBack<T> extends ISCallBack<T> {
 
     void noData();
 
+    void cancel();
 
 }

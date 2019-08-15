@@ -54,6 +54,9 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     private static final String TAG = LoginPresenterImpl.class.getSimpleName();
     private Activity mActivity;
 
+    //是否自動登入的狀態
+    private boolean isAutoLogin = false;
+
     /**
      * SLoginDialogV2
      */
@@ -247,6 +250,11 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             public void noData() {
                 showMainLoginView();
             }
+
+            @Override
+            public void cancel() {
+                showMainLoginView();
+            }
         });
         cmd.excute(SLoginResponse.class);
 
@@ -348,6 +356,10 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             public void noData() {
 
             }
+
+            @Override
+            public void cancel() {
+            }
         });
 
         changePwdRequestTask.excute(SLoginResponse.class);
@@ -390,6 +402,10 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
             }
 
+            @Override
+            public void cancel() {
+
+            }
         });
         findPwdRequestTask.excute(SLoginResponse.class);
     }
@@ -495,6 +511,10 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             public void noData() {
 
             }
+
+            @Override
+            public void cancel() {
+            }
         });
         injectionRequestTask.excute(SLoginResponse.class);
     }
@@ -530,6 +550,10 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             @Override
             public void noData() {
 
+            }
+
+            @Override
+            public void cancel() {
             }
 
         });
@@ -581,6 +605,10 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             @Override
             public void noData() {
 
+            }
+
+            @Override
+            public void cancel() {
             }
         });
         macLoginRegCmd.excute(SLoginResponse.class);
@@ -822,12 +850,17 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             public void noData() {
                 showMainLoginView();
             }
+
+            @Override
+            public void cancel() {
+                showMainLoginView();
+            }
         });
         cmd.excute(SLoginResponse.class);
 
     }
 
-    private void login(Activity activity, final String account, final String password) {
+    private void login(final Activity activity, final String account, final String password) {
 
         AccountLoginRequestTask accountLoginCmd = new AccountLoginRequestTask(getActivity(), account, password);
         accountLoginCmd.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(),"Loading..."));
@@ -850,12 +883,23 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
             @Override
             public void timeout(String code) {
-
+                if(isAutoLogin) {
+                    iLoginView.showLoginView();
+                }
             }
 
             @Override
             public void noData() {
+                if(isAutoLogin) {
+                    iLoginView.showLoginView();
+                }
+            }
 
+            @Override
+            public void cancel() {
+//                if(isAutoLogin) {
+                    iLoginView.showLoginView();
+//                }
             }
         });
         accountLoginCmd.excute(SLoginResponse.class);
@@ -897,13 +941,17 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
             }
 
+            @Override
+            public void cancel() {
+            }
+
         });
         accountRegisterCmd.excute(SLoginResponse.class);
 
     }
 
     private void startAutoLogin(final Activity activity, final String registPlatform, final String account, final String password) {
-
+        isAutoLogin = true;
 
         if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GAMA, registPlatform)) {
 
@@ -1002,7 +1050,11 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
     }
 
+    /**
+     * 顯示登入頁面
+     */
     private void showLoginView() {
+        isAutoLogin = false;
         if (iLoginView != null){
 //            iLoginView.hildAutoLoginView();
             iLoginView.showLoginView();

@@ -312,6 +312,11 @@ public class GooglePayImpl implements IPay {
             public void noData() {
                 callbackFail("server error, please try again");
             }
+
+            @Override
+            public void cancel() {
+
+            }
         });
         googleCreateOrderReqTask.excute(GPCreateOrderIdRes.class);
 
@@ -425,8 +430,12 @@ public class GooglePayImpl implements IPay {
                                 public void noData() {
                                     callbackFail("server error, please try again");
                                 }
+
+                                @Override
+                                public void cancel() {
+
+                                }
                             });
-                            // TODO: 2018/7/5 测试支付上报时注释，不进行发币请求，正式版本必须去除注释
                             googleExchangeReqTask.excute(GPExchangeRes.class);
 
                         }
@@ -545,8 +554,12 @@ public class GooglePayImpl implements IPay {
             public void noData() {
 
             }
+
+            @Override
+            public void cancel() {
+
+            }
         });
-        // TODO: 2018/7/5 测试支付上报时注释，不进行发币请求，正式版本必须去除注释
         googleExchangeReqTask.excute(GPExchangeRes.class);
     }
 

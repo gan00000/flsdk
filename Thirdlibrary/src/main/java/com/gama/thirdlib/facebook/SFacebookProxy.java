@@ -1051,6 +1051,11 @@ public class SFacebookProxy {
 			public void noData() {
 
 			}
+
+			@Override
+			public void cancel() {
+
+			}
 		});
 		invitableFriendsCmd.excute();
 				/*new EfunCommandCallBack() {

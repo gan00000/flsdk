@@ -73,12 +73,23 @@ public class GamaWebPageHelper {
 
             @Override
             public void timeout(String code) {
-
+                if(iSdkCallBack != null) {
+                    iSdkCallBack.success();
+                }
             }
 
             @Override
             public void noData() {
+                if(iSdkCallBack != null) {
+                    iSdkCallBack.success();
+                }
+            }
 
+            @Override
+            public void cancel() {
+                if(iSdkCallBack != null) {
+                    iSdkCallBack.success();
+                }
             }
         });
         requestTask.excute(UnifiedSwitchResponseBean.class);

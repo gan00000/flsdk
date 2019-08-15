@@ -63,6 +63,11 @@ public class GamaAgeImpl implements IGamaAgePresenter {
             public void noData() {
                 ToastUtils.toast(context, R.string.py_error_occur);
             }
+
+            @Override
+            public void cancel() {
+
+            }
         });
         task.excute(BaseResponseModel.class);
     }
@@ -95,6 +100,13 @@ public class GamaAgeImpl implements IGamaAgePresenter {
             @Override
             public void noData() {
                 ToastUtils.toast(context, R.string.py_error_occur);
+                if(ageCallback != null) {
+                    ageCallback.onFailure();
+                }
+            }
+
+            @Override
+            public void cancel() {
                 if(ageCallback != null) {
                     ageCallback.onFailure();
                 }

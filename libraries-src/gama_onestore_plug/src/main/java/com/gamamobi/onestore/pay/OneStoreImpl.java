@@ -310,6 +310,11 @@ public class OneStoreImpl implements IOneStorePay {
             public void noData() {
                 callbackFail(null);
             }
+
+            @Override
+            public void cancel() {
+
+            }
         });
         oneStoreCreateOrderReqTask.excute(OneStoreCreateOrderIdRes.class);
     }
@@ -555,6 +560,11 @@ public class OneStoreImpl implements IOneStorePay {
             public void noData() {
                 callbackFail("server error, please try again");
             }
+
+            @Override
+            public void cancel() {
+
+            }
         });
         oneStoreExchangeReqTask.excute(OneStoreExchangeRes.class);
     }
@@ -595,6 +605,11 @@ public class OneStoreImpl implements IOneStorePay {
 
             @Override
             public void noData() {
+            }
+
+            @Override
+            public void cancel() {
+
             }
         });
         oneStoreExchangeReqTask.excute(OneStoreExchangeRes.class);

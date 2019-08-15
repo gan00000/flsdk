@@ -49,6 +49,10 @@ public class GamaAdsConstant {
      * Google支付轮询事件
      */
     public static final String GAMA_EVENT_PAY_QUERY = "gama_pay_query";
+    /**
+     * 在线时长事件
+     */
+    public static final String GAMA_EVENT_ONLINE_TIME = "gama_online_time";
 
 
     /**
