@@ -117,6 +117,7 @@ public class GamaAdsUtils {
                 bean.setUserId(userId);
                 bean.setServerCode(serverCode);
                 bean.setRoleId(roleId);
+                bean.setRoleLevel(roleLevel);
                 bean.setStartTime(startTime + "");
                 bean.setEndTime(currentTime + "");
 

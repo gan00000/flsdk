@@ -6,6 +6,7 @@ public class GamaOnlineRequestBean extends SSdkBaseRequestBean {
 
     private String userId;
     private String roleId;
+    private String roleLevel;
     private String serverCode;
     private String startTime;
     private String endTime;
@@ -52,5 +53,13 @@ public class GamaOnlineRequestBean extends SSdkBaseRequestBean {
 
     public void setEndTime(String endTime) {
         this.endTime = endTime;
+    }
+
+    public String getRoleLevel() {
+        return roleLevel;
+    }
+
+    public void setRoleLevel(String roleLevel) {
+        this.roleLevel = roleLevel;
     }
 }

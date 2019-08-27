@@ -150,6 +150,7 @@ public class BaseMainActivity extends AppCompatActivity {
                             Log.i("gamaLogin", "sLoginResponse: " + sLoginResponse.getTimestamp());
                             Log.i("gamaLogin", "sLoginResponse: " + sLoginResponse.getIconUri());
                             Log.i("gamaLogin", "sLoginResponse: " + sLoginResponse.getThirdToken());
+                            Log.i("gamaLogin", "sLoginResponse: " + sLoginResponse.getGmbPlayerIp());
                             /**
                              * 同步角色信息(以下均为测试信息)
                              */

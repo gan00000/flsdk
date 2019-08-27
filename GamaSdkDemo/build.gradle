@@ -402,6 +402,14 @@ android {
                             "\"com.ezfy.1usd\"," +
                             "\"com.ezfy.100usd\"," +
                             "}"
+            
+            resValue "string", "zh_tw_gama_login_pre_url", "https://t-login.gamamobi.com/"
+            resValue "string", "zh_tw_gama_login_spa_url", "https://t-login.gamamobi.com/"
+            resValue "string", "zh_tw_gama_pay_pre_url", "https://t-pay.gamamobi.com/"
+            resValue "string", "zh_tw_gama_pay_spa_url", "https://t-pay.gamamobi.com/"
+            resValue "string", "zh_tw_gama_ads_pre_url", "https://track.gamamobi.com/"
+            resValue "string", "zh_tw_gama_ads_spa_url", "https://track.gamamobi.com/"
+
         }
 
         twweb {

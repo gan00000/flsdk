@@ -113,7 +113,6 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/blame" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/check-manifest" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/intermediate-jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/javac" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/jniLibs" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/library_and_local_jars_jni" />
@@ -130,7 +129,6 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/transforms" />
       <excludeFolder url="file://$MODULE_DIR$/build/libs" />
       <excludeFolder url="file://$MODULE_DIR$/build/outputs" />
-      <excludeFolder url="file://$MODULE_DIR$/build/reports" />
       <excludeFolder url="file://$MODULE_DIR$/build/tmp" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 27 Platform" jdkType="Android SDK" />
@@ -153,7 +151,6 @@
     <orderEntry type="library" name="Gradle: com.mopub:mopub-sdk-4.11.0" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support.constraint:constraint-layout-1.1.2" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-core-utils-27.0.2" level="project" />
-    <orderEntry type="library" name="Gradle: com.facebook.android:facebook-share-5.2.0" level="project" />
     <orderEntry type="library" name="Gradle: com.google.zxing:core:3.3.3@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.mopub:mopub-sdk-native-static-4.11.0" level="project" />
     <orderEntry type="library" name="Gradle: com.twitter.sdk.android:tweet-ui-3.1.1" level="project" />
@@ -165,6 +162,7 @@
     <orderEntry type="library" name="Gradle: io.fabric.sdk.android:fabric-1.4.3" level="project" />
     <orderEntry type="library" name="Gradle: com.google.firebase:firebase-analytics-16.0.1" level="project" />
     <orderEntry type="library" name="Gradle: com.crashlytics.sdk.android:beta-1.2.9" level="project" />
+    <orderEntry type="library" name="Gradle: com.facebook.android:facebook-common-5.4.0" level="project" />
     <orderEntry type="library" name="Gradle: com.mopub.volley:mopub-volley:1.1.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.zhihu.android:matisse-0.5.1" level="project" />
     <orderEntry type="library" name="Gradle: com.mopub:mopub-sdk-native-video-4.11.0" level="project" />
@@ -172,7 +170,6 @@
     <orderEntry type="library" name="Gradle: com.squareup.okhttp3:okhttp:3.4.2@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.firebase:firebase-analytics-impl-16.1.1" level="project" />
     <orderEntry type="library" name="Gradle: it.sephiroth.android.library.imagezoom:library-1.0.4" level="project" />
-    <orderEntry type="library" name="Gradle: com.facebook.android:facebook-common-5.2.0" level="project" />
     <orderEntry type="library" name="Gradle: com.squareup.okio:okio:1.9.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.twitter.sdk.android:tweet-composer-3.1.1" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-v4-27.0.2" level="project" />
@@ -189,20 +186,21 @@
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-base-15.0.1" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-media-compat-27.0.2" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-core-ui-27.0.2" level="project" />
-    <orderEntry type="library" name="Gradle: com.facebook.android:facebook-messenger-5.2.0" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/Users/a123/Documents/AS/GamaSDK/GamaSDK/libs/GoogleConversionTrackingSdk-2.2.4.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-annotations:27.0.2@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.facebook.android:facebook-messenger-5.4.0" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-ads-identifier-15.0.1" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/Users/a123/Documents/AS/GamaSDK/GamaSDK/libs/AF-Android-SDK.jar:unspecified@jar" level="project" />
-    <orderEntry type="library" name="Gradle: com.facebook.android:facebook-login-5.2.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.facebook.android:facebook-share-5.4.0" level="project" />
     <orderEntry type="library" name="Gradle: com.google.firebase:firebase-measurement-connector-impl-16.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: com.facebook.android:facebook-login-5.4.0" level="project" />
     <orderEntry type="library" name="Gradle: com.twitter.sdk.android:twitter-mopub-3.1.1" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-fragment-27.0.2" level="project" />
     <orderEntry type="library" name="Gradle: com.twitter.sdk.android:twitter-core-3.1.1" level="project" />
     <orderEntry type="library" name="Gradle: com.mopub:mopub-sdk-banner-4.11.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.facebook.android:facebook-core-5.2.0" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:appcompat-v7-27.0.2" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-stats-15.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: com.facebook.android:facebook-core-5.4.0" level="project" />
     <orderEntry type="library" name="Gradle: com.google.firebase:firebase-iid-16.2.0" level="project" />
     <orderEntry type="library" name="Gradle: com.google.code.gson:gson:2.8.2@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.firebase:firebase-iid-interop-16.0.0" level="project" />
@@ -213,10 +211,6 @@
     <orderEntry type="library" name="Gradle: com.crashlytics.sdk.android:answers-1.4.2" level="project" />
     <orderEntry type="library" name="Gradle: android.arch.lifecycle:runtime-1.0.3" level="project" />
     <orderEntry type="library" name="Gradle: android.arch.lifecycle:common:1.0.3@jar" level="project" />
-    <orderEntry type="module" module-name="Thirdlibrary" />
-    <orderEntry type="module" module-name="gama-pay" />
-    <orderEntry type="module" module-name="GamaBaseLib" />
-    <orderEntry type="module" module-name="gama-core" />
     <orderEntry type="module" module-name="Thirdlibrary" />
     <orderEntry type="module" module-name="gama-pay" />
     <orderEntry type="module" module-name="GamaBaseLib" />

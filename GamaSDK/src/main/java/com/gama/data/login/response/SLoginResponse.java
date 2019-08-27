@@ -57,6 +57,11 @@ public class SLoginResponse extends BaseResponseModel {
      */
     private String nickName = "";
 
+    /**
+     * 用户ip
+     */
+    private String gmbPlayerIp = "";
+
     public String getThirdToken() {
         return thirdToken;
     }
@@ -167,5 +172,13 @@ public class SLoginResponse extends BaseResponseModel {
 
     public void setNickName(String nickName) {
         this.nickName = nickName;
+    }
+
+    public String getGmbPlayerIp() {
+        return gmbPlayerIp;
+    }
+
+    public void setGmbPlayerIp(String gmbPlayerIp) {
+        this.gmbPlayerIp = gmbPlayerIp;
     }
 }
