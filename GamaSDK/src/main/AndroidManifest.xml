@@ -185,7 +185,7 @@
         </provider>
 
         <!-- 18：9的宽屏 -->
-        <meta-data android:name="android.max_aspect" android:value="2.1" />
+        <meta-data android:name="android.max_aspect" android:value="2.4" />
 
         <!-- ONE store 支付版本 -->
         <meta-data
