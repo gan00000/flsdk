@@ -1,5 +1,6 @@
 package com.gama.sdk.demo;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -52,7 +53,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class BaseMainActivity extends AppCompatActivity {
+public class BaseMainActivity extends Activity {
 
     protected Button loginButton, othersPayButton, googlePayBtn, shareButton, showPlatform, crashlytics,
             PurchasesHistory, getFriend, invite, checkShare, getInfo, getFriendNext, getFriendPrevious,
@@ -151,6 +152,32 @@ public class BaseMainActivity extends AppCompatActivity {
                             Log.i("gamaLogin", "sLoginResponse: " + sLoginResponse.getIconUri());
                             Log.i("gamaLogin", "sLoginResponse: " + sLoginResponse.getThirdToken());
                             Log.i("gamaLogin", "sLoginResponse: " + sLoginResponse.getGmbPlayerIp());
+
+                            String msg = "gamaUid : " + uid + "\n"
+                                    + "thirdId : " + sLoginResponse.getThirdId() + "\n"
+                                    + "loginType : " + sLoginResponse.getLoginType() + "\n"
+                                    + "accessToken : " + sLoginResponse.getAccessToken() + "\n"
+                                    + "iconUri : " + sLoginResponse.getIconUri() + "\n"
+                                    + "ip : " + sLoginResponse.getGmbPlayerIp() + "\n"
+                                    + "timeStamp : " + sLoginResponse.getTimestamp() + "\n";
+                            AlertDialog.Builder builder;
+                            if (Build.VERSION.SDK_INT >= 21) {
+                                builder = new AlertDialog.Builder(BaseMainActivity.this, android.R.style.Theme_Material_Dialog);
+                            } else if (Build.VERSION.SDK_INT >= 14) {
+                                builder = new AlertDialog.Builder(BaseMainActivity.this, android.R.style.Theme_Holo_Dialog);
+                            } else {
+                                builder = new AlertDialog.Builder(BaseMainActivity.this);
+                            }
+                            AlertDialog dialog = builder.setNegativeButton("確定", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            }).setCancelable(false)
+                                    .setMessage(msg)
+                                    .create();
+                            dialog.show();
+
                             /**
                              * 同步角色信息(以下均为测试信息)
                              */

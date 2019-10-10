@@ -79,7 +79,7 @@ android {
     productFlavors {
 //        erge {
 //            applicationId "com.gama.myapplication"
-//            minSdkVersion 18
+//            minSdkVersion 21
 //            targetSdkVersion 27
 //            versionCode 1
 //            versionName "1.0"
@@ -92,7 +92,7 @@ android {
 //        }
 //        ezfy {
 //            applicationId "com.gamamobi.ezfy"
-//            minSdkVersion 18
+//            minSdkVersion 21
 //            targetSdkVersion 27
 //            versionCode 1
 //            versionName "1.0"
@@ -108,7 +108,7 @@ android {
 //        }
 //        ezfytest {
 //            applicationId "com.gamamobi.ezfy"
-//            minSdkVersion 18
+//            minSdkVersion 21
 //            targetSdkVersion 27
 //            versionCode 1
 //            versionName "1.0"
@@ -129,7 +129,7 @@ android {
 //        }
 //        mytest {
 //            applicationId "com.gamamobi.ezfy"
-//            minSdkVersion 18
+//            minSdkVersion 21
 //            targetSdkVersion 27
 //            versionCode 1
 //            versionName "1.0"
@@ -143,7 +143,7 @@ android {
 //
 //        fsztm {
 //            applicationId "com.gamamobi.fsztm"
-//            minSdkVersion 18
+//            minSdkVersion 21
 //            targetSdkVersion 27
 //            versionCode 1
 //            versionName "1.0"
@@ -160,7 +160,7 @@ android {
 //
 //        sds {
 //            applicationId "com.tencent.tmgp.ssktw"
-//            minSdkVersion 18
+//            minSdkVersion 21
 //            targetSdkVersion 27
 //            versionCode 1
 //            versionName "1.0"
@@ -177,7 +177,7 @@ android {
 //
 //        sdstest {
 //            applicationId "com.tencent.tmgp.ssktw"
-//            minSdkVersion 18
+//            minSdkVersion 21
 //            targetSdkVersion 27
 //            versionCode 1
 //            versionName "1.0"
@@ -201,7 +201,7 @@ android {
 //
 //        smzy {
 //            applicationId "com.gamamobi.smzy"
-//            minSdkVersion 18
+//            minSdkVersion 21
 //            targetSdkVersion 27
 //            versionCode 1
 //            versionName "1.0"
@@ -217,7 +217,7 @@ android {
 //        }
 //        vfjp {
 //            applicationId "com.gamamobi.vfjp"
-//            minSdkVersion 18
+//            minSdkVersion 21
 //            targetSdkVersion 27
 //            versionCode 60
 //            versionName "1.0"
@@ -236,7 +236,7 @@ android {
 //
 //        sslj {
 //            applicationId "com.gamamobi.sslj"
-//            minSdkVersion 18
+//            minSdkVersion 21
 //            targetSdkVersion 27
 //            versionCode 1
 //            versionName "1.0"
@@ -253,7 +253,7 @@ android {
 //
 //        twsd {
 //            applicationId "com.gamamobi.twsd"
-//            minSdkVersion 18
+//            minSdkVersion 21
 //            targetSdkVersion 27
 //            versionCode 1
 //            versionName "1.0"
@@ -270,7 +270,7 @@ android {
 //
 //        got {
 //            applicationId "com.yoozoo.got.gama"
-//            minSdkVersion 18
+//            minSdkVersion 21
 //            targetSdkVersion 27
 //            versionCode 1
 //            versionName "1.0"
@@ -287,7 +287,7 @@ android {
 
         krgoogle {
             applicationId "com.gamamobi.krezfy"
-            minSdkVersion 18
+            minSdkVersion 21
             targetSdkVersion 28
             versionCode 1
             versionName "1.0"
@@ -335,7 +335,7 @@ android {
 
         krone {
             applicationId "com.gamamobi.krezfy.one"
-            minSdkVersion 18
+            minSdkVersion 21
             targetSdkVersion 28
             versionCode 1
             versionName "1.0"
@@ -383,7 +383,7 @@ android {
 
         twgoogle {
             applicationId "com.gamamobi.ezfy"
-            minSdkVersion 18
+            minSdkVersion 21
             targetSdkVersion 28
             versionCode 1
             versionName "1.0"
@@ -414,7 +414,7 @@ android {
 
         twweb {
             applicationId "com.gamamobi.ezfy"
-            minSdkVersion 18
+            minSdkVersion 21
             targetSdkVersion 28
             versionCode 1
             versionName "1.0"

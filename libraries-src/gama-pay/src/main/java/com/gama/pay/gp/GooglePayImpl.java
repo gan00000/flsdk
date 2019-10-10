@@ -357,14 +357,15 @@ public class GooglePayImpl implements IPay {
 
                         if (purchase == null || result.isFailure()) {
                             SLog.logI("purchase is null.");
-                            //进行定时查单
-                            GooglePayHelper.getInstance().startQueryTask(activity);
+
                             //用户取消支付
                             if (result.getResponse() == IabHelper.IABHELPER_USER_CANCELLED) {
                                 PL.i("info: " + result.getMessage());
                                 callbackFail("");//用户去掉不提示
                                 return;
                             }
+                            //进行定时查单
+                            GooglePayHelper.getInstance().startQueryTask(activity);
                             callbackFail(result.getMessage());
 //                            loadingDialog.complain(result.getMessage());
 //                            ToastUtils.toast();

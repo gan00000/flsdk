@@ -20,6 +20,10 @@ public class SLoginType {
 	 */
 	public static final String LOGIN_TYPE_TWITTER = "twitter";
 	/**
+	 * 原gamamobi登入
+	 */
+	public static final String LOGIN_TYPE_GMB = "gmb";
+	/**
 	 * 用于mac登入，用于本地登录类型判断，回传原厂登录类型
 	 */
 	public static final String LOGIN_TYPE_MAC = "mac";

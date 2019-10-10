@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
 
     <style name="Gama.Theme.AppCompat.Dialog.NoTitle" parent="@style/Theme.AppCompat.Dialog">
@@ -53,6 +53,9 @@
         <item name="windowActionBar">false</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowLayoutInDisplayCutoutMode" tools:ignore="NewApi">
+            default <!-- default, shortEdges, never -->
+        </item>
     </style>
 
 
