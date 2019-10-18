@@ -17,6 +17,8 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        debug {
+        }
     }
 
     lintOptions {
@@ -39,7 +41,7 @@ task clearJar(type: Delete) {
 task makeLibraryJar(type: Copy) {
 //    指定生成的jar名
 //    baseName getJarName()
-
+    group 'a'
     //从哪里打包class文件,可以指定文件和目录
     from('build/intermediates/packaged-classes/release/')
     include ('classes.jar')

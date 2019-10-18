@@ -16,6 +16,8 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
+        debug {
+        }
     }
 
     lintOptions {
@@ -59,6 +61,7 @@ dependencies {
     api 'com.twitter.sdk.android:tweet-composer:3.1.1'
     api 'com.twitter.sdk.android:twitter-mopub:3.1.1'
 //    api project(':youzu')
+
 }
 
 //./gradlew makeJar 出现env: bash\r: No such file or directory的话是由
@@ -74,7 +77,7 @@ task clearJar(type: Delete) {
 task makeLibraryJar(type: Copy) {
 //    指定生成的jar名
 //    baseName getJarName()
-
+    group 'a'
     //从哪里打包class文件,可以指定文件和目录
     from('build/intermediates/packaged-classes/release/')
     include ('classes.jar')

@@ -185,7 +185,7 @@ public class BaseMainActivity extends Activity {
                             String roleName = "角色名"; //角色名
                             String roleLevel = "10"; //角色等级
                             String vipLevel = "5"; //角色vip等级
-                            String serverCode = "666"; //角色伺服器id
+                            String serverCode = "QPFnwX3jEMew"; //角色伺服器id
                             String serverName = "S1"; //角色伺服器名称
                             iGama.registerRoleInfo(BaseMainActivity.this, roleId, roleName, roleLevel, vipLevel, serverCode, serverName);
                         } else {
@@ -666,12 +666,9 @@ public class BaseMainActivity extends Activity {
         track.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String eventName = "eventName"; //事件名
+                String eventName = "gama_30retention"; //事件名
                 Map map = new HashMap(); //事件属性列表,如没有可传空
                 Set<GamaAdsConstant.GamaEventReportChannel> set = new HashSet<>();
-                set.add(GamaAdsConstant.GamaEventReportChannel.GamaEventReportFacebook);
-                set.add(GamaAdsConstant.GamaEventReportChannel.GamaEventReportFirebase);
-                set.add(GamaAdsConstant.GamaEventReportChannel.GamaEventReportAllChannel);
                 iGama.gamaTrack(BaseMainActivity.this, eventName, map, set);
             }
         });

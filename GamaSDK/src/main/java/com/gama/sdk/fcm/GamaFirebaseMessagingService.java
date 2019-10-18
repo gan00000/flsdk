@@ -16,6 +16,7 @@ import android.support.v4.app.NotificationCompat;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.gamamobi.ads.plug.aj.GamaAj;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -166,5 +167,6 @@ public class GamaFirebaseMessagingService extends FirebaseMessagingService {
     public void onNewToken(String s) {
         super.onNewToken(s);
         Log.i(TAG, "fcm token is " + s);
+        GamaAj.setPushToken(getApplicationContext(), s);
     }
 }

@@ -148,7 +148,7 @@ public class GamaUtil {
     private static String encryptPassword(String password){
         try {
             if (SStringUtil.isNotEmpty(password)){
-                return cipherPasswordFlag + DESCipher.encrypt3DES(password,GAMA_DY_ENCRYPT_SECRETKEY);
+                return cipherPasswordFlag + DESCipher.encrypt3DES(password, getSecretKey());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -163,7 +163,7 @@ public class GamaUtil {
         try {
             if (SStringUtil.isNotEmpty(encryptText) && encryptText.startsWith(cipherPasswordFlag)){
                 encryptText = encryptText.replace(cipherPasswordFlag,"");
-                return DESCipher.decrypt3DES(encryptText,GAMA_DY_ENCRYPT_SECRETKEY);
+                return DESCipher.decrypt3DES(encryptText, getSecretKey());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -344,10 +344,25 @@ public class GamaUtil {
     /**
      * 用于解密动态域名的secretKey
      */
-    private static final String GAMA_DY_ENCRYPT_SECRETKEY = "(starpy99988820170227dyrl)";
+//    private static final String GAMA_DY_ENCRYPT_SECRETKEY = "(starpy99988820170227dyrl)";
+
+    private static String getSecretKey() {
+        return getKeyPrefix() + getKeySurfix();
+    }
+
+    private static String getKeyPrefix() {
+        return "(starpy999888";
+    }
+
+    private static String getKeySurfix() {
+        int index = 2017 * 10000;
+        int sec = index + 227;
+        return sec + "dyrl)";
+    }
+
     public static String encryptDyUrl(Context context,String data){
         try {
-            return DESCipher.encrypt3DES(data,GAMA_DY_ENCRYPT_SECRETKEY);
+            return DESCipher.encrypt3DES(data, getSecretKey());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -359,7 +374,7 @@ public class GamaUtil {
      */
     public static String decryptDyUrl(Context context,String data){
         try {
-            return DESCipher.decrypt3DES(data,GAMA_DY_ENCRYPT_SECRETKEY);
+            return DESCipher.decrypt3DES(data, getSecretKey());
         } catch (Exception e) {
             e.printStackTrace();
         }

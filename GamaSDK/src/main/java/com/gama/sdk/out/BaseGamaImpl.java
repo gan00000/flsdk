@@ -384,6 +384,9 @@ public class BaseGamaImpl implements IGama {
 
                 //上报在线时长-记录时间戳
                 GamaUtil.saveOnlineTimeInfo(activity, System.currentTimeMillis());
+
+                //ads
+                StarEventLogger.onResume(activity);
             }
         });
     }
@@ -418,6 +421,9 @@ public class BaseGamaImpl implements IGama {
                 if (iLogin != null) {
                     iLogin.onPause(activity);
                 }
+
+                //ads
+                StarEventLogger.onPause(activity);
 
             }
         });

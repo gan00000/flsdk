@@ -24,6 +24,7 @@ import com.gama.data.login.response.SLoginResponse;
 import com.gama.sdk.R;
 import com.gama.thirdlib.facebook.SFacebookProxy;
 import com.gama.thirdlib.google.SGoogleProxy;
+import com.gamamobi.ads.plug.aj.GamaAj;
 import com.google.ads.conversiontracking.AdWordsConversionReporter;
 
 import java.util.HashMap;
@@ -61,6 +62,9 @@ public class StarEventLogger {
                         gama_ads_adword_conversionId, ResConfig.getConfigInAssetsProperties(activity,"gama_ads_adword_label"), "0.00", false);
             }
 
+            //adjust
+            GamaAj.activeAj(activity);
+
             trackingWithEventName(activity, GamaAdsConstant.GAMA_EVENT_OPEN, null, null);
 
         } catch (Exception e) {
@@ -89,6 +93,10 @@ public class StarEventLogger {
             Map<String, Object> eventValue = new HashMap<String, Object>();
             eventValue.put(GamaAdsConstant.GAMA_EVENT_USER_ID, userId);
             AppsFlyerLib.getInstance().trackEvent(activity.getApplicationContext(), GamaAdsConstant.GAMA_EVENT_LOGIN, eventValue);
+
+            //adjust
+            GamaAj.trackEvent(activity.getApplicationContext(), GamaAdsConstant.GAMA_EVENT_LOGIN, eventValue);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -114,6 +122,9 @@ public class StarEventLogger {
             Map<String, Object> eventValue = new HashMap<String, Object>();
             eventValue.put(GamaAdsConstant.GAMA_EVENT_USER_ID, userId);
             AppsFlyerLib.getInstance().trackEvent(activity.getApplicationContext(), GamaAdsConstant.GAMA_EVENT_REGISTER, eventValue);
+
+            //adjust
+            GamaAj.trackEvent(activity.getApplicationContext(), GamaAdsConstant.GAMA_EVENT_REGISTER, eventValue);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -145,6 +156,8 @@ public class StarEventLogger {
             //AppsFlyer上报
             map.put(GamaAdsConstant.GAMA_EVENT_USER_ID, userId);
             AppsFlyerLib.getInstance().trackEvent(activity.getApplicationContext(), GamaAdsConstant.GAMA_EVENT_ROLE_INFO, map);
+            //adjust
+            GamaAj.trackEvent(activity, GamaAdsConstant.GAMA_EVENT_ROLE_INFO, map);
             //计算留存
             GamaAdsUtils.caculateRetention(activity, userId);
             //计算在线时长
@@ -198,14 +211,19 @@ public class StarEventLogger {
             eventValues.put(GamaAdsConstant.GAMA_EVENT_PRODUCT_ID, productId);
             eventValues.put(GamaAdsConstant.GAMA_EVENT_ORDERID, orderId);
             eventValues.put(GamaAdsConstant.GAMA_EVENT_PURCHASE_TIME, purchaseTime);
+            eventValues.put(GamaAdsConstant.GAMA_EVENT_PAY_VALUE, price);
+            eventValues.put(GamaAdsConstant.GAMA_EVENT_CURRENCY, "USD");
             //下面是AppsFlyer自己的事件名
             eventValues.put(AFInAppEventParameterName.REVENUE, price);
             eventValues.put(AFInAppEventParameterName.CURRENCY, "USD");
             eventValues.put(AFInAppEventParameterName.CONTENT_ID, productId);
             AppsFlyerLib.getInstance().trackEvent(context, AFInAppEventType.PURCHASE, eventValues);
 
+            //adjust
+            GamaAj.trackEvent(context, GamaAdsConstant.GAMA_EVENT_IAB, eventValues);
+
             if(!GamaUtil.getFirstPay(context)) {
-                trackingWithEventName((Activity) context, GamaAdsConstant.GAMA_EVENT_FIRSTPAY, null, null);
+                trackingWithEventName(context, GamaAdsConstant.GAMA_EVENT_FIRSTPAY, null, null);
                 GamaUtil.saveFirstPay(context);
             }
 
@@ -248,6 +266,9 @@ public class StarEventLogger {
 
                 //AppsFlyer上报
                 AppsFlyerLib.getInstance().trackEvent(context.getApplicationContext(), eventName, map);
+
+                //adjust
+                GamaAj.trackEvent(context, eventName, map);
             } else {
                 if(mediaSet.contains(GamaAdsConstant.GamaEventReportChannel.GamaEventReportFacebook)) {
                     PL.i("上报媒体1");
@@ -263,6 +284,11 @@ public class StarEventLogger {
                     PL.i("上报媒体3");
                     //AppsFlyer上报
                     AppsFlyerLib.getInstance().trackEvent(context.getApplicationContext(), eventName, map);
+                }
+                if(mediaSet.contains(GamaAdsConstant.GamaEventReportChannel.GamaEventReportAdjust)) {
+                    PL.i("上报媒体4");
+                    //adjust上报
+                    GamaAj.trackEvent(context, eventName, map);
                 }
             }
         } catch (Exception e) {
@@ -316,7 +342,7 @@ public class StarEventLogger {
         simpleHttpRequest.setReqCallBack(new ISReqCallBack<BaseResponseModel>() {
             @Override
             public void success(BaseResponseModel responseModel, String rawResult) {
-                PL.i("ADS rawResult:" + rawResult);
+                PL.i(TAG, "ADS rawResult:" + rawResult);
                 if (responseModel != null && responseModel.isRequestSuccess()){
                     SPUtil.saveSimpleInfo(context,GamaUtil.GAMA_SP_FILE,GAMA_ADSINSTALLACTIVATION,"adsInstallActivation");
                 }
@@ -324,20 +350,25 @@ public class StarEventLogger {
 
             @Override
             public void timeout(String code) {
-
+                PL.i(TAG, "ADS timeout");
             }
 
             @Override
             public void noData() {
-
             }
 
             @Override
             public void cancel() {
-
             }
         });
         simpleHttpRequest.excute();
     }
 
+    public static void onResume(Activity activity) {
+        GamaAj.onResume(activity);
+    }
+
+    public static void onPause(Activity activity) {
+        GamaAj.onPause(activity);
+    }
 }

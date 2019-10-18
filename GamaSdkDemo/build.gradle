@@ -215,8 +215,8 @@ android {
 //            resValue "string", "sdk_name", "神魔SDK"
 //            signingConfig signingConfigs.release
 //        }
-//        vfjp {
-//            applicationId "com.gamamobi.vfjp"
+//        adlist {
+//            applicationId "com.gamamobi.adlist"
 //            minSdkVersion 21
 //            targetSdkVersion 27
 //            versionCode 60
@@ -229,7 +229,7 @@ android {
 //            resValue "string", "com.twitter.sdk.android.CONSUMER_KEY", "5FwA0veZVe6eQNJz05v2tZbBw"
 //            resValue "string", "com.twitter.sdk.android.CONSUMER_SECRET", "ARuTLsf9Mb7gvVfR946q6C5Q765A2G6uvQIjwiUUQxMWKRaVcX"
 //            //每个游戏的demo设置
-//            resValue "string", "test_sku", "com.vfjp.1usd"
+//            resValue "string", "test_sku", "com.adlist.1usd"
 //            resValue "string", "sdk_name", "圣光SDK"
 //            signingConfig signingConfigs.release
 //        }
@@ -382,7 +382,7 @@ android {
         }
 
         twgoogle {
-            applicationId "com.gamamobi.ezfy"
+            applicationId "com.gamamobi.vfjp"
             minSdkVersion 21
             targetSdkVersion 28
             versionCode 1
@@ -393,7 +393,7 @@ android {
             resValue "string", "fb_login_protocol_scheme", "fb1040235646130047"
             resValue "string", "facebook_app_name", "硬漢部隊"
             //每个游戏的demo设置
-            resValue "string", "test_sku", "com.ezfy.1usd"
+            resValue "string", "test_sku", "com.vfjp.1usd"
             resValue "string", "sdk_name", "硬汉Demo"
             signingConfig signingConfigs.release
 
@@ -403,12 +403,12 @@ android {
                             "\"com.ezfy.100usd\"," +
                             "}"
             
-            resValue "string", "zh_tw_gama_login_pre_url", "https://t-login.gamamobi.com/"
-            resValue "string", "zh_tw_gama_login_spa_url", "https://t-login.gamamobi.com/"
-            resValue "string", "zh_tw_gama_pay_pre_url", "https://t-pay.gamamobi.com/"
-            resValue "string", "zh_tw_gama_pay_spa_url", "https://t-pay.gamamobi.com/"
-            resValue "string", "zh_tw_gama_ads_pre_url", "https://track.gamamobi.com/"
-            resValue "string", "zh_tw_gama_ads_spa_url", "https://track.gamamobi.com/"
+//            resValue "string", "zh_tw_gama_login_pre_url", "https://t-login.gamamobi.com/"
+//            resValue "string", "zh_tw_gama_login_spa_url", "https://t-login.gamamobi.com/"
+//            resValue "string", "zh_tw_gama_pay_pre_url", "https://t-pay.gamamobi.com/"
+//            resValue "string", "zh_tw_gama_pay_spa_url", "https://t-pay.gamamobi.com/"
+//            resValue "string", "zh_tw_gama_ads_pre_url", "https://track.gamamobi.com/"
+//            resValue "string", "zh_tw_gama_ads_spa_url", "https://track.gamamobi.com/"
 
         }
 
