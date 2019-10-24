@@ -29,7 +29,6 @@ import com.gama.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
 import com.gama.pay.gp.bean.req.WebPayReqBean;
 import com.gama.pay.gp.util.PayHelper;
 import com.gama.pay.utils.GamaQueryProductListener;
-import com.gama.sdk.BuildConfig;
 import com.gama.sdk.R;
 import com.gama.sdk.SWebViewDialog;
 import com.gama.sdk.ads.GamaAdsConstant;
@@ -97,7 +96,7 @@ public class GamaImpl implements IGama {
                 PL.i("IGama initSDK");
                 Localization.gameLanguage(activity, gameLanguage);
                 //清除上一次登录成功的返回值
-                GamaUtil.saveSdkLoginData(activity, "");
+//                GamaUtil.saveSdkLoginData(activity, "");
 
                 //获取Google 广告ID
                 StarEventLogger.registerGoogleAdId(activity);
@@ -180,7 +179,7 @@ public class GamaImpl implements IGama {
                 PL.i("google sha1:" + SignatureUtil.getSignatureSHA1WithColon(activity, activity.getPackageName()));
                 if (iLogin != null) {
                     //清除上一次登录成功的返回值
-                    GamaUtil.saveSdkLoginData(activity, "");
+//                    GamaUtil.saveSdkLoginData(activity, "");
 
                     iLogin.initFacebookPro(activity, sFacebookProxy);
                     iLogin.startLogin(activity, iLoginCallBack);
@@ -347,7 +346,7 @@ public class GamaImpl implements IGama {
     @Override
     public void onCreate(final Activity activity) {
         PL.i("IGama onCreate");
-        PL.i("the jar version:" + BuildConfig.JAR_VERSION);//打印版本号
+//        PL.i("the jar version:" + BuildConfig.JAR_VERSION);//打印版本号
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {

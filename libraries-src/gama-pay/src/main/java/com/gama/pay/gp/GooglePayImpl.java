@@ -159,8 +159,23 @@ public class GooglePayImpl implements IPay {
             //开始Google储值
             googlePaySetUp();
         }else{
+
+            String errorInfo = "";
+            if (SStringUtil.isEmpty(createOrderIdReqBean.getUserId())){
+                errorInfo = errorInfo +  "userId";
+            }
+            if (SStringUtil.isEmpty(createOrderIdReqBean.getServerCode())){
+                errorInfo = errorInfo + "_serverCode";
+            }
+            if (SStringUtil.isEmpty(createOrderIdReqBean.getGameCode())){
+                errorInfo = errorInfo + "_gameCode";
+            }
+            if (SStringUtil.isEmpty(createOrderIdReqBean.getRoleId())){
+                errorInfo = errorInfo + "_roleId";
+            }
+
             ToastUtils.toast(activity,"please log in to the game first");
-            callbackFail("please log in to the game first");
+            callbackFail("please log in to the game first, due to " + errorInfo + " is empty");
         }
         isPaying = false;
         PL.w("google set not paying");
