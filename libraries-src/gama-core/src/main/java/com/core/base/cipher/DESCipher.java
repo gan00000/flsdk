@@ -107,7 +107,13 @@ public class DESCipher {
 		return result;
 	}
 
-	private static final String IV_3DES = "10000000";
+//	private static final String IV_3DES = "10000000";
+
+	private static String getIvDes() {
+		int index = 24 + 26 + 950;
+		int des = index * 10000;
+		return des + "";
+	}
 
 
 	public static String encrypt3DES(String plainText, String secretKey) throws Exception {
@@ -117,7 +123,7 @@ public class DESCipher {
 		DESedeKeySpec spec = new DESedeKeySpec(secretKey.getBytes());
 		SecretKeyFactory keyfactory = SecretKeyFactory.getInstance("desede");
 		Key deskey = keyfactory.generateSecret(spec);
-		IvParameterSpec ips = new IvParameterSpec(IV_3DES.getBytes("utf-8"));
+		IvParameterSpec ips = new IvParameterSpec(getIvDes().getBytes("utf-8"));
 		Cipher cipher = Cipher.getInstance("desede/CBC/PKCS5Padding");
 		cipher.init(Cipher.ENCRYPT_MODE, deskey, ips);
 		byte[] encryptData = cipher.doFinal(plainText.getBytes("utf-8"));
@@ -134,7 +140,7 @@ public class DESCipher {
 		SecretKeyFactory keyfactory = SecretKeyFactory.getInstance("desede");
 		Key deskey = keyfactory.generateSecret(spec);
 		Cipher cipher = Cipher.getInstance("desede/CBC/PKCS5Padding");
-		IvParameterSpec ips = new IvParameterSpec(IV_3DES.getBytes("utf-8"));
+		IvParameterSpec ips = new IvParameterSpec(getIvDes().getBytes("utf-8"));
 		cipher.init(Cipher.DECRYPT_MODE, deskey, ips);
 		byte[] decryptData = cipher.doFinal(Base64.decode(encryptText, Base64.DEFAULT));
 		return new String(decryptData, "utf-8");

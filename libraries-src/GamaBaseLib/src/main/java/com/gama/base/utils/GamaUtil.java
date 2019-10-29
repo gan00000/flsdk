@@ -148,7 +148,7 @@ public class GamaUtil {
     private static String encryptPassword(String password){
         try {
             if (SStringUtil.isNotEmpty(password)){
-                return cipherPasswordFlag + DESCipher.encrypt3DES(password,GAMA_DY_ENCRYPT_SECRETKEY);
+                return cipherPasswordFlag + DESCipher.encrypt3DES(password, getSecretKey());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -163,7 +163,7 @@ public class GamaUtil {
         try {
             if (SStringUtil.isNotEmpty(encryptText) && encryptText.startsWith(cipherPasswordFlag)){
                 encryptText = encryptText.replace(cipherPasswordFlag,"");
-                return DESCipher.decrypt3DES(encryptText,GAMA_DY_ENCRYPT_SECRETKEY);
+                return DESCipher.decrypt3DES(encryptText, getSecretKey());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -344,10 +344,25 @@ public class GamaUtil {
     /**
      * 用于解密动态域名的secretKey
      */
-    private static final String GAMA_DY_ENCRYPT_SECRETKEY = "(starpy99988820170227dyrl)";
+//    private static final String GAMA_DY_ENCRYPT_SECRETKEY = "(starpy99988820170227dyrl)";
+
+    private static String getSecretKey() {
+        return getKeyPrefix() + getKeySurfix();
+    }
+
+    private static String getKeyPrefix() {
+        return "(starpy999888";
+    }
+
+    private static String getKeySurfix() {
+        int index = 2017 * 10000;
+        int sec = index + 227;
+        return sec + "dyrl)";
+    }
+
     public static String encryptDyUrl(Context context,String data){
         try {
-            return DESCipher.encrypt3DES(data,GAMA_DY_ENCRYPT_SECRETKEY);
+            return DESCipher.encrypt3DES(data, getSecretKey());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -359,7 +374,7 @@ public class GamaUtil {
      */
     public static String decryptDyUrl(Context context,String data){
         try {
-            return DESCipher.decrypt3DES(data,GAMA_DY_ENCRYPT_SECRETKEY);
+            return DESCipher.decrypt3DES(data, getSecretKey());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -382,7 +397,7 @@ public class GamaUtil {
      * 获取保存的G+登录的三方ID
      */
     public static String getGoogleId(Context context){
-       return SPUtil.getSimpleString(context, GamaUtil.GAMA_SP_FILE,GAMA_LOGIN_GOOGLE_ID);
+        return SPUtil.getSimpleString(context, GamaUtil.GAMA_SP_FILE,GAMA_LOGIN_GOOGLE_ID);
     }
 
     /**
@@ -405,10 +420,10 @@ public class GamaUtil {
     }
 
     public static boolean isXM(Context context){
-       return ResConfig.getConfigInAssetsProperties(context,"gama_login_type").equals("100");
+        return ResConfig.getConfigInAssetsProperties(context,"gama_login_type").equals("100");
     }
     public static boolean isMainland(Context context){//100為大陸sdk,其他為海外
-       return ResConfig.getConfigInAssetsProperties(context,"gama_sdk_area").equals("100");
+        return ResConfig.getConfigInAssetsProperties(context,"gama_sdk_area").equals("100");
     }
 
     private static final String GAMA_GOOGLE_ADVERTISING_ID = "GAMA_GOOGLE_ADVERTISING_ID";
