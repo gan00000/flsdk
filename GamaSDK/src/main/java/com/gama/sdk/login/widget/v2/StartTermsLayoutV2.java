@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.core.base.utils.ScreenHelper;
 import com.core.base.utils.ToastUtils;
@@ -30,6 +31,7 @@ public class StartTermsLayoutV2 extends SBaseDialog {
 
 //    private View contentView;
     private WebView termsView1, termsView2;
+    private TextView gama_gama_start_term_tv1, gama_gama_start_term_tv2;
     private Button confirm;
     private RadioGroup titleGroup;
     private CheckBox checkBox1, checkBox2;
@@ -84,6 +86,13 @@ public class StartTermsLayoutV2 extends SBaseDialog {
         termsView1.loadUrl(serviceUrl);
 
         checkBox1 = (CheckBox) findViewById(R.id.gama_gama_start_term_cb1);
+        gama_gama_start_term_tv1 = findViewById(R.id.gama_gama_start_term_tv1);
+        gama_gama_start_term_tv1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkBox1.performClick();
+            }
+        });
 
         if(isPort) {
             titleGroup = (RadioGroup) findViewById(R.id.gama_start_term_title_group);
@@ -106,6 +115,13 @@ public class StartTermsLayoutV2 extends SBaseDialog {
             termsView2.loadUrl(privateUrl);
 
             checkBox2 = (CheckBox) findViewById(R.id.gama_gama_start_term_cb2);
+            gama_gama_start_term_tv2 = findViewById(R.id.gama_gama_start_term_tv2);
+            gama_gama_start_term_tv2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    checkBox2.performClick();
+                }
+            });
         }
 
         confirm = (Button) findViewById(R.id.gama_gama_start_term_confirm);
