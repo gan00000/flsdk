@@ -166,6 +166,11 @@
                     android:visibility="gone"
                     android:text="查商品" />
 
+                <ImageView
+                    android:id="@+id/image_test"
+                    android:layout_width="300dp"
+                    android:layout_height="200dp" />
+
             </LinearLayout>
 
 

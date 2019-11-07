@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -13,8 +14,14 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.Volley;
 import com.core.base.utils.GamaTimeUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.ToastUtils;
@@ -41,6 +48,7 @@ import com.gama.sdk.social.callback.FetchFriendsCallback;
 import com.gama.sdk.social.callback.InviteFriendsCallback;
 import com.gama.sdk.social.callback.UserProfileCallback;
 import com.gama.thirdlib.facebook.FriendProfile;
+import com.gama.thirdlib.google.SGoogleProxy;
 import com.gama.thirdlib.twitter.GamaTwitterLogin;
 
 import org.json.JSONObject;
@@ -58,6 +66,7 @@ public class BaseMainActivity extends Activity {
     protected Button loginButton, othersPayButton, googlePayBtn, shareButton, showPlatform, crashlytics,
             PurchasesHistory, getFriend, invite, checkShare, getInfo, getFriendNext, getFriendPrevious,
             service, announcement, age, demo_language, track, chaxun, xiaofei, open_url, open_page, demo_pay_one;
+    protected ImageView image_test;
     protected IGama iGama;
     private String nextUrl, previousUrl;
     private GamaTwitterLogin gamaTwitterLogin;
@@ -211,7 +220,7 @@ public class BaseMainActivity extends Activity {
                             }).setCancelable(false)
                                     .setMessage("是否退出遊戲")
                                     .create();
-                            dialog.show();
+//                            dialog.show();
                         }
                     }
                 });
@@ -676,6 +685,14 @@ public class BaseMainActivity extends Activity {
             }
         });
 
+        image_test = findViewById(R.id.image_test);
+        image_test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToastUtils.toast(BaseMainActivity.this, "click to refresh");
+                loadImage();
+            }
+        });
     }
 
     @Override
@@ -733,5 +750,28 @@ public class BaseMainActivity extends Activity {
 
     private boolean isLogin() {
         return !TextUtils.isEmpty(GamaUtil.getUid(this));
+    }
+
+    private void loadImage() {
+        String url = "https://login.gamesword.com/captcha/captcha.app?timestamp=" + System.currentTimeMillis()
+                + "&operatingSystem=android&uniqueId=" + SGoogleProxy.getAdvertisingId(BaseMainActivity.this);
+        PL.i(url);
+        final RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        //构建ImageRequest 实例
+        final ImageRequest request = new ImageRequest(url, new Response.Listener<Bitmap>() {
+            @Override
+            public void onResponse(Bitmap response) {
+                PL.i("response: " + response.toString());
+                //给imageView设置图片
+                image_test.setImageBitmap(response);
+            }
+        }, 0, 0, ImageView.ScaleType.FIT_XY, Bitmap.Config.RGB_565, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //设置一张错误的图片，临时用ic_launcher代替
+                image_test.setImageResource(R.drawable.gama_title_sdk_bg);
+            }
+        });
+        requestQueue.add(request);
     }
 }

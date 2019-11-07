@@ -336,6 +336,7 @@ public class GooglePayHelper {
                         if (listener != null) {
                             listener.onQueryResult(null);
                         }
+                        recycleIab();
                         return;
                     }
 
@@ -344,6 +345,7 @@ public class GooglePayHelper {
                         if (listener != null) {
                             listener.onQueryResult(null);
                         }
+                        recycleIab();
                         return;
                     }
 
