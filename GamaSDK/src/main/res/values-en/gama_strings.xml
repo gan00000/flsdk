@@ -1,0 +1,76 @@
+<resources>
+
+    <string name="py_success">Success</string>
+
+    <string name="py_account_login">Account Login</string>
+    <string name="py_account">Account:</string>
+    <string name="py_account_hit">Account</string>
+    <string name="py_password">Password:</string>
+    <string name="py_password_hit">Password</string>
+    <string name="py_login">Login</string>
+    <string name="py_register_account">Register</string>
+    <string name="py_login_fb">Log in with Facebook</string>
+    <string name="py_login_star">Log in with Gamamobi</string>
+    <string name="py_login_mac">Log in as Guest</string>
+    <string name="py_register_account_hit">6 to 18 letters or numbers</string>
+    <string name="py_confire">Confirm</string>
+    <string name="py_register_account_terms">I have read and accept the Membership Terms and Regulations</string>
+    <string name="py_password_error">Invalid password format</string>
+    <string name="py_account_error">Invalid account format</string>
+    <string name="py_account_empty">Account cannot be empty</string>
+    <string name="py_password_empty">Password cannot be empty</string>
+    <string name="py_password_equal_account">Account and password cannot be identical</string>
+    <string name="py_select_terms">Please confirm that you have read the Terms of Service</string>
+    <string name="py_register_success">Registration complete!</string>
+    <string name="py_login_success">Logged in successfully</string>
+    <string name="py_login_terms">Membership Terms and Regulations</string>
+    <string name="py_error_occur">An error occurred. Please try again.</string>
+    <string name="py_error_time_out">Connection time out. Please try again.</string>
+    <string name="py_auto_login_change">Switch account</string>
+    <string name="py_pay_title">Purchase</string>
+    <string name="py_login_mac_tips">Your %1$s login account and password:\nAccount: %2$s, Password: %3$s</string>
+    <string name="py_login_mac_saveimage_tips">Account and password have been saved to your albums</string>
+    <string name="py_login_autologin_tips">Logging into %1$s account…</string>
+    <string name="py_login_autologin_fblogining_tips">Logging into Facebook account…</string>
+    <string name="py_login_autologin_logining_tips">Logging into account…</string>
+
+    <string name="py_register_email_hit">Email (optional) - may be used to recover password</string>
+    <string name="py_findpwd_email_hit">Email (required) - may be used to recover password</string>
+    <string name="py_login_save_account">Remember account</string>
+    <string name="py_login_by_members">Member Login</string>
+    <string name="py_email_format_error">Invalid email format</string>
+    <string name="py_email_empty">Email cannot be empty</string>
+    <string name="py_old_pwd">Old password</string>
+    <string name="py_new_pwd">New password</string>
+    <string name="py_change_pwd">Change password</string>
+    <string name="py_old_equel_new_pwd">New password and old password may not be identical</string>
+    <string name="py_findpwd_success">Password recovered successfully</string>
+    <string name="py_findpwd">Forgot password</string>
+    <string name="py_bind_unique">Link guest account</string>
+    <string name="py_bind_fb">Link Facebook</string>
+    <string name="py_bind_google">Link Google</string>
+    <string name="py_bind_phone_area_num">+86</string>
+    <string name="py_account_center">Member Center</string>
+    <string name="py_send_new_pwd">Send new password</string>
+
+    <string name="py_free_reg">Guest Login</string>
+
+    <string name="py_login_page_account_login">Member Login Page</string>
+    <string name="py_login_page_account_reg">Member Registration</string>
+    <string name="py_login_page_account_bind">Link Account</string>
+    <string name="py_login_page_change_pwd">Change password</string>
+    <string name="py_login_page_forgot_pwd">Forgot password</string>
+
+    <!--启动条款页面-->
+    <string name="gama_ui_term_title" translatable="false">Terms of Use</string>
+    <string name="gama_ui_term_confirm" translatable="false">Game Login</string>
+    <string name="gama_ui_term_read_land" translatable="false">I have read and accept the Terms of Use</string>
+    <string name="gama_ui_term_port_read" translatable="false">I accept the Terms of Service and Privacy Policy</string>
+    <string name="gama_ui_term_port_term1" translatable="false">Terms of Service</string>
+    <string name="gama_ui_term_port_term2" translatable="false">Privacy Policy</string>
+    <string name="gama_ui_term_not_read" translatable="false">Please first accept the Terms of Use</string>
+
+    <!--SDK功能提示-->
+    <string name="gama_toast_msg_app_not_install" translatable="false">Please install the %s app in order to continue sharing</string>
+
+</resources>
