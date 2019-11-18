@@ -2,9 +2,9 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle" >
     <corners
-        android:radius="@dimen/px_15" />
+        android:radius="@dimen/px_10" />
     <!-- 图形的填充颜色 -->
-    <solid android:color="@color/e_73192d3f" >
+    <solid android:color="@color/gama_color_ui_btn_bg" >
     </solid>
 
 </shape>

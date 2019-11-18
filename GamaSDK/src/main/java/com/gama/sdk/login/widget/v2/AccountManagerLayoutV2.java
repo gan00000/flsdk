@@ -4,11 +4,10 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
-import com.gama.base.bean.SGameLanguage;
 import com.gama.base.utils.GamaUtil;
-import com.gama.base.utils.Localization;
 import com.gama.sdk.R;
 import com.gama.sdk.login.widget.SLoginBaseRelativeLayout;
 
@@ -17,10 +16,10 @@ public class AccountManagerLayoutV2 extends SLoginBaseRelativeLayout implements 
 
     private View contentView;
     private TextView changePwdBtn;
-    private TextView uniqueRegBindBtn;
-    private TextView fbRegBindBtn;
-    private TextView googleRegBindBtn;
-    private TextView twitterRegBindBtn;
+    private Button uniqueRegBindBtn;
+    private Button fbRegBindBtn;
+    private Button googleRegBindBtn;
+    private Button twitterRegBindBtn;
 
 
     public AccountManagerLayoutV2(Context context) {
@@ -43,16 +42,16 @@ public class AccountManagerLayoutV2 extends SLoginBaseRelativeLayout implements 
     private View onCreateView(LayoutInflater inflater) {
         contentView = inflater.inflate(R.layout.v2_gama_account_manager, null);
 
-        backView = contentView.findViewById(R.id.py_back_button_v2);
+        backView = contentView.findViewById(R.id.gama_head_iv_back);
         backView.setOnClickListener(this);
 
-        changePwdBtn = (TextView) contentView.findViewById(R.id.v2_account_manager_changepwd_btn);
-        uniqueRegBindBtn = (TextView) contentView.findViewById(R.id.v2_account_manager_free_reg_bind_btn);
-        fbRegBindBtn = (TextView) contentView.findViewById(R.id.v2_account_manager_fb_reg_bind_btn);
-        googleRegBindBtn = (TextView) contentView.findViewById(R.id.v2_account_manager_google_reg_bind_btn);
-        twitterRegBindBtn = (TextView) contentView.findViewById(R.id.v2_account_manager_twitter_reg_bind_btn);
+//        changePwdBtn = (TextView) contentView.findViewById(R.id.v2_account_manager_changepwd_btn);
+        uniqueRegBindBtn = contentView.findViewById(R.id.gama_manager_btn_guest);
+        fbRegBindBtn = contentView.findViewById(R.id.gama_manager_btn_facebook);
+        googleRegBindBtn =  contentView.findViewById(R.id.gama_manager_btn_google);
+        twitterRegBindBtn = contentView.findViewById(R.id.gama_manager_btn_twitter);
 
-        changePwdBtn.setOnClickListener(this);
+//        changePwdBtn.setOnClickListener(this);
         uniqueRegBindBtn.setOnClickListener(this);
         fbRegBindBtn.setOnClickListener(this);
         googleRegBindBtn.setOnClickListener(this);

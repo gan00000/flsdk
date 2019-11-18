@@ -638,4 +638,16 @@ public class GamaUtil {
     public static void resetOnlineTimeInfo(Context context) {
         SPUtil.saveSimpleInfo(context, GamaUtil.GAMA_SP_FILE, PREFIX_ONLINE, "");
     }
+
+
+    private static final String GAMA_VFCODE_SWITCH_STATUS = "GAMA_VFCODE_SWITCH_STATUS";
+    public static void saveVfcodeSwitchStatus(Context context, boolean status){
+        SPUtil.saveSimpleInfo(context, GamaUtil.GAMA_SP_FILE,GAMA_VFCODE_SWITCH_STATUS, status);
+    }
+    /**
+     * 登入验证码是否开启,false:登入不需要验证码；true:登入需要验证码
+     */
+    public static boolean getVfcodeSwitchStatus(Context context){
+        return SPUtil.getSimpleBoolean(context, GamaUtil.GAMA_SP_FILE, GAMA_VFCODE_SWITCH_STATUS);
+    }
 }

@@ -8,6 +8,8 @@
     <string name="gama_act_dynamic_method" translatable="false">act_dynamic</string>
     <!-- 安装上报接口名 -->
     <string name="gama_ads_install_activation" translatable="false">ads_install_activation</string>
+    <!-- 验证码接口名 -->
+    <string name="gama_vfcode" translatable="false">captcha/captcha.app</string>
 
 
 </resources>

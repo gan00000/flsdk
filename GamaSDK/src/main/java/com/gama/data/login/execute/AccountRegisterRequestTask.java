@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.core.base.bean.BaseReqeustBean;
 import com.core.base.utils.SStringUtil;
+import com.gama.data.login.constant.GSRequestMethod;
 import com.gama.data.login.request.AccountRegRequestBean;
 
 //1000成功
@@ -12,7 +13,7 @@ public class AccountRegisterRequestTask extends BaseLoginRequestTask {
 
     private AccountRegRequestBean regRequestBean;
 
-    public AccountRegisterRequestTask(Context context, String userName, String password) {
+    public AccountRegisterRequestTask(Context context, String userName, String password, String areaCode, String phone, String vfcode) {
         super(context);
 
         userName = userName.toLowerCase();
@@ -26,7 +27,11 @@ public class AccountRegisterRequestTask extends BaseLoginRequestTask {
         password = SStringUtil.toMd5(password);
         regRequestBean.setPwd(password);
 
-        regRequestBean.setRequestMethod("register");
+        regRequestBean.setVfCode(vfcode);
+        regRequestBean.setPhoneAreaCode(areaCode);
+        regRequestBean.setPhone(phone);
+
+        regRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_REGISTER);
 
 
     }
@@ -46,7 +51,7 @@ public class AccountRegisterRequestTask extends BaseLoginRequestTask {
 
         regRequestBean.setEmail(email);
 
-        regRequestBean.setRequestMethod("register");
+        regRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_REGISTER);
 
 
     }

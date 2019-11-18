@@ -25,6 +25,15 @@ public class ThirdAccountBindRequestBean extends AccountLoginRequestBean {
 	 */
 	private String apps = "";
 	private String tokenBusiness = "";//编码（标志明文密文）
+	private String vfCode = "";
+
+	public String getVfCode() {
+		return vfCode;
+	}
+
+	public void setVfCode(String vfCode) {
+		this.vfCode = vfCode;
+	}
 
 	public String getRegistPlatform() {
 		return registPlatform;

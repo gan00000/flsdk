@@ -46,13 +46,13 @@ public class AccountChangePwdLayoutV2 extends SLoginBaseRelativeLayout implement
     private View onCreateView(LayoutInflater inflater) {
         contentView = inflater.inflate(R.layout.v2_account_change_pwd, null);
 
-        backView = contentView.findViewById(R.id.py_back_button_v2);
+        backView = contentView.findViewById(R.id.gama_head_iv_back);
 
-        changePwdAccountEditText = (EditText) contentView.findViewById(R.id.py_changepwd_account);
-        changePwdOldEditText = (EditText) contentView.findViewById(R.id.py_changepwd_old_password);
-        changePwdNewEditText = (EditText) contentView.findViewById(R.id.py_changepwd_new_password);
+        changePwdAccountEditText = contentView.findViewById(R.id.gama_change_et_account);
+        changePwdOldEditText = contentView.findViewById(R.id.gama_change_et_password);
+        changePwdNewEditText = contentView.findViewById(R.id.gama_change_et_password2);
 
-        changePwdConfireBtn = (TextView) contentView.findViewById(R.id.py_changepwd_confirm);
+        changePwdConfireBtn = contentView.findViewById(R.id.gama_change_btn_confirm);
 
         backView.setOnClickListener(this);
         changePwdConfireBtn.setOnClickListener(this);
@@ -87,7 +87,7 @@ public class AccountChangePwdLayoutV2 extends SLoginBaseRelativeLayout implement
        if (v == changePwdConfireBtn) {
             changePwd();
         } else if (v == backView) {//返回键
-           sLoginDialogv2.toAccountManagerCenter();
+           sLoginDialogv2.toAccountLoginView();
         }
 
     }

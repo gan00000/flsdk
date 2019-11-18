@@ -15,7 +15,7 @@
     >
 
         <!--标题-->
-        <!--<include layout="@layout/py_title_layout"/>-->
+        <!--<include gama_ui_head_layout="@gama_ui_head_layout/py_title_layout"/>-->
 
         <RelativeLayout
             android:layout_width="match_parent"

@@ -28,4 +28,18 @@ public class SBaseRelativeLayout extends RelativeLayout {
     public SBaseRelativeLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
+
+    public interface OperationCallback<T extends Object> {
+        /**
+         * 时间限制中
+         */
+        int TIME_LIMIT = 0;
+        /**
+         * 时间限制解除
+         */
+        int TIME_OUT = 1;
+        void statusCallback(int operation);
+
+        void dataCallback(T t);
+    }
 }

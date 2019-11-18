@@ -12,7 +12,7 @@
         android:layout_width="@dimen/px_700"
         android:layout_height="@dimen/px_400"
         android:layout_centerInParent="true"
-        android:background="@drawable/v2_login_bg"
+        android:background="@drawable/gama_ui_bg_port"
         android:orientation="vertical"
         android:gravity="center"
         >
@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textSize="@dimen/sp_20"
-            android:textColor="@android:color/black"
+            android:textColor="@color/gama_color_ui_input_text"
             android:paddingLeft="@dimen/px_10"
             android:paddingRight="@dimen/px_10"
             android:id="@+id/py_auto_login_tips"
@@ -34,18 +34,18 @@
             android:layout_marginTop="@dimen/px_20"
             android:gravity="center"
             android:textSize="@dimen/sp_24"
-            android:textColor="@android:color/black"
+            android:textColor="@color/gama_color_ui_input_text"
             android:id="@+id/py_auto_login_wait_time"
             />
 
         <TextView
             android:layout_width="@dimen/px_280"
-            android:layout_height="@dimen/px_80"
+            android:layout_height="@dimen/px_60"
             android:layout_marginTop="@dimen/px_40"
             android:gravity="center"
             android:textSize="@dimen/sp_18"
-            android:textColor="@android:color/black"
-            android:background="@drawable/gama_edit_text_rectangle_bg"
+            android:textColor="@android:color/white"
+            android:background="@drawable/bg_192d3f_46"
             android:text="@string/py_auto_login_change"
             android:id="@+id/py_auto_login_change"
             />

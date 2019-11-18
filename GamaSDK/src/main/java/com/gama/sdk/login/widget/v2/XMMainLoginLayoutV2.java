@@ -49,14 +49,14 @@ public class XMMainLoginLayoutV2 extends SLoginBaseRelativeLayout implements Vie
 
         googleLoginView = contentView.findViewById(R.id.btn_xm_google_login_iv);
 
-        SGameLanguage sGameLanguage = Localization.getSGameLanguage(getContext());
-        if(SGameLanguage.ko_KR == sGameLanguage) {
-            starLoginView.setImageResource(R.drawable.btn_xm_member_login_kr);
-            macLoginView.setImageResource(R.drawable.gama_guest_login_kr);
-        } else if(SGameLanguage.zh_TW == sGameLanguage) {
-            starLoginView.setImageResource(R.drawable.btn_xm_member_login);
-            macLoginView.setImageResource(R.drawable.gama_guest_login);
-        }
+//        SGameLanguage sGameLanguage = Localization.getSGameLanguage(getContext());
+//        if(SGameLanguage.ko_KR == sGameLanguage) {
+//            starLoginView.setImageResource(R.drawable.btn_xm_member_login_kr);
+//            macLoginView.setImageResource(R.drawable.gama_guest_login_kr);
+//        } else if(SGameLanguage.zh_TW == sGameLanguage) {
+//            starLoginView.setImageResource(R.drawable.btn_xm_member_login);
+//            macLoginView.setImageResource(R.drawable.gama_guest_login);
+//        }
 
         fbLoginView.setOnClickListener(this);
         starLoginView.setOnClickListener(this);

@@ -8,32 +8,44 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
-import com.gama.base.bean.SLoginType;
+import com.gama.base.bean.GamaAreaInfoBean;
 import com.gama.base.utils.GamaUtil;
+import com.gama.data.login.constant.GSRequestMethod;
 import com.gama.sdk.R;
+import com.gama.sdk.SBaseRelativeLayout;
 import com.gama.sdk.login.widget.SLoginBaseRelativeLayout;
-import com.gama.sdk.utils.Validator;
 
 
-public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout implements View.OnClickListener {
+public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout implements View.OnClickListener, SBaseRelativeLayout.OperationCallback {
 
     private View contentView;
-    private ImageView termsSelectImageView, eyeImageView;
-    private TextView termsTextView, bindConfirm;
+    private ImageView eyeImageView;
+    private Button bindConfirm, gama_bind_btn_get_vfcode;
 
-    private EditText registerPasswordEditText, registerAccountEditText,registerMailEditText;
+    /**
+     * 密码、账号、手机、验证码
+     */
+    private EditText registerPasswordEditText, registerAccountEditText, gama_bind_et_phone, gama_bind_et_vfcode;
+
+    /**
+     * 区号
+     */
+    private TextView gama_bind_tv_area;
 
     private String account;
     private String password;
 
     private int bindTpye = 0;
 
+    //选中的区域信息
+    private GamaAreaInfoBean selectedBean;
 
     public ThirdPlatBindAccountLayoutV2(Context context) {
         super(context);
@@ -55,26 +67,24 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
     private View onCreateView(LayoutInflater inflater) {
         contentView = inflater.inflate(R.layout.v2_account_bind, null);
 
-        backView = contentView.findViewById(R.id.py_back_button_v2);
+        backView = contentView.findViewById(R.id.gama_head_iv_back);
 
-        termsSelectImageView = (ImageView) contentView.findViewById(R.id.py_register_account_terms_check);
-        termsTextView = (TextView) contentView.findViewById(R.id.py_register_terms_text_id);
+        eyeImageView = contentView.findViewById(R.id.gama_bind_iv_eye);
+        registerPasswordEditText = contentView.findViewById(R.id.gama_bind_et_password);
+        registerAccountEditText = contentView.findViewById(R.id.gama_bind_et_account);
+        gama_bind_et_phone = contentView.findViewById(R.id.gama_bind_et_phone);
+        gama_bind_et_vfcode = contentView.findViewById(R.id.gama_bind_et_vfcode);
+        gama_bind_tv_area = contentView.findViewById(R.id.gama_bind_tv_area);
+        gama_bind_btn_get_vfcode = contentView.findViewById(R.id.gama_bind_btn_get_vfcode);
+//        registerMailEditText = (EditText) contentView.findViewById(R.id.py_bind_account_mail);
 
+        bindConfirm = contentView.findViewById(R.id.gama_bind_btn_confirm);
 
-        eyeImageView = (ImageView) contentView.findViewById(R.id.py_eye_imageview_id);
-        registerPasswordEditText = (EditText) contentView.findViewById(R.id.py_bind_password);
-        registerAccountEditText = (EditText) contentView.findViewById(R.id.py_bind_account);
-        registerMailEditText = (EditText) contentView.findViewById(R.id.py_bind_account_mail);
-
-        bindConfirm = (TextView) contentView.findViewById(R.id.py_bind_account_confirm);
-
-        termsSelectImageView.setSelected(true);
-
-        termsSelectImageView.setOnClickListener(this);
         eyeImageView.setOnClickListener(this);
-        termsTextView.setOnClickListener(this);
         backView.setOnClickListener(this);
         bindConfirm.setOnClickListener(this);
+        gama_bind_btn_get_vfcode.setOnClickListener(this);
+        gama_bind_tv_area.setOnClickListener(this);
 
         return contentView;
     }
@@ -90,21 +100,7 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
     @Override
     public void onClick(View v) {
 
-        if (v == termsSelectImageView) {
-            if (termsSelectImageView.isSelected()) {
-                termsSelectImageView.setSelected(false);
-            } else {
-                termsSelectImageView.setSelected(true);
-            }
-        } else if (v == termsTextView) {
-
-            if (bindTpye == SLoginType.bind_unique) {
-                sLoginDialogv2.toRegisterTermsView(2);
-            }else {
-                sLoginDialogv2.toRegisterTermsView(3);
-            }
-
-        } else if (v == bindConfirm) {
+        if (v == bindConfirm) {
 
             accountBind();
 
@@ -127,6 +123,12 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
             Editable etable = registerPasswordEditText.getText();
             Selection.setSelection(etable, etable.length());
 
+        } else if (v == gama_bind_tv_area) {
+            sLoginDialogv2.getLoginPresenter().setOperationCallback(this);
+            getAndShowArea();
+        } else if(v == gama_bind_btn_get_vfcode) {
+            sLoginDialogv2.getLoginPresenter().setOperationCallback(this);
+            getVfcode();
         }
 
     }
@@ -145,12 +147,7 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
             return;
         }
 
-        String email = registerMailEditText.getEditableText().toString().trim();
-
-        if (!termsSelectImageView.isSelected()) {
-            ToastUtils.toast(getActivity(), R.string.py_select_terms);
-            return;
-        }
+//        String email = registerMailEditText.getEditableText().toString().trim();
 
         if (SStringUtil.isEqual(account, password)) {
             ToastUtils.toast(getActivity(), R.string.py_password_equal_account);
@@ -166,16 +163,75 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
             return;
         }
 
-        if (SStringUtil.isNotEmpty(email) && !Validator.isEmail(email)){
-            ToastUtils.toast(getActivity(), R.string.py_email_format_error);
+        String areaCode = gama_bind_tv_area.getText().toString();
+        if(TextUtils.isEmpty(areaCode)) {
+            ToastUtils.toast(getActivity(), R.string.py_area_code_empty);
+            return;
+        }
+        String phone = gama_bind_et_phone.getEditableText().toString().trim();
+        if(!phone.matches(selectedBean.getPattern())) {
+            ToastUtils.toast(getActivity(), R.string.py_phone_error);
             return;
         }
 
-        sLoginDialogv2.getLoginPresenter().accountBind(sLoginDialogv2.getActivity(), account, password, email, bindTpye);
+//        if (SStringUtil.isNotEmpty(email) && !Validator.isEmail(email)){
+//            ToastUtils.toast(getActivity(), R.string.py_email_format_error);
+//            return;
+//        }
+
+        String vfcode = gama_bind_et_vfcode.getEditableText().toString();
+        if(TextUtils.isEmpty(vfcode)) {
+            ToastUtils.toast(getActivity(), R.string.py_vfcode_empty);
+            return;
+        }
+//        if (SStringUtil.isNotEmpty(email) && !Validator.isEmail(email)){
+//            ToastUtils.toast(getActivity(), R.string.py_email_format_error);
+//            return;
+//        }
+
+        sLoginDialogv2.getLoginPresenter().accountBind(sLoginDialogv2.getActivity(), account, password, areaCode, phone, vfcode, bindTpye);
     }
 
 
     public void setBindTpye(int bindTpye) {
         this.bindTpye = bindTpye;
+    }
+
+    private void getAndShowArea() {
+        sLoginDialogv2.getLoginPresenter().getAreaInfo(sLoginDialogv2.getActivity());
+    }
+
+    private void getVfcode() {
+        String areaCode = gama_bind_tv_area.getText().toString();
+        if (TextUtils.isEmpty(areaCode)) {
+            ToastUtils.toast(getActivity(), R.string.py_area_code_empty);
+            return;
+        }
+        String phone = gama_bind_et_phone.getEditableText().toString().trim();
+        if (!phone.matches(selectedBean.getPattern())) {
+            ToastUtils.toast(getActivity(), R.string.py_phone_error);
+            return;
+        }
+        String interfaceName = GSRequestMethod.RequestVfcodeInterface.bind.getString();
+
+        sLoginDialogv2.getLoginPresenter().getPhoneVfcode(sLoginDialogv2.getActivity(), areaCode, phone, interfaceName);
+    }
+
+    @Override
+    public void statusCallback(int operation) {
+        if(TIME_LIMIT == operation) {
+            gama_bind_btn_get_vfcode.setBackgroundResource(R.drawable.gama_ui_bg_btn_unclickable);
+        } else if(TIME_OUT == operation) {
+            gama_bind_btn_get_vfcode.setBackgroundResource(R.drawable.bg_192d3f_46);
+        }
+    }
+
+    @Override
+    public void dataCallback(Object o) {
+        if (o instanceof GamaAreaInfoBean) {
+            selectedBean = (GamaAreaInfoBean) o;
+            String text = selectedBean.getValue();
+            gama_bind_tv_area.setText(text);
+        }
     }
 }

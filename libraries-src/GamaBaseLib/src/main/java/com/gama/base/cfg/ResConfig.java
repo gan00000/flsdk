@@ -273,6 +273,20 @@ public class ResConfig {
         return getConfigUrl(context, "gama_service_url");
     }
 
+    /**
+     * 获取区码的链接
+     */
+    public static String getAreaCodeUrl(Context context) {
+        return getConfigUrl(context, "gama_area_info_url");
+    }
+
+    /**
+     * 获取验证码开关的链接
+     */
+    public static String getVfCodeSwitchUrl(Context context) {
+        return getConfigUrl(context, "gama_vfcode_switch_url");
+    }
+
 
 //===========================================域名获取end===============================================	
 //===========================================域名获取end===============================================	

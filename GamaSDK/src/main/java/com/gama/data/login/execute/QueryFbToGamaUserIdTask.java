@@ -4,7 +4,7 @@ package com.gama.data.login.execute;
 import android.app.Activity;
 
 import com.core.base.bean.BaseReqeustBean;
-import com.core.base.callback.ISReqCallBack;
+import com.core.base.statusCallback.ISReqCallBack;
 import com.core.base.request.AbsHttpRequest;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;

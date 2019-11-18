@@ -7,6 +7,7 @@ import com.core.base.bean.BaseReqeustBean;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.gama.base.bean.SLoginType;
+import com.gama.data.login.constant.GSRequestMethod;
 import com.gama.data.login.request.ThirdAccountBindRequestBean;
 
 /**
@@ -45,7 +46,7 @@ public class ThirdAccountBindRequestTask extends BaseLoginRequestTask {
         thirdAccountBindRequestBean.setPwd(SStringUtil.toMd5(pwd));
         thirdAccountBindRequestBean.setEmail(email);
 
-        thirdAccountBindRequestBean.setRequestMethod("bind_thirdParty");
+        thirdAccountBindRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_BIND);
 
 
     }
@@ -75,7 +76,61 @@ public class ThirdAccountBindRequestTask extends BaseLoginRequestTask {
         thirdAccountBindRequestBean.setPwd(SStringUtil.toMd5(pwd));
         thirdAccountBindRequestBean.setEmail(email);
 
-        thirdAccountBindRequestBean.setRequestMethod("bind_thirdParty");
+        thirdAccountBindRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_BIND);
+
+
+    }
+
+    /**
+     *   需要手机验证码的fb綁定
+     */
+    public ThirdAccountBindRequestTask(Context context, String name, String pwd, String areaCode, String phone, String vfcode, String fbScopeId, String fbApps, String fbTokenBusiness) {
+        super(context);
+
+        thirdAccountBindRequestBean = new ThirdAccountBindRequestBean(context);
+
+        sdkBaseRequestBean = thirdAccountBindRequestBean;
+
+        thirdAccountBindRequestBean.setRegistPlatform(SLoginType.LOGIN_TYPE_FB);
+        thirdAccountBindRequestBean.setThirdPlatId(fbScopeId);
+        thirdAccountBindRequestBean.setApps(fbApps);
+        thirdAccountBindRequestBean.setTokenBusiness(fbTokenBusiness);
+
+        thirdAccountBindRequestBean.setName(name);
+        thirdAccountBindRequestBean.setPwd(SStringUtil.toMd5(pwd));
+        thirdAccountBindRequestBean.setPhone(phone);
+        thirdAccountBindRequestBean.setPhoneAreaCode(areaCode);
+        thirdAccountBindRequestBean.setVfCode(vfcode);
+
+        thirdAccountBindRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_BIND);
+
+
+    }
+
+    /**
+     * 需要手机验证码的綁定
+     */
+    public ThirdAccountBindRequestTask(Context context, String name, String pwd, String areaCode, String phone, String vfcode, String sLoginType, String thirdPlatId) {
+        super(context);
+
+        if(TextUtils.isEmpty(thirdPlatId)){
+            PL.d("thirdPlatId:" + thirdPlatId);
+            return;
+        }
+
+        thirdAccountBindRequestBean = new ThirdAccountBindRequestBean(context);
+
+        sdkBaseRequestBean = thirdAccountBindRequestBean;
+
+        thirdAccountBindRequestBean.setRegistPlatform(sLoginType);
+        thirdAccountBindRequestBean.setThirdPlatId(thirdPlatId);
+        thirdAccountBindRequestBean.setName(name);
+        thirdAccountBindRequestBean.setPwd(SStringUtil.toMd5(pwd));
+        thirdAccountBindRequestBean.setPhone(phone);
+        thirdAccountBindRequestBean.setPhoneAreaCode(areaCode);
+        thirdAccountBindRequestBean.setVfCode(vfcode);
+
+        thirdAccountBindRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_BIND);
 
 
     }

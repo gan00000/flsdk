@@ -8,28 +8,40 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
+import com.gama.base.bean.GamaAreaInfoBean;
 import com.gama.base.utils.GamaUtil;
+import com.gama.data.login.constant.GSRequestMethod;
 import com.gama.sdk.R;
+import com.gama.sdk.SBaseRelativeLayout;
 import com.gama.sdk.login.widget.SLoginBaseRelativeLayout;
-import com.gama.sdk.utils.Validator;
 
 
-public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements View.OnClickListener {
+public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements View.OnClickListener, SBaseRelativeLayout.OperationCallback {
 
     private View contentView;
-    private ImageView termsSelectImageView, eyeImageView;
-    private TextView termsTextView, registerConfirm;
+    private ImageView eyeImageView;
+    private Button registerConfirm, gama_register_btn_get_vfcode;
 
-    private EditText registerPasswordEditText, registerAccountEditText,registerMailEditText;
-
+    /**
+     * 密码、账号、手机、验证码
+     */
+    private EditText registerPasswordEditText, registerAccountEditText, gama_register_et_phone, gama_register_et_vfcode;
+    /**
+     * 区号
+     */
+    private TextView gama_register_tv_area;
     private String account;
     private String password;
+
+    //选中的区域信息
+    private GamaAreaInfoBean selectedBean;
 
     public AccountRegisterLayoutV2(Context context) {
         super(context);
@@ -51,26 +63,23 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
     private View onCreateView(LayoutInflater inflater) {
         contentView = inflater.inflate(R.layout.v2_account_reg, null);
 
-        backView = contentView.findViewById(R.id.py_back_button_v2);
+        backView = contentView.findViewById(R.id.gama_head_iv_back);
 
-        termsSelectImageView = (ImageView) contentView.findViewById(R.id.py_register_account_terms_check);
-        termsTextView = (TextView) contentView.findViewById(R.id.py_register_terms_text_id);
+        eyeImageView = contentView.findViewById(R.id.gama_register_iv_eye);
+        registerPasswordEditText = contentView.findViewById(R.id.gama_register_et_password);
+        registerAccountEditText = contentView.findViewById(R.id.gama_register_et_account);
+        gama_register_et_phone = contentView.findViewById(R.id.gama_register_et_phone);
+        gama_register_et_vfcode = contentView.findViewById(R.id.gama_register_et_vfcode);
+        gama_register_tv_area = contentView.findViewById(R.id.gama_register_tv_area);
 
+        registerConfirm = contentView.findViewById(R.id.gama_register_btn_confirm);
+        gama_register_btn_get_vfcode = contentView.findViewById(R.id.gama_register_btn_get_vfcode);
 
-        eyeImageView = (ImageView) contentView.findViewById(R.id.py_eye_imageview_id);
-        registerPasswordEditText = (EditText) contentView.findViewById(R.id.py_register_password);
-        registerAccountEditText = (EditText) contentView.findViewById(R.id.py_register_account);
-        registerMailEditText = (EditText) contentView.findViewById(R.id.py_register_account_mail);
-
-        registerConfirm = (TextView) contentView.findViewById(R.id.py_register_account_confirm);
-
-        termsSelectImageView.setSelected(true);
-
-        termsSelectImageView.setOnClickListener(this);
         eyeImageView.setOnClickListener(this);
-        termsTextView.setOnClickListener(this);
         backView.setOnClickListener(this);
         registerConfirm.setOnClickListener(this);
+        gama_register_btn_get_vfcode.setOnClickListener(this);
+        gama_register_tv_area.setOnClickListener(this);
 
         return contentView;
     }
@@ -78,7 +87,7 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        if (registerAccountEditText != null){
+        if (registerAccountEditText != null) {
             registerAccountEditText.requestFocus();
         }
     }
@@ -86,23 +95,13 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
     @Override
     public void onClick(View v) {
 
-        if (v == termsSelectImageView) {
-            if (termsSelectImageView.isSelected()) {
-                termsSelectImageView.setSelected(false);
-            } else {
-                termsSelectImageView.setSelected(true);
-            }
-        } else if (v == termsTextView) {
-
-            sLoginDialogv2.toRegisterTermsView(1);
-
-        } else if (v == registerConfirm) {
+        if (v == registerConfirm) {
             register();
         } else if (v == backView) {//返回键
 //            sLoginActivity.popBackStack();
-            if (from == 2){
+            if (from == 2) {
                 sLoginDialogv2.toAccountLoginView();
-            }else{
+            } else {
                 sLoginDialogv2.toMainLoginView();
             }
         } else if (v == eyeImageView) {//密码眼睛
@@ -120,9 +119,39 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
             Editable etable = registerPasswordEditText.getText();
             Selection.setSelection(etable, etable.length());
 
+        } else if (v == gama_register_btn_get_vfcode) {
+            sLoginDialogv2.getLoginPresenter().setOperationCallback(this);
+            getVfcode();
+        } else if (v == gama_register_tv_area) {
+            sLoginDialogv2.getLoginPresenter().setOperationCallback(this);
+            getAndShowArea();
         }
 
     }
+
+    private void getAndShowArea() {
+        sLoginDialogv2.getLoginPresenter().getAreaInfo(sLoginDialogv2.getActivity());
+    }
+//
+//    private void showAreaDialog() {
+//        final String[] areaList = new String[areaBeanList.length];
+//        for(int i = 0; i < areaBeanList.length; i++) {
+//            areaList[i] = areaBeanList[i].getText();
+//        }
+//
+//        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
+//                .setItems(areaList, new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        selectedBean = areaBeanList[which];
+//                        String text = selectedBean.getValue();
+//                        gama_register_tv_area.setText(text);
+//                    }
+//                });
+//        AlertDialog d = builder.create();
+//
+//        d.show();
+//    }
 
     private void register() {
 
@@ -138,12 +167,12 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
             return;
         }
 
-        String email = registerMailEditText.getEditableText().toString().trim();
+//        String email = registerMailEditText.getEditableText().toString().trim();
 
-        if (!termsSelectImageView.isSelected()) {
-            ToastUtils.toast(getActivity(), R.string.py_select_terms);
-            return;
-        }
+//        if (!termsSelectImageView.isSelected()) {
+//            ToastUtils.toast(getActivity(), R.string.py_select_terms);
+//            return;
+//        }
 
         if (SStringUtil.isEqual(account, password)) {
             ToastUtils.toast(getActivity(), R.string.py_password_equal_account);
@@ -159,13 +188,62 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
             return;
         }
 
-        if (SStringUtil.isNotEmpty(email) && !Validator.isEmail(email)){
-            ToastUtils.toast(getActivity(), R.string.py_email_format_error);
+        String areaCode = gama_register_tv_area.getText().toString();
+        if (TextUtils.isEmpty(areaCode)) {
+            ToastUtils.toast(getActivity(), R.string.py_area_code_empty);
+            return;
+        }
+        String phone = gama_register_et_phone.getEditableText().toString().trim();
+        if (!phone.matches(selectedBean.getPattern())) {
+            ToastUtils.toast(getActivity(), R.string.py_phone_error);
             return;
         }
 
-        sLoginDialogv2.getLoginPresenter().register(sLoginDialogv2.getActivity(), account, password, email);
+//        if (SStringUtil.isNotEmpty(email) && !Validator.isEmail(email)){
+//            ToastUtils.toast(getActivity(), R.string.py_email_format_error);
+//            return;
+//        }
+
+        String vfcode = gama_register_et_vfcode.getEditableText().toString();
+        if (TextUtils.isEmpty(vfcode)) {
+            ToastUtils.toast(getActivity(), R.string.py_vfcode_empty);
+            return;
+        }
+
+        sLoginDialogv2.getLoginPresenter().register(sLoginDialogv2.getActivity(), account, password, areaCode, phone, vfcode);
     }
 
+    private void getVfcode() {
+        String areaCode = gama_register_tv_area.getText().toString();
+        if (TextUtils.isEmpty(areaCode)) {
+            ToastUtils.toast(getActivity(), R.string.py_area_code_empty);
+            return;
+        }
+        String phone = gama_register_et_phone.getEditableText().toString().trim();
+        if (!phone.matches(selectedBean.getPattern())) {
+            ToastUtils.toast(getActivity(), R.string.py_phone_error);
+            return;
+        }
+        String interfaceName = GSRequestMethod.RequestVfcodeInterface.register.getString();
 
+        sLoginDialogv2.getLoginPresenter().getPhoneVfcode(sLoginDialogv2.getActivity(), areaCode, phone, interfaceName);
+    }
+
+    @Override
+    public void statusCallback(int operation) {
+        if (TIME_LIMIT == operation) {
+            gama_register_btn_get_vfcode.setBackgroundResource(R.drawable.gama_ui_bg_btn_unclickable);
+        } else if (TIME_OUT == operation) {
+            gama_register_btn_get_vfcode.setBackgroundResource(R.drawable.bg_192d3f_46);
+        }
+    }
+
+    @Override
+    public void dataCallback(Object o) {
+        if (o instanceof GamaAreaInfoBean) {
+            selectedBean = (GamaAreaInfoBean) o;
+            String text = selectedBean.getValue();
+            gama_register_tv_area.setText(text);
+        }
+    }
 }

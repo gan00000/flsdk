@@ -5,6 +5,7 @@ import android.content.Context;
 import com.core.base.bean.BaseReqeustBean;
 import com.core.base.utils.SStringUtil;
 import com.gama.base.bean.SLoginType;
+import com.gama.data.login.constant.GSRequestMethod;
 import com.gama.data.login.request.ThirdLoginRegRequestBean;
 
 /**
@@ -38,7 +39,7 @@ public class ThirdLoginRegRequestTask extends BaseLoginRequestTask {
         thirdLoginRegRequestBean.setTokenBusiness(fbTokenBusiness);
         thirdLoginRegRequestBean.setFb_oauthToken(accessTokenString);
 
-        thirdLoginRegRequestBean.setRequestMethod("thirdPartyLogin");
+        thirdLoginRegRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_THIRD_LOGIN);
 
 
     }
@@ -54,7 +55,7 @@ public class ThirdLoginRegRequestTask extends BaseLoginRequestTask {
 
         sdkBaseRequestBean = thirdLoginRegRequestBean;
 
-        thirdLoginRegRequestBean.setRequestMethod("thirdPartyLogin");
+        thirdLoginRegRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_THIRD_LOGIN);
 
 
     }
@@ -76,7 +77,7 @@ public class ThirdLoginRegRequestTask extends BaseLoginRequestTask {
         thirdLoginRegRequestBean.setRegistPlatform(registPlatform);
         thirdLoginRegRequestBean.setThirdPlatId(thirdPlatId);
 
-        thirdLoginRegRequestBean.setRequestMethod("thirdPartyLogin");
+        thirdLoginRegRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_THIRD_LOGIN);
 
 
     }

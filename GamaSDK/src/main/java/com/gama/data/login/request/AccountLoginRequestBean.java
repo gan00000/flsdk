@@ -22,6 +22,15 @@ public class AccountLoginRequestBean extends AdsRequestBean {
 	private String pwd;
 	private String newPwd;
 	private String email;
+	private String captcha;
+
+	public String getCaptcha() {
+		return captcha;
+	}
+
+	public void setCaptcha(String captcha) {
+		this.captcha = captcha;
+	}
 
 	public String getName() {
 		return name;

@@ -15,16 +15,24 @@ import com.core.base.request.SimpleHttpRequest;
 import com.core.base.utils.PL;
 import com.core.base.utils.SPUtil;
 import com.core.base.utils.SStringUtil;
+import com.core.base.utils.ToastUtils;
 import com.gama.base.bean.AdsRequestBean;
 import com.gama.base.bean.BasePayBean;
 import com.gama.base.cfg.ResConfig;
 import com.gama.base.constant.GamaCommonKey;
 import com.gama.base.utils.GamaUtil;
+import com.gama.data.login.execute.GamaVfcodeSwitchRequestTask;
+import com.gama.data.login.execute.PhoneVfcodeRequestTask;
 import com.gama.data.login.response.SLoginResponse;
 import com.gama.sdk.R;
+import com.gama.sdk.SBaseRelativeLayout;
+import com.gama.sdk.utils.DialogUtil;
 import com.gama.thirdlib.facebook.SFacebookProxy;
 import com.gama.thirdlib.google.SGoogleProxy;
 import com.google.ads.conversiontracking.AdWordsConversionReporter;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -62,6 +70,9 @@ public class StarEventLogger {
             }
 
             trackingWithEventName(activity, GamaAdsConstant.GAMA_EVENT_OPEN, null, null);
+
+            //获取验证码开关
+            getVfSwitch(activity);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -338,6 +349,44 @@ public class StarEventLogger {
             }
         });
         simpleHttpRequest.excute();
+    }
+
+    private static void getVfSwitch(final Activity activity) {
+        GamaVfcodeSwitchRequestTask task = new GamaVfcodeSwitchRequestTask(activity);
+        task.setReqCallBack(new ISReqCallBack<BaseResponseModel>() {
+            @Override
+            public void success(BaseResponseModel responseModel, String rawResult) {
+                if (responseModel != null && !TextUtils.isEmpty(rawResult)) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(rawResult);
+                        JSONObject vfcodeSch = jsonObject.optJSONObject("vfcodeSch");
+                        String code = vfcodeSch.optString("open");
+                        // "0:关闭,1:开启"
+                        if("0".equals(code)) {
+                            GamaUtil.saveVfcodeSwitchStatus(activity, false);
+                        } else {
+                            GamaUtil.saveVfcodeSwitchStatus(activity, true);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void timeout(String code) {
+            }
+
+            @Override
+            public void noData() {
+            }
+
+            @Override
+            public void cancel() {
+            }
+
+        });
+        task.excute();
     }
 
 }

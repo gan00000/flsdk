@@ -3,6 +3,7 @@ package com.gama.sdk.login;
 import android.app.Activity;
 
 import com.gama.data.login.request.ThirdLoginRegRequestBean;
+import com.gama.sdk.SBaseRelativeLayout;
 import com.gama.thirdlib.facebook.SFacebookProxy;
 import com.gama.BaseView;
 import com.gama.IBasePresenter;
@@ -43,7 +44,7 @@ public class LoginContract {
      */
     public interface ILoginPresenter extends IBasePresenter<ILoginView> {
 
-        void starpyAccountLogin(Activity activity, String account, String pwd);
+        void starpyAccountLogin(Activity activity, String account, String pwd, String vfcode);
 
         void fbLogin(Activity activity);
         void googleLogin(Activity activity);
@@ -74,6 +75,33 @@ public class LoginContract {
          * Twitter登入
          */
         void twitterLogin(Activity activity);
+
+        /**
+         * 获取手机验证码
+         */
+        void getPhoneVfcode(Activity activity, String area, String phone, String interfaceName);
+
+        /**
+         * 需要手机验证的注册
+         */
+        void register(Activity activity, String account, String pwd, String areaCode, String phone, String vfcode);
+
+        /**
+         * 需要手机验证的找回密码
+         */
+        void findPwd(Activity activity, String account, String areaCode, String phone);
+
+        /**
+         * 需要手机验证的绑定账号
+         */
+        void accountBind(Activity activity, String account, String pwd, String areaCode, String phone, String vfcode, int bindType);
+
+        /**
+         * 界面功能回调
+         */
+        void setOperationCallback(SBaseRelativeLayout.OperationCallback callback);
+
+        void getAreaInfo(Activity activity);
     }
 
 }

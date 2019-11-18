@@ -4,13 +4,14 @@ import android.content.Context;
 
 import com.core.base.bean.BaseReqeustBean;
 import com.core.base.utils.SStringUtil;
+import com.gama.data.login.constant.GSRequestMethod;
 import com.gama.data.login.request.AccountLoginRequestBean;
 
 public class AccountLoginRequestTask extends BaseLoginRequestTask {
 
 	private AccountLoginRequestBean requestBean;
 	
-	public AccountLoginRequestTask(Context mContext, String userName, String password) {
+	public AccountLoginRequestTask(Context mContext, String userName, String password, String vfcode) {
 		super(mContext);
 
 		userName = userName.toLowerCase();
@@ -21,8 +22,8 @@ public class AccountLoginRequestTask extends BaseLoginRequestTask {
 		requestBean.setName(userName);
 		password = SStringUtil.toMd5(password);
 		requestBean.setPwd(password);
-
-		requestBean.setRequestMethod("login");
+		requestBean.setCaptcha(vfcode);
+		requestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_LOGIN);
 
 
 	}

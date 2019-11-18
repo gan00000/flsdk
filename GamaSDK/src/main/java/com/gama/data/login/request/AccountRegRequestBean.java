@@ -11,6 +11,16 @@ import android.content.Context;
 */
 public class AccountRegRequestBean extends AccountLoginRequestBean {
 
+	private String vfCode;
+
+	public String getVfCode() {
+		return vfCode;
+	}
+
+	public void setVfCode(String vfCode) {
+		this.vfCode = vfCode;
+	}
+
 	public AccountRegRequestBean(Context context) {
 		super(context);
 	}
