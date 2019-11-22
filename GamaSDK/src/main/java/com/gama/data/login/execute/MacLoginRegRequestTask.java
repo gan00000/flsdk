@@ -8,6 +8,8 @@ import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.gama.base.bean.SLoginType;
 import com.gama.base.utils.GamaUtil;
+import com.gama.data.login.constant.GSRequestMethod;
+import com.gama.data.login.constant.GamaRequestMethod;
 import com.gama.data.login.request.MacLoginRegRequestBean;
 
 /**
@@ -19,7 +21,7 @@ import com.gama.data.login.request.MacLoginRegRequestBean;
 public class MacLoginRegRequestTask extends BaseLoginRequestTask {
 
     MacLoginRegRequestBean macLoginRegRequestBean;
-    public MacLoginRegRequestTask(Context context) {
+    public MacLoginRegRequestTask(Context context, GSRequestMethod.GSRequestType requestMethod) {
         super(context);
 
         macLoginRegRequestBean = new MacLoginRegRequestBean(context);
@@ -35,9 +37,11 @@ public class MacLoginRegRequestTask extends BaseLoginRequestTask {
         }
         macLoginRegRequestBean.setUniqueId(uniqueId);
 
-        macLoginRegRequestBean.setRequestMethod("freeRegister");
-
-
+        if(requestMethod == GSRequestMethod.GSRequestType.GAMESWORD) {
+            macLoginRegRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_FREE_LOGIN);
+        } else if (requestMethod == GSRequestMethod.GSRequestType.GAMAMOBI) {
+            macLoginRegRequestBean.setRequestMethod(GamaRequestMethod.GAMA_REQUEST_METHOD_FREE_LOGIN);
+        }
     }
 
     @Override

@@ -44,20 +44,15 @@ public class LoginContract {
      */
     public interface ILoginPresenter extends IBasePresenter<ILoginView> {
 
-        void starpyAccountLogin(Activity activity, String account, String pwd, String vfcode);
-
         void fbLogin(Activity activity);
+
         void googleLogin(Activity activity);
 
         void thirdPlatLogin(Activity activity, ThirdLoginRegRequestBean thirdLoginRegRequestBean);
 
         void macLogin(Activity activity);
 
-        void register(Activity activity, String account, String pwd, String email);
         void changePwd(Activity activity, String account, String oldPwd, String newPwd);
-        void findPwd(Activity activity, String account, String email);
-        void accountBind(Activity activity, String account, String pwd, String email, int bindType);
-        void accountInject(Activity activity, String account, String pwd,String uid);
 
         void autoLogin(Activity activity);
 
@@ -70,16 +65,15 @@ public class LoginContract {
         void setSGoogleSignIn(SGoogleSignIn sGoogleSignIn);
         void setSFacebookProxy(SFacebookProxy sFacebookProxy);
         void setTwitterLogin(GamaTwitterLogin twitterLogin);
-
         /**
          * Twitter登入
          */
         void twitterLogin(Activity activity);
 
         /**
-         * 获取手机验证码
+         * 需要验证码的登入
          */
-        void getPhoneVfcode(Activity activity, String area, String phone, String interfaceName);
+        void starpyAccountLogin(Activity activity, String account, String pwd, String vfcode, boolean isSaveAccount);
 
         /**
          * 需要手机验证的注册
@@ -97,11 +91,19 @@ public class LoginContract {
         void accountBind(Activity activity, String account, String pwd, String areaCode, String phone, String vfcode, int bindType);
 
         /**
+         * 获取手机验证码
+         */
+        void getPhoneVfcode(Activity activity, String area, String phone, String interfaceName);
+
+        /**
+         * 获取区码
+         */
+        void getAreaInfo(Activity activity);
+
+        /**
          * 界面功能回调
          */
         void setOperationCallback(SBaseRelativeLayout.OperationCallback callback);
-
-        void getAreaInfo(Activity activity);
     }
 
 }

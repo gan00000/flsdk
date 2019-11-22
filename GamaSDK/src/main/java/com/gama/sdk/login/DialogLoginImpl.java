@@ -9,12 +9,13 @@ import com.gama.base.utils.GamaUtil;
 import com.gama.base.utils.Localization;
 import com.gama.data.login.ILoginCallBack;
 import com.gama.sdk.callback.GamaCommonViewCallback;
+import com.gama.sdk.login.widget.en.SLoginDialogV2En;
+import com.gama.sdk.login.widget.en.view.StartTermsLayoutV2En;
 import com.gama.sdk.login.widget.v2.StartTermsLayoutV2;
 import com.gama.sdk.utils.DialogUtil;
 import com.gama.thirdlib.facebook.SFacebookProxy;
 import com.gama.thirdlib.google.SGoogleSignIn;
 import com.gama.thirdlib.twitter.GamaTwitterLogin;
-import com.twitter.sdk.android.core.Twitter;
 
 /**
  * Created by gan on 2017/4/12.
@@ -34,7 +35,7 @@ public class DialogLoginImpl implements ILogin {
 
         sGoogleSignIn = new SGoogleSignIn(activity, DialogUtil.createLoadingDialog(activity, "Loading..."));
 
-        if(SGameLanguage.ja_JP == Localization.getSGameLanguage(activity)) {
+        if(GamaUtil.isJapan(activity)) {
             twitterLogin = new GamaTwitterLogin(activity);
         }
     }
@@ -75,23 +76,16 @@ public class DialogLoginImpl implements ILogin {
     @Override
     public void startLogin(final Activity activity, final ILoginCallBack iLoginCallBack) {
 
-        if(SGameLanguage.ja_JP == Localization.getSGameLanguage(activity) && twitterLogin == null) {
+        if(GamaUtil.isJapan(activity) && twitterLogin == null) {
             twitterLogin = new GamaTwitterLogin(activity);
         }
         boolean isTermRead = GamaUtil.getStartTermRead(activity);
 
         if(!isTermRead) {
-            StartTermsLayoutV2 termsLayoutV2 = new StartTermsLayoutV2(activity, com.gama.sdk.R.style.Gama_Theme_AppCompat_Dialog_Notitle_Fullscreen, new GamaCommonViewCallback() {
+            GamaCommonViewCallback commonViewCallback = new GamaCommonViewCallback() {
                 @Override
                 public void onSuccess() {
-                    SLoginDialogV2 sLoginDialog = new SLoginDialogV2(activity, com.gama.sdk.R.style.Gama_Theme_AppCompat_Dialog_Notitle_Fullscreen);
-                    sLoginDialog.setSFacebookProxy(sFacebookProxy);
-                    sLoginDialog.setSGoogleSignIn(sGoogleSignIn);
-                    if(twitterLogin != null) {
-                        sLoginDialog.setTwitterLogin(twitterLogin);
-                    }
-                    sLoginDialog.setLoginCallBack(iLoginCallBack);
-                    sLoginDialog.show();
+                    goDialogView(activity, iLoginCallBack);
                 }
 
                 @Override
@@ -100,13 +94,36 @@ public class DialogLoginImpl implements ILogin {
                         iLoginCallBack.onLogin(null);
                     }
                 }
-            });
-            termsLayoutV2.show();
+            };
+            if (GamaUtil.isNorthAmarican(activity)) {
+                StartTermsLayoutV2En termsLayoutV2 = new StartTermsLayoutV2En(activity,
+                        com.gama.sdk.R.style.Gama_Theme_AppCompat_Dialog_Notitle_Fullscreen, commonViewCallback);
+                termsLayoutV2.show();
+            } else {
+                StartTermsLayoutV2 termsLayoutV2 = new StartTermsLayoutV2(activity,
+                        com.gama.sdk.R.style.Gama_Theme_AppCompat_Dialog_Notitle_Fullscreen, commonViewCallback);
+                termsLayoutV2.show();
+            }
+        } else {
+            goDialogView(activity, iLoginCallBack);
+        }
+    }
+
+    private void goDialogView(Activity activity, ILoginCallBack iLoginCallBack) {
+        if (GamaUtil.isNorthAmarican(activity)) {
+            SLoginDialogV2En sLoginDialog = new SLoginDialogV2En(activity, com.gama.sdk.R.style.Gama_Theme_AppCompat_Dialog_Notitle_Fullscreen);
+            sLoginDialog.setSFacebookProxy(sFacebookProxy);
+            sLoginDialog.setSGoogleSignIn(sGoogleSignIn);
+            if (twitterLogin != null) {
+                sLoginDialog.setTwitterLogin(twitterLogin);
+            }
+            sLoginDialog.setLoginCallBack(iLoginCallBack);
+            sLoginDialog.show();
         } else {
             SLoginDialogV2 sLoginDialog = new SLoginDialogV2(activity, com.gama.sdk.R.style.Gama_Theme_AppCompat_Dialog_Notitle_Fullscreen);
             sLoginDialog.setSFacebookProxy(sFacebookProxy);
             sLoginDialog.setSGoogleSignIn(sGoogleSignIn);
-            if(twitterLogin != null) {
+            if (twitterLogin != null) {
                 sLoginDialog.setTwitterLogin(twitterLogin);
             }
             sLoginDialog.setLoginCallBack(iLoginCallBack);

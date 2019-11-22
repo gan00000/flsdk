@@ -176,7 +176,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.82" />
+            app:layout_constraintGuide_percent="0.83" />
 
         <ImageView
             android:layout_width="0dp"
@@ -428,7 +428,7 @@
             android:textColor="@android:color/white"
             android:textSize="@dimen/sp_20"
             android:textStyle="bold"
-            app:layout_constraintDimensionRatio=":1"
+            app:layout_constraintDimensionRatio="4:1"
             app:layout_constraintBottom_toBottomOf="@id/gama_bind_guideline_button_bottom"
             app:layout_constraintEnd_toStartOf="@id/gama_bind_btn_confirm"
             app:layout_constraintStart_toStartOf="@id/gama_bind_guideline_child_left"
@@ -441,7 +441,7 @@
             android:layout_marginEnd="8dp"
             android:background="@drawable/bg_192d3f_46"
             android:gravity="center"
-            android:text="@string/py_register_account_confirm"
+            android:text="@string/py_btn_bind"
             android:textColor="@android:color/white"
             android:textSize="@dimen/sp_20"
             android:textStyle="bold"

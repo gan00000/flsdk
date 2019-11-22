@@ -43,9 +43,9 @@ public class XMMainLoginLayoutV2 extends SLoginBaseRelativeLayout implements Vie
 
         contentView = inflater.inflate(R.layout.v2_main_login_page_xm, null);
 
-        fbLoginView = contentView.findViewById(R.id.btn_xm_facebook_login_iv);
+        fbLoginView = contentView.findViewById(R.id.btn_xm_fb_bg);
         starLoginView = contentView.findViewById(R.id.btn_xm_member_login_iv);
-        macLoginView = contentView.findViewById(R.id.btn_xm_guest_login_iv);
+        macLoginView = contentView.findViewById(R.id.btn_xm_guest_bg);
 
         googleLoginView = contentView.findViewById(R.id.btn_xm_google_login_iv);
 

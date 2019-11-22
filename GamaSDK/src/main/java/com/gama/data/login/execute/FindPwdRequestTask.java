@@ -6,6 +6,7 @@ import android.telephony.gsm.GsmCellLocation;
 import com.core.base.bean.BaseReqeustBean;
 import com.core.base.utils.SStringUtil;
 import com.gama.data.login.constant.GSRequestMethod;
+import com.gama.data.login.constant.GamaRequestMethod;
 import com.gama.data.login.request.FindPwdRequestBean;
 
 public class FindPwdRequestTask extends BaseLoginRequestTask {
@@ -22,7 +23,7 @@ public class FindPwdRequestTask extends BaseLoginRequestTask {
 		pwdRequestBean.setName(userName);
 		pwdRequestBean.setEmail(email);
 
-		pwdRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_FIND_PASSWORD);
+		pwdRequestBean.setRequestMethod(GamaRequestMethod.GAMA_REQUEST_METHOD_FIND_PASSWORD);
 
 
 	}

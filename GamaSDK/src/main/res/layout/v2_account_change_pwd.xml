@@ -10,27 +10,6 @@
         android:layout_height="match_parent">
 
         <android.support.constraint.Guideline
-            android:id="@+id/gama_change_guideline_drop_start"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.46" />
-
-        <android.support.constraint.Guideline
-            android:id="@+id/gama_change_guideline_drop_end"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.48" />
-
-        <android.support.constraint.Guideline
-            android:id="@+id/gama_change_guideline_middle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.49" />
-
-        <android.support.constraint.Guideline
             android:id="@+id/gama_change_guideline_icon_start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

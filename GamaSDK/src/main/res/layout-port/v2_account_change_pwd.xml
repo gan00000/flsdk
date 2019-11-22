@@ -1,229 +1,369 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/transparent">
 
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="@dimen/px_700"
-        android:layout_height="@dimen/px_600"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:background="@drawable/v2_login_bg"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/px_60"
-            android:layout_marginTop="@dimen/px_15">
-
-            <include layout="@layout/v2_login_back_layout" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/px_60"
-            android:gravity="center"
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_change_guideline_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingLeft="@dimen/px_30"
-            android:paddingRight="@dimen/px_30">
+            app:layout_constraintGuide_percent="0.15" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:shadowColor="#FF000000"
-                android:shadowDx="5"
-                android:shadowDy="5"
-                android:shadowRadius="3.0"
-                android:text="@string/py_login_page_change_pwd"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/sp_30"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginLeft="@dimen/px_8"
-                android:layout_marginBottom="@dimen/px_5"
-                android:text="Change Password"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/sp_15" />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_change_guideline_bottom"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/px_15"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.85" />
 
-            <LinearLayout
-                android:layout_width="@dimen/px_600"
-                android:layout_height="@dimen/px_80"
-                android:background="@drawable/v2_editetext_view_bg"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingLeft="@dimen/px_30"
-                android:paddingRight="@dimen/px_30">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/v2_bg_icon_account" />
-
-                <EditText
-                    android:id="@+id/py_changepwd_account"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/px_15"
-                    android:background="@null"
-                    android:hint="@string/py_account_hit"
-                    android:textColor="@android:color/black"
-                    android:textColorHint="@android:color/darker_gray"
-                    android:inputType="text"
-                    android:maxLines="1"
-                    android:paddingLeft="@dimen/px_10"
-                    android:textSize="@dimen/sp_18" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="@dimen/px_600"
-                android:layout_height="@dimen/px_80"
-                android:layout_marginTop="@dimen/px_15"
-                android:background="@drawable/v2_editetext_view_bg"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingLeft="@dimen/px_30"
-                android:paddingRight="@dimen/px_15">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/v2_bg_icon_pwd" />
-
-                <EditText
-                    android:id="@+id/py_changepwd_old_password"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/px_15"
-                    android:layout_weight="1.0"
-                    android:background="@null"
-                    android:hint="@string/py_old_pwd"
-                    android:textColor="@android:color/black"
-                    android:textColorHint="@android:color/darker_gray"
-                    android:inputType="text"
-                    android:maxLines="1"
-                    android:paddingLeft="@dimen/px_10"
-                    android:textSize="@dimen/sp_18" />
-
-                <!--
-                                <ImageView
-                                    android:layout_width="@dimen/px_60"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginLeft="@dimen/px_15"
-                                    android:padding="@dimen/px_8"
-                                    android:id="@+id/py_eye_imageview_id"
-                                    android:src="@drawable/gama_eye_selector_v2"/>-->
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="@dimen/px_600"
-                android:layout_height="@dimen/px_80"
-                android:layout_marginTop="@dimen/px_15"
-                android:background="@drawable/v2_editetext_view_bg"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingLeft="@dimen/px_30"
-                android:paddingRight="@dimen/px_30">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/v2_bg_icon_pwd" />
-
-                <EditText
-                    android:id="@+id/py_changepwd_new_password"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/px_15"
-                    android:background="@null"
-                    android:hint="@string/py_new_pwd"
-                    android:textColor="@android:color/black"
-                    android:textColorHint="@android:color/darker_gray"
-                    android:inputType="text"
-                    android:maxLines="1"
-                    android:paddingLeft="@dimen/px_10"
-                    android:textSize="@dimen/sp_18" />
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-        <!--
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/px_60"
-                    android:orientation="horizontal"
-                    android:paddingLeft="@dimen/px_10"
-                    android:paddingRight="@dimen/px_10"
-                    android:layout_marginTop="@dimen/px_15"
-                    android:gravity="center"
-                    >
-
-                    <ImageView android:layout_width="@dimen/px_30"
-                        android:layout_height="@dimen/px_30"
-                        android:src="@drawable/gama_btn_checkbox_selector"
-                        android:id="@+id/py_register_account_terms_check"
-
-                        />
-
-                    <TextView android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="@string/py_register_account_terms"
-                        android:gravity="center_vertical"
-                        android:textSize="@dimen/sp_18"
-                        android:layout_marginLeft="@dimen/px_15"
-                        android:maxLines="1"
-                        android:id="@+id/py_register_terms_text_id"
-                        android:textColor="@android:color/white"
-                        />
-
-
-                </LinearLayout>-->
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_change_guideline_left"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/px_25"
-            android:gravity="center_horizontal">
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.1" />
 
-            <!--<TextView-->
-            <!--android:layout_width="@dimen/px_420"-->
-            <!--android:layout_height="@dimen/px_60"-->
-            <!--android:background="@drawable/v2_login_sure"-->
-            <!--android:id="@+id/py_changepwd_confirm"/>-->
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_change_guideline_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.9" />
 
-            <TextView
-                android:id="@+id/py_changepwd_confirm"
-                android:layout_width="@dimen/px_420"
-                android:layout_height="@dimen/px_60"
-                android:background="@drawable/bg_192d3f_46"
-                android:gravity="center"
-                android:text="@string/py_confire"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/sp_24"
-                android:textStyle="bold" />
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_change_guideline_title_layout_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.2" />
 
-        </LinearLayout>
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_change_guideline_title_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.24" />
 
-    </LinearLayout>
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_change_guideline_child_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.15" />
 
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_change_guideline_child_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.85" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_change_guideline_account_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.3" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_change_guideline_account_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.37" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_change_guideline_password_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.4" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_change_guideline_password_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.47" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_change_guideline_phone_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_change_guideline_phone_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.57" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_change_guideline_button_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.62" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_change_guideline_button_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.66" />
+
+        <!--<android.support.constraint.Guideline-->
+            <!--android:id="@+id/gama_change_guideline_drop_start"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="vertical"-->
+            <!--app:layout_constraintGuide_percent="0.4" />-->
+
+        <!--<android.support.constraint.Guideline-->
+            <!--android:id="@+id/gama_change_guideline_drop_end"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="vertical"-->
+            <!--app:layout_constraintGuide_percent="0.44" />-->
+
+        <!--<android.support.constraint.Guideline-->
+            <!--android:id="@+id/gama_change_guideline_middle"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="vertical"-->
+            <!--app:layout_constraintGuide_percent="0.46" />-->
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_change_guideline_icon_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.17" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_change_guideline_icon_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.3" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_change_guideline_eye_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.76" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/gama_ui_bg_port"
+            app:layout_constraintBottom_toBottomOf="@id/gama_change_guideline_bottom"
+            app:layout_constraintEnd_toEndOf="@id/gama_change_guideline_right"
+            app:layout_constraintStart_toStartOf="@id/gama_change_guideline_left"
+            app:layout_constraintTop_toTopOf="@id/gama_change_guideline_top" />
+
+        <include
+            layout="@layout/gama_ui_head_layout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/gama_change_guideline_title_layout_bottom"
+            app:layout_constraintEnd_toStartOf="@+id/gama_change_guideline_right"
+            app:layout_constraintStart_toStartOf="@+id/gama_change_guideline_left"
+            app:layout_constraintTop_toTopOf="@+id/gama_change_guideline_top" />
+
+        <TextView
+            android:id="@+id/gama_change_tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/py_login_page_change_pwd"
+            android:textColor="@color/gama_color_ui_head_title"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/gama_change_guideline_account_top"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/gama_change_guideline_title_top"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ImageView
+            android:id="@+id/gama_change_layout_account"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/gama_ui_input_bg"
+            app:layout_constraintBottom_toBottomOf="@id/gama_change_guideline_account_bottom"
+            app:layout_constraintEnd_toEndOf="@id/gama_change_guideline_child_right"
+            app:layout_constraintStart_toStartOf="@id/gama_change_guideline_child_left"
+            app:layout_constraintTop_toTopOf="@id/gama_change_guideline_account_top" />
+
+        <ImageView
+            android:id="@+id/gama_change_iv_account"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/gama_ui_icon_account"
+            app:layout_constraintBottom_toBottomOf="@id/gama_change_guideline_account_bottom"
+            app:layout_constraintDimensionRatio="206:97"
+            app:layout_constraintEnd_toEndOf="@id/gama_change_guideline_icon_end"
+            app:layout_constraintStart_toStartOf="@id/gama_change_guideline_icon_start"
+            app:layout_constraintTop_toTopOf="@id/gama_change_guideline_account_top" />
+
+        <EditText
+            android:id="@+id/gama_change_et_account"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="4dp"
+            android:background="@null"
+            android:hint="@string/py_register_account_hit"
+            android:inputType="text"
+            android:maxLines="1"
+            android:padding="4dp"
+            android:textColor="@color/gama_color_ui_input_text"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintBottom_toBottomOf="@id/gama_change_iv_account"
+            app:layout_constraintEnd_toEndOf="@id/gama_change_guideline_child_right"
+            app:layout_constraintStart_toStartOf="@id/gama_change_guideline_icon_end"
+            app:layout_constraintTop_toTopOf="@id/gama_change_iv_account" />
+
+
+        <ImageView
+            android:id="@+id/gama_change_layout_password"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/gama_ui_input_bg"
+            app:layout_constraintBottom_toBottomOf="@id/gama_change_guideline_password_bottom"
+            app:layout_constraintEnd_toEndOf="@id/gama_change_guideline_child_right"
+            app:layout_constraintStart_toStartOf="@id/gama_change_guideline_child_left"
+            app:layout_constraintTop_toTopOf="@id/gama_change_guideline_password_top" />
+
+        <ImageView
+            android:id="@+id/gama_change_iv_password"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/gama_ui_icon_old_password"
+            app:layout_constraintDimensionRatio="237:97"
+            app:layout_constraintBottom_toBottomOf="@id/gama_change_guideline_password_bottom"
+            app:layout_constraintEnd_toEndOf="@id/gama_change_guideline_icon_end"
+            app:layout_constraintStart_toStartOf="@id/gama_change_guideline_icon_start"
+            app:layout_constraintTop_toTopOf="@id/gama_change_guideline_password_top" />
+
+        <EditText
+            android:id="@+id/gama_change_et_password"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="4dp"
+            android:background="@null"
+            android:hint="@string/py_register_account_hit"
+            android:inputType="text"
+            android:maxLines="1"
+            android:padding="4dp"
+            android:textColor="@color/gama_color_ui_input_text"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintBottom_toBottomOf="@id/gama_change_iv_password"
+            app:layout_constraintEnd_toEndOf="@id/gama_change_guideline_eye_start"
+            app:layout_constraintStart_toStartOf="@id/gama_change_guideline_icon_end"
+            app:layout_constraintTop_toTopOf="@id/gama_change_iv_password" />
+
+        <ImageView
+            android:id="@+id/gama_change_iv_eye"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="4dp"
+            android:src="@drawable/gama_eye_selector_v2"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintBottom_toBottomOf="@id/gama_change_iv_password"
+            app:layout_constraintEnd_toEndOf="@id/gama_change_guideline_child_right"
+            app:layout_constraintStart_toStartOf="@id/gama_change_guideline_eye_start"
+            app:layout_constraintTop_toTopOf="@id/gama_change_iv_password" />
+
+        <ImageView
+            android:id="@+id/gama_change_layout_password2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/gama_ui_input_bg"
+            app:layout_constraintBottom_toBottomOf="@id/gama_change_guideline_phone_bottom"
+            app:layout_constraintEnd_toEndOf="@id/gama_change_guideline_child_right"
+            app:layout_constraintStart_toStartOf="@id/gama_change_guideline_child_left"
+            app:layout_constraintTop_toTopOf="@id/gama_change_guideline_phone_top" />
+
+        <ImageView
+            android:id="@+id/gama_change_iv_password2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintDimensionRatio="237:97"
+            android:src="@drawable/gama_ui_icon_new_password"
+            app:layout_constraintBottom_toBottomOf="@id/gama_change_guideline_phone_bottom"
+            app:layout_constraintEnd_toEndOf="@id/gama_change_guideline_icon_end"
+            app:layout_constraintStart_toStartOf="@id/gama_change_guideline_icon_start"
+            app:layout_constraintTop_toTopOf="@id/gama_change_guideline_phone_top" />
+
+        <EditText
+            android:id="@+id/gama_change_et_password2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="4dp"
+            android:background="@null"
+            android:hint="@string/py_register_account_hit"
+            android:inputType="text"
+            android:maxLines="1"
+            android:padding="4dp"
+            android:textColor="@color/gama_color_ui_input_text"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintBottom_toBottomOf="@id/gama_change_iv_password2"
+            app:layout_constraintEnd_toEndOf="@id/gama_change_guideline_eye_start"
+            app:layout_constraintStart_toStartOf="@id/gama_change_guideline_icon_end"
+            app:layout_constraintTop_toTopOf="@id/gama_change_iv_password2" />
+
+        <ImageView
+            android:id="@+id/gama_change_iv_eye2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="4dp"
+            android:src="@drawable/gama_eye_selector_v2"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintBottom_toBottomOf="@id/gama_change_iv_password2"
+            app:layout_constraintEnd_toEndOf="@id/gama_change_guideline_child_right"
+            app:layout_constraintStart_toStartOf="@id/gama_change_guideline_eye_start"
+            app:layout_constraintTop_toTopOf="@id/gama_change_iv_password2" />
+
+
+        <Button
+            android:id="@+id/gama_change_btn_confirm"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/bg_192d3f_46"
+            android:gravity="center"
+            android:text="@string/py_confire"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/sp_20"
+            android:textStyle="bold"
+            app:layout_constraintDimensionRatio="8:1"
+            app:layout_constraintBottom_toBottomOf="@id/gama_change_guideline_button_bottom"
+            app:layout_constraintEnd_toEndOf="@id/gama_change_guideline_child_right"
+            app:layout_constraintStart_toStartOf="@id/gama_change_guideline_child_left"
+            app:layout_constraintTop_toTopOf="@id/gama_change_guideline_button_top" />
+
+    </android.support.constraint.ConstraintLayout>
 
 </RelativeLayout>

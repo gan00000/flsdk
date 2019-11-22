@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -38,7 +39,7 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
 
     private View contentView;
 
-    private TextView loginMainLoginBtn;
+    private Button loginMainLoginBtn;
 
     /**
      * 眼睛、保存密码、验证码
@@ -234,10 +235,10 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
             ToastUtils.toast(getActivity(), R.string.py_account_error);
             return;
         }
-        if (!GamaUtil.checkPassword(password)) {
-            ToastUtils.toast(getActivity(), R.string.py_password_error);
-            return;
-        }
+//        if (!GamaUtil.checkPassword(password)) {
+//            ToastUtils.toast(getActivity(), R.string.py_password_error);
+//            return;
+//        }
 
         String vfcode = gama_login_et_vfcode.getEditableText().toString().trim();
         if(TextUtils.isEmpty(vfcode)) {
@@ -245,7 +246,7 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
             return;
         }
 
-        sLoginDialogv2.getLoginPresenter().starpyAccountLogin(sLoginDialogv2.getActivity(),account,password, vfcode);
+        sLoginDialogv2.getLoginPresenter().starpyAccountLogin(sLoginDialogv2.getActivity(),account,password, vfcode, savePwdCheckBox.isSelected());
 
     }
 

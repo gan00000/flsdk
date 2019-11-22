@@ -72,7 +72,9 @@ public class StarEventLogger {
             trackingWithEventName(activity, GamaAdsConstant.GAMA_EVENT_OPEN, null, null);
 
             //获取验证码开关
-            getVfSwitch(activity);
+            if(GamaUtil.isNeedVfSwitch(activity)) {
+                getVfSwitch(activity);
+            }
 
         } catch (Exception e) {
             e.printStackTrace();

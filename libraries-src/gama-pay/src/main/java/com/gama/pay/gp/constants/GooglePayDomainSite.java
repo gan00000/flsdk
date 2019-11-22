@@ -2,7 +2,17 @@ package com.gama.pay.gp.constants;
 
 public class GooglePayDomainSite {
 
-	public final static String google_order_create = "dynamic_creation";
-	public final static String google_send = "google_sendStone";
+	public final static String GOOGLE_ORDER_CREATE = "dynamic_creation";
+	public final static String GOOGLE_SEND = "google_sendStone";
+
+	/**
+	 * .app的创单接口
+	 */
+	public final static String APP_SURFIX_GOOGLE_ORDER_CREATE = "dynamic_creation.app";
+
+	/**
+	 * .app的发币接口
+	 */
+	public final static String APP_SURFIX_GOOGLE_SEND = "google_sendStone.app";
 
 }

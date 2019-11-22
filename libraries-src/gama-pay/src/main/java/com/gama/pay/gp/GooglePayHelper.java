@@ -9,6 +9,7 @@ import com.core.base.callback.ISReqCallBack;
 import com.core.base.utils.PL;
 import com.gama.base.bean.BasePayBean;
 import com.gama.base.constant.GamaCommonKey;
+import com.gama.base.utils.GamaUtil;
 import com.gama.base.utils.SLog;
 import com.gama.pay.gp.bean.req.GoogleExchangeReqBean;
 import com.gama.pay.gp.bean.res.GPExchangeRes;
@@ -171,7 +172,11 @@ public class GooglePayHelper {
         exchangeReqBean.setPurchaseData(purchase.getOriginalJson());
         exchangeReqBean.setRequestUrl(PayHelper.getPreferredUrl(context));
         exchangeReqBean.setRequestSpaUrl(PayHelper.getSpareUrl(context));
-        exchangeReqBean.setRequestMethod(GooglePayDomainSite.google_send);
+        if(GamaUtil.isInterfaceSurfixWithApp(context)) {
+            exchangeReqBean.setRequestMethod(GooglePayDomainSite.APP_SURFIX_GOOGLE_SEND);
+        } else {
+            exchangeReqBean.setRequestMethod(GooglePayDomainSite.GOOGLE_SEND);
+        }
         GoogleExchangeReqTask googleExchangeReqTask = new GoogleExchangeReqTask(context, exchangeReqBean);
         googleExchangeReqTask.setReqCallBack(new ISReqCallBack<GPExchangeRes>() {
 

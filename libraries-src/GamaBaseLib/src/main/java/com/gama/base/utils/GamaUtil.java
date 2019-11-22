@@ -335,6 +335,21 @@ public class GamaUtil {
         if (TextUtils.isEmpty(password)){
             return false;
         }
+        if (password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?!.*[\\W]).{8,16}$")){
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 旧版密码验证，目前北美继续使用
+     * @param password
+     * @return
+     */
+    public static boolean checkPasswordOld(String password){
+        if (TextUtils.isEmpty(password)){
+            return false;
+        }
         if (password.matches("^[A-Za-z0-9]{6,18}$")){
             return true;
         }
@@ -649,5 +664,61 @@ public class GamaUtil {
      */
     public static boolean getVfcodeSwitchStatus(Context context){
         return SPUtil.getSimpleBoolean(context, GamaUtil.GAMA_SP_FILE, GAMA_VFCODE_SWITCH_STATUS);
+    }
+
+    /**
+     * 判断是否北美地区
+     */
+    public static boolean isNorthAmarican(Context context) {
+        SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
+        if(SGameLanguage.en_US == sGameLanguage) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 判断是否日本地区
+     */
+    public static boolean isJapan(Context context) {
+        SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
+        if(SGameLanguage.ja_JP == sGameLanguage) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 判断是否韩国地区
+     */
+    public static boolean isKorea(Context context) {
+        SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
+        if(SGameLanguage.ko_KR == sGameLanguage) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 判断是否.app接口
+     */
+    public static boolean isInterfaceSurfixWithApp(Context context) {
+        SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
+        if(SGameLanguage.en_US == sGameLanguage) {
+            return false;
+        }
+        return true;
+    }
+
+
+    /**
+     * 判断是否需要请求登入验证码开关
+     */
+    public static boolean isNeedVfSwitch(Context context) {
+        SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
+        if(SGameLanguage.en_US == sGameLanguage) {
+            return false;
+        }
+        return true;
     }
 }

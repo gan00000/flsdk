@@ -194,7 +194,7 @@ public class BaseMainActivity extends Activity {
                             String roleName = "角色名"; //角色名
                             String roleLevel = "10"; //角色等级
                             String vipLevel = "5"; //角色vip等级
-                            String serverCode = "666"; //角色伺服器id
+                            String serverCode = "1"; //角色伺服器id
                             String serverName = "S1"; //角色伺服器名称
                             iGama.registerRoleInfo(BaseMainActivity.this, roleId, roleName, roleLevel, vipLevel, serverCode, serverName);
                         } else {

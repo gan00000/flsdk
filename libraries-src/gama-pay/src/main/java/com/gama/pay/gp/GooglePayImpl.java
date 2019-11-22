@@ -11,7 +11,10 @@ import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
 import com.gama.base.bean.BasePayBean;
+import com.gama.base.bean.SGameLanguage;
 import com.gama.base.constant.GamaCommonKey;
+import com.gama.base.utils.GamaUtil;
+import com.gama.base.utils.Localization;
 import com.gama.base.utils.SLog;
 import com.gama.pay.BuildConfig;
 import com.gama.pay.IPay;
@@ -157,7 +160,11 @@ public class GooglePayImpl implements IPay {
         //设置储值备用域名
         this.createOrderIdReqBean.setRequestSpaUrl(PayHelper.getSpareUrl(activity));
         //设置储值接口名
-        this.createOrderIdReqBean.setRequestMethod(GooglePayDomainSite.google_order_create);
+        if (GamaUtil.isInterfaceSurfixWithApp(activity)) {
+            this.createOrderIdReqBean.setRequestMethod(GooglePayDomainSite.APP_SURFIX_GOOGLE_ORDER_CREATE);
+        } else {
+            this.createOrderIdReqBean.setRequestMethod(GooglePayDomainSite.GOOGLE_ORDER_CREATE);
+        }
         //创建Loading窗
         loadingDialog = new LoadingDialog(activity);
 
@@ -394,7 +401,11 @@ public class GooglePayImpl implements IPay {
 
                             exchangeReqBean.setRequestUrl(PayHelper.getPreferredUrl(activity));
                             exchangeReqBean.setRequestSpaUrl(PayHelper.getSpareUrl(activity));
-                            exchangeReqBean.setRequestMethod(GooglePayDomainSite.google_send);
+                            if(GamaUtil.isInterfaceSurfixWithApp(activity)) {
+                                exchangeReqBean.setRequestMethod(GooglePayDomainSite.APP_SURFIX_GOOGLE_SEND);
+                            } else {
+                                exchangeReqBean.setRequestMethod(GooglePayDomainSite.GOOGLE_SEND);
+                            }
 
                             /*SkuDetails skuDetails = activity.getSkuDetails();
                             if (skuDetails != null) {
@@ -529,7 +540,11 @@ public class GooglePayImpl implements IPay {
 
         exchangeReqBean.setRequestUrl(PayHelper.getPreferredUrl(activity));
         exchangeReqBean.setRequestSpaUrl(PayHelper.getSpareUrl(activity));
-        exchangeReqBean.setRequestMethod(GooglePayDomainSite.google_send);
+        if(GamaUtil.isInterfaceSurfixWithApp(activity)) {
+            exchangeReqBean.setRequestMethod(GooglePayDomainSite.APP_SURFIX_GOOGLE_SEND);
+        } else {
+            exchangeReqBean.setRequestMethod(GooglePayDomainSite.GOOGLE_SEND);
+        }
 
         GoogleExchangeReqTask googleExchangeReqTask = new GoogleExchangeReqTask(activity, exchangeReqBean);
         googleExchangeReqTask.setReqCallBack(new ISReqCallBack<GPExchangeRes>() {

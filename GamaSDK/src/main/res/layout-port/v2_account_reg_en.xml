@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_register_guideline_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.15" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_register_guideline_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.85" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_register_guideline_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.1" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_register_guideline_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.9" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_register_guideline_title_layout_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.2" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_register_guideline_title_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.24" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_register_guideline_child_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.15" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_register_guideline_child_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.85" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_register_guideline_account_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.3" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_register_guideline_account_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.37" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_register_guideline_password_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.4" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_register_guideline_password_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.47" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_register_guideline_vfcode_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_register_guideline_vfcode_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.57" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_register_guideline_button_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.7" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_register_guideline_button_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.74" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_register_guideline_drop_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.4" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_register_guideline_drop_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.44" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_register_guideline_middle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.46" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_register_guideline_icon_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.17" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_register_guideline_icon_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.3" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_register_guideline_eye_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.76" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/gama_ui_bg_port"
+            app:layout_constraintBottom_toBottomOf="@id/gama_register_guideline_bottom"
+            app:layout_constraintEnd_toEndOf="@id/gama_register_guideline_right"
+            app:layout_constraintStart_toStartOf="@id/gama_register_guideline_left"
+            app:layout_constraintTop_toTopOf="@id/gama_register_guideline_top" />
+
+        <include
+            layout="@layout/gama_ui_head_layout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/gama_register_guideline_title_layout_bottom"
+            app:layout_constraintEnd_toStartOf="@+id/gama_register_guideline_right"
+            app:layout_constraintStart_toStartOf="@+id/gama_register_guideline_left"
+            app:layout_constraintTop_toTopOf="@+id/gama_register_guideline_top" />
+
+        <TextView
+            android:id="@+id/gama_register_tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/en_py_login_page_account_reg"
+            android:textColor="@color/gama_color_ui_head_title"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/gama_register_guideline_account_top"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/gama_register_guideline_title_top"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ImageView
+            android:id="@+id/gama_register_layout_account"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/gama_ui_input_bg"
+            app:layout_constraintBottom_toBottomOf="@id/gama_register_guideline_account_bottom"
+            app:layout_constraintEnd_toEndOf="@id/gama_register_guideline_child_right"
+            app:layout_constraintStart_toStartOf="@id/gama_register_guideline_child_left"
+            app:layout_constraintTop_toTopOf="@id/gama_register_guideline_account_top" />
+
+        <!--<android.support.constraint.Guideline-->
+        <!--android:id="@+id/gama_register_guideline_account_edge"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="vertical"-->
+        <!--app:layout_constraintGuide_percent="0.3" />-->
+
+        <!--<android.support.constraint.Guideline-->
+        <!--android:id="@+id/gama_register_guideline_account_edge2"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal"-->
+        <!--app:layout_constraintGuide_percent="0.2" />-->
+
+        <!--<android.support.constraint.Guideline-->
+        <!--android:id="@+id/gama_register_guideline_account_edge3"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal"-->
+        <!--app:layout_constraintGuide_percent="0.8" />-->
+
+        <ImageView
+            android:id="@+id/gama_register_iv_account"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/gama_ui_icon_account_en"
+            app:layout_constraintBottom_toBottomOf="@id/gama_register_guideline_account_bottom"
+            app:layout_constraintDimensionRatio="206:97"
+            app:layout_constraintEnd_toEndOf="@id/gama_register_guideline_icon_end"
+            app:layout_constraintStart_toStartOf="@id/gama_register_guideline_icon_start"
+            app:layout_constraintTop_toTopOf="@id/gama_register_guideline_account_top" />
+
+        <EditText
+            android:id="@+id/gama_register_et_account"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="4dp"
+            android:background="@null"
+            android:hint="@string/en_py_register_account_hit"
+            android:inputType="text"
+            android:maxLines="1"
+            android:padding="4dp"
+            android:textColor="@color/gama_color_ui_input_text"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintBottom_toBottomOf="@id/gama_register_iv_account"
+            app:layout_constraintEnd_toEndOf="@id/gama_register_guideline_child_right"
+            app:layout_constraintStart_toStartOf="@id/gama_register_guideline_icon_end"
+            app:layout_constraintTop_toTopOf="@id/gama_register_iv_account" />
+
+
+        <ImageView
+            android:id="@+id/gama_register_layout_password"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/gama_ui_input_bg"
+            app:layout_constraintBottom_toBottomOf="@id/gama_register_guideline_password_bottom"
+            app:layout_constraintEnd_toEndOf="@id/gama_register_guideline_child_right"
+            app:layout_constraintStart_toStartOf="@id/gama_register_guideline_child_left"
+            app:layout_constraintTop_toTopOf="@id/gama_register_guideline_password_top" />
+
+        <!--<android.support.constraint.Guideline-->
+        <!--android:id="@+id/gama_register_guideline_password_edge"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="vertical"-->
+        <!--app:layout_constraintGuide_percent="0.3" />-->
+
+        <!--<android.support.constraint.Guideline-->
+        <!--android:id="@+id/gama_register_guideline_password_edge2"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal"-->
+        <!--app:layout_constraintGuide_percent="0.2" />-->
+
+        <!--<android.support.constraint.Guideline-->
+        <!--android:id="@+id/gama_register_guideline_password_edge3"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal"-->
+        <!--app:layout_constraintGuide_percent="0.8" />-->
+
+        <!--<android.support.constraint.Guideline-->
+        <!--android:id="@+id/gama_register_guideline_password_edge4"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="vertical"-->
+        <!--app:layout_constraintGuide_percent="0.85" />-->
+
+        <ImageView
+            android:id="@+id/gama_register_iv_password"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/gama_ui_icon_password_en"
+            app:layout_constraintBottom_toBottomOf="@id/gama_register_guideline_password_bottom"
+            app:layout_constraintDimensionRatio="206:97"
+            app:layout_constraintEnd_toEndOf="@id/gama_register_guideline_icon_end"
+            app:layout_constraintStart_toStartOf="@id/gama_register_guideline_icon_start"
+            app:layout_constraintTop_toTopOf="@id/gama_register_guideline_password_top" />
+
+        <EditText
+            android:id="@+id/gama_register_et_password"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="4dp"
+            android:background="@null"
+            android:hint="@string/en_py_register_account_hit"
+            android:inputType="text"
+            android:maxLines="1"
+            android:padding="4dp"
+            android:textColor="@color/gama_color_ui_input_text"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintBottom_toBottomOf="@id/gama_register_iv_password"
+            app:layout_constraintEnd_toEndOf="@id/gama_register_guideline_eye_start"
+            app:layout_constraintStart_toStartOf="@id/gama_register_guideline_icon_end"
+            app:layout_constraintTop_toTopOf="@id/gama_register_iv_password" />
+
+        <ImageView
+            android:id="@+id/gama_register_iv_eye"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="4dp"
+            android:src="@drawable/gama_eye_selector_v2"
+            app:layout_constraintBottom_toBottomOf="@id/gama_register_iv_password"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="@id/gama_register_guideline_child_right"
+            app:layout_constraintStart_toStartOf="@id/gama_register_guideline_eye_start"
+            app:layout_constraintTop_toTopOf="@id/gama_register_iv_password" />
+
+
+        <ImageView
+            android:id="@+id/gama_register_layout_vfcode"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/gama_ui_input_bg"
+            app:layout_constraintBottom_toBottomOf="@id/gama_register_guideline_vfcode_bottom"
+            app:layout_constraintEnd_toEndOf="@id/gama_register_guideline_child_right"
+            app:layout_constraintStart_toStartOf="@id/gama_register_guideline_child_left"
+            app:layout_constraintTop_toTopOf="@id/gama_register_guideline_vfcode_top" />
+
+        <!--<android.support.constraint.Guideline-->
+        <!--android:id="@+id/gama_register_guideline_vfcode_edge"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="vertical"-->
+        <!--app:layout_constraintGuide_percent="0.3" />-->
+
+        <!--<android.support.constraint.Guideline-->
+        <!--android:id="@+id/gama_register_guideline_vfcode_edge2"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal"-->
+        <!--app:layout_constraintGuide_percent="0.2" />-->
+
+        <!--<android.support.constraint.Guideline-->
+        <!--android:id="@+id/gama_register_guideline_vfcode_edge3"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal"-->
+        <!--app:layout_constraintGuide_percent="0.8" />-->
+
+        <ImageView
+            android:id="@+id/gama_register_iv_vfcode"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/gama_ui_icon_email_en"
+            app:layout_constraintBottom_toBottomOf="@id/gama_register_guideline_vfcode_bottom"
+            app:layout_constraintDimensionRatio="206:97"
+            app:layout_constraintEnd_toEndOf="@id/gama_register_guideline_icon_end"
+            app:layout_constraintStart_toStartOf="@id/gama_register_guideline_icon_start"
+            app:layout_constraintTop_toTopOf="@id/gama_register_guideline_vfcode_top" />
+
+        <EditText
+            android:id="@+id/gama_register_et_vfcode"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="4dp"
+            android:background="@null"
+            android:hint="@string/en_py_msg_vfcode_hint"
+            android:inputType="text"
+            android:maxLines="1"
+            android:padding="4dp"
+            android:textColor="@color/gama_color_ui_input_text"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintBottom_toBottomOf="@id/gama_register_iv_vfcode"
+            app:layout_constraintEnd_toEndOf="@id/gama_register_guideline_child_right"
+            app:layout_constraintStart_toStartOf="@id/gama_register_guideline_icon_end"
+            app:layout_constraintTop_toTopOf="@id/gama_register_iv_vfcode" />
+
+        <Button
+            android:id="@+id/gama_register_btn_confirm"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/bg_192d3f_46"
+            android:gravity="center"
+            android:text="@string/en_py_register_account_confirm"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/sp_20"
+            android:textStyle="bold"
+            app:layout_constraintDimensionRatio="4:1"
+            app:layout_constraintEnd_toEndOf="@id/gama_register_guideline_child_right"
+            app:layout_constraintBottom_toBottomOf="@id/gama_register_guideline_button_bottom"
+            app:layout_constraintStart_toStartOf="@id/gama_register_guideline_child_left"
+            app:layout_constraintTop_toTopOf="@id/gama_register_guideline_button_top" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</RelativeLayout>

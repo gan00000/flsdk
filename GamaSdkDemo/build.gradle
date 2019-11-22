@@ -65,6 +65,20 @@ android {
             keyPassword 'gamamobi'
         }
     }
+//    signingConfigs {//签名的配置
+//        release {
+//            storeFile file('../signkey/gamesword.jks') //正式签名，以后使用
+//            storePassword 'gamesword'
+//            keyAlias 'gamesword'
+//            keyPassword 'gamesword'
+//        }
+//        debug {
+//            storeFile file('../signkey/gamesword.jks')
+//            storePassword 'gamesword'
+//            keyAlias 'gamesword'
+//            keyPassword 'gamesword'
+//        }
+//    }
 
     buildTypes {
         release {
@@ -381,37 +395,51 @@ android {
             signingConfig signingConfigs.release
         }
 
+//        twgoogle {
+//            applicationId "com.gamesword.gotgl"
+//            minSdkVersion 21
+//            targetSdkVersion 28
+//            versionCode 1
+//            versionName "1.0"
+//            flavorDimensions "1"
+//            resValue "string", "facebook_app_id", "2187420264887772"
+//            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider2187420264887772"
+//            resValue "string", "fb_login_protocol_scheme", "fb2187420264887772"
+//            resValue "string", "facebook_app_name", "硬漢部隊"
+//            //每个游戏的demo设置
+//            resValue "string", "test_sku", "com.gamesword.gotgl.1usd"
+//            resValue "string", "sdk_name", "硬汉Demo"
+//            signingConfig signingConfigs.release
+//
+//            buildConfigField "String[]", "PRODUCE_LIST",
+//                    "{" +
+//                            "\"com.gamesword.gotgl.1usd\"," +
+//                            "\"com.ezfy.100usd\"," +
+//                            "}"
+//
+//        }
+
         twgoogle {
-            applicationId "com.yoozoo.got.gama"
+            applicationId "com.gamesword.usbg"
             minSdkVersion 21
             targetSdkVersion 28
             versionCode 1
             versionName "1.0"
             flavorDimensions "1"
-            resValue "string", "facebook_app_id", "688175108304011"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider688175108304011"
-            resValue "string", "fb_login_protocol_scheme", "fb688175108304011"
-            resValue "string", "facebook_app_name", "硬漢部隊"
+            resValue "string", "facebook_app_id", "480070166148561"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider480070166148561"
+            resValue "string", "fb_login_protocol_scheme", "fb480070166148561"
+            resValue "string", "facebook_app_name", "usbg"
             //每个游戏的demo设置
-            resValue "string", "test_sku", "com.ezfy.1usd"
-            resValue "string", "sdk_name", "硬汉Demo"
+            resValue "string", "test_sku", "com.gamamobi.usbg.1usd"
+            resValue "string", "sdk_name", "usbg"
             signingConfig signingConfigs.release
 
             buildConfigField "String[]", "PRODUCE_LIST",
                     "{" +
-                            "\"com.ezfy.1usd\"," +
+                            "\"com.gamamobi.usbg.1usd\"," +
                             "\"com.ezfy.100usd\"," +
                             "}"
-            
-//            resValue "string", "zh_tw_gama_login_pre_url", "https://t-login.gamamobi.com/"
-//            resValue "string", "zh_tw_gama_login_spa_url", "https://t-login.gamamobi.com/"
-//            resValue "string", "zh_tw_gama_pay_pre_url", "https://t-pay.gamamobi.com/"
-//            resValue "string", "zh_tw_gama_pay_spa_url", "https://t-pay.gamamobi.com/"
-//            resValue "string", "zh_tw_gama_ads_pre_url", "https://track.gamamobi.com/"
-//            resValue "string", "zh_tw_gama_ads_spa_url", "https://track.gamamobi.com/"
-
-            resValue "string", "zh_tw_gama_login_pre_url", "https://login.gamesword.com/"
-            resValue "string", "zh_tw_gama_login_spa_url", "https://login.gamesword.com/"
 
         }
 

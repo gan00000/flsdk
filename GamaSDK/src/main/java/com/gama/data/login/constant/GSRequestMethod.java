@@ -42,6 +42,11 @@ public class GSRequestMethod {
      */
     public static final String GS_REQUEST_METHOD_THIRD_LOGIN = "thirdPartyLogin.app";
 
+    /**
+     * 免注册登入接口
+     */
+    public static final String GS_REQUEST_METHOD_FREE_LOGIN = "freeRegister.app";
+
     public enum RequestVfcodeInterface {
         register("1"),
         bind("2");
@@ -54,5 +59,10 @@ public class GSRequestMethod {
         public String getString() {
             return this.string;
         }
+    }
+
+    public enum GSRequestType {
+        GAMESWORD,
+        GAMAMOBI
     }
 }

@@ -8,6 +8,7 @@ import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.gama.base.bean.SLoginType;
 import com.gama.data.login.constant.GSRequestMethod;
+import com.gama.data.login.constant.GamaRequestMethod;
 import com.gama.data.login.request.ThirdAccountBindRequestBean;
 
 /**
@@ -21,16 +22,17 @@ public class ThirdAccountBindRequestTask extends BaseLoginRequestTask {
     ThirdAccountBindRequestBean thirdAccountBindRequestBean;
 
     /**
-     *   fb綁定
-     * @param context
-     * @param name
-     * @param pwd
-     * @param email
-     * @param fbScopeId
-     * @param fbApps
-     * @param fbTokenBusiness
+     *   email fb綁定
      */
-    public ThirdAccountBindRequestTask(Context context, String name, String pwd, String email, String fbScopeId, String fbApps, String fbTokenBusiness) {
+    public ThirdAccountBindRequestTask(Context context,
+                                       String name,
+                                       String pwd,
+                                       String email,
+                                       String fbScopeId,
+                                       String fbApps,
+                                       String fbAccessToken,
+                                       String fbTokenBusiness,
+                                       GSRequestMethod.GSRequestType requestMethod) {
         super(context);
 
         thirdAccountBindRequestBean = new ThirdAccountBindRequestBean(context);
@@ -45,20 +47,91 @@ public class ThirdAccountBindRequestTask extends BaseLoginRequestTask {
         thirdAccountBindRequestBean.setName(name);
         thirdAccountBindRequestBean.setPwd(SStringUtil.toMd5(pwd));
         thirdAccountBindRequestBean.setEmail(email);
+        thirdAccountBindRequestBean.setFb_oauthToken(fbAccessToken);
+        if(requestMethod == GSRequestMethod.GSRequestType.GAMESWORD) {
+            thirdAccountBindRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_BIND);
+        } else if (requestMethod == GSRequestMethod.GSRequestType.GAMAMOBI) {
+            thirdAccountBindRequestBean.setRequestMethod(GamaRequestMethod.GAMA_REQUEST_METHOD_BIND);
+        }
+    }
 
-        thirdAccountBindRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_BIND);
+//    public ThirdAccountBindRequestTask(Context context,
+//                                       String name,
+//                                       String pwd,
+//                                       String email,
+//                                       String thirdPlatId,
+//                                       GSRequestMethod.GSRequestType requestMethod) {
+//        super(context);
+//
+//        if(TextUtils.isEmpty(thirdPlatId)){
+//            PL.d("thirdPlatId:" + thirdPlatId);
+//            return;
+//        }
+//
+//        thirdAccountBindRequestBean = new ThirdAccountBindRequestBean(context);
+//
+//        sdkBaseRequestBean = thirdAccountBindRequestBean;
+//
+//        thirdAccountBindRequestBean.setRegistPlatform(SLoginType.LOGIN_TYPE_UNIQUE);
+//        thirdAccountBindRequestBean.setThirdPlatId(thirdPlatId);
+//        thirdAccountBindRequestBean.setName(name);
+//        thirdAccountBindRequestBean.setPwd(SStringUtil.toMd5(pwd));
+//        thirdAccountBindRequestBean.setEmail(email);
+//
+//        if(requestMethod == GSRequestMethod.GSRequestType.GAMESWORD) {
+//            thirdAccountBindRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_BIND);
+//        } else if (requestMethod == GSRequestMethod.GSRequestType.GAMAMOBI) {
+//            thirdAccountBindRequestBean.setRequestMethod(GamaRequestMethod.GAMA_REQUEST_METHOD_BIND);
+//        }
+//    }
 
+    /**
+     * email Google綁定
+     */
+    public ThirdAccountBindRequestTask(Context context,
+                                         String name,
+                                         String pwd,
+                                         String email,
+                                         String thirdPlatId,
+                                         String googleIdToken,
+                                         String googleClientId,
+                                         GSRequestMethod.GSRequestType requestMethod) {
+        super(context);
 
+        if(TextUtils.isEmpty(thirdPlatId)){
+            PL.d("thirdPlatId:" + thirdPlatId);
+            return;
+        }
+
+        thirdAccountBindRequestBean = new ThirdAccountBindRequestBean(context);
+
+        sdkBaseRequestBean = thirdAccountBindRequestBean;
+
+        thirdAccountBindRequestBean.setRegistPlatform(SLoginType.LOGIN_TYPE_GOOGLE);
+        thirdAccountBindRequestBean.setThirdPlatId(thirdPlatId);
+        thirdAccountBindRequestBean.setName(name);
+        thirdAccountBindRequestBean.setPwd(SStringUtil.toMd5(pwd));
+        thirdAccountBindRequestBean.setEmail(email);
+        thirdAccountBindRequestBean.setGoogleIdToken(googleIdToken);
+        thirdAccountBindRequestBean.setGoogleClientId(googleClientId);
+
+        if(requestMethod == GSRequestMethod.GSRequestType.GAMESWORD) {
+            thirdAccountBindRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_BIND);
+        } else if (requestMethod == GSRequestMethod.GSRequestType.GAMAMOBI) {
+            thirdAccountBindRequestBean.setRequestMethod(GamaRequestMethod.GAMA_REQUEST_METHOD_BIND);
+        }
     }
 
     /**
-     * 免註冊綁定
-     * @param context
-     * @param name
-     * @param pwd
-     * @param email
+     * email通用綁定
      */
-    public ThirdAccountBindRequestTask(Context context, String name, String pwd, String email, String sLoginType, String thirdPlatId) {
+    public ThirdAccountBindRequestTask(Context context,
+                                       String sLoginType,
+                                       String name,
+                                       String pwd,
+                                       String email,
+                                       String thirdPlatId,
+                                       GSRequestMethod.GSRequestType requestMethod) {
         super(context);
 
         if(TextUtils.isEmpty(thirdPlatId)){
@@ -76,63 +149,11 @@ public class ThirdAccountBindRequestTask extends BaseLoginRequestTask {
         thirdAccountBindRequestBean.setPwd(SStringUtil.toMd5(pwd));
         thirdAccountBindRequestBean.setEmail(email);
 
-        thirdAccountBindRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_BIND);
-
-
-    }
-
-    /**
-     *   需要手机验证码的fb綁定
-     */
-    public ThirdAccountBindRequestTask(Context context, String name, String pwd, String areaCode, String phone, String vfcode, String fbScopeId, String fbApps, String fbTokenBusiness) {
-        super(context);
-
-        thirdAccountBindRequestBean = new ThirdAccountBindRequestBean(context);
-
-        sdkBaseRequestBean = thirdAccountBindRequestBean;
-
-        thirdAccountBindRequestBean.setRegistPlatform(SLoginType.LOGIN_TYPE_FB);
-        thirdAccountBindRequestBean.setThirdPlatId(fbScopeId);
-        thirdAccountBindRequestBean.setApps(fbApps);
-        thirdAccountBindRequestBean.setTokenBusiness(fbTokenBusiness);
-
-        thirdAccountBindRequestBean.setName(name);
-        thirdAccountBindRequestBean.setPwd(SStringUtil.toMd5(pwd));
-        thirdAccountBindRequestBean.setPhone(phone);
-        thirdAccountBindRequestBean.setPhoneAreaCode(areaCode);
-        thirdAccountBindRequestBean.setVfCode(vfcode);
-
-        thirdAccountBindRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_BIND);
-
-
-    }
-
-    /**
-     * 需要手机验证码的綁定
-     */
-    public ThirdAccountBindRequestTask(Context context, String name, String pwd, String areaCode, String phone, String vfcode, String sLoginType, String thirdPlatId) {
-        super(context);
-
-        if(TextUtils.isEmpty(thirdPlatId)){
-            PL.d("thirdPlatId:" + thirdPlatId);
-            return;
+        if(requestMethod == GSRequestMethod.GSRequestType.GAMESWORD) {
+            thirdAccountBindRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_BIND);
+        } else if (requestMethod == GSRequestMethod.GSRequestType.GAMAMOBI) {
+            thirdAccountBindRequestBean.setRequestMethod(GamaRequestMethod.GAMA_REQUEST_METHOD_BIND);
         }
-
-        thirdAccountBindRequestBean = new ThirdAccountBindRequestBean(context);
-
-        sdkBaseRequestBean = thirdAccountBindRequestBean;
-
-        thirdAccountBindRequestBean.setRegistPlatform(sLoginType);
-        thirdAccountBindRequestBean.setThirdPlatId(thirdPlatId);
-        thirdAccountBindRequestBean.setName(name);
-        thirdAccountBindRequestBean.setPwd(SStringUtil.toMd5(pwd));
-        thirdAccountBindRequestBean.setPhone(phone);
-        thirdAccountBindRequestBean.setPhoneAreaCode(areaCode);
-        thirdAccountBindRequestBean.setVfCode(vfcode);
-
-        thirdAccountBindRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_BIND);
-
-
     }
 
     @Override

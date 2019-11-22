@@ -6,6 +6,7 @@ import com.core.base.bean.BaseReqeustBean;
 import com.core.base.utils.SStringUtil;
 import com.gama.base.bean.SLoginType;
 import com.gama.data.login.constant.GSRequestMethod;
+import com.gama.data.login.constant.GamaRequestMethod;
 import com.gama.data.login.request.ThirdLoginRegRequestBean;
 
 /**
@@ -26,7 +27,8 @@ public class ThirdLoginRegRequestTask extends BaseLoginRequestTask {
      * @param fbApps
      * @param fbTokenBusiness
      */
-    public ThirdLoginRegRequestTask(Context context, String fbScopeId, String fbApps, String fbTokenBusiness,String accessTokenString) {
+    public ThirdLoginRegRequestTask(Context context, String fbScopeId, String fbApps, String fbTokenBusiness,
+                                    String accessTokenString, GSRequestMethod.GSRequestType requestMethod) {
         super(context);
 
         thirdLoginRegRequestBean = new ThirdLoginRegRequestBean(context);
@@ -39,25 +41,30 @@ public class ThirdLoginRegRequestTask extends BaseLoginRequestTask {
         thirdLoginRegRequestBean.setTokenBusiness(fbTokenBusiness);
         thirdLoginRegRequestBean.setFb_oauthToken(accessTokenString);
 
-        thirdLoginRegRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_THIRD_LOGIN);
 
-
+        if(requestMethod == GSRequestMethod.GSRequestType.GAMESWORD) {
+            thirdLoginRegRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_THIRD_LOGIN);
+        } else if (requestMethod == GSRequestMethod.GSRequestType.GAMAMOBI) {
+            thirdLoginRegRequestBean.setRequestMethod(GamaRequestMethod.GAMA_REQUEST_METHOD_THIRD_LOGIN);
+        }
     }
 
     /**
      * 其他第三方登录使用
      * @param context
      */
-    public ThirdLoginRegRequestTask(Context context, ThirdLoginRegRequestBean thirdLoginRegRequestBean) {
+    public ThirdLoginRegRequestTask(Context context, ThirdLoginRegRequestBean thirdLoginRegRequestBean, GSRequestMethod.GSRequestType requestMethod) {
         super(context);
 
         this.thirdLoginRegRequestBean = thirdLoginRegRequestBean;
 
         sdkBaseRequestBean = thirdLoginRegRequestBean;
 
-        thirdLoginRegRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_THIRD_LOGIN);
-
-
+        if(requestMethod == GSRequestMethod.GSRequestType.GAMESWORD) {
+            thirdLoginRegRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_THIRD_LOGIN);
+        } else if (requestMethod == GSRequestMethod.GSRequestType.GAMAMOBI) {
+            thirdLoginRegRequestBean.setRequestMethod(GamaRequestMethod.GAMA_REQUEST_METHOD_THIRD_LOGIN);
+        }
     }
 
     /**
@@ -67,7 +74,7 @@ public class ThirdLoginRegRequestTask extends BaseLoginRequestTask {
      * @param registPlatform
      */
     @Deprecated
-    public ThirdLoginRegRequestTask(Context context, String thirdPlatId, String registPlatform) {
+    public ThirdLoginRegRequestTask(Context context, String thirdPlatId, String registPlatform, GSRequestMethod.GSRequestType requestMethod) {
         super(context);
 
         thirdLoginRegRequestBean = new ThirdLoginRegRequestBean(context);
@@ -77,9 +84,11 @@ public class ThirdLoginRegRequestTask extends BaseLoginRequestTask {
         thirdLoginRegRequestBean.setRegistPlatform(registPlatform);
         thirdLoginRegRequestBean.setThirdPlatId(thirdPlatId);
 
-        thirdLoginRegRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_THIRD_LOGIN);
-
-
+        if(requestMethod == GSRequestMethod.GSRequestType.GAMESWORD) {
+            thirdLoginRegRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_THIRD_LOGIN);
+        } else if (requestMethod == GSRequestMethod.GSRequestType.GAMAMOBI) {
+            thirdLoginRegRequestBean.setRequestMethod(GamaRequestMethod.GAMA_REQUEST_METHOD_THIRD_LOGIN);
+        }
     }
 
     @Override

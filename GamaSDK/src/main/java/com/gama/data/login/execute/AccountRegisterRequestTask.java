@@ -5,6 +5,7 @@ import android.content.Context;
 import com.core.base.bean.BaseReqeustBean;
 import com.core.base.utils.SStringUtil;
 import com.gama.data.login.constant.GSRequestMethod;
+import com.gama.data.login.constant.GamaRequestMethod;
 import com.gama.data.login.request.AccountRegRequestBean;
 
 //1000成功
@@ -51,7 +52,7 @@ public class AccountRegisterRequestTask extends BaseLoginRequestTask {
 
         regRequestBean.setEmail(email);
 
-        regRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_REGISTER);
+        regRequestBean.setRequestMethod(GamaRequestMethod.GAMA_REQUEST_METHOD_REGISTER);
 
 
     }

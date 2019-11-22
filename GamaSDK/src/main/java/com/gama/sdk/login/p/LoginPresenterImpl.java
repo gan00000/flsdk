@@ -26,6 +26,7 @@ import com.gama.base.bean.SLoginType;
 import com.gama.base.cfg.ResConfig;
 import com.gama.base.excute.GamaAreaInfoRequestTask;
 import com.gama.base.utils.GamaUtil;
+import com.gama.data.login.constant.GSRequestMethod;
 import com.gama.data.login.execute.AccountInjectionRequestTask;
 import com.gama.data.login.execute.AccountLoginRequestTask;
 import com.gama.data.login.execute.AccountRegisterRequestTask;
@@ -35,6 +36,7 @@ import com.gama.data.login.execute.MacLoginRegRequestTask;
 import com.gama.data.login.execute.PhoneVfcodeRequestTask;
 import com.gama.data.login.execute.ThirdAccountBindRequestTask;
 import com.gama.data.login.execute.ThirdLoginRegRequestTask;
+import com.gama.data.login.execute2.ThirdAccountBindRequestTaskV2;
 import com.gama.data.login.request.ThirdLoginRegRequestBean;
 import com.gama.data.login.response.SLoginResponse;
 import com.gama.sdk.R;
@@ -79,7 +81,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     //获取验证码是否在一分钟时限内
     private boolean isTimeLimit = false;
 
-    private static final int TIME_OUT_SECONDS = 10;
+    private static final int TIME_OUT_SECONDS = 60;
     private int resetTime;
 
     //区域json
@@ -203,11 +205,11 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
     }
 
-    @Override
-    public void starpyAccountLogin(Activity activity, String account, String pwd, String vfcode) {
-        this.mActivity = activity;
-        login(activity, account, pwd, vfcode);
-    }
+//    @Override
+//    public void starpyAccountLogin(Activity activity, String account, String pwd) {
+//        this.mActivity = activity;
+//        login(activity, account, pwd);
+//    }
 
     @Override
     public void fbLogin(Activity activity) {
@@ -258,7 +260,9 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     public void thirdPlatLogin(Activity activity, final ThirdLoginRegRequestBean thirdLoginRegRequestBean) {
         this.mActivity = activity;
 
-        ThirdLoginRegRequestTask cmd = new ThirdLoginRegRequestTask(getActivity(),thirdLoginRegRequestBean);
+        ThirdLoginRegRequestTask cmd = new ThirdLoginRegRequestTask(getActivity(),
+                thirdLoginRegRequestBean,
+                GSRequestMethod.GSRequestType.GAMESWORD);
         cmd.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(), "Loading..."));
         cmd.setReqCallBack(new ISReqCallBack<SLoginResponse>() {
             @Override
@@ -303,11 +307,11 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         mMacLogin(activity);
     }
 
-    @Override
-    public void register(Activity activity, String account, String pwd, String email) {
-        this.mActivity = activity;
-        registerAccout(activity, account, pwd, email);
-    }
+//    @Override
+//    public void register(Activity activity, String account, String pwd, String email) {
+//        this.mActivity = activity;
+//        registerAccout(activity, account, pwd, email);
+//    }
 
     @Override
     public void register(Activity activity, String account, String pwd, String areaCode, String phone, String vfcode) {
@@ -378,9 +382,8 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
     @Override
     public void changePwd(final Activity activity, final String account, String oldPwd, final String newPwd) {
-
         this.mActivity = activity;
-        ChangePwdRequestTask changePwdRequestTask = new ChangePwdRequestTask(activity,account,oldPwd,newPwd);
+        ChangePwdRequestTask changePwdRequestTask = new ChangePwdRequestTask(activity,account,oldPwd,newPwd, GSRequestMethod.GSRequestType.GAMESWORD);
         changePwdRequestTask.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(), "Loading..."));
         changePwdRequestTask.setReqCallBack(new ISReqCallBack<SLoginResponse>() {
 
@@ -424,158 +427,182 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
     }
 
-    @Override
-    public void findPwd(Activity activity, String account, String email) {
-        this.mActivity = activity;
-        FindPwdRequestTask findPwdRequestTask = new FindPwdRequestTask(getActivity(), account, email);
-        findPwdRequestTask.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(), "Loading..."));
-        findPwdRequestTask.setReqCallBack(new ISReqCallBack<SLoginResponse>() {
-            @Override
-            public void success(SLoginResponse sLoginResponse, String rawResult) {
-                if (sLoginResponse != null) {
-                    if (sLoginResponse.isRequestSuccess()) {
-                        ToastUtils.toast(getActivity(), R.string.py_findpwd_success);
-
-//                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GAMA);
-                        if (iLoginView != null){
-                            iLoginView.findPwdSuccess(sLoginResponse);
-                        }
-                    }else{
-
-                        ToastUtils.toast(getActivity(), sLoginResponse.getMessage());
-                    }
-
-                } else {
-                    ToastUtils.toast(getActivity(), R.string.py_error_occur);
-                }
-            }
-
-            @Override
-            public void timeout(String code) {
-
-            }
-
-            @Override
-            public void noData() {
-
-            }
-
-            @Override
-            public void cancel() {
-
-            }
-        });
-        findPwdRequestTask.excute(SLoginResponse.class);
-    }
-
-
-    @Override
-    public void accountBind(Activity activity, String account, String pwd, String email, int bindType) {
-        this.mActivity = activity;
-        final String mAccount = account;
-        final String mPwd = pwd;
-        final String mEmail = email;
-        if (bindType == SLoginType.bind_unique){
-            String uniqueId = GamaUtil.getCustomizedUniqueId1AndroidId1Adid(activity);
-            if(TextUtils.isEmpty(uniqueId)){
-                PL.d("thirdPlatId:" + uniqueId);
-                return;
-            }
-            ThirdAccountBindRequestTask bindRequestTask = new ThirdAccountBindRequestTask(getActivity(), account,pwd, email,SLoginType.LOGIN_TYPE_UNIQUE,uniqueId);
-            sAccountBind(bindRequestTask);
-
-        }else if (bindType == SLoginType.bind_fb){
-            sFbLogin(activity, sFacebookProxy, new FbLoginCallBack() {
-                @Override
-                public void loginSuccess(FaceBookUser user) {
-                    ThirdAccountBindRequestTask bindRequestTask = new ThirdAccountBindRequestTask(getActivity(),
-                            mAccount,mPwd, mEmail, user.getUserFbId(), user.getBusinessId(), "");
-                    sAccountBind(bindRequestTask);
-                }
-            });
-
-        }else  if (bindType == SLoginType.bind_google){//Google绑定
-            if (sGoogleSignIn == null){
-                return;
-            }
-            sGoogleSignIn.setClientId(ResConfig.getGoogleClientId(activity));
-            sGoogleSignIn.startSignIn(new SGoogleSignIn.GoogleSignInCallBack() {
-                @Override
-                public void success(String id, String mFullName, String mEmail,String idTokenString) {
-                    PL.i("google sign in : " + id);
-                    if (SStringUtil.isNotEmpty(id)) {
-                        ThirdAccountBindRequestTask bindGoogleRequestTask = new ThirdAccountBindRequestTask(getActivity(), mAccount,mPwd, mEmail,SLoginType.LOGIN_TYPE_GOOGLE,id);
-                        sAccountBind(bindGoogleRequestTask);
-                    }
-                }
-
-                @Override
-                public void failure() {
-                    ToastUtils.toast(getActivity(),"Google sign in error");
-                    PL.i("google sign in failure");
-                }
-            });
-        } else if(bindType == SLoginType.bind_twitter) {
-            if(twitterLogin != null) {
-                twitterLogin.startLogin(new GamaTwitterLogin.TwitterLoginCallBack() {
-                    @Override
-                    public void success(String id, String mFullName, String mEmail, String idTokenString) {
-                        PL.i("twitter login : " + id);
-                        if (SStringUtil.isNotEmpty(id)) {
-                            ThirdAccountBindRequestTask bindGoogleRequestTask = new ThirdAccountBindRequestTask(getActivity(), mAccount,mPwd, mEmail,SLoginType.LOGIN_TYPE_TWITTER,id);
-                            sAccountBind(bindGoogleRequestTask);
-                        }
-                    }
-
-                    @Override
-                    public void failure(String msg) {
-
-                    }
-                });
-            }
-        }
+//    @Override
+//    public void findPwd(Activity activity, String account, String email) {
+//        this.mActivity = activity;
+//        FindPwdRequestTask findPwdRequestTask = new FindPwdRequestTask(getActivity(), account, email);
+//        findPwdRequestTask.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(), "Loading..."));
+//        findPwdRequestTask.setReqCallBack(new ISReqCallBack<SLoginResponse>() {
+//            @Override
+//            public void success(SLoginResponse sLoginResponse, String rawResult) {
+//                if (sLoginResponse != null) {
+//                    if (sLoginResponse.isRequestSuccess()) {
+//                        ToastUtils.toast(getActivity(), R.string.py_findpwd_success);
+//
+////                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GAMA);
+//                        if (iLoginView != null){
+//                            iLoginView.findPwdSuccess(sLoginResponse);
+//                        }
+//                    }else{
+//
+//                        ToastUtils.toast(getActivity(), sLoginResponse.getMessage());
+//                    }
+//
+//                } else {
+//                    ToastUtils.toast(getActivity(), R.string.py_error_occur);
+//                }
+//            }
+//
+//            @Override
+//            public void timeout(String code) {
+//
+//            }
+//
+//            @Override
+//            public void noData() {
+//
+//            }
+//
+//            @Override
+//            public void cancel() {
+//
+//            }
+//        });
+//        findPwdRequestTask.excute(SLoginResponse.class);
+//    }
 
 
-    }
+//    @Override
+//    public void accountBind(Activity activity, final String account, final String pwd, final String email, int bindType) {
+//        this.mActivity = activity;
+//        if (bindType == SLoginType.bind_unique){
+//            String uniqueId = GamaUtil.getCustomizedUniqueId1AndroidId1Adid(activity);
+//            if(TextUtils.isEmpty(uniqueId)){
+//                PL.d("thirdPlatId:" + uniqueId);
+//                return;
+//            }
+//            ThirdAccountBindRequestTask bindRequestTask = new ThirdAccountBindRequestTask(getActivity(),
+//                    SLoginType.LOGIN_TYPE_UNIQUE,
+//                    account,
+//                    pwd,
+//                    email,
+//                    uniqueId,
+//                    GSRequestMethod.GSRequestType.GAMAMOBI);
+//            sAccountBind(bindRequestTask);
+//
+//        }else if (bindType == SLoginType.bind_fb){
+//            sFbLogin(activity, sFacebookProxy, new FbLoginCallBack() {
+//                @Override
+//                public void loginSuccess(FaceBookUser user) {
+//                    ThirdAccountBindRequestTask bindRequestTask = new ThirdAccountBindRequestTask(getActivity(),
+//                            account,
+//                            pwd,
+//                            email,
+//                            user.getUserFbId(),
+//                            user.getBusinessId(),
+//                            user.getAccessTokenString(),
+//                            "",
+//                            GSRequestMethod.GSRequestType.GAMAMOBI);
+//                    sAccountBind(bindRequestTask);
+//                }
+//            });
+//
+//        }else  if (bindType == SLoginType.bind_google){//Google绑定
+//            if (sGoogleSignIn == null){
+//                return;
+//            }
+//            final String googleClientId = ResConfig.getGoogleClientId(activity);
+//            sGoogleSignIn.setClientId(googleClientId);
+//            sGoogleSignIn.startSignIn(new SGoogleSignIn.GoogleSignInCallBack() {
+//                @Override
+//                public void success(String id, String mFullName, String mEmail,String idTokenString) {
+//                    PL.i("google sign in : " + id);
+//                    if (SStringUtil.isNotEmpty(id)) {
+//                        ThirdAccountBindRequestTask bindGoogleRequestTask = new ThirdAccountBindRequestTask(getActivity(),
+//                                account,
+//                                pwd,
+//                                email,
+//                                id,
+//                                idTokenString,
+//                                googleClientId,
+//                                GSRequestMethod.GSRequestType.GAMAMOBI);
+//                        sAccountBind(bindGoogleRequestTask);
+//                    }
+//                }
+//
+//                @Override
+//                public void failure() {
+//                    ToastUtils.toast(getActivity(),"Google sign in error");
+//                    PL.i("google sign in failure");
+//                }
+//            });
+//        } else if(bindType == SLoginType.bind_twitter) {
+//            if(twitterLogin != null) {
+//                twitterLogin.startLogin(new GamaTwitterLogin.TwitterLoginCallBack() {
+//                    @Override
+//                    public void success(String id, String mFullName, String mEmail, String idTokenString) {
+//                        PL.i("twitter login : " + id);
+//                        if (SStringUtil.isNotEmpty(id)) {
+//                            ThirdAccountBindRequestTask bindGoogleRequestTask = new ThirdAccountBindRequestTask(getActivity(),
+//                                    SLoginType.LOGIN_TYPE_TWITTER,
+//                                    account,
+//                                    pwd,
+//                                    email,
+//                                    id,
+//                                    GSRequestMethod.GSRequestType.GAMAMOBI);
+//                            sAccountBind(bindGoogleRequestTask);
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void failure(String msg) {
+//
+//                    }
+//                });
+//            }
+//        }
+//
+//
+//    }
 
-    @Override
-    public void accountInject(Activity activity, String account, String pwd, String uid) {
-        AccountInjectionRequestTask injectionRequestTask = new AccountInjectionRequestTask(getActivity(),account,pwd,uid);
-        injectionRequestTask.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(), "Loading..."));
-        injectionRequestTask.setReqCallBack(new ISReqCallBack<SLoginResponse>() {
-            @Override
-            public void success(SLoginResponse sLoginResponse, String rawResult) {
-                if (sLoginResponse != null) {
-                    if (sLoginResponse.isRequestSuccess()) {
-
-                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, "");
-
-                    }else {
-
-                        ToastUtils.toast(getActivity(), sLoginResponse.getMessage());
-                    }
-
-                } else {
-                    ToastUtils.toast(getActivity(), R.string.py_error_occur);
-                }
-            }
-
-            @Override
-            public void timeout(String code) {
-
-            }
-
-            @Override
-            public void noData() {
-
-            }
-
-            @Override
-            public void cancel() {
-            }
-        });
-        injectionRequestTask.excute(SLoginResponse.class);
-    }
+//    @Override
+//    public void accountInject(Activity activity, String account, String pwd, String uid) {
+//        AccountInjectionRequestTask injectionRequestTask = new AccountInjectionRequestTask(getActivity(),account,pwd,uid);
+//        injectionRequestTask.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(), "Loading..."));
+//        injectionRequestTask.setReqCallBack(new ISReqCallBack<SLoginResponse>() {
+//            @Override
+//            public void success(SLoginResponse sLoginResponse, String rawResult) {
+//                if (sLoginResponse != null) {
+//                    if (sLoginResponse.isRequestSuccess()) {
+//
+//                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, "");
+//
+//                    }else {
+//
+//                        ToastUtils.toast(getActivity(), sLoginResponse.getMessage());
+//                    }
+//
+//                } else {
+//                    ToastUtils.toast(getActivity(), R.string.py_error_occur);
+//                }
+//            }
+//
+//            @Override
+//            public void timeout(String code) {
+//
+//            }
+//
+//            @Override
+//            public void noData() {
+//
+//            }
+//
+//            @Override
+//            public void cancel() {
+//            }
+//        });
+//        injectionRequestTask.excute(SLoginResponse.class);
+//    }
 
     private void sAccountBind(ThirdAccountBindRequestTask bindRequestTask) {
         bindRequestTask.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(), "Loading..."));
@@ -618,9 +645,50 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         bindRequestTask.excute(SLoginResponse.class);
     }
 
+    private void sAccountBindV2(ThirdAccountBindRequestTaskV2 bindRequestTask) {
+        bindRequestTask.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(), "Loading..."));
+        bindRequestTask.setReqCallBack(new ISReqCallBack<SLoginResponse>() {
+            @Override
+            public void success(SLoginResponse sLoginResponse, String rawResult) {
+                if (sLoginResponse != null) {
+                    if (sLoginResponse.isRequestSuccess()) {
+                        ToastUtils.toast(getActivity(), R.string.py_success);
+
+//                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GAMA);
+                        if (iLoginView != null){
+                            iLoginView.accountBindSuccess(sLoginResponse);
+                        }
+                    }else{
+
+                        ToastUtils.toast(getActivity(), sLoginResponse.getMessage());
+                    }
+
+                } else {
+                    ToastUtils.toast(getActivity(), R.string.py_error_occur);
+                }
+            }
+
+            @Override
+            public void timeout(String code) {
+
+            }
+
+            @Override
+            public void noData() {
+
+            }
+
+            @Override
+            public void cancel() {
+            }
+
+        });
+        bindRequestTask.excute(SLoginResponse.class);
+    }
+
     private void mMacLogin(Activity activity) {
 
-        MacLoginRegRequestTask macLoginRegCmd = new MacLoginRegRequestTask(getActivity());
+        MacLoginRegRequestTask macLoginRegCmd = new MacLoginRegRequestTask(getActivity(), GSRequestMethod.GSRequestType.GAMESWORD);
         macLoginRegCmd.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(), "Loading..."));
         macLoginRegCmd.setReqCallBack(new ISReqCallBack<SLoginResponse>() {
             @Override
@@ -878,7 +946,12 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         if (accessToken != null){
             accessTokenString = accessToken.getToken();
         }
-        ThirdLoginRegRequestTask cmd = new ThirdLoginRegRequestTask(getActivity(),fbScopeId,fbApps,fbTokenBusiness,accessTokenString);
+        ThirdLoginRegRequestTask cmd = new ThirdLoginRegRequestTask(getActivity(),
+                fbScopeId,
+                fbApps,
+                fbTokenBusiness,
+                accessTokenString,
+                GSRequestMethod.GSRequestType.GAMESWORD);
         cmd.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(), "Loading..."));
         cmd.setReqCallBack(new ISReqCallBack<SLoginResponse>() {
             @Override
@@ -915,52 +988,6 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             }
         });
         cmd.excute(SLoginResponse.class);
-
-    }
-
-    private void login(final Activity activity, final String account, final String password, String vfcode) {
-
-        AccountLoginRequestTask accountLoginCmd = new AccountLoginRequestTask(getActivity(), account, password, vfcode);
-        accountLoginCmd.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(),"Loading..."));
-        accountLoginCmd.setReqCallBack(new ISReqCallBack<SLoginResponse>() {
-            @Override
-            public void success(SLoginResponse sLoginResponse, String rawResult) {
-                if (sLoginResponse != null){
-                    if (sLoginResponse.isRequestSuccess()) {
-                        GamaUtil.saveAccount(getContext(),account);
-                        GamaUtil.savePassword(getContext(),password);
-                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GAMA);
-                    }else{
-
-                        ToastUtils.toast(getActivity(),sLoginResponse.getMessage());
-                    }
-                }else{
-                    ToastUtils.toast(getActivity(),R.string.py_error_occur);
-                }
-            }
-
-            @Override
-            public void timeout(String code) {
-                if(isAutoLogin) {
-                    iLoginView.showLoginView();
-                }
-            }
-
-            @Override
-            public void noData() {
-                if(isAutoLogin) {
-                    iLoginView.showLoginView();
-                }
-            }
-
-            @Override
-            public void cancel() {
-//                if(isAutoLogin) {
-                    iLoginView.showLoginView();
-//                }
-            }
-        });
-        accountLoginCmd.excute(SLoginResponse.class);
 
     }
 
@@ -1155,7 +1182,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                             if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GAMA, registPlatform)) {//免注册或者平台用户自动登录
 //                                autoLogin22(mActivity, account, password);
 
-                                starpyAccountLogin(activity,account,password, "");
+                                starpyAccountLogin(activity,account,password, "", true);
 
                             }else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_FB, registPlatform)){//fb自动的登录
                                 /*String fbScopeId = FbSp.getFbId(activity);
@@ -1314,7 +1341,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     }
 
     @Override
-    public void accountBind(Activity activity, final String account, final String pwd, final String areaCode, final String phone, final String vfcode, int bindType) {
+    public void accountBind(final Activity activity, final String account, final String pwd, final String areaCode, final String phone, final String vfcode, int bindType) {
         this.mActivity = activity;
         if (bindType == SLoginType.bind_unique){
             String uniqueId = GamaUtil.getCustomizedUniqueId1AndroidId1Adid(activity);
@@ -1322,48 +1349,58 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 PL.d("thirdPlatId:" + uniqueId);
                 return;
             }
-            ThirdAccountBindRequestTask bindRequestTask = new ThirdAccountBindRequestTask(getActivity(),
+            ThirdAccountBindRequestTaskV2 bindRequestTask = new ThirdAccountBindRequestTaskV2(getActivity(),
+                    SLoginType.LOGIN_TYPE_UNIQUE,
                     account,
                     pwd,
                     areaCode,
                     phone,
                     vfcode,
-                    SLoginType.LOGIN_TYPE_UNIQUE,uniqueId);
-            sAccountBind(bindRequestTask);
+                    uniqueId,
+                    GSRequestMethod.GSRequestType.GAMESWORD);
+            sAccountBindV2(bindRequestTask);
 
-        }else if (bindType == SLoginType.bind_fb){
+        } else if (bindType == SLoginType.bind_fb){
             sFbLogin(activity, sFacebookProxy, new FbLoginCallBack() {
                 @Override
                 public void loginSuccess(FaceBookUser user) {
-                    ThirdAccountBindRequestTask bindRequestTask = new ThirdAccountBindRequestTask(getActivity(),
+                    ThirdAccountBindRequestTaskV2 bindRequestTask = new ThirdAccountBindRequestTaskV2(getActivity(),
                             account,
                             pwd,
                             areaCode,
                             phone,
                             vfcode,
-                            user.getUserFbId(), user.getBusinessId(), "");
-                    sAccountBind(bindRequestTask);
+                            user.getUserFbId(),
+                            user.getBusinessId(),
+                            user.getAccessTokenString(),
+                            "",
+                            GSRequestMethod.GSRequestType.GAMESWORD);
+                    sAccountBindV2(bindRequestTask);
                 }
             });
 
-        }else  if (bindType == SLoginType.bind_google){//Google绑定
+        } else  if (bindType == SLoginType.bind_google){//Google绑定
             if (sGoogleSignIn == null){
                 return;
             }
-            sGoogleSignIn.setClientId(ResConfig.getGoogleClientId(activity));
+            final String googleClientId = ResConfig.getGoogleClientId(activity);
+            sGoogleSignIn.setClientId(googleClientId);
             sGoogleSignIn.startSignIn(new SGoogleSignIn.GoogleSignInCallBack() {
                 @Override
                 public void success(String id, String mFullName, String mEmail,String idTokenString) {
                     PL.i("google sign in : " + id);
                     if (SStringUtil.isNotEmpty(id)) {
-                        ThirdAccountBindRequestTask bindGoogleRequestTask = new ThirdAccountBindRequestTask(getActivity(),
+                        ThirdAccountBindRequestTaskV2 bindGoogleRequestTask = new ThirdAccountBindRequestTaskV2(getActivity(),
                                 account,
                                 pwd,
                                 areaCode,
                                 phone,
                                 vfcode,
-                                SLoginType.LOGIN_TYPE_GOOGLE,id);
-                        sAccountBind(bindGoogleRequestTask);
+                                id,
+                                idTokenString,
+                                googleClientId,
+                                GSRequestMethod.GSRequestType.GAMESWORD);
+                        sAccountBindV2(bindGoogleRequestTask);
                     }
                 }
 
@@ -1380,14 +1417,16 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     public void success(String id, String mFullName, String mEmail, String idTokenString) {
                         PL.i("twitter login : " + id);
                         if (SStringUtil.isNotEmpty(id)) {
-                            ThirdAccountBindRequestTask bindGoogleRequestTask = new ThirdAccountBindRequestTask(getActivity(),
+                            ThirdAccountBindRequestTaskV2 bindGoogleRequestTask = new ThirdAccountBindRequestTaskV2(getActivity(),
+                                    SLoginType.LOGIN_TYPE_TWITTER,
                                     account,
                                     pwd,
                                     areaCode,
                                     phone,
                                     vfcode,
-                                    SLoginType.LOGIN_TYPE_TWITTER,id);
-                            sAccountBind(bindGoogleRequestTask);
+                                    id,
+                                    GSRequestMethod.GSRequestType.GAMESWORD);
+                            sAccountBindV2(bindGoogleRequestTask);
                         }
                     }
 
@@ -1418,7 +1457,12 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         requestPhoneVfcodeTimer = null;
                     }
                     if(callback != null) {
-                        callback.statusCallback(SBaseRelativeLayout.OperationCallback.TIME_OUT);
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                callback.statusCallback(SBaseRelativeLayout.OperationCallback.TIME_OUT);
+                            }
+                        });
                     }
                 }
                 resetTime--;
@@ -1492,4 +1536,110 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
         d.show();
     }
+
+    @Override
+    public void starpyAccountLogin(Activity activity, String account, String pwd, String vfcode, boolean isSaveAccount) {
+        this.mActivity = activity;
+        login(activity, account, pwd, vfcode, isSaveAccount);
+    }
+
+    private void login(final Activity activity, final String account, final String password, String vfcode, final boolean isSaveAccount) {
+
+        AccountLoginRequestTask accountLoginCmd = new AccountLoginRequestTask(getActivity(), account, password, vfcode);
+        accountLoginCmd.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(),"Loading..."));
+        accountLoginCmd.setReqCallBack(new ISReqCallBack<SLoginResponse>() {
+            @Override
+            public void success(SLoginResponse sLoginResponse, String rawResult) {
+                if (sLoginResponse != null){
+                    if (sLoginResponse.isRequestSuccess()) {
+                        GamaUtil.saveAccount(getContext(),account);
+                        if(isSaveAccount) {
+                            GamaUtil.savePassword(getContext(), password);
+                        } else {
+                            GamaUtil.savePassword(getContext(), "");
+                        }
+                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GAMA);
+                    }else{
+
+                        ToastUtils.toast(getActivity(),sLoginResponse.getMessage());
+                    }
+                }else{
+                    ToastUtils.toast(getActivity(),R.string.py_error_occur);
+                }
+            }
+
+            @Override
+            public void timeout(String code) {
+                if(isAutoLogin) {
+                    iLoginView.showLoginView();
+                }
+            }
+
+            @Override
+            public void noData() {
+                if(isAutoLogin) {
+                    iLoginView.showLoginView();
+                }
+            }
+
+            @Override
+            public void cancel() {
+                iLoginView.showLoginView();
+            }
+        });
+        accountLoginCmd.excute(SLoginResponse.class);
+    }
+
+//    /**
+//     * 使用FacebookId进行平台登录
+//     * @param fbScopeId
+//     * @param fbApps
+//     * @param fbTokenBusiness
+//     */
+//    private void fbThirdLoginApp(String fbScopeId, String fbApps, String fbTokenBusiness) {
+//
+//        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+//        String accessTokenString = "";
+//        if (accessToken != null){
+//            accessTokenString = accessToken.getToken();
+//        }
+//        ThirdLoginRegRequestTask cmd = new ThirdLoginRegRequestTask(getActivity(),fbScopeId,fbApps,fbTokenBusiness,accessTokenString);
+//        cmd.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(), "Loading..."));
+//        cmd.setReqCallBack(new ISReqCallBack<SLoginResponse>() {
+//            @Override
+//            public void success(SLoginResponse sLoginResponse, String rawResult) {
+//                if (sLoginResponse != null) {
+//
+//                    if (sLoginResponse.isRequestSuccess()){
+//
+//                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_FB);
+//                        return;
+//                    }else{
+//
+//                        ToastUtils.toast(getActivity(), sLoginResponse.getMessage());
+//                    }
+//                } else {
+//                    ToastUtils.toast(getActivity(), R.string.py_error_occur);
+//                }
+//                showMainLoginView();
+//            }
+//
+//            @Override
+//            public void timeout(String code) {
+//                showMainLoginView();
+//            }
+//
+//            @Override
+//            public void noData() {
+//                showMainLoginView();
+//            }
+//
+//            @Override
+//            public void cancel() {
+//                showMainLoginView();
+//            }
+//        });
+//        cmd.excute(SLoginResponse.class);
+//
+//    }
 }

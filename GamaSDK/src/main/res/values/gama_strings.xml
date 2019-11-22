@@ -16,6 +16,7 @@
     <string name="py_findpwd">忘記密碼</string>
     <string name="py_register_account">註冊帳號</string>
     <string name="py_account_center">會員中心</string>
+    <string name="py_account_input_vfcode">請點擊輸入驗證碼</string>
 
     <!--注册页面-->
     <string name="py_login_page_account_reg">註冊會員帳號</string>
@@ -52,6 +53,7 @@
 
     <!--绑定账号页面（通用）-->
     <string name="py_login_page_account_bind">綁定會員帳號</string>
+    <string name="py_btn_bind">綁定會員</string>
     <!--会员账号绑定-->
     <string name="py_login_page_account_link">會員帳號綁定</string>
 
