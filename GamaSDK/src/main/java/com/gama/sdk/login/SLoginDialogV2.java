@@ -251,13 +251,14 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
             viewPageList.add(accountLoginView);
         }
 
-        for (View childView : viewPageList) {
+        for (SLoginBaseRelativeLayout childView : viewPageList) {
 
             if (childView == null){
                 continue;
             }
 
             if (childView == accountLoginView){
+                childView.refreshAccountInfo();
                 childView.setVisibility(View.VISIBLE);
             }else{
                 childView.setVisibility(View.GONE);

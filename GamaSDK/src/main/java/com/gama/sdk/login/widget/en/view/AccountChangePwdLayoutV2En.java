@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
@@ -164,11 +165,11 @@ public class AccountChangePwdLayoutV2En extends SLoginBaseRelativeLayoutEn imple
         }
 
         if (!GamaUtil.checkAccount(account)) {
-            ToastUtils.toast(getActivity(), R.string.en_py_account_error);
+            ToastUtils.toast(getActivity(), errorStrAccount, Toast.LENGTH_LONG);
             return;
         }
         if (!GamaUtil.checkPasswordOld(newPassword)) {
-            ToastUtils.toast(getActivity(), R.string.en_py_password_error);
+            ToastUtils.toast(getActivity(), errorStrPassword, Toast.LENGTH_LONG);
             return;
         }
 

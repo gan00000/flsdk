@@ -107,17 +107,9 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
         eyeImageView = contentView.findViewById(R.id.gama_login_iv_eye);
 
         loginAccountEditText = contentView.findViewById(R.id.gama_login_et_account);
-        loginPasswordEditText = contentView.findViewById(R.id.gama_login_et_password);
-        loginPasswordEditText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
 
-        loginPasswordEditText.setOnFocusChangeListener(new OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus) {
-                    Log.i("login", "!hasFocus");
-                }
-            }
-        });
+        loginPasswordEditText = contentView.findViewById(R.id.gama_login_et_password);
+        loginPasswordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
 
         gama_login_et_vfcode = contentView.findViewById(R.id.gama_login_et_vfcode);
 
@@ -190,7 +182,6 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
                 if (eyeImageView.isSelected()) {
                     eyeImageView.setSelected(false);
                     // 显示为普通文本
-
                     loginPasswordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                 } else {
                     eyeImageView.setSelected(true);
@@ -288,5 +279,16 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
             }
         });
         requestQueue.add(request);
+    }
+
+    @Override
+    public void refreshAccountInfo() {
+        super.refreshAccountInfo();
+        account = GamaUtil.getAccount(getContext());
+        password = GamaUtil.getPassword(getContext());
+        if (!TextUtils.isEmpty(account)){
+            loginAccountEditText.setText(account);
+            loginPasswordEditText.setText(password);
+        }
     }
 }

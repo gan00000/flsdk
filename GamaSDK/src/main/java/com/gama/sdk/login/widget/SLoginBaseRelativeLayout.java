@@ -103,4 +103,6 @@ public abstract class SLoginBaseRelativeLayout extends SBaseRelativeLayout {
 
     protected void doSomething() {}
 
+    public void refreshAccountInfo(){}
+
 }

@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
@@ -85,6 +86,7 @@ public class PyAccountLoginV2En extends SLoginBaseRelativeLayoutEn {
         eyeImageView = contentView.findViewById(R.id.gama_login_iv_eye);
 
         loginAccountEditText = contentView.findViewById(R.id.gama_login_et_account);
+
         loginPasswordEditText = contentView.findViewById(R.id.gama_login_et_password);
         loginPasswordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
 
@@ -202,7 +204,7 @@ public class PyAccountLoginV2En extends SLoginBaseRelativeLayoutEn {
         }
 
         if (!GamaUtil.checkAccount(account)) {
-            ToastUtils.toast(getActivity(), R.string.en_py_account_error);
+            ToastUtils.toast(getActivity(), errorStrAccount, Toast.LENGTH_LONG);
             return;
         }
 //        if (!GamaUtil.checkPassword(password)) {
@@ -212,5 +214,16 @@ public class PyAccountLoginV2En extends SLoginBaseRelativeLayoutEn {
 
         sLoginDialogv2.getLoginPresenter().starpyAccountLogin(sLoginDialogv2.getActivity(),account,password, savePwdCheckBox.isSelected());
 
+    }
+
+    @Override
+    public void refreshAccountInfo() {
+        super.refreshAccountInfo();
+        account = GamaUtil.getAccount(getContext());
+        password = GamaUtil.getPassword(getContext());
+        if (!TextUtils.isEmpty(account)){
+            loginAccountEditText.setText(account);
+            loginPasswordEditText.setText(password);
+        }
     }
 }

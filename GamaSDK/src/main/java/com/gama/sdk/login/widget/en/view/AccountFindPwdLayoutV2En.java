@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.core.base.utils.ToastUtils;
 import com.gama.base.utils.GamaUtil;
@@ -107,7 +108,7 @@ public class AccountFindPwdLayoutV2En extends SLoginBaseRelativeLayoutEn impleme
         }
 
         if (!GamaUtil.checkAccount(account)) {
-            ToastUtils.toast(getActivity(), R.string.en_py_account_error);
+            ToastUtils.toast(getActivity(), errorStrAccount, Toast.LENGTH_LONG);
             return;
         }
         if (!Validator.isEmail(email)) {
