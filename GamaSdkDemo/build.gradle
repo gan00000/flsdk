@@ -395,53 +395,53 @@ android {
             signingConfig signingConfigs.release
         }
 
-//        twgoogle {
-//            applicationId "com.gamesword.gotgl"
-//            minSdkVersion 21
-//            targetSdkVersion 28
-//            versionCode 1
-//            versionName "1.0"
-//            flavorDimensions "1"
-//            resValue "string", "facebook_app_id", "2187420264887772"
-//            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider2187420264887772"
-//            resValue "string", "fb_login_protocol_scheme", "fb2187420264887772"
-//            resValue "string", "facebook_app_name", "硬漢部隊"
-//            //每个游戏的demo设置
-//            resValue "string", "test_sku", "com.gamesword.gotgl.1usd"
-//            resValue "string", "sdk_name", "硬汉Demo"
-//            signingConfig signingConfigs.release
-//
-//            buildConfigField "String[]", "PRODUCE_LIST",
-//                    "{" +
-//                            "\"com.gamesword.gotgl.1usd\"," +
-//                            "\"com.ezfy.100usd\"," +
-//                            "}"
-//
-//        }
-
         twgoogle {
-            applicationId "com.gamesword.usbg"
+            applicationId "com.gamesword.gotgl"
             minSdkVersion 21
             targetSdkVersion 28
             versionCode 1
             versionName "1.0"
             flavorDimensions "1"
-            resValue "string", "facebook_app_id", "480070166148561"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider480070166148561"
-            resValue "string", "fb_login_protocol_scheme", "fb480070166148561"
-            resValue "string", "facebook_app_name", "usbg"
+            resValue "string", "facebook_app_id", "2187420264887772"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider2187420264887772"
+            resValue "string", "fb_login_protocol_scheme", "fb2187420264887772"
+            resValue "string", "facebook_app_name", "硬漢部隊"
             //每个游戏的demo设置
-            resValue "string", "test_sku", "com.gamamobi.usbg.1usd"
-            resValue "string", "sdk_name", "usbg"
+            resValue "string", "test_sku", "com.gamesword.gotgl.1usd"
+            resValue "string", "sdk_name", "硬汉Demo"
             signingConfig signingConfigs.release
 
             buildConfigField "String[]", "PRODUCE_LIST",
                     "{" +
-                            "\"com.gamamobi.usbg.1usd\"," +
+                            "\"com.gamesword.gotgl.1usd\"," +
                             "\"com.ezfy.100usd\"," +
                             "}"
 
         }
+
+//        twgoogle {
+//            applicationId "com.gamesword.usbg"
+//            minSdkVersion 21
+//            targetSdkVersion 28
+//            versionCode 1
+//            versionName "1.0"
+//            flavorDimensions "1"
+//            resValue "string", "facebook_app_id", "480070166148561"
+//            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider480070166148561"
+//            resValue "string", "fb_login_protocol_scheme", "fb480070166148561"
+//            resValue "string", "facebook_app_name", "usbg"
+//            //每个游戏的demo设置
+//            resValue "string", "test_sku", "com.gamamobi.usbg.1usd"
+//            resValue "string", "sdk_name", "usbg"
+//            signingConfig signingConfigs.release
+//
+//            buildConfigField "String[]", "PRODUCE_LIST",
+//                    "{" +
+//                            "\"com.gamamobi.usbg.1usd\"," +
+//                            "\"com.ezfy.100usd\"," +
+//                            "}"
+//
+//        }
 
         twweb {
             applicationId "com.gamamobi.ezfy"

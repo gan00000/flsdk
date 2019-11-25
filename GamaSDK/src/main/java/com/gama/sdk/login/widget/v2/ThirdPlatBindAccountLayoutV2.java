@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
@@ -70,8 +71,11 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
         backView = contentView.findViewById(R.id.gama_head_iv_back);
 
         eyeImageView = contentView.findViewById(R.id.gama_bind_iv_eye);
-        registerPasswordEditText = contentView.findViewById(R.id.gama_bind_et_password);
+
         registerAccountEditText = contentView.findViewById(R.id.gama_bind_et_account);
+        registerPasswordEditText = contentView.findViewById(R.id.gama_bind_et_password);
+        registerPasswordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+
         gama_bind_et_phone = contentView.findViewById(R.id.gama_bind_et_phone);
         gama_bind_et_vfcode = contentView.findViewById(R.id.gama_bind_et_vfcode);
         gama_bind_tv_area = contentView.findViewById(R.id.gama_bind_tv_area);
@@ -85,6 +89,8 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
         bindConfirm.setOnClickListener(this);
         gama_bind_btn_get_vfcode.setOnClickListener(this);
         gama_bind_tv_area.setOnClickListener(this);
+
+        setDefaultAreaInfo();
 
         return contentView;
     }
@@ -112,22 +118,22 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
 
             if (eyeImageView.isSelected()) {
                 eyeImageView.setSelected(false);
-                // 显示为普通文本
-                registerPasswordEditText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-            } else {
-                eyeImageView.setSelected(true);
                 // 显示为密码
                 registerPasswordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            } else {
+                eyeImageView.setSelected(true);
+                // 显示为普通文本
+                registerPasswordEditText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
             }
             // 使光标始终在最后位置
             Editable etable = registerPasswordEditText.getText();
             Selection.setSelection(etable, etable.length());
 
         } else if (v == gama_bind_tv_area) {
-            sLoginDialogv2.getLoginPresenter().setOperationCallback(this);
+//            sLoginDialogv2.getLoginPresenter().setOperationCallback(this);
             getAndShowArea();
         } else if(v == gama_bind_btn_get_vfcode) {
-            sLoginDialogv2.getLoginPresenter().setOperationCallback(this);
+//            sLoginDialogv2.getLoginPresenter().setOperationCallback(this);
             getVfcode();
         }
 
@@ -155,11 +161,11 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
         }
 
         if (!GamaUtil.checkAccount(account)) {
-            ToastUtils.toast(getActivity(), R.string.py_account_error);
+            ToastUtils.toast(getActivity(), errorStrAccount, Toast.LENGTH_LONG);
             return;
         }
         if (!GamaUtil.checkPassword(password)) {
-            ToastUtils.toast(getActivity(), R.string.py_password_error);
+            ToastUtils.toast(getActivity(), errorStrPassword, Toast.LENGTH_LONG);
             return;
         }
 
@@ -221,9 +227,20 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
     public void statusCallback(int operation) {
         if(TIME_LIMIT == operation) {
             gama_bind_btn_get_vfcode.setBackgroundResource(R.drawable.gama_ui_bg_btn_unclickable);
+            gama_bind_btn_get_vfcode.setClickable(false);
         } else if(TIME_OUT == operation) {
             gama_bind_btn_get_vfcode.setBackgroundResource(R.drawable.bg_192d3f_46);
+            gama_bind_btn_get_vfcode.setClickable(true);
+            gama_bind_btn_get_vfcode.setText(R.string.py_register_account_get_vfcode);
         }
+    }
+
+    @Override
+    public void alertTime(int remainTimeSeconds) {
+        if(gama_bind_btn_get_vfcode.isClickable()) {
+            gama_bind_btn_get_vfcode.setClickable(false);
+        }
+        gama_bind_btn_get_vfcode.setText(remainTimeSeconds + "s");
     }
 
     @Override
@@ -233,5 +250,23 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
             String text = selectedBean.getValue();
             gama_bind_tv_area.setText(text);
         }
+    }
+
+    @Override
+    protected void doSomething() {
+        super.doSomething();
+        sLoginDialogv2.getLoginPresenter().setOperationCallback(this);
+        remainTimeSeconds = sLoginDialogv2.getLoginPresenter().getRemainTimeSeconds();
+        if(remainTimeSeconds > 0) {
+            gama_bind_btn_get_vfcode.setBackgroundResource(R.drawable.gama_ui_bg_btn_unclickable);
+            gama_bind_btn_get_vfcode.setClickable(false);
+            gama_bind_btn_get_vfcode.setText(remainTimeSeconds + "s");
+        }
+    }
+
+    private void setDefaultAreaInfo() {
+        selectedBean = new GamaAreaInfoBean();
+        selectedBean.setValue(getResources().getString(R.string.py_default_area_num));
+        selectedBean.setPattern(getResources().getString(R.string.py_default_area_num_pattern));
     }
 }

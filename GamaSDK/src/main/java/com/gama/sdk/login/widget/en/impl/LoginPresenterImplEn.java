@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.widget.Toast;
 
 import com.core.base.callback.ISReqCallBack;
 import com.core.base.utils.ApkInfoUtil;
@@ -136,15 +137,15 @@ public class LoginPresenterImplEn implements LoginContractEn.ILoginPresenterEn {
 
         String previousLoginType = GamaUtil.getPreviousLoginType(activity);
 
-        if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GAMA, previousLoginType)) {//自動登錄
+        if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GAMESWORD, previousLoginType)) {//自動登錄
             String account = GamaUtil.getAccount(activity);
             String password = GamaUtil.getPassword(activity);
-            startAutoLogin(activity, SLoginType.LOGIN_TYPE_GAMA, account, password);
+            startAutoLogin(activity, SLoginType.LOGIN_TYPE_GAMESWORD, account, password);
 
         } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_MAC, previousLoginType)) {//自動登錄
             String account = GamaUtil.getMacAccount(activity);
             String password = GamaUtil.getMacPassword(activity);
-            startAutoLogin(activity, SLoginType.LOGIN_TYPE_GAMA, account, password);
+            startAutoLogin(activity, SLoginType.LOGIN_TYPE_GAMESWORD, account, password);
 
         } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_FB, previousLoginType)) {//自動登錄
             String fbScopeId = FbSp.getFbId(activity);
@@ -689,7 +690,7 @@ public class LoginPresenterImplEn implements LoginContractEn.ILoginPresenterEn {
             Bitmap bitmap = BitmapUtil.bitmapAddText(BitmapFactory.decodeResource(context.getResources(),R.drawable.v2_mac_pwd_bg),text);
             String m = BitmapUtil.saveImageToGallery(getContext(),bitmap);
 //            if (SStringUtil.isNotEmpty(m)){
-                ToastUtils.toast(context, context.getResources().getString(R.string.en_py_login_mac_saveimage_tips));
+                ToastUtils.toast(context, context.getResources().getString(R.string.en_py_login_mac_saveimage_tips), Toast.LENGTH_LONG);
 //            }
         } catch (Exception e) {
             e.printStackTrace();
@@ -940,7 +941,7 @@ public class LoginPresenterImplEn implements LoginContractEn.ILoginPresenterEn {
                         } else {
                             GamaUtil.savePassword(getContext(), "");
                         }
-                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GAMA);
+                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GAMESWORD);
                     }else{
 
                         ToastUtils.toast(getActivity(),sLoginResponse.getMessage());
@@ -975,50 +976,6 @@ public class LoginPresenterImplEn implements LoginContractEn.ILoginPresenterEn {
 
     }
 
-    private void registerAccout(Activity activity, final String account, final String password, String areaCode, String phone, String vfcode){
-
-        AccountRegisterRequestTask accountRegisterCmd = new AccountRegisterRequestTask(getActivity(), account, password, areaCode, phone, vfcode);
-        accountRegisterCmd.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(), "Loading..."));
-        accountRegisterCmd.setReqCallBack(new ISReqCallBack<SLoginResponse>() {
-            @Override
-            public void success(SLoginResponse sLoginResponse, String rawResult) {
-                if (sLoginResponse != null) {
-                    if (sLoginResponse.isRequestSuccess()) {
-                        ToastUtils.toast(getActivity(), R.string.en_py_register_success);
-
-                        GamaUtil.saveAccount(getContext(),account);
-                        GamaUtil.savePassword(getContext(),password);
-                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GAMA);
-
-                    }else{
-
-                        ToastUtils.toast(getActivity(), sLoginResponse.getMessage());
-                    }
-
-                } else {
-                    ToastUtils.toast(getActivity(), R.string.en_py_error_occur);
-                }
-            }
-
-            @Override
-            public void timeout(String code) {
-
-            }
-
-            @Override
-            public void noData() {
-
-            }
-
-            @Override
-            public void cancel() {
-            }
-
-        });
-        accountRegisterCmd.excute(SLoginResponse.class);
-
-    }
-
     private void registerAccout(Activity activity, final String account, final String password, String email){
 
         AccountRegisterRequestTask accountRegisterCmd = new AccountRegisterRequestTask(getActivity(), account, password,email);
@@ -1032,7 +989,7 @@ public class LoginPresenterImplEn implements LoginContractEn.ILoginPresenterEn {
 
                         GamaUtil.saveAccount(getContext(),account);
                         GamaUtil.savePassword(getContext(),password);
-                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GAMA);
+                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GAMESWORD);
 
                     }else{
 
@@ -1066,7 +1023,7 @@ public class LoginPresenterImplEn implements LoginContractEn.ILoginPresenterEn {
     private void startAutoLogin(final Activity activity, final String registPlatform, final String account, final String password) {
         isAutoLogin = true;
 
-        if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GAMA, registPlatform)) {
+        if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GAMESWORD, registPlatform)) {
 
             if (SStringUtil.hasEmpty(account, password)) {
 
@@ -1118,7 +1075,7 @@ public class LoginPresenterImplEn implements LoginContractEn.ILoginPresenterEn {
                         iLoginView.showAutoLoginWaitTime("(" + count +  ")");
                         if (count == 0){
 
-                            if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GAMA, registPlatform)) {//免注册或者平台用户自动登录
+                            if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GAMESWORD, registPlatform)) {//免注册或者平台用户自动登录
 //                                autoLogin22(mActivity, account, password);
 
                                 starpyAccountLogin(activity,account,password, true);

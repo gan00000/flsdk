@@ -108,7 +108,7 @@
                 android:background="@drawable/gama_term_rb_selector"
                 android:text="@string/en_gama_ui_term_port_term1"
                 android:textColor="@android:color/black"
-                android:textSize="10sp" />
+                android:textSize="@dimen/sp_15" />
 
             <RadioButton
                 android:id="@+id/gama_start_term_title2"
@@ -122,7 +122,7 @@
                 android:background="@drawable/gama_term_rb_selector"
                 android:text="@string/en_gama_ui_term_port_term2"
                 android:textColor="@android:color/black"
-                android:textSize="10sp" />
+                android:textSize="@dimen/sp_15" />
 
         </RadioGroup>
 
@@ -156,7 +156,7 @@
             android:layout_marginLeft="8dp"
             android:text="@string/en_gama_ui_term_port_read"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/sp_14"
+            android:textSize="@dimen/sp_16"
             android:maxLines="1"
             app:layout_constraintBottom_toBottomOf="@id/gama_gama_start_term_cb1"
             app:layout_constraintStart_toEndOf="@id/gama_gama_start_term_cb1"
@@ -172,10 +172,9 @@
             android:background="@drawable/gama_ui_shape_term_btn"
             android:text="@string/en_gama_ui_term_confirm"
             android:textColor="@android:color/black"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:textSize="@dimen/sp_22"
             app:layout_constraintDimensionRatio="5:1"
-            app:layout_constraintEnd_toEndOf="@id/gama_start_term_guideline10"
+            app:layout_constraintBottom_toBottomOf="@id/gama_start_term_guideline10"
             app:layout_constraintEnd_toStartOf="@id/gama_start_term_guideline8"
             app:layout_constraintStart_toStartOf="@id/gama_start_term_guideline7"
             app:layout_constraintTop_toTopOf="@id/gama_start_term_guideline9" />

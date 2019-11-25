@@ -80,6 +80,13 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.88"/>
 
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_start_term_guideline10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.98"/>
+
         <TextView
             android:id="@+id/gama_start_term_title"
             android:layout_width="0dp"
@@ -88,7 +95,7 @@
             android:background="@android:color/white"
             android:text="@string/gama_ui_term_title"
             android:textColor="@android:color/black"
-            android:textSize="15sp"
+            android:textSize="@dimen/sp_22"
             android:gravity="center"
             app:layout_constraintEnd_toStartOf="@id/gama_start_term_guideline7"
             app:layout_constraintStart_toStartOf="@id/gama_start_term_guideline6"
@@ -144,7 +151,7 @@
             android:layout_marginLeft="8dp"
             android:text="@string/gama_ui_term_read_land"
             android:textColor="@android:color/white"
-            android:textSize="13sp"
+            android:textSize="@dimen/sp_19"
             app:layout_constraintBottom_toBottomOf="@id/gama_gama_start_term_cb1"
             app:layout_constraintStart_toEndOf="@id/gama_gama_start_term_cb1"
             app:layout_constraintEnd_toEndOf="@id/gama_start_term_wv1"
@@ -170,7 +177,7 @@
             android:layout_marginLeft="8dp"
             android:text="@string/gama_ui_term_read_land"
             android:textColor="@android:color/white"
-            android:textSize="13sp"
+            android:textSize="@dimen/sp_19"
             app:layout_constraintBottom_toBottomOf="@id/gama_gama_start_term_cb2"
             app:layout_constraintStart_toEndOf="@id/gama_gama_start_term_cb2"
             app:layout_constraintEnd_toEndOf="@id/gama_start_term_wv2"
@@ -180,11 +187,11 @@
             android:id="@+id/gama_gama_start_term_confirm"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginBottom="8dp"
             android:background="@drawable/gama_ui_shape_term_btn"
             android:text="@string/gama_ui_term_confirm"
             android:textColor="@android:color/black"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:textSize="@dimen/sp_20"
+            app:layout_constraintBottom_toBottomOf="@id/gama_start_term_guideline10"
             app:layout_constraintDimensionRatio="5:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

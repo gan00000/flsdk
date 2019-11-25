@@ -3,9 +3,9 @@ package com.gama.base.bean;
 public class SLoginType {
 
 	/**
-	 * Gama登入
+	 * GS入
 	 */
-	public static final String LOGIN_TYPE_GAMA = "gamamobi";
+	public static final String LOGIN_TYPE_GAMESWORD = "gamesword";
 	/**
 	 * facebook登入
 	 */

@@ -1,43 +1,96 @@
 {
   "project_info": {
-    "project_number": "1078559891996",
-    "firebase_url": "https://gamesword-usbg.firebaseio.com",
-    "project_id": "gamesword-usbg",
-    "storage_bucket": "gamesword-usbg.appspot.com"
+    "project_number": "940230712302",
+    "firebase_url": "https://gottw-452ec.firebaseio.com",
+    "project_id": "gottw-452ec",
+    "storage_bucket": "gottw-452ec.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1078559891996:android:e4342c572ece2c070a75d9",
+        "mobilesdk_app_id": "1:940230712302:android:6381686a4399b161908cff",
         "android_client_info": {
-          "package_name": "com.gamesword.usbg"
+          "package_name": "com.gamesword.gotgl"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1078559891996-f2id6r5u9e3asepse5tmisgri5h39fjv.apps.googleusercontent.com",
+          "client_id": "940230712302-nesmrt20nmd4o3uet6f7uj63im9ote2c.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.gamesword.usbg",
-            "certificate_hash": "be19a356782a28530325fe15a75c9d6437c04dde"
+            "package_name": "com.gamesword.gotgl",
+            "certificate_hash": "f70eda06327547eaac632d14e9617217224420f2"
           }
         },
         {
-          "client_id": "1078559891996-elcc54qom3du59ok4bvmjnoup2nlmf2a.apps.googleusercontent.com",
+          "client_id": "940230712302-05f0ift6v4dfls81verl2t0ud3bn4i64.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC17twDI90yPSQrC9jI0g3AA60yHJHaz8g"
+          "current_key": "AIzaSyAv086W-dASSWxAGqySbp6iv-YfV41mCPg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1078559891996-elcc54qom3du59ok4bvmjnoup2nlmf2a.apps.googleusercontent.com",
+              "client_id": "940230712302-05f0ift6v4dfls81verl2t0ud3bn4i64.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "940230712302-2fchudtj5aq9935htjhcc88ksscj0kfe.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.yoozoo.got.gamaios",
+                "app_store_id": "1458315464"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:940230712302:android:e1032d26177cdf51",
+        "android_client_info": {
+          "package_name": "com.yoozoo.got.gama"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "940230712302-6pi9i3ue7k363ib6u771e1mf83dn71s7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yoozoo.got.gama",
+            "certificate_hash": "f70eda06327547eaac632d14e9617217224420f2"
+          }
+        },
+        {
+          "client_id": "940230712302-05f0ift6v4dfls81verl2t0ud3bn4i64.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAv086W-dASSWxAGqySbp6iv-YfV41mCPg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "940230712302-05f0ift6v4dfls81verl2t0ud3bn4i64.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "940230712302-2fchudtj5aq9935htjhcc88ksscj0kfe.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.yoozoo.got.gamaios",
+                "app_store_id": "1458315464"
+              }
             }
           ]
         }

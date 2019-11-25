@@ -60,8 +60,10 @@ public class ThirdPlatBindAccountLayoutV2En extends SLoginBaseRelativeLayoutEn i
         backView = contentView.findViewById(R.id.gama_head_iv_back);
 
         eyeImageView = contentView.findViewById(R.id.gama_bind_iv_eye);
-        registerPasswordEditText = contentView.findViewById(R.id.gama_bind_et_password);
         registerAccountEditText = contentView.findViewById(R.id.gama_bind_et_account);
+        registerPasswordEditText = contentView.findViewById(R.id.gama_bind_et_password);
+        registerPasswordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+
         gama_bind_et_vfcode = contentView.findViewById(R.id.gama_bind_et_vfcode);
 
         bindConfirm = contentView.findViewById(R.id.gama_bind_btn_confirm);
@@ -96,12 +98,12 @@ public class ThirdPlatBindAccountLayoutV2En extends SLoginBaseRelativeLayoutEn i
 
             if (eyeImageView.isSelected()) {
                 eyeImageView.setSelected(false);
-                // 显示为普通文本
-                registerPasswordEditText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-            } else {
-                eyeImageView.setSelected(true);
                 // 显示为密码
                 registerPasswordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            } else {
+                eyeImageView.setSelected(true);
+                // 显示为普通文本
+                registerPasswordEditText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
             }
             // 使光标始终在最后位置
             Editable etable = registerPasswordEditText.getText();

@@ -104,6 +104,8 @@ public class LoginContract {
          * 界面功能回调
          */
         void setOperationCallback(SBaseRelativeLayout.OperationCallback callback);
+
+        int getRemainTimeSeconds();
     }
 
 }

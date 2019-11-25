@@ -7,12 +7,14 @@ import android.text.InputType;
 import android.text.Selection;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
@@ -106,6 +108,17 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
 
         loginAccountEditText = contentView.findViewById(R.id.gama_login_et_account);
         loginPasswordEditText = contentView.findViewById(R.id.gama_login_et_password);
+        loginPasswordEditText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+
+        loginPasswordEditText.setOnFocusChangeListener(new OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus) {
+                    Log.i("login", "!hasFocus");
+                }
+            }
+        });
+
         gama_login_et_vfcode = contentView.findViewById(R.id.gama_login_et_vfcode);
 
         gama_login_iv_vfcode = contentView.findViewById(R.id.gama_login_iv_vfcode);
@@ -177,11 +190,12 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
                 if (eyeImageView.isSelected()) {
                     eyeImageView.setSelected(false);
                     // 显示为普通文本
-                    loginPasswordEditText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+
+                    loginPasswordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                 } else {
                     eyeImageView.setSelected(true);
                     // 显示为密码
-                    loginPasswordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    loginPasswordEditText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
                 }
                 // 使光标始终在最后位置
                 Editable etable = loginPasswordEditText.getText();
@@ -232,7 +246,7 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
         }
 
         if (!GamaUtil.checkAccount(account)) {
-            ToastUtils.toast(getActivity(), R.string.py_account_error);
+            ToastUtils.toast(getActivity(), errorStrAccount, Toast.LENGTH_LONG);
             return;
         }
 //        if (!GamaUtil.checkPassword(password)) {
@@ -240,10 +254,13 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
 //            return;
 //        }
 
-        String vfcode = gama_login_et_vfcode.getEditableText().toString().trim();
-        if(TextUtils.isEmpty(vfcode)) {
-            ToastUtils.toast(getActivity(), R.string.py_vfcode_empty);
-            return;
+        String vfcode = "";
+        if(GamaUtil.getVfcodeSwitchStatus(getContext())) { //开启验证码登入需要验证码
+            vfcode = gama_login_et_vfcode.getEditableText().toString().trim();
+            if (TextUtils.isEmpty(vfcode)) {
+                ToastUtils.toast(getActivity(), R.string.py_vfcode_empty);
+                return;
+            }
         }
 
         sLoginDialogv2.getLoginPresenter().starpyAccountLogin(sLoginDialogv2.getActivity(),account,password, vfcode, savePwdCheckBox.isSelected());

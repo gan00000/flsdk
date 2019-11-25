@@ -29,7 +29,7 @@ public class SBaseRelativeLayout extends RelativeLayout {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
-    public interface OperationCallback<T extends Object> {
+    public interface OperationCallback<T> {
         /**
          * 时间限制中
          */
@@ -38,8 +38,10 @@ public class SBaseRelativeLayout extends RelativeLayout {
          * 时间限制解除
          */
         int TIME_OUT = 1;
-        void statusCallback(int operation);
+        void statusCallback(int status);
 
         void dataCallback(T t);
+
+        void alertTime(int remainTimeSeconds);
     }
 }

@@ -57,8 +57,10 @@ public class AccountRegisterLayoutV2En extends SLoginBaseRelativeLayoutEn implem
         backView = contentView.findViewById(R.id.gama_head_iv_back);
 
         eyeImageView = contentView.findViewById(R.id.gama_register_iv_eye);
-        registerPasswordEditText = contentView.findViewById(R.id.gama_register_et_password);
         registerAccountEditText = contentView.findViewById(R.id.gama_register_et_account);
+        registerPasswordEditText = contentView.findViewById(R.id.gama_register_et_password);
+        registerPasswordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+
         gama_register_et_vfcode = contentView.findViewById(R.id.gama_register_et_vfcode);
 
         registerConfirm = contentView.findViewById(R.id.gama_register_btn_confirm);
@@ -94,12 +96,12 @@ public class AccountRegisterLayoutV2En extends SLoginBaseRelativeLayoutEn implem
 
             if (eyeImageView.isSelected()) {
                 eyeImageView.setSelected(false);
-                // 显示为普通文本
-                registerPasswordEditText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-            } else {
-                eyeImageView.setSelected(true);
                 // 显示为密码
                 registerPasswordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            } else {
+                eyeImageView.setSelected(true);
+                // 显示为普通文本
+                registerPasswordEditText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
             }
             // 使光标始终在最后位置
             Editable etable = registerPasswordEditText.getText();

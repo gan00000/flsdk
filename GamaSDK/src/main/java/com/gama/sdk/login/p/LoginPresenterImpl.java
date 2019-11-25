@@ -54,6 +54,8 @@ import com.google.gson.Gson;
 
 import org.json.JSONArray;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -81,7 +83,14 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     //获取验证码是否在一分钟时限内
     private boolean isTimeLimit = false;
 
+    /**
+     * 默认倒数时间
+     */
     private static final int TIME_OUT_SECONDS = 60;
+
+    /**
+     * 剩余倒数时间
+     */
     private int resetTime;
 
     //区域json
@@ -112,11 +121,15 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
     private Fragment fragment;
 
-    private SBaseRelativeLayout.OperationCallback callback;
+//    private SBaseRelativeLayout.OperationCallback callback;
+    private ArrayList<SBaseRelativeLayout.OperationCallback> callbackList = new ArrayList<>();
 
     @Override
     public void setOperationCallback(SBaseRelativeLayout.OperationCallback callback) {
-        this.callback = callback;
+//        this.callback = callback;
+        if(!callbackList.contains(callback)) {
+            callbackList.add(callback);
+        }
     }
 
     @Override
@@ -173,15 +186,15 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
         String previousLoginType = GamaUtil.getPreviousLoginType(activity);
 
-        if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GAMA, previousLoginType)) {//自動登錄
+        if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GAMESWORD, previousLoginType)) {//自動登錄
             String account = GamaUtil.getAccount(activity);
             String password = GamaUtil.getPassword(activity);
-            startAutoLogin(activity, SLoginType.LOGIN_TYPE_GAMA, account, password);
+            startAutoLogin(activity, SLoginType.LOGIN_TYPE_GAMESWORD, account, password);
 
         } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_MAC, previousLoginType)) {//自動登錄
             String account = GamaUtil.getMacAccount(activity);
             String password = GamaUtil.getMacPassword(activity);
-            startAutoLogin(activity, SLoginType.LOGIN_TYPE_GAMA, account, password);
+            startAutoLogin(activity, SLoginType.LOGIN_TYPE_GAMESWORD, account, password);
 
         } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_FB, previousLoginType)) {//自動登錄
             String fbScopeId = FbSp.getFbId(activity);
@@ -323,9 +336,14 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     public void getPhoneVfcode(Activity activity, String area, String phone, String interfaceName) {
         this.mActivity = activity;
         if(isTimeLimit) {
-            if(callback != null) {
-                ToastUtils.toast(getActivity(), String.format(getActivity().getResources().getString(R.string.py_time_limit), resetTime + ""));
-                callback.statusCallback(SBaseRelativeLayout.OperationCallback.TIME_LIMIT);
+//            if(callback != null) {
+//                ToastUtils.toast(getActivity(), String.format(getActivity().getResources().getString(R.string.py_time_limit), resetTime + ""));
+//                callback.statusCallback(SBaseRelativeLayout.OperationCallback.TIME_LIMIT);
+//            }
+            if(callbackList != null && callbackList.size() > 0) {
+                for(SBaseRelativeLayout.OperationCallback callback : callbackList) {
+                    callback.statusCallback(SBaseRelativeLayout.OperationCallback.TIME_LIMIT);
+                }
             }
             return;
         }
@@ -1004,7 +1022,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
                         GamaUtil.saveAccount(getContext(),account);
                         GamaUtil.savePassword(getContext(),password);
-                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GAMA);
+                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GAMESWORD);
 
                     }else{
 
@@ -1048,7 +1066,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
                         GamaUtil.saveAccount(getContext(),account);
                         GamaUtil.savePassword(getContext(),password);
-                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GAMA);
+                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GAMESWORD);
 
                     }else{
 
@@ -1096,8 +1114,13 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     String msg = sLoginResponse.getMessage();
                     if (!TextUtils.isEmpty(msg)) {
                         ToastUtils.toast(getActivity(), msg);
-                        if(callback != null) {
-                            callback.statusCallback(SBaseRelativeLayout.OperationCallback.TIME_LIMIT);
+//                        if(callback != null) {
+//                            callback.statusCallback(SBaseRelativeLayout.OperationCallback.TIME_LIMIT);
+//                        }
+                        if(callbackList != null && callbackList.size() > 0) {
+                            for(SBaseRelativeLayout.OperationCallback callback : callbackList) {
+                                callback.statusCallback(SBaseRelativeLayout.OperationCallback.TIME_LIMIT);
+                            }
                         }
                         startTimer();
                     }
@@ -1127,7 +1150,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     private void startAutoLogin(final Activity activity, final String registPlatform, final String account, final String password) {
         isAutoLogin = true;
 
-        if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GAMA, registPlatform)) {
+        if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GAMESWORD, registPlatform)) {
 
             if (SStringUtil.hasEmpty(account, password)) {
 
@@ -1179,7 +1202,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         iLoginView.showAutoLoginWaitTime("(" + count +  ")");
                         if (count == 0){
 
-                            if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GAMA, registPlatform)) {//免注册或者平台用户自动登录
+                            if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GAMESWORD, registPlatform)) {//免注册或者平台用户自动登录
 //                                autoLogin22(mActivity, account, password);
 
                                 starpyAccountLogin(activity,account,password, "", true);
@@ -1456,16 +1479,47 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         requestPhoneVfcodeTimer.cancel();
                         requestPhoneVfcodeTimer = null;
                     }
-                    if(callback != null) {
+//                    if(callback != null) {
+//                        getActivity().runOnUiThread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                callback.statusCallback(SBaseRelativeLayout.OperationCallback.TIME_OUT);
+//                            }
+//                        });
+//                    }
+                    if(callbackList != null && callbackList.size() > 0) {
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                callback.statusCallback(SBaseRelativeLayout.OperationCallback.TIME_OUT);
+                                for (SBaseRelativeLayout.OperationCallback callback : callbackList) {
+                                    callback.statusCallback(SBaseRelativeLayout.OperationCallback.TIME_OUT);
+                                }
                             }
                         });
                     }
+                    return;
                 }
-                resetTime--;
+//                if(callback != null) {
+//                    getActivity().runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            callback.alertTime(resetTime);
+//                        }
+//                    });
+//                }
+                if(callbackList != null && callbackList.size() > 0) {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            for (SBaseRelativeLayout.OperationCallback callback : callbackList) {
+                                callback.alertTime(resetTime);
+                            }
+                        }
+                    });
+                }
+                if(resetTime > 0) {
+                    resetTime--;
+                }
             }
         }, 300, 1000);
     }
@@ -1527,8 +1581,13 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         selectedBean = areaBeanList[which];
-                        if(callback != null) {
-                            callback.dataCallback(selectedBean);
+//                        if(callback != null) {
+//                            callback.dataCallback(selectedBean);
+//                        }
+                        if(callbackList != null && callbackList.size() > 0) {
+                            for (SBaseRelativeLayout.OperationCallback callback : callbackList) {
+                                callback.dataCallback(selectedBean);
+                            }
                         }
                     }
                 });
@@ -1558,7 +1617,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         } else {
                             GamaUtil.savePassword(getContext(), "");
                         }
-                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GAMA);
+                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GAMESWORD);
                     }else{
 
                         ToastUtils.toast(getActivity(),sLoginResponse.getMessage());
@@ -1642,4 +1701,10 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 //        cmd.excute(SLoginResponse.class);
 //
 //    }
+
+
+    @Override
+    public int getRemainTimeSeconds() {
+        return resetTime;
+    }
 }

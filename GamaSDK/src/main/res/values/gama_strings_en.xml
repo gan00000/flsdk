@@ -17,11 +17,10 @@
     <string name="en_py_register_account">Register</string>
     <string name="en_py_account_center">Member Center</string>
     <string name="en_py_account_input_vfcode">Please enter verification code here</string>
+    <string name="en_py_account_input_password">Please enter your password</string>
 
     <!--注册页面-->
     <string name="en_py_login_page_account_reg">Member Registration</string>
-    <string name="en_py_select_terms">Please confirm that you have read the Terms of Service</string>
-    <string name="en_py_register_account_terms">I have read and accept the Membership Terms and Regulations</string>
     <string name="en_py_register_account_phone">Please enter your phone number here</string>
     <string name="en_py_register_account_area">Area Code</string>
     <string name="en_py_register_account_get_vfcode">Retrieve verification code</string>
@@ -30,25 +29,15 @@
 
     <!--找回密码页面-->
     <string name="en_py_login_page_forgot_pwd">Forgot password</string>
-    <string name="en_py_send_new_pwd">Send new password</string>
-
-    <!--請輸入新密碼-->
-    <string name="en_py_input_new_pwd_hint">Please enter your password here </string>
-    <string name="en_py_send_new_password">Send</string>
-    <string name="en_py_input_new_password">Change password</string>
-    <string name="en_py_password_same">The two passwords need to be identical(Case Sensitive)</string>
 
     <!--会员中心页面-->
-    <string name="en_py_change_pwd">Change password</string>
     <string name="en_py_bind_unique">Link guest account</string>
     <string name="en_py_bind_fb">Link Facebook</string>
     <string name="en_py_bind_google">Link Google</string>
 
     <!--修改密码页面-->
     <string name="en_py_login_page_change_pwd">Change password</string>
-    <string name="en_py_account_hit">Account</string>
-    <string name="en_py_old_pwd">Old password</string>
-    <string name="en_py_new_pwd">New password</string>
+    <string name="en_py_input_old_password">Please enter your original password</string>
     <string name="en_py_old_equel_new_pwd">New password and old password may not be identical</string>
 
     <!--绑定账号页面（通用）-->
@@ -71,7 +60,6 @@
     <string name="en_py_vfcode_empty">Please enter the verification code received on your mobile.</string>
     <string name="en_py_area_code_empty">Please enter the area code</string>
     <string name="en_py_phone_error">Invalid phone number format</string>
-    <string name="en_py_time_limit">Please wait %s seconds</string>
 
     <!--自动登录-->
     <string name="en_py_auto_login_change">Switch account</string>
@@ -79,12 +67,15 @@
 
     <!--预设提示-->
     <string name="en_py_register_account_hit">6 to 18 letters or numbers</string>
+    <string name="en_py_register_password_hit">8 to 16 alphanumeric characters (case sensetive)</string>
     <string name="en_py_findpwd_email_hit">Email (required) - may be used to recover password</string>
     <string name="en_py_register_email_hit">Email (optional) - may be used to recover password</string>
     <string name="en_py_msg_vfcode_hint">Please enter the verification code received on email</string>
 
     <!--通用文本-->
     <string name="en_py_confire">Confirm</string>
+    <string name="en_py_default_area_num">886</string>
+    <string name="en_py_default_area_num_pattern">^0{0,1}[6,7,9](?:\\d{7}|\\d{8}|\\d{10})$</string>
 
     <!--SDK功能提示-->
     <string name="en_gama_toast_msg_app_not_install" translatable="false">Please install the %s app in order to continue sharing</string>
@@ -103,20 +94,7 @@
     <string name="en_py_bind_twitter" translatable="false">Link Twitter</string>
     <string name="en_py_login_guset" translatable="false">遊客登入</string>
 
-    <!--未使用-->
-    <string name="en_py_login_success">Logged in successfully</string>
-    <string name="en_py_pay_title">Purchase</string>
-    <string name="en_py_login_autologin_fblogining_tips">Logging into Facebook account…</string>
+    <!--有使用 不确定用途-->
     <string name="en_py_account_login">Account Login</string>
-    <string name="en_py_account">Account:</string>
-    <string name="en_py_password">Password:</string>
-    <string name="en_py_password_hit">Password</string>
-    <string name="en_py_login">Login</string>
-    <string name="en_py_login_fb">Log in with Facebook</string>
-    <string name="en_py_login_star">Log in with GameSword</string>
-    <string name="en_py_login_mac">Log in as Guest</string>
-    <string name="en_py_bind_phone_area_num">+86</string>
-    <string name="en_py_free_reg">Guest Login</string>
-
 
 </resources>

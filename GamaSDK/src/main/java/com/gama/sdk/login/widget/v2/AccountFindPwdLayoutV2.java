@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.core.base.utils.ToastUtils;
 import com.gama.base.bean.GamaAreaInfoBean;
@@ -68,6 +69,7 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
         findPwdConfireBtn.setOnClickListener(this);
         gama_find_tv_area.setOnClickListener(this);
 
+        setDefaultAreaInfo();
         return contentView;
     }
 
@@ -100,7 +102,7 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
         } else if (v == backView) {//返回键
             sLoginDialogv2.toAccountLoginView();
         } else if (v == gama_find_tv_area) {
-            sLoginDialogv2.getLoginPresenter().setOperationCallback(this);
+//            sLoginDialogv2.getLoginPresenter().setOperationCallback(this);
             getAndShowArea();
         }
 
@@ -125,7 +127,7 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
 //        }
 
         if (!GamaUtil.checkAccount(account)) {
-            ToastUtils.toast(getActivity(), R.string.py_account_error);
+            ToastUtils.toast(getActivity(), errorStrAccount, Toast.LENGTH_LONG);
             return;
         }
 //        if (!Validator.isEmail(email)) {
@@ -160,5 +162,22 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
             String text = selectedBean.getValue();
             gama_find_tv_area.setText(text);
         }
+    }
+
+    @Override
+    public void alertTime(int remainTimeSeconds) {
+
+    }
+
+    @Override
+    protected void doSomething() {
+        super.doSomething();
+        sLoginDialogv2.getLoginPresenter().setOperationCallback(this);
+    }
+
+    private void setDefaultAreaInfo() {
+        selectedBean = new GamaAreaInfoBean();
+        selectedBean.setValue(getResources().getString(R.string.py_default_area_num));
+        selectedBean.setPattern(getResources().getString(R.string.py_default_area_num_pattern));
     }
 }

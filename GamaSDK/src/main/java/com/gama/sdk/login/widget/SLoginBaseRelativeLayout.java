@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gama.base.utils.Localization;
+import com.gama.sdk.R;
 import com.gama.sdk.SBaseRelativeLayout;
 import com.gama.sdk.login.SLoginDialogV2;
 
@@ -28,6 +29,10 @@ public abstract class SLoginBaseRelativeLayout extends SBaseRelativeLayout {
     protected View backView;
     protected TextView titleTextView;
     public int from;
+
+    protected int remainTimeSeconds;
+
+    protected String errorStrAccount, errorStrPassword;
 
     public SLoginBaseRelativeLayout(Context context) {
         super(context);
@@ -68,6 +73,14 @@ public abstract class SLoginBaseRelativeLayout extends SBaseRelativeLayout {
             l.addRule(RelativeLayout.CENTER_IN_PARENT);
             addView(contentView, l);
         }
+
+        String accountError1 = getActivity().getResources().getString(R.string.py_account_error) + ":";
+        String accountError2 = getActivity().getResources().getString(R.string.py_register_account_hit);
+        errorStrAccount = accountError1 + accountError2;
+
+        String passwordError1 = getActivity().getResources().getString(R.string.py_password_error) + ":";
+        String passwordError2 = getActivity().getResources().getString(R.string.py_register_password_hit);
+        errorStrPassword = passwordError1 + passwordError2;
     }
 
     protected Context getActivity() {
@@ -78,6 +91,7 @@ public abstract class SLoginBaseRelativeLayout extends SBaseRelativeLayout {
 
     public void setLoginDialogV2(SLoginDialogV2 sLoginDialog) {
         this.sLoginDialogv2 = sLoginDialog;
+        doSomething();
     }
 
     /**
@@ -86,4 +100,7 @@ public abstract class SLoginBaseRelativeLayout extends SBaseRelativeLayout {
     public View getBackView() {
         return backView;
     }
+
+    protected void doSomething() {}
+
 }

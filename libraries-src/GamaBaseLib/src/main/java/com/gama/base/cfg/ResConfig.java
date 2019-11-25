@@ -363,4 +363,8 @@ public class ResConfig {
         return properties.getProperty(key, "");
     }
 
+    public static String getStringWithLocal(Context context, String xmlSchemaName) {
+        String localSchemaName = getLocalSchemaName(context, xmlSchemaName);
+        return getResStringByName(context, localSchemaName);
+    }
 }

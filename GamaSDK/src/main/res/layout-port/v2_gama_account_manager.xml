@@ -97,7 +97,7 @@
             android:layout_height="wrap_content"
             android:text="@string/py_login_page_account_link"
             android:textColor="@color/gama_color_ui_head_title"
-            android:textSize="18sp"
+            android:textSize="@dimen/sp_27"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/gama_manager_guideline_guest_top"
             app:layout_constraintEnd_toEndOf="parent"
