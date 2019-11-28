@@ -88,7 +88,7 @@ public class PyAccountLoginV2En extends SLoginBaseRelativeLayoutEn {
         loginAccountEditText = contentView.findViewById(R.id.gama_login_et_account);
 
         loginPasswordEditText = contentView.findViewById(R.id.gama_login_et_password);
-        loginPasswordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        loginPasswordEditText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
 
         loginMainLoginBtn = contentView.findViewById(R.id.gama_login_btn_confirm);
 
@@ -151,7 +151,7 @@ public class PyAccountLoginV2En extends SLoginBaseRelativeLayoutEn {
                 if (eyeImageView.isSelected()) {
                     eyeImageView.setSelected(false);
                     // 显示为密码
-                    loginPasswordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    loginPasswordEditText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
                 } else {
                     eyeImageView.setSelected(true);
                     // 显示为普通文本

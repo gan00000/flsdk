@@ -63,8 +63,8 @@ public class AccountChangePwdLayoutV2En extends SLoginBaseRelativeLayoutEn imple
         changePwdOldEditText = contentView.findViewById(R.id.gama_change_et_password);
         changePwdNewEditText = contentView.findViewById(R.id.gama_change_et_password2);
 
-        changePwdOldEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-        changePwdNewEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        changePwdOldEditText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        changePwdNewEditText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
 
         gama_change_iv_eye = contentView.findViewById(R.id.gama_change_iv_eye);
         gama_change_iv_eye2 = contentView.findViewById(R.id.gama_change_iv_eye2);
@@ -111,7 +111,7 @@ public class AccountChangePwdLayoutV2En extends SLoginBaseRelativeLayoutEn imple
            if (gama_change_iv_eye.isSelected()) {
                gama_change_iv_eye.setSelected(false);
                // 显示为密码
-               changePwdOldEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+               changePwdOldEditText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
            } else {
                gama_change_iv_eye.setSelected(true);
                // 显示为普通文本
@@ -124,7 +124,7 @@ public class AccountChangePwdLayoutV2En extends SLoginBaseRelativeLayoutEn imple
            if (gama_change_iv_eye2.isSelected()) {
                gama_change_iv_eye2.setSelected(false);
                // 显示为密码
-               changePwdNewEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+               changePwdNewEditText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
            } else {
                gama_change_iv_eye2.setSelected(true);
                // 显示为普通文本

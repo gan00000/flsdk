@@ -37,6 +37,10 @@ public class LoginContract {
         void accountBindSuccess(SLoginResponse sLoginResponse);
 
         void showMainLoginView();
+
+        void showPhoneVerifyView(String loginType, String thirdId);
+
+        void showBindView(int fromPage);
     }
 
     /**
@@ -99,6 +103,11 @@ public class LoginContract {
          * 获取区码
          */
         void getAreaInfo(Activity activity);
+
+        /**
+         * 手机验证
+         */
+        void phoneVerify(Activity activity, String area, String phone, String vfCode, String thirdId, String loginType);
 
         /**
          * 界面功能回调

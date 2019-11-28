@@ -60,7 +60,7 @@ public class AccountRegisterLayoutV2En extends SLoginBaseRelativeLayoutEn implem
         eyeImageView = contentView.findViewById(R.id.gama_register_iv_eye);
         registerAccountEditText = contentView.findViewById(R.id.gama_register_et_account);
         registerPasswordEditText = contentView.findViewById(R.id.gama_register_et_password);
-        registerPasswordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        registerPasswordEditText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
 
         gama_register_et_vfcode = contentView.findViewById(R.id.gama_register_et_vfcode);
 
@@ -98,7 +98,7 @@ public class AccountRegisterLayoutV2En extends SLoginBaseRelativeLayoutEn implem
             if (eyeImageView.isSelected()) {
                 eyeImageView.setSelected(false);
                 // 显示为密码
-                registerPasswordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                registerPasswordEditText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
             } else {
                 eyeImageView.setSelected(true);
                 // 显示为普通文本

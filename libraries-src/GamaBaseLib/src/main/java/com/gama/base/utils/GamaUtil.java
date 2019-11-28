@@ -721,4 +721,16 @@ public class GamaUtil {
         }
         return true;
     }
+
+//    private static final String GAMA_MAC_LOGIN_COUNT = "GAMA_VFCGAMA_MAC_LOGIN_COUNTODE_SWITCH_STATUS";
+//    public static void saveMacLoginCount(Context context){
+//        int macLoginCount = getMacLoginCount(context) + 1;
+//        SPUtil.saveSimpleInfo(context, GamaUtil.GAMA_SP_FILE,GAMA_MAC_LOGIN_COUNT, macLoginCount);
+//    }
+//    /**
+//     * 获取免注册登入次数
+//     */
+//    public static int getMacLoginCount(Context context){
+//        return SPUtil.getSimpleInteger(context, GamaUtil.GAMA_SP_FILE, GAMA_MAC_LOGIN_COUNT);
+//    }
 }

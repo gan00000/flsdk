@@ -40,6 +40,11 @@
     <string name="py_input_old_password">請輸入舊密碼</string>
     <string name="py_old_equel_new_pwd">新密碼與舊密碼不能一致</string>
 
+    <!--会员验证页-->
+    <string name="py_verify_title">驗證會員帳號</string>
+    <string name="py_verify_subtitle">(Facebook、Google帳號驗證)</string>
+    <string name="py_verify_confirm">驗證登入</string>
+
     <!--绑定账号页面（通用）-->
     <string name="py_login_page_account_bind">綁定會員帳號</string>
     <string name="py_btn_bind">綁定會員</string>
@@ -76,6 +81,11 @@
     <string name="py_confire">確認</string>
     <string name="py_default_area_num">886</string>
     <string name="py_default_area_num_pattern">^0{0,1}[6,7,9](?:\\d{7}|\\d{8}|\\d{10})$</string>
+    <string name="py_mac_login_limit_hint1">提醒您，您的帳號尚未綁定，請立即進行綁定以確保帳戶權益</string>
+    <string name="py_mac_login_limit_hint2">您的帳號尚未綁定，請進行綁定後才可進行其他服務</string>
+    <string name="py_mac_login_limit_hint_continue">繼續登入</string>
+    <string name="py_mac_login_limit_hint_bind_now">馬上綁定</string>
+    <string name="py_mac_login_limit_hint_bind_now2">立即綁定</string>
 
     <!--SDK功能提示-->
     <string name="gama_toast_msg_app_not_install" translatable="false">由於您沒有安裝%s，請先裝APP後再進行分享</string>

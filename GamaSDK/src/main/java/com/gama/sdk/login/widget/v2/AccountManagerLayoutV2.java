@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.gama.base.utils.GamaUtil;
+import com.gama.data.login.constant.GSLoginCommonConstant;
 import com.gama.sdk.R;
 import com.gama.sdk.login.widget.SLoginBaseRelativeLayout;
 
@@ -99,7 +100,7 @@ public class AccountManagerLayoutV2 extends SLoginBaseRelativeLayout implements 
 //        } else
         if (v == uniqueRegBindBtn) {
 
-            sLoginDialogv2.toBindUniqueView();
+            sLoginDialogv2.toBindUniqueView(GSLoginCommonConstant.GsLoginUiPageNumber.GS_PAGE_BIND);
 
         } else if (v == fbRegBindBtn) {
             sLoginDialogv2.toBindFbView();

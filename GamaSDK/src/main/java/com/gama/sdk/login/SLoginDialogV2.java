@@ -24,7 +24,7 @@ import com.gama.sdk.login.widget.v2.AccountChangePwdLayoutV2;
 import com.gama.sdk.login.widget.v2.AccountFindPwdLayoutV2;
 import com.gama.sdk.login.widget.v2.AccountManagerLayoutV2;
 import com.gama.sdk.login.widget.v2.AccountRegisterLayoutV2;
-import com.gama.sdk.login.widget.v2.AccountRegisterTermsLayoutV2;
+import com.gama.sdk.login.widget.v2.PhoneVerifyLayoutV2;
 import com.gama.sdk.login.widget.v2.PyAccountLoginV2;
 import com.gama.sdk.login.widget.v2.ThirdPlatBindAccountLayoutV2;
 import com.gama.sdk.login.widget.v2.XMMainLoginLayoutV2;
@@ -68,6 +68,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
     private SLoginBaseRelativeLayout bindTwitterView;
     private SLoginBaseRelativeLayout injectionView;
     private SLoginBaseRelativeLayout accountManagerCenterView;
+    private SLoginBaseRelativeLayout phoneVerifyView;
 
     private List<SLoginBaseRelativeLayout> viewPageList;
 
@@ -297,28 +298,29 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
             }
         }
     }
-    public void toRegisterTermsView(int from) {
 
-        if (registerTermsView == null || !viewPageList.contains(registerTermsView)){
-            registerTermsView = new AccountRegisterTermsLayoutV2(context);
-            registerTermsView.setLoginDialogV2(this);
-            contentFrameLayout.addView(registerTermsView);
-            viewPageList.add(registerTermsView);
-        }
-        registerTermsView.from = from;
-        for (View childView : viewPageList) {
-
-            if (childView == null){
-                continue;
-            }
-
-            if (childView == registerTermsView){
-                childView.setVisibility(View.VISIBLE);
-            }else{
-                childView.setVisibility(View.GONE);
-            }
-        }
-    }
+//    public void toRegisterTermsView(int from) {
+//
+//        if (registerTermsView == null || !viewPageList.contains(registerTermsView)){
+//            registerTermsView = new AccountRegisterTermsLayoutV2(context);
+//            registerTermsView.setLoginDialogV2(this);
+//            contentFrameLayout.addView(registerTermsView);
+//            viewPageList.add(registerTermsView);
+//        }
+//        registerTermsView.from = from;
+//        for (View childView : viewPageList) {
+//
+//            if (childView == null){
+//                continue;
+//            }
+//
+//            if (childView == registerTermsView){
+//                childView.setVisibility(View.VISIBLE);
+//            }else{
+//                childView.setVisibility(View.GONE);
+//            }
+//        }
+//    }
 
     public void toChangePwdView() {
 
@@ -381,7 +383,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
     }
 
 
-    public void toBindUniqueView() {
+    public void toBindUniqueView(int fromPage) {
 
         if (bindUniqueView == null || !viewPageList.contains(bindUniqueView)){
 //            SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
@@ -391,13 +393,14 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 //            } else {
                 bindUniqueView = new ThirdPlatBindAccountLayoutV2(context);
                 ((ThirdPlatBindAccountLayoutV2)bindUniqueView).setBindTpye(SLoginType.bind_unique);
+
 //            }
 
             bindUniqueView.setLoginDialogV2(this);
             contentFrameLayout.addView(bindUniqueView);
             viewPageList.add(bindUniqueView);
         }
-
+        ((ThirdPlatBindAccountLayoutV2)bindUniqueView).setFromPage(fromPage);
         for (View childView : viewPageList) {
 
             if (childView == null){
@@ -587,6 +590,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
         toMainLoginView();
     }
 
+
     @Override
     public void changePwdSuccess(SLoginResponse sLoginResponse) {
         toAccountLoginView();
@@ -642,5 +646,36 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
         if(sGoogleSignIn != null) {
             sGoogleSignIn.handleActivityDestroy(this.getContext());
         }
+    }
+
+    @Override
+    public void showPhoneVerifyView(String loginType, String thirdId) {
+        if (phoneVerifyView == null || !viewPageList.contains(phoneVerifyView)){
+            phoneVerifyView = new PhoneVerifyLayoutV2(context);
+            ((PhoneVerifyLayoutV2)phoneVerifyView).setLoginTpye(loginType);
+            ((PhoneVerifyLayoutV2)phoneVerifyView).setThirdId(thirdId);
+
+            phoneVerifyView.setLoginDialogV2(this);
+            contentFrameLayout.addView(phoneVerifyView);
+            viewPageList.add(phoneVerifyView);
+        }
+
+        for (View childView : viewPageList) {
+
+            if (childView == null){
+                continue;
+            }
+
+            if (childView == phoneVerifyView){
+                childView.setVisibility(View.VISIBLE);
+            }else{
+                childView.setVisibility(View.GONE);
+            }
+        }
+    }
+
+    @Override
+    public void showBindView(int fromPage) {
+        toBindUniqueView(fromPage);
     }
 }

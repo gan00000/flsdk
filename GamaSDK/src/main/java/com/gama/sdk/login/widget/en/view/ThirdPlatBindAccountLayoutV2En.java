@@ -63,7 +63,7 @@ public class ThirdPlatBindAccountLayoutV2En extends SLoginBaseRelativeLayoutEn i
         eyeImageView = contentView.findViewById(R.id.gama_bind_iv_eye);
         registerAccountEditText = contentView.findViewById(R.id.gama_bind_et_account);
         registerPasswordEditText = contentView.findViewById(R.id.gama_bind_et_password);
-        registerPasswordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        registerPasswordEditText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
 
         gama_bind_et_vfcode = contentView.findViewById(R.id.gama_bind_et_vfcode);
 
@@ -100,7 +100,7 @@ public class ThirdPlatBindAccountLayoutV2En extends SLoginBaseRelativeLayoutEn i
             if (eyeImageView.isSelected()) {
                 eyeImageView.setSelected(false);
                 // 显示为密码
-                registerPasswordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                registerPasswordEditText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
             } else {
                 eyeImageView.setSelected(true);
                 // 显示为普通文本

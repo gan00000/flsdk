@@ -4,10 +4,7 @@ import android.content.Context;
 
 import com.core.base.bean.BaseReqeustBean;
 import com.core.base.utils.SStringUtil;
-import com.gama.base.cfg.ResConfig;
-import com.gama.base.utils.GamaUtil;
 import com.gama.data.login.constant.GSRequestMethod;
-import com.gama.data.login.request.AccountLoginRequestBean;
 import com.gama.data.login.request.PhoneVfcodeRequestBean;
 
 public class PhoneVfcodeRequestTask extends BaseLoginRequestTask {
@@ -19,7 +16,7 @@ public class PhoneVfcodeRequestTask extends BaseLoginRequestTask {
 	 * @param mContext
 	 * @param areaCode
 	 * @param phone
-	 * @param interfaceName 用到的接口名称，注册：1，绑定：2
+	 * @param interfaceName 用到的接口名称，注册：1，绑定：2，手机验证：3 {@link com.gama.data.login.constant.GSRequestMethod.RequestVfcodeInterface}
 	 */
 	public PhoneVfcodeRequestTask(Context mContext, String areaCode, String phone, String interfaceName) {
 		super(mContext);

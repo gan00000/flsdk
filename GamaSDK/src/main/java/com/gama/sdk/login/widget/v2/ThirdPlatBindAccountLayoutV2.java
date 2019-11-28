@@ -18,6 +18,7 @@ import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
 import com.gama.base.bean.GamaAreaInfoBean;
 import com.gama.base.utils.GamaUtil;
+import com.gama.data.login.constant.GSLoginCommonConstant;
 import com.gama.data.login.constant.GSRequestMethod;
 import com.gama.sdk.R;
 import com.gama.sdk.SBaseRelativeLayout;
@@ -44,6 +45,7 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
     private String password;
 
     private int bindTpye = 0;
+    private int fromPage = 0;
 
     //选中的区域信息
     private GamaAreaInfoBean selectedBean;
@@ -111,8 +113,11 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
             accountBind();
 
         } else if (v == backView) {//返回键
-
-            sLoginDialogv2.toAccountManagerCenter();
+            if (fromPage == GSLoginCommonConstant.GsLoginUiPageNumber.GS_PAGE_MAIN) {
+                sLoginDialogv2.toMainLoginView();
+            } else {
+                sLoginDialogv2.toAccountManagerCenter();
+            }
 
         } else if (v == eyeImageView) {//密码眼睛
 
@@ -201,6 +206,10 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
 
     public void setBindTpye(int bindTpye) {
         this.bindTpye = bindTpye;
+    }
+
+    public void setFromPage(int fromPage) {
+        this.fromPage = fromPage;
     }
 
     private void getAndShowArea() {

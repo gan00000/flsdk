@@ -402,6 +402,9 @@ android {
             versionCode 1
             versionName "1.0"
             flavorDimensions "1"
+
+            resValue "string", "scheme", "gotgl"
+
             resValue "string", "facebook_app_id", "2187420264887772"
             resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider2187420264887772"
             resValue "string", "fb_login_protocol_scheme", "fb2187420264887772"
@@ -416,7 +419,6 @@ android {
                             "\"com.gamesword.gotgl.1usd\"," +
                             "\"com.ezfy.100usd\"," +
                             "}"
-
         }
 
 //        twgoogle {
@@ -426,6 +428,9 @@ android {
 //            versionCode 1
 //            versionName "1.0"
 //            flavorDimensions "1"
+//
+//            resValue "string", "scheme", "usbg"
+//
 //            resValue "string", "facebook_app_id", "480070166148561"
 //            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider480070166148561"
 //            resValue "string", "fb_login_protocol_scheme", "fb480070166148561"

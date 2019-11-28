@@ -168,6 +168,7 @@ public class BaseMainActivity extends Activity {
                                     + "accessToken : " + sLoginResponse.getAccessToken() + "\n"
                                     + "iconUri : " + sLoginResponse.getIconUri() + "\n"
                                     + "ip : " + sLoginResponse.getGmbPlayerIp() + "\n"
+                                    + "code : " + sLoginResponse.getCode() + "\n"
                                     + "timeStamp : " + sLoginResponse.getTimestamp() + "\n";
                             AlertDialog.Builder builder;
                             if (Build.VERSION.SDK_INT >= 21) {

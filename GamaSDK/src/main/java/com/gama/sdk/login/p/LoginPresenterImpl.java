@@ -26,6 +26,7 @@ import com.gama.base.bean.SLoginType;
 import com.gama.base.cfg.ResConfig;
 import com.gama.base.excute.GamaAreaInfoRequestTask;
 import com.gama.base.utils.GamaUtil;
+import com.gama.data.login.constant.GSLoginCommonConstant;
 import com.gama.data.login.constant.GSRequestMethod;
 import com.gama.data.login.execute.AccountInjectionRequestTask;
 import com.gama.data.login.execute.AccountLoginRequestTask;
@@ -33,6 +34,7 @@ import com.gama.data.login.execute.AccountRegisterRequestTask;
 import com.gama.data.login.execute.ChangePwdRequestTask;
 import com.gama.data.login.execute.FindPwdRequestTask;
 import com.gama.data.login.execute.MacLoginRegRequestTask;
+import com.gama.data.login.execute.PhoneVerifyRequestTask;
 import com.gama.data.login.execute.PhoneVfcodeRequestTask;
 import com.gama.data.login.execute.ThirdAccountBindRequestTask;
 import com.gama.data.login.execute.ThirdLoginRegRequestTask;
@@ -162,7 +164,6 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         thirdLoginRegRequestBean.setRegistPlatform(SLoginType.LOGIN_TYPE_TWITTER);
                         thirdLoginRegRequestBean.setGoogleClientId(ResConfig.getGoogleClientId(activity));
                         thirdLoginRegRequestBean.setGoogleIdToken(idTokenString);
-
                         thirdPlatLogin(activity, thirdLoginRegRequestBean);
                     }
                 }
@@ -191,11 +192,11 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             String password = GamaUtil.getPassword(activity);
             startAutoLogin(activity, SLoginType.LOGIN_TYPE_GAMESWORD, account, password);
 
-        } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_MAC, previousLoginType)) {//自動登錄
-            String account = GamaUtil.getMacAccount(activity);
-            String password = GamaUtil.getMacPassword(activity);
-            startAutoLogin(activity, SLoginType.LOGIN_TYPE_GAMESWORD, account, password);
-
+        } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_MAC, previousLoginType)) {//免注册没有自動登錄
+//            String account = GamaUtil.getMacAccount(activity);
+//            String password = GamaUtil.getMacPassword(activity);
+//            startAutoLogin(activity, SLoginType.LOGIN_TYPE_GAMESWORD, account, password);
+            showLoginView();
         } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_FB, previousLoginType)) {//自動登錄
             String fbScopeId = FbSp.getFbId(activity);
             if (TextUtils.isEmpty(fbScopeId)){
@@ -217,12 +218,6 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         PL.i("fb keyhash:" + SignatureUtil.getHashKey(activity, activity.getPackageName()));
 
     }
-
-//    @Override
-//    public void starpyAccountLogin(Activity activity, String account, String pwd) {
-//        this.mActivity = activity;
-//        login(activity, account, pwd);
-//    }
 
     @Override
     public void fbLogin(Activity activity) {
@@ -255,7 +250,6 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     thirdLoginRegRequestBean.setRegistPlatform(SLoginType.LOGIN_TYPE_GOOGLE);
                     thirdLoginRegRequestBean.setGoogleClientId(ResConfig.getGoogleClientId(activity));
                     thirdLoginRegRequestBean.setGoogleIdToken(idTokenString);
-
                     thirdPlatLogin(activity, thirdLoginRegRequestBean);
                 }
             }
@@ -270,7 +264,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
     //目前Google登录使用到，fb登录没有使用
     @Override
-    public void thirdPlatLogin(Activity activity, final ThirdLoginRegRequestBean thirdLoginRegRequestBean) {
+    public void thirdPlatLogin(final Activity activity, final ThirdLoginRegRequestBean thirdLoginRegRequestBean) {
         this.mActivity = activity;
 
         ThirdLoginRegRequestTask cmd = new ThirdLoginRegRequestTask(getActivity(),
@@ -285,8 +279,15 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     if (sLoginResponse.isRequestSuccess()){
                         handleRegisteOrLoginSuccess(sLoginResponse,rawResult, thirdLoginRegRequestBean.getRegistPlatform());
                         return;
-                    }else{
-
+                    } else if ("9000".equals(sLoginResponse.getCode())) { //需要验证手机
+                        ToastUtils.toast(getActivity(), sLoginResponse.getMessage());
+                        if (isAutoLogin) {
+                            //如果是从自动登入过来的，就要先隐藏自动登入界面，显示登入主界面
+                            showMainLoginView();
+                        }
+                        showPhoneVerifyView(thirdLoginRegRequestBean.getRegistPlatform(), thirdLoginRegRequestBean.getThirdPlatId());
+                        return;
+                    } else {
                         ToastUtils.toast(getActivity(), sLoginResponse.getMessage());
                     }
                 } else {
@@ -315,16 +316,11 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     }
 
     @Override
-    public void macLogin(Activity activity) {
+    public void macLogin(final Activity activity) {
         this.mActivity = activity;
         mMacLogin(activity);
     }
 
-//    @Override
-//    public void register(Activity activity, String account, String pwd, String email) {
-//        this.mActivity = activity;
-//        registerAccout(activity, account, pwd, email);
-//    }
 
     @Override
     public void register(Activity activity, String account, String pwd, String areaCode, String phone, String vfcode) {
@@ -336,10 +332,6 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     public void getPhoneVfcode(Activity activity, String area, String phone, String interfaceName) {
         this.mActivity = activity;
         if(isTimeLimit) {
-//            if(callback != null) {
-//                ToastUtils.toast(getActivity(), String.format(getActivity().getResources().getString(R.string.py_time_limit), resetTime + ""));
-//                callback.statusCallback(SBaseRelativeLayout.OperationCallback.TIME_LIMIT);
-//            }
             if(callbackList != null && callbackList.size() > 0) {
                 for(SBaseRelativeLayout.OperationCallback callback : callbackList) {
                     callback.statusCallback(SBaseRelativeLayout.OperationCallback.TIME_LIMIT);
@@ -445,224 +437,6 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
     }
 
-//    @Override
-//    public void findPwd(Activity activity, String account, String email) {
-//        this.mActivity = activity;
-//        FindPwdRequestTask findPwdRequestTask = new FindPwdRequestTask(getActivity(), account, email);
-//        findPwdRequestTask.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(), "Loading..."));
-//        findPwdRequestTask.setReqCallBack(new ISReqCallBack<SLoginResponse>() {
-//            @Override
-//            public void success(SLoginResponse sLoginResponse, String rawResult) {
-//                if (sLoginResponse != null) {
-//                    if (sLoginResponse.isRequestSuccess()) {
-//                        ToastUtils.toast(getActivity(), R.string.py_findpwd_success);
-//
-////                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GAMA);
-//                        if (iLoginView != null){
-//                            iLoginView.findPwdSuccess(sLoginResponse);
-//                        }
-//                    }else{
-//
-//                        ToastUtils.toast(getActivity(), sLoginResponse.getMessage());
-//                    }
-//
-//                } else {
-//                    ToastUtils.toast(getActivity(), R.string.py_error_occur);
-//                }
-//            }
-//
-//            @Override
-//            public void timeout(String code) {
-//
-//            }
-//
-//            @Override
-//            public void noData() {
-//
-//            }
-//
-//            @Override
-//            public void cancel() {
-//
-//            }
-//        });
-//        findPwdRequestTask.excute(SLoginResponse.class);
-//    }
-
-
-//    @Override
-//    public void accountBind(Activity activity, final String account, final String pwd, final String email, int bindType) {
-//        this.mActivity = activity;
-//        if (bindType == SLoginType.bind_unique){
-//            String uniqueId = GamaUtil.getCustomizedUniqueId1AndroidId1Adid(activity);
-//            if(TextUtils.isEmpty(uniqueId)){
-//                PL.d("thirdPlatId:" + uniqueId);
-//                return;
-//            }
-//            ThirdAccountBindRequestTask bindRequestTask = new ThirdAccountBindRequestTask(getActivity(),
-//                    SLoginType.LOGIN_TYPE_UNIQUE,
-//                    account,
-//                    pwd,
-//                    email,
-//                    uniqueId,
-//                    GSRequestMethod.GSRequestType.GAMAMOBI);
-//            sAccountBind(bindRequestTask);
-//
-//        }else if (bindType == SLoginType.bind_fb){
-//            sFbLogin(activity, sFacebookProxy, new FbLoginCallBack() {
-//                @Override
-//                public void loginSuccess(FaceBookUser user) {
-//                    ThirdAccountBindRequestTask bindRequestTask = new ThirdAccountBindRequestTask(getActivity(),
-//                            account,
-//                            pwd,
-//                            email,
-//                            user.getUserFbId(),
-//                            user.getBusinessId(),
-//                            user.getAccessTokenString(),
-//                            "",
-//                            GSRequestMethod.GSRequestType.GAMAMOBI);
-//                    sAccountBind(bindRequestTask);
-//                }
-//            });
-//
-//        }else  if (bindType == SLoginType.bind_google){//Google绑定
-//            if (sGoogleSignIn == null){
-//                return;
-//            }
-//            final String googleClientId = ResConfig.getGoogleClientId(activity);
-//            sGoogleSignIn.setClientId(googleClientId);
-//            sGoogleSignIn.startSignIn(new SGoogleSignIn.GoogleSignInCallBack() {
-//                @Override
-//                public void success(String id, String mFullName, String mEmail,String idTokenString) {
-//                    PL.i("google sign in : " + id);
-//                    if (SStringUtil.isNotEmpty(id)) {
-//                        ThirdAccountBindRequestTask bindGoogleRequestTask = new ThirdAccountBindRequestTask(getActivity(),
-//                                account,
-//                                pwd,
-//                                email,
-//                                id,
-//                                idTokenString,
-//                                googleClientId,
-//                                GSRequestMethod.GSRequestType.GAMAMOBI);
-//                        sAccountBind(bindGoogleRequestTask);
-//                    }
-//                }
-//
-//                @Override
-//                public void failure() {
-//                    ToastUtils.toast(getActivity(),"Google sign in error");
-//                    PL.i("google sign in failure");
-//                }
-//            });
-//        } else if(bindType == SLoginType.bind_twitter) {
-//            if(twitterLogin != null) {
-//                twitterLogin.startLogin(new GamaTwitterLogin.TwitterLoginCallBack() {
-//                    @Override
-//                    public void success(String id, String mFullName, String mEmail, String idTokenString) {
-//                        PL.i("twitter login : " + id);
-//                        if (SStringUtil.isNotEmpty(id)) {
-//                            ThirdAccountBindRequestTask bindGoogleRequestTask = new ThirdAccountBindRequestTask(getActivity(),
-//                                    SLoginType.LOGIN_TYPE_TWITTER,
-//                                    account,
-//                                    pwd,
-//                                    email,
-//                                    id,
-//                                    GSRequestMethod.GSRequestType.GAMAMOBI);
-//                            sAccountBind(bindGoogleRequestTask);
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void failure(String msg) {
-//
-//                    }
-//                });
-//            }
-//        }
-//
-//
-//    }
-
-//    @Override
-//    public void accountInject(Activity activity, String account, String pwd, String uid) {
-//        AccountInjectionRequestTask injectionRequestTask = new AccountInjectionRequestTask(getActivity(),account,pwd,uid);
-//        injectionRequestTask.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(), "Loading..."));
-//        injectionRequestTask.setReqCallBack(new ISReqCallBack<SLoginResponse>() {
-//            @Override
-//            public void success(SLoginResponse sLoginResponse, String rawResult) {
-//                if (sLoginResponse != null) {
-//                    if (sLoginResponse.isRequestSuccess()) {
-//
-//                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, "");
-//
-//                    }else {
-//
-//                        ToastUtils.toast(getActivity(), sLoginResponse.getMessage());
-//                    }
-//
-//                } else {
-//                    ToastUtils.toast(getActivity(), R.string.py_error_occur);
-//                }
-//            }
-//
-//            @Override
-//            public void timeout(String code) {
-//
-//            }
-//
-//            @Override
-//            public void noData() {
-//
-//            }
-//
-//            @Override
-//            public void cancel() {
-//            }
-//        });
-//        injectionRequestTask.excute(SLoginResponse.class);
-//    }
-
-    private void sAccountBind(ThirdAccountBindRequestTask bindRequestTask) {
-        bindRequestTask.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(), "Loading..."));
-        bindRequestTask.setReqCallBack(new ISReqCallBack<SLoginResponse>() {
-            @Override
-            public void success(SLoginResponse sLoginResponse, String rawResult) {
-                if (sLoginResponse != null) {
-                    if (sLoginResponse.isRequestSuccess()) {
-                        ToastUtils.toast(getActivity(), R.string.py_success);
-
-//                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GAMA);
-                        if (iLoginView != null){
-                            iLoginView.accountBindSuccess(sLoginResponse);
-                        }
-                    }else{
-
-                        ToastUtils.toast(getActivity(), sLoginResponse.getMessage());
-                    }
-
-                } else {
-                    ToastUtils.toast(getActivity(), R.string.py_error_occur);
-                }
-            }
-
-            @Override
-            public void timeout(String code) {
-
-            }
-
-            @Override
-            public void noData() {
-
-            }
-
-            @Override
-            public void cancel() {
-            }
-
-        });
-        bindRequestTask.excute(SLoginResponse.class);
-    }
-
     private void sAccountBindV2(ThirdAccountBindRequestTaskV2 bindRequestTask) {
         bindRequestTask.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(), "Loading..."));
         bindRequestTask.setReqCallBack(new ISReqCallBack<SLoginResponse>() {
@@ -704,8 +478,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         bindRequestTask.excute(SLoginResponse.class);
     }
 
-    private void mMacLogin(Activity activity) {
-
+    private void mMacLogin(final Activity activity) {
         MacLoginRegRequestTask macLoginRegCmd = new MacLoginRegRequestTask(getActivity(), GSRequestMethod.GSRequestType.GAMESWORD);
         macLoginRegCmd.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(), "Loading..."));
         macLoginRegCmd.setReqCallBack(new ISReqCallBack<SLoginResponse>() {
@@ -713,26 +486,10 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             public void success(SLoginResponse sLoginResponse, String rawResult) {
                 if (sLoginResponse != null) {
                     if (sLoginResponse.isRequestSuccess()) {
-//                        ToastUtils.toast(getActivity(), R.string.py_login_success);
-//                        GamaUtil.saveSdkLoginData(getContext(),rawResult);
-
-                        //1001 注册成功    1000登入成功
-                        if (SStringUtil.isEqual("1001", sLoginResponse.getCode())) {//注册写一次
-
-                            cteateUserImage(getActivity(),sLoginResponse.getFreeRegisterName(),sLoginResponse.getFreeRegisterPwd());
-
-                            //mac登录第一次写一次
-                        }else if(SStringUtil.isEqual("1000", sLoginResponse.getCode()) && SStringUtil.isEmpty(GamaUtil.getMacAccount(getContext()))) {
-
-                            cteateUserImage(getActivity(),sLoginResponse.getFreeRegisterName(),sLoginResponse.getFreeRegisterPwd());
-                        }
-
-                        GamaUtil.saveMacAccount(getContext(),sLoginResponse.getFreeRegisterName());
-                        GamaUtil.saveMacPassword(getContext(),sLoginResponse.getFreeRegisterPwd());
                         handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_MAC);
-
-                    }else {
-
+                    } else if (checkIsMacLoginLimit(activity, sLoginResponse, rawResult)) {
+//                        macLoginLimit(activity);
+                    } else {
                         ToastUtils.toast(getActivity(), sLoginResponse.getMessage());
                     }
 
@@ -742,34 +499,25 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             }
 
             @Override
-            public void timeout(String code) {
-
-            }
+            public void timeout(String code) {}
 
             @Override
-            public void noData() {
-
-            }
+            public void noData() {}
 
             @Override
-            public void cancel() {
-            }
+            public void cancel() {}
         });
         macLoginRegCmd.excute(SLoginResponse.class);
-
     }
 
     private void cteateUserImage(Context context, String freeRegisterName, String freeRegisterPwd) {
         try {
             String appName = ApkInfoUtil.getApplicationName(context);
-//        String text = "你登入" + appName + "的帳號和密碼如下:\n帳號:" + freeRegisterName + "\n" + "密碼:" + freeRegisterPwd;
             String text = String.format(context.getResources().getString(R.string.py_login_mac_tips), appName, freeRegisterName, freeRegisterPwd);
             PL.i("cteateUserImage:" + text);
             Bitmap bitmap = BitmapUtil.bitmapAddText(BitmapFactory.decodeResource(context.getResources(),R.drawable.v2_mac_pwd_bg),text);
             String m = BitmapUtil.saveImageToGallery(getContext(),bitmap);
-//            if (SStringUtil.isNotEmpty(m)){
-                ToastUtils.toast(context, context.getResources().getString(R.string.py_login_mac_saveimage_tips));
-//            }
+            ToastUtils.toast(context, context.getResources().getString(R.string.py_login_mac_saveimage_tips));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -779,52 +527,6 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
      * Facebook登录实现
      */
     private void sFbLogin(final Activity activity, final SFacebookProxy sFacebookProxy, final FbLoginCallBack fbLoginCallBack) {
-//        String fbThirdId = FbSp.getFbId(activity);
-//        String businessId = FbSp.getAppsBusinessId(activity);
-//        String tokenBusiness = FbSp.getTokenForBusiness(activity);
-//        String gender = FbSp.getFbGender(activity);
-//        String birthday = FbSp.getFbBirthday(activity);
-//        String name = FbSp.getFbName(activity);
-//        String picUrl = FbSp.getFbPicUrl(activity);
-//        String fbId = FbResUtil.findStringByName(activity,"facebook_app_id");
-//        AccessToken accessToken = AccessToken.getCurrentAccessToken();
-//        String token = "";
-//        if(accessToken != null) {
-//            token = accessToken.getToken();
-//        }
-//        if(!TextUtils.isEmpty(fbThirdId)) {
-//            PL.i(TAG, "Facebook登入使用緩存登入");
-//            if(TextUtils.isEmpty(businessId)) {
-//                businessId = fbThirdId + "_" + fbId;
-//            }
-//            PL.i(TAG, "Facebook ThirdId: " + fbThirdId);
-//            PL.i(TAG, "Facebook businessId: " + businessId);
-//            PL.i(TAG, "Facebook tokenBusiness: " + tokenBusiness);
-//            PL.i(TAG, "Facebook gender: " + gender);
-//            PL.i(TAG, "Facebook birthday: " + birthday);
-//            PL.i(TAG, "Facebook name: " + name);
-//            PL.i(TAG, "Facebook picUrl: " + picUrl);
-//            PL.i(TAG, "Facebook token: " + token);
-//            if(fbLoginCallBack != null) {
-//                faceBookUser = new FaceBookUser();
-//                faceBookUser.setUserFbId(fbThirdId);
-//                faceBookUser.setBusinessId(businessId);
-//                faceBookUser.setName(name);
-//                faceBookUser.setGender(gender);
-//                faceBookUser.setBirthday(birthday);
-//                if(!TextUtils.isEmpty(picUrl)) {
-//                    faceBookUser.setPictureUri(Uri.parse(picUrl));
-//                }
-//                faceBookUser.setAccessTokenString(token);
-//                fbLoginCallBack.loginSuccess(faceBookUser);
-//            } else {
-//                PL.i(TAG, "Facebook 登入回調為空");
-//            }
-//            return;
-//        } else {
-//            PL.i(TAG, "沒有Facebook緩存，正式登入");
-//        }
-
         if (sFacebookProxy == null) {
             PL.i(TAG, "Facebook Proxy為null");
             return;
@@ -895,50 +597,6 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 if (fbLoginCallBack != null) {
                     fbLoginCallBack.loginSuccess(user);
                 }
-
-
-//                sFacebookProxy.getMyProfile(activity, new SFacebookProxy.FbLoginCallBack() {
-//                    @Override
-//                    public void onCancel() {
-//
-//                    }
-//
-//                    @Override
-//                    public void onError(String message) {
-//                        user.setBusinessId(businessId);
-//                        faceBookUser = user;
-//                        if (fbLoginCallBack != null){
-//                            fbLoginCallBack.loginSuccess(user);
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onSuccess(FaceBookUser user1) {
-//                        user1.setBusinessId(businessId);
-//                        faceBookUser = user1;
-//                        if (fbLoginCallBack != null){
-//                            fbLoginCallBack.loginSuccess(user1);
-//                        }
-//                    }
-//                });
-
-                // TODO: 2018/6/21 手动拼写businessId
-//                final String fbScopeId = user.getUserId();
-//                sFacebookProxy.requestBusinessId(activity, new SFacebookProxy.FbBusinessIdCallBack() {
-//                    @Override
-//                    public void onError() {
-//
-//                    }
-//
-//                    @Override
-//                    public void onSuccess(String businessId) {
-//                        PL.d("fb businessId:" + businessId);
-//                        if (fbLoginCallBack != null){
-//                            fbLoginCallBack.loginSuccess(fbScopeId,businessId,FbSp.getTokenForBusiness(getActivity()));
-//                        }
-//                    }
-//                });
-
             }
         };
 
@@ -953,11 +611,8 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
     /**
      * 使用FacebookId进行平台登录
-     * @param fbScopeId
-     * @param fbApps
-     * @param fbTokenBusiness
      */
-    private void fbThirdLogin(String fbScopeId, String fbApps, String fbTokenBusiness) {
+    private void fbThirdLogin(final String fbScopeId, String fbApps, String fbTokenBusiness) {
 
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         String accessTokenString = "";
@@ -980,8 +635,14 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
                         handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_FB);
                         return;
-                    }else{
-
+                    } else if ("9000".equals(sLoginResponse.getCode())) { //需要验证手机
+                        ToastUtils.toast(getActivity(), sLoginResponse.getMessage());
+                        if (isAutoLogin) {
+                            showMainLoginView();
+                        }
+                        showPhoneVerifyView(SLoginType.LOGIN_TYPE_FB, fbScopeId);
+                        return;
+                    } else {
                         ToastUtils.toast(getActivity(), sLoginResponse.getMessage());
                     }
                 } else {
@@ -1006,11 +667,9 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             }
         });
         cmd.excute(SLoginResponse.class);
-
     }
 
     private void registerAccout(Activity activity, final String account, final String password, String areaCode, String phone, String vfcode){
-
         AccountRegisterRequestTask accountRegisterCmd = new AccountRegisterRequestTask(getActivity(), account, password, areaCode, phone, vfcode);
         accountRegisterCmd.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(), "Loading..."));
         accountRegisterCmd.setReqCallBack(new ISReqCallBack<SLoginResponse>() {
@@ -1035,74 +694,20 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             }
 
             @Override
-            public void timeout(String code) {
-
-            }
+            public void timeout(String code) {}
 
             @Override
-            public void noData() {
-
-            }
+            public void noData() {}
 
             @Override
-            public void cancel() {
-            }
+            public void cancel() {}
 
         });
         accountRegisterCmd.excute(SLoginResponse.class);
-
-    }
-
-    private void registerAccout(Activity activity, final String account, final String password, String email){
-
-        AccountRegisterRequestTask accountRegisterCmd = new AccountRegisterRequestTask(getActivity(), account, password,email);
-        accountRegisterCmd.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(), "Loading..."));
-        accountRegisterCmd.setReqCallBack(new ISReqCallBack<SLoginResponse>() {
-            @Override
-            public void success(SLoginResponse sLoginResponse, String rawResult) {
-                if (sLoginResponse != null) {
-                    if (sLoginResponse.isRequestSuccess()) {
-                        ToastUtils.toast(getActivity(), R.string.py_register_success);
-
-                        GamaUtil.saveAccount(getContext(),account);
-                        GamaUtil.savePassword(getContext(),password);
-                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GAMESWORD);
-
-                    }else{
-
-                        ToastUtils.toast(getActivity(), sLoginResponse.getMessage());
-                    }
-
-                } else {
-                    ToastUtils.toast(getActivity(), R.string.py_error_occur);
-                }
-            }
-
-            @Override
-            public void timeout(String code) {
-
-            }
-
-            @Override
-            public void noData() {
-
-            }
-
-            @Override
-            public void cancel() {
-            }
-
-        });
-        accountRegisterCmd.excute(SLoginResponse.class);
-
     }
 
     /**
      * 获取手机验证码
-     * @param activity
-     * @param area
-     * @param phone
-     * @param interfaceName
      */
     private void getPhoneVfcodeRequest(Activity activity, String area, String phone, String interfaceName) {
         PhoneVfcodeRequestTask task = new PhoneVfcodeRequestTask(getActivity(), area, phone, interfaceName);
@@ -1140,8 +745,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             }
 
             @Override
-            public void cancel() {
-            }
+            public void cancel() {}
 
         });
         task.excute();
@@ -1172,7 +776,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             }
 
             iLoginView.showAutoLoginTips(String.format(activity.getResources().getString(R.string.py_login_autologin_tips),account));
-        }else{
+        } else {
             String autoLoginTips = activity.getResources().getString(R.string.py_login_autologin_logining_tips);
             if (registPlatform.equals(SLoginType.LOGIN_TYPE_FB)){
                 autoLoginTips = "Facebook" + autoLoginTips;
@@ -1216,7 +820,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                                 fbThirdLogin(fbScopeId, fbApps,FbSp.getTokenForBusiness(activity));*/
                                 fbLogin(mActivity);
 
-                            } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GOOGLE, registPlatform)){//Google登录
+                            } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GOOGLE, registPlatform)) {//Google登录
 
                                 ThirdLoginRegRequestBean thirdLoginRegRequestBean = new ThirdLoginRegRequestBean(activity);
                                 thirdLoginRegRequestBean.setThirdPlatId(GamaUtil.getGoogleId(activity));
@@ -1224,7 +828,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                                 thirdLoginRegRequestBean.setGoogleClientId(ResConfig.getGoogleClientId(activity));
                                 thirdLoginRegRequestBean.setGoogleIdToken(GamaUtil.getGoogleIdToken(activity));
                                 thirdPlatLogin(activity, thirdLoginRegRequestBean);
-                            } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_TWITTER, registPlatform)){//Google登录
+                            } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_TWITTER, registPlatform)) {//Google登录
 
                                 ThirdLoginRegRequestBean thirdLoginRegRequestBean = new ThirdLoginRegRequestBean(activity);
                                 thirdLoginRegRequestBean.setThirdPlatId(GamaUtil.getTwitterId(activity));
@@ -1235,7 +839,6 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                             }
 
                             if (autoLoginTimer != null){
-
                                 autoLoginTimer.cancel();
                             }
                         }
@@ -1244,7 +847,6 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 });
             }
         },300,1000);
-
     }
 
     /**
@@ -1264,6 +866,17 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         }
     }
 
+    private void showPhoneVerifyView(String loginType, String thirdId) {
+        if (iLoginView != null){
+            iLoginView.showPhoneVerifyView(loginType, thirdId);
+        }
+    }
+
+    private void showBindView(int fromPage) {
+        if (iLoginView != null){
+            iLoginView.showBindView(fromPage);
+        }
+    }
 
     private void handleRegisteOrLoginSuccess(SLoginResponse loginResponse, String rawResult, String loginType) {
 
@@ -1464,7 +1077,6 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
     public void startTimer() {
         isTimeLimit = true;
-//        gama_register_btn_get_vfcode.setBackgroundResource(R.drawable.gama_ui_bg_btn_unclickable);
         if(requestPhoneVfcodeTimer == null) {
             requestPhoneVfcodeTimer = new Timer();
         }
@@ -1474,19 +1086,10 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             public void run() {
                 if(resetTime < 1) {
                     isTimeLimit = false;
-//                    gama_register_btn_get_vfcode.setBackgroundResource(R.drawable.bg_192d3f_46);
                     if(requestPhoneVfcodeTimer != null) {
                         requestPhoneVfcodeTimer.cancel();
                         requestPhoneVfcodeTimer = null;
                     }
-//                    if(callback != null) {
-//                        getActivity().runOnUiThread(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                callback.statusCallback(SBaseRelativeLayout.OperationCallback.TIME_OUT);
-//                            }
-//                        });
-//                    }
                     if(callbackList != null && callbackList.size() > 0) {
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
@@ -1499,14 +1102,6 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     }
                     return;
                 }
-//                if(callback != null) {
-//                    getActivity().runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            callback.alertTime(resetTime);
-//                        }
-//                    });
-//                }
                 if(callbackList != null && callbackList.size() > 0) {
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
@@ -1649,62 +1244,88 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         accountLoginCmd.excute(SLoginResponse.class);
     }
 
-//    /**
-//     * 使用FacebookId进行平台登录
-//     * @param fbScopeId
-//     * @param fbApps
-//     * @param fbTokenBusiness
-//     */
-//    private void fbThirdLoginApp(String fbScopeId, String fbApps, String fbTokenBusiness) {
-//
-//        AccessToken accessToken = AccessToken.getCurrentAccessToken();
-//        String accessTokenString = "";
-//        if (accessToken != null){
-//            accessTokenString = accessToken.getToken();
-//        }
-//        ThirdLoginRegRequestTask cmd = new ThirdLoginRegRequestTask(getActivity(),fbScopeId,fbApps,fbTokenBusiness,accessTokenString);
-//        cmd.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(), "Loading..."));
-//        cmd.setReqCallBack(new ISReqCallBack<SLoginResponse>() {
-//            @Override
-//            public void success(SLoginResponse sLoginResponse, String rawResult) {
-//                if (sLoginResponse != null) {
-//
-//                    if (sLoginResponse.isRequestSuccess()){
-//
-//                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_FB);
-//                        return;
-//                    }else{
-//
-//                        ToastUtils.toast(getActivity(), sLoginResponse.getMessage());
-//                    }
-//                } else {
-//                    ToastUtils.toast(getActivity(), R.string.py_error_occur);
-//                }
-//                showMainLoginView();
-//            }
-//
-//            @Override
-//            public void timeout(String code) {
-//                showMainLoginView();
-//            }
-//
-//            @Override
-//            public void noData() {
-//                showMainLoginView();
-//            }
-//
-//            @Override
-//            public void cancel() {
-//                showMainLoginView();
-//            }
-//        });
-//        cmd.excute(SLoginResponse.class);
-//
-//    }
+    /**
+     * 进行手机验证
+     */
+    @Override
+    public void phoneVerify(Activity activity, String area, String phone, String vfCode, String thirdId, final String loginType) {
+        PhoneVerifyRequestTask accountLoginCmd = new PhoneVerifyRequestTask(getActivity(), area, phone, vfCode, thirdId, loginType);
+        accountLoginCmd.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(),"Loading..."));
+        accountLoginCmd.setReqCallBack(new ISReqCallBack<SLoginResponse>() {
+            @Override
+            public void success(SLoginResponse sLoginResponse, String rawResult) {
+                if (sLoginResponse != null){
+                    if (sLoginResponse.isRequestSuccess()) {
+                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, loginType);
+                    } else {
+                        ToastUtils.toast(getActivity(),sLoginResponse.getMessage());
+                    }
+                }else{
+                    ToastUtils.toast(getActivity(),R.string.py_error_occur);
+                }
+            }
 
+            @Override
+            public void timeout(String code) {}
+
+            @Override
+            public void noData() {}
+
+            @Override
+            public void cancel() {}
+        });
+        accountLoginCmd.excute(SLoginResponse.class);
+    }
 
     @Override
     public int getRemainTimeSeconds() {
         return resetTime;
     }
+
+    private boolean checkIsMacLoginLimit(Activity activity, final SLoginResponse sLoginResponse, final String rawResult) {
+        boolean isLimit = false;
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        String msg = sLoginResponse.getMessage();
+        if ("9002".equals(sLoginResponse.getCode())) { //提示绑定的选择
+            isLimit = true;
+            if(TextUtils.isEmpty(msg)) {
+                builder.setTitle(R.string.py_mac_login_limit_hint1);
+            } else {
+                builder.setTitle(msg);
+            }
+            builder.setPositiveButton(R.string.py_mac_login_limit_hint_continue, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    //继续登入
+                    sLoginResponse.setCode(BaseResponseModel.SUCCESS_CODE);
+                    handleRegisteOrLoginSuccess(sLoginResponse, rawResult, SLoginType.LOGIN_TYPE_MAC);
+                }
+            });
+            builder.setNegativeButton(R.string.py_mac_login_limit_hint_bind_now, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    //马上绑定
+                    showBindView(GSLoginCommonConstant.GsLoginUiPageNumber.GS_PAGE_MAIN);
+                }
+            });
+        } else if ("9001".equals(sLoginResponse.getCode())){ //强制绑定
+            isLimit = true;
+            if(TextUtils.isEmpty(msg)) {
+                builder.setTitle(R.string.py_mac_login_limit_hint2);
+            } else {
+                builder.setTitle(msg);
+            }
+            builder.setPositiveButton(R.string.py_mac_login_limit_hint_bind_now2, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    //立即绑定
+                    showBindView(GSLoginCommonConstant.GsLoginUiPageNumber.GS_PAGE_MAIN);
+                }
+            });
+        }
+        builder.setCancelable(false);
+        builder.create().show();
+        return isLimit;
+    }
+
 }

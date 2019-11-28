@@ -22,6 +22,10 @@ public class BaseResponseModel implements Serializable {
         return code;
     }
 
+    public void setCode(String code) {
+        this.code = code;
+    }
+
     public String getMessage() {
         return message;
     }

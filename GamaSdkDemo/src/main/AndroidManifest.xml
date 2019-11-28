@@ -8,19 +8,20 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/sdk_name"
-        android:supportsRtl="true"
-        android:resizeableActivity="false">
+        android:resizeableActivity="false"
+        android:supportsRtl="true">
 
-        <activity android:name=".DoPermissionReq"
+        <activity
+            android:name=".DoPermissionReq"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|fontScale"
             android:screenOrientation="sensor"
             android:theme="@style/Gama.Theme.AppCompat.Light.NoActionBar.FullScreen"
-            android:windowSoftInputMode="stateHidden|adjustResize" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:windowSoftInputMode="stateHidden|adjustResize">
+            <!--<intent-filter>-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
 
         <activity
@@ -29,16 +30,18 @@
             android:screenOrientation="sensor"
             android:theme="@style/Gama.Theme.AppCompat.Light.NoActionBar.FullScreen"
             android:windowSoftInputMode="stateHidden|adjustResize">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.VIEW" />-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-                <!--<category android:name="android.intent.category.DEFAULT" />-->
-                <!--<category android:name="android.intent.category.BROWSABLE" />-->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <data android:scheme="@string/scheme" />
+                <action android:name="android.intent.action.VIEW" />
 
-                <!--<data-->
-                    <!--android:host="@string/star_game_code"-->
-                    <!--android:scheme="@string/star_android_scheme" />-->
-            <!--</intent-filter>-->
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
         </activity>
 
         <service android:name="com.gama.sdk.fcm.GamaFirebaseMessagingService">

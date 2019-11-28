@@ -47,9 +47,15 @@ public class GSRequestMethod {
      */
     public static final String GS_REQUEST_METHOD_FREE_LOGIN = "freeRegister.app";
 
+    /**
+     * 手机验证接口
+     */
+    public static final String GS_REQUEST_METHOD_PHONE_VERIFY = "be_linked_phone.app";
+
     public enum RequestVfcodeInterface {
         register("1"),
-        bind("2");
+        bind("2"),
+        verify("3");
 
         private String string;
         RequestVfcodeInterface(String s) {
