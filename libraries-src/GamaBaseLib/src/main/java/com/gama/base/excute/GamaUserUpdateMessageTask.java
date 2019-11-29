@@ -37,7 +37,12 @@ public class GamaUserUpdateMessageTask extends GamaBaseRestRequestTask {
         //(AppKey+userId + gameCode + timestamp)md5小写
         String signature = SStringUtil.toMd5(ResConfig.getAppKey(context) + userId + gameCode + timeStamp);
 
-        String requestDomain = ResConfig.getLoginPreferredUrl(context) + RequestDomain.USER_UPDATE_MESSAGE;
+        String requestDomain = "";
+        if (GamaUtil.isInterfaceSurfixWithApp(context)) {
+            requestDomain = ResConfig.getLoginPreferredUrl(context) + RequestDomain.USER_UPDATE_MESSAGE_APP;
+        } else {
+            requestDomain = ResConfig.getLoginPreferredUrl(context) + RequestDomain.USER_UPDATE_MESSAGE;
+        }
         url = requestDomain + url;
         url = url.replace("userId", userId)
                 .replace("gameCode", gameCode)

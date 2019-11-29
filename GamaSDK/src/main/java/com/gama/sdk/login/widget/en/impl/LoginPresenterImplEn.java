@@ -22,7 +22,6 @@ import com.gama.base.bean.SLoginType;
 import com.gama.base.cfg.ResConfig;
 import com.gama.base.utils.GamaUtil;
 import com.gama.data.login.constant.GSRequestMethod;
-import com.gama.data.login.execute.AccountInjectionRequestTask;
 import com.gama.data.login.execute.AccountLoginRequestTask;
 import com.gama.data.login.execute.AccountRegisterRequestTask;
 import com.gama.data.login.execute.ChangePwdRequestTask;
@@ -507,41 +506,41 @@ public class LoginPresenterImplEn implements LoginContractEn.ILoginPresenterEn {
 
     @Override
     public void accountInject(Activity activity, String account, String pwd, String uid) {
-        AccountInjectionRequestTask injectionRequestTask = new AccountInjectionRequestTask(getActivity(),account,pwd,uid);
-        injectionRequestTask.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(), "Loading..."));
-        injectionRequestTask.setReqCallBack(new ISReqCallBack<SLoginResponse>() {
-            @Override
-            public void success(SLoginResponse sLoginResponse, String rawResult) {
-                if (sLoginResponse != null) {
-                    if (sLoginResponse.isRequestSuccess()) {
-
-                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, "");
-
-                    }else {
-
-                        ToastUtils.toast(getActivity(), sLoginResponse.getMessage());
-                    }
-
-                } else {
-                    ToastUtils.toast(getActivity(), R.string.en_py_error_occur);
-                }
-            }
-
-            @Override
-            public void timeout(String code) {
-
-            }
-
-            @Override
-            public void noData() {
-
-            }
-
-            @Override
-            public void cancel() {
-            }
-        });
-        injectionRequestTask.excute(SLoginResponse.class);
+//        AccountInjectionRequestTask injectionRequestTask = new AccountInjectionRequestTask(getActivity(),account,pwd,uid);
+//        injectionRequestTask.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(), "Loading..."));
+//        injectionRequestTask.setReqCallBack(new ISReqCallBack<SLoginResponse>() {
+//            @Override
+//            public void success(SLoginResponse sLoginResponse, String rawResult) {
+//                if (sLoginResponse != null) {
+//                    if (sLoginResponse.isRequestSuccess()) {
+//
+//                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, "");
+//
+//                    }else {
+//
+//                        ToastUtils.toast(getActivity(), sLoginResponse.getMessage());
+//                    }
+//
+//                } else {
+//                    ToastUtils.toast(getActivity(), R.string.en_py_error_occur);
+//                }
+//            }
+//
+//            @Override
+//            public void timeout(String code) {
+//
+//            }
+//
+//            @Override
+//            public void noData() {
+//
+//            }
+//
+//            @Override
+//            public void cancel() {
+//            }
+//        });
+//        injectionRequestTask.excute(SLoginResponse.class);
     }
 
     private void sAccountBind(ThirdAccountBindRequestTask bindRequestTask) {

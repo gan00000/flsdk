@@ -28,7 +28,6 @@ import com.gama.base.excute.GamaAreaInfoRequestTask;
 import com.gama.base.utils.GamaUtil;
 import com.gama.data.login.constant.GSLoginCommonConstant;
 import com.gama.data.login.constant.GSRequestMethod;
-import com.gama.data.login.execute.AccountInjectionRequestTask;
 import com.gama.data.login.execute.AccountLoginRequestTask;
 import com.gama.data.login.execute.AccountRegisterRequestTask;
 import com.gama.data.login.execute.ChangePwdRequestTask;
@@ -36,7 +35,6 @@ import com.gama.data.login.execute.FindPwdRequestTask;
 import com.gama.data.login.execute.MacLoginRegRequestTask;
 import com.gama.data.login.execute.PhoneVerifyRequestTask;
 import com.gama.data.login.execute.PhoneVfcodeRequestTask;
-import com.gama.data.login.execute.ThirdAccountBindRequestTask;
 import com.gama.data.login.execute.ThirdLoginRegRequestTask;
 import com.gama.data.login.execute2.ThirdAccountBindRequestTaskV2;
 import com.gama.data.login.request.ThirdLoginRegRequestBean;
@@ -57,7 +55,6 @@ import com.google.gson.Gson;
 import org.json.JSONArray;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -358,6 +355,11 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             sFacebookProxy.fbLogout(activity);
         } else {
             PL.i(TAG, "sFacebookProxy为null，无法進行Facebook登出");
+        }
+        if(sGoogleSignIn != null) {
+            sGoogleSignIn.handleActivityDestroy(this.getContext());
+        } else {
+            PL.i(TAG, "sGoogleSignIn为null，无法進行Google登出");
         }
         showLoginView();
     }
@@ -821,13 +823,13 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                                 fbLogin(mActivity);
 
                             } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GOOGLE, registPlatform)) {//Google登录
-
-                                ThirdLoginRegRequestBean thirdLoginRegRequestBean = new ThirdLoginRegRequestBean(activity);
-                                thirdLoginRegRequestBean.setThirdPlatId(GamaUtil.getGoogleId(activity));
-                                thirdLoginRegRequestBean.setRegistPlatform(SLoginType.LOGIN_TYPE_GOOGLE);
-                                thirdLoginRegRequestBean.setGoogleClientId(ResConfig.getGoogleClientId(activity));
-                                thirdLoginRegRequestBean.setGoogleIdToken(GamaUtil.getGoogleIdToken(activity));
-                                thirdPlatLogin(activity, thirdLoginRegRequestBean);
+                                googleLogin(activity);
+//                                ThirdLoginRegRequestBean thirdLoginRegRequestBean = new ThirdLoginRegRequestBean(activity);
+//                                thirdLoginRegRequestBean.setThirdPlatId(GamaUtil.getGoogleId(activity));
+//                                thirdLoginRegRequestBean.setRegistPlatform(SLoginType.LOGIN_TYPE_GOOGLE);
+//                                thirdLoginRegRequestBean.setGoogleClientId(ResConfig.getGoogleClientId(activity));
+//                                thirdLoginRegRequestBean.setGoogleIdToken(GamaUtil.getGoogleIdToken(activity));
+//                                thirdPlatLogin(activity, thirdLoginRegRequestBean);
                             } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_TWITTER, registPlatform)) {//Google登录
 
                                 ThirdLoginRegRequestBean thirdLoginRegRequestBean = new ThirdLoginRegRequestBean(activity);

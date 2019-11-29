@@ -15,6 +15,7 @@ import com.core.base.utils.ToastUtils;
 import com.gama.base.bean.BasePayBean;
 import com.gama.base.cfg.ResConfig;
 import com.gama.base.constant.GamaCommonKey;
+import com.gama.base.utils.GamaUtil;
 import com.gama.onestore.plug.BuildConfig;
 import com.gamamobi.onestore.IOneStorePay;
 import com.gamamobi.onestore.IPayCallBack;
@@ -108,7 +109,11 @@ public class OneStoreImpl implements IOneStorePay {
         //设置储值备用域名
         this.createOrderIdReqBean.setRequestSpaUrl(ResConfig.getPaySpareUrl(activity));
         //设置储值接口名
-        this.createOrderIdReqBean.setRequestMethod(OneStoreDomainSite.ONESTORE_ORDER_CREATE);
+        if (GamaUtil.isInterfaceSurfixWithApp(activity)) {
+            this.createOrderIdReqBean.setRequestMethod(OneStoreDomainSite.ONESTORE_ORDER_CREATE_APP);
+        } else {
+            this.createOrderIdReqBean.setRequestMethod(OneStoreDomainSite.ONESTORE_ORDER_CREATE);
+        }
 
         connectOneService();
     }
@@ -532,7 +537,11 @@ public class OneStoreImpl implements IOneStorePay {
 
         oneStoreExchangeReqBean.setRequestUrl(ResConfig.getPayPreferredUrl(mActivity));
         oneStoreExchangeReqBean.setRequestSpaUrl(ResConfig.getPaySpareUrl(mActivity));
-        oneStoreExchangeReqBean.setRequestMethod(OneStoreDomainSite.ONESTORE_SEND);
+        if (GamaUtil.isInterfaceSurfixWithApp(mActivity)) {
+            oneStoreExchangeReqBean.setRequestMethod(OneStoreDomainSite.ONESTORE_SEND_APP);
+        } else {
+            oneStoreExchangeReqBean.setRequestMethod(OneStoreDomainSite.ONESTORE_SEND);
+        }
 
         OneStoreExchangeReqTask oneStoreExchangeReqTask = new OneStoreExchangeReqTask(mActivity, oneStoreExchangeReqBean);
         oneStoreExchangeReqTask.setReqCallBack(new ISReqCallBack<OneStoreExchangeRes>() {
@@ -590,7 +599,11 @@ public class OneStoreImpl implements IOneStorePay {
 
         oneStoreExchangeReqBean.setRequestUrl(ResConfig.getPayPreferredUrl(mActivity));
         oneStoreExchangeReqBean.setRequestSpaUrl(ResConfig.getPaySpareUrl(mActivity));
-        oneStoreExchangeReqBean.setRequestMethod(OneStoreDomainSite.ONESTORE_SEND);
+        if (GamaUtil.isInterfaceSurfixWithApp(mActivity)) {
+            oneStoreExchangeReqBean.setRequestMethod(OneStoreDomainSite.ONESTORE_SEND_APP);
+        } else {
+            oneStoreExchangeReqBean.setRequestMethod(OneStoreDomainSite.ONESTORE_SEND);
+        }
 
         OneStoreExchangeReqTask oneStoreExchangeReqTask = new OneStoreExchangeReqTask(mActivity, oneStoreExchangeReqBean);
         oneStoreExchangeReqTask.setReqCallBack(new ISReqCallBack<OneStoreExchangeRes>() {

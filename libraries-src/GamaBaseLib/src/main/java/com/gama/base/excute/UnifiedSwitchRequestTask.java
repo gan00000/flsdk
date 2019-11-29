@@ -9,6 +9,7 @@ import com.core.base.utils.PL;
 import com.gama.base.bean.unify.UnifiedSwitchRequestBean;
 import com.gama.base.cfg.ResConfig;
 import com.gama.base.constant.RequestDomain;
+import com.gama.base.utils.GamaUtil;
 
 public class UnifiedSwitchRequestTask extends GamaBaseRestRequestTask {
 
@@ -26,7 +27,12 @@ public class UnifiedSwitchRequestTask extends GamaBaseRestRequestTask {
         setGetMethod(true, true);
 
         reqeustBean = new UnifiedSwitchRequestBean(context);
-        String completeUrl = ResConfig.getPlatPreferredUrl(context) + RequestDomain.UNIFIED_SWITCH;
+        String completeUrl = "";
+        if (GamaUtil.isInterfaceSurfixWithApp(context)) {
+            completeUrl = ResConfig.getPlatPreferredUrl(context) + RequestDomain.UNIFIED_SWITCH_APP;
+        } else {
+            completeUrl = ResConfig.getPlatPreferredUrl(context) + RequestDomain.UNIFIED_SWITCH;
+        }
         reqeustBean.setCompleteUrl(completeUrl);
         reqeustBean.setType(type);
     }

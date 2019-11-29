@@ -142,6 +142,7 @@ dependencies {
 
     //公共库
     api project(':libraries-src:GamaBaseLib')
+    api project(':libraries-src:gama_ads_plug')
     api project(':Thirdlibrary')
     //krgoogle引用库
     krgoogleApi project(':libraries-src:gama-pay')

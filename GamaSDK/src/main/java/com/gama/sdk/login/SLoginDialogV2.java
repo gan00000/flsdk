@@ -643,9 +643,9 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
     @Override
     public void dismiss() {
         super.dismiss();
-        if(sGoogleSignIn != null) {
-            sGoogleSignIn.handleActivityDestroy(this.getContext());
-        }
+//        if(sGoogleSignIn != null) {
+//            sGoogleSignIn.handleActivityDestroy(this.getContext());
+//        }
     }
 
     @Override

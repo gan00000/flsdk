@@ -39,7 +39,7 @@ public class MainActivity extends BaseMainActivity {
         SLog.enableDebug(true);
 
         //初始化sdk
-        iGama.initSDK(this, SGameLanguage.ko_KR);
+        iGama.initSDK(this, SGameLanguage.zh_TW);
 
         googlePayBtn.setVisibility(View.VISIBLE);
         googlePayBtn.setOnClickListener(new View.OnClickListener() {

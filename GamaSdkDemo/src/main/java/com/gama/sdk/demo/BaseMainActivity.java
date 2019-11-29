@@ -4,12 +4,10 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -17,24 +15,17 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageRequest;
-import com.android.volley.toolbox.Volley;
 import com.core.base.utils.GamaTimeUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.ToastUtils;
 import com.crashlytics.android.Crashlytics;
 import com.gama.base.bean.SGameLanguage;
-import com.gama.base.bean.SPayType;
 import com.gama.base.utils.GamaUtil;
 import com.gama.base.utils.Localization;
 import com.gama.base.utils.SLog;
 import com.gama.data.login.ILoginCallBack;
 import com.gama.data.login.response.SLoginResponse;
 import com.gama.sdk.ads.GamaAdsConstant;
-import com.gama.sdk.callback.IPayListener;
 import com.gama.sdk.login.widget.v2.age.IGamaAgePresenter;
 import com.gama.sdk.login.widget.v2.age.callback.GamaAgeCallback;
 import com.gama.sdk.login.widget.v2.age.impl.GamaAgeImpl;
@@ -48,7 +39,6 @@ import com.gama.sdk.social.callback.FetchFriendsCallback;
 import com.gama.sdk.social.callback.InviteFriendsCallback;
 import com.gama.sdk.social.callback.UserProfileCallback;
 import com.gama.thirdlib.facebook.FriendProfile;
-import com.gama.thirdlib.google.SGoogleProxy;
 import com.gama.thirdlib.twitter.GamaTwitterLogin;
 
 import org.json.JSONObject;
@@ -676,12 +666,9 @@ public class BaseMainActivity extends Activity {
         track.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String eventName = "eventName"; //事件名
+                String eventName = "gama_30retention"; //事件名
                 Map map = new HashMap(); //事件属性列表,如没有可传空
                 Set<GamaAdsConstant.GamaEventReportChannel> set = new HashSet<>();
-                set.add(GamaAdsConstant.GamaEventReportChannel.GamaEventReportFacebook);
-                set.add(GamaAdsConstant.GamaEventReportChannel.GamaEventReportFirebase);
-                set.add(GamaAdsConstant.GamaEventReportChannel.GamaEventReportAllChannel);
                 iGama.gamaTrack(BaseMainActivity.this, eventName, map, set);
             }
         });
@@ -690,8 +677,8 @@ public class BaseMainActivity extends Activity {
         image_test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtils.toast(BaseMainActivity.this, "click to refresh");
-                loadImage();
+//                ToastUtils.toast(BaseMainActivity.this, "click to refresh");
+//                loadImage();
             }
         });
     }
@@ -753,26 +740,4 @@ public class BaseMainActivity extends Activity {
         return !TextUtils.isEmpty(GamaUtil.getUid(this));
     }
 
-    private void loadImage() {
-        String url = "https://login.gamesword.com/captcha/captcha.app?timestamp=" + System.currentTimeMillis()
-                + "&operatingSystem=android&uniqueId=" + SGoogleProxy.getAdvertisingId(BaseMainActivity.this);
-        PL.i(url);
-        final RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        //构建ImageRequest 实例
-        final ImageRequest request = new ImageRequest(url, new Response.Listener<Bitmap>() {
-            @Override
-            public void onResponse(Bitmap response) {
-                PL.i("response: " + response.toString());
-                //给imageView设置图片
-                image_test.setImageBitmap(response);
-            }
-        }, 0, 0, ImageView.ScaleType.FIT_XY, Bitmap.Config.RGB_565, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                //设置一张错误的图片，临时用ic_launcher代替
-                image_test.setImageResource(R.drawable.gama_title_sdk_bg);
-            }
-        });
-        requestQueue.add(request);
-    }
 }

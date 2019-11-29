@@ -16,7 +16,6 @@ import com.gama.base.bean.SGameBaseRequestBean;
 import com.gama.base.bean.SGameLanguage;
 import com.gama.base.bean.SLoginType;
 import com.gama.base.bean.SPayType;
-import com.gama.base.cfg.ConfigRequest;
 import com.gama.base.cfg.ResConfig;
 import com.gama.base.utils.GamaUtil;
 import com.gama.base.utils.Localization;
@@ -29,6 +28,7 @@ import com.gama.sdk.ads.GamaAdsConstant;
 import com.gama.sdk.ads.GamaAdsUtils;
 import com.gama.sdk.ads.StarEventLogger;
 import com.gama.sdk.callback.IPayListener;
+import com.gama.sdk.constant.GsSdkImplConstant;
 import com.gama.sdk.login.DialogLoginImpl;
 import com.gama.sdk.login.ILogin;
 import com.gama.sdk.login.widget.v2.age.IGamaAgePresenter;
@@ -112,7 +112,7 @@ public class BaseGamaImpl implements IGama {
 
 //                        setGameLanguage(activity,SGameLanguage.zh_TW);
 
-                ConfigRequest.requestBaseCfg(activity.getApplicationContext());//下载配置文件
+//                ConfigRequest.requestBaseCfg(activity.getApplicationContext());//下载配置文件
 //                ConfigRequest.requestTermsCfg(activity.getApplicationContext());//下载服务条款
                 // 1.初始化fb sdk
 //                SFacebookProxy.initFbSdk(activity.getApplicationContext());
@@ -262,7 +262,11 @@ public class BaseGamaImpl implements IGama {
 
                 webviewReqeustBean.setRequestUrl(ResConfig.getActivityPreferredUrl(activity));//活动域名
                 webviewReqeustBean.setRequestSpaUrl(ResConfig.getActivitySpareUrl(activity));
-                webviewReqeustBean.setRequestMethod(activity.getResources().getString(R.string.gama_act_dynamic_method));
+                if (GamaUtil.isInterfaceSurfixWithApp(activity)) {
+                    webviewReqeustBean.setRequestMethod(GsSdkImplConstant.GS_ACT_DYNAMIC_METHOD_APP);
+                } else {
+                    webviewReqeustBean.setRequestMethod(GsSdkImplConstant.GS_ACT_DYNAMIC_METHOD);
+                }
 
                 SWebViewDialog sWebViewDialog = new SWebViewDialog(activity, R.style.Gama_Theme_AppCompat_Dialog_Notitle_Fullscreen);
 
@@ -384,6 +388,9 @@ public class BaseGamaImpl implements IGama {
 
                 //上报在线时长-记录时间戳
                 GamaUtil.saveOnlineTimeInfo(activity, System.currentTimeMillis());
+
+                //ads
+                StarEventLogger.onResume(activity);
             }
         });
     }
@@ -418,6 +425,9 @@ public class BaseGamaImpl implements IGama {
                 if (iLogin != null) {
                     iLogin.onPause(activity);
                 }
+
+                //ads
+                StarEventLogger.onPause(activity);
 
             }
         });

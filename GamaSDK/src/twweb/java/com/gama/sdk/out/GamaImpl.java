@@ -24,6 +24,7 @@ import com.gama.plat.entrance.PlatformManager;
 import com.gama.sdk.R;
 import com.gama.sdk.SWebViewDialog;
 import com.gama.sdk.ads.StarEventLogger;
+import com.gama.sdk.constant.GsSdkImplConstant;
 
 import java.util.List;
 
@@ -176,7 +177,11 @@ public class GamaImpl extends BaseGamaImpl {
             payThirdUrl = GamaUtil.getSdkCfg(activity).getS_Third_PayUrl();
         }
         if (TextUtils.isEmpty(payThirdUrl)) {
-            payThirdUrl = ResConfig.getPayPreferredUrl(activity) + ResConfig.getPayThirdMethod(activity);
+            if(GamaUtil.isInterfaceSurfixWithApp(activity)) {
+                payThirdUrl = ResConfig.getPayPreferredUrl(activity) + GsSdkImplConstant.GS_THIRD_METHOD_APP;
+            } else {
+                payThirdUrl = ResConfig.getPayPreferredUrl(activity) + GsSdkImplConstant.GS_THIRD_METHOD;
+            }
         }
         webPayReqBean.setCompleteUrl(payThirdUrl);
 

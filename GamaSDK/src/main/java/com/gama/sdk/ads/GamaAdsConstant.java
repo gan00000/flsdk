@@ -53,6 +53,10 @@ public class GamaAdsConstant {
      * 在线时长事件
      */
     public static final String GAMA_EVENT_ONLINE_TIME = "gama_online_time";
+    /**
+     * 充值事件
+     */
+    public static final String GAMA_EVENT_IAB = "in_app_purchases";
 
 
     /**
@@ -88,11 +92,29 @@ public class GamaAdsConstant {
     public static final String GAMA_EVENT_PAY_VALUE = "gama_pay_value";
     public static final String GAMA_EVENT_ORDERID = "gama_orderId";
     public static final String GAMA_EVENT_PURCHASE_TIME = "gama_purchase_time";
+    public static final String GAMA_EVENT_CURRENCY = "gama_event_currency";
 
     public enum GamaEventReportChannel {
         GamaEventReportAllChannel,
         GamaEventReportFacebook,
         GamaEventReportFirebase,
-        GamaEventReportAppsflyer
+        GamaEventReportAppsflyer,
+        GamaEventReportAdjust
+    }
+
+    public class GsAdsRequestMethod {
+
+        /**
+         * 安装上报接口
+         */
+        public static final String GS_REQUEST_METHOD_INSTALL = "ads_install_activation.app";
+    }
+
+    public class GamaAdsRequestMethod {
+
+        /**
+         * 安装上报接口
+         */
+        public static final String GAMA_REQUEST_METHOD_INSTALL = "ads_install_activation";
     }
 }

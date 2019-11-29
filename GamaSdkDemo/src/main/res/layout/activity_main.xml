@@ -169,7 +169,8 @@
                 <ImageView
                     android:id="@+id/image_test"
                     android:layout_width="300dp"
-                    android:layout_height="200dp" />
+                    android:layout_height="200dp"
+                    android:visibility="gone" />
 
             </LinearLayout>
 

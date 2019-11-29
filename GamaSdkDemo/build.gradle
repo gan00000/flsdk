@@ -229,8 +229,8 @@ android {
 //            resValue "string", "sdk_name", "神魔SDK"
 //            signingConfig signingConfigs.release
 //        }
-//        vfjp {
-//            applicationId "com.gamamobi.vfjp"
+//        adlist {
+//            applicationId "com.gamamobi.adlist"
 //            minSdkVersion 21
 //            targetSdkVersion 27
 //            versionCode 60
@@ -243,7 +243,7 @@ android {
 //            resValue "string", "com.twitter.sdk.android.CONSUMER_KEY", "5FwA0veZVe6eQNJz05v2tZbBw"
 //            resValue "string", "com.twitter.sdk.android.CONSUMER_SECRET", "ARuTLsf9Mb7gvVfR946q6C5Q765A2G6uvQIjwiUUQxMWKRaVcX"
 //            //每个游戏的demo设置
-//            resValue "string", "test_sku", "com.vfjp.1usd"
+//            resValue "string", "test_sku", "com.adlist.1usd"
 //            resValue "string", "sdk_name", "圣光SDK"
 //            signingConfig signingConfigs.release
 //        }
@@ -431,9 +431,9 @@ android {
 //
 //            resValue "string", "scheme", "usbg"
 //
-//            resValue "string", "facebook_app_id", "480070166148561"
-//            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider480070166148561"
-//            resValue "string", "fb_login_protocol_scheme", "fb480070166148561"
+//            resValue "string", "facebook_app_id", "481578069379657"
+//            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider481578069379657"
+//            resValue "string", "fb_login_protocol_scheme", "fb481578069379657"
 //            resValue "string", "facebook_app_name", "usbg"
 //            //每个游戏的demo设置
 //            resValue "string", "test_sku", "com.gamamobi.usbg.1usd"
@@ -455,6 +455,8 @@ android {
             versionCode 1
             versionName "1.0"
             flavorDimensions "1"
+
+            resValue "string", "scheme", "ezfy"
             resValue "string", "facebook_app_id", "1040235646130047"
             resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1040235646130047"
             resValue "string", "fb_login_protocol_scheme", "fb1040235646130047"
