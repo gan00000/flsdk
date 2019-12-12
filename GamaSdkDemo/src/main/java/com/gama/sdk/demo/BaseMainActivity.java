@@ -32,6 +32,7 @@ import com.gama.sdk.login.widget.v2.age.impl.GamaAgeImpl;
 import com.gama.sdk.out.GamaFactory;
 import com.gama.sdk.out.GamaOpenWebType;
 import com.gama.sdk.out.GamaThirdPartyType;
+import com.gama.sdk.out.GsFunctionType;
 import com.gama.sdk.out.IGama;
 import com.gama.sdk.out.ISdkCallBack;
 import com.gama.sdk.social.bean.UserInfo;
@@ -55,7 +56,7 @@ public class BaseMainActivity extends Activity {
 
     protected Button loginButton, othersPayButton, googlePayBtn, shareButton, showPlatform, crashlytics,
             PurchasesHistory, getFriend, invite, checkShare, getInfo, getFriendNext, getFriendPrevious,
-            service, announcement, age, demo_language, track, chaxun, xiaofei, open_url, open_page, demo_pay_one;
+            service, announcement, age, demo_language, track, chaxun, xiaofei, open_url, open_page, demo_pay_one, ingame_bind;
     protected ImageView image_test;
     protected IGama iGama;
     private String nextUrl, previousUrl;
@@ -63,6 +64,7 @@ public class BaseMainActivity extends Activity {
     private int iabCount = 0;
     private int iabIndex = 0;
     private int maxCount = 5;
+    protected String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +97,7 @@ public class BaseMainActivity extends Activity {
         open_url = findViewById(R.id.open_url);
         open_page = findViewById(R.id.open_page);
         demo_pay_one = findViewById(R.id.demo_pay_one);
+        ingame_bind = findViewById(R.id.ingame_bind);
 
         iGama = GamaFactory.create();
 
@@ -138,6 +141,7 @@ public class BaseMainActivity extends Activity {
                     public void onLogin(SLoginResponse sLoginResponse) {
                         if (sLoginResponse != null) {
                             String uid = sLoginResponse.getUserId();
+                            userId = uid;
                             String accessToken = sLoginResponse.getAccessToken();
                             String timestamp = sLoginResponse.getTimestamp();
                             Log.i("gamaLogin", "uid:" + uid);
@@ -151,6 +155,7 @@ public class BaseMainActivity extends Activity {
                             Log.i("gamaLogin", "sLoginResponse: " + sLoginResponse.getIconUri());
                             Log.i("gamaLogin", "sLoginResponse: " + sLoginResponse.getThirdToken());
                             Log.i("gamaLogin", "sLoginResponse: " + sLoginResponse.getGmbPlayerIp());
+                            Log.i("gamaLogin", "sLoginResponse: " + sLoginResponse.isLinked());
 
                             String msg = "gamaUid : " + uid + "\n"
                                     + "thirdId : " + sLoginResponse.getThirdId() + "\n"
@@ -159,7 +164,8 @@ public class BaseMainActivity extends Activity {
                                     + "iconUri : " + sLoginResponse.getIconUri() + "\n"
                                     + "ip : " + sLoginResponse.getGmbPlayerIp() + "\n"
                                     + "code : " + sLoginResponse.getCode() + "\n"
-                                    + "timeStamp : " + sLoginResponse.getTimestamp() + "\n";
+                                    + "timeStamp : " + sLoginResponse.getTimestamp() + "\n"
+                                    + "isLinked : " + sLoginResponse.isLinked() + "\n";
                             AlertDialog.Builder builder;
                             if (Build.VERSION.SDK_INT >= 21) {
                                 builder = new AlertDialog.Builder(BaseMainActivity.this, android.R.style.Theme_Material_Dialog);
@@ -679,6 +685,27 @@ public class BaseMainActivity extends Activity {
             public void onClick(View v) {
 //                ToastUtils.toast(BaseMainActivity.this, "click to refresh");
 //                loadImage();
+            }
+        });
+
+        ingame_bind.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (TextUtils.isEmpty(userId)) {
+                    ToastUtils.toast(BaseMainActivity.this, "请先进行登入");
+                    return;
+                }
+                iGama.openFunction(BaseMainActivity.this, GsFunctionType.BIND_ACCOUNT, new ISdkCallBack() {
+                    @Override
+                    public void success() {
+                        PL.i("ingame_bind success");
+                    }
+
+                    @Override
+                    public void failure() {
+                        PL.i("ingame_bind failure");
+                    }
+                });
             }
         });
     }

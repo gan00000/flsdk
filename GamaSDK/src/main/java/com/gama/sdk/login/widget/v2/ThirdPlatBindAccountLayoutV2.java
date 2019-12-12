@@ -37,9 +37,9 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
     private EditText registerPasswordEditText, registerAccountEditText, gama_bind_et_phone, gama_bind_et_vfcode;
 
     /**
-     * 区号
+     * 区号, 手机接收限制提示
      */
-    private TextView gama_bind_tv_area;
+    private TextView gama_bind_tv_area, gama_bind_tv_limit_hint;
 
     private String account;
     private String password;
@@ -85,6 +85,12 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
 //        registerMailEditText = (EditText) contentView.findViewById(R.id.py_bind_account_mail);
 
         bindConfirm = contentView.findViewById(R.id.gama_bind_btn_confirm);
+
+        gama_bind_tv_limit_hint = contentView.findViewById(R.id.gama_bind_tv_limit_hint);
+        String phoneMsgLimitHint = GamaUtil.getPhoneMsgLimitHint(getContext());
+        if(!TextUtils.isEmpty(phoneMsgLimitHint)) {
+            gama_bind_tv_limit_hint.setText(phoneMsgLimitHint);
+        }
 
         eyeImageView.setOnClickListener(this);
         backView.setOnClickListener(this);

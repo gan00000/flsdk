@@ -5,6 +5,8 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.Selection;
 import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,8 +64,9 @@ public class ThirdPlatBindAccountLayoutV2En extends SLoginBaseRelativeLayoutEn i
 
         eyeImageView = contentView.findViewById(R.id.gama_bind_iv_eye);
         registerAccountEditText = contentView.findViewById(R.id.gama_bind_et_account);
+
         registerPasswordEditText = contentView.findViewById(R.id.gama_bind_et_password);
-        registerPasswordEditText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        registerPasswordEditText.setTransformationMethod(new PasswordTransformationMethod());
 
         gama_bind_et_vfcode = contentView.findViewById(R.id.gama_bind_et_vfcode);
 
@@ -100,11 +103,11 @@ public class ThirdPlatBindAccountLayoutV2En extends SLoginBaseRelativeLayoutEn i
             if (eyeImageView.isSelected()) {
                 eyeImageView.setSelected(false);
                 // 显示为密码
-                registerPasswordEditText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                registerPasswordEditText.setTransformationMethod(new PasswordTransformationMethod());
             } else {
                 eyeImageView.setSelected(true);
                 // 显示为普通文本
-                registerPasswordEditText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                registerPasswordEditText.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
             }
             // 使光标始终在最后位置
             Editable etable = registerPasswordEditText.getText();

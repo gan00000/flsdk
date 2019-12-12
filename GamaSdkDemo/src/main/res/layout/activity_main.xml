@@ -172,6 +172,13 @@
                     android:layout_height="200dp"
                     android:visibility="gone" />
 
+                <Button
+                    android:id="@+id/ingame_bind"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    android:text="游戏内绑定手机"/>
+
             </LinearLayout>
 
 

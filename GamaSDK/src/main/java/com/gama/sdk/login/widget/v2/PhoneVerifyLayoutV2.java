@@ -34,9 +34,9 @@ public class PhoneVerifyLayoutV2 extends SLoginBaseRelativeLayout implements Vie
      */
     private EditText gama_verify_et_phone, gama_verify_et_vfcode;
     /**
-     * 区号
+     * 区号, 手机接收限制提示
      */
-    private TextView gama_verify_tv_area;
+    private TextView gama_verify_tv_area, gama_verify_tv_limit_hint;
 
     //选中的区域信息
     private GamaAreaInfoBean selectedBean;
@@ -70,6 +70,12 @@ public class PhoneVerifyLayoutV2 extends SLoginBaseRelativeLayout implements Vie
 
         registerConfirm = contentView.findViewById(R.id.gama_verify_btn_confirm);
         gama_verify_btn_get_vfcode = contentView.findViewById(R.id.gama_verify_btn_get_vfcode);
+
+        gama_verify_tv_limit_hint = contentView.findViewById(R.id.gama_verify_tv_limit_hint);
+        String phoneMsgLimitHint = GamaUtil.getPhoneMsgLimitHint(getContext());
+        if(!TextUtils.isEmpty(phoneMsgLimitHint)) {
+            gama_verify_tv_limit_hint.setText(phoneMsgLimitHint);
+        }
 
         backView.setOnClickListener(this);
         registerConfirm.setOnClickListener(this);

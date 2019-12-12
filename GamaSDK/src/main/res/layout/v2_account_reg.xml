@@ -555,10 +555,10 @@
             app:layout_constraintTop_toTopOf="@id/gama_register_guideline_button_top" />
 
         <TextView
+            android:id="@+id/gama_register_tv_limit_hint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@string/py_register_account_vfcode_hint"
             android:textColor="@color/gama_color_ui_hint_text"
             android:textSize="@dimen/sp_12"
             app:layout_constraintEnd_toEndOf="@id/gama_register_btn_get_vfcode"

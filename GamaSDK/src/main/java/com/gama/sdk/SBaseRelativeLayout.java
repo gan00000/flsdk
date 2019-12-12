@@ -38,6 +38,11 @@ public class SBaseRelativeLayout extends RelativeLayout {
          * 时间限制解除
          */
         int TIME_OUT = 1;
+
+        /**
+         * 游戏内手机绑定成功
+         */
+        int BIND_OK = 2;
         void statusCallback(int status);
 
         void dataCallback(T t);

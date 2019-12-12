@@ -46,7 +46,7 @@ public class GamaTwitterLogin {
             public void success(Result<TwitterSession> result) {
                 Log.i(TAG, "success : " + result.data.toString());
                 if(callBack != null) {
-                    callBack.success(result.data.getUserId() + "", result.data.getUserName(), "", "");
+                    callBack.success(result.data.getUserId() + "", result.data.getUserName(), "", result.data.getAuthToken().token);
                 }
             }
 

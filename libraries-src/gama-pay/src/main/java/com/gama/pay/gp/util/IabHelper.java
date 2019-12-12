@@ -994,6 +994,9 @@ public class IabHelper {
 		// VerifyTask verifyTask = new VerifyTask();
 		do {
 			logDebug("Calling getPurchases with continuation token: " + continueToken);
+			if(mService == null) {
+				return IABHELPER_NULL;
+			}
 			Bundle ownedItems = mService.getPurchases(3, context.getPackageName(), itemType, continueToken);
 
 			int response = getResponseCodeFromBundle(ownedItems);

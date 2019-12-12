@@ -6,7 +6,7 @@ import com.core.base.bean.BaseResponseModel;
 
 /**
  * Created by GanYuanrong on 2017/2/11.
- * "code":1000,"accessToken":"2eccffd3771eeec9303616386f6a2d27","message":"登入成功","userId":"41","timestamp":"1487844049868"}
+ * {"code":1000,"beLinked":"1","accessToken":"8e4104dd1336efcc5b09eac244b077e6","message":"成功","gmbPlayerIp":"119.131.76.84","userId":"500000053","timestamp":"1576121771885"}
  */
 
 public class SLoginResponse extends BaseResponseModel {
@@ -61,6 +61,8 @@ public class SLoginResponse extends BaseResponseModel {
      * 用户ip
      */
     private String gmbPlayerIp = "";
+
+    private String beLinked = "";
 
     public String getThirdToken() {
         return thirdToken;
@@ -180,5 +182,13 @@ public class SLoginResponse extends BaseResponseModel {
 
     public void setGmbPlayerIp(String gmbPlayerIp) {
         this.gmbPlayerIp = gmbPlayerIp;
+    }
+
+    public boolean isLinked() {
+        return "1".equals(beLinked);
+    }
+
+    public void setBeLinked(String beLinked) {
+        this.beLinked = beLinked;
     }
 }

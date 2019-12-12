@@ -1,10 +1,13 @@
 package com.gama.sdk.login.widget.en.view;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.Selection;
 import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -88,7 +91,8 @@ public class PyAccountLoginV2En extends SLoginBaseRelativeLayoutEn {
         loginAccountEditText = contentView.findViewById(R.id.gama_login_et_account);
 
         loginPasswordEditText = contentView.findViewById(R.id.gama_login_et_password);
-        loginPasswordEditText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+//        loginPasswordEditText.setTypeface(Typeface.DEFAULT);
+        loginPasswordEditText.setTransformationMethod(new PasswordTransformationMethod());
 
         loginMainLoginBtn = contentView.findViewById(R.id.gama_login_btn_confirm);
 
@@ -151,11 +155,11 @@ public class PyAccountLoginV2En extends SLoginBaseRelativeLayoutEn {
                 if (eyeImageView.isSelected()) {
                     eyeImageView.setSelected(false);
                     // 显示为密码
-                    loginPasswordEditText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    loginPasswordEditText.setTransformationMethod(new PasswordTransformationMethod());
                 } else {
                     eyeImageView.setSelected(true);
                     // 显示为普通文本
-                    loginPasswordEditText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    loginPasswordEditText.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                 }
                 // 使光标始终在最后位置
                 Editable etable = loginPasswordEditText.getText();

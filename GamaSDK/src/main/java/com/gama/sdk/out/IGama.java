@@ -93,4 +93,9 @@ public interface IGama extends IGameLifeCycle {
     void gamaQueryProductDetail(Activity activity, SPayType payType, List<String> skus, GamaQueryProductListener listener);
 
     void gamaOpenCafeHome(Activity activity);
+
+    /**
+     * 处理一些特殊功能的接口
+     */
+    void openFunction(Activity activity, GsFunctionType type, ISdkCallBack callBack);
 }

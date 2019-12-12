@@ -5,6 +5,8 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.Selection;
 import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,8 +65,8 @@ public class AccountChangePwdLayoutV2En extends SLoginBaseRelativeLayoutEn imple
         changePwdOldEditText = contentView.findViewById(R.id.gama_change_et_password);
         changePwdNewEditText = contentView.findViewById(R.id.gama_change_et_password2);
 
-        changePwdOldEditText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
-        changePwdNewEditText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        changePwdOldEditText.setTransformationMethod(new PasswordTransformationMethod());
+        changePwdNewEditText.setTransformationMethod(new PasswordTransformationMethod());
 
         gama_change_iv_eye = contentView.findViewById(R.id.gama_change_iv_eye);
         gama_change_iv_eye2 = contentView.findViewById(R.id.gama_change_iv_eye2);
@@ -111,11 +113,11 @@ public class AccountChangePwdLayoutV2En extends SLoginBaseRelativeLayoutEn imple
            if (gama_change_iv_eye.isSelected()) {
                gama_change_iv_eye.setSelected(false);
                // 显示为密码
-               changePwdOldEditText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+               changePwdOldEditText.setTransformationMethod(new PasswordTransformationMethod());
            } else {
                gama_change_iv_eye.setSelected(true);
                // 显示为普通文本
-               changePwdOldEditText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+               changePwdOldEditText.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
            }
            // 使光标始终在最后位置
            Editable etable = changePwdOldEditText.getText();
@@ -124,11 +126,11 @@ public class AccountChangePwdLayoutV2En extends SLoginBaseRelativeLayoutEn imple
            if (gama_change_iv_eye2.isSelected()) {
                gama_change_iv_eye2.setSelected(false);
                // 显示为密码
-               changePwdNewEditText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+               changePwdNewEditText.setTransformationMethod(new PasswordTransformationMethod());
            } else {
                gama_change_iv_eye2.setSelected(true);
                // 显示为普通文本
-               changePwdNewEditText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+               changePwdNewEditText.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
            }
            // 使光标始终在最后位置
            Editable etable = changePwdNewEditText.getText();

@@ -1123,6 +1123,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
     @Override
     public void getAreaInfo(Activity activity) {
+        this.mActivity = activity;
         if(areaBeanList == null || areaBeanList.length < 1) {
             GamaAreaInfoRequestTask task = new GamaAreaInfoRequestTask(getContext());
             task.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(), "Loading..."));
@@ -1251,6 +1252,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
      */
     @Override
     public void phoneVerify(Activity activity, String area, String phone, String vfCode, String thirdId, final String loginType) {
+        this.mActivity = activity;
         PhoneVerifyRequestTask accountLoginCmd = new PhoneVerifyRequestTask(getActivity(), area, phone, vfCode, thirdId, loginType);
         accountLoginCmd.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(),"Loading..."));
         accountLoginCmd.setReqCallBack(new ISReqCallBack<SLoginResponse>() {
@@ -1261,6 +1263,44 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         handleRegisteOrLoginSuccess(sLoginResponse,rawResult, loginType);
                     } else {
                         ToastUtils.toast(getActivity(),sLoginResponse.getMessage());
+                    }
+                }else{
+                    ToastUtils.toast(getActivity(),R.string.py_error_occur);
+                }
+            }
+
+            @Override
+            public void timeout(String code) {}
+
+            @Override
+            public void noData() {}
+
+            @Override
+            public void cancel() {}
+        });
+        accountLoginCmd.excute(SLoginResponse.class);
+    }
+
+    /**
+     * 进行手机验证
+     */
+    @Override
+    public void inGamePhoneVerify(final Activity activity, String area, String phone, String vfCode, String thirdId, final String loginType) {
+        this.mActivity = activity;
+        PhoneVerifyRequestTask accountLoginCmd = new PhoneVerifyRequestTask(getActivity(), area, phone, vfCode, thirdId, loginType);
+        accountLoginCmd.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(),"Loading..."));
+        accountLoginCmd.setReqCallBack(new ISReqCallBack<SLoginResponse>() {
+            @Override
+            public void success(SLoginResponse sLoginResponse, String rawResult) {
+                if (sLoginResponse != null){
+                    ToastUtils.toast(getActivity(),sLoginResponse.getMessage());
+                    if (sLoginResponse.isRequestSuccess()) {
+                        GamaUtil.setAccountLinked(activity);
+                        if(callbackList != null && callbackList.size() > 0) {
+                            for (SBaseRelativeLayout.OperationCallback callback : callbackList) {
+                                callback.statusCallback(SBaseRelativeLayout.OperationCallback.BIND_OK);
+                            }
+                        }
                     }
                 }else{
                     ToastUtils.toast(getActivity(),R.string.py_error_occur);

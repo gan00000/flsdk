@@ -110,6 +110,11 @@ public class LoginContract {
         void phoneVerify(Activity activity, String area, String phone, String vfCode, String thirdId, String loginType);
 
         /**
+         * 游戏内手机验证
+         */
+        void inGamePhoneVerify(Activity activity, String area, String phone, String vfCode, String thirdId, String loginType);
+
+        /**
          * 界面功能回调
          */
         void setOperationCallback(SBaseRelativeLayout.OperationCallback callback);

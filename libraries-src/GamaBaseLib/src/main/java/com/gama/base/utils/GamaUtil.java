@@ -224,6 +224,24 @@ public class GamaUtil {
         return JsonUtil.getValueByKey(context,getSdkLoginData(context), "accessToken", "");
     }
 
+    /**
+     * 获取当次登入的账号是否已经绑定手机
+     */
+    public static boolean isAccountLinked(Context context){
+        String beLink = JsonUtil.getValueByKey(context,getSdkLoginData(context), "beLinked", "");
+        return "1".equals(beLink);
+    }
+
+    /**
+     * 绑定手机后刷新当前账号绑定状态
+     */
+    public static void setAccountLinked(Context context){
+        String newSdkLoginData = JsonUtil.setValueByKey(context, getSdkLoginData(context), "beLinked", "1");
+        if(!TextUtils.isEmpty(newSdkLoginData)) {
+            saveSdkLoginData(context, newSdkLoginData);
+        }
+    }
+
     public static final String GAMA_LOGIN_USER_ID = "GAMA_LOGIN_USER_ID";
     public static final String GAMA_LOGIN_ROLE_ID = "GAMA_LOGIN_ROLE_ID";
     public static final String GAMA_LOGIN_ROLE_NAME = "GAMA_LOGIN_ROLE_NAME";
@@ -655,15 +673,46 @@ public class GamaUtil {
     }
 
 
-    private static final String GAMA_VFCODE_SWITCH_STATUS = "GAMA_VFCODE_SWITCH_STATUS";
-    public static void saveVfcodeSwitchStatus(Context context, boolean status){
-        SPUtil.saveSimpleInfo(context, GamaUtil.GAMA_SP_FILE,GAMA_VFCODE_SWITCH_STATUS, status);
+    private static final String GAMA_SWITCH_JSON = "GAMA_SWITCH_JSON";
+
+    /**
+     * 保存Switch的文档
+     */
+    public static void saveSwitchJson(Context context, String switchJson){
+        SPUtil.saveSimpleInfo(context, GamaUtil.GAMA_SP_FILE,GAMA_SWITCH_JSON, switchJson);
     }
+
+    public static String getSwitchJson(Context context){
+        return SPUtil.getSimpleString(context, GamaUtil.GAMA_SP_FILE, GAMA_SWITCH_JSON);
+    }
+
     /**
      * 登入验证码是否开启,false:登入不需要验证码；true:登入需要验证码
      */
     public static boolean getVfcodeSwitchStatus(Context context){
-        return SPUtil.getSimpleBoolean(context, GamaUtil.GAMA_SP_FILE, GAMA_VFCODE_SWITCH_STATUS);
+        String json = getSwitchJson(context);
+        JSONObject jsonObject;
+        try {
+            jsonObject = new JSONObject(json);
+            JSONObject vfcodeSch = jsonObject.optJSONObject("vfcodeSch");
+            String code = vfcodeSch.optString("open");
+            // "0:关闭,1:开启"
+            if("0".equals(code)) {
+                return false;
+            } else {
+                return true;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return true;
+        }
+    }
+
+    /**
+     * 获取接收手机验证码测试的提示语
+     */
+    public static String getPhoneMsgLimitHint(Context context) {
+        return JsonUtil.getValueByKey(context, getSwitchJson(context), "smsMsg", "");
     }
 
     /**

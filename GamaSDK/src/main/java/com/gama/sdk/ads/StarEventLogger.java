@@ -387,19 +387,7 @@ public class StarEventLogger {
             @Override
             public void success(BaseResponseModel responseModel, String rawResult) {
                 if (responseModel != null && !TextUtils.isEmpty(rawResult)) {
-                    try {
-                        JSONObject jsonObject = new JSONObject(rawResult);
-                        JSONObject vfcodeSch = jsonObject.optJSONObject("vfcodeSch");
-                        String code = vfcodeSch.optString("open");
-                        // "0:关闭,1:开启"
-                        if("0".equals(code)) {
-                            GamaUtil.saveVfcodeSwitchStatus(activity, false);
-                        } else {
-                            GamaUtil.saveVfcodeSwitchStatus(activity, true);
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                    GamaUtil.saveSwitchJson(activity, rawResult);
                 }
             }
 

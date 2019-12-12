@@ -29,6 +29,7 @@ import com.gama.sdk.ads.GamaAdsUtils;
 import com.gama.sdk.ads.StarEventLogger;
 import com.gama.sdk.callback.IPayListener;
 import com.gama.sdk.constant.GsSdkImplConstant;
+import com.gama.sdk.function.GsFunctionHelper;
 import com.gama.sdk.login.DialogLoginImpl;
 import com.gama.sdk.login.ILogin;
 import com.gama.sdk.login.widget.v2.age.IGamaAgePresenter;
@@ -874,5 +875,15 @@ public class BaseGamaImpl implements IGama {
 
     @Override
     public void gamaOpenCafeHome(final Activity activity) {
+    }
+
+    @Override
+    public void openFunction(final Activity activity, final GsFunctionType type, final ISdkCallBack callBack) {
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                GsFunctionHelper.openFunction(activity, type, callBack);
+            }
+        });
     }
 }

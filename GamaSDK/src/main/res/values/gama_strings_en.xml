@@ -43,6 +43,11 @@
     <!--绑定账号页面（通用）-->
     <string name="en_py_login_page_account_bind">Link Account</string>
     <string name="en_py_btn_bind">Register</string>
+
+    <!--游戏内手机绑定-->
+    <string name="en_py_ingame_account_link_title">手機綁定</string>
+    <string name="en_py_ingame_account_link_subtitle">(綁定手機號碼後可領取遊戲活動獎勵)</string>
+
     <!--会员账号绑定-->
     <string name="en_py_login_page_account_link">Linking Member Accounts</string>
 
@@ -71,6 +76,8 @@
     <string name="en_py_findpwd_email_hit">Email (required) - may be used to recover password</string>
     <string name="en_py_register_email_hit">Email (optional) - may be used to recover password</string>
     <string name="en_py_msg_vfcode_hint">Please enter the verification code received on email</string>
+    <string name="en_py_msg_account_hint">Please enter your account here</string>
+    <string name="en_py_msg_password_hint">Please enter your password here </string>
 
     <!--通用文本-->
     <string name="en_py_confire">Confirm</string>

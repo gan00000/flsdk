@@ -1,6 +1,7 @@
 package com.gama.sdk.webpage;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,6 +19,7 @@ import com.gama.base.excute.UnifiedSwitchRequestTask;
 import com.gama.base.utils.GamaUtil;
 import com.gama.sdk.R;
 import com.gama.sdk.SWebViewDialog;
+import com.gama.sdk.login.widget.v2.InGameBindLayoutV2;
 import com.gama.sdk.out.GamaOpenWebType;
 import com.gama.sdk.out.ISdkCallBack;
 import com.gama.sdk.utils.DialogUtil;
@@ -180,5 +182,4 @@ public class GamaWebPageHelper {
             }
         }
     }
-
 }

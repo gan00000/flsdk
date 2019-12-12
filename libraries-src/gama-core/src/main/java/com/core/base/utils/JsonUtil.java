@@ -49,6 +49,22 @@ public class JsonUtil {
         return defaultValue;
     }
 
+    public static String setValueByKey(Context context, String jsonStr, String key, String newValue) {
+
+        if (!TextUtils.isEmpty(jsonStr)) {
+            try {
+                JSONObject jsonObject = new JSONObject(jsonStr);
+                jsonObject.put(key, newValue);
+                return jsonObject.toString();
+            } catch (Exception e) {
+                e.printStackTrace();
+                return "";
+            }
+        } else {
+            return "";
+        }
+    }
+
     public static boolean isJson(String str) {
         try {
             if (TextUtils.isEmpty(str))

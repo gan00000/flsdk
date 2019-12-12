@@ -25,7 +25,7 @@
     <string name="py_register_account_area">區碼</string>
     <string name="py_register_account_get_vfcode">取得驗證碼</string>
     <string name="py_register_account_confirm">註冊會員</string>
-    <string name="py_register_account_vfcode_hint">同一手機號碼當日不得收取驗證碼超過三次</string>
+    <string name="py_register_account_vfcode_hint">同一手機號碼當日不得收取驗證碼超過五次</string>
 
     <!--找回密码页面-->
     <string name="py_login_page_forgot_pwd">忘記密碼</string>
@@ -48,6 +48,13 @@
     <!--绑定账号页面（通用）-->
     <string name="py_login_page_account_bind">綁定會員帳號</string>
     <string name="py_btn_bind">綁定會員</string>
+
+    <!--游戏内手机绑定-->
+    <string name="py_ingame_account_link_title">手機綁定</string>
+    <string name="py_ingame_account_link_subtitle">(綁定手機號碼後可領取遊戲活動獎勵)</string>
+    <string name="py_ingame_account_link_get">獲取</string>
+    <string name="py_ingame_account_link_confirm">綁定手機</string>
+
     <!--会员账号绑定-->
     <string name="py_login_page_account_link">會員帳號綁定</string>
 
@@ -76,6 +83,8 @@
     <string name="py_findpwd_email_hit">郵箱,必填,用於找回密碼</string>
     <string name="py_register_email_hit">郵箱,選填,用於找回密碼</string>
     <string name="py_msg_vfcode_hint">請輸入簡訊驗證碼</string>
+    <string name="py_msg_account_hint">請點擊輸入您的帳號</string>
+    <string name="py_msg_password_hint">請點擊輸入您的密碼</string>
 
     <!--通用文本-->
     <string name="py_confire">確認</string>
