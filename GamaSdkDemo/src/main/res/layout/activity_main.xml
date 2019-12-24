@@ -179,6 +179,13 @@
                     android:visibility="visible"
                     android:text="游戏内绑定手机"/>
 
+                <Button
+                    android:id="@+id/upload_file"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    android:text="上传文件"/>
+
             </LinearLayout>
 
 

@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.core.base.http.HttpRequest;
 import com.core.base.utils.GamaTimeUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.ToastUtils;
@@ -56,7 +57,8 @@ public class BaseMainActivity extends Activity {
 
     protected Button loginButton, othersPayButton, googlePayBtn, shareButton, showPlatform, crashlytics,
             PurchasesHistory, getFriend, invite, checkShare, getInfo, getFriendNext, getFriendPrevious,
-            service, announcement, age, demo_language, track, chaxun, xiaofei, open_url, open_page, demo_pay_one, ingame_bind;
+            service, announcement, age, demo_language, track, chaxun, xiaofei, open_url, open_page,
+            demo_pay_one, ingame_bind, upload_file;
     protected ImageView image_test;
     protected IGama iGama;
     private String nextUrl, previousUrl;
@@ -98,6 +100,7 @@ public class BaseMainActivity extends Activity {
         open_page = findViewById(R.id.open_page);
         demo_pay_one = findViewById(R.id.demo_pay_one);
         ingame_bind = findViewById(R.id.ingame_bind);
+        upload_file = findViewById(R.id.upload_file);
 
         iGama = GamaFactory.create();
 
@@ -706,6 +709,30 @@ public class BaseMainActivity extends Activity {
                         PL.i("ingame_bind failure");
                     }
                 });
+            }
+        });
+
+        upload_file.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Thread t = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        File file = new File(Environment.getExternalStorageDirectory() + "/a.log");
+                        if (file.exists()) {
+                            Log.i("upload", file.getAbsolutePath());
+                            String s = HttpRequest.uploadFile(null, file, "a.log", "https://usbg-upload.gamesword.com/upload/upload_img.web");
+                            if(TextUtils.isEmpty(s)) {
+                                Log.i("upload", "upload failed");
+                            } else {
+                                Log.i("upload", s);
+                            }
+                        } else {
+                            Log.i("upload", "file not exists");
+                        }
+                    }
+                });
+                t.start();
             }
         });
     }

@@ -161,16 +161,16 @@
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-auth-api-phone-15.0.1" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-basement-15.0.1" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-auth-base-15.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: com.facebook.android:facebook-core-5.13.0" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:cardview-v7-27.0.2" level="project" />
     <orderEntry type="library" name="Gradle: com.crashlytics.sdk.android:crashlytics-core-2.6.3" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:animated-vector-drawable-27.0.2" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-compat-27.0.2" level="project" />
     <orderEntry type="library" name="Gradle: com.google.firebase:firebase-messaging-17.1.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.facebook.android:facebook-common-5.12.1" level="project" />
     <orderEntry type="library" name="Gradle: com.twitter:twitter-text:1.14.3@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.adjust.sdk:adjust-android:4.13.0@jar" level="project" />
-    <orderEntry type="library" name="Gradle: com.facebook.android:facebook-login-5.12.1" level="project" />
     <orderEntry type="library" name="Gradle: com.squareup.retrofit2:retrofit:2.1.0@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.facebook.android:facebook-messenger-5.13.0" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-vector-drawable-27.0.2" level="project" />
     <orderEntry type="library" name="Gradle: it.sephiroth.android.library.easing:library-1.0.2" level="project" />
     <orderEntry type="library" name="Gradle: com.mopub:mopub-sdk-4.11.0" level="project" />
@@ -181,6 +181,7 @@
     <orderEntry type="library" name="Gradle: com.mopub:mopub-sdk-native-static-4.11.0" level="project" />
     <orderEntry type="library" name="Gradle: com.twitter.sdk.android:tweet-ui-3.1.1" level="project" />
     <orderEntry type="library" name="Gradle: com.mopub:mopub-sdk-base-4.11.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.facebook.android:facebook-share-5.13.0" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-games-15.0.1" level="project" />
     <orderEntry type="library" name="Gradle: com.android.installreferrer:installreferrer-1.0" level="project" />
     <orderEntry type="library" name="Gradle: com.mopub:mopub-sdk-interstitial-4.11.0" level="project" />
@@ -201,18 +202,18 @@
     <orderEntry type="library" name="Gradle: com.android.support:support-v4-27.0.2" level="project" />
     <orderEntry type="library" name="Gradle: com.squareup.retrofit2:converter-gson:2.1.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-drive-15.0.1" level="project" />
-    <orderEntry type="library" name="Gradle: com.facebook.android:facebook-core-5.12.1" level="project" />
     <orderEntry type="library" name="Gradle: com.parse.bolts:bolts-android:1.4.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.parse.bolts:bolts-tasks:1.4.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-auth-15.0.1" level="project" />
     <orderEntry type="library" name="Gradle: gama-platform-release-1.2:@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.facebook.android:facebook-common-5.13.0" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:customtabs-27.0.2" level="project" />
     <orderEntry type="library" name="Gradle: com.parse.bolts:bolts-applinks:1.4.0@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.facebook.android:facebook-login-5.13.0" level="project" />
     <orderEntry type="library" name="Gradle: android.arch.core:common:1.0.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:recyclerview-v7-27.0.2" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-base-15.0.1" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-media-compat-27.0.2" level="project" />
-    <orderEntry type="library" name="Gradle: com.facebook.android:facebook-messenger-5.12.1" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-core-ui-27.0.2" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/Users/a123/Documents/AS/GamaSDK/GamaSDK/libs/GoogleConversionTrackingSdk-2.2.4.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-annotations:27.0.2@jar" level="project" />
@@ -221,7 +222,6 @@
     <orderEntry type="library" name="Gradle: com.google.firebase:firebase-measurement-connector-impl-16.0.1" level="project" />
     <orderEntry type="library" name="Gradle: com.twitter.sdk.android:twitter-mopub-3.1.1" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-fragment-27.0.2" level="project" />
-    <orderEntry type="library" name="Gradle: com.facebook.android:facebook-share-5.12.1" level="project" />
     <orderEntry type="library" name="Gradle: com.twitter.sdk.android:twitter-core-3.1.1" level="project" />
     <orderEntry type="library" name="Gradle: com.mopub:mopub-sdk-banner-4.11.0" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:appcompat-v7-27.0.2" level="project" />
