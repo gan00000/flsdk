@@ -16,14 +16,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.15"/>
+            app:layout_constraintGuide_percent="0.1"/>
 
         <android.support.constraint.Guideline
             android:id="@+id/gama_mainpage_guideline2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.85"/>
+            app:layout_constraintGuide_percent="0.9"/>
 
         <android.support.constraint.Guideline
             android:id="@+id/gama_mainpage_guideline3"
@@ -37,74 +37,74 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.2"/>
+            app:layout_constraintGuide_percent="0.15"/>
 
         <android.support.constraint.Guideline
             android:id="@+id/gama_mainpage_guideline5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.8"/>
+            app:layout_constraintGuide_percent="0.85"/>
 
-        <android.support.constraint.Guideline
-            android:id="@+id/gama_mainpage_guideline6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.4"/>
+        <!--<android.support.constraint.Guideline-->
+        <!--android:id="@+id/gama_mainpage_guideline6"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="vertical"-->
+        <!--app:layout_constraintGuide_percent="0.36"/>-->
 
-        <android.support.constraint.Guideline
-            android:id="@+id/gama_mainpage_guideline7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.6"/>
+        <!--<android.support.constraint.Guideline-->
+        <!--android:id="@+id/gama_mainpage_guideline7"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="vertical"-->
+        <!--app:layout_constraintGuide_percent="0.63"/>-->
 
         <android.support.constraint.Guideline
             android:id="@+id/gama_mainpage_guideline8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.38"/>
+            app:layout_constraintGuide_percent="0.35"/>
 
         <android.support.constraint.Guideline
             android:id="@+id/gama_mainpage_guideline9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.62"/>
+            app:layout_constraintGuide_percent="0.65"/>
 
         <ImageView
             android:id="@+id/btn_xm_google_login_iv"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/btn_xm_google_login"
-            app:layout_constraintDimensionRatio=""
-            app:layout_constraintBottom_toBottomOf="@id/gama_mainpage_guideline3"
-            app:layout_constraintEnd_toStartOf="@id/gama_mainpage_guideline6"
+            android:scaleType="centerInside"
+            android:src="@drawable/gama_login_google_selector"
+            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintStart_toStartOf="@id/gama_mainpage_guideline4"
-            app:layout_constraintTop_toTopOf="@id/gama_mainpage_guideline1" />
+            app:layout_constraintEnd_toStartOf="@id/btn_xm_fb_bg"
+            app:layout_constraintBottom_toBottomOf="@id/gama_mainpage_guideline3" />
 
         <ImageView
             android:id="@+id/btn_xm_member_login_iv"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:src="@drawable/btn_xm_member_login"
-            android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="@id/gama_mainpage_guideline2"
-            app:layout_constraintEnd_toStartOf="@id/gama_mainpage_guideline6"
+            android:src="@drawable/gama_login_member_selector"
+            android:scaleType="centerInside"
+            app:layout_constraintDimensionRatio="441:398"
+            app:layout_constraintEnd_toEndOf="@id/btn_xm_google_login_iv"
             app:layout_constraintStart_toStartOf="@id/gama_mainpage_guideline4"
             app:layout_constraintTop_toTopOf="@id/gama_mainpage_guideline3" />
 
         <ImageView
+            android:id="@+id/btn_xm_fb_bg"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/gama_fb_login_bg"
-            app:layout_constraintBottom_toBottomOf="@id/gama_mainpage_guideline2"
-            app:layout_constraintEnd_toStartOf="@id/gama_mainpage_guideline7"
-            app:layout_constraintStart_toStartOf="@id/gama_mainpage_guideline6"
-            app:layout_constraintTop_toTopOf="@id/gama_mainpage_guideline1" />
+            android:background="@drawable/gama_login_fb_selector"
+            app:layout_constraintStart_toEndOf="@id/btn_xm_google_login_iv"
+            app:layout_constraintBottom_toBottomOf="@id/btn_xm_member_login_iv"
+            app:layout_constraintEnd_toStartOf="@id/btn_xm_guest_bg"
+            app:layout_constraintTop_toTopOf="@id/btn_xm_google_login_iv" />
 
         <ImageView
             android:id="@+id/btn_xm_facebook_login_iv"
@@ -113,18 +113,19 @@
             android:src="@drawable/gama_fb_login"
             android:scaleType="centerInside"
             app:layout_constraintBottom_toBottomOf="@id/gama_mainpage_guideline9"
-            app:layout_constraintEnd_toStartOf="@id/gama_mainpage_guideline7"
-            app:layout_constraintStart_toStartOf="@id/gama_mainpage_guideline6"
+            app:layout_constraintEnd_toEndOf="@id/btn_xm_fb_bg"
+            app:layout_constraintStart_toStartOf="@id/btn_xm_fb_bg"
             app:layout_constraintTop_toTopOf="@id/gama_mainpage_guideline8" />
 
         <ImageView
+            android:id="@+id/btn_xm_guest_bg"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/gama_guest_login_bg"
-            app:layout_constraintBottom_toBottomOf="@id/gama_mainpage_guideline2"
+            android:background="@drawable/gama_login_guest_selector"
+            app:layout_constraintBottom_toBottomOf="@id/btn_xm_member_login_iv"
             app:layout_constraintEnd_toStartOf="@id/gama_mainpage_guideline5"
-            app:layout_constraintStart_toStartOf="@id/gama_mainpage_guideline7"
-            app:layout_constraintTop_toTopOf="@id/gama_mainpage_guideline1" />
+            app:layout_constraintStart_toEndOf="@id/btn_xm_fb_bg"
+            app:layout_constraintTop_toTopOf="@id/btn_xm_google_login_iv" />
 
         <ImageView
             android:id="@+id/btn_xm_guest_login_iv"
@@ -133,8 +134,8 @@
             android:src="@drawable/gama_guest_login"
             android:scaleType="centerInside"
             app:layout_constraintBottom_toBottomOf="@id/gama_mainpage_guideline9"
-            app:layout_constraintEnd_toStartOf="@id/gama_mainpage_guideline5"
-            app:layout_constraintStart_toStartOf="@id/gama_mainpage_guideline7"
+            app:layout_constraintEnd_toEndOf="@id/btn_xm_guest_bg"
+            app:layout_constraintStart_toStartOf="@id/btn_xm_guest_bg"
             app:layout_constraintTop_toTopOf="@id/gama_mainpage_guideline8" />
 
     </android.support.constraint.ConstraintLayout>

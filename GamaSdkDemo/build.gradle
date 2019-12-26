@@ -410,8 +410,8 @@ android {
 //            resValue "string", "zh_tw_gama_ads_pre_url", "https://track.gamamobi.com/"
 //            resValue "string", "zh_tw_gama_ads_spa_url", "https://track.gamamobi.com/"
 
-            resValue "string", "zh_tw_gama_login_pre_url", "https://login.gamesword.com/"
-            resValue "string", "zh_tw_gama_login_spa_url", "https://login.gamesword.com/"
+//            resValue "string", "zh_tw_gama_login_pre_url", "https://login.gamesword.com/"
+//            resValue "string", "zh_tw_gama_login_spa_url", "https://login.gamesword.com/"
 
         }
 

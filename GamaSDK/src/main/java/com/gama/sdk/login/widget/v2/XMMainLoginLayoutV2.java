@@ -3,8 +3,11 @@ package com.gama.sdk.login.widget.v2;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.gama.base.bean.SGameLanguage;
 import com.gama.base.utils.Localization;
@@ -21,6 +24,8 @@ public class XMMainLoginLayoutV2 extends SLoginBaseRelativeLayout implements Vie
 
     private ImageView fbLoginView, starLoginView, macLoginView, googleLoginView;
 //    private View starpyRegView;
+
+    private View btn_xm_facebook_login_bg, btn_xm_guest_login_bg;
 
     public XMMainLoginLayoutV2(Context context) {
         super(context);
@@ -49,20 +54,27 @@ public class XMMainLoginLayoutV2 extends SLoginBaseRelativeLayout implements Vie
 
         googleLoginView = contentView.findViewById(R.id.btn_xm_google_login_iv);
 
+        btn_xm_facebook_login_bg = contentView.findViewById(R.id.btn_xm_fb_bg);
+        btn_xm_guest_login_bg = contentView.findViewById(R.id.btn_xm_guest_bg);
+
         SGameLanguage sGameLanguage = Localization.getSGameLanguage(getContext());
         if(SGameLanguage.ko_KR == sGameLanguage) {
             starLoginView.setImageResource(R.drawable.btn_xm_member_login_kr);
             macLoginView.setImageResource(R.drawable.gama_guest_login_kr);
         } else if(SGameLanguage.zh_TW == sGameLanguage) {
-            starLoginView.setImageResource(R.drawable.btn_xm_member_login);
+            starLoginView.setImageResource(R.drawable.gama_login_member_selector);
             macLoginView.setImageResource(R.drawable.gama_guest_login);
         }
 
-        fbLoginView.setOnClickListener(this);
+//        fbLoginView.setOnClickListener(this);
+
         starLoginView.setOnClickListener(this);
-        macLoginView.setOnClickListener(this);
+//        macLoginView.setOnClickListener(this);
 //        starpyRegView.setOnClickListener(this);
         googleLoginView.setOnClickListener(this);
+
+        btn_xm_facebook_login_bg.setOnClickListener(this);
+        btn_xm_guest_login_bg.setOnClickListener(this);
 
 //        if (Localization.getSGameLanguage(getActivity()) == SGameLanguage.en_US){
 //            ((ImageView)macLoginView).setImageResource(R.drawable.btn_xm_guest_login_en);
@@ -77,12 +89,14 @@ public class XMMainLoginLayoutV2 extends SLoginBaseRelativeLayout implements Vie
     @Override
     public void onClick(View v) {
 
-        if (v == fbLoginView){
+        if (v == btn_xm_facebook_login_bg){
+//            btn_xm_facebook_login_bg.performClick();
             sLoginDialogv2.getLoginPresenter().fbLogin(sLoginDialogv2.getActivity());
         }else if (v == starLoginView) {
 
             sLoginDialogv2.toAccountLoginView();
-        }else if(v == macLoginView){
+        }else if(v == btn_xm_guest_login_bg){
+//            btn_xm_guest_login_bg.performClick();
             sLoginDialogv2.getLoginPresenter().macLogin(sLoginDialogv2.getActivity());
         }else if (v == googleLoginView){
             //google+登录

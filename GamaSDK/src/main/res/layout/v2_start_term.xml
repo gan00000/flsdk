@@ -181,7 +181,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/gama_ui_shape_term_btn"
+            android:background="@drawable/gama_term_confirm_selector"
             android:text="@string/gama_ui_term_confirm"
             android:textColor="@android:color/black"
             app:layout_constraintBottom_toBottomOf="parent"
