@@ -286,6 +286,7 @@
             android:textColor="@color/gama_color_ui_input_text"
             android:textColorHint="@android:color/darker_gray"
             android:textSize="@dimen/sp_14"
+            android:imeOptions="actionDone"
             app:layout_constraintBottom_toBottomOf="@id/gama_find_guideline_phone_bottom"
             app:layout_constraintEnd_toEndOf="@id/gama_find_guideline_child_right"
             app:layout_constraintStart_toStartOf="@id/gama_find_guideline_middle"

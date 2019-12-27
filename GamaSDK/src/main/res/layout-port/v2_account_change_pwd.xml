@@ -330,6 +330,7 @@
             android:textColor="@color/gama_color_ui_input_text"
             android:textColorHint="@android:color/darker_gray"
             android:textSize="@dimen/sp_14"
+            android:imeOptions="actionDone"
             app:layout_constraintBottom_toBottomOf="@id/gama_change_iv_password2"
             app:layout_constraintEnd_toEndOf="@id/gama_change_guideline_eye_start"
             app:layout_constraintStart_toStartOf="@id/gama_change_guideline_icon_end"

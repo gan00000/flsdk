@@ -512,6 +512,7 @@
             android:textColor="@color/gama_color_ui_input_text"
             android:textColorHint="@android:color/darker_gray"
             android:textSize="@dimen/sp_14"
+            android:imeOptions="actionDone"
             app:layout_constraintBottom_toBottomOf="@id/gama_register_iv_vfcode"
             app:layout_constraintEnd_toEndOf="@id/gama_register_guideline_child_right"
             app:layout_constraintStart_toStartOf="@id/gama_register_guideline_icon_end"
