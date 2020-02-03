@@ -22,6 +22,9 @@ import com.gama.sdk.out.GamaOpenWebType;
 import com.gama.sdk.out.ISdkCallBack;
 import com.gama.sdk.utils.DialogUtil;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 public class GamaWebPageHelper {
     private static ISdkCallBack iSdkCallBack;
     private static boolean isLaunch = false;
@@ -134,14 +137,20 @@ public class GamaWebPageHelper {
             url += "?";
         }
         StringBuilder builder = new StringBuilder(url);
-        builder.append("gameCode=").append(ResConfig.getGameCode(context))
-                .append("&userId=").append(GamaUtil.getUid(context))
-                .append("&accessToken=").append(GamaUtil.getSdkAccessToken(context))
-                .append("&packageName=").append(context.getPackageName())
-                .append("&timestamp=").append(GamaUtil.getSdkTimestamp(context))
-                .append("&serverCode=").append(GamaUtil.getServerCode(context))
-                .append("&roleId=").append(GamaUtil.getRoleId(context))
-                .append("&from=gamePage");
+        try {
+            builder.append("gameCode=").append(URLEncoder.encode(ResConfig.getGameCode(context),"UTF-8"))
+                    .append("&userId=").append(URLEncoder.encode(GamaUtil.getUid(context),"UTF-8"))
+                    .append("&accessToken=").append(URLEncoder.encode(GamaUtil.getSdkAccessToken(context),"UTF-8"))
+                    .append("&packageName=").append(URLEncoder.encode(context.getPackageName(),"UTF-8"))
+                    .append("&timestamp=").append(URLEncoder.encode(GamaUtil.getSdkTimestamp(context),"UTF-8"))
+                    .append("&serverCode=").append(URLEncoder.encode(GamaUtil.getServerCode(context),"UTF-8"))
+                    .append("&roleId=").append(URLEncoder.encode(GamaUtil.getRoleId(context),"UTF-8"))
+                    .append("&roleName=").append(URLEncoder.encode(GamaUtil.getRoleName(context),"UTF-8"))
+                    .append("&roleLevel=").append(URLEncoder.encode(GamaUtil.getRoleLevel(context),"UTF-8"))
+                    .append("&from=gamePage");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         PL.i("add info url : " + builder.toString());
         return builder.toString();
     }

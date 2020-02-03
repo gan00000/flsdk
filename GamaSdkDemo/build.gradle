@@ -449,27 +449,25 @@ android {
 //        }
 
         twweb {
-            applicationId "com.gamamobi.ezfy"
+            signingConfig signingConfigs.release
+            applicationId "com.gamamobi.twsm"
             minSdkVersion 21
             targetSdkVersion 28
             versionCode 1
             versionName "1.0"
             flavorDimensions "1"
-
-            resValue "string", "scheme", "ezfy"
-            resValue "string", "facebook_app_id", "1040235646130047"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1040235646130047"
-            resValue "string", "fb_login_protocol_scheme", "fb1040235646130047"
-            resValue "string", "facebook_app_name", "硬漢部隊"
+            resValue "string", "scheme", "twsm"
+            resValue "string", "facebook_app_id", "404025320186326"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider404025320186326"
+            resValue "string", "fb_login_protocol_scheme", "fb404025320186326"
+            resValue "string", "facebook_app_name", "神魔大陸2"
             //每个游戏的demo设置
-            resValue "string", "test_sku", "com.ezfy.1usd"
-            resValue "string", "sdk_name", "硬汉Demo"
-            signingConfig signingConfigs.release
+            resValue "string", "test_sku", "com.gamamobi.smdl.1usd"
+            resValue "string", "sdk_name", "神魔大陸2Demo"
 
             buildConfigField "String[]", "PRODUCE_LIST",
                     "{" +
-                            "\"com.ezfy.1usd\"," +
-                            "\"com.ezfy.100usd\"," +
+                            "\"com.gamamobi.smdl.1usd\"," +
                             "}"
         }
 

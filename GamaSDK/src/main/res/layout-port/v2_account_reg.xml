@@ -443,6 +443,7 @@
             android:layout_height="0dp"
             android:layout_marginStart="4dp"
             android:background="@drawable/gama_ui_phone_bg"
+            android:imeOptions="actionDone"
             android:hint="@string/py_register_account_phone"
             android:inputType="phone"
             android:maxLines="1"

@@ -15,7 +15,7 @@ public class GsSdkImplConstant {
     /**
      * .app第三方支付接口
      */
-    public static final String GS_THIRD_METHOD_APP = "dynamic_change.app";
+    public static final String GS_THIRD_METHOD_APP = "web/page/payment.app";
 
     /**
      * .app活动接口

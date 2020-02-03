@@ -181,11 +181,11 @@ public class BaseMainActivity extends Activity {
                             /**
                              * 同步角色信息(以下均为测试信息)
                              */
-                            String roleId = "123"; //角色id
-                            String roleName = "角色名"; //角色名
-                            String roleLevel = "10"; //角色等级
+                            String roleId = "20001000402"; //角色id
+                            String roleName = "貪婪聖殿"; //角色名
+                            String roleLevel = "106"; //角色等级
                             String vipLevel = "5"; //角色vip等级
-                            String serverCode = "1"; //角色伺服器id
+                            String serverCode = "20001"; //角色伺服器id
                             String serverName = "S1"; //角色伺服器名称
                             iGama.registerRoleInfo(BaseMainActivity.this, roleId, roleName, roleLevel, vipLevel, serverCode, serverName);
                         } else {
