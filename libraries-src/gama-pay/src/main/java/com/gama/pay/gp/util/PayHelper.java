@@ -49,6 +49,7 @@ public class PayHelper {
 		webPayReqBean.setExtra(extra);
 
 		webPayReqBean.setPsid("62");
+		webPayReqBean.setTimestamp(GamaUtil.getSdkTimestamp(context));
 
 		return webPayReqBean;
 

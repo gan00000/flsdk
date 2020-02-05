@@ -8,11 +8,11 @@
     </facet>
     <facet type="android" name="Android">
       <configuration>
-        <option name="SELECTED_BUILD_VARIANT" value="twgoogleRelease" />
-        <option name="ASSEMBLE_TASK_NAME" value="assembleTwgoogleRelease" />
-        <option name="COMPILE_JAVA_TASK_NAME" value="compileTwgoogleReleaseSources" />
+        <option name="SELECTED_BUILD_VARIANT" value="twwebRelease" />
+        <option name="ASSEMBLE_TASK_NAME" value="assembleTwwebRelease" />
+        <option name="COMPILE_JAVA_TASK_NAME" value="compileTwwebReleaseSources" />
         <afterSyncTasks>
-          <task>generateTwgoogleReleaseSources</task>
+          <task>generateTwwebReleaseSources</task>
         </afterSyncTasks>
         <option name="ALLOW_USER_CONFIGURATION" value="false" />
         <option name="MANIFEST_FILE_RELATIVE_PATH" value="/src/main/AndroidManifest.xml" />
@@ -24,53 +24,53 @@
     </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7">
-    <output url="file://$MODULE_DIR$/build/intermediates/javac/twgoogleRelease/compileTwgoogleReleaseJavaWithJavac/classes" />
-    <output-test url="file://$MODULE_DIR$/build/intermediates/javac/twgoogleReleaseUnitTest/compileTwgoogleReleaseUnitTestJavaWithJavac/classes" />
+    <output url="file://$MODULE_DIR$/build/intermediates/javac/twwebRelease/compileTwwebReleaseJavaWithJavac/classes" />
+    <output-test url="file://$MODULE_DIR$/build/intermediates/javac/twwebReleaseUnitTest/compileTwwebReleaseUnitTestJavaWithJavac/classes" />
     <exclude-output />
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/twgoogle/release" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/not_namespaced_r_class_sources/twgoogleRelease/generateTwgoogleReleaseRFile/out" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/twgoogle/release" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/twgoogle/release" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/twgoogle/release" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/twgoogle/release" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/twgoogle/release" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/twgoogleRelease/res" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/twgoogleRelease/resources" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/twgoogleRelease/assets" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/twgoogleRelease/aidl" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/twgoogleRelease/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/twgoogleRelease/rs" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/twgoogleRelease/shaders" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/test/twgoogle/release" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testTwgoogleRelease/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testTwgoogleRelease/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testTwgoogleRelease/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testTwgoogleRelease/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testTwgoogleRelease/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testTwgoogleRelease/rs" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testTwgoogleRelease/shaders" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/twgoogle/res" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/twgoogle/resources" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/twgoogle/assets" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/twgoogle/aidl" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/twgoogle/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/twgoogle/rs" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/twgoogle/shaders" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestTwgoogle/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestTwgoogle/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestTwgoogle/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestTwgoogle/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestTwgoogle/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestTwgoogle/rs" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestTwgoogle/shaders" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testTwgoogle/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testTwgoogle/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testTwgoogle/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testTwgoogle/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testTwgoogle/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testTwgoogle/rs" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testTwgoogle/shaders" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/twweb/release" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/not_namespaced_r_class_sources/twwebRelease/generateTwwebReleaseRFile/out" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/twweb/release" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/twweb/release" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/twweb/release" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/twweb/release" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/twweb/release" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/twwebRelease/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/twwebRelease/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/twwebRelease/assets" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/twwebRelease/aidl" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/twwebRelease/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/twwebRelease/rs" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/twwebRelease/shaders" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/test/twweb/release" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testTwwebRelease/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testTwwebRelease/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testTwwebRelease/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testTwwebRelease/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testTwwebRelease/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testTwwebRelease/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testTwwebRelease/shaders" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/twweb/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/twweb/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/twweb/assets" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/twweb/aidl" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/twweb/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/twweb/rs" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/twweb/shaders" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testTwweb/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testTwweb/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testTwweb/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testTwweb/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testTwweb/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testTwweb/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testTwweb/shaders" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestTwweb/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestTwweb/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestTwweb/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestTwweb/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestTwweb/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestTwweb/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestTwweb/shaders" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/release/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/release/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/release/assets" type="java-resource" />
@@ -128,18 +128,20 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/shaders" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/symbols" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/transforms" />
+      <excludeFolder url="file://$MODULE_DIR$/build/libs" />
       <excludeFolder url="file://$MODULE_DIR$/build/outputs" />
+      <excludeFolder url="file://$MODULE_DIR$/build/reports" />
       <excludeFolder url="file://$MODULE_DIR$/build/tmp" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 27 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Gradle: Plat-GS-SDK-release-2.4:@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.firebase:firebase-core-16.0.1" level="project" />
     <orderEntry type="library" name="Gradle: com.mopub:mopub-sdk-rewardedvideo-4.11.0" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-measurement-base-16.0.0" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-auth-api-phone-15.0.1" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-basement-15.0.1" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-auth-base-15.0.1" level="project" />
-    <orderEntry type="library" name="Gradle: com.facebook.android:facebook-core-5.13.0" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:cardview-v7-27.0.2" level="project" />
     <orderEntry type="library" name="Gradle: com.crashlytics.sdk.android:crashlytics-core-2.6.3" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:animated-vector-drawable-27.0.2" level="project" />
@@ -147,25 +149,27 @@
     <orderEntry type="library" name="Gradle: com.google.firebase:firebase-messaging-17.1.0" level="project" />
     <orderEntry type="library" name="Gradle: com.twitter:twitter-text:1.14.3@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.adjust.sdk:adjust-android:4.13.0@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.github.bumptech.glide:glide-4.7.1" level="project" />
     <orderEntry type="library" name="Gradle: com.squareup.retrofit2:retrofit:2.1.0@jar" level="project" />
-    <orderEntry type="library" name="Gradle: com.facebook.android:facebook-messenger-5.13.0" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-vector-drawable-27.0.2" level="project" />
     <orderEntry type="library" name="Gradle: it.sephiroth.android.library.easing:library-1.0.2" level="project" />
     <orderEntry type="library" name="Gradle: com.mopub:mopub-sdk-4.11.0" level="project" />
     <orderEntry type="library" name="Gradle: com.android.volley:volley-1.1.1" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-core-utils-27.0.2" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support.constraint:constraint-layout-1.1.3" level="project" />
+    <orderEntry type="library" name="Gradle: com.facebook.android:facebook-messenger-5.15.3" level="project" />
+    <orderEntry type="library" name="Gradle: com.facebook.android:facebook-share-5.15.3" level="project" />
     <orderEntry type="library" name="Gradle: com.google.zxing:core:3.3.3@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.mopub:mopub-sdk-native-static-4.11.0" level="project" />
     <orderEntry type="library" name="Gradle: com.twitter.sdk.android:tweet-ui-3.1.1" level="project" />
     <orderEntry type="library" name="Gradle: com.mopub:mopub-sdk-base-4.11.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.facebook.android:facebook-share-5.13.0" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-games-15.0.1" level="project" />
     <orderEntry type="library" name="Gradle: com.android.installreferrer:installreferrer-1.0" level="project" />
     <orderEntry type="library" name="Gradle: com.mopub:mopub-sdk-interstitial-4.11.0" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.exoplayer:exoplayer-r1.5.6" level="project" />
     <orderEntry type="library" name="Gradle: io.fabric.sdk.android:fabric-1.4.3" level="project" />
     <orderEntry type="library" name="Gradle: com.google.firebase:firebase-analytics-16.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: YoutobePlayerCore-release-2.4:@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.crashlytics.sdk.android:beta-1.2.9" level="project" />
     <orderEntry type="library" name="Gradle: com.mopub.volley:mopub-volley:1.1.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.zhihu.android:matisse-0.5.1" level="project" />
@@ -174,6 +178,7 @@
     <orderEntry type="library" name="Gradle: com.squareup.okhttp3:okhttp:3.4.2@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.firebase:firebase-analytics-impl-16.1.1" level="project" />
     <orderEntry type="library" name="Gradle: it.sephiroth.android.library.imagezoom:library-1.0.4" level="project" />
+    <orderEntry type="library" name="Gradle: com.facebook.android:facebook-core-5.15.3" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support.constraint:constraint-layout-solver:1.1.3@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.squareup.okio:okio:1.9.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.twitter.sdk.android:tweet-composer-3.1.1" level="project" />
@@ -183,17 +188,17 @@
     <orderEntry type="library" name="Gradle: com.parse.bolts:bolts-android:1.4.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.parse.bolts:bolts-tasks:1.4.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-auth-15.0.1" level="project" />
-    <orderEntry type="library" name="Gradle: gama-platform-release-1.2:@aar" level="project" />
-    <orderEntry type="library" name="Gradle: com.facebook.android:facebook-common-5.13.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.facebook.android:facebook-login-5.15.3" level="project" />
+    <orderEntry type="library" name="Gradle: com.facebook.android:facebook-common-5.15.3" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:customtabs-27.0.2" level="project" />
     <orderEntry type="library" name="Gradle: com.parse.bolts:bolts-applinks:1.4.0@jar" level="project" />
-    <orderEntry type="library" name="Gradle: com.facebook.android:facebook-login-5.13.0" level="project" />
     <orderEntry type="library" name="Gradle: android.arch.core:common:1.0.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:recyclerview-v7-27.0.2" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-base-15.0.1" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-media-compat-27.0.2" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-core-ui-27.0.2" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/Users/a123/Documents/AS/GamaSDK/GamaSDK/libs/GoogleConversionTrackingSdk-2.2.4.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.github.bumptech.glide:disklrucache:4.7.1@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-annotations:27.0.2@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-ads-identifier-15.0.1" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/Users/a123/Documents/AS/GamaSDK/GamaSDK/libs/AF-Android-SDK.jar:unspecified@jar" level="project" />
@@ -208,8 +213,10 @@
     <orderEntry type="library" name="Gradle: com.google.code.gson:gson:2.8.2@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.firebase:firebase-iid-interop-16.0.0" level="project" />
     <orderEntry type="library" name="Gradle: com.squareup.picasso:picasso:2.5.2@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.github.bumptech.glide:gifdecoder-4.7.1" level="project" />
     <orderEntry type="library" name="Gradle: com.crashlytics.sdk.android:crashlytics-2.9.4" level="project" />
     <orderEntry type="library" name="Gradle: com.google.firebase:firebase-measurement-connector-16.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.github.bumptech.glide:annotations:4.7.1@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.firebase:firebase-common-16.0.0" level="project" />
     <orderEntry type="library" name="Gradle: com.crashlytics.sdk.android:answers-1.4.2" level="project" />
     <orderEntry type="library" name="Gradle: android.arch.lifecycle:runtime-1.0.3" level="project" />

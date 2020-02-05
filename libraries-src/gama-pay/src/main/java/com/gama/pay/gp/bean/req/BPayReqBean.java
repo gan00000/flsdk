@@ -85,4 +85,12 @@ public class BPayReqBean extends BaseReqeustBean {
 	public void setAdId(String adId) {
 		this.adId = adId;
 	}
+
+	public String getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(String timestamp) {
+		this.timestamp = timestamp;
+	}
 }

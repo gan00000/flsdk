@@ -62,8 +62,6 @@ dependencies {
     api 'com.twitter.sdk.android:tweet-composer:3.1.1'
     api 'com.twitter.sdk.android:twitter-mopub:3.1.1'
 //    api project(':youzu')
-    //google volley
-    api 'com.android.volley:volley:1.1.1'
 }
 
 //./gradlew makeJar 出现env: bash\r: No such file or directory的话是由

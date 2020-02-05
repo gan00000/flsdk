@@ -39,7 +39,7 @@
     <string name="zh_tw_gama_start_terms_private_url" translatable="false">https://member.gamesword.com/member/privacymb.html</string>
 
     <!--客服链接-->
-    <string name="zh_tw_gama_service_url" translatable="false">https://member.gamesword.com/service/turn.html</string>
+    <string name="zh_tw_gama_service_url" translatable="false">https://platform.gamesword.com/web/page/service.app</string>
 
     <!--区域码链接-->
     <string name="zh_tw_gama_area_info_url" translatable="false">https://static-download2.gamesword.com/baseconfig/v1/areacodes.json</string>

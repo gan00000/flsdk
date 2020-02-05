@@ -172,17 +172,17 @@ public class GamaImpl extends BaseGamaImpl {
     private void a(Activity activity, String cpOrderId, String extra) {
         WebPayReqBean webPayReqBean = PayHelper.buildWebPayBean(activity, cpOrderId, extra);
 
-        String payThirdUrl = null;
-        if (GamaUtil.getSdkCfg(activity) != null) {
-            payThirdUrl = GamaUtil.getSdkCfg(activity).getS_Third_PayUrl();
-        }
-        if (TextUtils.isEmpty(payThirdUrl)) {
-            if(GamaUtil.isInterfaceSurfixWithApp(activity)) {
-                payThirdUrl = ResConfig.getPayPreferredUrl(activity) + GsSdkImplConstant.GS_THIRD_METHOD_APP;
-            } else {
-                payThirdUrl = ResConfig.getPayPreferredUrl(activity) + GsSdkImplConstant.GS_THIRD_METHOD;
-            }
-        }
+        String payThirdUrl = ResConfig.getPlatPreferredUrl(activity) + GsSdkImplConstant.GS_THIRD_METHOD_APP;
+//        if (GamaUtil.getSdkCfg(activity) != null) {
+//            payThirdUrl = GamaUtil.getSdkCfg(activity).getS_Third_PayUrl();
+//        }
+//        if (TextUtils.isEmpty(payThirdUrl)) {
+//            if(GamaUtil.isInterfaceSurfixWithApp(activity)) {
+//                payThirdUrl = ResConfig.getPayPreferredUrl(activity) + GsSdkImplConstant.GS_THIRD_METHOD_APP;
+//            } else {
+//                payThirdUrl = ResConfig.getPlatPreferredUrl(activity) + GsSdkImplConstant.GS_THIRD_METHOD_APP;
+//            }
+//        }
         webPayReqBean.setCompleteUrl(payThirdUrl);
 
         String webUrl = webPayReqBean.createPreRequestUrl();
