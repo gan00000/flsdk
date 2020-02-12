@@ -70,6 +70,7 @@ public class GooglePayHelper {
                     PL.i(TAG, "startSetup onIabSetupFinished.");
                     if (!result.isSuccess()) {
                         PL.i(TAG, "Your phone or Google account does not support In-app Billing");
+                        recycleIab();
                         return;
                     }
                     //开始从Google商店查询所有商品状态
@@ -78,6 +79,7 @@ public class GooglePayHelper {
             });
         } else {
             PL.e("iabhelper null !!!!!!");
+            recycleIab();
         }
     }
 
@@ -143,7 +145,7 @@ public class GooglePayHelper {
                         if (mPurchase.getPurchaseState() == 2) {//退款订单
                             PL.i(TAG, "refunded:属于退款订单");
                         } else {
-                            //补发
+                            //补发,这里不需要recycle，如果有未消费会进入下面两个消费的其中之一，消费后会recycle
                             replacement(mContext, mPurchase);
                         }
                     }
@@ -325,6 +327,9 @@ public class GooglePayHelper {
     public void queryProductDetail(final Context context, final List<String> skus, final GamaQueryProductListener listener) {
         if(isWorking) {
             PL.i(TAG, "iab is working,ignore this request");
+            if (listener != null) {
+                listener.onQueryResult(null);
+            }
             return;
         }
         lockWorking("queryProductDetail");
