@@ -678,4 +678,15 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
     public void showBindView(int fromPage) {
         toBindUniqueView(fromPage);
     }
+
+    @Override
+    public void refreshVfCode() {
+        if(accountLoginView != null && accountLoginView.getVisibility() == View.VISIBLE) {
+            try {
+                accountLoginView.refreshVfCode();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

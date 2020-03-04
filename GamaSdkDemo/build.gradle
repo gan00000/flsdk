@@ -398,22 +398,20 @@ android {
         }
 
         twgoogle {
-            applicationId "com.gamesword.gotgl"
+            applicationId "com.gamesword.twsb"
             minSdkVersion 21
             targetSdkVersion 28
             versionCode 1
             versionName "1.0"
             flavorDimensions "1"
-
-            resValue "string", "scheme", "gotgl"
-
-            resValue "string", "facebook_app_id", "2187420264887772"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider2187420264887772"
-            resValue "string", "fb_login_protocol_scheme", "fb2187420264887772"
-            resValue "string", "facebook_app_name", "硬漢部隊"
+            resValue "string", "scheme", "twsb"
+            resValue "string", "facebook_app_id", "1020031555016427"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1020031555016427"
+            resValue "string", "fb_login_protocol_scheme", "fb1020031555016427"
+            resValue "string", "facebook_app_name", "shining beyond"
             //每个游戏的demo设置
             resValue "string", "test_sku", "com.gamesword.gotgl.1usd"
-            resValue "string", "sdk_name", "硬汉Demo"
+            resValue "string", "sdk_name", "twsb"
             signingConfig signingConfigs.release
 
             buildConfigField "String[]", "PRODUCE_LIST",
@@ -422,6 +420,32 @@ android {
                             "\"com.ezfy.100usd\"," +
                             "}"
         }
+
+//        twgoogle {
+//            applicationId "com.gamesword.gotgl"
+//            minSdkVersion 21
+//            targetSdkVersion 28
+//            versionCode 1
+//            versionName "1.0"
+//            flavorDimensions "1"
+//
+//            resValue "string", "scheme", "gotgl"
+//
+//            resValue "string", "facebook_app_id", "2187420264887772"
+//            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider2187420264887772"
+//            resValue "string", "fb_login_protocol_scheme", "fb2187420264887772"
+//            resValue "string", "facebook_app_name", "硬漢部隊"
+//            //每个游戏的demo设置
+//            resValue "string", "test_sku", "com.gamesword.gotgl.1usd"
+//            resValue "string", "sdk_name", "硬汉Demo"
+//            signingConfig signingConfigs.release
+//
+//            buildConfigField "String[]", "PRODUCE_LIST",
+//                    "{" +
+//                            "\"com.gamesword.gotgl.1usd\"," +
+//                            "\"com.ezfy.100usd\"," +
+//                            "}"
+//        }
 
 //        twgoogle {
 //            applicationId "com.gamesword.usbg"

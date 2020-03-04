@@ -260,7 +260,7 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
 
     private void loadImage() {
         String vfcodeUrl = ResConfig.getLoginPreferredUrl(getContext()) + GSRequestMethod.GS_REQUEST_METHOD_VFCODE
-                + "?timestamp=" + System.currentTimeMillis() + "&operatingSystem=android&uniqueId=" + SGoogleProxy.getAdvertisingId(getContext());
+                + "?timestamp=" + System.currentTimeMillis() + "&operatingSystem=android&uniqueId=" + GamaUtil.getCustomizedUniqueId1AndroidId1Adid(getContext());
         PL.i(vfcodeUrl);
         final RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         //构建ImageRequest 实例
@@ -289,6 +289,14 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
         if (!TextUtils.isEmpty(account)){
             loginAccountEditText.setText(account);
             loginPasswordEditText.setText(password);
+        }
+    }
+
+    @Override
+    public void refreshVfCode() {
+        super.refreshVfCode();
+        if (GamaUtil.getVfcodeSwitchStatus(getContext())) {
+            loadImage();
         }
     }
 }

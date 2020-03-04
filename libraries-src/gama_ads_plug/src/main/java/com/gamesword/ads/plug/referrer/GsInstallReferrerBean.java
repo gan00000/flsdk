@@ -1,22 +1,13 @@
-package com.gama.base.bean;
+package com.gamesword.ads.plug.referrer;
 
-import android.content.Context;
+import java.io.Serializable;
 
-/**
- * <p>Title: AdsRequestBean</p> <p>Description: 接口请求参数实体</p>
- *
- * @author GanYuanrong
- * @date 2014年8月22日
- */
-public class AdsRequestBean extends SSdkBaseRequestBean {
+public class GsInstallReferrerBean implements Serializable {
 
+    private String referrerUrl;
     private String referrerClickTime;
     private String appInstallTime;
     private boolean instantExperienceLaunched;
-
-    public AdsRequestBean(Context context) {
-        super(context);
-    }
 
     public String getReferrerClickTime() {
         return referrerClickTime;
@@ -40,5 +31,13 @@ public class AdsRequestBean extends SSdkBaseRequestBean {
 
     public void setInstantExperienceLaunched(boolean instantExperienceLaunched) {
         this.instantExperienceLaunched = instantExperienceLaunched;
+    }
+
+    public String getReferrerUrl() {
+        return referrerUrl;
+    }
+
+    public void setReferrerUrl(String referrerUrl) {
+        this.referrerUrl = referrerUrl;
     }
 }

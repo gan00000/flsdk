@@ -41,6 +41,8 @@ public class LoginContract {
         void showPhoneVerifyView(String loginType, String thirdId);
 
         void showBindView(int fromPage);
+
+        void refreshVfCode();
     }
 
     /**

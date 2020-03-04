@@ -153,7 +153,7 @@ dependencies {
     //twgoogle应用库
     twgoogleApi project(':libraries-src:gama-pay')
     twgoogleImplementation(name: 'Plat-GS-SDK-release-2.4', ext: 'aar')
-    twgoogleImplementation(name: 'YoutobePlayerCore-release-2.4', ext: 'aar')
+    twgoogleImplementation(name: 'YoutobePlayerCore-release-2.4.1', ext: 'aar')
     twgoogleImplementation ('com.zhihu.android:matisse:0.5.1') {
         exclude group: 'com.android.support'
     }
@@ -163,7 +163,7 @@ dependencies {
     //twweb引用库
     twwebApi project(':libraries-src:gama-pay')
     twwebImplementation(name: 'Plat-GS-SDK-release-2.4', ext: 'aar')
-    twwebImplementation(name: 'YoutobePlayerCore-release-2.4', ext: 'aar')
+    twwebImplementation(name: 'YoutobePlayerCore-release-2.4.1', ext: 'aar')
     twwebImplementation ('com.zhihu.android:matisse:0.5.1') {
         exclude group: 'com.android.support'
     }

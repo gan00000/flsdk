@@ -177,17 +177,22 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     public void autoLogin(Activity activity) {
         this.mActivity = activity;
 
-        if(GamaUtil.getVfcodeSwitchStatus(activity)) {
-            showLoginView();
-            return;
-        }
+//        if(GamaUtil.getVfcodeSwitchStatus(activity)) {
+//            showLoginView();
+//            return;
+//        }
 
         String previousLoginType = GamaUtil.getPreviousLoginType(activity);
 
         if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GAMESWORD, previousLoginType)) {//自動登錄
-            String account = GamaUtil.getAccount(activity);
-            String password = GamaUtil.getPassword(activity);
-            startAutoLogin(activity, SLoginType.LOGIN_TYPE_GAMESWORD, account, password);
+            //如果开启了验证码登录就不进行gs自动登录
+            if(GamaUtil.getVfcodeSwitchStatus(activity)) {
+                showLoginView();
+            } else {
+                String account = GamaUtil.getAccount(activity);
+                String password = GamaUtil.getPassword(activity);
+                startAutoLogin(activity, SLoginType.LOGIN_TYPE_GAMESWORD, account, password);
+            }
 
         } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_MAC, previousLoginType)) {//免注册没有自動登錄
 //            String account = GamaUtil.getMacAccount(activity);
@@ -212,8 +217,6 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             showLoginView();
         }
 
-        PL.i("fb keyhash:" + SignatureUtil.getHashKey(activity, activity.getPackageName()));
-
     }
 
     @Override
@@ -223,7 +226,13 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             sFbLogin(activity, sFacebookProxy, new FbLoginCallBack() {
                 @Override
                 public void loginSuccess(FaceBookUser user) {
-                    fbThirdLogin(user.getUserFbId(), user.getBusinessId(), "");
+                    if(user != null) {
+                        fbThirdLogin(user.getUserFbId(), user.getBusinessId(), "");
+                    } else {
+                        if (isAutoLogin) {
+                            showLoginView();
+                        }
+                    }
                 }
             });
         }
@@ -233,6 +242,9 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     @Override
     public void googleLogin(final Activity activity) {
         if (sGoogleSignIn == null){
+            if (isAutoLogin) {
+                showLoginView();
+            }
             return;
         }
         sGoogleSignIn.setClientId(ResConfig.getGoogleClientId(activity));
@@ -248,6 +260,10 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     thirdLoginRegRequestBean.setGoogleClientId(ResConfig.getGoogleClientId(activity));
                     thirdLoginRegRequestBean.setGoogleIdToken(idTokenString);
                     thirdPlatLogin(activity, thirdLoginRegRequestBean);
+                } else {
+                    if (isAutoLogin) {
+                        showLoginView();
+                    }
                 }
             }
 
@@ -255,6 +271,9 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             public void failure() {
                 ToastUtils.toast(activity,"Google sign in error");
                 PL.i("google sign in failure");
+                if (isAutoLogin) {
+                    showLoginView();
+                }
             }
         });
     }
@@ -537,6 +556,9 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             @Override
             public void onCancel() {
                 PL.d(TAG, "sFbLogin cancel");
+                if(fbLoginCallBack != null) {
+                    fbLoginCallBack.loginSuccess(null);
+                }
             }
 
             @Override
@@ -582,6 +604,10 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         fbLoginCallBack.loginSuccess(faceBookUser);
                     } else {
                         PL.i(TAG, "Facebook 登入回調為空");
+                    }
+                } else { //没有本地记录
+                    if (fbLoginCallBack != null) {
+                        fbLoginCallBack.loginSuccess(null);
                     }
                 }
             }
@@ -772,10 +798,10 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 showLoginView();
                 return;
             }
-            if (!GamaUtil.checkPassword(password)) {
-                showLoginView();
-                return;
-            }
+//            if (!GamaUtil.checkPassword(password)) {
+//                showLoginView();
+//                return;
+//            }
 
             iLoginView.showAutoLoginTips(String.format(activity.getResources().getString(R.string.py_login_autologin_tips),account));
         } else {
@@ -852,7 +878,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     }
 
     /**
-     * 顯示登入頁面
+     * 顯示登入頁面,自动登录状态重置为false
      */
     private void showLoginView() {
         isAutoLogin = false;
@@ -877,6 +903,12 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     private void showBindView(int fromPage) {
         if (iLoginView != null){
             iLoginView.showBindView(fromPage);
+        }
+    }
+
+    private void refreshVfCode() {
+        if (iLoginView != null){
+            iLoginView.refreshVfCode();
         }
     }
 
@@ -1217,31 +1249,48 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         }
                         handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GAMESWORD);
                     }else{
-
                         ToastUtils.toast(getActivity(),sLoginResponse.getMessage());
+                        if(isAutoLogin) {
+                            showLoginView();
+                        } else {
+                            refreshVfCode();
+                        }
                     }
                 }else{
                     ToastUtils.toast(getActivity(),R.string.py_error_occur);
+                    if(isAutoLogin) {
+                        showLoginView();
+                    } else {
+                        refreshVfCode();
+                    }
                 }
             }
 
             @Override
             public void timeout(String code) {
                 if(isAutoLogin) {
-                    iLoginView.showLoginView();
+                    showLoginView();
+                } else {
+                    refreshVfCode();
                 }
             }
 
             @Override
             public void noData() {
                 if(isAutoLogin) {
-                    iLoginView.showLoginView();
+                    showLoginView();
+                } else {
+                    refreshVfCode();
                 }
             }
 
             @Override
             public void cancel() {
-                iLoginView.showLoginView();
+                if(isAutoLogin) {
+                    showLoginView();
+                } else {
+                    refreshVfCode();
+                }
             }
         });
         accountLoginCmd.excute(SLoginResponse.class);

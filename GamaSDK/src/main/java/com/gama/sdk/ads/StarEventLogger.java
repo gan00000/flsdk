@@ -30,6 +30,8 @@ import com.gama.sdk.utils.DialogUtil;
 import com.gama.thirdlib.facebook.SFacebookProxy;
 import com.gama.thirdlib.google.SGoogleProxy;
 import com.gamamobi.ads.plug.aj.GamaAj;
+import com.gamesword.ads.plug.referrer.GsInstallReferrer;
+import com.gamesword.ads.plug.referrer.GsInstallReferrerBean;
 import com.google.ads.conversiontracking.AdWordsConversionReporter;
 
 import org.json.JSONException;
@@ -345,40 +347,50 @@ public class StarEventLogger {
             }
         },10 * 1000);
     }
+
     public static void adsInstallActivation(final Context context){
-
-        final AdsRequestBean adsRequestBean = new AdsRequestBean(context);
-        adsRequestBean.setRequestUrl(ResConfig.getAdsPreferredUrl(context));
-        if (GamaUtil.isInterfaceSurfixWithApp(context)) {
-            adsRequestBean.setRequestMethod(GamaAdsConstant.GsAdsRequestMethod.GS_REQUEST_METHOD_INSTALL);
-        } else {
-            adsRequestBean.setRequestMethod(GamaAdsConstant.GamaAdsRequestMethod.GAMA_REQUEST_METHOD_INSTALL);
-        }
-        SimpleHttpRequest simpleHttpRequest = new SimpleHttpRequest();
-        simpleHttpRequest.setBaseReqeustBean(adsRequestBean);
-        simpleHttpRequest.setReqCallBack(new ISReqCallBack<BaseResponseModel>() {
+        GsInstallReferrer.initReferrerClient(context, new GsInstallReferrer.GsInstallReferrerCallback() {
             @Override
-            public void success(BaseResponseModel responseModel, String rawResult) {
-                PL.i(TAG, "ADS rawResult:" + rawResult);
-                if (responseModel != null && responseModel.isRequestSuccess()){
-                    SPUtil.saveSimpleInfo(context,GamaUtil.GAMA_SP_FILE,GAMA_ADSINSTALLACTIVATION,"adsInstallActivation");
+            public void onResult(GsInstallReferrerBean bean) {
+                    final AdsRequestBean adsRequestBean = new AdsRequestBean(context);
+                    adsRequestBean.setRequestUrl(ResConfig.getAdsPreferredUrl(context));
+                    if (GamaUtil.isInterfaceSurfixWithApp(context)) {
+                        adsRequestBean.setRequestMethod(GamaAdsConstant.GsAdsRequestMethod.GS_REQUEST_METHOD_INSTALL);
+                    } else {
+                        adsRequestBean.setRequestMethod(GamaAdsConstant.GamaAdsRequestMethod.GAMA_REQUEST_METHOD_INSTALL);
+                    }
+                    if (bean != null) {
+                        adsRequestBean.setAppInstallTime(bean.getAppInstallTime());
+                        adsRequestBean.setReferrerClickTime(bean.getReferrerClickTime());
+                        adsRequestBean.setReferrer(bean.getReferrerUrl());
+                    }
+                    SimpleHttpRequest simpleHttpRequest = new SimpleHttpRequest();
+                    simpleHttpRequest.setBaseReqeustBean(adsRequestBean);
+                    simpleHttpRequest.setReqCallBack(new ISReqCallBack<BaseResponseModel>() {
+                        @Override
+                        public void success(BaseResponseModel responseModel, String rawResult) {
+                            PL.i(TAG, "ADS rawResult:" + rawResult);
+                            if (responseModel != null && responseModel.isRequestSuccess()){
+                                SPUtil.saveSimpleInfo(context,GamaUtil.GAMA_SP_FILE,GAMA_ADSINSTALLACTIVATION,"adsInstallActivation");
+                            }
+                        }
+
+                        @Override
+                        public void timeout(String code) {
+                            PL.i(TAG, "ADS timeout");
+                        }
+
+                        @Override
+                        public void noData() {
+                        }
+
+                        @Override
+                        public void cancel() {
+                        }
+                    });
+                    simpleHttpRequest.excute();
                 }
-            }
-
-            @Override
-            public void timeout(String code) {
-                PL.i(TAG, "ADS timeout");
-            }
-
-            @Override
-            public void noData() {
-            }
-
-            @Override
-            public void cancel() {
-            }
         });
-        simpleHttpRequest.excute();
     }
 
     private static void getVfSwitch(final Activity activity) {
