@@ -9,14 +9,20 @@ import com.android.installreferrer.api.InstallReferrerStateListener;
 import com.android.installreferrer.api.ReferrerDetails;
 import com.core.base.utils.PL;
 import com.gama.base.utils.GamaUtil;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 
 public class GsInstallReferrer {
     private static final String TAG  = GsInstallReferrer.class.getSimpleName();
     private  static InstallReferrerClient referrerClient;
 
-    public static void initReferrerClient(final Context context, final GsInstallReferrerCallback callback) {
-        if (referrerClient != null) {
-            referrerClient = null;
+    public static synchronized void initReferrerClient(final Context context, final GsInstallReferrerCallback callback) {
+        if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(context) != ConnectionResult.SUCCESS){
+            PL.i(TAG, "device do not suppert install referrer or play services.");
+            if (callback != null) {
+                callback.onResult(null);
+            }
+            return;
         }
         referrerClient = InstallReferrerClient.newBuilder(context).build();
         referrerClient.startConnection(new InstallReferrerStateListener() {
@@ -60,7 +66,11 @@ public class GsInstallReferrer {
                 if (callback != null) {
                     callback.onResult(referrerBean);
                 }
-                referrerClient.endConnection();
+                try {
+                    referrerClient.endConnection();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -70,7 +80,11 @@ public class GsInstallReferrer {
                 if (callback != null) {
                     callback.onResult(null);
                 }
-                referrerClient.endConnection();
+                try {
+                    referrerClient.endConnection();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
