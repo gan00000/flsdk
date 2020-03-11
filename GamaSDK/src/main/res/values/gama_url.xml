@@ -2,8 +2,8 @@
 
     <!--港台域名列表 开始-->
     <!--登录域名-->
-    <string name="zh_tw_gama_login_pre_url" translatable="false">https://login.gamesword.com/</string>
-    <string name="zh_tw_gama_login_spa_url" translatable="false">https://login.gamesword.com/</string>
+    <string name="zh_tw_gama_login_pre_url" translatable="false">http://192.168.1.22:8084/</string>
+    <string name="zh_tw_gama_login_spa_url" translatable="false">http://192.168.1.22:8084/</string>
 
     <!--支付域名-->
     <string name="zh_tw_gama_pay_pre_url" translatable="false">https://pay.gamesword.com/</string>
@@ -140,8 +140,8 @@
 
     <!--北美域名列表 开始-->
     <!--登录域名-->
-    <string name="en_us_gama_login_pre_url" translatable="false">https://loginam.gamesword.com/</string>
-    <string name="en_us_gama_login_spa_url" translatable="false">https://loginam.gamesword.com/</string>
+    <string name="en_us_gama_login_pre_url" translatable="false">http://192.168.1.17:8084/</string>
+    <string name="en_us_gama_login_spa_url" translatable="false">http://192.168.1.17:8084/</string>
 
     <!--支付域名-->
     <string name="en_us_gama_pay_pre_url" translatable="false">https://payam.gamesword.com/</string>
