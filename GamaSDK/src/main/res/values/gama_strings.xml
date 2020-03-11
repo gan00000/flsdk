@@ -3,7 +3,7 @@
     <!--启动条款页面-->
     <string name="gama_ui_term_title" translatable="false">User Terms</string>
     <string name="gama_ui_term_confirm" translatable="false">Login</string>
-    <string name="gama_ui_term_read_land" translatable="false">I have read and accept the Terms and Conditions</string>
+    <string name="gama_ui_term_read_land" translatable="false">I\'ve read and accept the Terms and Conditions</string>
     <string name="gama_ui_term_port_read" translatable="false">"I agree to the Terms of Service &amp; Privacy Policy</string>
     <string name="gama_ui_term_port_term1" translatable="false">Terms of Service</string>
     <string name="gama_ui_term_port_term2" translatable="false">Privacy Policy</string>
@@ -79,8 +79,8 @@
     <string name="py_login_autologin_tips">Account %1$s is using</string>
 
     <!--预设提示-->
-    <string name="py_register_account_hit">account within 6~18 letters or numbers only</string>
-    <string name="py_register_password_hit">password within 8~16 letters and numbers</string>
+    <string name="py_register_account_hit">6~18 letters or numbers only</string>
+    <string name="py_register_password_hit">8~16 letters and numbers</string>
     <string name="py_findpwd_email_hit">Email, must input, use to find your password</string>
     <string name="py_register_email_hit">Email, use to find your password</string>
     <string name="py_msg_vfcode_hint">input verification code</string>
