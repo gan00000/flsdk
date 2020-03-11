@@ -84,7 +84,7 @@ public class LoginContract {
         /**
          * 需要手机验证的注册
          */
-        void register(Activity activity, String account, String pwd, String areaCode, String phone, String vfcode);
+        void register(Activity activity, String account, String pwd, String areaCode, String phone, String vfcode, String email);
 
         /**
          * 需要手机验证的找回密码
@@ -100,6 +100,8 @@ public class LoginContract {
          * 获取手机验证码
          */
         void getPhoneVfcode(Activity activity, String area, String phone, String interfaceName);
+
+        void getEmailVfcode(Activity activity, String email, String interfaceName);
 
         /**
          * 获取区码

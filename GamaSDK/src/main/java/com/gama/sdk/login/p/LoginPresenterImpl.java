@@ -17,7 +17,6 @@ import com.core.base.utils.BitmapUtil;
 import com.core.base.utils.FileUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
-import com.core.base.utils.SignatureUtil;
 import com.core.base.utils.ToastUtils;
 import com.facebook.AccessToken;
 import com.facebook.internal.ImageRequest;
@@ -339,9 +338,9 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
 
     @Override
-    public void register(Activity activity, String account, String pwd, String areaCode, String phone, String vfcode) {
+    public void register(Activity activity, String account, String pwd, String areaCode, String phone, String vfcode, String email) {
         this.mActivity = activity;
-        registerAccout(activity, account, pwd, areaCode, phone, vfcode);
+        registerAccout(activity, account, pwd, areaCode, phone, vfcode, email);
     }
 
     @Override
@@ -356,6 +355,20 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             return;
         }
         getPhoneVfcodeRequest(activity, area, phone, interfaceName);
+    }
+
+    @Override
+    public void getEmailVfcode(Activity activity, String email, String interfaceName) {
+        this.mActivity = activity;
+        if(isTimeLimit) {
+            if(callbackList != null && callbackList.size() > 0) {
+                for(SBaseRelativeLayout.OperationCallback callback : callbackList) {
+                    callback.statusCallback(SBaseRelativeLayout.OperationCallback.TIME_LIMIT);
+                }
+            }
+            return;
+        }
+        getEmailVfcodeRequest(activity, email, interfaceName);
     }
 
     @Override
@@ -697,8 +710,8 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         cmd.excute(SLoginResponse.class);
     }
 
-    private void registerAccout(Activity activity, final String account, final String password, String areaCode, String phone, String vfcode){
-        AccountRegisterRequestTask accountRegisterCmd = new AccountRegisterRequestTask(getActivity(), account, password, areaCode, phone, vfcode);
+    private void registerAccout(Activity activity, final String account, final String password, String areaCode, String phone, String vfcode, String email){
+        AccountRegisterRequestTask accountRegisterCmd = new AccountRegisterRequestTask(getActivity(), account, password, areaCode, phone, vfcode, email);
         accountRegisterCmd.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(), "Loading..."));
         accountRegisterCmd.setReqCallBack(new ISReqCallBack<SLoginResponse>() {
             @Override
@@ -778,6 +791,51 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         });
         task.excute();
     }
+
+
+
+    private void getEmailVfcodeRequest(Activity activity, String email, String interfaceName) {
+        PhoneVfcodeRequestTask task = new PhoneVfcodeRequestTask(getActivity(), email, interfaceName);
+        task.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(), "Loading..."));
+        task.setReqCallBack(new ISReqCallBack<BaseResponseModel>() {
+            @Override
+            public void success(BaseResponseModel sLoginResponse, String rawResult) {
+                if (sLoginResponse != null) {
+                    String msg = sLoginResponse.getMessage();
+                    if (!TextUtils.isEmpty(msg)) {
+                        ToastUtils.toast(getActivity(), msg);
+//                        if(callback != null) {
+//                            callback.statusCallback(SBaseRelativeLayout.OperationCallback.TIME_LIMIT);
+//                        }
+                        if(callbackList != null && callbackList.size() > 0) {
+                            for(SBaseRelativeLayout.OperationCallback callback : callbackList) {
+                                callback.statusCallback(SBaseRelativeLayout.OperationCallback.TIME_LIMIT);
+                            }
+                        }
+                        startTimer();
+                    }
+                } else {
+                    ToastUtils.toast(getActivity(), R.string.py_error_occur);
+                }
+            }
+
+            @Override
+            public void timeout(String code) {
+                ToastUtils.toast(getActivity(), R.string.py_error_occur);
+            }
+
+            @Override
+            public void noData() {
+                ToastUtils.toast(getActivity(), R.string.py_error_occur);
+            }
+
+            @Override
+            public void cancel() {}
+
+        });
+        task.excute();
+    }
+
 
     private void startAutoLogin(final Activity activity, final String registPlatform, final String account, final String password) {
         isAutoLogin = true;

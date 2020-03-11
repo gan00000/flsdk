@@ -31,6 +31,18 @@ public class PhoneVfcodeRequestTask extends BaseLoginRequestTask {
 	}
 
 
+	public PhoneVfcodeRequestTask(Context mContext, String email, String interfaceName) {
+		super(mContext);
+
+		requestBean = new PhoneVfcodeRequestBean(mContext);
+		sdkBaseRequestBean = requestBean;
+		requestBean.setEmail(email);
+		requestBean.setInterfaces(interfaceName);
+		requestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_GET_PHONT_VFCODE);
+
+	}
+
+
 	@Override
 	public BaseReqeustBean createRequestBean() {
 		super.createRequestBean();

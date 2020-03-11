@@ -49,10 +49,15 @@ public class ThirdAccountBindRequestTaskV2 extends BaseLoginRequestTask {
 
         thirdAccountBindRequestBean.setName(name);
         thirdAccountBindRequestBean.setPwd(SStringUtil.toMd5(pwd));
-        thirdAccountBindRequestBean.setPhone(phone);
+        if (TextUtils.isEmpty(areaCode)){ //areaCode為空值是未通過email獲取驗證碼進行綁定
+            thirdAccountBindRequestBean.setEmail(phone);
+        }else {
+            thirdAccountBindRequestBean.setPhone(phone);
+        }
         thirdAccountBindRequestBean.setPhoneAreaCode(areaCode);
         thirdAccountBindRequestBean.setVfCode(vfcode);
         thirdAccountBindRequestBean.setFb_oauthToken(fbAccessToken);
+
         if(requestMethod == GSRequestMethod.GSRequestType.GAMESWORD) {
             thirdAccountBindRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_BIND);
         } else if (requestMethod == GSRequestMethod.GSRequestType.GAMAMOBI) {
@@ -89,7 +94,11 @@ public class ThirdAccountBindRequestTaskV2 extends BaseLoginRequestTask {
         thirdAccountBindRequestBean.setThirdPlatId(thirdPlatId);
         thirdAccountBindRequestBean.setName(name);
         thirdAccountBindRequestBean.setPwd(SStringUtil.toMd5(pwd));
-        thirdAccountBindRequestBean.setPhone(phone);
+        if (TextUtils.isEmpty(areaCode)){ //areaCode為空值是未通過email獲取驗證碼進行綁定
+            thirdAccountBindRequestBean.setEmail(phone);
+        }else {
+            thirdAccountBindRequestBean.setPhone(phone);
+        }
         thirdAccountBindRequestBean.setPhoneAreaCode(areaCode);
         thirdAccountBindRequestBean.setVfCode(vfcode);
 
@@ -128,11 +137,18 @@ public class ThirdAccountBindRequestTaskV2 extends BaseLoginRequestTask {
         thirdAccountBindRequestBean.setThirdPlatId(thirdPlatId);
         thirdAccountBindRequestBean.setName(name);
         thirdAccountBindRequestBean.setPwd(SStringUtil.toMd5(pwd));
-        thirdAccountBindRequestBean.setPhone(phone);
+
+        if (TextUtils.isEmpty(areaCode)){ //areaCode為空值是未通過email獲取驗證碼進行綁定
+            thirdAccountBindRequestBean.setEmail(phone);
+        }else {
+            thirdAccountBindRequestBean.setPhone(phone);
+        }
+
         thirdAccountBindRequestBean.setPhoneAreaCode(areaCode);
         thirdAccountBindRequestBean.setVfCode(vfcode);
         thirdAccountBindRequestBean.setGoogleIdToken(googleIdToken);
         thirdAccountBindRequestBean.setGoogleClientId(googleClientId);
+
 
         if(requestMethod == GSRequestMethod.GSRequestType.GAMESWORD) {
             thirdAccountBindRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_BIND);

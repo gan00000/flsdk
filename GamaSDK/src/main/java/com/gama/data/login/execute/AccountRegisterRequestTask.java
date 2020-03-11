@@ -14,7 +14,7 @@ public class AccountRegisterRequestTask extends BaseLoginRequestTask {
 
     private AccountRegRequestBean regRequestBean;
 
-    public AccountRegisterRequestTask(Context context, String userName, String password, String areaCode, String phone, String vfcode) {
+    public AccountRegisterRequestTask(Context context, String userName, String password, String areaCode, String phone, String vfcode, String email) {
         super(context);
 
         userName = userName.toLowerCase();
@@ -31,6 +31,8 @@ public class AccountRegisterRequestTask extends BaseLoginRequestTask {
         regRequestBean.setVfCode(vfcode);
         regRequestBean.setPhoneAreaCode(areaCode);
         regRequestBean.setPhone(phone);
+
+        regRequestBean.setEmail(email);
 
         regRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_REGISTER);
 

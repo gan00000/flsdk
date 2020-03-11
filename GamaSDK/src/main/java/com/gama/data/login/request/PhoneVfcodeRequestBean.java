@@ -9,6 +9,8 @@ import com.gama.base.bean.AdsRequestBean;
  */
 public class PhoneVfcodeRequestBean extends AdsRequestBean {
 
+	private String email;
+
 	public PhoneVfcodeRequestBean(Context context) {
 		super(context);
 	}
@@ -26,4 +28,11 @@ public class PhoneVfcodeRequestBean extends AdsRequestBean {
 		this.interfaces = interfaces;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 }

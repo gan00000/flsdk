@@ -47,6 +47,8 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
     private int bindTpye = 0;
     private int fromPage = 0;
 
+    private EditText emailEditText;
+
     //选中的区域信息
     private GamaAreaInfoBean selectedBean;
 
@@ -85,6 +87,8 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
 //        registerMailEditText = (EditText) contentView.findViewById(R.id.py_bind_account_mail);
 
         bindConfirm = contentView.findViewById(R.id.gama_bind_btn_confirm);
+
+        emailEditText = contentView.findViewById(R.id.gama_bind_et_email);
 
         gama_bind_tv_limit_hint = contentView.findViewById(R.id.gama_bind_tv_limit_hint);
         String phoneMsgLimitHint = GamaUtil.getPhoneMsgLimitHint(getContext());
@@ -145,7 +149,9 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
             getAndShowArea();
         } else if(v == gama_bind_btn_get_vfcode) {
 //            sLoginDialogv2.getLoginPresenter().setOperationCallback(this);
-            getVfcode();
+//            getVfcode();
+
+            getVfcodeByEmail();
         }
 
     }
@@ -180,21 +186,27 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
             return;
         }
 
-        String areaCode = gama_bind_tv_area.getText().toString();
-        if(TextUtils.isEmpty(areaCode)) {
-            ToastUtils.toast(getActivity(), R.string.py_area_code_empty);
-            return;
-        }
-        String phone = gama_bind_et_phone.getEditableText().toString().trim();
-        if(!phone.matches(selectedBean.getPattern())) {
-            ToastUtils.toast(getActivity(), R.string.py_phone_error);
-            return;
-        }
+//        String areaCode = gama_bind_tv_area.getText().toString();
+//        if(TextUtils.isEmpty(areaCode)) {
+//            ToastUtils.toast(getActivity(), R.string.py_area_code_empty);
+//            return;
+//        }
+//        String phone = gama_bind_et_phone.getEditableText().toString().trim();
+//        if(!phone.matches(selectedBean.getPattern())) {
+//            ToastUtils.toast(getActivity(), R.string.py_phone_error);
+//            return;
+//        }
 
 //        if (SStringUtil.isNotEmpty(email) && !Validator.isEmail(email)){
 //            ToastUtils.toast(getActivity(), R.string.py_email_format_error);
 //            return;
 //        }
+
+        String email = emailEditText.getEditableText().toString().trim();
+        if (TextUtils.isEmpty(email)) {
+            ToastUtils.toast(getActivity(), R.string.py_email_empty);
+            return;
+        }
 
         String vfcode = gama_bind_et_vfcode.getEditableText().toString();
         if(TextUtils.isEmpty(vfcode)) {
@@ -206,7 +218,8 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
 //            return;
 //        }
 
-        sLoginDialogv2.getLoginPresenter().accountBind(sLoginDialogv2.getActivity(), account, password, areaCode, phone, vfcode, bindTpye);
+//        sLoginDialogv2.getLoginPresenter().accountBind(sLoginDialogv2.getActivity(), account, password, areaCode, phone, vfcode, bindTpye);
+        sLoginDialogv2.getLoginPresenter().accountBind(sLoginDialogv2.getActivity(), account, password, "", email, vfcode, bindTpye);
     }
 
 
@@ -236,6 +249,19 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
         String interfaceName = GSRequestMethod.RequestVfcodeInterface.bind.getString();
 
         sLoginDialogv2.getLoginPresenter().getPhoneVfcode(sLoginDialogv2.getActivity(), areaCode, phone, interfaceName);
+    }
+
+
+    private void getVfcodeByEmail() {
+
+        String email = emailEditText.getEditableText().toString().trim();
+        if (TextUtils.isEmpty(email)) {
+            ToastUtils.toast(getActivity(), R.string.py_email_empty);
+            return;
+        }
+        String interfaceName = GSRequestMethod.RequestVfcodeInterface.bind.getString();
+
+        sLoginDialogv2.getLoginPresenter().getEmailVfcode(sLoginDialogv2.getActivity(), email, interfaceName);
     }
 
     @Override

@@ -418,23 +418,25 @@
             android:maxLines="1"
             android:hint="@string/py_register_account_area"
             android:text="@string/py_default_area_num"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="@id/gama_register_guideline_icon_end"
             app:layout_constraintEnd_toEndOf="@id/gama_register_guideline_drop_start"
             app:layout_constraintTop_toTopOf="@id/gama_register_iv_area"
             app:layout_constraintBottom_toBottomOf="@id/gama_register_iv_area"/>
 
-        <ImageView
+        <!--<ImageView
             android:id="@+id/gama_register_iv_drop"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
+            android:visibility="gone"
             android:src="@drawable/gama_ui_icon_drop"
             app:layout_constraintBottom_toBottomOf="@id/gama_register_iv_area"
             app:layout_constraintDimensionRatio="2:1"
             app:layout_constraintEnd_toEndOf="@id/gama_register_guideline_drop_end"
             app:layout_constraintStart_toStartOf="@id/gama_register_guideline_drop_start"
-            app:layout_constraintTop_toTopOf="@id/gama_register_iv_area" />
+            app:layout_constraintTop_toTopOf="@id/gama_register_iv_area" />-->
 
 
         <EditText
@@ -454,7 +456,7 @@
             android:textSize="@dimen/sp_14"
             app:layout_constraintBottom_toBottomOf="@id/gama_register_guideline_phone_bottom"
             app:layout_constraintEnd_toEndOf="@id/gama_register_guideline_child_right"
-            app:layout_constraintStart_toStartOf="@id/gama_register_guideline_middle"
+            app:layout_constraintStart_toStartOf="@id/gama_register_guideline_icon_end"
             app:layout_constraintTop_toTopOf="@id/gama_register_guideline_phone_top" />
 
         <ImageView
