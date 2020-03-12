@@ -312,6 +312,7 @@
             android:id="@+id/gama_bind_layout_area"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:visibility="gone"
             android:background="@drawable/gama_ui_area_bg"
             app:layout_constraintBottom_toBottomOf="@id/gama_bind_guideline_phone_bottom"
             app:layout_constraintEnd_toEndOf="@id/gama_bind_guideline_middle"
@@ -323,6 +324,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="8dp"
+            android:visibility="gone"
             android:layout_marginBottom="8dp"
             android:src="@drawable/gama_ui_icon_phone"
             app:layout_constraintBottom_toBottomOf="@id/gama_bind_guideline_phone_bottom"
@@ -335,6 +337,7 @@
             android:id="@+id/gama_bind_tv_area"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:visibility="gone"
             android:gravity="center"
             android:textColor="@color/gama_color_ui_input_text"
             android:textColorHint="@android:color/darker_gray"
@@ -351,6 +354,7 @@
             android:id="@+id/gama_bind_iv_drop"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:visibility="gone"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:src="@drawable/gama_ui_icon_drop"
@@ -365,6 +369,7 @@
             android:id="@+id/gama_bind_et_phone"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:visibility="gone"
             android:layout_marginStart="4dp"
             android:background="@drawable/gama_ui_phone_bg"
             android:hint="@string/py_register_account_phone"
@@ -381,6 +386,54 @@
             app:layout_constraintStart_toStartOf="@id/gama_bind_guideline_middle"
             app:layout_constraintTop_toTopOf="@id/gama_bind_guideline_phone_top" />
 
+
+<!--        邮箱-->
+
+        <ImageView
+            android:id="@+id/gama_bind_layout_email"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/gama_ui_input_bg"
+            app:layout_constraintBottom_toBottomOf="@id/gama_bind_guideline_phone_bottom"
+            app:layout_constraintEnd_toEndOf="@id/gama_bind_guideline_child_right"
+            app:layout_constraintStart_toStartOf="@id/gama_bind_guideline_child_left"
+            app:layout_constraintTop_toTopOf="@id/gama_bind_guideline_phone_top" />
+
+        <ImageView
+            android:id="@+id/gama_bind_iv_email"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/gama_ui_icon_email"
+            app:layout_constraintBottom_toBottomOf="@id/gama_bind_guideline_phone_bottom"
+            app:layout_constraintDimensionRatio="206:97"
+            app:layout_constraintEnd_toEndOf="@id/gama_bind_guideline_icon_end"
+            app:layout_constraintStart_toStartOf="@id/gama_bind_guideline_icon_start"
+            app:layout_constraintTop_toTopOf="@id/gama_bind_guideline_phone_top" />
+
+        <EditText
+            android:id="@+id/gama_bind_et_email"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@null"
+            android:hint="@string/py_register_account_email"
+            android:inputType="text"
+            android:maxLines="1"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="4dp"
+            android:textColor="@color/gama_color_ui_input_text"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="@dimen/sp_14"
+            android:imeOptions="actionDone"
+            app:layout_constraintTop_toTopOf="@id/gama_bind_iv_email"
+            app:layout_constraintBottom_toBottomOf="@id/gama_bind_iv_email"
+            app:layout_constraintStart_toStartOf="@id/gama_bind_guideline_icon_end"
+            app:layout_constraintEnd_toEndOf="@id/gama_bind_guideline_child_right"/>
+
+
+
+        <!--        验证码-->
         <ImageView
             android:id="@+id/gama_bind_layout_vfcode"
             android:layout_width="0dp"
@@ -410,7 +463,7 @@
             android:layout_height="0dp"
             android:background="@null"
             android:hint="@string/py_msg_vfcode_hint"
-            android:inputType="text"
+            android:inputType="number"
             android:maxLines="1"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="4dp"
@@ -425,8 +478,8 @@
 
         <Button
             android:id="@+id/gama_bind_btn_get_vfcode"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/bg_192d3f_46"
@@ -436,14 +489,13 @@
             android:textSize="@dimen/sp_20"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/gama_bind_guideline_button_bottom"
-            app:layout_constraintDimensionRatio="4:1"
             app:layout_constraintEnd_toStartOf="@id/gama_bind_btn_confirm"
             app:layout_constraintStart_toStartOf="@id/gama_bind_guideline_child_left"
             app:layout_constraintTop_toTopOf="@id/gama_bind_guideline_button_top" />
 
         <Button
             android:id="@+id/gama_bind_btn_confirm"
-            android:layout_width="0dp"
+            android:layout_width="100dp"
             android:layout_height="0dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
@@ -453,11 +505,10 @@
             android:textColor="@android:color/white"
             android:textSize="@dimen/sp_20"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/gama_bind_guideline_button_bottom"
-            app:layout_constraintDimensionRatio="4:1"
+            app:layout_constraintBottom_toBottomOf="@id/gama_bind_btn_get_vfcode"
             app:layout_constraintEnd_toStartOf="@id/gama_bind_guideline_child_right"
             app:layout_constraintStart_toEndOf="@id/gama_bind_btn_get_vfcode"
-            app:layout_constraintTop_toTopOf="@id/gama_bind_guideline_button_top" />
+            app:layout_constraintTop_toTopOf="@id/gama_bind_btn_get_vfcode" />
 
         <TextView
             android:id="@+id/gama_bind_tv_limit_hint"

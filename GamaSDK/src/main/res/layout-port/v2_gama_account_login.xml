@@ -432,7 +432,7 @@
         <TextView
             android:id="@+id/gama_login_tv_forget_password"
             android:layout_width="0dp"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:maxLines="2"
             android:text="@string/py_findpwd"

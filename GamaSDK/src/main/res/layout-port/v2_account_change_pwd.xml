@@ -269,7 +269,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="4dp"
             android:background="@null"
-            android:hint="@string/py_register_password_hit"
+            android:hint="@string/py_input_old_password"
             android:inputType="text"
             android:maxLines="1"
             android:padding="4dp"
