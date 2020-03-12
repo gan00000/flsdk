@@ -15,6 +15,7 @@ import com.gama.base.utils.GamaUtil;
 import com.gama.sdk.R;
 import com.gama.sdk.SBaseRelativeLayout;
 import com.gama.sdk.login.widget.SLoginBaseRelativeLayout;
+import com.gama.sdk.utils.Validator;
 
 
 public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements View.OnClickListener, SBaseRelativeLayout.OperationCallback {
@@ -22,7 +23,7 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
     private View contentView;
     private TextView findPwdConfireBtn;
 
-    private EditText findPwdAccountEditText, gama_find_et_phone;
+    private EditText findPwdAccountEditText, gama_find_et_phone, findPwdEmailEditText;
 
     private String account;
 //    private String email;
@@ -65,11 +66,13 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
         gama_find_tv_area = contentView.findViewById(R.id.gama_find_tv_area);
         gama_find_et_phone = contentView.findViewById(R.id.gama_find_et_phone);
 
+        findPwdEmailEditText = contentView.findViewById(R.id.gama_find_et_email);
+
         backView.setOnClickListener(this);
         findPwdConfireBtn.setOnClickListener(this);
-        gama_find_tv_area.setOnClickListener(this);
-
-        setDefaultAreaInfo();
+//        gama_find_tv_area.setOnClickListener(this);
+//
+//        setDefaultAreaInfo();
         return contentView;
     }
 
@@ -120,33 +123,33 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
             return;
         }
 
-//        email = findPwdEmailEditText.getEditableText().toString().trim();
-//        if (TextUtils.isEmpty(email)) {
-//            ToastUtils.toast(getActivity(), R.string.py_email_empty);
-//            return;
-//        }
+        String email = findPwdEmailEditText.getEditableText().toString().trim();
+        if (TextUtils.isEmpty(email)) {
+            ToastUtils.toast(getActivity(), R.string.py_email_empty);
+            return;
+        }
 
         if (!GamaUtil.checkAccount(account)) {
             ToastUtils.toast(getActivity(), errorStrAccount, Toast.LENGTH_LONG);
             return;
         }
-//        if (!Validator.isEmail(email)) {
-//            ToastUtils.toast(getActivity(), R.string.py_email_format_error);
+        if (!Validator.isEmail(email)) {
+            ToastUtils.toast(getActivity(), R.string.py_email_format_error);
+            return;
+        }
+
+//        String areaCode = gama_find_tv_area.getText().toString();
+//        if(TextUtils.isEmpty(areaCode)) {
+//            ToastUtils.toast(getActivity(), R.string.py_area_code_empty);
+//            return;
+//        }
+//        String phone = gama_find_et_phone.getEditableText().toString().trim();
+//        if(!phone.matches(selectedBean.getPattern())) {
+//            ToastUtils.toast(getActivity(), R.string.py_phone_error);
 //            return;
 //        }
 
-        String areaCode = gama_find_tv_area.getText().toString();
-        if(TextUtils.isEmpty(areaCode)) {
-            ToastUtils.toast(getActivity(), R.string.py_area_code_empty);
-            return;
-        }
-        String phone = gama_find_et_phone.getEditableText().toString().trim();
-        if(!phone.matches(selectedBean.getPattern())) {
-            ToastUtils.toast(getActivity(), R.string.py_phone_error);
-            return;
-        }
-
-        sLoginDialogv2.getLoginPresenter().findPwd(sLoginDialogv2.getActivity(), account, areaCode, phone);
+        sLoginDialogv2.getLoginPresenter().findPwd(sLoginDialogv2.getActivity(), account, "", email);
     }
 
 

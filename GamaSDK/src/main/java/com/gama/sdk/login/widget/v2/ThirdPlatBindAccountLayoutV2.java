@@ -23,6 +23,7 @@ import com.gama.data.login.constant.GSRequestMethod;
 import com.gama.sdk.R;
 import com.gama.sdk.SBaseRelativeLayout;
 import com.gama.sdk.login.widget.SLoginBaseRelativeLayout;
+import com.gama.sdk.utils.Validator;
 
 
 public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout implements View.OnClickListener, SBaseRelativeLayout.OperationCallback {
@@ -213,10 +214,10 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
             ToastUtils.toast(getActivity(), R.string.py_vfcode_empty);
             return;
         }
-//        if (SStringUtil.isNotEmpty(email) && !Validator.isEmail(email)){
-//            ToastUtils.toast(getActivity(), R.string.py_email_format_error);
-//            return;
-//        }
+        if (SStringUtil.isNotEmpty(email) && !Validator.isEmail(email)){
+            ToastUtils.toast(getActivity(), R.string.py_email_format_error);
+            return;
+        }
 
 //        sLoginDialogv2.getLoginPresenter().accountBind(sLoginDialogv2.getActivity(), account, password, areaCode, phone, vfcode, bindTpye);
         sLoginDialogv2.getLoginPresenter().accountBind(sLoginDialogv2.getActivity(), account, password, "", email, vfcode, bindTpye);
@@ -259,6 +260,12 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
             ToastUtils.toast(getActivity(), R.string.py_email_empty);
             return;
         }
+
+        if (!Validator.isEmail(email)) {
+            ToastUtils.toast(getActivity(), R.string.py_email_format_error);
+            return;
+        }
+
         String interfaceName = GSRequestMethod.RequestVfcodeInterface.bind.getString();
 
         sLoginDialogv2.getLoginPresenter().getEmailVfcode(sLoginDialogv2.getActivity(), email, interfaceName);

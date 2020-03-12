@@ -1,7 +1,7 @@
 package com.gama.data.login.execute;
 
 import android.content.Context;
-import android.telephony.gsm.GsmCellLocation;
+import android.text.TextUtils;
 
 import com.core.base.bean.BaseReqeustBean;
 import com.core.base.utils.SStringUtil;
@@ -36,8 +36,17 @@ public class FindPwdRequestTask extends BaseLoginRequestTask {
 		pwdRequestBean = new FindPwdRequestBean(mContext);
 		sdkBaseRequestBean = pwdRequestBean;
 		pwdRequestBean.setName(userName);
+
 		pwdRequestBean.setPhoneAreaCode(areaCode);
-		pwdRequestBean.setPhone(phone);
+
+		if (TextUtils.isEmpty(areaCode)){
+
+			pwdRequestBean.setEmail(phone);
+
+		}else {
+
+			pwdRequestBean.setPhone(phone);
+		}
 
 		pwdRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_FIND_PASSWORD);
 

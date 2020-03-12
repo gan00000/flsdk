@@ -217,12 +217,57 @@
             app:layout_constraintStart_toStartOf="@id/gama_find_guideline_icon_end"
             app:layout_constraintTop_toTopOf="@id/gama_find_iv_account" />
 
+        <!--        邮箱start-->
+        <ImageView
+            android:id="@+id/gama_find_layout_email"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/gama_ui_input_bg"
+            app:layout_constraintBottom_toBottomOf="@id/gama_find_guideline_phone_bottom"
+            app:layout_constraintEnd_toEndOf="@id/gama_find_guideline_child_right"
+            app:layout_constraintStart_toStartOf="@id/gama_find_guideline_child_left"
+            app:layout_constraintTop_toTopOf="@id/gama_find_guideline_phone_top" />
+
+        <ImageView
+            android:id="@+id/gama_find_iv_email"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/gama_ui_icon_phone"
+            app:layout_constraintBottom_toBottomOf="@id/gama_find_guideline_phone_bottom"
+            app:layout_constraintDimensionRatio="206:97"
+            app:layout_constraintEnd_toEndOf="@id/gama_find_guideline_icon_end"
+            app:layout_constraintStart_toStartOf="@id/gama_find_guideline_icon_start"
+            app:layout_constraintTop_toTopOf="@id/gama_find_guideline_phone_top" />
+
+        <EditText
+            android:id="@+id/gama_find_et_email"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="4dp"
+            android:background="@null"
+            android:hint="@string/py_register_account_email"
+            android:inputType="text"
+            android:maxLines="1"
+            android:padding="4dp"
+            android:textColor="@color/gama_color_ui_input_text"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintBottom_toBottomOf="@id/gama_find_iv_email"
+            app:layout_constraintEnd_toEndOf="@id/gama_find_guideline_child_right"
+            app:layout_constraintStart_toStartOf="@id/gama_find_guideline_icon_end"
+            app:layout_constraintTop_toTopOf="@id/gama_find_iv_email" />
+
+<!--        邮箱end-->
 
 
         <ImageView
             android:id="@+id/gama_find_layout_area"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:visibility="gone"
             android:background="@drawable/gama_ui_area_bg"
             app:layout_constraintBottom_toBottomOf="@id/gama_find_guideline_phone_bottom"
             app:layout_constraintEnd_toEndOf="@id/gama_find_guideline_middle"
@@ -235,6 +280,7 @@
             android:layout_height="0dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
+            android:visibility="gone"
             android:src="@drawable/gama_ui_icon_phone"
             app:layout_constraintBottom_toBottomOf="@id/gama_find_guideline_phone_bottom"
             app:layout_constraintDimensionRatio="206:97"
@@ -252,6 +298,7 @@
             android:textSize="@dimen/sp_14"
             android:maxLines="1"
             android:hint="@string/py_register_account_area"
+            android:visibility="gone"
             android:text="@string/py_default_area_num"
             app:layout_constraintStart_toStartOf="@id/gama_find_guideline_icon_end"
             app:layout_constraintEnd_toEndOf="@id/gama_find_guideline_drop_start"
@@ -264,6 +311,7 @@
             android:layout_height="0dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
+            android:visibility="gone"
             android:src="@drawable/gama_ui_icon_drop"
             app:layout_constraintBottom_toBottomOf="@id/gama_find_iv_area"
             app:layout_constraintDimensionRatio="2:1"
@@ -280,6 +328,7 @@
             android:background="@drawable/gama_ui_phone_bg"
             android:hint="@string/py_register_account_phone"
             android:inputType="phone"
+            android:visibility="gone"
             android:maxLines="1"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"

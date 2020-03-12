@@ -22,6 +22,7 @@ import com.gama.data.login.constant.GSRequestMethod;
 import com.gama.sdk.R;
 import com.gama.sdk.SBaseRelativeLayout;
 import com.gama.sdk.login.widget.SLoginBaseRelativeLayout;
+import com.gama.sdk.utils.Validator;
 
 
 public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements View.OnClickListener, SBaseRelativeLayout.OperationCallback {
@@ -230,6 +231,11 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
             return;
         }
 
+        if (!Validator.isEmail(email)) {
+            ToastUtils.toast(getActivity(), R.string.py_email_format_error);
+            return;
+        }
+
         String vfcode = gama_register_et_vfcode.getEditableText().toString();
         if (TextUtils.isEmpty(vfcode)) {
             ToastUtils.toast(getActivity(), R.string.py_vfcode_empty);
@@ -264,6 +270,12 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
             ToastUtils.toast(getActivity(), R.string.py_email_empty);
             return;
         }
+
+        if (!Validator.isEmail(email)) {
+            ToastUtils.toast(getActivity(), R.string.py_email_format_error);
+            return;
+        }
+
         String interfaceName = GSRequestMethod.RequestVfcodeInterface.register.getString();
 
         sLoginDialogv2.getLoginPresenter().getEmailVfcode(sLoginDialogv2.getActivity(), email, interfaceName);

@@ -1025,9 +1025,9 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     }
 
     @Override
-    public void findPwd(Activity activity, String account, String areaCode, String phone) {
+    public void findPwd(Activity activity, String account, String areaCode, String phoneOrEmail) {
         this.mActivity = activity;
-        FindPwdRequestTask findPwdRequestTask = new FindPwdRequestTask(getActivity(), account, areaCode, phone);
+        FindPwdRequestTask findPwdRequestTask = new FindPwdRequestTask(getActivity(), account, areaCode, phoneOrEmail);
         findPwdRequestTask.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(), "Loading..."));
         findPwdRequestTask.setReqCallBack(new ISReqCallBack<SLoginResponse>() {
             @Override
