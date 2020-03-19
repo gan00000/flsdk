@@ -97,6 +97,8 @@ public class BaseGamaImpl implements IGama {
                 GamaUtil.resetOnlineTimeInfo(activity);
                 //获取Google 广告ID
                 StarEventLogger.registerGoogleAdId(activity);
+                //获取install refferrer
+                StarEventLogger.startFetchingInstallReferrer(activity);
                 //Gama平台安装上报
                 StarEventLogger.reportInstallActivation(activity.getApplicationContext());
 //                try {

@@ -104,9 +104,6 @@ public class BaseMainActivity extends Activity {
 
         iGama = GamaFactory.create();
 
-        //在游戏Activity的onCreate生命周期中调用
-        iGama.onCreate(this);
-
         demo_language.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

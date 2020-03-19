@@ -467,19 +467,58 @@ public class GamaUtil {
         return SPUtil.getSimpleString(context, GamaUtil.GAMA_SP_FILE,GAMA_GOOGLE_ADVERTISING_ID);
     }
 
+    private static final String GAMA_GOOGLE_INSTALL_REFERRER_INFO = "GAMA_GOOGLE_INSTALL_REFERRER_INFO";
     private static final String GAMA_GOOGLE_INSTALL_REFERRER = "GAMA_GOOGLE_INSTALL_REFERRER";
-    public static void saveReferrer(Context context, String referrer){
-        SPUtil.saveSimpleInfo(context, GamaUtil.GAMA_SP_FILE,GAMA_GOOGLE_INSTALL_REFERRER,referrer);
+    private static final String GAMA_GOOGLE_APP_INSTALL_TIME = "GAMA_GOOGLE_APP_INSTALL_TIME";
+    private static final String GAMA_GOOGLE_REFERRER_CLICK_TIME = "GAMA_GOOGLE_REFERRER_CLICK_TIME";
+
+    public static void saveReferrerInfo(Context context, String referrerInfo) {
+        SPUtil.saveSimpleInfo(context, GamaUtil.GAMA_SP_FILE, GAMA_GOOGLE_INSTALL_REFERRER_INFO, referrerInfo);
     }
+
+    public static void saveReferrerInfo(Context context, String referrer, String installTime, String clickTime) {
+        try {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put(GAMA_GOOGLE_INSTALL_REFERRER, referrer);
+            jsonObject.put(GAMA_GOOGLE_APP_INSTALL_TIME, installTime);
+            jsonObject.put(GAMA_GOOGLE_REFERRER_CLICK_TIME, clickTime);
+            saveReferrerInfo(context, jsonObject.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static String getReferrerInfo(Context context) {
+        return SPUtil.getSimpleString(context, GamaUtil.GAMA_SP_FILE, GAMA_GOOGLE_INSTALL_REFERRER_INFO);
+    }
+
+    /**
+     * 获取Install Refferrer
+     */
     public static String getReferrer(Context context){
-        return SPUtil.getSimpleString(context, GamaUtil.GAMA_SP_FILE,GAMA_GOOGLE_INSTALL_REFERRER);
+        return JsonUtil.getValueByKey(context, getReferrerInfo(context), GAMA_GOOGLE_INSTALL_REFERRER, "");
     }
+    /**
+     * 获取Install Time
+     */
+    public static String getInstallTime(Context context){
+        return JsonUtil.getValueByKey(context, getReferrerInfo(context), GAMA_GOOGLE_APP_INSTALL_TIME, "");
+    }
+    /**
+     * 获取Click Time
+     */
+    public static String getRefferrerClickTime(Context context){
+        return JsonUtil.getValueByKey(context, getReferrerInfo(context), GAMA_GOOGLE_REFERRER_CLICK_TIME, "");
+    }
+
     private static final String GAMA_GOOGLE_TOKEN_ID_STRING = "GAMA_GOOGLE_TOKEN_ID_STRING";
-    public static void saveGoogleIdToken(Context context, String idTokenString){
-        SPUtil.saveSimpleInfo(context, GamaUtil.GAMA_SP_FILE,GAMA_GOOGLE_TOKEN_ID_STRING,idTokenString);
+
+    public static void saveGoogleIdToken(Context context, String idTokenString) {
+        SPUtil.saveSimpleInfo(context, GamaUtil.GAMA_SP_FILE, GAMA_GOOGLE_TOKEN_ID_STRING, idTokenString);
     }
-    public static String getGoogleIdToken(Context context){
-        return SPUtil.getSimpleString(context, GamaUtil.GAMA_SP_FILE,GAMA_GOOGLE_TOKEN_ID_STRING);
+
+    public static String getGoogleIdToken(Context context) {
+        return SPUtil.getSimpleString(context, GamaUtil.GAMA_SP_FILE, GAMA_GOOGLE_TOKEN_ID_STRING);
     }
 
     /**

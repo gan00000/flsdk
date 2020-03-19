@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.view.TextureView;
 
 import com.appsflyer.AFInAppEventParameterName;
 import com.appsflyer.AFInAppEventType;
@@ -325,6 +326,27 @@ public class StarEventLogger {
         }).start();
     }
 
+    public static void startFetchingInstallReferrer(final Context context) {
+        if(!TextUtils.isEmpty(GamaUtil.getReferrerInfo(context))) {
+            PL.i(TAG, "install  referrer already get.");
+            return;
+        }
+        try {
+            GsInstallReferrer.initReferrerClient(context, new GsInstallReferrer.GsInstallReferrerCallback() {
+                @Override
+                public void onResult(GsInstallReferrerBean bean) {
+                    if (bean != null) {
+                        GamaUtil.saveReferrerInfo(context, bean.getReferrerUrl(), bean.getAppInstallTime(), bean.getReferrerClickTime());
+                    } else {
+                        GamaUtil.saveReferrerInfo(context, "", "0", "0");
+                    }
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * 本地保存的安装上报标识
      */
@@ -349,48 +371,43 @@ public class StarEventLogger {
     }
 
     public static void adsInstallActivation(final Context context){
-        GsInstallReferrer.initReferrerClient(context, new GsInstallReferrer.GsInstallReferrerCallback() {
+        final AdsRequestBean adsRequestBean = new AdsRequestBean(context);
+        adsRequestBean.setRequestUrl(ResConfig.getAdsPreferredUrl(context));
+        if (GamaUtil.isInterfaceSurfixWithApp(context)) {
+            adsRequestBean.setRequestMethod(GamaAdsConstant.GsAdsRequestMethod.GS_REQUEST_METHOD_INSTALL);
+        } else {
+            adsRequestBean.setRequestMethod(GamaAdsConstant.GamaAdsRequestMethod.GAMA_REQUEST_METHOD_INSTALL);
+        }
+
+        adsRequestBean.setAppInstallTime(GamaUtil.getInstallTime(context));
+        adsRequestBean.setReferrerClickTime(GamaUtil.getRefferrerClickTime(context));
+        adsRequestBean.setReferrer(GamaUtil.getReferrer(context));
+
+        SimpleHttpRequest simpleHttpRequest = new SimpleHttpRequest();
+        simpleHttpRequest.setBaseReqeustBean(adsRequestBean);
+        simpleHttpRequest.setReqCallBack(new ISReqCallBack<BaseResponseModel>() {
             @Override
-            public void onResult(GsInstallReferrerBean bean) {
-                    final AdsRequestBean adsRequestBean = new AdsRequestBean(context);
-                    adsRequestBean.setRequestUrl(ResConfig.getAdsPreferredUrl(context));
-                    if (GamaUtil.isInterfaceSurfixWithApp(context)) {
-                        adsRequestBean.setRequestMethod(GamaAdsConstant.GsAdsRequestMethod.GS_REQUEST_METHOD_INSTALL);
-                    } else {
-                        adsRequestBean.setRequestMethod(GamaAdsConstant.GamaAdsRequestMethod.GAMA_REQUEST_METHOD_INSTALL);
-                    }
-                    if (bean != null) {
-                        adsRequestBean.setAppInstallTime(bean.getAppInstallTime());
-                        adsRequestBean.setReferrerClickTime(bean.getReferrerClickTime());
-                        adsRequestBean.setReferrer(bean.getReferrerUrl());
-                    }
-                    SimpleHttpRequest simpleHttpRequest = new SimpleHttpRequest();
-                    simpleHttpRequest.setBaseReqeustBean(adsRequestBean);
-                    simpleHttpRequest.setReqCallBack(new ISReqCallBack<BaseResponseModel>() {
-                        @Override
-                        public void success(BaseResponseModel responseModel, String rawResult) {
-                            PL.i(TAG, "ADS rawResult:" + rawResult);
-                            if (responseModel != null && responseModel.isRequestSuccess()){
-                                SPUtil.saveSimpleInfo(context,GamaUtil.GAMA_SP_FILE,GAMA_ADSINSTALLACTIVATION,"adsInstallActivation");
-                            }
-                        }
-
-                        @Override
-                        public void timeout(String code) {
-                            PL.i(TAG, "ADS timeout");
-                        }
-
-                        @Override
-                        public void noData() {
-                        }
-
-                        @Override
-                        public void cancel() {
-                        }
-                    });
-                    simpleHttpRequest.excute();
+            public void success(BaseResponseModel responseModel, String rawResult) {
+                PL.i(TAG, "ADS rawResult:" + rawResult);
+                if (responseModel != null && responseModel.isRequestSuccess()){
+                    SPUtil.saveSimpleInfo(context,GamaUtil.GAMA_SP_FILE,GAMA_ADSINSTALLACTIVATION,"adsInstallActivation");
                 }
+            }
+
+            @Override
+            public void timeout(String code) {
+                PL.i(TAG, "ADS timeout");
+            }
+
+            @Override
+            public void noData() {
+            }
+
+            @Override
+            public void cancel() {
+            }
         });
+        simpleHttpRequest.excute();
     }
 
     private static void getVfSwitch(final Activity activity) {

@@ -3,6 +3,7 @@ package com.gama.pay.gp;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.core.base.callback.ISReqCallBack;
@@ -362,8 +363,12 @@ public class GooglePayHelper {
                     ArrayList<String> transList = new ArrayList<>();
                     String skusString = "";
                     for (String sku : skus) {
-                        transList.add(sku);
-                        skusString += sku + "\n";
+                        if (!TextUtils.isEmpty(sku)) {
+                            transList.add(sku);
+                            skusString += sku + "\n";
+                        } else {
+                            PL.i(TAG, "ingore empty sku.");
+                        }
                     }
                     PL.i(TAG, "query list is : " + skusString);
 

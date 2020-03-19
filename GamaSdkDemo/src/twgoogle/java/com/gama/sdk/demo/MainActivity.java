@@ -39,6 +39,8 @@ public class MainActivity extends BaseMainActivity {
 
         //初始化sdk
         iGama.initSDK(this, SGameLanguage.zh_TW );
+        //在游戏Activity的onCreate生命周期中调用
+        iGama.onCreate(this);
 
         googlePayBtn.setVisibility(View.VISIBLE);
         googlePayBtn.setOnClickListener(new View.OnClickListener() {
@@ -122,7 +124,12 @@ public class MainActivity extends BaseMainActivity {
         chaxun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                querySku();
+//                querySku();
+                try {
+                    throw new SecurityException();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

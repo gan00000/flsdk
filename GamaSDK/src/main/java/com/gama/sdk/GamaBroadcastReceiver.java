@@ -23,7 +23,7 @@ public class GamaBroadcastReceiver extends BroadcastReceiver {
             String referrer = intent.getStringExtra("referrer");
             PL.i("referrer:" + referrer);
             if (SStringUtil.isNotEmpty(referrer)){
-                GamaUtil.saveReferrer(context,referrer);
+                GamaUtil.saveReferrerInfo(context, referrer, "0", "0");
             }
         }
     }
