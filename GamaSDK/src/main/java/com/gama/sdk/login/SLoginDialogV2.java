@@ -269,6 +269,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 
     public void toRegisterView(int from) {
 
+        getLoginPresenter().stopVfCodeTimer();
         if (registerView == null || !viewPageList.contains(registerView)){
 //            SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
 //            if (SGameLanguage.en_US == sGameLanguage) {
@@ -400,6 +401,9 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
             contentFrameLayout.addView(bindUniqueView);
             viewPageList.add(bindUniqueView);
         }
+
+        getLoginPresenter().stopVfCodeTimer();
+
         ((ThirdPlatBindAccountLayoutV2)bindUniqueView).setFromPage(fromPage);
         for (View childView : viewPageList) {
 
@@ -432,7 +436,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
             contentFrameLayout.addView(bindFbView);
             viewPageList.add(bindFbView);
         }
-
+        getLoginPresenter().stopVfCodeTimer();
         for (View childView : viewPageList) {
 
             if (childView == null){
@@ -464,7 +468,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
             contentFrameLayout.addView(bindGoogleView);
             viewPageList.add(bindGoogleView);
         }
-
+        getLoginPresenter().stopVfCodeTimer();
         for (View childView : viewPageList) {
 
             if (childView == null){
@@ -496,7 +500,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
             contentFrameLayout.addView(bindTwitterView);
             viewPageList.add(bindTwitterView);
         }
-
+        getLoginPresenter().stopVfCodeTimer();
         for (View childView : viewPageList) {
 
             if (childView == null){
@@ -659,7 +663,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
             contentFrameLayout.addView(phoneVerifyView);
             viewPageList.add(phoneVerifyView);
         }
-
+        getLoginPresenter().stopVfCodeTimer();
         for (View childView : viewPageList) {
 
             if (childView == null){

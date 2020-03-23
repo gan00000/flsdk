@@ -268,7 +268,7 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
 
         String interfaceName = GSRequestMethod.RequestVfcodeInterface.bind.getString();
 
-        sLoginDialogv2.getLoginPresenter().getEmailVfcode(sLoginDialogv2.getActivity(), email, interfaceName);
+        sLoginDialogv2.getLoginPresenter().getEmailVfcode(sLoginDialogv2.getActivity(), this, email, interfaceName);
     }
 
     @Override

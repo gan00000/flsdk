@@ -1,6 +1,7 @@
 package com.gama.sdk.login;
 
 import android.app.Activity;
+import android.view.View;
 
 import com.gama.data.login.request.ThirdLoginRegRequestBean;
 import com.gama.sdk.SBaseRelativeLayout;
@@ -101,7 +102,7 @@ public class LoginContract {
          */
         void getPhoneVfcode(Activity activity, String area, String phone, String interfaceName);
 
-        void getEmailVfcode(Activity activity, String email, String interfaceName);
+        void getEmailVfcode(Activity activity, View callView, String email, String interfaceName);
 
         /**
          * 获取区码
@@ -124,6 +125,8 @@ public class LoginContract {
         void setOperationCallback(SBaseRelativeLayout.OperationCallback callback);
 
         int getRemainTimeSeconds();
+
+        void stopVfCodeTimer();
     }
 
 }

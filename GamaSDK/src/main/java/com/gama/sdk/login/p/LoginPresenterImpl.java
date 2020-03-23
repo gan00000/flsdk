@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.view.View;
 
 import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.ISReqCallBack;
@@ -78,6 +79,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     private Timer autoLoginTimer;
     //获取手机验证码的timer
     private Timer requestPhoneVfcodeTimer;
+    private String requestVfcodeTimerBelong;//标记属于哪个类点击生成的requestPhoneVfcodeTimer
     //获取验证码是否在一分钟时限内
     private boolean isTimeLimit = false;
 
@@ -115,6 +117,14 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
     public void setFragment(Fragment fragment) {
         this.fragment = fragment;
+    }
+
+    public String getRequestVfcodeTimerBelong() {
+        return requestVfcodeTimerBelong;
+    }
+
+    public void setRequestVfcodeTimerBelong(String requestVfcodeTimerBelong) {
+        this.requestVfcodeTimerBelong = requestVfcodeTimerBelong;
     }
 
     private Fragment fragment;
@@ -358,8 +368,11 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     }
 
     @Override
-    public void getEmailVfcode(Activity activity, String email, String interfaceName) {
+    public void getEmailVfcode(Activity activity, View callView, String email, String interfaceName) {
         this.mActivity = activity;
+
+        this.requestVfcodeTimerBelong = callView.getClass().getSimpleName();
+
         if(isTimeLimit) {
             if(callbackList != null && callbackList.size() > 0) {
                 for(SBaseRelativeLayout.OperationCallback callback : callbackList) {
@@ -420,6 +433,26 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         }
         if (requestPhoneVfcodeTimer != null){
             requestPhoneVfcodeTimer.cancel();
+        }
+    }
+
+    @Override
+    public void stopVfCodeTimer() {//根据需求充值计数器
+
+        if (requestPhoneVfcodeTimer != null){
+            requestPhoneVfcodeTimer.cancel();
+        }
+        requestPhoneVfcodeTimer = null;
+        resetTime = 0;
+        isTimeLimit = false;
+        if(requestPhoneVfcodeTimer != null) {
+            requestPhoneVfcodeTimer.cancel();
+            requestPhoneVfcodeTimer = null;
+        }
+        if(callbackList != null && callbackList.size() > 0) {
+            for (SBaseRelativeLayout.OperationCallback callback : callbackList) {
+                callback.statusCallback(SBaseRelativeLayout.OperationCallback.TIME_OUT);
+            }
         }
     }
 

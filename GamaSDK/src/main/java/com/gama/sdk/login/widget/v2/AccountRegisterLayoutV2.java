@@ -278,7 +278,7 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
 
         String interfaceName = GSRequestMethod.RequestVfcodeInterface.register.getString();
 
-        sLoginDialogv2.getLoginPresenter().getEmailVfcode(sLoginDialogv2.getActivity(), email, interfaceName);
+        sLoginDialogv2.getLoginPresenter().getEmailVfcode(sLoginDialogv2.getActivity(),this, email, interfaceName);
     }
 
     @Override
