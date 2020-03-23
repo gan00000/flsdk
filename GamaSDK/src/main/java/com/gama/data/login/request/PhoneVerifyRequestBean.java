@@ -19,6 +19,7 @@ public class PhoneVerifyRequestBean extends AdsRequestBean {
 	private String vfCode;
 	private String thirdPlatId;
 	private String registPlatform;
+	private String email;
 
 	public String getVfCode() {
 		return vfCode;
@@ -42,5 +43,14 @@ public class PhoneVerifyRequestBean extends AdsRequestBean {
 
 	public void setThirdPlatId(String thirdPlatId) {
 		this.thirdPlatId = thirdPlatId;
+	}
+
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }

@@ -1,20 +1,14 @@
 package com.gama.sdk.login.widget.v2;
 
 import android.content.Context;
-import android.text.Editable;
-import android.text.InputType;
-import android.text.Selection;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
 import com.gama.base.bean.GamaAreaInfoBean;
 import com.gama.base.utils.GamaUtil;
@@ -22,6 +16,7 @@ import com.gama.data.login.constant.GSRequestMethod;
 import com.gama.sdk.R;
 import com.gama.sdk.SBaseRelativeLayout;
 import com.gama.sdk.login.widget.SLoginBaseRelativeLayout;
+import com.gama.sdk.utils.Validator;
 
 
 public class PhoneVerifyLayoutV2 extends SLoginBaseRelativeLayout implements View.OnClickListener, SBaseRelativeLayout.OperationCallback {
@@ -32,7 +27,7 @@ public class PhoneVerifyLayoutV2 extends SLoginBaseRelativeLayout implements Vie
     /**
      * 密码、账号、手机、验证码
      */
-    private EditText gama_verify_et_phone, gama_verify_et_vfcode;
+    private EditText gama_verify_et_phone, gama_verify_et_vfcode, emailEditText;
     /**
      * 区号, 手机接收限制提示
      */
@@ -100,7 +95,9 @@ public class PhoneVerifyLayoutV2 extends SLoginBaseRelativeLayout implements Vie
         } else if (v == backView) {//返回键,直接返回主登入页面
             sLoginDialogv2.toMainLoginView();
         } else if (v == gama_verify_btn_get_vfcode) {
-            getVfcode();
+//            getVfcode();
+
+            getVfcodeByEmail();
         } else if (v == gama_verify_tv_area) {
             getAndShowArea();
         }
@@ -113,15 +110,26 @@ public class PhoneVerifyLayoutV2 extends SLoginBaseRelativeLayout implements Vie
 
     private void register() {
 
-        String areaCode = gama_verify_tv_area.getText().toString();
-        if (TextUtils.isEmpty(areaCode)) {
-            ToastUtils.toast(getActivity(), R.string.py_area_code_empty);
+//        String areaCode = gama_verify_tv_area.getText().toString();
+//        if (TextUtils.isEmpty(areaCode)) {
+//            ToastUtils.toast(getActivity(), R.string.py_area_code_empty);
+//            return;
+//        }
+//
+//        String phone = gama_verify_et_phone.getEditableText().toString().trim();
+//        if (!phone.matches(selectedBean.getPattern())) {
+//            ToastUtils.toast(getActivity(), R.string.py_phone_error);
+//            return;
+//        }
+
+        String email = emailEditText.getEditableText().toString().trim();
+        if (TextUtils.isEmpty(email)) {
+            ToastUtils.toast(getActivity(), R.string.py_email_empty);
             return;
         }
 
-        String phone = gama_verify_et_phone.getEditableText().toString().trim();
-        if (!phone.matches(selectedBean.getPattern())) {
-            ToastUtils.toast(getActivity(), R.string.py_phone_error);
+        if (!Validator.isEmail(email)) {
+            ToastUtils.toast(getActivity(), R.string.py_email_format_error);
             return;
         }
 
@@ -131,7 +139,7 @@ public class PhoneVerifyLayoutV2 extends SLoginBaseRelativeLayout implements Vie
             return;
         }
 
-        sLoginDialogv2.getLoginPresenter().phoneVerify(sLoginDialogv2.getActivity(), areaCode, phone, vfcode, thirdId, loginType);
+        sLoginDialogv2.getLoginPresenter().phoneVerify(sLoginDialogv2.getActivity(), "", email, vfcode, thirdId, loginType);
     }
 
     private void getVfcode() {
@@ -149,6 +157,25 @@ public class PhoneVerifyLayoutV2 extends SLoginBaseRelativeLayout implements Vie
 
         sLoginDialogv2.getLoginPresenter().getPhoneVfcode(sLoginDialogv2.getActivity(), areaCode, phone, interfaceName);
     }
+
+    private void getVfcodeByEmail() {
+
+        String email = emailEditText.getEditableText().toString().trim();
+        if (TextUtils.isEmpty(email)) {
+            ToastUtils.toast(getActivity(), R.string.py_email_empty);
+            return;
+        }
+
+        if (!Validator.isEmail(email)) {
+            ToastUtils.toast(getActivity(), R.string.py_email_format_error);
+            return;
+        }
+
+        String interfaceName = GSRequestMethod.RequestVfcodeInterface.bind.getString();
+
+        sLoginDialogv2.getLoginPresenter().getEmailVfcode(sLoginDialogv2.getActivity(), this, email, interfaceName);
+    }
+
 
     @Override
     public void statusCallback(int operation) {

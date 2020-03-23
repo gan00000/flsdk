@@ -1,12 +1,11 @@
 package com.gama.data.login.execute;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import com.core.base.bean.BaseReqeustBean;
 import com.core.base.utils.SStringUtil;
 import com.gama.data.login.constant.GSRequestMethod;
-import com.gama.data.login.constant.GamaRequestMethod;
-import com.gama.data.login.request.AccountLoginRequestBean;
 import com.gama.data.login.request.PhoneVerifyRequestBean;
 
 public class PhoneVerifyRequestTask extends BaseLoginRequestTask {
@@ -18,7 +17,15 @@ public class PhoneVerifyRequestTask extends BaseLoginRequestTask {
 		requestBean = new PhoneVerifyRequestBean(mContext);
 		sdkBaseRequestBean = requestBean;
 		requestBean.setVfCode(vfCode);
-		requestBean.setPhone(phone);
+
+		if (TextUtils.isEmpty(area)){
+
+			requestBean.setEmail(phone);
+
+		}else {
+
+			requestBean.setPhone(phone);
+		}
 		requestBean.setPhoneAreaCode(area);
 		requestBean.setThirdPlatId(thirdId);
 		requestBean.setRegistPlatform(registPlatform);
