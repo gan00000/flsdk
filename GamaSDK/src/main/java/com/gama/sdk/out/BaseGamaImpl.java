@@ -89,7 +89,7 @@ public class BaseGamaImpl implements IGama {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                PL.i("IGama initSDK");
+                PL.i("IGama initSDK. AAR version " + BuildConfig.AAR_VERSION);
                 Localization.gameLanguage(activity, gameLanguage);
                 //清除上一次登录成功的返回值
                 GamaUtil.saveSdkLoginData(activity, "");

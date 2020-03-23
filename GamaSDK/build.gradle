@@ -74,6 +74,7 @@ android {
             flavorDimensions "1"
 
             buildConfigField "String", JAR_VERSION, SDK_VERSION_NAME_SDK_KRONE
+            buildConfigField "String", AAR_VERSION, SDK_VERSION_NAME_AAR
 
         }
 
@@ -85,6 +86,7 @@ android {
             flavorDimensions "1"
 
             buildConfigField "String", JAR_VERSION, SDK_VERSION_NAME_SDK_KRGOOGLE
+            buildConfigField "String", AAR_VERSION, SDK_VERSION_NAME_AAR
 
         }
 
@@ -96,6 +98,7 @@ android {
             flavorDimensions "1"
 
             buildConfigField "String", JAR_VERSION, SDK_VERSION_NAME_SDK_TWGOOGLE
+            buildConfigField "String", AAR_VERSION, SDK_VERSION_NAME_AAR
 
         }
 
@@ -107,6 +110,7 @@ android {
             flavorDimensions "1"
 
             buildConfigField "String", JAR_VERSION, SDK_VERSION_NAME_SDK_TWWEB
+            buildConfigField "String", AAR_VERSION, SDK_VERSION_NAME_AAR
 
         }
     }
