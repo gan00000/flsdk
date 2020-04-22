@@ -19,12 +19,12 @@ public class GamaBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         PL.i("GamaBroadcastReceiver onReceive");
-        if (intent != null && INSTALL_REFERRER_ACTION.equals(intent.getAction())){
-            String referrer = intent.getStringExtra("referrer");
-            PL.i("referrer:" + referrer);
-            if (SStringUtil.isNotEmpty(referrer)){
-                GamaUtil.saveReferrerInfo(context, referrer, "0", "0");
-            }
-        }
+//        if (intent != null && INSTALL_REFERRER_ACTION.equals(intent.getAction())){
+//            String referrer = intent.getStringExtra("referrer");
+//            PL.i("referrer:" + referrer);
+//            if (SStringUtil.isNotEmpty(referrer)){
+//                GamaUtil.saveReferrerInfo(context, referrer, "0", "0");
+//            }
+//        }
     }
 }

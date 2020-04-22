@@ -124,7 +124,7 @@ public class MainActivity extends BaseMainActivity {
         chaxun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                querySku();
+                querySku();
                 try {
                     throw new SecurityException();
                 } catch (Exception e) {

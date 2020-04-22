@@ -90,6 +90,10 @@ public class BaseGamaImpl implements IGama {
             @Override
             public void run() {
                 PL.i("IGama initSDK. AAR version " + BuildConfig.AAR_VERSION);
+                if (isInitSdk) {
+                    PL.i("IGama initSDK already finish.");
+                    return;
+                }
                 Localization.gameLanguage(activity, gameLanguage);
                 //清除上一次登录成功的返回值
                 GamaUtil.saveSdkLoginData(activity, "");
@@ -166,10 +170,14 @@ public class BaseGamaImpl implements IGama {
 
     @Override
     public void login(final Activity activity, final ILoginCallBack iLoginCallBack) {
-        PL.i("IGama login");
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                PL.i("IGama login");
+                if (isClickTooQuick()) {//防止连续点击
+                    PL.i("点击过快，无效");
+                    return;
+                }
                 PL.i("fb keyhash:" + SignatureUtil.getHashKey(activity, activity.getPackageName()));
                 PL.i("google sha1:" + SignatureUtil.getSignatureSHA1WithColon(activity, activity.getPackageName()));
                 if (iLogin != null) {
@@ -188,12 +196,11 @@ public class BaseGamaImpl implements IGama {
     @Override
     public void pay(final Activity activity, final SPayType payType, final String cpOrderId, final String productId, final String extra, final IPayListener listener) {
         PL.i("IGama pay payType:" + payType.toString() + " ,cpOrderId:" + cpOrderId + ",productId:" + productId + ",extra:" + extra + ", IPayListener: " + listener);
-        if ((System.currentTimeMillis() - firstClickTime) < 1000) {//防止连续点击
+        if (isClickTooQuick()) {//防止连续点击
             PL.i("点击过快，无效");
             return;
         }
         iPayListener = listener;
-        firstClickTime = System.currentTimeMillis();
 
         activity.runOnUiThread(new Runnable() {
             @Override
@@ -252,7 +259,10 @@ public class BaseGamaImpl implements IGama {
 
     @Override
     public void openWebview(final Activity activity) {
-
+        if (isClickTooQuick()) {//防止连续点击
+            PL.i("点击过快，无效");
+            return;
+        }
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -500,6 +510,10 @@ public class BaseGamaImpl implements IGama {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                if (isClickTooQuick()) {//防止连续点击
+                    PL.i("点击过快，无效");
+                    return;
+                }
                 openWebPage(activity, type, url, null);
             }
         });
@@ -510,6 +524,10 @@ public class BaseGamaImpl implements IGama {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                if (isClickTooQuick()) {//防止连续点击
+                    PL.i("点击过快，无效");
+                    return;
+                }
                 GamaWebPageHelper.openWebPage(activity, type, url, callBack);
             }
         });
@@ -525,6 +543,10 @@ public class BaseGamaImpl implements IGama {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                if (isClickTooQuick()) {//防止连续点击
+                    PL.i("点击过快，无效");
+                    return;
+                }
                 String loginType = GamaUtil.getPreviousLoginType(activity);
                 if (SLoginType.LOGIN_TYPE_FB.equals(loginType)) {
                     if (sFacebookProxy != null) {
@@ -657,6 +679,10 @@ public class BaseGamaImpl implements IGama {
             @Override
             public void run() {
                 Log.i(TAG, "type : " + type.name() + "  message : " + message + "  shareLinkUrl : " + shareLinkUrl + "  picPath : " + picPath);
+                if (isClickTooQuick()) {//防止连续点击
+                    PL.i("点击过快，无效");
+                    return;
+                }
                 switch (type) {
                     case FACEBOOK:
                         if (!TextUtils.isEmpty(shareLinkUrl)) {
@@ -821,6 +847,10 @@ public class BaseGamaImpl implements IGama {
             @Override
             public void run() {
                 Log.i(TAG, "type : " + type.name() + "  message : " + message + "  title : " + title + "  invitingList : " + invitingList);
+                if (isClickTooQuick()) {//防止连续点击
+                    PL.i("点击过快，无效");
+                    return;
+                }
                 switch (type) {
                     case FACEBOOK:
                         if (sFacebookProxy != null) {
@@ -884,8 +914,20 @@ public class BaseGamaImpl implements IGama {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                if (isClickTooQuick()) {//防止连续点击
+                    PL.i("点击过快，无效");
+                    return;
+                }
                 GsFunctionHelper.openFunction(activity, type, callBack);
             }
         });
+    }
+
+    boolean isClickTooQuick() {
+        if(System.currentTimeMillis() - firstClickTime < 2000) {
+            return true;
+        }
+        firstClickTime = System.currentTimeMillis();
+        return false;
     }
 }

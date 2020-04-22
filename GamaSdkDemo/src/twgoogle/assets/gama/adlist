@@ -1,11 +1,11 @@
 {
     "events": [
         {
-            "id": 676707834,
-            "name": "gama_10min",
-            "token": "b6w73u",
+            "id": 428027033,
+            "name": "gamesword_10min",
+            "token": "72u3rt",
             "callback_url": null,
-            "unique": false,
+            "unique": true,
             "urls": {
                 "archive": null,
                 "unarchive": null
@@ -14,11 +14,11 @@
             "archived": false
         },
         {
-            "id": 1195102538,
-            "name": "gama_15retention",
-            "token": "jrj70q",
+            "id": 1441688998,
+            "name": "gamesword_15retention",
+            "token": "nucecm",
             "callback_url": null,
-            "unique": false,
+            "unique": true,
             "urls": {
                 "archive": null,
                 "unarchive": null
@@ -27,11 +27,11 @@
             "archived": false
         },
         {
-            "id": 872598420,
-            "name": "gama_1retention",
-            "token": "efit90",
+            "id": 1146122737,
+            "name": "gamesword_1retention",
+            "token": "iyddyp",
             "callback_url": null,
-            "unique": false,
+            "unique": true,
             "urls": {
                 "archive": null,
                 "unarchive": null
@@ -40,11 +40,11 @@
             "archived": false
         },
         {
-            "id": 1606522371,
-            "name": "gama_20min",
-            "token": "qkhclf",
+            "id": 1502386958,
+            "name": "gamesword_20min",
+            "token": "ouhd72",
             "callback_url": null,
-            "unique": false,
+            "unique": true,
             "urls": {
                 "archive": null,
                 "unarchive": null
@@ -53,11 +53,11 @@
             "archived": false
         },
         {
-            "id": 362357681,
-            "name": "gama_30min",
-            "token": "5zqkz5",
+            "id": 2102020743,
+            "name": "gamesword_30min",
+            "token": "yrhll3",
             "callback_url": null,
-            "unique": false,
+            "unique": true,
             "urls": {
                 "archive": null,
                 "unarchive": null
@@ -66,11 +66,11 @@
             "archived": false
         },
         {
-            "id": 1031689668,
-            "name": "gama_30retention",
-            "token": "h28ouc",
+            "id": 1477064003,
+            "name": "gamesword_30retention",
+            "token": "ofelvn",
             "callback_url": null,
-            "unique": false,
+            "unique": true,
             "urls": {
                 "archive": null,
                 "unarchive": null
@@ -79,11 +79,11 @@
             "archived": false
         },
         {
-            "id": 1496028799,
-            "name": "gama_3retention",
-            "token": "oqp37j",
+            "id": 1644213435,
+            "name": "gamesword_3retention",
+            "token": "r6x77f",
             "callback_url": null,
-            "unique": false,
+            "unique": true,
             "urls": {
                 "archive": null,
                 "unarchive": null
@@ -92,11 +92,11 @@
             "archived": false
         },
         {
-            "id": 1120756819,
-            "name": "gama_7retention",
-            "token": "ij9phv",
+            "id": 1916085957,
+            "name": "gamesword_7retention",
+            "token": "vosddx",
             "callback_url": null,
-            "unique": false,
+            "unique": true,
             "urls": {
                 "archive": null,
                 "unarchive": null
@@ -105,11 +105,11 @@
             "archived": false
         },
         {
-            "id": 984586685,
-            "name": "gama_8min",
-            "token": "ga73y5",
+            "id": 1850803452,
+            "name": "gamesword_8min",
+            "token": "ulx530",
             "callback_url": null,
-            "unique": false,
+            "unique": true,
             "urls": {
                 "archive": null,
                 "unarchive": null
@@ -118,11 +118,11 @@
             "archived": false
         },
         {
-            "id": 490114631,
-            "name": "gama_firstpay",
-            "token": "83suvb",
+            "id": 1939142726,
+            "name": "gamesword_attendbattle1",
+            "token": "w2ik3q",
             "callback_url": null,
-            "unique": false,
+            "unique": true,
             "urls": {
                 "archive": null,
                 "unarchive": null
@@ -131,11 +131,11 @@
             "archived": false
         },
         {
-            "id": 183754755,
-            "name": "gama_login_event",
-            "token": "31ei2r",
+            "id": 1540226642,
+            "name": "gamesword_attendbattle10",
+            "token": "ph0ehe",
             "callback_url": null,
-            "unique": false,
+            "unique": true,
             "urls": {
                 "archive": null,
                 "unarchive": null
@@ -144,11 +144,11 @@
             "archived": false
         },
         {
-            "id": 483273081,
-            "name": "gama_open",
-            "token": "7zq7w9",
+            "id": 1641510414,
+            "name": "gamesword_attendbattle2",
+            "token": "r5b9ji",
             "callback_url": null,
-            "unique": false,
+            "unique": true,
             "urls": {
                 "archive": null,
                 "unarchive": null
@@ -157,11 +157,11 @@
             "archived": false
         },
         {
-            "id": 507164157,
-            "name": "gama_register_event",
-            "token": "8dyad9",
+            "id": 1281978694,
+            "name": "gamesword_attendbattle3",
+            "token": "l7993a",
             "callback_url": null,
-            "unique": false,
+            "unique": true,
             "urls": {
                 "archive": null,
                 "unarchive": null
@@ -170,11 +170,11 @@
             "archived": false
         },
         {
-            "id": 269901148,
-            "name": "gama_role_info",
-            "token": "4gox24",
+            "id": 1791434948,
+            "name": "gamesword_attendbattle4",
+            "token": "tmko1w",
             "callback_url": null,
-            "unique": false,
+            "unique": true,
             "urls": {
                 "archive": null,
                 "unarchive": null
@@ -183,22 +183,347 @@
             "archived": false
         },
         {
-            "id": 1403359308,
+            "id": 1334705767,
+            "name": "gamesword_attendbattle5",
+            "token": "m2ndk7",
+            "callback_url": null,
+            "unique": true,
+            "urls": {
+                "archive": null,
+                "unarchive": null
+            },
+            "autogenerated": false,
+            "archived": false
+        },
+        {
+            "id": 1864858372,
+            "name": "gamesword_attendbattle6",
+            "token": "uuadxg",
+            "callback_url": null,
+            "unique": true,
+            "urls": {
+                "archive": null,
+                "unarchive": null
+            },
+            "autogenerated": false,
+            "archived": false
+        },
+        {
+            "id": 1370869811,
+            "name": "gamesword_attendbattle7",
+            "token": "mo6hwz",
+            "callback_url": null,
+            "unique": true,
+            "urls": {
+                "archive": null,
+                "unarchive": null
+            },
+            "autogenerated": false,
+            "archived": false
+        },
+        {
+            "id": 1519686986,
+            "name": "gamesword_attendbattle8",
+            "token": "p4s5ze",
+            "callback_url": null,
+            "unique": true,
+            "urls": {
+                "archive": null,
+                "unarchive": null
+            },
+            "autogenerated": false,
+            "archived": false
+        },
+        {
+            "id": 1456215219,
+            "name": "gamesword_attendbattle9",
+            "token": "o2zqur",
+            "callback_url": null,
+            "unique": true,
+            "urls": {
+                "archive": null,
+                "unarchive": null
+            },
+            "autogenerated": false,
+            "archived": false
+        },
+        {
+            "id": 418535113,
+            "name": "gamesword_clicktopay",
+            "token": "6x6nrd",
+            "callback_url": null,
+            "unique": true,
+            "urls": {
+                "archive": null,
+                "unarchive": null
+            },
+            "autogenerated": false,
+            "archived": false
+        },
+        {
+            "id": 497968902,
+            "name": "gamesword_firstpay",
+            "token": "88h79i",
+            "callback_url": null,
+            "unique": true,
+            "urls": {
+                "archive": null,
+                "unarchive": null
+            },
+            "autogenerated": false,
+            "archived": false
+        },
+        {
+            "id": 1244778983,
+            "name": "gamesword_hero12",
+            "token": "kl3xlz",
+            "callback_url": null,
+            "unique": true,
+            "urls": {
+                "archive": null,
+                "unarchive": null
+            },
+            "autogenerated": false,
+            "archived": false
+        },
+        {
+            "id": 174453097,
+            "name": "gamesword_hero3",
+            "token": "2vv4vd",
+            "callback_url": null,
+            "unique": true,
+            "urls": {
+                "archive": null,
+                "unarchive": null
+            },
+            "autogenerated": false,
+            "archived": false
+        },
+        {
+            "id": 1034053383,
+            "name": "gamesword_hero6",
+            "token": "h3ncp3",
+            "callback_url": null,
+            "unique": true,
+            "urls": {
+                "archive": null,
+                "unarchive": null
+            },
+            "autogenerated": false,
+            "archived": false
+        },
+        {
+            "id": 1710991726,
+            "name": "gamesword_hero8",
+            "token": "saohny",
+            "callback_url": null,
+            "unique": true,
+            "urls": {
+                "archive": null,
+                "unarchive": null
+            },
+            "autogenerated": false,
+            "archived": false
+        },
+        {
+            "id": 1889531354,
+            "name": "gamesword_login_event",
+            "token": "v8z7q2",
+            "callback_url": "https://ads.gamesword.com/adjust/gama_login_event?event_name={event_name}&gps_adid={idfa||gps_adid}&idfv={idfv}&android_id={android_id}&adid={adid}&tracker={tracker}&tracker_name={tracker_name}&app_name={app_name}&created_at={created_at}&activity_kind={activity_kind}&event={event}&is_organic={is_organic}&impression_based={impression_based}&network_name={network_name}&campaign_name={campaign_name}&adgroup_name={adgroup_name}&creative_name={creative_name}&click_time={click_time}&installed_at={installed_at}&created_at_milli={created_at_milli}&user_agent={user_agent}&ip_address={ip_address}&country={country}&os_name={os_name}&device_name={device_name}&device_type={device_type}&time_spent={time_spent}&deeplink={deeplink}&cost_type={cost_type}&cost_amount={cost_amount}&cost_currency={cost_currency}&reporting_cost={reporting_cost}&gclid={gclid}&adwords_campaign_type={adwords_campaign_type}&adwords_campaign_name={adwords_campaign_name}&adwords_campaign_id={adwords_campaign_id}&adwords_adgroup_id={adwords_adgroup_id}&adwords_creative_id={adwords_creative_id}&adwords_network_type={adwords_network_type}&adwords_network_subtype={adwords_network_subtype}&adwords_keyword={adwords_keyword}&adwords_matchtype={adwords_matchtype}&adwords_placement={adwords_placement}&adwords_video_id={adwords_video_id}&search_term={search_term}&fb_campaign_group_name={fb_campaign_group_name}&fb_campaign_group_id={fb_campaign_group_id}&fb_campaign_name={fb_campaign_name}&fb_campaign_id={fb_campaign_id}&fb_adgroup_name={fb_adgroup_name}&fb_adgroup_id={fb_adgroup_id}&fb_ad_objective_name={fb_ad_objective_name}&fb_account_id={fb_account_id}&fb_platform_position={fb_platform_position}&gameCode=twsb&packageName=com.gamesword.twsb",
+            "unique": true,
+            "urls": {
+                "archive": null,
+                "unarchive": null
+            },
+            "autogenerated": false,
+            "archived": false
+        },
+        {
+            "id": 1534635202,
+            "name": "gamesword_onlevel1",
+            "token": "pdok3m",
+            "callback_url": null,
+            "unique": true,
+            "urls": {
+                "archive": null,
+                "unarchive": null
+            },
+            "autogenerated": false,
+            "archived": false
+        },
+        {
+            "id": 677398248,
+            "name": "gamesword_onlevel10",
+            "token": "b7azu0",
+            "callback_url": null,
+            "unique": true,
+            "urls": {
+                "archive": null,
+                "unarchive": null
+            },
+            "autogenerated": false,
+            "archived": false
+        },
+        {
+            "id": 329247262,
+            "name": "gamesword_onlevel15",
+            "token": "5g0wta",
+            "callback_url": null,
+            "unique": true,
+            "urls": {
+                "archive": null,
+                "unarchive": null
+            },
+            "autogenerated": false,
+            "archived": false
+        },
+        {
+            "id": 1513839127,
+            "name": "gamesword_onlevel2",
+            "token": "p1atqv",
+            "callback_url": null,
+            "unique": true,
+            "urls": {
+                "archive": null,
+                "unarchive": null
+            },
+            "autogenerated": false,
+            "archived": false
+        },
+        {
+            "id": 1103192891,
+            "name": "gamesword_onlevel20",
+            "token": "i8t92z",
+            "callback_url": null,
+            "unique": true,
+            "urls": {
+                "archive": null,
+                "unarchive": null
+            },
+            "autogenerated": false,
+            "archived": false
+        },
+        {
+            "id": 1594455426,
+            "name": "gamesword_onlevel22",
+            "token": "qdapoi",
+            "callback_url": null,
+            "unique": true,
+            "urls": {
+                "archive": null,
+                "unarchive": null
+            },
+            "autogenerated": false,
+            "archived": false
+        },
+        {
+            "id": 1856953425,
+            "name": "gamesword_onlevel27",
+            "token": "upkyfl",
+            "callback_url": null,
+            "unique": true,
+            "urls": {
+                "archive": null,
+                "unarchive": null
+            },
+            "autogenerated": false,
+            "archived": false
+        },
+        {
+            "id": 1954276214,
+            "name": "gamesword_onlevel4",
+            "token": "wbix6e",
+            "callback_url": null,
+            "unique": true,
+            "urls": {
+                "archive": null,
+                "unarchive": null
+            },
+            "autogenerated": false,
+            "archived": false
+        },
+        {
+            "id": 60734799,
+            "name": "gamesword_onlevel5",
+            "token": "105r9r",
+            "callback_url": null,
+            "unique": true,
+            "urls": {
+                "archive": null,
+                "unarchive": null
+            },
+            "autogenerated": false,
+            "archived": false
+        },
+        {
+            "id": 1583957493,
+            "name": "gamesword_open",
+            "token": "q71pf9",
+            "callback_url": null,
+            "unique": true,
+            "urls": {
+                "archive": null,
+                "unarchive": null
+            },
+            "autogenerated": false,
+            "archived": false
+        },
+        {
+            "id": 786263766,
+            "name": "gamesword_openmall",
+            "token": "d04d06",
+            "callback_url": null,
+            "unique": true,
+            "urls": {
+                "archive": null,
+                "unarchive": null
+            },
+            "autogenerated": false,
+            "archived": false
+        },
+        {
+            "id": 1474209759,
+            "name": "gamesword_register_event",
+            "token": "odpfj3",
+            "callback_url": "https://ads.gamesword.com/adjust/gama_register_event?event_name={event_name}&gps_adid={idfa||gps_adid}&idfv={idfv}&android_id={android_id}&adid={adid}&tracker={tracker}&tracker_name={tracker_name}&app_name={app_name}&created_at={created_at}&activity_kind={activity_kind}&event={event}&is_organic={is_organic}&impression_based={impression_based}&network_name={network_name}&campaign_name={campaign_name}&adgroup_name={adgroup_name}&creative_name={creative_name}&click_time={click_time}&installed_at={installed_at}&created_at_milli={created_at_milli}&user_agent={user_agent}&ip_address={ip_address}&country={country}&os_name={os_name}&device_name={device_name}&device_type={device_type}&time_spent={time_spent}&deeplink={deeplink}&cost_type={cost_type}&cost_amount={cost_amount}&cost_currency={cost_currency}&reporting_cost={reporting_cost}&gclid={gclid}&adwords_campaign_type={adwords_campaign_type}&adwords_campaign_name={adwords_campaign_name}&adwords_campaign_id={adwords_campaign_id}&adwords_adgroup_id={adwords_adgroup_id}&adwords_creative_id={adwords_creative_id}&adwords_network_type={adwords_network_type}&adwords_network_subtype={adwords_network_subtype}&adwords_keyword={adwords_keyword}&adwords_matchtype={adwords_matchtype}&adwords_placement={adwords_placement}&adwords_video_id={adwords_video_id}&search_term={search_term}&fb_campaign_group_name={fb_campaign_group_name}&fb_campaign_group_id={fb_campaign_group_id}&fb_campaign_name={fb_campaign_name}&fb_campaign_id={fb_campaign_id}&fb_adgroup_name={fb_adgroup_name}&fb_adgroup_id={fb_adgroup_id}&fb_ad_objective_name={fb_ad_objective_name}&fb_account_id={fb_account_id}&fb_platform_position={fb_platform_position}&gameCode=twsb&packageName=com.gamesword.twsb",
+            "unique": true,
+            "urls": {
+                "archive": null,
+                "unarchive": null
+            },
+            "autogenerated": false,
+            "archived": false
+        },
+        {
+            "id": 773842207,
+            "name": "gamesword_role_info",
+            "token": "csq4gv",
+            "callback_url": null,
+            "unique": true,
+            "urls": {
+                "archive": null,
+                "unarchive": null
+            },
+            "autogenerated": false,
+            "archived": false
+        },
+        {
+            "id": 790205205,
+            "name": "gamesword_spendcrystal",
+            "token": "d2gu8l",
+            "callback_url": null,
+            "unique": true,
+            "urls": {
+                "archive": null,
+                "unarchive": null
+            },
+            "autogenerated": false,
+            "archived": false
+        },
+        {
+            "id": 950850672,
             "name": "in_app_purchases",
-            "token": "n7iuz0",
-            "callback_url": null,
-            "unique": false,
-            "urls": {
-                "archive": null,
-                "unarchive": null
-            },
-            "autogenerated": false,
-            "archived": false
-        },
-        {
-            "id": 1565668308,
-            "name": "install",
-            "token": "pw5pec",
+            "token": "fq412o",
             "callback_url": null,
             "unique": false,
             "urls": {

@@ -51,34 +51,34 @@ android {
 //        }
 //    }
 
-    signingConfigs {//签名的配置
-        release {
-            storeFile file('../signkey/gamamobi.jks') //正式签名，以后使用
-            storePassword 'gamamobi'
-            keyAlias 'gamamobi'
-            keyPassword 'gamamobi'
-        }
-        debug {
-            storeFile file('../signkey/gamamobi.jks')
-            storePassword 'gamamobi'
-            keyAlias 'gamamobi'
-            keyPassword 'gamamobi'
-        }
-    }
 //    signingConfigs {//签名的配置
 //        release {
-//            storeFile file('../signkey/gamesword.jks') //正式签名，以后使用
-//            storePassword 'gamesword'
-//            keyAlias 'gamesword'
-//            keyPassword 'gamesword'
+//            storeFile file('../signkey/gamamobi.jks') //正式签名，以后使用
+//            storePassword 'gamamobi'
+//            keyAlias 'gamamobi'
+//            keyPassword 'gamamobi'
 //        }
 //        debug {
-//            storeFile file('../signkey/gamesword.jks')
-//            storePassword 'gamesword'
-//            keyAlias 'gamesword'
-//            keyPassword 'gamesword'
+//            storeFile file('../signkey/gamamobi.jks')
+//            storePassword 'gamamobi'
+//            keyAlias 'gamamobi'
+//            keyPassword 'gamamobi'
 //        }
 //    }
+    signingConfigs {//签名的配置
+        release {
+            storeFile file('../signkey/gamesword.jks') //正式签名，以后使用
+            storePassword 'gamesword'
+            keyAlias 'gamesword'
+            keyPassword 'gamesword'
+        }
+        debug {
+            storeFile file('../signkey/gamesword.jks')
+            storePassword 'gamesword'
+            keyAlias 'gamesword'
+            keyPassword 'gamesword'
+        }
+    }
 
     buildTypes {
         release {
@@ -396,6 +396,30 @@ android {
 
             signingConfig signingConfigs.release
         }
+
+//        twgoogle {
+//            applicationId "com.gamesword.twsst"
+//            minSdkVersion 21
+//            targetSdkVersion 28
+//            versionCode 1
+//            versionName "1.0"
+//            flavorDimensions "1"
+//            resValue "string", "scheme", "twsst"
+//            resValue "string", "facebook_app_id", "502656093689012"
+//            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider502656093689012"
+//            resValue "string", "fb_login_protocol_scheme", "fb502656093689012"
+//            resValue "string", "facebook_app_name", "少年猛將傳"
+//            //每个游戏的demo设置
+//            resValue "string", "test_sku", "com.gamesword.gotgl.1usd"
+//            resValue "string", "sdk_name", "twsb"
+//            signingConfig signingConfigs.release
+//
+//            buildConfigField "String[]", "PRODUCE_LIST",
+//                    "{" +
+//                            "\"com.gamesword.gotgl.1usd\"," +
+//                            "\"com.ezfy.100usd\"," +
+//                            "}"
+//        }
 
         twgoogle {
             applicationId "com.gamesword.twsb"

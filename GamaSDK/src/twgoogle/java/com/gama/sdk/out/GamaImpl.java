@@ -203,6 +203,10 @@ public class GamaImpl extends BaseGamaImpl {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                if (isClickTooQuick()) {//防止连续点击
+                    PL.i("点击过快，无效");
+                    return;
+                }
                 if (payType == SPayType.GOOGLE) {
                     GooglePayHelper.getInstance().queryProductDetail(activity, skus, listener);
                 }

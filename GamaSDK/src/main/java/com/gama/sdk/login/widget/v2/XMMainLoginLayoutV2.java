@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.core.base.utils.PL;
 import com.gama.base.bean.SGameLanguage;
 import com.gama.base.utils.Localization;
 import com.gama.sdk.R;
@@ -20,6 +21,8 @@ public class XMMainLoginLayoutV2 extends SLoginBaseRelativeLayout implements Vie
     private View contentView;
 
     private ImageView fbLoginView, starLoginView, macLoginView, googleLoginView;
+
+    private long time = System.currentTimeMillis();
 //    private View starpyRegView;
 
     public XMMainLoginLayoutV2(Context context) {
@@ -76,6 +79,13 @@ public class XMMainLoginLayoutV2 extends SLoginBaseRelativeLayout implements Vie
 
     @Override
     public void onClick(View v) {
+
+        if(System.currentTimeMillis() - time < 2 * 1000) {
+            PL.i("点击过快，无效");
+            return;
+        } else {
+            time = System.currentTimeMillis();
+        }
 
         if (v == fbLoginView){
             sLoginDialogv2.getLoginPresenter().fbLogin(sLoginDialogv2.getActivity());
