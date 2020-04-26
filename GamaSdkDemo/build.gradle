@@ -443,6 +443,11 @@ android {
                             "\"com.gamesword.gotgl.1usd\"," +
                             "\"com.ezfy.100usd\"," +
                             "}"
+
+//            resValue "string", "zh_tw_gama_login_pre_url", "http://192.168.1.81:8080/login_web_war/"
+//            resValue "string", "zh_tw_gama_login_spa_url", "http://192.168.1.81:8080/login_web_war/"
+//            resValue "string", "tw_gama_pay_pre_url", "https://t-pay.gamamobi.com/"
+//            resValue "string", "tw_gama_pay_spa_url", "https://t-pay.gamamobi.com/"
         }
 
 //        twgoogle {

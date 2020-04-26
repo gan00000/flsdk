@@ -22,7 +22,7 @@ public class XMMainLoginLayoutV2 extends SLoginBaseRelativeLayout implements Vie
 
     private ImageView fbLoginView, starLoginView, macLoginView, googleLoginView;
 
-    private long time = System.currentTimeMillis();
+    private long time;
 //    private View starpyRegView;
 
     public XMMainLoginLayoutV2(Context context) {

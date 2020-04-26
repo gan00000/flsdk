@@ -35,7 +35,7 @@
         android:smallScreens="true"
         android:xlargeScreens="true" />
 
-    <application>
+    <application android:usesCleartextTraffic="true">
 
         <activity
             android:name="com.gama.sdk.SWebViewActivity"

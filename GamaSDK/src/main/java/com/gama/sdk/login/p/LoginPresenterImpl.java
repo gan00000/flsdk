@@ -510,6 +510,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_MAC);
                     } else if (checkIsMacLoginLimit(activity, sLoginResponse, rawResult)) {
 //                        macLoginLimit(activity);
+                        PL.i(TAG, "免注册限制");
                     } else {
                         ToastUtils.toast(getActivity(), sLoginResponse.getMessage());
                     }
@@ -1374,11 +1375,13 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     }
 
     private boolean checkIsMacLoginLimit(Activity activity, final SLoginResponse sLoginResponse, final String rawResult) {
-        boolean isLimit = false;
+        if(!"9002".equals(sLoginResponse.getCode()) || !"9001".equals(sLoginResponse.getCode())) {
+            PL.i(TAG, "不是免注册限制");
+            return false;
+        }
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         String msg = sLoginResponse.getMessage();
         if ("9002".equals(sLoginResponse.getCode())) { //提示绑定的选择
-            isLimit = true;
             if(TextUtils.isEmpty(msg)) {
                 builder.setTitle(R.string.py_mac_login_limit_hint1);
             } else {
@@ -1400,7 +1403,6 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 }
             });
         } else if ("9001".equals(sLoginResponse.getCode())){ //强制绑定
-            isLimit = true;
             if(TextUtils.isEmpty(msg)) {
                 builder.setTitle(R.string.py_mac_login_limit_hint2);
             } else {
@@ -1413,10 +1415,12 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     showBindView(GSLoginCommonConstant.GsLoginUiPageNumber.GS_PAGE_MAIN);
                 }
             });
+        } else {
+            return false;
         }
         builder.setCancelable(false);
         builder.create().show();
-        return isLimit;
+        return true;
     }
 
 }
