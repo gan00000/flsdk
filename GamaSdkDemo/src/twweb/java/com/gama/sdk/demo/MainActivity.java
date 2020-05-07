@@ -39,9 +39,9 @@ public class MainActivity extends BaseMainActivity {
         SLog.enableDebug(true);
 
         //初始化sdk
-        iGama.initSDK(this, SGameLanguage.zh_TW);
+        iGama.initSDK(this, SGameLanguage.en_US);
 
-        googlePayBtn.setVisibility(View.VISIBLE);
+//        googlePayBtn.setVisibility(View.VISIBLE);
         googlePayBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,7 +62,7 @@ public class MainActivity extends BaseMainActivity {
             }
         });
 
-        othersPayButton.setVisibility(View.VISIBLE);
+//        othersPayButton.setVisibility(View.VISIBLE);
         othersPayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,7 +96,7 @@ public class MainActivity extends BaseMainActivity {
 
         mHelper = new IabHelper(MainActivity.this.getApplicationContext());
 
-        xiaofei.setVisibility(View.VISIBLE);
+//        xiaofei.setVisibility(View.VISIBLE);
         xiaofei.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,7 +119,7 @@ public class MainActivity extends BaseMainActivity {
             }
         });
 
-        PurchasesHistory.setVisibility(View.VISIBLE);
+//        PurchasesHistory.setVisibility(View.VISIBLE);
         PurchasesHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -142,7 +142,7 @@ public class MainActivity extends BaseMainActivity {
             }
         });
 
-        chaxun.setVisibility(View.VISIBLE);
+//        chaxun.setVisibility(View.VISIBLE);
         chaxun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

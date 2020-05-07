@@ -39,16 +39,16 @@ android {
 
     signingConfigs {//签名的配置
         release {
-            storeFile file('../signkey/gamamobi.jks') //正式签名，以后使用
-            storePassword 'gamamobi'
-            keyAlias 'gamamobi'
-            keyPassword 'gamamobi'
+            storeFile file('../signkey/emm18.keystore') //正式签名，以后使用
+            storePassword '111222'
+            keyAlias 'emm18'
+            keyPassword '111222'
         }
         debug {
-            storeFile file('../signkey/gamamobi.jks')
-            storePassword 'gamamobi'
-            keyAlias 'gamamobi'
-            keyPassword 'gamamobi'
+            storeFile file('../signkey/emm18.keystore') //正式签名，以后使用
+            storePassword '111222'
+            keyAlias 'emm18'
+            keyPassword '111222'
         }
     }
 
@@ -66,20 +66,20 @@ android {
 
         twweb {
             signingConfig signingConfigs.release
-            applicationId "com.gamamobi.twsm"
+            applicationId "com.e18.qpt"
             minSdkVersion 21
             targetSdkVersion 28
             versionCode 1
             versionName "1.0"
             flavorDimensions "1"
-            resValue "string", "scheme", "twsm"
-            resValue "string", "facebook_app_id", "404025320186326"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider404025320186326"
-            resValue "string", "fb_login_protocol_scheme", "fb404025320186326"
+            resValue "string", "scheme", "qpt"
+            resValue "string", "facebook_app_id", "835997193587371"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider835997193587371"
+            resValue "string", "fb_login_protocol_scheme", "fb835997193587371"
             resValue "string", "facebook_app_name", "神魔大陸2"
             //每个游戏的demo设置
             resValue "string", "test_sku", "com.gamamobi.smdl.1usd"
-            resValue "string", "sdk_name", "神魔大陸2Demo"
+            resValue "string", "sdk_name", "emaa18 Demo"
 
             buildConfigField "String[]", "PRODUCE_LIST",
                     "{" +
@@ -141,7 +141,7 @@ def getCurrentFlavor() {
     else
     {
         println "NO MATCH FOUND"
-        return "";
+        return ""
     }
 }
 

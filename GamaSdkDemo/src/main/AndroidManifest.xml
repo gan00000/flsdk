@@ -9,6 +9,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/sdk_name"
         android:resizeableActivity="false"
+        android:usesCleartextTraffic="true"
         android:supportsRtl="true">
 
         <activity
