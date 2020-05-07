@@ -2,50 +2,50 @@
 
     <!--港台域名列表 开始-->
     <!--登录域名-->
-    <string name="zh_tw_gama_login_pre_url" translatable="false">http://192.168.1.22:8084/</string>
-    <string name="zh_tw_gama_login_spa_url" translatable="false">http://192.168.1.22:8084/</string>
+    <string name="zh_tw_gama_login_pre_url" translatable="false">http://login.emma18.com/</string>
+    <string name="zh_tw_gama_login_spa_url" translatable="false">http://login.emma18.com/</string>
 
     <!--支付域名-->
-    <string name="zh_tw_gama_pay_pre_url" translatable="false">https://pay.gamesword.com/</string>
-    <string name="zh_tw_gama_pay_spa_url" translatable="false">https://pay.gamesword.com/</string>
+    <string name="zh_tw_gama_pay_pre_url" translatable="false">https://pay.emma18.com/</string>
+    <string name="zh_tw_gama_pay_spa_url" translatable="false">https://pay.emma18.com/</string>
 
     <!--活动域名-->
-    <string name="zh_tw_gama_act_pre_url" translatable="false">https://activity.gamesword.com/</string>
-    <string name="zh_tw_gama_act_spa_url" translatable="false">https://activity.gamesword.com/</string>
+    <string name="zh_tw_gama_act_pre_url" translatable="false">https://activity.emma18.com/</string>
+    <string name="zh_tw_gama_act_spa_url" translatable="false">https://activity.emma18.com/</string>
 
     <!--cdn域名-->
-    <string name="zh_tw_gama_cdn_pre_url" translatable="false">https://sdk-download.gamesword.com/</string>
-    <string name="zh_tw_gama_cdn_spa_url" translatable="false">https://sdk-download.gamesword.com/</string>
+    <string name="zh_tw_gama_cdn_pre_url" translatable="false">https://sdk-download.emma18.com/</string>
+    <string name="zh_tw_gama_cdn_spa_url" translatable="false">https://sdk-download.emma18.com/</string>
 
     <!--广告域名-->
-    <string name="zh_tw_gama_ads_pre_url" translatable="false">https://ads.gamesword.com/</string>
-    <string name="zh_tw_gama_ads_spa_url" translatable="false">https://ads.gamesword.com/</string>
+    <string name="zh_tw_gama_ads_pre_url" translatable="false">https://ads.emma18.com/</string>
+    <string name="zh_tw_gama_ads_spa_url" translatable="false">https://ads.emma18.com/</string>
 
     <!--平台域名-->
-    <string name="zh_tw_gama_plat_pre_url" translatable="false">https://platform.gamesword.com/</string>
-    <string name="zh_tw_gama_plat_spa_url" translatable="false">https://platform.gamesword.com/</string>
+    <string name="zh_tw_gama_plat_pre_url" translatable="false">https://platform.emma18.com/</string>
+    <string name="zh_tw_gama_plat_spa_url" translatable="false">https://platform.emma18.com/</string>
 
     <!--客服域名-->
     <string name="zh_tw_gama_cs_pre_url" translatable="false"></string>
     <string name="zh_tw_gama_cs_spa_url" translatable="false"></string>
 
     <!-- 服务条款 -->
-    <string name="zh_tw_gama_terms_url" translatable="false">https://member.gamesword.com/member/archive.html</string>
+    <string name="zh_tw_gama_terms_url" translatable="false">http://member.emma18.com/member/archive.html</string>
 
     <!--使用者條款 - 服務條款-->
-    <string name="zh_tw_gama_start_terms_service_url" translatable="false">https://member.gamesword.com/member/archivemb.html</string>
+    <string name="zh_tw_gama_start_terms_service_url" translatable="false">http://member.emma18.com/member/archivemb.html</string>
 
     <!--使用者條款 - 隱私規章-->
-    <string name="zh_tw_gama_start_terms_private_url" translatable="false">https://member.gamesword.com/member/privacymb.html</string>
+    <string name="zh_tw_gama_start_terms_private_url" translatable="false">http://member.emma18.com/member/privacymb.html</string>
 
     <!--客服链接-->
-    <string name="zh_tw_gama_service_url" translatable="false">https://platform.gamesword.com/web/page/service.app</string>
+    <string name="zh_tw_gama_service_url" translatable="false">http://platform.emma18.com/web/page/service.app</string>
 
     <!--区域码链接-->
-    <string name="zh_tw_gama_area_info_url" translatable="false">https://static-download2.gamesword.com/baseconfig/v1/areacodes.json</string>
+    <string name="zh_tw_gama_area_info_url" translatable="false">https://static-download2.emma18.com/baseconfig/v1/areacodes.json</string>
 
     <!--验证码开关链接-->
-    <string name="zh_tw_gama_vfcode_switch_url" translatable="false">https://config.gamesword.com/%s/base/V1/config.json</string>
+    <string name="zh_tw_gama_vfcode_switch_url" translatable="false">https://config.emma18.com/%s/base/V1/config.json</string>
     <!--港台域名列表 结束-->
 
 
@@ -140,50 +140,50 @@
 
     <!--北美域名列表 开始-->
     <!--登录域名-->
-    <string name="en_us_gama_login_pre_url" translatable="false">http://192.168.1.17:8084/</string>
-    <string name="en_us_gama_login_spa_url" translatable="false">http://192.168.1.17:8084/</string>
+    <string name="en_us_gama_login_pre_url" translatable="false">http://login.emma18.com/</string>
+    <string name="en_us_gama_login_spa_url" translatable="false">http://login.emma18.com/</string>
 
     <!--支付域名-->
-    <string name="en_us_gama_pay_pre_url" translatable="false">https://payam.gamesword.com/</string>
-    <string name="en_us_gama_pay_spa_url" translatable="false">https://payam.gamesword.com/</string>
+    <string name="en_us_gama_pay_pre_url" translatable="false">https://pay.emma18.com/</string>
+    <string name="en_us_gama_pay_spa_url" translatable="false">https://pay.emma18.com/</string>
 
     <!--活动域名-->
-    <string name="en_us_gama_act_pre_url" translatable="false">https://activityam.gamesword.com/</string>
-    <string name="en_us_gama_act_spa_url" translatable="false">https://activityam.gamesword.com/</string>
+    <string name="en_us_gama_act_pre_url" translatable="false">https://activity.emma18.com/</string>
+    <string name="en_us_gama_act_spa_url" translatable="false">https://activity.emma18.com/</string>
 
     <!--cdn域名-->
-    <string name="en_us_gama_cdn_pre_url" translatable="false">https://sdk-download.gamesword.com/</string>
-    <string name="en_us_gama_cdn_spa_url" translatable="false">https://sdk-download.gamesword.com/</string>
+    <string name="en_us_gama_cdn_pre_url" translatable="false">https://sdk-download.emma18.com/</string>
+    <string name="en_us_gama_cdn_spa_url" translatable="false">https://sdk-download.emma18.com/</string>
 
     <!--广告域名-->
-    <string name="en_us_gama_ads_pre_url" translatable="false">https://adsam.gamesword.com/</string>
-    <string name="en_us_gama_ads_spa_url" translatable="false">https://adsam.gamesword.com/</string>
+    <string name="en_us_gama_ads_pre_url" translatable="false">https://ads.emma18.com/</string>
+    <string name="en_us_gama_ads_spa_url" translatable="false">https://ads.emma18.com/</string>
 
     <!--平台域名-->
-    <string name="en_us_gama_plat_pre_url" translatable="false">https://platformam.gamesword.com/</string>
-    <string name="en_us_gama_plat_spa_url" translatable="false">https://platformam.gamesword.com/</string>
+    <string name="en_us_gama_plat_pre_url" translatable="false">https://platform.emma18.com/</string>
+    <string name="en_us_gama_plat_spa_url" translatable="false">https://platform.emma18.com/</string>
 
     <!--客服域名-->
     <string name="en_us_gama_cs_pre_url" translatable="false"></string>
     <string name="en_us_gama_cs_spa_url" translatable="false"></string>
 
     <!-- 服务条款 -->
-    <string name="en_us_gama_terms_url" translatable="false">https://memberam.gamesword.com/member/archive.html</string>
+    <string name="en_us_gama_terms_url" translatable="false">https://member.emma18.com/member/archive.html</string>
 
     <!--使用者條款 - 服務條款-->
-    <string name="en_us_gama_start_terms_service_url" translatable="false">https://memberam.gamesword.com/member/archivemb.html</string>
+    <string name="en_us_gama_start_terms_service_url" translatable="false">https://member.emma18.com/member/archivemb.html</string>
 
     <!--使用者條款 - 隱私規章-->
-    <string name="en_us_gama_start_terms_private_url" translatable="false">https://memberam.gamesword.com/member/privacymb.html</string>
+    <string name="en_us_gama_start_terms_private_url" translatable="false">https://member.emma18.com/member/privacymb.html</string>
 
     <!--客服链接-->
-    <string name="en_us_gama_service_url" translatable="false">https://memberam.gamesword.com/service/turn.html</string>
+    <string name="en_us_gama_service_url" translatable="false">https://member.emma18.com/service/turn.html</string>
 
     <!--区域码链接-->
-    <string name="en_us_gama_area_info_url" translatable="false">https://static-download2.gamesword.com/baseconfig/v1/areacodes.json</string>
+    <string name="en_us_gama_area_info_url" translatable="false">https://static-download2.emma18.com/baseconfig/v1/areacodes.json</string>
 
     <!--验证码开关链接-->
-    <string name="en_us_gama_vfcode_switch_url" translatable="false">https://config.gamesword.com/%s/base/V1/config.json</string>
+    <string name="en_us_gama_vfcode_switch_url" translatable="false">https://config.emma18.com/%s/base/V1/config.json</string>
     <!--北美域名列表 结束-->
 
 </resources>
