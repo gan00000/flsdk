@@ -43,6 +43,8 @@ public class LoginContract {
         void showBindView(int fromPage);
 
         void refreshVfCode();
+
+        void showAnnouce(SLoginResponse sLoginResponse);
     }
 
     /**

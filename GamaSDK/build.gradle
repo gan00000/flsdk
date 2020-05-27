@@ -156,7 +156,7 @@ dependencies {
     kroneApi project(':libraries-src:gama_cafe_plug')
     //twgoogle应用库
     twgoogleApi project(':libraries-src:gama-pay')
-    twgoogleImplementation(name: 'TW-V3-SDK-debug-test', ext: 'aar')
+    twgoogleImplementation(name: 'Plat-GS-SDK-release-2.5', ext: 'aar')
     twgoogleImplementation(name: 'YoutobePlayerCore-release-2.4.1', ext: 'aar')
     twgoogleImplementation ('com.zhihu.android:matisse:0.5.1') {
         exclude group: 'com.android.support'

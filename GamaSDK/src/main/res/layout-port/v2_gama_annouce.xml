@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/transparent">
+
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_annouce_guideline1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.1"/>
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_annouce_guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.9"/>
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_annouce_guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.1"/>
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_annouce_guideline4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.9"/>
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_annouce_guideline5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.86"/>
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_annouce_guideline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.94"/>
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_annouce_guideline7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.07"/>
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gama_annouce_guideline8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.13"/>
+
+<!--        <RelativeLayout-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:background="@drawable/gama_webview_rectangle_bg"-->
+<!--            android:padding="3dp"-->
+<!--            app:layout_constraintStart_toStartOf="@id/gama_annouce_guideline3"-->
+<!--            app:layout_constraintTop_toTopOf="@id/gama_annouce_guideline1"-->
+<!--            app:layout_constraintEnd_toEndOf="@id/gama_annouce_guideline4"-->
+<!--            app:layout_constraintBottom_toBottomOf="@id/gama_annouce_guideline2" >-->
+
+<!--            <com.gama.base.widget.SWebView-->
+<!--                android:id="@+id/gama_annouce_webview"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent" />-->
+
+<!--        </RelativeLayout>-->
+
+<!--        <com.gama.base.widget.SRectRelativeLayout-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            app:layout_constraintStart_toStartOf="@id/gama_annouce_guideline3"-->
+<!--            app:layout_constraintTop_toTopOf="@id/gama_annouce_guideline1"-->
+<!--            app:layout_constraintEnd_toEndOf="@id/gama_annouce_guideline4"-->
+<!--            app:layout_constraintBottom_toBottomOf="@id/gama_annouce_guideline2" >-->
+
+<!--            <com.gama.base.widget.SWebView-->
+<!--                android:id="@+id/gama_annouce_webview"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent" />-->
+
+<!--        </com.gama.base.widget.SRectRelativeLayout>-->
+
+        <com.gama.sdk.login.widget.GsAnnouceWebView
+            android:id="@+id/gama_annouce_webview"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="@id/gama_annouce_guideline3"
+            app:layout_constraintTop_toTopOf="@id/gama_annouce_guideline1"
+            app:layout_constraintEnd_toEndOf="@id/gama_annouce_guideline4"
+            app:layout_constraintBottom_toBottomOf="@id/gama_annouce_guideline2"/>
+
+
+        <ImageView
+            android:id="@+id/gama_annouce_close"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/gama_annouce_close"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="@id/gama_annouce_guideline6"
+            app:layout_constraintStart_toStartOf="@id/gama_annouce_guideline5"
+            app:layout_constraintTop_toTopOf="@id/gama_annouce_guideline7"
+            app:layout_constraintBottom_toBottomOf="@id/gama_annouce_guideline8"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+</RelativeLayout>

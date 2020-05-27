@@ -287,6 +287,13 @@ public class ResConfig {
         return getConfigUrl(context, "gama_vfcode_switch_url");
     }
 
+    /**
+     * 获取统一开关的链接
+     */
+    public static String getCommonSwitchUrl(Context context) {
+        return getConfigUrl(context, "gama_common_switch_url");
+    }
+
 
 //===========================================域名获取end===============================================	
 //===========================================域名获取end===============================================	

@@ -46,6 +46,10 @@
 
     <!--验证码开关链接-->
     <string name="zh_tw_gama_vfcode_switch_url" translatable="false">https://config.gamesword.com/%s/base/V1/config.json</string>
+
+    <!--统一开关链接-->
+    <string name="zh_tw_gama_common_switch_url" translatable="false">https://static-download2.gamesword.com/sdkConfig/%s/v1.1/sdkConfig.json</string>
+
     <!--港台域名列表 结束-->
 
 
@@ -90,6 +94,9 @@
 
     <!--客服链接-->
     <string name="ja_jp_gama_service_url" translatable="false">https://memberjp.gamesword.com/service/turn.html</string>
+
+    <!--统一开关链接-->
+    <string name="ja_jp_gama_common_switch_url" translatable="false">https://static-download2.gamesword.com/sdkConfig/%s/v1.1/sdkConfig.json</string>
     <!--日本域名列表 结束-->
 
 
@@ -134,6 +141,9 @@
 
     <!--客服链接-->
     <string name="ko_gama_service_url" translatable="false">https://memberkr.gamesword.com/service/turn.html</string>
+
+    <!--统一开关链接-->
+    <string name="ko_gama_common_switch_url" translatable="false">https://static-download2.gamesword.com/sdkConfig/%s/v1.1/sdkConfig.json</string>
     <!--韩国域名列表 结束-->
 
 
@@ -184,6 +194,9 @@
 
     <!--验证码开关链接-->
     <string name="en_us_gama_vfcode_switch_url" translatable="false">https://config.gamesword.com/%s/base/V1/config.json</string>
+
+    <!--统一开关链接-->
+    <string name="en_us_gama_common_switch_url" translatable="false">https://static-download2.gamesword.com/sdkConfig/%s/v1.1/sdkConfig.json</string>
     <!--北美域名列表 结束-->
 
 </resources>

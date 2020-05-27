@@ -21,6 +21,7 @@ import com.gama.base.bean.AdsRequestBean;
 import com.gama.base.bean.BasePayBean;
 import com.gama.base.cfg.ResConfig;
 import com.gama.base.constant.GamaCommonKey;
+import com.gama.base.excute.GsCommonSwitchTask;
 import com.gama.base.utils.GamaUtil;
 import com.gama.data.login.execute.GamaVfcodeSwitchRequestTask;
 import com.gama.data.login.execute.PhoneVfcodeRequestTask;
@@ -82,6 +83,9 @@ public class StarEventLogger {
             if(GamaUtil.isNeedVfSwitch(activity)) {
                 getVfSwitch(activity);
             }
+
+            //请求统一开关
+            getCommonSwitch(activity);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -442,6 +446,33 @@ public class StarEventLogger {
 
     public static void onPause(Activity activity) {
         GamaAj.onPause(activity);
+    }
+
+    private static void getCommonSwitch(final Activity activity) {
+        GsCommonSwitchTask task = new GsCommonSwitchTask(activity);
+        task.setReqCallBack(new ISReqCallBack() {
+            @Override
+            public void success(Object o, String rawResult) {
+                PL.i("annouce : " + rawResult);
+                GamaUtil.saveCommonSwitchJson(activity, rawResult);
+            }
+
+            @Override
+            public void timeout(String code) {
+                PL.i("annouce : timeout " + code);
+            }
+
+            @Override
+            public void noData() {
+                PL.i("annouce : noData");
+            }
+
+            @Override
+            public void cancel() {
+
+            }
+        });
+        task.excute();
     }
 
 }

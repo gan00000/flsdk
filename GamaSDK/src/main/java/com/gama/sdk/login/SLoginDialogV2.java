@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gama.base.bean.SLoginType;
+import com.gama.base.utils.GamaUtil;
 import com.gama.base.utils.Localization;
 import com.gama.data.login.ILoginCallBack;
 import com.gama.data.login.response.SLoginResponse;
@@ -24,6 +25,7 @@ import com.gama.sdk.login.widget.v2.AccountChangePwdLayoutV2;
 import com.gama.sdk.login.widget.v2.AccountFindPwdLayoutV2;
 import com.gama.sdk.login.widget.v2.AccountManagerLayoutV2;
 import com.gama.sdk.login.widget.v2.AccountRegisterLayoutV2;
+import com.gama.sdk.login.widget.v2.LoginAnnouceLayoutV2;
 import com.gama.sdk.login.widget.v2.PhoneVerifyLayoutV2;
 import com.gama.sdk.login.widget.v2.PyAccountLoginV2;
 import com.gama.sdk.login.widget.v2.ThirdPlatBindAccountLayoutV2;
@@ -69,6 +71,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
     private SLoginBaseRelativeLayout injectionView;
     private SLoginBaseRelativeLayout accountManagerCenterView;
     private SLoginBaseRelativeLayout phoneVerifyView;
+    private SLoginBaseRelativeLayout acnnouceView;
 
     private List<SLoginBaseRelativeLayout> viewPageList;
 
@@ -541,7 +544,32 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 
     }
 
+    public void toAnnouceView(SLoginResponse sLoginResponse) {
+        if (autoLoginLayout.getVisibility() == View.VISIBLE) {
+            autoLoginLayout.setVisibility(View.GONE);
+            contentFrameLayout.setVisibility(View.VISIBLE);
+        }
+        if (acnnouceView == null || !viewPageList.contains(acnnouceView)){
+            acnnouceView = new LoginAnnouceLayoutV2(context, sLoginResponse);
 
+            acnnouceView.setLoginDialogV2(this);
+            contentFrameLayout.addView(acnnouceView);
+            viewPageList.add(acnnouceView);
+        }
+
+        for (View childView : viewPageList) {
+
+            if (childView == null){
+                continue;
+            }
+
+            if (childView == acnnouceView){
+                childView.setVisibility(View.VISIBLE);
+            }else{
+                childView.setVisibility(View.GONE);
+            }
+        }
+    }
 
     public Activity getActivity() {
         return activity;
@@ -553,7 +581,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 
     @Override
     public void LoginSuccess(SLoginResponse sLoginResponse) {
-        if (iLoginCallBack != null){
+        if (iLoginCallBack != null) {
             iLoginCallBack.onLogin(sLoginResponse);
         }
         this.dismiss();
@@ -688,5 +716,10 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public void showAnnouce(SLoginResponse sLoginResponse) {
+        toAnnouceView(sLoginResponse);
     }
 }

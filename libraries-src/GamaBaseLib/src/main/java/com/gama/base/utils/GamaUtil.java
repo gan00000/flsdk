@@ -11,10 +11,16 @@ import com.core.base.utils.JsonUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.SPUtil;
 import com.core.base.utils.SStringUtil;
+import com.gama.base.bean.AnnouceBean;
 import com.gama.base.bean.SGameLanguage;
 import com.gama.base.cfg.ConfigBean;
 import com.gama.base.cfg.ResConfig;
+import com.gama.base.constant.GsCommonSwitchType;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 
 import org.json.JSONException;
@@ -808,6 +814,78 @@ public class GamaUtil {
             return false;
         }
         return true;
+    }
+
+    private static final String GAMA_COMMON_SWITCH_JSON = "GAMA_COMMON_SWITCH_JSON";
+
+    /**
+     * 保存统一开关的文档
+     */
+    public static void saveCommonSwitchJson(Context context, String switchJson){
+        SPUtil.saveSimpleInfo(context, GamaUtil.GAMA_SP_FILE, GAMA_COMMON_SWITCH_JSON, switchJson);
+    }
+
+    public static String getCommonSwitchJson(Context context){
+        return SPUtil.getSimpleString(context, GamaUtil.GAMA_SP_FILE, GAMA_COMMON_SWITCH_JSON);
+    }
+
+    public static String getSwitchJsonWithType(Context context, GsCommonSwitchType type) {
+        String json = getCommonSwitchJson(context);
+        try {
+            JsonArray jsonElements = new JsonParser().parse(json).getAsJsonArray();//获取JsonArray对象
+            for (JsonElement bean : jsonElements) {
+                JsonObject jsonObject = bean.getAsJsonObject();
+                if(type.getString().equals(jsonObject.get("type").getAsString())) {
+                    return jsonObject.toString();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+       return null;
+    }
+
+    /**
+     * 根据type判断是否开启
+     * @param context
+     * @param type
+     * @return
+     */
+    public static boolean isSwitchOpenWithType(Context context, GsCommonSwitchType type) {
+        try {
+            String json = getSwitchJsonWithType(context, type);
+            if(!TextUtils.isEmpty(json)) {
+                JSONObject jsonObject = new JSONObject(json);
+                if(jsonObject.getInt("isOpen") == 1) {
+                    return true;
+                }
+            }
+        }catch (JSONException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return false;
+    }
+
+    /**
+     * 根据typ获取url
+     * @param context
+     * @param type
+     * @return
+     */
+    public static String getSwitchUrlWithType(Context context, GsCommonSwitchType type) {
+        try {
+            String json = getSwitchJsonWithType(context, type);
+            if(!TextUtils.isEmpty(json)) {
+                JSONObject jsonObject = new JSONObject(json);
+                return jsonObject.getString("url");
+            }
+        }catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return null;
     }
 
 //    private static final String GAMA_MAC_LOGIN_COUNT = "GAMA_VFCGAMA_MAC_LOGIN_COUNTODE_SWITCH_STATUS";

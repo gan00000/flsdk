@@ -397,42 +397,18 @@ android {
             signingConfig signingConfigs.release
         }
 
-//        twgoogle {
-//            applicationId "com.gamesword.twsst"
-//            minSdkVersion 21
-//            targetSdkVersion 28
-//            versionCode 1
-//            versionName "1.0"
-//            flavorDimensions "1"
-//            resValue "string", "scheme", "twsst"
-//            resValue "string", "facebook_app_id", "502656093689012"
-//            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider502656093689012"
-//            resValue "string", "fb_login_protocol_scheme", "fb502656093689012"
-//            resValue "string", "facebook_app_name", "少年猛將傳"
-//            //每个游戏的demo设置
-//            resValue "string", "test_sku", "com.gamesword.gotgl.1usd"
-//            resValue "string", "sdk_name", "twsb"
-//            signingConfig signingConfigs.release
-//
-//            buildConfigField "String[]", "PRODUCE_LIST",
-//                    "{" +
-//                            "\"com.gamesword.gotgl.1usd\"," +
-//                            "\"com.ezfy.100usd\"," +
-//                            "}"
-//        }
-
         twgoogle {
-            applicationId "com.gamesword.twsb"
+            applicationId "com.gamesword.twsst"
             minSdkVersion 21
             targetSdkVersion 28
             versionCode 1
             versionName "1.0"
             flavorDimensions "1"
-            resValue "string", "scheme", "twsb"
-            resValue "string", "facebook_app_id", "1020031555016427"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1020031555016427"
-            resValue "string", "fb_login_protocol_scheme", "fb1020031555016427"
-            resValue "string", "facebook_app_name", "shining beyond"
+            resValue "string", "scheme", "twsst"
+            resValue "string", "facebook_app_id", "502656093689012"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider502656093689012"
+            resValue "string", "fb_login_protocol_scheme", "fb502656093689012"
+            resValue "string", "facebook_app_name", "少年猛將傳"
             //每个游戏的demo设置
             resValue "string", "test_sku", "com.gamesword.gotgl.1usd"
             resValue "string", "sdk_name", "twsb"
@@ -443,12 +419,36 @@ android {
                             "\"com.gamesword.gotgl.1usd\"," +
                             "\"com.ezfy.100usd\"," +
                             "}"
-
-//            resValue "string", "zh_tw_gama_login_pre_url", "http://192.168.1.81:8080/login_web_war/"
-//            resValue "string", "zh_tw_gama_login_spa_url", "http://192.168.1.81:8080/login_web_war/"
-//            resValue "string", "tw_gama_pay_pre_url", "https://t-pay.gamamobi.com/"
-//            resValue "string", "tw_gama_pay_spa_url", "https://t-pay.gamamobi.com/"
         }
+
+//        twgoogle {
+//            applicationId "com.gamesword.twsb"
+//            minSdkVersion 21
+//            targetSdkVersion 28
+//            versionCode 1
+//            versionName "1.0"
+//            flavorDimensions "1"
+//            resValue "string", "scheme", "twsb"
+//            resValue "string", "facebook_app_id", "1020031555016427"
+//            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1020031555016427"
+//            resValue "string", "fb_login_protocol_scheme", "fb1020031555016427"
+//            resValue "string", "facebook_app_name", "shining beyond"
+//            //每个游戏的demo设置
+//            resValue "string", "test_sku", "com.gamesword.gotgl.1usd"
+//            resValue "string", "sdk_name", "twsb"
+//            signingConfig signingConfigs.release
+//
+//            buildConfigField "String[]", "PRODUCE_LIST",
+//                    "{" +
+//                            "\"com.gamesword.gotgl.1usd\"," +
+//                            "\"com.ezfy.100usd\"," +
+//                            "}"
+//
+////            resValue "string", "zh_tw_gama_login_pre_url", "http://192.168.1.81:8080/login_web_war/"
+////            resValue "string", "zh_tw_gama_login_spa_url", "http://192.168.1.81:8080/login_web_war/"
+////            resValue "string", "tw_gama_pay_pre_url", "https://t-pay.gamamobi.com/"
+////            resValue "string", "tw_gama_pay_spa_url", "https://t-pay.gamamobi.com/"
+//        }
 
 //        twgoogle {
 //            applicationId "com.gamesword.gotgl"

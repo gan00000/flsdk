@@ -24,6 +24,7 @@ import com.facebook.internal.ImageRequest;
 import com.gama.base.bean.GamaAreaInfoBean;
 import com.gama.base.bean.SLoginType;
 import com.gama.base.cfg.ResConfig;
+import com.gama.base.constant.GsCommonSwitchType;
 import com.gama.base.excute.GamaAreaInfoRequestTask;
 import com.gama.base.utils.GamaUtil;
 import com.gama.data.login.constant.GSLoginCommonConstant;
@@ -955,8 +956,15 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
 //        ToastUtils.toast(mActivity, R.string.py_login_success);
 
-        if (iLoginView != null){
-            iLoginView.LoginSuccess(loginResponse);
+        if (GamaUtil.isSwitchOpenWithType(mActivity, GsCommonSwitchType.ANNOUCE)
+        && !TextUtils.isEmpty(GamaUtil.getSwitchUrlWithType(mActivity, GsCommonSwitchType.ANNOUCE)))  {
+            if (iLoginView != null) {
+                iLoginView.showAnnouce(loginResponse);
+            }
+        } else {
+            if (iLoginView != null) {
+                iLoginView.LoginSuccess(loginResponse);
+            }
         }
     }
 

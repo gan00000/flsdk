@@ -476,7 +476,14 @@ public class BaseGamaImpl implements IGama {
                 }
                 //时间打点结束
                 LogTimer.getInstance().cancel();
-
+                //清除上一次登录成功的返回值
+                GamaUtil.saveSdkLoginData(activity, "");
+                //清除登入验证码本地数据
+                GamaUtil.saveSwitchJson(activity, "");
+                //清除统一开关本地数据
+                GamaUtil.saveCommonSwitchJson(activity, "");
+                //清除角色信息
+                GamaUtil.saveRoleInfo(activity, "", "", "", "", "", "");
             }
         });
     }
@@ -510,10 +517,6 @@ public class BaseGamaImpl implements IGama {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                if (isClickTooQuick()) {//防止连续点击
-                    PL.i("点击过快，无效");
-                    return;
-                }
                 openWebPage(activity, type, url, null);
             }
         });
