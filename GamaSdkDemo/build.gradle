@@ -6,12 +6,12 @@ apply plugin: 'io.fabric'
 
 android {
 
-    compileSdkVersion 27
+    compileSdkVersion 29
     buildToolsVersion '28.0.2'
 
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 27
+        targetSdkVersion 29
         ndk {
             abiFilters "armeabi", "armeabi-v7a", "x86"  // 指定要ndk需要兼容的架构(这样其他依赖包里mips之类的.so会被过滤掉)
         }

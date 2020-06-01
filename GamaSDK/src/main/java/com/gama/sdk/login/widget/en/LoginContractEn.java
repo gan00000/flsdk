@@ -36,6 +36,8 @@ public class LoginContractEn {
         void accountBindSuccess(SLoginResponse sLoginResponse);
 
         void showMainLoginView();
+
+        void showAnnouce(SLoginResponse sLoginResponse);
     }
 
     /**

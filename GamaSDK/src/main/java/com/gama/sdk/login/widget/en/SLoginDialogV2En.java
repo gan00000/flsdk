@@ -23,6 +23,7 @@ import com.gama.sdk.login.widget.en.view.AccountChangePwdLayoutV2En;
 import com.gama.sdk.login.widget.en.view.AccountFindPwdLayoutV2En;
 import com.gama.sdk.login.widget.en.view.AccountManagerLayoutV2En;
 import com.gama.sdk.login.widget.en.view.AccountRegisterLayoutV2En;
+import com.gama.sdk.login.widget.en.view.LoginAnnouceLayoutV2En;
 import com.gama.sdk.login.widget.en.view.PyAccountLoginV2En;
 import com.gama.sdk.login.widget.en.view.ThirdPlatBindAccountLayoutV2En;
 import com.gama.sdk.login.widget.en.view.XMMainLoginLayoutV2En;
@@ -67,6 +68,7 @@ public class SLoginDialogV2En extends SBaseDialog implements LoginContractEn.ILo
     private SLoginBaseRelativeLayoutEn bindTwitterView;
     private SLoginBaseRelativeLayoutEn injectionView;
     private SLoginBaseRelativeLayoutEn accountManagerCenterView;
+    private SLoginBaseRelativeLayoutEn acnnouceView;
 
     private List<SLoginBaseRelativeLayoutEn> viewPageList;
 
@@ -473,7 +475,32 @@ public class SLoginDialogV2En extends SBaseDialog implements LoginContractEn.ILo
 
     }
 
+    public void toAnnouceView(SLoginResponse sLoginResponse) {
+        if (autoLoginLayout.getVisibility() == View.VISIBLE) {
+            autoLoginLayout.setVisibility(View.GONE);
+            contentFrameLayout.setVisibility(View.VISIBLE);
+        }
+        if (acnnouceView == null || !viewPageList.contains(acnnouceView)){
+            acnnouceView = new LoginAnnouceLayoutV2En(context, sLoginResponse);
 
+            acnnouceView.setLoginDialogV2(this);
+            contentFrameLayout.addView(acnnouceView);
+            viewPageList.add(acnnouceView);
+        }
+
+        for (View childView : viewPageList) {
+
+            if (childView == null){
+                continue;
+            }
+
+            if (childView == acnnouceView){
+                childView.setVisibility(View.VISIBLE);
+            }else{
+                childView.setVisibility(View.GONE);
+            }
+        }
+    }
 
     public Activity getActivity() {
         return activity;
@@ -577,5 +604,10 @@ public class SLoginDialogV2En extends SBaseDialog implements LoginContractEn.ILo
         if(sGoogleSignIn != null) {
             sGoogleSignIn.handleActivityDestroy(this.getContext());
         }
+    }
+
+    @Override
+    public void showAnnouce(SLoginResponse sLoginResponse) {
+        toAnnouceView(sLoginResponse);
     }
 }
