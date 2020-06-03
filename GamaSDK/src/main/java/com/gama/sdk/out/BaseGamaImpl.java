@@ -278,71 +278,78 @@ public class BaseGamaImpl implements IGama {
         });
     }
 
+    @Override
+    public void openCs(Activity activity) {
+        openWebPage(activity,GamaOpenWebType.CUSTOM_URL,activity.getString(R.string.emm_service_url));
+    }
+
     protected void startPay(Activity activity, SPayType payType, String cpOrderId, String productId, String extra) {}
 
-//    private void startPay(Activity activity, SPayType payType, String cpOrderId, String productId, String extra) {
-//        if (payType == SPayType.OTHERS) {//第三方储值
-//
-//            othersPay(activity, cpOrderId, extra);
-//
-//        } else if (payType == SPayType.ONESTORE) {
-//            oneStorePay(activity, cpOrderId, productId, extra);
-//        } else {//默认Google储值
-//
-//            if (GamaUtil.getSdkCfg(activity) != null && GamaUtil.getSdkCfg(activity).openOthersPay(activity)) {//假若Google包侵权被下架，此配置可以启动三方储值
-//                PL.i("转第三方储值");
-//                othersPay(activity, cpOrderId, extra);
-//
-//            } else {
-//
-//                googlePay(activity, cpOrderId, productId, extra);
-//            }
-//
-//        }
-//    }
+    /*
+   private void startPay(Activity activity, SPayType payType, String cpOrderId, String productId, String extra) {
+        if (payType == SPayType.OTHERS) {//第三方储值
 
-//    private void googlePay(Activity activity, String cpOrderId, String productId, String extra) {
-//        GooglePayCreateOrderIdReqBean googlePayCreateOrderIdReqBean = new GooglePayCreateOrderIdReqBean(activity);
-//        googlePayCreateOrderIdReqBean.setCpOrderId(cpOrderId);
-//        googlePayCreateOrderIdReqBean.setProductId(productId);
-//        googlePayCreateOrderIdReqBean.setExtra(extra);
-//
-//        Intent i = new Intent(activity, GooglePayActivity2.class);
-//        i.putExtra(GooglePayActivity2.GooglePayReqBean_Extra_Key, googlePayCreateOrderIdReqBean);
-//        activity.startActivityForResult(i, GooglePayActivity2.GooglePayReqeustCode);
-//    }
+            othersPay(activity, cpOrderId, extra);
+
+        } else if (payType == SPayType.ONESTORE) {
+            oneStorePay(activity, cpOrderId, productId, extra);
+        } else {//默认Google储值
+
+            if (GamaUtil.getSdkCfg(activity) != null && GamaUtil.getSdkCfg(activity).openOthersPay(activity)) {//假若Google包侵权被下架，此配置可以启动三方储值
+                PL.i("转第三方储值");
+                othersPay(activity, cpOrderId, extra);
+
+            } else {
+
+                googlePay(activity, cpOrderId, productId, extra);
+            }
+
+        }
+    }
+
+    private void googlePay(Activity activity, String cpOrderId, String productId, String extra) {
+        GooglePayCreateOrderIdReqBean googlePayCreateOrderIdReqBean = new GooglePayCreateOrderIdReqBean(activity);
+        googlePayCreateOrderIdReqBean.setCpOrderId(cpOrderId);
+        googlePayCreateOrderIdReqBean.setProductId(productId);
+        googlePayCreateOrderIdReqBean.setExtra(extra);
+
+        Intent i = new Intent(activity, GooglePayActivity2.class);
+        i.putExtra(GooglePayActivity2.GooglePayReqBean_Extra_Key, googlePayCreateOrderIdReqBean);
+        activity.startActivityForResult(i, GooglePayActivity2.GooglePayReqeustCode);
+    }
 
 
-//    private void othersPay(Activity activity, String cpOrderId, String extra) {
-//        WebPayReqBean webPayReqBean = PayHelper.buildWebPayBean(activity, cpOrderId, extra);
-//
-//        String payThirdUrl = null;
-//        if (GamaUtil.getSdkCfg(activity) != null) {
-//
-//            payThirdUrl = GamaUtil.getSdkCfg(activity).getS_Third_PayUrl();
-//        }
-//        if (TextUtils.isEmpty(payThirdUrl)) {
-//            payThirdUrl = ResConfig.getPayPreferredUrl(activity) + ResConfig.getPayThirdMethod(activity);
-//        }
-//        webPayReqBean.setCompleteUrl(payThirdUrl);
-//
-//        String webUrl = webPayReqBean.createPreRequestUrl();
-//
-//        otherPayWebViewDialog = new SWebViewDialog(activity, R.style.Gama_Theme_AppCompat_Dialog_Notitle_Fullscreen);
-//        otherPayWebViewDialog.setWebUrl(webUrl);
-//        otherPayWebViewDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-//            @Override
-//            public void onDismiss(DialogInterface dialog) {
-//                if (iPayListener != null) {
-//                    PL.i(TAG, "OtherPay支付回调");
-//                    iPayListener.onPayFinish(new Bundle());
-//                } else {
-//                    PL.i(TAG, "OtherPay支付回调为空");
-//                }
-//            }
-//        });
-//        otherPayWebViewDialog.show();
-//    }
+    private void othersPay(Activity activity, String cpOrderId, String extra) {
+        WebPayReqBean webPayReqBean = PayHelper.buildWebPayBean(activity, cpOrderId, extra);
+
+        String payThirdUrl = null;
+        if (GamaUtil.getSdkCfg(activity) != null) {
+
+            payThirdUrl = GamaUtil.getSdkCfg(activity).getS_Third_PayUrl();
+        }
+        if (TextUtils.isEmpty(payThirdUrl)) {
+            payThirdUrl = ResConfig.getPayPreferredUrl(activity) + ResConfig.getPayThirdMethod(activity);
+        }
+        webPayReqBean.setCompleteUrl(payThirdUrl);
+
+        String webUrl = webPayReqBean.createPreRequestUrl();
+
+        otherPayWebViewDialog = new SWebViewDialog(activity, R.style.Gama_Theme_AppCompat_Dialog_Notitle_Fullscreen);
+        otherPayWebViewDialog.setWebUrl(webUrl);
+        otherPayWebViewDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                if (iPayListener != null) {
+                    PL.i(TAG, "OtherPay支付回调");
+                    iPayListener.onPayFinish(new Bundle());
+                } else {
+                    PL.i(TAG, "OtherPay支付回调为空");
+                }
+            }
+        });
+        otherPayWebViewDialog.show();
+    }
+    */
 
     @Override
     public void onCreate(final Activity activity) {

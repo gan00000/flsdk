@@ -41,6 +41,8 @@
     <!--客服链接-->
     <string name="zh_tw_gama_service_url" translatable="false">http://platform.emma18.com/web/page/service.app</string>
 
+    <string name="emm_service_url" translatable="false">https://member.emma18.com/service/cs.html</string>
+
     <!--区域码链接-->
     <string name="zh_tw_gama_area_info_url" translatable="false">https://static-download2.emma18.com/baseconfig/v1/areacodes.json</string>
 

@@ -43,6 +43,8 @@ public interface IGama extends IGameLifeCycle {
 
     void openWebview(Activity activity);
 
+    void openCs(Activity activity);
+
     void onRequestPermissionsResult(Activity activity, int requestCode, String[] permissions, int[] grantResults);
 
     void onWindowFocusChanged(Activity activity, boolean hasFocus);

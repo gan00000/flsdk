@@ -4,55 +4,55 @@ public class GamaAdsConstant {
     /**
      * 每次启动事件
      */
-    public static final String GAMA_EVENT_OPEN = "gamesword_open";
+    public static final String GAMA_EVENT_OPEN = "emm_open";
     /**
      * 登入事件
      */
-    public static final String GAMA_EVENT_LOGIN = "gamesword_login_event";
+    public static final String GAMA_EVENT_LOGIN = "emm_login_event";
     /**
      *注册事件
      */
-    public static final String GAMA_EVENT_REGISTER = "gamesword_register_event";
+    public static final String GAMA_EVENT_REGISTER = "emm_register_event";
     /**
      * 角色信息事件
      */
-    public static final String GAMA_EVENT_ROLE_INFO = "gamesword_role_info";
+    public static final String GAMA_EVENT_ROLE_INFO = "emm_role_info";
     /**
      * 在线时长事件
      */
-    public static final String GAMA_EVENT_MINUTE = "gamesword_%dmin";
+    public static final String GAMA_EVENT_MINUTE = "emm_%dmin";
     /**
      * 8分钟事件
      */
-    public static final String GAMA_EVENT_8_MIN = "gamesword_8min";
+    public static final String GAMA_EVENT_8_MIN = "emm_8min";
     /**
      * 10分钟事件
      */
-    public static final String GAMA_EVENT_10_MIN = "gamesword_10min";
+    public static final String GAMA_EVENT_10_MIN = "emm_10min";
     /**
      * 20分钟事件
      */
-    public static final String GAMA_EVENT_20_MIN = "gamesword_20min";
+    public static final String GAMA_EVENT_20_MIN = "emm_20min";
     /**
      * 30分钟事件
      */
-    public static final String GAMA_EVENT_30_MIN = "gamesword_30min";
+    public static final String GAMA_EVENT_30_MIN = "emm_30min";
     /**
      * 留存事件
      */
-    public static final String GAMA_RETENTION = "gamesword_%dretention";
+    public static final String GAMA_RETENTION = "emm_%dretention";
     /**
      * 首储事件
      */
-    public static final String GAMA_EVENT_FIRSTPAY = "gamesword_firstpay";
+    public static final String GAMA_EVENT_FIRSTPAY = "emm_firstpay";
     /**
      * Google支付轮询事件
      */
-    public static final String GAMA_EVENT_PAY_QUERY = "gamesword_pay_query";
+    public static final String GAMA_EVENT_PAY_QUERY = "emm_pay_query";
     /**
      * 在线时长事件
      */
-    public static final String GAMA_EVENT_ONLINE_TIME = "gamesword_online_time";
+    public static final String GAMA_EVENT_ONLINE_TIME = "emm_online_time";
     /**
      * 充值事件
      */
