@@ -11,4 +11,11 @@
     <!-- Google游戏服务ID -->
     <string name="google_app_id"></string>
 
+    <!-- TapDB appid -->
+    <string name="tapdb_appId"></string>
+    <!-- TapDB channel -->
+    <string name="tapdb_channel"></string>
+    <!-- TapDB gameVersion -->
+    <string name="tapdb_gameVersion"></string>
+
 </resources>
