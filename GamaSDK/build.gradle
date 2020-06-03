@@ -1,57 +1,16 @@
-import java.util.regex.Matcher
-import java.util.regex.Pattern
-import groovy.transform.Field
-
 apply plugin: 'com.android.library'
 
 android {
+    compileSdkVersion 27
+
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 27
+        minSdkVersion 18
+        targetSdkVersion 28
+        buildConfigField "String", JAR_VERSION, SDK_VERSION_NAME_SDK_TWGOOGLE
     }
 
     lintOptions {
         abortOnError false
-    }
-
-//    println 'android'
-//    libraryVariants.all { variant ->
-//        variant.outputs.all { output ->
-//            if (outputFile != null && outputFileName.endsWith('.aar')) {
-//                outputFileName ="${getCurrentFlavor(variant.flavorName)}-${archivesBaseName}-${SDK_VERSION_NAME_AAR}.aar"
-//            }
-//        }
-//    }
-
-    compileSdkVersion 27
-    buildToolsVersion '28.0.2'
-    defaultConfig {
-        minSdkVersion 18
-        targetSdkVersion 27
-//        libraryVariants.all { variant ->
-//            if(variant.flavorName.contains("twgoogle")) {
-//                //设置改jar版本
-//                buildConfigField "String", JAR_VERSION, SDK_VERSION_NAME_SDK_TWGOOGLE
-//                setVariant(variant.flavorName)
-//            }
-//            if(variant.flavorName.contains("twweb")) {
-//                //设置改jar版本
-//                buildConfigField "String", JAR_VERSION, SDK_VERSION_NAME_SDK_TWWEB
-//                setVariant(variant.flavorName)
-//            }
-//            if(variant.flavorName.contains("krone")) {
-//                //设置改jar版本
-//                buildConfigField "String", JAR_VERSION, SDK_VERSION_NAME_SDK_KRONE
-//                setVariant(variant.flavorName)
-//            }
-//            if(variant.flavorName.contains("krgoogle")) {
-//                //设置改jar版本
-//                buildConfigField "String", JAR_VERSION, SDK_VERSION_NAME_SDK_KRGOOGLE
-//                setVariant(variant.flavorName)
-//            }
-//
-//            println getVariant() + '  xfhxfgds'
-//        }
     }
 
     buildTypes {
@@ -65,51 +24,6 @@ android {
         }
     }
 
-    productFlavors {
-        krone {
-            minSdkVersion 18
-            targetSdkVersion 27
-            versionCode 1
-            versionName "1.0"
-            flavorDimensions "1"
-
-            buildConfigField "String", JAR_VERSION, SDK_VERSION_NAME_SDK_KRONE
-
-        }
-
-        krgoogle {
-            minSdkVersion 18
-            targetSdkVersion 27
-            versionCode 1
-            versionName "1.0"
-            flavorDimensions "1"
-
-            buildConfigField "String", JAR_VERSION, SDK_VERSION_NAME_SDK_KRGOOGLE
-
-        }
-
-        twgoogle {
-            minSdkVersion 18
-            targetSdkVersion 27
-            versionCode 1
-            versionName "1.0"
-            flavorDimensions "1"
-
-            buildConfigField "String", JAR_VERSION, SDK_VERSION_NAME_SDK_TWGOOGLE
-
-        }
-
-        twweb {
-            minSdkVersion 18
-            targetSdkVersion 27
-            versionCode 1
-            versionName "1.0"
-            flavorDimensions "1"
-
-            buildConfigField "String", JAR_VERSION, SDK_VERSION_NAME_SDK_TWWEB
-
-        }
-    }
 
 }
 
@@ -119,151 +33,62 @@ repositories {
     }
 }
 
-@Field String curVariant
-
-def setVariant (vari) {
-    curVariant = vari
-}
-
-def getVariant() {
-    return curVariant
-}
-
-def getAarVersion() {
-    return 'v1.0.1.0'
-}
-
 
 dependencies {
 //    implementation fileTree(dir: 'libs', include: ['*.aar'])
     api fileTree(include: ['*.jar'], dir: 'libs')
-//    api files('libs/takephoto_library_3.0.1.jar')
-//    api files('libs/nineoldandroids-library-2.4.0.jar')
 
     //公共库
-    api project(':libraries-src:GamaBaseLib')
-    api project(':libraries-src:gama_ads_plug')
-    api project(':Thirdlibrary')
-    //krgoogle引用库
-    krgoogleApi project(':libraries-src:gama-pay')
-    krgoogleApi project(':libraries-src:gama_cafe_plug')
-    //krone引用库
-    kroneApi project(':libraries-src:gama_onestore_plug')
-    kroneApi project(':libraries-src:gama_cafe_plug')
-    //twgoogle应用库
-    twgoogleApi project(':libraries-src:gama-pay')
-    twgoogleImplementation(name: 'Plat-GS-SDK-release-2.4', ext: 'aar')
-    twgoogleImplementation(name: 'YoutobePlayerCore-release-2.4.1', ext: 'aar')
-    twgoogleImplementation ('com.zhihu.android:matisse:0.5.1') {
-        exclude group: 'com.android.support'
-    }
-    twgoogleImplementation ('com.github.bumptech.glide:glide:4.7.1') {
-        exclude group: 'com.android.support'
-    }
-    //twweb引用库
-    twwebApi project(':libraries-src:gama-pay')
-    twwebImplementation(name: 'Plat-GS-SDK-release-2.4', ext: 'aar')
-    twwebImplementation(name: 'YoutobePlayerCore-release-2.4.1', ext: 'aar')
-    twwebImplementation ('com.zhihu.android:matisse:0.5.1') {
-        exclude group: 'com.android.support'
-    }
-    twwebImplementation ('com.github.bumptech.glide:glide:4.7.1') {
-        exclude group: 'com.android.support'
-    }
-//    annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
+    //Google库
+    implementation 'com.google.android.gms:play-services-auth:15.0.1'
+    implementation 'com.google.android.gms:play-services-base:15.0.1'
+    implementation 'com.google.android.gms:play-services-games:15.0.1'
+    implementation 'com.google.firebase:firebase-core:16.0.1'
+//    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.4'
+    implementation 'com.google.firebase:firebase-messaging:17.1.0'
 
-    //    compile 'com.android.support:recyclerview-v7:25.3.1'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    //Facebook库
+    implementation 'com.facebook.android:facebook-login:4.34.0'
+    implementation 'com.facebook.android:facebook-share:4.34.0'
+    implementation 'com.facebook.android:facebook-messenger:4.34.0'
+    //额外库
+    api 'com.android.support:support-v4:27.0.2'
+    api 'com.android.support:appcompat-v7:27.0.2'
+    api 'com.android.support:recyclerview-v7:27.0.2'
+    api 'com.android.support.constraint:constraint-layout:1.1.2'
+    api 'com.android.support:customtabs:27.0.2'
+    //mutildex
+    implementation 'com.android.support:multidex:1.0.1'
+
+    implementation 'com.google.code.gson:gson:2.8.2'
+
+    implementation ('com.zhihu.android:matisse:0.5.1') {
+        exclude group: 'com.android.support'
+    }
+    implementation ('com.github.bumptech.glide:glide:4.7.1') {
+        exclude group: 'com.android.support'
+    }
 
     //google volley
     implementation 'com.android.volley:volley:1.1.1'
+
+    //Twitter
+    implementation 'com.twitter.sdk.android:twitter-core:3.1.1'
+    implementation ('com.twitter.sdk.android:tweet-ui:3.1.1'){
+        exclude group: 'com.android.support'
+    }
+    implementation ('com.twitter.sdk.android:tweet-composer:3.1.1'){
+        exclude group: 'com.android.support'
+    }
+    implementation 'com.twitter.sdk.android:twitter-mopub:3.1.1'
+
+    //ads
+    //adjust
+    api 'com.adjust.sdk:adjust-android:4.21.1'
+    api 'com.android.installreferrer:installreferrer:1.1.2'
 
 }
 
 
 //./gradlew makeJar 出现env: bash\r: No such file or directory的话是由
 // 于window生成的工程gradlew文件在mac下换行符有问题
-
-
-//打包之前，删除以前的文件
-task clearJar(type: Delete) {
-    delete 'build/libs/'+ '*.jar'
-}
-
-@Field String tempVar
-
-//打包生成test.jar
-task makeLibraryJar {
-
-    group 'aaa'
-
-//    println android.productFlavors
-
-    doLast {
-        android.productFlavors.each {
-            flavor ->
-                println flavor.name
-                def mtask = tasks.findByName("task$flavor.name")
-//            mtask.description = flavor.name
-                mtask.execute()
-        }
-
-    }
-
-
-}
-
-android.productFlavors.each {
-    flavor ->
-        println flavor.name
-        task "task$flavor.name"(type:org.gradle.api.tasks.bundling.Jar) {
-            group 'aaa'
-
-            //指定生成的jar名
-            baseName 'gama-sdk-' + flavor.name + '-' + SDK_VERSION_NAME_SDK.replace("\"","")
-
-            println baseName
-            include "com/gama/**"
-            include "com/lhh/**"
-            exclude "com/gama/connector/**"
-            exclude "com/gama/pay/**"
-            exclude "com/gama/cafe/**"
-            exclude "com/gama/onestore/**"
-            exclude "com/gama/thirdlib/**"
-            exclude "**/R.class"
-            exclude "**/R\$*.class"
-            exclude "**/**/BuildConfig.class"
-            exclude "**/**/BuildConfig\$*.class"
-
-            println 'ddd -- ' + flavor.name.charAt(0).toUpperCase()
-            println 'ddd -- ' + flavor.name.substring(1)
-
-            //从哪里打包class文件,可以指定文件和目录
-            from('build/intermediates/javac/' + flavor.name +'Release/compile' + flavor.name.charAt(0).toUpperCase() + flavor.name.substring(1) + 'ReleaseJavaWithJavac/classes')
-        }
-}
-
-task createJar(type: Copy){
-
-    group 'aaa'
-    from('build/libs/')
-
-    into('../libs/')
-//    include(getJarName() + '.jar')
-}
-
-task deleteJar(type: Delete){
-
-    group 'aaa'
-    delete('build/libs')
-    delete('../libs')
-
-}
-
-createJar.dependsOn(deleteJar,makeLibraryJar)
-//createJar.dependsOn(clean,build,makeLibraryJar)
-//createJar.dependsOn(clean,build,makeLibraryJarKrone,makeLibraryJarKrgoogle,makeLibraryJarTwweb,makeLibraryJarTwgoogle)
-
-def getJarName(name){
-    return name.replace("\"","")+'.jar'
-}
