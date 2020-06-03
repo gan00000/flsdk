@@ -49,123 +49,11 @@
                     android:text="google储值" />
 
                 <Button
-                    android:id="@+id/demo_pay_one"
+                    android:id="@+id/demo_cs"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:text="one储值" />
+                    android:text="客服页面" />
 
-
-                <Button
-                    android:id="@+id/demo_share"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:text="分享" />
-
-                <Button
-                    android:id="@+id/open_page"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:text="打开活动页面" />
-
-                <Button
-                    android:id="@+id/open_url"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:text="打开链接页面" />
-
-                <Button
-                    android:id="@+id/showPlatform"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:text="显示平台" />
-
-                <Button
-                    android:id="@+id/xiaofei"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:text="消费" />
-
-                <Button
-                    android:id="@+id/Crashlytics"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:text="Crashlytics" />
-
-                <Button
-                    android:id="@+id/PurchasesHistory"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:text="PurchasesHistory" />
-
-                <Button
-                    android:id="@+id/getInfo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:text="获取信息" />
-
-                <Button
-                    android:id="@+id/getFriend"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:text="获取好友" />
-
-                <Button
-                    android:id="@+id/getFriendNext"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:text="下一页" />
-
-                <Button
-                    android:id="@+id/getFriendPrevious"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:text="上一页" />
-
-                <Button
-                    android:id="@+id/invite"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:text="发消息到游戏中心" />
-
-                <Button
-                    android:id="@+id/checkShare"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:text="判断能否分享" />
-
-                <Button
-                    android:id="@+id/service"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="客服" />
-
-                <Button
-                    android:id="@+id/announcement"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:text="公告" />
-
-                <Button
-                    android:id="@+id/age"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:text="年龄" />
 
                 <Button
                     android:id="@+id/track"
@@ -174,32 +62,7 @@
                     android:visibility="gone"
                     android:text="事件上报" />
 
-                <Button
-                    android:id="@+id/chaxun"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:text="查商品" />
 
-                <ImageView
-                    android:id="@+id/image_test"
-                    android:layout_width="300dp"
-                    android:layout_height="200dp"
-                    android:visibility="gone" />
-
-                <Button
-                    android:id="@+id/ingame_bind"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:text="游戏内绑定手机"/>
-
-                <Button
-                    android:id="@+id/upload_file"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:text="上传文件"/>
 
             </LinearLayout>
 

@@ -1,17 +1,13 @@
-import java.util.regex.Matcher
-import java.util.regex.Pattern
-
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
 
 android {
 
     compileSdkVersion 27
-    buildToolsVersion '28.0.2'
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 27
+        minSdkVersion 18
+        targetSdkVersion 28
         ndk {
             abiFilters "armeabi", "armeabi-v7a", "x86"  // 指定要ndk需要兼容的架构(这样其他依赖包里mips之类的.so会被过滤掉)
         }
@@ -64,7 +60,7 @@ android {
     }
     productFlavors {
 
-        twweb {
+        qpt {
             signingConfig signingConfigs.release
             applicationId "com.e18.qpt"
             minSdkVersion 21
@@ -73,18 +69,15 @@ android {
             versionName "1.0"
             flavorDimensions "1"
             resValue "string", "scheme", "qpt"
+            resValue "string", "tapdb_appId", "983w6q4hcv6karvi"
             resValue "string", "facebook_app_id", "835997193587371"
             resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider835997193587371"
             resValue "string", "fb_login_protocol_scheme", "fb835997193587371"
-            resValue "string", "facebook_app_name", "神魔大陸2"
+            resValue "string", "facebook_app_name", "emaa18"
+
             //每个游戏的demo设置
-            resValue "string", "test_sku", "com.gamamobi.smdl.1usd"
             resValue "string", "sdk_name", "emaa18 Demo"
 
-            buildConfigField "String[]", "PRODUCE_LIST",
-                    "{" +
-                            "\"com.gamamobi.smdl.1usd\"," +
-                            "}"
         }
 
     }
@@ -108,13 +101,7 @@ repositories {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':GamaSDK')
-    //    implementation 'com.android.support:multidex:1.0.1'
-    //    implementation 'com.google.android.gms:play-services-base:15.0.1'
-    //    implementation 'com.android.support:recyclerview-v7:27.0.2'
-    //    implementation 'com.android.support:support-v4:27.0.2'
-    //    compile 'com.android.support:multidex:1.0.2'
-    //    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+
 }
 
 
@@ -122,27 +109,5 @@ def getReleaseTime() {
     return new Date().format("yyyy-MM-dd-HH-mm", TimeZone.getDefault())
 }
 
-def getCurrentFlavor() {
-
-    Gradle gradle = getGradle()
-    String  tskReqStr = gradle.getStartParameter().getTaskRequests().toString()
-    println "str is " + tskReqStr
-    Pattern pattern;
-
-    if( tskReqStr.contains( "assemble" ) )
-        pattern = Pattern.compile("assemble(\\w+)(Release|Debug)")
-    else
-        pattern = Pattern.compile("generate(\\w+)(Release|Debug)")
-
-    Matcher matcher = pattern.matcher( tskReqStr )
-
-    if( matcher.find() )
-        return matcher.group(1).toLowerCase()
-    else
-    {
-        println "NO MATCH FOUND"
-        return ""
-    }
-}
 
 apply plugin: 'com.google.gms.google-services'
