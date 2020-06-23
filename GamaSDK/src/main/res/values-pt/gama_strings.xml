@@ -1,0 +1,120 @@
+<resources>
+
+    <!--Página dos Termos de Ativação-->
+    <string name="gama_ui_term_title" translatable="false">Termos de Uso</string>
+    <string name="gama_ui_term_confirm" translatable="false">Fazer login</string>
+    <string name="gama_ui_term_read_land" translatable="false">Li e concordo com os termos</string>
+    <string name="gama_ui_term_port_read" translatable="false">Concordo com os Termos de Serviço e a Política de Privacidade</string>
+    <string name="gama_ui_term_port_term1" translatable="false">Termos de Serviço</string>
+    <string name="gama_ui_term_port_term2" translatable="false">Política de Privacidade</string>
+    <string name="gama_ui_term_not_read" translatable="false">Aceite os Termos de Uso</string>
+
+    <!--Página de login-->
+    <string name="py_login_page_account_login">Login como membro</string>
+    <string name="py_login_save_account">Lembrar-me</string>
+    <string name="py_login_by_members">Login como membro</string>
+    <string name="py_findpwd">Esqueceu a senha?</string>
+    <string name="py_register_account">Inscrever-se</string>
+    <string name="py_account_center">Central de Membros</string>
+    <string name="py_account_input_vfcode">Toque para inserir seu código de verificação</string>
+    <string name="py_account_input_password">Digite sua senha</string>
+
+    <!--Página de inscrição-->
+    <string name="py_login_page_account_reg">Inscrever-se</string>
+    <string name="py_register_account_phone">Digite seu número de celular</string>
+    <string name="py_register_account_area">Código de área</string>
+    <string name="py_register_account_get_vfcode">Obter código de verificação</string>
+    <string name="py_register_account_confirm">Inscrever-se</string>
+    <string name="py_register_account_vfcode_hint">Cada número de celular só pode receber o código de verificação 5 vezes por dia.</string>
+
+    <!--Página de recuperação de senha-->
+    <string name="py_login_page_forgot_pwd">Esqueceu a senha?</string>
+
+    <!--Página da Central de Membros-->
+    <string name="py_bind_unique">Vincular conta do Gamebase</string>
+    <string name="py_bind_fb">Vincular conta do Facebook</string>
+    <string name="py_bind_google">Vincular conta do Google</string>
+
+    <!--Página de alteração de senha-->
+    <string name="py_login_page_change_pwd">Alterar senha</string>
+    <string name="py_input_old_password">Digite sua senha antiga</string>
+    <string name="py_old_equel_new_pwd">Sua nova senha não pode ser igual à antiga</string>
+
+    <!--Página de verificação de membro-->
+    <string name="py_verify_title">Verificar conta</string>
+    <string name="py_verify_subtitle">(Verificar conta do Facebook ou Google)</string>
+    <string name="py_verify_confirm">Verificar login</string>
+
+    <!--Página de vinculação de conta (geral)-->
+    <string name="py_login_page_account_bind">Vincular conta</string>
+    <string name="py_btn_bind">Vincular membro</string>
+
+    <!--Vincular celular-->
+    <string name="py_ingame_account_link_title">Vincular número de celular</string>
+    <string name="py_ingame_account_link_subtitle">(Vincule seu número de celular para receber uma recompensa no jogo)</string>
+    <string name="py_ingame_account_link_get">Receber</string>
+    <string name="py_ingame_account_link_confirm">Vincular número de celular</string>
+
+    <!--Vincular conta-->
+    <string name="py_login_page_account_link">Vincular conta</string>
+
+    <!--Termos-->
+    <string name="py_login_terms">Termos e Condições do Membro</string>
+
+    <!--Aviso de verificação-->
+    <string name="py_password_error">Erro no formato da senha</string>
+    <string name="py_account_error">Erro no formato do ID de usuário</string>
+    <string name="py_account_empty">O ID de usuário não pode ficar em branco</string>
+    <string name="py_password_empty">A senha não pode ficar em branco</string>
+    <string name="py_password_equal_account">Seu ID de usuário e sua senha não podem ser iguais</string>
+    <string name="py_email_format_error">Erro no formato do e-mail</string>
+    <string name="py_email_empty">O e-mail não pode ficar em branco</string>
+    <string name="py_vfcode_empty">Digite seu código de verificação</string>
+    <string name="py_area_code_empty">Digite seu código de área</string>
+    <string name="py_phone_error">Erro no formato do número de celular</string>
+
+    <!--Login automático-->
+    <string name="py_auto_login_change">Trocar conta</string>
+    <string name="py_login_autologin_tips">Fazendo login no  %1$s </string>
+
+    <!--Aviso padrão-->
+    <string name="py_register_account_hit">Digite de 6 a 18 caracteres alfanuméricos</string>
+    <string name="py_register_password_hit">Digite uma combinação de 8 a 16letras maiúsculas, minúsculas e números.</string>
+    <string name="py_findpwd_email_hit">E-mail, obrigatório, usado para recuperar sua senha</string>
+    <string name="py_register_email_hit">E-mail, opcional, usado para recuperar sua senha</string>
+    <string name="py_msg_vfcode_hint">Digite seu código de verificação via SMS</string>
+    <string name="py_msg_account_hint">Toque para inserir o ID de usuário</string>
+    <string name="py_msg_password_hint">Toque para inserir a senha</string>
+
+    <!--Texto geral-->
+    <string name="py_confire">Confirmar</string>
+    <string name="py_default_area_num">886</string>
+    <string name="py_default_area_num_pattern">^0{0,1}[6,7,9](?:\\d{7}|\\d{8}|\\d{10})$</string>
+    <string name="py_mac_login_limit_hint1">Você não vinculou sua conta. Vincule sua conta para protegê-la.</string>
+    <string name="py_mac_login_limit_hint2">Sua conta não está vinculada. Vincule-a para habilitar recursos avançados.</string>
+    <string name="py_mac_login_limit_hint_continue">Continuar a fazer login</string>
+    <string name="py_mac_login_limit_hint_bind_now">Vincular agora</string>
+    <string name="py_mac_login_limit_hint_bind_now2">Vincular agora</string>
+
+    <!--Aviso de recurso do SDK-->
+    <string name="gama_toast_msg_app_not_install" translatable="false">%s não está instalado. Instale esse app para compartilhar.</string>
+
+    <!--Aviso de recurso-->
+    <string name="py_register_success">Registro concluído</string>
+    <string name="py_error_occur">Ocorreu um erro. Tente novamente.</string>
+    <string name="py_error_time_out">Conexão expirada. Tente novamente.</string>
+    <string name="py_login_mac_tips">A conta que você está usando para fazer login no %1$s é a seguinte:\nID de usuário: %2$s Senha: %3$s</string>
+    <string name="py_login_mac_saveimage_tips">Senha salva no álbum</string>
+    <string name="py_login_autologin_logining_tips">Fazendo login</string>
+    <string name="py_findpwd_success">Senha recuperada com sucesso</string>
+    <string name="py_success">Sucesso</string>
+
+    <!--Para o Japão-->
+    <string name="py_bind_twitter" translatable="false">Vincular conta do Twitter</string>
+    <string name="py_login_guset" translatable="false">Fazer login como convidado</string>
+
+    <!--Em uso Objetivo incerto-->
+    <string name="py_account_login">Fazer login</string>
+
+
+</resources>

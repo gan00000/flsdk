@@ -566,10 +566,10 @@ public class GamaUtil {
      * @return
      */
     public static boolean hasTwitter(Context context) {
-        SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
+        /*SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
         if(SGameLanguage.ja_JP == sGameLanguage) {
             return true;
-        }
+        }*/
         return false;
     }
 
@@ -627,15 +627,15 @@ public class GamaUtil {
      * @return
      */
     public static boolean needShowAgePage(Context context) {
-        SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
-        if(SGameLanguage.ja_JP == sGameLanguage) {
-            if(getAge(context) >= 20) {
-                return false;
-            } else if(GamaTimeUtil.isSameMonth(getAgeTime(context))) {
-                return false;
-            }
-            return true;
-        }
+//        SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
+//        if(SGameLanguage.ja_JP == sGameLanguage) {
+//            if(getAge(context) >= 20) {
+//                return false;
+//            } else if(GamaTimeUtil.isSameMonth(getAgeTime(context))) {
+//                return false;
+//            }
+//            return true;
+//        }
         return false;
     }
 
@@ -645,10 +645,10 @@ public class GamaUtil {
      * @return
      */
     public static boolean needRequestAgeLimit(Context context) {
-        SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
-        if(SGameLanguage.ja_JP == sGameLanguage) {
-            return getAge(context) < 20;
-        }
+//        SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
+//        if(SGameLanguage.ja_JP == sGameLanguage) {
+//            return getAge(context) < 20;
+//        }
         return false;
     }
 
@@ -764,10 +764,10 @@ public class GamaUtil {
      * 判断是否北美地区
      */
     public static boolean isNorthAmarican(Context context) {
-        SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
-        if(SGameLanguage.en_US == sGameLanguage) {
-            return true;
-        }
+//        SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
+//        if(SGameLanguage.en_US == sGameLanguage) {
+//            return true;
+//        }
         return false;
     }
 
@@ -775,10 +775,10 @@ public class GamaUtil {
      * 判断是否日本地区
      */
     public static boolean isJapan(Context context) {
-        SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
+        /*SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
         if(SGameLanguage.ja_JP == sGameLanguage) {
             return true;
-        }
+        }*/
         return false;
     }
 
@@ -786,10 +786,10 @@ public class GamaUtil {
      * 判断是否韩国地区
      */
     public static boolean isKorea(Context context) {
-        SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
+        /*SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
         if(SGameLanguage.ko_KR == sGameLanguage) {
             return true;
-        }
+        }*/
         return false;
     }
 
@@ -797,10 +797,10 @@ public class GamaUtil {
      * 判断是否.app接口
      */
     public static boolean isInterfaceSurfixWithApp(Context context) {
-        SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
-        if(SGameLanguage.en_US == sGameLanguage) {
-            return false;
-        }
+//        SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
+//        if(SGameLanguage.en_US == sGameLanguage) {
+//            return false;
+//        }
         return true;
     }
 
@@ -809,10 +809,10 @@ public class GamaUtil {
      * 判断是否需要请求登入验证码开关
      */
     public static boolean isNeedVfSwitch(Context context) {
-        SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
-        if(SGameLanguage.en_US == sGameLanguage) {
-            return false;
-        }
+//        SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
+//        if(SGameLanguage.en_US == sGameLanguage) {
+//            return false;
+//        }
         return true;
     }
 

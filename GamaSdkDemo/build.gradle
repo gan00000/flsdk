@@ -504,26 +504,47 @@ android {
 //        }
 
         twweb {
-            signingConfig signingConfigs.release
-            applicationId "com.gamamobi.twsm"
+            applicationId "com.gamesword.twsst"
             minSdkVersion 21
             targetSdkVersion 28
             versionCode 1
             versionName "1.0"
             flavorDimensions "1"
-            resValue "string", "scheme", "twsm"
-            resValue "string", "facebook_app_id", "404025320186326"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider404025320186326"
-            resValue "string", "fb_login_protocol_scheme", "fb404025320186326"
-            resValue "string", "facebook_app_name", "神魔大陸2"
+            resValue "string", "scheme", "twsst"
+            resValue "string", "facebook_app_id", "502656093689012"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider502656093689012"
+            resValue "string", "fb_login_protocol_scheme", "fb502656093689012"
+            resValue "string", "facebook_app_name", "少年猛將傳"
             //每个游戏的demo设置
-            resValue "string", "test_sku", "com.gamamobi.smdl.1usd"
-            resValue "string", "sdk_name", "神魔大陸2Demo"
+            resValue "string", "test_sku", "com.gamesword.gotgl.1usd"
+            resValue "string", "sdk_name", "twsb"
+            signingConfig signingConfigs.release
 
             buildConfigField "String[]", "PRODUCE_LIST",
                     "{" +
-                            "\"com.gamamobi.smdl.1usd\"," +
+                            "\"com.gamesword.gotgl.1usd\"," +
+                            "\"com.ezfy.100usd\"," +
                             "}"
+//            signingConfig signingConfigs.release
+//            applicationId "com.gamamobi.twsm"
+//            minSdkVersion 21
+//            targetSdkVersion 28
+//            versionCode 1
+//            versionName "1.0"
+//            flavorDimensions "1"
+//            resValue "string", "scheme", "twsm"
+//            resValue "string", "facebook_app_id", "404025320186326"
+//            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider404025320186326"
+//            resValue "string", "fb_login_protocol_scheme", "fb404025320186326"
+//            resValue "string", "facebook_app_name", "神魔大陸2"
+//            //每个游戏的demo设置
+//            resValue "string", "test_sku", "com.gamamobi.smdl.1usd"
+//            resValue "string", "sdk_name", "神魔大陸2Demo"
+//
+//            buildConfigField "String[]", "PRODUCE_LIST",
+//                    "{" +
+//                            "\"com.gamamobi.smdl.1usd\"," +
+//                            "}"
         }
 
     }

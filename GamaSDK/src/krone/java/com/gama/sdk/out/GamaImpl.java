@@ -63,9 +63,7 @@ public class GamaImpl extends BaseGamaImpl {
     @Override
     public void onStop(Activity activity) {
         super.onStop(activity);
-        if (Localization.getSGameLanguage(activity) == SGameLanguage.ko_KR) {
             GamaCafeHelper.stopCafe(activity);
-        }
     }
 
     @Override

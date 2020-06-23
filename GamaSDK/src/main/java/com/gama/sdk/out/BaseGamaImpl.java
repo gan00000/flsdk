@@ -81,7 +81,7 @@ public class BaseGamaImpl implements IGama {
     @Deprecated
     @Override
     public void initSDK(final Activity activity) {
-        initSDK(activity, SGameLanguage.zh_TW);
+        initSDK(activity, SGameLanguage.DEFAULT);
     }
 
     @Override
@@ -138,12 +138,12 @@ public class BaseGamaImpl implements IGama {
     public void setGameLanguage(final Activity activity, final SGameLanguage gameLanguage) {
         PL.i("IGama setGameLanguage:" + gameLanguage);
 
-        activity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Localization.gameLanguage(activity, gameLanguage);
-            }
-        });
+//        activity.runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                Localization.gameLanguage(activity, gameLanguage);
+//            }
+//        });
 
     }
 
@@ -373,7 +373,7 @@ public class BaseGamaImpl implements IGama {
                 });
 
                 if (!isInitSdk) {
-                    initSDK(activity, SGameLanguage.zh_TW);
+                    initSDK(activity, SGameLanguage.DEFAULT);
                 }
                 if (iLogin != null) {
                     iLogin.onCreate(activity);
@@ -468,6 +468,7 @@ public class BaseGamaImpl implements IGama {
             @Override
             public void run() {
                 PL.i("IGama onDestroy");
+                isInitSdk = false;
                 if (iLogin != null) {
                     iLogin.onDestroy(activity);
                 }

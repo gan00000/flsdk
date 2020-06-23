@@ -1,0 +1,120 @@
+<resources>
+
+    <!--Aktivierungsbedingungen Seite-->
+    <string name="gama_ui_term_title" translatable="false">Nutzungsbedingungen</string>
+    <string name="gama_ui_term_confirm" translatable="false">Login</string>
+    <string name="gama_ui_term_read_land" translatable="false">Ich habe mir die Bedingungen durchgelesen und bin damit einverstanden</string>
+    <string name="gama_ui_term_port_read" translatable="false">Ich bin sowohl mit den Servicebedingungen als auch mit der Datenschutzrichtlinie einverstanden</string>
+    <string name="gama_ui_term_port_term1" translatable="false">Servicebedingungen</string>
+    <string name="gama_ui_term_port_term2" translatable="false">Datenschutzrichtlinie</string>
+    <string name="gama_ui_term_not_read" translatable="false">Bitte akzeptiere unsere Nutzungsbedingungen</string>
+
+    <!--Login-Seite-->
+    <string name="py_login_page_account_login">Mitglieder-Login</string>
+    <string name="py_login_save_account">Angemeldet bleiben</string>
+    <string name="py_login_by_members">Mitglieder-Login</string>
+    <string name="py_findpwd">Passwort vergessen?</string>
+    <string name="py_register_account">Anmelden</string>
+    <string name="py_account_center">Mitglieder-Center</string>
+    <string name="py_account_input_vfcode">Tippen, um deinen Verifizierungscode einzugeben</string>
+    <string name="py_account_input_password">Bitte gib dein Passwort ein</string>
+
+    <!--Anmelde-Seite-->
+    <string name="py_login_page_account_reg">Anmelden</string>
+    <string name="py_register_account_phone">Gib deine Mobilfunknummer ein</string>
+    <string name="py_register_account_area">Vorwahl</string>
+    <string name="py_register_account_get_vfcode">Verifizierungscode erhalten</string>
+    <string name="py_register_account_confirm">Anmelden</string>
+    <string name="py_register_account_vfcode_hint">Es können pro Mobilfunknummer maximal 5 Verifizierungscodes am Tag versendet werden.</string>
+
+    <!--Passwort-Wiederherstellung-Seite-->
+    <string name="py_login_page_forgot_pwd">Passwort vergessen?</string>
+
+    <!--Mitglieder-Center-Seite-->
+    <string name="py_bind_unique">Gamebase-Konto verknüpfen</string>
+    <string name="py_bind_fb">Facebook Konto verknüpfen</string>
+    <string name="py_bind_google">Google Konto verknüpfen</string>
+
+    <!--Passwortänderung-Seite-->
+    <string name="py_login_page_change_pwd">Passwort ändern</string>
+    <string name="py_input_old_password">Gib dein altes Passwort ein</string>
+    <string name="py_old_equel_new_pwd">Dein neues und altes Passwort dürfen nicht übereinstimmen</string>
+
+    <!--Mitgliederverifizierung-Seite-->
+    <string name="py_verify_title">Konto verifizieren</string>
+    <string name="py_verify_subtitle">(Facebook, Google Konto verifizieren)</string>
+    <string name="py_verify_confirm">Login verifizieren</string>
+
+    <!--Kontoverknüpfung-Seite (Allgemein)-->
+    <string name="py_login_page_account_bind">Konto verknüpfen</string>
+    <string name="py_btn_bind">Mitglied verknüpfen</string>
+
+    <!--Mobilfunknummer verknüpfen-->
+    <string name="py_ingame_account_link_title">Mobilfunknummer verknüpfen</string>
+    <string name="py_ingame_account_link_subtitle">(Verknüpfe deine Mobilfunknummer, um eine Belohnung im Spiel zu erhalten)</string>
+    <string name="py_ingame_account_link_get">Beanspruchen</string>
+    <string name="py_ingame_account_link_confirm">Mobilfunknummer verknüpfen</string>
+
+    <!--Konto verknüpfen-->
+    <string name="py_login_page_account_link">Konto verknüpfen</string>
+
+    <!--Bedingungen-->
+    <string name="py_login_terms">Mitgliederbedingungen</string>
+
+    <!--Verifizierungsaufforderung-->
+    <string name="py_password_error">Formatfehler bei Passwort</string>
+    <string name="py_account_error">Formatfehler bei Benutzer-ID</string>
+    <string name="py_account_empty">Benutzer-ID darf nicht leer bleiben</string>
+    <string name="py_password_empty">Passwort darf nicht leer bleiben</string>
+    <string name="py_password_equal_account">Deine Benutzer-ID und dein Passwort dürfen nicht identisch sein</string>
+    <string name="py_email_format_error">Formatfehler bei E-Mail-Adresse</string>
+    <string name="py_email_empty">E-Mail-Adresse darf nicht leer bleiben</string>
+    <string name="py_vfcode_empty">Bitte gib deinen Verifizierungscode ein</string>
+    <string name="py_area_code_empty">Bitte gib deine Vorwahl ein</string>
+    <string name="py_phone_error">Formatfehler bei Mobilfunknummer</string>
+
+    <!--Automatischer Login-->
+    <string name="py_auto_login_change">Konto wechseln</string>
+    <string name="py_login_autologin_tips">Einloggen in %1$s </string>
+
+    <!--Standardansage-->
+    <string name="py_register_account_hit">Bitte gib 6-18 alphanumerische Zeichen ein</string>
+    <string name="py_register_password_hit">Bitte gib eine Kombination aus 8-16Groß- und Kleinbuchstaben und Ziffern ein.</string>
+    <string name="py_findpwd_email_hit">E-Mail-Adresse, erforderlich, wird zur Wiederherstellung deines Passwortes verwendet</string>
+    <string name="py_register_email_hit">E-Mail-Adresse, optional, wird zur Wiederherstellung deines Passwortes verwendet</string>
+    <string name="py_msg_vfcode_hint">Gib deinen SMS-Verifizierungscode ein</string>
+    <string name="py_msg_account_hint">Tippen, um die Benutzer-ID einzugeben</string>
+    <string name="py_msg_password_hint">Tippen, um das Passwort einzugeben</string>
+
+    <!--Allgemeiner Text-->
+    <string name="py_confire">Bestätigen</string>
+    <string name="py_default_area_num">886</string>
+    <string name="py_default_area_num_pattern">^0{0,1}[6,7,9](?:\\d{7}|\\d{8}|\\d{10})$</string>
+    <string name="py_mac_login_limit_hint1">Du hast dein Konto noch nicht verknüpft. Bitte verknüpfe dein Konto, um es zu schützen.</string>
+    <string name="py_mac_login_limit_hint2">Du hast dein Konto noch nicht verknüpft. Bitte verknüpfe dein Konto, um erweiterte Funktionen zu aktivieren.</string>
+    <string name="py_mac_login_limit_hint_continue">Weiter zum Login</string>
+    <string name="py_mac_login_limit_hint_bind_now">Jetzt verknüpfen</string>
+    <string name="py_mac_login_limit_hint_bind_now2">Jetzt verknüpfen</string>
+
+    <!--SDK Funktionsaufforderung-->
+    <string name="gama_toast_msg_app_not_install" translatable="false">%s ist nicht installiert. Bitte installiere diese App, um teilen zu können.</string>
+
+    <!--Funktionsaufforderung-->
+    <string name="py_register_success">Registrierung abgeschlossen</string>
+    <string name="py_error_occur">Ein Fehler ist aufgetreten. Bitte versuche es noch einmal.</string>
+    <string name="py_error_time_out">Zeitüberschreitung bei der Verbindung. Bitte versuche es noch einmal.</string>
+    <string name="py_login_mac_tips">Du verwendest zum Einloggen in %1$s das folgende Konto:\nBenutzer-ID: %2$s Passwort: %3$s</string>
+    <string name="py_login_mac_saveimage_tips">Passwort wurde im Album abgespeichert</string>
+    <string name="py_login_autologin_logining_tips">Einloggen in</string>
+    <string name="py_findpwd_success">Passwort wurde erfolgreich wiederhergestellt</string>
+    <string name="py_success">Erfolgreich</string>
+
+    <!--Für Japan-->
+    <string name="py_bind_twitter" translatable="false">Twitter Konto verknüpfen</string>
+    <string name="py_login_guset" translatable="false">Als Gast einloggen</string>
+
+    <!--In Verwendung Nutzung ist unklar-->
+    <string name="py_account_login">Einloggen</string>
+
+
+</resources>

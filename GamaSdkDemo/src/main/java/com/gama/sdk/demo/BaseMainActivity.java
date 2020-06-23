@@ -108,7 +108,7 @@ public class BaseMainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(BaseMainActivity.this)
-                        .setItems(new String[]{"繁中", "日语", "韩语"}, new DialogInterface.OnClickListener() {
+                        .setItems(new String[]{"繁中"/*, "日语", "韩语"*/}, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 SGameLanguage language = null;
@@ -116,12 +116,12 @@ public class BaseMainActivity extends Activity {
                                     case 0:
                                         language = SGameLanguage.zh_TW;
                                         break;
-                                    case 1:
+                                    /*case 1:
                                         language = SGameLanguage.ja_JP;
                                         break;
                                     case 2:
                                         language = SGameLanguage.ko_KR;
-                                        break;
+                                        break;*/
                                 }
                                 iGama.setGameLanguage(BaseMainActivity.this, language);
                             }
@@ -187,11 +187,11 @@ public class BaseMainActivity extends Activity {
                             /**
                              * 同步角色信息(以下均为测试信息)
                              */
-                            String roleId = "20001000402"; //角色id
+                            String roleId = "2267742755764"; //角色id
                             String roleName = "貪婪聖殿"; //角色名
                             String roleLevel = "106"; //角色等级
                             String vipLevel = "5"; //角色vip等级
-                            String serverCode = "20001"; //角色伺服器id
+                            String serverCode = "2709310001"; //角色伺服器id
                             String serverName = "S1"; //角色伺服器名称
                             iGama.registerRoleInfo(BaseMainActivity.this, roleId, roleName, roleLevel, vipLevel, serverCode, serverName);
                         } else {
@@ -370,9 +370,9 @@ public class BaseMainActivity extends Activity {
         showPlatform.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(SGameLanguage.ko_KR == Localization.getSGameLanguage(BaseMainActivity.this)) {
+                /*if(SGameLanguage.ko_KR == Localization.getSGameLanguage(BaseMainActivity.this)) {
                     iGama.gamaOpenCafeHome(BaseMainActivity.this);
-                } else if(SGameLanguage.zh_TW == Localization.getSGameLanguage(BaseMainActivity.this)) {
+                } else */if(SGameLanguage.zh_TW == Localization.getSGameLanguage(BaseMainActivity.this)) {
                     iGama.openPlatform(BaseMainActivity.this);
                 }
 

@@ -604,7 +604,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
     public void showLoginView() {
         contentFrameLayout.setVisibility(View.VISIBLE);
         autoLoginLayout.setVisibility(View.GONE);
-        if (iLoginPresenter.hasAccountLogin()){
+        if (iLoginPresenter.hasAccountLogin() && Localization.isChineseLanguage(getContext())){
             toAccountLoginView();
         }else{
             toMainLoginView();

@@ -154,7 +154,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.76" />
+            app:layout_constraintGuide_percent="0.8" />
 
         <ImageView
             android:layout_width="0dp"
@@ -434,7 +434,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:gravity="center"
-            android:maxLines="1"
+            android:maxLines="2"
             android:text="@string/py_findpwd"
             android:textColor="@color/gama_color_ui_input_text"
             android:textSize="@dimen/sp_16"
@@ -449,7 +449,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:gravity="center"
-            android:maxLines="1"
+            android:maxLines="2"
             android:text="@string/py_register_account"
             android:textColor="@color/gama_color_ui_input_text"
             android:textSize="@dimen/sp_16"
@@ -464,7 +464,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:gravity="center"
-            android:maxLines="1"
+            android:maxLines="2"
             android:text="@string/py_login_page_account_bind"
             android:textColor="@color/gama_color_ui_input_text"
             android:textSize="@dimen/sp_16"
@@ -479,7 +479,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:gravity="center"
-            android:maxLines="1"
+            android:maxLines="2"
             android:text="@string/py_login_page_change_pwd"
             android:textColor="@color/gama_color_ui_input_text"
             android:textSize="@dimen/sp_16"

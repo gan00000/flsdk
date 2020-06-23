@@ -173,7 +173,7 @@ public class GamaImpl extends BaseGamaImpl {
                             PlatformData platformData = new PlatformData();
                             platformData.setAppKey(ResConfig.getAppKey(activity));
                             platformData.setGameCode(ResConfig.getGameCode(activity));
-                            platformData.setLanguage(SGameLanguage.zh_TW.getLanguage()); //设置语言
+                            platformData.setLanguage(ResConfig.getGameLanguage(activity)); //设置语言
                             platformData.setLoginTimestamp(GamaUtil.getSdkTimestamp(activity)); //登录完成timestamp
                             platformData.setLoginToken(GamaUtil.getSdkAccessToken(activity));//登录完成accessToken
                             platformData.setRoleId(GamaUtil.getRoleId(activity));

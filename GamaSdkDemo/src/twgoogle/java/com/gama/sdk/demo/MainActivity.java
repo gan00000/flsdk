@@ -3,8 +3,10 @@ package com.gama.sdk.demo;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.LocaleList;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 
 import com.core.base.utils.GamaTimeUtil;
@@ -25,6 +27,7 @@ import com.gama.thirdlib.twitter.GamaTwitterLogin;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class MainActivity extends BaseMainActivity {
@@ -37,8 +40,21 @@ public class MainActivity extends BaseMainActivity {
 
         SLog.enableDebug(true);
 
+        Log.i("MainActivity", "LocaleList.getDefault().toLanguageTags() : " + LocaleList.getDefault().toLanguageTags());
+        Log.i("MainActivity", "getCountry : " + Locale.getDefault().getCountry());
+        Log.i("MainActivity", "getLanguage : " + Locale.getDefault().getLanguage());
+        Log.i("MainActivity", "getDisplayCountry : " + Locale.getDefault().getDisplayCountry());
+        Log.i("MainActivity", "getDisplayLanguage : " + Locale.getDefault().getDisplayLanguage());
+        Log.i("MainActivity", "getDisplayName : " + Locale.getDefault().getDisplayName());
+        Log.i("MainActivity", "getISO3Country : " + Locale.getDefault().getISO3Country());
+        Log.i("MainActivity", "getISO3Language : " + Locale.getDefault().getISO3Language());
+        Log.i("MainActivity", "getDisplayScript : " + Locale.getDefault().getDisplayScript());
+        Log.i("MainActivity", "getDisplayVariant : " + Locale.getDefault().getDisplayVariant());
+        Log.i("MainActivity", "getScript : " + Locale.getDefault().getScript());
+        Log.i("MainActivity", "getVariant : " + Locale.getDefault().getVariant());
+
         //初始化sdk
-        iGama.initSDK(this, SGameLanguage.zh_TW );
+        iGama.initSDK(this, SGameLanguage.DEFAULT);
         //在游戏Activity的onCreate生命周期中调用
         iGama.onCreate(this);
 

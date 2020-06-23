@@ -1,50 +1,49 @@
 {
   "project_info": {
-    "project_number": "36085075925",
-    "firebase_url": "https://gamamobi-twsm.firebaseio.com",
-    "project_id": "gamamobi-twsm",
-    "storage_bucket": "gamamobi-twsm.appspot.com"
+    "project_number": "844872624154",
+    "firebase_url": "https://snsgz2-tw.firebaseio.com",
+    "project_id": "snsgz2-tw",
+    "storage_bucket": "snsgz2-tw.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:36085075925:android:5c8acfd1611044f9",
+        "mobilesdk_app_id": "1:844872624154:android:fa8e810da1d4c66f1f89a3",
         "android_client_info": {
-          "package_name": "com.gamamobi.twsm"
+          "package_name": "com.gamesword.twsst"
         }
       },
       "oauth_client": [
         {
-          "client_id": "36085075925-m2m3226etu0jnbh9fh8lpakk4juf1si1.apps.googleusercontent.com",
+          "client_id": "844872624154-qhuvfuk4k2sj83viimtqjoe7hlt8qqrs.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.gamamobi.twsm",
-            "certificate_hash": "f70eda06327547eaac632d14e9617217224420f2"
+            "package_name": "com.gamesword.twsst",
+            "certificate_hash": "d5024de9e29e273bf227e5a0f0a39fdf1a66a1e7"
           }
         },
         {
-          "client_id": "36085075925-h9bvop5om1hcpoblvfnkv4f7okeftk95.apps.googleusercontent.com",
+          "client_id": "844872624154-qtbir4ng88r41ckptmgtvhr6g33t672j.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC8pyzeeTiDCoiKMQtB8iF_HgSYEejxaVc"
+          "current_key": "AIzaSyBZRgi0gHGH8UQqllfNJrUttlOVHJ4DFpA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "36085075925-h9bvop5om1hcpoblvfnkv4f7okeftk95.apps.googleusercontent.com",
+              "client_id": "844872624154-qtbir4ng88r41ckptmgtvhr6g33t672j.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "36085075925-e77rrcv35b0kdg1aern5rvi1ntj776fq.apps.googleusercontent.com",
+              "client_id": "844872624154-llk203ta803eg4od1rmru0qpfe9hgm5l.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.gamamobi.twsm",
-                "app_store_id": "1466758956"
+                "bundle_id": "com.gamesword.twsst"
               }
             }
           ]

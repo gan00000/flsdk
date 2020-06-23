@@ -48,10 +48,15 @@ public class ResConfig {
     }
 
 
+    /**
+     * 获取当前语言，默认英文
+     * @param context
+     * @return
+     */
     public static String getGameLanguage(Context context) {
         String language = SPUtil.getSimpleString(context, GamaUtil.GAMA_SP_FILE, GamaUtil.GAMA_GAME_LANGUAGE);
         if (TextUtils.isEmpty(language)) {
-            language = SGameLanguage.zh_TW.getLanguage();
+            language = SGameLanguage.en_US.getLanguage();
         }
         return language;
     }
@@ -89,8 +94,8 @@ public class ResConfig {
     public static String getLocalSchemaName(Context context, String name) {
         String localName;
 
-        SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
-        localName = sGameLanguage.getPrefixName() + "_" + name;
+//        SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
+        localName = ResConfig.getGameLanguage(context) + "_" + name;
         PL.i("local prefix : " + localName);
         return localName;
     }
@@ -307,9 +312,17 @@ public class ResConfig {
 //            xmlSchemaName = "g_" + xmlSchemaName;
 //        }
 
-        String localSchemaName = getLocalSchemaName(context, xmlSchemaName);
+        //是否所有语言使用同一域名的配置
+        boolean isCommonDomain = Boolean.parseBoolean(getConfigInAssetsProperties(context, "is_common_domain"));
 
-        String url = getResStringByName(context, localSchemaName);
+        String url;
+        if (isCommonDomain) {
+            url = getResStringByName(context, xmlSchemaName);
+        } else {
+            String localSchemaName = getLocalSchemaName(context, xmlSchemaName);
+            url = getResStringByName(context, localSchemaName);
+        }
+
 
 //		if (TextUtils.isEmpty(url)) {
 //			return "";

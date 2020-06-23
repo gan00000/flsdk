@@ -1,6 +1,7 @@
 package com.gama.sdk.login.widget.v2;
 
 import android.content.Context;
+import android.os.LocaleList;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,7 +45,11 @@ public class XMMainLoginLayoutV2 extends SLoginBaseRelativeLayout implements Vie
 
     public View onCreateView(LayoutInflater inflater) {
 
-        contentView = inflater.inflate(R.layout.v2_main_login_page_xm, null);
+        if (Localization.isChineseLanguage(getContext())) {
+            contentView = inflater.inflate(R.layout.v2_main_login_page_xm, null);
+        } else {
+            contentView = inflater.inflate(R.layout.v2_main_login_page_xm_other, null);
+        }
 
         fbLoginView = contentView.findViewById(R.id.btn_xm_fb_bg);
         starLoginView = contentView.findViewById(R.id.btn_xm_member_login_iv);

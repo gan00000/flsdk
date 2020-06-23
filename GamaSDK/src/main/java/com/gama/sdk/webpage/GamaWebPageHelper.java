@@ -13,6 +13,7 @@ import android.text.TextUtils;
 import com.core.base.callback.IGameLifeCycle;
 import com.core.base.callback.ISReqCallBack;
 import com.core.base.utils.PL;
+import com.core.base.utils.SStringUtil;
 import com.gama.base.bean.unify.UnifiedSwitchResponseBean;
 import com.gama.base.cfg.ResConfig;
 import com.gama.base.excute.UnifiedSwitchRequestTask;
@@ -22,10 +23,12 @@ import com.gama.sdk.SWebViewDialog;
 import com.gama.sdk.login.widget.v2.InGameBindLayoutV2;
 import com.gama.sdk.out.GamaOpenWebType;
 import com.gama.sdk.out.ISdkCallBack;
+import com.gama.sdk.service.GsServiceDataBean;
 import com.gama.sdk.utils.DialogUtil;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.Map;
 
 public class GamaWebPageHelper {
     private static ISdkCallBack iSdkCallBack;
@@ -131,7 +134,7 @@ public class GamaWebPageHelper {
      * @param url
      * @return
      */
-    private static String addInfoToUrl(Context context, String url) {
+    private static String  addInfoToUrl(Context context, String url) {
         if(TextUtils.isEmpty(url)) {
             return null;
         }
@@ -139,20 +142,26 @@ public class GamaWebPageHelper {
             url += "?";
         }
         StringBuilder builder = new StringBuilder(url);
-        try {
-            builder.append("gameCode=").append(URLEncoder.encode(ResConfig.getGameCode(context),"UTF-8"))
-                    .append("&userId=").append(URLEncoder.encode(GamaUtil.getUid(context),"UTF-8"))
-                    .append("&accessToken=").append(URLEncoder.encode(GamaUtil.getSdkAccessToken(context),"UTF-8"))
-                    .append("&packageName=").append(URLEncoder.encode(context.getPackageName(),"UTF-8"))
-                    .append("&timestamp=").append(URLEncoder.encode(GamaUtil.getSdkTimestamp(context),"UTF-8"))
-                    .append("&serverCode=").append(URLEncoder.encode(GamaUtil.getServerCode(context),"UTF-8"))
-                    .append("&roleId=").append(URLEncoder.encode(GamaUtil.getRoleId(context),"UTF-8"))
-                    .append("&roleName=").append(URLEncoder.encode(GamaUtil.getRoleName(context),"UTF-8"))
-                    .append("&roleLevel=").append(URLEncoder.encode(GamaUtil.getRoleLevel(context),"UTF-8"))
-                    .append("&from=gamePage");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            builder.append("gameCode=").append(URLEncoder.encode(ResConfig.getGameCode(context),"UTF-8"))
+//                    .append("&userId=").append(URLEncoder.encode(GamaUtil.getUid(context),"UTF-8"))
+//                    .append("&accessToken=").append(URLEncoder.encode(GamaUtil.getSdkAccessToken(context),"UTF-8"))
+//                    .append("&packageName=").append(URLEncoder.encode(context.getPackageName(),"UTF-8"))
+//                    .append("&timestamp=").append(URLEncoder.encode(GamaUtil.getSdkTimestamp(context),"UTF-8"))
+//                    .append("&serverCode=").append(URLEncoder.encode(GamaUtil.getServerCode(context),"UTF-8"))
+//                    .append("&roleId=").append(URLEncoder.encode(GamaUtil.getRoleId(context),"UTF-8"))
+//                    .append("&roleName=").append(URLEncoder.encode(GamaUtil.getRoleName(context),"UTF-8"))
+//                    .append("&roleLevel=").append(URLEncoder.encode(GamaUtil.getRoleLevel(context),"UTF-8"))
+//                    .append("&from=gamePage");
+//        } catch (UnsupportedEncodingException e) {
+//            e.printStackTrace();
+//        }
+        GsServiceDataBean bean = new GsServiceDataBean(context);
+        bean.setTimestamp(GamaUtil.getSdkTimestamp(context));
+        Map<String, String> stringStringMap = bean.fieldValueToMap();
+        String strData = SStringUtil.map2strData(stringStringMap);
+        builder.append(strData);
+
         PL.i("add info url : " + builder.toString());
         return builder.toString();
     }

@@ -1,143 +1,121 @@
 <resources>
 
-    <!--启动条款页面-->
-    <string name="gama_ui_term_title" translatable="false">使用者條款</string>
-    <string name="gama_ui_term_confirm" translatable="false">登入遊戲</string>
-    <string name="gama_ui_term_read_land" translatable="false">我已閱畢並同意條款</string>
-    <string name="gama_ui_term_port_read" translatable="false">我同意「服務條款」及「隱私政策」</string>
-    <string name="gama_ui_term_port_term1" translatable="false">服務條款</string>
-    <string name="gama_ui_term_port_term2" translatable="false">隱私政策</string>
-    <string name="gama_ui_term_not_read" translatable="false">請先同意「使用者條款」</string>
+    <!--Activation Terms Page-->
+    <string name="gama_ui_term_title" translatable="false">User Terms</string>
+    <string name="gama_ui_term_confirm" translatable="false">Login</string>
+    <string name="gama_ui_term_read_land" translatable="false">I have read and agree to the terms</string>
+    <string name="gama_ui_term_port_read" translatable="false">I agree to the Terms of Service and Privacy Policy</string>
+    <string name="gama_ui_term_port_term1" translatable="false">Terms of Service</string>
+    <string name="gama_ui_term_port_term2" translatable="false">Privacy Policy</string>
+    <string name="gama_ui_term_not_read" translatable="false">Please accept the User Terms</string>
 
-    <!--登录页面-->
-    <string name="py_login_page_account_login">會員登入頁</string>
-    <string name="py_login_save_account">記住帳號</string>
-    <string name="py_login_by_members">會員登入</string>
-    <string name="py_findpwd">忘記密碼</string>
-    <string name="py_register_account">註冊帳號</string>
-    <string name="py_account_center">會員中心</string>
-    <string name="py_account_input_vfcode">請點擊輸入驗證碼</string>
-    <string name="py_account_input_password">請輸入密碼</string>
+    <!--Login Page-->
+    <string name="py_login_page_account_login">Member Login</string>
+    <string name="py_login_save_account">Remember me</string>
+    <string name="py_login_by_members">Member Login</string>
+    <string name="py_findpwd">Forgot your password?</string>
+    <string name="py_register_account">Sign up</string>
+    <string name="py_account_center">Member Center</string>
+    <string name="py_account_input_vfcode">Tap to enter your verification code</string>
+    <string name="py_account_input_password">Please enter your password</string>
 
-    <!--注册页面-->
-    <string name="py_login_page_account_reg">註冊會員帳號</string>
-    <string name="py_register_account_phone">請輸入手機號碼</string>
-    <string name="py_register_account_area">區碼</string>
-    <string name="py_register_account_get_vfcode">取得驗證碼</string>
-    <string name="py_register_account_confirm">註冊會員</string>
-    <string name="py_register_account_vfcode_hint">同一手機號碼當日不得收取驗證碼超過五次</string>
+    <!--Sign Up Page-->
+    <string name="py_login_page_account_reg">Sign up</string>
+    <string name="py_register_account_phone">Enter your mobile number</string>
+    <string name="py_register_account_area">Area Code</string>
+    <string name="py_register_account_get_vfcode">Get verification code</string>
+    <string name="py_register_account_confirm">Sign up</string>
+    <string name="py_register_account_vfcode_hint">Each mobile number may only receive a verification code 5 times per day.</string>
 
-    <!--找回密码页面-->
-    <string name="py_login_page_forgot_pwd">忘記密碼</string>
+    <!--Retrieve Password Page-->
+    <string name="py_login_page_forgot_pwd">Forgot your password?</string>
 
-    <!--会员中心页面-->
-    <string name="py_bind_unique">直接玩帳號綁定</string>
-    <string name="py_bind_fb">FACEBOOK帳號綁定</string>
-    <string name="py_bind_google">GOOGLE帳號綁定</string>
+    <!--Member Center Page-->
+    <string name="py_bind_unique">Link Gamebase account</string>
+    <string name="py_bind_fb">Link Facebook account</string>
+    <string name="py_bind_google">Link Google account</string>
 
-    <!--修改密码页面-->
-    <string name="py_login_page_change_pwd">修改密碼</string>
-    <string name="py_input_old_password">請輸入舊密碼</string>
-    <string name="py_old_equel_new_pwd">新密碼與舊密碼不能一致</string>
+    <!--Change Password Page-->
+    <string name="py_login_page_change_pwd">Change password</string>
+    <string name="py_input_old_password">Enter your old password</string>
+    <string name="py_old_equel_new_pwd">Your new password cannot be the same as your old password</string>
 
-    <!--会员验证页-->
-    <string name="py_verify_title">驗證會員帳號</string>
-    <string name="py_verify_subtitle">(Facebook、Google帳號驗證)</string>
-    <string name="py_verify_confirm">驗證登入</string>
+    <!--Member Verification Page-->
+    <string name="py_verify_title">Verify account</string>
+    <string name="py_verify_subtitle">(Verify Facebook, Google account)</string>
+    <string name="py_verify_confirm">Verify login</string>
 
-    <!--绑定账号页面（通用）-->
-    <string name="py_login_page_account_bind">綁定會員帳號</string>
-    <string name="py_btn_bind">綁定會員</string>
+    <!--Link Account Page (General)-->
+    <string name="py_login_page_account_bind">Link account</string>
+    <string name="py_btn_bind">Link member</string>
 
-    <!--游戏内手机绑定-->
-    <string name="py_ingame_account_link_title">手機綁定</string>
-    <string name="py_ingame_account_link_subtitle">(綁定手機號碼後可領取遊戲活動獎勵)</string>
-    <string name="py_ingame_account_link_get">獲取</string>
-    <string name="py_ingame_account_link_confirm">綁定手機</string>
+    <!--Link Mobile-->
+    <string name="py_ingame_account_link_title">Link mobile number</string>
+    <string name="py_ingame_account_link_subtitle">(Link your mobile number to get an in-game reward)</string>
+    <string name="py_ingame_account_link_get">Claim</string>
+    <string name="py_ingame_account_link_confirm">Link mobile number</string>
 
-    <!--会员账号绑定-->
-    <string name="py_login_page_account_link">會員帳號綁定</string>
+    <!--Link account-->
+    <string name="py_login_page_account_link">Link account</string>
 
-    <!--条款-->
-    <string name="py_login_terms">會員條款及管理規章</string>
+    <!--Terms-->
+    <string name="py_login_terms">Member Terms and Conditions</string>
 
-    <!--验证提示-->
-    <string name="py_password_error">密碼格式錯誤</string>
-    <string name="py_account_error">帳號格式錯誤</string>
-    <string name="py_account_empty">帳號不能為空</string>
-    <string name="py_password_empty">密碼不能為空</string>
-    <string name="py_password_equal_account">帳號、密碼不能一樣</string>
-    <string name="py_email_format_error">郵箱格式錯誤</string>
-    <string name="py_email_empty">郵箱不能為空</string>
-    <string name="py_vfcode_empty">請輸入驗證碼</string>
-    <string name="py_area_code_empty">請輸入區碼</string>
-    <string name="py_phone_error">手機號碼格式錯誤</string>
+    <!--Verification Prompt-->
+    <string name="py_password_error">Password format error</string>
+    <string name="py_account_error">User ID format error</string>
+    <string name="py_account_empty">User ID cannot be empty</string>
+    <string name="py_password_empty">Password cannot be empty</string>
+    <string name="py_password_equal_account">Your user ID and password cannot be the same</string>
+    <string name="py_email_format_error">Email format error</string>
+    <string name="py_email_empty">Email cannot be empty</string>
+    <string name="py_vfcode_empty">Please enter your verification code</string>
+    <string name="py_area_code_empty">Please enter your area code</string>
+    <string name="py_phone_error">Mobile number format error</string>
 
-    <!--自动登录-->
-    <string name="py_auto_login_change">切換帳號</string>
-    <string name="py_login_autologin_tips">帳號 %1$s 正在登錄</string>
+    <!--Auto Login-->
+    <string name="py_auto_login_change">Switch account</string>
+    <string name="py_login_autologin_tips">Logging in %1$s </string>
 
-    <!--预设提示-->
-    <string name="py_register_account_hit">請輸入6~18個字元，僅限字母及數字</string>
-    <string name="py_register_password_hit">僅限使用英文大小寫與數字混合之8~16字元</string>
-    <string name="py_findpwd_email_hit">郵箱,必填,用於找回密碼</string>
-    <string name="py_register_email_hit">郵箱,選填,用於找回密碼</string>
-    <string name="py_msg_vfcode_hint">請輸入簡訊驗證碼</string>
-    <string name="py_msg_account_hint">請點擊輸入您的帳號</string>
-    <string name="py_msg_password_hint">請點擊輸入您的密碼</string>
+    <!--Default Prompt-->
+    <string name="py_register_account_hit">Please enter 6-18 alphanumeric characters</string>
+    <string name="py_register_password_hit">Please enter a combination of 8-16upper- and lower- case letters and numbers.</string>
+    <string name="py_findpwd_email_hit">Email, required, used to retrieve your password</string>
+    <string name="py_register_email_hit">Email, optional, used to retrieve your password</string>
+    <string name="py_msg_vfcode_hint">Enter your SMS verification code</string>
+    <string name="py_msg_account_hint">Tap to enter user ID</string>
+    <string name="py_msg_password_hint">Tap to enter password</string>
 
-    <!--通用文本-->
-    <string name="py_confire">確認</string>
+    <!--General Text-->
+    <string name="py_confire">Confirm</string>
     <string name="py_default_area_num">886</string>
     <string name="py_default_area_num_pattern">^0{0,1}[6,7,9](?:\\d{7}|\\d{8}|\\d{10})$</string>
-    <string name="py_mac_login_limit_hint1">提醒您，您的帳號尚未綁定，請立即進行綁定以確保帳戶權益</string>
-    <string name="py_mac_login_limit_hint2">您的帳號尚未綁定，請進行綁定後才可進行其他服務</string>
-    <string name="py_mac_login_limit_hint_continue">繼續登入</string>
-    <string name="py_mac_login_limit_hint_bind_now">馬上綁定</string>
-    <string name="py_mac_login_limit_hint_bind_now2">立即綁定</string>
+    <string name="py_mac_login_limit_hint1">You have not linked your account. Please link your account to protect it.</string>
+    <string name="py_mac_login_limit_hint2">Your account is not linked. Please link your account to enable advanced features.</string>
+    <string name="py_mac_login_limit_hint_continue">Continue to login</string>
+    <string name="py_mac_login_limit_hint_bind_now">Link now</string>
+    <string name="py_mac_login_limit_hint_bind_now2">Link now</string>
 
-    <!--SDK功能提示-->
-    <string name="gama_toast_msg_app_not_install" translatable="false">由於您沒有安裝%s，請先裝APP後再進行分享</string>
+    <!--SDK Feature Prompt-->
+    <string name="gama_toast_msg_app_not_install" translatable="false">%s is not installed. Please install this app to share.</string>
 
-    <!--功能提示-->
-    <string name="py_register_success">註冊成功</string>
-    <string name="py_error_occur">發生錯誤，請重試</string>
-    <string name="py_error_time_out">連接超時，請重試</string>
-    <string name="py_login_mac_tips">你登入 %1$s 的帳號和密碼如下:\n帳號: %2$s 密碼: %3$s</string>
-    <string name="py_login_mac_saveimage_tips">你的帳號密碼已經保存到相簿中</string>
-    <string name="py_login_autologin_logining_tips">帳號正在登入</string>
-    <string name="py_findpwd_success">找回密碼成功</string>
-    <string name="py_success">成功</string>
+    <!--Feature Prompt-->
+    <string name="py_register_success">Registration complete</string>
+    <string name="py_error_occur">An error occurred. Please try again.</string>
+    <string name="py_error_time_out">Connection timeout. Please try again.</string>
+    <string name="py_login_mac_tips">The account that you are using to login to %1$s is as follows:\nUser ID: %2$s Password: %3$s</string>
+    <string name="py_login_mac_saveimage_tips">Password saved to album</string>
+    <string name="py_login_autologin_logining_tips">Logging in</string>
+    <string name="py_findpwd_success">Password successfully retrieved</string>
+    <string name="py_success">Success</string>
 
-    <!--日本使用-->
-    <string name="py_bind_twitter" translatable="false">TWITTER帳號綁定</string>
-    <string name="py_login_guset" translatable="false">遊客登入</string>
+    <!--For Japan-->
+    <string name="py_bind_twitter" translatable="false">Link Twitter account</string>
+    <string name="py_login_guset" translatable="false">Login as guest</string>
 
-    <!--有使用 不确定用途-->
-    <string name="py_account_login">帳號登入</string>
+    <!--In use Purpose unclear-->
+    <string name="py_account_login">Login</string>
 
-    <!--未使用-->
-    <!--<string name="py_login_success">登入成功</string>-->
-    <!--<string name="py_pay_title">儲值</string>-->
-    <!--<string name="py_login_autologin_fblogining_tips">Facebook帳號正在登錄</string>-->
-    <!--<string name="py_account">帳號:</string>-->
-    <!--<string name="py_password">密碼:</string>-->
-    <!--<string name="py_password_hit">密碼</string>-->
-    <!--<string name="py_login">登入</string>-->
-    <!--<string name="py_login_fb">Facebook登入</string>-->
-    <!--<string name="py_login_star">Starpy帳號登入</string>-->
-    <!--<string name="py_login_mac">免註冊登入</string>-->
-    <!--<string name="py_bind_phone_area_num">+86</string>-->
-    <!--<string name="py_free_reg">遊客登入</string>-->
-    <!--<string name="py_email_format_error">郵箱格式錯誤</string>-->
-    <!--<string name="py_email_empty">郵箱不能為空</string>-->
-    <!--<string name="py_select_terms">請勾選同意服務條款</string>-->
-    <!--<string name="py_register_account_terms">我已閱讀並同意《會員條款及管理規章》</string>-->
-    <!--<string name="py_account_hit">帳號</string>-->
-    <!--<string name="py_old_pwd">舊密碼</string>-->
-    <!--<string name="py_new_pwd">新密碼</string>-->
-    <!--<string name="py_send_new_pwd">發送新密碼</string>-->
-    <!--<string name="py_change_pwd">修改密碼</string>-->
-    <!--<string name="py_time_limit">%s秒後可點擊</string>-->
+
 
 </resources>

@@ -76,8 +76,10 @@ public class StartTermsLayoutV2 extends SBaseDialog {
             isPort = true;
         }
 
-        serviceUrl = ResConfig.getServiceTermUrl(getContext());
-        privateUrl = ResConfig.getPrivateTermUrl(getContext());
+        serviceUrl = ResConfig.getServiceTermUrl(getContext()) + "?gameLanguage=" +
+                ResConfig.getGameLanguage(getContext());
+        privateUrl = ResConfig.getPrivateTermUrl(getContext()) + "?gameLanguage=" +
+                ResConfig.getGameLanguage(getContext());
 
         termsView1 = (WebView) findViewById(R.id.gama_start_term_wv1);
         termsView1.clearCache(true);

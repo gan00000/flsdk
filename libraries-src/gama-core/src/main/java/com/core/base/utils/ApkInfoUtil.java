@@ -1,26 +1,19 @@
 package com.core.base.utils;
 
-import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import android.os.Build;
 import android.os.Environment;
-import android.os.LocaleList;
 import android.support.annotation.NonNull;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
-import android.util.DisplayMetrics;
-import android.util.Log;
 
 import java.io.File;
 import java.io.IOException;
@@ -356,6 +349,10 @@ public class ApkInfoUtil {
 	public static String getLocaleLanguage(){
 		return Locale.getDefault().getLanguage();
 	}
+
+	public static String getLocaleCountry() {
+		return Locale.getDefault().getCountry();
+	}
 	
 	public static String getOsLanguage(){
 		return getLocaleLanguage();
@@ -372,23 +369,23 @@ public class ApkInfoUtil {
 	 * @param newLocale
 	 */
 	public static void updateConfigurationLocale(Context context, Locale newLocale) {
-		if (null == newLocale){
-			return;
-		}
-		Resources resources = context.getResources();//获得res资源对象
-		Configuration config = resources.getConfiguration();//获得设置对象
-		PL.i("old onConfigurationChanged:" + config.toString());
-
-		DisplayMetrics dm = resources.getDisplayMetrics();//获得屏幕参数：主要是分辨率，像素等。
-		config.locale = newLocale; //简体中文
-		resources.updateConfiguration(config, dm);
-
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {//Android7.0及之后通过Context来设置语言
-			config.setLocales(new LocaleList(newLocale));
-			context.createConfigurationContext(config);
-		}
-
-		PL.i("new onConfigurationChanged:" + config.toString());
+//		if (null == newLocale){
+//			return;
+//		}
+//		Resources resources = context.getResources();//获得res资源对象
+//		Configuration config = resources.getConfiguration();//获得设置对象
+//		PL.i("old onConfigurationChanged:" + config.toString());
+//
+//		DisplayMetrics dm = resources.getDisplayMetrics();//获得屏幕参数：主要是分辨率，像素等。
+//		config.locale = newLocale; //简体中文
+//		resources.updateConfiguration(config, dm);
+//
+//		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {//Android7.0及之后通过Context来设置语言
+//			config.setLocales(new LocaleList(newLocale));
+//			context.createConfigurationContext(config);
+//		}
+//
+//		PL.i("new onConfigurationChanged:" + config.toString());
 
 	}
 

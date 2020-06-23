@@ -1,5 +1,57 @@
 <resources>
 
+    <!--通用域名列表 开始-->
+    <!--登录域名-->
+    <string name="gama_login_pre_url" translatable="false">https://login.gamesword.com/</string>
+    <string name="gama_login_spa_url" translatable="false">https://login.gamesword.com/</string>
+
+    <!--支付域名-->
+    <string name="gama_pay_pre_url" translatable="false">https://pay.gamesword.com/</string>
+    <string name="gama_pay_spa_url" translatable="false">https://pay.gamesword.com/</string>
+
+    <!--活动域名-->
+    <string name="gama_act_pre_url" translatable="false">https://activity.gamesword.com/</string>
+    <string name="gama_act_spa_url" translatable="false">https://activity.gamesword.com/</string>
+
+    <!--cdn域名-->
+    <string name="gama_cdn_pre_url" translatable="false">https://sdk-download.gamesword.com/</string>
+    <string name="gama_cdn_spa_url" translatable="false">https://sdk-download.gamesword.com/</string>
+
+    <!--广告域名-->
+    <string name="gama_ads_pre_url" translatable="false">https://ads.gamesword.com/</string>
+    <string name="gama_ads_spa_url" translatable="false">https://ads.gamesword.com/</string>
+
+    <!--平台域名-->
+    <string name="gama_plat_pre_url" translatable="false">https://platform.gamesword.com/</string>
+    <string name="gama_plat_spa_url" translatable="false">https://platform.gamesword.com/</string>
+
+    <!--客服域名-->
+    <string name="gama_cs_pre_url" translatable="false"></string>
+    <string name="gama_cs_spa_url" translatable="false"></string>
+
+    <!-- 服务条款 -->
+    <string name="gama_terms_url" translatable="false">https://member.gamesword.com/member/archive.html</string>
+
+    <!--使用者條款 - 服務條款-->
+    <string name="gama_start_terms_service_url" translatable="false">https://member.gamesword.com/member/archivemb.html</string>
+
+    <!--使用者條款 - 隱私規章-->
+    <string name="gama_start_terms_private_url" translatable="false">https://member.gamesword.com/member/privacymb.html</string>
+
+    <!--客服链接-->
+    <string name="gama_service_url" translatable="false">https://platform.gamesword.com/web/page/service.app</string>
+
+    <!--区域码链接-->
+    <string name="gama_area_info_url" translatable="false">https://static-download2.gamesword.com/baseconfig/v1/areacodes.json</string>
+
+    <!--验证码开关链接-->
+    <string name="gama_vfcode_switch_url" translatable="false">https://config.gamesword.com/%s/base/V1/config.json</string>
+
+    <!--统一开关链接-->
+    <string name="gama_common_switch_url" translatable="false">https://static-download2.gamesword.com/sdkConfig/%s/v1.1/sdkConfig.json</string>
+
+    <!--通用域名列表 结束-->
+
     <!--港台域名列表 开始-->
     <!--登录域名-->
     <string name="zh_tw_gama_login_pre_url" translatable="false">https://login.gamesword.com/</string>
