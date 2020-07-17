@@ -76,7 +76,7 @@ public class BitmapUtil {
         canvas.translate(width / 5, height / 4);
         staticLayout.draw(canvas);
 
-        canvas.save(Canvas.ALL_SAVE_FLAG);
+        canvas.save();
         canvas.restore();
 
         return tempBitmap;

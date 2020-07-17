@@ -86,6 +86,10 @@ public class BaseGamaImpl implements IGama {
 
     @Override
     public void initSDK(final Activity activity, final SGameLanguage gameLanguage) {
+
+        PL.i("fb keyhash:" + SignatureUtil.getHashKey(activity, activity.getPackageName()));
+        PL.i("google sha1:" + SignatureUtil.getSignatureSHA1WithColon(activity, activity.getPackageName()));
+
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -168,8 +172,7 @@ public class BaseGamaImpl implements IGama {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                PL.i("fb keyhash:" + SignatureUtil.getHashKey(activity, activity.getPackageName()));
-                PL.i("google sha1:" + SignatureUtil.getSignatureSHA1WithColon(activity, activity.getPackageName()));
+
                 if (iLogin != null) {
                     //清除上一次登录成功的返回值
                     GamaUtil.saveSdkLoginData(activity, "");

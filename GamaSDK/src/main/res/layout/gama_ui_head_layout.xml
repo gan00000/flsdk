@@ -1,73 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="50dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@android:color/transparent">
 
-    <android.support.constraint.ConstraintLayout
+
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:text=""
+        android:textSize="24sp"
+        android:textColor="@color/e_ff3e37"
+        android:id="@+id/sdk_head_title"
+        android:gravity="center"/>
 
-    <android.support.constraint.Guideline
-        android:id="@+id/gama_head_guideline1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.04"/>
 
-    <android.support.constraint.Guideline
-        android:id="@+id/gama_head_guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.3"/>
-
-    <android.support.constraint.Guideline
-        android:id="@+id/gama_head_guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.95"/>
-
-    <!--<android.support.constraint.Guideline-->
-        <!--android:id="@+id/gama_head_guideline4"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:orientation="horizontal"-->
-        <!--app:layout_constraintGuide_percent="0.4"/>-->
-
-    <!--<android.support.constraint.Guideline-->
-        <!--android:id="@+id/gama_head_guideline5"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:orientation="vertical"-->
-        <!--app:layout_constraintGuide_percent="0.1"/>-->
-
-    <ImageView
+    <LinearLayout
+        android:layout_width="45dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="14dp"
+        android:gravity="center_vertical"
         android:id="@+id/gama_head_iv_back"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:src="@drawable/gama_head_back"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintStart_toStartOf="@id/gama_head_guideline1"
-        app:layout_constraintTop_toTopOf="@id/gama_head_guideline2"
-        app:layout_constraintBottom_toBottomOf="@id/gama_head_guideline3"/>
+        android:orientation="vertical">
 
-    <!--<TextView-->
-        <!--android:id="@+id/gama_head_tv_title"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="阿迪是擦多少"-->
-        <!--android:textColor="@color/gama_color_ui_head_title"-->
-        <!--android:textSize="18sp"-->
-        <!--android:textStyle="bold"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="@id/gama_head_guideline4"-->
-        <!--app:layout_constraintVertical_bias="0.0" />-->
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/sdk_btn_back"/>
 
-    </android.support.constraint.ConstraintLayout>
+    </LinearLayout>
+
 
 </RelativeLayout>

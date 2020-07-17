@@ -46,6 +46,11 @@
     <color name="swap_holo_bule_bright">#4996e5</color>
 
     <color name="swap_holo_pure_bright">#d066b1</color>
+
+    <color name="e_ff3e37">#ff3e37</color>
+    <color name="e_f3f4f5">#f3f4f5</color>
+
+    <color name="e_777777">#777777</color>
 </resources>
 
     <!--透明度百分比-开头字母-->

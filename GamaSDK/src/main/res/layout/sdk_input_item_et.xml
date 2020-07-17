@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:layout_gravity="center"
+    android:gravity="center_vertical"
+    android:background="@android:color/white"
+    >
+
+    <ImageView
+        android:id="@+id/sdk_input_item_icon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="@dimen/px_20"
+        android:scaleType="fitCenter"
+        android:src="@drawable/fl_sdk_dx"
+
+        />
+
+    <TextView
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:layout_marginStart="@dimen/px_4"
+        android:maxLines="1"
+        android:textSize="@dimen/sp_24"
+        android:text="验证码"
+        android:textColor="@color/e_ff3e37"
+        android:id="@+id/sdk_input_item_lable"
+
+        />
+
+    <android.support.v7.widget.AppCompatEditText
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:paddingStart="@dimen/px_20"
+        android:paddingEnd="@dimen/px_20"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:inputType="text"
+        android:hint="@string/py_msg_account_hint"
+        android:id="@+id/sdk_input_item_et"
+        android:background="@null"
+       />
+
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="@dimen/px_20"
+        android:src="@drawable/gama_eye_selector_v2"
+        android:scaleType="fitCenter"
+        android:id="@+id/sdk_input_item_eye"
+        />
+
+</LinearLayout>
