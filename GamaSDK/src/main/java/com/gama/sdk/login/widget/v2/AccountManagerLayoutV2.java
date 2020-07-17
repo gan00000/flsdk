@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gama.base.utils.GamaUtil;
@@ -16,10 +16,9 @@ import com.gama.sdk.login.widget.SLoginBaseRelativeLayout;
 public class AccountManagerLayoutV2 extends SLoginBaseRelativeLayout implements View.OnClickListener {
 
     private View contentView;
-    private Button uniqueRegBindBtn;
-    private Button fbRegBindBtn;
-    private Button googleRegBindBtn;
-    private Button twitterRegBindBtn;
+    private ImageView uniqueRegBindBtn;
+    private ImageView fbRegBindBtn;
+    private ImageView googleRegBindBtn;
 
 
     public AccountManagerLayoutV2(Context context) {
@@ -45,26 +44,21 @@ public class AccountManagerLayoutV2 extends SLoginBaseRelativeLayout implements 
         backView = contentView.findViewById(R.id.gama_head_iv_back);
         backView.setOnClickListener(this);
 
+        TextView titleTextView = contentView.findViewById(R.id.sdk_head_title);
+        titleTextView.setText(R.string.py_login_page_account_bind);
+
         uniqueRegBindBtn = contentView.findViewById(R.id.gama_manager_btn_guest);
         fbRegBindBtn = contentView.findViewById(R.id.gama_manager_btn_facebook);
         googleRegBindBtn = contentView.findViewById(R.id.gama_manager_btn_google);
-        twitterRegBindBtn = contentView.findViewById(R.id.gama_manager_btn_twitter);
 
         uniqueRegBindBtn.setOnClickListener(this);
         fbRegBindBtn.setOnClickListener(this);
         googleRegBindBtn.setOnClickListener(this);
-        twitterRegBindBtn.setOnClickListener(this);
 
         if (GamaUtil.isMainland(getContext())) {
             fbRegBindBtn.setVisibility(GONE);
             googleRegBindBtn.setVisibility(GONE);
 
-        }
-
-        if (GamaUtil.hasTwitter(getContext())) {
-            twitterRegBindBtn.setVisibility(VISIBLE);
-        } else {
-            twitterRegBindBtn.setVisibility(GONE);
         }
 
         return contentView;
@@ -110,8 +104,6 @@ public class AccountManagerLayoutV2 extends SLoginBaseRelativeLayout implements 
 
         } else if (v == backView) {//返回键
             sLoginDialogv2.toAccountLoginView();
-        } else if (v == twitterRegBindBtn) {
-            sLoginDialogv2.toBindTwitterView();
         }
 
     }

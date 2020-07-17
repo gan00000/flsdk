@@ -1,0 +1,85 @@
+package com.gama.sdk.login.widget;
+
+import android.content.Context;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+import android.util.AttributeSet;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.gama.sdk.R;
+
+
+//封裝SDK電話號碼輸入框
+public class SDKPhoneInputEditTextView extends RelativeLayout {
+
+
+    private LayoutInflater inflater;
+
+    private ImageView iconImage;
+    private TextView labTextView, phoneAreaTextView;
+    private EditText inputEditText;
+
+
+    public ImageView getIconImage() {
+        return iconImage;
+    }
+
+    public TextView getLabTextView() {
+        return labTextView;
+    }
+
+    public TextView getPhoneAreaTextView() {
+        return phoneAreaTextView;
+    }
+
+    public EditText getInputEditText() {
+        return inputEditText;
+    }
+
+    public SDKPhoneInputEditTextView(Context context) {
+        super(context);
+        initInputView();
+    }
+
+    public SDKPhoneInputEditTextView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        initInputView();
+    }
+
+    public SDKPhoneInputEditTextView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        initInputView();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public SDKPhoneInputEditTextView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+        initInputView();
+    }
+
+    private void initInputView(){
+
+        inflater = LayoutInflater.from(getContext());
+        View contentView =  inflater.inflate(R.layout.sdk_phone_input_item_et, null);
+        if (contentView != null) {
+
+            LayoutParams l = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            l.addRule(RelativeLayout.CENTER_IN_PARENT);
+            addView(contentView, l);
+
+            iconImage = contentView.findViewById(R.id.sdk_input_item_icon);
+            labTextView = contentView.findViewById(R.id.sdk_input_item_lable);
+            inputEditText = contentView.findViewById(R.id.sdk_input_item_et);
+            phoneAreaTextView = contentView.findViewById(R.id.sdk_input_item_phone_area);
+
+        }
+
+    }
+
+}

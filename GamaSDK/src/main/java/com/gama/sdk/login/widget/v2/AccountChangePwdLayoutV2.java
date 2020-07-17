@@ -1,15 +1,11 @@
 package com.gama.sdk.login.widget.v2;
 
 import android.content.Context;
-import android.text.Editable;
-import android.text.InputType;
-import android.text.Selection;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +13,8 @@ import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
 import com.gama.base.utils.GamaUtil;
 import com.gama.sdk.R;
+import com.gama.sdk.login.widget.SDKInputEditTextView;
+import com.gama.sdk.login.widget.SDKInputType;
 import com.gama.sdk.login.widget.SLoginBaseRelativeLayout;
 
 
@@ -25,16 +23,14 @@ public class AccountChangePwdLayoutV2 extends SLoginBaseRelativeLayout implement
     private View contentView;
     private TextView changePwdConfireBtn;
 
+    private SDKInputEditTextView accountInputEditTextView, oldPwdSdkInputEditTextView, newPwdSdkInputEditTextView;
+
     private EditText changePwdAccountEditText, changePwdOldEditText, changePwdNewEditText;
 
     private String account;
     private String password;
     private String newPassword;
 
-    /**
-     * 眼睛、保存密码
-     */
-    private ImageView gama_change_iv_eye, gama_change_iv_eye2;
 
     public AccountChangePwdLayoutV2(Context context) {
         super(context);
@@ -57,23 +53,26 @@ public class AccountChangePwdLayoutV2 extends SLoginBaseRelativeLayout implement
         contentView = inflater.inflate(R.layout.v2_account_change_pwd, null);
 
         backView = contentView.findViewById(R.id.gama_head_iv_back);
+        TextView titleTextView = contentView.findViewById(R.id.sdk_head_title);
+        titleTextView.setText(R.string.py_login_page_change_pwd);
 
-        changePwdAccountEditText = contentView.findViewById(R.id.gama_change_et_account);
-        changePwdOldEditText = contentView.findViewById(R.id.gama_change_et_password);
-        changePwdNewEditText = contentView.findViewById(R.id.gama_change_et_password2);
+        accountInputEditTextView = contentView.findViewById(R.id.sdkinputview_change_account);
+        oldPwdSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_change_password_old);
+        newPwdSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_change_password_new);
 
-        changePwdOldEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-        changePwdNewEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        accountInputEditTextView.setInputType(SDKInputType.SDKInputType_Account);
+        oldPwdSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Old_Password);
+        newPwdSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_New_Password);
 
-        gama_change_iv_eye = contentView.findViewById(R.id.gama_change_iv_eye);
-        gama_change_iv_eye2 = contentView.findViewById(R.id.gama_change_iv_eye2);
+        changePwdAccountEditText = accountInputEditTextView.getInputEditText();
+        changePwdOldEditText = oldPwdSdkInputEditTextView.getInputEditText();
+        changePwdNewEditText = newPwdSdkInputEditTextView.getInputEditText();
+
 
         changePwdConfireBtn = contentView.findViewById(R.id.gama_change_btn_confirm);
 
         backView.setOnClickListener(this);
         changePwdConfireBtn.setOnClickListener(this);
-        gama_change_iv_eye.setOnClickListener(this);
-        gama_change_iv_eye2.setOnClickListener(this);
 
         return contentView;
     }
@@ -106,33 +105,7 @@ public class AccountChangePwdLayoutV2 extends SLoginBaseRelativeLayout implement
             changePwd();
         } else if (v == backView) {//返回键
            sLoginDialogv2.toAccountLoginView();
-        } else if (v == gama_change_iv_eye) {
-           if (gama_change_iv_eye.isSelected()) {
-               gama_change_iv_eye.setSelected(false);
-               // 显示为密码
-               changePwdOldEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-           } else {
-               gama_change_iv_eye.setSelected(true);
-               // 显示为普通文本
-               changePwdOldEditText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-           }
-           // 使光标始终在最后位置
-           Editable etable = changePwdOldEditText.getText();
-           Selection.setSelection(etable, etable.length());
-       } else if (v == gama_change_iv_eye2) {
-           if (gama_change_iv_eye2.isSelected()) {
-               gama_change_iv_eye2.setSelected(false);
-               // 显示为密码
-               changePwdNewEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-           } else {
-               gama_change_iv_eye2.setSelected(true);
-               // 显示为普通文本
-               changePwdNewEditText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-           }
-           // 使光标始终在最后位置
-           Editable etable = changePwdNewEditText.getText();
-           Selection.setSelection(etable, etable.length());
-       }
+        }
 
     }
 

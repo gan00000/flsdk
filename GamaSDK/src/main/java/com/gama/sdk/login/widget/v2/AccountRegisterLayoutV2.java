@@ -1,16 +1,12 @@
 package com.gama.sdk.login.widget.v2;
 
 import android.content.Context;
-import android.text.Editable;
-import android.text.InputType;
-import android.text.Selection;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,20 +17,22 @@ import com.gama.base.utils.GamaUtil;
 import com.gama.data.login.constant.GSRequestMethod;
 import com.gama.sdk.R;
 import com.gama.sdk.SBaseRelativeLayout;
+import com.gama.sdk.login.widget.SDKInputEditTextView;
+import com.gama.sdk.login.widget.SDKInputType;
+import com.gama.sdk.login.widget.SDKPhoneInputEditTextView;
 import com.gama.sdk.login.widget.SLoginBaseRelativeLayout;
-import com.gama.sdk.utils.Validator;
 
 
 public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements View.OnClickListener, SBaseRelativeLayout.OperationCallback {
 
     private View contentView;
-    private ImageView eyeImageView;
+
     private Button registerConfirm, gama_register_btn_get_vfcode;
 
     /**
      * 密码、账号、手机、验证码
      */
-    private EditText registerPasswordEditText, registerAccountEditText, gama_register_et_phone, gama_register_et_vfcode;
+    private EditText registerPasswordEditText, registerAccountEditText, registerPassworAgaindEditText, gama_register_et_phone, gama_register_et_vfcode;
     /**
      * 区号,手机接收限制提示
      */
@@ -42,10 +40,16 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
     private String account;
     private String password;
 
-    private EditText emailEditText;
+//    private EditText emailEditText;
 
     //选中的区域信息
     private GamaAreaInfoBean selectedBean;
+
+    private SDKInputEditTextView accountSdkInputEditTextView;
+    private SDKInputEditTextView pwdSdkInputEditTextView;
+    private SDKInputEditTextView pwdAgainSdkInputEditTextView;
+    private SDKInputEditTextView vfcodeSdkInputEditTextView;
+    private SDKPhoneInputEditTextView sdkPhoneInputEditTextView;
 
     public AccountRegisterLayoutV2(Context context) {
         super(context);
@@ -68,30 +72,42 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
         contentView = inflater.inflate(R.layout.v2_account_reg, null);
 
         backView = contentView.findViewById(R.id.gama_head_iv_back);
+        TextView titleTextView = contentView.findViewById(R.id.sdk_head_title);
+        titleTextView.setText(R.string.py_login_page_account_reg);
 
-        eyeImageView = contentView.findViewById(R.id.gama_register_iv_eye);
-        registerAccountEditText = contentView.findViewById(R.id.gama_register_et_account);
+        accountSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_account_login_account);
+        pwdSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_account_login_password);
+        pwdAgainSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_account_login_password_again);
+        vfcodeSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_account_login_vf);
+        sdkPhoneInputEditTextView = contentView.findViewById(R.id.sdkinputview_phone);
 
-        registerPasswordEditText = contentView.findViewById(R.id.gama_register_et_password);
-        registerPasswordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        //設置類型
+        accountSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Account);
+        pwdSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Password);
+        pwdAgainSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Password);
+        vfcodeSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Vf_Code);
 
-        gama_register_et_phone = contentView.findViewById(R.id.gama_register_et_phone);
-        gama_register_et_vfcode = contentView.findViewById(R.id.gama_register_et_vfcode);
-        gama_register_tv_area = contentView.findViewById(R.id.gama_register_tv_area);
+
+        registerAccountEditText = accountSdkInputEditTextView.getInputEditText();
+        registerPasswordEditText = pwdSdkInputEditTextView.getInputEditText();
+        registerPassworAgaindEditText = pwdAgainSdkInputEditTextView.getInputEditText();
+        gama_register_et_vfcode = vfcodeSdkInputEditTextView.getInputEditText();
+
+        gama_register_et_phone = sdkPhoneInputEditTextView.getInputEditText();
+        gama_register_tv_area = sdkPhoneInputEditTextView.getPhoneAreaTextView();
 
         registerConfirm = contentView.findViewById(R.id.gama_register_btn_confirm);
         gama_register_btn_get_vfcode = contentView.findViewById(R.id.gama_register_btn_get_vfcode);
 
         gama_register_tv_limit_hint = contentView.findViewById(R.id.gama_register_tv_limit_hint);
 
-        emailEditText = contentView.findViewById(R.id.gama_register_et_email);
+//        emailEditText = contentView.findViewById(R.id.gama_register_et_email);
 
         String phoneMsgLimitHint = GamaUtil.getPhoneMsgLimitHint(getContext());
         if(!TextUtils.isEmpty(phoneMsgLimitHint)) {
             gama_register_tv_limit_hint.setText(phoneMsgLimitHint);
         }
 
-        eyeImageView.setOnClickListener(this);
         backView.setOnClickListener(this);
         registerConfirm.setOnClickListener(this);
         gama_register_btn_get_vfcode.setOnClickListener(this);
@@ -123,21 +139,6 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
             } else {
                 sLoginDialogv2.toMainLoginView();
             }
-        } else if (v == eyeImageView) {//密码眼睛
-
-            if (eyeImageView.isSelected()) {
-                eyeImageView.setSelected(false);
-                // 显示为普通文本
-                registerPasswordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-            } else {
-                eyeImageView.setSelected(true);
-                // 显示为密码
-                registerPasswordEditText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-            }
-            // 使光标始终在最后位置
-            Editable etable = registerPasswordEditText.getText();
-            Selection.setSelection(etable, etable.length());
-
         } else if (v == gama_register_btn_get_vfcode) {
 //            sLoginDialogv2.getLoginPresenter().setOperationCallback(this);
 //            getVfcodeByPhone();
@@ -208,24 +209,9 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
             return;
         }
 
-//        String areaCode = gama_register_tv_area.getText().toString();
-//        if (TextUtils.isEmpty(areaCode)) {
-//            ToastUtils.toast(getActivity(), R.string.py_area_code_empty);
-//            return;
-//        }
-//        String phone = gama_register_et_phone.getEditableText().toString().trim();
-//        if (!phone.matches(selectedBean.getPattern())) {
-//            ToastUtils.toast(getActivity(), R.string.py_phone_error);
-//            return;
-//        }
-
-//        if (SStringUtil.isNotEmpty(email) && !Validator.isEmail(email)){
-//            ToastUtils.toast(getActivity(), R.string.py_email_format_error);
-//            return;
-//        }
 
 
-        String email = emailEditText.getEditableText().toString().trim();
+       /* String email = emailEditText.getEditableText().toString().trim();
         if (TextUtils.isEmpty(email)) {
             ToastUtils.toast(getActivity(), R.string.py_email_empty);
             return;
@@ -234,7 +220,7 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
         if (!Validator.isEmail(email)) {
             ToastUtils.toast(getActivity(), R.string.py_email_format_error);
             return;
-        }
+        }*/
 
         String vfcode = gama_register_et_vfcode.getEditableText().toString();
         if (TextUtils.isEmpty(vfcode)) {
@@ -243,7 +229,7 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
         }
 
 //        sLoginDialogv2.getLoginPresenter().register(sLoginDialogv2.getActivity(), account, password, areaCode, phone, vfcode, "");
-        sLoginDialogv2.getLoginPresenter().register(sLoginDialogv2.getActivity(), account, password, "", "", vfcode, email);
+        sLoginDialogv2.getLoginPresenter().register(sLoginDialogv2.getActivity(), account, password, "", "", vfcode, "");
     }
 
     private void getVfcodeByPhone() {
@@ -265,7 +251,7 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
 
     private void getVfcodeByEmail() {
 
-        String email = emailEditText.getEditableText().toString().trim();
+       /* String email = emailEditText.getEditableText().toString().trim();
         if (TextUtils.isEmpty(email)) {
             ToastUtils.toast(getActivity(), R.string.py_email_empty);
             return;
@@ -274,20 +260,20 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
         if (!Validator.isEmail(email)) {
             ToastUtils.toast(getActivity(), R.string.py_email_format_error);
             return;
-        }
+        }*/
 
         String interfaceName = GSRequestMethod.RequestVfcodeInterface.register.getString();
 
-        sLoginDialogv2.getLoginPresenter().getEmailVfcode(sLoginDialogv2.getActivity(),this, email, interfaceName);
+        sLoginDialogv2.getLoginPresenter().getEmailVfcode(sLoginDialogv2.getActivity(),this, "", interfaceName);
     }
 
     @Override
     public void statusCallback(int operation) {
         if (TIME_LIMIT == operation) {
-            gama_register_btn_get_vfcode.setBackgroundResource(R.drawable.gama_ui_bg_btn_unclickable);
+//            gama_register_btn_get_vfcode.setBackgroundResource(R.drawable.gama_ui_bg_btn_unclickable);
             gama_register_btn_get_vfcode.setClickable(false);
         } else if (TIME_OUT == operation) {
-            gama_register_btn_get_vfcode.setBackgroundResource(R.drawable.bg_192d3f_46);
+//            gama_register_btn_get_vfcode.setBackgroundResource(R.drawable.bg_192d3f_46);
             gama_register_btn_get_vfcode.setClickable(true);
             gama_register_btn_get_vfcode.setText(R.string.py_register_account_get_vfcode);
         }
@@ -316,7 +302,7 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
         sLoginDialogv2.getLoginPresenter().setOperationCallback(this);
         remainTimeSeconds = sLoginDialogv2.getLoginPresenter().getRemainTimeSeconds();
         if(remainTimeSeconds > 0) {
-            gama_register_btn_get_vfcode.setBackgroundResource(R.drawable.gama_ui_bg_btn_unclickable);
+//            gama_register_btn_get_vfcode.setBackgroundResource(R.drawable.gama_ui_bg_btn_unclickable);
             gama_register_btn_get_vfcode.setClickable(false);
             gama_register_btn_get_vfcode.setText(remainTimeSeconds + "s");
         }

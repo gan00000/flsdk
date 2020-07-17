@@ -161,7 +161,7 @@
                 android:layout_marginStart="40dp"
                 android:gravity="center"
                 android:maxLines="2"
-                android:text="@string/py_login_page_account_bind"
+                android:text="@string/py_btn_bind"
                 android:textColor="@color/e_777777"
                 android:textSize="@dimen/sp_20"
                 android:textStyle="bold"/>
