@@ -24,7 +24,6 @@ import com.gama.sdk.login.widget.v2.AccountChangePwdLayoutV2;
 import com.gama.sdk.login.widget.v2.AccountFindPwdLayoutV2;
 import com.gama.sdk.login.widget.v2.AccountManagerLayoutV2;
 import com.gama.sdk.login.widget.v2.AccountRegisterLayoutV2;
-import com.gama.sdk.login.widget.v2.PhoneVerifyLayoutV2;
 import com.gama.sdk.login.widget.v2.PyAccountLoginV2;
 import com.gama.sdk.login.widget.v2.ThirdPlatBindAccountLayoutV2;
 import com.gama.sdk.login.widget.v2.XMMainLoginLayoutV2;
@@ -55,20 +54,16 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
     private TextView autoLoginWaitTime;
     private TextView autoLoginChangeAccount;
 
-    private SLoginBaseRelativeLayout firstTermView;
     private SLoginBaseRelativeLayout mainLoginView;
     private SLoginBaseRelativeLayout accountLoginView;
     private SLoginBaseRelativeLayout registerView;
-    private SLoginBaseRelativeLayout registerTermsView;
     private SLoginBaseRelativeLayout changePwdView;
     private SLoginBaseRelativeLayout findPwdView;
+    private SLoginBaseRelativeLayout accountManagerCenterView;
+
     private SLoginBaseRelativeLayout bindUniqueView;
     private SLoginBaseRelativeLayout bindFbView;
     private SLoginBaseRelativeLayout bindGoogleView;
-    private SLoginBaseRelativeLayout bindTwitterView;
-    private SLoginBaseRelativeLayout injectionView;
-    private SLoginBaseRelativeLayout accountManagerCenterView;
-    private SLoginBaseRelativeLayout phoneVerifyView;
 
     private List<SLoginBaseRelativeLayout> viewPageList;
 
@@ -484,7 +479,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 
     }
 
-    public void toBindTwitterView() {
+    /*public void toBindTwitterView() {
         if (bindTwitterView == null || !viewPageList.contains(bindTwitterView)){
 //            SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
 //            if (SGameLanguage.en_US == sGameLanguage) {
@@ -513,7 +508,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
                 childView.setVisibility(View.GONE);
             }
         }
-    }
+    }*/
 
     public void toAccountManagerCenter() {//AccountManagerLayoutV2
 
@@ -654,28 +649,14 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 
     @Override
     public void showPhoneVerifyView(String loginType, String thirdId) {
-        if (phoneVerifyView == null || !viewPageList.contains(phoneVerifyView)){
-            phoneVerifyView = new PhoneVerifyLayoutV2(context);
-            ((PhoneVerifyLayoutV2)phoneVerifyView).setLoginTpye(loginType);
-            ((PhoneVerifyLayoutV2)phoneVerifyView).setThirdId(thirdId);
 
-            phoneVerifyView.setLoginDialogV2(this);
-            contentFrameLayout.addView(phoneVerifyView);
-            viewPageList.add(phoneVerifyView);
-        }
-        getLoginPresenter().stopVfCodeTimer();
-        for (View childView : viewPageList) {
-
-            if (childView == null){
-                continue;
-            }
-
-            if (childView == phoneVerifyView){
-                childView.setVisibility(View.VISIBLE);
-            }else{
-                childView.setVisibility(View.GONE);
-            }
-        }
+//        phoneVerifyView = new PhoneVerifyLayoutV2(context);
+//        ((PhoneVerifyLayoutV2)phoneVerifyView).setLoginTpye(loginType);
+//        ((PhoneVerifyLayoutV2)phoneVerifyView).setThirdId(thirdId);
+//
+//        phoneVerifyView.setLoginDialogV2(this);
+//        contentFrameLayout.addView(phoneVerifyView);
+//        getLoginPresenter().stopVfCodeTimer();
     }
 
     @Override

@@ -44,7 +44,7 @@
         android:hint="@string/py_msg_account_hint"
         android:id="@+id/sdk_input_item_et"
         android:background="@null"
-        android:textSize="@dimen/sp_20"
+        android:textSize="14sp"
        />
 
 

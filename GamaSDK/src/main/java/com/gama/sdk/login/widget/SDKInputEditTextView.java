@@ -7,7 +7,9 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.Selection;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
 import com.gama.base.utils.GamaUtil;
 import com.gama.sdk.R;
@@ -103,6 +106,7 @@ public class SDKInputEditTextView extends RelativeLayout {
                     Selection.setSelection(etable, etable.length());
                 }
             });
+
         }
 
     }
@@ -131,6 +135,7 @@ public class SDKInputEditTextView extends RelativeLayout {
                 hint = getResources().getString(R.string.py_register_password_hit);
                 eyeImageView.setVisibility(View.VISIBLE);
                 editTextInputType = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD;
+                adjustTvTextSize();
                 break;
             case SDKInputType_Old_Password:
                 iconId = R.drawable.fl_sdk_suo;
@@ -138,6 +143,7 @@ public class SDKInputEditTextView extends RelativeLayout {
                 hint = getResources().getString(R.string.py_register_password_hit);
                 eyeImageView.setVisibility(View.VISIBLE);
                 editTextInputType = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD;
+                adjustTvTextSize();
                 break;
             case SDKInputType_New_Password:
                 iconId = R.drawable.fl_sdk_suo;
@@ -145,6 +151,7 @@ public class SDKInputEditTextView extends RelativeLayout {
                 hint = getResources().getString(R.string.py_register_password_hit);
                 eyeImageView.setVisibility(View.VISIBLE);
                 editTextInputType = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD;
+                adjustTvTextSize();
                 break;
 
             case SDKInputType_Vf_Code:
@@ -162,8 +169,37 @@ public class SDKInputEditTextView extends RelativeLayout {
         labTextView.setText(labName);
         inputEditText.setInputType(editTextInputType);
         inputEditText.setHint(hint);
+
     }
 
+    /** 字体大小适配**/
+    private  void adjustTvTextSize()
+    {
+        final EditText inputEditText = getInputEditText();
+        inputEditText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10);
+        inputEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                if (SStringUtil.isEmpty(s.toString())){
+                    inputEditText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10);
+                }else {
+                    inputEditText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+                }
+
+            }
+        });
+    }
 
     public boolean checkAccount(){
 

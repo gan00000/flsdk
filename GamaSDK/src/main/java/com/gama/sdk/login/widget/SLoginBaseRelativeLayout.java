@@ -105,6 +105,7 @@ public abstract class SLoginBaseRelativeLayout extends SBaseRelativeLayout {
 
     public void refreshAccountInfo(){}
 
+    //用于刷新验证码
     public void refreshVfCode() {}
 
 }

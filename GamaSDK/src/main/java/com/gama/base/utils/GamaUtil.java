@@ -1,6 +1,7 @@
 package com.gama.base.utils;
 
 import android.content.Context;
+import android.os.Build;
 import android.text.TextUtils;
 
 import com.core.base.cipher.DESCipher;
@@ -14,11 +15,17 @@ import com.core.base.utils.SStringUtil;
 import com.gama.base.bean.SGameLanguage;
 import com.gama.base.cfg.ConfigBean;
 import com.gama.base.cfg.ResConfig;
+import com.gama.sdk.login.model.AccountModel;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  * Created by gan on 2017/2/7.
@@ -35,8 +42,7 @@ public class GamaUtil {
     public static final String ADS_ADVERTISERS_NAME = "ADS_ADVERTISERS_NAME";
     public static final String GAMA_GAME_LANGUAGE = "GAMA_GAME_LANGUAGE";
 
-    public static final String GAMA_LOGIN_USERNAME = "GAMA_LOGIN_USERNAME";//保存用户的账号
-    public static final String GAMA_LOGIN_PASSWORD = "GAMA_LOGIN_PASSWORD";//保存用户的密码
+    public static final String SDK_LOGIN_ACCOUNT_INFO = "SDK_LOGIN_ACCOUNT_INFO";//保存用户的账号信息
 
     public static final String GAMA_LOGIN_SERVER_RETURN_DATA = "GAMA_LOGIN_SERVER_RETURN_DATA";//保存服务端返回的数据
 
@@ -78,21 +84,80 @@ public class GamaUtil {
     }
 
     /**
-     * 保存gama登入的账号
+     * 保存登入的账号
      * @param context
-     * @param account
+     * @param accountModels
      */
-    public static void saveAccount(Context context,String account){
-        SPUtil.saveSimpleInfo(context,GAMA_SP_FILE, GAMA_LOGIN_USERNAME, account);
+    public static void saveAccountModels(Context context, List<AccountModel> accountModels){
+
+        if (accountModels == null || accountModels.isEmpty()){
+            return;
+        }
+        try {
+            JSONArray jsonArray = new JSONArray();
+            for (AccountModel accountModel: accountModels) {
+                JSONObject accountObject = new JSONObject();
+                accountObject.put("sdk_account", accountModel.getAccount());
+                accountObject.put("sdk_password", accountModel.getPassword());
+                accountObject.put("sdk_time", accountModel.getTime());
+                jsonArray.put(accountObject);
+            }
+            SPUtil.saveSimpleInfo(context,GAMA_SP_FILE, SDK_LOGIN_ACCOUNT_INFO, jsonArray.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
-     * 获取gama登入的账号
+     * 获取登入的账号
      * @param context
      * @return
      */
-    public static String getAccount(Context context){
-        return SPUtil.getSimpleString(context,GAMA_SP_FILE, GAMA_LOGIN_USERNAME);
+    public static List<AccountModel> getAccountModels(Context context){
+        List<AccountModel> accountModels = new ArrayList<>();
+        String accountStringInfo = SPUtil.getSimpleString(context,GAMA_SP_FILE, SDK_LOGIN_ACCOUNT_INFO);
+       if (SStringUtil.isEmpty(accountStringInfo)){
+           return accountModels;
+       }
+        try {
+            JSONArray accountArray = new JSONArray(accountStringInfo);
+            if (accountArray != null){
+                for (int i = 0; i < accountArray.length(); i++) {
+                    JSONObject accountObject = accountArray.getJSONObject(i);
+                    if (accountObject != null){
+                        AccountModel accountModel = new AccountModel();
+                        accountModel.setAccount(accountObject.getString("sdk_account"));
+                        accountModel.setPassword(accountObject.getString("sdk_password"));
+                        accountModel.setTime(accountObject.getLong("sdk_time"));
+
+                        accountModels.add(accountModel);
+                    }
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            accountModels.sort(new Comparator<AccountModel>() {
+                @Override
+                public int compare(AccountModel o1, AccountModel o2) {
+                    if (o1.getTime() > o2.getTime()){
+                        return 1;
+                    }
+                    return -1;
+                }
+            });
+        }
+        return accountModels;
+    }
+
+    public static AccountModel getLastLoginAccount(Context context){
+        List<AccountModel> accountModels = getAccountModels(context);
+        if (accountModels != null && !accountModels.isEmpty()){
+            return accountModels.get(0);
+        }
+        return null;
     }
     public static void saveMacAccount(Context context,String account){
         SPUtil.saveSimpleInfo(context,GAMA_SP_FILE, GAMA_MAC_LOGIN_USERNAME, account);
@@ -102,13 +167,6 @@ public class GamaUtil {
         return SPUtil.getSimpleString(context,GAMA_SP_FILE, GAMA_MAC_LOGIN_USERNAME);
     }
 
-    public static void savePassword(Context context,String password){
-        SPUtil.saveSimpleInfo(context,GAMA_SP_FILE, GAMA_LOGIN_PASSWORD, encryptPassword(password));
-    }
-
-    public static String getPassword(Context context){
-        return decryptPassword(SPUtil.getSimpleString(context,GAMA_SP_FILE, GAMA_LOGIN_PASSWORD));
-    }
     public static void saveMacPassword(Context context,String password){
         SPUtil.saveSimpleInfo(context,GAMA_SP_FILE, GAMA_MAC_LOGIN_PASSWORD, encryptPassword(password));
     }

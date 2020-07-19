@@ -43,6 +43,7 @@ import com.gama.sdk.R;
 import com.gama.sdk.SBaseRelativeLayout;
 import com.gama.sdk.ads.StarEventLogger;
 import com.gama.sdk.login.LoginContract;
+import com.gama.sdk.login.model.AccountModel;
 import com.gama.sdk.utils.DialogUtil;
 import com.gama.thirdlib.facebook.FaceBookUser;
 import com.gama.thirdlib.facebook.FbResUtil;
@@ -55,6 +56,7 @@ import com.google.gson.Gson;
 import org.json.JSONArray;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -194,36 +196,33 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         String previousLoginType = GamaUtil.getPreviousLoginType(activity);
 
         if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GAMESWORD, previousLoginType)) {//自動登錄
-            //如果开启了验证码登录就不进行gs自动登录
-            if(GamaUtil.getVfcodeSwitchStatus(activity)) {
-                showLoginView();
-            } else {
-                String account = GamaUtil.getAccount(activity);
-                String password = GamaUtil.getPassword(activity);
-                startAutoLogin(activity, SLoginType.LOGIN_TYPE_GAMESWORD, account, password);
+            AccountModel accountModel = GamaUtil.getLastLoginAccount(activity);
+            if (accountModel != null){
+                startAutoLogin(activity, SLoginType.LOGIN_TYPE_GAMESWORD, accountModel.getAccount(), accountModel.getPassword());
+            }else {
+                showMainLoginView();
             }
 
         } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_MAC, previousLoginType)) {//免注册没有自動登錄
 //            String account = GamaUtil.getMacAccount(activity);
 //            String password = GamaUtil.getMacPassword(activity);
 //            startAutoLogin(activity, SLoginType.LOGIN_TYPE_GAMESWORD, account, password);
-            showLoginView();
+            showMainLoginView();
         } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_FB, previousLoginType)) {//自動登錄
             String fbScopeId = FbSp.getFbId(activity);
-            if (TextUtils.isEmpty(fbScopeId)){
-                showLoginView();
-            }else{
+            if (SStringUtil.isNotEmpty(fbScopeId)){
                 startAutoLogin(activity, SLoginType.LOGIN_TYPE_FB, "", "");
+            }else {
+                showMainLoginView();
             }
 
         }  else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GOOGLE, previousLoginType)) {//自動登錄
 //           thirdPlatLogin(mActivity,GamaUtil.getGoogleId(mActivity),SLoginType.LOGIN_TYPE_GOOGLE);
             startAutoLogin(activity, SLoginType.LOGIN_TYPE_GOOGLE, "", "");
-
         } else if(SStringUtil.isEqual(SLoginType.LOGIN_TYPE_TWITTER, previousLoginType)) {
             startAutoLogin(activity, SLoginType.LOGIN_TYPE_TWITTER, "", "");
         } else {//進入登錄頁面
-            showLoginView();
+            showMainLoginView();
         }
 
     }
@@ -239,7 +238,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         fbThirdLogin(user.getUserFbId(), user.getBusinessId(), "");
                     } else {
                         if (isAutoLogin) {
-                            showLoginView();
+                            showMainLoginView();
                         }
                     }
                 }
@@ -412,11 +411,15 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     @Override
     public boolean hasAccountLogin() {
 
-        String account = GamaUtil.getAccount(mActivity);
-        String password = GamaUtil.getPassword(mActivity);
-        if (TextUtils.isEmpty(account)) {
+        String account = "";//GamaUtil.getAccount(mActivity);
+        String password = "";//GamaUtil.getPassword(mActivity);
+        AccountModel accountModel = GamaUtil.getLastLoginAccount(mActivity);
+        if (accountModel == null) {
             account = GamaUtil.getMacAccount(mActivity);
             password = GamaUtil.getMacPassword(mActivity);
+        }else {
+            account = accountModel.getAccount();
+            password = accountModel.getPassword();
         }
 
         if (SStringUtil.hasEmpty(account,password)) {
@@ -470,9 +473,20 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     if (sLoginResponse.isRequestSuccess()) {
 
                         ToastUtils.toast(getActivity(), sLoginResponse.getMessage());
-                        if (account.equals(GamaUtil.getAccount(getContext()))){
-                            GamaUtil.savePassword(getContext(), newPwd);
+                        List<AccountModel> accountModels = GamaUtil.getAccountModels(activity);
+                        if (accountModels != null && !accountModels.isEmpty()) {
+                            for (AccountModel model : accountModels) {
+
+                                if (account.equals(model.getAccount())){
+                                    model.setPassword(newPwd);
+//                                    GamaUtil.savePassword(getContext(), newPwd);
+                                    break;
+                                }
+                            }
+
+                            GamaUtil.saveAccountModels(activity,accountModels);
                         }
+
                         iLoginView.changePwdSuccess(sLoginResponse);
 
                     }else {
@@ -753,8 +767,18 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     if (sLoginResponse.isRequestSuccess()) {
                         ToastUtils.toast(getActivity(), R.string.py_register_success);
 
-                        GamaUtil.saveAccount(getContext(),account);
-                        GamaUtil.savePassword(getContext(),password);
+//                        GamaUtil.saveAccount(getContext(),account);
+//                        GamaUtil.savePassword(getContext(),password);
+
+                        List<AccountModel> accountModels = GamaUtil.getAccountModels(getContext());
+                        AccountModel accountModel = new AccountModel();
+                        accountModel.setAccount(account);
+                        accountModel.setPassword(password);
+                        accountModel.setTime(System.currentTimeMillis());
+
+                        accountModels.add(accountModel);
+
+                        GamaUtil.saveAccountModels(getContext(), accountModels);
                         handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GAMESWORD);
 
                     }else{
@@ -980,6 +1004,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     }
 
     private void showMainLoginView() {
+        isAutoLogin = false;
         if (iLoginView != null){
             iLoginView.showMainLoginView();
         }
@@ -1332,11 +1357,16 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             public void success(SLoginResponse sLoginResponse, String rawResult) {
                 if (sLoginResponse != null){
                     if (sLoginResponse.isRequestSuccess()) {
-                        GamaUtil.saveAccount(getContext(),account);
+//                        GamaUtil.saveAccount(getContext(),account);
                         if(isSaveAccount) {
-                            GamaUtil.savePassword(getContext(), password);
-                        } else {
-                            GamaUtil.savePassword(getContext(), "");
+
+                            List<AccountModel> accountModels = GamaUtil.getAccountModels(getContext());
+                            AccountModel accountModel = new AccountModel();
+                            accountModel.setAccount(account);
+                            accountModel.setPassword(password);
+                            accountModel.setTime(System.currentTimeMillis());
+                            accountModels.add(accountModel);
+                            GamaUtil.saveAccountModels(getContext(), accountModels);
                         }
                         handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GAMESWORD);
                     }else{

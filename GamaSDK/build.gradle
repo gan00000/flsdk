@@ -87,6 +87,7 @@ dependencies {
     api 'com.adjust.sdk:adjust-android:4.21.1'
     api 'com.android.installreferrer:installreferrer:1.1.2'
 
+    implementation 'com.zhy:base-rvadapter:3.0.3'
 }
 
 

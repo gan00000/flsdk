@@ -1,21 +1,27 @@
 package com.gama.sdk.login.widget.v2;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
 import com.gama.base.utils.GamaUtil;
 import com.gama.sdk.R;
+import com.gama.sdk.login.model.AccountModel;
 import com.gama.sdk.login.widget.SDKInputEditTextView;
 import com.gama.sdk.login.widget.SDKInputType;
 import com.gama.sdk.login.widget.SLoginBaseRelativeLayout;
+import com.zhy.adapter.recyclerview.CommonAdapter;
+import com.zhy.adapter.recyclerview.base.ViewHolder;
+
+import java.util.List;
 
 /**
  * Created by GanYuanrong on 2017/2/6.
@@ -35,9 +41,10 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
     /**
      * 密码、账号、验证码
      */
-    //private EditText loginPasswordEditText, loginAccountEditText, gama_login_et_vfcode;
+    private EditText loginPasswordEditText, loginAccountEditText;
     private String account;
     private String password;
+    List<AccountModel> accountModels;
     private View loginMainGoRegisterBtn;
     private View loginMainGoFindPwd;
     private View loginMainGoAccountCenter;
@@ -45,7 +52,9 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
 
     private SDKInputEditTextView accountSdkInputEditTextView;
     private SDKInputEditTextView pwdSdkInputEditTextView;
-//    private View vfcodeLayout;
+
+    private RecyclerView historyAccountRv;
+    private CommonAdapter  historyAccountCommonAdapter;
 
     public PyAccountLoginV2(Context context) {
         super(context);
@@ -91,13 +100,10 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
         loginMainGoChangePassword = contentView.findViewById(R.id.gama_login_tv_change_password);
 
 
-//        loginAccountEditText = contentView.findViewById(R.id.gama_login_et_account);
-//
-//        loginPasswordEditText = contentView.findViewById(R.id.gama_login_et_password);
-//        loginPasswordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-//
-//        gama_login_et_vfcode = contentView.findViewById(R.id.gama_login_et_vfcode);
+        loginAccountEditText = accountSdkInputEditTextView.getInputEditText();
+        loginPasswordEditText = pwdSdkInputEditTextView.getInputEditText();
 
+        historyAccountRv = contentView.findViewById(R.id.account_login_history_account_rv);
 
         loginMainLoginBtn = contentView.findViewById(R.id.gama_login_btn_confirm);
 
@@ -116,13 +122,6 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
             }
         });
 
-        backView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                sLoginActivity.replaceFragment(new AccountLoginFragment());
-                sLoginDialogv2.toMainLoginView();
-            }
-        });
 
         loginMainGoRegisterBtn.setOnClickListener(new OnClickListener() {
             @Override
@@ -162,60 +161,64 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
             }
         });
 
-        account = GamaUtil.getAccount(getContext());
-        password = GamaUtil.getPassword(getContext());
+        accountModels = GamaUtil.getAccountModels(getContext());
+        if (accountModels != null && !accountModels.isEmpty()){//设置按照最好登录时间排序后的第一个账号
+            AccountModel lastAccountModel = accountModels.get(0);
+            account = lastAccountModel.getAccount();
+            password = lastAccountModel.getPassword();
+        }
+
         if (TextUtils.isEmpty(account)){
             account = GamaUtil.getMacAccount(getContext());
             password = GamaUtil.getMacPassword(getContext());
         }
-        if (!TextUtils.isEmpty(account)){
-//            loginAccountEditText.setText(account);
-//            loginPasswordEditText.setText(password);
+        if (!TextUtils.isEmpty(account)){ //显示记住的密码，待修改
+            loginAccountEditText.setText(account);
+            loginPasswordEditText.setText(password);
         }
 
 //        loadImage();
 
+        initHistoryRv();
+
         return contentView;
+    }
+
+    private void initHistoryRv() {
+
+        if (accountModels == null){
+            return;
+        }
+        historyAccountCommonAdapter = new CommonAdapter<AccountModel>(this.getContext(), R.layout.sdk_login_history_account_item, accountModels)
+        {
+            @Override
+            protected void convert(ViewHolder holder, AccountModel accountModel, int position) {
+                holder.setText(R.id.history_account_item_text, accountModel.getAccount());
+            }
+
+        };
+        historyAccountRv.setAdapter(historyAccountCommonAdapter);
     }
 
     private void login() {
 
-//        account = loginAccountEditText.getEditableText().toString().trim();
-//        if (TextUtils.isEmpty(account)) {
-//            ToastUtils.toast(getActivity(), R.string.py_account_empty);
-//            return;
-//        }
-//
-//        password = loginPasswordEditText.getEditableText().toString().trim();
-//        if (TextUtils.isEmpty(password)) {
-//            ToastUtils.toast(getActivity(), R.string.py_password_empty);
-//            return;
-//        }
+        if (!accountSdkInputEditTextView.checkAccount()){
+            return;
+        }
+        if (!pwdSdkInputEditTextView.checkPassword()){
+            return;
+        }
+
+        account = loginAccountEditText.getEditableText().toString().trim();
+        password = loginPasswordEditText.getEditableText().toString().trim();
 
         if (SStringUtil.isEqual(account, password)) {
             ToastUtils.toast(getActivity(), R.string.py_password_equal_account);
             return;
         }
 
-        if (!GamaUtil.checkAccount(account)) {
-            ToastUtils.toast(getActivity(), errorStrAccount, Toast.LENGTH_LONG);
-            return;
-        }
-//        if (!GamaUtil.checkPassword(password)) {
-//            ToastUtils.toast(getActivity(), R.string.py_password_error);
-//            return;
-//        }
 
-//        String vfcode = "";
-//        if(GamaUtil.getVfcodeSwitchStatus(getContext())) { //开启验证码登入需要验证码
-//            vfcode = gama_login_et_vfcode.getEditableText().toString().trim();
-//            if (TextUtils.isEmpty(vfcode)) {
-//                ToastUtils.toast(getActivity(), R.string.py_vfcode_empty);
-//                return;
-//            }
-//        }
-
-//        sLoginDialogv2.getLoginPresenter().starpyAccountLogin(sLoginDialogv2.getActivity(),account,password, vfcode, savePwdCheckBox.isSelected());
+        sLoginDialogv2.getLoginPresenter().starpyAccountLogin(sLoginDialogv2.getActivity(),account,password, "", savePwdCheckBox.isSelected());
 
     }
 
@@ -245,11 +248,18 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
     @Override
     public void refreshAccountInfo() {
         super.refreshAccountInfo();
-        account = GamaUtil.getAccount(getContext());
-        password = GamaUtil.getPassword(getContext());
+
+        accountModels = GamaUtil.getAccountModels(getContext());
+        historyAccountCommonAdapter.notifyDataSetChanged();
+        if (accountModels != null && !accountModels.isEmpty()){
+            AccountModel lastAccountModel = accountModels.get(0); //设置按照最好登录时间排序后的第一个账号
+            account = lastAccountModel.getAccount();
+            password = lastAccountModel.getPassword();
+        }
+
         if (!TextUtils.isEmpty(account)){
-//            loginAccountEditText.setText(account);
-//            loginPasswordEditText.setText(password);
+            loginAccountEditText.setText(account);
+            loginPasswordEditText.setText(password);
         }
     }
 

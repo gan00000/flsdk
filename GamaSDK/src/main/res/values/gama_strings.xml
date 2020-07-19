@@ -82,7 +82,7 @@
 
     <!--预设提示-->
     <string name="py_register_account_hit">6~18個字元，僅限字母及數字</string>
-    <string name="py_register_password_hit">8~16個字元，僅限字母及數字</string>
+    <string name="py_register_password_hit">8~16個字元，僅限字母大小寫及數字</string>
     <string name="py_findpwd_email_hit">郵箱,必填,用於找回密碼</string>
     <string name="py_register_email_hit">郵箱,選填,用於找回密碼</string>
     <string name="py_msg_vfcode_hint">請輸入驗證碼</string>
