@@ -3,6 +3,7 @@ package com.gama.sdk.login.widget;
 import android.content.Context;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.core.base.utils.ToastUtils;
+import com.gama.base.bean.GamaAreaInfoBean;
 import com.gama.sdk.R;
 
 
@@ -25,6 +28,8 @@ public class SDKPhoneInputEditTextView extends RelativeLayout {
     private TextView labTextView, phoneAreaTextView;
     private EditText inputEditText;
 
+    //选中的区域信息
+    private GamaAreaInfoBean selectedBean;
 
     public ImageView getIconImage() {
         return iconImage;
@@ -80,6 +85,33 @@ public class SDKPhoneInputEditTextView extends RelativeLayout {
 
         }
 
+    }
+
+    public String getPhoneAreaCode(){
+        return phoneAreaTextView.getEditableText().toString().trim();
+    }
+
+    public String getPhoneNumber(){
+        return getInputEditText().getEditableText().toString().trim();
+    }
+
+
+    public boolean checkPhoneOk(){
+        String areaCode = phoneAreaTextView.getText().toString();
+        if(TextUtils.isEmpty(areaCode)) {
+            ToastUtils.toast(getContext(), R.string.py_area_code_empty);
+            return false;
+        }
+        if (selectedBean == null){
+            return false;
+        }
+        String phone = getInputEditText().getEditableText().toString().trim();
+        if(!phone.matches(selectedBean.getPattern())) {
+            ToastUtils.toast(getContext(), R.string.py_phone_error);
+            return false;
+        }
+
+        return true;
     }
 
 }

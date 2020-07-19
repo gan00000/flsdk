@@ -6,6 +6,7 @@ import android.support.annotation.RequiresApi;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.Selection;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +15,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.core.base.utils.ToastUtils;
+import com.gama.base.utils.GamaUtil;
 import com.gama.sdk.R;
 
 
@@ -160,4 +164,49 @@ public class SDKInputEditTextView extends RelativeLayout {
         inputEditText.setHint(hint);
     }
 
+
+    public boolean checkAccount(){
+
+        String account = this.getInputEditText().getEditableText().toString().trim();
+        if (TextUtils.isEmpty(account)) {
+            ToastUtils.toast(getContext(), R.string.py_account_empty);
+            return false;
+        }
+        if (!GamaUtil.checkAccount(account)) {
+
+            String accountError1 = getContext().getResources().getString(R.string.py_account_error) + ":";
+            String accountError2 = getContext().getResources().getString(R.string.py_register_account_hit);
+            String errorStrAccount = accountError1 + accountError2;
+
+            ToastUtils.toast(getContext(), errorStrAccount, Toast.LENGTH_LONG);
+            return false;
+        }
+        return  true;
+    }
+
+    public boolean checkPassword(){
+        String password = this.getInputEditText().getEditableText().toString().trim();
+        if (TextUtils.isEmpty(password)) {
+            ToastUtils.toast(getContext(), R.string.py_password_empty);
+            return false;
+        }
+        if (!GamaUtil.checkPassword(password)) {
+            String passwordError1 = getContext().getResources().getString(R.string.py_password_error) + ":";
+            String passwordError2 = getContext().getResources().getString(R.string.py_register_password_hit);
+            String errorStrPassword = passwordError1 + passwordError2;
+            ToastUtils.toast(getContext(), errorStrPassword, Toast.LENGTH_LONG);
+            return false;
+        }
+        return true;
+    }
+
+    public boolean checkVfCode(){
+
+        String vf = this.getInputEditText().getEditableText().toString().trim();
+        if (TextUtils.isEmpty(vf)) {
+            ToastUtils.toast(getContext(), R.string.py_vfcode_empty);
+            return false;
+        }
+        return  true;
+    }
 }
