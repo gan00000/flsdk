@@ -1,50 +1,43 @@
 {
   "project_info": {
-    "project_number": "844872624154",
-    "firebase_url": "https://snsgz2-tw.firebaseio.com",
-    "project_id": "snsgz2-tw",
-    "storage_bucket": "snsgz2-tw.appspot.com"
+    "project_number": "335589367264",
+    "firebase_url": "https://gamesword-twtm.firebaseio.com",
+    "project_id": "gamesword-twtm",
+    "storage_bucket": "gamesword-twtm.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:844872624154:android:fa8e810da1d4c66f1f89a3",
+        "mobilesdk_app_id": "1:335589367264:android:069baff1288552d95f5f85",
         "android_client_info": {
-          "package_name": "com.gamesword.twsst"
+          "package_name": "com.gamesword.twtm"
         }
       },
       "oauth_client": [
         {
-          "client_id": "844872624154-qhuvfuk4k2sj83viimtqjoe7hlt8qqrs.apps.googleusercontent.com",
+          "client_id": "335589367264-2jl09qctl2epa2ijdgofn50bkq3s2j6s.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.gamesword.twsst",
-            "certificate_hash": "d5024de9e29e273bf227e5a0f0a39fdf1a66a1e7"
+            "package_name": "com.gamesword.twtm",
+            "certificate_hash": "f70eda06327547eaac632d14e9617217224420f2"
           }
         },
         {
-          "client_id": "844872624154-qtbir4ng88r41ckptmgtvhr6g33t672j.apps.googleusercontent.com",
+          "client_id": "335589367264-46e7pf0du1g47q6u8bsaffhik4i7g04c.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBZRgi0gHGH8UQqllfNJrUttlOVHJ4DFpA"
+          "current_key": "AIzaSyATOGzBdv5ZoErQouHlr-9LziKorDBYvm0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "844872624154-qtbir4ng88r41ckptmgtvhr6g33t672j.apps.googleusercontent.com",
+              "client_id": "335589367264-46e7pf0du1g47q6u8bsaffhik4i7g04c.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "844872624154-llk203ta803eg4od1rmru0qpfe9hgm5l.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.gamesword.twsst"
-              }
             }
           ]
         }

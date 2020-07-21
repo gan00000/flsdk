@@ -97,6 +97,8 @@ public class BaseGamaImpl implements IGama {
                 Localization.gameLanguage(activity, gameLanguage);
                 //清除上一次登录成功的返回值
                 GamaUtil.saveSdkLoginData(activity, "");
+                //清除角色信息
+                GamaUtil.saveRoleInfo(activity, "", "", "", "", "", "");
                 //重置用户登入时长
                 GamaUtil.resetOnlineTimeInfo(activity);
                 //获取Google 广告ID

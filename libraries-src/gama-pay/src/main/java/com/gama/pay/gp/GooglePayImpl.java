@@ -11,10 +11,8 @@ import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
 import com.gama.base.bean.BasePayBean;
-import com.gama.base.bean.SGameLanguage;
 import com.gama.base.constant.GamaCommonKey;
 import com.gama.base.utils.GamaUtil;
-import com.gama.base.utils.Localization;
 import com.gama.base.utils.SLog;
 import com.gama.pay.BuildConfig;
 import com.gama.pay.IPay;
@@ -184,6 +182,7 @@ public class GooglePayImpl implements IPay {
         }
         isPaying = false;
         PL.w("google set not paying");
+
     }
 
     @Override
@@ -465,6 +464,9 @@ public class GooglePayImpl implements IPay {
                 SLog.logI("消费成功");
             } else {
                 SLog.logI("消费失败");
+                Intent intent = new Intent(GooglePayHelper.ACTION_PAY_ERROR_CONSUME);
+                intent.setPackage(activity.getPackageName());
+                activity.sendBroadcast(intent);
             }
             callbackSuccess(purchase);
         }
@@ -493,6 +495,9 @@ public class GooglePayImpl implements IPay {
            // callbackFail();
             PL.i("query result:" + result.getMessage());
             SLog.logD("getQueryInventoryState is null");
+            Intent intent = new Intent(GooglePayHelper.ACTION_PAY_ERROR_QUERY_DETAILS);
+            intent.setPackage(activity.getPackageName());
+            activity.sendBroadcast(intent);
         } else {
 
             SLog.logD("Query inventory was successful.");
@@ -555,6 +560,7 @@ public class GooglePayImpl implements IPay {
                 try {//补发上报
                     Intent intent = new Intent(GooglePayHelper.ACTION_PAY_REPLACE_OK);
                     intent.putExtra(GooglePayContant.PURCHASE_OBJECT, mPurchase);
+                    intent.setPackage(activity.getPackageName());
                     activity.sendBroadcast(intent);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -594,6 +600,9 @@ public class GooglePayImpl implements IPay {
                 } else {
                     SLog.logD("sku: " + purchases.get(i).getSku() + " Consume finished fail");
                     SLog.logD(purchases.get(i).getSku() + "consumption is not success, yet to be consumed.");
+                    Intent intent = new Intent(GooglePayHelper.ACTION_PAY_ERROR_CONSUME);
+                    intent.setPackage(activity.getPackageName());
+                    activity.sendBroadcast(intent);
                 }
             }
             SLog.logD("End consumption flow.");
@@ -619,6 +628,9 @@ public class GooglePayImpl implements IPay {
                 }
             } else {
                 SLog.logD("consumption is not success, yet to be consumed.");
+                Intent intent = new Intent(GooglePayHelper.ACTION_PAY_ERROR_CONSUME);
+                intent.setPackage(activity.getPackageName());
+                activity.sendBroadcast(intent);
             }
             SLog.logD("End consumption flow.");
 

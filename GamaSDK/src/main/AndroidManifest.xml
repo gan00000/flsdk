@@ -134,6 +134,8 @@
             <intent-filter>
                 <action android:name="com.gamamobi.PAY_REPLACE_OK" />
                 <action android:name="com.gamamobi.PAY_QUERY_TASK_START" />
+                <action android:name="com.gamamobi.PAY_ERROR_CONSUME" />
+                <action android:name="com.gamamobi.PAY_ERROR_QUERY_DETAILS" />
             </intent-filter>
         </receiver>
 

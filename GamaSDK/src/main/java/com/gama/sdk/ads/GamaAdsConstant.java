@@ -57,6 +57,14 @@ public class GamaAdsConstant {
      * 充值事件
      */
     public static final String GAMA_EVENT_IAB = "in_app_purchases";
+    /**
+     * 消费失败事件
+     */
+    public static final String GAMA_EVENT_IAB_ERROR_CONSUME = "gamesword_iab_error_consume";
+    /**
+     * 查询商品信息失败事件
+     */
+    public static final String GAMA_EVENT_IAB_ERROR_QUERY_DETAILS = "gamesword_iab_error_query_details";
 
 
     /**

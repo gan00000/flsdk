@@ -41,6 +41,8 @@ public class GooglePayHelper {
 
     public static final String ACTION_PAY_REPLACE_OK = "com.gamamobi.PAY_REPLACE_OK";
     public static final String ACTION_PAY_QUERY_TASK_START = "com.gamamobi.PAY_QUERY_TASK_START";
+    public static final String ACTION_PAY_ERROR_CONSUME = "com.gamamobi.PAY_ERROR_CONSUME";
+    public static final String ACTION_PAY_ERROR_QUERY_DETAILS = "com.gamamobi.PAY_ERROR_QUERY_DETAILS";
 
     public static GooglePayHelper getInstance() {
         if (payHelper == null) {

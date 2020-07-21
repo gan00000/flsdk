@@ -37,6 +37,14 @@ public class GamaReceiver extends BaseGamaReceiver {
             case GooglePayHelper.ACTION_PAY_QUERY_TASK_START:
                 StarEventLogger.trackingWithEventName(context, GamaAdsConstant.GAMA_EVENT_PAY_QUERY, null, null);
                 break;
+
+            case GooglePayHelper.ACTION_PAY_ERROR_CONSUME:
+                StarEventLogger.trackingWithEventName(context, GamaAdsConstant.GAMA_EVENT_IAB_ERROR_CONSUME, null, null);
+                break;
+
+            case GooglePayHelper.ACTION_PAY_ERROR_QUERY_DETAILS:
+                StarEventLogger.trackingWithEventName(context, GamaAdsConstant.GAMA_EVENT_IAB_ERROR_QUERY_DETAILS, null, null);
+                break;
         }
     }
 }

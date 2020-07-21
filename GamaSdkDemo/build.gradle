@@ -398,13 +398,13 @@ android {
         }
 
         twgoogle {
-            applicationId "com.gamesword.twsst"
+            applicationId "com.gamesword.twtm"
             minSdkVersion 21
             targetSdkVersion 28
             versionCode 1
             versionName "1.0"
             flavorDimensions "1"
-            resValue "string", "scheme", "twsst"
+            resValue "string", "scheme", "twtm"
             resValue "string", "facebook_app_id", "502656093689012"
             resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider502656093689012"
             resValue "string", "fb_login_protocol_scheme", "fb502656093689012"
