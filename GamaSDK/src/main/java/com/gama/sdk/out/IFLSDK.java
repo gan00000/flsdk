@@ -1,19 +1,14 @@
 package com.gama.sdk.out;
 
 import android.app.Activity;
-import android.os.Bundle;
 
 import com.core.base.callback.IGameLifeCycle;
 import com.gama.base.bean.SGameLanguage;
 import com.gama.base.bean.SPayType;
 import com.gama.data.login.ILoginCallBack;
-import com.gama.pay.utils.GamaQueryProductListener;
-import com.gama.sdk.ads.GamaAdsConstant;
+import com.gama.pay.utils.QueryProductListener;
+import com.gama.sdk.ads.SdkAdsConstant;
 import com.gama.sdk.callback.IPayListener;
-import com.gama.sdk.social.callback.FetchFriendsCallback;
-import com.gama.sdk.social.callback.InviteFriendsCallback;
-import com.gama.sdk.social.callback.UserProfileCallback;
-import com.gama.thirdlib.facebook.FriendProfile;
 
 import java.util.List;
 import java.util.Map;
@@ -59,29 +54,29 @@ public interface IFLSDK extends IGameLifeCycle {
     /**
      * 获取用户资料
      */
-    void gamaGetUserProfile(Activity activity, UserProfileCallback callBack);
+//    void gamaGetUserProfile(Activity activity, UserProfileCallback callBack);
 
     /**
      * 获取好友
      */
-    void gamaFetchFriends(Activity activity, GamaThirdPartyType type, Bundle bundle, String paging, int limit, FetchFriendsCallback callback);
+//    void gamaFetchFriends(Activity activity, ThirdPartyType type, Bundle bundle, String paging, int limit, FetchFriendsCallback callback);
 
     /**
      * 分享
      */
-    void gamaShare(Activity activity, GamaThirdPartyType type, String message, String linkUrl, String picPath, ISdkCallBack callback);
+    void share(Activity activity, ThirdPartyType type, String message, String linkUrl, String picPath, ISdkCallBack callback);
 
 //    void gamaSentMessageToSpecifiedFriends(Activity activity, GamaThirdPartyType type, Uri uri, ISdkCallBack callback);
 
     /**
      * 发消息至游戏中心
      */
-    void gamaInviteFriends(Activity activity, GamaThirdPartyType type, List<FriendProfile> invitingList, String msg, String title, InviteFriendsCallback callback);
+//    void gamaInviteFriends(Activity activity, ThirdPartyType type, List<FriendProfile> invitingList, String msg, String title, InviteFriendsCallback callback);
 
     /**
      * 检查是否支持分享
      */
-    boolean gamaShouldShareWithType(Activity activity, GamaThirdPartyType type);
+    boolean gamaShouldShareWithType(Activity activity, ThirdPartyType type);
 
     /**
      * 事件上报接口
@@ -89,12 +84,12 @@ public interface IFLSDK extends IGameLifeCycle {
      * @param eventName
      * @param map
      */
-    void gamaTrack(Activity activity, String eventName, Map<String, Object> map, Set<GamaAdsConstant.GamaEventReportChannel> mediaSet);
+    void trackEvent(Activity activity, String eventName, Map<String, Object> map, Set<SdkAdsConstant.EventReportChannel> mediaSet);
 
 
-    void gamaQueryProductDetail(Activity activity, SPayType payType, List<String> skus, GamaQueryProductListener listener);
+    void queryProductDetail(Activity activity, SPayType payType, List<String> skus, QueryProductListener listener);
 
-    void gamaOpenCafeHome(Activity activity);
+//    void gamaOpenCafeHome(Activity activity);
 
     /**
      * 处理一些特殊功能的接口

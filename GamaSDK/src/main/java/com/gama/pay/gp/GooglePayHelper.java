@@ -13,7 +13,6 @@ import com.gama.base.utils.GamaUtil;
 import com.gama.base.utils.SLog;
 import com.gama.pay.gp.bean.req.GoogleExchangeReqBean;
 import com.gama.pay.gp.bean.res.GPExchangeRes;
-import com.gama.pay.gp.constants.GooglePayContant;
 import com.gama.pay.gp.constants.GooglePayDomainSite;
 import com.gama.pay.gp.task.GoogleExchangeReqTask;
 import com.gama.pay.gp.util.IabHelper;
@@ -22,7 +21,7 @@ import com.gama.pay.gp.util.Inventory;
 import com.gama.pay.gp.util.PayHelper;
 import com.gama.pay.gp.util.Purchase;
 import com.gama.pay.gp.util.SkuDetails;
-import com.gama.pay.utils.GamaQueryProductListener;
+import com.gama.pay.utils.QueryProductListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -324,7 +323,7 @@ public class GooglePayHelper {
         }
     }
 
-    public void queryProductDetail(final Context context, final List<String> skus, final GamaQueryProductListener listener) {
+    public void queryProductDetail(final Context context, final List<String> skus, final QueryProductListener listener) {
         if(isWorking) {
             PL.i(TAG, "iab is working,ignore this request");
             if (listener != null) {
@@ -367,7 +366,7 @@ public class GooglePayHelper {
                     }
                     PL.i(TAG, "query list is : " + skusString);
 
-                    queryProductDetailBatch(context, transList, new HashMap<String, SkuDetails>(), new GamaQueryProductListener() {
+                    queryProductDetailBatch(context, transList, new HashMap<String, SkuDetails>(), new QueryProductListener() {
                         @Override
                         public void onQueryResult(Map<String, SkuDetails> details) {
                             if (listener != null) {
@@ -387,7 +386,7 @@ public class GooglePayHelper {
         }
     }
 
-    private void queryProductDetailBatch(final Context context, final List<String> skus, final Map<String, SkuDetails> allSkuDetail, final GamaQueryProductListener listener) {
+    private void queryProductDetailBatch(final Context context, final List<String> skus, final Map<String, SkuDetails> allSkuDetail, final QueryProductListener listener) {
         ArrayList<String> curSkus = new ArrayList<>(skus.subList(0, Math.min(15, skus.size())));//单次最多查询20个商品
         skus.removeAll(curSkus);
         if (iabHelper != null) {

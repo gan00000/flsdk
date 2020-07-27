@@ -15,7 +15,7 @@ import com.gama.pay.gp.GooglePayHelper;
 import com.gama.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
 import com.gama.pay.gp.bean.req.WebPayReqBean;
 import com.gama.pay.gp.util.PayHelper;
-import com.gama.pay.utils.GamaQueryProductListener;
+import com.gama.pay.utils.QueryProductListener;
 import com.gama.sdk.R;
 import com.gama.sdk.SWebViewDialog;
 import com.gama.sdk.ads.StarEventLogger;
@@ -236,8 +236,8 @@ public class SdkImpl extends BaseSdkImpl {
     }
 
     @Override
-    public void gamaQueryProductDetail(final Activity activity, final SPayType payType, final List<String> skus, final GamaQueryProductListener listener) {
-        super.gamaQueryProductDetail(activity, payType, skus, listener);
+    public void queryProductDetail(final Activity activity, final SPayType payType, final List<String> skus, final QueryProductListener listener) {
+        super.queryProductDetail(activity, payType, skus, listener);
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {

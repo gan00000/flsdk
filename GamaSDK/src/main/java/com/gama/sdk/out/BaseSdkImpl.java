@@ -20,11 +20,11 @@ import com.gama.base.cfg.ResConfig;
 import com.gama.base.utils.GamaUtil;
 import com.gama.base.utils.Localization;
 import com.gama.data.login.ILoginCallBack;
-import com.gama.pay.utils.GamaQueryProductListener;
+import com.gama.pay.utils.QueryProductListener;
 import com.gama.sdk.BuildConfig;
 import com.gama.sdk.R;
 import com.gama.sdk.SWebViewDialog;
-import com.gama.sdk.ads.GamaAdsConstant;
+import com.gama.sdk.ads.SdkAdsConstant;
 import com.gama.sdk.ads.GamaAdsUtils;
 import com.gama.sdk.ads.StarEventLogger;
 import com.gama.sdk.callback.IPayListener;
@@ -155,12 +155,12 @@ public class BaseSdkImpl implements IFLSDK {
                 GamaUtil.saveRoleInfo(activity, roleId, roleName, roleLevel, vipLevel, severCode, serverName);//保存角色信息
 
                 HashMap<String, Object> map = new HashMap<>();
-                map.put(GamaAdsConstant.GAMA_EVENT_ROLEID, roleId);
-                map.put(GamaAdsConstant.GAMA_EVENT_ROLENAME, roleName);
-                map.put(GamaAdsConstant.GAMA_EVENT_ROLE_LEVEL, roleLevel);
-                map.put(GamaAdsConstant.GAMA_EVENT_ROLE_VIP_LEVEL, vipLevel);
-                map.put(GamaAdsConstant.GAMA_EVENT_SERVERCODE, severCode);
-                map.put(GamaAdsConstant.GAMA_EVENT_SERVERNAME, serverName);
+                map.put(SdkAdsConstant.GAMA_EVENT_ROLEID, roleId);
+                map.put(SdkAdsConstant.GAMA_EVENT_ROLENAME, roleName);
+                map.put(SdkAdsConstant.GAMA_EVENT_ROLE_LEVEL, roleLevel);
+                map.put(SdkAdsConstant.GAMA_EVENT_ROLE_VIP_LEVEL, vipLevel);
+                map.put(SdkAdsConstant.GAMA_EVENT_SERVERCODE, severCode);
+                map.put(SdkAdsConstant.GAMA_EVENT_SERVERNAME, serverName);
                 StarEventLogger.trackingRoleInfo(activity, map);
             }
         });
@@ -528,7 +528,6 @@ public class BaseSdkImpl implements IFLSDK {
 
     }
 
-    @Override
     public void gamaGetUserProfile(final Activity activity, final UserProfileCallback callBack) {
         activity.runOnUiThread(new Runnable() {
             @Override
@@ -622,8 +621,7 @@ public class BaseSdkImpl implements IFLSDK {
         });
     }
 
-    @Override
-    public void gamaFetchFriends(final Activity activity, final GamaThirdPartyType type, final Bundle bundle, final String paging, final int limit, final FetchFriendsCallback callback) {
+    public void gamaFetchFriends(final Activity activity, final ThirdPartyType type, final Bundle bundle, final String paging, final int limit, final FetchFriendsCallback callback) {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -660,7 +658,7 @@ public class BaseSdkImpl implements IFLSDK {
     }
 
     @Override
-    public void gamaShare(final Activity activity, final GamaThirdPartyType type, final String message, final String shareLinkUrl, final String picPath, final ISdkCallBack iSdkCallBack) {
+    public void share(final Activity activity, final ThirdPartyType type, final String message, final String shareLinkUrl, final String picPath, final ISdkCallBack iSdkCallBack) {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -822,8 +820,7 @@ public class BaseSdkImpl implements IFLSDK {
 //        }
 //    }
 
-    @Override
-    public void gamaInviteFriends(final Activity activity, final GamaThirdPartyType type, final List<FriendProfile> invitingList,
+    public void gamaInviteFriends(final Activity activity, final ThirdPartyType type, final List<FriendProfile> invitingList,
                                   final String message, final String title, final InviteFriendsCallback callback) {
         activity.runOnUiThread(new Runnable() {
             @Override
@@ -865,13 +862,13 @@ public class BaseSdkImpl implements IFLSDK {
     }
 
     @Override
-    public boolean gamaShouldShareWithType(Activity activity, GamaThirdPartyType type) {
+    public boolean gamaShouldShareWithType(Activity activity, ThirdPartyType type) {
         Log.i(TAG, "type : " + type.name());
         return GamaShare.shouldShareWithType(activity, type);
     }
 
     @Override
-    public void gamaTrack(final Activity activity, final String eventName, final Map<String, Object> map, final Set<GamaAdsConstant.GamaEventReportChannel> channelSet) {
+    public void trackEvent(final Activity activity, final String eventName, final Map<String, Object> map, final Set<SdkAdsConstant.EventReportChannel> channelSet) {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -881,11 +878,11 @@ public class BaseSdkImpl implements IFLSDK {
     }
 
     @Override
-    public void gamaQueryProductDetail(final Activity activity, final SPayType payType, final List<String> skus, final GamaQueryProductListener listener) {}
+    public void queryProductDetail(final Activity activity, final SPayType payType, final List<String> skus, final QueryProductListener listener) {}
 
-    @Override
-    public void gamaOpenCafeHome(final Activity activity) {
-    }
+//    @Override
+//    public void gamaOpenCafeHome(final Activity activity) {
+//    }
 
     @Override
     public void openFunction(final Activity activity, final GsFunctionType type, final ISdkCallBack callBack) {

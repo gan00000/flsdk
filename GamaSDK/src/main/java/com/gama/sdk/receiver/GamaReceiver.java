@@ -7,7 +7,7 @@ import android.text.TextUtils;
 
 import com.gama.base.utils.SLog;
 import com.gama.pay.gp.GooglePayHelper;
-import com.gama.sdk.ads.GamaAdsConstant;
+import com.gama.sdk.ads.SdkAdsConstant;
 import com.gama.sdk.ads.StarEventLogger;
 
 public class GamaReceiver extends BaseGamaReceiver {
@@ -35,7 +35,7 @@ public class GamaReceiver extends BaseGamaReceiver {
                 break;
 
             case GooglePayHelper.ACTION_PAY_QUERY_TASK_START:
-                StarEventLogger.trackingWithEventName(context, GamaAdsConstant.GAMA_EVENT_PAY_QUERY, null, null);
+                StarEventLogger.trackingWithEventName(context, SdkAdsConstant.GAMA_EVENT_PAY_QUERY, null, null);
                 break;
         }
     }

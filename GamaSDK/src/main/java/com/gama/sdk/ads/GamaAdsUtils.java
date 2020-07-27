@@ -43,7 +43,7 @@ public class GamaAdsUtils {
             for(int i : intArray) {
                 PL.i("intArray : " + i);
                 if(bewteen == i) {
-                    String retentions = String.format(GamaAdsConstant.GAMA_RETENTION, i);
+                    String retentions = String.format(SdkAdsConstant.GAMA_RETENTION, i);
                     PL.i("retentions : " + retentions);
                     StarEventLogger.trackingWithEventName((Activity) context, retentions, null, null);
                 }
@@ -125,14 +125,14 @@ public class GamaAdsUtils {
                 task.excute();
 
                 HashMap<String, Object> map = new HashMap<String, Object>();
-                map.put(GamaAdsConstant.GAMA_EVENT_ROLEID, roleId);
-                map.put(GamaAdsConstant.GAMA_EVENT_ROLENAME, roleName);
-                map.put(GamaAdsConstant.GAMA_EVENT_ROLE_LEVEL, roleLevel);
-                map.put(GamaAdsConstant.GAMA_EVENT_ROLE_VIP_LEVEL, roleVip);
-                map.put(GamaAdsConstant.GAMA_EVENT_SERVERCODE, serverCode);
-                map.put(GamaAdsConstant.GAMA_EVENT_SERVERNAME, serverName);
-                map.put(GamaAdsConstant.GAMA_EVENT_USER_ID, userId);
-                map.put(GamaAdsConstant.GAMA_EVENT_ONLINE_TIME, lastTime);
+                map.put(SdkAdsConstant.GAMA_EVENT_ROLEID, roleId);
+                map.put(SdkAdsConstant.GAMA_EVENT_ROLENAME, roleName);
+                map.put(SdkAdsConstant.GAMA_EVENT_ROLE_LEVEL, roleLevel);
+                map.put(SdkAdsConstant.GAMA_EVENT_ROLE_VIP_LEVEL, roleVip);
+                map.put(SdkAdsConstant.GAMA_EVENT_SERVERCODE, serverCode);
+                map.put(SdkAdsConstant.GAMA_EVENT_SERVERNAME, serverName);
+                map.put(SdkAdsConstant.GAMA_EVENT_USER_ID, userId);
+                map.put(SdkAdsConstant.GAMA_EVENT_ONLINE_TIME, lastTime);
 
                 //facebook和firebase的属性列表
                 Bundle b = new Bundle();
@@ -141,13 +141,13 @@ public class GamaAdsUtils {
                 }
 
                 //Facebook上报
-                SFacebookProxy.trackingEvent(context, GamaAdsConstant.GAMA_EVENT_ONLINE_TIME, (double) lastTime, b);
+                SFacebookProxy.trackingEvent(context, SdkAdsConstant.GAMA_EVENT_ONLINE_TIME, (double) lastTime, b);
 
                 //firebase上报,
-                SGoogleProxy.firebaseAnalytics(context, GamaAdsConstant.GAMA_EVENT_ONLINE_TIME, b);
+                SGoogleProxy.firebaseAnalytics(context, SdkAdsConstant.GAMA_EVENT_ONLINE_TIME, b);
 
                 //AppsFlyer上报
-                AppsFlyerLib.getInstance().trackEvent(context.getApplicationContext(), GamaAdsConstant.GAMA_EVENT_ONLINE_TIME, map);
+                AppsFlyerLib.getInstance().trackEvent(context.getApplicationContext(), SdkAdsConstant.GAMA_EVENT_ONLINE_TIME, map);
 
             } else {
                 PL.i("不需要上传在线时长");

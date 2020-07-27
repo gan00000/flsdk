@@ -4,6 +4,6 @@ import com.gama.pay.gp.util.SkuDetails;
 
 import java.util.Map;
 
-public interface GamaQueryProductListener {
+public interface QueryProductListener {
     void onQueryResult(Map<String, SkuDetails> details);
 }

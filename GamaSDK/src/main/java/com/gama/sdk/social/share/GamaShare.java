@@ -1,13 +1,10 @@
 package com.gama.sdk.social.share;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
-import android.os.Build;
-import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
 
 import com.core.base.utils.ApkInstallUtil;
@@ -16,10 +13,9 @@ import com.core.base.utils.PL;
 import com.core.base.utils.ToastUtils;
 import com.facebook.messenger.MessengerUtils;
 import com.gama.sdk.R;
-import com.gama.sdk.out.GamaThirdPartyType;
+import com.gama.sdk.out.ThirdPartyType;
 import com.gama.sdk.out.ISdkCallBack;
 
-import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
@@ -33,7 +29,7 @@ public class GamaShare {
     private static final int SHARE_WHATSAPP = 61;
     private static final int SHARE_TWITTER = 62;
 
-    public static void share(Activity activity, GamaThirdPartyType type, String message, String linkUrl, String picPath, ISdkCallBack callBack) {
+    public static void share(Activity activity, ThirdPartyType type, String message, String linkUrl, String picPath, ISdkCallBack callBack) {
         iSdkCallBack = callBack;
         switch (type) {
             case LINE:
@@ -50,7 +46,7 @@ public class GamaShare {
     }
 
     private static void shareWhatsapp(Activity activity, String message, String linkUrl, String picPath) {
-        if (shouldShareWithType(activity, GamaThirdPartyType.WHATSAPP)) {
+        if (shouldShareWithType(activity, ThirdPartyType.WHATSAPP)) {
             Intent sendIntent = new Intent();
             sendIntent.setAction(Intent.ACTION_SEND);
             sendIntent.setPackage("com.whatsapp");
@@ -79,7 +75,7 @@ public class GamaShare {
     }
 
     private static void shareLine(Activity activity, String message, String linkUrl, String picPath) {
-        if (shouldShareWithType(activity, GamaThirdPartyType.LINE)) {
+        if (shouldShareWithType(activity, ThirdPartyType.LINE)) {
             if (!TextUtils.isEmpty(picPath)) { // 有读sdk权限及有图片路径
                 activity.startActivityForResult(
                         new Intent("android.intent.action.VIEW", Uri.parse("line://msg/image/"
@@ -175,7 +171,7 @@ public class GamaShare {
         }
     }
 
-    public static boolean shouldShareWithType(Activity activity, GamaThirdPartyType type) {
+    public static boolean shouldShareWithType(Activity activity, ThirdPartyType type) {
         switch (type) {
             case LINE:
                 return ApkInstallUtil.isInstallApp(activity, "jp.naver.line.android");

@@ -6,12 +6,10 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.core.base.utils.PL;
-import com.facebook.appevents.AppEventsLogger;
 import com.gama.sdk.R;
-import com.gama.sdk.ads.GamaAdsConstant;
+import com.gama.sdk.ads.SdkAdsConstant;
 import com.gama.sdk.ads.StarEventLogger;
 
-import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -80,7 +78,7 @@ public class LogTimer {
         }
         for (int i = 0; i < intArray.length; i++) {
             int minute = intArray[i];
-            String eventName = String.format(GamaAdsConstant.GAMA_EVENT_MINUTE, minute);
+            String eventName = String.format(SdkAdsConstant.GAMA_EVENT_MINUTE, minute);
             if (time >= minute * 1000 * 60 && !sp.getBoolean(eventName, false)) {
                 StarEventLogger.trackingWithEventName(context, eventName, null, null);
                 sp.edit().putBoolean(eventName, true).apply();

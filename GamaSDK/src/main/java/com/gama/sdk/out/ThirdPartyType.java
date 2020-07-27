@@ -1,6 +1,6 @@
 package com.gama.sdk.out;
 
-public enum  GamaThirdPartyType {
+public enum ThirdPartyType {
     FACEBOOK,
     FACEBOOK_MESSENGER,
     LINE,

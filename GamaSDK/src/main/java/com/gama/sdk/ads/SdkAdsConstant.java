@@ -1,6 +1,6 @@
 package com.gama.sdk.ads;
 
-public class GamaAdsConstant {
+public class SdkAdsConstant {
     /**
      * 每次启动事件
      */
@@ -94,12 +94,12 @@ public class GamaAdsConstant {
     public static final String GAMA_EVENT_PURCHASE_TIME = "gama_purchase_time";
     public static final String GAMA_EVENT_CURRENCY = "gama_event_currency";
 
-    public enum GamaEventReportChannel {
-        GamaEventReportAllChannel,
-        GamaEventReportFacebook,
-        GamaEventReportFirebase,
-        GamaEventReportAppsflyer,
-        GamaEventReportAdjust
+    public enum EventReportChannel {
+        EventReportAllChannel,
+        EventReportFacebook,
+        EventReportFirebase,
+        EventReportAppsflyer,
+        EventReportAdjust
     }
 
     public class GsAdsRequestMethod {
