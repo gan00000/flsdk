@@ -6,9 +6,9 @@ package com.gama.sdk.out;
 
 public class GamaFactory {
 
-    public static IGama create(){
+    public static IFLSDK create(){
 
-        return new GamaImpl();
+        return new SdkImpl();
     }
 
 }

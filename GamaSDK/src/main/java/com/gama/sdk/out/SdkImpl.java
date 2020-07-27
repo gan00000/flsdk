@@ -23,10 +23,10 @@ import com.gama.sdk.constant.GsSdkImplConstant;
 
 import java.util.List;
 
-public class GamaImpl extends BaseGamaImpl {
-    private static final String TAG = GamaImpl.class.getSimpleName();
+public class SdkImpl extends BaseSdkImpl {
+    private static final String TAG = SdkImpl.class.getSimpleName();
 
-    GamaImpl() {
+    SdkImpl() {
         super();
     }
 

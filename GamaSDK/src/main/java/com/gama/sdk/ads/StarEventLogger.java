@@ -22,14 +22,12 @@ import com.gama.base.constant.GamaCommonKey;
 import com.gama.base.utils.GamaUtil;
 import com.gama.data.login.execute.GamaVfcodeSwitchRequestTask;
 import com.gama.data.login.response.SLoginResponse;
-import com.gama.sdk.R;
 import com.gama.thirdlib.facebook.SFacebookProxy;
 import com.gama.thirdlib.google.SGoogleProxy;
 import com.gamamobi.ads.plug.aj.GamaAj;
 import com.gamesword.ads.plug.referrer.GsInstallReferrer;
 import com.gamesword.ads.plug.referrer.GsInstallReferrerBean;
 import com.google.ads.conversiontracking.AdWordsConversionReporter;
-import com.tapdb.sdk.TapDB;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -69,8 +67,8 @@ public class StarEventLogger {
             //adjust
             GamaAj.activeAj(activity);
 
-            TapDB.init(activity,activity.getString(R.string.tapdb_appId),activity.getString(R.string.tapdb_channel),
-                    activity.getString(R.string.tapdb_gameVersion));
+//            TapDB.init(activity,activity.getString(R.string.tapdb_appId),activity.getString(R.string.tapdb_channel),
+//                    activity.getString(R.string.tapdb_gameVersion));
 
             trackingWithEventName(activity, GamaAdsConstant.GAMA_EVENT_OPEN, null, null);
 
@@ -109,7 +107,7 @@ public class StarEventLogger {
             //adjust
             GamaAj.trackEvent(activity.getApplicationContext(), GamaAdsConstant.GAMA_EVENT_LOGIN, eventValue);
 
-            TapDB.setUser(userId);
+//            TapDB.setUser(userId);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -179,8 +177,8 @@ public class StarEventLogger {
             //上报给gama服务器
             GamaAdsUtils.upLoadRoleInfo(activity, map);
 
-            TapDB.setName(map.get(GamaAdsConstant.GAMA_EVENT_ROLENAME).toString());
-            TapDB.setServer(map.get(GamaAdsConstant.GAMA_EVENT_SERVERCODE).toString());
+//            TapDB.setName(map.get(GamaAdsConstant.GAMA_EVENT_ROLENAME).toString());
+//            TapDB.setServer(map.get(GamaAdsConstant.GAMA_EVENT_SERVERCODE).toString());
 //            TapDB.setLevel(map.get(GamaAdsConstant.GAMA_EVENT_ROLE_LEVEL).toString());
         } catch (Exception e) {
             e.printStackTrace();
@@ -424,12 +422,12 @@ public class StarEventLogger {
 	
 	public static void onResume(Activity activity) {
         GamaAj.onResume(activity);
-        TapDB.onResume(activity);
+//        TapDB.onResume(activity);
     }
 
     public static void onPause(Activity activity) {
         GamaAj.onPause(activity);
-        TapDB.onStop(activity);
+//        TapDB.onStop(activity);
     }
 
 }

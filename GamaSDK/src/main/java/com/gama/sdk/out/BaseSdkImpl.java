@@ -57,8 +57,8 @@ import java.util.Map;
 import java.util.Set;
 
 
-public class BaseGamaImpl implements IGama {
-    private static final String TAG = BaseGamaImpl.class.getSimpleName();
+public class BaseSdkImpl implements IFLSDK {
+    private static final String TAG = BaseSdkImpl.class.getSimpleName();
     private static final int PERMISSION_REQUEST_CODE = 401;
     private ILogin iLogin;
 
@@ -74,7 +74,7 @@ public class BaseGamaImpl implements IGama {
 
     protected IPayListener iPayListener;
 
-    public BaseGamaImpl() {
+    public BaseSdkImpl() {
         iLogin = ObjFactory.create(DialogLoginImpl.class);
     }
 

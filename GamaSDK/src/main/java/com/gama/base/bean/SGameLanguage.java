@@ -8,12 +8,12 @@ public enum SGameLanguage {
     /**
      * 繁中
      */
-    zh_TW("zh-TW"),
+    zh_TW("zh_TW"),
 
     /**
      * 英文
      */
-    en_US("en-US"),
+    en_US("en_US"),
 
     /**
      * 韩文
@@ -23,12 +23,12 @@ public enum SGameLanguage {
     /**
      * 日文
      */
-    ja_JP("ja-JP"),
+    ja_JP("ja_JP"),
 
     /**
      * 简中
      */
-    zh_CH("zh-CH");
+    zh_CH("zh_CH");
 
     private String lang;
 

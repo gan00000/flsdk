@@ -35,8 +35,9 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/px_20"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <TextView
@@ -46,7 +47,7 @@
             android:layout_marginStart="@dimen/px_4"
             android:maxLines="1"
             android:textSize="@dimen/sp_24"
-            android:text="+8868"
+            android:text="886"
             android:textColor="@color/e_ff3e37"
             android:id="@+id/sdk_input_item_phone_area"
 
@@ -55,9 +56,10 @@
 
         <ImageView
             android:id="@+id/sdk_input_item_phone_list_icon"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
             android:layout_marginStart="@dimen/px_4"
+            android:gravity="center_vertical"
             android:scaleType="fitCenter"
             android:src="@drawable/sdk_list_down"
             android:layout_marginEnd="6dp"

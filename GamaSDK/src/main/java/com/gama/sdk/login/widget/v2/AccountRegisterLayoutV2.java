@@ -111,7 +111,7 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
         backView.setOnClickListener(this);
         registerConfirm.setOnClickListener(this);
         gama_register_btn_get_vfcode.setOnClickListener(this);
-//        gama_register_tv_area.setOnClickListener(this);
+        gama_register_tv_area.setOnClickListener(this);
 
 
         setDefaultAreaInfo();
@@ -140,9 +140,8 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
                 sLoginDialogv2.toMainLoginView();
             }
         } else if (v == gama_register_btn_get_vfcode) {
-//            sLoginDialogv2.getLoginPresenter().setOperationCallback(this);
-//            getVfcodeByPhone();
-            getVfcodeByEmail();
+            getVfcodeByPhone();
+//            getVfcodeByEmail();
         } else if (v == gama_register_tv_area) {
 //            sLoginDialogv2.getLoginPresenter().setOperationCallback(this);
             getAndShowArea();
@@ -222,14 +221,26 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
             return;
         }*/
 
+        String areaCode = gama_register_tv_area.getText().toString();
+        if (TextUtils.isEmpty(areaCode)) {
+            ToastUtils.toast(getActivity(), R.string.py_area_code_empty);
+            return;
+        }
+        String phone = gama_register_et_phone.getEditableText().toString().trim();
+        if (!phone.matches(selectedBean.getPattern())) {
+            ToastUtils.toast(getActivity(), R.string.py_phone_error);
+            return;
+        }
+        String interfaceName = GSRequestMethod.RequestVfcodeInterface.register.getString();
+
         String vfcode = gama_register_et_vfcode.getEditableText().toString();
         if (TextUtils.isEmpty(vfcode)) {
             ToastUtils.toast(getActivity(), R.string.py_vfcode_empty);
             return;
         }
 
-//        sLoginDialogv2.getLoginPresenter().register(sLoginDialogv2.getActivity(), account, password, areaCode, phone, vfcode, "");
-        sLoginDialogv2.getLoginPresenter().register(sLoginDialogv2.getActivity(), account, password, "", "", vfcode, "");
+        sLoginDialogv2.getLoginPresenter().register(sLoginDialogv2.getActivity(), account, password, areaCode, phone, vfcode, "");
+//        sLoginDialogv2.getLoginPresenter().register(sLoginDialogv2.getActivity(), account, password, "", "", vfcode, "");
     }
 
     private void getVfcodeByPhone() {

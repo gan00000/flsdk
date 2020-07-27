@@ -137,40 +137,6 @@
             </intent-filter>
         </receiver>
 
-        <!--play-services config start-->
-
-        <!--<activity-->
-            <!--android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"-->
-            <!--android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|fontScale"-->
-            <!--android:excludeFromRecents="true"-->
-            <!--android:exported="false"-->
-            <!--android:theme="@android:style/Theme.Translucent.NoTitleBar" />-->
-        <!--&lt;!&ndash;-->
-        <!--Service handling Google Sign-In user revocation. For apps that do not integrate with-->
-        <!--Google Sign-In, this service will never be started.-->
-        <!--&ndash;&gt;-->
-        <!--<service-->
-            <!--android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"-->
-            <!--android:exported="true"-->
-            <!--android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION" />-->
-
-        <!--<activity-->
-            <!--android:name="com.google.android.gms.common.api.GoogleApiActivity"-->
-            <!--android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|fontScale"-->
-            <!--android:exported="false"-->
-            <!--android:theme="@android:style/Theme.Translucent.NoTitleBar" />-->
-
-        <!--&lt;!&ndash;play game services&ndash;&gt;-->
-        <!--<meta-data android:name="com.google.android.gms.games.APP_ID"-->
-            <!--android:value="@string/google_app_id" />-->
-
-        <!--play-services config end-->
-
-        <!--平台设置-->
-        <!--<activity android:name="com.gama.sdk.plat.PlatMainActivity"-->
-            <!--android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|fontScale"-->
-            <!--android:windowSoftInputMode="stateHidden|adjustResize"-->
-            <!--android:theme="@style/Gama.Theme.AppCompat.Light.NoActionBar.FullScreen.Translucent" />-->
 
         <provider
             android:authorities="${applicationId}.GamaProvider"

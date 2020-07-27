@@ -204,9 +204,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             }
 
         } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_MAC, previousLoginType)) {//免注册没有自動登錄
-//            String account = GamaUtil.getMacAccount(activity);
-//            String password = GamaUtil.getMacPassword(activity);
-//            startAutoLogin(activity, SLoginType.LOGIN_TYPE_GAMESWORD, account, password);
+//            startAutoLogin(activity, SLoginType.LOGIN_TYPE_GAMESWORD, "", "");
             showMainLoginView();
         } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_FB, previousLoginType)) {//自動登錄
             String fbScopeId = FbSp.getFbId(activity);
@@ -1280,7 +1278,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 public void success(Object o, String rawResult) {
                     try {
                         if (TextUtils.isEmpty(rawResult)) {
-                            areaJson = FileUtil.readAssetsTxtFile(getContext(), "gamesword/areaInfo");
+                            areaJson = FileUtil.readAssetsTxtFile(getContext(), "flsdk/areaInfo");
                         } else {
                             JSONArray areaArray = new JSONArray(rawResult);
                             areaJson = areaArray.toString();
@@ -1297,6 +1295,16 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
                 @Override
                 public void timeout(String code) {
+
+                    try {
+
+                        areaJson = FileUtil.readAssetsTxtFile(getContext(), "flsdk/areaInfo");
+                        Gson gson = new Gson();
+                        areaBeanList = gson.fromJson(areaJson, GamaAreaInfoBean[].class);
+                        showAreaDialog();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
 
                 }
 

@@ -3,7 +3,7 @@ apply plugin: 'io.fabric'
 
 android {
 
-    compileSdkVersion 27
+    compileSdkVersion 28
 
     defaultConfig {
         minSdkVersion 18
@@ -56,13 +56,14 @@ android {
         }
 
         debug {
+        debuggable true
         }
     }
     productFlavors {
 
-        qpt {
-            signingConfig signingConfigs.release
-            applicationId "com.e18.qpt"
+        fzdld {
+            signingConfig signingConfigs.debug
+            applicationId "com.flyfun.fzdld.google"
             minSdkVersion 21
             targetSdkVersion 28
             versionCode 1
@@ -70,13 +71,13 @@ android {
             flavorDimensions "1"
             resValue "string", "scheme", "qpt"
             resValue "string", "tapdb_appId", "983w6q4hcv6karvi"
-            resValue "string", "facebook_app_id", "835997193587371"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider835997193587371"
-            resValue "string", "fb_login_protocol_scheme", "fb835997193587371"
-            resValue "string", "facebook_app_name", "emaa18"
+            resValue "string", "facebook_app_id", "566990643996286"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider566990643996286"
+            resValue "string", "fb_login_protocol_scheme", "fb566990643996286"
+            resValue "string", "facebook_app_name", "放置大亂鬥"
 
             //每个游戏的demo设置
-            resValue "string", "sdk_name", "emaa18 Demo"
+            resValue "string", "sdk_name", "放置大亂鬥 Demo"
 
         }
 

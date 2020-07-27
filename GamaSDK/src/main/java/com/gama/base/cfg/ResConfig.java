@@ -331,7 +331,7 @@ public class ResConfig {
     public static String getConfigInAssets(Context context, String key) {
 
         if (SStringUtil.isEmpty(gameConfig)) {
-            gameConfig = FileUtil.readAssetsTxtFile(context, "gama/gama_game_config");
+            gameConfig = FileUtil.readAssetsTxtFile(context, "flsdk/gama_game_config");
             PL.i("gameConfig:" + gameConfig);
         }
         String mVaule = "";
@@ -353,7 +353,7 @@ public class ResConfig {
     public static String getConfigInAssetsProperties(Context context, String key) {
 
         if (properties == null) {
-            properties = FileUtil.readAssetsPropertiestFile(context, "gama/gama_gameconfig.properties");
+            properties = FileUtil.readAssetsPropertiestFile(context, "flsdk/gama_gameconfig.properties");
             PL.i(TAG, "获取游戏assets配置文件: " + (properties != null ? properties.toString() : "失败"));
         }
         if (properties == null) {

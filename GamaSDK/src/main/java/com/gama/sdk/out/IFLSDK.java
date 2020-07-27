@@ -23,7 +23,7 @@ import java.util.Set;
  * Created by gan on 2017/2/13.
  */
 
-public interface IGama extends IGameLifeCycle {
+public interface IFLSDK extends IGameLifeCycle {
 
     @Deprecated
     void initSDK(Activity activity);

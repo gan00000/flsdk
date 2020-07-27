@@ -5,7 +5,7 @@ public class SLoginType {
 	/**
 	 * GS入
 	 */
-	public static final String LOGIN_TYPE_GAMESWORD = "gamesword";
+	public static final String LOGIN_TYPE_GAMESWORD = "flsdk";
 	/**
 	 * facebook登入
 	 */

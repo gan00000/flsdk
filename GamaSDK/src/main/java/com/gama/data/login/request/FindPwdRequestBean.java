@@ -20,6 +20,7 @@ public class FindPwdRequestBean extends AdsRequestBean {
 
 	private String name;//用户账号名
 	private String email;
+	private String interfaces = "4";
 
 	public String getName() {
 		return name;

@@ -254,7 +254,7 @@ public class GamaUtil {
         String m = SPUtil.getSimpleString(context, GAMA_SDK_LOGIN_TERMS_FILE,GAMA_SDK_LOGIN_TERMS);
         if (TextUtils.isEmpty(m)){
             String gameLanguage = ResConfig.getGameLanguage(context);
-            m = FileUtil.readAssetsTxtFile(context,"gama/" + gameLanguage + "/s_sdk_login_terms.txt");
+            m = FileUtil.readAssetsTxtFile(context,"flsdk/" + gameLanguage + "/s_sdk_login_terms.txt");
         }
         if (isXM(context)){
             m = m.replaceAll("新玩意整合行銷有限公司","Gamamobi網絡科技有限公司");

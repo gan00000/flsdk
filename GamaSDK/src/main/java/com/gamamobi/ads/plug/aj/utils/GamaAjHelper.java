@@ -4,7 +4,6 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.core.base.utils.FileUtil;
-import com.core.base.utils.PL;
 import com.core.base.utils.SPUtil;
 
 import org.json.JSONArray;
@@ -20,7 +19,7 @@ public class GamaAjHelper {
         String token = null;
         String adList = GamaAjHelper.getGamaAjList(context);
         if(TextUtils.isEmpty(adList)) {
-            adList = FileUtil.readAssetsTxtFile(context, "gama/adlist");
+            adList = FileUtil.readAssetsTxtFile(context, "flsdk/adlist");
         }
         if (!adList.isEmpty() && adList.contains(event)) {
             try {

@@ -12,6 +12,7 @@ import android.content.Context;
 public class AccountRegRequestBean extends AccountLoginRequestBean {
 
 	private String vfCode;
+	private String interfaces = "1";
 
 	public String getVfCode() {
 		return vfCode;
@@ -19,6 +20,10 @@ public class AccountRegRequestBean extends AccountLoginRequestBean {
 
 	public void setVfCode(String vfCode) {
 		this.vfCode = vfCode;
+	}
+
+	public void setInterfaces(String interfaces) {
+		this.interfaces = interfaces;
 	}
 
 	public AccountRegRequestBean(Context context) {
