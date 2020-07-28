@@ -101,7 +101,7 @@
             app:layout_constraintStart_toStartOf="@id/gama_start_term_guideline6"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.gama.base.widget.SWebView
+        <com.flyfun.base.widget.SWebView
             android:id="@+id/gama_start_term_wv1"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -116,7 +116,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/gama_start_term_title" />
 
-        <com.gama.base.widget.SWebView
+        <com.flyfun.base.widget.SWebView
             android:id="@+id/gama_start_term_wv2"
             android:layout_width="0dp"
             android:layout_height="0dp"

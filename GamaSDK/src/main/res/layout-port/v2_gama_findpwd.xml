@@ -18,7 +18,7 @@
             layout="@layout/gama_ui_head_layout"
             />
 
-        <com.gama.sdk.login.widget.SDKInputEditTextView
+        <com.flyfun.sdk.login.widget.SDKInputEditTextView
             android:layout_width="320dp"
             android:layout_height="40dp"
             android:layout_marginTop="20dp"
@@ -27,7 +27,7 @@
 
 
 
-        <com.gama.sdk.login.widget.SDKPhoneInputEditTextView
+        <com.flyfun.sdk.login.widget.SDKPhoneInputEditTextView
             android:layout_width="320dp"
             android:layout_height="40dp"
             android:layout_marginTop="10dp"
@@ -41,7 +41,7 @@
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
-            <com.gama.sdk.login.widget.SDKInputEditTextView
+            <com.flyfun.sdk.login.widget.SDKInputEditTextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"

@@ -38,7 +38,7 @@
             android:layout_height="wrap_content">
 
 <!--            账号-->
-            <com.gama.sdk.login.widget.SDKInputEditTextView
+            <com.flyfun.sdk.login.widget.SDKInputEditTextView
                 android:layout_width="320dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="20dp"
@@ -47,7 +47,7 @@
                 />
 
             <!--            密码-->
-            <com.gama.sdk.login.widget.SDKInputEditTextView
+            <com.flyfun.sdk.login.widget.SDKInputEditTextView
                 android:layout_width="320dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"

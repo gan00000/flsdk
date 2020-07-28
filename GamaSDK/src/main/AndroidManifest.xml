@@ -38,21 +38,15 @@
     <application>
 
         <activity
-            android:name="com.gama.sdk.SWebViewActivity"
+            android:name="com.flyfun.sdk.SWebViewActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|fontScale"
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:theme="@style/Gama.Theme.AppCompat.Light.NoActionBar.FullScreen"/>
         <activity
-            android:name="com.gama.pay.gp.GooglePayActivity2"
+            android:name="com.flyfun.pay.gp.GooglePayActivity2"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|fontScale"
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:theme="@style/Gama.Theme.AppCompat.Light.NoActionBar.FullScreen.Translucent"/>
-        <activity
-            android:name="com.gamamobi.onestore.pay.OneStoreActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|fontScale"
-            android:windowSoftInputMode="stateHidden|adjustResize"
-            android:theme="@style/Gama.Theme.AppCompat.Light.NoActionBar.FullScreen.Translucent"/>
-
 
 
         <!-- ==========================共同需要的配置============================ -->
@@ -114,7 +108,7 @@
             </intent-filter>
         </receiver>
 
-        <receiver android:name="com.gama.sdk.GamaBroadcastReceiver" android:exported="true">
+        <receiver android:name="com.flyfun.sdk.GamaBroadcastReceiver" android:exported="true">
             <intent-filter>
                 <action android:name="com.android.vending.INSTALL_REFERRER" />
             </intent-filter>
@@ -129,7 +123,7 @@
         </receiver>
 
         <receiver
-            android:name="com.gama.sdk.receiver.GamaReceiver"
+            android:name="com.flyfun.sdk.receiver.SDKReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.gamamobi.PAY_REPLACE_OK" />
@@ -140,7 +134,7 @@
 
         <provider
             android:authorities="${applicationId}.GamaProvider"
-            android:name="com.core.base.fileprovider.GamaFileProvider"
+            android:name="com.core.base.fileprovider.SDKFileProvider"
             android:exported="false"
             android:grantUriPermissions="true">
 
@@ -150,13 +144,13 @@
 
         </provider>
 
-        <!-- 18：9的宽屏 -->
-        <meta-data android:name="android.max_aspect" android:value="2.4" />
+<!--        &lt;!&ndash; 18：9的宽屏 &ndash;&gt;-->
+<!--        <meta-data android:name="android.max_aspect" android:value="2.4" />-->
 
-        <!-- ONE store 支付版本 -->
-        <meta-data
-            android:name="iap:api_version"
-            android:value="5"/>
+<!--        &lt;!&ndash; ONE store 支付版本 &ndash;&gt;-->
+<!--        <meta-data-->
+<!--            android:name="iap:api_version"-->
+<!--            android:value="5"/>-->
 
     </application>
 

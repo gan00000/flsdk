@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.core.base.bean.BaseReqeustBean;
 import com.core.base.request.AbsHttpRequest;
-import com.gama.base.cfg.ResConfig;
+import com.flyfun.base.cfg.ResConfig;
 import com.gamamobi.ads.plug.aj.constant.GamaAjConstant;
 
 public class GamaAjEventListCmd extends AbsHttpRequest {

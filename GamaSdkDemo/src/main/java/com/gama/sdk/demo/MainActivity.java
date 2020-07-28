@@ -21,13 +21,13 @@ import com.gama.data.login.ILoginCallBack;
 import com.gama.data.login.response.SLoginResponse;
 import com.gama.sdk.callback.IPayListener;
 import com.gama.sdk.out.GamaFactory;
-import com.gama.sdk.out.IGama;
+import com.gama.sdk.out.IFLSDK;
 
 public class MainActivity extends Activity {
 
     protected Button loginButton, othersPayButton, googlePayBtn, shareButton, showPlatform, demo_language,
             demo_cs;
-    protected IGama iGama;
+    protected IFLSDK IFLSDK;
     protected String userId;
 
     @Override
@@ -43,13 +43,13 @@ public class MainActivity extends Activity {
         googlePayBtn = findViewById(R.id.demo_pay_google);
         demo_cs = findViewById(R.id.demo_cs);
 
-        iGama = GamaFactory.create();
+        IFLSDK = GamaFactory.create();
 
         //初始化sdk
-        iGama.initSDK(this, SGameLanguage.en_US);
+        IFLSDK.initSDK(this, SGameLanguage.zh_TW);
 
         //在游戏Activity的onCreate生命周期中调用
-        iGama.onCreate(this);
+        IFLSDK.onCreate(this);
 
         demo_language.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +70,7 @@ public class MainActivity extends Activity {
                                         language = SGameLanguage.ko_KR;
                                         break;
                                 }
-                                iGama.setGameLanguage(MainActivity.this, language);
+                                IFLSDK.setGameLanguage(MainActivity.this, language);
                             }
                         })
                         .setTitle("选择语言");
@@ -83,7 +83,7 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
 
                 //登陆接口 ILoginCallBack为登录成功后的回调
-                iGama.login(MainActivity.this, new ILoginCallBack() {
+                IFLSDK.login(MainActivity.this, new ILoginCallBack() {
                     @Override
                     public void onLogin(SLoginResponse sLoginResponse) {
                         if (sLoginResponse != null) {
@@ -140,7 +140,7 @@ public class MainActivity extends Activity {
                             String vipLevel = "5"; //角色vip等级
                             String serverCode = "1000"; //角色伺服器id
                             String serverName = "S1"; //角色伺服器名称
-                            iGama.registerRoleInfo(MainActivity.this, roleId, roleName, roleLevel, vipLevel, serverCode, serverName);
+                            IFLSDK.registerRoleInfo(MainActivity.this, roleId, roleName, roleLevel, vipLevel, serverCode, serverName);
                         } else {
                             PL.i("从登录界面返回");
                             AlertDialog.Builder builder;
@@ -183,7 +183,7 @@ public class MainActivity extends Activity {
                 productId 充值的商品id
                 customize 自定义透传字段（从服务端回调到cp）
                 */
-                iGama.pay(MainActivity.this, SPayType.OTHERS, "" + System.currentTimeMillis(),"", "", new IPayListener() {
+                IFLSDK.pay(MainActivity.this, SPayType.OTHERS, "" + System.currentTimeMillis(),"", "", new IPayListener() {
                     @Override
                     public void onPayFinish(Bundle bundle) {
                         PL.i("OtherPay支付结束");
@@ -201,7 +201,7 @@ public class MainActivity extends Activity {
                 /**
                  * 打开客服页面
                  */
-                iGama.openCs(MainActivity.this);
+                IFLSDK.openCs(MainActivity.this);
             }
         });
 
@@ -211,7 +211,7 @@ public class MainActivity extends Activity {
     protected void onResume() {
         super.onResume();
         PL.i("activity onResume");
-        iGama.onResume(this);
+        IFLSDK.onResume(this);
     }
 
 
@@ -219,14 +219,14 @@ public class MainActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        iGama.onActivityResult(this, requestCode, resultCode, data);
+        IFLSDK.onActivityResult(this, requestCode, resultCode, data);
 
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        iGama.onPause(this);
+        IFLSDK.onPause(this);
         PL.i("activity onPause");
     }
 
@@ -234,27 +234,27 @@ public class MainActivity extends Activity {
     protected void onStop() {
         super.onStop();
         PL.i("activity onStop");
-        iGama.onStop(this);
+        IFLSDK.onStop(this);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         PL.i("activity onDestroy");
-        iGama.onDestroy(this);
+        IFLSDK.onDestroy(this);
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         PL.i("activity onRequestPermissionsResult");
-        iGama.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
+        IFLSDK.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
     }
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        iGama.onWindowFocusChanged(this, hasFocus);
+        IFLSDK.onWindowFocusChanged(this, hasFocus);
     }
 
     private boolean isLogin() {

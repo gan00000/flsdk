@@ -126,7 +126,7 @@
 
         </RadioGroup>
 
-        <com.gama.base.widget.SWebView
+        <com.flyfun.base.widget.SWebView
             android:id="@+id/gama_start_term_wv1"
             android:layout_width="0dp"
             android:layout_height="0dp"

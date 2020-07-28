@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "936574555531-5bov3u4o6jhuabs9gn7j5ppel7sv74nd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.flyfun.fzdld.google",
+            "certificate_hash": "f1738617b7ae0c892ca378439c80aa5b9f4bbd50"
+          }
+        },
+        {
           "client_id": "936574555531-70bqauvvfhic3uo0rimffiajtf4c4nki.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -30,6 +38,13 @@
             {
               "client_id": "936574555531-70bqauvvfhic3uo0rimffiajtf4c4nki.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "936574555531-hsujfidci9a2ve7udd0imvojjeb9sl3a.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.flyfun.fzdld.ios"
+              }
             }
           ]
         }

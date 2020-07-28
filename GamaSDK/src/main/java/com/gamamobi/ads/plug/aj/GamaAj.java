@@ -9,7 +9,7 @@ import com.adjust.sdk.AdjustEvent;
 import com.adjust.sdk.LogLevel;
 import com.core.base.callback.ISReqCallBack;
 import com.core.base.utils.PL;
-import com.gama.base.cfg.ResConfig;
+import com.flyfun.base.cfg.ResConfig;
 import com.gamamobi.ads.plug.aj.cmd.GamaAjEventListCmd;
 import com.gamamobi.ads.plug.aj.utils.GamaAjHelper;
 

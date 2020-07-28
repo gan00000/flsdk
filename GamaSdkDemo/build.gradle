@@ -35,16 +35,16 @@ android {
 
     signingConfigs {//签名的配置
         release {
-            storeFile file('../signkey/emm18.keystore') //正式签名，以后使用
-            storePassword '111222'
-            keyAlias 'emm18'
-            keyPassword '111222'
+            storeFile file('../signkey/flyfun.keystore') //正式签名，以后使用
+            storePassword 'flyfun999'
+            keyAlias 'flyfun'
+            keyPassword 'flyfun999'
         }
         debug {
-            storeFile file('../signkey/emm18.keystore') //正式签名，以后使用
-            storePassword '111222'
-            keyAlias 'emm18'
-            keyPassword '111222'
+            storeFile file('../signkey/flyfun.keystore') //正式签名，以后使用
+            storePassword 'flyfun999'
+            keyAlias 'flyfun'
+            keyPassword 'flyfun999'
         }
     }
 
