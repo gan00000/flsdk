@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
 import com.gama.base.utils.GamaUtil;
 import com.gama.sdk.R;
@@ -202,21 +201,17 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
 
     private void login() {
 
-        if (!accountSdkInputEditTextView.checkAccount()){
-            return;
-        }
-        if (!pwdSdkInputEditTextView.checkPassword()){
-            return;
-        }
-
         account = loginAccountEditText.getEditableText().toString().trim();
         password = loginPasswordEditText.getEditableText().toString().trim();
 
-        if (SStringUtil.isEqual(account, password)) {
-            ToastUtils.toast(getActivity(), R.string.py_password_equal_account);
+        if (!accountSdkInputEditTextView.checkAccount()){
             return;
         }
 
+        if (TextUtils.isEmpty(password)) {
+            ToastUtils.toast(getContext(), R.string.py_password_empty);
+            return;
+        }
 
         sLoginDialogv2.getLoginPresenter().starpyAccountLogin(sLoginDialogv2.getActivity(),account,password, "", savePwdCheckBox.isSelected());
 

@@ -236,6 +236,7 @@ public class SDKInputEditTextView extends RelativeLayout {
         return true;
     }
 
+
     public boolean checkVfCode(){
 
         String vf = this.getInputEditText().getEditableText().toString().trim();
