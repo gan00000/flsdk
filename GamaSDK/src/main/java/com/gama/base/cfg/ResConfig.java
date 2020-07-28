@@ -30,7 +30,7 @@ public class ResConfig {
             return GamaUtil.getSdkCfg(context).getS_GameCode();
         }
 //		return getResStringByName(context, "star_game_code");
-        return getConfigInAssetsProperties(context, "gama_game_code");
+        return getConfigInAssetsProperties(context, "sdk_game_code");
     }
 
     /**
@@ -40,7 +40,7 @@ public class ResConfig {
         if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_AppKey())) {
             return GamaUtil.getSdkCfg(context).getS_AppKey();
         }
-        return getConfigInAssetsProperties(context, "gama_app_key");
+        return getConfigInAssetsProperties(context, "sdk_app_key");
     }
 
     public static String getApplicationId(Context context) {

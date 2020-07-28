@@ -62,37 +62,37 @@ public class SdkAdsConstant {
     /**
      * 角色名
      */
-    public static final String GAMA_EVENT_ROLENAME = "gama_role_name";
+    public static final String GAMA_EVENT_ROLENAME = "role_name";
     /**
      * 角色ID
      */
-    public static final String GAMA_EVENT_ROLEID = "gama_role_id";
+    public static final String GAMA_EVENT_ROLEID = "role_id";
     /**
      * 角色等级
      */
-    public static final String GAMA_EVENT_ROLE_LEVEL = "gama_level";
+    public static final String GAMA_EVENT_ROLE_LEVEL = "level";
     /**
      * 角色VIP等级
      */
-    public static final String GAMA_EVENT_ROLE_VIP_LEVEL = "gama_vip_level";
+    public static final String GAMA_EVENT_ROLE_VIP_LEVEL = "vip_level";
     /**
      * 服务端CODE
      */
-    public static final String GAMA_EVENT_SERVERCODE = "gama_server_code";
+    public static final String GAMA_EVENT_SERVERCODE = "server_code";
     /**
      * 服务器名
      */
-    public static final String GAMA_EVENT_SERVERNAME = "gama_server_name";
+    public static final String GAMA_EVENT_SERVERNAME = "server_name";
     /**
      * UserId
      */
     public static final String GAMA_EVENT_USER_ID = "userId";
-    public static final String GAMA_EVENT_PRODUCT_ID = "gama_productId";
-    public static final String GAMA_EVENT_PAY_TYPE = "gama_pay_type";
-    public static final String GAMA_EVENT_PAY_VALUE = "gama_pay_value";
-    public static final String GAMA_EVENT_ORDERID = "gama_orderId";
-    public static final String GAMA_EVENT_PURCHASE_TIME = "gama_purchase_time";
-    public static final String GAMA_EVENT_CURRENCY = "gama_event_currency";
+    public static final String GAMA_EVENT_PRODUCT_ID = "sdk_productId";
+    public static final String GAMA_EVENT_PAY_TYPE = "sdk_pay_type";
+    public static final String GAMA_EVENT_PAY_VALUE = "sdk_pay_value";
+    public static final String GAMA_EVENT_ORDERID = "sdk_orderId";
+    public static final String GAMA_EVENT_PURCHASE_TIME = "sdk_purchase_time";
+    public static final String GAMA_EVENT_CURRENCY = "sdk_event_currency";
 
     public enum EventReportChannel {
         EventReportAllChannel,

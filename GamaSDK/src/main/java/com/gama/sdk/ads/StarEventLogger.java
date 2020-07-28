@@ -47,7 +47,7 @@ public class StarEventLogger {
         try {
             AppsFlyerLib.getInstance().setCollectIMEI(false);
             AppsFlyerLib.getInstance().setCollectAndroidID(false);
-            String afDevKey = ResConfig.getConfigInAssetsProperties(activity,"gama_ads_appflyer_dev_key");
+            String afDevKey = ResConfig.getConfigInAssetsProperties(activity,"sdk_ads_appflyer_dev_key");
             if(TextUtils.isEmpty(afDevKey)) {
                 PL.e("af dev key empty!");
             } else {

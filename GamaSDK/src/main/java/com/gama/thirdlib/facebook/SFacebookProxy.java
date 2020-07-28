@@ -55,7 +55,7 @@ public class SFacebookProxy {
 
 	private static DefaultAudience defaultAudience = DefaultAudience.FRIENDS;
 	private static LoginBehavior loginBehavior = LoginBehavior.NATIVE_WITH_FALLBACK;
-	private static List<String> permissions = Arrays.asList("public_profile", "user_friends");
+	private static List<String> permissions = Arrays.asList("public_profile");
 //	private static List<String> permissions = Arrays.asList("public_profile", "email", "user_friends");
 //	private static List<String> permissions = Collections.singletonList("public_profile");
 	private static final int REQUEST_TOMESSENGER = 16;

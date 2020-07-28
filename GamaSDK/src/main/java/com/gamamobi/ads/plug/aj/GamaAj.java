@@ -25,8 +25,8 @@ public class GamaAj {
 
     public static void activeAj(final Context context) {
         //adjust激活
-        String appToken = ResConfig.getConfigInAssetsProperties(context,"gama_ads_adjust_dev_key");
-        String appSecret = ResConfig.getConfigInAssetsProperties(context,"gama_ads_adjust_secret");
+        String appToken = ResConfig.getConfigInAssetsProperties(context,"sdk_ads_adjust_dev_key");
+        String appSecret = ResConfig.getConfigInAssetsProperties(context,"sdk_ads_adjust_secret");
         if(TextUtils.isEmpty(appToken)) {
             PL.e(TAG, "aj dev key empty!");
             isAdjustEnable = false;
