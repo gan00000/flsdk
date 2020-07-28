@@ -11,7 +11,7 @@ import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
 import com.core.base.utils.SPUtil;
-import com.gama.base.utils.GamaUtil;
+import com.flyfun.base.utils.GamaUtil;
 
 /**
  * 用于处理Android 6.0以上授权的工具类

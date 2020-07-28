@@ -191,4 +191,26 @@ public class SLoginResponse extends BaseResponseModel {
     public void setBeLinked(String beLinked) {
         this.beLinked = beLinked;
     }
+
+
+    @Override
+    public String toString() {
+        return "SLoginResponse{" +
+                "userId='" + userId + '\'' +
+                ", accessToken='" + accessToken + '\'' +
+                ", timestamp='" + timestamp + '\'' +
+                ", freeRegisterName='" + freeRegisterName + '\'' +
+                ", freeRegisterPwd='" + freeRegisterPwd + '\'' +
+                ", gameCode='" + gameCode + '\'' +
+                ", loginType='" + loginType + '\'' +
+                ", gender='" + gender + '\'' +
+                ", iconUri=" + iconUri +
+                ", birthday='" + birthday + '\'' +
+                ", thirdId='" + thirdId + '\'' +
+                ", thirdToken='" + thirdToken + '\'' +
+                ", nickName='" + nickName + '\'' +
+                ", gmbPlayerIp='" + gmbPlayerIp + '\'' +
+                ", beLinked='" + beLinked + '\'' +
+                '}';
+    }
 }

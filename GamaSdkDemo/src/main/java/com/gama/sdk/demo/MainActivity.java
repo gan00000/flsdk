@@ -8,26 +8,25 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import com.core.base.utils.PL;
-import com.gama.base.bean.SGameLanguage;
-import com.gama.base.bean.SPayType;
-import com.gama.base.utils.GamaUtil;
-import com.gama.base.utils.SLog;
-import com.gama.data.login.ILoginCallBack;
-import com.gama.data.login.response.SLoginResponse;
-import com.gama.sdk.callback.IPayListener;
-import com.gama.sdk.out.GamaFactory;
-import com.gama.sdk.out.IFLSDK;
+import com.flyfun.base.bean.SGameLanguage;
+import com.flyfun.base.bean.SPayType;
+import com.flyfun.base.utils.GamaUtil;
+import com.flyfun.base.utils.SLog;
+import com.flyfun.data.login.ILoginCallBack;
+import com.flyfun.data.login.response.SLoginResponse;
+import com.flyfun.sdk.callback.IPayListener;
+import com.flyfun.sdk.out.GamaFactory;
+import com.flyfun.sdk.out.IFLSDK;
 
 public class MainActivity extends Activity {
 
     protected Button loginButton, othersPayButton, googlePayBtn, shareButton, showPlatform, demo_language,
             demo_cs;
-    protected IFLSDK IFLSDK;
+    protected IFLSDK mIFLSDK;
     protected String userId;
 
     @Override
@@ -43,47 +42,49 @@ public class MainActivity extends Activity {
         googlePayBtn = findViewById(R.id.demo_pay_google);
         demo_cs = findViewById(R.id.demo_cs);
 
-        IFLSDK = GamaFactory.create();
+        mIFLSDK = GamaFactory.create();
 
         //初始化sdk
-        IFLSDK.initSDK(this, SGameLanguage.zh_TW);
+        mIFLSDK.initSDK(this, SGameLanguage.zh_TW);
 
         //在游戏Activity的onCreate生命周期中调用
-        IFLSDK.onCreate(this);
+        mIFLSDK.onCreate(this);
 
-        demo_language.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this)
-                        .setItems(new String[]{"繁中", "日语", "韩语"}, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                SGameLanguage language = null;
-                                switch (which) {
-                                    case 0:
-                                        language = SGameLanguage.zh_TW;
-                                        break;
-                                    case 1:
-                                        language = SGameLanguage.ja_JP;
-                                        break;
-                                    case 2:
-                                        language = SGameLanguage.ko_KR;
-                                        break;
-                                }
-                                IFLSDK.setGameLanguage(MainActivity.this, language);
-                            }
-                        })
-                        .setTitle("选择语言");
-                builder.create().show();
-            }
-        });
+        mIFLSDK.setGameLanguage(MainActivity.this, SGameLanguage.zh_TW);
+
+//        demo_language.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this)
+//                        .setItems(new String[]{"繁中", "日语", "韩语"}, new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                SGameLanguage language = null;
+//                                switch (which) {
+//                                    case 0:
+//                                        language = SGameLanguage.zh_TW;
+//                                        break;
+//                                    case 1:
+//                                        language = SGameLanguage.ja_JP;
+//                                        break;
+//                                    case 2:
+//                                        language = SGameLanguage.ko_KR;
+//                                        break;
+//                                }
+//                                IFLSDK.setGameLanguage(MainActivity.this, language);
+//                            }
+//                        })
+//                        .setTitle("选择语言");
+//                builder.create().show();
+//            }
+//        });
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 //登陆接口 ILoginCallBack为登录成功后的回调
-                IFLSDK.login(MainActivity.this, new ILoginCallBack() {
+                mIFLSDK.login(MainActivity.this, new ILoginCallBack() {
                     @Override
                     public void onLogin(SLoginResponse sLoginResponse) {
                         if (sLoginResponse != null) {
@@ -91,28 +92,8 @@ public class MainActivity extends Activity {
                             userId = uid;
                             String accessToken = sLoginResponse.getAccessToken();
                             String timestamp = sLoginResponse.getTimestamp();
-                            Log.i("gamaLogin", "uid:" + uid);
-                            Log.i("gamaLogin", "sLoginResponse: " + sLoginResponse.getNickName());
-                            Log.i("gamaLogin", "sLoginResponse: " + sLoginResponse.getBirthday());
-                            Log.i("gamaLogin", "sLoginResponse: " + sLoginResponse.getAccessToken());
-                            Log.i("gamaLogin", "sLoginResponse: " + sLoginResponse.getGender());
-                            Log.i("gamaLogin", "sLoginResponse: " + sLoginResponse.getThirdId());
-                            Log.i("gamaLogin", "sLoginResponse: " + sLoginResponse.getLoginType());
-                            Log.i("gamaLogin", "sLoginResponse: " + sLoginResponse.getTimestamp());
-                            Log.i("gamaLogin", "sLoginResponse: " + sLoginResponse.getIconUri());
-                            Log.i("gamaLogin", "sLoginResponse: " + sLoginResponse.getThirdToken());
-                            Log.i("gamaLogin", "sLoginResponse: " + sLoginResponse.getGmbPlayerIp());
-                            Log.i("gamaLogin", "sLoginResponse: " + sLoginResponse.isLinked());
+                            //todo 进行验证
 
-                            String msg = "gamaUid : " + uid + "\n"
-                                    + "thirdId : " + sLoginResponse.getThirdId() + "\n"
-                                    + "loginType : " + sLoginResponse.getLoginType() + "\n"
-                                    + "accessToken : " + sLoginResponse.getAccessToken() + "\n"
-                                    + "iconUri : " + sLoginResponse.getIconUri() + "\n"
-                                    + "ip : " + sLoginResponse.getGmbPlayerIp() + "\n"
-                                    + "code : " + sLoginResponse.getCode() + "\n"
-                                    + "timeStamp : " + sLoginResponse.getTimestamp() + "\n"
-                                    + "isLinked : " + sLoginResponse.isLinked() + "\n";
                             AlertDialog.Builder builder;
                             if (Build.VERSION.SDK_INT >= 21) {
                                 builder = new AlertDialog.Builder(MainActivity.this, android.R.style.Theme_Material_Dialog);
@@ -127,7 +108,7 @@ public class MainActivity extends Activity {
                                     dialog.dismiss();
                                 }
                             }).setCancelable(false)
-                                    .setMessage(msg)
+                                    .setMessage(sLoginResponse.toString())
                                     .create();
                             dialog.show();
 
@@ -140,7 +121,7 @@ public class MainActivity extends Activity {
                             String vipLevel = "5"; //角色vip等级
                             String serverCode = "1000"; //角色伺服器id
                             String serverName = "S1"; //角色伺服器名称
-                            IFLSDK.registerRoleInfo(MainActivity.this, roleId, roleName, roleLevel, vipLevel, serverCode, serverName);
+                            mIFLSDK.registerRoleInfo(MainActivity.this, roleId, roleName, roleLevel, vipLevel, serverCode, serverName);
                         } else {
                             PL.i("从登录界面返回");
                             AlertDialog.Builder builder;
@@ -172,6 +153,28 @@ public class MainActivity extends Activity {
             }
         });
 
+        googlePayBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+               /*
+                充值接口
+                SPayType SPayType.OTHERS为第三方储值，SPayType.GOOGLE为Google储值
+                cpOrderId cp订单号，请保持每次的值都是不会重复的
+                productId 充值的商品id
+                customize 自定义透传字段（从服务端回调到cp）
+                */
+                mIFLSDK.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(),"com.sku1", "xxx", new IPayListener() {
+                    @Override
+                    public void onPayFinish(Bundle bundle) {
+                        PL.i("支付结束");
+                    }
+                });
+
+
+            }
+        });
+
         othersPayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -183,7 +186,7 @@ public class MainActivity extends Activity {
                 productId 充值的商品id
                 customize 自定义透传字段（从服务端回调到cp）
                 */
-                IFLSDK.pay(MainActivity.this, SPayType.OTHERS, "" + System.currentTimeMillis(),"", "", new IPayListener() {
+                mIFLSDK.pay(MainActivity.this, SPayType.OTHERS, "" + System.currentTimeMillis(),"", "", new IPayListener() {
                     @Override
                     public void onPayFinish(Bundle bundle) {
                         PL.i("OtherPay支付结束");
@@ -201,7 +204,7 @@ public class MainActivity extends Activity {
                 /**
                  * 打开客服页面
                  */
-                IFLSDK.openCs(MainActivity.this);
+                mIFLSDK.openCs(MainActivity.this);
             }
         });
 
@@ -211,7 +214,7 @@ public class MainActivity extends Activity {
     protected void onResume() {
         super.onResume();
         PL.i("activity onResume");
-        IFLSDK.onResume(this);
+        mIFLSDK.onResume(this);
     }
 
 
@@ -219,14 +222,14 @@ public class MainActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        IFLSDK.onActivityResult(this, requestCode, resultCode, data);
+        mIFLSDK.onActivityResult(this, requestCode, resultCode, data);
 
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        IFLSDK.onPause(this);
+        mIFLSDK.onPause(this);
         PL.i("activity onPause");
     }
 
@@ -234,27 +237,27 @@ public class MainActivity extends Activity {
     protected void onStop() {
         super.onStop();
         PL.i("activity onStop");
-        IFLSDK.onStop(this);
+        mIFLSDK.onStop(this);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         PL.i("activity onDestroy");
-        IFLSDK.onDestroy(this);
+        mIFLSDK.onDestroy(this);
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         PL.i("activity onRequestPermissionsResult");
-        IFLSDK.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
+        mIFLSDK.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
     }
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        IFLSDK.onWindowFocusChanged(this, hasFocus);
+        mIFLSDK.onWindowFocusChanged(this, hasFocus);
     }
 
     private boolean isLogin() {

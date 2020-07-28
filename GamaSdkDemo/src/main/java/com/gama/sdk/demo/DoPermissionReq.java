@@ -13,7 +13,7 @@ import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
 import com.core.base.utils.SPUtil;
-import com.gama.base.utils.GamaUtil;
+import com.flyfun.base.utils.GamaUtil;
 
 public class DoPermissionReq extends Activity implements ActivityCompat.OnRequestPermissionsResultCallback {
     public static final String TAG = "Unity";
