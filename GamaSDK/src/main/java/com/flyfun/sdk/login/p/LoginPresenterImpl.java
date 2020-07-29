@@ -24,6 +24,8 @@ import com.facebook.internal.ImageRequest;
 import com.flyfun.base.bean.GamaAreaInfoBean;
 import com.flyfun.base.bean.SLoginType;
 import com.flyfun.base.cfg.ResConfig;
+import com.flyfun.base.excute.GamaAreaInfoRequestTask;
+import com.flyfun.base.utils.GamaUtil;
 import com.flyfun.data.login.constant.GSLoginCommonConstant;
 import com.flyfun.data.login.constant.GSRequestMethod;
 import com.flyfun.data.login.execute.AccountLoginRequestTask;
@@ -38,25 +40,22 @@ import com.flyfun.data.login.execute2.ThirdAccountBindRequestTaskV2;
 import com.flyfun.data.login.request.ThirdLoginRegRequestBean;
 import com.flyfun.data.login.response.SLoginResponse;
 import com.flyfun.sdk.SBaseRelativeLayout;
+import com.flyfun.sdk.ads.StarEventLogger;
 import com.flyfun.sdk.login.LoginContract;
 import com.flyfun.sdk.login.model.AccountModel;
 import com.flyfun.sdk.utils.DialogUtil;
 import com.flyfun.thirdlib.facebook.FaceBookUser;
 import com.flyfun.thirdlib.facebook.FbResUtil;
 import com.flyfun.thirdlib.facebook.FbSp;
+import com.flyfun.thirdlib.facebook.SFacebookProxy;
 import com.flyfun.thirdlib.google.SGoogleSignIn;
 import com.flyfun.thirdlib.twitter.GamaTwitterLogin;
-import com.flyfun.base.excute.GamaAreaInfoRequestTask;
-import com.flyfun.base.utils.GamaUtil;
 import com.gama.sdk.R;
-import com.flyfun.sdk.ads.StarEventLogger;
-import com.flyfun.thirdlib.facebook.SFacebookProxy;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -413,8 +412,8 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         String password = "";//GamaUtil.getPassword(mActivity);
         AccountModel accountModel = GamaUtil.getLastLoginAccount(mActivity);
         if (accountModel == null) {
-            account = GamaUtil.getMacAccount(mActivity);
-            password = GamaUtil.getMacPassword(mActivity);
+//            account = GamaUtil.getMacAccount(mActivity);
+//            password = GamaUtil.getMacPassword(mActivity);
         }else {
             account = accountModel.getAccount();
             password = accountModel.getPassword();
@@ -471,19 +470,8 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     if (sLoginResponse.isRequestSuccess()) {
 
                         ToastUtils.toast(getActivity(), sLoginResponse.getMessage());
-                        List<AccountModel> accountModels = GamaUtil.getAccountModels(activity);
-                        if (accountModels != null && !accountModels.isEmpty()) {
-                            for (AccountModel model : accountModels) {
 
-                                if (account.equals(model.getAccount())){
-                                    model.setPassword(newPwd);
-//                                    GamaUtil.savePassword(getContext(), newPwd);
-                                    break;
-                                }
-                            }
-
-                            GamaUtil.saveAccountModels(activity,accountModels);
-                        }
+                        GamaUtil.saveAccountModel(activity,account,newPwd,false);
 
                         iLoginView.changePwdSuccess(sLoginResponse);
 
@@ -755,7 +743,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         cmd.excute(SLoginResponse.class);
     }
 
-    private void registerAccout(Activity activity, final String account, final String password, String areaCode, String phone, String vfcode, String email){
+    private void registerAccout(final Activity activity, final String account, final String password, String areaCode, String phone, String vfcode, String email){
         AccountRegisterRequestTask accountRegisterCmd = new AccountRegisterRequestTask(getActivity(), account, password, areaCode, phone, vfcode, email);
         accountRegisterCmd.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(), "Loading..."));
         accountRegisterCmd.setReqCallBack(new ISReqCallBack<SLoginResponse>() {
@@ -765,18 +753,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     if (sLoginResponse.isRequestSuccess()) {
                         ToastUtils.toast(getActivity(), R.string.py_register_success);
 
-//                        GamaUtil.saveAccount(getContext(),account);
-//                        GamaUtil.savePassword(getContext(),password);
-
-                        List<AccountModel> accountModels = GamaUtil.getAccountModels(getContext());
-                        AccountModel accountModel = new AccountModel();
-                        accountModel.setAccount(account);
-                        accountModel.setPassword(password);
-                        accountModel.setTime(System.currentTimeMillis());
-
-                        accountModels.add(accountModel);
-
-                        GamaUtil.saveAccountModels(getContext(), accountModels);
+                        GamaUtil.saveAccountModel(activity,account,password,true);
                         handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GAMESWORD);
 
                     }else{
@@ -1368,13 +1345,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 //                        GamaUtil.saveAccount(getContext(),account);
                         if(isSaveAccount) {
 
-                            List<AccountModel> accountModels = GamaUtil.getAccountModels(getContext());
-                            AccountModel accountModel = new AccountModel();
-                            accountModel.setAccount(account);
-                            accountModel.setPassword(password);
-                            accountModel.setTime(System.currentTimeMillis());
-                            accountModels.add(accountModel);
-                            GamaUtil.saveAccountModels(getContext(), accountModels);
+                            GamaUtil.saveAccountModel(activity,account,password,true);
                         }
                         handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GAMESWORD);
                     }else{

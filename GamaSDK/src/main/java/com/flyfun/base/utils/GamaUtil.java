@@ -83,14 +83,35 @@ public class GamaUtil {
         return null;
     }
 
+    public static void saveAccountModel(Context context, String account, String password, boolean updateTime){
+        List<AccountModel> mls = getAccountModels(context);
+        for (AccountModel a: mls) {
+            if (a.getAccount().equals(account)){
+                a.setPassword(password);
+                if (updateTime){
+                    a.setTime(System.currentTimeMillis());
+                }
+                saveAccountModels(context,mls);
+                break;
+            }
+        }
+        AccountModel newAccountModel = new AccountModel();//新添加一个保存
+        newAccountModel.setAccount(account);
+        newAccountModel.setPassword(password);
+        newAccountModel.setTime(System.currentTimeMillis());
+        mls.add(newAccountModel);
+        saveAccountModels(context,mls);
+
+    }
+
     /**
-     * 保存登入的账号
+     * 保存登入的账号,覆盖所有
      * @param context
      * @param accountModels
      */
     public static void saveAccountModels(Context context, List<AccountModel> accountModels){
 
-        if (accountModels == null || accountModels.isEmpty()){
+        if (accountModels == null){
             return;
         }
         try {
