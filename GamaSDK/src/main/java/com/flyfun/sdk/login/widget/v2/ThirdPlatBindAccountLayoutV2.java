@@ -113,6 +113,8 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
         gama_bind_btn_get_vfcode.setOnClickListener(this);
         gama_bind_tv_area.setOnClickListener(this);
 
+        mSdkPhoneInputEditTextView.getAraeCodeMoreListView().setOnClickListener(this);
+
         setDefaultAreaInfo();
 
         return contentView;
@@ -145,7 +147,7 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
             getVfcode();
 
 //            getVfcodeByEmail();
-        }else if (v == gama_bind_tv_area) {
+        }else if (v == gama_bind_tv_area || v == mSdkPhoneInputEditTextView.getAraeCodeMoreListView()) {
             getAndShowArea();
         }
 

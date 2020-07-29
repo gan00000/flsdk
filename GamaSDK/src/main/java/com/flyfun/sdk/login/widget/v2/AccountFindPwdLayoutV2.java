@@ -90,6 +90,7 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
         findPwdConfireBtn.setOnClickListener(this);
         gama_find_tv_area.setOnClickListener(this);
         gama_find_btn_get_vfcode.setOnClickListener(this);
+        mSdkPhoneInputEditTextView.getAraeCodeMoreListView().setOnClickListener(this);
 
         setDefaultAreaInfo();
         return contentView;
@@ -125,7 +126,7 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
             sLoginDialogv2.toAccountLoginView();
         } else if (v == gama_find_tv_area) {
             getAndShowArea();
-        }else if (v == gama_find_btn_get_vfcode) {
+        }else if (v == gama_find_btn_get_vfcode || v == mSdkPhoneInputEditTextView.getAraeCodeMoreListView()) {
             getVfcodeByPhone();
         }
 

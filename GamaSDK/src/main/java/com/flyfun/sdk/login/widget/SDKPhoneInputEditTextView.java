@@ -25,6 +25,11 @@ public class SDKPhoneInputEditTextView extends RelativeLayout {
     private ImageView iconImage;
     private TextView labTextView, phoneAreaTextView;
     private EditText inputEditText;
+    private View araeCodeMoreListView;
+
+    public View getAraeCodeMoreListView() {
+        return araeCodeMoreListView;
+    }
 
     //选中的区域信息
     private GamaAreaInfoBean selectedBean;
@@ -81,6 +86,7 @@ public class SDKPhoneInputEditTextView extends RelativeLayout {
             inputEditText = contentView.findViewById(R.id.sdk_input_item_et);
             phoneAreaTextView = contentView.findViewById(R.id.sdk_input_item_phone_area);
 
+            araeCodeMoreListView = contentView.findViewById(R.id.sdk_input_item_phone_list_icon);
         }
 
     }

@@ -113,6 +113,7 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
         gama_register_btn_get_vfcode.setOnClickListener(this);
         gama_register_tv_area.setOnClickListener(this);
 
+        sdkPhoneInputEditTextView.getAraeCodeMoreListView().setOnClickListener(this);
 
         setDefaultAreaInfo();
 
@@ -142,7 +143,7 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
         } else if (v == gama_register_btn_get_vfcode) {
             getVfcodeByPhone();
 //            getVfcodeByEmail();
-        } else if (v == gama_register_tv_area) {
+        } else if (v == gama_register_tv_area || v == sdkPhoneInputEditTextView.getAraeCodeMoreListView()) {
 //            sLoginDialogv2.getLoginPresenter().setOperationCallback(this);
             getAndShowArea();
         }
