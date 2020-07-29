@@ -237,10 +237,10 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
     @Override
     public void statusCallback(int operation) {
         if(TIME_LIMIT == operation) {
-            gama_bind_btn_get_vfcode.setBackgroundResource(R.drawable.gama_ui_bg_btn_unclickable);
+//            gama_bind_btn_get_vfcode.setBackgroundResource(R.drawable.gama_ui_bg_btn_unclickable);
             gama_bind_btn_get_vfcode.setClickable(false);
         } else if(TIME_OUT == operation) {
-            gama_bind_btn_get_vfcode.setBackgroundResource(R.drawable.bg_192d3f_46);
+//            gama_bind_btn_get_vfcode.setBackgroundResource(R.drawable.bg_192d3f_46);
             gama_bind_btn_get_vfcode.setClickable(true);
             gama_bind_btn_get_vfcode.setText(R.string.py_register_account_get_vfcode);
         }
@@ -268,7 +268,7 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
         sLoginDialogv2.getLoginPresenter().setOperationCallback(this);
         remainTimeSeconds = sLoginDialogv2.getLoginPresenter().getRemainTimeSeconds();
         if(remainTimeSeconds > 0) {
-            gama_bind_btn_get_vfcode.setBackgroundResource(R.drawable.gama_ui_bg_btn_unclickable);
+//            gama_bind_btn_get_vfcode.setBackgroundResource(R.drawable.gama_ui_bg_btn_unclickable);
             gama_bind_btn_get_vfcode.setClickable(false);
             gama_bind_btn_get_vfcode.setText(remainTimeSeconds + "s");
         }
