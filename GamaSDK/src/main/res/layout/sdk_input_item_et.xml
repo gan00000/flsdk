@@ -62,13 +62,13 @@
         android:layout_width="36dp"
         android:layout_height="match_parent"
         android:id="@+id/sdk_input_item_account_history"
+        android:visibility="gone"
         android:gravity="center">
 
         <ImageView
 
             android:layout_width="16dp"
             android:layout_height="16dp"
-            android:visibility="gone"
             android:layout_marginStart="@dimen/px_4"
             android:gravity="center_vertical"
             android:scaleType="fitCenter"
