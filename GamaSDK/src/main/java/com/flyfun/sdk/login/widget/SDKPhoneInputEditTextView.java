@@ -3,7 +3,6 @@ package com.flyfun.sdk.login.widget;
 import android.content.Context;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
-import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.core.base.utils.ToastUtils;
 import com.flyfun.base.bean.GamaAreaInfoBean;
 import com.gama.sdk.R;
 
@@ -88,7 +86,7 @@ public class SDKPhoneInputEditTextView extends RelativeLayout {
     }
 
     public String getPhoneAreaCode(){
-        return phoneAreaTextView.getEditableText().toString().trim();
+        return phoneAreaTextView.getText().toString().trim();
     }
 
     public String getPhoneNumber(){
@@ -96,7 +94,7 @@ public class SDKPhoneInputEditTextView extends RelativeLayout {
     }
 
 
-    public boolean checkPhoneOk(){
+   /* public boolean checkPhoneOk(){
         String areaCode = phoneAreaTextView.getText().toString();
         if(TextUtils.isEmpty(areaCode)) {
             ToastUtils.toast(getContext(), R.string.py_area_code_empty);
@@ -112,6 +110,6 @@ public class SDKPhoneInputEditTextView extends RelativeLayout {
         }
 
         return true;
-    }
+    }*/
 
 }

@@ -187,13 +187,6 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
             return;
         }
 
-//        String email = registerMailEditText.getEditableText().toString().trim();
-
-//        if (!termsSelectImageView.isSelected()) {
-//            ToastUtils.toast(getActivity(), R.string.py_select_terms);
-//            return;
-//        }
-
         if (SStringUtil.isEqual(account, password)) {
             ToastUtils.toast(getActivity(), R.string.py_password_equal_account);
             return;
@@ -208,18 +201,10 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
             return;
         }
 
-
-
-       /* String email = emailEditText.getEditableText().toString().trim();
-        if (TextUtils.isEmpty(email)) {
-            ToastUtils.toast(getActivity(), R.string.py_email_empty);
+        if (!password.equals(pwdAgainSdkInputEditTextView.getInputEditText().getEditableText().toString())){
+            ToastUtils.toast(getActivity(), "兩次密碼不一致", Toast.LENGTH_LONG);
             return;
         }
-
-        if (!Validator.isEmail(email)) {
-            ToastUtils.toast(getActivity(), R.string.py_email_format_error);
-            return;
-        }*/
 
         String areaCode = gama_register_tv_area.getText().toString();
         if (TextUtils.isEmpty(areaCode)) {

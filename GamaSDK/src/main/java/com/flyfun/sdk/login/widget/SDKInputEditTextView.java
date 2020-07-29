@@ -220,7 +220,7 @@ public class SDKInputEditTextView extends RelativeLayout {
         return  true;
     }
 
-    public boolean checkPassword(){
+   /* public boolean checkPassword(){
         String password = this.getInputEditText().getEditableText().toString().trim();
         if (TextUtils.isEmpty(password)) {
             ToastUtils.toast(getContext(), R.string.py_password_empty);
@@ -234,10 +234,10 @@ public class SDKInputEditTextView extends RelativeLayout {
             return false;
         }
         return true;
-    }
+    }*/
 
 
-    public boolean checkVfCode(){
+    /*public boolean checkVfCode(){
 
         String vf = this.getInputEditText().getEditableText().toString().trim();
         if (TextUtils.isEmpty(vf)) {
@@ -245,5 +245,5 @@ public class SDKInputEditTextView extends RelativeLayout {
             return false;
         }
         return  true;
-    }
+    }*/
 }

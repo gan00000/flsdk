@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
@@ -33,11 +34,12 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
      */
     private EditText registerPasswordEditText;
     private EditText registerAccountEditText;
+    private EditText gama_register_et_phone,gama_register_et_vfcode;
 
     /**
      * 区号, 手机接收限制提示
      */
-    private TextView gama_bind_tv_limit_hint;
+    private TextView gama_bind_tv_limit_hint, gama_bind_tv_area;
 
     private String account;
     private String password;
@@ -88,12 +90,17 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
         pwdAgainSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Password);
         vfSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Vf_Code);
 
+        gama_register_et_vfcode = vfSdkInputEditTextView.getInputEditText();
+
         registerAccountEditText = accountSdkInputEditTextView.getInputEditText();
         registerPasswordEditText = pwdSdkInputEditTextView.getInputEditText();
 
         gama_bind_btn_get_vfcode = contentView.findViewById(R.id.gama_bind_btn_get_vfcode);
         bindConfirm = contentView.findViewById(R.id.gama_bind_btn_confirm);
 
+        mSdkPhoneInputEditTextView = contentView.findViewById(R.id.sdkinputview_phone);
+        gama_bind_tv_area = mSdkPhoneInputEditTextView.getPhoneAreaTextView();
+        gama_register_et_phone = mSdkPhoneInputEditTextView.getInputEditText();
 
         gama_bind_tv_limit_hint = contentView.findViewById(R.id.gama_bind_tv_limit_hint);
         String phoneMsgLimitHint = GamaUtil.getPhoneMsgLimitHint(getContext());
@@ -104,6 +111,7 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
         backView.setOnClickListener(this);
         bindConfirm.setOnClickListener(this);
         gama_bind_btn_get_vfcode.setOnClickListener(this);
+        gama_bind_tv_area.setOnClickListener(this);
 
         setDefaultAreaInfo();
 
@@ -134,62 +142,70 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
 
         } else if(v == gama_bind_btn_get_vfcode) {
 //            sLoginDialogv2.getLoginPresenter().setOperationCallback(this);
-//            getVfcode();
+            getVfcode();
 
 //            getVfcodeByEmail();
+        }else if (v == gama_bind_tv_area) {
+            getAndShowArea();
         }
 
     }
 
     private void accountBind() {
 
-        if (!accountSdkInputEditTextView.checkAccount()){
-            return;
-        }
-        if (!pwdSdkInputEditTextView.checkPassword()){
+        account = registerAccountEditText.getEditableText().toString().trim();
+        if (TextUtils.isEmpty(account)) {
+            ToastUtils.toast(getActivity(), R.string.py_account_empty);
             return;
         }
 
-        account = registerAccountEditText.getEditableText().toString().trim();
         password = registerPasswordEditText.getEditableText().toString().trim();
-        String vfcode = vfSdkInputEditTextView.getInputEditText().getEditableText().toString().trim();
+        if (TextUtils.isEmpty(password)) {
+            ToastUtils.toast(getActivity(), R.string.py_password_empty);
+            return;
+        }
+
 
         if (SStringUtil.isEqual(account, password)) {
             ToastUtils.toast(getActivity(), R.string.py_password_equal_account);
             return;
         }
 
-        if (!password.equals(pwdAgainSdkInputEditTextView.getInputEditText().getEditableText().toString().trim())){
-            ToastUtils.toast(getActivity(), R.string.py_password_not_equals);
+        if (!GamaUtil.checkAccount(account)) {
+            ToastUtils.toast(getActivity(), errorStrAccount, Toast.LENGTH_LONG);
+            return;
+        }
+        if (!GamaUtil.checkPassword(password)) {
+            ToastUtils.toast(getActivity(), errorStrPassword, Toast.LENGTH_LONG);
             return;
         }
 
-        if (!mSdkPhoneInputEditTextView.checkPhoneOk()){
+        if (!password.equals(pwdAgainSdkInputEditTextView.getInputEditText().getEditableText().toString())){
+            ToastUtils.toast(getActivity(), "兩次密碼不一致", Toast.LENGTH_LONG);
             return;
         }
 
-        if (!vfSdkInputEditTextView.checkVfCode()){
+
+        String areaCode = gama_bind_tv_area.getText().toString();
+        if (TextUtils.isEmpty(areaCode)) {
+            ToastUtils.toast(getActivity(), R.string.py_area_code_empty);
             return;
         }
-
-      /*  String email = emailEditText.getEditableText().toString().trim();
-        if (TextUtils.isEmpty(email)) {
-            ToastUtils.toast(getActivity(), R.string.py_email_empty);
+        String phone = gama_register_et_phone.getEditableText().toString().trim();
+        if (!phone.matches(selectedBean.getPattern())) {
+            ToastUtils.toast(getActivity(), R.string.py_phone_error);
             return;
         }
+        String interfaceName = GSRequestMethod.RequestVfcodeInterface.register.getString();
 
-        String vfcode = gama_bind_et_vfcode.getEditableText().toString();
-        if(TextUtils.isEmpty(vfcode)) {
+        String vfcode = gama_register_et_vfcode.getEditableText().toString();
+        if (TextUtils.isEmpty(vfcode)) {
             ToastUtils.toast(getActivity(), R.string.py_vfcode_empty);
             return;
         }
-        if (SStringUtil.isNotEmpty(email) && !Validator.isEmail(email)){
-            ToastUtils.toast(getActivity(), R.string.py_email_format_error);
-            return;
-        }*/
 
-        sLoginDialogv2.getLoginPresenter().accountBind(sLoginDialogv2.getActivity(), account, password, mSdkPhoneInputEditTextView.getPhoneAreaCode(),
-                mSdkPhoneInputEditTextView.getPhoneNumber(), vfcode, bindTpye);
+        sLoginDialogv2.getLoginPresenter().accountBind(sLoginDialogv2.getActivity(), account, password, areaCode,
+                phone, vfcode, bindTpye);
 //        sLoginDialogv2.getLoginPresenter().accountBind(sLoginDialogv2.getActivity(), account, password, "", "", "", bindTpye);
     }
 
@@ -207,12 +223,21 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
     }
 
     private void getVfcode() {
-        if (!mSdkPhoneInputEditTextView.checkPhoneOk()){
+
+        String areaCode = gama_bind_tv_area.getText().toString();
+        if (TextUtils.isEmpty(areaCode)) {
+            ToastUtils.toast(getActivity(), R.string.py_area_code_empty);
             return;
         }
+        String phone = gama_register_et_phone.getEditableText().toString().trim();
+        if (!phone.matches(selectedBean.getPattern())) {
+            ToastUtils.toast(getActivity(), R.string.py_phone_error);
+            return;
+        }
+
         String interfaceName = GSRequestMethod.RequestVfcodeInterface.bind.getString();
 
-        sLoginDialogv2.getLoginPresenter().getPhoneVfcode(sLoginDialogv2.getActivity(), mSdkPhoneInputEditTextView.getPhoneAreaCode(), mSdkPhoneInputEditTextView.getPhoneNumber(), interfaceName);
+        sLoginDialogv2.getLoginPresenter().getPhoneVfcode(sLoginDialogv2.getActivity(), areaCode, phone, interfaceName);
     }
 
 
@@ -259,6 +284,7 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
         if (o instanceof GamaAreaInfoBean) {
             selectedBean = (GamaAreaInfoBean) o;
             String text = selectedBean.getValue();
+            gama_bind_tv_area.setText(text);
         }
     }
 

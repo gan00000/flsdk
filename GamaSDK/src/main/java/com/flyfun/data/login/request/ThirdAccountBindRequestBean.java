@@ -2,6 +2,8 @@ package com.flyfun.data.login.request;
 
 import android.content.Context;
 
+import com.flyfun.data.login.constant.GSRequestMethod;
+
 /**
 * <p>Title: AdsRequestBean</p>
 * <p>Description: 接口请求参数实体</p>
@@ -29,6 +31,9 @@ public class ThirdAccountBindRequestBean extends AccountLoginRequestBean {
 	private String fb_oauthToken = ""; //facebook登入的accesstoken
 	private String googleIdToken = ""; //Google登入的accesstoken
 	private String googleClientId = ""; //Google登入的参数,在google-service.json里面找到:oauth_client-type3的client-id
+
+	private String interfaces =  GSRequestMethod.RequestVfcodeInterface.bind.getString();
+
 
 	public String getFb_oauthToken() {
 		return fb_oauthToken;
