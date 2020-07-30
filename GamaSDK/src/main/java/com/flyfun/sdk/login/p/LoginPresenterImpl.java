@@ -792,6 +792,9 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 //                        if(callback != null) {
 //                            callback.statusCallback(SBaseRelativeLayout.OperationCallback.TIME_LIMIT);
 //                        }
+                        if (!sLoginResponse.isRequestSuccess()){
+                            return;
+                        }
                         if(callbackList != null && callbackList.size() > 0) {
                             for(SBaseRelativeLayout.OperationCallback callback : callbackList) {
                                 callback.statusCallback(SBaseRelativeLayout.OperationCallback.TIME_LIMIT);
