@@ -78,7 +78,7 @@
 
     <!--自动登录-->
     <string name="py_auto_login_change">切換帳號</string>
-    <string name="py_login_autologin_tips">帳號 %1$s 正在登錄</string>
+    <string name="py_login_autologin_tips">帳號 %1$s 正在登入</string>
 
     <!--预设提示-->
     <string name="py_register_account_hit">6~18個字元，僅限字母及數字</string>
@@ -129,7 +129,7 @@
     <!--未使用-->
     <string name="py_login_success">登入成功</string>
     <string name="py_pay_title">儲值</string>
-    <string name="py_login_autologin_fblogining_tips">Facebook帳號正在登錄</string>
+    <string name="py_login_autologin_fblogining_tips">Facebook帳號正在登入</string>
     <string name="py_account">帳號</string>
     <string name="py_password">密碼</string>
     <string name="py_login">登入</string>

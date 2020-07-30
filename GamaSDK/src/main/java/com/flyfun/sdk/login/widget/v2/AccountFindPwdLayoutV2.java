@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
 import com.flyfun.base.bean.GamaAreaInfoBean;
 import com.flyfun.sdk.SBaseRelativeLayout;
@@ -143,6 +144,10 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
             return;
         }
         String phone = gama_find_et_phone.getEditableText().toString().trim();
+        if (SStringUtil.isEmpty(phone)){
+            ToastUtils.toast(getActivity(), R.string.py_register_account_phone);
+            return;
+        }
         if (!phone.matches(selectedBean.getPattern())) {
             ToastUtils.toast(getActivity(), R.string.py_phone_error);
             return;
@@ -168,6 +173,10 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
             return;
         }
         String phone = gama_find_et_phone.getEditableText().toString().trim();
+        if (SStringUtil.isEmpty(phone)){
+            ToastUtils.toast(getActivity(), R.string.py_register_account_phone);
+            return;
+        }
         if(!phone.matches(selectedBean.getPattern())) {
             ToastUtils.toast(getActivity(), R.string.py_phone_error);
             return;

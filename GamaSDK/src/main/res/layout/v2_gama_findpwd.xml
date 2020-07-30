@@ -75,6 +75,15 @@
             android:textSize="@dimen/sp_20"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/gama_bind_tv_limit_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/py_register_account_vfcode_hint"
+            android:textColor="@color/gama_color_ui_hint_text"
+            android:textSize="@dimen/sp_12" />
+
     </LinearLayout>
 
 </RelativeLayout>

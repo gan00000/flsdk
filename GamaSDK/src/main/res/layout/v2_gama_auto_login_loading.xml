@@ -45,7 +45,7 @@
             android:gravity="center"
             android:textSize="@dimen/sp_18"
             android:textColor="@android:color/white"
-            android:background="@drawable/bg_192d3f_46"
+            android:background="@drawable/sdk_btn_bg"
             android:text="@string/py_auto_login_change"
             android:id="@+id/py_auto_login_change"
             />

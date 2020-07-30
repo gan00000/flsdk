@@ -194,6 +194,10 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
             return;
         }
         String phone = gama_register_et_phone.getEditableText().toString().trim();
+        if (SStringUtil.isEmpty(phone)){
+            ToastUtils.toast(getActivity(), R.string.py_register_account_phone);
+            return;
+        }
         if (!phone.matches(selectedBean.getPattern())) {
             ToastUtils.toast(getActivity(), R.string.py_phone_error);
             return;
@@ -232,6 +236,10 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
             return;
         }
         String phone = gama_register_et_phone.getEditableText().toString().trim();
+        if (SStringUtil.isEmpty(phone)){
+            ToastUtils.toast(getActivity(), R.string.py_register_account_phone);
+            return;
+        }
         if (!phone.matches(selectedBean.getPattern())) {
             ToastUtils.toast(getActivity(), R.string.py_phone_error);
             return;

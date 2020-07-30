@@ -60,7 +60,7 @@ public class SLoginResponse extends BaseResponseModel {
     /**
      * 用户ip
      */
-    private String gmbPlayerIp = "";
+    private String playerIp = "";
 
     private String beLinked = "";
 
@@ -176,13 +176,6 @@ public class SLoginResponse extends BaseResponseModel {
         this.nickName = nickName;
     }
 
-    public String getGmbPlayerIp() {
-        return gmbPlayerIp;
-    }
-
-    public void setGmbPlayerIp(String gmbPlayerIp) {
-        this.gmbPlayerIp = gmbPlayerIp;
-    }
 
     public boolean isLinked() {
         return "1".equals(beLinked);
@@ -192,6 +185,17 @@ public class SLoginResponse extends BaseResponseModel {
         this.beLinked = beLinked;
     }
 
+    public String getPlayerIp() {
+        return playerIp;
+    }
+
+    public void setPlayerIp(String playerIp) {
+        this.playerIp = playerIp;
+    }
+
+    public String getBeLinked() {
+        return beLinked;
+    }
 
     @Override
     public String toString() {
@@ -209,8 +213,17 @@ public class SLoginResponse extends BaseResponseModel {
                 ", thirdId='" + thirdId + '\'' +
                 ", thirdToken='" + thirdToken + '\'' +
                 ", nickName='" + nickName + '\'' +
-                ", gmbPlayerIp='" + gmbPlayerIp + '\'' +
+                ", playerIp='" + playerIp + '\'' +
                 ", beLinked='" + beLinked + '\'' +
+                '}';
+    }
+
+    public String msg() {
+        return "SLoginResponse{" +
+                "userId='" + userId + '\'' +
+                ", accessToken='" + accessToken + '\'' +
+                ", timestamp='" + timestamp + '\'' +
+                ", loginType='" + loginType + '\'' +
                 '}';
     }
 }

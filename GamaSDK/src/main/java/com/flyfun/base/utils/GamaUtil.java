@@ -92,7 +92,7 @@ public class GamaUtil {
                     a.setTime(System.currentTimeMillis());
                 }
                 saveAccountModels(context,mls);
-                break;
+                return;
             }
         }
         AccountModel newAccountModel = new AccountModel();//新添加一个保存

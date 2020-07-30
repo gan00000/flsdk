@@ -24,7 +24,6 @@ import com.facebook.internal.ImageRequest;
 import com.flyfun.base.bean.GamaAreaInfoBean;
 import com.flyfun.base.bean.SLoginType;
 import com.flyfun.base.cfg.ResConfig;
-import com.flyfun.base.excute.GamaAreaInfoRequestTask;
 import com.flyfun.base.utils.GamaUtil;
 import com.flyfun.data.login.constant.GSLoginCommonConstant;
 import com.flyfun.data.login.constant.GSRequestMethod;
@@ -52,8 +51,6 @@ import com.flyfun.thirdlib.google.SGoogleSignIn;
 import com.flyfun.thirdlib.twitter.GamaTwitterLogin;
 import com.gama.sdk.R;
 import com.google.gson.Gson;
-
-import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -1248,7 +1245,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     public void getAreaInfo(Activity activity) {
         this.mActivity = activity;
         if(areaBeanList == null || areaBeanList.length < 1) {
-            GamaAreaInfoRequestTask task = new GamaAreaInfoRequestTask(getContext());
+            /*GamaAreaInfoRequestTask task = new GamaAreaInfoRequestTask(getContext());
             task.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(), "Loading..."));
             task.setReqCallBack(new ISReqCallBack() {
                 @Override
@@ -1295,7 +1292,12 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
                 }
             });
-            task.excute();
+            task.excute();*/
+
+            areaJson = FileUtil.readAssetsTxtFile(getContext(), "flsdk/areaInfo");
+            Gson gson = new Gson();
+            areaBeanList = gson.fromJson(areaJson, GamaAreaInfoBean[].class);
+            showAreaDialog();
         } else {
             showAreaDialog();
         }
