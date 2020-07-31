@@ -39,7 +39,7 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/login_cons_bg"
+        android:background="@drawable/gama_term_bg"
         app:layout_constraintBottom_toTopOf="@id/gama_start_term_guideline2"
         app:layout_constraintEnd_toStartOf="@id/gama_start_term_guideline4"
         app:layout_constraintStart_toStartOf="@id/gama_start_term_guideline3"
@@ -190,7 +190,7 @@
             android:background="@drawable/sdk_btn_bg"
             android:text="@string/gama_ui_term_confirm"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/sp_20"
+            android:textSize="@dimen/sp_26"
             app:layout_constraintBottom_toBottomOf="@id/gama_start_term_guideline10"
             app:layout_constraintDimensionRatio="5:1"
             app:layout_constraintEnd_toEndOf="parent"

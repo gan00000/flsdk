@@ -126,7 +126,7 @@ public class SDKInputEditTextView extends RelativeLayout {
                 labName = getResources().getString(R.string.py_account);
                 hint = getResources().getString(R.string.py_register_account_hit);
                 eyeImageView.setVisibility(View.GONE);
-
+                adjustTvTextSize();
                 break;
 
             case SDKInputType_Password:
@@ -160,6 +160,7 @@ public class SDKInputEditTextView extends RelativeLayout {
                 eyeImageView.setVisibility(View.GONE);
                 labName = getResources().getString(R.string.py_vfcode);
                 hint = getResources().getString(R.string.py_msg_vfcode_hint);
+                adjustTvTextSize();
                 break;
 
             default:

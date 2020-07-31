@@ -3,7 +3,10 @@ package com.flyfun.sdk.login.widget;
 import android.content.Context;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.core.base.utils.SStringUtil;
 import com.flyfun.base.bean.GamaAreaInfoBean;
 import com.gama.sdk.R;
 
@@ -87,8 +91,39 @@ public class SDKPhoneInputEditTextView extends RelativeLayout {
             phoneAreaTextView = contentView.findViewById(R.id.sdk_input_item_phone_area);
 
             araeCodeMoreListView = contentView.findViewById(R.id.sdk_input_item_phone_list_icon);
+
+            adjustTvTextSize();
         }
 
+    }
+
+    /** 字体大小适配**/
+    private  void adjustTvTextSize()
+    {
+        final EditText inputEditText = getInputEditText();
+        inputEditText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10);
+        inputEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                if (SStringUtil.isEmpty(s.toString())){
+                    inputEditText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10);
+                }else {
+                    inputEditText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+                }
+
+            }
+        });
     }
 
     public String getPhoneAreaCode(){

@@ -57,7 +57,7 @@
                 android:gravity="center"
                 android:id="@+id/gama_find_btn_get_vfcode"
                 android:text="@string/py_register_account_get_vfcode"
-                android:textSize="18sp" />
+                android:textSize="@dimen/sp_18" />
 
 
         </LinearLayout>
@@ -72,7 +72,7 @@
             android:gravity="center"
             android:text="@string/py_confire"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/sp_20"
+            android:textSize="@dimen/sp_26"
             android:textStyle="bold" />
 
         <TextView
