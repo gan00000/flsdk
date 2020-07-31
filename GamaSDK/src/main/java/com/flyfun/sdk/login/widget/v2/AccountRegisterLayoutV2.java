@@ -84,7 +84,7 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
         //設置類型
         accountSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Account);
         pwdSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Password);
-        pwdAgainSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Password);
+        pwdAgainSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Password_Again);
         vfcodeSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Vf_Code);
 
 

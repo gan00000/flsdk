@@ -21,6 +21,7 @@ public class FindPwdRequestBean extends AdsRequestBean {
 	private String name;//用户账号名
 	private String email;
 	private String interfaces = "4";
+	private String vfCode = "";
 
 	public String getName() {
 		return name;
@@ -36,5 +37,13 @@ public class FindPwdRequestBean extends AdsRequestBean {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getVfCode() {
+		return vfCode;
+	}
+
+	public void setVfCode(String vfCode) {
+		this.vfCode = vfCode;
 	}
 }

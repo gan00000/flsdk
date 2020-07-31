@@ -184,7 +184,12 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
 
         String vfCode = vfCodeSdkInputEditTextView.getInputEditText().getEditableText().toString().trim();
 
-        sLoginDialogv2.getLoginPresenter().findPwd(sLoginDialogv2.getActivity(), account, areaCode, phone);
+        if (TextUtils.isEmpty(vfCode)) {
+            ToastUtils.toast(getActivity(), R.string.py_vfcode_empty);
+            return;
+        }
+
+        sLoginDialogv2.getLoginPresenter().findPwd(sLoginDialogv2.getActivity(), account, areaCode, phone, vfCode);
     }
 
 

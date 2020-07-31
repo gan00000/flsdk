@@ -28,7 +28,7 @@ public class FindPwdRequestTask extends BaseLoginRequestTask {
 
 	}
 
-	public FindPwdRequestTask(Context mContext, String userName, String areaCode, String phone) {
+	public FindPwdRequestTask(Context mContext, String userName, String areaCode, String phone, String vfCode) {
 		super(mContext);
 
 		userName = userName.toLowerCase();
@@ -36,6 +36,7 @@ public class FindPwdRequestTask extends BaseLoginRequestTask {
 		pwdRequestBean = new FindPwdRequestBean(mContext);
 		sdkBaseRequestBean = pwdRequestBean;
 		pwdRequestBean.setName(userName);
+		pwdRequestBean.setVfCode(vfCode);
 
 		pwdRequestBean.setPhoneAreaCode(areaCode);
 

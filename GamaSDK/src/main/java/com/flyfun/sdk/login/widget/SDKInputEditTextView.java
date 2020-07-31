@@ -137,6 +137,16 @@ public class SDKInputEditTextView extends RelativeLayout {
                 editTextInputType = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD;
                 adjustTvTextSize();
                 break;
+
+            case SDKInputType_Password_Again:
+                iconId = R.drawable.fl_sdk_suo;
+                labName = getResources().getString(R.string.py_password);
+                hint = getResources().getString(R.string.py_account_again_input_password);
+                eyeImageView.setVisibility(View.VISIBLE);
+                editTextInputType = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD;
+                adjustTvTextSize();
+                break;
+
             case SDKInputType_Old_Password:
                 iconId = R.drawable.fl_sdk_suo;
                 labName = getResources().getString(R.string.py_old_pwd);

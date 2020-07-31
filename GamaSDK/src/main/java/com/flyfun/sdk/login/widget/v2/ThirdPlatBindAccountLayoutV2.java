@@ -87,7 +87,7 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
 
         accountSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Account);
         pwdSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Password);
-        pwdAgainSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Password);
+        pwdAgainSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Password_Again);
         vfSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Vf_Code);
 
         gama_register_et_vfcode = vfSdkInputEditTextView.getInputEditText();

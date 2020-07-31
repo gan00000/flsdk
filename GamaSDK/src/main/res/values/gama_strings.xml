@@ -18,6 +18,7 @@
     <string name="py_account_center">會員中心</string>
     <string name="py_account_input_vfcode">請點擊輸入驗證碼</string>
     <string name="py_account_input_password">請輸入密碼</string>
+    <string name="py_account_again_input_password">請再次輸入密碼</string>
 
     <!--注册页面-->
     <string name="py_login_page_account_reg">註冊會員</string>

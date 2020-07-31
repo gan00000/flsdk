@@ -90,7 +90,7 @@ public class LoginContract {
         /**
          * 需要手机验证的找回密码
          */
-        void findPwd(Activity activity, String account, String areaCode, String phone);
+        void findPwd(Activity activity, String account, String areaCode, String phone, String vfCode);
 
         /**
          * 需要手机验证的绑定账号
