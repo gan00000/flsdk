@@ -164,9 +164,9 @@ public class GamaUtil {
                 @Override
                 public int compare(AccountModel o1, AccountModel o2) {
                     if (o1.getTime() > o2.getTime()){
-                        return 1;
+                        return -1;
                     }
-                    return -1;
+                    return 1;
                 }
             });
         }

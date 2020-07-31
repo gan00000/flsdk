@@ -227,6 +227,7 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
                     public void onClick(View v) {
                         loginAccountEditText.setText(accountModel.getAccount());
                         loginPasswordEditText.setText(accountModel.getPassword());
+                        historyAccountRv.setVisibility(GONE);
                     }
                 });
                 holder.setOnClickListener(R.id.history_account_item_delete_btn, new OnClickListener() {
