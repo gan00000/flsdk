@@ -4,21 +4,19 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.flyfun.base.utils.GamaUtil;
 import com.flyfun.data.login.constant.GSLoginCommonConstant;
-import com.gama.sdk.R;
 import com.flyfun.sdk.login.widget.SLoginBaseRelativeLayout;
+import com.gama.sdk.R;
 
 
 public class AccountManagerLayoutV2 extends SLoginBaseRelativeLayout implements View.OnClickListener {
 
     private View contentView;
-    private ImageView uniqueRegBindBtn;
-    private ImageView fbRegBindBtn;
-    private ImageView googleRegBindBtn;
+    private View uniqueRegBindBtn;
+    private View fbRegBindBtn;
+    private View googleRegBindBtn;
 
 
     public AccountManagerLayoutV2(Context context) {
@@ -55,11 +53,11 @@ public class AccountManagerLayoutV2 extends SLoginBaseRelativeLayout implements 
         fbRegBindBtn.setOnClickListener(this);
         googleRegBindBtn.setOnClickListener(this);
 
-        if (GamaUtil.isMainland(getContext())) {
+        /*if (GamaUtil.isMainland(getContext())) {
             fbRegBindBtn.setVisibility(GONE);
             googleRegBindBtn.setVisibility(GONE);
 
-        }
+        }*/
 
         return contentView;
     }

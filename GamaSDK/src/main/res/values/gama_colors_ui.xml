@@ -18,5 +18,7 @@
     <color name="gama_color_ui_btn_bg">#5891f6</color>
     <!--登入UI提示文字颜色-->
     <color name="gama_color_ui_hint_text">#e60012</color>
+    <color name="c_fc403f">#fc403f</color>
+    <color name="c_545454">#545454</color>
 
 </resources>

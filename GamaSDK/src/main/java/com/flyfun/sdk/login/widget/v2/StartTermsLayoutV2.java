@@ -2,6 +2,7 @@ package com.flyfun.sdk.login.widget.v2;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,6 +13,7 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.FrameLayout;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -65,7 +67,7 @@ public class StartTermsLayoutV2 extends SBaseDialog {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.setContentView(R.layout.v2_start_term);
+        this.setContentView(R.layout.v2_start_term2);
 //        this.setCancelable(false);
         this.setCanceledOnTouchOutside(false);
 
@@ -96,13 +98,19 @@ public class StartTermsLayoutV2 extends SBaseDialog {
 
         if(isPort) {
             titleGroup = (RadioGroup) findViewById(R.id.gama_start_term_title_group);
+            final RadioButton mRadioButton1 = titleGroup.findViewById(R.id.gama_start_term_title1);
+            final RadioButton mRadioButton2 = titleGroup.findViewById(R.id.gama_start_term_title2);
             titleGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(RadioGroup radioGroup, int i) {
                     if(i == R.id.gama_start_term_title1) {
                         termsView1.loadUrl(serviceUrl);
+                        mRadioButton1.setTextColor(Color.WHITE);
+                        mRadioButton2.setTextColor(getContext().getResources().getColor(R.color.c_fc403f));
                     } else if(i == R.id.gama_start_term_title2) {
                         termsView1.loadUrl(privateUrl);
+                        mRadioButton2.setTextColor(Color.WHITE);
+                        mRadioButton1.setTextColor(getContext().getResources().getColor(R.color.c_fc403f));
                     }
                 }
             });

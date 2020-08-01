@@ -17,7 +17,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="@dimen/px_120"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="20dp"
             android:gravity="center"
             android:text="請選擇登入方式"
             android:textSize="26sp"
@@ -25,42 +25,136 @@
             android:textColor="@color/e_ff3e37"
             />
 
-        <ImageView
+        <!--        會員登入-->
+        <LinearLayout
             android:layout_width="320dp"
             android:layout_height="48dp"
-            android:src="@drawable/btn_hy"
-            android:scaleType="fitCenter"
-            android:layout_marginTop="20dp"
+            android:gravity="center_vertical"
+            android:layout_marginTop="14dp"
+            android:orientation="horizontal"
+            android:background="@drawable/sdk_btn_bg"
+            android:id="@+id/btn_xm_member_login_iv">
 
-            android:id="@+id/btn_xm_member_login_iv"
-            />
 
-        <ImageView
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/sdk_logo"
+                android:scaleType="fitCenter"
+                android:layout_marginStart="36dp"
+                android:paddingTop="@dimen/px_8"
+                android:paddingBottom="@dimen/px_8"
+
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textSize="@dimen/sp_26"
+                android:text="會員帳號登入"/>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="320dp"
             android:layout_height="48dp"
-            android:src="@drawable/btn_yk"
-            android:scaleType="fitCenter"
+            android:gravity="center_vertical"
             android:layout_marginTop="10dp"
-            android:id="@+id/btn_xm_guest_bg"
-            />
+            android:orientation="horizontal"
+            android:background="@drawable/sdk_btn_bg"
+            android:id="@+id/btn_xm_guest_bg">
 
-        <ImageView
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/sdk_guest_icon"
+                android:scaleType="fitCenter"
+                android:layout_marginStart="36dp"
+                android:paddingTop="@dimen/px_8"
+                android:paddingBottom="@dimen/px_8"
+
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textSize="@dimen/sp_26"
+                android:text="遊客帳號登入"/>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="320dp"
             android:layout_height="48dp"
-            android:src="@drawable/btn_fb"
-            android:scaleType="fitCenter"
+            android:gravity="center_vertical"
             android:layout_marginTop="10dp"
-            android:id="@+id/btn_xm_fb_bg"
-            />
+            android:orientation="horizontal"
+            android:background="@drawable/fb_btn_bg"
+            android:id="@+id/btn_xm_fb_bg">
 
-        <ImageView
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/sdk_fb_icon"
+                android:scaleType="fitCenter"
+                android:layout_marginStart="36dp"
+                android:paddingTop="@dimen/px_8"
+                android:paddingBottom="@dimen/px_8"
+
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textSize="@dimen/sp_26"
+                android:text="Sign in with Facebook"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
             android:layout_width="320dp"
             android:layout_height="48dp"
-            android:src="@drawable/btn_google"
-            android:scaleType="fitCenter"
+            android:gravity="center_vertical"
             android:layout_marginTop="10dp"
-            android:id="@+id/btn_xm_google_login_iv"
-            />
+            android:orientation="horizontal"
+            android:background="@drawable/google_btn_bg"
+            android:id="@+id/btn_xm_google_login_iv">
+
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/sdk_google_icon"
+                android:scaleType="fitCenter"
+                android:layout_marginStart="36dp"
+                android:paddingTop="@dimen/px_8"
+                android:paddingBottom="@dimen/px_8"
+
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textSize="@dimen/sp_26"
+                android:text="Sign in with Google"/>
+
+        </LinearLayout>
+
 
 
     </LinearLayout>

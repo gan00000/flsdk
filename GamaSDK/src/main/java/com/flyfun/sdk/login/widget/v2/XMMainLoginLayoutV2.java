@@ -4,10 +4,9 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
 
-import com.gama.sdk.R;
 import com.flyfun.sdk.login.widget.SLoginBaseRelativeLayout;
+import com.gama.sdk.R;
 
 /**
  * Created by GanYuanrong on 2017/2/6.
@@ -17,7 +16,7 @@ public class XMMainLoginLayoutV2 extends SLoginBaseRelativeLayout implements Vie
 
     private View contentView;
 
-    private ImageView fbLoginView, starLoginView, macLoginView, googleLoginView;
+    private View fbLoginView, starLoginView, macLoginView, googleLoginView;
 //    private View starpyRegView;
 
     public XMMainLoginLayoutV2(Context context) {
