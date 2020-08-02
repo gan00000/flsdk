@@ -239,4 +239,12 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
         selectedBean.setValue(getResources().getString(R.string.py_default_area_num));
         selectedBean.setPattern(getResources().getString(R.string.py_default_area_num_pattern));
     }
+
+    @Override
+    public void refreshViewData() {
+        super.refreshViewData();
+        findPwdAccountEditText.setText("");
+        gama_find_et_phone.setText("");
+        vfCodeSdkInputEditTextView.getInputEditText().setText("");
+    }
 }

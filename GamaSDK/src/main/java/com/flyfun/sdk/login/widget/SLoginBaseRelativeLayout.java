@@ -103,7 +103,7 @@ public abstract class SLoginBaseRelativeLayout extends SBaseRelativeLayout {
 
     protected void doSomething() {}
 
-    public void refreshAccountInfo(){}
+    public void refreshViewData(){}
 
     //用于刷新验证码
     public void refreshVfCode() {}

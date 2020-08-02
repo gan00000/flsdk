@@ -104,6 +104,22 @@ public class GamaUtil {
 
     }
 
+    public static void removeAccountModel(Context context, String account){
+        List<AccountModel> mls = getAccountModels(context);
+        AccountModel xxxmls = null;
+        for (AccountModel a: mls) {
+            if (a.getAccount().equals(account)){
+                xxxmls = a;
+                break;
+            }
+        }
+
+        if (xxxmls != null && mls.contains(xxxmls)){
+            mls.remove(xxxmls);
+            saveAccountModels(context,mls);
+        }
+    }
+
     /**
      * 保存登入的账号,覆盖所有
      * @param context

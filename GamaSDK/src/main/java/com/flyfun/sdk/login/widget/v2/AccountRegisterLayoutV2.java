@@ -103,10 +103,10 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
 
 //        emailEditText = contentView.findViewById(R.id.gama_register_et_email);
 
-        String phoneMsgLimitHint = GamaUtil.getPhoneMsgLimitHint(getContext());
-        if(!TextUtils.isEmpty(phoneMsgLimitHint)) {
-            gama_register_tv_limit_hint.setText(phoneMsgLimitHint);
-        }
+//        String phoneMsgLimitHint = GamaUtil.getPhoneMsgLimitHint(getContext());
+//        if(!TextUtils.isEmpty(phoneMsgLimitHint)) {
+//            gama_register_tv_limit_hint.setText(phoneMsgLimitHint);
+//        }
 
         backView.setOnClickListener(this);
         registerConfirm.setOnClickListener(this);

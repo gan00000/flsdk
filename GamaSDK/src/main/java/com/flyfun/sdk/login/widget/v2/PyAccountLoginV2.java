@@ -300,8 +300,8 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
     }*/
 
     @Override
-    public void refreshAccountInfo() {
-        super.refreshAccountInfo();
+    public void refreshViewData() {
+        super.refreshViewData();
 
         List<AccountModel>  ams = GamaUtil.getAccountModels(getContext());
         accountModels.clear();

@@ -103,10 +103,10 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
         gama_register_et_phone = mSdkPhoneInputEditTextView.getInputEditText();
 
         gama_bind_tv_limit_hint = contentView.findViewById(R.id.gama_bind_tv_limit_hint);
-        String phoneMsgLimitHint = GamaUtil.getPhoneMsgLimitHint(getContext());
-        if(!TextUtils.isEmpty(phoneMsgLimitHint)) {
-            gama_bind_tv_limit_hint.setText(phoneMsgLimitHint);
-        }
+//        String phoneMsgLimitHint = GamaUtil.getPhoneMsgLimitHint(getContext());
+//        if(!TextUtils.isEmpty(phoneMsgLimitHint)) {
+//            gama_bind_tv_limit_hint.setText(phoneMsgLimitHint);
+//        }
 
         backView.setOnClickListener(this);
         bindConfirm.setOnClickListener(this);
@@ -118,6 +118,16 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
         setDefaultAreaInfo();
 
         return contentView;
+    }
+
+    @Override
+    public void refreshViewData() {
+        super.refreshViewData();
+        registerAccountEditText.setText("");
+        registerPasswordEditText.setText("");
+        pwdAgainSdkInputEditTextView.getInputEditText().setText("");
+        gama_register_et_phone.setText("");
+        gama_register_et_vfcode.setText("");
     }
 
     @Override

@@ -1058,7 +1058,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     }
 
     @Override
-    public void findPwd(Activity activity, String account, String areaCode, String phoneOrEmail, String vfCode) {
+    public void findPwd(final Activity activity, final String account, String areaCode, String phoneOrEmail, String vfCode) {
         this.mActivity = activity;
         FindPwdRequestTask findPwdRequestTask = new FindPwdRequestTask(getActivity(), account, areaCode, phoneOrEmail, vfCode);
         findPwdRequestTask.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(), "Loading..."));
@@ -1070,8 +1070,10 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         ToastUtils.toast(getActivity(), R.string.py_findpwd_success);
 
 //                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GAMA);
+                        GamaUtil.removeAccountModel(activity,account);
                         if (iLoginView != null){
                             iLoginView.findPwdSuccess(sLoginResponse);
+
                         }
                     }else{
 

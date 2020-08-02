@@ -254,7 +254,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
             }
 
             if (childView == accountLoginView){
-                childView.refreshAccountInfo();
+                childView.refreshViewData();
                 childView.setVisibility(View.VISIBLE);
             }else{
                 childView.setVisibility(View.GONE);
@@ -592,6 +592,9 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 
     @Override
     public void changePwdSuccess(SLoginResponse sLoginResponse) {
+        if (changePwdView != null){
+            changePwdView.refreshViewData();
+        }
         toAccountLoginView();
     }
 
@@ -606,11 +609,24 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 
     @Override
     public void findPwdSuccess(SLoginResponse sLoginResponse) {
+        if (findPwdView != null){
+            findPwdView.refreshViewData();
+        }
         toAccountLoginView();
+
     }
 
     @Override
     public void accountBindSuccess(SLoginResponse sLoginResponse) {
+        if (bindFbView != null){
+            bindFbView.refreshViewData();
+        }
+        if (bindGoogleView != null){
+            bindGoogleView.refreshViewData();
+        }
+        if (bindUniqueView != null){
+            bindUniqueView.refreshViewData();
+        }
         toAccountLoginView();
     }
 

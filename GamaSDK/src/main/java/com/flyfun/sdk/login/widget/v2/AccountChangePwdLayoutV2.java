@@ -78,6 +78,14 @@ public class AccountChangePwdLayoutV2 extends SLoginBaseRelativeLayout implement
     }
 
     @Override
+    public void refreshViewData() {
+        super.refreshViewData();
+        changePwdAccountEditText.setText("");
+        changePwdOldEditText.setText("");
+        changePwdNewEditText.setText("");
+    }
+
+    @Override
     public void onWindowFocusChanged(boolean hasWindowFocus) {
         super.onWindowFocusChanged(hasWindowFocus);
     }
