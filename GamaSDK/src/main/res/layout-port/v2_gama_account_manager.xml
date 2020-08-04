@@ -44,7 +44,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textColor="@android:color/white"
-                android:textStyle="bold"
                 android:gravity="center"
                 android:textSize="@dimen/sp_26"
                 android:text="遊客帳號綁定"/>
@@ -76,7 +75,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textColor="@android:color/white"
-                android:textStyle="bold"
                 android:gravity="center"
                 android:textSize="@dimen/sp_26"
                 android:text="Google帳號綁定"/>
@@ -108,7 +106,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textColor="@android:color/white"
-                android:textStyle="bold"
                 android:gravity="center"
                 android:textSize="@dimen/sp_26"
                 android:text="Facebook帳號綁定"/>
