@@ -501,7 +501,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
     }
 
-    private void sAccountBindV2(ThirdAccountBindRequestTaskV2 bindRequestTask) {
+    private void sAccountBindV2(ThirdAccountBindRequestTaskV2 bindRequestTask, final String account, final String pwd) {
         bindRequestTask.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(), "Loading..."));
         bindRequestTask.setReqCallBack(new ISReqCallBack<SLoginResponse>() {
             @Override
@@ -511,6 +511,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         ToastUtils.toast(getActivity(), R.string.py_success);
 
 //                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GAMA);
+                        GamaUtil.saveAccountModel(getActivity(), account, pwd, true);//记住账号密码
                         if (iLoginView != null){
                             iLoginView.accountBindSuccess(sLoginResponse);
                         }
@@ -1121,7 +1122,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     vfcode,
                     uniqueId,
                     GSRequestMethod.GSRequestType.GAMESWORD);
-            sAccountBindV2(bindRequestTask);
+            sAccountBindV2(bindRequestTask, account, pwd);
 
         } else if (bindType == SLoginType.bind_fb){
             sFbLogin(activity, sFacebookProxy, new FbLoginCallBack() {
@@ -1138,7 +1139,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                             user.getAccessTokenString(),
                             "",
                             GSRequestMethod.GSRequestType.GAMESWORD);
-                    sAccountBindV2(bindRequestTask);
+                    sAccountBindV2(bindRequestTask,account,pwd);
                 }
             });
 
@@ -1163,7 +1164,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                                 idTokenString,
                                 googleClientId,
                                 GSRequestMethod.GSRequestType.GAMESWORD);
-                        sAccountBindV2(bindGoogleRequestTask);
+                        sAccountBindV2(bindGoogleRequestTask,account,pwd);
                     }
                 }
 
@@ -1189,7 +1190,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                                     vfcode,
                                     id,
                                     GSRequestMethod.GSRequestType.GAMESWORD);
-                            sAccountBindV2(bindGoogleRequestTask);
+                            sAccountBindV2(bindGoogleRequestTask,account,pwd);
                         }
                     }
 

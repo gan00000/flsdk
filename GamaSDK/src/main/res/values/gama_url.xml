@@ -49,5 +49,5 @@
     <!--验证码开关链接-->
     <string name="zh_tw_gama_vfcode_switch_url" translatable="false">https://config.flyfungame.com/%s/base/V1/config.json</string>
     <!--港台域名列表 结束-->
-    
+
 </resources>
