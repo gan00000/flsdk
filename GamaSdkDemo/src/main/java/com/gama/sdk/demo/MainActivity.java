@@ -108,7 +108,7 @@ public class MainActivity extends Activity {
                                     dialog.dismiss();
                                 }
                             }).setCancelable(false)
-                                    .setMessage(sLoginResponse.toString())
+                                    .setMessage(sLoginResponse.msg())
                                     .create();
                             dialog.show();
 
