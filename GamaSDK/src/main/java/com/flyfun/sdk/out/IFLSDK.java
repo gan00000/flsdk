@@ -36,7 +36,7 @@ public interface IFLSDK extends IGameLifeCycle {
 
     void pay(Activity activity, SPayType payType, String cpOrderId, String productId, String extra, IPayListener listener);
 
-    void openWebview(Activity activity);
+//    void openWebview(Activity activity);
 
     void openCs(Activity activity);
 
@@ -94,5 +94,5 @@ public interface IFLSDK extends IGameLifeCycle {
     /**
      * 处理一些特殊功能的接口
      */
-    void openFunction(Activity activity, GsFunctionType type, ISdkCallBack callBack);
+//    void openFunction(Activity activity, GsFunctionType type, ISdkCallBack callBack);
 }

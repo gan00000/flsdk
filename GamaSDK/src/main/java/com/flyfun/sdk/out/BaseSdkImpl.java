@@ -12,11 +12,9 @@ import com.core.base.utils.AppUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.SignatureUtil;
-import com.flyfun.base.bean.SGameBaseRequestBean;
 import com.flyfun.base.bean.SGameLanguage;
 import com.flyfun.base.bean.SLoginType;
 import com.flyfun.base.bean.SPayType;
-import com.flyfun.base.cfg.ResConfig;
 import com.flyfun.base.utils.GamaUtil;
 import com.flyfun.base.utils.Localization;
 import com.flyfun.data.login.ILoginCallBack;
@@ -26,8 +24,6 @@ import com.flyfun.sdk.ads.GamaAdsUtils;
 import com.flyfun.sdk.ads.SdkAdsConstant;
 import com.flyfun.sdk.ads.StarEventLogger;
 import com.flyfun.sdk.callback.IPayListener;
-import com.flyfun.sdk.constant.GsSdkImplConstant;
-import com.flyfun.sdk.function.GsFunctionHelper;
 import com.flyfun.sdk.login.DialogLoginImpl;
 import com.flyfun.sdk.login.ILogin;
 import com.flyfun.sdk.login.widget.v2.age.IGamaAgePresenter;
@@ -250,7 +246,7 @@ public class BaseSdkImpl implements IFLSDK {
             }
         });
     }
-
+/*
     @Override
     public void openWebview(final Activity activity) {
 
@@ -279,7 +275,7 @@ public class BaseSdkImpl implements IFLSDK {
                 sWebViewDialog.show();
             }
         });
-    }
+    }*/
 
     @Override
     public void openCs(Activity activity) {
@@ -884,7 +880,7 @@ public class BaseSdkImpl implements IFLSDK {
 //    public void gamaOpenCafeHome(final Activity activity) {
 //    }
 
-    @Override
+    /*@Override
     public void openFunction(final Activity activity, final GsFunctionType type, final ISdkCallBack callBack) {
         activity.runOnUiThread(new Runnable() {
             @Override
@@ -892,5 +888,5 @@ public class BaseSdkImpl implements IFLSDK {
                 GsFunctionHelper.openFunction(activity, type, callBack);
             }
         });
-    }
+    }*/
 }
