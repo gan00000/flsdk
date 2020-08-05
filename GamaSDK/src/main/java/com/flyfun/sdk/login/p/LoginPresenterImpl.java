@@ -552,9 +552,11 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 if (sLoginResponse != null) {
                     if (sLoginResponse.isRequestSuccess()) {
                         handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_MAC);
-                    } else if (checkIsMacLoginLimit(activity, sLoginResponse, rawResult)) {
-//                        macLoginLimit(activity);
-                    } else {
+                    }
+//                    else if (checkIsMacLoginLimit(activity, sLoginResponse, rawResult)) {
+////                        macLoginLimit(activity);
+//                    }
+                    else {
                         ToastUtils.toast(getActivity(), sLoginResponse.getMessage());
                     }
 
