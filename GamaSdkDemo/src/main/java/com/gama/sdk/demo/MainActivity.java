@@ -19,7 +19,7 @@ import com.flyfun.base.utils.SLog;
 import com.flyfun.data.login.ILoginCallBack;
 import com.flyfun.data.login.response.SLoginResponse;
 import com.flyfun.sdk.callback.IPayListener;
-import com.flyfun.sdk.out.GamaFactory;
+import com.flyfun.sdk.out.FlSdkFactory;
 import com.flyfun.sdk.out.IFLSDK;
 
 public class MainActivity extends Activity {
@@ -42,7 +42,7 @@ public class MainActivity extends Activity {
         googlePayBtn = findViewById(R.id.demo_pay_google);
         demo_cs = findViewById(R.id.demo_cs);
 
-        mIFLSDK = GamaFactory.create();
+        mIFLSDK = FlSdkFactory.create();
 
         //初始化sdk
         mIFLSDK.initSDK(this, SGameLanguage.zh_TW);
@@ -175,27 +175,6 @@ public class MainActivity extends Activity {
             }
         });
 
-        othersPayButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-               /*
-                充值接口
-                SPayType SPayType.OTHERS为第三方储值，SPayType.GOOGLE为Google储值
-                cpOrderId cp订单号，请保持每次的值都是不会重复的
-                productId 充值的商品id
-                customize 自定义透传字段（从服务端回调到cp）
-                */
-                mIFLSDK.pay(MainActivity.this, SPayType.OTHERS, "" + System.currentTimeMillis(),"", "", new IPayListener() {
-                    @Override
-                    public void onPayFinish(Bundle bundle) {
-                        PL.i("OtherPay支付结束");
-                    }
-                });
-
-
-            }
-        });
 
         demo_cs.setOnClickListener(new View.OnClickListener() {
             @Override
