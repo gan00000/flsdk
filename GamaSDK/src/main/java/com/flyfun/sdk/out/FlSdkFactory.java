@@ -4,7 +4,7 @@ package com.flyfun.sdk.out;
  * Created by GanYuanrong on 2017/2/13.
  */
 
-public class GamaFactory {
+public class FlSdkFactory {
 
     public static IFLSDK create(){
 

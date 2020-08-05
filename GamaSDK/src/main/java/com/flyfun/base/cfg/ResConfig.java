@@ -353,7 +353,7 @@ public class ResConfig {
     public static String getConfigInAssetsProperties(Context context, String key) {
 
         if (properties == null) {
-            properties = FileUtil.readAssetsPropertiestFile(context, "flsdk/gama_gameconfig.properties");
+            properties = FileUtil.readAssetsPropertiestFile(context, "flsdk/gameconfig.properties");
             PL.i(TAG, "获取游戏assets配置文件: " + (properties != null ? properties.toString() : "失败"));
         }
         if (properties == null) {
