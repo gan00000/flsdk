@@ -56,7 +56,7 @@
             android:gravity="center_vertical"
             android:layout_marginTop="20dp"
             android:orientation="horizontal"
-            android:background="@drawable/google_btn_bg"
+            android:background="@drawable/sdk_gogole_btn_bg"
             android:id="@+id/gama_manager_btn_google">
 
 
@@ -74,7 +74,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textColor="@android:color/white"
+                android:textColor="@color/e_7a7a7a"
                 android:gravity="center"
                 android:textSize="@dimen/sp_26"
                 android:text="Google帳號綁定"/>

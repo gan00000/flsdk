@@ -80,27 +80,9 @@ android {
 
         }
 
-        lyj {
-            signingConfig signingConfigs.debug
-            applicationId "com.flyfun.lyj.google"
-            minSdkVersion 21
-            targetSdkVersion 28
-            versionCode 1
-            versionName "1.0"
-            flavorDimensions "1"
-            resValue "string", "scheme", "fzdld"
-            resValue "string", "facebook_app_id", "566990643996286"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider566990643996286"
-            resValue "string", "fb_login_protocol_scheme", "fb566990643996286"
-            resValue "string", "facebook_app_name", "放置大亂鬥"
-
-            //每个游戏的demo设置
-            resValue "string", "sdk_name", "lyj Demo"
-
-        }
         ylj {
             signingConfig signingConfigs.debug
-            applicationId "com.flyfun.ylj.google"
+            applicationId "com.flyfun.lyj.google"
             minSdkVersion 21
             targetSdkVersion 28
             versionCode 1
