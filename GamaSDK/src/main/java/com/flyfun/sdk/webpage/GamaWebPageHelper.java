@@ -3,6 +3,7 @@ package com.flyfun.sdk.webpage;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.net.Uri;
 import android.support.customtabs.CustomTabsIntent;
@@ -146,6 +147,12 @@ public class GamaWebPageHelper {
                     .append("&roleName=").append(URLEncoder.encode(GamaUtil.getRoleName(context),"UTF-8"))
                     .append("&roleLevel=").append(URLEncoder.encode(GamaUtil.getRoleLevel(context),"UTF-8"))
                     .append("&from=gamePage");
+
+            if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+                builder.append("&layout=transverse");
+            }else{
+                builder.append("&layout=vertical");
+            }
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
