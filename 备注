@@ -30,6 +30,8 @@
     Line分享： GamaShare.SHARE_LINE = 60;
     Whatsapp分享： GamaShare.SHARE_WHATSAPP = 61;
     Twitter分享： GamaShare.SHARE_TWITTER = 62;
+    One支付： OneStoreImpl.PURCHASE_REQUEST_CODE = 2007;
+    免注册绑Google： GsFunctionHelper.REQUEST_CODE_TO_BIND_GOOGLE = 140
 
 10.已使用的activity result code
     Google支付： GooglePayActivity2.GooglePayResultCode = 91

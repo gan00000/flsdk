@@ -78,6 +78,13 @@ android {
             keyAlias 'gamesword'
             keyPassword 'gamesword'
         }
+        twtm {
+            // 21:C9:16:A8:C7:7F:59:F1:7D:06:04:66:09:FA:E6:E6:37:53:69:A4
+            storeFile file('../signkey/gamesword-twtm.jks') //正式签名
+            storePassword 'gamesword'
+            keyAlias 'gamesword'
+            keyPassword 'gamesword'
+        }
     }
 
     buildTypes {
@@ -412,7 +419,7 @@ android {
             //每个游戏的demo设置
             resValue "string", "test_sku", "com.gamesword.gotgl.1usd"
             resValue "string", "sdk_name", "twsb"
-            signingConfig signingConfigs.release
+            signingConfig signingConfigs.twtm
 
             buildConfigField "String[]", "PRODUCE_LIST",
                     "{" +

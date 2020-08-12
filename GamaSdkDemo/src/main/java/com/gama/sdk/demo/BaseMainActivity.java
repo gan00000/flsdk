@@ -58,7 +58,7 @@ public class BaseMainActivity extends Activity {
     protected Button loginButton, othersPayButton, googlePayBtn, shareButton, showPlatform, crashlytics,
             PurchasesHistory, getFriend, invite, checkShare, getInfo, getFriendNext, getFriendPrevious,
             service, announcement, age, demo_language, track, chaxun, xiaofei, open_url, open_page,
-            demo_pay_one, ingame_bind, upload_file;
+            demo_pay_one, ingame_bind, upload_file, bind_google;
     protected ImageView image_test;
     protected IGama iGama;
     private String nextUrl, previousUrl;
@@ -101,6 +101,7 @@ public class BaseMainActivity extends Activity {
         demo_pay_one = findViewById(R.id.demo_pay_one);
         ingame_bind = findViewById(R.id.ingame_bind);
         upload_file = findViewById(R.id.upload_file);
+        bind_google = findViewById(R.id.bind_google);
 
         iGama = GamaFactory.create();
 
@@ -730,6 +731,23 @@ public class BaseMainActivity extends Activity {
                     }
                 });
                 t.start();
+            }
+        });
+
+        bind_google.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                iGama.openFunction(BaseMainActivity.this, GsFunctionType.BIND_TO_GOOGLE, new ISdkCallBack() {
+                    @Override
+                    public void success() {
+                        ToastUtils.toast(BaseMainActivity.this, "绑Google成功");
+                    }
+
+                    @Override
+                    public void failure() {
+                        ToastUtils.toast(BaseMainActivity.this, "绑Google失败");
+                    }
+                });
             }
         });
     }

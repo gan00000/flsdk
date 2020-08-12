@@ -427,6 +427,7 @@ public class BaseGamaImpl implements IGama {
                 }
                 GamaShare.onActivityResult(activity, requestCode, resultCode, data);
 
+                GsFunctionHelper.onActivityResult(activity, requestCode, resultCode, data);
             }
         });
     }

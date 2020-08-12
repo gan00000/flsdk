@@ -53,6 +53,12 @@
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:theme="@style/Gama.Theme.AppCompat.Light.NoActionBar.FullScreen.Translucent"/>
 
+        <activity
+            android:name="com.gama.sdk.SProgressActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|fontScale"
+            android:windowSoftInputMode="stateHidden|adjustResize"
+            android:theme="@style/Gama.Theme.AppCompat.Light.NoActionBar.FullScreen.Translucent"/>
+
 
 
         <!-- ==========================共同需要的配置============================ -->

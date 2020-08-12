@@ -186,6 +186,13 @@
                     android:visibility="visible"
                     android:text="上传文件"/>
 
+                <Button
+                    android:id="@+id/bind_google"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    android:text="免注册绑google"/>
+
             </LinearLayout>
 
 

@@ -52,6 +52,12 @@ public class GSRequestMethod {
      */
     public static final String GS_REQUEST_METHOD_PHONE_VERIFY = "be_linked_phone.app";
 
+    /**
+     * 第三方绑第三方接口
+     * 免注册绑Google
+     */
+    public static final String GS_REQUEST_METHOD_BIND_TO_THIRD = "bind_toThirdParty.app";
+
     public enum RequestVfcodeInterface {
         register("1"),
         bind("2"),
