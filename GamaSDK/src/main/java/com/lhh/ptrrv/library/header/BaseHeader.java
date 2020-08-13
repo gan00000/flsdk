@@ -1,6 +1,6 @@
 package com.lhh.ptrrv.library.header;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by linhonghong on 2015/11/17.

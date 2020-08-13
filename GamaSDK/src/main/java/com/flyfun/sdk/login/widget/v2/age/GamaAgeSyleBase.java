@@ -1,7 +1,7 @@
 package com.flyfun.sdk.login.widget.v2.age;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.flyfun.sdk.SBaseDialog;
 import com.flyfun.sdk.login.widget.v2.age.impl.GamaAgeImpl;
