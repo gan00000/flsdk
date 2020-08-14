@@ -5,6 +5,7 @@
     <string name="gama_ui_term_confirm" translatable="false">登入遊戲</string>
     <string name="gama_ui_term_read_land" translatable="false">我已閱畢並同意條款</string>
     <string name="gama_ui_term_port_read" translatable="false">我同意「服務條款」及「隱私政策」</string>
+    <string name="gama_ui_term_port_read2" translatable="false">我已閱讀並同意使用者協議</string>
     <string name="gama_ui_term_port_term1" translatable="false">服務條款</string>
     <string name="gama_ui_term_port_term2" translatable="false">隱私政策</string>
     <string name="gama_ui_term_not_read" translatable="false">請先同意「使用者條款」</string>

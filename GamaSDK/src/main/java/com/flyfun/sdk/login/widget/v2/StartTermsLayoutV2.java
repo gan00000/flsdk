@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
@@ -17,12 +15,15 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.core.base.utils.ScreenHelper;
 import com.core.base.utils.ToastUtils;
 import com.flyfun.base.cfg.ResConfig;
+import com.flyfun.base.utils.GamaUtil;
 import com.flyfun.sdk.SBaseDialog;
 import com.flyfun.sdk.callback.GamaCommonViewCallback;
-import com.flyfun.base.utils.GamaUtil;
 import com.gama.sdk.R;
 
 /**
@@ -88,6 +89,7 @@ public class StartTermsLayoutV2 extends SBaseDialog {
         termsView1.loadUrl(serviceUrl);
 
         checkBox1 = (CheckBox) findViewById(R.id.gama_gama_start_term_cb1);
+        checkBox1.setChecked(true);//默認選擇
         gama_gama_start_term_tv1 = findViewById(R.id.gama_gama_start_term_tv1);
         gama_gama_start_term_tv1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,6 +125,7 @@ public class StartTermsLayoutV2 extends SBaseDialog {
             termsView2.loadUrl(privateUrl);
 
             checkBox2 = (CheckBox) findViewById(R.id.gama_gama_start_term_cb2);
+            checkBox2.setChecked(true);
             gama_gama_start_term_tv2 = findViewById(R.id.gama_gama_start_term_tv2);
             gama_gama_start_term_tv2.setOnClickListener(new View.OnClickListener() {
                 @Override

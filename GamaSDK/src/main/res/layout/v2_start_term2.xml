@@ -39,6 +39,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
+
         android:background="@drawable/login_cons_bg"
         app:layout_constraintBottom_toTopOf="@id/gama_start_term_guideline2"
         app:layout_constraintEnd_toStartOf="@id/gama_start_term_guideline4"
@@ -97,6 +98,7 @@
             android:textStyle="bold"
             android:textSize="@dimen/sp_22"
             android:gravity="center"
+            android:visibility="gone"
             app:layout_constraintEnd_toStartOf="@id/gama_start_term_guideline7"
             app:layout_constraintStart_toStartOf="@id/gama_start_term_guideline6"
             app:layout_constraintTop_toTopOf="parent" />
@@ -105,14 +107,12 @@
             android:id="@+id/gama_start_term_wv1"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginStart="@dimen/px_58"
+            android:layout_marginEnd="@dimen/px_58"
             android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginTop="@dimen/px_36"
             app:layout_constraintBottom_toTopOf="@id/gama_start_term_guideline8"
-            app:layout_constraintEnd_toStartOf="@id/gama_start_term_guideline5"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/gama_start_term_title" />
 
@@ -126,45 +126,60 @@
             android:layout_marginEnd="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@id/gama_start_term_guideline8"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/gama_start_term_guideline5"
             app:layout_constraintTop_toBottomOf="@id/gama_start_term_title" />
 
-        <CheckBox
-            android:id="@+id/gama_gama_start_term_cb1"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/gama_term_checkbox_selector"
-            android:button="@null"
             app:layout_constraintBottom_toTopOf="@id/gama_start_term_guideline9"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintStart_toStartOf="@id/gama_start_term_wv1"
-            app:layout_constraintTop_toTopOf="@id/gama_start_term_guideline8" />
+            app:layout_constraintTop_toTopOf="@id/gama_start_term_guideline8"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/px_6"
+            >
+            <CheckBox
+                android:id="@+id/gama_gama_start_term_cb1"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:background="@drawable/gama_term_checkbox_selector"
+                android:button="@null"
+                android:checked="true"
+                 />
 
-        <TextView
-            android:id="@+id/gama_gama_start_term_tv1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:text="@string/gama_ui_term_read_land"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/sp_19"
-            app:layout_constraintBottom_toBottomOf="@id/gama_gama_start_term_cb1"
-            app:layout_constraintStart_toEndOf="@id/gama_gama_start_term_cb1"
-            app:layout_constraintEnd_toEndOf="@id/gama_start_term_wv1"
-            app:layout_constraintTop_toTopOf="@id/gama_gama_start_term_cb1" />
+            <TextView
+                android:id="@+id/gama_gama_start_term_tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:text="@string/gama_ui_term_port_read2"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/sp_19"
+                app:layout_constraintBottom_toBottomOf="@id/gama_gama_start_term_cb1"
+                app:layout_constraintStart_toEndOf="@id/gama_gama_start_term_cb1"
+                app:layout_constraintEnd_toEndOf="@id/gama_start_term_wv1"
+                app:layout_constraintTop_toTopOf="@id/gama_gama_start_term_cb1" />
+        </LinearLayout>
+
+
 
         <CheckBox
             android:id="@+id/gama_gama_start_term_cb2"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginBottom="8dp"
+            android:visibility="gone"
             android:background="@drawable/gama_term_checkbox_selector"
             android:button="@null"
-            app:layout_constraintBottom_toTopOf="@+id/gama_start_term_guideline9"
+            android:checked="true"
+            app:layout_constraintBottom_toTopOf="@id/gama_start_term_guideline9"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintStart_toStartOf="@id/gama_start_term_wv2"
             app:layout_constraintTop_toTopOf="@id/gama_start_term_guideline8" />
