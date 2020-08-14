@@ -88,6 +88,9 @@
         android:id="@+id/sdk_input_item_et"
         android:background="@null"
         android:textSize="12sp"
+
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         />
 
 
