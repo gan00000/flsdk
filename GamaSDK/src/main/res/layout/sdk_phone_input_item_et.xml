@@ -73,7 +73,7 @@
         android:orientation="horizontal"
         android:background="@color/e_f3f4f5"/>
 
-    <androidx.appcompat.widget.AppCompatEditText
+    <EditText
 
         android:layout_width="0dp"
         android:layout_height="match_parent"
