@@ -147,7 +147,6 @@
                 android:layout_height="18dp"
                 android:background="@drawable/gama_term_checkbox_selector"
                 android:button="@null"
-                android:checked="true"
                  />
 
             <TextView

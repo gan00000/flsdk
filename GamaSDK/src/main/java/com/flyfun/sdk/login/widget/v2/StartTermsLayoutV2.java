@@ -89,7 +89,7 @@ public class StartTermsLayoutV2 extends SBaseDialog {
         termsView1.loadUrl(serviceUrl);
 
         checkBox1 = (CheckBox) findViewById(R.id.gama_gama_start_term_cb1);
-        checkBox1.setChecked(true);//默認選擇
+        //checkBox1.setChecked(true);//默認不選擇
         gama_gama_start_term_tv1 = findViewById(R.id.gama_gama_start_term_tv1);
         gama_gama_start_term_tv1.setOnClickListener(new View.OnClickListener() {
             @Override
