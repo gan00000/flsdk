@@ -71,7 +71,7 @@ public class ResConfig {
      * 获取Google Client Id用于G+登录验证
      */
     public static String getGoogleClientId(Context context) {
-        return getConfigInAssetsProperties(context, "google_client_id");
+        return ResUtil.findStringByName(context,"default_web_client_id");
     }
 
 
