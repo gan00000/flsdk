@@ -8,7 +8,7 @@
     <string name="gama_ui_term_port_read2" translatable="false">我已閱讀並同意使用者協議</string>
     <string name="gama_ui_term_port_term1" translatable="false">服務條款</string>
     <string name="gama_ui_term_port_term2" translatable="false">隱私政策</string>
-    <string name="gama_ui_term_not_read" translatable="false">請先同意「使用者條款」</string>
+    <string name="gama_ui_term_not_read" translatable="false">請先同意使用者協議</string>
 
     <!--登录页面-->
     <string name="py_login_page_account_login">會員登入頁</string>
