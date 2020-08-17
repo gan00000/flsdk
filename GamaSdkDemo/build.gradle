@@ -5,6 +5,13 @@ android {
 
     compileSdkVersion 29
 
+//    错误原因：这是因为java8才支持静态接口方法的原因
+//    解决办法：可以通过在app的build.gradle文件中配置使用java8编译
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     defaultConfig {
         minSdkVersion 18
         targetSdkVersion 29
