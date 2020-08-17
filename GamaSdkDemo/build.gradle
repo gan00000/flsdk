@@ -56,16 +56,15 @@ android {
         }
 
         debug {
-        debuggable true
         }
     }
     productFlavors {
 
         fzdld {
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
             applicationId "com.flyfun.fzdld.google"
             minSdkVersion 21
-            targetSdkVersion 28
+            targetSdkVersion 29
             versionCode 1
             versionName "1.0"
             flavorDimensions "1"
@@ -81,10 +80,10 @@ android {
         }
 
         ylj {
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
             applicationId "com.flyfun.lyj.google"
             minSdkVersion 21
-            targetSdkVersion 28
+            targetSdkVersion 29
             versionCode 1
             versionName "1.0"
             flavorDimensions "1"
