@@ -8,60 +8,55 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
-import android.content.IntentSender;
-import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import android.text.TextUtils;
-import android.util.Log;
-import android.widget.Toast;
 
-import com.google.android.gms.auth.api.Auth;
+import com.core.base.utils.ResUtil;
+import com.core.base.utils.SStringUtil;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.auth.api.signin.GoogleSignInResult;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
-import com.flyfun.base.utils.GamaUtil;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 
-import static android.app.Activity.RESULT_OK;
+public class SGoogleSignIn {
 
-public class SGoogleSignIn implements GoogleApiClient.OnConnectionFailedListener,GoogleApiClient.ConnectionCallbacks {
-	
 	private static final String TAG = "SGoogleSignIn";
-	
+
 	public static final int RC_SIGN_IN = 9001;
 
 	public static final int GOOGLE_SHARE_CODE = 9002;
-	
+
 	private Activity activity;
-	
+
 	private Dialog mConnectionProgressDialog;
-	
-	private GoogleApiClient mGoogleApiClient;
-	
-	GoogleSignInCallBack googleSignInCallBack;
-	
+
 	boolean isCancel = false;
 
 	private Fragment fragment;
 
-	// Bool to track whether the app is already resolving an error
-	private boolean mResolvingError = false;
-	// Request code to use when launching the resolution activity
-	private static final int REQUEST_RESOLVE_ERROR = 1001;
-	// Unique tag for the error dialog fragment
-	private static final String DIALOG_ERROR = "dialog_error";
 
-	private String clientId = "";
+	// [START declare_auth]
+	private FirebaseAuth mAuth;
+	// [END declare_auth]
+
+	GoogleSignInCallBack googleSignInCallBack;
+	private GoogleSignInClient mGoogleSignInClient;
+
+	private String default_web_client_id = "";
 
 	public void setClientId(String clientId) {
-		this.clientId = clientId;
+		this.default_web_client_id = clientId;
 	}
 
 	public SGoogleSignIn(Activity activity) {
@@ -70,8 +65,9 @@ public class SGoogleSignIn implements GoogleApiClient.OnConnectionFailedListener
 			Log.e(TAG,"SGoogleSignIn activity must not null");
 			return;
 		}
-		
+
 		this.activity = activity;
+		initxx();
 	}
 
 	public SGoogleSignIn(Activity activity, Dialog dialog) {
@@ -83,9 +79,7 @@ public class SGoogleSignIn implements GoogleApiClient.OnConnectionFailedListener
 
 		this.activity = activity;
 		this.mConnectionProgressDialog = dialog;
-//		if (activity instanceof FragmentActivity){
-//			this.fragmentActivity = (FragmentActivity)activity;
-//		}
+		initxx();
 	}
 
 	public SGoogleSignIn(FragmentActivity fragmentActivity, Fragment fragment, Dialog dialog) {
@@ -98,10 +92,41 @@ public class SGoogleSignIn implements GoogleApiClient.OnConnectionFailedListener
 		this.mConnectionProgressDialog = dialog;
 
 		this.fragment = fragment;
+		initxx();
 	}
 
-	
+	private void initxx(){
+		// [START config_signin]
+		// Configure Google Sign In
+		if (SStringUtil.isEmpty(default_web_client_id)) {
+			default_web_client_id = ResUtil.findStringByName(activity,"default_web_client_id");
+		}
+		GoogleSignInOptions gso;
+		if (SStringUtil.isNotEmpty(default_web_client_id)){
+			gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+					.requestIdToken(default_web_client_id)
+					.requestEmail()
+					.build();
+			// [END config_signin]
+
+		}else{
+
+			Log.e(TAG,"default_web_client_id为空,firebase配置不正确");
+			gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().requestId().build();
+
+		}
+		mGoogleSignInClient = GoogleSignIn.getClient(activity, gso);
+
+		// [START initialize_auth]
+		// Initialize Firebase Auth
+		mAuth = FirebaseAuth.getInstance();
+		// [END initialize_auth]
+	}
+
+
 	public void startSignIn(GoogleSignInCallBack googleSignInCallBack){
+
+		this.googleSignInCallBack = googleSignInCallBack;
 		if (!SGoogleProxy.isGooglePlayServicesAvailableToast(activity)){
 			return;
 		}
@@ -110,52 +135,25 @@ public class SGoogleSignIn implements GoogleApiClient.OnConnectionFailedListener
 			return;
 		}
 
-		// Configure sign-in to request the user's ID, email address, and basic
-		// profile. ID and
-		// basic profile are included in DEFAULT_SIGN_IN.
-		if (mGoogleApiClient == null) {
-			GoogleSignInOptions gso;
-			if (TextUtils.isEmpty(clientId)){
-				gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().requestId().build();
-			}else {
-				gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().requestId().requestIdToken(clientId).build();
-			}
-
-			// Build a GoogleApiClient with access to SGoogleSignIn.API and the
-			// options above.
-
-			mGoogleApiClient = new GoogleApiClient.Builder(activity)
-					//.enableAutoManage(fragmentActivity, this)
-					.addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-					.addConnectionCallbacks(this)
-					.addOnConnectionFailedListener(this)
-					.build();
-
-		}
-		if (!mGoogleApiClient.isConnecting() && !mGoogleApiClient.isConnected()) {
-			mGoogleApiClient.connect();
-		}else {
-			signIn();
-		}
-		this.googleSignInCallBack = googleSignInCallBack;
-		isCancel = false;
 		Log.d(TAG,"Start Google SignIn ");
 		if (mConnectionProgressDialog != null) {
 			initDialog();
 			mConnectionProgressDialog.show();
 		}
+		signInFirebase();
+		isCancel = false;
 
 	}
-	
+
 	public void handleActivityResult(Context context, int requestCode, int resultCode, Intent data) {
 		Log.d(TAG,"handleActivityResult --> " + requestCode + "  --> " +  resultCode);
-		if (isCancel || mGoogleApiClient == null) {
+		if (isCancel) {
 			return;
 		}
 		dimissDialog();
-		 // Result returned from launching the Intent from
-	    //   GoogleSignInApi.getSignInIntent(...);
-	    if (requestCode == RC_SIGN_IN) {
+		// Result returned from launching the Intent from
+		//   GoogleSignInApi.getSignInIntent(...);
+	   /* if (requestCode == RC_SIGN_IN) {
 	        GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
 	        if (result != null && result.isSuccess()) {
 	            GoogleSignInAccount acct = result.getSignInAccount();
@@ -197,9 +195,43 @@ public class SGoogleSignIn implements GoogleApiClient.OnConnectionFailedListener
 					googleSignInCallBack.failure();
 				}
 			}
+		}*/
+
+		if (requestCode == RC_SIGN_IN) {
+			Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+			try {
+				// Google Sign In was successful, authenticate with Firebase
+				GoogleSignInAccount account = task.getResult(ApiException.class);
+				Log.d(TAG, "firebaseAuthWithGoogle:" + account.getId());
+
+				String mFullName = account.getDisplayName();
+				String mEmail = account.getEmail();
+				String id = account.getId();
+				Log.d(TAG, "mFullName：" + mFullName + ",mEmail:" + mEmail + ",id:" + id);
+				String idToken = account.getIdToken();
+				Log.d(TAG, "idToken：" + idToken);
+
+				//firebaseAuthWithGoogle(account.getIdToken());
+
+				if (googleSignInCallBack != null) {
+					googleSignInCallBack.success(id,mFullName,mEmail,idToken);
+				}
+
+			} catch (ApiException e) {
+				// Google Sign In failed, update UI appropriately
+				Log.w(TAG, "Google sign in failed", e);
+				// [START_EXCLUDE]
+
+				if (googleSignInCallBack != null) {
+					googleSignInCallBack.failure();
+				}
+
+				// [END_EXCLUDE]
+			}
 		}
+
 	}
-	
+
 	public void handleActivityDestroy(Context context) {
 		signOut();
 	}
@@ -213,7 +245,7 @@ public class SGoogleSignIn implements GoogleApiClient.OnConnectionFailedListener
 		mConnectionProgressDialog.setCancelable(true);
 		mConnectionProgressDialog.setCanceledOnTouchOutside(false);
 		mConnectionProgressDialog.setOnCancelListener(new OnCancelListener() {
-			
+
 			@Override
 			public void onCancel(DialogInterface dialog) {
 				isCancel = true;
@@ -222,128 +254,87 @@ public class SGoogleSignIn implements GoogleApiClient.OnConnectionFailedListener
 				}
 			}
 		});
-		
+
 	}
-	
+
 	private void dimissDialog() { //关闭loading窗
 		if(mConnectionProgressDialog != null) {
 			Log.d(TAG,"dimiss dialog");
 			mConnectionProgressDialog.dismiss();
 		}
 	}
-	
-	
-	
-	 // [START signIn]
-	private void signIn() {
 
-		if (mGoogleApiClient != null && activity != null) {
 
-			Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-			if (this.fragment != null){
+//	============firebase 1=================
 
-				if (signInIntent != null) {
-					this.fragment.startActivityForResult(signInIntent, RC_SIGN_IN);
-				}
+	// [START auth_with_google]
+	private void firebaseAuthWithGoogle(String idToken) {
+		// [START_EXCLUDE silent]
+//		showProgressBar();
+		// [END_EXCLUDE]
+		AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+		mAuth.signInWithCredential(credential)
+				.addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
+					@Override
+					public void onComplete(@NonNull Task<AuthResult> task) {
+						if (task.isSuccessful()) {
+							// Sign in success, update UI with the signed-in user's information
+							Log.d(TAG, "signInWithCredential:success");
+							FirebaseUser user = mAuth.getCurrentUser();
+							if (googleSignInCallBack != null) {
+								googleSignInCallBack.success(user.getUid(),user.getDisplayName(),user.getEmail(),"");
+							}
+						} else {
+							// If sign in fails, display a message to the user.
+							Log.w(TAG, "signInWithCredential:failure", task.getException());
+							if (googleSignInCallBack != null) {
+								googleSignInCallBack.failure();
+							}
+						}
 
-			}else {
-
-				if (signInIntent != null) {
-					activity.startActivityForResult(signInIntent, RC_SIGN_IN);
-				}
-			}
-
-		}
+						// [START_EXCLUDE]
+//						hideProgressBar();
+						// [END_EXCLUDE]
+					}
+				});
 	}
-   // [END signIn]
+	// [END auth_with_google]
 
-   // [START signOut]
-	public void signOut() {
-
-		if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
-			Log.d(TAG, "signOut");
-			try {
-				Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(new ResultCallback<Status>() {
-                    @Override
-                    public void onResult(Status status) {
-                        // [START_EXCLUDE]
-                        mGoogleApiClient.disconnect();
-                        // [END_EXCLUDE]
-                    }
-                });
-			} catch (Exception e) {
-				mGoogleApiClient.disconnect();
-			}
-		} else {
-			Log.d(TAG, "mGoogleApiClient not connected");
-		}
-		
+	// [START signin]
+	private void signInFirebase() {
+		Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+		activity.startActivityForResult(signInIntent, RC_SIGN_IN);
 	}
-   // [END signOut]
+	// [END signin]
 
-   // [START revokeAccess]
-	public void revokeAccess() {
-		Auth.GoogleSignInApi.revokeAccess(mGoogleApiClient).setResultCallback(new ResultCallback<Status>() {
-			@Override
-			public void onResult(Status status) {
-				// [START_EXCLUDE]
+	private void signOut() {
+		// Firebase sign out
+		mAuth.signOut();
 
-				// [END_EXCLUDE]
-			}
-		});
-	}
-   // [END revokeAccess]
-
-
-	@Override
-	public void onConnectionFailed(ConnectionResult result) {
-		Log.d(TAG, "onConnectionFailed");
-		if (isCancel) {
-			return;
-		}
-		dimissDialog();
-		/*if (!TextUtils.isEmpty(result.getErrorMessage())) {
-			Toast.makeText(fragmentActivity, result.getErrorMessage(), Toast.LENGTH_SHORT).show();
-		}
-		if (googleSignInCallBack != null) {
-			googleSignInCallBack.failure();
-		}*/
-
-
-		if (mResolvingError) {
-			// Already attempting to resolve an error.
-			return;
-		} else if (result.hasResolution()) {
-			try {
-				mResolvingError = true;
-				result.startResolutionForResult(activity, REQUEST_RESOLVE_ERROR);
-			} catch (IntentSender.SendIntentException e) {
-				// There was an error with the resolution intent. Try again.
-				mGoogleApiClient.connect();
-			}
-		} else {
-			// Show dialog using GoogleApiAvailability.getErrorDialog()
-			if (!TextUtils.isEmpty(result.getErrorMessage())) {
-				Toast.makeText(activity, result.getErrorMessage(), Toast.LENGTH_SHORT).show();
-			}
-			showErrorDialog(result.getErrorCode());
-			mResolvingError = true;
-		}
-	}
-	
-
-	@Override
-	public void onConnected(@Nullable Bundle bundle) {
-		Log.d(TAG, "onConnected");
-
-		signIn();
-
+		// Google sign out
+		mGoogleSignInClient.signOut().addOnCompleteListener(activity,
+				new OnCompleteListener<Void>() {
+					@Override
+					public void onComplete(@NonNull Task<Void> task) {
+					}
+				});
 	}
 
-	@Override
-	public void onConnectionSuspended(int i) {
-		Log.d(TAG, "onConnectionSuspended");
+	private void revokeAccess() {
+		// Firebase sign out
+		mAuth.signOut();
+
+		// Google revoke access
+		mGoogleSignInClient.revokeAccess().addOnCompleteListener(activity,
+				new OnCompleteListener<Void>() {
+					@Override
+					public void onComplete(@NonNull Task<Void> task) {
+					}
+				});
 	}
+
+
+//	============firebase 1=================
 
 
 	public interface GoogleSignInCallBack{
@@ -352,25 +343,15 @@ public class SGoogleSignIn implements GoogleApiClient.OnConnectionFailedListener
 	}
 
 
-
-	// The rest of this code is all about building the error dialog
-
-	/* Creates a dialog for an error message */
-	private void showErrorDialog(int errorCode) {
-
-		GoogleApiAvailability.getInstance().getErrorDialog(activity, errorCode, REQUEST_RESOLVE_ERROR).show();
-	}
-
 	/* Called from ErrorDialogFragment when the dialog is dismissed. */
 	public void onDialogDismissed() {
-		mResolvingError = false;
 		if (googleSignInCallBack != null) {
 			googleSignInCallBack.failure();
 		}
 	}
 
 	/* A fragment to display an error dialog */
-	public static class ErrorDialogFragment extends DialogFragment {
+	/*public static class ErrorDialogFragment extends DialogFragment {
 		private SGoogleSignIn mSGoogleSignIn;
 
 		public void setmSGoogleSignIn(SGoogleSignIn mSGoogleSignIn) {
@@ -390,5 +371,5 @@ public class SGoogleSignIn implements GoogleApiClient.OnConnectionFailedListener
 				mSGoogleSignIn.onDialogDismissed();
 			}
 		}
-	}
+	}*/
 }
