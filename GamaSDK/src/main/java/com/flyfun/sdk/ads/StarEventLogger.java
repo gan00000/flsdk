@@ -6,34 +6,20 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
 
-import com.appsflyer.AFInAppEventParameterName;
-import com.appsflyer.AFInAppEventType;
-import com.appsflyer.AppsFlyerLib;
 import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.ISReqCallBack;
-import com.core.base.request.SimpleHttpRequest;
 import com.core.base.utils.PL;
 import com.core.base.utils.SPUtil;
 import com.core.base.utils.SStringUtil;
-import com.flyfun.base.bean.AdsRequestBean;
-import com.flyfun.base.bean.BasePayBean;
-import com.flyfun.base.cfg.ResConfig;
-import com.flyfun.base.constant.GamaCommonKey;
 import com.flyfun.base.utils.GamaUtil;
 import com.flyfun.data.login.execute.GamaVfcodeSwitchRequestTask;
 import com.flyfun.data.login.response.SLoginResponse;
 import com.flyfun.thirdlib.facebook.SFacebookProxy;
 import com.flyfun.thirdlib.google.SGoogleProxy;
 import com.gamamobi.ads.plug.aj.GamaAj;
-import com.gamesword.ads.plug.referrer.GsInstallReferrer;
-import com.gamesword.ads.plug.referrer.GsInstallReferrerBean;
-import com.google.ads.conversiontracking.AdWordsConversionReporter;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Created by gan on 2017/3/3.
@@ -45,17 +31,17 @@ public class StarEventLogger {
     public static void activateApp(Activity activity){
 
         try {
-            AppsFlyerLib.getInstance().setCollectIMEI(false);
+           /* AppsFlyerLib.getInstance().setCollectIMEI(false);
             AppsFlyerLib.getInstance().setCollectAndroidID(false);
             String afDevKey = ResConfig.getConfigInAssetsProperties(activity,"sdk_ads_appflyer_dev_key");
             if(TextUtils.isEmpty(afDevKey)) {
                 PL.e("af dev key empty!");
             } else {
                 AppsFlyerLib.getInstance().startTracking(activity.getApplication(), afDevKey);
-            }
+            }*/
 
             SFacebookProxy.initFbSdk(activity.getApplicationContext());
-
+/*
             // Google Android first open conversion tracking snippet
             // Add this code to the onCreate() method of your application activity
             String gama_ads_adword_conversionId = ResConfig.getConfigInAssetsProperties(activity,"gama_ads_adword_conversionId");
@@ -75,7 +61,7 @@ public class StarEventLogger {
             //获取验证码开关
             if(GamaUtil.isNeedVfSwitch(activity)) {
                 getVfSwitch(activity);
-            }
+            }*/
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -90,7 +76,7 @@ public class StarEventLogger {
         try {
             PL.i(TAG, "登入上報");
             // TODO: 2018/4/16 Android登录事件名 gama_login_event_android
-            String userId = loginResponse.getUserId();
+           /* String userId = loginResponse.getUserId();
             //Facebook上报
             Bundle b = new Bundle();
             b.putString(SdkAdsConstant.GAMA_EVENT_USER_ID, userId);
@@ -105,7 +91,7 @@ public class StarEventLogger {
             AppsFlyerLib.getInstance().trackEvent(activity.getApplicationContext(), SdkAdsConstant.GAMA_EVENT_LOGIN, eventValue);
 
             //adjust
-            GamaAj.trackEvent(activity.getApplicationContext(), SdkAdsConstant.GAMA_EVENT_LOGIN, eventValue);
+            GamaAj.trackEvent(activity.getApplicationContext(), SdkAdsConstant.GAMA_EVENT_LOGIN, eventValue);*/
 
 //            TapDB.setUser(userId);
 
@@ -121,7 +107,7 @@ public class StarEventLogger {
         try {
             PL.i(TAG, "註冊上報");
             // TODO: 2018/4/16 Android注册事件名 gama_register_event_android
-            String userId = loginResponse.getUserId();
+           /* String userId = loginResponse.getUserId();
             //Facebook上报
             Bundle b = new Bundle();
             b.putString(SdkAdsConstant.GAMA_EVENT_USER_ID, userId);
@@ -136,7 +122,7 @@ public class StarEventLogger {
             AppsFlyerLib.getInstance().trackEvent(activity.getApplicationContext(), SdkAdsConstant.GAMA_EVENT_REGISTER, eventValue);
 
             //adjust
-            GamaAj.trackEvent(activity.getApplicationContext(), SdkAdsConstant.GAMA_EVENT_REGISTER, eventValue);
+            GamaAj.trackEvent(activity.getApplicationContext(), SdkAdsConstant.GAMA_EVENT_REGISTER, eventValue);*/
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -146,7 +132,7 @@ public class StarEventLogger {
      * Android角色信息上报
      */
     public static void trackingRoleInfo(Context activity, Map<String, Object> map) {
-        try {
+        /*try {
             String userId = GamaUtil.getUid(activity);
             if (map == null || map.isEmpty() || TextUtils.isEmpty(userId)) {
                 PL.i(TAG, "沒有角色信息");
@@ -182,7 +168,7 @@ public class StarEventLogger {
 //            TapDB.setLevel(map.get(GamaAdsConstant.GAMA_EVENT_ROLE_LEVEL).toString());
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     /**
@@ -193,7 +179,7 @@ public class StarEventLogger {
             PL.i(TAG, "trackinPay bundle null");
             return;
         }
-        BasePayBean payBean = (BasePayBean) bundle.getSerializable(GamaCommonKey.PURCHASE_DATA);
+       /* BasePayBean payBean = (BasePayBean) bundle.getSerializable(GamaCommonKey.PURCHASE_DATA);
 
         String orderId = "";
         String productId = "";
@@ -245,7 +231,7 @@ public class StarEventLogger {
 
         } catch (Exception e1) {
             e1.printStackTrace();
-        }
+        }*/
     }
 
     public static void trackingWithEventName(Context context, String eventName, Map<String, Object> map, Set<SdkAdsConstant.EventReportChannel> mediaSet) {
@@ -253,7 +239,7 @@ public class StarEventLogger {
             PL.e("上報事件名為空");
             return;
         }
-        try {
+      /*  try {
             String userId = GamaUtil.getUid(context);
             if(map == null) { //appsflyer的属性列表
                 map = new HashMap<>();
@@ -309,7 +295,7 @@ public class StarEventLogger {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     /**
@@ -350,7 +336,7 @@ public class StarEventLogger {
     }
 
     public static void adsInstallActivation(final Context context){
-        GsInstallReferrer.initReferrerClient(context, new GsInstallReferrer.GsInstallReferrerCallback() {
+       /* GsInstallReferrer.initReferrerClient(context, new GsInstallReferrer.GsInstallReferrerCallback() {
             @Override
             public void onResult(GsInstallReferrerBean bean) {
                     final AdsRequestBean adsRequestBean = new AdsRequestBean(context);
@@ -391,7 +377,7 @@ public class StarEventLogger {
                     });
                     simpleHttpRequest.excute();
                 }
-        });
+        });*/
     }
 
     private static void getVfSwitch(final Activity activity) {

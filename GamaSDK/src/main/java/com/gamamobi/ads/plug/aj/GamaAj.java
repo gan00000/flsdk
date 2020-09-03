@@ -1,20 +1,8 @@
 package com.gamamobi.ads.plug.aj;
 
 import android.content.Context;
-import android.text.TextUtils;
 
-import com.adjust.sdk.Adjust;
-import com.adjust.sdk.AdjustConfig;
-import com.adjust.sdk.AdjustEvent;
-import com.adjust.sdk.LogLevel;
-import com.core.base.callback.ISReqCallBack;
 import com.core.base.utils.PL;
-import com.flyfun.base.cfg.ResConfig;
-import com.gamamobi.ads.plug.aj.cmd.GamaAjEventListCmd;
-import com.gamamobi.ads.plug.aj.utils.GamaAjHelper;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.Map;
 
@@ -24,7 +12,7 @@ public class GamaAj {
     private static boolean isAdjustEnable = false;
 
     public static void activeAj(final Context context) {
-        //adjust激活
+       /* //adjust激活
         String appToken = ResConfig.getConfigInAssetsProperties(context,"sdk_ads_adjust_dev_key");
         String appSecret = ResConfig.getConfigInAssetsProperties(context,"sdk_ads_adjust_secret");
         if(TextUtils.isEmpty(appToken)) {
@@ -75,7 +63,7 @@ public class GamaAj {
 
             }
         });
-        cmd.excute();
+        cmd.excute();*/
     }
 
     public static void onResume(Context context) {
@@ -84,7 +72,7 @@ public class GamaAj {
             PL.i(TAG, "adjust disable");
             return;
         }
-        Adjust.onResume();
+//        Adjust.onResume();
     }
 
     public static void onPause(Context context) {
@@ -93,11 +81,11 @@ public class GamaAj {
             PL.i(TAG, "adjust disable");
             return;
         }
-        Adjust.onPause();
+//        Adjust.onPause();
     }
 
     public static void trackEvent(Context context, String event, Map<String, Object> map) {
-        if(!isAdjustEnable) {
+        /*if(!isAdjustEnable) {
             PL.i(TAG, "adjust disable");
             return;
         }
@@ -119,7 +107,7 @@ public class GamaAj {
             ae.setRevenue(value, currenty);
         }
         ae.addCallbackParameter("gameCode", ResConfig.getGameCode(context));
-        Adjust.trackEvent(ae);
+        Adjust.trackEvent(ae);*/
     }
 
     /**
@@ -128,10 +116,10 @@ public class GamaAj {
      * @param pushToken
      */
     public static void setPushToken(Context context, String pushToken) {
-        if(!isAdjustEnable) {
+        /*if(!isAdjustEnable) {
             PL.i(TAG, "adjust disable");
             return;
         }
-        Adjust.setPushToken(pushToken, context);
+        Adjust.setPushToken(pushToken, context);*/
     }
 }

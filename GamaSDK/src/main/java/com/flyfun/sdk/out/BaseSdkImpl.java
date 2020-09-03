@@ -67,6 +67,7 @@ public class BaseSdkImpl implements IFLSDK {
     private GamaShare gamaShare;
 
     protected SWebViewDialog otherPayWebViewDialog;
+    protected SWebViewDialog csSWebViewDialog;
 
     protected IPayListener iPayListener;
 
@@ -414,6 +415,9 @@ public class BaseSdkImpl implements IFLSDK {
                 if (otherPayWebViewDialog != null) {
                     otherPayWebViewDialog.onActivityResult(activity, requestCode, resultCode, data);
                 }
+                if (csSWebViewDialog != null){
+                    csSWebViewDialog.onActivityResult(activity, requestCode, resultCode, data);
+                }
                 if (sGooglePlayGameServices != null) {
                     sGooglePlayGameServices.handleActivityResult(activity, requestCode, resultCode, data);
                 }
@@ -514,7 +518,12 @@ public class BaseSdkImpl implements IFLSDK {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                GamaWebPageHelper.openWebPage(activity, type, url, callBack);
+                if (GamaOpenWebType.CUSTOM_URL == type){
+                    csSWebViewDialog =  GamaWebPageHelper.openWebPage(activity, type, url, callBack);
+                }else{
+
+                    GamaWebPageHelper.openWebPage(activity, type, url, callBack);
+                }
             }
         });
     }

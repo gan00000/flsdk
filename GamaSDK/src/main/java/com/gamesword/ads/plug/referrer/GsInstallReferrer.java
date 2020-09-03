@@ -1,3 +1,4 @@
+/*
 package com.gamesword.ads.plug.referrer;
 
 import android.content.Context;
@@ -94,3 +95,4 @@ public class GsInstallReferrer {
     }
 
 }
+*/

@@ -68,30 +68,29 @@ dependencies {
 
     implementation 'com.google.code.gson:gson:2.8.2'
 
-//    implementation ('com.zhihu.android:matisse:0.5.1') {
-//        exclude group: 'com.android.support'
-//    }
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
+    implementation 'com.zhy:base-rvadapter:3.0.3'
+
     //google volley
-    implementation 'com.android.volley:volley:1.1.1'
+//    implementation 'com.android.volley:volley:1.1.1'
 
     //Twitter
-    implementation 'com.twitter.sdk.android:twitter-core:3.1.1'
-    implementation ('com.twitter.sdk.android:tweet-ui:3.1.1'){
-        exclude group: 'com.android.support'
-    }
-    implementation ('com.twitter.sdk.android:tweet-composer:3.1.1'){
-        exclude group: 'com.android.support'
-    }
-    implementation 'com.twitter.sdk.android:twitter-mopub:3.1.1'
+//    implementation 'com.twitter.sdk.android:twitter-core:3.1.1'
+//    implementation ('com.twitter.sdk.android:tweet-ui:3.1.1'){
+//        exclude group: 'com.android.support'
+//    }
+//    implementation ('com.twitter.sdk.android:tweet-composer:3.1.1'){
+//        exclude group: 'com.android.support'
+//    }
+//    implementation 'com.twitter.sdk.android:twitter-mopub:3.1.1'
 
     //ads
     //adjust
-    api 'com.adjust.sdk:adjust-android:4.21.1'
-    api 'com.android.installreferrer:installreferrer:2.1'
+//    api 'com.adjust.sdk:adjust-android:4.21.1'
+//    api 'com.android.installreferrer:installreferrer:2.1'
 
-    implementation 'com.zhy:base-rvadapter:3.0.3'
 }
 
 

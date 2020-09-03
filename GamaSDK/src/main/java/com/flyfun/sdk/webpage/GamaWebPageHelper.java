@@ -6,20 +6,21 @@ import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.net.Uri;
-import androidx.browser.customtabs.CustomTabsIntent;
 import android.text.TextUtils;
+
+import androidx.browser.customtabs.CustomTabsIntent;
 
 import com.core.base.callback.ISReqCallBack;
 import com.core.base.utils.PL;
 import com.flyfun.base.bean.unify.UnifiedSwitchResponseBean;
 import com.flyfun.base.cfg.ResConfig;
-import com.flyfun.sdk.SWebViewDialog;
 import com.flyfun.base.excute.UnifiedSwitchRequestTask;
 import com.flyfun.base.utils.GamaUtil;
-import com.gama.sdk.R;
+import com.flyfun.sdk.SWebViewDialog;
 import com.flyfun.sdk.out.GamaOpenWebType;
 import com.flyfun.sdk.out.ISdkCallBack;
 import com.flyfun.sdk.utils.DialogUtil;
+import com.gama.sdk.R;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -28,12 +29,12 @@ public class GamaWebPageHelper {
     private static ISdkCallBack iSdkCallBack;
     private static boolean isLaunch = false;
 
-    public static void openWebPage(Context context, GamaOpenWebType type, String url, ISdkCallBack callBack) {
+    public static SWebViewDialog openWebPage(Context context, GamaOpenWebType type, String url, ISdkCallBack callBack) {
         iSdkCallBack = callBack;
         switch (type) {
             case CUSTOM_URL:
-                openWebPageWithDefaultDialog(context, url);
-                break;
+                return openWebPageWithDefaultDialog(context, url);
+               // break;
 
             case SERVICE:
                 startService(context);
@@ -43,6 +44,7 @@ public class GamaWebPageHelper {
                 startAnnouncement(context);
                 break;
         }
+        return null;
     }
 
     private static void startAnnouncement(final Context context) {
@@ -160,13 +162,13 @@ public class GamaWebPageHelper {
         return builder.toString();
     }
 
-    private static void openWebPageWithDefaultDialog(Context context, String url) {
+    private static SWebViewDialog openWebPageWithDefaultDialog(Context context, String url) {
         if(TextUtils.isEmpty(url)) {
             PL.e("Open Web Page url null");
             if(iSdkCallBack != null) {
                 iSdkCallBack.failure();
             }
-            return;
+            return null;
         }
         try {
             url = addInfoToUrl(context, url);
@@ -181,9 +183,11 @@ public class GamaWebPageHelper {
                 }
             });
             sWebViewDialog.show();
+            return sWebViewDialog;
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return null;
     }
 
     public static void onResume(Activity activity) {
