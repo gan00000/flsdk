@@ -88,15 +88,15 @@ android {
 
         }
 
-        ylj {
+        lyj {
             signingConfig signingConfigs.release
-            applicationId "com.flyfun.lyj.google"
+            applicationId "com.flyfun.lyj"
             minSdkVersion 21
             targetSdkVersion 29
             versionCode 1
             versionName "1.0"
             flavorDimensions "1"
-            resValue "string", "scheme", "ylj"
+            resValue "string", "scheme", "lyj"
             resValue "string", "facebook_app_id", "951929145281682"
             resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider951929145281682"
             resValue "string", "fb_login_protocol_scheme", "fb951929145281682"

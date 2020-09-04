@@ -8,6 +8,50 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:942710672171:android:66a071f5a3e16ffbdd536e",
+        "android_client_info": {
+          "package_name": "com.flyfun.lyj"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "942710672171-ibf7nqk7op0im78k50kvg7d5vnhjhcqt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.flyfun.lyj",
+            "certificate_hash": "f1738617b7ae0c892ca378439c80aa5b9f4bbd50"
+          }
+        },
+        {
+          "client_id": "942710672171-393c0r7s869k9sg8t00lvpbh0otoim72.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDyIQGLYmzGJdLZWfofFi4X_U_6ztKltA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "942710672171-conkb67cs5ue1704j0j6svoja2eea6jj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "942710672171-cnrkvkuteojkj1urtkjcogj5nl6he6bg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.flyfun.lyj"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:942710672171:android:ef4ccc88f9e5a34bdd536e",
         "android_client_info": {
           "package_name": "com.flyfun.lyj.google"
@@ -36,14 +80,14 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "942710672171-393c0r7s869k9sg8t00lvpbh0otoim72.apps.googleusercontent.com",
+              "client_id": "942710672171-conkb67cs5ue1704j0j6svoja2eea6jj.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "942710672171-audo2btofim510ujvq6a70b10gqhmukm.apps.googleusercontent.com",
+              "client_id": "942710672171-cnrkvkuteojkj1urtkjcogj5nl6he6bg.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.flyfun.dybtt.ios"
+                "bundle_id": "com.flyfun.lyj"
               }
             }
           ]

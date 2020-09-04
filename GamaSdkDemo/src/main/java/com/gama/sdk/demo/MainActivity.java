@@ -6,10 +6,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+
+import androidx.annotation.NonNull;
 
 import com.core.base.utils.PL;
 import com.flyfun.base.bean.SGameLanguage;
@@ -119,7 +120,7 @@ public class MainActivity extends Activity {
                             String roleName = "貪婪聖殿"; //角色名
                             String roleLevel = "106"; //角色等级
                             String vipLevel = "5"; //角色vip等级
-                            String serverCode = "1000"; //角色伺服器id
+                            String serverCode = "999"; //角色伺服器id
                             String serverName = "S1"; //角色伺服器名称
                             mIFLSDK.registerRoleInfo(MainActivity.this, roleId, roleName, roleLevel, vipLevel, serverCode, serverName);
                         } else {
