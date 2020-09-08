@@ -30,28 +30,14 @@
 *  在根项目的build.gradle的dependencies中添加(请参照demo中配置)
 
 	```
+classpath 'com.android.tools.build:gradle:4.0.1'
 classpath 'com.google.gms:google-services:4.2.0'// google-services plugin
-
 	```
 
 * 在您的项目中，打开 your_app | Gradle Scripts | build.gradle (Module: app) 并添加以下配置，依赖的aar和其他库，以便编译SDK:
 
 	```
-	
-	android {
-	//Android括号中添加java 1.8，支持java静态接口
-    compileSdkVersion 29
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    	}
-    }
-	
-	dependencies {
-//    implementation fileTree(dir: 'libs', include: ['*.aar'])
-    api fileTree(include: ['*.jar'], dir: 'libs')
-
-    //公共库
+		//公共库
     //Google库
     implementation 'com.google.android.gms:play-services-auth:18.1.0'
     implementation 'com.google.android.gms:play-services-base:17.4.0'
@@ -67,27 +53,22 @@ classpath 'com.google.gms:google-services:4.2.0'// google-services plugin
     //implementation 'com.google.firebase:firebase-crashlytics:17.2.1'
 
     //Facebook库
-    implementation 'com.facebook.android:facebook-login:4.34.0'
-    implementation 'com.facebook.android:facebook-share:4.34.0'
-    implementation 'com.facebook.android:facebook-messenger:4.34.0'
+    implementation 'com.facebook.android:facebook-login:7.1.0'
+    implementation 'com.facebook.android:facebook-share:7.1.0'
+    implementation 'com.facebook.android:facebook-messenger:7.1.0'
     //额外库
     api 'androidx.legacy:legacy-support-v4:1.0.0'
     api 'androidx.appcompat:appcompat:1.2.0'
     api 'androidx.recyclerview:recyclerview:1.1.0'
-    api 'androidx.constraintlayout:constraintlayout:1.1.3'
+    api 'androidx.constraintlayout:constraintlayout:2.0.0'
     api 'androidx.browser:browser:1.2.0'
     //mutildex
     implementation 'androidx.multidex:multidex:2.0.1'
 
     implementation 'com.google.code.gson:gson:2.8.2'
 
-    implementation ('com.zhihu.android:matisse:0.5.1') {
-        exclude group: 'com.android.support'
-    }
-    implementation ('com.github.bumptech.glide:glide:4.11.0') {
-        exclude group: 'com.android.support'
-    }
-
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     //google volley
     implementation 'com.android.volley:volley:1.1.1'
 
@@ -107,8 +88,7 @@ classpath 'com.google.gms:google-services:4.2.0'// google-services plugin
     api 'com.android.installreferrer:installreferrer:2.1'
 
     implementation 'com.zhy:base-rvadapter:3.0.3'
-}
-
+	    
 	```
 	
 * 在运行module的build.gradle最后添加 
