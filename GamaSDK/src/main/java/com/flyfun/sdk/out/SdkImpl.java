@@ -6,9 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.core.base.utils.PL;
+import com.flyfun.base.bean.BasePayBean;
 import com.flyfun.base.bean.SGameLanguage;
 import com.flyfun.base.bean.SPayType;
 import com.flyfun.base.cfg.ResConfig;
+import com.flyfun.base.constant.GamaCommonKey;
+import com.flyfun.pay.IPay;
 import com.flyfun.pay.gp.GooglePayActivity2;
 import com.flyfun.pay.gp.GooglePayHelper;
 import com.flyfun.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
@@ -69,23 +72,40 @@ public class SdkImpl extends BaseSdkImpl {
             @Override
             public void run() {
                 if (requestCode == GooglePayActivity2.GooglePayReqeustCode && resultCode == GooglePayActivity2.GooglePayResultCode) {
-                    Bundle bundle = null;
                     if (data != null) {
-                        bundle = data.getExtras();
-                    }
-                    if (bundle == null) {
-                        bundle = new Bundle();
-                    } else {
-                        StarEventLogger.trackinPayEvent(activity, bundle);
+                        Bundle bundle = data.getExtras();
+
+                        if (bundle != null) {
+                            int payStatus = bundle.getInt(IPay.PAY_STATUS);
+                            if (payStatus == IPay.PAY_SUCCESS){
+                                BasePayBean payBean = (BasePayBean) bundle.getSerializable(GamaCommonKey.PURCHASE_DATA);
+                                //GooglePayCreateOrderIdReqBean googlePayCreateOrderIdReqBean = (GooglePayCreateOrderIdReqBean)bundle.getSerializable(IPay.GooglePayCreateOrderIdReqBean_Key);
+                                if (payBean != null){
+
+                                    if (iPayListener != null) { //支付刷新的回调
+                                        PL.i(TAG, "GooglePay支付回调");
+                                        iPayListener.onPaySuccess(payBean.getProductId(), payBean.getCpOrderId());
+                                    }
+
+                                }
+                            }else if (payStatus == IPay.PAY_FAIL){
+                                if (iPayListener != null) { //支付刷新的回调
+                                    PL.i(TAG, "GooglePay支付回调");
+                                    iPayListener.onPayFail();
+                                }
+                            }
+                            StarEventLogger.trackinPayEvent(activity, bundle);
+                        }
+
+                        if (iPayListener != null) { //支付刷新的回调
+                            PL.i(TAG, "GooglePay支付回调");
+                            iPayListener.onPayFinish(null);
+                        } else {
+                            PL.i(TAG, "GooglePay支付回调为空");
+                        }
                     }
 
-                    if (iPayListener != null) { //支付刷新的回调
-                        PL.i(TAG, "GooglePay支付回调");
-                        iPayListener.onPayFinish(bundle);
-                    } else {
-                        PL.i(TAG, "GooglePay支付回调为空");
-                    }
-                    return;
+                  //  return;
                 }
                 //平台
 //                PlatformManager.getInstance().onActivityResult(activity, requestCode, resultCode, data);

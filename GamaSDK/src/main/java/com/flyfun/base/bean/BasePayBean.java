@@ -16,6 +16,7 @@ public class BasePayBean implements Serializable {
     private String signature;
     private int recurringState;
     private String originPurchaseData;
+    private String cpOrderId;
 
     public String getmItemType() {
         return mItemType;
@@ -111,5 +112,13 @@ public class BasePayBean implements Serializable {
 
     public void setOriginPurchaseData(String originPurchaseData) {
         this.originPurchaseData = originPurchaseData;
+    }
+
+    public String getCpOrderId() {
+        return cpOrderId;
+    }
+
+    public void setCpOrderId(String cpOrderId) {
+        this.cpOrderId = cpOrderId;
     }
 }

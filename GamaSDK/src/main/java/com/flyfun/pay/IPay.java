@@ -10,7 +10,8 @@ import com.flyfun.pay.gp.bean.req.PayReqBean;
  */
 
 public interface IPay extends IGameLifeCycle{
-    String PAY_STATUS = "status";
+    public static final String PAY_STATUS = "status";
+    public static final String GooglePayCreateOrderIdReqBean_Key = "GooglePayCreateOrderIdReqBean_Key";
     int PAY_SUCCESS = 93;
     int PAY_FAIL = 94;
 

@@ -81,9 +81,11 @@ public class GooglePayImpl implements IPay {
             payBean.setSignature(purchase.getSignature());
             payBean.setDeveloperPayload(purchase.getDeveloperPayload());
             payBean.setmToken(purchase.getToken());
+
+            payBean.setCpOrderId(createOrderIdReqBean.getCpOrderId());
             Bundle b = new Bundle();
             b.putInt(PAY_STATUS, PAY_SUCCESS);
-            b.putSerializable("GooglePayCreateOrderIdReqBean", createOrderIdReqBean);
+            b.putSerializable(GooglePayCreateOrderIdReqBean_Key, createOrderIdReqBean);
             b.putSerializable(GamaCommonKey.PURCHASE_DATA, payBean);
             iPayCallBack.success(b);
         }
