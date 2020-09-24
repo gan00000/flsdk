@@ -33,8 +33,8 @@ public class GamaAj {
             return;
         } else {
             isAdjustEnable = true;
-//            String environment = AdjustConfig.ENVIRONMENT_PRODUCTION;
-            String environment = AdjustConfig.ENVIRONMENT_SANDBOX;
+            String environment = AdjustConfig.ENVIRONMENT_PRODUCTION;
+//            String environment = AdjustConfig.ENVIRONMENT_SANDBOX;
             AdjustConfig config = new AdjustConfig(context, appToken, environment);
             config.setLogLevel(LogLevel.VERBOSE);
             if(!TextUtils.isEmpty(appSecret)){
