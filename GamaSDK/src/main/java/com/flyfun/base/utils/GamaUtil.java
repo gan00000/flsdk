@@ -24,6 +24,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -185,7 +186,18 @@ public class GamaUtil {
                     return 1;
                 }
             });
+        }else{
+            Collections.sort(accountModels,new Comparator<AccountModel>() {//排序
+                @Override
+                public int compare(AccountModel o1, AccountModel o2) {
+                    if (o1.getTime() > o2.getTime()){
+                        return -1;
+                    }
+                    return 1;
+                }
+            });
         }
+
         return accountModels;
     }
 
