@@ -170,6 +170,17 @@ public class MainActivity extends Activity {
                     public void onPayFinish(Bundle bundle) {
                         PL.i("支付结束");
                     }
+
+                    @Override
+                    public void onPaySuccess(String productId, String cpOrderId) {
+
+                    }
+
+                    @Override
+                    public void onPayFail() {
+
+                    }
+
                 });
 
 
