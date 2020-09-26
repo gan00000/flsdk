@@ -26,9 +26,6 @@ import com.flyfun.sdk.ads.StarEventLogger;
 import com.flyfun.sdk.callback.IPayListener;
 import com.flyfun.sdk.login.DialogLoginImpl;
 import com.flyfun.sdk.login.ILogin;
-import com.flyfun.sdk.login.widget.v2.age.IGamaAgePresenter;
-import com.flyfun.sdk.login.widget.v2.age.callback.GamaAgeCallback;
-import com.flyfun.sdk.login.widget.v2.age.impl.GamaAgeImpl;
 import com.flyfun.sdk.social.bean.UserInfo;
 import com.flyfun.sdk.social.callback.FetchFriendsCallback;
 import com.flyfun.sdk.social.callback.InviteFriendsCallback;
@@ -196,7 +193,7 @@ public class BaseSdkImpl implements IFLSDK {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                if (GamaUtil.needShowAgePage(activity)) {
+                /*if (GamaUtil.needShowAgePage(activity)) {
                     final IGamaAgePresenter presenter = new GamaAgeImpl();
                     ((GamaAgeImpl) presenter).setAgeCallback(new GamaAgeCallback() {
                         @Override
@@ -243,7 +240,8 @@ public class BaseSdkImpl implements IFLSDK {
                     presenter.requestAgeLimit(activity);
                 } else {
                     startPay(activity, payType, cpOrderId, productId, extra);
-                }
+                }*/
+                startPay(activity, payType, cpOrderId, productId, extra);
             }
         });
     }
