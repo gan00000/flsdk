@@ -7,7 +7,7 @@
 
     <LinearLayout
         android:layout_width="360dp"
-        android:layout_height="400dp"
+        android:layout_height="340dp"
         android:orientation="vertical"
         android:gravity="center_horizontal"
         android:layout_centerInParent="true"
@@ -31,6 +31,7 @@
             android:layout_marginTop="8dp"
             android:layout_centerHorizontal="true"
             android:src="@drawable/fl_sdk_logo"
+            android:visibility="gone"
             />
 
 <!--        會員登入-->
@@ -38,7 +39,7 @@
             android:layout_width="320dp"
             android:layout_height="48dp"
             android:gravity="center_vertical"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="40dp"
             android:orientation="horizontal"
             android:background="@drawable/sdk_btn_bg"
             android:id="@+id/btn_xm_member_login_iv">

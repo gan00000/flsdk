@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="360dp"
-        android:layout_height="400dp"
+        android:layout_height="340dp"
         android:orientation="vertical"
         android:gravity="center_horizontal"
         android:layout_centerInParent="true"
@@ -24,6 +24,7 @@
                 android:layout_height="70dp"
                 android:layout_centerHorizontal="true"
                 android:src="@drawable/fl_sdk_logo"
+                android:visibility="gone"
                 />
 
             <include
