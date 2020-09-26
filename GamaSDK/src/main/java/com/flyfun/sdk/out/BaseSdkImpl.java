@@ -883,8 +883,8 @@ public class BaseSdkImpl implements IFLSDK {
     }
 
     @Override
-    public void trackCreateRole(Activity activity, String roleId, String roleName) {
-        PL.i("roleId:" + roleId + ",roleName:" + roleName);
+    public void trackCreateRoleEvent(Activity activity, String roleId, String roleName) {
+        PL.i("trackCreateRoleEvent roleId:" + roleId + ",roleName:" + roleName);
         if (SStringUtil.isEmpty(roleId)){
             return;
         }
