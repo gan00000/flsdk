@@ -151,14 +151,14 @@ public class BaseSdkImpl implements IFLSDK {
                 PL.i("roleId:" + roleId + ",roleName:" + roleName + ",roleLevel:" + roleLevel + ",vipLevel:" + vipLevel + ",severCode:" + severCode + ",serverName:" + serverName);
                 GamaUtil.saveRoleInfo(activity, roleId, roleName, roleLevel, vipLevel, severCode, serverName);//保存角色信息
 
-                HashMap<String, Object> map = new HashMap<>();
-                map.put(SdkAdsConstant.GAMA_EVENT_ROLEID, roleId);
-                map.put(SdkAdsConstant.GAMA_EVENT_ROLENAME, roleName);
-                map.put(SdkAdsConstant.GAMA_EVENT_ROLE_LEVEL, roleLevel);
-                map.put(SdkAdsConstant.GAMA_EVENT_ROLE_VIP_LEVEL, vipLevel);
-                map.put(SdkAdsConstant.GAMA_EVENT_SERVERCODE, severCode);
-                map.put(SdkAdsConstant.GAMA_EVENT_SERVERNAME, serverName);
-                StarEventLogger.trackingRoleInfo(activity, map);
+//                HashMap<String, Object> map = new HashMap<>();
+//                map.put(SdkAdsConstant.GAMA_EVENT_ROLEID, roleId);
+//                map.put(SdkAdsConstant.GAMA_EVENT_ROLENAME, roleName);
+//                map.put(SdkAdsConstant.GAMA_EVENT_ROLE_LEVEL, roleLevel);
+//                map.put(SdkAdsConstant.GAMA_EVENT_ROLE_VIP_LEVEL, vipLevel);
+//                map.put(SdkAdsConstant.GAMA_EVENT_SERVERCODE, severCode);
+//                map.put(SdkAdsConstant.GAMA_EVENT_SERVERNAME, serverName);
+//                StarEventLogger.trackingRoleInfo(activity, map);
             }
         });
     }
@@ -880,6 +880,22 @@ public class BaseSdkImpl implements IFLSDK {
                 StarEventLogger.trackingWithEventName(activity, eventName, map, channelSet);
             }
         });
+    }
+
+    @Override
+    public void trackCreateRole(Activity activity, String roleId, String roleName) {
+        PL.i("roleId:" + roleId + ",roleName:" + roleName);
+        if (SStringUtil.isEmpty(roleId)){
+            return;
+        }
+        HashMap<String, Object> map = new HashMap<>();
+        map.put(SdkAdsConstant.GAMA_EVENT_ROLEID, roleId);
+        map.put(SdkAdsConstant.GAMA_EVENT_ROLENAME, roleName);
+//        map.put(SdkAdsConstant.GAMA_EVENT_ROLE_LEVEL, roleLevel);
+//        map.put(SdkAdsConstant.GAMA_EVENT_ROLE_VIP_LEVEL, vipLevel);
+//        map.put(SdkAdsConstant.GAMA_EVENT_SERVERCODE, severCode);
+//        map.put(SdkAdsConstant.GAMA_EVENT_SERVERNAME, serverName);
+        StarEventLogger.trackingRoleInfo(activity, map);
     }
 
     @Override

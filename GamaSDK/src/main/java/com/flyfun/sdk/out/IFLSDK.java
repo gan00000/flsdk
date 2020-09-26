@@ -86,6 +86,8 @@ public interface IFLSDK extends IGameLifeCycle {
      */
     void trackEvent(Activity activity, String eventName, Map<String, Object> map, Set<SdkAdsConstant.EventReportChannel> mediaSet);
 
+    void trackCreateRole(Activity activity, String roleId,String roleName);
+
 
     void queryProductDetail(Activity activity, SPayType payType, List<String> skus, QueryProductListener listener);
 

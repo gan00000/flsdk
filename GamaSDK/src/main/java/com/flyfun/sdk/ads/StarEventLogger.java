@@ -258,12 +258,15 @@ public class StarEventLogger {
             if(map == null) { //appsflyer的属性列表
                 map = new HashMap<>();
             }
-            map.put(SdkAdsConstant.GAMA_EVENT_ROLEID, GamaUtil.getRoleId(context));
-            map.put(SdkAdsConstant.GAMA_EVENT_ROLENAME, GamaUtil.getRoleName(context));
-            map.put(SdkAdsConstant.GAMA_EVENT_ROLE_LEVEL, GamaUtil.getRoleLevel(context));
-            map.put(SdkAdsConstant.GAMA_EVENT_ROLE_VIP_LEVEL, GamaUtil.getRoleVip(context));
-            map.put(SdkAdsConstant.GAMA_EVENT_SERVERCODE, GamaUtil.getServerCode(context));
-            map.put(SdkAdsConstant.GAMA_EVENT_SERVERNAME, GamaUtil.getServerName(context));
+            if (!map.containsKey(SdkAdsConstant.GAMA_EVENT_ROLEID)) {
+                map.put(SdkAdsConstant.GAMA_EVENT_ROLEID, GamaUtil.getRoleId(context));
+                map.put(SdkAdsConstant.GAMA_EVENT_ROLENAME, GamaUtil.getRoleName(context));
+                map.put(SdkAdsConstant.GAMA_EVENT_ROLE_LEVEL, GamaUtil.getRoleLevel(context));
+                map.put(SdkAdsConstant.GAMA_EVENT_ROLE_VIP_LEVEL, GamaUtil.getRoleVip(context));
+                map.put(SdkAdsConstant.GAMA_EVENT_SERVERCODE, GamaUtil.getServerCode(context));
+                map.put(SdkAdsConstant.GAMA_EVENT_SERVERNAME, GamaUtil.getServerName(context));
+            }
+
             map.put(SdkAdsConstant.GAMA_EVENT_USER_ID, userId);
 
             //facebook和firebase的属性列表
