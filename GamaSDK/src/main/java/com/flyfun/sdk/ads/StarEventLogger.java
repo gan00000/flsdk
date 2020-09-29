@@ -175,7 +175,7 @@ public class StarEventLogger {
             //计算在线时长
             GamaAdsUtils.uploadOnlineTime(activity, GamaAdsUtils.GamaOnlineType.TYPE_CHANGE_ROLE);
             //上报给gama服务器
-            GamaAdsUtils.upLoadRoleInfo(activity, map);
+//            GamaAdsUtils.upLoadRoleInfo(activity, map);
 
 //            TapDB.setName(map.get(GamaAdsConstant.GAMA_EVENT_ROLENAME).toString());
 //            TapDB.setServer(map.get(GamaAdsConstant.GAMA_EVENT_SERVERCODE).toString());

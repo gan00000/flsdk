@@ -881,19 +881,25 @@ public class BaseSdkImpl implements IFLSDK {
     }
 
     @Override
-    public void trackCreateRoleEvent(Activity activity, String roleId, String roleName) {
+    public void trackCreateRoleEvent(final Activity activity, String roleId, String roleName) {
         PL.i("trackCreateRoleEvent roleId:" + roleId + ",roleName:" + roleName);
         if (SStringUtil.isEmpty(roleId)){
             return;
         }
-        HashMap<String, Object> map = new HashMap<>();
+        final HashMap<String, Object> map = new HashMap<>();
         map.put(SdkAdsConstant.GAMA_EVENT_ROLEID, roleId);
         map.put(SdkAdsConstant.GAMA_EVENT_ROLENAME, roleName);
 //        map.put(SdkAdsConstant.GAMA_EVENT_ROLE_LEVEL, roleLevel);
 //        map.put(SdkAdsConstant.GAMA_EVENT_ROLE_VIP_LEVEL, vipLevel);
 //        map.put(SdkAdsConstant.GAMA_EVENT_SERVERCODE, severCode);
 //        map.put(SdkAdsConstant.GAMA_EVENT_SERVERNAME, serverName);
-        StarEventLogger.trackingRoleInfo(activity, map);
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                StarEventLogger.trackingRoleInfo(activity, map);
+            }
+        });
+
     }
 
     @Override
