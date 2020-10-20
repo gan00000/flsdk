@@ -29,6 +29,42 @@ public class BaseReqeustBean extends AbsReqeustBean {
     private String versionCode = "";
     private String versionName = "";
 
+    public String getAndroidId() {
+        return androidId;
+    }
+
+    public String getImei() {
+        return imei;
+    }
+
+    public String getSystemVersion() {
+        return systemVersion;
+    }
+
+    public String getDeviceType() {
+        return deviceType;
+    }
+
+    public String getMac() {
+        return mac;
+    }
+
+    public String getOsLanguage() {
+        return osLanguage;
+    }
+
+    public String getPackageName() {
+        return packageName;
+    }
+
+    public String getVersionCode() {
+        return versionCode;
+    }
+
+    public String getVersionName() {
+        return versionName;
+    }
+
     public BaseReqeustBean() {}
 
     public BaseReqeustBean(Context context) {

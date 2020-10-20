@@ -8,6 +8,10 @@ import android.util.Log;
 import android.view.View;
 
 import com.core.base.ObjFactory;
+import com.core.base.bean.BaseReqeustBean;
+import com.core.base.bean.BaseResponseModel;
+import com.core.base.callback.ISReqCallBack;
+import com.core.base.request.AbsHttpRequest;
 import com.core.base.utils.AppUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
@@ -20,6 +24,7 @@ import com.flyfun.base.utils.Localization;
 import com.flyfun.data.login.ILoginCallBack;
 import com.flyfun.pay.utils.QueryProductListener;
 import com.flyfun.sdk.SWebViewDialog;
+import com.flyfun.sdk.ads.Ad2RequestBean;
 import com.flyfun.sdk.ads.GamaAdsUtils;
 import com.flyfun.sdk.ads.SdkAdsConstant;
 import com.flyfun.sdk.ads.StarEventLogger;
@@ -156,6 +161,49 @@ public class BaseSdkImpl implements IFLSDK {
 //                map.put(SdkAdsConstant.GAMA_EVENT_SERVERCODE, severCode);
 //                map.put(SdkAdsConstant.GAMA_EVENT_SERVERNAME, serverName);
 //                StarEventLogger.trackingRoleInfo(activity, map);
+
+                AbsHttpRequest xAbsHttpRequest = new AbsHttpRequest() {
+                    @Override
+                    public BaseReqeustBean createRequestBean() {
+
+                        Ad2RequestBean ad2RequestBean = new Ad2RequestBean(activity.getApplicationContext());
+                        ad2RequestBean.setRoleId(roleId);
+                        ad2RequestBean.setRoleName(roleName);
+                        ad2RequestBean.setRoleLevel(roleLevel);
+                        ad2RequestBean.setRoleVipLevel(vipLevel);
+                        ad2RequestBean.setServerCode(severCode);
+                        ad2RequestBean.setServerName(serverName);
+
+                        ad2RequestBean.setValue(activity.getApplicationContext());
+
+                        ad2RequestBean.setCompleteUrl("");
+                        return ad2RequestBean;
+                    }
+                };
+
+                xAbsHttpRequest.setReqCallBack(new ISReqCallBack<BaseResponseModel>() {
+                    @Override
+                    public void success(BaseResponseModel baseResponseModel, String rawResult) {
+
+                    }
+
+                    @Override
+                    public void timeout(String code) {
+
+                    }
+
+                    @Override
+                    public void noData() {
+
+                    }
+
+                    @Override
+                    public void cancel() {
+
+                    }
+                });
+
+                xAbsHttpRequest.excute(BaseResponseModel.class);
             }
         });
     }
