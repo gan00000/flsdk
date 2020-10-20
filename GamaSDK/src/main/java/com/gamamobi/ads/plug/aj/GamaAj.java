@@ -10,6 +10,7 @@ import com.adjust.sdk.LogLevel;
 import com.core.base.callback.ISReqCallBack;
 import com.core.base.utils.PL;
 import com.flyfun.base.cfg.ResConfig;
+import com.flyfun.sdk.ads.SdkAdsConstant;
 import com.gamamobi.ads.plug.aj.cmd.GamaAjEventListCmd;
 import com.gamamobi.ads.plug.aj.utils.GamaAjHelper;
 
@@ -110,12 +111,12 @@ public class GamaAj {
         for (Map.Entry<String, Object> entry : map.entrySet()) {
             ae.addCallbackParameter(entry.getKey(), entry.getValue().toString());
         }
-        if(map.get("gama_pay_value") != null) {
-            int value = (int) map.get("gama_pay_value");
+        if(map.get(SdkAdsConstant.GAMA_EVENT_PAY_VALUE) != null) {
+            int value = (int) map.get(SdkAdsConstant.GAMA_EVENT_PAY_VALUE);
             String currenty = "USD";
-            if(map.get("gama_event_currency") != null) {
-                currenty = (String) map.get("gama_event_currency");
-            }
+//            if(map.get("gama_event_currency") != null) {
+//                currenty = (String) map.get("gama_event_currency");
+//            }
             ae.setRevenue(value, currenty);
         }
         ae.addCallbackParameter("gameCode", ResConfig.getGameCode(context));

@@ -61,6 +61,7 @@ public class GooglePayImpl implements IPay {
      * 防止连续快速点击储值出现未知异常
      */
     boolean isPaying = false;
+    private double usdPrice = 0;
 
 
     private void callbackSuccess(Purchase purchase){
@@ -82,6 +83,7 @@ public class GooglePayImpl implements IPay {
             payBean.setDeveloperPayload(purchase.getDeveloperPayload());
             payBean.setmToken(purchase.getToken());
 
+            payBean.setUsdPrice(usdPrice);
             payBean.setCpOrderId(createOrderIdReqBean.getCpOrderId());
             Bundle b = new Bundle();
             b.putInt(PAY_STATUS, PAY_SUCCESS);
@@ -92,7 +94,7 @@ public class GooglePayImpl implements IPay {
     }
 
     private void callbackFail(String message){
-
+        usdPrice = 0;
         if (loadingDialog != null){
             loadingDialog.dismissProgressDialog();
         }
@@ -295,7 +297,7 @@ public class GooglePayImpl implements IPay {
                             return null;
                         }
                     }.asyncExcute();*/
-
+                    usdPrice = createOrderIdRes.getUsdPrice();
                     launchPurchase(createOrderIdRes);
                 } else {
                     if (createOrderIdRes!=null && !TextUtils.isEmpty(createOrderIdRes.getMessage())){

@@ -82,6 +82,8 @@ public class SdkImpl extends BaseSdkImpl {
                                 //GooglePayCreateOrderIdReqBean googlePayCreateOrderIdReqBean = (GooglePayCreateOrderIdReqBean)bundle.getSerializable(IPay.GooglePayCreateOrderIdReqBean_Key);
                                 if (payBean != null){
 
+                                    StarEventLogger.trackinPayEvent(activity, bundle);
+
                                     if (iPayListener != null) { //支付刷新的回调
                                         PL.i(TAG, "GooglePay支付回调");
                                         iPayListener.onPaySuccess(payBean.getProductId(), payBean.getCpOrderId());
@@ -94,7 +96,7 @@ public class SdkImpl extends BaseSdkImpl {
                                     iPayListener.onPayFail();
                                 }
                             }
-                            StarEventLogger.trackinPayEvent(activity, bundle);
+
                         }
 
                         if (iPayListener != null) { //支付刷新的回调

@@ -32,8 +32,6 @@ import com.google.ads.conversiontracking.AdWordsConversionReporter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Created by gan on 2017/3/3.
@@ -198,22 +196,25 @@ public class StarEventLogger {
         String orderId = "";
         String productId = "";
         long purchaseTime;
-        int price = 0;
+        double usdPrice = 0;
 
         if(payBean != null) {
             PL.i(TAG, "trackinPay Purchase");
             orderId = payBean.getOrderId();
             purchaseTime = payBean.getPurchaseTime();
             productId = payBean.getProductId();
-            try {
-                Pattern p = Pattern.compile("\\d+(usd|USD)");
-                Matcher m = p.matcher(productId);
-                if(m.find()) {
-                    price = Integer.parseInt(m.group().toLowerCase().replace("usd", ""));
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+//            try {
+//                Pattern p = Pattern.compile("\\d+(usd|USD)");
+//                Matcher m = p.matcher(productId);
+//                if(m.find()) {
+//                    price = Integer.parseInt(m.group().toLowerCase().replace("usd", ""));
+//                }
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+
+            usdPrice = payBean.getUsdPrice();
+
         } else {
             PL.i(TAG, "trackinPay Purchase null");
             return;
@@ -227,10 +228,10 @@ public class StarEventLogger {
             eventValues.put(SdkAdsConstant.GAMA_EVENT_PRODUCT_ID, productId);
             eventValues.put(SdkAdsConstant.GAMA_EVENT_ORDERID, orderId);
             eventValues.put(SdkAdsConstant.GAMA_EVENT_PURCHASE_TIME, purchaseTime);
-            eventValues.put(SdkAdsConstant.GAMA_EVENT_PAY_VALUE, price);
+            eventValues.put(SdkAdsConstant.GAMA_EVENT_PAY_VALUE, usdPrice);
             eventValues.put(SdkAdsConstant.GAMA_EVENT_CURRENCY, "USD");
             //下面是AppsFlyer自己的事件名
-            eventValues.put(AFInAppEventParameterName.REVENUE, price);
+            eventValues.put(AFInAppEventParameterName.REVENUE, usdPrice);
             eventValues.put(AFInAppEventParameterName.CURRENCY, "USD");
             eventValues.put(AFInAppEventParameterName.CONTENT_ID, productId);
             AppsFlyerLib.getInstance().trackEvent(context, AFInAppEventType.PURCHASE, eventValues);

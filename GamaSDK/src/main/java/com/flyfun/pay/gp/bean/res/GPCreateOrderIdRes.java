@@ -9,6 +9,7 @@ public class GPCreateOrderIdRes extends BaseResponseModel {
 
     private String orderId;
     private String paygpId;
+    private double usdPrice;
 
 
     public String getOrderId() {
@@ -25,5 +26,13 @@ public class GPCreateOrderIdRes extends BaseResponseModel {
 
     public void setPaygpId(String paygpId) {
         this.paygpId = paygpId;
+    }
+
+    public double getUsdPrice() {
+        return usdPrice;
+    }
+
+    public void setUsdPrice(double usdPrice) {
+        this.usdPrice = usdPrice;
     }
 }

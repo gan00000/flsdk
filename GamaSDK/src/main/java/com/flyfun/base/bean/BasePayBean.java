@@ -17,6 +17,7 @@ public class BasePayBean implements Serializable {
     private int recurringState;
     private String originPurchaseData;
     private String cpOrderId;
+    private double usdPrice;
 
     public String getmItemType() {
         return mItemType;
@@ -120,5 +121,13 @@ public class BasePayBean implements Serializable {
 
     public void setCpOrderId(String cpOrderId) {
         this.cpOrderId = cpOrderId;
+    }
+
+    public double getUsdPrice() {
+        return usdPrice;
+    }
+
+    public void setUsdPrice(double usdPrice) {
+        this.usdPrice = usdPrice;
     }
 }
