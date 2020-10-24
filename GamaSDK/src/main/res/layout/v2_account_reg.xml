@@ -16,6 +16,7 @@
 
         <include
             layout="@layout/gama_ui_head_layout"
+            android:visibility="gone"
             />
 
         <com.flyfun.sdk.login.widget.SDKInputEditTextView

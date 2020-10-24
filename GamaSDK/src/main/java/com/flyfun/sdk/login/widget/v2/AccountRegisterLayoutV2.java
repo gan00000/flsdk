@@ -304,8 +304,10 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
     @Override
     protected void doSomething() {
         super.doSomething();
-        sLoginDialogv2.getLoginPresenter().setOperationCallback(this);
-        remainTimeSeconds = sLoginDialogv2.getLoginPresenter().getRemainTimeSeconds();
+        if (sLoginDialogv2 != null) {
+            sLoginDialogv2.getLoginPresenter().setOperationCallback(this);
+            remainTimeSeconds = sLoginDialogv2.getLoginPresenter().getRemainTimeSeconds();
+        }
         if(remainTimeSeconds > 0) {
 //            gama_register_btn_get_vfcode.setBackgroundResource(R.drawable.gama_ui_bg_btn_unclickable);
             gama_register_btn_get_vfcode.setClickable(false);

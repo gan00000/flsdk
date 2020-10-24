@@ -4,15 +4,17 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StyleRes;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StyleRes;
+
 import com.flyfun.base.bean.SLoginType;
+import com.flyfun.base.utils.Localization;
 import com.flyfun.data.login.ILoginCallBack;
 import com.flyfun.data.login.response.SLoginResponse;
 import com.flyfun.sdk.SBaseDialog;
@@ -21,15 +23,12 @@ import com.flyfun.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.flyfun.sdk.login.widget.v2.AccountChangePwdLayoutV2;
 import com.flyfun.sdk.login.widget.v2.AccountFindPwdLayoutV2;
 import com.flyfun.sdk.login.widget.v2.AccountManagerLayoutV2;
-import com.flyfun.sdk.login.widget.v2.AccountRegisterLayoutV2;
-import com.flyfun.sdk.login.widget.v2.PyAccountLoginV2;
+import com.flyfun.sdk.login.widget.v2.MainLoginLayoutV3;
 import com.flyfun.sdk.login.widget.v2.ThirdPlatBindAccountLayoutV2;
-import com.flyfun.sdk.login.widget.v2.XMMainLoginLayoutV2;
+import com.flyfun.thirdlib.facebook.SFacebookProxy;
 import com.flyfun.thirdlib.google.SGoogleSignIn;
 import com.flyfun.thirdlib.twitter.GamaTwitterLogin;
-import com.flyfun.base.utils.Localization;
 import com.gama.sdk.R;
-import com.flyfun.thirdlib.facebook.SFacebookProxy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -210,23 +209,18 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 
     public void toMainLoginView() {
         if (mainLoginView == null || !viewPageList.contains(mainLoginView)){
-//            SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
-//            if(SGameLanguage.ja_JP == sGameLanguage) {
-//                mainLoginView = new XMMainLoginLayoutJP(context);
-//            } else if (SGameLanguage.en_US == sGameLanguage) {
-//                mainLoginView = new XMMainLoginLayoutV2En(context);
-//            } else {
-                mainLoginView = new XMMainLoginLayoutV2(context);
-//            }
+
+            mainLoginView = new MainLoginLayoutV3(context);
             mainLoginView.setLoginDialogV2(this);
             contentFrameLayout.addView(mainLoginView);
             viewPageList.add(mainLoginView);
         }
-        for (View childView : viewPageList) {
+        for (SLoginBaseRelativeLayout childView : viewPageList) {
             if (childView == null){
                 continue;
             }
             if (childView == mainLoginView){
+                childView.refreshViewData();
                 childView.setVisibility(View.VISIBLE);
             }else{
                 childView.setVisibility(View.GONE);
@@ -234,7 +228,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
         }
     }
     public void toAccountLoginView() {
-
+/*
         if (accountLoginView == null || !viewPageList.contains(accountLoginView)){
 //            SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
 //            if (SGameLanguage.en_US == sGameLanguage) {
@@ -259,12 +253,14 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
             }else{
                 childView.setVisibility(View.GONE);
             }
-        }
+        }*/
+
+        this.toMainLoginView();
     }
 
     public void toRegisterView(int from) {
 
-        getLoginPresenter().stopVfCodeTimer();
+       /* getLoginPresenter().stopVfCodeTimer();
         if (registerView == null || !viewPageList.contains(registerView)){
 //            SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
 //            if (SGameLanguage.en_US == sGameLanguage) {
@@ -292,7 +288,10 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
             }else{
                 childView.setVisibility(View.GONE);
             }
-        }
+        }*/
+
+
+        this.toMainLoginView();
     }
 
 //    public void toRegisterTermsView(int from) {

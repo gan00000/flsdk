@@ -52,6 +52,8 @@
     <string name="py_login_page_account_bind">綁定會員帳號</string>
     <string name="py_btn_bind">綁定會員</string>
 
+    <string name="account_bind">帳號綁定</string>
+
     <!--游戏内手机绑定-->
     <string name="py_ingame_account_link_title">手機綁定</string>
     <string name="py_ingame_account_link_subtitle">(綁定手機號碼後可領取遊戲活動獎勵)</string>
@@ -136,6 +138,8 @@
     <string name="py_password">密碼</string>
     <string name="py_login">登入</string>
     <string name="py_login_fb">Facebook登入</string>
+    <string name="py_login_fb_1">FB登入</string>
+    <string name="py_login_google">Google登入</string>
     <string name="py_login_star">Starpy帳號登入</string>
     <string name="py_login_mac">免註冊登入</string>
     <string name="py_bind_phone_area_num">+86</string>
@@ -150,5 +154,5 @@
     <string name="py_vfcode">驗證碼</string>
 <!--    <string name="py_send_new_pwd">發送新密碼</string>-->
 <!--    <string name="py_change_pwd">修改密碼</string>-->
-<!--    <string name="py_time_limit">%s秒後可點擊</string>-->
+    <string name="guest_login_btn">遊客登入</string>
 </resources>

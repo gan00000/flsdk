@@ -1,8 +1,6 @@
 package com.flyfun.sdk.login.widget.v2;
 
 import android.content.Context;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -10,6 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.core.base.utils.ToastUtils;
 import com.flyfun.base.utils.GamaUtil;
@@ -51,12 +52,16 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
     private View loginMainGoAccountCenter;
     private View loginMainGoChangePassword;
 
+    private View goTermView;
+
     private SDKInputEditTextView accountSdkInputEditTextView;
     private SDKInputEditTextView pwdSdkInputEditTextView;
 
     private RecyclerView historyAccountRv;
     View historyAccountListBtn;
     private CommonAdapter  historyAccountCommonAdapter;
+
+    private View fbLoginView, bindAccountView, macLoginView, googleLoginView;
 
     public PyAccountLoginV2(Context context) {
         super(context);
@@ -109,6 +114,7 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
         historyAccountListBtn = contentView.findViewById(R.id.sdk_input_item_account_history);
 
         loginMainLoginBtn = contentView.findViewById(R.id.gama_login_btn_confirm);
+        goTermView = contentView.findViewById(R.id.gama_gama_start_term_tv1);//跳轉服務條款
 
         savePwdCheckBox = contentView.findViewById(R.id.gama_login_iv_remember_account);
 
@@ -160,6 +166,43 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
             @Override
             public void onClick(View v) {
                 login();
+            }
+        });
+
+        goTermView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //服務條款
+            }
+        });
+        fbLoginView = contentView.findViewById(R.id.fbLoginView);
+        bindAccountView = contentView.findViewById(R.id.accountBindView);
+        macLoginView = contentView.findViewById(R.id.guestLoginView);
+        googleLoginView = contentView.findViewById(R.id.ggLoginView);
+
+        fbLoginView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sLoginDialogv2.getLoginPresenter().fbLogin(sLoginDialogv2.getActivity());
+            }
+        });
+        bindAccountView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sLoginDialogv2.toAccountManagerCenter();
+            }
+        });
+        macLoginView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sLoginDialogv2.getLoginPresenter().macLogin(sLoginDialogv2.getActivity());
+            }
+        });
+        googleLoginView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //google+登录
+                sLoginDialogv2.getLoginPresenter().googleLogin(sLoginDialogv2.getActivity());
             }
         });
 
