@@ -5,13 +5,9 @@ import android.content.Intent;
 
 import com.facebook.internal.CallbackManagerImpl;
 import com.flyfun.data.login.ILoginCallBack;
-import com.flyfun.sdk.callback.GamaCommonViewCallback;
-import com.flyfun.sdk.login.widget.v2.StartTermsLayoutV2;
 import com.flyfun.sdk.utils.DialogUtil;
 import com.flyfun.thirdlib.facebook.SFacebookProxy;
 import com.flyfun.thirdlib.google.SGoogleSignIn;
-import com.flyfun.thirdlib.twitter.GamaTwitterLogin;
-import com.flyfun.base.utils.GamaUtil;
 
 /**
  * Created by gan on 2017/4/12.
@@ -23,7 +19,7 @@ public class DialogLoginImpl implements ILogin {
 
     private SGoogleSignIn sGoogleSignIn;
 
-    private GamaTwitterLogin twitterLogin;
+//    private GamaTwitterLogin twitterLogin;
 
 
     @Override
@@ -31,9 +27,9 @@ public class DialogLoginImpl implements ILogin {
 
         sGoogleSignIn = new SGoogleSignIn(activity, DialogUtil.createLoadingDialog(activity, "Loading..."));
 
-        if(GamaUtil.isJapan(activity)) {
-            twitterLogin = new GamaTwitterLogin(activity);
-        }
+//        if(GamaUtil.isJapan(activity)) {
+//            twitterLogin = new GamaTwitterLogin(activity);
+//        }
     }
 
     @Override
@@ -49,9 +45,9 @@ public class DialogLoginImpl implements ILogin {
         if (sGoogleSignIn != null){
             sGoogleSignIn.handleActivityResult(activity,requestCode,resultCode,data);
         }
-        if(twitterLogin != null) {
-            twitterLogin.onActivityResult(requestCode, resultCode, data);
-        }
+//        if(twitterLogin != null) {
+//            twitterLogin.onActivityResult(requestCode, resultCode, data);
+//        }
     }
 
     @Override
@@ -72,7 +68,7 @@ public class DialogLoginImpl implements ILogin {
     @Override
     public void startLogin(final Activity activity, final ILoginCallBack iLoginCallBack) {
 
-        if(GamaUtil.isJapan(activity) && twitterLogin == null) {
+       /* if(GamaUtil.isJapan(activity) && twitterLogin == null) {
             twitterLogin = new GamaTwitterLogin(activity);
         }
         boolean isTermRead = GamaUtil.getStartTermRead(activity);
@@ -91,7 +87,7 @@ public class DialogLoginImpl implements ILogin {
                     }
                 }
             };
-           /* if (GamaUtil.isNorthAmarican(activity)) {
+           *//* if (GamaUtil.isNorthAmarican(activity)) {
                 StartTermsLayoutV2En termsLayoutV2 = new StartTermsLayoutV2En(activity,
                         com.gama.sdk.R.style.Gama_Theme_AppCompat_Dialog_Notitle_Fullscreen, commonViewCallback);
                 termsLayoutV2.show();
@@ -99,14 +95,16 @@ public class DialogLoginImpl implements ILogin {
                 StartTermsLayoutV2 termsLayoutV2 = new StartTermsLayoutV2(activity,
                         com.gama.sdk.R.style.Gama_Theme_AppCompat_Dialog_Notitle_Fullscreen, commonViewCallback);
                 termsLayoutV2.show();
-            }*/
+            }*//*
 
             StartTermsLayoutV2 termsLayoutV2 = new StartTermsLayoutV2(activity,
                     com.gama.sdk.R.style.Gama_Theme_AppCompat_Dialog_Notitle_Fullscreen, commonViewCallback);
             termsLayoutV2.show();
         } else {
             goDialogView(activity, iLoginCallBack);
-        }
+        }*/
+
+        goDialogView(activity, iLoginCallBack);
     }
 
     private void goDialogView(Activity activity, ILoginCallBack iLoginCallBack) {
@@ -133,9 +131,9 @@ public class DialogLoginImpl implements ILogin {
         SLoginDialogV2 sLoginDialog = new SLoginDialogV2(activity, com.gama.sdk.R.style.Gama_Theme_AppCompat_Dialog_Notitle_Fullscreen);
         sLoginDialog.setSFacebookProxy(sFacebookProxy);
         sLoginDialog.setSGoogleSignIn(sGoogleSignIn);
-        if (twitterLogin != null) {
-            sLoginDialog.setTwitterLogin(twitterLogin);
-        }
+//        if (twitterLogin != null) {
+//            sLoginDialog.setTwitterLogin(twitterLogin);
+//        }
         sLoginDialog.setLoginCallBack(iLoginCallBack);
         sLoginDialog.show();
     }

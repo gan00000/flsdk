@@ -43,7 +43,7 @@
             <com.flyfun.sdk.login.widget.SDKInputEditTextView
                 android:layout_width="320dp"
                 android:layout_height="40dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="6dp"
                 android:layout_centerHorizontal="true"
                 android:id="@+id/sdkinputview_account_login_account"
                 />
@@ -171,8 +171,7 @@
                 android:gravity="center_vertical"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
+                android:layout_marginStart="4dp"
                 android:text="@string/gama_ui_term_port_read2"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/sp_19"/>
@@ -244,19 +243,19 @@
 
 
                 <ImageView
-                    android:layout_width="47dp"
-                    android:layout_height="47dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:src="@drawable/icon_guest"
                     />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="6dp"
                     android:gravity="center"
                     android:text="@string/guest_login_btn"
                     android:textColor="@color/c_545454"
-                    android:textSize="@dimen/sp_20"/>
+                    android:textSize="@dimen/sp_18"/>
 
             </LinearLayout>
 
@@ -270,19 +269,19 @@
 
 
                 <ImageView
-                    android:layout_width="47dp"
-                    android:layout_height="47dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:src="@drawable/sdk_icon_bind"
                     />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="6dp"
                     android:gravity="center"
                     android:text="@string/account_bind"
                     android:textColor="@color/c_545454"
-                    android:textSize="@dimen/sp_20"/>
+                    android:textSize="@dimen/sp_18"/>
 
             </LinearLayout>
 
@@ -290,14 +289,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"
-                android:layout_marginStart="34dp"
+                android:layout_marginStart="30dp"
                 android:id="@+id/ggLoginView"
                 android:orientation="vertical">
 
 
                 <ImageView
-                    android:layout_width="47dp"
-                    android:layout_height="47dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:src="@drawable/sdk_icon_gg"
                     />
 
@@ -308,7 +307,7 @@
                     android:gravity="center"
                     android:text="@string/py_login_google"
                     android:textColor="@color/c_545454"
-                    android:textSize="@dimen/sp_20"/>
+                    android:textSize="@dimen/sp_18"/>
 
             </LinearLayout>
 
@@ -316,14 +315,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"
-                android:layout_marginStart="34dp"
+                android:layout_marginStart="30dp"
                 android:id="@+id/fbLoginView"
                 android:orientation="vertical">
 
 
                 <ImageView
-                    android:layout_width="47dp"
-                    android:layout_height="47dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:src="@drawable/sdk_icon_fb"
                     />
 
@@ -334,7 +333,7 @@
                     android:gravity="center"
                     android:text="@string/py_login_fb_1"
                     android:textColor="@color/c_545454"
-                    android:textSize="@dimen/sp_20"/>
+                    android:textSize="@dimen/sp_18"/>
 
             </LinearLayout>
 

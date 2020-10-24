@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gama_start_term_guideline1"
@@ -117,12 +117,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/gama_start_term_title"
             >
+
             <com.flyfun.base.widget.SWebView
                 android:id="@+id/gama_start_term_wv1"
-                android:background="@drawable/sdk_terms_content_bg"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                 />
+                android:background="@drawable/sdk_terms_content_bg" />
 
         </RelativeLayout>
 

@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -39,6 +40,7 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
      * 眼睛、保存密码、验证码
      */
     private ImageView savePwdCheckBox;
+    private CheckBox agreeCheckBox;
 
     /**
      * 密码、账号、验证码
@@ -115,6 +117,7 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
 
         loginMainLoginBtn = contentView.findViewById(R.id.gama_login_btn_confirm);
         goTermView = contentView.findViewById(R.id.gama_gama_start_term_tv1);//跳轉服務條款
+        agreeCheckBox = contentView.findViewById(R.id.gama_gama_start_term_cb1);//跳轉服務條款
 
         savePwdCheckBox = contentView.findViewById(R.id.gama_login_iv_remember_account);
 
@@ -173,6 +176,7 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
             @Override
             public void onClick(View v) {
                 //服務條款
+                sLoginDialogv2.toTermsV3View();
             }
         });
         fbLoginView = contentView.findViewById(R.id.fbLoginView);
@@ -302,6 +306,11 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
     }
 
     private void login() {
+
+        if(!agreeCheckBox.isChecked()) {
+            ToastUtils.toast(getContext(), R.string.gama_ui_term_not_read);
+        }
+        GamaUtil.saveStartTermRead(getContext(), true);
 
         account = loginAccountEditText.getEditableText().toString().trim();
         password = loginPasswordEditText.getEditableText().toString().trim();

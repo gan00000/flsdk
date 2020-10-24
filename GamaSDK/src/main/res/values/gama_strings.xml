@@ -155,4 +155,6 @@
 <!--    <string name="py_send_new_pwd">發送新密碼</string>-->
 <!--    <string name="py_change_pwd">修改密碼</string>-->
     <string name="guest_login_btn">遊客登入</string>
+
+    <string name="sdk_terms_title">網絡連線遊戲服務定型化契約</string>
 </resources>

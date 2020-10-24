@@ -24,6 +24,7 @@ import com.flyfun.sdk.login.widget.v2.AccountChangePwdLayoutV2;
 import com.flyfun.sdk.login.widget.v2.AccountFindPwdLayoutV2;
 import com.flyfun.sdk.login.widget.v2.AccountManagerLayoutV2;
 import com.flyfun.sdk.login.widget.v2.MainLoginLayoutV3;
+import com.flyfun.sdk.login.widget.v2.TermsViewV3;
 import com.flyfun.sdk.login.widget.v2.ThirdPlatBindAccountLayoutV2;
 import com.flyfun.thirdlib.facebook.SFacebookProxy;
 import com.flyfun.thirdlib.google.SGoogleSignIn;
@@ -59,6 +60,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
     private SLoginBaseRelativeLayout changePwdView;
     private SLoginBaseRelativeLayout findPwdView;
     private SLoginBaseRelativeLayout accountManagerCenterView;
+    private SLoginBaseRelativeLayout sdkTermsV3View;
 
     private SLoginBaseRelativeLayout bindUniqueView;
     private SLoginBaseRelativeLayout bindFbView;
@@ -207,7 +209,20 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 
     }
 
+    public void toTermsV3View() {
+
+        sdkTermsV3View = new TermsViewV3(context);
+        sdkTermsV3View.setLoginDialogV2(this);
+        contentFrameLayout.addView(sdkTermsV3View);
+    }
+
     public void toMainLoginView() {
+
+        if (sdkTermsV3View  != null) {
+            contentFrameLayout.removeView(sdkTermsV3View);
+            sdkTermsV3View = null;
+        }
+
         if (mainLoginView == null || !viewPageList.contains(mainLoginView)){
 
             mainLoginView = new MainLoginLayoutV3(context);
