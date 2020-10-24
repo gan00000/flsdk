@@ -1,7 +1,10 @@
 package com.flyfun.sdk.login.widget.v2;
 
 import android.content.Context;
+import android.graphics.Paint;
+import android.text.SpannableString;
 import android.text.TextUtils;
+import android.text.style.UnderlineSpan;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +12,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -54,7 +58,7 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
     private View loginMainGoAccountCenter;
     private View loginMainGoChangePassword;
 
-    private View goTermView;
+    private TextView goTermView;
 
     private SDKInputEditTextView accountSdkInputEditTextView;
     private SDKInputEditTextView pwdSdkInputEditTextView;
@@ -118,6 +122,11 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
         loginMainLoginBtn = contentView.findViewById(R.id.gama_login_btn_confirm);
         goTermView = contentView.findViewById(R.id.gama_gama_start_term_tv1);//跳轉服務條款
         agreeCheckBox = contentView.findViewById(R.id.gama_gama_start_term_cb1);//跳轉服務條款
+        if (GamaUtil.getStartTermRead(getContext())){
+            agreeCheckBox.setChecked(true);
+        }else {
+            agreeCheckBox.setChecked(false);
+        }
 
         savePwdCheckBox = contentView.findViewById(R.id.gama_login_iv_remember_account);
 
@@ -172,6 +181,10 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
             }
         });
 
+        String ssText = getContext().getString(R.string.gama_ui_term_port_read2);
+        SpannableString ss = new SpannableString(ssText);
+        ss.setSpan(new UnderlineSpan(), ssText.length() - 5, ssText.length(), Paint.UNDERLINE_TEXT_FLAG);
+        goTermView.setText(ss);
         goTermView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -309,6 +322,7 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
 
         if(!agreeCheckBox.isChecked()) {
             ToastUtils.toast(getContext(), R.string.gama_ui_term_not_read);
+            return;
         }
         GamaUtil.saveStartTermRead(getContext(), true);
 
@@ -354,6 +368,12 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
     @Override
     public void refreshViewData() {
         super.refreshViewData();
+
+        if (GamaUtil.getStartTermRead(getContext())){
+            agreeCheckBox.setChecked(true);
+        }else {
+            agreeCheckBox.setChecked(false);
+        }
 
         List<AccountModel>  ams = GamaUtil.getAccountModels(getContext());
         accountModels.clear();

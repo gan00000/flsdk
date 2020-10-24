@@ -1,6 +1,9 @@
 package com.flyfun.sdk.login.widget.v2;
 
 import android.content.Context;
+import android.graphics.Paint;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +14,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import com.core.base.utils.ToastUtils;
 import com.flyfun.base.cfg.ResConfig;
+import com.flyfun.base.utils.GamaUtil;
 import com.flyfun.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.gama.sdk.R;
 
@@ -58,6 +63,12 @@ public class TermsViewV3 extends SLoginBaseRelativeLayout {
         backView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(agreeCheckBox.isChecked()) {
+                    GamaUtil.saveStartTermRead(getContext(), true);
+                }else{
+                    GamaUtil.saveStartTermRead(getContext(), false);
+                }
+
                 sLoginDialogv2.toMainLoginView();
             }
         });
@@ -68,7 +79,11 @@ public class TermsViewV3 extends SLoginBaseRelativeLayout {
         okButton = contentView.findViewById(R.id.sdk_terms_btn_confirm);
 
 
-
+        if (GamaUtil.getStartTermRead(getContext())){
+            agreeCheckBox.setChecked(true);
+        }else {
+            agreeCheckBox.setChecked(false);
+        }
         goTermView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,11 +101,23 @@ public class TermsViewV3 extends SLoginBaseRelativeLayout {
         termsView1.setWebViewClient(new WebViewClient());
         termsView1.loadUrl(serviceUrl);
 
+        TextView goTermView = contentView.findViewById(R.id.gama_gama_start_term_tv1);
+        String ssText = getContext().getString(R.string.gama_ui_term_port_read2);
+        SpannableString ss = new SpannableString(ssText);
+        ss.setSpan(new UnderlineSpan(), ssText.length() - 5, ssText.length(), Paint.UNDERLINE_TEXT_FLAG);
+        goTermView.setText(ss);
 
         okButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                sLoginDialogv2.getLoginPresenter().fbLogin(sLoginDialogv2.getActivity());
+
+                if(!agreeCheckBox.isChecked()) {
+                    ToastUtils.toast(getContext(), R.string.gama_ui_term_not_read);
+                    return;
+                }
+                GamaUtil.saveStartTermRead(getContext(), true);
+
+                sLoginDialogv2.toMainLoginView();
             }
         });
 

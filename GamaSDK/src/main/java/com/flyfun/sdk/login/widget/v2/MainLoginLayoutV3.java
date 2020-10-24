@@ -99,8 +99,8 @@ public class MainLoginLayoutV3 extends SLoginBaseRelativeLayout implements View.
             mAccountLoginV2.setVisibility(VISIBLE);
             mAccountRegisterLayoutV2.setVisibility(GONE);
 
-            loginTabView.setBackgroundColor(getContext().getResources().getColor(R.color.e_ff3a3b));
-            regTabView.setBackgroundColor(Color.WHITE);
+            loginTabView.setBackgroundResource(R.drawable.login_tab_red_left_cons_bg);
+            regTabView.setBackgroundResource(R.drawable.login_tab_white_right_cons_bg);
 
             loginTabView.setTextColor(Color.WHITE);
             regTabView.setTextColor(getContext().getResources().getColor(R.color.e_ff3a3b));
@@ -109,8 +109,8 @@ public class MainLoginLayoutV3 extends SLoginBaseRelativeLayout implements View.
             mAccountLoginV2.setVisibility(GONE);
             mAccountRegisterLayoutV2.setVisibility(VISIBLE);
 
-            loginTabView.setBackgroundColor(Color.WHITE);
-            regTabView.setBackgroundColor(getContext().getResources().getColor(R.color.e_ff3a3b));
+            loginTabView.setBackgroundResource(R.drawable.login_tab_white_left_cons_bg);
+            regTabView.setBackgroundResource(R.drawable.login_tab_red_right_cons_bg);
 
             loginTabView.setTextColor(getContext().getResources().getColor(R.color.e_ff3a3b));
             regTabView.setTextColor(Color.WHITE);
