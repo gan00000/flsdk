@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/transparent">
+
+    <LinearLayout
+        android:layout_width="360dp"
+        android:layout_height="400dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_centerInParent="true"
+        android:background="@drawable/login_cons_bg"
+
+        >
+
+        <LinearLayout
+            android:layout_width="320dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="16dp"
+            android:padding="1dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="@string/py_login_by_members"
+                android:background="@drawable/login_tab_red_left_cons_bg"
+                android:gravity="center"
+                android:lines="1"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/sp_26"
+                android:id="@+id/loginTabView"
+                android:layout_weight="0.5"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="@string/py_register_account"
+                android:gravity="center"
+                android:textColor="@color/e_ff3a3b"
+                android:background="@drawable/login_tab_white_right_cons_bg"
+                android:lines="1"
+                android:id="@+id/regTabView"
+                android:layout_weight="0.5"/>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="2dp">
+
+            <com.flyfun.sdk.login.widget.v2.PyAccountLoginV2
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/pyAccountLoginV2Id"/>
+
+            <com.flyfun.sdk.login.widget.v2.AccountRegisterLayoutV2
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/accountRegisterLayoutV2Id"
+                android:visibility="gone"/>
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

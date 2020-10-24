@@ -58,6 +58,7 @@ public class TermsViewV3 extends SLoginBaseRelativeLayout {
 
         TextView titleTextView = contentView.findViewById(R.id.sdk_head_title);
         titleTextView.setText(R.string.sdk_terms_title);
+        titleTextView.setTextSize(20);
 
         backView = contentView.findViewById(R.id.gama_head_iv_back);
         backView.setOnClickListener(new OnClickListener() {

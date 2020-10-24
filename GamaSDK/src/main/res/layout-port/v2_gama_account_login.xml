@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="360dp"
-        android:layout_height="340dp"
+        android:layout_height="400dp"
         android:orientation="vertical"
         android:gravity="center_horizontal"
         android:layout_centerInParent="true"
@@ -17,7 +17,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:visibility="gone">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -42,7 +43,7 @@
             <com.flyfun.sdk.login.widget.SDKInputEditTextView
                 android:layout_width="320dp"
                 android:layout_height="40dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="6dp"
                 android:layout_centerHorizontal="true"
                 android:id="@+id/sdkinputview_account_login_account"
                 />
@@ -61,7 +62,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_centerHorizontal="true"
-                android:layout_height="60dp"
+                android:layout_height="40dp"
                 android:layout_below="@id/sdkinputview_account_login_password"
                 android:orientation="horizontal">
 
@@ -78,6 +79,7 @@
                     android:gravity="center_vertical"
                     android:layout_centerVertical="true"
                     android:layout_toStartOf="@id/view_center_base"
+                    android:visibility="gone"
                     android:orientation="horizontal">
 
 
@@ -123,7 +125,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="320dp"
-                android:layout_height="90dp"
+                android:layout_height="85dp"
                 android:layout_centerHorizontal="true"
                 android:background="@android:color/white"
                 android:minHeight="40dp"
@@ -144,12 +146,42 @@
             android:gravity="center"
             android:text="@string/py_login_by_members"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/sp_26"/>
+            android:textSize="@dimen/sp_26" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/px_6"
+            >
+            <CheckBox
+                android:id="@+id/gama_gama_start_term_cb1"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:background="@drawable/gama_term_checkbox_selector"
+                android:button="@null"
+                />
+
+            <TextView
+                android:id="@+id/gama_gama_start_term_tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:layout_marginStart="4dp"
+                android:text="@string/gama_ui_term_port_read2"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/sp_19"/>
+        </LinearLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:visibility="gone"
             android:orientation="horizontal">
 
 
@@ -196,7 +228,116 @@
 
         </RelativeLayout>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:id="@+id/guestLoginView"
+                android:orientation="vertical">
+
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/icon_guest"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:gravity="center"
+                    android:text="@string/guest_login_btn"
+                    android:textColor="@color/c_545454"
+                    android:textSize="@dimen/sp_18"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:layout_marginStart="38dp"
+                android:id="@+id/accountBindView"
+                android:orientation="vertical">
+
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/sdk_icon_bind"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:gravity="center"
+                    android:text="@string/account_bind"
+                    android:textColor="@color/c_545454"
+                    android:textSize="@dimen/sp_18"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:layout_marginStart="30dp"
+                android:id="@+id/ggLoginView"
+                android:orientation="vertical">
+
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/sdk_icon_gg"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="@string/py_login_google"
+                    android:textColor="@color/c_545454"
+                    android:textSize="@dimen/sp_18"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:layout_marginStart="30dp"
+                android:id="@+id/fbLoginView"
+                android:orientation="vertical">
+
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/sdk_icon_fb"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="@string/py_login_fb_1"
+                    android:textColor="@color/c_545454"
+                    android:textSize="@dimen/sp_18"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
     </LinearLayout>
 
 
