@@ -3,6 +3,7 @@ package com.flyfun.sdk.ads;
 import android.content.Context;
 
 import com.core.base.utils.ApkInfoUtil;
+import com.core.base.utils.SStringUtil;
 import com.flyfun.base.bean.SGameBaseRequestBean;
 
 public class Ad2RequestBean extends SGameBaseRequestBean {
@@ -10,6 +11,7 @@ public class Ad2RequestBean extends SGameBaseRequestBean {
     private String game_code;
     private String game_name;
     private String role_id = "";
+    private String role_name = "";
     private String server_code = "";
     private String server_name = "";
     private String user_id = "";
@@ -35,10 +37,12 @@ public class Ad2RequestBean extends SGameBaseRequestBean {
         user_id = this.getUserId();
         game_code = this.getGameCode();
         role_id = this.getRoleId();
+        role_name = this.getRoleName();
         server_code = this.getServerCode();
         server_name = this.getServerName();
         game_name = ApkInfoUtil.getApplicationName(context);
 
+        sigin = SStringUtil.toMd5(game_code + server_code + user_id + role_id + "FLYFUNGAME", true);
     }
 
 
@@ -129,5 +133,9 @@ public class Ad2RequestBean extends SGameBaseRequestBean {
 
     public void setSigin(String sigin) {
         this.sigin = sigin;
+    }
+
+    public void setRole_name(String role_name) {
+        this.role_name = role_name;
     }
 }

@@ -10,6 +10,7 @@ import com.core.base.http.HttpResponse;
 import com.core.base.bean.BaseReqeustBean;
 import com.core.base.bean.BaseResponseModel;
 import com.core.base.utils.JsonUtil;
+import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.google.gson.Gson;
 
@@ -19,11 +20,17 @@ import java.net.HttpURLConnection;
 
 public abstract class AbsHttpRequest implements ISRqeust {
 
+    private PostType postType = PostType.application_urlencoded;
+
     private HttpResponse coreHttpResponse;
 
     private Dialog loadDialog;
 
     private ISReqCallBack reqCallBack;
+
+    public void setPostType(PostType postType) {
+        this.postType = postType;
+    }
 
     public void setReqCallBack(ISReqCallBack reqCallBack) {
         this.reqCallBack = reqCallBack;
@@ -200,7 +207,17 @@ public abstract class AbsHttpRequest implements ISRqeust {
                 }
 
             }else{
-                coreHttpResponse = HttpRequest.postIn2Url(baseReqeustBean.getCompleteUrl(), baseReqeustBean.getCompleteSpaUrl(), baseReqeustBean.fieldValueToMap());
+
+                PL.i("postType:" + postType.name());
+
+                if (postType == PostType.application_json){
+
+                    coreHttpResponse = HttpRequest.postJsonObject(baseReqeustBean.getCompleteUrl(), SStringUtil.map2Json(baseReqeustBean.fieldValueToMap()));
+
+                }else {
+
+                    coreHttpResponse = HttpRequest.postIn2Url(baseReqeustBean.getCompleteUrl(), baseReqeustBean.getCompleteSpaUrl(), baseReqeustBean.fieldValueToMap());
+                }
             }
             if (coreHttpResponse != null) {
                 return coreHttpResponse.getResult();

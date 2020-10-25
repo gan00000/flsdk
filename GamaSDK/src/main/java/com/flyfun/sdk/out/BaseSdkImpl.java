@@ -12,6 +12,7 @@ import com.core.base.bean.BaseReqeustBean;
 import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.ISReqCallBack;
 import com.core.base.request.AbsHttpRequest;
+import com.core.base.request.PostType;
 import com.core.base.utils.AppUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
@@ -167,12 +168,12 @@ public class BaseSdkImpl implements IFLSDK {
                     public BaseReqeustBean createRequestBean() {
 
                         Ad2RequestBean ad2RequestBean = new Ad2RequestBean(activity.getApplicationContext());
-                        ad2RequestBean.setRoleId(roleId);
-                        ad2RequestBean.setRoleName(roleName);
-                        ad2RequestBean.setRoleLevel(roleLevel);
-                        ad2RequestBean.setRoleVipLevel(vipLevel);
-                        ad2RequestBean.setServerCode(severCode);
-                        ad2RequestBean.setServerName(serverName);
+//                        ad2RequestBean.setRoleId(roleId);
+//                        ad2RequestBean.setRoleName(roleName);
+//                        ad2RequestBean.setRoleLevel(roleLevel);
+//                        ad2RequestBean.setRoleVipLevel(vipLevel);
+//                        ad2RequestBean.setServerCode(severCode);
+//                        ad2RequestBean.setServerName(serverName);
 
                         ad2RequestBean.setValue(activity.getApplicationContext());
 
@@ -202,7 +203,7 @@ public class BaseSdkImpl implements IFLSDK {
 
                     }
                 });
-
+                xAbsHttpRequest.setPostType(PostType.application_json);
                 xAbsHttpRequest.excute(BaseResponseModel.class);
             }
         });

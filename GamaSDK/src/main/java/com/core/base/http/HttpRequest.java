@@ -1,13 +1,13 @@
 package com.core.base.http;
 
-import java.io.File;
-import java.util.Map;
-
-import org.json.JSONObject;
+import android.text.TextUtils;
 
 import com.core.base.utils.SStringUtil;
 
-import android.text.TextUtils;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.util.Map;
 
 public class HttpRequest {
 	
@@ -112,12 +112,12 @@ public class HttpRequest {
 		return result;
 	}
 
-	public static String postJsonObject(String urlStr,JSONObject jsonObject) {
+	public static HttpResponse postJsonObject(String urlStr,JSONObject jsonObject) {
 		HttpRequestCore requestCore = new HttpRequestCore();
 		requestCore.setSendData(jsonObject.toString());
 		requestCore.setRequestUrl(urlStr);
 		requestCore.setContentType("application/json");
-		return requestCore.doPost().getResult();
+		return requestCore.doPost();
 	}
 
 

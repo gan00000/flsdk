@@ -1,5 +1,11 @@
 package com.core.base.utils;
 
+import android.text.TextUtils;
+import android.util.Log;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
@@ -7,9 +13,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import android.text.TextUtils;
-import android.util.Log;
 
 /**
  * Class Description：String util
@@ -277,5 +280,25 @@ public class SStringUtil {
 			e.printStackTrace();
 		}
 		return data;
+	}
+
+	public static JSONObject map2Json(Map<String, String> dataMap){
+		JSONObject jsonObject = new JSONObject();
+		if (dataMap.isEmpty()){
+			return jsonObject;
+		}
+		for (Map.Entry<String, String> entry : dataMap.entrySet()) {
+			String mapValue = entry.getValue();
+			if (mapValue == null) {
+				mapValue = "";
+			}
+			try {
+				jsonObject.put(entry.getKey(), mapValue);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+			//postData.append(entry.getKey()).append("=").append(URLEncoder.encode(mapValue,"UTF-8")).append("&");
+		}
+		return jsonObject;
 	}
 }
