@@ -224,6 +224,13 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
         });
 
         accountModels = new ArrayList<>();
+
+        //test
+//        GamaUtil.saveAccountModel(getContext(), "ddda","xxx",true);
+//        GamaUtil.saveAccountModel(getContext(), "ccc","xxx",true);
+//        GamaUtil.saveAccountModel(getContext(), "ddxxxxda","xxx",true);
+//        GamaUtil.saveAccountModel(getContext(), "aaaaa","xxx",true);
+
         List<AccountModel> ams = GamaUtil.getAccountModels(getContext());
         accountModels.addAll(ams);
         if (accountModels != null && !accountModels.isEmpty()){//设置按照最好登录时间排序后的第一个账号
@@ -290,25 +297,18 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
                         historyAccountRv.setVisibility(GONE);
                     }
                 });
+                holder.setOnClickListener(R.id.history_account_item_delete_layout, new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        removeAccountMode(position);
+                    }
+                });
                 holder.setOnClickListener(R.id.history_account_item_delete_btn, new OnClickListener() {
                     @Override
                     public void onClick(View v) {
 
-                        AccountModel removeModel = accountModels.remove(position);
-                        if (removeModel != null){
-
-                            if (accountModels.isEmpty()){
-                                historyAccountRv.setVisibility(GONE);
-                                historyAccountListBtn.setVisibility(GONE);//删除就保存重新刷新数据
-                                loginAccountEditText.setText("");
-                                loginPasswordEditText.setText("");
-                            }
-                            GamaUtil.saveAccountModels(getContext(),accountModels);
-                            List<AccountModel>  ams = GamaUtil.getAccountModels(getContext());
-                            accountModels.clear();
-                            accountModels.addAll(ams);
-                            historyAccountCommonAdapter.notifyDataSetChanged();
-                        }
+                        removeAccountMode(position);
                     }
                 });
 
@@ -316,6 +316,24 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
 
         };
         historyAccountRv.setAdapter(historyAccountCommonAdapter);
+    }
+
+    private void removeAccountMode(int position) {
+        AccountModel removeModel = accountModels.remove(position);
+        if (removeModel != null) {
+
+            if (accountModels.isEmpty()) {
+                historyAccountRv.setVisibility(GONE);
+                historyAccountListBtn.setVisibility(GONE);//删除就保存重新刷新数据
+                loginAccountEditText.setText("");
+                loginPasswordEditText.setText("");
+            }
+            GamaUtil.saveAccountModels(getContext(), accountModels);
+            List<AccountModel> ams = GamaUtil.getAccountModels(getContext());
+            accountModels.clear();
+            accountModels.addAll(ams);
+            historyAccountCommonAdapter.notifyDataSetChanged();
+        }
     }
 
     private void login() {
