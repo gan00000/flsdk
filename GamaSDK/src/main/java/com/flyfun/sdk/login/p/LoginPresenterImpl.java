@@ -7,9 +7,10 @@ import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import androidx.fragment.app.Fragment;
 import android.text.TextUtils;
 import android.view.View;
+
+import androidx.fragment.app.Fragment;
 
 import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.ISReqCallBack;
@@ -910,7 +911,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         }
         iLoginView.showAutoLoginView();
 
-        count = 3;
+        count = 2;
 
         iLoginView.showAutoLoginWaitTime("(" + count +  ")");
 
