@@ -259,7 +259,7 @@ public class StarEventLogger {
             if(map == null) { //appsflyer的属性列表
                 map = new HashMap<>();
             }
-            if (!map.containsKey(SdkAdsConstant.GAMA_EVENT_ROLEID)) {
+            if (!map.containsKey(SdkAdsConstant.GAMA_EVENT_ROLEID) && SStringUtil.isNotEmpty(GamaUtil.getRoleId(context))) {
                 map.put(SdkAdsConstant.GAMA_EVENT_ROLEID, GamaUtil.getRoleId(context));
                 map.put(SdkAdsConstant.GAMA_EVENT_ROLENAME, GamaUtil.getRoleName(context));
                 map.put(SdkAdsConstant.GAMA_EVENT_ROLE_LEVEL, GamaUtil.getRoleLevel(context));
