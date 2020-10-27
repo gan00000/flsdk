@@ -112,7 +112,7 @@ public class GamaAj {
             ae.addCallbackParameter(entry.getKey(), entry.getValue().toString());
         }
         if(map.get(SdkAdsConstant.GAMA_EVENT_PAY_VALUE) != null) {
-            int value = (int) map.get(SdkAdsConstant.GAMA_EVENT_PAY_VALUE);
+            double value = (double) map.get(SdkAdsConstant.GAMA_EVENT_PAY_VALUE);
             String currenty = "USD";
 //            if(map.get("gama_event_currency") != null) {
 //                currenty = (String) map.get("gama_event_currency");
