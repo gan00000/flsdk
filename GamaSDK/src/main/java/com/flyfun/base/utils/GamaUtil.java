@@ -460,7 +460,7 @@ public class GamaUtil {
         if (TextUtils.isEmpty(password)){
             return false;
         }
-        if (password.matches("^(?=.*[a-z])(?=.*[0-9])(?!.*[\\W]).{8,16}$")){
+        if (password.matches("^(?=.*[a-zA-Z])(?=.*[0-9])(?!.*[\\W]).{8,16}$")){
             return true;
         }
         return false;
