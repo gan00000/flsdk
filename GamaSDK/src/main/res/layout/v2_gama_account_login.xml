@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="460dp"
-        android:layout_height="340dp"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center_horizontal"
         android:layout_centerInParent="true"
@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-<!--            账号-->
+            <!--            账号-->
             <com.flyfun.sdk.login.widget.SDKInputEditTextView
                 android:layout_width="320dp"
                 android:layout_height="40dp"
@@ -58,9 +58,9 @@
                 android:layout_below="@id/sdkinputview_account_login_account"
                 />
 
-<!--            记住账号-->
+            <!--            记住账号-->
             <RelativeLayout
-                android:layout_width="match_parent"
+                android:layout_width="320dp"
                 android:layout_centerHorizontal="true"
                 android:layout_height="40dp"
                 android:layout_below="@id/sdkinputview_account_login_password"
@@ -107,9 +107,10 @@
                     android:id="@+id/gama_login_tv_forget_password"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toEndOf="@id/view_center_base"
+                    android:layout_alignParentEnd="true"
                     android:layout_marginStart="@dimen/px_40"
                     android:layout_centerVertical="true"
+                    android:layout_marginEnd="16dp"
                     android:gravity="center"
                     android:maxLines="2"
                     android:text="@string/py_findpwd"
@@ -121,7 +122,7 @@
             </RelativeLayout>
 
 
-<!--        账号历史记录-->
+            <!--        账号历史记录-->
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="320dp"

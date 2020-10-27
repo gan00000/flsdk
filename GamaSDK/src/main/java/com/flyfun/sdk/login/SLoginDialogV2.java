@@ -211,6 +211,13 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 
     public void toTermsV3View() {
 
+        for (SLoginBaseRelativeLayout childView : viewPageList) {
+            if (childView == null){
+                continue;
+            }
+            childView.setVisibility(View.GONE);
+        }
+
         sdkTermsV3View = new TermsViewV3(context);
         sdkTermsV3View.setLoginDialogV2(this);
         contentFrameLayout.addView(sdkTermsV3View);
