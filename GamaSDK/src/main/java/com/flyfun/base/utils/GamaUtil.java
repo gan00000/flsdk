@@ -471,15 +471,15 @@ public class GamaUtil {
      * @param password
      * @return
      */
-    public static boolean checkPasswordOld(String password){
-        if (TextUtils.isEmpty(password)){
-            return false;
-        }
-        if (password.matches("^[A-Za-z0-9]{6,18}$")){
-            return true;
-        }
-        return false;
-    }
+//    public static boolean checkPasswordOld(String password){
+//        if (TextUtils.isEmpty(password)){
+//            return false;
+//        }
+//        if (password.matches("^[A-Za-z0-9]{6,18}$")){
+//            return true;
+//        }
+//        return false;
+//    }
 
     /**
      * 用于解密动态域名的secretKey
