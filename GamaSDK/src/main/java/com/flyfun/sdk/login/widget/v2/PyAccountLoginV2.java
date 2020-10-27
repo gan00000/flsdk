@@ -122,11 +122,15 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
         loginMainLoginBtn = contentView.findViewById(R.id.gama_login_btn_confirm);
         goTermView = contentView.findViewById(R.id.gama_gama_start_term_tv1);//跳轉服務條款
         agreeCheckBox = contentView.findViewById(R.id.gama_gama_start_term_cb1);//跳轉服務條款
-        if (GamaUtil.getStartTermRead(getContext())){
-            agreeCheckBox.setChecked(true);
-        }else {
-            agreeCheckBox.setChecked(false);
-        }
+
+        GamaUtil.saveStartTermRead(getContext(), true);//默认设置为勾选
+        agreeCheckBox.setChecked(true);
+
+//        if (GamaUtil.getStartTermRead(getContext())){
+//            agreeCheckBox.setChecked(true);
+//        }else {
+//            agreeCheckBox.setChecked(false);
+//        }
 
         savePwdCheckBox = contentView.findViewById(R.id.gama_login_iv_remember_account);
 
