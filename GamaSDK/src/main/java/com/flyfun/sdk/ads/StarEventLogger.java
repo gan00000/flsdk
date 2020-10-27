@@ -7,7 +7,6 @@ import android.os.Handler;
 import android.text.TextUtils;
 
 import com.appsflyer.AFInAppEventParameterName;
-import com.appsflyer.AFInAppEventType;
 import com.appsflyer.AppsFlyerLib;
 import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.ISReqCallBack;
@@ -72,7 +71,7 @@ public class StarEventLogger {
 
             //获取验证码开关
             if(GamaUtil.isNeedVfSwitch(activity)) {
-                getVfSwitch(activity);
+               // getVfSwitch(activity);
             }
 
         } catch (Exception e) {
@@ -100,7 +99,7 @@ public class StarEventLogger {
             //AppsFlyer上报
             Map<String, Object> eventValue = new HashMap<String, Object>();
             eventValue.put(SdkAdsConstant.GAMA_EVENT_USER_ID, userId);
-            AppsFlyerLib.getInstance().trackEvent(activity.getApplicationContext(), SdkAdsConstant.GAMA_EVENT_LOGIN, eventValue);
+           // AppsFlyerLib.getInstance().trackEvent(activity.getApplicationContext(), SdkAdsConstant.GAMA_EVENT_LOGIN, eventValue);
 
             //adjust
             GamaAj.trackEvent(activity.getApplicationContext(), SdkAdsConstant.GAMA_EVENT_LOGIN, eventValue);
@@ -131,7 +130,7 @@ public class StarEventLogger {
             //AppsFlyer上报
             Map<String, Object> eventValue = new HashMap<String, Object>();
             eventValue.put(SdkAdsConstant.GAMA_EVENT_USER_ID, userId);
-            AppsFlyerLib.getInstance().trackEvent(activity.getApplicationContext(), SdkAdsConstant.GAMA_EVENT_REGISTER, eventValue);
+           // AppsFlyerLib.getInstance().trackEvent(activity.getApplicationContext(), SdkAdsConstant.GAMA_EVENT_REGISTER, eventValue);
 
             //adjust
             GamaAj.trackEvent(activity.getApplicationContext(), SdkAdsConstant.GAMA_EVENT_REGISTER, eventValue);
@@ -165,7 +164,7 @@ public class StarEventLogger {
 
             //AppsFlyer上报
             map.put(SdkAdsConstant.GAMA_EVENT_USER_ID, userId);
-            AppsFlyerLib.getInstance().trackEvent(activity.getApplicationContext(), SdkAdsConstant.GAMA_EVENT_ROLE_INFO, map);
+           // AppsFlyerLib.getInstance().trackEvent(activity.getApplicationContext(), SdkAdsConstant.GAMA_EVENT_ROLE_INFO, map);
             //adjust
             GamaAj.trackEvent(activity, SdkAdsConstant.GAMA_EVENT_ROLE_INFO, map);
             //计算留存
@@ -234,7 +233,8 @@ public class StarEventLogger {
             eventValues.put(AFInAppEventParameterName.REVENUE, usdPrice);
             eventValues.put(AFInAppEventParameterName.CURRENCY, "USD");
             eventValues.put(AFInAppEventParameterName.CONTENT_ID, productId);
-            AppsFlyerLib.getInstance().trackEvent(context, AFInAppEventType.PURCHASE, eventValues);
+
+            //AppsFlyerLib.getInstance().trackEvent(context, AFInAppEventType.PURCHASE, eventValues);
 
             //adjust
             GamaAj.trackEvent(context, SdkAdsConstant.GAMA_EVENT_IAB, eventValues);
@@ -285,7 +285,7 @@ public class StarEventLogger {
                 SGoogleProxy.firebaseAnalytics(context, eventName, b);
 
                 //AppsFlyer上报
-                AppsFlyerLib.getInstance().trackEvent(context.getApplicationContext(), eventName, map);
+              //  AppsFlyerLib.getInstance().trackEvent(context.getApplicationContext(), eventName, map);
 
                 //adjust
                 GamaAj.trackEvent(context, eventName, map);
@@ -303,7 +303,7 @@ public class StarEventLogger {
                 if(mediaSet.contains(SdkAdsConstant.EventReportChannel.EventReportAppsflyer)) {
                     PL.i("上报媒体3");
                     //AppsFlyer上报
-                    AppsFlyerLib.getInstance().trackEvent(context.getApplicationContext(), eventName, map);
+                  //  AppsFlyerLib.getInstance().trackEvent(context.getApplicationContext(), eventName, map);
                 }
                 if(mediaSet.contains(SdkAdsConstant.EventReportChannel.EventReportAdjust)) {
                     PL.i("上报媒体4");

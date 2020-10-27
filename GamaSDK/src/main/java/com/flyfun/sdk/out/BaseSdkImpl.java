@@ -102,7 +102,7 @@ public class BaseSdkImpl implements IFLSDK {
                 //获取Google 广告ID
                 StarEventLogger.registerGoogleAdId(activity);
                 //Gama平台安装上报
-                StarEventLogger.reportInstallActivation(activity.getApplicationContext());
+//                StarEventLogger.reportInstallActivation(activity.getApplicationContext());
 //                try {
 //                    Fresco.initialize(activity.getApplicationContext());//初始化fb Fresco库
 //                } catch (Exception e) {
