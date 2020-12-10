@@ -76,6 +76,7 @@ public class BaseSdkImpl implements IFLSDK {
 
     public BaseSdkImpl() {
         iLogin = ObjFactory.create(DialogLoginImpl.class);
+        PL.i("BaseSdkImpl 构造函数");
     }
 
     @Deprecated
@@ -96,7 +97,7 @@ public class BaseSdkImpl implements IFLSDK {
                 PL.i("IGama initSDK");
                 Localization.gameLanguage(activity, gameLanguage);
                 //清除上一次登录成功的返回值
-                GamaUtil.saveSdkLoginData(activity, "");
+                //GamaUtil.saveSdkLoginData(activity, "");
                 //重置用户登入时长
                 GamaUtil.resetOnlineTimeInfo(activity);
                 //获取Google 广告ID
