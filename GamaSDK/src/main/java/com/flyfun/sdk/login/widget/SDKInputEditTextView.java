@@ -2,7 +2,6 @@ package com.flyfun.sdk.login.widget;
 
 import android.content.Context;
 import android.os.Build;
-import androidx.annotation.RequiresApi;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.Selection;
@@ -18,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
 
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
@@ -122,7 +123,7 @@ public class SDKInputEditTextView extends RelativeLayout {
         switch (inputType){
 
             case SDKInputType_Account:
-                iconId = R.drawable.fl_sdk_ren;
+                iconId = R.drawable.h_account_number;
                 labName = getResources().getString(R.string.py_account);
                 hint = getResources().getString(R.string.py_register_account_hit);
                 eyeImageView.setVisibility(View.GONE);
@@ -130,7 +131,7 @@ public class SDKInputEditTextView extends RelativeLayout {
                 break;
 
             case SDKInputType_Password:
-                iconId = R.drawable.fl_sdk_suo;
+                iconId = R.drawable.h_password;
                 labName = getResources().getString(R.string.py_password);
                 hint = getResources().getString(R.string.py_register_password_hit);
                 eyeImageView.setVisibility(View.VISIBLE);
@@ -139,7 +140,7 @@ public class SDKInputEditTextView extends RelativeLayout {
                 break;
 
             case SDKInputType_Password_Again:
-                iconId = R.drawable.fl_sdk_suo;
+                iconId = R.drawable.h_password;
                 labName = getResources().getString(R.string.py_password);
                 hint = getResources().getString(R.string.py_account_again_input_password);
                 eyeImageView.setVisibility(View.VISIBLE);
@@ -148,7 +149,7 @@ public class SDKInputEditTextView extends RelativeLayout {
                 break;
 
             case SDKInputType_Old_Password:
-                iconId = R.drawable.fl_sdk_suo;
+                iconId = R.drawable.h_password;
                 labName = getResources().getString(R.string.py_old_pwd);
                 hint = getResources().getString(R.string.py_register_password_hit);
                 eyeImageView.setVisibility(View.VISIBLE);
@@ -156,7 +157,7 @@ public class SDKInputEditTextView extends RelativeLayout {
                 adjustTvTextSize();
                 break;
             case SDKInputType_New_Password:
-                iconId = R.drawable.fl_sdk_suo;
+                iconId = R.drawable.h_password;
                 labName = getResources().getString(R.string.py_new_pwd);
                 hint = getResources().getString(R.string.py_register_password_hit);
                 eyeImageView.setVisibility(View.VISIBLE);

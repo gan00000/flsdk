@@ -6,49 +6,60 @@
     android:background="@android:color/transparent">
 
     <LinearLayout
-        android:layout_width="360dp"
-        android:layout_height="400dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center_horizontal"
         android:layout_centerInParent="true"
-        android:background="@drawable/login_cons_bg"
+        android:background="@drawable/hgamebackground"
 
         >
+        
+        
+        <ImageView
+            android:layout_width="288dp"
+            android:layout_height="221dp"
+            android:layout_marginTop="177dp"
+            android:src="@drawable/hgameicon"
+            />
 
         <LinearLayout
-            android:layout_width="320dp"
-            android:layout_height="42dp"
-            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="134dp"
+            android:gravity="center_horizontal"
             android:padding="1dp"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_width="264dp"
+                android:layout_height="50.5dp"
                 android:text="@string/py_login_by_members"
-                android:background="@drawable/login_tab_red_left_cons_bg"
+                android:background="@drawable/login_tab_white_right_cons_bg"
                 android:gravity="center"
                 android:lines="1"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/sp_26"
+                android:textColor="@color/e_F349C1"
+                android:textSize="@dimen/sp_32"
                 android:id="@+id/loginTabView"
                 android:layout_weight="0.5"/>
 
             <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:text="@string/py_register_account"
+                android:layout_width="264dp"
+                android:layout_height="50.5dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/py_free_reg"
                 android:gravity="center"
-                android:textColor="@color/e_ff3a3b"
+                android:textColor="@color/e_F349C1"
                 android:background="@drawable/login_tab_white_right_cons_bg"
                 android:lines="1"
-                android:textSize="@dimen/sp_26"
+                android:textSize="@dimen/sp_32"
                 android:id="@+id/regTabView"
                 android:layout_weight="0.5"/>
 
         </LinearLayout>
 
-        <RelativeLayout
+        <!--<RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="2dp">
@@ -65,7 +76,7 @@
                 android:visibility="gone"/>
 
 
-        </RelativeLayout>
+        </RelativeLayout>-->
 
 
     </LinearLayout>

@@ -20,16 +20,6 @@ public class MainLoginLayoutV3 extends SLoginBaseRelativeLayout implements View.
     private View contentView;
     private TextView loginTabView, regTabView;
 
-    private PyAccountLoginV2 mAccountLoginV2;
-    private AccountRegisterLayoutV2 mAccountRegisterLayoutV2;
-
-    public PyAccountLoginV2 getmAccountLoginV2() {
-        return mAccountLoginV2;
-    }
-
-    public AccountRegisterLayoutV2 getmAccountRegisterLayoutV2() {
-        return mAccountRegisterLayoutV2;
-    }
 
     public MainLoginLayoutV3(Context context) {
         super(context);
@@ -54,9 +44,6 @@ public class MainLoginLayoutV3 extends SLoginBaseRelativeLayout implements View.
         loginTabView = contentView.findViewById(R.id.loginTabView);
         regTabView = contentView.findViewById(R.id.regTabView);
 
-        mAccountLoginV2 = contentView.findViewById(R.id.pyAccountLoginV2Id);
-        mAccountRegisterLayoutV2 = contentView.findViewById(R.id.accountRegisterLayoutV2Id);
-
         loginTabView.setOnClickListener(this);
         regTabView.setOnClickListener(this);
 
@@ -68,8 +55,6 @@ public class MainLoginLayoutV3 extends SLoginBaseRelativeLayout implements View.
     public void setLoginDialogV2(SLoginDialogV2 sLoginDialog) {
         super.setLoginDialogV2(sLoginDialog);
 
-        mAccountLoginV2.setLoginDialogV2(sLoginDialogv2);
-        mAccountRegisterLayoutV2.setLoginDialogV2(sLoginDialogv2);
     }
 
     @Override
@@ -89,15 +74,11 @@ public class MainLoginLayoutV3 extends SLoginBaseRelativeLayout implements View.
     public void refreshViewData() {
         super.refreshViewData();
 
-        mAccountLoginV2.refreshViewData();
-        mAccountRegisterLayoutV2.refreshViewData();
     }
 
     private void makeTabStatus(boolean isLoginClick) {
 
         if (isLoginClick){
-            mAccountLoginV2.setVisibility(VISIBLE);
-            mAccountRegisterLayoutV2.setVisibility(GONE);
 
             loginTabView.setBackgroundResource(R.drawable.login_tab_red_left_cons_bg);
             regTabView.setBackgroundResource(R.drawable.login_tab_white_right_cons_bg);
@@ -106,8 +87,6 @@ public class MainLoginLayoutV3 extends SLoginBaseRelativeLayout implements View.
             regTabView.setTextColor(getContext().getResources().getColor(R.color.e_ff3a3b));
 
         }else{
-            mAccountLoginV2.setVisibility(GONE);
-            mAccountRegisterLayoutV2.setVisibility(VISIBLE);
 
             loginTabView.setBackgroundResource(R.drawable.login_tab_white_left_cons_bg);
             regTabView.setBackgroundResource(R.drawable.login_tab_red_right_cons_bg);

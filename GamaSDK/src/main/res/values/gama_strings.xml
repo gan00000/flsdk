@@ -13,7 +13,7 @@
     <!--登录页面-->
     <string name="py_login_page_account_login">會員登入頁</string>
     <string name="py_login_save_account">記住帳號</string>
-    <string name="py_login_by_members">會員登入</string>
+    <string name="py_login_by_members">平台會員登入</string>
     <string name="py_findpwd">忘記密碼</string>
     <string name="py_register_account">註冊帳號</string>
     <string name="py_account_center">會員中心</string>
@@ -143,7 +143,7 @@
     <string name="py_login_star">Starpy帳號登入</string>
     <string name="py_login_mac">免註冊登入</string>
     <string name="py_bind_phone_area_num">+86</string>
-    <string name="py_free_reg">遊客登入</string>
+    <string name="py_free_reg">直接玩</string>
 <!--    <string name="py_email_format_error">郵箱格式錯誤</string>-->
 <!--    <string name="py_email_empty">郵箱不能為空</string>-->
 <!--    <string name="py_select_terms">請勾選同意服務條款</string>-->
@@ -157,4 +157,7 @@
     <string name="guest_login_btn">遊客登入</string>
 
     <string name="sdk_terms_title">網絡連線遊戲服務定型化契約</string>
+
+    <string name="h_login">登入</string>
+    <string name="h_login_en">Welcome back</string>
 </resources>
