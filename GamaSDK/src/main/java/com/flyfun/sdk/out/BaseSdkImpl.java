@@ -178,7 +178,7 @@ public class BaseSdkImpl implements IFLSDK {
 
                         ad2RequestBean.setValue(activity.getApplicationContext());
 
-                        ad2RequestBean.setCompleteUrl("http://adv.flyfungame.com/adv-api/v1/role/save/");
+                        ad2RequestBean.setCompleteUrl("https://adv.flyfungame.com/adv-api/v1/role/save/");
                         return ad2RequestBean;
                     }
                 };

@@ -5,6 +5,9 @@ import android.content.Context;
 import com.core.base.utils.ApkInfoUtil;
 import com.core.base.utils.SStringUtil;
 import com.flyfun.base.bean.SGameBaseRequestBean;
+import com.flyfun.base.bean.SLoginType;
+import com.flyfun.base.utils.GamaUtil;
+import com.flyfun.sdk.login.model.AccountModel;
 
 public class Ad2RequestBean extends SGameBaseRequestBean {
 
@@ -42,6 +45,14 @@ public class Ad2RequestBean extends SGameBaseRequestBean {
         server_name = this.getServerName();
         game_name = ApkInfoUtil.getApplicationName(context);
 
+        String previousLoginType = GamaUtil.getPreviousLoginType(context);
+        if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GAMESWORD, previousLoginType)) {//自動登錄
+            AccountModel accountModel = GamaUtil.getLastLoginAccount(context);
+            if (accountModel != null){
+                user_name = accountModel.getAccount();
+            }
+
+        }
         sigin = SStringUtil.toMd5(game_code + server_code + user_id + role_id + "FLYFUNGAME", true);
     }
 
