@@ -62,11 +62,12 @@ public class MainLoginLayoutV3 extends SLoginBaseRelativeLayout implements View.
 
         if (v == loginTabView){
 
-            makeTabStatus(true);
+//            makeTabStatus(true);
+
             
         }else if (v == regTabView) {
 
-            makeTabStatus(false);
+//            makeTabStatus(false);
         }
     }
 

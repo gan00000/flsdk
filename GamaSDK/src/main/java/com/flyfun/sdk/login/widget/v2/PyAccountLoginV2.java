@@ -1,21 +1,13 @@
 package com.flyfun.sdk.login.widget.v2;
 
 import android.content.Context;
-import android.graphics.Paint;
-import android.text.SpannableString;
 import android.text.TextUtils;
-import android.text.style.UnderlineSpan;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.core.base.utils.ToastUtils;
 import com.flyfun.base.utils.GamaUtil;
@@ -25,7 +17,6 @@ import com.flyfun.sdk.login.widget.SDKInputType;
 import com.flyfun.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.gama.sdk.R;
 import com.zhy.adapter.recyclerview.CommonAdapter;
-import com.zhy.adapter.recyclerview.base.ViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,8 +34,8 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
     /**
      * 眼睛、保存密码、验证码
      */
-    private ImageView savePwdCheckBox;
-    private CheckBox agreeCheckBox;
+    private CheckBox savePwdCheckBox;
+//    private CheckBox agreeCheckBox;
 
     /**
      * 密码、账号、验证码
@@ -55,16 +46,16 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
     List<AccountModel> accountModels;
     private View loginMainGoRegisterBtn;
     private View loginMainGoFindPwd;
-    private View loginMainGoAccountCenter;
+//    private View loginMainGoAccountCenter;
     private View loginMainGoChangePassword;
 
-    private TextView goTermView;
+//    private TextView goTermView;
 
     private SDKInputEditTextView accountSdkInputEditTextView;
     private SDKInputEditTextView pwdSdkInputEditTextView;
 
-    private RecyclerView historyAccountRv;
-    View historyAccountListBtn;
+//    private RecyclerView historyAccountRv;
+//    View historyAccountListBtn;
     private CommonAdapter  historyAccountCommonAdapter;
 
     private View fbLoginView, bindAccountView, macLoginView, googleLoginView;
@@ -109,22 +100,22 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
 
         loginMainGoRegisterBtn = contentView.findViewById(R.id.gama_login_tv_register);
         loginMainGoFindPwd = contentView.findViewById(R.id.gama_login_tv_forget_password);
-        loginMainGoAccountCenter = contentView.findViewById(R.id.gama_login_tv_link);
+//        loginMainGoAccountCenter = contentView.findViewById(R.id.gama_login_tv_link);
         loginMainGoChangePassword = contentView.findViewById(R.id.gama_login_tv_change_password);
 
 
         loginAccountEditText = accountSdkInputEditTextView.getInputEditText();
         loginPasswordEditText = pwdSdkInputEditTextView.getInputEditText();
 
-        historyAccountRv = contentView.findViewById(R.id.account_login_history_account_rv);
-        historyAccountListBtn = contentView.findViewById(R.id.sdk_input_item_account_history);
+//        historyAccountRv = contentView.findViewById(R.id.account_login_history_account_rv);
+//        historyAccountListBtn = contentView.findViewById(R.id.sdk_input_item_account_history);
 
         loginMainLoginBtn = contentView.findViewById(R.id.gama_login_btn_confirm);
-        goTermView = contentView.findViewById(R.id.gama_gama_start_term_tv1);//跳轉服務條款
-        agreeCheckBox = contentView.findViewById(R.id.gama_gama_start_term_cb1);//跳轉服務條款
+//        goTermView = contentView.findViewById(R.id.gama_gama_start_term_tv1);//跳轉服務條款
+//        agreeCheckBox = contentView.findViewById(R.id.gama_gama_start_term_cb1);//跳轉服務條款
 
         GamaUtil.saveStartTermRead(getContext(), true);//默认设置为勾选
-        agreeCheckBox.setChecked(true);
+//        agreeCheckBox.setChecked(true);
 
 //        if (GamaUtil.getStartTermRead(getContext())){
 //            agreeCheckBox.setChecked(true);
@@ -134,7 +125,7 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
 
         savePwdCheckBox = contentView.findViewById(R.id.gama_login_iv_remember_account);
 
-        savePwdCheckBox.setSelected(true);
+        /*savePwdCheckBox.setSelected(true);
 
         savePwdCheckBox.setOnClickListener(new OnClickListener() {
             @Override
@@ -145,7 +136,7 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
                     savePwdCheckBox.setSelected(true);
                 }
             }
-        });
+        });*/
 
 
         loginMainGoRegisterBtn.setOnClickListener(new OnClickListener() {
@@ -164,12 +155,12 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
             }
         });
 
-        loginMainGoAccountCenter.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sLoginDialogv2.toAccountManagerCenter();
-            }
-        });
+//        loginMainGoAccountCenter.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                sLoginDialogv2.toAccountManagerCenter();
+//            }
+//        });
 
         loginMainGoChangePassword.setOnClickListener(new OnClickListener() {
             @Override
@@ -185,18 +176,18 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
             }
         });
 
-        String ssText = getContext().getString(R.string.gama_ui_term_port_read2);
-        SpannableString ss = new SpannableString(ssText);
-        ss.setSpan(new UnderlineSpan(), ssText.length() - 5, ssText.length(), Paint.UNDERLINE_TEXT_FLAG);
-        goTermView.setText(ss);
-        goTermView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //服務條款
-                sLoginDialogv2.toTermsV3View();
-            }
-        });
-        fbLoginView = contentView.findViewById(R.id.fbLoginView);
+//        String ssText = getContext().getString(R.string.gama_ui_term_port_read2);
+//        SpannableString ss = new SpannableString(ssText);
+//        ss.setSpan(new UnderlineSpan(), ssText.length() - 5, ssText.length(), Paint.UNDERLINE_TEXT_FLAG);
+//        goTermView.setText(ss);
+//        goTermView.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //服務條款
+//                sLoginDialogv2.toTermsV3View();
+//            }
+//        });
+      /*  fbLoginView = contentView.findViewById(R.id.fbLoginView);
         bindAccountView = contentView.findViewById(R.id.accountBindView);
         macLoginView = contentView.findViewById(R.id.guestLoginView);
         googleLoginView = contentView.findViewById(R.id.ggLoginView);
@@ -225,7 +216,7 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
                 //google+登录
                 sLoginDialogv2.getLoginPresenter().googleLogin(sLoginDialogv2.getActivity());
             }
-        });
+        });*/
 
         accountModels = new ArrayList<>();
 
@@ -242,22 +233,18 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
             account = lastAccountModel.getAccount();
             password = lastAccountModel.getPassword();
 
-            if (accountModels.size() > 1){
+            /*if (accountModels.size() > 1){
                 historyAccountListBtn.setVisibility(VISIBLE);
-            }
+            }*/
         }
 
-//        if (TextUtils.isEmpty(account)){
-//            account = GamaUtil.getMacAccount(getContext());
-//            password = GamaUtil.getMacPassword(getContext());
-//        }
         if (!TextUtils.isEmpty(account)){ //显示记住的密码，待修改
             loginAccountEditText.setText(account);
             loginPasswordEditText.setText(password);
         }
 
 
-        initHistoryRv();
+      /*  initHistoryRv();
 
         historyAccountListBtn.setOnClickListener(new OnClickListener() {
             @Override
@@ -270,11 +257,11 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
                     historyAccountRv.setVisibility(GONE);
                 }
             }
-        });
+        });*/
 
         return contentView;
     }
-
+/*
     private void initHistoryRv() {
 
         if (accountModels == null){
@@ -339,13 +326,14 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
             historyAccountCommonAdapter.notifyDataSetChanged();
         }
     }
+    */
 
     private void login() {
 
-        if(!agreeCheckBox.isChecked()) {
+        /*if(!agreeCheckBox.isChecked()) {
             ToastUtils.toast(getContext(), R.string.gama_ui_term_not_read);
             return;
-        }
+        }*/
         GamaUtil.saveStartTermRead(getContext(), true);
 
         account = loginAccountEditText.getEditableText().toString().trim();
@@ -391,11 +379,11 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
     public void refreshViewData() {
         super.refreshViewData();
 
-        if (GamaUtil.getStartTermRead(getContext())){
-            agreeCheckBox.setChecked(true);
-        }else {
-            agreeCheckBox.setChecked(false);
-        }
+//        if (GamaUtil.getStartTermRead(getContext())){
+//            agreeCheckBox.setChecked(true);
+//        }else {
+//            agreeCheckBox.setChecked(false);
+//        }
 
         List<AccountModel>  ams = GamaUtil.getAccountModels(getContext());
         accountModels.clear();
@@ -415,14 +403,14 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
             loginPasswordEditText.setText(password);
         }
 
-        if (accountModels != null && accountModels.size() > 1){
+      /*  if (accountModels != null && accountModels.size() > 1){
             historyAccountListBtn.setVisibility(VISIBLE);
         }else{
             historyAccountListBtn.setVisibility(GONE);
         }
         if (historyAccountRv != null) {
             historyAccountRv.setVisibility(GONE);
-        }
+        }*/
 
     }
 

@@ -24,6 +24,7 @@ import com.flyfun.sdk.login.widget.v2.AccountChangePwdLayoutV2;
 import com.flyfun.sdk.login.widget.v2.AccountFindPwdLayoutV2;
 import com.flyfun.sdk.login.widget.v2.AccountManagerLayoutV2;
 import com.flyfun.sdk.login.widget.v2.MainLoginLayoutV3;
+import com.flyfun.sdk.login.widget.v2.PyAccountLoginV2;
 import com.flyfun.sdk.login.widget.v2.TermsViewV3;
 import com.flyfun.sdk.login.widget.v2.ThirdPlatBindAccountLayoutV2;
 import com.flyfun.thirdlib.facebook.SFacebookProxy;
@@ -250,7 +251,6 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
         }
     }
     public void toAccountLoginView() {
-/*
         if (accountLoginView == null || !viewPageList.contains(accountLoginView)){
 //            SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
 //            if (SGameLanguage.en_US == sGameLanguage) {
@@ -275,9 +275,9 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
             }else{
                 childView.setVisibility(View.GONE);
             }
-        }*/
+        }
 
-        this.toMainLoginView();
+//        this.toMainLoginView();
     }
 
     public void toRegisterView(int from) {
