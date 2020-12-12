@@ -163,7 +163,7 @@
                 android:layout_width="320dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="180dp"
-                android:background="@drawable/shape_cons_bg_e32cbc"
+                android:background="@drawable/shape_cons_bg_E32CBC"
                 android:gravity="center"
                 android:text="@string/h_login"
                 android:textColor="@android:color/white"
