@@ -107,6 +107,7 @@ public class GamaAj {
             PL.e(TAG, "no token found");
             return;
         }
+        PL.i(TAG, "adjust start eventName:" + event + ", eventToken:" + eventToken);
         AdjustEvent ae = new AdjustEvent(eventToken);
         for (Map.Entry<String, Object> entry : map.entrySet()) {
             ae.addCallbackParameter(entry.getKey(), entry.getValue().toString());
@@ -117,10 +118,12 @@ public class GamaAj {
 //            if(map.get("gama_event_currency") != null) {
 //                currenty = (String) map.get("gama_event_currency");
 //            }
+            PL.i(TAG, "adjust ing eventName:" + event + ", eventToken:" + eventToken + ",setRevenue:" + value);
             ae.setRevenue(value, currenty);
         }
         ae.addCallbackParameter("gameCode", ResConfig.getGameCode(context));
         Adjust.trackEvent(ae);
+        PL.i(TAG, "adjust end eventName:" + event + ", eventToken:" + eventToken);
     }
 
     /**
