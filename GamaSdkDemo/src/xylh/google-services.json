@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "567763414433",
+    "firebase_url": "https://flyfun-xylh.firebaseio.com",
+    "project_id": "flyfun-xylh",
+    "storage_bucket": "flyfun-xylh.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:567763414433:android:44a8db628fe209595a2fe0",
+        "android_client_info": {
+          "package_name": "com.flyfun.xylh"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "567763414433-19ne5b8pa9sr2pi88eqoaikqkccdt4f4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.flyfun.xylh",
+            "certificate_hash": "f1738617b7ae0c892ca378439c80aa5b9f4bbd50"
+          }
+        },
+        {
+          "client_id": "567763414433-cafefo6psi5d6pnn0qm63585pq35n0il.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbcBvFyf6jTNRemQLSKYDenVuHtp2wwq0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "567763414433-cafefo6psi5d6pnn0qm63585pq35n0il.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "567763414433-sffstlmloh5mhdm0tep8qca8ig3ft5j7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.flyfun.xylh"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
