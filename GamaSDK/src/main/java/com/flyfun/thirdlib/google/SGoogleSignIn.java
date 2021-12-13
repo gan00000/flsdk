@@ -23,11 +23,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GoogleAuthProvider;
 
 public class SGoogleSignIn {
 
@@ -47,7 +42,7 @@ public class SGoogleSignIn {
 
 
 	// [START declare_auth]
-	private FirebaseAuth mAuth;
+//	private FirebaseAuth mAuth;
 	// [END declare_auth]
 
 	GoogleSignInCallBack googleSignInCallBack;
@@ -119,7 +114,7 @@ public class SGoogleSignIn {
 
 		// [START initialize_auth]
 		// Initialize Firebase Auth
-		mAuth = FirebaseAuth.getInstance();
+//		mAuth = FirebaseAuth.getInstance();
 		// [END initialize_auth]
 	}
 
@@ -268,7 +263,7 @@ public class SGoogleSignIn {
 //	============firebase 1=================
 
 	// [START auth_with_google]
-	private void firebaseAuthWithGoogle(String idToken) {
+	/*private void firebaseAuthWithGoogle(String idToken) {
 		// [START_EXCLUDE silent]
 //		showProgressBar();
 		// [END_EXCLUDE]
@@ -297,7 +292,7 @@ public class SGoogleSignIn {
 						// [END_EXCLUDE]
 					}
 				});
-	}
+	}*/
 	// [END auth_with_google]
 
 	// [START signin]
@@ -309,7 +304,7 @@ public class SGoogleSignIn {
 
 	private void signOut() {
 		// Firebase sign out
-		mAuth.signOut();
+//		mAuth.signOut();
 
 		// Google sign out
 		mGoogleSignInClient.signOut().addOnCompleteListener(activity,
@@ -322,7 +317,7 @@ public class SGoogleSignIn {
 
 	private void revokeAccess() {
 		// Firebase sign out
-		mAuth.signOut();
+//		mAuth.signOut();
 
 		// Google revoke access
 		mGoogleSignInClient.revokeAccess().addOnCompleteListener(activity,
