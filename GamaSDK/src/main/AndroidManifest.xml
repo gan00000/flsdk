@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.gama.sdk">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--需要添加以下配置 start-->
 

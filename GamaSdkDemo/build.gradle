@@ -5,7 +5,7 @@ apply plugin: 'com.android.application'
 
 android {
 
-    compileSdkVersion 29
+    compileSdkVersion 32
 
 //    错误原因：这是因为java8才支持静态接口方法的原因
 //    解决办法：可以通过在app的build.gradle文件中配置使用java8编译
@@ -16,7 +16,7 @@ android {
 
     defaultConfig {
         minSdkVersion 18
-        targetSdkVersion 29
+        targetSdkVersion 32
         ndk {
             abiFilters "armeabi", "armeabi-v7a", "x86"  // 指定要ndk需要兼容的架构(这样其他依赖包里mips之类的.so会被过滤掉)
         }
@@ -123,6 +123,7 @@ android {
             abortOnError false
         }
     }
+    namespace 'com.gama.sdk.demo'
 }
 
 repositories {

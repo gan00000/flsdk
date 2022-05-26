@@ -1,17 +1,14 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 32
 
     defaultConfig {
         minSdkVersion 18
-        targetSdkVersion 29
+        targetSdkVersion 32
         buildConfigField "String", JAR_VERSION, SDK_VERSION_NAME_SDK_TWGOOGLE
     }
 
-    lintOptions {
-        abortOnError false
-    }
 
     buildTypes {
         release {
@@ -23,6 +20,10 @@ android {
         debug {
         }
     }
+    lint {
+        abortOnError false
+    }
+    namespace 'com.gama.sdk'
 
 
 }
@@ -40,16 +41,16 @@ dependencies {
 
     //公共库
     //Google库
-    implementation 'com.google.android.gms:play-services-auth:18.1.0'
-    implementation 'com.google.android.gms:play-services-base:17.4.0'
-    implementation 'com.google.android.gms:play-services-games:20.0.0'
+    implementation 'com.google.android.gms:play-services-auth:20.2.0'
+    implementation 'com.google.android.gms:play-services-base:18.0.1'
+    implementation 'com.google.android.gms:play-services-games:22.0.1'
 
     //firebase
-    implementation 'com.google.firebase:firebase-core:17.5.0'
-    implementation 'com.google.firebase:firebase-messaging:20.2.4'
-    implementation 'com.google.firebase:firebase-auth:19.3.2'
+    implementation 'com.google.firebase:firebase-core:21.0.0'
+    implementation 'com.google.firebase:firebase-messaging:23.0.5'
+    implementation 'com.google.firebase:firebase-auth:21.0.4'
     // Recommended: Add the Firebase SDK for Google Analytics.
-    implementation 'com.google.firebase:firebase-analytics:17.5.0'
+    implementation 'com.google.firebase:firebase-analytics:21.0.0'
     // Add the Firebase Crashlytics SDK.
     //implementation 'com.google.firebase:firebase-crashlytics:17.2.1'
 
@@ -59,10 +60,10 @@ dependencies {
     implementation 'com.facebook.android:facebook-messenger:7.1.0'
     //额外库
     api 'androidx.legacy:legacy-support-v4:1.0.0'
-    api 'androidx.appcompat:appcompat:1.2.0'
-    api 'androidx.recyclerview:recyclerview:1.1.0'
-    api 'androidx.constraintlayout:constraintlayout:2.0.0'
-    api 'androidx.browser:browser:1.2.0'
+    api 'androidx.appcompat:appcompat:1.4.1'
+    api 'androidx.recyclerview:recyclerview:1.2.1'
+    api 'androidx.constraintlayout:constraintlayout:2.1.4'
+    api 'androidx.browser:browser:1.4.0'
     //mutildex
     implementation 'androidx.multidex:multidex:2.0.1'
 
