@@ -75,17 +75,17 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     //google volley
-    implementation 'com.android.volley:volley:1.1.1'
+//    implementation 'com.android.volley:volley:1.1.1'
 
     //Twitter
-    implementation 'com.twitter.sdk.android:twitter-core:3.1.1'
-    implementation ('com.twitter.sdk.android:tweet-ui:3.1.1'){
-        exclude group: 'com.android.support'
-    }
-    implementation ('com.twitter.sdk.android:tweet-composer:3.1.1'){
-        exclude group: 'com.android.support'
-    }
-    implementation 'com.twitter.sdk.android:twitter-mopub:3.1.1'
+//    implementation 'com.twitter.sdk.android:twitter-core:3.1.1'
+//    implementation ('com.twitter.sdk.android:tweet-ui:3.1.1'){
+//        exclude group: 'com.android.support'
+//    }
+//    implementation ('com.twitter.sdk.android:tweet-composer:3.1.1'){
+//        exclude group: 'com.android.support'
+//    }
+//    implementation 'com.twitter.sdk.android:twitter-mopub:3.1.1'
 
     //ads
     //adjust

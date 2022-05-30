@@ -27,7 +27,7 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
 
     private View contentView;
 
-    private Button registerConfirm, gama_register_btn_get_vfcode;
+    private Button registerConfirm;
 
     /**
      * 密码、账号、手机、验证码
@@ -47,9 +47,9 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
 
     private SDKInputEditTextView accountSdkInputEditTextView;
     private SDKInputEditTextView pwdSdkInputEditTextView;
-    private SDKInputEditTextView pwdAgainSdkInputEditTextView;
-    private SDKInputEditTextView vfcodeSdkInputEditTextView;
-    private SDKPhoneInputEditTextView sdkPhoneInputEditTextView;
+//    private SDKInputEditTextView pwdAgainSdkInputEditTextView;
+//    private SDKInputEditTextView vfcodeSdkInputEditTextView;
+//    private SDKPhoneInputEditTextView sdkPhoneInputEditTextView;
 
     public AccountRegisterLayoutV2(Context context) {
         super(context);
@@ -71,33 +71,29 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
     private View onCreateView(LayoutInflater inflater) {
         contentView = inflater.inflate(R.layout.v2_account_reg, null);
 
-        backView = contentView.findViewById(R.id.gama_head_iv_back);
-        TextView titleTextView = contentView.findViewById(R.id.sdk_head_title);
-        titleTextView.setText(R.string.py_login_page_account_reg);
-
         accountSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_account_login_account);
         pwdSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_account_login_password);
-        pwdAgainSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_account_login_password_again);
-        vfcodeSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_account_login_vf);
-        sdkPhoneInputEditTextView = contentView.findViewById(R.id.sdkinputview_phone);
+//        pwdAgainSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_account_login_password_again);
+//        vfcodeSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_account_login_vf);
+//        sdkPhoneInputEditTextView = contentView.findViewById(R.id.sdkinputview_phone);
 
         //設置類型
         accountSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Account);
         pwdSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Password);
-        pwdAgainSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Password_Again);
-        vfcodeSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Vf_Code);
+//        pwdAgainSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Password_Again);
+//        vfcodeSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Vf_Code);
 
 
         registerAccountEditText = accountSdkInputEditTextView.getInputEditText();
         registerPasswordEditText = pwdSdkInputEditTextView.getInputEditText();
-        registerPassworAgaindEditText = pwdAgainSdkInputEditTextView.getInputEditText();
-        gama_register_et_vfcode = vfcodeSdkInputEditTextView.getInputEditText();
-
-        gama_register_et_phone = sdkPhoneInputEditTextView.getInputEditText();
-        gama_register_tv_area = sdkPhoneInputEditTextView.getPhoneAreaTextView();
+//        registerPassworAgaindEditText = pwdAgainSdkInputEditTextView.getInputEditText();
+//        gama_register_et_vfcode = vfcodeSdkInputEditTextView.getInputEditText();
+//
+//        gama_register_et_phone = sdkPhoneInputEditTextView.getInputEditText();
+//        gama_register_tv_area = sdkPhoneInputEditTextView.getPhoneAreaTextView();
 
         registerConfirm = contentView.findViewById(R.id.gama_register_btn_confirm);
-        gama_register_btn_get_vfcode = contentView.findViewById(R.id.gama_register_btn_get_vfcode);
+//        gama_register_btn_get_vfcode = contentView.findViewById(R.id.gama_register_btn_get_vfcode);
 
         gama_register_tv_limit_hint = contentView.findViewById(R.id.gama_register_tv_limit_hint);
 
@@ -110,10 +106,10 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
 
         backView.setOnClickListener(this);
         registerConfirm.setOnClickListener(this);
-        gama_register_btn_get_vfcode.setOnClickListener(this);
+//        gama_register_btn_get_vfcode.setOnClickListener(this);
         gama_register_tv_area.setOnClickListener(this);
 
-        sdkPhoneInputEditTextView.getAraeCodeMoreListView().setOnClickListener(this);
+//        sdkPhoneInputEditTextView.getAraeCodeMoreListView().setOnClickListener(this);
 
         setDefaultAreaInfo();
 
@@ -141,12 +137,12 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
                 sLoginDialogv2.toMainLoginView();
             }
         } else if (v == gama_register_btn_get_vfcode) {
-            getVfcodeByPhone();
+//            getVfcodeByPhone();
 //            getVfcodeByEmail();
-        } else if (v == gama_register_tv_area || v == sdkPhoneInputEditTextView.getAraeCodeMoreListView()) {
-//            sLoginDialogv2.getLoginPresenter().setOperationCallback(this);
-            getAndShowArea();
         }
+//        else if (v == gama_register_tv_area || v == sdkPhoneInputEditTextView.getAraeCodeMoreListView()) {
+//            getAndShowArea();
+//        }
 
     }
 
@@ -202,10 +198,10 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
             return;
         }
 
-        if (!password.equals(pwdAgainSdkInputEditTextView.getInputEditText().getEditableText().toString())){
-            ToastUtils.toast(getActivity(), "兩次密碼不一致", Toast.LENGTH_LONG);
-            return;
-        }
+//        if (!password.equals(pwdAgainSdkInputEditTextView.getInputEditText().getEditableText().toString())){
+//            ToastUtils.toast(getActivity(), "兩次密碼不一致", Toast.LENGTH_LONG);
+//            return;
+//        }
 
         String areaCode = gama_register_tv_area.getText().toString();
         if (TextUtils.isEmpty(areaCode)) {
@@ -276,11 +272,11 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
     public void statusCallback(int operation) {
         if (TIME_LIMIT == operation) {
 //            gama_register_btn_get_vfcode.setBackgroundResource(R.drawable.gama_ui_bg_btn_unclickable);
-            gama_register_btn_get_vfcode.setClickable(false);
+//            gama_register_btn_get_vfcode.setClickable(false);
         } else if (TIME_OUT == operation) {
 //            gama_register_btn_get_vfcode.setBackgroundResource(R.drawable.bg_192d3f_46);
-            gama_register_btn_get_vfcode.setClickable(true);
-            gama_register_btn_get_vfcode.setText(R.string.py_register_account_get_vfcode);
+//            gama_register_btn_get_vfcode.setClickable(true);
+//            gama_register_btn_get_vfcode.setText(R.string.py_register_account_get_vfcode);
         }
     }
 
@@ -295,10 +291,10 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
 
     @Override
     public void alertTime(int remainTimeSeconds) {
-        if(gama_register_btn_get_vfcode.isClickable()) {
-            gama_register_btn_get_vfcode.setClickable(false);
-        }
-        gama_register_btn_get_vfcode.setText(remainTimeSeconds + "s");
+//        if(gama_register_btn_get_vfcode.isClickable()) {
+//            gama_register_btn_get_vfcode.setClickable(false);
+//        }
+//        gama_register_btn_get_vfcode.setText(remainTimeSeconds + "s");
     }
 
     @Override
@@ -310,8 +306,8 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
         }
         if(remainTimeSeconds > 0) {
 //            gama_register_btn_get_vfcode.setBackgroundResource(R.drawable.gama_ui_bg_btn_unclickable);
-            gama_register_btn_get_vfcode.setClickable(false);
-            gama_register_btn_get_vfcode.setText(remainTimeSeconds + "s");
+//            gama_register_btn_get_vfcode.setClickable(false);
+//            gama_register_btn_get_vfcode.setText(remainTimeSeconds + "s");
         }
     }
 

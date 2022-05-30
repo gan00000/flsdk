@@ -19,13 +19,13 @@ public class MainLoginLayoutV3 extends SLoginBaseRelativeLayout implements View.
 
     private View contentView;
     private TextView loginTabView, regTabView;
-
-    private PyAccountLoginV2 mAccountLoginV2;
-    private AccountRegisterLayoutV2 mAccountRegisterLayoutV2;
+    private View login_bottom_line,register_bottom_line;
 
     public PyAccountLoginV2 getmAccountLoginV2() {
         return mAccountLoginV2;
     }
+    private PyAccountLoginV2 mAccountLoginV2;
+    private AccountRegisterLayoutV2 mAccountRegisterLayoutV2;
 
     public AccountRegisterLayoutV2 getmAccountRegisterLayoutV2() {
         return mAccountRegisterLayoutV2;
@@ -53,6 +53,8 @@ public class MainLoginLayoutV3 extends SLoginBaseRelativeLayout implements View.
         contentView = inflater.inflate(R.layout.v3_main_login_page_xm, null);
         loginTabView = contentView.findViewById(R.id.loginTabView);
         regTabView = contentView.findViewById(R.id.regTabView);
+        login_bottom_line = contentView.findViewById(R.id.loginTabView_bottom_line);
+        register_bottom_line = contentView.findViewById(R.id.regTabView_bottom_line);
 
         mAccountLoginV2 = contentView.findViewById(R.id.pyAccountLoginV2Id);
         mAccountRegisterLayoutV2 = contentView.findViewById(R.id.accountRegisterLayoutV2Id);
@@ -99,22 +101,26 @@ public class MainLoginLayoutV3 extends SLoginBaseRelativeLayout implements View.
             mAccountLoginV2.setVisibility(VISIBLE);
             mAccountRegisterLayoutV2.setVisibility(GONE);
 
-            loginTabView.setBackgroundResource(R.drawable.login_tab_red_left_cons_bg);
-            regTabView.setBackgroundResource(R.drawable.login_tab_white_right_cons_bg);
+//            loginTabView.setBackgroundResource(R.drawable.login_tab_red_left_cons_bg);
+//            regTabView.setBackgroundResource(R.drawable.login_tab_white_right_cons_bg);
 
             loginTabView.setTextColor(Color.WHITE);
-            regTabView.setTextColor(getContext().getResources().getColor(R.color.e_ff3a3b));
+            regTabView.setTextColor(getContext().getResources().getColor(R.color.c_848484));
+
+            login_bottom_line.setVisibility(View.VISIBLE);
+            register_bottom_line.setVisibility(View.INVISIBLE);
 
         }else{
             mAccountLoginV2.setVisibility(GONE);
             mAccountRegisterLayoutV2.setVisibility(VISIBLE);
 
-            loginTabView.setBackgroundResource(R.drawable.login_tab_white_left_cons_bg);
-            regTabView.setBackgroundResource(R.drawable.login_tab_red_right_cons_bg);
+//            loginTabView.setBackgroundResource(R.drawable.login_tab_white_left_cons_bg);
+//            regTabView.setBackgroundResource(R.drawable.login_tab_red_right_cons_bg);
 
-            loginTabView.setTextColor(getContext().getResources().getColor(R.color.e_ff3a3b));
+            loginTabView.setTextColor(getContext().getResources().getColor(R.color.c_848484));
             regTabView.setTextColor(Color.WHITE);
-
+            login_bottom_line.setVisibility(View.INVISIBLE);
+            register_bottom_line.setVisibility(View.VISIBLE);
         }
 
     }

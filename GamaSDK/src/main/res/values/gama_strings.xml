@@ -136,7 +136,7 @@
     <string name="py_login_autologin_fblogining_tips">Facebook帳號正在登入</string>
     <string name="py_account">帳號</string>
     <string name="py_password">密碼</string>
-    <string name="py_login">登入</string>
+
     <string name="py_login_fb">Facebook登入</string>
     <string name="py_login_fb_1">FB登入</string>
     <string name="py_login_google">Google登入</string>
@@ -154,7 +154,17 @@
     <string name="py_vfcode">驗證碼</string>
 <!--    <string name="py_send_new_pwd">發送新密碼</string>-->
 <!--    <string name="py_change_pwd">修改密碼</string>-->
-    <string name="guest_login_btn">遊客登入</string>
+
 
     <string name="sdk_terms_title">網絡連線遊戲服務定型化契約</string>
+
+
+<!--    新增-->
+    <string name="guest_login_btn">遊客登入</string>
+    <string name="tips_have_account">已有帳號？</string>
+    <string name="py_login">登入</string>
+    <string name="text_register">註冊</string>
+    <string name="text_login_other">其他登入</string>
+    <string name="text_reg_tips">*帳號信箱將會作為您找回密碼的驗證信箱，請謹慎輸入</string>
+
 </resources>

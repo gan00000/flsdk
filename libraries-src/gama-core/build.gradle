@@ -57,10 +57,10 @@ dependencies {
     api 'com.android.support:customtabs:27.0.2'
 
     //Twitter
-    api 'com.twitter.sdk.android:twitter-core:3.1.1'
-    api 'com.twitter.sdk.android:tweet-ui:3.1.1'
-    api 'com.twitter.sdk.android:tweet-composer:3.1.1'
-    api 'com.twitter.sdk.android:twitter-mopub:3.1.1'
+//    api 'com.twitter.sdk.android:twitter-core:3.1.1'
+//    api 'com.twitter.sdk.android:tweet-ui:3.1.1'
+//    api 'com.twitter.sdk.android:tweet-composer:3.1.1'
+//    api 'com.twitter.sdk.android:twitter-mopub:3.1.1'
 //    api project(':youzu')
 }
 

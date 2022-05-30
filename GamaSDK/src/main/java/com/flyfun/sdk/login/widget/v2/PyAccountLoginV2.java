@@ -67,7 +67,7 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
     View historyAccountListBtn;
     private CommonAdapter  historyAccountCommonAdapter;
 
-    private View fbLoginView, bindAccountView, macLoginView, googleLoginView;
+    private View fbLoginView, macLoginView, googleLoginView, lineLoginView;
 
     public PyAccountLoginV2(Context context) {
         super(context);
@@ -197,7 +197,7 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
             }
         });
         fbLoginView = contentView.findViewById(R.id.fbLoginView);
-        bindAccountView = contentView.findViewById(R.id.accountBindView);
+        lineLoginView = contentView.findViewById(R.id.lineLoginView);
         macLoginView = contentView.findViewById(R.id.guestLoginView);
         googleLoginView = contentView.findViewById(R.id.ggLoginView);
 
@@ -207,12 +207,12 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
                 sLoginDialogv2.getLoginPresenter().fbLogin(sLoginDialogv2.getActivity());
             }
         });
-        bindAccountView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sLoginDialogv2.toAccountManagerCenter();
-            }
-        });
+//        bindAccountView.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                sLoginDialogv2.toAccountManagerCenter();
+//            }
+//        });
         macLoginView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
