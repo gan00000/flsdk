@@ -26,10 +26,11 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
     private View contentView;
     private TextView findPwdConfireBtn;
 
-    private EditText findPwdAccountEditText, gama_find_et_phone;
+    private EditText findPwdAccountEditText;
 
     private SDKInputEditTextView accountSdkInputEditTextView, vfCodeSdkInputEditTextView;
-    private SDKPhoneInputEditTextView mSdkPhoneInputEditTextView;
+    private SDKInputEditTextView newPwdSdkInputEditTextView, newPwdAgainSdkInputEditTextView;
+//    private SDKPhoneInputEditTextView mSdkPhoneInputEditTextView;
 
     private String account;
 //    private String email;
@@ -38,11 +39,6 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
     private GamaAreaInfoBean selectedBean;
 
     Button gama_find_btn_get_vfcode;
-
-    /**
-     * 区号
-     */
-    private TextView gama_find_tv_area;
 
     public AccountFindPwdLayoutV2(Context context) {
         super(context);
@@ -73,10 +69,15 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
 
         accountSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_findpwd_account);
         vfCodeSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_findpwd_vf);
-        mSdkPhoneInputEditTextView = contentView.findViewById(R.id.sdkinputview_findpwd_phone);
+        newPwdSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_findpwd_new);
+        newPwdAgainSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_findpwd_new_again);
+//        mSdkPhoneInputEditTextView = contentView.findViewById(R.id.sdkinputview_findpwd_phone);
 
         accountSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Account);
         vfCodeSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Vf_Code);
+
+        newPwdSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_New_Password);
+        newPwdAgainSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Password_Again);
 
         findPwdAccountEditText = accountSdkInputEditTextView.getInputEditText();
 
@@ -84,14 +85,10 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
         gama_find_btn_get_vfcode = contentView.findViewById(R.id.gama_find_btn_get_vfcode);
 
 
-        gama_find_tv_area = mSdkPhoneInputEditTextView.getPhoneAreaTextView();
-        gama_find_et_phone = mSdkPhoneInputEditTextView.getInputEditText();
 
         backView.setOnClickListener(this);
         findPwdConfireBtn.setOnClickListener(this);
-        gama_find_tv_area.setOnClickListener(this);
         gama_find_btn_get_vfcode.setOnClickListener(this);
-        mSdkPhoneInputEditTextView.getAraeCodeMoreListView().setOnClickListener(this);
 
         setDefaultAreaInfo();
         return contentView;
@@ -125,11 +122,10 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
             findPwd();
         } else if (v == backView) {//返回键
             sLoginDialogv2.toAccountLoginView();
-        } else if (v == gama_find_tv_area) {
-            getAndShowArea();
-        }else if (v == gama_find_btn_get_vfcode || v == mSdkPhoneInputEditTextView.getAraeCodeMoreListView()) {
-            getVfcodeByPhone();
         }
+//        else if (v == gama_find_btn_get_vfcode || v == mSdkPhoneInputEditTextView.getAraeCodeMoreListView()) {
+//            getVfcodeByPhone();
+//        }
 
     }
 
@@ -138,12 +134,12 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
     }
 
     private void getVfcodeByPhone() {
-        String areaCode = gama_find_tv_area.getText().toString();
+        String areaCode = "";//gama_find_tv_area.getText().toString();
         if (TextUtils.isEmpty(areaCode)) {
             ToastUtils.toast(getActivity(), R.string.py_area_code_empty);
             return;
         }
-        String phone = gama_find_et_phone.getEditableText().toString().trim();
+        String phone = "";//gama_find_et_phone.getEditableText().toString().trim();
         if (SStringUtil.isEmpty(phone)){
             ToastUtils.toast(getActivity(), R.string.py_register_account_phone);
             return;
@@ -167,12 +163,12 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
         }
 
 
-        String areaCode = gama_find_tv_area.getText().toString();
+        String areaCode = "";//gama_find_tv_area.getText().toString();
         if(TextUtils.isEmpty(areaCode)) {
             ToastUtils.toast(getActivity(), R.string.py_area_code_empty);
             return;
         }
-        String phone = gama_find_et_phone.getEditableText().toString().trim();
+        String phone = "";//gama_find_et_phone.getEditableText().toString().trim();
         if (SStringUtil.isEmpty(phone)){
             ToastUtils.toast(getActivity(), R.string.py_register_account_phone);
             return;
@@ -210,7 +206,7 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
         if (o instanceof GamaAreaInfoBean) {
             selectedBean = (GamaAreaInfoBean) o;
             String text = selectedBean.getValue();
-            gama_find_tv_area.setText(text);
+//            gama_find_tv_area.setText(text);
         }
     }
 
@@ -244,7 +240,7 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
     public void refreshViewData() {
         super.refreshViewData();
         findPwdAccountEditText.setText("");
-        gama_find_et_phone.setText("");
+//        gama_find_et_phone.setText("");
         vfCodeSdkInputEditTextView.getInputEditText().setText("");
     }
 }

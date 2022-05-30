@@ -69,7 +69,7 @@ public abstract class SLoginBaseRelativeLayout extends SBaseRelativeLayout {
 
         if (contentView != null) {
 
-            LayoutParams l = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            LayoutParams l = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             l.addRule(RelativeLayout.CENTER_IN_PARENT);
             addView(contentView, l);
         }

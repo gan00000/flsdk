@@ -37,6 +37,9 @@ public class SDKInputEditTextView extends RelativeLayout {
     private EditText inputEditText;
     private View eyeImageViewLayout;
 
+    private View line1View;
+    private View bottomLine;
+
     public EditText getInputEditText() {
         return inputEditText;
     }
@@ -77,6 +80,8 @@ public class SDKInputEditTextView extends RelativeLayout {
             eyeImageView = contentView.findViewById(R.id.sdk_input_item_eye);
             eyeImageViewLayout = contentView.findViewById(R.id.sdk_input_item_eye_layout);
             inputEditText = contentView.findViewById(R.id.sdk_input_item_et);
+            line1View = contentView.findViewById(R.id.sdk_input_item_line1);
+            bottomLine = contentView.findViewById(R.id.sdk_input_item_bottom_line);
 
             eyeImageViewLayout.setOnClickListener(new OnClickListener() {
                 @Override
@@ -130,7 +135,7 @@ public class SDKInputEditTextView extends RelativeLayout {
             case SDKInputType_Password_Again:
                 iconId = R.mipmap.mw_passowrd_icon;
                 labName = getResources().getString(R.string.py_password);
-                hint = getResources().getString(R.string.py_account_again_input_password);
+                hint = getResources().getString(R.string.text_input_new_pwd_confire);
                 eyeImageViewLayout.setVisibility(View.VISIBLE);
                 editTextInputType = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD;
                 adjustTvTextSize();
@@ -147,16 +152,19 @@ public class SDKInputEditTextView extends RelativeLayout {
             case SDKInputType_New_Password:
                 iconId = R.mipmap.mw_passowrd_icon;
                 labName = getResources().getString(R.string.py_new_pwd);
-                hint = getResources().getString(R.string.py_register_password_hit);
+                hint = getResources().getString(R.string.text_input_new_pwd);
                 eyeImageViewLayout.setVisibility(View.VISIBLE);
                 editTextInputType = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD;
                 adjustTvTextSize();
                 break;
 
             case SDKInputType_Vf_Code:
-                iconId = R.drawable.fl_sdk_dx;
+                iconId = R.mipmap.mw_account_icon;
                 editTextInputType = InputType.TYPE_CLASS_NUMBER;
                 eyeImageViewLayout.setVisibility(View.GONE);
+                iconImage.setVisibility(View.GONE);
+                line1View.setVisibility(View.GONE);
+                bottomLine.setVisibility(View.GONE);
                 labName = getResources().getString(R.string.py_vfcode);
                 hint = getResources().getString(R.string.py_msg_vfcode_hint);
                 adjustTvTextSize();
@@ -176,7 +184,7 @@ public class SDKInputEditTextView extends RelativeLayout {
     private  void adjustTvTextSize()
     {
         final EditText inputEditText = getInputEditText();
-        inputEditText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10);
+//        inputEditText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10);
         inputEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -191,11 +199,11 @@ public class SDKInputEditTextView extends RelativeLayout {
             @Override
             public void afterTextChanged(Editable s) {
 
-                if (SStringUtil.isEmpty(s.toString())){
-                    inputEditText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10);
-                }else {
-                    inputEditText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-                }
+//                if (SStringUtil.isEmpty(s.toString())){
+//                    inputEditText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10);
+//                }else {
+//                    inputEditText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+//                }
 
             }
         });

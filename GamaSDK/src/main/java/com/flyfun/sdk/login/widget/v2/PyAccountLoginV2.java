@@ -2,10 +2,12 @@ package com.flyfun.sdk.login.widget.v2;
 
 import android.content.Context;
 import android.graphics.Paint;
+import android.os.Build;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.UnderlineSpan;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.core.base.utils.ToastUtils;
 import com.flyfun.base.utils.GamaUtil;
+import com.flyfun.sdk.login.AccountPopupWindow;
 import com.flyfun.sdk.login.model.AccountModel;
 import com.flyfun.sdk.login.widget.SDKInputEditTextView;
 import com.flyfun.sdk.login.widget.SDKInputType;
@@ -63,11 +66,11 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
     private SDKInputEditTextView accountSdkInputEditTextView;
     private SDKInputEditTextView pwdSdkInputEditTextView;
 
-    private RecyclerView historyAccountRv;
     View historyAccountListBtn;
-    private CommonAdapter  historyAccountCommonAdapter;
 
     private View fbLoginView, macLoginView, googleLoginView, lineLoginView;
+
+    private AccountPopupWindow accountPopupWindow;
 
     public PyAccountLoginV2(Context context) {
         super(context);
@@ -116,8 +119,8 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
         loginAccountEditText = accountSdkInputEditTextView.getInputEditText();
         loginPasswordEditText = pwdSdkInputEditTextView.getInputEditText();
 
-        historyAccountRv = contentView.findViewById(R.id.account_login_history_account_rv);
         historyAccountListBtn = contentView.findViewById(R.id.sdk_input_item_account_history);
+        historyAccountListBtn.setVisibility(VISIBLE);
 
         loginMainLoginBtn = contentView.findViewById(R.id.gama_login_btn_confirm);
         goTermView = contentView.findViewById(R.id.gama_gama_start_term_tv1);//跳轉服務條款
@@ -230,10 +233,10 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
         accountModels = new ArrayList<>();
 
         //test
-//        GamaUtil.saveAccountModel(getContext(), "ddda","xxx",true);
-//        GamaUtil.saveAccountModel(getContext(), "ccc","xxx",true);
-//        GamaUtil.saveAccountModel(getContext(), "ddxxxxda","xxx",true);
-//        GamaUtil.saveAccountModel(getContext(), "aaaaa","xxx",true);
+        GamaUtil.saveAccountModel(getContext(), "ddda","xxx",true);
+        GamaUtil.saveAccountModel(getContext(), "ccc","xxx",true);
+        GamaUtil.saveAccountModel(getContext(), "ddxxxxda","xxx",true);
+        GamaUtil.saveAccountModel(getContext(), "aaaaa","xxx",true);
 
         List<AccountModel> ams = GamaUtil.getAccountModels(getContext());
         accountModels.addAll(ams);
@@ -242,9 +245,9 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
             account = lastAccountModel.getAccount();
             password = lastAccountModel.getPassword();
 
-            if (accountModels.size() > 1){
-                historyAccountListBtn.setVisibility(VISIBLE);
-            }
+//            if (accountModels.size() > 1){
+//                historyAccountListBtn.setVisibility(VISIBLE);
+//            }
         }
 
 //        if (TextUtils.isEmpty(account)){
@@ -257,87 +260,36 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
         }
 
 
-        initHistoryRv();
+//        initHistoryRv();
 
+        accountPopupWindow = new AccountPopupWindow(getActivity());
+        accountPopupWindow.setPopWindowListener(new AccountPopupWindow.PopWindowListener() {
+            @Override
+            public void onRemove(AccountModel accountModel) {
+
+            }
+
+            @Override
+            public void onUse(AccountModel accountModel) {
+                loginAccountEditText.setText(accountModel.getAccount());
+                loginPasswordEditText.setText(accountModel.getPassword());
+            }
+
+            @Override
+            public void onEmpty() {
+                loginAccountEditText.setText("");
+                loginPasswordEditText.setText("");
+            }
+        });
         historyAccountListBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (historyAccountRv.getVisibility() == GONE){
+                accountPopupWindow.showOnView(accountSdkInputEditTextView);
 
-                    historyAccountRv.setVisibility(VISIBLE);
-                    historyAccountCommonAdapter.notifyDataSetChanged();
-                }else {
-                    historyAccountRv.setVisibility(GONE);
-                }
             }
         });
 
         return contentView;
-    }
-
-    private void initHistoryRv() {
-
-        if (accountModels == null){
-            return;
-        }
-
-        historyAccountRv.setLayoutManager(new LinearLayoutManager(getContext()));
-        historyAccountCommonAdapter = new CommonAdapter<AccountModel>(this.getContext(), R.layout.sdk_login_history_account_item, accountModels)
-        {
-
-            @Override
-            public void onBindViewHolder(ViewHolder holder, int position) {
-                super.onBindViewHolder(holder, position);
-            }
-
-            @Override
-            protected void convert(final ViewHolder holder, final AccountModel accountModel, final int position) {
-                holder.setText(R.id.history_account_item_text, accountModel.getAccount());
-                holder.setOnClickListener(R.id.history_account_item_text, new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        loginAccountEditText.setText(accountModel.getAccount());
-                        loginPasswordEditText.setText(accountModel.getPassword());
-                        historyAccountRv.setVisibility(GONE);
-                    }
-                });
-                holder.setOnClickListener(R.id.history_account_item_delete_layout, new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        removeAccountMode(position);
-                    }
-                });
-                holder.setOnClickListener(R.id.history_account_item_delete_btn, new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        removeAccountMode(position);
-                    }
-                });
-
-            }
-
-        };
-        historyAccountRv.setAdapter(historyAccountCommonAdapter);
-    }
-
-    private void removeAccountMode(int position) {
-        AccountModel removeModel = accountModels.remove(position);
-        if (removeModel != null) {
-
-            if (accountModels.isEmpty()) {
-                historyAccountRv.setVisibility(GONE);
-                historyAccountListBtn.setVisibility(GONE);//删除就保存重新刷新数据
-                loginAccountEditText.setText("");
-                loginPasswordEditText.setText("");
-            }
-            GamaUtil.saveAccountModels(getContext(), accountModels);
-            List<AccountModel> ams = GamaUtil.getAccountModels(getContext());
-            accountModels.clear();
-            accountModels.addAll(ams);
-            historyAccountCommonAdapter.notifyDataSetChanged();
-        }
     }
 
     private void login() {
@@ -400,9 +352,9 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
         List<AccountModel>  ams = GamaUtil.getAccountModels(getContext());
         accountModels.clear();
         accountModels.addAll(ams);
-        if (historyAccountCommonAdapter != null) {
-            historyAccountCommonAdapter.notifyDataSetChanged();
-        }
+//        if (historyAccountCommonAdapter != null) {
+//            historyAccountCommonAdapter.notifyDataSetChanged();
+//        }
         if (accountModels != null && !accountModels.isEmpty()){
             AccountModel lastAccountModel = accountModels.get(0); //设置按照最好登录时间排序后的第一个账号
             account = lastAccountModel.getAccount();
@@ -415,14 +367,14 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
             loginPasswordEditText.setText(password);
         }
 
-        if (accountModels != null && accountModels.size() > 1){
-            historyAccountListBtn.setVisibility(VISIBLE);
-        }else{
-            historyAccountListBtn.setVisibility(GONE);
-        }
-        if (historyAccountRv != null) {
-            historyAccountRv.setVisibility(GONE);
-        }
+//        if (accountModels != null && accountModels.size() > 1){
+//            historyAccountListBtn.setVisibility(VISIBLE);
+//        }else{
+//            historyAccountListBtn.setVisibility(GONE);
+//        }
+//        if (historyAccountRv != null) {
+//            historyAccountRv.setVisibility(GONE);
+//        }
 
     }
 

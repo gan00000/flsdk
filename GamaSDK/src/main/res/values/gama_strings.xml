@@ -14,7 +14,7 @@
     <string name="py_login_page_account_login">會員登入頁</string>
     <string name="py_login_save_account">記住帳號</string>
     <string name="py_login_by_members">會員登入</string>
-    <string name="py_findpwd">忘記密碼</string>
+    <string name="py_findpwd">忘記密碼?</string>
     <string name="py_register_account">註冊帳號</string>
     <string name="py_account_center">會員中心</string>
     <string name="py_account_input_vfcode">請點擊輸入驗證碼</string>
@@ -26,7 +26,7 @@
     <string name="py_register_account_phone">請輸入手機號碼</string>
     <string name="py_register_account_email">請輸入郵箱</string>
     <string name="py_register_account_area">區碼</string>
-    <string name="py_register_account_get_vfcode">獲取驗證碼</string>
+
     <string name="py_register_account_confirm">註冊會員</string>
     <string name="py_register_account_vfcode_hint">同一手機號碼當日不得收取驗證碼超過五次</string>
 
@@ -85,11 +85,9 @@
     <string name="py_login_autologin_tips">帳號 %1$s 正在登入</string>
 
     <!--预设提示-->
-    <string name="py_register_account_hit">6~18個字元，僅限字母及數字</string>
-    <string name="py_register_password_hit">8~16個字元，英文與數字混合</string>
+
     <string name="py_findpwd_email_hit">郵箱,必填,用於找回密碼</string>
     <string name="py_register_email_hit">郵箱,選填,用於找回密碼</string>
-    <string name="py_msg_vfcode_hint">請輸入驗證碼</string>
     <string name="py_msg_account_hint">請點擊輸入您的帳號</string>
     <string name="py_msg_password_hint">請點擊輸入您的密碼</string>
 
@@ -101,7 +99,7 @@
 <!--    &#8195; == &emsp; == em空格 （一个中文宽度）-->
 <!--    &#8197; == 四分之一em空格 （四分之一中文宽度）-->
 <!--    相比平时的空格（&#32;），nbsp拥有不间断（non-breaking）特性。即连续的nbsp会在同一行内显示。即使有100个连续的nbsp，浏览器也不会把它们拆成两行。-->
-    <string name="py_confire">確&#8195;&#8195;認</string>
+    <string name="py_confire">確&#8195;認</string>
     <string name="py_default_area_num">886</string>
     <string name="py_default_area_num_pattern">^0{0,1}[6,7,9](?:\\d{7}|\\d{8}|\\d{10})$</string>
     <string name="py_mac_login_limit_hint1">提醒您，您的帳號尚未綁定，請立即進行綁定以確保帳戶權益</string>
@@ -166,5 +164,12 @@
     <string name="text_register">註冊</string>
     <string name="text_login_other">其他登入</string>
     <string name="text_reg_tips">*帳號信箱將會作為您找回密碼的驗證信箱，請謹慎輸入</string>
+    <string name="py_register_account_get_vfcode">發送驗證碼</string>
+
+    <string name="py_register_account_hit">請輸入您的帳號信箱</string>
+    <string name="py_register_password_hit">请输入密码</string>
+    <string name="py_msg_vfcode_hint">請輸入驗證碼</string>
+    <string name="text_input_new_pwd">請輸入新密碼</string>
+    <string name="text_input_new_pwd_confire">確認新密碼</string>
 
 </resources>

@@ -12,7 +12,7 @@
         android:text=""
         android:textStyle="bold"
         android:textSize="24sp"
-        android:textColor="@color/e_ff3e37"
+        android:textColor="@android:color/white"
         android:id="@+id/sdk_head_title"
         android:gravity="center"/>
 
@@ -20,7 +20,7 @@
     <LinearLayout
         android:layout_width="45dp"
         android:layout_height="match_parent"
-        android:layout_marginStart="14dp"
+        android:layout_marginStart="34dp"
         android:gravity="center_vertical"
         android:id="@+id/gama_head_iv_back"
         android:orientation="vertical">
@@ -28,7 +28,7 @@
         <ImageView
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:src="@drawable/sdk_btn_back"/>
+            android:src="@mipmap/mw_back_icon"/>
 
     </LinearLayout>
 

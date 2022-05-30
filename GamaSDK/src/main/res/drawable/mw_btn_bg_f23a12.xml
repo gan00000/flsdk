@@ -4,7 +4,7 @@
     <corners
         android:radius="25dp" />
     <!-- 图形的填充颜色 -->
-    <solid android:color="@color/c_F23A12" >
+    <solid android:color="@color/c_F94925" >
     </solid>
 
 </shape>

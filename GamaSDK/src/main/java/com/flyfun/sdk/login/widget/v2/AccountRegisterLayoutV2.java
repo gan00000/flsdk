@@ -36,7 +36,7 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
     /**
      * 区号,手机接收限制提示
      */
-    private TextView gama_register_tv_area, gama_register_tv_limit_hint;
+//    private TextView gama_register_tv_area, gama_register_tv_limit_hint;
     private String account;
     private String password;
 
@@ -95,7 +95,7 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
         registerConfirm = contentView.findViewById(R.id.gama_register_btn_confirm);
 //        gama_register_btn_get_vfcode = contentView.findViewById(R.id.gama_register_btn_get_vfcode);
 
-        gama_register_tv_limit_hint = contentView.findViewById(R.id.gama_register_tv_limit_hint);
+//        gama_register_tv_limit_hint = contentView.findViewById(R.id.gama_register_tv_limit_hint);
 
 //        emailEditText = contentView.findViewById(R.id.gama_register_et_email);
 
@@ -104,10 +104,10 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
 //            gama_register_tv_limit_hint.setText(phoneMsgLimitHint);
 //        }
 
-        backView.setOnClickListener(this);
+//        backView.setOnClickListener(this);
         registerConfirm.setOnClickListener(this);
 //        gama_register_btn_get_vfcode.setOnClickListener(this);
-        gama_register_tv_area.setOnClickListener(this);
+//        gama_register_tv_area.setOnClickListener(this);
 
 //        sdkPhoneInputEditTextView.getAraeCodeMoreListView().setOnClickListener(this);
 
@@ -136,13 +136,7 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
             } else {
                 sLoginDialogv2.toMainLoginView();
             }
-        } else if (v == gama_register_btn_get_vfcode) {
-//            getVfcodeByPhone();
-//            getVfcodeByEmail();
         }
-//        else if (v == gama_register_tv_area || v == sdkPhoneInputEditTextView.getAraeCodeMoreListView()) {
-//            getAndShowArea();
-//        }
 
     }
 
@@ -203,38 +197,38 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
 //            return;
 //        }
 
-        String areaCode = gama_register_tv_area.getText().toString();
-        if (TextUtils.isEmpty(areaCode)) {
-            ToastUtils.toast(getActivity(), R.string.py_area_code_empty);
-            return;
-        }
-        String phone = gama_register_et_phone.getEditableText().toString().trim();
-        if (SStringUtil.isEmpty(phone)){
-            ToastUtils.toast(getActivity(), R.string.py_register_account_phone);
-            return;
-        }
-        if (!phone.matches(selectedBean.getPattern())) {
-            ToastUtils.toast(getActivity(), R.string.py_phone_error);
-            return;
-        }
+//        String areaCode = gama_register_tv_area.getText().toString();
+//        if (TextUtils.isEmpty(areaCode)) {
+//            ToastUtils.toast(getActivity(), R.string.py_area_code_empty);
+//            return;
+//        }
+//        String phone = gama_register_et_phone.getEditableText().toString().trim();
+//        if (SStringUtil.isEmpty(phone)){
+//            ToastUtils.toast(getActivity(), R.string.py_register_account_phone);
+//            return;
+//        }
+//        if (!phone.matches(selectedBean.getPattern())) {
+//            ToastUtils.toast(getActivity(), R.string.py_phone_error);
+//            return;
+//        }
         String interfaceName = GSRequestMethod.RequestVfcodeInterface.register.getString();
 
-        String vfcode = gama_register_et_vfcode.getEditableText().toString();
-        if (TextUtils.isEmpty(vfcode)) {
-            ToastUtils.toast(getActivity(), R.string.py_vfcode_empty);
-            return;
-        }
+//        String vfcode = gama_register_et_vfcode.getEditableText().toString();
+//        if (TextUtils.isEmpty(vfcode)) {
+//            ToastUtils.toast(getActivity(), R.string.py_vfcode_empty);
+//            return;
+//        }
 
-        sLoginDialogv2.getLoginPresenter().register(sLoginDialogv2.getActivity(), account, password, areaCode, phone, vfcode, "");
+        sLoginDialogv2.getLoginPresenter().register(sLoginDialogv2.getActivity(), account, password, "areaCode", "phone", "vfcode", "");
 //        sLoginDialogv2.getLoginPresenter().register(sLoginDialogv2.getActivity(), account, password, "", "", vfcode, "");
     }
 
     private void getVfcodeByPhone() {
-        String areaCode = gama_register_tv_area.getText().toString();
-        if (TextUtils.isEmpty(areaCode)) {
-            ToastUtils.toast(getActivity(), R.string.py_area_code_empty);
-            return;
-        }
+//        String areaCode = gama_register_tv_area.getText().toString();
+//        if (TextUtils.isEmpty(areaCode)) {
+//            ToastUtils.toast(getActivity(), R.string.py_area_code_empty);
+//            return;
+//        }
         String phone = gama_register_et_phone.getEditableText().toString().trim();
         if (SStringUtil.isEmpty(phone)){
             ToastUtils.toast(getActivity(), R.string.py_register_account_phone);
@@ -246,7 +240,7 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
         }
         String interfaceName = GSRequestMethod.RequestVfcodeInterface.register.getString();
 
-        sLoginDialogv2.getLoginPresenter().getPhoneVfcode(sLoginDialogv2.getActivity(), areaCode, phone, interfaceName);
+        sLoginDialogv2.getLoginPresenter().getPhoneVfcode(sLoginDialogv2.getActivity(), "areaCode", phone, interfaceName);
     }
 
 
@@ -285,7 +279,7 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
         if (o instanceof GamaAreaInfoBean) {
             selectedBean = (GamaAreaInfoBean) o;
             String text = selectedBean.getValue();
-            gama_register_tv_area.setText(text);
+//            gama_register_tv_area.setText(text);
         }
     }
 

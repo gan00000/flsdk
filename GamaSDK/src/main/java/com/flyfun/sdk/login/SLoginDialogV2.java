@@ -3,6 +3,7 @@ package com.flyfun.sdk.login;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -46,13 +47,13 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 
     private FrameLayout rootFrameLayout;
     private FrameLayout contentFrameLayout;
-    private View autoLoginPage;
+//    private View autoLoginPage;
 
     //    自動登錄頁面控件
-    private RelativeLayout autoLoginLayout;
-    private TextView autoLoginTips;
-    private TextView autoLoginWaitTime;
-    private TextView autoLoginChangeAccount;
+//    private RelativeLayout autoLoginLayout;
+//    private TextView autoLoginTips;
+//    private TextView autoLoginWaitTime;
+//    private TextView autoLoginChangeAccount;
 
     private SLoginBaseRelativeLayout mainLoginView;
     private SLoginBaseRelativeLayout accountLoginView;
@@ -123,22 +124,23 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
         contentFrameLayout = new FrameLayout(context);
         contentFrameLayout.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,FrameLayout.LayoutParams.MATCH_PARENT));
 
-        autoLoginLayout = new RelativeLayout(context);
-        autoLoginPage = getLayoutInflater().inflate(R.layout.v2_gama_auto_login_loading,null,false);
-        autoLoginLayout.addView(autoLoginPage,new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.MATCH_PARENT));
+//        autoLoginLayout = new RelativeLayout(context);
+//        autoLoginPage = getLayoutInflater().inflate(R.layout.v2_gama_auto_login_loading,null,false);
+//        autoLoginLayout.addView(autoLoginPage,new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.MATCH_PARENT));
 
         rootFrameLayout = new FrameLayout(context);
+//        rootFrameLayout.setBackgroundColor(Color.BLUE);
         rootFrameLayout.addView(contentFrameLayout);
-        rootFrameLayout.addView(autoLoginLayout);
+//        rootFrameLayout.addView(autoLoginLayout);
 
         setContentView(rootFrameLayout);
 
         viewPageList = new ArrayList<>();
 
         //初始化主登录界面
-        toMainLoginView();
+//        toMainLoginView();
         //初始化自动登录界面
-        initAutoLoginView();
+//        initAutoLoginView();
 
         iLoginPresenter.setSFacebookProxy(sFacebookProxy);
         iLoginPresenter.setSGoogleSignIn(sGoogleSignIn);
@@ -148,7 +150,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
     }
 
     private void initAutoLoginView() {
-        if (autoLoginPage == null){
+       /* if (autoLoginPage == null){
             return;
         }
         autoLoginLayout = (RelativeLayout) autoLoginPage.findViewById(R.id.py_auto_login_page);
@@ -160,7 +162,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
             public void onClick(View v) {
                 iLoginPresenter.autoLoginChangeAccount(activity);
             }
-        });
+        });*/
     }
 
     @Override
@@ -176,7 +178,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
     @Override
     public void onBackPressed() {
         //返回键的回退逻辑
-        if(autoLoginLayout != null && autoLoginLayout.getVisibility() == View.VISIBLE) {
+       /* if(autoLoginLayout != null && autoLoginLayout.getVisibility() == View.VISIBLE) {
             if(iLoginPresenter != null) { //如果自动登录就返回登录界面
                 iLoginPresenter.autoLoginChangeAccount(activity);
             } else { //无法返回登录界面就回调退出登录界面状态
@@ -185,7 +187,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
                     iLoginCallBack.onLogin(null);
                 }
             }
-        } else if(mainLoginView != null && mainLoginView.getVisibility() == View.VISIBLE) { //如果主界面显示就退出登录
+        } else */if(mainLoginView != null && mainLoginView.getVisibility() == View.VISIBLE) { //如果主界面显示就退出登录
             super.onBackPressed();
             if(iLoginCallBack != null) { //回调退出登录界面的状态
                 iLoginCallBack.onLogin(null);
@@ -581,13 +583,13 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 
     @Override
     public void showAutoLoginTips(String tips) {
-        autoLoginTips.setText(tips);
+//        autoLoginTips.setText(tips);
     }
 
     @Override
     public void showAutoLoginView() {
-        contentFrameLayout.setVisibility(View.GONE);
-        autoLoginLayout.setVisibility(View.VISIBLE);
+//        contentFrameLayout.setVisibility(View.GONE);
+//        autoLoginLayout.setVisibility(View.VISIBLE);
 
     }
 
@@ -595,7 +597,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
     @Override
     public void showLoginView() {
         contentFrameLayout.setVisibility(View.VISIBLE);
-        autoLoginLayout.setVisibility(View.GONE);
+//        autoLoginLayout.setVisibility(View.GONE);
         if (iLoginPresenter.hasAccountLogin()){
             toAccountLoginView();
         }else{
@@ -606,7 +608,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
     @Override
     public void showMainLoginView() {
         contentFrameLayout.setVisibility(View.VISIBLE);
-        autoLoginLayout.setVisibility(View.GONE);
+//        autoLoginLayout.setVisibility(View.GONE);
         toMainLoginView();
     }
 
@@ -621,7 +623,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 
     @Override
     public void showAutoLoginWaitTime(String time) {
-        autoLoginWaitTime.setText(time);
+//        autoLoginWaitTime.setText(time);
     }
 
     public void setLoginCallBack(ILoginCallBack iLoginCallBack) {

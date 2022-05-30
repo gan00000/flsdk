@@ -107,30 +107,16 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/px_40"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginEnd="4dp"
                     android:gravity="center"
                     android:maxLines="2"
                     android:text="@string/py_findpwd"
                     android:textColor="@color/c_C0C0C0"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
+                    android:textSize="12sp"/>
 
 
             </RelativeLayout>
 
-
-            <!--        账号历史记录-->
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="320dp"
-                android:layout_height="85dp"
-                android:layout_centerHorizontal="true"
-                android:background="@android:color/white"
-                android:minHeight="40dp"
-                android:visibility="gone"
-                android:layout_below="@id/sdkinputview_account_login_account"
-                android:id="@+id/account_login_history_account_rv"/>
 
         </RelativeLayout>
 

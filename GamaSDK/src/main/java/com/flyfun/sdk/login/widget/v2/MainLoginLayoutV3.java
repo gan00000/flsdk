@@ -70,8 +70,12 @@ public class MainLoginLayoutV3 extends SLoginBaseRelativeLayout implements View.
     public void setLoginDialogV2(SLoginDialogV2 sLoginDialog) {
         super.setLoginDialogV2(sLoginDialog);
 
-        mAccountLoginV2.setLoginDialogV2(sLoginDialogv2);
-        mAccountRegisterLayoutV2.setLoginDialogV2(sLoginDialogv2);
+        if (mAccountLoginV2 != null) {
+            mAccountLoginV2.setLoginDialogV2(sLoginDialogv2);
+        }
+        if (mAccountRegisterLayoutV2 != null) {
+            mAccountRegisterLayoutV2.setLoginDialogV2(sLoginDialogv2);
+        }
     }
 
     @Override
