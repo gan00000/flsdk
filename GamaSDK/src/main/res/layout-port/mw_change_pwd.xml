@@ -31,18 +31,18 @@
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:layout_marginTop="25dp"
-            android:id="@+id/sdkinputview_findpwd_new"
+            android:id="@+id/sdkinputview_changepwd_new"
             />
 
         <com.flyfun.sdk.login.widget.SDKInputEditTextView
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:layout_marginTop="25dp"
-            android:id="@+id/sdkinputview_findpwd_new_again"
+            android:id="@+id/sdkinputview_changepwd_new_again"
             />
 
         <Button
-            android:id="@+id/gama_find_btn_confirm"
+            android:id="@+id/btn_confire_change"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_marginTop="25dp"

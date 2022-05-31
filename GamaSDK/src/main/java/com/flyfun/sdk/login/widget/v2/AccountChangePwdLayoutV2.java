@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,11 +22,11 @@ import com.flyfun.sdk.login.widget.SLoginBaseRelativeLayout;
 public class AccountChangePwdLayoutV2 extends SLoginBaseRelativeLayout implements View.OnClickListener {
 
     private View contentView;
-    private TextView changePwdConfireBtn;
+    private Button btn_confire_change;
 
-    private SDKInputEditTextView accountInputEditTextView, oldPwdSdkInputEditTextView, newPwdSdkInputEditTextView;
+    private SDKInputEditTextView sdkinputview_changepwd_new_again, oldPwdSdkInputEditTextView, newPwdSdkInputEditTextView;
 
-    private EditText changePwdAccountEditText, changePwdOldEditText, changePwdNewEditText;
+    private EditText againPwdEditText, changePwdOldEditText, changePwdNewEditText;
 
     private String account;
     private String password;
@@ -50,29 +51,29 @@ public class AccountChangePwdLayoutV2 extends SLoginBaseRelativeLayout implement
     }
 
     private View onCreateView(LayoutInflater inflater) {
-        contentView = inflater.inflate(R.layout.v2_account_change_pwd, null);
+        contentView = inflater.inflate(R.layout.mw_change_pwd, null);
 
         backView = contentView.findViewById(R.id.gama_head_iv_back);
         TextView titleTextView = contentView.findViewById(R.id.sdk_head_title);
-        titleTextView.setText(R.string.py_login_page_change_pwd);
+        titleTextView.setText(R.string.text_change_pwd);
 
-        accountInputEditTextView = contentView.findViewById(R.id.sdkinputview_change_account);
-        oldPwdSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_change_password_old);
-        newPwdSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_change_password_new);
+        oldPwdSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_old_pwd);
+        newPwdSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_changepwd_new);
+        sdkinputview_changepwd_new_again = contentView.findViewById(R.id.sdkinputview_changepwd_new_again);
 
-        accountInputEditTextView.setInputType(SDKInputType.SDKInputType_Account);
+        sdkinputview_changepwd_new_again.setInputType(SDKInputType.SDKInputType_Password_Again);
         oldPwdSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Old_Password);
         newPwdSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_New_Password);
 
-        changePwdAccountEditText = accountInputEditTextView.getInputEditText();
+        againPwdEditText = sdkinputview_changepwd_new_again.getInputEditText();
         changePwdOldEditText = oldPwdSdkInputEditTextView.getInputEditText();
         changePwdNewEditText = newPwdSdkInputEditTextView.getInputEditText();
 
 
-        changePwdConfireBtn = contentView.findViewById(R.id.gama_change_btn_confirm);
+        btn_confire_change = contentView.findViewById(R.id.btn_confire_change);
 
         backView.setOnClickListener(this);
-        changePwdConfireBtn.setOnClickListener(this);
+        btn_confire_change.setOnClickListener(this);
 
         return contentView;
     }
@@ -80,7 +81,7 @@ public class AccountChangePwdLayoutV2 extends SLoginBaseRelativeLayout implement
     @Override
     public void refreshViewData() {
         super.refreshViewData();
-        changePwdAccountEditText.setText("");
+        againPwdEditText.setText("");
         changePwdOldEditText.setText("");
         changePwdNewEditText.setText("");
     }
@@ -109,7 +110,7 @@ public class AccountChangePwdLayoutV2 extends SLoginBaseRelativeLayout implement
     @Override
     public void onClick(View v) {
 
-       if (v == changePwdConfireBtn) {
+       if (v == btn_confire_change) {
             changePwd();
         } else if (v == backView) {//返回键
            sLoginDialogv2.toAccountLoginView();
@@ -119,7 +120,7 @@ public class AccountChangePwdLayoutV2 extends SLoginBaseRelativeLayout implement
 
     private void changePwd() {
 
-        account = changePwdAccountEditText.getEditableText().toString().trim();
+        account = againPwdEditText.getEditableText().toString().trim();
         if (TextUtils.isEmpty(account)) {
             ToastUtils.toast(getActivity(), R.string.py_account_empty);
             return;
