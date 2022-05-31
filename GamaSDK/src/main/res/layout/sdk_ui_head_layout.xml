@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@android:color/transparent">
+    >
 
 
     <TextView
@@ -22,7 +21,7 @@
         android:layout_height="match_parent"
         android:layout_marginStart="34dp"
         android:gravity="center_vertical"
-        android:id="@+id/gama_head_iv_back"
+        android:id="@+id/layout_head_back"
         android:orientation="vertical">
 
         <ImageView

@@ -3,12 +3,9 @@ package com.flyfun.sdk.login;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,13 +21,13 @@ import com.flyfun.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.flyfun.sdk.login.widget.v2.AccountChangePwdLayoutV2;
 import com.flyfun.sdk.login.widget.v2.AccountFindPwdLayoutV2;
 import com.flyfun.sdk.login.widget.v2.AccountManagerLayoutV2;
-import com.flyfun.sdk.login.widget.v2.MainLoginLayoutV3;
+import com.flyfun.sdk.login.widget.v2.LoginWithRegLayout;
+import com.flyfun.sdk.login.widget.v2.MainHomeLayout;
 import com.flyfun.sdk.login.widget.v2.TermsViewV3;
 import com.flyfun.sdk.login.widget.v2.ThirdPlatBindAccountLayoutV2;
 import com.flyfun.thirdlib.facebook.SFacebookProxy;
 import com.flyfun.thirdlib.google.SGoogleSignIn;
 import com.flyfun.thirdlib.twitter.GamaTwitterLogin;
-import com.gama.sdk.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,13 +52,14 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 //    private TextView autoLoginWaitTime;
 //    private TextView autoLoginChangeAccount;
 
-    private SLoginBaseRelativeLayout mainLoginView;
+    private SLoginBaseRelativeLayout mainHomwView;
+    private SLoginBaseRelativeLayout loginWithRegView;
     private SLoginBaseRelativeLayout accountLoginView;
     private SLoginBaseRelativeLayout registerView;
     private SLoginBaseRelativeLayout changePwdView;
     private SLoginBaseRelativeLayout findPwdView;
     private SLoginBaseRelativeLayout accountManagerCenterView;
-    private SLoginBaseRelativeLayout sdkTermsV3View;
+//    private SLoginBaseRelativeLayout sdkTermsV3View;
 
     private SLoginBaseRelativeLayout bindUniqueView;
     private SLoginBaseRelativeLayout bindFbView;
@@ -187,7 +185,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
                     iLoginCallBack.onLogin(null);
                 }
             }
-        } else */if(mainLoginView != null && mainLoginView.getVisibility() == View.VISIBLE) { //如果主界面显示就退出登录
+        } else */if(loginWithRegView != null && loginWithRegView.getVisibility() == View.VISIBLE) { //如果主界面显示就退出登录
             super.onBackPressed();
             if(iLoginCallBack != null) { //回调退出登录界面的状态
                 iLoginCallBack.onLogin(null);
@@ -220,37 +218,50 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
             childView.setVisibility(View.GONE);
         }
 
-        sdkTermsV3View = new TermsViewV3(context);
-        sdkTermsV3View.setLoginDialogV2(this);
-        contentFrameLayout.addView(sdkTermsV3View);
+//        sdkTermsV3View = new TermsViewV3(context);
+//        sdkTermsV3View.setLoginDialogV2(this);
+//        contentFrameLayout.addView(sdkTermsV3View);
     }
 
-    public void toMainLoginView() {
+    public void toLoginWithRegView() {
 
-        if (sdkTermsV3View  != null) {
-            contentFrameLayout.removeView(sdkTermsV3View);
-            sdkTermsV3View = null;
+        if (loginWithRegView == null || !viewPageList.contains(loginWithRegView)){
+
+            loginWithRegView = new LoginWithRegLayout(context);
+            loginWithRegView.setLoginDialogV2(this);
+            contentFrameLayout.addView(loginWithRegView);
+            viewPageList.add(loginWithRegView);
         }
+        setViewPageVisable(loginWithRegView);
+    }
 
-        if (mainLoginView == null || !viewPageList.contains(mainLoginView)){
+    public void toMainHomeView() {
 
-            mainLoginView = new MainLoginLayoutV3(context);
-            mainLoginView.setLoginDialogV2(this);
-            contentFrameLayout.addView(mainLoginView);
-            viewPageList.add(mainLoginView);
+        if (mainHomwView == null || !viewPageList.contains(mainHomwView)){
+
+            mainHomwView = new MainHomeLayout(context);
+            mainHomwView.setLoginDialogV2(this);
+            contentFrameLayout.addView(mainHomwView);
+            viewPageList.add(mainHomwView);
         }
+        setViewPageVisable(mainHomwView);
+    }
+
+    private void setViewPageVisable(SLoginBaseRelativeLayout baseRelativeLayout) {
+
         for (SLoginBaseRelativeLayout childView : viewPageList) {
-            if (childView == null){
+            if (childView == null) {
                 continue;
             }
-            if (childView == mainLoginView){
+            if (childView == baseRelativeLayout) {
                 childView.refreshViewData();
                 childView.setVisibility(View.VISIBLE);
-            }else{
+            } else {
                 childView.setVisibility(View.GONE);
             }
         }
     }
+
     public void toAccountLoginView() {
 /*
         if (accountLoginView == null || !viewPageList.contains(accountLoginView)){
@@ -279,7 +290,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
             }
         }*/
 
-        this.toMainLoginView();
+        this.toLoginWithRegView();
     }
 
     public void toRegisterView(int from) {
@@ -315,7 +326,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
         }*/
 
 
-        this.toMainLoginView();
+        this.toLoginWithRegView();
     }
 
 //    public void toRegisterTermsView(int from) {
@@ -588,30 +599,28 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 
     @Override
     public void showAutoLoginView() {
-//        contentFrameLayout.setVisibility(View.GONE);
-//        autoLoginLayout.setVisibility(View.VISIBLE);
 
     }
 
 
     @Override
     public void showLoginView() {
-        contentFrameLayout.setVisibility(View.VISIBLE);
-//        autoLoginLayout.setVisibility(View.GONE);
         if (iLoginPresenter.hasAccountLogin()){
             toAccountLoginView();
         }else{
-            toMainLoginView();
+            toLoginWithRegView();
         }
     }
 
     @Override
-    public void showMainLoginView() {
-        contentFrameLayout.setVisibility(View.VISIBLE);
-//        autoLoginLayout.setVisibility(View.GONE);
-        toMainLoginView();
+    public void showLoginWithRegView() {
+        toLoginWithRegView();
     }
 
+    @Override
+    public void showMainHomeView() {
+        toMainHomeView();
+    }
 
     @Override
     public void changePwdSuccess(SLoginResponse sLoginResponse) {

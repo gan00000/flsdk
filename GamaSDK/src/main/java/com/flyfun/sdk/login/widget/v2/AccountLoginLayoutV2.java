@@ -2,12 +2,10 @@ package com.flyfun.sdk.login.widget.v2;
 
 import android.content.Context;
 import android.graphics.Paint;
-import android.os.Build;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.UnderlineSpan;
 import android.util.AttributeSet;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -15,9 +13,6 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.core.base.utils.ToastUtils;
 import com.flyfun.base.utils.GamaUtil;
@@ -27,8 +22,6 @@ import com.flyfun.sdk.login.widget.SDKInputEditTextView;
 import com.flyfun.sdk.login.widget.SDKInputType;
 import com.flyfun.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.gama.sdk.R;
-import com.zhy.adapter.recyclerview.CommonAdapter;
-import com.zhy.adapter.recyclerview.base.ViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +30,7 @@ import java.util.List;
  * Created by GanYuanrong on 2017/2/6.
  */
 
-public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
+public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
 
     private View contentView;
 
@@ -72,17 +65,17 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
 
     private AccountPopupWindow accountPopupWindow;
 
-    public PyAccountLoginV2(Context context) {
+    public AccountLoginLayoutV2(Context context) {
         super(context);
 
     }
 
 
-    public PyAccountLoginV2(Context context, AttributeSet attrs) {
+    public AccountLoginLayoutV2(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public PyAccountLoginV2(Context context, AttributeSet attrs, int defStyleAttr) {
+    public AccountLoginLayoutV2(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
@@ -93,13 +86,13 @@ public class PyAccountLoginV2 extends SLoginBaseRelativeLayout {
 
     public View onCreateView(LayoutInflater inflater) {
 
-        contentView = inflater.inflate(R.layout.v2_gama_account_login, null);
+        contentView = inflater.inflate(R.layout.mw_account_login, null);
 
-        backView = contentView.findViewById(R.id.gama_head_iv_back);
+        backView = contentView.findViewById(R.id.layout_head_back);
         backView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                sLoginDialogv2.toMainLoginView();
+                sLoginDialogv2.toLoginWithRegView();
             }
         });
 

@@ -37,7 +37,8 @@ public class LoginContract {
 
         void accountBindSuccess(SLoginResponse sLoginResponse);
 
-        void showMainLoginView();
+        void showLoginWithRegView();
+        void showMainHomeView();
 
         void showPhoneVerifyView(String loginType, String thirdId);
 

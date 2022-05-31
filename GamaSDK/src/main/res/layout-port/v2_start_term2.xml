@@ -155,7 +155,7 @@
             android:id="@+id/gama_gama_start_term_cb1"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:background="@drawable/gama_term_checkbox_selector"
+            android:background="@drawable/mw_term_checkbox_selector"
             android:button="@null"
             app:layout_constraintBottom_toBottomOf="@id/gama_start_term_guideline9"
             app:layout_constraintDimensionRatio="1:1"

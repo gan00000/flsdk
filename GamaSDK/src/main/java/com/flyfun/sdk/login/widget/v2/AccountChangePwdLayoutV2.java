@@ -53,7 +53,7 @@ public class AccountChangePwdLayoutV2 extends SLoginBaseRelativeLayout implement
     private View onCreateView(LayoutInflater inflater) {
         contentView = inflater.inflate(R.layout.mw_change_pwd, null);
 
-        backView = contentView.findViewById(R.id.gama_head_iv_back);
+        backView = contentView.findViewById(R.id.layout_head_back);
         TextView titleTextView = contentView.findViewById(R.id.sdk_head_title);
         titleTextView.setText(R.string.text_change_pwd);
 

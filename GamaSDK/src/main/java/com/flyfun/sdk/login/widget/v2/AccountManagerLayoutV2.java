@@ -37,9 +37,9 @@ public class AccountManagerLayoutV2 extends SLoginBaseRelativeLayout implements 
     }
 
     private View onCreateView(LayoutInflater inflater) {
-        contentView = inflater.inflate(R.layout.v2_gama_account_manager, null);
+        contentView = inflater.inflate(R.layout.v2_account_manager, null);
 
-        backView = contentView.findViewById(R.id.gama_head_iv_back);
+        backView = contentView.findViewById(R.id.layout_head_back);
         backView.setOnClickListener(this);
 
         TextView titleTextView = contentView.findViewById(R.id.sdk_head_title);

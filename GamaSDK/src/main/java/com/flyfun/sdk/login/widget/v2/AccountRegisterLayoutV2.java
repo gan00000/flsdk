@@ -7,14 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
 import com.flyfun.base.bean.GamaAreaInfoBean;
 import com.flyfun.sdk.SBaseRelativeLayout;
-import com.flyfun.sdk.login.widget.SDKPhoneInputEditTextView;
 import com.flyfun.base.utils.GamaUtil;
 import com.flyfun.data.login.constant.GSRequestMethod;
 import com.gama.sdk.R;
@@ -69,7 +67,7 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
     }
 
     private View onCreateView(LayoutInflater inflater) {
-        contentView = inflater.inflate(R.layout.v2_account_reg, null);
+        contentView = inflater.inflate(R.layout.mw_account_reg, null);
 
         accountSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_account_login_account);
         pwdSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_account_login_password);
@@ -134,7 +132,7 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
             if (from == 2) {
                 sLoginDialogv2.toAccountLoginView();
             } else {
-                sLoginDialogv2.toMainLoginView();
+                sLoginDialogv2.toLoginWithRegView();
             }
         }
 

@@ -13,7 +13,6 @@ import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
 import com.flyfun.base.bean.GamaAreaInfoBean;
 import com.flyfun.sdk.SBaseRelativeLayout;
-import com.flyfun.sdk.login.widget.SDKPhoneInputEditTextView;
 import com.flyfun.data.login.constant.GSRequestMethod;
 import com.gama.sdk.R;
 import com.flyfun.sdk.login.widget.SDKInputEditTextView;
@@ -60,9 +59,9 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
 
 
     private View onCreateView(LayoutInflater inflater) {
-        contentView = inflater.inflate(R.layout.v2_gama_findpwd, null);
+        contentView = inflater.inflate(R.layout.mw_find_pwd, null);
 
-        backView = contentView.findViewById(R.id.gama_head_iv_back);
+        backView = contentView.findViewById(R.id.layout_head_back);
 
         TextView titleTextView = contentView.findViewById(R.id.sdk_head_title);
         titleTextView.setText(R.string.py_login_page_forgot_pwd);

@@ -15,31 +15,31 @@ import com.gama.sdk.R;
  * Created by GanYuanrong on 2017/2/6.
  */
 
-public class MainLoginLayoutV3 extends SLoginBaseRelativeLayout implements View.OnClickListener {
+public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View.OnClickListener {
 
     private View contentView;
     private TextView loginTabView, regTabView;
-    private View login_bottom_line,register_bottom_line;
+    private View login_bottom_line,register_bottom_line,iv_login_reg_back;
 
-    public PyAccountLoginV2 getmAccountLoginV2() {
+    public AccountLoginLayoutV2 getmAccountLoginV2() {
         return mAccountLoginV2;
     }
-    private PyAccountLoginV2 mAccountLoginV2;
+    private AccountLoginLayoutV2 mAccountLoginV2;
     private AccountRegisterLayoutV2 mAccountRegisterLayoutV2;
 
     public AccountRegisterLayoutV2 getmAccountRegisterLayoutV2() {
         return mAccountRegisterLayoutV2;
     }
 
-    public MainLoginLayoutV3(Context context) {
+    public LoginWithRegLayout(Context context) {
         super(context);
     }
 
-    public MainLoginLayoutV3(Context context, AttributeSet attrs) {
+    public LoginWithRegLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public MainLoginLayoutV3(Context context, AttributeSet attrs, int defStyleAttr) {
+    public LoginWithRegLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
@@ -50,7 +50,8 @@ public class MainLoginLayoutV3 extends SLoginBaseRelativeLayout implements View.
 
     public View onCreateView(LayoutInflater inflater) {
 
-        contentView = inflater.inflate(R.layout.v3_main_login_page_xm, null);
+        contentView = inflater.inflate(R.layout.mw_login_reg, null);
+        iv_login_reg_back = contentView.findViewById(R.id.iv_login_reg_back);
         loginTabView = contentView.findViewById(R.id.loginTabView);
         regTabView = contentView.findViewById(R.id.regTabView);
         login_bottom_line = contentView.findViewById(R.id.loginTabView_bottom_line);
@@ -61,6 +62,7 @@ public class MainLoginLayoutV3 extends SLoginBaseRelativeLayout implements View.
 
         loginTabView.setOnClickListener(this);
         regTabView.setOnClickListener(this);
+        iv_login_reg_back.setOnClickListener(this);
 
         return contentView;
     }
@@ -88,6 +90,8 @@ public class MainLoginLayoutV3 extends SLoginBaseRelativeLayout implements View.
         }else if (v == regTabView) {
 
             makeTabStatus(false);
+        }else if (v == iv_login_reg_back) {
+            sLoginDialogv2.toMainHomeView();
         }
     }
 

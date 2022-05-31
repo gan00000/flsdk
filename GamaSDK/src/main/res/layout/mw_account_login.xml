@@ -7,11 +7,12 @@
 
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="460dp"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center_horizontal"
         android:layout_centerInParent="true"
+        android:background="@drawable/login_cons_bg"
         >
 
         <RelativeLayout
@@ -28,7 +29,7 @@
                 />
 
             <include
-                layout="@layout/gama_ui_head_layout"
+                layout="@layout/sdk_ui_head_layout"
                 />
 
 
@@ -40,17 +41,18 @@
 
             <!--            账号-->
             <com.flyfun.sdk.login.widget.SDKInputEditTextView
-                android:id="@+id/sdkinputview_account_login_account"
-                android:layout_width="300dp"
+                android:layout_width="320dp"
                 android:layout_height="40dp"
+                android:layout_marginTop="6dp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="1dp" />
+                android:id="@+id/sdkinputview_account_login_account"
+                />
 
             <!--            密码-->
             <com.flyfun.sdk.login.widget.SDKInputEditTextView
-                android:layout_width="300dp"
+                android:layout_width="320dp"
                 android:layout_height="40dp"
-                android:layout_marginTop="22dp"
+                android:layout_marginTop="10dp"
                 android:layout_centerHorizontal="true"
                 android:id="@+id/sdkinputview_account_login_password"
                 android:layout_below="@id/sdkinputview_account_login_account"
@@ -58,7 +60,7 @@
 
             <!--            记住账号-->
             <RelativeLayout
-                android:layout_width="300dp"
+                android:layout_width="320dp"
                 android:layout_centerHorizontal="true"
                 android:layout_height="40dp"
                 android:layout_below="@id/sdkinputview_account_login_password"
@@ -106,17 +108,31 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
+                    android:layout_marginStart="@dimen/px_40"
                     android:layout_centerVertical="true"
-                    android:layout_marginEnd="4dp"
+                    android:layout_marginEnd="16dp"
                     android:gravity="center"
                     android:maxLines="2"
                     android:text="@string/py_findpwd"
-                    android:textColor="@color/c_C0C0C0"
-                    android:textSize="12sp"/>
+                    android:textColor="@color/e_ff3e37"
+                    android:textSize="@dimen/sp_20"
+                    android:textStyle="bold"/>
 
 
             </RelativeLayout>
 
+
+            <!--        账号历史记录-->
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="320dp"
+                android:layout_height="85dp"
+                android:layout_centerHorizontal="true"
+                android:background="@android:color/white"
+                android:minHeight="40dp"
+                android:visibility="gone"
+                android:layout_below="@id/sdkinputview_account_login_account"
+                android:id="@+id/account_login_history_account_rv"/>
 
         </RelativeLayout>
 
@@ -125,21 +141,19 @@
 
         <Button
             android:id="@+id/gama_login_btn_confirm"
-            android:layout_width="300dp"
+            android:layout_width="320dp"
             android:layout_height="40dp"
-            android:layout_marginTop="26dp"
-            android:background="@drawable/mw_btn_bg_f23a12_20"
+            android:background="@drawable/sdk_btn_bg"
             android:gravity="center"
-            android:text="@string/py_login"
+            android:text="@string/py_login_by_members"
             android:textColor="@android:color/white"
-            android:textSize="17sp" />
+            android:textSize="@dimen/sp_26" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="20dp"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:visibility="gone"
             android:orientation="horizontal"
             android:layout_marginBottom="@dimen/px_6"
             >
@@ -147,7 +161,7 @@
                 android:id="@+id/gama_gama_start_term_cb1"
                 android:layout_width="18dp"
                 android:layout_height="18dp"
-                android:background="@drawable/gama_term_checkbox_selector"
+                android:background="@drawable/mw_term_checkbox_selector"
                 android:button="@null"
                 />
 
@@ -217,39 +231,28 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="31dp"
-            android:gravity="center_vertical"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/text_login_other"
-                android:textColor="@color/c_C0C0C0"
-                android:textSize="11sp"
-                />
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:gravity="center_horizontal"
-                android:layout_marginStart="7dp"
                 android:id="@+id/guestLoginView"
                 android:orientation="vertical">
 
 
                 <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:src="@mipmap/mw_guest_icon"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/icon_guest"
                     />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
-                    android:visibility="gone"
                     android:gravity="center"
                     android:text="@string/guest_login_btn"
                     android:textColor="@color/c_545454"
@@ -259,26 +262,25 @@
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:gravity="center_horizontal"
-                android:layout_marginStart="28dp"
-                android:id="@+id/fbLoginView"
+                android:layout_marginStart="38dp"
+                android:id="@+id/accountBindView"
                 android:orientation="vertical">
 
 
                 <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:src="@mipmap/mw_fb_icon"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/sdk_icon_bind"
                     />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="6dp"
                     android:gravity="center"
-                    android:text="@string/py_login_fb_1"
+                    android:text="@string/account_bind"
                     android:textColor="@color/c_545454"
                     android:textSize="@dimen/sp_18"/>
 
@@ -286,24 +288,23 @@
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:gravity="center_horizontal"
-                android:layout_marginStart="28dp"
+                android:layout_marginStart="30dp"
                 android:id="@+id/ggLoginView"
                 android:orientation="vertical">
 
 
                 <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:src="@mipmap/mw_gp_icon"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/sdk_icon_gg"
                     />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:visibility="gone"
                     android:gravity="center"
                     android:text="@string/py_login_google"
                     android:textColor="@color/c_545454"
@@ -313,26 +314,25 @@
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:gravity="center_horizontal"
-                android:layout_marginStart="28dp"
-                android:id="@+id/lineLoginView"
+                android:layout_marginStart="30dp"
+                android:id="@+id/fbLoginView"
                 android:orientation="vertical">
 
 
                 <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:src="@mipmap/mw_line_icon"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/sdk_icon_fb"
                     />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
+                    android:layout_marginTop="8dp"
                     android:gravity="center"
-                    android:visibility="gone"
-                    android:text="@string/account_bind"
+                    android:text="@string/py_login_fb_1"
                     android:textColor="@color/c_545454"
                     android:textSize="@dimen/sp_18"/>
 

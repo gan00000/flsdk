@@ -170,7 +170,7 @@
                 android:id="@+id/gama_gama_start_term_cb1"
                 android:layout_width="18dp"
                 android:layout_height="18dp"
-                android:background="@drawable/gama_term_checkbox_selector"
+                android:background="@drawable/mw_term_checkbox_selector"
                 android:button="@null"
                  />
 
@@ -200,7 +200,7 @@
             android:layout_height="0dp"
             android:layout_marginBottom="8dp"
             android:visibility="gone"
-            android:background="@drawable/gama_term_checkbox_selector"
+            android:background="@drawable/mw_term_checkbox_selector"
             android:button="@null"
             android:checked="true"
             app:layout_constraintBottom_toTopOf="@id/gama_start_term_guideline9"

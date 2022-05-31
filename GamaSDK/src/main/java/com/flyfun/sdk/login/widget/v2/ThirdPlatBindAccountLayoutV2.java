@@ -14,10 +14,7 @@ import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
 import com.flyfun.base.bean.GamaAreaInfoBean;
 import com.flyfun.sdk.SBaseRelativeLayout;
-import com.flyfun.sdk.login.widget.SDKPhoneInputEditTextView;
 import com.flyfun.base.utils.GamaUtil;
-import com.flyfun.data.login.constant.GSLoginCommonConstant;
-import com.flyfun.data.login.constant.GSRequestMethod;
 import com.gama.sdk.R;
 import com.flyfun.sdk.login.widget.SDKInputEditTextView;
 import com.flyfun.sdk.login.widget.SDKInputType;
@@ -71,7 +68,7 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
     private View onCreateView(LayoutInflater inflater) {
         contentView = inflater.inflate(R.layout.mw_update_account, null);
 
-        backView = contentView.findViewById(R.id.gama_head_iv_back);
+        backView = contentView.findViewById(R.id.layout_head_back);
         TextView titleTextView = contentView.findViewById(R.id.sdk_head_title);
         titleTextView.setText(R.string.text_update_account);
 

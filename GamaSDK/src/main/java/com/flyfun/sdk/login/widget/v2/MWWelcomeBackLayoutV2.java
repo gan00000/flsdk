@@ -12,8 +12,6 @@ import android.widget.TextView;
 
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
-import com.flyfun.base.bean.GamaAreaInfoBean;
-import com.flyfun.data.login.constant.GSRequestMethod;
 import com.flyfun.sdk.SBaseRelativeLayout;
 import com.flyfun.sdk.login.widget.SDKInputEditTextView;
 import com.flyfun.sdk.login.widget.SDKInputType;
@@ -58,7 +56,7 @@ public class MWWelcomeBackLayoutV2 extends SLoginBaseRelativeLayout implements V
     private View onCreateView(LayoutInflater inflater) {
         contentView = inflater.inflate(R.layout.mw_welcome_back, null);
 
-        backView = contentView.findViewById(R.id.gama_head_iv_back);
+        backView = contentView.findViewById(R.id.layout_head_back);
 
         TextView titleTextView = contentView.findViewById(R.id.sdk_head_title);
         titleTextView.setText(R.string.text_welcome_back);

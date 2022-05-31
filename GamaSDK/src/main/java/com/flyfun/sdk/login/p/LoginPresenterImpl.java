@@ -185,11 +185,6 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     public void autoLogin(Activity activity) {
         this.mActivity = activity;
 
-//        if(GamaUtil.getVfcodeSwitchStatus(activity)) {
-//            showLoginView();
-//            return;
-//        }
-
         String previousLoginType = GamaUtil.getPreviousLoginType(activity);
 
         if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GAMESWORD, previousLoginType)) {//自動登錄
@@ -197,18 +192,18 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             if (accountModel != null){
                 startAutoLogin(activity, SLoginType.LOGIN_TYPE_GAMESWORD, accountModel.getAccount(), accountModel.getPassword());
             }else {
-                showMainLoginView();
+                showLoginWithRegView();
             }
 
         } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_MAC, previousLoginType)) {//免注册没有自動登錄
 //            startAutoLogin(activity, SLoginType.LOGIN_TYPE_GAMESWORD, "", "");
-            showMainLoginView();
+            showLoginWithRegView();
         } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_FB, previousLoginType)) {//自動登錄
             String fbScopeId = FbSp.getFbId(activity);
             if (SStringUtil.isNotEmpty(fbScopeId)){
                 startAutoLogin(activity, SLoginType.LOGIN_TYPE_FB, "", "");
             }else {
-                showMainLoginView();
+                showLoginWithRegView();
             }
 
         }  else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GOOGLE, previousLoginType)) {//自動登錄
@@ -217,7 +212,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         } else if(SStringUtil.isEqual(SLoginType.LOGIN_TYPE_TWITTER, previousLoginType)) {
             startAutoLogin(activity, SLoginType.LOGIN_TYPE_TWITTER, "", "");
         } else {//進入登錄頁面
-            showMainLoginView();
+            showMainHomeView();
         }
 
     }
@@ -233,7 +228,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         fbThirdLogin(user.getUserFbId(), user.getBusinessId(), "");
                     } else {
                         if (isAutoLogin) {
-                            showMainLoginView();
+                            showLoginWithRegView();
                         }
                     }
                 }
@@ -302,7 +297,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         ToastUtils.toast(getActivity(), sLoginResponse.getMessage());
                         if (isAutoLogin) {
                             //如果是从自动登入过来的，就要先隐藏自动登入界面，显示登入主界面
-                            showMainLoginView();
+                            showLoginWithRegView();
                         }
                         showPhoneVerifyView(thirdLoginRegRequestBean.getRegistPlatform(), thirdLoginRegRequestBean.getThirdPlatId());
                         return;
@@ -312,22 +307,22 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 } else {
                     ToastUtils.toast(getActivity(), R.string.py_error_occur);
                 }
-                showMainLoginView();
+                showLoginWithRegView();
             }
 
             @Override
             public void timeout(String code) {
-                showMainLoginView();
+                showLoginWithRegView();
             }
 
             @Override
             public void noData() {
-                showMainLoginView();
+                showLoginWithRegView();
             }
 
             @Override
             public void cancel() {
-                showMainLoginView();
+                showLoginWithRegView();
             }
         });
         cmd.excute(SLoginResponse.class);
@@ -713,7 +708,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     } else if ("9000".equals(sLoginResponse.getCode())) { //需要验证手机
                         ToastUtils.toast(getActivity(), sLoginResponse.getMessage());
                         if (isAutoLogin) {
-                            showMainLoginView();
+                            showLoginWithRegView();
                         }
                         showPhoneVerifyView(SLoginType.LOGIN_TYPE_FB, fbScopeId);
                         return;
@@ -723,22 +718,22 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 } else {
                     ToastUtils.toast(getActivity(), R.string.py_error_occur);
                 }
-                showMainLoginView();
+                showLoginWithRegView();
             }
 
             @Override
             public void timeout(String code) {
-                showMainLoginView();
+                showLoginWithRegView();
             }
 
             @Override
             public void noData() {
-                showMainLoginView();
+                showLoginWithRegView();
             }
 
             @Override
             public void cancel() {
-                showMainLoginView();
+                showLoginWithRegView();
             }
         });
         cmd.excute(SLoginResponse.class);
@@ -982,10 +977,17 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         }
     }
 
-    private void showMainLoginView() {
+    private void showLoginWithRegView() {
         isAutoLogin = false;
         if (iLoginView != null){
-            iLoginView.showMainLoginView();
+            iLoginView.showLoginWithRegView();
+        }
+    }
+
+    private void showMainHomeView() {
+        isAutoLogin = false;
+        if (iLoginView != null){
+            iLoginView.showMainHomeView();
         }
     }
 

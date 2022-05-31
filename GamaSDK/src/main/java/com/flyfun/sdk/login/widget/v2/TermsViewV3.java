@@ -60,7 +60,7 @@ public class TermsViewV3 extends SLoginBaseRelativeLayout {
         titleTextView.setText(R.string.sdk_terms_title);
         titleTextView.setTextSize(20);
 
-        backView = contentView.findViewById(R.id.gama_head_iv_back);
+        backView = contentView.findViewById(R.id.layout_head_back);
         backView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,7 +70,7 @@ public class TermsViewV3 extends SLoginBaseRelativeLayout {
                     GamaUtil.saveStartTermRead(getContext(), false);
                 }
 
-                sLoginDialogv2.toMainLoginView();
+                sLoginDialogv2.toLoginWithRegView();
             }
         });
 
@@ -118,7 +118,7 @@ public class TermsViewV3 extends SLoginBaseRelativeLayout {
                 }
                 GamaUtil.saveStartTermRead(getContext(), true);
 
-                sLoginDialogv2.toMainLoginView();
+                sLoginDialogv2.toLoginWithRegView();
             }
         });
 

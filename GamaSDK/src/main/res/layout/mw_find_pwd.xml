@@ -15,7 +15,7 @@
         >
 
         <include
-            layout="@layout/gama_ui_head_layout"
+            layout="@layout/sdk_ui_head_layout"
             />
 
         <com.flyfun.sdk.login.widget.SDKInputEditTextView
