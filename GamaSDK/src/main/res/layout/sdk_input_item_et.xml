@@ -61,7 +61,7 @@
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:textColor="@android:color/white"
-            android:textColorHint="@android:color/white"
+            android:textColorHint="@color/c_848484"
             />
 
 

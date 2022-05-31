@@ -171,5 +171,11 @@
     <string name="py_msg_vfcode_hint">請輸入驗證碼</string>
     <string name="text_input_new_pwd">請輸入新密碼</string>
     <string name="text_input_new_pwd_confire">確認新密碼</string>
+    <string name="text_update_account">建議升級帳號，提升帳號安全性</string>
+    <string name="text_delete_account">刪除該帳號</string>
+    <string name="text_confire_change">確認修改</string>
+    <string name="text_confire_update">確認升級</string>
+    <string name="text_change_pwd">密碼修改</string>
+    <string name="text_bind_account_tips">*帳號信箱將會作為您找回密碼的驗證信箱，請謹慎輸入</string>
 
 </resources>
