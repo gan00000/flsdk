@@ -83,18 +83,30 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
     public void onClick(View v) {
 
         if (v == fbLoginView){
-            sLoginDialogv2.getLoginPresenter().fbLogin(sLoginDialogv2.getActivity());
+            if (checkAgreeTerm()){
+                sLoginDialogv2.getLoginPresenter().fbLogin(sLoginDialogv2.getActivity());
+            }
         }else if (v == layout_go_account_login) {
 
             sLoginDialogv2.showLoginWithRegView();
         }else if(v == guestLoginView){
-            sLoginDialogv2.getLoginPresenter().macLogin(sLoginDialogv2.getActivity());
+            if (checkAgreeTerm()){
+                sLoginDialogv2.getLoginPresenter().guestLogin(sLoginDialogv2.getActivity());
+            }
         }else if (v == googleLoginView){
             //google+登录
-            sLoginDialogv2.getLoginPresenter().googleLogin(sLoginDialogv2.getActivity());
+            if (checkAgreeTerm()){
+                sLoginDialogv2.getLoginPresenter().googleLogin(sLoginDialogv2.getActivity());
+            }
 
         }
     }
 
-
+    private boolean checkAgreeTerm(){
+        if (cb_agree_term.isChecked()){
+            return true;
+        }
+        toast(R.string.gama_ui_term_not_read);
+        return false;
+    }
 }

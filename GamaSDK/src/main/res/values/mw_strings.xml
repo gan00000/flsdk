@@ -8,7 +8,6 @@
     <string name="gama_ui_term_port_read2" translatable="false">我已閱讀並同意定型化契約</string>
     <string name="gama_ui_term_port_term1" translatable="false">服務條款</string>
     <string name="gama_ui_term_port_term2" translatable="false">隱私政策</string>
-    <string name="gama_ui_term_not_read" translatable="false">請先同意「定型化契約」</string>
 
     <!--登录页面-->
     <string name="py_login_page_account_login">會員登入頁</string>
@@ -22,7 +21,6 @@
     <string name="py_account_again_input_password">請再次輸入密碼</string>
 
     <!--注册页面-->
-    <string name="py_login_page_account_reg">註冊會員</string>
     <string name="py_register_account_phone">請輸入手機號碼</string>
     <string name="py_register_account_email">請輸入郵箱</string>
     <string name="py_register_account_area">區碼</string>
@@ -182,5 +180,8 @@
     <string name="text_welcome_back">歡迎回來</string>
     <string name="text_go_game">繼續遊戲</string>
     <string name="text_update_account">帳號升級</string>
+
+    <string name="gama_ui_term_not_read" translatable="false">請先同意「定型化契約」</string>
+    <string name="text_confire_reg">確認註冊</string>
 
 </resources>

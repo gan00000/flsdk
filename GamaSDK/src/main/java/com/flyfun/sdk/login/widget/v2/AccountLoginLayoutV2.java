@@ -9,10 +9,8 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.core.base.utils.ToastUtils;
 import com.flyfun.base.utils.GamaUtil;
@@ -40,7 +38,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
      * 眼睛、保存密码、验证码
      */
     private ImageView savePwdCheckBox;
-    private CheckBox agreeCheckBox;
+//    private CheckBox agreeCheckBox;
 
     /**
      * 密码、账号、验证码
@@ -54,7 +52,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
     private View loginMainGoAccountCenter;
     private View loginMainGoChangePassword;
 
-    private TextView goTermView;
+//    private TextView goTermView;
 
     private SDKInputEditTextView accountSdkInputEditTextView;
     private SDKInputEditTextView pwdSdkInputEditTextView;
@@ -116,17 +114,11 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
         historyAccountListBtn.setVisibility(VISIBLE);
 
         loginMainLoginBtn = contentView.findViewById(R.id.gama_login_btn_confirm);
-        goTermView = contentView.findViewById(R.id.gama_gama_start_term_tv1);//跳轉服務條款
-        agreeCheckBox = contentView.findViewById(R.id.gama_gama_start_term_cb1);//跳轉服務條款
-
-        GamaUtil.saveStartTermRead(getContext(), true);//默认设置为勾选
-        agreeCheckBox.setChecked(true);
-
-//        if (GamaUtil.getStartTermRead(getContext())){
-//            agreeCheckBox.setChecked(true);
-//        }else {
-//            agreeCheckBox.setChecked(false);
-//        }
+//        goTermView = contentView.findViewById(R.id.gama_gama_start_term_tv1);//跳轉服務條款
+//        agreeCheckBox = contentView.findViewById(R.id.gama_gama_start_term_cb1);//跳轉服務條款
+//
+//        GamaUtil.saveStartTermRead(getContext(), true);//默认设置为勾选
+//        agreeCheckBox.setChecked(true);
 
         savePwdCheckBox = contentView.findViewById(R.id.gama_login_iv_remember_account);
 
@@ -184,14 +176,14 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
         String ssText = getContext().getString(R.string.gama_ui_term_port_read2);
         SpannableString ss = new SpannableString(ssText);
         ss.setSpan(new UnderlineSpan(), ssText.length() - 5, ssText.length(), Paint.UNDERLINE_TEXT_FLAG);
-        goTermView.setText(ss);
-        goTermView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //服務條款
-                sLoginDialogv2.toTermsV3View();
-            }
-        });
+//        goTermView.setText(ss);
+//        goTermView.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //服務條款
+//                sLoginDialogv2.toTermsV3View();
+//            }
+//        });
         fbLoginView = contentView.findViewById(R.id.fbLoginView);
         lineLoginView = contentView.findViewById(R.id.lineLoginView);
         macLoginView = contentView.findViewById(R.id.guestLoginView);
@@ -212,7 +204,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
         macLoginView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                sLoginDialogv2.getLoginPresenter().macLogin(sLoginDialogv2.getActivity());
+                sLoginDialogv2.getLoginPresenter().guestLogin(sLoginDialogv2.getActivity());
             }
         });
         googleLoginView.setOnClickListener(new OnClickListener() {
@@ -220,6 +212,13 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
             public void onClick(View v) {
                 //google+登录
                 sLoginDialogv2.getLoginPresenter().googleLogin(sLoginDialogv2.getActivity());
+            }
+        });
+        lineLoginView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //google+登录
+                sLoginDialogv2.getLoginPresenter().lineLogin(sLoginDialogv2.getActivity());
             }
         });
 
@@ -287,11 +286,11 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
 
     private void login() {
 
-        if(!agreeCheckBox.isChecked()) {
-            ToastUtils.toast(getContext(), R.string.gama_ui_term_not_read);
-            return;
-        }
-        GamaUtil.saveStartTermRead(getContext(), true);
+//        if(!agreeCheckBox.isChecked()) {
+//            ToastUtils.toast(getContext(), R.string.gama_ui_term_not_read);
+//            return;
+//        }
+//        GamaUtil.saveStartTermRead(getContext(), true);
 
         account = loginAccountEditText.getEditableText().toString().trim();
         password = loginPasswordEditText.getEditableText().toString().trim();
@@ -336,11 +335,11 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
     public void refreshViewData() {
         super.refreshViewData();
 
-        if (GamaUtil.getStartTermRead(getContext())){
-            agreeCheckBox.setChecked(true);
-        }else {
-            agreeCheckBox.setChecked(false);
-        }
+//        if (GamaUtil.getStartTermRead(getContext())){
+//            agreeCheckBox.setChecked(true);
+//        }else {
+//            agreeCheckBox.setChecked(false);
+//        }
 
         List<AccountModel>  ams = GamaUtil.getAccountModels(getContext());
         accountModels.clear();

@@ -67,7 +67,7 @@ public class SSdkBaseRequestBean extends BaseReqeustBean {
 //            uniqueId = adId;
 //        }
 
-        uniqueId = GamaUtil.getCustomizedUniqueId1AndroidId1Adid(context);
+        uniqueId = GamaUtil.getGoogleAdid1AndroidId(context);
         referrer = GamaUtil.getReferrer(context);
 
         spy_platForm = ResUtil.findStringByName(context,"spy_platForm");

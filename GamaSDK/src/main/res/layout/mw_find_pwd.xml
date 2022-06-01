@@ -55,7 +55,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/login_get_vfcode_bg"
                 android:gravity="center"
-                android:id="@+id/gama_find_btn_get_vfcode"
+                android:id="@+id/btn_find_get_vfcode"
                 android:text="@string/py_register_account_get_vfcode"
                 android:textColor="@color/e_ff3e37"
                 android:textSize="@dimen/sp_18" />

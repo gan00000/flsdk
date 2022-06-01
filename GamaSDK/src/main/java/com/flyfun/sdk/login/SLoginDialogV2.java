@@ -385,30 +385,13 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
     public void toFindPwdView() {
 
         if (findPwdView == null || !viewPageList.contains(findPwdView)){
-//            SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
-//            if (SGameLanguage.en_US == sGameLanguage) {
-//                findPwdView = new AccountFindPwdLayoutV2En(context);
-//            } else {
-                findPwdView = new AccountFindPwdLayoutV2(context);
-//            }
-
+            findPwdView = new AccountFindPwdLayoutV2(context);
             findPwdView.setLoginDialogV2(this);
             contentFrameLayout.addView(findPwdView);
             viewPageList.add(findPwdView);
         }
 
-        for (View childView : viewPageList) {
-
-            if (childView == null){
-                continue;
-            }
-
-            if (childView == findPwdView){
-                childView.setVisibility(View.VISIBLE);
-            }else{
-                childView.setVisibility(View.GONE);
-            }
-        }
+        setViewPageVisable(findPwdView);
 
     }
 

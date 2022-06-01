@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.core.base.utils.ToastUtils;
 import com.flyfun.sdk.SBaseRelativeLayout;
 import com.flyfun.base.utils.Localization;
 import com.gama.sdk.R;
@@ -108,4 +109,7 @@ public abstract class SLoginBaseRelativeLayout extends SBaseRelativeLayout {
     //用于刷新验证码
     public void refreshVfCode() {}
 
+    protected void toast(int msgId){
+        ToastUtils.toast(getActivity(),msgId);
+    }
 }

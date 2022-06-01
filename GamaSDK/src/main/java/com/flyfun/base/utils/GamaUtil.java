@@ -450,8 +450,12 @@ public class GamaUtil {
         if (TextUtils.isEmpty(account)){
             return false;
         }
-        if (account.matches("^[A-Za-z0-9]{6,18}$")){
+        if (account.contains("@")){//简单检查只是邮箱就行
             return true;
+        }
+        if (account.contains(" "))
+        {
+            return false;
         }
         return false;
     }
@@ -460,7 +464,11 @@ public class GamaUtil {
         if (TextUtils.isEmpty(password)){
             return false;
         }
-        if (password.matches("^(?=.*[a-zA-Z])(?=.*[0-9])(?!.*[\\W]).{8,16}$")){
+        if (password.contains(" "))
+        {
+            return false;
+        }
+        if (password.matches("^.{6,20}$")){
             return true;
         }
         return false;
@@ -592,13 +600,12 @@ public class GamaUtil {
     /**
      * 生成免注册登入账号
      */
-    public static  String getCustomizedUniqueId1AndroidId1Adid(Context ctx){
+    public static  String getGoogleAdid1AndroidId(Context ctx){
         String adId = GamaUtil.getGoogleAdId(ctx);
         if (SStringUtil.isNotEmpty(adId)){//先Google id
             return adId;
         }
-
-        return ApkInfoUtil.getCustomizedUniqueIdOrAndroidId(ctx);
+        return ApkInfoUtil.getAndroidId(ctx);
     }
 
     private static final String GAMA_START_TERM_STATUS = "GAMA_START_TERM_STATUS";

@@ -276,6 +276,11 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         });
     }
 
+    @Override
+    public void lineLogin(Activity activity) {
+
+    }
+
     //目前Google登录使用到，fb登录没有使用
     @Override
     public void thirdPlatLogin(final Activity activity, final ThirdLoginRegRequestBean thirdLoginRegRequestBean) {
@@ -330,7 +335,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     }
 
     @Override
-    public void macLogin(final Activity activity) {
+    public void guestLogin(final Activity activity) {
         this.mActivity = activity;
         mMacLogin(activity);
     }
@@ -1113,7 +1118,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     public void accountBind(final Activity activity, final String account, final String pwd, final String areaCode, final String phone, final String vfcode, int bindType) {
         this.mActivity = activity;
         if (bindType == SLoginType.bind_unique){
-            String uniqueId = GamaUtil.getCustomizedUniqueId1AndroidId1Adid(activity);
+            String uniqueId = GamaUtil.getGoogleAdid1AndroidId(activity);
             if(TextUtils.isEmpty(uniqueId)){
                 PL.d("thirdPlatId:" + uniqueId);
                 return;

@@ -82,13 +82,13 @@ public class ApkInfoUtil {
 	/**
 	 * 获取保存在SDcard的uuid
 	 */
-	public static  String getCustomizedUniqueIdOrAndroidId(Context ctx){
+	/*public static  String getCustomizedUniqueIdOrAndroidId(Context ctx){
 		String s = getCustomizedUniqueId(ctx);
 		if (TextUtils.isEmpty(s)){
 			s = getAndroidId(ctx);
 		}
 		return s;
-	}
+	}*/
 
 	/**
 	 * <p>Description: 获取植入SD卡的uuid</p>
@@ -96,7 +96,7 @@ public class ApkInfoUtil {
 	 * @return
 	 * @date 2015年10月12日
 	 */
-	private static synchronized String getCustomizedUniqueId(Context ctx) {
+	/*private static synchronized String getCustomizedUniqueId(Context ctx) {
 
 		if (!TextUtils.isEmpty(customizedUniqueId) && customizedUniqueId.length() >= 30) {
 			return customizedUniqueId;
@@ -136,7 +136,7 @@ public class ApkInfoUtil {
 
 		}
 		return "";
-	}
+	}*/
 	
 
 //	public static String getImeiAddress(Context ctx) {

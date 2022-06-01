@@ -58,7 +58,8 @@ public class LoginContract {
 
         void thirdPlatLogin(Activity activity, ThirdLoginRegRequestBean thirdLoginRegRequestBean);
 
-        void macLogin(Activity activity);
+        void guestLogin(Activity activity);
+        void lineLogin(Activity activity);
 
         void changePwd(Activity activity, String account, String oldPwd, String newPwd);
 

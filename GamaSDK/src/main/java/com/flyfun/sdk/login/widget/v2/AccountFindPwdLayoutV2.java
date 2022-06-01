@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
-import com.flyfun.base.bean.GamaAreaInfoBean;
 import com.flyfun.sdk.SBaseRelativeLayout;
 import com.flyfun.data.login.constant.GSRequestMethod;
 import com.gama.sdk.R;
@@ -34,10 +33,7 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
     private String account;
 //    private String email;
 
-    //选中的区域信息
-    private GamaAreaInfoBean selectedBean;
-
-    Button gama_find_btn_get_vfcode;
+    Button btn_find_get_vfcode;
 
     public AccountFindPwdLayoutV2(Context context) {
         super(context);
@@ -81,15 +77,12 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
         findPwdAccountEditText = accountSdkInputEditTextView.getInputEditText();
 
         findPwdConfireBtn = contentView.findViewById(R.id.gama_find_btn_confirm);
-        gama_find_btn_get_vfcode = contentView.findViewById(R.id.gama_find_btn_get_vfcode);
-
-
+        btn_find_get_vfcode = contentView.findViewById(R.id.btn_find_get_vfcode);
 
         backView.setOnClickListener(this);
         findPwdConfireBtn.setOnClickListener(this);
-        gama_find_btn_get_vfcode.setOnClickListener(this);
+        btn_find_get_vfcode.setOnClickListener(this);
 
-        setDefaultAreaInfo();
         return contentView;
     }
 
@@ -122,34 +115,21 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
         } else if (v == backView) {//返回键
             sLoginDialogv2.toAccountLoginView();
         }
-//        else if (v == gama_find_btn_get_vfcode || v == mSdkPhoneInputEditTextView.getAraeCodeMoreListView()) {
-//            getVfcodeByPhone();
-//        }
+        else if (v == btn_find_get_vfcode) {
+            getVfcodeByEmail();
+        }
 
     }
 
-    private void getAndShowArea() {
-        sLoginDialogv2.getLoginPresenter().getAreaInfo(sLoginDialogv2.getActivity());
-    }
-
-    private void getVfcodeByPhone() {
+    private void getVfcodeByEmail() {
         String areaCode = "";//gama_find_tv_area.getText().toString();
         if (TextUtils.isEmpty(areaCode)) {
             ToastUtils.toast(getActivity(), R.string.py_area_code_empty);
             return;
         }
-        String phone = "";//gama_find_et_phone.getEditableText().toString().trim();
-        if (SStringUtil.isEmpty(phone)){
-            ToastUtils.toast(getActivity(), R.string.py_register_account_phone);
-            return;
-        }
-        if (!phone.matches(selectedBean.getPattern())) {
-            ToastUtils.toast(getActivity(), R.string.py_phone_error);
-            return;
-        }
         String interfaceName = GSRequestMethod.RequestVfcodeInterface.findpwd.getString();
 
-        sLoginDialogv2.getLoginPresenter().getPhoneVfcode(sLoginDialogv2.getActivity(), areaCode, phone, interfaceName);
+//        sLoginDialogv2.getLoginPresenter().getEmailVfcode();
     }
 
 
@@ -172,10 +152,6 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
             ToastUtils.toast(getActivity(), R.string.py_register_account_phone);
             return;
         }
-        if(!phone.matches(selectedBean.getPattern())) {
-            ToastUtils.toast(getActivity(), R.string.py_phone_error);
-            return;
-        }
 
         String vfCode = vfCodeSdkInputEditTextView.getInputEditText().getEditableText().toString().trim();
 
@@ -192,29 +168,24 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
     public void statusCallback(int operation) {
         if (TIME_LIMIT == operation) {
 //            gama_register_btn_get_vfcode.setBackgroundResource(R.drawable.gama_ui_bg_btn_unclickable);
-            gama_find_btn_get_vfcode.setClickable(false);
+            btn_find_get_vfcode.setClickable(false);
         } else if (TIME_OUT == operation) {
 //            gama_register_btn_get_vfcode.setBackgroundResource(R.drawable.bg_192d3f_46);
-            gama_find_btn_get_vfcode.setClickable(true);
-            gama_find_btn_get_vfcode.setText(R.string.py_register_account_get_vfcode);
+            btn_find_get_vfcode.setClickable(true);
+            btn_find_get_vfcode.setText(R.string.py_register_account_get_vfcode);
         }
     }
 
     @Override
     public void dataCallback(Object o) {
-        if (o instanceof GamaAreaInfoBean) {
-            selectedBean = (GamaAreaInfoBean) o;
-            String text = selectedBean.getValue();
-//            gama_find_tv_area.setText(text);
-        }
     }
 
     @Override
     public void alertTime(int remainTimeSeconds) {
-        if(gama_find_btn_get_vfcode.isClickable()) {
-            gama_find_btn_get_vfcode.setClickable(false);
+        if(btn_find_get_vfcode.isClickable()) {
+            btn_find_get_vfcode.setClickable(false);
         }
-        gama_find_btn_get_vfcode.setText(remainTimeSeconds + "s");
+        btn_find_get_vfcode.setText(remainTimeSeconds + "s");
     }
 
 
@@ -224,15 +195,12 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
         sLoginDialogv2.getLoginPresenter().setOperationCallback(this);
         remainTimeSeconds = sLoginDialogv2.getLoginPresenter().getRemainTimeSeconds();
         if(remainTimeSeconds > 0) {
-            gama_find_btn_get_vfcode.setClickable(false);
-            gama_find_btn_get_vfcode.setText(remainTimeSeconds + "s");
+            btn_find_get_vfcode.setClickable(false);
+            btn_find_get_vfcode.setText(remainTimeSeconds + "s");
         }
     }
 
     private void setDefaultAreaInfo() {
-        selectedBean = new GamaAreaInfoBean();
-        selectedBean.setValue(getResources().getString(R.string.py_default_area_num));
-        selectedBean.setPattern(getResources().getString(R.string.py_default_area_num_pattern));
     }
 
     @Override
