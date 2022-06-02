@@ -217,12 +217,7 @@ public class SDKInputEditTextView extends RelativeLayout {
             return false;
         }
         if (!GamaUtil.checkAccount(account)) {
-
-            String accountError1 = getContext().getResources().getString(R.string.py_account_error) + ":";
-            String accountError2 = getContext().getResources().getString(R.string.py_register_account_hit);
-            String errorStrAccount = accountError1 + accountError2;
-
-            ToastUtils.toast(getContext(), errorStrAccount, Toast.LENGTH_LONG);
+            ToastUtils.toast(getContext(), R.string.text_account_format, Toast.LENGTH_LONG);
             return false;
         }
         return  true;

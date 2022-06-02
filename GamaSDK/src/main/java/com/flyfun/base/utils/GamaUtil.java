@@ -483,12 +483,13 @@ public class GamaUtil {
         if (TextUtils.isEmpty(account)){
             return false;
         }
-        if (account.contains("@")){//简单检查只是邮箱就行
-            return true;
-        }
         if (account.contains(" "))
         {
             return false;
+        }
+
+        if (account.contains("@")){//简单检查只是邮箱就行
+            return true;
         }
         return false;
     }

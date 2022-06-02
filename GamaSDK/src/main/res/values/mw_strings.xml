@@ -163,8 +163,8 @@
     <string name="text_reg_tips">*帳號信箱將會作為您找回密碼的驗證信箱，請謹慎輸入</string>
     <string name="py_register_account_get_vfcode">發送驗證碼</string>
 
-    <string name="py_register_account_hit">請輸入您的帳號信箱</string>
-    <string name="py_register_password_hit">请输入密码</string>
+    <string name="py_register_account_hit">請輸入您的常用信箱(xxxx@xx.com)</string>
+    <string name="py_register_password_hit">請輸入6–20字元</string>
     <string name="py_msg_vfcode_hint">請輸入驗證碼</string>
     <string name="text_input_new_pwd">請輸入新密碼</string>
     <string name="text_input_new_pwd_confire">確認新密碼</string>
@@ -183,5 +183,7 @@
 
     <string name="gama_ui_term_not_read" translatable="false">請先同意「定型化契約」</string>
     <string name="text_confire_reg">確認註冊</string>
+    <string name="text_pwd_format">密碼支持6~20字元</string>
+    <string name="text_account_format">信箱格式異常，請重新輸入</string>
 
 </resources>

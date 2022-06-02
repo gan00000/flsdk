@@ -19,7 +19,7 @@ import com.flyfun.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.gama.sdk.R;
 
 
-public class MWWelcomeBackLayoutV2 extends SLoginBaseRelativeLayout implements View.OnClickListener, SBaseRelativeLayout.OperationCallback {
+public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.OnClickListener, SBaseRelativeLayout.OperationCallback {
 
     private View contentView;
     private View layout_need_update_account,layout_has_update_account;
@@ -34,15 +34,15 @@ public class MWWelcomeBackLayoutV2 extends SLoginBaseRelativeLayout implements V
 
     Button btn_login_game,btn_swith_account,btn_update_account,btn_change_pwd,btn_swith_account2;
 
-    public MWWelcomeBackLayoutV2(Context context) {
+    public WelcomeBackLayout(Context context) {
         super(context);
     }
 
-    public MWWelcomeBackLayoutV2(Context context, AttributeSet attrs) {
+    public WelcomeBackLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public MWWelcomeBackLayoutV2(Context context, AttributeSet attrs, int defStyleAttr) {
+    public WelcomeBackLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 

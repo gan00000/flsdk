@@ -46,7 +46,7 @@ public class AccountLoginRequestTask extends BaseLoginRequestTask {
 		super.createRequestBean();
 
 		requestBean.setSignature(SStringUtil.toMd5(requestBean.getAppKey() + requestBean.getTimestamp() +
-				requestBean.getName() + requestBean.getPwd() + requestBean.getGameCode()));
+				requestBean.getName() + requestBean.getGameCode()));
 
 		return requestBean;
 	}

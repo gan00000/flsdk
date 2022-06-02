@@ -22,6 +22,7 @@ import com.flyfun.sdk.login.widget.v2.AccountChangePwdLayoutV2;
 import com.flyfun.sdk.login.widget.v2.AccountFindPwdLayoutV2;
 import com.flyfun.sdk.login.widget.v2.AccountManagerLayoutV2;
 import com.flyfun.sdk.login.widget.v2.LoginWithRegLayout;
+import com.flyfun.sdk.login.widget.v2.WelcomeBackLayout;
 import com.flyfun.sdk.login.widget.v2.MainHomeLayout;
 import com.flyfun.sdk.login.widget.v2.ThirdPlatBindAccountLayoutV2;
 import com.flyfun.thirdlib.facebook.SFacebookProxy;
@@ -63,6 +64,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
     private SLoginBaseRelativeLayout bindUniqueView;
     private SLoginBaseRelativeLayout bindFbView;
     private SLoginBaseRelativeLayout bindGoogleView;
+    private SLoginBaseRelativeLayout welcomeBackView;
 
     private List<SLoginBaseRelativeLayout> viewPageList;
 
@@ -246,6 +248,17 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
             viewPageList.add(mainHomeView);
         }
         setViewPageVisable(mainHomeView);
+    }
+    public void toWelcomeBackView() {
+
+        if (welcomeBackView == null || !viewPageList.contains(welcomeBackView)){
+
+            welcomeBackView = new WelcomeBackLayout(context);
+            welcomeBackView.setLoginDialogV2(this);
+            contentFrameLayout.addView(welcomeBackView);
+            viewPageList.add(welcomeBackView);
+        }
+        setViewPageVisable(welcomeBackView);
     }
 
     private void setViewPageVisable(SLoginBaseRelativeLayout baseRelativeLayout) {
@@ -604,6 +617,11 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
     @Override
     public void showMainHomeView() {
         toMainHomeView();
+    }
+
+    @Override
+    public void showWelcomeBackView() {
+        toWelcomeBackView();
     }
 
     @Override

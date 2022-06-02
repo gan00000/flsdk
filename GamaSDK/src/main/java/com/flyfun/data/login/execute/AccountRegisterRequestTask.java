@@ -38,33 +38,13 @@ public class AccountRegisterRequestTask extends BaseLoginRequestTask {
 
     }
 
-    public AccountRegisterRequestTask(Context context, String userName, String password,String email) {
-        super(context);
-
-        userName = userName.toLowerCase();
-
-        regRequestBean = new AccountRegRequestBean(context);
-        sdkBaseRequestBean = regRequestBean;
-
-        regRequestBean.setName(userName);
-
-        password = SStringUtil.toMd5(password);
-        regRequestBean.setPwd(password);
-
-        regRequestBean.setEmail(email);
-
-//        regRequestBean.setRequestMethod(GamaRequestMethod.GAMA_REQUEST_METHOD_REGISTER);
-
-
-    }
-
 
     @Override
     public BaseReqeustBean createRequestBean() {
         super.createRequestBean();
 
         regRequestBean.setSignature(SStringUtil.toMd5(regRequestBean.getAppKey() + regRequestBean.getTimestamp() +
-                regRequestBean.getName() + regRequestBean.getPwd() + regRequestBean.getGameCode()));
+                regRequestBean.getName() + regRequestBean.getGameCode()));
 
         return regRequestBean;
     }

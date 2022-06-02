@@ -146,11 +146,9 @@ public class AccountChangePwdLayoutV2 extends SLoginBaseRelativeLayout implement
         }
 
         if (!GamaUtil.checkAccount(account)) {
-            ToastUtils.toast(getActivity(), errorStrAccount, Toast.LENGTH_LONG);
             return;
         }
         if (!GamaUtil.checkPassword(newPassword)) {
-            ToastUtils.toast(getActivity(), errorStrPassword, Toast.LENGTH_LONG);
             return;
         }
 

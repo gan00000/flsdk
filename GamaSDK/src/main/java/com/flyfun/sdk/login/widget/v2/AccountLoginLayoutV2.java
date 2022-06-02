@@ -38,7 +38,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
     /**
      * 眼睛、保存密码、验证码
      */
-    private ImageView savePwdCheckBox;
+//    private ImageView savePwdCheckBox;
 //    private CheckBox agreeCheckBox;
 
     /**
@@ -121,7 +121,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
 //        GamaUtil.saveStartTermRead(getContext(), true);//默认设置为勾选
 //        agreeCheckBox.setChecked(true);
 
-        savePwdCheckBox = contentView.findViewById(R.id.gama_login_iv_remember_account);
+       /* savePwdCheckBox = contentView.findViewById(R.id.gama_login_iv_remember_account);
 
         savePwdCheckBox.setSelected(true);
 
@@ -134,7 +134,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
                     savePwdCheckBox.setSelected(true);
                 }
             }
-        });
+        });*/
 
 
         loginMainGoRegisterBtn.setOnClickListener(new OnClickListener() {
@@ -174,17 +174,6 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
             }
         });
 
-        String ssText = getContext().getString(R.string.gama_ui_term_port_read2);
-        SpannableString ss = new SpannableString(ssText);
-        ss.setSpan(new UnderlineSpan(), ssText.length() - 5, ssText.length(), Paint.UNDERLINE_TEXT_FLAG);
-//        goTermView.setText(ss);
-//        goTermView.setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //服務條款
-//                sLoginDialogv2.toTermsV3View();
-//            }
-//        });
         fbLoginView = contentView.findViewById(R.id.fbLoginView);
         lineLoginView = contentView.findViewById(R.id.lineLoginView);
         macLoginView = contentView.findViewById(R.id.guestLoginView);
@@ -288,25 +277,28 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
 
     private void login() {
 
-//        if(!agreeCheckBox.isChecked()) {
-//            ToastUtils.toast(getContext(), R.string.gama_ui_term_not_read);
-//            return;
-//        }
-//        GamaUtil.saveStartTermRead(getContext(), true);
-
         account = loginAccountEditText.getEditableText().toString().trim();
         password = loginPasswordEditText.getEditableText().toString().trim();
+
+        if (!GamaUtil.checkAccount(account)) {
+            toast(R.string.text_account_format);
+            return;
+        }
 
         if (!accountSdkInputEditTextView.checkAccount()){
             return;
         }
 
         if (TextUtils.isEmpty(password)) {
-            ToastUtils.toast(getContext(), R.string.py_password_empty);
+            ToastUtils.toast(getActivity(), R.string.py_password_empty);
+            return;
+        }
+        if (!GamaUtil.checkPassword(password)) {
+            toast(R.string.text_pwd_format);
             return;
         }
 
-        sLoginDialogv2.getLoginPresenter().starpyAccountLogin(sLoginDialogv2.getActivity(),account,password, "", savePwdCheckBox.isSelected());
+        sLoginDialogv2.getLoginPresenter().starpyAccountLogin(sLoginDialogv2.getActivity(),account,password, "", true);
 
     }
 

@@ -117,16 +117,13 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
 
 
         if (!GamaUtil.checkAccount(account)) {
-            ToastUtils.toast(getActivity(), errorStrAccount, Toast.LENGTH_LONG);
+            toast(R.string.text_account_format);
             return;
         }
         if (!GamaUtil.checkPassword(password)) {
-            ToastUtils.toast(getActivity(), errorStrPassword, Toast.LENGTH_LONG);
+            toast(R.string.text_pwd_format);
             return;
         }
-
-        String interfaceName = ApiRequestMethod.RequestVfcodeInterface.register.getString();
-
 
         sLoginDialogv2.getLoginPresenter().register(sLoginDialogv2.getActivity(), account, password, "areaCode", "phone", "vfcode", "");
     }

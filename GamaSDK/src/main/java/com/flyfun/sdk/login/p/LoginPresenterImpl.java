@@ -217,6 +217,13 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
         List<AccountModel> accountModels = GamaUtil.getAccountModels(this.mActivity);
         showMainHomeView();
+//        if (accountModels.isEmpty()){
+//            showMainHomeView();
+//        }else{
+//            if (iLoginView != null){
+//                iLoginView.showWelcomeBackView();
+//            }
+//        }
     }
 
     @Override
@@ -989,7 +996,6 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             iLoginView.showLoginWithRegView();
         }
     }
-
     private void showMainHomeView() {
         isAutoLogin = false;
         if (iLoginView != null){
@@ -1365,47 +1371,47 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_MG);
                     }else{
                         ToastUtils.toast(getActivity(),sLoginResponse.getMessage());
-                        if(isAutoLogin) {
-                            showLoginView();
-                        } else {
-                            refreshVfCode();
-                        }
+//                        if(isAutoLogin) {
+//                            showLoginView();
+//                        } else {
+//                            refreshVfCode();
+//                        }
                     }
                 }else{
                     ToastUtils.toast(getActivity(),R.string.py_error_occur);
-                    if(isAutoLogin) {
-                        showLoginView();
-                    } else {
-                        refreshVfCode();
-                    }
+//                    if(isAutoLogin) {
+//                        showLoginView();
+//                    } else {
+//                        refreshVfCode();
+//                    }
                 }
             }
 
             @Override
             public void timeout(String code) {
-                if(isAutoLogin) {
-                    showLoginView();
-                } else {
-                    refreshVfCode();
-                }
+//                if(isAutoLogin) {
+//                    showLoginView();
+//                } else {
+//                    refreshVfCode();
+//                }
             }
 
             @Override
             public void noData() {
-                if(isAutoLogin) {
-                    showLoginView();
-                } else {
-                    refreshVfCode();
-                }
+//                if(isAutoLogin) {
+//                    showLoginView();
+//                } else {
+//                    refreshVfCode();
+//                }
             }
 
             @Override
             public void cancel() {
-                if(isAutoLogin) {
-                    showLoginView();
-                } else {
-                    refreshVfCode();
-                }
+//                if(isAutoLogin) {
+//                    showLoginView();
+//                } else {
+//                    refreshVfCode();
+//                }
             }
         });
         accountLoginCmd.excute(SLoginResponse.class);

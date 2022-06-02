@@ -10,7 +10,7 @@ public class ApiRequestMethod {
     /**
      * 登入接口
      */
-    public static final String GS_REQUEST_METHOD_LOGIN = "login/v1/login.app";
+    public static final String GS_REQUEST_METHOD_LOGIN = "api/user/login";
 
     /**
      * 获取手机验证码接口
@@ -20,7 +20,7 @@ public class ApiRequestMethod {
     /**
      * 注册接口
      */
-    public static final String GS_REQUEST_METHOD_REGISTER = "login/v1/register.app";
+    public static final String GS_REQUEST_METHOD_REGISTER = "api/user/register";
 
     /**
      * 修改密码接口

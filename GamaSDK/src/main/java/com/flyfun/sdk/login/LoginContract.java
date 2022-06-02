@@ -39,6 +39,7 @@ public class LoginContract {
 
         void showLoginWithRegView();
         void showMainHomeView();
+        void showWelcomeBackView();
 
         void showPhoneVerifyView(String loginType, String thirdId);
 

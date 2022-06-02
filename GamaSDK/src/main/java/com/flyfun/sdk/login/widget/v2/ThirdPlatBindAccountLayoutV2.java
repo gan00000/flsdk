@@ -143,11 +143,9 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
         }
 
         if (!GamaUtil.checkAccount(account)) {
-            ToastUtils.toast(getActivity(), errorStrAccount, Toast.LENGTH_LONG);
             return;
         }
         if (!GamaUtil.checkPassword(password)) {
-            ToastUtils.toast(getActivity(), errorStrPassword, Toast.LENGTH_LONG);
             return;
         }
 

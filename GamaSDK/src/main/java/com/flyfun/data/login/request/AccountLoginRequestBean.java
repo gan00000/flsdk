@@ -20,24 +20,36 @@ public class AccountLoginRequestBean extends AdsRequestBean {
 
 	private String name;//用户账号名
 	private String pwd;
+	private String loginId;//新添加
+	private String password;//新添加
 	private String newPwd;
 	private String email;
-	private String captcha;
+	private String captcha; //验证码
 
-	public String getCaptcha() {
-		return captcha;
-	}
 
-	public void setCaptcha(String captcha) {
-		this.captcha = captcha;
-	}
+//	public String getLoginId() {
+//		return loginId;
+//	}
+
+//	public void setLoginId(String loginId) {
+//		this.loginId = loginId;
+//	}
+
+//	public String getPassword() {
+//		return password;
+//	}
+
+//	public void setPassword(String password) {
+//		this.password = password;
+//	}
 
 	public String getName() {
 		return name;
 	}
 
 	public void setName(String name) {
-		this.name = name.trim();
+		this.name = name;
+		this.loginId = name;
 	}
 
 	public String getPwd() {
@@ -46,6 +58,7 @@ public class AccountLoginRequestBean extends AdsRequestBean {
 
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
+		this.password = pwd;
 	}
 
 	public String getNewPwd() {
@@ -62,5 +75,9 @@ public class AccountLoginRequestBean extends AdsRequestBean {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public void setCaptcha(String captcha) {
+		this.captcha = captcha;
 	}
 }
