@@ -20,6 +20,7 @@ public class BaseReqeustBean extends AbsReqeustBean {
     private String androidId = "";
     private String imei = "";//因Google警告，不再获取imei信息
     private String systemVersion = "";
+    private String osVersion = "";
     private String deviceType = "";
     private String mac = "";//因Google警告，不再获取mac信息
     private String osLanguage = "";//系统语言
@@ -70,6 +71,7 @@ public class BaseReqeustBean extends AbsReqeustBean {
     public BaseReqeustBean(Context context) {
 
         systemVersion = ApkInfoUtil.getOsVersion();
+        osVersion = systemVersion;
         deviceType = ApkInfoUtil.getDeviceType();
         androidId = ApkInfoUtil.getAndroidId(context);
         osLanguage = ApkInfoUtil.getOsLanguage();

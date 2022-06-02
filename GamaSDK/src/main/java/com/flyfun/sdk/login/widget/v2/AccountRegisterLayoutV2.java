@@ -9,12 +9,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
-import com.flyfun.base.bean.GamaAreaInfoBean;
 import com.flyfun.sdk.SBaseRelativeLayout;
 import com.flyfun.base.utils.GamaUtil;
-import com.flyfun.data.login.constant.GSRequestMethod;
+import com.flyfun.data.login.constant.ApiRequestMethod;
 import com.gama.sdk.R;
 import com.flyfun.sdk.login.widget.SDKInputEditTextView;
 import com.flyfun.sdk.login.widget.SDKInputType;
@@ -127,7 +125,7 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
             return;
         }
 
-        String interfaceName = GSRequestMethod.RequestVfcodeInterface.register.getString();
+        String interfaceName = ApiRequestMethod.RequestVfcodeInterface.register.getString();
 
 
         sLoginDialogv2.getLoginPresenter().register(sLoginDialogv2.getActivity(), account, password, "areaCode", "phone", "vfcode", "");

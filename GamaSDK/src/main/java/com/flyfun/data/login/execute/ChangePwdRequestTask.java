@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.core.base.bean.BaseReqeustBean;
 import com.core.base.utils.SStringUtil;
-import com.flyfun.data.login.constant.GSRequestMethod;
+import com.flyfun.data.login.constant.ApiRequestMethod;
 import com.flyfun.data.login.request.ChangePwdRequestBean;
 
 //1000成功
@@ -26,7 +26,7 @@ public class ChangePwdRequestTask extends BaseLoginRequestTask {
         pwdRequestBean.setPwd(SStringUtil.toMd5(password.trim()));
         pwdRequestBean.setNewPwd(SStringUtil.toMd5(newPwd.trim()));
 
-        pwdRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_CHANGE_PASSWORD);
+        pwdRequestBean.setRequestMethod(ApiRequestMethod.GS_REQUEST_METHOD_CHANGE_PASSWORD);
 
     }
 

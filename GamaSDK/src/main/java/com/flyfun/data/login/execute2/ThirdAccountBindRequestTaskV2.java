@@ -7,7 +7,7 @@ import com.core.base.bean.BaseReqeustBean;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.flyfun.base.bean.SLoginType;
-import com.flyfun.data.login.constant.GSRequestMethod;
+import com.flyfun.data.login.constant.ApiRequestMethod;
 import com.flyfun.data.login.execute.BaseLoginRequestTask;
 import com.flyfun.data.login.request.ThirdAccountBindRequestBean;
 
@@ -56,7 +56,7 @@ public class ThirdAccountBindRequestTaskV2 extends BaseLoginRequestTask {
         thirdAccountBindRequestBean.setVfCode(vfcode);
         thirdAccountBindRequestBean.setFb_oauthToken(fbAccessToken);
 
-        thirdAccountBindRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_BIND);
+        thirdAccountBindRequestBean.setRequestMethod(ApiRequestMethod.GS_REQUEST_METHOD_BIND);
 
     }
 
@@ -94,7 +94,7 @@ public class ThirdAccountBindRequestTaskV2 extends BaseLoginRequestTask {
         thirdAccountBindRequestBean.setPhoneAreaCode(areaCode);
         thirdAccountBindRequestBean.setVfCode(vfcode);
 
-        thirdAccountBindRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_BIND);
+        thirdAccountBindRequestBean.setRequestMethod(ApiRequestMethod.GS_REQUEST_METHOD_BIND);
     }
 
     /**
@@ -137,7 +137,7 @@ public class ThirdAccountBindRequestTaskV2 extends BaseLoginRequestTask {
         thirdAccountBindRequestBean.setGoogleClientId(googleClientId);
 
 
-        thirdAccountBindRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_BIND);
+        thirdAccountBindRequestBean.setRequestMethod(ApiRequestMethod.GS_REQUEST_METHOD_BIND);
     }
 
     @Override

@@ -27,7 +27,6 @@ import com.flyfun.base.bean.SLoginType;
 import com.flyfun.base.cfg.ResConfig;
 import com.flyfun.base.utils.GamaUtil;
 import com.flyfun.data.login.constant.GSLoginCommonConstant;
-import com.flyfun.data.login.constant.GSRequestMethod;
 import com.flyfun.data.login.execute.AccountLoginRequestTask;
 import com.flyfun.data.login.execute.AccountRegisterRequestTask;
 import com.flyfun.data.login.execute.ChangePwdRequestTask;
@@ -54,6 +53,7 @@ import com.gama.sdk.R;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -184,7 +184,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     @Override
     public void autoLogin(Activity activity) {
         this.mActivity = activity;
-
+/*
         String previousLoginType = GamaUtil.getPreviousLoginType(activity);
 
         if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_MG, previousLoginType)) {//自動登錄
@@ -213,8 +213,10 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         }
         else {//進入登錄頁面
             showMainHomeView();
-        }
+        }*/
 
+        List<AccountModel> accountModels = GamaUtil.getAccountModels(this.mActivity);
+        showMainHomeView();
     }
 
     @Override
@@ -1016,7 +1018,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     private void handleRegisteOrLoginSuccess(SLoginResponse loginResponse, String rawResult, String loginType) {
 
         GamaUtil.saveSdkLoginData(getContext(), loginResponse.getRawResponse());
-        loginResponse.setLoginType(loginType);
+        loginResponse.getData().setLoginType(loginType);
         if (SStringUtil.isNotEmpty(loginType)) {//loginType为空时是账号注入登录，不能空时是其他普通登入
 
             GamaUtil.savePreviousLoginType(mActivity, loginType);
@@ -1030,12 +1032,12 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     }
                 }
                 if(SLoginType.LOGIN_TYPE_FB.equals(loginType) && faceBookUser != null) {
-                    loginResponse.setThirdToken(faceBookUser.getAccessTokenString());
-                    loginResponse.setGender(FbSp.getFbGender(mActivity));
-                    loginResponse.setBirthday(FbSp.getFbBirthday(mActivity));
-                    loginResponse.setIconUri(faceBookUser.getPictureUri());
-                    loginResponse.setThirdId(faceBookUser.getUserFbId());
-                    loginResponse.setNickName(faceBookUser.getName());
+                    loginResponse.getData().setThirdToken(faceBookUser.getAccessTokenString());
+                    loginResponse.getData().setGender(FbSp.getFbGender(mActivity));
+                    loginResponse.getData().setBirthday(FbSp.getFbBirthday(mActivity));
+                    loginResponse.getData().setIconUri(faceBookUser.getPictureUri());
+                    loginResponse.getData().setThirdId(faceBookUser.getUserFbId());
+                    loginResponse.getData().setNickName(faceBookUser.getName());
                 }
 
             } catch (Exception e) {

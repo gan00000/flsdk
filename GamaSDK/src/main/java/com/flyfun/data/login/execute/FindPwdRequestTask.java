@@ -5,7 +5,7 @@ import android.text.TextUtils;
 
 import com.core.base.bean.BaseReqeustBean;
 import com.core.base.utils.SStringUtil;
-import com.flyfun.data.login.constant.GSRequestMethod;
+import com.flyfun.data.login.constant.ApiRequestMethod;
 import com.flyfun.data.login.request.FindPwdRequestBean;
 
 public class FindPwdRequestTask extends BaseLoginRequestTask {
@@ -48,7 +48,7 @@ public class FindPwdRequestTask extends BaseLoginRequestTask {
 			pwdRequestBean.setPhone(phone);
 		}
 
-		pwdRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_FIND_PASSWORD);
+		pwdRequestBean.setRequestMethod(ApiRequestMethod.GS_REQUEST_METHOD_FIND_PASSWORD);
 
 
 	}

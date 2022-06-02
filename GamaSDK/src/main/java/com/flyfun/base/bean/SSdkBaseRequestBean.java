@@ -18,7 +18,7 @@ public class SSdkBaseRequestBean extends BaseReqeustBean {
 
     private String appKey;
     private String gameCode;
-    private String operatingSystem = "android";
+    private String os = "android";
     private String gameLanguage = "";//游戏语言
 
     private String accessToken;
@@ -63,10 +63,6 @@ public class SSdkBaseRequestBean extends BaseReqeustBean {
             signature = SStringUtil.toMd5(ResConfig.getAppKey(context) + gameCode + timestamp);
         }
         adId = GamaUtil.getGoogleAdId(context);
-//        if (SStringUtil.isEmpty(uniqueId) && SStringUtil.isNotEmpty(adId)){//确保免注册不受干扰
-//            uniqueId = adId;
-//        }
-
         uniqueId = GamaUtil.getGoogleAdid1AndroidId(context);
         referrer = GamaUtil.getReferrer(context);
 
@@ -88,10 +84,6 @@ public class SSdkBaseRequestBean extends BaseReqeustBean {
 
     public void setGameCode(String gameCode) {
         this.gameCode = gameCode;
-    }
-
-    public String getOperatingSystem() {
-        return operatingSystem;
     }
 
     public String getGameLanguage() {

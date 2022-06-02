@@ -11,219 +11,234 @@ import com.core.base.bean.BaseResponseModel;
 
 public class SLoginResponse extends BaseResponseModel {
 
-    private String userId = "";
-    /**
-     * gama的accesstoken
-     */
-    private String accessToken = "";
-    /**
-     * 登陆成功时间戳
-     */
-    private String timestamp = "";
-    private String freeRegisterName = "";
-    private String freeRegisterPwd = "";
+    Data data;
 
-    private String gameCode = "";
-
-    private String loginType = "";
-
-    /**
-     * 性别
-     */
-    private String gender = "";
-
-    /**
-     * 头像
-     */
-    private Uri iconUri;
-
-    /**
-     * 生日
-     */
-    private String birthday = "";
-
-    /**
-     * 三方平台id
-     */
-    private String thirdId = "";
-
-    /**
-     * 第三方的accesstoken
-     */
-    private String thirdToken = "";
-
-    /**
-     * 第三方的昵称
-     */
-    private String nickName = "";
-
-    /**
-     * 用户ip
-     */
-    private String playerIp = "";
-
-    private String beLinked = "";
-
-    public String getThirdToken() {
-        return thirdToken;
-    }
-
-    public void setThirdToken(String thirdToken) {
-        this.thirdToken = thirdToken;
+    public Data getData() {
+        return data;
     }
 
     public boolean isRequestSuccess(){//1001为注册成功
         return SUCCESS_CODE.equals(getCode()) || "1001".equals(getCode());
     }
 
-    public String getAccessToken() {
-        return accessToken;
+    public void setData(Data data) {
+        this.data = data;
     }
+    public static class Data{
 
-    public void setAccessToken(String accessToken) {
-        this.accessToken = accessToken;
-    }
+        private String userId = "";
+        /**
+         * gama的accesstoken
+         */
+        private String accessToken = "";
+        /**
+         * 登陆成功时间戳
+         */
+        private String timestamp = "";
+        private String freeRegisterName = "";
+        private String freeRegisterPwd = "";
 
+        private String gameCode = "";
 
+        private String loginType = "";
 
-    public String getGameCode() {
-        return gameCode;
-    }
+        /**
+         * 性别
+         */
+        private String gender = "";
 
-    public void setGameCode(String gameCode) {
-        this.gameCode = gameCode;
-    }
+        /**
+         * 头像
+         */
+        private Uri iconUri;
 
+        /**
+         * 生日
+         */
+        private String birthday = "";
 
-    public String getUserId() {
-        return userId;
-    }
+        /**
+         * 三方平台id
+         */
+        private String thirdId = "";
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
+        /**
+         * 第三方的accesstoken
+         */
+        private String thirdToken = "";
 
+        /**
+         * 第三方的昵称
+         */
+        private String nickName = "";
 
-    public String getFreeRegisterName() {
-        return freeRegisterName;
-    }
+        /**
+         * 用户ip
+         */
+        private String playerIp = "";
 
-    public void setFreeRegisterName(String freeRegisterName) {
-        this.freeRegisterName = freeRegisterName;
-    }
+        private String beLinked = "";
 
-    public String getFreeRegisterPwd() {
-        return freeRegisterPwd;
-    }
+        public String getThirdToken() {
+            return thirdToken;
+        }
 
-    public void setFreeRegisterPwd(String freeRegisterPwd) {
-        this.freeRegisterPwd = freeRegisterPwd;
-    }
+        public void setThirdToken(String thirdToken) {
+            this.thirdToken = thirdToken;
+        }
 
-    public String getTimestamp() {
-        return timestamp;
-    }
+        public String getAccessToken() {
+            return accessToken;
+        }
 
-    public void setTimestamp(String timestamp) {
-        this.timestamp = timestamp;
-    }
-
-    public String getLoginType() {
-        return loginType;
-    }
-
-    public void setLoginType(String loginType) {
-        this.loginType = loginType;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public Uri getIconUri() {
-        return iconUri;
-    }
-
-    public void setIconUri(Uri iconUri) {
-        this.iconUri = iconUri;
-    }
-
-    public String getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
-    }
-
-    public String getThirdId() {
-        return thirdId;
-    }
-
-    public void setThirdId(String thirdId) {
-        this.thirdId = thirdId;
-    }
-
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
+        public void setAccessToken(String accessToken) {
+            this.accessToken = accessToken;
+        }
 
 
-    public boolean isLinked() {
-        return "1".equals(beLinked);
-    }
 
-    public void setBeLinked(String beLinked) {
-        this.beLinked = beLinked;
-    }
+        public String getGameCode() {
+            return gameCode;
+        }
 
-    public String getPlayerIp() {
-        return playerIp;
-    }
+        public void setGameCode(String gameCode) {
+            this.gameCode = gameCode;
+        }
 
-    public void setPlayerIp(String playerIp) {
-        this.playerIp = playerIp;
-    }
 
-    public String getBeLinked() {
-        return beLinked;
-    }
+        public String getUserId() {
+            return userId;
+        }
 
-    @Override
-    public String toString() {
-        return "SLoginResponse{" +
-                "userId='" + userId + '\'' +
-                ", accessToken='" + accessToken + '\'' +
-                ", timestamp='" + timestamp + '\'' +
-                ", freeRegisterName='" + freeRegisterName + '\'' +
-                ", freeRegisterPwd='" + freeRegisterPwd + '\'' +
-                ", gameCode='" + gameCode + '\'' +
-                ", loginType='" + loginType + '\'' +
-                ", gender='" + gender + '\'' +
-                ", iconUri=" + iconUri +
-                ", birthday='" + birthday + '\'' +
-                ", thirdId='" + thirdId + '\'' +
-                ", thirdToken='" + thirdToken + '\'' +
-                ", nickName='" + nickName + '\'' +
-                ", playerIp='" + playerIp + '\'' +
-                ", beLinked='" + beLinked + '\'' +
-                '}';
-    }
+        public void setUserId(String userId) {
+            this.userId = userId;
+        }
 
-    public String msg() {
-        return "SLoginResponse{" +
-                "userId='" + userId + '\'' +
-                ", accessToken='" + accessToken + '\'' +
-                ", timestamp='" + timestamp + '\'' +
-                ", loginType='" + loginType + '\'' +
-                '}';
+
+        public String getFreeRegisterName() {
+            return freeRegisterName;
+        }
+
+        public void setFreeRegisterName(String freeRegisterName) {
+            this.freeRegisterName = freeRegisterName;
+        }
+
+        public String getFreeRegisterPwd() {
+            return freeRegisterPwd;
+        }
+
+        public void setFreeRegisterPwd(String freeRegisterPwd) {
+            this.freeRegisterPwd = freeRegisterPwd;
+        }
+
+        public String getTimestamp() {
+            return timestamp;
+        }
+
+        public void setTimestamp(String timestamp) {
+            this.timestamp = timestamp;
+        }
+
+        public String getLoginType() {
+            return loginType;
+        }
+
+        public void setLoginType(String loginType) {
+            this.loginType = loginType;
+        }
+
+        public String getGender() {
+            return gender;
+        }
+
+        public void setGender(String gender) {
+            this.gender = gender;
+        }
+
+        public Uri getIconUri() {
+            return iconUri;
+        }
+
+        public void setIconUri(Uri iconUri) {
+            this.iconUri = iconUri;
+        }
+
+        public String getBirthday() {
+            return birthday;
+        }
+
+        public void setBirthday(String birthday) {
+            this.birthday = birthday;
+        }
+
+        public String getThirdId() {
+            return thirdId;
+        }
+
+        public void setThirdId(String thirdId) {
+            this.thirdId = thirdId;
+        }
+
+        public String getNickName() {
+            return nickName;
+        }
+
+        public void setNickName(String nickName) {
+            this.nickName = nickName;
+        }
+
+
+        public boolean isLinked() {
+            return "1".equals(beLinked);
+        }
+
+        public void setBeLinked(String beLinked) {
+            this.beLinked = beLinked;
+        }
+
+        public String getPlayerIp() {
+            return playerIp;
+        }
+
+        public void setPlayerIp(String playerIp) {
+            this.playerIp = playerIp;
+        }
+
+        public String getBeLinked() {
+            return beLinked;
+        }
+
+        @Override
+        public String toString() {
+            return "SLoginResponse{" +
+                    "userId='" + userId + '\'' +
+                    ", accessToken='" + accessToken + '\'' +
+                    ", timestamp='" + timestamp + '\'' +
+                    ", freeRegisterName='" + freeRegisterName + '\'' +
+                    ", freeRegisterPwd='" + freeRegisterPwd + '\'' +
+                    ", gameCode='" + gameCode + '\'' +
+                    ", loginType='" + loginType + '\'' +
+                    ", gender='" + gender + '\'' +
+                    ", iconUri=" + iconUri +
+                    ", birthday='" + birthday + '\'' +
+                    ", thirdId='" + thirdId + '\'' +
+                    ", thirdToken='" + thirdToken + '\'' +
+                    ", nickName='" + nickName + '\'' +
+                    ", playerIp='" + playerIp + '\'' +
+                    ", beLinked='" + beLinked + '\'' +
+                    '}';
+        }
+
+        public String print() {
+            return "SLoginResponse{" +
+                    "userId='" + userId + '\'' +
+                    ", accessToken='" + accessToken + '\'' +
+                    ", timestamp='" + timestamp + '\'' +
+                    ", loginType='" + loginType + '\'' +
+                    '}';
+        }
+
     }
 }
+
+

@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.core.base.bean.BaseReqeustBean;
 import com.core.base.utils.SStringUtil;
-import com.flyfun.data.login.constant.GSRequestMethod;
+import com.flyfun.data.login.constant.ApiRequestMethod;
 import com.flyfun.data.login.request.AccountLoginRequestBean;
 
 public class AccountLoginRequestTask extends BaseLoginRequestTask {
@@ -23,7 +23,7 @@ public class AccountLoginRequestTask extends BaseLoginRequestTask {
 		password = SStringUtil.toMd5(password);
 		requestBean.setPwd(password);
 		requestBean.setCaptcha(vfcode);
-		requestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_LOGIN);
+		requestBean.setRequestMethod(ApiRequestMethod.GS_REQUEST_METHOD_LOGIN);
 	}
 
 	public AccountLoginRequestTask(Context mContext, String userName, String password) {

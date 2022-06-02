@@ -5,7 +5,7 @@ import android.content.Context;
 import com.core.base.bean.BaseReqeustBean;
 import com.core.base.utils.SStringUtil;
 import com.flyfun.base.bean.SLoginType;
-import com.flyfun.data.login.constant.GSRequestMethod;
+import com.flyfun.data.login.constant.ApiRequestMethod;
 import com.flyfun.data.login.request.ThirdLoginRegRequestBean;
 
 /**
@@ -41,7 +41,7 @@ public class ThirdLoginRegRequestTask extends BaseLoginRequestTask {
         thirdLoginRegRequestBean.setFb_oauthToken(accessTokenString);
 
 
-        thirdLoginRegRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_THIRD_LOGIN);
+        thirdLoginRegRequestBean.setRequestMethod(ApiRequestMethod.GS_REQUEST_METHOD_THIRD_LOGIN);
     }
 
     /**
@@ -55,7 +55,7 @@ public class ThirdLoginRegRequestTask extends BaseLoginRequestTask {
 
         sdkBaseRequestBean = thirdLoginRegRequestBean;
 
-        thirdLoginRegRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_THIRD_LOGIN);
+        thirdLoginRegRequestBean.setRequestMethod(ApiRequestMethod.GS_REQUEST_METHOD_THIRD_LOGIN);
     }
 
     /**
@@ -75,7 +75,7 @@ public class ThirdLoginRegRequestTask extends BaseLoginRequestTask {
         thirdLoginRegRequestBean.setRegistPlatform(registPlatform);
         thirdLoginRegRequestBean.setThirdPlatId(thirdPlatId);
 
-        thirdLoginRegRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_THIRD_LOGIN);
+        thirdLoginRegRequestBean.setRequestMethod(ApiRequestMethod.GS_REQUEST_METHOD_THIRD_LOGIN);
     }
 
     @Override

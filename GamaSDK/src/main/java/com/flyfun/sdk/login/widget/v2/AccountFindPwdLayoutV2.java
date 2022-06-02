@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
 import com.flyfun.sdk.SBaseRelativeLayout;
-import com.flyfun.data.login.constant.GSRequestMethod;
+import com.flyfun.data.login.constant.ApiRequestMethod;
 import com.gama.sdk.R;
 import com.flyfun.sdk.login.widget.SDKInputEditTextView;
 import com.flyfun.sdk.login.widget.SDKInputType;
@@ -127,7 +127,7 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
             ToastUtils.toast(getActivity(), R.string.py_area_code_empty);
             return;
         }
-        String interfaceName = GSRequestMethod.RequestVfcodeInterface.findpwd.getString();
+        String interfaceName = ApiRequestMethod.RequestVfcodeInterface.findpwd.getString();
 
 //        sLoginDialogv2.getLoginPresenter().getEmailVfcode();
     }

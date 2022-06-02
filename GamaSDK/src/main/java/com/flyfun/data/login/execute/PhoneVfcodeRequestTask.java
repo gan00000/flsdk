@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.core.base.bean.BaseReqeustBean;
 import com.core.base.utils.SStringUtil;
-import com.flyfun.data.login.constant.GSRequestMethod;
+import com.flyfun.data.login.constant.ApiRequestMethod;
 import com.flyfun.data.login.request.PhoneVfcodeRequestBean;
 
 public class PhoneVfcodeRequestTask extends BaseLoginRequestTask {
@@ -16,7 +16,7 @@ public class PhoneVfcodeRequestTask extends BaseLoginRequestTask {
 	 * @param mContext
 	 * @param areaCode
 	 * @param phone
-	 * @param interfaceName 用到的接口名称，注册：1，绑定：2，手机验证：3 {@link GSRequestMethod.RequestVfcodeInterface}
+	 * @param interfaceName 用到的接口名称，注册：1，绑定：2，手机验证：3 {@link ApiRequestMethod.RequestVfcodeInterface}
 	 */
 	public PhoneVfcodeRequestTask(Context mContext, String areaCode, String phone, String interfaceName) {
 		super(mContext);
@@ -26,7 +26,7 @@ public class PhoneVfcodeRequestTask extends BaseLoginRequestTask {
 		requestBean.setPhone(phone);
 		requestBean.setPhoneAreaCode(areaCode);
 		requestBean.setInterfaces(interfaceName);
-		requestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_GET_PHONT_VFCODE);
+		requestBean.setRequestMethod(ApiRequestMethod.GS_REQUEST_METHOD_GET_PHONT_VFCODE);
 
 	}
 
@@ -38,7 +38,7 @@ public class PhoneVfcodeRequestTask extends BaseLoginRequestTask {
 		sdkBaseRequestBean = requestBean;
 		requestBean.setEmail(email);
 		requestBean.setInterfaces(interfaceName);
-		requestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_GET_PHONT_VFCODE);
+		requestBean.setRequestMethod(ApiRequestMethod.GS_REQUEST_METHOD_GET_PHONT_VFCODE);
 
 	}
 

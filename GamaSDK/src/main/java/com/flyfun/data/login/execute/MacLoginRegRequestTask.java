@@ -7,7 +7,7 @@ import com.core.base.bean.BaseReqeustBean;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.flyfun.base.bean.SLoginType;
-import com.flyfun.data.login.constant.GSRequestMethod;
+import com.flyfun.data.login.constant.ApiRequestMethod;
 import com.flyfun.data.login.request.MacLoginRegRequestBean;
 import com.flyfun.base.utils.GamaUtil;
 
@@ -36,7 +36,7 @@ public class MacLoginRegRequestTask extends BaseLoginRequestTask {
         }
         macLoginRegRequestBean.setUniqueId(uniqueId);
 
-        macLoginRegRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_FREE_LOGIN);
+        macLoginRegRequestBean.setRequestMethod(ApiRequestMethod.GS_REQUEST_METHOD_FREE_LOGIN);
     }
 
     @Override

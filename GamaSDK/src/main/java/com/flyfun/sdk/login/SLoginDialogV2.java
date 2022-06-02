@@ -23,7 +23,6 @@ import com.flyfun.sdk.login.widget.v2.AccountFindPwdLayoutV2;
 import com.flyfun.sdk.login.widget.v2.AccountManagerLayoutV2;
 import com.flyfun.sdk.login.widget.v2.LoginWithRegLayout;
 import com.flyfun.sdk.login.widget.v2.MainHomeLayout;
-import com.flyfun.sdk.login.widget.v2.TermsViewV3;
 import com.flyfun.sdk.login.widget.v2.ThirdPlatBindAccountLayoutV2;
 import com.flyfun.thirdlib.facebook.SFacebookProxy;
 import com.flyfun.thirdlib.google.SGoogleSignIn;
@@ -52,7 +51,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 //    private TextView autoLoginWaitTime;
 //    private TextView autoLoginChangeAccount;
 
-    private SLoginBaseRelativeLayout mainHomwView;
+    private SLoginBaseRelativeLayout mainHomeView;
     private SLoginBaseRelativeLayout loginWithRegView;
     private SLoginBaseRelativeLayout accountLoginView;
     private SLoginBaseRelativeLayout registerView;
@@ -175,6 +174,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         //返回键的回退逻辑
        /* if(autoLoginLayout != null && autoLoginLayout.getVisibility() == View.VISIBLE) {
             if(iLoginPresenter != null) { //如果自动登录就返回登录界面
@@ -185,7 +185,8 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
                     iLoginCallBack.onLogin(null);
                 }
             }
-        } else */if(loginWithRegView != null && loginWithRegView.getVisibility() == View.VISIBLE) { //如果主界面显示就退出登录
+        } else */
+       /* if(mainHomeView != null && mainHomeView.getVisibility() == View.VISIBLE) { //如果主界面显示就退出登录
             super.onBackPressed();
             if(iLoginCallBack != null) { //回调退出登录界面的状态
                 iLoginCallBack.onLogin(null);
@@ -202,7 +203,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
             }
         } else {
             super.onBackPressed();
-        }
+        }*/
     }
 
     public void popBackStack(SLoginBaseRelativeLayout baseRelativeLayout) {
@@ -237,14 +238,14 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 
     public void toMainHomeView() {
 
-        if (mainHomwView == null || !viewPageList.contains(mainHomwView)){
+        if (mainHomeView == null || !viewPageList.contains(mainHomeView)){
 
-            mainHomwView = new MainHomeLayout(context);
-            mainHomwView.setLoginDialogV2(this);
-            contentFrameLayout.addView(mainHomwView);
-            viewPageList.add(mainHomwView);
+            mainHomeView = new MainHomeLayout(context);
+            mainHomeView.setLoginDialogV2(this);
+            contentFrameLayout.addView(mainHomeView);
+            viewPageList.add(mainHomeView);
         }
-        setViewPageVisable(mainHomwView);
+        setViewPageVisable(mainHomeView);
     }
 
     private void setViewPageVisable(SLoginBaseRelativeLayout baseRelativeLayout) {

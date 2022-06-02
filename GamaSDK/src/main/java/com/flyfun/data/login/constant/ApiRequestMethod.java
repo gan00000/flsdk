@@ -1,6 +1,6 @@
 package com.flyfun.data.login.constant;
 
-public class GSRequestMethod {
+public class ApiRequestMethod {
 
     /**
      * 验证码接口
@@ -45,7 +45,7 @@ public class GSRequestMethod {
     /**
      * 免注册登入接口
      */
-    public static final String GS_REQUEST_METHOD_FREE_LOGIN = "login/v1/free-register.app";
+    public static final String GS_REQUEST_METHOD_FREE_LOGIN = "api/user/visitorLogin";
 
     /**
      * 手机验证接口

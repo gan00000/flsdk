@@ -87,7 +87,7 @@ public class StarEventLogger {
         try {
             PL.i(TAG, "登入上報");
             // TODO: 2018/4/16 Android登录事件名 gama_login_event_android
-            String userId = loginResponse.getUserId();
+            String userId = loginResponse.getData().getUserId();
             //Facebook上报
             Bundle b = new Bundle();
             b.putString(SdkAdsConstant.GAMA_EVENT_USER_ID, userId);
@@ -118,7 +118,7 @@ public class StarEventLogger {
         try {
             PL.i(TAG, "註冊上報");
             // TODO: 2018/4/16 Android注册事件名 gama_register_event_android
-            String userId = loginResponse.getUserId();
+            String userId = loginResponse.getData().getUserId();
             //Facebook上报
             Bundle b = new Bundle();
             b.putString(SdkAdsConstant.GAMA_EVENT_USER_ID, userId);

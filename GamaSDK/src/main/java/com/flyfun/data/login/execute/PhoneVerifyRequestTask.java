@@ -5,7 +5,7 @@ import android.text.TextUtils;
 
 import com.core.base.bean.BaseReqeustBean;
 import com.core.base.utils.SStringUtil;
-import com.flyfun.data.login.constant.GSRequestMethod;
+import com.flyfun.data.login.constant.ApiRequestMethod;
 import com.flyfun.data.login.request.PhoneVerifyRequestBean;
 
 public class PhoneVerifyRequestTask extends BaseLoginRequestTask {
@@ -29,7 +29,7 @@ public class PhoneVerifyRequestTask extends BaseLoginRequestTask {
 		requestBean.setPhoneAreaCode(area);
 		requestBean.setThirdPlatId(thirdId);
 		requestBean.setRegistPlatform(registPlatform);
-		requestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_PHONE_VERIFY);
+		requestBean.setRequestMethod(ApiRequestMethod.GS_REQUEST_METHOD_PHONE_VERIFY);
 	}
 
 	@Override
