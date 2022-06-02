@@ -58,25 +58,6 @@ public class ThirdLoginRegRequestTask extends BaseLoginRequestTask {
         thirdLoginRegRequestBean.setRequestMethod(ApiRequestMethod.GS_REQUEST_METHOD_THIRD_LOGIN);
     }
 
-    /**
-     * 其他第三方登录使用
-     * @param context
-     * @param thirdPlatId
-     * @param registPlatform
-     */
-    @Deprecated
-    public ThirdLoginRegRequestTask(Context context, String thirdPlatId, String registPlatform) {
-        super(context);
-
-        thirdLoginRegRequestBean = new ThirdLoginRegRequestBean(context);
-
-        sdkBaseRequestBean = thirdLoginRegRequestBean;
-
-        thirdLoginRegRequestBean.setRegistPlatform(registPlatform);
-        thirdLoginRegRequestBean.setThirdPlatId(thirdPlatId);
-
-        thirdLoginRegRequestBean.setRequestMethod(ApiRequestMethod.GS_REQUEST_METHOD_THIRD_LOGIN);
-    }
 
     @Override
     public BaseReqeustBean createRequestBean() {
@@ -84,7 +65,7 @@ public class ThirdLoginRegRequestTask extends BaseLoginRequestTask {
 
 
         thirdLoginRegRequestBean.setSignature(SStringUtil.toMd5(thirdLoginRegRequestBean.getAppKey() + thirdLoginRegRequestBean.getTimestamp() +
-                thirdLoginRegRequestBean.getThirdPlatId() + thirdLoginRegRequestBean.getGameCode() + thirdLoginRegRequestBean.getRegistPlatform()));
+                thirdLoginRegRequestBean.getThirdPlatId() + thirdLoginRegRequestBean.getRegistPlatform()));
 
         return thirdLoginRegRequestBean;
     }

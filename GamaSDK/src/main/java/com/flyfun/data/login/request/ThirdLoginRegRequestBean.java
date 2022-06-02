@@ -17,11 +17,15 @@ public class ThirdLoginRegRequestBean extends AdsRequestBean {
 		super(context);
 	}
 
+	private String thirdAccount;
+
 	/**
 	 * registPlatform 第三方登陆平台的标识符
 	 */
 	private String registPlatform;
+	private String loginMode;
 	private String thirdPlatId;
+	private String thirdLoginId;
 
 	/**
 	 * apps 关联应用的FB ID
@@ -46,6 +50,7 @@ public class ThirdLoginRegRequestBean extends AdsRequestBean {
 
 	public void setRegistPlatform(String registPlatform) {
 		this.registPlatform = registPlatform;
+		this.loginMode = registPlatform;
 	}
 
 	public String getThirdPlatId() {
@@ -54,6 +59,7 @@ public class ThirdLoginRegRequestBean extends AdsRequestBean {
 
 	public void setThirdPlatId(String thirdPlatId) {
 		this.thirdPlatId = thirdPlatId;
+		this.thirdLoginId = thirdPlatId;
 	}
 
 	public String getApps() {
@@ -94,5 +100,13 @@ public class ThirdLoginRegRequestBean extends AdsRequestBean {
 
 	public void setGoogleClientId(String googleClientId) {
 		this.googleClientId = googleClientId;
+	}
+
+	public String getThirdAccount() {
+		return thirdAccount;
+	}
+
+	public void setThirdAccount(String thirdAccount) {
+		this.thirdAccount = thirdAccount;
 	}
 }

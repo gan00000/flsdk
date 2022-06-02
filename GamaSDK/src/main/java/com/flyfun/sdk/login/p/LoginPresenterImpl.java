@@ -266,6 +266,8 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     thirdLoginRegRequestBean.setRegistPlatform(SLoginType.LOGIN_TYPE_GOOGLE);
                     thirdLoginRegRequestBean.setGoogleClientId(ResConfig.getGoogleClientId(activity));
                     thirdLoginRegRequestBean.setGoogleIdToken(idTokenString);
+
+                    thirdLoginRegRequestBean.setThirdAccount(mEmail);
                     thirdPlatLogin(activity, thirdLoginRegRequestBean);
                 } else {
                     if (isAutoLogin) {
@@ -295,8 +297,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     public void thirdPlatLogin(final Activity activity, final ThirdLoginRegRequestBean thirdLoginRegRequestBean) {
         this.mActivity = activity;
 
-        ThirdLoginRegRequestTask cmd = new ThirdLoginRegRequestTask(getActivity(),
-                thirdLoginRegRequestBean);
+        ThirdLoginRegRequestTask cmd = new ThirdLoginRegRequestTask(getActivity(), thirdLoginRegRequestBean);
         cmd.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(), "Loading..."));
         cmd.setReqCallBack(new ISReqCallBack<SLoginResponse>() {
             @Override
@@ -304,15 +305,13 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 if (sLoginResponse != null) {
 
                     if (sLoginResponse.isRequestSuccess()){
+
+                        GamaUtil.saveAccountModel(getContext(), thirdLoginRegRequestBean.getRegistPlatform(),"","",
+                                sLoginResponse.getData().getUserId(),
+                                thirdLoginRegRequestBean.getThirdPlatId(),
+                                thirdLoginRegRequestBean.getThirdAccount(),true);
+
                         handleRegisteOrLoginSuccess(sLoginResponse,rawResult, thirdLoginRegRequestBean.getRegistPlatform());
-                        return;
-                    } else if ("9000".equals(sLoginResponse.getCode())) { //需要验证手机
-                        ToastUtils.toast(getActivity(), sLoginResponse.getMessage());
-                        if (isAutoLogin) {
-                            //如果是从自动登入过来的，就要先隐藏自动登入界面，显示登入主界面
-                            showLoginWithRegView();
-                        }
-                        showPhoneVerifyView(thirdLoginRegRequestBean.getRegistPlatform(), thirdLoginRegRequestBean.getThirdPlatId());
                         return;
                     } else {
                         ToastUtils.toast(getActivity(), sLoginResponse.getMessage());
@@ -320,22 +319,18 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 } else {
                     ToastUtils.toast(getActivity(), R.string.py_error_occur);
                 }
-                showLoginWithRegView();
             }
 
             @Override
             public void timeout(String code) {
-                showLoginWithRegView();
             }
 
             @Override
             public void noData() {
-                showLoginWithRegView();
             }
 
             @Override
             public void cancel() {
-                showLoginWithRegView();
             }
         });
         cmd.excute(SLoginResponse.class);
@@ -560,6 +555,12 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             public void success(SLoginResponse sLoginResponse, String rawResult) {
                 if (sLoginResponse != null) {
                     if (sLoginResponse.isRequestSuccess()) {
+
+                        GamaUtil.saveAccountModel(getContext(), SLoginType.LOGIN_TYPE_GUEST,"","",
+                                sLoginResponse.getData().getUserId(),
+                                macLoginRegCmd.getSdkBaseRequestBean().getUniqueId(),
+                                "",true);
+
                         handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GUEST);
                     }
 //                    else if (checkIsMacLoginLimit(activity, sLoginResponse, rawResult)) {
@@ -1365,7 +1366,6 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     if (sLoginResponse.isRequestSuccess()) {
 //                        GamaUtil.saveAccount(getContext(),account);
                         if(isSaveAccount) {
-
                             GamaUtil.saveAccountModel(activity,account,password,true);
                         }
                         handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_MG);

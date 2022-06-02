@@ -40,7 +40,7 @@ public class ApiRequestMethod {
     /**
      * 绑定账号接口
      */
-    public static final String GS_REQUEST_METHOD_THIRD_LOGIN = "login/v1/third-party-login.app";
+    public static final String GS_REQUEST_METHOD_THIRD_LOGIN = "api/user/thirdPartyLogin";
 
     /**
      * 免注册登入接口
