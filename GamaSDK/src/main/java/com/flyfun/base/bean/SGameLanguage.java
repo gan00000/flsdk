@@ -28,7 +28,7 @@ public enum SGameLanguage {
     /**
      * 简中
      */
-    zh_CH("zh_CH");
+    zh_CN("zh_CN");
 
     private String lang;
 

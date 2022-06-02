@@ -24,7 +24,7 @@ public class Localization {
         }
         ResConfig.saveGameLanguage(context,gameLanguage.getLanguage());
 
-        if (gameLanguage == SGameLanguage.zh_CH){
+        if (gameLanguage == SGameLanguage.zh_CN){
 
             ApkInfoUtil.updateConfigurationLocale(context, Locale.SIMPLIFIED_CHINESE);//简体
 
@@ -49,8 +49,8 @@ public class Localization {
         if (SStringUtil.isEqual(SGameLanguage.en_US.getLanguage(), language)){
             return SGameLanguage.en_US;
         }
-        if (SStringUtil.isEqual(SGameLanguage.zh_CH.getLanguage(), language)){
-            return SGameLanguage.zh_CH;
+        if (SStringUtil.isEqual(SGameLanguage.zh_CN.getLanguage(), language)){
+            return SGameLanguage.zh_CN;
         }
         if (SStringUtil.isEqual(SGameLanguage.ko_KR.getLanguage(), language)){
             return SGameLanguage.ko_KR;
