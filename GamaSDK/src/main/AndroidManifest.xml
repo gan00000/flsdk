@@ -49,14 +49,13 @@
             android:theme="@style/Gama.Theme.AppCompat.Light.NoActionBar.FullScreen.Translucent"/>
 
 
-        <!-- ==========================共同需要的配置============================ -->
+        <!-- ==========================fb共同需要的配置============================ -->
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
-
-
-        <!-- =======================4.x要配置=============================== -->
+        <meta-data android:name="com.facebook.sdk.ClientToken"
+            android:value="@string/facebook_client_token"/>
 
         <activity
             android:name="com.facebook.FacebookActivity"
@@ -75,6 +74,7 @@
             </intent-filter>
         </activity>
 
+
         <!--
          The initialization ContentProvider will call FacebookSdk.sdkInitialize automatically
          with the application context. This config is merged in with the host app's manifest,
@@ -90,9 +90,9 @@
             android:exported="false" />
 
         <!-- 如需要从Facebook进行本地图片分享，需要开启以下两项 -->
-        <meta-data
-            android:name="com.facebook.sdk.ApplicationName"
-            android:value="@string/facebook_app_name" />
+<!--        <meta-data-->
+<!--            android:name="com.facebook.sdk.ApplicationName"-->
+<!--            android:value="@string/facebook_app_name" />-->
 
         <!--如果要通过 Android 版 Facebook 应用分享链接、图片或视频，还需要在清单文件中声明 FacebookContentProvider-->
         <provider
@@ -100,6 +100,9 @@
             android:authorities="@string/facebook_authorities"
             android:exported="true" />
         <!-- 以上 -->
+
+<!--        ================================-->
+<!--        ================================-->
 
         <!--The AppsFlyer Install Receiver is first and will broadcast to all receivers placed below it-->
         <receiver android:name="com.appsflyer.MultipleInstallBroadcastReceiver" android:exported="true">

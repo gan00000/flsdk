@@ -144,82 +144,6 @@ public class SFacebookProxy {
 		
 	}
 
-	/*public void fbLogin(final Fragment fragment, final FbLoginCallBack fbLoginCallBack) {
-		if (loginManager == null) {
-			loginManager = LoginManager.getInstance();
-		}
-		if (callbackManager == null) {
-			callbackManager = CallbackManager.Factory.create();
-		}
-		LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-
-			@Override
-			public void onSuccess(LoginResult result) {
-				Log.d(FB_TAG, "onSuccess");
-				if(result != null) {
-					Log.d(FB_TAG, "login result: " + result.toString());
-				}
-				if (fbLoginCallBack == null){
-					return;
-				}
-				User user = new User();
-				user.setUserId(result.getAccessToken().getUserId());
-				FbSp.saveFbId(fragment.getActivity(),user.getUserId());
-				requestTokenForBusines(fragment.getActivity(),user, fbLoginCallBack);
-			}
-
-			@Override
-			public void onError(FacebookException error) {
-				Log.d(FB_TAG, "onError:" + error.getMessage());
-				if (fbLoginCallBack != null) {
-					fbLoginCallBack.onError(error.getMessage());
-				}
-			}
-
-			@Override
-			public void onCancel() {
-				Log.d(FB_TAG, "onCancel");
-				if (fbLoginCallBack != null) {
-					fbLoginCallBack.onCancel();
-				}
-			}
-		});
-
-		AccessToken accessToken = AccessToken.getCurrentAccessToken();
-		if (accessToken == null) {
-			Log.d(FB_TAG, "accessToken == null");
-			loginManager.setDefaultAudience(defaultAudience);
-			loginManager.setLoginBehavior(loginBehavior);
-			loginManager.logInWithReadPermissions(fragment, permissions);
-
-		} else {
-			getMyProfile(fragment.getActivity(), new FbLoginCallBack() {
-				@Override
-				public void onCancel() {
-					Log.d(FB_TAG, "onCancel");
-					if (fbLoginCallBack != null) {
-						fbLoginCallBack.onCancel();
-					}
-				}
-
-				@Override
-				public void onError(String message) {
-					Log.d(FB_TAG, "onError:" + message);
-					if (fbLoginCallBack != null) {
-						fbLoginCallBack.onError(message);
-					}
-				}
-
-				@Override
-				public void onSuccess(User user) {
-					FbSp.saveFbId(fragment.getActivity(),user.getUserId());
-					requestTokenForBusines(fragment.getActivity(),user, fbLoginCallBack);
-				}
-			});
-		}
-
-	}*/
-
 	public void fbLogin(final Activity activity, final FbLoginCallBack fbLoginCallBack) {
 		fbLogin(activity, permissions, fbLoginCallBack);
 	}
@@ -299,30 +223,6 @@ public class SFacebookProxy {
 			loginManager.setDefaultAudience(defaultAudience);
 			loginManager.setLoginBehavior(loginBehavior);
 			loginManager.logInWithReadPermissions(activity, permissions);
-//			Log.d(FB_TAG, "accessToken == " + accessToken);
-//			getMyProfile(activity, new FbLoginCallBack() {
-//				@Override
-//				public void onCancel() {
-//					Log.d(FB_TAG, "onCancel");
-//					if (fbLoginCallBack != null) {
-//						fbLoginCallBack.onCancel();
-//					}
-//				}
-//
-//				@Override
-//				public void onError(String message) {
-//					Log.d(FB_TAG, "onError:" + message);
-//					if (fbLoginCallBack != null) {
-//						fbLoginCallBack.onError(message);
-//					}
-//				}
-//
-//				@Override
-//				public void onSuccess(User user) {
-//					FbSp.saveFbId(activity,user.getUserId());
-//					requestTokenForBusines(activity,user, fbLoginCallBack);
-//				}
-//			});
 		}
 
 	}
@@ -438,17 +338,17 @@ public class SFacebookProxy {
 		 * Instead we post some app information we scrape from the app store
 		 * directly with the Webcrawler. This may not include images.
 		 */
-		Builder builder = new Builder().setContentTitle(shareCaption).setContentDescription(
-				shareDescrition);
-		if (!TextUtils.isEmpty(shareLinkUrl)) {
-			builder.setContentUrl(Uri.parse(shareLinkUrl));
-		}
-		if (!TextUtils.isEmpty(sharePictureUrl)) {
-			builder.setImageUrl(Uri.parse(sharePictureUrl));
-		}
-		ShareLinkContent linkContent = builder.build();
-
-		shareDialog.show(linkContent);
+//		Builder builder = new Builder().setContentTitle(shareCaption).setContentDescription(
+//				shareDescrition);
+//		if (!TextUtils.isEmpty(shareLinkUrl)) {
+//			builder.setContentUrl(Uri.parse(shareLinkUrl));
+//		}
+//		if (!TextUtils.isEmpty(sharePictureUrl)) {
+//			builder.setImageUrl(Uri.parse(sharePictureUrl));
+//		}
+//		ShareLinkContent linkContent = builder.build();
+//
+//		shareDialog.show(linkContent);
 
 	}
 	
