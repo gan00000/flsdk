@@ -102,11 +102,11 @@ public class TermsViewV3 extends SLoginBaseRelativeLayout {
         termsView1.setWebViewClient(new WebViewClient());
         termsView1.loadUrl(serviceUrl);
 
-        TextView goTermView = contentView.findViewById(R.id.gama_gama_start_term_tv1);
-        String ssText = getContext().getString(R.string.gama_ui_term_port_read2);
-        SpannableString ss = new SpannableString(ssText);
-        ss.setSpan(new UnderlineSpan(), ssText.length() - 5, ssText.length(), Paint.UNDERLINE_TEXT_FLAG);
-        goTermView.setText(ss);
+//        TextView goTermView = contentView.findViewById(R.id.gama_gama_start_term_tv1);
+//        String ssText = getContext().getString(R.string.gama_ui_term_port_read2);
+//        SpannableString ss = new SpannableString(ssText);
+//        ss.setSpan(new UnderlineSpan(), ssText.length() - 5, ssText.length(), Paint.UNDERLINE_TEXT_FLAG);
+//        goTermView.setText(ss);
 
         okButton.setOnClickListener(new OnClickListener() {
             @Override

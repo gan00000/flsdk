@@ -2,8 +2,8 @@
 
     <!--港台域名列表 开始-->
     <!--登录域名-->
-    <string name="zh_tw_gama_login_pre_url" translatable="false">https://login.flyfungame.com/</string>
-    <string name="zh_tw_gama_login_spa_url" translatable="false">https://login.flyfungame.com/</string>
+    <string name="zh_tw_gama_login_pre_url" translatable="false">http://192.168.10.42:8080/</string>
+    <string name="zh_tw_gama_login_spa_url" translatable="false">http://192.168.10.42:8080/</string>
 
     <!--支付域名-->
     <string name="zh_tw_gama_pay_pre_url" translatable="false">https://pay.flyfungame.com/</string>

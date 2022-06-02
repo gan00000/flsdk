@@ -1,6 +1,10 @@
 package com.flyfun.sdk.login.widget.v2;
 
 import android.content.Context;
+import android.graphics.Paint;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.UnderlineSpan;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,10 +23,10 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
 
     private View contentView;
 
-    private View fbLoginView, layout_go_account_login, guestLoginView, googleLoginView;
+    private View layout_go_account_login, guestLoginView;
     private ImageView iv_login_google,iv_login_fb,iv_login_line;
     private CheckBox cb_agree_term;
-    private TextView tv_go_term;
+    private View layout_go_term;
     private ImageView iv_logo;
 
     public MainHomeLayout(Context context) {
@@ -53,27 +57,23 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
         iv_login_line = contentView.findViewById(R.id.iv_login_line);
 
         cb_agree_term = contentView.findViewById(R.id.cb_agree_term);
-        tv_go_term = contentView.findViewById(R.id.tv_go_term);
+        layout_go_term = contentView.findViewById(R.id.layout_go_term);
         iv_logo = contentView.findViewById(R.id.iv_logo);
-
-//        SGameLanguage sGameLanguage = Localization.getSGameLanguage(getContext());
-//        if(SGameLanguage.ko_KR == sGameLanguage) {
-//            starLoginView.setImageResource(R.drawable.btn_xm_member_login_kr);
-//            macLoginView.setImageResource(R.drawable.gama_guest_login_kr);
-//        } else if(SGameLanguage.zh_TW == sGameLanguage) {
-//            starLoginView.setImageResource(R.drawable.btn_xm_member_login);
-//            macLoginView.setImageResource(R.drawable.gama_guest_login);
-//        }
 
         guestLoginView.setOnClickListener(this);
         layout_go_account_login.setOnClickListener(this);
-
-//        if (Localization.getSGameLanguage(getActivity()) == SGameLanguage.en_US){
-//            ((ImageView)macLoginView).setImageResource(R.drawable.btn_xm_guest_login_en);
-//            ((ImageView)starLoginView).setImageResource(R.drawable.btn_xm_member_login_en);
-//        }
+        iv_login_google.setOnClickListener(this);
+        iv_login_fb.setOnClickListener(this);
+        iv_login_line.setOnClickListener(this);
+        layout_go_term.setOnClickListener(this);
 
         cb_agree_term.setChecked(true);
+
+//        String ssText = getContext().getString(R.string.gama_ui_term_port_read2);
+//        SpannableString ss = new SpannableString(ssText);
+//        ss.setSpan(new UnderlineSpan(), ssText.length() - 5, ssText.length(), Paint.UNDERLINE_TEXT_FLAG);
+//        ss.setSpan(new ForegroundColorSpan(), ssText.length() - 5, ssText.length(), Paint.UNDERLINE_TEXT_FLAG);
+
         return contentView;
     }
 
@@ -82,7 +82,7 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
     @Override
     public void onClick(View v) {
 
-        if (v == fbLoginView){
+        if (v == iv_login_fb){
             if (checkAgreeTerm()){
                 sLoginDialogv2.getLoginPresenter().fbLogin(sLoginDialogv2.getActivity());
             }
@@ -93,10 +93,16 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
             if (checkAgreeTerm()){
                 sLoginDialogv2.getLoginPresenter().guestLogin(sLoginDialogv2.getActivity());
             }
-        }else if (v == googleLoginView){
+        }else if (v == iv_login_google){
             //google+登录
             if (checkAgreeTerm()){
                 sLoginDialogv2.getLoginPresenter().googleLogin(sLoginDialogv2.getActivity());
+            }
+
+        }else if (v == iv_login_line){
+            //google+登录
+            if (checkAgreeTerm()){
+                sLoginDialogv2.getLoginPresenter().lineLogin(sLoginDialogv2.getActivity());
             }
 
         }

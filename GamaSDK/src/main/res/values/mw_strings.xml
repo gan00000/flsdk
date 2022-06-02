@@ -6,6 +6,7 @@
     <string name="gama_ui_term_read_land" translatable="false">我已閱畢並同意條款</string>
     <string name="gama_ui_term_port_read" translatable="false">我同意「服務條款」及「隱私政策」</string>
     <string name="gama_ui_term_port_read2" translatable="false">我已閱讀並同意定型化契約</string>
+
     <string name="gama_ui_term_port_term1" translatable="false">服務條款</string>
     <string name="gama_ui_term_port_term2" translatable="false">隱私政策</string>
 
@@ -110,7 +111,7 @@
 
     <!--功能提示-->
     <string name="py_register_success">註冊成功</string>
-    <string name="py_error_occur">發生錯誤，請重試</string>
+
     <string name="py_error_time_out">連接超時，請重試</string>
     <string name="py_login_mac_tips">你登入 %1$s 的帳號和密碼如下:\n帳號: %2$s 密碼: %3$s</string>
     <string name="py_login_mac_saveimage_tips">你的帳號密碼已經保存到相簿中</string>
@@ -185,5 +186,9 @@
     <string name="text_confire_reg">確認註冊</string>
     <string name="text_pwd_format">密碼支持6~20字元</string>
     <string name="text_account_format">信箱格式異常，請重新輸入</string>
+
+    <string name="py_error_occur">網路異常，請檢查重試</string>
+    <string name="text_i_agree_tips">我已閱讀並同意</string>
+    <string name="text_term_moqie"><u>定型化契約</u></string>
 
 </resources>
