@@ -30,7 +30,7 @@ public class SLoginResponse extends BaseResponseModel {
         /**
          * gama的accesstoken
          */
-        private String accessToken = "";
+        private String token = "";
         /**
          * 登陆成功时间戳
          */
@@ -87,13 +87,13 @@ public class SLoginResponse extends BaseResponseModel {
             this.thirdToken = thirdToken;
         }
 
-        public String getAccessToken() {
-            return accessToken;
+        public String getToken() {
+            return token;
         }
 
-        public void setAccessToken(String accessToken) {
-            this.accessToken = accessToken;
-        }
+//        public void setToken(String token) {
+//            this.token = token;
+//        }
 
 
 
@@ -212,7 +212,7 @@ public class SLoginResponse extends BaseResponseModel {
         public String toString() {
             return "SLoginResponse{" +
                     "userId='" + userId + '\'' +
-                    ", accessToken='" + accessToken + '\'' +
+                    ", accessToken='" + token + '\'' +
                     ", timestamp='" + timestamp + '\'' +
                     ", freeRegisterName='" + freeRegisterName + '\'' +
                     ", freeRegisterPwd='" + freeRegisterPwd + '\'' +
@@ -232,7 +232,7 @@ public class SLoginResponse extends BaseResponseModel {
         public String print() {
             return "SLoginResponse{" +
                     "userId='" + userId + '\'' +
-                    ", accessToken='" + accessToken + '\'' +
+                    ", accessToken='" + token + '\'' +
                     ", timestamp='" + timestamp + '\'' +
                     ", loginType='" + loginType + '\'' +
                     '}';
