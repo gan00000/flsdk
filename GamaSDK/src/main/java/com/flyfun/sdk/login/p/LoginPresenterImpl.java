@@ -187,15 +187,15 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
         String previousLoginType = GamaUtil.getPreviousLoginType(activity);
 
-        if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GAMESWORD, previousLoginType)) {//自動登錄
+        if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_MG, previousLoginType)) {//自動登錄
             AccountModel accountModel = GamaUtil.getLastLoginAccount(activity);
             if (accountModel != null){
-                startAutoLogin(activity, SLoginType.LOGIN_TYPE_GAMESWORD, accountModel.getAccount(), accountModel.getPassword());
+                startAutoLogin(activity, SLoginType.LOGIN_TYPE_MG, accountModel.getAccount(), accountModel.getPassword());
             }else {
                 showLoginWithRegView();
             }
 
-        } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_MAC, previousLoginType)) {//免注册没有自動登錄
+        } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GUEST, previousLoginType)) {//免注册没有自動登錄
 //            startAutoLogin(activity, SLoginType.LOGIN_TYPE_GAMESWORD, "", "");
             showLoginWithRegView();
         } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_FB, previousLoginType)) {//自動登錄
@@ -207,11 +207,11 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             }
 
         }  else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GOOGLE, previousLoginType)) {//自動登錄
-//           thirdPlatLogin(mActivity,GamaUtil.getGoogleId(mActivity),SLoginType.LOGIN_TYPE_GOOGLE);
             startAutoLogin(activity, SLoginType.LOGIN_TYPE_GOOGLE, "", "");
-        } else if(SStringUtil.isEqual(SLoginType.LOGIN_TYPE_TWITTER, previousLoginType)) {
+        }else if(SStringUtil.isEqual(SLoginType.LOGIN_TYPE_TWITTER, previousLoginType)) {
             startAutoLogin(activity, SLoginType.LOGIN_TYPE_TWITTER, "", "");
-        } else {//進入登錄頁面
+        }
+        else {//進入登錄頁面
             showMainHomeView();
         }
 
@@ -287,8 +287,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         this.mActivity = activity;
 
         ThirdLoginRegRequestTask cmd = new ThirdLoginRegRequestTask(getActivity(),
-                thirdLoginRegRequestBean,
-                GSRequestMethod.GSRequestType.GAMESWORD);
+                thirdLoginRegRequestBean);
         cmd.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(), "Loading..."));
         cmd.setReqCallBack(new ISReqCallBack<SLoginResponse>() {
             @Override
@@ -458,7 +457,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     @Override
     public void changePwd(final Activity activity, final String account, String oldPwd, final String newPwd) {
         this.mActivity = activity;
-        ChangePwdRequestTask changePwdRequestTask = new ChangePwdRequestTask(activity,account,oldPwd,newPwd, GSRequestMethod.GSRequestType.GAMESWORD);
+        ChangePwdRequestTask changePwdRequestTask = new ChangePwdRequestTask(activity,account,oldPwd,newPwd);
         changePwdRequestTask.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(), "Loading..."));
         changePwdRequestTask.setReqCallBack(new ISReqCallBack<SLoginResponse>() {
 
@@ -512,7 +511,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         ToastUtils.toast(getActivity(), R.string.py_success);
 
 //                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GAMA);
-                        GamaUtil.saveAccountModel(getActivity(), account, pwd, true);//记住账号密码
+                        GamaUtil.saveAccountModel(getActivity(), account, pwd,true);//记住账号密码
                         if (iLoginView != null){
                             iLoginView.accountBindSuccess(sLoginResponse);
                         }
@@ -545,14 +544,14 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     }
 
     private void mMacLogin(final Activity activity) {
-        MacLoginRegRequestTask macLoginRegCmd = new MacLoginRegRequestTask(getActivity(), GSRequestMethod.GSRequestType.GAMESWORD);
+        MacLoginRegRequestTask macLoginRegCmd = new MacLoginRegRequestTask(getActivity());
         macLoginRegCmd.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(), "Loading..."));
         macLoginRegCmd.setReqCallBack(new ISReqCallBack<SLoginResponse>() {
             @Override
             public void success(SLoginResponse sLoginResponse, String rawResult) {
                 if (sLoginResponse != null) {
                     if (sLoginResponse.isRequestSuccess()) {
-                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_MAC);
+                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GUEST);
                     }
 //                    else if (checkIsMacLoginLimit(activity, sLoginResponse, rawResult)) {
 ////                        macLoginLimit(activity);
@@ -698,8 +697,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 fbScopeId,
                 fbApps,
                 fbTokenBusiness,
-                accessTokenString,
-                GSRequestMethod.GSRequestType.GAMESWORD);
+                accessTokenString);
         cmd.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(), "Loading..."));
         cmd.setReqCallBack(new ISReqCallBack<SLoginResponse>() {
             @Override
@@ -755,7 +753,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         ToastUtils.toast(getActivity(), R.string.py_register_success);
 
                         GamaUtil.saveAccountModel(activity,account,password,true);
-                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GAMESWORD);
+                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_MG);
 
                     }else{
 
@@ -876,7 +874,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     private void startAutoLogin(final Activity activity, final String registPlatform, final String account, final String password) {
         isAutoLogin = true;
 
-        if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GAMESWORD, registPlatform)) {
+        if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_MG, registPlatform)) {
 
             if (SStringUtil.hasEmpty(account, password)) {
 
@@ -904,7 +902,8 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 autoLoginTips = "Facebook" + autoLoginTips;
             } else if (registPlatform.equals(SLoginType.LOGIN_TYPE_GOOGLE)){
                 autoLoginTips = "Google" + autoLoginTips;
-            } else if (registPlatform.equals(SLoginType.LOGIN_TYPE_TWITTER)){
+            }
+            else if (registPlatform.equals(SLoginType.LOGIN_TYPE_TWITTER)){
                 autoLoginTips = "Twitter" + autoLoginTips;
             }
             iLoginView.showAutoLoginTips(autoLoginTips);
@@ -928,7 +927,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         iLoginView.showAutoLoginWaitTime("(" + count +  ")");
                         if (count == 0){
 
-                            if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GAMESWORD, registPlatform)) {//免注册或者平台用户自动登录
+                            if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_MG, registPlatform)) {//免注册或者平台用户自动登录
 //                                autoLogin22(mActivity, account, password);
 
                                 starpyAccountLogin(activity,account,password, "", true);
@@ -1130,8 +1129,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     areaCode,
                     phone,
                     vfcode,
-                    uniqueId,
-                    GSRequestMethod.GSRequestType.GAMESWORD);
+                    uniqueId);
             sAccountBindV2(bindRequestTask, account, pwd);
 
         } else if (bindType == SLoginType.bind_fb){
@@ -1147,8 +1145,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                             user.getUserFbId(),
                             user.getBusinessId(),
                             user.getAccessTokenString(),
-                            "",
-                            GSRequestMethod.GSRequestType.GAMESWORD);
+                            "");
                     sAccountBindV2(bindRequestTask,account,pwd);
                 }
             });
@@ -1172,8 +1169,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                                 vfcode,
                                 id,
                                 idTokenString,
-                                googleClientId,
-                                GSRequestMethod.GSRequestType.GAMESWORD);
+                                googleClientId);
                         sAccountBindV2(bindGoogleRequestTask,account,pwd);
                     }
                 }
@@ -1198,8 +1194,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                                     areaCode,
                                     phone,
                                     vfcode,
-                                    id,
-                                    GSRequestMethod.GSRequestType.GAMESWORD);
+                                    id);
                             sAccountBindV2(bindGoogleRequestTask,account,pwd);
                         }
                     }
@@ -1365,7 +1360,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
                             GamaUtil.saveAccountModel(activity,account,password,true);
                         }
-                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GAMESWORD);
+                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_MG);
                     }else{
                         ToastUtils.toast(getActivity(),sLoginResponse.getMessage());
                         if(isAutoLogin) {
@@ -1507,7 +1502,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 public void onClick(DialogInterface dialog, int which) {
                     //继续登入
                     sLoginResponse.setCode(BaseResponseModel.SUCCESS_CODE);
-                    handleRegisteOrLoginSuccess(sLoginResponse, rawResult, SLoginType.LOGIN_TYPE_MAC);
+                    handleRegisteOrLoginSuccess(sLoginResponse, rawResult, SLoginType.LOGIN_TYPE_GUEST);
                 }
             });
             builder.setNegativeButton(R.string.py_mac_login_limit_hint_bind_now, new DialogInterface.OnClickListener() {

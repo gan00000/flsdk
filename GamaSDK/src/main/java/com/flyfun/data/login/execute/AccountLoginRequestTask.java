@@ -5,7 +5,6 @@ import android.content.Context;
 import com.core.base.bean.BaseReqeustBean;
 import com.core.base.utils.SStringUtil;
 import com.flyfun.data.login.constant.GSRequestMethod;
-import com.flyfun.data.login.constant.GamaRequestMethod;
 import com.flyfun.data.login.request.AccountLoginRequestBean;
 
 public class AccountLoginRequestTask extends BaseLoginRequestTask {
@@ -38,7 +37,7 @@ public class AccountLoginRequestTask extends BaseLoginRequestTask {
 		requestBean.setName(userName);
 		password = SStringUtil.toMd5(password);
 		requestBean.setPwd(password);
-		requestBean.setRequestMethod(GamaRequestMethod.GAMA_REQUEST_METHOD_LOGIN);
+//		requestBean.setRequestMethod(GamaRequestMethod.GAMA_REQUEST_METHOD_LOGIN);
 	}
 
 

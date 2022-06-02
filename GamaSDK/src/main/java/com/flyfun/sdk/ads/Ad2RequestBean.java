@@ -46,7 +46,7 @@ public class Ad2RequestBean extends SGameBaseRequestBean {
         game_name = ApkInfoUtil.getApplicationName(context);
 
         String previousLoginType = GamaUtil.getPreviousLoginType(context);
-        if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GAMESWORD, previousLoginType)) {//自動登錄
+        if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_MG, previousLoginType)) {//自動登錄
             AccountModel accountModel = GamaUtil.getLastLoginAccount(context);
             if (accountModel != null){
                 user_name = accountModel.getAccount();

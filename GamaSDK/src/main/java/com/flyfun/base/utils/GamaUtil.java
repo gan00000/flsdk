@@ -13,9 +13,11 @@ import com.core.base.utils.PL;
 import com.core.base.utils.SPUtil;
 import com.core.base.utils.SStringUtil;
 import com.flyfun.base.bean.SGameLanguage;
+import com.flyfun.base.bean.SLoginType;
 import com.flyfun.base.cfg.ConfigBean;
 import com.flyfun.base.cfg.ResConfig;
 import com.flyfun.sdk.login.model.AccountModel;
+import com.flyfun.thirdlib.facebook.FbSp;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
@@ -85,6 +87,25 @@ public class GamaUtil {
     }
 
     public static void saveAccountModel(Context context, String account, String password, boolean updateTime){
+        saveAccountModel(context,SLoginType.LOGIN_TYPE_MG,account,password,"","","",updateTime);
+    }
+
+    public static void saveAccountModel(Context context,String loginType, String account, String password,String userId, String thirdId, String thirdAccount, boolean updateTime){
+
+        if (!SStringUtil.isEqual(SLoginType.LOGIN_TYPE_MG, loginType)) {//非账号登錄
+            account = thirdId;
+        }
+
+       /* else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GUEST, loginType)) {//游客
+
+        } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_FB, loginType)) {//fb登錄
+
+        }  else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GOOGLE, loginType)) {//gg登錄
+        }else if(SStringUtil.isEqual(SLoginType.LOGIN_TYPE_TWITTER, loginType)) {
+        }else if(SStringUtil.isEqual(SLoginType.LOGIN_TYPE_LINE, loginType)) {
+        } else {
+        }*/
+
         List<AccountModel> mls = getAccountModels(context);
         for (AccountModel a: mls) {
             if (a.getAccount().equals(account)){
@@ -99,6 +120,10 @@ public class GamaUtil {
         AccountModel newAccountModel = new AccountModel();//新添加一个保存
         newAccountModel.setAccount(account);
         newAccountModel.setPassword(password);
+        newAccountModel.setLoginType(loginType);
+        newAccountModel.setThirdAccount(thirdAccount);
+        newAccountModel.setUserId(userId);
+        newAccountModel.setThirdId(thirdId);
         newAccountModel.setTime(System.currentTimeMillis());
         mls.add(newAccountModel);
         saveAccountModels(context,mls);
@@ -138,6 +163,10 @@ public class GamaUtil {
                 accountObject.put("sdk_account", accountModel.getAccount());
                 accountObject.put("sdk_password", accountModel.getPassword());
                 accountObject.put("sdk_time", accountModel.getTime());
+                accountObject.put("sdk_loginType", accountModel.getLoginType());
+                accountObject.put("sdk_thirdId", accountModel.getThirdId());
+                accountObject.put("sdk_userId", accountModel.getUserId());
+                accountObject.put("sdk_thirdAccount", accountModel.getThirdAccount());
                 jsonArray.put(accountObject);
             }
             SPUtil.saveSimpleInfo(context,GAMA_SP_FILE, SDK_LOGIN_ACCOUNT_INFO, jsonArray.toString());
@@ -167,6 +196,10 @@ public class GamaUtil {
                         accountModel.setAccount(accountObject.getString("sdk_account"));
                         accountModel.setPassword(accountObject.getString("sdk_password"));
                         accountModel.setTime(accountObject.getLong("sdk_time"));
+                        accountModel.setLoginType(accountObject.getString("sdk_loginType"));
+                        accountModel.setThirdId(accountObject.getString("sdk_thirdId"));
+                        accountModel.setUserId(accountObject.getString("sdk_userId"));
+                        accountModel.setThirdAccount(accountObject.getString("sdk_thirdAccount"));
 
                         accountModels.add(accountModel);
                     }

@@ -8,7 +8,6 @@ import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.flyfun.base.bean.SLoginType;
 import com.flyfun.data.login.constant.GSRequestMethod;
-import com.flyfun.data.login.constant.GamaRequestMethod;
 import com.flyfun.data.login.request.ThirdAccountBindRequestBean;
 
 /**
@@ -31,8 +30,7 @@ public class ThirdAccountBindRequestTask extends BaseLoginRequestTask {
                                        String fbScopeId,
                                        String fbApps,
                                        String fbAccessToken,
-                                       String fbTokenBusiness,
-                                       GSRequestMethod.GSRequestType requestMethod) {
+                                       String fbTokenBusiness) {
         super(context);
 
         thirdAccountBindRequestBean = new ThirdAccountBindRequestBean(context);
@@ -48,11 +46,7 @@ public class ThirdAccountBindRequestTask extends BaseLoginRequestTask {
         thirdAccountBindRequestBean.setPwd(SStringUtil.toMd5(pwd));
         thirdAccountBindRequestBean.setEmail(email);
         thirdAccountBindRequestBean.setFb_oauthToken(fbAccessToken);
-        if(requestMethod == GSRequestMethod.GSRequestType.GAMESWORD) {
-            thirdAccountBindRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_BIND);
-        } else if (requestMethod == GSRequestMethod.GSRequestType.GAMAMOBI) {
-            thirdAccountBindRequestBean.setRequestMethod(GamaRequestMethod.GAMA_REQUEST_METHOD_BIND);
-        }
+        thirdAccountBindRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_BIND);
     }
 
 //    public ThirdAccountBindRequestTask(Context context,
@@ -94,8 +88,7 @@ public class ThirdAccountBindRequestTask extends BaseLoginRequestTask {
                                          String email,
                                          String thirdPlatId,
                                          String googleIdToken,
-                                         String googleClientId,
-                                         GSRequestMethod.GSRequestType requestMethod) {
+                                         String googleClientId) {
         super(context);
 
         if(TextUtils.isEmpty(thirdPlatId)){
@@ -115,11 +108,7 @@ public class ThirdAccountBindRequestTask extends BaseLoginRequestTask {
         thirdAccountBindRequestBean.setGoogleIdToken(googleIdToken);
         thirdAccountBindRequestBean.setGoogleClientId(googleClientId);
 
-        if(requestMethod == GSRequestMethod.GSRequestType.GAMESWORD) {
-            thirdAccountBindRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_BIND);
-        } else if (requestMethod == GSRequestMethod.GSRequestType.GAMAMOBI) {
-            thirdAccountBindRequestBean.setRequestMethod(GamaRequestMethod.GAMA_REQUEST_METHOD_BIND);
-        }
+        thirdAccountBindRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_BIND);
     }
 
     /**
@@ -130,8 +119,7 @@ public class ThirdAccountBindRequestTask extends BaseLoginRequestTask {
                                        String name,
                                        String pwd,
                                        String email,
-                                       String thirdPlatId,
-                                       GSRequestMethod.GSRequestType requestMethod) {
+                                       String thirdPlatId) {
         super(context);
 
         if(TextUtils.isEmpty(thirdPlatId)){
@@ -149,11 +137,7 @@ public class ThirdAccountBindRequestTask extends BaseLoginRequestTask {
         thirdAccountBindRequestBean.setPwd(SStringUtil.toMd5(pwd));
         thirdAccountBindRequestBean.setEmail(email);
 
-        if(requestMethod == GSRequestMethod.GSRequestType.GAMESWORD) {
-            thirdAccountBindRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_BIND);
-        } else if (requestMethod == GSRequestMethod.GSRequestType.GAMAMOBI) {
-            thirdAccountBindRequestBean.setRequestMethod(GamaRequestMethod.GAMA_REQUEST_METHOD_BIND);
-        }
+        thirdAccountBindRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_BIND);
     }
 
     @Override

@@ -4,6 +4,12 @@ public class AccountModel {
 
     private String account;
     private String password;
+    private String loginType;
+
+    private String thirdId;
+    private String userId;
+    private String thirdAccount;
+
     //记录时间
     private long time;
 
@@ -31,4 +37,35 @@ public class AccountModel {
         this.time = time;
     }
 
+    public String getLoginType() {
+        return loginType;
+    }
+
+    public void setLoginType(String loginType) {
+        this.loginType = loginType;
+    }
+
+    public String getThirdId() {
+        return thirdId;
+    }
+
+    public void setThirdId(String thirdId) {
+        this.thirdId = thirdId;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getThirdAccount() {
+        return thirdAccount;
+    }
+
+    public void setThirdAccount(String thirdAccount) {
+        this.thirdAccount = thirdAccount;
+    }
 }

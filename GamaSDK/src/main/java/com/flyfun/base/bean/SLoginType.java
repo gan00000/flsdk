@@ -5,7 +5,7 @@ public class SLoginType {
 	/**
 	 * GS入
 	 */
-	public static final String LOGIN_TYPE_GAMESWORD = "flsdk";
+	public static final String LOGIN_TYPE_MG = "mg";
 	/**
 	 * facebook登入
 	 */
@@ -14,19 +14,16 @@ public class SLoginType {
 	 * Google登入
 	 */
 	public static final String LOGIN_TYPE_GOOGLE = "google";
+	public static final String LOGIN_TYPE_LINE = "line";
 
 	/**
 	 * Twitter登入
 	 */
 	public static final String LOGIN_TYPE_TWITTER = "twitter";
 	/**
-	 * 原gamamobi登入
-	 */
-	public static final String LOGIN_TYPE_GMB = "gmb";
-	/**
 	 * 用于mac登入，用于本地登录类型判断，回传原厂登录类型
 	 */
-	public static final String LOGIN_TYPE_MAC = "mac";
+	public static final String LOGIN_TYPE_GUEST = "mac";
 	/**
 	 * 用于免注册登录传给服务端的登录标识
 	 */

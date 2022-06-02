@@ -13,6 +13,8 @@ import android.widget.PopupWindow;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.core.base.utils.SStringUtil;
+import com.flyfun.base.bean.SLoginType;
 import com.flyfun.base.utils.GamaUtil;
 import com.flyfun.sdk.login.model.AccountModel;
 import com.gama.sdk.R;
@@ -111,7 +113,8 @@ public class AccountPopupWindow extends PopupWindow {
 
             @Override
             protected void convert(final ViewHolder holder, final AccountModel accountModel, final int position) {
-                holder.setText(R.id.history_account_item_text, accountModel.getAccount());
+
+
                 holder.setOnClickListener(R.id.history_account_item_text, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -134,11 +137,29 @@ public class AccountPopupWindow extends PopupWindow {
                 holder.setOnClickListener(R.id.history_account_item_delete_btn, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
                         removeAccountMode(position);
                     }
                 });
 
+                int imageResId = R.mipmap.mw_smail_icon;
+                String showName = accountModel.getThirdAccount();
+                if (SStringUtil.isEmpty(showName)){
+                    showName = accountModel.getUserId();
+                }
+                if (SLoginType.LOGIN_TYPE_FB.equals(accountModel.getLoginType())){
+                    imageResId = R.mipmap.fb_smail_icon;
+                }else  if (SLoginType.LOGIN_TYPE_GOOGLE.equals(accountModel.getLoginType())){
+                    imageResId = R.mipmap.google_smail_icon;
+                }else  if (SLoginType.LOGIN_TYPE_GUEST.equals(accountModel.getLoginType())){
+                    imageResId = R.mipmap.guest_smail_icon;
+                }else if (SLoginType.LOGIN_TYPE_LINE.equals(accountModel.getLoginType())){
+                    imageResId = R.mipmap.line_smail_icon;
+                }else if (SLoginType.LOGIN_TYPE_MG.equals(accountModel.getLoginType())){
+                    imageResId = R.mipmap.mw_smail_icon;
+                    showName = accountModel.getAccount();
+                }
+                holder.setImageResource(R.id.history_account_item_icon, imageResId);
+                holder.setText(R.id.history_account_item_text, showName);
             }
 
         };

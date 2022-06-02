@@ -68,8 +68,4 @@ public class GSRequestMethod {
         }
     }
 
-    public enum GSRequestType {
-        GAMESWORD,
-        GAMAMOBI
-    }
 }

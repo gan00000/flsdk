@@ -8,7 +8,6 @@ import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.flyfun.base.bean.SLoginType;
 import com.flyfun.data.login.constant.GSRequestMethod;
-import com.flyfun.data.login.constant.GamaRequestMethod;
 import com.flyfun.data.login.request.MacLoginRegRequestBean;
 import com.flyfun.base.utils.GamaUtil;
 
@@ -21,7 +20,7 @@ import com.flyfun.base.utils.GamaUtil;
 public class MacLoginRegRequestTask extends BaseLoginRequestTask {
 
     MacLoginRegRequestBean macLoginRegRequestBean;
-    public MacLoginRegRequestTask(Context context, GSRequestMethod.GSRequestType requestMethod) {
+    public MacLoginRegRequestTask(Context context) {
         super(context);
 
         macLoginRegRequestBean = new MacLoginRegRequestBean(context);
@@ -37,11 +36,7 @@ public class MacLoginRegRequestTask extends BaseLoginRequestTask {
         }
         macLoginRegRequestBean.setUniqueId(uniqueId);
 
-        if(requestMethod == GSRequestMethod.GSRequestType.GAMESWORD) {
-            macLoginRegRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_FREE_LOGIN);
-        } else if (requestMethod == GSRequestMethod.GSRequestType.GAMAMOBI) {
-            macLoginRegRequestBean.setRequestMethod(GamaRequestMethod.GAMA_REQUEST_METHOD_FREE_LOGIN);
-        }
+        macLoginRegRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_FREE_LOGIN);
     }
 
     @Override

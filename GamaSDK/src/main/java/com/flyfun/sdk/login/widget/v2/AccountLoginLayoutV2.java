@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.core.base.utils.ToastUtils;
+import com.flyfun.base.bean.SLoginType;
 import com.flyfun.base.utils.GamaUtil;
 import com.flyfun.sdk.login.AccountPopupWindow;
 import com.flyfun.sdk.login.model.AccountModel;
@@ -225,10 +226,11 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
         accountModels = new ArrayList<>();
 
         //test
-        GamaUtil.saveAccountModel(getContext(), "ddda","xxx",true);
         GamaUtil.saveAccountModel(getContext(), "ccc","xxx",true);
-        GamaUtil.saveAccountModel(getContext(), "ddxxxxda","xxx",true);
-        GamaUtil.saveAccountModel(getContext(), "aaaaa","xxx",true);
+        GamaUtil.saveAccountModel(getContext(), SLoginType.LOGIN_TYPE_FB,"","", "12","1111222","adfaf@qq.com",true);
+        GamaUtil.saveAccountModel(getContext(), SLoginType.LOGIN_TYPE_GOOGLE,"","", "1332","55555","a3333af@qq.com",true);
+        GamaUtil.saveAccountModel(getContext(), SLoginType.LOGIN_TYPE_GUEST,"","", "1222","111e3331222","111222@qq.com",true);
+        GamaUtil.saveAccountModel(getContext(), SLoginType.LOGIN_TYPE_LINE,"","", "111","334444","",true);
 
         List<AccountModel> ams = GamaUtil.getAccountModels(getContext());
         accountModels.addAll(ams);

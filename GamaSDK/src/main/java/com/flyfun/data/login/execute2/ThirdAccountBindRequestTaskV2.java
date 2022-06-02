@@ -8,7 +8,6 @@ import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.flyfun.base.bean.SLoginType;
 import com.flyfun.data.login.constant.GSRequestMethod;
-import com.flyfun.data.login.constant.GamaRequestMethod;
 import com.flyfun.data.login.execute.BaseLoginRequestTask;
 import com.flyfun.data.login.request.ThirdAccountBindRequestBean;
 
@@ -34,8 +33,7 @@ public class ThirdAccountBindRequestTaskV2 extends BaseLoginRequestTask {
                                        String fbScopeId,
                                        String fbApps,
                                        String fbAccessToken,
-                                       String fbTokenBusiness,
-                                       GSRequestMethod.GSRequestType requestMethod) {
+                                       String fbTokenBusiness) {
         super(context);
 
         thirdAccountBindRequestBean = new ThirdAccountBindRequestBean(context);
@@ -58,12 +56,7 @@ public class ThirdAccountBindRequestTaskV2 extends BaseLoginRequestTask {
         thirdAccountBindRequestBean.setVfCode(vfcode);
         thirdAccountBindRequestBean.setFb_oauthToken(fbAccessToken);
 
-        if(requestMethod == GSRequestMethod.GSRequestType.GAMESWORD) {
-            thirdAccountBindRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_BIND);
-        } else if (requestMethod == GSRequestMethod.GSRequestType.GAMAMOBI) {
-            thirdAccountBindRequestBean.setRequestMethod(GamaRequestMethod.GAMA_REQUEST_METHOD_BIND);
-        }
-
+        thirdAccountBindRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_BIND);
 
     }
 
@@ -77,8 +70,7 @@ public class ThirdAccountBindRequestTaskV2 extends BaseLoginRequestTask {
                                        String areaCode,
                                        String phone,
                                        String vfcode,
-                                       String thirdPlatId,
-                                       GSRequestMethod.GSRequestType requestMethod) {
+                                       String thirdPlatId) {
         super(context);
 
         if(TextUtils.isEmpty(thirdPlatId)){
@@ -102,11 +94,7 @@ public class ThirdAccountBindRequestTaskV2 extends BaseLoginRequestTask {
         thirdAccountBindRequestBean.setPhoneAreaCode(areaCode);
         thirdAccountBindRequestBean.setVfCode(vfcode);
 
-        if(requestMethod == GSRequestMethod.GSRequestType.GAMESWORD) {
-            thirdAccountBindRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_BIND);
-        } else if (requestMethod == GSRequestMethod.GSRequestType.GAMAMOBI) {
-            thirdAccountBindRequestBean.setRequestMethod(GamaRequestMethod.GAMA_REQUEST_METHOD_BIND);
-        }
+        thirdAccountBindRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_BIND);
     }
 
     /**
@@ -120,8 +108,7 @@ public class ThirdAccountBindRequestTaskV2 extends BaseLoginRequestTask {
                                        String vfcode,
                                        String thirdPlatId,
                                        String googleIdToken,
-                                       String googleClientId,
-                                       GSRequestMethod.GSRequestType requestMethod) {
+                                       String googleClientId) {
         super(context);
 
         if(TextUtils.isEmpty(thirdPlatId)){
@@ -150,11 +137,7 @@ public class ThirdAccountBindRequestTaskV2 extends BaseLoginRequestTask {
         thirdAccountBindRequestBean.setGoogleClientId(googleClientId);
 
 
-        if(requestMethod == GSRequestMethod.GSRequestType.GAMESWORD) {
-            thirdAccountBindRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_BIND);
-        } else if (requestMethod == GSRequestMethod.GSRequestType.GAMAMOBI) {
-            thirdAccountBindRequestBean.setRequestMethod(GamaRequestMethod.GAMA_REQUEST_METHOD_BIND);
-        }
+        thirdAccountBindRequestBean.setRequestMethod(GSRequestMethod.GS_REQUEST_METHOD_BIND);
     }
 
     @Override
