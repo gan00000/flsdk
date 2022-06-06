@@ -38,7 +38,7 @@
 
     <!--修改密码页面-->
     <string name="py_login_page_change_pwd">修改密碼</string>
-    <string name="py_input_old_password">請輸入舊密碼</string>
+
     <string name="py_old_equel_new_pwd">新密碼與舊密碼不能一致</string>
 
     <!--会员验证页-->
@@ -80,6 +80,7 @@
 
     <!--自动登录-->
     <string name="py_auto_login_change">切換帳號</string>
+
     <string name="py_login_autologin_tips">帳號 %1$s 正在登入</string>
 
     <!--预设提示-->
@@ -187,5 +188,9 @@
     <string name="text_i_agree_tips">我已閱讀並同意</string>
     <string name="text_term_moqie"><u>定型化契約</u></string>
     <string name="sdk_terms_title">定型化契約</string>
+    <string name="text_switch_account">切換帳號</string>
+    <string name="text_update_account_bind">升級帳號</string>
+    <string name="text_pwd_not_equel">兩次密碼不一致</string>
+    <string name="py_input_old_password">請輸入舊密碼</string>
 
 </resources>

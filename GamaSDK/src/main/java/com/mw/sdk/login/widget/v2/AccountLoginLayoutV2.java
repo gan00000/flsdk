@@ -87,7 +87,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
         backView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                sLoginDialogv2.toLoginWithRegView();
+//                sLoginDialogv2.toLoginWithRegView();
             }
         });
 
@@ -138,7 +138,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
             public void onClick(View v) {
 //                sLoginActivity.replaceFragmentBackToStack(new AccountRegisterFragment());
 
-                sLoginDialogv2.toRegisterView(2);
+//                sLoginDialogv2.toRegisterView(2);
             }
         });
 
@@ -159,7 +159,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
         loginMainGoChangePassword.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                sLoginDialogv2.toChangePwdView();
+//                sLoginDialogv2.toChangePwdView();
             }
         });
 
@@ -211,11 +211,11 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
         accountModels = new ArrayList<>();
 
         //test
-        GamaUtil.saveAccountModel(getContext(), "ccc","xxx",true);
-        GamaUtil.saveAccountModel(getContext(), SLoginType.LOGIN_TYPE_FB,"","", "12","1111222","adfaf@qq.com",true);
-        GamaUtil.saveAccountModel(getContext(), SLoginType.LOGIN_TYPE_GOOGLE,"","", "1332","55555","a3333af@qq.com",true);
-        GamaUtil.saveAccountModel(getContext(), SLoginType.LOGIN_TYPE_GUEST,"","", "1222","111e3331222","111222@qq.com",true);
-        GamaUtil.saveAccountModel(getContext(), SLoginType.LOGIN_TYPE_LINE,"","", "111","334444","",true);
+//        GamaUtil.saveAccountModel(getContext(), "ccc","xxx",true);
+//        GamaUtil.saveAccountModel(getContext(), SLoginType.LOGIN_TYPE_FB,"","", "12","1111222","adfaf@qq.com",true);
+//        GamaUtil.saveAccountModel(getContext(), SLoginType.LOGIN_TYPE_GOOGLE,"","", "1332","55555","a3333af@qq.com",true);
+//        GamaUtil.saveAccountModel(getContext(), SLoginType.LOGIN_TYPE_GUEST,"","", "1222","111e3331222","111222@qq.com",true);
+//        GamaUtil.saveAccountModel(getContext(), SLoginType.LOGIN_TYPE_LINE,"","", "111","334444","",true);
 
         List<AccountModel> ams = GamaUtil.getAccountModels(getContext());
         accountModels.addAll(ams);

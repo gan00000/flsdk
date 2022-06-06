@@ -28,9 +28,13 @@ public class AccountChangePwdLayoutV2 extends SLoginBaseRelativeLayout implement
     private EditText againPwdEditText, changePwdOldEditText, changePwdNewEditText;
 
     private String account;
-    private String password;
+    private String oldPassword;
     private String newPassword;
+    private String againPassword;
 
+    public void setAccount(String account) {
+        this.account = account;
+    }
 
     public AccountChangePwdLayoutV2(Context context) {
         super(context);
@@ -60,13 +64,13 @@ public class AccountChangePwdLayoutV2 extends SLoginBaseRelativeLayout implement
         newPwdSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_changepwd_new);
         sdkinputview_changepwd_new_again = contentView.findViewById(R.id.sdkinputview_changepwd_new_again);
 
-        sdkinputview_changepwd_new_again.setInputType(SDKInputType.SDKInputType_Password_Again);
         oldPwdSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Old_Password);
         newPwdSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_New_Password);
+        sdkinputview_changepwd_new_again.setInputType(SDKInputType.SDKInputType_Password_Again);
 
-        againPwdEditText = sdkinputview_changepwd_new_again.getInputEditText();
         changePwdOldEditText = oldPwdSdkInputEditTextView.getInputEditText();
         changePwdNewEditText = newPwdSdkInputEditTextView.getInputEditText();
+        againPwdEditText = sdkinputview_changepwd_new_again.getInputEditText();
 
 
         btn_confire_change = contentView.findViewById(R.id.btn_confire_change);
@@ -112,51 +116,52 @@ public class AccountChangePwdLayoutV2 extends SLoginBaseRelativeLayout implement
        if (v == btn_confire_change) {
             changePwd();
         } else if (v == backView) {//返回键
-           sLoginDialogv2.toAccountLoginView();
+           sLoginDialogv2.toWelcomeBackView();
         }
 
     }
 
     private void changePwd() {
 
-        account = againPwdEditText.getEditableText().toString().trim();
-        if (TextUtils.isEmpty(account)) {
-            ToastUtils.toast(getActivity(), R.string.py_account_empty);
-            return;
-        }
-
-        password = changePwdOldEditText.getEditableText().toString().trim();
-        if (TextUtils.isEmpty(password)) {
+        oldPassword = changePwdOldEditText.getEditableText().toString().trim();
+        if (TextUtils.isEmpty(oldPassword)) {
             ToastUtils.toast(getActivity(), R.string.py_password_empty);
             return;
         }
 
         newPassword = changePwdNewEditText.getEditableText().toString().trim();
-
         if (TextUtils.isEmpty(newPassword)) {
             ToastUtils.toast(getActivity(), R.string.py_password_empty);
             return;
         }
 
-
-        if (SStringUtil.isEqual(account, newPassword)) {
-            ToastUtils.toast(getActivity(), R.string.py_password_equal_account);
+        againPassword = againPwdEditText.getEditableText().toString().trim();
+        if (TextUtils.isEmpty(againPassword)) {
+            ToastUtils.toast(getActivity(), R.string.py_password_empty);
             return;
         }
 
+
+//        if (SStringUtil.isEqual(account, newPassword)) {
+//            ToastUtils.toast(getActivity(), R.string.py_password_equal_account);
+//            return;
+//        }
+
         if (!GamaUtil.checkAccount(account)) {
+            toast(R.string.text_account_format);
             return;
         }
         if (!GamaUtil.checkPassword(newPassword)) {
+            toast(R.string.text_pwd_format);
             return;
         }
 
-        if (SStringUtil.isEqual(password,newPassword)){
-            ToastUtils.toast(getActivity(), R.string.py_old_equel_new_pwd);
+        if (!SStringUtil.isEqual(newPassword,againPassword)){
+            ToastUtils.toast(getActivity(), R.string.text_pwd_not_equel);
             return;
         }
 
-        sLoginDialogv2.getLoginPresenter().changePwd(sLoginDialogv2.getActivity(), account, password, newPassword);
+        sLoginDialogv2.getLoginPresenter().changePwd(sLoginDialogv2.getActivity(), account, oldPassword, newPassword);
     }
 
 

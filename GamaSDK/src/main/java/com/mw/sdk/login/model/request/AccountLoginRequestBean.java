@@ -23,6 +23,7 @@ public class AccountLoginRequestBean extends AdsRequestBean {
 	private String loginId;//新添加
 	private String password;//新添加
 	private String newPwd;
+	private String oldPwd;
 	private String email;
 	private String captcha; //验证码
 
@@ -67,6 +68,14 @@ public class AccountLoginRequestBean extends AdsRequestBean {
 
 	public void setNewPwd(String newPwd) {
 		this.newPwd = newPwd;
+	}
+
+	public String getOldPwd() {
+		return oldPwd;
+	}
+
+	public void setOldPwd(String oldPwd) {
+		this.oldPwd = oldPwd;
 	}
 
 	public String getEmail() {

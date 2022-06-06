@@ -13,6 +13,7 @@ import androidx.annotation.StyleRes;
 
 import com.mw.base.bean.SLoginType;
 import com.mw.base.utils.Localization;
+import com.mw.sdk.login.constant.ViewType;
 import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.SBaseDialog;
 import com.mw.sdk.login.p.LoginPresenterImpl;
@@ -196,7 +197,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
         setViewPageVisable(sdkTermsV3View);
     }
 
-    public void toLoginWithRegView() {
+    public void toLoginWithRegView(ViewType fromViewType) {
 
         if (loginWithRegView == null || !viewPageList.contains(loginWithRegView)){
 
@@ -205,6 +206,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
             contentFrameLayout.addView(loginWithRegView);
             viewPageList.add(loginWithRegView);
         }
+        ((LoginWithRegLayout)loginWithRegView).setFromViewType(fromViewType);
         setViewPageVisable(loginWithRegView);
     }
 
@@ -246,8 +248,8 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
         }
     }
 
-    public void toAccountLoginView() {
-/*
+    /*public void toAccountLoginView() {
+*//*
         if (accountLoginView == null || !viewPageList.contains(accountLoginView)){
 //            SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
 //            if (SGameLanguage.en_US == sGameLanguage) {
@@ -272,14 +274,14 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
             }else{
                 childView.setVisibility(View.GONE);
             }
-        }*/
+        }*//*
 
         this.toLoginWithRegView();
-    }
+    }*/
 
-    public void toRegisterView(int from) {
+   /* public void toRegisterView(int from) {
 
-       /* getLoginPresenter().stopVfCodeTimer();
+       *//* getLoginPresenter().stopVfCodeTimer();
         if (registerView == null || !viewPageList.contains(registerView)){
 //            SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
 //            if (SGameLanguage.en_US == sGameLanguage) {
@@ -307,11 +309,11 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
             }else{
                 childView.setVisibility(View.GONE);
             }
-        }*/
+        }*//*
 
 
         this.toLoginWithRegView();
-    }
+    }*/
 
 //    public void toRegisterTermsView(int from) {
 //
@@ -336,33 +338,17 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 //        }
 //    }
 
-    public void toChangePwdView() {
+    public void toChangePwdView(String account) {
 
         if (changePwdView == null || !viewPageList.contains(changePwdView)){
-//            SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
-//            if (SGameLanguage.en_US == sGameLanguage) {
-//                changePwdView = new AccountChangePwdLayoutV2En(context);
-//            } else {
-                changePwdView = new AccountChangePwdLayoutV2(context);
-//            }
 
+            changePwdView = new AccountChangePwdLayoutV2(context);
             changePwdView.setLoginDialogV2(this);
             contentFrameLayout.addView(changePwdView);
             viewPageList.add(changePwdView);
         }
-
-        for (View childView : viewPageList) {
-
-            if (childView == null){
-                continue;
-            }
-
-            if (childView == changePwdView){
-                childView.setVisibility(View.VISIBLE);
-            }else{
-                childView.setVisibility(View.GONE);
-            }
-        }
+        ((AccountChangePwdLayoutV2)changePwdView).setAccount(account);
+        setViewPageVisable(changePwdView);
 
     }
 
@@ -576,17 +562,8 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 
 
     @Override
-    public void showLoginView() {
-        if (iLoginPresenter.hasAccountLogin()){
-            toAccountLoginView();
-        }else{
-            toLoginWithRegView();
-        }
-    }
-
-    @Override
-    public void showLoginWithRegView() {
-        toLoginWithRegView();
+    public void showLoginWithRegView(ViewType fromViewType) {
+        toLoginWithRegView(fromViewType);
     }
 
     @Override
@@ -633,7 +610,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 //        if (bindUniqueView != null){
 //            bindUniqueView.refreshViewData();
 //        }
-        toAccountLoginView();
+//        toAccountLoginView();
     }
 
     public SGoogleSignIn getGoogleSignIn() {

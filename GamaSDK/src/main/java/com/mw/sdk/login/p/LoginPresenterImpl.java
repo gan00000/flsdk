@@ -223,14 +223,16 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         }*/
 
         List<AccountModel> accountModels = GamaUtil.getAccountModels(this.mActivity);
-        showMainHomeView();
-//        if (accountModels.isEmpty()){
-//            showMainHomeView();
-//        }else{
-//            if (iLoginView != null){
-//                iLoginView.showWelcomeBackView();
-//            }
-//        }
+//        showMainHomeView();
+        if (accountModels.isEmpty()){
+            if (iLoginView != null){
+                iLoginView.showMainHomeView();
+            }
+        }else{
+            if (iLoginView != null){
+                iLoginView.showWelcomeBackView();
+            }
+        }
     }
 
     @Override
@@ -243,9 +245,9 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     if(user != null) {
                         fbThirdLogin(user.getUserFbId(), user.getBusinessId(), "");
                     } else {
-                        if (isAutoLogin) {
-                            showLoginWithRegView();
-                        }
+//                        if (isAutoLogin) {
+//                            showLoginWithRegView();
+//                        }
                     }
                 }
             });
@@ -255,12 +257,12 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
     @Override
     public void googleLogin(final Activity activity) {
-        if (sGoogleSignIn == null){
-            if (isAutoLogin) {
-                showLoginView();
-            }
-            return;
-        }
+//        if (sGoogleSignIn == null){
+//            if (isAutoLogin) {
+//                showLoginView();
+//            }
+//            return;
+//        }
         sGoogleSignIn.setClientId(ResConfig.getGoogleClientId(activity));
         sGoogleSignIn.startSignIn(new SGoogleSignIn.GoogleSignInCallBack() {
             @Override
@@ -277,9 +279,9 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     thirdLoginRegRequestBean.setThirdAccount(mEmail);
                     thirdPlatLogin(activity, thirdLoginRegRequestBean);
                 } else {
-                    if (isAutoLogin) {
-                        showLoginView();
-                    }
+//                    if (isAutoLogin) {
+//                        showLoginView();
+//                    }
                 }
             }
 
@@ -287,9 +289,9 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             public void failure() {
                 ToastUtils.toast(activity,"Google sign in error");
                 PL.i("google sign in failure");
-                if (isAutoLogin) {
-                    showLoginView();
-                }
+//                if (isAutoLogin) {
+//                    showLoginView();
+//                }
             }
         });
     }
@@ -304,6 +306,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 thirdLoginRegRequestBean.setThirdPlatId(id);
                 thirdLoginRegRequestBean.setRegistPlatform(SLoginType.LOGIN_TYPE_LINE);
                 thirdLoginRegRequestBean.setThirdAccount("");
+                thirdLoginRegRequestBean.setLineAccessToken(idTokenString);
                 thirdPlatLogin(activity, thirdLoginRegRequestBean);
             }
 
@@ -414,18 +417,18 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         if (autoLoginTimer != null){
             autoLoginTimer.cancel();
         }
-        if(sFacebookProxy != null) {
-            PL.i(TAG, "取消自動登錄，進行Facebook登出");
-            sFacebookProxy.fbLogout(activity);
-        } else {
-            PL.i(TAG, "sFacebookProxy为null，无法進行Facebook登出");
-        }
-        if(sGoogleSignIn != null) {
-            sGoogleSignIn.handleActivityDestroy(this.getContext());
-        } else {
-            PL.i(TAG, "sGoogleSignIn为null，无法進行Google登出");
-        }
-        showLoginView();
+//        if(sFacebookProxy != null) {
+//            PL.i(TAG, "取消自動登錄，進行Facebook登出");
+//            sFacebookProxy.fbLogout(activity);
+//        } else {
+//            PL.i(TAG, "sFacebookProxy为null，无法進行Facebook登出");
+//        }
+//        if(sGoogleSignIn != null) {
+//            sGoogleSignIn.handleActivityDestroy(this.getContext());
+//        } else {
+//            PL.i(TAG, "sGoogleSignIn为null，无法進行Google登出");
+//        }
+//        showLoginView();
     }
 
     @Override
@@ -902,16 +905,16 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
             if (SStringUtil.hasEmpty(account, password)) {
 
-                showLoginView();
+//                showLoginView();
                 return;
             }
             if (SStringUtil.isEqual(account, password)) {
-                showLoginView();
+//                showLoginView();
                 return;
             }
 
             if (!GamaUtil.checkAccount(account)) {
-                showLoginView();
+//                showLoginView();
                 return;
             }
 //            if (!GamaUtil.checkPassword(password)) {
@@ -997,26 +1000,27 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     /**
      * 顯示登入頁面,自动登录状态重置为false
      */
-    private void showLoginView() {
+   /* private void showLoginView() {
         isAutoLogin = false;
         if (iLoginView != null){
 //            iLoginView.hildAutoLoginView();
             iLoginView.showLoginView();
         }
-    }
+    }*/
 
-    private void showLoginWithRegView() {
-        isAutoLogin = false;
-        if (iLoginView != null){
-            iLoginView.showLoginWithRegView();
-        }
-    }
-    private void showMainHomeView() {
-        isAutoLogin = false;
-        if (iLoginView != null){
-            iLoginView.showMainHomeView();
-        }
-    }
+//    private void showLoginWithRegView() {
+//        isAutoLogin = false;
+//        if (iLoginView != null){
+//            iLoginView.showLoginWithRegView();
+//        }
+//    }
+
+//    private void showMainHomeView() {
+//        isAutoLogin = false;
+//        if (iLoginView != null){
+//            iLoginView.showMainHomeView();
+//        }
+//    }
 
     private void showPhoneVerifyView(String loginType, String thirdId) {
         if (iLoginView != null){

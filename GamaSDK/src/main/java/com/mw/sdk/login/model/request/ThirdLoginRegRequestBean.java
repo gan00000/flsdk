@@ -45,6 +45,8 @@ public class ThirdLoginRegRequestBean extends AdsRequestBean {
 	private String googleIdToken;
 	private String googleClientId;
 
+	private String lineAccessToken;
+
 	public String getRegistPlatform() {
 		return registPlatform;
 	}
@@ -110,5 +112,13 @@ public class ThirdLoginRegRequestBean extends AdsRequestBean {
 
 	public void setThirdAccount(String thirdAccount) {
 		this.thirdAccount = thirdAccount;
+	}
+
+	public String getLineAccessToken() {
+		return lineAccessToken;
+	}
+
+	public void setLineAccessToken(String lineAccessToken) {
+		this.lineAccessToken = lineAccessToken;
 	}
 }

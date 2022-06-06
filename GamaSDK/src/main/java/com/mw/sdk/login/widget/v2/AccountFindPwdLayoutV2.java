@@ -113,7 +113,7 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
         if (v == findPwdConfireBtn) {
             findPwd();
         } else if (v == backView) {//返回键
-            sLoginDialogv2.toAccountLoginView();
+//            sLoginDialogv2.toAccountLoginView();
         }
         else if (v == btn_find_get_vfcode) {
             getVfcodeByEmail();

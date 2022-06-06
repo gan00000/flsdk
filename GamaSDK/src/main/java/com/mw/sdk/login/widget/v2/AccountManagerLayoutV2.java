@@ -101,7 +101,7 @@ public class AccountManagerLayoutV2 extends SLoginBaseRelativeLayout implements 
             sLoginDialogv2.toBindGoogleView();
 
         } else if (v == backView) {//返回键
-            sLoginDialogv2.toAccountLoginView();
+//            sLoginDialogv2.toAccountLoginView();
         }
 
     }

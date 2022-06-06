@@ -12,11 +12,17 @@ import android.widget.TextView;
 
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
+import com.mw.base.utils.GamaUtil;
 import com.mw.sdk.SBaseRelativeLayout;
+import com.mw.sdk.login.AccountPopupWindow;
+import com.mw.sdk.login.constant.ViewType;
+import com.mw.sdk.login.model.AccountModel;
 import com.mw.sdk.login.widget.SDKInputEditTextView;
 import com.mw.sdk.login.widget.SDKInputType;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.mw.sdk.R;
+
+import java.util.List;
 
 
 public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.OnClickListener, SBaseRelativeLayout.OperationCallback {
@@ -26,11 +32,14 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
     private TextView tv_account_update_tips;
     private ImageView iv_update_account;
 
-    private EditText findPwdAccountEditText;
+    private EditText accountEditText;
 
     private SDKInputEditTextView accountSdkInputEditTextView;
 
     private String account;
+
+    View historyAccountListBtn;
+    private AccountPopupWindow accountPopupWindow;
 
     Button btn_login_game,btn_swith_account,btn_update_account,btn_change_pwd,btn_swith_account2;
 
@@ -73,9 +82,62 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
         btn_swith_account2 = contentView.findViewById(R.id.btn_swith_account2);
 
         accountSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Account);
-        findPwdAccountEditText = accountSdkInputEditTextView.getInputEditText();
+        accountEditText = accountSdkInputEditTextView.getInputEditText();
+
+        historyAccountListBtn = contentView.findViewById(R.id.sdk_input_item_account_history);
+        historyAccountListBtn.setVisibility(VISIBLE);
+        backView.setVisibility(GONE);
+
 
         backView.setOnClickListener(this);
+        btn_swith_account.setOnClickListener(this);
+        btn_update_account.setOnClickListener(this);
+        btn_change_pwd.setOnClickListener(this);
+        btn_swith_account2.setOnClickListener(this);
+
+        accountPopupWindow = new AccountPopupWindow(getActivity());
+        accountPopupWindow.setPopWindowListener(new AccountPopupWindow.PopWindowListener() {
+            @Override
+            public void onRemove(AccountModel accountModel) {
+
+            }
+
+            @Override
+            public void onUse(AccountModel accountModel) {
+//                accountSdkInputEditTextView.getInputEditText().setText(accountModel.getAccount());
+                GamaUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(),accountEditText);
+            }
+
+            @Override
+            public void onEmpty() {
+                accountSdkInputEditTextView.getInputEditText().setText("");
+            }
+        });
+
+        historyAccountListBtn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                accountPopupWindow.showOnView(accountSdkInputEditTextView);
+
+            }
+        });
+
+        List<AccountModel> ams = GamaUtil.getAccountModels(getContext());
+        if (ams != null && !ams.isEmpty()){//设置按照最好登录时间排序后的第一个账号
+            AccountModel lastAccountModel = ams.get(0);
+
+            if (lastAccountModel != null){ //显示记住的密码，待修改
+                account = lastAccountModel.getAccount();
+//            String password = lastAccountModel.getPassword();
+//                accountSdkInputEditTextView.getInputEditText().setText(account);
+                ImageView imageView = accountSdkInputEditTextView.getIconImageView();
+                GamaUtil.setAccountWithIcon(lastAccountModel,imageView,accountEditText);
+            }
+
+
+        }
+
+
         return contentView;
     }
 
@@ -106,17 +168,33 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
         if (v == btn_login_game) {
             findPwd();
         } else if (v == backView) {//返回键
-            sLoginDialogv2.toAccountLoginView();
+
+        }else if (v == btn_change_pwd) {
+
+            account = accountEditText.getEditableText().toString().trim();
+            if (TextUtils.isEmpty(account)) {
+                ToastUtils.toast(getActivity(), R.string.py_account_empty);
+                return;
+            }
+            sLoginDialogv2.toChangePwdView(account);
+        }else if (v == btn_swith_account || v == btn_swith_account2) {
+            sLoginDialogv2.toLoginWithRegView(ViewType.WelcomeView);
+
+        }else if (v == btn_change_pwd) {
+
+            account = accountEditText.getEditableText().toString().trim();
+            if (TextUtils.isEmpty(account)) {
+                ToastUtils.toast(getActivity(), R.string.py_account_empty);
+                return;
+            }
+            sLoginDialogv2.toChangePwdView(account);
         }
-//        else if (v == gama_find_btn_get_vfcode || v == mSdkPhoneInputEditTextView.getAraeCodeMoreListView()) {
-//            getVfcodeByPhone();
-//        }
 
     }
 
     private void findPwd() {
 
-        account = findPwdAccountEditText.getEditableText().toString().trim();
+        account = accountEditText.getEditableText().toString().trim();
         if (TextUtils.isEmpty(account)) {
             ToastUtils.toast(getActivity(), R.string.py_account_empty);
             return;
@@ -171,6 +249,6 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
     @Override
     public void refreshViewData() {
         super.refreshViewData();
-        findPwdAccountEditText.setText("");
+//        accountEditText.setText("");
     }
 }

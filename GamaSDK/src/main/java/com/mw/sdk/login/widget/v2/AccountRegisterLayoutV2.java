@@ -90,11 +90,11 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
             register();
         } else if (v == backView) {//返回键
 //            sLoginActivity.popBackStack();
-            if (from == 2) {
-                sLoginDialogv2.toAccountLoginView();
-            } else {
-                sLoginDialogv2.toLoginWithRegView();
-            }
+//            if (from == 2) {
+//                sLoginDialogv2.toAccountLoginView();
+//            } else {
+//                sLoginDialogv2.toLoginWithRegView();
+//            }
         }
 
     }

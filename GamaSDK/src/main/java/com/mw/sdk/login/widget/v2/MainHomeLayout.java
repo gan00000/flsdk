@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 
+import com.mw.sdk.login.constant.ViewType;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.mw.sdk.R;
 
@@ -83,7 +84,7 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
             }
         }else if (v == layout_go_account_login) {
 
-            sLoginDialogv2.showLoginWithRegView();
+            sLoginDialogv2.showLoginWithRegView(ViewType.HomeView);
         }else if(v == guestLoginView){
             if (checkAgreeTerm()){
                 sLoginDialogv2.getLoginPresenter().guestLogin(sLoginDialogv2.getActivity());

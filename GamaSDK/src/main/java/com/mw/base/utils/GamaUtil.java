@@ -2,7 +2,10 @@ package com.mw.base.utils;
 
 import android.content.Context;
 import android.os.Build;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.core.base.cipher.DESCipher;
 import com.core.base.utils.ApkInfoUtil;
@@ -16,6 +19,7 @@ import com.mw.base.bean.SGameLanguage;
 import com.mw.base.bean.SLoginType;
 import com.mw.base.cfg.ConfigBean;
 import com.mw.base.cfg.ResConfig;
+import com.mw.sdk.R;
 import com.mw.sdk.login.model.AccountModel;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
@@ -918,15 +922,27 @@ public class GamaUtil {
         return true;
     }
 
-//    private static final String GAMA_MAC_LOGIN_COUNT = "GAMA_VFCGAMA_MAC_LOGIN_COUNTODE_SWITCH_STATUS";
-//    public static void saveMacLoginCount(Context context){
-//        int macLoginCount = getMacLoginCount(context) + 1;
-//        SPUtil.saveSimpleInfo(context, GamaUtil.GAMA_SP_FILE,GAMA_MAC_LOGIN_COUNT, macLoginCount);
-//    }
-//    /**
-//     * 获取免注册登入次数
-//     */
-//    public static int getMacLoginCount(Context context){
-//        return SPUtil.getSimpleInteger(context, GamaUtil.GAMA_SP_FILE, GAMA_MAC_LOGIN_COUNT);
-//    }
+
+    public static void setAccountWithIcon(AccountModel accountModel, ImageView imageView, EditText editText){
+        int imageResId = R.mipmap.mw_smail_icon;
+        String showName = accountModel.getThirdAccount();
+        if (SStringUtil.isEmpty(showName)){
+            showName = accountModel.getUserId();
+        }
+        if (SLoginType.LOGIN_TYPE_FB.equals(accountModel.getLoginType())){
+            imageResId = R.mipmap.fb_smail_icon;
+        }else  if (SLoginType.LOGIN_TYPE_GOOGLE.equals(accountModel.getLoginType())){
+            imageResId = R.mipmap.google_smail_icon;
+        }else  if (SLoginType.LOGIN_TYPE_GUEST.equals(accountModel.getLoginType())){
+            imageResId = R.mipmap.guest_smail_icon;
+        }else if (SLoginType.LOGIN_TYPE_LINE.equals(accountModel.getLoginType())){
+            imageResId = R.mipmap.line_smail_icon;
+        }else if (SLoginType.LOGIN_TYPE_MG.equals(accountModel.getLoginType())){
+            imageResId = R.mipmap.mw_smail_icon;
+            showName = accountModel.getAccount();
+        }
+
+        imageView.setImageResource(imageResId);
+        editText.setText(showName);
+    }
 }

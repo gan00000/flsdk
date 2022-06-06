@@ -79,6 +79,16 @@ public class SLoginResponse extends BaseResponseModel {
 
         private String beLinked = "";
 
+        private Boolean isBind;
+
+        public Boolean getBind() {
+            return isBind;
+        }
+
+        public void setBind(Boolean bind) {
+            isBind = bind;
+        }
+
         public String getThirdToken() {
             return thirdToken;
         }

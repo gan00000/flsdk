@@ -29,7 +29,12 @@ public class SDKInputEditTextView extends RelativeLayout {
 
     private LayoutInflater inflater;
 
-    private ImageView iconImage;
+    private ImageView iconImageView;
+
+    public ImageView getIconImageView() {
+        return iconImageView;
+    }
+
     private ImageView eyeImageView;
     private TextView labTextView;
     private EditText inputEditText;
@@ -73,13 +78,14 @@ public class SDKInputEditTextView extends RelativeLayout {
             l.addRule(RelativeLayout.CENTER_IN_PARENT);
             addView(contentView, l);
 
-            iconImage = contentView.findViewById(R.id.sdk_input_item_icon);
+            iconImageView = contentView.findViewById(R.id.sdk_input_item_icon);
             labTextView = contentView.findViewById(R.id.sdk_input_item_lable);
             eyeImageView = contentView.findViewById(R.id.sdk_input_item_eye);
             eyeImageViewLayout = contentView.findViewById(R.id.sdk_input_item_eye_layout);
             inputEditText = contentView.findViewById(R.id.sdk_input_item_et);
             line1View = contentView.findViewById(R.id.sdk_input_item_line1);
             bottomLine = contentView.findViewById(R.id.sdk_input_item_bottom_line);
+
 
             eyeImageViewLayout.setOnClickListener(new OnClickListener() {
                 @Override
@@ -142,7 +148,7 @@ public class SDKInputEditTextView extends RelativeLayout {
             case SDKInputType_Old_Password:
                 iconId = R.mipmap.mw_passowrd_icon;
                 labName = getResources().getString(R.string.py_old_pwd);
-                hint = getResources().getString(R.string.py_register_password_hit);
+                hint = getResources().getString(R.string.py_input_old_password);
                 eyeImageViewLayout.setVisibility(View.VISIBLE);
                 editTextInputType = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD;
                 adjustTvTextSize();
@@ -160,7 +166,7 @@ public class SDKInputEditTextView extends RelativeLayout {
                 iconId = R.mipmap.mw_account_icon;
                 editTextInputType = InputType.TYPE_CLASS_NUMBER;
                 eyeImageViewLayout.setVisibility(View.GONE);
-                iconImage.setVisibility(View.GONE);
+                iconImageView.setVisibility(View.GONE);
                 line1View.setVisibility(View.GONE);
                 bottomLine.setVisibility(View.GONE);
                 labName = getResources().getString(R.string.py_vfcode);
@@ -171,7 +177,7 @@ public class SDKInputEditTextView extends RelativeLayout {
             default:
         }
 
-        iconImage.setImageResource(iconId);
+        iconImageView.setImageResource(iconId);
         labTextView.setText(labName);
         inputEditText.setInputType(editTextInputType);
         inputEditText.setHint(hint);

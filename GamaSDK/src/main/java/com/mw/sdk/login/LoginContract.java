@@ -3,6 +3,7 @@ package com.mw.sdk.login;
 import android.app.Activity;
 import android.view.View;
 
+import com.mw.sdk.login.constant.ViewType;
 import com.mw.sdk.login.model.request.ThirdLoginRegRequestBean;
 import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.SBaseRelativeLayout;
@@ -31,13 +32,13 @@ public class LoginContract {
         void showAutoLoginView();
         void showTermView();
 
-        void showLoginView();
+//        void showLoginView();
 
         void showAutoLoginWaitTime(String time);
 
         void accountBindSuccess(SLoginResponse sLoginResponse);
 
-        void showLoginWithRegView();
+        void showLoginWithRegView(ViewType fromViewType);
         void showMainHomeView();
         void showWelcomeBackView();
 

@@ -25,7 +25,7 @@ public class ApiRequestMethod {
     /**
      * 修改密码接口
      */
-    public static final String GS_REQUEST_METHOD_CHANGE_PASSWORD = "change/v1/pwd.app";
+    public static final String GS_REQUEST_METHOD_CHANGE_PASSWORD = "api/pwd/changePassword";
 
     /**
      * 找回密码接口

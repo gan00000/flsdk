@@ -24,7 +24,8 @@ public class ChangePwdRequestTask extends BaseLoginRequestTask {
 
         pwdRequestBean.setName(userName);
 
-        pwdRequestBean.setPwd(SStringUtil.toMd5(password.trim()));
+//        pwdRequestBean.setPwd(SStringUtil.toMd5(password.trim()));
+        pwdRequestBean.setOldPwd(SStringUtil.toMd5(password.trim()));
         pwdRequestBean.setNewPwd(SStringUtil.toMd5(newPwd.trim()));
 
         pwdRequestBean.setRequestMethod(ApiRequestMethod.GS_REQUEST_METHOD_CHANGE_PASSWORD);
@@ -37,8 +38,7 @@ public class ChangePwdRequestTask extends BaseLoginRequestTask {
         super.createRequestBean();
 
         pwdRequestBean.setSignature(SStringUtil.toMd5(ResConfig.getAppKey(context) + pwdRequestBean.getTimestamp() +
-                pwdRequestBean.getName() + pwdRequestBean.getPwd() +
-                pwdRequestBean.getNewPwd() + pwdRequestBean.getGameCode()));
+                pwdRequestBean.getName() + pwdRequestBean.getGameCode()));
 
         return pwdRequestBean;
     }

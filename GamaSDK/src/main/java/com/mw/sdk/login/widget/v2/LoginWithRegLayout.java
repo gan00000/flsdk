@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.mw.sdk.login.SLoginDialogV2;
+import com.mw.sdk.login.constant.ViewType;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.mw.sdk.R;
 
@@ -26,6 +27,12 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
     }
     private AccountLoginLayoutV2 mAccountLoginV2;
     private AccountRegisterLayoutV2 mAccountRegisterLayoutV2;
+
+    private ViewType fromViewType;
+
+    public void setFromViewType(ViewType fromViewType) {
+        this.fromViewType = fromViewType;
+    }
 
     public AccountRegisterLayoutV2 getmAccountRegisterLayoutV2() {
         return mAccountRegisterLayoutV2;
@@ -91,7 +98,11 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
 
             makeTabStatus(false);
         }else if (v == iv_login_reg_back) {
-            sLoginDialogv2.toMainHomeView();
+            if (this.fromViewType == ViewType.HomeView){
+                sLoginDialogv2.toMainHomeView();
+            }else if (this.fromViewType == ViewType.WelcomeView){
+                sLoginDialogv2.toWelcomeBackView();
+            }
         }
     }
 
