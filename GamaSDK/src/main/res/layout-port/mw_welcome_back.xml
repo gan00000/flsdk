@@ -18,7 +18,7 @@
             android:layout_height="50dp"
             android:layout_marginTop="182dp" />
 
-        <com.flyfun.sdk.login.widget.SDKInputEditTextView
+        <com.mw.sdk.login.widget.SDKInputEditTextView
             android:id="@+id/sdkinputview_welcome_account"
             android:layout_width="300dp"
             android:layout_height="40dp"

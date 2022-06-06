@@ -38,12 +38,12 @@
     <application>
 
         <activity
-            android:name="com.flyfun.sdk.SWebViewActivity"
+            android:name="com.mw.sdk.SWebViewActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|fontScale"
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:theme="@style/Gama.Theme.AppCompat.Light.NoActionBar.FullScreen"/>
         <activity
-            android:name="com.flyfun.pay.gp.GooglePayActivity2"
+            android:name=".pay.gp.GooglePayActivity2"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|fontScale"
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:theme="@style/Gama.Theme.AppCompat.Light.NoActionBar.FullScreen.Translucent"/>
@@ -111,7 +111,7 @@
             </intent-filter>
         </receiver>
 
-        <receiver android:name="com.flyfun.sdk.GamaBroadcastReceiver" android:exported="true">
+        <receiver android:name="com.mw.sdk.GamaBroadcastReceiver" android:exported="true">
             <intent-filter>
                 <action android:name="com.android.vending.INSTALL_REFERRER" />
             </intent-filter>
@@ -126,7 +126,7 @@
         </receiver>
 
         <receiver
-            android:name="com.flyfun.sdk.receiver.SDKReceiver"
+            android:name="com.mw.sdk.receiver.SDKReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.gamamobi.PAY_REPLACE_OK" />

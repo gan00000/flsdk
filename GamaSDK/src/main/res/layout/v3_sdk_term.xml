@@ -39,7 +39,7 @@
             android:layout_marginTop="4dp"
             >
 
-            <com.flyfun.base.widget.SWebView
+            <com.mw.base.widget.SWebView
                 android:id="@+id/sdk_terms_webview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

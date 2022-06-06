@@ -20,7 +20,7 @@
             android:layout_marginTop="182dp"
             />
 
-        <com.flyfun.sdk.login.widget.SDKInputEditTextView
+        <com.mw.sdk.login.widget.SDKInputEditTextView
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:layout_marginTop="25dp"
@@ -34,7 +34,7 @@
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
-            <com.flyfun.sdk.login.widget.SDKInputEditTextView
+            <com.mw.sdk.login.widget.SDKInputEditTextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
@@ -70,14 +70,14 @@
             android:background="@color/c_C0C0C0"/>
 
 
-        <com.flyfun.sdk.login.widget.SDKInputEditTextView
+        <com.mw.sdk.login.widget.SDKInputEditTextView
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:layout_marginTop="25dp"
             android:id="@+id/sdkinputview_findpwd_new"
             />
 
-        <com.flyfun.sdk.login.widget.SDKInputEditTextView
+        <com.mw.sdk.login.widget.SDKInputEditTextView
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:layout_marginTop="25dp"

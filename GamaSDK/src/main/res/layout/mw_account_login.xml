@@ -40,7 +40,7 @@
             android:layout_height="wrap_content">
 
             <!--            账号-->
-            <com.flyfun.sdk.login.widget.SDKInputEditTextView
+            <com.mw.sdk.login.widget.SDKInputEditTextView
                 android:layout_width="320dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="6dp"
@@ -49,7 +49,7 @@
                 />
 
             <!--            密码-->
-            <com.flyfun.sdk.login.widget.SDKInputEditTextView
+            <com.mw.sdk.login.widget.SDKInputEditTextView
                 android:layout_width="320dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"

@@ -53,12 +53,12 @@
             android:layout_height="match_parent"
             android:layout_marginTop="2dp">
 
-            <com.flyfun.sdk.login.widget.v2.AccountLoginLayoutV2
+            <com.mw.sdk.login.widget.v2.AccountLoginLayoutV2
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/pyAccountLoginV2Id"/>
 
-            <com.flyfun.sdk.login.widget.v2.AccountRegisterLayoutV2
+            <com.mw.sdk.login.widget.v2.AccountRegisterLayoutV2
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/accountRegisterLayoutV2Id"
