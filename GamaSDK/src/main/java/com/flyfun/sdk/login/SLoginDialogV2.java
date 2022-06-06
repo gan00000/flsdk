@@ -28,6 +28,7 @@ import com.flyfun.sdk.login.widget.v2.MainHomeLayout;
 import com.flyfun.sdk.login.widget.v2.ThirdPlatBindAccountLayoutV2;
 import com.flyfun.thirdlib.facebook.SFacebookProxy;
 import com.flyfun.thirdlib.google.SGoogleSignIn;
+import com.flyfun.thirdlib.line.SLineSignIn;
 import com.flyfun.thirdlib.twitter.GamaTwitterLogin;
 
 import java.util.ArrayList;
@@ -45,13 +46,6 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 
     private FrameLayout rootFrameLayout;
     private FrameLayout contentFrameLayout;
-//    private View autoLoginPage;
-
-    //    自動登錄頁面控件
-//    private RelativeLayout autoLoginLayout;
-//    private TextView autoLoginTips;
-//    private TextView autoLoginWaitTime;
-//    private TextView autoLoginChangeAccount;
 
     private SLoginBaseRelativeLayout mainHomeView;
     private SLoginBaseRelativeLayout loginWithRegView;
@@ -72,12 +66,11 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
     private SFacebookProxy sFacebookProxy;
     private SGoogleSignIn sGoogleSignIn;
     private GamaTwitterLogin twitterLogin;
+    private SLineSignIn sLineSignIn;
 
     private LoginContract.ILoginPresenter iLoginPresenter;
 
     private ILoginCallBack iLoginCallBack;
-
-//    private boolean isXM = false;
 
     public SLoginDialogV2(@NonNull Context context) {
         super(context);
@@ -124,14 +117,8 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
         contentFrameLayout = new FrameLayout(context);
         contentFrameLayout.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,FrameLayout.LayoutParams.MATCH_PARENT));
 
-//        autoLoginLayout = new RelativeLayout(context);
-//        autoLoginPage = getLayoutInflater().inflate(R.layout.v2_gama_auto_login_loading,null,false);
-//        autoLoginLayout.addView(autoLoginPage,new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.MATCH_PARENT));
-
         rootFrameLayout = new FrameLayout(context);
-//        rootFrameLayout.setBackgroundColor(Color.BLUE);
         rootFrameLayout.addView(contentFrameLayout);
-//        rootFrameLayout.addView(autoLoginLayout);
 
         setContentView(rootFrameLayout);
 
@@ -145,24 +132,9 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
         iLoginPresenter.setSFacebookProxy(sFacebookProxy);
         iLoginPresenter.setSGoogleSignIn(sGoogleSignIn);
         iLoginPresenter.setTwitterLogin(twitterLogin);
+        iLoginPresenter.setLineLogin(sLineSignIn);
 
         iLoginPresenter.autoLogin(activity);
-    }
-
-    private void initAutoLoginView() {
-       /* if (autoLoginPage == null){
-            return;
-        }
-        autoLoginLayout = (RelativeLayout) autoLoginPage.findViewById(R.id.py_auto_login_page);
-        autoLoginTips = (TextView) autoLoginPage.findViewById(R.id.py_auto_login_tips);
-        autoLoginWaitTime = (TextView) autoLoginPage.findViewById(R.id.py_auto_login_wait_time);
-        autoLoginChangeAccount = (TextView) autoLoginPage.findViewById(R.id.py_auto_login_change);
-        autoLoginChangeAccount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                iLoginPresenter.autoLoginChangeAccount(activity);
-            }
-        });*/
     }
 
     @Override
@@ -673,6 +645,9 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
         this.sGoogleSignIn = sGoogleSignIn;
     }
 
+    public void setsLineSignIn(SLineSignIn sLineSignIn) {
+        this.sLineSignIn = sLineSignIn;
+    }
 
     public SFacebookProxy getFacebookProxy() {
         return sFacebookProxy;

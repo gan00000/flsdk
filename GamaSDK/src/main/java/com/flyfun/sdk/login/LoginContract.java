@@ -10,6 +10,7 @@ import com.flyfun.data.login.response.SLoginResponse;
 import com.flyfun.sdk.SBaseRelativeLayout;
 import com.flyfun.thirdlib.google.SGoogleSignIn;
 import com.flyfun.thirdlib.facebook.SFacebookProxy;
+import com.flyfun.thirdlib.line.SLineSignIn;
 import com.flyfun.thirdlib.twitter.GamaTwitterLogin;
 
 /**
@@ -76,6 +77,7 @@ public class LoginContract {
         void setSGoogleSignIn(SGoogleSignIn sGoogleSignIn);
         void setSFacebookProxy(SFacebookProxy sFacebookProxy);
         void setTwitterLogin(GamaTwitterLogin twitterLogin);
+        void setLineLogin(SLineSignIn sLineSignIn);
         /**
          * Twitter登入
          */

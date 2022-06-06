@@ -48,6 +48,7 @@ import com.flyfun.thirdlib.facebook.FbResUtil;
 import com.flyfun.thirdlib.facebook.FbSp;
 import com.flyfun.thirdlib.facebook.SFacebookProxy;
 import com.flyfun.thirdlib.google.SGoogleSignIn;
+import com.flyfun.thirdlib.line.SLineSignIn;
 import com.flyfun.thirdlib.twitter.GamaTwitterLogin;
 import com.gama.sdk.R;
 import com.google.gson.Gson;
@@ -112,6 +113,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     private SFacebookProxy sFacebookProxy;
     private SGoogleSignIn sGoogleSignIn;
     private GamaTwitterLogin twitterLogin;
+    private SLineSignIn sLineSignIn;
     private FaceBookUser faceBookUser;
 
     public void setFragment(Fragment fragment) {
@@ -152,6 +154,11 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     @Override
     public void setTwitterLogin(GamaTwitterLogin twitterLogin) {
         this.twitterLogin = twitterLogin;
+    }
+
+    @Override
+    public void setLineLogin(SLineSignIn sLineSignIn) {
+        this.sLineSignIn = sLineSignIn;
     }
 
     @Override
@@ -289,7 +296,17 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
     @Override
     public void lineLogin(Activity activity) {
+        this.sLineSignIn.startSignIn(getActivity().getString(R.string.line_channelId), new SLineSignIn.LineSignInCallBack() {
+            @Override
+            public void success(String id, String mFullName, String mEmail, String idTokenString) {
 
+            }
+
+            @Override
+            public void failure() {
+
+            }
+        });
     }
 
     //目前Google登录使用到，fb登录没有使用

@@ -27,6 +27,7 @@ import com.google.android.gms.tasks.Task;
 import com.linecorp.linesdk.Scope;
 import com.linecorp.linesdk.auth.LineAuthenticationParams;
 import com.linecorp.linesdk.auth.LineLoginApi;
+import com.linecorp.linesdk.auth.LineLoginResult;
 
 import java.util.Arrays;
 
@@ -44,19 +45,7 @@ public class SLineSignIn {
 
 	private Fragment fragment;
 
-
-	// [START declare_auth]
-//	private FirebaseAuth mAuth;
-	// [END declare_auth]
-
 	LineSignInCallBack signInCallBack;
-	private GoogleSignInClient mGoogleSignInClient;
-
-	private String default_web_client_id = "";
-
-	public void setClientId(String clientId) {
-		this.default_web_client_id = clientId;
-	}
 
 	public SLineSignIn(Activity activity) {
 
@@ -95,6 +84,7 @@ public class SLineSignIn {
 	}
 
 	private void initxx(){
+		initDialog();
 	}
 
 
@@ -121,47 +111,54 @@ public class SLineSignIn {
 
 	public void handleActivityResult(Context context, int requestCode, int resultCode, Intent data) {
 		Log.d(TAG,"handleActivityResult --> " + requestCode + "  --> " +  resultCode);
+		if (requestCode != LINE_LOGIN_REQUEST_CODE) {
+			return;
+		}
 		if (isCancel) {
 			return;
 		}
 		dimissDialog();
 
-		if (requestCode == LINE_LOGIN_REQUEST_CODE) {
-			Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-			try {
-				// Google Sign In was successful, authenticate with Firebase
-				GoogleSignInAccount account = task.getResult(ApiException.class);
-				Log.d(TAG, "firebaseAuthWithGoogle:" + account.getId());
+		LineLoginResult result = LineLoginApi.getLoginResultFromIntent(data);
 
-				String mFullName = account.getDisplayName();
-				String mEmail = account.getEmail();
-				String id = account.getId();
-				Log.d(TAG, "mFullName：" + mFullName + ",mEmail:" + mEmail + ",id:" + id);
-				String idToken = account.getIdToken();
-				Log.d(TAG, "idToken：" + idToken);
+		switch (result.getResponseCode()) {
 
-				//firebaseAuthWithGoogle(account.getIdToken());
+			case SUCCESS:
+				// Login successful
+				String accessToken = result.getLineCredential().getAccessToken().getTokenString();
+
+				String mFullName = result.getLineProfile().getDisplayName();
+				String status_message = result.getLineProfile().getStatusMessage();
+				String picture_url = result.getLineProfile().getPictureUrl().toString();
+				String id = result.getLineProfile().getUserId();
+				Log.d(TAG, "mFullName：" + mFullName + ",status_message:" + status_message + ",id:" + id);
 
 				if (signInCallBack != null) {
-					signInCallBack.success(id,mFullName,mEmail,idToken);
+					signInCallBack.success(id,mFullName,"",accessToken);
 				}
 
-			} catch (ApiException e) {
-				// Google Sign In failed, update UI appropriately
-				Log.w(TAG, "Google sign in failed", e);
-				// [START_EXCLUDE]
+				break;
 
+			case CANCEL:
+				// Login canceled by user
+				Log.e("ERROR", "LINE Login Canceled by user.");
 				if (signInCallBack != null) {
 					signInCallBack.failure();
 				}
+				break;
 
-				// [END_EXCLUDE]
-			}
+			default:
+				// Login canceled due to other error
+				Log.e("ERROR", "Login FAILED!");
+				Log.e("ERROR", result.getErrorData().toString());
+				if (signInCallBack != null) {
+					signInCallBack.failure();
+				}
 		}
 
 	}
 
-	/*private void initDialog() {  //初始化loading窗
+	private void initDialog() {  //初始化loading窗
 
 		if (mConnectionProgressDialog == null) {
 			mConnectionProgressDialog = new ProgressDialog(activity);
@@ -174,13 +171,13 @@ public class SLineSignIn {
 			@Override
 			public void onCancel(DialogInterface dialog) {
 				isCancel = true;
-				if (googleSignInCallBack != null) {
-					googleSignInCallBack.failure();
+				if (signInCallBack != null) {
+					signInCallBack.failure();
 				}
 			}
 		});
 
-	}*/
+	}
 
 	private void dimissDialog() { //关闭loading窗
 		if(mConnectionProgressDialog != null) {
