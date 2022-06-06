@@ -18,6 +18,8 @@ public class BasePayBean implements Serializable {
     private String originPurchaseData;
     private String cpOrderId;
     private double usdPrice;
+    private double price;
+    private String currency;
 
     public String getmItemType() {
         return mItemType;
@@ -129,5 +131,21 @@ public class BasePayBean implements Serializable {
 
     public void setUsdPrice(double usdPrice) {
         this.usdPrice = usdPrice;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 }

@@ -6,7 +6,6 @@ import com.core.base.callback.IGameLifeCycle;
 import com.mw.base.bean.SGameLanguage;
 import com.mw.base.bean.SPayType;
 import com.mw.sdk.login.ILoginCallBack;
-import com.mw.sdk.pay.utils.QueryProductListener;
 import com.mw.sdk.ads.SdkAdsConstant;
 import com.mw.sdk.callback.IPayListener;
 
@@ -87,11 +86,6 @@ public interface IFLSDK extends IGameLifeCycle {
     void trackEvent(Activity activity, String eventName, Map<String, Object> map, Set<SdkAdsConstant.EventReportChannel> mediaSet);
 
     void trackCreateRoleEvent(Activity activity, String roleId,String roleName);
-
-
-    void queryProductDetail(Activity activity, SPayType payType, List<String> skus, QueryProductListener listener);
-
-//    void gamaOpenCafeHome(Activity activity);
 
     /**
      * 处理一些特殊功能的接口

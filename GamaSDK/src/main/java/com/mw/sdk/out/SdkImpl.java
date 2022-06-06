@@ -6,25 +6,21 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.core.base.utils.PL;
+import com.gama.pay.IPay;
+import com.gama.pay.gp.GooglePayActivity2;
+import com.gama.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
+import com.gama.pay.gp.bean.req.WebPayReqBean;
+import com.gama.pay.gp.util.PayHelper;
 import com.mw.base.bean.BasePayBean;
 import com.mw.base.bean.SGameLanguage;
 import com.mw.base.bean.SPayType;
 import com.mw.base.cfg.ResConfig;
 import com.mw.base.constant.GamaCommonKey;
-import com.mw.sdk.pay.IPay;
-import com.mw.sdk.pay.gp.GooglePayActivity2;
-import com.mw.sdk.pay.gp.GooglePayHelper;
-import com.mw.sdk.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
-import com.mw.sdk.pay.gp.bean.req.WebPayReqBean;
-import com.mw.sdk.pay.gp.util.PayHelper;
-import com.mw.sdk.pay.utils.QueryProductListener;
-import com.mw.sdk.SWebViewDialog;
-import com.mw.sdk.constant.GsSdkImplConstant;
 import com.mw.base.utils.SLog;
 import com.mw.sdk.R;
+import com.mw.sdk.SWebViewDialog;
 import com.mw.sdk.ads.StarEventLogger;
-
-import java.util.List;
+import com.mw.sdk.constant.GsSdkImplConstant;
 
 public class SdkImpl extends BaseSdkImpl {
     private static final String TAG = SdkImpl.class.getSimpleName();
@@ -41,7 +37,7 @@ public class SdkImpl extends BaseSdkImpl {
             public void run() {
                 //进行启动的查单
                 SLog.logD(TAG, "Start launch query.");
-                GooglePayHelper.getInstance().queryConsumablePurchase(activity);
+//                GooglePayHelper.getInstance().queryConsumablePurchase(activity);
             }
         });
     }
@@ -60,7 +56,7 @@ public class SdkImpl extends BaseSdkImpl {
                 //平台
 //                PlatformManager.getInstance().resume(activity);
 
-                GooglePayHelper.getInstance().setForeground(true);
+//                GooglePayHelper.getInstance().setForeground(true);
             }
         });
     }
@@ -137,7 +133,7 @@ public class SdkImpl extends BaseSdkImpl {
                 //平台
 //                PlatformManager.getInstance().pauseAndStop(activity);
                 //
-                GooglePayHelper.getInstance().setForeground(false);
+//                GooglePayHelper.getInstance().setForeground(false);
             }
         });
     }
@@ -151,7 +147,7 @@ public class SdkImpl extends BaseSdkImpl {
                 //平台
 //                PlatformManager.getInstance().destory(activity);
                 //退出游戏时停止定时查单
-                GooglePayHelper.getInstance().stopQueryTask();
+//                GooglePayHelper.getInstance().stopQueryTask();
 
             }
         });
@@ -257,16 +253,4 @@ public class SdkImpl extends BaseSdkImpl {
 
     }
 
-    @Override
-    public void queryProductDetail(final Activity activity, final SPayType payType, final List<String> skus, final QueryProductListener listener) {
-        super.queryProductDetail(activity, payType, skus, listener);
-        activity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (payType == SPayType.GOOGLE) {
-                    GooglePayHelper.getInstance().queryProductDetail(activity, skus, listener);
-                }
-            }
-        });
-    }
 }

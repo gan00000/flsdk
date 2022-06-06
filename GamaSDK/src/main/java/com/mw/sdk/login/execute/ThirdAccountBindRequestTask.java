@@ -145,11 +145,11 @@ public class ThirdAccountBindRequestTask extends BaseLoginRequestTask {
     public BaseReqeustBean createRequestBean() {
         super.createRequestBean();
 
-
-        thirdAccountBindRequestBean.setSignature(SStringUtil.toMd5(ResConfig.getAppKey(context) + thirdAccountBindRequestBean.getTimestamp() +
-                        thirdAccountBindRequestBean.getName() + thirdAccountBindRequestBean.getPwd() +
-                thirdAccountBindRequestBean.getGameCode() + thirdAccountBindRequestBean.getThirdPlatId() + thirdAccountBindRequestBean.getRegistPlatform()));
-
+        String key = ResConfig.getAppKey(context) + thirdAccountBindRequestBean.getTimestamp() +
+                thirdAccountBindRequestBean.getName() + thirdAccountBindRequestBean.getPwd() +
+                thirdAccountBindRequestBean.getGameCode() + thirdAccountBindRequestBean.getThirdPlatId() + thirdAccountBindRequestBean.getRegistPlatform();
+        PL.d("request key:" + key);
+        thirdAccountBindRequestBean.setSignature(SStringUtil.toMd5(key));
         return thirdAccountBindRequestBean;
     }
 }

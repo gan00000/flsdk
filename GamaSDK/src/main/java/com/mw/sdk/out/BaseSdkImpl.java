@@ -23,7 +23,6 @@ import com.mw.base.bean.SPayType;
 import com.mw.base.utils.GamaUtil;
 import com.mw.base.utils.Localization;
 import com.mw.sdk.login.ILoginCallBack;
-import com.mw.sdk.pay.utils.QueryProductListener;
 import com.mw.sdk.SWebViewDialog;
 import com.mw.sdk.ads.Ad2RequestBean;
 import com.mw.sdk.ads.GamaAdsUtils;
@@ -952,20 +951,4 @@ public class BaseSdkImpl implements IFLSDK {
 
     }
 
-    @Override
-    public void queryProductDetail(final Activity activity, final SPayType payType, final List<String> skus, final QueryProductListener listener) {}
-
-//    @Override
-//    public void gamaOpenCafeHome(final Activity activity) {
-//    }
-
-    /*@Override
-    public void openFunction(final Activity activity, final GsFunctionType type, final ISdkCallBack callBack) {
-        activity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                GsFunctionHelper.openFunction(activity, type, callBack);
-            }
-        });
-    }*/
 }

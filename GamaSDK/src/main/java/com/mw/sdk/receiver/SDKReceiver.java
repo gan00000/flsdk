@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 
-import com.mw.sdk.pay.gp.GooglePayHelper;
 import com.mw.sdk.ads.SdkAdsConstant;
 import com.mw.base.utils.SLog;
 import com.mw.sdk.ads.StarEventLogger;
@@ -23,7 +22,7 @@ public class SDKReceiver extends BaseGamaReceiver {
         if (TextUtils.isEmpty(action)) {
             return;
         }
-        switch (action) {
+       /* switch (action) {
             case GooglePayHelper.ACTION_PAY_REPLACE_OK:
                 Bundle extras = intent.getExtras();
                 if(extras != null) {
@@ -37,6 +36,6 @@ public class SDKReceiver extends BaseGamaReceiver {
             case GooglePayHelper.ACTION_PAY_QUERY_TASK_START:
                 StarEventLogger.trackingWithEventName(context, SdkAdsConstant.GAMA_EVENT_PAY_QUERY, null, null);
                 break;
-        }
+        }*/
     }
 }
