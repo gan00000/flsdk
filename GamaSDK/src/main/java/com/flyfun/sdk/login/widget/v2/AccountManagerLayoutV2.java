@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.flyfun.data.login.constant.GSLoginCommonConstant;
 import com.flyfun.sdk.login.widget.SLoginBaseRelativeLayout;
-import com.gama.sdk.R;
+import com.mw.sdk.R;
 
 
 public class AccountManagerLayoutV2 extends SLoginBaseRelativeLayout implements View.OnClickListener {

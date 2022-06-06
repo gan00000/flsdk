@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import com.core.base.utils.SStringUtil;
 import com.flyfun.base.bean.GamaAreaInfoBean;
-import com.gama.sdk.R;
+import com.mw.sdk.R;
 
 
 //封裝SDK電話號碼輸入框

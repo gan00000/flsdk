@@ -50,7 +50,7 @@ import com.flyfun.thirdlib.facebook.SFacebookProxy;
 import com.flyfun.thirdlib.google.SGoogleSignIn;
 import com.flyfun.thirdlib.line.SLineSignIn;
 import com.flyfun.thirdlib.twitter.GamaTwitterLogin;
-import com.gama.sdk.R;
+import com.mw.sdk.R;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;

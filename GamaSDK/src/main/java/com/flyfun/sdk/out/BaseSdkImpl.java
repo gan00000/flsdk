@@ -43,8 +43,8 @@ import com.flyfun.thirdlib.facebook.FaceBookUser;
 import com.flyfun.thirdlib.facebook.FriendProfile;
 import com.flyfun.thirdlib.facebook.SFacebookProxy;
 import com.flyfun.thirdlib.google.SGooglePlayGameServices;
-import com.gama.sdk.BuildConfig;
-import com.gama.sdk.R;
+import com.mw.sdk.BuildConfig;
+import com.mw.sdk.R;
 
 import org.json.JSONObject;
 

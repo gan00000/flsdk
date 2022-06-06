@@ -12,7 +12,7 @@ import com.core.base.utils.FileUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.ToastUtils;
 import com.facebook.messenger.MessengerUtils;
-import com.gama.sdk.R;
+import com.mw.sdk.R;
 import com.flyfun.sdk.out.ThirdPartyType;
 import com.flyfun.sdk.out.ISdkCallBack;
 

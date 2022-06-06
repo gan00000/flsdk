@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.flyfun.sdk.login.SLoginDialogV2;
 import com.flyfun.sdk.login.widget.SLoginBaseRelativeLayout;
-import com.gama.sdk.R;
+import com.mw.sdk.R;
 
 /**
  * Created by GanYuanrong on 2017/2/6.

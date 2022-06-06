@@ -17,7 +17,7 @@ import com.core.base.utils.SStringUtil;
 import com.flyfun.base.bean.SLoginType;
 import com.flyfun.base.utils.GamaUtil;
 import com.flyfun.sdk.login.model.AccountModel;
-import com.gama.sdk.R;
+import com.mw.sdk.R;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 

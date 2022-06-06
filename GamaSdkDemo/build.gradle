@@ -98,7 +98,7 @@ android {
             abortOnError false
         }
     }
-    namespace 'com.gama.sdk.demo'
+    namespace 'com.mw.sdk.demo'
 }
 
 repositories {

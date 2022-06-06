@@ -16,7 +16,7 @@ import com.flyfun.sdk.SBaseRelativeLayout;
 import com.flyfun.sdk.login.widget.SDKInputEditTextView;
 import com.flyfun.sdk.login.widget.SDKInputType;
 import com.flyfun.sdk.login.widget.SLoginBaseRelativeLayout;
-import com.gama.sdk.R;
+import com.mw.sdk.R;
 
 
 public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.OnClickListener, SBaseRelativeLayout.OperationCallback {

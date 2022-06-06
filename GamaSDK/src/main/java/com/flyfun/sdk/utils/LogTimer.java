@@ -7,7 +7,7 @@ import android.util.Log;
 
 import com.core.base.utils.PL;
 import com.flyfun.sdk.ads.SdkAdsConstant;
-import com.gama.sdk.R;
+import com.mw.sdk.R;
 import com.flyfun.sdk.ads.StarEventLogger;
 
 import java.util.Timer;

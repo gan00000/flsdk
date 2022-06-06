@@ -13,7 +13,7 @@ import com.flyfun.base.widget.SWebView;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
-import com.gama.sdk.R;
+import com.mw.sdk.R;
 
 /**
  * Created by GanYuanrong on 2016/12/1.

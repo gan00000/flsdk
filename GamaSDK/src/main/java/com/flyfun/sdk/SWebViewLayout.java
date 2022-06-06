@@ -13,7 +13,7 @@ import com.core.base.BaseWebChromeClient;
 import com.core.base.BaseWebViewClient;
 import com.flyfun.base.widget.SWebView;
 import com.core.base.utils.SStringUtil;
-import com.gama.sdk.R;
+import com.mw.sdk.R;
 
 /**
  * SWebViewDialog的内容布局

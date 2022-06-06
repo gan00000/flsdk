@@ -15,7 +15,7 @@ import com.core.base.utils.ToastUtils;
 import com.flyfun.base.bean.GamaAreaInfoBean;
 import com.flyfun.sdk.SBaseRelativeLayout;
 import com.flyfun.base.utils.GamaUtil;
-import com.gama.sdk.R;
+import com.mw.sdk.R;
 import com.flyfun.sdk.login.widget.SDKInputEditTextView;
 import com.flyfun.sdk.login.widget.SDKInputType;
 import com.flyfun.sdk.login.widget.SLoginBaseRelativeLayout;

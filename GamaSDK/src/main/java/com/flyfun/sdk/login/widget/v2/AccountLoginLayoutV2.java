@@ -20,7 +20,7 @@ import com.flyfun.sdk.login.model.AccountModel;
 import com.flyfun.sdk.login.widget.SDKInputEditTextView;
 import com.flyfun.sdk.login.widget.SDKInputType;
 import com.flyfun.sdk.login.widget.SLoginBaseRelativeLayout;
-import com.gama.sdk.R;
+import com.mw.sdk.R;
 
 import java.util.ArrayList;
 import java.util.List;

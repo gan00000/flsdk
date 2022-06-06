@@ -20,7 +20,7 @@ import com.flyfun.sdk.SWebViewDialog;
 import com.flyfun.sdk.out.GamaOpenWebType;
 import com.flyfun.sdk.out.ISdkCallBack;
 import com.flyfun.sdk.utils.DialogUtil;
-import com.gama.sdk.R;
+import com.mw.sdk.R;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

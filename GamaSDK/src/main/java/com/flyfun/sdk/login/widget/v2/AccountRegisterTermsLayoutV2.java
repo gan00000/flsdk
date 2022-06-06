@@ -12,7 +12,7 @@
 //
 //import com.gama.base.cfg.ResConfig;
 //import com.gama.base.utils.GamaUtil;
-//import com.gama.sdk.R;
+//import com.mw.sdk.R;
 //import com.gama.sdk.login.widget.SLoginBaseRelativeLayout;
 //
 ///**

@@ -21,7 +21,7 @@ import com.flyfun.pay.utils.QueryProductListener;
 import com.flyfun.sdk.SWebViewDialog;
 import com.flyfun.sdk.constant.GsSdkImplConstant;
 import com.flyfun.base.utils.SLog;
-import com.gama.sdk.R;
+import com.mw.sdk.R;
 import com.flyfun.sdk.ads.StarEventLogger;
 
 import java.util.List;

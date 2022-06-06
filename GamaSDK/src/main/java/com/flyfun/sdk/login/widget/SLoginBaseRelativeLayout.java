@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.core.base.utils.ToastUtils;
 import com.flyfun.sdk.SBaseRelativeLayout;
 import com.flyfun.base.utils.Localization;
-import com.gama.sdk.R;
+import com.mw.sdk.R;
 import com.flyfun.sdk.login.SLoginDialogV2;
 
 /**

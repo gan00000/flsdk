@@ -22,6 +22,7 @@ import com.flyfun.data.login.response.SLoginResponse;
 import com.flyfun.sdk.callback.IPayListener;
 import com.flyfun.sdk.out.FlSdkFactory;
 import com.flyfun.sdk.out.IFLSDK;
+import com.mw.sdk.demo.R;
 
 public class MainActivity extends Activity {
 

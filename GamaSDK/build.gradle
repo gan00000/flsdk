@@ -23,7 +23,7 @@ android {
     lint {
         abortOnError false
     }
-    namespace 'com.gama.sdk'
+    namespace 'com.mw.sdk'
 
 
 }

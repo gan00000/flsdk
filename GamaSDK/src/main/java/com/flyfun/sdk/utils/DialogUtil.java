@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.gama.sdk.R;
+import com.mw.sdk.R;
 
 /**
  * Created by gan on 2017/2/6.

@@ -11,7 +11,7 @@ import com.flyfun.base.bean.GamaOnlineRequestBean;
 import com.flyfun.base.excute.GamaOnlineRequestTask;
 import com.flyfun.base.excute.GamaRoleInfoRequestTask;
 import com.flyfun.base.utils.GamaUtil;
-import com.gama.sdk.R;
+import com.mw.sdk.R;
 import com.flyfun.thirdlib.facebook.SFacebookProxy;
 import com.flyfun.thirdlib.google.SGoogleProxy;
 

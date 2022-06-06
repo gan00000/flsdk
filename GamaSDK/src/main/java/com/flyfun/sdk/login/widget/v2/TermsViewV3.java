@@ -20,7 +20,7 @@ import com.core.base.utils.ToastUtils;
 import com.flyfun.base.cfg.ResConfig;
 import com.flyfun.base.utils.GamaUtil;
 import com.flyfun.sdk.login.widget.SLoginBaseRelativeLayout;
-import com.gama.sdk.R;
+import com.mw.sdk.R;
 
 /**
  * Created by GanYuanrong on 2017/2/6.
