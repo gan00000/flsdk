@@ -1,50 +1,34 @@
 {
   "project_info": {
-    "project_number": "942710672171",
-    "firebase_url": "https://flyfun-lyj.firebaseio.com",
-    "project_id": "flyfun-lyj",
-    "storage_bucket": "flyfun-lyj.appspot.com"
+    "project_number": "985871206324",
+    "project_id": "puzzle-f4c57",
+    "storage_bucket": "puzzle-f4c57.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:942710672171:android:66a071f5a3e16ffbdd536e",
+        "mobilesdk_app_id": "1:985871206324:android:2f7b7a2a6b11b75daed4e1",
         "android_client_info": {
-          "package_name": "com.flyfun.lyj"
+          "package_name": "com.hgame.fsyl"
         }
       },
       "oauth_client": [
         {
-          "client_id": "942710672171-ibf7nqk7op0im78k50kvg7d5vnhjhcqt.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.flyfun.lyj",
-            "certificate_hash": "f1738617b7ae0c892ca378439c80aa5b9f4bbd50"
-          }
-        },
-        {
-          "client_id": "942710672171-393c0r7s869k9sg8t00lvpbh0otoim72.apps.googleusercontent.com",
+          "client_id": "985871206324-50c386ns175hesvo5qj1gcbjhe39ukbr.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCDyIQGLYmzGJdLZWfofFi4X_U_6ztKltA"
+          "current_key": "AIzaSyAavR7X7FGn4CXLI22GxWSeTqNm7QPCAnU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "942710672171-conkb67cs5ue1704j0j6svoja2eea6jj.apps.googleusercontent.com",
+              "client_id": "985871206324-50c386ns175hesvo5qj1gcbjhe39ukbr.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "942710672171-cnrkvkuteojkj1urtkjcogj5nl6he6bg.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.flyfun.lyj"
-              }
             }
           ]
         }
@@ -52,43 +36,123 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:942710672171:android:ef4ccc88f9e5a34bdd536e",
+        "mobilesdk_app_id": "1:985871206324:android:f92379ee404f99abaed4e1",
         "android_client_info": {
-          "package_name": "com.flyfun.lyj.google"
+          "package_name": "com.hgame.myns"
         }
       },
       "oauth_client": [
         {
-          "client_id": "942710672171-5r5sc3ca05sh2a5h85ngd62qdgen4vv6.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.flyfun.lyj.google",
-            "certificate_hash": "f1738617b7ae0c892ca378439c80aa5b9f4bbd50"
-          }
-        },
-        {
-          "client_id": "942710672171-393c0r7s869k9sg8t00lvpbh0otoim72.apps.googleusercontent.com",
+          "client_id": "985871206324-50c386ns175hesvo5qj1gcbjhe39ukbr.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCDyIQGLYmzGJdLZWfofFi4X_U_6ztKltA"
+          "current_key": "AIzaSyAavR7X7FGn4CXLI22GxWSeTqNm7QPCAnU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "942710672171-conkb67cs5ue1704j0j6svoja2eea6jj.apps.googleusercontent.com",
+              "client_id": "985871206324-50c386ns175hesvo5qj1gcbjhe39ukbr.apps.googleusercontent.com",
               "client_type": 3
-            },
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:985871206324:android:0ae8c8f0ad10ee0aaed4e1",
+        "android_client_info": {
+          "package_name": "com.hgame.shjy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "985871206324-50c386ns175hesvo5qj1gcbjhe39ukbr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAavR7X7FGn4CXLI22GxWSeTqNm7QPCAnU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
             {
-              "client_id": "942710672171-cnrkvkuteojkj1urtkjcogj5nl6he6bg.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.flyfun.lyj"
-              }
+              "client_id": "985871206324-50c386ns175hesvo5qj1gcbjhe39ukbr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:985871206324:android:2a2ee31fb9cba093aed4e1",
+        "android_client_info": {
+          "package_name": "com.hgame.sxh"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "985871206324-n48a3o0ckh38lrjl2cs0u03c50hrau3r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hgame.sxh",
+            "certificate_hash": "6d84cc51a37c445f6a5f164b51d5ec2a34828e8c"
+          }
+        },
+        {
+          "client_id": "985871206324-50c386ns175hesvo5qj1gcbjhe39ukbr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAavR7X7FGn4CXLI22GxWSeTqNm7QPCAnU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "985871206324-50c386ns175hesvo5qj1gcbjhe39ukbr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:985871206324:android:4381b264fd63b070aed4e1",
+        "android_client_info": {
+          "package_name": "com.mg.testa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "985871206324-50c386ns175hesvo5qj1gcbjhe39ukbr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAavR7X7FGn4CXLI22GxWSeTqNm7QPCAnU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "985871206324-50c386ns175hesvo5qj1gcbjhe39ukbr.apps.googleusercontent.com",
+              "client_type": 3
             }
           ]
         }

@@ -88,11 +88,11 @@ public class MainActivity extends Activity {
                 mIFLSDK.login(MainActivity.this, new ILoginCallBack() {
                     @Override
                     public void onLogin(SLoginResponse sLoginResponse) {
-                        if (sLoginResponse != null) {
-                            String uid = sLoginResponse.getUserId();
+                        if (sLoginResponse != null && sLoginResponse.getData() != null) {
+                            String uid = sLoginResponse.getData().getUserId();
                             userId = uid;
-                            String accessToken = sLoginResponse.getAccessToken();
-                            String timestamp = sLoginResponse.getTimestamp();
+                            String accessToken = sLoginResponse.getData().getToken();
+                            String timestamp = sLoginResponse.getData().getTimestamp();
                             //todo 进行验证
 
                             AlertDialog.Builder builder;
@@ -109,7 +109,7 @@ public class MainActivity extends Activity {
                                     dialog.dismiss();
                                 }
                             }).setCancelable(false)
-                                    .setMessage(sLoginResponse.msg())
+                                    .setMessage(sLoginResponse.getData().print())
                                     .create();
                             dialog.show();
 
