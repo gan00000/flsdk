@@ -2,8 +2,8 @@
 
     <!--港台域名列表 开始-->
     <!--登录域名-->
-    <string name="zh_tw_gama_login_pre_url" translatable="false">http://192.168.10.42:8080/</string>
-    <string name="zh_tw_gama_login_spa_url" translatable="false">http://192.168.10.42:8080/</string>
+    <string name="zh_tw_gama_login_pre_url" translatable="false">http://192.168.10.202:8080/</string>
+    <string name="zh_tw_gama_login_spa_url" translatable="false">http://192.168.10.202:8080/</string>
 
     <!--支付域名-->
     <string name="zh_tw_gama_pay_pre_url" translatable="false">https://pay.flyfungame.com/</string>
@@ -29,14 +29,9 @@
     <string name="zh_tw_gama_cs_pre_url" translatable="false"></string>
     <string name="zh_tw_gama_cs_spa_url" translatable="false"></string>
 
-    <!-- 服务条款 -->
-    <string name="zh_tw_gama_terms_url" translatable="false">https://www.flyfungame.com/sdk/archive.html</string>
 
     <!--使用者條款 - 服務條款-->
-    <string name="zh_tw_gama_start_terms_service_url" translatable="false">https://www.flyfungame.com/sdk/archive.html</string>
-
-    <!--使用者條款 - 隱私規章-->
-    <string name="zh_tw_gama_start_terms_private_url" translatable="false">https://www.flyfungame.com/sdk/privacy.html</string>
+    <string name="zh_tw_gama_start_terms_service_url" translatable="false">https://www.baidu.com/</string>
 
     <!--客服链接-->
     <string name="zh_tw_gama_service_url" translatable="false">https://platform.flyfungame.com/web/page/service.app</string>

@@ -151,10 +151,6 @@
 <!--    <string name="py_send_new_pwd">發送新密碼</string>-->
 <!--    <string name="py_change_pwd">修改密碼</string>-->
 
-
-    <string name="sdk_terms_title">網絡連線遊戲服務定型化契約</string>
-
-
 <!--    新增-->
     <string name="guest_login_btn">遊客登入</string>
     <string name="tips_have_account">已有帳號？</string>
@@ -190,5 +186,6 @@
     <string name="py_error_occur">網路異常，請檢查重試</string>
     <string name="text_i_agree_tips">我已閱讀並同意</string>
     <string name="text_term_moqie"><u>定型化契約</u></string>
+    <string name="sdk_terms_title">定型化契約</string>
 
 </resources>

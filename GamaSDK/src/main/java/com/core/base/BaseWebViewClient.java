@@ -31,7 +31,7 @@ public class BaseWebViewClient extends WebViewClient {
 
     Activity activity;
 
-    public BaseWebViewClient() {
+    private BaseWebViewClient() {
     }
 
     public BaseWebViewClient(Activity activity) {
@@ -118,29 +118,21 @@ public class BaseWebViewClient extends WebViewClient {
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
-//        super.onReceivedError(view, request, error);
+        super.onReceivedError(view, request, error);
         PL.w("onReceivedError(WebView view, WebResourceRequest request, WebResourceError error)");
-        handleReceivedError(view, request.getUrl().toString());
+//        handleReceivedError(view, request.getUrl().toString());
     }
 
     @Override
     public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-//        super.onReceivedError(view, errorCode, description, failingUrl);
+        super.onReceivedError(view, errorCode, description, failingUrl);
         PL.w("onReceivedError(WebView view, int errorCode, String description, String failingUrl)");
-        handleReceivedError(view, failingUrl);
+//        handleReceivedError(view, failingUrl);
     }
 
     public void handleReceivedError(WebView webView,String url){
         try {
             PL.w("ERROR URL:" + url);
-//            webView.loadData(URLEncoder.encode("loading error!!!","utf-8"),"text/html","utf-8");
-            if (SStringUtil.isNotEmpty("url") && url.contains("starb168.com") && url.contains("?")){
-                String urlSub = url.substring(0,url.indexOf("?"));
-                PL.w("ERROR URL urlSub:" + urlSub);
-                if (urlSub.contains("starb168.com")){
-                    webView.loadData("loading error, Please try again later", "text/html", "utf-8");
-                }
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }

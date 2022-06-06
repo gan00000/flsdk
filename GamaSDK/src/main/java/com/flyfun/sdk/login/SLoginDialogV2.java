@@ -22,6 +22,7 @@ import com.flyfun.sdk.login.widget.v2.AccountChangePwdLayoutV2;
 import com.flyfun.sdk.login.widget.v2.AccountFindPwdLayoutV2;
 import com.flyfun.sdk.login.widget.v2.AccountManagerLayoutV2;
 import com.flyfun.sdk.login.widget.v2.LoginWithRegLayout;
+import com.flyfun.sdk.login.widget.v2.TermsViewV3;
 import com.flyfun.sdk.login.widget.v2.WelcomeBackLayout;
 import com.flyfun.sdk.login.widget.v2.MainHomeLayout;
 import com.flyfun.sdk.login.widget.v2.ThirdPlatBindAccountLayoutV2;
@@ -59,7 +60,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
     private SLoginBaseRelativeLayout changePwdView;
     private SLoginBaseRelativeLayout findPwdView;
     private SLoginBaseRelativeLayout accountManagerCenterView;
-//    private SLoginBaseRelativeLayout sdkTermsV3View;
+    private SLoginBaseRelativeLayout sdkTermsV3View;
 
     private SLoginBaseRelativeLayout bindUniqueView;
     private SLoginBaseRelativeLayout bindFbView;
@@ -212,18 +213,16 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 
     }
 
-    public void toTermsV3View() {
+    private void toTermView() {
 
-        for (SLoginBaseRelativeLayout childView : viewPageList) {
-            if (childView == null){
-                continue;
-            }
-            childView.setVisibility(View.GONE);
+        if (sdkTermsV3View == null || !viewPageList.contains(sdkTermsV3View)){
+
+            sdkTermsV3View = new TermsViewV3(activity);
+            sdkTermsV3View.setLoginDialogV2(this);
+            contentFrameLayout.addView(sdkTermsV3View);
+            viewPageList.add(sdkTermsV3View);
         }
-
-//        sdkTermsV3View = new TermsViewV3(context);
-//        sdkTermsV3View.setLoginDialogV2(this);
-//        contentFrameLayout.addView(sdkTermsV3View);
+        setViewPageVisable(sdkTermsV3View);
     }
 
     public void toLoginWithRegView() {
@@ -595,6 +594,11 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
     }
 
     @Override
+    public void showTermView() {
+        toTermView();
+    }
+
+    @Override
     public void showAutoLoginView() {
 
     }
@@ -626,10 +630,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 
     @Override
     public void changePwdSuccess(SLoginResponse sLoginResponse) {
-        if (changePwdView != null){
-            changePwdView.refreshViewData();
-        }
-        toAccountLoginView();
+
     }
 
     @Override
@@ -643,24 +644,24 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 
     @Override
     public void findPwdSuccess(SLoginResponse sLoginResponse) {
-        if (findPwdView != null){
-            findPwdView.refreshViewData();
-        }
-        toAccountLoginView();
+//        if (findPwdView != null){
+//            findPwdView.refreshViewData();
+//        }
+//        toAccountLoginView();
 
     }
 
     @Override
     public void accountBindSuccess(SLoginResponse sLoginResponse) {
-        if (bindFbView != null){
-            bindFbView.refreshViewData();
-        }
-        if (bindGoogleView != null){
-            bindGoogleView.refreshViewData();
-        }
-        if (bindUniqueView != null){
-            bindUniqueView.refreshViewData();
-        }
+//        if (bindFbView != null){
+//            bindFbView.refreshViewData();
+//        }
+//        if (bindGoogleView != null){
+//            bindGoogleView.refreshViewData();
+//        }
+//        if (bindUniqueView != null){
+//            bindUniqueView.refreshViewData();
+//        }
         toAccountLoginView();
     }
 

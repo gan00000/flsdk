@@ -7,49 +7,48 @@
 
 
     <LinearLayout
-        android:layout_width="360dp"
-        android:layout_height="400dp"
+        android:layout_width="375dp"
+        android:layout_height="667dp"
         android:orientation="vertical"
         android:gravity="center_horizontal"
         android:layout_centerInParent="true"
-        android:background="@drawable/login_cons_bg"
         >
 
+        <include
+            layout="@layout/sdk_ui_head_layout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="182dp"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:background="@color/c_848484"
+            />
+
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="visible">
-
-            <include
-                layout="@layout/sdk_ui_head_layout"
-                />
-
-
-        </RelativeLayout>
-
-
-        <RelativeLayout
-            android:background="@drawable/sdk_terms_content_bg"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             android:padding="2dp"
-            android:layout_weight="1.0"
-            android:layout_marginStart="12dp"
-            android:layout_marginEnd="12dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginTop="12dp"
             >
 
             <com.flyfun.base.widget.SWebView
                 android:id="@+id/sdk_terms_webview"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/sdk_terms_content_bg" />
+                android:layout_height="match_parent" />
 
         </RelativeLayout>
 
 
 
-        <LinearLayout
+       <!-- <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="20dp"
             android:layout_marginTop="4dp"
@@ -88,7 +87,7 @@
             android:gravity="center"
             android:text="@string/py_confire"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/sp_26" />
+            android:textSize="@dimen/sp_26" />-->
     </LinearLayout>
 
 

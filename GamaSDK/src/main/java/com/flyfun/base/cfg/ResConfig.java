@@ -188,20 +188,6 @@ public class ResConfig {
     }
 
     /**
-     * 获取注册的条款链接
-     */
-    public static String getRegisterTermUrl(Context context) {
-        return getConfigUrl(context, "gama_terms_url");
-    }
-
-    /**
-     * 获取个人条款链接
-     */
-    public static String getPrivateTermUrl(Context context) {
-        return getConfigUrl(context, "gama_start_terms_private_url");
-    }
-
-    /**
      * 获取服务条款链接
      */
     public static String getServiceTermUrl(Context context) {

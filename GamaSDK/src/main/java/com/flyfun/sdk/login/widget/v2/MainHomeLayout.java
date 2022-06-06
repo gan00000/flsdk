@@ -105,7 +105,10 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
                 sLoginDialogv2.getLoginPresenter().lineLogin(sLoginDialogv2.getActivity());
             }
 
+        }else if (v == layout_go_term){
+            sLoginDialogv2.showTermView();
         }
+
     }
 
     private boolean checkAgreeTerm(){
