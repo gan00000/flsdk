@@ -7,6 +7,7 @@ import com.core.base.bean.BaseReqeustBean;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.mw.base.bean.SLoginType;
+import com.mw.base.cfg.ResConfig;
 import com.mw.sdk.login.constant.ApiRequestMethod;
 import com.mw.sdk.login.model.request.ThirdAccountBindRequestBean;
 
@@ -145,7 +146,7 @@ public class ThirdAccountBindRequestTask extends BaseLoginRequestTask {
         super.createRequestBean();
 
 
-        thirdAccountBindRequestBean.setSignature(SStringUtil.toMd5(thirdAccountBindRequestBean.getAppKey() + thirdAccountBindRequestBean.getTimestamp() +
+        thirdAccountBindRequestBean.setSignature(SStringUtil.toMd5(ResConfig.getAppKey(context) + thirdAccountBindRequestBean.getTimestamp() +
                         thirdAccountBindRequestBean.getName() + thirdAccountBindRequestBean.getPwd() +
                 thirdAccountBindRequestBean.getGameCode() + thirdAccountBindRequestBean.getThirdPlatId() + thirdAccountBindRequestBean.getRegistPlatform()));
 

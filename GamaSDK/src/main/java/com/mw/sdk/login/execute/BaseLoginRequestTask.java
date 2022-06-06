@@ -59,9 +59,9 @@ public class BaseLoginRequestTask extends AbsHttpRequest {
 		if (SStringUtil.isEmpty(sdkBaseRequestBean.getGameCode())) {
 			sdkBaseRequestBean.setGameCode(ResConfig.getGameCode(context));
 		}
-		if (SStringUtil.isEmpty(sdkBaseRequestBean.getAppKey())) {
-			sdkBaseRequestBean.setAppKey(ResConfig.getAppKey(context));
-		}
+//		if (SStringUtil.isEmpty(sdkBaseRequestBean.getAppKey())) {
+//			sdkBaseRequestBean.setAppKey(ResConfig.getAppKey(context));
+//		}
 
 
 		if(SStringUtil.isEmpty(sdkBaseRequestBean.getGameLanguage())){

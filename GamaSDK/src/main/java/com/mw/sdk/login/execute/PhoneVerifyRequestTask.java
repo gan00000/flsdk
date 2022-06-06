@@ -5,6 +5,7 @@ import android.text.TextUtils;
 
 import com.core.base.bean.BaseReqeustBean;
 import com.core.base.utils.SStringUtil;
+import com.mw.base.cfg.ResConfig;
 import com.mw.sdk.login.constant.ApiRequestMethod;
 import com.mw.sdk.login.model.request.PhoneVerifyRequestBean;
 
@@ -36,7 +37,7 @@ public class PhoneVerifyRequestTask extends BaseLoginRequestTask {
 	public BaseReqeustBean createRequestBean() {
 		super.createRequestBean();
 		//签名，规则 AppKey + timestamp + gameCode + thirdPlatId + registPlatform
-		requestBean.setSignature(SStringUtil.toMd5(requestBean.getAppKey() + requestBean.getTimestamp() +
+		requestBean.setSignature(SStringUtil.toMd5(ResConfig.getAppKey(context) + requestBean.getTimestamp() +
 				requestBean.getGameCode() + requestBean.getThirdPlatId() + requestBean.getRegistPlatform()));
 
 		return requestBean;

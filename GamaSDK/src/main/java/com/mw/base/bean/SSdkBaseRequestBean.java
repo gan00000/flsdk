@@ -16,7 +16,7 @@ import com.mw.base.utils.GamaUtil;
  */
 public class SSdkBaseRequestBean extends BaseReqeustBean {
 
-    private String appKey;
+//    private String appKey;
     private String gameCode;
     private String os = "android";
     private String gameLanguage = "";//游戏语言
@@ -53,7 +53,7 @@ public class SSdkBaseRequestBean extends BaseReqeustBean {
 
     private void initSdkField(Context context) {
 
-        appKey = ResConfig.getAppKey(context);
+//        appKey = ResConfig.getAppKey(context);
         accessToken = GamaUtil.getSdkAccessToken(context);
         loginTimestamp = GamaUtil.getSdkTimestamp(context);
         gameCode = ResConfig.getGameCode(context);
@@ -70,13 +70,13 @@ public class SSdkBaseRequestBean extends BaseReqeustBean {
         spy_advertiser = ResUtil.findStringByName(context,"spy_advertiser");
     }
 
-    public String getAppKey() {
-        return appKey;
-    }
-
-    public void setAppKey(String appKey) {
-        this.appKey = appKey;
-    }
+//    public String getAppKey() {
+//        return appKey;
+//    }
+//
+//    public void setAppKey(String appKey) {
+//        this.appKey = appKey;
+//    }
 
     public String getGameCode() {
         return gameCode;

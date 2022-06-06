@@ -7,6 +7,7 @@ import com.core.base.bean.BaseReqeustBean;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.mw.base.bean.SLoginType;
+import com.mw.base.cfg.ResConfig;
 import com.mw.sdk.login.constant.ApiRequestMethod;
 import com.mw.sdk.login.model.request.MacLoginRegRequestBean;
 import com.mw.base.utils.GamaUtil;
@@ -42,7 +43,7 @@ public class MacLoginRegRequestTask extends BaseLoginRequestTask {
     @Override
     public BaseReqeustBean createRequestBean() {
         super.createRequestBean();
-        macLoginRegRequestBean.setSignature(SStringUtil.toMd5(macLoginRegRequestBean.getAppKey() + macLoginRegRequestBean.getTimestamp() +
+        macLoginRegRequestBean.setSignature(SStringUtil.toMd5(ResConfig.getAppKey(context) + macLoginRegRequestBean.getTimestamp() +
                 macLoginRegRequestBean.getUniqueId() + macLoginRegRequestBean.getGameCode()));
         return macLoginRegRequestBean;
     }

@@ -300,6 +300,11 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             @Override
             public void success(String id, String mFullName, String mEmail, String idTokenString) {
 
+                ThirdLoginRegRequestBean thirdLoginRegRequestBean = new ThirdLoginRegRequestBean(activity);
+                thirdLoginRegRequestBean.setThirdPlatId(id);
+                thirdLoginRegRequestBean.setRegistPlatform(SLoginType.LOGIN_TYPE_LINE);
+                thirdLoginRegRequestBean.setThirdAccount("");
+                thirdPlatLogin(activity, thirdLoginRegRequestBean);
             }
 
             @Override
@@ -732,15 +737,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 if (sLoginResponse != null) {
 
                     if (sLoginResponse.isRequestSuccess()){
-
                         handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_FB);
-                        return;
-                    } else if ("9000".equals(sLoginResponse.getCode())) { //需要验证手机
-                        ToastUtils.toast(getActivity(), sLoginResponse.getMessage());
-                        if (isAutoLogin) {
-                            showLoginWithRegView();
-                        }
-                        showPhoneVerifyView(SLoginType.LOGIN_TYPE_FB, fbScopeId);
                         return;
                     } else {
                         ToastUtils.toast(getActivity(), sLoginResponse.getMessage());
@@ -748,22 +745,22 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 } else {
                     ToastUtils.toast(getActivity(), R.string.py_error_occur);
                 }
-                showLoginWithRegView();
+//                showLoginWithRegView();
             }
 
             @Override
             public void timeout(String code) {
-                showLoginWithRegView();
+//                showLoginWithRegView();
             }
 
             @Override
             public void noData() {
-                showLoginWithRegView();
+//                showLoginWithRegView();
             }
 
             @Override
             public void cancel() {
-                showLoginWithRegView();
+//                showLoginWithRegView();
             }
         });
         cmd.excute(SLoginResponse.class);

@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.core.base.bean.BaseReqeustBean;
 import com.core.base.utils.SStringUtil;
+import com.mw.base.cfg.ResConfig;
 import com.mw.sdk.login.constant.ApiRequestMethod;
 import com.mw.sdk.login.model.request.AccountRegRequestBean;
 
@@ -43,7 +44,7 @@ public class AccountRegisterRequestTask extends BaseLoginRequestTask {
     public BaseReqeustBean createRequestBean() {
         super.createRequestBean();
 
-        regRequestBean.setSignature(SStringUtil.toMd5(regRequestBean.getAppKey() + regRequestBean.getTimestamp() +
+        regRequestBean.setSignature(SStringUtil.toMd5(ResConfig.getAppKey(context) + regRequestBean.getTimestamp() +
                 regRequestBean.getName() + regRequestBean.getGameCode()));
 
         return regRequestBean;

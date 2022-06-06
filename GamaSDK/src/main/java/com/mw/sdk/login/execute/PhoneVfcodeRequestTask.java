@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.core.base.bean.BaseReqeustBean;
 import com.core.base.utils.SStringUtil;
+import com.mw.base.cfg.ResConfig;
 import com.mw.sdk.login.constant.ApiRequestMethod;
 import com.mw.sdk.login.model.request.PhoneVfcodeRequestBean;
 
@@ -47,7 +48,7 @@ public class PhoneVfcodeRequestTask extends BaseLoginRequestTask {
 	public BaseReqeustBean createRequestBean() {
 		super.createRequestBean();
 
-		requestBean.setSignature(SStringUtil.toMd5(requestBean.getAppKey()
+		requestBean.setSignature(SStringUtil.toMd5(ResConfig.getAppKey(context)
 				+ requestBean.getTimestamp() +
 				requestBean.getGameCode()
 				+ requestBean.getPhone()));
