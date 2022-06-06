@@ -93,7 +93,7 @@ public class SLineSignIn {
 
 		}
 		catch(Exception e) {
-			Log.e("ERROR", e.toString());
+			Log.e(TAG, e.toString());
 		}
 
 	}
@@ -118,7 +118,7 @@ public class SLineSignIn {
 
 				String mFullName = result.getLineProfile().getDisplayName();
 				String status_message = result.getLineProfile().getStatusMessage();
-				String picture_url = result.getLineProfile().getPictureUrl().toString();
+//				String picture_url = result.getLineProfile().getPictureUrl().toString();//可能为null
 				String id = result.getLineProfile().getUserId();
 				Log.d(TAG, "mFullName：" + mFullName + ",status_message:" + status_message + ",id:" + id);
 
@@ -130,7 +130,7 @@ public class SLineSignIn {
 
 			case CANCEL:
 				// Login canceled by user
-				Log.e("ERROR", "LINE Login Canceled by user.");
+				Log.e(TAG, "LINE Login Canceled by user.");
 				if (signInCallBack != null) {
 					signInCallBack.failure();
 				}
@@ -138,8 +138,8 @@ public class SLineSignIn {
 
 			default:
 				// Login canceled due to other error
-				Log.e("ERROR", "Login FAILED!");
-				Log.e("ERROR", result.getErrorData().toString());
+				Log.e(TAG, "Login FAILED!");
+				Log.e(TAG, result.getErrorData().toString());
 				if (signInCallBack != null) {
 					signInCallBack.failure();
 				}
