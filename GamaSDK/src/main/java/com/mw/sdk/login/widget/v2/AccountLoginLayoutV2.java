@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.core.base.utils.ToastUtils;
 import com.mw.base.bean.SLoginType;
@@ -275,24 +276,6 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
 
         account = loginAccountEditText.getEditableText().toString().trim();
         password = loginPasswordEditText.getEditableText().toString().trim();
-
-        if (!GamaUtil.checkAccount(account)) {
-            toast(R.string.text_account_format);
-            return;
-        }
-
-        if (!accountSdkInputEditTextView.checkAccount()){
-            return;
-        }
-
-        if (TextUtils.isEmpty(password)) {
-            ToastUtils.toast(getActivity(), R.string.py_password_empty);
-            return;
-        }
-        if (!GamaUtil.checkPassword(password)) {
-            toast(R.string.text_pwd_format);
-            return;
-        }
 
         sLoginDialogv2.getLoginPresenter().starpyAccountLogin(sLoginDialogv2.getActivity(),account,password, "", true);
 

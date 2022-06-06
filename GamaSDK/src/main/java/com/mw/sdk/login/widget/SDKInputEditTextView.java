@@ -213,7 +213,7 @@ public class SDKInputEditTextView extends RelativeLayout {
         });
     }
 
-    public boolean checkAccount(){
+ /*   public boolean checkAccount(){
 
         String account = this.getInputEditText().getEditableText().toString().trim();
         if (TextUtils.isEmpty(account)) {
@@ -225,7 +225,7 @@ public class SDKInputEditTextView extends RelativeLayout {
             return false;
         }
         return  true;
-    }
+    }*/
 
    /* public boolean checkPassword(){
         String password = this.getInputEditText().getEditableText().toString().trim();

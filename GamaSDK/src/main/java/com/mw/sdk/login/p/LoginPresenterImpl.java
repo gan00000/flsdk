@@ -969,7 +969,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                                 fbLogin(mActivity);
 
                             } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GOOGLE, registPlatform)) {//Google登录
-                                googleLogin(activity);
+//                                googleLogin(activity);
 //                                ThirdLoginRegRequestBean thirdLoginRegRequestBean = new ThirdLoginRegRequestBean(activity);
 //                                thirdLoginRegRequestBean.setThirdPlatId(GamaUtil.getGoogleId(activity));
 //                                thirdLoginRegRequestBean.setRegistPlatform(SLoginType.LOGIN_TYPE_GOOGLE);
@@ -1368,9 +1368,31 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     }
 
     @Override
-    public void starpyAccountLogin(Activity activity, String account, String pwd, String vfcode, boolean isSaveAccount) {
+    public void starpyAccountLogin(Activity activity, String account, String password, String vfcode, boolean isSaveAccount) {
         this.mActivity = activity;
-        login(activity, account, pwd, vfcode, isSaveAccount);
+
+        account = account.trim();
+        password = password.trim();
+        if (TextUtils.isEmpty(account)) {
+            ToastUtils.toast(getContext(), R.string.py_account_empty);
+            return;
+        }
+
+        if (!GamaUtil.checkAccount(account)) {
+            ToastUtils.toast(activity,R.string.text_account_format);
+            return;
+        }
+        if (TextUtils.isEmpty(password)) {
+            ToastUtils.toast(getActivity(), R.string.py_password_empty);
+            return;
+        }
+        if (!GamaUtil.checkPassword(password)) {
+            ToastUtils.toast(activity,R.string.text_pwd_format);
+            return;
+        }
+
+
+        login(activity, account, password, vfcode, isSaveAccount);
     }
 
     private void login(final Activity activity, final String account, final String password, String vfcode, final boolean isSaveAccount) {

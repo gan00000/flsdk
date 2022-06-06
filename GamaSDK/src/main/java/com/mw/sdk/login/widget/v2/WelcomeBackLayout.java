@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
+import com.mw.base.bean.SLoginType;
 import com.mw.base.utils.GamaUtil;
 import com.mw.sdk.SBaseRelativeLayout;
 import com.mw.sdk.login.AccountPopupWindow;
@@ -37,6 +38,7 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
     private SDKInputEditTextView accountSdkInputEditTextView;
 
     private String account;
+    private AccountModel currentAccountModel;
 
     View historyAccountListBtn;
     private AccountPopupWindow accountPopupWindow;
@@ -90,6 +92,7 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
 
 
         backView.setOnClickListener(this);
+        btn_login_game.setOnClickListener(this);
         btn_swith_account.setOnClickListener(this);
         btn_update_account.setOnClickListener(this);
         btn_change_pwd.setOnClickListener(this);
@@ -106,6 +109,7 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
             public void onUse(AccountModel accountModel) {
 //                accountSdkInputEditTextView.getInputEditText().setText(accountModel.getAccount());
                 GamaUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(),accountEditText);
+                currentAccountModel = accountModel;
             }
 
             @Override
@@ -124,14 +128,16 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
 
         List<AccountModel> ams = GamaUtil.getAccountModels(getContext());
         if (ams != null && !ams.isEmpty()){//设置按照最好登录时间排序后的第一个账号
-            AccountModel lastAccountModel = ams.get(0);
+            currentAccountModel = ams.get(0);
 
-            if (lastAccountModel != null){ //显示记住的密码，待修改
-                account = lastAccountModel.getAccount();
+            if (currentAccountModel != null){ //显示记住的密码，待修改
+                account = currentAccountModel.getAccount();
 //            String password = lastAccountModel.getPassword();
 //                accountSdkInputEditTextView.getInputEditText().setText(account);
                 ImageView imageView = accountSdkInputEditTextView.getIconImageView();
-                GamaUtil.setAccountWithIcon(lastAccountModel,imageView,accountEditText);
+                GamaUtil.setAccountWithIcon(currentAccountModel,imageView,accountEditText);
+
+                //判斷是否綁定，顯示是否升級賬號
             }
 
 
@@ -166,7 +172,7 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
     public void onClick(View v) {
 
         if (v == btn_login_game) {
-            findPwd();
+            login();
         } else if (v == backView) {//返回键
 
         }else if (v == btn_change_pwd) {
@@ -192,38 +198,27 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
 
     }
 
-    private void findPwd() {
+    private void login() {
 
-        account = accountEditText.getEditableText().toString().trim();
-        if (TextUtils.isEmpty(account)) {
-            ToastUtils.toast(getActivity(), R.string.py_account_empty);
+        if (currentAccountModel == null){
             return;
+        }
+        if (SLoginType.LOGIN_TYPE_FB.equals(currentAccountModel.getLoginType())){
+            sLoginDialogv2.getLoginPresenter().fbLogin(sLoginDialogv2.getActivity());
+        }else  if (SLoginType.LOGIN_TYPE_GOOGLE.equals(currentAccountModel.getLoginType())){
+            sLoginDialogv2.getLoginPresenter().googleLogin(sLoginDialogv2.getActivity());
+        }else  if (SLoginType.LOGIN_TYPE_GUEST.equals(currentAccountModel.getLoginType())){
+            sLoginDialogv2.getLoginPresenter().guestLogin(sLoginDialogv2.getActivity());
+        }else if (SLoginType.LOGIN_TYPE_LINE.equals(currentAccountModel.getLoginType())){
+            sLoginDialogv2.getLoginPresenter().lineLogin(sLoginDialogv2.getActivity());
+        }else if (SLoginType.LOGIN_TYPE_MG.equals(currentAccountModel.getLoginType())){
+
+            account = currentAccountModel.getAccount();
+            String pwd = currentAccountModel.getPassword();
+            sLoginDialogv2.getLoginPresenter().starpyAccountLogin(sLoginDialogv2.getActivity(),account,pwd,"",true);
         }
 
 
-        String areaCode = "";//gama_find_tv_area.getText().toString();
-        if(TextUtils.isEmpty(areaCode)) {
-            ToastUtils.toast(getActivity(), R.string.py_area_code_empty);
-            return;
-        }
-        String phone = "";//gama_find_et_phone.getEditableText().toString().trim();
-        if (SStringUtil.isEmpty(phone)){
-            ToastUtils.toast(getActivity(), R.string.py_register_account_phone);
-            return;
-        }
-//        if(!phone.matches(selectedBean.getPattern())) {
-//            ToastUtils.toast(getActivity(), R.string.py_phone_error);
-//            return;
-//        }
-//
-        String vfCode = "";//vfCodeSdkInputEditTextView.getInputEditText().getEditableText().toString().trim();
-
-        if (TextUtils.isEmpty(vfCode)) {
-            ToastUtils.toast(getActivity(), R.string.py_vfcode_empty);
-            return;
-        }
-
-        sLoginDialogv2.getLoginPresenter().findPwd(sLoginDialogv2.getActivity(), account, areaCode, phone, "vfCode");
     }
 
 
