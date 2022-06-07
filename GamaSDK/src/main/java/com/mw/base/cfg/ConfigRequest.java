@@ -3,15 +3,11 @@ package com.mw.base.cfg;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.core.base.bean.BaseReqeustBean;
 import com.core.base.callback.ISReqCallBack;
 import com.core.base.request.CfgFileRequest;
-import com.core.base.bean.BaseReqeustBean;
-import com.core.base.utils.JsonUtil;
 import com.core.base.utils.PL;
-import com.core.base.utils.SStringUtil;
 import com.mw.base.utils.GamaUtil;
-
-import org.json.JSONArray;
 
 /**
  * Created by gan on 2017/2/14.
@@ -38,7 +34,7 @@ public class ConfigRequest{
 
 //        https://www.meowplayer.com/sdk/config/jjcs/v1/version.json
 
-        String configUrl = ResConfig.getCdnPreferredUrl(context) + gameCode + "/v1/version.json";
+        String configUrl = ResConfig.getCdnPreferredUrl(context) + gameCode + "/v1/version.json?v=" + System.currentTimeMillis();
         baseReqeustBean.setCompleteUrl(configUrl);
 
         cfgFileRequest.setBaseReqeustBean(baseReqeustBean);

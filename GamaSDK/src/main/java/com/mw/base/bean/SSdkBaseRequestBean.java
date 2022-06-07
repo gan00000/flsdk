@@ -21,7 +21,7 @@ public class SSdkBaseRequestBean extends BaseReqeustBean {
     private String os = "android";
     private String gameLanguage = "";//游戏语言
 
-    private String accessToken;
+    private String loginAccessToken;
     private String loginTimestamp;
 
     /**
@@ -54,7 +54,7 @@ public class SSdkBaseRequestBean extends BaseReqeustBean {
     private void initSdkField(Context context) {
 
 //        appKey = ResConfig.getAppKey(context);
-        accessToken = GamaUtil.getSdkAccessToken(context);
+        loginAccessToken = GamaUtil.getSdkAccessToken(context);
         loginTimestamp = GamaUtil.getSdkTimestamp(context);
         gameCode = ResConfig.getGameCode(context);
         gameLanguage = ResConfig.getGameLanguage(context);
@@ -111,21 +111,21 @@ public class SSdkBaseRequestBean extends BaseReqeustBean {
         this.signature = signature;
     }
 
-    public String getAccessToken() {
-        return accessToken;
-    }
+//    public String getAccessToken() {
+//        return accessToken;
+//    }
+//
+//    public void setAccessToken(String accessToken) {
+//        this.accessToken = accessToken;
+//    }
 
-    public void setAccessToken(String accessToken) {
-        this.accessToken = accessToken;
-    }
-
-    public String getLoginTimestamp() {
-        return loginTimestamp;
-    }
-
-    public void setLoginTimestamp(String loginTimestamp) {
-        this.loginTimestamp = loginTimestamp;
-    }
+//    public String getLoginTimestamp() {
+//        return loginTimestamp;
+//    }
+//
+//    public void setLoginTimestamp(String loginTimestamp) {
+//        this.loginTimestamp = loginTimestamp;
+//    }
 
     public String getUniqueId() {
         return uniqueId;

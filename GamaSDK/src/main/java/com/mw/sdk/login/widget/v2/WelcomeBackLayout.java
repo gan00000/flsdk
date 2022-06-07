@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
 import com.mw.base.bean.SLoginType;
+import com.mw.base.cfg.ConfigBean;
 import com.mw.base.utils.GamaUtil;
 import com.mw.sdk.SBaseRelativeLayout;
 import com.mw.sdk.login.AccountPopupWindow;
@@ -30,6 +31,7 @@ import java.util.List;
 public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.OnClickListener, SBaseRelativeLayout.OperationCallback {
 
     private View contentView;
+    private View layout_delete_account;
     private View layout_need_update_account,layout_has_update_account;
     private TextView tv_account_update_tips;
     private ImageView iv_update_account_icon;
@@ -83,6 +85,7 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
         btn_update_account = contentView.findViewById(R.id.btn_update_account);
         btn_change_pwd = contentView.findViewById(R.id.btn_change_pwd);
         btn_swith_account2 = contentView.findViewById(R.id.btn_swith_account2);
+        layout_delete_account = contentView.findViewById(R.id.layout_delete_account);
 
         accountSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Account);
         accountEditText = accountSdkInputEditTextView.getInputEditText();
@@ -98,6 +101,7 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
         btn_update_account.setOnClickListener(this);
         btn_change_pwd.setOnClickListener(this);
         btn_swith_account2.setOnClickListener(this);
+        layout_delete_account.setOnClickListener(this);
 
         accountPopupWindow = new AccountPopupWindow(getActivity());
         accountPopupWindow.setPopWindowListener(new AccountPopupWindow.PopWindowListener() {
@@ -133,6 +137,19 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
             currentAccountModel = ams.get(0);
             setViewStatue();
         }
+
+        ConfigBean configBean = GamaUtil.getSdkCfg(getContext());
+        if (configBean != null){
+            ConfigBean.VersionData versionData = configBean.getSdkConfigLoginData(getContext());
+            if (versionData != null){
+                if(versionData.isDeleteAccount()){
+                    layout_delete_account.setVisibility(View.VISIBLE);
+                }else{
+                    layout_delete_account.setVisibility(View.GONE);
+                }
+            }
+        }
+
         return contentView;
     }
 
@@ -217,6 +234,9 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
                 sLoginDialogv2.toBindView(ViewType.WelcomeView, BindType.BIND_LINE,currentAccountModel);
             }else if (SLoginType.LOGIN_TYPE_MG.equals(currentAccountModel.getLoginType())){
             }
+
+        }else if (v == layout_delete_account){
+//            layout_delete_account
 
         }
 

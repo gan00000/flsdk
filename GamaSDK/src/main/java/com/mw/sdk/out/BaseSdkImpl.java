@@ -20,6 +20,7 @@ import com.core.base.utils.SignatureUtil;
 import com.mw.base.bean.SGameLanguage;
 import com.mw.base.bean.SLoginType;
 import com.mw.base.bean.SPayType;
+import com.mw.base.cfg.ConfigRequest;
 import com.mw.base.utils.GamaUtil;
 import com.mw.base.utils.Localization;
 import com.mw.sdk.login.ILoginCallBack;
@@ -65,8 +66,8 @@ public class BaseSdkImpl implements IFLSDK {
     private static boolean isInitSdk = false;
 
     private SFacebookProxy sFacebookProxy;
-    private SGooglePlayGameServices sGooglePlayGameServices;
-    private GamaShare gamaShare;
+//    private SGooglePlayGameServices sGooglePlayGameServices;
+//    private GamaShare gamaShare;
 
     protected SWebViewDialog otherPayWebViewDialog;
     protected SWebViewDialog csSWebViewDialog;
@@ -87,13 +88,10 @@ public class BaseSdkImpl implements IFLSDK {
     @Override
     public void initSDK(final Activity activity, final SGameLanguage gameLanguage) {
 
-        PL.i("fb keyhash:" + SignatureUtil.getHashKey(activity, activity.getPackageName()));
-        PL.i("google sha1:" + SignatureUtil.getSignatureSHA1WithColon(activity, activity.getPackageName()));
-
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                PL.i("IGama initSDK");
+                PL.i("sdk initSDK");
                 Localization.gameLanguage(activity, gameLanguage);
                 //清除上一次登录成功的返回值
                 //GamaUtil.saveSdkLoginData(activity, "");
@@ -113,7 +111,7 @@ public class BaseSdkImpl implements IFLSDK {
                 StarEventLogger.activateApp(activity);
 
                 //时间打点开始
-                LogTimer.getInstance().start(activity);
+//                LogTimer.getInstance().start(activity);
 
 //                        setGameLanguage(activity,SGameLanguage.zh_TW);
 
@@ -400,8 +398,12 @@ public class BaseSdkImpl implements IFLSDK {
 
     @Override
     public void onCreate(final Activity activity) {
-        PL.i("IGama onCreate");
+        PL.i("sdk onCreate");
         PL.i("the jar version:" + BuildConfig.JAR_VERSION);//打印版本号
+
+        PL.i("fb keyhash:" + SignatureUtil.getHashKey(activity, activity.getPackageName()));
+        PL.i("google sha1:" + SignatureUtil.getSignatureSHA1WithColon(activity, activity.getPackageName()));
+
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -414,13 +416,15 @@ public class BaseSdkImpl implements IFLSDK {
                     }
                 });
 
+                ConfigRequest.requestBaseCfg(activity);//加载配置
+
                 if (!isInitSdk) {
                     initSDK(activity, SGameLanguage.zh_TW);
                 }
                 if (iLogin != null) {
                     iLogin.onCreate(activity);
                 }
-                sGooglePlayGameServices = new SGooglePlayGameServices(activity);
+//                sGooglePlayGameServices = new SGooglePlayGameServices(activity);
 
                 //permission授权
                 //        PermissionUtil.requestPermissions_STORAGE(activity,PERMISSION_REQUEST_CODE);
@@ -465,9 +469,9 @@ public class BaseSdkImpl implements IFLSDK {
                 if (csSWebViewDialog != null){
                     csSWebViewDialog.onActivityResult(activity, requestCode, resultCode, data);
                 }
-                if (sGooglePlayGameServices != null) {
-                    sGooglePlayGameServices.handleActivityResult(activity, requestCode, resultCode, data);
-                }
+//                if (sGooglePlayGameServices != null) {
+//                    sGooglePlayGameServices.handleActivityResult(activity, requestCode, resultCode, data);
+//                }
                 GamaShare.onActivityResult(activity, requestCode, resultCode, data);
 
             }
@@ -520,7 +524,7 @@ public class BaseSdkImpl implements IFLSDK {
                     sFacebookProxy.onDestroy(activity);
                 }
                 //时间打点结束
-                LogTimer.getInstance().cancel();
+//                LogTimer.getInstance().cancel();
 
             }
         });
