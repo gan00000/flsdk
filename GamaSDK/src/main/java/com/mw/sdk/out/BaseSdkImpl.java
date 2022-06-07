@@ -152,27 +152,11 @@ public class BaseSdkImpl implements IFLSDK {
                 PL.i("roleId:" + roleId + ",roleName:" + roleName + ",roleLevel:" + roleLevel + ",vipLevel:" + vipLevel + ",severCode:" + severCode + ",serverName:" + serverName);
                 GamaUtil.saveRoleInfo(activity, roleId, roleName, roleLevel, vipLevel, severCode, serverName);//保存角色信息
 
-//                HashMap<String, Object> map = new HashMap<>();
-//                map.put(SdkAdsConstant.GAMA_EVENT_ROLEID, roleId);
-//                map.put(SdkAdsConstant.GAMA_EVENT_ROLENAME, roleName);
-//                map.put(SdkAdsConstant.GAMA_EVENT_ROLE_LEVEL, roleLevel);
-//                map.put(SdkAdsConstant.GAMA_EVENT_ROLE_VIP_LEVEL, vipLevel);
-//                map.put(SdkAdsConstant.GAMA_EVENT_SERVERCODE, severCode);
-//                map.put(SdkAdsConstant.GAMA_EVENT_SERVERNAME, serverName);
-//                StarEventLogger.trackingRoleInfo(activity, map);
-
-                AbsHttpRequest xAbsHttpRequest = new AbsHttpRequest() {
+                /*AbsHttpRequest xAbsHttpRequest = new AbsHttpRequest() {
                     @Override
                     public BaseReqeustBean createRequestBean() {
 
                         Ad2RequestBean ad2RequestBean = new Ad2RequestBean(activity.getApplicationContext());
-//                        ad2RequestBean.setRoleId(roleId);
-//                        ad2RequestBean.setRoleName(roleName);
-//                        ad2RequestBean.setRoleLevel(roleLevel);
-//                        ad2RequestBean.setRoleVipLevel(vipLevel);
-//                        ad2RequestBean.setServerCode(severCode);
-//                        ad2RequestBean.setServerName(serverName);
-
                         ad2RequestBean.setValue(activity.getApplicationContext());
 
                         ad2RequestBean.setCompleteUrl("https://adv.flyfungame.com/adv-api/v1/role/save/");
@@ -202,21 +186,21 @@ public class BaseSdkImpl implements IFLSDK {
                     }
                 });
                 xAbsHttpRequest.setPostType(PostType.application_json);
-                xAbsHttpRequest.excute(BaseResponseModel.class);
+                xAbsHttpRequest.excute(BaseResponseModel.class);*/
             }
         });
     }
 
     @Override
     public void login(final Activity activity, final ILoginCallBack iLoginCallBack) {
-        PL.i("IGama login");
+        PL.i("sdk login");
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
 
                 if (iLogin != null) {
                     //清除上一次登录成功的返回值
-                    GamaUtil.saveSdkLoginData(activity, "");
+//                    GamaUtil.saveSdkLoginData(activity, "");
 
                     iLogin.initFacebookPro(activity, sFacebookProxy);
                     iLogin.startLogin(activity, iLoginCallBack);

@@ -1,3 +1,4 @@
+/*
 package com.mw.sdk.fcm;
 
 import android.app.NotificationChannel;
@@ -12,11 +13,11 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.core.app.NotificationCompat;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.mw.sdk.ads.GamaAj;
+import androidx.core.app.NotificationCompat;
+
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -25,11 +26,13 @@ public class GamaFirebaseMessagingService extends FirebaseMessagingService {
 
     private static final String TAG = "MyFirebaseMsgService";
 
-    /**
+    */
+/**
      * Called when message is received.
      *
      * @param remoteMessage Object representing the message received from Firebase Cloud Messaging.
-     */
+     *//*
+
     // [START receive_message]
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -64,12 +67,14 @@ public class GamaFirebaseMessagingService extends FirebaseMessagingService {
     }
     // [END receive_message]
 
-    /**
+    */
+/**
      * Create and show a simple notification containing the received FCM message.
      *
      * @param messageTitle FCM message title received.
      * @param messageBody  FCM message body received.
-     */
+     *//*
+
     private void sendNotification(String messageTitle, String messageBody) {
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -128,7 +133,9 @@ public class GamaFirebaseMessagingService extends FirebaseMessagingService {
             notificationBuilder.setChannelId(id);
         }
 
-        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+        notificationManager.notify(0 */
+/* ID of notification *//*
+, notificationBuilder.build());
     }
 
     public static String getApplicationName(Context context) {
@@ -137,10 +144,12 @@ public class GamaFirebaseMessagingService extends FirebaseMessagingService {
         return stringId == 0 ? applicationInfo.nonLocalizedLabel.toString() : context.getString(stringId);
     }
 
-    /**
+    */
+/**
      * 获取推送icon的id
      * @return 先读取meta-data配置(com.google.firebase.messaging.default_notification_icon)，然后读取应用icon。
-     */
+     *//*
+
     public static int getPushIconId(Context context) {
         int iconId = 0;
         try {
@@ -167,6 +176,7 @@ public class GamaFirebaseMessagingService extends FirebaseMessagingService {
     public void onNewToken(String s) {
         super.onNewToken(s);
         Log.i(TAG, "fcm token is " + s);
-        GamaAj.setPushToken(getApplicationContext(), s);
+//        GamaAj.setPushToken(getApplicationContext(), s);
     }
 }
+*/

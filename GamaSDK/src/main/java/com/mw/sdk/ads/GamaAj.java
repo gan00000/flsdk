@@ -1,3 +1,4 @@
+/*
 package com.mw.sdk.ads;
 
 import android.content.Context;
@@ -125,11 +126,13 @@ public class GamaAj {
         PL.i(TAG, "adjust end eventName:" + event + ", eventToken:" + eventToken);
     }
 
-    /**
+    */
+/**
      * 用于统计卸载事件，传入fcm的token
      * @param context
      * @param pushToken
-     */
+     *//*
+
     public static void setPushToken(Context context, String pushToken) {
         if(!isAdjustEnable) {
             PL.i(TAG, "adjust disable");
@@ -138,3 +141,4 @@ public class GamaAj {
         Adjust.setPushToken(pushToken, context);
     }
 }
+*/

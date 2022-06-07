@@ -59,7 +59,7 @@ public class StarEventLogger {
             }
 
             //adjust
-            GamaAj.activeAj(activity);
+//            GamaAj.activeAj(activity);
 
 //            TapDB.init(activity,activity.getString(R.string.tapdb_appId),activity.getString(R.string.tapdb_channel),
 //                    activity.getString(R.string.tapdb_gameVersion));
@@ -99,7 +99,7 @@ public class StarEventLogger {
            // AppsFlyerLib.getInstance().trackEvent(activity.getApplicationContext(), SdkAdsConstant.GAMA_EVENT_LOGIN, eventValue);
 
             //adjust
-            GamaAj.trackEvent(activity.getApplicationContext(), SdkAdsConstant.GAMA_EVENT_LOGIN, eventValue);
+//            GamaAj.trackEvent(activity.getApplicationContext(), SdkAdsConstant.GAMA_EVENT_LOGIN, eventValue);
 
 //            TapDB.setUser(userId);
 
@@ -130,7 +130,7 @@ public class StarEventLogger {
            // AppsFlyerLib.getInstance().trackEvent(activity.getApplicationContext(), SdkAdsConstant.GAMA_EVENT_REGISTER, eventValue);
 
             //adjust
-            GamaAj.trackEvent(activity.getApplicationContext(), SdkAdsConstant.GAMA_EVENT_REGISTER, eventValue);
+//            GamaAj.trackEvent(activity.getApplicationContext(), SdkAdsConstant.GAMA_EVENT_REGISTER, eventValue);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -163,7 +163,7 @@ public class StarEventLogger {
             map.put(SdkAdsConstant.GAMA_EVENT_USER_ID, userId);
            // AppsFlyerLib.getInstance().trackEvent(activity.getApplicationContext(), SdkAdsConstant.GAMA_EVENT_ROLE_INFO, map);
             //adjust
-            GamaAj.trackEvent(activity, SdkAdsConstant.GAMA_EVENT_ROLE_INFO, map);
+//            GamaAj.trackEvent(activity, SdkAdsConstant.GAMA_EVENT_ROLE_INFO, map);
             //计算留存
             GamaAdsUtils.caculateRetention(activity, userId);
             //计算在线时长
@@ -234,7 +234,7 @@ public class StarEventLogger {
             //AppsFlyerLib.getInstance().trackEvent(context, AFInAppEventType.PURCHASE, eventValues);
 
             //adjust
-            GamaAj.trackEvent(context, SdkAdsConstant.GAMA_EVENT_IAB, eventValues);
+//            GamaAj.trackEvent(context, SdkAdsConstant.GAMA_EVENT_IAB, eventValues);
 
             if(!GamaUtil.getFirstPay(context)) {
                 trackingWithEventName(context, SdkAdsConstant.GAMA_EVENT_FIRSTPAY, null, null);
@@ -285,7 +285,7 @@ public class StarEventLogger {
               //  AppsFlyerLib.getInstance().trackEvent(context.getApplicationContext(), eventName, map);
 
                 //adjust
-                GamaAj.trackEvent(context, eventName, map);
+//                GamaAj.trackEvent(context, eventName, map);
             } else {
                 if(mediaSet.contains(SdkAdsConstant.EventReportChannel.EventReportFacebook)) {
                     PL.i("上报媒体1");
@@ -305,7 +305,7 @@ public class StarEventLogger {
                 if(mediaSet.contains(SdkAdsConstant.EventReportChannel.EventReportAdjust)) {
                     PL.i("上报媒体4");
                     //adjust上报
-                    GamaAj.trackEvent(context, eventName, map);
+//                    GamaAj.trackEvent(context, eventName, map);
                 }
             }
         } catch (Exception e) {
@@ -422,12 +422,12 @@ public class StarEventLogger {
     }
 	
 	public static void onResume(Activity activity) {
-        GamaAj.onResume(activity);
+//        GamaAj.onResume(activity);
 //        TapDB.onResume(activity);
     }
 
     public static void onPause(Activity activity) {
-        GamaAj.onPause(activity);
+//        GamaAj.onPause(activity);
 //        TapDB.onStop(activity);
     }
 
