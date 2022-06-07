@@ -17,6 +17,7 @@ import com.mw.base.utils.GamaUtil;
 import com.mw.sdk.R;
 import com.mw.sdk.login.constant.BindType;
 import com.mw.sdk.login.constant.ViewType;
+import com.mw.sdk.login.model.AccountModel;
 import com.mw.sdk.login.widget.SDKInputEditTextView;
 import com.mw.sdk.login.widget.SDKInputType;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
@@ -25,11 +26,15 @@ import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
 public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout implements View.OnClickListener, SBaseRelativeLayout.OperationCallback {
 
     private BindType bindTpye;
+    private AccountModel accountModel;
 
     public void setBindTpye(BindType bindTpye) {
         this.bindTpye = bindTpye;
     }
 
+    public void setAccountModel(AccountModel accountModel) {
+        this.accountModel = accountModel;
+    }
 
     private View contentView;
     private Button bindConfirm;
@@ -39,6 +44,7 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
      */
     private EditText registerPasswordEditText;
     private EditText registerAccountEditText;
+    private EditText thirdAccountEditText;
 
     private String account;
     private String password;
@@ -70,6 +76,7 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
         return onCreateView(layoutInflater);
     }
 
+    //new实例的时候调用
     private View onCreateView(LayoutInflater inflater) {
         contentView = inflater.inflate(R.layout.mw_update_account, null);
 
@@ -89,6 +96,7 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
 
         registerAccountEditText = accountSdkInputEditTextView.getInputEditText();
         registerPasswordEditText = pwdSdkInputEditTextView.getInputEditText();
+        thirdAccountEditText = sdkinputview_third_account.getInputEditText();
 
 
 
@@ -103,13 +111,17 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
         super.refreshViewData();
         registerAccountEditText.setText("");
         registerPasswordEditText.setText("");
+        thirdAccountEditText.setText("");
+
+        GamaUtil.setAccountWithIcon(accountModel,sdkinputview_third_account.getIconImageView(),thirdAccountEditText);
+
     }
 
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        if (registerAccountEditText != null){
-            registerAccountEditText.requestFocus();
+        if (thirdAccountEditText != null){
+            thirdAccountEditText.requestFocus();
         }
     }
 
@@ -121,8 +133,7 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
             accountBind();
 
         } else if (v == backView) {//返回键
-            sLoginDialogv2.toAccountManagerCenter();
-
+            sLoginDialogv2.toWelcomeBackView();
         }
 
     }
@@ -142,21 +153,22 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
         }
 
 
-        if (SStringUtil.isEqual(account, password)) {
-            ToastUtils.toast(getActivity(), R.string.py_password_equal_account);
-            return;
-        }
+//        if (SStringUtil.isEqual(account, password)) {
+//            ToastUtils.toast(getActivity(), R.string.py_password_equal_account);
+//            return;
+//        }
 
         if (!GamaUtil.checkAccount(account)) {
+            toast(R.string.text_account_format);
             return;
         }
         if (!GamaUtil.checkPassword(password)) {
+            toast(R.string.text_pwd_format);
             return;
         }
 
-
-//        sLoginDialogv2.getLoginPresenter().accountBind(sLoginDialogv2.getActivity(), account, password, areaCode,
-//                phone, vfcode, bindTpye);
+        sLoginDialogv2.getLoginPresenter().accountBind(sLoginDialogv2.getActivity(), account, password, "",
+                "", "", bindTpye);
     }
 
 

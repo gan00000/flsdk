@@ -90,15 +90,26 @@ public class GamaUtil {
         return null;
     }
 
-    public static void saveAccountModel(Context context, String account, String password, boolean updateTime){
+    public static void saveAccountModel(Context context, String account, String password,String userId, boolean updateTime){
         //平台注册的默认绑定
-        saveAccountModel(context,SLoginType.LOGIN_TYPE_MG,account,password,"","","",updateTime,true);
+        saveAccountModel(context,SLoginType.LOGIN_TYPE_MG,account,password,userId,"","",updateTime,true);
+    }
+
+    public static void updateAccountModel(Context context, String userId, boolean isBind){
+        List<AccountModel> mls = getAccountModels(context);
+        //account = thirdId;
+        for (AccountModel a: mls) {
+            if (SStringUtil.isNotEmpty(a.getUserId()) && SStringUtil.isEqual(a.getUserId(), userId)){
+                a.setBind(isBind);
+            }
+        }
+        saveAccountModels(context,mls);
     }
 
     public static void saveAccountModel(Context context,String loginType, String account, String password,String userId, String thirdId, String thirdAccount, boolean updateTime, boolean isBindAccount){
 
         List<AccountModel> mls = getAccountModels(context);
-        if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_MG, loginType)) {//非账号登錄
+        if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_MG, loginType)) {//账号登錄
             //account = thirdId;
             for (AccountModel a: mls) {
                 if (SStringUtil.isNotEmpty(a.getUserId()) && SStringUtil.isEqual(a.getUserId(), userId) && a.getAccount().equals(account)){

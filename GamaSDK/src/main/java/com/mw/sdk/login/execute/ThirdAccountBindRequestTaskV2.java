@@ -149,10 +149,7 @@ public class ThirdAccountBindRequestTaskV2 extends BaseLoginRequestTask {
                 ResConfig.getAppKey(context)
                 + thirdAccountBindRequestBean.getTimestamp()
                 +thirdAccountBindRequestBean.getName()
-                + thirdAccountBindRequestBean.getPwd()
-                +thirdAccountBindRequestBean.getGameCode()
-                + thirdAccountBindRequestBean.getThirdPlatId()
-                + thirdAccountBindRequestBean.getRegistPlatform()));
+                +thirdAccountBindRequestBean.getGameCode()));
 
         return thirdAccountBindRequestBean;
     }

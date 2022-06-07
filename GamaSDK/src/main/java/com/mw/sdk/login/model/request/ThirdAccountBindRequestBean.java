@@ -21,7 +21,9 @@ public class ThirdAccountBindRequestBean extends AccountLoginRequestBean {
 	 * registPlatform 第三方登陆平台的标识符
 	 */
 	private String registPlatform;
+	private String loginMode;
 	private String thirdPlatId;
+	private String thirdLoginId;
 	/**
 	 * apps 关联应用的FB ID
 	 */
@@ -31,9 +33,6 @@ public class ThirdAccountBindRequestBean extends AccountLoginRequestBean {
 	private String fb_oauthToken = ""; //facebook登入的accesstoken
 	private String googleIdToken = ""; //Google登入的accesstoken
 	private String googleClientId = ""; //Google登入的参数,在google-service.json里面找到:oauth_client-type3的client-id
-
-	private String interfaces =  ApiRequestMethod.RequestVfcodeInterface.bind.getString();
-
 
 	public String getFb_oauthToken() {
 		return fb_oauthToken;
@@ -73,6 +72,7 @@ public class ThirdAccountBindRequestBean extends AccountLoginRequestBean {
 
 	public void setRegistPlatform(String registPlatform) {
 		this.registPlatform = registPlatform;
+		this.loginMode = registPlatform;
 	}
 
 	public String getThirdPlatId() {
@@ -81,6 +81,7 @@ public class ThirdAccountBindRequestBean extends AccountLoginRequestBean {
 
 	public void setThirdPlatId(String thirdPlatId) {
 		this.thirdPlatId = thirdPlatId;
+		this.thirdLoginId = thirdPlatId;
 	}
 
 	public String getApps() {

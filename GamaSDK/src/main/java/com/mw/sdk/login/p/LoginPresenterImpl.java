@@ -224,16 +224,16 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         }*/
 
         List<AccountModel> accountModels = GamaUtil.getAccountModels(this.mActivity);
-        iLoginView.showMainHomeView();
-//        if (accountModels.isEmpty()){
-//            if (iLoginView != null){
-//                iLoginView.showMainHomeView();
-//            }
-//        }else{
-//            if (iLoginView != null){
-//                iLoginView.showWelcomeBackView();
-//            }
-//        }
+//        iLoginView.showMainHomeView();
+        if (accountModels.isEmpty()){
+            if (iLoginView != null){
+                iLoginView.showMainHomeView();
+            }
+        }else{
+            if (iLoginView != null){
+                iLoginView.showWelcomeBackView();
+            }
+        }
     }
 
     @Override
@@ -499,7 +499,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         ToastUtils.toast(getActivity(), sLoginResponse.getMessage());
 
                         iLoginView.changePwdSuccess(sLoginResponse);
-                        GamaUtil.saveAccountModel(activity,account,newPwd,true);
+                        GamaUtil.saveAccountModel(activity,account,newPwd,sLoginResponse.getData().getUserId(),true);
                         //登录成功后直接进入游戏
                         handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_MG);
 
@@ -542,10 +542,13 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         ToastUtils.toast(getActivity(), R.string.py_success);
 
 //                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GAMA);
-                        GamaUtil.saveAccountModel(getActivity(), account, pwd,true);//记住账号密码
+                        GamaUtil.updateAccountModel(getActivity(),sLoginResponse.getData().getUserId(),true);
+                        GamaUtil.saveAccountModel(getActivity(), account, pwd,sLoginResponse.getData().getUserId(),true);//记住账号密码
                         if (iLoginView != null){
                             iLoginView.accountBindSuccess(sLoginResponse);
                         }
+                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_MG);
+
                     }else{
 
                         ToastUtils.toast(getActivity(), sLoginResponse.getMessage());
@@ -781,7 +784,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     if (sLoginResponse.isRequestSuccess()) {
                         ToastUtils.toast(getActivity(), R.string.py_register_success);
 
-                        GamaUtil.saveAccountModel(activity,account,password,true);
+                        GamaUtil.saveAccountModel(activity,account,password,sLoginResponse.getData().getUserId(),true);
                         handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_MG);
 
                     }else{
@@ -1152,7 +1155,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 return;
             }
             ThirdAccountBindRequestTaskV2 bindRequestTask = new ThirdAccountBindRequestTaskV2(getActivity(),
-                    SLoginType.LOGIN_TYPE_UNIQUE,
+                    SLoginType.LOGIN_TYPE_GUEST,
                     account,
                     pwd,
                     areaCode,
@@ -1410,7 +1413,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     if (sLoginResponse.isRequestSuccess()) {
 //                        GamaUtil.saveAccount(getContext(),account);
                         if(isSaveAccount) {
-                            GamaUtil.saveAccountModel(activity,account,password,true);
+                            GamaUtil.saveAccountModel(activity,account,password,sLoginResponse.getData().getUserId(),true);
                         }
                         handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_MG);
                     }else{

@@ -28,7 +28,7 @@ public class MacLoginRegRequestTask extends BaseLoginRequestTask {
 
         sdkBaseRequestBean = macLoginRegRequestBean;
 
-        macLoginRegRequestBean.setRegistPlatform(SLoginType.LOGIN_TYPE_UNIQUE);
+        macLoginRegRequestBean.setRegistPlatform(SLoginType.LOGIN_TYPE_GUEST);
         //生成免注册登入账密
         String uniqueId = GamaUtil.getGoogleAdid1AndroidId(context);
         if(TextUtils.isEmpty(uniqueId)){

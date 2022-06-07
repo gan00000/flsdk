@@ -35,7 +35,7 @@ public class ApiRequestMethod {
     /**
      * 绑定账号接口
      */
-    public static final String GS_REQUEST_METHOD_BIND = "bind/v1/bind-third-party.app";
+    public static final String GS_REQUEST_METHOD_BIND = "api/upgrade/bind";
 
     /**
      * 绑定账号接口

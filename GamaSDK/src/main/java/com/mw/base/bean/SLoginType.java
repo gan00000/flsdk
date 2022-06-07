@@ -23,10 +23,10 @@ public class SLoginType {
 	/**
 	 * 用于mac登入，用于本地登录类型判断，回传原厂登录类型
 	 */
-	public static final String LOGIN_TYPE_GUEST = "mac";
+	public static final String LOGIN_TYPE_GUEST = "visitor";
 	/**
 	 * 用于免注册登录传给服务端的登录标识
 	 */
-	public static final String LOGIN_TYPE_UNIQUE = "unique";
+//	public static final String LOGIN_TYPE_UNIQUE = "visitor";
 
 }

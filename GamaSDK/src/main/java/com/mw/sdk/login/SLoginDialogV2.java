@@ -15,6 +15,7 @@ import com.mw.base.bean.SLoginType;
 import com.mw.base.utils.Localization;
 import com.mw.sdk.login.constant.BindType;
 import com.mw.sdk.login.constant.ViewType;
+import com.mw.sdk.login.model.AccountModel;
 import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.SBaseDialog;
 import com.mw.sdk.login.p.LoginPresenterImpl;
@@ -367,14 +368,16 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 
     }
 
-    public void toBindView(ViewType fromView, BindType bindType) {
+    public void toBindView(ViewType fromView, BindType bindType, AccountModel accountModel) {
 
         if (bindView == null || !viewPageList.contains(bindView)){
             bindView = new ThirdPlatBindAccountLayoutV2(context);
             ((ThirdPlatBindAccountLayoutV2)bindView).setBindTpye(bindType);
             ((ThirdPlatBindAccountLayoutV2)bindView).setFromView(fromView);
+            ((ThirdPlatBindAccountLayoutV2)bindView).setAccountModel(accountModel);
             bindView.setLoginDialogV2(this);
             contentFrameLayout.addView(bindView);
+            viewPageList.add(bindView);
         }
         setViewPageVisable(bindView);
     }
@@ -689,4 +692,12 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 //            }
 //        }
 //    }
+
+    public boolean distoryView(View view){
+        if (viewPageList.contains(view)){
+            viewPageList.remove(view);
+            return true;
+        }
+        return false;
+    }
 }

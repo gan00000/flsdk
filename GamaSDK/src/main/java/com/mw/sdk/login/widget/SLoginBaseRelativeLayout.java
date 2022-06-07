@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.core.base.utils.PL;
 import com.core.base.utils.ToastUtils;
 import com.mw.sdk.SBaseRelativeLayout;
 import com.mw.base.utils.Localization;
@@ -64,6 +65,12 @@ public abstract class SLoginBaseRelativeLayout extends SBaseRelativeLayout {
 
     }
 
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        PL.i(this.getClass().getCanonicalName() + " onAttachedToWindow");
+    }
+
     private void initView(Context context) {
         this.context = context;
 
@@ -108,7 +115,9 @@ public abstract class SLoginBaseRelativeLayout extends SBaseRelativeLayout {
 
     protected void doSomething() {}
 
-    public void refreshViewData(){}
+    public void refreshViewData(){
+        PL.i(this.getClass().getCanonicalName() + " refreshViewData");
+    }
 
     //用于刷新验证码
     public void refreshVfCode() {}

@@ -209,13 +209,13 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
                 return;
             }
             if (SLoginType.LOGIN_TYPE_FB.equals(currentAccountModel.getLoginType())){
-                sLoginDialogv2.toBindView(ViewType.WelcomeView, BindType.BIND_FB);
+                sLoginDialogv2.toBindView(ViewType.WelcomeView, BindType.BIND_FB,currentAccountModel);
             }else  if (SLoginType.LOGIN_TYPE_GOOGLE.equals(currentAccountModel.getLoginType())){
-                sLoginDialogv2.toBindView(ViewType.WelcomeView, BindType.BIND_GOOGLE);
+                sLoginDialogv2.toBindView(ViewType.WelcomeView, BindType.BIND_GOOGLE,currentAccountModel);
             }else  if (SLoginType.LOGIN_TYPE_GUEST.equals(currentAccountModel.getLoginType())){
-                sLoginDialogv2.toBindView(ViewType.WelcomeView, BindType.BIND_UNIQUE);
+                sLoginDialogv2.toBindView(ViewType.WelcomeView, BindType.BIND_UNIQUE,currentAccountModel);
             }else if (SLoginType.LOGIN_TYPE_LINE.equals(currentAccountModel.getLoginType())){
-                sLoginDialogv2.toBindView(ViewType.WelcomeView, BindType.BIND_LINE);
+                sLoginDialogv2.toBindView(ViewType.WelcomeView, BindType.BIND_LINE,currentAccountModel);
             }else if (SLoginType.LOGIN_TYPE_MG.equals(currentAccountModel.getLoginType())){
             }
 
