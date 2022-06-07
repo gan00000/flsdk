@@ -1,6 +1,8 @@
 package com.mw.sdk.login.widget;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Build;
 import androidx.annotation.RequiresApi;
 import android.text.Editable;
@@ -54,9 +56,13 @@ public class SDKInputEditTextView extends RelativeLayout {
         }
         this.eyeImageViewLayout.setVisibility(visibility);
         if (visibility== View.GONE){
-            eyeImageView.setSelected(false);
-            // 显示为普通文本
-            inputEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            eyeImageView.setSelected(true);
+            // 明文
+            inputEditText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+        }else{
+            eyeImageView.setSelected(true);
+            // 明文
+            inputEditText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
         }
     }
 
@@ -105,11 +111,11 @@ public class SDKInputEditTextView extends RelativeLayout {
                 public void onClick(View v) {
                     if (eyeImageView.isSelected()) {
                         eyeImageView.setSelected(false);
-                        // 显示为普通文本
+                        // 显示为密码
                         inputEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                     } else {
                         eyeImageView.setSelected(true);
-                        // 显示为密码
+                        //
                         inputEditText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
                     }
                     // 使光标始终在最后位置
@@ -197,6 +203,32 @@ public class SDKInputEditTextView extends RelativeLayout {
 
     }
 
+    public void setPwdInputEnable(boolean enable){
+        if (enable) {
+            this.setEnabled(enable);
+            eyeImageView.setSelected(true);
+            // 明文
+            inputEditText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+
+            inputEditText.setEnabled(true);
+            inputEditText.setTextColor(getContext().getResources().getColor(R.color.white_c));
+            iconImageView.setImageResource(R.mipmap.mw_passowrd_icon);
+            eyeImageView.setVisibility(VISIBLE);
+
+        }else{
+            this.setEnabled(enable);
+            eyeImageView.setSelected(true);
+            // 明文
+            inputEditText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+
+            inputEditText.setEnabled(false);
+            inputEditText.setTextColor(getContext().getResources().getColor(R.color.c_848484));
+            iconImageView.setImageResource(R.mipmap.mw_passowrd_disable_icon);
+
+            eyeImageView.setVisibility(GONE);
+        }
+
+    }
     /** 字体大小适配**/
     private  void adjustTvTextSize()
     {

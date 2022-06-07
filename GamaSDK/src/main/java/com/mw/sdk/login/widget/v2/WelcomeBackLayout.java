@@ -109,9 +109,9 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
             @Override
             public void onUse(AccountModel accountModel) {
 //                accountSdkInputEditTextView.getInputEditText().setText(accountModel.getAccount());
-                GamaUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(),accountEditText);
+//                GamaUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(),accountEditText);
                 currentAccountModel = accountModel;
-
+                setViewStatue();
             }
 
             @Override
@@ -131,35 +131,34 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
         List<AccountModel> ams = GamaUtil.getAccountModels(getContext());
         if (ams != null && !ams.isEmpty()){//设置按照最好登录时间排序后的第一个账号
             currentAccountModel = ams.get(0);
+            setViewStatue();
+        }
+        return contentView;
+    }
 
-            if (currentAccountModel != null){ //显示记住的密码，待修改
+    private void setViewStatue() {
+        if (currentAccountModel != null){ //显示记住的密码，待修改
 //                account = currentAccountModel.getAccount();
 //            String password = lastAccountModel.getPassword();
 //                accountSdkInputEditTextView.getInputEditText().setText(account);
-                ImageView imageView = accountSdkInputEditTextView.getIconImageView();
-                GamaUtil.setAccountWithIcon(currentAccountModel,imageView,accountEditText);
+            ImageView imageView = accountSdkInputEditTextView.getIconImageView();
+            GamaUtil.setAccountWithIcon(currentAccountModel,imageView,accountEditText);
 
-                //判斷是否綁定，顯示是否升級賬號
+            //判斷是否綁定，顯示是否升級賬號
 
-                if (currentAccountModel.isBind()){
-                    layout_need_update_account.setVisibility(View.GONE);
-                    layout_has_update_account.setVisibility(View.VISIBLE);
-                    tv_account_update_tips.setText(R.string.text_has_update_account_tips);
-                    iv_update_account_icon.setImageResource(R.mipmap.has_update_account_bg);
+            if (currentAccountModel.isBind()){
+                layout_need_update_account.setVisibility(View.GONE);
+                layout_has_update_account.setVisibility(View.VISIBLE);
+                tv_account_update_tips.setText(R.string.text_has_update_account_tips);
+                iv_update_account_icon.setImageResource(R.mipmap.has_update_account_bg);
 //
-                }else{
-                    layout_need_update_account.setVisibility(View.VISIBLE);
-                    layout_has_update_account.setVisibility(View.GONE);
-                    tv_account_update_tips.setText(R.string.text_update_account_tips);
-                    iv_update_account_icon.setImageResource(R.mipmap.nend_update_account_bg);
-                }
+            }else{
+                layout_need_update_account.setVisibility(View.VISIBLE);
+                layout_has_update_account.setVisibility(View.GONE);
+                tv_account_update_tips.setText(R.string.text_update_account_tips);
+                iv_update_account_icon.setImageResource(R.mipmap.nend_update_account_bg);
             }
-
-
         }
-
-
-        return contentView;
     }
 
     @Override

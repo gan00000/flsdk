@@ -88,7 +88,8 @@
         android:id="@+id/sdk_input_item_et"
         android:background="@null"
         android:textSize="12sp"
-
+        android:textColorHint="@color/c_848484"
+        android:textColor="@android:color/white"
         android:focusable="true"
         android:focusableInTouchMode="true"
         />

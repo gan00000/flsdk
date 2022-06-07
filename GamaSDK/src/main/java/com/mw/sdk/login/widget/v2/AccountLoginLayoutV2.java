@@ -223,14 +223,8 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
         accountModels.addAll(ams);
         if (accountModels != null && !accountModels.isEmpty()){//设置按照最好登录时间排序后的第一个账号
             AccountModel lastAccountModel = accountModels.get(0);
-            account = lastAccountModel.getAccount();
-            password = lastAccountModel.getPassword();
             currentAccountModel = lastAccountModel;
-            if (!TextUtils.isEmpty(account)){ //显示记住的密码
-//                loginAccountEditText.setText(account);
-                GamaUtil.setAccountWithIcon(lastAccountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
-                loginPasswordEditText.setText(password);
-            }
+            setViewStatue(lastAccountModel);
         }
 
 
@@ -245,16 +239,15 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
             public void onUse(AccountModel accountModel) {
 
                 currentAccountModel = accountModel;
-                if (SLoginType.LOGIN_TYPE_MG.equals(accountModel.getLoginType())){
-//                    loginAccountEditText.setText(accountModel.getAccount());
-                    GamaUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
-                    loginPasswordEditText.setText(accountModel.getPassword());
-                }else{
-//                    loginAccountEditText.setText(accountModel.getAccount());
+//                if (SLoginType.LOGIN_TYPE_MG.equals(accountModel.getLoginType())){
+//                    GamaUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
 //                    loginPasswordEditText.setText(accountModel.getPassword());
-                    GamaUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
-                    loginPasswordEditText.setText("");
-                }
+//                }else{
+//                    GamaUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
+//                    loginPasswordEditText.setText("");
+//                }
+
+                setViewStatue(currentAccountModel);
 
             }
 
@@ -273,6 +266,23 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
         });
 
         return contentView;
+    }
+
+    private void setViewStatue(AccountModel accountModel) {
+
+        if (SLoginType.LOGIN_TYPE_MG.equals(currentAccountModel.getLoginType())){
+            account = accountModel.getAccount();
+            password = accountModel.getPassword();
+            if (!TextUtils.isEmpty(account)){ //显示记住的密码
+                GamaUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
+                pwdSdkInputEditTextView.setPwdInputEnable(true);
+                loginPasswordEditText.setText(password);
+            }
+        }else{
+            GamaUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
+            pwdSdkInputEditTextView.setPwdInputEnable(false);
+            loginPasswordEditText.setText("免註冊登入");
+        }
     }
 
     private void login() {
