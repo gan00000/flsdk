@@ -103,6 +103,7 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
             }else if (this.fromView == ViewType.WelcomeView){
                 sLoginDialogv2.toWelcomeBackView();
             }
+            sLoginDialogv2.distoryView(this);
         }
     }
 

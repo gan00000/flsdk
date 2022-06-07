@@ -697,6 +697,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 
     public boolean distoryView(View view){
         if (viewPageList.contains(view)){
+            this.contentFrameLayout.removeView(view);
             viewPageList.remove(view);
             return true;
         }
