@@ -466,10 +466,6 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     @Override
     public void stopVfCodeTimer() {//根据需求充值计数器
 
-        if (requestPhoneVfcodeTimer != null){
-            requestPhoneVfcodeTimer.cancel();
-        }
-        requestPhoneVfcodeTimer = null;
         resetTime = 0;
         isTimeLimit = false;
         if(requestPhoneVfcodeTimer != null) {
@@ -868,11 +864,10 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             public void success(BaseResponseModel sLoginResponse, String rawResult) {
                 if (sLoginResponse != null) {
                     String msg = sLoginResponse.getMessage();
-                    if (!TextUtils.isEmpty(msg)) {
+                    if(SStringUtil.isNotEmpty(msg)){
                         ToastUtils.toast(getActivity(), msg);
-//                        if(callback != null) {
-//                            callback.statusCallback(SBaseRelativeLayout.OperationCallback.TIME_LIMIT);
-//                        }
+                    }
+                    if (sLoginResponse.isRequestSuccess()) {
                         if(callbackList != null && callbackList.size() > 0) {
                             for(SBaseRelativeLayout.OperationCallback callback : callbackList) {
                                 callback.statusCallback(SBaseRelativeLayout.OperationCallback.TIME_LIMIT);
@@ -1100,23 +1095,24 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     }
 
     @Override
-    public void findPwd(final Activity activity, final String account, String areaCode, String phoneOrEmail, String vfCode) {
+    public void findPwd(final Activity activity, final String account, String newPwd, String phoneOrEmail, String vfCode) {
         this.mActivity = activity;
-        FindPwdRequestTask findPwdRequestTask = new FindPwdRequestTask(getActivity(), account, areaCode, phoneOrEmail, vfCode);
+        FindPwdRequestTask findPwdRequestTask = new FindPwdRequestTask(getActivity(), account, newPwd, phoneOrEmail, vfCode);
         findPwdRequestTask.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(), "Loading..."));
         findPwdRequestTask.setReqCallBack(new ISReqCallBack<SLoginResponse>() {
             @Override
             public void success(SLoginResponse sLoginResponse, String rawResult) {
                 if (sLoginResponse != null) {
                     if (sLoginResponse.isRequestSuccess()) {
-                        ToastUtils.toast(getActivity(), R.string.py_findpwd_success);
+//                        ToastUtils.toast(getActivity(), R.string.py_findpwd_success);
 
-//                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GAMA);
                         GamaUtil.removeAccountModel(activity,account);
                         if (iLoginView != null){
                             iLoginView.findPwdSuccess(sLoginResponse);
-
                         }
+                        GamaUtil.saveAccountModel(getActivity(), account, newPwd,sLoginResponse.getData().getUserId(),true);//记住账号密码
+                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_MG);
+
                     }else{
 
                         ToastUtils.toast(getActivity(), sLoginResponse.getMessage());

@@ -28,11 +28,11 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
     private AccountLoginLayoutV2 mAccountLoginV2;
     private AccountRegisterLayoutV2 mAccountRegisterLayoutV2;
 
-    private ViewType fromViewType;
-
-    public void setFromViewType(ViewType fromViewType) {
-        this.fromViewType = fromViewType;
-    }
+//    private ViewType fromViewType;
+//
+//    public void setFromViewType(ViewType fromViewType) {
+//        this.fromViewType = fromViewType;
+//    }
 
     public AccountRegisterLayoutV2 getmAccountRegisterLayoutV2() {
         return mAccountRegisterLayoutV2;
@@ -98,9 +98,9 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
 
             makeTabStatus(false);
         }else if (v == iv_login_reg_back) {
-            if (this.fromViewType == ViewType.HomeView){
+            if (this.fromView == ViewType.HomeView){
                 sLoginDialogv2.toMainHomeView();
-            }else if (this.fromViewType == ViewType.WelcomeView){
+            }else if (this.fromView == ViewType.WelcomeView){
                 sLoginDialogv2.toWelcomeBackView();
             }
         }

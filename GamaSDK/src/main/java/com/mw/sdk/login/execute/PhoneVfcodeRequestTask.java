@@ -48,10 +48,10 @@ public class PhoneVfcodeRequestTask extends BaseLoginRequestTask {
 	public BaseReqeustBean createRequestBean() {
 		super.createRequestBean();
 
-		requestBean.setSignature(SStringUtil.toMd5(ResConfig.getAppKey(context)
-				+ requestBean.getTimestamp() +
-				requestBean.getGameCode()
-				+ requestBean.getPhone()));
+		requestBean.setSignature(SStringUtil.toMd5(ResConfig.getAppKey(context) +
+				requestBean.getTimestamp() +
+				requestBean.getEmail() +
+				requestBean.getGameCode()));
 
 		return requestBean;
 	}

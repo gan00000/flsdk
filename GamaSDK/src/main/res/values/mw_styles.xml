@@ -9,6 +9,7 @@
         <item name="android:background">@android:color/transparent</item>
         <item name="android:windowBackground">@android:color/transparent</item>  <!-- 背景透明 -->
         <item name="android:backgroundDimAmount">0.3</item>  <!-- 灰度 -->
+        <item name="android:backgroundDimEnabled">false</item>
     </style>
 
 

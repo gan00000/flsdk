@@ -22,6 +22,8 @@ public class FindPwdRequestBean extends AdsRequestBean {
 	private String email;
 	private String interfaces = "4";
 	private String vfCode = "";
+	private String verifyCode = "";
+	private String newPwd = "";
 
 	public String getName() {
 		return name;
@@ -45,5 +47,14 @@ public class FindPwdRequestBean extends AdsRequestBean {
 
 	public void setVfCode(String vfCode) {
 		this.vfCode = vfCode;
+		this.verifyCode = vfCode;
+	}
+
+	public String getNewPwd() {
+		return newPwd;
+	}
+
+	public void setNewPwd(String newPwd) {
+		this.newPwd = newPwd;
 	}
 }

@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
+import com.mw.base.utils.GamaUtil;
 import com.mw.sdk.SBaseRelativeLayout;
 import com.mw.sdk.login.constant.ApiRequestMethod;
 import com.mw.sdk.R;
@@ -113,7 +114,8 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
         if (v == findPwdConfireBtn) {
             findPwd();
         } else if (v == backView) {//返回键
-//            sLoginDialogv2.toAccountLoginView();
+            sLoginDialogv2.toLoginWithRegView(null);
+            sLoginDialogv2.distoryView(this);
         }
         else if (v == btn_find_get_vfcode) {
             getVfcodeByEmail();
@@ -122,14 +124,27 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
     }
 
     private void getVfcodeByEmail() {
-        String areaCode = "";//gama_find_tv_area.getText().toString();
-        if (TextUtils.isEmpty(areaCode)) {
-            ToastUtils.toast(getActivity(), R.string.py_area_code_empty);
+
+        account = findPwdAccountEditText.getText().toString().trim();
+        if (TextUtils.isEmpty(account)) {
+            ToastUtils.toast(getContext(), R.string.py_account_empty);
             return;
         }
-        String interfaceName = ApiRequestMethod.RequestVfcodeInterface.findpwd.getString();
 
-//        sLoginDialogv2.getLoginPresenter().getEmailVfcode();
+        if (!GamaUtil.checkAccount(account)) {
+            ToastUtils.toast(getContext(),R.string.text_account_format);
+            return;
+        }
+//        if (TextUtils.isEmpty(password)) {
+//            ToastUtils.toast(getActivity(), R.string.py_password_empty);
+//            return;
+//        }
+//        if (!GamaUtil.checkPassword(password)) {
+//            ToastUtils.toast(activity,R.string.text_pwd_format);
+//            return;
+//        }
+
+        sLoginDialogv2.getLoginPresenter().getEmailVfcode(sLoginDialogv2.getActivity(),this,account,"");
     }
 
 
@@ -141,17 +156,26 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
             return;
         }
 
+        String password = newPwdSdkInputEditTextView.getInputEditText().getEditableText().toString().trim();
+        if (TextUtils.isEmpty(password)) {
+            ToastUtils.toast(getActivity(), R.string.py_password_empty);
+            return;
+        }
+        if (!GamaUtil.checkPassword(password)) {
+            ToastUtils.toast(getContext(),R.string.text_pwd_format);
+            return;
+        }
 
-        String areaCode = "";//gama_find_tv_area.getText().toString();
-        if(TextUtils.isEmpty(areaCode)) {
-            ToastUtils.toast(getActivity(), R.string.py_area_code_empty);
-            return;
-        }
-        String phone = "";//gama_find_et_phone.getEditableText().toString().trim();
-        if (SStringUtil.isEmpty(phone)){
-            ToastUtils.toast(getActivity(), R.string.py_register_account_phone);
-            return;
-        }
+//        String areaCode = "";//gama_find_tv_area.getText().toString();
+//        if(TextUtils.isEmpty(areaCode)) {
+//            ToastUtils.toast(getActivity(), R.string.py_area_code_empty);
+//            return;
+//        }
+//        String phone = "";//gama_find_et_phone.getEditableText().toString().trim();
+//        if (SStringUtil.isEmpty(phone)){
+//            ToastUtils.toast(getActivity(), R.string.py_register_account_phone);
+//            return;
+//        }
 
         String vfCode = vfCodeSdkInputEditTextView.getInputEditText().getEditableText().toString().trim();
 
@@ -160,7 +184,7 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
             return;
         }
 
-        sLoginDialogv2.getLoginPresenter().findPwd(sLoginDialogv2.getActivity(), account, areaCode, phone, vfCode);
+        sLoginDialogv2.getLoginPresenter().findPwd(sLoginDialogv2.getActivity(), account, password, account, vfCode);
     }
 
 

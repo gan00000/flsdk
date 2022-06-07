@@ -193,8 +193,8 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
     @Override
     protected void doSomething() {
         super.doSomething();
-        sLoginDialogv2.getLoginPresenter().setOperationCallback(this);
-        remainTimeSeconds = sLoginDialogv2.getLoginPresenter().getRemainTimeSeconds();
+//        sLoginDialogv2.getLoginPresenter().setOperationCallback(this);
+//        remainTimeSeconds = sLoginDialogv2.getLoginPresenter().getRemainTimeSeconds();
     }
 
 }

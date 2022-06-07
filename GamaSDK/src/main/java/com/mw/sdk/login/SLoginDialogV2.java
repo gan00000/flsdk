@@ -209,7 +209,9 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
             contentFrameLayout.addView(loginWithRegView);
             viewPageList.add(loginWithRegView);
         }
-        ((LoginWithRegLayout)loginWithRegView).setFromViewType(fromViewType);
+        if (fromViewType != null) {
+            loginWithRegView.setFromView(fromViewType);
+        }
         setViewPageVisable(loginWithRegView);
     }
 

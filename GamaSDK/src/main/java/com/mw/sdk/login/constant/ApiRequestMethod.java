@@ -15,7 +15,7 @@ public class ApiRequestMethod {
     /**
      * 获取手机验证码接口
      */
-    public static final String GS_REQUEST_METHOD_GET_PHONT_VFCODE = "acquire/v1/acquire-vf-code.app";
+    public static final String GS_REQUEST_METHOD_GET_PHONT_VFCODE = "api/vcode/sendEmailVcode";
 
     /**
      * 注册接口
@@ -30,7 +30,7 @@ public class ApiRequestMethod {
     /**
      * 找回密码接口
      */
-    public static final String GS_REQUEST_METHOD_FIND_PASSWORD = "find/v1/pwd.app";
+    public static final String GS_REQUEST_METHOD_FIND_PASSWORD = "api/pwd/forgotPassword";
 
     /**
      * 绑定账号接口
