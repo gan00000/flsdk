@@ -140,6 +140,31 @@ public class ThirdAccountBindRequestTaskV2 extends BaseLoginRequestTask {
         thirdAccountBindRequestBean.setRequestMethod(ApiRequestMethod.GS_REQUEST_METHOD_BIND);
     }
 
+    public ThirdAccountBindRequestTaskV2(Context context,
+                                         String name,
+                                         String pwd,
+                                         String thirdPlatId,
+                                         String thirdToken) {
+        super(context);
+
+        if(TextUtils.isEmpty(thirdPlatId)){
+            PL.d("thirdPlatId:" + thirdPlatId);
+            return;
+        }
+
+        thirdAccountBindRequestBean = new ThirdAccountBindRequestBean(context);
+
+        sdkBaseRequestBean = thirdAccountBindRequestBean;
+
+        thirdAccountBindRequestBean.setRegistPlatform(SLoginType.LOGIN_TYPE_GOOGLE);
+        thirdAccountBindRequestBean.setThirdPlatId(thirdPlatId);
+        thirdAccountBindRequestBean.setName(name);
+        thirdAccountBindRequestBean.setPwd(SStringUtil.toMd5(pwd));
+        thirdAccountBindRequestBean.setLineAccessToken(thirdToken);
+
+        thirdAccountBindRequestBean.setRequestMethod(ApiRequestMethod.GS_REQUEST_METHOD_BIND);
+    }
+
     @Override
     public BaseReqeustBean createRequestBean() {
         super.createRequestBean();

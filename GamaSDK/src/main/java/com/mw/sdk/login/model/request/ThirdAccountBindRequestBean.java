@@ -31,8 +31,12 @@ public class ThirdAccountBindRequestBean extends AccountLoginRequestBean {
 	private String tokenBusiness = "";//编码（标志明文密文）
 	private String vfCode = "";
 	private String fb_oauthToken = ""; //facebook登入的accesstoken
+	private String fbOauthToken;
+
 	private String googleIdToken = ""; //Google登入的accesstoken
 	private String googleClientId = ""; //Google登入的参数,在google-service.json里面找到:oauth_client-type3的client-id
+
+	private String lineAccessToken;
 
 	public String getFb_oauthToken() {
 		return fb_oauthToken;
@@ -40,6 +44,7 @@ public class ThirdAccountBindRequestBean extends AccountLoginRequestBean {
 
 	public void setFb_oauthToken(String fb_oauthToken) {
 		this.fb_oauthToken = fb_oauthToken;
+		this.fbOauthToken = fb_oauthToken;
 	}
 
 	public String getGoogleIdToken() {
@@ -98,5 +103,13 @@ public class ThirdAccountBindRequestBean extends AccountLoginRequestBean {
 
 	public void setTokenBusiness(String tokenBusiness) {
 		this.tokenBusiness = tokenBusiness;
+	}
+
+	public String getLineAccessToken() {
+		return lineAccessToken;
+	}
+
+	public void setLineAccessToken(String lineAccessToken) {
+		this.lineAccessToken = lineAccessToken;
 	}
 }

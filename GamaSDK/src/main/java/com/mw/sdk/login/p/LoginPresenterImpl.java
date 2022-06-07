@@ -1239,6 +1239,25 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             }
         }else if(bindType == BindType.BIND_LINE) {
 
+            this.sLineSignIn.startSignIn(getActivity().getString(R.string.line_channelId), new SLineSignIn.LineSignInCallBack() {
+                @Override
+                public void success(String id, String mFullName, String mEmail, String idTokenString) {
+
+                    if (SStringUtil.isNotEmpty(id)) {
+                        ThirdAccountBindRequestTaskV2 bindLineRequestTask = new ThirdAccountBindRequestTaskV2(getActivity(),
+                                account,
+                                pwd,
+                                id,
+                                idTokenString);
+                        sAccountBindV2(bindLineRequestTask,account,pwd);
+                    }
+                }
+
+                @Override
+                public void failure() {
+
+                }
+            });
         }
     }
 
