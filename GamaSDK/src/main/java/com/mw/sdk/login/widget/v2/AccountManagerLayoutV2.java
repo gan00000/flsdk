@@ -92,13 +92,13 @@ public class AccountManagerLayoutV2 extends SLoginBaseRelativeLayout implements 
 //        } else
         if (v == uniqueRegBindBtn) {
 
-            sLoginDialogv2.toBindUniqueView(GSLoginCommonConstant.GsLoginUiPageNumber.GS_PAGE_BIND);
+//            sLoginDialogv2.toBindUniqueView(GSLoginCommonConstant.GsLoginUiPageNumber.GS_PAGE_BIND);
 
         } else if (v == fbRegBindBtn) {
-            sLoginDialogv2.toBindFbView();
+//            sLoginDialogv2.toBindFbView();
 
         } else if (v == googleRegBindBtn) {
-            sLoginDialogv2.toBindGoogleView();
+//            sLoginDialogv2.toBindGoogleView();
 
         } else if (v == backView) {//返回键
 //            sLoginDialogv2.toAccountLoginView();

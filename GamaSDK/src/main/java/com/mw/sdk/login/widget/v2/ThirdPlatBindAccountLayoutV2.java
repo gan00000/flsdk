@@ -15,6 +15,8 @@ import com.mw.base.bean.GamaAreaInfoBean;
 import com.mw.sdk.SBaseRelativeLayout;
 import com.mw.base.utils.GamaUtil;
 import com.mw.sdk.R;
+import com.mw.sdk.login.constant.BindType;
+import com.mw.sdk.login.constant.ViewType;
 import com.mw.sdk.login.widget.SDKInputEditTextView;
 import com.mw.sdk.login.widget.SDKInputType;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
@@ -22,8 +24,12 @@ import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
 
 public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout implements View.OnClickListener, SBaseRelativeLayout.OperationCallback {
 
-    private int bindTpye = 0;
-    private int fromPage = 0;
+    private BindType bindTpye;
+
+    public void setBindTpye(BindType bindTpye) {
+        this.bindTpye = bindTpye;
+    }
+
 
     private View contentView;
     private Button bindConfirm;
@@ -45,7 +51,7 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
 //    SDKPhoneInputEditTextView mSdkPhoneInputEditTextView;
 
     //选中的区域信息
-    private GamaAreaInfoBean selectedBean;
+//    private GamaAreaInfoBean selectedBean;
 
     public ThirdPlatBindAccountLayoutV2(Context context) {
         super(context);
@@ -154,13 +160,6 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
     }
 
 
-    public void setBindTpye(int bindTpye) {
-        this.bindTpye = bindTpye;
-    }
-
-    public void setFromPage(int fromPage) {
-        this.fromPage = fromPage;
-    }
 
     private void getAndShowArea() {
         sLoginDialogv2.getLoginPresenter().getAreaInfo(sLoginDialogv2.getActivity());

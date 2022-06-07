@@ -16,6 +16,7 @@ import com.mw.base.bean.SLoginType;
 import com.mw.base.utils.GamaUtil;
 import com.mw.sdk.SBaseRelativeLayout;
 import com.mw.sdk.login.AccountPopupWindow;
+import com.mw.sdk.login.constant.BindType;
 import com.mw.sdk.login.constant.ViewType;
 import com.mw.sdk.login.model.AccountModel;
 import com.mw.sdk.login.widget.SDKInputEditTextView;
@@ -37,7 +38,7 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
 
     private SDKInputEditTextView accountSdkInputEditTextView;
 
-    private String account;
+//    private String account;
     private AccountModel currentAccountModel;
 
     View historyAccountListBtn;
@@ -110,6 +111,7 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
 //                accountSdkInputEditTextView.getInputEditText().setText(accountModel.getAccount());
                 GamaUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(),accountEditText);
                 currentAccountModel = accountModel;
+
             }
 
             @Override
@@ -131,7 +133,7 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
             currentAccountModel = ams.get(0);
 
             if (currentAccountModel != null){ //显示记住的密码，待修改
-                account = currentAccountModel.getAccount();
+//                account = currentAccountModel.getAccount();
 //            String password = lastAccountModel.getPassword();
 //                accountSdkInputEditTextView.getInputEditText().setText(account);
                 ImageView imageView = accountSdkInputEditTextView.getIconImageView();
@@ -190,7 +192,7 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
 
         }else if (v == btn_change_pwd) {
 
-            account = accountEditText.getEditableText().toString().trim();
+            String account = accountEditText.getEditableText().toString().trim();
             if (TextUtils.isEmpty(account)) {
                 ToastUtils.toast(getActivity(), R.string.py_account_empty);
                 return;
@@ -199,14 +201,24 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
         }else if (v == btn_swith_account || v == btn_swith_account2) {
             sLoginDialogv2.toLoginWithRegView(ViewType.WelcomeView);
 
-        }else if (v == btn_change_pwd) {
+        }else if (v == btn_update_account) {
 
-            account = accountEditText.getEditableText().toString().trim();
+            String account = accountEditText.getEditableText().toString().trim();
             if (TextUtils.isEmpty(account)) {
                 ToastUtils.toast(getActivity(), R.string.py_account_empty);
                 return;
             }
-            sLoginDialogv2.toChangePwdView(account);
+            if (SLoginType.LOGIN_TYPE_FB.equals(currentAccountModel.getLoginType())){
+                sLoginDialogv2.toBindView(ViewType.WelcomeView, BindType.BIND_FB);
+            }else  if (SLoginType.LOGIN_TYPE_GOOGLE.equals(currentAccountModel.getLoginType())){
+                sLoginDialogv2.toBindView(ViewType.WelcomeView, BindType.BIND_GOOGLE);
+            }else  if (SLoginType.LOGIN_TYPE_GUEST.equals(currentAccountModel.getLoginType())){
+                sLoginDialogv2.toBindView(ViewType.WelcomeView, BindType.BIND_UNIQUE);
+            }else if (SLoginType.LOGIN_TYPE_LINE.equals(currentAccountModel.getLoginType())){
+                sLoginDialogv2.toBindView(ViewType.WelcomeView, BindType.BIND_LINE);
+            }else if (SLoginType.LOGIN_TYPE_MG.equals(currentAccountModel.getLoginType())){
+            }
+
         }
 
     }
@@ -226,7 +238,7 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
             sLoginDialogv2.getLoginPresenter().lineLogin(sLoginDialogv2.getActivity());
         }else if (SLoginType.LOGIN_TYPE_MG.equals(currentAccountModel.getLoginType())){
 
-            account = currentAccountModel.getAccount();
+            String account = currentAccountModel.getAccount();
             String pwd = currentAccountModel.getPassword();
             sLoginDialogv2.getLoginPresenter().starpyAccountLogin(sLoginDialogv2.getActivity(),account,pwd,"",true);
         }

@@ -14,6 +14,7 @@ import com.core.base.utils.ToastUtils;
 import com.mw.sdk.SBaseRelativeLayout;
 import com.mw.base.utils.Localization;
 import com.mw.sdk.login.SLoginDialogV2;
+import com.mw.sdk.login.constant.ViewType;
 
 /**
  * Created by gan on 2017/4/12.
@@ -28,7 +29,11 @@ public abstract class SLoginBaseRelativeLayout extends SBaseRelativeLayout {
 
     protected View backView;
     protected TextView titleTextView;
-    public int from;
+    protected ViewType fromView;
+
+    public void setFromView(ViewType fromView) {
+        this.fromView = fromView;
+    }
 
     protected int remainTimeSeconds;
 

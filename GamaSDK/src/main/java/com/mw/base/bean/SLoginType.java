@@ -29,9 +29,4 @@ public class SLoginType {
 	 */
 	public static final String LOGIN_TYPE_UNIQUE = "unique";
 
-	public static final int bind_unique = 1;
-	public static final int bind_fb = 2;
-	public static final int bind_google = 3;
-	public static final int bind_twitter = 4;
-
 }

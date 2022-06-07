@@ -26,6 +26,7 @@ import com.mw.base.bean.GamaAreaInfoBean;
 import com.mw.base.bean.SLoginType;
 import com.mw.base.cfg.ResConfig;
 import com.mw.base.utils.GamaUtil;
+import com.mw.sdk.login.constant.BindType;
 import com.mw.sdk.login.constant.GSLoginCommonConstant;
 import com.mw.sdk.login.execute.AccountLoginRequestTask;
 import com.mw.sdk.login.execute.AccountRegisterRequestTask;
@@ -223,16 +224,16 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         }*/
 
         List<AccountModel> accountModels = GamaUtil.getAccountModels(this.mActivity);
-//        showMainHomeView();
-        if (accountModels.isEmpty()){
-            if (iLoginView != null){
-                iLoginView.showMainHomeView();
-            }
-        }else{
-            if (iLoginView != null){
-                iLoginView.showWelcomeBackView();
-            }
-        }
+        iLoginView.showMainHomeView();
+//        if (accountModels.isEmpty()){
+//            if (iLoginView != null){
+//                iLoginView.showMainHomeView();
+//            }
+//        }else{
+//            if (iLoginView != null){
+//                iLoginView.showWelcomeBackView();
+//            }
+//        }
     }
 
     @Override
@@ -1023,7 +1024,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 //        }
 //    }
 
-    private void showPhoneVerifyView(String loginType, String thirdId) {
+    /*private void showPhoneVerifyView(String loginType, String thirdId) {
         if (iLoginView != null){
             iLoginView.showPhoneVerifyView(loginType, thirdId);
         }
@@ -1039,7 +1040,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         if (iLoginView != null){
             iLoginView.refreshVfCode();
         }
-    }
+    }*/
 
     private void handleRegisteOrLoginSuccess(SLoginResponse loginResponse, String rawResult, String loginType) {
 
@@ -1142,9 +1143,9 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     }
 
     @Override
-    public void accountBind(final Activity activity, final String account, final String pwd, final String areaCode, final String phone, final String vfcode, int bindType) {
+    public void accountBind(final Activity activity, final String account, final String pwd, final String areaCode, final String phone, final String vfcode, BindType bindType) {
         this.mActivity = activity;
-        if (bindType == SLoginType.bind_unique){
+        if (bindType == BindType.BIND_UNIQUE){
             String uniqueId = GamaUtil.getGoogleAdid1AndroidId(activity);
             if(TextUtils.isEmpty(uniqueId)){
                 PL.d("thirdPlatId:" + uniqueId);
@@ -1160,7 +1161,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     uniqueId);
             sAccountBindV2(bindRequestTask, account, pwd);
 
-        } else if (bindType == SLoginType.bind_fb){
+        } else if (bindType == BindType.BIND_FB){
             sFbLogin(activity, sFacebookProxy, new FbLoginCallBack() {
                 @Override
                 public void loginSuccess(FaceBookUser user) {
@@ -1178,7 +1179,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 }
             });
 
-        } else  if (bindType == SLoginType.bind_google){//Google绑定
+        } else  if (bindType == BindType.BIND_GOOGLE){//Google绑定
             if (sGoogleSignIn == null){
                 return;
             }
@@ -1208,7 +1209,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     PL.i("google sign in failure");
                 }
             });
-        } else if(bindType == SLoginType.bind_twitter) {
+        } else if(bindType == BindType.BIND_TWITTER) {
             if(twitterLogin != null) {
                 twitterLogin.startLogin(new GamaTwitterLogin.TwitterLoginCallBack() {
                     @Override
@@ -1233,6 +1234,8 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     }
                 });
             }
+        }else if(bindType == BindType.BIND_LINE) {
+
         }
     }
 
@@ -1535,7 +1538,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         return resetTime;
     }
 
-    private boolean checkIsMacLoginLimit(Activity activity, final SLoginResponse sLoginResponse, final String rawResult) {
+   /* private boolean checkIsMacLoginLimit(Activity activity, final SLoginResponse sLoginResponse, final String rawResult) {
         boolean isLimit = false;
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         String msg = sLoginResponse.getMessage();
@@ -1580,5 +1583,5 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         builder.create().show();
         return isLimit;
     }
-
+*/
 }

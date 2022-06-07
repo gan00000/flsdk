@@ -60,6 +60,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
     private View fbLoginView, macLoginView, googleLoginView, lineLoginView;
 
     private AccountPopupWindow accountPopupWindow;
+    private AccountModel currentAccountModel;
 
     public AccountLoginLayoutV2(Context context) {
         super(context);
@@ -224,7 +225,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
             AccountModel lastAccountModel = accountModels.get(0);
             account = lastAccountModel.getAccount();
             password = lastAccountModel.getPassword();
-
+            currentAccountModel = lastAccountModel;
             if (!TextUtils.isEmpty(account)){ //显示记住的密码
 //                loginAccountEditText.setText(account);
                 GamaUtil.setAccountWithIcon(lastAccountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
@@ -242,8 +243,19 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
 
             @Override
             public void onUse(AccountModel accountModel) {
-                loginAccountEditText.setText(accountModel.getAccount());
-                loginPasswordEditText.setText(accountModel.getPassword());
+
+                currentAccountModel = accountModel;
+                if (SLoginType.LOGIN_TYPE_MG.equals(accountModel.getLoginType())){
+//                    loginAccountEditText.setText(accountModel.getAccount());
+                    GamaUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
+                    loginPasswordEditText.setText(accountModel.getPassword());
+                }else{
+//                    loginAccountEditText.setText(accountModel.getAccount());
+//                    loginPasswordEditText.setText(accountModel.getPassword());
+                    GamaUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
+                    loginPasswordEditText.setText("");
+                }
+
             }
 
             @Override

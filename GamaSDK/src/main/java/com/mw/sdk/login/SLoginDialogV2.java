@@ -13,6 +13,7 @@ import androidx.annotation.StyleRes;
 
 import com.mw.base.bean.SLoginType;
 import com.mw.base.utils.Localization;
+import com.mw.sdk.login.constant.BindType;
 import com.mw.sdk.login.constant.ViewType;
 import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.SBaseDialog;
@@ -56,9 +57,10 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
     private SLoginBaseRelativeLayout accountManagerCenterView;
     private SLoginBaseRelativeLayout sdkTermsV3View;
 
-    private SLoginBaseRelativeLayout bindUniqueView;
-    private SLoginBaseRelativeLayout bindFbView;
-    private SLoginBaseRelativeLayout bindGoogleView;
+    private SLoginBaseRelativeLayout bindView;
+//    private SLoginBaseRelativeLayout bindUniqueView;
+//    private SLoginBaseRelativeLayout bindFbView;
+//    private SLoginBaseRelativeLayout bindGoogleView;
     private SLoginBaseRelativeLayout welcomeBackView;
 
     private List<SLoginBaseRelativeLayout> viewPageList;
@@ -365,8 +367,19 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 
     }
 
+    public void toBindView(ViewType fromView, BindType bindType) {
 
-    public void toBindUniqueView(int fromPage) {
+        if (bindView == null || !viewPageList.contains(bindView)){
+            bindView = new ThirdPlatBindAccountLayoutV2(context);
+            ((ThirdPlatBindAccountLayoutV2)bindView).setBindTpye(bindType);
+            ((ThirdPlatBindAccountLayoutV2)bindView).setFromView(fromView);
+            bindView.setLoginDialogV2(this);
+            contentFrameLayout.addView(bindView);
+        }
+        setViewPageVisable(bindView);
+    }
+
+   /* public void toBindUniqueView(int fromPage) {
 
         if (bindUniqueView == null || !viewPageList.contains(bindUniqueView)){
 //            SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
@@ -464,7 +477,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
             }
         }
 
-    }
+    }*/
 
     /*public void toBindTwitterView() {
         if (bindTwitterView == null || !viewPageList.contains(bindTwitterView)){
@@ -649,8 +662,8 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 //        }
     }
 
-    @Override
-    public void showPhoneVerifyView(String loginType, String thirdId) {
+//    @Override
+//    public void showPhoneVerifyView(String loginType, String thirdId) {
 
 //        phoneVerifyView = new PhoneVerifyLayoutV2(context);
 //        ((PhoneVerifyLayoutV2)phoneVerifyView).setLoginTpye(loginType);
@@ -659,21 +672,21 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 //        phoneVerifyView.setLoginDialogV2(this);
 //        contentFrameLayout.addView(phoneVerifyView);
 //        getLoginPresenter().stopVfCodeTimer();
-    }
+//    }
 
-    @Override
-    public void showBindView(int fromPage) {
-        toBindUniqueView(fromPage);
-    }
+//    @Override
+//    public void showBindView(int fromPage) {
+//        toBindUniqueView(fromPage);
+//    }
 
-    @Override
-    public void refreshVfCode() {
-        if(accountLoginView != null && accountLoginView.getVisibility() == View.VISIBLE) {
-            try {
-                accountLoginView.refreshVfCode();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
+//    @Override
+//    public void refreshVfCode() {
+//        if(accountLoginView != null && accountLoginView.getVisibility() == View.VISIBLE) {
+//            try {
+//                accountLoginView.refreshVfCode();
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
 }

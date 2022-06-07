@@ -947,10 +947,10 @@ public class GamaUtil {
 
     public static void setAccountWithIcon(AccountModel accountModel, ImageView imageView, EditText editText){
         int imageResId = R.mipmap.mw_smail_icon;
-        String showName = accountModel.getThirdAccount();
-        if (SStringUtil.isEmpty(showName)){
-            showName = accountModel.getUserId();
-        }
+        String showName = accountModel.getUserId();//accountModel.getThirdAccount();
+//        if (SStringUtil.isEmpty(showName)){
+//            showName = accountModel.getUserId();
+//        }
         if (SLoginType.LOGIN_TYPE_FB.equals(accountModel.getLoginType())){
             imageResId = R.mipmap.fb_smail_icon;
         }else  if (SLoginType.LOGIN_TYPE_GOOGLE.equals(accountModel.getLoginType())){

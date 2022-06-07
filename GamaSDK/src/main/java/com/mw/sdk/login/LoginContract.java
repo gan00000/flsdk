@@ -3,6 +3,7 @@ package com.mw.sdk.login;
 import android.app.Activity;
 import android.view.View;
 
+import com.mw.sdk.login.constant.BindType;
 import com.mw.sdk.login.constant.ViewType;
 import com.mw.sdk.login.model.request.ThirdLoginRegRequestBean;
 import com.mw.sdk.login.model.response.SLoginResponse;
@@ -42,11 +43,11 @@ public class LoginContract {
         void showMainHomeView();
         void showWelcomeBackView();
 
-        void showPhoneVerifyView(String loginType, String thirdId);
-
-        void showBindView(int fromPage);
-
-        void refreshVfCode();
+//        void showPhoneVerifyView(String loginType, String thirdId);
+//
+//        void showBindView(int fromPage);
+//
+//        void refreshVfCode();
     }
 
     /**
@@ -100,7 +101,7 @@ public class LoginContract {
         /**
          * 需要手机验证的绑定账号
          */
-        void accountBind(Activity activity, String account, String pwd, String areaCode, String phone, String vfcode, int bindType);
+        void accountBind(Activity activity, String account, String pwd, String areaCode, String phone, String vfcode, BindType bindType);
 
         /**
          * 获取手机验证码
