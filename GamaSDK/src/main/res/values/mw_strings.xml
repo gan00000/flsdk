@@ -193,5 +193,6 @@
     <string name="text_update_account_bind">升級帳號</string>
     <string name="text_pwd_not_equel">兩次密碼不一致</string>
     <string name="py_input_old_password">請輸入舊密碼</string>
+    <string name="text_free_register">免註冊登入</string>
 
 </resources>

@@ -108,6 +108,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
 
         loginAccountEditText = accountSdkInputEditTextView.getInputEditText();
         loginPasswordEditText = pwdSdkInputEditTextView.getInputEditText();
+        pwdSdkInputEditTextView.setEyeVisable(View.VISIBLE);
 
         historyAccountListBtn = contentView.findViewById(R.id.sdk_input_item_account_history);
         historyAccountListBtn.setVisibility(VISIBLE);
@@ -281,7 +282,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
         }else{
             GamaUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
             pwdSdkInputEditTextView.setPwdInputEnable(false);
-            loginPasswordEditText.setText("免註冊登入");
+            loginPasswordEditText.setText(R.string.text_free_register);
         }
     }
 
