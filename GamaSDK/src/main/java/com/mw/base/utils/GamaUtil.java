@@ -3,6 +3,7 @@ package com.mw.base.utils;
 import android.content.Context;
 import android.os.Build;
 import android.text.Editable;
+import android.text.Selection;
 import android.text.TextUtils;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -944,5 +945,8 @@ public class GamaUtil {
 
         imageView.setImageResource(imageResId);
         editText.setText(showName);
+        // 使光标始终在最后位置
+        Editable etable = editText.getText();
+        Selection.setSelection(etable, etable.length());
     }
 }

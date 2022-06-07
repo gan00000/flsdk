@@ -47,6 +47,19 @@ public class SDKInputEditTextView extends RelativeLayout {
         return inputEditText;
     }
 
+    public void setEyeVisable(int visibility){
+
+        if (eyeImageView == null){
+            return;
+        }
+        this.eyeImageViewLayout.setVisibility(visibility);
+        if (visibility== View.GONE){
+            eyeImageView.setSelected(false);
+            // 显示为普通文本
+            inputEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        }
+    }
+
     public SDKInputEditTextView(Context context) {
         super(context);
         initInputView();

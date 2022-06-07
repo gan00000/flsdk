@@ -225,22 +225,13 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
             account = lastAccountModel.getAccount();
             password = lastAccountModel.getPassword();
 
-//            if (accountModels.size() > 1){
-//                historyAccountListBtn.setVisibility(VISIBLE);
-//            }
+            if (!TextUtils.isEmpty(account)){ //显示记住的密码
+//                loginAccountEditText.setText(account);
+                GamaUtil.setAccountWithIcon(lastAccountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
+                loginPasswordEditText.setText(password);
+            }
         }
 
-//        if (TextUtils.isEmpty(account)){
-//            account = GamaUtil.getMacAccount(getContext());
-//            password = GamaUtil.getMacPassword(getContext());
-//        }
-        if (!TextUtils.isEmpty(account)){ //显示记住的密码，待修改
-            loginAccountEditText.setText(account);
-            loginPasswordEditText.setText(password);
-        }
-
-
-//        initHistoryRv();
 
         accountPopupWindow = new AccountPopupWindow(getActivity());
         accountPopupWindow.setPopWindowListener(new AccountPopupWindow.PopWindowListener() {

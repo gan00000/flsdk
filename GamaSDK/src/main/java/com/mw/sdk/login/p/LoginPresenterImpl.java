@@ -497,9 +497,10 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
                         ToastUtils.toast(getActivity(), sLoginResponse.getMessage());
 
-                        GamaUtil.saveAccountModel(activity,account,newPwd,false);
-
                         iLoginView.changePwdSuccess(sLoginResponse);
+                        GamaUtil.saveAccountModel(activity,account,newPwd,true);
+                        //登录成功后直接进入游戏
+                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_MG);
 
                     }else {
 
