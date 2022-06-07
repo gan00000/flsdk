@@ -74,9 +74,6 @@ public class GamaUtil {
     private static ConfigBean configBean;
 
     public static ConfigBean getSdkCfg(Context context){
-//        if (configBean != null){//缓存
-//            return configBean;
-//        }
         String cfg = getSdkCfgString(context);
         if (JsonUtil.isJson(cfg)){
             try {

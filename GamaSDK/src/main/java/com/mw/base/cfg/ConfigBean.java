@@ -2,7 +2,9 @@ package com.mw.base.cfg;
 
 import android.content.Context;
 
-import com.core.base.utils.SStringUtil;
+import com.core.base.utils.ApkInfoUtil;
+
+import java.util.List;
 
 /**
  * Created by gan on 2017/2/16.
@@ -10,135 +12,113 @@ import com.core.base.utils.SStringUtil;
 
 public class ConfigBean {
 
-    /**
-     * 登录的AppKey
-     */
-    private String S_AppKey = "";
-    /**
-     * 游戏的GameCode
-     */
-    private String S_GameCode = "";
-    /**
-     * 支付主域名
-     */
-    private String S_Pay_Pre_Url = "";
-    /**
-     * 支付备用域名
-     */
-    private String S_Pay_Spa_Url = "";
-    /**
-     * 登录主域名
-     */
-    private String S_Login_Pre_Url = "";
-    /**
-     * 登录备用域名
-     */
-    private String S_Login_Spa_Url = "";
-    /**
-     * 活动主域名
-     */
-    private String S_Act_Pre_Url = "";
-    /**
-     * 活动备用域名
-     */
-    private String S_Act_Spa_Url = "";
-    /**
-     * 第三方支付域名
-     */
-    private String S_Third_PayUrl = "";
+    private VersionData allVersion;
+    private List<VersionData> subVersion;
 
-    @Deprecated
-    private String S_Login_password_Regularly = "";
-    @Deprecated
-    private String S_Login_account_Regularly = "";
-    /**
-     * Google储值是否转移为第三方储值；假若Google包侵权被下架，此配置可以启动三方储值
-     */
-    private String OpenOthersPay = "";
-
-    private String gama_cs_pre_url;
-    private String gama_cs_spa_url;
-
-    private String gama_plat_pre_url;
-    private String gama_plat_spa_url;
-
-    private String gama_ads_pre_url;
-    private String gama_ads_spa_url;
-
-    public String getS_AppKey() {
-        return S_AppKey;
+    public VersionData getAllVersion() {
+        return allVersion;
     }
 
-    public String getS_GameCode() {
-        return S_GameCode;
-    }
 
-    /**
-     * 获取支付主域名
-     */
-    public String getS_Pay_Pre_Url() {
-        return S_Pay_Pre_Url;
-    }
+    public VersionData getSdkConfigLoginData(Context context){
 
-    /**
-     * 获取支付备用域名
-     */
-    public String getS_Pay_Spa_Url() {
-        return S_Pay_Spa_Url;
-    }
-
-    /**
-     * 获取登录主域名
-     */
-    public String getS_Login_Pre_Url() {
-        return S_Login_Pre_Url;
-    }
-
-    /**
-     * 获取登录备用域名
-     */
-    public String getS_Login_Spa_Url() {
-        return S_Login_Spa_Url;
-    }
-
-    /**
-     * 获取第三方支付域名
-     */
-    public String getS_Third_PayUrl() {
-        return S_Third_PayUrl;
-    }
-
-    @Deprecated
-    public String getS_Login_password_Regularly() {
-        return S_Login_password_Regularly;
-    }
-
-    @Deprecated
-    public String getS_Login_account_Regularly() {
-        return S_Login_account_Regularly;
-    }
-
-    /**
-     * Google储值是否转移为第三方储值.假若Google包侵权被下架，此配置可以启动三方储值
-     */
-    public boolean openOthersPay(Context context){
-        if (SStringUtil.isNotEmpty(OpenOthersPay) && OpenOthersPay.contains(context.getPackageName())){
-            return true;
+        String packageName = context.getPackageName();
+        String versionCode = ApkInfoUtil.getVersionCode(context);
+        String versionName = ApkInfoUtil.getVersionName(context);
+        if (allVersion != null && packageName.equals(allVersion.getPackageName())){
+            return allVersion;
         }
-        return false;
+        if (subVersion != null){
+
+            for (int i = 0; i < subVersion.size(); i++) {
+                VersionData versionData = subVersion.get(i);
+
+                if (versionData != null && packageName.equals(versionData.getPackageName()) && versionCode.equals(versionData.getVersion())){
+                    return versionData;
+                }
+            }
+
+        }
+        return null;
     }
 
-    /**
-     * 获取活动主域名
-     */
-    public String getS_Act_Pre_Url() {
-        return S_Act_Pre_Url;
+    public void setSubVersion(List<VersionData> subVersion) {
+        this.subVersion = subVersion;
     }
 
-    /**
-     * 获取活动备用域名
-     */
-    public String getS_Act_Spa_Url() {
-        return S_Act_Spa_Url;
+    public static class VersionData {
+
+        private String version = "";
+        private String packageName = "";
+        private boolean visitorLogin = true;
+        private boolean fbLogin = true;
+        private boolean googleLogin = true;
+        private boolean lineLogin = true;
+        private boolean appleLogin = true;
+        private boolean deleteAccount = true;
+
+        public String getVersion() {
+            return version;
+        }
+
+        public void setVersion(String version) {
+            this.version = version;
+        }
+
+        public String getPackageName() {
+            return packageName;
+        }
+
+        public void setPackageName(String packageName) {
+            this.packageName = packageName;
+        }
+
+        public boolean isVisitorLogin() {
+            return visitorLogin;
+        }
+
+        public void setVisitorLogin(boolean visitorLogin) {
+            this.visitorLogin = visitorLogin;
+        }
+
+        public boolean isFbLogin() {
+            return fbLogin;
+        }
+
+        public void setFbLogin(boolean fbLogin) {
+            this.fbLogin = fbLogin;
+        }
+
+        public boolean isGoogleLogin() {
+            return googleLogin;
+        }
+
+        public void setGoogleLogin(boolean googleLogin) {
+            this.googleLogin = googleLogin;
+        }
+
+        public boolean isLineLogin() {
+            return lineLogin;
+        }
+
+        public void setLineLogin(boolean lineLogin) {
+            this.lineLogin = lineLogin;
+        }
+
+        public boolean isAppleLogin() {
+            return appleLogin;
+        }
+
+        public void setAppleLogin(boolean appleLogin) {
+            this.appleLogin = appleLogin;
+        }
+
+        public boolean isDeleteAccount() {
+            return deleteAccount;
+        }
+
+        public void setDeleteAccount(boolean deleteAccount) {
+            this.deleteAccount = deleteAccount;
+        }
     }
 }

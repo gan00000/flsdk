@@ -26,9 +26,9 @@ public class ResConfig {
      * 获取gameCode
      */
     public static String getGameCode(Context context) {
-        if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_GameCode())) {
-            return GamaUtil.getSdkCfg(context).getS_GameCode();
-        }
+//        if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_GameCode())) {
+//            return GamaUtil.getSdkCfg(context).getS_GameCode();
+//        }
 //		return getResStringByName(context, "star_game_code");
         return getConfigInAssetsProperties(context, "sdk_game_code");
     }
@@ -37,9 +37,9 @@ public class ResConfig {
      * 获取秘钥
      */
     public static String getAppKey(Context context) {
-        if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_AppKey())) {
-            return GamaUtil.getSdkCfg(context).getS_AppKey();
-        }
+//        if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_AppKey())) {
+//            return GamaUtil.getSdkCfg(context).getS_AppKey();
+//        }
         return getConfigInAssetsProperties(context, "sdk_app_key");
     }
 
@@ -103,9 +103,9 @@ public class ResConfig {
      * 获取登录主域名地址
      */
     public static String getLoginPreferredUrl(Context context) {
-        if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_Login_Pre_Url())) {
-            return GamaUtil.getSdkCfg(context).getS_Login_Pre_Url();
-        }
+//        if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_Login_Pre_Url())) {
+//            return GamaUtil.getSdkCfg(context).getS_Login_Pre_Url();
+//        }
         return getConfigUrl(context, "gama_login_pre_url");
     }
 
@@ -113,9 +113,9 @@ public class ResConfig {
      * 获取登录备用域名地址
      */
     public static String getLoginSpareUrl(Context context) {
-        if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_Login_Spa_Url())) {
-            return GamaUtil.getSdkCfg(context).getS_Login_Spa_Url();
-        }
+//        if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_Login_Spa_Url())) {
+//            return GamaUtil.getSdkCfg(context).getS_Login_Spa_Url();
+//        }
         return getConfigUrl(context, "gama_login_spa_url");
     }
 
@@ -123,9 +123,9 @@ public class ResConfig {
      * 获取储值主域名
      */
     public static String getPayPreferredUrl(Context context) {
-        if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_Pay_Pre_Url())) {
-            return GamaUtil.getSdkCfg(context).getS_Pay_Pre_Url();
-        }
+//        if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_Pay_Pre_Url())) {
+//            return GamaUtil.getSdkCfg(context).getS_Pay_Pre_Url();
+//        }
         return getConfigUrl(context, "gama_pay_pre_url");
     }
 
@@ -133,9 +133,9 @@ public class ResConfig {
      * 获取储值备用域名
      */
     public static String getPaySpareUrl(Context context) {
-        if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_Pay_Spa_Url())) {
-            return GamaUtil.getSdkCfg(context).getS_Pay_Spa_Url();
-        }
+//        if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_Pay_Spa_Url())) {
+//            return GamaUtil.getSdkCfg(context).getS_Pay_Spa_Url();
+//        }
         return getConfigUrl(context, "gama_pay_spa_url");
     }
 
@@ -157,9 +157,9 @@ public class ResConfig {
      * 获取活动主域名
      */
     public static String getActivityPreferredUrl(Context context) {
-        if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_Act_Pre_Url())) {
-            return GamaUtil.getSdkCfg(context).getS_Act_Pre_Url();
-        }
+//        if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_Act_Pre_Url())) {
+//            return GamaUtil.getSdkCfg(context).getS_Act_Pre_Url();
+//        }
         return getConfigUrl(context, "gama_act_pre_url");
     }
 
@@ -167,9 +167,9 @@ public class ResConfig {
      * 获取活动备用域名
      */
     public static String getActivitySpareUrl(Context context) {
-        if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_Act_Spa_Url())) {
-            return GamaUtil.getSdkCfg(context).getS_Act_Spa_Url();
-        }
+//        if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_Act_Spa_Url())) {
+//            return GamaUtil.getSdkCfg(context).getS_Act_Spa_Url();
+//        }
         return getConfigUrl(context, "gama_act_spa_url");
     }
 

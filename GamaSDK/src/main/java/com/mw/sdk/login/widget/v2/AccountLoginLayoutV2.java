@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.core.base.utils.ToastUtils;
 import com.mw.base.bean.SLoginType;
+import com.mw.base.cfg.ConfigBean;
 import com.mw.base.utils.GamaUtil;
 import com.mw.sdk.login.AccountPopupWindow;
 import com.mw.sdk.login.model.AccountModel;
@@ -177,6 +178,25 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
         lineLoginView = contentView.findViewById(R.id.lineLoginView);
         macLoginView = contentView.findViewById(R.id.guestLoginView);
         googleLoginView = contentView.findViewById(R.id.ggLoginView);
+
+        ConfigBean configBean = GamaUtil.getSdkCfg(getContext());
+        if (configBean != null){
+            ConfigBean.VersionData versionData = configBean.getSdkConfigLoginData(getContext());
+            if (versionData != null){
+                if(!versionData.isVisitorLogin()){
+                    macLoginView.setVisibility(View.GONE);
+                }
+                if(!versionData.isFbLogin()){
+                    fbLoginView.setVisibility(View.GONE);
+                }
+                if(!versionData.isGoogleLogin()){
+                    googleLoginView.setVisibility(View.GONE);
+                }
+                if(!versionData.isLineLogin()){
+                    lineLoginView.setVisibility(View.GONE);
+                }
+            }
+        }
 
         fbLoginView.setOnClickListener(new OnClickListener() {
             @Override

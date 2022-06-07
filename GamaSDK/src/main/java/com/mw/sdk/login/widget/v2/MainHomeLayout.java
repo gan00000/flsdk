@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 
+import com.mw.base.cfg.ConfigBean;
+import com.mw.base.utils.GamaUtil;
 import com.mw.sdk.login.constant.ViewType;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.mw.sdk.R;
@@ -70,6 +72,24 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
 //        ss.setSpan(new UnderlineSpan(), ssText.length() - 5, ssText.length(), Paint.UNDERLINE_TEXT_FLAG);
 //        ss.setSpan(new ForegroundColorSpan(), ssText.length() - 5, ssText.length(), Paint.UNDERLINE_TEXT_FLAG);
 
+        ConfigBean configBean = GamaUtil.getSdkCfg(getContext());
+        if (configBean != null){
+            ConfigBean.VersionData versionData = configBean.getSdkConfigLoginData(getContext());
+            if (versionData != null){
+                if(!versionData.isVisitorLogin()){//false隐藏图标
+                    guestLoginView.setVisibility(View.GONE);
+                }
+                if(!versionData.isFbLogin()){
+                    iv_login_fb.setVisibility(View.GONE);
+                }
+                if(!versionData.isGoogleLogin()){
+                    iv_login_google.setVisibility(View.GONE);
+                }
+                if(!versionData.isLineLogin()){
+                    iv_login_line.setVisibility(View.GONE);
+                }
+            }
+        }
         return contentView;
     }
 
