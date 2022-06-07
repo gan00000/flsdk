@@ -167,6 +167,7 @@
     <string name="text_input_new_pwd">請輸入新密碼</string>
     <string name="text_input_new_pwd_confire">確認新密碼</string>
     <string name="text_update_account_tips">建議升級帳號，提升帳號安全性</string>
+    <string name="text_has_update_account_tips">該賬號已升級為正式平台帳號</string>
     <string name="text_delete_account">刪除該帳號</string>
     <string name="text_confire_change">確認修改</string>
     <string name="text_confire_update">確認升級</string>

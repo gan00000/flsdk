@@ -334,7 +334,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         GamaUtil.saveAccountModel(getContext(), thirdLoginRegRequestBean.getRegistPlatform(),"","",
                                 sLoginResponse.getData().getUserId(),
                                 thirdLoginRegRequestBean.getThirdPlatId(),
-                                thirdLoginRegRequestBean.getThirdAccount(),true);
+                                thirdLoginRegRequestBean.getThirdAccount(),true,sLoginResponse.getData().isBind());
 
                         handleRegisteOrLoginSuccess(sLoginResponse,rawResult, thirdLoginRegRequestBean.getRegistPlatform());
                         return;
@@ -585,7 +585,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         GamaUtil.saveAccountModel(getContext(), SLoginType.LOGIN_TYPE_GUEST,"","",
                                 sLoginResponse.getData().getUserId(),
                                 macLoginRegCmd.getSdkBaseRequestBean().getUniqueId(),
-                                "",true);
+                                "",true,sLoginResponse.getData().isBind());
 
                         handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GUEST);
                     }

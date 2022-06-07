@@ -91,13 +91,41 @@ public class GamaUtil {
     }
 
     public static void saveAccountModel(Context context, String account, String password, boolean updateTime){
-        saveAccountModel(context,SLoginType.LOGIN_TYPE_MG,account,password,"","","",updateTime);
+        //平台注册的默认绑定
+        saveAccountModel(context,SLoginType.LOGIN_TYPE_MG,account,password,"","","",updateTime,true);
     }
 
-    public static void saveAccountModel(Context context,String loginType, String account, String password,String userId, String thirdId, String thirdAccount, boolean updateTime){
+    public static void saveAccountModel(Context context,String loginType, String account, String password,String userId, String thirdId, String thirdAccount, boolean updateTime, boolean isBindAccount){
 
-        if (!SStringUtil.isEqual(SLoginType.LOGIN_TYPE_MG, loginType)) {//非账号登錄
-            account = thirdId;
+        List<AccountModel> mls = getAccountModels(context);
+        if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_MG, loginType)) {//非账号登錄
+            //account = thirdId;
+            for (AccountModel a: mls) {
+                if (SStringUtil.isNotEmpty(a.getUserId()) && SStringUtil.isEqual(a.getUserId(), userId) && a.getAccount().equals(account)){
+                    a.setPassword(password);
+                    a.setBind(isBindAccount);
+                    a.setUserId(userId);
+                    if (updateTime){
+                        a.setTime(System.currentTimeMillis());
+                    }
+                    saveAccountModels(context,mls);
+                    return;
+                }
+            }
+        }else{//第三方账号
+
+            for (AccountModel a: mls) {
+                if (SStringUtil.isNotEmpty(a.getThirdId()) && SStringUtil.isNotEmpty(a.getUserId()) && SStringUtil.isEqual(a.getUserId(), userId) && a.getThirdId().equals(thirdId)){//三方账号已存在
+                    a.setBind(isBindAccount);
+                    a.setUserId(userId);
+                    if (updateTime){
+                        a.setTime(System.currentTimeMillis());
+                    }
+                    saveAccountModels(context,mls);
+                    return;
+                }
+            }
+
         }
 
        /* else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GUEST, loginType)) {//游客
@@ -110,25 +138,16 @@ public class GamaUtil {
         } else {
         }*/
 
-        List<AccountModel> mls = getAccountModels(context);
-        for (AccountModel a: mls) {
-            if (a.getAccount().equals(account)){
-                a.setPassword(password);
-                if (updateTime){
-                    a.setTime(System.currentTimeMillis());
-                }
-                saveAccountModels(context,mls);
-                return;
-            }
-        }
         AccountModel newAccountModel = new AccountModel();//新添加一个保存
         newAccountModel.setAccount(account);
         newAccountModel.setPassword(password);
         newAccountModel.setLoginType(loginType);
-        newAccountModel.setThirdAccount(thirdAccount);
         newAccountModel.setUserId(userId);
+
+        newAccountModel.setThirdAccount(thirdAccount);
         newAccountModel.setThirdId(thirdId);
         newAccountModel.setTime(System.currentTimeMillis());
+        newAccountModel.setBind(isBindAccount);
         mls.add(newAccountModel);
         saveAccountModels(context,mls);
 
@@ -171,6 +190,7 @@ public class GamaUtil {
                 accountObject.put("sdk_thirdId", accountModel.getThirdId());
                 accountObject.put("sdk_userId", accountModel.getUserId());
                 accountObject.put("sdk_thirdAccount", accountModel.getThirdAccount());
+                accountObject.put("sdk_bindAccount", accountModel.isBind());
                 jsonArray.put(accountObject);
             }
             SPUtil.saveSimpleInfo(context,GAMA_SP_FILE, SDK_LOGIN_ACCOUNT_INFO, jsonArray.toString());
@@ -204,6 +224,7 @@ public class GamaUtil {
                         accountModel.setThirdId(accountObject.getString("sdk_thirdId"));
                         accountModel.setUserId(accountObject.getString("sdk_userId"));
                         accountModel.setThirdAccount(accountObject.getString("sdk_thirdAccount"));
+                        accountModel.setBind(accountObject.getBoolean("sdk_bindAccount"));
 
                         accountModels.add(accountModel);
                     }

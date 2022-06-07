@@ -31,7 +31,7 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
     private View contentView;
     private View layout_need_update_account,layout_has_update_account;
     private TextView tv_account_update_tips;
-    private ImageView iv_update_account;
+    private ImageView iv_update_account_icon;
 
     private EditText accountEditText;
 
@@ -74,7 +74,7 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
 
         accountSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_welcome_account);
         tv_account_update_tips = contentView.findViewById(R.id.tv_account_update_tips);
-        iv_update_account = contentView.findViewById(R.id.iv_update_account);
+        iv_update_account_icon = contentView.findViewById(R.id.iv_update_account_icon);
         btn_login_game = contentView.findViewById(R.id.btn_login_game);
         layout_need_update_account = contentView.findViewById(R.id.layout_need_update_account);
         layout_has_update_account = contentView.findViewById(R.id.layout_has_update_account);
@@ -138,6 +138,19 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
                 GamaUtil.setAccountWithIcon(currentAccountModel,imageView,accountEditText);
 
                 //判斷是否綁定，顯示是否升級賬號
+
+                if (currentAccountModel.isBind()){
+                    layout_need_update_account.setVisibility(View.GONE);
+                    layout_has_update_account.setVisibility(View.VISIBLE);
+                    tv_account_update_tips.setText(R.string.text_has_update_account_tips);
+                    iv_update_account_icon.setImageResource(R.mipmap.has_update_account_bg);
+//
+                }else{
+                    layout_need_update_account.setVisibility(View.VISIBLE);
+                    layout_has_update_account.setVisibility(View.GONE);
+                    tv_account_update_tips.setText(R.string.text_update_account_tips);
+                    iv_update_account_icon.setImageResource(R.mipmap.nend_update_account_bg);
+                }
             }
 
 

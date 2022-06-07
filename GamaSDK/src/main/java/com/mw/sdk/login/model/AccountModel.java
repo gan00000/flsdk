@@ -9,6 +9,7 @@ public class AccountModel {
     private String thirdId;
     private String userId;
     private String thirdAccount;
+    private boolean isBind;
 
     //记录时间
     private long time;
@@ -67,5 +68,13 @@ public class AccountModel {
 
     public void setThirdAccount(String thirdAccount) {
         this.thirdAccount = thirdAccount;
+    }
+
+    public boolean isBind() {
+        return isBind;
+    }
+
+    public void setBind(boolean bind) {
+        isBind = bind;
     }
 }
