@@ -117,6 +117,7 @@ public class AccountChangePwdLayoutV2 extends SLoginBaseRelativeLayout implement
             changePwd();
         } else if (v == backView) {//返回键
            sLoginDialogv2.toWelcomeBackView();
+           sLoginDialogv2.distoryView(this);
         }
 
     }
