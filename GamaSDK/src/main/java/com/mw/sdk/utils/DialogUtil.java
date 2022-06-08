@@ -41,6 +41,7 @@ public class DialogUtil {
 		loadingDialog.setCancelable(false);
         loadingDialog.setCanceledOnTouchOutside(false);
         loadingDialog.setContentView(v, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));// 设置布局
+
         return loadingDialog;
     }
 

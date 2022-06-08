@@ -194,5 +194,8 @@
     <string name="text_pwd_not_equel">兩次密碼不一致</string>
     <string name="py_input_old_password">請輸入舊密碼</string>
     <string name="text_free_register">免註冊登入</string>
+    <string name="text_cancel">取消</string>
+    <string name="text_confire">確認</string>
+    <string name="text_delete_account_tips">請注意，註銷帳號將會將您的帳號從平台中徹底刪除，如果確認註銷，請點擊“確認”</string>
 
 </resources>

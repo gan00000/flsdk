@@ -1,5 +1,6 @@
 package com.mw.sdk.login.widget.v2;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -24,6 +25,7 @@ import com.mw.sdk.login.widget.SDKInputEditTextView;
 import com.mw.sdk.login.widget.SDKInputType;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.mw.sdk.R;
+import com.mw.sdk.utils.DialogUtil;
 
 import java.util.List;
 
@@ -47,6 +49,8 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
     private AccountPopupWindow accountPopupWindow;
 
     Button btn_login_game,btn_swith_account,btn_update_account,btn_change_pwd,btn_swith_account2;
+
+    Dialog deleteDialog;
 
     public WelcomeBackLayout(Context context) {
         super(context);
@@ -86,6 +90,9 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
         btn_change_pwd = contentView.findViewById(R.id.btn_change_pwd);
         btn_swith_account2 = contentView.findViewById(R.id.btn_swith_account2);
         layout_delete_account = contentView.findViewById(R.id.layout_delete_account);
+
+        //test
+        layout_delete_account.setVisibility(VISIBLE);
 
         accountSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Account);
         accountEditText = accountSdkInputEditTextView.getInputEditText();
@@ -237,6 +244,34 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
 
         }else if (v == layout_delete_account){
 //            layout_delete_account
+
+            if (deleteDialog == null){
+                LayoutInflater inflater = LayoutInflater.from(getContext());
+                View contentView = inflater.inflate(R.layout.mw_delete_account_alert, null);
+                Button cancelBtn = contentView.findViewById(R.id.btn_delete_cancel);
+                cancelBtn.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (deleteDialog != null) {
+                            deleteDialog.dismiss();
+                        }
+                    }
+                });
+                Button confireBtn = contentView.findViewById(R.id.btn_delete_confirm);
+
+                confireBtn.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                }); 
+
+                deleteDialog = DialogUtil.createDialog(getContext(),contentView);
+                deleteDialog.show();
+            }else{
+
+                deleteDialog.show();
+            }
 
         }
 
