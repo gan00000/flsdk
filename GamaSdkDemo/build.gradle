@@ -1,7 +1,4 @@
 apply plugin: 'com.android.application'
-//apply plugin: 'io.fabric' //Google不再支持
-// Apply the Crashlytics Gradle plugin
-//apply plugin: 'com.google.firebase.crashlytics'
 
 android {
 
@@ -78,14 +75,33 @@ android {
             versionName "1.0"
             flavorDimensions "1"
             resValue "string", "scheme", "jjcs"
+            resValue "string", "facebook_app_id", "290914729828439"
+            resValue "string", "facebook_client_token", "290914729828439"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider290914729828439" //启用分析
+            resValue "string", "fb_login_protocol_scheme", "fb290914729828439"
+            resValue "string", "line_channelId", "1657186918"
+
+            //每个游戏的demo设置
+            resValue "string", "sdk_name", "ylj Demo"
+
+        }
+        superand {
+            signingConfig signingConfigs.release
+            applicationId "com.game.superand"
+            minSdkVersion 21
+            targetSdkVersion 29
+            versionCode 1
+            versionName "1.0"
+            flavorDimensions "1"
+            resValue "string", "scheme", "jjcs"
             resValue "string", "facebook_app_id", "977770276222572"
-            resValue "string", "facebook_client_token", "977770276222572"
+            resValue "string", "facebook_client_token", "3bd436587ffec3df1f9e0c15cb40d09b"
             resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider977770276222572" //启用分析
             resValue "string", "fb_login_protocol_scheme", "fb977770276222572"
             resValue "string", "line_channelId", "1657186918"
 
             //每个游戏的demo设置
-            resValue "string", "sdk_name", "ylj Demo"
+            resValue "string", "sdk_name", "superand"
 
         }
     }

@@ -3,12 +3,12 @@
         {
             "id": 428027033,
             "name": "flyfun_10min",
-            "token": "rifhjp"
+            "token": "5vdkj9"
         },
         {
 
             "name": "flyfun_15retention",
-            "token": "y2rf4j"
+            "token": "lwdu4f"
 
         },
         {
@@ -20,7 +20,7 @@
         {
             "id": 1502386958,
             "name": "flyfun_20min",
-            "token": "75iigl",
+            "token": "ykasoq",
             "callback_url": null,
             "unique": true,
             "urls": {
@@ -33,7 +33,7 @@
         {
             "id": 2102020743,
             "name": "flyfun_30min",
-            "token": "dvzzv0",
+            "token": "7asnmv",
             "callback_url": null,
             "unique": true,
             "urls": {
@@ -46,22 +46,22 @@
         {
             "id": 1477064003,
             "name": "flyfun_30retention",
-            "token": "cijxdz"
+            "token": "120hbv"
         },
         {
             "id": 1644213435,
             "name": "flyfun_3retention",
-            "token": "xzqh1y"
+            "token": "4a7y1i"
         },
         {
             "id": 1916085957,
             "name": "flyfun_7retention",
-            "token": "rk2rfy"
+            "token": "4ikkeq"
         },
         {
             "id": 1850803452,
             "name": "flyfun_8min",
-            "token": "jtrbze",
+            "token": "j5xz5c",
             "callback_url": null,
             "unique": true,
             "urls": {
@@ -217,7 +217,7 @@
         {
             "id": 497968902,
             "name": "flyfun_firstpay",
-            "token": "8113g1",
+            "token": "860h4u",
             "callback_url": null,
             "unique": true,
             "urls": {
@@ -282,7 +282,7 @@
         {
             "id": 1889531354,
             "name": "flyfun_login_event",
-            "token": "nvaphd",
+            "token": "jwchi5",
             "callback_url": "",
             "unique": true,
             "urls": {
@@ -412,7 +412,7 @@
         {
             "id": 1583957493,
             "name": "flyfun_open",
-            "token": "j0xvs8",
+            "token": "n5ulds",
             "callback_url": null,
             "unique": true,
             "urls": {
@@ -438,7 +438,7 @@
         {
             "id": 1474209759,
             "name": "flyfun_register_event",
-            "token": "iu4o1g",
+            "token": "eifadd",
             "callback_url": "",
             "unique": true,
             "urls": {
@@ -451,7 +451,7 @@
         {
             "id": 773842207,
             "name": "flyfun_role_info",
-            "token": "k401wu"
+            "token": "vwtw2v"
         },
         {
             "id": 790205205,
@@ -469,7 +469,7 @@
         {
             "id": 950850672,
             "name": "in_app_purchases",
-            "token": "89peno",
+            "token": "twhhmo",
             "callback_url": null,
             "unique": false,
             "urls": {

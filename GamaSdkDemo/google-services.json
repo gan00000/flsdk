@@ -1,157 +1,41 @@
 {
   "project_info": {
-    "project_number": "985871206324",
-    "project_id": "puzzle-f4c57",
-    "storage_bucket": "puzzle-f4c57.appspot.com"
+    "project_number": "61788863107",
+    "project_id": "meowplayer-5541c",
+    "storage_bucket": "meowplayer-5541c.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:985871206324:android:2f7b7a2a6b11b75daed4e1",
+        "mobilesdk_app_id": "1:61788863107:android:71e73a6595bd3957c5f9b6",
         "android_client_info": {
-          "package_name": "com.hgame.fsyl"
+          "package_name": "com.game.superand"
         }
       },
       "oauth_client": [
         {
-          "client_id": "985871206324-50c386ns175hesvo5qj1gcbjhe39ukbr.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAavR7X7FGn4CXLI22GxWSeTqNm7QPCAnU"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "985871206324-50c386ns175hesvo5qj1gcbjhe39ukbr.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:985871206324:android:f92379ee404f99abaed4e1",
-        "android_client_info": {
-          "package_name": "com.hgame.myns"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "985871206324-50c386ns175hesvo5qj1gcbjhe39ukbr.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAavR7X7FGn4CXLI22GxWSeTqNm7QPCAnU"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "985871206324-50c386ns175hesvo5qj1gcbjhe39ukbr.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:985871206324:android:0ae8c8f0ad10ee0aaed4e1",
-        "android_client_info": {
-          "package_name": "com.hgame.shjy"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "985871206324-50c386ns175hesvo5qj1gcbjhe39ukbr.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAavR7X7FGn4CXLI22GxWSeTqNm7QPCAnU"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "985871206324-50c386ns175hesvo5qj1gcbjhe39ukbr.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:985871206324:android:2a2ee31fb9cba093aed4e1",
-        "android_client_info": {
-          "package_name": "com.hgame.sxh"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "985871206324-n48a3o0ckh38lrjl2cs0u03c50hrau3r.apps.googleusercontent.com",
+          "client_id": "61788863107-kqg3srg1tcelrta7rac0d630gd44krkc.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.hgame.sxh",
-            "certificate_hash": "6d84cc51a37c445f6a5f164b51d5ec2a34828e8c"
+            "package_name": "com.game.superand",
+            "certificate_hash": "f1738617b7ae0c892ca378439c80aa5b9f4bbd50"
           }
         },
         {
-          "client_id": "985871206324-50c386ns175hesvo5qj1gcbjhe39ukbr.apps.googleusercontent.com",
+          "client_id": "61788863107-0ljklfj8o2udqbcfjclrq7g5g61juj0r.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAavR7X7FGn4CXLI22GxWSeTqNm7QPCAnU"
+          "current_key": "AIzaSyBVMP-vvB8dScQjCYEnjs20o8gI7INT1xI"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "985871206324-50c386ns175hesvo5qj1gcbjhe39ukbr.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:985871206324:android:4381b264fd63b070aed4e1",
-        "android_client_info": {
-          "package_name": "com.mg.testa"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "985871206324-50c386ns175hesvo5qj1gcbjhe39ukbr.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAavR7X7FGn4CXLI22GxWSeTqNm7QPCAnU"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "985871206324-50c386ns175hesvo5qj1gcbjhe39ukbr.apps.googleusercontent.com",
+              "client_id": "61788863107-0ljklfj8o2udqbcfjclrq7g5g61juj0r.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

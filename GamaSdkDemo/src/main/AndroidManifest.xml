@@ -44,11 +44,11 @@
             </intent-filter>
         </activity>
 
-        <service android:name="com.mw.sdk.fcm.GamaFirebaseMessagingService">
+        <!--<service android:name="com.mw.sdk.fcm.GamaFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
-        </service>
+        </service>-->
 
     </application>
 
