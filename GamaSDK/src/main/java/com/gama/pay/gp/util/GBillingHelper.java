@@ -41,7 +41,7 @@ public class GBillingHelper implements PurchasesUpdatedListener {
     private boolean isBillingInit = false;
     private PurchasesUpdatedListener purchasesUpdatedListener;
 
-    private static String TAG = GBillingHelper.class.getSimpleName();
+//    private static String TAG = GBillingHelper.class.getSimpleName();
 
     public static GBillingHelper getInstance() {
         if (gBillingHelper == null) {
@@ -60,10 +60,10 @@ public class GBillingHelper implements PurchasesUpdatedListener {
      */
     public void setBillingHelperStatusCallback(BillingHelperStatusCallback callback) {
         if (!this.mBillingCallbackList.contains(callback)) {
-            PL.i(TAG, "Add BillingCallbackList.");
+            PL.i( "Add BillingCallbackList.");
             mBillingCallbackList.add(callback);
         } else {
-            PL.i(TAG, "Already have BillingCallbackList.");
+            PL.i( "Already have BillingCallbackList.");
         }
     }
 
@@ -74,9 +74,9 @@ public class GBillingHelper implements PurchasesUpdatedListener {
     public void removeBillingHelperStatusCallback(BillingHelperStatusCallback callback) {
         if (this.mBillingCallbackList.contains(callback)) {
             this.mBillingCallbackList.remove(callback);
-            PL.i(TAG, "Remove BillingCallbackList.");
+            PL.i( "Remove BillingCallbackList.");
         } else {
-            PL.i(TAG, "No BillingCallbackList match.");
+            PL.i( "No BillingCallbackList match.");
         }
     }
 
@@ -116,13 +116,13 @@ public class GBillingHelper implements PurchasesUpdatedListener {
                 if (billingResponseCode == BillingClient.BillingResponseCode.OK) {
                     // The BillingClient is ready. You can query purchases here.
                     isBillingInit = true;
-                    PL.i(TAG, "onBillingSetupFinished -> success");
+                    PL.i( "onBillingSetupFinished -> success");
 //                    callback.onStartUp(true);
                     if (executeOnSuccess != null) {
                         executeOnSuccess.run();
                     }
                 } else {
-                    PL.i(TAG, "onBillingSetupFinished -> fail");
+                    PL.i( "onBillingSetupFinished -> fail");
 //                    callback.onStartUp(false);
                     if (mBillingCallbackList != null && !mBillingCallbackList.isEmpty()) {
                         for (BillingHelperStatusCallback mBillingCallback : mBillingCallbackList) {
@@ -135,7 +135,7 @@ public class GBillingHelper implements PurchasesUpdatedListener {
             @Override
             public void onBillingServiceDisconnected() {
                 // Logic from ServiceConnection.onServiceDisconnected should be moved here.
-                PL.i(TAG, "onBillingServiceDisconnected -> ");
+                PL.i( "onBillingServiceDisconnected -> ");
                 if (mBillingCallbackList != null && !mBillingCallbackList.isEmpty()) {
                     for (BillingHelperStatusCallback mBillingCallback : mBillingCallbackList) {
                         mBillingCallback.onStartUp(false, "");
@@ -166,7 +166,7 @@ public class GBillingHelper implements PurchasesUpdatedListener {
             public void onConsumeResponse(BillingResult billingResult, @NonNull String purchaseToken) {
                 if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
                     // Handle the success of the consume operation.
-                    PL.i(TAG, "purchaseToken -> " + purchaseToken);
+                    PL.i( "purchaseToken -> " + purchaseToken);
 
                     if (consumeResponseListener != null){
                         consumeResponseListener.onConsumeResponse(billingResult,purchaseToken);
@@ -178,8 +178,8 @@ public class GBillingHelper implements PurchasesUpdatedListener {
                         }
                     }
                 } else {
-                    PL.i(TAG, "consumePurchase error code -> " + billingResult.getResponseCode());
-                    PL.i(TAG, "consumePurchase error message -> " + billingResult.getDebugMessage());
+                    PL.i( "consumePurchase error code -> " + billingResult.getResponseCode());
+                    PL.i( "consumePurchase error message -> " + billingResult.getDebugMessage());
                     if (consumeResponseListener != null){
                         consumeResponseListener.onConsumeResponse(billingResult,null);
                     }
@@ -256,6 +256,7 @@ public class GBillingHelper implements PurchasesUpdatedListener {
             @Override
             public void onProductDetailsResponse(@NonNull BillingResult billingResult, @NonNull List<ProductDetails> list) {
 
+                PL.i( "queryProductDetailsAsync finish ");
                 if (list != null && !list.isEmpty()) {
                     launchPurchaseFlow(context, orderId, list.get(0));
                 }
@@ -272,7 +273,7 @@ public class GBillingHelper implements PurchasesUpdatedListener {
         Runnable launchPurchaseRunnable = new Runnable() {
             @Override
             public void run() {
-                PL.i(TAG, "productDetails -> " + productDetails);
+                PL.i( "productDetails -> " + productDetails.toString());
 
                 // An activity reference from which the billing flow will be launched.
                 BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
@@ -282,7 +283,8 @@ public class GBillingHelper implements PurchasesUpdatedListener {
                                         .setProductDetails(productDetails)
                                         // to get an offer token, call ProductDetails.getOfferDetails()
                                         // for a list of offers that are available to the user
-                                        .setOfferToken(GamaUtil.getUid(context))
+//                                        .setOfferToken(GamaUtil.getUid(context))
+//                                        .setOfferToken(productDetails.getSubscriptionOfferDetails().get(0).getOfferToken())
                                         .build())
                         )
                         .build();
@@ -302,8 +304,8 @@ public class GBillingHelper implements PurchasesUpdatedListener {
                 }
 //                            int responseCode = billingResult.getResponseCode();
 //                            String responseMessage = billingResult.getDebugMessage();
-//                            PL.i(TAG, "launchPurchaseFlow responseCode -> " + responseCode);
-//                            PL.i(TAG, "launchPurchaseFlow responseMessage -> " + responseMessage);
+//                            PL.i( "launchPurchaseFlow responseCode -> " + responseCode);
+//                            PL.i( "launchPurchaseFlow responseMessage -> " + responseMessage);
             }
         };
         executeRunnable(context, launchPurchaseRunnable);
