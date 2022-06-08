@@ -24,6 +24,9 @@ import com.mw.sdk.out.FlSdkFactory;
 import com.mw.sdk.out.IFLSDK;
 import com.mw.sdk.demo.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class MainActivity extends Activity {
 
     protected Button loginButton, othersPayButton, googlePayBtn, shareButton, showPlatform, demo_language,
@@ -166,7 +169,10 @@ public class MainActivity extends Activity {
                 productId 充值的商品id
                 customize 自定义透传字段（从服务端回调到cp）
                 */
-                mIFLSDK.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(),"com.sku1", "xxx", new IPayListener() {
+
+//                com.game.superand.1usd
+//                com.game.superand.2usd
+                mIFLSDK.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(),"com.game.superand.1usd", "xxxx", new IPayListener() {
                     @Override
                     public void onPayFinish(Bundle bundle) {
                         PL.i("支付结束");

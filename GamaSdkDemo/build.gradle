@@ -70,7 +70,7 @@ android {
             signingConfig signingConfigs.release
             applicationId "com.mg.testa"
             minSdkVersion 21
-            targetSdkVersion 29
+            targetSdkVersion 32
             versionCode 1
             versionName "1.0"
             flavorDimensions "1"
@@ -89,7 +89,7 @@ android {
             signingConfig signingConfigs.release
             applicationId "com.game.superand"
             minSdkVersion 21
-            targetSdkVersion 29
+            targetSdkVersion 32
             versionCode 1
             versionName "1.0"
             flavorDimensions "1"
