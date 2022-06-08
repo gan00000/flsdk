@@ -111,22 +111,6 @@ public class SSdkBaseRequestBean extends BaseReqeustBean {
         this.signature = signature;
     }
 
-//    public String getAccessToken() {
-//        return accessToken;
-//    }
-//
-//    public void setAccessToken(String accessToken) {
-//        this.accessToken = accessToken;
-//    }
-
-//    public String getLoginTimestamp() {
-//        return loginTimestamp;
-//    }
-//
-//    public void setLoginTimestamp(String loginTimestamp) {
-//        this.loginTimestamp = loginTimestamp;
-//    }
-
     public String getUniqueId() {
         return uniqueId;
     }
@@ -185,5 +169,21 @@ public class SSdkBaseRequestBean extends BaseReqeustBean {
 
     public void setAdvertisingId(String advertisingId) {
         this.adId = advertisingId;
+    }
+
+    public String getLoginAccessToken() {
+        return loginAccessToken;
+    }
+
+    public void setLoginAccessToken(String loginAccessToken) {
+        this.loginAccessToken = loginAccessToken;
+    }
+
+    public String getLoginTimestamp() {
+        return loginTimestamp;
+    }
+
+    public void setLoginTimestamp(String loginTimestamp) {
+        this.loginTimestamp = loginTimestamp;
     }
 }

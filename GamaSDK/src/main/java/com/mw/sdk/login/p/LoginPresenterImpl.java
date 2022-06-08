@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.ISReqCallBack;
+import com.core.base.callback.SFCallBack;
 import com.core.base.utils.ApkInfoUtil;
 import com.core.base.utils.BitmapUtil;
 import com.core.base.utils.FileUtil;
@@ -30,6 +31,7 @@ import com.mw.sdk.login.constant.BindType;
 import com.mw.sdk.login.execute.AccountLoginRequestTask;
 import com.mw.sdk.login.execute.AccountRegisterRequestTask;
 import com.mw.sdk.login.execute.ChangePwdRequestTask;
+import com.mw.sdk.login.execute.DeleteAccountRequestTask;
 import com.mw.sdk.login.execute.FindPwdRequestTask;
 import com.mw.sdk.login.execute.MacLoginRegRequestTask;
 import com.mw.sdk.login.execute.PhoneVerifyRequestTask;
@@ -1565,6 +1567,58 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         });
         accountLoginCmd.excute(SLoginResponse.class);
     }
+
+    @Override
+    public void deleteAccout(Context mContext, String userId, String loginMode, String thirdLoginId, String loginAccessToken, String loginTimestamp, SFCallBack<String> sfCallBack) {
+
+        DeleteAccountRequestTask cmd = new DeleteAccountRequestTask(getActivity(), userId,loginMode,thirdLoginId,loginAccessToken,loginTimestamp);
+        cmd.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(), "Loading..."));
+        cmd.setReqCallBack(new ISReqCallBack<SLoginResponse>() {
+            @Override
+            public void success(SLoginResponse sLoginResponse, String rawResult) {
+                if (sLoginResponse != null) {
+                    if (sLoginResponse.isRequestSuccess()) {
+                        if (SStringUtil.isNotEmpty(sLoginResponse.getMessage())){
+                            ToastUtils.toast(getActivity(), sLoginResponse.getMessage() + "");
+                        }
+
+                        if (sfCallBack != null){
+                            sfCallBack.success(rawResult,rawResult);
+                        }
+//                        GamaUtil.saveAccountModel(activity,account,password,sLoginResponse.getData().getUserId(),sLoginResponse.getData().getToken(),
+//                                sLoginResponse.getData().getTimestamp(),true);
+//                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_MG);
+
+                    }else{
+
+                        ToastUtils.toast(getActivity(), sLoginResponse.getMessage() + "");
+                        if (sfCallBack != null){
+                            sfCallBack.success(rawResult,rawResult);
+                        }
+                    }
+
+                } else {
+                    ToastUtils.toast(getActivity(), R.string.py_error_occur);
+                    if (sfCallBack != null){
+                        sfCallBack.success(rawResult,rawResult);
+                    }
+                }
+            }
+
+            @Override
+            public void timeout(String code) {}
+
+            @Override
+            public void noData() {}
+
+            @Override
+            public void cancel() {}
+
+        });
+        cmd.excute(SLoginResponse.class);
+    }
+
+
 
     @Override
     public int getRemainTimeSeconds() {

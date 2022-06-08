@@ -1,8 +1,10 @@
 package com.mw.sdk.login;
 
 import android.app.Activity;
+import android.content.Context;
 import android.view.View;
 
+import com.core.base.callback.SFCallBack;
 import com.mw.sdk.login.constant.BindType;
 import com.mw.sdk.login.constant.ViewType;
 import com.mw.sdk.login.model.request.ThirdLoginRegRequestBean;
@@ -133,6 +135,8 @@ public class LoginContract {
         int getRemainTimeSeconds();
 
         void stopVfCodeTimer();
+
+        void deleteAccout(Context mContext, String userId, String loginMode, String thirdLoginId, String loginAccessToken, String loginTimestamp, SFCallBack<String> sfCallBack);
     }
 
 }

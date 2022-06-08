@@ -11,6 +11,7 @@ public class ApiRequestMethod {
      * 登入接口
      */
     public static final String GS_REQUEST_METHOD_LOGIN = "api/user/login";
+    public static final String GS_REQUEST_METHOD_DELETE_ACCOUNT = "api/cancel/account";
 
     /**
      * 获取手机验证码接口

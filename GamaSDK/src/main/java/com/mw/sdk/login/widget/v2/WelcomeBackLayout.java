@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.core.base.callback.SFCallBack;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
 import com.mw.base.bean.SLoginType;
@@ -262,7 +263,7 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
                 confireBtn.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
+                        deleteAccount();
                     }
                 });
 
@@ -275,6 +276,34 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
 
         }
 
+    }
+
+    private void deleteAccount() {
+        String account = accountEditText.getEditableText().toString().trim();
+        if (TextUtils.isEmpty(account)) {
+            ToastUtils.toast(getActivity(), R.string.py_account_empty);
+            return;
+        }
+
+        sLoginDialogv2.getLoginPresenter().deleteAccout(sLoginDialogv2.getActivity(), currentAccountModel.getUserId(),
+                currentAccountModel.getLoginType(),
+                currentAccountModel.getThirdId(),
+                currentAccountModel.getLoginAccessToken(),
+                currentAccountModel.getLoginTimestamp(), new SFCallBack<String>() {
+                    @Override
+                    public void success(String result, String msg) {
+                        if (deleteDialog != null) {
+                            deleteDialog.dismiss();
+                        }
+                    }
+
+                    @Override
+                    public void fail(String result, String msg) {
+                        if (deleteDialog != null) {
+                            deleteDialog.dismiss();
+                        }
+                    }
+                });
     }
 
     private void login() {
