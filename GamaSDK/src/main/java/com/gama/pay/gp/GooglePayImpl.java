@@ -211,12 +211,12 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
 
     @Override
     public void onCreate(Activity activity) {
-        PL.i(TAG, "onCreate");
+        PL.i( "onCreate");
         if (mBillingHelper == null) {
-            PL.i(TAG, "instance GBillingHelper.");
+            PL.i( "instance GBillingHelper.");
             mBillingHelper = GBillingHelper.getInstance();
         } else {
-            PL.i(TAG, "GBillingHelper not null.");
+            PL.i( "GBillingHelper not null.");
         }
         mBillingHelper.setBillingHelperStatusCallback(this);
 
@@ -224,7 +224,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
 
     @Override
     public void onResume(Activity activity) {
-        PL.i(TAG, "onResume");
+        PL.i( "onResume");
     }
 
     @Override
@@ -233,17 +233,17 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
 
     @Override
     public void onPause(Activity activity) {
-        PL.i(TAG, "onPause");
+        PL.i( "onPause");
     }
 
     @Override
     public void onStop(Activity activity) {
-        PL.i(TAG, "onStop");
+        PL.i( "onStop");
     }
 
     @Override
     public void onDestroy(Activity activity) {
-        PL.i(TAG, "onDestroy");
+        PL.i( "onDestroy");
         if (loadingDialog != null) {
             loadingDialog.dismissProgressDialog();
         }
@@ -272,6 +272,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
         mBillingHelper.queryPurchase(activity.getApplicationContext(), new PurchasesResponseListener() {
             @Override
             public void onQueryPurchasesResponse(@NonNull BillingResult billingResult, @NonNull List<com.android.billingclient.api.Purchase> list) {
+                PL.i("queryPurchase finish");
                 for (com.android.billingclient.api.Purchase purchase : list) {//查询是否为PURCHASED未消费商品
                     if(purchase.getPurchaseState() == com.android.billingclient.api.Purchase.PurchaseState.PURCHASED){
                         //2.发送到服务器
@@ -280,14 +281,52 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
                 }
 
                 //4.创建订单
-                PayApi.requestCreateOrder(activity, createOrderIdReqBean, new SFCallBack<GPCreateOrderIdRes>() {
+                mBillingHelper.launchPurchaseFlow(activity.getApplicationContext(), createOrderIdReqBean.getProductId(),
+                        "aaaaaaaaa", new PurchasesUpdatedListener() {
+                            @Override
+                            public void onPurchasesUpdated(@NonNull BillingResult billingResult, @Nullable List<com.android.billingclient.api.Purchase> purchasesList) {
+                                //支付回调
+                                PL.i("onPurchasesUpdated finish...");
+                                for (Purchase purchase : purchasesList) {
+                                    PL.i("onPurchasesUpdated = " + purchase.getPurchaseState());
+                                    if(purchase.getPurchaseState() == Purchase.PurchaseState.PURCHASED){
+                                        //先消费,防止下次购买不了和三天过期退款
+                                        mBillingHelper.consumePurchase(activity, purchase, false, new ConsumeResponseListener() {
+                                            @Override
+                                            public void onConsumeResponse(@NonNull BillingResult billingResult, @NonNull String s) {
+                                                PL.i("onConsumeResponse => " + s);
+                                            }
+                                        });
+
+                                        //发送到服务器,发币
+                                        PayApi.requestSendStone(activity, purchase, new SFCallBack<GPExchangeRes>() {
+                                            @Override
+                                            public void success(GPExchangeRes result, String msg) {
+                                                PL.i("requestSendStone success => " + msg);
+                                            }
+
+                                            @Override
+                                            public void fail(GPExchangeRes result, String msg) {
+                                                PL.i("requestSendStone fail => " + msg);
+                                                ToastUtils.toast(activity, msg);
+                                            }
+                                        });
+                                    }
+                                }
+                            }
+                        });
+                /*PayApi.requestCreateOrder(activity, createOrderIdReqBean, new SFCallBack<GPCreateOrderIdRes>() {
                     @Override
                     public void success(GPCreateOrderIdRes createOrderIdRes, String msg1) {
+                        PL.i("requestCreateOrder finish success");
                         //5.开始购买
                         mBillingHelper.launchPurchaseFlow(activity.getApplicationContext(), createOrderIdReqBean.getProductId(),
                                 createOrderIdRes.getOrderId(), new PurchasesUpdatedListener() {
                             @Override
                             public void onPurchasesUpdated(@NonNull BillingResult billingResult, @Nullable List<com.android.billingclient.api.Purchase> purchasesList) {
+
+                                PL.i("onPurchasesUpdated finish...");
+
                                 //支付回调
                                 for (Purchase purchase : purchasesList) {
                                     PL.i("onPurchasesUpdated = " + purchase.getPurchaseState());
@@ -321,12 +360,13 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
 
                     @Override
                     public void fail(GPCreateOrderIdRes createOrderIdRes, String msg) {
+                        PL.i("requestCreateOrder finish fail");
                         //创建订单失败
                         if (createOrderIdRes != null && !TextUtils.isEmpty(createOrderIdRes.getMessage())) {
                             ToastUtils.toast(activity, createOrderIdRes.getMessage());
                         }
                     }
-                });
+                });*/
 
             }
         });
@@ -337,10 +377,10 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
     @Override
     public void onStartUp(boolean isSuccess, String msg) {
 //        if (!isSuccess) {
-//            PL.i(TAG, "onStartUp fail.");
+//            PL.i( "onStartUp fail.");
 //            callbackFail(msg);
 //        } else {
-//            PL.i(TAG, "onStartUp success.");
+//            PL.i( "onStartUp success.");
 //        }
     }
 
@@ -350,35 +390,35 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
 //            skuDetails = list.get(0);
 //            mBillingHelper.launchPurchaseFlow(activity, createOrderBean.getOrderId(), skuDetails);
 //        } else {
-//            PL.i(TAG, "onQuerySkuResult not current query. ");
+//            PL.i( "onQuerySkuResult not current query. ");
 //        }
     }
 
     @Override
     public void queryPurchaseResult(Context context, List<com.android.billingclient.api.Purchase> purchases) {
 //        if (purchasesResult.getResponseCode() == BillingClient.BillingResponseCode.OK) { //查单成功
-//            PL.i(TAG, "queryPurchaseResult response ok. ");
+//            PL.i( "queryPurchaseResult response ok. ");
 //            List<com.android.billingclient.api.Purchase> purchasesList = purchasesResult.getPurchasesList();
 //            if (purchasesList != null && purchasesList.size() > 0) { //有未消费
 //                for (com.android.billingclient.api.Purchase purchase : purchasesList) {
-////                    PL.i(TAG, "queryPurchaseResult response purc toString" + purchase.toString());
-////                    PL.i(TAG, "queryPurchaseResult response purc getOriginalJson" + purchase.getOriginalJson());
-////                    PL.i(TAG, "queryPurchaseResult response purc getSku" + purchase.getSku());
-////                    PL.i(TAG, "queryPurchaseResult response purc getPurchaseState" + purchase.getPurchaseState());
-////                    PL.i(TAG, "queryPurchaseResult response purc getDeveloperPayload" + purchase.getDeveloperPayload());
-////                    PL.i(TAG, "queryPurchaseResult response purc getPurchaseToken" + purchase.getPurchaseToken());
-////                    PL.i(TAG, "queryPurchaseResult response purc getSignature" + purchase.getSignature());
-////                    PL.i(TAG, "queryPurchaseResult response purc getOrderId" + purchase.getOrderId());
-////                    PL.i(TAG, "queryPurchaseResult response purc getPurchaseTime" + purchase.getPurchaseTime());
+////                    PL.i( "queryPurchaseResult response purc toString" + purchase.toString());
+////                    PL.i( "queryPurchaseResult response purc getOriginalJson" + purchase.getOriginalJson());
+////                    PL.i( "queryPurchaseResult response purc getSku" + purchase.getSku());
+////                    PL.i( "queryPurchaseResult response purc getPurchaseState" + purchase.getPurchaseState());
+////                    PL.i( "queryPurchaseResult response purc getDeveloperPayload" + purchase.getDeveloperPayload());
+////                    PL.i( "queryPurchaseResult response purc getPurchaseToken" + purchase.getPurchaseToken());
+////                    PL.i( "queryPurchaseResult response purc getSignature" + purchase.getSignature());
+////                    PL.i( "queryPurchaseResult response purc getOrderId" + purchase.getOrderId());
+////                    PL.i( "queryPurchaseResult response purc getPurchaseTime" + purchase.getPurchaseTime());
 //                    if (purchase.getPurchaseState() == com.android.billingclient.api.Purchase.PurchaseState.PURCHASED) {
-//                        PL.i(TAG, "queryPurchaseResult response ok, status purchased and start to consume.");
+//                        PL.i( "queryPurchaseResult response ok, status purchased and start to consume.");
 //                        mBillingHelper.consumePurchase(context, purchase, true);
 //                    } else {
-//                        PL.i(TAG, "queryPurchaseResult response ok, status not ok.");
+//                        PL.i( "queryPurchaseResult response ok, status not ok.");
 //                    }
 //                }
 //            } else {
-//                PL.i(TAG, "queryPurchaseResult response ok but no purchase to consume. ");
+//                PL.i( "queryPurchaseResult response ok but no purchase to consume. ");
 //            }
 //        }
 //        //
@@ -388,30 +428,30 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
     @Override
     public void onConsumeResult(Context context, BillingResult billingResult, @NonNull String purchaseToken, com.android.billingclient.api.Purchase purchase, boolean isReplaceConsume) {
         if (billingResult != null) {
-            PL.i(TAG, "onConsumeResult response code : " + billingResult.getResponseCode());
+            PL.i( "onConsumeResult response code : " + billingResult.getResponseCode());
             if (TextUtils.isEmpty(billingResult.getDebugMessage())) {
-                PL.i(TAG, "onConsumeResult response msg empty. ");
+                PL.i( "onConsumeResult response msg empty. ");
             } else {
-                PL.i(TAG, "onConsumeResult response msg : " + billingResult.getDebugMessage());
+                PL.i( "onConsumeResult response msg : " + billingResult.getDebugMessage());
             }
         }
        /* if (waitConsumeList != null && !waitConsumeList.isEmpty()) { //有未消费记录并且当次已经尝试过消费，不管是否成功都先移除
-            PL.i(TAG, "onConsumeResult remove purchase regardless of consume or not. ");
+            PL.i( "onConsumeResult remove purchase regardless of consume or not. ");
             waitConsumeList.remove(purchase);
         }
         if (billingResult != null && billingResult.getResponseCode() != BillingClient.BillingResponseCode.OK) { //消费失败
-            PL.i(TAG, "consume result:" + billingResult.getDebugMessage());
+            PL.i( "consume result:" + billingResult.getDebugMessage());
             if (!isReplaceConsume) { //正常购买消费失败
-                PL.i(TAG, "onConsumeResult send stone fail.");
+                PL.i( "onConsumeResult send stone fail.");
                 callbackFail("Consuming purchase failed, please contact customer service.");
             }
         } else { //消费成功，发币
-            PL.i(TAG, "onConsumeResult ok");
+            PL.i( "onConsumeResult ok");
             if (isReplaceConsume) { //走补发请求，不阻塞购买
-                PL.i(TAG, "onConsumeResult replacement.");
+                PL.i( "onConsumeResult replacement.");
                 requestReplace(purchase);
             } else {
-                PL.i(TAG, "onConsumeResult send stone.");
+                PL.i( "onConsumeResult send stone.");
 //                requestSendStone(purchase);
             }
         }*/
@@ -421,57 +461,57 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
     @Override
     public void onPurchaseUpdate(@NonNull BillingResult billingResult, @Nullable List<com.android.billingclient.api.Purchase> purchases) {
         if (billingResult != null) {
-            PL.i(TAG, "onPurchaseUpdate response code : " + billingResult.getResponseCode());
+            PL.i( "onPurchaseUpdate response code : " + billingResult.getResponseCode());
             if (TextUtils.isEmpty(billingResult.getDebugMessage())) {
-                PL.i(TAG, "onPurchaseUpdate response msg empty. ");
+                PL.i( "onPurchaseUpdate response msg empty. ");
             } else {
-                PL.i(TAG, "onPurchaseUpdate response msg : " + billingResult.getDebugMessage());
+                PL.i( "onPurchaseUpdate response msg : " + billingResult.getDebugMessage());
             }
         }
         if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && purchases != null) { //支付成功，进行消费
-            PL.i(TAG, "onPurchaseUpdate pay success, start consume.");
+            PL.i( "onPurchaseUpdate pay success, start consume.");
             com.android.billingclient.api.Purchase currentPurchase = null;
             boolean isPending = false;
             for (Purchase purchase : purchases) {
-                PL.i(TAG, "onPurchaseUpdate purchase.getSku()=>" + purchase.toString());
+                PL.i( "onPurchaseUpdate purchase.getSku()=>" + purchase.toString());
                 if (purchase.getProducts().get(0).equals(createOrderIdReqBean.getProductId())) { //本次购买的商品
-                    PL.i(TAG, "onPurchaseUpdate current pay product.");
+                    PL.i( "onPurchaseUpdate current pay product.");
                     if (currentPurchase == null) { //未有符合的当次购买商品记录
-                        PL.i(TAG, "onPurchaseUpdate have no product meet.");
+                        PL.i( "onPurchaseUpdate have no product meet.");
                         if (purchase.getPurchaseState() == com.android.billingclient.api.Purchase.PurchaseState.PURCHASED) {
-                            PL.i(TAG, "onPurchaseUpdate purchased.");
+                            PL.i( "onPurchaseUpdate purchased.");
                             isPending = false;
                             currentPurchase = purchase;
                         } else if (purchase.getPurchaseState() == com.android.billingclient.api.Purchase.PurchaseState.PENDING) { //待支付状态
-                            PL.i(TAG, "onPurchaseUpdate pending.");
+                            PL.i( "onPurchaseUpdate pending.");
                             isPending = true;
                         } else {
-                            PL.i(TAG, "onPurchaseUpdate other status.");
+                            PL.i( "onPurchaseUpdate other status.");
                             isPending = false;
                         }
                     } else { //已经有一个符合当次商品的支付，将这个商品添加到补发列表
-                        PL.i(TAG, "onPurchaseUpdate already have meet product, add to replace list.");
+                        PL.i( "onPurchaseUpdate already have meet product, add to replace list.");
                         if (purchase.getPurchaseState() == com.android.billingclient.api.Purchase.PurchaseState.PURCHASED) {
-                            PL.i(TAG, "onPurchaseUpdate replace list purchased.");
+                            PL.i( "onPurchaseUpdate replace list purchased.");
                             waitConsumeList.add(purchase); //非本次购买的商品都添加到待消费列表，走补发流程
                         }
                     }
                 } else {
-                    PL.i(TAG, "onPurchaseUpdate not current pay, add to replace list.");
+                    PL.i( "onPurchaseUpdate not current pay, add to replace list.");
                     if (purchase.getPurchaseState() == com.android.billingclient.api.Purchase.PurchaseState.PURCHASED) {
-                        PL.i(TAG, "onPurchaseUpdate not current pay purchased.");
+                        PL.i( "onPurchaseUpdate not current pay purchased.");
                         waitConsumeList.add(purchase); //非本次购买的商品都添加到待消费列表，走补发流程
                     }
                 }
             }
             if (waitConsumeList.isEmpty()) { //没有可消费的商品
-                PL.i(TAG, "onPurchaseUpdate Nothing waiting for consume.");
+                PL.i( "onPurchaseUpdate Nothing waiting for consume.");
             } else { //有待补发的商品
-                PL.i(TAG, "onPurchaseUpdate start replacement consume.");
+                PL.i( "onPurchaseUpdate start replacement consume.");
                 mBillingHelper.consumePurchaseList(activity, waitConsumeList, true,null);
             }
             if (currentPurchase != null) { //当次的购买消费
-                PL.i(TAG, "onPurchaseUpdate start replacement consume.");
+                PL.i( "onPurchaseUpdate start replacement consume.");
                 mBillingHelper.consumePurchase(activity, currentPurchase, false,null);
             } else {
                 if (isPending) { //当次购买的商品待付款，否则继续等待当次购买信息回调
@@ -482,12 +522,12 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
             }
         } else if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.USER_CANCELED) { //用户取消
             // Handle an error caused by a user cancelling the purchase flow.
-            PL.i(TAG, "user cancelling the purchase flow");
+            PL.i( "user cancelling the purchase flow");
             callbackFail(null);
         } else { //发生错误
             // Handle any other error codes.
-            PL.i(TAG, "Purchases error code -> " + billingResult.getResponseCode());
-            PL.i(TAG, "Purchases error message -> " + billingResult.getDebugMessage());
+            PL.i( "Purchases error code -> " + billingResult.getResponseCode());
+            PL.i( "Purchases error message -> " + billingResult.getDebugMessage());
             callbackFail(billingResult.getDebugMessage());
         }
     }
@@ -495,11 +535,11 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
     @Override
     public void launchBillingFlowResult(Context context, BillingResult billingResult) {
         if (billingResult != null) {
-            PL.i(TAG, "launchBillingFlowResult response code : " + billingResult.getResponseCode());
+            PL.i( "launchBillingFlowResult response code : " + billingResult.getResponseCode() + "  :" + billingResult.toString());
             if (TextUtils.isEmpty(billingResult.getDebugMessage())) {
-                PL.i(TAG, "launchBillingFlowResult response msg empty. ");
+                PL.i( "launchBillingFlowResult response msg empty. ");
             } else {
-                PL.i(TAG, "launchBillingFlowResult response msg : " + billingResult.getDebugMessage());
+                PL.i( "launchBillingFlowResult response msg : " + billingResult.getDebugMessage());
             }
         }
         if (billingResult.getResponseCode() != BillingClient.BillingResponseCode.OK) {
