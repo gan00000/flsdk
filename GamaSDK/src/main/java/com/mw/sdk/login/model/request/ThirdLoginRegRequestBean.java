@@ -87,7 +87,7 @@ public class ThirdLoginRegRequestBean extends AdsRequestBean {
 
 	public void setFb_oauthToken(String fb_oauthToken) {
 		this.fb_oauthToken = fb_oauthToken;
-		this.fbOauthToken = fbOauthToken;
+		this.fbOauthToken = fb_oauthToken;
 	}
 
 	public String getGoogleIdToken() {
