@@ -264,7 +264,7 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
                     public void onClick(View v) {
 
                     }
-                }); 
+                });
 
                 deleteDialog = DialogUtil.createDialog(getContext(),contentView);
                 deleteDialog.show();

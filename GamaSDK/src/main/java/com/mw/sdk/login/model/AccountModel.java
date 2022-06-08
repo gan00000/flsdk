@@ -14,6 +14,9 @@ public class AccountModel {
     //记录时间
     private long time;
 
+    String loginAccessToken;
+    String loginTimestamp;
+
     public String getAccount() {
         return account;
     }
@@ -76,5 +79,21 @@ public class AccountModel {
 
     public void setBind(boolean bind) {
         isBind = bind;
+    }
+
+    public String getLoginAccessToken() {
+        return loginAccessToken;
+    }
+
+    public void setLoginAccessToken(String loginAccessToken) {
+        this.loginAccessToken = loginAccessToken;
+    }
+
+    public String getLoginTimestamp() {
+        return loginTimestamp;
+    }
+
+    public void setLoginTimestamp(String loginTimestamp) {
+        this.loginTimestamp = loginTimestamp;
     }
 }

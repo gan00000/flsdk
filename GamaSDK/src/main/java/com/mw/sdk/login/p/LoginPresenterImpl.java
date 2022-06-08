@@ -333,6 +333,8 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
                         GamaUtil.saveAccountModel(getContext(), thirdLoginRegRequestBean.getRegistPlatform(),"","",
                                 sLoginResponse.getData().getUserId(),
+                                sLoginResponse.getData().getToken(),
+                                sLoginResponse.getData().getTimestamp(),
                                 thirdLoginRegRequestBean.getThirdPlatId(),
                                 thirdLoginRegRequestBean.getThirdAccount(),true,sLoginResponse.getData().isBind());
 
@@ -494,7 +496,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         ToastUtils.toast(getActivity(), sLoginResponse.getMessage());
 
                         iLoginView.changePwdSuccess(sLoginResponse);
-                        GamaUtil.saveAccountModel(activity,account,newPwd,sLoginResponse.getData().getUserId(),true);
+                        GamaUtil.saveAccountModel(activity,account,newPwd,sLoginResponse.getData().getUserId(),sLoginResponse.getData().getToken(), sLoginResponse.getData().getTimestamp(),true);
                         //登录成功后直接进入游戏
                         handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_MG);
 
@@ -538,7 +540,8 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
 //                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GAMA);
                         GamaUtil.updateAccountModel(getActivity(),sLoginResponse.getData().getUserId(),true);
-                        GamaUtil.saveAccountModel(getActivity(), account, pwd,sLoginResponse.getData().getUserId(),true);//记住账号密码
+                        GamaUtil.saveAccountModel(getActivity(), account, pwd,sLoginResponse.getData().getUserId(),sLoginResponse.getData().getToken(),
+                                sLoginResponse.getData().getTimestamp(),true);//记住账号密码
                         if (iLoginView != null){
                             iLoginView.accountBindSuccess(sLoginResponse);
                         }
@@ -583,6 +586,8 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
                         GamaUtil.saveAccountModel(getContext(), SLoginType.LOGIN_TYPE_GUEST,"","",
                                 sLoginResponse.getData().getUserId(),
+                                sLoginResponse.getData().getToken(),
+                                sLoginResponse.getData().getTimestamp(),
                                 macLoginRegCmd.getSdkBaseRequestBean().getUniqueId(),
                                 "",true,sLoginResponse.getData().isBind());
 
@@ -743,6 +748,8 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
                         GamaUtil.saveAccountModel(getContext(), SLoginType.LOGIN_TYPE_FB,"","",
                                 sLoginResponse.getData().getUserId(),
+                                sLoginResponse.getData().getToken(),
+                                sLoginResponse.getData().getTimestamp(),
                                 fbScopeId,
                                 "",true,sLoginResponse.getData().isBind());
 
@@ -785,7 +792,8 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     if (sLoginResponse.isRequestSuccess()) {
                         ToastUtils.toast(getActivity(), R.string.py_register_success);
 
-                        GamaUtil.saveAccountModel(activity,account,password,sLoginResponse.getData().getUserId(),true);
+                        GamaUtil.saveAccountModel(activity,account,password,sLoginResponse.getData().getUserId(),sLoginResponse.getData().getToken(),
+                                sLoginResponse.getData().getTimestamp(),true);
                         handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_MG);
 
                     }else{
@@ -1115,7 +1123,8 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         if (iLoginView != null){
                             iLoginView.findPwdSuccess(sLoginResponse);
                         }
-                        GamaUtil.saveAccountModel(getActivity(), account, newPwd,sLoginResponse.getData().getUserId(),true);//记住账号密码
+                        GamaUtil.saveAccountModel(getActivity(), account, newPwd,sLoginResponse.getData().getUserId(),sLoginResponse.getData().getToken(),
+                                sLoginResponse.getData().getTimestamp(),true);//记住账号密码
                         handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_MG);
 
                     }else{
@@ -1433,7 +1442,8 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     if (sLoginResponse.isRequestSuccess()) {
 //                        GamaUtil.saveAccount(getContext(),account);
                         if(isSaveAccount) {
-                            GamaUtil.saveAccountModel(activity,account,password,sLoginResponse.getData().getUserId(),true);
+                            GamaUtil.saveAccountModel(activity,account,password,sLoginResponse.getData().getUserId(),sLoginResponse.getData().getToken(),
+                                    sLoginResponse.getData().getTimestamp(),true);
                         }
                         handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_MG);
                     }else{

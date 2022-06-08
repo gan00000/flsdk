@@ -87,9 +87,10 @@ public class GamaUtil {
         return null;
     }
 
-    public static void saveAccountModel(Context context, String account, String password,String userId, boolean updateTime){
+    public static void saveAccountModel(Context context, String account, String password,String userId,  String loginAccessToken,
+                                        String loginTimestamp, boolean updateTime){
         //平台注册的默认绑定
-        saveAccountModel(context,SLoginType.LOGIN_TYPE_MG,account,password,userId,"","",updateTime,true);
+        saveAccountModel(context,SLoginType.LOGIN_TYPE_MG,account,password,userId, loginAccessToken,loginTimestamp,"","",updateTime,true);
     }
 
     public static void updateAccountModel(Context context, String userId, boolean isBind){
@@ -103,7 +104,10 @@ public class GamaUtil {
         saveAccountModels(context,mls);
     }
 
-    public static void saveAccountModel(Context context,String loginType, String account, String password,String userId, String thirdId, String thirdAccount, boolean updateTime, boolean isBindAccount){
+    public static void saveAccountModel(Context context,String loginType, String account, String password,String userId,
+                                        String loginAccessToken,
+                                        String loginTimestamp,
+                                        String thirdId, String thirdAccount, boolean updateTime, boolean isBindAccount){
 
         List<AccountModel> mls = getAccountModels(context);
         if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_MG, loginType)) {//账号登錄
@@ -113,6 +117,9 @@ public class GamaUtil {
                     a.setPassword(password);
                     a.setBind(isBindAccount);
                     a.setUserId(userId);
+                    a.setLoginAccessToken(loginAccessToken);
+                    a.setLoginTimestamp(loginTimestamp);
+
                     if (updateTime){
                         a.setTime(System.currentTimeMillis());
                     }
@@ -126,6 +133,9 @@ public class GamaUtil {
                 if (SStringUtil.isNotEmpty(a.getThirdId()) && SStringUtil.isNotEmpty(a.getUserId()) && SStringUtil.isEqual(a.getUserId(), userId) && a.getThirdId().equals(thirdId)){//三方账号已存在
                     a.setBind(isBindAccount);
                     a.setUserId(userId);
+                    a.setLoginAccessToken(loginAccessToken);
+                    a.setLoginTimestamp(loginTimestamp);
+
                     if (updateTime){
                         a.setTime(System.currentTimeMillis());
                     }
@@ -156,6 +166,10 @@ public class GamaUtil {
         newAccountModel.setThirdId(thirdId);
         newAccountModel.setTime(System.currentTimeMillis());
         newAccountModel.setBind(isBindAccount);
+
+        newAccountModel.setLoginAccessToken(loginAccessToken);
+        newAccountModel.setLoginTimestamp(loginTimestamp);
+
         mls.add(newAccountModel);
         saveAccountModels(context,mls);
 
@@ -199,6 +213,8 @@ public class GamaUtil {
                 accountObject.put("sdk_userId", accountModel.getUserId());
                 accountObject.put("sdk_thirdAccount", accountModel.getThirdAccount());
                 accountObject.put("sdk_bindAccount", accountModel.isBind());
+                accountObject.put("sdk_loginAccessToken", accountModel.getLoginAccessToken());
+                accountObject.put("sdk_loginTimestamp", accountModel.getLoginTimestamp());
                 jsonArray.put(accountObject);
             }
             SPUtil.saveSimpleInfo(context,GAMA_SP_FILE, SDK_LOGIN_ACCOUNT_INFO, jsonArray.toString());
@@ -233,6 +249,8 @@ public class GamaUtil {
                         accountModel.setUserId(accountObject.getString("sdk_userId"));
                         accountModel.setThirdAccount(accountObject.getString("sdk_thirdAccount"));
                         accountModel.setBind(accountObject.getBoolean("sdk_bindAccount"));
+                        accountModel.setLoginAccessToken(accountObject.getString("sdk_loginAccessToken"));
+                        accountModel.setLoginTimestamp(accountObject.getString("sdk_loginTimestamp"));
 
                         accountModels.add(accountModel);
                     }
