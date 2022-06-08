@@ -191,7 +191,7 @@ public class ResConfig {
      * 获取服务条款链接
      */
     public static String getServiceTermUrl(Context context) {
-        return getConfigUrl(context, "gama_start_terms_service_url");
+        return getConfigUrl(context, "sdk_terms_service_url");
     }
 
     /**
