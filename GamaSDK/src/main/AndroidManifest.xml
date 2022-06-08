@@ -43,7 +43,7 @@
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:theme="@style/Gama.Theme.AppCompat.Light.NoActionBar.FullScreen"/>
         <activity
-            android:name=".pay.gp.GooglePayActivity2"
+            android:name="com.gama.pay.gp.GooglePayActivity2"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|fontScale"
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:theme="@style/Gama.Theme.AppCompat.Light.NoActionBar.FullScreen.Translucent"/>
@@ -95,10 +95,10 @@
 <!--            android:value="@string/facebook_app_name" />-->
 
         <!--如果要通过 Android 版 Facebook 应用分享链接、图片或视频，还需要在清单文件中声明 FacebookContentProvider-->
-        <provider
-            android:name="com.facebook.FacebookContentProvider"
-            android:authorities="@string/facebook_authorities"
-            android:exported="true" />
+<!--        <provider-->
+<!--            android:name="com.facebook.FacebookContentProvider"-->
+<!--            android:authorities="@string/facebook_authorities"-->
+<!--            android:exported="true" />-->
         <!-- 以上 -->
 
 <!--        ================================-->
