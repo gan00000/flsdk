@@ -8,7 +8,7 @@ import android.util.Log;
 import com.core.base.utils.PL;
 import com.mw.sdk.ads.SdkAdsConstant;
 import com.mw.sdk.R;
-import com.mw.sdk.ads.StarEventLogger;
+import com.mw.sdk.ads.SdkEventLogger;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -80,7 +80,7 @@ public class LogTimer {
             int minute = intArray[i];
             String eventName = String.format(SdkAdsConstant.GAMA_EVENT_MINUTE, minute);
             if (time >= minute * 1000 * 60 && !sp.getBoolean(eventName, false)) {
-                StarEventLogger.trackingWithEventName(context, eventName, null, null);
+                SdkEventLogger.trackingWithEventName(context, eventName, null, null);
                 sp.edit().putBoolean(eventName, true).apply();
 //                if(i == intArray.length - 1) {
 //                    PL.i(TAG, "任務完成，不用再執行。");

@@ -33,8 +33,8 @@ import java.util.Set;
  * Created by gan on 2017/3/3.
  */
 
-public class StarEventLogger {
-    private static final String TAG = StarEventLogger.class.getSimpleName();
+public class SdkEventLogger {
+    private static final String TAG = SdkEventLogger.class.getSimpleName();
 
     public static void activateApp(Activity activity){
 

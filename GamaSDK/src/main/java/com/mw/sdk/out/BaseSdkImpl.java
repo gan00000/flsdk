@@ -8,11 +8,6 @@ import android.util.Log;
 import android.view.View;
 
 import com.core.base.ObjFactory;
-import com.core.base.bean.BaseReqeustBean;
-import com.core.base.bean.BaseResponseModel;
-import com.core.base.callback.ISReqCallBack;
-import com.core.base.request.AbsHttpRequest;
-import com.core.base.request.PostType;
 import com.core.base.utils.AppUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
@@ -25,10 +20,9 @@ import com.mw.base.utils.GamaUtil;
 import com.mw.base.utils.Localization;
 import com.mw.sdk.login.ILoginCallBack;
 import com.mw.sdk.SWebViewDialog;
-import com.mw.sdk.ads.Ad2RequestBean;
 import com.mw.sdk.ads.GamaAdsUtils;
 import com.mw.sdk.ads.SdkAdsConstant;
-import com.mw.sdk.ads.StarEventLogger;
+import com.mw.sdk.ads.SdkEventLogger;
 import com.mw.sdk.callback.IPayListener;
 import com.mw.sdk.login.DialogLoginImpl;
 import com.mw.sdk.login.ILogin;
@@ -37,12 +31,10 @@ import com.mw.sdk.social.callback.FetchFriendsCallback;
 import com.mw.sdk.social.callback.InviteFriendsCallback;
 import com.mw.sdk.social.callback.UserProfileCallback;
 import com.mw.sdk.social.share.GamaShare;
-import com.mw.sdk.utils.LogTimer;
 import com.mw.sdk.webpage.GamaWebPageHelper;
 import com.thirdlib.facebook.FaceBookUser;
 import com.thirdlib.facebook.FriendProfile;
 import com.thirdlib.facebook.SFacebookProxy;
-import com.thirdlib.google.SGooglePlayGameServices;
 import com.mw.sdk.BuildConfig;
 import com.mw.sdk.R;
 
@@ -98,7 +90,7 @@ public class BaseSdkImpl implements IFLSDK {
                 //重置用户登入时长
                 GamaUtil.resetOnlineTimeInfo(activity);
                 //获取Google 广告ID
-                StarEventLogger.registerGoogleAdId(activity);
+                SdkEventLogger.registerGoogleAdId(activity);
                 //Gama平台安装上报
 //                StarEventLogger.reportInstallActivation(activity.getApplicationContext());
 //                try {
@@ -108,7 +100,7 @@ public class BaseSdkImpl implements IFLSDK {
 //                }
 
                 //广告
-                StarEventLogger.activateApp(activity);
+                SdkEventLogger.activateApp(activity);
 
                 //时间打点开始
 //                LogTimer.getInstance().start(activity);
@@ -433,7 +425,7 @@ public class BaseSdkImpl implements IFLSDK {
                 GamaUtil.saveOnlineTimeInfo(activity, System.currentTimeMillis());
 
                 //ads
-                StarEventLogger.onResume(activity);
+                SdkEventLogger.onResume(activity);
             }
         });
     }
@@ -473,7 +465,7 @@ public class BaseSdkImpl implements IFLSDK {
                 }
 
                 //ads
-                StarEventLogger.onPause(activity);
+                SdkEventLogger.onPause(activity);
 
             }
         });
@@ -912,7 +904,7 @@ public class BaseSdkImpl implements IFLSDK {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                StarEventLogger.trackingWithEventName(activity, eventName, map, channelSet);
+                SdkEventLogger.trackingWithEventName(activity, eventName, map, channelSet);
             }
         });
     }
@@ -933,7 +925,7 @@ public class BaseSdkImpl implements IFLSDK {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                StarEventLogger.trackingRoleInfo(activity, map);
+                SdkEventLogger.trackingRoleInfo(activity, map);
             }
         });
 

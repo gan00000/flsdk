@@ -27,7 +27,6 @@ import com.mw.base.bean.SLoginType;
 import com.mw.base.cfg.ResConfig;
 import com.mw.base.utils.GamaUtil;
 import com.mw.sdk.login.constant.BindType;
-import com.mw.sdk.login.constant.GSLoginCommonConstant;
 import com.mw.sdk.login.execute.AccountLoginRequestTask;
 import com.mw.sdk.login.execute.AccountRegisterRequestTask;
 import com.mw.sdk.login.execute.ChangePwdRequestTask;
@@ -40,7 +39,7 @@ import com.mw.sdk.login.execute.ThirdAccountBindRequestTaskV2;
 import com.mw.sdk.login.model.request.ThirdLoginRegRequestBean;
 import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.SBaseRelativeLayout;
-import com.mw.sdk.ads.StarEventLogger;
+import com.mw.sdk.ads.SdkEventLogger;
 import com.mw.sdk.login.LoginContract;
 import com.mw.sdk.login.model.AccountModel;
 import com.mw.sdk.utils.DialogUtil;
@@ -1051,9 +1050,9 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 if (loginResponse != null) {
                     //1001 注册成功    1000登入成功
                     if (SStringUtil.isEqual("1000", loginResponse.getCode())) {
-                        StarEventLogger.trackinLoginEvent(mActivity, loginResponse);
+                        SdkEventLogger.trackinLoginEvent(mActivity, loginResponse);
                     } else if (SStringUtil.isEqual("1001", loginResponse.getCode())) {
-                        StarEventLogger.trackinRegisterEvent(mActivity, loginResponse);
+                        SdkEventLogger.trackinRegisterEvent(mActivity, loginResponse);
                     }
                 }
                 if(SLoginType.LOGIN_TYPE_FB.equals(loginType) && faceBookUser != null) {

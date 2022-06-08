@@ -45,7 +45,7 @@ public class GamaAdsUtils {
                 if(bewteen == i) {
                     String retentions = String.format(SdkAdsConstant.GAMA_RETENTION, i);
                     PL.i("retentions : " + retentions);
-                    StarEventLogger.trackingWithEventName((Activity) context, retentions, null, null);
+                    SdkEventLogger.trackingWithEventName((Activity) context, retentions, null, null);
                 }
             }
         } else {

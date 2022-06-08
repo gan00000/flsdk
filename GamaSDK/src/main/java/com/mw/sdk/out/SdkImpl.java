@@ -19,7 +19,7 @@ import com.mw.base.constant.GamaCommonKey;
 import com.mw.base.utils.SLog;
 import com.mw.sdk.R;
 import com.mw.sdk.SWebViewDialog;
-import com.mw.sdk.ads.StarEventLogger;
+import com.mw.sdk.ads.SdkEventLogger;
 import com.mw.sdk.constant.GsSdkImplConstant;
 
 public class SdkImpl extends BaseSdkImpl {
@@ -78,7 +78,7 @@ public class SdkImpl extends BaseSdkImpl {
                                 //GooglePayCreateOrderIdReqBean googlePayCreateOrderIdReqBean = (GooglePayCreateOrderIdReqBean)bundle.getSerializable(IPay.GooglePayCreateOrderIdReqBean_Key);
                                 if (payBean != null){
 
-                                    StarEventLogger.trackinPayEvent(activity, bundle);
+                                    SdkEventLogger.trackinPayEvent(activity, bundle);
 
                                     if (iPayListener != null) { //支付刷新的回调
                                         PL.i(TAG, "GooglePay支付回调");

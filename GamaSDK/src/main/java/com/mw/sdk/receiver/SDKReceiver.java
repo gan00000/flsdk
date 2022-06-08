@@ -2,12 +2,7 @@ package com.mw.sdk.receiver;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.text.TextUtils;
-
-import com.mw.sdk.ads.SdkAdsConstant;
-import com.mw.base.utils.SLog;
-import com.mw.sdk.ads.StarEventLogger;
 
 public class SDKReceiver extends BaseGamaReceiver {
     private static final String TAG = SDKReceiver.class.getSimpleName();
