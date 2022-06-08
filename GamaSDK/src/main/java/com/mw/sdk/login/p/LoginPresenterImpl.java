@@ -317,7 +317,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         });
     }
 
-    //目前Google登录使用到，fb登录没有使用
+    //目前Google line twitter登录使用到，fb登录没有使用
     @Override
     public void thirdPlatLogin(final Activity activity, final ThirdLoginRegRequestBean thirdLoginRegRequestBean) {
         this.mActivity = activity;
@@ -740,6 +740,12 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 if (sLoginResponse != null) {
 
                     if (sLoginResponse.isRequestSuccess()){
+
+                        GamaUtil.saveAccountModel(getContext(), SLoginType.LOGIN_TYPE_FB,"","",
+                                sLoginResponse.getData().getUserId(),
+                                fbScopeId,
+                                "",true,sLoginResponse.getData().isBind());
+
                         handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_FB);
                         return;
                     } else {
