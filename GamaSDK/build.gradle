@@ -39,7 +39,20 @@ dependencies {
 //    implementation fileTree(dir: 'libs', include: ['*.aar'])
     api fileTree(include: ['*.jar'], dir: 'libs')
 
-    //公共库
+    //基础库
+    api 'androidx.legacy:legacy-support-v4:1.0.0'
+    api 'androidx.appcompat:appcompat:1.4.2'
+    api 'androidx.recyclerview:recyclerview:1.2.1'
+    api 'androidx.constraintlayout:constraintlayout:2.1.4'
+    api 'androidx.browser:browser:1.4.0'
+    //mutildex
+    implementation 'androidx.multidex:multidex:2.0.1'
+    //google pay
+    api "com.android.billingclient:billing:5.0.0"
+
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.zhy:base-rvadapter:3.0.3'
+
     //Google库
     implementation 'com.google.android.gms:play-services-auth:20.2.0'
     implementation 'com.google.android.gms:play-services-base:18.0.1'
@@ -70,17 +83,6 @@ dependencies {
     //line
     implementation 'com.linecorp:linesdk:5.0.1'
 
-    //额外库
-    api 'androidx.legacy:legacy-support-v4:1.0.0'
-    api 'androidx.appcompat:appcompat:1.4.1'
-    api 'androidx.recyclerview:recyclerview:1.2.1'
-    api 'androidx.constraintlayout:constraintlayout:2.1.4'
-    api 'androidx.browser:browser:1.4.0'
-    //mutildex
-    implementation 'androidx.multidex:multidex:2.0.1'
-
-    implementation 'com.google.code.gson:gson:2.8.2'
-
 //    implementation ('com.zhihu.android:matisse:0.5.1') {
 //        exclude group: 'com.android.support'
 //    }
@@ -101,10 +103,9 @@ dependencies {
 
     //ads
     //adjust
-    api 'com.adjust.sdk:adjust-android:4.21.1'
-    api 'com.android.installreferrer:installreferrer:2.1'
+//    api 'com.adjust.sdk:adjust-android:4.21.1'
+//    api 'com.android.installreferrer:installreferrer:2.2'
 
-    implementation 'com.zhy:base-rvadapter:3.0.3'
 }
 
 
