@@ -12,12 +12,20 @@
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:visibility="invisible"
+            android:layout_marginTop="168dp"
+            android:src="@mipmap/mw_logo" />
+
         <!-- 登入方式 -->
         <LinearLayout
-            android:id="@+id/id_btn_guest_login"
+            android:id="@+id/layout_guest_login"
             android:layout_width="300dp"
             android:layout_height="50dp"
-            android:layout_marginTop="240dp"
+            android:layout_marginTop="22dp"
             android:background="@drawable/mw_btn_bg_f23a12"
             android:gravity="center_vertical"
             android:orientation="horizontal">
@@ -45,6 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="35dp"
+            android:id="@+id/layout_go_account_login"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -104,20 +113,20 @@
 
 
             <ImageView
-                android:id="@+id/id_btn_fb_login"
+                android:id="@+id/iv_login_fb"
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:src="@mipmap/mw_fb_icon" />
 
             <ImageView
-                android:id="@+id/id_btn_google_login"
+                android:id="@+id/iv_login_google"
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:layout_marginStart="27dp"
                 android:src="@mipmap/mw_gp_icon" />
 
             <ImageView
-                android:id="@+id/id_btn_line_login"
+                android:id="@+id/iv_login_line"
                 android:layout_width="28dp"
 
                 android:layout_height="28dp"
@@ -142,23 +151,39 @@
                 android:orientation="horizontal">
 
                 <CheckBox
-                    android:id="@+id/gama_gama_start_term_cb1"
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
+                    android:id="@+id/cb_agree_term"
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
                     android:background="@drawable/mw_term_checkbox_selector"
                     android:button="@null" />
 
+            <LinearLayout
+                android:id="@+id/layout_go_term"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:orientation="horizontal">
+
                 <TextView
-                    android:id="@+id/gama_gama_start_term_tv1"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="4dp"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
-                    android:text="@string/gama_ui_term_port_read2"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/sp_19" />
+                    android:text="@string/text_i_agree_tips"
+                    android:textColor="@color/c_C0C0C0"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/tv_term"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="@string/text_term_moqie"
+                    android:textColor="@android:color/white"
+
+                    android:textSize="10sp" />
+
+            </LinearLayout>
+
             </LinearLayout>
 
         </RelativeLayout>
