@@ -34,12 +34,40 @@ android {
             } else if (outputFile != null && outputFile.name.contains("debug") && outputFile.name.endsWith('.apk')) {
 
                 outputFileName = "${variant.applicationId}_${variant.versionCode}_${variant.versionName}_${getReleaseTime()}_debug.apk"
+            }else if (outputFileName != null && outputFileName.contains("release") && outputFileName.endsWith('.aab')) {
+
+                outputFileName = "${variant.applicationId}_${variant.versionCode}_${variant.versionName}_${getReleaseTime()}_release.aab"
+
+            } else if (outputFile != null && outputFile.name.contains("debug") && outputFile.name.endsWith('.aab')) {
+
+                outputFileName = "${variant.applicationId}_${variant.versionCode}_${variant.versionName}_${getReleaseTime()}_debug.aab"
             }
         }
     }
 
 
     signingConfigs {//签名的配置
+
+        googlePayTest {
+            storeFile file('../key/mmda.key')
+            storePassword 'sfish0000'
+            keyAlias = 'sfish0000'
+            keyPassword 'sfish0000'
+        }
+
+        ganrelease {
+            storeFile file('../signkey/ganme') //正式签名，以后使用
+            storePassword 'gan999000'
+            keyAlias 'gan'
+            keyPassword 'gan999000'
+        }
+
+        mwrelease {
+            storeFile file('../signkey/mw_game') //正式签名，以后使用
+            storePassword 'mw999000'
+            keyAlias 'mwgame'
+            keyPassword 'mw999000'
+        }
         release {
             storeFile file('../signkey/flyfun.keystore') //正式签名，以后使用
             storePassword 'flyfun999'
@@ -47,10 +75,10 @@ android {
             keyPassword 'flyfun999'
         }
         debug {
-            storeFile file('../signkey/flyfun.keystore') //正式签名，以后使用
-            storePassword 'flyfun999'
-            keyAlias 'flyfun'
-            keyPassword 'flyfun999'
+            storeFile file('../signkey/mw_game') //正式签名，以后使用
+            storePassword 'mw999000'
+            keyAlias 'mwgame'
+            keyPassword 'mw999000'
         }
     }
 
@@ -67,14 +95,14 @@ android {
     productFlavors {
 
         lyj {
-            signingConfig signingConfigs.release
+            signingConfig signingConfigs.ganrelease
             applicationId "com.mg.testa"
             minSdkVersion 21
             targetSdkVersion 32
-            versionCode 1
-            versionName "1.0"
+            versionCode 2
+            versionName "2.0"
             flavorDimensions "1"
-            resValue "string", "scheme", "jjcs"
+            resValue "string", "scheme", "xxxxx"
             resValue "string", "facebook_app_id", "290914729828439"
             resValue "string", "facebook_client_token", "290914729828439"
             resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider290914729828439" //启用分析
@@ -82,16 +110,36 @@ android {
             resValue "string", "line_channelId", "1657186918"
 
             //每个游戏的demo设置
-            resValue "string", "sdk_name", "ylj Demo"
-
+            resValue "string", "sdk_name", "testaDemo"
         }
+
         superand {
-            signingConfig signingConfigs.release
+            signingConfig signingConfigs.mwrelease
             applicationId "com.game.superand"
             minSdkVersion 21
             targetSdkVersion 32
-            versionCode 1
-            versionName "1.0"
+            versionCode 2
+            versionName "2.0"
+            flavorDimensions "1"
+            resValue "string", "scheme", "jjcs"
+            resValue "string", "facebook_app_id", "977770276222572"
+            resValue "string", "facebook_client_token", "3bd436587ffec3df1f9e0c15cb40d09b"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider977770276222572" //启用分析
+            resValue "string", "fb_login_protocol_scheme", "fb977770276222572"
+            resValue "string", "line_channelId", "1657186918"
+
+            //每个游戏的demo设置
+            resValue "string", "sdk_name", "superand"
+
+        }
+
+        googlePayTest {
+            signingConfig signingConfigs.googlePayTest
+            applicationId "com.qqsky.mic"
+            minSdkVersion 21
+            targetSdkVersion 32
+            versionCode 2
+            versionName "2.0"
             flavorDimensions "1"
             resValue "string", "scheme", "jjcs"
             resValue "string", "facebook_app_id", "977770276222572"

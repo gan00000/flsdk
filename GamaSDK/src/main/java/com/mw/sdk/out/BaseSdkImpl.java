@@ -216,54 +216,6 @@ public class BaseSdkImpl implements IFLSDK {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                /*if (GamaUtil.needShowAgePage(activity)) {
-                    final IGamaAgePresenter presenter = new GamaAgeImpl();
-                    ((GamaAgeImpl) presenter).setAgeCallback(new GamaAgeCallback() {
-                        @Override
-                        public void onSuccess() {
-                            PL.i("上报年龄成功");
-                            presenter.requestAgeLimit(activity);
-                        }
-
-                        @Override
-                        public void onFailure() {
-                            if (listener != null) {
-                                listener.onPayFinish(null);
-                            }
-                        }
-
-                        @Override
-                        public void canBuy() {
-                            PL.i("未达到年龄购买限制");
-                            startPay(activity, payType, cpOrderId, productId, extra);
-                        }
-                    });
-                    presenter.goAgeStyleThree(activity);
-                } else if (GamaUtil.needRequestAgeLimit(activity)) {
-                    IGamaAgePresenter presenter = new GamaAgeImpl();
-                    ((GamaAgeImpl) presenter).setAgeCallback(new GamaAgeCallback() {
-                        @Override
-                        public void onSuccess() {
-
-                        }
-
-                        @Override
-                        public void onFailure() {
-                            if (listener != null) {
-                                listener.onPayFinish(null);
-                            }
-                        }
-
-                        @Override
-                        public void canBuy() {
-                            PL.i("未达到年龄购买限制");
-                            startPay(activity, payType, cpOrderId, productId, extra);
-                        }
-                    });
-                    presenter.requestAgeLimit(activity);
-                } else {
-                    startPay(activity, payType, cpOrderId, productId, extra);
-                }*/
                 startPay(activity, payType, cpOrderId, productId, extra);
             }
         });
