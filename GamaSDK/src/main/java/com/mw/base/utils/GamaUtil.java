@@ -1019,9 +1019,11 @@ public class GamaUtil {
         }
 
         imageView.setImageResource(imageResId);
-        editText.setText(showName);
         // 使光标始终在最后位置
-        Editable etable = editText.getText();
-        Selection.setSelection(etable, etable.length());
+        if (SStringUtil.isNotEmpty(showName)) {
+            editText.setText(showName);
+            Editable etable = editText.getText();
+            Selection.setSelection(etable, showName.length());
+        }
     }
 }

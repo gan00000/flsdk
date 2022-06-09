@@ -20,6 +20,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
 import com.mw.base.utils.GamaUtil;
 import com.mw.sdk.R;
@@ -125,8 +126,11 @@ public class SDKInputEditTextView extends RelativeLayout {
                         inputEditText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
                     }
                     // 使光标始终在最后位置
-                    Editable etable = inputEditText.getText();
-                    Selection.setSelection(etable, etable.length());
+                    if (SStringUtil.isNotEmpty(inputEditText.getText().toString())){
+                        inputEditText.setSelection(inputEditText.getText().toString().length());
+                    }
+//                    Editable etable = inputEditText.getText();
+//                    Selection.setSelection(etable, etable.toString().length());
                 }
             });
 
@@ -254,11 +258,19 @@ public class SDKInputEditTextView extends RelativeLayout {
             @Override
             public void afterTextChanged(Editable s) {
 
-//                if (SStringUtil.isEmpty(s.toString())){
+                if (s == null){
+                    return;
+                }
+                if (SStringUtil.isNotEmpty(s.toString())){
 //                    inputEditText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10);
-//                }else {
-//                    inputEditText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-//                }
+                    String xx = s.toString();//.trim();
+                    if (xx.contains(" ")){
+                        xx = xx.replace(" ","");
+                        inputEditText.setText(xx);
+                        inputEditText.setSelection(xx.length());
+//                        Selection.setSelection(s, s.length());
+                    }
+                }
 
             }
         });
