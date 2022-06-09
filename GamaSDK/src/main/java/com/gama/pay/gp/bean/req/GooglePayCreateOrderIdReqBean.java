@@ -12,6 +12,7 @@ public class GooglePayCreateOrderIdReqBean extends PayReqBean {
 	private String payValue = "0";
 	private String productId;
 	private String payType = GooglePayContant.GOOGLEPAYTYPE;
+	private String mode = "google";
 
 	public GooglePayCreateOrderIdReqBean(Context context) {
 		super(context);

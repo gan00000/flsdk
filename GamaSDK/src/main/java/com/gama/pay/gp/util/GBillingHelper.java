@@ -75,6 +75,9 @@ public class GBillingHelper implements PurchasesUpdatedListener {
 
     @Override
     public void onPurchasesUpdated(@NonNull BillingResult billingResult, @Nullable List<Purchase> purchases) {
+
+        PL.i( "billing onPurchasesUpdated.");
+//        billingClient.showInAppMessages()
         if (purchasesUpdatedListener != null){
             purchasesUpdatedListener.onPurchasesUpdated(billingResult,purchases);
         }
@@ -251,6 +254,8 @@ public class GBillingHelper implements PurchasesUpdatedListener {
                 PL.i( "queryProductDetailsAsync finish ");
                 if (list != null && !list.isEmpty()) {
                     launchPurchaseFlow(context, userId, orderId, list.get(0));
+                }else{
+                    PL.i( "queryProductDetailsAsync finish fail,SkuDetails not find");
                 }
             }
         });
@@ -271,7 +276,7 @@ public class GBillingHelper implements PurchasesUpdatedListener {
                 // Retrieve a value for "skuDetails" by calling querySkuDetailsAsync().
                 BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
                         .setSkuDetails(productDetails)
-                        .setObfuscatedAccountId(userId)
+                        .setObfuscatedAccountId(userId)//64 个字符
                         .setObfuscatedProfileId(orderId)
                         .build();
 
@@ -279,7 +284,7 @@ public class GBillingHelper implements PurchasesUpdatedListener {
 
                     PL.i("start launchBillingFlow");
                     BillingResult billingResult = billingClient.launchBillingFlow((Activity) context, billingFlowParams);
-
+                    PL.i("start launchBillingFlow return:" + billingResult.getResponseCode());
                     if (mBillingCallbackList != null && !mBillingCallbackList.isEmpty()) {
                         for (BillingHelperStatusCallback mBillingCallback : mBillingCallbackList) {
                             mBillingCallback.launchBillingFlowResult(context, billingResult);
@@ -304,7 +309,7 @@ public class GBillingHelper implements PurchasesUpdatedListener {
     /**
      * 查询已购买
      */
-    public void queryPurchase(Context context, PurchasesResponseListener purchasesResponseListener) {
+    public void queryPurchasesAsync(Context context, PurchasesResponseListener purchasesResponseListener) {
         Runnable queryPurchaseRunnable = new Runnable() {
             @Override
             public void run() {

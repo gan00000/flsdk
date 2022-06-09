@@ -19,6 +19,7 @@ import com.android.billingclient.api.PurchasesUpdatedListener;
 import com.android.billingclient.api.SkuDetails;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.PL;
+import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
 import com.gama.pay.IPay;
 import com.gama.pay.IPayCallBack;
@@ -186,20 +187,16 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
         //设置储值备用域名
         this.createOrderIdReqBean.setRequestSpaUrl(PayHelper.getSpareUrl(activity));
         //设置储值接口名
-        if (GamaUtil.isInterfaceSurfixWithApp(activity)) {
-            this.createOrderIdReqBean.setRequestMethod(GooglePayDomainSite.APP_SURFIX_GOOGLE_ORDER_CREATE);
-        } else {
-            this.createOrderIdReqBean.setRequestMethod(GooglePayDomainSite.GOOGLE_ORDER_CREATE);
-        }
+        this.createOrderIdReqBean.setRequestMethod(GooglePayDomainSite.GOOGLE_ORDER_CREATE);
+
         //创建Loading窗
         loadingDialog = new LoadingDialog(activity);
-
         if (this.createOrderIdReqBean.isInitOk()) {
             //开始Google储值
             googlePaySetUp();
         } else {
             ToastUtils.toast(activity, "please log in to the game first");
-            callbackFail("please log in to the game first");
+            callbackFail("can not find role info:" + this.createOrderIdReqBean.print());
         }
         isPaying = false;
         PL.w("google set not paying");
@@ -265,7 +262,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
 //        ====注意：如果您在三天内未确认购买交易，则用户会自动收到退款，并且 Google Play 会撤消该购买交易。====
 
         //1.先查询=>在提供待售商品之前，检查用户是否尚未拥有该商品。如果用户的消耗型商品仍在他们的商品库中，他们必须先消耗掉该商品，然后才能再次购买。
-        mBillingHelper.queryPurchase(activity, new PurchasesResponseListener() {
+        mBillingHelper.queryPurchasesAsync(activity, new PurchasesResponseListener() {
             @Override
             public void onQueryPurchasesResponse(@NonNull BillingResult billingResult, @NonNull List<com.android.billingclient.api.Purchase> list) {
                 PL.i("queryPurchase finish");
@@ -275,94 +272,74 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
                         //3.消费
                     }
                 }
-
-                //4.创建订单
-                mBillingHelper.launchPurchaseFlow(activity, createOrderIdReqBean.getProductId(),createOrderIdReqBean.getUserId(),
-                        "aaaaaaaaa", new PurchasesUpdatedListener() {
-                            @Override
-                            public void onPurchasesUpdated(@NonNull BillingResult billingResult, @Nullable List<com.android.billingclient.api.Purchase> purchasesList) {
-                                //支付回调
-                                PL.i("onPurchasesUpdated finish...");
-                                for (Purchase purchase : purchasesList) {
-                                    PL.i("onPurchasesUpdated = " + purchase.getPurchaseState());
-                                    if(purchase.getPurchaseState() == Purchase.PurchaseState.PURCHASED){
-                                        //先消费,防止下次购买不了和三天过期退款
-                                        mBillingHelper.consumePurchase(activity, purchase, false, new ConsumeResponseListener() {
-                                            @Override
-                                            public void onConsumeResponse(@NonNull BillingResult billingResult, @NonNull String s) {
-                                                PL.i("onConsumeResponse => " + s);
-                                            }
-                                        });
-
-                                        //发送到服务器,发币
-                                        PayApi.requestSendStone(activity, purchase, new SFCallBack<GPExchangeRes>() {
-                                            @Override
-                                            public void success(GPExchangeRes result, String msg) {
-                                                PL.i("requestSendStone success => " + msg);
-                                            }
-
-                                            @Override
-                                            public void fail(GPExchangeRes result, String msg) {
-                                                PL.i("requestSendStone fail => " + msg);
-                                                ToastUtils.toast(activity, msg);
-                                            }
-                                        });
-                                    }
-                                }
-                            }
-                        });
-                /*PayApi.requestCreateOrder(activity, createOrderIdReqBean, new SFCallBack<GPCreateOrderIdRes>() {
+                if (activity == null){
+                    callbackFail("");
+                    return;
+                }
+                activity.runOnUiThread(new Runnable() {
                     @Override
-                    public void success(GPCreateOrderIdRes createOrderIdRes, String msg1) {
-                        PL.i("requestCreateOrder finish success");
-                        //5.开始购买
-                        mBillingHelper.launchPurchaseFlow(activity.getApplicationContext(), createOrderIdReqBean.getProductId(),
-                                createOrderIdRes.getOrderId(), new PurchasesUpdatedListener() {
+                    public void run() {
+                        //4.创建订单
+                        PayApi.requestCreateOrder(activity, createOrderIdReqBean, new SFCallBack<GPCreateOrderIdRes>() {
                             @Override
-                            public void onPurchasesUpdated(@NonNull BillingResult billingResult, @Nullable List<com.android.billingclient.api.Purchase> purchasesList) {
-
-                                PL.i("onPurchasesUpdated finish...");
-
-                                //支付回调
-                                for (Purchase purchase : purchasesList) {
-                                    PL.i("onPurchasesUpdated = " + purchase.getPurchaseState());
-                                    if(purchase.getPurchaseState() == Purchase.PurchaseState.PURCHASED){
-                                        //先消费,防止下次购买不了和三天过期退款
-                                        mBillingHelper.consumePurchase(activity, purchase, false, new ConsumeResponseListener() {
+                            public void success(GPCreateOrderIdRes createOrderIdRes, String msg1) {
+                                PL.i("requestCreateOrder finish success");
+                                //5.开始购买
+                                mBillingHelper.launchPurchaseFlow(activity.getApplicationContext(), createOrderIdReqBean.getProductId(),createOrderIdReqBean.getUserId(),
+                                        createOrderIdRes.getOrderId(), new PurchasesUpdatedListener() {
                                             @Override
-                                            public void onConsumeResponse(@NonNull BillingResult billingResult, @NonNull String s) {
-                                                PL.i("onConsumeResponse => " + s);
+                                            public void onPurchasesUpdated(@NonNull BillingResult billingResult, @Nullable List<com.android.billingclient.api.Purchase> purchasesList) {
+
+                                                PL.i("onPurchasesUpdated finish...");
+                                                if (purchasesList == null){
+                                                    return;
+                                                }
+                                                //支付回调
+                                                for (Purchase purchase : purchasesList) {
+                                                    PL.i("onPurchasesUpdated = " + purchase.getPurchaseState());
+                                                    if(purchase.getPurchaseState() == Purchase.PurchaseState.PURCHASED){
+                                                        //先消费,防止下次购买不了和三天过期退款
+                                                        mBillingHelper.consumePurchase(activity, purchase, false, new ConsumeResponseListener() {
+                                                            @Override
+                                                            public void onConsumeResponse(@NonNull BillingResult billingResult, @NonNull String s) {
+                                                                PL.i("onConsumeResponse => " + s);
+                                                            }
+                                                        });
+
+                                                        //发送到服务器,发币
+                                                        PayApi.requestSendStone(activity, purchase, new SFCallBack<GPExchangeRes>() {
+                                                            @Override
+                                                            public void success(GPExchangeRes result, String msg) {
+                                                                PL.i("requestSendStone success => " + msg);
+                                                            }
+
+                                                            @Override
+                                                            public void fail(GPExchangeRes result, String msg) {
+                                                                PL.i("requestSendStone fail => " + msg);
+//                                                                ToastUtils.toast(activity, msg);
+                                                                callbackFail(result.getMessage());
+                                                            }
+                                                        });
+                                                    }
+                                                }
                                             }
                                         });
+                            }
 
-                                        //发送到服务器,发币
-                                        PayApi.requestSendStone(activity, purchase, new SFCallBack<GPExchangeRes>() {
-                                            @Override
-                                            public void success(GPExchangeRes result, String msg) {
-                                                PL.i("requestSendStone success => " + msg);
-                                            }
-
-                                            @Override
-                                            public void fail(GPExchangeRes result, String msg) {
-                                                PL.i("requestSendStone fail => " + msg);
-                                                ToastUtils.toast(activity, msg);
-                                            }
-                                        });
-                                    }
+                            @Override
+                            public void fail(GPCreateOrderIdRes createOrderIdRes, String msg) {
+                                PL.i("requestCreateOrder finish fail");
+                                //创建订单失败
+                                if (createOrderIdRes != null && SStringUtil.isNotEmpty(createOrderIdRes.getMessage())) {
+                                    callbackFail(createOrderIdRes.getMessage());
+                                }else{
+                                    callbackFail("error");
                                 }
                             }
                         });
                     }
+                });
 
-                    @Override
-                    public void fail(GPCreateOrderIdRes createOrderIdRes, String msg) {
-                        PL.i("requestCreateOrder finish fail");
-                        //创建订单失败
-                        if (createOrderIdRes != null && !TextUtils.isEmpty(createOrderIdRes.getMessage())) {
-                            ToastUtils.toast(activity, createOrderIdRes.getMessage());
-                        }
-                    }
-                });*/
 
             }
         });
@@ -470,7 +447,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
             boolean isPending = false;
             for (Purchase purchase : purchases) {
                 PL.i( "onPurchaseUpdate purchase.getSku()=>" + purchase.toString());
-                if (purchase.getSkus().get(0).equals(createOrderIdReqBean.getProductId())) { //本次购买的商品
+                if (purchase.getSkus() != null && !purchase.getSkus().isEmpty() && purchase.getSkus().get(0).equals(createOrderIdReqBean.getProductId())) { //本次购买的商品
                     PL.i( "onPurchaseUpdate current pay product.");
                     if (currentPurchase == null) { //未有符合的当次购买商品记录
                         PL.i( "onPurchaseUpdate have no product meet.");
@@ -525,6 +502,8 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
             PL.i( "Purchases error code -> " + billingResult.getResponseCode());
             PL.i( "Purchases error message -> " + billingResult.getDebugMessage());
             callbackFail(billingResult.getDebugMessage());
+//            if (SStringUtil.isNotEmpty(billingResult.getDebugMessage())){
+//            }
         }
     }
 

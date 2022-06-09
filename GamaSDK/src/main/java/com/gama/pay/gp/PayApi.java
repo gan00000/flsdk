@@ -21,7 +21,7 @@ public class PayApi {
 
     public static void requestCreateOrder(Activity activity, GooglePayCreateOrderIdReqBean bean, SFCallBack<GPCreateOrderIdRes> sfCallBack) {
 
-        GoogleCreateOrderReqTask googleCreateOrderReqTask = new GoogleCreateOrderReqTask(bean);
+        GoogleCreateOrderReqTask googleCreateOrderReqTask = new GoogleCreateOrderReqTask(activity,bean);
         googleCreateOrderReqTask.setReqCallBack(new ISReqCallBack<GPCreateOrderIdRes>() {
 
             @Override

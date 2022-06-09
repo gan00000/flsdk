@@ -43,6 +43,13 @@ public class PayReqBean extends BPayReqBean {
 
 	public boolean isInitOk(){
 		return !SStringUtil.hasEmpty(userId,getGameCode(),serverCode,roleId);
+//		return true;
+	}
+
+	public String print() {
+		return "userId='" + userId + '\'' +
+				", serverCode='" + serverCode + '\'' +
+				", roleId='" + roleId;
 	}
 
 	public String getUserId() {
