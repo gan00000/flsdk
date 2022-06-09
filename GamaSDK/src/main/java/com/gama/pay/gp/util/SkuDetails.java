@@ -11,7 +11,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ *//*
+
 
 package com.gama.pay.gp.util;
 
@@ -20,9 +21,11 @@ import com.android.billingclient.api.BillingClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+*/
 /**
  * Represents an in-app product's listing details.
- */
+ *//*
+
 public class SkuDetails {
     String mItemType;
     String mSku;
@@ -59,16 +62,20 @@ public class SkuDetails {
     public String getTitle() { return mTitle; }
     public String getDescription() { return mDescription; }
 
-    /**
+    */
+/**
 	 * @return the price_amount_micros
-	 */
+	 *//*
+
 	public String getPrice_amount_micros() {
 		return price_amount_micros;
 	}
 
-	/**
+	*/
+/**
 	 * @return the price_currency_code
-	 */
+	 *//*
+
 	public String getPrice_currency_code() {
 		return price_currency_code;
 	}
@@ -78,3 +85,4 @@ public class SkuDetails {
         return "SkuDetails:" + mJson;
     }
 }
+*/
