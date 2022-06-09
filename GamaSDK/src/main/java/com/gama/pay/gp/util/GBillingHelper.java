@@ -212,7 +212,7 @@ public class GBillingHelper implements PurchasesUpdatedListener {
         Runnable queryInventoryRunnable = new Runnable() {
             @Override
             public void run() {
-                
+
                 SkuDetailsParams.Builder params = SkuDetailsParams.newBuilder();
                 params.setSkusList(skuList).setType(BillingClient.SkuType.INAPP);
                 billingClient.querySkuDetailsAsync(params.build(),
@@ -241,7 +241,7 @@ public class GBillingHelper implements PurchasesUpdatedListener {
     /**
      * 开始购买,需要传入sku查询商品详情
      */
-    public void launchPurchaseFlow(Context context, String sku, String orderId,PurchasesUpdatedListener purchasesUpdatedListener) {
+    public void launchPurchaseFlow(Context context, String sku,String userId, String orderId,PurchasesUpdatedListener purchasesUpdatedListener) {
 
         this.purchasesUpdatedListener = purchasesUpdatedListener;
 
@@ -250,7 +250,7 @@ public class GBillingHelper implements PurchasesUpdatedListener {
             public void onSkuDetailsResponse(@NonNull BillingResult billingResult, @Nullable List<SkuDetails> list) {
                 PL.i( "queryProductDetailsAsync finish ");
                 if (list != null && !list.isEmpty()) {
-                    launchPurchaseFlow(context, orderId, list.get(0));
+                    launchPurchaseFlow(context, userId, orderId, list.get(0));
                 }
             }
         });
@@ -260,7 +260,7 @@ public class GBillingHelper implements PurchasesUpdatedListener {
     /**
      * 开始购买,直接传入商品详情
      */
-    private void launchPurchaseFlow(Context context,String orderId, SkuDetails productDetails) {
+    private void launchPurchaseFlow(Context context,String userId,String orderId, SkuDetails productDetails) {
 
         Runnable launchPurchaseRunnable = new Runnable() {
             @Override
@@ -271,9 +271,9 @@ public class GBillingHelper implements PurchasesUpdatedListener {
                 // Retrieve a value for "skuDetails" by calling querySkuDetailsAsync().
                 BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
                         .setSkuDetails(productDetails)
+                        .setObfuscatedAccountId(userId)
+                        .setObfuscatedProfileId(orderId)
                         .build();
-
-//                BillingResult billingResult = billingClient.launchBillingFlow(activity, billingFlowParams)
 
                 if (context instanceof Activity) {
 
