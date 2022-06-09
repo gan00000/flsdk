@@ -7,27 +7,26 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.android.billingclient.api.BillingClient;
 import com.android.billingclient.api.BillingResult;
 import com.android.billingclient.api.ConsumeResponseListener;
-import com.android.billingclient.api.ProductDetails;
 import com.android.billingclient.api.Purchase;
 import com.android.billingclient.api.PurchasesResponseListener;
 import com.android.billingclient.api.PurchasesUpdatedListener;
 import com.android.billingclient.api.SkuDetails;
-import com.core.base.callback.ISReqCallBack;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.PL;
 import com.core.base.utils.ToastUtils;
 import com.gama.pay.IPay;
 import com.gama.pay.IPayCallBack;
-import com.gama.pay.gp.bean.req.GoogleExchangeReqBean;
 import com.gama.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
 import com.gama.pay.gp.bean.req.PayReqBean;
 import com.gama.pay.gp.bean.res.GPCreateOrderIdRes;
 import com.gama.pay.gp.bean.res.GPExchangeRes;
 import com.gama.pay.gp.constants.GooglePayDomainSite;
-import com.gama.pay.gp.task.GoogleExchangeReqTask;
 import com.gama.pay.gp.task.LoadingDialog;
 import com.gama.pay.gp.util.GBillingHelper;
 import com.gama.pay.gp.util.PayHelper;
@@ -38,9 +37,6 @@ import com.mw.sdk.BuildConfig;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 /**
  * Created by gan on 2017/2/23.
@@ -269,7 +265,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
 //        ====注意：如果您在三天内未确认购买交易，则用户会自动收到退款，并且 Google Play 会撤消该购买交易。====
 
         //1.先查询=>在提供待售商品之前，检查用户是否尚未拥有该商品。如果用户的消耗型商品仍在他们的商品库中，他们必须先消耗掉该商品，然后才能再次购买。
-        mBillingHelper.queryPurchase(activity.getApplicationContext(), new PurchasesResponseListener() {
+        mBillingHelper.queryPurchase(activity, new PurchasesResponseListener() {
             @Override
             public void onQueryPurchasesResponse(@NonNull BillingResult billingResult, @NonNull List<com.android.billingclient.api.Purchase> list) {
                 PL.i("queryPurchase finish");
@@ -281,7 +277,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
                 }
 
                 //4.创建订单
-                mBillingHelper.launchPurchaseFlow(activity.getApplicationContext(), createOrderIdReqBean.getProductId(),
+                mBillingHelper.launchPurchaseFlow(activity, createOrderIdReqBean.getProductId(),
                         "aaaaaaaaa", new PurchasesUpdatedListener() {
                             @Override
                             public void onPurchasesUpdated(@NonNull BillingResult billingResult, @Nullable List<com.android.billingclient.api.Purchase> purchasesList) {
@@ -385,7 +381,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
     }
 
     @Override
-    public void onQuerySkuResult(Context context, List<ProductDetails> productDetails) {
+    public void onQuerySkuResult(Context context, List<SkuDetails> productDetails) {
 //        if (list != null && list.size() == 1) {
 //            skuDetails = list.get(0);
 //            mBillingHelper.launchPurchaseFlow(activity, createOrderBean.getOrderId(), skuDetails);
@@ -474,7 +470,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
             boolean isPending = false;
             for (Purchase purchase : purchases) {
                 PL.i( "onPurchaseUpdate purchase.getSku()=>" + purchase.toString());
-                if (purchase.getProducts().get(0).equals(createOrderIdReqBean.getProductId())) { //本次购买的商品
+                if (purchase.getSkus().get(0).equals(createOrderIdReqBean.getProductId())) { //本次购买的商品
                     PL.i( "onPurchaseUpdate current pay product.");
                     if (currentPurchase == null) { //未有符合的当次购买商品记录
                         PL.i( "onPurchaseUpdate have no product meet.");
