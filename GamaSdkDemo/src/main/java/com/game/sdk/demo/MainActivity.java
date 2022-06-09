@@ -172,7 +172,8 @@ public class MainActivity extends Activity {
 
 //                com.game.superand.1usd
 //                com.game.superand.2usd
-                mIFLSDK.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(),"com.game.superand.1usd", "xxxx", new IPayListener() {
+                String skuId = "com.sfinsh.1day";
+                mIFLSDK.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(),skuId, "xxxx", new IPayListener() {
                     @Override
                     public void onPayFinish(Bundle bundle) {
                         PL.i("支付结束");

@@ -49,7 +49,7 @@ android {
     signingConfigs {//签名的配置
 
         googlePayTest {
-            storeFile file('../key/mmda.key')
+            storeFile file('../signkey/mmda.key')
             storePassword 'sfish0000'
             keyAlias = 'sfish0000'
             keyPassword 'sfish0000'
@@ -68,18 +68,22 @@ android {
             keyAlias 'mwgame'
             keyPassword 'mw999000'
         }
-        release {
+        releasexx {
             storeFile file('../signkey/flyfun.keystore') //正式签名，以后使用
             storePassword 'flyfun999'
             keyAlias 'flyfun'
             keyPassword 'flyfun999'
         }
-        debug {
-            storeFile file('../signkey/mw_game') //正式签名，以后使用
-            storePassword 'mw999000'
-            keyAlias 'mwgame'
-            keyPassword 'mw999000'
-        }
+//        debug {
+//            storeFile file('../signkey/flyfun.keystore') //正式签名，以后使用
+//            storePassword 'flyfun999'
+//            keyAlias 'flyfun'
+//            keyPassword 'flyfun999'
+////            storeFile file('../signkey/mmda.key')
+////            storePassword 'sfish0000'
+////            keyAlias = 'sfish0000'
+////            keyPassword 'sfish0000'
+//        }
     }
 
     buildTypes {
@@ -114,7 +118,7 @@ android {
         }
 
         superand {
-            signingConfig signingConfigs.mwrelease
+            signingConfig signingConfigs.releasexx
             applicationId "com.game.superand"
             minSdkVersion 21
             targetSdkVersion 32
@@ -138,8 +142,8 @@ android {
             applicationId "com.qqsky.mic"
             minSdkVersion 21
             targetSdkVersion 32
-            versionCode 2
-            versionName "2.0"
+            versionCode 1
+            versionName "1.0"
             flavorDimensions "1"
             resValue "string", "scheme", "jjcs"
             resValue "string", "facebook_app_id", "977770276222572"

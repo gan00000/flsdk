@@ -2,20 +2,20 @@
 
     <!--港台域名列表 开始-->
     <!--登录域名-->
-    <string name="zh_tw_gama_login_pre_url" translatable="false">http://192.168.10.52:8080/</string>
-    <string name="zh_tw_gama_login_spa_url" translatable="false">http://192.168.10.52:8080/</string>
+    <string name="zh_tw_gama_login_pre_url" translatable="false">https://hktw-t-login.meowplayer.com/</string>
+    <string name="zh_tw_gama_login_spa_url" translatable="false">http://hktw-t-login.meowplayer.com/</string>
 
     <!--支付域名-->
-    <string name="zh_tw_gama_pay_pre_url" translatable="false">https://pay.flyfungame.com/</string>
-    <string name="zh_tw_gama_pay_spa_url" translatable="false">https://pay.flyfungame.com/</string>
+    <string name="zh_tw_gama_pay_pre_url" translatable="false">https://hktw-t-pay.meowplayer.com/</string>
+    <string name="zh_tw_gama_pay_spa_url" translatable="false">https://hktw-t-pay.meowplayer.com/</string>
 
     <!--活动域名-->
     <string name="zh_tw_gama_act_pre_url" translatable="false">https://activity.flyfungame.com/</string>
     <string name="zh_tw_gama_act_spa_url" translatable="false">https://activity.flyfungame.com/</string>
 
     <!--cdn域名-->
-    <string name="zh_tw_gama_cdn_pre_url" translatable="false">https://sdk-download.flyfungame.com/</string>
-    <string name="zh_tw_gama_cdn_spa_url" translatable="false">https://sdk-download.flyfungame.com/</string>
+    <string name="zh_tw_gama_cdn_pre_url" translatable="false">https://www.meowplayer.com/sdk/config/</string>
+    <string name="zh_tw_gama_cdn_spa_url" translatable="false">https://www.meowplayer.com/sdk/config/</string>
 
     <!--广告域名-->
     <string name="zh_tw_gama_ads_pre_url" translatable="false">https://ads.flyfungame.com/</string>
@@ -30,8 +30,8 @@
     <string name="zh_tw_gama_cs_spa_url" translatable="false"></string>
 
 
-    <!--使用者條款 - 服務條款-->
-    <string name="zh_tw_gama_start_terms_service_url" translatable="false">https://www.baidu.com/</string>
+    <!--使用者條款 - 服務條款 -->
+    <string name="zh_tw_sdk_terms_service_url" translatable="false">http://member.meowplayer.com/archive/dev_archive.html</string>
 
     <!--客服链接-->
     <string name="zh_tw_gama_service_url" translatable="false">https://platform.flyfungame.com/web/page/service.app</string>
