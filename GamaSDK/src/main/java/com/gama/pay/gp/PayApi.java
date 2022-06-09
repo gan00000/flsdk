@@ -26,7 +26,7 @@ public class PayApi {
 
             @Override
             public void success(GPCreateOrderIdRes createOrderIdRes, String rawResult) {
-                if (createOrderIdRes != null && createOrderIdRes.isRequestSuccess() && !TextUtils.isEmpty(createOrderIdRes.getOrderId())) {
+                if (createOrderIdRes != null && createOrderIdRes.isRequestSuccess() && createOrderIdRes.getPayData() != null && !TextUtils.isEmpty(createOrderIdRes.getPayData().getOrderId())) {
                     if (sfCallBack != null){
                         sfCallBack.success(createOrderIdRes,rawResult);
                     }

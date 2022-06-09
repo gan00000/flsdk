@@ -7,23 +7,32 @@ import com.core.base.bean.BaseResponseModel;
  */
 public class GPCreateOrderIdRes extends BaseResponseModel {
 
-    private String orderId;
-    private String paygpId;
+    private PayData data;
 
-
-    public String getOrderId() {
-        return orderId;
+    public PayData getPayData() {
+        return data;
     }
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
-    }
+    public static class PayData{
 
-    public String getPaygpId() {
-        return paygpId;
-    }
+        private String orderId;
+        private String paymentId;
 
-    public void setPaygpId(String paygpId) {
-        this.paygpId = paygpId;
+
+        public String getOrderId() {
+            return orderId;
+        }
+
+        public void setOrderId(String orderId) {
+            this.orderId = orderId;
+        }
+
+        public String getPaymentId() {
+            return paymentId;
+        }
+
+        public void setPaymentId(String paymentId) {
+            this.paymentId = paymentId;
+        }
     }
 }

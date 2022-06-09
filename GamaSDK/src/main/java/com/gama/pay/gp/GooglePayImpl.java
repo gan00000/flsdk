@@ -285,8 +285,8 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
                             public void success(GPCreateOrderIdRes createOrderIdRes, String msg1) {
                                 PL.i("requestCreateOrder finish success");
                                 //5.开始购买
-                                mBillingHelper.launchPurchaseFlow(activity.getApplicationContext(), createOrderIdReqBean.getProductId(),createOrderIdReqBean.getUserId(),
-                                        createOrderIdRes.getOrderId(), new PurchasesUpdatedListener() {
+                                mBillingHelper.launchPurchaseFlow(activity, createOrderIdReqBean.getProductId(),createOrderIdReqBean.getUserId(),
+                                        createOrderIdRes.getPayData().getOrderId(), new PurchasesUpdatedListener() {
                                             @Override
                                             public void onPurchasesUpdated(@NonNull BillingResult billingResult, @Nullable List<com.android.billingclient.api.Purchase> purchasesList) {
 
