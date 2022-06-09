@@ -93,7 +93,12 @@ public class GBillingHelper implements PurchasesUpdatedListener {
     }
 
     private void executeRunnable(Context context, Runnable runnable) {
+
         if (isBillingInit && billingClient != null && billingClient.isReady()) {
+//            BillingResult billingResult = billingClient.isFeatureSupported(BillingClient.FeatureType.IN_APP_MESSAGING);
+//            PL.i("IN_APP_MESSAGING isFeatureSupported:" + billingResult.toString());
+//            BillingResult billingResult2 = billingClient.isFeatureSupported(BillingClient.FeatureType.PRODUCT_DETAILS);
+//            PL.i("PRODUCT_DETAILS isFeatureSupported:" + billingResult.toString());
             runnable.run();
         } else {
             startServiceConnection(context, runnable);
@@ -291,6 +296,7 @@ public class GBillingHelper implements PurchasesUpdatedListener {
 
                 if (context instanceof Activity) {
                     BillingResult billingResult = billingClient.launchBillingFlow((Activity) context, billingFlowParams);
+
                     if (mBillingCallbackList != null && !mBillingCallbackList.isEmpty()) {
                         for (BillingHelperStatusCallback mBillingCallback : mBillingCallbackList) {
                             mBillingCallback.launchBillingFlowResult(context, billingResult);
