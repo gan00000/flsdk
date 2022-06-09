@@ -2,7 +2,9 @@ package com.gama.pay.gp.util;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.android.billingclient.api.BillingClient;
 import com.android.billingclient.api.BillingClientStateListener;
@@ -10,26 +12,17 @@ import com.android.billingclient.api.BillingFlowParams;
 import com.android.billingclient.api.BillingResult;
 import com.android.billingclient.api.ConsumeParams;
 import com.android.billingclient.api.ConsumeResponseListener;
-import com.android.billingclient.api.ProductDetails;
-import com.android.billingclient.api.ProductDetailsResponseListener;
 import com.android.billingclient.api.Purchase;
 import com.android.billingclient.api.PurchasesResponseListener;
 import com.android.billingclient.api.PurchasesUpdatedListener;
-import com.android.billingclient.api.QueryProductDetailsParams;
-import com.android.billingclient.api.QueryPurchasesParams;
 import com.android.billingclient.api.SkuDetails;
 import com.android.billingclient.api.SkuDetailsParams;
 import com.android.billingclient.api.SkuDetailsResponseListener;
 import com.core.base.utils.PL;
-import com.mw.base.utils.GamaUtil;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 /**
  * 处理Google支付3.0的帮助类
@@ -215,37 +208,31 @@ public class GBillingHelper implements PurchasesUpdatedListener {
     /**
      * 查询商品详情
      */
-    public void queryProductDetailsAsync(Context context, List<String> skuList, ProductDetailsResponseListener detailsResponseListener) {
+    public void queryProductDetailsAsync(Context context, List<String> skuList, SkuDetailsResponseListener detailsResponseListener) {
         Runnable queryInventoryRunnable = new Runnable() {
             @Override
             public void run() {
-                List<QueryProductDetailsParams.Product> productList = new ArrayList<>();
-                if (skuList != null && !skuList.isEmpty()){
+                
+                SkuDetailsParams.Builder params = SkuDetailsParams.newBuilder();
+                params.setSkusList(skuList).setType(BillingClient.SkuType.INAPP);
+                billingClient.querySkuDetailsAsync(params.build(),
+                        new SkuDetailsResponseListener() {
+                            @Override
+                            public void onSkuDetailsResponse(BillingResult billingResult, List<SkuDetails> skuDetailsList) {
+                                // Process the result.
 
-                    for (String skuId: skuList) {
-                        productList.add(QueryProductDetailsParams.Product.newBuilder()
-                                .setProductId(skuId)
-                                .setProductType(BillingClient.ProductType.INAPP)
-                                .build());
-                    }
-
-                }
-                QueryProductDetailsParams params = QueryProductDetailsParams.newBuilder()
-                        .setProductList(productList)
-                        .build();
-
-                billingClient.queryProductDetailsAsync(
-                        params,
-                        new ProductDetailsResponseListener() {
-                            public void onProductDetailsResponse(BillingResult billingResult, List<ProductDetails> productDetailsList) {
-                                // Process the result
-                                if (detailsResponseListener != null){
-                                    detailsResponseListener.onProductDetailsResponse(billingResult,productDetailsList);
+                                if (mBillingCallbackList != null && !mBillingCallbackList.isEmpty()) {
+                                    for (BillingHelperStatusCallback mBillingCallback : mBillingCallbackList) {
+                                        mBillingCallback.onQuerySkuResult(context,skuDetailsList);
+                                    }
                                 }
+                                if (detailsResponseListener != null){
+                                    detailsResponseListener.onSkuDetailsResponse(billingResult,skuDetailsList);
+                                }
+
                             }
                         }
                 );
-
             }
         };
         executeRunnable(context, queryInventoryRunnable);
@@ -257,10 +244,10 @@ public class GBillingHelper implements PurchasesUpdatedListener {
     public void launchPurchaseFlow(Context context, String sku, String orderId,PurchasesUpdatedListener purchasesUpdatedListener) {
 
         this.purchasesUpdatedListener = purchasesUpdatedListener;
-        queryProductDetailsAsync(context, Collections.singletonList(sku), new ProductDetailsResponseListener() {
-            @Override
-            public void onProductDetailsResponse(@NonNull BillingResult billingResult, @NonNull List<ProductDetails> list) {
 
+        queryProductDetailsAsync(context, Collections.singletonList(sku), new SkuDetailsResponseListener() {
+            @Override
+            public void onSkuDetailsResponse(@NonNull BillingResult billingResult, @Nullable List<SkuDetails> list) {
                 PL.i( "queryProductDetailsAsync finish ");
                 if (list != null && !list.isEmpty()) {
                     launchPurchaseFlow(context, orderId, list.get(0));
@@ -273,7 +260,7 @@ public class GBillingHelper implements PurchasesUpdatedListener {
     /**
      * 开始购买,直接传入商品详情
      */
-    private void launchPurchaseFlow(Context context,String orderId, ProductDetails productDetails) {
+    private void launchPurchaseFlow(Context context,String orderId, SkuDetails productDetails) {
 
         Runnable launchPurchaseRunnable = new Runnable() {
             @Override
@@ -281,20 +268,16 @@ public class GBillingHelper implements PurchasesUpdatedListener {
                 PL.i( "productDetails -> " + productDetails.toString());
 
                 // An activity reference from which the billing flow will be launched.
+                // Retrieve a value for "skuDetails" by calling querySkuDetailsAsync().
                 BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
-                        .setProductDetailsParamsList(
-                                Arrays.asList(BillingFlowParams.ProductDetailsParams.newBuilder()
-                                        // fetched via queryProductDetailsAsync
-                                        .setProductDetails(productDetails)
-                                        // to get an offer token, call ProductDetails.getOfferDetails()
-                                        // for a list of offers that are available to the user
-//                                        .setOfferToken(GamaUtil.getUid(context))
-//                                        .setOfferToken(productDetails.getSubscriptionOfferDetails().get(0).getOfferToken())
-                                        .build())
-                        )
+                        .setSkuDetails(productDetails)
                         .build();
 
+//                BillingResult billingResult = billingClient.launchBillingFlow(activity, billingFlowParams)
+
                 if (context instanceof Activity) {
+
+                    PL.i("start launchBillingFlow");
                     BillingResult billingResult = billingClient.launchBillingFlow((Activity) context, billingFlowParams);
 
                     if (mBillingCallbackList != null && !mBillingCallbackList.isEmpty()) {
@@ -303,6 +286,7 @@ public class GBillingHelper implements PurchasesUpdatedListener {
                         }
                     }
                 } else {
+                    PL.i("context is not Activity error");
                     for (BillingHelperStatusCallback mBillingCallback : mBillingCallbackList) {
                         BillingResult billingResult = BillingResult.newBuilder().setResponseCode(BillingClient.BillingResponseCode.ERROR).build();
                         mBillingCallback.launchBillingFlowResult(context, billingResult);
@@ -325,17 +309,14 @@ public class GBillingHelper implements PurchasesUpdatedListener {
             @Override
             public void run() {
 
-                billingClient.queryPurchasesAsync(
-                        QueryPurchasesParams.newBuilder().setProductType(BillingClient.ProductType.INAPP).build(),
-                        new PurchasesResponseListener() {
-                            public void onQueryPurchasesResponse(BillingResult billingResult, List<Purchase> purchases) {
-                                // Process the result
-                                if (purchasesResponseListener != null){
-                                    purchasesResponseListener.onQueryPurchasesResponse(billingResult,purchases);
-                                }
-                            }
+                billingClient.queryPurchasesAsync(BillingClient.SkuType.INAPP, new PurchasesResponseListener() {
+                    @Override
+                    public void onQueryPurchasesResponse(@NonNull BillingResult billingResult, @NonNull List<Purchase> list) {
+                        if (purchasesResponseListener != null){
+                            purchasesResponseListener.onQueryPurchasesResponse(billingResult,list);
                         }
-                );
+                    }
+                });
             }
         };
         executeRunnable(context, queryPurchaseRunnable);
@@ -367,7 +348,7 @@ public class GBillingHelper implements PurchasesUpdatedListener {
          *
          * @param productDetails
          */
-        void onQuerySkuResult(Context context, List<ProductDetails> productDetails);
+        void onQuerySkuResult(Context context, List<SkuDetails> productDetails);
 
         /**
          * 查询购买的回调
