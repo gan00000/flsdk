@@ -495,7 +495,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 if (sLoginResponse != null) {
                     if (sLoginResponse.isRequestSuccess()) {
 
-                        ToastUtils.toast(getActivity(), sLoginResponse.getMessage());
+                        ToastUtils.toast(getActivity(), R.string.text_account_change_pwd_success);
 
                         iLoginView.changePwdSuccess(sLoginResponse);
                         GamaUtil.saveAccountModel(activity,account,newPwd,sLoginResponse.getData().getUserId(),sLoginResponse.getData().getToken(), sLoginResponse.getData().getTimestamp(),true);
@@ -538,7 +538,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             public void success(SLoginResponse sLoginResponse, String rawResult) {
                 if (sLoginResponse != null) {
                     if (sLoginResponse.isRequestSuccess()) {
-                        ToastUtils.toast(getActivity(), R.string.py_success);
+                        ToastUtils.toast(getActivity(), R.string.text_account_bind_success);
 
 //                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GAMA);
                         GamaUtil.updateAccountModel(getActivity(),sLoginResponse.getData().getUserId(),true);
@@ -878,17 +878,20 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             @Override
             public void success(BaseResponseModel sLoginResponse, String rawResult) {
                 if (sLoginResponse != null) {
-                    String msg = sLoginResponse.getMessage();
-                    if(SStringUtil.isNotEmpty(msg)){
-                        ToastUtils.toast(getActivity(), msg);
-                    }
+
                     if (sLoginResponse.isRequestSuccess()) {
+                        ToastUtils.toast(getActivity(), R.string.text_send_vf_code_success);
                         if(callbackList != null && callbackList.size() > 0) {
                             for(SBaseRelativeLayout.OperationCallback callback : callbackList) {
                                 callback.statusCallback(SBaseRelativeLayout.OperationCallback.TIME_LIMIT);
                             }
                         }
                         startTimer();
+                    }else {
+                        String msg = sLoginResponse.getMessage();
+                        if(SStringUtil.isNotEmpty(msg)){
+                            ToastUtils.toast(getActivity(), msg);
+                        }
                     }
                 } else {
                     ToastUtils.toast(getActivity(), R.string.py_error_occur);
@@ -1119,8 +1122,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             public void success(SLoginResponse sLoginResponse, String rawResult) {
                 if (sLoginResponse != null) {
                     if (sLoginResponse.isRequestSuccess()) {
-//                        ToastUtils.toast(getActivity(), R.string.py_findpwd_success);
-
+                        ToastUtils.toast(getActivity(), R.string.text_account_change_pwd_success);
                         GamaUtil.removeAccountModel(activity,account);
                         if (iLoginView != null){
                             iLoginView.findPwdSuccess(sLoginResponse);

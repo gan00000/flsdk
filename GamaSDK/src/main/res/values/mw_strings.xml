@@ -194,8 +194,12 @@
     <string name="text_pwd_not_equel">兩次密碼不一致</string>
     <string name="py_input_old_password">請輸入舊密碼</string>
     <string name="text_free_register">免註冊登入</string>
+    <string name="text_old_new_pwd_same">新密碼不能與舊密碼相同</string>
     <string name="text_cancel">取消</string>
     <string name="text_confire">確認</string>
     <string name="text_delete_account_tips">請注意，註銷帳號將會將您的帳號從平台中徹底刪除，如果確認註銷，請點擊“確認”</string>
+    <string name="text_account_bind_success">升級會員帳號成功，正在登入...</string>
+    <string name="text_account_change_pwd_success">修改成功，正在登入...</string>
+    <string name="text_send_vf_code_success">驗證碼已發送，請注意查收</string>
 
 </resources>

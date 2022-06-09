@@ -157,6 +157,10 @@ public class AccountChangePwdLayoutV2 extends SLoginBaseRelativeLayout implement
             return;
         }
 
+        if (SStringUtil.isEqual(oldPassword,newPassword)){
+            ToastUtils.toast(getActivity(), R.string.text_old_new_pwd_same);
+            return;
+        }
         if (!SStringUtil.isEqual(newPassword,againPassword)){
             ToastUtils.toast(getActivity(), R.string.text_pwd_not_equel);
             return;
