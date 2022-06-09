@@ -24,6 +24,7 @@ import com.mw.sdk.R;
 import com.mw.sdk.login.model.AccountModel;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import com.mw.sdk.login.model.response.SLoginResponse;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -366,12 +367,27 @@ public class GamaUtil {
         SPUtil.saveSimpleInfo(context,GAMA_SP_FILE,GAMA_LOGIN_SERVER_RETURN_DATA,data);
     }
 
-    public static String getSdkLoginData(Context context){
-        return SPUtil.getSimpleString(context,GAMA_SP_FILE,GAMA_LOGIN_SERVER_RETURN_DATA);
+    public static SLoginResponse getSdkLoginData(Context context){
+        String loginResult = SPUtil.getSimpleString(context,GAMA_SP_FILE,GAMA_LOGIN_SERVER_RETURN_DATA);
+        if (SStringUtil.isEmpty(loginResult)){
+            return null;
+        }
+        try {
+            Gson gson = new Gson();
+            return gson.fromJson(loginResult, SLoginResponse.class);
+        } catch (JsonSyntaxException e) {
+            e.printStackTrace();
+            return null;
+        }
+
     }
 
     public static boolean isLogin(Context context){
-        return SStringUtil.isNotEmpty(getSdkLoginData(context));
+        SLoginResponse sLoginResponse = getSdkLoginData(context);
+        if (sLoginResponse != null && sLoginResponse.isRequestSuccess() && sLoginResponse.getData()!= null && SStringUtil.isNotEmpty(sLoginResponse.getData().getUserId())){
+            return true;
+        }
+        return false;
     }
 
     public static void saveSdkLoginTerms(Context context,String terms){
@@ -399,11 +415,19 @@ public class GamaUtil {
      * 获取当次登入的userId
      */
     public static String getUid(Context context){
-        return JsonUtil.getValueByKey(context,getSdkLoginData(context), "userId", "");
+        SLoginResponse sLoginResponse = getSdkLoginData(context);
+        if (sLoginResponse != null && sLoginResponse.isRequestSuccess() && sLoginResponse.getData()!= null && SStringUtil.isNotEmpty(sLoginResponse.getData().getUserId())){
+            return sLoginResponse.getData().getUserId();
+        }
+        return "";
     }
 
     public static String getSdkTimestamp(Context context){
-        return JsonUtil.getValueByKey(context,getSdkLoginData(context), "timestamp", "");
+        SLoginResponse sLoginResponse = getSdkLoginData(context);
+        if (sLoginResponse != null && sLoginResponse.isRequestSuccess() && sLoginResponse.getData()!= null && SStringUtil.isNotEmpty(sLoginResponse.getData().getTimestamp())){
+            return sLoginResponse.getData().getTimestamp();
+        }
+        return "";
     }
 
     /**
@@ -412,25 +436,29 @@ public class GamaUtil {
      * @return
      */
     public static String getSdkAccessToken(Context context){
-        return JsonUtil.getValueByKey(context,getSdkLoginData(context), "accessToken", "");
+        SLoginResponse sLoginResponse = getSdkLoginData(context);
+        if (sLoginResponse != null && sLoginResponse.isRequestSuccess() && sLoginResponse.getData()!= null && SStringUtil.isNotEmpty(sLoginResponse.getData().getToken())){
+            return sLoginResponse.getData().getToken();
+        }
+        return "";
     }
 
     /**
      * 获取当次登入的账号是否已经绑定手机
      */
-    public static boolean isAccountLinked(Context context){
-        String beLink = JsonUtil.getValueByKey(context,getSdkLoginData(context), "beLinked", "");
-        return "1".equals(beLink);
-    }
+//    public static boolean isAccountLinked(Context context){
+//        String beLink = JsonUtil.getValueByKey(context,getSdkLoginData(context), "beLinked", "");
+//        return "1".equals(beLink);
+//    }
 
     /**
      * 绑定手机后刷新当前账号绑定状态
      */
     public static void setAccountLinked(Context context){
-        String newSdkLoginData = JsonUtil.setValueByKey(context, getSdkLoginData(context), "beLinked", "1");
-        if(!TextUtils.isEmpty(newSdkLoginData)) {
-            saveSdkLoginData(context, newSdkLoginData);
-        }
+//        String newSdkLoginData = JsonUtil.setValueByKey(context, getSdkLoginData(context), "beLinked", "1");
+//        if(!TextUtils.isEmpty(newSdkLoginData)) {
+//            saveSdkLoginData(context, newSdkLoginData);
+//        }
     }
 
     public static final String GAMA_LOGIN_USER_ID = "GAMA_LOGIN_USER_ID";
