@@ -103,20 +103,20 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
         backView.setOnClickListener(this);
         bindConfirm.setOnClickListener(this);
 
-        GamaUtil.setAccountWithIcon(accountModel,sdkinputview_third_account.getIconImageView(),thirdAccountEditText);
-        pwdSdkInputEditTextView.setPwdInputEnable(false);
-
+//        GamaUtil.setAccountWithIcon(accountModel,sdkinputview_third_account.getIconImageView(),thirdAccountEditText);
         return contentView;
     }
 
     @Override
     public void refreshViewData() {
         super.refreshViewData();
-//        registerAccountEditText.setText("");
-//        registerPasswordEditText.setText("");
-//        thirdAccountEditText.setText("");
+        registerAccountEditText.setText("");
+        registerPasswordEditText.setText("");
+        thirdAccountEditText.setText("");
 //
-//        GamaUtil.setAccountWithIcon(accountModel,sdkinputview_third_account.getIconImageView(),thirdAccountEditText);
+        GamaUtil.setAccountWithIcon(accountModel,sdkinputview_third_account.getIconImageView(),thirdAccountEditText);
+        sdkinputview_third_account.setPwdInputEnable(false);
+
 
     }
 

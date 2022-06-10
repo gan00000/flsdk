@@ -374,13 +374,13 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 
         if (bindView == null || !viewPageList.contains(bindView)){
             bindView = new ThirdPlatBindAccountLayoutV2(context);
-            ((ThirdPlatBindAccountLayoutV2)bindView).setBindTpye(bindType);
-            ((ThirdPlatBindAccountLayoutV2)bindView).setFromView(fromView);
-            ((ThirdPlatBindAccountLayoutV2)bindView).setAccountModel(accountModel);
             bindView.setLoginDialogV2(this);
             contentFrameLayout.addView(bindView);
             viewPageList.add(bindView);
         }
+        ((ThirdPlatBindAccountLayoutV2)bindView).setBindTpye(bindType);
+        ((ThirdPlatBindAccountLayoutV2)bindView).setFromView(fromView);
+        ((ThirdPlatBindAccountLayoutV2)bindView).setAccountModel(accountModel);
         setViewPageVisable(bindView);
     }
 
