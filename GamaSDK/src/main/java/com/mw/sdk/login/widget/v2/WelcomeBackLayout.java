@@ -168,7 +168,7 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
 //                accountSdkInputEditTextView.getInputEditText().setText(account);
             ImageView imageView = accountSdkInputEditTextView.getIconImageView();
             GamaUtil.setAccountWithIcon(currentAccountModel,imageView,accountEditText);
-            accountSdkInputEditTextView.setPwdInputEnable(false);
+            accountSdkInputEditTextView.getInputEditText().setEnabled(false);
 
             //判斷是否綁定，顯示是否升級賬號
 

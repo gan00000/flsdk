@@ -115,8 +115,8 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
         thirdAccountEditText.setText("");
 //
         GamaUtil.setAccountWithIcon(accountModel,sdkinputview_third_account.getIconImageView(),thirdAccountEditText);
-        sdkinputview_third_account.setPwdInputEnable(false);
-
+//        sdkinputview_third_account.setPwdInputEnable(false);
+        sdkinputview_third_account.getInputEditText().setEnabled(false);
 
     }
 

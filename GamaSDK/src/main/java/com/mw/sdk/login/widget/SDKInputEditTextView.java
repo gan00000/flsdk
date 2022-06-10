@@ -45,6 +45,7 @@ public class SDKInputEditTextView extends RelativeLayout {
 
     private View line1View;
     private View bottomLine;
+    private SDKInputType sdkInputType;
 
     public EditText getInputEditText() {
         return inputEditText;
@@ -141,7 +142,7 @@ public class SDKInputEditTextView extends RelativeLayout {
 
     //设置输入框的类型
     public void setInputType(SDKInputType inputType){
-
+        this.sdkInputType = inputType;
         int iconId = 0;
         String labName = "";
         int editTextInputType = InputType.TYPE_CLASS_TEXT;
