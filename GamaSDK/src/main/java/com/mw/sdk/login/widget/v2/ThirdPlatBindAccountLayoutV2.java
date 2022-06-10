@@ -134,6 +134,7 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
 
         } else if (v == backView) {//返回键
             sLoginDialogv2.toWelcomeBackView();
+            sLoginDialogv2.distoryView(this);
         }
 
     }
