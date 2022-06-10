@@ -51,6 +51,7 @@ public class SDKInputEditTextView extends RelativeLayout {
         return inputEditText;
     }
 
+    //默认密码显示，非密码类型不显示
     public void setEyeVisable(int visibility){
 
         if (eyeImageView == null){
@@ -161,8 +162,8 @@ public class SDKInputEditTextView extends RelativeLayout {
                 iconId = R.mipmap.mw_passowrd_icon;
                 labName = getResources().getString(R.string.py_password);
                 hint = getResources().getString(R.string.py_register_password_hit);
-                eyeImageViewLayout.setVisibility(View.GONE);
-//                editTextInputType = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD;
+                eyeImageViewLayout.setVisibility(View.VISIBLE);
+                editTextInputType = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD;
                 adjustTvTextSize();
                 break;
 
@@ -170,8 +171,8 @@ public class SDKInputEditTextView extends RelativeLayout {
                 iconId = R.mipmap.mw_passowrd_icon;
                 labName = getResources().getString(R.string.py_password);
                 hint = getResources().getString(R.string.text_input_new_pwd_confire);
-                eyeImageViewLayout.setVisibility(View.GONE);
-//                editTextInputType = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD;
+                eyeImageViewLayout.setVisibility(View.VISIBLE);
+                editTextInputType = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD;
                 adjustTvTextSize();
                 break;
 
@@ -179,16 +180,16 @@ public class SDKInputEditTextView extends RelativeLayout {
                 iconId = R.mipmap.mw_passowrd_icon;
                 labName = getResources().getString(R.string.py_old_pwd);
                 hint = getResources().getString(R.string.py_input_old_password);
-                eyeImageViewLayout.setVisibility(View.GONE);
-//                editTextInputType = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD;
+                eyeImageViewLayout.setVisibility(View.VISIBLE);
+                editTextInputType = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD;
                 adjustTvTextSize();
                 break;
             case SDKInputType_New_Password:
                 iconId = R.mipmap.mw_passowrd_icon;
                 labName = getResources().getString(R.string.py_new_pwd);
                 hint = getResources().getString(R.string.text_input_new_pwd);
-                eyeImageViewLayout.setVisibility(View.GONE);
-//                editTextInputType = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD;
+                eyeImageViewLayout.setVisibility(View.VISIBLE);
+                editTextInputType = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD;
                 adjustTvTextSize();
                 break;
 
@@ -216,10 +217,9 @@ public class SDKInputEditTextView extends RelativeLayout {
 
     public void setPwdInputEnable(boolean enable){
         if (enable) {
-            this.setEnabled(enable);
-            eyeImageView.setSelected(true);
-            // 明文
-            inputEditText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            eyeImageView.setSelected(false);
+            // 显示为密码
+            inputEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
 
             inputEditText.setEnabled(true);
             inputEditText.setTextColor(getContext().getResources().getColor(R.color.white_c));
@@ -227,7 +227,7 @@ public class SDKInputEditTextView extends RelativeLayout {
             eyeImageView.setVisibility(VISIBLE);
 
         }else{
-            this.setEnabled(enable);
+
             eyeImageView.setSelected(true);
             // 明文
             inputEditText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);

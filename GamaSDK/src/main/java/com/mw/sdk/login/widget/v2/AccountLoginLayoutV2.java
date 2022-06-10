@@ -109,7 +109,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
 
         loginAccountEditText = accountSdkInputEditTextView.getInputEditText();
         loginPasswordEditText = pwdSdkInputEditTextView.getInputEditText();
-        pwdSdkInputEditTextView.setEyeVisable(View.VISIBLE);
+//        pwdSdkInputEditTextView.setEyeVisable(View.VISIBLE);
 
         historyAccountListBtn = contentView.findViewById(R.id.sdk_input_item_account_history);
         historyAccountListBtn.setVisibility(VISIBLE);
