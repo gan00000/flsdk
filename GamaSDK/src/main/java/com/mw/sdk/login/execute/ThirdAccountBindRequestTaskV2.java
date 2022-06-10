@@ -120,10 +120,10 @@ public class ThirdAccountBindRequestTaskV2 extends BaseLoginRequestTask {
                                          String userId, String loginToken,String loginTimestamp) {
         super(context);
 
-//        if(TextUtils.isEmpty(thirdPlatId)){
-//            PL.d("thirdPlatId:" + thirdPlatId);
-//            return;
-//        }
+        if(TextUtils.isEmpty(thirdPlatId)){
+            PL.d("thirdPlatId:" + thirdPlatId);
+            return;
+        }
 
         thirdAccountBindRequestBean = new ThirdAccountBindRequestBean(context);
 
@@ -160,10 +160,10 @@ public class ThirdAccountBindRequestTaskV2 extends BaseLoginRequestTask {
                                          String thirdToken, String userId, String loginToken,String loginTimestamp) {
         super(context);
 
-        if(TextUtils.isEmpty(thirdPlatId)){
-            PL.d("thirdPlatId:" + thirdPlatId);
-            return;
-        }
+//        if(TextUtils.isEmpty(thirdPlatId)){
+//            PL.d("thirdPlatId:" + thirdPlatId);
+//            return;
+//        }
 
         thirdAccountBindRequestBean = new ThirdAccountBindRequestBean(context);
 
