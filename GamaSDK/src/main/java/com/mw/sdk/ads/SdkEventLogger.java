@@ -89,6 +89,9 @@ public class SdkEventLogger {
     public static void trackinLoginEvent(Context activity, SLoginResponse loginResponse){
         try {
             PL.i(TAG, "登入上報");
+            if (activity == null || loginResponse == null){
+                return;
+            }
             // TODO: 2018/4/16 Android登录事件名 gama_login_event_android
             String userId = loginResponse.getData().getUserId();
             //Facebook上报
@@ -102,7 +105,7 @@ public class SdkEventLogger {
             //AppsFlyer上报
             Map<String, Object> eventValue = new HashMap<String, Object>();
             eventValue.put(SdkAdsConstant.GAMA_EVENT_USER_ID, userId);
-           // AppsFlyerLib.getInstance().trackEvent(activity.getApplicationContext(), SdkAdsConstant.GAMA_EVENT_LOGIN, eventValue);
+            AppsFlyerLib.getInstance().logEvent(activity.getApplicationContext(), SdkAdsConstant.GAMA_EVENT_LOGIN, eventValue);
 
             //adjust
 //            GamaAj.trackEvent(activity.getApplicationContext(), SdkAdsConstant.GAMA_EVENT_LOGIN, eventValue);
@@ -120,6 +123,9 @@ public class SdkEventLogger {
     public static void trackinRegisterEvent(Context activity, SLoginResponse loginResponse){
         try {
             PL.i(TAG, "註冊上報");
+            if (activity == null || loginResponse == null){
+                return;
+            }
             // TODO: 2018/4/16 Android注册事件名 gama_register_event_android
             String userId = loginResponse.getData().getUserId();
             //Facebook上报
@@ -133,7 +139,7 @@ public class SdkEventLogger {
             //AppsFlyer上报
             Map<String, Object> eventValue = new HashMap<String, Object>();
             eventValue.put(SdkAdsConstant.GAMA_EVENT_USER_ID, userId);
-           // AppsFlyerLib.getInstance().trackEvent(activity.getApplicationContext(), SdkAdsConstant.GAMA_EVENT_REGISTER, eventValue);
+            AppsFlyerLib.getInstance().logEvent(activity.getApplicationContext(), SdkAdsConstant.GAMA_EVENT_REGISTER, eventValue);
 
             //adjust
 //            GamaAj.trackEvent(activity.getApplicationContext(), SdkAdsConstant.GAMA_EVENT_REGISTER, eventValue);
@@ -167,7 +173,7 @@ public class SdkEventLogger {
 
             //AppsFlyer上报
             map.put(SdkAdsConstant.GAMA_EVENT_USER_ID, userId);
-           // AppsFlyerLib.getInstance().trackEvent(activity.getApplicationContext(), SdkAdsConstant.GAMA_EVENT_ROLE_INFO, map);
+            AppsFlyerLib.getInstance().logEvent(activity.getApplicationContext(), SdkAdsConstant.GAMA_EVENT_ROLE_INFO, map);
             //adjust
 //            GamaAj.trackEvent(activity, SdkAdsConstant.GAMA_EVENT_ROLE_INFO, map);
             //计算留存
@@ -288,7 +294,7 @@ public class SdkEventLogger {
                 SGoogleProxy.firebaseAnalytics(context, eventName, b);
 
                 //AppsFlyer上报
-              //  AppsFlyerLib.getInstance().trackEvent(context.getApplicationContext(), eventName, map);
+                AppsFlyerLib.getInstance().logEvent(context.getApplicationContext(), eventName, map);
 
                 //adjust
 //                GamaAj.trackEvent(context, eventName, map);
@@ -306,7 +312,7 @@ public class SdkEventLogger {
                 if(mediaSet.contains(SdkAdsConstant.EventReportChannel.EventReportAppsflyer)) {
                     PL.i("上报媒体3");
                     //AppsFlyer上报
-                  //  AppsFlyerLib.getInstance().trackEvent(context.getApplicationContext(), eventName, map);
+                    AppsFlyerLib.getInstance().logEvent(context.getApplicationContext(), eventName, map);
                 }
                 if(mediaSet.contains(SdkAdsConstant.EventReportChannel.EventReportAdjust)) {
                     PL.i("上报媒体4");
@@ -341,7 +347,7 @@ public class SdkEventLogger {
     /**
      * 自家平台广告：安装上报
      */
-    public static void reportInstallActivation(final Context context){
+   /* public static void reportInstallActivation(final Context context){
 
         if (SStringUtil.isNotEmpty(SPUtil.getSimpleString(context,GamaUtil.GAMA_SP_FILE,GAMA_ADSINSTALLACTIVATION))){
             return;
@@ -399,9 +405,9 @@ public class SdkEventLogger {
                     simpleHttpRequest.excute();
                 }
         });
-    }
+    }*/
 
-    private static void getVfSwitch(final Activity activity) {
+    /*private static void getVfSwitch(final Activity activity) {
         GamaVfcodeSwitchRequestTask task = new GamaVfcodeSwitchRequestTask(activity);
         task.setReqCallBack(new ISReqCallBack<BaseResponseModel>() {
             @Override
@@ -425,7 +431,7 @@ public class SdkEventLogger {
 
         });
         task.excute();
-    }
+    }*/
 	
 	public static void onResume(Activity activity) {
 //        GamaAj.onResume(activity);

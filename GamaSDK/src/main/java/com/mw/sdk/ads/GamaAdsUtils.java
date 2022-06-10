@@ -81,7 +81,7 @@ public class GamaAdsUtils {
         TYPE_CHANGE_ROLE
     }
 
-    public static void uploadOnlineTime(Context context, GamaOnlineType type) {
+   /* public static void uploadOnlineTime(Context context, GamaOnlineType type) {
         String onlineTimeInfo = GamaUtil.getOnlineTimeInfo(context);
 
         if(TextUtils.isEmpty(onlineTimeInfo)) {
@@ -169,7 +169,7 @@ public class GamaAdsUtils {
             e.printStackTrace();
         }
 
-    }
+    }*/
 
 
 }
