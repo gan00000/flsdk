@@ -7,6 +7,7 @@ import android.view.View;
 import com.core.base.callback.SFCallBack;
 import com.mw.sdk.login.constant.BindType;
 import com.mw.sdk.login.constant.ViewType;
+import com.mw.sdk.login.model.AccountModel;
 import com.mw.sdk.login.model.request.ThirdLoginRegRequestBean;
 import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.SBaseRelativeLayout;
@@ -103,7 +104,7 @@ public class LoginContract {
         /**
          * 需要手机验证的绑定账号
          */
-        void accountBind(Activity activity, String account, String pwd, String areaCode, String phone, String vfcode, BindType bindType);
+        void accountBind(Activity activity, AccountModel currentAccountMode, String account, String pwd, String areaCode, String phone, String vfcode, BindType bindType);
 
         /**
          * 获取手机验证码

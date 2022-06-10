@@ -37,6 +37,7 @@ public class ThirdAccountBindRequestBean extends AccountLoginRequestBean {
 	private String googleClientId = ""; //Google登入的参数,在google-service.json里面找到:oauth_client-type3的client-id
 
 	private String lineAccessToken;
+	private String userId;
 
 	public String getFb_oauthToken() {
 		return fb_oauthToken;
@@ -111,5 +112,13 @@ public class ThirdAccountBindRequestBean extends AccountLoginRequestBean {
 
 	public void setLineAccessToken(String lineAccessToken) {
 		this.lineAccessToken = lineAccessToken;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 }

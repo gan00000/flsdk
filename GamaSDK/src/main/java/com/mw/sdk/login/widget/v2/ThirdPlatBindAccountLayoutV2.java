@@ -171,7 +171,7 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
             return;
         }
 
-        sLoginDialogv2.getLoginPresenter().accountBind(sLoginDialogv2.getActivity(), account, password, "",
+        sLoginDialogv2.getLoginPresenter().accountBind(sLoginDialogv2.getActivity(), accountModel, account, password, "",
                 "", "", bindTpye);
     }
 

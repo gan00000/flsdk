@@ -1160,7 +1160,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     }
 
     @Override
-    public void accountBind(final Activity activity, final String account, final String pwd, final String areaCode, final String phone, final String vfcode, BindType bindType) {
+    public void accountBind(final Activity activity,final AccountModel currentAccountMode, final String account, final String pwd, final String areaCode, final String phone, final String vfcode, BindType bindType) {
         this.mActivity = activity;
         if (bindType == BindType.BIND_UNIQUE){
             String uniqueId = GamaUtil.getGoogleAdid1AndroidId(activity);
@@ -1175,7 +1175,10 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     areaCode,
                     phone,
                     vfcode,
-                    uniqueId);
+                    uniqueId,
+                    currentAccountMode.getUserId(),
+                    currentAccountMode.getLoginAccessToken(),
+                    currentAccountMode.getLoginTimestamp());
             sAccountBindV2(bindRequestTask, account, pwd);
 
         } else if (bindType == BindType.BIND_FB){
@@ -1191,7 +1194,10 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                             user.getUserFbId(),
                             user.getBusinessId(),
                             user.getAccessTokenString(),
-                            "");
+                            "",
+                            currentAccountMode.getUserId(),
+                            currentAccountMode.getLoginAccessToken(),
+                            currentAccountMode.getLoginTimestamp());
                     sAccountBindV2(bindRequestTask,account,pwd);
                 }
             });
@@ -1215,7 +1221,10 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                                 vfcode,
                                 id,
                                 idTokenString,
-                                googleClientId);
+                                googleClientId,
+                                currentAccountMode.getUserId(),
+                                currentAccountMode.getLoginAccessToken(),
+                                currentAccountMode.getLoginTimestamp());
                         sAccountBindV2(bindGoogleRequestTask,account,pwd);
                     }
                 }
@@ -1240,7 +1249,10 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                                     areaCode,
                                     phone,
                                     vfcode,
-                                    id);
+                                    id,
+                                    currentAccountMode.getUserId(),
+                                    currentAccountMode.getLoginAccessToken(),
+                                    currentAccountMode.getLoginTimestamp());
                             sAccountBindV2(bindGoogleRequestTask,account,pwd);
                         }
                     }
@@ -1253,7 +1265,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             }
         }else if(bindType == BindType.BIND_LINE) {
 
-            this.sLineSignIn.startSignIn(getActivity().getString(R.string.line_channelId), new SLineSignIn.LineSignInCallBack() {
+           /* this.sLineSignIn.startSignIn(getActivity().getString(R.string.line_channelId), new SLineSignIn.LineSignInCallBack() {
                 @Override
                 public void success(String id, String mFullName, String mEmail, String idTokenString) {
 
@@ -1262,7 +1274,10 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                                 account,
                                 pwd,
                                 id,
-                                idTokenString);
+                                idTokenString,
+                                currentAccountMode.getUserId(),
+                                currentAccountMode.getLoginAccessToken(),
+                                currentAccountMode.getLoginTimestamp());
                         sAccountBindV2(bindLineRequestTask,account,pwd);
                     }
                 }
@@ -1271,7 +1286,19 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 public void failure() {
 
                 }
-            });
+            });*/
+
+            if (currentAccountMode != null) {
+                ThirdAccountBindRequestTaskV2 bindLineRequestTask = new ThirdAccountBindRequestTaskV2(getActivity(),
+                        account,
+                        pwd,
+                        currentAccountMode.getThirdId(),
+                        "",
+                        currentAccountMode.getUserId(),
+                        currentAccountMode.getLoginAccessToken(),
+                        currentAccountMode.getLoginTimestamp());
+                sAccountBindV2(bindLineRequestTask,account,pwd);
+            }
         }
     }
 

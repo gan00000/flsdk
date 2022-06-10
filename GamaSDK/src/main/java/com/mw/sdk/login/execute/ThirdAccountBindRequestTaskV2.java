@@ -33,7 +33,7 @@ public class ThirdAccountBindRequestTaskV2 extends BaseLoginRequestTask {
                                        String fbScopeId,
                                        String fbApps,
                                        String fbAccessToken,
-                                       String fbTokenBusiness) {
+                                       String fbTokenBusiness, String userId, String loginToken,String loginTimestamp) {
         super(context);
 
         thirdAccountBindRequestBean = new ThirdAccountBindRequestBean(context);
@@ -56,6 +56,10 @@ public class ThirdAccountBindRequestTaskV2 extends BaseLoginRequestTask {
         thirdAccountBindRequestBean.setVfCode(vfcode);
         thirdAccountBindRequestBean.setFb_oauthToken(fbAccessToken);
 
+        thirdAccountBindRequestBean.setUserId(userId);
+        thirdAccountBindRequestBean.setLoginAccessToken(loginToken);
+        thirdAccountBindRequestBean.setLoginTimestamp(loginTimestamp);
+
         thirdAccountBindRequestBean.setRequestMethod(ApiRequestMethod.GS_REQUEST_METHOD_BIND);
 
     }
@@ -70,7 +74,7 @@ public class ThirdAccountBindRequestTaskV2 extends BaseLoginRequestTask {
                                        String areaCode,
                                        String phone,
                                        String vfcode,
-                                       String thirdPlatId) {
+                                       String thirdPlatId, String userId, String loginToken,String loginTimestamp) {
         super(context);
 
         if(TextUtils.isEmpty(thirdPlatId)){
@@ -94,6 +98,10 @@ public class ThirdAccountBindRequestTaskV2 extends BaseLoginRequestTask {
         thirdAccountBindRequestBean.setPhoneAreaCode(areaCode);
         thirdAccountBindRequestBean.setVfCode(vfcode);
 
+        thirdAccountBindRequestBean.setUserId(userId);
+        thirdAccountBindRequestBean.setLoginAccessToken(loginToken);
+        thirdAccountBindRequestBean.setLoginTimestamp(loginTimestamp);
+
         thirdAccountBindRequestBean.setRequestMethod(ApiRequestMethod.GS_REQUEST_METHOD_BIND);
     }
 
@@ -108,13 +116,14 @@ public class ThirdAccountBindRequestTaskV2 extends BaseLoginRequestTask {
                                        String vfcode,
                                        String thirdPlatId,
                                        String googleIdToken,
-                                       String googleClientId) {
+                                       String googleClientId,
+                                         String userId, String loginToken,String loginTimestamp) {
         super(context);
 
-        if(TextUtils.isEmpty(thirdPlatId)){
-            PL.d("thirdPlatId:" + thirdPlatId);
-            return;
-        }
+//        if(TextUtils.isEmpty(thirdPlatId)){
+//            PL.d("thirdPlatId:" + thirdPlatId);
+//            return;
+//        }
 
         thirdAccountBindRequestBean = new ThirdAccountBindRequestBean(context);
 
@@ -136,15 +145,19 @@ public class ThirdAccountBindRequestTaskV2 extends BaseLoginRequestTask {
         thirdAccountBindRequestBean.setGoogleIdToken(googleIdToken);
         thirdAccountBindRequestBean.setGoogleClientId(googleClientId);
 
+        thirdAccountBindRequestBean.setUserId(userId);
+        thirdAccountBindRequestBean.setLoginAccessToken(loginToken);
+        thirdAccountBindRequestBean.setLoginTimestamp(loginTimestamp);
 
         thirdAccountBindRequestBean.setRequestMethod(ApiRequestMethod.GS_REQUEST_METHOD_BIND);
     }
 
+    //line
     public ThirdAccountBindRequestTaskV2(Context context,
                                          String name,
                                          String pwd,
                                          String thirdPlatId,
-                                         String thirdToken) {
+                                         String thirdToken, String userId, String loginToken,String loginTimestamp) {
         super(context);
 
         if(TextUtils.isEmpty(thirdPlatId)){
@@ -161,6 +174,10 @@ public class ThirdAccountBindRequestTaskV2 extends BaseLoginRequestTask {
         thirdAccountBindRequestBean.setName(name);
         thirdAccountBindRequestBean.setPwd(SStringUtil.toMd5(pwd));
         thirdAccountBindRequestBean.setLineAccessToken(thirdToken);
+
+        thirdAccountBindRequestBean.setUserId(userId);
+        thirdAccountBindRequestBean.setLoginAccessToken(loginToken);
+        thirdAccountBindRequestBean.setLoginTimestamp(loginTimestamp);
 
         thirdAccountBindRequestBean.setRequestMethod(ApiRequestMethod.GS_REQUEST_METHOD_BIND);
     }
