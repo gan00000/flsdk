@@ -126,10 +126,10 @@ android {
             versionName "2.0"
             flavorDimensions "1"
             resValue "string", "scheme", "jjcs"
-            resValue "string", "facebook_app_id", "977770276222572"
-            resValue "string", "facebook_client_token", "3bd436587ffec3df1f9e0c15cb40d09b"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider977770276222572" //启用分析
-            resValue "string", "fb_login_protocol_scheme", "fb977770276222572"
+            resValue "string", "facebook_app_id", "290914729828439"
+            resValue "string", "facebook_client_token", "6a5570d4d7aad0ba5fb55035ce199da6"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider290914729828439" //启用分析
+            resValue "string", "fb_login_protocol_scheme", "fb290914729828439"
             resValue "string", "line_channelId", "1657186918"
 
             //每个游戏的demo设置
