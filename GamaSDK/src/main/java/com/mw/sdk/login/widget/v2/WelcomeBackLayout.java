@@ -177,6 +177,17 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
                 layout_has_update_account.setVisibility(View.VISIBLE);
                 tv_account_update_tips.setText(R.string.text_has_update_account_tips);
                 iv_update_account_icon.setImageResource(R.mipmap.has_update_account_bg);
+
+                if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_MG, currentAccountModel.getLoginType())){
+                    btn_change_pwd.setEnabled(true);
+                    btn_change_pwd.setBackgroundResource(R.drawable.mw_bg_white_20);
+                    btn_change_pwd.setTextColor(getContext().getResources().getColor(R.color.white_c));
+                }else{
+                    btn_change_pwd.setEnabled(false);
+                    btn_change_pwd.setBackgroundResource(R.drawable.mw_bg_707070_20);
+                    btn_change_pwd.setTextColor(getContext().getResources().getColor(R.color.c_707070));
+                }
+
 //
             }else{
                 layout_need_update_account.setVisibility(View.VISIBLE);
