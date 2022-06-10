@@ -17,8 +17,8 @@ public class SLoginResponse extends BaseResponseModel {
         return data;
     }
 
-    public boolean isRequestSuccess(){//1001为注册成功
-        return SUCCESS_CODE.equals(getCode()) || "1001".equals(getCode());
+    public boolean isRequestSuccess(){//5001为注册成功
+        return (SUCCESS_CODE.equals(getCode()) || SUCCESS_CODE_REG.equals(getCode())) && this.data != null;
     }
 
     public void setData(Data data) {

@@ -9,7 +9,7 @@ import com.mw.sdk.login.constant.ApiRequestMethod;
 import com.mw.sdk.login.model.request.AccountRegRequestBean;
 
 //1000成功
-//1001註冊登入成功
+//5001註冊登入成功
 public class AccountRegisterRequestTask extends BaseLoginRequestTask {
 
     private AccountRegRequestBean regRequestBean;

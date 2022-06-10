@@ -9,7 +9,7 @@ import com.mw.sdk.login.constant.ApiRequestMethod;
 import com.mw.sdk.login.model.request.ChangePwdRequestBean;
 
 //1000成功
-//1001註冊登入成功
+//5001註冊登入成功
 public class ChangePwdRequestTask extends BaseLoginRequestTask {
 
     private ChangePwdRequestBean pwdRequestBean;

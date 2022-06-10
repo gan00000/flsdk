@@ -12,6 +12,7 @@ import java.io.Serializable;
 public class BaseResponseModel implements Serializable {
 
     public static final String SUCCESS_CODE = "1000";
+    public static final String SUCCESS_CODE_REG = "5001";
 
     private String rawResponse;
     private String code = "";

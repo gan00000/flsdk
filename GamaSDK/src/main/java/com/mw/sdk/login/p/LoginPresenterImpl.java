@@ -503,7 +503,6 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_MG);
 
                     }else {
-
                         ToastUtils.toast(getActivity(), sLoginResponse.getMessage());
                     }
 
@@ -1067,10 +1066,10 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             GamaUtil.savePreviousLoginType(mActivity, loginType);
             try {
                 if (loginResponse != null) {
-                    //1001 注册成功    1000登入成功
-                    if (SStringUtil.isEqual("1000", loginResponse.getCode())) {
+                    //5001 注册成功    1000登入成功
+                    if (SStringUtil.isEqual(BaseResponseModel.SUCCESS_CODE, loginResponse.getCode())) {
                         SdkEventLogger.trackinLoginEvent(mActivity, loginResponse);
-                    } else if (SStringUtil.isEqual("1001", loginResponse.getCode())) {
+                    } else if (SStringUtil.isEqual(BaseResponseModel.SUCCESS_CODE_REG, loginResponse.getCode())) {
                         SdkEventLogger.trackinRegisterEvent(mActivity, loginResponse);
                     }
                 }
