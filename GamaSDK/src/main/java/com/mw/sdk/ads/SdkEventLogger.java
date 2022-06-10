@@ -16,14 +16,15 @@ import com.core.base.utils.SPUtil;
 import com.core.base.utils.SStringUtil;
 import com.mw.base.bean.AdsRequestBean;
 import com.mw.base.bean.BasePayBean;
+import com.mw.base.cfg.ConfigBean;
 import com.mw.base.cfg.ResConfig;
 import com.mw.base.constant.GamaCommonKey;
 import com.mw.base.utils.GamaUtil;
+import com.mw.sdk.BuildConfig;
 import com.mw.sdk.login.execute.GamaVfcodeSwitchRequestTask;
 import com.mw.sdk.login.model.response.SLoginResponse;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.google.SGoogleProxy;
-import com.google.ads.conversiontracking.AdWordsConversionReporter;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -42,21 +43,26 @@ public class SdkEventLogger {
             AppsFlyerLib.getInstance().setCollectIMEI(false);
             AppsFlyerLib.getInstance().setCollectAndroidID(false);
             String afDevKey = ResConfig.getConfigInAssetsProperties(activity,"sdk_ads_appflyer_dev_key");
-            if(TextUtils.isEmpty(afDevKey)) {
-                PL.e("af dev key empty!");
+            if(!TextUtils.isEmpty(afDevKey)) {
+//                AppsFlyerLib.getInstance().startTracking(activity.getApplication(), afDevKey);
+                AppsFlyerLib.getInstance().init(afDevKey,null,activity.getApplication());//应用层调用
+                AppsFlyerLib.getInstance().start(activity.getApplicationContext());
+                if (BuildConfig.DEBUG) {//debug打印日志
+                    AppsFlyerLib.getInstance().setDebugLog(true);
+                }
             } else {
-                AppsFlyerLib.getInstance().startTracking(activity.getApplication(), afDevKey);
+                PL.e("af dev key empty!");
             }
 
             SFacebookProxy.initFbSdk(activity.getApplicationContext());
 
             // Google Android first open conversion tracking snippet
             // Add this code to the onCreate() method of your application activity
-            String gama_ads_adword_conversionId = ResConfig.getConfigInAssetsProperties(activity,"gama_ads_adword_conversionId");
-            if (SStringUtil.isNotEmpty(gama_ads_adword_conversionId)) {
-                AdWordsConversionReporter.reportWithConversionId(activity.getApplicationContext(),
-                        gama_ads_adword_conversionId, ResConfig.getConfigInAssetsProperties(activity,"gama_ads_adword_label"), "0.00", false);
-            }
+//            String gama_ads_adword_conversionId = ResConfig.getConfigInAssetsProperties(activity,"gama_ads_adword_conversionId");
+//            if (SStringUtil.isNotEmpty(gama_ads_adword_conversionId)) {
+//                AdWordsConversionReporter.reportWithConversionId(activity.getApplicationContext(),
+//                        gama_ads_adword_conversionId, ResConfig.getConfigInAssetsProperties(activity,"gama_ads_adword_label"), "0.00", false);
+//            }
 
             //adjust
 //            GamaAj.activeAj(activity);
@@ -165,9 +171,9 @@ public class SdkEventLogger {
             //adjust
 //            GamaAj.trackEvent(activity, SdkAdsConstant.GAMA_EVENT_ROLE_INFO, map);
             //计算留存
-            GamaAdsUtils.caculateRetention(activity, userId);
+//            GamaAdsUtils.caculateRetention(activity, userId);
             //计算在线时长
-            GamaAdsUtils.uploadOnlineTime(activity, GamaAdsUtils.GamaOnlineType.TYPE_CHANGE_ROLE);
+//            GamaAdsUtils.uploadOnlineTime(activity, GamaAdsUtils.GamaOnlineType.TYPE_CHANGE_ROLE);
             //上报给gama服务器
 //            GamaAdsUtils.upLoadRoleInfo(activity, map);
 

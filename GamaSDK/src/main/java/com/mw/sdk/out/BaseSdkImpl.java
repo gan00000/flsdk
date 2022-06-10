@@ -12,10 +12,14 @@ import com.core.base.utils.AppUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.SignatureUtil;
+import com.gama.pay.IPay;
+import com.gama.pay.gp.GooglePayActivity2;
+import com.mw.base.bean.BasePayBean;
 import com.mw.base.bean.SGameLanguage;
 import com.mw.base.bean.SLoginType;
 import com.mw.base.bean.SPayType;
 import com.mw.base.cfg.ConfigRequest;
+import com.mw.base.constant.GamaCommonKey;
 import com.mw.base.utils.GamaUtil;
 import com.mw.base.utils.Localization;
 import com.mw.sdk.login.ILoginCallBack;
@@ -88,7 +92,7 @@ public class BaseSdkImpl implements IFLSDK {
                 //清除上一次登录成功的返回值
                 //GamaUtil.saveSdkLoginData(activity, "");
                 //重置用户登入时长
-                GamaUtil.resetOnlineTimeInfo(activity);
+//                GamaUtil.resetOnlineTimeInfo(activity);
                 //获取Google 广告ID
                 SdkEventLogger.registerGoogleAdId(activity);
                 //Gama平台安装上报
@@ -105,7 +109,7 @@ public class BaseSdkImpl implements IFLSDK {
                 //时间打点开始
 //                LogTimer.getInstance().start(activity);
 
-//                        setGameLanguage(activity,SGameLanguage.zh_TW);
+//                setGameLanguage(activity,SGameLanguage.zh_TW);
 
 //                ConfigRequest.requestBaseCfg(activity.getApplicationContext());//下载配置文件
 //                ConfigRequest.requestTermsCfg(activity.getApplicationContext());//下载服务条款
@@ -402,6 +406,42 @@ public class BaseSdkImpl implements IFLSDK {
 //                }
                 GamaShare.onActivityResult(activity, requestCode, resultCode, data);
 
+                if (requestCode == GooglePayActivity2.GooglePayReqeustCode && resultCode == GooglePayActivity2.GooglePayResultCode) {
+                    if (data != null) {
+                        Bundle bundle = data.getExtras();
+
+                        if (bundle != null) {
+                            int payStatus = bundle.getInt(IPay.PAY_STATUS);
+                            if (payStatus == IPay.PAY_SUCCESS){
+                                BasePayBean payBean = (BasePayBean) bundle.getSerializable(GamaCommonKey.PURCHASE_DATA);
+                                //GooglePayCreateOrderIdReqBean googlePayCreateOrderIdReqBean = (GooglePayCreateOrderIdReqBean)bundle.getSerializable(IPay.GooglePayCreateOrderIdReqBean_Key);
+                                if (payBean != null){
+
+                                    SdkEventLogger.trackinPayEvent(activity, bundle);
+
+                                    if (iPayListener != null) { //支付刷新的回调
+                                        PL.i(TAG, "GooglePay支付回调");
+                                        iPayListener.onPaySuccess(payBean.getProductId(), payBean.getCpOrderId());
+                                    }
+
+                                }
+                            }else if (payStatus == IPay.PAY_FAIL){
+                                if (iPayListener != null) { //支付刷新的回调
+                                    PL.i(TAG, "GooglePay支付回调");
+                                    iPayListener.onPayFail();
+                                }
+                            }
+
+                        }
+
+                        if (iPayListener != null) { //支付刷新的回调
+                            PL.i(TAG, "GooglePay支付回调");
+                            iPayListener.onPayFinish(null);
+                        } else {
+                            PL.i(TAG, "GooglePay支付回调为空");
+                        }
+                    }
+                }
             }
         });
     }
@@ -434,7 +474,7 @@ public class BaseSdkImpl implements IFLSDK {
                 }
 
                 //上报在线时长
-                GamaAdsUtils.uploadOnlineTime(activity, GamaAdsUtils.GamaOnlineType.TYPE_EXIT_GAME);
+//                GamaAdsUtils.uploadOnlineTime(activity, GamaAdsUtils.GamaOnlineType.TYPE_EXIT_GAME);
             }
         });
     }

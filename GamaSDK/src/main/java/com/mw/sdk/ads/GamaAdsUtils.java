@@ -53,7 +53,7 @@ public class GamaAdsUtils {
         }
     }
 
-    public static int betweenDate(Date startDate, Date endDate) {
+    private static int betweenDate(Date startDate, Date endDate) {
         int between = 0;
         SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault());
         try {
@@ -147,7 +147,7 @@ public class GamaAdsUtils {
                 SGoogleProxy.firebaseAnalytics(context, SdkAdsConstant.GAMA_EVENT_ONLINE_TIME, b);
 
                 //AppsFlyer上报
-                AppsFlyerLib.getInstance().trackEvent(context.getApplicationContext(), SdkAdsConstant.GAMA_EVENT_ONLINE_TIME, map);
+                AppsFlyerLib.getInstance().logEvent(context.getApplicationContext(), SdkAdsConstant.GAMA_EVENT_ONLINE_TIME, map);
 
             } else {
                 PL.i("不需要上传在线时长");

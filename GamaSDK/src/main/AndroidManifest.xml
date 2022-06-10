@@ -3,13 +3,14 @@
 
     <!--需要添加以下配置 start-->
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- VERY IMPORTANT! Don't forget this permission, or in-app billing won't work. -->
-    <uses-permission android:name="com.android.vending.BILLING" />
+<!--    <uses-permission android:name="com.android.vending.BILLING" />-->
+<!--    Apps targeting Android 13 should add the following permission to AndroidManifest.xml to access the Android Advertising Identifier-->
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
 
     <uses-feature
         android:name="android.hardware.microphone"
@@ -105,38 +106,21 @@
 <!--        ================================-->
 
         <!--The AppsFlyer Install Receiver is first and will broadcast to all receivers placed below it-->
-        <receiver android:name="com.appsflyer.MultipleInstallBroadcastReceiver" android:exported="true">
-            <intent-filter>
-                <action android:name="com.android.vending.INSTALL_REFERRER" />
-            </intent-filter>
-        </receiver>
+<!--        <receiver android:name="com.appsflyer.MultipleInstallBroadcastReceiver" android:exported="true">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="com.android.vending.INSTALL_REFERRER" />-->
+<!--            </intent-filter>-->
+<!--        </receiver>-->
 
-        <receiver android:name="com.mw.sdk.GamaBroadcastReceiver" android:exported="true">
-            <intent-filter>
-                <action android:name="com.android.vending.INSTALL_REFERRER" />
-            </intent-filter>
-        </receiver>
-
-        <receiver
-            android:name="com.google.ads.conversiontracking.InstallReceiver"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="com.android.vending.INSTALL_REFERRER" />
-            </intent-filter>
-        </receiver>
-
-        <receiver
-            android:name="com.mw.sdk.receiver.SDKReceiver"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.gamamobi.PAY_REPLACE_OK" />
-                <action android:name="com.gamamobi.PAY_QUERY_TASK_START" />
-            </intent-filter>
-        </receiver>
+<!--        <receiver android:name="com.mw.sdk.GamaBroadcastReceiver" android:exported="true">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="com.android.vending.INSTALL_REFERRER" />-->
+<!--            </intent-filter>-->
+<!--        </receiver>-->
 
 
         <provider
-            android:authorities="${applicationId}.GamaProvider"
+            android:authorities="${applicationId}.MWSDKProvider"
             android:name="com.core.base.fileprovider.SDKFileProvider"
             android:exported="false"
             android:grantUriPermissions="true">
