@@ -150,6 +150,10 @@ public class GBillingHelper implements PurchasesUpdatedListener {
     /**
      * 消费购买
      *
+     * 由于消耗请求偶尔会失败，因此您必须检查安全的后端服务器，确保所有购买令牌都未被使用过，这样您的应用就不会针对同一购买交易多次授予权利。
+     * 或者，您的应用也可以等到您收到 Google Play 发来的成功消耗响应后再授予权利。如果您选择在 Google Play 发来成功消耗响应之前不让用户消耗所购商品，
+     * 那么您必须非常小心，在消耗请求发出后时刻跟踪相应商品。
+     *
      * @param purchase
      * @param isReplaceConsume 是否补单的消费
      */
@@ -256,6 +260,9 @@ public class GBillingHelper implements PurchasesUpdatedListener {
                     launchPurchaseFlow(context, userId, orderId, list.get(0));
                 }else{
                     PL.i( "queryProductDetailsAsync finish fail,SkuDetails not find");
+                    if (purchasesUpdatedListener != null) {
+                        purchasesUpdatedListener.onPurchasesUpdated(billingResult, null);
+                    }
                 }
             }
         });
@@ -308,6 +315,13 @@ public class GBillingHelper implements PurchasesUpdatedListener {
 
     /**
      * 查询已购买
+     * 在大多数情况下，您的应用会通过 PurchasesUpdatedListener 收到购买交易的通知。
+     * 但在某些情况下，您的应用通过调用 BillingClient.queryPurchasesAsync() 得知购买交易
+     *
+     * 需验证购买交易，请先检查购买交易的状态是否为 PURCHASED。如果购买交易的状态为 PENDING，则您应按照处理待处理的交易中的说明处理购买交易。
+     * 对于通过 onPurchasesUpdated() 或 queryPurchasesAsync() 接收的购买交易，您应在应用授予权利之前进一步验证购买交易以确保其合法性
+     *
+     * 一旦您验证了购买交易，您的应用就可以向用户授予权利了。授予权利后，您的应用必须确认购买交易。此确认会告知 Google Play 您已授予购买权。
      */
     public void queryPurchasesAsync(Context context, PurchasesResponseListener purchasesResponseListener) {
         Runnable queryPurchaseRunnable = new Runnable() {

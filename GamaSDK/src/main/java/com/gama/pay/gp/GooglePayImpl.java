@@ -33,7 +33,6 @@ import com.gama.pay.gp.util.GBillingHelper;
 import com.gama.pay.gp.util.PayHelper;
 import com.mw.base.bean.BasePayBean;
 import com.mw.base.constant.GamaCommonKey;
-import com.mw.base.utils.GamaUtil;
 import com.mw.sdk.BuildConfig;
 
 import java.util.ArrayList;
@@ -65,7 +64,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
      */
     private GooglePayCreateOrderIdReqBean createOrderIdReqBean;
 
-    private Activity activity;
+    private Activity mActivity;
 
     private IPayCallBack iPayCallBack;
     /**
@@ -167,7 +166,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
             PL.w("activity is null");
             return;
         }
-        this.activity = activity;
+        this.mActivity = activity;
         if (payReqBean == null) {
             PL.w("payReqBean is null");
             return;
@@ -193,7 +192,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
         loadingDialog = new LoadingDialog(activity);
         if (this.createOrderIdReqBean.isInitOk()) {
             //开始Google储值
-            googlePaySetUp();
+            googlePaySetUp(activity);
         } else {
             ToastUtils.toast(activity, "please log in to the game first");
             callbackFail("can not find role info:" + this.createOrderIdReqBean.print());
@@ -251,7 +250,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
     /**
      * <p>Title: googlePaySetUp</p> <p>Description: 启动远程服务</p>
      */
-    private void googlePaySetUp() {
+    private void googlePaySetUp(Activity activity) {
 
         loadingDialog.showProgressDialog();
 
@@ -292,6 +291,8 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
 
                                                 PL.i("onPurchasesUpdated finish...");
                                                 if (purchasesList == null){
+                                                    //SkuDetails not find
+//                                                    callbackFail("");
                                                     return;
                                                 }
                                                 //支付回调
@@ -359,12 +360,13 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
 
     @Override
     public void onQuerySkuResult(Context context, List<SkuDetails> productDetails) {
-//        if (list != null && list.size() == 1) {
+        if (productDetails != null && !productDetails.isEmpty()) {
 //            skuDetails = list.get(0);
 //            mBillingHelper.launchPurchaseFlow(activity, createOrderBean.getOrderId(), skuDetails);
-//        } else {
-//            PL.i( "onQuerySkuResult not current query. ");
-//        }
+        } else {
+            PL.i( "onQuerySkuResult not current query. ");
+            callbackFail("SkuDetails not find");
+        }
     }
 
     @Override
@@ -481,11 +483,11 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
                 PL.i( "onPurchaseUpdate Nothing waiting for consume.");
             } else { //有待补发的商品
                 PL.i( "onPurchaseUpdate start replacement consume.");
-                mBillingHelper.consumePurchaseList(activity, waitConsumeList, true,null);
+                mBillingHelper.consumePurchaseList(mActivity, waitConsumeList, true,null);
             }
             if (currentPurchase != null) { //当次的购买消费
                 PL.i( "onPurchaseUpdate start replacement consume.");
-                mBillingHelper.consumePurchase(activity, currentPurchase, false,null);
+                mBillingHelper.consumePurchase(mActivity, currentPurchase, false,null);
             } else {
                 if (isPending) { //当次购买的商品待付款，否则继续等待当次购买信息回调
                     callbackFail("Purchase is now pending, waiting for complete.");

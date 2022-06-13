@@ -1,6 +1,5 @@
 package com.gama.pay.gp.util;
 
-import android.app.Activity;
 import android.content.Context;
 import android.text.TextUtils;
 
@@ -9,7 +8,7 @@ import com.core.base.utils.SStringUtil;
 import com.gama.pay.gp.bean.req.WebPayReqBean;
 import com.gama.pay.gp.constants.GooglePayContant;
 import com.mw.base.cfg.ResConfig;
-import com.mw.base.utils.GamaUtil;
+import com.mw.base.utils.SdkUtil;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -43,13 +42,13 @@ public class PayHelper {
 			webPayReqBean.setIswifi(simOperator);
 		}
 
-		webPayReqBean.setUserId(GamaUtil.getUid(context));
+		webPayReqBean.setUserId(SdkUtil.getUid(context));
 		webPayReqBean.setCpOrderId(cpOrderId);
 //		webPayReqBean.setRoleLevel(roleLevel);
 		webPayReqBean.setExtra(extra);
 
 		webPayReqBean.setPsid("62");
-		webPayReqBean.setTimestamp(GamaUtil.getSdkTimestamp(context));
+		webPayReqBean.setTimestamp(SdkUtil.getSdkTimestamp(context));
 
 		return webPayReqBean;
 
