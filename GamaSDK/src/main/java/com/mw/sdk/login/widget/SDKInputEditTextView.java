@@ -32,6 +32,7 @@ public class SDKInputEditTextView extends RelativeLayout {
     }
 
     private ImageView eyeImageView;
+    private ImageView iv_account_history;
     private TextView labTextView;
     private EditText inputEditText;
     private View eyeImageViewLayout;
@@ -42,6 +43,10 @@ public class SDKInputEditTextView extends RelativeLayout {
 
     public EditText getInputEditText() {
         return inputEditText;
+    }
+
+    public ImageView getIv_account_history() {
+        return iv_account_history;
     }
 
     //默认密码显示，非密码类型不显示
@@ -106,6 +111,7 @@ public class SDKInputEditTextView extends RelativeLayout {
             inputEditText = contentView.findViewById(R.id.sdk_input_item_et);
             line1View = contentView.findViewById(R.id.sdk_input_item_line1);
             bottomLine = contentView.findViewById(R.id.sdk_input_item_bottom_line);
+            iv_account_history = contentView.findViewById(R.id.iv_account_history);
 
 
             eyeImageViewLayout.setOnClickListener(new OnClickListener() {

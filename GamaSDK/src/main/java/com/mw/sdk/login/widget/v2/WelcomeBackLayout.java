@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.core.base.callback.SFCallBack;
@@ -136,7 +137,13 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
             @Override
             public void onClick(View v) {
                 accountPopupWindow.showOnView(accountSdkInputEditTextView);
-
+                accountSdkInputEditTextView.getIv_account_history().setSelected(true);
+            }
+        });
+        accountPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                accountSdkInputEditTextView.getIv_account_history().setSelected(false);
             }
         });
 

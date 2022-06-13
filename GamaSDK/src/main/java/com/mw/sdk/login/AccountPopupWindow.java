@@ -71,15 +71,6 @@ public class AccountPopupWindow extends PopupWindow {
         }else{
             this.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         }
-        this.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-//                for (LimitedItemBean limitedItemBean : limitedItemBeanArrayList) {
-//                    limitedItemBean.setIsSelect(0);
-//                }
-            }
-        });
-
         historyAccountRv = contentView.findViewById(R.id.sdk_history_account_rv);
     }
 

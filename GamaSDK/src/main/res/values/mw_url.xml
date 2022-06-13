@@ -31,7 +31,7 @@
 
 
     <!--使用者條款 - 服務條款 -->
-    <string name="zh_tw_sdk_terms_service_url" translatable="false">http://member.meowplayer.com/archive/dev_archive.html</string>
+    <string name="zh_tw_sdk_terms_service_url" translatable="false">https://member.meowplayer.com/sdk/agreement/%s_agreement.html</string>
 
     <!--客服链接-->
     <string name="zh_tw_gama_service_url" translatable="false">https://platform.flyfungame.com/web/page/service.app</string>

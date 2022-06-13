@@ -979,10 +979,14 @@ public class SdkUtil {
 
         imageView.setImageResource(imageResId);
         // 使光标始终在最后位置
-        if (SStringUtil.isNotEmpty(showName)) {
-            editText.setText(showName);
-            Editable etable = editText.getText();
-            Selection.setSelection(etable, showName.length());
+        try {
+            if (SStringUtil.isNotEmpty(showName)) {
+                editText.setText(showName);
+                Editable etable = editText.getText();
+                Selection.setSelection(etable, showName.length());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

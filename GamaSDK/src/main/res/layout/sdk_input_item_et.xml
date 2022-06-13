@@ -97,7 +97,8 @@
                 android:layout_marginStart="@dimen/px_4"
                 android:gravity="center_vertical"
                 android:scaleType="fitCenter"
-                android:src="@mipmap/sdk_list_down"
+                android:id="@+id/iv_account_history"
+                android:src="@drawable/iv_selector_account_more"
                 />
         </LinearLayout>
 

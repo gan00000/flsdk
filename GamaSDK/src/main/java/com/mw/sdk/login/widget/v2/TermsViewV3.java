@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.core.base.BaseWebViewClient;
 import com.mw.base.cfg.ResConfig;
+import com.mw.base.utils.SdkUtil;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.mw.sdk.R;
 
@@ -88,6 +89,7 @@ public class TermsViewV3 extends SLoginBaseRelativeLayout {
         });*/
 
         serviceUrl = ResConfig.getServiceTermUrl(getContext());
+        serviceUrl = String.format(serviceUrl, ResConfig.getGameCode(getContext()));
 //        String privateUrl = ResConfig.getPrivateTermUrl(getContext());
 
         termsView1 = (WebView) contentView.findViewById(R.id.sdk_terms_webview);

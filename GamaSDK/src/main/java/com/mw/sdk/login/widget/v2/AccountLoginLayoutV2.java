@@ -1,12 +1,15 @@
 package com.mw.sdk.login.widget.v2;
 
 import android.content.Context;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.PopupWindow;
 
 import com.mw.base.bean.SLoginType;
 import com.mw.base.cfg.ConfigBean;
@@ -276,14 +279,55 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
                 loginPasswordEditText.setText("");
             }
         });
+        accountPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                accountSdkInputEditTextView.getIv_account_history().setSelected(false);
+            }
+        });
+
         historyAccountListBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 accountPopupWindow.showOnView(accountSdkInputEditTextView);
-
+                accountSdkInputEditTextView.getIv_account_history().setSelected(true);
             }
         });
 
+        loginAccountEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (currentAccountModel != null && s != null){
+                    if (SLoginType.LOGIN_TYPE_MG.equals(currentAccountModel.getLoginType())){
+
+                    }else {
+                        //平台帐号登入界面这里，帐号输入框这里如果删除或者编辑修改过原内容，帐号类型自动变成平台帐号类型，
+                        // icon也变成平台帐号icon，下方的免注册登入也自动变成可编辑状态
+                        if(!s.toString().equals(currentAccountModel.getUserId())){
+                            AccountModel tempAccountModel = new AccountModel();
+                            currentAccountModel = tempAccountModel;
+                            tempAccountModel.setLoginType(SLoginType.LOGIN_TYPE_MG);
+                            tempAccountModel.setAccount(s.toString());
+                            tempAccountModel.setPassword("");
+                            SdkUtil.setAccountWithIcon(tempAccountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
+                            pwdSdkInputEditTextView.setPwdInputEnable(true);
+                            pwdSdkInputEditTextView.getInputEditText().setText("");
+                        }
+                    }
+
+                }
+            }
+        });
         return contentView;
     }
 
