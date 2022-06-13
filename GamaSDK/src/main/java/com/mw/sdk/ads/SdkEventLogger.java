@@ -8,10 +8,8 @@ import android.text.TextUtils;
 import com.appsflyer.AFInAppEventParameterName;
 import com.appsflyer.AppsFlyerLib;
 import com.core.base.utils.PL;
-import com.core.base.utils.SStringUtil;
-import com.mw.base.bean.BasePayBean;
+import com.gama.pay.gp.bean.res.BasePayBean;
 import com.mw.base.cfg.ResConfig;
-import com.mw.base.constant.GamaCommonKey;
 import com.mw.base.utils.SdkUtil;
 import com.mw.sdk.BuildConfig;
 import com.mw.sdk.login.model.response.SLoginResponse;
@@ -139,12 +137,12 @@ public class SdkEventLogger {
     /**
      * 统计储值数据
      */
-    public static void trackinPayEvent(Context context, Bundle bundle){
-        if(bundle == null) {
+    public static void trackinPayEvent(Context context, BasePayBean payBean){
+        if(payBean == null) {
             PL.i(TAG, "trackinPay bundle null");
             return;
         }
-        BasePayBean payBean = (BasePayBean) bundle.getSerializable(GamaCommonKey.PURCHASE_DATA);
+//        BasePayBean payBean = (BasePayBean) bundle.getSerializable(GamaCommonKey.PURCHASE_DATA);
 
         String orderId = "";
         String productId = "";

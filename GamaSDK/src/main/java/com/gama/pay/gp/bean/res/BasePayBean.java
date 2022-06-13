@@ -1,4 +1,4 @@
-package com.mw.base.bean;
+package com.gama.pay.gp.bean.res;
 
 import java.io.Serializable;
 

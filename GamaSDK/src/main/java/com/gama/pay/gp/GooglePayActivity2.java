@@ -10,6 +10,7 @@ import com.gama.pay.IPay;
 import com.gama.pay.IPayCallBack;
 import com.gama.pay.IPayFactory;
 import com.gama.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
+import com.gama.pay.gp.bean.res.BasePayBean;
 
 public class GooglePayActivity2 extends SBaseActivity {
 
@@ -32,18 +33,29 @@ public class GooglePayActivity2 extends SBaseActivity {
 		iPay = IPayFactory.create(IPayFactory.PAY_GOOGLE);
 		iPay.onCreate(this);
 		//设置Google储值的回调
+//		iPay.setIPayCallBack(new IPayCallBack() {
+//
+//			@Override
+//			public void success(Bundle bundle) {
+//				setResultForPay(bundle);
+//				activity.finish();
+//			}
+//
+//			@Override
+//			public void fail(Bundle bundle) {
+//				setResultForPay(bundle);
+//				activity.finish();
+//			}
+//		});
 		iPay.setIPayCallBack(new IPayCallBack() {
-
 			@Override
-			public void success(Bundle bundle) {
-				setResultForPay(bundle);
-				activity.finish();
+			public void success(BasePayBean basePayBean) {
+
 			}
 
 			@Override
-			public void fail(Bundle bundle) {
-				setResultForPay(bundle);
-				activity.finish();
+			public void fail(BasePayBean basePayBean) {
+
 			}
 		});
 
@@ -67,7 +79,7 @@ public class GooglePayActivity2 extends SBaseActivity {
 		super.onActivityResult(requestCode, resultCode, data);
 		iPay.onActivityResult(this,requestCode,resultCode,data);
 		// TODO: 2018/7/5  Facebook统计储值数据
-		CallbackManager.Factory.create().onActivityResult(requestCode, resultCode, data);
+//		CallbackManager.Factory.create().onActivityResult(requestCode, resultCode, data);
 	}
 
 	@Override

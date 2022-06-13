@@ -12,14 +12,11 @@ import com.core.base.utils.AppUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.SignatureUtil;
-import com.gama.pay.IPay;
 import com.gama.pay.gp.GooglePayActivity2;
-import com.mw.base.bean.BasePayBean;
 import com.mw.base.bean.SGameLanguage;
 import com.mw.base.bean.SLoginType;
 import com.mw.base.bean.SPayType;
 import com.mw.base.cfg.ConfigRequest;
-import com.mw.base.constant.GamaCommonKey;
 import com.mw.base.utils.SdkUtil;
 import com.mw.base.utils.Localization;
 import com.mw.sdk.login.ILoginCallBack;
@@ -48,7 +45,6 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 
 public class BaseSdkImpl implements IMWSDK {
@@ -67,7 +63,7 @@ public class BaseSdkImpl implements IMWSDK {
     protected SWebViewDialog otherPayWebViewDialog;
     protected SWebViewDialog csSWebViewDialog;
 
-    protected IPayListener iPayListener;
+//    protected IPayListener iPayListener;
 
     public BaseSdkImpl() {
         iLogin = ObjFactory.create(DialogLoginImpl.class);
@@ -213,13 +209,13 @@ public class BaseSdkImpl implements IMWSDK {
             PL.i("点击过快，无效");
             return;
         }
-        iPayListener = listener;
+//        iPayListener = listener;
         firstClickTime = System.currentTimeMillis();
 
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                startPay(activity, payType, cpOrderId, productId, extra);
+                startPay(activity, payType, cpOrderId, productId, extra, listener);
             }
         });
     }
@@ -259,7 +255,7 @@ public class BaseSdkImpl implements IMWSDK {
         openWebPage(activity,GamaOpenWebType.CUSTOM_URL,activity.getString(R.string.emm_service_url));
     }
 
-    protected void startPay(Activity activity, SPayType payType, String cpOrderId, String productId, String extra) {}
+    protected void startPay(Activity activity, SPayType payType, String cpOrderId, String productId, String extra,IPayListener listener) {}
 
     /*
    private void startPay(Activity activity, SPayType payType, String cpOrderId, String productId, String extra) {
@@ -406,7 +402,7 @@ public class BaseSdkImpl implements IMWSDK {
                 GamaShare.onActivityResult(activity, requestCode, resultCode, data);
 
                 if (requestCode == GooglePayActivity2.GooglePayReqeustCode && resultCode == GooglePayActivity2.GooglePayResultCode) {
-                    if (data != null) {
+                    /*if (data != null) {
                         Bundle bundle = data.getExtras();
 
                         if (bundle != null) {
@@ -439,7 +435,7 @@ public class BaseSdkImpl implements IMWSDK {
                         } else {
                             PL.i(TAG, "GooglePay支付回调为空");
                         }
-                    }
+                    }*/
                 }
             }
         });

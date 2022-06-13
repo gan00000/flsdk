@@ -157,7 +157,7 @@ public class GBillingHelper implements PurchasesUpdatedListener {
      * @param purchase
      * @param isReplaceConsume 是否补单的消费
      */
-    public void consumePurchase(Context context, Purchase purchase, boolean isReplaceConsume,ConsumeResponseListener consumeResponseListener) {
+    public void consumeAsync(Context context, Purchase purchase, boolean isReplaceConsume,ConsumeResponseListener consumeResponseListener) {
         // Verify the purchase.
         // Ensure entitlement was not already granted for this purchaseToken.
         // Grant entitlement to the user.
@@ -206,11 +206,11 @@ public class GBillingHelper implements PurchasesUpdatedListener {
      * @param purchases
      * @param isReplaceConsume 是否补单的消费
      */
-    public void consumePurchaseList(Context context, List<Purchase> purchases, boolean isReplaceConsume,ConsumeResponseListener consumeResponseListener) {
-        for (Purchase purchase : purchases) {
-            consumePurchase(context, purchase, isReplaceConsume,consumeResponseListener);
-        }
-    }
+//    public void consumePurchaseList(Context context, List<Purchase> purchases, boolean isReplaceConsume,ConsumeResponseListener consumeResponseListener) {
+//        for (Purchase purchase : purchases) {
+//            consumeAsync(context, purchase, isReplaceConsume,consumeResponseListener);
+//        }
+//    }
 
     /**
      * 查询商品详情

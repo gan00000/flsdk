@@ -1,6 +1,7 @@
 package com.gama.pay.gp;
 
 import android.app.Activity;
+import android.content.Context;
 import android.text.TextUtils;
 
 import com.android.billingclient.api.Purchase;
@@ -40,6 +41,9 @@ public class PayApi {
 
             @Override
             public void timeout(String code) {
+                if (sfCallBack != null){
+                    sfCallBack.fail(null,"");
+                }
             }
 
             @Override
@@ -58,17 +62,21 @@ public class PayApi {
     /**
      * 正常购买发币
      */
-    public static void requestSendStone(Activity activity, final Purchase mPurchase, SFCallBack<GPExchangeRes> sfCallBack) {
-        GoogleExchangeReqBean exchangeReqBean = new GoogleExchangeReqBean(activity);
+    public static void requestSendStone(Context context, final Purchase mPurchase, SFCallBack<GPExchangeRes> sfCallBack) {
+
+        GoogleExchangeReqBean exchangeReqBean = new GoogleExchangeReqBean(context);
         exchangeReqBean.setDataSignature(mPurchase.getSignature());
         exchangeReqBean.setPurchaseData(mPurchase.getOriginalJson());
+        exchangeReqBean.setUserId(mPurchase.getAccountIdentifiers().getObfuscatedAccountId());
+        exchangeReqBean.setOrderId(mPurchase.getAccountIdentifiers().getObfuscatedProfileId());
+        exchangeReqBean.setGoogleOrderId(mPurchase.getOrderId());
 
-        exchangeReqBean.setRequestUrl(PayHelper.getPreferredUrl(activity));
-        exchangeReqBean.setRequestSpaUrl(PayHelper.getSpareUrl(activity));
+        exchangeReqBean.setRequestUrl(PayHelper.getPreferredUrl(context));
+        exchangeReqBean.setRequestSpaUrl(PayHelper.getSpareUrl(context));
 
         exchangeReqBean.setRequestMethod(GooglePayDomainSite.GOOGLE_SEND);
 
-        GoogleExchangeReqTask googleExchangeReqTask = new GoogleExchangeReqTask(activity, exchangeReqBean);
+        GoogleExchangeReqTask googleExchangeReqTask = new GoogleExchangeReqTask(context, exchangeReqBean);
         googleExchangeReqTask.setReqCallBack(new ISReqCallBack<GPExchangeRes>() {
 
             @Override
@@ -79,9 +87,9 @@ public class PayApi {
                         sfCallBack.success(gpExchangeRes,rawResult);
                     }
                 } else {
-                    if (gpExchangeRes!=null && !TextUtils.isEmpty(gpExchangeRes.getMessage())){
-                        ToastUtils.toast(activity,gpExchangeRes.getMessage());
-                    }
+//                    if (gpExchangeRes!=null && !TextUtils.isEmpty(gpExchangeRes.getMessage())){
+//                        ToastUtils.toast(activity,gpExchangeRes.getMessage());
+//                    }
                     PL.i("GoogleExchangeReqTask failed");
                     if (sfCallBack != null){
                         sfCallBack.fail(gpExchangeRes,rawResult);
@@ -91,10 +99,16 @@ public class PayApi {
 
             @Override
             public void timeout(String code) {
+                if (sfCallBack != null){
+                    sfCallBack.fail(null,"");
+                }
             }
 
             @Override
             public void noData() {
+                if (sfCallBack != null){
+                    sfCallBack.fail(null,"");
+                }
             }
 
             @Override

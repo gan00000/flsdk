@@ -1,6 +1,7 @@
 package com.gama.pay;
 
 import android.app.Activity;
+import android.content.Context;
 
 import com.core.base.callback.IGameLifeCycle;
 import com.gama.pay.gp.bean.req.PayReqBean;
@@ -10,14 +11,15 @@ import com.gama.pay.gp.bean.req.PayReqBean;
  */
 
 public interface IPay extends IGameLifeCycle{
-    String PAY_STATUS = "status";
-    int PAY_SUCCESS = 93;
-    int PAY_FAIL = 94;
+//    String PAY_STATUS = "status";
+//    int PAY_SUCCESS = 93;
+//    int PAY_FAIL = 94;
 
     /**
      * 进入Google储值流程
      */
     void startPay(Activity activity,PayReqBean payReqBean);
+    void startQueryPurchase(Context mContext);
 
     /**
      * 设置Google储值的回调

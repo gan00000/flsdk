@@ -4,25 +4,20 @@ import android.content.Context;
 
 import com.core.base.utils.SStringUtil;
 import com.gama.pay.gp.constants.GooglePayContant;
+import com.mw.base.bean.SGameBaseRequestBean;
+import com.mw.base.bean.SSdkBaseRequestBean;
 import com.mw.base.utils.SdkUtil;
 
-public class PayReqBean extends BPayReqBean {
+public class PayReqBean extends SGameBaseRequestBean {
 
-	private String userId;
 	private String payFrom = GooglePayContant.PAY_FROM;
-
-	private String serverCode;
-	private String serverName;
-	private String roleId = "";
-	private String roleName = "";
-
 	private String extra = "";
-
-	private String roleLevel = "";
 	/**
 	 * 原厂订单号
 	 */
 	private String cpOrderId = "";
+
+	private String psid = "61";
 
 	public PayReqBean(Context context) {
 		super(context);
@@ -32,41 +27,19 @@ public class PayReqBean extends BPayReqBean {
 	}
 
 	private void initm(Context context) {
-		userId = SdkUtil.getUid(context);
-
-		serverCode = SdkUtil.getServerCode(context);
-		serverName = SdkUtil.getServerName(context);
-		roleName = SdkUtil.getRoleName(context);
-		roleId = SdkUtil.getRoleId(context);
-		roleLevel = SdkUtil.getRoleLevel(context);
 	}
 
 	public boolean isInitOk(){
-		return !SStringUtil.hasEmpty(userId,getGameCode(),serverCode,roleId);
+		return !SStringUtil.hasEmpty(getUserId(),getGameCode(),getServerCode(),getRoleId());
 //		return true;
 	}
 
 	public String print() {
-		return "userId='" + userId + '\'' +
-				", serverCode='" + serverCode + '\'' +
-				", roleId='" + roleId;
+		return "userId='" + getUserId() + '\'' +
+				", serverCode='" + getServerCode() + '\'' +
+				", roleId='" + getRoleId();
 	}
 
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
-	public String getServerCode() {
-		return serverCode;
-	}
-
-	public void setServerCode(String serverCode) {
-		this.serverCode = serverCode;
-	}
 
 
 	public String getPayFrom() {
@@ -85,30 +58,6 @@ public class PayReqBean extends BPayReqBean {
 		this.extra = extra;
 	}
 
-	public String getRoleName() {
-		return roleName;
-	}
-
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
-	}
-
-	public String getRoleLevel() {
-		return roleLevel;
-	}
-
-	public void setRoleLevel(String roleLevel) {
-		this.roleLevel = roleLevel;
-	}
-
-	public String getRoleId() {
-		return roleId;
-	}
-
-	public void setRoleId(String roleId) {
-		this.roleId = roleId;
-	}
-
 	/**
 	 * 返回原厂订单号
 	 */
@@ -120,4 +69,11 @@ public class PayReqBean extends BPayReqBean {
 		this.cpOrderId = cpOrderId;
 	}
 
+	public String getPsid() {
+		return psid;
+	}
+
+	public void setPsid(String psid) {
+		this.psid = psid;
+	}
 }

@@ -2,9 +2,13 @@ package com.gama.pay.gp.bean.req;
 
 import android.content.Context;
 
-public class GoogleExchangeReqBean extends BPayReqBean {
+import com.mw.base.bean.SSdkBaseRequestBean;
 
+public class GoogleExchangeReqBean extends SSdkBaseRequestBean {
 
+	private String userId;
+	private String orderId;
+	private String googleOrderId;
 	private String purchaseData;
 	private String dataSignature;
 
@@ -52,6 +56,29 @@ public class GoogleExchangeReqBean extends BPayReqBean {
 		this.productPrice = productPrice;
 	}
 
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public String getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(String orderId) {
+		this.orderId = orderId;
+	}
+
+	public String getGoogleOrderId() {
+		return googleOrderId;
+	}
+
+	public void setGoogleOrderId(String googleOrderId) {
+		this.googleOrderId = googleOrderId;
+	}
 
 	public GoogleExchangeReqBean(Context context) {
 		super(context);
