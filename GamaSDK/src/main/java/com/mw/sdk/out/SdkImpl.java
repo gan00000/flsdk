@@ -28,48 +28,7 @@ public class SdkImpl extends BaseSdkImpl {
     SdkImpl() {
         super();
     }
-
-    @Override
-    public void onPause(final Activity activity) {
-        super.onPause(activity);
-        activity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                //平台
-//                PlatformManager.getInstance().pauseAndStop(activity);
-            }
-        });
-    }
-
-    @Override
-    public void onStop(final Activity activity) {
-        super.onStop(activity);
-        activity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                //平台
-//                PlatformManager.getInstance().pauseAndStop(activity);
-                //
-//                GooglePayHelper.getInstance().setForeground(false);
-            }
-        });
-    }
-
-    @Override
-    public void onDestroy(final Activity activity) {
-        super.onDestroy(activity);
-        activity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                //平台
-//                PlatformManager.getInstance().destory(activity);
-                //退出游戏时停止定时查单
-//                GooglePayHelper.getInstance().stopQueryTask();
-
-            }
-        });
-    }
-
+    
     @Override
     protected void startPay(final Activity activity, final SPayType payType, final String cpOrderId, final String productId, final String extra) {
         super.startPay(activity, payType, cpOrderId, productId, extra);

@@ -13,6 +13,8 @@ import androidx.annotation.StyleRes;
 
 import com.mw.base.bean.SLoginType;
 import com.mw.base.utils.Localization;
+import com.mw.sdk.ads.EventConstant;
+import com.mw.sdk.ads.SdkEventLogger;
 import com.mw.sdk.login.constant.BindType;
 import com.mw.sdk.login.constant.ViewType;
 import com.mw.sdk.login.model.AccountModel;
@@ -138,6 +140,8 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
         iLoginPresenter.setLineLogin(sLineSignIn);
 
         iLoginPresenter.autoLogin(activity);
+
+        SdkEventLogger.trackingWithEventName(getActivity(), EventConstant.EventName.OPEN_LOGIN_SCREEN.name());
     }
 
     @Override

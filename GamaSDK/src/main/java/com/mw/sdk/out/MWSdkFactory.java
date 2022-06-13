@@ -4,9 +4,9 @@ package com.mw.sdk.out;
  * Created by GanYuanrong on 2017/2/13.
  */
 
-public class FlSdkFactory {
+public class MWSdkFactory {
 
-    public static IFLSDK create(){
+    public static IMWSDK create(){
 
         return new SdkImpl();
     }

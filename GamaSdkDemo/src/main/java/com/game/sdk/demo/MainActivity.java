@@ -20,15 +20,15 @@ import com.mw.base.utils.SLog;
 import com.mw.sdk.login.ILoginCallBack;
 import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.callback.IPayListener;
-import com.mw.sdk.out.FlSdkFactory;
-import com.mw.sdk.out.IFLSDK;
+import com.mw.sdk.out.MWSdkFactory;
+import com.mw.sdk.out.IMWSDK;
 import com.mw.sdk.demo.R;
 
 public class MainActivity extends Activity {
 
     protected Button loginButton, othersPayButton, googlePayBtn, shareButton, showPlatform, demo_language,
             demo_cs;
-    protected IFLSDK mIFLSDK;
+    protected IMWSDK mIMWSDK;
     protected String userId;
 
     @Override
@@ -44,15 +44,15 @@ public class MainActivity extends Activity {
         googlePayBtn = findViewById(R.id.demo_pay_google);
         demo_cs = findViewById(R.id.demo_cs);
 
-        mIFLSDK = FlSdkFactory.create();
+        mIMWSDK = MWSdkFactory.create();
 
         //初始化sdk
-        mIFLSDK.initSDK(this, SGameLanguage.zh_TW);
+        mIMWSDK.initSDK(this, SGameLanguage.zh_TW);
 
         //在游戏Activity的onCreate生命周期中调用
-        mIFLSDK.onCreate(this);
+        mIMWSDK.onCreate(this);
 
-        mIFLSDK.setGameLanguage(MainActivity.this, SGameLanguage.zh_TW);
+        mIMWSDK.setGameLanguage(MainActivity.this, SGameLanguage.zh_TW);
 
 //        demo_language.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -86,7 +86,7 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
 
                 //登陆接口 ILoginCallBack为登录成功后的回调
-                mIFLSDK.login(MainActivity.this, new ILoginCallBack() {
+                mIMWSDK.login(MainActivity.this, new ILoginCallBack() {
                     @Override
                     public void onLogin(SLoginResponse sLoginResponse) {
                         if (sLoginResponse != null && sLoginResponse.getData() != null) {
@@ -123,7 +123,7 @@ public class MainActivity extends Activity {
                             String vipLevel = "5"; //角色vip等级
                             String serverCode = "999"; //角色伺服器id
                             String serverName = "S1"; //角色伺服器名称
-                            mIFLSDK.registerRoleInfo(MainActivity.this, roleId, roleName, roleLevel, vipLevel, serverCode, serverName);
+                            mIMWSDK.registerRoleInfo(MainActivity.this, roleId, roleName, roleLevel, vipLevel, serverCode, serverName);
                         } else {
                             PL.i("从登录界面返回");
                             AlertDialog.Builder builder;
@@ -170,7 +170,7 @@ public class MainActivity extends Activity {
 //                com.game.superand.1usd
 //                com.game.superand.2usd
                 String skuId = "com.sfinsh.1day";
-                mIFLSDK.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(),skuId, "xxxx", new IPayListener() {
+                mIMWSDK.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(),skuId, "xxxx", new IPayListener() {
                     @Override
                     public void onPayFinish(Bundle bundle) {
                         PL.i("支付结束");
@@ -200,7 +200,7 @@ public class MainActivity extends Activity {
                 /**
                  * 打开客服页面
                  */
-                mIFLSDK.openCs(MainActivity.this);
+                mIMWSDK.openCs(MainActivity.this);
             }
         });
 
@@ -210,7 +210,7 @@ public class MainActivity extends Activity {
     protected void onResume() {
         super.onResume();
         PL.i("activity onResume");
-        mIFLSDK.onResume(this);
+        mIMWSDK.onResume(this);
     }
 
 
@@ -218,14 +218,14 @@ public class MainActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        mIFLSDK.onActivityResult(this, requestCode, resultCode, data);
+        mIMWSDK.onActivityResult(this, requestCode, resultCode, data);
 
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        mIFLSDK.onPause(this);
+        mIMWSDK.onPause(this);
         PL.i("activity onPause");
     }
 
@@ -233,27 +233,27 @@ public class MainActivity extends Activity {
     protected void onStop() {
         super.onStop();
         PL.i("activity onStop");
-        mIFLSDK.onStop(this);
+        mIMWSDK.onStop(this);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         PL.i("activity onDestroy");
-        mIFLSDK.onDestroy(this);
+        mIMWSDK.onDestroy(this);
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         PL.i("activity onRequestPermissionsResult");
-        mIFLSDK.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
+        mIMWSDK.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
     }
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        mIFLSDK.onWindowFocusChanged(this, hasFocus);
+        mIMWSDK.onWindowFocusChanged(this, hasFocus);
     }
 
     private boolean isLogin() {

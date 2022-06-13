@@ -16,10 +16,10 @@ import java.util.Set;
  * Created by gan on 2017/2/13.
  */
 
-public interface IFLSDK extends IGameLifeCycle {
+public interface IMWSDK extends IGameLifeCycle {
 
-    @Deprecated
-    void initSDK(Activity activity);
+//    @Deprecated
+//    void initSDK(Activity activity);
 
     void initSDK(Activity activity, SGameLanguage language);
 
@@ -82,7 +82,7 @@ public interface IFLSDK extends IGameLifeCycle {
      * @param eventName
      * @param map
      */
-    void trackEvent(Activity activity, String eventName, Map<String, Object> map, Set<EventConstant.EventReportChannel> mediaSet);
+    void trackEvent(Activity activity, EventConstant.EventName eventName, Map<String, Object> map);
 
     void trackCreateRoleEvent(Activity activity, String roleId,String roleName);
 

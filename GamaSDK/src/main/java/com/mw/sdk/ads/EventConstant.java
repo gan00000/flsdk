@@ -13,7 +13,12 @@ public class EventConstant {
         SELECT_SERVER,
         CREATE_ROLE,
         START_GUIDE,
-        COMPLETE_GUIDE
+        COMPLETE_GUIDE,
+
+        /**
+         * 首储事件
+         */
+        FIRST_PAY;
     }
 
     /**
@@ -56,11 +61,6 @@ public class EventConstant {
      * 留存事件
      */
     public static final String GAMA_RETENTION = "event_%dretention";
-    /**
-     * 首储事件
-     */
-    public static final String GAMA_EVENT_FIRSTPAY = "event_first_pay";
-
 
     public static class ParameterName{
 
@@ -98,6 +98,8 @@ public class EventConstant {
         public static final String ORDER_ID = "sdk_orderId";
         public static final String PURCHASE_TIME = "sdk_purchase_time";
         public static final String CURRENCY = "sdk_event_currency";
+
+        public static final String TIME = "TIME";
 
     }
 

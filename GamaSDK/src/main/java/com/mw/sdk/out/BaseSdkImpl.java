@@ -51,7 +51,7 @@ import java.util.Map;
 import java.util.Set;
 
 
-public class BaseSdkImpl implements IFLSDK {
+public class BaseSdkImpl implements IMWSDK {
     private static final String TAG = BaseSdkImpl.class.getSimpleName();
     private static final int PERMISSION_REQUEST_CODE = 401;
     private ILogin iLogin;
@@ -74,11 +74,11 @@ public class BaseSdkImpl implements IFLSDK {
         PL.i("BaseSdkImpl 构造函数");
     }
 
-    @Deprecated
-    @Override
-    public void initSDK(final Activity activity) {
-        initSDK(activity, SGameLanguage.zh_TW);
-    }
+//    @Deprecated
+//    @Override
+//    public void initSDK(final Activity activity) {
+//        initSDK(activity, SGameLanguage.zh_TW);
+//    }
 
     @Override
     public void initSDK(final Activity activity, final SGameLanguage gameLanguage) {
@@ -891,11 +891,16 @@ public class BaseSdkImpl implements IFLSDK {
     }
 
     @Override
-    public void trackEvent(final Activity activity, final String eventName, final Map<String, Object> map, final Set<EventConstant.EventReportChannel> channelSet) {
+    public void trackEvent(final Activity activity, EventConstant.EventName eventName, final Map<String, Object> map) {
+        Log.i(TAG, "trackEvent...");
+        if (eventName == null){
+            Log.i(TAG, "trackEvent eventName is null");
+            return;
+        }
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                SdkEventLogger.trackingWithEventName(activity, eventName, map, channelSet);
+                SdkEventLogger.trackingWithEventName(activity, eventName.name(), map, null);
             }
         });
     }
