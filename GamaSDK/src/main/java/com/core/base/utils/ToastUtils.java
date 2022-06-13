@@ -26,7 +26,8 @@ public class ToastUtils {
 
 	public static void toast(Context context, String msg, int time) {
 		if (context != null) {
-			Toast toast = Toast.makeText(context, msg + "", time);
+			Toast toast = Toast.makeText(context.getApplicationContext(), msg + "", time);
+			//Android 11后无效
 			toast.setGravity(Gravity.CENTER,0,0);
 			toast.show();
 		}
