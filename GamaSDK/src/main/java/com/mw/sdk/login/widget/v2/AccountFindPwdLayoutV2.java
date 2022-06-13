@@ -11,9 +11,8 @@ import android.widget.TextView;
 
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
-import com.mw.base.utils.GamaUtil;
+import com.mw.base.utils.SdkUtil;
 import com.mw.sdk.SBaseRelativeLayout;
-import com.mw.sdk.login.constant.ApiRequestMethod;
 import com.mw.sdk.R;
 import com.mw.sdk.login.widget.SDKInputEditTextView;
 import com.mw.sdk.login.widget.SDKInputType;
@@ -131,7 +130,7 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
             return;
         }
 
-        if (!GamaUtil.checkAccount(account)) {
+        if (!SdkUtil.checkAccount(account)) {
             ToastUtils.toast(getContext(),R.string.text_account_format);
             return;
         }
@@ -169,7 +168,7 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
             return;
         }
 
-        if (!GamaUtil.checkPassword(password)) {
+        if (!SdkUtil.checkPassword(password)) {
             ToastUtils.toast(getContext(),R.string.text_pwd_format);
             return;
         }

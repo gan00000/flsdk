@@ -2,26 +2,15 @@ package com.mw.sdk.ads;
 
 import android.app.Activity;
 import android.content.Context;
-import android.os.Bundle;
-import android.text.TextUtils;
 
-import com.appsflyer.AppsFlyerLib;
 import com.core.base.utils.PL;
-import com.mw.base.bean.GamaOnlineRequestBean;
-import com.mw.base.excute.GamaOnlineRequestTask;
 import com.mw.base.excute.GamaRoleInfoRequestTask;
-import com.mw.base.utils.GamaUtil;
+import com.mw.base.utils.SdkUtil;
 import com.mw.sdk.R;
-import com.thirdlib.facebook.SFacebookProxy;
-import com.thirdlib.google.SGoogleProxy;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
@@ -33,7 +22,7 @@ public class GamaAdsUtils {
      * 计算留存
      */
     public static void caculateRetention(Context context, String userid) {
-        long firstLoginDate = GamaUtil.getFirstLoginDate(context, userid);
+        long firstLoginDate = SdkUtil.getFirstLoginDate(context, userid);
         PL.i("firstLoginDate : " + firstLoginDate);
         if(firstLoginDate > 0) { //有登入记录
             Date firstDate = new Date(firstLoginDate);
@@ -43,13 +32,13 @@ public class GamaAdsUtils {
             for(int i : intArray) {
                 PL.i("intArray : " + i);
                 if(bewteen == i) {
-                    String retentions = String.format(SdkAdsConstant.GAMA_RETENTION, i);
+                    String retentions = String.format(EventConstant.GAMA_RETENTION, i);
                     PL.i("retentions : " + retentions);
                     SdkEventLogger.trackingWithEventName((Activity) context, retentions, null, null);
                 }
             }
         } else {
-            GamaUtil.saveFirstLoginDate(context, userid);
+            SdkUtil.saveFirstLoginDate(context, userid);
         }
     }
 

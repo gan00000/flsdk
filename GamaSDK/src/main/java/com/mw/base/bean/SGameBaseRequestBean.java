@@ -3,7 +3,7 @@ package com.mw.base.bean;
 import android.content.Context;
 
 import com.core.base.utils.SStringUtil;
-import com.mw.base.utils.GamaUtil;
+import com.mw.base.utils.SdkUtil;
 
 /**
  * <p>Title: SSdkBaseRequestBean</p> <p>Description: 进入游戏角色之后请求参数实体，所有属性实例时都已经初始化</p>
@@ -30,15 +30,15 @@ public class SGameBaseRequestBean extends SSdkBaseRequestBean {
 
 
     private void initGameField(Context context) {
-        userId = GamaUtil.getUid(context);
+        userId = SdkUtil.getUid(context);
 
-        serverCode = GamaUtil.getServerCode(context);
-        serverName = GamaUtil.getServerName(context);
-        roleName = GamaUtil.getRoleName(context);
-        roleId = GamaUtil.getRoleId(context);
+        serverCode = SdkUtil.getServerCode(context);
+        serverName = SdkUtil.getServerName(context);
+        roleName = SdkUtil.getRoleName(context);
+        roleId = SdkUtil.getRoleId(context);
 
-        roleLevel = GamaUtil.getRoleLevel(context);
-        roleVipLevel = GamaUtil.getRoleVip(context);
+        roleLevel = SdkUtil.getRoleLevel(context);
+        roleVipLevel = SdkUtil.getRoleVip(context);
     }
 
     public boolean isInitOk(){

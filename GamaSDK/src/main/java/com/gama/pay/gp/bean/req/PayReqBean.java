@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.core.base.utils.SStringUtil;
 import com.gama.pay.gp.constants.GooglePayContant;
-import com.mw.base.utils.GamaUtil;
+import com.mw.base.utils.SdkUtil;
 
 public class PayReqBean extends BPayReqBean {
 
@@ -32,13 +32,13 @@ public class PayReqBean extends BPayReqBean {
 	}
 
 	private void initm(Context context) {
-		userId = GamaUtil.getUid(context);
+		userId = SdkUtil.getUid(context);
 
-		serverCode = GamaUtil.getServerCode(context);
-		serverName = GamaUtil.getServerName(context);
-		roleName = GamaUtil.getRoleName(context);
-		roleId = GamaUtil.getRoleId(context);
-		roleLevel = GamaUtil.getRoleLevel(context);
+		serverCode = SdkUtil.getServerCode(context);
+		serverName = SdkUtil.getServerName(context);
+		roleName = SdkUtil.getRoleName(context);
+		roleId = SdkUtil.getRoleId(context);
+		roleLevel = SdkUtil.getRoleLevel(context);
 	}
 
 	public boolean isInitOk(){

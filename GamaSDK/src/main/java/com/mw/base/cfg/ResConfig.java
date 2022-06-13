@@ -10,7 +10,7 @@ import com.core.base.utils.ResUtil;
 import com.core.base.utils.SPUtil;
 import com.core.base.utils.SStringUtil;
 import com.mw.base.bean.SGameLanguage;
-import com.mw.base.utils.GamaUtil;
+import com.mw.base.utils.SdkUtil;
 import com.mw.base.utils.Localization;
 
 import java.util.Properties;
@@ -49,7 +49,7 @@ public class ResConfig {
 
 
     public static String getGameLanguage(Context context) {
-        String language = SPUtil.getSimpleString(context, GamaUtil.GAMA_SP_FILE, GamaUtil.GAMA_GAME_LANGUAGE);
+        String language = SPUtil.getSimpleString(context, SdkUtil.SDK_SP_FILE, SdkUtil.SDK_GAME_LANGUAGE);
         if (TextUtils.isEmpty(language)) {
             language = SGameLanguage.zh_TW.getLanguage();
         }
@@ -60,7 +60,7 @@ public class ResConfig {
         if (TextUtils.isEmpty(language)) {
             return;
         }
-        SPUtil.saveSimpleInfo(context, GamaUtil.GAMA_SP_FILE, GamaUtil.GAMA_GAME_LANGUAGE, language);
+        SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE, SdkUtil.SDK_GAME_LANGUAGE, language);
     }
 
     public static String getGameLanguageLower(Context context) {
@@ -243,7 +243,7 @@ public class ResConfig {
      */
     public static String getCdnLocalUrl(Context context, String resName) {
 
-        String url = GamaUtil.getCfgValueByKey(context, resName, "");
+        String url = SdkUtil.getCfgValueByKey(context, resName, "");
         if (SStringUtil.isEmpty(url)) {
             url = getConfigUrl(context, resName);
         }

@@ -8,7 +8,7 @@ import com.core.base.utils.PL;
 import com.mw.base.cfg.ResConfig;
 import com.mw.base.constant.RequestDomain;
 import com.mw.base.bean.restful.GamaRestfulRequestBean;
-import com.mw.base.utils.GamaUtil;
+import com.mw.base.utils.SdkUtil;
 import com.google.gson.Gson;
 
 import java.util.Map;
@@ -35,12 +35,12 @@ public class GamaRoleInfoRequestTask extends GamaBaseRestRequestTask {
         requestBean = new GamaRestfulRequestBean(context);
 
         String paramsJson = new Gson().toJson(map);
-        String userId = GamaUtil.getUid(context);
+        String userId = SdkUtil.getUid(context);
         String gameCode = requestBean.getGameCode();
         String packageName = context.getPackageName();
         String beijingTime = GamaTimeUtil.getBeiJingTime(context);
         String localTime = GamaTimeUtil.getDisplayTime(context);
-        String signature = GamaUtil.getSdkAccessToken(context);
+        String signature = SdkUtil.getSdkAccessToken(context);
 
         String requestDomain = ResConfig.getAdsPreferredUrl(context) + RequestDomain.SEPARATE_SERVER;
         url = requestDomain + url;

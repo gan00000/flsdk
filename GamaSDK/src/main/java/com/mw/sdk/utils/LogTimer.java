@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.core.base.utils.PL;
-import com.mw.sdk.ads.SdkAdsConstant;
+import com.mw.sdk.ads.EventConstant;
 import com.mw.sdk.R;
 import com.mw.sdk.ads.SdkEventLogger;
 
@@ -78,7 +78,7 @@ public class LogTimer {
         }
         for (int i = 0; i < intArray.length; i++) {
             int minute = intArray[i];
-            String eventName = String.format(SdkAdsConstant.GAMA_EVENT_MINUTE, minute);
+            String eventName = String.format(EventConstant.GAMA_EVENT_MINUTE, minute);
             if (time >= minute * 1000 * 60 && !sp.getBoolean(eventName, false)) {
                 SdkEventLogger.trackingWithEventName(context, eventName, null, null);
                 sp.edit().putBoolean(eventName, true).apply();

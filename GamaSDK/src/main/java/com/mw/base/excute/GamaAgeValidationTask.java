@@ -8,7 +8,7 @@ import com.core.base.utils.SStringUtil;
 import com.mw.base.cfg.ResConfig;
 import com.mw.base.constant.RequestDomain;
 import com.mw.base.bean.restful.GamaRestfulRequestBean;
-import com.mw.base.utils.GamaUtil;
+import com.mw.base.utils.SdkUtil;
 
 public class GamaAgeValidationTask extends GamaBaseRestRequestTask {
 
@@ -31,7 +31,7 @@ public class GamaAgeValidationTask extends GamaBaseRestRequestTask {
 
         requestBean = new GamaRestfulRequestBean(context);
 
-        String userId = GamaUtil.getUid(context);
+        String userId = SdkUtil.getUid(context);
         String gameCode = requestBean.getGameCode();
         String packageName = context.getPackageName();
         String timeStamp = System.currentTimeMillis() + "";
@@ -39,7 +39,7 @@ public class GamaAgeValidationTask extends GamaBaseRestRequestTask {
         String signature = SStringUtil.toMd5(ResConfig.getAppKey(context) + userId + gameCode + timeStamp);
 
         String requestDomain = "";
-        if (GamaUtil.isInterfaceSurfixWithApp(context)) {
+        if (SdkUtil.isInterfaceSurfixWithApp(context)) {
             requestDomain = ResConfig.getPayPreferredUrl(context) + RequestDomain.AGE_VALIDATION_APP;
         } else {
             requestDomain = ResConfig.getPayPreferredUrl(context) + RequestDomain.AGE_VALIDATION;

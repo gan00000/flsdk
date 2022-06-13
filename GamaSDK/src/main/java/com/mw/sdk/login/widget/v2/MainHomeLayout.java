@@ -8,7 +8,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 
 import com.mw.base.cfg.ConfigBean;
-import com.mw.base.utils.GamaUtil;
+import com.mw.base.utils.SdkUtil;
 import com.mw.sdk.login.constant.ViewType;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.mw.sdk.R;
@@ -72,7 +72,7 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
 //        ss.setSpan(new UnderlineSpan(), ssText.length() - 5, ssText.length(), Paint.UNDERLINE_TEXT_FLAG);
 //        ss.setSpan(new ForegroundColorSpan(), ssText.length() - 5, ssText.length(), Paint.UNDERLINE_TEXT_FLAG);
 
-        ConfigBean configBean = GamaUtil.getSdkCfg(getContext());
+        ConfigBean configBean = SdkUtil.getSdkCfg(getContext());
         if (configBean != null){
             ConfigBean.VersionData versionData = configBean.getSdkConfigLoginData(getContext());
             if (versionData != null){

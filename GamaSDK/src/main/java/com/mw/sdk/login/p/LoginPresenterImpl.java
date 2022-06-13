@@ -26,7 +26,7 @@ import com.facebook.internal.ImageRequest;
 import com.mw.base.bean.GamaAreaInfoBean;
 import com.mw.base.bean.SLoginType;
 import com.mw.base.cfg.ResConfig;
-import com.mw.base.utils.GamaUtil;
+import com.mw.base.utils.SdkUtil;
 import com.mw.sdk.login.constant.BindType;
 import com.mw.sdk.login.execute.AccountLoginRequestTask;
 import com.mw.sdk.login.execute.AccountRegisterRequestTask;
@@ -172,7 +172,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     PL.i("twitter login : " + id);
                     PL.i("google sign in : " + id);
                     if (SStringUtil.isNotEmpty(id)) {
-                        GamaUtil.saveTwitterId(activity,id);
+                        SdkUtil.saveTwitterId(activity,id);
                         ThirdLoginRegRequestBean thirdLoginRegRequestBean = new ThirdLoginRegRequestBean(activity);
                         thirdLoginRegRequestBean.setThirdPlatId(id);
                         thirdLoginRegRequestBean.setRegistPlatform(SLoginType.LOGIN_TYPE_TWITTER);
@@ -224,7 +224,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             showMainHomeView();
         }*/
 
-        List<AccountModel> accountModels = GamaUtil.getAccountModels(this.mActivity);
+        List<AccountModel> accountModels = SdkUtil.getAccountModels(this.mActivity);
 //        iLoginView.showMainHomeView();
         if (accountModels.isEmpty()){
             if (iLoginView != null){
@@ -271,7 +271,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             public void success(String id, String mFullName, String mEmail, String idTokenString) {
                 PL.i("google sign in : " + id);
                 if (SStringUtil.isNotEmpty(id)) {
-                    GamaUtil.saveGoogleId(activity,id);
+                    SdkUtil.saveGoogleId(activity,id);
                     ThirdLoginRegRequestBean thirdLoginRegRequestBean = new ThirdLoginRegRequestBean(activity);
                     thirdLoginRegRequestBean.setThirdPlatId(id);
                     thirdLoginRegRequestBean.setRegistPlatform(SLoginType.LOGIN_TYPE_GOOGLE);
@@ -333,7 +333,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
                     if (sLoginResponse.isRequestSuccess()){
 
-                        GamaUtil.saveAccountModel(getContext(), thirdLoginRegRequestBean.getRegistPlatform(),"","",
+                        SdkUtil.saveAccountModel(getContext(), thirdLoginRegRequestBean.getRegistPlatform(),"","",
                                 sLoginResponse.getData().getUserId(),
                                 sLoginResponse.getData().getToken(),
                                 sLoginResponse.getData().getTimestamp(),
@@ -440,7 +440,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
         String account = "";//GamaUtil.getAccount(mActivity);
         String password = "";//GamaUtil.getPassword(mActivity);
-        AccountModel accountModel = GamaUtil.getLastLoginAccount(mActivity);
+        AccountModel accountModel = SdkUtil.getLastLoginAccount(mActivity);
         if (accountModel == null) {
 //            account = GamaUtil.getMacAccount(mActivity);
 //            password = GamaUtil.getMacPassword(mActivity);
@@ -498,7 +498,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         ToastUtils.toast(getActivity(), R.string.text_account_change_pwd_success);
 
                         iLoginView.changePwdSuccess(sLoginResponse);
-                        GamaUtil.saveAccountModel(activity,account,newPwd,sLoginResponse.getData().getUserId(),sLoginResponse.getData().getToken(), sLoginResponse.getData().getTimestamp(),true);
+                        SdkUtil.saveAccountModel(activity,account,newPwd,sLoginResponse.getData().getUserId(),sLoginResponse.getData().getToken(), sLoginResponse.getData().getTimestamp(),true);
                         //登录成功后直接进入游戏
                         handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_MG);
 
@@ -540,8 +540,8 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         ToastUtils.toast(getActivity(), R.string.text_account_bind_success);
 
 //                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GAMA);
-                        GamaUtil.updateAccountModel(getActivity(),sLoginResponse.getData().getUserId(),true);
-                        GamaUtil.saveAccountModel(getActivity(), account, pwd,sLoginResponse.getData().getUserId(),sLoginResponse.getData().getToken(),
+                        SdkUtil.updateAccountModel(getActivity(),sLoginResponse.getData().getUserId(),true);
+                        SdkUtil.saveAccountModel(getActivity(), account, pwd,sLoginResponse.getData().getUserId(),sLoginResponse.getData().getToken(),
                                 sLoginResponse.getData().getTimestamp(),true);//记住账号密码
                         if (iLoginView != null){
                             iLoginView.accountBindSuccess(sLoginResponse);
@@ -585,7 +585,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 if (sLoginResponse != null) {
                     if (sLoginResponse.isRequestSuccess()) {
 
-                        GamaUtil.saveAccountModel(getContext(), SLoginType.LOGIN_TYPE_GUEST,"","",
+                        SdkUtil.saveAccountModel(getContext(), SLoginType.LOGIN_TYPE_GUEST,"","",
                                 sLoginResponse.getData().getUserId(),
                                 sLoginResponse.getData().getToken(),
                                 sLoginResponse.getData().getTimestamp(),
@@ -747,7 +747,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
                     if (sLoginResponse.isRequestSuccess()){
 
-                        GamaUtil.saveAccountModel(getContext(), SLoginType.LOGIN_TYPE_FB,"","",
+                        SdkUtil.saveAccountModel(getContext(), SLoginType.LOGIN_TYPE_FB,"","",
                                 sLoginResponse.getData().getUserId(),
                                 sLoginResponse.getData().getToken(),
                                 sLoginResponse.getData().getTimestamp(),
@@ -793,7 +793,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     if (sLoginResponse.isRequestSuccess()) {
                         ToastUtils.toast(getActivity(), R.string.py_register_success);
 
-                        GamaUtil.saveAccountModel(activity,account,password,sLoginResponse.getData().getUserId(),sLoginResponse.getData().getToken(),
+                        SdkUtil.saveAccountModel(activity,account,password,sLoginResponse.getData().getUserId(),sLoginResponse.getData().getToken(),
                                 sLoginResponse.getData().getTimestamp(),true);
                         handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_MG);
 
@@ -930,7 +930,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 return;
             }
 
-            if (!GamaUtil.checkAccount(account)) {
+            if (!SdkUtil.checkAccount(account)) {
 //                showLoginView();
                 return;
             }
@@ -996,10 +996,10 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                             } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_TWITTER, registPlatform)) {//Google登录
 
                                 ThirdLoginRegRequestBean thirdLoginRegRequestBean = new ThirdLoginRegRequestBean(activity);
-                                thirdLoginRegRequestBean.setThirdPlatId(GamaUtil.getTwitterId(activity));
+                                thirdLoginRegRequestBean.setThirdPlatId(SdkUtil.getTwitterId(activity));
                                 thirdLoginRegRequestBean.setRegistPlatform(SLoginType.LOGIN_TYPE_TWITTER);
                                 thirdLoginRegRequestBean.setGoogleClientId(ResConfig.getGoogleClientId(activity));
-                                thirdLoginRegRequestBean.setGoogleIdToken(GamaUtil.getGoogleIdToken(activity));
+                                thirdLoginRegRequestBean.setGoogleIdToken(SdkUtil.getGoogleIdToken(activity));
                                 thirdPlatLogin(activity, thirdLoginRegRequestBean);
                             }
 
@@ -1059,11 +1059,11 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
     private void handleRegisteOrLoginSuccess(SLoginResponse loginResponse, String rawResult, String loginType) {
 
-        GamaUtil.saveSdkLoginData(getContext(), loginResponse.getRawResponse());
+        SdkUtil.saveSdkLoginData(getContext(), loginResponse.getRawResponse());
         loginResponse.getData().setLoginType(loginType);
         if (SStringUtil.isNotEmpty(loginType)) {//loginType为空时是账号注入登录，不能空时是其他普通登入
 
-            GamaUtil.savePreviousLoginType(mActivity, loginType);
+            SdkUtil.savePreviousLoginType(mActivity, loginType);
             try {
                 if (loginResponse != null) {
                     //5001 注册成功    1000登入成功
@@ -1122,11 +1122,11 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 if (sLoginResponse != null) {
                     if (sLoginResponse.isRequestSuccess()) {
                         ToastUtils.toast(getActivity(), R.string.text_account_change_pwd_success);
-                        GamaUtil.removeAccountModel(activity,account);
+                        SdkUtil.removeAccountModel(activity,account);
                         if (iLoginView != null){
                             iLoginView.findPwdSuccess(sLoginResponse);
                         }
-                        GamaUtil.saveAccountModel(getActivity(), account, newPwd,sLoginResponse.getData().getUserId(),sLoginResponse.getData().getToken(),
+                        SdkUtil.saveAccountModel(getActivity(), account, newPwd,sLoginResponse.getData().getUserId(),sLoginResponse.getData().getToken(),
                                 sLoginResponse.getData().getTimestamp(),true);//记住账号密码
                         handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_MG);
 
@@ -1162,7 +1162,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     public void accountBind(final Activity activity,final AccountModel currentAccountMode, final String account, final String pwd, final String areaCode, final String phone, final String vfcode, BindType bindType) {
         this.mActivity = activity;
         if (bindType == BindType.BIND_UNIQUE){
-            String uniqueId = GamaUtil.getGoogleAdid1AndroidId(activity);
+            String uniqueId = SdkUtil.getGoogleAdid1AndroidId(activity);
             if(TextUtils.isEmpty(uniqueId)){
                 PL.d("thirdPlatId:" + uniqueId);
                 return;
@@ -1444,7 +1444,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             return;
         }
 
-        if (!GamaUtil.checkAccount(account)) {
+        if (!SdkUtil.checkAccount(account)) {
             ToastUtils.toast(activity,R.string.text_account_format);
             return;
         }
@@ -1452,7 +1452,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             ToastUtils.toast(getActivity(), R.string.py_password_empty);
             return;
         }
-        if (!GamaUtil.checkPassword(password)) {
+        if (!SdkUtil.checkPassword(password)) {
             ToastUtils.toast(activity,R.string.text_pwd_format);
             return;
         }
@@ -1472,7 +1472,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     if (sLoginResponse.isRequestSuccess()) {
 //                        GamaUtil.saveAccount(getContext(),account);
                         if(isSaveAccount) {
-                            GamaUtil.saveAccountModel(activity,account,password,sLoginResponse.getData().getUserId(),sLoginResponse.getData().getToken(),
+                            SdkUtil.saveAccountModel(activity,account,password,sLoginResponse.getData().getUserId(),sLoginResponse.getData().getToken(),
                                     sLoginResponse.getData().getTimestamp(),true);
                         }
                         handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_MG);
@@ -1572,7 +1572,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 if (sLoginResponse != null){
                     ToastUtils.toast(getActivity(),sLoginResponse.getMessage());
                     if (sLoginResponse.isRequestSuccess()) {
-                        GamaUtil.setAccountLinked(activity);
+                        SdkUtil.setAccountLinked(activity);
                         if(callbackList != null && callbackList.size() > 0) {
                             for (SBaseRelativeLayout.OperationCallback callback : callbackList) {
                                 callback.statusCallback(SBaseRelativeLayout.OperationCallback.BIND_OK);

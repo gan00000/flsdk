@@ -1,14 +1,10 @@
 package com.mw.sdk.login.widget;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Build;
 import androidx.annotation.RequiresApi;
 import android.text.Editable;
 import android.text.InputType;
-import android.text.Selection;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -18,11 +14,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.core.base.utils.SStringUtil;
-import com.core.base.utils.ToastUtils;
-import com.mw.base.utils.GamaUtil;
 import com.mw.sdk.R;
 
 

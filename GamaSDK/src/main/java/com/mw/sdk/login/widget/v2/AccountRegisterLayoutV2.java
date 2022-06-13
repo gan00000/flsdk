@@ -10,7 +10,7 @@ import android.widget.EditText;
 
 import com.core.base.utils.ToastUtils;
 import com.mw.sdk.SBaseRelativeLayout;
-import com.mw.base.utils.GamaUtil;
+import com.mw.base.utils.SdkUtil;
 import com.mw.sdk.R;
 import com.mw.sdk.login.widget.SDKInputEditTextView;
 import com.mw.sdk.login.widget.SDKInputType;
@@ -114,11 +114,11 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
         }
 
 
-        if (!GamaUtil.checkAccount(account)) {
+        if (!SdkUtil.checkAccount(account)) {
             toast(R.string.text_account_format);
             return;
         }
-        if (!GamaUtil.checkPassword(password)) {
+        if (!SdkUtil.checkPassword(password)) {
             toast(R.string.text_pwd_format);
             return;
         }

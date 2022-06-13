@@ -13,9 +13,8 @@ import android.widget.PopupWindow;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.core.base.utils.SStringUtil;
 import com.mw.base.bean.SLoginType;
-import com.mw.base.utils.GamaUtil;
+import com.mw.base.utils.SdkUtil;
 import com.mw.sdk.login.model.AccountModel;
 import com.mw.sdk.R;
 import com.zhy.adapter.recyclerview.CommonAdapter;
@@ -95,7 +94,7 @@ public class AccountPopupWindow extends PopupWindow {
 
     private void initHistoryRv() {
 
-        List<AccountModel> ams = GamaUtil.getAccountModels(getContext());
+        List<AccountModel> ams = SdkUtil.getAccountModels(getContext());
         accountModels.addAll(ams);
 
         if (accountModels == null){
@@ -183,8 +182,8 @@ public class AccountPopupWindow extends PopupWindow {
                     popWindowListener.onEmpty();
                 }
             }
-            GamaUtil.saveAccountModels(getContext(), accountModels);
-            List<AccountModel> ams = GamaUtil.getAccountModels(getContext());
+            SdkUtil.saveAccountModels(getContext(), accountModels);
+            List<AccountModel> ams = SdkUtil.getAccountModels(getContext());
             accountModels.clear();
             accountModels.addAll(ams);
             historyAccountCommonAdapter.notifyDataSetChanged();

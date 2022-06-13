@@ -10,7 +10,7 @@ import com.mw.base.bean.SLoginType;
 import com.mw.base.cfg.ResConfig;
 import com.mw.sdk.login.constant.ApiRequestMethod;
 import com.mw.sdk.login.model.request.MacLoginRegRequestBean;
-import com.mw.base.utils.GamaUtil;
+import com.mw.base.utils.SdkUtil;
 
 /**
  * <p>Title: MacLoginRegRequestTask</p> <p>Description: 新三方登陆&注册接口</p> <p>Company:GanYuanrong</p>
@@ -30,7 +30,7 @@ public class MacLoginRegRequestTask extends BaseLoginRequestTask {
 
         macLoginRegRequestBean.setRegistPlatform(SLoginType.LOGIN_TYPE_GUEST);
         //生成免注册登入账密
-        String uniqueId = GamaUtil.getGoogleAdid1AndroidId(context);
+        String uniqueId = SdkUtil.getGoogleAdid1AndroidId(context);
         if(TextUtils.isEmpty(uniqueId)){
             PL.d("uniqueId:" + uniqueId);
             return;

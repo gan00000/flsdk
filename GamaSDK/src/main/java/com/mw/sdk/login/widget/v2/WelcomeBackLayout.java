@@ -16,7 +16,7 @@ import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
 import com.mw.base.bean.SLoginType;
 import com.mw.base.cfg.ConfigBean;
-import com.mw.base.utils.GamaUtil;
+import com.mw.base.utils.SdkUtil;
 import com.mw.sdk.SBaseRelativeLayout;
 import com.mw.sdk.login.AccountPopupWindow;
 import com.mw.sdk.login.constant.BindType;
@@ -140,13 +140,13 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
             }
         });
 
-        List<AccountModel> ams = GamaUtil.getAccountModels(getContext());
+        List<AccountModel> ams = SdkUtil.getAccountModels(getContext());
         if (ams != null && !ams.isEmpty()){//设置按照最好登录时间排序后的第一个账号
             currentAccountModel = ams.get(0);
             setViewStatue();
         }
 
-        ConfigBean configBean = GamaUtil.getSdkCfg(getContext());
+        ConfigBean configBean = SdkUtil.getSdkCfg(getContext());
         if (configBean != null){
             ConfigBean.VersionData versionData = configBean.getSdkConfigLoginData(getContext());
             if (versionData != null){
@@ -167,7 +167,7 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
 //            String password = lastAccountModel.getPassword();
 //                accountSdkInputEditTextView.getInputEditText().setText(account);
             ImageView imageView = accountSdkInputEditTextView.getIconImageView();
-            GamaUtil.setAccountWithIcon(currentAccountModel,imageView,accountEditText);
+            SdkUtil.setAccountWithIcon(currentAccountModel,imageView,accountEditText);
             accountSdkInputEditTextView.getInputEditText().setEnabled(false);
 
             //判斷是否綁定，顯示是否升級賬號

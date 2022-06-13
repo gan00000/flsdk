@@ -6,7 +6,7 @@ import com.core.base.bean.BaseReqeustBean;
 import com.core.base.utils.ResUtil;
 import com.core.base.utils.SStringUtil;
 import com.mw.base.cfg.ResConfig;
-import com.mw.base.utils.GamaUtil;
+import com.mw.base.utils.SdkUtil;
 
 /**
  * <p>Title: SSdkBaseRequestBean</p> <p>Description: SDK接口请求参数实体</p>
@@ -54,17 +54,17 @@ public class SSdkBaseRequestBean extends BaseReqeustBean {
     private void initSdkField(Context context) {
 
 //        appKey = ResConfig.getAppKey(context);
-        loginAccessToken = GamaUtil.getSdkAccessToken(context);
-        loginTimestamp = GamaUtil.getSdkTimestamp(context);
+        loginAccessToken = SdkUtil.getSdkAccessToken(context);
+        loginTimestamp = SdkUtil.getSdkTimestamp(context);
         gameCode = ResConfig.getGameCode(context);
         gameLanguage = ResConfig.getGameLanguage(context);
 
         if (SStringUtil.isEmpty(signature)) {
             signature = SStringUtil.toMd5(ResConfig.getAppKey(context) + gameCode + timestamp);
         }
-        adId = GamaUtil.getGoogleAdId(context);
-        uniqueId = GamaUtil.getGoogleAdid1AndroidId(context);
-        referrer = GamaUtil.getReferrer(context);
+        adId = SdkUtil.getGoogleAdId(context);
+        uniqueId = SdkUtil.getGoogleAdid1AndroidId(context);
+        referrer = SdkUtil.getReferrer(context);
 
         spy_platForm = ResUtil.findStringByName(context,"spy_platForm");
         spy_advertiser = ResUtil.findStringByName(context,"spy_advertiser");

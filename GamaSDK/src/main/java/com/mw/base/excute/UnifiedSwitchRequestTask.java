@@ -8,7 +8,7 @@ import com.core.base.utils.PL;
 import com.mw.base.cfg.ResConfig;
 import com.mw.base.constant.RequestDomain;
 import com.mw.base.bean.unify.UnifiedSwitchRequestBean;
-import com.mw.base.utils.GamaUtil;
+import com.mw.base.utils.SdkUtil;
 
 public class UnifiedSwitchRequestTask extends GamaBaseRestRequestTask {
 
@@ -27,7 +27,7 @@ public class UnifiedSwitchRequestTask extends GamaBaseRestRequestTask {
 
         reqeustBean = new UnifiedSwitchRequestBean(context);
         String completeUrl = "";
-        if (GamaUtil.isInterfaceSurfixWithApp(context)) {
+        if (SdkUtil.isInterfaceSurfixWithApp(context)) {
             completeUrl = ResConfig.getPlatPreferredUrl(context) + RequestDomain.UNIFIED_SWITCH_APP;
         } else {
             completeUrl = ResConfig.getPlatPreferredUrl(context) + RequestDomain.UNIFIED_SWITCH;

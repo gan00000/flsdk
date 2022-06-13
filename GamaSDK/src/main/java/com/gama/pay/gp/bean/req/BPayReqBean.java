@@ -5,7 +5,7 @@ import android.content.Context;
 import com.core.base.bean.BaseReqeustBean;
 import com.core.base.utils.SStringUtil;
 import com.mw.base.cfg.ResConfig;
-import com.mw.base.utils.GamaUtil;
+import com.mw.base.utils.SdkUtil;
 
 public class BPayReqBean extends BaseReqeustBean {
 
@@ -33,9 +33,9 @@ public class BPayReqBean extends BaseReqeustBean {
 
 	private void init(Context context) {
 
-		adId = GamaUtil.getGoogleAdId(context);
+		adId = SdkUtil.getGoogleAdId(context);
 
-		accessToken = GamaUtil.getSdkAccessToken(context);
+		accessToken = SdkUtil.getSdkAccessToken(context);
 		gameCode = ResConfig.getGameCode(context);
 		gameLanguage = ResConfig.getGameLanguage(context);
 

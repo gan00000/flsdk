@@ -6,7 +6,7 @@ import com.core.base.utils.ApkInfoUtil;
 import com.core.base.utils.SStringUtil;
 import com.mw.base.bean.SGameBaseRequestBean;
 import com.mw.base.bean.SLoginType;
-import com.mw.base.utils.GamaUtil;
+import com.mw.base.utils.SdkUtil;
 import com.mw.sdk.login.model.AccountModel;
 
 public class Ad2RequestBean extends SGameBaseRequestBean {
@@ -45,9 +45,9 @@ public class Ad2RequestBean extends SGameBaseRequestBean {
         server_name = this.getServerName();
         game_name = ApkInfoUtil.getApplicationName(context);
 
-        String previousLoginType = GamaUtil.getPreviousLoginType(context);
+        String previousLoginType = SdkUtil.getPreviousLoginType(context);
         if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_MG, previousLoginType)) {//自動登錄
-            AccountModel accountModel = GamaUtil.getLastLoginAccount(context);
+            AccountModel accountModel = SdkUtil.getLastLoginAccount(context);
             if (accountModel != null){
                 user_name = accountModel.getAccount();
             }

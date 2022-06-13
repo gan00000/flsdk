@@ -15,7 +15,7 @@ import com.core.base.utils.PL;
 import com.mw.base.bean.unify.UnifiedSwitchResponseBean;
 import com.mw.base.cfg.ResConfig;
 import com.mw.base.excute.UnifiedSwitchRequestTask;
-import com.mw.base.utils.GamaUtil;
+import com.mw.base.utils.SdkUtil;
 import com.mw.sdk.SWebViewDialog;
 import com.mw.sdk.out.GamaOpenWebType;
 import com.mw.sdk.out.ISdkCallBack;
@@ -140,14 +140,14 @@ public class GamaWebPageHelper {
         StringBuilder builder = new StringBuilder(url);
         try {
             builder.append("gameCode=").append(URLEncoder.encode(ResConfig.getGameCode(context),"UTF-8"))
-                    .append("&userId=").append(URLEncoder.encode(GamaUtil.getUid(context),"UTF-8"))
-                    .append("&accessToken=").append(URLEncoder.encode(GamaUtil.getSdkAccessToken(context),"UTF-8"))
+                    .append("&userId=").append(URLEncoder.encode(SdkUtil.getUid(context),"UTF-8"))
+                    .append("&accessToken=").append(URLEncoder.encode(SdkUtil.getSdkAccessToken(context),"UTF-8"))
                     .append("&packageName=").append(URLEncoder.encode(context.getPackageName(),"UTF-8"))
-                    .append("&timestamp=").append(URLEncoder.encode(GamaUtil.getSdkTimestamp(context),"UTF-8"))
-                    .append("&serverCode=").append(URLEncoder.encode(GamaUtil.getServerCode(context),"UTF-8"))
-                    .append("&roleId=").append(URLEncoder.encode(GamaUtil.getRoleId(context),"UTF-8"))
-                    .append("&roleName=").append(URLEncoder.encode(GamaUtil.getRoleName(context),"UTF-8"))
-                    .append("&roleLevel=").append(URLEncoder.encode(GamaUtil.getRoleLevel(context),"UTF-8"))
+                    .append("&timestamp=").append(URLEncoder.encode(SdkUtil.getSdkTimestamp(context),"UTF-8"))
+                    .append("&serverCode=").append(URLEncoder.encode(SdkUtil.getServerCode(context),"UTF-8"))
+                    .append("&roleId=").append(URLEncoder.encode(SdkUtil.getRoleId(context),"UTF-8"))
+                    .append("&roleName=").append(URLEncoder.encode(SdkUtil.getRoleName(context),"UTF-8"))
+                    .append("&roleLevel=").append(URLEncoder.encode(SdkUtil.getRoleLevel(context),"UTF-8"))
                     .append("&from=gamePage");
 
             if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){

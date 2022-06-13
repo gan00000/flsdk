@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
-import com.mw.base.utils.GamaUtil;
+import com.mw.base.utils.SdkUtil;
 import com.mw.sdk.R;
 import com.mw.sdk.login.widget.SDKInputEditTextView;
 import com.mw.sdk.login.widget.SDKInputType;
@@ -148,11 +148,11 @@ public class AccountChangePwdLayoutV2 extends SLoginBaseRelativeLayout implement
 //            return;
 //        }
 
-        if (!GamaUtil.checkAccount(account)) {
+        if (!SdkUtil.checkAccount(account)) {
             toast(R.string.text_account_format);
             return;
         }
-        if (!GamaUtil.checkPassword(newPassword)) {
+        if (!SdkUtil.checkPassword(newPassword)) {
             toast(R.string.text_pwd_format);
             return;
         }

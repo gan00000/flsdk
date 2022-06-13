@@ -19,9 +19,6 @@ public class Localization {
         if (gameLanguage == null){
             gameLanguage = SGameLanguage.zh_TW;
         }
-        if (!gameLanguage.getLanguage().equals(ResConfig.getGameLanguage(context))){//如果语言改变，从新更新服务条款
-            GamaUtil.saveSdkLoginTerms(context,"");
-        }
         ResConfig.saveGameLanguage(context,gameLanguage.getLanguage());
 
         if (gameLanguage == SGameLanguage.zh_CN){

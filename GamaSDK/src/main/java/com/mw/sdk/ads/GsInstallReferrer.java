@@ -8,7 +8,7 @@ import com.android.installreferrer.api.InstallReferrerClient;
 import com.android.installreferrer.api.InstallReferrerStateListener;
 import com.android.installreferrer.api.ReferrerDetails;
 import com.core.base.utils.PL;
-import com.mw.base.utils.GamaUtil;
+import com.mw.base.utils.SdkUtil;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
@@ -45,7 +45,7 @@ public class GsInstallReferrer {
                             referrerBean.setAppInstallTime(appInstallTime + "");
                             referrerBean.setReferrerClickTime(referrerClickTime  + "");
                             referrerBean.setReferrerUrl(referrerUrl);
-                            GamaUtil.saveReferrer(context, referrerUrl);
+                            SdkUtil.saveReferrer(context, referrerUrl);
                         } catch (RemoteException e) {
                             e.printStackTrace();
                         }

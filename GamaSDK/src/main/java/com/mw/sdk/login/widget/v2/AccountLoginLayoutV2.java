@@ -7,12 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import com.core.base.utils.ToastUtils;
 import com.mw.base.bean.SLoginType;
 import com.mw.base.cfg.ConfigBean;
-import com.mw.base.utils.GamaUtil;
+import com.mw.base.utils.SdkUtil;
 import com.mw.sdk.login.AccountPopupWindow;
 import com.mw.sdk.login.model.AccountModel;
 import com.mw.sdk.login.widget.SDKInputEditTextView;
@@ -179,7 +177,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
         macLoginView = contentView.findViewById(R.id.guestLoginView);
         googleLoginView = contentView.findViewById(R.id.ggLoginView);
 
-        ConfigBean configBean = GamaUtil.getSdkCfg(getContext());
+        ConfigBean configBean = SdkUtil.getSdkCfg(getContext());
         if (configBean != null){
             ConfigBean.VersionData versionData = configBean.getSdkConfigLoginData(getContext());
             if (versionData != null){
@@ -240,7 +238,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
 //        GamaUtil.saveAccountModel(getContext(), SLoginType.LOGIN_TYPE_GUEST,"","", "1222","111e3331222","111222@qq.com",true);
 //        GamaUtil.saveAccountModel(getContext(), SLoginType.LOGIN_TYPE_LINE,"","", "111","334444","",true);
 
-        List<AccountModel> ams = GamaUtil.getAccountModels(getContext());
+        List<AccountModel> ams = SdkUtil.getAccountModels(getContext());
         accountModels.addAll(ams);
         if (accountModels != null && !accountModels.isEmpty()){//设置按照最好登录时间排序后的第一个账号
             AccountModel lastAccountModel = accountModels.get(0);
@@ -295,12 +293,12 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
             account = accountModel.getAccount();
             password = accountModel.getPassword();
             if (!TextUtils.isEmpty(account)){ //显示记住的密码
-                GamaUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
+                SdkUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
                 pwdSdkInputEditTextView.setPwdInputEnable(true);
                 loginPasswordEditText.setText(password);
             }
         }else{
-            GamaUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
+            SdkUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
             pwdSdkInputEditTextView.setPwdInputEnable(false);
             loginPasswordEditText.setText(R.string.text_free_register);
         }
@@ -348,7 +346,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
 //            agreeCheckBox.setChecked(false);
 //        }
 
-        List<AccountModel>  ams = GamaUtil.getAccountModels(getContext());
+        List<AccountModel>  ams = SdkUtil.getAccountModels(getContext());
         accountModels.clear();
         accountModels.addAll(ams);
 //        if (historyAccountCommonAdapter != null) {

@@ -7,7 +7,7 @@ import com.core.base.bean.BaseReqeustBean;
 import com.core.base.callback.ISReqCallBack;
 import com.core.base.request.CfgFileRequest;
 import com.core.base.utils.PL;
-import com.mw.base.utils.GamaUtil;
+import com.mw.base.utils.SdkUtil;
 
 /**
  * Created by gan on 2017/2/14.
@@ -47,7 +47,7 @@ public class ConfigRequest{
                 if (TextUtils.isEmpty(rawResult)){
                     return;
                 }
-                GamaUtil.saveSdkCfg(context,rawResult);
+                SdkUtil.saveSdkCfg(context,rawResult);
             }
 
             @Override

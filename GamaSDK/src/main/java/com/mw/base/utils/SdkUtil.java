@@ -10,7 +10,6 @@ import android.widget.ImageView;
 
 import com.core.base.cipher.DESCipher;
 import com.core.base.utils.ApkInfoUtil;
-import com.core.base.utils.FileUtil;
 import com.core.base.utils.GamaTimeUtil;
 import com.core.base.utils.JsonUtil;
 import com.core.base.utils.PL;
@@ -39,36 +38,31 @@ import java.util.List;
  * Created by gan on 2017/2/7.
  */
 
-public class GamaUtil {
+public class SdkUtil {
 
     /**
      * 本地SharePreference数据库名
      */
-    public static final String GAMA_SP_FILE = "gama_sp_file.xml";
-    public static final String GAMA_SDK_LOGIN_TERMS_FILE = "gama_sdk_login_terms_file.xml";
+    public static final String SDK_SP_FILE = "sdk_sp_file.xml";
 
-    public static final String ADS_ADVERTISERS_NAME = "ADS_ADVERTISERS_NAME";
-    public static final String GAMA_GAME_LANGUAGE = "GAMA_GAME_LANGUAGE";
+    public static final String SDK_GAME_LANGUAGE = "SDK_GAME_LANGUAGE";
 
     public static final String SDK_LOGIN_ACCOUNT_INFO = "SDK_LOGIN_ACCOUNT_INFO";//保存用户的账号信息
 
-    public static final String GAMA_LOGIN_SERVER_RETURN_DATA = "GAMA_LOGIN_SERVER_RETURN_DATA";//保存服务端返回的数据
+    public static final String SDK_LOGIN_SERVER_RETURN_DATA = "SDK_LOGIN_SERVER_RETURN_DATA";//保存服务端返回的数据
 
-    public static final String GAMA_SDK_CFG = "GAMA_SDK_CFG";//保存sdk配置 cdn文件
-    public static final String GAMA_SDK_LOGIN_TERMS = "GAMA_SDK_LOGIN_TERMS";
-    public static final String GAMA_MAC_LOGIN_USERNAME = "GAMA_MAC_LOGIN_USERNAME";
-    public static final String GAMA_MAC_LOGIN_PASSWORD = "GAMA_MAC_LOGIN_PASSWORD";
+    public static final String SDK_CFG = "SDK_CFG";//保存sdk配置 cdn文件
     /**
      * 上一次的登录类型
      */
-    public static final String GAMA_PREVIOUS_LOGIN_TYPE = "GAMA_PREVIOUS_LOGIN_TYPE";
+    public static final String SDK_PREVIOUS_LOGIN_TYPE = "SDK_PREVIOUS_LOGIN_TYPE";
 
 
     public static void saveSdkCfg(Context context,String cfg){
-        SPUtil.saveSimpleInfo(context,GAMA_SP_FILE,GAMA_SDK_CFG,cfg);
+        SPUtil.saveSimpleInfo(context, SDK_SP_FILE, SDK_CFG,cfg);
     }
     public static String getSdkCfgString(Context context){
-        return SPUtil.getSimpleString(context,GAMA_SP_FILE,GAMA_SDK_CFG);
+        return SPUtil.getSimpleString(context, SDK_SP_FILE, SDK_CFG);
     }
 
 
@@ -218,7 +212,7 @@ public class GamaUtil {
                 accountObject.put("sdk_loginTimestamp", accountModel.getLoginTimestamp());
                 jsonArray.put(accountObject);
             }
-            SPUtil.saveSimpleInfo(context,GAMA_SP_FILE, SDK_LOGIN_ACCOUNT_INFO, jsonArray.toString());
+            SPUtil.saveSimpleInfo(context, SDK_SP_FILE, SDK_LOGIN_ACCOUNT_INFO, jsonArray.toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -231,7 +225,7 @@ public class GamaUtil {
      */
     public static List<AccountModel> getAccountModels(Context context){
         List<AccountModel> accountModels = new ArrayList<>();
-        String accountStringInfo = SPUtil.getSimpleString(context,GAMA_SP_FILE, SDK_LOGIN_ACCOUNT_INFO);
+        String accountStringInfo = SPUtil.getSimpleString(context, SDK_SP_FILE, SDK_LOGIN_ACCOUNT_INFO);
        if (SStringUtil.isEmpty(accountStringInfo)){
            return accountModels;
        }
@@ -293,21 +287,6 @@ public class GamaUtil {
         }
         return null;
     }
-    public static void saveMacAccount(Context context,String account){
-        SPUtil.saveSimpleInfo(context,GAMA_SP_FILE, GAMA_MAC_LOGIN_USERNAME, account);
-    }
-
-    public static String getMacAccount(Context context){
-        return SPUtil.getSimpleString(context,GAMA_SP_FILE, GAMA_MAC_LOGIN_USERNAME);
-    }
-
-    public static void saveMacPassword(Context context,String password){
-        SPUtil.saveSimpleInfo(context,GAMA_SP_FILE, GAMA_MAC_LOGIN_PASSWORD, encryptPassword(password));
-    }
-
-    public static String getMacPassword(Context context){
-        return decryptPassword(SPUtil.getSimpleString(context,GAMA_SP_FILE, GAMA_MAC_LOGIN_PASSWORD));
-    }
 
     /**
      * 保存登入方式
@@ -315,7 +294,7 @@ public class GamaUtil {
      * @param loginType
      */
     public static void savePreviousLoginType(Context context,String loginType){
-        SPUtil.saveSimpleInfo(context,GAMA_SP_FILE, GAMA_PREVIOUS_LOGIN_TYPE, loginType);
+        SPUtil.saveSimpleInfo(context, SDK_SP_FILE, SDK_PREVIOUS_LOGIN_TYPE, loginType);
     }
 
     /**
@@ -324,7 +303,7 @@ public class GamaUtil {
      * @return
      */
     public static String getPreviousLoginType(Context context){
-        return SPUtil.getSimpleString(context,GAMA_SP_FILE, GAMA_PREVIOUS_LOGIN_TYPE);
+        return SPUtil.getSimpleString(context, SDK_SP_FILE, SDK_PREVIOUS_LOGIN_TYPE);
     }
 
 //    private final static String cipherKey = "20170314starpypassword";
@@ -364,11 +343,11 @@ public class GamaUtil {
     }
 
     public static void saveSdkLoginData(Context context,String data){
-        SPUtil.saveSimpleInfo(context,GAMA_SP_FILE,GAMA_LOGIN_SERVER_RETURN_DATA,data);
+        SPUtil.saveSimpleInfo(context, SDK_SP_FILE, SDK_LOGIN_SERVER_RETURN_DATA,data);
     }
 
     public static SLoginResponse getSdkLoginData(Context context){
-        String loginResult = SPUtil.getSimpleString(context,GAMA_SP_FILE,GAMA_LOGIN_SERVER_RETURN_DATA);
+        String loginResult = SPUtil.getSimpleString(context, SDK_SP_FILE, SDK_LOGIN_SERVER_RETURN_DATA);
         if (SStringUtil.isEmpty(loginResult)){
             return null;
         }
@@ -390,26 +369,6 @@ public class GamaUtil {
         return false;
     }
 
-    public static void saveSdkLoginTerms(Context context,String terms){
-        SPUtil.saveSimpleInfo(context, GAMA_SDK_LOGIN_TERMS_FILE,GAMA_SDK_LOGIN_TERMS,terms);
-    }
-
-    /**
-     * 获取服务条款
-     * @param context
-     * @return
-     */
-    public static String getSdkLoginTerms(Context context){
-        String m = SPUtil.getSimpleString(context, GAMA_SDK_LOGIN_TERMS_FILE,GAMA_SDK_LOGIN_TERMS);
-        if (TextUtils.isEmpty(m)){
-            String gameLanguage = ResConfig.getGameLanguage(context);
-            m = FileUtil.readAssetsTxtFile(context,"flsdk/" + gameLanguage + "/s_sdk_login_terms.txt");
-        }
-        if (isXM(context)){
-            m = m.replaceAll("新玩意整合行銷有限公司","Gamamobi網絡科技有限公司");
-        }
-        return m;
-    }
 
     /**
      * 获取当次登入的userId
@@ -474,14 +433,14 @@ public class GamaUtil {
      * 获取Json形式保存的角色信息
      */
     public static String getRoleInfo(Context context){
-        return SPUtil.getSimpleString(context,GAMA_SP_FILE,GAMA_LOGIN_ROLE_INFO);
+        return SPUtil.getSimpleString(context, SDK_SP_FILE,GAMA_LOGIN_ROLE_INFO);
     }
 
     /**
      * 以Json形式保存角色信息
      */
     private static void saveRoleInfoJson(Context context,String roleInfo){
-        SPUtil.saveSimpleInfo(context,GAMA_SP_FILE,GAMA_LOGIN_ROLE_INFO,roleInfo);
+        SPUtil.saveSimpleInfo(context, SDK_SP_FILE,GAMA_LOGIN_ROLE_INFO,roleInfo);
     }
 
     /**
@@ -651,14 +610,14 @@ public class GamaUtil {
      * 保存G+登录的三方ID
      */
     public static void saveGoogleId(Context context, String googleId){
-        SPUtil.saveSimpleInfo(context, GamaUtil.GAMA_SP_FILE,GAMA_LOGIN_GOOGLE_ID,googleId);
+        SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE,GAMA_LOGIN_GOOGLE_ID,googleId);
     }
 
     /**
      * 获取保存的G+登录的三方ID
      */
     public static String getGoogleId(Context context){
-        return SPUtil.getSimpleString(context, GamaUtil.GAMA_SP_FILE,GAMA_LOGIN_GOOGLE_ID);
+        return SPUtil.getSimpleString(context, SdkUtil.SDK_SP_FILE,GAMA_LOGIN_GOOGLE_ID);
     }
 
     /**
@@ -670,14 +629,14 @@ public class GamaUtil {
      * 保存Twitter登录的三方ID
      */
     public static void saveTwitterId(Context context, String googleId){
-        SPUtil.saveSimpleInfo(context, GamaUtil.GAMA_SP_FILE,GAMA_LOGIN_TWITTER_ID,googleId);
+        SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE,GAMA_LOGIN_TWITTER_ID,googleId);
     }
 
     /**
      * 获取保存的Twitter登录的三方ID
      */
     public static String getTwitterId(Context context){
-        return SPUtil.getSimpleString(context, GamaUtil.GAMA_SP_FILE,GAMA_LOGIN_TWITTER_ID);
+        return SPUtil.getSimpleString(context, SdkUtil.SDK_SP_FILE,GAMA_LOGIN_TWITTER_ID);
     }
 
     public static boolean isXM(Context context){
@@ -689,32 +648,32 @@ public class GamaUtil {
 
     private static final String GAMA_GOOGLE_ADVERTISING_ID = "GAMA_GOOGLE_ADVERTISING_ID";
     public static void saveGoogleAdId(Context context, String googleAdId){
-        SPUtil.saveSimpleInfo(context, GamaUtil.GAMA_SP_FILE,GAMA_GOOGLE_ADVERTISING_ID,googleAdId);
+        SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE,GAMA_GOOGLE_ADVERTISING_ID,googleAdId);
     }
     public static String getGoogleAdId(Context context){
-        return SPUtil.getSimpleString(context, GamaUtil.GAMA_SP_FILE,GAMA_GOOGLE_ADVERTISING_ID);
+        return SPUtil.getSimpleString(context, SdkUtil.SDK_SP_FILE,GAMA_GOOGLE_ADVERTISING_ID);
     }
 
     private static final String GAMA_GOOGLE_INSTALL_REFERRER = "GAMA_GOOGLE_INSTALL_REFERRER";
     public static void saveReferrer(Context context, String referrer){
-        SPUtil.saveSimpleInfo(context, GamaUtil.GAMA_SP_FILE,GAMA_GOOGLE_INSTALL_REFERRER,referrer);
+        SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE,GAMA_GOOGLE_INSTALL_REFERRER,referrer);
     }
     public static String getReferrer(Context context){
-        return SPUtil.getSimpleString(context, GamaUtil.GAMA_SP_FILE,GAMA_GOOGLE_INSTALL_REFERRER);
+        return SPUtil.getSimpleString(context, SdkUtil.SDK_SP_FILE,GAMA_GOOGLE_INSTALL_REFERRER);
     }
     private static final String GAMA_GOOGLE_TOKEN_ID_STRING = "GAMA_GOOGLE_TOKEN_ID_STRING";
     public static void saveGoogleIdToken(Context context, String idTokenString){
-        SPUtil.saveSimpleInfo(context, GamaUtil.GAMA_SP_FILE,GAMA_GOOGLE_TOKEN_ID_STRING,idTokenString);
+        SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE,GAMA_GOOGLE_TOKEN_ID_STRING,idTokenString);
     }
     public static String getGoogleIdToken(Context context){
-        return SPUtil.getSimpleString(context, GamaUtil.GAMA_SP_FILE,GAMA_GOOGLE_TOKEN_ID_STRING);
+        return SPUtil.getSimpleString(context, SdkUtil.SDK_SP_FILE,GAMA_GOOGLE_TOKEN_ID_STRING);
     }
 
     /**
      * 生成免注册登入账号
      */
     public static  String getGoogleAdid1AndroidId(Context ctx){
-        String adId = GamaUtil.getGoogleAdId(ctx);
+        String adId = SdkUtil.getGoogleAdId(ctx);
         if (SStringUtil.isNotEmpty(adId)){//先Google id
             return adId;
         }
@@ -723,23 +682,23 @@ public class GamaUtil {
 
     private static final String GAMA_START_TERM_STATUS = "GAMA_START_TERM_STATUS";
     public static void saveStartTermRead(Context context, boolean isRead){
-        SPUtil.saveSimpleInfo(context, GamaUtil.GAMA_SP_FILE,GAMA_START_TERM_STATUS, isRead);
+        SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE,GAMA_START_TERM_STATUS, isRead);
     }
     public static boolean getStartTermRead(Context context){
-        return SPUtil.getSimpleBoolean(context, GamaUtil.GAMA_SP_FILE, GAMA_START_TERM_STATUS);
+        return SPUtil.getSimpleBoolean(context, SdkUtil.SDK_SP_FILE, GAMA_START_TERM_STATUS);
     }
 
     /**
      * 保存首次登入时间,userid为key
      */
     public static void saveFirstLoginDate(Context context, String userid){
-        SPUtil.saveSimpleInfo(context, GamaUtil.GAMA_SP_FILE, userid, System.currentTimeMillis());
+        SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE, userid, System.currentTimeMillis());
     }
     /**
      * 保存首次登入时间,userid为key
      */
     public static long getFirstLoginDate(Context context, String userid){
-        return SPUtil.getSimpleLong(context, GamaUtil.GAMA_SP_FILE, userid);
+        return SPUtil.getSimpleLong(context, SdkUtil.SDK_SP_FILE, userid);
     }
 
     /**
@@ -772,7 +731,7 @@ public class GamaUtil {
      * @param context
      */
     public static void saveAgeTime(Context context) {
-        SPUtil.saveSimpleInfo(context, GamaUtil.GAMA_SP_FILE, PREFIX_AGE_TIME + getUid(context), System.currentTimeMillis());
+        SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE, PREFIX_AGE_TIME + getUid(context), System.currentTimeMillis());
     }
 
     /**
@@ -781,7 +740,7 @@ public class GamaUtil {
      * @return
      */
     public static long getAgeTime(Context context) {
-        return SPUtil.getSimpleLong(context, GamaUtil.GAMA_SP_FILE, PREFIX_AGE_TIME + getUid(context));
+        return SPUtil.getSimpleLong(context, SdkUtil.SDK_SP_FILE, PREFIX_AGE_TIME + getUid(context));
     }
 
     private static final String PREFIX_AGE_ = "GAMA_AGE_";
@@ -791,7 +750,7 @@ public class GamaUtil {
      * @param context
      */
     public static void saveAge(Context context, int age) {
-        SPUtil.saveSimpleInteger(context, GamaUtil.GAMA_SP_FILE, PREFIX_AGE_ + getUid(context), age);
+        SPUtil.saveSimpleInteger(context, SdkUtil.SDK_SP_FILE, PREFIX_AGE_ + getUid(context), age);
     }
 
     /**
@@ -800,7 +759,7 @@ public class GamaUtil {
      * @return
      */
     public static int getAge(Context context) {
-        return SPUtil.getSimpleInteger(context, GamaUtil.GAMA_SP_FILE, PREFIX_AGE_ + getUid(context));
+        return SPUtil.getSimpleInteger(context, SdkUtil.SDK_SP_FILE, PREFIX_AGE_ + getUid(context));
     }
 
     /**
@@ -841,7 +800,7 @@ public class GamaUtil {
      * @param context
      */
     public static void saveFirstPay(Context context) {
-        SPUtil.saveSimpleInfo(context, GamaUtil.GAMA_SP_FILE, PREFIX_FIRSTPAY_ + getUid(context), true);
+        SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE, PREFIX_FIRSTPAY_ + getUid(context), true);
     }
 
     /**
@@ -850,7 +809,7 @@ public class GamaUtil {
      * @return
      */
     public static boolean getFirstPay(Context context) {
-        return SPUtil.getSimpleBoolean(context, GamaUtil.GAMA_SP_FILE, PREFIX_FIRSTPAY_ + getUid(context));
+        return SPUtil.getSimpleBoolean(context, SdkUtil.SDK_SP_FILE, PREFIX_FIRSTPAY_ + getUid(context));
     }
 
     private static final String PREFIX_ONLINE = "GAMA_ONLINE";
@@ -878,7 +837,7 @@ public class GamaUtil {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        SPUtil.saveSimpleInfo(context, GamaUtil.GAMA_SP_FILE, PREFIX_ONLINE, jsonObject.toString());
+        SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE, PREFIX_ONLINE, jsonObject.toString());
     }
 
     /**
@@ -887,7 +846,7 @@ public class GamaUtil {
      * @return
      */
     public static String getOnlineTimeInfo(Context context) {
-        return SPUtil.getSimpleString(context, GamaUtil.GAMA_SP_FILE, PREFIX_ONLINE);
+        return SPUtil.getSimpleString(context, SdkUtil.SDK_SP_FILE, PREFIX_ONLINE);
     }
 
     /**
@@ -896,7 +855,7 @@ public class GamaUtil {
      * @return
      */
     public static void resetOnlineTimeInfo(Context context) {
-        SPUtil.saveSimpleInfo(context, GamaUtil.GAMA_SP_FILE, PREFIX_ONLINE, "");
+        SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE, PREFIX_ONLINE, "");
     }
 
 
@@ -906,11 +865,11 @@ public class GamaUtil {
      * 保存Switch的文档
      */
     public static void saveSwitchJson(Context context, String switchJson){
-        SPUtil.saveSimpleInfo(context, GamaUtil.GAMA_SP_FILE,GAMA_SWITCH_JSON, switchJson);
+        SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE,GAMA_SWITCH_JSON, switchJson);
     }
 
     public static String getSwitchJson(Context context){
-        return SPUtil.getSimpleString(context, GamaUtil.GAMA_SP_FILE, GAMA_SWITCH_JSON);
+        return SPUtil.getSimpleString(context, SdkUtil.SDK_SP_FILE, GAMA_SWITCH_JSON);
     }
 
     /**

@@ -20,12 +20,11 @@ import com.mw.base.bean.SLoginType;
 import com.mw.base.bean.SPayType;
 import com.mw.base.cfg.ConfigRequest;
 import com.mw.base.constant.GamaCommonKey;
-import com.mw.base.utils.GamaUtil;
+import com.mw.base.utils.SdkUtil;
 import com.mw.base.utils.Localization;
 import com.mw.sdk.login.ILoginCallBack;
 import com.mw.sdk.SWebViewDialog;
-import com.mw.sdk.ads.GamaAdsUtils;
-import com.mw.sdk.ads.SdkAdsConstant;
+import com.mw.sdk.ads.EventConstant;
 import com.mw.sdk.ads.SdkEventLogger;
 import com.mw.sdk.callback.IPayListener;
 import com.mw.sdk.login.DialogLoginImpl;
@@ -146,7 +145,7 @@ public class BaseSdkImpl implements IFLSDK {
             public void run() {
                 PL.i("IGama registerRoleInfo");
                 PL.i("roleId:" + roleId + ",roleName:" + roleName + ",roleLevel:" + roleLevel + ",vipLevel:" + vipLevel + ",severCode:" + severCode + ",serverName:" + serverName);
-                GamaUtil.saveRoleInfo(activity, roleId, roleName, roleLevel, vipLevel, severCode, serverName);//保存角色信息
+                SdkUtil.saveRoleInfo(activity, roleId, roleName, roleLevel, vipLevel, severCode, serverName);//保存角色信息
 
                 /*AbsHttpRequest xAbsHttpRequest = new AbsHttpRequest() {
                     @Override
@@ -378,7 +377,7 @@ public class BaseSdkImpl implements IFLSDK {
                 GamaWebPageHelper.onResume(activity);
 
                 //上报在线时长-记录时间戳
-                GamaUtil.saveOnlineTimeInfo(activity, System.currentTimeMillis());
+                SdkUtil.saveOnlineTimeInfo(activity, System.currentTimeMillis());
 
                 //ads
                 SdkEventLogger.onResume(activity);
@@ -556,7 +555,7 @@ public class BaseSdkImpl implements IFLSDK {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                String loginType = GamaUtil.getPreviousLoginType(activity);
+                String loginType = SdkUtil.getPreviousLoginType(activity);
                 if (SLoginType.LOGIN_TYPE_FB.equals(loginType)) {
                     if (sFacebookProxy != null) {
                         sFacebookProxy.getMyProfile(activity, new SFacebookProxy.FbLoginCallBack() {
@@ -715,12 +714,12 @@ public class BaseSdkImpl implements IFLSDK {
                                     }
                                 };
 
-                                if (SStringUtil.isNotEmpty(GamaUtil.getServerCode(activity)) && SStringUtil.isNotEmpty(GamaUtil.getRoleId(activity))) {
+                                if (SStringUtil.isNotEmpty(SdkUtil.getServerCode(activity)) && SStringUtil.isNotEmpty(SdkUtil.getRoleId(activity))) {
                                     try {
                                         if (newShareLinkUrl.contains("?")) {//userId+||S||+serverCode+||S||+roleId
-                                            newShareLinkUrl = newShareLinkUrl + "&campaign=" + URLEncoder.encode(GamaUtil.getUid(activity) + "||S||" + GamaUtil.getServerCode(activity) + "||S||" + GamaUtil.getRoleId(activity), "UTF-8");
+                                            newShareLinkUrl = newShareLinkUrl + "&campaign=" + URLEncoder.encode(SdkUtil.getUid(activity) + "||S||" + SdkUtil.getServerCode(activity) + "||S||" + SdkUtil.getRoleId(activity), "UTF-8");
                                         } else {
-                                            newShareLinkUrl = newShareLinkUrl + "?campaign=" + URLEncoder.encode(GamaUtil.getUid(activity) + "||S||" + GamaUtil.getServerCode(activity) + "||S||" + GamaUtil.getRoleId(activity), "UTF-8");
+                                            newShareLinkUrl = newShareLinkUrl + "?campaign=" + URLEncoder.encode(SdkUtil.getUid(activity) + "||S||" + SdkUtil.getServerCode(activity) + "||S||" + SdkUtil.getRoleId(activity), "UTF-8");
                                         }
                                     } catch (UnsupportedEncodingException e) {
                                         e.printStackTrace();
@@ -892,7 +891,7 @@ public class BaseSdkImpl implements IFLSDK {
     }
 
     @Override
-    public void trackEvent(final Activity activity, final String eventName, final Map<String, Object> map, final Set<SdkAdsConstant.EventReportChannel> channelSet) {
+    public void trackEvent(final Activity activity, final String eventName, final Map<String, Object> map, final Set<EventConstant.EventReportChannel> channelSet) {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -908,8 +907,8 @@ public class BaseSdkImpl implements IFLSDK {
             return;
         }
         final HashMap<String, Object> map = new HashMap<>();
-        map.put(SdkAdsConstant.GAMA_EVENT_ROLEID, roleId);
-        map.put(SdkAdsConstant.GAMA_EVENT_ROLENAME, roleName);
+        map.put(EventConstant.ParameterName.ROLE_ID, roleId);
+        map.put(EventConstant.ParameterName.ROLE_NAME, roleName);
 //        map.put(SdkAdsConstant.GAMA_EVENT_ROLE_LEVEL, roleLevel);
 //        map.put(SdkAdsConstant.GAMA_EVENT_ROLE_VIP_LEVEL, vipLevel);
 //        map.put(SdkAdsConstant.GAMA_EVENT_SERVERCODE, severCode);
