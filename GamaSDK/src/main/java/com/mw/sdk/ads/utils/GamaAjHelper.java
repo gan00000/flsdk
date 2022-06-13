@@ -19,7 +19,7 @@ public class GamaAjHelper {
         String token = null;
         String adList = GamaAjHelper.getGamaAjList(context);
         if(TextUtils.isEmpty(adList)) {
-            adList = FileUtil.readAssetsTxtFile(context, "flsdk/adlist");
+            adList = FileUtil.readAssetsTxtFile(context, "mwsdk/adlist");
         }
         if (!adList.isEmpty() && adList.contains(event)) {
             try {

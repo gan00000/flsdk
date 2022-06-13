@@ -97,7 +97,7 @@ classpath 'com.google.gms:google-services:4.2.0'// google-services plugin
 apply plugin: 'com.google.gms.google-services'
 	```
 
-* 添加游戏配置文件，在您的项目中，打开 your_app | assets下创建flsdk目录并添加 **gameconfig.propertie和adlist 配置文件（该文件SDK对接人员提供）**
+* 添加游戏配置文件，在您的项目中，打开 your_app | assets下创建mwsdk目录并添加 **gameconfig.propertie和adlist 配置文件（该文件SDK对接人员提供）**
 
 *   添加游戏配置文件，在您的项目中，打开 your_app根目录下添加google-services.json配置文件（该文件SDK对接人员提供）  
 

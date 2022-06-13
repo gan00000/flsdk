@@ -13,7 +13,7 @@ import androidx.core.app.ActivityCompat;
 import android.util.Log;
 
 import com.core.base.utils.SPUtil;
-import com.mw.base.utils.GamaUtil;
+import com.mw.base.utils.SdkUtil;
 
 public class DoPermissionReq extends Activity implements ActivityCompat.OnRequestPermissionsResultCallback {
     public static final String TAG = "Unity";
@@ -29,7 +29,7 @@ public class DoPermissionReq extends Activity implements ActivityCompat.OnReques
             return;
         }
         //是否首次启动
-        boolean launched = SPUtil.getSimpleBoolean(this, GamaUtil.GAMA_SP_FILE, "launched");
+        boolean launched = SPUtil.getSimpleBoolean(this, SdkUtil.SDK_SP_FILE, "launched");
         //未授权
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             if(!launched || ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
@@ -41,7 +41,7 @@ public class DoPermissionReq extends Activity implements ActivityCompat.OnReques
             startMainActivity();
         }
         if(!launched) {
-            SPUtil.saveSimpleInfo(this, GamaUtil.GAMA_SP_FILE, "launched", true);
+            SPUtil.saveSimpleInfo(this, SdkUtil.SDK_SP_FILE, "launched", true);
         }
     }
 

@@ -11,7 +11,7 @@ import androidx.core.app.ActivityCompat;
 import android.util.Log;
 
 import com.core.base.utils.SPUtil;
-import com.mw.base.utils.GamaUtil;
+import com.mw.base.utils.SdkUtil;
 
 /**
  * 用于处理Android 6.0以上授权的工具类
@@ -58,7 +58,7 @@ public class GamaDoPermission {
             return;
         }
         //是否首次启动
-        boolean launched = SPUtil.getSimpleBoolean(activity, GamaUtil.GAMA_SP_FILE, "launched");
+        boolean launched = SPUtil.getSimpleBoolean(activity, SdkUtil.SDK_SP_FILE, "launched");
         //未授权
         if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             if(!launched || ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
@@ -70,7 +70,7 @@ public class GamaDoPermission {
             // TODO: 2018/6/7 回调
         }
         if(!launched) {
-            SPUtil.saveSimpleInfo(activity, GamaUtil.GAMA_SP_FILE, "launched", true);
+            SPUtil.saveSimpleInfo(activity, SdkUtil.SDK_SP_FILE, "launched", true);
         }
     }
 

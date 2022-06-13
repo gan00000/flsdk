@@ -1356,7 +1356,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 public void success(Object o, String rawResult) {
                     try {
                         if (TextUtils.isEmpty(rawResult)) {
-                            areaJson = FileUtil.readAssetsTxtFile(getContext(), "flsdk/areaInfo");
+                            areaJson = FileUtil.readAssetsTxtFile(getContext(), "mwsdk/areaInfo");
                         } else {
                             JSONArray areaArray = new JSONArray(rawResult);
                             areaJson = areaArray.toString();
@@ -1376,7 +1376,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
                     try {
 
-                        areaJson = FileUtil.readAssetsTxtFile(getContext(), "flsdk/areaInfo");
+                        areaJson = FileUtil.readAssetsTxtFile(getContext(), "mwsdk/areaInfo");
                         Gson gson = new Gson();
                         areaBeanList = gson.fromJson(areaJson, GamaAreaInfoBean[].class);
                         showAreaDialog();
@@ -1398,7 +1398,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             });
             task.excute();*/
 
-            areaJson = FileUtil.readAssetsTxtFile(getContext(), "flsdk/areaInfo");
+            areaJson = FileUtil.readAssetsTxtFile(getContext(), "mwsdk/areaInfo");
             Gson gson = new Gson();
             areaBeanList = gson.fromJson(areaJson, GamaAreaInfoBean[].class);
             showAreaDialog();

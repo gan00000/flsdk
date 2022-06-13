@@ -15,7 +15,7 @@ import androidx.annotation.NonNull;
 import com.core.base.utils.PL;
 import com.mw.base.bean.SGameLanguage;
 import com.mw.base.bean.SPayType;
-import com.mw.base.utils.GamaUtil;
+import com.mw.base.utils.SdkUtil;
 import com.mw.base.utils.SLog;
 import com.mw.sdk.login.ILoginCallBack;
 import com.mw.sdk.login.model.response.SLoginResponse;
@@ -23,9 +23,6 @@ import com.mw.sdk.callback.IPayListener;
 import com.mw.sdk.out.FlSdkFactory;
 import com.mw.sdk.out.IFLSDK;
 import com.mw.sdk.demo.R;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class MainActivity extends Activity {
 
@@ -260,7 +257,7 @@ public class MainActivity extends Activity {
     }
 
     private boolean isLogin() {
-        return !TextUtils.isEmpty(GamaUtil.getUid(this));
+        return !TextUtils.isEmpty(SdkUtil.getUid(this));
     }
 
 }
