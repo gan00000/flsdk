@@ -14,33 +14,21 @@ public class ToastUtils {
 
 	public static void toast(Context context, String msg) {
 		if (context != null && !TextUtils.isEmpty(msg)) {
-			Toast.makeText(context, msg + "", Toast.LENGTH_SHORT).show();
+			toast(context,msg,Toast.LENGTH_SHORT);
 		}
 	}
 
-	public static void toast(Context context, int msg) {
+	public static void toast(Context context, int stringId) {
 		if (context != null) {
-			Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+			toast(context,context.getString(stringId),Toast.LENGTH_SHORT);
 		}
 	}
 
-	public static void toast(Context context, int msg, int time) {
-		if (context != null) {
-			if (time == Toast.LENGTH_LONG) {
-				Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
-			} else {
-				Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
-			}
-		}
-	}
-	
 	public static void toast(Context context, String msg, int time) {
 		if (context != null) {
-			if (time == Toast.LENGTH_LONG) {
-				Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
-			} else {
-				Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
-			}
+			Toast toast = Toast.makeText(context, msg + "", time);
+			toast.setGravity(Gravity.CENTER,0,0);
+			toast.show();
 		}
 	}
 
