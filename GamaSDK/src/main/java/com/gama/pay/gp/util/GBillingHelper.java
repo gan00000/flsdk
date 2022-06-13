@@ -171,7 +171,7 @@ public class GBillingHelper implements PurchasesUpdatedListener {
             public void onConsumeResponse(BillingResult billingResult, @NonNull String purchaseToken) {
                 if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
                     // Handle the success of the consume operation.
-                    PL.i( "purchaseToken -> " + purchaseToken);
+                    PL.i( "consumeAsync purchaseToken -> " + purchaseToken);
 
                     if (consumeResponseListener != null){
                         consumeResponseListener.onConsumeResponse(billingResult,purchaseToken);
