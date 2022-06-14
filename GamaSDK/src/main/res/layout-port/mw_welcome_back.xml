@@ -140,8 +140,13 @@
                 android:layout_marginBottom="15dp"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:visibility="gone"
+                android:visibility="visible"
+                android:background="@drawable/mw_delete_account_bg_white"
                 android:id="@+id/layout_delete_account"
+                android:paddingLeft="13dp"
+                android:paddingRight="13dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 >
 
 
@@ -157,7 +162,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="6dp"
                     android:text="@string/text_delete_account"
-                    android:textColor="@color/c_C0C0C0"
+                    android:textColor="@color/black_s"
                     android:textSize="14sp" />
 
             </LinearLayout>
