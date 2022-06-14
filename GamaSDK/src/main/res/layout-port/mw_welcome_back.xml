@@ -63,6 +63,17 @@
             android:textColor="@android:color/white"
             android:textSize="17sp" />
 
+        <Button
+            android:id="@+id/btn_swith_account3"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/mw_bg_white_20"
+            android:gravity="center"
+            android:text="@string/text_switch_account"
+            android:textColor="@android:color/white"
+            android:textSize="15sp" />
+
 
         <LinearLayout
             android:id="@+id/layout_need_update_account"
@@ -100,6 +111,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="15dp"
+            android:visibility="gone"
             android:gravity="center"
             android:orientation="horizontal">
 

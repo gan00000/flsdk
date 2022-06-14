@@ -54,6 +54,8 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
 
     Dialog deleteDialog;
 
+    Button btn_swith_account3;
+
     public WelcomeBackLayout(Context context) {
         super(context);
     }
@@ -91,10 +93,12 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
         btn_update_account = contentView.findViewById(R.id.btn_update_account);
         btn_change_pwd = contentView.findViewById(R.id.btn_change_pwd);
         btn_swith_account2 = contentView.findViewById(R.id.btn_swith_account2);
+        btn_swith_account3 = contentView.findViewById(R.id.btn_swith_account3);
         layout_delete_account = contentView.findViewById(R.id.layout_delete_account);
 
-        //test
-        layout_delete_account.setVisibility(VISIBLE);
+        btn_swith_account3.setVisibility(View.GONE);
+
+        layout_delete_account.setVisibility(View.GONE);
 
         accountSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Account);
         accountEditText = accountSdkInputEditTextView.getInputEditText();
@@ -110,6 +114,7 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
         btn_update_account.setOnClickListener(this);
         btn_change_pwd.setOnClickListener(this);
         btn_swith_account2.setOnClickListener(this);
+        btn_swith_account3.setOnClickListener(this);
         layout_delete_account.setOnClickListener(this);
 
         accountPopupWindow = new AccountPopupWindow(getActivity());
@@ -193,9 +198,9 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
 
             //判斷是否綁定，顯示是否升級賬號
 
-            if (currentAccountModel.isBind()){
+            if (!currentAccountModel.isBind()){
                 layout_need_update_account.setVisibility(View.GONE);
-                layout_has_update_account.setVisibility(View.VISIBLE);
+                layout_has_update_account.setVisibility(View.GONE);//方式改变，隐藏了
                 tv_account_update_tips.setText(R.string.text_has_update_account_tips);
                 iv_update_account_icon.setImageResource(R.mipmap.has_update_account_bg);
 
@@ -203,16 +208,20 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
                     btn_change_pwd.setEnabled(true);
                     btn_change_pwd.setBackgroundResource(R.drawable.mw_bg_white_20);
                     btn_change_pwd.setTextColor(getContext().getResources().getColor(R.color.white_c));
+                    btn_swith_account3.setVisibility(View.GONE);
                 }else{
                     btn_change_pwd.setEnabled(false);
                     btn_change_pwd.setBackgroundResource(R.drawable.mw_bg_707070_20);
                     btn_change_pwd.setTextColor(getContext().getResources().getColor(R.color.c_707070));
+
+                    btn_swith_account3.setVisibility(View.VISIBLE);
                 }
 
 //
             }else{
                 layout_need_update_account.setVisibility(View.VISIBLE);
                 layout_has_update_account.setVisibility(View.GONE);
+                btn_swith_account3.setVisibility(View.GONE);
                 tv_account_update_tips.setText(R.string.text_update_account_tips);
                 iv_update_account_icon.setImageResource(R.mipmap.nend_update_account_bg);
             }
@@ -255,7 +264,7 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
                 return;
             }
             sLoginDialogv2.toChangePwdView(account);
-        }else if (v == btn_swith_account || v == btn_swith_account2) {
+        }else if (v == btn_swith_account || v == btn_swith_account2 || v == btn_swith_account3) {
             sLoginDialogv2.toLoginWithRegView(ViewType.WelcomeView);
 
         }else if (v == btn_update_account) {
