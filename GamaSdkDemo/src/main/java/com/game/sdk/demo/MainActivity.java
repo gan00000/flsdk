@@ -112,7 +112,7 @@ public class MainActivity extends Activity {
                             }).setCancelable(false)
                                     .setMessage(sLoginResponse.getData().print())
                                     .create();
-                            dialog.show();
+//                            dialog.show();
 
                             /**
                              * 同步角色信息(以下均为测试信息)
@@ -169,7 +169,7 @@ public class MainActivity extends Activity {
 
 //                com.game.superand.1usd
 //                com.game.superand.2usd
-                String skuId = "com.sfinsh.1day";
+                String skuId = "com.game.superand.1usd";
                 mIMWSDK.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(),skuId, "xxxx", new IPayListener() {
                     @Override
                     public void onPayFinish(Bundle bundle) {
@@ -189,6 +189,30 @@ public class MainActivity extends Activity {
                 });
 
 
+            }
+        });
+
+        findViewById(R.id.demo_pay_google2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String skuId = "com.game.superand.2usd";
+                mIMWSDK.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(),skuId, "xxxx", new IPayListener() {
+                    @Override
+                    public void onPayFinish(Bundle bundle) {
+                        PL.i("支付结束");
+                    }
+
+                    @Override
+                    public void onPaySuccess(String productId, String cpOrderId) {
+
+                    }
+
+                    @Override
+                    public void onPayFail() {
+
+                    }
+
+                });
             }
         });
 

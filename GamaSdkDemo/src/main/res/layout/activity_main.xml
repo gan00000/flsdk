@@ -47,7 +47,13 @@
                     android:id="@+id/demo_pay_google"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="google储值" />
+                    android:text="google储值:com.game.superand.1usd" />
+
+                <Button
+                    android:id="@+id/demo_pay_google2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="google储值:com.game.superand.2usd" />
 
                 <Button
                     android:id="@+id/demo_cs"
