@@ -106,7 +106,7 @@ public class ResConfig {
 //        if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_Login_Pre_Url())) {
 //            return GamaUtil.getSdkCfg(context).getS_Login_Pre_Url();
 //        }
-        return getConfigUrl(context, "gama_login_pre_url");
+        return getConfigUrl(context, "sdk_login_pre_url");
     }
 
     /**
@@ -116,7 +116,7 @@ public class ResConfig {
 //        if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_Login_Spa_Url())) {
 //            return GamaUtil.getSdkCfg(context).getS_Login_Spa_Url();
 //        }
-        return getConfigUrl(context, "gama_login_spa_url");
+        return getConfigUrl(context, "sdk_login_spa_url");
     }
 
     /**
@@ -126,7 +126,7 @@ public class ResConfig {
 //        if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_Pay_Pre_Url())) {
 //            return GamaUtil.getSdkCfg(context).getS_Pay_Pre_Url();
 //        }
-        return getConfigUrl(context, "gama_pay_pre_url");
+        return getConfigUrl(context, "sdk_pay_pre_url");
     }
 
     /**
@@ -136,21 +136,21 @@ public class ResConfig {
 //        if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_Pay_Spa_Url())) {
 //            return GamaUtil.getSdkCfg(context).getS_Pay_Spa_Url();
 //        }
-        return getConfigUrl(context, "gama_pay_spa_url");
+        return getConfigUrl(context, "sdk_pay_spa_url");
     }
 
     /**
      * 获取客服主域名
      */
     public static String getCsPreferredUrl(Context context) {
-        return getCdnLocalUrl(context, "gama_cs_pre_url");
+        return getCdnLocalUrl(context, "sdk_cs_pre_url");
     }
 
     /**
      * 获取客服备用域名
      */
     public static String getCsSpareUrl(Context context) {
-        return getCdnLocalUrl(context, "gama_cs_spa_url");
+        return getCdnLocalUrl(context, "sdk_cs_spa_url");
     }
 
     /**
@@ -160,7 +160,7 @@ public class ResConfig {
 //        if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_Act_Pre_Url())) {
 //            return GamaUtil.getSdkCfg(context).getS_Act_Pre_Url();
 //        }
-        return getConfigUrl(context, "gama_act_pre_url");
+        return getConfigUrl(context, "sdk_act_pre_url");
     }
 
     /**
@@ -170,21 +170,21 @@ public class ResConfig {
 //        if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_Act_Spa_Url())) {
 //            return GamaUtil.getSdkCfg(context).getS_Act_Spa_Url();
 //        }
-        return getConfigUrl(context, "gama_act_spa_url");
+        return getConfigUrl(context, "sdk_act_spa_url");
     }
 
     /**
      * 获取CDN动态域名的主域名
      */
     public static String getCdnPreferredUrl(Context context) {
-        return getConfigUrl(context, "gama_cdn_pre_url");
+        return getConfigUrl(context, "sdk_cdn_pre_url");
     }
 
     /**
      * 获取CDN动态域名的备用域名
      */
     public static String getCdnSpareUrl(Context context) {
-        return getConfigUrl(context, "gama_cdn_spa_url");
+        return getConfigUrl(context, "sdk_cdn_spa_url");
     }
 
     /**
@@ -198,14 +198,14 @@ public class ResConfig {
      * 是否侵权
      */
     public static boolean isInfringement(Context context) {
-        return SStringUtil.isEqual(getConfigInAssetsProperties(context, "gama_infringement"), "true");
+        return SStringUtil.isEqual(getConfigInAssetsProperties(context, "sdk_infringement"), "true");
     }
 
     /**
      * 获取第三方支付的接口名
      */
     public static String getPayThirdMethod(Context context) {
-        return getResStringByName(context, "gama_third_method");
+        return getResStringByName(context, "sdk_third_method");
     }
 
 
@@ -256,21 +256,21 @@ public class ResConfig {
      * @return
      */
     public static String getServiceUrl(Context context) {
-        return getConfigUrl(context, "gama_service_url");
+        return getConfigUrl(context, "sdk_service_url");
     }
 
     /**
      * 获取区码的链接
      */
     public static String getAreaCodeUrl(Context context) {
-        return getConfigUrl(context, "gama_area_info_url");
+        return getConfigUrl(context, "sdk_area_info_url");
     }
 
     /**
      * 获取验证码开关的链接
      */
     public static String getVfCodeSwitchUrl(Context context) {
-        return getConfigUrl(context, "gama_vfcode_switch_url");
+        return getConfigUrl(context, "sdk_vfcode_switch_url");
     }
 
 
