@@ -289,8 +289,17 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
         historyAccountListBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                accountPopupWindow.showOnView(accountSdkInputEditTextView);
-                accountSdkInputEditTextView.getIv_account_history().setSelected(true);
+                if (accountPopupWindow!= null)
+                {
+                    if (accountPopupWindow.isShowing()){
+
+                        accountPopupWindow.dismiss();
+//                        accountSdkInputEditTextView.getIv_account_history().setSelected(true);
+                    }else{
+                        accountPopupWindow.showOnView(accountSdkInputEditTextView);
+                        accountSdkInputEditTextView.getIv_account_history().setSelected(true);
+                    }
+                }
             }
         });
 
