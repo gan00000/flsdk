@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.core.base.utils.PL;
+import com.core.base.utils.ToastUtils;
 import com.gama.pay.IPay;
 import com.gama.pay.IPayCallBack;
 import com.gama.pay.IPayFactory;
@@ -77,6 +78,7 @@ public class SdkImpl extends BaseSdkImpl {
                 @Override
                 public void success(BasePayBean basePayBean) {
                     SdkEventLogger.trackinPayEvent(activity, basePayBean);
+                    ToastUtils.toast(activity,R.string.text_finish_pay);
                 }
 
                 @Override
