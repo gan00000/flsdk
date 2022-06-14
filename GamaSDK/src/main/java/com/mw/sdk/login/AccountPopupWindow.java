@@ -160,11 +160,16 @@ public class AccountPopupWindow extends PopupWindow {
         AccountModel removeModel = accountModels.remove(position);
         if (removeModel != null) {
 
+            SdkUtil.saveAccountModels(getContext(), accountModels);
+            List<AccountModel> ams = SdkUtil.getAccountModels(getContext());
+            accountModels.clear();
+            accountModels.addAll(ams);
+            historyAccountCommonAdapter.notifyDataSetChanged();
+
             if (popWindowListener != null){
                 popWindowListener.onRemove(removeModel);
             }
-
-            if (accountModels.isEmpty()) {
+            if (ams.isEmpty()) {
 //                historyAccountRv.setVisibility(GONE);
 //                historyAccountListBtn.setVisibility(GONE);//删除就保存重新刷新数据
 //                loginAccountEditText.setText("");
@@ -173,11 +178,6 @@ public class AccountPopupWindow extends PopupWindow {
                     popWindowListener.onEmpty();
                 }
             }
-            SdkUtil.saveAccountModels(getContext(), accountModels);
-            List<AccountModel> ams = SdkUtil.getAccountModels(getContext());
-            accountModels.clear();
-            accountModels.addAll(ams);
-            historyAccountCommonAdapter.notifyDataSetChanged();
         }
     }
 

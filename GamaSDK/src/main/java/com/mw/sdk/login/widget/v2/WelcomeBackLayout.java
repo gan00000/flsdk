@@ -138,6 +138,7 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
                 if (accountPopupWindow.isShowing()){
                     accountPopupWindow.dismiss();
                 }
+                currentAccountModel = null;
                 checkLocalAccount();
             }
         });
@@ -352,6 +353,8 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
     private void login() {
 
         if (currentAccountModel == null){
+            ToastUtils.toast(getActivity(),R.string.text_account_not_exist);
+            sLoginDialogv2.toLoginWithRegView(ViewType.WelcomeView);
             return;
         }
         if (SLoginType.LOGIN_TYPE_FB.equals(currentAccountModel.getLoginType())){

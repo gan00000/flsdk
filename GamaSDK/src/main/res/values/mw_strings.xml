@@ -202,5 +202,6 @@
     <string name="text_account_change_pwd_success">修改成功，正在登入...</string>
     <string name="text_send_vf_code_success">驗證碼已發送，請注意查收</string>
     <string name="text_finish_pay">支付完成</string>
+    <string name="text_account_not_exist">帳號不存在</string>
 
 </resources>
