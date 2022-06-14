@@ -3,27 +3,27 @@
     <!--港台域名列表 开始-->
     <!--登录域名-->
     <string name="zh_tw_gama_login_pre_url" translatable="false">https://hktw-t-login.meowplayer.com/</string>
-    <string name="zh_tw_gama_login_spa_url" translatable="false">http://hktw-t-login.meowplayer.com/</string>
+    <string name="zh_tw_gama_login_spa_url" translatable="false"></string>
 
     <!--支付域名-->
     <string name="zh_tw_gama_pay_pre_url" translatable="false">https://hktw-t-pay.meowplayer.com/</string>
-    <string name="zh_tw_gama_pay_spa_url" translatable="false">https://hktw-t-pay.meowplayer.com/</string>
+    <string name="zh_tw_gama_pay_spa_url" translatable="false"></string>
 
     <!--活动域名-->
     <string name="zh_tw_gama_act_pre_url" translatable="false">https://activity.flyfungame.com/</string>
-    <string name="zh_tw_gama_act_spa_url" translatable="false">https://activity.flyfungame.com/</string>
+    <string name="zh_tw_gama_act_spa_url" translatable="false"></string>
 
     <!--cdn域名-->
     <string name="zh_tw_gama_cdn_pre_url" translatable="false">https://www.meowplayer.com/sdk/config/</string>
-    <string name="zh_tw_gama_cdn_spa_url" translatable="false">https://www.meowplayer.com/sdk/config/</string>
+    <string name="zh_tw_gama_cdn_spa_url" translatable="false"></string>
 
     <!--广告域名-->
     <string name="zh_tw_gama_ads_pre_url" translatable="false">https://ads.flyfungame.com/</string>
-    <string name="zh_tw_gama_ads_spa_url" translatable="false">https://ads.flyfungame.com/</string>
+    <string name="zh_tw_gama_ads_spa_url" translatable="false"></string>
 
     <!--平台域名-->
     <string name="zh_tw_gama_plat_pre_url" translatable="false">https://platform.flyfungame.com/</string>
-    <string name="zh_tw_gama_plat_spa_url" translatable="false">https://platform.flyfungame.com/</string>
+    <string name="zh_tw_gama_plat_spa_url" translatable="false"></string>
 
     <!--客服域名-->
     <string name="zh_tw_gama_cs_pre_url" translatable="false"></string>
