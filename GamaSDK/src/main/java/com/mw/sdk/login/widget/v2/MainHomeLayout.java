@@ -122,7 +122,7 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
             }
 
         }else if (v == layout_go_term){
-            sLoginDialogv2.showTermView();
+            sLoginDialogv2.showTermView(ViewType.HomeView);
         }
 
     }

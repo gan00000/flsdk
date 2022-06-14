@@ -34,7 +34,7 @@ public class LoginContract {
         void showAutoLoginTips(String tips);
 
         void showAutoLoginView();
-        void showTermView();
+        void showTermView(ViewType fromViewType);
 
 //        void showLoginView();
 

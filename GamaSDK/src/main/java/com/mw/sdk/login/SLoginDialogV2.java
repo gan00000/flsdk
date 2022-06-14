@@ -192,7 +192,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 
     }
 
-    private void toTermView() {
+    private void toTermView(ViewType fromViewType) {
 
         if (sdkTermsV3View == null || !viewPageList.contains(sdkTermsV3View)){
 
@@ -201,6 +201,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
             contentFrameLayout.addView(sdkTermsV3View);
             viewPageList.add(sdkTermsV3View);
         }
+        sdkTermsV3View.setFromView(fromViewType);
         setViewPageVisable(sdkTermsV3View);
     }
 
@@ -573,8 +574,8 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
     }
 
     @Override
-    public void showTermView() {
-        toTermView();
+    public void showTermView(ViewType fromViewType) {
+        toTermView(fromViewType);
     }
 
     @Override
