@@ -130,6 +130,10 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
             @Override
             public void onEmpty() {
                 accountSdkInputEditTextView.getInputEditText().setText("");
+                if (accountPopupWindow.isShowing()){
+                    accountPopupWindow.dismiss();
+                }
+                checkLocalAccount();
             }
         });
 
@@ -323,6 +327,7 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
                     public void success(String result, String msg) {
                         if (deleteDialog != null) {
                             deleteDialog.dismiss();
+                            checkLocalAccount();
                         }
                     }
 
@@ -354,10 +359,15 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
             String pwd = currentAccountModel.getPassword();
             sLoginDialogv2.getLoginPresenter().starpyAccountLogin(sLoginDialogv2.getActivity(),account,pwd,"",true);
         }
-
-
     }
 
+
+    private void checkLocalAccount(){
+        List<AccountModel> accountModels = SdkUtil.getAccountModels(getActivity());
+        if (accountModels == null || accountModels.isEmpty()){
+            sLoginDialogv2.toLoginWithRegView(ViewType.WelcomeView);
+        }
+    }
 
     @Override
     public void statusCallback(int operation) {

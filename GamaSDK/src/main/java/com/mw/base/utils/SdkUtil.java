@@ -170,11 +170,27 @@ public class SdkUtil {
 
     }
 
-    public static void removeAccountModel(Context context, String account){
+    public static void removeAccountModelByAccountName(Context context, String account){
         List<AccountModel> mls = getAccountModels(context);
         AccountModel xxxmls = null;
         for (AccountModel a: mls) {
             if (a.getAccount().equals(account)){
+                xxxmls = a;
+                break;
+            }
+        }
+
+        if (xxxmls != null && mls.contains(xxxmls)){
+            mls.remove(xxxmls);
+            saveAccountModels(context,mls);
+        }
+    }
+
+    public static void removeAccountModelByUserId(Context context, String userId){//根据uid删除之前的账号记录
+        List<AccountModel> mls = getAccountModels(context);
+        AccountModel xxxmls = null;
+        for (AccountModel a: mls) {
+            if (a.getUserId().equals(userId)){
                 xxxmls = a;
                 break;
             }

@@ -540,7 +540,8 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         ToastUtils.toast(getActivity(), R.string.text_account_bind_success);
 
 //                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GAMA);
-                        SdkUtil.updateAccountModel(getActivity(),sLoginResponse.getData().getUserId(),true);
+                        SdkUtil.removeAccountModelByUserId(getActivity(),sLoginResponse.getData().getUserId());
+//                        SdkUtil.updateAccountModel(getActivity(),sLoginResponse.getData().getUserId(),true);
                         SdkUtil.saveAccountModel(getActivity(), account, pwd,sLoginResponse.getData().getUserId(),sLoginResponse.getData().getToken(),
                                 sLoginResponse.getData().getTimestamp(),true);//记住账号密码
                         if (iLoginView != null){
@@ -1122,7 +1123,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 if (sLoginResponse != null) {
                     if (sLoginResponse.isRequestSuccess()) {
                         ToastUtils.toast(getActivity(), R.string.text_account_change_pwd_success);
-                        SdkUtil.removeAccountModel(activity,account);
+                        SdkUtil.removeAccountModelByAccountName(activity,account);
                         if (iLoginView != null){
                             iLoginView.findPwdSuccess(sLoginResponse);
                         }
@@ -1611,7 +1612,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         if (SStringUtil.isNotEmpty(sLoginResponse.getMessage())){
                             ToastUtils.toast(getActivity(), sLoginResponse.getMessage() + "");
                         }
-
+                        SdkUtil.removeAccountModelByUserId(getActivity(),userId);
                         if (sfCallBack != null){
                             sfCallBack.success(rawResult,rawResult);
                         }
