@@ -1289,13 +1289,14 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
             if (currentAccountMode != null) {
                 ThirdAccountBindRequestTaskV2 bindLineRequestTask = new ThirdAccountBindRequestTaskV2(getActivity(),
+                        SLoginType.LOGIN_TYPE_LINE,
                         account,
                         pwd,
                         currentAccountMode.getThirdId(),
                         "",
                         currentAccountMode.getUserId(),
-                        currentAccountMode.getLoginAccessToken(),
-                        currentAccountMode.getLoginTimestamp());
+                        currentAccountMode.getLoginAccessToken(), //该账号保存的accessToken
+                        currentAccountMode.getLoginTimestamp());//该账号保存的Timestamp
                 sAccountBindV2(bindLineRequestTask,account,pwd);
             }
         }

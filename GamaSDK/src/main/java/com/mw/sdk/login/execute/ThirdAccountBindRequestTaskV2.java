@@ -65,7 +65,7 @@ public class ThirdAccountBindRequestTaskV2 extends BaseLoginRequestTask {
     }
 
     /**
-     * 需要手机验证码的通用綁定
+     * 需要手机验证码的通用綁定、免注册推特使用，后面可能会改
      */
     public ThirdAccountBindRequestTaskV2(Context context,
                                        String sLoginType,
@@ -152,8 +152,9 @@ public class ThirdAccountBindRequestTaskV2 extends BaseLoginRequestTask {
         thirdAccountBindRequestBean.setRequestMethod(ApiRequestMethod.GS_REQUEST_METHOD_BIND);
     }
 
-    //line
+    //使用loginToken进行绑定的通用实例
     public ThirdAccountBindRequestTaskV2(Context context,
+                                         String registPlatform,
                                          String name,
                                          String pwd,
                                          String thirdPlatId,
@@ -169,7 +170,7 @@ public class ThirdAccountBindRequestTaskV2 extends BaseLoginRequestTask {
 
         sdkBaseRequestBean = thirdAccountBindRequestBean;
 
-        thirdAccountBindRequestBean.setRegistPlatform(SLoginType.LOGIN_TYPE_GOOGLE);
+        thirdAccountBindRequestBean.setRegistPlatform(registPlatform);
         thirdAccountBindRequestBean.setThirdPlatId(thirdPlatId);
         thirdAccountBindRequestBean.setName(name);
         thirdAccountBindRequestBean.setPwd(SStringUtil.toMd5(pwd));
