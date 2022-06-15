@@ -104,8 +104,8 @@ public class SdkUtil {
                                         String loginTimestamp,
                                         String thirdId, String thirdAccount, boolean updateTime, boolean isBindAccount){
 
-        List<AccountModel> mls = getAccountModels(context);
         if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_MG, loginType)) {//账号登錄
+            List<AccountModel> mls = getAccountModels(context);
             //account = thirdId;
             for (AccountModel a: mls) {
                 if (SStringUtil.isNotEmpty(a.getUserId()) && SStringUtil.isEqual(a.getUserId(), userId) && a.getAccount().equals(account)){
@@ -123,7 +123,8 @@ public class SdkUtil {
                 }
             }
         }else{//第三方账号
-
+            removeAccountModelLoginType(context,loginType);
+            List<AccountModel> mls = getAccountModels(context);
             for (AccountModel a: mls) {
                 if (SStringUtil.isNotEmpty(a.getThirdId()) && SStringUtil.isNotEmpty(a.getUserId()) && SStringUtil.isEqual(a.getUserId(), userId) && a.getThirdId().equals(thirdId)){//三方账号已存在
                     a.setBind(isBindAccount);
@@ -138,7 +139,6 @@ public class SdkUtil {
                     return;
                 }
             }
-
         }
 
        /* else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GUEST, loginType)) {//游客
@@ -150,7 +150,7 @@ public class SdkUtil {
         }else if(SStringUtil.isEqual(SLoginType.LOGIN_TYPE_LINE, loginType)) {
         } else {
         }*/
-
+        List<AccountModel> mls = getAccountModels(context);
         AccountModel newAccountModel = new AccountModel();//新添加一个保存
         newAccountModel.setAccount(account);
         newAccountModel.setPassword(password);
@@ -172,32 +172,45 @@ public class SdkUtil {
 
     public static void removeAccountModelByAccountName(Context context, String account){
         List<AccountModel> mls = getAccountModels(context);
-        AccountModel xxxmls = null;
+        List<AccountModel> removeModels  = new ArrayList<>();
         for (AccountModel a: mls) {
-            if (a.getAccount().equals(account)){
-                xxxmls = a;
-                break;
+            if (account.equals(a.getAccount())){
+                removeModels.add(a);
             }
         }
 
-        if (xxxmls != null && mls.contains(xxxmls)){
-            mls.remove(xxxmls);
+        if (!removeModels.isEmpty()){
+            mls.removeAll(removeModels);
             saveAccountModels(context,mls);
         }
     }
 
     public static void removeAccountModelByUserId(Context context, String userId){//根据uid删除之前的账号记录
         List<AccountModel> mls = getAccountModels(context);
-        AccountModel xxxmls = null;
+        List<AccountModel> removeModels  = new ArrayList<>();
         for (AccountModel a: mls) {
-            if (a.getUserId().equals(userId)){
-                xxxmls = a;
-                break;
+            if (userId.equals(a.getUserId())){
+                removeModels.add(a);
             }
         }
 
-        if (xxxmls != null && mls.contains(xxxmls)){
-            mls.remove(xxxmls);
+        if (!removeModels.isEmpty()){
+            mls.removeAll(removeModels);
+            saveAccountModels(context,mls);
+        }
+    }
+
+    public static void removeAccountModelLoginType(Context context, String loginType){//根据loginType删除之前的账号记录
+        List<AccountModel> mls = getAccountModels(context);
+        List<AccountModel> removeModels  = new ArrayList<>();
+        for (AccountModel a: mls) {
+            if (loginType.equals(a.getLoginType())){
+                removeModels.add(a);
+            }
+        }
+
+        if (!removeModels.isEmpty()){
+            mls.removeAll(removeModels);
             saveAccountModels(context,mls);
         }
     }

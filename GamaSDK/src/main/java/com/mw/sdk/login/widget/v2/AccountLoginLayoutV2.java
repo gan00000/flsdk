@@ -360,6 +360,23 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
 
     private void login() {
 
+        if (currentAccountModel != null){
+           if (SLoginType.LOGIN_TYPE_FB.equals(currentAccountModel.getLoginType())){
+                fbLoginView.performClick();
+                return;
+           }else if (SLoginType.LOGIN_TYPE_GOOGLE.equals(currentAccountModel.getLoginType())){
+               googleLoginView.performClick();
+               return;
+           }else if (SLoginType.LOGIN_TYPE_GUEST.equals(currentAccountModel.getLoginType())){
+               macLoginView.performClick();
+               return;
+           }else if (SLoginType.LOGIN_TYPE_LINE.equals(currentAccountModel.getLoginType())){
+                lineLoginView.performClick();
+               return;
+           }
+        }
+
+
         account = loginAccountEditText.getEditableText().toString().trim();
         password = loginPasswordEditText.getEditableText().toString().trim();
 
@@ -394,18 +411,9 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
     public void refreshViewData() {
         super.refreshViewData();
 
-//        if (GamaUtil.getStartTermRead(getContext())){
-//            agreeCheckBox.setChecked(true);
-//        }else {
-//            agreeCheckBox.setChecked(false);
-//        }
-
-        List<AccountModel>  ams = SdkUtil.getAccountModels(getContext());
+       /* List<AccountModel>  ams = SdkUtil.getAccountModels(getContext());
         accountModels.clear();
         accountModels.addAll(ams);
-//        if (historyAccountCommonAdapter != null) {
-//            historyAccountCommonAdapter.notifyDataSetChanged();
-//        }
         if (accountModels != null && !accountModels.isEmpty()){
             AccountModel lastAccountModel = accountModels.get(0); //设置按照最好登录时间排序后的第一个账号
             account = lastAccountModel.getAccount();
@@ -416,24 +424,11 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
         if (!TextUtils.isEmpty(account)){
             loginAccountEditText.setText(account);
             loginPasswordEditText.setText(password);
-        }
-
-//        if (accountModels != null && accountModels.size() > 1){
-//            historyAccountListBtn.setVisibility(VISIBLE);
-//        }else{
-//            historyAccountListBtn.setVisibility(GONE);
-//        }
-//        if (historyAccountRv != null) {
-//            historyAccountRv.setVisibility(GONE);
-//        }
-
+        }*/
     }
 
     @Override
     public void refreshVfCode() {
         super.refreshVfCode();
-        /*if (GamaUtil.getVfcodeSwitchStatus(getContext())) {
-            loadImage();
-        }*/
     }
 }

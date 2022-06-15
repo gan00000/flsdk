@@ -201,7 +201,7 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
 
             if (!currentAccountModel.isBind()){
                 layout_need_update_account.setVisibility(View.GONE);
-                layout_has_update_account.setVisibility(View.GONE);//方式改变，隐藏了
+
                 tv_account_update_tips.setText(R.string.text_has_update_account_tips);
                 iv_update_account_icon.setImageResource(R.mipmap.has_update_account_bg);
 
@@ -210,12 +210,13 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
                     btn_change_pwd.setBackgroundResource(R.drawable.mw_bg_white_20);
                     btn_change_pwd.setTextColor(getContext().getResources().getColor(R.color.white_c));
                     btn_swith_account3.setVisibility(View.GONE);
+                    layout_has_update_account.setVisibility(View.VISIBLE);
                 }else{
                     btn_change_pwd.setEnabled(false);
                     btn_change_pwd.setBackgroundResource(R.drawable.mw_bg_707070_20);
                     btn_change_pwd.setTextColor(getContext().getResources().getColor(R.color.c_707070));
-
                     btn_swith_account3.setVisibility(View.VISIBLE);
+                    layout_has_update_account.setVisibility(View.GONE);
                 }
 
 //

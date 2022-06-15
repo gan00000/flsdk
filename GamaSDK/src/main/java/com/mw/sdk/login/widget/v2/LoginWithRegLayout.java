@@ -2,15 +2,21 @@ package com.mw.sdk.login.widget.v2;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.core.base.utils.ToastUtils;
+import com.mw.base.utils.SdkUtil;
 import com.mw.sdk.login.SLoginDialogV2;
 import com.mw.sdk.login.constant.ViewType;
+import com.mw.sdk.login.model.AccountModel;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.mw.sdk.R;
+
+import java.util.List;
 
 /**
  * Created by GanYuanrong on 2017/2/6.
@@ -98,10 +104,18 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
 
             makeTabStatus(false);
         }else if (v == iv_login_reg_back) {
-            if (this.fromView == ViewType.HomeView){
+
+            List<AccountModel> accountModels = SdkUtil.getAccountModels(getActivity());
+            if (accountModels == null || accountModels.isEmpty()){
                 sLoginDialogv2.toMainHomeView();
-            }else if (this.fromView == ViewType.WelcomeView){
-                sLoginDialogv2.toWelcomeBackView();
+            }else{
+
+                if (this.fromView == ViewType.HomeView){
+                    sLoginDialogv2.toMainHomeView();
+                }else if (this.fromView == ViewType.WelcomeView){
+                    sLoginDialogv2.toWelcomeBackView();
+                }
+
             }
             sLoginDialogv2.distoryView(this);
         }
