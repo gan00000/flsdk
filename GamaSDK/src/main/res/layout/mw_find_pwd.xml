@@ -3,86 +3,97 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/transparent">
+    android:background="@color/c_sdk_bg">
 
     <LinearLayout
-        android:layout_width="460dp"
-        android:layout_height="340dp"
+        android:layout_width="375dp"
+        android:layout_height="667dp"
         android:orientation="vertical"
         android:gravity="center_horizontal"
         android:layout_centerInParent="true"
-        android:background="@drawable/login_cons_bg"
         >
 
         <include
             layout="@layout/sdk_ui_head_layout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="182dp"
             />
 
         <com.mw.sdk.login.widget.SDKInputEditTextView
-            android:layout_width="320dp"
+            android:layout_width="300dp"
             android:layout_height="40dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="25dp"
             android:id="@+id/sdkinputview_findpwd_account"
             />
 
-
-
-        <com.mw.sdk.login.widget.SDKPhoneInputEditTextView
-            android:layout_width="320dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="10dp"
-            android:id="@+id/sdkinputview_findpwd_phone"
-            />
-
-
         <LinearLayout
-            android:layout_width="320dp"
+            android:layout_width="300dp"
             android:layout_height="40dp"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
             <com.mw.sdk.login.widget.SDKInputEditTextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="1"
                 android:id="@+id/sdkinputview_findpwd_vf"
                 android:layout_marginRight="10dp"
                 />
 
+            <View
+                android:layout_width="1dp"
+                android:layout_height="14dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="14dp"
+                android:background="@color/c_C0C0C0"
+                />
+
             <Button
-                android:layout_width="0dp"
+                android:layout_width="90dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/login_get_vfcode_bg"
+                android:background="@null"
                 android:gravity="center"
                 android:id="@+id/btn_find_get_vfcode"
                 android:text="@string/py_register_account_get_vfcode"
-                android:textColor="@color/e_ff3e37"
-                android:textSize="@dimen/sp_18" />
+                android:textColor="@android:color/white"
+                android:textSize="14sp" />
 
 
         </LinearLayout>
+        <View
+            android:layout_width="300dp"
+            android:layout_height="0.5dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/c_C0C0C0"/>
 
+
+        <com.mw.sdk.login.widget.SDKInputEditTextView
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="25dp"
+            android:id="@+id/sdkinputview_findpwd_new"
+            />
+
+        <com.mw.sdk.login.widget.SDKInputEditTextView
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="25dp"
+            android:id="@+id/sdkinputview_findpwd_new_again"
+            />
 
         <Button
             android:id="@+id/gama_find_btn_confirm"
-            android:layout_width="320dp"
-            android:layout_height="40dp"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
             android:layout_marginTop="20dp"
-            android:background="@drawable/sdk_btn_bg"
+            android:background="@drawable/mw_btn_bg_f23a12"
             android:gravity="center"
             android:text="@string/py_confire"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/sp_26"/>
+            android:textSize="17sp" />
 
-        <TextView
-            android:id="@+id/gama_bind_tv_limit_hint"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/py_register_account_vfcode_hint"
-            android:textColor="@color/gama_color_ui_hint_text"
-            android:textSize="@dimen/sp_12" />
 
     </LinearLayout>
 
