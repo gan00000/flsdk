@@ -345,8 +345,8 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
                     public void success(String result, String msg) {
                         if (deleteDialog != null) {
                             deleteDialog.dismiss();
-                            checkLocalAccount();
                         }
+                        checkLocalAccount();
                     }
 
                     @Override
@@ -360,6 +360,9 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
 
     private void login() {
 
+        if (accountPopupWindow != null && accountPopupWindow.isShowing()) {
+            accountPopupWindow.dismiss();
+        }
         if (currentAccountModel == null){
             ToastUtils.toast(getActivity(),R.string.text_account_not_exist);
             sLoginDialogv2.toLoginWithRegView(ViewType.WelcomeView);
@@ -386,7 +389,10 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
         List<AccountModel> accountModels = SdkUtil.getAccountModels(getActivity());
         if (accountModels == null || accountModels.isEmpty()){
             sLoginDialogv2.toLoginWithRegView(ViewType.WelcomeView);
+            return;
         }
+        currentAccountModel = accountModels.get(0);
+        setViewStatue();
     }
 
     @Override
@@ -412,5 +418,21 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
     public void onViewVisible() {
         super.onViewVisible();
 //        accountEditText.setText("");
+    }
+
+    @Override
+    public void onViewGone() {
+        super.onViewGone();
+        if (accountPopupWindow != null && accountPopupWindow.isShowing()) {
+            accountPopupWindow.dismiss();
+        }
+    }
+
+    @Override
+    public void onViewRemove() {
+        super.onViewRemove();
+        if (accountPopupWindow != null && accountPopupWindow.isShowing()) {
+            accountPopupWindow.dismiss();
+        }
     }
 }
