@@ -73,7 +73,7 @@ public class DialogLoginImpl implements ILogin {
 
     private void goDialogView(Activity activity, ILoginCallBack iLoginCallBack) {
 
-        SLoginDialogV2 sLoginDialog = new SLoginDialogV2(activity, com.mw.sdk.R.style.Gama_Theme_AppCompat_Dialog_Notitle_Fullscreen);
+        SLoginDialogV2 sLoginDialog = new SLoginDialogV2(activity, com.mw.sdk.R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
         sLoginDialog.setSFacebookProxy(sFacebookProxy);
         sLoginDialog.setSGoogleSignIn(sGoogleSignIn);
         sLoginDialog.setsLineSignIn(sLineSignIn);

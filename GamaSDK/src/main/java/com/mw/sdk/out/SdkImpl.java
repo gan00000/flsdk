@@ -115,7 +115,7 @@ public class SdkImpl extends BaseSdkImpl {
 
         String webUrl = webPayReqBean.createPreRequestUrl();
 
-        otherPayWebViewDialog = new SWebViewDialog(activity, R.style.Gama_Theme_AppCompat_Dialog_Notitle_Fullscreen);
+        otherPayWebViewDialog = new SWebViewDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
         otherPayWebViewDialog.setWebUrl(webUrl);
         otherPayWebViewDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override

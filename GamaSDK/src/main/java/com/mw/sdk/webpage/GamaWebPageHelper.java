@@ -172,7 +172,7 @@ public class GamaWebPageHelper {
         }
         try {
             url = addInfoToUrl(context, url);
-            SWebViewDialog sWebViewDialog = new SWebViewDialog(context, R.style.Gama_Theme_AppCompat_Dialog_Notitle_Fullscreen);
+            SWebViewDialog sWebViewDialog = new SWebViewDialog(context, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
             sWebViewDialog.setWebUrl(url);
             sWebViewDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                 @Override

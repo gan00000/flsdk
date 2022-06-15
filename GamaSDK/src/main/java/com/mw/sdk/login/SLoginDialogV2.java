@@ -13,6 +13,7 @@ import androidx.annotation.StyleRes;
 
 import com.mw.base.bean.SLoginType;
 import com.mw.base.utils.Localization;
+import com.mw.sdk.R;
 import com.mw.sdk.ads.EventConstant;
 import com.mw.sdk.ads.SdkEventLogger;
 import com.mw.sdk.login.constant.BindType;
@@ -48,7 +49,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
     private Context context;
     private Activity activity;
 
-    private FrameLayout rootFrameLayout;
+    private View rootView;
     private FrameLayout contentFrameLayout;
 
     private SLoginBaseRelativeLayout mainHomeView;
@@ -119,13 +120,14 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Localization.updateSGameLanguage(context);
-        contentFrameLayout = new FrameLayout(context);
-        contentFrameLayout.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,FrameLayout.LayoutParams.MATCH_PARENT));
+//        contentFrameLayout = new FrameLayout(context);
+//        contentFrameLayout.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,FrameLayout.LayoutParams.MATCH_PARENT));
 
-        rootFrameLayout = new FrameLayout(context);
-        rootFrameLayout.addView(contentFrameLayout);
-
-        setContentView(rootFrameLayout);
+//        rootView = new FrameLayout(context);
+//        rootView.addView(contentFrameLayout);
+        rootView = this.activity.getLayoutInflater().inflate(R.layout.mw_dialog_layout, null);
+        contentFrameLayout = rootView.findViewById(R.id.sdk_fl_content_layout);
+        setContentView(rootView);
 
         viewPageList = new ArrayList<>();
 

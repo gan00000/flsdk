@@ -11,25 +11,25 @@
         android:usesCleartextTraffic="true"
         android:supportsRtl="true">
 
-        <activity
+       <!-- <activity
             android:name="com.game.sdk.demo.DoPermissionReq"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|fontScale"
             android:screenOrientation="sensor"
             android:theme="@style/Gama.Theme.AppCompat.Light.NoActionBar.FullScreen"
             android:windowSoftInputMode="stateHidden|adjustResize">
-            <!--<intent-filter>-->
-            <!--<action android:name="android.intent.action.MAIN" />-->
+            &lt;!&ndash;<intent-filter>&ndash;&gt;
+            &lt;!&ndash;<action android:name="android.intent.action.MAIN" />&ndash;&gt;
 
-            <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-        </activity>
+            &lt;!&ndash;<category android:name="android.intent.category.LAUNCHER" />&ndash;&gt;
+            &lt;!&ndash;</intent-filter>&ndash;&gt;
+        </activity>-->
 
         <activity
             android:name="com.game.sdk.demo.MainActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|fontScale"
             android:screenOrientation="sensor"
-            android:theme="@style/Gama.Theme.AppCompat.Light.NoActionBar.FullScreen"
-            android:windowSoftInputMode="stateHidden|adjustResize"
+            android:theme="@style/Sdk.Theme.AppCompat.Light.NoActionBar.FullScreen"
+            android:windowSoftInputMode="stateHidden|adjustResize|adjustPan"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
