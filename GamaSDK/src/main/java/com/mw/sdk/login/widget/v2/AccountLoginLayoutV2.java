@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupWindow;
 
+import com.core.base.utils.PL;
 import com.mw.base.bean.SLoginType;
 import com.mw.base.cfg.ConfigBean;
 import com.mw.base.utils.SdkUtil;
@@ -255,7 +256,11 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
         accountPopupWindow.setPopWindowListener(new AccountPopupWindow.PopWindowListener() {
             @Override
             public void onRemove(AccountModel accountModel) {
-
+                List<AccountModel> ams = SdkUtil.getAccountModels(getContext());
+                if (ams != null && !ams.isEmpty()){//设置按照最好登录时间排序后的第一个账号
+                    currentAccountModel = ams.get(0);
+                    setViewStatue(currentAccountModel);
+                }
             }
 
             @Override
@@ -323,6 +328,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
                     }else {
                         //平台帐号登入界面这里，帐号输入框这里如果删除或者编辑修改过原内容，帐号类型自动变成平台帐号类型，
                         // icon也变成平台帐号icon，下方的免注册登入也自动变成可编辑状态
+                        PL.i("afterTextChanged...");
                         if(!s.toString().equals(currentAccountModel.getUserId())){
                             AccountModel tempAccountModel = new AccountModel();
                             currentAccountModel = tempAccountModel;
@@ -408,8 +414,8 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
     }*/
 
     @Override
-    public void refreshViewData() {
-        super.refreshViewData();
+    public void onViewVisible() {
+        super.onViewVisible();
 
        /* List<AccountModel>  ams = SdkUtil.getAccountModels(getContext());
         accountModels.clear();
@@ -428,7 +434,32 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
     }
 
     @Override
+    public void onViewGone() {
+        super.onViewGone();
+        if (accountPopupWindow != null){
+            accountPopupWindow.dismiss();
+        }
+    }
+
+    @Override
+    public void onViewRemove() {
+        super.onViewRemove();
+        if (accountPopupWindow != null){
+            accountPopupWindow.dismiss();
+        }
+    }
+
+    @Override
     public void refreshVfCode() {
         super.refreshVfCode();
     }
+
+    @Override
+    public void setVisibility(int visibility) {
+        super.setVisibility(visibility);
+        if (accountPopupWindow != null){
+            accountPopupWindow.dismiss();
+        }
+    }
+
 }

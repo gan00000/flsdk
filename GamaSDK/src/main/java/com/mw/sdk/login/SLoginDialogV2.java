@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StyleRes;
 
-import com.mw.base.bean.SLoginType;
 import com.mw.base.utils.Localization;
 import com.mw.sdk.R;
 import com.mw.sdk.ads.EventConstant;
@@ -252,9 +251,10 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
                 continue;
             }
             if (childView == baseRelativeLayout) {
-                childView.refreshViewData();
+                childView.onViewVisible();
                 childView.setVisibility(View.VISIBLE);
             } else {
+                childView.onViewGone();
                 childView.setVisibility(View.GONE);
             }
         }
@@ -702,8 +702,9 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 //        }
 //    }
 
-    public boolean distoryView(View view){
+    public boolean distoryView(SLoginBaseRelativeLayout view){
         if (viewPageList.contains(view)){
+            view.onViewRemove();
             this.contentFrameLayout.removeView(view);
             viewPageList.remove(view);
             return true;

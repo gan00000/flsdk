@@ -2,13 +2,11 @@ package com.mw.sdk.login.widget.v2;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-import com.core.base.utils.ToastUtils;
 import com.mw.base.utils.SdkUtil;
 import com.mw.sdk.login.SLoginDialogV2;
 import com.mw.sdk.login.constant.ViewType;
@@ -122,11 +120,25 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
     }
 
     @Override
-    public void refreshViewData() {
-        super.refreshViewData();
+    public void onViewVisible() {
+        super.onViewVisible();
 
-        mAccountLoginV2.refreshViewData();
-        mAccountRegisterLayoutV2.refreshViewData();
+        mAccountLoginV2.onViewVisible();
+        mAccountRegisterLayoutV2.onViewVisible();
+    }
+
+    @Override
+    public void onViewGone() {
+        super.onViewGone();
+        mAccountLoginV2.onViewGone();
+        mAccountRegisterLayoutV2.onViewGone();
+    }
+
+    @Override
+    public void onViewRemove() {
+        super.onViewRemove();
+        mAccountLoginV2.onViewRemove();
+        mAccountRegisterLayoutV2.onViewRemove();
     }
 
     private void makeTabStatus(boolean isLoginClick) {

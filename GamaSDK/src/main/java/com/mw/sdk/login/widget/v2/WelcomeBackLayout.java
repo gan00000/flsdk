@@ -120,8 +120,15 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
         accountPopupWindow = new AccountPopupWindow(getActivity());
         accountPopupWindow.setPopWindowListener(new AccountPopupWindow.PopWindowListener() {
             @Override
-            public void onRemove(AccountModel accountModel) {
-
+            public void onRemove(AccountModel xaccountModel) {
+                if (xaccountModel != null) {
+                    currentAccountModel = null;
+                    List<AccountModel> ams = SdkUtil.getAccountModels(getContext());
+                    if (ams != null && !ams.isEmpty()){//设置按照最好登录时间排序后的第一个账号
+                        currentAccountModel = ams.get(0);
+                        setViewStatue();
+                    }
+                }
             }
 
             @Override
@@ -199,7 +206,7 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
 
             //判斷是否綁定，顯示是否升級賬號
 
-            if (!currentAccountModel.isBind()){
+            if (currentAccountModel.isBind()){
                 layout_need_update_account.setVisibility(View.GONE);
 
                 tv_account_update_tips.setText(R.string.text_has_update_account_tips);
@@ -396,14 +403,14 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
 
 
     @Override
-    protected void doSomething() {
-        super.doSomething();
+    protected void onSetDialog() {
+        super.onSetDialog();
     }
 
 
     @Override
-    public void refreshViewData() {
-        super.refreshViewData();
+    public void onViewVisible() {
+        super.onViewVisible();
 //        accountEditText.setText("");
     }
 }

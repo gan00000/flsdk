@@ -103,7 +103,7 @@ public abstract class SLoginBaseRelativeLayout extends SBaseRelativeLayout {
 
     public void setLoginDialogV2(SLoginDialogV2 sLoginDialog) {
         this.sLoginDialogv2 = sLoginDialog;
-        doSomething();
+        onSetDialog();
     }
 
     /**
@@ -113,14 +113,27 @@ public abstract class SLoginBaseRelativeLayout extends SBaseRelativeLayout {
         return backView;
     }
 
-    protected void doSomething() {}
-
-    public void refreshViewData(){
-        PL.i(this.getClass().getCanonicalName() + " refreshViewData");
-    }
+    protected void onSetDialog() {}
 
     //用于刷新验证码
     public void refreshVfCode() {}
+
+    /**
+     * 当view 从 dialog隐藏时被调用
+     */
+    public void onViewGone() {}
+
+    /**
+     * 当view 从 dialog content remove时被调用
+     */
+    public void onViewRemove() {}
+
+    /**
+     * 当view 从 dialog content 设置可见时被调用
+     */
+    public void onViewVisible(){
+        PL.i(this.getClass().getCanonicalName() + " onViewVisible");
+    }
 
     protected void toast(int msgId){
         ToastUtils.toast(getActivity(),msgId);

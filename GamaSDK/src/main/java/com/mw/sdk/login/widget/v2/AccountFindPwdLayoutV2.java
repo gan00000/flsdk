@@ -215,8 +215,8 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
 
 
     @Override
-    protected void doSomething() {
-        super.doSomething();
+    protected void onSetDialog() {
+        super.onSetDialog();
         sLoginDialogv2.getLoginPresenter().setOperationCallback(this);
         remainTimeSeconds = sLoginDialogv2.getLoginPresenter().getRemainTimeSeconds();
         if(remainTimeSeconds > 0) {
@@ -229,8 +229,8 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
     }
 
     @Override
-    public void refreshViewData() {
-        super.refreshViewData();
+    public void onViewVisible() {
+        super.onViewVisible();
         findPwdAccountEditText.setText("");
 //        gama_find_et_phone.setText("");
         vfCodeSdkInputEditTextView.getInputEditText().setText("");

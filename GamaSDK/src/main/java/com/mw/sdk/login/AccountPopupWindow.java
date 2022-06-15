@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupWindow;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -81,6 +82,7 @@ public class AccountPopupWindow extends PopupWindow {
         }else{
             this.showAsDropDown(anchorView,0,4);
         }
+        refreshData();
     }
 
     private void initHistoryRv() {
@@ -161,11 +163,7 @@ public class AccountPopupWindow extends PopupWindow {
         if (removeModel != null) {
 
             SdkUtil.saveAccountModels(getContext(), accountModels);
-            List<AccountModel> ams = SdkUtil.getAccountModels(getContext());
-            accountModels.clear();
-            accountModels.addAll(ams);
-            historyAccountCommonAdapter.notifyDataSetChanged();
-
+            List<AccountModel> ams = refreshData();
             if (popWindowListener != null){
                 popWindowListener.onRemove(removeModel);
             }
@@ -177,12 +175,23 @@ public class AccountPopupWindow extends PopupWindow {
                 if (popWindowListener != null){
                     popWindowListener.onEmpty();
                 }
+                dismiss();
             }
         }
     }
 
+    @NonNull
+    private List<AccountModel> refreshData() {
 
-   public interface PopWindowListener{
+        List<AccountModel> ams = SdkUtil.getAccountModels(getContext());
+        accountModels.clear();
+        accountModels.addAll(ams);
+        historyAccountCommonAdapter.notifyDataSetChanged();
+        return ams;
+    }
+
+
+    public interface PopWindowListener{
 
         void onRemove(AccountModel accountModel);
         void onUse(AccountModel accountModel);

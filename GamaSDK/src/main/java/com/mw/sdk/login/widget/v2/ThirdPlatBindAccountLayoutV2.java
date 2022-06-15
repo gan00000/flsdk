@@ -105,8 +105,8 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
     }
 
     @Override
-    public void refreshViewData() {
-        super.refreshViewData();
+    public void onViewVisible() {
+        super.onViewVisible();
         registerAccountEditText.setText("");
         registerPasswordEditText.setText("");
         thirdAccountEditText.setText("");
@@ -192,8 +192,8 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
     }
 
     @Override
-    protected void doSomething() {
-        super.doSomething();
+    protected void onSetDialog() {
+        super.onSetDialog();
 //        sLoginDialogv2.getLoginPresenter().setOperationCallback(this);
 //        remainTimeSeconds = sLoginDialogv2.getLoginPresenter().getRemainTimeSeconds();
     }

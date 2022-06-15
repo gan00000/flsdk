@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.core.base.BaseWebViewClient;
 import com.mw.base.cfg.ResConfig;
-import com.mw.base.utils.SdkUtil;
 import com.mw.sdk.login.constant.ViewType;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.mw.sdk.R;
@@ -123,8 +122,8 @@ public class TermsViewV3 extends SLoginBaseRelativeLayout {
 
 
     @Override
-    public void refreshViewData() {
-        super.refreshViewData();
+    public void onViewVisible() {
+        super.onViewVisible();
         termsView1.loadUrl(serviceUrl);
     }
 

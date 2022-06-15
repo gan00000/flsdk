@@ -139,8 +139,8 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
     }
 
     @Override
-    protected void doSomething() {
-        super.doSomething();
+    protected void onSetDialog() {
+        super.onSetDialog();
     }
 
 }
