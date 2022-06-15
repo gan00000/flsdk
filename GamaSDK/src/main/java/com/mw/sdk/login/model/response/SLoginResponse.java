@@ -14,11 +14,14 @@ public class SLoginResponse extends BaseResponseModel {
     Data data;
 
     public Data getData() {
+        if (data == null) {
+            return new Data();
+        }
         return data;
     }
 
     public boolean isRequestSuccess(){//5001为注册成功
-        return (SUCCESS_CODE.equals(getCode()) || SUCCESS_CODE_REG.equals(getCode())) && this.data != null;
+        return (SUCCESS_CODE.equals(getCode()) || SUCCESS_CODE_REG.equals(getCode()));
     }
 
     public void setData(Data data) {
