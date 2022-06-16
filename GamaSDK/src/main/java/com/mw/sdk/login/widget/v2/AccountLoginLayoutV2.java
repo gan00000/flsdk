@@ -8,6 +8,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.PopupWindow;
 
@@ -35,6 +36,8 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
     private View contentView;
 
     private Button loginMainLoginBtn;
+
+    private CheckBox cb_agree_term;
 
     /**
      * 眼睛、保存密码、验证码
@@ -204,6 +207,9 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
         fbLoginView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!checkAgreeTerm()) {
+                    return;
+                }
                 sLoginDialogv2.getLoginPresenter().fbLogin(sLoginDialogv2.getActivity());
             }
         });
@@ -213,15 +219,25 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
                 sLoginDialogv2.showTermView(ViewType.LoginWithRegView);
             }
         });
+
+        cb_agree_term = contentView.findViewById(R.id.cb_agree_term);
+        cb_agree_term.setChecked(true);
+
         macLoginView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!checkAgreeTerm()) {
+                    return;
+                }
                 sLoginDialogv2.getLoginPresenter().guestLogin(sLoginDialogv2.getActivity());
             }
         });
         googleLoginView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!checkAgreeTerm()) {
+                    return;
+                }
                 //google+登录
                 sLoginDialogv2.getLoginPresenter().googleLogin(sLoginDialogv2.getActivity());
             }
@@ -229,6 +245,9 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
         lineLoginView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!checkAgreeTerm()) {
+                    return;
+                }
                 //google+登录
                 sLoginDialogv2.getLoginPresenter().lineLogin(sLoginDialogv2.getActivity());
             }
@@ -366,6 +385,9 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
 
     private void login() {
 
+        if (!checkAgreeTerm()) {
+            return;
+        }
         if (currentAccountModel != null){
            if (SLoginType.LOGIN_TYPE_FB.equals(currentAccountModel.getLoginType())){
                 fbLoginView.performClick();
@@ -390,28 +412,13 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
 
     }
 
-    /*private void loadImage() {
-        String vfcodeUrl = ResConfig.getLoginPreferredUrl(getContext()) + GSRequestMethod.GS_REQUEST_METHOD_VFCODE
-                + "?timestamp=" + System.currentTimeMillis() + "&operatingSystem=android&uniqueId=" + GamaUtil.getCustomizedUniqueId1AndroidId1Adid(getContext());
-        PL.i(vfcodeUrl);
-        final RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        //构建ImageRequest 实例
-        final ImageRequest request = new ImageRequest(vfcodeUrl, new Response.Listener<Bitmap>() {
-            @Override
-            public void onResponse(Bitmap response) {
-                PL.i("response: " + response.toString());
-                //给imageView设置图片
-                gama_login_iv_vfcode.setImageBitmap(response);
-            }
-        }, 0, 0, ImageView.ScaleType.FIT_XY, Bitmap.Config.RGB_565, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                //设置一张错误的图片，临时用ic_launcher代替
-                gama_login_iv_vfcode.setImageResource(R.drawable.gama_title_sdk_bg);
-            }
-        });
-        requestQueue.add(request);
-    }*/
+    private boolean checkAgreeTerm(){
+        if (cb_agree_term.isChecked()){
+            return true;
+        }
+        toast(R.string.gama_ui_term_not_read);
+        return false;
+    }
 
     @Override
     public void onViewVisible() {
