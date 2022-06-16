@@ -84,56 +84,68 @@ public class SdkUtil {
 
     public static void saveAccountModel(Context context, String account, String password,String userId,  String loginAccessToken,
                                         String loginTimestamp, boolean updateTime){
+
         //平台注册的默认绑定
         saveAccountModel(context,SLoginType.LOGIN_TYPE_MG,account,password,userId, loginAccessToken,loginTimestamp,"","",updateTime,true);
     }
 
-    public static void updateAccountModel(Context context, String userId, boolean isBind){
-        List<AccountModel> mls = getAccountModels(context);
-        //account = thirdId;
-        for (AccountModel a: mls) {
-            if (SStringUtil.isNotEmpty(a.getUserId()) && SStringUtil.isEqual(a.getUserId(), userId)){
-                a.setBind(isBind);
-            }
-        }
-        saveAccountModels(context,mls);
-    }
+//    public static void updateAccountModel(Context context, String userId, boolean isBind){
+//        List<AccountModel> mls = getAccountModels(context);
+//        //account = thirdId;
+//        for (AccountModel a: mls) {
+//            if (SStringUtil.isNotEmpty(a.getUserId()) && SStringUtil.isEqual(a.getUserId(), userId)){
+//                a.setBind(isBind);
+//            }
+//        }
+//        saveAccountModels(context,mls);
+//    }
 
     public static void saveAccountModel(Context context,String loginType, String account, String password,String userId,
                                         String loginAccessToken,
                                         String loginTimestamp,
                                         String thirdId, String thirdAccount, boolean updateTime, boolean isBindAccount){
+        /**
+         * 1.每种第三方登录方式只保留最后一个
+         * 2.如果第三方的账号uid和平台uid相同(绑定的情况下)，保留平台，没有平台账号记录才保存第三方
+         */
+
 
         if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_MG, loginType)) {//账号登錄
-            List<AccountModel> mls = getAccountModels(context);
-            //account = thirdId;
-            for (AccountModel a: mls) {
-                if (SStringUtil.isNotEmpty(a.getUserId()) && SStringUtil.isEqual(a.getUserId(), userId) && a.getAccount().equals(account)){
-                    a.setPassword(password);
-                    a.setBind(isBindAccount);
-                    a.setUserId(userId);
-                    a.setLoginAccessToken(loginAccessToken);
-                    a.setLoginTimestamp(loginTimestamp);
-
-                    if (updateTime){
-                        a.setTime(System.currentTimeMillis());
-                    }
-                    saveAccountModels(context,mls);
-                    return;
-                }
-            }
+            SdkUtil.removeAccountModelByUserId(context,userId);
+//            List<AccountModel> mls = getAccountModels(context);
+//            //account = thirdId;
+//            for (AccountModel a: mls) {
+//                if (SStringUtil.isNotEmpty(a.getUserId()) && SStringUtil.isEqual(a.getUserId(), userId) && a.getAccount().equals(account)){
+//                    a.setPassword(password);
+//                    a.setBind(isBindAccount);
+//                    a.setUserId(userId);
+//                    a.setLoginAccessToken(loginAccessToken);
+//                    a.setLoginTimestamp(loginTimestamp);
+//
+//                    if (updateTime){
+//                        a.setTime(System.currentTimeMillis());
+//                    }
+//                    saveAccountModels(context,mls);
+//                    return;
+//                }
+//            }
         }else{//第三方账号
             removeAccountModelLoginType(context,loginType);
             List<AccountModel> mls = getAccountModels(context);
-            for (AccountModel a: mls) {
-                if (SStringUtil.isNotEmpty(a.getThirdId()) && SStringUtil.isNotEmpty(a.getUserId()) && SStringUtil.isEqual(a.getUserId(), userId) && a.getThirdId().equals(thirdId)){//三方账号已存在
-                    a.setBind(isBindAccount);
-                    a.setUserId(userId);
-                    a.setLoginAccessToken(loginAccessToken);
-                    a.setLoginTimestamp(loginTimestamp);
+            for (AccountModel tempAccountModel: mls) {
+
+                if (SStringUtil.isNotEmpty(tempAccountModel.getUserId()) && SStringUtil.isEqual(tempAccountModel.getUserId(), userId)){//uid账号已存在
+
+                    if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_MG, tempAccountModel.getLoginType())) {
+                        return;
+                    }
+                    tempAccountModel.setBind(isBindAccount);
+                    tempAccountModel.setUserId(userId);
+                    tempAccountModel.setLoginAccessToken(loginAccessToken);
+                    tempAccountModel.setLoginTimestamp(loginTimestamp);
 
                     if (updateTime){
-                        a.setTime(System.currentTimeMillis());
+                        tempAccountModel.setTime(System.currentTimeMillis());
                     }
                     saveAccountModels(context,mls);
                     return;
@@ -170,7 +182,7 @@ public class SdkUtil {
 
     }
 
-    public static void removeAccountModelByAccountName(Context context, String account){
+   /* public static void removeAccountModelByAccountName(Context context, String account){
         List<AccountModel> mls = getAccountModels(context);
         List<AccountModel> removeModels  = new ArrayList<>();
         for (AccountModel a: mls) {
@@ -183,7 +195,7 @@ public class SdkUtil {
             mls.removeAll(removeModels);
             saveAccountModels(context,mls);
         }
-    }
+    }*/
 
     public static void removeAccountModelByUserId(Context context, String userId){//根据uid删除之前的账号记录
         List<AccountModel> mls = getAccountModels(context);
@@ -200,7 +212,7 @@ public class SdkUtil {
         }
     }
 
-    public static void removeAccountModelLoginType(Context context, String loginType){//根据loginType删除之前的账号记录
+    private static void removeAccountModelLoginType(Context context, String loginType){//根据loginType删除之前的账号记录
         List<AccountModel> mls = getAccountModels(context);
         List<AccountModel> removeModels  = new ArrayList<>();
         for (AccountModel a: mls) {

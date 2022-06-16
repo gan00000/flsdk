@@ -540,7 +540,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         ToastUtils.toast(getActivity(), R.string.text_account_bind_success);
 
 //                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GAMA);
-                        SdkUtil.removeAccountModelByUserId(getActivity(),sLoginResponse.getData().getUserId());
+
 //                        SdkUtil.updateAccountModel(getActivity(),sLoginResponse.getData().getUserId(),true);
                         SdkUtil.saveAccountModel(getActivity(), account, pwd,sLoginResponse.getData().getUserId(),sLoginResponse.getData().getToken(),
                                 sLoginResponse.getData().getTimestamp(),true);//记住账号密码
@@ -1123,7 +1123,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 if (sLoginResponse != null) {
                     if (sLoginResponse.isRequestSuccess()) {
                         ToastUtils.toast(getActivity(), R.string.text_account_change_pwd_success);
-                        SdkUtil.removeAccountModelByAccountName(activity,account);
+
                         if (iLoginView != null){
                             iLoginView.findPwdSuccess(sLoginResponse);
                         }
