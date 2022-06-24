@@ -139,6 +139,8 @@ public class SdkUtil {
                     if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_MG, tempAccountModel.getLoginType())) {
                         return;
                     }
+
+                    //這裡應該是不會被執行到
                     tempAccountModel.setBind(isBindAccount);
                     tempAccountModel.setUserId(userId);
                     tempAccountModel.setLoginAccessToken(loginAccessToken);
@@ -148,6 +150,8 @@ public class SdkUtil {
                         tempAccountModel.setTime(System.currentTimeMillis());
                     }
                     saveAccountModels(context,mls);
+
+                    //這裡應該是不會被執行到 end
                     return;
                 }
             }
