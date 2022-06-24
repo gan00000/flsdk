@@ -35,7 +35,9 @@ public class ThirdAccountBindRequestTaskV2 extends BaseLoginRequestTask {
                                        String fbAccessToken,
                                        String fbTokenBusiness, String userId, String loginToken,String loginTimestamp) {
         super(context);
-
+        if (SStringUtil.isNotEmpty(name)){
+            name = name.toLowerCase();
+        }
         thirdAccountBindRequestBean = new ThirdAccountBindRequestBean(context);
 
         sdkBaseRequestBean = thirdAccountBindRequestBean;
@@ -81,7 +83,9 @@ public class ThirdAccountBindRequestTaskV2 extends BaseLoginRequestTask {
             PL.d("thirdPlatId:" + thirdPlatId);
             return;
         }
-
+        if (SStringUtil.isNotEmpty(name)){
+            name = name.toLowerCase();
+        }
         thirdAccountBindRequestBean = new ThirdAccountBindRequestBean(context);
 
         sdkBaseRequestBean = thirdAccountBindRequestBean;
@@ -124,6 +128,9 @@ public class ThirdAccountBindRequestTaskV2 extends BaseLoginRequestTask {
             PL.d("thirdPlatId:" + thirdPlatId);
             return;
         }
+        if (SStringUtil.isNotEmpty(name)){
+            name = name.toLowerCase();
+        }
 
         thirdAccountBindRequestBean = new ThirdAccountBindRequestBean(context);
 
@@ -165,7 +172,9 @@ public class ThirdAccountBindRequestTaskV2 extends BaseLoginRequestTask {
 //            PL.d("thirdPlatId:" + thirdPlatId);
 //            return;
 //        }
-
+        if (SStringUtil.isNotEmpty(name)){
+            name = name.toLowerCase();
+        }
         thirdAccountBindRequestBean = new ThirdAccountBindRequestBean(context);
 
         sdkBaseRequestBean = thirdAccountBindRequestBean;
