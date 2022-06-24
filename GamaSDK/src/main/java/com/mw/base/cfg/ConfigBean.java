@@ -25,9 +25,7 @@ public class ConfigBean {
         String packageName = context.getPackageName();
         String versionCode = ApkInfoUtil.getVersionCode(context);
         String versionName = ApkInfoUtil.getVersionName(context);
-        if (allVersion != null && packageName.equals(allVersion.getPackageName())){
-            return allVersion;
-        }
+
         if (subVersion != null){
 
             for (int i = 0; i < subVersion.size(); i++) {
@@ -39,6 +37,11 @@ public class ConfigBean {
             }
 
         }
+
+        if (allVersion != null && packageName.equals(allVersion.getPackageName())){
+            return allVersion;
+        }
+
         return null;
     }
 
