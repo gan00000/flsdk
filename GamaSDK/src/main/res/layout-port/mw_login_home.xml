@@ -152,8 +152,8 @@
 
                 <CheckBox
                     android:id="@+id/cb_agree_term"
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
                     android:background="@drawable/mw_term_checkbox_selector"
                     android:button="@null" />
 
