@@ -114,7 +114,9 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
 
 
         loginAccountEditText = accountSdkInputEditTextView.getInputEditText();
+        loginAccountEditText.setHint(R.string.py_msg_account_hint);
         loginPasswordEditText = pwdSdkInputEditTextView.getInputEditText();
+        loginPasswordEditText.setHint(R.string.py_msg_pwd_hint);
 //        pwdSdkInputEditTextView.setEyeVisable(View.VISIBLE);
 
         historyAccountListBtn = contentView.findViewById(R.id.sdk_input_item_account_history);
