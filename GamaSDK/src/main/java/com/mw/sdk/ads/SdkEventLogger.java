@@ -7,6 +7,7 @@ import android.text.TextUtils;
 
 import com.appsflyer.AFInAppEventParameterName;
 import com.appsflyer.AppsFlyerLib;
+import com.core.base.utils.ApkInfoUtil;
 import com.core.base.utils.PL;
 import com.gama.pay.gp.bean.res.BasePayBean;
 import com.mw.base.cfg.ResConfig;
@@ -218,8 +219,7 @@ public class SdkEventLogger {
             if(map == null) { //appsflyer的属性列表
                 map = new HashMap<>();
             }
-            map.put(EventConstant.ParameterName.TIME, System.currentTimeMillis() + "");
-//            addEventParameterName(context, map);
+            addEventParameterName(context, map);
 
             //facebook和firebase的属性列表
             Bundle b = new Bundle();
@@ -229,14 +229,14 @@ public class SdkEventLogger {
 
             if(mediaSet == null || mediaSet.isEmpty() || mediaSet.contains(EventConstant.EventReportChannel.EventReportAllChannel)) {
                 PL.i("上报全部媒体");
+                //AppsFlyer上报
+                AppsFlyerLib.getInstance().logEvent(context.getApplicationContext(), eventName, map);
+
                 //Facebook上报
                 SFacebookProxy.trackingEvent(context, eventName, null, b);
 
                 //firebase上报,
                 SGoogleProxy.firebaseAnalytics(context, eventName, b);
-
-                //AppsFlyer上报
-                AppsFlyerLib.getInstance().logEvent(context.getApplicationContext(), eventName, map);
 
                 //adjust
 //                GamaAj.trackEvent(context, eventName, map);
@@ -267,7 +267,7 @@ public class SdkEventLogger {
         }
     }
 
-//    private static Map<String, Object> addEventParameterName(Context context, Map<String, Object> map) {
+    private static Map<String, Object> addEventParameterName(Context context, Map<String, Object> map) {
 //        if (!map.containsKey(EventConstant.ParameterName.ROLE_ID) && SStringUtil.isNotEmpty(SdkUtil.getRoleId(context))) {
 //            map.put(EventConstant.ParameterName.ROLE_ID, SdkUtil.getRoleId(context));
 //            map.put(EventConstant.ParameterName.ROLE_NAME, SdkUtil.getRoleName(context));
@@ -280,9 +280,17 @@ public class SdkEventLogger {
 //        if (SStringUtil.isNotEmpty(userId)) {
 //            map.put(EventConstant.ParameterName.USER_ID, userId);
 //        }
-//        map.put(EventConstant.ParameterName.TIME, System.currentTimeMillis() + "");
-//        return map;
-//    }
+        String adId = SdkUtil.getGoogleAdId(context);
+        String uniqueId = SdkUtil.getGoogleAdid1AndroidId(context);
+        String androidId = ApkInfoUtil.getAndroidId(context);
+
+        map.put(EventConstant.ParameterName.TIME, System.currentTimeMillis() + "");
+        map.put("adId", adId);
+        map.put("uniqueId", uniqueId);
+        map.put("androidId", androidId);
+
+        return map;
+    }
 
     /**
      * 获取Google ads id，不能在主线程调用
