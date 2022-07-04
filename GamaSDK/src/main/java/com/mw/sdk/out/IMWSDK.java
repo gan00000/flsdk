@@ -42,39 +42,17 @@ public interface IMWSDK extends IGameLifeCycle {
 
     void onWindowFocusChanged(Activity activity, boolean hasFocus);
 
-    @Deprecated
-    void openWebPage(Activity activity, GamaOpenWebType type, String url);
+//    @Deprecated
+//    void openWebPage(Activity activity, GamaOpenWebType type, String url);
+//
+//    void openWebPage(Activity activity, GamaOpenWebType type, String url, ISdkCallBack callBack);
 
-    void openWebPage(Activity activity, GamaOpenWebType type, String url, ISdkCallBack callBack);
-
-    void openPlatform(Activity activity);
-
-    /**
-     * 获取用户资料
-     */
-//    void gamaGetUserProfile(Activity activity, UserProfileCallback callBack);
-
-    /**
-     * 获取好友
-     */
-//    void gamaFetchFriends(Activity activity, ThirdPartyType type, Bundle bundle, String paging, int limit, FetchFriendsCallback callback);
-
-    /**
-     * 分享
-     */
-    void share(Activity activity, ThirdPartyType type, String message, String linkUrl, String picPath, ISdkCallBack callback);
-
-//    void gamaSentMessageToSpecifiedFriends(Activity activity, GamaThirdPartyType type, Uri uri, ISdkCallBack callback);
-
-    /**
-     * 发消息至游戏中心
-     */
-//    void gamaInviteFriends(Activity activity, ThirdPartyType type, List<FriendProfile> invitingList, String msg, String title, InviteFriendsCallback callback);
+//    void openPlatform(Activity activity);
 
     /**
      * 检查是否支持分享
      */
-    boolean gamaShouldShareWithType(Activity activity, ThirdPartyType type);
+//    boolean gamaShouldShareWithType(Activity activity, ThirdPartyType type);
 
     /**
      * 事件上报接口
@@ -84,10 +62,6 @@ public interface IMWSDK extends IGameLifeCycle {
      */
     void trackEvent(Activity activity, EventConstant.EventName eventName, Map<String, Object> map);
 
-    void trackCreateRoleEvent(Activity activity, String roleId,String roleName);
+//    void trackCreateRoleEvent(Activity activity, String roleId,String roleName);
 
-    /**
-     * 处理一些特殊功能的接口
-     */
-//    void openFunction(Activity activity, GsFunctionType type, ISdkCallBack callBack);
 }

@@ -268,6 +268,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
 
     @Override
     public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
+
     }
 
     @Override

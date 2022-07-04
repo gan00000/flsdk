@@ -8,7 +8,7 @@ public class MWSdkFactory {
 
     public static IMWSDK create(){
 
-        return new SdkImpl();
+        return new BaseSdkImpl();
     }
 
 }

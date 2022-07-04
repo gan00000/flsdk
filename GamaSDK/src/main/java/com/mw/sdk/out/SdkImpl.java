@@ -1,3 +1,4 @@
+/*
 package com.mw.sdk.out;
 
 import android.app.Activity;
@@ -22,20 +23,19 @@ import com.mw.sdk.ads.SdkEventLogger;
 import com.mw.sdk.callback.IPayListener;
 import com.mw.sdk.constant.GsSdkImplConstant;
 
-public class SdkImpl extends BaseSdkImpl {
+public class SdkImpl {
     private static final String TAG = SdkImpl.class.getSimpleName();
 
     SdkImpl() {
         super();
     }
 
-    private IPay iPay;
+//    private IPay iPay;
 
     @Override
     public void onCreate(Activity activity) {
         super.onCreate(activity);
-        iPay = IPayFactory.create(IPayFactory.PAY_GOOGLE);
-        iPay.onCreate(activity);
+
     }
 
     @Override
@@ -137,3 +137,4 @@ public class SdkImpl extends BaseSdkImpl {
     }
 
 }
+*/
