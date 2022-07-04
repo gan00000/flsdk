@@ -99,16 +99,16 @@ public class EventConstant {
         public static final String PURCHASE_TIME = "sdk_purchase_time";
         public static final String CURRENCY = "sdk_event_currency";
 
-        public static final String TIME = "TIME";
+        public static final String TIME = "time";
 
     }
 
 
-    public enum EventReportChannel {
-        EventReportAllChannel,
-        EventReportFacebook,
-        EventReportFirebase,
-        EventReportAppsflyer,
-        EventReportAdjust
+    public static class AdType {
+
+        public static final int AdTypeFacebook = 1<<1;
+        public static final int AdTypeFirebase = 1<<2;
+        public static final int AdTypeAppsflyer = 1<<3;
+        public static final int AdTypeAllChannel = AdTypeFacebook | AdTypeFirebase | AdTypeAppsflyer;
     }
 }

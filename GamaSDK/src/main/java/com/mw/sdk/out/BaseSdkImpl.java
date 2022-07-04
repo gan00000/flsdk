@@ -896,7 +896,7 @@ public class BaseSdkImpl implements IMWSDK {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                SdkEventLogger.trackingWithEventName(activity, eventName.name(), map, null);
+                SdkEventLogger.trackingWithEventName(activity, eventName.name(), map, EventConstant.AdType.AdTypeAllChannel);
             }
         });
     }

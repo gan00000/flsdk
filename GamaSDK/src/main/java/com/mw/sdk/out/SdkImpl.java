@@ -77,7 +77,7 @@ public class SdkImpl extends BaseSdkImpl {
             iPay.setIPayCallBack(new IPayCallBack() {
                 @Override
                 public void success(BasePayBean basePayBean) {
-//                    SdkEventLogger.trackinPayEvent(activity, basePayBean);
+                    SdkEventLogger.trackinPayEvent(activity, basePayBean);
                     ToastUtils.toast(activity,R.string.text_finish_pay);
                 }
 

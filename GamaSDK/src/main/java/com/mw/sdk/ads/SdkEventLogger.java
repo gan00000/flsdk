@@ -9,6 +9,7 @@ import com.appsflyer.AFInAppEventParameterName;
 import com.appsflyer.AppsFlyerLib;
 import com.core.base.utils.ApkInfoUtil;
 import com.core.base.utils.PL;
+import com.facebook.appevents.AppEventsConstants;
 import com.gama.pay.gp.bean.res.BasePayBean;
 import com.mw.base.cfg.ResConfig;
 import com.mw.base.utils.SdkUtil;
@@ -26,6 +27,7 @@ import java.util.Set;
  */
 
 public class SdkEventLogger {
+
     private static final String TAG = SdkEventLogger.class.getSimpleName();
 
     public static void activateApp(Activity activity){
@@ -47,27 +49,7 @@ public class SdkEventLogger {
 
             SFacebookProxy.initFbSdk(activity.getApplicationContext());
 
-            // Google Android first open conversion tracking snippet
-            // Add this code to the onCreate() method of your application activity
-//            String gama_ads_adword_conversionId = ResConfig.getConfigInAssetsProperties(activity,"gama_ads_adword_conversionId");
-//            if (SStringUtil.isNotEmpty(gama_ads_adword_conversionId)) {
-//                AdWordsConversionReporter.reportWithConversionId(activity.getApplicationContext(),
-//                        gama_ads_adword_conversionId, ResConfig.getConfigInAssetsProperties(activity,"gama_ads_adword_label"), "0.00", false);
-//            }
-
-            //adjust
-//            GamaAj.activeAj(activity);
-
-//            TapDB.init(activity,activity.getString(R.string.tapdb_appId),activity.getString(R.string.tapdb_channel),
-//                    activity.getString(R.string.tapdb_gameVersion));
-
-            trackingWithEventName(activity, EventConstant.EventName.APP_OPEN.name(), null, null);
-
-            //获取验证码开关
-            if(SdkUtil.isNeedVfSwitch(activity)) {
-               // getVfSwitch(activity);
-            }
-
+            trackingWithEventName(activity, EventConstant.EventName.APP_OPEN.name(), null, EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -87,7 +69,7 @@ public class SdkEventLogger {
             Map<String, Object> eventValue = new HashMap<String, Object>();
             eventValue.put(EventConstant.ParameterName.USER_ID, userId);
             String eventName = EventConstant.EventName.LOGIN_SUCCESS.name();
-            trackingWithEventName(activity,eventName,eventValue,null);
+            trackingWithEventName(activity,eventName,eventValue, EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -108,8 +90,9 @@ public class SdkEventLogger {
             Map<String, Object> eventValue = new HashMap<String, Object>();
             eventValue.put(EventConstant.ParameterName.USER_ID, userId);
             String eventName = EventConstant.EventName.REGISTER_SUCCESS.name();
-            trackingWithEventName(activity,eventName,eventValue,null);
-
+            trackingWithEventName(activity,eventName,eventValue,EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
+            trackingWithEventName(activity, AppEventsConstants.EVENT_NAME_COMPLETED_REGISTRATION,eventValue,EventConstant.AdType.AdTypeFacebook);
+            trackingWithEventName(activity, "COMPLETE_REGISTRATION_AND",eventValue,EventConstant.AdType.AdTypeFacebook);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -128,7 +111,7 @@ public class SdkEventLogger {
                 PL.i(TAG, "角色信息上報");
             }
             map.put(EventConstant.ParameterName.USER_ID, userId);
-            trackingWithEventName(activity,EventConstant.EventName.CREATE_ROLE.name(),map,null);
+            trackingWithEventName(activity,EventConstant.EventName.CREATE_ROLE.name(),map, EventConstant.AdType.AdTypeAllChannel);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -147,24 +130,14 @@ public class SdkEventLogger {
 
         String orderId = "";
         String productId = "";
-        long purchaseTime;
+//        long purchaseTime;
         double usdPrice = 0;
 
         if(payBean != null) {
             PL.i(TAG, "trackinPay Purchase");
             orderId = payBean.getOrderId();
-            purchaseTime = payBean.getPurchaseTime();
+//            purchaseTime = payBean.getPurchaseTime();
             productId = payBean.getProductId();
-//            try {
-//                Pattern p = Pattern.compile("\\d+(usd|USD)");
-//                Matcher m = p.matcher(productId);
-//                if(m.find()) {
-//                    price = Integer.parseInt(m.group().toLowerCase().replace("usd", ""));
-//                }
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-
             usdPrice = payBean.getUsdPrice();
 
         } else {
@@ -180,7 +153,7 @@ public class SdkEventLogger {
             eventValues.put(EventConstant.ParameterName.ROLE_ID, SdkUtil.getRoleId(context));
             eventValues.put(EventConstant.ParameterName.PRODUCT_ID, productId);
             eventValues.put(EventConstant.ParameterName.ORDER_ID, orderId);
-            eventValues.put(EventConstant.ParameterName.PURCHASE_TIME, purchaseTime);
+//            eventValues.put(EventConstant.ParameterName.PURCHASE_TIME, purchaseTime);
             eventValues.put(EventConstant.ParameterName.PAY_VALUE, usdPrice);
             eventValues.put(EventConstant.ParameterName.CURRENCY, "USD");
             //下面是AppsFlyer自己的事件名
@@ -188,13 +161,8 @@ public class SdkEventLogger {
             eventValues.put(AFInAppEventParameterName.CURRENCY, "USD");
             eventValues.put(AFInAppEventParameterName.CONTENT_ID, productId);
 
-            //AppsFlyerLib.getInstance().trackEvent(context, AFInAppEventType.PURCHASE, eventValues);
-
-            //adjust
-//            GamaAj.trackEvent(context, SdkAdsConstant.GAMA_EVENT_IAB, eventValues);
-
             if(!SdkUtil.getFirstPay(context)) {//检查是否首次充值
-                trackingWithEventName(context, EventConstant.EventName.FIRST_PAY.name(), null, null);
+                trackingWithEventName(context, EventConstant.EventName.FIRST_PAY.name(), eventValues, EventConstant.AdType.AdTypeAllChannel);
                 SdkUtil.saveFirstPay(context);
             }
 
@@ -204,12 +172,12 @@ public class SdkEventLogger {
     }
 
     public static void trackingWithEventName(Context context, String eventName){
-        trackingWithEventName(context,eventName,null,null);
+        trackingWithEventName(context,eventName,null,EventConstant.AdType.AdTypeAllChannel);
     }
     public static void trackingWithEventName(Context context, String eventName, Map<String, Object> map){
-        trackingWithEventName(context,eventName,map,null);
+        trackingWithEventName(context,eventName,map, EventConstant.AdType.AdTypeAllChannel);
     }
-    public static void trackingWithEventName(Context context, String eventName, Map<String, Object> map, Set<EventConstant.EventReportChannel> mediaSet) {
+    public static void trackingWithEventName(Context context, String eventName, Map<String, Object> map, int adType) {
         if(TextUtils.isEmpty(eventName)) {
             PL.e("上報事件名為空");
             return;
@@ -227,7 +195,7 @@ public class SdkEventLogger {
                 b.putString(entry.getKey(), entry.getValue().toString());
             }
 
-            if(mediaSet == null || mediaSet.isEmpty() || mediaSet.contains(EventConstant.EventReportChannel.EventReportAllChannel)) {
+            if(adType == 0 || (adType & EventConstant.AdType.AdTypeAllChannel) == EventConstant.AdType.AdTypeAllChannel) {
                 PL.i("上报全部媒体");
                 //AppsFlyer上报
                 AppsFlyerLib.getInstance().logEvent(context.getApplicationContext(), eventName, map);
@@ -241,26 +209,26 @@ public class SdkEventLogger {
                 //adjust
 //                GamaAj.trackEvent(context, eventName, map);
             } else {
-                if(mediaSet.contains(EventConstant.EventReportChannel.EventReportFacebook)) {
-                    PL.i("上报媒体1");
+                if((adType & EventConstant.AdType.AdTypeFacebook)==EventConstant.AdType.AdTypeFacebook) {
+                    PL.i("上报媒体EventReportFacebook");
                     //Facebook上报
                     SFacebookProxy.trackingEvent(context, eventName, null, b);
                 }
-                if(mediaSet.contains(EventConstant.EventReportChannel.EventReportFirebase)) {
-                    PL.i("上报媒体2");
+                if((adType & EventConstant.AdType.AdTypeFirebase)==EventConstant.AdType.AdTypeFirebase) {
+                    PL.i("上报媒体EventReportFirebase");
                     //firebase上报,
                     SGoogleProxy.firebaseAnalytics(context, eventName, b);
                 }
-                if(mediaSet.contains(EventConstant.EventReportChannel.EventReportAppsflyer)) {
-                    PL.i("上报媒体3");
+                if((adType & EventConstant.AdType.AdTypeAppsflyer)==EventConstant.AdType.AdTypeAppsflyer) {
+                    PL.i("上报媒体AdTypeAppsflyer");
                     //AppsFlyer上报
                     AppsFlyerLib.getInstance().logEvent(context.getApplicationContext(), eventName, map);
                 }
-                if(mediaSet.contains(EventConstant.EventReportChannel.EventReportAdjust)) {
-                    PL.i("上报媒体4");
+//                if(mediaSet.contains(EventConstant.EventReportChannel.EventReportAdjust)) {
+//                    PL.i("上报媒体4");
                     //adjust上报
 //                    GamaAj.trackEvent(context, eventName, map);
-                }
+//                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -268,18 +236,7 @@ public class SdkEventLogger {
     }
 
     private static Map<String, Object> addEventParameterName(Context context, Map<String, Object> map) {
-//        if (!map.containsKey(EventConstant.ParameterName.ROLE_ID) && SStringUtil.isNotEmpty(SdkUtil.getRoleId(context))) {
-//            map.put(EventConstant.ParameterName.ROLE_ID, SdkUtil.getRoleId(context));
-//            map.put(EventConstant.ParameterName.ROLE_NAME, SdkUtil.getRoleName(context));
-//            map.put(EventConstant.ParameterName.ROLE_LEVEL, SdkUtil.getRoleLevel(context));
-//            map.put(EventConstant.ParameterName.VIP_LEVEL, SdkUtil.getRoleVip(context));
-//            map.put(EventConstant.ParameterName.SERVER_CODE, SdkUtil.getServerCode(context));
-//            map.put(EventConstant.ParameterName.SERVER_NAME, SdkUtil.getServerName(context));
-//        }
-//        String userId = SdkUtil.getUid(context);
-//        if (SStringUtil.isNotEmpty(userId)) {
-//            map.put(EventConstant.ParameterName.USER_ID, userId);
-//        }
+
         String adId = SdkUtil.getGoogleAdId(context);
         String uniqueId = SdkUtil.getGoogleAdid1AndroidId(context);
         String androidId = ApkInfoUtil.getAndroidId(context);

@@ -80,7 +80,7 @@ public class LogTimer {
             int minute = intArray[i];
             String eventName = String.format(EventConstant.GAMA_EVENT_MINUTE, minute);
             if (time >= minute * 1000 * 60 && !sp.getBoolean(eventName, false)) {
-                SdkEventLogger.trackingWithEventName(context, eventName, null, null);
+//                SdkEventLogger.trackingWithEventName(context, eventName, null, null);
                 sp.edit().putBoolean(eventName, true).apply();
 //                if(i == intArray.length - 1) {
 //                    PL.i(TAG, "任務完成，不用再執行。");
