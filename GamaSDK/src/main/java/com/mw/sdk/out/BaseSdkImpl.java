@@ -156,7 +156,7 @@ public class BaseSdkImpl implements IMWSDK {
     }
 
     @Override
-    public void pay(final Activity activity, final SPayType payType, final String cpOrderId, final String productId, final String extra, final IPayListener listener) {
+    public void pay(Activity activity, SPayType payType, String cpOrderId, String productId, String extra, String roleId,String roleName,String roleLevel,String severCode,String serverName, IPayListener listener) {
         PL.i("sdk pay payType:" + payType.toString() + " ,cpOrderId:" + cpOrderId + ",productId:" + productId + ",extra:" + extra);
         if ((System.currentTimeMillis() - firstClickTime) < 1000) {//防止连续点击
             PL.i("点击过快，无效");

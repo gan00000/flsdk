@@ -170,10 +170,10 @@ public class MainActivity extends Activity {
 //                com.game.superand.1usd
 //                com.game.superand.2usd
                 String skuId = "com.game.superand.1usd";
-                mIMWSDK.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(),skuId, "xxxx", new IPayListener() {
+                mIMWSDK.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(),skuId, "xxxx","role_id_1","role_name","role_level","serverCode", "serverName", new IPayListener() {
                     @Override
                     public void onPayFinish(Bundle bundle) {
-                        PL.i("支付结束");
+
                     }
 
                     @Override
@@ -196,7 +196,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 String skuId = "com.game.superand.2usd";
-                mIMWSDK.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(),skuId, "xxxx", new IPayListener() {
+                mIMWSDK.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(),skuId, "xxxx", "role_id_1","role_name","role_level","serverCode", "serverName", new IPayListener() {
                     @Override
                     public void onPayFinish(Bundle bundle) {
                         PL.i("支付结束");
