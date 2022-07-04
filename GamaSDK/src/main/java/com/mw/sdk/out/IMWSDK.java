@@ -32,7 +32,7 @@ public interface IMWSDK extends IGameLifeCycle {
 
     void login(Activity activity, ILoginCallBack iLoginCallBack);
 
-    void pay(Activity activity, SPayType payType, String cpOrderId, String productId, String extra, String roleId,String roleName,String roleLevel,String severCode,String serverName, IPayListener listener);
+    void pay(Activity activity, SPayType payType, String cpOrderId, String productId, String extra, String roleId,String roleName,String roleLevel,String vipLevel,String severCode,String serverName, IPayListener listener);
 
 //    void openWebview(Activity activity);
 
