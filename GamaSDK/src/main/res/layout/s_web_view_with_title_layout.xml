@@ -18,15 +18,12 @@
                         android:background="@color/c_F13B11"
         >
 
-
-
             <TextView
                 android:id="@+id/tv_s_web_title"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"
                 android:gravity="center"
-                android:text="@string/py_account_login"
                 android:textColor="@android:color/white"
                 android:textSize="20sp"
                 android:textStyle="bold" />

@@ -4,10 +4,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
 
 import com.core.base.BaseWebChromeClient;
 import com.core.base.BaseWebViewClient;
@@ -75,7 +78,7 @@ public class SWebViewLayout extends SBaseRelativeLayout {
         progressBar = (ProgressBar) contentView.findViewById(R.id.s_webview_pager_loading_percent);
         sWebView = (SWebView) contentView.findViewById(R.id.s_webview_id);
 
-        sWebView.setBaseWebChromeClient(new BaseWebChromeClient(progressBar, activity));
+        sWebView.setBaseWebChromeClient(new MyWebChromeClient(progressBar, activity));
         sWebView.setWebViewClient(new BaseWebViewClient(activity));
 
     }
@@ -106,5 +109,31 @@ public class SWebViewLayout extends SBaseRelativeLayout {
             }
         });
 
+    }
+
+    public class MyWebChromeClient extends BaseWebChromeClient{
+
+        public MyWebChromeClient(ProgressBar progressBar, Activity activity) {
+            super(progressBar, activity);
+        }
+
+        public MyWebChromeClient(ProgressBar progressBar, Fragment fragment) {
+            super(progressBar, fragment);
+        }
+
+        public MyWebChromeClient(Activity activity) {
+            super(activity);
+        }
+
+        public MyWebChromeClient() {
+        }
+
+        @Override
+        public void onReceivedTitle(WebView view, String title) {
+            super.onReceivedTitle(view, title);
+            if (SStringUtil.isNotEmpty(title)){
+                titleTv.setText(title);
+            }
+        }
     }
 }

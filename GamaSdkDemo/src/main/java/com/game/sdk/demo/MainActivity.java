@@ -26,10 +26,20 @@ import com.mw.sdk.demo.R;
 
 public class MainActivity extends Activity {
 
-    protected Button loginButton, othersPayButton, googlePayBtn, shareButton, showPlatform, demo_language,
+    protected Button loginButton, webPayButton, googlePayBtn, shareButton, showPlatform, demo_language,
             demo_cs;
     protected IMWSDK mIMWSDK;
     protected String userId;
+
+    /**
+     * 同步角色信息(以下均为测试信息)
+     */
+    String roleId = "20001000402"; //角色id
+    String roleName = "貪婪聖殿"; //角色名
+    String roleLevel = "106"; //角色等级
+    String vipLevel = "5"; //角色vip等级
+    String serverCode = "999"; //角色伺服器id
+    String serverName = "S1"; //角色伺服器名称
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +50,7 @@ public class MainActivity extends Activity {
 
         loginButton = findViewById(R.id.demo_login);
         demo_language = findViewById(R.id.demo_language);
-        othersPayButton = findViewById(R.id.demo_pay);
+        webPayButton = findViewById(R.id.web_pay);
         googlePayBtn = findViewById(R.id.demo_pay_google);
         demo_cs = findViewById(R.id.demo_cs);
 
@@ -114,15 +124,7 @@ public class MainActivity extends Activity {
                                     .create();
 //                            dialog.show();
 
-                            /**
-                             * 同步角色信息(以下均为测试信息)
-                             */
-                            String roleId = "20001000402"; //角色id
-                            String roleName = "貪婪聖殿"; //角色名
-                            String roleLevel = "106"; //角色等级
-                            String vipLevel = "5"; //角色vip等级
-                            String serverCode = "999"; //角色伺服器id
-                            String serverName = "S1"; //角色伺服器名称
+
                             mIMWSDK.registerRoleInfo(MainActivity.this, roleId, roleName, roleLevel, vipLevel, serverCode, serverName);
                         } else {
                             PL.i("从登录界面返回");
@@ -170,7 +172,7 @@ public class MainActivity extends Activity {
 //                com.game.superand.1usd
 //                com.game.superand.2usd
                 String skuId = "com.game.superand.1usd";
-                mIMWSDK.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(),skuId, "xxxx","role_id_1","role_name","role_level","serverCode", "serverName", new IPayListener() {
+                mIMWSDK.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(),skuId, "xxxx","role_id_1","role_name","role_level","vipLevel",serverCode, serverName, new IPayListener() {
                     @Override
                     public void onPayFinish(Bundle bundle) {
 
@@ -196,7 +198,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 String skuId = "com.game.superand.2usd";
-                mIMWSDK.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(),skuId, "xxxx", "role_id_1","role_name","role_level","serverCode", "serverName", new IPayListener() {
+                mIMWSDK.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(),skuId, "xxxx", "role_id_1","role_name","role_level","vipLevel",serverCode, serverName, new IPayListener() {
                     @Override
                     public void onPayFinish(Bundle bundle) {
                         PL.i("支付结束");
@@ -217,14 +219,28 @@ public class MainActivity extends Activity {
         });
 
 
-        demo_cs.setOnClickListener(new View.OnClickListener() {
+
+        webPayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String skuId = "com.game.superand.2usd";
+                mIMWSDK.pay(MainActivity.this, SPayType.WEB, "" + System.currentTimeMillis(),skuId, "xxxx", "role_id_1","role_name","role_level","vipLevel",serverCode, serverName, new IPayListener() {
+                    @Override
+                    public void onPayFinish(Bundle bundle) {
+                        PL.i("支付结束");
+                    }
 
-                /**
-                 * 打开客服页面
-                 */
-                mIMWSDK.openCs(MainActivity.this);
+                    @Override
+                    public void onPaySuccess(String productId, String cpOrderId) {
+                        PL.i("webPayButton onPaySuccess");
+                    }
+
+                    @Override
+                    public void onPayFail() {
+
+                    }
+
+                });
             }
         });
 
