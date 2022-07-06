@@ -27,6 +27,7 @@ public class SWebViewLayout extends SBaseRelativeLayout {
 
     private SWebView sWebView;
     private ImageView closeImageView;
+    private TextView titleTv;
 
     public SWebView getsWebView() {
         return sWebView;
@@ -60,13 +61,15 @@ public class SWebViewLayout extends SBaseRelativeLayout {
         webviewLp.setMargins(closeeRadius,closeeRadius,closeeRadius,closeeRadius);
         this.addView(contentView,webviewLp);
 
-        closeImageView = new ImageView(activity);
-        RelativeLayout.LayoutParams colseLp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        colseLp.addRule(ALIGN_PARENT_RIGHT);
-        this.addView(closeImageView,colseLp);
-//        closeImageView.setBackgroundResource(R.drawable.com_star_close);
-        closeImageView.setImageDrawable(getResources().getDrawable(R.drawable.com_star_close));
+//        closeImageView = new ImageView(activity);
+//        RelativeLayout.LayoutParams colseLp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+//        colseLp.addRule(ALIGN_PARENT_RIGHT);
+//        this.addView(closeImageView,colseLp);
+////        closeImageView.setBackgroundResource(R.drawable.com_star_close);
+//        closeImageView.setImageDrawable(getResources().getDrawable(R.drawable.com_star_close));
 
+        closeImageView = contentView.findViewById(R.id.iv_s_web_close);
+        titleTv = contentView.findViewById(R.id.tv_s_web_title);
         initTitle("");
 
         progressBar = (ProgressBar) contentView.findViewById(R.id.s_webview_pager_loading_percent);

@@ -56,7 +56,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
     /**
      * 当次的创单响应
      */
-    private GPCreateOrderIdRes createOrderBean = null;
+//    private GPCreateOrderIdRes createOrderBean = null;
 
     /**
      * 创单的请求参数Bean
@@ -79,66 +79,89 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
 
 
     private void callbackSuccess(Purchase purchase) {
-        if (mBillingHelper != null) { //关闭页面前先移除callback，否则游戏的onResume会先于 GooglePayActivity2 的onDestroy执行
-//            mBillingHelper.removeBillingHelperStatusCallback(this);
-        }
 
-        if (loadingDialog != null) {
-            loadingDialog.dismissProgressDialog();
-        }
-
-        if (iPayCallBack != null) {
-            BasePayBean payBean = new BasePayBean();
-            if (purchase != null) {
-                try {
-                    payBean.setOrderId(purchase.getOrderId());
-                    payBean.setPackageName(purchase.getPackageName());
-//                    payBean.setProductId(purchase.getProducts().get(0));
-//                    payBean.setmItemType(purchase.getItemType());
-                    payBean.setOriginPurchaseData(purchase.getOriginalJson());
-                    payBean.setPurchaseState(purchase.getPurchaseState());
-                    payBean.setPurchaseTime(purchase.getPurchaseTime());
-                    payBean.setSignature(purchase.getSignature());
-                    payBean.setDeveloperPayload(purchase.getDeveloperPayload());
-                    payBean.setmToken(purchase.getPurchaseToken());
-                    double price = skuDetails.getPriceAmountMicros() / 1000000.00;
-                    payBean.setPrice(price);
-                    payBean.setCurrency(skuDetails.getPriceCurrencyCode());
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-            iPayCallBack.success(payBean);
-        }
-    }
-
-    private void callbackFail(String message) {
-        if (mBillingHelper != null) { //关闭页面前先移除callback，否则游戏的onResume会先于 GooglePayActivity2 的onDestroy执行
-//            mBillingHelper.removeBillingHelperStatusCallback(this);
-        }
-        if (loadingDialog != null) {
-            loadingDialog.dismissProgressDialog();
-        }
-        if (!TextUtils.isEmpty(message)) {//提示错误信息
-
-            loadingDialog.alert(message, new DialogInterface.OnClickListener() {
+        if (mActivity != null) {
+            mActivity.runOnUiThread(new Runnable() {
                 @Override
-                public void onClick(DialogInterface dialog, int which) {
+                public void run() {
+                    if (mBillingHelper != null) { //关闭页面前先移除callback，否则游戏的onResume会先于 GooglePayActivity2 的onDestroy执行
+//            mBillingHelper.removeBillingHelperStatusCallback(this);
+                    }
 
-                    dialog.dismiss();
+                    if (loadingDialog != null) {
+                        loadingDialog.dismissProgressDialog();
+                    }
 
                     if (iPayCallBack != null) {
-                        iPayCallBack.fail(null);
+                        BasePayBean payBean = new BasePayBean();
+                        if (purchase != null) {
+                            try {
+                                payBean.setOrderId(purchase.getOrderId());
+                                payBean.setPackageName(purchase.getPackageName());
+//                    payBean.setProductId(purchase.getProducts().get(0));
+//                    payBean.setmItemType(purchase.getItemType());
+                                payBean.setOriginPurchaseData(purchase.getOriginalJson());
+                                payBean.setPurchaseState(purchase.getPurchaseState());
+                                payBean.setPurchaseTime(purchase.getPurchaseTime());
+                                payBean.setSignature(purchase.getSignature());
+                                payBean.setDeveloperPayload(purchase.getDeveloperPayload());
+                                payBean.setmToken(purchase.getPurchaseToken());
+                                if (skuDetails != null) {
+                                    double price = skuDetails.getPriceAmountMicros() / 1000000.00;
+                                    payBean.setPrice(price);
+                                    payBean.setCurrency(skuDetails.getPriceCurrencyCode());
+                                }
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        iPayCallBack.success(payBean);
                     }
                 }
             });
+        }
 
-        } else {//用户取消
 
-            if (iPayCallBack != null) {
-                iPayCallBack.fail(null);
-            }
+    }
+
+    private void callbackFail(String message) {
+
+        if (mActivity != null) {
+            mActivity.runOnUiThread(new Runnable() {
+
+                @Override
+                public void run() {
+
+                    if (mBillingHelper != null) { //关闭页面前先移除callback，否则游戏的onResume会先于 GooglePayActivity2 的onDestroy执行
+//            mBillingHelper.removeBillingHelperStatusCallback(this);
+                    }
+                    if (loadingDialog != null) {
+                        loadingDialog.dismissProgressDialog();
+                    }
+                    if (!TextUtils.isEmpty(message)) {//提示错误信息
+
+                        loadingDialog.alert(message, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                dialog.dismiss();
+
+                                if (iPayCallBack != null) {
+                                    iPayCallBack.fail(null);
+                                }
+                            }
+                        });
+
+                    } else {//用户取消
+
+                        if (iPayCallBack != null) {
+                            iPayCallBack.fail(null);
+                        }
+                    }
+
+                }
+            });
         }
 
     }
@@ -258,12 +281,12 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
         }
         mBillingHelper.setBillingHelperStatusCallback(this);
 
+        startQueryPurchase(activity.getApplicationContext());
     }
 
     @Override
     public void onResume(Activity activity) {
         PL.i( "onResume");
-        startQueryPurchase(activity.getApplicationContext());
     }
 
     @Override
@@ -400,6 +423,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
     private int consumeFinish = 0;
     private int PurchaseState_PURCHASED_SIEZ = 0;
     private void handleMultipleConsmeAsyncWithResend(@NonNull List<Purchase> list, Activity activity, ConsumeResponseListener consumeResponseListener) {
+        PL.i("------handleMultipleConsmeAsyncWithResend-----");
         consumeFinish = 0;
         PurchaseState_PURCHASED_SIEZ = 0;
         if (list==null || list.isEmpty() || activity == null){
@@ -466,7 +490,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
     @Override
     public void onQuerySkuResult(Context context, List<SkuDetails> productDetails) {
         if (productDetails != null && !productDetails.isEmpty()) {
-//            skuDetails = list.get(0);
+            skuDetails = productDetails.get(0);
 //            mBillingHelper.launchPurchaseFlow(activity, createOrderBean.getOrderId(), skuDetails);
         } else {
             PL.i( "onQuerySkuResult not current query. ");

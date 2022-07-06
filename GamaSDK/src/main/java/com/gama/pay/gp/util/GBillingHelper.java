@@ -169,6 +169,9 @@ public class GBillingHelper implements PurchasesUpdatedListener {
         ConsumeResponseListener listener = new ConsumeResponseListener() {
             @Override
             public void onConsumeResponse(BillingResult billingResult, @NonNull String purchaseToken) {
+
+                PL.i( "------consumeAsync finish--------");
+
                 if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
                     // Handle the success of the consume operation.
                     PL.i( "consumeAsync purchaseToken -> " + purchaseToken);
@@ -196,7 +199,7 @@ public class GBillingHelper implements PurchasesUpdatedListener {
                 }
             }
         };
-
+        PL.i( "------consumeAsync start--------");
         billingClient.consumeAsync(consumeParams, listener);
     }
 

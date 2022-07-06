@@ -28,8 +28,13 @@ public class SWebViewDialog extends SBaseDialog {
     private Activity activity;
     private ProgressBar progressBar;
     private SWebView sWebView;
+    private SWebDialogCallback sWebDialogCallback;
 
-   private SWebViewLayout sWebViewLayout;
+    public void setsWebDialogCallback(SWebDialogCallback sWebDialogCallback) {
+        this.sWebDialogCallback = sWebDialogCallback;
+    }
+
+    private SWebViewLayout sWebViewLayout;
 
     public void setWebUrl(String webUrl) {
         this.webUrl = webUrl;
@@ -109,6 +114,10 @@ public class SWebViewDialog extends SBaseDialog {
 
         viewGroupLayoutParams = (ViewGroup.LayoutParams) sWebViewLayout.getLayoutParams();
         originalHeight = viewGroupLayoutParams.height;
+
+        if (sWebDialogCallback != null) {
+            sWebDialogCallback.createFinish(this,sWebView);
+        }
     }
 
     private int usableHeightPrevious;
@@ -163,5 +172,10 @@ public class SWebViewDialog extends SBaseDialog {
             sWebView = null;
             PL.i("dialog destory webview");
         }
+    }
+
+    public interface SWebDialogCallback
+    {
+        void createFinish(SWebViewDialog sWebViewDialog,SWebView sWebView);
     }
 }

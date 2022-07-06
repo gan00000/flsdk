@@ -1,9 +1,12 @@
 package com.mw.sdk.out;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import android.webkit.JavascriptInterface;
 
 import com.core.base.ObjFactory;
 import com.core.base.utils.AppUtil;
@@ -14,12 +17,15 @@ import com.gama.pay.IPay;
 import com.gama.pay.IPayCallBack;
 import com.gama.pay.IPayFactory;
 import com.gama.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
+import com.gama.pay.gp.bean.req.WebPayReqBean;
 import com.gama.pay.gp.bean.res.BasePayBean;
 import com.mw.base.bean.SGameLanguage;
 import com.mw.base.bean.SPayType;
 import com.mw.base.cfg.ConfigRequest;
+import com.mw.base.cfg.ResConfig;
 import com.mw.base.utils.Localization;
 import com.mw.base.utils.SdkUtil;
+import com.mw.base.widget.SWebView;
 import com.mw.sdk.BuildConfig;
 import com.mw.sdk.R;
 import com.mw.sdk.SWebViewDialog;
@@ -52,6 +58,7 @@ public class BaseSdkImpl implements IMWSDK {
 
     private IPay iPay;
     protected IPayListener iPayListener;
+    private Activity activity;
 
     public BaseSdkImpl() {
         iLogin = ObjFactory.create(DialogLoginImpl.class);
@@ -136,90 +143,9 @@ public class BaseSdkImpl implements IMWSDK {
     }
 
     @Override
-    public void login(final Activity activity, final ILoginCallBack iLoginCallBack) {
-        PL.i("sdk login");
-        activity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-
-                if (iLogin != null) {
-                    //清除上一次登录成功的返回值
-//                    GamaUtil.saveSdkLoginData(activity, "");
-
-                    iLogin.initFacebookPro(activity, sFacebookProxy);
-                    iLogin.startLogin(activity, iLoginCallBack);
-                }
-            }
-        });
-
-
-    }
-
-    @Override
-    public void pay(Activity activity, SPayType payType, String cpOrderId, String productId, String extra, String roleId,String roleName,String roleLevel, String vipLevel, String severCode,String serverName, IPayListener listener) {
-        PL.i("sdk pay payType:" + payType.toString() + " ,cpOrderId:" + cpOrderId + ",productId:" + productId + ",extra:" + extra);
-        if ((System.currentTimeMillis() - firstClickTime) < 1000) {//防止连续点击
-            PL.i("点击过快，无效");
-            return;
-        }
-        iPayListener = listener;
-        firstClickTime = System.currentTimeMillis();
-
-        activity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                SdkUtil.saveRoleInfo(activity, roleId, roleName, roleLevel, vipLevel, severCode, serverName);//保存角色信息
-                startPay(activity, payType, cpOrderId, productId, extra, listener);
-            }
-        });
-    }
-
-    @Override
     public void openCs(Activity activity) {
 //        openWebPage(activity,GamaOpenWebType.CUSTOM_URL,activity.getString(R.string.emm_service_url));
     }
-
-    protected void startPay(final Activity activity, final SPayType payType, final String cpOrderId, final String productId, final String extra, IPayListener listener) {
-
-        if (payType == SPayType.GOOGLE) {
-//            googlePay(activity, cpOrderId, productId, extra);
-            GooglePayCreateOrderIdReqBean googlePayCreateOrderIdReqBean = new GooglePayCreateOrderIdReqBean(activity);
-            googlePayCreateOrderIdReqBean.setCpOrderId(cpOrderId);
-            googlePayCreateOrderIdReqBean.setProductId(productId);
-            googlePayCreateOrderIdReqBean.setExtra(extra);
-//
-//        Intent i = new Intent(activity, GooglePayActivity2.class);
-//        i.putExtra(GooglePayActivity2.GooglePayReqBean_Extra_Key, googlePayCreateOrderIdReqBean);
-//        activity.startActivityForResult(i, GooglePayActivity2.GooglePayReqeustCode);
-
-            //设置Google储值的回调
-            iPay.setIPayCallBack(new IPayCallBack() {
-                @Override
-                public void success(BasePayBean basePayBean) {
-                    SdkEventLogger.trackinPayEvent(activity, basePayBean);
-                    ToastUtils.toast(activity,R.string.text_finish_pay);
-                    if (iPayListener != null) {
-                        iPayListener.onPaySuccess(basePayBean.getProductId(),basePayBean.getCpOrderId());
-                    }
-                }
-
-                @Override
-                public void fail(BasePayBean basePayBean) {
-                    if (iPayListener != null) {
-                        iPayListener.onPayFail();
-                    }
-                }
-            });
-
-            iPay.startPay(activity,googlePayCreateOrderIdReqBean);
-
-        } else if(payType == SPayType.WEB) {
-//            a(activity, cpOrderId, extra);
-        } else {//默认Google储值
-            PL.i("不支持當前類型： " + payType.name());
-        }
-    }
-
 
     @Override
     public void onCreate(final Activity activity) {
@@ -228,7 +154,7 @@ public class BaseSdkImpl implements IMWSDK {
 
         PL.i("fb keyhash:" + SignatureUtil.getHashKey(activity, activity.getPackageName()));
         PL.i("google sha1:" + SignatureUtil.getSignatureSHA1WithColon(activity, activity.getPackageName()));
-
+        this.activity = activity;
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -258,6 +184,7 @@ public class BaseSdkImpl implements IMWSDK {
 
     @Override
     public void onResume(final Activity activity) {
+        this.activity = activity;
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -567,4 +494,149 @@ public class BaseSdkImpl implements IMWSDK {
 
     }
 */
+
+    @Override
+    public void login(final Activity activity, final ILoginCallBack iLoginCallBack) {
+        PL.i("sdk login");
+        this.activity = activity;
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                if (iLogin != null) {
+                    //清除上一次登录成功的返回值
+//                    GamaUtil.saveSdkLoginData(activity, "");
+
+                    iLogin.initFacebookPro(activity, sFacebookProxy);
+                    iLogin.startLogin(activity, iLoginCallBack);
+                }
+            }
+        });
+
+
+    }
+
+    @Override
+    public void pay(Activity activity, SPayType payType, String cpOrderId, String productId, String extra, String roleId,String roleName,String roleLevel, String vipLevel, String severCode,String serverName, IPayListener listener) {
+        PL.i("sdk pay payType:" + payType.toString() + " ,cpOrderId:" + cpOrderId + ",productId:" + productId + ",extra:" + extra);
+        if ((System.currentTimeMillis() - firstClickTime) < 1000) {//防止连续点击
+            PL.i("点击过快，无效");
+            return;
+        }
+        iPayListener = listener;
+        firstClickTime = System.currentTimeMillis();
+
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                SdkUtil.saveRoleInfo(activity, roleId, roleName, roleLevel, vipLevel, severCode, serverName);//保存角色信息
+                startPay(activity, payType, cpOrderId, productId, extra, listener);
+            }
+        });
+    }
+
+    private String productId;
+    private String cpOrderId;
+    private String extra;
+    protected void startPay(final Activity activity, final SPayType payType, final String cpOrderId, final String productId, final String extra, IPayListener listener) {
+        this.activity = activity;
+        this.productId = productId;
+        this.cpOrderId = cpOrderId;
+        this.extra = extra;
+
+        GooglePayCreateOrderIdReqBean googlePayCreateOrderIdReqBean = new GooglePayCreateOrderIdReqBean(activity);
+        googlePayCreateOrderIdReqBean.setCpOrderId(cpOrderId);
+        googlePayCreateOrderIdReqBean.setProductId(productId);
+        googlePayCreateOrderIdReqBean.setExtra(extra);
+
+        if (payType == SPayType.GOOGLE) {
+            doGooglePay(activity, googlePayCreateOrderIdReqBean);
+
+        } else if(payType == SPayType.WEB) {
+            doWebPay(activity,googlePayCreateOrderIdReqBean);
+        } else {//默认Google储值
+            PL.i("不支持當前類型： " + payType.name());
+        }
+    }
+
+
+    private void doGooglePay(Activity activity, GooglePayCreateOrderIdReqBean googlePayCreateOrderIdReqBean) {
+        //            googlePay(activity, cpOrderId, productId, extra);
+//        Intent i = new Intent(activity, GooglePayActivity2.class);
+//        i.putExtra(GooglePayActivity2.GooglePayReqBean_Extra_Key, googlePayCreateOrderIdReqBean);
+//        activity.startActivityForResult(i, GooglePayActivity2.GooglePayReqeustCode);
+
+        //设置Google储值的回调
+        iPay.setIPayCallBack(new IPayCallBack() {
+            @Override
+            public void success(BasePayBean basePayBean) {
+                PL.i("IPayCallBack success");
+                ToastUtils.toast(activity,R.string.text_finish_pay);
+                if (otherPayWebViewDialog != null && otherPayWebViewDialog.isShowing()){
+                    otherPayWebViewDialog.dismiss();
+                }
+
+                SdkEventLogger.trackinPayEvent(activity, basePayBean);
+
+                if (iPayListener != null) {
+                    iPayListener.onPaySuccess(basePayBean.getProductId(),basePayBean.getCpOrderId());
+                }
+            }
+
+            @Override
+            public void fail(BasePayBean basePayBean) {
+                if (iPayListener != null) {
+                    iPayListener.onPayFail();
+                }
+            }
+        });
+
+        iPay.startPay(activity, googlePayCreateOrderIdReqBean);
+    }
+
+
+
+    @SuppressLint("JavascriptInterface")
+    private void doWebPay(Activity activity, GooglePayCreateOrderIdReqBean bean) {
+
+        String payThirdUrl = ResConfig.getPayPreferredUrl(activity) + "api/web/payment.page";
+        bean.setCompleteUrl(payThirdUrl);
+
+        String webUrl = bean.createPreRequestUrl();
+
+        otherPayWebViewDialog = new SWebViewDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
+        otherPayWebViewDialog.setWebUrl(webUrl);
+        otherPayWebViewDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+//                if (iPayListener != null) {
+//                    iPayListener.onPayFinish(new Bundle());
+//                } else {
+//                    PL.i(TAG, "a null occour");
+//                }
+            }
+        });
+        otherPayWebViewDialog.setsWebDialogCallback(new SWebViewDialog.SWebDialogCallback() {
+            @Override
+            public void createFinish(SWebViewDialog sWebViewDialog, SWebView sWebView) {
+                sWebView.addJavascriptInterface(BaseSdkImpl.this,"SdkObj");
+            }
+        });
+        otherPayWebViewDialog.show();
+    }
+
+    @SuppressLint("JavascriptInterface")
+    @JavascriptInterface
+    public void googlePay(String productId)
+    {
+        PL.i("js googlePay productId=" + productId);
+        if (this.activity != null){
+            this.activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    BaseSdkImpl.this.startPay(BaseSdkImpl.this.activity,SPayType.GOOGLE,BaseSdkImpl.this.cpOrderId,BaseSdkImpl.this.productId,BaseSdkImpl.this.extra,BaseSdkImpl.this.iPayListener);
+                }
+            });
+        }
+    }
 }
