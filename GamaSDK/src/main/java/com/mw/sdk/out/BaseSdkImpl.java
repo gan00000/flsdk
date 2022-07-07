@@ -639,4 +639,32 @@ public class BaseSdkImpl implements IMWSDK {
             });
         }
     }
+
+    /**
+     * 充值通知，提供给网页使用
+     * @param success  是否成功
+     * @param productId  商品id
+     */
+    @SuppressLint("JavascriptInterface")
+    @JavascriptInterface
+    public void onPayFinish(boolean success,String productId)
+    {
+        PL.i("js onPayFinish productId=" + productId);
+        if (this.activity != null){
+            this.activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (success){
+                        if (iPayListener != null) {
+                            iPayListener.onPaySuccess(productId, BaseSdkImpl.this.cpOrderId);
+                        }
+                    }else{
+                        if (iPayListener != null) {
+                            iPayListener.onPaySuccess(productId, BaseSdkImpl.this.cpOrderId);
+                        }
+                    }
+                }
+            });
+        }
+    }
 }

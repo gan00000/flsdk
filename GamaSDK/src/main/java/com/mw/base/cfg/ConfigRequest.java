@@ -34,7 +34,7 @@ public class ConfigRequest{
 
 //        https://www.meowplayer.com/sdk/config/jjcs/v1/version.json
 
-        String configUrl = ResConfig.getCdnPreferredUrl(context) + gameCode + "/v1/version.json?v=" + System.currentTimeMillis();
+        String configUrl = ResConfig.getCdnPreferredUrl(context) + "sdk/config/" + gameCode + "/v1/version.json?v=" + System.currentTimeMillis();
         baseReqeustBean.setCompleteUrl(configUrl);
 
         cfgFileRequest.setBaseReqeustBean(baseReqeustBean);
