@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="375dp"
-        android:layout_height="667dp"
+        android:layout_height="375dp"
         android:orientation="vertical"
         android:gravity="center_horizontal"
         android:layout_centerInParent="true"
@@ -18,7 +18,7 @@
             layout="@layout/sdk_ui_head_layout"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="182dp"
+            android:layout_marginTop="20dp"
             />
 
         <View
