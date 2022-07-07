@@ -173,10 +173,6 @@ public class MainActivity extends Activity {
 //                com.game.superand.2usd
                 String skuId = "com.game.superand.1usd";
                 mIMWSDK.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(),skuId, "xxxx","role_id_1","role_name","role_level","vipLevel",serverCode, serverName, new IPayListener() {
-                    @Override
-                    public void onPayFinish(Bundle bundle) {
-
-                    }
 
                     @Override
                     public void onPaySuccess(String productId, String cpOrderId) {
@@ -199,10 +195,6 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 String skuId = "com.game.superand.2usd";
                 mIMWSDK.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(),skuId, "xxxx", "role_id_1","role_name","role_level","vipLevel",serverCode, serverName, new IPayListener() {
-                    @Override
-                    public void onPayFinish(Bundle bundle) {
-                        PL.i("支付结束");
-                    }
 
                     @Override
                     public void onPaySuccess(String productId, String cpOrderId) {
@@ -225,10 +217,6 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 String skuId = "com.game.superand.2usd";
                 mIMWSDK.pay(MainActivity.this, SPayType.WEB, "" + System.currentTimeMillis(),skuId, "xxxx", "role_id_1","role_name","role_level","vipLevel",serverCode, serverName, new IPayListener() {
-                    @Override
-                    public void onPayFinish(Bundle bundle) {
-                        PL.i("支付结束");
-                    }
 
                     @Override
                     public void onPaySuccess(String productId, String cpOrderId) {

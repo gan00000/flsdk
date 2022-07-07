@@ -2,17 +2,11 @@
 
 * [一. SDK接入配置](#100)
 * [二. SDK api说明](#101)
-	* [1. 实例SDK接口IFLSDK对象](#1)
-	* [2. Activity生命周期调用](#2)
-	* [3. 初始化sdk](#3)
-	* [4. 设置SDK语言版本](#4)
-	* [5. 设置角色信息](#5)
-	* [6. 登录接口](#6)
-	* [7. 充值接口](#7)
-	* [9. 分享接口](#9)
-	*   [10. 客服接口](#11)
-	
-	
+	1. [实例SDK接口对象](#1)
+	2. [Activity生命周期和初始化SDK](#2)
+	3. [设置角色信息](#5)
+	4. [登录接口](#6)
+	5. [充值接口](#7)
 
 
 ----------------
@@ -21,125 +15,160 @@
 说明：由于Google 2015年6月不再支持Eclipse，https://developer.android.com/studio/tools/sdk/eclipse-adt.html
 ，Android 24之后的版本SDK和Google play servcie库，google support v4 v7库，还有很多第三方库都已经不支持Eclipse，固本SDK不支持Eclipse，请使用AndroidStudio接入。
 
-*  在项目顶层的build.gradle的repositories中添加(请参照demo中配置)
+*  设置项目顶层的build.gradle(可请参照demo中配置)
 
 	```
-	 google()
-	```
-
-*  在根项目的build.gradle的dependencies中添加(请参照demo中配置)
-
-	```
-classpath 'com.android.tools.build:gradle:4.0.1'
-classpath 'com.google.gms:google-services:4.2.0'// google-services plugin
-	```
-
-* 在您的项目中，打开 your_app | Gradle Scripts | build.gradle (Module: app) 并添加以下配置，依赖的aar和其他库，以便编译SDK:
-
-	```
-		//公共库
-    //Google库
-    implementation 'com.google.android.gms:play-services-auth:18.1.0'
-    implementation 'com.google.android.gms:play-services-base:17.4.0'
-    implementation 'com.google.android.gms:play-services-games:20.0.0'
-
-    //firebase
-    implementation 'com.google.firebase:firebase-core:17.5.0'
-    implementation 'com.google.firebase:firebase-messaging:20.2.4'
-    implementation 'com.google.firebase:firebase-auth:19.3.2'
-    // Recommended: Add the Firebase SDK for Google Analytics.
-    implementation 'com.google.firebase:firebase-analytics:17.5.0'
-    // Add the Firebase Crashlytics SDK.
-    //implementation 'com.google.firebase:firebase-crashlytics:17.2.1'
-
-    //Facebook库
-    implementation 'com.facebook.android:facebook-login:7.1.0'
-    implementation 'com.facebook.android:facebook-share:7.1.0'
-    implementation 'com.facebook.android:facebook-messenger:7.1.0'
-    //额外库
-    api 'androidx.legacy:legacy-support-v4:1.0.0'
-    api 'androidx.appcompat:appcompat:1.2.0'
-    api 'androidx.recyclerview:recyclerview:1.1.0'
-    api 'androidx.constraintlayout:constraintlayout:2.0.0'
-    api 'androidx.browser:browser:1.2.0'
-    //mutildex
-    implementation 'androidx.multidex:multidex:2.0.1'
-
-    implementation 'com.google.code.gson:gson:2.8.2'
-
-    implementation 'com.github.bumptech.glide:glide:4.11.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
-    //google volley
-    implementation 'com.android.volley:volley:1.1.1'
-
-    //Twitter
-    implementation 'com.twitter.sdk.android:twitter-core:3.1.1'
-    implementation ('com.twitter.sdk.android:tweet-ui:3.1.1'){
-        exclude group: 'com.android.support'
+	 buildscript {
+    repositories {
+        google()
+        mavenCentral()
+		 jcenter()
     }
-    implementation ('com.twitter.sdk.android:tweet-composer:3.1.1'){
-        exclude group: 'com.android.support'
-    }
-    implementation 'com.twitter.sdk.android:twitter-mopub:3.1.1'
+    dependencies {
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
 
-    //ads
-    //adjust
-    api 'com.adjust.sdk:adjust-android:4.21.1'
-    api 'com.android.installreferrer:installreferrer:2.1'
+        classpath 'com.android.tools.build:gradle:7.2.0'
+        classpath 'com.google.gms:google-services:4.3.10'// google-services plugin
+        // Add the Crashlytics Gradle plugin.
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.8.1'
 
-    implementation 'com.zhy:base-rvadapter:3.0.3'
-	    
+    	}
+	}
+
+	allprojects {
+	    repositories {
+	        google()
+	        mavenCentral()
+		 	 jcenter()
+	    }
+	}
+
 	```
+
+* 设置您的模块（应用级）Gradle 文件
+
+	```
+	apply plugin: 'com.android.application'
+	//添加 Google 服务 Gradle 插件
+	apply plugin: 'com.google.gms.google-services'
+
+	android {
 	
-* 在运行module的build.gradle最后添加 
+	    compileSdkVersion 33
+	
+		//使用java8编译,支持静态接口
+	    compileOptions {
+	        sourceCompatibility JavaVersion.VERSION_1_8
+	        targetCompatibility JavaVersion.VERSION_1_8
+	    }
+	
+	    defaultConfig {
+	        minSdkVersion 21
+	        targetSdkVersion 33
+	        multiDexEnabled true
+	    }
+	
+
+	    productFlavors {
+	
+	
+	        superand {
+	            
+	            applicationId "com.game.superand"
+	            minSdkVersion 21 //设置支持的最低版本系统
+	            targetSdkVersion 33  //与Google最新版本同步
+	            versionCode 2
+	            versionName "2.0"
+	            
+	            //设置参数，参数值由对接人员提供
+	            resValue "string", "scheme", "对接人员提供"
+	            resValue "string", "facebook_app_id", "对接人员提供"
+	            resValue "string", "facebook_client_token", "对接人员提供"
+	            resValue "string", "facebook_authorities", "对接人员提供"
+	            resValue "string", "fb_login_protocol_scheme", "对接人员提供"
+	            resValue "string", "line_channelId", "对接人员提供"
+
+	        }
+	
+	    }
+	}
+	
+	repositories {
+	    flatDir {
+	        dirs 'libs'
+	    }
+	}
+	
+	//添加下列的依赖
+	dependencies {
+	//    api fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
+	
+	    implementation(name:'MWSDK-release', ext:'aar')
+	    api 'androidx.legacy:legacy-support-v4:1.0.0'
+	    api 'androidx.appcompat:appcompat:1.4.2'
+	    api 'androidx.recyclerview:recyclerview:1.2.1'
+	    api 'androidx.constraintlayout:constraintlayout:2.1.4'
+	    api 'androidx.browser:browser:1.4.0'
+	    //mutildex
+	    implementation 'androidx.multidex:multidex:2.0.1'
+	    //google pay
+	    api "com.android.billingclient:billing:4.1.0"
+	
+	    implementation 'com.google.code.gson:gson:2.8.6'
+	    implementation 'com.zhy:base-rvadapter:3.0.3'
+	
+	    //Google库
+	    implementation 'com.google.android.gms:play-services-auth:20.2.0'
+	    implementation 'com.google.android.gms:play-services-base:18.0.1'
+	    implementation 'com.google.android.gms:play-services-games:22.0.1'
+	
+	    //firebase
+	    implementation platform('com.google.firebase:firebase-bom:30.1.0')
+	    implementation 'com.google.firebase:firebase-core'
+	    implementation 'com.google.firebase:firebase-messaging'
+	    implementation 'com.google.firebase:firebase-auth'
+	    // Recommended: Add the Firebase SDK for Google Analytics.
+	    implementation 'com.google.firebase:firebase-analytics'
+	
+	    //Facebook库
+	    // Facebook Core only (Analytics)
+	    implementation 'com.facebook.android:facebook-core:13.2.0'
+	    // Facebook Login only
+	    implementation 'com.facebook.android:facebook-login:13.2.0'
+	    // Facebook Share only
+	    implementation 'com.facebook.android:facebook-share:13.2.0'
+	    // Facebook Messenger only
+	    implementation 'com.facebook.android:facebook-messenger:13.2.0'
+	    //line
+	    implementation 'com.linecorp:linesdk:5.0.1'
+	
+	    implementation 'com.github.bumptech.glide:glide:4.11.0'
+	    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+	
+	    implementation 'com.appsflyer:af-android-sdk:6.3.2'
+	    implementation 'com.android.installreferrer:installreferrer:2.2'
+	
+	}
+
 
 	```
-apply plugin: 'com.google.gms.google-services'
-	```
-
-* 添加游戏配置文件，在您的项目中，打开 your_app | assets下创建mwsdk目录并添加 **gameconfig.propertie和adlist 配置文件（该文件SDK对接人员提供）**
-
-*   添加游戏配置文件，在您的项目中，打开 your_app根目录下添加google-services.json配置文件（该文件SDK对接人员提供）  
 
 
-* 在您的项目中，打开 your_app | Gradle Scripts | build.gradle 中productFlavors 内添加以下配置，以动态设置游戏配置
+* 添加游戏配置文件，在您的项目中，打开 your_app | **assets下创建mwsdk目录并添加 gameconfig.propertie（该文件SDK对接人员提供）**
 
-	```
-	//添加以下配置, 具体参数由SDK对接人员提供 ，比如
-	  productFlavors {
+*   添加游戏配置文件，在您的项目中，打开 your_app根目录下添加**google-services.json配置文件（该文件SDK对接人员提供）**
 
-       ylj {
-            signingConfig signingConfigs.release
-            //对接人员提供
-            applicationId "com.flyfun.ylj.google"
-            minSdkVersion 21
-            targetSdkVersion 28
-            versionCode 1
-            versionName "1.0"
-            flavorDimensions "1"
 
-            //对接人员提供一下参数
-            esValue "string", "scheme", "fzdld"
-            resValue "string", "facebook_app_id", "xxx"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProviderxxx"
-            resValue "string", "fb_login_protocol_scheme", "fb566990643996286"            resValue "string", "facebook_app_name", "xxx"
-
-            //每个游戏的demo设置
-            resValue "string", "sdk_name", "Demo"
-
-        }
-
-    }
-    ```
  ------------------------------
 
 <h2 id="101">SDK api说明</h2>
 以下为sdk api使用示例,具体请查看SDK demo 
 
-* <h3 id="1">实例SDK接口IFLSDK对象</h3>  
-`mIFLSDK = FlSdkFactory.create(); ` 
+* <h3 id="1">实例SDK接口IMWSDK对象</h3>  
+`mIMWSDK = MWSdkFactory.create(); ` 
  
-* <h3 id="2">Activity生命周期调用</h3> 
+* <h3 id="2">Activity生命周期和初始化SDK</h3> 
 
 	```java
 	游戏Activity以下相应的声明周期方法（必须调用）:  
@@ -148,56 +177,56 @@ apply plugin: 'com.google.gms.google-services'
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		mIFLSDK = FlSdkFactory.create();
-	    
-	    //初始化sdk
-        mIFLSDK.initSDK(this, SGameLanguage.zh_TW);
-        
-		 //在游戏Activity的onCreate生命周期中调用
-        mIFLSDK.onCreate(this);
-	    
+		mIMWSDK = MWSdkFactory.create();
+        //初始化sdk
+        mIMWSDK.initSDK(this, SGameLanguage.zh_TW);
+
+        //在游戏Activity的onCreate生命周期中调用
+        mIMWSDK.onCreate(this);
 	    
 	}
    @Override
     protected void onResume() {
         super.onResume();
-        PL.i("activity onResume");
-        mIFLSDK.onResume(this);
+        在游戏Activity中调用该方法
+        mIMWSDK.onResume(this);
     }
 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        mIFLSDK.onActivityResult(this, requestCode, resultCode, data);
+		//在游戏Activity中调用该方法
+        mIMWSDK.onActivityResult(this, requestCode, resultCode, data);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        mIFLSDK.onPause(this);
-        PL.i("activity onPause");
+        //在游戏Activity中调用该方法
+        mIMWSDK.onPause(this);
+        
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        PL.i("activity onStop");
-        mIFLSDK.onStop(this);
+        //在游戏Activity中调用该方法
+        mIMWSDK.onStop(this);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        PL.i("activity onDestroy");
-        mIFLSDK.onDestroy(this);
+        //在游戏Activity中调用该方法
+        mIMWSDK.onDestroy(this);
     } 
     
      @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        mIFLSDK.onWindowFocusChanged(this,hasFocus);
+        //在游戏Activity中调用该方法
+        mIMWSDK.onWindowFocusChanged(this,hasFocus);
     }
     
      /**
@@ -209,113 +238,111 @@ apply plugin: 'com.google.gms.google-services'
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) { 
     	super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-      	PL.i("activity onRequestPermissionsResult");
-      	mIFLSDK.onRequestPermissionsResult(this,requestCode,permissions,grantResults);
-    }  
+      	//在游戏Activity中调用该方法
+      	mIMWSDK.onRequestPermissionsResult(this,requestCode,permissions,grantResults);
+    } 
+    
+     
     ```
- 
-* <h3 id="3">初始化sdk</h3>
-```
-	游戏启动的时候调用，通常在游戏activity oncreate中调用
-	
-	mIFLSDK.initSDK(this, SGameLanguage.en_US);
-```
-
-* <h3 id="4">设置SDK语言版本</h3> 
-	
- ```
- 根据游戏的语言，设置相应的SDK语言，默认为繁体中文
- 游戏activity oncreate中调用
- /*
-    * SGameLanguage.zh_TW 游戏为繁体语言时使用
-    * SGameLanguage.en_US  游戏为英文语言时使用
-    * */
-    mIFLSDK.setGameLanguage(this, SGameLanguage.zh_TW);
- ```
-	
+ 	
 * <h3 id="5">设置角色信息</h3> 
+	
+	在游戏获得角色信息的时候调用，每次登陆，切换账号等角色变化时调用
 
-
- ```
- 在游戏获得角色信息的时候调用，每次登陆，切换账号等角色变化时调用
+ 	```
  
+ 接口定义:
 	/**
-     * 在游戏获得角色信息的时候调用
-     * roleId 角色id
-     * roleName  角色名
-     * rolelevel 角色等级
-     * severCode 角色伺服器id
-     * serverName 角色伺服器名称
+     * 设置角色信息  在游戏获得角色信息的时候调用，每次登陆，切换账号等角色变化时调用
+     * @param roleId            角色id  				必传
+     * @param roleName          角色名   			必传
+     * @param roleLevel         角色等级			没有传空值 ""
+     * @param vipLevel          vip等级   			没有传空值 ""
+     * @param severCode         角色伺服器id 		必传
+     * @param serverName        角色伺服器名称	 	必传
      */
-mIFLSDK.registerRoleInfo(this, "roleid_1", "roleName", "rolelevel", "s1001", "serverName");
-```
+    void registerRoleInfo(Activity activity,String roleId,String roleName,String roleLevel,String vipLevel,String severCode,String serverName);
+
+     
+  	//sample:
+	mIMWSDK.registerRoleInfo(this, "roleid_1", "roleName", "rolelevel", "vip", "s1001", "serverName");
+	
+
+	```
 
 * <h3 id="6">登录接口</h3>  
 
- ```
-//登陆接口 ILoginCallBack为登录成功后的回调
-mIFLSDK.login(MainActivity.this, new ILoginCallBack() {
-        @Override
-        public void onLogin(SLoginResponse sLoginResponse) {
-            if (sLoginResponse != null){
-                String uid = sLoginResponse.getUserId();
-                String accessToken = sLoginResponse.getAccessToken();
-                String timestamp = sLoginResponse.getTimestamp();
+ 	```
+ 	
+ 	接口定义:
+ 	/**
+     * 登录
+     * @param activity
+     * @param iLoginCallBack        登录回调
+     */
+    void login(Activity activity, ILoginCallBack iLoginCallBack);
+ 	
+ 	
+	//sample:
+	mIFLSDK.login(MainActivity.this, new ILoginCallBack() {
+	    @Override
+	    public void onLogin(SLoginResponse sLoginResponse) {
+	        if (sLoginResponse != null){
+	        		
+	        	 //获得登录成功后的用户uid
+	            String uid = sLoginResponse.getUserId();
+	            String accessToken = sLoginResponse.getAccessToken();
+	            String timestamp = sLoginResponse.getTimestamp();
+				
+	        }
+	    }
+	});
 
-                PL.i("uid:" + uid);
-
-            }
-        }
-    });
-```
+ 	```
 
 * <h3 id="7">充值接口</h3>    
 
- ```
-    充值接口
-    SPayType SPayType.OTHERS为第三方储值，SPayType.GOOGLE为Google储值
-    cpOrderId cp订单号，请保持每次的值都是不会重复的
-    productId 充值的商品id
-    customize 自定义透传字段（从服务端回调到cp）
-    */
-    mIFLSDK.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(),"com.sku1", "xxx", new IPayListener() {
-        @Override
-        public void onPayFinish(Bundle bundle) {
-            PL.i("支付结束");
-        }
-    });
-```
-
-* <h3 id="9">分享接口</h3>
-
- ```
-//下面的参数请按照实际传值
-    
-    String shareUrl = "https://www.baidu.com/";
-      //分享回调
-    ISdkCallBack iSdkCallBack = new ISdkCallBack() {
-        @Override
-        public void success() {
-            PL.i("share  success");
-        }
-
-        @Override
-        public void failure() {
-            PL.i("share  failure");
-        }
-    };
-
-    mIFLSDK.share(MainActivity.this,iSdkCallBack,shareUrl);
- ```
+ 	```
  
-* <h3 id="11">客服接口</h3>
+ 接口定义:
+    /**
+     * @param activity
+     * @param payType           SPayType.WEB为平台网页第三方储值，SPayType.GOOGLE为Google储值
+     * @param cpOrderId         厂商订单号    必传
+     * @param productId         购买的商品id   必传
+     * @param extra             预留的穿透值   可选
+     * @param roleId            角色id  				必传
+     * @param roleName          角色名   			必传
+     * @param roleLevel         角色等级			没有传空值 ""
+     * @param vipLevel          vip等级   			没有传空值 ""
+     * @param severCode         角色伺服器id 		必传
+     * @param serverName        角色伺服器名称	 	必传
+     * @param listener          充值回调              辅助回调，充值是否成功以服务端回调为准
+     */
+    void pay(Activity activity, SPayType payType, String cpOrderId, String productId, String extra, String roleId,String roleName,String roleLevel,String vipLevel,String severCode,String serverName, IPayListener listener);
 
- ```
- 	//打开一个客服网页
-	mIFLSDK.openCs(MainActivity.this);
- ```
  
+    //sample:
+    mIMWSDK.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(),skuId, "xxxx","role_id_1","role_name","role_level","vipLevel",serverCode, serverName, new IPayListener() {
+                 
+
+            @Override
+            public void onPaySuccess(String productId, String cpOrderId) {
+					//支付成功，客户端是辅助，请以服务端为准
+            }
+
+            @Override
+            public void onPayFail() {
+					//支付失败，客户端是辅助，请以服务端为准
+            }
+
+        });
+                
+       
+	```
+
 * <h3 id="10">上架Google Play相关注意的问题</h3>
+
 1. apk包不要包含有其他渠道的代码资源，不要包含有talkdata sdk相关代码
 2. openssl漏洞问题，应用迁移至 OpenSSL 1.02f/1.01r 或更高版本，查看命令 ($ unzip -p YourApp.apk | strings | grep "OpenSSL")，相关说明https://support.google.com/faqs/answer/6376725
 3. 检查权限，不要添加多余的、没有使用的权限，使用到的权限越少越好；不能使用Google不建议的权限,如SYSTEM_ALERT_WINDOW and WRITE_SETTINGS 
