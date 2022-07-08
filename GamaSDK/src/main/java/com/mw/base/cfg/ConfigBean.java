@@ -58,7 +58,8 @@ public class ConfigBean {
         private boolean googleLogin = true;
         private boolean lineLogin = true;
         private boolean appleLogin = true;
-        private boolean deleteAccount = true;
+        private boolean deleteAccount = false;
+        private boolean showContract = true;
 
         public String getVersion() {
             return version;
@@ -122,6 +123,14 @@ public class ConfigBean {
 
         public void setDeleteAccount(boolean deleteAccount) {
             this.deleteAccount = deleteAccount;
+        }
+
+        public boolean isShowContract() {
+            return showContract;
+        }
+
+        public void setShowContract(boolean showContract) {
+            this.showContract = showContract;
         }
     }
 }

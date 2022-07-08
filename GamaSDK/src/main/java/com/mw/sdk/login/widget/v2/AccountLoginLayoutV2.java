@@ -38,6 +38,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
     private Button loginMainLoginBtn;
 
     private CheckBox cb_agree_term;
+    private View tv_login_term;
 
     /**
      * 眼睛、保存密码、验证码
@@ -112,6 +113,9 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
         loginMainGoAccountCenter = contentView.findViewById(R.id.gama_login_tv_link);
         loginMainGoChangePassword = contentView.findViewById(R.id.gama_login_tv_change_password);
 
+        tv_login_term = contentView.findViewById(R.id.tv_login_term);
+        cb_agree_term = contentView.findViewById(R.id.cb_agree_term);
+        cb_agree_term.setChecked(true);
 
         loginAccountEditText = accountSdkInputEditTextView.getInputEditText();
         loginAccountEditText.setHint(R.string.py_msg_account_hint);
@@ -203,6 +207,10 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
                 if(!versionData.isLineLogin()){
                     lineLoginView.setVisibility(View.GONE);
                 }
+                if(!versionData.isShowContract()){
+                    cb_agree_term.setVisibility(View.GONE);
+                    tv_login_term.setVisibility(View.GONE);
+                }
             }
         }
 
@@ -215,15 +223,12 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
                 sLoginDialogv2.getLoginPresenter().fbLogin(sLoginDialogv2.getActivity());
             }
         });
-        contentView.findViewById(R.id.tv_login_term).setOnClickListener(new OnClickListener() {
+        tv_login_term.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 sLoginDialogv2.showTermView(ViewType.LoginWithRegView);
             }
         });
-
-        cb_agree_term = contentView.findViewById(R.id.cb_agree_term);
-        cb_agree_term.setChecked(true);
 
         macLoginView.setOnClickListener(new OnClickListener() {
             @Override

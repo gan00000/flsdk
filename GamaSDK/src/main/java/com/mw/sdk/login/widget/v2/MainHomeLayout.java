@@ -25,6 +25,7 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
     private ImageView iv_login_google,iv_login_fb,iv_login_line;
     private CheckBox cb_agree_term;
     private View layout_go_term;
+    private View layout_term;
     private ImageView iv_logo;
 
     public MainHomeLayout(Context context) {
@@ -57,6 +58,7 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
         cb_agree_term = contentView.findViewById(R.id.cb_agree_term);
         layout_go_term = contentView.findViewById(R.id.layout_go_term);
         iv_logo = contentView.findViewById(R.id.iv_logo);
+        layout_term = contentView.findViewById(R.id.layout_term);
 
         guestLoginView.setOnClickListener(this);
         layout_go_account_login.setOnClickListener(this);
@@ -87,6 +89,9 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
                 }
                 if(!versionData.isLineLogin()){
                     iv_login_line.setVisibility(View.GONE);
+                }
+                if(!versionData.isShowContract()){
+                    layout_term.setVisibility(View.GONE);
                 }
             }
         }

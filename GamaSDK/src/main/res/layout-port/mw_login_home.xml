@@ -148,6 +148,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="15dp"
                 android:gravity="center"
+                android:id="@+id/layout_term"
                 android:orientation="horizontal">
 
                 <CheckBox
