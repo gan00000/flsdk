@@ -119,6 +119,11 @@ public class GBillingHelper implements PurchasesUpdatedListener {
                     isBillingInit = true;
                     PL.i( "onBillingSetupFinished -> success");
 //                    callback.onStartUp(true);
+                    if (mBillingCallbackList != null && !mBillingCallbackList.isEmpty()) {
+                        for (BillingHelperStatusCallback mBillingCallback : mBillingCallbackList) {
+                            mBillingCallback.onStartUp(true, billingResult.getDebugMessage());
+                        }
+                    }
                     if (executeOnSuccess != null) {
                         executeOnSuccess.run();
                     }

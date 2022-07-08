@@ -479,12 +479,12 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
 
     @Override
     public void onStartUp(boolean isSuccess, String msg) {
-//        if (!isSuccess) {
-//            PL.i( "onStartUp fail.");
-//            callbackFail(msg);
-//        } else {
-//            PL.i( "onStartUp success.");
-//        }
+        if (isSuccess) {
+            PL.i( "billingClient.startConnection onStartUp success.");
+        } else {
+            PL.i( "billingClient.startConnection onStartUp fail.");
+            callbackFail(msg + "");
+        }
     }
 
     @Override
