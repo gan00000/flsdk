@@ -16,11 +16,10 @@ import com.mw.base.bean.unify.UnifiedSwitchResponseBean;
 import com.mw.base.cfg.ResConfig;
 import com.mw.base.excute.UnifiedSwitchRequestTask;
 import com.mw.base.utils.SdkUtil;
+import com.mw.sdk.R;
 import com.mw.sdk.SWebViewDialog;
-import com.mw.sdk.out.GamaOpenWebType;
 import com.mw.sdk.out.ISdkCallBack;
 import com.mw.sdk.utils.DialogUtil;
-import com.mw.sdk.R;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -29,7 +28,7 @@ public class GamaWebPageHelper {
     private static ISdkCallBack iSdkCallBack;
     private static boolean isLaunch = false;
 
-    public static SWebViewDialog openWebPage(Context context, GamaOpenWebType type, String url, ISdkCallBack callBack) {
+   /* public static SWebViewDialog openWebPage(Context context, GamaOpenWebType type, String url, ISdkCallBack callBack) {
         iSdkCallBack = callBack;
         switch (type) {
             case CUSTOM_URL:
@@ -45,7 +44,7 @@ public class GamaWebPageHelper {
                 break;
         }
         return null;
-    }
+    }*/
 
     private static void startAnnouncement(final Context context) {
         UnifiedSwitchRequestTask requestTask = new UnifiedSwitchRequestTask(context, "notice");

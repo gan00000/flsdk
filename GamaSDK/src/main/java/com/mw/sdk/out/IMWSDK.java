@@ -95,4 +95,5 @@ public interface IMWSDK extends IGameLifeCycle {
 
 //    void trackCreateRoleEvent(Activity activity, String roleId,String roleName);
 
+    public void requestStoreReview(Activity activity, ICompleteListener iCompleteListener);
 }

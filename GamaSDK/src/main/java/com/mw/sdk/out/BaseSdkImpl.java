@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.webkit.JavascriptInterface;
 
+import androidx.annotation.NonNull;
+
 import com.core.base.ObjFactory;
 import com.core.base.utils.AppUtil;
 import com.core.base.utils.PL;
@@ -19,6 +21,12 @@ import com.gama.pay.IPayFactory;
 import com.gama.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
 import com.gama.pay.gp.bean.req.WebPayReqBean;
 import com.gama.pay.gp.bean.res.BasePayBean;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.play.core.review.ReviewInfo;
+import com.google.android.play.core.review.ReviewManager;
+import com.google.android.play.core.review.ReviewManagerFactory;
+import com.google.android.play.core.review.model.ReviewErrorCode;
 import com.mw.base.bean.SGameLanguage;
 import com.mw.base.bean.SPayType;
 import com.mw.base.cfg.ConfigRequest;
@@ -599,6 +607,49 @@ public class BaseSdkImpl implements IMWSDK {
         iPay.startPay(activity, googlePayCreateOrderIdReqBean);
     }
 
+    public void requestStoreReview(Activity activity, ICompleteListener iCompleteListener){
+
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                ReviewManager manager = ReviewManagerFactory.create(activity);
+                Task<ReviewInfo> request = manager.requestReviewFlow();
+                request.addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        // We can get the ReviewInfo object
+                        PL.i("task.isSuccessful We can get the ReviewInfo object");
+                        ReviewInfo reviewInfo = task.getResult();
+
+                        Task<Void> flow = manager.launchReviewFlow(activity, reviewInfo);
+                        flow.addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                //https://developer.android.com/guide/playcore/in-app-review/kotlin-java?hl=zh-cn
+                                // 如果在应用内评价流程中出现错误，请勿通知用户或更改应用的正常用户流。调用 onComplete 后，继续执行应用的正常用户流。
+                                // The flow has finished. The API does not indicate whether the user
+                                // reviewed or not, or even whether the review dialog was shown. Thus, no
+                                // matter the result, we continue our app flow.
+                                if (iCompleteListener != null) {
+                                    iCompleteListener.onComplete();
+                                }
+                            }
+                        });
+
+                    } else {
+                        // There was some problem, log or handle the error code.
+//                @ReviewErrorCode
+                        PL.i("requestReviewFlow There was some problem");
+//                        int reviewErrorCode = task.getException().getErrorCode();
+                        if (iCompleteListener != null) {
+                            iCompleteListener.onComplete();
+                        }
+                    }
+                });
+            }
+        });
+
+    }
 
 
     @SuppressLint("JavascriptInterface")
