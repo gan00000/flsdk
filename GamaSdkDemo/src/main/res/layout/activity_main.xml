@@ -67,6 +67,11 @@
                     android:layout_height="wrap_content"
                     android:visibility="gone"
                     android:text="事件上报" />
+                <Button
+                    android:id="@+id/openScore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="弹出评分" />
 
 
 

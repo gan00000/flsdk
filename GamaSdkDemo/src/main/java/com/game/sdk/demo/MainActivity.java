@@ -20,6 +20,7 @@ import com.mw.base.utils.SLog;
 import com.mw.sdk.login.ILoginCallBack;
 import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.callback.IPayListener;
+import com.mw.sdk.out.ICompleteListener;
 import com.mw.sdk.out.MWSdkFactory;
 import com.mw.sdk.out.IMWSDK;
 import com.mw.sdk.demo.R;
@@ -228,6 +229,19 @@ public class MainActivity extends Activity {
 
                     }
 
+                });
+            }
+        });
+
+        findViewById(R.id.openScore).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mIMWSDK.requestStoreReview(MainActivity.this, new ICompleteListener() {
+                    @Override
+                    public void onComplete() {
+                        //重要提示：如果在应用内评价流程中出现错误，请勿通知用户或更改应用的正常用户流。调用 onComplete 后，继续执行应用的正常用户流。
+                        PL.i("requestReviewFlow onComplete");
+                    }
                 });
             }
         });
