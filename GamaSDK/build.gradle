@@ -4,7 +4,7 @@ android {
     compileSdkVersion 32
 
     defaultConfig {
-        minSdkVersion 18
+        minSdkVersion 21
         targetSdkVersion 32
         buildConfigField "String", JAR_VERSION, SDK_VERSION_NAME_SDK_TWGOOGLE
     }

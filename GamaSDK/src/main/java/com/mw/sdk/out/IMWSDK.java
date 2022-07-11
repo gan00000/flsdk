@@ -80,6 +80,12 @@ public interface IMWSDK extends IGameLifeCycle {
 //    boolean gamaShouldShareWithType(Activity activity, ThirdPartyType type);
 
     /**
+     * 事件追踪接口
+     * @param activity
+     * @param eventName 事件名称
+     */
+    void trackEvent(Activity activity, EventConstant.EventName eventName);
+    /**
      * 事件上报接口
      * @param activity
      * @param eventName

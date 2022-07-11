@@ -7,6 +7,7 @@
 	3. [设置角色信息](#5)
 	4. [登录接口](#6)
 	5. [充值接口](#7)
+	6. [事件埋点接口](#8)
 
 
 ----------------
@@ -341,21 +342,40 @@
        
 	```
 
-* <h3 id="10">上架Google Play相关注意的问题</h3>
 
-1. apk包不要包含有其他渠道的代码资源，不要包含有talkdata sdk相关代码
-2. openssl漏洞问题，应用迁移至 OpenSSL 1.02f/1.01r 或更高版本，查看命令 ($ unzip -p YourApp.apk | strings | grep "OpenSSL")，相关说明https://support.google.com/faqs/answer/6376725
-3. 检查权限，不要添加多余的、没有使用的权限，使用到的权限越少越好；不能使用Google不建议的权限,如SYSTEM_ALERT_WINDOW and WRITE_SETTINGS 
-相关说明:https://developer.android.com/guide/topics/permissions/requesting.html#perm-groups"
-4. apk包不能大于100M,超过100m,需要把相关资源做成扩展文件obb,相关文档https://developer.android.com/google/play/expansion-files。超过100M可以参照Google官方的建议做法（推荐） 或者  启动游戏进行cdn加载
-5. 最低支持Android系统4.3
-6. Libpng 漏洞问题，需要使用合适的版本 文档： https://support.google.com/faqs/answer/7011127
-7. WebView SSL 错误处理 https://support.google.com/faqs/answer/7071387?hl=zh-Hans
-8. 确保您的应用支持64位设备  https://developer.android.com/distribute/best-practices/develop/64-bit
-9. Android support支持库迁移AndroidX https://developer.android.google.cn/jetpack/androidx 参考链接 https://developer.android.google.cn/jetpack/androidx/migrate
+* <h3 id="8">事件埋点接口</h3>   
+	
+	```
+	
+	/**
+     * 事件埋点接口
+     * @param activity
+     * @param eventName 事件名称
+     */
+    void trackEvent(Activity activity, EventConstant.EventName eventName);
+    
+    游戏接入需要对下列几个事件进行埋点：
+    CHECK_PERMISSIONS,  检查权限(如果有该操作，没有不用接)
+    CHECK_UPDATE, 检查更新
+    CHECK_RESOURCES, 检查游戏资源
+    SELECT_SERVER,	选择伺服器
+    CREATE_ROLE,		创建角色
+    START_GUIDE, 开始新手引导
+    COMPLETE_GUIDE,  完成新手引导
 
-
-
-
+	sample:
+	
+	//埋点检查更新事件
+    mIMWSDK.trackEvent(MainActivity.this, EventConstant.EventName.CHECK_UPDATE);
+	
+	
+	
+	
+	
+	```
+	
+	
+	
+	
 
 

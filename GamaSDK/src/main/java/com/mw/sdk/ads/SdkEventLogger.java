@@ -101,7 +101,7 @@ public class SdkEventLogger {
     /**
      * Android角色信息上报
      */
-    public static void trackingRoleInfo(Context activity, Map<String, Object> map) {
+   /* public static void trackingRoleInfo(Context activity, Map<String, Object> map) {
         try {
             String userId = SdkUtil.getUid(activity);
             if (map == null || map.isEmpty() || TextUtils.isEmpty(userId)) {
@@ -116,7 +116,7 @@ public class SdkEventLogger {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
     /**
      * 统计储值数据
