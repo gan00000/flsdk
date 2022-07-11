@@ -114,7 +114,9 @@
 	    //mutildex
 	    implementation 'androidx.multidex:multidex:2.0.1'
 	    //google pay
-	    api "com.android.billingclient:billing:4.1.0"
+	  	implementation "com.android.billingclient:billing:4.1.0"
+    	//google评分
+    	implementation 'com.google.android.play:review:2.0.0'
 	
 	    implementation 'com.google.code.gson:gson:2.8.6'
 	    implementation 'com.zhy:base-rvadapter:3.0.3'
@@ -372,6 +374,12 @@
 	
 	
 	
+	```
+	
+* <h3 id="9">应用内评分接口</h3>  
+	
+	```
+	public void requestStoreReview(Activity activity, ICompleteListener iCompleteListener);
 	```
 	
 	
