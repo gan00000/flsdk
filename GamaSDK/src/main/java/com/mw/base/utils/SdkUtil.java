@@ -257,7 +257,7 @@ public class SdkUtil {
                 accountObject.put("sdk_loginTimestamp", accountModel.getLoginTimestamp());
                 jsonArray.put(accountObject);
             }
-            SPUtil.saveSimpleInfo(context, SDK_SP_FILE, SDK_LOGIN_ACCOUNT_INFO, jsonArray.toString());
+            SPUtil.saveSimpleInfo(context, SDK_SP_FILE, SDK_LOGIN_ACCOUNT_INFO, encryptText(jsonArray.toString()));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -270,7 +270,7 @@ public class SdkUtil {
      */
     public static List<AccountModel> getAccountModels(Context context){
         List<AccountModel> accountModels = new ArrayList<>();
-        String accountStringInfo = SPUtil.getSimpleString(context, SDK_SP_FILE, SDK_LOGIN_ACCOUNT_INFO);
+        String accountStringInfo = decryptText(SPUtil.getSimpleString(context, SDK_SP_FILE, SDK_LOGIN_ACCOUNT_INFO));
        if (SStringUtil.isEmpty(accountStringInfo)){
            return accountModels;
        }
@@ -356,29 +356,28 @@ public class SdkUtil {
     /**
      * 加密后的密码前缀
      */
-    private final static String cipherPasswordFlag = "888*****888";
+//    private final static String cipherPasswordFlag = "888*****888";
 
     /**
      * 加密密码
      */
-    private static String encryptPassword(String password){
+    private static String encryptText(String str){
         try {
-            if (SStringUtil.isNotEmpty(password)){
-                return cipherPasswordFlag + DESCipher.encrypt3DES(password, getSecretKey());
+            if (SStringUtil.isNotEmpty(str)){
+                return DESCipher.encrypt3DES(str, getSecretKey());
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return password;
+        return str;
     }
 
     /**
      * 解密密码
      */
-    private static String decryptPassword(String encryptText){
+    private static String decryptText(String encryptText){
         try {
-            if (SStringUtil.isNotEmpty(encryptText) && encryptText.startsWith(cipherPasswordFlag)){
-                encryptText = encryptText.replace(cipherPasswordFlag,"");
+            if (SStringUtil.isNotEmpty(encryptText)){
                 return DESCipher.decrypt3DES(encryptText, getSecretKey());
             }
         } catch (Exception e) {
@@ -388,11 +387,15 @@ public class SdkUtil {
     }
 
     public static void saveSdkLoginData(Context context,String data){
+        if (SStringUtil.isNotEmpty(data)){
+            data = encryptText(data);//进行加密后保存
+        }
         SPUtil.saveSimpleInfo(context, SDK_SP_FILE, SDK_LOGIN_SERVER_RETURN_DATA,data);
     }
 
     public static SLoginResponse getSdkLoginData(Context context){
         String loginResult = SPUtil.getSimpleString(context, SDK_SP_FILE, SDK_LOGIN_SERVER_RETURN_DATA);
+        loginResult = decryptText(loginResult);//进行解密
         if (SStringUtil.isEmpty(loginResult)){
             return null;
         }
@@ -616,34 +619,13 @@ public class SdkUtil {
     }
 
     private static String getKeyPrefix() {
-        return "(starpy999888";
+        return "(mwmwmw111888";
     }
 
     private static String getKeySurfix() {
         int index = 2017 * 10000;
         int sec = index + 227;
-        return sec + "dyrl)";
-    }
-
-    public static String encryptDyUrl(Context context,String data){
-        try {
-            return DESCipher.encrypt3DES(data, getSecretKey());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "";
-    }
-
-    /**
-     * 解密动态域名信息
-     */
-    public static String decryptDyUrl(Context context,String data){
-        try {
-            return DESCipher.decrypt3DES(data, getSecretKey());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "";
+        return sec + "mwmw)";
     }
 
     /**
