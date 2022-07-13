@@ -68,6 +68,8 @@ public class BaseSdkImpl implements IMWSDK {
     protected IPayListener iPayListener;
     private Activity activity;
 
+    private ReviewInfo reviewInfo;
+
     public BaseSdkImpl() {
         iLogin = ObjFactory.create(DialogLoginImpl.class);
         PL.i("BaseSdkImpl 构造函数");
@@ -614,13 +616,34 @@ public class BaseSdkImpl implements IMWSDK {
             public void run() {
 
                 ReviewManager manager = ReviewManagerFactory.create(activity);
+
+//                if (BaseSdkImpl.this.reviewInfo != null){
+//
+//                    Task<Void> flow = manager.launchReviewFlow(activity, reviewInfo);
+//                    flow.addOnCompleteListener(new OnCompleteListener<Void>() {
+//                        @Override
+//                        public void onComplete(@NonNull Task<Void> task) {
+//                            //https://developer.android.com/guide/playcore/in-app-review/kotlin-java?hl=zh-cn
+//                            // 如果在应用内评价流程中出现错误，请勿通知用户或更改应用的正常用户流。调用 onComplete 后，继续执行应用的正常用户流。
+//                            // The flow has finished. The API does not indicate whether the user
+//                            // reviewed or not, or even whether the review dialog was shown. Thus, no
+//                            // matter the result, we continue our app flow.
+//                            if (iCompleteListener != null) {
+//                                iCompleteListener.onComplete();
+//                            }
+//                        }
+//                    });
+//
+//                    return;
+//                }
+
                 Task<ReviewInfo> request = manager.requestReviewFlow();
                 request.addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         // We can get the ReviewInfo object
                         PL.i("task.isSuccessful We can get the ReviewInfo object");
                         ReviewInfo reviewInfo = task.getResult();
-
+                        BaseSdkImpl.this.reviewInfo = reviewInfo;
                         Task<Void> flow = manager.launchReviewFlow(activity, reviewInfo);
                         flow.addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
@@ -718,6 +741,10 @@ public class BaseSdkImpl implements IMWSDK {
                         if (iPayListener != null) {
                             iPayListener.onPaySuccess(productId, BaseSdkImpl.this.cpOrderId);
                         }
+                    }
+
+                    if (otherPayWebViewDialog != null) {
+                        otherPayWebViewDialog.finish();
                     }
                 }
             });

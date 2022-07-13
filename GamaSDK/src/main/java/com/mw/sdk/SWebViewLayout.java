@@ -30,6 +30,7 @@ public class SWebViewLayout extends SBaseRelativeLayout {
 
     private SWebView sWebView;
     private ImageView closeImageView;
+    private ImageView backImageView;
     private TextView titleTv;
 
     public SWebView getsWebView() {
@@ -40,6 +41,9 @@ public class SWebViewLayout extends SBaseRelativeLayout {
         return closeImageView;
     }
 
+    public ImageView getBackImageView() {
+        return backImageView;
+    }
 
     public SWebViewLayout(Context context) {
         super(context);
@@ -73,6 +77,7 @@ public class SWebViewLayout extends SBaseRelativeLayout {
 
         closeImageView = contentView.findViewById(R.id.iv_s_web_close);
         titleTv = contentView.findViewById(R.id.tv_s_web_title);
+        backImageView = contentView.findViewById(R.id.iv_s_web_back);
         initTitle("");
 
         progressBar = (ProgressBar) contentView.findViewById(R.id.s_webview_pager_loading_percent);
@@ -81,6 +86,15 @@ public class SWebViewLayout extends SBaseRelativeLayout {
         sWebView.setBaseWebChromeClient(new MyWebChromeClient(progressBar, activity));
         sWebView.setWebViewClient(new BaseWebViewClient(activity));
 
+
+        backImageView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (sWebView != null && sWebView.canGoBack()){
+                    sWebView.goBack();
+                }
+            }
+        });
     }
 
     private int getCloseRadius(){
@@ -88,26 +102,6 @@ public class SWebViewLayout extends SBaseRelativeLayout {
     }
 
     private void initTitle(String webTitle) {
-
-        View titleLayout = this.findViewById(R.id.py_title_layout_id);
-        if (SStringUtil.isNotEmpty(webTitle)){
-            titleLayout.setVisibility(VISIBLE);
-            titleLayout.setBackgroundResource(R.drawable.gama_title_sdk_bg);
-        }else{
-            titleLayout.setVisibility(GONE);
-            return;
-        }
-
-        this.findViewById(R.id.py_back_button).setVisibility(GONE);
-        TextView titleTextView = (TextView) this.findViewById(R.id.py_title_id);
-        titleTextView.setText(webTitle);
-        View rightCloseView = this.findViewById(R.id.py_title_right_button);
-        rightCloseView.setVisibility(VISIBLE);
-        rightCloseView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
 
     }
 
@@ -133,6 +127,24 @@ public class SWebViewLayout extends SBaseRelativeLayout {
             super.onReceivedTitle(view, title);
             if (SStringUtil.isNotEmpty(title)){
                 titleTv.setText(title);
+            }
+        }
+    }
+
+    public class MyWebViewClient extends BaseWebViewClient {
+
+        public MyWebViewClient(Activity activity) {
+            super(activity);
+        }
+
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            super.onPageFinished(view, url);
+
+            if (view.canGoBack()){
+                backImageView.setVisibility(VISIBLE);
+            }else {
+                backImageView.setVisibility(GONE);
             }
         }
     }

@@ -174,6 +174,10 @@ public class SWebViewDialog extends SBaseDialog {
         }
     }
 
+    public void finish(){
+        sWebViewLayout.getBackImageView().setVisibility(View.GONE);
+    }
+
     public interface SWebDialogCallback
     {
         void createFinish(SWebViewDialog sWebViewDialog,SWebView sWebView);

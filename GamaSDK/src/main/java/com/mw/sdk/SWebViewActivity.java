@@ -36,7 +36,7 @@ public class SWebViewActivity extends SBaseSdkActivity {
         if (getIntent() != null) {
             webUrl = getIntent().getStringExtra(PLAT_WEBVIEW_URL);
             webTitle = getIntent().getStringExtra(PLAT_WEBVIEW_TITLE);
-            initTitle(webTitle);
+//            initTitle(webTitle);
         }
 
 
@@ -58,31 +58,6 @@ public class SWebViewActivity extends SBaseSdkActivity {
 
     }
 
-    private void initTitle(String webTitle) {
-
-       View titleLayout = findViewById(R.id.py_title_layout_id);
-        if (SStringUtil.isNotEmpty(webTitle)){
-            titleLayout.setVisibility(View.VISIBLE);
-            titleLayout.setBackgroundResource(R.drawable.gama_title_sdk_bg);
-        }else{
-            titleLayout.setVisibility(View.GONE);
-            return;
-        }
-
-        findViewById(R.id.py_back_button).setVisibility(View.GONE);
-        TextView titleTextView = (TextView) findViewById(R.id.py_title_id);
-        titleTextView.setText(webTitle);
-        View rightCloseView = findViewById(R.id.py_title_right_button);
-        rightCloseView.setVisibility(View.VISIBLE);
-        rightCloseView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
-
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

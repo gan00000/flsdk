@@ -64,6 +64,7 @@ public class BaseWebViewClient extends WebViewClient {
     @Override
     public void onPageFinished(WebView view, String url) {
         super.onPageFinished(view, url);
+        PL.i("onPageFinished url:" + url);
     }
 
     public boolean overrideUrlLoading(WebView webView,String url){
