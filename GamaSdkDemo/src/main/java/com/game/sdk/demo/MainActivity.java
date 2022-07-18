@@ -12,6 +12,7 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 
+import com.core.base.utils.MarketUtil;
 import com.core.base.utils.PL;
 import com.mw.base.bean.SGameLanguage;
 import com.mw.base.bean.SPayType;
@@ -243,6 +244,12 @@ public class MainActivity extends Activity {
                         PL.i("requestReviewFlow onComplete");
                     }
                 });
+            }
+        });
+        findViewById(R.id.goDownLoad).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MarketUtil.openMarket(MainActivity.this);
             }
         });
 

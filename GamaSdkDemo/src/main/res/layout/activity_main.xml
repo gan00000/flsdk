@@ -3,7 +3,6 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/demo_bg"
     android:paddingTop="50dp"
     android:orientation="vertical">
 
@@ -72,6 +71,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="弹出评分" />
+
+                <Button
+                    android:id="@+id/goDownLoad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="弹出评分(跳到商店)" />
 
 
 
