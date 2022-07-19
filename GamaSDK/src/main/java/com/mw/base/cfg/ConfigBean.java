@@ -60,6 +60,7 @@ public class ConfigBean {
         private boolean appleLogin = true;
         private boolean deleteAccount = false;
         private boolean showContract = true;
+        private boolean showLogo = false;
 
         public String getVersion() {
             return version;
@@ -131,6 +132,14 @@ public class ConfigBean {
 
         public void setShowContract(boolean showContract) {
             this.showContract = showContract;
+        }
+
+        public boolean isShowLogo() {
+            return showLogo;
+        }
+
+        public void setShowLogo(boolean showLogo) {
+            this.showLogo = showLogo;
         }
     }
 }
