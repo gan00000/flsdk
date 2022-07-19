@@ -9,6 +9,7 @@
 	5. [充值接口](#7)
 	6. [事件埋点接口](#8)
 	7. [应用内评分接口](#9)
+	8. [上架Google Play相关注意的问题](#10)
 
 
 ----------------
@@ -383,6 +384,21 @@
 	public void requestStoreReview(Activity activity, ICompleteListener iCompleteListener);
 	```
 	
+	
+* <h3 id="10">上架Google Play相关注意的问题</h3>
+	1. apk包不要包含有其他渠道的代码和资源，不要包含有talkdata sdk相关代码
+	2. openssl漏洞问题，应用迁移至 OpenSSL 1.02f/1.01r 或更高版本，查看命令 ($ unzip -p YourApp.apk | strings | grep "OpenSSL")，相关说明：https://support.google.com/faqs/answer/6376725
+	3. 检查权限，不要添加多余的、没有使用的权限，使用到的权限越少越好；不能使用Google不建议的权限,如SYSTEM_ALERT_WINDOW and WRITE_SETTINGS 
+	相关说明:https://developer.android.com/guide/topics/permissions/requesting.html#perm-groups"
+	4. 从 2021 年 8 月起，新应用需要使用 Android App Bundle 才能在 Google Play 中发布。现在，Play Feature Delivery 或 Play Asset Delivery 支持大小超过 150 MB 的新应用,相关链接：https://developer.android.com/guide/app-bundle?hl=zh-cn
+	5. 最低版本支持：minSdkVersion 21
+	6. Libpng 漏洞问题，需要使用合适的版本 文档： https://support.google.com/faqs/answer/7011127
+	7. WebView SSL 错误处理 https://support.google.com/faqs/answer/7071387?hl=zh-Hans
+	8. 确保您的应用支持64位设备  https://developer.android.com/distribute/best-practices/develop/64-bit
+	9. sdk使用AndroidX，不使用Android support。支持库迁移AndroidX https://developer.android.google.cn/jetpack/androidx 参考链接 https://developer.android.google.cn/jetpack/androidx/migrate
+	
+
+
 	
 	
 	
