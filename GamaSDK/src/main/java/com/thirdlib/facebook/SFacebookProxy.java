@@ -51,6 +51,7 @@ import java.util.List;
 public class SFacebookProxy {
 
 	private static final String FB_TAG = "PL_LOG_FB";
+	public static final int Request_Code_Share_Url = 9101;
 
 	private static DefaultAudience defaultAudience = DefaultAudience.FRIENDS;
 	private static LoginBehavior loginBehavior = LoginBehavior.NATIVE_WITH_FALLBACK;
@@ -335,7 +336,7 @@ public class SFacebookProxy {
 		if (callbackManager == null) {
 			callbackManager = CallbackManager.Factory.create();
 		}
-		shareDialog.registerCallback(callbackManager, shareCallback);
+		shareDialog.registerCallback(callbackManager, shareCallback, Request_Code_Share_Url);
 		
 		/*
 		 * Note: If your app share links to the iTunes or Google Play stores, we

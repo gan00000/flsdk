@@ -231,6 +231,9 @@ public class BaseSdkImpl implements IMWSDK {
                 if (csSWebViewDialog != null){
                     csSWebViewDialog.onActivityResult(activity, requestCode, resultCode, data);
                 }
+                if (sFacebookProxy != null && requestCode == SFacebookProxy.Request_Code_Share_Url) {
+                    sFacebookProxy.onActivityResult(activity, requestCode, resultCode, data);
+                }
                 ShareUtil.onActivityResult(activity, requestCode, resultCode, data);
             }
         });

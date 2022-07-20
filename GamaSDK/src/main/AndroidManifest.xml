@@ -36,6 +36,12 @@
         android:smallScreens="true"
         android:xlargeScreens="true" />
 
+
+    <!--  如果您的应用程序面向 Android 11 或更高版本，请向 AndroidManifest.xml 文件添加以下查询块，以使 Facebook 应用对您的应用可见：-->
+    <queries>
+        <provider android:authorities="com.facebook.katana.provider.PlatformProvider" />
+    </queries>
+
     <application>
 
 <!--        <activity-->
@@ -101,8 +107,6 @@
             android:authorities="@string/facebook_authorities"
             android:exported="true" />
 
-<!--        如果您的应用程序面向 Android 11 或更高版本，请向 AndroidManifest.xml 文件添加以下查询块，以使 Facebook 应用对您的应用可见：-->
-<!--        <queries><provider android:authorities="com.facebook.katana.provider.PlatformProvider" /></queries>-->
         <!-- 以上 -->
 
 <!--        ================================-->

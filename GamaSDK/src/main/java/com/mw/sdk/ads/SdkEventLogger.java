@@ -266,7 +266,7 @@ public class SdkEventLogger {
     /**
      * 本地保存的安装上报标识
      */
-    private static final String GAMA_ADSINSTALLACTIVATION = "GAMA_ADSINSTALLACTIVATION";
+//    private static final String GAMA_ADSINSTALLACTIVATION = "GAMA_ADSINSTALLACTIVATION";
 
     /**
      * 自家平台广告：安装上报
