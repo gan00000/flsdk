@@ -2,11 +2,12 @@ package com.gama.pay.gp.bean.req;
 
 import android.content.Context;
 
+import com.mw.base.bean.SGameBaseRequestBean;
 import com.mw.base.bean.SSdkBaseRequestBean;
 
-public class GoogleExchangeReqBean extends SSdkBaseRequestBean {
+public class GoogleExchangeReqBean extends SGameBaseRequestBean {
 
-	private String userId;
+//	private String userId;
 	private String orderId;
 	private String googleOrderId;
 	private String purchaseData;
@@ -56,13 +57,13 @@ public class GoogleExchangeReqBean extends SSdkBaseRequestBean {
 		this.productPrice = productPrice;
 	}
 
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
+//	public String getUserId() {
+//		return userId;
+//	}
+//
+//	public void setUserId(String userId) {
+//		this.userId = userId;
+//	}
 
 	public String getOrderId() {
 		return orderId;

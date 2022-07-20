@@ -8,6 +8,7 @@ import com.android.billingclient.api.Purchase;
 import com.core.base.callback.ISReqCallBack;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.PL;
+import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
 import com.gama.pay.gp.bean.req.GoogleExchangeReqBean;
 import com.gama.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
@@ -60,15 +61,21 @@ public class PayApi {
     }
 
     /**
-     * 正常购买发币
+     * 发币
      */
     public static void requestSendStone(Context context, final Purchase mPurchase, SFCallBack<GPExchangeRes> sfCallBack) {
 
         GoogleExchangeReqBean exchangeReqBean = new GoogleExchangeReqBean(context);
         exchangeReqBean.setDataSignature(mPurchase.getSignature());
         exchangeReqBean.setPurchaseData(mPurchase.getOriginalJson());
-        exchangeReqBean.setUserId(mPurchase.getAccountIdentifiers().getObfuscatedAccountId());
-        exchangeReqBean.setOrderId(mPurchase.getAccountIdentifiers().getObfuscatedProfileId());
+        if (mPurchase.getAccountIdentifiers() != null) {
+            if (SStringUtil.isNotEmpty(mPurchase.getAccountIdentifiers().getObfuscatedAccountId())){
+                exchangeReqBean.setUserId(mPurchase.getAccountIdentifiers().getObfuscatedAccountId());
+            }
+            if (SStringUtil.isNotEmpty(mPurchase.getAccountIdentifiers().getObfuscatedProfileId())){
+                exchangeReqBean.setOrderId(mPurchase.getAccountIdentifiers().getObfuscatedProfileId());
+            }
+        }
         exchangeReqBean.setGoogleOrderId(mPurchase.getOrderId());
 
         exchangeReqBean.setRequestUrl(PayHelper.getPreferredUrl(context));
