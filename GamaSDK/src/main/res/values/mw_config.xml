@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Facebook应用名 -->
-<!--    <string name="facebook_app_name"></string>-->
+    <string name="facebook_app_name"></string>
     <!-- Facebook应用ID -->
     <string name="facebook_app_id"></string>
     <string name="facebook_client_token"></string>

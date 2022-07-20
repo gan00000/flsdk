@@ -74,10 +74,11 @@ public interface IMWSDK extends IGameLifeCycle {
 
 //    void openPlatform(Activity activity);
 
+    void share(Activity activity, String shareLinkUrl, ISdkCallBack iSdkCallBack);
     /**
      * 检查是否支持分享
      */
-//    boolean gamaShouldShareWithType(Activity activity, ThirdPartyType type);
+    boolean canShareWithType(Activity activity, ThirdPartyType type);
 
     /**
      * 事件追踪接口

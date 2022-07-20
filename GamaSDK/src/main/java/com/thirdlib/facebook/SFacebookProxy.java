@@ -278,13 +278,19 @@ public class SFacebookProxy {
 		}
 	}
 	
-	public void fbShare(Activity activity, final FbShareCallBack fbShareCallBack, String shareCaption, String shareDescrition,
-						String shareLinkUrl, String sharePictureUrl) {
-		fbShare(activity, fbShareCallBack, shareCaption, shareDescrition, shareLinkUrl, sharePictureUrl, "");
-	}
-	public void fbShare(Activity activity, final FbShareCallBack fbShareCallBack, String shareCaption, String shareDescrition,
-						String shareLinkUrl, String sharePictureUrl, String shareLinkName) {
-		
+//	public void fbShare(Activity activity, final FbShareCallBack fbShareCallBack,
+//						String shareLinkUrl, String sharePictureUrl) {
+//		fbShare(activity, fbShareCallBack, shareCaption, shareDescrition, shareLinkUrl, sharePictureUrl, "");
+//	}
+	public void fbShare(Activity activity, final FbShareCallBack fbShareCallBack, String shareLinkUrl) {
+
+		if (TextUtils.isEmpty(shareLinkUrl)) {
+			if (fbShareCallBack != null) {
+				fbShareCallBack.onError("shareLinkUrl is enpty");
+			}
+			return;
+		}
+
 		FacebookCallback<Sharer.Result> shareCallback = new FacebookCallback<Sharer.Result>() {
 			@Override
 			public void onCancel() {
@@ -337,17 +343,11 @@ public class SFacebookProxy {
 		 * Instead we post some app information we scrape from the app store
 		 * directly with the Webcrawler. This may not include images.
 		 */
-//		Builder builder = new Builder().setContentTitle(shareCaption).setContentDescription(
-//				shareDescrition);
-//		if (!TextUtils.isEmpty(shareLinkUrl)) {
-//			builder.setContentUrl(Uri.parse(shareLinkUrl));
-//		}
-//		if (!TextUtils.isEmpty(sharePictureUrl)) {
-//			builder.setImageUrl(Uri.parse(sharePictureUrl));
-//		}
-//		ShareLinkContent linkContent = builder.build();
-//
-//		shareDialog.show(linkContent);
+
+		ShareLinkContent linkContent = new ShareLinkContent.Builder()
+				.setContentUrl(Uri.parse(shareLinkUrl))
+				.build();
+		shareDialog.show(linkContent);
 
 	}
 	

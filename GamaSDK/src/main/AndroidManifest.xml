@@ -91,15 +91,18 @@
             android:exported="false" />
 
         <!-- 如需要从Facebook进行本地图片分享，需要开启以下两项 -->
-<!--        <meta-data-->
-<!--            android:name="com.facebook.sdk.ApplicationName"-->
-<!--            android:value="@string/facebook_app_name" />-->
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationName"
+            android:value="@string/facebook_app_name" />
 
         <!--如果要通过 Android 版 Facebook 应用分享链接、图片或视频，还需要在清单文件中声明 FacebookContentProvider-->
-<!--        <provider-->
-<!--            android:name="com.facebook.FacebookContentProvider"-->
-<!--            android:authorities="@string/facebook_authorities"-->
-<!--            android:exported="true" />-->
+        <provider
+            android:name="com.facebook.FacebookContentProvider"
+            android:authorities="@string/facebook_authorities"
+            android:exported="true" />
+
+<!--        如果您的应用程序面向 Android 11 或更高版本，请向 AndroidManifest.xml 文件添加以下查询块，以使 Facebook 应用对您的应用可见：-->
+<!--        <queries><provider android:authorities="com.facebook.katana.provider.PlatformProvider" /></queries>-->
         <!-- 以上 -->
 
 <!--        ================================-->

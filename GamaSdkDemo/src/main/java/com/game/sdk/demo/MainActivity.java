@@ -22,6 +22,7 @@ import com.mw.sdk.login.ILoginCallBack;
 import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.callback.IPayListener;
 import com.mw.sdk.out.ICompleteListener;
+import com.mw.sdk.out.ISdkCallBack;
 import com.mw.sdk.out.MWSdkFactory;
 import com.mw.sdk.out.IMWSDK;
 import com.mw.sdk.demo.R;
@@ -29,7 +30,7 @@ import com.mw.sdk.demo.R;
 public class MainActivity extends Activity {
 
     protected Button loginButton, webPayButton, googlePayBtn, shareButton, showPlatform, demo_language,
-            demo_cs;
+            demo_share;
     protected IMWSDK mIMWSDK;
     protected String userId;
 
@@ -54,7 +55,7 @@ public class MainActivity extends Activity {
         demo_language = findViewById(R.id.demo_language);
         webPayButton = findViewById(R.id.web_pay);
         googlePayBtn = findViewById(R.id.demo_pay_google);
-        demo_cs = findViewById(R.id.demo_cs);
+        demo_share = findViewById(R.id.demo_share);
 
         mIMWSDK = MWSdkFactory.create();
 
@@ -253,6 +254,22 @@ public class MainActivity extends Activity {
             }
         });
 
+        demo_share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mIMWSDK.share(MainActivity.this, "https://developers.facebook.com/docs/sharing/android", new ISdkCallBack() {
+                    @Override
+                    public void success() {
+                        PL.i("share success");
+                    }
+
+                    @Override
+                    public void failure() {
+                        PL.i("share failure");
+                    }
+                });
+            }
+        });
     }
 
     @Override

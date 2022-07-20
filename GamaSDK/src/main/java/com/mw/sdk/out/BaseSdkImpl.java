@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.webkit.JavascriptInterface;
@@ -13,20 +14,19 @@ import androidx.annotation.NonNull;
 import com.core.base.ObjFactory;
 import com.core.base.utils.AppUtil;
 import com.core.base.utils.PL;
+import com.core.base.utils.SStringUtil;
 import com.core.base.utils.SignatureUtil;
 import com.core.base.utils.ToastUtils;
 import com.gama.pay.IPay;
 import com.gama.pay.IPayCallBack;
 import com.gama.pay.IPayFactory;
 import com.gama.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
-import com.gama.pay.gp.bean.req.WebPayReqBean;
 import com.gama.pay.gp.bean.res.BasePayBean;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.play.core.review.ReviewInfo;
 import com.google.android.play.core.review.ReviewManager;
 import com.google.android.play.core.review.ReviewManagerFactory;
-import com.google.android.play.core.review.model.ReviewErrorCode;
 import com.mw.base.bean.SGameLanguage;
 import com.mw.base.bean.SPayType;
 import com.mw.base.cfg.ConfigRequest;
@@ -43,9 +43,11 @@ import com.mw.sdk.callback.IPayListener;
 import com.mw.sdk.login.DialogLoginImpl;
 import com.mw.sdk.login.ILogin;
 import com.mw.sdk.login.ILoginCallBack;
-import com.mw.sdk.social.share.GamaShare;
+import com.mw.sdk.social.share.ShareUtil;
 import com.thirdlib.facebook.SFacebookProxy;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Map;
 
 
@@ -229,7 +231,7 @@ public class BaseSdkImpl implements IMWSDK {
                 if (csSWebViewDialog != null){
                     csSWebViewDialog.onActivityResult(activity, requestCode, resultCode, data);
                 }
-                GamaShare.onActivityResult(activity, requestCode, resultCode, data);
+                ShareUtil.onActivityResult(activity, requestCode, resultCode, data);
             }
         });
     }
@@ -333,12 +335,15 @@ public class BaseSdkImpl implements IMWSDK {
 //
 //    }
 
+    public void share(Activity activity, String shareLinkUrl, ISdkCallBack iSdkCallBack) {
+        this.share(activity, ThirdPartyType.FACEBOOK,"",shareLinkUrl,"",iSdkCallBack);
+    }
 
-   /* public void share(final Activity activity, final ThirdPartyType type, final String message, final String shareLinkUrl, final String picPath, final ISdkCallBack iSdkCallBack) {
+    public void share(final Activity activity, final ThirdPartyType type, final String message, final String shareLinkUrl, final String picPath, final ISdkCallBack iSdkCallBack) {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Log.i(TAG, "type : " + type.name() + "  message : " + message + "  shareLinkUrl : " + shareLinkUrl + "  picPath : " + picPath);
+                PL.i("share type : " + type.name() + "  message : " + message + "  shareLinkUrl : " + shareLinkUrl + "  picPath : " + picPath);
                 switch (type) {
                     case FACEBOOK:
                         if (!TextUtils.isEmpty(shareLinkUrl)) {
@@ -378,7 +383,7 @@ public class BaseSdkImpl implements IMWSDK {
                                         e.printStackTrace();
                                     }
                                 }
-                                sFacebookProxy.fbShare(activity, fbShareCallBack, "", "", shareLinkUrl, "");
+                                sFacebookProxy.fbShare(activity, fbShareCallBack, newShareLinkUrl);
                             } else {
                                 if (iSdkCallBack != null) {
                                     iSdkCallBack.failure();
@@ -454,7 +459,7 @@ public class BaseSdkImpl implements IMWSDK {
                     case LINE:
                     case WHATSAPP:
                     case TWITTER:
-                        GamaShare.share(activity, type, message, shareLinkUrl, picPath, iSdkCallBack);
+                        ShareUtil.share(activity, type, message, shareLinkUrl, picPath, iSdkCallBack);
                         break;
                 }
             }
@@ -462,10 +467,10 @@ public class BaseSdkImpl implements IMWSDK {
     }
 
     @Override
-    public boolean gamaShouldShareWithType(Activity activity, ThirdPartyType type) {
+    public boolean canShareWithType(Activity activity, ThirdPartyType type) {
         Log.i(TAG, "type : " + type.name());
-        return GamaShare.shouldShareWithType(activity, type);
-    }*/
+        return ShareUtil.shouldShareWithType(activity, type);
+    }
 
     @Override
     public void trackEvent(Activity activity, EventConstant.EventName eventName) {

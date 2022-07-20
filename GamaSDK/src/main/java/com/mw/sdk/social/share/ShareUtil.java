@@ -20,10 +20,9 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
 
-public class GamaShare {
+public class ShareUtil {
 
     private static ISdkCallBack iSdkCallBack;
-    private static GamaShare gamaShare;
 
     private static final int SHARE_LINE = 60;
     private static final int SHARE_WHATSAPP = 61;

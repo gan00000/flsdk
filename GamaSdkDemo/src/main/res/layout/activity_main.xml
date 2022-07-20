@@ -54,10 +54,10 @@
                     android:text="网页储值" />
 
                 <Button
-                    android:id="@+id/demo_cs"
+                    android:id="@+id/demo_share"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="客服页面" />
+                    android:text="分享url" />
 
 
                 <Button
