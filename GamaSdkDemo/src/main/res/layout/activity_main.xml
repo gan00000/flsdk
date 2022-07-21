@@ -54,13 +54,6 @@
                     android:text="网页储值" />
 
                 <Button
-                    android:id="@+id/demo_share"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="分享url" />
-
-
-                <Button
                     android:id="@+id/track"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -79,6 +72,16 @@
                     android:text="弹出评分(跳到商店)" />
 
 
+                <Button
+                    android:id="@+id/demo_share"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="分享url1" />
+                <Button
+                    android:id="@+id/demo_share2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="分享url2，自己的链接" />
 
             </LinearLayout>
 
