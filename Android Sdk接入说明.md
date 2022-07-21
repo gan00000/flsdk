@@ -9,7 +9,8 @@
 	5. [充值接口](#7)
 	6. [事件埋点接口](#8)
 	7. [应用内评分接口](#9)
-	8. [上架Google Play相关注意的问题](#10)
+	8. [fb分享接口](#11)
+	9. [上架Google Play相关注意的问题](#10)
 
 
 ----------------
@@ -384,6 +385,37 @@
 	public void requestStoreReview(Activity activity, ICompleteListener iCompleteListener);
 	```
 	
+* <h3 id="11">fb分享接口</h3>   
+	
+	```
+	
+	/**
+     * fb分享
+     * @param activity
+     * @param hashTag  话题
+     * @param msg   引文内容
+     * @param shareLinkUrl  分享的链接
+     * @param iSdkCallBack  分享回调
+     */
+    void share(Activity activity, String hashTag, String msg, String shareLinkUrl, ISdkCallBack iSdkCallBack);
+    
+
+	sample:
+	
+	mIMWSDK.share(MainActivity.this, "#萬靈召喚師","2022首款卡牌大作【萬靈召喚師】，爆笑來襲！從東方文明到西方文明的羈絆，從神族到魔族的對抗，一段奇妙的神仙冒險之旅就此展開！","https://static-resource.meowplayer.com/share/index.html", new ISdkCallBack() {
+                    @Override
+                    public void success() {
+                        Log.i("tag","share success");
+                    }
+
+                    @Override
+                    public void failure() {
+                        Log.i("tag","share failure");
+                    }
+                });
+                
+	
+	```
 	
 * <h3 id="10">上架Google Play相关注意的问题</h3>
 	1. apk包不要包含有其他渠道的代码和资源，不要包含有talkdata sdk相关代码
