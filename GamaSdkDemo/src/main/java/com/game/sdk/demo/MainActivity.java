@@ -261,7 +261,7 @@ public class MainActivity extends Activity {
         demo_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mIMWSDK.share(MainActivity.this, "https://developers.facebook.com/docs/sharing/android", new ISdkCallBack() {
+                mIMWSDK.share(MainActivity.this, "#萬靈召喚師","2022首款卡牌大作【萬靈召喚師】，爆笑來襲！從東方文明到西方文明的羈絆，從神族到魔族的對抗，一段奇妙的神仙冒險之旅就此展開！","https://share.leyouye.com/aedzj/1.html", new ISdkCallBack() {
                     @Override
                     public void success() {
                         PL.i("share success");
