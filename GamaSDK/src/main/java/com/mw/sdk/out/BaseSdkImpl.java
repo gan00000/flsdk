@@ -338,11 +338,11 @@ public class BaseSdkImpl implements IMWSDK {
 //
 //    }
 
-    public void share(Activity activity, String shareLinkUrl, ISdkCallBack iSdkCallBack) {
-        this.share(activity, ThirdPartyType.FACEBOOK,"",shareLinkUrl,"",iSdkCallBack);
+    public void share(Activity activity, String hashTag, String message, String shareLinkUrl, ISdkCallBack iSdkCallBack) {
+        this.share(activity, ThirdPartyType.FACEBOOK, hashTag, message, shareLinkUrl,"",iSdkCallBack);
     }
 
-    public void share(final Activity activity, final ThirdPartyType type, final String message, final String shareLinkUrl, final String picPath, final ISdkCallBack iSdkCallBack) {
+    public void share(final Activity activity, final ThirdPartyType type, String hashTag, final String message, final String shareLinkUrl, final String picPath, final ISdkCallBack iSdkCallBack) {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -375,18 +375,18 @@ public class BaseSdkImpl implements IMWSDK {
                                     }
                                 };
 
-                                if (SStringUtil.isNotEmpty(SdkUtil.getServerCode(activity)) && SStringUtil.isNotEmpty(SdkUtil.getRoleId(activity))) {
-                                    try {
-                                        if (newShareLinkUrl.contains("?")) {//userId+||S||+serverCode+||S||+roleId
-                                            newShareLinkUrl = newShareLinkUrl + "&campaign=" + URLEncoder.encode(SdkUtil.getUid(activity) + "||S||" + SdkUtil.getServerCode(activity) + "||S||" + SdkUtil.getRoleId(activity), "UTF-8");
-                                        } else {
-                                            newShareLinkUrl = newShareLinkUrl + "?campaign=" + URLEncoder.encode(SdkUtil.getUid(activity) + "||S||" + SdkUtil.getServerCode(activity) + "||S||" + SdkUtil.getRoleId(activity), "UTF-8");
-                                        }
-                                    } catch (UnsupportedEncodingException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                                sFacebookProxy.fbShare(activity, fbShareCallBack, newShareLinkUrl);
+//                                if (SStringUtil.isNotEmpty(SdkUtil.getServerCode(activity)) && SStringUtil.isNotEmpty(SdkUtil.getRoleId(activity))) {
+//                                    try {
+//                                        if (newShareLinkUrl.contains("?")) {//userId+||S||+serverCode+||S||+roleId
+//                                            newShareLinkUrl = newShareLinkUrl + "&campaign=" + URLEncoder.encode(SdkUtil.getUid(activity) + "||S||" + SdkUtil.getServerCode(activity) + "||S||" + SdkUtil.getRoleId(activity), "UTF-8");
+//                                        } else {
+//                                            newShareLinkUrl = newShareLinkUrl + "?campaign=" + URLEncoder.encode(SdkUtil.getUid(activity) + "||S||" + SdkUtil.getServerCode(activity) + "||S||" + SdkUtil.getRoleId(activity), "UTF-8");
+//                                        }
+//                                    } catch (UnsupportedEncodingException e) {
+//                                        e.printStackTrace();
+//                                    }
+//                                }
+                                sFacebookProxy.fbShare(activity, hashTag, message, newShareLinkUrl, fbShareCallBack );
                             } else {
                                 if (iSdkCallBack != null) {
                                     iSdkCallBack.failure();

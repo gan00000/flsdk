@@ -74,7 +74,7 @@ public interface IMWSDK extends IGameLifeCycle {
 
 //    void openPlatform(Activity activity);
 
-    void share(Activity activity, String shareLinkUrl, ISdkCallBack iSdkCallBack);
+    void share(Activity activity, String hashTag, String msg, String shareLinkUrl, ISdkCallBack iSdkCallBack);
     /**
      * 检查是否支持分享
      */

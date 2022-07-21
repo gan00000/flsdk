@@ -34,6 +34,7 @@ import com.facebook.messenger.ShareToMessengerParamsBuilder;
 import com.facebook.share.ShareApi;
 import com.facebook.share.Sharer;
 import com.facebook.share.model.GameRequestContent;
+import com.facebook.share.model.ShareHashtag;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.model.SharePhoto;
 import com.facebook.share.model.SharePhotoContent;
@@ -283,7 +284,7 @@ public class SFacebookProxy {
 //						String shareLinkUrl, String sharePictureUrl) {
 //		fbShare(activity, fbShareCallBack, shareCaption, shareDescrition, shareLinkUrl, sharePictureUrl, "");
 //	}
-	public void fbShare(Activity activity, final FbShareCallBack fbShareCallBack, String shareLinkUrl) {
+	public void fbShare(Activity activity, String hashTag, String quote, String shareLinkUrl, final FbShareCallBack fbShareCallBack) {
 
 		if (TextUtils.isEmpty(shareLinkUrl)) {
 			if (fbShareCallBack != null) {
@@ -328,9 +329,9 @@ public class SFacebookProxy {
 			}
 
 		};
-		if (!ShareDialog.canShow(ShareLinkContent.class)){
-			ToastUtils.toast(activity,"share error");
-		}
+//		if (!ShareDialog.canShow(ShareLinkContent.class)){
+//			ToastUtils.toast(activity,"share error");
+//		}
 
 		ShareDialog shareDialog = new ShareDialog(activity);
 		if (callbackManager == null) {
@@ -347,6 +348,10 @@ public class SFacebookProxy {
 
 		ShareLinkContent linkContent = new ShareLinkContent.Builder()
 				.setContentUrl(Uri.parse(shareLinkUrl))
+				.setQuote(quote)
+				.setShareHashtag((new ShareHashtag.Builder().setHashtag(hashTag)).build())
+//				.setRef("记得记得江江达")
+//				.setPlaceId()
 				.build();
 		shareDialog.show(linkContent);
 
