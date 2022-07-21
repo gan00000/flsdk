@@ -107,6 +107,10 @@ public class MainActivity extends Activity {
                             userId = uid;
                             String accessToken = sLoginResponse.getData().getToken();
                             String timestamp = sLoginResponse.getData().getTimestamp();
+                            //是否绑定手机
+                            boolean isBindPhone = sLoginResponse.getData().isBindPhone();
+                            //是否绑定账号
+                            boolean isBind = sLoginResponse.getData().isBind();
                             //todo 进行验证
 
                             AlertDialog.Builder builder;
