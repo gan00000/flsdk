@@ -149,7 +149,9 @@ public class BaseSdkImpl implements IMWSDK {
                 PL.i("IGama registerRoleInfo");
                 PL.i("roleId:" + roleId + ",roleName:" + roleName + ",roleLevel:" + roleLevel + ",vipLevel:" + vipLevel + ",severCode:" + severCode + ",serverName:" + serverName);
                 SdkUtil.saveRoleInfo(activity, roleId, roleName, roleLevel, vipLevel, severCode, serverName);//保存角色信息
-
+                if (iPay != null){
+                    iPay.startQueryPurchase(activity.getApplicationContext());
+                }
             }
         });
     }
