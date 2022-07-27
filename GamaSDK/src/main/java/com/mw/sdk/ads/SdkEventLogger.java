@@ -183,7 +183,7 @@ public class SdkEventLogger {
             return;
         }
         try {
-
+            PL.i("tracking EventName:" + eventName);
             if(map == null) { //appsflyer的属性列表
                 map = new HashMap<>();
             }
