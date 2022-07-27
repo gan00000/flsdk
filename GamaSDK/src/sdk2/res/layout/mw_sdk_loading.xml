@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
+
+    <LinearLayout
+        android:layout_width="@dimen/px_220"
+        android:layout_height="@dimen/px_100"
+        android:layout_centerInParent="true"
+        android:background="@drawable/gama_cons_gray_bg"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ProgressBar
+            android:id="@+id/dialog_loading"
+            android:layout_width="@dimen/px_60"
+            android:layout_height="@dimen/px_60"
+            android:layout_marginLeft="@dimen/px_10"
+            android:indeterminateDrawable="@drawable/gama_progress_dialog_rotate" />
+
+        <TextView
+            android:id="@+id/dialog_loading_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/px_10"
+            android:layout_marginRight="@dimen/px_10"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@android:color/black" />
+    </LinearLayout>
+
+</RelativeLayout>

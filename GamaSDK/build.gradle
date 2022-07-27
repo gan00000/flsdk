@@ -8,7 +8,10 @@ android {
         targetSdkVersion 32
         buildConfigField "String", JAR_VERSION, SDK_VERSION_NAME_SDK_TWGOOGLE
     }
-
+    lint {
+        abortOnError false
+    }
+    namespace 'com.mw.sdk'
 
     buildTypes {
         release {
@@ -20,12 +23,16 @@ android {
         debug {
         }
     }
-    lint {
-        abortOnError false
+    productFlavors {
+
+        sdk1 {//第一套
+            flavorDimensions "1"
+        }
+        sdk2 {//第二套
+            flavorDimensions "1"
+        }
+
     }
-    namespace 'com.mw.sdk'
-
-
 }
 
 repositories {
