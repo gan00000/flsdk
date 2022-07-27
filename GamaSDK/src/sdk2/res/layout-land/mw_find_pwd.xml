@@ -27,6 +27,21 @@
             android:id="@+id/sdkinputview_findpwd_account"
             />
 
+        <com.mw.sdk.login.widget.SDKInputEditTextView
+            android:layout_width="300dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="15dp"
+            android:id="@+id/sdkinputview_findpwd_new"
+            />
+
+        <com.mw.sdk.login.widget.SDKInputEditTextView
+            android:layout_width="300dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="15dp"
+            android:visibility="gone"
+            android:id="@+id/sdkinputview_findpwd_new_again"
+            />
+
         <LinearLayout
             android:layout_width="300dp"
             android:layout_height="36dp"
@@ -68,20 +83,6 @@
             android:layout_alignParentBottom="true"
             android:background="@color/c_C0C0C0"/>
 
-
-        <com.mw.sdk.login.widget.SDKInputEditTextView
-            android:layout_width="300dp"
-            android:layout_height="36dp"
-            android:layout_marginTop="15dp"
-            android:id="@+id/sdkinputview_findpwd_new"
-            />
-
-        <com.mw.sdk.login.widget.SDKInputEditTextView
-            android:layout_width="300dp"
-            android:layout_height="36dp"
-            android:layout_marginTop="15dp"
-            android:id="@+id/sdkinputview_findpwd_new_again"
-            />
 
         <Button
             android:id="@+id/gama_find_btn_confirm"
