@@ -1,479 +1,479 @@
-package com.mw.sdk.login.widget.v2;
-
-import android.content.Context;
-import android.text.Editable;
-import android.text.TextUtils;
-import android.text.TextWatcher;
-import android.util.AttributeSet;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.PopupWindow;
-
-import com.core.base.utils.PL;
-import com.mw.base.bean.SLoginType;
-import com.mw.base.cfg.ConfigBean;
-import com.mw.base.utils.SdkUtil;
-import com.mw.sdk.login.AccountPopupWindow;
-import com.mw.sdk.login.constant.ViewType;
-import com.mw.sdk.login.model.AccountModel;
-import com.mw.sdk.login.widget.SDKInputEditTextView;
-import com.mw.sdk.login.widget.SDKInputType;
-import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
-import com.mw.sdk.R;
-
-import java.util.ArrayList;
-import java.util.List;
-
-/**
- * Created by GanYuanrong on 2017/2/6.
- */
-
-public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
-
-    private View contentView;
-
-    private Button loginMainLoginBtn;
-
-    private CheckBox cb_agree_term;
-    private View tv_login_term;
-
-    /**
-     * 眼睛、保存密码、验证码
-     */
-//    private ImageView savePwdCheckBox;
-//    private CheckBox agreeCheckBox;
-
-    /**
-     * 密码、账号、验证码
-     */
-    private EditText loginPasswordEditText, loginAccountEditText;
-    private String account;
-    private String password;
-    List<AccountModel> accountModels;
-    private View loginMainGoRegisterBtn;
-    private View loginMainGoFindPwd;
-    private View loginMainGoAccountCenter;
-    private View loginMainGoChangePassword;
-
-//    private TextView goTermView;
-
-    private SDKInputEditTextView accountSdkInputEditTextView;
-    private SDKInputEditTextView pwdSdkInputEditTextView;
-
-    View historyAccountListBtn;
-
-    private View fbLoginView, macLoginView, googleLoginView, lineLoginView;
-
-    private AccountPopupWindow accountPopupWindow;
-    private AccountModel currentAccountModel;
-
-    public AccountLoginLayoutV2(Context context) {
-        super(context);
-
-    }
-
-
-    public AccountLoginLayoutV2(Context context, AttributeSet attrs) {
-        super(context, attrs);
-    }
-
-    public AccountLoginLayoutV2(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-    }
-
-    @Override
-    protected View createView(Context context, LayoutInflater layoutInflater) {
-        return onCreateView(layoutInflater);
-    }
-
-    public View onCreateView(LayoutInflater inflater) {
-
-        contentView = inflater.inflate(R.layout.mw_account_login, null);
-
-        backView = contentView.findViewById(R.id.layout_head_back);
-        backView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                sLoginDialogv2.toLoginWithRegView();
-            }
-        });
-
-
-        accountSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_account_login_account);
-        pwdSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_account_login_password);
-
-        accountSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Account);
-        pwdSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Password);
-
-        loginMainGoRegisterBtn = contentView.findViewById(R.id.gama_login_tv_register);
-        loginMainGoFindPwd = contentView.findViewById(R.id.gama_login_tv_forget_password);
-        loginMainGoAccountCenter = contentView.findViewById(R.id.gama_login_tv_link);
-        loginMainGoChangePassword = contentView.findViewById(R.id.gama_login_tv_change_password);
-
-        tv_login_term = contentView.findViewById(R.id.tv_login_term);
-        cb_agree_term = contentView.findViewById(R.id.cb_agree_term);
-        cb_agree_term.setChecked(true);
-
-        loginAccountEditText = accountSdkInputEditTextView.getInputEditText();
-        loginAccountEditText.setHint(R.string.py_msg_account_hint);
-        loginPasswordEditText = pwdSdkInputEditTextView.getInputEditText();
-        loginPasswordEditText.setHint(R.string.py_msg_pwd_hint);
-//        pwdSdkInputEditTextView.setEyeVisable(View.VISIBLE);
-
-        historyAccountListBtn = contentView.findViewById(R.id.sdk_input_item_account_history);
-        historyAccountListBtn.setVisibility(VISIBLE);
-
-        loginMainLoginBtn = contentView.findViewById(R.id.gama_login_btn_confirm);
-//        goTermView = contentView.findViewById(R.id.gama_gama_start_term_tv1);//跳轉服務條款
-//        agreeCheckBox = contentView.findViewById(R.id.gama_gama_start_term_cb1);//跳轉服務條款
+//package com.mw.sdk.login.widget.v2;
 //
-//        GamaUtil.saveStartTermRead(getContext(), true);//默认设置为勾选
-//        agreeCheckBox.setChecked(true);
-
-       /* savePwdCheckBox = contentView.findViewById(R.id.gama_login_iv_remember_account);
-
-        savePwdCheckBox.setSelected(true);
-
-        savePwdCheckBox.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (savePwdCheckBox.isSelected()) {
-                    savePwdCheckBox.setSelected(false);
-                } else {
-                    savePwdCheckBox.setSelected(true);
-                }
-            }
-        });*/
-
-
-        loginMainGoRegisterBtn.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                sLoginActivity.replaceFragmentBackToStack(new AccountRegisterFragment());
-
-//                sLoginDialogv2.toRegisterView(2);
-            }
-        });
-
-        loginMainGoFindPwd.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sLoginDialogv2.toFindPwdView();
-            }
-        });
-
-        loginMainGoAccountCenter.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sLoginDialogv2.toAccountManagerCenter();
-            }
-        });
-
-        loginMainGoChangePassword.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                sLoginDialogv2.toChangePwdView();
-            }
-        });
-
-        loginMainLoginBtn.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                login();
-            }
-        });
-
-        fbLoginView = contentView.findViewById(R.id.fbLoginView);
-        lineLoginView = contentView.findViewById(R.id.lineLoginView);
-        macLoginView = contentView.findViewById(R.id.guestLoginView);
-        googleLoginView = contentView.findViewById(R.id.ggLoginView);
-
-        ConfigBean configBean = SdkUtil.getSdkCfg(getContext());
-        if (configBean != null){
-            ConfigBean.VersionData versionData = configBean.getSdkConfigLoginData(getContext());
-            if (versionData != null){
-                if(!versionData.isVisitorLogin()){
-                    macLoginView.setVisibility(View.GONE);
-                }
-                if(!versionData.isFbLogin()){
-                    fbLoginView.setVisibility(View.GONE);
-                }
-                if(!versionData.isGoogleLogin()){
-                    googleLoginView.setVisibility(View.GONE);
-                }
-                if(!versionData.isLineLogin()){
-                    lineLoginView.setVisibility(View.GONE);
-                }
-                if(!versionData.isShowContract()){
-                    cb_agree_term.setVisibility(View.GONE);
-                    tv_login_term.setVisibility(View.GONE);
-                }
-            }
-        }
-
-        fbLoginView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!checkAgreeTerm()) {
-                    return;
-                }
-                sLoginDialogv2.getLoginPresenter().fbLogin(sLoginDialogv2.getActivity());
-            }
-        });
-        tv_login_term.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sLoginDialogv2.showTermView(ViewType.LoginWithRegView);
-            }
-        });
-
-        macLoginView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!checkAgreeTerm()) {
-                    return;
-                }
-                sLoginDialogv2.getLoginPresenter().guestLogin(sLoginDialogv2.getActivity());
-            }
-        });
-        googleLoginView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!checkAgreeTerm()) {
-                    return;
-                }
-                //google+登录
-                sLoginDialogv2.getLoginPresenter().googleLogin(sLoginDialogv2.getActivity());
-            }
-        });
-        lineLoginView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!checkAgreeTerm()) {
-                    return;
-                }
-                //google+登录
-                sLoginDialogv2.getLoginPresenter().lineLogin(sLoginDialogv2.getActivity());
-            }
-        });
-
-        accountModels = new ArrayList<>();
-
-        //test
-//        GamaUtil.saveAccountModel(getContext(), "ccc","xxx",true);
-//        GamaUtil.saveAccountModel(getContext(), SLoginType.LOGIN_TYPE_FB,"","", "12","1111222","adfaf@qq.com",true);
-//        GamaUtil.saveAccountModel(getContext(), SLoginType.LOGIN_TYPE_GOOGLE,"","", "1332","55555","a3333af@qq.com",true);
-//        GamaUtil.saveAccountModel(getContext(), SLoginType.LOGIN_TYPE_GUEST,"","", "1222","111e3331222","111222@qq.com",true);
-//        GamaUtil.saveAccountModel(getContext(), SLoginType.LOGIN_TYPE_LINE,"","", "111","334444","",true);
-
-        List<AccountModel> ams = SdkUtil.getAccountModels(getContext());
-        accountModels.addAll(ams);
-        if (accountModels != null && !accountModels.isEmpty()){//设置按照最好登录时间排序后的第一个账号
-            AccountModel lastAccountModel = accountModels.get(0);
-            currentAccountModel = lastAccountModel;
-            setViewStatue(lastAccountModel);
-        }
-
-
-        accountPopupWindow = new AccountPopupWindow(getActivity());
-        accountPopupWindow.setPopWindowListener(new AccountPopupWindow.PopWindowListener() {
-            @Override
-            public void onRemove(AccountModel accountModel) {
-                List<AccountModel> ams = SdkUtil.getAccountModels(getContext());
-                if (ams != null && !ams.isEmpty()){//设置按照最好登录时间排序后的第一个账号
-                    currentAccountModel = ams.get(0);
-                    setViewStatue(currentAccountModel);
-                }
-            }
-
-            @Override
-            public void onUse(AccountModel accountModel) {
-
-                currentAccountModel = accountModel;
-//                if (SLoginType.LOGIN_TYPE_MG.equals(accountModel.getLoginType())){
-//                    GamaUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
-//                    loginPasswordEditText.setText(accountModel.getPassword());
-//                }else{
-//                    GamaUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
-//                    loginPasswordEditText.setText("");
+//import android.content.Context;
+//import android.text.Editable;
+//import android.text.TextUtils;
+//import android.text.TextWatcher;
+//import android.util.AttributeSet;
+//import android.view.LayoutInflater;
+//import android.view.View;
+//import android.widget.Button;
+//import android.widget.CheckBox;
+//import android.widget.EditText;
+//import android.widget.PopupWindow;
+//
+//import com.core.base.utils.PL;
+//import com.mw.base.bean.SLoginType;
+//import com.mw.base.cfg.ConfigBean;
+//import com.mw.base.utils.SdkUtil;
+//import com.mw.sdk.login.AccountPopupWindow;
+//import com.mw.sdk.login.constant.ViewType;
+//import com.mw.sdk.login.model.AccountModel;
+//import com.mw.sdk.login.widget.SDKInputEditTextView;
+//import com.mw.sdk.login.widget.SDKInputType;
+//import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
+//import com.mw.sdk.R;
+//
+//import java.util.ArrayList;
+//import java.util.List;
+//
+///**
+// * Created by GanYuanrong on 2017/2/6.
+// */
+//
+//public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
+//
+//    private View contentView;
+//
+//    private Button loginMainLoginBtn;
+//
+//    private CheckBox cb_agree_term;
+//    private View tv_login_term;
+//
+//    /**
+//     * 眼睛、保存密码、验证码
+//     */
+////    private ImageView savePwdCheckBox;
+////    private CheckBox agreeCheckBox;
+//
+//    /**
+//     * 密码、账号、验证码
+//     */
+//    private EditText loginPasswordEditText, loginAccountEditText;
+//    private String account;
+//    private String password;
+//    List<AccountModel> accountModels;
+//    private View loginMainGoRegisterBtn;
+//    private View loginMainGoFindPwd;
+//    private View loginMainGoAccountCenter;
+//    private View loginMainGoChangePassword;
+//
+////    private TextView goTermView;
+//
+//    private SDKInputEditTextView accountSdkInputEditTextView;
+//    private SDKInputEditTextView pwdSdkInputEditTextView;
+//
+//    View historyAccountListBtn;
+//
+//    private View fbLoginView, macLoginView, googleLoginView, lineLoginView;
+//
+//    private AccountPopupWindow accountPopupWindow;
+//    private AccountModel currentAccountModel;
+//
+//    public AccountLoginLayoutV2(Context context) {
+//        super(context);
+//
+//    }
+//
+//
+//    public AccountLoginLayoutV2(Context context, AttributeSet attrs) {
+//        super(context, attrs);
+//    }
+//
+//    public AccountLoginLayoutV2(Context context, AttributeSet attrs, int defStyleAttr) {
+//        super(context, attrs, defStyleAttr);
+//    }
+//
+//    @Override
+//    protected View createView(Context context, LayoutInflater layoutInflater) {
+//        return onCreateView(layoutInflater);
+//    }
+//
+//    public View onCreateView(LayoutInflater inflater) {
+//
+//        contentView = inflater.inflate(R.layout.mw_account_login, null);
+//
+//        backView = contentView.findViewById(R.id.layout_head_back);
+//        backView.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                sLoginDialogv2.toLoginWithRegView();
+//            }
+//        });
+//
+//
+//        accountSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_account_login_account);
+//        pwdSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_account_login_password);
+//
+//        accountSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Account);
+//        pwdSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Password);
+//
+//        loginMainGoRegisterBtn = contentView.findViewById(R.id.gama_login_tv_register);
+//        loginMainGoFindPwd = contentView.findViewById(R.id.gama_login_tv_forget_password);
+//        loginMainGoAccountCenter = contentView.findViewById(R.id.gama_login_tv_link);
+//        loginMainGoChangePassword = contentView.findViewById(R.id.gama_login_tv_change_password);
+//
+//        tv_login_term = contentView.findViewById(R.id.tv_login_term);
+//        cb_agree_term = contentView.findViewById(R.id.cb_agree_term);
+//        cb_agree_term.setChecked(true);
+//
+//        loginAccountEditText = accountSdkInputEditTextView.getInputEditText();
+//        loginAccountEditText.setHint(R.string.py_msg_account_hint);
+//        loginPasswordEditText = pwdSdkInputEditTextView.getInputEditText();
+//        loginPasswordEditText.setHint(R.string.py_msg_pwd_hint);
+////        pwdSdkInputEditTextView.setEyeVisable(View.VISIBLE);
+//
+//        historyAccountListBtn = contentView.findViewById(R.id.sdk_input_item_account_history);
+//        historyAccountListBtn.setVisibility(VISIBLE);
+//
+//        loginMainLoginBtn = contentView.findViewById(R.id.gama_login_btn_confirm);
+////        goTermView = contentView.findViewById(R.id.gama_gama_start_term_tv1);//跳轉服務條款
+////        agreeCheckBox = contentView.findViewById(R.id.gama_gama_start_term_cb1);//跳轉服務條款
+////
+////        GamaUtil.saveStartTermRead(getContext(), true);//默认设置为勾选
+////        agreeCheckBox.setChecked(true);
+//
+//       /* savePwdCheckBox = contentView.findViewById(R.id.gama_login_iv_remember_account);
+//
+//        savePwdCheckBox.setSelected(true);
+//
+//        savePwdCheckBox.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (savePwdCheckBox.isSelected()) {
+//                    savePwdCheckBox.setSelected(false);
+//                } else {
+//                    savePwdCheckBox.setSelected(true);
 //                }
-
-                setViewStatue(currentAccountModel);
-
-            }
-
-            @Override
-            public void onEmpty() {
-                loginAccountEditText.setText("");
-                loginPasswordEditText.setText("");
-            }
-        });
-        accountPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                accountSdkInputEditTextView.getIv_account_history().setSelected(false);
-            }
-        });
-
-        historyAccountListBtn.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (accountPopupWindow!= null)
-                {
-                    if (accountPopupWindow.isShowing()){
-
-                        accountPopupWindow.dismiss();
+//            }
+//        });*/
+//
+//
+//        loginMainGoRegisterBtn.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                sLoginActivity.replaceFragmentBackToStack(new AccountRegisterFragment());
+//
+////                sLoginDialogv2.toRegisterView(2);
+//            }
+//        });
+//
+//        loginMainGoFindPwd.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                sLoginDialogv2.toFindPwdView();
+//            }
+//        });
+//
+//        loginMainGoAccountCenter.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                sLoginDialogv2.toAccountManagerCenter();
+//            }
+//        });
+//
+//        loginMainGoChangePassword.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                sLoginDialogv2.toChangePwdView();
+//            }
+//        });
+//
+//        loginMainLoginBtn.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                login();
+//            }
+//        });
+//
+//        fbLoginView = contentView.findViewById(R.id.fbLoginView);
+//        lineLoginView = contentView.findViewById(R.id.lineLoginView);
+//        macLoginView = contentView.findViewById(R.id.guestLoginView);
+//        googleLoginView = contentView.findViewById(R.id.ggLoginView);
+//
+//        ConfigBean configBean = SdkUtil.getSdkCfg(getContext());
+//        if (configBean != null){
+//            ConfigBean.VersionData versionData = configBean.getSdkConfigLoginData(getContext());
+//            if (versionData != null){
+//                if(!versionData.isVisitorLogin()){
+//                    macLoginView.setVisibility(View.GONE);
+//                }
+//                if(!versionData.isFbLogin()){
+//                    fbLoginView.setVisibility(View.GONE);
+//                }
+//                if(!versionData.isGoogleLogin()){
+//                    googleLoginView.setVisibility(View.GONE);
+//                }
+//                if(!versionData.isLineLogin()){
+//                    lineLoginView.setVisibility(View.GONE);
+//                }
+//                if(!versionData.isShowContract()){
+//                    cb_agree_term.setVisibility(View.GONE);
+//                    tv_login_term.setVisibility(View.GONE);
+//                }
+//            }
+//        }
+//
+//        fbLoginView.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (!checkAgreeTerm()) {
+//                    return;
+//                }
+//                sLoginDialogv2.getLoginPresenter().fbLogin(sLoginDialogv2.getActivity());
+//            }
+//        });
+//        tv_login_term.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                sLoginDialogv2.showTermView(ViewType.LoginWithRegView);
+//            }
+//        });
+//
+//        macLoginView.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (!checkAgreeTerm()) {
+//                    return;
+//                }
+//                sLoginDialogv2.getLoginPresenter().guestLogin(sLoginDialogv2.getActivity());
+//            }
+//        });
+//        googleLoginView.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (!checkAgreeTerm()) {
+//                    return;
+//                }
+//                //google+登录
+//                sLoginDialogv2.getLoginPresenter().googleLogin(sLoginDialogv2.getActivity());
+//            }
+//        });
+//        lineLoginView.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (!checkAgreeTerm()) {
+//                    return;
+//                }
+//                //google+登录
+//                sLoginDialogv2.getLoginPresenter().lineLogin(sLoginDialogv2.getActivity());
+//            }
+//        });
+//
+//        accountModels = new ArrayList<>();
+//
+//        //test
+////        GamaUtil.saveAccountModel(getContext(), "ccc","xxx",true);
+////        GamaUtil.saveAccountModel(getContext(), SLoginType.LOGIN_TYPE_FB,"","", "12","1111222","adfaf@qq.com",true);
+////        GamaUtil.saveAccountModel(getContext(), SLoginType.LOGIN_TYPE_GOOGLE,"","", "1332","55555","a3333af@qq.com",true);
+////        GamaUtil.saveAccountModel(getContext(), SLoginType.LOGIN_TYPE_GUEST,"","", "1222","111e3331222","111222@qq.com",true);
+////        GamaUtil.saveAccountModel(getContext(), SLoginType.LOGIN_TYPE_LINE,"","", "111","334444","",true);
+//
+//        List<AccountModel> ams = SdkUtil.getAccountModels(getContext());
+//        accountModels.addAll(ams);
+//        if (accountModels != null && !accountModels.isEmpty()){//设置按照最好登录时间排序后的第一个账号
+//            AccountModel lastAccountModel = accountModels.get(0);
+//            currentAccountModel = lastAccountModel;
+//            setViewStatue(lastAccountModel);
+//        }
+//
+//
+//        accountPopupWindow = new AccountPopupWindow(getActivity());
+//        accountPopupWindow.setPopWindowListener(new AccountPopupWindow.PopWindowListener() {
+//            @Override
+//            public void onRemove(AccountModel accountModel) {
+//                List<AccountModel> ams = SdkUtil.getAccountModels(getContext());
+//                if (ams != null && !ams.isEmpty()){//设置按照最好登录时间排序后的第一个账号
+//                    currentAccountModel = ams.get(0);
+//                    setViewStatue(currentAccountModel);
+//                }
+//            }
+//
+//            @Override
+//            public void onUse(AccountModel accountModel) {
+//
+//                currentAccountModel = accountModel;
+////                if (SLoginType.LOGIN_TYPE_MG.equals(accountModel.getLoginType())){
+////                    GamaUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
+////                    loginPasswordEditText.setText(accountModel.getPassword());
+////                }else{
+////                    GamaUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
+////                    loginPasswordEditText.setText("");
+////                }
+//
+//                setViewStatue(currentAccountModel);
+//
+//            }
+//
+//            @Override
+//            public void onEmpty() {
+//                loginAccountEditText.setText("");
+//                loginPasswordEditText.setText("");
+//            }
+//        });
+//        accountPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+//            @Override
+//            public void onDismiss() {
+//                accountSdkInputEditTextView.getIv_account_history().setSelected(false);
+//            }
+//        });
+//
+//        historyAccountListBtn.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (accountPopupWindow!= null)
+//                {
+//                    if (accountPopupWindow.isShowing()){
+//
+//                        accountPopupWindow.dismiss();
+////                        accountSdkInputEditTextView.getIv_account_history().setSelected(true);
+//                    }else{
+//                        accountPopupWindow.showOnView(accountSdkInputEditTextView);
 //                        accountSdkInputEditTextView.getIv_account_history().setSelected(true);
-                    }else{
-                        accountPopupWindow.showOnView(accountSdkInputEditTextView);
-                        accountSdkInputEditTextView.getIv_account_history().setSelected(true);
-                    }
-                }
-            }
-        });
-
-        loginAccountEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (currentAccountModel != null && s != null){
-                    if (SLoginType.LOGIN_TYPE_MG.equals(currentAccountModel.getLoginType())){
-
-                    }else {
-                        //平台帐号登入界面这里，帐号输入框这里如果删除或者编辑修改过原内容，帐号类型自动变成平台帐号类型，
-                        // icon也变成平台帐号icon，下方的免注册登入也自动变成可编辑状态
-                        PL.i("afterTextChanged...");
-                        if(!s.toString().equals(currentAccountModel.getUserId())){
-                            AccountModel tempAccountModel = new AccountModel();
-                            currentAccountModel = tempAccountModel;
-                            tempAccountModel.setLoginType(SLoginType.LOGIN_TYPE_MG);
-                            tempAccountModel.setAccount(s.toString());
-                            tempAccountModel.setPassword("");
-                            SdkUtil.setAccountWithIcon(tempAccountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
-                            pwdSdkInputEditTextView.setPwdInputEnable(true);
-                            pwdSdkInputEditTextView.getInputEditText().setText("");
-                        }
-                    }
-
-                }
-            }
-        });
-        return contentView;
-    }
-
-    private void setViewStatue(AccountModel accountModel) {
-
-        if (SLoginType.LOGIN_TYPE_MG.equals(currentAccountModel.getLoginType())){
-            account = accountModel.getAccount();
-            password = accountModel.getPassword();
-            if (!TextUtils.isEmpty(account)){ //显示记住的密码
-                SdkUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
-                pwdSdkInputEditTextView.setPwdInputEnable(true);
-                loginPasswordEditText.setText(password);
-            }
-        }else{
-            SdkUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
-            pwdSdkInputEditTextView.setPwdInputEnable(false);
-            loginPasswordEditText.setText(R.string.text_free_register);
-        }
-    }
-
-    private void login() {
-
-        if (!checkAgreeTerm()) {
-            return;
-        }
-        if (currentAccountModel != null){
-           if (SLoginType.LOGIN_TYPE_FB.equals(currentAccountModel.getLoginType())){
-                fbLoginView.performClick();
-                return;
-           }else if (SLoginType.LOGIN_TYPE_GOOGLE.equals(currentAccountModel.getLoginType())){
-               googleLoginView.performClick();
-               return;
-           }else if (SLoginType.LOGIN_TYPE_GUEST.equals(currentAccountModel.getLoginType())){
-               macLoginView.performClick();
-               return;
-           }else if (SLoginType.LOGIN_TYPE_LINE.equals(currentAccountModel.getLoginType())){
-                lineLoginView.performClick();
-               return;
-           }
-        }
-
-
-        account = loginAccountEditText.getEditableText().toString().trim();
-        password = loginPasswordEditText.getEditableText().toString().trim();
-
-        sLoginDialogv2.getLoginPresenter().starpyAccountLogin(sLoginDialogv2.getActivity(),account,password, "", true);
-
-    }
-
-    private boolean checkAgreeTerm(){
-        if (cb_agree_term.isChecked()){
-            return true;
-        }
-        toast(R.string.gama_ui_term_not_read);
-        return false;
-    }
-
-    @Override
-    public void onViewVisible() {
-        super.onViewVisible();
-
-       /* List<AccountModel>  ams = SdkUtil.getAccountModels(getContext());
-        accountModels.clear();
-        accountModels.addAll(ams);
-        if (accountModels != null && !accountModels.isEmpty()){
-            AccountModel lastAccountModel = accountModels.get(0); //设置按照最好登录时间排序后的第一个账号
-            account = lastAccountModel.getAccount();
-            password = lastAccountModel.getPassword();
-
-        }
-
-        if (!TextUtils.isEmpty(account)){
-            loginAccountEditText.setText(account);
-            loginPasswordEditText.setText(password);
-        }*/
-    }
-
-    @Override
-    public void onViewGone() {
-        super.onViewGone();
-        if (accountPopupWindow != null){
-            accountPopupWindow.dismiss();
-        }
-    }
-
-    @Override
-    public void onViewRemove() {
-        super.onViewRemove();
-        if (accountPopupWindow != null){
-            accountPopupWindow.dismiss();
-        }
-    }
-
-    @Override
-    public void refreshVfCode() {
-        super.refreshVfCode();
-    }
-
-    @Override
-    public void setVisibility(int visibility) {
-        super.setVisibility(visibility);
-        if (accountPopupWindow != null){
-            accountPopupWindow.dismiss();
-        }
-    }
-
-}
+//                    }
+//                }
+//            }
+//        });
+//
+//        loginAccountEditText.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                if (currentAccountModel != null && s != null){
+//                    if (SLoginType.LOGIN_TYPE_MG.equals(currentAccountModel.getLoginType())){
+//
+//                    }else {
+//                        //平台帐号登入界面这里，帐号输入框这里如果删除或者编辑修改过原内容，帐号类型自动变成平台帐号类型，
+//                        // icon也变成平台帐号icon，下方的免注册登入也自动变成可编辑状态
+//                        PL.i("afterTextChanged...");
+//                        if(!s.toString().equals(currentAccountModel.getUserId())){
+//                            AccountModel tempAccountModel = new AccountModel();
+//                            currentAccountModel = tempAccountModel;
+//                            tempAccountModel.setLoginType(SLoginType.LOGIN_TYPE_MG);
+//                            tempAccountModel.setAccount(s.toString());
+//                            tempAccountModel.setPassword("");
+//                            SdkUtil.setAccountWithIcon(tempAccountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
+//                            pwdSdkInputEditTextView.setPwdInputEnable(true);
+//                            pwdSdkInputEditTextView.getInputEditText().setText("");
+//                        }
+//                    }
+//
+//                }
+//            }
+//        });
+//        return contentView;
+//    }
+//
+//    private void setViewStatue(AccountModel accountModel) {
+//
+//        if (SLoginType.LOGIN_TYPE_MG.equals(currentAccountModel.getLoginType())){
+//            account = accountModel.getAccount();
+//            password = accountModel.getPassword();
+//            if (!TextUtils.isEmpty(account)){ //显示记住的密码
+//                SdkUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
+//                pwdSdkInputEditTextView.setPwdInputEnable(true);
+//                loginPasswordEditText.setText(password);
+//            }
+//        }else{
+//            SdkUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
+//            pwdSdkInputEditTextView.setPwdInputEnable(false);
+//            loginPasswordEditText.setText(R.string.text_free_register);
+//        }
+//    }
+//
+//    private void login() {
+//
+//        if (!checkAgreeTerm()) {
+//            return;
+//        }
+//        if (currentAccountModel != null){
+//           if (SLoginType.LOGIN_TYPE_FB.equals(currentAccountModel.getLoginType())){
+//                fbLoginView.performClick();
+//                return;
+//           }else if (SLoginType.LOGIN_TYPE_GOOGLE.equals(currentAccountModel.getLoginType())){
+//               googleLoginView.performClick();
+//               return;
+//           }else if (SLoginType.LOGIN_TYPE_GUEST.equals(currentAccountModel.getLoginType())){
+//               macLoginView.performClick();
+//               return;
+//           }else if (SLoginType.LOGIN_TYPE_LINE.equals(currentAccountModel.getLoginType())){
+//                lineLoginView.performClick();
+//               return;
+//           }
+//        }
+//
+//
+//        account = loginAccountEditText.getEditableText().toString().trim();
+//        password = loginPasswordEditText.getEditableText().toString().trim();
+//
+//        sLoginDialogv2.getLoginPresenter().starpyAccountLogin(sLoginDialogv2.getActivity(),account,password, "", true);
+//
+//    }
+//
+//    private boolean checkAgreeTerm(){
+//        if (cb_agree_term.isChecked()){
+//            return true;
+//        }
+//        toast(R.string.gama_ui_term_not_read);
+//        return false;
+//    }
+//
+//    @Override
+//    public void onViewVisible() {
+//        super.onViewVisible();
+//
+//       /* List<AccountModel>  ams = SdkUtil.getAccountModels(getContext());
+//        accountModels.clear();
+//        accountModels.addAll(ams);
+//        if (accountModels != null && !accountModels.isEmpty()){
+//            AccountModel lastAccountModel = accountModels.get(0); //设置按照最好登录时间排序后的第一个账号
+//            account = lastAccountModel.getAccount();
+//            password = lastAccountModel.getPassword();
+//
+//        }
+//
+//        if (!TextUtils.isEmpty(account)){
+//            loginAccountEditText.setText(account);
+//            loginPasswordEditText.setText(password);
+//        }*/
+//    }
+//
+//    @Override
+//    public void onViewGone() {
+//        super.onViewGone();
+//        if (accountPopupWindow != null){
+//            accountPopupWindow.dismiss();
+//        }
+//    }
+//
+//    @Override
+//    public void onViewRemove() {
+//        super.onViewRemove();
+//        if (accountPopupWindow != null){
+//            accountPopupWindow.dismiss();
+//        }
+//    }
+//
+//    @Override
+//    public void refreshVfCode() {
+//        super.refreshVfCode();
+//    }
+//
+//    @Override
+//    public void setVisibility(int visibility) {
+//        super.setVisibility(visibility);
+//        if (accountPopupWindow != null){
+//            accountPopupWindow.dismiss();
+//        }
+//    }
+//
+//}
