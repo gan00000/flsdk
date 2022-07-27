@@ -149,9 +149,15 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
 
 //            loginTabView.setBackgroundResource(R.drawable.login_tab_red_left_cons_bg);
 //            regTabView.setBackgroundResource(R.drawable.login_tab_white_right_cons_bg);
+            if ("v2".equals(getResources().getString(R.string.sdk_inner_version))){
 
-            loginTabView.setTextColor(Color.WHITE);
-            regTabView.setTextColor(getContext().getResources().getColor(R.color.c_848484));
+                loginTabView.setTextColor(getContext().getResources().getColor(R.color.c_FF892E));
+                regTabView.setTextColor(getContext().getResources().getColor(R.color.white_c));
+
+            }else{
+                loginTabView.setTextColor(Color.WHITE);
+                regTabView.setTextColor(getContext().getResources().getColor(R.color.c_848484));
+            }
 
             login_bottom_line.setVisibility(View.VISIBLE);
             register_bottom_line.setVisibility(View.INVISIBLE);
@@ -163,8 +169,17 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
 //            loginTabView.setBackgroundResource(R.drawable.login_tab_white_left_cons_bg);
 //            regTabView.setBackgroundResource(R.drawable.login_tab_red_right_cons_bg);
 
-            loginTabView.setTextColor(getContext().getResources().getColor(R.color.c_848484));
-            regTabView.setTextColor(Color.WHITE);
+
+            if ("v2".equals(getResources().getString(R.string.sdk_inner_version))){
+
+                loginTabView.setTextColor(getContext().getResources().getColor(R.color.white_c));
+                regTabView.setTextColor(getContext().getResources().getColor(R.color.c_FF892E));
+
+            }else{
+                loginTabView.setTextColor(getContext().getResources().getColor(R.color.c_848484));
+                regTabView.setTextColor(Color.WHITE);
+            }
+
             login_bottom_line.setVisibility(View.INVISIBLE);
             register_bottom_line.setVisibility(View.VISIBLE);
         }
