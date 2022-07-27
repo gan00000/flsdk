@@ -12,9 +12,11 @@ import android.widget.TextView;
 
 import com.core.base.BaseWebViewClient;
 import com.mw.base.cfg.ResConfig;
+import com.mw.sdk.SBaseDialog;
 import com.mw.sdk.login.constant.ViewType;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.mw.sdk.R;
+import com.mw.sdk.out.ISdkCallBack;
 
 /**
  * Created by GanYuanrong on 2017/2/6.
@@ -24,9 +26,16 @@ public class TermsViewV3 extends SLoginBaseRelativeLayout {
 
     private View contentView;
 
-    private View goTermView;
-    private CheckBox agreeCheckBox;
+    private ISdkCallBack iSdkCallBack;
+
+    public void setiSdkCallBack(ISdkCallBack iSdkCallBack) {
+        this.iSdkCallBack = iSdkCallBack;
+    }
+
+    //    private View goTermView;
+//    private CheckBox agreeCheckBox;
     private Button okButton;
+    private Button closeButton;
     private WebView termsView1;
     String serviceUrl;
 
@@ -52,44 +61,28 @@ public class TermsViewV3 extends SLoginBaseRelativeLayout {
 
         contentView = inflater.inflate(R.layout.v3_sdk_term, null);
 
-        TextView titleTextView = contentView.findViewById(R.id.sdk_head_title);
-        titleTextView.setText(R.string.sdk_terms_title);
+        okButton = contentView.findViewById(R.id.btn_term_agree);
+        closeButton = contentView.findViewById(R.id.btn_term_close);
 
-        backView = contentView.findViewById(R.id.layout_head_back);
-        backView.setOnClickListener(new OnClickListener() {
+        okButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if(agreeCheckBox.isChecked()) {
-//                    GamaUtil.saveStartTermRead(getContext(), true);
-//                }else{
-//                    GamaUtil.saveStartTermRead(getContext(), false);
-//                }
-                if (ViewType.HomeView == fromView){
-
-                    sLoginDialogv2.toMainHomeView();
-                }else if (ViewType.LoginWithRegView == fromView){
-                    sLoginDialogv2.toLoginWithRegView(null);
+                if (iSdkCallBack != null){
+                    iSdkCallBack.success();
                 }
             }
         });
 
-/*
-        goTermView = contentView.findViewById(R.id.gama_gama_start_term_tv1);//跳轉服務條款
-        agreeCheckBox = contentView.findViewById(R.id.gama_gama_start_term_cb1);//跳轉服務條款
-        okButton = contentView.findViewById(R.id.sdk_terms_btn_confirm);
-
-        if (GamaUtil.getStartTermRead(getContext())){
-            agreeCheckBox.setChecked(true);
-        }else {
-            agreeCheckBox.setChecked(false);
-        }
-        goTermView.setOnClickListener(new OnClickListener() {
+        closeButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                //服務條款
-                agreeCheckBox.performClick();
+
+                if (iSdkCallBack != null){
+                    iSdkCallBack.failure();
+                }
+
             }
-        });*/
+        });
 
         serviceUrl = ResConfig.getServiceTermUrl(getContext());
         serviceUrl = String.format(serviceUrl, ResConfig.getGameCode(getContext()));
@@ -101,21 +94,6 @@ public class TermsViewV3 extends SLoginBaseRelativeLayout {
         termsView1.setWebViewClient(new BaseWebViewClient((Activity) getActivity()));
         termsView1.loadUrl(serviceUrl);
 
-      /*  okButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(!agreeCheckBox.isChecked()) {
-                    ToastUtils.toast(getContext(), R.string.gama_ui_term_not_read);
-                    return;
-                }
-                GamaUtil.saveStartTermRead(getContext(), true);
-
-                sLoginDialogv2.toLoginWithRegView();
-            }
-        });*/
-
-
         return contentView;
     }
 
@@ -126,5 +104,6 @@ public class TermsViewV3 extends SLoginBaseRelativeLayout {
         super.onViewVisible();
         termsView1.loadUrl(serviceUrl);
     }
+
 
 }

@@ -105,6 +105,7 @@
 
     <string name="py_error_occur">網路異常，請檢查重試</string>
     <string name="text_i_agree_tips">我已閱讀並同意</string>
+    <string name="text_i_read_agree">閱讀並同意</string>
     <string name="text_term_moqie"><u>定型化契約</u></string>
     <string name="sdk_terms_title">定型化契約</string>
     <string name="text_switch_account">切換帳號</string>
@@ -121,5 +122,6 @@
     <string name="text_send_vf_code_success">驗證碼已發送，請注意查收</string>
     <string name="text_finish_pay">支付完成</string>
     <string name="text_account_not_exist">帳號不存在</string>
+    <string name="text_close">關閉</string>
 
 </resources>
