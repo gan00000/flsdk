@@ -16,6 +16,7 @@ import com.core.base.utils.PL;
 import com.mw.base.bean.SLoginType;
 import com.mw.base.cfg.ConfigBean;
 import com.mw.base.utils.SdkUtil;
+import com.mw.sdk.SBaseDialog;
 import com.mw.sdk.login.AccountPopupWindow;
 import com.mw.sdk.login.constant.ViewType;
 import com.mw.sdk.login.model.AccountModel;
@@ -23,6 +24,7 @@ import com.mw.sdk.login.widget.SDKInputEditTextView;
 import com.mw.sdk.login.widget.SDKInputType;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.mw.sdk.R;
+import com.mw.sdk.out.ISdkCallBack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -226,7 +228,26 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
         tv_login_term.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                sLoginDialogv2.showTermView(ViewType.LoginWithRegView);
+//                sLoginDialogv2.showTermView(ViewType.LoginWithRegView);
+
+                SBaseDialog sBaseDialog = new SBaseDialog(getContext(),com.mw.sdk.R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
+
+                TermsViewV3 termsViewV3 = new TermsViewV3(getContext());
+                termsViewV3.setiSdkCallBack(new ISdkCallBack() {
+                    @Override
+                    public void success() {
+                        cb_agree_term.setChecked(true);
+                        sBaseDialog.dismiss();
+                    }
+
+                    @Override
+                    public void failure() {
+                        sBaseDialog.dismiss();
+                    }
+                });
+                sBaseDialog.setContentView(termsViewV3);
+                sBaseDialog.show();
+
             }
         });
 
