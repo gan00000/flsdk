@@ -114,22 +114,22 @@
 
             <ImageView
                 android:id="@+id/iv_login_fb"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
                 android:src="@mipmap/mw_fb_icon" />
 
             <ImageView
                 android:id="@+id/iv_login_google"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
                 android:layout_marginStart="27dp"
                 android:src="@mipmap/mw_gp_icon" />
 
             <ImageView
                 android:id="@+id/iv_login_line"
-                android:layout_width="28dp"
+                android:layout_width="34dp"
 
-                android:layout_height="28dp"
+                android:layout_height="34dp"
                 android:layout_marginStart="27dp"
                 android:src="@mipmap/mw_line_icon" />
 

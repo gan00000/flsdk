@@ -69,6 +69,8 @@
     <color name="c_F94925">#F94925</color>
     <color name="c_F13B11">#F13B11</color>
 
+    <color name="c_FF892E">#FF892E</color>
+
     <color name="white_c">#ffffffff</color>
     <!-- The color black, equivalent to 0xff000000 -->
     <color name="black_s">#ff000000</color>

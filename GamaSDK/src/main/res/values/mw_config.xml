@@ -21,4 +21,7 @@
 
     <string name="line_channelId"></string>
 
+<!--    sdk内部版本-第几套-->
+<!--    <string name="sdk_inner_version">v1</string>-->
+
 </resources>

@@ -41,7 +41,7 @@
                     android:text="@string/py_login"
                     android:gravity="center"
                     android:lines="1"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/c_F94925"
                     android:textSize="24sp"
                     android:id="@+id/loginTabView"/>
 
@@ -49,7 +49,7 @@
                     android:layout_width="48dp"
                     android:layout_height="2dp"
                     android:layout_marginTop="3dp"
-                    android:background="@color/c_F23B12"
+                    android:background="@color/c_F94925"
                     android:id="@+id/loginTabView_bottom_line"
                     />
 
@@ -68,7 +68,7 @@
                     android:text="@string/text_register"
                     android:gravity="center"
                     android:lines="1"
-                    android:textColor="@color/c_848484"
+                    android:textColor="@color/white_c"
                     android:textSize="24sp"
                     android:id="@+id/regTabView"/>
 
@@ -76,7 +76,7 @@
                     android:layout_width="48dp"
                     android:layout_height="2dp"
                     android:layout_marginTop="3dp"
-                    android:background="@color/c_F23B12"
+                    android:background="@color/c_F94925"
                     android:id="@+id/regTabView_bottom_line"
                     android:visibility="invisible"
                     />
@@ -92,9 +92,9 @@
             android:layout_marginTop="23dp">
 
             <com.mw.sdk.login.widget.v2.AccountLoginLayoutV2
+                android:id="@+id/pyAccountLoginV2Id"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/pyAccountLoginV2Id"/>
+                android:layout_height="match_parent" />
 
             <com.mw.sdk.login.widget.v2.AccountRegisterLayoutV2
                 android:layout_width="match_parent"

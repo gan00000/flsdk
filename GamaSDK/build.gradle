@@ -27,9 +27,11 @@ android {
 
         sdk1 {//第一套
             flavorDimensions "1"
+            resValue "string", "sdk_inner_version", "v1"
         }
         sdk2 {//第二套
             flavorDimensions "1"
+            resValue "string", "sdk_inner_version", "v2"
         }
 
     }
