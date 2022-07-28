@@ -250,23 +250,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
             public void onClick(View v) {
 //                sLoginDialogv2.showTermView(ViewType.LoginWithRegView);
 
-                SBaseDialog sBaseDialog = new SBaseDialog(getContext(),com.mw.sdk.R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
-
-                TermsViewV3 termsViewV3 = new TermsViewV3(getContext());
-                termsViewV3.setiSdkCallBack(new ISdkCallBack() {
-                    @Override
-                    public void success() {
-                        cb_agree_term.setChecked(true);
-                        sBaseDialog.dismiss();
-                    }
-
-                    @Override
-                    public void failure() {
-                        sBaseDialog.dismiss();
-                    }
-                });
-                sBaseDialog.setContentView(termsViewV3);
-                sBaseDialog.show();
+                showTermDialog();
 
             }
         });
@@ -469,7 +453,40 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
             return true;
         }
         toast(R.string.gama_ui_term_not_read);
+        this.showTermDialog();
         return false;
+    }
+
+    private SBaseDialog termBaseDialog;
+    private void showTermDialog() {
+
+        if (termBaseDialog != null){
+            termBaseDialog.show();
+            return;
+        }
+
+        termBaseDialog = new SBaseDialog(getContext(), R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
+
+        TermsViewV3 termsViewV3 = new TermsViewV3(getContext());
+        termsViewV3.setiSdkCallBack(new ISdkCallBack() {
+            @Override
+            public void success() {
+                cb_agree_term.setChecked(true);
+                if (termBaseDialog != null) {
+                    termBaseDialog.dismiss();
+                }
+            }
+
+            @Override
+            public void failure() {
+                if (termBaseDialog != null) {
+                    termBaseDialog.dismiss();
+                }
+            }
+        });
+        termBaseDialog.setContentView(termsViewV3);
+        termBaseDialog.getWindow().setWindowAnimations(R.style.dialog_animation);
+        termBaseDialog.show();
     }
 
     @Override

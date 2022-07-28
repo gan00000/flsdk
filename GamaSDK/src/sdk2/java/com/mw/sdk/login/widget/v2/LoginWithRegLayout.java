@@ -5,6 +5,8 @@ import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.mw.base.utils.SdkUtil;
@@ -37,6 +39,11 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
 //    public void setFromViewType(ViewType fromViewType) {
 //        this.fromViewType = fromViewType;
 //    }
+
+    Animation login_out_animation;
+    Animation login_enter_animation;
+    Animation reg_out_animation;
+    Animation reg_enter_animation;
 
     public AccountRegisterLayoutV2 getmAccountRegisterLayoutV2() {
         return mAccountRegisterLayoutV2;
@@ -74,6 +81,78 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
         loginTabView.setOnClickListener(this);
         regTabView.setOnClickListener(this);
         iv_login_reg_back.setOnClickListener(this);
+
+        login_out_animation = AnimationUtils.loadAnimation(getContext(),R.anim.mw_login_out);
+        login_out_animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                mAccountLoginV2.setVisibility(GONE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+        login_enter_animation = AnimationUtils.loadAnimation(getContext(),R.anim.mw_login_enter);
+        login_enter_animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                mAccountLoginV2.setVisibility(VISIBLE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+        reg_enter_animation = AnimationUtils.loadAnimation(getContext(),R.anim.mw_reg_enter);
+        reg_enter_animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                mAccountRegisterLayoutV2.setVisibility(VISIBLE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+        reg_out_animation = AnimationUtils.loadAnimation(getContext(),R.anim.mw_reg_out);
+        reg_out_animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                mAccountRegisterLayoutV2.setVisibility(GONE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
 
         return contentView;
     }
@@ -148,8 +227,12 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
     private void makeTabStatus(boolean isLoginClick) {
 
         if (isLoginClick){
+
+            if (mAccountLoginV2.getVisibility() == VISIBLE){
+                return;
+            }
             mAccountLoginV2.setVisibility(VISIBLE);
-            mAccountRegisterLayoutV2.setVisibility(GONE);
+            mAccountRegisterLayoutV2.setVisibility(VISIBLE);
 
 //            loginTabView.setBackgroundResource(R.drawable.login_tab_red_left_cons_bg);
 //            regTabView.setBackgroundResource(R.drawable.login_tab_white_right_cons_bg);
@@ -166,8 +249,16 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
             login_bottom_line.setVisibility(View.VISIBLE);
             register_bottom_line.setVisibility(View.INVISIBLE);
 
+            mAccountRegisterLayoutV2.startAnimation(reg_out_animation);
+            mAccountLoginV2.startAnimation(login_enter_animation);
+
         }else{
-            mAccountLoginV2.setVisibility(GONE);
+
+            if (mAccountRegisterLayoutV2.getVisibility() == VISIBLE){
+                return;
+            }
+
+            mAccountLoginV2.setVisibility(VISIBLE);
             mAccountRegisterLayoutV2.setVisibility(VISIBLE);
 
 //            loginTabView.setBackgroundResource(R.drawable.login_tab_white_left_cons_bg);
@@ -186,6 +277,10 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
 
             login_bottom_line.setVisibility(View.INVISIBLE);
             register_bottom_line.setVisibility(View.VISIBLE);
+
+            mAccountLoginV2.startAnimation(login_out_animation);
+            mAccountRegisterLayoutV2.startAnimation(reg_enter_animation);
+
         }
 
     }
