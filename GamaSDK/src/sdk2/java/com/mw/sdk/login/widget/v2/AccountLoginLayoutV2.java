@@ -5,6 +5,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -85,6 +86,25 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
     public AccountLoginLayoutV2(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
+//    private int mWidth;
+//    private int mHeight;
+//    @Override
+//    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+//        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+//        //获取宽度的测量规范模式
+//        int specMode = MeasureSpec.getMode(widthMeasureSpec);
+//        int specWidth = MeasureSpec.getSize(widthMeasureSpec);
+//        PL.i("onMeasure 模式和宽度" + " specMode:"+specMode+"|specWidth:"+specWidth);
+//
+//        specMode = MeasureSpec.getMode(widthMeasureSpec);
+//        int specHeight = MeasureSpec.getSize(widthMeasureSpec);
+//        PL.i("onMeasure 模式和宽度" + " specMode:"+specMode+"|specHeight:"+specHeight);
+//
+//        int contentView_w = contentView.getWidth();
+//        int contentView_h = contentView.getHeight();
+//
+//        PL.i("contentView_w=" + contentView_w + ",  contentView_h=" + contentView_h);
+//    }
 
     @Override
     protected View createView(Context context, LayoutInflater layoutInflater) {
@@ -399,15 +419,19 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
         if (SLoginType.LOGIN_TYPE_MG.equals(currentAccountModel.getLoginType())){
             account = accountModel.getAccount();
             password = accountModel.getPassword();
+            loginMainGoFindPwd.setVisibility(VISIBLE);
             if (!TextUtils.isEmpty(account)){ //显示记住的密码
                 SdkUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
-                pwdSdkInputEditTextView.setPwdInputEnable(true);
+                pwdSdkInputEditTextView.setVisibility(View.VISIBLE);
+//                pwdSdkInputEditTextView.setPwdInputEnable(true);
                 loginPasswordEditText.setText(password);
             }
         }else{
             SdkUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
-            pwdSdkInputEditTextView.setPwdInputEnable(false);
-            loginPasswordEditText.setText(R.string.text_free_register);
+//            pwdSdkInputEditTextView.setPwdInputEnable(false);
+//            loginPasswordEditText.setText(R.string.text_free_register);
+            pwdSdkInputEditTextView.setVisibility(View.GONE);
+            loginMainGoFindPwd.setVisibility(GONE);
         }
     }
 
