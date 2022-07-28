@@ -28,6 +28,7 @@ import com.mw.base.bean.SLoginType;
 import com.mw.base.cfg.ResConfig;
 import com.mw.base.utils.SdkUtil;
 import com.mw.sdk.login.constant.BindType;
+import com.mw.sdk.login.constant.ViewType;
 import com.mw.sdk.login.execute.AccountLoginRequestTask;
 import com.mw.sdk.login.execute.AccountRegisterRequestTask;
 import com.mw.sdk.login.execute.ChangePwdRequestTask;
@@ -232,7 +233,11 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             }
         }else{
             if (iLoginView != null){
-                iLoginView.showWelcomeBackView();
+                if (SdkUtil.isVersion2(getContext())){
+                    iLoginView.showLoginWithRegView(ViewType.WelcomeView);
+                }else{
+                    iLoginView.showWelcomeBackView();
+                }
             }
         }
     }
