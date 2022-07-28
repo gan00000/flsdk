@@ -402,9 +402,10 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
                             tempAccountModel.setLoginType(SLoginType.LOGIN_TYPE_MG);
                             tempAccountModel.setAccount(s.toString());
                             tempAccountModel.setPassword("");
-                            SdkUtil.setAccountWithIcon(tempAccountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
-                            pwdSdkInputEditTextView.setPwdInputEnable(true);
-                            pwdSdkInputEditTextView.getInputEditText().setText("");
+//                            SdkUtil.setAccountWithIcon(tempAccountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
+//                            pwdSdkInputEditTextView.setPwdInputEnable(true);
+//                            pwdSdkInputEditTextView.getInputEditText().setText("");
+                            setViewStatue(tempAccountModel);
                         }
                     }
 
@@ -420,12 +421,11 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
             account = accountModel.getAccount();
             password = accountModel.getPassword();
             loginMainGoFindPwd.setVisibility(VISIBLE);
-            if (!TextUtils.isEmpty(account)){ //显示记住的密码
-                SdkUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
-                pwdSdkInputEditTextView.setVisibility(View.VISIBLE);
+            SdkUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
+            pwdSdkInputEditTextView.setVisibility(View.VISIBLE);
 //                pwdSdkInputEditTextView.setPwdInputEnable(true);
-                loginPasswordEditText.setText(password);
-            }
+            loginPasswordEditText.setText(password);
+
         }else{
             SdkUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
 //            pwdSdkInputEditTextView.setPwdInputEnable(false);

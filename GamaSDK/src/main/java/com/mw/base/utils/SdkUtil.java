@@ -1011,6 +1011,8 @@ public class SdkUtil {
                 editText.setText(showName);
                 Editable etable = editText.getText();
                 Selection.setSelection(etable, showName.length());
+            }else{
+                editText.setText("");
             }
         } catch (Exception e) {
             e.printStackTrace();
