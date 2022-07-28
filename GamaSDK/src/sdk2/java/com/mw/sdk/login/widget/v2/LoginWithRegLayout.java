@@ -125,6 +125,10 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
 
         mAccountLoginV2.onViewVisible();
         mAccountRegisterLayoutV2.onViewVisible();
+
+        if (this.fromView == ViewType.WelcomeView || this.fromView == null){
+            iv_login_reg_back.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override
@@ -149,7 +153,7 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
 
 //            loginTabView.setBackgroundResource(R.drawable.login_tab_red_left_cons_bg);
 //            regTabView.setBackgroundResource(R.drawable.login_tab_white_right_cons_bg);
-            if ("v2".equals(getResources().getString(R.string.sdk_inner_version))){
+            if (SdkUtil.isVersion2(getContext())){
 
                 loginTabView.setTextColor(getContext().getResources().getColor(R.color.c_FF892E));
                 regTabView.setTextColor(getContext().getResources().getColor(R.color.white_c));
@@ -170,7 +174,7 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
 //            regTabView.setBackgroundResource(R.drawable.login_tab_red_right_cons_bg);
 
 
-            if ("v2".equals(getResources().getString(R.string.sdk_inner_version))){
+            if (SdkUtil.isVersion2(getContext())){
 
                 loginTabView.setTextColor(getContext().getResources().getColor(R.color.white_c));
                 regTabView.setTextColor(getContext().getResources().getColor(R.color.c_FF892E));
