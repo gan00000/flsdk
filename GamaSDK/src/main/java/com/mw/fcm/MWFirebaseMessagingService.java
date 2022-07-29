@@ -1,5 +1,4 @@
-/*
-package com.mw.sdk.fcm;
+package com.mw.fcm;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -14,51 +13,31 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 
+import com.core.base.utils.PL;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 
-public class GamaFirebaseMessagingService extends FirebaseMessagingService {
+public class MWFirebaseMessagingService extends FirebaseMessagingService {
 
-    private static final String TAG = "MyFirebaseMsgService";
-
-    */
-/**
-     * Called when message is received.
-     *
-     * @param remoteMessage Object representing the message received from Firebase Cloud Messaging.
-     *//*
-
-    // [START receive_message]
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-        // [START_EXCLUDE]
-        // There are two types of messages data messages and notification messages. Data messages are handled
-        // here in onMessageReceived whether the app is in the foreground or background. Data messages are the type
-        // traditionally used with GCM. Notification messages are only received here in onMessageReceived when the app
-        // is in the foreground. When the app is in the background an automatically generated notification is displayed.
-        // When the user taps on the notification they are returned to the app. Messages containing both notification
-        // and data payloads are treated as notification messages. The Firebase console always sends notification
-        // messages. For more see: https://firebase.google.com/docs/cloud-messaging/concept-options
-        // [END_EXCLUDE]
 
-
+        // TODO(developer): Handle FCM messages here.
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
-        Log.d(TAG, "From: " + remoteMessage.getFrom());
+        PL.i("remoteMessage From: " + remoteMessage.getFrom());
 
         // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
-            Log.d(TAG, "Message data payload: " + remoteMessage.getData());
-
+            PL.i("Message data payload: " + remoteMessage.getData());
         }
 
         // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
-            Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
+            PL.i("Message Notification Body: " + remoteMessage.getNotification().getBody());
             sendNotification(remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody());
         }
 
@@ -67,13 +46,6 @@ public class GamaFirebaseMessagingService extends FirebaseMessagingService {
     }
     // [END receive_message]
 
-    */
-/**
-     * Create and show a simple notification containing the received FCM message.
-     *
-     * @param messageTitle FCM message title received.
-     * @param messageBody  FCM message body received.
-     *//*
 
     private void sendNotification(String messageTitle, String messageBody) {
         NotificationManager notificationManager =
@@ -88,9 +60,21 @@ public class GamaFirebaseMessagingService extends FirebaseMessagingService {
         if (!TextUtils.isEmpty(pkName)) {
             Intent intent = getApplicationContext().getPackageManager().getLaunchIntentForPackage(pkName);
             if(intent != null) {
+
+// Targeting S+ (version 31 and above) requires that one of FLAG_IMMUTABLE or FLAG_MUTABLE be specified when creating a PendingIntent.
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                pendingIntent = PendingIntent.getActivity(this, 0, intent,
-                        PendingIntent.FLAG_ONE_SHOT);
+//                pendingIntent = PendingIntent.getActivity(this, 0, intent,
+//                        PendingIntent.FLAG_ONE_SHOT);
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    pendingIntent = PendingIntent.getActivity(this,
+                            0, intent, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE);
+
+                }else {
+                    pendingIntent = PendingIntent.getActivity(this,
+                            0, intent, PendingIntent.FLAG_ONE_SHOT);
+
+                }
             }
         }
 
@@ -100,6 +84,13 @@ public class GamaFirebaseMessagingService extends FirebaseMessagingService {
         if(TextUtils.isEmpty(messageTitle)) {
             messageTitle = getApplicationName(this);
         }
+
+//        小图标：必须提供，通过 setSmallIcon() 进行设置。
+//        应用名称：由系统提供。
+//        时间戳：由系统提供，但您可以使用 setWhen() 替换它或者使用 setShowWhen(false) 隐藏它。
+//        大图标：可选内容（通常仅用于联系人照片，请勿将其用于应用图标），通过 setLargeIcon() 进行设置。
+//        标题：可选内容，通过 setContentTitle() 进行设置。
+//        文本：可选内容，通过 setContentText() 进行设置
 
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setContentTitle(messageTitle)
@@ -115,7 +106,7 @@ public class GamaFirebaseMessagingService extends FirebaseMessagingService {
         if (Build.VERSION.SDK_INT >= 26) {
 
             // The id of the channel.
-            String id = "gama_notify_channel";
+            String id = "nw_notify_channel";
             // The user-visible name of the channel.
 //            String name = context.getApplicationInfo().name;
             String name = "new message";
@@ -133,9 +124,7 @@ public class GamaFirebaseMessagingService extends FirebaseMessagingService {
             notificationBuilder.setChannelId(id);
         }
 
-        notificationManager.notify(0 */
-/* ID of notification *//*
-, notificationBuilder.build());
+        notificationManager.notify(0, notificationBuilder.build());
     }
 
     public static String getApplicationName(Context context) {
@@ -144,11 +133,9 @@ public class GamaFirebaseMessagingService extends FirebaseMessagingService {
         return stringId == 0 ? applicationInfo.nonLocalizedLabel.toString() : context.getString(stringId);
     }
 
-    */
-/**
-     * 获取推送icon的id
-     * @return 先读取meta-data配置(com.google.firebase.messaging.default_notification_icon)，然后读取应用icon。
-     *//*
+//     * 获取推送icon的id
+//     * @return 先读取meta-data配置(com.google.firebase.messaging.default_notification_icon)，然后读取应用icon。
+
 
     public static int getPushIconId(Context context) {
         int iconId = 0;
@@ -159,7 +146,7 @@ public class GamaFirebaseMessagingService extends FirebaseMessagingService {
             if(metaData != null) {
                 iconId = metaData.getInt("com.google.firebase.messaging.default_notification_icon");
             } else {
-                Log.i(TAG, "当前应用没有在meta-data配置");
+                PL.i("当前应用没有在meta-data配置");
             }
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
@@ -167,7 +154,7 @@ public class GamaFirebaseMessagingService extends FirebaseMessagingService {
         if(iconId == 0) {
             ApplicationInfo info = context.getApplicationInfo();
             iconId = info.icon;
-            Log.i(TAG, "没有找到推送icon，使用应用icon : " + iconId);
+            PL.i("没有找到推送icon，使用应用icon : " + iconId);
         }
         return iconId;
     }
@@ -175,8 +162,7 @@ public class GamaFirebaseMessagingService extends FirebaseMessagingService {
     @Override
     public void onNewToken(String s) {
         super.onNewToken(s);
-        Log.i(TAG, "fcm token is " + s);
+        PL.i("fcm token is " + s);
 //        GamaAj.setPushToken(getApplicationContext(), s);
     }
 }
-*/
