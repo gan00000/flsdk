@@ -140,16 +140,18 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
     }
 
     private SBaseDialog termBaseDialog;
+    private TermsViewV3 termsViewV3;
     private void showTermDialog() {
 
-        if (termBaseDialog != null){
+        if (termBaseDialog != null && termsViewV3 != null){
             termBaseDialog.show();
+            termsViewV3.reloadUrl();
             return;
         }
 
         termBaseDialog = new SBaseDialog(getContext(), R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
 
-        TermsViewV3 termsViewV3 = new TermsViewV3(getContext());
+        termsViewV3 = new TermsViewV3(getContext());
         termsViewV3.setiSdkCallBack(new ISdkCallBack() {
             @Override
             public void success() {

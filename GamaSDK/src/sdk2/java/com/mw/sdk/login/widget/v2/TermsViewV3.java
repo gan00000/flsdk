@@ -11,6 +11,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.core.base.BaseWebViewClient;
+import com.core.base.utils.PL;
 import com.mw.base.cfg.ResConfig;
 import com.mw.sdk.SBaseDialog;
 import com.mw.sdk.login.constant.ViewType;
@@ -87,7 +88,7 @@ public class TermsViewV3 extends SLoginBaseRelativeLayout {
         serviceUrl = ResConfig.getServiceTermUrl(getContext());
         serviceUrl = String.format(serviceUrl, ResConfig.getGameCode(getContext()));
 //        String privateUrl = ResConfig.getPrivateTermUrl(getContext());
-
+        PL.i("serviceUrl=" + serviceUrl);
         termsView1 = (WebView) contentView.findViewById(R.id.sdk_terms_webview);
         termsView1.clearCache(true);
 //        termsView1.setWebChromeClient(new WebChromeClient());
@@ -105,5 +106,9 @@ public class TermsViewV3 extends SLoginBaseRelativeLayout {
         termsView1.loadUrl(serviceUrl);
     }
 
-
+    public void reloadUrl(){
+        if (termsView1 != null) {
+            termsView1.loadUrl(serviceUrl);
+        }
+    }
 }
