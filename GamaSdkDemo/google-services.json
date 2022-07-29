@@ -1,42 +1,49 @@
 {
   "project_info": {
-    "project_number": "61788863107",
-    "project_id": "meowplayer-5541c",
-    "storage_bucket": "meowplayer-5541c.appspot.com"
+    "project_number": "166447905232",
+    "project_id": "first-game-0506",
+    "storage_bucket": "first-game-0506.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:61788863107:android:71e73a6595bd3957c5f9b6",
+        "mobilesdk_app_id": "1:166447905232:android:4460d68a1fb7357cb1e1d5",
         "android_client_info": {
-          "package_name": "com.game.superand"
+          "package_name": "com.wanye.fszhl"
         }
       },
       "oauth_client": [
         {
-          "client_id": "61788863107-kqg3srg1tcelrta7rac0d630gd44krkc.apps.googleusercontent.com",
+          "client_id": "166447905232-irdpvm0rm1p3v3591or9cqbij1gjhsdh.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.game.superand",
-            "certificate_hash": "f1738617b7ae0c892ca378439c80aa5b9f4bbd50"
+            "package_name": "com.wanye.fszhl",
+            "certificate_hash": "723068ce8ea216fac2613f173ca7957324b071d3"
           }
         },
         {
-          "client_id": "61788863107-0ljklfj8o2udqbcfjclrq7g5g61juj0r.apps.googleusercontent.com",
+          "client_id": "166447905232-7hraepme1hj92fov57ojii0ga0jhfjnr.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBVMP-vvB8dScQjCYEnjs20o8gI7INT1xI"
+          "current_key": "AIzaSyAauaKgU5m9xhgXNSJqsLzyrOi2fSEoRwI"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "61788863107-0ljklfj8o2udqbcfjclrq7g5g61juj0r.apps.googleusercontent.com",
+              "client_id": "166447905232-7hraepme1hj92fov57ojii0ga0jhfjnr.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "166447905232-0430a669fr754far2h70q08nmsku9p69.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.wanye.fszhl"
+              }
             }
           ]
         }

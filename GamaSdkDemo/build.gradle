@@ -99,42 +99,46 @@ android {
     productFlavors {
 
         sdk1 {
-            signingConfig signingConfigs.releasexx
-            applicationId "com.game.superand"
+
+            signingConfig signingConfigs.mwrelease
+            applicationId "com.wanye.fszhl"
             minSdkVersion 21
             targetSdkVersion 32
-            versionCode 2
-            versionName "2.0"
+            versionCode 1
+            versionName "1.0"
             flavorDimensions "1"
-            resValue "string", "scheme", "jjcs"
-            resValue "string", "facebook_app_id", "290914729828439"
-            resValue "string", "facebook_client_token", "6a5570d4d7aad0ba5fb55035ce199da6"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider290914729828439" //启用分析
-            resValue "string", "fb_login_protocol_scheme", "fb290914729828439"
-            resValue "string", "line_channelId", "1657186918"
+            resValue "string", "scheme", "fszhl"
+            resValue "string", "facebook_app_id", "1672362243138559"
+            resValue "string", "facebook_client_token", "d5b9ebb98ff9a1f67266d937f4cce980"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1672362243138559" //启用分析
+            resValue "string", "fb_login_protocol_scheme", "fb1672362243138559"
+            resValue "string", "facebook_app_name", "終末的御靈師"
+            resValue "string", "line_channelId", "1657313585"
 
-            //每个游戏的demo设置
-            resValue "string", "sdk_name", "superand"
+            //每个游戏的demo设置 test
+            resValue "string", "sdk_name", "終末的御靈師demo"
 
         }
 
         sdk2 {
-            signingConfig signingConfigs.releasexx
-            applicationId "com.game.superand"
+
+            signingConfig signingConfigs.mwrelease
+            applicationId "com.wanye.fszhl"
             minSdkVersion 21
             targetSdkVersion 32
-            versionCode 2
-            versionName "2.0"
+            versionCode 1
+            versionName "1.0"
             flavorDimensions "1"
-            resValue "string", "scheme", "jjcs"
-            resValue "string", "facebook_app_id", "290914729828439"
-            resValue "string", "facebook_client_token", "6a5570d4d7aad0ba5fb55035ce199da6"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider290914729828439" //启用分析
-            resValue "string", "fb_login_protocol_scheme", "fb290914729828439"
-            resValue "string", "line_channelId", "1657186918"
+            resValue "string", "scheme", "fszhl"
+            resValue "string", "facebook_app_id", "1672362243138559"
+            resValue "string", "facebook_client_token", "d5b9ebb98ff9a1f67266d937f4cce980"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1672362243138559" //启用分析
+            resValue "string", "fb_login_protocol_scheme", "fb1672362243138559"
+            resValue "string", "facebook_app_name", "終末的御靈師"
+            resValue "string", "line_channelId", "1657313585"
 
-            //每个游戏的demo设置
-            resValue "string", "sdk_name", "superand"
+            //每个游戏的demo设置 test
+            resValue "string", "sdk_name", "終末的御靈師demo"
 
         }
 
