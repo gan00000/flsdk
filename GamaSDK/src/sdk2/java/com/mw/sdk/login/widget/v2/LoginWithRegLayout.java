@@ -5,10 +5,13 @@ import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.mw.base.cfg.ConfigBean;
 import com.mw.base.utils.SdkUtil;
 import com.mw.sdk.login.SLoginDialogV2;
 import com.mw.sdk.login.constant.ViewType;
@@ -27,6 +30,8 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
     private View contentView;
     private TextView loginTabView, regTabView;
     private View login_bottom_line,register_bottom_line,iv_login_reg_back;
+
+    private LinearLayout ll_reg_login_title;
 
     public AccountLoginLayoutV2 getmAccountLoginV2() {
         return mAccountLoginV2;
@@ -75,6 +80,7 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
         login_bottom_line = contentView.findViewById(R.id.loginTabView_bottom_line);
         register_bottom_line = contentView.findViewById(R.id.regTabView_bottom_line);
 
+        ll_reg_login_title = contentView.findViewById(R.id.ll_reg_login_title);
         mAccountLoginV2 = contentView.findViewById(R.id.pyAccountLoginV2Id);
         mAccountRegisterLayoutV2 = contentView.findViewById(R.id.accountRegisterLayoutV2Id);
 
@@ -153,6 +159,22 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
 
             }
         });
+
+        ConfigBean configBean = SdkUtil.getSdkCfg(getContext());
+        if (configBean != null){
+            ConfigBean.VersionData versionData = configBean.getSdkConfigLoginData(getContext());
+            if (versionData != null){
+
+                if(versionData.isDeleteAccount()){
+
+                }else{
+//                    layout_delete_account.setVisibility(View.GONE);
+                    LinearLayout.LayoutParams titleLayoutParams = (LinearLayout.LayoutParams) ll_reg_login_title.getLayoutParams();
+                    titleLayoutParams.topMargin = titleLayoutParams.topMargin / 2 + titleLayoutParams.topMargin;
+                    ll_reg_login_title.setLayoutParams(titleLayoutParams);
+                }
+            }
+        }
 
         return contentView;
     }

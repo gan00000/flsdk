@@ -10,10 +10,12 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.PL;
@@ -111,20 +113,29 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
 //        PL.i("contentView_w=" + contentView_w + ",  contentView_h=" + contentView_h);
 //    }
 
-
+    boolean isResizeView = false;
     @Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-        layout_delete_account_parent.post(new Runnable() {
-            @Override
-            public void run() {
-                View xxView = AccountLoginLayoutV2.this;
-                int accountViewH = xxView.getHeight();
-                int delete_account_parent_h = layout_delete_account_parent.getHeight();
-
-                accountViewH = accountViewH - delete_account_parent_h;
-            }
-        });
+    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        super.onLayout(changed, l, t, r, b);
+        PL.i("view onLayout");
+//        if (isResizeView || layout_delete_account.getVisibility() == View.VISIBLE){
+//            return;
+//        }
+//        this.post(new Runnable() {
+//            @Override
+//            public void run() {
+//                View xxView = AccountLoginLayoutV2.this;
+//                int accountViewH = xxView.getHeight();
+//                int delete_account_parent_h = layout_delete_account_parent.getHeight();
+//                accountViewH = accountViewH - delete_account_parent_h;
+//
+//                ViewGroup.LayoutParams layoutParams = xxView.getLayoutParams();
+//                layoutParams.height = accountViewH;
+//
+//                isResizeView = true;
+//                xxView.setLayoutParams(layoutParams);
+//            }
+//        });
     }
 
     @Override
@@ -159,7 +170,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
         layout_delete_account = contentView.findViewById(R.id.layout_delete_account);
         layout_delete_account_parent = contentView.findViewById(R.id.layout_delete_account_parent);
         layout_delete_account.setVisibility(View.GONE);
-        layout_delete_account_parent.setVisibility(View.GONE);
+//        layout_delete_account_parent.setVisibility(View.GONE);
 
         layout_delete_account.setOnClickListener(new OnClickListener() {
             @Override
@@ -268,10 +279,10 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
                 }
                 if(versionData.isDeleteAccount()){
                     layout_delete_account.setVisibility(View.VISIBLE);
-                    layout_delete_account_parent.setVisibility(View.VISIBLE);
+//                    layout_delete_account_parent.setVisibility(View.VISIBLE);
                 }else{
                     layout_delete_account.setVisibility(View.GONE);
-                    layout_delete_account_parent.setVisibility(View.GONE);
+//                    layout_delete_account_parent.setVisibility(View.GONE);
                 }
             }
         }
