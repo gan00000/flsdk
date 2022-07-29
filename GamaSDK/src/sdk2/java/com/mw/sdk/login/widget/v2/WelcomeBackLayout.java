@@ -297,36 +297,40 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
         }else if (v == layout_delete_account){
 //            layout_delete_account
 
-            if (deleteDialog == null){
-                LayoutInflater inflater = LayoutInflater.from(getContext());
-                View contentView = inflater.inflate(R.layout.mw_delete_account_alert, null);
-                Button cancelBtn = contentView.findViewById(R.id.btn_delete_cancel);
-                cancelBtn.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (deleteDialog != null) {
-                            deleteDialog.dismiss();
-                        }
-                    }
-                });
-                Button confireBtn = contentView.findViewById(R.id.btn_delete_confirm);
-
-                confireBtn.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        deleteAccount();
-                    }
-                });
-
-                deleteDialog = DialogUtil.createDialog(getContext(),contentView);
-                deleteDialog.show();
-            }else{
-
-                deleteDialog.show();
-            }
+            showDeleteDialog();
 
         }
 
+    }
+
+    private void showDeleteDialog() {
+        if (deleteDialog == null){
+            LayoutInflater inflater = LayoutInflater.from(getContext());
+            View contentView = inflater.inflate(R.layout.mw_delete_account_alert, null);
+            Button cancelBtn = contentView.findViewById(R.id.btn_delete_cancel);
+            cancelBtn.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (deleteDialog != null) {
+                        deleteDialog.dismiss();
+                    }
+                }
+            });
+            Button confireBtn = contentView.findViewById(R.id.btn_delete_confirm);
+
+            confireBtn.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    deleteAccount();
+                }
+            });
+
+            deleteDialog = DialogUtil.createDialog(getContext(),contentView);
+            deleteDialog.show();
+        }else{
+
+            deleteDialog.show();
+        }
     }
 
     private void deleteAccount() {

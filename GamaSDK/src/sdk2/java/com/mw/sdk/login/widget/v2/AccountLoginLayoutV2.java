@@ -1,6 +1,8 @@
 package com.mw.sdk.login.widget.v2;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Canvas;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -13,7 +15,9 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.PopupWindow;
 
+import com.core.base.callback.SFCallBack;
 import com.core.base.utils.PL;
+import com.core.base.utils.ToastUtils;
 import com.mw.base.bean.SLoginType;
 import com.mw.base.cfg.ConfigBean;
 import com.mw.base.utils.SdkUtil;
@@ -26,6 +30,7 @@ import com.mw.sdk.login.widget.SDKInputType;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.mw.sdk.R;
 import com.mw.sdk.out.ISdkCallBack;
+import com.mw.sdk.utils.DialogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -106,6 +111,22 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
 //        PL.i("contentView_w=" + contentView_w + ",  contentView_h=" + contentView_h);
 //    }
 
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        layout_delete_account_parent.post(new Runnable() {
+            @Override
+            public void run() {
+                View xxView = AccountLoginLayoutV2.this;
+                int accountViewH = xxView.getHeight();
+                int delete_account_parent_h = layout_delete_account_parent.getHeight();
+
+                accountViewH = accountViewH - delete_account_parent_h;
+            }
+        });
+    }
+
     @Override
     protected View createView(Context context, LayoutInflater layoutInflater) {
         return onCreateView(layoutInflater);
@@ -134,6 +155,18 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
         loginMainGoFindPwd = contentView.findViewById(R.id.gama_login_tv_forget_password);
         loginMainGoAccountCenter = contentView.findViewById(R.id.gama_login_tv_link);
         loginMainGoChangePassword = contentView.findViewById(R.id.gama_login_tv_change_password);
+
+        layout_delete_account = contentView.findViewById(R.id.layout_delete_account);
+        layout_delete_account_parent = contentView.findViewById(R.id.layout_delete_account_parent);
+        layout_delete_account.setVisibility(View.GONE);
+        layout_delete_account_parent.setVisibility(View.GONE);
+
+        layout_delete_account.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDeleteDialog();
+            }
+        });
 
         tv_login_term = contentView.findViewById(R.id.tv_login_term);
         cb_agree_term = contentView.findViewById(R.id.cb_agree_term);
@@ -232,6 +265,13 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
                 if(!versionData.isShowContract()){
                     cb_agree_term.setVisibility(View.GONE);
                     tv_login_term.setVisibility(View.GONE);
+                }
+                if(versionData.isDeleteAccount()){
+                    layout_delete_account.setVisibility(View.VISIBLE);
+                    layout_delete_account_parent.setVisibility(View.VISIBLE);
+                }else{
+                    layout_delete_account.setVisibility(View.GONE);
+                    layout_delete_account_parent.setVisibility(View.GONE);
                 }
             }
         }
@@ -538,4 +578,82 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
         }
     }
 
+
+    private View layout_delete_account;
+    private View layout_delete_account_parent;
+    Dialog deleteDialog;
+    private void showDeleteDialog() {
+        if (deleteDialog == null){
+            LayoutInflater inflater = LayoutInflater.from(getContext());
+            View contentView = inflater.inflate(R.layout.mw_delete_account_alert, null);
+            Button cancelBtn = contentView.findViewById(R.id.btn_delete_cancel);
+            cancelBtn.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (deleteDialog != null) {
+                        deleteDialog.dismiss();
+                    }
+                }
+            });
+            Button confireBtn = contentView.findViewById(R.id.btn_delete_confirm);
+
+            confireBtn.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    deleteAccount();
+                }
+            });
+
+            deleteDialog = DialogUtil.createDialog(getContext(),contentView);
+            deleteDialog.show();
+        }else{
+
+            deleteDialog.show();
+        }
+    }
+
+    private void deleteAccount() {
+        String account = accountSdkInputEditTextView.getInputEditText().getEditableText().toString().trim();
+        if (TextUtils.isEmpty(account)) {
+            ToastUtils.toast(getActivity(), R.string.py_account_empty);
+            return;
+        }
+
+        sLoginDialogv2.getLoginPresenter().deleteAccout(sLoginDialogv2.getActivity(), currentAccountModel.getUserId(),
+                currentAccountModel.getLoginType(),
+                currentAccountModel.getThirdId(),
+                currentAccountModel.getLoginAccessToken(),
+                currentAccountModel.getLoginTimestamp(), new SFCallBack<String>() {
+                    @Override
+                    public void success(String result, String msg) {
+                        if (deleteDialog != null) {
+                            deleteDialog.dismiss();
+                        }
+                        checkLocalAccount();
+                    }
+
+                    @Override
+                    public void fail(String result, String msg) {
+                        if (deleteDialog != null) {
+                            deleteDialog.dismiss();
+                        }
+                    }
+                });
+    }
+
+    private void checkLocalAccount(){
+        List<AccountModel> accountModels = SdkUtil.getAccountModels(getActivity());
+        if (accountModels == null || accountModels.isEmpty()){
+//            sLoginDialogv2.toLoginWithRegView(ViewType.WelcomeView);
+            AccountModel tempAccountModel = new AccountModel();
+            currentAccountModel = tempAccountModel;
+            tempAccountModel.setLoginType(SLoginType.LOGIN_TYPE_MG);
+            tempAccountModel.setAccount("");
+            tempAccountModel.setPassword("");
+            setViewStatue(tempAccountModel);
+            return;
+        }
+        currentAccountModel = accountModels.get(0);
+        setViewStatue(currentAccountModel);
+    }
 }

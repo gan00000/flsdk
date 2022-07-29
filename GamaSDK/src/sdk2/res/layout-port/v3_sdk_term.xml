@@ -7,88 +7,88 @@
 
 
     <LinearLayout
-        android:layout_width="375dp"
-        android:layout_height="667dp"
+        android:layout_width="330dp"
+        android:layout_height="300dp"
         android:orientation="vertical"
         android:gravity="center_horizontal"
         android:layout_centerInParent="true"
+        android:background="@drawable/sdk_bg_termview"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
         >
 
-        <include
-            layout="@layout/sdk_ui_head_layout"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="182dp"
-            />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
+            <View
+                android:layout_width="3dp"
+                android:layout_height="14dp"
+                android:background="@color/c_FF892E"
+                />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_marginTop="14dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:background="@color/c_848484"
-            />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="@string/sdk_terms_title"
+                android:textColor="@color/c_2A2A2A"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="2dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginTop="12dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="9dp"
+            android:padding="7dp"
+            android:background="@drawable/sdk_bg_term_content"
             >
 
             <com.mw.base.widget.SWebView
                 android:id="@+id/sdk_terms_webview"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="100dp" />
+                android:layout_height="match_parent" />
 
         </RelativeLayout>
 
 
 
-       <!-- <LinearLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_marginTop="4dp"
-            android:gravity="center"
+            android:layout_height="32dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal"
-            android:layout_marginBottom="4dp"
+            android:layout_marginBottom="10dp"
             >
-            <CheckBox
-                android:id="@+id/gama_gama_start_term_cb1"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:background="@drawable/mw_term_checkbox_selector"
-                android:button="@null"
-                />
+            <Button
+                android:id="@+id/btn_term_close"
+                android:layout_width="94dp"
+                android:layout_height="32dp"
+                android:background="@drawable/sdk_bg_term_close"
+                android:text="@string/text_close"
+                android:textColor="@color/c_FF892E"
+                android:textSize="15sp" />
 
-            <TextView
-                android:id="@+id/gama_gama_start_term_tv1"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:layout_marginStart="4dp"
-                android:text="@string/gama_ui_term_port_read2"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/sp_19"/>
+            <Button
+                android:id="@+id/btn_term_agree"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_marginStart="12dp"
+                android:background="@drawable/sdk_bg_term_agree"
+                android:text="@string/text_i_read_agree"
+                android:textColor="@color/white_c"
+                android:textSize="15sp" />
+
+
         </LinearLayout>
 
 
-        <Button
-            android:id="@+id/sdk_terms_btn_confirm"
-            android:layout_width="320dp"
-            android:layout_height="40dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/sdk_btn_bg"
-            android:gravity="center"
-            android:text="@string/py_confire"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/sp_26" />-->
     </LinearLayout>
 
 
