@@ -58,7 +58,7 @@ public class SBaseWebView extends WebView {
         ws.setJavaScriptEnabled(true);
 
         ws.setAllowFileAccess(true);
-        ws.setAppCacheEnabled(true);
+//        ws.setAppCacheEnabled(true);
         ws.setCacheMode(WebSettings.LOAD_DEFAULT);
         ws.setDatabaseEnabled(true);
 
@@ -70,7 +70,7 @@ public class SBaseWebView extends WebView {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             ws.setAllowContentAccess(true);
         }
-        ws.setAppCachePath(getContext().getCacheDir().toString());
+//        ws.setAppCachePath(getContext().getCacheDir().toString());
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             ws.setAllowFileAccessFromFileURLs(true);
