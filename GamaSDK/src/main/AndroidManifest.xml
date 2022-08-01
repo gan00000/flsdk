@@ -156,6 +156,22 @@
 
         </service>
 
+        <!-- Set custom default icon. This is used when no icon is set for incoming notification messages.
+     See README(https://goo.gl/l4GJaQ) for more. -->
+<!--        <meta-data-->
+<!--            android:name="com.google.firebase.messaging.default_notification_icon"-->
+<!--            android:resource="@drawable/ic_stat_ic_notification" />-->
+        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more. -->
+<!--        <meta-data-->
+<!--            android:name="com.google.firebase.messaging.default_notification_color"-->
+<!--            android:resource="@color/colorAccent" />-->
+<!--        从 Android 8.0（API 级别 26）和更高版本开始，我们支持并推荐使用通知渠道。FCM 提供具有基本设置的默认通知渠道。如果您希望创建和使用自己的默认渠道，-->
+<!--        请将 default_notification_channel_id 设置为您的通知渠道对象的 ID（如下所示）；只要传入的消息未明确设置通知渠道，FCM 就会使用此值。如需了解详情，请参阅管理通知渠道。-->
+<!--        <meta-data-->
+<!--            android:name="com.google.firebase.messaging.default_notification_channel_id"-->
+<!--            android:value="@string/default_notification_channel_id" />-->
+
     </application>
 
     <!--需要添加以下配置 end-->
