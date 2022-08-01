@@ -31,6 +31,7 @@ import com.google.android.play.core.review.ReviewInfo;
 import com.google.android.play.core.review.ReviewManager;
 import com.google.android.play.core.review.ReviewManagerFactory;
 import com.mw.base.bean.SGameLanguage;
+import com.mw.base.bean.SLoginType;
 import com.mw.base.bean.SPayType;
 import com.mw.base.cfg.ConfigRequest;
 import com.mw.base.cfg.ResConfig;
@@ -550,6 +551,35 @@ public class BaseSdkImpl implements IMWSDK {
             }
         });
 
+
+    }
+
+    @Override
+    public void logout(Activity activity, ISdkCallBack iSdkCallBack) {
+
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                String previousLoginType = SdkUtil.getPreviousLoginType(activity);
+
+                if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GOOGLE, previousLoginType)) {//google
+
+                    if (iLogin != null && iLogin.getGoogleSignIn() != null) {
+                        iLogin.getGoogleSignIn().signOut();
+                    }
+
+                } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_LINE, previousLoginType)) {//line
+                } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_FB, previousLoginType)) {//fb
+                    if (sFacebookProxy != null) {
+                        sFacebookProxy.fbLogout(activity);
+                    }
+                }
+                if (iSdkCallBack != null){
+                    iSdkCallBack.success();
+                }
+            }
+        });
 
     }
 

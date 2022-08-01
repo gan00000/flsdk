@@ -32,29 +32,29 @@ public class Ad2RequestBean extends SGameBaseRequestBean {
     }
 
 
-    public void setValue(Context context) {
-
-        device_type = this.getDeviceType();
-        system_version = this.getSystemVersion();
-
-        user_id = this.getUserId();
-        game_code = this.getGameCode();
-        role_id = this.getRoleId();
-        role_name = this.getRoleName();
-        server_code = this.getServerCode();
-        server_name = this.getServerName();
-        game_name = ApkInfoUtil.getApplicationName(context);
-
-        String previousLoginType = SdkUtil.getPreviousLoginType(context);
-        if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_MG, previousLoginType)) {//自動登錄
-            AccountModel accountModel = SdkUtil.getLastLoginAccount(context);
-            if (accountModel != null){
-                user_name = accountModel.getAccount();
-            }
-
-        }
-        sigin = SStringUtil.toMd5(game_code + server_code + user_id + role_id + "FLYFUNGAME", true);
-    }
+//    public void setValue(Context context) {
+//
+//        device_type = this.getDeviceType();
+//        system_version = this.getSystemVersion();
+//
+//        user_id = this.getUserId();
+//        game_code = this.getGameCode();
+//        role_id = this.getRoleId();
+//        role_name = this.getRoleName();
+//        server_code = this.getServerCode();
+//        server_name = this.getServerName();
+//        game_name = ApkInfoUtil.getApplicationName(context);
+//
+//        String previousLoginType = SdkUtil.getPreviousLoginType(context);
+//        if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_MG, previousLoginType)) {//自動登錄
+//            AccountModel accountModel = SdkUtil.getLastLoginAccount(context);
+//            if (accountModel != null){
+//                user_name = accountModel.getAccount();
+//            }
+//
+//        }
+//        sigin = SStringUtil.toMd5(game_code + server_code + user_id + role_id + "FLYFUNGAME", true);
+//    }
 
 
 

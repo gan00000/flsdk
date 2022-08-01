@@ -23,6 +23,10 @@ public class DialogLoginImpl implements ILogin {
 //    private GamaTwitterLogin twitterLogin;
 
 
+    public SGoogleSignIn getGoogleSignIn() {
+        return sGoogleSignIn;
+    }
+
     @Override
     public void onCreate(Activity activity) {
 

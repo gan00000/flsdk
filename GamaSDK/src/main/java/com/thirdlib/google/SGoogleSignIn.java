@@ -227,10 +227,6 @@ public class SGoogleSignIn {
 
 	}
 
-	public void handleActivityDestroy(Context context) {
-		signOut();
-	}
-
 	private void initDialog() {  //初始化loading窗
 
 		if (mConnectionProgressDialog == null) {
@@ -302,17 +298,19 @@ public class SGoogleSignIn {
 	}
 	// [END signin]
 
-	private void signOut() {
+	public void signOut() {
 		// Firebase sign out
 //		mAuth.signOut();
 
 		// Google sign out
-		mGoogleSignInClient.signOut().addOnCompleteListener(activity,
-				new OnCompleteListener<Void>() {
-					@Override
-					public void onComplete(@NonNull Task<Void> task) {
-					}
-				});
+		if (mGoogleSignInClient != null) {
+			mGoogleSignInClient.signOut().addOnCompleteListener(activity,
+					new OnCompleteListener<Void>() {
+						@Override
+						public void onComplete(@NonNull Task<Void> task) {
+						}
+					});
+		}
 	}
 
 	private void revokeAccess() {
