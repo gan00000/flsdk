@@ -94,6 +94,7 @@ android {
         }
 
         debug {
+            signingConfig signingConfigs.mwrelease
         }
     }
     productFlavors {

@@ -83,6 +83,12 @@
                     android:layout_height="wrap_content"
                     android:text="分享url2，自己的链接" />
 
+                <Button
+                    android:id="@+id/logout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="登出" />
+
             </LinearLayout>
 
 
