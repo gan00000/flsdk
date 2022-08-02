@@ -15,10 +15,15 @@ public class ConfigBean {
     private VersionData allVersion;
     private List<VersionData> subVersion;
 
+    private UrlData url;
+
     public VersionData getAllVersion() {
         return allVersion;
     }
 
+    public UrlData getUrl() {
+        return url;
+    }
 
     public VersionData getSdkConfigLoginData(Context context){
 
@@ -61,6 +66,8 @@ public class ConfigBean {
         private boolean deleteAccount = false;
         private boolean showContract = true;
         private boolean showLogo = false;
+        private boolean showForgetPwd = true;
+        private boolean showNotice = false;
 
         public String getVersion() {
             return version;
@@ -140,6 +147,44 @@ public class ConfigBean {
 
         public void setShowLogo(boolean showLogo) {
             this.showLogo = showLogo;
+        }
+
+        public boolean isShowForgetPwd() {
+            return showForgetPwd;
+        }
+
+        public void setShowForgetPwd(boolean showForgetPwd) {
+            this.showForgetPwd = showForgetPwd;
+        }
+
+        public boolean isShowNotice() {
+            return showNotice;
+        }
+
+        public void setShowNotice(boolean showNotice) {
+            this.showNotice = showNotice;
+        }
+    }
+
+    public static class UrlData {
+
+        private String noticeUrl = "";//公告地址
+        private String agreementUrl = "";//服务条款地址
+
+        public String getNoticeUrl() {
+            return noticeUrl;
+        }
+
+        public void setNoticeUrl(String noticeUrl) {
+            this.noticeUrl = noticeUrl;
+        }
+
+        public String getAgreementUrl() {
+            return agreementUrl;
+        }
+
+        public void setAgreementUrl(String agreementUrl) {
+            this.agreementUrl = agreementUrl;
         }
     }
 }

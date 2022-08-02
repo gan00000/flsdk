@@ -284,6 +284,11 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
                     layout_delete_account.setVisibility(View.GONE);
 //                    layout_delete_account_parent.setVisibility(View.GONE);
                 }
+                if(!versionData.isShowForgetPwd()){
+                    loginMainGoFindPwd.setVisibility(View.GONE);
+                    loginMainGoFindPwd.setTag(100);
+                }
+
             }
         }
 
@@ -455,7 +460,12 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
         if (SLoginType.LOGIN_TYPE_MG.equals(currentAccountModel.getLoginType())){
             account = accountModel.getAccount();
             password = accountModel.getPassword();
-            loginMainGoFindPwd.setVisibility(VISIBLE);
+            Object tagObj = loginMainGoFindPwd.getTag();
+            if (tagObj != null && (int)tagObj == 100) {//这里是因为远程配置不显示
+                loginMainGoFindPwd.setVisibility(GONE);
+            }else {
+                loginMainGoFindPwd.setVisibility(VISIBLE);
+            }
             SdkUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
             pwdSdkInputEditTextView.setVisibility(View.VISIBLE);
 //                pwdSdkInputEditTextView.setPwdInputEnable(true);
