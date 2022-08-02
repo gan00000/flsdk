@@ -1,5 +1,6 @@
 package com.core.base.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -17,16 +18,16 @@ public class MarketUtil {
 
         优先通过商店打开，打不开就通过浏览器打开
     */
-    public static boolean openMarket(Context context) {
+    public static boolean openMarket(Context context, String packageName) {
 
         //这里开始执行一个应用市场跳转逻辑，默认this为Context上下文对象
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse("market://details?id=" + context.getPackageName())); //跳转到应用市场，非Google Play市场一般情况也实现了这个接口
+        intent.setData(Uri.parse("market://details?id=" + packageName)); //跳转到应用市场，非Google Play市场一般情况也实现了这个接口
         intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
 
         //这里开始执行一个应用市场跳转逻辑，默认this为Context上下文对象
         Intent intent2 = new Intent(Intent.ACTION_VIEW);
-        intent2.setData(Uri.parse("market://details?id=" + context.getPackageName())); //跳转到应用市场，非Google Play市场一般情况也实现了这个接口
+        intent2.setData(Uri.parse("market://details?id=" + packageName)); //跳转到应用市场，非Google Play市场一般情况也实现了这个接口
         intent2.setPackage("com.android.vending");   //设置市场商店为Google商店
         intent2.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
 
@@ -41,7 +42,7 @@ public class MarketUtil {
             context.startActivity(intent);
 
         } else { //没有应用市场，我们通过浏览器跳转到Google Play
-            intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=" + context.getPackageName()));
+            intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=" + packageName));
             //这里存在一个极端情况就是有些用户浏览器也没有，再判断一次
             if (intent.resolveActivity(context.getPackageManager()) != null) { //有浏览器
                 context.startActivity(intent);
@@ -52,4 +53,14 @@ public class MarketUtil {
         }
         return true;
     }
+
+
+//    private void toGooglePaly(Activity activity,String packageName) {
+//        try {
+//            activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + packageName)));
+//        } catch (android.content.ActivityNotFoundException anfe) {
+//
+//            activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("https://play.google.com/store/apps/details?id=" + packageName)));
+//        }
+//    }
 }

@@ -13,8 +13,10 @@ import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 import com.core.base.utils.AppUtil;
+import com.core.base.utils.MarketUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 
@@ -71,7 +73,7 @@ public class BaseWebViewClient extends WebViewClient {
 
         PL.i("overrideUrlLoading url:" + url);
 
-        if (url.startsWith("sms:")) {
+        /*if (url.startsWith("sms:")) {
             try {
                 url = URLDecoder.decode(url, "utf-8");
                 String[] str = url.split("\\?");
@@ -92,16 +94,27 @@ public class BaseWebViewClient extends WebViewClient {
 
             AppUtil.openInOsWebApp(activity, url);
 
-        } else if (url.toLowerCase().startsWith("http") || url.toLowerCase().startsWith("https") || url.toLowerCase().startsWith("file")) {
+        } else */if (url.toLowerCase().startsWith("http:") || url.toLowerCase().startsWith("https:") || url.toLowerCase().startsWith("file")) {
             webView.loadUrl(url);
         } else {
+            Intent intent;
+            String packageName = "";
             try {
-                Uri uri = Uri.parse(url);
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                if (url.startsWith("intent://")) { //MyCard、Line
+                    intent = Intent.parseUri(url, Intent.URI_INTENT_SCHEME);
+                    packageName = intent.getPackage();
+                } else { //第三方支付
+                    intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                }
                 activity.startActivity(intent);
-            } catch (Exception e) {
-                e.printStackTrace();
-                webView.loadUrl(url);
+
+            } catch (Exception ex) {
+//                handleCatch(e);
+                if (SStringUtil.isNotEmpty(packageName)) {
+                    MarketUtil.openMarket(activity, packageName);
+                }else{
+                    Toast.makeText(activity, ex.getMessage(), Toast.LENGTH_LONG).show();
+                }
             }
         }
         return true;
