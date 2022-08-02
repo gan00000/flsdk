@@ -3,17 +3,17 @@ package com.mw.sdk.ads;
 public class EventConstant {
 
     public enum EventName{
-        APP_OPEN,
-        CHECK_PERMISSIONS,
-        CHECK_UPDATE,
-        CHECK_RESOURCES,
-        OPEN_LOGIN_SCREEN,
-        LOGIN_SUCCESS,
-        REGISTER_SUCCESS,
-        SELECT_SERVER,
-        CREATE_ROLE,
-        START_GUIDE,
-        COMPLETE_GUIDE,
+        APP_OPEN, //打开app
+        CHECK_PERMISSIONS,//检查权限
+        CHECK_UPDATE,//检查更新
+        CHECK_RESOURCES,//检查资源
+        OPEN_LOGIN_SCREEN,//打开sdk登录页面
+        LOGIN_SUCCESS,//登录成功
+        REGISTER_SUCCESS,//注册成功
+        SELECT_SERVER,//选择服务器
+        CREATE_ROLE,//创建角色
+        START_GUIDE,//新手引导
+        COMPLETE_GUIDE,//完成新手引导
 
         /**
          * 首储事件
