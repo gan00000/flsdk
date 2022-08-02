@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="330dp"
+        android:layout_height="265dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:background="@color/white_c"
+        android:layout_centerInParent="true"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        >
+        <View
+            android:layout_width="3dp"
+            android:layout_height="14dp"
+            android:background="@color/c_FF892E"
+            android:layout_centerVertical="true"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="4dp"
+            android:text="@string/text_phone_bind"
+            android:textColor="@color/c_2A2A2A"
+            android:textStyle="bold"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/icon_close_3"
+            />
+
+    </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_marginTop="28dp"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:background="@drawable/sdk_bg_input2"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="18dp"
+                    android:gravity="center_vertical"
+                    android:id="@+id/tv_area_code"
+                    android:text="@string/text_phone_area_code"
+                    android:textColor="@color/c_B8B8B8"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="12dp"
+                    android:id="@+id/iv_area_code_select"
+                    android:src="@mipmap/icon_down_list2"
+                    />
+
+
+            </LinearLayout>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/sdk_bg_input2"
+                android:layout_marginStart="8dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:inputType="phone"
+                android:hint="@string/text_phone_input_hint"
+                android:id="@+id/et_input_phone_number"
+                android:textSize="14sp"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:textColor="@color/c_606060"
+                android:textColorHint="@color/c_B8B8B8"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp"
+            >
+
+            <EditText
+                android:layout_width="180dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/sdk_bg_input2"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:gravity="center"
+                android:maxLines="1"
+                android:inputType="number"
+                android:hint="@string/py_msg_vfcode_hint"
+                android:id="@+id/et_input_vf_code"
+                android:textSize="14sp"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:textColor="@color/c_606060"
+                android:textColorHint="@color/c_B8B8B8"
+                />
+
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/sdk_bg_vfcode"
+                android:gravity="center"
+                android:id="@+id/btn_find_get_vfcode"
+                android:text="@string/py_register_account_get_vfcode"
+                android:textColor="@color/c_FF892E"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="34dp"
+            android:background="@drawable/mw_btn_bg_2"
+            android:gravity="center"
+            android:text="@string/text_confire"
+            android:textColor="@android:color/white"
+            android:textSize="17sp"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>
