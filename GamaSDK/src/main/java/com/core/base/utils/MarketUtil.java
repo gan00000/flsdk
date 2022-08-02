@@ -23,13 +23,13 @@ public class MarketUtil {
         //这里开始执行一个应用市场跳转逻辑，默认this为Context上下文对象
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse("market://details?id=" + packageName)); //跳转到应用市场，非Google Play市场一般情况也实现了这个接口
-        intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         //这里开始执行一个应用市场跳转逻辑，默认this为Context上下文对象
         Intent intent2 = new Intent(Intent.ACTION_VIEW);
         intent2.setData(Uri.parse("market://details?id=" + packageName)); //跳转到应用市场，非Google Play市场一般情况也实现了这个接口
         intent2.setPackage("com.android.vending");   //设置市场商店为Google商店
-        intent2.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
+        intent2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         //存在手机里没安装应用市场的情况，跳转会包异常，做一个接收判断
         if (intent2.resolveActivity(context.getPackageManager()) != null){
@@ -54,6 +54,25 @@ public class MarketUtil {
         return true;
     }
 
+    public static void toGooglePaly(Activity activity, String googlePayUrl) {
+
+        if (SStringUtil.isNotEmpty(googlePayUrl) && googlePayUrl.startsWith("https://play.google.com/store/apps/details?id=")){
+            try {
+                String marketUrl = googlePayUrl.replace("https://play.google.com/store/apps/details?id=","market://details?id=");
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(marketUrl)); //跳转到应用市场，非Google Play市场一般情况也实现了这个接口
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                //存在手机里没安装应用市场的情况，跳转会包异常，做一个接收判断
+                if (intent.resolveActivity(activity.getPackageManager()) != null){
+                    activity.startActivity(intent);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
 
 //    private void toGooglePaly(Activity activity,String packageName) {
 //        try {

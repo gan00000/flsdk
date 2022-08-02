@@ -47,15 +47,15 @@ public class BaseWebViewClient extends WebViewClient {
      */
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
-        overrideUrlLoading(view,url);
-        return true;
+        return overrideUrlLoading(view,url);
+//        return true;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-        overrideUrlLoading(view,request.getUrl().toString());
-        return true;
+        return overrideUrlLoading(view,request.getUrl().toString());
+//        return true;
     }
 
     @Override
@@ -95,7 +95,13 @@ public class BaseWebViewClient extends WebViewClient {
             AppUtil.openInOsWebApp(activity, url);
 
         } else */if (url.toLowerCase().startsWith("http:") || url.toLowerCase().startsWith("https:") || url.toLowerCase().startsWith("file")) {
-            webView.loadUrl(url);
+
+            if (url.startsWith("https://play.google.com/store/apps/details?id=")){
+                MarketUtil.toGooglePaly(activity, url);
+            }else{
+                webView.loadUrl(url);
+            }
+            return true;
         } else {
             Intent intent;
             String packageName = "";
@@ -106,14 +112,16 @@ public class BaseWebViewClient extends WebViewClient {
                 } else { //第三方支付
                     intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 }
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 activity.startActivity(intent);
 
             } catch (Exception ex) {
-//                handleCatch(e);
+
                 if (SStringUtil.isNotEmpty(packageName)) {
                     MarketUtil.openMarket(activity, packageName);
                 }else{
-                    Toast.makeText(activity, ex.getMessage(), Toast.LENGTH_LONG).show();
+//                    Toast.makeText(activity, ex.getMessage(), Toast.LENGTH_LONG).show();
+                    PL.e("overrideUrlLoading error:" + ex.getMessage());
                 }
             }
         }
