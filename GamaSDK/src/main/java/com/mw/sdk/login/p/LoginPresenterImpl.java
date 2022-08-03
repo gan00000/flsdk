@@ -1074,6 +1074,8 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         SdkEventLogger.trackinLoginEvent(mActivity, loginResponse);
                     } else if (SStringUtil.isEqual(BaseResponseModel.SUCCESS_CODE_REG, loginResponse.getCode())) {
                         SdkEventLogger.trackinRegisterEvent(mActivity, loginResponse);
+
+                        SdkEventLogger.trackinLoginEvent(mActivity, loginResponse);//註冊後直接登入
                     }
                 }
                 if(SLoginType.LOGIN_TYPE_FB.equals(loginType) && faceBookUser != null) {
