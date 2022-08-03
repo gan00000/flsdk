@@ -84,6 +84,7 @@ public class SLoginResponse extends BaseResponseModel {
 
         private boolean isBind;//是否绑定账号
         private boolean isBindPhone;//是否绑定手机
+        private String telephone;
 
         public boolean isBindPhone() {
             return isBindPhone;
@@ -228,6 +229,14 @@ public class SLoginResponse extends BaseResponseModel {
 
         public String getBeLinked() {
             return beLinked;
+        }
+
+        public String getTelephone() {
+            return telephone;
+        }
+
+        public void setTelephone(String telephone) {
+            this.telephone = telephone;
         }
 
         @Override

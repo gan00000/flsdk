@@ -14,18 +14,13 @@
 	"text": "澳門 +853",
 	"pattern": "^6\\d{7}$"
 }, {
-	"key": "cn",
-	"value": "86",
-	"text": "中國大陸 +86",
-	"pattern": "^1\\d{10}$"
-}, {
+ 	"key": "ml",
+ 	"value": "60",
+ 	"text": "Malaysia +60",
+ 	"pattern": "^1\\d{8,9}$"
+ }, {
 	"key": "sjp",
 	"value": "65",
 	"text": "Singapore +65",
 	"pattern": "^[13689]\\d{6,7}$"
-}, {
-	"key": "ml",
-	"value": "60",
-	"text": "Malaysia +60",
-	"pattern": "^1\\d{8,9}$"
 }]

@@ -7,13 +7,16 @@ import android.content.DialogInterface;
 import com.core.base.utils.FileUtil;
 import com.google.gson.Gson;
 import com.mw.base.bean.PhoneInfo;
+import com.mw.base.utils.SdkUtil;
+
+import java.util.List;
 
 public class PhoneAreaCodeDialogHelper {
 
     //区域json
     private String areaJson;
     //区域bean列表
-    private PhoneInfo[] areaBeanList;
+    List<PhoneInfo> areaBeanList;
     //已选中的区域bean
     private PhoneInfo selectedBean;
 
@@ -29,7 +32,7 @@ public class PhoneAreaCodeDialogHelper {
 
         this.areaCodeSelectCallback = areaCodeSelectCallback;
 
-        if(areaBeanList == null || areaBeanList.length < 1) {
+        if(areaBeanList == null || areaBeanList.isEmpty()) {
             /*GamaAreaInfoRequestTask task = new GamaAreaInfoRequestTask(getContext());
             task.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(), "Loading..."));
             task.setReqCallBack(new ISReqCallBack() {
@@ -79,9 +82,7 @@ public class PhoneAreaCodeDialogHelper {
             });
             task.excute();*/
 
-            areaJson = FileUtil.readAssetsTxtFile(activity.getApplicationContext(), "mwsdk/areaInfo");
-            Gson gson = new Gson();
-            areaBeanList = gson.fromJson(areaJson, PhoneInfo[].class);
+            areaBeanList = SdkUtil.getPhoneInfo(activity);
             showAreaDialog();
         } else {
             showAreaDialog();
@@ -95,16 +96,16 @@ public class PhoneAreaCodeDialogHelper {
             return;
         }
 
-        final String[] areaList = new String[areaBeanList.length];
-        for(int i = 0; i < areaBeanList.length; i++) {
-            areaList[i] = areaBeanList[i].getText();
+        final String[] areaList = new String[areaBeanList.size()];
+        for(int i = 0; i < areaBeanList.size(); i++) {
+            areaList[i] = areaBeanList.get(i).getText();
         }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(activity)
                 .setItems(areaList, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        selectedBean = areaBeanList[which];
+                        selectedBean = areaBeanList.get(which);
                         if (areaCodeSelectCallback != null){
                             areaCodeSelectCallback.select(selectedBean);
                         }

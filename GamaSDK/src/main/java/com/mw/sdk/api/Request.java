@@ -3,6 +3,7 @@ package com.mw.sdk.api;
 import android.app.Activity;
 import android.content.Context;
 
+import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.ISReqCallBack;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.SStringUtil;
@@ -29,21 +30,18 @@ public class Request {
         if (needDialog) {
             baseLoginRequestTask.setLoadDialog(DialogUtil.createLoadingDialog(context, "Loading..."));
         }
-        baseLoginRequestTask.setReqCallBack(new ISReqCallBack<SLoginResponse>() {
+        baseLoginRequestTask.setReqCallBack(new ISReqCallBack<BaseResponseModel>() {
             @Override
-            public void success(SLoginResponse sLoginResponse, String rawResult) {
-                if (sLoginResponse != null) {
-                    if (sLoginResponse.isRequestSuccess()) {
-                        if (SStringUtil.isNotEmpty(sLoginResponse.getMessage())){
-                            ToastUtils.toast(context, sLoginResponse.getMessage() + "");
-                        }
+            public void success(BaseResponseModel responseModel, String rawResult) {
+                if (responseModel != null) {
+                    if (responseModel.isRequestSuccess()) {
                         if (iSdkCallBack != null){
                             iSdkCallBack.success();
                         }
 
                     }else{
 
-                        ToastUtils.toast(context, sLoginResponse.getMessage() + "");
+                        ToastUtils.toast(context, responseModel.getMessage() + "");
                         if (iSdkCallBack != null){
                             iSdkCallBack.failure();
                         }
@@ -75,7 +73,7 @@ public class Request {
             public void cancel() {}
 
         });
-        baseLoginRequestTask.excute(SLoginResponse.class);
+        baseLoginRequestTask.excute(BaseResponseModel.class);
     }
 
     public static void bindPhone(Context context, boolean needDialog, String areaCode, String telephone,String vfCode, SFCallBack sfCallBack) {
@@ -91,21 +89,18 @@ public class Request {
         if (needDialog) {
             baseLoginRequestTask.setLoadDialog(DialogUtil.createLoadingDialog(context, "Loading..."));
         }
-        baseLoginRequestTask.setReqCallBack(new ISReqCallBack<SLoginResponse>() {
+        baseLoginRequestTask.setReqCallBack(new ISReqCallBack<BaseResponseModel>() {
             @Override
-            public void success(SLoginResponse sLoginResponse, String rawResult) {
-                if (sLoginResponse != null) {
-                    if (sLoginResponse.isRequestSuccess()) {
-                        if (SStringUtil.isNotEmpty(sLoginResponse.getMessage())){
-                            ToastUtils.toast(context, sLoginResponse.getMessage() + "");
-                        }
+            public void success(BaseResponseModel responseModel, String rawResult) {
+                if (responseModel != null) {
+                    if (responseModel.isRequestSuccess()) {
                         if (sfCallBack != null){
                             sfCallBack.success(rawResult,rawResult);
                         }
 
                     }else{
 
-                        ToastUtils.toast(context, sLoginResponse.getMessage() + "");
+                        ToastUtils.toast(context, responseModel.getMessage() + "");
                         if (sfCallBack != null){
                             sfCallBack.fail(null,rawResult);
                         }
@@ -137,7 +132,7 @@ public class Request {
             public void cancel() {}
 
         });
-        baseLoginRequestTask.excute(SLoginResponse.class);
+        baseLoginRequestTask.excute(BaseResponseModel.class);
     }
 
 }

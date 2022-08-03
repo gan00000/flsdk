@@ -10,11 +10,13 @@ import android.widget.ImageView;
 
 import com.core.base.cipher.DESCipher;
 import com.core.base.utils.ApkInfoUtil;
+import com.core.base.utils.FileUtil;
 import com.core.base.utils.GamaTimeUtil;
 import com.core.base.utils.JsonUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.SPUtil;
 import com.core.base.utils.SStringUtil;
+import com.mw.base.bean.PhoneInfo;
 import com.mw.base.bean.SGameLanguage;
 import com.mw.base.bean.SLoginType;
 import com.mw.base.cfg.ConfigBean;
@@ -30,6 +32,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -393,7 +396,7 @@ public class SdkUtil {
         SPUtil.saveSimpleInfo(context, SDK_SP_FILE, SDK_LOGIN_SERVER_RETURN_DATA,data);
     }
 
-    public static SLoginResponse getSdkLoginData(Context context){
+    public static SLoginResponse getCurrentUserLoginResponse(Context context){
         String loginResult = SPUtil.getSimpleString(context, SDK_SP_FILE, SDK_LOGIN_SERVER_RETURN_DATA);
         loginResult = decryptText(loginResult);//进行解密
         if (SStringUtil.isEmpty(loginResult)){
@@ -410,7 +413,7 @@ public class SdkUtil {
     }
 
     public static boolean isLogin(Context context){
-        SLoginResponse sLoginResponse = getSdkLoginData(context);
+        SLoginResponse sLoginResponse = getCurrentUserLoginResponse(context);
         if (sLoginResponse != null && sLoginResponse.isRequestSuccess() && sLoginResponse.getData()!= null && SStringUtil.isNotEmpty(sLoginResponse.getData().getUserId())){
             return true;
         }
@@ -422,7 +425,7 @@ public class SdkUtil {
      * 获取当次登入的userId
      */
     public static String getUid(Context context){
-        SLoginResponse sLoginResponse = getSdkLoginData(context);
+        SLoginResponse sLoginResponse = getCurrentUserLoginResponse(context);
         if (sLoginResponse != null && sLoginResponse.isRequestSuccess() && sLoginResponse.getData()!= null && SStringUtil.isNotEmpty(sLoginResponse.getData().getUserId())){
             return sLoginResponse.getData().getUserId();
         }
@@ -430,7 +433,7 @@ public class SdkUtil {
     }
 
     public static String getSdkTimestamp(Context context){
-        SLoginResponse sLoginResponse = getSdkLoginData(context);
+        SLoginResponse sLoginResponse = getCurrentUserLoginResponse(context);
         if (sLoginResponse != null && sLoginResponse.isRequestSuccess() && sLoginResponse.getData()!= null && SStringUtil.isNotEmpty(sLoginResponse.getData().getTimestamp())){
             return sLoginResponse.getData().getTimestamp();
         }
@@ -443,7 +446,7 @@ public class SdkUtil {
      * @return
      */
     public static String getSdkAccessToken(Context context){
-        SLoginResponse sLoginResponse = getSdkLoginData(context);
+        SLoginResponse sLoginResponse = getCurrentUserLoginResponse(context);
         if (sLoginResponse != null && sLoginResponse.isRequestSuccess() && sLoginResponse.getData()!= null && SStringUtil.isNotEmpty(sLoginResponse.getData().getToken())){
             return sLoginResponse.getData().getToken();
         }
@@ -1025,5 +1028,17 @@ public class SdkUtil {
             return true;
         }
         return false;
+    }
+
+    public static List<PhoneInfo> getPhoneInfo(Context context){
+
+        String areaJson = FileUtil.readAssetsTxtFile(context, "mwsdk/areaInfo");
+        if (SStringUtil.isEmpty(areaJson)){
+            return null;
+        }
+        Gson gson = new Gson();
+        PhoneInfo[] areaBeanList = gson.fromJson(areaJson, PhoneInfo[].class);
+        List<PhoneInfo> phoneInfos = Arrays.asList(areaBeanList);
+        return phoneInfos;
     }
 }

@@ -5,8 +5,10 @@ import android.content.Context;
 import com.core.base.request.AbsHttpRequest;
 import com.core.base.bean.BaseReqeustBean;
 import com.core.base.utils.SStringUtil;
+import com.core.base.utils.ToastUtils;
 import com.gama.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
 import com.mw.base.cfg.ResConfig;
+import com.mw.sdk.R;
 
 /**
  * Created by gan on 2017/2/23.
@@ -40,7 +42,7 @@ public class GoogleCreateOrderReqTask extends AbsHttpRequest {
 
     @Override
     public void onTimeout(String result) {
-
+        ToastUtils.toast(context, R.string.py_error_occur);
     }
 
     @Override

@@ -12,6 +12,7 @@ import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
 import com.mw.base.bean.SSdkBaseRequestBean;
 import com.mw.base.cfg.ResConfig;
+import com.mw.sdk.R;
 
 /**
  * <p>Title: BaseLoginRequestTask</p>
@@ -84,7 +85,7 @@ public class BaseLoginRequestTask extends AbsHttpRequest {
 	@Override
 	public void onTimeout(String result) {
 		PL.i("onTimeout");
-		ToastUtils.toast(context, "connect timeout, please try again");
+		ToastUtils.toast(context, R.string.py_error_occur);
 	}
 
 	@Override
