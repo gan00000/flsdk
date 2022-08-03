@@ -734,14 +734,16 @@ public class BaseSdkImpl implements IMWSDK {
     @Override
     public void showBindPhoneView(Activity activity, ISdkCallBack iSdkCallBack) {
 
-        if (bindPhoneDialog != null){
-            bindPhoneDialog.dismiss();
+        if (SdkUtil.isVersion2(activity)) {
+            if (bindPhoneDialog != null){
+                bindPhoneDialog.dismiss();
+            }
+            bindPhoneDialog = new SBaseDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
+            AccountBindPhoneLayout accountBindPhoneLayout = new AccountBindPhoneLayout(activity);
+            accountBindPhoneLayout.setsBaseDialog(bindPhoneDialog);
+            bindPhoneDialog.setContentView(accountBindPhoneLayout);
+            bindPhoneDialog.show();
         }
-        bindPhoneDialog = new SBaseDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
-        AccountBindPhoneLayout accountBindPhoneLayout = new AccountBindPhoneLayout(activity);
-        accountBindPhoneLayout.setsBaseDialog(bindPhoneDialog);
-        bindPhoneDialog.setContentView(accountBindPhoneLayout);
-        bindPhoneDialog.show();
 
     }
 
