@@ -42,12 +42,51 @@ public class ConfigRequest{
             @Override
             public void success(Object o, String rawResult) {
 
-                PL.i("cfgFileRequest:" + rawResult);
+                PL.i("requestBaseCfg:" + rawResult);
 
                 if (TextUtils.isEmpty(rawResult)){
                     return;
                 }
                 SdkUtil.saveSdkCfg(context,rawResult);
+            }
+
+            @Override
+            public void timeout(String code) {
+
+            }
+
+            @Override
+            public void noData() {
+
+            }
+
+            @Override
+            public void cancel() {
+
+            }
+        });
+        cfgFileRequest.excute();
+    }
+
+    public static void requestAreaCodeInfo(final Context context){
+
+        CfgFileRequest cfgFileRequest = new CfgFileRequest(context);
+        BaseReqeustBean baseReqeustBean = new BaseReqeustBean(context);
+
+        String configUrl = ResConfig.getCdnPreferredUrl(context) + "config/areaInfo.json?v=" + System.currentTimeMillis();
+        baseReqeustBean.setCompleteUrl(configUrl);
+
+        cfgFileRequest.setBaseReqeustBean(baseReqeustBean);
+        cfgFileRequest.setReqCallBack(new ISReqCallBack() {
+            @Override
+            public void success(Object o, String rawResult) {
+
+                PL.i("requestAreaCodeInfo:" + rawResult);
+
+                if (TextUtils.isEmpty(rawResult)){
+                    return;
+                }
+                SdkUtil.saveAreaCodeInfo(context,rawResult);
             }
 
             @Override

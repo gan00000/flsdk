@@ -1045,7 +1045,10 @@ public class SdkUtil {
 
     public static List<PhoneInfo> getPhoneInfo(Context context){
 
-        String areaJson = FileUtil.readAssetsTxtFile(context, "mwsdk/areaInfo");
+        String areaJson = getAreaCodeInfo(context);//先读取远程下载
+        if (SStringUtil.isEmpty(areaJson)){
+            areaJson = FileUtil.readAssetsTxtFile(context, "mwsdk/areaInfo");
+        }
         if (SStringUtil.isEmpty(areaJson)){
             return null;
         }
@@ -1054,4 +1057,13 @@ public class SdkUtil {
         List<PhoneInfo> phoneInfos = Arrays.asList(areaBeanList);
         return phoneInfos;
     }
+
+    private static final String KEY_AREA_CODE_INFO = "KEY_AREA_CODE_INFO";
+    public static void saveAreaCodeInfo(Context context, String areaCodeInfo) {
+        SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE, KEY_AREA_CODE_INFO, areaCodeInfo);
+    }
+    public static String getAreaCodeInfo(Context context) {
+        return SPUtil.getSimpleString(context, SdkUtil.SDK_SP_FILE, KEY_AREA_CODE_INFO);
+    }
+
 }

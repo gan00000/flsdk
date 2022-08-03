@@ -190,7 +190,8 @@ public class BaseSdkImpl implements IMWSDK {
                     }
                 });
 
-                ConfigRequest.requestBaseCfg(activity);//加载配置
+                ConfigRequest.requestBaseCfg(activity.getApplicationContext());//加载配置
+                ConfigRequest.requestAreaCodeInfo(activity.getApplicationContext());
 
                 if (!isInitSdk) {
                     initSDK(activity, SGameLanguage.zh_TW);
