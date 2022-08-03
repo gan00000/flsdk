@@ -40,6 +40,7 @@ import com.mw.base.utils.SdkUtil;
 import com.mw.base.widget.SWebView;
 import com.mw.sdk.BuildConfig;
 import com.mw.sdk.R;
+import com.mw.sdk.SBaseDialog;
 import com.mw.sdk.SWebViewDialog;
 import com.mw.sdk.ads.EventConstant;
 import com.mw.sdk.ads.SdkEventLogger;
@@ -48,6 +49,7 @@ import com.mw.sdk.constant.RequestCode;
 import com.mw.sdk.login.DialogLoginImpl;
 import com.mw.sdk.login.ILogin;
 import com.mw.sdk.login.ILoginCallBack;
+import com.mw.sdk.login.widget.v2.AccountBindPhoneLayout;
 import com.mw.sdk.social.share.ShareUtil;
 import com.thirdlib.facebook.SFacebookProxy;
 
@@ -70,6 +72,8 @@ public class BaseSdkImpl implements IMWSDK {
 
     protected SWebViewDialog csSWebViewDialog;
     protected SWebViewDialog otherPayWebViewDialog;
+
+    protected SBaseDialog bindPhoneDialog;
 
     private IPay iPay;
     protected IPayListener iPayListener;
@@ -726,6 +730,20 @@ public class BaseSdkImpl implements IMWSDK {
 
     }
 
+
+    @Override
+    public void showBindPhoneView(Activity activity, ISdkCallBack iSdkCallBack) {
+
+        if (bindPhoneDialog != null){
+            bindPhoneDialog.dismiss();
+        }
+        bindPhoneDialog = new SBaseDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
+        AccountBindPhoneLayout accountBindPhoneLayout = new AccountBindPhoneLayout(activity);
+        accountBindPhoneLayout.setsBaseDialog(bindPhoneDialog);
+        bindPhoneDialog.setContentView(accountBindPhoneLayout);
+        bindPhoneDialog.show();
+
+    }
 
     @SuppressLint("JavascriptInterface")
     private void doWebPay(Activity activity, GooglePayCreateOrderIdReqBean bean) {

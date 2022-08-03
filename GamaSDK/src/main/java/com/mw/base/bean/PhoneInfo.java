@@ -1,6 +1,6 @@
 package com.mw.base.bean;
 
-public class GamaAreaInfoBean {
+public class PhoneInfo {
     private String key;
     private String value;
     private String text;

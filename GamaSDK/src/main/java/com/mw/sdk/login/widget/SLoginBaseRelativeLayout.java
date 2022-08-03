@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.core.base.utils.PL;
 import com.core.base.utils.ToastUtils;
+import com.mw.sdk.SBaseDialog;
 import com.mw.sdk.SBaseRelativeLayout;
 import com.mw.base.utils.Localization;
 import com.mw.sdk.login.SLoginDialogV2;
@@ -27,6 +28,7 @@ public abstract class SLoginBaseRelativeLayout extends SBaseRelativeLayout {
     LayoutInflater inflater;
 
     protected SLoginDialogV2 sLoginDialogv2;
+    protected SBaseDialog sBaseDialog;
 
     protected View backView;
     protected TextView titleTextView;
@@ -104,6 +106,14 @@ public abstract class SLoginBaseRelativeLayout extends SBaseRelativeLayout {
     public void setLoginDialogV2(SLoginDialogV2 sLoginDialog) {
         this.sLoginDialogv2 = sLoginDialog;
         onSetDialog();
+    }
+
+    public SBaseDialog getsBaseDialog() {
+        return sBaseDialog;
+    }
+
+    public void setsBaseDialog(SBaseDialog sBaseDialog) {
+        this.sBaseDialog = sBaseDialog;
     }
 
     /**

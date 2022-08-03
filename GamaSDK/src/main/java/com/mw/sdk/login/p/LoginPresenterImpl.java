@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.view.View;
@@ -15,15 +13,13 @@ import androidx.fragment.app.Fragment;
 import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.ISReqCallBack;
 import com.core.base.callback.SFCallBack;
-import com.core.base.utils.ApkInfoUtil;
-import com.core.base.utils.BitmapUtil;
 import com.core.base.utils.FileUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
 import com.facebook.AccessToken;
 import com.facebook.internal.ImageRequest;
-import com.mw.base.bean.GamaAreaInfoBean;
+import com.mw.base.bean.PhoneInfo;
 import com.mw.base.bean.SLoginType;
 import com.mw.base.cfg.ResConfig;
 import com.mw.base.utils.SdkUtil;
@@ -99,9 +95,9 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     //区域json
     private String areaJson;
     //区域bean列表
-    private GamaAreaInfoBean[] areaBeanList;
+    private PhoneInfo[] areaBeanList;
     //已选中的区域bean
-    private GamaAreaInfoBean selectedBean;
+    private PhoneInfo selectedBean;
 
     int count = 3;
 
@@ -1407,7 +1403,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
             areaJson = FileUtil.readAssetsTxtFile(getContext(), "mwsdk/areaInfo");
             Gson gson = new Gson();
-            areaBeanList = gson.fromJson(areaJson, GamaAreaInfoBean[].class);
+            areaBeanList = gson.fromJson(areaJson, PhoneInfo[].class);
             showAreaDialog();
         } else {
             showAreaDialog();
