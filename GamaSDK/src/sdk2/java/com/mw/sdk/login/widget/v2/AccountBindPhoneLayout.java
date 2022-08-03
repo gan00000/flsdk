@@ -2,6 +2,7 @@ package com.mw.sdk.login.widget.v2;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,11 +15,18 @@ import com.core.base.callback.SFCallBack;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
 import com.mw.base.bean.PhoneInfo;
+import com.mw.base.utils.SdkUtil;
 import com.mw.sdk.R;
+import com.mw.sdk.SBaseRelativeLayout;
 import com.mw.sdk.api.Request;
 import com.mw.sdk.login.PhoneAreaCodeDialogHelper;
+import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.mw.sdk.out.ISdkCallBack;
+
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by GanYuanrong on 2017/2/6.
@@ -45,6 +53,14 @@ public class AccountBindPhoneLayout extends SLoginBaseRelativeLayout {
     private EditText et_input_phone_number_2;
 
     private PhoneAreaCodeDialogHelper phoneAreaCodeDialogHelper;
+    private PhoneInfo currentPhoneInfo;
+    private static final int TIME_OUT_SECONDS = 60;
+
+    private Timer requestPhoneVfcodeTimer;
+    /**
+     * 剩余倒数时间
+     */
+    private int resetTime;
 
     public AccountBindPhoneLayout(Context context) {
         super(context);
@@ -83,7 +99,28 @@ public class AccountBindPhoneLayout extends SLoginBaseRelativeLayout {
         ll_has_bind_view = contentView.findViewById(R.id.ll_has_bind_view);
         tv_area_code_2 = contentView.findViewById(R.id.tv_area_code_2);
         et_input_phone_number_2 = contentView.findViewById(R.id.et_input_phone_number_2);
+        et_input_phone_number_2.setEnabled(false);
 
+        List<PhoneInfo> phoneInfos = SdkUtil.getPhoneInfo(getContext());
+        if (phoneInfos != null && !phoneInfos.isEmpty()){
+            currentPhoneInfo = phoneInfos.get(0);
+            tv_area_code.setText(currentPhoneInfo.getValue());
+        }
+
+        SLoginResponse sLoginResponse = SdkUtil.getCurrentUserLoginResponse(getContext());
+        if (sLoginResponse != null && sLoginResponse.getData() != null) {
+            if (sLoginResponse.getData().isBindPhone()){
+                ll_bind_view.setVisibility(GONE);
+                ll_has_bind_view.setVisibility(VISIBLE);
+
+                String tel = sLoginResponse.getData().getTelephone();
+                String[] tels = tel.split("-");
+                if (tels.length > 1){
+                    tv_area_code_2.setText(tels[0]);
+                    et_input_phone_number_2.setText(tels[1]);
+                }
+            }
+        }
 
         iv_bind_phone_close.setOnClickListener(new OnClickListener() {
             @Override
@@ -105,6 +142,7 @@ public class AccountBindPhoneLayout extends SLoginBaseRelativeLayout {
                 phoneAreaCodeDialogHelper.showPhoneAreaCodeDialog(new PhoneAreaCodeDialogHelper.AreaCodeSelectCallback() {
                     @Override
                     public void select(PhoneInfo phoneInfo) {
+                        currentPhoneInfo = phoneInfo;
                         tv_area_code.setText(phoneInfo.getValue());
                     }
                 });
@@ -126,10 +164,21 @@ public class AccountBindPhoneLayout extends SLoginBaseRelativeLayout {
                     ToastUtils.toast(getContext(),R.string.text_phone_not_empty);
                     return;
                 }
+
+                if (currentPhoneInfo == null){
+                    return;
+                }
+
+                if (!phone.matches(currentPhoneInfo.getPattern())){
+                    ToastUtils.toast(getContext(),R.string.text_phone_not_match);
+                    return;
+                }
+
                 Request.sendVfCode(getContext(),true, areaCode, phone, new ISdkCallBack() {
                     @Override
                     public void success() {
-
+                        ToastUtils.toast(getContext(),R.string.text_vfcode_has_send);
+                        startTimer();
                     }
 
                     @Override
@@ -143,6 +192,14 @@ public class AccountBindPhoneLayout extends SLoginBaseRelativeLayout {
         okBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //已經綁定
+                if (ll_has_bind_view.getVisibility() == VISIBLE){
+                    if (sBaseDialog != null) {
+                        sBaseDialog.dismiss();
+                    }
+                    return;
+                }
 
                 String areaCode = tv_area_code.getText().toString();
                 String phone = et_input_phone_number.getEditableText().toString();
@@ -161,10 +218,23 @@ public class AccountBindPhoneLayout extends SLoginBaseRelativeLayout {
                     return;
                 }
 
+                if (currentPhoneInfo == null){
+                    return;
+                }
+
+                if (!phone.matches(currentPhoneInfo.getPattern())){
+                    ToastUtils.toast(getContext(),R.string.text_phone_not_match);
+                    return;
+                }
+
+                stopVfCodeTimer();
                 Request.bindPhone(getContext(),true, areaCode, phone, vfCode, new SFCallBack<String>() {
                     @Override
                     public void success(String result, String msg) {
-
+                        ToastUtils.toast(getContext(),R.string.text_phone_bind_success);
+                        if (sBaseDialog != null) {
+                            sBaseDialog.dismiss();
+                        }
                     }
 
                     @Override
@@ -177,6 +247,18 @@ public class AccountBindPhoneLayout extends SLoginBaseRelativeLayout {
         });
 
         return contentView;
+    }
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+
+        this.sBaseDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                stopVfCodeTimer();
+            }
+        });
     }
 
     @Override
@@ -204,6 +286,39 @@ public class AccountBindPhoneLayout extends SLoginBaseRelativeLayout {
         super.setVisibility(visibility);
     }
 
+    private void startTimer(){
 
+        if(requestPhoneVfcodeTimer == null) {
+            requestPhoneVfcodeTimer = new Timer();
+        }
+
+        resetTime = TIME_OUT_SECONDS;
+        requestPhoneVfcodeTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if(resetTime < 1) {
+                    stopVfCodeTimer();
+                    return;
+                }
+                if(resetTime > 0) {
+                    resetTime--;
+                    btn_find_get_vfcode.setClickable(false);
+                    btn_find_get_vfcode.setText(resetTime + "");
+                }
+            }
+        }, 300, 1000);
+
+    }
+
+    public void stopVfCodeTimer() {//根据需求充值计数器
+
+        resetTime = 0;
+        if(requestPhoneVfcodeTimer != null) {
+            requestPhoneVfcodeTimer.cancel();
+            requestPhoneVfcodeTimer = null;
+        }
+        btn_find_get_vfcode.setClickable(true);
+        btn_find_get_vfcode.setText(R.string.py_register_account_get_vfcode);
+    }
 
 }

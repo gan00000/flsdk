@@ -78,7 +78,7 @@
                             android:layout_marginStart="18dp"
                             android:gravity="center"
                             android:text="@string/text_phone_area_code"
-                            android:textColor="@color/c_B8B8B8"
+                            android:textColor="@color/c_606060"
                             android:textSize="14sp" />
 
                         <ImageView
@@ -180,7 +180,7 @@
                             android:layout_marginStart="18dp"
                             android:gravity="center"
                             android:text="@string/text_phone_area_code"
-                            android:textColor="@color/c_B8B8B8"
+                            android:textColor="@color/c_606060"
                             android:textSize="14sp" />
 
                         <ImageView

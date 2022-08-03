@@ -6,5 +6,8 @@
     <string name="text_phone_hasbind_tips">您已經成功綁定，這是您當前綁定的手機號碼</string>
     <string name="text_area_code_not_empty">手機區號不能為空</string>
     <string name="text_phone_not_empty">手機號碼不能為空</string>
+    <string name="text_phone_not_match">手機號碼格式不正確</string>
+    <string name="text_vfcode_has_send">驗證碼已發送</string>
+    <string name="text_phone_bind_success">手機綁定成功</string>
 
 </resources>
