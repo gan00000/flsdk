@@ -4,5 +4,7 @@
     <string name="text_phone_area_code">區號</string>
     <string name="text_phone_input_hint">請輸入手機號碼</string>
     <string name="text_phone_hasbind_tips">您已經成功綁定，這是您當前綁定的手機號碼</string>
+    <string name="text_area_code_not_empty">手機區號不能為空</string>
+    <string name="text_phone_not_empty">手機號碼不能為空</string>
 
 </resources>
