@@ -19,6 +19,7 @@ import com.mw.base.utils.SdkUtil;
 import com.mw.sdk.R;
 import com.mw.sdk.SBaseRelativeLayout;
 import com.mw.sdk.api.Request;
+import com.mw.sdk.login.ILoginCallBack;
 import com.mw.sdk.login.PhoneAreaCodeDialogHelper;
 import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
@@ -62,11 +63,16 @@ public class AccountBindPhoneLayout extends SLoginBaseRelativeLayout {
      */
     private int resetTime;
 
+    private ILoginCallBack iLoginCallBack;
+
+    public void setiLoginCallBack(ILoginCallBack iLoginCallBack) {
+        this.iLoginCallBack = iLoginCallBack;
+    }
+
     public AccountBindPhoneLayout(Context context) {
         super(context);
 
     }
-
 
     public AccountBindPhoneLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -232,6 +238,12 @@ public class AccountBindPhoneLayout extends SLoginBaseRelativeLayout {
                     @Override
                     public void success(String result, String msg) {
                         ToastUtils.toast(getContext(),R.string.text_phone_bind_success);
+
+                        SLoginResponse sLoginResponse = SdkUtil.getCurrentUserLoginResponse(getContext());
+                        sLoginResponse.getData().setTelephone(areaCode + "-" + phone);
+                        sLoginResponse.getData().setBindPhone(true);
+
+                        SdkUtil.updateLoginData(getContext(), sLoginResponse);
                         if (sBaseDialog != null) {
                             sBaseDialog.dismiss();
                         }
@@ -257,6 +269,10 @@ public class AccountBindPhoneLayout extends SLoginBaseRelativeLayout {
             @Override
             public void onDismiss(DialogInterface dialog) {
                 stopVfCodeTimer();
+
+                if (iLoginCallBack != null) {
+                    iLoginCallBack.onLogin(SdkUtil.getCurrentUserLoginResponse(getContext()));
+                }
             }
         });
     }
