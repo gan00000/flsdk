@@ -3,5 +3,6 @@
     <string name="text_phone_bind">手機綁定</string>
     <string name="text_phone_area_code">區號</string>
     <string name="text_phone_input_hint">請輸入手機號碼</string>
+    <string name="text_phone_hasbind_tips">您已經成功綁定，這是您當前綁定的手機號碼</string>
 
 </resources>
