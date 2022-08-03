@@ -108,5 +108,5 @@ public interface IMWSDK extends IGameLifeCycle {
 
     public void requestStoreReview(Activity activity, ICompleteListener iCompleteListener);
 
-    public void showBindPhoneView(Activity activity, ISdkCallBack iSdkCallBack);
+    public void showBindPhoneView(Activity activity, ILoginCallBack iLoginCallBack);
 }

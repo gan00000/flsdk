@@ -389,11 +389,24 @@ public class SdkUtil {
         return encryptText;
     }
 
-    public static void saveSdkLoginData(Context context,String data){
+    private static void saveSdkLoginData(Context context,String data){
         if (SStringUtil.isNotEmpty(data)){
             data = encryptText(data);//进行加密后保存
         }
         SPUtil.saveSimpleInfo(context, SDK_SP_FILE, SDK_LOGIN_SERVER_RETURN_DATA,data);
+    }
+
+    public static void updateLoginData(Context context, SLoginResponse sLoginResponse){
+        if (sLoginResponse != null){
+            try {
+                Gson gson = new Gson();
+                String result = gson.toJson(sLoginResponse);
+                saveSdkLoginData(context, result);
+            } catch (Exception e) {
+                e.printStackTrace();
+                saveSdkLoginData(context, sLoginResponse.getRawResponse());
+            }
+        }
     }
 
     public static SLoginResponse getCurrentUserLoginResponse(Context context){
