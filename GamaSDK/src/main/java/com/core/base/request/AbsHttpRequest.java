@@ -1,5 +1,6 @@
 package com.core.base.request;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.text.TextUtils;
@@ -40,7 +41,7 @@ public abstract class AbsHttpRequest implements ISRqeust {
 
     public <T> void excute(final Type mTypeOfT) {
 
-        SRequestAsyncTask asyncTask = new SRequestAsyncTask() {
+        @SuppressLint("StaticFieldLeak") SRequestAsyncTask asyncTask = new SRequestAsyncTask() {
 
             T responseModule = null;
 
@@ -120,7 +121,7 @@ public abstract class AbsHttpRequest implements ISRqeust {
     @Override
     public <T> void excute(final Class<T> classOfT) {
 
-        SRequestAsyncTask asyncTask = new SRequestAsyncTask() {
+        @SuppressLint("StaticFieldLeak") SRequestAsyncTask asyncTask = new SRequestAsyncTask() {
 
             T responseModule = null;
 

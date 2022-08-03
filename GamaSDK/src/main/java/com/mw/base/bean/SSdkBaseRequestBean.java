@@ -34,8 +34,11 @@ public class SSdkBaseRequestBean extends BaseReqeustBean {
     private String signature = "";
 
     private String phone = "";
+    private String telephone = "";
 
     private String phoneAreaCode = "";
+    private String areaCode = "";
+    private String vCode = "";
 
 //    private String advertisingId = "";
     private String adId = "";//advertisingId
@@ -128,6 +131,7 @@ public class SSdkBaseRequestBean extends BaseReqeustBean {
 
     public void setPhone(String phone) {
         this.phone = phone;
+        this.telephone = phone;
     }
 
     public String getPhoneAreaCode() {
@@ -136,6 +140,7 @@ public class SSdkBaseRequestBean extends BaseReqeustBean {
 
     public void setPhoneAreaCode(String phoneAreaCode) {
         this.phoneAreaCode = phoneAreaCode;
+        this.areaCode = phoneAreaCode;
     }
 
     public String getReferrer() {
@@ -185,5 +190,13 @@ public class SSdkBaseRequestBean extends BaseReqeustBean {
 
     public void setLoginTimestamp(String loginTimestamp) {
         this.loginTimestamp = loginTimestamp;
+    }
+
+    public String getvCode() {
+        return vCode;
+    }
+
+    public void setvCode(String vCode) {
+        this.vCode = vCode;
     }
 }

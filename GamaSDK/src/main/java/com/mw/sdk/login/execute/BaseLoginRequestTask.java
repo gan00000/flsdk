@@ -25,9 +25,9 @@ public class BaseLoginRequestTask extends AbsHttpRequest {
 
 	protected SSdkBaseRequestBean sdkBaseRequestBean;
 
-//	public void setSdkBaseRequestBean(SSdkBaseRequestBean sdkBaseRequestBean) {
-//		this.sdkBaseRequestBean = sdkBaseRequestBean;
-//	}
+	public void setSdkBaseRequestBean(SSdkBaseRequestBean sdkBaseRequestBean) {
+		this.sdkBaseRequestBean = sdkBaseRequestBean;
+	}
 
 
 	public SSdkBaseRequestBean getSdkBaseRequestBean() {

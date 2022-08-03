@@ -17,6 +17,8 @@ public class ApiRequestMethod {
      * 获取手机验证码接口
      */
     public static final String GS_REQUEST_METHOD_GET_PHONT_VFCODE = "api/vcode/sendEmailVcode";
+    public static final String api_sendMobileVcode = "api/vcode/sendMobileVcode";
+    public static final String api_mobile_bind = "api/mobile/bind";
 
     /**
      * 注册接口
