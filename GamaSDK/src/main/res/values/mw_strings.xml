@@ -118,6 +118,7 @@
     <string name="text_confire">確認</string>
     <string name="text_delete_account_tips">請注意，刪除帳號將會將您的帳號從平台中徹底刪除，如果確認刪除，請點擊“確認”</string>
     <string name="text_account_bind_success">升級會員帳號成功，正在登入...</string>
+    <string name="text_account_bind_success2">升級會員帳號成功</string>
     <string name="text_account_change_pwd_success">修改成功，正在登入...</string>
     <string name="text_send_vf_code_success">驗證碼已發送，請注意查收</string>
     <string name="text_finish_pay">支付完成</string>

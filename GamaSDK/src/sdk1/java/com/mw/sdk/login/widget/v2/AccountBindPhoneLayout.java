@@ -16,6 +16,7 @@ import com.core.base.utils.ToastUtils;
 import com.mw.base.bean.PhoneInfo;
 import com.mw.sdk.R;
 import com.mw.sdk.api.Request;
+import com.mw.sdk.login.ILoginCallBack;
 import com.mw.sdk.login.PhoneAreaCodeDialogHelper;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.mw.sdk.out.ISdkCallBack;
@@ -45,6 +46,12 @@ public class AccountBindPhoneLayout extends SLoginBaseRelativeLayout {
     private EditText et_input_phone_number_2;
 
     private PhoneAreaCodeDialogHelper phoneAreaCodeDialogHelper;
+
+    private ILoginCallBack iLoginCallBack;
+
+    public void setiLoginCallBack(ILoginCallBack iLoginCallBack) {
+        this.iLoginCallBack = iLoginCallBack;
+    }
 
     public AccountBindPhoneLayout(Context context) {
         super(context);

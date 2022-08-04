@@ -31,9 +31,11 @@ public class SLoginResponse extends BaseResponseModel {
 
         private String userId = "";
         /**
-         * gama的accesstoken
+         * sdk內部使用的accesstoken
          */
         private String token = "";
+        //原廠驗證賬號使用的sign
+        private String sign = "";
         /**
          * 登陆成功时间戳
          */
@@ -237,6 +239,14 @@ public class SLoginResponse extends BaseResponseModel {
 
         public void setTelephone(String telephone) {
             this.telephone = telephone;
+        }
+
+        public String getSign() {
+            return sign;
+        }
+
+        public void setSign(String sign) {
+            this.sign = sign;
         }
 
         @Override

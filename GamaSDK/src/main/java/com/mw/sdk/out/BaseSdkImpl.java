@@ -1,6 +1,5 @@
 package com.mw.sdk.out;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -16,7 +15,6 @@ import androidx.annotation.NonNull;
 import com.core.base.ObjFactory;
 import com.core.base.utils.AppUtil;
 import com.core.base.utils.PL;
-import com.core.base.utils.PermissionUtil;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.SignatureUtil;
 import com.core.base.utils.ToastUtils;
@@ -45,16 +43,14 @@ import com.mw.sdk.SWebViewDialog;
 import com.mw.sdk.ads.EventConstant;
 import com.mw.sdk.ads.SdkEventLogger;
 import com.mw.sdk.callback.IPayListener;
-import com.mw.sdk.constant.RequestCode;
 import com.mw.sdk.login.DialogLoginImpl;
 import com.mw.sdk.login.ILogin;
 import com.mw.sdk.login.ILoginCallBack;
 import com.mw.sdk.login.widget.v2.AccountBindPhoneLayout;
+import com.mw.sdk.login.widget.v2.ThirdPlatBindAccountLayoutV2;
 import com.mw.sdk.social.share.ShareUtil;
 import com.thirdlib.facebook.SFacebookProxy;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.Map;
 
 
@@ -73,7 +69,7 @@ public class BaseSdkImpl implements IMWSDK {
     protected SWebViewDialog csSWebViewDialog;
     protected SWebViewDialog otherPayWebViewDialog;
 
-    protected SBaseDialog bindPhoneDialog;
+    protected SBaseDialog commonDialog;
 
     private IPay iPay;
     protected IPayListener iPayListener;
@@ -740,15 +736,37 @@ public class BaseSdkImpl implements IMWSDK {
             public void run() {
 
                 if (SdkUtil.isVersion2(activity)) {
-                    if (bindPhoneDialog != null){
-                        bindPhoneDialog.dismiss();
+                    if (commonDialog != null){
+                        commonDialog.dismiss();
                     }
-                    bindPhoneDialog = new SBaseDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
+                    commonDialog = new SBaseDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
                     AccountBindPhoneLayout accountBindPhoneLayout = new AccountBindPhoneLayout(activity);
-                    accountBindPhoneLayout.setsBaseDialog(bindPhoneDialog);
+                    accountBindPhoneLayout.setsBaseDialog(commonDialog);
                     accountBindPhoneLayout.setiLoginCallBack(iLoginCallBack);
-                    bindPhoneDialog.setContentView(accountBindPhoneLayout);
-                    bindPhoneDialog.show();
+                    commonDialog.setContentView(accountBindPhoneLayout);
+                    commonDialog.show();
+                }
+            }
+        });
+
+    }
+
+    @Override
+    public void showUpdateAccountView(Activity activity, ILoginCallBack iLoginCallBack) {
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                if (SdkUtil.isVersion2(activity)) {
+                    if (commonDialog != null){
+                        commonDialog.dismiss();
+                    }
+                    commonDialog = new SBaseDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
+                    ThirdPlatBindAccountLayoutV2 platBindAccountLayoutV2 = new ThirdPlatBindAccountLayoutV2(activity);
+                    platBindAccountLayoutV2.setsBaseDialog(commonDialog);
+                    platBindAccountLayoutV2.setiLoginCallBack(iLoginCallBack);
+                    commonDialog.setContentView(platBindAccountLayoutV2);
+                    commonDialog.show();
                 }
             }
         });
