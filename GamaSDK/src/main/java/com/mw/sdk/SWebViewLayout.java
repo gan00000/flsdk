@@ -32,6 +32,7 @@ public class SWebViewLayout extends SBaseRelativeLayout {
     private ImageView closeImageView;
     private ImageView backImageView;
     private TextView titleTv;
+    private View rl_sdk_sweb_header;
 
     public SWebView getsWebView() {
         return sWebView;
@@ -78,6 +79,8 @@ public class SWebViewLayout extends SBaseRelativeLayout {
         closeImageView = contentView.findViewById(R.id.iv_s_web_close);
         titleTv = contentView.findViewById(R.id.tv_s_web_title);
         backImageView = contentView.findViewById(R.id.iv_s_web_back);
+
+        rl_sdk_sweb_header = contentView.findViewById(R.id.rl_sdk_sweb_header);
         initTitle("");
 
         progressBar = (ProgressBar) contentView.findViewById(R.id.s_webview_pager_loading_percent);
@@ -131,21 +134,21 @@ public class SWebViewLayout extends SBaseRelativeLayout {
         }
     }
 
-    public class MyWebViewClient extends BaseWebViewClient {
-
-        public MyWebViewClient(Activity activity) {
-            super(activity);
-        }
-
-        @Override
-        public void onPageFinished(WebView view, String url) {
-            super.onPageFinished(view, url);
-
-            if (view.canGoBack()){
-                backImageView.setVisibility(VISIBLE);
-            }else {
-                backImageView.setVisibility(GONE);
-            }
-        }
-    }
+//    public class MyWebViewClient extends BaseWebViewClient {
+//
+//        public MyWebViewClient(Activity activity) {
+//            super(activity);
+//        }
+//
+//        @Override
+//        public void onPageFinished(WebView view, String url) {
+//            super.onPageFinished(view, url);
+//
+//            if (view.canGoBack()){
+//                backImageView.setVisibility(VISIBLE);
+//            }else {
+//                backImageView.setVisibility(GONE);
+//            }
+//        }
+//    }
 }

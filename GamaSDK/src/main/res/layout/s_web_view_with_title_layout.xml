@@ -1,33 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-<!--        <include layout="@layout/sdk_title_layout"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="@dimen/px_80"-->
-<!--            android:visibility="gone"/>-->
-
-        <RelativeLayout android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:background="@color/c_F13B11"
-        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:id="@+id/rl_sdk_sweb_header"
+            android:background="@color/c_F13B11">
 
             <ImageView
+                android:id="@+id/iv_s_web_back"
                 android:layout_width="40dp"
                 android:layout_height="match_parent"
                 android:layout_alignParentStart="true"
-                android:src="@drawable/icon_back_webview"
                 android:layout_marginStart="10dp"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:id="@+id/iv_s_web_back"
-                />
+                android:src="@drawable/icon_back_webview" />
 
             <TextView
                 android:id="@+id/tv_s_web_title"
@@ -40,19 +35,18 @@
                 android:textStyle="bold" />
 
             <ImageView
+                android:id="@+id/iv_s_web_close"
                 android:layout_width="40dp"
                 android:layout_height="match_parent"
                 android:layout_alignParentEnd="true"
-                android:src="@drawable/icon_close_white"
                 android:layout_marginEnd="10dp"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:id="@+id/iv_s_web_close"
-                />
+                android:src="@drawable/icon_close_white" />
 
         </RelativeLayout>
 
-        <include layout="@layout/s_base_web_view"/>
+        <include layout="@layout/s_base_web_view" />
 
     </LinearLayout>
 
