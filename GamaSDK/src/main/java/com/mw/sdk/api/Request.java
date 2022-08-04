@@ -24,7 +24,7 @@ import com.mw.sdk.utils.DialogUtil;
 
 public class Request {
 
-    public static void sendVfCode(Context context, boolean needDialog, String areaCode, String telephone, ISdkCallBack iSdkCallBack) {
+    public static void sendVfCode(Context context, boolean needDialog, String areaCode, String telephone, SFCallBack<BaseResponseModel> iSdkCallBack) {
 
         SGameBaseRequestBean sGameBaseRequestBean = new SGameBaseRequestBean(context);
         sGameBaseRequestBean.setPhone(telephone);
@@ -42,21 +42,21 @@ public class Request {
                 if (responseModel != null) {
                     if (responseModel.isRequestSuccess()) {
                         if (iSdkCallBack != null){
-                            iSdkCallBack.success();
+                            iSdkCallBack.success(responseModel,rawResult);
                         }
 
                     }else{
 
                         ToastUtils.toast(context, responseModel.getMessage() + "");
                         if (iSdkCallBack != null){
-                            iSdkCallBack.failure();
+                            iSdkCallBack.fail(responseModel,rawResult);
                         }
                     }
 
                 } else {
                     ToastUtils.toast(context, R.string.py_error_occur);
                     if (iSdkCallBack != null){
-                        iSdkCallBack.failure();
+                        iSdkCallBack.fail(null,rawResult);
                     }
                 }
             }
@@ -64,14 +64,14 @@ public class Request {
             @Override
             public void timeout(String code) {
                 if (iSdkCallBack != null){
-                    iSdkCallBack.failure();
+                    iSdkCallBack.fail(null,"");
                 }
             }
 
             @Override
             public void noData() {
                 if (iSdkCallBack != null){
-                    iSdkCallBack.failure();
+                    iSdkCallBack.fail(null,"");
                 }
             }
 
@@ -82,7 +82,7 @@ public class Request {
         baseLoginRequestTask.excute(BaseResponseModel.class);
     }
 
-    public static void bindPhone(Context context, boolean needDialog, String areaCode, String telephone,String vfCode, SFCallBack sfCallBack) {
+    public static void bindPhone(Context context, boolean needDialog, String areaCode, String telephone,String vfCode, SFCallBack<BaseResponseModel> sfCallBack) {
 
         SGameBaseRequestBean sGameBaseRequestBean = new SGameBaseRequestBean(context);
         sGameBaseRequestBean.setPhone(telephone);
@@ -101,14 +101,14 @@ public class Request {
                 if (responseModel != null) {
                     if (responseModel.isRequestSuccess()) {
                         if (sfCallBack != null){
-                            sfCallBack.success(rawResult,rawResult);
+                            sfCallBack.success(responseModel,rawResult);
                         }
 
                     }else{
 
                         ToastUtils.toast(context, responseModel.getMessage() + "");
                         if (sfCallBack != null){
-                            sfCallBack.fail(null,rawResult);
+                            sfCallBack.fail(responseModel,rawResult);
                         }
                     }
 

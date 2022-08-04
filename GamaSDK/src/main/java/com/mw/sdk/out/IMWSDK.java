@@ -3,6 +3,7 @@ package com.mw.sdk.out;
 import android.app.Activity;
 
 import com.core.base.callback.IGameLifeCycle;
+import com.core.base.callback.SFCallBack;
 import com.mw.base.bean.SGameLanguage;
 import com.mw.base.bean.SPayType;
 import com.mw.sdk.login.ILoginCallBack;
@@ -108,6 +109,10 @@ public interface IMWSDK extends IGameLifeCycle {
 
     public void requestStoreReview(Activity activity, ICompleteListener iCompleteListener);
 
-    public void showBindPhoneView(Activity activity, ILoginCallBack iLoginCallBack);
-    public void showUpdateAccountView(Activity activity, ILoginCallBack iLoginCallBack);
+    public void showBindPhoneView(Activity activity, SFCallBack sfCallBack);
+    public void showUpdateAccountView(Activity activity, SFCallBack sfCallBack);
+
+    public void requestVfCode(Activity activity, String areaCode, String telephone,SFCallBack sfCallBack);
+    public void requestBindPhone(Activity activity, String areaCode, String telephone,String vfCode, SFCallBack sfCallBack);
+    public void requestUpdateAccount(Activity activity, String account, String pwd, SFCallBack sfCallBack);
 }

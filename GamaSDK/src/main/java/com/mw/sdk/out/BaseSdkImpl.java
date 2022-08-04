@@ -2,6 +2,7 @@ package com.mw.sdk.out;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
@@ -13,6 +14,7 @@ import android.webkit.JavascriptInterface;
 import androidx.annotation.NonNull;
 
 import com.core.base.ObjFactory;
+import com.core.base.callback.SFCallBack;
 import com.core.base.utils.AppUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
@@ -42,6 +44,7 @@ import com.mw.sdk.SBaseDialog;
 import com.mw.sdk.SWebViewDialog;
 import com.mw.sdk.ads.EventConstant;
 import com.mw.sdk.ads.SdkEventLogger;
+import com.mw.sdk.api.Request;
 import com.mw.sdk.callback.IPayListener;
 import com.mw.sdk.login.DialogLoginImpl;
 import com.mw.sdk.login.ILogin;
@@ -729,7 +732,7 @@ public class BaseSdkImpl implements IMWSDK {
 
 
     @Override
-    public void showBindPhoneView(Activity activity, ILoginCallBack iLoginCallBack) {
+    public void showBindPhoneView(Activity activity, SFCallBack sfCallBack) {
 
         activity.runOnUiThread(new Runnable() {
             @Override
@@ -742,7 +745,7 @@ public class BaseSdkImpl implements IMWSDK {
                     commonDialog = new SBaseDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
                     AccountBindPhoneLayout accountBindPhoneLayout = new AccountBindPhoneLayout(activity);
                     accountBindPhoneLayout.setsBaseDialog(commonDialog);
-                    accountBindPhoneLayout.setiLoginCallBack(iLoginCallBack);
+                    accountBindPhoneLayout.setSFCallBack(sfCallBack);
                     commonDialog.setContentView(accountBindPhoneLayout);
                     commonDialog.show();
                 }
@@ -752,7 +755,7 @@ public class BaseSdkImpl implements IMWSDK {
     }
 
     @Override
-    public void showUpdateAccountView(Activity activity, ILoginCallBack iLoginCallBack) {
+    public void showUpdateAccountView(Activity activity, SFCallBack sfCallBack) {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -764,13 +767,44 @@ public class BaseSdkImpl implements IMWSDK {
                     commonDialog = new SBaseDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
                     ThirdPlatBindAccountLayoutV2 platBindAccountLayoutV2 = new ThirdPlatBindAccountLayoutV2(activity);
                     platBindAccountLayoutV2.setsBaseDialog(commonDialog);
-                    platBindAccountLayoutV2.setiLoginCallBack(iLoginCallBack);
+                    platBindAccountLayoutV2.setSFCallBack(sfCallBack);
                     commonDialog.setContentView(platBindAccountLayoutV2);
                     commonDialog.show();
                 }
             }
         });
 
+    }
+
+    @Override
+    public void requestVfCode(Activity activity, String areaCode, String telephone, SFCallBack sfCallBack) {
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Request.sendVfCode(activity, false, areaCode, telephone, sfCallBack);
+            }
+        });
+    }
+
+    @Override
+    public void requestBindPhone(Activity activity, String areaCode, String telephone,String vfCode, SFCallBack sfCallBack) {
+
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Request.bindPhone(activity, false, areaCode, telephone, vfCode, sfCallBack);
+            }
+        });
+    }
+
+    @Override
+    public void requestUpdateAccount(Activity activity, String account, String pwd, SFCallBack sfCallBack ) {
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Request.bindAcountInGame(activity,false,SdkUtil.getPreviousLoginType(activity), account, pwd, sfCallBack);
+            }
+        });
     }
 
     @SuppressLint("JavascriptInterface")
