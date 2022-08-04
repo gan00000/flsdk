@@ -9,5 +9,10 @@
     <string name="text_phone_not_match">手機號碼格式不正確</string>
     <string name="text_vfcode_has_send">驗證碼已發送</string>
     <string name="text_phone_bind_success">手機綁定成功</string>
+    <string name="text_has_bind_tips_google">Google已升級為會員帳號</string>
+    <string name="text_has_bind_tips_fb">Facebook已升級為會員帳號</string>
+    <string name="text_has_bind_tips_guest">遊客已升級為會員帳號</string>
+    <string name="text_has_bind_tips_line">LINE已升級為會員帳號</string>
+    <string name="text_has_bind_tips_mw">會員帳號</string>
 
 </resources>

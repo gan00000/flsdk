@@ -1062,8 +1062,8 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     private void handleRegisteOrLoginSuccess(SLoginResponse loginResponse, String rawResult, String loginType) {
 
 //        SdkUtil.saveSdkLoginData(getContext(), loginResponse.getRawResponse());
-        SdkUtil.updateLoginData(getContext(), loginResponse);
         loginResponse.getData().setLoginType(loginType);
+        SdkUtil.updateLoginData(getContext(), loginResponse);
         if (SStringUtil.isNotEmpty(loginType)) {//loginType为空时是账号注入登录，不能空时是其他普通登入
 
             SdkUtil.savePreviousLoginType(mActivity, loginType);

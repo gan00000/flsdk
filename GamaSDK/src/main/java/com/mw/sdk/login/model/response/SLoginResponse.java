@@ -36,12 +36,15 @@ public class SLoginResponse extends BaseResponseModel {
         private String token = "";
         //原廠驗證賬號使用的sign
         private String sign = "";
+
+        private String loginId = "";//用户账号或者第三方绑定的账号
+
         /**
          * 登陆成功时间戳
          */
         private String timestamp = "";
-        private String freeRegisterName = "";
-        private String freeRegisterPwd = "";
+//        private String freeRegisterName = "";
+//        private String freeRegisterPwd = "";
 
         private String gameCode = "";
 
@@ -77,13 +80,6 @@ public class SLoginResponse extends BaseResponseModel {
          */
         private String nickName = "";
 
-        /**
-         * 用户ip
-         */
-        private String playerIp = "";
-
-        private String beLinked = "";
-
         private boolean isBind;//是否绑定账号
         private boolean isBindPhone;//是否绑定手机
         private String telephone;
@@ -116,11 +112,6 @@ public class SLoginResponse extends BaseResponseModel {
             return token;
         }
 
-//        public void setToken(String token) {
-//            this.token = token;
-//        }
-
-
 
         public String getGameCode() {
             return gameCode;
@@ -130,38 +121,13 @@ public class SLoginResponse extends BaseResponseModel {
             this.gameCode = gameCode;
         }
 
-
         public String getUserId() {
             return userId;
         }
 
-        public void setUserId(String userId) {
-            this.userId = userId;
-        }
-
-
-        public String getFreeRegisterName() {
-            return freeRegisterName;
-        }
-
-        public void setFreeRegisterName(String freeRegisterName) {
-            this.freeRegisterName = freeRegisterName;
-        }
-
-        public String getFreeRegisterPwd() {
-            return freeRegisterPwd;
-        }
-
-        public void setFreeRegisterPwd(String freeRegisterPwd) {
-            this.freeRegisterPwd = freeRegisterPwd;
-        }
 
         public String getTimestamp() {
             return timestamp;
-        }
-
-        public void setTimestamp(String timestamp) {
-            this.timestamp = timestamp;
         }
 
         public String getLoginType() {
@@ -213,26 +179,6 @@ public class SLoginResponse extends BaseResponseModel {
         }
 
 
-        public boolean isLinked() {
-            return "1".equals(beLinked);
-        }
-
-        public void setBeLinked(String beLinked) {
-            this.beLinked = beLinked;
-        }
-
-        public String getPlayerIp() {
-            return playerIp;
-        }
-
-        public void setPlayerIp(String playerIp) {
-            this.playerIp = playerIp;
-        }
-
-        public String getBeLinked() {
-            return beLinked;
-        }
-
         public String getTelephone() {
             return telephone;
         }
@@ -249,14 +195,20 @@ public class SLoginResponse extends BaseResponseModel {
             this.sign = sign;
         }
 
+        public String getLoginId() {
+            return loginId;
+        }
+
+        public void setLoginId(String loginId) {
+            this.loginId = loginId;
+        }
+
         @Override
         public String toString() {
             return "SLoginResponse{" +
                     "userId='" + userId + '\'' +
                     ", accessToken='" + token + '\'' +
                     ", timestamp='" + timestamp + '\'' +
-                    ", freeRegisterName='" + freeRegisterName + '\'' +
-                    ", freeRegisterPwd='" + freeRegisterPwd + '\'' +
                     ", gameCode='" + gameCode + '\'' +
                     ", loginType='" + loginType + '\'' +
                     ", gender='" + gender + '\'' +
@@ -265,8 +217,6 @@ public class SLoginResponse extends BaseResponseModel {
                     ", thirdId='" + thirdId + '\'' +
                     ", thirdToken='" + thirdToken + '\'' +
                     ", nickName='" + nickName + '\'' +
-                    ", playerIp='" + playerIp + '\'' +
-                    ", beLinked='" + beLinked + '\'' +
                     '}';
         }
 
