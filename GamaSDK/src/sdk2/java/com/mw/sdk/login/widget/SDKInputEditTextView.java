@@ -31,6 +31,7 @@ public class SDKInputEditTextView extends RelativeLayout {
         return iconImageView;
     }
 
+    View contentView;
     private ImageView eyeImageView;
     private ImageView iv_account_history;
     private TextView labTextView;
@@ -40,6 +41,10 @@ public class SDKInputEditTextView extends RelativeLayout {
     private View line1View;
     private View bottomLine;
     private SDKInputType sdkInputType;
+
+    public View getContentView() {
+        return contentView;
+    }
 
     public EditText getInputEditText() {
         return inputEditText;
@@ -97,7 +102,7 @@ public class SDKInputEditTextView extends RelativeLayout {
     private void initInputView(){
 
         inflater = LayoutInflater.from(getContext());
-        View contentView =  inflater.inflate(R.layout.sdk_input_item_et, null);
+        contentView =  inflater.inflate(R.layout.sdk_input_item_et, null);
         if (contentView != null) {
 
             LayoutParams l = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);

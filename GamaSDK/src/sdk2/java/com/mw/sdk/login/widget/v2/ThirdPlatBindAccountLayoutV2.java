@@ -9,10 +9,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.core.base.callback.SFCallBack;
 import com.core.base.utils.ToastUtils;
 import com.mw.sdk.SBaseRelativeLayout;
 import com.mw.base.utils.SdkUtil;
 import com.mw.sdk.R;
+import com.mw.sdk.api.Request;
+import com.mw.sdk.login.ILoginCallBack;
 import com.mw.sdk.login.constant.BindType;
 import com.mw.sdk.login.model.AccountModel;
 import com.mw.sdk.login.widget.SDKInputEditTextView;
@@ -41,20 +44,20 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
      */
     private EditText registerPasswordEditText;
     private EditText registerAccountEditText;
-    private EditText thirdAccountEditText;
 
     private String account;
     private String password;
 
     SDKInputEditTextView accountSdkInputEditTextView;
     SDKInputEditTextView pwdSdkInputEditTextView;
-    SDKInputEditTextView sdkinputview_third_account;
 
-//    SDKInputEditTextView vfSdkInputEditTextView;
-//    SDKPhoneInputEditTextView mSdkPhoneInputEditTextView;
+    private View iv_bind_phone_close;
 
-    //选中的区域信息
-//    private GamaAreaInfoBean selectedBean;
+    private ILoginCallBack iLoginCallBack;
+
+    public void setiLoginCallBack(ILoginCallBack iLoginCallBack) {
+        this.iLoginCallBack = iLoginCallBack;
+    }
 
     public ThirdPlatBindAccountLayoutV2(Context context) {
         super(context);
@@ -75,32 +78,48 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
 
     //new实例的时候调用
     private View onCreateView(LayoutInflater inflater) {
-        contentView = inflater.inflate(R.layout.mw_update_account, null);
 
-        backView = contentView.findViewById(R.id.layout_head_back);
-        TextView titleTextView = contentView.findViewById(R.id.sdk_head_title);
-        titleTextView.setText(R.string.text_update_account);
+        contentView = inflater.inflate(R.layout.mw_update_account, null);
 
         accountSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_bind_account);
         pwdSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_bind_password);
-        sdkinputview_third_account = contentView.findViewById(R.id.sdkinputview_third_account);
 
-        bindConfirm = contentView.findViewById(R.id.btn_confirm_bind);
+//        sdkinputview_third_account = contentView.findViewById(R.id.sdkinputview_third_account);
+
+        bindConfirm = contentView.findViewById(R.id.btn_confirm);
 
         accountSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Account);
         pwdSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Password);
-        sdkinputview_third_account.setInputType(SDKInputType.SDKInputType_Account);
+//        sdkinputview_third_account.setInputType(SDKInputType.SDKInputType_Account);
+
+        accountSdkInputEditTextView.getContentView().setBackgroundResource(R.drawable.sdk_bg_input2);
+        pwdSdkInputEditTextView.getContentView().setBackgroundResource(R.drawable.sdk_bg_input2);
+
+        accountSdkInputEditTextView.getIconImageView().setImageResource(R.mipmap.mw_smail_icon2);
+        pwdSdkInputEditTextView.getIconImageView().setImageResource(R.mipmap.mw_passowrd_icon2);
 
         registerAccountEditText = accountSdkInputEditTextView.getInputEditText();
+        registerAccountEditText.setHintTextColor(getResources().getColor(R.color.c_B8B8B8));
+        registerAccountEditText.setTextColor(getResources().getColor(R.color.black_s));
         registerPasswordEditText = pwdSdkInputEditTextView.getInputEditText();
-        thirdAccountEditText = sdkinputview_third_account.getInputEditText();
+        registerPasswordEditText.setHintTextColor(getResources().getColor(R.color.c_B8B8B8));
+        registerPasswordEditText.setTextColor(getResources().getColor(R.color.black_s));
+//        thirdAccountEditText = sdkinputview_third_account.getInputEditText();
 
 
+        iv_bind_phone_close = contentView.findViewById(R.id.iv_bind_phone_close);
 
-        backView.setOnClickListener(this);
         bindConfirm.setOnClickListener(this);
 
-//        GamaUtil.setAccountWithIcon(accountModel,sdkinputview_third_account.getIconImageView(),thirdAccountEditText);
+        iv_bind_phone_close.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (sBaseDialog != null) {
+                    sBaseDialog.dismiss();
+                }
+            }
+        });
+
         return contentView;
     }
 
@@ -109,20 +128,17 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
         super.onViewVisible();
         registerAccountEditText.setText("");
         registerPasswordEditText.setText("");
-        thirdAccountEditText.setText("");
-//
-        SdkUtil.setAccountWithIcon(accountModel,sdkinputview_third_account.getIconImageView(),thirdAccountEditText);
-//        sdkinputview_third_account.setPwdInputEnable(false);
-        sdkinputview_third_account.getInputEditText().setEnabled(false);
+
+//        SdkUtil.setAccountWithIcon(accountModel,sdkinputview_third_account.getIconImageView(),thirdAccountEditText);
 
     }
 
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        if (thirdAccountEditText != null){
-            thirdAccountEditText.requestFocus();
-        }
+//        if (thirdAccountEditText != null){
+//            thirdAccountEditText.requestFocus();
+//        }
     }
 
     @Override
@@ -132,9 +148,6 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
 
             accountBind();
 
-        } else if (v == backView) {//返回键
-            sLoginDialogv2.toWelcomeBackView();
-            sLoginDialogv2.distoryView(this);
         }
 
     }
@@ -168,14 +181,20 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
             return;
         }
 
-        sLoginDialogv2.getLoginPresenter().accountBind(sLoginDialogv2.getActivity(), accountModel, account, password, "",
-                "", "", bindTpye);
-    }
+        Request.bindAcountInGame(getActivity(), true, SdkUtil.getPreviousLoginType(getContext()), account, password, new SFCallBack() {
+            @Override
+            public void success(Object result, String msg) {
+                toast(R.string.text_account_bind_success2);
+                if (sBaseDialog != null) {
+                    sBaseDialog.dismiss();
+                }
+            }
 
+            @Override
+            public void fail(Object result, String msg) {
 
-
-    private void getAndShowArea() {
-        sLoginDialogv2.getLoginPresenter().getAreaInfo(sLoginDialogv2.getActivity());
+            }
+        });
     }
 
 
