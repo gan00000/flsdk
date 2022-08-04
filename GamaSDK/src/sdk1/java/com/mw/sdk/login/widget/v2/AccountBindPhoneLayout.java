@@ -47,11 +47,13 @@ public class AccountBindPhoneLayout extends SLoginBaseRelativeLayout {
 
     private PhoneAreaCodeDialogHelper phoneAreaCodeDialogHelper;
 
-    private ILoginCallBack iLoginCallBack;
+    private SFCallBack sfCallBack;
 
-    public void setiLoginCallBack(ILoginCallBack iLoginCallBack) {
-        this.iLoginCallBack = iLoginCallBack;
+
+    public void setSFCallBack(SFCallBack sfCallBack) {
+        this.sfCallBack = sfCallBack;
     }
+
 
     public AccountBindPhoneLayout(Context context) {
         super(context);

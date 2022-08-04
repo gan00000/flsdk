@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.core.base.callback.SFCallBack;
 import com.core.base.utils.ToastUtils;
 import com.mw.base.utils.SdkUtil;
 import com.mw.sdk.R;
@@ -55,6 +56,12 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
 
     //选中的区域信息
 //    private GamaAreaInfoBean selectedBean;
+
+    private SFCallBack sfCallBack;
+
+    public void setSFCallBack(SFCallBack sfCallBack) {
+        this.sfCallBack = sfCallBack;
+    }
 
     public ThirdPlatBindAccountLayoutV2(Context context) {
         super(context);
