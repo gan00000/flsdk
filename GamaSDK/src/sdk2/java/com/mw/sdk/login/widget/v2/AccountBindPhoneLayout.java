@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
@@ -63,10 +64,12 @@ public class AccountBindPhoneLayout extends SLoginBaseRelativeLayout {
      */
     private int resetTime;
 
-    private ILoginCallBack iLoginCallBack;
+    private SFCallBack sfCallBack;
 
-    public void setiLoginCallBack(ILoginCallBack iLoginCallBack) {
-        this.iLoginCallBack = iLoginCallBack;
+    private boolean isBindSuccess = false;
+
+    public void setSFCallBack(SFCallBack sfCallBack) {
+        this.sfCallBack = sfCallBack;
     }
 
     public AccountBindPhoneLayout(Context context) {
@@ -180,15 +183,15 @@ public class AccountBindPhoneLayout extends SLoginBaseRelativeLayout {
                     return;
                 }
 
-                Request.sendVfCode(getContext(),true, areaCode, phone, new ISdkCallBack() {
+                Request.sendVfCode(getContext(), true, areaCode, phone, new SFCallBack<BaseResponseModel>() {
                     @Override
-                    public void success() {
+                    public void success(BaseResponseModel result, String msg) {
                         ToastUtils.toast(getContext(),R.string.text_vfcode_has_send);
                         startTimer();
                     }
 
                     @Override
-                    public void failure() {
+                    public void fail(BaseResponseModel result, String msg) {
 
                     }
                 });
@@ -234,24 +237,33 @@ public class AccountBindPhoneLayout extends SLoginBaseRelativeLayout {
                 }
 
                 stopVfCodeTimer();
-                Request.bindPhone(getContext(),true, areaCode, phone, vfCode, new SFCallBack<String>() {
+                Request.bindPhone(getContext(),true, areaCode, phone, vfCode, new SFCallBack<BaseResponseModel>() {
                     @Override
-                    public void success(String result, String msg) {
+                    public void success(BaseResponseModel result, String msg) {
                         ToastUtils.toast(getContext(),R.string.text_phone_bind_success);
-
+                        isBindSuccess = true;
                         SLoginResponse sLoginResponse = SdkUtil.getCurrentUserLoginResponse(getContext());
                         sLoginResponse.getData().setTelephone(areaCode + "-" + phone);
                         sLoginResponse.getData().setBindPhone(true);
 
                         SdkUtil.updateLoginData(getContext(), sLoginResponse);
+
+
+                        if (sfCallBack != null) {
+                            sfCallBack.success(SdkUtil.getCurrentUserLoginResponse(getContext()),"");
+                        }
+
+
                         if (sBaseDialog != null) {
                             sBaseDialog.dismiss();
                         }
                     }
 
                     @Override
-                    public void fail(String result, String msg) {
-
+                    public void fail(BaseResponseModel result, String msg) {
+                        if (sfCallBack != null){
+                            sfCallBack.fail(null,"");
+                        }
                     }
                 });
 
@@ -269,10 +281,6 @@ public class AccountBindPhoneLayout extends SLoginBaseRelativeLayout {
             @Override
             public void onDismiss(DialogInterface dialog) {
                 stopVfCodeTimer();
-
-                if (iLoginCallBack != null) {
-                    iLoginCallBack.onLogin(SdkUtil.getCurrentUserLoginResponse(getContext()));
-                }
             }
         });
     }

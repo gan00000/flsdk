@@ -1,6 +1,7 @@
 package com.mw.sdk.login.widget.v2;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -53,10 +54,10 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
 
     private View iv_bind_phone_close;
 
-    private ILoginCallBack iLoginCallBack;
+    private SFCallBack sfCallBack;
 
-    public void setiLoginCallBack(ILoginCallBack iLoginCallBack) {
-        this.iLoginCallBack = iLoginCallBack;
+    public void setSFCallBack(SFCallBack sfCallBack) {
+        this.sfCallBack = sfCallBack;
     }
 
     public ThirdPlatBindAccountLayoutV2(Context context) {
@@ -136,9 +137,13 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-//        if (thirdAccountEditText != null){
-//            thirdAccountEditText.requestFocus();
-//        }
+
+        this.sBaseDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+
+            }
+        });
     }
 
     @Override
@@ -185,6 +190,11 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
             @Override
             public void success(Object result, String msg) {
                 toast(R.string.text_account_bind_success2);
+
+                if (sfCallBack != null) {
+                    sfCallBack.success(SdkUtil.getCurrentUserLoginResponse(getContext()),"");
+                }
+
                 if (sBaseDialog != null) {
                     sBaseDialog.dismiss();
                 }
@@ -193,6 +203,9 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
             @Override
             public void fail(Object result, String msg) {
 
+                if (sfCallBack != null){
+                    sfCallBack.fail(null,"");
+                }
             }
         });
     }
