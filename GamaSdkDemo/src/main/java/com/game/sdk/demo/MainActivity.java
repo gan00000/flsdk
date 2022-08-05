@@ -17,6 +17,8 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
+import com.core.base.bean.BaseResponseModel;
+import com.core.base.callback.SFCallBack;
 import com.core.base.utils.MarketUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.PermissionUtil;
@@ -261,7 +263,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.goDownLoad).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MarketUtil.openMarket(MainActivity.this);
+                MarketUtil.openMarket(MainActivity.this, MainActivity.this.getPackageName());
             }
         });
 
@@ -284,23 +286,23 @@ public class MainActivity extends Activity {
         findViewById(R.id.demo_share2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                mIMWSDK.share(MainActivity.this, "#萬靈召喚師","2022首款卡牌大作【萬靈召喚師】，爆笑來襲！從東方文明到西方文明的羈絆，從神族到魔族的對抗，一段奇妙的神仙冒險之旅就此展開！","https://static-resource.meowplayer.com/share/index.html", new ISdkCallBack() {
-//                    @Override
-//                    public void success() {
-//                        PL.i("share success");
-//                    }
-//
-//                    @Override
-//                    public void failure() {
-//                        PL.i("share failure");
-//                    }
-//                });
+                mIMWSDK.share(MainActivity.this, "#萬靈召喚師","2022首款卡牌大作【萬靈召喚師】，爆笑來襲！從東方文明到西方文明的羈絆，從神族到魔族的對抗，一段奇妙的神仙冒險之旅就此展開！","https://static-resource.meowplayer.com/share/index.html", new ISdkCallBack() {
+                    @Override
+                    public void success() {
+                        PL.i("share success");
+                    }
 
-                if (Build.VERSION.SDK_INT >= 33) {
-                    //todo 现在还没13系统设备，无法测试先注释
-//                    PermissionUtil.requestPermissions(MainActivity.this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, RequestCode.RequestCode_Permission_POST_NOTIFICATIONS);
-                    askNotificationPermission();
-                }
+                    @Override
+                    public void failure() {
+                        PL.i("share failure");
+                    }
+                });
+
+//                if (Build.VERSION.SDK_INT >= 33) {
+//                    //todo 现在还没13系统设备，无法测试先注释
+////                    PermissionUtil.requestPermissions(MainActivity.this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, RequestCode.RequestCode_Permission_POST_NOTIFICATIONS);
+//                    askNotificationPermission();
+//                }
             }
         });
         findViewById(R.id.logout).setOnClickListener(new View.OnClickListener() {
@@ -317,6 +319,43 @@ public class MainActivity extends Activity {
 
                     }
                 });
+            }
+        });
+
+        findViewById(R.id.bindphone).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                mIMWSDK.showBindPhoneView(MainActivity.this, new SFCallBack<BaseResponseModel>() {
+                    @Override
+                    public void success(BaseResponseModel result, String msg) {
+
+                    }
+
+                    @Override
+                    public void fail(BaseResponseModel result, String msg) {
+
+                    }
+                });
+
+            }
+        });
+        findViewById(R.id.updateAccount).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                mIMWSDK.showUpdateAccountView(MainActivity.this, new SFCallBack() {
+                    @Override
+                    public void success(Object result, String msg) {
+
+                    }
+
+                    @Override
+                    public void fail(Object result, String msg) {
+
+                    }
+                });
+
             }
         });
     }
@@ -373,6 +412,35 @@ public class MainActivity extends Activity {
 
     private boolean isLogin() {
         return !TextUtils.isEmpty(SdkUtil.getUid(this));
+    }
+
+    // Declare the launcher at the top of your Activity/Fragment:
+//    private final ActivityResultLauncher<String> requestPermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+//                if (isGranted) {
+//                    // FCM SDK (and your app) can post notifications.
+//                } else {
+//                    // TODO: Inform user that that your app will not show notifications.
+//                }
+//            });
+
+    // ...
+    private void askNotificationPermission() {
+
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) ==
+//                    PackageManager.PERMISSION_GRANTED) {
+//                // FCM SDK (and your app) can post notifications.
+//            } else if (shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
+//                // TODO: display an educational UI explaining to the user the features that will be enabled
+//                //       by them granting the POST_NOTIFICATION permission. This UI should provide the user
+//                //       "OK" and "No thanks" buttons. If the user selects "OK," directly request the permission.
+//                //       If the user selects "No thanks," allow the user to continue without notifications.
+//                PL.i("shouldShowRequestPermissionRationale");
+//            } else {
+//                // Directly ask for the permission
+////                requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS);
+//            }
+//        }
     }
 
 }

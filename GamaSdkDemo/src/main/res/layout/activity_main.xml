@@ -89,6 +89,18 @@
                     android:layout_height="wrap_content"
                     android:text="登出" />
 
+                <Button
+                    android:id="@+id/bindphone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="显示绑定手机view" />
+
+                <Button
+                    android:id="@+id/updateAccount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="升级账号view" />
+
             </LinearLayout>
 
 
