@@ -1,9 +1,14 @@
 package com.mw.sdk.login;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 
 import com.facebook.internal.CallbackManagerImpl;
+import com.mw.base.cfg.ConfigBean;
+import com.mw.base.utils.SdkUtil;
+import com.mw.sdk.SWebViewDialog;
+import com.mw.sdk.login.widget.v2.NoticeView;
 import com.mw.sdk.utils.DialogUtil;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.google.SGoogleSignIn;
@@ -72,6 +77,29 @@ public class DialogLoginImpl implements ILogin {
 
     @Override
     public void startLogin(final Activity activity, final ILoginCallBack iLoginCallBack) {
+
+        if (SdkUtil.isVersion2(activity)) {
+            ConfigBean configBean = SdkUtil.getSdkCfg(activity);
+            if (configBean != null) {
+                ConfigBean.VersionData versionData = configBean.getSdkConfigLoginData(activity);
+                //test
+                versionData.setShowNotice(true);
+                if (versionData != null && versionData.isShowNotice()) { //显示dialog web公告
+                    NoticeView noticeView = new NoticeView(activity);
+                    SWebViewDialog sLoginDialog = new SWebViewDialog(activity, com.mw.sdk.R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen,noticeView,noticeView.getSWebView(),null);
+                    sLoginDialog.setWebUrl("https://www.baidu.com/");
+                    noticeView.setsBaseDialog(sLoginDialog);
+                    sLoginDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                        @Override
+                        public void onDismiss(DialogInterface dialog) {
+                            goDialogView(activity, iLoginCallBack);
+                        }
+                    });
+                    sLoginDialog.show();
+                    return;
+                }
+            }
+        }
         goDialogView(activity, iLoginCallBack);
     }
 

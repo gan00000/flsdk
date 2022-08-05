@@ -27,14 +27,24 @@ public class SWebViewDialog extends SBaseDialog {
 
     private Activity activity;
     private ProgressBar progressBar;
+
+    private View mContentView;
     private SWebView sWebView;
+    private View backView;
+
+    public SWebViewDialog(@NonNull Context context, int themeResId, View mContentView, SWebView sWebView, View backView) {
+        super(context, themeResId);
+        this.activity = (Activity)context;
+        this.mContentView = mContentView;
+        this.sWebView = sWebView;
+        this.backView = backView;
+    }
+
     private SWebDialogCallback sWebDialogCallback;
 
     public void setsWebDialogCallback(SWebDialogCallback sWebDialogCallback) {
         this.sWebDialogCallback = sWebDialogCallback;
     }
-
-    private SWebViewLayout sWebViewLayout;
 
     public void setWebUrl(String webUrl) {
         this.webUrl = webUrl;
@@ -45,6 +55,7 @@ public class SWebViewDialog extends SBaseDialog {
     public SWebViewDialog(@NonNull Context context) {
         super(context);
         this.activity = (Activity)context;
+
     }
 
     public SWebViewDialog(@NonNull Context context, @StyleRes int themeResId) {
@@ -92,27 +103,33 @@ public class SWebViewDialog extends SBaseDialog {
 //            }
 //        });
 
-        sWebViewLayout = new SWebViewLayout(activity);
-        this.setContentView(sWebViewLayout);
-        sWebView = sWebViewLayout.getsWebView();
-        sWebViewLayout.getCloseImageView().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismiss();
-            }
-        });
+        if (mContentView == null) {
+            SWebViewLayout sWebViewLayout = new SWebViewLayout(activity);
+            sWebView = sWebViewLayout.getsWebView();
+            backView = sWebViewLayout.getBackImageView();
+            sWebViewLayout.getCloseImageView().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dismiss();
+                }
+            });
+
+            mContentView = sWebViewLayout;
+        }
+        this.setContentView(mContentView);
+
         if (sWebView != null) {
             sWebView.loadUrl(webUrl);
         }
 
-        sWebViewLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+        mContentView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             public void onGlobalLayout() {
                 PL.d("onGlobalLayout...");
                 possiblyResizeChildOfContent();
             }
         });
 
-        viewGroupLayoutParams = (ViewGroup.LayoutParams) sWebViewLayout.getLayoutParams();
+        viewGroupLayoutParams = (ViewGroup.LayoutParams) mContentView.getLayoutParams();
         originalHeight = viewGroupLayoutParams.height;
 
         if (sWebDialogCallback != null) {
@@ -128,7 +145,7 @@ public class SWebViewDialog extends SBaseDialog {
     private void possiblyResizeChildOfContent() {//全屏状态下webView输入框被遮挡的问题，通过这个方法重设view高度勉强解决
         int usableHeightNow = computeUsableHeight();
         if (usableHeightNow != usableHeightPrevious) {
-            int usableHeightSansKeyboard = sWebViewLayout.getRootView().getHeight();
+            int usableHeightSansKeyboard = mContentView.getRootView().getHeight();
             PL.d("usableHeightSansKeyboard:" + usableHeightSansKeyboard);
             int heightDifference = usableHeightSansKeyboard - usableHeightNow;
             if (heightDifference > (usableHeightSansKeyboard / 3)) {
@@ -138,14 +155,14 @@ public class SWebViewDialog extends SBaseDialog {
                 // keyboard probably just became hidden
                 viewGroupLayoutParams.height = originalHeight;
             }
-            sWebViewLayout.requestLayout();
+            mContentView.requestLayout();
             usableHeightPrevious = usableHeightNow;
         }
     }
 
     private int computeUsableHeight() {
         Rect r = new Rect();
-        sWebViewLayout.getWindowVisibleDisplayFrame(r);
+        mContentView.getWindowVisibleDisplayFrame(r);
         return (r.bottom - r.top);// 全屏模式下： return r.bottom
     }
 
@@ -175,7 +192,10 @@ public class SWebViewDialog extends SBaseDialog {
     }
 
     public void finish(){
-        sWebViewLayout.getBackImageView().setVisibility(View.GONE);
+
+        if (backView != null){
+            backView.setVisibility(View.GONE);
+        }
     }
 
     public interface SWebDialogCallback

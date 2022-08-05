@@ -54,12 +54,25 @@ public class SWebViewLayout extends SBaseRelativeLayout {
 
     public SWebViewLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
+        activity = (Activity)context;
+        initView();
     }
 
     public SWebViewLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        activity = (Activity)context;
+        initView();
     }
 
+    public SWebViewLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+        activity = (Activity)context;
+        initView();
+    }
+
+    public View getTitleHeaderView(){
+        return rl_sdk_sweb_header;
+    }
 
     private void initView(){
 
