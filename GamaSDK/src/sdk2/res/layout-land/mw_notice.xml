@@ -23,7 +23,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="@string/text_phone_bind"
+                android:text="@string/text_notice"
                 android:textColor="@color/white_c"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -51,11 +51,11 @@
 
 
             <ImageView
+                android:id="@+id/iv_notice_close"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:id="@+id/iv_bind_phone_close"
                 android:layout_marginEnd="8dp"
                 android:src="@mipmap/icon_close_4" />
 
@@ -67,9 +67,9 @@
             android:orientation="vertical">
 
             <com.mw.sdk.SWebViewLayout
+                android:id="@+id/svl_notice_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/svl_notice_layout"/>
+                android:layout_height="match_parent" />
 
         </RelativeLayout>
 
