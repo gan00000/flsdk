@@ -16,7 +16,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="36dp"
-            android:background="@color/c_FF892E"
+            android:background="@drawable/mw_bg_notice_title"
             >
 
             <TextView
@@ -64,6 +64,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@drawable/mw_bg_notice_web"
             android:orientation="vertical">
 
             <com.mw.sdk.SWebViewLayout
