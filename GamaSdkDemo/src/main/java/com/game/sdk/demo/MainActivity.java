@@ -1,32 +1,25 @@
 package com.game.sdk.demo;
 
-import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 
 import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.MarketUtil;
 import com.core.base.utils.PL;
-import com.core.base.utils.PermissionUtil;
 import com.mw.base.bean.SGameLanguage;
 import com.mw.base.bean.SPayType;
 import com.mw.base.utils.SdkUtil;
 import com.mw.base.utils.SLog;
-import com.mw.sdk.constant.RequestCode;
 import com.mw.sdk.login.ILoginCallBack;
 import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.callback.IPayListener;
@@ -344,7 +337,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View view) {
 
-                mIMWSDK.showUpdateAccountView(MainActivity.this, new SFCallBack() {
+                mIMWSDK.showUpgradeAccountView(MainActivity.this, new SFCallBack() {
                     @Override
                     public void success(Object result, String msg) {
 

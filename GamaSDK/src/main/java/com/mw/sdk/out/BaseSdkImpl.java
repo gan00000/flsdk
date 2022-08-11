@@ -755,7 +755,7 @@ public class BaseSdkImpl implements IMWSDK {
     }
 
     @Override
-    public void showUpdateAccountView(Activity activity, SFCallBack sfCallBack) {
+    public void showUpgradeAccountView(Activity activity, SFCallBack sfCallBack) {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -798,7 +798,7 @@ public class BaseSdkImpl implements IMWSDK {
     }
 
     @Override
-    public void requestUpdateAccount(Activity activity, String account, String pwd, SFCallBack sfCallBack ) {
+    public void requestUpgradeAccount(Activity activity, String account, String pwd, SFCallBack sfCallBack ) {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {

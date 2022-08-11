@@ -83,7 +83,7 @@ public class DialogLoginImpl implements ILogin {
             if (configBean != null) {
                 ConfigBean.VersionData versionData = configBean.getSdkConfigLoginData(activity);
                 //test
-                versionData.setShowNotice(true);
+//                versionData.setShowNotice(true);
                 if (versionData != null && versionData.isShowNotice()) { //显示dialog web公告
                     NoticeView noticeView = new NoticeView(activity);
                     SWebViewDialog sLoginDialog = new SWebViewDialog(activity, com.mw.sdk.R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen,noticeView,noticeView.getSWebView(),null);

@@ -110,9 +110,9 @@ public interface IMWSDK extends IGameLifeCycle {
     public void requestStoreReview(Activity activity, ICompleteListener iCompleteListener);
 
     public void showBindPhoneView(Activity activity, SFCallBack sfCallBack);
-    public void showUpdateAccountView(Activity activity, SFCallBack sfCallBack);
+    public void showUpgradeAccountView(Activity activity, SFCallBack sfCallBack);
 
     public void requestVfCode(Activity activity, String areaCode, String telephone,SFCallBack sfCallBack);
     public void requestBindPhone(Activity activity, String areaCode, String telephone,String vfCode, SFCallBack sfCallBack);
-    public void requestUpdateAccount(Activity activity, String account, String pwd, SFCallBack sfCallBack);
+    public void requestUpgradeAccount(Activity activity, String account, String pwd, SFCallBack sfCallBack);
 }
