@@ -86,8 +86,8 @@ public class SWebViewDialog extends SBaseDialog {
         if (TextUtils.isEmpty(webUrl)){
             ToastUtils.toast(getContext(),"url error");
             PL.i("webUrl is empty");
-            dismiss();
-            return;
+//            dismiss();
+//            return;
         }
 
 //        setOnDismissListener(new OnDismissListener() {
@@ -118,7 +118,7 @@ public class SWebViewDialog extends SBaseDialog {
         }
         this.setContentView(mContentView);
 
-        if (sWebView != null) {
+        if (sWebView != null && !TextUtils.isEmpty(webUrl)) {
             sWebView.loadUrl(webUrl);
         }
 

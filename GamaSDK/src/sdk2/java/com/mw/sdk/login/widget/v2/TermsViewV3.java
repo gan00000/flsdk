@@ -12,7 +12,10 @@ import android.widget.TextView;
 
 import com.core.base.BaseWebViewClient;
 import com.core.base.utils.PL;
+import com.core.base.utils.SStringUtil;
+import com.mw.base.cfg.ConfigBean;
 import com.mw.base.cfg.ResConfig;
+import com.mw.base.utils.SdkUtil;
 import com.mw.sdk.SBaseDialog;
 import com.mw.sdk.login.constant.ViewType;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
@@ -84,10 +87,15 @@ public class TermsViewV3 extends SLoginBaseRelativeLayout {
 
             }
         });
+        ConfigBean configBean = SdkUtil.getSdkCfg(getContext());
+        if (configBean != null && configBean.getUrl() != null && SStringUtil.isNotEmpty(configBean.getUrl().getAgreementUrl())) {
+            serviceUrl = configBean.getUrl().getAgreementUrl();
+        }else{
+            serviceUrl = ResConfig.getServiceTermUrl(getContext());
+            serviceUrl = String.format(serviceUrl, ResConfig.getGameCode(getContext()));
+//          String privateUrl = ResConfig.getPrivateTermUrl(getContext());
+        }
 
-        serviceUrl = ResConfig.getServiceTermUrl(getContext());
-        serviceUrl = String.format(serviceUrl, ResConfig.getGameCode(getContext()));
-//        String privateUrl = ResConfig.getPrivateTermUrl(getContext());
         PL.i("serviceUrl=" + serviceUrl);
         termsView1 = (WebView) contentView.findViewById(R.id.sdk_terms_webview);
         termsView1.clearCache(true);

@@ -79,32 +79,32 @@ public class NoticeView extends SLoginBaseRelativeLayout {
             }
         });
 
-        serviceUrl = ResConfig.getServiceTermUrl(getContext());
-        serviceUrl = String.format(serviceUrl, ResConfig.getGameCode(getContext()));
+//        serviceUrl = ResConfig.getServiceTermUrl(getContext());
+//        serviceUrl = String.format(serviceUrl, ResConfig.getGameCode(getContext()));
 //        String privateUrl = ResConfig.getPrivateTermUrl(getContext());
-        PL.i("serviceUrl=" + serviceUrl);
+//        PL.i("serviceUrl=" + serviceUrl);
         sWebViewLayout = contentView.findViewById(R.id.svl_notice_layout);
         sWebViewLayout.getTitleHeaderView().setVisibility(GONE);
         webView = sWebViewLayout.getsWebView();
 
         webView.clearCache(true);
         webView.setWebViewClient(new BaseWebViewClient((Activity) getActivity()));
-        webView.loadUrl(serviceUrl);
+//        webView.loadUrl(serviceUrl);
 
         return contentView;
     }
 
 
 
-    @Override
-    public void onViewVisible() {
-        super.onViewVisible();
-        webView.loadUrl(serviceUrl);
-    }
+//    @Override
+//    public void onViewVisible() {
+//        super.onViewVisible();
+//        webView.loadUrl(serviceUrl);
+//    }
 
-    public void reloadUrl(){
-        if (webView != null) {
-            webView.loadUrl(serviceUrl);
-        }
-    }
+//    public void reloadUrl(){
+//        if (webView != null) {
+//            webView.loadUrl(serviceUrl);
+//        }
+//    }
 }
