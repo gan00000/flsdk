@@ -107,17 +107,17 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
             return;
         }
 
+        if (!SdkUtil.checkAccount(account)) {
+            toast(R.string.text_account_format);
+            return;
+        }
+
         password = registerPasswordEditText.getEditableText().toString().trim();
         if (TextUtils.isEmpty(password)) {
             ToastUtils.toast(getActivity(), R.string.py_password_empty);
             return;
         }
 
-
-        if (!SdkUtil.checkAccount(account)) {
-            toast(R.string.text_account_format);
-            return;
-        }
         if (!SdkUtil.checkPassword(password)) {
             toast(R.string.text_pwd_format);
             return;
