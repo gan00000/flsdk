@@ -14,7 +14,7 @@
     <string name="zh_tw_sdk_act_spa_url" translatable="false"></string>
 
     <!--cdn域名-->
-    <string name="zh_tw_sdk_cdn_pre_url" translatable="false">https://res-static.mmplaygame.com/</string>
+    <string name="zh_tw_sdk_cdn_pre_url" translatable="false">https://cdn-download.mmplaygame.com/</string>
     <string name="zh_tw_sdk_cdn_spa_url" translatable="false"></string>
 
     <!--广告域名-->
