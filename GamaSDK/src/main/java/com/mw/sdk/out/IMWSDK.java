@@ -120,10 +120,45 @@ public interface IMWSDK extends IGameLifeCycle {
 
     public void requestStoreReview(Activity activity, ICompleteListener iCompleteListener);
 
+    /**
+     * 显示sdk内部绑定手机页面
+     * @param activity
+     * @param sfCallBack
+     */
     public void showBindPhoneView(Activity activity, SFCallBack sfCallBack);
+
+    /**
+     * 显示sdk内部升级账号页面
+     * @param activity
+     * @param sfCallBack
+     */
     public void showUpgradeAccountView(Activity activity, SFCallBack sfCallBack);
 
+    /**
+     * 请求获取手机验证码
+     * @param activity
+     * @param areaCode  手机区号（不带"+"，如中国：86）
+     * @param telephone 手机号码
+     * @param sfCallBack    回调
+     */
     public void requestVfCode(Activity activity, String areaCode, String telephone,SFCallBack sfCallBack);
+
+    /**
+     * 请求绑定手机
+     * @param activity
+     * @param areaCode 区号
+     * @param telephone 手机号码
+     * @param vfCode    验证码
+     * @param sfCallBack
+     */
     public void requestBindPhone(Activity activity, String areaCode, String telephone,String vfCode, SFCallBack sfCallBack);
+
+    /**
+     * 请求账号升级
+     * @param activity
+     * @param account 需要绑定的新账号
+     * @param pwd 新账号的密码
+     * @param sfCallBack 回调
+     */
     public void requestUpgradeAccount(Activity activity, String account, String pwd, SFCallBack sfCallBack);
 }
