@@ -75,17 +75,27 @@ public class ShareUtil {
 
     private static void shareLine(Activity activity, String message, String linkUrl, String picPath) {
         if (shouldShareWithType(activity, ThirdPartyType.LINE)) {
-            if (!TextUtils.isEmpty(picPath)) { // 有读sdk权限及有图片路径
-                activity.startActivityForResult(
-                        new Intent("android.intent.action.VIEW", Uri.parse("line://msg/image/"
-                                + picPath)), SHARE_LINE);
-            } else if (!TextUtils.isEmpty(message)) {
-                if (!TextUtils.isEmpty(linkUrl)) {
-                    message = message + " " + linkUrl;
+            try {
+                if (!TextUtils.isEmpty(picPath)) { // 有读sdk权限及有图片路径
+                    activity.startActivityForResult(
+                            new Intent("android.intent.action.VIEW", Uri.parse("line://msg/image/"
+                                    + picPath)), SHARE_LINE);
+                } else if (!TextUtils.isEmpty(message)) {
+                    if (!TextUtils.isEmpty(linkUrl)) {
+                        message = message + " " + linkUrl;
+                    }
+                    activity.startActivityForResult(
+                            new Intent("android.intent.action.VIEW", Uri.parse("line://msg/text/"
+                                    + message)), SHARE_LINE);
                 }
-                activity.startActivityForResult(
-                        new Intent("android.intent.action.VIEW", Uri.parse("line://msg/text/"
-                                + message)), SHARE_LINE);
+            } catch (Exception e) {
+                e.printStackTrace();
+                String tip = String.format(activity.getResources().getString(R.string.gama_toast_msg_app_not_install), "Line");
+                ToastUtils.toast(activity, tip);
+                PL.e("没有安装line");
+                if(iSdkCallBack != null) {
+                    iSdkCallBack.failure();
+                }
             }
         } else {
             String tip = String.format(activity.getResources().getString(R.string.gama_toast_msg_app_not_install), "Line");
@@ -171,25 +181,26 @@ public class ShareUtil {
     }
 
     public static boolean shouldShareWithType(Activity activity, ThirdPartyType type) {
-        switch (type) {
-            case LINE:
-                return ApkInstallUtil.isInstallApp(activity, "jp.naver.line.android");
-
-            case WHATSAPP:
-                return ApkInstallUtil.isInstallApp(activity, "com.whatsapp");
-
-            case FACEBOOK_MESSENGER:
-                return MessengerUtils.hasMessengerInstalled(activity);
-
-            case FACEBOOK:
-                return true;
-
-            case TWITTER:
-                return true;
-
-            default:
-                return false;
-        }
+//        switch (type) {
+//            case LINE:
+//                return ApkInstallUtil.isInstallApp(activity, "jp.naver.line.android");
+//
+//            case WHATSAPP:
+//                return ApkInstallUtil.isInstallApp(activity, "com.whatsapp");
+//
+//            case FACEBOOK_MESSENGER:
+//                return MessengerUtils.hasMessengerInstalled(activity);
+//
+//            case FACEBOOK:
+//                return true;
+//
+//            case TWITTER:
+//                return true;
+//
+//            default:
+//                return false;
+//        }
+        return true;
     }
 
     public static void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data){
