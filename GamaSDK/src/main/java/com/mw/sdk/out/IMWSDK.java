@@ -85,7 +85,18 @@ public interface IMWSDK extends IGameLifeCycle {
      * @param shareLinkUrl  分享的链接
      * @param iSdkCallBack  分享回调
      */
+    void shareFacebook(Activity activity, String hashTag, String msg, String shareLinkUrl, ISdkCallBack iSdkCallBack);
+
     void share(Activity activity, String hashTag, String msg, String shareLinkUrl, ISdkCallBack iSdkCallBack);
+
+    /**
+     * line分享
+     * @param activity
+     * @param message 分享的内容
+     * @param shareLinkUrl  分享的链接
+     * @param iSdkCallBack  分享回调
+     */
+    void shareLine(final Activity activity, final String message, final String shareLinkUrl, final ISdkCallBack iSdkCallBack);
     /**
      * 检查是否支持分享
      */

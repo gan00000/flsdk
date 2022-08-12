@@ -237,7 +237,7 @@ public class BaseSdkImpl implements IMWSDK {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                PL.i("IGama onActivityResult");
+                PL.i("mw onActivityResult");
                 if (iLogin != null) {
                     iLogin.onActivityResult(activity, requestCode, resultCode, data);
                 }
@@ -263,7 +263,7 @@ public class BaseSdkImpl implements IMWSDK {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                PL.i("IGama onPause");
+                PL.i("mw onPause");
                 if (iLogin != null) {
                     iLogin.onPause(activity);
                 }
@@ -359,6 +359,14 @@ public class BaseSdkImpl implements IMWSDK {
 
     public void share(Activity activity, String hashTag, String message, String shareLinkUrl, ISdkCallBack iSdkCallBack) {
         this.share(activity, ThirdPartyType.FACEBOOK, hashTag, message, shareLinkUrl,"",iSdkCallBack);
+    }
+
+    public void shareFacebook(Activity activity, String hashTag, String message, String shareLinkUrl, ISdkCallBack iSdkCallBack) {
+        this.share(activity, ThirdPartyType.FACEBOOK, hashTag, message, shareLinkUrl,"",iSdkCallBack);
+    }
+
+    public void shareLine(final Activity activity, final String message, final String shareLinkUrl, final ISdkCallBack iSdkCallBack){
+        share(activity,ThirdPartyType.LINE,"",message,shareLinkUrl,"",iSdkCallBack);
     }
 
     public void share(final Activity activity, final ThirdPartyType type, String hashTag, final String message, final String shareLinkUrl, final String picPath, final ISdkCallBack iSdkCallBack) {
