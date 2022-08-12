@@ -298,6 +298,28 @@ public class MainActivity extends Activity {
 //                }
             }
         });
+        findViewById(R.id.share_line).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mIMWSDK.shareLine(MainActivity.this, "2022首款卡牌大作【萬靈召喚師】，爆笑來襲！從東方文明到西方文明的羈絆，從神族到魔族的對抗，一段奇妙的神仙冒險之旅就此展開！","https://static-resource.meowplayer.com/share/index.html", new ISdkCallBack() {
+                    @Override
+                    public void success() {
+                        PL.i("share success");
+                    }
+
+                    @Override
+                    public void failure() {
+                        PL.i("share failure");
+                    }
+                });
+
+//                if (Build.VERSION.SDK_INT >= 33) {
+//                    //todo 现在还没13系统设备，无法测试先注释
+////                    PermissionUtil.requestPermissions(MainActivity.this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, RequestCode.RequestCode_Permission_POST_NOTIFICATIONS);
+//                    askNotificationPermission();
+//                }
+            }
+        });
         findViewById(R.id.logout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -101,6 +101,12 @@
                     android:layout_height="wrap_content"
                     android:text="升级账号view" />
 
+                <Button
+                    android:id="@+id/share_line"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="line分享" />
+
             </LinearLayout>
 
 

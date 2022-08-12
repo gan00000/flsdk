@@ -10,6 +10,12 @@
 	6. [事件埋点接口](#8)
 	7. [应用内评分接口](#9)
 	8. [fb分享接口](#11)
+	9. [line分享接口](#12)
+	10. [显示sdk内部绑定手机页面](#13)
+	11. [显示sdk内部升级账号页面](#14)
+	12. [请求获取手机验证码](#15)
+	13. [请求绑定手机](#16)
+	14. [请求账号升级](#17)
 	9. [上架Google Play相关注意的问题](#10)
 
 
@@ -107,7 +113,8 @@
 	//添加下列的依赖
 	dependencies {
 	//    api fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
-	
+		
+		//MWSDK-release为sdk内提供的aar库
 	    implementation(name:'MWSDK-release', ext:'aar')
 	    api 'androidx.legacy:legacy-support-v4:1.0.0'
 	    api 'androidx.appcompat:appcompat:1.4.2'
@@ -414,6 +421,86 @@
                     }
                 });
                 
+	
+	```
+	
+* <h3 id="12">line分享接口</h3>   
+	
+	```
+	/**
+     * line分享
+     * @param activity
+     * @param message 分享的内容
+     * @param shareLinkUrl  分享的链接
+     * @param iSdkCallBack  分享回调
+     */
+    void shareLine(final Activity activity, final String message, final String shareLinkUrl, final ISdkCallBack iSdkCallBack);
+    
+	
+	```
+* <h3 id="13">显示sdk内部绑定手机页面</h3>   
+	
+	```
+	/**
+     * 显示sdk内部绑定手机页面
+     * @param activity
+     * @param sfCallBack
+     */
+    public void showBindPhoneView(Activity activity, SFCallBack sfCallBack);
+    
+	
+	```
+	
+* <h3 id="14">显示sdk内部升级账号页面</h3>   
+	
+	```
+	/**
+     * 显示sdk内部升级账号页面
+     * @param activity
+     * @param sfCallBack
+     */
+    public void showUpgradeAccountView(Activity activity, SFCallBack sfCallBack);
+	
+	```
+	
+* <h3 id="15">请求获取手机验证码</h3>   
+	
+	```
+	/**
+     * 请求获取手机验证码
+     * @param activity
+     * @param areaCode  手机区号（不带"+"，如中国：86）
+     * @param telephone 手机号码
+     * @param sfCallBack    回调
+     */
+    public void requestVfCode(Activity activity, String areaCode, String telephone,SFCallBack sfCallBack);
+	
+	```
+* <h3 id="16">请求绑定手机</h3>   
+	
+	```
+	/**
+     * 请求绑定手机
+     * @param activity
+     * @param areaCode 区号
+     * @param telephone 手机号码
+     * @param vfCode    验证码
+     * @param sfCallBack
+     */
+    public void requestBindPhone(Activity activity, String areaCode, String telephone,String vfCode, SFCallBack sfCallBack);
+	
+	```
+* <h3 id="17">请求账号升级</h3>   
+	
+	```
+	 /**
+     * 请求账号升级
+     * @param activity
+     * @param account 需要绑定的新账号
+     * @param pwd 新账号的密码
+     * @param sfCallBack 回调
+     */
+    public void requestUpgradeAccount(Activity activity, String account, String pwd, SFCallBack sfCallBack);
 	
 	```
 	
