@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "404975489067",
+    "project_id": "mzxq-game",
+    "storage_bucket": "mzxq-game.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:404975489067:android:378630350479a1b47b9a6e",
+        "android_client_info": {
+          "package_name": "com.wanxian.mzxq"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "404975489067-g5o0g8t48kvj37f7591luvrbr60dqkh0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wanxian.mzxq",
+            "certificate_hash": "0cead8362d5cfb6c3f80f366cf348ee7650fee1c"
+          }
+        },
+        {
+          "client_id": "404975489067-qn7ic6pgue1ll965um2ucs867uafp4se.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBP5JrJaey0fpwbY-IAL3ZOHrf8b6cwvOo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "404975489067-qn7ic6pgue1ll965um2ucs867uafp4se.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -48,42 +48,19 @@ android {
 
     signingConfigs {//签名的配置
 
-        googlePayTest {
-            storeFile file('../signkey/mmda.key')
-            storePassword 'sfish0000'
-            keyAlias = 'sfish0000'
-            keyPassword 'sfish0000'
-        }
-
-        ganrelease {
-            storeFile file('../signkey/ganme') //正式签名，以后使用
-            storePassword 'gan999000'
-            keyAlias 'gan'
-            keyPassword 'gan999000'
-        }
-
         mwrelease {
             storeFile file('../signkey/mw_game') //正式签名，以后使用
             storePassword 'mw999000'
             keyAlias 'mwgame'
             keyPassword 'mw999000'
         }
-        releasexx {
-            storeFile file('../signkey/flyfun.keystore') //正式签名，以后使用
-            storePassword 'flyfun999'
-            keyAlias 'flyfun'
-            keyPassword 'flyfun999'
+
+        release_v2 {
+            storeFile file('../signkey/sdkv2_key.jks') //正式签名，以后使用
+            storePassword 'mw888000'
+            keyAlias 'mwgamev2'
+            keyPassword 'mw888000'
         }
-//        debug {
-//            storeFile file('../signkey/flyfun.keystore') //正式签名，以后使用
-//            storePassword 'flyfun999'
-//            keyAlias 'flyfun'
-//            keyPassword 'flyfun999'
-////            storeFile file('../signkey/mmda.key')
-////            storePassword 'sfish0000'
-////            keyAlias = 'sfish0000'
-////            keyPassword 'sfish0000'
-//        }
     }
 
     buildTypes {
@@ -94,7 +71,7 @@ android {
         }
 
         debug {
-            signingConfig signingConfigs.mwrelease
+            signingConfig signingConfigs.release_v2
         }
     }
     productFlavors {
@@ -123,23 +100,23 @@ android {
 
         sdk2 {
 
-            signingConfig signingConfigs.mwrelease
-            applicationId "com.wanye.fszhl"
+            signingConfig signingConfigs.release_v2
+            applicationId "com.wanxian.mzxq"
             minSdkVersion 21
-            targetSdkVersion 33
+            targetSdkVersion 32
             versionCode 1
             versionName "1.0"
             flavorDimensions "1"
             resValue "string", "scheme", "fszhl"
-            resValue "string", "facebook_app_id", "1672362243138559"
-            resValue "string", "facebook_client_token", "d5b9ebb98ff9a1f67266d937f4cce980"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1672362243138559" //启用分析
-            resValue "string", "fb_login_protocol_scheme", "fb1672362243138559"
-            resValue "string", "facebook_app_name", "終末的御靈師"
-            resValue "string", "line_channelId", "1657313585"
+            resValue "string", "facebook_app_id", "855035868795821"
+            resValue "string", "facebook_client_token", "0872345a71b6e76c9247438a3f27b0b8"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider855035868795821" //启用分析
+            resValue "string", "fb_login_protocol_scheme", "fb855035868795821"
+            resValue "string", "facebook_app_name", "魔之序曲"
+            resValue "string", "line_channelId", "1657381968"
 
             //每个游戏的demo设置 test
-            resValue "string", "sdk_name", "終末的御靈師demo"
+            resValue "string", "sdk_name", "魔之序曲demo"
 
         }
 
