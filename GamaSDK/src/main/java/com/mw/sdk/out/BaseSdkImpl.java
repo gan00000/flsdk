@@ -91,7 +91,7 @@ public class BaseSdkImpl implements IMWSDK {
 //        initSDK(activity, SGameLanguage.zh_TW);
 //    }
 
-    @Override
+//    @Override
     public void initSDK(final Activity activity, final SGameLanguage gameLanguage) {
 
         activity.runOnUiThread(new Runnable() {
@@ -136,7 +136,7 @@ public class BaseSdkImpl implements IMWSDK {
         需要在其他所有方法之前调用
     * */
 
-    @Override
+//    @Override
     public void setGameLanguage(final Activity activity, final SGameLanguage gameLanguage) {
         PL.i("IGama setGameLanguage:" + gameLanguage);
 
@@ -181,6 +181,10 @@ public class BaseSdkImpl implements IMWSDK {
             @Override
             public void run() {
 
+                if (!isInitSdk) {
+                    initSDK(activity, SGameLanguage.zh_TW);
+                }
+
                 activity.getWindow().getDecorView().setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
                     @Override
                     public void onSystemUiVisibilityChange(int visibility) {
@@ -192,9 +196,6 @@ public class BaseSdkImpl implements IMWSDK {
                 ConfigRequest.requestBaseCfg(activity.getApplicationContext());//加载配置
                 ConfigRequest.requestAreaCodeInfo(activity.getApplicationContext());
 
-                if (!isInitSdk) {
-                    initSDK(activity, SGameLanguage.zh_TW);
-                }
                 if (iLogin != null) {
                     iLogin.onCreate(activity);
                 }

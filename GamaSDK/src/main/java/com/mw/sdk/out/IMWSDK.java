@@ -22,9 +22,9 @@ public interface IMWSDK extends IGameLifeCycle {
 //    @Deprecated
 //    void initSDK(Activity activity);
 
-    void initSDK(Activity activity, SGameLanguage language);
+//    void initSDK(Activity activity, SGameLanguage language);
 
-    void setGameLanguage(Activity activity,SGameLanguage gameLanguage);
+//    void setGameLanguage(Activity activity,SGameLanguage gameLanguage);
 
     /**
      * 设置角色信息  在游戏获得角色信息的时候调用，每次登陆，切换账号等角色变化时调用

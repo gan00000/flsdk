@@ -61,13 +61,8 @@ public class MainActivity extends Activity {
 
         mIMWSDK = MWSdkFactory.create();
 
-        //初始化sdk
-        mIMWSDK.initSDK(this, SGameLanguage.zh_TW);
-
         //在游戏Activity的onCreate生命周期中调用
         mIMWSDK.onCreate(this);
-
-        mIMWSDK.setGameLanguage(MainActivity.this, SGameLanguage.zh_TW);
 
 //        demo_language.setOnClickListener(new View.OnClickListener() {
 //            @Override

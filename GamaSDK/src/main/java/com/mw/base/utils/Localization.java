@@ -21,24 +21,24 @@ public class Localization {
         }
         ResConfig.saveGameLanguage(context,gameLanguage.getLanguage());
 
-        if (gameLanguage == SGameLanguage.zh_CN){
-
-            ApkInfoUtil.updateConfigurationLocale(context, Locale.SIMPLIFIED_CHINESE);//简体
-
-        }else if(gameLanguage == SGameLanguage.en_US){
-
-            ApkInfoUtil.updateConfigurationLocale(context, Locale.US);//英文（美国）
-
-        } else if(gameLanguage == SGameLanguage.ko_KR) {
-            ApkInfoUtil.updateConfigurationLocale(context, Locale.KOREAN);//韩国
-        } else if(gameLanguage == SGameLanguage.ja_JP) {
-            ApkInfoUtil.updateConfigurationLocale(context, Locale.JAPANESE);//日本
-        }
-        else{
-
-            ApkInfoUtil.updateConfigurationLocale(context, Locale.TRADITIONAL_CHINESE);//繁体
-
-        }
+//        if (gameLanguage == SGameLanguage.zh_CN){
+//
+//            ApkInfoUtil.updateConfigurationLocale(context, Locale.SIMPLIFIED_CHINESE);//简体
+//
+//        }else if(gameLanguage == SGameLanguage.en_US){
+//
+//            ApkInfoUtil.updateConfigurationLocale(context, Locale.US);//英文（美国）
+//
+//        } else if(gameLanguage == SGameLanguage.ko_KR) {
+//            ApkInfoUtil.updateConfigurationLocale(context, Locale.KOREAN);//韩国
+//        } else if(gameLanguage == SGameLanguage.ja_JP) {
+//            ApkInfoUtil.updateConfigurationLocale(context, Locale.JAPANESE);//日本
+//        }
+//        else{
+//
+//            ApkInfoUtil.updateConfigurationLocale(context, Locale.TRADITIONAL_CHINESE);//繁体
+//
+//        }
     }
 
     public static SGameLanguage getSGameLanguage(Context context){
