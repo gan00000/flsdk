@@ -131,7 +131,7 @@ public class SBaseDialog extends Dialog {
     public boolean onTouchEvent(@NonNull MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             if (this.getCurrentFocus() != null) {
-                if (this.getCurrentFocus().getWindowToken() != null) {
+                if (this.getCurrentFocus().getWindowToken() != null) {//点击页面其他地方输入法隐藏
                     inputMethodManager.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 }
             }
