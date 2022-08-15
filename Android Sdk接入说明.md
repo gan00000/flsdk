@@ -191,9 +191,7 @@
 		super.onCreate(savedInstanceState);
 		
 		mIMWSDK = MWSdkFactory.create();
-        //初始化sdk
-        mIMWSDK.initSDK(this, SGameLanguage.zh_TW);
-
+       
         //在游戏Activity的onCreate生命周期中调用
         mIMWSDK.onCreate(this);
 	    
@@ -374,6 +372,9 @@
     CREATE_ROLE,		创建角色
     START_GUIDE, 开始新手引导
     COMPLETE_GUIDE,  完成新手引导
+    
+    此接口可接入常用的SDK埋点事件，如有特殊的另外事件需要进行埋点，使用 ：
+    public void trackEvent(Activity activity, String eventName)
 
 	sample:
 	

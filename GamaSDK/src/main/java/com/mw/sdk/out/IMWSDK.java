@@ -107,6 +107,8 @@ public interface IMWSDK extends IGameLifeCycle {
      * @param eventName 事件名称
      */
     void trackEvent(Activity activity, EventConstant.EventName eventName);
+
+    void trackEvent(Activity activity, String eventName);
     /**
      * 事件上报接口
      * @param activity

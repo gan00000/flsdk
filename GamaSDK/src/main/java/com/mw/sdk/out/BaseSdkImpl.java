@@ -509,6 +509,21 @@ public class BaseSdkImpl implements IMWSDK {
     }
 
     @Override
+    public void trackEvent(Activity activity, String eventName) {
+        Log.i(TAG, "trackEvent eventName...");
+        if (eventName == null){
+            Log.i(TAG, "trackEvent eventName is null");
+            return;
+        }
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                SdkEventLogger.trackingWithEventName(activity, eventName, null, EventConstant.AdType.AdTypeAllChannel);
+            }
+        });
+    }
+
+    @Override
     public void trackEvent(final Activity activity, EventConstant.EventName eventName, final Map<String, Object> map) {
         Log.i(TAG, "trackEvent...");
         if (eventName == null){
