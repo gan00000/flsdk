@@ -108,7 +108,8 @@
                         android:paddingEnd="16dp"
                         android:textColor="@color/c_606060"
                         android:textColorHint="@color/c_B8B8B8"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:imeOptions="flagNoExtractUi"/>
 
                 </LinearLayout>
 
@@ -134,7 +135,8 @@
                         android:paddingEnd="12dp"
                         android:textColor="@color/c_606060"
                         android:textColorHint="@color/c_B8B8B8"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:imeOptions="flagNoExtractUi"/>
 
 
                     <Button
@@ -210,7 +212,8 @@
                         android:paddingEnd="16dp"
                         android:textColor="@color/c_606060"
                         android:textColorHint="@color/c_B8B8B8"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:imeOptions="flagNoExtractUi"/>
 
                 </LinearLayout>
 

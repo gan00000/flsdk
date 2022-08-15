@@ -5,9 +5,12 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StyleRes;
+
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 
 import com.core.base.utils.AppUtil;
 import com.core.base.utils.PL;
@@ -20,6 +23,7 @@ import com.mw.base.utils.Localization;
 public class SBaseDialog extends Dialog {
 
     private static String TAG = SBaseDialog.class.getSimpleName();
+    private InputMethodManager inputMethodManager;
 
     public SBaseDialog(@NonNull Context context) {
         super(context);
@@ -43,6 +47,7 @@ public class SBaseDialog extends Dialog {
         if(window == null) {
             return;
         }
+        inputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         window.getDecorView().setPadding(0, 0, 0, 0);
 //        ScreenHelper screenHelper = new ScreenHelper((Activity) context);
 //        int screenWidth = screenHelper.getScreenWidth();
@@ -120,5 +125,17 @@ public class SBaseDialog extends Dialog {
     public void dismiss() {
         super.dismiss();
         PL.i(TAG, "Dialog dismiss");
+    }
+
+    @Override
+    public boolean onTouchEvent(@NonNull MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            if (this.getCurrentFocus() != null) {
+                if (this.getCurrentFocus().getWindowToken() != null) {
+                    inputMethodManager.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                }
+            }
+        }
+        return super.onTouchEvent(event);
     }
 }

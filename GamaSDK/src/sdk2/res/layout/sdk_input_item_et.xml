@@ -65,6 +65,7 @@
             android:focusableInTouchMode="true"
             android:textColor="@color/white_c"
             android:textColorHint="@color/c_848484"
+            android:imeOptions="flagNoExtractUi"
             />
 
 
