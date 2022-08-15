@@ -66,7 +66,7 @@ public class AccountPopupWindow extends PopupWindow {
         contentView = inflater.inflate(R.layout.sdk_account_rv, null);
         setContentView(contentView);
 
-        this.setOutsideTouchable(false);
+        this.setOutsideTouchable(true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             this.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         }else{

@@ -404,6 +404,8 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
             public void onClick(View v) {
                 if (accountPopupWindow!= null)
                 {
+                    //要先让popupwindow获得焦点，才能正确获取popupwindow的状态
+                    accountPopupWindow.setFocusable(true);
                     if (accountPopupWindow.isShowing()){
 
                         accountPopupWindow.dismiss();
