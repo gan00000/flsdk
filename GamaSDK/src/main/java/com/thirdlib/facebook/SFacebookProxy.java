@@ -55,7 +55,7 @@ public class SFacebookProxy {
 	public static final int Request_Code_Share_Url = 9101;
 
 	private static DefaultAudience defaultAudience = DefaultAudience.FRIENDS;
-	private static LoginBehavior loginBehavior = LoginBehavior.NATIVE_WITH_FALLBACK;
+	private static LoginBehavior loginBehavior = LoginBehavior.WEB_ONLY;
 	private static List<String> permissions = Arrays.asList("public_profile");
 //	private static List<String> permissions = Arrays.asList("public_profile", "email", "user_friends");
 //	private static List<String> permissions = Collections.singletonList("public_profile");
@@ -221,8 +221,8 @@ public class SFacebookProxy {
 			}
 		} else {
 			Log.d(FB_TAG, "accessToken == null");
-			loginManager.setDefaultAudience(defaultAudience);
-			loginManager.setLoginBehavior(loginBehavior);
+//			loginManager.setDefaultAudience(defaultAudience);
+//			loginManager.setLoginBehavior(loginBehavior);
 			loginManager.logInWithReadPermissions(activity, permissions);
 		}
 
