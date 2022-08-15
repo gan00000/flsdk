@@ -107,7 +107,7 @@ android {
             versionCode 1
             versionName "1.0"
             flavorDimensions "1"
-            resValue "string", "scheme", "fszhl"
+            resValue "string", "scheme", "mzxq"
             resValue "string", "facebook_app_id", "855035868795821"
             resValue "string", "facebook_client_token", "0872345a71b6e76c9247438a3f27b0b8"
             resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider855035868795821" //启用分析
