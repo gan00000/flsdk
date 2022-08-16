@@ -11,7 +11,7 @@ import android.util.DisplayMetrics;
  */
 public class ScreenHelper {
 
-    Activity activity;
+    /*Activity activity;
     int screenWidth;
 
     int screenHeight;
@@ -98,7 +98,21 @@ public class ScreenHelper {
 
     public boolean isPortrait() {
         return isPortrait;
+    }*/
+
+
+    public static boolean isLandscape(Context context) {
+        return context.getResources().getConfiguration().orientation
+                == Configuration.ORIENTATION_LANDSCAPE;
     }
 
-
+    /**
+     * Return whether screen is portrait.
+     *
+     * @return {@code true}: yes<br>{@code false}: no
+     */
+    public static boolean isPortrait(Context context) {
+        return context.getResources().getConfiguration().orientation
+                == Configuration.ORIENTATION_PORTRAIT;
+    }
 }
