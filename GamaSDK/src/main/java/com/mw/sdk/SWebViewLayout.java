@@ -76,10 +76,10 @@ public class SWebViewLayout extends SBaseRelativeLayout {
 
     private void initView(){
 
-        int closeeRadius = getCloseRadius();
+//        int closeeRadius = getCloseRadius();
         View contentView = activity.getLayoutInflater().inflate(R.layout.s_web_view_with_title_layout,null);
         RelativeLayout.LayoutParams webviewLp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-        webviewLp.setMargins(closeeRadius,closeeRadius,closeeRadius,closeeRadius);
+//        webviewLp.setMargins(closeeRadius,closeeRadius,closeeRadius,closeeRadius);
         this.addView(contentView,webviewLp);
 
 //        closeImageView = new ImageView(activity);

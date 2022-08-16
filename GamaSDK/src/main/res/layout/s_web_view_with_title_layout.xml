@@ -29,10 +29,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"
+                android:layout_toEndOf="@id/iv_s_web_back"
+                android:layout_toStartOf="@id/iv_s_web_close"
                 android:gravity="center"
                 android:textColor="@android:color/white"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:visibility="gone"
+                android:maxLines="1" />
 
             <ImageView
                 android:id="@+id/iv_s_web_close"
