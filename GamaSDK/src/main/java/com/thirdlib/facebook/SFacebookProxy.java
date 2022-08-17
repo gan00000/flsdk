@@ -205,7 +205,7 @@ public class SFacebookProxy {
 			}
 		});
 
-		AccessToken accessToken = AccessToken.getCurrentAccessToken();
+		/*AccessToken accessToken = AccessToken.getCurrentAccessToken();
 		if (accessToken != null && !accessToken.isExpired()) {
 			Log.d(FB_TAG, "login result: onSuccess: accessToken != null" );
 			String fbThirdId = accessToken.getUserId();
@@ -224,8 +224,9 @@ public class SFacebookProxy {
 //			loginManager.setDefaultAudience(defaultAudience);
 //			loginManager.setLoginBehavior(loginBehavior);
 			loginManager.logInWithReadPermissions(activity, permissions);
-		}
+		}*/
 
+		loginManager.logInWithReadPermissions(activity, permissions);
 	}
 
 	/**
