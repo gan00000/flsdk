@@ -36,6 +36,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by gan on 2017/2/7.
@@ -712,15 +713,41 @@ public class SdkUtil {
         return SPUtil.getSimpleString(context, SdkUtil.SDK_SP_FILE,GAMA_GOOGLE_TOKEN_ID_STRING);
     }
 
+    private static final String MW_UNIQUEID = "MW_SDK_UNIQUEID";
+    private static void saveUniqueId(Context context, String uniqueId){
+        SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE,MW_UNIQUEID,uniqueId);
+    }
+    private static String getUniqueId(Context context){
+        return SPUtil.getSimpleString(context, SdkUtil.SDK_SP_FILE,MW_UNIQUEID);
+    }
+
     /**
      * 生成免注册登入账号
      */
-    public static  String getGoogleAdid1AndroidId(Context ctx){
+    public static  String getSdkUniqueId(Context ctx){
+
+//        1、優先獲取谷歌ID
+//        2、獲取不到谷歌ID再獲取安卓ID
+//        3、谷歌ID和安卓ID都獲取不到，最後再自己生成一個ID
+//        为防止上次獲取谷歌ID下次獲取安卓ID的情况，獲取的ID都保存到本地，後面從本地去讀取
+        String localUniqueId = getUniqueId(ctx);
+        if (SStringUtil.isNotEmpty(localUniqueId)){
+            return localUniqueId;
+        }
         String adId = SdkUtil.getGoogleAdId(ctx);
         if (SStringUtil.isNotEmpty(adId)){//先Google id
+            saveUniqueId(ctx,adId);
             return adId;
         }
-        return ApkInfoUtil.getAndroidId(ctx);
+        String androidId = ApkInfoUtil.getAndroidId(ctx);
+        if (SStringUtil.isNotEmpty(androidId)){//獲取不到谷歌ID再獲取安卓ID
+            saveUniqueId(ctx,androidId);
+            return androidId;
+        }
+
+        String sdkUUID = UUID.randomUUID().toString();
+        saveUniqueId(ctx,sdkUUID);
+        return sdkUUID;
     }
 
     private static final String GAMA_START_TERM_STATUS = "GAMA_START_TERM_STATUS";

@@ -66,7 +66,7 @@ public class SSdkBaseRequestBean extends BaseReqeustBean {
             signature = SStringUtil.toMd5(ResConfig.getAppKey(context) + gameCode + timestamp);
         }
         adId = SdkUtil.getGoogleAdId(context);
-        uniqueId = SdkUtil.getGoogleAdid1AndroidId(context);
+        uniqueId = SdkUtil.getSdkUniqueId(context);
         referrer = SdkUtil.getReferrer(context);
 
         spy_platForm = ResUtil.findStringByName(context,"spy_platForm");

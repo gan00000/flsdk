@@ -13,7 +13,6 @@ import androidx.fragment.app.Fragment;
 import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.ISReqCallBack;
 import com.core.base.callback.SFCallBack;
-import com.core.base.utils.FileUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
@@ -50,7 +49,6 @@ import com.thirdlib.google.SGoogleSignIn;
 import com.thirdlib.line.SLineSignIn;
 import com.thirdlib.twitter.GamaTwitterLogin;
 import com.mw.sdk.R;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -1167,7 +1165,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     public void accountBind(final Activity activity,final AccountModel currentAccountMode, final String account, final String pwd, final String areaCode, final String phone, final String vfcode, BindType bindType) {
         this.mActivity = activity;
         if (bindType == BindType.BIND_UNIQUE){
-            String uniqueId = SdkUtil.getGoogleAdid1AndroidId(activity);
+            String uniqueId = SdkUtil.getSdkUniqueId(activity);
             if(TextUtils.isEmpty(uniqueId)){
                 PL.d("thirdPlatId:" + uniqueId);
                 return;

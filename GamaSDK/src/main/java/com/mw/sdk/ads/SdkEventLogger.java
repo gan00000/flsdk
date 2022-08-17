@@ -20,7 +20,6 @@ import com.thirdlib.google.SGoogleProxy;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by gan on 2017/3/3.
@@ -238,7 +237,7 @@ public class SdkEventLogger {
     private static Map<String, Object> addEventParameterName(Context context, Map<String, Object> map) {
 
         String adId = SdkUtil.getGoogleAdId(context);
-        String uniqueId = SdkUtil.getGoogleAdid1AndroidId(context);
+        String uniqueId = SdkUtil.getSdkUniqueId(context);
         String androidId = ApkInfoUtil.getAndroidId(context);
 
         map.put(EventConstant.ParameterName.TIME, System.currentTimeMillis() + "");
