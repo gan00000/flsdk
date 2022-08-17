@@ -19,6 +19,7 @@ import com.mw.sdk.R;
 import com.mw.sdk.SBaseSdkActivity;
 import com.mw.sdk.SWebViewLayout;
 import com.mw.sdk.ads.SdkEventLogger;
+import com.mw.sdk.constant.ResultCode;
 import com.mw.sdk.out.BaseSdkImpl;
 
 /**
@@ -142,6 +143,8 @@ public class MWWebPayActivity extends SBaseSdkActivity {
 //                if (iPayListener != null) {
 //                    iPayListener.onPaySuccess(basePayBean.getProductId(),basePayBean.getCpOrderId());
 //                }
+                setActivityResult(true,productId,cpOrderId);
+                finish();
             }
 
             @Override
@@ -149,6 +152,8 @@ public class MWWebPayActivity extends SBaseSdkActivity {
 //                if (iPayListener != null) {
 //                    iPayListener.onPayFail();
 //                }
+                setActivityResult(false,productId,cpOrderId);
+                finish();
             }
         });
 
@@ -170,11 +175,24 @@ public class MWWebPayActivity extends SBaseSdkActivity {
         if (backView != null){
             backView.setVisibility(View.GONE);
         }
+        //第三方支付成功
+        setActivityResult(success,productId,cpOrderId);
+    }
 
-        if (success){
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
 
-        }else {
-//            this.finish();
+    }
+
+    private void setActivityResult(boolean success, String productId,String cpOrderId){
+        if (success) {
+            Intent resultIntent = new Intent();
+            resultIntent.putExtra("mw_productId",productId);
+            resultIntent.putExtra("mw_cpOrderId",cpOrderId);
+            setResult(ResultCode.ResultCode_Web_Pay,resultIntent);
+        }else{
+            setResult(ResultCode.ResultCode_Web_Pay);
         }
     }
 }

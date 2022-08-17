@@ -41,6 +41,7 @@ import com.mw.base.widget.SWebView;
 import com.mw.sdk.BuildConfig;
 import com.mw.sdk.R;
 import com.mw.sdk.SBaseDialog;
+import com.mw.sdk.constant.ResultCode;
 import com.mw.sdk.pay.MWWebPayActivity;
 import com.mw.sdk.SWebViewDialog;
 import com.mw.sdk.ads.EventConstant;
@@ -140,7 +141,7 @@ public class BaseSdkImpl implements IMWSDK {
 
 //    @Override
     public void setGameLanguage(final Activity activity, final SGameLanguage gameLanguage) {
-        PL.i("IGama setGameLanguage:" + gameLanguage);
+        PL.i("IMWSDK setGameLanguage:" + gameLanguage);
 
         activity.runOnUiThread(new Runnable() {
             @Override
@@ -156,7 +157,7 @@ public class BaseSdkImpl implements IMWSDK {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                PL.i("IGama registerRoleInfo");
+                PL.i("IMWSDK registerRoleInfo");
                 PL.i("roleId:" + roleId + ",roleName:" + roleName + ",roleLevel:" + roleLevel + ",vipLevel:" + vipLevel + ",severCode:" + severCode + ",serverName:" + serverName);
                 SdkUtil.saveRoleInfo(activity, roleId, roleName, roleLevel, vipLevel, severCode, serverName);//保存角色信息
                 if (iPay != null){
@@ -214,7 +215,7 @@ public class BaseSdkImpl implements IMWSDK {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                PL.i("IGama onResume");
+                PL.i("IMWSDK onResume");
                 if (iLogin != null) {
                     iLogin.onResume(activity);
                 }
@@ -257,6 +258,23 @@ public class BaseSdkImpl implements IMWSDK {
                     sFacebookProxy.onActivityResult(activity, requestCode, resultCode, data);
                 }
                 ShareUtil.onActivityResult(activity, requestCode, resultCode, data);
+                //网页充值，或者网页内Google充值回调
+                if (requestCode == RequestCode.RequestCode_Web_Pay && resultCode == ResultCode.ResultCode_Web_Pay){
+                    if (data != null){
+                        String mw_productId = data.getStringExtra("mw_productId");
+                        String mw_cpOrderId = data.getStringExtra("mw_cpOrderId");
+                        PL.i("web onPaySuccess:mw_productId=" + mw_productId);
+                        PL.i("web onPaySuccess:mw_cpOrderId=" + mw_cpOrderId);
+                        if (iPayListener != null) {
+                            iPayListener.onPaySuccess(mw_productId,mw_cpOrderId);
+                        }
+                    }else{
+                        PL.i("web onPayFail");
+                        if (iPayListener != null) {
+                            iPayListener.onPayFail();
+                        }
+                    }
+                }
             }
         });
     }
@@ -286,7 +304,7 @@ public class BaseSdkImpl implements IMWSDK {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                PL.i("IGama onStop");
+                PL.i("IMWSDK onStop");
                 if (iLogin != null) {
                     iLogin.onStop(activity);
                 }
@@ -322,7 +340,7 @@ public class BaseSdkImpl implements IMWSDK {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                PL.i("IGama onRequestPermissionsResult");
+                PL.i("IMWSDK onRequestPermissionsResult");
             }
         });
     }
@@ -332,7 +350,7 @@ public class BaseSdkImpl implements IMWSDK {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                PL.i("IGama onWindowFocusChanged: hasFocus -- " + hasFocus);
+                PL.i("IMWSDK onWindowFocusChanged: hasFocus -- " + hasFocus);
                 if (hasFocus) {
                     AppUtil.hideActivityBottomBar(activity);
                 }
@@ -833,7 +851,6 @@ public class BaseSdkImpl implements IMWSDK {
         });
     }
 
-    @SuppressLint("JavascriptInterface")
     private void doWebPay(Activity activity, GooglePayCreateOrderIdReqBean bean) {
 
         String payThirdUrl = ResConfig.getPayPreferredUrl(activity) + "api/web/payment.page";
