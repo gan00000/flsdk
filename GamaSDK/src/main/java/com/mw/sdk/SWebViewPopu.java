@@ -41,7 +41,7 @@ public class SWebViewPopu extends SBasePopu {
 
     private void initPop(){
 
-        ScreenHelper screenHelper = new ScreenHelper(activity);
+//        ScreenHelper screenHelper = new ScreenHelper(activity);
 
         this.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         relativeLayout = new RelativeLayout(activity);

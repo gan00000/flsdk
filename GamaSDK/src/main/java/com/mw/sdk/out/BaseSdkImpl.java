@@ -2,7 +2,6 @@ package com.mw.sdk.out;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
@@ -18,6 +17,7 @@ import com.core.base.callback.SFCallBack;
 import com.core.base.utils.AppUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
+import com.core.base.utils.ScreenHelper;
 import com.core.base.utils.SignatureUtil;
 import com.core.base.utils.ToastUtils;
 import com.gama.pay.IPay;
@@ -41,11 +41,13 @@ import com.mw.base.widget.SWebView;
 import com.mw.sdk.BuildConfig;
 import com.mw.sdk.R;
 import com.mw.sdk.SBaseDialog;
+import com.mw.sdk.pay.MWWebPayActivity;
 import com.mw.sdk.SWebViewDialog;
 import com.mw.sdk.ads.EventConstant;
 import com.mw.sdk.ads.SdkEventLogger;
 import com.mw.sdk.api.Request;
 import com.mw.sdk.callback.IPayListener;
+import com.mw.sdk.constant.RequestCode;
 import com.mw.sdk.login.DialogLoginImpl;
 import com.mw.sdk.login.ILogin;
 import com.mw.sdk.login.ILoginCallBack;
@@ -839,7 +841,10 @@ public class BaseSdkImpl implements IMWSDK {
 
         String webUrl = bean.createPreRequestUrl();
 
-        otherPayWebViewDialog = new SWebViewDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
+        Intent intent = MWWebPayActivity.create(activity,"",webUrl,bean.getCpOrderId(),bean.getProductId(),bean.getExtra());
+        activity.startActivityForResult(intent, RequestCode.RequestCode_Web_Pay);
+
+     /*   otherPayWebViewDialog = new SWebViewDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
         otherPayWebViewDialog.setWebUrl(webUrl);
         otherPayWebViewDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
@@ -857,10 +862,10 @@ public class BaseSdkImpl implements IMWSDK {
                 sWebView.addJavascriptInterface(BaseSdkImpl.this,"SdkObj");
             }
         });
-        otherPayWebViewDialog.show();
+        otherPayWebViewDialog.show();*/
     }
 
-    @SuppressLint("JavascriptInterface")
+ /*   @SuppressLint("JavascriptInterface")
     @JavascriptInterface
     public void googlePay(String productId)
     {
@@ -875,11 +880,11 @@ public class BaseSdkImpl implements IMWSDK {
         }
     }
 
-    /**
+    *//**
      * 充值通知，提供给网页使用
      * @param success  是否成功
      * @param productId  商品id
-     */
+     *//*
     @SuppressLint("JavascriptInterface")
     @JavascriptInterface
     public void onPayFinish(boolean success,String productId)
@@ -905,5 +910,5 @@ public class BaseSdkImpl implements IMWSDK {
                 }
             });
         }
-    }
+    }*/
 }
