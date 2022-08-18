@@ -142,7 +142,7 @@ public class SWebViewLayout extends SBaseRelativeLayout {
         public void onReceivedTitle(WebView view, String title) {
             super.onReceivedTitle(view, title);
             if (SStringUtil.isNotEmpty(title)){
-                titleTv.setText(title);
+                titleTv.setText(title.trim());
             }
         }
     }
