@@ -155,6 +155,7 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
             public void onClick(View v) {
                 if (accountPopupWindow!= null)
                 {
+                    accountPopupWindow.setFocusable(true);
                     if (accountPopupWindow.isShowing()){
 
                         accountPopupWindow.dismiss();
