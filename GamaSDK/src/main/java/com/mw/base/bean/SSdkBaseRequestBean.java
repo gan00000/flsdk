@@ -60,7 +60,7 @@ public class SSdkBaseRequestBean extends BaseReqeustBean {
         loginAccessToken = SdkUtil.getSdkAccessToken(context);
         loginTimestamp = SdkUtil.getSdkTimestamp(context);
         gameCode = ResConfig.getGameCode(context);
-        gameLanguage = ResConfig.getGameLanguage(context);
+        gameLanguage = SdkUtil.getGameLanguage(context);//ResConfig.getGameLanguage(context);
 
         if (SStringUtil.isEmpty(signature)) {
             signature = SStringUtil.toMd5(ResConfig.getAppKey(context) + gameCode + timestamp);

@@ -48,24 +48,24 @@ public class ResConfig {
     }
 
 
-    public static String getGameLanguage(Context context) {
-        String language = SPUtil.getSimpleString(context, SdkUtil.SDK_SP_FILE, SdkUtil.SDK_GAME_LANGUAGE);
-        if (TextUtils.isEmpty(language)) {
-            language = SGameLanguage.zh_TW.getLanguage();
-        }
-        return language;
-    }
+//    public static String getGameLanguage(Context context) {
+//        String language = SPUtil.getSimpleString(context, SdkUtil.SDK_SP_FILE, SdkUtil.SDK_GAME_LANGUAGE);
+//        if (TextUtils.isEmpty(language)) {
+//            language = SGameLanguage.zh_TW.getLanguage();
+//        }
+//        return language;
+//    }
 
-    public static void saveGameLanguage(Context context, String language) {
-        if (TextUtils.isEmpty(language)) {
-            return;
-        }
-        SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE, SdkUtil.SDK_GAME_LANGUAGE, language);
-    }
-
-    public static String getGameLanguageLower(Context context) {
-        return getGameLanguage(context).toLowerCase();
-    }
+//    public static void saveGameLanguage(Context context, String language) {
+//        if (TextUtils.isEmpty(language)) {
+//            return;
+//        }
+//        SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE, SdkUtil.SDK_GAME_LANGUAGE, language);
+//    }
+//
+//    public static String getGameLanguageLower(Context context) {
+//        return getGameLanguage(context).toLowerCase();
+//    }
 
     /**
      * 获取Google Client Id用于G+登录验证

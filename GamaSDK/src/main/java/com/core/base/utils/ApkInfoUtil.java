@@ -12,17 +12,14 @@ import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
-import android.os.Environment;
 import android.os.LocaleList;
-import androidx.annotation.NonNull;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 
-import java.io.File;
-import java.io.IOException;
+import androidx.annotation.NonNull;
+
 import java.util.Locale;
-import java.util.UUID;
 
 /**
  * 本地信息帮助类
@@ -351,13 +348,13 @@ public class ApkInfoUtil {
 
 	
 	public static String getLocaleLanguage(){
-		return Locale.getDefault().getLanguage();
+		Locale locale = Locale.getDefault();
+		return locale.getLanguage() + "_" + locale.getCountry();
 	}
 	
 	public static String getOsLanguage(){
 		return getLocaleLanguage();
 	}
-
 
 	/**
 	 *

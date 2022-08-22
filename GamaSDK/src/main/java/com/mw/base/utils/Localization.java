@@ -16,10 +16,10 @@ import java.util.Locale;
 public class Localization {
 
     public static void gameLanguage(Context context, SGameLanguage gameLanguage){
-        if (gameLanguage == null){
-            gameLanguage = SGameLanguage.zh_TW;
-        }
-        ResConfig.saveGameLanguage(context,gameLanguage.getLanguage());
+//        if (gameLanguage == null){
+//            gameLanguage = SGameLanguage.zh_TW;
+//        }
+//        ResConfig.saveGameLanguage(context,gameLanguage.getLanguage());
 
 //        if (gameLanguage == SGameLanguage.zh_CN){
 //
@@ -42,23 +42,23 @@ public class Localization {
     }
 
     public static SGameLanguage getSGameLanguage(Context context){
-        String language = ResConfig.getGameLanguage(context);
-        if (SStringUtil.isEqual(SGameLanguage.en_US.getLanguage(), language)){
-            return SGameLanguage.en_US;
-        }
-        if (SStringUtil.isEqual(SGameLanguage.zh_CN.getLanguage(), language)){
-            return SGameLanguage.zh_CN;
-        }
-        if (SStringUtil.isEqual(SGameLanguage.ko_KR.getLanguage(), language)){
-            return SGameLanguage.ko_KR;
-        }
-        if (SStringUtil.isEqual(SGameLanguage.ja_JP.getLanguage(), language)){
-            return SGameLanguage.ja_JP;
-        }
+//        String language = ResConfig.getGameLanguage(context);
+//        if (SStringUtil.isEqual(SGameLanguage.en_US.getLanguage(), language)){
+//            return SGameLanguage.en_US;
+//        }
+//        if (SStringUtil.isEqual(SGameLanguage.zh_CN.getLanguage(), language)){
+//            return SGameLanguage.zh_CN;
+//        }
+//        if (SStringUtil.isEqual(SGameLanguage.ko_KR.getLanguage(), language)){
+//            return SGameLanguage.ko_KR;
+//        }
+//        if (SStringUtil.isEqual(SGameLanguage.ja_JP.getLanguage(), language)){
+//            return SGameLanguage.ja_JP;
+//        }
         return SGameLanguage.zh_TW;//默认设置为繁体中文
     }
 
     public static void updateSGameLanguage(Context context){
-        gameLanguage(context,getSGameLanguage(context));
+//        gameLanguage(context,getSGameLanguage(context));
     }
 }

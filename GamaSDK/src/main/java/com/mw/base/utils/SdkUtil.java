@@ -36,6 +36,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 
 /**
@@ -771,98 +772,6 @@ public class SdkUtil {
         return SPUtil.getSimpleLong(context, SdkUtil.SDK_SP_FILE, userid);
     }
 
-    /**
-     * 判断是否有Twitter相关功能
-     * @param context
-     * @return
-     */
-    public static boolean hasTwitter(Context context) {
-        SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
-        if(SGameLanguage.ja_JP == sGameLanguage) {
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * 同时保存年龄和时间
-     * @param context
-     * @param age
-     */
-    public static void saveAgeAndTime(Context context, int age) {
-        saveAgeTime(context);
-        saveAge(context, age);
-    }
-
-    private static final String PREFIX_AGE_TIME = "GAMA_AGE_TIME_";
-
-    /**
-     * 保存当次年龄日期
-     * @param context
-     */
-    public static void saveAgeTime(Context context) {
-        SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE, PREFIX_AGE_TIME + getUid(context), System.currentTimeMillis());
-    }
-
-    /**
-     * 获取上次年龄日期
-     * @param context
-     * @return
-     */
-    public static long getAgeTime(Context context) {
-        return SPUtil.getSimpleLong(context, SdkUtil.SDK_SP_FILE, PREFIX_AGE_TIME + getUid(context));
-    }
-
-    private static final String PREFIX_AGE_ = "GAMA_AGE_";
-
-    /**
-     * 保存当次年龄日期
-     * @param context
-     */
-    public static void saveAge(Context context, int age) {
-        SPUtil.saveSimpleInteger(context, SdkUtil.SDK_SP_FILE, PREFIX_AGE_ + getUid(context), age);
-    }
-
-    /**
-     * 获取上次年龄日期
-     * @param context
-     * @return
-     */
-    public static int getAge(Context context) {
-        return SPUtil.getSimpleInteger(context, SdkUtil.SDK_SP_FILE, PREFIX_AGE_ + getUid(context));
-    }
-
-    /**
-     * 判断是否有需要显示年齡限制页面
-     * @param context
-     * @return
-     */
-    public static boolean needShowAgePage(Context context) {
-        SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
-        if(SGameLanguage.ja_JP == sGameLanguage) {
-            if(getAge(context) >= 20) {
-                return false;
-            } else if(GamaTimeUtil.isSameMonth(getAgeTime(context))) {
-                return false;
-            }
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * 判断是否有需要查询年齡限制
-     * @param context
-     * @return
-     */
-    public static boolean needRequestAgeLimit(Context context) {
-        SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
-        if(SGameLanguage.ja_JP == sGameLanguage) {
-            return getAge(context) < 20;
-        }
-        return false;
-    }
-
     private static final String PREFIX_FIRSTPAY_ = "GAMA_FIRSTPAY_";
 
     /**
@@ -972,58 +881,13 @@ public class SdkUtil {
     }
 
     /**
-     * 判断是否北美地区
-     */
-    public static boolean isNorthAmarican(Context context) {
-        SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
-        if(SGameLanguage.en_US == sGameLanguage) {
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * 判断是否日本地区
-     */
-    public static boolean isJapan(Context context) {
-        SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
-        if(SGameLanguage.ja_JP == sGameLanguage) {
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * 判断是否韩国地区
-     */
-    public static boolean isKorea(Context context) {
-        SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
-        if(SGameLanguage.ko_KR == sGameLanguage) {
-            return true;
-        }
-        return false;
-    }
-
-    /**
      * 判断是否.app接口
      */
     public static boolean isInterfaceSurfixWithApp(Context context) {
-        SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
-        if(SGameLanguage.en_US == sGameLanguage) {
-            return false;
-        }
-        return true;
-    }
-
-
-    /**
-     * 判断是否需要请求登入验证码开关
-     */
-    public static boolean isNeedVfSwitch(Context context) {
-        SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
-        if(SGameLanguage.en_US == sGameLanguage) {
-            return false;
-        }
+//        SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
+//        if(SGameLanguage.en_US == sGameLanguage) {
+//            return false;
+//        }
         return true;
     }
 
@@ -1091,5 +955,19 @@ public class SdkUtil {
     public static String getAreaCodeInfo(Context context) {
         return SPUtil.getSimpleString(context, SdkUtil.SDK_SP_FILE, KEY_AREA_CODE_INFO);
     }
+
+    public static String getGameLanguage(Context context){
+        Locale locale = Locale.getDefault();
+        String language = locale.getLanguage();
+        String country = locale.getCountry();
+        if (language.equals("en")){
+            return SGameLanguage.en_US.getLanguage();
+        }
+        if (language.equals("zh") && country.equals("CN")){
+            return SGameLanguage.zh_CN.getLanguage();
+        }
+        return SGameLanguage.zh_TW.getLanguage();//默认为繁体
+    }
+
 
 }

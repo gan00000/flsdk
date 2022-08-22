@@ -12,6 +12,7 @@ import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
 import com.mw.base.bean.SSdkBaseRequestBean;
 import com.mw.base.cfg.ResConfig;
+import com.mw.base.utils.SdkUtil;
 import com.mw.sdk.R;
 
 /**
@@ -66,7 +67,7 @@ public class BaseLoginRequestTask extends AbsHttpRequest {
 
 
 		if(SStringUtil.isEmpty(sdkBaseRequestBean.getGameLanguage())){
-			sdkBaseRequestBean.setGameLanguage(ResConfig.getGameLanguage(context));
+			sdkBaseRequestBean.setGameLanguage(SdkUtil.getGameLanguage(context));
 		}
 
 //		sdkBaseRequestBean.setReferrer(PyLoginHelper.takeReferrer(context, ""));
