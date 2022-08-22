@@ -33,6 +33,11 @@ public class ResConfig {
         return getConfigInAssetsProperties(context, "sdk_game_code");
     }
 
+    public static boolean isMoreLanguage(Context context) {
+        String more = getConfigInAssetsProperties(context, "sdk_more_language");
+        return SStringUtil.isEqual("true",more);
+    }
+
     /**
      * 获取秘钥
      */

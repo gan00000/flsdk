@@ -957,14 +957,19 @@ public class SdkUtil {
     }
 
     public static String getGameLanguage(Context context){
-        Locale locale = Locale.getDefault();
-        String language = locale.getLanguage();
-        String country = locale.getCountry();
-        if (language.equals("en")){
-            return SGameLanguage.en_US.getLanguage();
-        }
-        if (language.equals("zh") && country.equals("CN")){
-            return SGameLanguage.zh_CN.getLanguage();
+
+        if (ResConfig.isMoreLanguage(context)){
+
+            Locale locale = Locale.getDefault();
+            String language = locale.getLanguage();
+            String country = locale.getCountry();
+            if (language.equals("en")){
+                return SGameLanguage.en_US.getLanguage();
+            }
+            if (language.equals("zh") && country.equals("CN")){
+                return SGameLanguage.zh_CN.getLanguage();
+            }
+            return SGameLanguage.zh_TW.getLanguage();//默认为繁体
         }
         return SGameLanguage.zh_TW.getLanguage();//默认为繁体
     }
