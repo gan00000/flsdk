@@ -69,8 +69,8 @@ public class SSdkBaseRequestBean extends BaseReqeustBean {
         uniqueId = SdkUtil.getSdkUniqueId(context);
         referrer = SdkUtil.getReferrer(context);
 
-        spy_platForm = ResUtil.findStringByName(context,"spy_platForm");
-        spy_advertiser = ResUtil.findStringByName(context,"spy_advertiser");
+//        spy_platForm = ResUtil.findStringByName(context,"spy_platForm");
+//        spy_advertiser = ResUtil.findStringByName(context,"spy_advertiser");
     }
 
 //    public String getAppKey() {
