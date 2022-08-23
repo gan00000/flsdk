@@ -1,6 +1,7 @@
 package com.mw.sdk.login.widget;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Build;
 import androidx.annotation.RequiresApi;
 import android.text.Editable;
@@ -68,6 +69,7 @@ public class SDKInputEditTextView extends RelativeLayout {
             eyeImageView.setSelected(true);
             // 明文
             inputEditText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            inputEditText.setTypeface(Typeface.DEFAULT);
         }else{
 
             eyeImageViewLayout.setVisibility(View.VISIBLE);
@@ -75,6 +77,7 @@ public class SDKInputEditTextView extends RelativeLayout {
             eyeImageView.setSelected(true);
             // 明文
             inputEditText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            inputEditText.setTypeface(Typeface.DEFAULT);
         }
     }
 
@@ -131,6 +134,7 @@ public class SDKInputEditTextView extends RelativeLayout {
                         //
                         inputEditText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
                     }
+                    inputEditText.setTypeface(Typeface.DEFAULT);
                     // 使光标始终在最后位置
                     if (SStringUtil.isNotEmpty(inputEditText.getText().toString())){
                         inputEditText.setSelection(inputEditText.getText().toString().length());
@@ -216,7 +220,7 @@ public class SDKInputEditTextView extends RelativeLayout {
         labTextView.setText(labName);
         inputEditText.setInputType(editTextInputType);
         inputEditText.setHint(hint);
-
+        inputEditText.setTypeface(Typeface.DEFAULT);
     }
 
     public void setPwdInputEnable(boolean enable){
@@ -224,7 +228,7 @@ public class SDKInputEditTextView extends RelativeLayout {
             eyeImageView.setSelected(false);
             // 显示为密码
             inputEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-
+            inputEditText.setTypeface(Typeface.DEFAULT);
             inputEditText.setEnabled(true);
             inputEditText.setTextColor(getContext().getResources().getColor(R.color.white_c));
             iconImageView.setImageResource(R.mipmap.mw_passowrd_icon);
@@ -235,7 +239,7 @@ public class SDKInputEditTextView extends RelativeLayout {
             eyeImageView.setSelected(true);
             // 明文
             inputEditText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-
+            inputEditText.setTypeface(Typeface.DEFAULT);
             inputEditText.setEnabled(false);
             inputEditText.setTextColor(getContext().getResources().getColor(R.color.c_848484));
             iconImageView.setImageResource(R.mipmap.mw_passowrd_disable_icon);
