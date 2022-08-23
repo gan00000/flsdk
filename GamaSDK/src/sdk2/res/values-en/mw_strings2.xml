@@ -2,7 +2,7 @@
 
     <string name="text_phone_bind">Binding phone</string>
     <string name="text_phone_area_code">Area code</string>
-    <string name="text_phone_input_hint">Enter your cell phone number</string>
+    <string name="text_phone_input_hint">Enter your phone number</string>
     <string name="text_phone_hasbind_tips">You have successfully bound, this is your current bound cell phone number</string>
     <string name="text_area_code_not_empty">Cell phone area code cannot be empty</string>
     <string name="text_phone_not_empty">Cell phone number cannot be empty</string>
