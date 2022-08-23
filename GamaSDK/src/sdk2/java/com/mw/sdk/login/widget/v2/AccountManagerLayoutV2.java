@@ -41,22 +41,17 @@ public class AccountManagerLayoutV2 extends SLoginBaseRelativeLayout implements 
         backView = contentView.findViewById(R.id.layout_head_back);
         backView.setOnClickListener(this);
 
-        TextView titleTextView = contentView.findViewById(R.id.sdk_head_title);
-        titleTextView.setText(R.string.py_login_page_account_bind);
+//        TextView titleTextView = contentView.findViewById(R.id.sdk_head_title);
+//        titleTextView.setText(R.string.py_login_page_account_bind);
+//
+//        uniqueRegBindBtn = contentView.findViewById(R.id.gama_manager_btn_guest);
+//        fbRegBindBtn = contentView.findViewById(R.id.gama_manager_btn_facebook);
+//        googleRegBindBtn = contentView.findViewById(R.id.gama_manager_btn_google);
+//
+//        uniqueRegBindBtn.setOnClickListener(this);
+//        fbRegBindBtn.setOnClickListener(this);
+//        googleRegBindBtn.setOnClickListener(this);
 
-        uniqueRegBindBtn = contentView.findViewById(R.id.gama_manager_btn_guest);
-        fbRegBindBtn = contentView.findViewById(R.id.gama_manager_btn_facebook);
-        googleRegBindBtn = contentView.findViewById(R.id.gama_manager_btn_google);
-
-        uniqueRegBindBtn.setOnClickListener(this);
-        fbRegBindBtn.setOnClickListener(this);
-        googleRegBindBtn.setOnClickListener(this);
-
-        /*if (GamaUtil.isMainland(getContext())) {
-            fbRegBindBtn.setVisibility(GONE);
-            googleRegBindBtn.setVisibility(GONE);
-
-        }*/
 
         return contentView;
     }

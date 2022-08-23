@@ -13,23 +13,22 @@ import androidx.annotation.StyleRes;
 
 import com.mw.base.utils.Localization;
 import com.mw.sdk.R;
+import com.mw.sdk.SBaseDialog;
 import com.mw.sdk.ads.EventConstant;
 import com.mw.sdk.ads.SdkEventLogger;
 import com.mw.sdk.login.constant.BindType;
 import com.mw.sdk.login.constant.ViewType;
 import com.mw.sdk.login.model.AccountModel;
 import com.mw.sdk.login.model.response.SLoginResponse;
-import com.mw.sdk.SBaseDialog;
 import com.mw.sdk.login.p.LoginPresenterImpl;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.mw.sdk.login.widget.v2.AccountChangePwdLayoutV2;
 import com.mw.sdk.login.widget.v2.AccountFindPwdLayoutV2;
-import com.mw.sdk.login.widget.v2.AccountManagerLayoutV2;
 import com.mw.sdk.login.widget.v2.LoginWithRegLayout;
-import com.mw.sdk.login.widget.v2.TermsViewV3;
-import com.mw.sdk.login.widget.v2.WelcomeBackLayout;
 import com.mw.sdk.login.widget.v2.MainHomeLayout;
+import com.mw.sdk.login.widget.v2.TermsViewV3;
 import com.mw.sdk.login.widget.v2.ThirdPlatBindAccountLayoutV2;
+import com.mw.sdk.login.widget.v2.WelcomeBackLayout;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.google.SGoogleSignIn;
 import com.thirdlib.line.SLineSignIn;
@@ -523,32 +522,6 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
     }*/
 
     public void toAccountManagerCenter() {//AccountManagerLayoutV2
-
-        if (accountManagerCenterView == null || !viewPageList.contains(accountManagerCenterView)){
-//            SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
-//            if (SGameLanguage.en_US == sGameLanguage) {
-//                accountManagerCenterView = new AccountManagerLayoutV2En(context);
-//            } else {
-                accountManagerCenterView = new AccountManagerLayoutV2(context);
-//            }
-
-            accountManagerCenterView.setLoginDialogV2(this);
-            contentFrameLayout.addView(accountManagerCenterView);
-            viewPageList.add(accountManagerCenterView);
-        }
-
-        for (View childView : viewPageList) {
-
-            if (childView == null){
-                continue;
-            }
-
-            if (childView == accountManagerCenterView){
-                childView.setVisibility(View.VISIBLE);
-            }else{
-                childView.setVisibility(View.GONE);
-            }
-        }
 
     }
 
