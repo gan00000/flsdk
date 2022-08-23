@@ -106,7 +106,7 @@
     <string name="py_error_occur">Network Anomaly</string>
     <string name="text_i_agree_tips">I have read and agree to</string>
     <string name="text_i_read_agree">Read and agree</string>
-    <string name="text_term_moqie"><u>The Terms Of Service</u></string>
+    <string name="text_term_moqie"> <u>The Terms Of Service</u></string>
     <string name="sdk_terms_title">The Terms Of Service</string>
     <string name="text_switch_account">Switching accounts</string>
     <string name="text_update_account_bind">Upgrade</string>
