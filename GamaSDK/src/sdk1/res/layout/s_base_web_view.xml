@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white">
+
+        <com.mw.base.widget.SWebView
+            android:id="@+id/s_webview_id"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></com.mw.base.widget.SWebView>
+
+        <ProgressBar
+            android:id="@+id/s_webview_pager_loading_percent"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@drawable/s_progress_web_loading_horizontal"
+            android:indeterminate="false"
+            android:indeterminateOnly="false"
+            android:progressDrawable="@drawable/s_progress_web_loading_horizontal"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

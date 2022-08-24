@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
+
+
+    <LinearLayout
+        android:layout_width="375dp"
+        android:layout_height="667dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_centerInParent="true"
+        >
+
+        <include
+            layout="@layout/sdk_ui_head_layout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="182dp"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:background="@color/c_848484"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="2dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginTop="12dp"
+            >
+
+            <com.mw.base.widget.SWebView
+                android:id="@+id/sdk_terms_webview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="100dp" />
+
+        </RelativeLayout>
+
+
+
+       <!-- <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginBottom="4dp"
+            >
+            <CheckBox
+                android:id="@+id/gama_gama_start_term_cb1"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:background="@drawable/mw_term_checkbox_selector"
+                android:button="@null"
+                />
+
+            <TextView
+                android:id="@+id/gama_gama_start_term_tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:layout_marginStart="4dp"
+                android:text="@string/gama_ui_term_port_read2"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/sp_19"/>
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/sdk_terms_btn_confirm"
+            android:layout_width="320dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/sdk_btn_bg"
+            android:gravity="center"
+            android:text="@string/py_confire"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/sp_26" />-->
+    </LinearLayout>
+
+
+</RelativeLayout>
