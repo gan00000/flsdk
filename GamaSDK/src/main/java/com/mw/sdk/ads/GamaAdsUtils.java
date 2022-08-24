@@ -24,22 +24,22 @@ public class GamaAdsUtils {
     public static void caculateRetention(Context context, String userid) {
         long firstLoginDate = SdkUtil.getFirstLoginDate(context, userid);
         PL.i("firstLoginDate : " + firstLoginDate);
-        if(firstLoginDate > 0) { //有登入记录
-            Date firstDate = new Date(firstLoginDate);
-            Date nowDate = new Date(System.currentTimeMillis());
-            int bewteen = betweenDate(firstDate, nowDate);
-            int[] intArray = context.getResources().getIntArray(R.array.gama_retention_day);
-            for(int i : intArray) {
-                PL.i("intArray : " + i);
-                if(bewteen == i) {
-                    String retentions = String.format(EventConstant.GAMA_RETENTION, i);
-                    PL.i("retentions : " + retentions);
-//                    SdkEventLogger.trackingWithEventName((Activity) context, retentions, null, null);
-                }
-            }
-        } else {
-            SdkUtil.saveFirstLoginDate(context, userid);
-        }
+//        if(firstLoginDate > 0) { //有登入记录
+//            Date firstDate = new Date(firstLoginDate);
+//            Date nowDate = new Date(System.currentTimeMillis());
+//            int bewteen = betweenDate(firstDate, nowDate);
+//            int[] intArray = context.getResources().getIntArray(R.array.gama_retention_day);
+//            for(int i : intArray) {
+//                PL.i("intArray : " + i);
+//                if(bewteen == i) {
+//                    String retentions = String.format(EventConstant.GAMA_RETENTION, i);
+//                    PL.i("retentions : " + retentions);
+////                    SdkEventLogger.trackingWithEventName((Activity) context, retentions, null, null);
+//                }
+//            }
+//        } else {
+//            SdkUtil.saveFirstLoginDate(context, userid);
+//        }
     }
 
     private static int betweenDate(Date startDate, Date endDate) {
