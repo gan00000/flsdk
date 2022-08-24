@@ -92,6 +92,7 @@ android {
             resValue "string", "fb_login_protocol_scheme", "fb1672362243138559"
             resValue "string", "facebook_app_name", "終末的御靈師"
             resValue "string", "line_channelId", "1657313585"
+            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow"
 
             //每个游戏的demo设置 test
             resValue "string", "sdk_name", "終末的御靈師demo"
@@ -114,6 +115,7 @@ android {
             resValue "string", "fb_login_protocol_scheme", "fb855035868795821"
             resValue "string", "facebook_app_name", "魔之序曲"
             resValue "string", "line_channelId", "1657381968"
+            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow"
 
             //每个游戏的demo设置 test
             resValue "string", "sdk_name", "魔之序曲demo"

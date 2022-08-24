@@ -24,4 +24,6 @@
 <!--    sdk内部版本-第几套-->
 <!--    <string name="sdk_inner_version">v1</string>-->
 
+    <string name="channel_platform">google</string>
+
 </resources>

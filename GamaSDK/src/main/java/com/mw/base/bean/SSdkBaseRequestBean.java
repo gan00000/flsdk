@@ -7,6 +7,7 @@ import com.core.base.utils.ResUtil;
 import com.core.base.utils.SStringUtil;
 import com.mw.base.cfg.ResConfig;
 import com.mw.base.utils.SdkUtil;
+import com.mw.sdk.R;
 
 /**
  * <p>Title: SSdkBaseRequestBean</p> <p>Description: SDK接口请求参数实体</p>
@@ -43,8 +44,8 @@ public class SSdkBaseRequestBean extends BaseReqeustBean {
 //    private String advertisingId = "";
     private String adId = "";//advertisingId
 
-    private String spy_platForm = "";//渠道包-所属平台
-    private String spy_advertiser = "";//渠道包-所属广告
+    private String platform = "";//渠道包-所属平台
+//    private String spy_advertiser = "";//渠道包-所属广告
     private String referrer = "";
 
 
@@ -69,7 +70,7 @@ public class SSdkBaseRequestBean extends BaseReqeustBean {
         uniqueId = SdkUtil.getSdkUniqueId(context);
         referrer = SdkUtil.getReferrer(context);
 
-//        spy_platForm = ResUtil.findStringByName(context,"spy_platForm");
+        platform = context.getResources().getString(R.string.channel_platform);
 //        spy_advertiser = ResUtil.findStringByName(context,"spy_advertiser");
     }
 
@@ -151,21 +152,21 @@ public class SSdkBaseRequestBean extends BaseReqeustBean {
         this.referrer = referrer;
     }
 
-    public String getSpy_platForm() {
-        return spy_platForm;
-    }
-
-    public void setSpy_platForm(String spy_platForm) {
-        this.spy_platForm = spy_platForm;
-    }
-
-    public String getSpy_advertiser() {
-        return spy_advertiser;
-    }
-
-    public void setSpy_advertiser(String spy_advertiser) {
-        this.spy_advertiser = spy_advertiser;
-    }
+//    public String getSpy_platForm() {
+//        return spy_platForm;
+//    }
+//
+//    public void setSpy_platForm(String spy_platForm) {
+//        this.spy_platForm = spy_platForm;
+//    }
+//
+//    public String getSpy_advertiser() {
+//        return spy_advertiser;
+//    }
+//
+//    public void setSpy_advertiser(String spy_advertiser) {
+//        this.spy_advertiser = spy_advertiser;
+//    }
 
 
     public String getAdvertisingId() {
