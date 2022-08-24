@@ -96,7 +96,7 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
                     layout_term.setVisibility(View.GONE);
                 }
                 if (versionData.isShowLogo()){
-                    iv_logo.setVisibility(View.VISIBLE);
+//                    iv_logo.setVisibility(View.VISIBLE);
                 }
             }
         }
