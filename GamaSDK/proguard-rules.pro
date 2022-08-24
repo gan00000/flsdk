@@ -38,3 +38,12 @@
 -keep public class com.core.base.bean.AbsReqeustBean { *; }
 # -keep public interface mypackage.MyInterface
 # -keep public class * implements mypackage.MyInterface
+
+
+# Uncomment this to preserve the line number information for
+# debugging stack traces.
+#-keepattributes SourceFile,LineNumberTable
+
+# If you keep the line number information, uncomment this to
+# hide the original source file name.
+#-renamesourcefileattribute SourceFile

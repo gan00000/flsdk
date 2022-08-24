@@ -29,12 +29,15 @@ android {
     buildTypes {
         release {
 //            multiDexEnabled true //Add this
-            shrinkResources false  //压缩资源
+//            shrinkResources true  //压缩资源
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
         debug {
+//            shrinkResources false  //压缩资源
+//            minifyEnabled false
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
     productFlavors {
