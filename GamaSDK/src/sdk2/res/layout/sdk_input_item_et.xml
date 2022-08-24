@@ -38,7 +38,7 @@
             android:layout_width="60dp"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:layout_marginStart="@dimen/px_4"
+            android:layout_marginStart="2dp"
             android:maxLines="1"
             android:textSize="@dimen/sp_24"
             android:text="@string/py_vfcode"
@@ -98,7 +98,7 @@
 
                 android:layout_width="16dp"
                 android:layout_height="16dp"
-                android:layout_marginStart="@dimen/px_4"
+                android:layout_marginStart="2dp"
                 android:gravity="center_vertical"
                 android:scaleType="fitCenter"
                 android:id="@+id/iv_account_history"
