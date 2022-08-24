@@ -17,8 +17,7 @@
             android:layout_width="200dp"
             android:layout_height="50dp"
             android:visibility="invisible"
-            android:layout_marginTop="168dp"
-            android:src="@mipmap/mw_logo" />
+            android:layout_marginTop="168dp"/>
 
         <!-- 登入方式 -->
         <LinearLayout
