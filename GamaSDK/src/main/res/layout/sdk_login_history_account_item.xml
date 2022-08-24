@@ -21,7 +21,7 @@
             android:layout_height="15dp"
             android:layout_marginStart="15dp"
             android:scaleType="fitCenter"
-            android:src="@mipmap/mw_smail_icon"
+            android:src="@mipmap/mmplaygame_ac_login"
 
             />
 
@@ -44,7 +44,7 @@
             <Button
                 android:layout_width="14dp"
                 android:layout_height="14dp"
-                android:background="@mipmap/delete_icon"
+                android:background="@mipmap/mmplaygame_delete_img"
                 android:layout_marginEnd="10dp"
                 android:id="@+id/history_account_item_delete_btn"
                 />

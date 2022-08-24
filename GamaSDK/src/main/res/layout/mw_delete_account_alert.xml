@@ -20,7 +20,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginTop="12dp"
-            android:src="@mipmap/nend_update_account_bg" />
+            android:src="@mipmap/mmplaygame_nend_update_account_img" />
 
 
         <TextView

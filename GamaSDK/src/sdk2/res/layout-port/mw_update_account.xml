@@ -41,7 +41,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:id="@+id/iv_bind_phone_close"
-                android:src="@mipmap/icon_close_3" />
+                android:src="@mipmap/mmplaygame_orange_close" />
 
         </RelativeLayout>
 

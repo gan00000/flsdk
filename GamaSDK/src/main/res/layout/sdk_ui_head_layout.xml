@@ -27,7 +27,7 @@
         <ImageView
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:src="@mipmap/mw_back_icon"/>
+            android:src="@mipmap/mmplaygame_back_icon"/>
 
     </LinearLayout>
 
