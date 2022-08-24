@@ -85,7 +85,7 @@
 	
 	        superand {
 	            
-	            applicationId "com.game.superand"
+	            applicationId "com.game.xxxx"
 	            minSdkVersion 21 //设置支持的最低版本系统
 	            targetSdkVersion 33  //与Google最新版本同步
 	            versionCode 2
@@ -98,6 +98,8 @@
 	            resValue "string", "facebook_authorities", "对接人员提供"
 	            resValue "string", "fb_login_protocol_scheme", "对接人员提供"
 	            resValue "string", "line_channelId", "对接人员提供"
+	            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow"
+
 
 	        }
 	
