@@ -73,7 +73,7 @@ public class ConfigRequest{
         CfgFileRequest cfgFileRequest = new CfgFileRequest(context);
         BaseReqeustBean baseReqeustBean = new BaseReqeustBean(context);
 
-        String configUrl = ResConfig.getCdnPreferredUrl(context) + "config/areaInfo.json?v=" + System.currentTimeMillis();
+        String configUrl = ResConfig.getCdnPreferredUrl(context) + "sdk/config/areaCode/areaInfo.json?v=" + System.currentTimeMillis();
         baseReqeustBean.setCompleteUrl(configUrl);
 
         cfgFileRequest.setBaseReqeustBean(baseReqeustBean);
