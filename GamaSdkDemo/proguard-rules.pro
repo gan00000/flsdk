@@ -15,3 +15,46 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+#-keep class com.appsflyer.** { *; }
+#-keep public class com.android.installreferrer.** { *; }
+
+# Your application may contain more items that need to be preserved;
+# typically classes that are dynamically created using Class.forName:
+
+-keep public class com.mw.sdk.out.** { *; }
+-keep public class * extends java.lang.Enum { *; }
+-keep public class * extends com.core.base.bean.BaseResponseModel { *; }
+-keep public class * extends com.core.base.bean.AbsReqeustBean { *; }
+-keep public class com.mw.sdk.login.model.response.SLoginResponse$Data { *; }
+-keep public class com.mw.sdk.login.ILoginCallBack { *; }
+-keep public class com.mw.sdk.callback.IPayListener { *; }
+-keep public class com.mw.base.bean.SPayType { *; }
+-keep public class com.core.base.callback.SFCallBack { *; }
+-keep public class com.mw.sdk.pay.WebPayJs { *; }
+-keep public class com.core.base.utils.PL { *; }
+-keep public class com.mw.sdk.ads.EventConstant { *; }
+-keep public class com.core.base.bean.BaseResponseModel { *; }
+-keep public class com.core.base.bean.AbsReqeustBean { *; }
+# -keep public interface mypackage.MyInterface
+# -keep public class * implements mypackage.MyInterface
+
+
+# Uncomment this to preserve the line number information for
+# debugging stack traces.
+#-keepattributes SourceFile,LineNumberTable
+
+# If you keep the line number information, uncomment this to
+# hide the original source file name.
+#-renamesourcefileattribute SourceFile
+
+-keep public class android.** { *; }
+-keep public class androidx.** { *; }
+-keep public class com.facebook.** { *; }
+-keep public class com.google.** { *; }
+-keep public class com.linecorp.** { *; }
+-keep public class com.appflyer.** { *; }
+-keep public class io.** { *; }
+-keep public class com.zhy.** { *; }
+-keep public class org.spongycastle.** { *; }
+-keep public class javax.** { *; }
