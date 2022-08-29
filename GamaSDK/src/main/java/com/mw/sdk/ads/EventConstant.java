@@ -18,7 +18,7 @@ public class EventConstant {
         /**
          * 首储事件
          */
-        FIRST_PAY;
+//        FIRST_PAY;
     }
 
     /**

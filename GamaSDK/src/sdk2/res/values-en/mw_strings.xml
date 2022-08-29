@@ -1,7 +1,7 @@
 <resources>
 
     <!--启动条款页面-->
-    <string name="gama_ui_term_port_read2" translatable="false">I have read and agree to the terms of Service</string>
+    <string name="gama_ui_term_port_read2" translatable="false">I have read and agree to The Terms Of Service</string>
 
     <!--登录页面-->
     <string name="py_login_save_account">Remember account</string>
