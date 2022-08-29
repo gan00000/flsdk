@@ -52,6 +52,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
      * 当次的商品详情
      */
     private SkuDetails skuDetails = null;
+    private Double skuAmount;
 
     /**
      * 当次的创单响应
@@ -98,6 +99,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
                             try {
                                 payBean.setOrderId(purchase.getOrderId());
                                 payBean.setPackageName(purchase.getPackageName());
+                                payBean.setUsdPrice(skuAmount);
 //                    payBean.setProductId(purchase.getProducts().get(0));
 //                    payBean.setmItemType(purchase.getItemType());
                                 payBean.setOriginPurchaseData(purchase.getOriginalJson());
@@ -362,6 +364,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
 //                                                          callbackFail("");
                                                             return;
                                                         }
+                                                        skuAmount = createOrderIdRes.getPayData().getAmount();
                                                         //支付回调
                                                         for (Purchase purchase : purchasesList) {//这里其实只会有一笔
                                                             PL.i("launchPurchaseFlow onPurchasesUpdated = " + purchase.getPurchaseState());
