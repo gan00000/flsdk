@@ -6,11 +6,13 @@ import android.os.Bundle;
 import android.text.TextUtils;
 
 import com.appsflyer.AFInAppEventParameterName;
+import com.appsflyer.AFInAppEventType;
 import com.appsflyer.AppsFlyerLib;
 import com.core.base.utils.ApkInfoUtil;
 import com.core.base.utils.PL;
 import com.facebook.appevents.AppEventsConstants;
 import com.gama.pay.gp.bean.res.BasePayBean;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.mw.base.cfg.ResConfig;
 import com.mw.base.utils.SdkUtil;
 import com.mw.sdk.BuildConfig;
@@ -18,6 +20,7 @@ import com.mw.sdk.login.model.response.SLoginResponse;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.google.SGoogleProxy;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -127,41 +130,53 @@ public class SdkEventLogger {
         }
 //        BasePayBean payBean = (BasePayBean) bundle.getSerializable(GamaCommonKey.PURCHASE_DATA);
 
-        String orderId = "";
-        String productId = "";
-//        long purchaseTime;
-        double usdPrice = 0;
-
-        if(payBean != null) {
-            PL.i(TAG, "trackinPay Purchase");
-            orderId = payBean.getOrderId();
-//            purchaseTime = payBean.getPurchaseTime();
-            productId = payBean.getProductId();
-            usdPrice = payBean.getUsdPrice();
-
-        } else {
-            PL.i(TAG, "trackinPay Purchase null");
-            return;
-        }
+        PL.i(TAG, "trackinPay Purchase");
+        String orderId = payBean.getOrderId();
+        String productId = payBean.getProductId();
+        double usdPrice = payBean.getUsdPrice();
 
         try {
+
+            String uid = SdkUtil.getUid(context);
+
             //Appsflyer上报
             Map<String, Object> eventValues = new HashMap<>();
             //下面是自定义的事件名
-            eventValues.put(EventConstant.ParameterName.USER_ID, SdkUtil.getUid(context));
+            eventValues.put(EventConstant.ParameterName.USER_ID, uid);
             eventValues.put(EventConstant.ParameterName.ROLE_ID, SdkUtil.getRoleId(context));
             eventValues.put(EventConstant.ParameterName.PRODUCT_ID, productId);
             eventValues.put(EventConstant.ParameterName.ORDER_ID, orderId);
 //            eventValues.put(EventConstant.ParameterName.PURCHASE_TIME, purchaseTime);
             eventValues.put(EventConstant.ParameterName.PAY_VALUE, usdPrice);
             eventValues.put(EventConstant.ParameterName.CURRENCY, "USD");
+
             //下面是AppsFlyer自己的事件名
-            eventValues.put(AFInAppEventParameterName.REVENUE, usdPrice);
-            eventValues.put(AFInAppEventParameterName.CURRENCY, "USD");
-            eventValues.put(AFInAppEventParameterName.CONTENT_ID, productId);
+            Map<String, Object> af_eventValues = new HashMap<>();
+            af_eventValues.put(AFInAppEventParameterName.REVENUE, usdPrice);
+            af_eventValues.put(AFInAppEventParameterName.CURRENCY, "USD");
+            af_eventValues.put(AFInAppEventParameterName.CONTENT_ID, productId);
+            af_eventValues.put(AFInAppEventParameterName.ORDER_ID, orderId);
+            af_eventValues.put(AFInAppEventParameterName.CUSTOMER_USER_ID, uid);
+            AppsFlyerLib.getInstance().logEvent(context.getApplicationContext(), AFInAppEventType.PURCHASE, af_eventValues);
+
+            //FB
+            SFacebookProxy.logPurchase(context, new BigDecimal(usdPrice), eventValues);
+
+            //Firebase
+            Bundle b = new Bundle();
+            for (Map.Entry<String, Object> entry : eventValues.entrySet()) {
+                b.putString(entry.getKey(), entry.getValue().toString());
+            }
+            b.putString(FirebaseAnalytics.Param.ITEM_ID,productId);
+            b.putDouble(FirebaseAnalytics.Param.PRICE,usdPrice);
+            b.putString(FirebaseAnalytics.Param.CURRENCY, "USD");
+            b.putString(FirebaseAnalytics.Param.TRANSACTION_ID, orderId);
+
+            SGoogleProxy.firebaseAnalytics(context, FirebaseAnalytics.Event.PURCHASE, b);
+
 
             if(!SdkUtil.getFirstPay(context)) {//检查是否首次充值
-                trackingWithEventName(context, EventConstant.EventName.FIRST_PAY.name(), eventValues, EventConstant.AdType.AdTypeAllChannel);
+//                trackingWithEventName(context, EventConstant.EventName.FIRST_PAY.name(), eventValues, EventConstant.AdType.AdTypeAllChannel);
                 SdkUtil.saveFirstPay(context);
             }
 
@@ -197,6 +212,7 @@ public class SdkEventLogger {
             if(adType == 0 || (adType & EventConstant.AdType.AdTypeAllChannel) == EventConstant.AdType.AdTypeAllChannel) {
                 PL.i("上报全部媒体");
                 //AppsFlyer上报
+
                 AppsFlyerLib.getInstance().logEvent(context.getApplicationContext(), eventName, map);
 
                 //Facebook上报

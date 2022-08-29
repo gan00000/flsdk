@@ -45,9 +45,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Currency;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 public class SFacebookProxy {
 
@@ -142,7 +146,20 @@ public class SFacebookProxy {
 		}else {
 			logger.logEvent(eventName,valueToSum,parameters);
 		}
-		
+
+	}
+
+	public static void logPurchase(Context context, BigDecimal purchaseAmount, Map<String, Object> parametersMap) {
+
+		AppEventsLogger logger = AppEventsLogger.newLogger(context);
+		if (parametersMap == null || parametersMap.isEmpty()) {
+			logger.logPurchase(purchaseAmount, Currency.getInstance(Locale.US));
+		}
+		Bundle parameters = new Bundle();
+		for (Map.Entry<String, Object> entry : parametersMap.entrySet()) {
+			parameters.putString(entry.getKey(), entry.getValue().toString());
+		}
+		logger.logPurchase(purchaseAmount, Currency.getInstance(Locale.US), parameters);
 	}
 
 	public void fbLogin(final Activity activity, final FbLoginCallBack fbLoginCallBack) {
