@@ -36,6 +36,9 @@
 -keep public class com.mw.sdk.ads.EventConstant { *; }
 -keep public class com.core.base.bean.BaseResponseModel { *; }
 -keep public class com.core.base.bean.AbsReqeustBean { *; }
+-keep public class com.gama.pay.gp.bean.res.GPExchangeRes$Data { *; }
+-keep public class com.gama.pay.gp.bean.res.GPCreateOrderIdRes$PayData { *; }
+
 # -keep public interface mypackage.MyInterface
 # -keep public class * implements mypackage.MyInterface
 
