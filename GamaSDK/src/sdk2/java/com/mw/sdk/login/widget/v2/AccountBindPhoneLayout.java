@@ -237,17 +237,15 @@ public class AccountBindPhoneLayout extends SLoginBaseRelativeLayout {
                 }
 
                 stopVfCodeTimer();
-                Request.bindPhone(getContext(),true, areaCode, phone, vfCode, new SFCallBack<BaseResponseModel>() {
+                Request.bindPhone(getContext(),true, areaCode, phone, vfCode, new SFCallBack<SLoginResponse>() {
                     @Override
-                    public void success(BaseResponseModel result, String msg) {
+                    public void success(SLoginResponse aaaSLoginResponse1, String msg) {
                         ToastUtils.toast(getContext(),R.string.text_phone_bind_success);
                         isBindSuccess = true;
-                        SLoginResponse sLoginResponse = SdkUtil.getCurrentUserLoginResponse(getContext());
-                        sLoginResponse.getData().setTelephone(areaCode + "-" + phone);
-                        sLoginResponse.getData().setBindPhone(true);
-
-                        SdkUtil.updateLoginData(getContext(), sLoginResponse);
-
+//                        SLoginResponse sLoginResponse = SdkUtil.getCurrentUserLoginResponse(getContext());
+//                        sLoginResponse.getData().setTelephone(areaCode + "-" + phone);
+//                        sLoginResponse.getData().setBindPhone(true);
+//                        SdkUtil.updateLoginData(getContext(), sLoginResponse);
 
                         if (sfCallBack != null) {
                             sfCallBack.success(SdkUtil.getCurrentUserLoginResponse(getContext()),"");
@@ -260,7 +258,7 @@ public class AccountBindPhoneLayout extends SLoginBaseRelativeLayout {
                     }
 
                     @Override
-                    public void fail(BaseResponseModel result, String msg) {
+                    public void fail(SLoginResponse result, String msg) {
                         if (sfCallBack != null){
                             sfCallBack.fail(null,"");
                         }

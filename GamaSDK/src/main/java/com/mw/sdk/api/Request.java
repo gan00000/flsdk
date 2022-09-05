@@ -82,7 +82,7 @@ public class Request {
         baseLoginRequestTask.excute(BaseResponseModel.class);
     }
 
-    public static void bindPhone(Context context, boolean needDialog, String areaCode, String telephone,String vfCode, SFCallBack<BaseResponseModel> sfCallBack) {
+    public static void bindPhone(Context context, boolean needDialog, String areaCode, String telephone,String vfCode, SFCallBack<SLoginResponse> sfCallBack) {
 
         SGameBaseRequestBean sGameBaseRequestBean = new SGameBaseRequestBean(context);
         sGameBaseRequestBean.setPhone(telephone);
@@ -100,15 +100,26 @@ public class Request {
             public void success(BaseResponseModel responseModel, String rawResult) {
                 if (responseModel != null) {
                     if (responseModel.isRequestSuccess()) {
+
+                        SLoginResponse localLoginResponse = SdkUtil.getCurrentUserLoginResponse(context);
+                        localLoginResponse.getData().setTelephone(areaCode + "-" + telephone);
+                        localLoginResponse.getData().setBindPhone(true);
+                        SdkUtil.updateLoginData(context, localLoginResponse);
+
                         if (sfCallBack != null){
-                            sfCallBack.success(responseModel,rawResult);
+                            sfCallBack.success(localLoginResponse,rawResult);
                         }
 
                     }else{
 
                         ToastUtils.toast(context, responseModel.getMessage() + "");
+                        SLoginResponse localLoginResponse = new SLoginResponse();
+                        localLoginResponse.setCode(responseModel.getCode());
+                        localLoginResponse.setRawResponse(responseModel.getRawResponse());
+                        localLoginResponse.setMessage(responseModel.getMessage());
+
                         if (sfCallBack != null){
-                            sfCallBack.fail(responseModel,rawResult);
+                            sfCallBack.fail(localLoginResponse,rawResult);
                         }
                     }
 
@@ -141,7 +152,7 @@ public class Request {
         baseLoginRequestTask.excute(BaseResponseModel.class);
     }
 
-    public static void bindAcountInGame(Context context, boolean needDialog, String loginType,String name, String pwd, SFCallBack sfCallBack) {
+    public static void bindAcountInGame(Context context, boolean needDialog, String loginType,String name, String pwd, SFCallBack<SLoginResponse> sfCallBack) {
 
         AccountBindInGameRequestBean bindInGameRequestBean = new AccountBindInGameRequestBean(context);
         bindInGameRequestBean.setRegistPlatform(loginType);
@@ -175,14 +186,14 @@ public class Request {
                                 sLoginResponse.getData().getTimestamp(),true);//记住账号密码
 
                         if (sfCallBack != null){
-                            sfCallBack.success(rawResult,rawResult);
+                            sfCallBack.success(sLoginResponse,rawResult);
                         }
 
                     }else{
 
                         ToastUtils.toast(context, sLoginResponse.getMessage() + "");
                         if (sfCallBack != null){
-                            sfCallBack.fail(null,rawResult);
+                            sfCallBack.fail(sLoginResponse,rawResult);
                         }
                     }
 
