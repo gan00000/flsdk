@@ -31,6 +31,10 @@ public class BaseResponseModel implements Serializable {
         return message;
     }
 
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
     public void setRawResponse(String rawResponse){
         this.rawResponse = rawResponse;
 
