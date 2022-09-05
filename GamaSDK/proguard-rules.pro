@@ -38,6 +38,11 @@
 -keep public class com.core.base.bean.AbsReqeustBean { *; }
 -keep public class com.gama.pay.gp.bean.res.GPExchangeRes$Data { *; }
 -keep public class com.gama.pay.gp.bean.res.GPCreateOrderIdRes$PayData { *; }
+-keep public class com.mw.base.cfg.ConfigBean { *; }
+-keep public class com.mw.base.cfg.ConfigBean$VersionData { *; }
+-keep public class com.mw.base.cfg.ConfigBean$UrlData { *; }
+-keep public class com.mw.base.bean.PhoneInfo { *; }
+
 
 # -keep public interface mypackage.MyInterface
 # -keep public class * implements mypackage.MyInterface
