@@ -113,13 +113,13 @@ public class Request {
                     }else{
 
                         ToastUtils.toast(context, responseModel.getMessage() + "");
-                        SLoginResponse localLoginResponse = new SLoginResponse();
-                        localLoginResponse.setCode(responseModel.getCode());
-                        localLoginResponse.setRawResponse(responseModel.getRawResponse());
-                        localLoginResponse.setMessage(responseModel.getMessage());
+                        SLoginResponse tempLoginResponse = new SLoginResponse();
+                        tempLoginResponse.setCode(responseModel.getCode());
+                        tempLoginResponse.setRawResponse(responseModel.getRawResponse());
+                        tempLoginResponse.setMessage(responseModel.getMessage());
 
                         if (sfCallBack != null){
-                            sfCallBack.fail(localLoginResponse,rawResult);
+                            sfCallBack.fail(tempLoginResponse,rawResult);
                         }
                     }
 
