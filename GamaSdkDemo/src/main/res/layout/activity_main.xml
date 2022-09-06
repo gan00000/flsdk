@@ -109,6 +109,12 @@
                     android:layout_height="wrap_content"
                     android:text="升级账号view" />
 
+                <Button
+                    android:id="@+id/cs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="打开客服页面" />
+
 
             </LinearLayout>
 

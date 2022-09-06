@@ -386,16 +386,24 @@ public class MainActivity extends Activity {
         mIMWSDK.requestBindPhone(this, "86", "13622843403", "111111", new SFCallBack<SLoginResponse>() {
             @Override
             public void success(SLoginResponse sLoginResponse, String result) {
-                if (sLoginResponse != null){
+                if (sLoginResponse != null) {
                     String tel = sLoginResponse.getData().getTelephone();//绑定的手机号码
                 }
             }
 
             @Override
             public void fail(SLoginResponse sLoginResponse, String result) {
-                if (sLoginResponse != null){
+                if (sLoginResponse != null) {
                     String errMsg = sLoginResponse.getMessage();
                 }
+
+            }
+        });
+
+        findViewById(R.id.cs).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mIMWSDK.openCs(MainActivity.this);
             }
         });
     }
