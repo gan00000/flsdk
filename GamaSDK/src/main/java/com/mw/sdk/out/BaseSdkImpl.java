@@ -167,19 +167,25 @@ public class BaseSdkImpl implements IMWSDK {
 
     @Override
     public void openCs(Activity activity) {
+        PL.i("sdk openCs");
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
 
-        ConfigBean configBean = SdkUtil.getSdkCfg(activity.getApplicationContext());
-        if (configBean != null && configBean.getUrl() != null && SStringUtil.isNotEmpty(configBean.getUrl().getCsUrl())) {
+                ConfigBean configBean = SdkUtil.getSdkCfg(activity.getApplicationContext());
+                if (configBean != null && configBean.getUrl() != null && SStringUtil.isNotEmpty(configBean.getUrl().getCsUrl())) {
 
-            SGameBaseRequestBean sGameBaseRequestBean = new SGameBaseRequestBean(activity);
-            sGameBaseRequestBean.setCompleteUrl(configBean.getUrl().getCsUrl());
+                    SGameBaseRequestBean sGameBaseRequestBean = new SGameBaseRequestBean(activity);
+                    sGameBaseRequestBean.setCompleteUrl(configBean.getUrl().getCsUrl());
 
-            Intent csIntent = MWBaseWebActivity.create(activity,"", sGameBaseRequestBean.createPreRequestUrl());
-            activity.startActivity(csIntent);
-        }else {
-            PL.i("获取不到客服地址");
-        }
+                    Intent csIntent = MWBaseWebActivity.create(activity,"", sGameBaseRequestBean.createPreRequestUrl());
+                    activity.startActivity(csIntent);
+                }else {
+                    PL.i("获取不到客服地址");
+                }
 
+            }
+        });
     }
 
     @Override
