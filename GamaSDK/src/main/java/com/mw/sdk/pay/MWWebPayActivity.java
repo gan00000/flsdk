@@ -15,6 +15,7 @@ import com.gama.pay.gp.bean.res.BasePayBean;
 import com.mw.base.widget.SWebView;
 import com.core.base.utils.PL;
 import com.core.base.utils.ToastUtils;
+import com.mw.sdk.MWBaseWebActivity;
 import com.mw.sdk.R;
 import com.mw.sdk.SBaseSdkActivity;
 import com.mw.sdk.SWebViewLayout;
@@ -26,16 +27,8 @@ import com.mw.sdk.out.BaseSdkImpl;
  * Created by GanYuanrong on 2016/12/1.
  */
 
-public class MWWebPayActivity extends SBaseSdkActivity {
+public class MWWebPayActivity extends MWBaseWebActivity {
 
-    public static final String PLAT_WEBVIEW_URL = "PLAT_WEBVIEW_URL";
-    public static final String PLAT_WEBVIEW_TITLE = "PLAT_WEBVIEW_TITLE";
-    private String webUrl;
-    private String webTitle;
-//    private ProgressBar progressBar;
-
-    private SWebViewLayout sWebViewLayout;
-    private SWebView sWebView;
     private View backView;
 
     private WebPayJs webPayJs;
@@ -59,19 +52,18 @@ public class MWWebPayActivity extends SBaseSdkActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.s_web_act_layout);
+        //setContentView(R.layout.s_web_act_layout);
 
         if (getIntent() != null) {
-            webUrl = getIntent().getStringExtra(PLAT_WEBVIEW_URL);
-            webTitle = getIntent().getStringExtra(PLAT_WEBVIEW_TITLE);
+//            webUrl = getIntent().getStringExtra(PLAT_WEBVIEW_URL);
+//            webTitle = getIntent().getStringExtra(PLAT_WEBVIEW_TITLE);
             cpOrderId = getIntent().getStringExtra("mw_cpOrderId");
             productId = getIntent().getStringExtra("mw_productId");
             extra = getIntent().getStringExtra("mw_extra");
 //            initTitle(webTitle);
         }
 
-        sWebViewLayout = findViewById(R.id.sl_web_act);
-        sWebView = sWebViewLayout.getsWebView();
+        sWebViewLayout.getTitleHeaderView().setVisibility(View.VISIBLE);
         backView = sWebViewLayout.getBackImageView();
 
         sWebViewLayout.getCloseImageView().setOnClickListener(new View.OnClickListener() {
@@ -95,6 +87,11 @@ public class MWWebPayActivity extends SBaseSdkActivity {
     }
 
     @Override
+    protected boolean superAutoLoadUrl() {
+        return false;
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         if (iPay != null){
@@ -105,9 +102,6 @@ public class MWWebPayActivity extends SBaseSdkActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (sWebView != null){
-            sWebView.onActivityResult(requestCode, resultCode, data);
-        }
         if (iPay != null){
             iPay.onActivityResult(this,requestCode,resultCode,data);
         }
@@ -117,13 +111,6 @@ public class MWWebPayActivity extends SBaseSdkActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (sWebView != null){
-            sWebView.clearCache(true);
-            sWebView.clearHistory();
-            sWebView.destroy();
-            sWebView = null;
-            PL.i("dialog destory webview");
-        }
         if (iPay != null){
             iPay.onDestroy(this);
         }
