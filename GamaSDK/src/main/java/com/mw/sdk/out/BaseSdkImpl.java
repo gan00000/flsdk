@@ -26,9 +26,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.play.core.review.ReviewInfo;
 import com.google.android.play.core.review.ReviewManager;
 import com.google.android.play.core.review.ReviewManagerFactory;
+import com.mw.base.bean.SGameBaseRequestBean;
 import com.mw.base.bean.SGameLanguage;
 import com.mw.base.bean.SLoginType;
 import com.mw.base.bean.SPayType;
+import com.mw.base.cfg.ConfigBean;
 import com.mw.base.cfg.ConfigRequest;
 import com.mw.base.cfg.ResConfig;
 import com.mw.base.utils.Localization;
@@ -166,8 +168,18 @@ public class BaseSdkImpl implements IMWSDK {
     @Override
     public void openCs(Activity activity) {
 
-        Intent csIntent = MWBaseWebActivity.create(activity,"","https://www.baidu.com/");
-        activity.startActivity(csIntent);
+        ConfigBean configBean = SdkUtil.getSdkCfg(activity.getApplicationContext());
+        if (configBean != null && configBean.getUrl() != null && SStringUtil.isNotEmpty(configBean.getUrl().getCsUrl())) {
+
+            SGameBaseRequestBean sGameBaseRequestBean = new SGameBaseRequestBean(activity);
+            sGameBaseRequestBean.setCompleteUrl(configBean.getUrl().getCsUrl());
+
+            Intent csIntent = MWBaseWebActivity.create(activity,"", sGameBaseRequestBean.createPreRequestUrl());
+            activity.startActivity(csIntent);
+        }else {
+            PL.i("获取不到客服地址");
+        }
+
     }
 
     @Override

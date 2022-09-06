@@ -142,7 +142,7 @@ public class BaseReqeustBean extends AbsReqeustBean {
             if (s.endsWith("?")){
                 return s + fieldParams;
             }
-            if (s.contains("?")){
+            if (s.contains("?")){//已经拼接了部分参数
                 return s + "&" + fieldParams;
             }
             return s + "?" + fieldParams;
