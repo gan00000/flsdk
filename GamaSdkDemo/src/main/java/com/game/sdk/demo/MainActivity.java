@@ -368,6 +368,13 @@ public class MainActivity extends Activity {
 
             }
         });
+
+        findViewById(R.id.cs).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mIMWSDK.openCs(MainActivity.this);
+            }
+        });
     }
 
     @Override
