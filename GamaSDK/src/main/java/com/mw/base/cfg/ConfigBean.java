@@ -170,6 +170,7 @@ public class ConfigBean {
 
         private String noticeUrl = "";//公告地址
         private String agreementUrl = "";//服务条款地址
+        private String csUrl = "";//客服地址
 
         public String getNoticeUrl() {
             return noticeUrl;
@@ -185,6 +186,14 @@ public class ConfigBean {
 
         public void setAgreementUrl(String agreementUrl) {
             this.agreementUrl = agreementUrl;
+        }
+
+        public String getCsUrl() {
+            return csUrl;
+        }
+
+        public void setCsUrl(String csUrl) {
+            this.csUrl = csUrl;
         }
     }
 }
