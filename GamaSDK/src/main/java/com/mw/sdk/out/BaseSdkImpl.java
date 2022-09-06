@@ -1,14 +1,11 @@
 package com.mw.sdk.out;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.webkit.JavascriptInterface;
 
 import androidx.annotation.NonNull;
 
@@ -17,7 +14,6 @@ import com.core.base.callback.SFCallBack;
 import com.core.base.utils.AppUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
-import com.core.base.utils.ScreenHelper;
 import com.core.base.utils.SignatureUtil;
 import com.core.base.utils.ToastUtils;
 import com.gama.pay.IPay;
@@ -37,11 +33,11 @@ import com.mw.base.cfg.ConfigRequest;
 import com.mw.base.cfg.ResConfig;
 import com.mw.base.utils.Localization;
 import com.mw.base.utils.SdkUtil;
-import com.mw.base.widget.SWebView;
 import com.mw.sdk.BuildConfig;
 import com.mw.sdk.R;
 import com.mw.sdk.SBaseDialog;
 import com.mw.sdk.constant.ResultCode;
+import com.mw.sdk.MWBaseWebActivity;
 import com.mw.sdk.pay.MWWebPayActivity;
 import com.mw.sdk.SWebViewDialog;
 import com.mw.sdk.ads.EventConstant;
@@ -169,7 +165,9 @@ public class BaseSdkImpl implements IMWSDK {
 
     @Override
     public void openCs(Activity activity) {
-//        openWebPage(activity,GamaOpenWebType.CUSTOM_URL,activity.getString(R.string.emm_service_url));
+
+        Intent csIntent = MWBaseWebActivity.create(activity,"","https://www.baidu.com/");
+        activity.startActivity(csIntent);
     }
 
     @Override

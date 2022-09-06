@@ -50,4 +50,12 @@ public class WebPayJs {
             });
         }
     }
+
+    @SuppressLint("JavascriptInterface")
+    @JavascriptInterface
+    public void close(){
+        if (activity != null){
+            activity.finish();
+        }
+    }
 }
