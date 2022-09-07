@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+<!--    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />-->
     <!-- VERY IMPORTANT! Don't forget this permission, or in-app billing won't work. -->
 <!--    <uses-permission android:name="com.android.vending.BILLING" />-->
 <!--    Apps targeting Android 13 should add the following permission to AndroidManifest.xml to access the Android Advertising Identifier-->
