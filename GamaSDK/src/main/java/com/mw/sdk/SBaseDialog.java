@@ -47,6 +47,11 @@ public class SBaseDialog extends Dialog {
         if(window == null) {
             return;
         }
+
+        //Window开启硬件加速方式,防止 游戏设置android:hardwareAccelerated="false"会造成输入框看不到输入中的内容(原因未知)
+        window.setFlags(
+                WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
+                WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED);
         inputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         window.getDecorView().setPadding(0, 0, 0, 0);
 //        ScreenHelper screenHelper = new ScreenHelper((Activity) context);
