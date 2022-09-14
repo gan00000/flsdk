@@ -892,7 +892,7 @@ public class SdkUtil {
     }
 
 
-    public static void setAccountWithIcon(AccountModel accountModel, ImageView imageView, EditText editText){
+    /*public static void setAccountWithIcon(AccountModel accountModel, ImageView imageView, EditText editText){
         int imageResId = R.mipmap.mw_smail_icon;
         String showName = accountModel.getUserId();//accountModel.getThirdAccount();
 //        if (SStringUtil.isEmpty(showName)){
@@ -924,7 +924,7 @@ public class SdkUtil {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
     public static boolean isVersion2(Context context) {//是否是第二套sdk
         if ("v2".equals(context.getResources().getString(R.string.sdk_inner_version))){
