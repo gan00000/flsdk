@@ -18,6 +18,7 @@ import com.core.base.utils.ToastUtils;
 import com.mw.base.bean.SLoginType;
 import com.mw.base.cfg.ConfigBean;
 import com.mw.base.utils.SdkUtil;
+import com.mw.base.utils.SdkVersionUtil;
 import com.mw.sdk.SBaseRelativeLayout;
 import com.mw.sdk.login.AccountPopupWindow;
 import com.mw.sdk.login.constant.BindType;
@@ -201,7 +202,7 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
 //            String password = lastAccountModel.getPassword();
 //                accountSdkInputEditTextView.getInputEditText().setText(account);
             ImageView imageView = accountSdkInputEditTextView.getIconImageView();
-            SdkUtil.setAccountWithIcon(currentAccountModel,imageView,accountEditText);
+            SdkVersionUtil.setAccountWithIcon(currentAccountModel,imageView,accountEditText);
             accountSdkInputEditTextView.getInputEditText().setEnabled(false);
 
             //判斷是否綁定，顯示是否升級賬號

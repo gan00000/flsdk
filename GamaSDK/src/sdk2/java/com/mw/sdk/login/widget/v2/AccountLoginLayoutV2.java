@@ -23,6 +23,7 @@ import com.core.base.utils.ToastUtils;
 import com.mw.base.bean.SLoginType;
 import com.mw.base.cfg.ConfigBean;
 import com.mw.base.utils.SdkUtil;
+import com.mw.base.utils.SdkVersionUtil;
 import com.mw.sdk.SBaseDialog;
 import com.mw.sdk.login.AccountPopupWindow;
 import com.mw.sdk.login.constant.ViewType;
@@ -468,13 +469,13 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
             }else {
                 loginMainGoFindPwd.setVisibility(VISIBLE);
             }
-            SdkUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
+            SdkVersionUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
             pwdSdkInputEditTextView.setVisibility(View.VISIBLE);
 //                pwdSdkInputEditTextView.setPwdInputEnable(true);
             loginPasswordEditText.setText(password);
 
         }else{
-            SdkUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
+            SdkVersionUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
 //            pwdSdkInputEditTextView.setPwdInputEnable(false);
 //            loginPasswordEditText.setText(R.string.text_free_register);
             pwdSdkInputEditTextView.setVisibility(View.GONE);

@@ -16,6 +16,7 @@ import com.core.base.utils.PL;
 import com.mw.base.bean.SLoginType;
 import com.mw.base.cfg.ConfigBean;
 import com.mw.base.utils.SdkUtil;
+import com.mw.base.utils.SdkVersionUtil;
 import com.mw.sdk.R;
 import com.mw.sdk.login.AccountPopupWindow;
 import com.mw.sdk.login.constant.ViewType;
@@ -363,7 +364,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
                             tempAccountModel.setLoginType(SLoginType.LOGIN_TYPE_MG);
                             tempAccountModel.setAccount(s.toString());
                             tempAccountModel.setPassword("");
-                            SdkUtil.setAccountWithIcon(tempAccountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
+                            SdkVersionUtil.setAccountWithIcon(tempAccountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
                             pwdSdkInputEditTextView.setPwdInputEnable(true);
                             pwdSdkInputEditTextView.getInputEditText().setText("");
                         }
@@ -381,12 +382,12 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
             account = accountModel.getAccount();
             password = accountModel.getPassword();
             if (!TextUtils.isEmpty(account)){ //显示记住的密码
-                SdkUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
+                SdkVersionUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
                 pwdSdkInputEditTextView.setPwdInputEnable(true);
                 loginPasswordEditText.setText(password);
             }
         }else{
-            SdkUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
+            SdkVersionUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
             pwdSdkInputEditTextView.setPwdInputEnable(false);
             loginPasswordEditText.setText(R.string.text_free_register);
         }
