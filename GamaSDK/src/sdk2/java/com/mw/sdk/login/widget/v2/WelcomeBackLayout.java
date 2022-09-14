@@ -210,7 +210,7 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
                 layout_need_update_account.setVisibility(View.GONE);
 
                 tv_account_update_tips.setText(R.string.text_has_update_account_tips);
-                iv_update_account_icon.setImageResource(R.mipmap.has_update_account_bg);
+                iv_update_account_icon.setImageResource(R.mipmap.mmplaygame_has_update_account_bg);
 
                 if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_MG, currentAccountModel.getLoginType())){
                     btn_change_pwd.setEnabled(true);
@@ -232,7 +232,7 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
                 layout_has_update_account.setVisibility(View.GONE);
                 btn_swith_account3.setVisibility(View.GONE);
                 tv_account_update_tips.setText(R.string.text_update_account_tips);
-                iv_update_account_icon.setImageResource(R.mipmap.nend_update_account_bg);
+                iv_update_account_icon.setImageResource(R.mipmap.mmplaygame_nend_update_account_img);
             }
         }
     }

@@ -41,7 +41,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:id="@+id/iv_bind_phone_close"
-                android:src="@mipmap/icon_close_3" />
+                android:src="@mipmap/mmplaygame_orange_close" />
 
         </RelativeLayout>
 
@@ -87,7 +87,7 @@
                             android:layout_height="match_parent"
                             android:layout_marginStart="10dp"
                             android:layout_marginEnd="12dp"
-                            android:src="@mipmap/icon_down_list2" />
+                            android:src="@mipmap/mmplaygame_icon_xia_list" />
 
 
                     </LinearLayout>
@@ -191,7 +191,7 @@
                             android:layout_height="16dp"
                             android:layout_marginStart="10dp"
                             android:layout_marginEnd="12dp"
-                            android:src="@mipmap/icon_down_list2" />
+                            android:src="@mipmap/mmplaygame_icon_xia_list" />
 
 
                     </LinearLayout>

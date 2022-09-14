@@ -27,7 +27,7 @@
                 android:layout_marginTop="2dp"
                 android:layout_marginStart="34dp"
                 android:scaleType="fitCenter"
-                android:src="@mipmap/mw_back_icon" />
+                android:src="@mipmap/mmplaygame_back_icon" />
 
             <RelativeLayout
                 android:layout_width="0dp"

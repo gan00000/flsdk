@@ -223,7 +223,7 @@
                 <ImageView
                     android:layout_width="34dp"
                     android:layout_height="34dp"
-                    android:src="@mipmap/mw_guest_icon" />
+                    android:src="@mipmap/mmplaygame_big_vister" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -249,7 +249,7 @@
                 <ImageView
                     android:layout_width="34dp"
                     android:layout_height="34dp"
-                    android:src="@mipmap/mw_fb_icon" />
+                    android:src="@mipmap/mmplaygame_big_fb" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -275,7 +275,7 @@
                 <ImageView
                     android:layout_width="34dp"
                     android:layout_height="34dp"
-                    android:src="@mipmap/mw_gp_icon" />
+                    android:src="@mipmap/mmplaygame_big_gp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -301,7 +301,7 @@
                 <ImageView
                     android:layout_width="34dp"
                     android:layout_height="34dp"
-                    android:src="@mipmap/mw_line_icon" />
+                    android:src="@mipmap/mmplaygame_big_le" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -345,7 +345,7 @@
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:scaleType="fitCenter"
-                    android:src="@mipmap/mw_delete_icon" />
+                    android:src="@mipmap/mmplaygame_laji_img" />
 
 
                 <TextView
