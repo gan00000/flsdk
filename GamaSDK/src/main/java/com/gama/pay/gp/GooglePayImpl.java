@@ -283,7 +283,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
         }
         mBillingHelper.setBillingHelperStatusCallback(this);
 
-        startQueryPurchase(activity.getApplicationContext());
+//        startQueryPurchase(activity.getApplicationContext());
     }
 
     @Override
