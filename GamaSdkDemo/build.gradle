@@ -86,9 +86,9 @@ android {
             signingConfig signingConfigs.mwrelease
             applicationId "com.wanye.fszhl"
             minSdkVersion 21
-            targetSdkVersion 33
-            versionCode 1
-            versionName "1.0"
+            targetSdkVersion 32
+            versionCode 8
+            versionName "2.3.8"
             flavorDimensions "1"
             resValue "string", "scheme", "fszhl"
             resValue "string", "facebook_app_id", "1672362243138559"

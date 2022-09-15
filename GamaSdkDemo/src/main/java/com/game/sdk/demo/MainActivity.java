@@ -369,36 +369,36 @@ public class MainActivity extends Activity {
             }
         });
 
-        mIMWSDK.requestVfCode(this, "86", "13622843403", new SFCallBack<BaseResponseModel>() {
-            @Override
-            public void success(BaseResponseModel responseModel, String result) {
-
-            }
-
-            @Override
-            public void fail(BaseResponseModel responseModel, String result) {
-                if (responseModel != null){
-                    String errMsg = responseModel.getMessage();
-                }
-            }
-        });
-
-        mIMWSDK.requestBindPhone(this, "86", "13622843403", "111111", new SFCallBack<SLoginResponse>() {
-            @Override
-            public void success(SLoginResponse sLoginResponse, String result) {
-                if (sLoginResponse != null) {
-                    String tel = sLoginResponse.getData().getTelephone();//绑定的手机号码
-                }
-            }
-
-            @Override
-            public void fail(SLoginResponse sLoginResponse, String result) {
-                if (sLoginResponse != null) {
-                    String errMsg = sLoginResponse.getMessage();
-                }
-
-            }
-        });
+//        mIMWSDK.requestVfCode(this, "86", "13622843403", new SFCallBack<BaseResponseModel>() {
+//            @Override
+//            public void success(BaseResponseModel responseModel, String result) {
+//
+//            }
+//
+//            @Override
+//            public void fail(BaseResponseModel responseModel, String result) {
+//                if (responseModel != null){
+//                    String errMsg = responseModel.getMessage();
+//                }
+//            }
+//        });
+//
+//        mIMWSDK.requestBindPhone(this, "86", "13622843403", "111111", new SFCallBack<SLoginResponse>() {
+//            @Override
+//            public void success(SLoginResponse sLoginResponse, String result) {
+//                if (sLoginResponse != null) {
+//                    String tel = sLoginResponse.getData().getTelephone();//绑定的手机号码
+//                }
+//            }
+//
+//            @Override
+//            public void fail(SLoginResponse sLoginResponse, String result) {
+//                if (sLoginResponse != null) {
+//                    String errMsg = sLoginResponse.getMessage();
+//                }
+//
+//            }
+//        });
 
         findViewById(R.id.cs).setOnClickListener(new View.OnClickListener() {
             @Override
