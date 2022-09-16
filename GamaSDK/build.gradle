@@ -3,7 +3,7 @@ apply plugin: 'com.android.library'
 android {
     compileSdkVersion 32
 
-    def sdk_version = "1.5.6"
+    def sdk_version = "1.5.8"
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 32
@@ -30,7 +30,7 @@ android {
         release {
 //            multiDexEnabled true //Add this
 //            shrinkResources true  //压缩资源
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
