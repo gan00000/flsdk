@@ -69,8 +69,8 @@ public class SdkVersionUtil {
         try {
             if (SStringUtil.isNotEmpty(showName)) {
                 editText.setText(showName);
-                Editable etable = editText.getText();
-                Selection.setSelection(etable, showName.length());
+//                Editable etable = editText.getText();
+//                Selection.setSelection(etable, showName.length());
             }else{
                 editText.setText("");
             }
