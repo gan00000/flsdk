@@ -933,6 +933,13 @@ public class SdkUtil {
         return false;
     }
 
+    public static boolean isVersion3(Context context) {//是否是第二套sdk
+        if ("v3".equals(context.getResources().getString(R.string.sdk_inner_version))){
+            return true;
+        }
+        return false;
+    }
+
     public static List<PhoneInfo> getPhoneInfo(Context context){
 
         String areaJson = getAreaCodeInfo(context);//先读取远程下载
