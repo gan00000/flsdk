@@ -147,7 +147,7 @@
                         android:background="@drawable/sdk_bg_vfcode"
                         android:gravity="center"
                         android:text="@string/py_register_account_get_vfcode"
-                        android:textColor="@color/c_FF892E"
+                        android:textColor="@color/c_F94925"
                         android:textSize="14sp" />
 
                 </LinearLayout>
@@ -236,7 +236,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginBottom="27dp"
-            android:background="@drawable/mw_btn_bg_2"
+            android:background="@drawable/sdk_btn3_corners20_bg"
             android:gravity="center"
             android:text="@string/py_confire"
             android:textColor="@android:color/white"

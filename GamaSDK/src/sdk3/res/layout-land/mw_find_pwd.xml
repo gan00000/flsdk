@@ -64,7 +64,7 @@
                 android:gravity="center"
                 android:id="@+id/btn_find_get_vfcode"
                 android:text="@string/py_register_account_get_vfcode"
-                android:textColor="@color/c_FF892E"
+                android:textColor="@color/c_F94925"
                 android:textSize="14sp" />
 
 
@@ -75,7 +75,7 @@
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_marginTop="20dp"
-            android:background="@drawable/mw_btn_bg_f23a12"
+            android:background="@drawable/sdk_btn3_corners25_bg"
             android:gravity="center"
             android:text="@string/py_confire"
             android:textColor="@android:color/white"

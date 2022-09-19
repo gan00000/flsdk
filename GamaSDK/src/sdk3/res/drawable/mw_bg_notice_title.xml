@@ -5,7 +5,7 @@
         android:topLeftRadius="5dp"
         android:topRightRadius="5dp"/>
     <!-- 图形的填充颜色 -->
-    <solid android:color="@color/c_FF892E" >
+    <solid android:color="@color/c_F94925" >
     </solid>
 
 </shape>
