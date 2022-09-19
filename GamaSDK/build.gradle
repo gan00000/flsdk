@@ -17,6 +17,8 @@ android {
                 outputFileName = "MWSDK-sdk1-release-" + sdk_version + ".aar"
             }else if (outputFileName != null && outputFileName.contains("release") && outputFileName.endsWith('.aar') && outputFileName.contains('sdk2')) {
                 outputFileName = "MWSDK-sdk2-release-" + sdk_version + ".aar"
+            }else if (outputFileName != null && outputFileName.contains("release") && outputFileName.endsWith('.aar') && outputFileName.contains('sdk3')) {
+                outputFileName = "MWSDK-sdk3-release-" + sdk_version + ".aar"
             }
         }
     }
@@ -30,7 +32,7 @@ android {
         release {
 //            multiDexEnabled true //Add this
 //            shrinkResources true  //压缩资源
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
@@ -49,6 +51,11 @@ android {
         sdk2 {//第二套
             flavorDimensions "1"
             resValue "string", "sdk_inner_version", "v2"
+        }
+
+        sdk3 {//第三套
+            flavorDimensions "1"
+            resValue "string", "sdk_inner_version", "v3"
         }
 
     }
