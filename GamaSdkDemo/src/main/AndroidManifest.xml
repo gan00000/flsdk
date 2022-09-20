@@ -24,7 +24,7 @@
             &lt;!&ndash;</intent-filter>&ndash;&gt;
         </activity>-->
 
-        <activity
+       <!-- <activity
             android:name="com.game.sdk.demo.MainActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|fontScale"
             android:screenOrientation="portrait"
@@ -43,7 +43,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
-        </activity>
+        </activity>-->
 
     </application>
 
