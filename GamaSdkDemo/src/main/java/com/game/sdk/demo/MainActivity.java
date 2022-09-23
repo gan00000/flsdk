@@ -240,11 +240,17 @@ public class MainActivity extends Activity {
         findViewById(R.id.openScore).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mIMWSDK.requestStoreReview(MainActivity.this, new ICompleteListener() {
+
+                //重要提示：如果在应用内评价流程中出现错误，请勿通知用户或更改应用的正常用户流。调用 onComplete 后，继续执行应用的正常用户流。
+                mIMWSDK.requestStoreReview(MainActivity.this, new SFCallBack() {
                     @Override
-                    public void onComplete() {
-                        //重要提示：如果在应用内评价流程中出现错误，请勿通知用户或更改应用的正常用户流。调用 onComplete 后，继续执行应用的正常用户流。
-                        PL.i("requestReviewFlow onComplete");
+                    public void success(Object result, String msg) {
+                        //评价成功
+                    }
+
+                    @Override
+                    public void fail(Object result, String msg) {
+                        //评价失败
                     }
                 });
             }
@@ -398,6 +404,19 @@ public class MainActivity extends Activity {
 //                    String errMsg = sLoginResponse.getMessage();
 //                }
 //
+//            }
+//        });
+//
+//        mIMWSDK.requestUpgradeAccount(this, "xxx", "pwd", new SFCallBack<SLoginResponse>() {
+//
+//            @Override
+//            public void success(SLoginResponse result, String msg) {
+//                //账号升级成功
+//            }
+//
+//            @Override
+//            public void fail(SLoginResponse result, String msg) {
+//                //账号升级绑定失败
 //            }
 //        });
 

@@ -725,7 +725,7 @@ public class BaseSdkImpl implements IMWSDK {
         iPay.startPay(activity, googlePayCreateOrderIdReqBean);
     }
 
-    public void requestStoreReview(Activity activity, ICompleteListener iCompleteListener){
+    public void requestStoreReview(Activity activity, SFCallBack sfCallBack){
 
         activity.runOnUiThread(new Runnable() {
             @Override
@@ -769,19 +769,18 @@ public class BaseSdkImpl implements IMWSDK {
                                 // The flow has finished. The API does not indicate whether the user
                                 // reviewed or not, or even whether the review dialog was shown. Thus, no
                                 // matter the result, we continue our app flow.
-                                if (iCompleteListener != null) {
-                                    iCompleteListener.onComplete();
+                                if (sfCallBack != null) {
+                                    sfCallBack.success("","");
                                 }
                             }
                         });
 
                     } else {
                         // There was some problem, log or handle the error code.
-//                @ReviewErrorCode
                         PL.i("requestReviewFlow There was some problem");
 //                        int reviewErrorCode = task.getException().getErrorCode();
-                        if (iCompleteListener != null) {
-                            iCompleteListener.onComplete();
+                        if (sfCallBack != null) {
+                            sfCallBack.success("","");
                         }
                     }
                 });
