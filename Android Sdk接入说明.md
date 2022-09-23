@@ -392,7 +392,23 @@
 * <h3 id="9">应用内评分接口</h3>  
 	
 	```
-	public void requestStoreReview(Activity activity, ICompleteListener iCompleteListener);
+	接口声明：
+	public void requestStoreReview(Activity activity, SFCallBack sfCallBack);
+	
+	示例：
+	
+	//重要提示：如果在应用内评价流程中出现错误，请勿通知用户或更改应用的正常用户流。调用 onComplete 后，继续执行应用的正常用户流。
+    mIMWSDK.requestStoreReview(MainActivity.this, new SFCallBack() {
+        @Override
+        public void success(Object result, String msg) {
+            //评价成功
+        }
+
+        @Override
+        public void fail(Object result, String msg) {
+            //评价失败
+        }
+    });
 	```
 	
 * <h3 id="11">fb分享接口</h3>   
@@ -477,6 +493,21 @@
      * @param sfCallBack    回调
      */
     public void requestVfCode(Activity activity, String areaCode, String telephone,SFCallBack sfCallBack);
+    
+    示例：
+    mIMWSDK.requestVfCode(this, "86", "13622843403", new SFCallBack<BaseResponseModel>() {
+            @Override
+            public void success(BaseResponseModel responseModel, String result) {
+
+            }
+
+            @Override
+            public void fail(BaseResponseModel responseModel, String result) {
+                if (responseModel != null){
+                    String errMsg = responseModel.getMessage();
+                }
+            }
+        });
 	
 	```
 * <h3 id="16">请求绑定手机</h3>   
@@ -491,6 +522,26 @@
      * @param sfCallBack
      */
     public void requestBindPhone(Activity activity, String areaCode, String telephone,String vfCode, SFCallBack sfCallBack);
+    
+    
+    示例:
+    
+     mIMWSDK.requestBindPhone(this, "86", "13622843403", "111111", new SFCallBack<SLoginResponse>() {
+            @Override
+            public void success(SLoginResponse sLoginResponse, String result) {
+                if (sLoginResponse != null) {
+                    String tel = sLoginResponse.getData().getTelephone();//绑定的手机号码
+                }
+            }
+
+            @Override
+            public void fail(SLoginResponse sLoginResponse, String result) {
+                if (sLoginResponse != null) {
+                    String errMsg = sLoginResponse.getMessage();
+                }
+
+            }
+        });
 	
 	```
 * <h3 id="17">请求账号升级</h3>   
@@ -505,6 +556,20 @@
      */
     public void requestUpgradeAccount(Activity activity, String account, String pwd, SFCallBack sfCallBack);
 	
+	示例：
+	mIMWSDK.requestUpgradeAccount(this, "xxx", "pwd", new SFCallBack<SLoginResponse>() {
+
+            @Override
+            public void success(SLoginResponse result, String msg) {
+                //账号升级成功
+            }
+
+            @Override
+            public void fail(SLoginResponse result, String msg) {
+                //账号升级绑定失败
+            }
+        });
+        
 	```
 	
 * <h3 id="10">上架Google Play相关注意的问题</h3>
