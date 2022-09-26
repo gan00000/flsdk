@@ -16,6 +16,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.mw.base.cfg.ResConfig;
 import com.mw.base.utils.SdkUtil;
 import com.mw.sdk.BuildConfig;
+import com.mw.sdk.R;
 import com.mw.sdk.login.model.response.SLoginResponse;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.google.SGoogleProxy;
@@ -157,12 +158,14 @@ public class SdkEventLogger {
             af_eventValues.put(AFInAppEventParameterName.CONTENT_ID, productId);
             af_eventValues.put(AFInAppEventParameterName.ORDER_ID, orderId);
             af_eventValues.put(AFInAppEventParameterName.CUSTOMER_USER_ID, uid);
+            af_eventValues.put("platform", context.getResources().getString(R.string.channel_platform));
             AppsFlyerLib.getInstance().logEvent(context.getApplicationContext(), AFInAppEventType.PURCHASE, af_eventValues);
 
             //FB
             eventValues.put(AppEventsConstants.EVENT_PARAM_CURRENCY,"USD");
             eventValues.put(AppEventsConstants.EVENT_PARAM_CONTENT_ID, productId);
             eventValues.put(AppEventsConstants.EVENT_PARAM_ORDER_ID, orderId);
+            eventValues.put("platform", context.getResources().getString(R.string.channel_platform));
             SFacebookProxy.logPurchase(context, new BigDecimal(usdPrice), eventValues);
 
             //Firebase
@@ -175,7 +178,7 @@ public class SdkEventLogger {
             b.putDouble(FirebaseAnalytics.Param.VALUE,usdPrice);
             b.putString(FirebaseAnalytics.Param.CURRENCY, "USD");
             b.putString(FirebaseAnalytics.Param.TRANSACTION_ID, orderId);
-
+            b.putString("platform", context.getResources().getString(R.string.channel_platform));
             SGoogleProxy.firebaseAnalytics(context, FirebaseAnalytics.Event.PURCHASE, b);
 
 
@@ -264,6 +267,7 @@ public class SdkEventLogger {
         map.put("adId", adId);
         map.put("uniqueId", uniqueId);
         map.put("androidId", androidId);
+        map.put("platform", context.getResources().getString(R.string.channel_platform));
 
         return map;
     }
