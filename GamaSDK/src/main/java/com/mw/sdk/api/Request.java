@@ -179,8 +179,9 @@ public class Request {
                 if (sLoginResponse != null) {
                     if (sLoginResponse.isRequestSuccess()) {
 
-                        SdkUtil.updateLoginData(context, sLoginResponse);
                         sLoginResponse.getData().setLoginType(SLoginType.LOGIN_TYPE_MG);
+
+                        SdkUtil.updateLoginData(context, sLoginResponse);
 
                         SdkUtil.saveAccountModel(context, name, pwd,sLoginResponse.getData().getUserId(),sLoginResponse.getData().getToken(),
                                 sLoginResponse.getData().getTimestamp(),true);//记住账号密码
