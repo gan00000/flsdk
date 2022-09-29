@@ -57,6 +57,11 @@ public class GooglePayActivity2 extends SBaseActivity {
 			public void fail(BasePayBean basePayBean) {
 
 			}
+
+			@Override
+			public void cancel(String msg) {
+
+			}
 		});
 
 		Intent intent = getIntent();

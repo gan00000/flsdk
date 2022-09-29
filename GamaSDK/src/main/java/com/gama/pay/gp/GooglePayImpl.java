@@ -44,6 +44,7 @@ import java.util.List;
 public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCallback {
     private static final String TAG = GooglePayImpl.class.getSimpleName();
 
+    public static final String TAG_USER_CANCEL = "TAG_GOOGLE_PAY_USER_CANCEL";
     private GBillingHelper mBillingHelper;
 
     private LoadingDialog loadingDialog;
@@ -141,6 +142,15 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
                     if (loadingDialog != null) {
                         loadingDialog.dismissProgressDialog();
                     }
+
+                    if (!TextUtils.isEmpty(message) && TAG_USER_CANCEL.equals(message)){
+                        PL.i(TAG_USER_CANCEL);
+                        if (iPayCallBack != null) {//用户取消
+                            iPayCallBack.cancel("");
+                        }
+                        return;
+                    }
+
                     if (!TextUtils.isEmpty(message)) {//提示错误信息
 
                         loadingDialog.alert(message, new DialogInterface.OnClickListener() {
@@ -155,7 +165,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
                             }
                         });
 
-                    } else {//用户取消
+                    } else {
 
                         if (iPayCallBack != null) {
                             iPayCallBack.fail(null);
@@ -630,7 +640,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
         } else if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.USER_CANCELED) { //用户取消
             // Handle an error caused by a user cancelling the purchase flow.
             PL.i( "user cancelling the purchase flow");
-            callbackFail(null);
+            callbackFail(TAG_USER_CANCEL);
         } else { //发生错误
             // Handle any other error codes.
             PL.i( "Purchases error code -> " + billingResult.getResponseCode());

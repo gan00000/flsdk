@@ -720,6 +720,13 @@ public class BaseSdkImpl implements IMWSDK {
                     iPayListener.onPayFail();
                 }
             }
+
+            @Override
+            public void cancel(String msg) {
+                if (iPayListener != null) {
+                    iPayListener.onPayFail();
+                }
+            }
         });
 
         iPay.startPay(activity, googlePayCreateOrderIdReqBean);

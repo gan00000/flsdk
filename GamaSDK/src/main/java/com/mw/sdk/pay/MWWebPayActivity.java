@@ -142,6 +142,11 @@ public class MWWebPayActivity extends MWBaseWebActivity {
                 setActivityResult(false,productId,cpOrderId);
                 finish();
             }
+
+            @Override
+            public void cancel(String msg) {
+
+            }
         });
 
         iPay.startPay(activity, googlePayCreateOrderIdReqBean);

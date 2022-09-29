@@ -15,4 +15,6 @@ public interface IPayCallBack extends ISCallBack {
     void success(BasePayBean basePayBean);
     void fail(BasePayBean basePayBean);
 
+    void cancel(String msg);
+
 }
