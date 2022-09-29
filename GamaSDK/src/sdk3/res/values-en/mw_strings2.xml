@@ -9,10 +9,10 @@
     <string name="text_phone_not_match">Wrong format of cell phone number</string>
     <string name="text_vfcode_has_send">Code has been sent</string>
     <string name="text_phone_bind_success">Cell phone binding success</string>
-    <string name="text_has_bind_tips_google">Google has upgraded to a member account</string>
-    <string name="text_has_bind_tips_fb">Facebook has been upgraded to a member account</string>
-    <string name="text_has_bind_tips_guest">Visitors have been upgraded to member accounts</string>
-    <string name="text_has_bind_tips_line">LINE has been upgraded to a member account</string>
+    <string name="text_has_bind_tips_google">Account has been upgraded</string>
+    <string name="text_has_bind_tips_fb">Account has been upgraded</string>
+    <string name="text_has_bind_tips_guest">Account has been upgraded</string>
+    <string name="text_has_bind_tips_line">Account has been upgraded</string>
     <string name="text_has_bind_tips_mw">Member Account</string>
     <string name="text_notice">Announcement</string>
 

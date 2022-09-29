@@ -179,7 +179,8 @@ public class Request {
                 if (sLoginResponse != null) {
                     if (sLoginResponse.isRequestSuccess()) {
 
-                        sLoginResponse.getData().setLoginType(SLoginType.LOGIN_TYPE_MG);
+                        sLoginResponse.getData().setLoginType(loginType);
+//                        sLoginResponse.getData().setLoginId(name);
 
                         SdkUtil.updateLoginData(context, sLoginResponse);
 
