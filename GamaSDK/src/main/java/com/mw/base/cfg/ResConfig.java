@@ -243,7 +243,7 @@ public class ResConfig {
     }
 
     public static String getLogPreferredUrl(Context context) {
-        return getCdnLocalUrl(context, "mw_log_pre_url");
+        return getCdnLocalUrl(context, "sdk_log_pre_url");
     }
 
     /**

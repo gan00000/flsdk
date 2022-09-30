@@ -348,9 +348,7 @@ public class SdkEventLogger {
             @Override
             public void success(BaseResponseModel responseModel, String rawResult) {
                 PL.i(TAG, "SDK_INSTALL_ACTIVATION rawResult:" + rawResult);
-                if (responseModel != null && responseModel.isRequestSuccess()) {
-                    SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE, SDK_INSTALL_ACTIVATION, "adsInstallActivation");
-                }
+                SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE, SDK_INSTALL_ACTIVATION, "adsInstallActivation");
             }
 
             @Override
@@ -360,6 +358,7 @@ public class SdkEventLogger {
 
             @Override
             public void noData() {
+                SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE, SDK_INSTALL_ACTIVATION, "adsInstallActivation");
             }
 
             @Override

@@ -30,7 +30,7 @@
     <string name="zh_tw_sdk_cs_spa_url" translatable="false"></string>
 
 <!--    日志记录域名-->
-    <string name="mw_log_pre_url" translatable="false">https://log.meowplayer.com/</string>
+    <string name="zh_tw_sdk_log_pre_url" translatable="false">https://log.meowplayer.com/</string>
 
 
     <!--使用者條款 - 服務條款 -->
