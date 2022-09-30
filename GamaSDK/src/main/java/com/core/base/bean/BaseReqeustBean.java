@@ -91,6 +91,11 @@ public class BaseReqeustBean extends AbsReqeustBean {
      */
     public Map<String, String> fieldValueToMap() {
 
+        //如果主动设置此值，不再变量字段
+        if (getRequestParamsMap() != null && !getRequestParamsMap().isEmpty()){
+            return getRequestParamsMap();
+        }
+
         Map<String, String> postParams = new HashMap<String, String>();
         Class c = this.getClass();
         while (c != null && c != BaseReqeustBean.class.getSuperclass()) {

@@ -3,6 +3,8 @@ package com.core.base.bean;
 import android.text.TextUtils;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 网络请求的基础设置
@@ -10,6 +12,17 @@ import java.io.Serializable;
  */
 
 public abstract class AbsReqeustBean implements Serializable{
+
+    //自己设置的参数，这个参数有值的话，后面的子类不在遍历字段，直接取这里的值
+    private Map<String, String> requestParamsMap;
+
+    public Map<String, String> getRequestParamsMap() {
+        return requestParamsMap;
+    }
+
+    public void setRequestParamsMap(Map<String, String> requestParamsMap) {
+        this.requestParamsMap = requestParamsMap;
+    }
 
     /**
      * 请求的主域名
