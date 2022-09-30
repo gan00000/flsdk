@@ -139,8 +139,8 @@ public class MWWebPayActivity extends MWBaseWebActivity {
 //                if (iPayListener != null) {
 //                    iPayListener.onPayFail();
 //                }
-                setActivityResult(false,productId,cpOrderId);
-                finish();
+//                setActivityResult(false,productId,cpOrderId);
+//                finish();
             }
 
             @Override
