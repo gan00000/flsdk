@@ -242,6 +242,9 @@ public class ResConfig {
         return getCdnLocalUrl(context, "gama_plat_spa_url");
     }
 
+    public static String getLogPreferredUrl(Context context) {
+        return getCdnLocalUrl(context, "mw_log_pre_url");
+    }
 
     /**
      * <p>Description: 先获取动态域名，然后获取本地域名，配置文件的key和本地的xml key需要一致</p>

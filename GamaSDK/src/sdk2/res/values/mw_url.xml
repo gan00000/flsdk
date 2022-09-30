@@ -29,6 +29,8 @@
     <string name="zh_tw_sdk_cs_pre_url" translatable="false"></string>
     <string name="zh_tw_sdk_cs_spa_url" translatable="false"></string>
 
+    <!--    日志记录域名-->
+    <string name="mw_log_pre_url" translatable="false">https://log.mmplaygame.com/</string>
 
     <!--使用者條款 - 服務條款 -->
     <string name="zh_tw_sdk_terms_service_url" translatable="false">https://member.mmplaygame.com/sdk/agreement/%s_agreement.html</string>

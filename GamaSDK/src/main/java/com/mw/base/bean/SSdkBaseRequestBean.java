@@ -200,4 +200,12 @@ public class SSdkBaseRequestBean extends BaseReqeustBean {
     public void setvCode(String vCode) {
         this.vCode = vCode;
     }
+
+    public String getPlatform() {
+        return platform;
+    }
+
+    public void setPlatform(String platform) {
+        this.platform = platform;
+    }
 }

@@ -106,8 +106,8 @@ public class BaseSdkImpl implements IMWSDK {
 //                GamaUtil.resetOnlineTimeInfo(activity);
                 //获取Google 广告ID
                 SdkEventLogger.registerGoogleAdId(activity);
-                //Gama平台安装上报
-//                StarEventLogger.reportInstallActivation(activity.getApplicationContext());
+                //平台安装上报
+                SdkEventLogger.reportInstallActivation(activity.getApplicationContext());
 //                try {
 //                    Fresco.initialize(activity.getApplicationContext());//初始化fb Fresco库
 //                } catch (Exception e) {
