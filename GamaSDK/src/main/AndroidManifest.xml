@@ -116,6 +116,12 @@
             android:authorities="@string/facebook_authorities"
             android:exported="true" />
 
+        <meta-data android:name="com.facebook.sdk.AutoLogAppEventsEnabled"
+            android:value="true"/>
+        <meta-data android:name="com.facebook.sdk.AutoInitEnabled"
+            android:value="true"/>
+        <meta-data android:name="com.facebook.sdk.AdvertiserIDCollectionEnabled"
+            android:value="true"/>
         <!-- 以上 -->
 
 <!--        ================================-->

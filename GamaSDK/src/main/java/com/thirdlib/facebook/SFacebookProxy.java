@@ -85,7 +85,11 @@ public class SFacebookProxy {
 	}
 
 	public static void initFbSdk(Context context){
-		FacebookSdk.sdkInitialize(context.getApplicationContext());
+//		FacebookSdk.sdkInitialize(context.getApplicationContext());
+//		FacebookSdk.setAutoLogAppEventsEnabled(true);
+//		FacebookSdk.setAdvertiserIDCollectionEnabled(true);
+//		FacebookSdk.setAutoInitEnabled(true);
+//		FacebookSdk.fullyInitialize();
 	}
 	
 //	public static void activateApp(Context context){
