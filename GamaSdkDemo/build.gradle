@@ -76,7 +76,7 @@ android {
         }
 
         debug {
-//            signingConfig signingConfigs.release_v2
+            signingConfig signingConfigs.mwrelease
         }
     }
     productFlavors {
@@ -129,20 +129,20 @@ android {
 
         sdk3 {
 
-            signingConfig signingConfigs.release_v2
-            applicationId "com.wanxian.mzxq"
+            signingConfig signingConfigs.mwrelease
+            applicationId "com.wanye.fszhl"
             minSdkVersion 21
             targetSdkVersion 32
-            versionCode 1
-            versionName "1.0"
+            versionCode 6
+            versionName "6.0"
             flavorDimensions "1"
-            resValue "string", "scheme", "mzxq"
-            resValue "string", "facebook_app_id", "855035868795821"
-            resValue "string", "facebook_client_token", "0872345a71b6e76c9247438a3f27b0b8"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider855035868795821" //启用分析
-            resValue "string", "fb_login_protocol_scheme", "fb855035868795821"
-            resValue "string", "facebook_app_name", "魔之序曲"
-            resValue "string", "line_channelId", "1657381968"
+            resValue "string", "scheme", "wlzhs"
+            resValue "string", "facebook_app_id", "1137481690478934"
+            resValue "string", "facebook_client_token", "9457e9f00d7e1c0a9869c451326b15a9"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1137481690478934" //启用分析
+            resValue "string", "fb_login_protocol_scheme", "fb1137481690478934"
+            resValue "string", "facebook_app_name", "万灵召唤师"
+            resValue "string", "line_channelId", "1657511063"
             resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow"
 
             //每个游戏的demo设置 test
