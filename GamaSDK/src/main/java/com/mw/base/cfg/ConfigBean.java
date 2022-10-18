@@ -62,7 +62,7 @@ public class ConfigBean {
         private boolean fbLogin = true;
         private boolean googleLogin = true;
         private boolean lineLogin = true;
-        private boolean appleLogin = true;
+//        private boolean appleLogin = true;
         private boolean deleteAccount = false;
         private boolean showContract = true;
         private boolean showLogo = false;
@@ -117,13 +117,13 @@ public class ConfigBean {
             this.lineLogin = lineLogin;
         }
 
-        public boolean isAppleLogin() {
-            return appleLogin;
-        }
-
-        public void setAppleLogin(boolean appleLogin) {
-            this.appleLogin = appleLogin;
-        }
+//        public boolean isAppleLogin() {
+//            return appleLogin;
+//        }
+//
+//        public void setAppleLogin(boolean appleLogin) {
+//            this.appleLogin = appleLogin;
+//        }
 
         public boolean isDeleteAccount() {
             return deleteAccount;
@@ -163,6 +163,10 @@ public class ConfigBean {
 
         public void setShowNotice(boolean showNotice) {
             this.showNotice = showNotice;
+        }
+
+        public boolean isAllThirdLoginTypeHiden(){
+            return !visitorLogin && !fbLogin && !googleLogin && !lineLogin;
         }
     }
 

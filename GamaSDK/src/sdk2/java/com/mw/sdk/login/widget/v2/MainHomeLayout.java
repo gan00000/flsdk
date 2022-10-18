@@ -29,6 +29,7 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
     private View layout_go_term;
     private View layout_term;
     private ImageView iv_logo;
+    private View other_login_layout;
 
     public MainHomeLayout(Context context) {
         super(context);
@@ -68,7 +69,7 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
         iv_login_fb.setOnClickListener(this);
         iv_login_line.setOnClickListener(this);
         layout_go_term.setOnClickListener(this);
-
+        other_login_layout = contentView.findViewById(R.id.ll_other_login);
         cb_agree_term.setChecked(true);
 
 //        String ssText = getContext().getString(R.string.gama_ui_term_port_read2);
@@ -79,6 +80,10 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
         ConfigBean configBean = SdkUtil.getSdkCfg(getContext());
         if (configBean != null){
             ConfigBean.VersionData versionData = configBean.getSdkConfigLoginData(getContext());
+            versionData.setVisitorLogin(false);
+            versionData.setFbLogin(false);
+            versionData.setGoogleLogin(false);
+            versionData.setLineLogin(false);
             if (versionData != null){
                 if(!versionData.isVisitorLogin()){//false隐藏图标
                     guestLoginView.setVisibility(View.GONE);
@@ -97,6 +102,11 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
                 }
                 if (versionData.isShowLogo()){
 //                    iv_logo.setVisibility(View.VISIBLE);
+                }
+                if (versionData.isAllThirdLoginTypeHiden()){
+                    other_login_layout.setVisibility(View.GONE);
+                }else {
+                    other_login_layout.setVisibility(View.VISIBLE);
                 }
             }
         }
