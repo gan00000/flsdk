@@ -338,7 +338,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                                 sLoginResponse.getData().getTimestamp(),
                                 thirdLoginRegRequestBean.getThirdPlatId(),
                                 thirdLoginRegRequestBean.getThirdAccount(),true,sLoginResponse.getData().isBind());
-                        ToastUtils.toast(getActivity(), R.string.py_login_success);
+//                        ToastUtils.toast(getActivity(), R.string.py_login_success);
                         handleRegisteOrLoginSuccess(sLoginResponse,rawResult, thirdLoginRegRequestBean.getRegistPlatform());
                         return;
                     } else {
@@ -494,7 +494,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 if (sLoginResponse != null) {
                     if (sLoginResponse.isRequestSuccess()) {
 
-                        ToastUtils.toast(getActivity(), R.string.text_account_change_pwd_success);
+//                        ToastUtils.toast(getActivity(), R.string.text_account_change_pwd_success);
 
                         iLoginView.changePwdSuccess(sLoginResponse);
                         SdkUtil.saveAccountModel(activity,account,newPwd,sLoginResponse.getData().getUserId(),sLoginResponse.getData().getToken(), sLoginResponse.getData().getTimestamp(),true);
@@ -536,7 +536,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             public void success(SLoginResponse sLoginResponse, String rawResult) {
                 if (sLoginResponse != null) {
                     if (sLoginResponse.isRequestSuccess()) {
-                        ToastUtils.toast(getActivity(), R.string.text_account_bind_success);
+//                        ToastUtils.toast(getActivity(), R.string.text_account_bind_success);
 
 //                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GAMA);
 
@@ -584,7 +584,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             public void success(SLoginResponse sLoginResponse, String rawResult) {
                 if (sLoginResponse != null) {
                     if (sLoginResponse.isRequestSuccess()) {
-                        ToastUtils.toast(getActivity(), R.string.py_login_success);
+//                        ToastUtils.toast(getActivity(), R.string.py_login_success);
                         SdkUtil.saveAccountModel(getContext(), SLoginType.LOGIN_TYPE_GUEST,"","",
                                 sLoginResponse.getData().getUserId(),
                                 sLoginResponse.getData().getToken(),
@@ -746,7 +746,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 if (sLoginResponse != null) {
 
                     if (sLoginResponse.isRequestSuccess()){
-                        ToastUtils.toast(getActivity(), R.string.py_login_success);
+//                        ToastUtils.toast(getActivity(), R.string.py_login_success);
                         SdkUtil.saveAccountModel(getContext(), SLoginType.LOGIN_TYPE_FB,"","",
                                 sLoginResponse.getData().getUserId(),
                                 sLoginResponse.getData().getToken(),
@@ -791,7 +791,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             public void success(SLoginResponse sLoginResponse, String rawResult) {
                 if (sLoginResponse != null) {
                     if (sLoginResponse.isRequestSuccess()) {
-                        ToastUtils.toast(getActivity(), R.string.py_register_success);
+//                        ToastUtils.toast(getActivity(), R.string.py_register_success);
 
                         SdkUtil.saveAccountModel(activity,account,password,sLoginResponse.getData().getUserId(),sLoginResponse.getData().getToken(),
                                 sLoginResponse.getData().getTimestamp(),true);
@@ -1124,7 +1124,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             public void success(SLoginResponse sLoginResponse, String rawResult) {
                 if (sLoginResponse != null) {
                     if (sLoginResponse.isRequestSuccess()) {
-                        ToastUtils.toast(getActivity(), R.string.text_account_change_pwd_success);
+//                        ToastUtils.toast(getActivity(), R.string.text_account_change_pwd_success);
 
                         if (iLoginView != null){
                             iLoginView.findPwdSuccess(sLoginResponse);
@@ -1431,7 +1431,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                             SdkUtil.saveAccountModel(activity,account,password,sLoginResponse.getData().getUserId(),sLoginResponse.getData().getToken(),
                                     sLoginResponse.getData().getTimestamp(),true);
                         }
-                        ToastUtils.toast(getActivity(), R.string.py_login_success);
+//                        ToastUtils.toast(getActivity(), R.string.py_login_success);
                         handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_MG);
                     }else{
                         ToastUtils.toast(getActivity(),sLoginResponse.getMessage());
