@@ -363,6 +363,7 @@ public class GBillingHelper implements PurchasesUpdatedListener {
      */
     public void destroy() {
         if (billingClient != null && billingClient.isReady()) {
+            PL.i("billingClient.endConnection");
             billingClient.endConnection();
             billingClient = null;
             isBillingInit = false;
