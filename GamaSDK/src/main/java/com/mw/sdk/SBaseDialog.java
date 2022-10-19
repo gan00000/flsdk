@@ -89,13 +89,13 @@ public class SBaseDialog extends Dialog {
         Localization.updateSGameLanguage(context);//设置应用内语言
 
 //        AppUtil.hideDialogBottomBar(this);
-        this.getWindow().getDecorView().setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
-            @Override
-            public void onSystemUiVisibilityChange(int visibility) {
-                PL.d("dialog onSystemUiVisibilityChange");
-                AppUtil.hideDialogBottomBar(SBaseDialog.this);
-            }
-        });
+//        this.getWindow().getDecorView().setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
+//            @Override
+//            public void onSystemUiVisibilityChange(int visibility) {
+//                PL.d("dialog onSystemUiVisibilityChange");
+//                AppUtil.hideDialogBottomBar(SBaseDialog.this);
+//            }
+//        });
 
     }
 
@@ -122,7 +122,7 @@ public class SBaseDialog extends Dialog {
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         if (hasFocus) {
-            AppUtil.hideDialogBottomBar(this);
+//            AppUtil.hideDialogBottomBar(this);
         }
     }
 

@@ -202,13 +202,13 @@ public class BaseSdkImpl implements IMWSDK {
                     initSDK(activity, SGameLanguage.zh_TW);
                 }
 
-                activity.getWindow().getDecorView().setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
-                    @Override
-                    public void onSystemUiVisibilityChange(int visibility) {
-                        PL.d("activity onSystemUiVisibilityChange");
-                        AppUtil.hideActivityBottomBar(activity);
-                    }
-                });
+//                activity.getWindow().getDecorView().setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
+//                    @Override
+//                    public void onSystemUiVisibilityChange(int visibility) {
+//                        PL.d("activity onSystemUiVisibilityChange");
+//                        AppUtil.hideActivityBottomBar(activity);
+//                    }
+//                });
 
                 ConfigRequest.requestBaseCfg(activity.getApplicationContext());//加载配置
                 ConfigRequest.requestAreaCodeInfo(activity.getApplicationContext());
@@ -361,15 +361,15 @@ public class BaseSdkImpl implements IMWSDK {
 
     @Override
     public void onWindowFocusChanged(final Activity activity, final boolean hasFocus) {
-        activity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                PL.i("IMWSDK onWindowFocusChanged: hasFocus -- " + hasFocus);
-                if (hasFocus) {
-                    AppUtil.hideActivityBottomBar(activity);
-                }
-            }
-        });
+        PL.i("IMWSDK onWindowFocusChanged: hasFocus -- " + hasFocus);
+//        activity.runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                if (hasFocus) {
+//                    AppUtil.hideActivityBottomBar(activity);
+//                }
+//            }
+//        });
     }
 
 //    @Override

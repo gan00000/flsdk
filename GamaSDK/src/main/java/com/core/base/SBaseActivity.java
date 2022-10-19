@@ -20,13 +20,13 @@ public class SBaseActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 //		AppUtil.hideActivityBottomBar(this);
 
-		this.getWindow().getDecorView().setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
-			@Override
-			public void onSystemUiVisibilityChange(int visibility) {
-				PL.d("activity onSystemUiVisibilityChange");
-				AppUtil.hideActivityBottomBar(SBaseActivity.this);
-			}
-		});
+//		this.getWindow().getDecorView().setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
+//			@Override
+//			public void onSystemUiVisibilityChange(int visibility) {
+//				PL.d("activity onSystemUiVisibilityChange");
+//				AppUtil.hideActivityBottomBar(SBaseActivity.this);
+//			}
+//		});
 
 	}
 
@@ -108,8 +108,8 @@ public class SBaseActivity extends AppCompatActivity {
 	@Override
 	public void onWindowFocusChanged(boolean hasFocus) {
 		super.onWindowFocusChanged(hasFocus);
-		if (hasFocus) {
-			AppUtil.hideActivityBottomBar(this);
-		}
+//		if (hasFocus) {
+//			AppUtil.hideActivityBottomBar(this);
+//		}
 	}
 }
