@@ -90,7 +90,7 @@ public class GBillingHelper implements PurchasesUpdatedListener {
 
     private void executeRunnable(Context context, Runnable runnable) {
 
-        if (isBillingInit && billingClient != null && billingClient.isReady()) {
+        if (billingClient != null && billingClient.isReady()) {
 //            BillingResult billingResult = billingClient.isFeatureSupported(BillingClient.FeatureType.IN_APP_MESSAGING);
 //            PL.i("IN_APP_MESSAGING isFeatureSupported:" + billingResult.toString());
 //            BillingResult billingResult2 = billingClient.isFeatureSupported(BillingClient.FeatureType.PRODUCT_DETAILS);
@@ -106,15 +106,17 @@ public class GBillingHelper implements PurchasesUpdatedListener {
 //    }
 
     private synchronized void startServiceConnection(Context context, final Runnable executeOnSuccess) {
+
         if (billingClient != null){
             try {
+                PL.e("startServiceConnection billingClient.endConnection()");
                 billingClient.endConnection();
-                billingClient = null;
             } catch (Exception e) {
                 PL.e("startServiceConnection billingClient.endConnection() exception");
                 e.printStackTrace();
             }
         }
+        PL.i( "startServiceConnection start");
         billingClient = BillingClient.newBuilder(context).setListener(this)
                 .enablePendingPurchases()
                 .build();

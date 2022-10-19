@@ -352,7 +352,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
                 PL.i("queryPurchase finish");
                 handleMultipleConsmeAsyncWithResend(list, activity, new ConsumeResponseListener() {
                     @Override
-                    public void onConsumeResponse(@NonNull BillingResult billingResult, @NonNull String s) {
+                    public void onConsumeResponse(@NonNull BillingResult billingResult3333, @NonNull String s) {
 
                         activity.runOnUiThread(new Runnable() {
                             @Override
@@ -366,14 +366,14 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
                                         mBillingHelper.launchPurchaseFlow(activity, createOrderIdReqBean.getProductId(),createOrderIdReqBean.getUserId(),
                                                 createOrderIdRes.getPayData().getOrderId(), new PurchasesUpdatedListener() {
                                                     @Override
-                                                    public void onPurchasesUpdated(@NonNull BillingResult billingResult1, @Nullable List<com.android.billingclient.api.Purchase> purchasesList) {
+                                                    public void onPurchasesUpdated(@NonNull BillingResult billingResult2, @Nullable List<com.android.billingclient.api.Purchase> purchasesList) {
 
                                                         PL.i("launchPurchaseFlow onPurchasesUpdated finish...");
 
-                                                        if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && purchasesList != null) {
+                                                        if (billingResult2.getResponseCode() == BillingClient.BillingResponseCode.OK && purchasesList != null) {
                                                             //成功回调
                                                             handlePurchase(purchasesList, createOrderIdRes, activity);
-                                                        } else if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.USER_CANCELED) {
+                                                        } else if (billingResult2.getResponseCode() == BillingClient.BillingResponseCode.USER_CANCELED) {
                                                             // Handle an error caused by a user cancelling the purchase flow.
                                                         } else {
                                                             // Handle any other error codes.
