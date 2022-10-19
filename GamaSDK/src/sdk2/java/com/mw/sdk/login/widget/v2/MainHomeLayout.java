@@ -80,10 +80,6 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
         ConfigBean configBean = SdkUtil.getSdkCfg(getContext());
         if (configBean != null){
             ConfigBean.VersionData versionData = configBean.getSdkConfigLoginData(getContext());
-            versionData.setVisitorLogin(false);
-            versionData.setFbLogin(false);
-            versionData.setGoogleLogin(false);
-            versionData.setLineLogin(false);
             if (versionData != null){
                 if(!versionData.isVisitorLogin()){//false隐藏图标
                     guestLoginView.setVisibility(View.GONE);
@@ -103,7 +99,7 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
                 if (versionData.isShowLogo()){
 //                    iv_logo.setVisibility(View.VISIBLE);
                 }
-                if (versionData.isAllThirdLoginTypeHiden()){
+                if (versionData.isFB_GOGOLE_LINE_LoginTypeHiden()){
                     other_login_layout.setVisibility(View.GONE);
                 }else {
                     other_login_layout.setVisibility(View.VISIBLE);

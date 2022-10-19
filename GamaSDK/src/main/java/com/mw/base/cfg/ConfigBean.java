@@ -168,6 +168,10 @@ public class ConfigBean {
         public boolean isAllThirdLoginTypeHiden(){
             return !visitorLogin && !fbLogin && !googleLogin && !lineLogin;
         }
+
+        public boolean isFB_GOGOLE_LINE_LoginTypeHiden(){
+            return !fbLogin && !googleLogin && !lineLogin;
+        }
     }
 
     public static class UrlData {
