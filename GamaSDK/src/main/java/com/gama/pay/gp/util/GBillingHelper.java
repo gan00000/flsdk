@@ -105,7 +105,16 @@ public class GBillingHelper implements PurchasesUpdatedListener {
 //       return billingClient.isFeatureSupported(BillingClient.FeatureType.IN_APP_MESSAGING).;
 //    }
 
-    private void startServiceConnection(Context context, final Runnable executeOnSuccess) {
+    private synchronized void startServiceConnection(Context context, final Runnable executeOnSuccess) {
+        if (billingClient != null){
+            try {
+                billingClient.endConnection();
+                billingClient = null;
+            } catch (Exception e) {
+                PL.e("startServiceConnection billingClient.endConnection() exception");
+                e.printStackTrace();
+            }
+        }
         billingClient = BillingClient.newBuilder(context).setListener(this)
                 .enablePendingPurchases()
                 .build();
