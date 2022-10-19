@@ -3,6 +3,7 @@ package com.mw.sdk.out;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -95,41 +96,38 @@ public class BaseSdkImpl implements IMWSDK {
 //    @Override
     public void initSDK(final Activity activity, final SGameLanguage gameLanguage) {
 
-        activity.runOnUiThread(new Runnable() {
+        PL.i("sdk initSDK");
+        //获取Google 广告ID
+        SdkEventLogger.registerGoogleAdId(activity);
+
+        Localization.gameLanguage(activity, gameLanguage);
+        //清除上一次登录成功的返回值
+        //GamaUtil.saveSdkLoginData(activity, "");
+
+        //平台安装上报
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                PL.i("sdk initSDK");
-                Localization.gameLanguage(activity, gameLanguage);
-                //清除上一次登录成功的返回值
-                //GamaUtil.saveSdkLoginData(activity, "");
-                //重置用户登入时长
-//                GamaUtil.resetOnlineTimeInfo(activity);
-                //获取Google 广告ID
-                SdkEventLogger.registerGoogleAdId(activity);
-                //平台安装上报
-                SdkEventLogger.reportInstallActivation(activity.getApplicationContext());
-//                try {
-//                    Fresco.initialize(activity.getApplicationContext());//初始化fb Fresco库
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-
                 //广告
                 SdkEventLogger.activateApp(activity);
+                SdkEventLogger.reportInstallActivation(activity.getApplicationContext());
+            }
+        },200);
 
-                //时间打点开始
+
+        //时间打点开始
 //                LogTimer.getInstance().start(activity);
 
 //                setGameLanguage(activity,SGameLanguage.zh_TW);
 
 //                ConfigRequest.requestBaseCfg(activity.getApplicationContext());//下载配置文件
 //                ConfigRequest.requestTermsCfg(activity.getApplicationContext());//下载服务条款
-                // 1.初始化fb sdk
+        // 1.初始化fb sdk
 //                SFacebookProxy.initFbSdk(activity.getApplicationContext());
-                sFacebookProxy = new SFacebookProxy(activity.getApplicationContext());
-                isInitSdk = true;
-            }
-        });
+        sFacebookProxy = new SFacebookProxy(activity.getApplicationContext());
+        isInitSdk = true;
+
     }
 
     /*

@@ -731,6 +731,7 @@ public class SdkUtil {
 //        2、獲取不到谷歌ID再獲取安卓ID
 //        3、谷歌ID和安卓ID都獲取不到，最後再自己生成一個ID
 //        为防止上次獲取谷歌ID下次獲取安卓ID的情况，獲取的ID都保存到本地，後面從本地去讀取
+        //PL.i("getSdkUniqueId start");
         String localUniqueId = getUniqueId(ctx);
         if (SStringUtil.isNotEmpty(localUniqueId)){
             return localUniqueId;
