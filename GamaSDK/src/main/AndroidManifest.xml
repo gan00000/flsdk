@@ -12,6 +12,8 @@
 <!--    Apps targeting Android 13 should add the following permission to AndroidManifest.xml to access the Android Advertising Identifier-->
     <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
 
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+
     <uses-feature
         android:name="android.hardware.microphone"
         android:required="false" />

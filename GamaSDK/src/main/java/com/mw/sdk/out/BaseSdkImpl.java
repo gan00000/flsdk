@@ -1,5 +1,6 @@
 package com.mw.sdk.out;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
@@ -14,6 +15,7 @@ import com.core.base.ObjFactory;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.AppUtil;
 import com.core.base.utils.PL;
+import com.core.base.utils.PermissionUtil;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.SignatureUtil;
 import com.core.base.utils.ToastUtils;
@@ -240,13 +242,11 @@ public class BaseSdkImpl implements IMWSDK {
                 }
                 //ads
                 SdkEventLogger.onResume(activity);
-
 //                Android 13 中引入了用于显示通知的新运行时权限。该项引入会影响在 Android 13 或更高版本上使用 FCM 通知的所有应用。
 //                默认情况下，FCM SDK（23.0.6 或更高版本）中包含清单中定义的 POST_NOTIFICATIONS 权限。不过，您的应用还需要通过常量 android.permission.POST_NOTIFICATIONS 请求此权限的运行时版本。
 //                在用户授予此权限之前，您的应用将无法显示通知。
                 if (Build.VERSION.SDK_INT >= 33) {
-                    //todo 现在还没13系统设备，无法测试先注释
-//                    PermissionUtil.requestPermissions(activity, new String[]{Manifest.permission.POST_NOTIFICATIONS}, RequestCode.RequestCode_Permission_POST_NOTIFICATIONS);
+                    PermissionUtil.requestPermission(activity, "android.permission.POST_NOTIFICATIONS",RequestCode.RequestCode_Permission_POST_NOTIFICATIONS);
                 }
             }
         });
