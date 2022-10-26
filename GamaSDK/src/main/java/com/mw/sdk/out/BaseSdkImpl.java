@@ -22,6 +22,8 @@ import com.gama.pay.IPayCallBack;
 import com.gama.pay.IPayFactory;
 import com.gama.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
 import com.gama.pay.gp.bean.res.BasePayBean;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.play.core.review.ReviewInfo;
@@ -948,4 +950,15 @@ public class BaseSdkImpl implements IMWSDK {
             });
         }
     }*/
+
+    @Override
+    public void checkGooglePlayServicesAvailable(Activity activity) {
+        int code = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(activity);
+        if (code == ConnectionResult.SUCCESS){
+            PL.i("支持的Google服务");
+            ToastUtils.toast(activity,"支持的Google服务");
+        }else {
+            GoogleApiAvailability.getInstance().makeGooglePlayServicesAvailable(activity);
+        }
+    }
 }

@@ -160,4 +160,6 @@ public interface IMWSDK extends IGameLifeCycle {
      * @param sfCallBack 回调
      */
     public void requestUpgradeAccount(Activity activity, String account, String pwd, SFCallBack sfCallBack);
+
+    public void checkGooglePlayServicesAvailable(Activity activity);
 }
