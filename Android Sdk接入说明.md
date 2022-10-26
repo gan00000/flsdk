@@ -478,8 +478,19 @@
      * @param activity
      * @param sfCallBack
      */
-    public void showUpgradeAccountView(Activity activity, SFCallBack sfCallBack);
-	
+    
+    mIMWSDK.showUpgradeAccountView(MainActivity.this, new SFCallBack() {
+            @Override
+            public void success(Object result, String msg) {
+                //账号升级成功
+                SLoginResponse sLoginResponse = (SLoginResponse)result;
+            }
+
+            @Override
+            public void fail(Object result, String msg) {
+
+            }
+        });	
 	```
 	
 * <h3 id="15">请求获取手机验证码</h3>   
