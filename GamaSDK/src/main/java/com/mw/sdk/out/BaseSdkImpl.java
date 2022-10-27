@@ -3,6 +3,7 @@ package com.mw.sdk.out;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -959,6 +960,27 @@ public class BaseSdkImpl implements IMWSDK {
             ToastUtils.toast(activity,"支持的Google服务");
         }else {
             GoogleApiAvailability.getInstance().makeGooglePlayServicesAvailable(activity);
+        }
+    }
+
+    //打开fb相关的url，优先通过fb app打开
+    public void openFbUrl(Activity activity, String url){
+        Uri uri = Uri.parse(url);
+        Intent fb_intent = new Intent(Intent.ACTION_VIEW,uri);
+        fb_intent.setPackage("com.facebook.katana");
+        fb_intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        Intent other_intent = new Intent(Intent.ACTION_VIEW,uri);
+        other_intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        try {
+            if (fb_intent.resolveActivity(activity.getPackageManager()) != null){
+                activity.startActivity(fb_intent);
+            }else {
+                activity.startActivity(other_intent);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

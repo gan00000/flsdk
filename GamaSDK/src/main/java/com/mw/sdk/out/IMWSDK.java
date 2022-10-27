@@ -162,4 +162,6 @@ public interface IMWSDK extends IGameLifeCycle {
     public void requestUpgradeAccount(Activity activity, String account, String pwd, SFCallBack sfCallBack);
 
     public void checkGooglePlayServicesAvailable(Activity activity);
+
+    public void openFbUrl(Activity activity, String url);
 }
