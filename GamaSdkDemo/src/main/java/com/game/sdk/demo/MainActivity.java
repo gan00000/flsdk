@@ -9,12 +9,14 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
 
 import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.SFCallBack;
+import com.core.base.utils.AppUtil;
 import com.core.base.utils.MarketUtil;
 import com.core.base.utils.PL;
 import com.mw.base.bean.SGameLanguage;
@@ -29,6 +31,7 @@ import com.mw.sdk.out.ISdkCallBack;
 import com.mw.sdk.out.MWSdkFactory;
 import com.mw.sdk.out.IMWSDK;
 import com.mw.sdk.demo.R;
+import com.thirdlib.google.SGoogleProxy;
 
 public class MainActivity extends Activity {
 
@@ -64,6 +67,8 @@ public class MainActivity extends Activity {
 
         //在游戏Activity的onCreate生命周期中调用
         mIMWSDK.onCreate(this);
+
+//        this.getWindow().setSystemGestureExclusionRects();
 
 //        demo_language.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -176,7 +181,7 @@ public class MainActivity extends Activity {
 
 //                com.game.superand.1usd
 //                com.game.superand.2usd
-                String skuId = "com.game.superand.1usd";
+                String skuId = "com.mplay.wlzhs.70";
                 mIMWSDK.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(),skuId, "xxxx","role_id_1","role_name","role_level","vipLevel",serverCode, serverName, new IPayListener() {
 
                     @Override
@@ -198,7 +203,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.demo_pay_google2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String skuId = "com.game.superand.2usd";
+                String skuId = "com.mplay.wlzhs.340";
                 mIMWSDK.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(),skuId, "xxxx", "role_id_1","role_name","role_level","vipLevel",serverCode, serverName, new IPayListener() {
 
                     @Override
@@ -220,8 +225,8 @@ public class MainActivity extends Activity {
         webPayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String skuId = "com.game.superand.2usd";
-                mIMWSDK.pay(MainActivity.this, SPayType.WEB, "" + System.currentTimeMillis(),skuId, "xxxx", "role_id_1","role_name","role_level","vipLevel",serverCode, serverName, new IPayListener() {
+                String skuId = "com.mplay.wlzhs.lb2";
+                mIMWSDK.pay(MainActivity.this, SPayType.WEB, "" + System.currentTimeMillis(),skuId, "xxxx", "role_id_1","role_name","role_level","vipLevel","1001", serverName, new IPayListener() {
 
                     @Override
                     public void onPaySuccess(String productId, String cpOrderId) {
@@ -315,6 +320,8 @@ public class MainActivity extends Activity {
                     }
                 });
 
+//                mIMWSDK.openFbUrl(MainActivity.this,"https://www.facebook.com/groups/431250895792522");
+
 //                if (Build.VERSION.SDK_INT >= 33) {
 //                    //todo 现在还没13系统设备，无法测试先注释
 ////                    PermissionUtil.requestPermissions(MainActivity.this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, RequestCode.RequestCode_Permission_POST_NOTIFICATIONS);
@@ -364,7 +371,8 @@ public class MainActivity extends Activity {
                 mIMWSDK.showUpgradeAccountView(MainActivity.this, new SFCallBack() {
                     @Override
                     public void success(Object result, String msg) {
-
+                        //账号升级成功
+                        SLoginResponse sLoginResponse = (SLoginResponse)result;
                     }
 
                     @Override
@@ -426,6 +434,14 @@ public class MainActivity extends Activity {
                 mIMWSDK.openCs(MainActivity.this);
             }
         });
+        findViewById(R.id.checkGoogleServer).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mIMWSDK.checkGooglePlayServicesAvailable(MainActivity.this);
+            }
+        });
+
+        AppUtil.hideActivityBottomBar(this);
     }
 
     @Override
@@ -478,6 +494,12 @@ public class MainActivity extends Activity {
         mIMWSDK.onWindowFocusChanged(this, hasFocus);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        PL.i("activity onBackPressed");
+    }
+
     private boolean isLogin() {
         return !TextUtils.isEmpty(SdkUtil.getUid(this));
     }
@@ -509,26 +531,5 @@ public class MainActivity extends Activity {
 ////                requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS);
 //            }
 //        }
-    }
-
-    //打开fb相关的url，优先通过fb app打开
-    public void openFbUrl(Activity activity, String url){
-        Uri uri = Uri.parse(url);
-        Intent fb_intent = new Intent(Intent.ACTION_VIEW,uri);
-        fb_intent.setPackage("com.facebook.katana");
-        fb_intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-        Intent other_intent = new Intent(Intent.ACTION_VIEW,uri);
-        other_intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-        try {
-            if (fb_intent.resolveActivity(activity.getPackageManager()) != null){
-                activity.startActivity(fb_intent);
-            }else {
-                activity.startActivity(other_intent);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }

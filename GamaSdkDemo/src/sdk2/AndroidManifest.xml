@@ -5,7 +5,6 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
         android:label="@string/sdk_name"
         android:resizeableActivity="false"
         android:usesCleartextTraffic="true"
@@ -44,6 +43,17 @@
                 <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
         </activity>
+
+<!--         Set custom default icon. This is used when no icon is set for incoming notification messages.-->
+<!--     See README(https://goo.gl/l4GJaQ) for more. -->
+                <meta-data
+                    android:name="com.google.firebase.messaging.default_notification_icon"
+                    android:resource="@drawable/app_push_icon" />
+<!--         Set color used with incoming notification messages. This is used when no color is set for the incoming-->
+<!--             notification message. See README(https://goo.gl/6BKBk7) for more.-->
+                <meta-data
+                    android:name="com.google.firebase.messaging.default_notification_color"
+                    android:resource="@color/colorPush" />
 
     </application>
 

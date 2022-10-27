@@ -115,6 +115,12 @@
                     android:layout_height="wrap_content"
                     android:text="打开客服页面" />
 
+                <Button
+                    android:id="@+id/checkGoogleServer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="检查Google服务" />
+
 
             </LinearLayout>
 

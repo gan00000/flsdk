@@ -76,7 +76,7 @@ android {
         }
 
         debug {
-            signingConfig signingConfigs.mwrelease
+            signingConfig signingConfigs.release_v2
         }
     }
     productFlavors {
@@ -110,7 +110,7 @@ android {
             applicationId "com.wanxian.mzxq"
             minSdkVersion 21
             targetSdkVersion 32
-            versionCode 1
+            versionCode 5
             versionName "1.0"
             flavorDimensions "1"
             resValue "string", "scheme", "mzxq"

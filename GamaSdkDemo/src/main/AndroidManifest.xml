@@ -5,8 +5,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
         android:label="@string/sdk_name"
+        android:icon="@mipmap/ic_launcher_testaaaa"
+        android:roundIcon="@mipmap/ic_launcher_testaaaa_round"
         android:resizeableActivity="false"
         android:usesCleartextTraffic="true"
         android:supportsRtl="true">
