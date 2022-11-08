@@ -6,9 +6,13 @@ package com.mw.sdk.out;
 
 public class MWSdkFactory {
 
-    public static IMWSDK create(){
-
-        return new BaseSdkImpl();
+    private static IMWSDK imwsdk;
+    public synchronized static IMWSDK create(){
+        if (imwsdk== null){
+            imwsdk = new BaseSdkImpl();
+        }
+        return imwsdk;
+        //return new BaseSdkImpl();
     }
 
 }

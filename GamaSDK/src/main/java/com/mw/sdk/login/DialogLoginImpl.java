@@ -21,6 +21,7 @@ import com.thirdlib.line.SLineSignIn;
 
 public class DialogLoginImpl implements ILogin {
 
+    private SLoginDialogV2 sLoginDialog;
     private SFacebookProxy sFacebookProxy;
 
     private SGoogleSignIn sGoogleSignIn;
@@ -87,18 +88,18 @@ public class DialogLoginImpl implements ILogin {
 //                versionData.setShowNotice(true);
                 if (versionData != null && versionData.isShowNotice()) { //显示dialog web公告
                     NoticeView noticeView = new NoticeView(activity);
-                    SWebViewDialog sLoginDialog = new SWebViewDialog(activity, com.mw.sdk.R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen,noticeView,noticeView.getSWebView(),null);
+                    SWebViewDialog webViewDialog = new SWebViewDialog(activity, com.mw.sdk.R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen,noticeView,noticeView.getSWebView(),null);
                     if (configBean.getUrl() != null) {
-                        sLoginDialog.setWebUrl(configBean.getUrl().getNoticeUrl());
+                        webViewDialog.setWebUrl(configBean.getUrl().getNoticeUrl());
                     }
-                    noticeView.setsBaseDialog(sLoginDialog);
-                    sLoginDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    noticeView.setsBaseDialog(webViewDialog);
+                    webViewDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                         @Override
                         public void onDismiss(DialogInterface dialog) {
                             goDialogView(activity, iLoginCallBack);
                         }
                     });
-                    sLoginDialog.show();
+                    webViewDialog.show();
                     return;
                 }
             }
@@ -108,7 +109,10 @@ public class DialogLoginImpl implements ILogin {
 
     private void goDialogView(Activity activity, ILoginCallBack iLoginCallBack) {
 
-        SLoginDialogV2 sLoginDialog = new SLoginDialogV2(activity, com.mw.sdk.R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
+        if (sLoginDialog != null){
+            sLoginDialog.dismiss();
+        }
+        sLoginDialog = new SLoginDialogV2(activity, com.mw.sdk.R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
         sLoginDialog.setSFacebookProxy(sFacebookProxy);
         sLoginDialog.setSGoogleSignIn(sGoogleSignIn);
         sLoginDialog.setsLineSignIn(sLineSignIn);
