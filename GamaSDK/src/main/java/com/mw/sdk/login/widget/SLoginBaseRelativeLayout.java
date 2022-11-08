@@ -148,4 +148,7 @@ public abstract class SLoginBaseRelativeLayout extends SBaseRelativeLayout {
     protected void toast(int msgId){
         ToastUtils.toast(getActivity(),msgId);
     }
+    protected void toast(String msg){
+        ToastUtils.toast(getActivity(),msg);
+    }
 }

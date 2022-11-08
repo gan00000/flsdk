@@ -47,7 +47,7 @@ public class Request {
 
                     }else{
 
-                        ToastUtils.toast(context, responseModel.getMessage() + "");
+//                        ToastUtils.toast(context, responseModel.getMessage() + "");
                         if (iSdkCallBack != null){
                             iSdkCallBack.fail(responseModel,rawResult);
                         }
@@ -55,24 +55,26 @@ public class Request {
 
                 } else {
                     ToastUtils.toast(context, R.string.py_error_occur);
-                    if (iSdkCallBack != null){
-                        iSdkCallBack.fail(null,rawResult);
-                    }
+//                    if (iSdkCallBack != null){
+//                        iSdkCallBack.fail(null,rawResult);
+//                    }
                 }
             }
 
             @Override
             public void timeout(String code) {
-                if (iSdkCallBack != null){
-                    iSdkCallBack.fail(null,"");
-                }
+                ToastUtils.toast(context, R.string.py_error_occur);
+//                if (iSdkCallBack != null){
+//                    iSdkCallBack.fail(null,"");
+//                }
             }
 
             @Override
             public void noData() {
-                if (iSdkCallBack != null){
-                    iSdkCallBack.fail(null,"");
-                }
+                ToastUtils.toast(context, R.string.py_error_occur);
+//                if (iSdkCallBack != null){
+//                    iSdkCallBack.fail(null,"");
+//                }
             }
 
             @Override
@@ -112,7 +114,7 @@ public class Request {
 
                     }else{
 
-                        ToastUtils.toast(context, responseModel.getMessage() + "");
+//                        ToastUtils.toast(context, responseModel.getMessage() + "");
                         SLoginResponse tempLoginResponse = new SLoginResponse();
                         tempLoginResponse.setCode(responseModel.getCode());
                         tempLoginResponse.setRawResponse(responseModel.getRawResponse());
@@ -125,24 +127,26 @@ public class Request {
 
                 } else {
                     ToastUtils.toast(context, R.string.py_error_occur);
-                    if (sfCallBack != null){
-                        sfCallBack.fail(null,rawResult);
-                    }
+//                    if (sfCallBack != null){
+//                        sfCallBack.fail(null,rawResult);
+//                    }
                 }
             }
 
             @Override
             public void timeout(String code) {
-                if (sfCallBack != null){
-                    sfCallBack.fail(null,"");
-                }
+                ToastUtils.toast(context, R.string.py_error_occur);
+//                if (sfCallBack != null){
+//                    sfCallBack.fail(null,"");
+//                }
             }
 
             @Override
             public void noData() {
-                if (sfCallBack != null){
-                    sfCallBack.fail(null,"");
-                }
+                ToastUtils.toast(context, R.string.py_error_occur);
+//                if (sfCallBack != null){
+//                    sfCallBack.fail(null,"");
+//                }
             }
 
             @Override
@@ -193,7 +197,7 @@ public class Request {
 
                     }else{
 
-                        ToastUtils.toast(context, sLoginResponse.getMessage() + "");
+//                        ToastUtils.toast(context, sLoginResponse.getMessage() + "");
                         if (sfCallBack != null){
                             sfCallBack.fail(sLoginResponse,rawResult);
                         }
@@ -201,24 +205,26 @@ public class Request {
 
                 } else {
                     ToastUtils.toast(context, R.string.py_error_occur);
-                    if (sfCallBack != null){
-                        sfCallBack.fail(null,rawResult);
-                    }
+//                    if (sfCallBack != null){
+//                        sfCallBack.fail(null,rawResult);
+//                    }
                 }
             }
 
             @Override
             public void timeout(String code) {
-                if (sfCallBack != null){
-                    sfCallBack.fail(null,"");
-                }
+                ToastUtils.toast(context, R.string.py_error_occur);
+//                if (sfCallBack != null){
+//                    sfCallBack.fail(null,"");
+//                }
             }
 
             @Override
             public void noData() {
-                if (sfCallBack != null){
-                    sfCallBack.fail(null,"");
-                }
+                ToastUtils.toast(context, R.string.py_error_occur);
+//                if (sfCallBack != null){
+//                    sfCallBack.fail(null,"");
+//                }
             }
 
             @Override

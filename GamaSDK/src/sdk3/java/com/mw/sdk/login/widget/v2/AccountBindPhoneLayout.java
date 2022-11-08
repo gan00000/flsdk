@@ -192,7 +192,9 @@ public class AccountBindPhoneLayout extends SLoginBaseRelativeLayout {
 
                     @Override
                     public void fail(BaseResponseModel result, String msg) {
-
+                        if (result != null){
+                            ToastUtils.toast(getContext(), "" + result.getMessage());
+                        }
                     }
                 });
             }
@@ -259,8 +261,10 @@ public class AccountBindPhoneLayout extends SLoginBaseRelativeLayout {
 
                     @Override
                     public void fail(SLoginResponse result, String msg) {
+
+                        ToastUtils.toast(getContext(), "" + result.getMessage());
                         if (sfCallBack != null){
-                            sfCallBack.fail(null,"");
+//                            sfCallBack.fail(null,"");
                         }
                     }
                 });
