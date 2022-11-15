@@ -150,6 +150,29 @@ android {
 
         }
 
+        sdk4 {
+
+            signingConfig signingConfigs.mwrelease
+            applicationId "com.wanye.fszhl"
+            minSdkVersion 21
+            targetSdkVersion 32
+            versionCode 16
+            versionName "2.3.16"
+            flavorDimensions "1"
+            resValue "string", "scheme", "wlzhs"
+            resValue "string", "facebook_app_id", "1137481690478934"
+            resValue "string", "facebook_client_token", "9457e9f00d7e1c0a9869c451326b15a9"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1137481690478934" //启用分析
+            resValue "string", "fb_login_protocol_scheme", "fb1137481690478934"
+            resValue "string", "facebook_app_name", "万灵召唤师"
+            resValue "string", "line_channelId", "1657511063"
+            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow"
+
+            //每个游戏的demo设置 test
+            resValue "string", "sdk_name", "SDK3 demo"
+
+        }
+
     }
 
     android {

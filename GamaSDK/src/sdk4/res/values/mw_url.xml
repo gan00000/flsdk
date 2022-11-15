@@ -1,0 +1,50 @@
+<resources>
+
+    <!--港台域名列表 开始-->
+    <!--登录域名-->
+    <string name="zh_tw_sdk_login_pre_url" translatable="false">https://login.mmhyplayer.com/</string>
+    <string name="zh_tw_sdk_login_spa_url" translatable="false"></string>
+
+    <!--支付域名-->
+    <string name="zh_tw_sdk_pay_pre_url" translatable="false">https://pay.mmhyplayer.com/</string>
+    <string name="zh_tw_sdk_pay_spa_url" translatable="false"></string>
+
+    <!--活动域名-->
+    <string name="zh_tw_sdk_act_pre_url" translatable="false"></string>
+    <string name="zh_tw_sdk_act_spa_url" translatable="false"></string>
+
+    <!--cdn域名-->
+    <string name="zh_tw_sdk_cdn_pre_url" translatable="false">https://cdn-download.mmhyplayer.com/</string>
+    <string name="zh_tw_sdk_cdn_spa_url" translatable="false"></string>
+
+    <!--广告域名-->
+    <string name="zh_tw_sdk_ads_pre_url" translatable="false"></string>
+    <string name="zh_tw_sdk_ads_spa_url" translatable="false"></string>
+
+    <!--平台域名-->
+    <string name="zh_tw_sdk_plat_pre_url" translatable="false"></string>
+    <string name="zh_tw_sdk_plat_spa_url" translatable="false"></string>
+
+    <!--客服域名-->
+    <string name="zh_tw_sdk_cs_pre_url" translatable="false"></string>
+    <string name="zh_tw_sdk_cs_spa_url" translatable="false"></string>
+
+    <!--    日志记录域名-->
+    <string name="zh_tw_sdk_log_pre_url" translatable="false">https://log.mmhyplayer.com/</string>
+
+    <!--使用者條款 - 服務條款 -->
+    <string name="zh_tw_sdk_terms_service_url" translatable="false">https://member.mmhyplayer.com/sdk/agreement/%s_agreement.html</string>
+
+    <!--客服链接-->
+    <string name="zh_tw_sdk_service_url" translatable="false"></string>
+
+    <string name="emm_service_url" translatable="false"></string>
+
+    <!--区域码链接-->
+    <string name="zh_tw_sdk_area_info_url" translatable="false"></string>
+
+    <!--验证码开关链接-->
+    <string name="zh_tw_sdk_vfcode_switch_url" translatable="false"></string>
+    <!--港台域名列表 结束-->
+
+</resources>
