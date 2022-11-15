@@ -1,7 +1,10 @@
 package com.game.sdk.demo;
 
+import android.Manifest;
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -13,12 +16,15 @@ import android.view.Window;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 
 import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.AppUtil;
 import com.core.base.utils.MarketUtil;
 import com.core.base.utils.PL;
+import com.core.base.utils.PermissionUtil;
+import com.core.base.utils.ToastUtils;
 import com.mw.base.bean.SGameLanguage;
 import com.mw.base.bean.SPayType;
 import com.mw.base.utils.SdkUtil;
@@ -39,7 +45,7 @@ public class MainActivity extends Activity {
             demo_share;
     protected IMWSDK mIMWSDK;
     protected String userId;
-
+    Activity activity;
     /**
      * 同步角色信息(以下均为测试信息)
      */
@@ -54,7 +60,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        activity = this;
         SLog.enableDebug(true);
 
         loginButton = findViewById(R.id.demo_login);
@@ -270,7 +276,7 @@ public class MainActivity extends Activity {
         demo_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mIMWSDK.share(MainActivity.this, "#萬靈召喚師","2022首款卡牌大作【萬靈召喚師】，爆笑來襲！從東方文明到西方文明的羈絆，從神族到魔族的對抗，一段奇妙的神仙冒險之旅就此展開！","https://share.leyouye.com/aedzj/1.html", new ISdkCallBack() {
+                mIMWSDK.share(MainActivity.this, "#獲得最多好友推薦萬靈應召而來","集結東西方神話英靈《萬靈召喚師》卡牌RPG，以高養成自由度為核心，無限搭配的陣營組合，掌握六種無法想象的強大力量，召喚師們踏上拯救三界的道路！","https://member.mmhyplayer.com/sdk/share/wlzhs/index.html", new ISdkCallBack() {
                     @Override
                     public void success() {
                         PL.i("share success");
@@ -286,7 +292,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.demo_share2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mIMWSDK.share(MainActivity.this, "#萬靈召喚師","2022首款卡牌大作【萬靈召喚師】，爆笑來襲！從東方文明到西方文明的羈絆，從神族到魔族的對抗，一段奇妙的神仙冒險之旅就此展開！","https://static-resource.meowplayer.com/share/index.html", new ISdkCallBack() {
+                mIMWSDK.share(MainActivity.this, "#萬靈召喚師","2022首款卡牌大作【萬靈召喚師】，爆笑來襲！從東方文明到西方文明的羈絆，從神族到魔族的對抗，一段奇妙的神仙冒險之旅就此展開！","https://member.mmhyplayer.com/sdk/share/wlzhs/index.html", new ISdkCallBack() {
                     @Override
                     public void success() {
                         PL.i("share success");
@@ -435,9 +441,16 @@ public class MainActivity extends Activity {
             }
         });
         findViewById(R.id.checkGoogleServer).setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.P)
             @Override
             public void onClick(View view) {
                 mIMWSDK.checkGooglePlayServicesAvailable(MainActivity.this);
+                ActivityManager mActivityManager = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
+                if (mActivityManager.isBackgroundRestricted()){
+                    ToastUtils.toast(activity,"isBackgroundRestricted true");
+                }else {
+                    ToastUtils.toast(activity,"isBackgroundRestricted false");
+                }
             }
         });
 

@@ -110,7 +110,7 @@ android {
             applicationId "com.wanxian.mzxq"
             minSdkVersion 21
             targetSdkVersion 32
-            versionCode 5
+            versionCode 10
             versionName "1.0"
             flavorDimensions "1"
             resValue "string", "scheme", "mzxq"
@@ -133,8 +133,8 @@ android {
             applicationId "com.wanye.fszhl"
             minSdkVersion 21
             targetSdkVersion 32
-            versionCode 6
-            versionName "6.0"
+            versionCode 16
+            versionName "2.3.16"
             flavorDimensions "1"
             resValue "string", "scheme", "wlzhs"
             resValue "string", "facebook_app_id", "1137481690478934"
