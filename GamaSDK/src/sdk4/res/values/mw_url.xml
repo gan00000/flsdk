@@ -2,11 +2,11 @@
 
     <!--港台域名列表 开始-->
     <!--登录域名-->
-    <string name="zh_tw_sdk_login_pre_url" translatable="false">https://login.mmhyplayer.com/</string>
+    <string name="zh_tw_sdk_login_pre_url" translatable="false">https://login.luckyyx.com/</string>
     <string name="zh_tw_sdk_login_spa_url" translatable="false"></string>
 
     <!--支付域名-->
-    <string name="zh_tw_sdk_pay_pre_url" translatable="false">https://pay.mmhyplayer.com/</string>
+    <string name="zh_tw_sdk_pay_pre_url" translatable="false">https://pay.luckyyx.com/</string>
     <string name="zh_tw_sdk_pay_spa_url" translatable="false"></string>
 
     <!--活动域名-->
@@ -14,7 +14,7 @@
     <string name="zh_tw_sdk_act_spa_url" translatable="false"></string>
 
     <!--cdn域名-->
-    <string name="zh_tw_sdk_cdn_pre_url" translatable="false">https://cdn-download.mmhyplayer.com/</string>
+    <string name="zh_tw_sdk_cdn_pre_url" translatable="false">https://cdn-download.luckyyx.com/</string>
     <string name="zh_tw_sdk_cdn_spa_url" translatable="false"></string>
 
     <!--广告域名-->
@@ -30,10 +30,10 @@
     <string name="zh_tw_sdk_cs_spa_url" translatable="false"></string>
 
     <!--    日志记录域名-->
-    <string name="zh_tw_sdk_log_pre_url" translatable="false">https://log.mmhyplayer.com/</string>
+    <string name="zh_tw_sdk_log_pre_url" translatable="false">https://log.luckyyx.com/</string>
 
     <!--使用者條款 - 服務條款 -->
-    <string name="zh_tw_sdk_terms_service_url" translatable="false">https://member.mmhyplayer.com/sdk/agreement/%s_agreement.html</string>
+    <string name="zh_tw_sdk_terms_service_url" translatable="false">https://member.luckyyx.com/sdk/agreement/%s_agreement.html</string>
 
     <!--客服链接-->
     <string name="zh_tw_sdk_service_url" translatable="false"></string>
