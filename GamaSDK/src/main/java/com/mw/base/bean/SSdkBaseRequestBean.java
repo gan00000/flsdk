@@ -140,6 +140,9 @@ public class SSdkBaseRequestBean extends BaseReqeustBean {
     }
 
     public void setPhoneAreaCode(String phoneAreaCode) {
+        if (SStringUtil.isNotEmpty(phoneAreaCode)){
+            phoneAreaCode = phoneAreaCode.replace("+","");
+        }
         this.phoneAreaCode = phoneAreaCode;
         this.areaCode = phoneAreaCode;
     }
