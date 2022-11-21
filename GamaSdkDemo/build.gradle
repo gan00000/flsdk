@@ -61,6 +61,12 @@ android {
             keyAlias 'mwgamev2'
             keyPassword 'mw888000'
         }
+        release_v4 {
+            storeFile file('../signkey/sdkv4_key.jks') //正式签名，以后使用
+            storePassword 'mw888000'
+            keyAlias 'mwv4'
+            keyPassword 'mw888000'
+        }
     }
 
     buildTypes {
@@ -76,7 +82,7 @@ android {
         }
 
         debug {
-            signingConfig signingConfigs.release_v2
+            signingConfig signingConfigs.release_v4
         }
     }
     productFlavors {
@@ -152,7 +158,7 @@ android {
 
         sdk4 {
 
-            signingConfig signingConfigs.mwrelease
+            signingConfig signingConfigs.release_v4
             applicationId "com.xinhai.chmxt"
             minSdkVersion 21
             targetSdkVersion 32
