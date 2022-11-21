@@ -79,11 +79,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="分享url1" />
-                <Button
-                    android:id="@+id/demo_share2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="fb分享url" />
+
                 <Button
                     android:id="@+id/share_line"
                     android:layout_width="wrap_content"
