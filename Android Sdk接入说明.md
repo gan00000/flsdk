@@ -304,7 +304,7 @@
 	        		
 	        	 //获得登录成功后的用户uid
 	            String uid = sLoginResponse.getUserId();
-	            String accessToken = sLoginResponse.getAccessToken();
+	            String sign = sLoginResponse.getSign();
 	            String timestamp = sLoginResponse.getTimestamp();
 				
 	        }
@@ -467,12 +467,27 @@
      */
     public void showBindPhoneView(Activity activity, SFCallBack sfCallBack);
     
-	
+	//示例
+	mIMWSDK.showBindPhoneView(MainActivity.this, new SFCallBack<BaseResponseModel>() {
+                    @Override
+                    public void success(BaseResponseModel result, String msg) {
+                        //todo绑定手机成功
+
+                    }
+
+                    @Override
+                    public void fail(BaseResponseModel result, String msg) {
+                        //todo绑定手机失败
+                    }
+                });
 	```
 	
 * <h3 id="14">显示sdk内部升级账号页面</h3>   
 	
 	```
+	
+	public void showUpgradeAccountView(Activity activity, SFCallBack sfCallBack);
+	
 	/**
      * 显示sdk内部升级账号页面
      * @param activity
@@ -509,13 +524,14 @@
     mIMWSDK.requestVfCode(this, "86", "13622843403", new SFCallBack<BaseResponseModel>() {
             @Override
             public void success(BaseResponseModel responseModel, String result) {
-
+                //获取手机验证码成功
+                //todo
             }
 
             @Override
             public void fail(BaseResponseModel responseModel, String result) {
                 if (responseModel != null){
-                    String errMsg = responseModel.getMessage();
+                    String errMsg = responseModel.getMessage();//获取验证码 错误信息
                 }
             }
         });
@@ -541,7 +557,7 @@
             @Override
             public void success(SLoginResponse sLoginResponse, String result) {
                 if (sLoginResponse != null) {
-                    String tel = sLoginResponse.getData().getTelephone();//绑定的手机号码
+                    String tel = sLoginResponse.getData().getTelephone();//绑定的手机号码，格式：国际区号-号码，比如86-13622843403
                 }
             }
 

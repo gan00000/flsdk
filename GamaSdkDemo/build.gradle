@@ -153,23 +153,23 @@ android {
         sdk4 {
 
             signingConfig signingConfigs.mwrelease
-            applicationId "com.wanye.fszhl"
+            applicationId "com.xinhai.chmxt"
             minSdkVersion 21
             targetSdkVersion 32
-            versionCode 16
-            versionName "2.3.16"
+            versionCode 1
+            versionName "1.0"
             flavorDimensions "1"
-            resValue "string", "scheme", "wlzhs"
-            resValue "string", "facebook_app_id", "1137481690478934"
-            resValue "string", "facebook_client_token", "9457e9f00d7e1c0a9869c451326b15a9"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1137481690478934" //启用分析
-            resValue "string", "fb_login_protocol_scheme", "fb1137481690478934"
-            resValue "string", "facebook_app_name", "万灵召唤师"
-            resValue "string", "line_channelId", "1657511063"
+            resValue "string", "scheme", "chmxt"
+            resValue "string", "facebook_app_id", "656701765898240"
+            resValue "string", "facebook_client_token", "bb38401adb12a4615d1a0c8dad838e61"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider656701765898240" //启用分析
+            resValue "string", "fb_login_protocol_scheme", "fb656701765898240"
+            resValue "string", "facebook_app_name", "Mushroom & Heroes RPG"
+            resValue "string", "line_channelId", "1657663563"
             resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow"
 
             //每个游戏的demo设置 test
-            resValue "string", "sdk_name", "SDK3 demo"
+            resValue "string", "sdk_name", "SDK4 demo"
 
         }
 

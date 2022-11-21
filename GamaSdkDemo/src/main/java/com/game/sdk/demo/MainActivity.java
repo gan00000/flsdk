@@ -114,10 +114,12 @@ public class MainActivity extends Activity {
                         if (sLoginResponse != null && sLoginResponse.getData() != null) {
                             String uid = sLoginResponse.getData().getUserId();
                             userId = uid;
-                            String accessToken = sLoginResponse.getData().getToken();
+                            String sign = sLoginResponse.getData().getSign();
                             String timestamp = sLoginResponse.getData().getTimestamp();
                             //是否绑定手机
                             boolean isBindPhone = sLoginResponse.getData().isBindPhone();
+                            //绑定的手机号码
+                            String telephone = sLoginResponse.getData().getTelephone();
                             //是否绑定账号
                             boolean isBind = sLoginResponse.getData().isBind();
                             //todo 进行验证
@@ -359,12 +361,13 @@ public class MainActivity extends Activity {
                 mIMWSDK.showBindPhoneView(MainActivity.this, new SFCallBack<BaseResponseModel>() {
                     @Override
                     public void success(BaseResponseModel result, String msg) {
+                        //todo绑定手机成功
 
                     }
 
                     @Override
                     public void fail(BaseResponseModel result, String msg) {
-
+                        //todo绑定手机失败
                     }
                 });
 
@@ -390,49 +393,50 @@ public class MainActivity extends Activity {
             }
         });
 
-//        mIMWSDK.requestVfCode(this, "86", "13622843403", new SFCallBack<BaseResponseModel>() {
-//            @Override
-//            public void success(BaseResponseModel responseModel, String result) {
-//
-//            }
-//
-//            @Override
-//            public void fail(BaseResponseModel responseModel, String result) {
-//                if (responseModel != null){
-//                    String errMsg = responseModel.getMessage();
-//                }
-//            }
-//        });
-//
-//        mIMWSDK.requestBindPhone(this, "86", "13622843403", "111111", new SFCallBack<SLoginResponse>() {
-//            @Override
-//            public void success(SLoginResponse sLoginResponse, String result) {
-//                if (sLoginResponse != null) {
-//                    String tel = sLoginResponse.getData().getTelephone();//绑定的手机号码
-//                }
-//            }
-//
-//            @Override
-//            public void fail(SLoginResponse sLoginResponse, String result) {
-//                if (sLoginResponse != null) {
-//                    String errMsg = sLoginResponse.getMessage();
-//                }
-//
-//            }
-//        });
-//
-//        mIMWSDK.requestUpgradeAccount(this, "xxx", "pwd", new SFCallBack<SLoginResponse>() {
-//
-//            @Override
-//            public void success(SLoginResponse result, String msg) {
-//                //账号升级成功
-//            }
-//
-//            @Override
-//            public void fail(SLoginResponse result, String msg) {
-//                //账号升级绑定失败
-//            }
-//        });
+        mIMWSDK.requestVfCode(this, "86", "13622843403", new SFCallBack<BaseResponseModel>() {
+            @Override
+            public void success(BaseResponseModel responseModel, String result) {
+                //获取手机验证码成功
+                //todo
+            }
+
+            @Override
+            public void fail(BaseResponseModel responseModel, String result) {
+                if (responseModel != null){
+                    String errMsg = responseModel.getMessage();//获取验证码 错误信息
+                }
+            }
+        });
+
+        mIMWSDK.requestBindPhone(this, "86", "13622843403", "111111", new SFCallBack<SLoginResponse>() {
+            @Override
+            public void success(SLoginResponse sLoginResponse, String result) {
+                if (sLoginResponse != null) {
+                    String tel = sLoginResponse.getData().getTelephone();//绑定的手机号码
+                }
+            }
+
+            @Override
+            public void fail(SLoginResponse sLoginResponse, String result) {
+                if (sLoginResponse != null) {
+                    String errMsg = sLoginResponse.getMessage();
+                }
+
+            }
+        });
+
+        mIMWSDK.requestUpgradeAccount(this, "xxx", "pwd", new SFCallBack<SLoginResponse>() {
+
+            @Override
+            public void success(SLoginResponse result, String msg) {
+                //账号升级成功
+            }
+
+            @Override
+            public void fail(SLoginResponse result, String msg) {
+                //账号升级绑定失败
+            }
+        });
 
         findViewById(R.id.cs).setOnClickListener(new View.OnClickListener() {
             @Override
