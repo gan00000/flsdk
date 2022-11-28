@@ -288,8 +288,8 @@ public class SdkEventLogger {
             @Override
             public void run() {
                 String googleAdId = SGoogleProxy.getAdvertisingId(context.getApplicationContext());
+                PL.i("get google ad id-->" + googleAdId);
                 SdkUtil.saveGoogleAdId(context,googleAdId);
-                PL.i("save google ad id-->" + googleAdId);
             }
         }).start();
     }
