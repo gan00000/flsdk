@@ -737,11 +737,11 @@ public class SdkUtil {
 //        为防止上次獲取谷歌ID下次獲取安卓ID的情况，獲取的ID都保存到本地，後面從本地去讀取
         //PL.i("getSdkUniqueId start");
         String localUniqueId = getUniqueId(ctx);
-        if (SStringUtil.isNotEmpty(localUniqueId) && !localUniqueId.contains("00000000-")){
+        if (SStringUtil.isNotEmpty(localUniqueId) && !localUniqueId.contains("00000000-0000")){
             return localUniqueId;
         }
         String adId = SdkUtil.getGoogleAdId(ctx);
-        if (SStringUtil.isNotEmpty(adId) && !adId.contains("00000000-")){//先Google id   //00000000-0000-0000-0000-000000000000
+        if (SStringUtil.isNotEmpty(adId) && !adId.contains("00000000-0000")){//先Google id   //00000000-0000-0000-0000-000000000000
             saveUniqueId(ctx,adId);
             return adId;
         }
