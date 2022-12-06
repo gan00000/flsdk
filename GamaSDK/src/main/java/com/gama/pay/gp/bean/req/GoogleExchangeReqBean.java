@@ -16,6 +16,15 @@ public class GoogleExchangeReqBean extends SGameBaseRequestBean {
 	private String priceCurrencyCode;
 	private String priceAmountMicros;
 	private String productPrice;
+	private String reissue;//是否是补发调用
+
+	public String getReissue() {
+		return reissue;
+	}
+
+	public void setReissue(String reissue) {
+		this.reissue = reissue;
+	}
 
 	public String getPurchaseData() {
 		return purchaseData;

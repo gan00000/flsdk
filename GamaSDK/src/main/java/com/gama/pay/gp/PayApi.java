@@ -63,11 +63,12 @@ public class PayApi {
     /**
      * 发币
      */
-    public static void requestSendStone(Context context, final Purchase mPurchase, SFCallBack<GPExchangeRes> sfCallBack) {
+    public static void requestSendStone(Context context, final Purchase mPurchase,String reissue, SFCallBack<GPExchangeRes> sfCallBack) {
 
         GoogleExchangeReqBean exchangeReqBean = new GoogleExchangeReqBean(context);
         exchangeReqBean.setDataSignature(mPurchase.getSignature());
         exchangeReqBean.setPurchaseData(mPurchase.getOriginalJson());
+        exchangeReqBean.setReissue(reissue);
         if (mPurchase.getAccountIdentifiers() != null) {
             if (SStringUtil.isNotEmpty(mPurchase.getAccountIdentifiers().getObfuscatedAccountId())){
                 exchangeReqBean.setUserId(mPurchase.getAccountIdentifiers().getObfuscatedAccountId());
