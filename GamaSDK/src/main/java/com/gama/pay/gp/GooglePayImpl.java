@@ -82,6 +82,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
 
     private void callbackSuccess(Purchase purchase) {
 
+        PL.i("google pay onConsumeResponse callbackSuccess");
         if (mActivity != null) {
             mActivity.runOnUiThread(new Runnable() {
                 @Override
@@ -89,36 +90,38 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
                     if (mBillingHelper != null) { //关闭页面前先移除callback，否则游戏的onResume会先于 GooglePayActivity2 的onDestroy执行
 //            mBillingHelper.removeBillingHelperStatusCallback(this);
                     }
+                    BasePayBean payBean = new BasePayBean();
+                    if (purchase != null) {
+                        try {
+                            payBean.setOrderId(purchase.getOrderId());
+                            payBean.setPackageName(purchase.getPackageName());
+                            payBean.setUsdPrice(skuAmount);
+                            if (createOrderIdReqBean != null) {
+                                payBean.setProductId(createOrderIdReqBean.getProductId());
+                            }
+//                    payBean.setmItemType(purchase.getItemType());
+                            payBean.setOriginPurchaseData(purchase.getOriginalJson());
+                            payBean.setPurchaseState(purchase.getPurchaseState());
+                            payBean.setPurchaseTime(purchase.getPurchaseTime());
+                            payBean.setSignature(purchase.getSignature());
+                            payBean.setDeveloperPayload(purchase.getDeveloperPayload());
+                            payBean.setmToken(purchase.getPurchaseToken());
+                            if (skuDetails != null) {
+                                double price = skuDetails.getPriceAmountMicros() / 1000000.00;
+                                payBean.setPrice(price);
+                                payBean.setCurrency(skuDetails.getPriceCurrencyCode());
+                            }
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
 
                     if (loadingDialog != null) {
                         loadingDialog.dismissProgressDialog();
                     }
 
                     if (iPayCallBack != null) {
-                        BasePayBean payBean = new BasePayBean();
-                        if (purchase != null) {
-                            try {
-                                payBean.setOrderId(purchase.getOrderId());
-                                payBean.setPackageName(purchase.getPackageName());
-                                payBean.setUsdPrice(skuAmount);
-//                    payBean.setProductId(purchase.getProducts().get(0));
-//                    payBean.setmItemType(purchase.getItemType());
-                                payBean.setOriginPurchaseData(purchase.getOriginalJson());
-                                payBean.setPurchaseState(purchase.getPurchaseState());
-                                payBean.setPurchaseTime(purchase.getPurchaseTime());
-                                payBean.setSignature(purchase.getSignature());
-                                payBean.setDeveloperPayload(purchase.getDeveloperPayload());
-                                payBean.setmToken(purchase.getPurchaseToken());
-                                if (skuDetails != null) {
-                                    double price = skuDetails.getPriceAmountMicros() / 1000000.00;
-                                    payBean.setPrice(price);
-                                    payBean.setCurrency(skuDetails.getPriceCurrencyCode());
-                                }
-
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
                         iPayCallBack.success(payBean);
                     }
                 }

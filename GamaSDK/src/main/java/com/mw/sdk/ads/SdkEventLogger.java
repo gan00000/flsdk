@@ -140,8 +140,8 @@ public class SdkEventLogger {
 //        BasePayBean payBean = (BasePayBean) bundle.getSerializable(GamaCommonKey.PURCHASE_DATA);
 
         PL.i(TAG, "trackinPay Purchase");
-        String orderId = payBean.getOrderId();
-        String productId = payBean.getProductId();
+        String orderId = payBean.getOrderId() == null ? "unknow" : payBean.getOrderId();
+        String productId = payBean.getProductId() == null ? "unknow" : payBean.getProductId();
         double usdPrice = payBean.getUsdPrice();
 
         try {
@@ -167,6 +167,7 @@ public class SdkEventLogger {
             af_eventValues.put(AFInAppEventParameterName.ORDER_ID, orderId);
             af_eventValues.put(AFInAppEventParameterName.CUSTOMER_USER_ID, uid);
             af_eventValues.put("platform", context.getResources().getString(R.string.channel_platform));
+            PL.i(TAG, "trackinPay Purchase af...");
             AppsFlyerLib.getInstance().logEvent(context.getApplicationContext(), AFInAppEventType.PURCHASE, af_eventValues);
 
             //FB
@@ -174,6 +175,7 @@ public class SdkEventLogger {
             eventValues.put(AppEventsConstants.EVENT_PARAM_CONTENT_ID, productId);
             eventValues.put(AppEventsConstants.EVENT_PARAM_ORDER_ID, orderId);
             eventValues.put("platform", context.getResources().getString(R.string.channel_platform));
+            PL.i(TAG, "trackinPay Purchase fb...");
             SFacebookProxy.logPurchase(context, new BigDecimal(usdPrice), eventValues);
 
             //Firebase
@@ -187,6 +189,7 @@ public class SdkEventLogger {
             b.putString(FirebaseAnalytics.Param.CURRENCY, "USD");
             b.putString(FirebaseAnalytics.Param.TRANSACTION_ID, orderId);
             b.putString("platform", context.getResources().getString(R.string.channel_platform));
+            PL.i(TAG, "trackinPay Purchase firebase...");
             SGoogleProxy.firebaseAnalytics(context, FirebaseAnalytics.Event.PURCHASE, b);
 
 
