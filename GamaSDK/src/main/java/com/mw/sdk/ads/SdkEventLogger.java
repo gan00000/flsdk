@@ -39,8 +39,6 @@ import java.util.Map;
 
 public class SdkEventLogger {
 
-    private static final String TAG = SdkEventLogger.class.getSimpleName();
-
     public static void activateApp(Activity activity){
 
         try {
@@ -72,7 +70,7 @@ public class SdkEventLogger {
      */
     public static void trackinLoginEvent(Context activity, SLoginResponse loginResponse){
         try {
-            PL.i(TAG, "登入上報");
+            PL.i("登入上報");
             if (activity == null || loginResponse == null){
                 return;
             }
@@ -92,7 +90,7 @@ public class SdkEventLogger {
      */
     public static void trackinRegisterEvent(Context activity, SLoginResponse loginResponse){
         try {
-            PL.i(TAG, "註冊上報");
+            PL.i("註冊上報");
             if (activity == null || loginResponse == null){
                 return;
             }
@@ -134,12 +132,12 @@ public class SdkEventLogger {
      */
     public static void trackinPayEvent(Context context, BasePayBean payBean){
         if(payBean == null) {
-            PL.i(TAG, "trackinPay bundle null");
+            PL.i("trackinPay bundle null");
             return;
         }
 //        BasePayBean payBean = (BasePayBean) bundle.getSerializable(GamaCommonKey.PURCHASE_DATA);
 
-        PL.i(TAG, "trackinPay Purchase");
+        PL.i("trackinPay Purchase");
         String orderId = payBean.getOrderId() == null ? "unknow" : payBean.getOrderId();
         String productId = payBean.getProductId() == null ? "unknow" : payBean.getProductId();
         double usdPrice = payBean.getUsdPrice();
@@ -167,7 +165,7 @@ public class SdkEventLogger {
             af_eventValues.put(AFInAppEventParameterName.ORDER_ID, orderId);
             af_eventValues.put(AFInAppEventParameterName.CUSTOMER_USER_ID, uid);
             af_eventValues.put("platform", context.getResources().getString(R.string.channel_platform));
-            PL.i(TAG, "trackinPay Purchase af...");
+            PL.i("trackinPay Purchase af...");
             AppsFlyerLib.getInstance().logEvent(context.getApplicationContext(), AFInAppEventType.PURCHASE, af_eventValues);
 
             //FB
@@ -175,7 +173,7 @@ public class SdkEventLogger {
             eventValues.put(AppEventsConstants.EVENT_PARAM_CONTENT_ID, productId);
             eventValues.put(AppEventsConstants.EVENT_PARAM_ORDER_ID, orderId);
             eventValues.put("platform", context.getResources().getString(R.string.channel_platform));
-            PL.i(TAG, "trackinPay Purchase fb...");
+            PL.i("trackinPay Purchase fb...");
             SFacebookProxy.logPurchase(context, new BigDecimal(usdPrice), eventValues);
 
             //Firebase
@@ -189,7 +187,7 @@ public class SdkEventLogger {
             b.putString(FirebaseAnalytics.Param.CURRENCY, "USD");
             b.putString(FirebaseAnalytics.Param.TRANSACTION_ID, orderId);
             b.putString("platform", context.getResources().getString(R.string.channel_platform));
-            PL.i(TAG, "trackinPay Purchase firebase...");
+            PL.i("trackinPay Purchase firebase...");
             SGoogleProxy.firebaseAnalytics(context, FirebaseAnalytics.Event.PURCHASE, b);
 
 
@@ -350,13 +348,13 @@ public class SdkEventLogger {
         simpleHttpRequest.setReqCallBack(new ISReqCallBack<BaseResponseModel>() {
             @Override
             public void success(BaseResponseModel responseModel, String rawResult) {
-                PL.i(TAG, "SDK_INSTALL_ACTIVATION rawResult:" + rawResult);
+                PL.i("SDK_INSTALL_ACTIVATION rawResult:" + rawResult);
                 SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE, SDK_INSTALL_ACTIVATION, "adsInstallActivation");
             }
 
             @Override
             public void timeout(String code) {
-                PL.i(TAG, "ADS timeout");
+                PL.i("ADS timeout");
             }
 
             @Override
