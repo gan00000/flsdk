@@ -38,6 +38,10 @@ public class ResConfig {
         return SStringUtil.isEqual("true",more);
     }
 
+    public static String getDefaultServerLanguage(Context context) {
+        return getConfigInAssetsProperties(context, "sdk_default_server_language");
+    }
+
     /**
      * 获取秘钥
      */

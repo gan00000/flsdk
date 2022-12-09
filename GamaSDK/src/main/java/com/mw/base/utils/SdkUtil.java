@@ -972,16 +972,26 @@ public class SdkUtil {
 
         if (ResConfig.isMoreLanguage(context)){
 
-            Locale locale = Locale.getDefault();
-            String language = locale.getLanguage();
-            String country = locale.getCountry();
+            Locale locale = Locale.getDefault();//zh_TW_#Hant  zh_HK_#Hant zh_CN_#Hans en_US
+            String language = locale.getLanguage();//zh en
+            String country = locale.getCountry();//TW US
             if (language.equals("en")){
                 return SGameLanguage.en_US.getLanguage();
             }
             if (language.equals("zh") && country.equals("CN")){
                 return SGameLanguage.zh_CN.getLanguage();
             }
-            return SGameLanguage.zh_TW.getLanguage();//默认为繁体
+            if (language.equals("zh") && country.equals("TW")){
+                return SGameLanguage.zh_TW.getLanguage();
+            }
+            if (language.equals("zh") && country.equals("HK")){
+                return SGameLanguage.zh_TW.getLanguage();
+            }
+            //return SGameLanguage.zh_TW.getLanguage();//默认为繁体
+        }
+        //主动通过配置文件设置的默认语言
+        if (SStringUtil.isNotEmpty(ResConfig.getDefaultServerLanguage(context))){
+            return ResConfig.getDefaultServerLanguage(context);
         }
         return SGameLanguage.zh_TW.getLanguage();//默认为繁体
     }
