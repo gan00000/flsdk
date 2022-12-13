@@ -480,6 +480,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
                     @Override
                     public void onConsumeResponse(@NonNull BillingResult billingResult, @NonNull String s) {
                         consumeFinish = consumeFinish + 1;
+                        PL.i("query purchase consumeAsync finish consumeFinish=" + consumeFinish);
                         if (consumeFinish == PurchaseState_PURCHASED_SIEZ){
                             consumeResponseListener.onConsumeResponse(null,"");
                         }
