@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import com.android.billingclient.api.BillingClient;
 import com.android.billingclient.api.BillingResult;
 import com.android.billingclient.api.ConsumeResponseListener;
+import com.android.billingclient.api.ProductDetails;
 import com.android.billingclient.api.Purchase;
 import com.android.billingclient.api.PurchasesResponseListener;
 import com.android.billingclient.api.PurchasesUpdatedListener;
@@ -52,7 +53,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
     /**
      * 当次的商品详情
      */
-    private SkuDetails skuDetails = null;
+    private ProductDetails skuDetails = null;
     private Double skuAmount;
 
     /**
@@ -106,10 +107,10 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
                             payBean.setSignature(purchase.getSignature());
                             payBean.setDeveloperPayload(purchase.getDeveloperPayload());
                             payBean.setmToken(purchase.getPurchaseToken());
-                            if (skuDetails != null) {
-                                double price = skuDetails.getPriceAmountMicros() / 1000000.00;
+                            if (skuDetails != null && skuDetails.getOneTimePurchaseOfferDetails() != null) {
+                                double price = skuDetails.getOneTimePurchaseOfferDetails().getPriceAmountMicros() / 1000000.00;
                                 payBean.setPrice(price);
-                                payBean.setCurrency(skuDetails.getPriceCurrencyCode());
+                                payBean.setCurrency(skuDetails.getOneTimePurchaseOfferDetails().getPriceCurrencyCode());
                             }
 
                         } catch (Exception e) {
@@ -248,6 +249,10 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
                 PL.i("startQueryPurchase onQueryPurchasesResponse success");
                 if (list != null) {
                     PL.i("startQueryPurchase onQueryPurchasesResponse success, purchase size:" + list.size());
+                }
+                if (list.isEmpty()){
+                    PL.i("startQueryPurchase onQueryPurchasesResponse success, purchase list is empty");
+                    return;
                 }
                 for (com.android.billingclient.api.Purchase purchase : list) {//查询是否为PURCHASED未消费商品
                     if(purchase.getPurchaseState() == com.android.billingclient.api.Purchase.PurchaseState.PURCHASED){
@@ -513,9 +518,9 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
     }
 
     @Override
-    public void onQuerySkuResult(Context context, List<SkuDetails> productDetails) {
-        if (productDetails != null && !productDetails.isEmpty()) {
-            skuDetails = productDetails.get(0);
+    public void onQuerySkuResult(Context context, List<ProductDetails> productDetailsList) {
+        if (productDetailsList != null && !productDetailsList.isEmpty()) {
+            skuDetails = productDetailsList.get(0);
 //            mBillingHelper.launchPurchaseFlow(activity, createOrderBean.getOrderId(), skuDetails);
         } else {
             PL.i( "onQuerySkuResult not current query. ");

@@ -12,13 +12,18 @@ import com.android.billingclient.api.BillingFlowParams;
 import com.android.billingclient.api.BillingResult;
 import com.android.billingclient.api.ConsumeParams;
 import com.android.billingclient.api.ConsumeResponseListener;
+import com.android.billingclient.api.ProductDetails;
+import com.android.billingclient.api.ProductDetailsResponseListener;
 import com.android.billingclient.api.Purchase;
 import com.android.billingclient.api.PurchasesResponseListener;
 import com.android.billingclient.api.PurchasesUpdatedListener;
+import com.android.billingclient.api.QueryProductDetailsParams;
+import com.android.billingclient.api.QueryPurchasesParams;
 import com.android.billingclient.api.SkuDetails;
 import com.android.billingclient.api.SkuDetailsParams;
 import com.android.billingclient.api.SkuDetailsResponseListener;
 import com.core.base.utils.PL;
+import com.google.common.collect.ImmutableList;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -234,31 +239,55 @@ public class GBillingHelper implements PurchasesUpdatedListener {
     /**
      * 查询商品详情
      */
-    public void queryProductDetailsAsync(Context context, List<String> skuList, SkuDetailsResponseListener detailsResponseListener) {
+    public void queryProductDetailsAsync(Context context, String productId, ProductDetailsResponseListener detailsResponseListener) {
         Runnable queryInventoryRunnable = new Runnable() {
             @Override
             public void run() {
 
-                SkuDetailsParams.Builder params = SkuDetailsParams.newBuilder();
-                params.setSkusList(skuList).setType(BillingClient.SkuType.INAPP);
-                billingClient.querySkuDetailsAsync(params.build(),
-                        new SkuDetailsResponseListener() {
-                            @Override
-                            public void onSkuDetailsResponse(BillingResult billingResult, List<SkuDetails> skuDetailsList) {
-                                // Process the result.
+                ImmutableList<QueryProductDetailsParams.Product> productList = ImmutableList.of(QueryProductDetailsParams.Product.newBuilder()
+                        .setProductId(productId)
+                        .setProductType(BillingClient.ProductType.INAPP)
+                        .build());
 
+                QueryProductDetailsParams params = QueryProductDetailsParams.newBuilder()
+                        .setProductList(productList)
+                        .build();
+
+                billingClient.queryProductDetailsAsync(params,  new ProductDetailsResponseListener() {
+                            public void onProductDetailsResponse(BillingResult billingResult, List<ProductDetails> productDetailsList) {
+                                // Process the result
                                 if (mBillingCallbackList != null && !mBillingCallbackList.isEmpty()) {
                                     for (BillingHelperStatusCallback mBillingCallback : mBillingCallbackList) {
-                                        mBillingCallback.onQuerySkuResult(context,skuDetailsList);
+                                        mBillingCallback.onQuerySkuResult(context,productDetailsList);
                                     }
                                 }
                                 if (detailsResponseListener != null){
-                                    detailsResponseListener.onSkuDetailsResponse(billingResult,skuDetailsList);
+                                    detailsResponseListener.onProductDetailsResponse(billingResult,productDetailsList);
                                 }
-
                             }
                         }
                 );
+
+//                SkuDetailsParams.Builder params = SkuDetailsParams.newBuilder();
+//                params.setSkusList(skuList).setType(BillingClient.SkuType.INAPP);
+//                billingClient.querySkuDetailsAsync(params.build(),
+//                        new SkuDetailsResponseListener() {
+//                            @Override
+//                            public void onSkuDetailsResponse(BillingResult billingResult, List<SkuDetails> skuDetailsList) {
+//                                // Process the result.
+//
+//                                if (mBillingCallbackList != null && !mBillingCallbackList.isEmpty()) {
+//                                    for (BillingHelperStatusCallback mBillingCallback : mBillingCallbackList) {
+//                                        mBillingCallback.onQuerySkuResult(context,skuDetailsList);
+//                                    }
+//                                }
+//                                if (detailsResponseListener != null){
+//                                    detailsResponseListener.onSkuDetailsResponse(billingResult,skuDetailsList);
+//                                }
+//
+//                            }
+//                        }
+//                );
             }
         };
         executeRunnable(context, queryInventoryRunnable);
@@ -271,9 +300,9 @@ public class GBillingHelper implements PurchasesUpdatedListener {
 
         this.purchasesUpdatedListener = purchasesUpdatedListener;
 
-        queryProductDetailsAsync(context, Collections.singletonList(sku), new SkuDetailsResponseListener() {
+        queryProductDetailsAsync(context, sku, new ProductDetailsResponseListener() {
             @Override
-            public void onSkuDetailsResponse(@NonNull BillingResult billingResult, @Nullable List<SkuDetails> list) {
+            public void onProductDetailsResponse(@NonNull BillingResult billingResult, @NonNull List<ProductDetails> list) {
                 PL.i( "queryProductDetailsAsync finish ");
                 if (list != null && !list.isEmpty()) {
                     launchPurchaseFlow(context, userId, orderId, list.get(0));
@@ -286,25 +315,67 @@ public class GBillingHelper implements PurchasesUpdatedListener {
             }
         });
 
+//        queryProductDetailsAsync(context, Collections.singletonList(sku), new SkuDetailsResponseListener() {
+//            @Override
+//            public void onSkuDetailsResponse(@NonNull BillingResult billingResult, @Nullable List<SkuDetails> list) {
+//                PL.i( "queryProductDetailsAsync finish ");
+//                if (list != null && !list.isEmpty()) {
+//                    launchPurchaseFlow(context, userId, orderId, list.get(0));
+//                }else{
+//                    PL.i( "queryProductDetailsAsync finish fail,SkuDetails not find");
+//                    if (purchasesUpdatedListener != null) {
+//                        purchasesUpdatedListener.onPurchasesUpdated(billingResult, null);
+//                    }
+//                }
+//            }
+//        });
+
     }
 
     /**
      * 开始购买,直接传入商品详情
      */
-    private void launchPurchaseFlow(Context context,String userId,String orderId, SkuDetails productDetails) {
+    private void launchPurchaseFlow(Context context,String userId,String orderId, ProductDetails productDetails) {
 
         Runnable launchPurchaseRunnable = new Runnable() {
             @Override
             public void run() {
                 PL.i( "productDetails -> " + productDetails.toString());
 
-                // An activity reference from which the billing flow will be launched.
-                // Retrieve a value for "skuDetails" by calling querySkuDetailsAsync().
+//                queryProductDetailsAsync 的回调会返回一个 List<ProductDetails>。每个 ProductDetails 项目都包含商品的相关信息（ID、商品名、类型等）。主要区别在于，
+//                订阅商品现在还包含一个 List<ProductDetails.SubscriptionOfferDetails>，其中包含用户可以享受的所有优惠。
+//                由于以前的 Play 结算库版本不支持新对象（订阅、基础方案、优惠等），因此新系统将每个订阅 SKU 转换为单个向后兼容的基础方案和优惠。
+//                可用的一次性购买商品也改为使用 ProductDetails 对象。您可以使用 getOneTimePurchaseOfferDetails() 方法访问一次性购买商品的优惠详情。
+
+                // Retrieve a value for "productDetails" by calling queryProductDetailsAsync()
+                // Get the offerToken of the selected offer
+//                String offerToken = productDetails
+//                        .getSubscriptionOfferDetails()
+//                        .get(0)
+//                        .getOfferToken();
+                // Set the parameters for the offer that will be presented
+                // in the billing flow creating separate productDetailsParamsList variable
+                ImmutableList<BillingFlowParams.ProductDetailsParams> productDetailsParamsList = ImmutableList.of(
+                                BillingFlowParams.ProductDetailsParams.newBuilder()
+                                        .setProductDetails(productDetails)
+//                                        .setOfferToken(offerToken)
+                                        .build()
+                        );
+
                 BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
-                        .setSkuDetails(productDetails)
+                        .setProductDetailsParamsList(productDetailsParamsList)
                         .setObfuscatedAccountId(userId)//64 个字符
                         .setObfuscatedProfileId(orderId)
                         .build();
+
+
+                // An activity reference from which the billing flow will be launched.
+                // Retrieve a value for "skuDetails" by calling querySkuDetailsAsync().
+//                BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
+//                        .setSkuDetails(productDetails)
+//                        .setObfuscatedAccountId(userId)//64 个字符
+//                        .setObfuscatedProfileId(orderId)
+//                        .build();
 
                 if (context instanceof Activity) {
 
@@ -347,14 +418,24 @@ public class GBillingHelper implements PurchasesUpdatedListener {
             @Override
             public void run() {
 
-                billingClient.queryPurchasesAsync(BillingClient.SkuType.INAPP, new PurchasesResponseListener() {
-                    @Override
-                    public void onQueryPurchasesResponse(@NonNull BillingResult billingResult, @NonNull List<Purchase> list) {
-                        if (purchasesResponseListener != null){
-                            purchasesResponseListener.onQueryPurchasesResponse(billingResult,list);
+                billingClient.queryPurchasesAsync(QueryPurchasesParams.newBuilder().setProductType(BillingClient.ProductType.INAPP).build(), new PurchasesResponseListener() {
+                            public void onQueryPurchasesResponse(BillingResult billingResult, List<Purchase> purchases) {
+                                // Process the result
+                                if (purchasesResponseListener != null){
+                                    purchasesResponseListener.onQueryPurchasesResponse(billingResult,purchases);
+                                }
+                            }
                         }
-                    }
-                });
+                );
+
+//                billingClient.queryPurchasesAsync(BillingClient.SkuType.INAPP, new PurchasesResponseListener() {
+//                    @Override
+//                    public void onQueryPurchasesResponse(@NonNull BillingResult billingResult, @NonNull List<Purchase> list) {
+//                        if (purchasesResponseListener != null){
+//                            purchasesResponseListener.onQueryPurchasesResponse(billingResult,list);
+//                        }
+//                    }
+//                });
             }
         };
         executeRunnable(context, queryPurchaseRunnable);
@@ -385,9 +466,9 @@ public class GBillingHelper implements PurchasesUpdatedListener {
         /**
          * 查询商品Sku回调
          *
-         * @param productDetails
+         * @param productDetailsList
          */
-        void onQuerySkuResult(Context context, List<SkuDetails> productDetails);
+        void onQuerySkuResult(Context context, List<ProductDetails> productDetailsList);
 
         /**
          * 查询购买的回调
