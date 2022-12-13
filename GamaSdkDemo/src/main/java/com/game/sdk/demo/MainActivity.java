@@ -189,7 +189,7 @@ public class MainActivity extends Activity {
 
 //                com.game.superand.1usd
 //                com.game.superand.2usd
-                String skuId = "com.mplay.wlzhs.70";
+                String skuId = "com.wanye.fszhl.lb1";
                 mIMWSDK.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(),skuId, "xxxx","role_id_1","role_name","role_level","vipLevel",serverCode, serverName, new IPayListener() {
 
                     @Override
@@ -211,7 +211,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.demo_pay_google2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String skuId = "com.mplay.wlzhs.340";
+                String skuId = "com.wanye.fszhl.lb1";
                 mIMWSDK.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(),skuId, "xxxx", "role_id_1","role_name","role_level","vipLevel",serverCode, serverName, new IPayListener() {
 
                     @Override

@@ -48,7 +48,7 @@ android {
 
     signingConfigs {//签名的配置
 
-        mwrelease {
+        signv3 {
             storeFile file('../signkey/mw_game') //正式签名，以后使用
             storePassword 'mw999000'
             keyAlias 'mwgame'
@@ -82,14 +82,14 @@ android {
         }
 
         debug {
-            signingConfig signingConfigs.mwrelease
+            signingConfig signingConfigs.signv3
         }
     }
     productFlavors {
 
         sdk1 {
 
-            signingConfig signingConfigs.mwrelease
+            signingConfig signingConfigs.signv3
             applicationId "com.wanye.fszhl"
             minSdkVersion 21
             targetSdkVersion 33
@@ -135,7 +135,7 @@ android {
 
         sdk3 {
 
-            signingConfig signingConfigs.mwrelease
+            signingConfig signingConfigs.signv3
             applicationId "com.wanye.fszhl"
             minSdkVersion 21
             targetSdkVersion 33
