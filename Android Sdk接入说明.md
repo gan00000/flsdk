@@ -37,11 +37,11 @@
     dependencies {
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
-
-        classpath 'com.android.tools.build:gradle:7.2.0'
-        classpath 'com.google.gms:google-services:4.3.10'// google-services plugin
+        
+        classpath 'com.android.tools.build:gradle:7.2.2'
+        classpath 'com.google.gms:google-services:4.3.14'// google-services plugin
         // Add the Crashlytics Gradle plugin.
-        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.8.1'
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.2'
 
     	}
 	}
@@ -62,6 +62,9 @@
 	apply plugin: 'com.android.application'
 	//添加 Google 服务 Gradle 插件
 	apply plugin: 'com.google.gms.google-services'
+	
+	// Add the Crashlytics Gradle plugin
+	apply plugin: 'com.google.firebase.crashlytics'
 
 	android {
 	
@@ -114,29 +117,31 @@
 	
 	//添加下列的依赖
 	dependencies {
-	//    api fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
 		
 		//MWSDK-release为sdk内提供的aar库
 	    implementation(name:'MWSDK-release', ext:'aar')
+	    
+	    //基础库
 	    api 'androidx.legacy:legacy-support-v4:1.0.0'
-	    api 'androidx.appcompat:appcompat:1.4.2'
+	    api 'androidx.appcompat:appcompat:1.5.1'
 	    api 'androidx.recyclerview:recyclerview:1.2.1'
 	    api 'androidx.constraintlayout:constraintlayout:2.1.4'
 	    api 'androidx.browser:browser:1.4.0'
 	    //mutildex
 	    implementation 'androidx.multidex:multidex:2.0.1'
 	    //google pay
-	  	implementation "com.android.billingclient:billing:4.1.0"
-    	//google评分
-    	implementation 'com.google.android.play:review:2.0.0'
+	    implementation "com.android.billingclient:billing:5.1.0"
+	    //google评分
+	    implementation 'com.google.android.play:review:2.0.1'
 	
 	    implementation 'com.google.code.gson:gson:2.8.6'
+	    implementation("com.google.guava:guava:31.1-android")
 	    implementation 'com.zhy:base-rvadapter:3.0.3'
 	
 	    //Google库
-	    implementation 'com.google.android.gms:play-services-auth:20.2.0'
-	    implementation 'com.google.android.gms:play-services-base:18.0.1'
-	    implementation 'com.google.android.gms:play-services-games:22.0.1'
+	    implementation 'com.google.android.gms:play-services-auth:20.4.0'
+	    implementation 'com.google.android.gms:play-services-base:18.1.0'
+	    implementation 'com.google.android.gms:play-services-games:23.1.0'
 	
 	    //firebase
 	    implementation platform('com.google.firebase:firebase-bom:30.1.0')
@@ -145,10 +150,12 @@
 	    implementation 'com.google.firebase:firebase-auth'
 	    // Recommended: Add the Firebase SDK for Google Analytics.
 	    implementation 'com.google.firebase:firebase-analytics'
+	    // Add the Firebase Crashlytics SDK.
+	    implementation 'com.google.firebase:firebase-crashlytics'
 	
 	    //Facebook库
 	    // Facebook Core only (Analytics)
-	    implementation 'com.facebook.android:facebook-core:13.2.0'
+	    implementation 'com.facebook.android:facebook-core:13.2.0'  //latest.release
 	    // Facebook Login only
 	    implementation 'com.facebook.android:facebook-login:13.2.0'
 	    // Facebook Share only
@@ -160,9 +167,10 @@
 	
 	    implementation 'com.github.bumptech.glide:glide:4.11.0'
 	    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
-	
-	    implementation 'com.appsflyer:af-android-sdk:6.3.2'
+	    //af
+	    implementation 'com.appsflyer:af-android-sdk:6.9.0'
 	    implementation 'com.android.installreferrer:installreferrer:2.2'
+
 	
 	}
 
