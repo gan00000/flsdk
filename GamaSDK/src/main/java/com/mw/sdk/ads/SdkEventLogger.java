@@ -359,6 +359,7 @@ public class SdkEventLogger {
 
             @Override
             public void noData() {
+                PL.i("SDK_INSTALL_ACTIVATION rawResult noData");
                 SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE, SDK_INSTALL_ACTIVATION, "adsInstallActivation");
             }
 
