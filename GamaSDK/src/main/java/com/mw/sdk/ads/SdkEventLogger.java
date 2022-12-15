@@ -332,6 +332,8 @@ public class SdkEventLogger {
         requestParams.put("gameLanguage",adsRequestBean.getGameLanguage());
         requestParams.put("versionCode",adsRequestBean.getVersionCode());
         requestParams.put("versionName",adsRequestBean.getVersionName());
+        requestParams.put("androidId",adsRequestBean.getAndroidId());
+        requestParams.put("adId",adsRequestBean.getAdvertisingId());
 
         adsRequestBean.setRequestParamsMap(requestParams);
         adsRequestBean.setRequestUrl(ResConfig.getLogPreferredUrl(context)); //日志记录
