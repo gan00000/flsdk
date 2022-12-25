@@ -876,7 +876,7 @@ public class BaseSdkImpl implements IMWSDK {
 
     private void doWebPay(Activity activity, GooglePayCreateOrderIdReqBean bean) {
 
-        String payThirdUrl = ResConfig.getPayPreferredUrl(activity) + "api/web/payment.page";
+        String payThirdUrl = ResConfig.getPayPreferredUrl(activity) + activity.getResources().getString(R.string.api_pay_web_payment);//"api/web/payment.page";
         bean.setCompleteUrl(payThirdUrl);
 
         String webUrl = bean.createPreRequestUrl();
