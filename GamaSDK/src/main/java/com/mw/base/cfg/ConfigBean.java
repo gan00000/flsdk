@@ -3,6 +3,7 @@ package com.mw.base.cfg;
 import android.content.Context;
 
 import com.core.base.utils.ApkInfoUtil;
+import com.mw.sdk.R;
 
 import java.util.List;
 
@@ -12,14 +13,15 @@ import java.util.List;
 
 public class ConfigBean {
 
-    private VersionData allVersion;
+//    private VersionData allVersion;
+    private List<VersionData> allVersion;
     private List<VersionData> subVersion;
 
     private UrlData url;
 
-    public VersionData getAllVersion() {
-        return allVersion;
-    }
+//    public VersionData getAllVersion() {
+//        return allVersion;
+//    }
 
     public UrlData getUrl() {
         return url;
@@ -30,34 +32,47 @@ public class ConfigBean {
         String packageName = context.getPackageName();
         String versionCode = ApkInfoUtil.getVersionCode(context);
         String versionName = ApkInfoUtil.getVersionName(context);
+        String channel_platform = context.getResources().getString(R.string.channel_platform);
 
         if (subVersion != null){
 
             for (int i = 0; i < subVersion.size(); i++) {
                 VersionData versionData = subVersion.get(i);
 
-                if (versionData != null && packageName.equals(versionData.getPackageName()) && versionCode.equals(versionData.getVersion())){
+                if (versionData != null && packageName.equals(versionData.getPackageName()) && versionCode.equals(versionData.getVersion())
+                    && channel_platform.equals(versionData.getPlatform())){
                     return versionData;
                 }
             }
 
         }
 
-        if (allVersion != null && packageName.equals(allVersion.getPackageName())){
-            return allVersion;
+//        if (allVersion != null && packageName.equals(allVersion.getPackageName())){
+//            return allVersion;
+//        }
+
+        if (allVersion != null){
+
+            for (int i = 0; i < allVersion.size(); i++) {
+                VersionData versionData = allVersion.get(i);
+
+                if (versionData != null && packageName.equals(versionData.getPackageName())
+                        && channel_platform.equals(versionData.getPlatform())){
+                    return versionData;
+                }
+            }
+
         }
 
         return null;
     }
 
-    public void setSubVersion(List<VersionData> subVersion) {
-        this.subVersion = subVersion;
-    }
 
     public static class VersionData {
 
         private String version = "";
         private String packageName = "";
+        private String platform = "";
         private boolean visitorLogin = true;
         private boolean fbLogin = true;
         private boolean googleLogin = true;
@@ -68,6 +83,14 @@ public class ConfigBean {
         private boolean showLogo = false;
         private boolean showForgetPwd = true;
         private boolean showNotice = false;
+
+        public String getPlatform() {
+            return platform;
+        }
+
+        public void setPlatform(String platform) {
+            this.platform = platform;
+        }
 
         public String getVersion() {
             return version;
