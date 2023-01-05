@@ -3,7 +3,7 @@ apply plugin: 'com.android.library'
 android {
     compileSdkVersion 33
 
-    def sdk_version = "1.6.9"
+    def sdk_version = "1.7.0"
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 33
