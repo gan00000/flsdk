@@ -82,7 +82,7 @@ android {
         }
 
         debug {
-            signingConfig signingConfigs.signv3
+            signingConfig signingConfigs.release_v4
         }
     }
     productFlavors {
