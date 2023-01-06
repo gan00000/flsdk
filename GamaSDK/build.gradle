@@ -3,7 +3,7 @@ apply plugin: 'com.android.library'
 android {
     compileSdkVersion 33
 
-    def sdk_version = "1.7.0"
+    def sdk_version = "1.7.1"
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 33
@@ -113,13 +113,13 @@ dependencies {
 
     //Facebook库
     // Facebook Core only (Analytics)
-    implementation 'com.facebook.android:facebook-core:13.2.0'  //latest.release
+    implementation 'com.facebook.android:facebook-core:15.2.0'  //latest.release
     // Facebook Login only
-    implementation 'com.facebook.android:facebook-login:13.2.0'
+    implementation 'com.facebook.android:facebook-login:15.2.0'
     // Facebook Share only
-    implementation 'com.facebook.android:facebook-share:13.2.0'
+    implementation 'com.facebook.android:facebook-share:15.2.0'
     // Facebook Messenger only
-    implementation 'com.facebook.android:facebook-messenger:13.2.0'
+    implementation 'com.facebook.android:facebook-messenger:15.2.0'
     //line
     implementation 'com.linecorp:linesdk:5.0.1'
 

@@ -1010,6 +1010,7 @@ public class SFacebookProxy {
 		});
 		EfunCommandExecute.getInstance().asynExecute(activity, invitableFriendsCmd);*/
 	}
+/*
 
 	public void shareToMessenger(Activity activity, String picPath, FbShareCallBack fbShareCallBack) {
 		if(TextUtils.isEmpty(picPath)) {
@@ -1042,6 +1043,7 @@ public class SFacebookProxy {
 		
 		MessengerUtils.shareToMessenger(activity, REQUEST_TOMESSENGER, shareToMessengerParams);
 	}
+*/
 
 	
 	public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {

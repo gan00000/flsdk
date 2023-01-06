@@ -495,7 +495,7 @@ public class BaseSdkImpl implements IMWSDK {
 
                     case FACEBOOK_MESSENGER:
                         if (sFacebookProxy != null) {
-                            sFacebookProxy.shareToMessenger(activity, picPath, new SFacebookProxy.FbShareCallBack() {
+                           /* sFacebookProxy.shareToMessenger(activity, picPath, new SFacebookProxy.FbShareCallBack() {
                                 @Override
                                 public void onCancel() {
                                     if (iSdkCallBack != null) {
@@ -516,7 +516,7 @@ public class BaseSdkImpl implements IMWSDK {
                                         iSdkCallBack.success();
                                     }
                                 }
-                            });
+                            });*/
                         } else {
                             if (iSdkCallBack != null) {
                                 iSdkCallBack.failure();
