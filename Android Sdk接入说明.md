@@ -156,13 +156,13 @@
 	
 	    //Facebook库
 	    // Facebook Core only (Analytics)
-	    implementation 'com.facebook.android:facebook-core:13.2.0'  //latest.release
+	    implementation 'com.facebook.android:facebook-core:15.2.0'  //latest.release
 	    // Facebook Login only
-	    implementation 'com.facebook.android:facebook-login:13.2.0'
+	    implementation 'com.facebook.android:facebook-login:15.2.0'
 	    // Facebook Share only
-	    implementation 'com.facebook.android:facebook-share:13.2.0'
+	    implementation 'com.facebook.android:facebook-share:15.2.0'
 	    // Facebook Messenger only
-	    implementation 'com.facebook.android:facebook-messenger:13.2.0'
+	    implementation 'com.facebook.android:facebook-messenger:15.2.0'
 	    //line
 	    implementation 'com.linecorp:linesdk:5.0.1'
 	
