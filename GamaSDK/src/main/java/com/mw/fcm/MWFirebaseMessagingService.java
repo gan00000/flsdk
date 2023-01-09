@@ -23,6 +23,11 @@ import com.google.firebase.messaging.RemoteMessage;
 
 public class MWFirebaseMessagingService extends FirebaseMessagingService {
 
+/*
+    应用状态	    通知	                        数据	                    两个都
+    前景	    onMessageReceived	        onMessageReceived	    onMessageReceived
+    背景	    系统托盘	                    onMessageReceived	    通知：系统托盘 | 数据：在意图的附加值中。
+*/
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
 
