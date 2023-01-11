@@ -258,7 +258,7 @@ public class GBillingHelper implements PurchasesUpdatedListener {
                                 // Process the result
                                 if (mBillingCallbackList != null && !mBillingCallbackList.isEmpty()) {
                                     for (BillingHelperStatusCallback mBillingCallback : mBillingCallbackList) {
-                                        mBillingCallback.onQuerySkuResult(context,productDetailsList);
+                                        mBillingCallback.onQuerySkuResult(context,billingResult,productDetailsList);
                                     }
                                 }
                                 if (detailsResponseListener != null){
@@ -304,10 +304,10 @@ public class GBillingHelper implements PurchasesUpdatedListener {
             @Override
             public void onProductDetailsResponse(@NonNull BillingResult billingResult, @NonNull List<ProductDetails> list) {
                 PL.i( "queryProductDetailsAsync finish ");
-                if (list != null && !list.isEmpty()) {
+                if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && list != null && !list.isEmpty()) {
                     launchPurchaseFlow(context, userId, orderId, list.get(0));
                 }else{
-                    PL.i( "queryProductDetailsAsync finish fail,SkuDetails not find");
+                    PL.i( "queryProductDetailsAsync finish error");
                     if (purchasesUpdatedListener != null) {
                         purchasesUpdatedListener.onPurchasesUpdated(billingResult, null);
                     }
@@ -468,7 +468,7 @@ public class GBillingHelper implements PurchasesUpdatedListener {
          *
          * @param productDetailsList
          */
-        void onQuerySkuResult(Context context, List<ProductDetails> productDetailsList);
+        void onQuerySkuResult(Context context, BillingResult billingResult, List<ProductDetails> productDetailsList);
 
         /**
          * 查询购买的回调
