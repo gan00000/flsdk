@@ -1,22 +1,3 @@
 include ':GamaSDK'
 include ':GamaSdkDemo'
-//include ':Thirdlibrary'
-//include ':google:google-play-service-src'
-//include ':google:google-play-service-demo'
-
-
-//include ':facebook:gama-fb-4.25'
-
-
-//include ':libraries-src:gama-core'
-//include ':libraries-src:gama_onestore_plug'
-//include ':libraries-src:gama_cafe_plug'
-//include ':libraries-src:gama-pay'
-//include ':libraries-src:star-ads'
-//include ':libraries-src:GamaBaseLib'
-//include ':libraries-src:gama_ads_plug'
-//include ':youzu'
-//include ':gamaplatform'
-//include ':facebookSDK451'
-//include ':efunFBSocial'
-include ':AndroidUtilCode'
+include ':sdk_asset_pack'
