@@ -294,6 +294,11 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 //                    showLoginView();
 //                }
             }
+
+            @Override
+            public void accountIsExpired(String msg) {
+                ToastUtils.toast(activity,"Google account is expired, try again");
+            }
         });
     }
 
@@ -1207,6 +1212,11 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 public void failure() {
                     ToastUtils.toast(getActivity(),"Google sign in error");
                     PL.i("google sign in failure");
+                }
+
+                @Override
+                public void accountIsExpired(String msg) {
+                    ToastUtils.toast(activity,"Google account is expired, try again");
                 }
             });
         } else if(bindType == BindType.BIND_TWITTER) {

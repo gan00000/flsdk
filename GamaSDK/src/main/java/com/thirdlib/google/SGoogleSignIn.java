@@ -135,7 +135,22 @@ public class SGoogleSignIn {
 			initDialog();
 			mConnectionProgressDialog.show();
 		}
-		signInFirebase();
+		GoogleSignInAccount lastSignedInAccount = GoogleSignIn.getLastSignedInAccount(activity);
+		if (lastSignedInAccount != null && lastSignedInAccount.isExpired()){//防止token过期，服务端验证错误
+			Log.d(TAG,"lastSignedInAccount.isExpired");
+			if (mGoogleSignInClient != null) {
+				mGoogleSignInClient.signOut().addOnCompleteListener(activity,
+						new OnCompleteListener<Void>() {
+							@Override
+							public void onComplete(@NonNull Task<Void> task) {
+								Log.d(TAG,"lastSignedInAccount signOut onComplete");
+								signInFirebase();
+							}
+						});
+			}
+		}else {
+			signInFirebase();
+		}
 		isCancel = false;
 
 	}
@@ -198,7 +213,14 @@ public class SGoogleSignIn {
 				// Google Sign In was successful, authenticate with Firebase
 				GoogleSignInAccount account = task.getResult(ApiException.class);
 				Log.d(TAG, "firebaseAuthWithGoogle:" + account.getId());
-
+				if (account.isExpired()){
+					Log.d(TAG, "Google account is expired");
+					signOut();
+					if (googleSignInCallBack != null) {
+						googleSignInCallBack.accountIsExpired(account.getId());
+					}
+					return;
+				}
 				String mFullName = account.getDisplayName();
 				String mEmail = account.getEmail();
 				String id = account.getId();
@@ -308,6 +330,7 @@ public class SGoogleSignIn {
 					new OnCompleteListener<Void>() {
 						@Override
 						public void onComplete(@NonNull Task<Void> task) {
+							Log.d(TAG,"shoudong signOut onComplete");
 						}
 					});
 		}
@@ -322,6 +345,7 @@ public class SGoogleSignIn {
 				new OnCompleteListener<Void>() {
 					@Override
 					public void onComplete(@NonNull Task<Void> task) {
+						Log.d(TAG,"shoudong revokeAccess onComplete");
 					}
 				});
 	}
@@ -333,6 +357,7 @@ public class SGoogleSignIn {
 	public interface GoogleSignInCallBack{
 		void success(String id, String mFullName, String mEmail, String idTokenString);
 		void failure();
+		void accountIsExpired(String msg);
 	}
 
 
