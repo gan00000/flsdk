@@ -343,6 +343,12 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         return;
                     } else {
                         ToastUtils.toast(getActivity(), sLoginResponse.getMessage());
+                        //如果登录出错，有可能是token后端验证错误无法通过，故signOut
+                        if (SStringUtil.isEqual(sLoginResponse.getCode(), "1010") && SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GOOGLE, thirdLoginRegRequestBean.getRegistPlatform())) {
+                            if (sGoogleSignIn != null) {
+                                sGoogleSignIn.signOut();
+                            }
+                        }
                     }
                 } else {
                     ToastUtils.toast(getActivity(), R.string.py_error_occur);
@@ -758,6 +764,12 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         return;
                     } else {
                         ToastUtils.toast(getActivity(), sLoginResponse.getMessage());
+                        //如果登录出错，有可能是token后端验证错误无法通过，故signOut
+                        if (SStringUtil.isEqual(sLoginResponse.getCode(), "1010")) {
+                            if (sFacebookProxy != null) {
+                                sFacebookProxy.fbLogout(getActivity());
+                            }
+                        }
                     }
                 } else {
                     ToastUtils.toast(getActivity(), R.string.py_error_occur);
