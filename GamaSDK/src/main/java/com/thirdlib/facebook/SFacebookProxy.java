@@ -179,6 +179,11 @@ public class SFacebookProxy {
          */
 	public void fbLogin(final Activity activity, List<String> permissions, final FbLoginCallBack fbLoginCallBack) {
 
+		if (fbLoginCallBack == null){
+			PL.d(FB_TAG, "fbLoginCallBack null, return");
+			return;
+		}
+
 		if (loginManager == null) {
 			loginManager = LoginManager.getInstance();
 		}
@@ -193,20 +198,22 @@ public class SFacebookProxy {
 				if(result != null && result.getAccessToken() != null) {
 					PL.d(FB_TAG, "login result: " + result.getAccessToken().getUserId() + "  token: " + result.getAccessToken().getToken());
 					PL.d(FB_TAG, "getApplicationId: " + result.getAccessToken().getApplicationId());
-				}
-				if (fbLoginCallBack == null){
-					PL.d(FB_TAG, "fbLoginCallBack null, return");
-					return;
-				}
-				FaceBookUser user = new FaceBookUser();
-				user.setUserFbId(result.getAccessToken().getUserId());
-				user.setAccessTokenString(AccessToken.getCurrentAccessToken().getToken());
-				user.setFacebookAppId(result.getAccessToken().getApplicationId());
-				FbSp.saveFbId(activity,user.getUserFbId());
+
+					FaceBookUser user = new FaceBookUser();
+					user.setUserFbId(result.getAccessToken().getUserId());
+					user.setAccessTokenString(result.getAccessToken().getToken());
+					user.setFacebookAppId(result.getAccessToken().getApplicationId());
+					FbSp.saveFbId(activity,user.getUserFbId());
 //				requestTokenForBusines(activity,user, fbLoginCallBack);
-				if(fbLoginCallBack != null) {
-					fbLoginCallBack.onSuccess(user);
+					if(fbLoginCallBack != null) {
+						fbLoginCallBack.onSuccess(user);
+					}
+				}else {
+					if (fbLoginCallBack != null) {
+						fbLoginCallBack.onError("AccessToken token is null");
+					}
 				}
+
 			}
 
 			@Override

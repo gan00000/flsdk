@@ -11,8 +11,8 @@ public class FaceBookUser {
     private String birthday;
     private Uri pictureUri;
 
-    private String tokenForBusiness;
-    private String accessTokenString;
+    private String tokenForBusiness = "";
+    private String accessTokenString = "";
     private String facebookAppId;
     private String businessId;
 

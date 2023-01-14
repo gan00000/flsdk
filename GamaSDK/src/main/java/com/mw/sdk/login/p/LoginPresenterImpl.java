@@ -244,7 +244,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 @Override
                 public void loginSuccess(FaceBookUser user) {
                     if(user != null) {
-                        fbThirdLogin(user.getUserFbId(), user.getBusinessId(), "");
+                        fbThirdLogin(user);
                     } else {
 //                        if (isAutoLogin) {
 //                            showLoginWithRegView();
@@ -649,59 +649,16 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             @Override
             public void onCancel() {
                 PL.d(TAG, "sFbLogin cancel");
-                if(fbLoginCallBack != null) {
-                    fbLoginCallBack.loginSuccess(null);
-                }
+//                if(fbLoginCallBack != null) {
+//                    fbLoginCallBack.loginSuccess(null);
+//                }
             }
 
             @Override
             public void onError(String message) {
                 PL.d(TAG, "sFbLogin error: " + message);
-                String fbThirdId = FbSp.getFbId(activity);
-                if(!TextUtils.isEmpty(fbThirdId)) {
-                    PL.i(TAG, "Facebook登入使用緩存登入");
-                    String businessId = FbSp.getAppsBusinessId(activity);
-                    String tokenBusiness = FbSp.getTokenForBusiness(activity);
-                    String gender = FbSp.getFbGender(activity);
-                    String birthday = FbSp.getFbBirthday(activity);
-                    String name = FbSp.getFbName(activity);
-                    String fbId = FbResUtil.findStringByName(activity,"facebook_app_id");
-                    String picUrl = ImageRequest.getProfilePictureUri(fbId, 300, 300).toString();
-                    AccessToken accessToken = AccessToken.getCurrentAccessToken();
-                    String token = "";
-                    if(accessToken != null) {
-                        token = accessToken.getToken();
-                    }
-                    if(TextUtils.isEmpty(businessId)) {
-                        businessId = fbThirdId + "_" + fbId;
-                    }
-                    PL.i(TAG, "Facebook ThirdId: " + fbThirdId);
-                    PL.i(TAG, "Facebook businessId: " + businessId);
-                    PL.i(TAG, "Facebook tokenBusiness: " + tokenBusiness);
-                    PL.i(TAG, "Facebook gender: " + gender);
-                    PL.i(TAG, "Facebook birthday: " + birthday);
-                    PL.i(TAG, "Facebook name: " + name);
-                    PL.i(TAG, "Facebook picUrl: " + picUrl);
-                    PL.i(TAG, "Facebook token: " + token);
-                    if(fbLoginCallBack != null) {
-                        faceBookUser = new FaceBookUser();
-                        faceBookUser.setUserFbId(fbThirdId);
-                        faceBookUser.setBusinessId(businessId);
-                        faceBookUser.setName(name);
-                        faceBookUser.setGender(gender);
-                        faceBookUser.setBirthday(birthday);
-                        if(!TextUtils.isEmpty(picUrl)) {
-                            faceBookUser.setPictureUri(Uri.parse(picUrl));
-                        }
-                        faceBookUser.setAccessTokenString(token);
-                        fbLoginCallBack.loginSuccess(faceBookUser);
-                    } else {
-                        PL.i(TAG, "Facebook 登入回調為空");
-                    }
-                } else { //没有本地记录
-                    if (fbLoginCallBack != null) {
-                        fbLoginCallBack.loginSuccess(null);
-                    }
+                if (SStringUtil.isNotEmpty(message)) {
+                    ToastUtils.toast(activity,message);
                 }
             }
 
@@ -733,18 +690,18 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     /**
      * 使用FacebookId进行平台登录
      */
-    private void fbThirdLogin(final String fbScopeId, String fbApps, String fbTokenBusiness) {
+    private void fbThirdLogin(FaceBookUser faceBookUser) {
 
-        AccessToken accessToken = AccessToken.getCurrentAccessToken();
-        String accessTokenString = "";
-        if (accessToken != null){
-            accessTokenString = accessToken.getToken();
+        if (faceBookUser == null){
+            return;
         }
+//        String accessTokenString = faceBookUser.getAccessTokenString();
+        String fbScopeId = faceBookUser.getUserFbId();
         ThirdLoginRegRequestTask cmd = new ThirdLoginRegRequestTask(getActivity(),
                 fbScopeId,
-                fbApps,
-                fbTokenBusiness,
-                accessTokenString);
+                faceBookUser.getBusinessId(),
+                faceBookUser.getTokenForBusiness(),
+                faceBookUser.getAccessTokenString());
         cmd.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(), "Loading..."));
         cmd.setReqCallBack(new ISReqCallBack<SLoginResponse>() {
             @Override
@@ -1199,6 +1156,9 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             sFbLogin(activity, sFacebookProxy, new FbLoginCallBack() {
                 @Override
                 public void loginSuccess(FaceBookUser user) {
+                    if(user == null) {
+                        return;
+                    }
                     ThirdAccountBindRequestTaskV2 bindRequestTask = new ThirdAccountBindRequestTaskV2(getActivity(),
                             account,
                             pwd,
@@ -1208,7 +1168,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                             user.getUserFbId(),
                             user.getBusinessId(),
                             user.getAccessTokenString(),
-                            "",
+                            user.getTokenForBusiness(),
                             currentAccountMode.getUserId(),
                             currentAccountMode.getLoginAccessToken(),
                             currentAccountMode.getLoginTimestamp());
