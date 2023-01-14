@@ -171,9 +171,9 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         ThirdLoginRegRequestBean thirdLoginRegRequestBean = new ThirdLoginRegRequestBean(activity);
                         thirdLoginRegRequestBean.setThirdPlatId(id);
                         thirdLoginRegRequestBean.setRegistPlatform(SLoginType.LOGIN_TYPE_TWITTER);
-                        thirdLoginRegRequestBean.setGoogleClientId(ResConfig.getGoogleClientId(activity));
-                        thirdLoginRegRequestBean.setGoogleIdToken(idTokenString);
-                        thirdPlatLogin(activity, thirdLoginRegRequestBean);
+//                        thirdLoginRegRequestBean.setGoogleClientId(ResConfig.getGoogleClientId(activity));
+//                        thirdLoginRegRequestBean.setGoogleIdToken(idTokenString);
+//                        thirdPlatLogin(activity, thirdLoginRegRequestBean);
                     }
                 }
 
