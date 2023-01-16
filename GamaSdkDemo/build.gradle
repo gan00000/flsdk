@@ -57,6 +57,13 @@ android {
             keyPassword 'mw999000'
         }
 
+        signv3_3 {
+            storeFile file('../signkey/sdkv3_3_key.jks') //正式签名，以后使用
+            storePassword 'mw111000'
+            keyAlias 'mwv3'
+            keyPassword 'mw111000'
+        }
+
         release_v2 {
             storeFile file('../signkey/sdkv2_key.jks') //正式签名，以后使用
             storePassword 'mw888000'
