@@ -10,35 +10,35 @@ import android.content.Context;
  */
 public class AdsRequestBean extends SSdkBaseRequestBean {
 
-    private String referrerClickTime;
-    private String appInstallTime;
-    private boolean instantExperienceLaunched;
+//    private String referrerClickTime;
+//    private String appInstallTime;
+//    private boolean instantExperienceLaunched;
 
     public AdsRequestBean(Context context) {
         super(context);
     }
 
-    public String getReferrerClickTime() {
-        return referrerClickTime;
-    }
-
-    public void setReferrerClickTime(String referrerClickTime) {
-        this.referrerClickTime = referrerClickTime;
-    }
-
-    public String getAppInstallTime() {
-        return appInstallTime;
-    }
-
-    public void setAppInstallTime(String appInstallTime) {
-        this.appInstallTime = appInstallTime;
-    }
-
-    public boolean isInstantExperienceLaunched() {
-        return instantExperienceLaunched;
-    }
-
-    public void setInstantExperienceLaunched(boolean instantExperienceLaunched) {
-        this.instantExperienceLaunched = instantExperienceLaunched;
-    }
+//    public String getReferrerClickTime() {
+//        return referrerClickTime;
+//    }
+//
+//    public void setReferrerClickTime(String referrerClickTime) {
+//        this.referrerClickTime = referrerClickTime;
+//    }
+//
+//    public String getAppInstallTime() {
+//        return appInstallTime;
+//    }
+//
+//    public void setAppInstallTime(String appInstallTime) {
+//        this.appInstallTime = appInstallTime;
+//    }
+//
+//    public boolean isInstantExperienceLaunched() {
+//        return instantExperienceLaunched;
+//    }
+//
+//    public void setInstantExperienceLaunched(boolean instantExperienceLaunched) {
+//        this.instantExperienceLaunched = instantExperienceLaunched;
+//    }
 }

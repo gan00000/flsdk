@@ -25,6 +25,7 @@ import com.mw.base.cfg.ResConfig;
 import com.mw.base.utils.SdkUtil;
 import com.mw.sdk.BuildConfig;
 import com.mw.sdk.R;
+import com.mw.sdk.api.Request;
 import com.mw.sdk.login.model.response.SLoginResponse;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.google.SGoogleProxy;
@@ -57,7 +58,7 @@ public class SdkEventLogger {
             }
 
             SFacebookProxy.initFbSdk(activity.getApplicationContext());
-
+            sendEventToSever(activity,EventConstant.EventName.APP_OPEN.name());
             trackingWithEventName(activity, EventConstant.EventName.APP_OPEN.name(), null, EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
         } catch (Exception e) {
             e.printStackTrace();
@@ -78,6 +79,7 @@ public class SdkEventLogger {
             Map<String, Object> eventValue = new HashMap<String, Object>();
             eventValue.put(EventConstant.ParameterName.USER_ID, userId);
             String eventName = EventConstant.EventName.LOGIN_SUCCESS.name();
+            sendEventToSever(activity,eventName);
             trackingWithEventName(activity,eventName,eventValue, EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
 
         } catch (Exception e) {
@@ -99,6 +101,7 @@ public class SdkEventLogger {
             Map<String, Object> eventValue = new HashMap<String, Object>();
             eventValue.put(EventConstant.ParameterName.USER_ID, userId);
             String eventName = EventConstant.EventName.REGISTER_SUCCESS.name();
+            sendEventToSever(activity, EventConstant.EventName.REGISTER_SUCCESS.name());
             trackingWithEventName(activity,eventName,eventValue,EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
             trackingWithEventName(activity, AppEventsConstants.EVENT_NAME_COMPLETED_REGISTRATION,eventValue,EventConstant.AdType.AdTypeFacebook);
             trackingWithEventName(activity, "COMPLETE_REGISTRATION_AND",eventValue,EventConstant.AdType.AdTypeFacebook);
@@ -295,6 +298,14 @@ public class SdkEventLogger {
         }).start();
     }
 
+    //发送事件到服务器记录，只是发一次
+    public static void sendEventToSever(Context context, String eventName){
+        try {
+            Request.sendEventToServer(context, eventName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * 本地保存的安装上报标识
      */
@@ -311,7 +322,7 @@ public class SdkEventLogger {
         adsInstallActivation(context);
     }
 
-    public static void adsInstallActivation(final Context context) {
+    private static void adsInstallActivation(final Context context) {
 //        GsInstallReferrer.initReferrerClient(context, new GsInstallReferrer.GsInstallReferrerCallback() {
 //            @Override
 //            public void onResult(GsInstallReferrerBean bean) {

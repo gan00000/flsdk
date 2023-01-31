@@ -7,8 +7,12 @@ import com.core.base.bean.BaseReqeustBean;
 import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.ISReqCallBack;
 import com.core.base.callback.SFCallBack;
+import com.core.base.request.SimpleHttpRequest;
+import com.core.base.utils.PL;
+import com.core.base.utils.SPUtil;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
+import com.mw.base.bean.AdsRequestBean;
 import com.mw.base.bean.SGameBaseRequestBean;
 import com.mw.base.bean.SLoginType;
 import com.mw.base.cfg.ResConfig;
@@ -21,6 +25,9 @@ import com.mw.sdk.login.model.request.AccountBindInGameRequestBean;
 import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.out.ISdkCallBack;
 import com.mw.sdk.utils.DialogUtil;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Request {
 
@@ -232,5 +239,73 @@ public class Request {
 
         });
         baseLoginRequestTask.excute(SLoginResponse.class);
+    }
+
+    public static void sendEventToServer(final Context context, String eventName) throws Exception {
+
+        if (SStringUtil.isEmpty(eventName)){
+            return;
+        }
+
+        String sp_key_event = "EVENT_KEY_" + eventName;
+
+        if (SStringUtil.isNotEmpty(SPUtil.getSimpleString(context,SdkUtil.SDK_SP_FILE,sp_key_event))){
+            PL.i("sendEventToServer exist eventname=" + eventName);
+            return;
+        }
+
+        final SGameBaseRequestBean sGameBaseRequestBean = new SGameBaseRequestBean(context);
+
+        Map<String, String> requestParams = new HashMap<String, String>();
+        requestParams.put("eventName", eventName);
+        requestParams.put("appTime", sGameBaseRequestBean.getTimestamp());
+        requestParams.put("gameCode",sGameBaseRequestBean.getGameCode());
+        requestParams.put("packageName",sGameBaseRequestBean.getPackageName());
+        requestParams.put("uniqueId",sGameBaseRequestBean.getUniqueId());
+        requestParams.put("system",sGameBaseRequestBean.getSystemVersion());
+        requestParams.put("platform",sGameBaseRequestBean.getPlatform());
+        requestParams.put("deviceType",sGameBaseRequestBean.getDeviceType());
+        requestParams.put("gameLanguage",sGameBaseRequestBean.getGameLanguage());
+        requestParams.put("versionCode",sGameBaseRequestBean.getVersionCode());
+        requestParams.put("versionName",sGameBaseRequestBean.getVersionName());
+        requestParams.put("androidId",sGameBaseRequestBean.getAndroidId());
+        requestParams.put("adId",sGameBaseRequestBean.getAdvertisingId());
+
+        sGameBaseRequestBean.setRequestParamsMap(requestParams);
+        sGameBaseRequestBean.setRequestUrl(ResConfig.getLogPreferredUrl(context)); //日志记录
+        sGameBaseRequestBean.setRequestMethod("sdk/event/log");
+
+//        if (bean != null) {
+//            adsRequestBean.setAppInstallTime(bean.getAppInstallTime());
+//            adsRequestBean.setReferrerClickTime(bean.getReferrerClickTime());
+//            adsRequestBean.setReferrer(bean.getReferrerUrl());
+//        }
+        SimpleHttpRequest simpleHttpRequest = new SimpleHttpRequest();
+        simpleHttpRequest.setGetMethod(true,true);
+        simpleHttpRequest.setBaseReqeustBean(sGameBaseRequestBean);
+        simpleHttpRequest.setReqCallBack(new ISReqCallBack<BaseResponseModel>() {
+            @Override
+            public void success(BaseResponseModel responseModel, String rawResult) {
+                PL.i("sendEventToServer success eventname=" + eventName);
+                SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE, sp_key_event, eventName);
+
+            }
+
+            @Override
+            public void timeout(String code) {
+                PL.i("sendEventToServer timeout eventname=" + eventName);
+            }
+
+            @Override
+            public void noData() {
+                PL.i("sendEventToServer success eventname=" + eventName);
+                SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE, sp_key_event, eventName);
+            }
+
+            @Override
+            public void cancel() {
+            }
+        });
+        simpleHttpRequest.excute();
     }
 }

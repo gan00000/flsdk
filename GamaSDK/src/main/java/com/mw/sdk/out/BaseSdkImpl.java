@@ -555,6 +555,7 @@ public class BaseSdkImpl implements IMWSDK {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                SdkEventLogger.sendEventToSever(activity, eventName);
                 SdkEventLogger.trackingWithEventName(activity, eventName, null, EventConstant.AdType.AdTypeAllChannel);
             }
         });
@@ -570,6 +571,7 @@ public class BaseSdkImpl implements IMWSDK {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                SdkEventLogger.sendEventToSever(activity, eventName.name());
                 SdkEventLogger.trackingWithEventName(activity, eventName.name(), map, EventConstant.AdType.AdTypeAllChannel);
             }
         });

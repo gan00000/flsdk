@@ -141,6 +141,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 
         iLoginPresenter.autoLogin(activity);
 
+        SdkEventLogger.sendEventToSever(activity,EventConstant.EventName.OPEN_LOGIN_SCREEN.name());
         SdkEventLogger.trackingWithEventName(getActivity(), EventConstant.EventName.OPEN_LOGIN_SCREEN.name());
     }
 
