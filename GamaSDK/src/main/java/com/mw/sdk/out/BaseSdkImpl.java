@@ -105,7 +105,7 @@ public class BaseSdkImpl implements IMWSDK {
         //获取Google 广告ID
         SdkEventLogger.registerGoogleAdId(activity);
 
-        Localization.gameLanguage(activity, gameLanguage);
+//        Localization.gameLanguage(activity, gameLanguage);
         //清除上一次登录成功的返回值
         //GamaUtil.saveSdkLoginData(activity, "");
 

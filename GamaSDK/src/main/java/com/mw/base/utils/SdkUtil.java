@@ -987,6 +987,9 @@ public class SdkUtil {
             if (language.equals("zh") && country.equals("HK")){
                 return SGameLanguage.zh_TW.getLanguage();
             }
+            if (language.equals("vi")){
+                return SGameLanguage.vi_VN.getLanguage();
+            }
             //return SGameLanguage.zh_TW.getLanguage();//默认为繁体
         }
         //主动通过配置文件设置的默认语言
