@@ -1375,13 +1375,11 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     public void starpyAccountLogin(Activity activity, String account, String password, String vfcode, boolean isSaveAccount) {
         this.mActivity = activity;
 
-        account = account.trim();
-        password = password.trim();
         if (TextUtils.isEmpty(account)) {
             ToastUtils.toast(getContext(), R.string.py_account_empty);
             return;
         }
-
+        account = account.trim();
         if (!SdkUtil.checkAccount(account)) {
             ToastUtils.toast(activity,R.string.text_account_format);
             return;
@@ -1390,6 +1388,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             ToastUtils.toast(getActivity(), R.string.py_password_empty);
             return;
         }
+        password = password.trim();
         if (!SdkUtil.checkPassword(password)) {
             ToastUtils.toast(activity,R.string.text_pwd_format);
             return;

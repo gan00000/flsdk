@@ -850,6 +850,15 @@ public class BaseSdkImpl implements IMWSDK {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
+
+                if (SStringUtil.isEmpty(areaCode)) {
+                    ToastUtils.toast(activity,R.string.text_area_code_not_empty);
+                    return;
+                }
+                if (SStringUtil.isEmpty(telephone)) {
+                    ToastUtils.toast(activity,R.string.text_phone_not_empty);
+                    return;
+                }
                 Request.sendVfCode(activity, false, areaCode, telephone, sfCallBack);
             }
         });
@@ -861,6 +870,20 @@ public class BaseSdkImpl implements IMWSDK {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
+
+                if (SStringUtil.isEmpty(areaCode)) {
+                    ToastUtils.toast(activity,R.string.text_area_code_not_empty);
+                    return;
+                }
+                if (SStringUtil.isEmpty(telephone)) {
+                    ToastUtils.toast(activity,R.string.text_phone_not_empty);
+                    return;
+                }
+                if (SStringUtil.isEmpty(vfCode)) {
+                    ToastUtils.toast(activity,R.string.py_vfcode_empty);
+                    return;
+                }
+
                 Request.bindPhone(activity, false, areaCode, telephone, vfCode, sfCallBack);
             }
         });
@@ -868,6 +891,26 @@ public class BaseSdkImpl implements IMWSDK {
 
     @Override
     public void requestUpgradeAccount(Activity activity, String account, String pwd, SFCallBack sfCallBack ) {
+
+        if (TextUtils.isEmpty(account)) {
+            ToastUtils.toast(activity, R.string.py_account_empty);
+            return;
+        }
+        account = account.trim();
+        if (!SdkUtil.checkAccount(account)) {
+            ToastUtils.toast(activity,R.string.text_account_format);
+            return;
+        }
+
+        if (TextUtils.isEmpty(pwd)) {
+            ToastUtils.toast(activity, R.string.py_password_empty);
+            return;
+        }
+        pwd = pwd.trim();
+        if (!SdkUtil.checkPassword(pwd)) {
+            ToastUtils.toast(activity,R.string.text_pwd_format);
+            return;
+        }
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {

@@ -131,11 +131,11 @@ public class SStringUtil {
 	 * @param email
 	 * @return boolean
 	 */
-	public static boolean email(String email) {
-		if (isEmpty(email))
-			return false;
-		return email.matches("^[\\w-]+(\\.[\\w-]+)*@[\\w-]+(\\.[\\w-]+)+$");
-	}
+//	public static boolean email(String email) {
+//		if (isEmpty(email))
+//			return false;
+//		return email.matches("^[\\w-]+(\\.[\\w-]+)*@[\\w-]+(\\.[\\w-]+)+$");
+//	}
 
 	/**
 	 * 帐号验证
@@ -143,11 +143,11 @@ public class SStringUtil {
 	 * @param loginName
 	 * @return boolean
 	 */
-	public static boolean loginName(String loginName) {
-		if (isEmpty(loginName))
-			return false;
-		return loginName.matches("[\\w_]{1,50}");
-	}
+//	public static boolean loginName(String loginName) {
+//		if (isEmpty(loginName))
+//			return false;
+//		return loginName.matches("[\\w_]{1,50}");
+//	}
 
 	/**
 	 * 将空字符串(null)转换为 ""

@@ -592,7 +592,10 @@ public class SdkUtil {
             return false;
         }
 
-        if (account.contains("@")){//简单检查只是邮箱就行
+//        if (account.contains("@")){//简单检查只是邮箱就行
+//            return true;
+//        }
+        if (account.matches("^.+@\\w+\\..+$")){//简单检查只是邮箱就行
             return true;
         }
         return false;
