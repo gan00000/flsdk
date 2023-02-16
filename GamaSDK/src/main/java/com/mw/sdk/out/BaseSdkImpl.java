@@ -896,8 +896,8 @@ public class BaseSdkImpl implements IMWSDK {
             ToastUtils.toast(activity, R.string.py_account_empty);
             return;
         }
-        account = account.trim();
-        if (!SdkUtil.checkAccount(account)) {
+        final String account_temp = account.trim();
+        if (!SdkUtil.checkAccount(account_temp)) {
             ToastUtils.toast(activity,R.string.text_account_format);
             return;
         }
@@ -906,15 +906,15 @@ public class BaseSdkImpl implements IMWSDK {
             ToastUtils.toast(activity, R.string.py_password_empty);
             return;
         }
-        pwd = pwd.trim();
-        if (!SdkUtil.checkPassword(pwd)) {
+        final String pwd_temp = pwd.trim();
+        if (!SdkUtil.checkPassword(pwd_temp)) {
             ToastUtils.toast(activity,R.string.text_pwd_format);
             return;
         }
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Request.bindAcountInGame(activity,false,SdkUtil.getPreviousLoginType(activity), account, pwd, sfCallBack);
+                Request.bindAcountInGame(activity,false,SdkUtil.getPreviousLoginType(activity), account_temp, pwd_temp, sfCallBack);
             }
         });
     }
