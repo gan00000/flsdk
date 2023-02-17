@@ -110,7 +110,7 @@ public class AccountBindPhoneLayout extends SLoginBaseRelativeLayout {
         et_input_phone_number_2 = contentView.findViewById(R.id.et_input_phone_number_2);
         et_input_phone_number_2.setEnabled(false);
 
-        List<PhoneInfo> phoneInfos = SdkUtil.getPhoneInfo(getContext());
+        List<PhoneInfo> phoneInfos = SdkUtil.getPhoneInfoList(getContext());
         if (phoneInfos != null && !phoneInfos.isEmpty()){
             currentPhoneInfo = phoneInfos.get(0);
             tv_area_code.setText(currentPhoneInfo.getValue());

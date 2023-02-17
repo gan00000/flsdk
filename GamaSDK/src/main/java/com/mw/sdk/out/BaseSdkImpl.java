@@ -32,6 +32,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.play.core.review.ReviewInfo;
 import com.google.android.play.core.review.ReviewManager;
 import com.google.android.play.core.review.ReviewManagerFactory;
+import com.mw.base.bean.PhoneInfo;
 import com.mw.base.bean.SGameBaseRequestBean;
 import com.mw.base.bean.SGameLanguage;
 import com.mw.base.bean.SLoginType;
@@ -859,6 +860,13 @@ public class BaseSdkImpl implements IMWSDK {
                     ToastUtils.toast(activity,R.string.text_phone_not_empty);
                     return;
                 }
+                PhoneInfo phoneInfo = SdkUtil.getPhoneInfoByAreaCode(activity,areaCode);
+                if (phoneInfo != null){
+                    if (!telephone.matches(phoneInfo.getPattern())){
+                        ToastUtils.toast(activity,R.string.text_phone_not_match);
+                        return;
+                    }
+                }
                 Request.sendVfCode(activity, false, areaCode, telephone, sfCallBack);
             }
         });
@@ -882,6 +890,13 @@ public class BaseSdkImpl implements IMWSDK {
                 if (SStringUtil.isEmpty(vfCode)) {
                     ToastUtils.toast(activity,R.string.py_vfcode_empty);
                     return;
+                }
+                PhoneInfo phoneInfo = SdkUtil.getPhoneInfoByAreaCode(activity,areaCode);
+                if (phoneInfo != null){
+                    if (!telephone.matches(phoneInfo.getPattern())){
+                        ToastUtils.toast(activity,R.string.text_phone_not_match);
+                        return;
+                    }
                 }
 
                 Request.bindPhone(activity, false, areaCode, telephone, vfCode, sfCallBack);

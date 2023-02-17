@@ -948,7 +948,7 @@ public class SdkUtil {
         return false;
     }
 
-    public static List<PhoneInfo> getPhoneInfo(Context context){
+    public static List<PhoneInfo> getPhoneInfoList(Context context){
 
         String areaJson = getAreaCodeInfo(context);//先读取远程下载
         if (SStringUtil.isEmpty(areaJson)){
@@ -961,6 +961,26 @@ public class SdkUtil {
         PhoneInfo[] areaBeanList = gson.fromJson(areaJson, PhoneInfo[].class);
         List<PhoneInfo> phoneInfos = Arrays.asList(areaBeanList);
         return phoneInfos;
+    }
+
+    public static PhoneInfo getPhoneInfoByAreaCode(Context context, String areaCode){ //通过区号获取
+        if (SStringUtil.isEmpty(areaCode)){
+            return null;
+        }
+        areaCode = areaCode.trim();
+        if (areaCode.startsWith("+")){
+            areaCode = areaCode.replace("+","");
+        }
+        List<PhoneInfo> phoneInfos = getPhoneInfoList(context);
+        if (phoneInfos == null || phoneInfos.isEmpty()){
+            return null;
+        }
+        for(PhoneInfo phoneInfo : phoneInfos){
+            if (areaCode.equals(phoneInfo.getValue())){
+                return phoneInfo;
+            }
+        }
+        return null;
     }
 
     private static final String KEY_AREA_CODE_INFO = "KEY_AREA_CODE_INFO";

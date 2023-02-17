@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 
-import com.core.base.utils.FileUtil;
-import com.google.gson.Gson;
 import com.mw.base.bean.PhoneInfo;
 import com.mw.base.utils.SdkUtil;
 
@@ -33,7 +31,7 @@ public class PhoneAreaCodeDialogHelper {
         this.areaCodeSelectCallback = areaCodeSelectCallback;
 
         if(areaBeanList == null || areaBeanList.isEmpty()) {
-            areaBeanList = SdkUtil.getPhoneInfo(activity);
+            areaBeanList = SdkUtil.getPhoneInfoList(activity);
             showAreaDialog();
         } else {
             showAreaDialog();
