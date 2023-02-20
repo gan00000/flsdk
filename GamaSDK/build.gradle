@@ -65,6 +65,11 @@ android {
             resValue "string", "sdk_inner_version", "v3"
         }
 
+        sdk5 {//第4套
+            flavorDimensions "1"
+            resValue "string", "sdk_inner_version", "v2"
+        }
+
     }
 }
 
