@@ -1,42 +1,12 @@
 package com.mw.base.utils;
 
-import android.content.Context;
-import android.os.Build;
-import android.text.Editable;
-import android.text.Selection;
-import android.text.TextUtils;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.core.base.cipher.DESCipher;
-import com.core.base.utils.ApkInfoUtil;
-import com.core.base.utils.FileUtil;
-import com.core.base.utils.JsonUtil;
-import com.core.base.utils.PL;
-import com.core.base.utils.SPUtil;
 import com.core.base.utils.SStringUtil;
-import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
-import com.mw.base.bean.PhoneInfo;
-import com.mw.base.bean.SGameLanguage;
 import com.mw.base.bean.SLoginType;
-import com.mw.base.cfg.ConfigBean;
-import com.mw.base.cfg.ResConfig;
 import com.mw.sdk.R;
 import com.mw.sdk.login.model.AccountModel;
-import com.mw.sdk.login.model.response.SLoginResponse;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Locale;
-import java.util.UUID;
 
 /**
  * Created by gan on 2017/2/7.
@@ -46,21 +16,21 @@ public class SdkVersionUtil {
 
 
     public static void setAccountWithIcon(AccountModel accountModel, ImageView imageView, EditText editText){
-        int imageResId = R.mipmap.mmplaygame_ac_login;
+        int imageResId = R.mipmap.img_persion_bg;
         String showName = accountModel.getUserId();//accountModel.getThirdAccount();
 //        if (SStringUtil.isEmpty(showName)){
 //            showName = accountModel.getUserId();
 //        }
         if (SLoginType.LOGIN_TYPE_FB.equals(accountModel.getLoginType())){
-            imageResId = R.mipmap.mmplaygame_fb_img;
+            imageResId = R.mipmap.icon_fb_2;
         }else  if (SLoginType.LOGIN_TYPE_GOOGLE.equals(accountModel.getLoginType())){
-            imageResId = R.mipmap.mmplaygame_gp_img;
+            imageResId = R.mipmap.icon_gp_2;
         }else  if (SLoginType.LOGIN_TYPE_GUEST.equals(accountModel.getLoginType())){
-            imageResId = R.mipmap.mmplaygame_vister_login;
+            imageResId = R.mipmap.img_guest_2;
         }else if (SLoginType.LOGIN_TYPE_LINE.equals(accountModel.getLoginType())){
-            imageResId = R.mipmap.mmplaygame_le_login;
+            imageResId = R.mipmap.icon_line_2;
         }else if (SLoginType.LOGIN_TYPE_MG.equals(accountModel.getLoginType())){
-            imageResId = R.mipmap.mmplaygame_ac_login;
+            imageResId = R.mipmap.img_persion_bg;
             showName = accountModel.getAccount();
         }
 

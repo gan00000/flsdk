@@ -159,7 +159,7 @@ public class SDKInputEditTextView extends RelativeLayout {
         switch (inputType){
 
             case SDKInputType_Account:
-                iconId = R.mipmap.mmplaygame_account_icon;
+                iconId = R.mipmap.im_persion_bg_2;
                 labName = getResources().getString(R.string.py_account);
                 hint = getResources().getString(R.string.py_register_account_hit);
                 eyeImageViewLayout.setVisibility(View.GONE);
@@ -167,7 +167,7 @@ public class SDKInputEditTextView extends RelativeLayout {
                 break;
 
             case SDKInputType_Password:
-                iconId = R.mipmap.mmplaygame_lock_icon3;
+                iconId = R.mipmap.img_lock_pwd_able;
                 labName = getResources().getString(R.string.py_password);
                 hint = getResources().getString(R.string.py_register_password_hit);
                 eyeImageViewLayout.setVisibility(View.VISIBLE);
@@ -176,7 +176,7 @@ public class SDKInputEditTextView extends RelativeLayout {
                 break;
 
             case SDKInputType_Password_Again:
-                iconId = R.mipmap.mmplaygame_lock_icon3;
+                iconId = R.mipmap.img_lock_pwd_able;
                 labName = getResources().getString(R.string.py_password);
                 hint = getResources().getString(R.string.text_input_new_pwd_confire);
                 eyeImageViewLayout.setVisibility(View.VISIBLE);
@@ -185,7 +185,7 @@ public class SDKInputEditTextView extends RelativeLayout {
                 break;
 
             case SDKInputType_Old_Password:
-                iconId = R.mipmap.mmplaygame_lock_icon3;
+                iconId = R.mipmap.img_lock_pwd_able;
                 labName = getResources().getString(R.string.py_old_pwd);
                 hint = getResources().getString(R.string.py_input_old_password);
                 eyeImageViewLayout.setVisibility(View.VISIBLE);
@@ -193,7 +193,7 @@ public class SDKInputEditTextView extends RelativeLayout {
                 adjustTvTextSize();
                 break;
             case SDKInputType_New_Password:
-                iconId = R.mipmap.mmplaygame_lock_icon3;
+                iconId = R.mipmap.img_lock_pwd_able;
                 labName = getResources().getString(R.string.py_new_pwd);
                 hint = getResources().getString(R.string.text_input_new_pwd);
                 eyeImageViewLayout.setVisibility(View.VISIBLE);
@@ -202,7 +202,7 @@ public class SDKInputEditTextView extends RelativeLayout {
                 break;
 
             case SDKInputType_Vf_Code:
-                iconId = R.mipmap.mmplaygame_account_icon;
+                iconId = R.mipmap.im_persion_bg_2;
                 editTextInputType = InputType.TYPE_CLASS_NUMBER;
                 eyeImageViewLayout.setVisibility(View.GONE);
                 iconImageView.setVisibility(View.GONE);
@@ -231,7 +231,7 @@ public class SDKInputEditTextView extends RelativeLayout {
             inputEditText.setTypeface(Typeface.DEFAULT);
             inputEditText.setEnabled(true);
             inputEditText.setTextColor(getContext().getResources().getColor(R.color.white_c));
-            iconImageView.setImageResource(R.mipmap.mmplaygame_lock_icon3);
+            iconImageView.setImageResource(R.mipmap.img_lock_pwd_able);
             eyeImageView.setVisibility(VISIBLE);
 
         }else{
@@ -242,7 +242,7 @@ public class SDKInputEditTextView extends RelativeLayout {
             inputEditText.setTypeface(Typeface.DEFAULT);
             inputEditText.setEnabled(false);
             inputEditText.setTextColor(getContext().getResources().getColor(R.color.c_848484));
-            iconImageView.setImageResource(R.mipmap.mmplaygame_lock_disable_icon);
+            iconImageView.setImageResource(R.mipmap.img_lock_pwd_disable);
 
             eyeImageView.setVisibility(GONE);
         }
