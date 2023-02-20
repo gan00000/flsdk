@@ -77,7 +77,6 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
     View historyAccountListBtn;
 
     private View fbLoginView, macLoginView, googleLoginView, lineLoginView;
-    private View other_login_layout;
 
     private AccountPopupWindow accountPopupWindow;
     private AccountModel currentAccountModel;
@@ -215,7 +214,8 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
                 }
             }
         });*/
-        other_login_layout = contentView.findViewById(R.id.ll_other_login);
+
+
         loginMainGoRegisterBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -290,11 +290,6 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
                     loginMainGoFindPwd.setTag(100);
                 }
 
-                if (versionData.isAllThirdLoginTypeHiden()){
-                    other_login_layout.setVisibility(View.GONE);
-                }else {
-                    other_login_layout.setVisibility(View.VISIBLE);
-                }
             }
         }
 

@@ -27,7 +27,7 @@
             <View
                 android:layout_width="3dp"
                 android:layout_height="14dp"
-                android:background="@color/c_FF892E"
+                android:background="@color/c_F94925"
                 />
 
             <TextView
@@ -72,7 +72,7 @@
                 android:layout_height="32dp"
                 android:background="@drawable/sdk_bg_term_close"
                 android:text="@string/text_close"
-                android:textColor="@color/c_FF892E"
+                android:textColor="@color/c_F94925"
                 android:textSize="15sp" />
 
             <Button
@@ -80,7 +80,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="32dp"
                 android:layout_marginStart="12dp"
-                android:background="@drawable/sdk_bg_term_agree"
+                android:background="@drawable/sdk_btn3_corners16_bg"
                 android:text="@string/text_i_read_agree"
                 android:textColor="@color/white_c"
                 android:textSize="15sp" />

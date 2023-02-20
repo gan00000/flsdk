@@ -248,9 +248,13 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
 
             @Override
             public void fail(Object result, String msg) {
-
+                if (result != null){
+                    SLoginResponse response = (SLoginResponse)result;
+                    toast("" + response.getMessage());
+                }
                 if (sfCallBack != null){
-                    sfCallBack.fail(null,"");
+
+//                    sfCallBack.fail(null,"");
                 }
             }
         });
