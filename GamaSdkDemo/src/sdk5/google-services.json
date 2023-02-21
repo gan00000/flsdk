@@ -1,41 +1,33 @@
 {
   "project_info": {
-    "project_number": "404975489067",
-    "project_id": "mzxq-game",
-    "storage_bucket": "mzxq-game.appspot.com"
+    "project_number": "450716949290",
+    "project_id": "tw-xlzsg-and",
+    "storage_bucket": "tw-xlzsg-and.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:404975489067:android:378630350479a1b47b9a6e",
+        "mobilesdk_app_id": "1:450716949290:android:5adc2148fb2f6de670dc53",
         "android_client_info": {
-          "package_name": "com.wanxian.mzxq"
+          "package_name": "com.wantang.xlzsg"
         }
       },
       "oauth_client": [
         {
-          "client_id": "404975489067-g5o0g8t48kvj37f7591luvrbr60dqkh0.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.wanxian.mzxq",
-            "certificate_hash": "0cead8362d5cfb6c3f80f366cf348ee7650fee1c"
-          }
-        },
-        {
-          "client_id": "404975489067-qn7ic6pgue1ll965um2ucs867uafp4se.apps.googleusercontent.com",
+          "client_id": "450716949290-ovhrq0un2o25jqhi1jfrvsifes9hi3ln.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBP5JrJaey0fpwbY-IAL3ZOHrf8b6cwvOo"
+          "current_key": "AIzaSyCAY_VvhK7XjRJ5jlnFcaQAjYVgbwRDC4M"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "404975489067-qn7ic6pgue1ll965um2ucs867uafp4se.apps.googleusercontent.com",
+              "client_id": "450716949290-ovhrq0un2o25jqhi1jfrvsifes9hi3ln.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

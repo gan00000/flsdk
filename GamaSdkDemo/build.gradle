@@ -91,31 +91,31 @@ android {
         }
 
         debug {
-            signingConfig signingConfigs.release_v4
+            signingConfig signingConfigs.release_v2
         }
     }
     productFlavors {
 
-        sdk1 {
+        QooApp {
 
-            signingConfig signingConfigs.signv3
-            applicationId "com.wanye.fszhl"
+            signingConfig signingConfigs.release_v2
+            applicationId "com.wantang.xlzsg.qooapp"  //qooapp渠道包名必须qooapp结尾
             minSdkVersion 21
             targetSdkVersion 33
-            versionCode 8
-            versionName "2.3.8"
+            versionCode 10
+            versionName "1.0"
             flavorDimensions "1"
-            resValue "string", "scheme", "fszhl"
-            resValue "string", "facebook_app_id", "1672362243138559"
-            resValue "string", "facebook_client_token", "d5b9ebb98ff9a1f67266d937f4cce980"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1672362243138559" //启用分析
-            resValue "string", "fb_login_protocol_scheme", "fb1672362243138559"
-            resValue "string", "facebook_app_name", "終末的御靈師"
-            resValue "string", "line_channelId", "1657313585"
-            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow"
+            resValue "string", "scheme", "gwsg"
+            resValue "string", "facebook_app_id", "1362551254507553"
+            resValue "string", "facebook_client_token", "0a8e2080cba4d5aa1fe9d9dd65c04e58"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1362551254507553" //启用分析
+            resValue "string", "fb_login_protocol_scheme", "fb1362551254507553"
+            resValue "string", "facebook_app_name", "鬼武三國：燼"
+            resValue "string", "line_channelId", ""
+            resValue "string", "channel_platform", "qooapp"  //渠道区分,google包设置google,apk包设置"meow",qooapp渠道apk为"qooapp"
 
             //每个游戏的demo设置 test
-            resValue "string", "sdk_name", "終末的御靈師demo"
+            resValue "string", "sdk_name", "qooapp demo"
 
         }
 
@@ -202,7 +202,7 @@ android {
             resValue "string", "facebook_client_token", "0a8e2080cba4d5aa1fe9d9dd65c04e58"
             resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1362551254507553" //启用分析
             resValue "string", "fb_login_protocol_scheme", "fb1362551254507553"
-            resValue "string", "facebook_app_name", "鬼武三國-燼"
+            resValue "string", "facebook_app_name", "鬼武三國：燼"
             resValue "string", "line_channelId", "1657882064"
             resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow"
 
@@ -224,14 +224,15 @@ android {
     namespace 'com.mw.sdk.demo'
 }
 
-repositories {
-    flatDir {
-        dirs 'libs', '../GamaSDK/libs'
-    }
-}
+//repositories {
+//    flatDir {
+//        dirs 'libs', '../GamaSDK/libs'
+//    }
+//}
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
+//    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
     implementation project(':GamaSDK')
 
 }

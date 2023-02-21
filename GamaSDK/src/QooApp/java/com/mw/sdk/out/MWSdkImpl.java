@@ -7,9 +7,9 @@ import com.mw.sdk.login.ILoginCallBack;
 import com.qooapp.opensdk.QooAppOpenSDK;
 import com.qooapp.opensdk.common.QooAppCallback;
 
-public class QooAppSdkImpl extends BaseSdkImpl {
+public class MWSdkImpl extends BaseSdkImpl {
 
-    private static final String TAG = QooAppSdkImpl.class.getSimpleName();
+    private static final String TAG = MWSdkImpl.class.getSimpleName();
 
     @Override
     public void onCreate(Activity activity) {
@@ -39,7 +39,7 @@ public class QooAppSdkImpl extends BaseSdkImpl {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-
+                qooAppLogin(activity);
             }
         });
 
