@@ -70,19 +70,25 @@ android {
             resValue "string", "sdk_inner_version", "v2"
         }
 
+        QooApp {//Qooap
+            flavorDimensions "1"
+            resValue "string", "sdk_inner_version", "v2"
+        }
+
     }
 }
 
-repositories {
-    flatDir {
-        dirs 'libs'
-    }
-}
+//repositories {
+//    flatDir {
+//        dirs 'libs'
+//    }
+//}
 
 
 dependencies {
 //    implementation fileTree(dir: 'libs', include: ['*.aar'])
-    api fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
+//    api fileTree(include: ['*.jar'], dir: 'libs')
 
     //基础库
     api 'androidx.legacy:legacy-support-v4:1.0.0'

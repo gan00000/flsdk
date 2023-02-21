@@ -84,7 +84,7 @@ public class BaseSdkImpl implements IMWSDK {
 
     private IPay iPay;
     protected IPayListener iPayListener;
-    private Activity activity;
+    protected Activity activity;
 
     private ReviewInfo reviewInfo;
 

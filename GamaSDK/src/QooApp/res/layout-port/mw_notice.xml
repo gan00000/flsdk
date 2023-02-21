@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="330dp"
+        android:layout_height="512dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/mw_bind_phone_bg"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:background="@drawable/mw_bg_notice_title"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/text_notice"
+                android:textColor="@color/white_c"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_centerInParent="true"
+
+                android:id="@+id/tv_notice_title"
+
+                />
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="14dp"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@+id/tv_notice_title"
+                android:src="@mipmap/img_arr_right"
+                android:layout_marginEnd="17dp"/>
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="14dp"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/tv_notice_title"
+                android:src="@mipmap/img_arr_left"
+                android:layout_marginStart="17dp"/>
+
+
+            <ImageView
+                android:id="@+id/iv_notice_close"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="8dp"
+                android:src="@mipmap/img_close_4" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/mw_bg_notice_web"
+            android:orientation="vertical">
+
+            <com.mw.sdk.SWebViewLayout
+                android:id="@+id/svl_notice_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>
