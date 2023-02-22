@@ -82,35 +82,6 @@ public class MainActivity extends Activity {
         //在游戏Activity的onCreate生命周期中调用
         mIMWSDK.onCreate(this);
 
-//        this.getWindow().setSystemGestureExclusionRects();
-
-//        demo_language.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this)
-//                        .setItems(new String[]{"繁中", "日语", "韩语"}, new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                SGameLanguage language = null;
-//                                switch (which) {
-//                                    case 0:
-//                                        language = SGameLanguage.zh_TW;
-//                                        break;
-//                                    case 1:
-//                                        language = SGameLanguage.ja_JP;
-//                                        break;
-//                                    case 2:
-//                                        language = SGameLanguage.ko_KR;
-//                                        break;
-//                                }
-//                                IFLSDK.setGameLanguage(MainActivity.this, language);
-//                            }
-//                        })
-//                        .setTitle("选择语言");
-//                builder.create().show();
-//            }
-//        });
-
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -445,7 +416,6 @@ public class MainActivity extends Activity {
             }
         });
 
-        AppUtil.hideActivityBottomBar(this);
     }
 
     @Override
