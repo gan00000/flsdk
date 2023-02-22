@@ -79,7 +79,7 @@ public class SBaseDialog extends Dialog {
         //设置窗口宽度为充满全屏
         lp.width = WindowManager.LayoutParams.MATCH_PARENT;
         //设置窗口高度为包裹内容
-        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+//        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
 
         //将设置好的属性set回去
         window.setAttributes(lp);
@@ -111,7 +111,7 @@ public class SBaseDialog extends Dialog {
         //设置窗口宽度为充满全屏
         lp.width = WindowManager.LayoutParams.MATCH_PARENT;
         //设置窗口高度为包裹内容
-        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+//        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
 
         //将设置好的属性set回去
         window.setAttributes(lp);
