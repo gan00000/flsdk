@@ -27,7 +27,7 @@ public class LoginContract {
      */
     public interface ILoginView extends BaseView {
 
-        void LoginSuccess(SLoginResponse sLoginResponse);
+        void loginSuccess(SLoginResponse sLoginResponse);
         void changePwdSuccess(SLoginResponse sLoginResponse);
         void findPwdSuccess(SLoginResponse sLoginResponse);
 

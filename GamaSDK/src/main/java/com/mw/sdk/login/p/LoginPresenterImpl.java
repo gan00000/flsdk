@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.net.Uri;
 import android.text.TextUtils;
 import android.view.View;
 
@@ -16,7 +15,6 @@ import com.core.base.callback.SFCallBack;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
-import com.facebook.AccessToken;
 import com.facebook.internal.ImageRequest;
 import com.mw.base.bean.PhoneInfo;
 import com.mw.base.bean.SLoginType;
@@ -42,7 +40,6 @@ import com.mw.sdk.login.LoginContract;
 import com.mw.sdk.login.model.AccountModel;
 import com.mw.sdk.utils.DialogUtil;
 import com.thirdlib.facebook.FaceBookUser;
-import com.thirdlib.facebook.FbResUtil;
 import com.thirdlib.facebook.FbSp;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.google.SGoogleSignIn;
@@ -1077,7 +1074,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 //        ToastUtils.toast(mActivity, R.string.py_login_success);
 
         if (iLoginView != null){
-            iLoginView.LoginSuccess(loginResponse);
+            iLoginView.loginSuccess(loginResponse);
         }
     }
 

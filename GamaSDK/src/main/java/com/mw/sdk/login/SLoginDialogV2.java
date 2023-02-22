@@ -537,7 +537,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
     }
 
     @Override
-    public void LoginSuccess(SLoginResponse sLoginResponse) {
+    public void loginSuccess(SLoginResponse sLoginResponse) {
         if (iLoginCallBack != null){
             iLoginCallBack.onLogin(sLoginResponse);
         }
