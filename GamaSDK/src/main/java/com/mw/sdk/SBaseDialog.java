@@ -54,67 +54,41 @@ public class SBaseDialog extends Dialog {
                 WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED);
         inputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         window.getDecorView().setPadding(0, 0, 0, 0);
-//        ScreenHelper screenHelper = new ScreenHelper((Activity) context);
-//        int screenWidth = screenHelper.getScreenWidth();
-//        int screenHeight = screenHelper.getScreenHeight();
-//        if(screenWidth >= screenHeight) {
-//            int padDimension = ApkInfoUtil.getNavBarHeight(context);
 //
-//            if (padDimension <= 0) {
-//                padDimension = context.getResources().getDimensionPixelSize(R.dimen.px_15);
-//                window.getDecorView().setPadding(padDimension, padDimension, padDimension, padDimension);
-//            } else {
-//                window.getDecorView().setPadding(padDimension, padDimension / 2, padDimension, padDimension / 2);
-//            }
-//        } else {
-//            window.getDecorView().setPadding(0, 0, 0, 0);
-//        }
-
-//        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE|
-//                WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-
-        //获得window窗口的属性
-        android.view.WindowManager.LayoutParams lp = window.getAttributes();
-
-        //设置窗口宽度为充满全屏
-        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-        //设置窗口高度为包裹内容
-//        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
-
-        //将设置好的属性set回去
-        window.setAttributes(lp);
+//        //获得window窗口的属性
+//        android.view.WindowManager.LayoutParams lp = window.getAttributes();
+//
+//        //设置窗口宽度为充满全屏
+//        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+//        //设置窗口高度为包裹内容
+////        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+//
+//        //将设置好的属性set回去
+//        window.setAttributes(lp);
 
         setCanceledOnTouchOutside(true);
 
         Localization.updateSGameLanguage(context);//设置应用内语言
 
-//        AppUtil.hideDialogBottomBar(this);
-//        this.getWindow().getDecorView().setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
-//            @Override
-//            public void onSystemUiVisibilityChange(int visibility) {
-//                PL.d("dialog onSystemUiVisibilityChange");
-//                AppUtil.hideDialogBottomBar(SBaseDialog.this);
-//            }
-//        });
-
     }
+
 
     protected void setFullScreen(){
 
         //获得dialog的window窗口
-        Window window = this.getWindow();
-
-        window.getDecorView().setPadding(0, 0, 0, 0);
-
-        //获得window窗口的属性
-        android.view.WindowManager.LayoutParams lp = window.getAttributes();
-        //设置窗口宽度为充满全屏
-        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-        //设置窗口高度为包裹内容
-//        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
-
-        //将设置好的属性set回去
-        window.setAttributes(lp);
+//        Window window = this.getWindow();
+//
+//        window.getDecorView().setPadding(0, 0, 0, 0);
+//
+//        //获得window窗口的属性
+//        android.view.WindowManager.LayoutParams lp = window.getAttributes();
+//        //设置窗口宽度为充满全屏
+//        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+//        //设置窗口高度为包裹内容
+////        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+//
+//        //将设置好的属性set回去
+//        window.setAttributes(lp);
 
     }
 

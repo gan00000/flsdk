@@ -3,7 +3,7 @@
 
     <style name="Sdk.Theme.AppCompat.Dialog.NoTitle" parent="@style/Theme.AppCompat.Dialog">
         <item name="android:windowFrame">@null</item>  <!-- 边框 -->
-        <item name="android:windowIsFloating">true</item> <!-- 是否悬浮在activity上 -->
+        <item name="android:windowIsFloating">true</item>
         <item name="android:windowIsTranslucent">false</item>  <!-- 半透明 -->
         <item name="android:windowNoTitle">true</item> <!-- 无标题 -->
         <item name="android:background">@android:color/transparent</item>
@@ -30,8 +30,8 @@
         <item name="android:windowNoTitle">true</item>
         <!--是否去除边框-->
         <item name="android:windowFrame">@null</item>
-        <!--是否浮现在activity之上-->
-        <item name="android:windowIsFloating">true</item>
+        <!--WindowManager.LayoutParams默认采用的是MATCH_PARENT，但是如果windowIsFloating 被设置为True，WindowManager.LayoutParams参数中的尺寸就会被设置成WRAP_CONTENT-->
+        <item name="android:windowIsFloating">false</item>
         <!--是否模糊-->
         <item name="android:backgroundDimEnabled">true</item>
 
