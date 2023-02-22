@@ -3,7 +3,7 @@ apply plugin: 'com.android.library'
 android {
     compileSdkVersion 33
 
-    def sdk_version = "1.7.2"
+    def sdk_version = "1.8.0"
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 33
@@ -21,6 +21,8 @@ android {
                 outputFileName = "MWSDK-sdk3-release-" + sdk_version + ".aar"
             }else if (outputFileName != null && outputFileName.contains("release") && outputFileName.endsWith('.aar') && outputFileName.contains('sdk4')) {
                 outputFileName = "MWSDK-sdk4-release-" + sdk_version + ".aar"
+            }else if (outputFileName != null && outputFileName.contains("release") && outputFileName.endsWith('.aar') && outputFileName.contains('sdk5')) {
+                outputFileName = "MWSDK-sdk5-release-" + sdk_version + ".aar"
             }
         }
     }
