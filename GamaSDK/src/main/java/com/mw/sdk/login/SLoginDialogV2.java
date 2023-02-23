@@ -97,7 +97,6 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
             this.activity = (Activity) context;
         }
         setCanceledOnTouchOutside(false);
-        setFullScreen();
         //创建登录控制类
         iLoginPresenter = new LoginPresenterImpl();
         iLoginPresenter.setBaseView(this);
