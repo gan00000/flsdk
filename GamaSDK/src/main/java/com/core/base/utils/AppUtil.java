@@ -203,7 +203,11 @@ public class AppUtil {
 		}
 	}
 	/**
+	 * https://developer.android.com/training/system-ui/immersive?hl=zh-cn
 	 * 隐藏虚拟按键，并且全屏
+	 * 您可以将应用的内容设置为显示在状态栏的后面，这样内容大小就不会随着状态栏的隐藏和显示发生调整。
+	 * 可使用 SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN 执行此操作。 您可能还需要使用 SYSTEM_UI_FLAG_LAYOUT_STABLE 来帮助您的应用保持稳定布局。
+	 * 您可以使用 SYSTEM_UI_FLAG_HIDE_NAVIGATION 标记隐藏导航栏
 	 */
 	public static void hideDialogBottomBar(Dialog dialog){
 		//隐藏虚拟按键，并且全屏
