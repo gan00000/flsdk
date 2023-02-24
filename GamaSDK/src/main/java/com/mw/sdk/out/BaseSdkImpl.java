@@ -199,6 +199,7 @@ public class BaseSdkImpl implements IMWSDK {
 
         PL.i("fb keyhash:" + SignatureUtil.getHashKey(activity, activity.getPackageName()));
         PL.i("google sha1:" + SignatureUtil.getSignatureSHA1WithColon(activity, activity.getPackageName()));
+        PL.i("app sha256:" + SignatureUtil.getSignatureSHA256WithColon(activity, activity.getPackageName()));
         this.activity = activity;
         activity.runOnUiThread(new Runnable() {
             @Override

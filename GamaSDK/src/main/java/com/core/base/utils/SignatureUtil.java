@@ -83,6 +83,19 @@ public class SignatureUtil {
 		PL.w("arrayOfSignature.length:" + arrayOfSignature.length);
 		return "";
 	}
+
+	public static String getSignatureSHA256(Context context,String pkgName) {
+		Signature[] arrayOfSignature = getRawSignature(context, pkgName);
+		if ((arrayOfSignature == null) || (arrayOfSignature.length == 0)) {
+			PL.e("signs is null");
+			return "";
+		}
+		if (arrayOfSignature.length == 1) {
+			return getMessageDigest(arrayOfSignature[0].toByteArray(),"SHA256");
+		}
+		PL.w("arrayOfSignature.length:" + arrayOfSignature.length);
+		return "";
+	}
 	
 
 	/**
@@ -106,6 +119,21 @@ public class SignatureUtil {
 		
 		return "";
 		
+	}
+
+	public static String getSignatureSHA256WithColon(Context context,String pkgName){
+		String sha1 = getSignatureSHA256(context, pkgName);
+		if (!TextUtils.isEmpty(sha1) && sha1.length() > 2 && !sha1.contains(":")) {
+			StringBuilder stringBuilder = new StringBuilder(sha1);
+			for (int i = 2; i < stringBuilder.length(); i = i+2+1) {
+				stringBuilder.insert(i, ':');
+			}
+
+			return stringBuilder.toString();
+		}
+
+		return "";
+
 	}
 	
 	public static Signature[] getRawSignature(Context context, String pkgName) {
