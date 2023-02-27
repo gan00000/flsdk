@@ -215,7 +215,7 @@
                 android:id="@+id/guestLoginView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="7dp"
+                android:layout_marginStart="15dp"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
@@ -236,6 +236,15 @@
                     android:visibility="gone" />
 
             </LinearLayout>
+
+            <com.huawei.hms.support.hwid.ui.HuaweiIdAuthButton
+                android:id="@+id/hwLoginView"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_marginStart="28dp"
+                app:hwid_button_theme="hwid_button_theme_no_title"
+                app:hwid_corner_radius="hwid_corner_radius_large"
+                app:hwid_color_policy="hwid_color_policy_white"/>
 
             <LinearLayout
                 android:id="@+id/fbLoginView"
