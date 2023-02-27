@@ -934,6 +934,13 @@ public class SdkUtil {
         }
     }*/
 
+    public static boolean isVersion1(Context context) {//是否是第一套sdk
+        if ("v1".equals(context.getResources().getString(R.string.sdk_inner_version))){
+            return true;
+        }
+        return false;
+    }
+
     public static boolean isVersion2(Context context) {//是否是第二套sdk
         if ("v2".equals(context.getResources().getString(R.string.sdk_inner_version))){
             return true;

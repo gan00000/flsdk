@@ -80,7 +80,7 @@ public class DialogLoginImpl implements ILogin {
     @Override
     public void startLogin(final Activity activity, final ILoginCallBack iLoginCallBack) {
 
-        if (SdkUtil.isVersion2(activity) || SdkUtil.isVersion3(activity)) {
+        if (!SdkUtil.isVersion1(activity)) {
             ConfigBean configBean = SdkUtil.getSdkCfg(activity);
             if (configBean != null) {
                 ConfigBean.VersionData versionData = configBean.getSdkConfigLoginData(activity);

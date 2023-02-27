@@ -224,7 +224,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             }
         }else{
             if (iLoginView != null){
-                if (SdkUtil.isVersion2(getContext()) || SdkUtil.isVersion3(activity)){
+                if (!SdkUtil.isVersion1(activity)){
                     iLoginView.showLoginWithRegView(ViewType.WelcomeView);
                 }else{
                     iLoginView.showWelcomeBackView();

@@ -809,7 +809,7 @@ public class BaseSdkImpl implements IMWSDK {
             @Override
             public void run() {
 
-                if (SdkUtil.isVersion2(activity) || SdkUtil.isVersion3(activity)) {
+                if (!SdkUtil.isVersion1(activity)) {
                     if (commonDialog != null){
                         commonDialog.dismiss();
                     }
@@ -831,7 +831,7 @@ public class BaseSdkImpl implements IMWSDK {
             @Override
             public void run() {
 
-                if (SdkUtil.isVersion2(activity) || SdkUtil.isVersion3(activity)) {
+                if (!SdkUtil.isVersion1(activity)) {
                     if (commonDialog != null){
                         commonDialog.dismiss();
                     }
