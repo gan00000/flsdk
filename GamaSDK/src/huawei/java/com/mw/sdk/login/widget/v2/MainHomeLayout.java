@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 
+import com.huawei.hms.support.hwid.ui.HuaweiIdAuthButton;
 import com.mw.base.cfg.ConfigBean;
 import com.mw.base.utils.SdkUtil;
 import com.mw.sdk.SBaseDialog;
@@ -29,6 +30,8 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
     private View layout_go_term;
     private View layout_term;
     private ImageView iv_logo;
+
+    private HuaweiIdAuthButton huaweiIdAuthButton;
 
     public MainHomeLayout(Context context) {
         super(context);
@@ -56,6 +59,7 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
         iv_login_google = contentView.findViewById(R.id.iv_login_google);
         iv_login_fb = contentView.findViewById(R.id.iv_login_fb);
         iv_login_line = contentView.findViewById(R.id.iv_login_line);
+        huaweiIdAuthButton = contentView.findViewById(R.id.iv_login_hw);
 
         cb_agree_term = contentView.findViewById(R.id.cb_agree_term);
         layout_go_term = contentView.findViewById(R.id.layout_go_term);
@@ -68,6 +72,7 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
         iv_login_fb.setOnClickListener(this);
         iv_login_line.setOnClickListener(this);
         layout_go_term.setOnClickListener(this);
+        huaweiIdAuthButton.setOnClickListener(this);
 
         cb_agree_term.setChecked(true);
 
@@ -91,6 +96,9 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
                 }
                 if(!versionData.isLineLogin()){
                     iv_login_line.setVisibility(View.GONE);
+                }
+                if(!versionData.isHuaweiLogin()){
+                    huaweiIdAuthButton.setVisibility(View.GONE);
                 }
                 if(!versionData.isShowContract()){
                     layout_term.setVisibility(View.GONE);
@@ -129,6 +137,12 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
             //google+登录
             if (checkAgreeTerm()){
                 sLoginDialogv2.getLoginPresenter().lineLogin(sLoginDialogv2.getActivity());
+            }
+
+        }else if (v == huaweiIdAuthButton){
+            //huwei登录
+            if (checkAgreeTerm()){
+                sLoginDialogv2.getLoginPresenter().hwLogin(sLoginDialogv2.getActivity(), sLoginDialogv2.getHuaweiSignIn());
             }
 
         }else if (v == layout_go_term){

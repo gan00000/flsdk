@@ -31,6 +31,7 @@ import com.mw.sdk.login.widget.v2.ThirdPlatBindAccountLayoutV2;
 import com.mw.sdk.login.widget.v2.WelcomeBackLayout;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.google.SGoogleSignIn;
+import com.thirdlib.huawei.HuaweiSignIn;
 import com.thirdlib.line.SLineSignIn;
 import com.thirdlib.twitter.GamaTwitterLogin;
 
@@ -71,6 +72,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
     private SGoogleSignIn sGoogleSignIn;
     private GamaTwitterLogin twitterLogin;
     private SLineSignIn sLineSignIn;
+    private HuaweiSignIn huaweiSignIn;
 
     private LoginContract.ILoginPresenter iLoginPresenter;
 
@@ -609,6 +611,14 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 //            bindUniqueView.refreshViewData();
 //        }
 //        toAccountLoginView();
+    }
+
+    public HuaweiSignIn getHuaweiSignIn() {
+        return huaweiSignIn;
+    }
+
+    public void setHuaweiSignIn(HuaweiSignIn huaweiSignIn) {
+        this.huaweiSignIn = huaweiSignIn;
     }
 
     public SGoogleSignIn getGoogleSignIn() {

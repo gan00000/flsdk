@@ -43,6 +43,7 @@ import com.thirdlib.facebook.FaceBookUser;
 import com.thirdlib.facebook.FbSp;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.google.SGoogleSignIn;
+import com.thirdlib.huawei.HuaweiSignIn;
 import com.thirdlib.line.SLineSignIn;
 import com.thirdlib.twitter.GamaTwitterLogin;
 import com.mw.sdk.R;
@@ -110,6 +111,8 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     private SLineSignIn sLineSignIn;
     private FaceBookUser faceBookUser;
 
+    private HuaweiSignIn huaweiSignIn;
+
     public void setFragment(Fragment fragment) {
         this.fragment = fragment;
     }
@@ -153,6 +156,10 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     @Override
     public void setLineLogin(SLineSignIn sLineSignIn) {
         this.sLineSignIn = sLineSignIn;
+    }
+
+    public void setHuaweiSignIn(HuaweiSignIn huaweiSignIn) {
+        this.huaweiSignIn = huaweiSignIn;
     }
 
     @Override
@@ -311,6 +318,22 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 thirdLoginRegRequestBean.setThirdAccount("");
                 thirdLoginRegRequestBean.setLineAccessToken(idTokenString);
                 thirdPlatLogin(activity, thirdLoginRegRequestBean);
+            }
+
+            @Override
+            public void failure() {
+
+            }
+        });
+    }
+
+    @Override
+    public void hwLogin(Activity activity, HuaweiSignIn huaweiSignIn) {
+
+        huaweiSignIn.startSignIn(activity, new HuaweiSignIn.HWSignInCallBack() {
+            @Override
+            public void success(String id, String mFullName, String mEmail, String idTokenString) {
+
             }
 
             @Override

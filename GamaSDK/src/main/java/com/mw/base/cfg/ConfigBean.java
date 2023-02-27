@@ -77,7 +77,7 @@ public class ConfigBean {
         private boolean fbLogin = true;
         private boolean googleLogin = true;
         private boolean lineLogin = true;
-//        private boolean appleLogin = true;
+        private boolean huaweiLogin = true; //华为登录
         private boolean deleteAccount = false;
         private boolean showContract = true;
         private boolean showLogo = false;
@@ -140,13 +140,13 @@ public class ConfigBean {
             this.lineLogin = lineLogin;
         }
 
-//        public boolean isAppleLogin() {
-//            return appleLogin;
-//        }
-//
-//        public void setAppleLogin(boolean appleLogin) {
-//            this.appleLogin = appleLogin;
-//        }
+        public boolean isHuaweiLogin() {
+            return huaweiLogin;
+        }
+
+        public void setHuaweiLogin(boolean huaweiLogin) {
+            this.huaweiLogin = huaweiLogin;
+        }
 
         public boolean isDeleteAccount() {
             return deleteAccount;

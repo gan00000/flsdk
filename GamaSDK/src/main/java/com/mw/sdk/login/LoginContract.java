@@ -13,6 +13,7 @@ import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.SBaseRelativeLayout;
 import com.thirdlib.google.SGoogleSignIn;
 import com.thirdlib.facebook.SFacebookProxy;
+import com.thirdlib.huawei.HuaweiSignIn;
 import com.thirdlib.line.SLineSignIn;
 import com.thirdlib.twitter.GamaTwitterLogin;
 
@@ -66,6 +67,7 @@ public class LoginContract {
 
         void guestLogin(Activity activity);
         void lineLogin(Activity activity);
+        void hwLogin(Activity activity, HuaweiSignIn huaweiSignIn);
 
         void changePwd(Activity activity, String account, String oldPwd, String newPwd);
 

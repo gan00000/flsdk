@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 
+import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.facebook.internal.CallbackManagerImpl;
 import com.mw.base.cfg.ConfigBean;
@@ -13,6 +14,7 @@ import com.mw.sdk.login.widget.v2.NoticeView;
 import com.mw.sdk.utils.DialogUtil;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.google.SGoogleSignIn;
+import com.thirdlib.huawei.HuaweiSignIn;
 import com.thirdlib.line.SLineSignIn;
 
 /**
@@ -26,9 +28,7 @@ public class DialogLoginImpl implements ILogin {
 
     private SGoogleSignIn sGoogleSignIn;
     private SLineSignIn sLineSignIn;
-
-//    private GamaTwitterLogin twitterLogin;
-
+    private HuaweiSignIn huaweiSignIn;
 
     public SGoogleSignIn getGoogleSignIn() {
         return sGoogleSignIn;
@@ -39,6 +39,7 @@ public class DialogLoginImpl implements ILogin {
 
         sGoogleSignIn = new SGoogleSignIn(activity, DialogUtil.createLoadingDialog(activity, "Loading..."));
         sLineSignIn = new SLineSignIn(activity, DialogUtil.createLoadingDialog(activity, "Loading..."));
+        huaweiSignIn = new HuaweiSignIn(activity, DialogUtil.createLoadingDialog(activity, "Loading..."));
     }
 
     @Override
@@ -48,7 +49,7 @@ public class DialogLoginImpl implements ILogin {
 
     @Override
     public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
-        if (sFacebookProxy != null && requestCode == CallbackManagerImpl.RequestCodeOffset.Login.toRequestCode()) {
+        if (sFacebookProxy != null) {
             sFacebookProxy.onActivityResult(activity, requestCode, resultCode, data);
         }
         if (sGoogleSignIn != null){
@@ -57,9 +58,10 @@ public class DialogLoginImpl implements ILogin {
         if (sLineSignIn != null){
             sLineSignIn.handleActivityResult(activity,requestCode,resultCode,data);
         }
-//        if(twitterLogin != null) {
-//            twitterLogin.onActivityResult(requestCode, resultCode, data);
-//        }
+        if(huaweiSignIn != null) {
+            huaweiSignIn.handleActivityResult(activity, requestCode, resultCode, data);
+        }
+        PL.i("DialogLoginImpl onActivityResult");
     }
 
     @Override
@@ -116,6 +118,7 @@ public class DialogLoginImpl implements ILogin {
         sLoginDialog.setSFacebookProxy(sFacebookProxy);
         sLoginDialog.setSGoogleSignIn(sGoogleSignIn);
         sLoginDialog.setsLineSignIn(sLineSignIn);
+        sLoginDialog.setHuaweiSignIn(huaweiSignIn);
 //        if (twitterLogin != null) {
 //            sLoginDialog.setTwitterLogin(twitterLogin);
 //        }

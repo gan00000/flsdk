@@ -111,10 +111,20 @@
             android:orientation="horizontal">
 
 
+            <!--id开发者可自定义-->
+            <com.huawei.hms.support.hwid.ui.HuaweiIdAuthButton
+                android:id="@+id/iv_login_hw"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                app:hwid_button_theme="hwid_button_theme_no_title"
+                app:hwid_corner_radius="hwid_corner_radius_large"
+                app:hwid_color_policy="hwid_color_policy_white"/>
+
             <ImageView
                 android:id="@+id/iv_login_fb"
                 android:layout_width="34dp"
                 android:layout_height="34dp"
+                android:layout_marginStart="27dp"
                 android:src="@mipmap/icon_fb_1" />
 
             <ImageView

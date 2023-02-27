@@ -24,6 +24,7 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
 import com.facebook.appevents.AppEventsLogger;
+import com.facebook.internal.CallbackManagerImpl;
 import com.facebook.login.DefaultAudience;
 import com.facebook.login.LoginBehavior;
 import com.facebook.login.LoginManager;
@@ -1054,6 +1055,11 @@ public class SFacebookProxy {
 
 	
 	public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
+
+		if (!FacebookSdk.isInitialized() || requestCode != CallbackManagerImpl.RequestCodeOffset.Login.toRequestCode()){
+			return;
+		}
+
 		if (callbackManager == null) {
 			callbackManager = CallbackManager.Factory.create();
 		}

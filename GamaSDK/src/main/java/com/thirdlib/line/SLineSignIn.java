@@ -106,6 +106,7 @@ public class SLineSignIn {
 		if (isCancel) {
 			return;
 		}
+		isCancel = false;
 		dimissDialog();
 
 		LineLoginResult result = LineLoginApi.getLoginResultFromIntent(data);
