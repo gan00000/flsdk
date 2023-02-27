@@ -334,6 +334,12 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             @Override
             public void success(String id, String mFullName, String mEmail, String idTokenString) {
 
+                ThirdLoginRegRequestBean thirdLoginRegRequestBean = new ThirdLoginRegRequestBean(activity);
+                thirdLoginRegRequestBean.setThirdPlatId(id);
+                thirdLoginRegRequestBean.setRegistPlatform(SLoginType.LOGIN_TYPE_HUAWEI);
+                thirdLoginRegRequestBean.setThirdAccount("");
+                thirdPlatLogin(activity, thirdLoginRegRequestBean);
+
             }
 
             @Override
