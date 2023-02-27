@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.core.base.utils.ApkInfoUtil;
 import com.mw.sdk.R;
+import com.mw.sdk.constant.SdkInnerVersion;
 
 import java.util.List;
 
@@ -41,6 +42,10 @@ public class ConfigBean {
 
                 if (versionData != null && packageName.equals(versionData.getPackageName()) && versionCode.equals(versionData.getVersion())
                     && channel_platform.equals(versionData.getPlatform())){
+
+                    if (channel_platform.equals(SdkInnerVersion.HUAWEI.getSdkVeriosnName())){//设置一下特殊不需要显示的
+                        versionData.setHuaweiData(context);
+                    }
                     return versionData;
                 }
             }
@@ -58,13 +63,21 @@ public class ConfigBean {
 
                 if (versionData != null && packageName.equals(versionData.getPackageName())
                         && channel_platform.equals(versionData.getPlatform())){
+
+                    if (channel_platform.equals(SdkInnerVersion.HUAWEI.getSdkVeriosnName())){//设置一下特殊不需要显示的
+                        versionData.setHuaweiData(context);
+                    }
                     return versionData;
                 }
             }
 
         }
 
-        return null;
+        VersionData xxVersionData = new VersionData();
+        if (channel_platform.equals(SdkInnerVersion.HUAWEI.getSdkVeriosnName())){//设置一下特殊不需要显示的
+            xxVersionData.setHuaweiData(context);
+        }
+        return xxVersionData;
     }
 
 
@@ -194,6 +207,16 @@ public class ConfigBean {
 
         public boolean isFB_GOGOLE_LINE_LoginTypeHiden(){
             return !fbLogin && !googleLogin && !lineLogin;
+        }
+
+        //华为登录，下面的不需要显示
+        public VersionData setHuaweiData(Context context){
+            this.fbLogin = false;
+            this.googleLogin = false;
+            this.lineLogin = false;
+            this.showContract = false;
+            this.deleteAccount = false;
+            return this;
         }
     }
 
