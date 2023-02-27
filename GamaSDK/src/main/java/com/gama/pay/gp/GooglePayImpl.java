@@ -34,6 +34,7 @@ import com.gama.pay.gp.util.GBillingHelper;
 import com.gama.pay.gp.util.PayHelper;
 import com.gama.pay.gp.bean.res.BasePayBean;
 import com.mw.sdk.BuildConfig;
+import com.mw.sdk.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -194,7 +195,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
 
         this.createOrderIdReqBean = null;
 
-        PL.i("the jar version:" + BuildConfig.JAR_VERSION);//打印版本号
+        PL.i("the aar version info:" + activity.getResources().getString(R.string.sdk_inner_version) + "_" + BuildConfig.JAR_VERSION);//打印版本号
 
         if (activity == null) {
             PL.w("activity is null");
