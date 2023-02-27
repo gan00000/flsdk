@@ -77,6 +77,11 @@ android {
             resValue "string", "sdk_inner_version", "qooap"
         }
 
+        huawei {//华为渠道
+            flavorDimensions "1"
+            resValue "string", "sdk_inner_version", "huawei"
+        }
+
     }
 }
 
@@ -142,26 +147,9 @@ dependencies {
     implementation 'com.appsflyer:af-android-sdk:6.9.0'
     implementation 'com.android.installreferrer:installreferrer:2.2'
 
-    //google volley
-//    implementation 'com.android.volley:volley:1.1.1'
+    //huawei sdk
+    implementation 'com.huawei.hms:hwid:6.9.0.301'
 
-    //Twitter
-//    implementation 'com.twitter.sdk.android:twitter-core:3.1.1'
-//    implementation ('com.twitter.sdk.android:tweet-ui:3.1.1'){
-//        exclude group: 'com.android.support'
-//    }
-//    implementation ('com.twitter.sdk.android:tweet-composer:3.1.1'){
-//        exclude group: 'com.android.support'
-//    }
-//    implementation 'com.twitter.sdk.android:twitter-mopub:3.1.1'
-
-    //ads
-    //adjust
-//    api 'com.adjust.sdk:adjust-android:4.21.1'
-
-    //    implementation ('com.zhihu.android:matisse:0.5.1') {
-//        exclude group: 'com.android.support'
-//    }
 }
 
 
