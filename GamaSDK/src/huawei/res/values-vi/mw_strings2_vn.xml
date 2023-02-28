@@ -15,6 +15,6 @@
     <string name="text_has_bind_tips_line">LINE đã nâng cấp thành tài khoản hội viên</string>
     <string name="text_has_bind_tips_mw">Tài khoản hội viên</string>
     <string name="text_notice">Thông báo</string>
-
+    <string name="text_has_bind_account_already">Đã nâng cấp lên tài khoản thành viên</string>
 
 </resources>

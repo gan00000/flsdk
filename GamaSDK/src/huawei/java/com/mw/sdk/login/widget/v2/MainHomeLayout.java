@@ -31,7 +31,7 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
     private View layout_term;
     private ImageView iv_logo;
 
-    private HuaweiIdAuthButton huaweiIdAuthButton;
+    private View huaweiIdAuthButton;
 
     public MainHomeLayout(Context context) {
         super(context);

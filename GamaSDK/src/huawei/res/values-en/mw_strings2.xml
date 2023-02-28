@@ -15,5 +15,6 @@
     <string name="text_has_bind_tips_line">Account has been upgraded</string>
     <string name="text_has_bind_tips_mw">Member Account</string>
     <string name="text_notice">Announcement</string>
+    <string name="text_has_bind_account_already">Account has been upgraded</string>
 
 </resources>

@@ -76,7 +76,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
 
     View historyAccountListBtn;
 
-    private View fbLoginView, macLoginView, googleLoginView, lineLoginView;
+    private View fbLoginView, macLoginView, googleLoginView, lineLoginView, hwLoginView;
 
     private AccountPopupWindow accountPopupWindow;
     private AccountModel currentAccountModel;
@@ -257,6 +257,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
         lineLoginView = contentView.findViewById(R.id.lineLoginView);
         macLoginView = contentView.findViewById(R.id.guestLoginView);
         googleLoginView = contentView.findViewById(R.id.ggLoginView);
+        hwLoginView = contentView.findViewById(R.id.hwLoginView);
 
         ConfigBean configBean = SdkUtil.getSdkCfg(getContext());
         if (configBean != null){
@@ -273,6 +274,9 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
                 }
                 if(!versionData.isLineLogin()){
                     lineLoginView.setVisibility(View.GONE);
+                }
+                if(!versionData.isHuaweiLogin()){
+                    hwLoginView.setVisibility(View.GONE);
                 }
                 if(!versionData.isShowContract()){
                     cb_agree_term.setVisibility(View.GONE);
@@ -339,6 +343,16 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
                 }
                 //google+登录
                 sLoginDialogv2.getLoginPresenter().lineLogin(sLoginDialogv2.getActivity());
+            }
+        });
+
+        hwLoginView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!checkAgreeTerm()) {
+                    return;
+                }
+                sLoginDialogv2.getLoginPresenter().hwLogin(sLoginDialogv2.getActivity(), sLoginDialogv2.getHuaweiSignIn());
             }
         });
 
@@ -500,6 +514,9 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
                return;
            }else if (SLoginType.LOGIN_TYPE_LINE.equals(currentAccountModel.getLoginType())){
                 lineLoginView.performClick();
+               return;
+           }else if (SLoginType.LOGIN_TYPE_HUAWEI.equals(currentAccountModel.getLoginType())){
+               hwLoginView.performClick();
                return;
            }
         }

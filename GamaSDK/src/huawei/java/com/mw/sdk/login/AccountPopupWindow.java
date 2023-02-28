@@ -146,6 +146,8 @@ public class AccountPopupWindow extends PopupWindow {
                     imageResId = R.mipmap.img_guest_2;
                 }else if (SLoginType.LOGIN_TYPE_LINE.equals(accountModel.getLoginType())){
                     imageResId = R.mipmap.icon_line_2;
+                }else if (SLoginType.LOGIN_TYPE_HUAWEI.equals(accountModel.getLoginType())){
+                    imageResId = R.mipmap.icon_huawei_2;
                 }else if (SLoginType.LOGIN_TYPE_MG.equals(accountModel.getLoginType())){
                     imageResId = R.mipmap.img_persion_bg;
                     showName = accountModel.getAccount();
