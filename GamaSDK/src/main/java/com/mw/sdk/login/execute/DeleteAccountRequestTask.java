@@ -5,8 +5,7 @@ import android.content.Context;
 import com.core.base.bean.BaseReqeustBean;
 import com.core.base.utils.SStringUtil;
 import com.mw.base.cfg.ResConfig;
-import com.mw.sdk.login.constant.ApiRequestMethod;
-import com.mw.sdk.login.model.request.AccountLoginRequestBean;
+import com.mw.sdk.constant.ApiRequestMethod;
 import com.mw.sdk.login.model.request.DeleteAccountRequestBean;
 
 public class DeleteAccountRequestTask extends BaseLoginRequestTask {

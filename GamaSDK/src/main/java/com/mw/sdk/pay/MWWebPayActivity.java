@@ -5,23 +5,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.ProgressBar;
 
-import com.gama.pay.IPay;
-import com.gama.pay.IPayCallBack;
-import com.gama.pay.IPayFactory;
-import com.gama.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
-import com.gama.pay.gp.bean.res.BasePayBean;
-import com.mw.base.widget.SWebView;
+import com.mw.sdk.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
+import com.mw.sdk.pay.gp.bean.res.BasePayBean;
 import com.core.base.utils.PL;
 import com.core.base.utils.ToastUtils;
 import com.mw.sdk.MWBaseWebActivity;
 import com.mw.sdk.R;
-import com.mw.sdk.SBaseSdkActivity;
-import com.mw.sdk.SWebViewLayout;
 import com.mw.sdk.ads.SdkEventLogger;
 import com.mw.sdk.constant.ResultCode;
-import com.mw.sdk.out.BaseSdkImpl;
 
 /**
  * Created by GanYuanrong on 2016/12/1.

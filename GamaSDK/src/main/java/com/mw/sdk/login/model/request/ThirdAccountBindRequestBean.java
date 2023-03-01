@@ -2,8 +2,6 @@ package com.mw.sdk.login.model.request;
 
 import android.content.Context;
 
-import com.mw.sdk.login.constant.ApiRequestMethod;
-
 /**
 * <p>Title: AdsRequestBean</p>
 * <p>Description: 接口请求参数实体</p>

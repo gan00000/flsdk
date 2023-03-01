@@ -1,12 +1,11 @@
 package com.mw.sdk.login.execute;
 
 import android.content.Context;
-import android.text.TextUtils;
 
 import com.core.base.bean.BaseReqeustBean;
 import com.core.base.utils.SStringUtil;
 import com.mw.base.cfg.ResConfig;
-import com.mw.sdk.login.constant.ApiRequestMethod;
+import com.mw.sdk.constant.ApiRequestMethod;
 import com.mw.sdk.login.model.request.FindPwdRequestBean;
 
 public class FindPwdRequestTask extends BaseLoginRequestTask {

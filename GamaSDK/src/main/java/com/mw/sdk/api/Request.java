@@ -1,9 +1,7 @@
 package com.mw.sdk.api;
 
-import android.app.Activity;
 import android.content.Context;
 
-import com.core.base.bean.BaseReqeustBean;
 import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.ISReqCallBack;
 import com.core.base.callback.SFCallBack;
@@ -12,18 +10,14 @@ import com.core.base.utils.PL;
 import com.core.base.utils.SPUtil;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
-import com.mw.base.bean.AdsRequestBean;
 import com.mw.base.bean.SGameBaseRequestBean;
-import com.mw.base.bean.SLoginType;
 import com.mw.base.cfg.ResConfig;
 import com.mw.base.utils.SdkUtil;
 import com.mw.sdk.R;
-import com.mw.sdk.login.constant.ApiRequestMethod;
+import com.mw.sdk.constant.ApiRequestMethod;
 import com.mw.sdk.login.execute.BaseLoginRequestTask;
-import com.mw.sdk.login.execute.ThirdAccountBindRequestTaskV2;
 import com.mw.sdk.login.model.request.AccountBindInGameRequestBean;
 import com.mw.sdk.login.model.response.SLoginResponse;
-import com.mw.sdk.out.ISdkCallBack;
 import com.mw.sdk.utils.DialogUtil;
 
 import java.util.HashMap;

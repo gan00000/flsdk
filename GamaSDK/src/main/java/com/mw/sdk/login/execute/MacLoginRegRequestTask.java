@@ -8,7 +8,7 @@ import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.mw.base.bean.SLoginType;
 import com.mw.base.cfg.ResConfig;
-import com.mw.sdk.login.constant.ApiRequestMethod;
+import com.mw.sdk.constant.ApiRequestMethod;
 import com.mw.sdk.login.model.request.MacLoginRegRequestBean;
 import com.mw.base.utils.SdkUtil;
 

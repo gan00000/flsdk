@@ -36,8 +36,8 @@
 -keep public class com.mw.sdk.ads.EventConstant { *; }
 -keep public class com.core.base.bean.BaseResponseModel { *; }
 -keep public class com.core.base.bean.AbsReqeustBean { *; }
--keep public class com.gama.pay.gp.bean.res.GPExchangeRes$Data { *; }
--keep public class com.gama.pay.gp.bean.res.GPCreateOrderIdRes$PayData { *; }
+-keep public class com.mw.sdk.pay.gp.bean.res.GPExchangeRes$Data { *; }
+-keep public class com.mw.sdk.pay.gp.bean.res.GPCreateOrderIdRes$PayData { *; }
 -keep public class com.mw.base.cfg.ConfigBean { *; }
 -keep public class com.mw.base.cfg.ConfigBean$VersionData { *; }
 -keep public class com.mw.base.cfg.ConfigBean$UrlData { *; }

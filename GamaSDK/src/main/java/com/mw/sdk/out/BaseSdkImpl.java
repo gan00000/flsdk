@@ -1,6 +1,5 @@
 package com.mw.sdk.out;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -8,23 +7,21 @@ import android.os.Build;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 
 import com.core.base.ObjFactory;
 import com.core.base.callback.SFCallBack;
-import com.core.base.utils.AppUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.PermissionUtil;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.SignatureUtil;
 import com.core.base.utils.ToastUtils;
-import com.gama.pay.IPay;
-import com.gama.pay.IPayCallBack;
-import com.gama.pay.IPayFactory;
-import com.gama.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
-import com.gama.pay.gp.bean.res.BasePayBean;
+import com.mw.sdk.pay.IPay;
+import com.mw.sdk.pay.IPayCallBack;
+import com.mw.sdk.pay.IPayFactory;
+import com.mw.sdk.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
+import com.mw.sdk.pay.gp.bean.res.BasePayBean;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.tasks.OnCompleteListener;
