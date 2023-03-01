@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 
+import com.core.base.base64.Base64;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
@@ -43,6 +44,10 @@ import com.mw.sdk.pay.gp.util.PayHelper;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.nio.charset.StandardCharsets;
+import java.security.KeyFactory;
+import java.security.PublicKey;
+import java.security.spec.X509EncodedKeySpec;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -365,6 +370,17 @@ public class HuaweiPayImpl {
             handlePayFail("inAppPurchaseDataSignature is empty");
             return;
         }
+        //boolean checkSign = checkSign(inAppPurchaseData, inAppPurchaseDataSignature, publicKey, "SHA256WithRSA");
+        //PL.i("checkSign is " + checkSign);
+//        try {
+//            JSONObject jsonObject = new JSONObject(inAppPurchaseData);
+//            String developerPayload = jsonObject.getString("developerPayload");
+//            JSONObject jsonObjectDevPayload = new JSONObject(developerPayload);
+//            String orderId = jsonObjectDevPayload.getString("orderId");
+//            PL.i("orderId=" + orderId);
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
         this.current_inAppPurchaseData = inAppPurchaseData;
         PayApi.requestSendStone_huawei(this.mActivity, inAppPurchaseData, inAppPurchaseDataSignature, reissue, new SFCallBack<GPExchangeRes>() {
             @Override
@@ -560,5 +576,52 @@ public class HuaweiPayImpl {
         }
     }
 
-    
+    public static final String publicKey = "MIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAnQtpQslB03181lk0aDzjqkyfOSvu4fe31XSzsNYn63McP6A1jKFLtWHt8L8wdK9EBTOzXcMGX4QlM0WdscuK5g4Dmz8ivNH4vFF1cX5mx1Z9JoVhfVR5jEjzLxOBzoLnNLFk1DW45H6u7F7+5JMDyxp87DwbelaCq9DLn0269w2gbI0npheERwwj8CmDxCeO5JQTiaTOGWM9u/akIw+D99cX/YpNo4TiNdGAaESR0d5YMqOH536LexZvshvSeOCIJaNc0soINHJaffaB1amR4QFyKY5ISQQDTdtW4RfR5snHM1cq6hxnOT4ze8JtBzqE9Q7dUGFd9mbqWguYm8vpeKyjBXhf6AKzEFILrU+Yyrg312hoSKwWFTAjSyCw8mH2ktPvk9oObcQpelhMNXZMmCPlT5eijQkgRqwMeHxXJQNA930yDahMGdI+taMO6TtOyCxSMRA54IOSSO7s1Fl8Pu0cDn2WJrOHSECX0L47Up/P93II2N3zNfGNKs+zNidfAgMBAAE=";
+    /**
+     * 校验签名信息
+     *
+     * @param content 结果字符串
+     * @param sign 签名字符串
+     * @param publicKey IAP公钥
+     * @param signatureAlgorithm 签名算法字段，可从接口返回数据中获取，例如：OwnedPurchasesResult.getSignatureAlgorithm()
+     * @return 是否校验通过
+     */
+    public static boolean checkSign(String content, String sign, String publicKey, String signatureAlgorithm) {
+        if (sign == null) {
+            return false;
+        }
+        if (publicKey == null) {
+            return false;
+        }
+
+        // 当signatureAlgorithm为空时使用默认签名算法
+        if (signatureAlgorithm == null || signatureAlgorithm.length() == 0) {
+            signatureAlgorithm = "SHA256WithRSA";
+            System.out.println("doCheck, algorithm: SHA256WithRSA");
+        }
+        try {
+            //Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
+            // 生成"RSA"的KeyFactory对象
+            KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+            byte[] decodedKey = Base64.decode(publicKey);
+            // 生成公钥
+            PublicKey pubKey = keyFactory.generatePublic(new X509EncodedKeySpec(decodedKey));
+            java.security.Signature signature = null;
+            // 根据SHA256WithRSA算法获取签名对象实例
+            signature = java.security.Signature.getInstance(signatureAlgorithm);
+            // 初始化验证签名的公钥
+            signature.initVerify(pubKey);
+            // 把原始报文更新到签名对象中
+            signature.update(content.getBytes(StandardCharsets.UTF_8));
+            // 将sign解码
+            byte[] bsign = Base64.decode(sign);
+            // 进行验签
+            return signature.verify(bsign);
+        } catch (RuntimeException e) {
+            throw e;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
