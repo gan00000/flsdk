@@ -1,6 +1,5 @@
 package com.game.sdk.demo;
 
-import android.Manifest;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
@@ -19,7 +18,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
@@ -28,24 +26,19 @@ import androidx.core.app.NotificationCompat;
 
 import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.SFCallBack;
-import com.core.base.utils.AppUtil;
 import com.core.base.utils.MarketUtil;
 import com.core.base.utils.PL;
-import com.core.base.utils.PermissionUtil;
 import com.core.base.utils.ToastUtils;
-import com.mw.base.bean.SGameLanguage;
 import com.mw.base.bean.SPayType;
-import com.mw.base.utils.SdkUtil;
 import com.mw.base.utils.SLog;
+import com.mw.base.utils.SdkUtil;
+import com.mw.sdk.callback.IPayListener;
+import com.mw.sdk.demo.R;
 import com.mw.sdk.login.ILoginCallBack;
 import com.mw.sdk.login.model.response.SLoginResponse;
-import com.mw.sdk.callback.IPayListener;
-import com.mw.sdk.out.ICompleteListener;
+import com.mw.sdk.out.IMWSDK;
 import com.mw.sdk.out.ISdkCallBack;
 import com.mw.sdk.out.MWSdkFactory;
-import com.mw.sdk.out.IMWSDK;
-import com.mw.sdk.demo.R;
-import com.thirdlib.google.SGoogleProxy;
 
 public class MainActivity extends Activity {
 
