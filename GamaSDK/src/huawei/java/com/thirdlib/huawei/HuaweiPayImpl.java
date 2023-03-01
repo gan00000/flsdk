@@ -102,6 +102,7 @@ public class HuaweiPayImpl {
                 case OrderStatusCode.ORDER_STATE_CANCEL:
                     // 用户取消
                     PL.i("onActivityResult purchase 用户取消");
+                    handlePayFail("");
                     break;
                 case OrderStatusCode.ORDER_STATE_FAILED:
                 case OrderStatusCode.ORDER_STATE_DEFAULT_CODE:
@@ -437,6 +438,8 @@ public class HuaweiPayImpl {
                 } else {
                     // 其他外部错误
                 }
+
+                handlePayFail("getOwnedPurchases onFailure");
             }
         });
     }
@@ -556,4 +559,6 @@ public class HuaweiPayImpl {
             iPayCallBack.success(payBean);
         }
     }
+
+    
 }

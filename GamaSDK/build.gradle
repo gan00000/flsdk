@@ -93,6 +93,7 @@ android {
 
 
 dependencies {
+
     compileOnly fileTree(dir: 'libs', include: ['*.aar'])
 //    implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
     api fileTree(include: ['*.jar'], dir: 'libs')
@@ -148,8 +149,8 @@ dependencies {
     implementation 'com.android.installreferrer:installreferrer:2.2'
 
     //huawei sdk
-    implementation 'com.huawei.hms:hwid:6.9.0.301'
-    implementation 'com.huawei.hms:iap:6.4.0.301'
+    huaweiImplementation 'com.huawei.hms:hwid:6.9.0.301'
+    huaweiImplementation 'com.huawei.hms:iap:6.4.0.301'
 
 }
 

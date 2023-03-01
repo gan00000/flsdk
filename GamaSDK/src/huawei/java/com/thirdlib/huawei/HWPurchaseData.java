@@ -3,18 +3,42 @@ package com.thirdlib.huawei;
 public class HWPurchaseData {
 
       private boolean autoRenewing;
+      /**
+       * 订单ID，唯一标识一笔需要收费的收据，由华为应用内支付服务器在创建订单以及订阅型商品续费时生成。
+       *
+       * 每一笔新的收据都会使用不同的orderId。
+       */
       private String orderId;
       private String packageName;
-      private int applicationId;
+      private long applicationId;
       private String applicationIdString;
+      /**
+       * 商品类别，取值包括：
+       *
+       * 0：消耗型商品
+       * 1：非消耗型商品
+       * 2：订阅型商品
+       */
       private int kind;
       private String productId;
       private String productName;
       private long purchaseTime;
-      private long purchaseTimeMillis;
+      /**
+       * 订单交易状态。
+       * -1：初始化
+       * 0：已购买
+       * 1：已取消
+       * 2：已退款
+       * 3：待处理
+       */
       private int purchaseState;
       private String developerPayload;
       private String purchaseToken;
+      /**
+       * 消耗状态，仅一次性商品存在，取值包括：
+       * 0：未消耗
+       * 1：已消耗
+       */
       private int consumptionState;
       private int confirmed;
       private int purchaseType;
@@ -49,11 +73,11 @@ public class HWPurchaseData {
             this.packageName = packageName;
       }
 
-      public int getApplicationId() {
+      public long getApplicationId() {
             return applicationId;
       }
 
-      public void setApplicationId(int applicationId) {
+      public void setApplicationId(long applicationId) {
             this.applicationId = applicationId;
       }
 
@@ -95,14 +119,6 @@ public class HWPurchaseData {
 
       public void setPurchaseTime(long purchaseTime) {
             this.purchaseTime = purchaseTime;
-      }
-
-      public long getPurchaseTimeMillis() {
-            return purchaseTimeMillis;
-      }
-
-      public void setPurchaseTimeMillis(long purchaseTimeMillis) {
-            this.purchaseTimeMillis = purchaseTimeMillis;
       }
 
       public int getPurchaseState() {
