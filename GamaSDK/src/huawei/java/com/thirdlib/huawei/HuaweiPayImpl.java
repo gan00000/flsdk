@@ -2,12 +2,17 @@ package com.thirdlib.huawei;
 
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 
+import com.core.base.callback.SFCallBack;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
+import com.mw.sdk.pay.gp.PayApi;
 import com.mw.sdk.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
+import com.mw.sdk.pay.gp.bean.res.GPCreateOrderIdRes;
+import com.mw.sdk.pay.gp.bean.res.GPExchangeRes;
 import com.mw.sdk.pay.gp.task.LoadingDialog;
 import com.mw.sdk.pay.gp.util.PayHelper;
 import com.huawei.hmf.tasks.OnFailureListener;
@@ -33,6 +38,7 @@ import com.huawei.hms.support.api.client.Status;
 import com.mw.sdk.constant.ApiRequestMethod;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +49,11 @@ public class HuaweiPayImpl {
     public static final int HW_IAP_REQUEST_CODE_PURCHASE = 6661;
 
     private Activity mActivity;
+
     private String productId;
+    private String cpOrderId;
+    private String extra;
+
     private ProductInfo currentProductInfo;
     private GooglePayCreateOrderIdReqBean createOrderIdReqBean;
 
@@ -95,6 +105,8 @@ public class HuaweiPayImpl {
                     // 使用您应用的IAP公钥验证签名
                     // 若验签成功，必须校验InAppPurchaseData中的productId、price、currency等信息的一致性，验证一致后发货
                     // 若用户购买商品为消耗型商品，您需要在发货成功后调用consumeOwnedPurchase接口进行消耗
+
+                    sendPayment(inAppPurchaseData, inAppPurchaseDataSignature, "no");
                     break;
                 default:
                     break;
@@ -202,7 +214,7 @@ public class HuaweiPayImpl {
                     }
 
                     if (currentProductInfo != null){
-                        createPurchaseIntentToPay(activity,productId);
+                        createOrder();
                         return;
                     }
                 }
@@ -238,11 +250,38 @@ public class HuaweiPayImpl {
         this.createOrderIdReqBean.setRequestSpaUrl(PayHelper.getSpareUrl(this.mActivity));
         //设置储值接口名
         this.createOrderIdReqBean.setRequestMethod(ApiRequestMethod.API_ORDER_CREATE);
+        this.createOrderIdReqBean.setMode("huawei");
+        this.createOrderIdReqBean.setProductId(this.productId);
+        this.createOrderIdReqBean.setCpOrderId(this.cpOrderId);
+        this.createOrderIdReqBean.setExtra(this.extra);
 
+        PayApi.requestCreateOrder(this.mActivity, this.createOrderIdReqBean, new SFCallBack<GPCreateOrderIdRes>() {
+            @Override
+            public void success(GPCreateOrderIdRes result, String msg) {
+
+                if (result != null && result.getPayData() != null && SStringUtil.isNotEmpty(result.getPayData().getOrderId())){
+                    createPurchaseIntentToPay(mActivity, result.getPayData().getOrderId(), createOrderIdReqBean.getProductId());
+                }else {
+                    handlePayFail("create order error");
+                }
+
+            }
+
+            @Override
+            public void fail(GPCreateOrderIdRes createOrderIdRes, String msg) {
+                PL.i("requestCreateOrder finish fail");
+                //创建订单失败
+                if (createOrderIdRes != null && SStringUtil.isNotEmpty(createOrderIdRes.getMessage())) {
+                    handlePayFail(createOrderIdRes.getMessage());
+                }else{
+                    handlePayFail("create order error");
+                }
+            }
+        });
 
     }
 
-    public void createPurchaseIntentToPay(Activity activity, String productId){
+    public void createPurchaseIntentToPay(Activity activity, String orderId, String productId){
 
         // 构造一个PurchaseIntentReq对象
         PurchaseIntentReq req = new PurchaseIntentReq();
@@ -250,7 +289,15 @@ public class HuaweiPayImpl {
         req.setProductId(productId);
         // priceType: 0：消耗型商品; 1：非消耗型商品; 2：订阅型商品
         req.setPriceType(0);
-        req.setDeveloperPayload("test");
+        try {
+            JSONObject devJsonObject = new JSONObject();
+            devJsonObject.put("userId", this.createOrderIdReqBean.getUserId());
+            devJsonObject.put("orderId", orderId);
+            devJsonObject.put("cpOrderId", this.createOrderIdReqBean.getCpOrderId());
+            req.setDeveloperPayload(devJsonObject.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         PL.i("createPurchaseIntent start");
         // 调用createPurchaseIntent接口创建托管商品订单
@@ -280,8 +327,49 @@ public class HuaweiPayImpl {
                     IapApiException apiException = (IapApiException) e;
                     Status status = apiException.getStatus();
                     int returnCode = apiException.getStatusCode();
+
+                    handlePayFail(status.getStatusCode() + ":" + status.getErrorString());
+
                 } else {
                     // 其他外部错误
+                    handlePayFail("An unknown error occurred, please try again");
+                }
+            }
+        });
+
+    }
+
+    public void sendPayment(String inAppPurchaseData, String inAppPurchaseDataSignature,String reissue){
+
+        if (SStringUtil.isEmpty(inAppPurchaseData)){
+            handlePayFail("inAppPurchaseData is empty");
+            return;
+        }
+        if (SStringUtil.isEmpty(inAppPurchaseDataSignature)){
+            handlePayFail("inAppPurchaseDataSignature is empty");
+            return;
+        }
+
+        PayApi.requestSendStone_huawei(this.mActivity, inAppPurchaseData, inAppPurchaseDataSignature, reissue, new SFCallBack<GPExchangeRes>() {
+            @Override
+            public void success(GPExchangeRes result, String msg) {
+
+                try {
+                    InAppPurchaseData inAppPurchaseDataBean = new InAppPurchaseData(inAppPurchaseData);
+                    int purchaseState = inAppPurchaseDataBean.getPurchaseState();
+                    consumeOwnedPurchase(mActivity, inAppPurchaseDataBean);
+                    handlePaySuccess();
+                } catch (JSONException e) {
+
+                }
+            }
+
+            @Override
+            public void fail(GPExchangeRes result, String msg) {
+                if (result != null && SStringUtil.isNotEmpty(result.getMessage())) {
+                    handlePayFail(result.getMessage());
+                }else{
+                    handlePayFail("payment error");
                 }
             }
         });
@@ -308,13 +396,16 @@ public class HuaweiPayImpl {
                         // 使用应用的IAP公钥验证inAppPurchaseData的签名数据
                         // 如果验签成功，必须校验InAppPurchaseData中的productId、price、currency等信息的一致性
                         // 验证一致后，确认每个商品的购买状态。确认商品已支付后，检查此前是否已发过货，未发货则进行发货操作。发货成功后执行消耗操作
-                        try {
-                            InAppPurchaseData inAppPurchaseDataBean = new InAppPurchaseData(inAppPurchaseData);
-                            int purchaseState = inAppPurchaseDataBean.getPurchaseState();
-                            consumeOwnedPurchase(activity, inAppPurchaseDataBean);
-                        } catch (JSONException e) {
 
-                        }
+                        sendPayment(inAppPurchaseData, inAppSignature, "yes");
+
+//                        try {
+//                            InAppPurchaseData inAppPurchaseDataBean = new InAppPurchaseData(inAppPurchaseData);
+//                            int purchaseState = inAppPurchaseDataBean.getPurchaseState();
+//                            consumeOwnedPurchase(mActivity, inAppPurchaseDataBean);
+//                        } catch (JSONException e) {
+//
+//                        }
                     }
                 }
             }
@@ -362,11 +453,13 @@ public class HuaweiPayImpl {
             public void onSuccess(ConsumeOwnedPurchaseResult result) {
                 // 获取接口请求结果
                 PL.i("consumeOwnedPurchase onSuccess");
+                //handlePaySuccess();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(Exception e) {
                 PL.i("consumeOwnedPurchase onFailure");
+                //handlePayFail("finish");
                 if (e instanceof IapApiException) {
                     IapApiException apiException = (IapApiException) e;
                     Status status = apiException.getStatus();
@@ -383,9 +476,20 @@ public class HuaweiPayImpl {
 
     private void handlePayFail(String msg){
 
+        if (loadingDialog != null){
+            loadingDialog.dismissProgressDialog();
+        }
+        loadingDialog.alert(msg, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
     }
 
     private void handlePaySuccess(){
-
+        if (loadingDialog != null){
+            loadingDialog.dismissProgressDialog();
+        }
     }
 }
