@@ -9,12 +9,7 @@ import android.content.IntentSender;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
-import com.mw.sdk.pay.gp.PayApi;
-import com.mw.sdk.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
-import com.mw.sdk.pay.gp.bean.res.GPCreateOrderIdRes;
-import com.mw.sdk.pay.gp.bean.res.GPExchangeRes;
-import com.mw.sdk.pay.gp.task.LoadingDialog;
-import com.mw.sdk.pay.gp.util.PayHelper;
+import com.google.gson.Gson;
 import com.huawei.hmf.tasks.OnFailureListener;
 import com.huawei.hmf.tasks.OnSuccessListener;
 import com.huawei.hmf.tasks.Task;
@@ -36,6 +31,14 @@ import com.huawei.hms.iap.entity.PurchaseResultInfo;
 import com.huawei.hms.iap.util.IapClientHelper;
 import com.huawei.hms.support.api.client.Status;
 import com.mw.sdk.constant.ApiRequestMethod;
+import com.mw.sdk.pay.IPayCallBack;
+import com.mw.sdk.pay.gp.PayApi;
+import com.mw.sdk.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
+import com.mw.sdk.pay.gp.bean.res.BasePayBean;
+import com.mw.sdk.pay.gp.bean.res.GPCreateOrderIdRes;
+import com.mw.sdk.pay.gp.bean.res.GPExchangeRes;
+import com.mw.sdk.pay.gp.task.LoadingDialog;
+import com.mw.sdk.pay.gp.util.PayHelper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -50,14 +53,24 @@ public class HuaweiPayImpl {
 
     private Activity mActivity;
 
+    private IPayCallBack iPayCallBack;
+
     private String productId;
     private String cpOrderId;
     private String extra;
+    private String currentOrderId;
+
+    private String current_inAppPurchaseData;
 
     private ProductInfo currentProductInfo;
     private GooglePayCreateOrderIdReqBean createOrderIdReqBean;
 
     private LoadingDialog loadingDialog;
+    private Double skuAmount;
+
+    public void setPayCallBack(IPayCallBack iPayCallBack) {
+        this.iPayCallBack = iPayCallBack;
+    }
 
     public HuaweiPayImpl(Activity mActivity) {
         this.mActivity = mActivity;
@@ -260,6 +273,7 @@ public class HuaweiPayImpl {
             public void success(GPCreateOrderIdRes result, String msg) {
 
                 if (result != null && result.getPayData() != null && SStringUtil.isNotEmpty(result.getPayData().getOrderId())){
+                    skuAmount = result.getPayData().getAmount();
                     createPurchaseIntentToPay(mActivity, result.getPayData().getOrderId(), createOrderIdReqBean.getProductId());
                 }else {
                     handlePayFail("create order error");
@@ -283,6 +297,7 @@ public class HuaweiPayImpl {
 
     public void createPurchaseIntentToPay(Activity activity, String orderId, String productId){
 
+        this.currentOrderId = orderId;
         // 构造一个PurchaseIntentReq对象
         PurchaseIntentReq req = new PurchaseIntentReq();
         // 通过createPurchaseIntent接口购买的商品必须是您在AppGallery Connect网站配置的商品
@@ -349,7 +364,7 @@ public class HuaweiPayImpl {
             handlePayFail("inAppPurchaseDataSignature is empty");
             return;
         }
-
+        this.current_inAppPurchaseData = inAppPurchaseData;
         PayApi.requestSendStone_huawei(this.mActivity, inAppPurchaseData, inAppPurchaseDataSignature, reissue, new SFCallBack<GPExchangeRes>() {
             @Override
             public void success(GPExchangeRes result, String msg) {
@@ -479,10 +494,22 @@ public class HuaweiPayImpl {
         if (loadingDialog != null){
             loadingDialog.dismissProgressDialog();
         }
+
+        if (SStringUtil.isEmpty(msg)){
+            if (iPayCallBack != null) {
+                iPayCallBack.fail(null);
+            }
+            return;
+        }
         loadingDialog.alert(msg, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
+                dialog.dismiss();
+
+                if (iPayCallBack != null) {
+                    iPayCallBack.fail(null);
+                }
             }
         });
     }
@@ -490,6 +517,43 @@ public class HuaweiPayImpl {
     private void handlePaySuccess(){
         if (loadingDialog != null){
             loadingDialog.dismissProgressDialog();
+        }
+
+        if (iPayCallBack != null) {
+
+            Gson gson = new Gson();
+
+            BasePayBean payBean = new BasePayBean();
+
+            try {
+
+                if (this.current_inAppPurchaseData != null) {
+                    HWPurchaseData hwPurchaseData = gson.fromJson(this.current_inAppPurchaseData, HWPurchaseData.class);
+
+                    if (hwPurchaseData != null){
+
+                        payBean.setOrderId(hwPurchaseData.getOrderId());
+                        payBean.setPackageName(hwPurchaseData.getPackageName());
+                        payBean.setUsdPrice(this.skuAmount);
+                        payBean.setProductId(hwPurchaseData.getProductId());
+//                    payBean.setmItemType(purchase.getItemType());
+                        payBean.setOriginPurchaseData(this.current_inAppPurchaseData);
+                        payBean.setPurchaseState(hwPurchaseData.getPurchaseState());
+                        payBean.setPurchaseTime(hwPurchaseData.getPurchaseTime());
+                        //payBean.setSignature(purchase.getSignature());
+                        payBean.setDeveloperPayload(hwPurchaseData.getDeveloperPayload());
+                        //payBean.setmToken(purchase.getPurchaseToken());
+                        payBean.setPrice(hwPurchaseData.getPrice());
+                        payBean.setCurrency(hwPurchaseData.getCurrency());
+
+                    }
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            iPayCallBack.success(payBean);
         }
     }
 }

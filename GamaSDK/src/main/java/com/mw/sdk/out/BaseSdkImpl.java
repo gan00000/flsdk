@@ -703,8 +703,32 @@ public class BaseSdkImpl implements IMWSDK {
     }
 
     private void doHuaweiPay(Activity activity, GooglePayCreateOrderIdReqBean googlePayCreateOrderIdReqBean) {
+
         if (huaweiPay == null){
             huaweiPay = new HuaweiPayImpl(activity);
+
+            huaweiPay.setPayCallBack(new IPayCallBack() {
+                @Override
+                public void success(BasePayBean basePayBean) {
+                    if (iPayListener != null) {
+                        iPayListener.onPaySuccess(basePayBean.getProductId(),basePayBean.getCpOrderId());
+                    }
+                }
+
+                @Override
+                public void fail(BasePayBean basePayBean) {
+                    if (iPayListener != null) {
+                        iPayListener.onPayFail();
+                    }
+                }
+
+                @Override
+                public void cancel(String msg) {
+                    if (iPayListener != null) {
+                        iPayListener.onPayFail();
+                    }
+                }
+            });
         }
         huaweiPay.startPay(activity, googlePayCreateOrderIdReqBean.getProductId());
     }
