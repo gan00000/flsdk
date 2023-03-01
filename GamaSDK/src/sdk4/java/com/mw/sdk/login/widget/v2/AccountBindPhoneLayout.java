@@ -18,13 +18,10 @@ import com.core.base.utils.ToastUtils;
 import com.mw.base.bean.PhoneInfo;
 import com.mw.base.utils.SdkUtil;
 import com.mw.sdk.R;
-import com.mw.sdk.SBaseRelativeLayout;
 import com.mw.sdk.api.Request;
-import com.mw.sdk.login.ILoginCallBack;
 import com.mw.sdk.login.PhoneAreaCodeDialogHelper;
 import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
-import com.mw.sdk.out.ISdkCallBack;
 
 import java.util.List;
 import java.util.Timer;
