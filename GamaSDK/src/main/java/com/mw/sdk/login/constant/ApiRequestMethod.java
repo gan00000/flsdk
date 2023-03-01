@@ -55,6 +55,11 @@ public class ApiRequestMethod {
      */
     public static final String GS_REQUEST_METHOD_PHONE_VERIFY = "bind/v1/be-linked-phone.app";
 
+    //充值接口
+    public final static String API_ORDER_CREATE = "api/order/create";
+    public final static String API_PAYMENT_GOOGLE = "api/google/payment";
+    public final static String API_PAYMENT_HW = "api/huawei/payment";
+
     public enum RequestVfcodeInterface {
         register("1"),
         bind("2"),

@@ -17,7 +17,6 @@ import com.android.billingclient.api.ProductDetails;
 import com.android.billingclient.api.Purchase;
 import com.android.billingclient.api.PurchasesResponseListener;
 import com.android.billingclient.api.PurchasesUpdatedListener;
-import com.android.billingclient.api.SkuDetails;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
@@ -28,13 +27,13 @@ import com.gama.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
 import com.gama.pay.gp.bean.req.PayReqBean;
 import com.gama.pay.gp.bean.res.GPCreateOrderIdRes;
 import com.gama.pay.gp.bean.res.GPExchangeRes;
-import com.gama.pay.gp.constants.GooglePayDomainSite;
 import com.gama.pay.gp.task.LoadingDialog;
 import com.gama.pay.gp.util.GBillingHelper;
 import com.gama.pay.gp.util.PayHelper;
 import com.gama.pay.gp.bean.res.BasePayBean;
 import com.mw.sdk.BuildConfig;
 import com.mw.sdk.R;
+import com.mw.sdk.login.constant.ApiRequestMethod;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -221,7 +220,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
         //设置储值备用域名
         this.createOrderIdReqBean.setRequestSpaUrl(PayHelper.getSpareUrl(activity));
         //设置储值接口名
-        this.createOrderIdReqBean.setRequestMethod(GooglePayDomainSite.GOOGLE_ORDER_CREATE);
+        this.createOrderIdReqBean.setRequestMethod(ApiRequestMethod.API_ORDER_CREATE);
 
         //创建Loading窗
         loadingDialog = new LoadingDialog(activity);

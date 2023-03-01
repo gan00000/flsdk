@@ -18,6 +18,7 @@ import com.gama.pay.gp.constants.GooglePayDomainSite;
 import com.gama.pay.gp.task.GoogleCreateOrderReqTask;
 import com.gama.pay.gp.task.GoogleExchangeReqTask;
 import com.gama.pay.gp.util.PayHelper;
+import com.mw.sdk.login.constant.ApiRequestMethod;
 
 public class PayApi {
 
@@ -82,7 +83,7 @@ public class PayApi {
         exchangeReqBean.setRequestUrl(PayHelper.getPreferredUrl(context));
         exchangeReqBean.setRequestSpaUrl(PayHelper.getSpareUrl(context));
 
-        exchangeReqBean.setRequestMethod(GooglePayDomainSite.GOOGLE_SEND);
+        exchangeReqBean.setRequestMethod(ApiRequestMethod.API_PAYMENT_GOOGLE);
 
         GoogleExchangeReqTask googleExchangeReqTask = new GoogleExchangeReqTask(context, exchangeReqBean);
         googleExchangeReqTask.setReqCallBack(new ISReqCallBack<GPExchangeRes>() {

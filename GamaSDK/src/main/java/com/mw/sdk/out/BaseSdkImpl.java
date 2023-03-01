@@ -61,6 +61,7 @@ import com.mw.sdk.login.widget.v2.AccountBindPhoneLayout;
 import com.mw.sdk.login.widget.v2.ThirdPlatBindAccountLayoutV2;
 import com.mw.sdk.social.share.ShareUtil;
 import com.thirdlib.facebook.SFacebookProxy;
+import com.thirdlib.huawei.HuaweiPayImpl;
 
 import java.util.Map;
 
@@ -85,6 +86,9 @@ public class BaseSdkImpl implements IMWSDK {
     private IPay iPay;
     protected IPayListener iPayListener;
     protected Activity activity;
+
+    HuaweiPayImpl huaweiPay;
+
 
     private ReviewInfo reviewInfo;
 
@@ -293,6 +297,10 @@ public class BaseSdkImpl implements IMWSDK {
                             iPayListener.onPayFail();
                         }
                     }
+                }
+
+                if (huaweiPay != null){
+                    huaweiPay.onActivityResult(activity, requestCode, resultCode, data);
                 }
             }
         });
@@ -690,9 +698,18 @@ public class BaseSdkImpl implements IMWSDK {
 
         } else if(payType == SPayType.WEB) {
             doWebPay(activity,googlePayCreateOrderIdReqBean);
+        } else if(payType == SPayType.HUAWEI) {
+            doHuaweiPay(activity,googlePayCreateOrderIdReqBean);
         } else {//默认Google储值
             PL.i("不支持當前類型： " + payType.name());
         }
+    }
+
+    private void doHuaweiPay(Activity activity, GooglePayCreateOrderIdReqBean googlePayCreateOrderIdReqBean) {
+        if (huaweiPay == null){
+            huaweiPay = new HuaweiPayImpl(activity);
+        }
+        huaweiPay.startPay(activity, googlePayCreateOrderIdReqBean.getProductId());
     }
 
 

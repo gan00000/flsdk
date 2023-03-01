@@ -7,5 +7,6 @@ package com.mw.base.bean;
 public enum SPayType {
 
     GOOGLE,
-    WEB
+    WEB,
+    HUAWEI,
 }

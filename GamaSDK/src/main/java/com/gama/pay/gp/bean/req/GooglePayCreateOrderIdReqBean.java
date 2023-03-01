@@ -18,6 +18,13 @@ public class GooglePayCreateOrderIdReqBean extends PayReqBean {
 		super(context);
 	}
 
+	public String getMode() {
+		return mode;
+	}
+
+	public void setMode(String mode) {
+		this.mode = mode;
+	}
 
 	/**
 	 * @return the productId
