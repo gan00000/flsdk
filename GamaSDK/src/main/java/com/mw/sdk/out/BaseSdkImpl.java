@@ -730,7 +730,7 @@ public class BaseSdkImpl implements IMWSDK {
                 }
             });
         }
-        huaweiPay.startPay(activity, googlePayCreateOrderIdReqBean.getProductId());
+        huaweiPay.startPay(activity, googlePayCreateOrderIdReqBean);
     }
 
 

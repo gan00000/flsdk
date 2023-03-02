@@ -134,13 +134,15 @@ public class HuaweiPayImpl {
         }
     }
 
-    public void startPay(Activity activity, String productId) {
+    public void startPay(Activity activity, GooglePayCreateOrderIdReqBean createOrderIdReqBean) {
 
         if (SStringUtil.isEmpty(productId)){
             handlePayFail("productId is empty");
             return;
         }
-        this.productId = productId;
+        this.productId = createOrderIdReqBean.getProductId();
+        this.cpOrderId = createOrderIdReqBean.getCpOrderId();
+        this.extra = createOrderIdReqBean.getExtra();
         loadingDialog.showProgressDialog();
         checkEnvReady(activity);
     }
@@ -551,7 +553,8 @@ public class HuaweiPayImpl {
 
                     if (hwPurchaseData != null){
 
-                        payBean.setOrderId(hwPurchaseData.getOrderId());
+                        payBean.setTransactionId(hwPurchaseData.getOrderId());
+                        payBean.setOrderId(this.currentOrderId);
                         payBean.setPackageName(hwPurchaseData.getPackageName());
                         payBean.setUsdPrice(this.skuAmount);
                         payBean.setProductId(hwPurchaseData.getProductId());
