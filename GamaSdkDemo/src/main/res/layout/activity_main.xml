@@ -39,19 +39,19 @@
                     android:id="@+id/demo_pay_google"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="google储值:com.game.superand.1usd" />
+                    android:text="google储值test" />
 
                 <Button
                     android:id="@+id/demo_pay_google2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="huawei储值:com.game.superand.2usd" />
+                    android:text="huawei储值test" />
 
                 <Button
                     android:id="@+id/web_pay"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="网页储值" />
+                    android:text="网页储值test" />
 
                 <Button
                     android:id="@+id/track"
@@ -114,6 +114,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="检查Google服务" />
+
+                <Button
+                    android:id="@+id/sendNotify"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="手动发送推送测试图标" />
 
 
             </LinearLayout>

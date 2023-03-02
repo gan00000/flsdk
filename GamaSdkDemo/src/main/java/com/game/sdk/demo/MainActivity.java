@@ -409,6 +409,15 @@ public class MainActivity extends Activity {
             }
         });
 
+        findViewById(R.id.sendNotify).setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.P)
+            @Override
+            public void onClick(View view) {
+
+                sendNotification("tests觉得基督教", "kdkkdk好的哈哈哈哈");
+            }
+        });
+
     }
 
     @Override
