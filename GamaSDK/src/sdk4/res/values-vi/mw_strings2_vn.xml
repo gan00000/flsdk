@@ -9,10 +9,10 @@
     <string name="text_phone_not_match">Sai quy cách số điện thoại</string>
     <string name="text_vfcode_has_send">Đã gửi mã xác minh</string>
     <string name="text_phone_bind_success">Liên kết điện thoại thành công</string>
-    <string name="text_has_bind_tips_google">Google đã nâng cấp thành tài khoản hội viên</string>
-    <string name="text_has_bind_tips_fb">Facebook đã nâng cấp thành tài khoản hội viên</string>
-    <string name="text_has_bind_tips_guest">Khách đã nâng cấp thành tài khoản hội viên</string>
-    <string name="text_has_bind_tips_line">LINE đã nâng cấp thành tài khoản hội viên</string>
+    <string name="text_has_bind_tips_google">Tài khoản đã nâng cấp</string>
+    <string name="text_has_bind_tips_fb">Tài khoản đã nâng cấp</string>
+    <string name="text_has_bind_tips_guest">Tài khoản đã nâng cấp</string>
+    <string name="text_has_bind_tips_line">Tài khoản đã nâng cấp</string>
     <string name="text_has_bind_tips_mw">Tài khoản hội viên</string>
     <string name="text_notice">Thông báo</string>
 

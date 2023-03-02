@@ -35,13 +35,13 @@
     <string name="py_msg_pwd_hint">Hãy nhập mật mã</string>
 
     <!--通用文本-->
-<!--    &#32; == 普通的英文半角空格-->
-<!--    &#160; == &nbsp; == &#xA0; == no-break space （普通的英文半角空格但不换行）-->
-<!--    &#12288; == 中文全角空格 （一个中文宽度）-->
-<!--    &#8194; == &ensp; == en空格 （半个中文宽度）-->
-<!--    &#8195; == &emsp; == em空格 （一个中文宽度）-->
-<!--    &#8197; == 四分之一em空格 （四分之一中文宽度）-->
-<!--    相比平时的空格（&#32;），nbsp拥有不间断（non-breaking）特性。即连续的nbsp会在同一行内显示。即使有100个连续的nbsp，浏览器也不会把它们拆成两行。-->
+    <!--    &#32; == 普通的英文半角空格-->
+    <!--    &#160; == &nbsp; == &#xA0; == no-break space （普通的英文半角空格但不换行）-->
+    <!--    &#12288; == 中文全角空格 （一个中文宽度）-->
+    <!--    &#8194; == &ensp; == en空格 （半个中文宽度）-->
+    <!--    &#8195; == &emsp; == em空格 （一个中文宽度）-->
+    <!--    &#8197; == 四分之一em空格 （四分之一中文宽度）-->
+    <!--    相比平时的空格（&#32;），nbsp拥有不间断（non-breaking）特性。即连续的nbsp会在同一行内显示。即使有100个连续的nbsp，浏览器也不会把它们拆成两行。-->
     <string name="py_confire">Xác &#8195;nhận</string>
     <!--SDK功能提示-->
     <string name="gama_toast_msg_app_not_install" translatable="false">Do bạn chưa cài đặt %s, hãy cài đặt app rồi chia sẻ</string>
@@ -70,14 +70,14 @@
     <string name="py_phone">Điện thoại</string>
     <string name="py_vfcode">Mã xác minh</string>
 
-<!--    新增-->
+    <!--    新增-->
     <string name="guest_login_btn">Đăng nhập khách</string>
     <string name="tips_have_account">Đã có tài khoản?</string>
     <string name="py_login">Đăng nhập</string>
     <string name="text_register">Đăng ký</string>
     <string name="text_login_other">Cách khác</string>
     <string name="text_reg_tips">*Email tài khoản chỉ dùng làm email xác minh giúp tìm lại mật mã, hãy điền thận trọng</string>
-    <string name="py_register_account_get_vfcode">Gửi mã xác minh</string>
+    <string name="py_register_account_get_vfcode">Gửi mã</string>
 
     <string name="py_register_account_hit">Hãy nhập email bạn thường dùng</string>
     <string name="py_register_password_hit">Hãy nhập 6-20 ký tự</string>

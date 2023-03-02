@@ -77,7 +77,7 @@
     <string name="text_register">Đăng ký</string>
     <string name="text_login_other">Cách khác</string>
     <string name="text_reg_tips">*Email tài khoản chỉ dùng làm email xác minh giúp tìm lại mật mã, hãy điền thận trọng</string>
-    <string name="py_register_account_get_vfcode">Gửi mã xác minh</string>
+    <string name="py_register_account_get_vfcode">Gửi mã</string>
 
     <string name="py_register_account_hit">Hãy nhập email bạn thường dùng</string>
     <string name="py_register_password_hit">Hãy nhập 6-20 ký tự</string>
