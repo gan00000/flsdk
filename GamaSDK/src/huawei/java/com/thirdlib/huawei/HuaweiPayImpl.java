@@ -136,7 +136,7 @@ public class HuaweiPayImpl {
 
     public void startPay(Activity activity, GooglePayCreateOrderIdReqBean createOrderIdReqBean) {
 
-        if (SStringUtil.isEmpty(productId)){
+        if (SStringUtil.isEmpty(createOrderIdReqBean.getProductId())){
             handlePayFail("productId is empty");
             return;
         }
