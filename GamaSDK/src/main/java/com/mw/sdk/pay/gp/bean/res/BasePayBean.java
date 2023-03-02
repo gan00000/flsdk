@@ -11,7 +11,7 @@ public class BasePayBean implements Serializable {
     private String productId;
     private long purchaseTime;
     private String developerPayload;
-    private String purchaseId;
+    private String transactionId;
     private int purchaseState;
     private String signature;
     private int recurringState;
@@ -77,13 +77,14 @@ public class BasePayBean implements Serializable {
         this.developerPayload = developerPayload;
     }
 
-    public String getPurchaseId() {
-        return purchaseId;
+    public String getTransactionId() {
+        return transactionId;
     }
 
-    public void setPurchaseId(String purchaseId) {
-        this.purchaseId = purchaseId;
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
     }
+
 
     public int getPurchaseState() {
         return purchaseState;

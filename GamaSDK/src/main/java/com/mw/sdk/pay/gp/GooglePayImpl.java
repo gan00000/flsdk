@@ -94,7 +94,12 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
                     BasePayBean payBean = new BasePayBean();
                     if (purchase != null) {
                         try {
-                            payBean.setOrderId(purchase.getOrderId());
+                            if (purchase.getAccountIdentifiers() != null && SStringUtil.isNotEmpty(purchase.getAccountIdentifiers().getObfuscatedProfileId())) {
+                                payBean.setOrderId(purchase.getAccountIdentifiers().getObfuscatedProfileId());
+                            }else {
+                                payBean.setOrderId(purchase.getOrderId());
+                            }
+                            payBean.setTransactionId(purchase.getOrderId());
                             payBean.setPackageName(purchase.getPackageName());
                             payBean.setUsdPrice(skuAmount);
                             if (createOrderIdReqBean != null) {
