@@ -710,6 +710,7 @@ public class BaseSdkImpl implements IMWSDK {
             huaweiPay.setPayCallBack(new IPayCallBack() {
                 @Override
                 public void success(BasePayBean basePayBean) {
+                    PL.i("huawei IPayCallBack success");
                     if (iPayListener != null) {
                         iPayListener.onPaySuccess(basePayBean.getProductId(),basePayBean.getCpOrderId());
                     }
@@ -717,6 +718,7 @@ public class BaseSdkImpl implements IMWSDK {
 
                 @Override
                 public void fail(BasePayBean basePayBean) {
+                    PL.i("huawei IPayCallBack fail");
                     if (iPayListener != null) {
                         iPayListener.onPayFail();
                     }
