@@ -13,23 +13,31 @@ android {
     android.libraryVariants.all { variant ->
         variant.outputs.all {
             //定义一个文件
-            if (outputFileName != null && outputFileName.contains("release") && outputFileName.endsWith('.aar') && outputFileName.contains('sdk1')) {
-                outputFileName = "MWSDK-sdk1-release-" + sdk_version + ".aar"
-            }else if (outputFileName != null && outputFileName.contains("release") && outputFileName.endsWith('.aar') && outputFileName.contains('sdk2')) {
-                outputFileName = "MWSDK-sdk2-release-" + sdk_version + ".aar"
-            }else if (outputFileName != null && outputFileName.contains("release") && outputFileName.endsWith('.aar') && outputFileName.contains('sdk3')) {
-                outputFileName = "MWSDK-sdk3-release-" + sdk_version + ".aar"
-            }else if (outputFileName != null && outputFileName.contains("release") && outputFileName.endsWith('.aar') && outputFileName.contains('sdk4')) {
-                outputFileName = "MWSDK-sdk4-release-" + sdk_version + ".aar"
-            }else if (outputFileName != null && outputFileName.contains("release") && outputFileName.endsWith('.aar') && outputFileName.contains('sdk5')) {
-                outputFileName = "MWSDK-sdk5-release-" + sdk_version + ".aar"
+//            if (outputFileName != null && outputFileName.contains("release") && outputFileName.endsWith('.aar') && outputFileName.contains('sdk1')) {
+//                outputFileName = "MWSDK-sdk1-release-" + sdk_version + ".aar"
+//            }else if (outputFileName != null && outputFileName.contains("release") && outputFileName.endsWith('.aar') && outputFileName.contains('sdk2')) {
+//                outputFileName = "MWSDK-sdk2-release-" + sdk_version + ".aar"
+//            }else if (outputFileName != null && outputFileName.contains("release") && outputFileName.endsWith('.aar') && outputFileName.contains('sdk3')) {
+//                outputFileName = "MWSDK-sdk3-release-" + sdk_version + ".aar"
+//            }else if (outputFileName != null && outputFileName.contains("release") && outputFileName.endsWith('.aar') && outputFileName.contains('sdk4')) {
+//                outputFileName = "MWSDK-sdk4-release-" + sdk_version + ".aar"
+//            }else if (outputFileName != null && outputFileName.contains("release") && outputFileName.endsWith('.aar') && outputFileName.contains('sdk5')) {
+//                outputFileName = "MWSDK-sdk5-release-" + sdk_version + ".aar"
+//            }else if (outputFileName != null && outputFileName.contains("release") && outputFileName.endsWith('.aar') && outputFileName.contains('huawei')) {
+//                outputFileName = "MWSDK-huawei-release-" + sdk_version + ".aar"
+//            }else if (outputFileName != null && outputFileName.contains("release") && outputFileName.endsWith('.aar') && outputFileName.contains('QooApp')) {
+//                outputFileName = "MWSDK-qooapp-release-" + sdk_version + ".aar"
+//            }
+
+            if (outputFileName != null && outputFileName.contains("release") && outputFileName.endsWith('.aar')) {
+                outputFileName = "MWSDK-"  + variant.flavorName.toLowerCase() + "-release-" + sdk_version + ".aar"
             }
         }
     }
 
-    lint {
-        abortOnError false
-    }
+//    lint {
+//        abortOnError false
+//    }
     namespace 'com.mw.sdk'
 
     buildTypes {

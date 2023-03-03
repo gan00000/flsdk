@@ -31,18 +31,19 @@ android {
             //定义存储apk的位置和文件名，这里文件名格式定义为 [applicationId_版本号_ReleaseTime_apk]
             if (outputFileName != null && outputFileName.contains("release") && outputFileName.endsWith('.apk')) {
 
-                outputFileName = "${variant.applicationId}_${variant.versionCode}_${variant.versionName}_${getReleaseTime()}_release.apk"
+                outputFileName = "${variant.flavorName}_${variant.applicationId}_${variant.versionCode}_${variant.versionName}_${getReleaseTime()}_release.apk"
 
             } else if (outputFile != null && outputFile.name.contains("debug") && outputFile.name.endsWith('.apk')) {
 
-                outputFileName = "${variant.applicationId}_${variant.versionCode}_${variant.versionName}_${getReleaseTime()}_debug.apk"
+                outputFileName = "${variant.flavorName}_${variant.applicationId}_${variant.versionCode}_${variant.versionName}_${getReleaseTime()}_debug.apk"
+
             }else if (outputFileName != null && outputFileName.contains("release") && outputFileName.endsWith('.aab')) {
 
-                outputFileName = "${variant.applicationId}_${variant.versionCode}_${variant.versionName}_${getReleaseTime()}_release.aab"
+                outputFileName = "${variant.flavorName}_${variant.applicationId}_${variant.versionCode}_${variant.versionName}_${getReleaseTime()}_release.aab"
 
             } else if (outputFile != null && outputFile.name.contains("debug") && outputFile.name.endsWith('.aab')) {
 
-                outputFileName = "${variant.applicationId}_${variant.versionCode}_${variant.versionName}_${getReleaseTime()}_debug.aab"
+                outputFileName = "${variant.flavorName}_${variant.applicationId}_${variant.versionCode}_${variant.versionName}_${getReleaseTime()}_debug.aab"
             }
         }
     }
@@ -237,12 +238,12 @@ android {
     }
 
     android {
-        lintOptions {
-            checkReleaseBuilds false
-            // Or, if you prefer, you can continue to check for errors in release builds,
-            // but continue the build even when errors are found:
-            abortOnError false
-        }
+//        lintOptions {
+//            checkReleaseBuilds false
+//            // Or, if you prefer, you can continue to check for errors in release builds,
+//            // but continue the build even when errors are found:
+//            abortOnError false
+//        }
     }
     namespace 'com.mw.sdk.demo'
 }
@@ -262,7 +263,7 @@ dependencies {
 
 
 def getReleaseTime() {
-    return new Date().format("yyyy-MM-dd-HH-mm", TimeZone.getDefault())
+    return new Date().format("yyyy_MM_dd_HH_mm", TimeZone.getDefault())
 }
 
 
