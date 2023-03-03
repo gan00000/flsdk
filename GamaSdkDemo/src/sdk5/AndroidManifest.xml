@@ -8,7 +8,10 @@
         android:label="@string/sdk_name"
         android:resizeableActivity="false"
         android:usesCleartextTraffic="true"
-        android:supportsRtl="true">
+        android:supportsRtl="true"
+        android:icon="@mipmap/ic_launcher_gwsg"
+        android:roundIcon="@mipmap/ic_launcher_gwsg_round"
+        >
 
        <!-- <activity
             android:name="com.game.sdk.demo.DoPermissionReq"
