@@ -29,7 +29,9 @@ public class HuaweiSignIn {
 	public void startSignIn(Activity activity, HWSignInCallBack mSignInCallBack){
 	}
 
+	public void signOut(Activity activity) {
 
+	}
 	public void handleActivityResult(Context context, int requestCode, int resultCode, Intent data) {
 
 	}

@@ -1,5 +1,6 @@
 package com.thirdlib.huawei;
 
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -28,7 +29,9 @@ public class HuaweiSignIn {
 	public void startSignIn(Activity activity, HWSignInCallBack mSignInCallBack){
 	}
 
+	public void signOut(Activity activity) {
 
+	}
 	public void handleActivityResult(Context context, int requestCode, int resultCode, Intent data) {
 
 	}
