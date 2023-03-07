@@ -133,8 +133,12 @@ public class DialogLoginImpl implements ILogin {
 
     private void goDialogView(Activity activity, ILoginCallBack iLoginCallBack) {
 
-        if (sLoginDialog != null){
-            sLoginDialog.dismiss();
+        try {
+            if (sLoginDialog != null){
+                sLoginDialog.dismiss();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         sLoginDialog = new SLoginDialogV2(activity, com.mw.sdk.R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
         sLoginDialog.setSFacebookProxy(sFacebookProxy);

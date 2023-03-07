@@ -42,6 +42,8 @@ public interface IMWSDK extends IGameLifeCycle {
      */
     void login(Activity activity, ILoginCallBack iLoginCallBack);
 
+    void switchLogin(Activity activity, ILoginCallBack iLoginCallBack);
+
     void logout(Activity activity, ISdkCallBack iSdkCallBack);
 
     /**

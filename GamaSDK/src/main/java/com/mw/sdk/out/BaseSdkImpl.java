@@ -629,6 +629,12 @@ public class BaseSdkImpl implements IMWSDK {
     }
 
     @Override
+    public void switchLogin(Activity activity, ILoginCallBack iLoginCallBack) {
+        logout(activity, null);
+        login(activity, iLoginCallBack);
+    }
+
+    @Override
     public void logout(Activity activity, ISdkCallBack iSdkCallBack) {
 
         activity.runOnUiThread(new Runnable() {
