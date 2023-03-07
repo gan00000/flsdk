@@ -77,6 +77,8 @@
     <!-- The color black, equivalent to 0xff000000 -->
     <color name="black_s">#ff000000</color>
 
+    <color name="colorPush">#9c0000</color>
+
 </resources>
 
     <!--透明度百分比-开头字母-->
