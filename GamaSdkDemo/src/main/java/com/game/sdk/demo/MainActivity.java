@@ -83,64 +83,7 @@ public class MainActivity extends Activity {
                 mIMWSDK.login(MainActivity.this, new ILoginCallBack() {
                     @Override
                     public void onLogin(SLoginResponse sLoginResponse) {
-                        if (sLoginResponse != null && sLoginResponse.getData() != null) {
-                            String uid = sLoginResponse.getData().getUserId();
-                            userId = uid;
-                            String sign = sLoginResponse.getData().getSign();
-                            String timestamp = sLoginResponse.getData().getTimestamp();
-                            //是否绑定手机
-                            boolean isBindPhone = sLoginResponse.getData().isBindPhone();
-                            //绑定的手机号码
-                            String telephone = sLoginResponse.getData().getTelephone();
-                            //是否绑定账号
-                            boolean isBind = sLoginResponse.getData().isBind();
-                            //todo 进行验证
-
-                            AlertDialog.Builder builder;
-                            if (Build.VERSION.SDK_INT >= 21) {
-                                builder = new AlertDialog.Builder(MainActivity.this, android.R.style.Theme_Material_Dialog);
-                            } else if (Build.VERSION.SDK_INT >= 14) {
-                                builder = new AlertDialog.Builder(MainActivity.this, android.R.style.Theme_Holo_Dialog);
-                            } else {
-                                builder = new AlertDialog.Builder(MainActivity.this);
-                            }
-                            AlertDialog dialog = builder.setNegativeButton("確定", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            }).setCancelable(false)
-                                    .setMessage(sLoginResponse.getData().print())
-                                    .create();
-//                            dialog.show();
-
-
-                            mIMWSDK.registerRoleInfo(MainActivity.this, roleId, roleName, roleLevel, vipLevel, serverCode, serverName);
-                        } else {
-                            PL.i("从登录界面返回");
-                            AlertDialog.Builder builder;
-                            if (Build.VERSION.SDK_INT >= 21) {
-                                builder = new AlertDialog.Builder(MainActivity.this, android.R.style.Theme_Material_Dialog);
-                            } else if (Build.VERSION.SDK_INT >= 14) {
-                                builder = new AlertDialog.Builder(MainActivity.this, android.R.style.Theme_Holo_Dialog);
-                            } else {
-                                builder = new AlertDialog.Builder(MainActivity.this);
-                            }
-                            AlertDialog dialog = builder.setNegativeButton("確定", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    MainActivity.this.finish();
-                                }
-                            }).setPositiveButton("取消", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    loginButton.performClick();
-                                }
-                            }).setCancelable(false)
-                                    .setMessage("是否退出遊戲")
-                                    .create();
-//                            dialog.show();
-                        }
+                        handleLoginResponse(sLoginResponse);
                     }
                 });
 
@@ -291,15 +234,10 @@ public class MainActivity extends Activity {
         findViewById(R.id.logout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mIMWSDK.logout(MainActivity.this, new ISdkCallBack() {
+                mIMWSDK.switchLogin(activity, new ILoginCallBack() {
                     @Override
-                    public void success() {
-
-                    }
-
-                    @Override
-                    public void failure() {
-
+                    public void onLogin(SLoginResponse sLoginResponse) {
+                        handleLoginResponse(sLoginResponse);
                     }
                 });
             }
@@ -418,6 +356,67 @@ public class MainActivity extends Activity {
             }
         });
 
+    }
+
+    private void handleLoginResponse(SLoginResponse sLoginResponse) {
+        if (sLoginResponse != null && sLoginResponse.getData() != null) {
+            String uid = sLoginResponse.getData().getUserId();
+            userId = uid;
+            String sign = sLoginResponse.getData().getSign();
+            String timestamp = sLoginResponse.getData().getTimestamp();
+            //是否绑定手机
+            boolean isBindPhone = sLoginResponse.getData().isBindPhone();
+            //绑定的手机号码
+            String telephone = sLoginResponse.getData().getTelephone();
+            //是否绑定账号
+            boolean isBind = sLoginResponse.getData().isBind();
+            //todo 进行验证
+
+            AlertDialog.Builder builder;
+            if (Build.VERSION.SDK_INT >= 21) {
+                builder = new AlertDialog.Builder(MainActivity.this, android.R.style.Theme_Material_Dialog);
+            } else if (Build.VERSION.SDK_INT >= 14) {
+                builder = new AlertDialog.Builder(MainActivity.this, android.R.style.Theme_Holo_Dialog);
+            } else {
+                builder = new AlertDialog.Builder(MainActivity.this);
+            }
+            AlertDialog dialog = builder.setNegativeButton("確定", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            }).setCancelable(false)
+                    .setMessage(sLoginResponse.getData().print())
+                    .create();
+//                            dialog.show();
+
+
+            mIMWSDK.registerRoleInfo(MainActivity.this, roleId, roleName, roleLevel, vipLevel, serverCode, serverName);
+        } else {
+            PL.i("从登录界面返回");
+            AlertDialog.Builder builder;
+            if (Build.VERSION.SDK_INT >= 21) {
+                builder = new AlertDialog.Builder(MainActivity.this, android.R.style.Theme_Material_Dialog);
+            } else if (Build.VERSION.SDK_INT >= 14) {
+                builder = new AlertDialog.Builder(MainActivity.this, android.R.style.Theme_Holo_Dialog);
+            } else {
+                builder = new AlertDialog.Builder(MainActivity.this);
+            }
+            AlertDialog dialog = builder.setNegativeButton("確定", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    MainActivity.this.finish();
+                }
+            }).setPositiveButton("取消", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    loginButton.performClick();
+                }
+            }).setCancelable(false)
+                    .setMessage("是否退出遊戲")
+                    .create();
+//                            dialog.show();
+        }
     }
 
     @Override
