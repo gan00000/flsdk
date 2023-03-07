@@ -92,6 +92,7 @@ public class HuaweiSignIn {
 		silentSignInByHwId(activity, mSignInCallBack);
 	}
 
+	//退出华为账号
 	public void signOut(Activity activity) {
 		if (mAuthService == null){
 			return;
@@ -106,6 +107,28 @@ public class HuaweiSignIn {
 			@Override
 			public void onFailure(Exception e) {
 				PL.i("huawei signOut fail");
+			}
+		});
+	}
+
+	//取消授权登录
+	private void cancelAuthorization() {
+
+		if (mAuthService == null){
+			return;
+		}
+
+		Task<Void> task = mAuthService.cancelAuthorization();
+		task.addOnSuccessListener(new OnSuccessListener<Void>() {
+			@Override
+			public void onSuccess(Void aVoid) {
+				PL.i("cancelAuthorization success");
+			}
+		});
+		task.addOnFailureListener(new OnFailureListener() {
+			@Override
+			public void onFailure(Exception e) {
+				PL.i("cancelAuthorization failure:" + e.getClass().getSimpleName());
 			}
 		});
 	}
