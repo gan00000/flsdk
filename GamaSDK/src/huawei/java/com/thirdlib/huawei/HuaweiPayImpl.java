@@ -384,29 +384,37 @@ public class HuaweiPayImpl {
 //            e.printStackTrace();
 //        }
         this.current_inAppPurchaseData = inAppPurchaseData;
-        PayApi.requestSendStone_huawei(this.mActivity, inAppPurchaseData, inAppPurchaseDataSignature, reissue, new SFCallBack<GPExchangeRes>() {
-            @Override
-            public void success(GPExchangeRes result, String msg) {
 
-                try {
-                    InAppPurchaseData inAppPurchaseDataBean = new InAppPurchaseData(inAppPurchaseData);
-                    int purchaseState = inAppPurchaseDataBean.getPurchaseState();
+        try {
+
+            InAppPurchaseData inAppPurchaseDataBean = new InAppPurchaseData(inAppPurchaseData);
+            int purchaseState = inAppPurchaseDataBean.getPurchaseState();
+
+            PayApi.requestSendStone_huawei(this.mActivity, inAppPurchaseData, inAppPurchaseDataSignature, reissue, new SFCallBack<GPExchangeRes>() {
+                @Override
+                public void success(GPExchangeRes result, String msg) {
+
                     consumeOwnedPurchase(mActivity, inAppPurchaseDataBean);
                     handlePaySuccess();
-                } catch (JSONException e) {
-
                 }
-            }
 
-            @Override
-            public void fail(GPExchangeRes result, String msg) {
-                if (result != null && SStringUtil.isNotEmpty(result.getMessage())) {
-                    handlePayFail(result.getMessage());
-                }else{
-                    handlePayFail("payment error");
+                @Override
+                public void fail(GPExchangeRes result, String msg) {
+                    //test
+                    //consumeOwnedPurchase(mActivity, inAppPurchaseDataBean);
+
+                    if (result != null && SStringUtil.isNotEmpty(result.getMessage())) {
+                        handlePayFail(result.getMessage());
+                    }else{
+                        handlePayFail("payment error");
+                    }
                 }
-            }
-        });
+            });
+
+
+        } catch (JSONException e) {
+            handlePayFail("InAppPurchaseData json error");
+        }
 
     }
 
