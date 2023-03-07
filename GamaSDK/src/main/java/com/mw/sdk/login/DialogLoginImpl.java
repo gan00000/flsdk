@@ -7,6 +7,7 @@ import android.content.Intent;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.facebook.internal.CallbackManagerImpl;
+import com.mw.base.bean.SLoginType;
 import com.mw.base.cfg.ConfigBean;
 import com.mw.base.utils.SdkUtil;
 import com.mw.sdk.SWebViewDialog;
@@ -30,9 +31,6 @@ public class DialogLoginImpl implements ILogin {
     private SLineSignIn sLineSignIn;
     private HuaweiSignIn huaweiSignIn;
 
-    public SGoogleSignIn getGoogleSignIn() {
-        return sGoogleSignIn;
-    }
 
     @Override
     public void onCreate(Activity activity) {
@@ -107,6 +105,30 @@ public class DialogLoginImpl implements ILogin {
             }
         }
         goDialogView(activity, iLoginCallBack);
+    }
+
+    @Override
+    public void signOut(Activity activity) {
+
+//        String previousLoginType = SdkUtil.getPreviousLoginType(activity);
+//        if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GOOGLE, previousLoginType)) {//google
+//        } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_LINE, previousLoginType)) {//line
+//        } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_FB, previousLoginType)) {//fb
+//        }else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_HUAWEI, previousLoginType)) {
+//        }
+
+        if (sFacebookProxy != null) {
+            sFacebookProxy.fbLogout(activity);
+        }
+
+        if (sGoogleSignIn != null) {
+            sGoogleSignIn.signOut();
+        }
+
+        if(huaweiSignIn != null) {
+            huaweiSignIn.signOut(activity);
+        }
+
     }
 
     private void goDialogView(Activity activity, ILoginCallBack iLoginCallBack) {

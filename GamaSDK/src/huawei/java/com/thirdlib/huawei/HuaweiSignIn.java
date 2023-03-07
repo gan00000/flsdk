@@ -92,6 +92,26 @@ public class HuaweiSignIn {
 		silentSignInByHwId(activity, mSignInCallBack);
 	}
 
+	public void signOut(Activity activity) {
+		if (mAuthService == null){
+			return;
+		}
+		Task<Void> signOutTask = mAuthService.signOut();
+		signOutTask.addOnSuccessListener(new OnSuccessListener<Void>() {
+			@Override
+			public void onSuccess(Void aVoid) {
+				PL.i("huawei signOut Success");
+			}
+		}).addOnFailureListener(new OnFailureListener() {
+			@Override
+			public void onFailure(Exception e) {
+				PL.i("huawei signOut fail");
+			}
+		});
+	}
+
+
+
 	/**
 	 * 静默登录，如果设备上的华为帐号系统已经登录，并且用户已经授权过，无需再拉起登录页面和授权页面，
 	 * 将直接静默登录成功，在成功监听器中，返回帐号信息;

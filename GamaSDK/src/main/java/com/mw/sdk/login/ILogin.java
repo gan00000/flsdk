@@ -14,5 +14,6 @@ public interface ILogin extends IGameLifeCycle {
 
     public void startLogin(Activity activity, ILoginCallBack iLoginCallBack);
     public void initFacebookPro(Activity activity, SFacebookProxy sFacebookProxy);
-    public SGoogleSignIn getGoogleSignIn();
+
+    public void signOut(Activity activity);
 }

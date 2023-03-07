@@ -635,19 +635,23 @@ public class BaseSdkImpl implements IMWSDK {
             @Override
             public void run() {
 
-                String previousLoginType = SdkUtil.getPreviousLoginType(activity);
+//                String previousLoginType = SdkUtil.getPreviousLoginType(activity);
+//
+//                if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GOOGLE, previousLoginType)) {//google
+//
+//                    if (iLogin != null && iLogin.getGoogleSignIn() != null) {
+//                        iLogin.getGoogleSignIn().signOut();
+//                    }
+//
+//                } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_LINE, previousLoginType)) {//line
+//                } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_FB, previousLoginType)) {//fb
+//                    if (sFacebookProxy != null) {
+//                        sFacebookProxy.fbLogout(activity);
+//                    }
+//                }
 
-                if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GOOGLE, previousLoginType)) {//google
-
-                    if (iLogin != null && iLogin.getGoogleSignIn() != null) {
-                        iLogin.getGoogleSignIn().signOut();
-                    }
-
-                } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_LINE, previousLoginType)) {//line
-                } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_FB, previousLoginType)) {//fb
-                    if (sFacebookProxy != null) {
-                        sFacebookProxy.fbLogout(activity);
-                    }
+                if (iLogin != null){
+                    iLogin.signOut(activity);
                 }
                 if (iSdkCallBack != null){
                     iSdkCallBack.success();
