@@ -107,12 +107,12 @@ android {
             versionName "1.0"
             flavorDimensions "1"
             resValue "string", "scheme", "gwsg"
-            resValue "string", "facebook_app_id", "1362551254507553"
-            resValue "string", "facebook_client_token", "0a8e2080cba4d5aa1fe9d9dd65c04e58"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1362551254507553" //启用分析
-            resValue "string", "fb_login_protocol_scheme", "fb1362551254507553"
-            resValue "string", "facebook_app_name", "鬼武三國：燼"
-            resValue "string", "line_channelId", ""
+//            resValue "string", "facebook_app_id", "1362551254507553"
+//            resValue "string", "facebook_client_token", "0a8e2080cba4d5aa1fe9d9dd65c04e58"
+//            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1362551254507553" //启用分析
+//            resValue "string", "fb_login_protocol_scheme", "fb1362551254507553"
+//            resValue "string", "facebook_app_name", "鬼武三國：燼"
+//            resValue "string", "line_channelId", ""
             resValue "string", "channel_platform", "qooapp"  //渠道区分,google包设置google,apk包设置"meow",qooapp渠道apk为"qooapp"
 
             //每个游戏的demo设置 test
@@ -282,8 +282,21 @@ boolean isHuaweiFlavor(){
     }
     return false
 }
+
+boolean isQooappFlavor(){
+    for (String s in gradle.startParameter.taskNames) {
+        println("taskName ==== " + s)
+        if(s.toLowerCase().contains("qooapp")){
+            return true
+        }
+    }
+    return false
+}
+
 if (isHuaweiFlavor()){
     apply plugin: 'com.huawei.agconnect'  //华为需要设置
+}else if (isQooappFlavor()){
+
 }else {
     //Google包，第三方包设置
     apply plugin: 'com.google.gms.google-services'
