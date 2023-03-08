@@ -46,7 +46,7 @@ public class QooappPayImpl {
     private String extra;
     private String currentOrderId;
 
-    private String current_inAppPurchaseData;
+//    private String current_inAppPurchaseData;
 
     private GooglePayCreateOrderIdReqBean createOrderIdReqBean;
 
@@ -145,10 +145,10 @@ public class QooappPayImpl {
 
                     JSONObject dataJson = puchaseData.getJSONObject("data");
                     String signature = puchaseData.getString("signature");
-                    String algorithm = puchaseData.getString("algorithm");
+                    String algorithm = puchaseData.getString("algorithm");//有效值是 sha1或sha256
 
                     if (SStringUtil.isNotEmpty(dataJson.toString()) && SStringUtil.isNotEmpty(signature)) {
-                        sendPayment(dataJson.toString(), signature,"no");
+                        sendPayment(dataJson.toString(), signature, algorithm, "no");
                         return;
                     }
                 } catch (JSONException e) {
@@ -167,11 +167,12 @@ public class QooappPayImpl {
             @Override
             public void onCancel() {
                 PL.i("QooAppOpenSDK.onCancel");
+                handlePayFail("");
             }
         }, activity, productId, orderId, developerPayload);
     }
 
-    public void sendPayment(String inAppPurchaseData, String inAppPurchaseDataSignature, String reissue){
+    public void sendPayment(String inAppPurchaseData, String inAppPurchaseDataSignature, String algorithm, String reissue){
 
         if (SStringUtil.isEmpty(inAppPurchaseData)){
             handlePayFail("inAppPurchaseData is empty");
@@ -181,8 +182,8 @@ public class QooappPayImpl {
             handlePayFail("inAppPurchaseDataSignature is empty");
             return;
         }
-        //boolean checkSign = checkSign(inAppPurchaseData, inAppPurchaseDataSignature, publicKey, "SHA256WithRSA");
-        //PL.i("checkSign is " + checkSign);
+        boolean checkSign = checkSign(inAppPurchaseData, inAppPurchaseDataSignature, publicKey, algorithm);
+        PL.i("checkSign is " + checkSign);
 //        try {
 //            JSONObject jsonObject = new JSONObject(inAppPurchaseData);
 //            String developerPayload = jsonObject.getString("developerPayload");
@@ -192,12 +193,12 @@ public class QooappPayImpl {
 //        } catch (JSONException e) {
 //            e.printStackTrace();
 //        }
-        this.current_inAppPurchaseData = inAppPurchaseData;
+        //this.current_inAppPurchaseData = inAppPurchaseData;
 
         PayApi.requestSendStone_qooapp(this.mActivity, inAppPurchaseData, inAppPurchaseDataSignature, reissue, new SFCallBack<GPExchangeRes>() {
             @Override
             public void success(GPExchangeRes result, String msg) {
-                consumeOwnedPurchase(mActivity, inAppPurchaseData);
+                consumeOwnedPurchase(mActivity, inAppPurchaseData, reissue);
                 handlePaySuccess();
             }
 
@@ -233,16 +234,19 @@ public class QooappPayImpl {
                         String signature = restorePurchasesJsonObject.getString("signature");
                         String algorithm = restorePurchasesJsonObject.getString("algorithm");
 
+                        //查询的时候这里是数组，购买的时候不是数组
                         JSONArray dataJsonArray = restorePurchasesJsonObject.getJSONArray("data");
                         PL.i("QooAppOpenSDK.restorePurchases onSuccess dataJsonArray:" + dataJsonArray.length());
-                        for (int i = 0; i < dataJsonArray.length(); i++) {
 
-                            JSONObject puchaseData = dataJsonArray.getJSONObject(i);
-                            if (SStringUtil.isNotEmpty(puchaseData.toString()) && SStringUtil.isNotEmpty(signature)) {
-                                sendPayment(puchaseData.toString(), signature,"yes");
-                            }
-
+                        if (SStringUtil.isNotEmpty(dataJsonArray.toString()) && SStringUtil.isNotEmpty(signature)) {
+                            sendPayment(dataJsonArray.toString(), signature, algorithm, "yes");
                         }
+
+//                        for (int i = 0; i < dataJsonArray.length(); i++) {
+//
+//                            JSONObject puchaseData = dataJsonArray.getJSONObject(i);
+//
+//                        }
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -259,9 +263,14 @@ public class QooappPayImpl {
 
     }
 
-    public void consumeOwnedPurchase(Activity activity, String inAppPurchaseData){
+    public void consumeOwnedPurchase(Activity activity, String inAppPurchaseData, String reissue){
 
         try {
+
+            if ("yes".equals(reissue)){
+
+            }
+
             JSONObject puchaseData = new JSONObject(inAppPurchaseData);
 
            String purchase_id = puchaseData.getString("purchase_id");
@@ -326,9 +335,9 @@ public class QooappPayImpl {
 
             BasePayBean payBean = new BasePayBean();
 
-            try {
+//            try {
 
-                if (this.current_inAppPurchaseData != null) {
+//                if (this.current_inAppPurchaseData != null) {
 //                    HWPurchaseData hwPurchaseData = gson.fromJson(this.current_inAppPurchaseData, HWPurchaseData.class);
 //
 //                    if (hwPurchaseData != null){
@@ -349,17 +358,17 @@ public class QooappPayImpl {
 //                        payBean.setCurrency(hwPurchaseData.getCurrency());
 //
 //                    }
-                }
+//                }
 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
 
             iPayCallBack.success(payBean);
         }
     }
 
-    public static final String publicKey = "MIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAnQtpQslB03181lk0aDzjqkyfOSvu4fe31XSzsNYn63McP6A1jKFLtWHt8L8wdK9EBTOzXcMGX4QlM0WdscuK5g4Dmz8ivNH4vFF1cX5mx1Z9JoVhfVR5jEjzLxOBzoLnNLFk1DW45H6u7F7+5JMDyxp87DwbelaCq9DLn0269w2gbI0npheERwwj8CmDxCeO5JQTiaTOGWM9u/akIw+D99cX/YpNo4TiNdGAaESR0d5YMqOH536LexZvshvSeOCIJaNc0soINHJaffaB1amR4QFyKY5ISQQDTdtW4RfR5snHM1cq6hxnOT4ze8JtBzqE9Q7dUGFd9mbqWguYm8vpeKyjBXhf6AKzEFILrU+Yyrg312hoSKwWFTAjSyCw8mH2ktPvk9oObcQpelhMNXZMmCPlT5eijQkgRqwMeHxXJQNA930yDahMGdI+taMO6TtOyCxSMRA54IOSSO7s1Fl8Pu0cDn2WJrOHSECX0L47Up/P93II2N3zNfGNKs+zNidfAgMBAAE=";
+    public static final String publicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1p0wgJCX9XERkGaU3t7hFvoc9tES+wDcbKu/C8BQojCX43MH7ZWjM4A7zze8sGq/41pV7v30lcf4psQN0YxHDtG7k97byvGVgtdgTVfpRm3i0da5tu1VqQufgsVdmT8vHrCU5oOvI+flVEEBzQrKio2spe+/l1QnfdYmwKf0wZ3/Z+SSc9KnLwimB6dUisrDRXNOsfYU0oT38x1Zt1V+lUuU6nFQjfA7AsaIOX45W7Q47P00zlRrF438KXJu81r8M9rcxFt4/t9lNXCOwI4fn2KzJfsp8gOZonMANyiMRNT1k0gUilGXkzyBH5OHEQidEpwBs0YnJvSPxAfXgh66EQIDAQAB";
     /**
      * 校验签名信息
      *
@@ -378,10 +387,12 @@ public class QooappPayImpl {
         }
 
         // 当signatureAlgorithm为空时使用默认签名算法
-        if (signatureAlgorithm == null || signatureAlgorithm.length() == 0) {
-            signatureAlgorithm = "SHA256WithRSA";
-            System.out.println("doCheck, algorithm: SHA256WithRSA");
+        if ("sha1".equals(signatureAlgorithm)) {
+            signatureAlgorithm = "SHA1withRSA";
+        }else {
+            signatureAlgorithm = "SHA256WithRSA"; //sha256
         }
+
         try {
             //Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
             // 生成"RSA"的KeyFactory对象
