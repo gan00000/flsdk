@@ -59,6 +59,7 @@ public class ApiRequestMethod {
     public final static String API_ORDER_CREATE = "api/order/create";
     public final static String API_PAYMENT_GOOGLE = "api/google/payment";
     public final static String API_PAYMENT_HW = "api/huawei/payment";
+    public final static String API_PAYMENT_QOOAPP = "api/qooapp/payment";
 
     public enum RequestVfcodeInterface {
         register("1"),

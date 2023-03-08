@@ -179,4 +179,59 @@ public class PayApi {
         });
         googleExchangeReqTask.excute(GPExchangeRes.class);
     }
+
+
+    public static void requestSendStone_qooapp(Context context, String inAppPurchaseData, String inAppPurchaseDataSignature, String reissue, SFCallBack<GPExchangeRes> sfCallBack) {
+
+        GoogleExchangeReqBean exchangeReqBean = new GoogleExchangeReqBean(context);
+        exchangeReqBean.setDataSignature(inAppPurchaseDataSignature);
+        exchangeReqBean.setPurchaseData(inAppPurchaseData);
+        exchangeReqBean.setReissue(reissue);
+
+        exchangeReqBean.setRequestUrl(PayHelper.getPreferredUrl(context));
+        exchangeReqBean.setRequestSpaUrl(PayHelper.getSpareUrl(context));
+
+        exchangeReqBean.setRequestMethod(ApiRequestMethod.API_PAYMENT_QOOAPP);
+
+        GoogleExchangeReqTask googleExchangeReqTask = new GoogleExchangeReqTask(context, exchangeReqBean);
+        googleExchangeReqTask.setReqCallBack(new ISReqCallBack<GPExchangeRes>() {
+
+            @Override
+            public void success(GPExchangeRes gpExchangeRes, String rawResult) {
+                if (gpExchangeRes != null && gpExchangeRes.isRequestSuccess()) {
+                    PL.i("huawei payment finish");
+                    if (sfCallBack != null){
+                        sfCallBack.success(gpExchangeRes,rawResult);
+                    }
+                } else {
+//                    if (gpExchangeRes!=null && !TextUtils.isEmpty(gpExchangeRes.getMessage())){
+//                        ToastUtils.toast(activity,gpExchangeRes.getMessage());
+//                    }
+                    PL.i("huawei payment failed");
+                    if (sfCallBack != null){
+                        sfCallBack.fail(gpExchangeRes,rawResult);
+                    }
+                }
+            }
+
+            @Override
+            public void timeout(String code) {
+                if (sfCallBack != null){
+                    sfCallBack.fail(null,"");
+                }
+            }
+
+            @Override
+            public void noData() {
+                if (sfCallBack != null){
+                    sfCallBack.fail(null,"");
+                }
+            }
+
+            @Override
+            public void cancel() {
+            }
+        });
+        googleExchangeReqTask.excute(GPExchangeRes.class);
+    }
 }

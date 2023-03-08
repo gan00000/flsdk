@@ -674,7 +674,7 @@ public class BaseSdkImpl implements IMWSDK {
             PL.i("点击过快，无效");
             return;
         }
-        iPayListener = listener;
+        //iPayListener = listener;
         firstClickTime = System.currentTimeMillis();
 
         activity.runOnUiThread(new Runnable() {
@@ -686,10 +686,11 @@ public class BaseSdkImpl implements IMWSDK {
         });
     }
 
-    private String productId;
-    private String cpOrderId;
-    private String extra;
+    protected String productId;
+    protected String cpOrderId;
+    protected String extra;
     protected void startPay(final Activity activity, final SPayType payType, final String cpOrderId, final String productId, final String extra, IPayListener listener) {
+        this.iPayListener = listener;
         this.activity = activity;
         this.productId = productId;
         this.cpOrderId = cpOrderId;
@@ -707,11 +708,15 @@ public class BaseSdkImpl implements IMWSDK {
             doWebPay(activity,googlePayCreateOrderIdReqBean);
         } else if(payType == SPayType.HUAWEI) {
             doHuaweiPay(activity,googlePayCreateOrderIdReqBean);
+        } else if(payType == SPayType.QooApp) {
+            doQooAppPay(activity,googlePayCreateOrderIdReqBean);
         } else {//默认Google储值
             PL.i("不支持當前類型： " + payType.name());
         }
     }
+    protected void doQooAppPay(Activity activity, GooglePayCreateOrderIdReqBean googlePayCreateOrderIdReqBean) {
 
+    }
     private void doHuaweiPay(Activity activity, GooglePayCreateOrderIdReqBean googlePayCreateOrderIdReqBean) {
 
         if (huaweiPay == null){

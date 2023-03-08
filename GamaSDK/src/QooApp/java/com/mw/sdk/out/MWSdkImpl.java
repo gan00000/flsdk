@@ -12,14 +12,20 @@ import com.mw.sdk.login.QooAppLoginView;
 import com.mw.sdk.login.model.QooAppLoginModel;
 import com.mw.sdk.login.model.request.ThirdLoginRegRequestBean;
 import com.mw.sdk.login.p.LoginPresenterImpl;
+import com.mw.sdk.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
 import com.qooapp.opensdk.QooAppOpenSDK;
 import com.qooapp.opensdk.common.QooAppCallback;
+import com.thirdlib.qooapp.QooappPayImpl;
 
 public class MWSdkImpl extends BaseSdkImpl {
 
     private static final String TAG = MWSdkImpl.class.getSimpleName();
 
     QooAppLoginView qooAppLoginView;
+
+    GooglePayCreateOrderIdReqBean createOrderIdReqBean;
+
+    QooappPayImpl qooappPay;
 
     @Override
     public void onCreate(Activity activity) {
@@ -31,6 +37,9 @@ public class MWSdkImpl extends BaseSdkImpl {
             @Override
             public void onSuccess(String response) {
                 PL.i("QooAppOpenSDK.initialize onSuccess:" + response);
+                if (qooappPay == null) {
+                    qooappPay = new QooappPayImpl(activity);
+                }
             }
 
             @Override
@@ -39,6 +48,15 @@ public class MWSdkImpl extends BaseSdkImpl {
             }
         }, activity);
 
+    }
+
+    @Override
+    public void registerRoleInfo(Activity activity, String roleId, String roleName, String roleLevel, String vipLevel, String severCode, String serverName) {
+        super.registerRoleInfo(activity, roleId, roleName, roleLevel, vipLevel, severCode, serverName);
+
+        if (qooappPay != null){
+            qooappPay.getOwnedPurchases(activity);
+        }
     }
 
     @Override
@@ -92,4 +110,52 @@ public class MWSdkImpl extends BaseSdkImpl {
             }
         }, activity);
     }
+
+    @Override
+    public void switchLogin(Activity activity, ILoginCallBack iLoginCallBack) {
+
+        QooAppOpenSDK.getInstance().logout(new QooAppCallback() {
+
+            @Override
+            public void onSuccess(String s) {
+                PL.i("QooAppOpenSDK.logout onSuccess:" + s);
+                login(activity, iLoginCallBack);
+            }
+
+            @Override
+            public void onError(String s) {
+                PL.i("QooAppOpenSDK.logout onError:" + s);
+                ToastUtils.toast(activity,"QooApp logout error");
+            }
+        }, activity);
+    }
+
+    @Override
+    protected void doQooAppPay(Activity activity, GooglePayCreateOrderIdReqBean createOrderIdReqBean) {
+        super.doQooAppPay(activity, createOrderIdReqBean);
+
+        this.createOrderIdReqBean = createOrderIdReqBean;
+
+        if (qooappPay != null) {
+            qooappPay.startPay(activity, createOrderIdReqBean);
+        }
+    }
+
+
+    @Override
+    public void shareLine(Activity activity, String content, ISdkCallBack iSdkCallBack) {
+    }
+
+    @Override
+    public void shareFacebook(Activity activity, String hashTag, String message, String shareLinkUrl, ISdkCallBack iSdkCallBack) {
+    }
+
+    @Override
+    public void share(Activity activity, String hashTag, String message, String shareLinkUrl, ISdkCallBack iSdkCallBack) {
+    }
+
+    @Override
+    public void share(Activity activity, ThirdPartyType type, String hashTag, String message, String shareLinkUrl, String picPath, ISdkCallBack iSdkCallBack) {
+    }
+
 }

@@ -9,4 +9,5 @@ public enum SPayType {
     GOOGLE,
     WEB,
     HUAWEI,
+    QooApp,
 }
