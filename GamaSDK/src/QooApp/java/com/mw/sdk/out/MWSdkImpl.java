@@ -12,7 +12,9 @@ import com.mw.sdk.login.QooAppLoginView;
 import com.mw.sdk.login.model.QooAppLoginModel;
 import com.mw.sdk.login.model.request.ThirdLoginRegRequestBean;
 import com.mw.sdk.login.p.LoginPresenterImpl;
+import com.mw.sdk.pay.IPayCallBack;
 import com.mw.sdk.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
+import com.mw.sdk.pay.gp.bean.res.BasePayBean;
 import com.qooapp.opensdk.QooAppOpenSDK;
 import com.qooapp.opensdk.common.QooAppCallback;
 import com.thirdlib.qooapp.QooappPayImpl;
@@ -137,6 +139,29 @@ public class MWSdkImpl extends BaseSdkImpl {
         this.createOrderIdReqBean = createOrderIdReqBean;
 
         if (qooappPay != null) {
+
+            qooappPay.setPayCallBack(new IPayCallBack() {
+                @Override
+                public void success(BasePayBean basePayBean) {
+                    if (iPayListener != null){
+                        iPayListener.onPaySuccess(basePayBean.getProductId(), basePayBean.getCpOrderId());
+                    }
+                }
+
+                @Override
+                public void fail(BasePayBean basePayBean) {
+                    if (iPayListener != null){
+                        iPayListener.onPayFail();
+                    }
+                }
+
+                @Override
+                public void cancel(String msg) {
+                    if (iPayListener != null){
+                        iPayListener.onPayFail();
+                    }
+                }
+            });
             qooappPay.startPay(activity, createOrderIdReqBean);
         }
     }

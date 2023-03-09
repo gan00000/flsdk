@@ -101,6 +101,7 @@ public class QooappPayImpl {
                 try {
                     if (result != null && result.getPayData() != null && SStringUtil.isNotEmpty(result.getPayData().getOrderId())){
                         String orderId = result.getPayData().getOrderId();
+                        currentOrderId = orderId;
                         skuAmount = result.getPayData().getAmount();
 
                         JSONObject devJsonObject = new JSONObject();
@@ -148,7 +149,7 @@ public class QooappPayImpl {
                     String algorithm = puchaseData.getString("algorithm");//有效值是 sha1或sha256
 
                     if (SStringUtil.isNotEmpty(dataJson.toString()) && SStringUtil.isNotEmpty(signature)) {
-                        sendPayment(dataJson.toString(), signature, algorithm, "no");
+                        sendPayment(dataJson.toString(), signature, algorithm, false);
                         return;
                     }
                 } catch (JSONException e) {
@@ -172,8 +173,8 @@ public class QooappPayImpl {
         }, activity, productId, orderId, developerPayload);
     }
 
-    public void sendPayment(String inAppPurchaseData, String inAppPurchaseDataSignature, String algorithm, String reissue){
-        loadingDialog.showProgressDialog();
+    public void sendPayment(String inAppPurchaseData, String inAppPurchaseDataSignature, String algorithm, boolean reissue){
+
         if (SStringUtil.isEmpty(inAppPurchaseData)){
             handlePayFail("inAppPurchaseData is empty");
             return;
@@ -185,13 +186,15 @@ public class QooappPayImpl {
 //        boolean checkSign = checkSign(inAppPurchaseData, inAppPurchaseDataSignature, publicKey, algorithm);
 //        PL.i("checkSign is " + checkSign);
         //this.current_inAppPurchaseData = inAppPurchaseData;
-
+        if (!reissue){
+            loadingDialog.showProgressDialog();
+        }
         PayApi.requestSendStone_qooapp(this.mActivity, inAppPurchaseData, inAppPurchaseDataSignature, reissue, new SFCallBack<GPExchangeRes>() {
             @Override
             public void success(GPExchangeRes result, String msg) {
 
                 try {//yes表示补发
-                    if ("yes".equals(reissue)){
+                    if (reissue){
                         JSONArray puchaseDataArr = new JSONArray(inAppPurchaseData);
                         for (int i = 0; i < puchaseDataArr.length(); i++) {
                             JSONObject puchaseData = puchaseDataArr.getJSONObject(i);
@@ -200,12 +203,12 @@ public class QooappPayImpl {
                     }else {
                         JSONObject puchaseData = new JSONObject(inAppPurchaseData);
                         consumeOwnedPurchase(mActivity, puchaseData);
+                        handlePaySuccess(puchaseData);
                     }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                handlePaySuccess();
             }
 
             @Override
@@ -245,7 +248,7 @@ public class QooappPayImpl {
                         PL.i("QooAppOpenSDK.restorePurchases onSuccess dataJsonArray:" + dataJsonArray.length());
 
                         if (SStringUtil.isNotEmpty(dataJsonArray.toString()) && SStringUtil.isNotEmpty(signature)) {
-                            sendPayment(dataJsonArray.toString(), signature, algorithm, "yes");
+                            sendPayment(dataJsonArray.toString(), signature, algorithm, true);
                         }
 
 //                        for (int i = 0; i < dataJsonArray.length(); i++) {
@@ -324,7 +327,8 @@ public class QooappPayImpl {
         });
     }
 
-    private void handlePaySuccess(){
+    private void handlePaySuccess(JSONObject puchaseData){
+
         if (loadingDialog != null){
             loadingDialog.dismissProgressDialog();
         }
@@ -335,34 +339,21 @@ public class QooappPayImpl {
 
             BasePayBean payBean = new BasePayBean();
 
-//            try {
-
-//                if (this.current_inAppPurchaseData != null) {
-//                    HWPurchaseData hwPurchaseData = gson.fromJson(this.current_inAppPurchaseData, HWPurchaseData.class);
-//
-//                    if (hwPurchaseData != null){
-//
-//                        payBean.setTransactionId(hwPurchaseData.getOrderId());
-//                        payBean.setOrderId(this.currentOrderId);
-//                        payBean.setPackageName(hwPurchaseData.getPackageName());
-//                        payBean.setUsdPrice(this.skuAmount);
-//                        payBean.setProductId(hwPurchaseData.getProductId());
-////                    payBean.setmItemType(purchase.getItemType());
-//                        payBean.setOriginPurchaseData(this.current_inAppPurchaseData);
-//                        payBean.setPurchaseState(hwPurchaseData.getPurchaseState());
-//                        payBean.setPurchaseTime(hwPurchaseData.getPurchaseTime());
-//                        //payBean.setSignature(purchase.getSignature());
-//                        payBean.setDeveloperPayload(hwPurchaseData.getDeveloperPayload());
-//                        //payBean.setmToken(purchase.getPurchaseToken());
-//                        payBean.setPrice(hwPurchaseData.getPrice());
-//                        payBean.setCurrency(hwPurchaseData.getCurrency());
-//
-//                    }
-//                }
-
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
+//            payBean.setTransactionId(hwPurchaseData.getOrderId());
+            payBean.setOrderId(this.currentOrderId);
+//            payBean.setPackageName(hwPurchaseData.getPackageName());
+            payBean.setUsdPrice(this.skuAmount);
+            payBean.setCpOrderId(this.cpOrderId);
+//            payBean.setProductId(hwPurchaseData.getProductId());
+//                    payBean.setmItemType(purchase.getItemType());
+//            payBean.setOriginPurchaseData(this.current_inAppPurchaseData);
+//            payBean.setPurchaseState(hwPurchaseData.getPurchaseState());
+//            payBean.setPurchaseTime(hwPurchaseData.getPurchaseTime());
+            //payBean.setSignature(purchase.getSignature());
+//            payBean.setDeveloperPayload(hwPurchaseData.getDeveloperPayload());
+            //payBean.setmToken(purchase.getPurchaseToken());
+//            payBean.setPrice(hwPurchaseData.getPrice());
+//            payBean.setCurrency(hwPurchaseData.getCurrency());
 
             iPayCallBack.success(payBean);
         }

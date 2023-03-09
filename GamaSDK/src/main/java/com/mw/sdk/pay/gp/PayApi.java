@@ -181,12 +181,16 @@ public class PayApi {
     }
 
 
-    public static void requestSendStone_qooapp(Context context, String inAppPurchaseData, String inAppPurchaseDataSignature, String reissue, SFCallBack<GPExchangeRes> sfCallBack) {
+    public static void requestSendStone_qooapp(Context context, String inAppPurchaseData, String inAppPurchaseDataSignature, boolean reissue, SFCallBack<GPExchangeRes> sfCallBack) {
 
         GoogleExchangeReqBean exchangeReqBean = new GoogleExchangeReqBean(context);
         exchangeReqBean.setDataSignature(inAppPurchaseDataSignature);
         exchangeReqBean.setPurchaseData(inAppPurchaseData);
-        exchangeReqBean.setReissue(reissue);
+        if (reissue){
+            exchangeReqBean.setReissue("yes");
+        }else {
+            exchangeReqBean.setReissue("no");
+        }
 
         exchangeReqBean.setRequestUrl(PayHelper.getPreferredUrl(context));
         exchangeReqBean.setRequestSpaUrl(PayHelper.getSpareUrl(context));
