@@ -109,12 +109,12 @@ public class MainActivity extends Activity {
 
                     @Override
                     public void onPaySuccess(String productId, String cpOrderId) {
-
+                        ToastUtils.toast(activity,"充值成功>" + skuId);
                     }
 
                     @Override
                     public void onPayFail() {
-
+                        ToastUtils.toast(activity,"充值失败>" + skuId);
                     }
 
                 });
@@ -123,7 +123,7 @@ public class MainActivity extends Activity {
             }
         });
 
-        findViewById(R.id.demo_pay_google2).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.demo_pay_hw).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String skuId = "com.miaoou.6jin";
@@ -131,12 +131,12 @@ public class MainActivity extends Activity {
 
                     @Override
                     public void onPaySuccess(String productId, String cpOrderId) {
-
+                        ToastUtils.toast(activity,"充值成功>" + skuId);
                     }
 
                     @Override
                     public void onPayFail() {
-
+                        ToastUtils.toast(activity,"充值失败>" + skuId);
                     }
 
                 });
@@ -151,12 +151,12 @@ public class MainActivity extends Activity {
 
                     @Override
                     public void onPaySuccess(String productId, String cpOrderId) {
-
+                        ToastUtils.toast(activity,"充值成功>" + skuId);
                     }
 
                     @Override
                     public void onPayFail() {
-
+                        ToastUtils.toast(activity,"充值失败>" + skuId);
                     }
 
                 });
