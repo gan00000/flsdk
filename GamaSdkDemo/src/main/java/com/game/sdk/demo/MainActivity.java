@@ -143,6 +143,25 @@ public class MainActivity extends Activity {
             }
         });
 
+        findViewById(R.id.web_pay_qooapp).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String skuId = "com.miaoou.6jin";
+                mIMWSDK.pay(MainActivity.this, SPayType.QooApp, "" + System.currentTimeMillis(),skuId, "xxxx", "role_id_1","role_name","role_level","vipLevel",serverCode, serverName, new IPayListener() {
+
+                    @Override
+                    public void onPaySuccess(String productId, String cpOrderId) {
+
+                    }
+
+                    @Override
+                    public void onPayFail() {
+
+                    }
+
+                });
+            }
+        });
 
 
         webPayButton.setOnClickListener(new View.OnClickListener() {

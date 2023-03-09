@@ -54,6 +54,12 @@
                     android:text="网页储值test" />
 
                 <Button
+                    android:id="@+id/web_pay_qooapp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="qooapp储值test" />
+
+                <Button
                     android:id="@+id/track"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

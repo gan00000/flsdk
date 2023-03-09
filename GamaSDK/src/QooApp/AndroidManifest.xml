@@ -12,15 +12,13 @@
             android:value="@string/com_qooapp_APP_ID"/>
         <meta-data
             android:name="com.qooapp.PUBLIC_KEY"
-            android:value="-----BEGIN PUBLIC KEY-----
-MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1p0wgJCX9XERkGaU3t7h
+            android:value="MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1p0wgJCX9XERkGaU3t7h
 Fvoc9tES+wDcbKu/C8BQojCX43MH7ZWjM4A7zze8sGq/41pV7v30lcf4psQN0YxH
 DtG7k97byvGVgtdgTVfpRm3i0da5tu1VqQufgsVdmT8vHrCU5oOvI+flVEEBzQrK
 io2spe+/l1QnfdYmwKf0wZ3/Z+SSc9KnLwimB6dUisrDRXNOsfYU0oT38x1Zt1V+
 lUuU6nFQjfA7AsaIOX45W7Q47P00zlRrF438KXJu81r8M9rcxFt4/t9lNXCOwI4f
 n2KzJfsp8gOZonMANyiMRNT1k0gUilGXkzyBH5OHEQidEpwBs0YnJvSPxAfXgh66
-EQIDAQAB
------END PUBLIC KEY-----"/>
+EQIDAQAB"/>
 
     </application>
 

@@ -198,7 +198,22 @@ public class QooappPayImpl {
         PayApi.requestSendStone_qooapp(this.mActivity, inAppPurchaseData, inAppPurchaseDataSignature, reissue, new SFCallBack<GPExchangeRes>() {
             @Override
             public void success(GPExchangeRes result, String msg) {
-                consumeOwnedPurchase(mActivity, inAppPurchaseData, reissue);
+
+                try {//yes表示补发
+                    if ("yes".equals(reissue)){
+                        JSONArray puchaseDataArr = new JSONArray(inAppPurchaseData);
+                        for (int i = 0; i < puchaseDataArr.length(); i++) {
+                            JSONObject puchaseData = puchaseDataArr.getJSONObject(i);
+                            consumeOwnedPurchase(mActivity, puchaseData);
+                        }
+                    }else {
+                        JSONObject puchaseData = new JSONObject(inAppPurchaseData);
+                        consumeOwnedPurchase(mActivity, puchaseData);
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 handlePaySuccess();
             }
 
@@ -263,15 +278,9 @@ public class QooappPayImpl {
 
     }
 
-    public void consumeOwnedPurchase(Activity activity, String inAppPurchaseData, String reissue){
+    public void consumeOwnedPurchase(Activity activity, JSONObject puchaseData){
 
         try {
-
-            if ("yes".equals(reissue)){
-
-            }
-
-            JSONObject puchaseData = new JSONObject(inAppPurchaseData);
 
            String purchase_id = puchaseData.getString("purchase_id");
            String token = puchaseData.getString("token");
