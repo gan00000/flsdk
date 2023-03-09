@@ -11,6 +11,7 @@ public class GoogleExchangeReqBean extends SGameBaseRequestBean {
 	private String googleOrderId;
 	private String purchaseData;
 	private String dataSignature;
+	private String algorithm;
 
 	private String priceCurrencyCode;
 	private String priceAmountMicros;
@@ -39,6 +40,14 @@ public class GoogleExchangeReqBean extends SGameBaseRequestBean {
 
 	public void setDataSignature(String dataSignature) {
 		this.dataSignature = dataSignature;
+	}
+
+	public String getAlgorithm() {
+		return algorithm;
+	}
+
+	public void setAlgorithm(String algorithm) {
+		this.algorithm = algorithm;
 	}
 
 	public String getPriceCurrencyCode() {

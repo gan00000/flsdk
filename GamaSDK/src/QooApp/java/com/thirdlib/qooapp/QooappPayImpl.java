@@ -189,11 +189,11 @@ public class QooappPayImpl {
         if (!reissue){
             loadingDialog.showProgressDialog();
         }
-        PayApi.requestSendStone_qooapp(this.mActivity, inAppPurchaseData, inAppPurchaseDataSignature, reissue, new SFCallBack<GPExchangeRes>() {
+        PayApi.requestSendStone_qooapp(this.mActivity, inAppPurchaseData, inAppPurchaseDataSignature, algorithm, reissue, new SFCallBack<GPExchangeRes>() {
             @Override
             public void success(GPExchangeRes result, String msg) {
 
-                try {//yes表示补发
+                try {//true表示补发
                     if (reissue){
                         JSONArray puchaseDataArr = new JSONArray(inAppPurchaseData);
                         for (int i = 0; i < puchaseDataArr.length(); i++) {

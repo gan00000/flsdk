@@ -181,11 +181,12 @@ public class PayApi {
     }
 
 
-    public static void requestSendStone_qooapp(Context context, String inAppPurchaseData, String inAppPurchaseDataSignature, boolean reissue, SFCallBack<GPExchangeRes> sfCallBack) {
+    public static void requestSendStone_qooapp(Context context, String inAppPurchaseData, String inAppPurchaseDataSignature, String algorithm, boolean reissue, SFCallBack<GPExchangeRes> sfCallBack) {
 
         GoogleExchangeReqBean exchangeReqBean = new GoogleExchangeReqBean(context);
         exchangeReqBean.setDataSignature(inAppPurchaseDataSignature);
         exchangeReqBean.setPurchaseData(inAppPurchaseData);
+        exchangeReqBean.setAlgorithm(algorithm);
         if (reissue){
             exchangeReqBean.setReissue("yes");
         }else {
@@ -203,7 +204,7 @@ public class PayApi {
             @Override
             public void success(GPExchangeRes gpExchangeRes, String rawResult) {
                 if (gpExchangeRes != null && gpExchangeRes.isRequestSuccess()) {
-                    PL.i("huawei payment finish");
+                    PL.i("qooapp payment finish");
                     if (sfCallBack != null){
                         sfCallBack.success(gpExchangeRes,rawResult);
                     }
@@ -211,7 +212,7 @@ public class PayApi {
 //                    if (gpExchangeRes!=null && !TextUtils.isEmpty(gpExchangeRes.getMessage())){
 //                        ToastUtils.toast(activity,gpExchangeRes.getMessage());
 //                    }
-                    PL.i("huawei payment failed");
+                    PL.i("qooapp payment failed");
                     if (sfCallBack != null){
                         sfCallBack.fail(gpExchangeRes,rawResult);
                     }
