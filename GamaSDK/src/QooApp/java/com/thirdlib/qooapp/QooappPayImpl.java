@@ -133,7 +133,7 @@ public class QooappPayImpl {
     }
 
     private void qooappPurchase(Activity activity, String productId, String orderId, String cpOrderId, String developerPayload) {
-
+        loadingDialog.dismissProgressDialog();
         QooAppOpenSDK.getInstance().purchase(new PaymentCallback() {
             @Override
             public void onComplete(String s) {
@@ -173,7 +173,7 @@ public class QooappPayImpl {
     }
 
     public void sendPayment(String inAppPurchaseData, String inAppPurchaseDataSignature, String algorithm, String reissue){
-
+        loadingDialog.showProgressDialog();
         if (SStringUtil.isEmpty(inAppPurchaseData)){
             handlePayFail("inAppPurchaseData is empty");
             return;
@@ -182,17 +182,8 @@ public class QooappPayImpl {
             handlePayFail("inAppPurchaseDataSignature is empty");
             return;
         }
-        boolean checkSign = checkSign(inAppPurchaseData, inAppPurchaseDataSignature, publicKey, algorithm);
-        PL.i("checkSign is " + checkSign);
-//        try {
-//            JSONObject jsonObject = new JSONObject(inAppPurchaseData);
-//            String developerPayload = jsonObject.getString("developerPayload");
-//            JSONObject jsonObjectDevPayload = new JSONObject(developerPayload);
-//            String orderId = jsonObjectDevPayload.getString("orderId");
-//            PL.i("orderId=" + orderId);
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
+//        boolean checkSign = checkSign(inAppPurchaseData, inAppPurchaseDataSignature, publicKey, algorithm);
+//        PL.i("checkSign is " + checkSign);
         //this.current_inAppPurchaseData = inAppPurchaseData;
 
         PayApi.requestSendStone_qooapp(this.mActivity, inAppPurchaseData, inAppPurchaseDataSignature, reissue, new SFCallBack<GPExchangeRes>() {
