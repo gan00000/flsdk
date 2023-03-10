@@ -2,6 +2,7 @@ package com.mw.sdk.out;
 
 import android.app.Activity;
 
+import com.core.base.callback.SFCallBack;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
@@ -183,4 +184,8 @@ public class MWSdkImpl extends BaseSdkImpl {
     public void share(Activity activity, ThirdPartyType type, String hashTag, String message, String shareLinkUrl, String picPath, ISdkCallBack iSdkCallBack) {
     }
 
+    @Override
+    public void requestStoreReview(Activity activity, SFCallBack sfCallBack) {
+
+    }
 }

@@ -2,6 +2,8 @@ package com.mw.sdk.out;
 
 import android.app.Activity;
 
+import com.core.base.callback.SFCallBack;
+
 public class MWSdkImpl extends BaseSdkImpl {
 
     @Override
@@ -17,5 +19,10 @@ public class MWSdkImpl extends BaseSdkImpl {
     @Override
     public void shareLine(Activity activity, String content, ISdkCallBack iSdkCallBack) {
 
+    }
+
+    @Override
+    public void requestStoreReview(Activity activity, SFCallBack sfCallBack) {
+        
     }
 }
