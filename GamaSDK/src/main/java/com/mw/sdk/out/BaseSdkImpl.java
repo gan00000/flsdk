@@ -143,17 +143,17 @@ public class BaseSdkImpl implements IMWSDK {
     * */
 
 //    @Override
-    public void setGameLanguage(final Activity activity, final SGameLanguage gameLanguage) {
-        PL.i("IMWSDK setGameLanguage:" + gameLanguage);
-
-        activity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Localization.gameLanguage(activity, gameLanguage);
-            }
-        });
-
-    }
+//    public void setGameLanguage(final Activity activity, final SGameLanguage gameLanguage) {
+//        PL.i("IMWSDK setGameLanguage:" + gameLanguage);
+//
+//        activity.runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                Localization.gameLanguage(activity, gameLanguage);
+//            }
+//        });
+//
+//    }
 
     @Override
     public void registerRoleInfo(final Activity activity, final String roleId, final String roleName, final String roleLevel, final String vipLevel, final String severCode, final String serverName) {
@@ -206,28 +206,25 @@ public class BaseSdkImpl implements IMWSDK {
             @Override
             public void run() {
 
-                if (!isInitSdk) {
-                    initSDK(activity, SGameLanguage.zh_TW);
-                }
-
-//                activity.getWindow().getDecorView().setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
-//                    @Override
-//                    public void onSystemUiVisibilityChange(int visibility) {
-//                        PL.d("activity onSystemUiVisibilityChange");
-//                        AppUtil.hideActivityBottomBar(activity);
-//                    }
-//                });
-
-                ConfigRequest.requestBaseCfg(activity.getApplicationContext());//加载配置
-                ConfigRequest.requestAreaCodeInfo(activity.getApplicationContext());
-
-                if (iLogin != null) {
-                    iLogin.onCreate(activity);
-                }
-                iPay = IPayFactory.create(IPayFactory.PAY_GOOGLE);
-                iPay.onCreate(activity);
+                onCreate_OnUi(activity);
             }
         });
+
+    }
+
+    protected void onCreate_OnUi(Activity activity) {
+        if (!isInitSdk) {
+            initSDK(activity, SGameLanguage.zh_TW);
+        }
+
+        ConfigRequest.requestBaseCfg(activity.getApplicationContext());//加载配置
+        ConfigRequest.requestAreaCodeInfo(activity.getApplicationContext());
+
+        if (iLogin != null) {
+            iLogin.onCreate(activity);
+        }
+        iPay = IPayFactory.create(IPayFactory.PAY_GOOGLE);
+        iPay.onCreate(activity);
 
     }
 
