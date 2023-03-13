@@ -216,6 +216,9 @@ public class QooappPayImpl {
                 //test
                 //consumeOwnedPurchase(mActivity, inAppPurchaseDataBean);
 
+                if (reissue){
+                    return;
+                }
                 if (result != null && SStringUtil.isNotEmpty(result.getMessage())) {
                     handlePayFail(result.getMessage());
                 }else{
@@ -247,7 +250,7 @@ public class QooappPayImpl {
                         JSONArray dataJsonArray = restorePurchasesJsonObject.getJSONArray("data");
                         PL.i("QooAppOpenSDK.restorePurchases onSuccess dataJsonArray:" + dataJsonArray.length());
 
-                        if (SStringUtil.isNotEmpty(dataJsonArray.toString()) && SStringUtil.isNotEmpty(signature)) {
+                        if (dataJsonArray.length() > 0 && SStringUtil.isNotEmpty(signature)) {
                             sendPayment(dataJsonArray.toString(), signature, algorithm, true);
                         }
 

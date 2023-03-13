@@ -23,6 +23,6 @@ public class MWSdkImpl extends BaseSdkImpl {
 
     @Override
     public void requestStoreReview(Activity activity, SFCallBack sfCallBack) {
-        
+
     }
 }
