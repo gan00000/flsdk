@@ -188,4 +188,11 @@ public class MWSdkImpl extends BaseSdkImpl {
     public void requestStoreReview(Activity activity, SFCallBack sfCallBack) {
 
     }
+
+    @Override
+    protected void onCreate_OnUi(Activity activity) {
+        super.onCreate_OnUi(activity);
+        iPay = null;
+        sFacebookProxy = null;
+    }
 }

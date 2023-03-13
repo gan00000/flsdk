@@ -67,30 +67,30 @@ public class BaseSdkImpl implements IMWSDK {
 
     private static final String TAG = BaseSdkImpl.class.getSimpleName();
     private static final int PERMISSION_REQUEST_CODE = 401;
-    private ILogin iLogin;
+    protected ILogin iLogin;
 
     private long firstClickTime;
 
     private static boolean isInitSdk = false;
 
-    private SFacebookProxy sFacebookProxy;
+    protected SFacebookProxy sFacebookProxy;
 
     protected SWebViewDialog csSWebViewDialog;
     protected SWebViewDialog otherPayWebViewDialog;
 
     protected SBaseDialog commonDialog;
 
-    private IPay iPay;
+    protected IPay iPay;
     protected IPayListener iPayListener;
     protected Activity activity;
 
-    HuaweiPayImpl huaweiPay;
+    protected HuaweiPayImpl huaweiPay;
 
 
     private ReviewInfo reviewInfo;
 
     public BaseSdkImpl() {
-        iLogin = ObjFactory.create(DialogLoginImpl.class);
+//        iLogin = ObjFactory.create(DialogLoginImpl.class);
         PL.i("BaseSdkImpl 构造函数");
     }
 
@@ -611,6 +611,10 @@ public class BaseSdkImpl implements IMWSDK {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
+
+                if (iLogin == null){
+                    iLogin = new DialogLoginImpl(activity);
+                }
 
                 if (iLogin != null) {
                     //清除上一次登录成功的返回值

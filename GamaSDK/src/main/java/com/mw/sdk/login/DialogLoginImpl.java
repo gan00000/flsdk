@@ -31,13 +31,16 @@ public class DialogLoginImpl implements ILogin {
     private SLineSignIn sLineSignIn;
     private HuaweiSignIn huaweiSignIn;
 
-
-    @Override
-    public void onCreate(Activity activity) {
+    public DialogLoginImpl(Activity activity) {
 
         sGoogleSignIn = new SGoogleSignIn(activity, DialogUtil.createLoadingDialog(activity, "Loading..."));
         sLineSignIn = new SLineSignIn(activity, DialogUtil.createLoadingDialog(activity, "Loading..."));
         huaweiSignIn = new HuaweiSignIn(activity, DialogUtil.createLoadingDialog(activity, "Loading..."));
+    }
+
+    @Override
+    public void onCreate(Activity activity) {
+
     }
 
     @Override
