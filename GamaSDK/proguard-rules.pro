@@ -42,7 +42,8 @@
 -keep public class com.mw.base.cfg.ConfigBean$VersionData { *; }
 -keep public class com.mw.base.cfg.ConfigBean$UrlData { *; }
 -keep public class com.mw.base.bean.PhoneInfo { *; }
-
+-keep public class com.mw.sdk.login.model.QooAppLoginModel { *; }
+-keep public class com.mw.sdk.login.model.QooAppLoginModel$UserData { *; }
 
 # -keep public interface mypackage.MyInterface
 # -keep public class * implements mypackage.MyInterface

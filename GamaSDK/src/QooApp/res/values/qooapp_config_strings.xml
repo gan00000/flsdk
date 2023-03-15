@@ -1,7 +1,7 @@
 <resources>
 
     <!--qooapp开始-->
-    <string name="com_qooapp_APP_ID">SANDadc84e9ab1a011ed90d4e23bc1590402</string>
-    <string name="com_qooapp_PUBLIC_KEY"></string>
+<!--    <string name="com_qooapp_APP_ID"></string>-->
+<!--    <string name="com_qooapp_PUBLIC_KEY"></string>-->
 
 </resources>
