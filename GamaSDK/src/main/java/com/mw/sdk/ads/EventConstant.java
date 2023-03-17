@@ -14,6 +14,7 @@ public class EventConstant {
         CREATE_ROLE,//创建角色
         START_GUIDE,//新手引导
         COMPLETE_GUIDE,//完成新手引导
+        Upgrade_Account,//完成新手引导
 
         /**
          * 首储事件

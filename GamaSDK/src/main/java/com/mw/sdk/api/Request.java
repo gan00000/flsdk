@@ -14,6 +14,8 @@ import com.mw.base.bean.SGameBaseRequestBean;
 import com.mw.base.cfg.ResConfig;
 import com.mw.base.utils.SdkUtil;
 import com.mw.sdk.R;
+import com.mw.sdk.ads.EventConstant;
+import com.mw.sdk.ads.SdkEventLogger;
 import com.mw.sdk.constant.ApiRequestMethod;
 import com.mw.sdk.login.execute.BaseLoginRequestTask;
 import com.mw.sdk.login.model.request.AccountBindInGameRequestBean;
@@ -186,6 +188,13 @@ public class Request {
 
                         sLoginResponse.getData().setLoginType(loginType);
 //                        sLoginResponse.getData().setLoginId(name);
+
+                        String userId = sLoginResponse.getData().getUserId();
+                        Map<String, Object> eventValue = new HashMap<String, Object>();
+                        eventValue.put(EventConstant.ParameterName.USER_ID, userId);
+                        String eventName = EventConstant.EventName.Upgrade_Account.name();
+                        SdkEventLogger.sendEventToSever(context,eventName);
+                        SdkEventLogger.trackingWithEventName(context,eventName,eventValue);
 
                         SdkUtil.updateLoginData(context, sLoginResponse);
 
