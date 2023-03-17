@@ -20,6 +20,7 @@ import com.mw.base.bean.PhoneInfo;
 import com.mw.base.bean.SLoginType;
 import com.mw.base.cfg.ResConfig;
 import com.mw.base.utils.SdkUtil;
+import com.mw.sdk.ads.EventConstant;
 import com.mw.sdk.login.constant.BindType;
 import com.mw.sdk.login.constant.ViewType;
 import com.mw.sdk.login.execute.AccountLoginRequestTask;
@@ -49,7 +50,9 @@ import com.thirdlib.twitter.GamaTwitterLogin;
 import com.mw.sdk.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -578,6 +581,14 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 //                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GAMA);
 
 //                        SdkUtil.updateAccountModel(getActivity(),sLoginResponse.getData().getUserId(),true);
+
+                        String userId = sLoginResponse.getData().getUserId();
+                        Map<String, Object> eventValue = new HashMap<String, Object>();
+                        eventValue.put(EventConstant.ParameterName.USER_ID, userId);
+                        String eventName = EventConstant.EventName.Upgrade_Account.name();
+                        SdkEventLogger.sendEventToSever(getActivity(),eventName);
+                        SdkEventLogger.trackingWithEventName(getActivity(),eventName,eventValue);
+
                         SdkUtil.saveAccountModel(getActivity(), account, pwd,sLoginResponse.getData().getUserId(),sLoginResponse.getData().getToken(),
                                 sLoginResponse.getData().getTimestamp(),true);//记住账号密码
                         if (iLoginView != null){
