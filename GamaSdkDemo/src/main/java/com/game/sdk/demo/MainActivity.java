@@ -104,7 +104,7 @@ public class MainActivity extends Activity {
 
 //                com.game.superand.1usd
 //                com.game.superand.2usd
-                String skuId = "com_xinhai_chmxt_3card";
+                String skuId = "com.miaoou.6jin";
                 mIMWSDK.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(),skuId, "xxxx","role_id_1","role_name","role_level","vipLevel",serverCode, serverName, new IPayListener() {
 
                     @Override
@@ -229,7 +229,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.share_line).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mIMWSDK.shareLine(MainActivity.this, "2022首款卡牌大作【萬靈召喚師】，爆笑來襲！從東方文明到西方文明的羈絆，從神族到魔族的對抗，一段奇妙的神仙冒險之旅就此展開！https://static-resource.meowplayer.com/share/index.html", new ISdkCallBack() {
+                mIMWSDK.shareLine(MainActivity.this, "★胡宇威盛裝代言★邀你前往異時空三國世界！重新定義三國名將，在鬼武時空大顯神威！https://member.dustyx.com/sdk/share/gwsg/index.html", new ISdkCallBack() {
                     @Override
                     public void success() {
                         PL.i("share success");
