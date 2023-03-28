@@ -90,6 +90,11 @@ android {
             resValue "string", "sdk_inner_version", "huawei"
         }
 
+        vn {//越南专用
+            flavorDimensions "1"
+            resValue "string", "sdk_inner_version", "vn"
+        }
+
     }
 }
 

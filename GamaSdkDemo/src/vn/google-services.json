@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1088518691592",
+    "project_id": "tw-xlzsg-and-354c2",
+    "storage_bucket": "tw-xlzsg-and-354c2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1088518691592:android:731b32b76f4b3bcb6f6abd",
+        "android_client_info": {
+          "package_name": "com.wantang.xlzsg"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1088518691592-cigf7ga22ro1rnjkalihtef6hofbgakd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wantang.xlzsg",
+            "certificate_hash": "0cead8362d5cfb6c3f80f366cf348ee7650fee1c"
+          }
+        },
+        {
+          "client_id": "1088518691592-g22bgj3gllg9vigo7uck79aoc1246crf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDn5Z9dtl0G93KxH-zg9ruxN6kbP_GzCtQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1088518691592-g22bgj3gllg9vigo7uck79aoc1246crf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
