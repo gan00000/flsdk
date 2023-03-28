@@ -656,6 +656,9 @@ public class BaseSdkImpl implements IMWSDK {
 //                        sFacebookProxy.fbLogout(activity);
 //                    }
 //                }
+                if (dataManager == null){
+                    dataManager = DataManager.getInstance();
+                }
                 dataManager.setLogin(false);
                 if (iLogin != null){
                     iLogin.signOut(activity);
