@@ -10,13 +10,13 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.core.base.ObjFactory;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.PL;
 import com.core.base.utils.PermissionUtil;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.SignatureUtil;
 import com.core.base.utils.ToastUtils;
+import com.mw.sdk.utils.DataManager;
 import com.mw.sdk.pay.IPay;
 import com.mw.sdk.pay.IPayCallBack;
 import com.mw.sdk.pay.IPayFactory;
@@ -32,12 +32,10 @@ import com.google.android.play.core.review.ReviewManagerFactory;
 import com.mw.base.bean.PhoneInfo;
 import com.mw.base.bean.SGameBaseRequestBean;
 import com.mw.base.bean.SGameLanguage;
-import com.mw.base.bean.SLoginType;
 import com.mw.base.bean.SPayType;
 import com.mw.base.cfg.ConfigBean;
 import com.mw.base.cfg.ConfigRequest;
 import com.mw.base.cfg.ResConfig;
-import com.mw.base.utils.Localization;
 import com.mw.base.utils.SdkUtil;
 import com.mw.sdk.BuildConfig;
 import com.mw.sdk.R;
@@ -86,6 +84,7 @@ public class BaseSdkImpl implements IMWSDK {
 
     protected HuaweiPayImpl huaweiPay;
 
+    protected DataManager dataManager;
 
     private ReviewInfo reviewInfo;
 
@@ -202,6 +201,7 @@ public class BaseSdkImpl implements IMWSDK {
         PL.i("google sha1:" + SignatureUtil.getSignatureSHA1WithColon(activity, activity.getPackageName()));
         PL.i("app sha256:" + SignatureUtil.getSignatureSHA256WithColon(activity, activity.getPackageName()));
         this.activity = activity;
+        dataManager = DataManager.getInstance();
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -656,7 +656,7 @@ public class BaseSdkImpl implements IMWSDK {
 //                        sFacebookProxy.fbLogout(activity);
 //                    }
 //                }
-
+                dataManager.setLogin(false);
                 if (iLogin != null){
                     iLogin.signOut(activity);
                 }

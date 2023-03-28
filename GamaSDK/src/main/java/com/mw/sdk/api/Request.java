@@ -17,6 +17,7 @@ import com.mw.sdk.R;
 import com.mw.sdk.ads.EventConstant;
 import com.mw.sdk.ads.SdkEventLogger;
 import com.mw.sdk.constant.ApiRequestMethod;
+import com.mw.sdk.utils.DataManager;
 import com.mw.sdk.login.execute.BaseLoginRequestTask;
 import com.mw.sdk.login.model.request.AccountBindInGameRequestBean;
 import com.mw.sdk.login.model.response.SLoginResponse;
@@ -273,6 +274,10 @@ public class Request {
         requestParams.put("versionName",sGameBaseRequestBean.getVersionName());
         requestParams.put("androidId",sGameBaseRequestBean.getAndroidId());
         requestParams.put("adId",sGameBaseRequestBean.getAdvertisingId());
+
+        if (DataManager.getInstance().isLogin()) {
+            requestParams.put("userId",sGameBaseRequestBean.getUserId());
+        }
 
         sGameBaseRequestBean.setRequestParamsMap(requestParams);
         sGameBaseRequestBean.setRequestUrl(ResConfig.getLogPreferredUrl(context)); //日志记录

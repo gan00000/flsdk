@@ -21,6 +21,7 @@ import com.mw.base.bean.SLoginType;
 import com.mw.base.cfg.ResConfig;
 import com.mw.base.utils.SdkUtil;
 import com.mw.sdk.ads.EventConstant;
+import com.mw.sdk.utils.DataManager;
 import com.mw.sdk.login.constant.BindType;
 import com.mw.sdk.login.constant.ViewType;
 import com.mw.sdk.login.execute.AccountLoginRequestTask;
@@ -1073,6 +1074,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 //        SdkUtil.saveSdkLoginData(getContext(), loginResponse.getRawResponse());
         loginResponse.getData().setLoginType(loginType);
         SdkUtil.updateLoginData(getContext(), loginResponse);
+        DataManager.getInstance().setLogin(true);
         if (SStringUtil.isNotEmpty(loginType)) {//loginType为空时是账号注入登录，不能空时是其他普通登入
 
             SdkUtil.savePreviousLoginType(mActivity, loginType);
