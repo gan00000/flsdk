@@ -83,7 +83,7 @@
                     android:gravity="center"
                     android:maxLines="1"
                     android:text="@string/text_term_moqie"
-                    android:textColor="@color/c_C0C0C0"
+                    android:textColor="@color/c_text"
                     android:textSize="12sp" />
 
                 <TextView
@@ -96,7 +96,7 @@
                     android:gravity="center"
                     android:maxLines="1"
                     android:text="@string/py_findpwd"
-                    android:textColor="@color/c_C0C0C0"
+                    android:textColor="@color/c_text"
                     android:textSize="12sp" />
 
 
@@ -203,12 +203,12 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/text_login_other"
-                android:textColor="@color/c_C0C0C0"
-                android:textSize="11sp" />
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/text_login_other"-->
+<!--                android:textColor="@color/c_C0C0C0"-->
+<!--                android:textSize="11sp" />-->
 
             <LinearLayout
                 android:id="@+id/guestLoginView"
@@ -319,6 +319,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:visibility="gone"
             android:id="@+id/layout_delete_account_parent"
             android:layout_marginTop="10dp">
 
@@ -337,7 +338,7 @@
                 android:paddingTop="5dp"
                 android:paddingRight="13dp"
                 android:paddingBottom="5dp"
-                android:visibility="visible">
+                >
 
 
                 <ImageView
