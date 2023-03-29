@@ -38,8 +38,7 @@
                 android:id="@+id/sdkinputview_account_login_account"
                 android:layout_width="300dp"
                 android:layout_height="40dp"
-                android:layout_centerHorizontal="true"
-                 />
+                android:layout_centerHorizontal="true" />
 
             <!--            密码-->
             <com.mw.sdk.login.widget.SDKInputEditTextView

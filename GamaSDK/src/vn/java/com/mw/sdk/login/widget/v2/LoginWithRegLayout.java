@@ -260,7 +260,7 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
 //            regTabView.setBackgroundResource(R.drawable.login_tab_white_right_cons_bg);
 
             loginTabView.setTextColor(getContext().getResources().getColor(R.color.c_F94925));
-            regTabView.setTextColor(getContext().getResources().getColor(R.color.white_c));
+            regTabView.setTextColor(getContext().getResources().getColor(R.color.c_text));
 
             login_bottom_line.setVisibility(View.VISIBLE);
             register_bottom_line.setVisibility(View.INVISIBLE);
@@ -280,7 +280,7 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
 //            loginTabView.setBackgroundResource(R.drawable.login_tab_white_left_cons_bg);
 //            regTabView.setBackgroundResource(R.drawable.login_tab_red_right_cons_bg);
 
-            loginTabView.setTextColor(getContext().getResources().getColor(R.color.white_c));
+            loginTabView.setTextColor(getContext().getResources().getColor(R.color.c_text));
             regTabView.setTextColor(getContext().getResources().getColor(R.color.c_F94925));
 
             login_bottom_line.setVisibility(View.INVISIBLE);
