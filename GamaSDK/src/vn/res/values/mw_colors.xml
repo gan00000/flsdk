@@ -13,6 +13,9 @@
 
     <color name="c_view_bg">#ffffff</color>
     <color name="c_text">#656565</color>
+    <color name="c_text_input">#414141</color>
+    <color name="c_text_input_hit">#B1B1B1</color>
+    <color name="c_C0C0C0">#B1B1B1</color>
 </resources>
 
     <!--透明度百分比-开头字母-->
