@@ -147,7 +147,7 @@
                         android:background="@drawable/sdk_bg_vfcode"
                         android:gravity="center"
                         android:text="@string/py_register_account_get_vfcode"
-                        android:textColor="@color/c_F94925"
+                        android:textColor="@color/white_c"
                         android:textSize="14sp" />
 
                 </LinearLayout>
