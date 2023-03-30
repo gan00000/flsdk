@@ -6,18 +6,19 @@
     android:background="@color/c_sdk_bg">
 
     <LinearLayout
-        android:layout_width="375dp"
-        android:layout_height="375dp"
+        android:layout_width="340dp"
+        android:layout_height="326dp"
         android:orientation="vertical"
         android:gravity="center_horizontal"
         android:layout_centerInParent="true"
+        android:background="@mipmap/sdk_bg_page"
         >
 
         <include
             layout="@layout/sdk_ui_head_layout"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             />
 
         <com.mw.sdk.login.widget.SDKInputEditTextView
@@ -64,7 +65,7 @@
                 android:gravity="center"
                 android:id="@+id/btn_find_get_vfcode"
                 android:text="@string/py_register_account_get_vfcode"
-                android:textColor="@color/c_F94925"
+                android:textColor="@color/white_c"
                 android:textSize="14sp" />
 
 
