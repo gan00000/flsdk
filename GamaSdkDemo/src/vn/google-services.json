@@ -1,42 +1,51 @@
 {
   "project_info": {
-    "project_number": "1088518691592",
-    "project_id": "tw-xlzsg-and-354c2",
-    "storage_bucket": "tw-xlzsg-and-354c2.appspot.com"
+    "project_number": "255382194723",
+    "firebase_url": "https://kdzq-202210.firebaseio.com",
+    "project_id": "kdzq-202210",
+    "storage_bucket": "kdzq-202210.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1088518691592:android:731b32b76f4b3bcb6f6abd",
+        "mobilesdk_app_id": "1:255382194723:android:e81596e8c195eb5c623f96",
         "android_client_info": {
-          "package_name": "com.wantang.xlzsg"
+          "package_name": "com.snmxw.vntest"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1088518691592-cigf7ga22ro1rnjkalihtef6hofbgakd.apps.googleusercontent.com",
+          "client_id": "255382194723-kueignpli6am84vgo0mlsnu1fh3a1bc6.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.wantang.xlzsg",
-            "certificate_hash": "0cead8362d5cfb6c3f80f366cf348ee7650fee1c"
+            "package_name": "com.snmxw.vntest",
+            "certificate_hash": "0604d383be78acb2edcce2e3fea1161edb00cd1c"
           }
         },
         {
-          "client_id": "1088518691592-g22bgj3gllg9vigo7uck79aoc1246crf.apps.googleusercontent.com",
+          "client_id": "255382194723-ido414tji2jukt3scb1b9ag402qkq723.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDn5Z9dtl0G93KxH-zg9ruxN6kbP_GzCtQ"
+          "current_key": "AIzaSyC3SLqTVEqfpLCsy2STGLE-W981MdsDk24"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1088518691592-g22bgj3gllg9vigo7uck79aoc1246crf.apps.googleusercontent.com",
+              "client_id": "255382194723-ido414tji2jukt3scb1b9ag402qkq723.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "255382194723-3hqr2uh1m67r524h9h3vci6krpc7arsc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.starpy.kdzq",
+                "app_store_id": "1375422332"
+              }
             }
           ]
         }

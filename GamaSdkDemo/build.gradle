@@ -77,6 +77,13 @@ android {
             keyAlias 'mwv4'
             keyPassword 'mw888000'
         }
+
+        release_vn {
+            storeFile file('../signkey/key_vn.jks') //正式签名，以后使用
+            storePassword 'mwvn888000'
+            keyAlias 'mwvn'
+            keyPassword 'mwvn888000'
+        }
     }
 
     buildTypes {
@@ -92,7 +99,7 @@ android {
         }
 
         debug {
-            signingConfig signingConfigs.release_v2
+            signingConfig signingConfigs.release_vn
         }
     }
     productFlavors {
@@ -237,24 +244,24 @@ android {
 
         vn {
 
-            signingConfig signingConfigs.release_v2
-            applicationId "com.wantang.xlzsg"
+            signingConfig signingConfigs.release_vn
+            applicationId "com.snmxw.vntest"
             minSdkVersion 21
             targetSdkVersion 33
             versionCode 10
             versionName "1.0"
             flavorDimensions "1"
-            resValue "string", "scheme", "gwsg"
-            resValue "string", "facebook_app_id", "1362551254507553"
-            resValue "string", "facebook_client_token", "0a8e2080cba4d5aa1fe9d9dd65c04e58"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1362551254507553" //启用分析
-            resValue "string", "fb_login_protocol_scheme", "fb1362551254507553"
-            resValue "string", "facebook_app_name", "鬼武三國：燼"
-            resValue "string", "line_channelId", "1657882064"
+            resValue "string", "scheme", "vnmxw"
+            resValue "string", "facebook_app_id", "948331946321316"
+            resValue "string", "facebook_client_token", "544fc9b2685b5ed2e7ce7235a50ea268"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider948331946321316" //启用分析
+            resValue "string", "fb_login_protocol_scheme", "fb948331946321316"
+            resValue "string", "facebook_app_name", "vnDemo"
+            resValue "string", "line_channelId", "1660819297"
             resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow"
 
             //每个游戏的demo设置 test
-            resValue "string", "sdk_name", "鬼武三國demo"
+            resValue "string", "sdk_name", "vnDemo"
 
         }
     }
