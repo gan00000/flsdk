@@ -28,6 +28,7 @@ import java.util.List;
 public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View.OnClickListener {
 
     private View contentView;
+    private View regLayoutTabView;
     private TextView loginTabView, regTabView;
     private View login_bottom_line,register_bottom_line,iv_login_reg_back;
 
@@ -75,6 +76,8 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
 
         contentView = inflater.inflate(R.layout.mw_login_reg, null);
         iv_login_reg_back = contentView.findViewById(R.id.iv_login_reg_back);
+
+        regLayoutTabView = contentView.findViewById(R.id.regLayoutTabView);
         loginTabView = contentView.findViewById(R.id.loginTabView);
         regTabView = contentView.findViewById(R.id.regTabView);
         login_bottom_line = contentView.findViewById(R.id.loginTabView_bottom_line);
@@ -173,6 +176,10 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
                     titleLayoutParams.topMargin = titleLayoutParams.topMargin / 2 + titleLayoutParams.topMargin;
                     ll_reg_login_title.setLayoutParams(titleLayoutParams);
                 }
+
+                if (!versionData.isShowRegPage()){
+                    regLayoutTabView.setVisibility(GONE);
+                }
             }
         }
 
@@ -228,7 +235,7 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
         mAccountRegisterLayoutV2.onViewVisible();
 
         if (this.fromView == ViewType.WelcomeView || this.fromView == null){
-            iv_login_reg_back.setVisibility(View.INVISIBLE);
+            iv_login_reg_back.setVisibility(View.GONE);
         }
     }
 

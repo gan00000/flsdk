@@ -18,6 +18,7 @@ import com.core.base.utils.ToastUtils;
 import com.facebook.internal.ImageRequest;
 import com.mw.base.bean.PhoneInfo;
 import com.mw.base.bean.SLoginType;
+import com.mw.base.cfg.ConfigBean;
 import com.mw.base.cfg.ResConfig;
 import com.mw.base.utils.SdkUtil;
 import com.mw.sdk.ads.EventConstant;
@@ -227,6 +228,16 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             showMainHomeView();
         }*/
 
+        ConfigBean configBean = SdkUtil.getSdkCfg(getContext());
+        if (configBean != null) {
+            ConfigBean.VersionData versionData = configBean.getSdkConfigLoginData(getContext());
+            if (versionData != null && versionData.isHiden_Guest_Fb_Gg_Line()) {//此处可能还有华为登录，先不管，应该不会出现此情况
+                if (iLoginView != null){
+                    iLoginView.showLoginWithRegView(ViewType.WelcomeView);
+                }
+                return;
+            }
+        }
         List<AccountModel> accountModels = SdkUtil.getAccountModels(this.mActivity);
 //        iLoginView.showMainHomeView();
         if (accountModels.isEmpty()){

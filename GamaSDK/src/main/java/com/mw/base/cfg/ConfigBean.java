@@ -29,6 +29,17 @@ public class ConfigBean {
     }
 
     public VersionData getSdkConfigLoginData(Context context){
+        VersionData versionData = getVersionDataData(context);
+//        versionData.setVisitorLogin(false);
+//        versionData.setFbLogin(false);
+//        versionData.setGoogleLogin(false);
+//        versionData.setLineLogin(false);
+//        versionData.setShowRegPage(false);
+//        versionData.setHuaweiData();
+        return versionData;
+    }
+
+    private VersionData getVersionDataData(Context context){
 
         String packageName = context.getPackageName();
         String versionCode = ApkInfoUtil.getVersionCode(context);
@@ -96,6 +107,8 @@ public class ConfigBean {
         private boolean showLogo = false;
         private boolean showForgetPwd = true;
         private boolean showNotice = false;
+
+        private boolean showRegPage = true;
 
         public String getPlatform() {
             return platform;
@@ -201,7 +214,15 @@ public class ConfigBean {
             this.showNotice = showNotice;
         }
 
-        public boolean isAllThirdLoginTypeHiden(){
+        public boolean isShowRegPage() {
+            return showRegPage;
+        }
+
+        public void setShowRegPage(boolean showRegPage) {
+            this.showRegPage = showRegPage;
+        }
+
+        public boolean isHiden_Guest_Fb_Gg_Line(){
             return !visitorLogin && !fbLogin && !googleLogin && !lineLogin;
         }
 
