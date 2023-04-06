@@ -198,7 +198,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="60dp"
         android:background="@drawable/mw_delete_account_bg_white"
         android:gravity="center"
         android:orientation="horizontal"
