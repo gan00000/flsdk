@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 
+import com.core.base.utils.ToastUtils;
 import com.mw.base.cfg.ConfigBean;
 import com.mw.base.utils.SdkUtil;
 import com.mw.sdk.SBaseDialog;
@@ -29,6 +30,7 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
     private View layout_go_term;
     private View layout_term;
     private ImageView iv_logo;
+    private View layout_delete_account2;
 
     public MainHomeLayout(Context context) {
         super(context);
@@ -62,12 +64,16 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
         iv_logo = contentView.findViewById(R.id.iv_logo);
         layout_term = contentView.findViewById(R.id.layout_term);
 
+        layout_delete_account2 = contentView.findViewById(R.id.layout_delete_account2);
+        layout_delete_account2.setVisibility(GONE);
+
         guestLoginView.setOnClickListener(this);
         layout_go_account_login.setOnClickListener(this);
         iv_login_google.setOnClickListener(this);
         iv_login_fb.setOnClickListener(this);
         iv_login_line.setOnClickListener(this);
         layout_go_term.setOnClickListener(this);
+        layout_delete_account2.setOnClickListener(this);
 
         cb_agree_term.setChecked(true);
 
@@ -97,6 +103,12 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
                 }
                 if (versionData.isShowLogo()){
 //                    iv_logo.setVisibility(View.VISIBLE);
+                }
+
+                if(versionData.isDeleteAccount()){
+                    layout_delete_account2.setVisibility(View.VISIBLE);
+                }else{
+                    layout_delete_account2.setVisibility(View.GONE);
                 }
             }
         }
@@ -135,6 +147,8 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
 //            sLoginDialogv2.showTermView(ViewType.HomeView);
 
             showTermDialog();
+        }else if (v == layout_delete_account2){
+            ToastUtils.toast(getActivity(), R.string.text_account_not_login);
         }
 
     }

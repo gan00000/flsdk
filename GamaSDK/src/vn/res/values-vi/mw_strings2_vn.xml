@@ -15,6 +15,6 @@
     <string name="text_has_bind_tips_line">Tài khoản đã nâng cấp</string>
     <string name="text_has_bind_tips_mw">Tài khoản hội viên</string>
     <string name="text_notice">Thông báo</string>
-
+    <string name="text_account_not_login">Chưa có tài khoản, hãy đăng nhập trước</string>
 
 </resources>
