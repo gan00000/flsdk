@@ -119,24 +119,6 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         super.onLayout(changed, l, t, r, b);
         PL.i("view onLayout");
-//        if (isResizeView || layout_delete_account.getVisibility() == View.VISIBLE){
-//            return;
-//        }
-//        this.post(new Runnable() {
-//            @Override
-//            public void run() {
-//                View xxView = AccountLoginLayoutV2.this;
-//                int accountViewH = xxView.getHeight();
-//                int delete_account_parent_h = layout_delete_account_parent.getHeight();
-//                accountViewH = accountViewH - delete_account_parent_h;
-//
-//                ViewGroup.LayoutParams layoutParams = xxView.getLayoutParams();
-//                layoutParams.height = accountViewH;
-//
-//                isResizeView = true;
-//                xxView.setLayoutParams(layoutParams);
-//            }
-//        });
     }
 
     @Override
@@ -171,7 +153,6 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
         layout_delete_account = contentView.findViewById(R.id.layout_delete_account);
         layout_delete_account_parent = contentView.findViewById(R.id.layout_delete_account_parent);
         layout_delete_account.setVisibility(View.GONE);
-//        layout_delete_account_parent.setVisibility(View.GONE);
 
         layout_delete_account.setOnClickListener(new OnClickListener() {
             @Override
@@ -278,13 +259,11 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
                     cb_agree_term.setVisibility(View.GONE);
                     tv_login_term.setVisibility(View.GONE);
                 }
-                if(versionData.isDeleteAccount()){
-                    layout_delete_account.setVisibility(View.VISIBLE);
-//                    layout_delete_account_parent.setVisibility(View.VISIBLE);
-                }else{
-                    layout_delete_account.setVisibility(View.GONE);
-//                    layout_delete_account_parent.setVisibility(View.GONE);
-                }
+//                if(versionData.isDeleteAccount()){
+//                    layout_delete_account.setVisibility(View.VISIBLE);
+//                }else{
+//                    layout_delete_account.setVisibility(View.GONE);
+//                }
                 if(!versionData.isShowForgetPwd()){
                     loginMainGoFindPwd.setVisibility(View.GONE);
                     loginMainGoFindPwd.setTag(100);
@@ -608,7 +587,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
     private View layout_delete_account;
     private View layout_delete_account_parent;
     Dialog deleteDialog;
-    private void showDeleteDialog() {
+    public void showDeleteDialog() {
         if (deleteDialog == null){
             LayoutInflater inflater = LayoutInflater.from(getContext());
             View contentView = inflater.inflate(R.layout.mw_delete_account_alert, null);

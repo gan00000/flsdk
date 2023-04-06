@@ -29,6 +29,7 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
 
     private View contentView;
     private View regLayoutTabView;
+    private View layout_delete_account2;
     private TextView loginTabView, regTabView;
     private View login_bottom_line,register_bottom_line,iv_login_reg_back;
 
@@ -86,10 +87,13 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
         ll_reg_login_title = contentView.findViewById(R.id.ll_reg_login_title);
         mAccountLoginV2 = contentView.findViewById(R.id.pyAccountLoginV2Id);
         mAccountRegisterLayoutV2 = contentView.findViewById(R.id.accountRegisterLayoutV2Id);
+        layout_delete_account2 = contentView.findViewById(R.id.layout_delete_account2);
+        layout_delete_account2.setVisibility(GONE);
 
         loginTabView.setOnClickListener(this);
         regTabView.setOnClickListener(this);
         iv_login_reg_back.setOnClickListener(this);
+        layout_delete_account2.setOnClickListener(this);
 
         login_out_animation = AnimationUtils.loadAnimation(getContext(),R.anim.mw_login_out);
         login_out_animation.setAnimationListener(new Animation.AnimationListener() {
@@ -180,6 +184,13 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
                 if (!versionData.isShowRegPage()){
                     regLayoutTabView.setVisibility(GONE);
                 }
+
+                if(versionData.isDeleteAccount()){
+                    layout_delete_account2.setVisibility(View.VISIBLE);
+                }else{
+                    layout_delete_account2.setVisibility(View.GONE);
+                }
+
             }
         }
 
@@ -224,6 +235,8 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
 
             }
             sLoginDialogv2.distoryView(this);
+        }else if (v == layout_delete_account2){
+            mAccountLoginV2.showDeleteDialog();
         }
     }
 
@@ -262,6 +275,7 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
             }
             mAccountLoginV2.setVisibility(VISIBLE);
             mAccountRegisterLayoutV2.setVisibility(VISIBLE);
+            layout_delete_account2.setVisibility(VISIBLE);
 
 //            loginTabView.setBackgroundResource(R.drawable.login_tab_red_left_cons_bg);
 //            regTabView.setBackgroundResource(R.drawable.login_tab_white_right_cons_bg);
@@ -283,6 +297,7 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
 
             mAccountLoginV2.setVisibility(VISIBLE);
             mAccountRegisterLayoutV2.setVisibility(VISIBLE);
+            layout_delete_account2.setVisibility(GONE);
 
 //            loginTabView.setBackgroundResource(R.drawable.login_tab_white_left_cons_bg);
 //            regTabView.setBackgroundResource(R.drawable.login_tab_red_right_cons_bg);
