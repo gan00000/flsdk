@@ -17,81 +17,108 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
-            android:layout_marginStart="16dp"
             android:id="@+id/ll_reg_login_title"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:id="@+id/iv_login_reg_back"
-                android:layout_marginTop="2dp"
+            <!--            <ImageView-->
+            <!--                android:layout_width="25dp"-->
+            <!--                android:layout_height="25dp"-->
+            <!--                android:layout_marginStart="16dp"-->
+            <!--                android:id="@+id/iv_login_reg_back"-->
+            <!--                android:layout_marginTop="2dp"-->
+            <!--                android:scaleType="fitCenter"-->
+            <!--                android:src="@mipmap/img_back_bg_2" />-->
 
-
-                android:scaleType="fitCenter"
-                android:src="@mipmap/img_back_bg_2" />
-
+            <!--   平分宽度-->
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.0"
                 >
 
-                <TextView
-                    android:id="@+id/loginTabView"
+                <!--  返回-->
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="16dp"
+                    android:id="@+id/iv_login_reg_back"
+                    android:layout_marginTop="2dp"
+                    android:scaleType="fitCenter"
+                    android:src="@mipmap/img_back_bg_2" />
+
+                <!-- 登录标题 -->
+                <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:gravity="center"
-                    android:lines="1"
-                    android:text="@string/py_login"
-                    android:textColor="@color/c_F94925"
-                    android:textSize="24sp" />
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="20dp"
+                    android:id="@+id/llTabViewlogin"
+                    >
 
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="2dp"
-                    android:layout_toStartOf="@id/loginTabView"
-                    android:layout_toEndOf="@id/loginTabView"
-                    android:layout_below="@id/loginTabView"
-                    android:layout_marginTop="3dp"
-                    android:background="@color/c_F94925"
-                    android:id="@+id/loginTabView_bottom_line"
-                    />
+                    <TextView
+                        android:id="@+id/loginTabView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:lines="1"
+                        android:text="@string/py_login"
+                        android:textColor="@color/c_F94925"
+                        android:textSize="24sp" />
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="2dp"
+                        android:layout_toStartOf="@id/loginTabView"
+                        android:layout_toEndOf="@id/loginTabView"
+                        android:layout_below="@id/loginTabView"
+                        android:layout_marginTop="3dp"
+                        android:background="@color/c_F94925"
+                        android:id="@+id/loginTabView_bottom_line"
+                        />
+                </RelativeLayout>
 
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:orientation="vertical"
                 android:layout_weight="1.0"
                 android:id="@+id/regLayoutTabView"
                 >
 
-                <TextView
+                <!-- 注册标题 -->
+                <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:text="@string/text_register"
-                    android:gravity="center"
-                    android:lines="1"
-                    android:textColor="@color/c_text"
-                    android:textSize="24sp"
-                    android:id="@+id/regTabView"/>
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="20dp"
+                    >
 
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="2dp"
-                    android:layout_toStartOf="@id/regTabView"
-                    android:layout_toEndOf="@id/regTabView"
-                    android:layout_below="@id/regTabView"
-                    android:layout_marginTop="3dp"
-                    android:background="@color/c_F94925"
-                    android:id="@+id/regTabView_bottom_line"
-                    android:visibility="invisible"
-                    />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_register"
+                        android:gravity="center"
+                        android:lines="1"
+                        android:textColor="@color/c_text"
+                        android:textSize="24sp"
+                        android:id="@+id/regTabView"/>
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="2dp"
+                        android:layout_toStartOf="@id/regTabView"
+                        android:layout_toEndOf="@id/regTabView"
+                        android:layout_below="@id/regTabView"
+                        android:layout_marginTop="3dp"
+                        android:background="@color/c_F94925"
+                        android:id="@+id/regTabView_bottom_line"
+                        android:visibility="invisible"
+                        />
+
+                </RelativeLayout>
 
             </RelativeLayout>
 

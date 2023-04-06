@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mw.base.cfg.ConfigBean;
@@ -34,6 +35,7 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
     private View login_bottom_line,register_bottom_line,iv_login_reg_back;
 
     private LinearLayout ll_reg_login_title;
+    private RelativeLayout llTabViewlogin;
 
     public AccountLoginLayoutV2 getmAccountLoginV2() {
         return mAccountLoginV2;
@@ -83,6 +85,7 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
         regTabView = contentView.findViewById(R.id.regTabView);
         login_bottom_line = contentView.findViewById(R.id.loginTabView_bottom_line);
         register_bottom_line = contentView.findViewById(R.id.regTabView_bottom_line);
+        llTabViewlogin = contentView.findViewById(R.id.llTabViewlogin);
 
         ll_reg_login_title = contentView.findViewById(R.id.ll_reg_login_title);
         mAccountLoginV2 = contentView.findViewById(R.id.pyAccountLoginV2Id);
@@ -180,9 +183,14 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
                     titleLayoutParams.topMargin = titleLayoutParams.topMargin / 2 + titleLayoutParams.topMargin;
                     ll_reg_login_title.setLayoutParams(titleLayoutParams);
                 }
-
+                
                 if (!versionData.isShowRegPage()){
                     regLayoutTabView.setVisibility(GONE);
+                    RelativeLayout.LayoutParams rlTabLoginLayoutParams = (LayoutParams) llTabViewlogin.getLayoutParams();
+                    rlTabLoginLayoutParams.removeRule(RelativeLayout.ALIGN_PARENT_END);
+                    rlTabLoginLayoutParams.setMarginEnd(0);
+                    rlTabLoginLayoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
+                    llTabViewlogin.setLayoutParams(rlTabLoginLayoutParams);
                 }
 
                 if(versionData.isDeleteAccount()){
