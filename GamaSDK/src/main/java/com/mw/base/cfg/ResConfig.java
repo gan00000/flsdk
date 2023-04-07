@@ -52,30 +52,6 @@ public class ResConfig {
         return getConfigInAssetsProperties(context, "sdk_app_key");
     }
 
-    public static String getApplicationId(Context context) {
-        return getConfigInAssetsProperties(context, "facebook_app_id");
-    }
-
-
-//    public static String getGameLanguage(Context context) {
-//        String language = SPUtil.getSimpleString(context, SdkUtil.SDK_SP_FILE, SdkUtil.SDK_GAME_LANGUAGE);
-//        if (TextUtils.isEmpty(language)) {
-//            language = SGameLanguage.zh_TW.getLanguage();
-//        }
-//        return language;
-//    }
-
-//    public static void saveGameLanguage(Context context, String language) {
-//        if (TextUtils.isEmpty(language)) {
-//            return;
-//        }
-//        SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE, SdkUtil.SDK_GAME_LANGUAGE, language);
-//    }
-//
-//    public static String getGameLanguageLower(Context context) {
-//        return getGameLanguage(context).toLowerCase();
-//    }
-
     /**
      * 获取Google Client Id用于G+登录验证
      */
@@ -204,13 +180,6 @@ public class ResConfig {
     }
 
     /**
-     * 是否侵权
-     */
-    public static boolean isInfringement(Context context) {
-        return SStringUtil.isEqual(getConfigInAssetsProperties(context, "sdk_infringement"), "true");
-    }
-
-    /**
      * 获取第三方支付的接口名
      */
     public static String getPayThirdMethod(Context context) {
@@ -326,10 +295,10 @@ public class ResConfig {
 
     private static String gameConfig = "";
 
-    public static String getConfigInAssets(Context context, String key) {
+   /* public static String getConfigInAssets(Context context, String key) {
 
         if (SStringUtil.isEmpty(gameConfig)) {
-            gameConfig = FileUtil.readAssetsTxtFile(context, "mwsdk/gama_game_config");
+            gameConfig = FileUtil.readAssetsTxtFile(context, "mwsdk/game_config");
             PL.i("gameConfig:" + gameConfig);
         }
         String mVaule = "";
@@ -340,7 +309,7 @@ public class ResConfig {
             mVaule = getResStringByName(context, key);
         }
         return mVaule;
-    }
+    }*/
 
 
     private static Properties properties;
