@@ -1052,7 +1052,7 @@ public class SFacebookProxy {
 */
 
 	
-	public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
+	public void onActivityResultForLogin(Activity activity, int requestCode, int resultCode, Intent data) {
 
 		if (!FacebookSdk.isInitialized() || requestCode != CallbackManagerImpl.RequestCodeOffset.Login.toRequestCode()){
 			return;
@@ -1069,6 +1069,18 @@ public class SFacebookProxy {
 				 shareCallBack.onSuccess();
 			 }
 		 }
+	}
+
+	public void onActivityResultForShare(Activity activity, int requestCode, int resultCode, Intent data) {
+
+		if (!FacebookSdk.isInitialized() || requestCode != Request_Code_Share_Url){
+			return;
+		}
+
+		if (callbackManager == null) {
+			callbackManager = CallbackManager.Factory.create();
+		}
+		callbackManager.onActivityResult(requestCode, resultCode, data);
 	}
 	
 	public void onDestroy(Activity activity) {

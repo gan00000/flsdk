@@ -51,7 +51,7 @@ public class DialogLoginImpl implements ILogin {
     @Override
     public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
         if (sFacebookProxy != null) {
-            sFacebookProxy.onActivityResult(activity, requestCode, resultCode, data);
+            sFacebookProxy.onActivityResultForLogin(activity, requestCode, resultCode, data);
         }
         if (sGoogleSignIn != null){
             sGoogleSignIn.handleActivityResult(activity,requestCode,resultCode,data);
