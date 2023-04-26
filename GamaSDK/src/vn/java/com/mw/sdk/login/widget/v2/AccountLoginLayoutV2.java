@@ -2,7 +2,9 @@ package com.mw.sdk.login.widget.v2;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
+import android.net.Uri;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -19,6 +21,7 @@ import android.widget.RelativeLayout;
 
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.PL;
+import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
 import com.mw.base.bean.SLoginType;
 import com.mw.base.cfg.ConfigBean;
@@ -238,6 +241,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
         lineLoginView = contentView.findViewById(R.id.lineLoginView);
         macLoginView = contentView.findViewById(R.id.guestLoginView);
         googleLoginView = contentView.findViewById(R.id.ggLoginView);
+        View vnGoReviewWebView = contentView.findViewById(R.id.vnGoReviewWebView);
 
         ConfigBean configBean = SdkUtil.getSdkCfg(getContext());
         if (configBean != null){
@@ -255,7 +259,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
                 if(!versionData.isLineLogin()){
                     lineLoginView.setVisibility(View.GONE);
                 }
-                if(!versionData.isShowContract()){
+                if(!versionData.isShowContract()){ //服务条款
                     cb_agree_term.setVisibility(View.GONE);
                     tv_login_term.setVisibility(View.GONE);
                 }
@@ -269,6 +273,24 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
                     loginMainGoFindPwd.setTag(100);
                 }
 
+            }
+            if (configBean.getUrl() != null && SStringUtil.isNotEmpty(configBean.getUrl().getAgreementUrl())){
+                vnGoReviewWebView.setVisibility(VISIBLE);
+                vnGoReviewWebView.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        Uri uri = Uri.parse(configBean.getUrl().getAgreementUrl());
+                        Intent other_intent = new Intent(Intent.ACTION_VIEW,uri);
+                        other_intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                        try {
+                            getActivity().startActivity(other_intent);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
             }
         }
 
