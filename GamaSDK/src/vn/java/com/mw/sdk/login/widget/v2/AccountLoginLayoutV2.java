@@ -241,6 +241,8 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
         lineLoginView = contentView.findViewById(R.id.lineLoginView);
         macLoginView = contentView.findViewById(R.id.guestLoginView);
         googleLoginView = contentView.findViewById(R.id.ggLoginView);
+
+        //登录界面添加一个按钮，用来做资质跳转，跳转地址使用服务条款地址
         View vnGoReviewWebView = contentView.findViewById(R.id.vnGoReviewWebView);
 
         ConfigBean configBean = SdkUtil.getSdkCfg(getContext());
