@@ -84,6 +84,13 @@ android {
             keyAlias 'mwvn'
             keyPassword 'mwvn888000'
         }
+
+        release_v6 {
+            storeFile file('../signkey/sdkv6_key.jks') //正式签名，以后使用
+            storePassword 'mwv6888'
+            keyAlias 'mwv6'
+            keyPassword 'mwv6888'
+        }
     }
 
     buildTypes {
@@ -99,7 +106,7 @@ android {
         }
 
         debug {
-            signingConfig signingConfigs.release_v2
+            signingConfig signingConfigs.release_v6
         }
     }
     productFlavors {
@@ -266,7 +273,7 @@ android {
         }
         sdk6 {
 
-            signingConfig signingConfigs.release_v2
+            signingConfig signingConfigs.release_v6
             applicationId "com.wxgy.sshx"
             minSdkVersion 21
             targetSdkVersion 33

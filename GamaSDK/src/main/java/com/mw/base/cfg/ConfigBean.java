@@ -30,10 +30,12 @@ public class ConfigBean {
 
     public VersionData getSdkConfigLoginData(Context context){
         VersionData versionData = getVersionDataData(context);
-//        versionData.setVisitorLogin(false);
-//        versionData.setFbLogin(false);
-//        versionData.setGoogleLogin(false);
-//        versionData.setLineLogin(false);
+//        versionData.setVisitorLogin(true);
+//        versionData.setFbLogin(true);
+//        versionData.setGoogleLogin(true);
+//        versionData.setLineLogin(true);
+//        versionData.setShowContract(true);
+//        versionData.setDeleteAccount(true);
 //        versionData.setShowRegPage(false);
 //        versionData.setHuaweiData();
         return versionData;
