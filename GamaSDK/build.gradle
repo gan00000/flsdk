@@ -95,6 +95,10 @@ android {
             resValue "string", "sdk_inner_version", "vn"
         }
 
+        sdk6 {//第6套，东南亚
+            flavorDimensions "1"
+            resValue "string", "sdk_inner_version", "v6"
+        }
     }
 }
 
