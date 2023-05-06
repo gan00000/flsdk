@@ -111,9 +111,9 @@ android {
 
 dependencies {
 
-    compileOnly fileTree(dir: 'libs', include: ['*.aar'])
+//    compileOnly fileTree(dir: 'libs', include: ['*.aar'])
 //    implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
-    api fileTree(include: ['*.jar'], dir: 'libs')
+//    api fileTree(include: ['*.jar'], dir: 'libs')
 
     //基础库
     api 'androidx.legacy:legacy-support-v4:1.0.0'
@@ -169,6 +169,8 @@ dependencies {
     huaweiImplementation 'com.huawei.hms:hwid:6.9.0.301'
     huaweiImplementation 'com.huawei.hms:iap:6.4.0.301'
 
+    //qooapp sdk
+    QooAppImplementation(name: 'qooapp-opensdk-2.0.6', ext: 'aar')
 }
 
 

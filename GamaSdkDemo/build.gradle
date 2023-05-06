@@ -314,7 +314,8 @@ android {
 
 dependencies {
 //    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
+//    implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
+    QooAppImplementation(name: 'qooapp-opensdk-2.0.6', ext: 'aar')
     implementation project(':GamaSDK')
 
 }
