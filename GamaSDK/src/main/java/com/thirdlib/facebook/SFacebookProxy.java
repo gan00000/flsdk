@@ -307,6 +307,7 @@ public class SFacebookProxy {
 
 	public void fbLogout(Activity activity){
 		if (loginManager != null) {
+			PL.d("fb logOut.....");
 			loginManager.logOut();
 		}
 	}
