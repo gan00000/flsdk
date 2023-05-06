@@ -306,11 +306,11 @@ android {
     namespace 'com.mw.sdk.demo'
 }
 
-//repositories {
-//    flatDir {
-//        dirs 'libs', '../GamaSDK/libs'
-//    }
-//}
+repositories {
+    flatDir {
+        dirs 'libs', '../GamaSDK/libs'
+    }
+}
 
 dependencies {
 //    implementation fileTree(include: ['*.jar'], dir: 'libs')
