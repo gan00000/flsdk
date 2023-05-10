@@ -111,6 +111,8 @@ public class ConfigBean {
         private boolean showNotice = false;
 
         private boolean showRegPage = true;
+        //越南调整审核按钮是否显示
+        private boolean vnIsReview = true;
 
         public String getPlatform() {
             return platform;
@@ -232,6 +234,14 @@ public class ConfigBean {
             return !fbLogin && !googleLogin && !lineLogin;
         }
 
+        public boolean isVnIsReview() {
+            return vnIsReview;
+        }
+
+        public void setVnIsReview(boolean vnIsReview) {
+            this.vnIsReview = vnIsReview;
+        }
+
         //华为登录，下面的不需要显示
         public VersionData setHuaweiData(Context context){
             this.fbLogin = false;
@@ -248,6 +258,7 @@ public class ConfigBean {
         private String noticeUrl = "";//公告地址
         private String agreementUrl = "";//服务条款地址
         private String csUrl = "";//客服地址
+        private String vnReviewUrl = "";//越南审核按钮跳转地址
 
         public String getNoticeUrl() {
             return noticeUrl;
@@ -271,6 +282,14 @@ public class ConfigBean {
 
         public void setCsUrl(String csUrl) {
             this.csUrl = csUrl;
+        }
+
+        public String getVnReviewUrl() {
+            return vnReviewUrl;
+        }
+
+        public void setVnReviewUrl(String vnReviewUrl) {
+            this.vnReviewUrl = vnReviewUrl;
         }
     }
 }

@@ -242,7 +242,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
         macLoginView = contentView.findViewById(R.id.guestLoginView);
         googleLoginView = contentView.findViewById(R.id.ggLoginView);
 
-        //登录界面添加一个按钮，用来做资质跳转，跳转地址使用服务条款地址
+        //登录界面添加一个按钮，用来做资质跳转
         View vnGoReviewWebView = contentView.findViewById(R.id.vnGoReviewWebView);
 
         ConfigBean configBean = SdkUtil.getSdkCfg(getContext());
@@ -275,14 +275,18 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
                     loginMainGoFindPwd.setTag(100);
                 }
 
-            }
-            if (configBean.getUrl() != null && SStringUtil.isNotEmpty(configBean.getUrl().getAgreementUrl())){
-                vnGoReviewWebView.setVisibility(VISIBLE);
-                vnGoReviewWebView.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+                if (versionData.isVnIsReview()){
+                    vnGoReviewWebView.setVisibility(VISIBLE);
+                }else {
+                    vnGoReviewWebView.setVisibility(View.GONE);
+                }
 
-                        Uri uri = Uri.parse(configBean.getUrl().getAgreementUrl());
+            }
+            vnGoReviewWebView.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (configBean.getUrl() != null && SStringUtil.isNotEmpty(configBean.getUrl().getVnReviewUrl())){
+                        Uri uri = Uri.parse(configBean.getUrl().getVnReviewUrl());
                         Intent other_intent = new Intent(Intent.ACTION_VIEW,uri);
                         other_intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
@@ -291,9 +295,12 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
+                    }else {
+                        ToastUtils.toast(getContext(),"Url not configured");
                     }
-                });
-            }
+
+                }
+            });
         }
 
         fbLoginView.setOnClickListener(new OnClickListener() {
