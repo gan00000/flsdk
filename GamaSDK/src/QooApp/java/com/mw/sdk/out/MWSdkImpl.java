@@ -109,7 +109,7 @@ public class MWSdkImpl extends BaseSdkImpl {
             @Override
             public void onError(String error) {
                 PL.i("QooAppOpenSDK.login onError:" + error);
-                ToastUtils.toast(activity, "" + error);
+//                ToastUtils.toast(activity, "" + error);
             }
         }, activity);
     }
