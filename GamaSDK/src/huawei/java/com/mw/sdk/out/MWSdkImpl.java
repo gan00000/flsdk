@@ -30,6 +30,6 @@ public class MWSdkImpl extends BaseSdkImpl {
     protected void onCreate_OnUi(Activity activity) {
         super.onCreate_OnUi(activity);
         iPay = null;
-        sFacebookProxy = null;
+//        sFacebookProxy = null;
     }
 }

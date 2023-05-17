@@ -244,7 +244,7 @@ public class ConfigBean {
 
         //华为登录，下面的不需要显示
         public VersionData setHuaweiData(Context context){
-            this.fbLogin = false;
+//            this.fbLogin = false;
             this.googleLogin = false;
             this.lineLogin = false;
             this.showContract = false;

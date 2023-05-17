@@ -106,7 +106,7 @@ android {
         }
 
         debug {
-            signingConfig signingConfigs.release_v6
+            signingConfig signingConfigs.release_v2
         }
     }
     productFlavors {
@@ -236,11 +236,11 @@ android {
             versionName "1.0"
             flavorDimensions "1"
             resValue "string", "scheme", "gwsg"
-//            resValue "string", "facebook_app_id", "1362551254507553"
-//            resValue "string", "facebook_client_token", "0a8e2080cba4d5aa1fe9d9dd65c04e58"
-//            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1362551254507553" //启用分析
-//            resValue "string", "fb_login_protocol_scheme", "fb1362551254507553"
-//            resValue "string", "facebook_app_name", "鬼武三國：燼"
+            resValue "string", "facebook_app_id", "1362551254507553"
+            resValue "string", "facebook_client_token", "0a8e2080cba4d5aa1fe9d9dd65c04e58"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1362551254507553" //启用分析
+            resValue "string", "fb_login_protocol_scheme", "fb1362551254507553"
+            resValue "string", "facebook_app_name", "鬼武三國"
 //            resValue "string", "line_channelId", "1657882064"
             resValue "string", "channel_platform", "huawei"  //渠道区分,google包设置google,apk包设置"meow"
 
