@@ -118,7 +118,17 @@ public class MainActivity extends Activity {
                     }
 
                 });
-
+//                mIMWSDK.checkPreRegData(activity, new ISdkCallBack() {
+//                    @Override
+//                    public void success() {
+//                        PL.d("checkPreRegData success");
+//                    }
+//
+//                    @Override
+//                    public void failure() {
+//                        PL.d("checkPreRegData failure");
+//                    }
+//                });
 
             }
         });

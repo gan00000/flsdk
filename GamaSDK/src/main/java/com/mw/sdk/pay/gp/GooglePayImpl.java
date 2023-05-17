@@ -38,6 +38,8 @@ import com.mw.sdk.BuildConfig;
 import com.mw.sdk.R;
 import com.mw.sdk.constant.ApiRequestMethod;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -309,6 +311,12 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
         }
         Handler mHandler = new Handler();
         PL.i("queryPreRegData...");
+//        try {
+//            Purchase purchase = new Purchase("{\"packageName\":\"com.wantang.xlzsg\",\"productId\":\"com.wantang.gwsg.yzcjl\",\"purchaseTime\":1684253534812,\"purchaseState\":0,\"purchaseToken\":\"giklhafklnbbdkfeceocpmhp.AO-J1OysnskiWzby8LmHDVegqwkIjD8k-e1xs8OVcDcfCConqSRqdjSehwL3RJweFQmHnd0ZMT4bwaj9xWVDyHydFLtqkaHwag\"}", "Tv3YvII6n66MAusut5PvLdLIlUSH85T/OaAA9jEyYTGsX3fqz5aPDZADJ35uRkiCTJqorlq3+pCnkKklCSReSeWfTgzyn7FJmUXIXHZ8RCB2NKFfhWYmROP8pPaX9eDeGv/IYloyazmp0Vo8GbTCQSUrjmdq4Tmke3cjxe9O6LGD+8PVX4WLuP5zuHITWRCHsYaaHM9UVzRRt28LUfrjGtuuYcdqeiW0i5rsLEIQbsQJNk4N1dwZ3/CjE+rs5NzcnDPilE4ej6EFcBCWiCtqLkPFjCpVCq7KZ3R/vUdqs4wMkJ1DWs8UUQNvcov6Bch6ez80GkVX68/Y1pqTPhMcOw==");
+//            List<String> stringList = purchase.getProducts();
+//        } catch (JSONException e) {
+//
+//        }
         mBillingHelper.queryPurchasesAsync(mContext, new PurchasesResponseListener() {
             @Override
             public void onQueryPurchasesResponse(@NonNull BillingResult billingResult, @NonNull List<Purchase> list) {
