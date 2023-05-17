@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.text.TextUtils;
 
+import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -20,7 +21,9 @@ import com.android.billingclient.api.PurchasesUpdatedListener;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
+import com.core.base.utils.ThreadUtil;
 import com.core.base.utils.ToastUtils;
+import com.mw.sdk.out.ISdkCallBack;
 import com.mw.sdk.pay.IPay;
 import com.mw.sdk.pay.IPayCallBack;
 import com.mw.sdk.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
@@ -67,7 +70,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
     private GooglePayCreateOrderIdReqBean createOrderIdReqBean;
 
     private Activity mActivity;
-    private Context mContext;
+//    private Context mContext;
 
     private IPayCallBack iPayCallBack;
     /**
@@ -254,6 +257,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
                 PL.i("startQueryPurchase onQueryPurchasesResponse success");
                 if (list != null) {
                     PL.i("startQueryPurchase onQueryPurchasesResponse success, purchase size:" + list.size());
+                    return;
                 }
                 if (list.isEmpty()){
                     PL.i("startQueryPurchase onQueryPurchasesResponse success, purchase list is empty");
@@ -295,6 +299,59 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
         });
     }
 
+    public void queryPreRegData(final Context mContext, ISdkCallBack iSdkCallBack) {
+
+        if (mBillingHelper== null || mContext == null){
+            if (iSdkCallBack != null){
+                iSdkCallBack.failure();
+            }
+            return;
+        }
+        Handler mHandler = new Handler();
+        PL.i("queryPreRegData...");
+        mBillingHelper.queryPurchasesAsync(mContext, new PurchasesResponseListener() {
+            @Override
+            public void onQueryPurchasesResponse(@NonNull BillingResult billingResult, @NonNull List<Purchase> list) {
+                PL.i("queryPreRegData startQueryPurchase onQueryPurchasesResponse success");
+                PL.i("is main thread=" + ThreadUtil.isUiThread());
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (list == null || list.isEmpty()){
+                            PL.i("queryPreRegData onQueryPurchasesResponse success, purchase list is empty");
+                            if (iSdkCallBack != null){
+                                iSdkCallBack.failure();
+                            }
+                            return;
+                        }
+                        for (com.android.billingclient.api.Purchase purchase : list) {//查询是否为PURCHASED未消费商品
+
+                            if(purchase.getPurchaseState() == com.android.billingclient.api.Purchase.PurchaseState.PURCHASED){
+
+                                if (!purchase.getProducts().isEmpty() && purchase.getProducts().get(0).contains(".yzcjl")){
+
+                                    if (iSdkCallBack != null){
+                                        iSdkCallBack.success();
+                                    }
+                                    mBillingHelper.consumeAsync(mContext, purchase, false, new ConsumeResponseListener() {
+                                        @Override
+                                        public void onConsumeResponse(@NonNull BillingResult billingResult, @NonNull String s) {
+                                            PL.i("queryPreRegData consumeAsync onConsumeResponse => " + s);
+                                        }
+                                    });
+                                    return;
+                                }
+                            }
+                        }
+                        if (iSdkCallBack != null){
+                            iSdkCallBack.failure();
+                        }
+                    }
+                });
+
+            }
+        });
+    }
     @Override
     public void onCreate(Activity activity) {
         PL.i( "onCreate");

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 
 import com.core.base.callback.IGameLifeCycle;
+import com.mw.sdk.out.ISdkCallBack;
 import com.mw.sdk.pay.gp.bean.req.PayReqBean;
 
 /**
@@ -25,4 +26,6 @@ public interface IPay extends IGameLifeCycle{
      * 设置Google储值的回调
      */
     void setIPayCallBack(IPayCallBack iPayCallBack);
+
+    void queryPreRegData(final Context mContext, ISdkCallBack iSdkCallBack);
 }

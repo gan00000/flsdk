@@ -169,6 +169,18 @@ public class BaseSdkImpl implements IMWSDK {
         });
     }
 
+    public void checkPreRegData(final Activity activity, ISdkCallBack iSdkCallBack) {
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                PL.i("IMWSDK checkPreRegData");
+                if (iPay != null){
+                    iPay.queryPreRegData(activity.getApplicationContext(), iSdkCallBack);
+                }
+            }
+        });
+    }
+
     @Override
     public void openCs(Activity activity) {
         PL.i("sdk openCs");
