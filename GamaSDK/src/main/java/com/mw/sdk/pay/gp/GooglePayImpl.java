@@ -510,7 +510,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
                             public void fail(GPExchangeRes result, String msg) {
                                 PL.i("launchPurchaseFlow requestSendStone fail => " + msg);
 //
-                                if (result != null){
+                                if (result != null && SStringUtil.isNotEmpty(result.getMessage())){
                                     callbackFail(result.getMessage());
                                 }else {
                                     callbackFail("error");
