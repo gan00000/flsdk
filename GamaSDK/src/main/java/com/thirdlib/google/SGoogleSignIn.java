@@ -273,7 +273,11 @@ public class SGoogleSignIn {
 	private void dimissDialog() { //关闭loading窗
 		if(mConnectionProgressDialog != null) {
 			Log.d(TAG,"dimiss dialog");
-			mConnectionProgressDialog.dismiss();
+			try {
+				mConnectionProgressDialog.dismiss();
+			} catch (Exception e) {
+				
+			}
 		}
 	}
 
