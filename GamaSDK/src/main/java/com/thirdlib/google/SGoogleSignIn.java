@@ -136,6 +136,16 @@ public class SGoogleSignIn {
 			mConnectionProgressDialog.show();
 		}
 		GoogleSignInAccount lastSignedInAccount = GoogleSignIn.getLastSignedInAccount(activity);
+		if (lastSignedInAccount != null) {
+			String idToken = lastSignedInAccount.getIdToken();
+			Boolean isExpired = lastSignedInAccount.isExpired();
+			Log.d(TAG, "lastSignedInAccount idToken：" + idToken);
+			Log.d(TAG, "lastSignedInAccount isExpired：" + isExpired);
+		}else {
+			Log.d(TAG, "lastSignedInAccount is null");
+		}
+
+
 		if (lastSignedInAccount != null && lastSignedInAccount.isExpired()){//防止token过期，服务端验证错误
 			Log.d(TAG,"lastSignedInAccount.isExpired");
 			if (mGoogleSignInClient != null) {
@@ -215,11 +225,11 @@ public class SGoogleSignIn {
 				Log.d(TAG, "firebaseAuthWithGoogle:" + account.getId());
 				if (account.isExpired()){
 					Log.d(TAG, "Google account is expired");
-					signOut();
-					if (googleSignInCallBack != null) {
-						googleSignInCallBack.accountIsExpired(account.getId());
-					}
-					return;
+//					signOut();
+//					if (googleSignInCallBack != null) {
+//						googleSignInCallBack.accountIsExpired(account.getId());
+//					}
+//					return;
 				}
 				String mFullName = account.getDisplayName();
 				String mEmail = account.getEmail();
@@ -325,9 +335,8 @@ public class SGoogleSignIn {
 	// [END signin]
 
 	public void signOut() {
-		// Firebase sign out
-//		mAuth.signOut();
 
+		Log.i(TAG, "Google signOut");
 		// Google sign out
 		if (mGoogleSignInClient != null) {
 			mGoogleSignInClient.signOut().addOnCompleteListener(activity,
@@ -340,9 +349,7 @@ public class SGoogleSignIn {
 		}
 	}
 
-	private void revokeAccess() {
-		// Firebase sign out
-//		mAuth.signOut();
+	private void revokeAccess() {//撤销授予当前应用程序的访问权限
 
 		// Google revoke access
 		mGoogleSignInClient.revokeAccess().addOnCompleteListener(activity,
