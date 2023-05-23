@@ -920,6 +920,7 @@ public class BaseSdkImpl implements IMWSDK {
 
     @Override
     public void requestVfCode(Activity activity, String areaCode, String telephone, SFCallBack sfCallBack) {
+        PL.i("requestVfCode areaCode=" + areaCode + " telephone=" + telephone);
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -946,7 +947,7 @@ public class BaseSdkImpl implements IMWSDK {
 
     @Override
     public void requestBindPhone(Activity activity, String areaCode, String telephone,String vfCode, SFCallBack sfCallBack) {
-
+        PL.i("requestBindPhone areaCode=" + areaCode + " telephone=" + telephone + " vfCode=" + vfCode);
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
