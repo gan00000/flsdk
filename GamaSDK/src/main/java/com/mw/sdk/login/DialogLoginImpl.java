@@ -33,9 +33,6 @@ public class DialogLoginImpl implements ILogin {
 
     public DialogLoginImpl(Activity activity) {
 
-        sGoogleSignIn = new SGoogleSignIn(activity, DialogUtil.createLoadingDialog(activity, "Loading..."));
-        sLineSignIn = new SLineSignIn(activity, DialogUtil.createLoadingDialog(activity, "Loading..."));
-        huaweiSignIn = new HuaweiSignIn(activity, DialogUtil.createLoadingDialog(activity, "Loading..."));
     }
 
     @Override
@@ -82,6 +79,10 @@ public class DialogLoginImpl implements ILogin {
 
     @Override
     public void startLogin(final Activity activity, final ILoginCallBack iLoginCallBack) {
+
+        sGoogleSignIn = new SGoogleSignIn(activity, DialogUtil.createLoadingDialog(activity, "Loading..."));
+        sLineSignIn = new SLineSignIn(activity, DialogUtil.createLoadingDialog(activity, "Loading..."));
+        huaweiSignIn = new HuaweiSignIn(activity, DialogUtil.createLoadingDialog(activity, "Loading..."));
 
         if (!SdkUtil.isVersion1(activity)) {
             ConfigBean configBean = SdkUtil.getSdkCfg(activity);
