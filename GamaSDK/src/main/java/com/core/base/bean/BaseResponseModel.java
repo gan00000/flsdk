@@ -1,5 +1,7 @@
 package com.core.base.bean;
 
+import com.core.base.utils.SStringUtil;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -53,6 +55,21 @@ public class BaseResponseModel implements Serializable {
 
     public String getRawResponse() {
         return rawResponse;
+    }
+
+    public String getWrapRawResponse() {
+        if (SStringUtil.isNotEmpty(rawResponse)) {
+            return rawResponse;
+        }
+        try {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("code",this.code);
+            jsonObject.optString("message",this.message);
+            return jsonObject.toString();
+        } catch (JSONException e) {
+
+        }
+        return "";
     }
 
 }

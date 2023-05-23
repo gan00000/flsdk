@@ -59,30 +59,46 @@ public class Request {
 
                 } else {
                     ToastUtils.toast(context, R.string.py_error_occur);
-//                    if (iSdkCallBack != null){
-//                        iSdkCallBack.fail(null,rawResult);
-//                    }
+                    if (iSdkCallBack != null){
+                        BaseResponseModel errorModel = new BaseResponseModel();
+                        errorModel.setCode("1001");
+                        errorModel.setMessage(context.getString(R.string.text_phone_not_empty));
+                        iSdkCallBack.fail(errorModel,errorModel.getWrapRawResponse());
+                    }
                 }
             }
 
             @Override
             public void timeout(String code) {
                 ToastUtils.toast(context, R.string.py_error_occur);
-//                if (iSdkCallBack != null){
-//                    iSdkCallBack.fail(null,"");
-//                }
+                if (iSdkCallBack != null){
+                    BaseResponseModel errorModel = new BaseResponseModel();
+                    errorModel.setCode("1001");
+                    errorModel.setMessage(context.getString(R.string.py_error_occur));
+                    iSdkCallBack.fail(errorModel,errorModel.getWrapRawResponse());
+                }
             }
 
             @Override
             public void noData() {
                 ToastUtils.toast(context, R.string.py_error_occur);
-//                if (iSdkCallBack != null){
-//                    iSdkCallBack.fail(null,"");
-//                }
+                if (iSdkCallBack != null){
+                    BaseResponseModel errorModel = new BaseResponseModel();
+                    errorModel.setCode("1001");
+                    errorModel.setMessage(context.getString(R.string.py_error_occur));
+                    iSdkCallBack.fail(errorModel,errorModel.getWrapRawResponse());
+                }
             }
 
             @Override
-            public void cancel() {}
+            public void cancel() {
+                if (iSdkCallBack != null){
+                    BaseResponseModel errorModel = new BaseResponseModel();
+                    errorModel.setCode("1001");
+                    errorModel.setMessage("user cancel");
+                    iSdkCallBack.fail(errorModel,errorModel.getWrapRawResponse());
+                }
+            }
 
         });
         baseLoginRequestTask.excute(BaseResponseModel.class);

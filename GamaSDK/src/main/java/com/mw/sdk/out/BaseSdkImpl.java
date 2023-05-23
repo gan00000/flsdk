@@ -10,12 +10,14 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.PL;
 import com.core.base.utils.PermissionUtil;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.SignatureUtil;
 import com.core.base.utils.ToastUtils;
+import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.utils.DataManager;
 import com.mw.sdk.pay.IPay;
 import com.mw.sdk.pay.IPayCallBack;
@@ -874,7 +876,7 @@ public class BaseSdkImpl implements IMWSDK {
 
 
     @Override
-    public void showBindPhoneView(Activity activity, SFCallBack sfCallBack) {
+    public void showBindPhoneView(Activity activity, SFCallBack<BaseResponseModel> sfCallBack) {
 
         activity.runOnUiThread(new Runnable() {
             @Override
@@ -919,24 +921,37 @@ public class BaseSdkImpl implements IMWSDK {
     }
 
     @Override
-    public void requestVfCode(Activity activity, String areaCode, String telephone, SFCallBack sfCallBack) {
+    public void requestVfCode(Activity activity, String areaCode, String telephone, SFCallBack<BaseResponseModel> sfCallBack) {
         PL.i("requestVfCode areaCode=" + areaCode + " telephone=" + telephone);
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-
+                BaseResponseModel errorModel = new BaseResponseModel();
+                errorModel.setCode("1001");
                 if (SStringUtil.isEmpty(areaCode)) {
                     ToastUtils.toast(activity,R.string.text_area_code_not_empty);
+                    if (sfCallBack != null){
+                        errorModel.setMessage(activity.getString(R.string.text_area_code_not_empty));
+                        sfCallBack.fail(errorModel,errorModel.getWrapRawResponse());
+                    }
                     return;
                 }
                 if (SStringUtil.isEmpty(telephone)) {
                     ToastUtils.toast(activity,R.string.text_phone_not_empty);
+                    if (sfCallBack != null){
+                        errorModel.setMessage(activity.getString(R.string.text_phone_not_empty));
+                        sfCallBack.fail(errorModel,errorModel.getWrapRawResponse());
+                    }
                     return;
                 }
                 PhoneInfo phoneInfo = SdkUtil.getPhoneInfoByAreaCode(activity,areaCode);
                 if (phoneInfo != null){
                     if (!telephone.matches(phoneInfo.getPattern())){
                         ToastUtils.toast(activity,R.string.text_phone_not_match);
+                        if (sfCallBack != null){
+                            errorModel.setMessage(activity.getString(R.string.text_phone_not_match));
+                            sfCallBack.fail(errorModel,errorModel.getWrapRawResponse());
+                        }
                         return;
                     }
                 }
@@ -946,7 +961,7 @@ public class BaseSdkImpl implements IMWSDK {
     }
 
     @Override
-    public void requestBindPhone(Activity activity, String areaCode, String telephone,String vfCode, SFCallBack sfCallBack) {
+    public void requestBindPhone(Activity activity, String areaCode, String telephone,String vfCode, SFCallBack<SLoginResponse> sfCallBack) {
         PL.i("requestBindPhone areaCode=" + areaCode + " telephone=" + telephone + " vfCode=" + vfCode);
         activity.runOnUiThread(new Runnable() {
             @Override
@@ -978,7 +993,7 @@ public class BaseSdkImpl implements IMWSDK {
     }
 
     @Override
-    public void requestUpgradeAccount(Activity activity, String account, String pwd, SFCallBack sfCallBack ) {
+    public void requestUpgradeAccount(Activity activity, String account, String pwd, SFCallBack<SLoginResponse> sfCallBack ) {
 
         if (TextUtils.isEmpty(account)) {
             ToastUtils.toast(activity, R.string.py_account_empty);

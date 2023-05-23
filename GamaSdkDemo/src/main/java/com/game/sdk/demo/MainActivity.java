@@ -295,15 +295,15 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View view) {
 
-                mIMWSDK.showUpgradeAccountView(MainActivity.this, new SFCallBack() {
+                mIMWSDK.showUpgradeAccountView(MainActivity.this, new SFCallBack<SLoginResponse>() {
                     @Override
-                    public void success(Object result, String msg) {
+                    public void success(SLoginResponse sLoginResponse, String msg) {
                         //账号升级成功
-                        SLoginResponse sLoginResponse = (SLoginResponse)result;
+
                     }
 
                     @Override
-                    public void fail(Object result, String msg) {
+                    public void fail(SLoginResponse result, String msg) {
 
                     }
                 });

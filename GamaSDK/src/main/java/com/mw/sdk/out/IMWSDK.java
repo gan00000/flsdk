@@ -2,12 +2,14 @@ package com.mw.sdk.out;
 
 import android.app.Activity;
 
+import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.IGameLifeCycle;
 import com.core.base.callback.SFCallBack;
 import com.mw.base.bean.SPayType;
 import com.mw.sdk.ads.EventConstant;
 import com.mw.sdk.callback.IPayListener;
 import com.mw.sdk.login.ILoginCallBack;
+import com.mw.sdk.login.model.response.SLoginResponse;
 
 import java.util.Map;
 
@@ -126,7 +128,7 @@ public interface IMWSDK extends IGameLifeCycle {
      * @param activity
      * @param sfCallBack
      */
-    public void showBindPhoneView(Activity activity, SFCallBack sfCallBack);
+    public void showBindPhoneView(Activity activity, SFCallBack<BaseResponseModel> sfCallBack);
 
     /**
      * 显示sdk内部升级账号页面
@@ -142,7 +144,7 @@ public interface IMWSDK extends IGameLifeCycle {
      * @param telephone 手机号码
      * @param sfCallBack    回调
      */
-    public void requestVfCode(Activity activity, String areaCode, String telephone,SFCallBack sfCallBack);
+    public void requestVfCode(Activity activity, String areaCode, String telephone,SFCallBack<BaseResponseModel> sfCallBack);
 
     /**
      * 请求绑定手机
@@ -152,7 +154,7 @@ public interface IMWSDK extends IGameLifeCycle {
      * @param vfCode    验证码
      * @param sfCallBack
      */
-    public void requestBindPhone(Activity activity, String areaCode, String telephone,String vfCode, SFCallBack sfCallBack);
+    public void requestBindPhone(Activity activity, String areaCode, String telephone,String vfCode, SFCallBack<SLoginResponse> sfCallBack);
 
     /**
      * 请求账号升级
@@ -161,7 +163,7 @@ public interface IMWSDK extends IGameLifeCycle {
      * @param pwd 新账号的密码
      * @param sfCallBack 回调
      */
-    public void requestUpgradeAccount(Activity activity, String account, String pwd, SFCallBack sfCallBack);
+    public void requestUpgradeAccount(Activity activity, String account, String pwd, SFCallBack<SLoginResponse> sfCallBack);
 
     public void checkGooglePlayServicesAvailable(Activity activity);
 
