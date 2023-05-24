@@ -421,6 +421,7 @@ public class BaseSdkImpl implements IMWSDK {
         this.share(activity, ThirdPartyType.FACEBOOK, hashTag, message, shareLinkUrl,"",iSdkCallBack);
     }
 
+    //line分享内容不能带换行符\n
     public void shareLine(final Activity activity, final String content, final ISdkCallBack iSdkCallBack){
         share(activity,ThirdPartyType.LINE,"",content,"","",iSdkCallBack);
     }
