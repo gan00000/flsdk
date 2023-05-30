@@ -121,12 +121,13 @@ public class MainActivity extends Activity {
 //                mIMWSDK.checkPreRegData(activity, new ISdkCallBack() {
 //                    @Override
 //                    public void success() {
-//                        PL.d("checkPreRegData success");
+////                        PL.d("checkPreRegData success");
+//                        //需要发预注册奖励
 //                    }
 //
 //                    @Override
 //                    public void failure() {
-//                        PL.d("checkPreRegData failure");
+////                        PL.d("checkPreRegData failure");
 //                    }
 //                });
 

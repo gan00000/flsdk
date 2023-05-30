@@ -91,6 +91,12 @@ android {
             keyAlias 'mwv6'
             keyPassword 'mwv6888'
         }
+        release_vn1 {
+            storeFile file('../signkey/sdk_vn1_key.jks') //正式签名，以后使用
+            storePassword 'wxvn999'
+            keyAlias 'wxvn'
+            keyPassword 'wxvn999'
+        }
     }
 
     buildTypes {
