@@ -12,6 +12,7 @@ import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.ISReqCallBack;
 import com.core.base.request.SimpleHttpRequest;
 import com.core.base.utils.ApkInfoUtil;
+import com.core.base.utils.JsonUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.SPUtil;
 import com.core.base.utils.SStringUtil;
@@ -147,17 +148,6 @@ public class SdkEventLogger {
 
             String uid = SdkUtil.getUid(context);
 
-            //Appsflyer上报
-            Map<String, Object> eventValues = new HashMap<>();
-            //下面是自定义的事件名
-            eventValues.put(EventConstant.ParameterName.USER_ID, uid);
-            eventValues.put(EventConstant.ParameterName.ROLE_ID, SdkUtil.getRoleId(context));
-//            eventValues.put(EventConstant.ParameterName.PRODUCT_ID, productId);
-//            eventValues.put(EventConstant.ParameterName.ORDER_ID, orderId);
-//            eventValues.put(EventConstant.ParameterName.PURCHASE_TIME, purchaseTime);
-//            eventValues.put(EventConstant.ParameterName.PAY_VALUE, usdPrice);
-//            eventValues.put(EventConstant.ParameterName.CURRENCY, "USD");
-
             //下面是AppsFlyer自己的事件名
             Map<String, Object> af_eventValues = new HashMap<>();
             af_eventValues.put(AFInAppEventParameterName.REVENUE, usdPrice);
@@ -165,21 +155,35 @@ public class SdkEventLogger {
             af_eventValues.put(AFInAppEventParameterName.CONTENT_ID, productId);
             af_eventValues.put(AFInAppEventParameterName.ORDER_ID, orderId);
             af_eventValues.put(AFInAppEventParameterName.CUSTOMER_USER_ID, uid);
-            af_eventValues.put("platform", context.getResources().getString(R.string.channel_platform));
-            PL.i("trackinPay Purchase af...");
+            af_eventValues.put(EventConstant.ParameterName.USER_ID, uid);
+            af_eventValues.put(EventConstant.ParameterName.ROLE_ID, SdkUtil.getRoleId(context));
+//            af_eventValues.put("platform", context.getResources().getString(R.string.channel_platform));
+            addEventParameterName(context, af_eventValues);
+            PL.i("trackinPay start Purchase af...");
             AppsFlyerLib.getInstance().logEvent(context.getApplicationContext(), AFInAppEventType.PURCHASE, af_eventValues);
+            PL.i("trackinPay end Purchase af... params=" + JsonUtil.map2Json(af_eventValues).toString());
+
 
             //FB
-            eventValues.put(AppEventsConstants.EVENT_PARAM_CURRENCY,"USD");
-            eventValues.put(AppEventsConstants.EVENT_PARAM_CONTENT_ID, productId);
-            eventValues.put(AppEventsConstants.EVENT_PARAM_ORDER_ID, orderId);
-            eventValues.put("platform", context.getResources().getString(R.string.channel_platform));
+            Map<String, Object> fb_eventValues = new HashMap<>();
+            //下面是自定义的事件名
+            fb_eventValues.put(EventConstant.ParameterName.USER_ID, uid);
+            fb_eventValues.put(EventConstant.ParameterName.ROLE_ID, SdkUtil.getRoleId(context));
+            fb_eventValues.put(AppEventsConstants.EVENT_PARAM_CURRENCY,"USD");
+            fb_eventValues.put(AppEventsConstants.EVENT_PARAM_CONTENT_ID, productId);
+            fb_eventValues.put(AppEventsConstants.EVENT_PARAM_ORDER_ID, orderId);
+            fb_eventValues.put("platform", context.getResources().getString(R.string.channel_platform));
             PL.i("trackinPay Purchase fb...");
-            SFacebookProxy.logPurchase(context, new BigDecimal(usdPrice), eventValues);
+            SFacebookProxy.logPurchase(context, new BigDecimal(usdPrice), fb_eventValues);
 
             //Firebase
+            Map<String, Object> firebaseValues = new HashMap<>();
+            //下面是自定义的事件名
+            firebaseValues.put(EventConstant.ParameterName.USER_ID, uid);
+            firebaseValues.put(EventConstant.ParameterName.ROLE_ID, SdkUtil.getRoleId(context));
+
             Bundle b = new Bundle();
-            for (Map.Entry<String, Object> entry : eventValues.entrySet()) {
+            for (Map.Entry<String, Object> entry : firebaseValues.entrySet()) {
                 b.putString(entry.getKey(), entry.getValue().toString());
             }
             b.putString(FirebaseAnalytics.Param.ITEM_ID,productId);

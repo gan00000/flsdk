@@ -91,4 +91,44 @@ public class JsonUtil {
 
         return jsonObject.toString();
     }
+
+    public static JSONObject map2Json(Map<String, Object> map) {
+
+        JSONObject jsonObject = new JSONObject();
+        if (map == null || map.isEmpty()) {
+            return jsonObject;
+        }
+        for (Map.Entry<String, Object> entry : map.entrySet()) {
+            if (!TextUtils.isEmpty(entry.getKey())) {
+                try {
+                    String key = entry.getKey();
+                    Object vObj = entry.getValue();
+                    jsonObject.put(key, vObj);
+                } catch (JSONException e) {
+
+                }
+//                String value_str = "";
+//                if (vObj instanceof Integer){
+//                    jsonObject.put(key, vObj);
+//                }
+//                else if (vObj instanceof Long){
+//                    jsonObject.put(key, vObj);
+//                }
+//                else if (vObj instanceof Boolean){
+//                    jsonObject.put(key, vObj);
+//                }
+//                else if (vObj instanceof Float){
+//                    jsonObject.put(key, vObj);
+//                }
+//                else if (vObj instanceof String){
+//                    jsonObject.put(key, vObj);
+//                }
+//                else{
+//
+//                }
+            }
+        }
+
+        return jsonObject;
+    }
 }
