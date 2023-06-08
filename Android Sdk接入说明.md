@@ -468,13 +468,24 @@
 	/**
      * line分享
      * @param activity
-     * @param message 分享的内容
-     * @param shareLinkUrl  分享的链接
+     * @param content 分享的内容
      * @param iSdkCallBack  分享回调
-     */
-    void shareLine(final Activity activity, final String message, final String shareLinkUrl, final ISdkCallBack iSdkCallBack);
+     */    
+     void shareLine(final Activity activity, final String content, final ISdkCallBack iSdkCallBack);
     
+	sample:
 	
+	mIMWSDK.shareLine(MainActivity.this, "★胡宇威盛裝代言★邀你前往異時空三國世界！重新定義三國名將，在鬼武時空大顯神威！https://member.dustyx.com/sdk/share/gwsg/index.html", new ISdkCallBack() {
+                    @Override
+                    public void success() {
+                        PL.i("share success");
+                    }
+
+                    @Override
+                    public void failure() {
+                        PL.i("share failure");
+                    }
+                });
 	```
 	
 * <h3 id="181">客服接口</h3>   
