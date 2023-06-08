@@ -209,6 +209,7 @@ public class Request {
                         String userId = sLoginResponse.getData().getUserId();
                         Map<String, Object> eventValue = new HashMap<String, Object>();
                         eventValue.put(EventConstant.ParameterName.USER_ID, userId);
+//                        eventValue.put(EventConstant.ParameterName.SERVER_TIME, SdkUtil.getSdkTimestamp(context) + "");
                         String eventName = EventConstant.EventName.Upgrade_Account.name();
                         SdkEventLogger.sendEventToSever(context,eventName);
                         SdkEventLogger.trackingWithEventName(context,eventName,eventValue);

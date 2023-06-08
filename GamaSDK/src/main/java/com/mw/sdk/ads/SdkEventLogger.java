@@ -77,6 +77,7 @@ public class SdkEventLogger {
             String userId = loginResponse.getData().getUserId();
             Map<String, Object> eventValue = new HashMap<String, Object>();
             eventValue.put(EventConstant.ParameterName.USER_ID, userId);
+            eventValue.put(EventConstant.ParameterName.SERVER_TIME, SdkUtil.getSdkTimestamp(activity) + "");
             String eventName = EventConstant.EventName.LOGIN_SUCCESS.name();
             sendEventToSever(activity,eventName);
             trackingWithEventName(activity,eventName,eventValue, EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
@@ -99,6 +100,7 @@ public class SdkEventLogger {
             String userId = loginResponse.getData().getUserId();
             Map<String, Object> eventValue = new HashMap<String, Object>();
             eventValue.put(EventConstant.ParameterName.USER_ID, userId);
+            eventValue.put(EventConstant.ParameterName.SERVER_TIME, SdkUtil.getSdkTimestamp(activity) + "");
             String eventName = EventConstant.EventName.REGISTER_SUCCESS.name();
             sendEventToSever(activity, EventConstant.EventName.REGISTER_SUCCESS.name());
             trackingWithEventName(activity,eventName,eventValue,EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
@@ -157,6 +159,7 @@ public class SdkEventLogger {
             af_eventValues.put(AFInAppEventParameterName.CUSTOMER_USER_ID, uid);
             af_eventValues.put(EventConstant.ParameterName.USER_ID, uid);
             af_eventValues.put(EventConstant.ParameterName.ROLE_ID, SdkUtil.getRoleId(context));
+            af_eventValues.put(EventConstant.ParameterName.SERVER_TIME, SdkUtil.getSdkTimestamp(context) + "");
 //            af_eventValues.put("platform", context.getResources().getString(R.string.channel_platform));
             addEventParameterName(context, af_eventValues);
             PL.i("trackinPay start Purchase af...");
