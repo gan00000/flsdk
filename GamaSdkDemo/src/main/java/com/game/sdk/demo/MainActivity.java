@@ -395,6 +395,13 @@ public class MainActivity extends Activity {
             userId = uid;
             String sign = sLoginResponse.getData().getSign();
             String timestamp = sLoginResponse.getData().getTimestamp();
+
+            //检验
+//            我们这边现在登录验证没有提供接口，贵方通过加密规则检验
+//                    sign = md5(key+ gameCode + uid + timestamp);
+//            sign 、uid、timestamp  sdk登录返回
+//            gameCode Android为 tgvn . ios为tgvnios
+
             //是否绑定手机
             boolean isBindPhone = sLoginResponse.getData().isBindPhone();
             //绑定的手机号码
