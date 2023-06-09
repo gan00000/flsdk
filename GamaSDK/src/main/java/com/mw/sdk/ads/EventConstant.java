@@ -101,7 +101,7 @@ public class EventConstant {
         public static final String CURRENCY = "sdk_event_currency";
 
         public static final String TIME = "time";
-        public static final String SERVER_TIME = "loginTimestamp";
+        public static final String SERVER_TIME = "serverTimestamp";
 
     }
 

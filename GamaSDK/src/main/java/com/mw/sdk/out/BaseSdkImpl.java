@@ -786,7 +786,7 @@ public class BaseSdkImpl implements IMWSDK {
                     otherPayWebViewDialog.dismiss();
                 }
 
-                SdkEventLogger.trackinPayEvent(activity, basePayBean);
+//                SdkEventLogger.trackinPayEvent(activity, basePayBean);
 
                 if (iPayListener != null) {
                     iPayListener.onPaySuccess(basePayBean.getProductId(),basePayBean.getCpOrderId());

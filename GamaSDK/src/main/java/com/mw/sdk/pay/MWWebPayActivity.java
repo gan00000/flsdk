@@ -117,7 +117,7 @@ public class MWWebPayActivity extends MWBaseWebActivity {
                 PL.i("IPayCallBack success");
                 ToastUtils.toast(activity,R.string.text_finish_pay);
 
-                SdkEventLogger.trackinPayEvent(activity, basePayBean);
+//                SdkEventLogger.trackinPayEvent(activity, basePayBean);
 
 //                if (iPayListener != null) {
 //                    iPayListener.onPaySuccess(basePayBean.getProductId(),basePayBean.getCpOrderId());

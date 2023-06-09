@@ -21,6 +21,8 @@ public class BasePayBean implements Serializable {
     private double price;
     private String currency;
 
+    private String serverTimestamp;
+
     public String getmItemType() {
         return mItemType;
     }
@@ -148,5 +150,13 @@ public class BasePayBean implements Serializable {
 
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+    public String getServerTimestamp() {
+        return serverTimestamp;
+    }
+
+    public void setServerTimestamp(String serverTimestamp) {
+        this.serverTimestamp = serverTimestamp;
     }
 }

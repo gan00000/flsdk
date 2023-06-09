@@ -159,7 +159,7 @@ public class SdkEventLogger {
             af_eventValues.put(AFInAppEventParameterName.CUSTOMER_USER_ID, uid);
             af_eventValues.put(EventConstant.ParameterName.USER_ID, uid);
             af_eventValues.put(EventConstant.ParameterName.ROLE_ID, SdkUtil.getRoleId(context));
-            af_eventValues.put(EventConstant.ParameterName.SERVER_TIME, SdkUtil.getSdkTimestamp(context) + "");
+            af_eventValues.put(EventConstant.ParameterName.SERVER_TIME, payBean.getServerTimestamp() + "");
 //            af_eventValues.put("platform", context.getResources().getString(R.string.channel_platform));
             addEventParameterName(context, af_eventValues);
             PL.i("trackinPay start Purchase af...");

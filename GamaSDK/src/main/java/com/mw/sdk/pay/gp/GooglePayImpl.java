@@ -86,7 +86,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
     private ArrayList<com.android.billingclient.api.Purchase> waitConsumeList = new ArrayList<>();
 
 
-    private void callbackSuccess(Purchase purchase) {
+    private void callbackSuccess(Purchase purchase, GPExchangeRes gpExchangeRes) {
 
         PL.i("google pay onConsumeResponse callbackSuccess");
         if (mActivity != null) {
@@ -121,6 +121,10 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
                                 double price = skuDetails.getOneTimePurchaseOfferDetails().getPriceAmountMicros() / 1000000.00;
                                 payBean.setPrice(price);
                                 payBean.setCurrency(skuDetails.getOneTimePurchaseOfferDetails().getPriceCurrencyCode());
+                            }
+
+                            if (gpExchangeRes != null && gpExchangeRes.getData() != null) {
+                                payBean.setServerTimestamp(gpExchangeRes.getData().getTimestamp());
                             }
 
                         } catch (Exception e) {
@@ -493,14 +497,14 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
                     public void run() {
                         PayApi.requestSendStone(activity, purchase,"no", new SFCallBack<GPExchangeRes>() {
                             @Override
-                            public void success(GPExchangeRes result, String msg) {
+                            public void success(GPExchangeRes gpExchangeRes, String msg) {
                                 PL.i("launchPurchaseFlow requestSendStone success => " + msg);
 
                                 mBillingHelper.consumeAsync(activity, purchase, false, new ConsumeResponseListener() {
                                     @Override
                                     public void onConsumeResponse(@NonNull BillingResult billingResult, @NonNull String s) {
                                         PL.i("launchPurchaseFlow onConsumeResponse => " + s);
-                                        callbackSuccess(purchase);
+                                        callbackSuccess(purchase, gpExchangeRes);
                                     }
                                 });
 

@@ -8,9 +8,22 @@ import com.core.base.bean.BaseResponseModel;
 
 public class GPExchangeRes extends BaseResponseModel {
 
+    private Data data;
+
+    public Data getData() {
+        return data;
+    }
+
+    public void setData(Data data) {
+        this.data = data;
+    }
+
     public static class Data{
 
         private String orderId;
+        private double amount;
+        private String timestamp;
+        private String productId;
 
         private String verification;
 
@@ -29,6 +42,30 @@ public class GPExchangeRes extends BaseResponseModel {
 
         public void setOrderId(String orderId) {
             this.orderId = orderId;
+        }
+
+        public double getAmount() {
+            return amount;
+        }
+
+        public void setAmount(double amount) {
+            this.amount = amount;
+        }
+
+        public String getTimestamp() {
+            return timestamp;
+        }
+
+        public void setTimestamp(String timestamp) {
+            this.timestamp = timestamp;
+        }
+
+        public String getProductId() {
+            return productId;
+        }
+
+        public void setProductId(String productId) {
+            this.productId = productId;
         }
     }
 }

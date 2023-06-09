@@ -9,9 +9,11 @@ import com.core.base.callback.ISReqCallBack;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
+import com.mw.sdk.ads.SdkEventLogger;
 import com.mw.sdk.constant.ApiRequestMethod;
 import com.mw.sdk.pay.gp.bean.req.GoogleExchangeReqBean;
 import com.mw.sdk.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
+import com.mw.sdk.pay.gp.bean.res.BasePayBean;
 import com.mw.sdk.pay.gp.bean.res.GPCreateOrderIdRes;
 import com.mw.sdk.pay.gp.bean.res.GPExchangeRes;
 import com.mw.sdk.pay.gp.task.GoogleCreateOrderReqTask;
@@ -93,6 +95,16 @@ public class PayApi {
                     if (sfCallBack != null){
                         sfCallBack.success(gpExchangeRes,rawResult);
                     }
+                    if (gpExchangeRes.getData() != null) {
+                        BasePayBean basePayBean = new BasePayBean();
+                        basePayBean.setOrderId(gpExchangeRes.getData().getOrderId());
+                        basePayBean.setProductId(gpExchangeRes.getData().getProductId());
+                        basePayBean.setServerTimestamp(gpExchangeRes.getData().getTimestamp());
+                        basePayBean.setUsdPrice(gpExchangeRes.getData().getAmount());
+
+                        SdkEventLogger.trackinPayEvent(context.getApplicationContext(), basePayBean);
+                    }
+
                 } else {
 //                    if (gpExchangeRes!=null && !TextUtils.isEmpty(gpExchangeRes.getMessage())){
 //                        ToastUtils.toast(activity,gpExchangeRes.getMessage());
