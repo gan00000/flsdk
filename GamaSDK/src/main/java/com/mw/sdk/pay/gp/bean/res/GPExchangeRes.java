@@ -8,6 +8,12 @@ import com.core.base.bean.BaseResponseModel;
 
 public class GPExchangeRes extends BaseResponseModel {
 
+    @Override
+    public boolean isRequestSuccess() {
+        //2008表示已经发币
+        return SUCCESS_CODE.equals(this.getCode()) || "2008".equals(this.getCode());
+    }
+
     private Data data;
 
     public Data getData() {

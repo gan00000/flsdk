@@ -95,7 +95,7 @@ public class PayApi {
                     if (sfCallBack != null){
                         sfCallBack.success(gpExchangeRes,rawResult);
                     }
-                    if (gpExchangeRes.getData() != null) {
+                    if (gpExchangeRes.getData() != null && SStringUtil.isNotEmpty(gpExchangeRes.getData().getOrderId())) {
                         BasePayBean basePayBean = new BasePayBean();
                         basePayBean.setOrderId(gpExchangeRes.getData().getOrderId());
                         basePayBean.setProductId(gpExchangeRes.getData().getProductId());
