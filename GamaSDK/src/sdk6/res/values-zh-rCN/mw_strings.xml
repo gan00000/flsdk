@@ -1,7 +1,7 @@
 <resources>
 
     <!--启动条款页面-->
-    <string name="gama_ui_term_port_read2" translatable="false">我已阅读并同意定型化契约</string>
+    <string name="gama_ui_term_port_read2">我已阅读并同意定型化契约</string>
 
     <!--登录页面-->
     <string name="py_login_save_account">记住账号</string>
@@ -44,7 +44,7 @@
 <!--    相比平时的空格（&#32;），nbsp拥有不间断（non-breaking）特性。即连续的nbsp会在同一行内显示。即使有100个连续的nbsp，浏览器也不会把它们拆成两行。-->
     <string name="py_confire">确&#8195;认</string>
     <!--SDK功能提示-->
-    <string name="gama_toast_msg_app_not_install" translatable="false">由于您没有安装%s，请先安装app后再进行分享</string>
+    <string name="gama_toast_msg_app_not_install">由于您没有安装%s，请先安装app后再进行分享</string>
 
     <!--功能提示-->
     <string name="py_register_success">注册成功</string>
@@ -98,7 +98,7 @@
     <string name="text_go_game">继续游戏</string>
     <string name="text_update_account">升级账号</string>
 
-    <string name="gama_ui_term_not_read" translatable="false">请先同意「定型化契约」</string>
+    <string name="gama_ui_term_not_read">请先同意「定型化契约」</string>
     <string name="text_confire_reg">确认注册</string>
     <string name="text_pwd_format">密码只支持6~20字符</string>
     <string name="text_account_format">信箱格式異常，請重新輸入</string>
