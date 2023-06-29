@@ -36,46 +36,46 @@ public class ResUtil {
 		return id;
 	}
 
-	/**
-	 * 获取布局ID
-	 * 
-	 * @param context
-	 * @param resourcesName
-	 * @return
-	 */
-	public static int findLayoutIdByName(Context context, String resourcesName) {
-		return getResourcesIdByName(context, "layout", resourcesName);
-	}
-	/**
-	 * 获取 color ID
-	 * 
-	 * @param context
-	 * @param resourcesName
-	 * @return
-	 */
-	public static int findColorIdByName(Context context, String resourcesName) {
-		return getResourcesIdByName(context, "color", resourcesName);
-	}
-	/**
-	 * 获取 array ID
-	 * 
-	 * @param context
-	 * @param resourcesName
-	 * @return
-	 */
-	public static int findArrayIdByName(Context context, String resourcesName) {
-		return getResourcesIdByName(context, "array", resourcesName);
-	}
-	/**
-	 * 获取String资源ID
-	 * 
-	 * @param context
-	 * @param resourcesName
-	 * @return
-	 */
-	public static int findStringIdByName(Context context, String resourcesName) {
-		return getResourcesIdByName(context, "string", resourcesName);
-	}
+//	/**
+//	 * 获取布局ID
+//	 *
+//	 * @param context
+//	 * @param resourcesName
+//	 * @return
+//	 */
+//	public static int findLayoutIdByName(Context context, String resourcesName) {
+//		return getResourcesIdByName(context, "layout", resourcesName);
+//	}
+//	/**
+//	 * 获取 color ID
+//	 *
+//	 * @param context
+//	 * @param resourcesName
+//	 * @return
+//	 */
+//	public static int findColorIdByName(Context context, String resourcesName) {
+//		return getResourcesIdByName(context, "color", resourcesName);
+//	}
+//	/**
+//	 * 获取 array ID
+//	 *
+//	 * @param context
+//	 * @param resourcesName
+//	 * @return
+//	 */
+//	public static int findArrayIdByName(Context context, String resourcesName) {
+//		return getResourcesIdByName(context, "array", resourcesName);
+//	}
+//	/**
+//	 * 获取String资源ID
+//	 *
+//	 * @param context
+//	 * @param resourcesName
+//	 * @return
+//	 */
+//	public static int findStringIdByName(Context context, String resourcesName) {
+//		return getResourcesIdByName(context, "string", resourcesName);
+//	}
 
 	public static String findStringByName(Context context, String resourcesName) {
 		String res = "";
@@ -86,43 +86,43 @@ public class ResUtil {
 		}
 		return res;
 	}
-
-	/**
-	 * 获取view id资源
-	 * 
-	 * @param context
-	 * @param resourcesName
-	 * @return
-	 */
-	public static int findViewIdByName(Context context, String resourcesName) {
-		return getResourcesIdByName(context, "id", resourcesName);
-	}
-
-	/**
-	 * 获取drawable资源
-	 * 
-	 * @param context
-	 * @param resourcesName
-	 * @return
-	 */
-	public static int findDrawableIdByName(Context context, String resourcesName) {
-		return getResourcesIdByName(context, "drawable", resourcesName);
-	}
-
-	/**
-	 * 获取drawable资源
-	 * 
-	 * @param context
-	 * @param resourcesName
-	 * @return
-	 */
-	public static int findAnimIdByName(Context context, String resourcesName) {
-		return getResourcesIdByName(context, "anim", resourcesName);
-	}
-
-	public static int findStyleIdByName(Context context, String resourcesName) {
-		return getResourcesIdByName(context, "style", resourcesName);
-	}
+//
+//	/**
+//	 * 获取view id资源
+//	 *
+//	 * @param context
+//	 * @param resourcesName
+//	 * @return
+//	 */
+//	public static int findViewIdByName(Context context, String resourcesName) {
+//		return getResourcesIdByName(context, "id", resourcesName);
+//	}
+//
+//	/**
+//	 * 获取drawable资源
+//	 *
+//	 * @param context
+//	 * @param resourcesName
+//	 * @return
+//	 */
+//	public static int findDrawableIdByName(Context context, String resourcesName) {
+//		return getResourcesIdByName(context, "drawable", resourcesName);
+//	}
+//
+//	/**
+//	 * 获取drawable资源
+//	 *
+//	 * @param context
+//	 * @param resourcesName
+//	 * @return
+//	 */
+//	public static int findAnimIdByName(Context context, String resourcesName) {
+//		return getResourcesIdByName(context, "anim", resourcesName);
+//	}
+//
+//	public static int findStyleIdByName(Context context, String resourcesName) {
+//		return getResourcesIdByName(context, "style", resourcesName);
+//	}
 
 	/**
 	 * 读取Assets中的文本

@@ -1002,7 +1002,7 @@ public class SdkUtil {
 
         if (ResConfig.isMoreLanguage(context)){
 
-            Locale locale = Locale.getDefault();//zh_TW_#Hant  zh_HK_#Hant zh_CN_#Hans en_US
+            Locale locale = Locale.getDefault();//mw_#Hant  zh_HK_#Hant zh_CN_#Hans en_US
             String language = locale.getLanguage();//zh en
             String country = locale.getCountry();//TW US
             if (language.equals("en")){

@@ -12,6 +12,7 @@ import com.core.base.utils.SStringUtil;
 import com.mw.base.bean.SGameLanguage;
 import com.mw.base.utils.SdkUtil;
 import com.mw.base.utils.Localization;
+import com.mw.sdk.R;
 
 import java.util.Properties;
 
@@ -91,168 +92,69 @@ public class ResConfig {
 //        if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_Login_Pre_Url())) {
 //            return GamaUtil.getSdkCfg(context).getS_Login_Pre_Url();
 //        }
-        return getConfigUrl(context, "sdk_login_pre_url");
+        return getConfigUrl(context, R.string.mw_sdk_login_pre_url);
     }
 
     /**
      * 获取登录备用域名地址
      */
     public static String getLoginSpareUrl(Context context) {
-//        if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_Login_Spa_Url())) {
-//            return GamaUtil.getSdkCfg(context).getS_Login_Spa_Url();
-//        }
-        return getConfigUrl(context, "sdk_login_spa_url");
+        return getConfigUrl(context, R.string.mw_sdk_login_spa_url);
     }
 
     /**
      * 获取储值主域名
      */
     public static String getPayPreferredUrl(Context context) {
-//        if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_Pay_Pre_Url())) {
-//            return GamaUtil.getSdkCfg(context).getS_Pay_Pre_Url();
-//        }
-        return getConfigUrl(context, "sdk_pay_pre_url");
+        return getConfigUrl(context, R.string.mw_sdk_pay_pre_url);
     }
 
     /**
      * 获取储值备用域名
      */
     public static String getPaySpareUrl(Context context) {
-//        if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_Pay_Spa_Url())) {
-//            return GamaUtil.getSdkCfg(context).getS_Pay_Spa_Url();
-//        }
-        return getConfigUrl(context, "sdk_pay_spa_url");
+        return getConfigUrl(context, R.string.mw_sdk_pay_spa_url);
     }
 
-    /**
-     * 获取客服主域名
-     */
-    public static String getCsPreferredUrl(Context context) {
-        return getCdnLocalUrl(context, "sdk_cs_pre_url");
-    }
-
-    /**
-     * 获取客服备用域名
-     */
-    public static String getCsSpareUrl(Context context) {
-        return getCdnLocalUrl(context, "sdk_cs_spa_url");
-    }
-
-    /**
-     * 获取活动主域名
-     */
-    public static String getActivityPreferredUrl(Context context) {
-//        if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_Act_Pre_Url())) {
-//            return GamaUtil.getSdkCfg(context).getS_Act_Pre_Url();
-//        }
-        return getConfigUrl(context, "sdk_act_pre_url");
-    }
-
-    /**
-     * 获取活动备用域名
-     */
-    public static String getActivitySpareUrl(Context context) {
-//        if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_Act_Spa_Url())) {
-//            return GamaUtil.getSdkCfg(context).getS_Act_Spa_Url();
-//        }
-        return getConfigUrl(context, "sdk_act_spa_url");
-    }
 
     /**
      * 获取CDN动态域名的主域名
      */
     public static String getCdnPreferredUrl(Context context) {
-        return getConfigUrl(context, "sdk_cdn_pre_url");
+        return getConfigUrl(context, R.string.mw_sdk_cdn_pre_url);
     }
 
     /**
      * 获取CDN动态域名的备用域名
      */
     public static String getCdnSpareUrl(Context context) {
-        return getConfigUrl(context, "sdk_cdn_spa_url");
+        return getConfigUrl(context, R.string.mw_sdk_cdn_spa_url);
     }
 
     /**
      * 获取服务条款链接
      */
     public static String getServiceTermUrl(Context context) {
-        return getConfigUrl(context, "sdk_terms_service_url");
+        return getConfigUrl(context, R.string.mw_sdk_terms_service_url);
     }
 
-    /**
-     * 获取第三方支付的接口名
-     */
-    public static String getPayThirdMethod(Context context) {
-        return getResStringByName(context, "sdk_third_method");
-    }
-
-
-    /**
-     * 获取广告主域名
-     */
-    public static String getAdsPreferredUrl(Context context) {
-        return getCdnLocalUrl(context, "gama_ads_pre_url");
-    }
-
-    /**
-     * 获取广告备用域名
-     */
-    public static String getAdsSpareUrl(Context context) {
-        return getCdnLocalUrl(context, "gama_ads_spa_url");
-    }
-
-    /**
-     * 获取平台主域名
-     */
-    public static String getPlatPreferredUrl(Context context) {
-        return getCdnLocalUrl(context, "gama_plat_pre_url");
-    }
-
-    /**
-     * 获取平台备用域名
-     */
-    public static String getPlatSpareUrl(Context context) {
-        return getCdnLocalUrl(context, "gama_plat_spa_url");
-    }
 
     public static String getLogPreferredUrl(Context context) {
-        return getCdnLocalUrl(context, "sdk_log_pre_url");
+        return getConfigUrl(context, R.string.mw_sdk_log_pre_url);
     }
 
     /**
      * <p>Description: 先获取动态域名，然后获取本地域名，配置文件的key和本地的xml key需要一致</p>
      */
-    public static String getCdnLocalUrl(Context context, String resName) {
+//    public static String getCdnLocalUrl(Context context, String resName) {
+//
+//        String url = SdkUtil.getCfgValueByKey(context, resName, "");
+//        if (SStringUtil.isEmpty(url)) {
+//            url = getConfigUrl(context, resName);
+//        }
+//        return url;
+//    }
 
-        String url = SdkUtil.getCfgValueByKey(context, resName, "");
-        if (SStringUtil.isEmpty(url)) {
-            url = getConfigUrl(context, resName);
-        }
-        return url;
-    }
-
-    /**
-     * 获取客服链接
-     * @param context
-     * @return
-     */
-    public static String getServiceUrl(Context context) {
-        return getConfigUrl(context, "sdk_service_url");
-    }
-
-    /**
-     * 获取区码的链接
-     */
-    public static String getAreaCodeUrl(Context context) {
-        return getConfigUrl(context, "sdk_area_info_url");
-    }
-
-    /**
-     * 获取验证码开关的链接
-     */
-    public static String getVfCodeSwitchUrl(Context context) {
-        return getConfigUrl(context, "sdk_vfcode_switch_url");
-    }
 
 
 //===========================================域名获取end===============================================	
@@ -260,16 +162,16 @@ public class ResConfig {
 //===========================================域名获取end===============================================	
 
 
-    private static String getConfigUrl(Context context, String xmlSchemaName) {
+    private static String getConfigUrl(Context context, int id_url) {
 
 //        String isGlobal = getConfigInAssetsProperties(context, "gama_url_is_global");
 //        if ("100".equals(isGlobal)) {
 //            xmlSchemaName = "g_" + xmlSchemaName;
 //        }
 
-        String localSchemaName = getLocalSchemaName(context, xmlSchemaName);
-
-        String url = getResStringByName(context, localSchemaName);
+//        String localSchemaName = getLocalSchemaName(context, xmlSchemaName);
+//
+//        String url = getResStringByName(context, localSchemaName);
 
 //		if (TextUtils.isEmpty(url)) {
 //			return "";
@@ -277,7 +179,7 @@ public class ResConfig {
 //		if (url.contains(".com") || url.contains("http") || url.contains("//")) {
 //			return url;
 //		}
-        return url;
+        return context.getResources().getString(id_url);
     }
 
     private static String getResStringByName(Context context, String xmlSchemaName) {
@@ -330,8 +232,8 @@ public class ResConfig {
         return properties.getProperty(key, "");
     }
 
-    public static String getStringWithLocal(Context context, String xmlSchemaName) {
-        String localSchemaName = getLocalSchemaName(context, xmlSchemaName);
-        return getResStringByName(context, localSchemaName);
-    }
+//    public static String getStringWithLocal(Context context, String xmlSchemaName) {
+//        String localSchemaName = getLocalSchemaName(context, xmlSchemaName);
+//        return getResStringByName(context, localSchemaName);
+//    }
 }
