@@ -28,6 +28,7 @@ import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.MarketUtil;
 import com.core.base.utils.PL;
+import com.core.base.utils.TimeUtil;
 import com.core.base.utils.ToastUtils;
 import com.mw.base.bean.SPayType;
 import com.mw.base.utils.SLog;
@@ -39,6 +40,10 @@ import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.out.IMWSDK;
 import com.mw.sdk.out.ISdkCallBack;
 import com.mw.sdk.out.MWSdkFactory;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class MainActivity extends Activity {
 
@@ -56,6 +61,8 @@ public class MainActivity extends Activity {
     String vipLevel = "5"; //角色vip等级
     String serverCode = "1"; //角色伺服器id
     String serverName = "S1"; //角色伺服器名称
+
+    SLoginResponse tempSLoginResponse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -384,6 +391,10 @@ public class MainActivity extends Activity {
             public void onClick(View view) {
 
                 sendNotification("tests觉得基督教", "kdkkdk好的哈哈哈哈");
+
+                Date ydate = TimeUtil.getYesterday(Long.parseLong(tempSLoginResponse.getData().getTimestamp()));
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                PL.i(sdf.format(ydate));
             }
         });
 
@@ -391,6 +402,7 @@ public class MainActivity extends Activity {
 
     private void handleLoginResponse(SLoginResponse sLoginResponse) {
         if (sLoginResponse != null && sLoginResponse.getData() != null) {
+            tempSLoginResponse = sLoginResponse;
             String uid = sLoginResponse.getData().getUserId();
             userId = uid;
             String sign = sLoginResponse.getData().getSign();
