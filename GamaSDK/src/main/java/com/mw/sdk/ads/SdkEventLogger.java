@@ -16,7 +16,9 @@ import com.core.base.utils.JsonUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.SPUtil;
 import com.core.base.utils.SStringUtil;
+import com.core.base.utils.TimeUtil;
 import com.facebook.appevents.AppEventsConstants;
+import com.mw.base.bean.SUserInfo;
 import com.mw.sdk.pay.gp.bean.res.BasePayBean;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.mw.base.bean.AdsRequestBean;
@@ -30,7 +32,10 @@ import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.google.SGoogleProxy;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -82,6 +87,19 @@ public class SdkEventLogger {
             sendEventToSever(activity,eventName);
             trackingWithEventName(activity,eventName,eventValue, EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
 
+            SUserInfo sUserInfo = SdkUtil.getSUserInfo(activity, userId);
+            if (sUserInfo != null && sUserInfo.isPay()){
+                Date ydate = TimeUtil.getYesterday();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
+                String yesterday = sdf.format(ydate);
+                Date regData = new Date(Long.parseLong(sUserInfo.getRegTime()));
+                String regDay = sdf.format(regData);
+                if (yesterday.equals(regDay)){
+                    //Paid_D2Login要限制为注册首日的付费玩家，新增付费玩家第二天登录时触发，上报AF,FB和Firebase
+                    PL.i("tracking Paid_D2Login");
+                    trackingWithEventName(activity,"Paid_D2Login",eventValue, EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -202,6 +220,32 @@ public class SdkEventLogger {
             if(!SdkUtil.getFirstPay(context)) {//检查是否首次充值
 //                trackingWithEventName(context, EventConstant.EventName.FIRST_PAY.name(), eventValues, EventConstant.AdType.AdTypeAllChannel);
                 SdkUtil.saveFirstPay(context);
+            }
+
+            SUserInfo sUserInfo = SdkUtil.getSUserInfo(context, uid);
+            if (sUserInfo != null){
+                if (sUserInfo.isPay()){//判断是否付费过
+
+                    if (!sUserInfo.isSecondPay()){
+                        sUserInfo.setSecondPay(true);//付费过则为第二次付费
+                        SdkUtil.updateUserInfo(context, sUserInfo);
+                        //2nd_purchase，第二次充值的时候触发，上报AF,FB和Firebase，传firebase要上报金额，AF和FB不上报金额。
+
+                        PL.i("tracking second_purchase...");
+                        trackingWithEventName(context, EventConstant.EventName.second_purchase.name(), null, EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFacebook);
+
+                        SGoogleProxy.firebaseAnalytics(context, EventConstant.EventName.second_purchase.name(), b);
+
+                        PL.i("tracking end second_purchase...");
+
+                    }
+
+                }else {
+                    sUserInfo.setPay(true);//没付费过,即为首次
+                    sUserInfo.setFirstPayTime(System.currentTimeMillis() + "");
+                    SdkUtil.updateUserInfo(context, sUserInfo);
+                }
+
             }
 
         } catch (Exception e1) {

@@ -8,9 +8,19 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
-public class GamaTimeUtil {
-    private static final String TAG = GamaTimeUtil.class.getSimpleName();
+public class TimeUtil {
+    private static final String TAG = TimeUtil.class.getSimpleName();
     private static final String TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+
+    public static Date getYesterday() {
+        Date date = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DAY_OF_MONTH, -1);
+        Date yesterdayDate = calendar.getTime();
+
+        return yesterdayDate;
+    }
 
     public static String getDisplayTime(Context context) {
         String displayTime = "";

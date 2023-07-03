@@ -2,16 +2,11 @@ package com.mw.base.utils;
 
 import android.content.Context;
 import android.os.Build;
-import android.text.Editable;
-import android.text.Selection;
 import android.text.TextUtils;
-import android.widget.EditText;
-import android.widget.ImageView;
 
 import com.core.base.cipher.DESCipher;
 import com.core.base.utils.ApkInfoUtil;
 import com.core.base.utils.FileUtil;
-import com.core.base.utils.GamaTimeUtil;
 import com.core.base.utils.JsonUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.SPUtil;
@@ -19,6 +14,7 @@ import com.core.base.utils.SStringUtil;
 import com.mw.base.bean.PhoneInfo;
 import com.mw.base.bean.SGameLanguage;
 import com.mw.base.bean.SLoginType;
+import com.mw.base.bean.SUserInfo;
 import com.mw.base.cfg.ConfigBean;
 import com.mw.base.cfg.ResConfig;
 import com.mw.sdk.R;
@@ -799,50 +795,55 @@ public class SdkUtil {
         return SPUtil.getSimpleBoolean(context, SdkUtil.SDK_SP_FILE, PREFIX_FIRSTPAY_ + getUid(context));
     }
 
-    private static final String PREFIX_ONLINE = "GAMA_ONLINE";
-    /**
-     * 保存活跃时间戳
-     * @param context
-     */
-    public static void saveOnlineTimeInfo(Context context, long timeStamp) {
-        if(TextUtils.isEmpty(getUid(context))
-                || TextUtils.isEmpty(getRoleId(context))
-                || TextUtils.isEmpty(getServerCode(context))) {
-            PL.i("没有角色信息，不保存在线时间");
-            return;
+    private static final String SP_KEY_USER_INFO = "SP_KEY_USER_INFO_";
+    public static SUserInfo getSUserInfo(Context context, String userId) {
+        if (SStringUtil.isEmpty(userId)){
+            return null;
         }
-        JSONObject jsonObject = new JSONObject();
+        String infoJson = SPUtil.getSimpleString(context, SdkUtil.SDK_SP_FILE, SP_KEY_USER_INFO + userId);
+        if (SStringUtil.isNotEmpty(infoJson)){
+            try {
+                Gson gson = new Gson();
+                SUserInfo sUserInfo = gson.fromJson(infoJson, SUserInfo.class);
+                return sUserInfo;
+            } catch (JsonSyntaxException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    public static void saveSUserInfo(Context context, SLoginResponse loginResponse) {
+        if (loginResponse != null && loginResponse.getData() != null){
+            SUserInfo sUserInfo = getSUserInfo(context, loginResponse.getData().getUserId());
+            if (sUserInfo != null){//已存在，即已注册
+                return;
+            }
+            String userId = loginResponse.getData().getUserId();
+            SUserInfo newUserInfo = new SUserInfo();
+            newUserInfo.setUserId(userId);
+            newUserInfo.setRegTime(System.currentTimeMillis() + "");
+            try {
+                Gson gson = new Gson();
+                String result = gson.toJson(newUserInfo);
+                SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE, SP_KEY_USER_INFO + userId, result);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static void updateUserInfo(Context context, SUserInfo sUserInfo) {
         try {
-            jsonObject.put(GAMA_LOGIN_USER_ID, getUid(context));
-            jsonObject.put(GAMA_LOGIN_ROLE_NAME, getRoleName(context));
-            jsonObject.put(GAMA_LOGIN_ROLE_SERVER_CODE, getServerCode(context));
-            jsonObject.put(GAMA_LOGIN_ROLE_SERVER_NAME, getServerName(context));
-            jsonObject.put(GAMA_LOGIN_ROLE_ID, getRoleId(context));
-            jsonObject.put(GAMA_LOGIN_ROLE_LEVEL, getRoleLevel(context));
-            jsonObject.put(GAMA_LOGIN_ROLE_VIP, getRoleVip(context));
-            jsonObject.put("timestamp", timeStamp);
-        } catch (JSONException e) {
+            if (sUserInfo == null){
+                return;
+            }
+            Gson gson = new Gson();
+            String result = gson.toJson(sUserInfo);
+            SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE, SP_KEY_USER_INFO + sUserInfo.getUserId(), result);
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE, PREFIX_ONLINE, jsonObject.toString());
-    }
-
-    /**
-     * 获取在线时长
-     * @param context
-     * @return
-     */
-    public static String getOnlineTimeInfo(Context context) {
-        return SPUtil.getSimpleString(context, SdkUtil.SDK_SP_FILE, PREFIX_ONLINE);
-    }
-
-    /**
-     * 重置在线时长
-     * @param context
-     * @return
-     */
-    public static void resetOnlineTimeInfo(Context context) {
-        SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE, PREFIX_ONLINE, "");
     }
 
 

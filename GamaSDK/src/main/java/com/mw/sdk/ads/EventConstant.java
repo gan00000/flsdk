@@ -15,6 +15,7 @@ public class EventConstant {
         START_GUIDE,//新手引导
         COMPLETE_GUIDE,//完成新手引导
         Upgrade_Account,//完成新手引导
+        second_purchase,//二次充值
 
         /**
          * 首储事件
