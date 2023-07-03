@@ -16,6 +16,7 @@ public class EventConstant {
         COMPLETE_GUIDE,//完成新手引导
         Upgrade_Account,//完成新手引导
         second_purchase,//二次充值
+        Paid_D2Login,//首日注册付费用户第二天 登录
 
         /**
          * 首储事件

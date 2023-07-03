@@ -89,15 +89,15 @@ public class SdkEventLogger {
 
             SUserInfo sUserInfo = SdkUtil.getSUserInfo(activity, userId);
             if (sUserInfo != null && sUserInfo.isPay()){
-                Date ydate = TimeUtil.getYesterday();
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
+                Date ydate = TimeUtil.getYesterday(Long.parseLong(loginResponse.getData().getTimestamp()));
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 String yesterday = sdf.format(ydate);
                 Date regData = new Date(Long.parseLong(sUserInfo.getRegTime()));
                 String regDay = sdf.format(regData);
                 if (yesterday.equals(regDay)){
                     //Paid_D2Login要限制为注册首日的付费玩家，新增付费玩家第二天登录时触发，上报AF,FB和Firebase
                     PL.i("tracking Paid_D2Login");
-                    trackingWithEventName(activity,"Paid_D2Login",eventValue, EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
+                    trackingWithEventName(activity,EventConstant.EventName.Paid_D2Login.name(),eventValue, EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
                 }
             }
         } catch (Exception e) {

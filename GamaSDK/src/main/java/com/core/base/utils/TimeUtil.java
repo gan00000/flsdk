@@ -22,6 +22,16 @@ public class TimeUtil {
         return yesterdayDate;
     }
 
+    public static Date getYesterday(long timeStamp) {
+        Date date = new Date(timeStamp);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DAY_OF_MONTH, -1);
+        Date yesterdayDate = calendar.getTime();
+
+        return yesterdayDate;
+    }
+
     public static String getDisplayTime(Context context) {
         String displayTime = "";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(TIME_FORMAT);
