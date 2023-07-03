@@ -14,9 +14,18 @@ import com.core.base.utils.JsonUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Observer;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.functions.Function;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 
 public abstract class AbsHttpRequest implements ISRqeust {
@@ -39,7 +48,7 @@ public abstract class AbsHttpRequest implements ISRqeust {
 
     protected boolean isCancel = false; //是否取消请求。
 
-    public <T> void excute(final Type mTypeOfT) {
+   /* public <T> void excute(final Type mTypeOfT) {
 
         @SuppressLint("StaticFieldLeak") SRequestAsyncTask asyncTask = new SRequestAsyncTask() {
 
@@ -111,7 +120,7 @@ public abstract class AbsHttpRequest implements ISRqeust {
         };
 
         asyncTask.asyncExcute();
-    }
+    }*/
 
     @Override
     public void excute() {
@@ -121,7 +130,93 @@ public abstract class AbsHttpRequest implements ISRqeust {
     @Override
     public <T> void excute(final Class<T> classOfT) {
 
-        @SuppressLint("StaticFieldLeak") SRequestAsyncTask asyncTask = new SRequestAsyncTask() {
+        if (loadDialog != null && !loadDialog.isShowing()){
+            loadDialog.show();
+        }
+        Observable.just("" + System.currentTimeMillis())
+                .map(new Function<String, String>() {
+            @Override
+            public String apply(String s) throws Throwable {
+                PL.i("apply");
+                if(isCancel) {
+                    return null;
+                }
+                BaseReqeustBean baseReqeustBean = createRequestBean();
+                if (baseReqeustBean == null) {
+                    return null;
+                }
+
+                String rawResponse = doRequest(baseReqeustBean);
+                return rawResponse;
+            }
+        })
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        PL.i("onSubscribe");
+                    }
+
+                    @Override
+                    public void onNext(@NonNull String rawResponse) {
+                        PL.i("onNext");
+
+                        if (loadDialog != null && loadDialog.isShowing()){
+                            loadDialog.dismiss();
+                        }
+
+                        if(isCancel) {
+                            return;
+                        }
+
+                        if (coreHttpResponse != null) {
+                            if (coreHttpResponse.getHttpResponseCode() != HttpURLConnection.HTTP_OK) {
+                                onTimeout(coreHttpResponse.getHttpResponseCode() + "");
+                                if (reqCallBack != null){
+                                    reqCallBack.timeout(coreHttpResponse.getHttpResponseCode() + "");
+                                }
+                            } else if (TextUtils.isEmpty(rawResponse)) {
+                                onNoData(coreHttpResponse.getRequestCompleteUrl());
+                                if (reqCallBack != null){
+                                    reqCallBack.noData();//也是请求成功
+                                }
+                            } else {
+
+                                //解析json数据
+//                                if (!TextUtils.isEmpty(rawResponse) && classOfT != null && JsonUtil.isJson(rawResponse)) {
+                                T responseModule = null;
+                                if (classOfT != null) {
+                                    try {
+                                        Gson gson = new Gson();
+                                        responseModule = gson.fromJson(rawResponse, classOfT);
+                                        if (responseModule != null && (responseModule instanceof BaseResponseModel)) {
+                                            ((BaseResponseModel) responseModule).setRawResponse(rawResponse);
+                                        }
+
+                                    } catch (JsonSyntaxException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                                onHttpSucceess(responseModule);
+                                if (reqCallBack != null){
+                                    reqCallBack.success(responseModule, rawResponse);
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        PL.i("onError");
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        PL.i("onComplete");//onError()和onComplete()只会回调一个。
+                    }
+                });
+       /* @SuppressLint("StaticFieldLeak") SRequestAsyncTask asyncTask = new SRequestAsyncTask() {
 
             T responseModule = null;
 
@@ -189,7 +284,7 @@ public abstract class AbsHttpRequest implements ISRqeust {
             }
         };
 
-        asyncTask.asyncExcute();
+        asyncTask.asyncExcute();*/
     }
 
     /**
