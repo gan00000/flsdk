@@ -15,6 +15,8 @@ public class SUserInfo implements Serializable {
     private String regTime;//注册时间
     private String firstPayTime;//第一次付费
 
+    private boolean isRegDayPay;//是否付费
+
     public String getUserId() {
         return userId;
     }
@@ -54,5 +56,13 @@ public class SUserInfo implements Serializable {
 
     public void setSecondPay(boolean secondPay) {
         isSecondPay = secondPay;
+    }
+
+    public boolean isRegDayPay() {
+        return isRegDayPay;
+    }
+
+    public void setRegDayPay(boolean regDayPay) {
+        isRegDayPay = regDayPay;
     }
 }

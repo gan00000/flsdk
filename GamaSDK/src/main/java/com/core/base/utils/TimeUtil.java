@@ -12,6 +12,23 @@ public class TimeUtil {
     private static final String TAG = TimeUtil.class.getSimpleName();
     private static final String TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
+    public static String getDateStr(String timeStamp, String format){
+        if (SStringUtil.isEmpty(format)){
+            format = TIME_FORMAT;
+        }
+        Date ydate = new Date(Long.parseLong(timeStamp));
+        SimpleDateFormat sdf = new SimpleDateFormat(format);
+        return sdf.format(ydate);
+    }
+
+    public static String getDateStr(Date mDate, String format){
+        if (SStringUtil.isEmpty(format)){
+            format = TIME_FORMAT;
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat(format);
+        return sdf.format(mDate);
+    }
+
     public static Date getYesterday() {
         Date date = new Date();
         Calendar calendar = Calendar.getInstance();

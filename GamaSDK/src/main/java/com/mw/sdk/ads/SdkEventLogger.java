@@ -32,6 +32,7 @@ import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.google.SGoogleProxy;
 
 import java.math.BigDecimal;
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -88,12 +89,10 @@ public class SdkEventLogger {
             trackingWithEventName(activity,eventName,eventValue, EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
 
             SUserInfo sUserInfo = SdkUtil.getSUserInfo(activity, userId);
-            if (sUserInfo != null && sUserInfo.isPay()){
+            if (sUserInfo != null && sUserInfo.isRegDayPay()){//注册首日付费玩家第二天登录
                 Date ydate = TimeUtil.getYesterday(Long.parseLong(loginResponse.getData().getTimestamp()));
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                String yesterday = sdf.format(ydate);
-                Date regData = new Date(Long.parseLong(sUserInfo.getRegTime()));
-                String regDay = sdf.format(regData);
+                String yesterday = TimeUtil.getDateStr(ydate, "yyyy-MM-dd");
+                String regDay = TimeUtil.getDateStr(sUserInfo.getRegTime(), "yyyy-MM-dd");
                 if (yesterday.equals(regDay)){
                     //Paid_D2Login要限制为注册首日的付费玩家，新增付费玩家第二天登录时触发，上报AF,FB和Firebase
                     PL.i("tracking Paid_D2Login");
@@ -242,7 +241,13 @@ public class SdkEventLogger {
 
                 }else {
                     sUserInfo.setPay(true);//没付费过,即为首次
-                    sUserInfo.setFirstPayTime(System.currentTimeMillis() + "");
+                    String firstPayTime = System.currentTimeMillis() + "";
+                    sUserInfo.setFirstPayTime(firstPayTime);
+                    if (TimeUtil.getDateStr(firstPayTime,"yyyy-MM-dd").equals(TimeUtil.getDateStr(sUserInfo.getRegTime(),"yyyy-MM-dd"))){
+                        sUserInfo.setRegDayPay(true);
+                    }else {
+                        sUserInfo.setRegDayPay(false);
+                    }
                     SdkUtil.updateUserInfo(context, sUserInfo);
                 }
 
