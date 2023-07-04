@@ -96,7 +96,7 @@ public class SdkEventLogger {
                 if (yesterday.equals(regDay)){
                     //Paid_D2Login要限制为注册首日的付费玩家，新增付费玩家第二天登录时触发，上报AF,FB和Firebase
                     PL.i("tracking Paid_D2Login");
-                    trackingWithEventName(activity,EventConstant.EventName.Paid_D2Login.name(),eventValue, EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
+                    trackingWithEventName(activity,EventConstant.EventName.Paid_D2Login.name(),eventValue);
                 }
             }
         } catch (Exception e) {
