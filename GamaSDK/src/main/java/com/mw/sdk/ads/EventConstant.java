@@ -14,7 +14,7 @@ public class EventConstant {
         CREATE_ROLE,//创建角色
         START_GUIDE,//新手引导
         COMPLETE_GUIDE,//完成新手引导
-        Upgrade_Account,//完成新手引导
+        Upgrade_Account,//升级账号
         second_purchase,//二次充值
         Paid_D2Login,//首日注册付费用户第二天 登录
 
