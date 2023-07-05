@@ -22,6 +22,7 @@ import com.mw.base.cfg.ConfigBean;
 import com.mw.base.cfg.ResConfig;
 import com.mw.base.utils.SdkUtil;
 import com.mw.sdk.ads.EventConstant;
+import com.mw.sdk.constant.SdkInnerVersion;
 import com.mw.sdk.utils.DataManager;
 import com.mw.sdk.login.constant.BindType;
 import com.mw.sdk.login.constant.ViewType;
@@ -227,6 +228,14 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         else {//進入登錄頁面
             showMainHomeView();
         }*/
+
+        if (SdkUtil.getSdkInnerVersion(activity).equals(SdkInnerVersion.KR.getSdkVeriosnName())){
+
+            if (iLoginView != null){
+                iLoginView.showSdkView(ViewType.AgeQualifiedView, null, "",1);
+            }
+            return;
+        }
 
         ConfigBean configBean = SdkUtil.getSdkCfg(getContext());
         if (configBean != null) {

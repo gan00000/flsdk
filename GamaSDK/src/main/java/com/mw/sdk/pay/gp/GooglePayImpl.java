@@ -23,6 +23,7 @@ import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ThreadUtil;
 import com.core.base.utils.ToastUtils;
+import com.mw.base.utils.SdkUtil;
 import com.mw.sdk.out.ISdkCallBack;
 import com.mw.sdk.pay.IPay;
 import com.mw.sdk.pay.IPayCallBack;
@@ -208,7 +209,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
 
         this.createOrderIdReqBean = null;
 
-        PL.i("the aar version info:" + activity.getResources().getString(R.string.sdk_inner_version) + "_" + BuildConfig.JAR_VERSION);//打印版本号
+        PL.i("the aar version info:" + SdkUtil.getSdkInnerVersion(activity) + "_" + BuildConfig.JAR_VERSION);//打印版本号
 
         if (activity == null) {
             PL.w("activity is null");

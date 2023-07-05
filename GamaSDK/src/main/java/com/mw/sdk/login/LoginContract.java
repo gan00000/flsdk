@@ -52,6 +52,8 @@ public class LoginContract {
 //        void showBindView(int fromPage);
 //
 //        void refreshVfCode();
+
+        void showSdkView(ViewType viewType, ViewType fromViewType, String arg1, int arg2);
     }
 
     /**

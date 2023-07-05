@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StyleRes;
 
 import com.mw.base.utils.Localization;
+import com.mw.base.utils.SdkVersionUtil;
 import com.mw.sdk.R;
 import com.mw.sdk.SBaseDialog;
 import com.mw.sdk.ads.EventConstant;
@@ -65,6 +66,8 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 //    private SLoginBaseRelativeLayout bindFbView;
 //    private SLoginBaseRelativeLayout bindGoogleView;
     private SLoginBaseRelativeLayout welcomeBackView;
+
+    private SLoginBaseRelativeLayout ageQuaView;
 
     private List<SLoginBaseRelativeLayout> viewPageList;
 
@@ -574,6 +577,21 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
     @Override
     public void showWelcomeBackView() {
         toWelcomeBackView();
+    }
+
+    @Override
+    public void showSdkView(ViewType viewType, ViewType fromViewType, String arg1, int arg2) {
+        if (viewType == ViewType.AgeQualifiedView){
+
+            if (ageQuaView == null || !viewPageList.contains(ageQuaView)){
+
+                ageQuaView =  SdkVersionUtil.newAgeQualifiedView(context);
+                ageQuaView.setLoginDialogV2(this);
+                contentFrameLayout.addView(ageQuaView);
+                viewPageList.add(ageQuaView);
+            }
+            setViewPageVisable(ageQuaView);
+        }
     }
 
     @Override

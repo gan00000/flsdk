@@ -936,24 +936,21 @@ public class SdkUtil {
     }*/
 
     public static boolean isVersion1(Context context) {//是否是第一套sdk
-        if ("v1".equals(context.getResources().getString(R.string.sdk_inner_version))){
+        if ("v1".equals(getSdkInnerVersion(context))){
             return true;
         }
         return false;
     }
 
     public static boolean isVersion2(Context context) {//是否是第二套sdk
-        if ("v2".equals(context.getResources().getString(R.string.sdk_inner_version))){
+        if ("v2".equals(getSdkInnerVersion(context))){
             return true;
         }
         return false;
     }
 
-    public static boolean isVersion3(Context context) {//是否是第二套sdk
-        if ("v3".equals(context.getResources().getString(R.string.sdk_inner_version))){
-            return true;
-        }
-        return false;
+    public static String getSdkInnerVersion(Context context) {//获取版本
+        return context.getResources().getString(R.string.sdk_inner_version);
     }
 
     public static List<PhoneInfo> getPhoneInfoList(Context context){

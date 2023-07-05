@@ -209,7 +209,7 @@ public class BaseSdkImpl implements IMWSDK {
     @Override
     public void onCreate(final Activity activity) {
         PL.i("sdk onCreate");
-        PL.i("the aar version info:" + activity.getResources().getString(R.string.sdk_inner_version) + "_" + BuildConfig.JAR_VERSION);//打印版本号
+        PL.i("the aar version info:" + SdkUtil.getSdkInnerVersion(activity) + "_" + BuildConfig.JAR_VERSION);//打印版本号
 
         PL.i("fb keyhash:" + SignatureUtil.getHashKey(activity, activity.getPackageName()));
         PL.i("google sha1:" + SignatureUtil.getSignatureSHA1WithColon(activity, activity.getPackageName()));
