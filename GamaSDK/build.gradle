@@ -82,7 +82,7 @@ android {
 
         QooApp {//Qooap
             flavorDimensions "1"
-            resValue "string", "sdk_inner_version", "qooap"
+            resValue "string", "sdk_inner_version", "qooapp"
         }
 
         huawei {//华为渠道
@@ -101,7 +101,7 @@ android {
         }
         sdkKR {//韩国
             flavorDimensions "1"
-            resValue "string", "sdk_inner_version", "vkr"
+            resValue "string", "sdk_inner_version", "kr"
         }
     }
 }

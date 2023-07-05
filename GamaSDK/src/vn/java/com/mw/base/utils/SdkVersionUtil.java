@@ -48,4 +48,9 @@ public class SdkVersionUtil {
             e.printStackTrace();
         }
     }
+
+    public static SLoginBaseRelativeLayout newAgeQualifiedView(Context context){
+
+        return null;
+    }
 }
