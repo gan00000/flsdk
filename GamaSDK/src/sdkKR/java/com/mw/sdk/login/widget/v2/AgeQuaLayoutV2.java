@@ -25,7 +25,7 @@ public class AgeQuaLayoutV2 extends SLoginBaseRelativeLayout implements View.OnC
     private String account;
 //    private String email;
 
-    Button btn_find_get_vfcode;
+    View closeView,ageUpView;
 
     public AgeQuaLayoutV2(Context context) {
         super(context);
@@ -49,8 +49,10 @@ public class AgeQuaLayoutV2 extends SLoginBaseRelativeLayout implements View.OnC
     private View onCreateView(LayoutInflater inflater) {
         contentView = inflater.inflate(R.layout.mw_age_qua, null);
 
-//        backView = contentView.findViewById(R.id.layout_head_back);
-
+        closeView = contentView.findViewById(R.id.btn_age_close);
+        ageUpView = contentView.findViewById(R.id.btn_age_ok);
+        closeView.setOnClickListener(this);
+        ageUpView.setOnClickListener(this);
 
         return contentView;
     }
@@ -79,15 +81,11 @@ public class AgeQuaLayoutV2 extends SLoginBaseRelativeLayout implements View.OnC
     @Override
     public void onClick(View v) {
 
-//        if (v == findPwdConfireBtn) {
-//            findPwd();
-//        } else if (v == backView) {//返回键
-//            sLoginDialogv2.toLoginWithRegView(null);
-//            sLoginDialogv2.distoryView(this);
-//        }
-//        else if (v == btn_find_get_vfcode) {
-//            getVfcodeByEmail();
-//        }
+        if (v == closeView) {
+            sLoginDialogv2.showMainHomeView();
+        }else if (v == ageUpView){
+            sLoginDialogv2.showMainHomeView();
+        }
 
     }
 

@@ -586,6 +586,9 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
             if (ageQuaView == null || !viewPageList.contains(ageQuaView)){
 
                 ageQuaView =  SdkVersionUtil.newAgeQualifiedView(context);
+                if (ageQuaView == null){
+                    return;
+                }
                 ageQuaView.setLoginDialogV2(this);
                 contentFrameLayout.addView(ageQuaView);
                 viewPageList.add(ageQuaView);
