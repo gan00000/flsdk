@@ -1,5 +1,6 @@
 package com.mw.base.utils;
 
+import android.content.Context;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -7,6 +8,7 @@ import com.core.base.utils.SStringUtil;
 import com.mw.base.bean.SLoginType;
 import com.mw.sdk.R;
 import com.mw.sdk.login.model.AccountModel;
+import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
 
 /**
  * Created by gan on 2017/2/7.
