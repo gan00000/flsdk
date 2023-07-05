@@ -32,9 +32,9 @@ public class LoginContract {
         void changePwdSuccess(SLoginResponse sLoginResponse);
         void findPwdSuccess(SLoginResponse sLoginResponse);
 
-        void showAutoLoginTips(String tips);
+//        void showAutoLoginTips(String tips);
 
-        void showAutoLoginView();
+        void showAutoLoginView(String tips);
         void showTermView(ViewType fromViewType);
 
 //        void showLoginView();

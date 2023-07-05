@@ -140,52 +140,6 @@ android {
 
         }
 
-        sdk2 {
-
-            signingConfig signingConfigs.release_v2
-            applicationId "com.wanxian.mzxq"
-            minSdkVersion 21
-            targetSdkVersion 33
-            versionCode 10
-            versionName "1.0"
-            flavorDimensions "1"
-            resValue "string", "scheme", "mzxq"
-            resValue "string", "facebook_app_id", "855035868795821"
-            resValue "string", "facebook_client_token", "0872345a71b6e76c9247438a3f27b0b8"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider855035868795821" //启用分析
-            resValue "string", "fb_login_protocol_scheme", "fb855035868795821"
-            resValue "string", "facebook_app_name", "魔之序曲"
-            resValue "string", "line_channelId", "1657381968"
-            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow"
-
-            //每个游戏的demo设置 test
-            resValue "string", "sdk_name", "魔之序曲demo"
-
-        }
-
-        sdk3 {
-
-            signingConfig signingConfigs.signv3
-            applicationId "com.wanye.fszhl"
-            minSdkVersion 21
-            targetSdkVersion 33
-            versionCode 16
-            versionName "2.3.16"
-            flavorDimensions "1"
-            resValue "string", "scheme", "wlzhs"
-            resValue "string", "facebook_app_id", "1137481690478934"
-            resValue "string", "facebook_client_token", "9457e9f00d7e1c0a9869c451326b15a9"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1137481690478934" //启用分析
-            resValue "string", "fb_login_protocol_scheme", "fb1137481690478934"
-            resValue "string", "facebook_app_name", "万灵召唤师"
-            resValue "string", "line_channelId", "1657511063"
-            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow"
-
-            //每个游戏的demo设置 test
-            resValue "string", "sdk_name", "SDK3 demo"
-
-        }
-
         sdk4 {
 
             signingConfig signingConfigs.release_v4
@@ -312,6 +266,30 @@ android {
 
             //每个游戏的demo设置 test
             resValue "string", "sdk_name", "v6 demo"
+
+        }
+
+
+        dysdk {
+
+            signingConfig signingConfigs.release_v2
+            applicationId "com.wantang.xlzsg"
+            minSdkVersion 21
+            targetSdkVersion 33
+            versionCode 10
+            versionName "1.0"
+            flavorDimensions "1"
+            resValue "string", "scheme", "gwsg"
+            resValue "string", "facebook_app_id", "1362551254507553"
+            resValue "string", "facebook_client_token", "0a8e2080cba4d5aa1fe9d9dd65c04e58"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1362551254507553" //启用分析
+            resValue "string", "fb_login_protocol_scheme", "fb1362551254507553"
+            resValue "string", "facebook_app_name", "鬼武三國"
+            resValue "string", "line_channelId", "1657882064"
+            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow"
+
+            //每个游戏的demo设置 test
+            resValue "string", "sdk_name", "鬼武三國demo"
 
         }
     }

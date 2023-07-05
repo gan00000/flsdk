@@ -197,26 +197,27 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     @Override
     public void autoLogin(Activity activity) {
         this.mActivity = activity;
-/*
-        String previousLoginType = GamaUtil.getPreviousLoginType(activity);
-
+//        SLoginResponse xSLoginResponse = SdkUtil.getCurrentUserLoginResponse(activity);
+//        String previousLoginType = xSLoginResponse.getData().getLoginType();
+        String previousLoginType = SdkUtil.getPreviousLoginType(activity);
         if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_MG, previousLoginType)) {//自動登錄
-            AccountModel accountModel = GamaUtil.getLastLoginAccount(activity);
+            AccountModel accountModel = SdkUtil.getLastLoginAccount(activity);//最后登录的账号
             if (accountModel != null){
                 startAutoLogin(activity, SLoginType.LOGIN_TYPE_MG, accountModel.getAccount(), accountModel.getPassword());
             }else {
-                showLoginWithRegView();
+                iLoginView.showLoginWithRegView(ViewType.WelcomeView);
             }
 
         } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GUEST, previousLoginType)) {//免注册没有自動登錄
-//            startAutoLogin(activity, SLoginType.LOGIN_TYPE_GAMESWORD, "", "");
-            showLoginWithRegView();
+//            iLoginView.showLoginWithRegView(ViewType.WelcomeView);
+            startAutoLogin(activity, SLoginType.LOGIN_TYPE_GUEST, "", "");
+
         } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_FB, previousLoginType)) {//自動登錄
             String fbScopeId = FbSp.getFbId(activity);
             if (SStringUtil.isNotEmpty(fbScopeId)){
                 startAutoLogin(activity, SLoginType.LOGIN_TYPE_FB, "", "");
             }else {
-                showLoginWithRegView();
+                iLoginView.showLoginWithRegView(ViewType.WelcomeView);
             }
 
         }  else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GOOGLE, previousLoginType)) {//自動登錄
@@ -225,10 +226,10 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             startAutoLogin(activity, SLoginType.LOGIN_TYPE_TWITTER, "", "");
         }
         else {//進入登錄頁面
-            showMainHomeView();
-        }*/
+            iLoginView.showLoginWithRegView(ViewType.WelcomeView);
+        }
 
-        ConfigBean configBean = SdkUtil.getSdkCfg(getContext());
+       /* ConfigBean configBean = SdkUtil.getSdkCfg(getContext());
         if (configBean != null) {
             ConfigBean.VersionData versionData = configBean.getSdkConfigLoginData(getContext());
             if (versionData != null && versionData.isHiden_Guest_Fb_Gg_Line()) {//此处可能还有华为登录，先不管，应该不会出现此情况
@@ -238,6 +239,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 return;
             }
         }
+
         List<AccountModel> accountModels = SdkUtil.getAccountModels(this.mActivity);
 //        iLoginView.showMainHomeView();
         if (accountModels.isEmpty()){
@@ -252,7 +254,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     iLoginView.showWelcomeBackView();
                 }
             }
-        }
+        }*/
     }
 
     @Override
@@ -483,7 +485,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 //        } else {
 //            PL.i(TAG, "sGoogleSignIn为null，无法進行Google登出");
 //        }
-//        showLoginView();
+        iLoginView.showLoginWithRegView(ViewType.WelcomeView);
     }
 
     @Override
@@ -941,11 +943,10 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
     private void startAutoLogin(final Activity activity, final String registPlatform, final String account, final String password) {
         isAutoLogin = true;
-
+        String autoLoginText = "";
         if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_MG, registPlatform)) {
 
             if (SStringUtil.hasEmpty(account, password)) {
-
 //                showLoginView();
                 return;
             }
@@ -962,8 +963,8 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 //                showLoginView();
 //                return;
 //            }
+            autoLoginText = String.format(activity.getResources().getString(R.string.py_login_autologin_tips),account);
 
-            iLoginView.showAutoLoginTips(String.format(activity.getResources().getString(R.string.py_login_autologin_tips),account));
         } else {
             String autoLoginTips = activity.getResources().getString(R.string.py_login_autologin_logining_tips);
             if (registPlatform.equals(SLoginType.LOGIN_TYPE_FB)){
@@ -974,16 +975,22 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             else if (registPlatform.equals(SLoginType.LOGIN_TYPE_TWITTER)){
                 autoLoginTips = "Twitter" + autoLoginTips;
             }
-            iLoginView.showAutoLoginTips(autoLoginTips);
+            else if (registPlatform.equals(SLoginType.LOGIN_TYPE_GUEST)){
+                autoLoginTips = "GUEST" + autoLoginTips;
+            }
+            autoLoginText = autoLoginTips;
         }
-        iLoginView.showAutoLoginView();
+        iLoginView.showAutoLoginView(autoLoginText);
 
-        count = 2;
+        count = 10;
 
-        iLoginView.showAutoLoginWaitTime("(" + count +  ")");
+        String autoLoginTipsTemp = String.format("%s%s",autoLoginText, "(" + count +  ")");
+
+        iLoginView.showAutoLoginWaitTime(autoLoginTipsTemp);
 
         autoLoginTimer = new Timer();//delay为long,period为long：从现在起过delay毫秒以后，每隔period毫秒执行一次。
 
+        String finalAutoLoginText = autoLoginText;
         autoLoginTimer.schedule(new TimerTask() {
 
             @Override
@@ -992,7 +999,8 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        iLoginView.showAutoLoginWaitTime("(" + count +  ")");
+                        String autoLoginTipsTemp2 = String.format("%s%s", finalAutoLoginText, "(" + count +  ")");
+                        iLoginView.showAutoLoginWaitTime(autoLoginTipsTemp2);
                         if (count == 0){
 
                             if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_MG, registPlatform)) {//免注册或者平台用户自动登录
@@ -1019,12 +1027,22 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 //                                thirdPlatLogin(activity, thirdLoginRegRequestBean);
                             } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_TWITTER, registPlatform)) {//Google登录
 
-                                ThirdLoginRegRequestBean thirdLoginRegRequestBean = new ThirdLoginRegRequestBean(activity);
-                                thirdLoginRegRequestBean.setThirdPlatId(SdkUtil.getTwitterId(activity));
-                                thirdLoginRegRequestBean.setRegistPlatform(SLoginType.LOGIN_TYPE_TWITTER);
-                                thirdLoginRegRequestBean.setGoogleClientId(ResConfig.getGoogleClientId(activity));
-                                thirdLoginRegRequestBean.setGoogleIdToken(SdkUtil.getGoogleIdToken(activity));
-                                thirdPlatLogin(activity, thirdLoginRegRequestBean);
+//                                ThirdLoginRegRequestBean thirdLoginRegRequestBean = new ThirdLoginRegRequestBean(activity);
+//                                thirdLoginRegRequestBean.setThirdPlatId(SdkUtil.getTwitterId(activity));
+//                                thirdLoginRegRequestBean.setRegistPlatform(SLoginType.LOGIN_TYPE_TWITTER);
+//                                thirdLoginRegRequestBean.setGoogleClientId(ResConfig.getGoogleClientId(activity));
+//                                thirdLoginRegRequestBean.setGoogleIdToken(SdkUtil.getGoogleIdToken(activity));
+//                                thirdPlatLogin(activity, thirdLoginRegRequestBean);
+                            } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GUEST, registPlatform)) {//guest登录
+
+//                                ThirdLoginRegRequestBean thirdLoginRegRequestBean = new ThirdLoginRegRequestBean(activity);
+//                                thirdLoginRegRequestBean.setThirdPlatId(SdkUtil.getTwitterId(activity));
+//                                thirdLoginRegRequestBean.setRegistPlatform(SLoginType.LOGIN_TYPE_TWITTER);
+//                                thirdLoginRegRequestBean.setGoogleClientId(ResConfig.getGoogleClientId(activity));
+//                                thirdLoginRegRequestBean.setGoogleIdToken(SdkUtil.getGoogleIdToken(activity));
+//                                thirdPlatLogin(activity, thirdLoginRegRequestBean);
+
+                                guestLogin(activity);
                             }
 
                             if (autoLoginTimer != null){
@@ -1041,13 +1059,13 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     /**
      * 顯示登入頁面,自动登录状态重置为false
      */
-   /* private void showLoginView() {
-        isAutoLogin = false;
-        if (iLoginView != null){
-//            iLoginView.hildAutoLoginView();
-            iLoginView.showLoginView();
-        }
-    }*/
+//    private void showLoginView() {
+//        isAutoLogin = false;
+//        if (iLoginView != null){
+////            iLoginView.hildAutoLoginView();
+//            iLoginView.showLoginView();
+//        }
+//    }
 
 //    private void showLoginWithRegView() {
 //        isAutoLogin = false;

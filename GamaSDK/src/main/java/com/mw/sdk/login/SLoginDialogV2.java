@@ -24,6 +24,7 @@ import com.mw.sdk.login.p.LoginPresenterImpl;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.mw.sdk.login.widget.v2.AccountChangePwdLayoutV2;
 import com.mw.sdk.login.widget.v2.AccountFindPwdLayoutV2;
+import com.mw.sdk.login.widget.v2.AutoLoginLayoutV2;
 import com.mw.sdk.login.widget.v2.LoginWithRegLayout;
 import com.mw.sdk.login.widget.v2.MainHomeLayout;
 import com.mw.sdk.login.widget.v2.TermsViewV3;
@@ -65,6 +66,8 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 //    private SLoginBaseRelativeLayout bindFbView;
 //    private SLoginBaseRelativeLayout bindGoogleView;
     private SLoginBaseRelativeLayout welcomeBackView;
+
+    private SLoginBaseRelativeLayout autoLoginView;
 
     private List<SLoginBaseRelativeLayout> viewPageList;
 
@@ -261,95 +264,6 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
         }
     }
 
-    /*public void toAccountLoginView() {
-*//*
-        if (accountLoginView == null || !viewPageList.contains(accountLoginView)){
-//            SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
-//            if (SGameLanguage.en_US == sGameLanguage) {
-//                accountLoginView = new PyAccountLoginV2En(context);
-//            } else {
-                accountLoginView = new PyAccountLoginV2(context);
-//            }
-            accountLoginView.setLoginDialogV2(this);
-            contentFrameLayout.addView(accountLoginView);
-            viewPageList.add(accountLoginView);
-        }
-
-        for (SLoginBaseRelativeLayout childView : viewPageList) {
-
-            if (childView == null){
-                continue;
-            }
-
-            if (childView == accountLoginView){
-                childView.refreshViewData();
-                childView.setVisibility(View.VISIBLE);
-            }else{
-                childView.setVisibility(View.GONE);
-            }
-        }*//*
-
-        this.toLoginWithRegView();
-    }*/
-
-   /* public void toRegisterView(int from) {
-
-       *//* getLoginPresenter().stopVfCodeTimer();
-        if (registerView == null || !viewPageList.contains(registerView)){
-//            SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
-//            if (SGameLanguage.en_US == sGameLanguage) {
-//                registerView = new AccountRegisterLayoutV2En(context);
-//            } else {
-                registerView = new AccountRegisterLayoutV2(context);
-//            }
-
-            registerView.setLoginDialogV2(this);
-            contentFrameLayout.addView(registerView);
-            viewPageList.add(registerView);
-        }
-
-        for (View childView : viewPageList) {
-
-            if (childView == null){
-                continue;
-            }
-
-            if (childView == registerView){
-                if (from > 0) {
-                    registerView.from = from;
-                }
-                childView.setVisibility(View.VISIBLE);
-            }else{
-                childView.setVisibility(View.GONE);
-            }
-        }*//*
-
-
-        this.toLoginWithRegView();
-    }*/
-
-//    public void toRegisterTermsView(int from) {
-//
-//        if (registerTermsView == null || !viewPageList.contains(registerTermsView)){
-//            registerTermsView = new AccountRegisterTermsLayoutV2(context);
-//            registerTermsView.setLoginDialogV2(this);
-//            contentFrameLayout.addView(registerTermsView);
-//            viewPageList.add(registerTermsView);
-//        }
-//        registerTermsView.from = from;
-//        for (View childView : viewPageList) {
-//
-//            if (childView == null){
-//                continue;
-//            }
-//
-//            if (childView == registerTermsView){
-//                childView.setVisibility(View.VISIBLE);
-//            }else{
-//                childView.setVisibility(View.GONE);
-//            }
-//        }
-//    }
 
     public void toChangePwdView(String account) {
 
@@ -392,136 +306,6 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
         setViewPageVisable(bindView);
     }
 
-   /* public void toBindUniqueView(int fromPage) {
-
-        if (bindUniqueView == null || !viewPageList.contains(bindUniqueView)){
-//            SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
-//            if (SGameLanguage.en_US == sGameLanguage) {
-//                bindUniqueView = new ThirdPlatBindAccountLayoutV2En(context);
-//                ((ThirdPlatBindAccountLayoutV2En)bindUniqueView).setBindTpye(SLoginType.bind_unique);
-//            } else {
-                bindUniqueView = new ThirdPlatBindAccountLayoutV2(context);
-                ((ThirdPlatBindAccountLayoutV2)bindUniqueView).setBindTpye(SLoginType.bind_unique);
-
-//            }
-
-            bindUniqueView.setLoginDialogV2(this);
-            contentFrameLayout.addView(bindUniqueView);
-            viewPageList.add(bindUniqueView);
-        }
-
-        getLoginPresenter().stopVfCodeTimer();
-
-        ((ThirdPlatBindAccountLayoutV2)bindUniqueView).setFromPage(fromPage);
-        for (View childView : viewPageList) {
-
-            if (childView == null){
-                continue;
-            }
-
-            if (childView == bindUniqueView){
-                childView.setVisibility(View.VISIBLE);
-            }else{
-                childView.setVisibility(View.GONE);
-            }
-        }
-
-    }
-
-    public void toBindFbView() {
-
-        if (bindFbView == null || !viewPageList.contains(bindFbView)){
-//            SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
-//            if (SGameLanguage.en_US == sGameLanguage) {
-//                bindFbView = new ThirdPlatBindAccountLayoutV2En(context);
-//                ((ThirdPlatBindAccountLayoutV2En)bindFbView).setBindTpye(SLoginType.bind_fb);
-//            } else {
-                bindFbView = new ThirdPlatBindAccountLayoutV2(context);
-                ((ThirdPlatBindAccountLayoutV2)bindFbView).setBindTpye(SLoginType.bind_fb);
-//            }
-
-            bindFbView.setLoginDialogV2(this);
-            contentFrameLayout.addView(bindFbView);
-            viewPageList.add(bindFbView);
-        }
-        getLoginPresenter().stopVfCodeTimer();
-        for (View childView : viewPageList) {
-
-            if (childView == null){
-                continue;
-            }
-
-            if (childView == bindFbView){
-                childView.setVisibility(View.VISIBLE);
-            }else{
-                childView.setVisibility(View.GONE);
-            }
-        }
-
-    }
-
-    public void toBindGoogleView() {
-
-        if (bindGoogleView == null || !viewPageList.contains(bindGoogleView)){
-//            SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
-//            if (SGameLanguage.en_US == sGameLanguage) {
-//                bindGoogleView = new ThirdPlatBindAccountLayoutV2En(context);
-//                ((ThirdPlatBindAccountLayoutV2En)bindGoogleView).setBindTpye(SLoginType.bind_google);
-//            } else {
-                bindGoogleView = new ThirdPlatBindAccountLayoutV2(context);
-                ((ThirdPlatBindAccountLayoutV2)bindGoogleView).setBindTpye(SLoginType.bind_google);
-//            }
-
-            bindGoogleView.setLoginDialogV2(this);
-            contentFrameLayout.addView(bindGoogleView);
-            viewPageList.add(bindGoogleView);
-        }
-        getLoginPresenter().stopVfCodeTimer();
-        for (View childView : viewPageList) {
-
-            if (childView == null){
-                continue;
-            }
-
-            if (childView == bindGoogleView){
-                childView.setVisibility(View.VISIBLE);
-            }else{
-                childView.setVisibility(View.GONE);
-            }
-        }
-
-    }*/
-
-    /*public void toBindTwitterView() {
-        if (bindTwitterView == null || !viewPageList.contains(bindTwitterView)){
-//            SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
-//            if (SGameLanguage.en_US == sGameLanguage) {
-//                bindTwitterView = new ThirdPlatBindAccountLayoutV2En(context);
-//                ((ThirdPlatBindAccountLayoutV2En)bindTwitterView).setBindTpye(SLoginType.bind_twitter);
-//            } else {
-                bindTwitterView = new ThirdPlatBindAccountLayoutV2(context);
-                ((ThirdPlatBindAccountLayoutV2)bindTwitterView).setBindTpye(SLoginType.bind_twitter);
-//            }
-
-
-            bindTwitterView.setLoginDialogV2(this);
-            contentFrameLayout.addView(bindTwitterView);
-            viewPageList.add(bindTwitterView);
-        }
-        getLoginPresenter().stopVfCodeTimer();
-        for (View childView : viewPageList) {
-
-            if (childView == null){
-                continue;
-            }
-
-            if (childView == bindTwitterView){
-                childView.setVisibility(View.VISIBLE);
-            }else{
-                childView.setVisibility(View.GONE);
-            }
-        }
-    }*/
 
     public void toAccountManagerCenter() {//AccountManagerLayoutV2
 
@@ -546,20 +330,32 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
     }
 
     @Override
-    public void showAutoLoginTips(String tips) {
-//        autoLoginTips.setText(tips);
-    }
-
-    @Override
     public void showTermView(ViewType fromViewType) {
         toTermView(fromViewType);
     }
 
     @Override
-    public void showAutoLoginView() {
+    public void showAutoLoginView(String tips) {
+
+        if (autoLoginView == null || !viewPageList.contains(autoLoginView)){
+
+            autoLoginView = new AutoLoginLayoutV2(context);
+            ((AutoLoginLayoutV2)autoLoginView).setAutoLoginTips(tips);
+            autoLoginView.setLoginDialogV2(this);
+            contentFrameLayout.addView(autoLoginView);
+            viewPageList.add(autoLoginView);
+        }
+        setViewPageVisable(autoLoginView);
 
     }
 
+    @Override
+    public void showAutoLoginWaitTime(String time) {
+
+        if (autoLoginView != null) {
+            ((AutoLoginLayoutV2)autoLoginView).setAutoLoginTips(time);
+        }
+    }
 
     @Override
     public void showLoginWithRegView(ViewType fromViewType) {
@@ -579,11 +375,6 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
     @Override
     public void changePwdSuccess(SLoginResponse sLoginResponse) {
 
-    }
-
-    @Override
-    public void showAutoLoginWaitTime(String time) {
-//        autoLoginWaitTime.setText(time);
     }
 
     public void setLoginCallBack(ILoginCallBack iLoginCallBack) {

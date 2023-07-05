@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:layout_marginTop="2dp"
+    android:layout_marginBottom="2dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        >
+
+
+        <ImageView
+            android:id="@+id/history_account_item_icon"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginStart="15dp"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/img_persion_bg"
+
+            />
+
+        <TextView
+            android:id="@+id/history_account_item_text"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="15dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"/>
+
+        <LinearLayout
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:id="@+id/history_account_item_delete_layout"
+            android:gravity="center">
+
+            <Button
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:background="@mipmap/img_delete"
+                android:layout_marginEnd="10dp"
+                android:id="@+id/history_account_item_delete_btn"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/c_C0C0C0"/>
+
+
+</LinearLayout>
