@@ -314,6 +314,29 @@ android {
             resValue "string", "sdk_name", "v6 demo"
 
         }
+
+        sdkKR {
+
+            signingConfig signingConfigs.release_v6
+            applicationId "com.wxgy.sshx"
+            minSdkVersion 21
+            targetSdkVersion 33
+            versionCode 10
+            versionName "1.0"
+            flavorDimensions "1"
+            resValue "string", "scheme", "sshx"
+            resValue "string", "facebook_app_id", "958518928627930"
+            resValue "string", "facebook_client_token", "70dee7e2899286d3b410c2af8530b899"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider958518928627930" //启用分析
+            resValue "string", "fb_login_protocol_scheme", "fb958518928627930"
+            resValue "string", "facebook_app_name", "v6demo"
+            resValue "string", "line_channelId", "1661047084"
+            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,第三方充值渠道apk包设置"meow"
+
+            //每个游戏的demo设置 test
+            resValue "string", "sdk_name", "v6 demo"
+
+        }
     }
 
     android {

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "62082257566",
+    "project_id": "sea-sshx-and",
+    "storage_bucket": "sea-sshx-and.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:62082257566:android:26f6d0cb64b3dba31e618f",
+        "android_client_info": {
+          "package_name": "com.wxgy.sshx"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "62082257566-jdn61a9favr5m8ibmnnqobbjn1thctjb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRPFNIl_9fvvk2yAED4ehcW7gm5AOpeHk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "62082257566-jdn61a9favr5m8ibmnnqobbjn1thctjb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

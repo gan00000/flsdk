@@ -1,0 +1,6 @@
+<resources>
+
+    <!--第三方储值页面开始-->
+    <string name="api_pay_web_payment">api/web/sea-payment.page</string>
+
+</resources>

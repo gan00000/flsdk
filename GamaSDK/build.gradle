@@ -99,6 +99,10 @@ android {
             flavorDimensions "1"
             resValue "string", "sdk_inner_version", "v6"
         }
+        sdkKR {//韩国
+            flavorDimensions "1"
+            resValue "string", "sdk_inner_version", "vkr"
+        }
     }
 }
 
