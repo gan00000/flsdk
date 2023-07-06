@@ -100,9 +100,9 @@ public class ConfigBean {
         private String packageName = "";
         private String platform = "";
         private boolean visitorLogin = true;
-        private boolean fbLogin = true;
-        private boolean googleLogin = true;
-        private boolean lineLogin = true;
+        private boolean fbLogin = false;
+        private boolean googleLogin = false;
+        private boolean lineLogin = false;
         private boolean huaweiLogin = true; //华为登录
         private boolean deleteAccount = false;
         private boolean showContract = true;
