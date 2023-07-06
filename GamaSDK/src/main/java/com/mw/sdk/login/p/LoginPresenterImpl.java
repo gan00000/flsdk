@@ -963,7 +963,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 //                showLoginView();
 //                return;
 //            }
-            autoLoginText = String.format(activity.getResources().getString(R.string.py_login_autologin_tips),account);
+            autoLoginText = account;//String.format(activity.getResources().getString(R.string.py_login_autologin_tips),account);
 
         } else {
             String autoLoginTips = activity.getResources().getString(R.string.py_login_autologin_logining_tips);
@@ -976,7 +976,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 autoLoginTips = "Twitter" + autoLoginTips;
             }
             else if (registPlatform.equals(SLoginType.LOGIN_TYPE_GUEST)){
-                autoLoginTips = "GUEST" + autoLoginTips;
+                autoLoginTips = "Guest" + autoLoginTips;
             }
             autoLoginText = autoLoginTips;
         }
