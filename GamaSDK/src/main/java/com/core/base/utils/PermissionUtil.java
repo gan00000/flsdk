@@ -42,13 +42,13 @@ public class PermissionUtil {
 	}
 	
 	public static void requestPermissions(Activity activity, String[] permissions, int requestCode) {
-		
+
 		//ActivityCompat.requestPermissions(activity, permissions, requestCode);
 		checkAndroidRequestPermissions(activity, permissions, requestCode);
 	}
 	
 	private static boolean checkAndroidRequestPermissions(Activity activity, String[] permissions, int requestCode) {
-		
+
 		String[] p = PermissionUtil.hasSelfPermissionFilter(activity, permissions);
 		Log.d(TAG, "has not permissions length:" + p.length);
 		if (p.length > 0) {
@@ -148,6 +148,7 @@ public class PermissionUtil {
 	public static String[] hasSelfPermissionFilter(Activity activity, String[] permissions) {
 		// Below Android M all permissions are granted at install time and are
 		// already available.
+
 		if (!moreThan23()) {
 			return new String[] {};
 		}
@@ -155,6 +156,10 @@ public class PermissionUtil {
 		// Verify that all required permissions have been granted
 		ArrayList<String> a = new ArrayList<String>();
 		for (String permission : permissions) {
+			if (!ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)){
+				PL.i("permission shouldShowRequestPermissionRationale false:" + permission);
+				continue;
+			}
 			if (ActivityCompat.checkSelfPermission(activity,permission) != PackageManager.PERMISSION_GRANTED) {
 				a.add(permission);
 			}
