@@ -13,6 +13,8 @@ import android.util.Log;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
+import com.core.base.utils.SStringUtil;
+import com.core.base.utils.ToastUtils;
 import com.linecorp.linesdk.Scope;
 import com.linecorp.linesdk.auth.LineAuthenticationParams;
 import com.linecorp.linesdk.auth.LineLoginApi;
@@ -78,7 +80,10 @@ public class SLineSignIn {
 
 
 	public void startSignIn(String channelId, LineSignInCallBack googleSignInCallBack){
-
+		if (SStringUtil.isEmpty(channelId)){
+			ToastUtils.toast(this.activity, "channelId is empty");
+			return;
+		}
 		this.signInCallBack = googleSignInCallBack;
 		try{
 			// App-to-app login

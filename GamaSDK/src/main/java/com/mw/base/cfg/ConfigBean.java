@@ -102,7 +102,7 @@ public class ConfigBean {
         private boolean visitorLogin = true;
         private boolean fbLogin = true;
         private boolean googleLogin = true;
-        private boolean lineLogin = true;
+        private boolean lineLogin = false;
         private boolean huaweiLogin = true; //华为登录
         private boolean deleteAccount = false;
         private boolean showContract = true;
