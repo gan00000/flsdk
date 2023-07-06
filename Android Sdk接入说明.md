@@ -172,6 +172,9 @@
 	    //af
 	    implementation 'com.appsflyer:af-android-sdk:6.9.0'
 	    implementation 'com.android.installreferrer:installreferrer:2.2'
+	
+	    implementation 'io.reactivex.rxjava3:rxandroid:3.0.2'
+	    implementation 'io.reactivex.rxjava3:rxjava:3.1.5'
 
 	
 	}
