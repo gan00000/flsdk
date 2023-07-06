@@ -156,11 +156,11 @@ public class PermissionUtil {
 		// Verify that all required permissions have been granted
 		ArrayList<String> a = new ArrayList<String>();
 		for (String permission : permissions) {
-			if (!ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)){
-				PL.i("permission shouldShowRequestPermissionRationale false:" + permission);
-				continue;
-			}
 			if (ActivityCompat.checkSelfPermission(activity,permission) != PackageManager.PERMISSION_GRANTED) {
+				if (!ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)){
+					PL.i("permission shouldShowRequestPermissionRationale false:" + permission);
+					continue;
+				}
 				a.add(permission);
 			}
 		}
