@@ -229,13 +229,44 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             showMainHomeView();
         }*/
 
-        if (SdkUtil.getSdkInnerVersion(activity).equals(SdkInnerVersion.KR.getSdkVeriosnName())){
+        if (SdkUtil.getSdkInnerVersion(activity).equals(SdkInnerVersion.KR.getSdkVeriosnName()) && !SdkUtil.getAgeQua14(activity)){
 
             if (iLoginView != null){
                 iLoginView.showSdkView(ViewType.AgeQualifiedView, null, "",1);
             }
             return;
         }
+
+        ConfigBean configBean = SdkUtil.getSdkCfg(getContext());
+        if (configBean != null) {
+            ConfigBean.VersionData versionData = configBean.getSdkConfigLoginData(getContext());
+            if (versionData != null && versionData.isHiden_Guest_Fb_Gg_Line()) {//此处可能还有华为登录，先不管，应该不会出现此情况
+                if (iLoginView != null){
+                    iLoginView.showLoginWithRegView(ViewType.WelcomeView);
+                }
+                return;
+            }
+        }
+        List<AccountModel> accountModels = SdkUtil.getAccountModels(this.mActivity);
+//        iLoginView.showMainHomeView();
+        if (accountModels.isEmpty()){
+            if (iLoginView != null){
+                iLoginView.showMainHomeView();
+            }
+        }else{
+            if (iLoginView != null){
+                if (!SdkUtil.isVersion1(activity)){
+                    iLoginView.showLoginWithRegView(ViewType.WelcomeView);
+                }else{
+                    iLoginView.showWelcomeBackView();
+                }
+            }
+        }
+    }
+
+    @Override
+    public void startLoginView(Activity activity) {
+        this.mActivity = activity;
 
         ConfigBean configBean = SdkUtil.getSdkCfg(getContext());
         if (configBean != null) {
@@ -1137,6 +1168,12 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         }*/
 
 //        ToastUtils.toast(mActivity, R.string.py_login_success);
+
+        //针对韩国sdk，没有同意14周岁，登录成功后重新回到SDK页面
+        if (SdkUtil.getSdkInnerVersion(getActivity()).equals(SdkInnerVersion.KR.getSdkVeriosnName()) && !SdkUtil.getAgeQua14(getActivity())){
+            autoLogin(getActivity());
+            return;
+        }
 
         if (iLoginView != null){
             iLoginView.loginSuccess(loginResponse);

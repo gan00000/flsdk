@@ -334,7 +334,7 @@ android {
             resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,第三方充值渠道apk包设置"meow"
 
             //每个游戏的demo设置 test
-            resValue "string", "sdk_name", "v6 demo"
+            resValue "string", "sdk_name", "krDemo"
 
         }
     }

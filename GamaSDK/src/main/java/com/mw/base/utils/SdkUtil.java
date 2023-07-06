@@ -683,12 +683,12 @@ public class SdkUtil {
         return SPUtil.getSimpleString(context, SdkUtil.SDK_SP_FILE,GAMA_LOGIN_TWITTER_ID);
     }
 
-    public static boolean isXM(Context context){
-        return ResConfig.getConfigInAssetsProperties(context,"gama_login_type").equals("100");
-    }
-    public static boolean isMainland(Context context){//100為大陸sdk,其他為海外
-        return ResConfig.getConfigInAssetsProperties(context,"gama_sdk_area").equals("100");
-    }
+//    public static boolean isXM(Context context){
+//        return ResConfig.getConfigInAssetsProperties(context,"gama_login_type").equals("100");
+//    }
+//    public static boolean isMainland(Context context){//100為大陸sdk,其他為海外
+//        return ResConfig.getConfigInAssetsProperties(context,"gama_sdk_area").equals("100");
+//    }
 
     private static final String GAMA_GOOGLE_ADVERTISING_ID = "GAMA_GOOGLE_ADVERTISING_ID";
     public static void saveGoogleAdId(Context context, String googleAdId){
@@ -761,6 +761,14 @@ public class SdkUtil {
     }
     public static boolean getStartTermRead(Context context){
         return SPUtil.getSimpleBoolean(context, SdkUtil.SDK_SP_FILE, GAMA_START_TERM_STATUS);
+    }
+
+    private static final String MW_AGE_QUA = "MW_SDK_AGE_QUA";
+    public static void saveAgeQua14(Context context, boolean agree){
+        SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE,MW_AGE_QUA, agree);
+    }
+    public static boolean getAgeQua14(Context context){
+        return SPUtil.getSimpleBoolean(context, SdkUtil.SDK_SP_FILE, MW_AGE_QUA);
     }
 
     /**

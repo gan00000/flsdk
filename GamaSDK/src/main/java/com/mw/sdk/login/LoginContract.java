@@ -74,6 +74,7 @@ public class LoginContract {
         void changePwd(Activity activity, String account, String oldPwd, String newPwd);
 
         void autoLogin(Activity activity);
+        public void startLoginView(Activity activity);
 
         void autoLoginChangeAccount(Activity activity);
 

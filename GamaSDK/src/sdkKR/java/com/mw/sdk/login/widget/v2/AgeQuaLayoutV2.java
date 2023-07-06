@@ -82,9 +82,10 @@ public class AgeQuaLayoutV2 extends SLoginBaseRelativeLayout implements View.OnC
     public void onClick(View v) {
 
         if (v == closeView) {
-            sLoginDialogv2.showMainHomeView();
+            sLoginDialogv2.getLoginPresenter().startLoginView(sLoginDialogv2.getActivity());
         }else if (v == ageUpView){
-            sLoginDialogv2.showMainHomeView();
+            SdkUtil.saveAgeQua14(getActivity(),true);
+            sLoginDialogv2.getLoginPresenter().startLoginView(sLoginDialogv2.getActivity());
         }
 
     }
