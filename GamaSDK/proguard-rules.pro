@@ -44,6 +44,7 @@
 -keep public class com.mw.base.bean.PhoneInfo { *; }
 -keep public class com.mw.sdk.login.model.QooAppLoginModel { *; }
 -keep public class com.mw.sdk.login.model.QooAppLoginModel$UserData { *; }
+-keep public class com.mw.base.bean.SUserInfo { *; }
 
 # -keep public interface mypackage.MyInterface
 # -keep public class * implements mypackage.MyInterface
