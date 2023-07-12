@@ -1,7 +1,7 @@
 <resources>
 
     <!--启动条款页面-->
-    <string name="gama_ui_term_port_read2">我已阅读并同意定型化契约</string>
+    <string name="gama_ui_term_port_read2">我已阅读并同意定用户协议</string>
 
     <!--登录页面-->
     <string name="py_login_save_account">记住账号</string>
@@ -98,7 +98,7 @@
     <string name="text_go_game">继续游戏</string>
     <string name="text_update_account">升级账号</string>
 
-    <string name="gama_ui_term_not_read">请先同意「定型化契约」</string>
+    <string name="gama_ui_term_not_read">请先同意「用户协议」</string>
     <string name="text_confire_reg">确认注册</string>
     <string name="text_pwd_format">密码只支持6~20字符</string>
     <string name="text_account_format">信箱格式異常，請重新輸入</string>
