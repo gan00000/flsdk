@@ -133,7 +133,7 @@ public class AccountPopupWindow extends PopupWindow {
                     }
                 });
 
-                int imageResId = R.mipmap.img_persion_bg;
+                int imageResId = R.mipmap.img_persion_3;
                 String showName = accountModel.getUserId();//accountModel.getThirdAccount();
 //                if (SStringUtil.isEmpty(showName)){
 //                    showName = accountModel.getUserId();
@@ -147,7 +147,7 @@ public class AccountPopupWindow extends PopupWindow {
                 }else if (SLoginType.LOGIN_TYPE_LINE.equals(accountModel.getLoginType())){
                     imageResId = R.mipmap.icon_line_2;
                 }else if (SLoginType.LOGIN_TYPE_MG.equals(accountModel.getLoginType())){
-                    imageResId = R.mipmap.img_persion_bg;
+                    imageResId = R.mipmap.img_persion_3;
                     showName = accountModel.getAccount();
                 }
                 holder.setImageResource(R.id.history_account_item_icon, imageResId);

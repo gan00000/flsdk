@@ -11,7 +11,7 @@
         android:thicknessRatio="18"
         android:useLevel="false" >
         <gradient
-            android:startColor="#CCCCCC"
+            android:startColor="@color/c_btn_start"
             android:type="sweep"
             android:useLevel="false" />
     </shape>

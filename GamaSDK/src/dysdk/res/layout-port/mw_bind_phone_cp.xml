@@ -79,7 +79,7 @@
                             android:layout_marginStart="18dp"
                             android:gravity="center"
                             android:text="@string/text_phone_area_code"
-                            android:textColor="@color/c_606060"
+                            android:textColor="@color/white_c"
                             android:textSize="14sp" />
 
                         <ImageView
@@ -107,7 +107,7 @@
                         android:maxLines="1"
                         android:paddingStart="16dp"
                         android:paddingEnd="16dp"
-                        android:textColor="@color/c_606060"
+                        android:textColor="@color/white_c"
                         android:textColorHint="@color/c_B8B8B8"
                         android:textSize="14sp"
                         android:imeOptions="flagNoExtractUi"/>
@@ -134,7 +134,7 @@
                         android:maxLines="1"
                         android:paddingStart="12dp"
                         android:paddingEnd="12dp"
-                        android:textColor="@color/c_606060"
+                        android:textColor="@color/white_c"
                         android:textColorHint="@color/c_B8B8B8"
                         android:textSize="14sp"
                         android:imeOptions="flagNoExtractUi"/>
