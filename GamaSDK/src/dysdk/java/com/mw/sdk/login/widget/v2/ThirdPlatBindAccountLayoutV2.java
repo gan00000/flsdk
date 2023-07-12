@@ -105,15 +105,15 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
         accountSdkInputEditTextView.getContentView().setBackgroundResource(R.drawable.sdk_bg_input2);
         pwdSdkInputEditTextView.getContentView().setBackgroundResource(R.drawable.sdk_bg_input2);
 
-        accountSdkInputEditTextView.getIconImageView().setImageResource(R.mipmap.img_persion);
-        pwdSdkInputEditTextView.getIconImageView().setImageResource(R.mipmap.img_lock_pwd);
+        accountSdkInputEditTextView.getIconImageView().setImageResource(R.mipmap.img_persion_bg);
+        pwdSdkInputEditTextView.getIconImageView().setImageResource(R.mipmap.img_lock_pwd_able);
 
         registerAccountEditText = accountSdkInputEditTextView.getInputEditText();
         registerAccountEditText.setHintTextColor(getResources().getColor(R.color.c_B8B8B8));
-        registerAccountEditText.setTextColor(getResources().getColor(R.color.black_s));
+        registerAccountEditText.setTextColor(getResources().getColor(R.color.white_c));
         registerPasswordEditText = pwdSdkInputEditTextView.getInputEditText();
         registerPasswordEditText.setHintTextColor(getResources().getColor(R.color.c_B8B8B8));
-        registerPasswordEditText.setTextColor(getResources().getColor(R.color.black_s));
+        registerPasswordEditText.setTextColor(getResources().getColor(R.color.white_c));
 
         iv_bind_phone_close = contentView.findViewById(R.id.iv_bind_phone_close);
 
@@ -125,11 +125,11 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
         thirdAccountSdkInputEditTextView.getContentView().setBackgroundResource(R.drawable.sdk_bg_input2);
         hasBindAccountSdkInputEditTextView.getContentView().setBackgroundResource(R.drawable.sdk_bg_input2);
         thirdAccountSdkInputEditTextView.getInputEditText().setHintTextColor(getResources().getColor(R.color.c_B8B8B8));
-        thirdAccountSdkInputEditTextView.getInputEditText().setTextColor(getResources().getColor(R.color.black_s));
+        thirdAccountSdkInputEditTextView.getInputEditText().setTextColor(getResources().getColor(R.color.white_c));
         hasBindAccountSdkInputEditTextView.getInputEditText().setHintTextColor(getResources().getColor(R.color.c_B8B8B8));
-        hasBindAccountSdkInputEditTextView.getInputEditText().setTextColor(getResources().getColor(R.color.black_s));
+        hasBindAccountSdkInputEditTextView.getInputEditText().setTextColor(getResources().getColor(R.color.white_c));
 
-        hasBindAccountSdkInputEditTextView.getIconImageView().setImageResource(R.mipmap.img_persion);
+        hasBindAccountSdkInputEditTextView.getIconImageView().setImageResource(R.mipmap.img_persion_bg);
 
         thirdAccountSdkInputEditTextView.getInputEditText().setEnabled(false);
         hasBindAccountSdkInputEditTextView.getInputEditText().setEnabled(false);
@@ -282,7 +282,7 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
 
 
     public void setAccountWithIcon2(AccountModel accountModel,  ImageView imageView, EditText editText){
-        int imageResId = R.mipmap.img_persion;
+        int imageResId = R.mipmap.img_persion_bg;
         String showName = "";
         if (SLoginType.LOGIN_TYPE_FB.equals(accountModel.getLoginType())){
             imageResId = R.mipmap.icon_fb_2;
@@ -299,7 +299,7 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
             imageResId = R.mipmap.icon_line_2;
             showName = getContext().getResources().getString(R.string.text_has_bind_tips_line);
         }else if (SLoginType.LOGIN_TYPE_MG.equals(accountModel.getLoginType())){
-            imageResId = R.mipmap.img_persion;
+            imageResId = R.mipmap.img_persion_bg;
             showName = getContext().getResources().getString(R.string.text_has_bind_tips_mw);
         }
 

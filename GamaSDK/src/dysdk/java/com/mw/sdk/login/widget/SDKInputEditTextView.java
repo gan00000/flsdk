@@ -159,7 +159,7 @@ public class SDKInputEditTextView extends RelativeLayout {
         switch (inputType){
 
             case SDKInputType_Account:
-                iconId = R.mipmap.im_persion_bg_2;
+                iconId = R.mipmap.img_persion_bg;
                 labName = getResources().getString(R.string.py_account);
                 hint = getResources().getString(R.string.py_register_account_hit);
                 eyeImageViewLayout.setVisibility(View.GONE);
@@ -202,7 +202,7 @@ public class SDKInputEditTextView extends RelativeLayout {
                 break;
 
             case SDKInputType_Vf_Code:
-                iconId = R.mipmap.im_persion_bg_2;
+                iconId = R.mipmap.img_persion_bg;
                 editTextInputType = InputType.TYPE_CLASS_NUMBER;
                 eyeImageViewLayout.setVisibility(View.GONE);
                 iconImageView.setVisibility(View.GONE);
