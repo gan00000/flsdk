@@ -3,20 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/c_sdk_bg"
     >
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="300dp"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:background="@color/c_sdk_bg"
+        android:orientation="vertical"
+        android:gravity="center"
         >
 
         <TextView
             android:id="@+id/autoLoginTips"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             android:gravity="center"
             android:lines="1"
@@ -26,25 +27,22 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_centerHorizontal="true"
-
-            android:layout_below="@id/autoLoginTips"
+            android:layout_height="40dp"
+            android:layout_marginTop="15dp"
             android:gravity="center"
             android:orientation="horizontal">
 
             <ProgressBar
                 android:id="@+id/dialog_loading"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:indeterminateDrawable="@drawable/gama_progress_dialog_rotate" />
 
             <TextView
                 android:id="@+id/dialog_loading_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginStart="12dp"
                 android:text="等待中..."
                 android:ellipsize="end"
                 android:maxLines="1"
@@ -53,19 +51,17 @@
 
         <Button
             android:id="@+id/autoLoginSwitch"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="20dp"
             android:layout_centerHorizontal="true"
-            android:layout_width="200dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/sdk_btn3_corners25_bg"
+            android:layout_width="266dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/sdk_btn3_corners20_bg"
             android:gravity="center"
             android:text="@string/py_confire"
             android:textColor="@android:color/white"
-            android:textSize="14sp" />
+            android:textSize="17sp" />
 
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </RelativeLayout>
