@@ -1011,6 +1011,7 @@ public class SdkUtil {
             Locale locale = Locale.getDefault();//mw_#Hant  zh_HK_#Hant zh_CN_#Hans en_US
             String language = locale.getLanguage();//zh en
             String country = locale.getCountry();//TW US
+            PL.d("language=%s, country=%s", language, country);
             if (language.equals("en")){
                 return SGameLanguage.en_US.getLanguage();
             }
@@ -1025,6 +1026,9 @@ public class SdkUtil {
             }
             if (language.equals("vi")){
                 return SGameLanguage.vi_VN.getLanguage();
+            }
+            if (language.equals("ko")){//韩语
+                return SGameLanguage.ko_KR.getLanguage();
             }
             //return SGameLanguage.zh_TW.getLanguage();//默认为繁体
         }

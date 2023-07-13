@@ -18,7 +18,7 @@ public enum SGameLanguage {
     /**
      * 韩文
      */
-    ko_KR("ko"),
+    ko_KR("ko_KR"),
 
     /**
      * 日文
