@@ -130,7 +130,7 @@
             <ImageView
                 android:layout_width="19dp"
                 android:layout_height="19dp"
-                android:src="@mipmap/img_guest_2"
+                android:src="@mipmap/icon_guest_4"
                 />
 
             <TextView
