@@ -15,5 +15,8 @@
     <string name="text_has_bind_tips_line">LINE已升级为会员账号</string>
     <string name="text_has_bind_tips_mw">会员账号</string>
     <string name="text_notice">公告</string>
+    <string name="text_age_up14">已满14周岁</string>
+    <string name="text_age_is_up14">你是否已满14周岁</string>
+    <string name="text_age_up14_can_useapp">注：如果您未满14周岁，请尽快退出，该应用不对14周岁以下用户开放</string>
 
 </resources>
