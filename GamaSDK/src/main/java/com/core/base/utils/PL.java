@@ -10,12 +10,20 @@ public class PL {
 
     public final static String PL_LOG = "PL_LOG";
 
+    public static void d(String format, Object... args){
+        d(PL_LOG,String.format(format, args));
+    }
+
     public static void d(String msg){
         d(PL_LOG,msg + "");
     }
 
     public static void d(String tag, String msg){
         Log.d(tag,msg + "");
+    }
+
+    public static void i(String format, Object... args){
+        i(PL_LOG, String.format(format, args));
     }
 
     public static void i(String msg){
