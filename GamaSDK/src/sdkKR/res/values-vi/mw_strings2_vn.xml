@@ -15,8 +15,8 @@
     <string name="text_has_bind_tips_line">Tài khoản đã nâng cấp</string>
     <string name="text_has_bind_tips_mw">Tài khoản hội viên</string>
     <string name="text_notice">Thông báo</string>
-    <string name="text_age_up14">已满14周岁</string>
-    <string name="text_age_is_up14">你是否已满14周岁</string>
-    <string name="text_age_up14_can_useapp">注：如果您未满14周岁，请尽快退出，该应用不对14周岁以下用户开放</string>
+    <string name="text_age_up14">over 14 years old</string>
+    <string name="text_age_is_up14">Are you over 14 years old</string>
+    <string name="text_age_up14_can_useapp">Note: If you are under the age of 14, please exit as soon as possible, this application is not open to users under the age of 14</string>
 
 </resources>

@@ -1,22 +1,22 @@
 <resources>
 
-    <string name="text_phone_bind">手機綁定</string>
-    <string name="text_phone_area_code">區號</string>
-    <string name="text_phone_input_hint">請輸入手機號碼</string>
-    <string name="text_phone_hasbind_tips">您已經成功綁定，這是您當前綁定的手機號碼</string>
-    <string name="text_area_code_not_empty">手機區號不能為空</string>
-    <string name="text_phone_not_empty">手機號碼不能為空</string>
-    <string name="text_phone_not_match">手機號碼格式不正確</string>
-    <string name="text_vfcode_has_send">驗證碼已發送</string>
-    <string name="text_phone_bind_success">手機綁定成功</string>
-    <string name="text_has_bind_tips_google">Google已升級為會員帳號</string>
-    <string name="text_has_bind_tips_fb">Facebook已升級為會員帳號</string>
-    <string name="text_has_bind_tips_guest">遊客已升級為會員帳號</string>
-    <string name="text_has_bind_tips_line">LINE已升級為會員帳號</string>
-    <string name="text_has_bind_tips_mw">會員帳號</string>
-    <string name="text_notice">公告</string>
-    <string name="text_age_up14">over 14 years old</string>
-    <string name="text_age_is_up14">Are you over 14 years old</string>
-    <string name="text_age_up14_can_useapp">Note: If you are under the age of 14, please exit as soon as possible, this application is not open to users under the age of 14</string>
+    <string name="text_phone_bind">휴대전화 연동</string>
+    <string name="text_phone_area_code">지역번호</string>
+    <string name="text_phone_input_hint">휴대전화 번호를 입력하세요.</string>
+    <string name="text_phone_hasbind_tips">이미 연동했습니다. 현재 연동된 휴대전화 번호는 다음과 같습니다.</string>
+    <string name="text_area_code_not_empty">휴대전화 지역 번호를 입력하세요.</string>
+    <string name="text_phone_not_empty">휴대전화 번호를 입력하세요.</string>
+    <string name="text_phone_not_match">휴대전화 번호 형식이 올바르지 않습니다.</string>
+    <string name="text_vfcode_has_send">인증번호를 발송했습니다.</string>
+    <string name="text_phone_bind_success">휴대전화 연동 성공</string>
+    <string name="text_has_bind_tips_google">구글을 회원 계정으로 업그레이드했습니다.</string>
+    <string name="text_has_bind_tips_fb">페이스북을 회원 계정으로 업그레이드했습니다.</string>
+    <string name="text_has_bind_tips_guest">게스트 로그인을 회원 계정으로 업그레이드했습니다.</string>
+    <string name="text_has_bind_tips_line">라인을 회원 계정으로 업그레이드했습니다.</string>
+    <string name="text_has_bind_tips_mw">회원 계정</string>
+    <string name="text_notice">공지</string>
+    <string name="text_age_up14">14세 이상입니다</string>
+    <string name="text_age_is_up14">14세 미만입니까?</string>
+    <string name="text_age_up14_can_useapp">주의: 14세 미만이라면 빠르게 로그아웃하세요. 14세 미만 사용자는 이 앱을 사용할 수 없습니다.</string>
 
 </resources>
