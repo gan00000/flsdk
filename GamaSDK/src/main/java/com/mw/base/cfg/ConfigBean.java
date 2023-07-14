@@ -102,6 +102,8 @@ public class ConfigBean {
         private boolean visitorLogin = true;
         private boolean fbLogin = true;
         private boolean googleLogin = true;
+
+        private boolean twitterLogin = false;
         private boolean lineLogin = false;
         private boolean huaweiLogin = true; //华为登录
         private boolean deleteAccount = false;
@@ -242,6 +244,14 @@ public class ConfigBean {
             this.vnIsReview = vnIsReview;
         }
 
+        public boolean isTwitterLogin() {
+            return twitterLogin;
+        }
+
+        public void setTwitterLogin(boolean twitterLogin) {
+            this.twitterLogin = twitterLogin;
+        }
+
         //华为登录，下面的不需要显示
         public VersionData setHuaweiData(Context context){
 //            this.fbLogin = false;
@@ -249,6 +259,7 @@ public class ConfigBean {
             this.lineLogin = false;
             this.showContract = false;
             this.deleteAccount = false;
+            this.twitterLogin = false;
             return this;
         }
     }
