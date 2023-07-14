@@ -116,7 +116,7 @@
     <string name="text_old_new_pwd_same">새로운 비밀번호는 기존 비밀번호와 같을 수 없습니다.</string>
     <string name="text_cancel">취소</string>
     <string name="text_confire">확인</string>
-    <string name="text_delete_account_tips">주의하세요. 계정을 삭제하면 플랫폼에서 모든 데이터가 삭제됩니다. 삭제를 원하시면 '확인'을 클릭하세요.</string>
+    <string name="text_delete_account_tips">주의하세요. 계정을 삭제하면 플랫폼에서 모든 데이터가 삭제됩니다. 삭제를 원하시면 \'확인\'을 클릭하세요.</string>
     <string name="text_account_bind_success">회원 계정으로 업그레이드 성공, 로그인 중...</string>
     <string name="text_account_bind_success2">회원 계정으로 업그레이드 성공했습니다.</string>
     <string name="text_account_change_pwd_success">수정 성공, 로그인 중...</string>
