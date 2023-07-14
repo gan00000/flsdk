@@ -17,6 +17,7 @@ import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.google.SGoogleSignIn;
 import com.thirdlib.huawei.HuaweiSignIn;
 import com.thirdlib.line.SLineSignIn;
+import com.thirdlib.twitter.TwitterLogin;
 
 /**
  * Created by gan on 2017/4/12.
@@ -30,6 +31,7 @@ public class DialogLoginImpl implements ILogin {
     private SGoogleSignIn sGoogleSignIn;
     private SLineSignIn sLineSignIn;
     private HuaweiSignIn huaweiSignIn;
+    private TwitterLogin twitterLogin;
 
     public DialogLoginImpl(Activity activity) {
 
@@ -83,6 +85,7 @@ public class DialogLoginImpl implements ILogin {
         sGoogleSignIn = new SGoogleSignIn(activity, DialogUtil.createLoadingDialog(activity, "Loading..."));
         sLineSignIn = new SLineSignIn(activity, DialogUtil.createLoadingDialog(activity, "Loading..."));
         huaweiSignIn = new HuaweiSignIn(activity, DialogUtil.createLoadingDialog(activity, "Loading..."));
+        twitterLogin = new TwitterLogin();
 
         if (!SdkUtil.isVersion1(activity)) {
             ConfigBean configBean = SdkUtil.getSdkCfg(activity);
@@ -149,9 +152,8 @@ public class DialogLoginImpl implements ILogin {
         sLoginDialog.setSGoogleSignIn(sGoogleSignIn);
         sLoginDialog.setsLineSignIn(sLineSignIn);
         sLoginDialog.setHuaweiSignIn(huaweiSignIn);
-//        if (twitterLogin != null) {
-//            sLoginDialog.setTwitterLogin(twitterLogin);
-//        }
+        sLoginDialog.setTwitterLogin(twitterLogin);
+
         sLoginDialog.setLoginCallBack(iLoginCallBack);
         sLoginDialog.show();
     }

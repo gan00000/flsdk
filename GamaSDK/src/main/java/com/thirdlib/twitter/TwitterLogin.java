@@ -6,6 +6,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.core.base.utils.PL;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
@@ -30,7 +31,7 @@ public class TwitterLogin {
      * 开始登陆
      */
     public void startLogin(Activity activity, final TwitterLoginCallBack callBack) {
-        if(mActivity == null || mActivity.isFinishing()) {
+        if(activity == null || activity.isFinishing()) {
             Log.e(TAG, "activity in illegal state");
             return;
         }
@@ -46,6 +47,7 @@ public class TwitterLogin {
                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                             @Override
                             public void onSuccess(AuthResult authResult) {
+                                PL.d("startActivityForSignInWithProvider twitter success");
                                 // User is signed in.
                                 // IdP data available in
                                 // authResult.getAdditionalUserInfo().getProfile().
@@ -59,6 +61,8 @@ public class TwitterLogin {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 // Handle failure.
+                                PL.d("startActivityForSignInWithProvider twitter onFailure");
+                                e.printStackTrace();
                             }
                         });
 
