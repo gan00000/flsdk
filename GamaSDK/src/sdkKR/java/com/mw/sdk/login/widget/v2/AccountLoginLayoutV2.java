@@ -76,7 +76,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
 
     View historyAccountListBtn;
 
-    private View fbLoginView, macLoginView, googleLoginView, lineLoginView;
+    private View fbLoginView, macLoginView, googleLoginView, lineLoginView, twitterLoginView;
 
     private AccountPopupWindow accountPopupWindow;
     private AccountModel currentAccountModel;
@@ -257,6 +257,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
         lineLoginView = contentView.findViewById(R.id.lineLoginView);
         macLoginView = contentView.findViewById(R.id.guestLoginView);
         googleLoginView = contentView.findViewById(R.id.ggLoginView);
+        twitterLoginView = contentView.findViewById(R.id.twitterLoginView);
 
         ConfigBean configBean = SdkUtil.getSdkCfg(getContext());
         if (configBean != null){
@@ -264,19 +265,35 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
             if (versionData != null){
                 if(!versionData.isVisitorLogin()){
                     macLoginView.setVisibility(View.GONE);
+                }else {
+                    macLoginView.setVisibility(View.VISIBLE);
                 }
                 if(!versionData.isFbLogin()){
                     fbLoginView.setVisibility(View.GONE);
+                }else {
+                    fbLoginView.setVisibility(View.VISIBLE);
                 }
                 if(!versionData.isGoogleLogin()){
                     googleLoginView.setVisibility(View.GONE);
+                }else {
+                    googleLoginView.setVisibility(View.VISIBLE);
+                }
+                if(!versionData.isTwitterLogin()){
+                    twitterLoginView.setVisibility(View.GONE);
+                }else {
+                    twitterLoginView.setVisibility(View.VISIBLE);
                 }
                 if(!versionData.isLineLogin()){
                     lineLoginView.setVisibility(View.GONE);
+                }else {
+                    lineLoginView.setVisibility(View.VISIBLE);
                 }
                 if(!versionData.isShowContract()){
                     cb_agree_term.setVisibility(View.GONE);
                     tv_login_term.setVisibility(View.GONE);
+                }else {
+                    cb_agree_term.setVisibility(View.VISIBLE);
+                    tv_login_term.setVisibility(View.VISIBLE);
                 }
                 if(versionData.isDeleteAccount()){
                     layout_delete_account.setVisibility(View.VISIBLE);
@@ -341,7 +358,16 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
                 sLoginDialogv2.getLoginPresenter().lineLogin(sLoginDialogv2.getActivity());
             }
         });
-
+        twitterLoginView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!checkAgreeTerm()) {
+                    return;
+                }
+                //twitter登录
+                sLoginDialogv2.getLoginPresenter().twitterLogin(sLoginDialogv2.getActivity());
+            }
+        });
         accountModels = new ArrayList<>();
 
         //test
@@ -500,6 +526,9 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
                return;
            }else if (SLoginType.LOGIN_TYPE_LINE.equals(currentAccountModel.getLoginType())){
                 lineLoginView.performClick();
+               return;
+           }else if (SLoginType.LOGIN_TYPE_TWITTER.equals(currentAccountModel.getLoginType())){
+               twitterLoginView.performClick();
                return;
            }
         }

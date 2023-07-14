@@ -24,7 +24,7 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
     private View contentView;
 
     private View layout_go_account_login, guestLoginView;
-    private ImageView iv_login_google,iv_login_fb,iv_login_line;
+    private ImageView iv_login_google,iv_login_fb,iv_login_line, iv_login_twitter;
     private CheckBox cb_agree_term;
     private View layout_go_term;
     private View layout_term;
@@ -56,6 +56,7 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
         iv_login_google = contentView.findViewById(R.id.iv_login_google);
         iv_login_fb = contentView.findViewById(R.id.iv_login_fb);
         iv_login_line = contentView.findViewById(R.id.iv_login_line);
+        iv_login_twitter = contentView.findViewById(R.id.iv_login_twitter);
 
         cb_agree_term = contentView.findViewById(R.id.cb_agree_term);
         layout_go_term = contentView.findViewById(R.id.layout_go_term);
@@ -67,6 +68,7 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
         iv_login_google.setOnClickListener(this);
         iv_login_fb.setOnClickListener(this);
         iv_login_line.setOnClickListener(this);
+        iv_login_twitter.setOnClickListener(this);
         layout_go_term.setOnClickListener(this);
 
         cb_agree_term.setChecked(true);
@@ -82,18 +84,33 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
             if (versionData != null){
                 if(!versionData.isVisitorLogin()){//false隐藏图标
                     guestLoginView.setVisibility(View.GONE);
+                }else {
+                    guestLoginView.setVisibility(View.VISIBLE);
                 }
                 if(!versionData.isFbLogin()){
                     iv_login_fb.setVisibility(View.GONE);
+                }else {
+                    iv_login_fb.setVisibility(View.VISIBLE);
                 }
                 if(!versionData.isGoogleLogin()){
                     iv_login_google.setVisibility(View.GONE);
+                }else {
+                    iv_login_google.setVisibility(View.VISIBLE);
                 }
                 if(!versionData.isLineLogin()){
                     iv_login_line.setVisibility(View.GONE);
+                }else {
+                    iv_login_line.setVisibility(View.VISIBLE);
+                }
+                if(!versionData.isTwitterLogin()){
+                    iv_login_twitter.setVisibility(View.GONE);
+                }else {
+                    iv_login_twitter.setVisibility(View.VISIBLE);
                 }
                 if(!versionData.isShowContract()){
                     layout_term.setVisibility(View.GONE);
+                }else {
+                    layout_term.setVisibility(View.VISIBLE);
                 }
                 if (versionData.isShowLogo()){
 //                    iv_logo.setVisibility(View.VISIBLE);
@@ -135,6 +152,12 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
 //            sLoginDialogv2.showTermView(ViewType.HomeView);
 
             showTermDialog();
+        }else if (v == iv_login_twitter){
+            //twitter登录
+            if (checkAgreeTerm()){
+                sLoginDialogv2.getLoginPresenter().twitterLogin(sLoginDialogv2.getActivity());
+            }
+
         }
 
     }

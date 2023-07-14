@@ -290,6 +290,32 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/twitterLoginView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+
+                <ImageView
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:src="@mipmap/icon_gp_1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="@string/py_login_google"
+                    android:textColor="@color/c_545454"
+                    android:textSize="@dimen/sp_18"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/lineLoginView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
