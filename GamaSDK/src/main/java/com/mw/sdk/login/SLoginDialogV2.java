@@ -34,7 +34,7 @@ import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.google.SGoogleSignIn;
 import com.thirdlib.huawei.HuaweiSignIn;
 import com.thirdlib.line.SLineSignIn;
-import com.thirdlib.twitter.GamaTwitterLogin;
+import com.thirdlib.twitter.TwitterLogin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,7 +73,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 
     private SFacebookProxy sFacebookProxy;
     private SGoogleSignIn sGoogleSignIn;
-    private GamaTwitterLogin twitterLogin;
+    private TwitterLogin twitterLogin;
     private SLineSignIn sLineSignIn;
     private HuaweiSignIn huaweiSignIn;
 
@@ -662,11 +662,11 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
         this.sFacebookProxy = sFacebookProxy;
     }
 
-    public void setTwitterLogin(GamaTwitterLogin twitterLogin) {
+    public void setTwitterLogin(TwitterLogin twitterLogin) {
         this.twitterLogin = twitterLogin;
     }
 
-    public GamaTwitterLogin getTwitterLogin() {
+    public TwitterLogin getTwitterLogin() {
         return this.twitterLogin;
     }
 

@@ -15,7 +15,7 @@ import com.thirdlib.google.SGoogleSignIn;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.huawei.HuaweiSignIn;
 import com.thirdlib.line.SLineSignIn;
-import com.thirdlib.twitter.GamaTwitterLogin;
+import com.thirdlib.twitter.TwitterLogin;
 
 /**
  * Created by gan on 2017/4/13.
@@ -84,7 +84,7 @@ public class LoginContract {
 
         void setSGoogleSignIn(SGoogleSignIn sGoogleSignIn);
         void setSFacebookProxy(SFacebookProxy sFacebookProxy);
-        void setTwitterLogin(GamaTwitterLogin twitterLogin);
+        void setTwitterLogin(TwitterLogin twitterLogin);
         void setLineLogin(SLineSignIn sLineSignIn);
         /**
          * Twitter登入

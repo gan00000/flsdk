@@ -49,7 +49,7 @@ import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.google.SGoogleSignIn;
 import com.thirdlib.huawei.HuaweiSignIn;
 import com.thirdlib.line.SLineSignIn;
-import com.thirdlib.twitter.GamaTwitterLogin;
+import com.thirdlib.twitter.TwitterLogin;
 import com.mw.sdk.R;
 
 import java.util.ArrayList;
@@ -113,7 +113,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
     private SFacebookProxy sFacebookProxy;
     private SGoogleSignIn sGoogleSignIn;
-    private GamaTwitterLogin twitterLogin;
+    private TwitterLogin twitterLogin;
     private SLineSignIn sLineSignIn;
     private FaceBookUser faceBookUser;
 
@@ -155,7 +155,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     }
 
     @Override
-    public void setTwitterLogin(GamaTwitterLogin twitterLogin) {
+    public void setTwitterLogin(TwitterLogin twitterLogin) {
         this.twitterLogin = twitterLogin;
     }
 
@@ -171,7 +171,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     @Override
     public void twitterLogin(final Activity activity) {
         if(twitterLogin != null) {
-            twitterLogin.startLogin(new GamaTwitterLogin.TwitterLoginCallBack() {
+            twitterLogin.startLogin(activity,new TwitterLogin.TwitterLoginCallBack() {
                 @Override
                 public void success(String id, String mFullName, String mEmail, String idTokenString) {
                     PL.i("twitter login : " + id);
@@ -1320,7 +1320,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             });
         } else if(bindType == BindType.BIND_TWITTER) {
             if(twitterLogin != null) {
-                twitterLogin.startLogin(new GamaTwitterLogin.TwitterLoginCallBack() {
+                twitterLogin.startLogin(activity, new TwitterLogin.TwitterLoginCallBack() {
                     @Override
                     public void success(String id, String mFullName, String mEmail, String idTokenString) {
                         PL.i("twitter login : " + id);
