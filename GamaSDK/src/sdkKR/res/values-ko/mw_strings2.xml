@@ -13,6 +13,7 @@
     <string name="text_has_bind_tips_fb">페이스북을 회원 계정으로 업그레이드했습니다.</string>
     <string name="text_has_bind_tips_guest">게스트 로그인을 회원 계정으로 업그레이드했습니다.</string>
     <string name="text_has_bind_tips_line">라인을 회원 계정으로 업그레이드했습니다.</string>
+    <string name="text_has_bind_tips_twitter">회원 계정으로 업그레이드했습니다.</string>
     <string name="text_has_bind_tips_mw">회원 계정</string>
     <string name="text_notice">공지</string>
     <string name="text_age_up14">14세 이상입니다</string>
