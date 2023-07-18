@@ -38,6 +38,7 @@ public class ConfigBean {
 //        versionData.setDeleteAccount(true);
 //        versionData.setShowRegPage(false);
 //        versionData.setHuaweiData();
+//        versionData.setTwitterLogin(true);
         return versionData;
     }
 
