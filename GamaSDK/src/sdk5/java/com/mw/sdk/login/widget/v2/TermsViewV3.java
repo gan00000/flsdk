@@ -1,4 +1,4 @@
-package com.mw.sdk.login.widget.v2;
+package com.ldy.sdk.login.widget.v2;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,16 +11,16 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.core.base.BaseWebViewClient;
-import com.core.base.utils.PL;
-import com.core.base.utils.SStringUtil;
-import com.mw.base.cfg.ConfigBean;
-import com.mw.base.cfg.ResConfig;
-import com.mw.base.utils.SdkUtil;
-import com.mw.sdk.SBaseDialog;
-import com.mw.sdk.login.constant.ViewType;
-import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
-import com.mw.sdk.R;
-import com.mw.sdk.out.ISdkCallBack;
+import com.mybase.utils.PL;
+import com.mybase.utils.SStringUtil;
+import com.ldy.base.cfg.ConfigBean;
+import com.ldy.base.cfg.ResConfig;
+import com.ldy.base.utils.SdkUtil;
+import com.ldy.sdk.SBaseDialog;
+import com.ldy.sdk.login.constant.ViewType;
+import com.ldy.sdk.login.widget.SLoginBaseRelativeLayout;
+import com.ldy.sdk.R;
+import com.ldy.sdk.pub.ISdkCallBack;
 
 /**
  * Created by GanYuanrong on 2017/2/6.

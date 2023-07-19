@@ -1,4 +1,4 @@
-package com.thirdlib.huawei;
+package com.allextends.huawei;
 
 
 import android.app.Activity;
@@ -6,10 +6,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 
-import com.core.base.base64.Base64;
-import com.core.base.callback.SFCallBack;
-import com.core.base.utils.PL;
-import com.core.base.utils.SStringUtil;
+import com.mybase.base64.Base64;
+import com.mybase.callback.SFCallBack;
+import com.mybase.utils.PL;
+import com.mybase.utils.SStringUtil;
 import com.google.gson.Gson;
 import com.huawei.hmf.tasks.OnFailureListener;
 import com.huawei.hmf.tasks.OnSuccessListener;
@@ -31,15 +31,15 @@ import com.huawei.hms.iap.entity.PurchaseIntentResult;
 import com.huawei.hms.iap.entity.PurchaseResultInfo;
 import com.huawei.hms.iap.util.IapClientHelper;
 import com.huawei.hms.support.api.client.Status;
-import com.mw.sdk.constant.ApiRequestMethod;
-import com.mw.sdk.pay.IPayCallBack;
-import com.mw.sdk.pay.gp.PayApi;
-import com.mw.sdk.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
-import com.mw.sdk.pay.gp.bean.res.BasePayBean;
-import com.mw.sdk.pay.gp.bean.res.GPCreateOrderIdRes;
-import com.mw.sdk.pay.gp.bean.res.GPExchangeRes;
-import com.mw.sdk.pay.gp.task.LoadingDialog;
-import com.mw.sdk.pay.gp.util.PayHelper;
+import com.ldy.sdk.constant.ApiRequestMethod;
+import com.ldy.sdk.pay.IPayCallBack;
+import com.ldy.sdk.pay.gp.PayApi;
+import com.ldy.sdk.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
+import com.ldy.sdk.pay.gp.bean.res.BasePayBean;
+import com.ldy.sdk.pay.gp.bean.res.GPCreateOrderIdRes;
+import com.ldy.sdk.pay.gp.bean.res.GPExchangeRes;
+import com.ldy.sdk.pay.gp.task.LoadingDialog;
+import com.ldy.sdk.pay.gp.util.PayHelper;
 
 import org.json.JSONException;
 import org.json.JSONObject;

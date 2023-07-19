@@ -23,7 +23,7 @@ android {
 //    lint {
 //        abortOnError false
 //    }
-    namespace 'com.mw.sdk'
+    namespace 'com.ldy.sdk'
 
     buildTypes {
         release {

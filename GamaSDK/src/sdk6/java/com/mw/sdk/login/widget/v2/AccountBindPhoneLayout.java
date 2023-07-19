@@ -1,4 +1,4 @@
-package com.mw.sdk.login.widget.v2;
+package com.ldy.sdk.login.widget.v2;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,17 +11,17 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.core.base.bean.BaseResponseModel;
-import com.core.base.callback.SFCallBack;
-import com.core.base.utils.SStringUtil;
-import com.core.base.utils.ToastUtils;
-import com.mw.base.bean.PhoneInfo;
-import com.mw.base.utils.SdkUtil;
-import com.mw.sdk.R;
-import com.mw.sdk.api.Request;
-import com.mw.sdk.login.PhoneAreaCodeDialogHelper;
-import com.mw.sdk.login.model.response.SLoginResponse;
-import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
+import com.mybase.bean.BaseResponseModel;
+import com.mybase.callback.SFCallBack;
+import com.mybase.utils.SStringUtil;
+import com.mybase.utils.ToastUtils;
+import com.ldy.base.bean.PhoneInfo;
+import com.ldy.base.utils.SdkUtil;
+import com.ldy.sdk.R;
+import com.ldy.sdk.api.Request;
+import com.ldy.sdk.login.PhoneAreaCodeDialogHelper;
+import com.ldy.sdk.login.model.response.SLoginResponse;
+import com.ldy.sdk.login.widget.SLoginBaseRelativeLayout;
 
 import java.util.List;
 import java.util.Timer;

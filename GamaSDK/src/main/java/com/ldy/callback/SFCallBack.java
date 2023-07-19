@@ -1,0 +1,10 @@
+package com.ldy.callback;
+
+/**
+ * Created by gan on 2017/2/11.
+ */
+public interface SFCallBack<T> extends ISCallBack<T> {
+
+    void success(T result,String msg);
+    void fail(T result,String msg);
+}

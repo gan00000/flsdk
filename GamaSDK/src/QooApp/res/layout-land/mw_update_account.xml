@@ -58,14 +58,14 @@
                 android:id="@+id/ll_bind_view"
                 android:orientation="vertical">
 
-                <com.mw.sdk.login.widget.SDKInputEditTextView
+                <com.ldy.sdk.login.widget.SDKInputEditTextView
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginTop="28dp"
                     android:id="@+id/sdkinputview_bind_account"
                     />
 
-                <com.mw.sdk.login.widget.SDKInputEditTextView
+                <com.ldy.sdk.login.widget.SDKInputEditTextView
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginTop="15dp"
@@ -88,14 +88,14 @@
                 android:id="@+id/ll_has_bind_view"
                 android:orientation="vertical">
 
-                <com.mw.sdk.login.widget.SDKInputEditTextView
+                <com.ldy.sdk.login.widget.SDKInputEditTextView
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginTop="28dp"
                     android:id="@+id/sdkinputview_has_bind_third_account"
                     />
 
-                <com.mw.sdk.login.widget.SDKInputEditTextView
+                <com.ldy.sdk.login.widget.SDKInputEditTextView
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginTop="15dp"

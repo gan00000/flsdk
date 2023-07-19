@@ -22,29 +22,29 @@
 # Your application may contain more items that need to be preserved;
 # typically classes that are dynamically created using Class.forName:
 
--keep public class com.mw.sdk.out.** { *; }
+-keep public class com.ldy.sdk.pub.** { *; }
 -keep public class * extends java.lang.Enum { *; }
--keep public class * extends com.core.base.bean.BaseResponseModel { *; }
--keep public class * extends com.core.base.bean.AbsReqeustBean { *; }
--keep public class com.mw.sdk.login.model.response.SLoginResponse$Data { *; }
--keep public class com.mw.sdk.login.ILoginCallBack { *; }
--keep public class com.mw.sdk.callback.IPayListener { *; }
--keep public class com.mw.base.bean.SPayType { *; }
--keep public class com.core.base.callback.SFCallBack { *; }
--keep public class com.mw.sdk.pay.WebPayJs { *; }
--keep public class com.core.base.utils.PL { *; }
--keep public class com.mw.sdk.ads.EventConstant { *; }
--keep public class com.core.base.bean.BaseResponseModel { *; }
--keep public class com.core.base.bean.AbsReqeustBean { *; }
--keep public class com.mw.sdk.pay.gp.bean.res.GPExchangeRes$Data { *; }
--keep public class com.mw.sdk.pay.gp.bean.res.GPCreateOrderIdRes$PayData { *; }
--keep public class com.mw.base.cfg.ConfigBean { *; }
--keep public class com.mw.base.cfg.ConfigBean$VersionData { *; }
--keep public class com.mw.base.cfg.ConfigBean$UrlData { *; }
--keep public class com.mw.base.bean.PhoneInfo { *; }
--keep public class com.mw.sdk.login.model.QooAppLoginModel { *; }
--keep public class com.mw.sdk.login.model.QooAppLoginModel$UserData { *; }
--keep public class com.mw.base.bean.SUserInfo { *; }
+-keep public class * extends com.mybase.bean.BaseResultModel { *; }
+-keep public class * extends com.mybase.bean.AbsReqeustBean { *; }
+-keep public class com.ldy.sdk.login.model.response.SLoginResult$Data { *; }
+-keep public class com.ldy.callback.ILoginCallBack { *; }
+-keep public class com.ldy.callback.IPayListener { *; }
+-keep public class com.ldy.base.bean.SPayType { *; }
+-keep public class com.ldy.callback.SFCallBack { *; }
+-keep public class com.ldy.sdk.pay.WebPayJs { *; }
+-keep public class com.mybase.utils.PL { *; }
+-keep public class com.ldy.sdk.ads.EventConstant { *; }
+-keep public class com.mybase.bean.BaseResultModel { *; }
+-keep public class com.mybase.bean.AbsReqeustBean { *; }
+-keep public class com.ldy.sdk.pay.gp.res.GPExchangeRes$Data { *; }
+-keep public class com.ldy.sdk.pay.gp.res.GPCreateOrderIdRes$PayData { *; }
+-keep public class com.ldy.base.cfg.ConfigModel { *; }
+-keep public class com.ldy.base.cfg.ConfigModel$VersionData { *; }
+-keep public class com.ldy.base.cfg.ConfigModel$UrlData { *; }
+-keep public class com.ldy.base.bean.PhoneInfo { *; }
+-keep public class com.ldy.sdk.login.model.QooAppLoginModel { *; }
+-keep public class com.ldy.sdk.login.model.QooAppLoginModel$UserData { *; }
+-keep public class com.ldy.base.bean.SUserInfo { *; }
 
 # -keep public interface mypackage.MyInterface
 # -keep public class * implements mypackage.MyInterface

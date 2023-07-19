@@ -1,4 +1,4 @@
-package com.mw.sdk.login.widget.v2;
+package com.ldy.sdk.login.widget.v2;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -10,19 +10,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.core.base.callback.SFCallBack;
-import com.core.base.utils.ToastUtils;
-import com.mw.base.bean.SLoginType;
-import com.mw.sdk.SBaseRelativeLayout;
-import com.mw.base.utils.SdkUtil;
-import com.mw.sdk.R;
-import com.mw.sdk.api.Request;
-import com.mw.sdk.login.constant.BindType;
-import com.mw.sdk.login.model.AccountModel;
-import com.mw.sdk.login.model.response.SLoginResponse;
-import com.mw.sdk.login.widget.SDKInputEditTextView;
-import com.mw.sdk.login.widget.SDKInputType;
-import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
+import com.mybase.callback.SFCallBack;
+import com.mybase.utils.ToastUtils;
+import com.ldy.base.bean.SLoginType;
+import com.ldy.sdk.SBaseRelativeLayout;
+import com.ldy.base.utils.SdkUtil;
+import com.ldy.sdk.R;
+import com.ldy.sdk.api.Request;
+import com.ldy.sdk.login.constant.BindType;
+import com.ldy.sdk.login.model.AccountModel;
+import com.ldy.sdk.login.model.response.SLoginResponse;
+import com.ldy.sdk.login.widget.SDKInputEditTextView;
+import com.ldy.sdk.login.widget.SDKInputType;
+import com.ldy.sdk.login.widget.SLoginBaseRelativeLayout;
 
 
 public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout implements View.OnClickListener, SBaseRelativeLayout.OperationCallback {

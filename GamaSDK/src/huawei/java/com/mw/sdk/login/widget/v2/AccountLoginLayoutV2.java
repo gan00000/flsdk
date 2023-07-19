@@ -1,4 +1,4 @@
-package com.mw.sdk.login.widget.v2;
+package com.ldy.sdk.login.widget.v2;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -17,23 +17,23 @@ import android.widget.EditText;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 
-import com.core.base.callback.SFCallBack;
-import com.core.base.utils.PL;
-import com.core.base.utils.ToastUtils;
-import com.mw.base.bean.SLoginType;
-import com.mw.base.cfg.ConfigBean;
-import com.mw.base.utils.SdkUtil;
-import com.mw.base.utils.SdkVersionUtil;
-import com.mw.sdk.SBaseDialog;
-import com.mw.sdk.login.AccountPopupWindow;
-import com.mw.sdk.login.constant.ViewType;
-import com.mw.sdk.login.model.AccountModel;
-import com.mw.sdk.login.widget.SDKInputEditTextView;
-import com.mw.sdk.login.widget.SDKInputType;
-import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
-import com.mw.sdk.R;
-import com.mw.sdk.out.ISdkCallBack;
-import com.mw.sdk.utils.DialogUtil;
+import com.mybase.callback.SFCallBack;
+import com.mybase.utils.PL;
+import com.mybase.utils.ToastUtils;
+import com.ldy.base.bean.SLoginType;
+import com.ldy.base.cfg.ConfigBean;
+import com.ldy.base.utils.SdkUtil;
+import com.ldy.base.utils.SdkVersionUtil;
+import com.ldy.sdk.SBaseDialog;
+import com.ldy.sdk.login.AccountPopupWindow;
+import com.ldy.sdk.login.constant.ViewType;
+import com.ldy.sdk.login.model.AccountModel;
+import com.ldy.sdk.login.widget.SDKInputEditTextView;
+import com.ldy.sdk.login.widget.SDKInputType;
+import com.ldy.sdk.login.widget.SLoginBaseRelativeLayout;
+import com.ldy.sdk.R;
+import com.ldy.sdk.pub.ISdkCallBack;
+import com.ldy.sdk.utils.DialogUtil;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.thirdlib.huawei;
+package com.allextends.huawei;
 
 
 import android.app.Activity;

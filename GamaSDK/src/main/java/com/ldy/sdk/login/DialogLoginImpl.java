@@ -1,0 +1,161 @@
+package com.ldy.sdk.login;
+
+import android.app.Activity;
+import android.content.DialogInterface;
+import android.content.Intent;
+
+import com.ldy.base.cfg.ConfigModel;
+import com.ldy.callback.ILoginCallBack;
+import com.mybase.utils.PL;
+import com.ldy.base.utils.SdkUtil;
+import com.ldy.sdk.SWebViewDialog;
+import com.ldy.sdk.login.widget.v2.NoticeView;
+import com.ldy.sdk.utils.DialogUtil;
+import com.allextends.facebook.SFacebookProxy;
+import com.allextends.google.SGoogleSignIn;
+import com.allextends.huawei.HuaweiSignIn;
+import com.allextends.line.SLineSignIn;
+
+/**
+ * Created by gan on 2017/4/12.
+ */
+
+public class DialogLoginImpl implements ILogin {
+
+    private SLoginDialogV2 sLoginDialog;
+    private SFacebookProxy sFacebookProxy;
+
+    private SGoogleSignIn sGoogleSignIn;
+    private SLineSignIn sLineSignIn;
+    private HuaweiSignIn huaweiSignIn;
+
+    public DialogLoginImpl(Activity activity) {
+
+    }
+
+    @Override
+    public void onCreate(Activity activity) {
+
+    }
+
+    @Override
+    public void onResume(Activity activity) {
+
+    }
+
+    @Override
+    public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
+        if (sFacebookProxy != null) {
+            sFacebookProxy.onActivityResultForLogin(activity, requestCode, resultCode, data);
+        }
+        if (sGoogleSignIn != null){
+            sGoogleSignIn.handleActivityResult(activity,requestCode,resultCode,data);
+        }
+        if (sLineSignIn != null){
+            sLineSignIn.handleActivityResult(activity,requestCode,resultCode,data);
+        }
+        if(huaweiSignIn != null) {
+            huaweiSignIn.handleActivityResult(activity, requestCode, resultCode, data);
+        }
+        PL.i("DialogLoginImpl onActivityResult");
+    }
+
+    @Override
+    public void onPause(Activity activity) {
+
+    }
+
+    @Override
+    public void onStop(Activity activity) {
+
+    }
+
+    @Override
+    public void onDestroy(Activity activity) {
+
+    }
+
+    @Override
+    public void startLogin(final Activity activity, final ILoginCallBack iLoginCallBack) {
+
+        sGoogleSignIn = new SGoogleSignIn(activity, DialogUtil.createLoadingDialog(activity, "Loading..."));
+        sLineSignIn = new SLineSignIn(activity, DialogUtil.createLoadingDialog(activity, "Loading..."));
+        huaweiSignIn = new HuaweiSignIn(activity, DialogUtil.createLoadingDialog(activity, "Loading..."));
+
+        if (!SdkUtil.isVersion1(activity)) {
+            ConfigModel configModel = SdkUtil.getSdkCfg(activity);
+            if (configModel != null) {
+                ConfigModel.VersionData versionData = configModel.getSdkConfigLoginData(activity);
+                //test
+//                versionData.setShowNotice(true);
+                if (versionData != null && versionData.isShowNotice()) { //显示dialog web公告
+                    NoticeView noticeView = new NoticeView(activity);
+                    SWebViewDialog webViewDialog = new SWebViewDialog(activity, com.ldy.sdk.R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen,noticeView,noticeView.getSWebView(),null);
+                    if (configModel.getUrl() != null) {
+                        webViewDialog.setWebUrl(configModel.getUrl().getNoticeUrl());
+                    }
+                    noticeView.setsBaseDialog(webViewDialog);
+                    webViewDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                        @Override
+                        public void onDismiss(DialogInterface dialog) {
+                            goDialogView(activity, iLoginCallBack);
+                        }
+                    });
+                    webViewDialog.show();
+                    return;
+                }
+            }
+        }
+        goDialogView(activity, iLoginCallBack);
+    }
+
+    @Override
+    public void signOut(Activity activity) {
+
+//        String previousLoginType = SdkUtil.getPreviousLoginType(activity);
+//        if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GOOGLE, previousLoginType)) {//google
+//        } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_LINE, previousLoginType)) {//line
+//        } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_FB, previousLoginType)) {//fb
+//        }else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_HUAWEI, previousLoginType)) {
+//        }
+
+        if (sFacebookProxy != null) {
+            sFacebookProxy.fbLogout(activity);
+        }
+
+        if (sGoogleSignIn != null) {
+            sGoogleSignIn.signOut();
+        }
+
+        if(huaweiSignIn != null) {
+            huaweiSignIn.signOut(activity);
+        }
+
+    }
+
+    private void goDialogView(Activity activity, ILoginCallBack iLoginCallBack) {
+
+        try {
+            if (sLoginDialog != null){
+                sLoginDialog.dismiss();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        sLoginDialog = new SLoginDialogV2(activity, com.ldy.sdk.R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
+        sLoginDialog.setSFacebookProxy(sFacebookProxy);
+        sLoginDialog.setSGoogleSignIn(sGoogleSignIn);
+        sLoginDialog.setsLineSignIn(sLineSignIn);
+        sLoginDialog.setHuaweiSignIn(huaweiSignIn);
+//        if (twitterLogin != null) {
+//            sLoginDialog.setTwitterLogin(twitterLogin);
+//        }
+        sLoginDialog.setLoginCallBack(iLoginCallBack);
+        sLoginDialog.show();
+    }
+
+    @Override
+    public void initFacebookPro(Activity activity, SFacebookProxy sFacebookProxy) {
+        this.sFacebookProxy = sFacebookProxy;
+    }
+}

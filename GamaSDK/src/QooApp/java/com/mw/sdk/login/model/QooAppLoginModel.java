@@ -1,4 +1,4 @@
-package com.mw.sdk.login.model;
+package com.ldy.sdk.login.model;
 
 import java.io.Serializable;
 

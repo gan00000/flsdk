@@ -1,0 +1,32 @@
+package com.ldy.sdk.pay;
+
+import android.app.Activity;
+import android.content.Context;
+
+import com.ldy.callback.IPayCallBack;
+import com.ldy.callback.IGameLifeCycle;
+import com.ldy.pub.ISdkCallBack;
+import com.ldy.sdk.pay.gp.req.PayReqBean;
+
+/**
+ * Created by gan on 2017/2/23.
+ */
+
+public interface IPay extends IGameLifeCycle{
+//    String PAY_STATUS = "status";
+//    int PAY_SUCCESS = 93;
+//    int PAY_FAIL = 94;
+
+    /**
+     * 进入Google储值流程
+     */
+    void startPay(Activity activity,PayReqBean payReqBean);
+    void startQueryPurchase(Context mContext);
+
+    /**
+     * 设置Google储值的回调
+     */
+    void setIPayCallBack(IPayCallBack iPayCallBack);
+
+    void queryPreRegData(final Context mContext, ISdkCallBack iSdkCallBack);
+}

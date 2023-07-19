@@ -14,7 +14,7 @@ import com.lhh.ptrrv.library.footer.loadmore.DefaultLoadMoreView;
 import com.lhh.ptrrv.library.header.Header;
 import com.lhh.ptrrv.library.impl.PrvInterface;
 import com.lhh.ptrrv.library.util.PullToRefreshRecyclerViewUtil;
-import com.mw.sdk.R;
+import com.ldy.sdk.R;
 
 /**
  * Created by linhonghong on 2015/11/11.

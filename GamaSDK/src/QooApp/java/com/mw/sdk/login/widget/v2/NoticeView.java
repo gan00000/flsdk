@@ -1,4 +1,4 @@
-package com.mw.sdk.login.widget.v2;
+package com.ldy.sdk.login.widget.v2;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,13 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.core.base.BaseWebViewClient;
-import com.core.base.utils.PL;
-import com.mw.base.cfg.ResConfig;
-import com.mw.base.widget.SWebView;
-import com.mw.sdk.R;
-import com.mw.sdk.SWebViewLayout;
-import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
-import com.mw.sdk.out.ISdkCallBack;
+import com.mybase.utils.PL;
+import com.ldy.base.cfg.ResConfig;
+import com.ldy.base.widget.SWebView;
+import com.ldy.sdk.R;
+import com.ldy.sdk.SWebViewLayout;
+import com.ldy.sdk.login.widget.SLoginBaseRelativeLayout;
+import com.ldy.sdk.pub.ISdkCallBack;
 
 /**
  * Created by GanYuanrong on 2017/2/6.

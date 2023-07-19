@@ -1,24 +1,24 @@
-package com.mw.sdk.out;
+package com.ldy.sdk.pub;
 
 import android.app.Activity;
 
-import com.core.base.callback.SFCallBack;
-import com.core.base.utils.PL;
-import com.core.base.utils.SStringUtil;
-import com.core.base.utils.ToastUtils;
+import com.mybase.callback.SFCallBack;
+import com.mybase.utils.PL;
+import com.mybase.utils.SStringUtil;
+import com.mybase.utils.ToastUtils;
 import com.google.gson.Gson;
-import com.mw.base.bean.SLoginType;
-import com.mw.sdk.login.ILoginCallBack;
-import com.mw.sdk.login.QooAppLoginView;
-import com.mw.sdk.login.model.QooAppLoginModel;
-import com.mw.sdk.login.model.request.ThirdLoginRegRequestBean;
-import com.mw.sdk.login.p.LoginPresenterImpl;
-import com.mw.sdk.pay.IPayCallBack;
-import com.mw.sdk.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
-import com.mw.sdk.pay.gp.bean.res.BasePayBean;
+import com.ldy.base.bean.SLoginType;
+import com.ldy.sdk.login.ILoginCallBack;
+import com.ldy.sdk.login.QooAppLoginView;
+import com.ldy.sdk.login.model.QooAppLoginModel;
+import com.ldy.sdk.login.model.request.ThirdLoginRegRequestBean;
+import com.ldy.sdk.login.p.LoginPresenterImpl;
+import com.ldy.sdk.pay.IPayCallBack;
+import com.ldy.sdk.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
+import com.ldy.sdk.pay.gp.bean.res.BasePayBean;
 import com.qooapp.opensdk.QooAppOpenSDK;
 import com.qooapp.opensdk.common.QooAppCallback;
-import com.thirdlib.qooapp.QooappPayImpl;
+import com.allextends.qooapp.QooappPayImpl;
 
 public class MWSdkImpl extends BaseSdkImpl {
 

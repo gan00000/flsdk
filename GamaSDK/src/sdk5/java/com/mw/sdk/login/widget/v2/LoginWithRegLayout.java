@@ -1,4 +1,4 @@
-package com.mw.sdk.login.widget.v2;
+package com.ldy.sdk.login.widget.v2;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -11,13 +11,13 @@ import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.mw.base.cfg.ConfigBean;
-import com.mw.base.utils.SdkUtil;
-import com.mw.sdk.login.SLoginDialogV2;
-import com.mw.sdk.login.constant.ViewType;
-import com.mw.sdk.login.model.AccountModel;
-import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
-import com.mw.sdk.R;
+import com.ldy.base.cfg.ConfigBean;
+import com.ldy.base.utils.SdkUtil;
+import com.ldy.sdk.login.SLoginDialogV2;
+import com.ldy.sdk.login.constant.ViewType;
+import com.ldy.sdk.login.model.AccountModel;
+import com.ldy.sdk.login.widget.SLoginBaseRelativeLayout;
+import com.ldy.sdk.R;
 
 import java.util.List;
 

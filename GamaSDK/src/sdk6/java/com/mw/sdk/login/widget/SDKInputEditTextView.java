@@ -1,4 +1,4 @@
-package com.mw.sdk.login.widget;
+package com.ldy.sdk.login.widget;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -16,8 +16,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.core.base.utils.SStringUtil;
-import com.mw.sdk.R;
+import com.mybase.utils.SStringUtil;
+import com.ldy.sdk.R;
 
 
 //封裝SDK輸入框

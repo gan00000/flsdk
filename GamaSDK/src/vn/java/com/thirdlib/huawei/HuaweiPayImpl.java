@@ -1,11 +1,11 @@
-package com.thirdlib.huawei;
+package com.allextends.huawei;
 
 
 import android.app.Activity;
 import android.content.Intent;
 
-import com.mw.sdk.pay.IPayCallBack;
-import com.mw.sdk.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
+import com.ldy.sdk.pay.IPayCallBack;
+import com.ldy.sdk.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
 
 public class HuaweiPayImpl {
 

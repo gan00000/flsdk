@@ -1,4 +1,4 @@
-package com.thirdlib.huawei;
+package com.allextends.huawei;
 
 
 import android.app.Activity;
@@ -13,7 +13,7 @@ import android.util.Log;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
-import com.core.base.utils.PL;
+import com.mybase.utils.PL;
 import com.huawei.hmf.tasks.OnFailureListener;
 import com.huawei.hmf.tasks.OnSuccessListener;
 import com.huawei.hmf.tasks.Task;
@@ -24,7 +24,7 @@ import com.huawei.hms.support.account.request.AccountAuthParamsHelper;
 import com.huawei.hms.support.account.result.AuthAccount;
 import com.huawei.hms.support.account.service.AccountAuthService;
 import com.huawei.hms.support.api.entity.common.CommonConstant;
-import com.thirdlib.line.SLineSignIn;
+import com.allextends.line.SLineSignIn;
 
 public class HuaweiSignIn {
 

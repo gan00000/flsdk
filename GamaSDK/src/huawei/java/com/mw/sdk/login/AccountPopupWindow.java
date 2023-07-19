@@ -1,4 +1,4 @@
-package com.mw.sdk.login;
+package com.ldy.sdk.login;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -14,10 +14,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.mw.base.bean.SLoginType;
-import com.mw.base.utils.SdkUtil;
-import com.mw.sdk.R;
-import com.mw.sdk.login.model.AccountModel;
+import com.ldy.base.bean.SLoginType;
+import com.ldy.base.utils.SdkUtil;
+import com.ldy.sdk.R;
+import com.ldy.sdk.login.model.AccountModel;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 

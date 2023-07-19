@@ -12,8 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import android.util.Log;
 
-import com.core.base.utils.SPUtil;
-import com.mw.base.utils.SdkUtil;
+import com.mybase.utils.SPUtil;
+import com.ldy.base.utils.SdkUtil;
 
 public class DoPermissionReq extends Activity implements ActivityCompat.OnRequestPermissionsResultCallback {
     public static final String TAG = "Unity";

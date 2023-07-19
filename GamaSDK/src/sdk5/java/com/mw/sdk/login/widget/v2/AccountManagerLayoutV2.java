@@ -1,4 +1,4 @@
-package com.mw.sdk.login.widget.v2;
+package com.ldy.sdk.login.widget.v2;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -6,8 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-import com.mw.sdk.R;
-import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
+import com.ldy.sdk.R;
+import com.ldy.sdk.login.widget.SLoginBaseRelativeLayout;
 
 
 public class AccountManagerLayoutV2 extends SLoginBaseRelativeLayout implements View.OnClickListener {

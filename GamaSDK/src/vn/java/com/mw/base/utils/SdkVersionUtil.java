@@ -1,12 +1,12 @@
-package com.mw.base.utils;
+package com.ldy.base.utils;
 
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.core.base.utils.SStringUtil;
-import com.mw.base.bean.SLoginType;
-import com.mw.sdk.R;
-import com.mw.sdk.login.model.AccountModel;
+import com.mybase.utils.SStringUtil;
+import com.ldy.base.bean.SLoginType;
+import com.ldy.sdk.R;
+import com.ldy.sdk.login.model.AccountModel;
 
 /**
  * Created by gan on 2017/2/7.

@@ -1,4 +1,4 @@
-package com.mw.sdk.login.widget.v2;
+package com.ldy.sdk.login.widget.v2;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -8,13 +8,13 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 
 import com.huawei.hms.support.hwid.ui.HuaweiIdAuthButton;
-import com.mw.base.cfg.ConfigBean;
-import com.mw.base.utils.SdkUtil;
-import com.mw.sdk.SBaseDialog;
-import com.mw.sdk.login.constant.ViewType;
-import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
-import com.mw.sdk.R;
-import com.mw.sdk.out.ISdkCallBack;
+import com.ldy.base.cfg.ConfigBean;
+import com.ldy.base.utils.SdkUtil;
+import com.ldy.sdk.SBaseDialog;
+import com.ldy.sdk.login.constant.ViewType;
+import com.ldy.sdk.login.widget.SLoginBaseRelativeLayout;
+import com.ldy.sdk.R;
+import com.ldy.sdk.pub.ISdkCallBack;
 
 /**
  * Created by GanYuanrong on 2017/2/6.

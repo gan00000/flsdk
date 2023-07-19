@@ -18,19 +18,19 @@
             android:layout_height="50dp"
             android:layout_marginTop="20dp" />
 
-        <com.mw.sdk.login.widget.SDKInputEditTextView
+        <com.ldy.sdk.login.widget.SDKInputEditTextView
             android:id="@+id/sdkinputview_findpwd_account"
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:layout_marginTop="25dp" />
 
-        <com.mw.sdk.login.widget.SDKInputEditTextView
+        <com.ldy.sdk.login.widget.SDKInputEditTextView
             android:id="@+id/sdkinputview_findpwd_new"
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:layout_marginTop="15dp" />
 
-        <com.mw.sdk.login.widget.SDKInputEditTextView
+        <com.ldy.sdk.login.widget.SDKInputEditTextView
             android:id="@+id/sdkinputview_findpwd_new_again"
             android:layout_width="300dp"
             android:layout_height="40dp"
@@ -44,7 +44,7 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <com.mw.sdk.login.widget.SDKInputEditTextView
+            <com.ldy.sdk.login.widget.SDKInputEditTextView
                 android:id="@+id/sdkinputview_findpwd_vf"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"

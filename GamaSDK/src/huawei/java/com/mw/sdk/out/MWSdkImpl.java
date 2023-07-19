@@ -1,8 +1,8 @@
-package com.mw.sdk.out;
+package com.ldy.sdk.pub;
 
 import android.app.Activity;
 
-import com.core.base.callback.SFCallBack;
+import com.mybase.callback.SFCallBack;
 
 public class MWSdkImpl extends BaseSdkImpl {
 

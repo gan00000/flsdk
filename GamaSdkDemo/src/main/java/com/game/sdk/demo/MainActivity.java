@@ -24,26 +24,25 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
-import com.core.base.bean.BaseResponseModel;
-import com.core.base.callback.SFCallBack;
-import com.core.base.utils.MarketUtil;
-import com.core.base.utils.PL;
-import com.core.base.utils.TimeUtil;
-import com.core.base.utils.ToastUtils;
-import com.mw.base.bean.SPayType;
-import com.mw.base.utils.SLog;
-import com.mw.base.utils.SdkUtil;
-import com.mw.sdk.callback.IPayListener;
-import com.mw.sdk.demo.R;
-import com.mw.sdk.login.ILoginCallBack;
-import com.mw.sdk.login.model.response.SLoginResponse;
-import com.mw.sdk.out.IMWSDK;
-import com.mw.sdk.out.ISdkCallBack;
-import com.mw.sdk.out.MWSdkFactory;
+import com.ldy.sdk.login.model.response.SLoginResult;
+import com.mybase.bean.BaseResultModel;
+import com.ldy.callback.SFCallBack;
+import com.mybase.utils.MarketUtil;
+import com.mybase.utils.PL;
+import com.mybase.utils.TimeUtil;
+import com.mybase.utils.ToastUtils;
+import com.ldy.base.bean.SPayType;
+import com.ldy.base.utils.SLog;
+import com.ldy.base.utils.SdkUtil;
+import com.ldy.callback.IPayListener;
+import com.ldy.sdk.demo.R;
+import com.ldy.callback.ILoginCallBack;
+import com.ldy.pub.IMWSDK;
+import com.ldy.pub.ISdkCallBack;
+import com.ldy.pub.MWSdkFactory;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 public class MainActivity extends Activity {
 
@@ -62,7 +61,7 @@ public class MainActivity extends Activity {
     String serverCode = "1"; //角色伺服器id
     String serverName = "S1"; //角色伺服器名称
 
-    SLoginResponse tempSLoginResponse;
+    SLoginResult tempSLoginResponse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +88,7 @@ public class MainActivity extends Activity {
                 //登陆接口 ILoginCallBack为登录成功后的回调
                 mIMWSDK.login(MainActivity.this, new ILoginCallBack() {
                     @Override
-                    public void onLogin(SLoginResponse sLoginResponse) {
+                    public void onLogin(SLoginResult sLoginResponse) {
                         handleLoginResponse(sLoginResponse);
                     }
                 });
@@ -274,7 +273,7 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 mIMWSDK.switchLogin(activity, new ILoginCallBack() {
                     @Override
-                    public void onLogin(SLoginResponse sLoginResponse) {
+                    public void onLogin(SLoginResult sLoginResponse) {
                         handleLoginResponse(sLoginResponse);
                     }
                 });
@@ -285,15 +284,15 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View view) {
 
-                mIMWSDK.showBindPhoneView(MainActivity.this, new SFCallBack<BaseResponseModel>() {
+                mIMWSDK.showBindPhoneView(MainActivity.this, new SFCallBack<BaseResultModel>() {
                     @Override
-                    public void success(BaseResponseModel result, String msg) {
+                    public void success(BaseResultModel result, String msg) {
                         //todo绑定手机成功
 
                     }
 
                     @Override
-                    public void fail(BaseResponseModel result, String msg) {
+                    public void fail(BaseResultModel result, String msg) {
                         //todo绑定手机失败
                     }
                 });
@@ -304,15 +303,15 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View view) {
 
-                mIMWSDK.showUpgradeAccountView(MainActivity.this, new SFCallBack<SLoginResponse>() {
+                mIMWSDK.showUpgradeAccountView(MainActivity.this, new SFCallBack<SLoginResult>() {
                     @Override
-                    public void success(SLoginResponse sLoginResponse, String msg) {
+                    public void success(SLoginResult sLoginResponse, String msg) {
                         //账号升级成功
 
                     }
 
                     @Override
-                    public void fail(SLoginResponse result, String msg) {
+                    public void fail(SLoginResult result, String msg) {
 
                     }
                 });
@@ -320,31 +319,31 @@ public class MainActivity extends Activity {
             }
         });
 
-//        mIMWSDK.requestVfCode(this, "86", "13622843403", new SFCallBack<BaseResponseModel>() {
+//        mIMWSDK.requestVfCode(this, "86", "13622843403", new SFCallBack<BaseResultModel>() {
 //            @Override
-//            public void success(BaseResponseModel responseModel, String result) {
+//            public void success(BaseResultModel responseModel, String result) {
 //                //获取手机验证码成功
 //                //todo
 //            }
 //
 //            @Override
-//            public void fail(BaseResponseModel responseModel, String result) {
+//            public void fail(BaseResultModel responseModel, String result) {
 //                if (responseModel != null){
 //                    String errMsg = responseModel.getMessage();//获取验证码 错误信息
 //                }
 //            }
 //        });
 //
-//        mIMWSDK.requestBindPhone(this, "86", "13622843403", "111111", new SFCallBack<SLoginResponse>() {
+//        mIMWSDK.requestBindPhone(this, "86", "13622843403", "111111", new SFCallBack<SLoginResult>() {
 //            @Override
-//            public void success(SLoginResponse sLoginResponse, String result) {
+//            public void success(SLoginResult sLoginResponse, String result) {
 //                if (sLoginResponse != null) {
 //                    String tel = sLoginResponse.getData().getTelephone();//绑定的手机号码
 //                }
 //            }
 //
 //            @Override
-//            public void fail(SLoginResponse sLoginResponse, String result) {
+//            public void fail(SLoginResult sLoginResponse, String result) {
 //                if (sLoginResponse != null) {
 //                    String errMsg = sLoginResponse.getMessage();
 //                }
@@ -352,15 +351,15 @@ public class MainActivity extends Activity {
 //            }
 //        });
 //
-//        mIMWSDK.requestUpgradeAccount(this, "xxx", "pwd", new SFCallBack<SLoginResponse>() {
+//        mIMWSDK.requestUpgradeAccount(this, "xxx", "pwd", new SFCallBack<SLoginResult>() {
 //
 //            @Override
-//            public void success(SLoginResponse result, String msg) {
+//            public void success(SLoginResult result, String msg) {
 //                //账号升级成功
 //            }
 //
 //            @Override
-//            public void fail(SLoginResponse result, String msg) {
+//            public void fail(SLoginResult result, String msg) {
 //                //账号升级绑定失败
 //            }
 //        });
@@ -400,7 +399,7 @@ public class MainActivity extends Activity {
 
     }
 
-    private void handleLoginResponse(SLoginResponse sLoginResponse) {
+    private void handleLoginResponse(SLoginResult sLoginResponse) {
         if (sLoginResponse != null && sLoginResponse.getData() != null) {
             tempSLoginResponse = sLoginResponse;
             String uid = sLoginResponse.getData().getUserId();

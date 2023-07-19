@@ -10,8 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import android.util.Log;
 
-import com.core.base.utils.SPUtil;
-import com.mw.base.utils.SdkUtil;
+import com.mybase.utils.SPUtil;
+import com.ldy.base.utils.SdkUtil;
 
 /**
  * 用于处理Android 6.0以上授权的工具类

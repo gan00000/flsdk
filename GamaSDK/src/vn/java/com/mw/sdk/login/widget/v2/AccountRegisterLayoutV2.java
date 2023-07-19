@@ -1,4 +1,4 @@
-package com.mw.sdk.login.widget.v2;
+package com.ldy.sdk.login.widget.v2;
 
 import android.content.Context;
 import android.text.TextUtils;
@@ -8,13 +8,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.core.base.utils.ToastUtils;
-import com.mw.sdk.SBaseRelativeLayout;
-import com.mw.base.utils.SdkUtil;
-import com.mw.sdk.R;
-import com.mw.sdk.login.widget.SDKInputEditTextView;
-import com.mw.sdk.login.widget.SDKInputType;
-import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
+import com.mybase.utils.ToastUtils;
+import com.ldy.sdk.SBaseRelativeLayout;
+import com.ldy.base.utils.SdkUtil;
+import com.ldy.sdk.R;
+import com.ldy.sdk.login.widget.SDKInputEditTextView;
+import com.ldy.sdk.login.widget.SDKInputType;
+import com.ldy.sdk.login.widget.SLoginBaseRelativeLayout;
 
 
 public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements View.OnClickListener, SBaseRelativeLayout.OperationCallback {

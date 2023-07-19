@@ -302,7 +302,7 @@ android {
 //            abortOnError false
 //        }
     }
-    namespace 'com.mw.sdk.demo'
+    namespace 'com.ldy.sdk.demo'
 }
 
 repositories {
