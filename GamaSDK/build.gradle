@@ -41,36 +41,6 @@ android {
     }
     productFlavors {
 
-        sdk4 {//第4套
-            flavorDimensions "1"
-            resValue "string", "sdk_inner_version", "v4"
-        }
-
-        sdk5 {//第4套
-            flavorDimensions "1"
-            resValue "string", "sdk_inner_version", "v5"
-        }
-
-        QooApp {//Qooap
-            flavorDimensions "1"
-            resValue "string", "sdk_inner_version", "qooap"
-        }
-
-        huawei {//华为渠道
-            flavorDimensions "1"
-            resValue "string", "sdk_inner_version", "huawei"
-        }
-
-        vn {//越南专用
-            flavorDimensions "1"
-            resValue "string", "sdk_inner_version", "vn"
-        }
-
-        sdk6 {//第6套，东南亚
-            flavorDimensions "1"
-            resValue "string", "sdk_inner_version", "v6"
-        }
-
         dysdk_kr {//....
             flavorDimensions "1"
             resValue "string", "sdk_inner_version", "vd_kr"
@@ -148,11 +118,11 @@ dependencies {
     implementation 'io.reactivex.rxjava3:rxjava:3.1.5'
 
     //huawei sdk
-    huaweiImplementation 'com.huawei.hms:hwid:6.9.0.301'
-    huaweiImplementation 'com.huawei.hms:iap:6.4.0.301'
+//    huaweiImplementation 'com.huawei.hms:hwid:6.9.0.301'
+//    huaweiImplementation 'com.huawei.hms:iap:6.4.0.301'
 
     //qooapp sdk
-    QooAppImplementation(name: 'qooapp-opensdk-2.0.6', ext: 'aar')
+//    QooAppImplementation(name: 'qooapp-opensdk-2.0.6', ext: 'aar')
 }
 
 
