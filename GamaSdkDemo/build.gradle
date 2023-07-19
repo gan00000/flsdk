@@ -270,7 +270,7 @@ android {
         }
 
 
-        dysdk {
+        dysdk_kr {
 
             signingConfig signingConfigs.release_v2
             applicationId "com.wantang.xlzsg"
