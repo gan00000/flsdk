@@ -291,6 +291,7 @@ public class Request {
         requestParams.put("versionName",sGameBaseRequestBean.getVersionName());
         requestParams.put("androidId",sGameBaseRequestBean.getAndroidId());
         requestParams.put("adId",sGameBaseRequestBean.getAdvertisingId());
+        requestParams.put("appsflyerId",sGameBaseRequestBean.getAppsflyerId());
 
         if (DataManager.getInstance().isLogin()) {
             requestParams.put("userId",sGameBaseRequestBean.getUserId());

@@ -399,6 +399,7 @@ public class SdkEventLogger {
         requestParams.put("versionName",adsRequestBean.getVersionName());
         requestParams.put("androidId",adsRequestBean.getAndroidId());
         requestParams.put("adId",adsRequestBean.getAdvertisingId());
+        requestParams.put("appsflyerId",adsRequestBean.getAppsflyerId());
 
         adsRequestBean.setRequestParamsMap(requestParams);
         adsRequestBean.setRequestUrl(ResConfig.getLogPreferredUrl(context)); //日志记录

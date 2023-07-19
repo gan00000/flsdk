@@ -3,6 +3,7 @@ package com.core.base.bean;
 import android.content.Context;
 import androidx.annotation.NonNull;
 
+import com.appsflyer.AppsFlyerLib;
 import com.core.base.utils.ApkInfoUtil;
 import com.core.base.utils.SStringUtil;
 
@@ -29,6 +30,7 @@ public class BaseReqeustBean extends AbsReqeustBean {
     private String packageName = "";
     private String versionCode = "";
     private String versionName = "";
+    private String appsflyerId = "";
 
     public String getAndroidId() {
         return androidId;
@@ -66,6 +68,14 @@ public class BaseReqeustBean extends AbsReqeustBean {
         return versionName;
     }
 
+    public String getAppsflyerId() {
+        return appsflyerId;
+    }
+
+    public void setAppsflyerId(String appsflyerId) {
+        this.appsflyerId = appsflyerId;
+    }
+
     public BaseReqeustBean() {}
 
     public BaseReqeustBean(Context context) {
@@ -83,6 +93,7 @@ public class BaseReqeustBean extends AbsReqeustBean {
             packageName = context.getPackageName();
             versionCode = ApkInfoUtil.getVersionCode(context);
             versionName = ApkInfoUtil.getVersionName(context);
+            appsflyerId = AppsFlyerLib.getInstance().getAppsFlyerUID(context);
         }
     }
 
