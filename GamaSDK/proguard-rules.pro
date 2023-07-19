@@ -25,7 +25,7 @@
 -keep public class com.ldy.sdk.pub.** { *; }
 -keep public class * extends java.lang.Enum { *; }
 -keep public class * extends com.mybase.bean.BaseResultModel { *; }
--keep public class * extends com.mybase.bean.AbsReqeustBean { *; }
+-keep public class * extends com.mybase.bean.AbsReqModel { *; }
 -keep public class com.ldy.sdk.login.model.response.SLoginResult$Data { *; }
 -keep public class com.ldy.callback.ILoginCallBack { *; }
 -keep public class com.ldy.callback.IPayListener { *; }
@@ -35,7 +35,7 @@
 -keep public class com.mybase.utils.PL { *; }
 -keep public class com.ldy.sdk.ads.EventConstant { *; }
 -keep public class com.mybase.bean.BaseResultModel { *; }
--keep public class com.mybase.bean.AbsReqeustBean { *; }
+-keep public class com.mybase.bean.AbsReqModel { *; }
 -keep public class com.ldy.sdk.pay.gp.res.GPExchangeRes$Data { *; }
 -keep public class com.ldy.sdk.pay.gp.res.GPCreateOrderIdRes$PayData { *; }
 -keep public class com.ldy.base.cfg.ConfigModel { *; }

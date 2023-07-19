@@ -2,7 +2,7 @@ package com.ldy.sdk.login.execute;
 
 import android.content.Context;
 
-import com.mybase.bean.BaseReqeustBean;
+import com.mybase.bean.BaseReqModel;
 import com.mybase.utils.SStringUtil;
 import com.ldy.base.cfg.ResConfig;
 import com.ldy.sdk.constant.ApiRequestMethod;
@@ -45,7 +45,7 @@ public class PhoneVfcodeRequestTask extends BaseLoginRequestTask {
 
 
 	@Override
-	public BaseReqeustBean createRequestBean() {
+	public BaseReqModel createRequestBean() {
 		super.createRequestBean();
 
 		requestBean.setSignature(SStringUtil.toMd5(ResConfig.getAppKey(context) +

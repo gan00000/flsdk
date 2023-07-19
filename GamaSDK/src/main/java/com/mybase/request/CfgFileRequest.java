@@ -2,12 +2,12 @@ package com.mybase.request;
 
 import android.content.Context;
 
-import com.mybase.bean.BaseReqeustBean;
+import com.mybase.bean.BaseReqModel;
 
 public class CfgFileRequest extends AbsHttpRequest {
 
     private Context context;
-   private   BaseReqeustBean baseReqeustBean;
+   private BaseReqModel baseReqeustBean;
 
     public CfgFileRequest(Context context) {
         this.context = context;
@@ -16,7 +16,7 @@ public class CfgFileRequest extends AbsHttpRequest {
 
 
     @Override
-    public BaseReqeustBean createRequestBean() {
+    public BaseReqModel createRequestBean() {
         return baseReqeustBean;
     }
 
@@ -35,7 +35,7 @@ public class CfgFileRequest extends AbsHttpRequest {
 
     }
 
-    public void setBaseReqeustBean(BaseReqeustBean baseReqeustBean) {
+    public void setBaseReqeustBean(BaseReqModel baseReqeustBean) {
         this.baseReqeustBean = baseReqeustBean;
     }
 }

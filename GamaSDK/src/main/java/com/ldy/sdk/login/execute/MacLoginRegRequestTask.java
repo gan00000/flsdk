@@ -3,7 +3,7 @@ package com.ldy.sdk.login.execute;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.mybase.bean.BaseReqeustBean;
+import com.mybase.bean.BaseReqModel;
 import com.mybase.utils.PL;
 import com.mybase.utils.SStringUtil;
 import com.ldy.base.bean.SLoginType;
@@ -41,7 +41,7 @@ public class MacLoginRegRequestTask extends BaseLoginRequestTask {
     }
 
     @Override
-    public BaseReqeustBean createRequestBean() {
+    public BaseReqModel createRequestBean() {
         super.createRequestBean();
         macLoginRegRequestBean.setSignature(SStringUtil.toMd5(ResConfig.getAppKey(context) + macLoginRegRequestBean.getTimestamp() +
                 macLoginRegRequestBean.getUniqueId() + macLoginRegRequestBean.getGameCode()));

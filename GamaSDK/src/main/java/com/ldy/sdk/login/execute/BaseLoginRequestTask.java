@@ -5,8 +5,8 @@ package com.ldy.sdk.login.execute;
 
 import android.content.Context;
 
+import com.mybase.bean.BaseReqModel;
 import com.mybase.request.AbsHttpRequest;
-import com.mybase.bean.BaseReqeustBean;
 import com.mybase.utils.PL;
 import com.mybase.utils.SStringUtil;
 import com.mybase.utils.ToastUtils;
@@ -42,7 +42,7 @@ public class BaseLoginRequestTask extends AbsHttpRequest {
 
 
 	@Override
-	public BaseReqeustBean createRequestBean() {
+	public BaseReqModel createRequestBean() {
 		if (this.context == null) {
 			PL.d("execute context is null");
 			return null;

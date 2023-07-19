@@ -1,6 +1,6 @@
 package com.mybase.request;
 
-import com.mybase.bean.BaseReqeustBean;
+import com.mybase.bean.BaseReqModel;
 
 /**
  * Created by gan on 2017/2/11.
@@ -15,7 +15,7 @@ public interface ISRqeust {
     /**
      * 从各Task对象中获取对应的请求Bean。子线程执行
      */
-    BaseReqeustBean createRequestBean();
+    BaseReqModel createRequestBean();
 
     /**
      *

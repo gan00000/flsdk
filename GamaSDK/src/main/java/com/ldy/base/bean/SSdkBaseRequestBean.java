@@ -2,7 +2,7 @@ package com.ldy.base.bean;
 
 import android.content.Context;
 
-import com.mybase.bean.BaseReqeustBean;
+import com.mybase.bean.BaseReqModel;
 import com.mybase.utils.SStringUtil;
 import com.ldy.base.cfg.ResConfig;
 import com.ldy.base.utils.SdkUtil;
@@ -14,7 +14,7 @@ import com.ldy.sdk.R;
  * @author GanYuanrong
  * @date 2014年8月22日
  */
-public class SSdkBaseRequestBean extends BaseReqeustBean {
+public class SSdkBaseRequestBean extends BaseReqModel {
 
 //    private String appKey;
     private String gameCode;

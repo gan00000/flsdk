@@ -15,7 +15,7 @@ import java.util.Map;
  * Created by gan on 2016/11/24.
  */
 
-public class BaseReqeustBean extends AbsReqeustBean {
+public class BaseReqModel extends AbsReqModel {
 
     private String androidId = "";
     private String imei = "";//因Google警告，不再获取imei信息
@@ -66,9 +66,9 @@ public class BaseReqeustBean extends AbsReqeustBean {
         return versionName;
     }
 
-    public BaseReqeustBean() {}
+    public BaseReqModel() {}
 
-    public BaseReqeustBean(Context context) {
+    public BaseReqModel(Context context) {
 
         systemVersion = ApkInfoUtil.getOsVersion();
         osVersion = systemVersion;
@@ -98,7 +98,7 @@ public class BaseReqeustBean extends AbsReqeustBean {
 
         Map<String, String> postParams = new HashMap<String, String>();
         Class c = this.getClass();
-        while (c != null && c != BaseReqeustBean.class.getSuperclass()) {
+        while (c != null && c != BaseReqModel.class.getSuperclass()) {
 
             Field[] fields = c.getDeclaredFields();
             Field.setAccessible(fields, true);

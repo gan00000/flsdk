@@ -4,11 +4,11 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.text.TextUtils;
 
+import com.mybase.bean.BaseReqModel;
 import com.mybase.bean.BaseResultModel;
 import com.ldy.callback.ISReqCallBack;
 import com.mybase.http.HttpRequest;
 import com.mybase.http.HttpResponse;
-import com.mybase.bean.BaseReqeustBean;
 import com.mybase.utils.PL;
 import com.mybase.utils.SStringUtil;
 import com.google.gson.Gson;
@@ -65,7 +65,7 @@ public abstract class AbsHttpRequest implements ISRqeust {
                 if(isCancel) {
                     return null;
                 }
-                BaseReqeustBean baseReqeustBean = createRequestBean();
+                BaseReqModel baseReqeustBean = createRequestBean();
                 if (baseReqeustBean == null) {
                     return "";
                 }
@@ -138,7 +138,7 @@ public abstract class AbsHttpRequest implements ISRqeust {
                 if(isCancel) {
                     return null;
                 }
-                BaseReqeustBean baseReqeustBean = createRequestBean();
+                BaseReqModel baseReqeustBean = createRequestBean();
                 if (baseReqeustBean == null) {
                     return null;
                 }
@@ -231,7 +231,7 @@ public abstract class AbsHttpRequest implements ISRqeust {
                 if(isCancel) {
                     return null;
                 }
-                BaseReqeustBean baseReqeustBean = createRequestBean();
+                BaseReqModel baseReqeustBean = createRequestBean();
                 if (baseReqeustBean == null) {
                     return "";
                 }
@@ -287,7 +287,7 @@ public abstract class AbsHttpRequest implements ISRqeust {
     /**
      * <p>Title: doRequest</p> <p>Description: 实际网络请求</p>
      */
-    public String doRequest(BaseReqeustBean baseReqeustBean) {
+    public String doRequest(BaseReqModel baseReqeustBean) {
         if (SStringUtil.isNotEmpty(baseReqeustBean.getCompleteUrl())) {
 
             if (isGetMethod) {

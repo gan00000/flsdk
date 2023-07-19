@@ -10,7 +10,7 @@ import java.util.Map;
  * Created by gan on 2016/11/24.
  */
 
-public abstract class AbsReqeustBean implements Serializable{
+public abstract class AbsReqModel implements Serializable{
 
     //自己设置的参数，这个参数有值的话，后面的子类不在遍历字段，直接取这里的值
     private Map<String, String> requestParamsMap;

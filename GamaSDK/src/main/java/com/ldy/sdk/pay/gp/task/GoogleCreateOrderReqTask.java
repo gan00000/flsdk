@@ -2,8 +2,8 @@ package com.ldy.sdk.pay.gp.task;
 
 import android.content.Context;
 
+import com.mybase.bean.BaseReqModel;
 import com.mybase.request.AbsHttpRequest;
-import com.mybase.bean.BaseReqeustBean;
 import com.mybase.utils.SStringUtil;
 import com.mybase.utils.ToastUtils;
 import com.ldy.sdk.pay.gp.req.GooglePayCreateOrderIdReqBean;
@@ -26,7 +26,7 @@ public class GoogleCreateOrderReqTask extends AbsHttpRequest {
 
 
     @Override
-    public BaseReqeustBean createRequestBean() {
+    public BaseReqModel createRequestBean() {
 
         createOrderIdReqBean.setSignature(SStringUtil.toMd5(ResConfig.getAppKey(context)
                 + createOrderIdReqBean.getGameCode()

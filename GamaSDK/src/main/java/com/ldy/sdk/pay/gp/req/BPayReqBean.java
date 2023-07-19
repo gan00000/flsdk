@@ -2,12 +2,12 @@
 //
 //import android.content.Context;
 //
-//import com.mybase.bean.BaseReqeustBean;
+//import com.mybase.bean.BaseReqModel;
 //import com.mybase.utils.SStringUtil;
 //import com.mw.base.cfg.ResConfig;
 //import com.mw.base.utils.SdkUtil;
 //
-//public class BPayReqBean extends BaseReqeustBean {
+//public class BPayReqBean extends BaseReqModel {
 //
 //	private String gameLanguage;
 //	private String accessToken;

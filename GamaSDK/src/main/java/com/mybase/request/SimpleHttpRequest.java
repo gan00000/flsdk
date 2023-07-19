@@ -1,6 +1,6 @@
 package com.mybase.request;
 
-import com.mybase.bean.BaseReqeustBean;
+import com.mybase.bean.BaseReqModel;
 
 /**
  * Created by gan on 2017/8/29.
@@ -8,19 +8,19 @@ import com.mybase.bean.BaseReqeustBean;
 
 public class SimpleHttpRequest extends AbsHttpRequest {
 
-    private BaseReqeustBean baseReqeustBean;
+    private BaseReqModel baseReqeustBean;
 
-    public BaseReqeustBean getBaseReqeustBean() {
+    public BaseReqModel getBaseReqeustBean() {
         return baseReqeustBean;
     }
 
-    public void setBaseReqeustBean(BaseReqeustBean baseReqeustBean) {
+    public void setBaseReqeustBean(BaseReqModel baseReqeustBean) {
         this.baseReqeustBean = baseReqeustBean;
     }
 
 
     @Override
-    public BaseReqeustBean createRequestBean() {
+    public BaseReqModel createRequestBean() {
         return baseReqeustBean;
     }
 }

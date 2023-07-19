@@ -3,7 +3,7 @@ package com.ldy.base.cfg;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.mybase.bean.BaseReqeustBean;
+import com.mybase.bean.BaseReqModel;
 import com.ldy.callback.ISReqCallBack;
 import com.mybase.request.CfgFileRequest;
 import com.mybase.utils.PL;
@@ -23,7 +23,7 @@ public class ConfigRequest{
     public static void requestBaseCfg(final Context context){
 
         CfgFileRequest cfgFileRequest = new CfgFileRequest(context);
-        BaseReqeustBean baseReqeustBean = new BaseReqeustBean(context);
+        BaseReqModel baseReqeustBean = new BaseReqModel(context);
         final String gameCode = ResConfig.getGameCode(context.getApplicationContext());
 //        String mUrl = null;
 //        if (!ResConfig.isInfringement(context)) {
@@ -71,7 +71,7 @@ public class ConfigRequest{
     public static void requestAreaCodeInfo(final Context context){
 
         CfgFileRequest cfgFileRequest = new CfgFileRequest(context);
-        BaseReqeustBean baseReqeustBean = new BaseReqeustBean(context);
+        BaseReqModel baseReqeustBean = new BaseReqModel(context);
 
         String configUrl = ResConfig.getCdnPreferredUrl(context) + "sdk/config/areaCode/areaInfo.json?v=" + System.currentTimeMillis();
         baseReqeustBean.setCompleteUrl(configUrl);

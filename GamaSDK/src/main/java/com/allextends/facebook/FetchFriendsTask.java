@@ -2,7 +2,7 @@ package com.allextends.facebook;
 
 import android.content.Context;
 
-import com.mybase.bean.BaseReqeustBean;
+import com.mybase.bean.BaseReqModel;
 import com.mybase.request.AbsHttpRequest;
 import com.mybase.utils.PL;
 import com.mybase.utils.ToastUtils;
@@ -21,9 +21,9 @@ public class FetchFriendsTask extends AbsHttpRequest {
 
 
     @Override
-    public BaseReqeustBean createRequestBean() {
+    public BaseReqModel createRequestBean() {
 
-        BaseReqeustBean baseReqeustBean = new BaseReqeustBean();
+        BaseReqModel baseReqeustBean = new BaseReqModel();
         baseReqeustBean.setCompleteUrl(url);
 
         return baseReqeustBean;

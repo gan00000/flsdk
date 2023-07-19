@@ -2,7 +2,7 @@
 //
 //import android.content.Context;
 //
-//import com.mybase.bean.BaseReqeustBean;
+//import com.mybase.bean.BaseReqModel;
 //import com.mybase.utils.SStringUtil;
 //import com.gama.data.login.request.AccountInjectionRequestBean;
 //
@@ -34,7 +34,7 @@
 //
 //
 //    @Override
-//    public BaseReqeustBean createRequestBean() {
+//    public BaseReqModel createRequestBean() {
 //        super.createRequestBean();
 //
 //        requestBean.setSignature(SStringUtil.toMd5(requestBean.getAppKey() + requestBean.getTimestamp() +

@@ -3,7 +3,7 @@ package com.gama.data.login.execute;
 
 import android.app.Activity;
 
-import com.mybase.bean.BaseReqeustBean;
+import com.mybase.bean.BaseReqModel;
 import com.core.base.statusCallback.ISReqCallBack;
 import com.mybase.request.AbsHttpRequest;
 import com.mybase.utils.PL;
@@ -71,7 +71,7 @@ public class QueryFbToGamaUserIdTask {
 
                     final AbsHttpRequest absHttpRequest = new AbsHttpRequest() {
                         @Override
-                        public BaseReqeustBean createRequestBean() {
+                        public BaseReqModel createRequestBean() {
                             return sGameBaseRequestBean;
                         }
                     };
@@ -133,7 +133,7 @@ public class QueryFbToGamaUserIdTask {
 
         final AbsHttpRequest absHttpRequest = new AbsHttpRequest() {
             @Override
-            public BaseReqeustBean createRequestBean() {
+            public BaseReqModel createRequestBean() {
                 return queryGameBaseRequestBean;
             }
         };

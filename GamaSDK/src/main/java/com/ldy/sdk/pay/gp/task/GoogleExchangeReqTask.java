@@ -3,7 +3,7 @@ package com.ldy.sdk.pay.gp.task;
 import android.content.Context;
 
 import com.mybase.request.AbsHttpRequest;
-import com.mybase.bean.BaseReqeustBean;
+import com.mybase.bean.BaseReqModel;
 import com.mybase.utils.SStringUtil;
 import com.ldy.sdk.pay.gp.req.GoogleExchangeReqBean;
 import com.ldy.base.cfg.ResConfig;
@@ -24,7 +24,7 @@ public class GoogleExchangeReqTask extends AbsHttpRequest {
     }
 
     @Override
-    public BaseReqeustBean createRequestBean() {
+    public BaseReqModel createRequestBean() {
 
         baseReqeustBean.setSignature(SStringUtil.toMd5(ResConfig.getAppKey(activity)
                 + baseReqeustBean.getGameCode()
