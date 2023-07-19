@@ -2,14 +2,15 @@ package com.ldy.pub;
 
 import android.app.Activity;
 
+import com.ldy.callback.ILoginCallBack;
+import com.ldy.callback.IPayListener;
+import com.ldy.callback.ISdkCallBack;
 import com.ldy.sdk.login.model.response.SLoginResult;
 import com.mybase.bean.BaseResultModel;
 import com.ldy.callback.IGameLifeCycle;
 import com.ldy.callback.SFCallBack;
 import com.ldy.base.bean.SPayType;
 import com.ldy.sdk.ads.EventConstant;
-import com.ldy.callback.IPayListener;
-import com.ldy.callback.ILoginCallBack;
 
 import java.util.Map;
 
@@ -17,7 +18,7 @@ import java.util.Map;
  * Created by gan on 2017/2/13.
  */
 
-public interface IMWSDK extends IGameLifeCycle {
+public interface IDYSDK extends IGameLifeCycle {
 
 //    @Deprecated
 //    void initSDK(Activity activity);

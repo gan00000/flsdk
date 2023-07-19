@@ -8,13 +8,13 @@ import com.ldy.sdk.pub.MWSdkImpl;
 
 public class MWSdkFactory {
 
-    private static IMWSDK imwsdk;
-    public synchronized static IMWSDK create(){
-        if (imwsdk== null){
-            imwsdk = new MWSdkImpl();
+    private static IDYSDK IDYSDK;
+    public synchronized static IDYSDK create(){
+        if (IDYSDK == null){
+            IDYSDK = new MWSdkImpl();
         }
-        return imwsdk;
-        //return new BaseSdkImpl();
+        return IDYSDK;
+        //return new SimpleSdkImpl();
     }
 
 }

@@ -11,6 +11,9 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.ldy.base.cfg.ConfigModel;
+import com.ldy.callback.ILoginCallBack;
+import com.ldy.callback.IPayListener;
+import com.ldy.callback.ISdkCallBack;
 import com.ldy.sdk.login.model.response.SLoginResult;
 import com.mybase.bean.BaseResultModel;
 import com.ldy.callback.SFCallBack;
@@ -49,11 +52,9 @@ import com.ldy.sdk.SWebViewDialog;
 import com.ldy.sdk.ads.EventConstant;
 import com.ldy.sdk.ads.SdkEventLogger;
 import com.ldy.sdk.api.Request;
-import com.ldy.callback.IPayListener;
 import com.ldy.sdk.constant.RequestCode;
 import com.ldy.sdk.login.DialogLoginImpl;
 import com.ldy.sdk.login.ILogin;
-import com.ldy.callback.ILoginCallBack;
 import com.ldy.sdk.login.widget.v2.AccountBindPhoneLayout;
 import com.ldy.sdk.login.widget.v2.ThirdPlatBindAccountLayoutV2;
 import com.ldy.sdk.social.share.ShareUtil;
@@ -63,9 +64,9 @@ import com.allextends.huawei.HuaweiPayImpl;
 import java.util.Map;
 
 
-public class BaseSdkImpl implements IMWSDK {
+public class SimpleSdkImpl implements IDYSDK {
 
-    private static final String TAG = BaseSdkImpl.class.getSimpleName();
+    private static final String TAG = SimpleSdkImpl.class.getSimpleName();
     private static final int PERMISSION_REQUEST_CODE = 401;
     protected ILogin iLogin;
 
@@ -90,9 +91,9 @@ public class BaseSdkImpl implements IMWSDK {
 
     private ReviewInfo reviewInfo;
 
-    public BaseSdkImpl() {
+    public SimpleSdkImpl() {
 //        iLogin = ObjFactory.create(DialogLoginImpl.class);
-        PL.i("BaseSdkImpl 构造函数");
+        PL.i("SimpleSdkImpl 构造函数");
     }
 
 //    @Deprecated
@@ -145,7 +146,7 @@ public class BaseSdkImpl implements IMWSDK {
 
 //    @Override
 //    public void setGameLanguage(final Activity activity, final SGameLanguage gameLanguage) {
-//        PL.i("IMWSDK setGameLanguage:" + gameLanguage);
+//        PL.i("IDYSDK setGameLanguage:" + gameLanguage);
 //
 //        activity.runOnUiThread(new Runnable() {
 //            @Override
@@ -161,7 +162,7 @@ public class BaseSdkImpl implements IMWSDK {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                PL.i("IMWSDK registerRoleInfo");
+                PL.i("IDYSDK registerRoleInfo");
                 PL.i("roleId:" + roleId + ",roleName:" + roleName + ",roleLevel:" + roleLevel + ",vipLevel:" + vipLevel + ",severCode:" + severCode + ",serverName:" + serverName);
                 SdkUtil.saveRoleInfo(activity, roleId, roleName, roleLevel, vipLevel, severCode, serverName);//保存角色信息
                 if (iPay != null){
@@ -175,7 +176,7 @@ public class BaseSdkImpl implements IMWSDK {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                PL.i("IMWSDK checkPreRegData");
+                PL.i("IDYSDK checkPreRegData");
                 if (iPay != null){
                     iPay.queryPreRegData(activity.getApplicationContext(), iSdkCallBack);
                 }
@@ -248,7 +249,7 @@ public class BaseSdkImpl implements IMWSDK {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                PL.i("IMWSDK onResume");
+                PL.i("IDYSDK onResume");
                 if (iLogin != null) {
                     iLogin.onResume(activity);
                 }
@@ -339,7 +340,7 @@ public class BaseSdkImpl implements IMWSDK {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                PL.i("IMWSDK onStop");
+                PL.i("IDYSDK onStop");
                 if (iLogin != null) {
                     iLogin.onStop(activity);
                 }
@@ -375,14 +376,14 @@ public class BaseSdkImpl implements IMWSDK {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                PL.i("IMWSDK onRequestPermissionsResult");
+                PL.i("IDYSDK onRequestPermissionsResult");
             }
         });
     }
 
     @Override
     public void onWindowFocusChanged(final Activity activity, final boolean hasFocus) {
-        PL.i("IMWSDK onWindowFocusChanged: hasFocus -- " + hasFocus);
+        PL.i("IDYSDK onWindowFocusChanged: hasFocus -- " + hasFocus);
 //        activity.runOnUiThread(new Runnable() {
 //            @Override
 //            public void run() {
@@ -819,7 +820,7 @@ public class BaseSdkImpl implements IMWSDK {
 
                 ReviewManager manager = ReviewManagerFactory.create(activity);
 
-//                if (BaseSdkImpl.this.reviewInfo != null){
+//                if (SimpleSdkImpl.this.reviewInfo != null){
 //
 //                    Task<Void> flow = manager.launchReviewFlow(activity, reviewInfo);
 //                    flow.addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -845,7 +846,7 @@ public class BaseSdkImpl implements IMWSDK {
                         // We can get the ReviewInfo object
                         PL.i("task.isSuccessful We can get the ReviewInfo object");
                         ReviewInfo reviewInfo = task.getResult();
-                        BaseSdkImpl.this.reviewInfo = reviewInfo;
+                        SimpleSdkImpl.this.reviewInfo = reviewInfo;
                         Task<Void> flow = manager.launchReviewFlow(activity, reviewInfo);
                         flow.addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
@@ -1048,7 +1049,7 @@ public class BaseSdkImpl implements IMWSDK {
         otherPayWebViewDialog.setsWebDialogCallback(new SWebViewDialog.SWebDialogCallback() {
             @Override
             public void createFinish(SWebViewDialog sWebViewDialog, SWebView sWebView) {
-                sWebView.addJavascriptInterface(BaseSdkImpl.this,"SdkObj");
+                sWebView.addJavascriptInterface(SimpleSdkImpl.this,"SdkObj");
             }
         });
         otherPayWebViewDialog.show();*/
@@ -1063,7 +1064,7 @@ public class BaseSdkImpl implements IMWSDK {
             this.activity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    BaseSdkImpl.this.startPay(BaseSdkImpl.this.activity,SPayType.GOOGLE,BaseSdkImpl.this.cpOrderId,BaseSdkImpl.this.productId,BaseSdkImpl.this.extra,BaseSdkImpl.this.iPayListener);
+                    SimpleSdkImpl.this.startPay(SimpleSdkImpl.this.activity,SPayType.GOOGLE,SimpleSdkImpl.this.cpOrderId,SimpleSdkImpl.this.productId,SimpleSdkImpl.this.extra,SimpleSdkImpl.this.iPayListener);
                 }
             });
         }
@@ -1085,11 +1086,11 @@ public class BaseSdkImpl implements IMWSDK {
                 public void run() {
                     if (success){
                         if (iPayListener != null) {
-                            iPayListener.onPaySuccess(productId, BaseSdkImpl.this.cpOrderId);
+                            iPayListener.onPaySuccess(productId, SimpleSdkImpl.this.cpOrderId);
                         }
                     }else{
                         if (iPayListener != null) {
-                            iPayListener.onPaySuccess(productId, BaseSdkImpl.this.cpOrderId);
+                            iPayListener.onPaySuccess(productId, SimpleSdkImpl.this.cpOrderId);
                         }
                     }
 

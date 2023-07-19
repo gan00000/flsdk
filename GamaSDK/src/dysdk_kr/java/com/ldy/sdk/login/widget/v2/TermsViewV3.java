@@ -16,7 +16,7 @@ import com.ldy.base.cfg.ResConfig;
 import com.ldy.base.utils.SdkUtil;
 import com.ldy.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.ldy.sdk.R;
-import com.ldy.pub.ISdkCallBack;
+import com.ldy.callback.ISdkCallBack;
 
 /**
  * Created by GanYuanrong on 2017/2/6.

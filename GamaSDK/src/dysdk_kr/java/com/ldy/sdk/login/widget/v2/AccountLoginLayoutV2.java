@@ -27,7 +27,7 @@ import com.ldy.sdk.login.widget.SDKInputEditTextView;
 import com.ldy.sdk.login.widget.SDKInputType;
 import com.ldy.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.ldy.sdk.R;
-import com.ldy.pub.ISdkCallBack;
+import com.ldy.callback.ISdkCallBack;
 import com.ldy.sdk.utils.DialogUtil;
 
 import java.util.ArrayList;

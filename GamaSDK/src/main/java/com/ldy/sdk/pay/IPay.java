@@ -5,7 +5,7 @@ import android.content.Context;
 
 import com.ldy.callback.IPayCallBack;
 import com.ldy.callback.IGameLifeCycle;
-import com.ldy.pub.ISdkCallBack;
+import com.ldy.callback.ISdkCallBack;
 import com.ldy.sdk.pay.gp.req.PayReqBean;
 
 /**

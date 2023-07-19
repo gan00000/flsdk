@@ -13,7 +13,7 @@ import com.ldy.sdk.SBaseDialog;
 import com.ldy.sdk.login.constant.ViewType;
 import com.ldy.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.ldy.sdk.R;
-import com.ldy.pub.ISdkCallBack;
+import com.ldy.callback.ISdkCallBack;
 
 /**
  * Created by GanYuanrong on 2017/2/6.

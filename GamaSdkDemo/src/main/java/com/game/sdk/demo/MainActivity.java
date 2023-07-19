@@ -24,6 +24,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
+import com.ldy.pub.IDYSDK;
 import com.ldy.sdk.login.model.response.SLoginResult;
 import com.mybase.bean.BaseResultModel;
 import com.ldy.callback.SFCallBack;
@@ -37,8 +38,7 @@ import com.ldy.base.utils.SdkUtil;
 import com.ldy.callback.IPayListener;
 import com.ldy.sdk.demo.R;
 import com.ldy.callback.ILoginCallBack;
-import com.ldy.pub.IMWSDK;
-import com.ldy.pub.ISdkCallBack;
+import com.ldy.callback.ISdkCallBack;
 import com.ldy.pub.MWSdkFactory;
 
 import java.text.SimpleDateFormat;
@@ -48,7 +48,7 @@ public class MainActivity extends Activity {
 
     protected Button loginButton, webPayButton, googlePayBtn, shareButton, showPlatform, demo_language,
             demo_share;
-    protected IMWSDK mIMWSDK;
+    protected IDYSDK mIDYSDK;
     protected String userId;
     Activity activity;
     /**
@@ -76,17 +76,17 @@ public class MainActivity extends Activity {
         googlePayBtn = findViewById(R.id.demo_pay_google);
         demo_share = findViewById(R.id.demo_share);
 
-        mIMWSDK = MWSdkFactory.create();
+        mIDYSDK = MWSdkFactory.create();
 
         //在游戏Activity的onCreate生命周期中调用
-        mIMWSDK.onCreate(this);
+        mIDYSDK.onCreate(this);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 //登陆接口 ILoginCallBack为登录成功后的回调
-                mIMWSDK.login(MainActivity.this, new ILoginCallBack() {
+                mIDYSDK.login(MainActivity.this, new ILoginCallBack() {
                     @Override
                     public void onLogin(SLoginResult sLoginResponse) {
                         handleLoginResponse(sLoginResponse);
@@ -112,7 +112,7 @@ public class MainActivity extends Activity {
 //                com.game.superand.2usd
 //                String skuId = "com.miaoou.6jin";
                 String skuId = "com_xinhai_chmxt_3card";
-                mIMWSDK.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(),skuId, "xxxx","role_id_1","role_name","role_level","vipLevel",serverCode, serverName, new IPayListener() {
+                mIDYSDK.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(),skuId, "xxxx","role_id_1","role_name","role_level","vipLevel",serverCode, serverName, new IPayListener() {
 
                     @Override
                     public void onPaySuccess(String productId, String cpOrderId) {
@@ -125,7 +125,7 @@ public class MainActivity extends Activity {
                     }
 
                 });
-//                mIMWSDK.checkPreRegData(activity, new ISdkCallBack() {
+//                mIDYSDK.checkPreRegData(activity, new ISdkCallBack() {
 //                    @Override
 //                    public void success() {
 ////                        PL.d("checkPreRegData success");
@@ -145,7 +145,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 String skuId = "com.miaoou.6jin";
-                mIMWSDK.pay(MainActivity.this, SPayType.HUAWEI, "" + System.currentTimeMillis(),skuId, "xxxx", "role_id_1","role_name","role_level","vipLevel",serverCode, serverName, new IPayListener() {
+                mIDYSDK.pay(MainActivity.this, SPayType.HUAWEI, "" + System.currentTimeMillis(),skuId, "xxxx", "role_id_1","role_name","role_level","vipLevel",serverCode, serverName, new IPayListener() {
 
                     @Override
                     public void onPaySuccess(String productId, String cpOrderId) {
@@ -165,7 +165,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 String skuId = "com.miaoou.6jin";
-                mIMWSDK.pay(MainActivity.this, SPayType.QooApp, "" + System.currentTimeMillis(),skuId, "xxxx", "role_id_1","role_name","role_level","vipLevel",serverCode, serverName, new IPayListener() {
+                mIDYSDK.pay(MainActivity.this, SPayType.QooApp, "" + System.currentTimeMillis(),skuId, "xxxx", "role_id_1","role_name","role_level","vipLevel",serverCode, serverName, new IPayListener() {
 
                     @Override
                     public void onPaySuccess(String productId, String cpOrderId) {
@@ -186,7 +186,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 String skuId = "com_xinhai_chmxt_1usd";
-                mIMWSDK.pay(MainActivity.this, SPayType.WEB, "" + System.currentTimeMillis(),skuId, "xxxx", "role_id_1","role_name","role_level","vipLevel","1001", serverName, new IPayListener() {
+                mIDYSDK.pay(MainActivity.this, SPayType.WEB, "" + System.currentTimeMillis(),skuId, "xxxx", "role_id_1","role_name","role_level","vipLevel","1001", serverName, new IPayListener() {
 
                     @Override
                     public void onPaySuccess(String productId, String cpOrderId) {
@@ -207,7 +207,7 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
 
                 //重要提示：如果在应用内评价流程中出现错误，请勿通知用户或更改应用的正常用户流。调用 onComplete 后，继续执行应用的正常用户流。
-                mIMWSDK.requestStoreReview(MainActivity.this, new SFCallBack() {
+                mIDYSDK.requestStoreReview(MainActivity.this, new SFCallBack() {
                     @Override
                     public void success(Object result, String msg) {
                         //评价成功
@@ -230,7 +230,7 @@ public class MainActivity extends Activity {
         demo_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mIMWSDK.share(MainActivity.this, "#獲得最多好友推薦萬靈應召而來","集結東西方神話英靈《萬靈召喚師》卡牌RPG，以高養成自由度為核心，無限搭配的陣營組合，掌握六種無法想象的強大力量，召喚師們踏上拯救三界的道路！","https://member.mmhyplayer.com/sdk/share/wlzhs/index.html", new ISdkCallBack() {
+                mIDYSDK.share(MainActivity.this, "#獲得最多好友推薦萬靈應召而來","集結東西方神話英靈《萬靈召喚師》卡牌RPG，以高養成自由度為核心，無限搭配的陣營組合，掌握六種無法想象的強大力量，召喚師們踏上拯救三界的道路！","https://member.mmhyplayer.com/sdk/share/wlzhs/index.html", new ISdkCallBack() {
                     @Override
                     public void success() {
                         PL.i("share success");
@@ -247,7 +247,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.share_line).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mIMWSDK.shareLine(MainActivity.this, "★胡宇威盛裝代言★邀你前往異時空三國世界！重新定義三國名將，在鬼武時空大顯神威！https://member.dustyx.com/sdk/share/gwsg/index.html", new ISdkCallBack() {
+                mIDYSDK.shareLine(MainActivity.this, "★胡宇威盛裝代言★邀你前往異時空三國世界！重新定義三國名將，在鬼武時空大顯神威！https://member.dustyx.com/sdk/share/gwsg/index.html", new ISdkCallBack() {
                     @Override
                     public void success() {
                         PL.i("share success");
@@ -259,7 +259,7 @@ public class MainActivity extends Activity {
                     }
                 });
 
-//                mIMWSDK.openFbUrl(MainActivity.this,"https://www.facebook.com/groups/431250895792522");
+//                mIDYSDK.openFbUrl(MainActivity.this,"https://www.facebook.com/groups/431250895792522");
 
 //                if (Build.VERSION.SDK_INT >= 33) {
 //                    //todo 现在还没13系统设备，无法测试先注释
@@ -271,7 +271,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.logout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mIMWSDK.switchLogin(activity, new ILoginCallBack() {
+                mIDYSDK.switchLogin(activity, new ILoginCallBack() {
                     @Override
                     public void onLogin(SLoginResult sLoginResponse) {
                         handleLoginResponse(sLoginResponse);
@@ -284,7 +284,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View view) {
 
-                mIMWSDK.showBindPhoneView(MainActivity.this, new SFCallBack<BaseResultModel>() {
+                mIDYSDK.showBindPhoneView(MainActivity.this, new SFCallBack<BaseResultModel>() {
                     @Override
                     public void success(BaseResultModel result, String msg) {
                         //todo绑定手机成功
@@ -303,7 +303,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View view) {
 
-                mIMWSDK.showUpgradeAccountView(MainActivity.this, new SFCallBack<SLoginResult>() {
+                mIDYSDK.showUpgradeAccountView(MainActivity.this, new SFCallBack<SLoginResult>() {
                     @Override
                     public void success(SLoginResult sLoginResponse, String msg) {
                         //账号升级成功
@@ -319,7 +319,7 @@ public class MainActivity extends Activity {
             }
         });
 
-//        mIMWSDK.requestVfCode(this, "86", "13622843403", new SFCallBack<BaseResultModel>() {
+//        mIDYSDK.requestVfCode(this, "86", "13622843403", new SFCallBack<BaseResultModel>() {
 //            @Override
 //            public void success(BaseResultModel responseModel, String result) {
 //                //获取手机验证码成功
@@ -334,7 +334,7 @@ public class MainActivity extends Activity {
 //            }
 //        });
 //
-//        mIMWSDK.requestBindPhone(this, "86", "13622843403", "111111", new SFCallBack<SLoginResult>() {
+//        mIDYSDK.requestBindPhone(this, "86", "13622843403", "111111", new SFCallBack<SLoginResult>() {
 //            @Override
 //            public void success(SLoginResult sLoginResponse, String result) {
 //                if (sLoginResponse != null) {
@@ -351,7 +351,7 @@ public class MainActivity extends Activity {
 //            }
 //        });
 //
-//        mIMWSDK.requestUpgradeAccount(this, "xxx", "pwd", new SFCallBack<SLoginResult>() {
+//        mIDYSDK.requestUpgradeAccount(this, "xxx", "pwd", new SFCallBack<SLoginResult>() {
 //
 //            @Override
 //            public void success(SLoginResult result, String msg) {
@@ -367,14 +367,14 @@ public class MainActivity extends Activity {
         findViewById(R.id.cs).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mIMWSDK.openCs(MainActivity.this);
+                mIDYSDK.openCs(MainActivity.this);
             }
         });
         findViewById(R.id.checkGoogleServer).setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.P)
             @Override
             public void onClick(View view) {
-                mIMWSDK.checkGooglePlayServicesAvailable(MainActivity.this);
+                mIDYSDK.checkGooglePlayServicesAvailable(MainActivity.this);
                 ActivityManager mActivityManager = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
                 if (mActivityManager.isBackgroundRestricted()){
                     ToastUtils.toast(activity,"isBackgroundRestricted true");
@@ -440,7 +440,7 @@ public class MainActivity extends Activity {
 //                            dialog.show();
 
 
-            mIMWSDK.registerRoleInfo(MainActivity.this, roleId, roleName, roleLevel, vipLevel, serverCode, serverName);
+            mIDYSDK.registerRoleInfo(MainActivity.this, roleId, roleName, roleLevel, vipLevel, serverCode, serverName);
         } else {
             PL.i("从登录界面返回");
             AlertDialog.Builder builder;
@@ -472,7 +472,7 @@ public class MainActivity extends Activity {
     protected void onResume() {
         super.onResume();
         PL.i("activity onResume");
-        mIMWSDK.onResume(this);
+        mIDYSDK.onResume(this);
     }
 
 
@@ -480,14 +480,14 @@ public class MainActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        mIMWSDK.onActivityResult(this, requestCode, resultCode, data);
+        mIDYSDK.onActivityResult(this, requestCode, resultCode, data);
 
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        mIMWSDK.onPause(this);
+        mIDYSDK.onPause(this);
         PL.i("activity onPause");
     }
 
@@ -495,27 +495,27 @@ public class MainActivity extends Activity {
     protected void onStop() {
         super.onStop();
         PL.i("activity onStop");
-        mIMWSDK.onStop(this);
+        mIDYSDK.onStop(this);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         PL.i("activity onDestroy");
-        mIMWSDK.onDestroy(this);
+        mIDYSDK.onDestroy(this);
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         PL.i("activity onRequestPermissionsResult");
-        mIMWSDK.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
+        mIDYSDK.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
     }
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        mIMWSDK.onWindowFocusChanged(this, hasFocus);
+        mIDYSDK.onWindowFocusChanged(this, hasFocus);
     }
 
     @Override

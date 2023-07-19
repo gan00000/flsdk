@@ -12,7 +12,7 @@ import com.mybase.utils.PL;
 import com.mybase.utils.ToastUtils;
 import com.ldy.sdk.R;
 import com.ldy.pub.ThirdPartyType;
-import com.ldy.pub.ISdkCallBack;
+import com.ldy.callback.ISdkCallBack;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

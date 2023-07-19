@@ -15,7 +15,7 @@ android {
             //定义一个文件
 
             if (outputFileName != null && outputFileName.contains("release") && outputFileName.endsWith('.aar')) {
-                outputFileName = "MWSDK-"  + variant.flavorName.toLowerCase() + "-release-" + sdk_version + ".aar"
+                outputFileName = "DYSdk-"  + variant.flavorName.toLowerCase() + "-release-" + sdk_version + ".aar"
             }
         }
     }

@@ -22,7 +22,7 @@ import com.mybase.utils.PL;
 import com.mybase.utils.SStringUtil;
 import com.mybase.utils.ThreadUtil;
 import com.mybase.utils.ToastUtils;
-import com.ldy.pub.ISdkCallBack;
+import com.ldy.callback.ISdkCallBack;
 import com.ldy.sdk.pay.IPay;
 import com.ldy.callback.IPayCallBack;
 import com.ldy.sdk.pay.gp.req.GooglePayCreateOrderIdReqBean;

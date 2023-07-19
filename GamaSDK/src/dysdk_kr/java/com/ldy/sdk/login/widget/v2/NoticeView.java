@@ -11,7 +11,7 @@ import com.ldy.base.widget.SWebView;
 import com.ldy.sdk.R;
 import com.ldy.sdk.SWebViewLayout;
 import com.ldy.sdk.login.widget.SLoginBaseRelativeLayout;
-import com.ldy.pub.ISdkCallBack;
+import com.ldy.callback.ISdkCallBack;
 
 /**
  * Created by GanYuanrong on 2017/2/6.
