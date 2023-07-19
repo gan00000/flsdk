@@ -6,7 +6,7 @@ import com.ldy.sdk.pub.MWSdkImpl;
  * Created by GanYuanrong on 2017/2/13.
  */
 
-public class MWSdkFactory {
+public class DYSdkFactory {
 
     private static IDYSDK IDYSDK;
     public synchronized static IDYSDK create(){

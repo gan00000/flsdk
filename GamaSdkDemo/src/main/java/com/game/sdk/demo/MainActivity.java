@@ -39,7 +39,7 @@ import com.ldy.callback.IPayListener;
 import com.ldy.sdk.demo.R;
 import com.ldy.callback.ILoginCallBack;
 import com.ldy.callback.ISdkCallBack;
-import com.ldy.pub.MWSdkFactory;
+import com.ldy.pub.DYSdkFactory;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -76,7 +76,7 @@ public class MainActivity extends Activity {
         googlePayBtn = findViewById(R.id.demo_pay_google);
         demo_share = findViewById(R.id.demo_share);
 
-        mIDYSDK = MWSdkFactory.create();
+        mIDYSDK = DYSdkFactory.create();
 
         //在游戏Activity的onCreate生命周期中调用
         mIDYSDK.onCreate(this);
