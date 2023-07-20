@@ -55,7 +55,7 @@ public class MainActivity extends Activity {
      * 同步角色信息(以下均为测试信息)
      */
     String roleId = "20001000402"; //角色id
-    String roleName = "貪婪聖殿"; //角色名
+    String roleName = "你好"; //角色名
     String roleLevel = "106"; //角色等级
     String vipLevel = "5"; //角色vip等级
     String serverCode = "1"; //角色伺服器id
