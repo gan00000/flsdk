@@ -22,7 +22,7 @@
 # Your application may contain more items that need to be preserved;
 # typically classes that are dynamically created using Class.forName:
 
--keep public class com.ldy.sdk.pub.** { *; }
+-keep public class com.ldy.pub.** { *; }
 -keep public class * extends java.lang.Enum { *; }
 -keep public class * extends com.mybase.bean.BaseResultModel { *; }
 -keep public class * extends com.mybase.bean.AbsReqModel { *; }
