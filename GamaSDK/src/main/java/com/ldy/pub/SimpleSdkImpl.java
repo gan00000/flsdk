@@ -46,8 +46,8 @@ import com.ldy.sdk.BuildConfig;
 import com.ldy.sdk.R;
 import com.ldy.sdk.SBaseDialog;
 import com.ldy.sdk.constant.ResultCode;
-import com.ldy.sdk.MWBaseWebActivity;
-import com.ldy.sdk.pay.MWWebPayActivity;
+import com.ldy.sdk.DyBaseWebActivity;
+import com.ldy.sdk.pay.DyWebPayActivity;
 import com.ldy.sdk.SWebViewDialog;
 import com.ldy.sdk.ads.EventConstant;
 import com.ldy.sdk.ads.SdkEventLogger;
@@ -197,7 +197,7 @@ public class SimpleSdkImpl implements IDYSDK {
                     SGameBaseRequestBean sGameBaseRequestBean = new SGameBaseRequestBean(activity);
                     sGameBaseRequestBean.setCompleteUrl(configModel.getUrl().getCsUrl());
 
-                    Intent csIntent = MWBaseWebActivity.create(activity,"", sGameBaseRequestBean.createPreRequestUrl());
+                    Intent csIntent = DyBaseWebActivity.create(activity,"", sGameBaseRequestBean.createPreRequestUrl());
                     activity.startActivity(csIntent);
                 }else {
                     PL.i("获取不到客服地址");
@@ -773,9 +773,9 @@ public class SimpleSdkImpl implements IDYSDK {
 
     private void doGooglePay(Activity activity, GooglePayCreateOrderIdReqBean googlePayCreateOrderIdReqBean) {
         //            googlePay(activity, cpOrderId, productId, extra);
-//        Intent i = new Intent(activity, GooglePayActivity2.class);
-//        i.putExtra(GooglePayActivity2.GooglePayReqBean_Extra_Key, googlePayCreateOrderIdReqBean);
-//        activity.startActivityForResult(i, GooglePayActivity2.GooglePayReqeustCode);
+//        Intent i = new Intent(activity, GgPayAct.class);
+//        i.putExtra(GgPayAct.GooglePayReqBean_Extra_Key, googlePayCreateOrderIdReqBean);
+//        activity.startActivityForResult(i, GgPayAct.GooglePayReqeustCode);
 
         //设置Google储值的回调
         iPay.setIPayCallBack(new IPayCallBack() {
@@ -1031,7 +1031,7 @@ public class SimpleSdkImpl implements IDYSDK {
 
         String webUrl = bean.createPreRequestUrl();
 
-        Intent intent = MWWebPayActivity.create(activity,"",webUrl,bean.getCpOrderId(),bean.getProductId(),bean.getExtra());
+        Intent intent = DyWebPayActivity.create(activity,"",webUrl,bean.getCpOrderId(),bean.getProductId(),bean.getExtra());
         activity.startActivityForResult(intent, RequestCode.RequestCode_Web_Pay);
 
      /*   otherPayWebViewDialog = new SWebViewDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);

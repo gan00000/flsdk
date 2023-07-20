@@ -11,7 +11,7 @@ import com.ldy.sdk.pay.IPayFactory;
 import com.ldy.sdk.pay.gp.req.GooglePayCreateOrderIdReqBean;
 import com.ldy.sdk.pay.gp.res.BasePayBean;
 
-public class GooglePayActivity2 extends SBaseActivity {
+public class GgPayAct extends SBaseActivity {
 
 	public static final String GooglePayReqBean_Extra_Key = "GooglePayReqBean_Extra_Key";
 	public static final int GooglePayReqeustCode = 90;

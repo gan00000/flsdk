@@ -218,7 +218,7 @@ public class ResConfig {
     public static String getConfigInAssetsProperties(Context context, String key) {
 
         if (properties == null) {
-            properties = FileUtil.readAssetsPropertiestFile(context, "mwsdk/gameconfig.properties");
+            properties = FileUtil.readAssetsPropertiestFile(context, "ldy/ldycon.properties");
             PL.i(TAG, "获取游戏assets配置文件: " + (properties != null ? properties.toString() : "失败"));
         }
         if (properties == null) {

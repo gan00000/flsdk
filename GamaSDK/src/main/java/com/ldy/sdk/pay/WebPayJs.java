@@ -7,9 +7,9 @@ import com.mybase.utils.PL;
 
 public class WebPayJs {
 
-    MWWebPayActivity activity;
+    DyWebPayActivity activity;
 
-    public WebPayJs(MWWebPayActivity activity) {
+    public WebPayJs(DyWebPayActivity activity) {
         this.activity = activity;
     }
 

@@ -15,7 +15,7 @@ import com.ldy.base.widget.SWebView;
  * Created by GanYuanrong on 2016/12/1.
  */
 
-public class MWBaseWebActivity extends SBaseSdkActivity {
+public class DyBaseWebActivity extends SBaseSdkActivity {
 
     public static final String PLAT_WEBVIEW_URL = "PLAT_WEBVIEW_URL";
     public static final String PLAT_WEBVIEW_TITLE = "PLAT_WEBVIEW_TITLE";
@@ -30,7 +30,7 @@ public class MWBaseWebActivity extends SBaseSdkActivity {
 
     public static Intent create(Activity activity, String title, String url){
 
-        Intent intent = new Intent(activity, MWBaseWebActivity.class);
+        Intent intent = new Intent(activity, DyBaseWebActivity.class);
         intent.putExtra(PLAT_WEBVIEW_TITLE,title);
         intent.putExtra(PLAT_WEBVIEW_URL,url);
         return intent;

@@ -90,7 +90,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
             mActivity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    if (mBillingHelper != null) { //关闭页面前先移除callback，否则游戏的onResume会先于 GooglePayActivity2 的onDestroy执行
+                    if (mBillingHelper != null) { //关闭页面前先移除callback，否则游戏的onResume会先于 GgPayAct 的onDestroy执行
 //            mBillingHelper.removeBillingHelperStatusCallback(this);
                     }
                     BasePayBean payBean = new BasePayBean();
@@ -151,7 +151,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
                 @Override
                 public void run() {
 
-                    if (mBillingHelper != null) { //关闭页面前先移除callback，否则游戏的onResume会先于 GooglePayActivity2 的onDestroy执行
+                    if (mBillingHelper != null) { //关闭页面前先移除callback，否则游戏的onResume会先于 GgPayAct 的onDestroy执行
 //            mBillingHelper.removeBillingHelperStatusCallback(this);
                     }
                     if (loadingDialog != null) {

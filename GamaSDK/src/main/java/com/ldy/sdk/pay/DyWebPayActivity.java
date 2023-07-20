@@ -11,7 +11,7 @@ import com.ldy.sdk.pay.gp.req.GooglePayCreateOrderIdReqBean;
 import com.ldy.sdk.pay.gp.res.BasePayBean;
 import com.mybase.utils.PL;
 import com.mybase.utils.ToastUtils;
-import com.ldy.sdk.MWBaseWebActivity;
+import com.ldy.sdk.DyBaseWebActivity;
 import com.ldy.sdk.R;
 import com.ldy.sdk.constant.ResultCode;
 
@@ -19,7 +19,7 @@ import com.ldy.sdk.constant.ResultCode;
  * Created by GanYuanrong on 2016/12/1.
  */
 
-public class MWWebPayActivity extends MWBaseWebActivity {
+public class DyWebPayActivity extends DyBaseWebActivity {
 
     private View backView;
 
@@ -32,7 +32,7 @@ public class MWWebPayActivity extends MWBaseWebActivity {
 
     public static Intent create(Activity activity, String title, String url, String cpOrderId, String productId, String extra){
 
-        Intent intent = new Intent(activity, MWWebPayActivity.class);
+        Intent intent = new Intent(activity, DyWebPayActivity.class);
         intent.putExtra(PLAT_WEBVIEW_TITLE,title);
         intent.putExtra(PLAT_WEBVIEW_URL,url);
         intent.putExtra("mw_cpOrderId",cpOrderId);

@@ -1,20 +1,20 @@
 <resources>
 
-    <string name="text_phone_bind">Binding phone</string>
-    <string name="text_phone_area_code">Area code</string>
-    <string name="text_phone_input_hint">Enter your phone number</string>
-    <string name="text_phone_hasbind_tips">You have successfully bound, this is your current bound cell phone number</string>
-    <string name="text_area_code_not_empty">Cell phone area code cannot be empty</string>
-    <string name="text_phone_not_empty">Cell phone number cannot be empty</string>
-    <string name="text_phone_not_match">Wrong format of cell phone number</string>
-    <string name="text_vfcode_has_send">Code has been sent</string>
-    <string name="text_phone_bind_success">Cell phone binding success</string>
-    <string name="text_has_bind_tips_google">Account has been upgraded</string>
-    <string name="text_has_bind_tips_fb">Account has been upgraded</string>
-    <string name="text_has_bind_tips_guest">Account has been upgraded</string>
-    <string name="text_has_bind_tips_line">Account has been upgraded</string>
-    <string name="text_has_bind_tips_mw">Member Account</string>
-    <string name="text_notice">Announcement</string>
-    <string name="text_waiting">等待中...</string>
+    <string name="text_phone_bind">핸드폰 연동하기</string>
+    <string name="text_phone_area_code">지역 번호</string>
+    <string name="text_phone_input_hint">핸드폰 번호를 입력하세요</string>
+    <string name="text_phone_hasbind_tips">성공적으로 연동되었습니다. 현재 연동된 휴대폰 번호입니다</string>
+    <string name="text_area_code_not_empty">휴대폰 지역 번호는 비워둘 수 없습니다</string>
+    <string name="text_phone_not_empty">휴대폰 번호는 비워둘 수 없습니다</string>
+    <string name="text_phone_not_match">휴대폰 번호 형식이 잘못되었습니다</string>
+    <string name="text_vfcode_has_send">인증번호 전송되었습니다</string>
+    <string name="text_phone_bind_success">휴대폰 연동 성공</string>
+    <string name="text_has_bind_tips_google">Google은 이미 회원 계정으로 연동되었습니다</string>
+    <string name="text_has_bind_tips_fb">Facebook이 회원 계정으로 연동되었습니다</string>
+    <string name="text_has_bind_tips_guest">게스트 계정은 이미 회원 계정으로 연동되었습니다</string>
+    <string name="text_has_bind_tips_line">LINE은 이미 회원 계정으로 연동되었습니다</string>
+    <string name="text_has_bind_tips_mw">회원계정</string>
+    <string name="text_notice">공지</string>
+    <string name="text_waiting">기다리는 중...</string>
 
 </resources>

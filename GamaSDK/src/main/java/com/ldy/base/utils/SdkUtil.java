@@ -962,7 +962,7 @@ public class SdkUtil {
 
         String areaJson = getAreaCodeInfo(context);//先读取远程下载
         if (SStringUtil.isEmpty(areaJson)){
-            areaJson = FileUtil.readAssetsTxtFile(context, "mwsdk/areaInfo");
+            areaJson = FileUtil.readAssetsTxtFile(context, "ldy/areaInfo");
         }
         if (SStringUtil.isEmpty(areaJson)){
             return null;
