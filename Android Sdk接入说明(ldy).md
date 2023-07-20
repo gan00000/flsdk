@@ -9,23 +9,17 @@
 	5. [切换账号登录接口](#18)
 	5. [充值接口](#7)
 	6. [事件埋点接口](#8)
-	7. [应用内评分接口](#9)
 	8. [fb分享接口](#11)
-	9. [line分享接口](#12)
 	10. [客服接口](#181)
 	10. [显示sdk内部绑定手机页面](#13)
 	11. [显示sdk内部升级账号页面](#14)
-	12. [请求获取手机验证码](#15)
-	13. [请求绑定手机](#16)
-	14. [请求账号升级](#17)
 	9. [上架Google Play相关注意的问题](#10)
 
 
 ----------------
 
 * <h2 id="100">SDK接入配置</h2> 
-说明：由于Google 2015年6月不再支持Eclipse，https://developer.android.com/studio/tools/sdk/eclipse-adt.html
-，Android 24之后的版本SDK和Google play servcie库，google support v4 v7库，还有很多第三方库都已经不支持Eclipse，固本SDK不支持Eclipse，请使用AndroidStudio接入。
+说明：请使用AndroidStudio接入。
 
 *  设置项目顶层的build.gradle(可请参照demo中配置)
 
@@ -37,10 +31,8 @@
 		 jcenter()
     }
     dependencies {
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
         
-        classpath 'com.android.tools.build:gradle:7.2.2'
+        classpath 'com.android.tools.build:gradle:8.0.2'
         classpath 'com.google.gms:google-services:4.3.14'// google-services plugin
         // Add the Crashlytics Gradle plugin.
         classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.2'
@@ -97,13 +89,18 @@
 	            versionName "2.0"
 	            
 	            //设置参数，参数值由对接人员提供
-	            resValue "string", "scheme", "对接人员提供"
-	            resValue "string", "facebook_app_id", "对接人员提供"
-	            resValue "string", "facebook_client_token", "对接人员提供"
-	            resValue "string", "facebook_authorities", "对接人员提供"
-	            resValue "string", "fb_login_protocol_scheme", "对接人员提供"
-	            resValue "string", "line_channelId", "对接人员提供"
-	            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow"
+	            resValue "string", "sdk_game_code", "xxxxx"
+	            resValue "string", "sdk_app_key", "xxxxx"
+	            resValue "string", "sdk_more_language", "false"
+	            resValue "string", "sdk_af_dev_key", "xxxxx"
+	            resValue "string", "sdk_default_server_language", "xxxxx"
+            
+	            resValue "string", "facebook_app_id", "xxxxx"
+	            resValue "string", "facebook_client_token", "xxxxx"
+	            resValue "string", "facebook_authorities", "xxxxx"
+	            resValue "string", "fb_login_protocol_scheme", "xxxxx"
+	            resValue "string", "line_channelId", "xxxxx"
+	            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google
 
 
 	        }
@@ -167,8 +164,6 @@
 	    //line
 	    implementation 'com.linecorp:linesdk:5.0.1'
 	
-	    implementation 'com.github.bumptech.glide:glide:4.11.0'
-	    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 	    //af
 	    implementation 'com.appsflyer:af-android-sdk:6.9.0'
 	    implementation 'com.android.installreferrer:installreferrer:2.2'
@@ -183,8 +178,6 @@
 	```
 
 
-* 添加游戏配置文件，在您的项目中，打开 your_app | **assets下创建mwsdk目录并添加 gameconfig.propertie（该文件SDK对接人员提供）**
-
 *   添加游戏配置文件，在您的项目中，打开 your_app根目录下添加**google-services.json配置文件（该文件SDK对接人员提供）**
 
 
@@ -193,8 +186,8 @@
 <h2 id="101">SDK api说明</h2>
 以下为sdk api使用示例,具体请查看SDK demo 
 
-* <h3 id="1">实例SDK接口IMWSDK对象</h3>  
-`mIMWSDK = MWSdkFactory.create(); ` 
+* <h3 id="1">实例SDK接口对象</h3>  
+`mIDYSDK = DYSdkFactory.create(); ` 
  
 * <h3 id="2">Activity生命周期和初始化SDK</h3> 
 
@@ -205,17 +198,17 @@
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		mIMWSDK = MWSdkFactory.create();
+		mIDYSDK = DYSdkFactory.create();
        
         //在游戏Activity的onCreate生命周期中调用
-        mIMWSDK.onCreate(this);
+        mIDYSDK.onCreate(this);
 	    
 	}
    @Override
     protected void onResume() {
         super.onResume();
         在游戏Activity中调用该方法
-        mIMWSDK.onResume(this);
+        mIDYSDK.onResume(this);
     }
 
 
@@ -223,14 +216,14 @@
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 		//在游戏Activity中调用该方法
-        mIMWSDK.onActivityResult(this, requestCode, resultCode, data);
+        mIDYSDK.onActivityResult(this, requestCode, resultCode, data);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         //在游戏Activity中调用该方法
-        mIMWSDK.onPause(this);
+        mIDYSDK.onPause(this);
         
     }
 
@@ -238,21 +231,21 @@
     protected void onStop() {
         super.onStop();
         //在游戏Activity中调用该方法
-        mIMWSDK.onStop(this);
+        mIDYSDK.onStop(this);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         //在游戏Activity中调用该方法
-        mIMWSDK.onDestroy(this);
+        mIDYSDK.onDestroy(this);
     } 
     
      @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         //在游戏Activity中调用该方法
-        mIMWSDK.onWindowFocusChanged(this,hasFocus);
+        mIDYSDK.onWindowFocusChanged(this,hasFocus);
     }
     
      /**
@@ -265,7 +258,7 @@
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) { 
     	super.onRequestPermissionsResult(requestCode, permissions, grantResults);
       	//在游戏Activity中调用该方法
-      	mIMWSDK.onRequestPermissionsResult(this,requestCode,permissions,grantResults);
+      	mIDYSDK.onRequestPermissionsResult(this,requestCode,permissions,grantResults);
     } 
     
      
@@ -291,7 +284,7 @@
 
      
   	//sample:
-	mIMWSDK.registerRoleInfo(this, "roleid_1", "roleName", "rolelevel", "vip", "s1001", "serverName");
+	mIDYSDK.registerRoleInfo(this, "roleid_1", "roleName", "rolelevel", "vip", "s1001", "serverName");
 	
 
 	```
@@ -310,7 +303,7 @@
  	
  	
 	//sample:
-	mIFLSDK.login(MainActivity.this, new ILoginCallBack() {
+	mIDYSDK.login(MainActivity.this, new ILoginCallBack() {
 	    @Override
 	    public void onLogin(SLoginResponse sLoginResponse) {
 	        if (sLoginResponse != null){
@@ -358,7 +351,7 @@
 
  
     //sample:
-    mIMWSDK.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(),skuId, "xxxx","role_id_1","role_name","role_level","vipLevel",serverCode, serverName, new IPayListener() {
+    mIDYSDK.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(),skuId, "xxxx","role_id_1","role_name","role_level","vipLevel",serverCode, serverName, new IPayListener() {
                  
 
             @Override
@@ -386,53 +379,20 @@
      * @param activity
      * @param eventName 事件名称
      */
-    void trackEvent(Activity activity, EventConstant.EventName eventName);
     
-    游戏接入需要对下列几个事件进行埋点：
-    CHECK_PERMISSIONS,  检查权限(如果有该操作，没有不用接)
-    CHECK_UPDATE, 检查更新
-    CHECK_RESOURCES, 检查游戏资源
-    SELECT_SERVER,	选择伺服器
-    CREATE_ROLE,		创建角色
-    START_GUIDE, 开始新手引导
-    COMPLETE_GUIDE,  完成新手引导
-    
-    此接口可接入常用的SDK埋点事件，如有特殊的另外事件需要进行埋点，使用 ：
     public void trackEvent(Activity activity, String eventName)
 
 	sample:
 	
 	//埋点检查更新事件
-    mIMWSDK.trackEvent(MainActivity.this, EventConstant.EventName.CHECK_UPDATE);
+    mIDYSDK.trackEvent(MainActivity.this, EventConstant.EventName.CHECK_UPDATE);
 	
 	
 	
 	
 	
 	```
-	
-* <h3 id="9">应用内评分接口</h3>  
-	
-	```
-	接口声明：
-	public void requestStoreReview(Activity activity, SFCallBack sfCallBack);
-	
-	示例：
-	
-	//重要提示：如果在应用内评价流程中出现错误，请勿通知用户或更改应用的正常用户流。调用 onComplete 后，继续执行应用的正常用户流。
-    mIMWSDK.requestStoreReview(MainActivity.this, new SFCallBack() {
-        @Override
-        public void success(Object result, String msg) {
-            //评价成功
-        }
-
-        @Override
-        public void fail(Object result, String msg) {
-            //评价失败
-        }
-    });
-	```
-	
+		
 * <h3 id="11">fb分享接口</h3>   
 	
 	```
@@ -450,7 +410,7 @@
 
 	sample:
 	
-	mIMWSDK.share(MainActivity.this, "#萬靈召喚師","2022首款卡牌大作【萬靈召喚師】，爆笑來襲！從東方文明到西方文明的羈絆，從神族到魔族的對抗，一段奇妙的神仙冒險之旅就此展開！","https://static-resource.meowplayer.com/share/index.html", new ISdkCallBack() {
+	mIDYSDK.share(MainActivity.this, "#萬靈召喚師","2022首款卡牌大作【萬靈召喚師】，爆笑來襲！從東方文明到西方文明的羈絆，從神族到魔族的對抗，一段奇妙的神仙冒險之旅就此展開！","https://static-resource.meowplayer.com/share/index.html", new ISdkCallBack() {
                     @Override
                     public void success() {
                         Log.i("tag","share success");
@@ -464,33 +424,7 @@
                 
 	
 	```
-	
-* <h3 id="12">line分享接口</h3>   
-	
-	```
-	/**
-     * line分享
-     * @param activity
-     * @param content 分享的内容
-     * @param iSdkCallBack  分享回调
-     */    
-     void shareLine(final Activity activity, final String content, final ISdkCallBack iSdkCallBack);
-    
-	sample:
-	
-	mIMWSDK.shareLine(MainActivity.this, "★胡宇威盛裝代言★邀你前往異時空三國世界！重新定義三國名將，在鬼武時空大顯神威！https://member.dustyx.com/sdk/share/gwsg/index.html", new ISdkCallBack() {
-                    @Override
-                    public void success() {
-                        PL.i("share success");
-                    }
-
-                    @Override
-                    public void failure() {
-                        PL.i("share failure");
-                    }
-                });
-	```
-	
+		
 * <h3 id="181">客服接口</h3>   
 	
 	```
@@ -511,7 +445,7 @@
     public void showBindPhoneView(Activity activity, SFCallBack sfCallBack);
     
 	//示例
-	mIMWSDK.showBindPhoneView(MainActivity.this, new SFCallBack<BaseResponseModel>() {
+	mIDYSDK.showBindPhoneView(MainActivity.this, new SFCallBack<BaseResponseModel>() {
                     @Override
                     public void success(BaseResponseModel result, String msg) {
                         //todo绑定手机成功
@@ -537,7 +471,7 @@
      * @param sfCallBack
      */
     
-    mIMWSDK.showUpgradeAccountView(MainActivity.this, new SFCallBack() {
+    mIDYSDK.showUpgradeAccountView(MainActivity.this, new SFCallBack() {
             @Override
             public void success(Object result, String msg) {
                 //账号升级成功
@@ -551,96 +485,6 @@
         });	
 	```
 	
-* <h3 id="15">请求获取手机验证码</h3>   
-	
-	```
-	/**
-     * 请求获取手机验证码
-     * @param activity
-     * @param areaCode  手机区号（不带"+"，如中国：86）
-     * @param telephone 手机号码
-     * @param sfCallBack    回调
-     */
-    public void requestVfCode(Activity activity, String areaCode, String telephone,SFCallBack sfCallBack);
-    
-    示例：
-    mIMWSDK.requestVfCode(this, "86", "13622843403", new SFCallBack<BaseResponseModel>() {
-            @Override
-            public void success(BaseResponseModel responseModel, String result) {
-                //获取手机验证码成功
-                //todo
-            }
-
-            @Override
-            public void fail(BaseResponseModel responseModel, String result) {
-                if (responseModel != null){
-                    String errMsg = responseModel.getMessage();//获取验证码 错误信息
-                }
-            }
-        });
-	
-	```
-* <h3 id="16">请求绑定手机</h3>   
-	
-	```
-	/**
-     * 请求绑定手机
-     * @param activity
-     * @param areaCode 区号
-     * @param telephone 手机号码
-     * @param vfCode    验证码
-     * @param sfCallBack
-     */
-    public void requestBindPhone(Activity activity, String areaCode, String telephone,String vfCode, SFCallBack sfCallBack);
-    
-    
-    示例:
-    
-     mIMWSDK.requestBindPhone(this, "86", "13622843403", "111111", new SFCallBack<SLoginResponse>() {
-            @Override
-            public void success(SLoginResponse sLoginResponse, String result) {
-                if (sLoginResponse != null) {
-                    String tel = sLoginResponse.getData().getTelephone();//绑定的手机号码，格式：国际区号-号码，比如86-13622843403
-                }
-            }
-
-            @Override
-            public void fail(SLoginResponse sLoginResponse, String result) {
-                if (sLoginResponse != null) {
-                    String errMsg = sLoginResponse.getMessage();
-                }
-
-            }
-        });
-	
-	```
-* <h3 id="17">请求账号升级</h3>   
-	
-	```
-	 /**
-     * 请求账号升级
-     * @param activity
-     * @param account 需要绑定的新账号
-     * @param pwd 新账号的密码
-     * @param sfCallBack 回调
-     */
-    public void requestUpgradeAccount(Activity activity, String account, String pwd, SFCallBack sfCallBack);
-	
-	示例：
-	mIMWSDK.requestUpgradeAccount(this, "xxx", "pwd", new SFCallBack<SLoginResponse>() {
-
-            @Override
-            public void success(SLoginResponse result, String msg) {
-                //账号升级成功
-            }
-
-            @Override
-            public void fail(SLoginResponse result, String msg) {
-                //账号升级绑定失败
-            }
-        });
-        
-	```
 	
 * <h3 id="10">上架Google Play相关注意的问题</h3>
 	1. apk包不要包含有其他渠道的代码和资源，不要包含有talkdata sdk相关代码
