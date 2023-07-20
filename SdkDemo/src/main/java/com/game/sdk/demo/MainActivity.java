@@ -440,7 +440,7 @@ public class MainActivity extends Activity {
 //                            dialog.show();
 
 
-            mIDYSDK.registerRoleInfo(MainActivity.this, roleId, roleName, roleLevel, vipLevel, serverCode, serverName);
+            mIDYSDK.setRoleInfo(MainActivity.this, roleId, roleName, roleLevel, vipLevel, serverCode, serverName);
         } else {
             PL.i("从登录界面返回");
             AlertDialog.Builder builder;

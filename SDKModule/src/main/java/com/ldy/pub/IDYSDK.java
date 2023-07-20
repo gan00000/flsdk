@@ -36,7 +36,7 @@ public interface IDYSDK extends IGameLifeCycle {
      * @param severCode         角色伺服器id 		必传
      * @param serverName        角色伺服器名称	 	必传
      */
-    void registerRoleInfo(Activity activity,String roleId,String roleName,String roleLevel,String vipLevel,String severCode,String serverName);
+    void setRoleInfo(Activity activity, String roleId, String roleName, String roleLevel, String vipLevel, String severCode, String serverName);
 
     /**
      * 登录

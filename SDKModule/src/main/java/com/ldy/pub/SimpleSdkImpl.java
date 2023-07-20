@@ -158,7 +158,7 @@ public class SimpleSdkImpl implements IDYSDK {
 //    }
 
     @Override
-    public void registerRoleInfo(final Activity activity, final String roleId, final String roleName, final String roleLevel, final String vipLevel, final String severCode, final String serverName) {
+    public void setRoleInfo(final Activity activity, final String roleId, final String roleName, final String roleLevel, final String vipLevel, final String severCode, final String serverName) {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
