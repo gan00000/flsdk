@@ -12,6 +12,26 @@ public class TimeUtil {
     private static final String TAG = TimeUtil.class.getSimpleName();
     private static final String TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
+    public static int daysBetween(String time1, String time2){
+        try {
+            long t1 = Long.parseLong(time1);
+            long t2 = Long.parseLong(time2);
+            return daysBetween(t1, t2);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+    public static int daysBetween(long time1, long time2){
+        try {
+            long between_days = (time2-time1)/(1000*3600*24);
+            return Integer.parseInt(String.valueOf(between_days));
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
     public static String getDateStr(String timeStamp, String format){
         if (SStringUtil.isEmpty(format)){
             format = TIME_FORMAT;

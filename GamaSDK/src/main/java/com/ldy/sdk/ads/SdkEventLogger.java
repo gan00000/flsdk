@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import com.appsflyer.AFInAppEventParameterName;
 import com.appsflyer.AFInAppEventType;
 import com.appsflyer.AppsFlyerLib;
+import com.ldy.base.bean.SLoginType;
 import com.mybase.bean.BaseResultModel;
 import com.ldy.callback.ISReqCallBack;
 import com.mybase.request.SimpleHttpRequest;
@@ -83,19 +84,50 @@ public class SdkEventLogger {
             eventValue.put(EventConstant.ParameterName.SERVER_TIME, SdkUtil.getSdkTimestamp(activity) + "");
             String eventName = EventConstant.EventName.LOGIN_SUCCESS.name();
             sendEventToSever(activity,eventName);
-            trackingWithEventName(activity,eventName,eventValue, EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
+//            trackingWithEventName(activity,eventName,eventValue, EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
+//
+//            SUserInfo sUserInfo = SdkUtil.getSUserInfo(activity, userId);
+//            if (sUserInfo != null && sUserInfo.isRegDayPay()){//注册首日付费玩家第二天登录
+//                Date ydate = TimeUtil.getYesterday(Long.parseLong(loginResponse.getData().getTimestamp()));
+//                String yesterday = TimeUtil.getDateStr(ydate, "yyyy-MM-dd");
+//                String regDay = TimeUtil.getDateStr(sUserInfo.getRegTime(), "yyyy-MM-dd");
+//                if (yesterday.equals(regDay)){
+//                    //Paid_D2Login要限制为注册首日的付费玩家，新增付费玩家第二天登录时触发，上报AF,FB和Firebase
+//                    PL.i("tracking Paid_D2Login");
+//                    trackingWithEventName(activity,EventConstant.EventName.Paid_D2Login.name(),eventValue);
+//                }
+//            }
 
-            SUserInfo sUserInfo = SdkUtil.getSUserInfo(activity, userId);
-            if (sUserInfo != null && sUserInfo.isRegDayPay()){//注册首日付费玩家第二天登录
-                Date ydate = TimeUtil.getYesterday(Long.parseLong(loginResponse.getData().getTimestamp()));
-                String yesterday = TimeUtil.getDateStr(ydate, "yyyy-MM-dd");
-                String regDay = TimeUtil.getDateStr(sUserInfo.getRegTime(), "yyyy-MM-dd");
-                if (yesterday.equals(regDay)){
-                    //Paid_D2Login要限制为注册首日的付费玩家，新增付费玩家第二天登录时触发，上报AF,FB和Firebase
-                    PL.i("tracking Paid_D2Login");
-                    trackingWithEventName(activity,EventConstant.EventName.Paid_D2Login.name(),eventValue);
-                }
+            trackingWithEventName(activity, "af_login_hf",eventValue,EventConstant.AdType.AdTypeAppsflyer);
+            trackingWithEventName(activity, "login_hf",eventValue,EventConstant.AdType.AdTypeFirebase);
+
+            String loginType = loginResponse.getData().getLoginType();
+            if(SLoginType.LOGIN_TYPE_MG.equals(loginType)) {
+                trackingWithEventName(activity, "login_account_hf",eventValue,EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
+            }else if(SLoginType.LOGIN_TYPE_GUEST.equals(loginType)) {
+                trackingWithEventName(activity, "login_visitor_hf",eventValue,EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
+            }else if(SLoginType.LOGIN_TYPE_FB.equals(loginType)) {
+
             }
+
+            SUserInfo sUserInfo = SdkUtil.getSUserInfo(activity, loginResponse.getData().getUserId());
+            if (sUserInfo != null){//更新用户一些数据
+                sUserInfo.setLastLoginTime(loginResponse.getData().getTimestamp());
+                SdkUtil.updateUserInfo(activity, sUserInfo);
+
+                int days = TimeUtil.daysBetween(sUserInfo.getFirstLoginTime(), sUserInfo.getLastLoginTime());
+                if (days == 2){
+
+                }else if (days == 3){
+
+                }else if (days == 5){
+
+                }else if (days == 7){
+
+                }
+
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -117,9 +149,20 @@ public class SdkEventLogger {
             eventValue.put(EventConstant.ParameterName.SERVER_TIME, SdkUtil.getSdkTimestamp(activity) + "");
             String eventName = EventConstant.EventName.REGISTER_SUCCESS.name();
             sendEventToSever(activity, EventConstant.EventName.REGISTER_SUCCESS.name());
-            trackingWithEventName(activity,eventName,eventValue,EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
-            trackingWithEventName(activity, AppEventsConstants.EVENT_NAME_COMPLETED_REGISTRATION,eventValue,EventConstant.AdType.AdTypeFacebook);
-            trackingWithEventName(activity, "COMPLETE_REGISTRATION_AND",eventValue,EventConstant.AdType.AdTypeFacebook);
+//            trackingWithEventName(activity,eventName,eventValue,EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
+//            trackingWithEventName(activity, AppEventsConstants.EVENT_NAME_COMPLETED_REGISTRATION,eventValue,EventConstant.AdType.AdTypeFacebook);
+            trackingWithEventName(activity, "af_complete_registration_hf",eventValue,EventConstant.AdType.AdTypeAppsflyer);
+            trackingWithEventName(activity, "sign_up_hf",eventValue,EventConstant.AdType.AdTypeFirebase);
+
+            String loginType = loginResponse.getData().getLoginType();
+            if(SLoginType.LOGIN_TYPE_MG.equals(loginType)) {
+                trackingWithEventName(activity, "sign_up_account_hf",eventValue,EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
+            }else if(SLoginType.LOGIN_TYPE_GUEST.equals(loginType)) {
+                trackingWithEventName(activity, "sign_up_visitor_hf",eventValue,EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
+            }else if(SLoginType.LOGIN_TYPE_FB.equals(loginType)) {
+
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -178,6 +221,7 @@ public class SdkEventLogger {
             addEventParameterName(context, af_eventValues);
             PL.i("trackinPay start Purchase af...");
             AppsFlyerLib.getInstance().logEvent(context.getApplicationContext(), AFInAppEventType.PURCHASE, af_eventValues);
+            AppsFlyerLib.getInstance().logEvent(context.getApplicationContext(), "af_purchase_hf", af_eventValues);
             PL.i("trackinPay end Purchase af... params=" + JsonUtil.map2Json(af_eventValues).toString());
 
 
@@ -211,6 +255,7 @@ public class SdkEventLogger {
             b.putString("platform", context.getResources().getString(R.string.channel_platform));
             PL.i("trackinPay Purchase firebase...");
             SGoogleProxy.firebaseAnalytics(context, FirebaseAnalytics.Event.PURCHASE, b);
+            SGoogleProxy.firebaseAnalytics(context, "purchase_hf", b);
 
 
             if(!SdkUtil.getFirstPay(context)) {//检查是否首次充值

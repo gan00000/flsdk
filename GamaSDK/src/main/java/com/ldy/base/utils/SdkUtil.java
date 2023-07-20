@@ -823,6 +823,8 @@ public class SdkUtil {
             SUserInfo newUserInfo = new SUserInfo();
             newUserInfo.setUserId(userId);
             newUserInfo.setRegTime(loginResponse.getData().getTimestamp());//使用服务器时间戳
+            newUserInfo.setFirstLoginTime(loginResponse.getData().getTimestamp());
+
             try {
                 Gson gson = new Gson();
                 String result = gson.toJson(newUserInfo);

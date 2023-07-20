@@ -12,6 +12,17 @@ public class SUserInfo implements Serializable {
 
     private boolean isRegDayPay;//是否付费
 
+    private String firstLoginTime;//第一次登录时间
+    private String lastLoginTime;//最后一次登录时间
+
+    public String getLastLoginTime() {
+        return lastLoginTime;
+    }
+
+    public void setLastLoginTime(String lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
+    }
+
     public String getUserId() {
         return userId;
     }
@@ -59,5 +70,13 @@ public class SUserInfo implements Serializable {
 
     public void setRegDayPay(boolean regDayPay) {
         isRegDayPay = regDayPay;
+    }
+
+    public String getFirstLoginTime() {
+        return firstLoginTime;
+    }
+
+    public void setFirstLoginTime(String firstLoginTime) {
+        this.firstLoginTime = firstLoginTime;
     }
 }

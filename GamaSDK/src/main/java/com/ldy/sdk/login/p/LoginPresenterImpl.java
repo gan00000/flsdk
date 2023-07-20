@@ -9,6 +9,7 @@ import android.view.View;
 
 import androidx.fragment.app.Fragment;
 
+import com.ldy.base.bean.SUserInfo;
 import com.ldy.sdk.login.model.response.SLoginResult;
 import com.mybase.bean.BaseResultModel;
 import com.ldy.callback.ISReqCallBack;
@@ -1110,7 +1111,9 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 if (loginResponse != null) {
                     //5001 注册成功    1000登入成功
                     if (SStringUtil.isEqual(BaseResultModel.SUCCESS_CODE, loginResponse.getCode())) {
+
                         SdkEventLogger.trackinLoginEvent(mActivity, loginResponse);
+
                     } else if (SStringUtil.isEqual(BaseResultModel.SUCCESS_CODE_REG, loginResponse.getCode())) {
                         SdkEventLogger.trackinRegisterEvent(mActivity, loginResponse);
 
