@@ -54,7 +54,7 @@
 //    }
 //
 //    private View onCreateView(LayoutInflater inflater) {
-//        contentView = inflater.inflate(R.layout.mw_change_pwd, null);
+//        contentView = inflater.inflate(R.layout.okokok_proctature, null);
 //
 //        backView = contentView.findViewById(R.id.layout_head_back);
 //        TextView titleTextView = contentView.findViewById(R.id.sdk_head_title);

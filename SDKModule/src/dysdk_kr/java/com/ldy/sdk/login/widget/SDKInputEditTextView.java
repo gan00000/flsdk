@@ -105,7 +105,7 @@ public class SDKInputEditTextView extends RelativeLayout {
     private void initInputView(){
 
         inflater = LayoutInflater.from(getContext());
-        contentView =  inflater.inflate(R.layout.sdk_input_item_et, null);
+        contentView =  inflater.inflate(R.layout.okokok_haloen, null);
         if (contentView != null) {
 
             LayoutParams l = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -159,7 +159,7 @@ public class SDKInputEditTextView extends RelativeLayout {
         switch (inputType){
 
             case SDKInputType_Account:
-                iconId = R.mipmap.img_persion_bg;
+                iconId = R.mipmap.okokok_dodec;
                 labName = getResources().getString(R.string.py_account);
                 hint = getResources().getString(R.string.py_register_account_hit);
                 eyeImageViewLayout.setVisibility(View.GONE);
@@ -167,7 +167,7 @@ public class SDKInputEditTextView extends RelativeLayout {
                 break;
 
             case SDKInputType_Password:
-                iconId = R.mipmap.img_lock_pwd_able;
+                iconId = R.mipmap.okokok_nausing;
                 labName = getResources().getString(R.string.py_password);
                 hint = getResources().getString(R.string.py_register_password_hit);
                 eyeImageViewLayout.setVisibility(View.VISIBLE);
@@ -176,7 +176,7 @@ public class SDKInputEditTextView extends RelativeLayout {
                 break;
 
             case SDKInputType_Password_Again:
-                iconId = R.mipmap.img_lock_pwd_able;
+                iconId = R.mipmap.okokok_nausing;
                 labName = getResources().getString(R.string.py_password);
                 hint = getResources().getString(R.string.text_input_new_pwd_confire);
                 eyeImageViewLayout.setVisibility(View.VISIBLE);
@@ -185,7 +185,7 @@ public class SDKInputEditTextView extends RelativeLayout {
                 break;
 
             case SDKInputType_Old_Password:
-                iconId = R.mipmap.img_lock_pwd_able;
+                iconId = R.mipmap.okokok_nausing;
                 labName = getResources().getString(R.string.py_old_pwd);
                 hint = getResources().getString(R.string.py_input_old_password);
                 eyeImageViewLayout.setVisibility(View.VISIBLE);
@@ -193,7 +193,7 @@ public class SDKInputEditTextView extends RelativeLayout {
                 adjustTvTextSize();
                 break;
             case SDKInputType_New_Password:
-                iconId = R.mipmap.img_lock_pwd_able;
+                iconId = R.mipmap.okokok_nausing;
                 labName = getResources().getString(R.string.py_new_pwd);
                 hint = getResources().getString(R.string.text_input_new_pwd);
                 eyeImageViewLayout.setVisibility(View.VISIBLE);
@@ -202,7 +202,7 @@ public class SDKInputEditTextView extends RelativeLayout {
                 break;
 
             case SDKInputType_Vf_Code:
-                iconId = R.mipmap.img_persion_bg;
+                iconId = R.mipmap.okokok_dodec;
                 editTextInputType = InputType.TYPE_CLASS_NUMBER;
                 eyeImageViewLayout.setVisibility(View.GONE);
                 iconImageView.setVisibility(View.GONE);
@@ -231,7 +231,7 @@ public class SDKInputEditTextView extends RelativeLayout {
             inputEditText.setTypeface(Typeface.DEFAULT);
             inputEditText.setEnabled(true);
             inputEditText.setTextColor(getContext().getResources().getColor(R.color.white_c));
-            iconImageView.setImageResource(R.mipmap.img_lock_pwd_able);
+            iconImageView.setImageResource(R.mipmap.okokok_nausing);
             eyeImageView.setVisibility(VISIBLE);
 
         }else{
@@ -242,7 +242,7 @@ public class SDKInputEditTextView extends RelativeLayout {
             inputEditText.setTypeface(Typeface.DEFAULT);
             inputEditText.setEnabled(false);
             inputEditText.setTextColor(getContext().getResources().getColor(R.color.c_848484));
-            iconImageView.setImageResource(R.mipmap.img_lock_pwd_disable);
+            iconImageView.setImageResource(R.mipmap.okokok_wishacy);
 
             eyeImageView.setVisibility(GONE);
         }

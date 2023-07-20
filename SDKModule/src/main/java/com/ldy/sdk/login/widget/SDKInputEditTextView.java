@@ -97,7 +97,7 @@
 //    private void initInputView(){
 //
 //        inflater = LayoutInflater.from(getContext());
-//        View contentView =  inflater.inflate(R.layout.sdk_input_item_et, null);
+//        View contentView =  inflater.inflate(R.layout.okokok_haloen, null);
 //        if (contentView != null) {
 //
 //            LayoutParams l = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);

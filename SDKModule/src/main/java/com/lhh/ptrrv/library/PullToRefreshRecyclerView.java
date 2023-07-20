@@ -96,7 +96,7 @@ public class PullToRefreshRecyclerView extends SwipeRefreshLayout implements Prv
      * initView
      */
     private void initView(){
-        mRootRelativeLayout = (RelativeLayout)LayoutInflater.from(getContext()).inflate(R.layout.plat_ptrrv_root_view, null);
+        mRootRelativeLayout = (RelativeLayout)LayoutInflater.from(getContext()).inflate(R.layout.okokok_best, null);
 
         this.addView(mRootRelativeLayout);
 //

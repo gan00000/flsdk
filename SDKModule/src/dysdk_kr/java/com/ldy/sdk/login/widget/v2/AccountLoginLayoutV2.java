@@ -141,7 +141,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
 
     public View onCreateView(LayoutInflater inflater) {
 
-        contentView = inflater.inflate(R.layout.mw_account_login, null);
+        contentView = inflater.inflate(R.layout.okokok_condiity, null);
 
         backView = contentView.findViewById(R.id.layout_head_back);
         backView.setOnClickListener(new OnClickListener() {
@@ -606,7 +606,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
     private void showDeleteDialog() {
         if (deleteDialog == null){
             LayoutInflater inflater = LayoutInflater.from(getContext());
-            View contentView = inflater.inflate(R.layout.mw_delete_account_alert, null);
+            View contentView = inflater.inflate(R.layout.okokok_wouldmost, null);
             Button cancelBtn = contentView.findViewById(R.id.btn_delete_cancel);
             cancelBtn.setOnClickListener(new OnClickListener() {
                 @Override

@@ -76,7 +76,7 @@
 //
 //
 //    private View onCreateView(LayoutInflater inflater) {
-//        contentView = inflater.inflate(R.layout.mw_welcome_back, null);
+//        contentView = inflater.inflate(R.layout.okokok_nor, null);
 //
 //        backView = contentView.findViewById(R.id.layout_head_back);
 //
@@ -214,13 +214,13 @@
 //
 //                if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_MG, currentAccountModel.getLoginType())){
 //                    btn_change_pwd.setEnabled(true);
-//                    btn_change_pwd.setBackgroundResource(R.drawable.mw_bg_white_20);
+//                    btn_change_pwd.setBackgroundResource(R.drawable.okokok_matterture);
 //                    btn_change_pwd.setTextColor(getContext().getResources().getColor(R.color.white_c));
 //                    btn_swith_account3.setVisibility(View.GONE);
 //                    layout_has_update_account.setVisibility(View.VISIBLE);
 //                }else{
 //                    btn_change_pwd.setEnabled(false);
-//                    btn_change_pwd.setBackgroundResource(R.drawable.mw_bg_707070_20);
+//                    btn_change_pwd.setBackgroundResource(R.drawable.okokok_returnty);
 //                    btn_change_pwd.setTextColor(getContext().getResources().getColor(R.color.c_707070));
 //                    btn_swith_account3.setVisibility(View.VISIBLE);
 //                    layout_has_update_account.setVisibility(View.GONE);
@@ -299,7 +299,7 @@
 //
 //            if (deleteDialog == null){
 //                LayoutInflater inflater = LayoutInflater.from(getContext());
-//                View contentView = inflater.inflate(R.layout.mw_delete_account_alert, null);
+//                View contentView = inflater.inflate(R.layout.okokok_wouldmost, null);
 //                Button cancelBtn = contentView.findViewById(R.id.btn_delete_cancel);
 //                cancelBtn.setOnClickListener(new OnClickListener() {
 //                    @Override

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    >
+
+    <View
+        android:layout_width="4dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="14dp"
+        android:background="@color/c_F13A12"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="哈哈"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:textColor="@color/c_F13A12"
+            android:lines="1"
+            android:id="@+id/sdk_head_title"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="2dp"
+            android:background="@color/c_F13A12"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/layout_head_back"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@mipmap/okokok_scalenance"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

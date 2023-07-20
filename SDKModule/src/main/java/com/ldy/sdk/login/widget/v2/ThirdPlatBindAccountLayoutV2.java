@@ -75,7 +75,7 @@
 //
 //    //new实例的时候调用
 //    private View onCreateView(LayoutInflater inflater) {
-//        contentView = inflater.inflate(R.layout.mw_update_account, null);
+//        contentView = inflater.inflate(R.layout.okokok_forefewious, null);
 //
 //        backView = contentView.findViewById(R.id.layout_head_back);
 //        TextView titleTextView = contentView.findViewById(R.id.sdk_head_title);

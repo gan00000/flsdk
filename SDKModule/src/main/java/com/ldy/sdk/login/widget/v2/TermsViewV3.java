@@ -50,7 +50,7 @@
 //
 //    public View onCreateView(LayoutInflater inflater) {
 //
-//        contentView = inflater.inflate(R.layout.v3_sdk_term, null);
+//        contentView = inflater.inflate(R.layout.okokok_nearair, null);
 //
 //        TextView titleTextView = contentView.findViewById(R.id.sdk_head_title);
 //        titleTextView.setText(R.string.sdk_terms_title);

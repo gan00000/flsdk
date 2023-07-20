@@ -89,7 +89,7 @@ public class AccountBindPhoneLayout extends SLoginBaseRelativeLayout {
 
     public View onCreateView(LayoutInflater inflater) {
 
-        contentView = inflater.inflate(R.layout.mw_bind_phone_cp, null);
+        contentView = inflater.inflate(R.layout.okokok_plecting, null);
 
         okBtn = contentView.findViewById(R.id.btn_confirm);
         iv_bind_phone_close = contentView.findViewById(R.id.iv_bind_phone_close);

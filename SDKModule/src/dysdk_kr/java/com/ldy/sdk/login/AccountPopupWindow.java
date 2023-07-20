@@ -63,7 +63,7 @@ public class AccountPopupWindow extends PopupWindow {
         this.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
 
         LayoutInflater inflater = LayoutInflater.from(context);
-        contentView = inflater.inflate(R.layout.sdk_account_rv, null);
+        contentView = inflater.inflate(R.layout.okokok_suiacy, null);
         setContentView(contentView);
 
         this.setOutsideTouchable(true);
@@ -95,7 +95,7 @@ public class AccountPopupWindow extends PopupWindow {
         }
 
         historyAccountRv.setLayoutManager(new LinearLayoutManager(getContext()));
-        historyAccountCommonAdapter = new CommonAdapter<AccountModel>(this.getContext(), R.layout.sdk_login_history_account_item, accountModels)
+        historyAccountCommonAdapter = new CommonAdapter<AccountModel>(this.getContext(), R.layout.okokok_pel, accountModels)
         {
 
             @Override
@@ -133,21 +133,21 @@ public class AccountPopupWindow extends PopupWindow {
                     }
                 });
 
-                int imageResId = R.mipmap.img_persion_3;
+                int imageResId = R.mipmap.okokok_rogitious;
                 String showName = accountModel.getUserId();//accountModel.getThirdAccount();
 //                if (SStringUtil.isEmpty(showName)){
 //                    showName = accountModel.getUserId();
 //                }
                 if (SLoginType.LOGIN_TYPE_FB.equals(accountModel.getLoginType())){
-                    imageResId = R.mipmap.icon_fb_2;
+                    imageResId = R.mipmap.okokok_lotose;
                 }else  if (SLoginType.LOGIN_TYPE_GOOGLE.equals(accountModel.getLoginType())){
-                    imageResId = R.mipmap.icon_gp_2;
+                    imageResId = R.mipmap.okokok_occureer;
                 }else  if (SLoginType.LOGIN_TYPE_GUEST.equals(accountModel.getLoginType())){
-                    imageResId = R.mipmap.img_guest_2;
+                    imageResId = R.mipmap.okokok_veteracity;
                 }else if (SLoginType.LOGIN_TYPE_LINE.equals(accountModel.getLoginType())){
-                    imageResId = R.mipmap.icon_line_2;
+                    imageResId = R.mipmap.okokok_piece;
                 }else if (SLoginType.LOGIN_TYPE_MG.equals(accountModel.getLoginType())){
-                    imageResId = R.mipmap.img_persion_3;
+                    imageResId = R.mipmap.okokok_rogitious;
                     showName = accountModel.getAccount();
                 }
                 holder.setImageResource(R.id.history_account_item_icon, imageResId);

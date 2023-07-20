@@ -89,7 +89,7 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
     //new实例的时候调用
     private View onCreateView(LayoutInflater inflater) {
 
-        contentView = inflater.inflate(R.layout.mw_update_account, null);
+        contentView = inflater.inflate(R.layout.okokok_forefewious, null);
 
         bind_view = contentView.findViewById(R.id.ll_bind_view);
         has_bind_view = contentView.findViewById(R.id.ll_has_bind_view);
@@ -102,11 +102,11 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
         accountSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Account);
         pwdSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Password);
 
-        accountSdkInputEditTextView.getContentView().setBackgroundResource(R.drawable.sdk_bg_input2);
-        pwdSdkInputEditTextView.getContentView().setBackgroundResource(R.drawable.sdk_bg_input2);
+        accountSdkInputEditTextView.getContentView().setBackgroundResource(R.drawable.okokok_lotic);
+        pwdSdkInputEditTextView.getContentView().setBackgroundResource(R.drawable.okokok_lotic);
 
-        accountSdkInputEditTextView.getIconImageView().setImageResource(R.mipmap.img_persion_bg);
-        pwdSdkInputEditTextView.getIconImageView().setImageResource(R.mipmap.img_lock_pwd_able);
+        accountSdkInputEditTextView.getIconImageView().setImageResource(R.mipmap.okokok_dodec);
+        pwdSdkInputEditTextView.getIconImageView().setImageResource(R.mipmap.okokok_nausing);
 
         registerAccountEditText = accountSdkInputEditTextView.getInputEditText();
         registerAccountEditText.setHintTextColor(getResources().getColor(R.color.c_B8B8B8));
@@ -122,14 +122,14 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
         thirdAccountSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Account);
         hasBindAccountSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Account);
 
-        thirdAccountSdkInputEditTextView.getContentView().setBackgroundResource(R.drawable.sdk_bg_input2);
-        hasBindAccountSdkInputEditTextView.getContentView().setBackgroundResource(R.drawable.sdk_bg_input2);
+        thirdAccountSdkInputEditTextView.getContentView().setBackgroundResource(R.drawable.okokok_lotic);
+        hasBindAccountSdkInputEditTextView.getContentView().setBackgroundResource(R.drawable.okokok_lotic);
         thirdAccountSdkInputEditTextView.getInputEditText().setHintTextColor(getResources().getColor(R.color.c_B8B8B8));
         thirdAccountSdkInputEditTextView.getInputEditText().setTextColor(getResources().getColor(R.color.white_c));
         hasBindAccountSdkInputEditTextView.getInputEditText().setHintTextColor(getResources().getColor(R.color.c_B8B8B8));
         hasBindAccountSdkInputEditTextView.getInputEditText().setTextColor(getResources().getColor(R.color.white_c));
 
-        hasBindAccountSdkInputEditTextView.getIconImageView().setImageResource(R.mipmap.img_persion_bg);
+        hasBindAccountSdkInputEditTextView.getIconImageView().setImageResource(R.mipmap.okokok_dodec);
 
         thirdAccountSdkInputEditTextView.getInputEditText().setEnabled(false);
         hasBindAccountSdkInputEditTextView.getInputEditText().setEnabled(false);
@@ -282,24 +282,24 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
 
 
     public void setAccountWithIcon2(AccountModel accountModel,  ImageView imageView, EditText editText){
-        int imageResId = R.mipmap.img_persion_bg;
+        int imageResId = R.mipmap.okokok_dodec;
         String showName = "";
         if (SLoginType.LOGIN_TYPE_FB.equals(accountModel.getLoginType())){
-            imageResId = R.mipmap.icon_fb_2;
+            imageResId = R.mipmap.okokok_lotose;
             showName = getContext().getResources().getString(R.string.text_has_bind_tips_fb);
 
         }else  if (SLoginType.LOGIN_TYPE_GOOGLE.equals(accountModel.getLoginType())){
-            imageResId = R.mipmap.icon_gp_2;
+            imageResId = R.mipmap.okokok_occureer;
             showName = getContext().getResources().getString(R.string.text_has_bind_tips_google);
 
         }else  if (SLoginType.LOGIN_TYPE_GUEST.equals(accountModel.getLoginType())){
-            imageResId = R.mipmap.img_guest_2;
+            imageResId = R.mipmap.okokok_veteracity;
             showName = getContext().getResources().getString(R.string.text_has_bind_tips_guest);
         }else if (SLoginType.LOGIN_TYPE_LINE.equals(accountModel.getLoginType())){
-            imageResId = R.mipmap.icon_line_2;
+            imageResId = R.mipmap.okokok_piece;
             showName = getContext().getResources().getString(R.string.text_has_bind_tips_line);
         }else if (SLoginType.LOGIN_TYPE_MG.equals(accountModel.getLoginType())){
-            imageResId = R.mipmap.img_persion_bg;
+            imageResId = R.mipmap.okokok_dodec;
             showName = getContext().getResources().getString(R.string.text_has_bind_tips_mw);
         }
 

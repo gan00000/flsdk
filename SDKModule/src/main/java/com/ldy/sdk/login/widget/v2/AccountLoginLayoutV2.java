@@ -91,7 +91,7 @@
 //
 //    public View onCreateView(LayoutInflater inflater) {
 //
-//        contentView = inflater.inflate(R.layout.mw_account_login, null);
+//        contentView = inflater.inflate(R.layout.okokok_condiity, null);
 //
 //        backView = contentView.findViewById(R.id.layout_head_back);
 //        backView.setOnClickListener(new OnClickListener() {

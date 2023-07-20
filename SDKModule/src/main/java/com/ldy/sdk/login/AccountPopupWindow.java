@@ -63,7 +63,7 @@
 //        this.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
 //
 //        LayoutInflater inflater = LayoutInflater.from(context);
-//        contentView = inflater.inflate(R.layout.sdk_account_rv, null);
+//        contentView = inflater.inflate(R.layout.okokok_suiacy, null);
 //        setContentView(contentView);
 //
 //        this.setOutsideTouchable(true);
@@ -95,7 +95,7 @@
 //        }
 //
 //        historyAccountRv.setLayoutManager(new LinearLayoutManager(getContext()));
-//        historyAccountCommonAdapter = new CommonAdapter<AccountModel>(this.getContext(), R.layout.sdk_login_history_account_item, accountModels)
+//        historyAccountCommonAdapter = new CommonAdapter<AccountModel>(this.getContext(), R.layout.okokok_pel, accountModels)
 //        {
 //
 //            @Override

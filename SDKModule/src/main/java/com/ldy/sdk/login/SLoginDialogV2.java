@@ -128,7 +128,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 
 //        rootView = new FrameLayout(context);
 //        rootView.addView(contentFrameLayout);
-        rootView = this.activity.getLayoutInflater().inflate(R.layout.mw_dialog_layout, null);
+        rootView = this.activity.getLayoutInflater().inflate(R.layout.okokok_dipsyesque, null);
         contentFrameLayout = rootView.findViewById(R.id.sdk_fl_content_layout);
         setContentView(rootView);
 

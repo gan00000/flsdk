@@ -55,7 +55,7 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
     }
 
     private View onCreateView(LayoutInflater inflater) {
-        contentView = inflater.inflate(R.layout.mw_account_reg, null);
+        contentView = inflater.inflate(R.layout.okokok_flexior, null);
 
         accountSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_account_login_account);
         pwdSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_account_login_password);

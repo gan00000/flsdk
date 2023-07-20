@@ -61,7 +61,7 @@
 //
 //    public View onCreateView(LayoutInflater inflater) {
 //
-//        contentView = inflater.inflate(R.layout.mw_login_reg, null);
+//        contentView = inflater.inflate(R.layout.okokok_again, null);
 //        iv_login_reg_back = contentView.findViewById(R.id.iv_login_reg_back);
 //        loginTabView = contentView.findViewById(R.id.loginTabView);
 //        regTabView = contentView.findViewById(R.id.regTabView);
