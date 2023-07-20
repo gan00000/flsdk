@@ -112,20 +112,23 @@ public class SdkEventLogger {
 
             SUserInfo sUserInfo = SdkUtil.getSUserInfo(activity, loginResponse.getData().getUserId());
             if (sUserInfo != null){//更新用户一些数据
-                sUserInfo.setLastLoginTime(loginResponse.getData().getTimestamp());
-                SdkUtil.updateUserInfo(activity, sUserInfo);
-
-                int days = TimeUtil.daysBetween(sUserInfo.getFirstLoginTime(), sUserInfo.getLastLoginTime());
-                if (days == 2){
-
-                }else if (days == 3){
-
-                }else if (days == 5){
-
-                }else if (days == 7){
-
+                String lastTime = loginResponse.getData().getTimestamp();
+                int days = TimeUtil.daysBetween(sUserInfo.getFirstLoginTime(), lastTime);
+                if (days == 2 && !sUserInfo.isLoginDays2()){
+                    trackingWithEventName(activity, "complete_2nd_login_hf",eventValue,EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
+                    sUserInfo.setLoginDays2(true);
+                }else if (days == 3 && !sUserInfo.isLoginDays3()){
+                    trackingWithEventName(activity, "complete_3nd_login_hf",eventValue,EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
+                    sUserInfo.setLoginDays3(true);
+                }else if (days == 5 && !sUserInfo.isLoginDays5()){
+                    trackingWithEventName(activity, "complete_5nd_login_hf",eventValue,EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
+                    sUserInfo.setLoginDays5(true);
+                }else if (days == 7 && !sUserInfo.isLoginDays7()){
+                    trackingWithEventName(activity, "complete_7nd_login_hf",eventValue,EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
+                    sUserInfo.setLoginDays7(true);
                 }
-
+                sUserInfo.setLastLoginTime(lastTime);
+                SdkUtil.updateUserInfo(activity, sUserInfo);
             }
 
         } catch (Exception e) {
@@ -265,19 +268,25 @@ public class SdkEventLogger {
 
             SUserInfo sUserInfo = SdkUtil.getSUserInfo(context, uid);
             if (sUserInfo != null){
+
+                if (usdPrice == 99.99 && !sUserInfo.isPay99_99()){
+                    trackingWithEventName(context, "", null, EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
+                    sUserInfo.setPay99_99(true);
+                }
+
                 if (sUserInfo.isPay()){//判断是否付费过
 
                     if (!sUserInfo.isSecondPay()){
                         sUserInfo.setSecondPay(true);//付费过则为第二次付费
-                        SdkUtil.updateUserInfo(context, sUserInfo);
+//                        SdkUtil.updateUserInfo(context, sUserInfo);
                         //2nd_purchase，第二次充值的时候触发，上报AF,FB和Firebase，传firebase要上报金额，AF和FB不上报金额。
 
-                        PL.i("tracking second_purchase...");
-                        trackingWithEventName(context, EventConstant.EventName.second_purchase.name(), null, EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFacebook);
-
-                        SGoogleProxy.firebaseAnalytics(context, EventConstant.EventName.second_purchase.name(), b);
-
-                        PL.i("tracking end second_purchase...");
+//                        PL.i("tracking second_purchase...");
+//                        trackingWithEventName(context, EventConstant.EventName.second_purchase.name(), null, EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFacebook);
+//
+//                        SGoogleProxy.firebaseAnalytics(context, EventConstant.EventName.second_purchase.name(), b);
+//
+//                        PL.i("tracking end second_purchase...");
 
                     }
 
@@ -290,9 +299,50 @@ public class SdkEventLogger {
                     }else {
                         sUserInfo.setRegDayPay(false);
                     }
-                    SdkUtil.updateUserInfo(context, sUserInfo);
+
+                    //首次储值
+                    AppsFlyerLib.getInstance().logEvent(context.getApplicationContext(), "purchase_first_charge_hf", af_eventValues);
+                    SGoogleProxy.firebaseAnalytics(context, "purchase_first_charge_hf", b);
+                }
+                double totalPay = sUserInfo.getPayAmount() + usdPrice;//累计金额
+                if (totalPay>=50 && !sUserInfo.getHasSendEventName().contains("continuous_50_dollars_recharege_hf")){
+                    sUserInfo.setHasSendEventName("continuous_50_dollars_recharege_hf");
+                    trackingWithEventName(context, "continuous_50_dollars_recharege_hf", null, EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
+                }
+                if (totalPay>=100 && !sUserInfo.getHasSendEventName().contains("continuous_100_dollars_recharege_hf")){
+                    sUserInfo.setHasSendEventName("continuous_100_dollars_recharege_hf");
+                    trackingWithEventName(context, "continuous_100_dollars_recharege_hf", null, EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
+                }
+                if (totalPay>=500 && !sUserInfo.getHasSendEventName().contains("continuous_500_dollars_recharege_hf")){
+                    sUserInfo.setHasSendEventName("continuous_500_dollars_recharege_hf");
+                    trackingWithEventName(context, "continuous_500_dollars_recharege_hf", null, EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
+                }
+                if (totalPay>=1000 && !sUserInfo.getHasSendEventName().contains("continuous_1000_dollars_recharege_hf")){
+                    sUserInfo.setHasSendEventName("continuous_1000_dollars_recharege_hf");
+                    trackingWithEventName(context, "continuous_1000_dollars_recharege_hf", null, EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
+                }
+                if (totalPay>=3000 && !sUserInfo.getHasSendEventName().contains("continuous_3000_dollars_recharege_hf")){
+                    sUserInfo.setHasSendEventName("continuous_3000_dollars_recharege_hf");
+                    trackingWithEventName(context, "continuous_3000_dollars_recharege_hf", null, EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
                 }
 
+                int payCount = sUserInfo.getPayCount() + 1; //充值次数
+                if (payCount == 2 && !sUserInfo.getHasSendEventName().contains("purchase_2rd_charge_hf")){
+                    sUserInfo.setHasSendEventName("purchase_2rd_charge_hf");
+                    trackingWithEventName(context, "purchase_2rd_charge_hf", null, EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
+                }
+                if (payCount == 3 && !sUserInfo.getHasSendEventName().contains("purchase_3rd_charge_hf")){
+                    sUserInfo.setHasSendEventName("purchase_3rd_charge_hf");
+                    trackingWithEventName(context, "purchase_3rd_charge_hf", null, EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
+                }
+                if (payCount == 10 && !sUserInfo.getHasSendEventName().contains("purchase_10rd_charge_hf")){
+                    sUserInfo.setHasSendEventName("purchase_10rd_charge_hf");
+                    trackingWithEventName(context, "purchase_10rd_charge_hf", null, EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
+                }
+
+                sUserInfo.setPayCount(payCount);
+                sUserInfo.setPayAmount(totalPay);
+                SdkUtil.updateUserInfo(context, sUserInfo);
             }
 
         } catch (Exception e1) {
