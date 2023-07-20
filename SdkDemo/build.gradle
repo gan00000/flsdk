@@ -51,51 +51,11 @@ android {
 
     signingConfigs {//签名的配置
 
-        signv3 {
-            storeFile file('../signkey/mw_game') //正式签名，以后使用
-            storePassword 'mw999000'
-            keyAlias 'mwgame'
-            keyPassword 'mw999000'
-        }
-
-        signv3_3 {
-            storeFile file('../signkey/sdkv3_3_key.jks') //正式签名，以后使用
-            storePassword 'mw111000'
-            keyAlias 'mwv3'
-            keyPassword 'mw111000'
-        }
-
-        release_v2 {
-            storeFile file('../signkey/sdkv2_key.jks') //正式签名，以后使用
-            storePassword 'mw888000'
-            keyAlias 'mwgamev2'
-            keyPassword 'mw888000'
-        }
-        release_v4 {
-            storeFile file('../signkey/sdkv4_key.jks') //正式签名，以后使用
-            storePassword 'mw888000'
-            keyAlias 'mwv4'
-            keyPassword 'mw888000'
-        }
-
-        release_vn {
-            storeFile file('../signkey/key_vn.jks') //正式签名，以后使用
-            storePassword 'mwvn888000'
-            keyAlias 'mwvn'
-            keyPassword 'mwvn888000'
-        }
-
-        release_v6 {
-            storeFile file('../signkey/sdkv6_key.jks') //正式签名，以后使用
-            storePassword 'mwv6888'
-            keyAlias 'mwv6'
-            keyPassword 'mwv6888'
-        }
-        release_vn1 {
-            storeFile file('../signkey/sdk_vn1_key.jks') //正式签名，以后使用
-            storePassword 'wxvn999'
-            keyAlias 'wxvn'
-            keyPassword 'wxvn999'
+        release_1 {
+            storeFile file('../signkey/dysdk_key.jks') //正式签名，以后使用
+            storePassword 'sdk111000'
+            keyAlias 'dysdk'
+            keyPassword 'sdk111000'
         }
     }
 
@@ -112,14 +72,14 @@ android {
         }
 
         debug {
-            signingConfig signingConfigs.release_v2
+            signingConfig signingConfigs.release_1
         }
     }
     productFlavors {
 
         dysdk_kr {
 
-            signingConfig signingConfigs.release_v2
+            signingConfig signingConfigs.release_1
             applicationId "com.adventure.go"
             minSdkVersion 21
             targetSdkVersion 33
@@ -143,7 +103,7 @@ android {
             resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow"
 
             //每个游戏的demo设置 test
-            resValue "string", "sdk_name", "鬼武三國demo"
+            resValue "string", "sdk_name", "sdkdemo"
 
         }
     }
@@ -207,6 +167,6 @@ if (isHuaweiFlavor()){
 
 }else {
     //Google包，第三方包设置
-    apply plugin: 'com.google.gms.google-services'
-    apply plugin: 'com.google.firebase.crashlytics'
+//    apply plugin: 'com.google.gms.google-services'
+//    apply plugin: 'com.google.firebase.crashlytics'
 }
