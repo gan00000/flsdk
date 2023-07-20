@@ -1,4 +1,10 @@
 <resources>
+    <!--    游戏相关配置-->
+    <string name="sdk_game_code"></string>
+    <string name="sdk_app_key"></string>
+    <string name="sdk_more_language">false</string>
+    <string name="sdk_af_dev_key"></string>
+    <string name="sdk_default_server_language"></string>
 
     <!-- Facebook应用名 -->
     <string name="facebook_app_name"></string>

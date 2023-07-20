@@ -48,7 +48,7 @@ public class SdkEventLogger {
         try {
             AppsFlyerLib.getInstance().setCollectIMEI(false);
             AppsFlyerLib.getInstance().setCollectAndroidID(false);
-            String afDevKey = ResConfig.getConfigInAssetsProperties(activity,"sdk_ads_appflyer_dev_key");
+            String afDevKey = activity.getResources().getString(R.string.sdk_af_dev_key);//ResConfig.getConfigInAssetsProperties(activity,"sdk_ads_appflyer_dev_key");
             if(!TextUtils.isEmpty(afDevKey)) {
 //                AppsFlyerLib.getInstance().startTracking(activity.getApplication(), afDevKey);
                 AppsFlyerLib.getInstance().init(afDevKey,null,activity.getApplication());//应用层调用

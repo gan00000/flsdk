@@ -27,26 +27,25 @@ public class ResConfig {
 //            return GamaUtil.getSdkCfg(context).getS_GameCode();
 //        }
 //		return getResStringByName(context, "star_game_code");
-        return getConfigInAssetsProperties(context, "sdk_game_code");
+        return context.getResources().getString(R.string.sdk_game_code);
     }
 
     public static boolean isMoreLanguage(Context context) {
-        String more = getConfigInAssetsProperties(context, "sdk_more_language");
+
+        String more = context.getResources().getString(R.string.sdk_more_language); //getConfigInAssetsProperties(context, "sdk_more_language");
         return SStringUtil.isEqual("true",more);
     }
 
     public static String getDefaultServerLanguage(Context context) {
-        return getConfigInAssetsProperties(context, "sdk_default_server_language");
+        return context.getResources().getString(R.string.sdk_default_server_language);
+//        return getConfigInAssetsProperties(context, "sdk_default_server_language");
     }
 
     /**
      * 获取秘钥
      */
     public static String getAppKey(Context context) {
-//        if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_AppKey())) {
-//            return GamaUtil.getSdkCfg(context).getS_AppKey();
-//        }
-        return getConfigInAssetsProperties(context, "sdk_app_key");
+        return context.getResources().getString(R.string.sdk_app_key);//getConfigInAssetsProperties(context, "sdk_app_key");
     }
 
     /**
@@ -215,7 +214,7 @@ public class ResConfig {
     /**
      * 从assets/gama/gama_gameconfig.properties中获取游戏配置信息
      */
-    public static String getConfigInAssetsProperties(Context context, String key) {
+/*    public static String getConfigInAssetsProperties(Context context, String key) {
 
         if (properties == null) {
             properties = FileUtil.readAssetsPropertiestFile(context, "ldy/ldycon.properties");
@@ -226,7 +225,7 @@ public class ResConfig {
             return "";
         }
         return properties.getProperty(key, "");
-    }
+    }*/
 
 //    public static String getStringWithLocal(Context context, String xmlSchemaName) {
 //        String localSchemaName = getLocalSchemaName(context, xmlSchemaName);
