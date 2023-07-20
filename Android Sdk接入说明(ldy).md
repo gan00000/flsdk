@@ -80,7 +80,7 @@
 	    productFlavors {
 	
 	
-	        superand {
+	        sdkdemo {
 	            
 	            applicationId "com.game.xxxx"
 	            minSdkVersion 21 //设置支持的最低版本系统
@@ -117,8 +117,8 @@
 	//添加下列的依赖
 	dependencies {
 		
-		//MWSDK-release为sdk内提供的aar库
-	    implementation(name:'MWSDK-release', ext:'aar')
+		//DYSdk-release-1.0为sdk内提供的aar库
+	    implementation(name:'DYSdk-release-1.0', ext:'aar')
 	    
 	    //基础库
 	    api 'androidx.legacy:legacy-support-v4:1.0.0'
