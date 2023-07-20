@@ -270,7 +270,7 @@ public class SdkEventLogger {
             if (sUserInfo != null){
 
                 if (usdPrice == 99.99 && !sUserInfo.isPay99_99()){
-                    trackingWithEventName(context, "", null, EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
+                    trackingWithEventName(context, "purchase_99_single_hf", null, EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
                     sUserInfo.setPay99_99(true);
                 }
 
