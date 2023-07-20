@@ -981,7 +981,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         }
         iLoginView.showAutoLoginView(autoLoginText);
 
-        count = 10;
+        count = 3;
 
         String autoLoginTipsTemp = String.format("%s%s",autoLoginText, "(" + count +  ")");
 
