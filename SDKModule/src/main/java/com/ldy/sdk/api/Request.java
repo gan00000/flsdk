@@ -58,11 +58,11 @@ public class Request {
                     }
 
                 } else {
-                    ToastUtils.toast(context, R.string.py_error_occur);
+                    ToastUtils.toast(context, R.string.mstr_palltodayry_pulchrster);
                     if (iSdkCallBack != null){
                         BaseResultModel errorModel = new BaseResultModel();
                         errorModel.setCode("1001");
-                        errorModel.setMessage(context.getString(R.string.text_phone_not_empty));
+                        errorModel.setMessage(context.getString(R.string.mstr_shareee_octaire));
                         iSdkCallBack.fail(errorModel,errorModel.getWrapRawResponse());
                     }
                 }
@@ -70,22 +70,22 @@ public class Request {
 
             @Override
             public void timeout(String code) {
-                ToastUtils.toast(context, R.string.py_error_occur);
+                ToastUtils.toast(context, R.string.mstr_palltodayry_pulchrster);
                 if (iSdkCallBack != null){
                     BaseResultModel errorModel = new BaseResultModel();
                     errorModel.setCode("1001");
-                    errorModel.setMessage(context.getString(R.string.py_error_occur));
+                    errorModel.setMessage(context.getString(R.string.mstr_palltodayry_pulchrster));
                     iSdkCallBack.fail(errorModel,errorModel.getWrapRawResponse());
                 }
             }
 
             @Override
             public void noData() {
-                ToastUtils.toast(context, R.string.py_error_occur);
+                ToastUtils.toast(context, R.string.mstr_palltodayry_pulchrster);
                 if (iSdkCallBack != null){
                     BaseResultModel errorModel = new BaseResultModel();
                     errorModel.setCode("1001");
-                    errorModel.setMessage(context.getString(R.string.py_error_occur));
+                    errorModel.setMessage(context.getString(R.string.mstr_palltodayry_pulchrster));
                     iSdkCallBack.fail(errorModel,errorModel.getWrapRawResponse());
                 }
             }
@@ -146,7 +146,7 @@ public class Request {
                     }
 
                 } else {
-                    ToastUtils.toast(context, R.string.py_error_occur);
+                    ToastUtils.toast(context, R.string.mstr_palltodayry_pulchrster);
 //                    if (sfCallBack != null){
 //                        sfCallBack.fail(null,rawResult);
 //                    }
@@ -155,7 +155,7 @@ public class Request {
 
             @Override
             public void timeout(String code) {
-                ToastUtils.toast(context, R.string.py_error_occur);
+                ToastUtils.toast(context, R.string.mstr_palltodayry_pulchrster);
 //                if (sfCallBack != null){
 //                    sfCallBack.fail(null,"");
 //                }
@@ -163,7 +163,7 @@ public class Request {
 
             @Override
             public void noData() {
-                ToastUtils.toast(context, R.string.py_error_occur);
+                ToastUtils.toast(context, R.string.mstr_palltodayry_pulchrster);
 //                if (sfCallBack != null){
 //                    sfCallBack.fail(null,"");
 //                }
@@ -232,7 +232,7 @@ public class Request {
                     }
 
                 } else {
-                    ToastUtils.toast(context, R.string.py_error_occur);
+                    ToastUtils.toast(context, R.string.mstr_palltodayry_pulchrster);
 //                    if (sfCallBack != null){
 //                        sfCallBack.fail(null,rawResult);
 //                    }
@@ -241,7 +241,7 @@ public class Request {
 
             @Override
             public void timeout(String code) {
-                ToastUtils.toast(context, R.string.py_error_occur);
+                ToastUtils.toast(context, R.string.mstr_palltodayry_pulchrster);
 //                if (sfCallBack != null){
 //                    sfCallBack.fail(null,"");
 //                }
@@ -249,7 +249,7 @@ public class Request {
 
             @Override
             public void noData() {
-                ToastUtils.toast(context, R.string.py_error_occur);
+                ToastUtils.toast(context, R.string.mstr_palltodayry_pulchrster);
 //                if (sfCallBack != null){
 //                    sfCallBack.fail(null,"");
 //                }

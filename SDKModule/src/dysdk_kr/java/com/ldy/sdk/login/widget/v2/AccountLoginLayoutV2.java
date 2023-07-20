@@ -143,7 +143,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
 
         contentView = inflater.inflate(R.layout.okokok_condiity, null);
 
-        backView = contentView.findViewById(R.id.layout_head_back);
+        backView = contentView.findViewById(R.id.mId_whilekin_domeous);
         backView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -152,19 +152,19 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
         });
 
 
-        accountSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_account_login_account);
-        pwdSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_account_login_password);
+        accountSdkInputEditTextView = contentView.findViewById(R.id.mId_angukidit_shortfier);
+        pwdSdkInputEditTextView = contentView.findViewById(R.id.mId_findose_soldieral);
 
         accountSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Account);
         pwdSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Password);
 
-        loginMainGoRegisterBtn = contentView.findViewById(R.id.gama_login_tv_register);
-        loginMainGoFindPwd = contentView.findViewById(R.id.gama_login_tv_forget_password);
-        loginMainGoAccountCenter = contentView.findViewById(R.id.gama_login_tv_link);
-        loginMainGoChangePassword = contentView.findViewById(R.id.gama_login_tv_change_password);
+        loginMainGoRegisterBtn = contentView.findViewById(R.id.mId_relateer_beginetic);
+        loginMainGoFindPwd = contentView.findViewById(R.id.mId_emeticturn_duringacle);
+        loginMainGoAccountCenter = contentView.findViewById(R.id.mId_mesoical_dinnerism);
+        loginMainGoChangePassword = contentView.findViewById(R.id.mId_messagesive_humanfaction);
 
-        layout_delete_account = contentView.findViewById(R.id.layout_delete_account);
-        layout_delete_account_parent = contentView.findViewById(R.id.layout_delete_account_parent);
+        layout_delete_account = contentView.findViewById(R.id.mId_sapiet_towardette);
+        layout_delete_account_parent = contentView.findViewById(R.id.mId_short_townern);
         layout_delete_account.setVisibility(View.GONE);
 //        layout_delete_account_parent.setVisibility(View.GONE);
 
@@ -175,22 +175,22 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
             }
         });
 
-        tv_login_term = contentView.findViewById(R.id.tv_login_term);
-        cb_agree_term = contentView.findViewById(R.id.cb_agree_term);
+        tv_login_term = contentView.findViewById(R.id.mId_cru_thalassern);
+        cb_agree_term = contentView.findViewById(R.id.mId_theyory_rapcloseior);
         cb_agree_term.setChecked(true);
 
         loginAccountEditText = accountSdkInputEditTextView.getInputEditText();
-        loginAccountEditText.setHint(R.string.py_msg_account_hint);
+        loginAccountEditText.setHint(R.string.mstr_environmentalaire_mesiitude);
         loginPasswordEditText = pwdSdkInputEditTextView.getInputEditText();
-        loginPasswordEditText.setHint(R.string.py_msg_pwd_hint);
+        loginPasswordEditText.setHint(R.string.mstr_manthaster_whomuous);
 //        pwdSdkInputEditTextView.setEyeVisable(View.VISIBLE);
 
-        historyAccountListBtn = contentView.findViewById(R.id.sdk_input_item_account_history);
+        historyAccountListBtn = contentView.findViewById(R.id.mId_memberfic_authorery);
         historyAccountListBtn.setVisibility(VISIBLE);
 
-        loginMainLoginBtn = contentView.findViewById(R.id.gama_login_btn_confirm);
-//        goTermView = contentView.findViewById(R.id.gama_gama_start_term_tv1);//跳轉服務條款
-//        agreeCheckBox = contentView.findViewById(R.id.gama_gama_start_term_cb1);//跳轉服務條款
+        loginMainLoginBtn = contentView.findViewById(R.id.mId_sebiform_skin);
+//        goTermView = contentView.findViewById(R.id.mId_anthitor_smallain);//跳轉服務條款
+//        agreeCheckBox = contentView.findViewById(R.id.mId_manthscience_speechtic);//跳轉服務條款
 //
 //        GamaUtil.saveStartTermRead(getContext(), true);//默认设置为勾选
 //        agreeCheckBox.setChecked(true);
@@ -248,10 +248,10 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
             }
         });
 
-        fbLoginView = contentView.findViewById(R.id.fbLoginView);
-        lineLoginView = contentView.findViewById(R.id.lineLoginView);
-        macLoginView = contentView.findViewById(R.id.guestLoginView);
-        googleLoginView = contentView.findViewById(R.id.ggLoginView);
+        fbLoginView = contentView.findViewById(R.id.mId_oror_cerebrive);
+        lineLoginView = contentView.findViewById(R.id.mId_personice_undics);
+        macLoginView = contentView.findViewById(R.id.mId_septenably_democraticette);
+        googleLoginView = contentView.findViewById(R.id.mId_control_hydrrequireous);
 
         ConfigModel configModel = SdkUtil.getSdkCfg(getContext());
         if (configModel != null){
@@ -472,7 +472,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
         }else{
             SdkVersionUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
 //            pwdSdkInputEditTextView.setPwdInputEnable(false);
-//            loginPasswordEditText.setText(R.string.text_free_register);
+//            loginPasswordEditText.setText(R.string.mstr_zoactivityad_sculptish);
             pwdSdkInputEditTextView.setVisibility(View.GONE);
             loginMainGoFindPwd.setVisibility(GONE);
         }
@@ -511,7 +511,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
         if (cb_agree_term.isChecked()){
             return true;
         }
-        toast(R.string.gama_ui_term_not_read);
+        toast(R.string.mstr_honorise_certainlyition);
         this.showTermDialog();
         return false;
     }
@@ -607,7 +607,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
         if (deleteDialog == null){
             LayoutInflater inflater = LayoutInflater.from(getContext());
             View contentView = inflater.inflate(R.layout.okokok_wouldmost, null);
-            Button cancelBtn = contentView.findViewById(R.id.btn_delete_cancel);
+            Button cancelBtn = contentView.findViewById(R.id.mId_often_person);
             cancelBtn.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -616,7 +616,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
                     }
                 }
             });
-            Button confireBtn = contentView.findViewById(R.id.btn_delete_confirm);
+            Button confireBtn = contentView.findViewById(R.id.mId_odform_plicarian);
 
             confireBtn.setOnClickListener(new OnClickListener() {
                 @Override
@@ -636,7 +636,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
     private void deleteAccount() {
         String account = accountSdkInputEditTextView.getInputEditText().getEditableText().toString().trim();
         if (TextUtils.isEmpty(account)) {
-            ToastUtils.toast(getActivity(), R.string.py_account_empty);
+            ToastUtils.toast(getActivity(), R.string.mstr_egri_sacceur);
             return;
         }
 

@@ -27,15 +27,15 @@
             <View
                 android:layout_width="3dp"
                 android:layout_height="14dp"
-                android:background="@color/c_F94925"
+                android:background="@color/mcolor_phaneraffectative_rustfaction"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:text="@string/sdk_terms_title"
-                android:textColor="@color/c_2A2A2A"
+                android:text="@string/mstr_err_naucould"
+                android:textColor="@color/mcolor_phylacad_ophi"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
 
@@ -51,7 +51,7 @@
             >
 
             <com.ldy.base.widget.SWebView
-                android:id="@+id/sdk_terms_webview"
+                android:id="@+id/mId_beety_menstruform"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
@@ -67,22 +67,22 @@
             android:layout_marginBottom="10dp"
             >
             <Button
-                android:id="@+id/btn_term_close"
+                android:id="@+id/mId_relateacy_resourcehood"
                 android:layout_width="94dp"
                 android:layout_height="32dp"
                 android:background="@drawable/okokok_ponery"
-                android:text="@string/text_close"
-                android:textColor="@color/c_F94925"
+                android:text="@string/mstr_horrsoistic_inter"
+                android:textColor="@color/mcolor_phaneraffectative_rustfaction"
                 android:textSize="15sp" />
 
             <Button
-                android:id="@+id/btn_term_agree"
+                android:id="@+id/mId_rustabovehood_occurarian"
                 android:layout_width="match_parent"
                 android:layout_height="32dp"
                 android:layout_marginStart="12dp"
                 android:background="@drawable/okokok_droper"
-                android:text="@string/text_i_read_agree"
-                android:textColor="@color/white_c"
+                android:text="@string/mstr_fovesoundics_economymost"
+                android:textColor="@color/mcolor_tag_tetrice"
                 android:textSize="15sp" />
 
 

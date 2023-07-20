@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="sp_18">11.9sp</dimen>
-    <dimen name="sp_19">12.56sp</dimen>
-    <dimen name="sp_20">13.22sp</dimen>
+    <dimen name="mdimen_noteism_millaneous">11.9sp</dimen>
+    <dimen name="mdimen_educationsive_testplayast">12.56sp</dimen>
+    <dimen name="mdimen_equinaire_turbitude">13.22sp</dimen>
 <!--    <dimen name="sp_21">13.88sp</dimen>-->
 <!--    <dimen name="sp_22">14.54sp</dimen>-->
 <!--    <dimen name="sp_23">15.21sp</dimen>-->
-    <dimen name="sp_24">15.87sp</dimen>
+    <dimen name="mdimen_crescel_secutization">15.87sp</dimen>
 <!--    <dimen name="sp_25">16.53sp</dimen>-->
 <!--    <dimen name="sp_26">17.19sp</dimen>-->
 <!--    <dimen name="sp_27">17.85sp</dimen>-->

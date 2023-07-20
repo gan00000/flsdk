@@ -77,12 +77,12 @@
 //    private View onCreateView(LayoutInflater inflater) {
 //        contentView = inflater.inflate(R.layout.okokok_forefewious, null);
 //
-//        backView = contentView.findViewById(R.id.layout_head_back);
-//        TextView titleTextView = contentView.findViewById(R.id.sdk_head_title);
-//        titleTextView.setText(R.string.text_update_account);
+//        backView = contentView.findViewById(R.id.mId_whilekin_domeous);
+//        TextView titleTextView = contentView.findViewById(R.id.mId_vovery_especiallyage);
+//        titleTextView.setText(R.string.mstr_pressureress_another);
 //
-//        accountSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_bind_account);
-//        pwdSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_bind_password);
+//        accountSdkInputEditTextView = contentView.findViewById(R.id.mId_motenne_paintingsure);
+//        pwdSdkInputEditTextView = contentView.findViewById(R.id.mId_parent_glassule);
 //        sdkinputview_third_account = contentView.findViewById(R.id.sdkinputview_third_account);
 //
 //        bindConfirm = contentView.findViewById(R.id.btn_confirm_bind);
@@ -143,13 +143,13 @@
 //
 //        account = registerAccountEditText.getEditableText().toString().trim();
 //        if (TextUtils.isEmpty(account)) {
-//            ToastUtils.toast(getActivity(), R.string.py_account_empty);
+//            ToastUtils.toast(getActivity(), R.string.mstr_egri_sacceur);
 //            return;
 //        }
 //
 //        password = registerPasswordEditText.getEditableText().toString().trim();
 //        if (TextUtils.isEmpty(password)) {
-//            ToastUtils.toast(getActivity(), R.string.py_password_empty);
+//            ToastUtils.toast(getActivity(), R.string.mstr_multaton_uxoriatic);
 //            return;
 //        }
 //
@@ -160,11 +160,11 @@
 ////        }
 //
 //        if (!SdkUtil.checkAccount(account)) {
-//            toast(R.string.text_account_format);
+//            toast(R.string.mstr_downsive_strategyness);
 //            return;
 //        }
 //        if (!SdkUtil.checkPassword(password)) {
-//            toast(R.string.text_pwd_format);
+//            toast(R.string.mstr_vasety_parvitor);
 //            return;
 //        }
 //

@@ -62,7 +62,7 @@ public class ShareUtil {
             }
             activity.startActivityForResult(sendIntent, SHARE_WHATSAPP);
         } else {
-            String tip = String.format(activity.getResources().getString(R.string.gama_toast_msg_app_not_install), "Whatsapp");
+            String tip = String.format(activity.getResources().getString(R.string.mstr_whenard_anthraship), "Whatsapp");
             ToastUtils.toast(activity, tip);
             PL.e("没有安装whatsapp");
             if(iSdkCallBack != null) {
@@ -88,7 +88,7 @@ public class ShareUtil {
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                String tip = String.format(activity.getResources().getString(R.string.gama_toast_msg_app_not_install), "Line");
+                String tip = String.format(activity.getResources().getString(R.string.mstr_whenard_anthraship), "Line");
                 ToastUtils.toast(activity, tip);
                 PL.e("没有安装line");
                 if(iSdkCallBack != null) {
@@ -96,7 +96,7 @@ public class ShareUtil {
                 }
             }
         } else {
-            String tip = String.format(activity.getResources().getString(R.string.gama_toast_msg_app_not_install), "Line");
+            String tip = String.format(activity.getResources().getString(R.string.mstr_whenard_anthraship), "Line");
             ToastUtils.toast(activity, tip);
             PL.e("没有安装line");
             if(iSdkCallBack != null) {

@@ -16,7 +16,7 @@
         >
 
         <ImageView
-            android:id="@+id/sdk_input_item_icon"
+            android:id="@+id/mId_stalagmfold_emeaeous"
             android:layout_width="21dp"
             android:layout_height="21dp"
             android:scaleType="fitCenter"
@@ -27,8 +27,8 @@
             android:layout_width="1dp"
             android:layout_height="14dp"
             android:layout_marginStart="8dp"
-            android:background="@color/c_C0C0C0"
-            android:id="@+id/sdk_input_item_line1"
+            android:background="@color/mcolor_ethopaintingist_loseture"
+            android:id="@+id/mId_behavior_sub"
             />
 
         <TextView
@@ -37,10 +37,10 @@
             android:gravity="center_vertical"
             android:layout_marginStart="2dp"
             android:maxLines="1"
-            android:textSize="@dimen/sp_24"
-            android:text="@string/py_vfcode"
-            android:textColor="@color/e_ff3e37"
-            android:id="@+id/sdk_input_item_lable"
+            android:textSize="@dimen/mdimen_crescel_secutization"
+            android:text="@string/mstr_genuical_sororern"
+            android:textColor="@color/mcolor_archa_plumbia"
+            android:id="@+id/mId_helpern_nemorant"
             android:visibility="gone"
 
             />
@@ -54,14 +54,14 @@
             android:gravity="center_vertical"
             android:maxLines="1"
             android:inputType="text"
-            android:hint="@string/py_msg_account_hint"
-            android:id="@+id/sdk_input_item_et"
+            android:hint="@string/mstr_environmentalaire_mesiitude"
+            android:id="@+id/mId_varichood_erganeous"
             android:background="@null"
             android:textSize="14sp"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:textColor="@color/white_c"
-            android:textColorHint="@color/c_848484"
+            android:textColor="@color/mcolor_tag_tetrice"
+            android:textColorHint="@color/mcolor_bromoan_undecimeer"
             android:imeOptions="flagNoExtractUi"
             />
 
@@ -69,7 +69,7 @@
         <LinearLayout
             android:layout_width="36dp"
             android:layout_height="match_parent"
-            android:id="@+id/sdk_input_item_eye_layout"
+            android:id="@+id/mId_identifyform_issue"
             android:visibility="gone"
             android:gravity="center">
 
@@ -78,7 +78,7 @@
                 android:layout_height="17dp"
                 android:src="@drawable/okokok_opportunityial"
                 android:scaleType="fitCenter"
-                android:id="@+id/sdk_input_item_eye"
+                android:id="@+id/mId_changeth_passment"
                 />
 
         </LinearLayout>
@@ -87,7 +87,7 @@
         <LinearLayout
             android:layout_width="36dp"
             android:layout_height="match_parent"
-            android:id="@+id/sdk_input_item_account_history"
+            android:id="@+id/mId_memberfic_authorery"
             android:visibility="gone"
             android:gravity="center">
 
@@ -98,7 +98,7 @@
                 android:layout_marginStart="2dp"
                 android:gravity="center_vertical"
                 android:scaleType="fitCenter"
-                android:id="@+id/iv_account_history"
+                android:id="@+id/mId_environmentaler_bitory"
                 android:src="@drawable/okokok_stillfold"
                 />
         </LinearLayout>
@@ -109,7 +109,7 @@
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:layout_alignParentBottom="true"
-        android:id="@+id/sdk_input_item_bottom_line"
-        android:background="@color/c_C0C0C0"/>
+        android:id="@+id/mId_unguilet_voiceature"
+        android:background="@color/mcolor_ethopaintingist_loseture"/>
 
 </RelativeLayout>

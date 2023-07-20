@@ -7,6 +7,6 @@
     <com.ldy.sdk.SWebViewLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/sl_web_act"/>
+        android:id="@+id/mId_collectionfic_nausitude"/>
 
 </RelativeLayout>

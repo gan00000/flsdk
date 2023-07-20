@@ -1,20 +1,20 @@
 <resources>
 
-    <string name="text_phone_bind">핸드폰 연동하기</string>
-    <string name="text_phone_area_code">지역 번호</string>
-    <string name="text_phone_input_hint">핸드폰 번호를 입력하세요</string>
-    <string name="text_phone_hasbind_tips">성공적으로 연동되었습니다. 현재 연동된 휴대폰 번호입니다</string>
-    <string name="text_area_code_not_empty">휴대폰 지역 번호는 비워둘 수 없습니다</string>
-    <string name="text_phone_not_empty">휴대폰 번호는 비워둘 수 없습니다</string>
-    <string name="text_phone_not_match">휴대폰 번호 형식이 잘못되었습니다</string>
-    <string name="text_vfcode_has_send">인증번호 전송되었습니다</string>
-    <string name="text_phone_bind_success">휴대폰 연동 성공</string>
-    <string name="text_has_bind_tips_google">Google은 이미 회원 계정으로 연동되었습니다</string>
-    <string name="text_has_bind_tips_fb">Facebook이 회원 계정으로 연동되었습니다</string>
-    <string name="text_has_bind_tips_guest">게스트 계정은 이미 회원 계정으로 연동되었습니다</string>
-    <string name="text_has_bind_tips_line">LINE은 이미 회원 계정으로 연동되었습니다</string>
-    <string name="text_has_bind_tips_mw">회원계정</string>
-    <string name="text_notice">공지</string>
-    <string name="text_waiting">기다리는 중...</string>
+    <string name="mstr_trecentious_turbine">핸드폰 연동하기</string>
+    <string name="mstr_remember_marketo">지역 번호</string>
+    <string name="mstr_archyfold_haurvariousery">핸드폰 번호를 입력하세요</string>
+    <string name="mstr_truscoachaire_specialen">성공적으로 연동되었습니다. 현재 연동된 휴대폰 번호입니다</string>
+    <string name="mstr_cordfic_scandrecentlyous">휴대폰 지역 번호는 비워둘 수 없습니다</string>
+    <string name="mstr_shareee_octaire">휴대폰 번호는 비워둘 수 없습니다</string>
+    <string name="mstr_ominency_wouldling">휴대폰 번호 형식이 잘못되었습니다</string>
+    <string name="mstr_exampleitor_practice">인증번호 전송되었습니다</string>
+    <string name="mstr_transimagineation_vol">휴대폰 연동 성공</string>
+    <string name="mstr_turbinetic_secreous">Google은 이미 회원 계정으로 연동되었습니다</string>
+    <string name="mstr_uxori_thusably">Facebook이 회원 계정으로 연동되었습니다</string>
+    <string name="mstr_scrupdiseasearium_taxful">게스트 계정은 이미 회원 계정으로 연동되었습니다</string>
+    <string name="mstr_factorful_omenable">LINE은 이미 회원 계정으로 연동되었습니다</string>
+    <string name="mstr_needward_hormate">회원계정</string>
+    <string name="mstr_opoteran_glassress">공지</string>
+    <string name="mstr_ground_boardid">기다리는 중...</string>
 
 </resources>

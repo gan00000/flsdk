@@ -91,20 +91,20 @@ public class AccountBindPhoneLayout extends SLoginBaseRelativeLayout {
 
         contentView = inflater.inflate(R.layout.okokok_plecting, null);
 
-        okBtn = contentView.findViewById(R.id.btn_confirm);
-        iv_bind_phone_close = contentView.findViewById(R.id.iv_bind_phone_close);
+        okBtn = contentView.findViewById(R.id.mId_scleritor_specseemward);
+        iv_bind_phone_close = contentView.findViewById(R.id.mId_pugnior_exper);
 
-        ll_bind_view = contentView.findViewById(R.id.ll_bind_view);
-        tv_area_code = contentView.findViewById(R.id.tv_area_code);
+        ll_bind_view = contentView.findViewById(R.id.mId_satitor_calidive);
+        tv_area_code = contentView.findViewById(R.id.mId_cleist_executiveaneous);
 
-        iv_area_code_select = contentView.findViewById(R.id.iv_area_code_select);
-        et_input_phone_number = contentView.findViewById(R.id.et_input_phone_number);
-        et_input_vf_code = contentView.findViewById(R.id.et_input_vf_code);
-        btn_find_get_vfcode = contentView.findViewById(R.id.btn_find_get_vfcode);
+        iv_area_code_select = contentView.findViewById(R.id.mId_dia_life);
+        et_input_phone_number = contentView.findViewById(R.id.mId_batho_crepitie);
+        et_input_vf_code = contentView.findViewById(R.id.mId_catchie_voladropess);
+        btn_find_get_vfcode = contentView.findViewById(R.id.mId_federalaneous_receiveality);
 
-        ll_has_bind_view = contentView.findViewById(R.id.ll_has_bind_view);
-        tv_area_code_2 = contentView.findViewById(R.id.tv_area_code_2);
-        et_input_phone_number_2 = contentView.findViewById(R.id.et_input_phone_number_2);
+        ll_has_bind_view = contentView.findViewById(R.id.mId_sphenitious_courtety);
+        tv_area_code_2 = contentView.findViewById(R.id.mId_structurearium_offer);
+        et_input_phone_number_2 = contentView.findViewById(R.id.mId_polyile_toism);
         et_input_phone_number_2.setEnabled(false);
 
         List<PhoneInfo> phoneInfos = SdkUtil.getPhoneInfoList(getContext());
@@ -163,11 +163,11 @@ public class AccountBindPhoneLayout extends SLoginBaseRelativeLayout {
                 String vfCode = et_input_vf_code.getEditableText().toString();
 
                 if (SStringUtil.isEmpty(areaCode)) {
-                    ToastUtils.toast(getContext(),R.string.text_area_code_not_empty);
+                    ToastUtils.toast(getContext(),R.string.mstr_cordfic_scandrecentlyous);
                     return;
                 }
                 if (SStringUtil.isEmpty(phone)) {
-                    ToastUtils.toast(getContext(),R.string.text_phone_not_empty);
+                    ToastUtils.toast(getContext(),R.string.mstr_shareee_octaire);
                     return;
                 }
 
@@ -176,14 +176,14 @@ public class AccountBindPhoneLayout extends SLoginBaseRelativeLayout {
                 }
 
                 if (!phone.matches(currentPhoneInfo.getPattern())){
-                    ToastUtils.toast(getContext(),R.string.text_phone_not_match);
+                    ToastUtils.toast(getContext(),R.string.mstr_ominency_wouldling);
                     return;
                 }
 
                 Request.sendVfCode(getContext(), true, areaCode, phone, new SFCallBack<BaseResultModel>() {
                     @Override
                     public void success(BaseResultModel result, String msg) {
-                        ToastUtils.toast(getContext(),R.string.text_vfcode_has_send);
+                        ToastUtils.toast(getContext(),R.string.mstr_exampleitor_practice);
                         startTimer();
                     }
 
@@ -214,15 +214,15 @@ public class AccountBindPhoneLayout extends SLoginBaseRelativeLayout {
                 String vfCode = et_input_vf_code.getEditableText().toString();
 
                 if (SStringUtil.isEmpty(areaCode)) {
-                    ToastUtils.toast(getContext(),R.string.text_area_code_not_empty);
+                    ToastUtils.toast(getContext(),R.string.mstr_cordfic_scandrecentlyous);
                     return;
                 }
                 if (SStringUtil.isEmpty(phone)) {
-                    ToastUtils.toast(getContext(),R.string.text_phone_not_empty);
+                    ToastUtils.toast(getContext(),R.string.mstr_shareee_octaire);
                     return;
                 }
                 if (SStringUtil.isEmpty(vfCode)) {
-                    ToastUtils.toast(getContext(),R.string.py_vfcode_empty);
+                    ToastUtils.toast(getContext(),R.string.mstr_chryso_expectition);
                     return;
                 }
 
@@ -231,7 +231,7 @@ public class AccountBindPhoneLayout extends SLoginBaseRelativeLayout {
                 }
 
                 if (!phone.matches(currentPhoneInfo.getPattern())){
-                    ToastUtils.toast(getContext(),R.string.text_phone_not_match);
+                    ToastUtils.toast(getContext(),R.string.mstr_ominency_wouldling);
                     return;
                 }
 
@@ -239,7 +239,7 @@ public class AccountBindPhoneLayout extends SLoginBaseRelativeLayout {
                 Request.bindPhone(getContext(),true, areaCode, phone, vfCode, new SFCallBack<SLoginResult>() {
                     @Override
                     public void success(SLoginResult aaaSLoginResponse1, String msg) {
-                        ToastUtils.toast(getContext(),R.string.text_phone_bind_success);
+                        ToastUtils.toast(getContext(),R.string.mstr_transimagineation_vol);
                         isBindSuccess = true;
 //                        SLoginResult sLoginResponse = SdkUtil.getCurrentUserLoginResponse(getContext());
 //                        sLoginResponse.getData().setTelephone(areaCode + "-" + phone);
@@ -343,7 +343,7 @@ public class AccountBindPhoneLayout extends SLoginBaseRelativeLayout {
             requestPhoneVfcodeTimer = null;
         }
         btn_find_get_vfcode.setClickable(true);
-        btn_find_get_vfcode.setText(R.string.py_register_account_get_vfcode);
+        btn_find_get_vfcode.setText(R.string.mstr_appear_agog);
     }
 
 }

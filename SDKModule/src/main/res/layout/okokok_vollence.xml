@@ -12,7 +12,7 @@
         android:textStyle="bold"
         android:textSize="24sp"
         android:textColor="@android:color/white"
-        android:id="@+id/sdk_head_title"
+        android:id="@+id/mId_vovery_especiallyage"
         android:gravity="center"/>
 
 
@@ -21,7 +21,7 @@
         android:layout_height="match_parent"
         android:layout_marginStart="34dp"
         android:gravity="center_vertical"
-        android:id="@+id/layout_head_back"
+        android:id="@+id/mId_whilekin_domeous"
         android:orientation="vertical">
 
         <ImageView

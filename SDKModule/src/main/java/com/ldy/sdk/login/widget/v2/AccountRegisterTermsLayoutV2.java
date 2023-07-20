@@ -39,7 +39,7 @@
 //
 //    public View onCreateView(LayoutInflater inflater) {
 //        contentView = inflater.inflate(R.layout.v2_gama_account_register_terms, null);
-//        backView = contentView.findViewById(R.id.py_back_button);
+//        backView = contentView.findViewById(R.id.mId_choreible_felinoon);
 //
 //        termsView = (WebView) contentView.findViewById(R.id.gama_terms);
 //        termsView.clearCache(true);

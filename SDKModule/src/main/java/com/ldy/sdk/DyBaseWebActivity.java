@@ -46,7 +46,7 @@ public class DyBaseWebActivity extends SBaseSdkActivity {
             webTitle = getIntent().getStringExtra(PLAT_WEBVIEW_TITLE);
         }
 
-        sWebViewLayout = findViewById(R.id.sl_web_act);
+        sWebViewLayout = findViewById(R.id.mId_collectionfic_nausitude);
         sWebView = sWebViewLayout.getsWebView();
         sWebViewLayout.getTitleHeaderView().setVisibility(View.GONE);
 

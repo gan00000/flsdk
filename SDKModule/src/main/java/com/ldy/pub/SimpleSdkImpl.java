@@ -782,7 +782,7 @@ public class SimpleSdkImpl implements IDYSDK {
             @Override
             public void success(BasePayBean basePayBean) {
                 PL.i("IPayCallBack success");
-                ToastUtils.toast(activity,R.string.text_finish_pay);
+                ToastUtils.toast(activity,R.string.mstr_thoughtitude_betteratic);
                 if (otherPayWebViewDialog != null && otherPayWebViewDialog.isShowing()){
                     otherPayWebViewDialog.dismiss();
                 }
@@ -931,17 +931,17 @@ public class SimpleSdkImpl implements IDYSDK {
                 BaseResultModel errorModel = new BaseResultModel();
                 errorModel.setCode("1001");
                 if (SStringUtil.isEmpty(areaCode)) {
-                    ToastUtils.toast(activity,R.string.text_area_code_not_empty);
+                    ToastUtils.toast(activity,R.string.mstr_cordfic_scandrecentlyous);
                     if (sfCallBack != null){
-                        errorModel.setMessage(activity.getString(R.string.text_area_code_not_empty));
+                        errorModel.setMessage(activity.getString(R.string.mstr_cordfic_scandrecentlyous));
                         sfCallBack.fail(errorModel,errorModel.getWrapRawResponse());
                     }
                     return;
                 }
                 if (SStringUtil.isEmpty(telephone)) {
-                    ToastUtils.toast(activity,R.string.text_phone_not_empty);
+                    ToastUtils.toast(activity,R.string.mstr_shareee_octaire);
                     if (sfCallBack != null){
-                        errorModel.setMessage(activity.getString(R.string.text_phone_not_empty));
+                        errorModel.setMessage(activity.getString(R.string.mstr_shareee_octaire));
                         sfCallBack.fail(errorModel,errorModel.getWrapRawResponse());
                     }
                     return;
@@ -949,9 +949,9 @@ public class SimpleSdkImpl implements IDYSDK {
                 PhoneInfo phoneInfo = SdkUtil.getPhoneInfoByAreaCode(activity,areaCode);
                 if (phoneInfo != null){
                     if (!telephone.matches(phoneInfo.getPattern())){
-                        ToastUtils.toast(activity,R.string.text_phone_not_match);
+                        ToastUtils.toast(activity,R.string.mstr_ominency_wouldling);
                         if (sfCallBack != null){
-                            errorModel.setMessage(activity.getString(R.string.text_phone_not_match));
+                            errorModel.setMessage(activity.getString(R.string.mstr_ominency_wouldling));
                             sfCallBack.fail(errorModel,errorModel.getWrapRawResponse());
                         }
                         return;
@@ -970,21 +970,21 @@ public class SimpleSdkImpl implements IDYSDK {
             public void run() {
 
                 if (SStringUtil.isEmpty(areaCode)) {
-                    ToastUtils.toast(activity,R.string.text_area_code_not_empty);
+                    ToastUtils.toast(activity,R.string.mstr_cordfic_scandrecentlyous);
                     return;
                 }
                 if (SStringUtil.isEmpty(telephone)) {
-                    ToastUtils.toast(activity,R.string.text_phone_not_empty);
+                    ToastUtils.toast(activity,R.string.mstr_shareee_octaire);
                     return;
                 }
                 if (SStringUtil.isEmpty(vfCode)) {
-                    ToastUtils.toast(activity,R.string.py_vfcode_empty);
+                    ToastUtils.toast(activity,R.string.mstr_chryso_expectition);
                     return;
                 }
                 PhoneInfo phoneInfo = SdkUtil.getPhoneInfoByAreaCode(activity,areaCode);
                 if (phoneInfo != null){
                     if (!telephone.matches(phoneInfo.getPattern())){
-                        ToastUtils.toast(activity,R.string.text_phone_not_match);
+                        ToastUtils.toast(activity,R.string.mstr_ominency_wouldling);
                         return;
                     }
                 }
@@ -998,22 +998,22 @@ public class SimpleSdkImpl implements IDYSDK {
     public void requestUpgradeAccount(Activity activity, String account, String pwd, SFCallBack<SLoginResult> sfCallBack ) {
 
         if (TextUtils.isEmpty(account)) {
-            ToastUtils.toast(activity, R.string.py_account_empty);
+            ToastUtils.toast(activity, R.string.mstr_egri_sacceur);
             return;
         }
         final String account_temp = account.trim();
         if (!SdkUtil.checkAccount(account_temp)) {
-            ToastUtils.toast(activity,R.string.text_account_format);
+            ToastUtils.toast(activity,R.string.mstr_downsive_strategyness);
             return;
         }
 
         if (TextUtils.isEmpty(pwd)) {
-            ToastUtils.toast(activity, R.string.py_password_empty);
+            ToastUtils.toast(activity, R.string.mstr_multaton_uxoriatic);
             return;
         }
         final String pwd_temp = pwd.trim();
         if (!SdkUtil.checkPassword(pwd_temp)) {
-            ToastUtils.toast(activity,R.string.text_pwd_format);
+            ToastUtils.toast(activity,R.string.mstr_vasety_parvitor);
             return;
         }
         activity.runOnUiThread(new Runnable() {
@@ -1026,7 +1026,7 @@ public class SimpleSdkImpl implements IDYSDK {
 
     private void doWebPay(Activity activity, GooglePayCreateOrderIdReqBean bean) {
 
-        String payThirdUrl = ResConfig.getPayPreferredUrl(activity) + activity.getResources().getString(R.string.api_pay_web_payment);//"api/web/payment.page";
+        String payThirdUrl = ResConfig.getPayPreferredUrl(activity) + activity.getResources().getString(R.string.mstr_pausie_earlyuous);//"api/web/payment.page";
         bean.setCompleteUrl(payThirdUrl);
 
         String webUrl = bean.createPreRequestUrl();

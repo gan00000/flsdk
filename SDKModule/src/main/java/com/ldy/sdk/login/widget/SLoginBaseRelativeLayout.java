@@ -89,11 +89,11 @@ public abstract class SLoginBaseRelativeLayout extends SBaseRelativeLayout {
         }
 
 //        String accountError1 = getActivity().getResources().getString(R.string.py_account_error) + ":";
-//        String accountError2 = getActivity().getResources().getString(R.string.py_register_account_hit);
+//        String accountError2 = getActivity().getResources().getString(R.string.mstr_thalamdetail_experieven);
 //        errorStrAccount = accountError1 + accountError2;
 //
 //        String passwordError1 = getActivity().getResources().getString(R.string.py_password_error) + ":";
-//        String passwordError2 = getActivity().getResources().getString(R.string.py_register_password_hit);
+//        String passwordError2 = getActivity().getResources().getString(R.string.mstr_veracieur_thalamarium);
 //        errorStrPassword = passwordError1 + passwordError2;
     }
 

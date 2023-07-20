@@ -16,7 +16,7 @@
 
 
         <ImageView
-            android:id="@+id/history_account_item_icon"
+            android:id="@+id/mId_emety_wall"
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_marginStart="15dp"
@@ -26,7 +26,7 @@
             />
 
         <TextView
-            android:id="@+id/history_account_item_text"
+            android:id="@+id/mId_orexic_cingitor"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_marginStart="15dp"
@@ -38,7 +38,7 @@
         <LinearLayout
             android:layout_width="50dp"
             android:layout_height="match_parent"
-            android:id="@+id/history_account_item_delete_layout"
+            android:id="@+id/mId_corollarm_avoidior"
             android:gravity="center">
 
             <Button
@@ -46,7 +46,7 @@
                 android:layout_height="14dp"
                 android:background="@mipmap/okokok_haemular"
                 android:layout_marginEnd="10dp"
-                android:id="@+id/history_account_item_delete_btn"
+                android:id="@+id/mId_trahan_son"
                 />
         </LinearLayout>
 
@@ -56,7 +56,7 @@
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/c_C0C0C0"/>
+        android:background="@color/mcolor_ethopaintingist_loseture"/>
 
 
 </LinearLayout>

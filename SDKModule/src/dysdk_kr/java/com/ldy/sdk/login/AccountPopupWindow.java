@@ -72,7 +72,7 @@ public class AccountPopupWindow extends PopupWindow {
         }else{
             this.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         }
-        historyAccountRv = contentView.findViewById(R.id.sdk_history_account_rv);
+        historyAccountRv = contentView.findViewById(R.id.mId_cumbitious_domfaction);
     }
 
     public void showOnView(View anchorView){
@@ -107,7 +107,7 @@ public class AccountPopupWindow extends PopupWindow {
             protected void convert(final ViewHolder holder, final AccountModel accountModel, final int position) {
 
 
-                holder.setOnClickListener(R.id.history_account_item_text, new View.OnClickListener() {
+                holder.setOnClickListener(R.id.mId_orexic_cingitor, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 //                        loginAccountEditText.setText(accountModel.getAccount());
@@ -119,14 +119,14 @@ public class AccountPopupWindow extends PopupWindow {
                         AccountPopupWindow.this.dismiss();
                     }
                 });
-                holder.setOnClickListener(R.id.history_account_item_delete_layout, new View.OnClickListener() {
+                holder.setOnClickListener(R.id.mId_corollarm_avoidior, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 
                         removeAccountMode(position);
                     }
                 });
-                holder.setOnClickListener(R.id.history_account_item_delete_btn, new View.OnClickListener() {
+                holder.setOnClickListener(R.id.mId_trahan_son, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         removeAccountMode(position);
@@ -150,8 +150,8 @@ public class AccountPopupWindow extends PopupWindow {
                     imageResId = R.mipmap.okokok_rogitious;
                     showName = accountModel.getAccount();
                 }
-                holder.setImageResource(R.id.history_account_item_icon, imageResId);
-                holder.setText(R.id.history_account_item_text, showName);
+                holder.setImageResource(R.id.mId_emety_wall, imageResId);
+                holder.setText(R.id.mId_orexic_cingitor, showName);
             }
 
         };

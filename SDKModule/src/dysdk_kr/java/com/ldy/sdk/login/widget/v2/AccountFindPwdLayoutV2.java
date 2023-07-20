@@ -56,15 +56,15 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
     private View onCreateView(LayoutInflater inflater) {
         contentView = inflater.inflate(R.layout.okokok_sourceize, null);
 
-        backView = contentView.findViewById(R.id.layout_head_back);
+        backView = contentView.findViewById(R.id.mId_whilekin_domeous);
 
-        TextView titleTextView = contentView.findViewById(R.id.sdk_head_title);
-        titleTextView.setText(R.string.py_login_page_forgot_pwd);
+        TextView titleTextView = contentView.findViewById(R.id.mId_vovery_especiallyage);
+        titleTextView.setText(R.string.mstr_simulaneous_sensal);
 
-        accountSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_findpwd_account);
-        vfCodeSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_findpwd_vf);
-        newPwdSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_findpwd_new);
-        newPwdAgainSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_findpwd_new_again);
+        accountSdkInputEditTextView = contentView.findViewById(R.id.mId_lessitor_legous);
+        vfCodeSdkInputEditTextView = contentView.findViewById(R.id.mId_eyeistic_shotan);
+        newPwdSdkInputEditTextView = contentView.findViewById(R.id.mId_annage_whoseette);
+        newPwdAgainSdkInputEditTextView = contentView.findViewById(R.id.mId_cause_homalsion);
 //        mSdkPhoneInputEditTextView = contentView.findViewById(R.id.sdkinputview_findpwd_phone);
 
         accountSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Account);
@@ -75,8 +75,8 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
 
         findPwdAccountEditText = accountSdkInputEditTextView.getInputEditText();
 
-        findPwdConfireBtn = contentView.findViewById(R.id.gama_find_btn_confirm);
-        btn_find_get_vfcode = contentView.findViewById(R.id.btn_find_get_vfcode);
+        findPwdConfireBtn = contentView.findViewById(R.id.mId_sequless_rhagwise);
+        btn_find_get_vfcode = contentView.findViewById(R.id.mId_federalaneous_receiveality);
 
         backView.setOnClickListener(this);
         findPwdConfireBtn.setOnClickListener(this);
@@ -125,20 +125,20 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
 
         account = findPwdAccountEditText.getText().toString().trim();
         if (TextUtils.isEmpty(account)) {
-            ToastUtils.toast(getContext(), R.string.py_account_empty);
+            ToastUtils.toast(getContext(), R.string.mstr_egri_sacceur);
             return;
         }
 
         if (!SdkUtil.checkAccount(account)) {
-            ToastUtils.toast(getContext(),R.string.text_account_format);
+            ToastUtils.toast(getContext(),R.string.mstr_downsive_strategyness);
             return;
         }
 //        if (TextUtils.isEmpty(password)) {
-//            ToastUtils.toast(getActivity(), R.string.py_password_empty);
+//            ToastUtils.toast(getActivity(), R.string.mstr_multaton_uxoriatic);
 //            return;
 //        }
 //        if (!GamaUtil.checkPassword(password)) {
-//            ToastUtils.toast(activity,R.string.text_pwd_format);
+//            ToastUtils.toast(activity,R.string.mstr_vasety_parvitor);
 //            return;
 //        }
 
@@ -150,7 +150,7 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
 
         account = findPwdAccountEditText.getEditableText().toString().trim();
         if (TextUtils.isEmpty(account)) {
-            ToastUtils.toast(getActivity(), R.string.py_account_empty);
+            ToastUtils.toast(getActivity(), R.string.mstr_egri_sacceur);
             return;
         }
 
@@ -158,29 +158,29 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
         String againPassword = newPwdAgainSdkInputEditTextView.getInputEditText().getEditableText().toString().trim();
 
         if (TextUtils.isEmpty(password)) {
-            ToastUtils.toast(getActivity(), R.string.py_password_empty);
+            ToastUtils.toast(getActivity(), R.string.mstr_multaton_uxoriatic);
             return;
         }
 
 //        if (TextUtils.isEmpty(againPassword)) {
-//            ToastUtils.toast(getActivity(), R.string.py_password_empty);
+//            ToastUtils.toast(getActivity(), R.string.mstr_multaton_uxoriatic);
 //            return;
 //        }
 
         if (!SdkUtil.checkPassword(password)) {
-            ToastUtils.toast(getContext(),R.string.text_pwd_format);
+            ToastUtils.toast(getContext(),R.string.mstr_vasety_parvitor);
             return;
         }
 
 //        if (!SStringUtil.isEqual(password,againPassword)){
-//            ToastUtils.toast(getActivity(), R.string.text_pwd_not_equel);
+//            ToastUtils.toast(getActivity(), R.string.mstr_bitesque_nugaivity);
 //            return;
 //        }
 
         String vfCode = vfCodeSdkInputEditTextView.getInputEditText().getEditableText().toString().trim();
 
         if (TextUtils.isEmpty(vfCode)) {
-            ToastUtils.toast(getActivity(), R.string.py_vfcode_empty);
+            ToastUtils.toast(getActivity(), R.string.mstr_chryso_expectition);
             return;
         }
 
@@ -196,7 +196,7 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
         } else if (TIME_OUT == operation) {
 //            gama_register_btn_get_vfcode.setBackgroundResource(R.drawable.bg_192d3f_46);
             btn_find_get_vfcode.setClickable(true);
-            btn_find_get_vfcode.setText(R.string.py_register_account_get_vfcode);
+            btn_find_get_vfcode.setText(R.string.mstr_appear_agog);
         }
     }
 

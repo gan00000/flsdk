@@ -3,5 +3,5 @@
     <corners 
         android:radius="13dp"/>
 	<solid
-	    android:color="@color/e_f0f0f0"/>
+	    android:color="@color/mcolor_phas_girlan"/>
 </shape>

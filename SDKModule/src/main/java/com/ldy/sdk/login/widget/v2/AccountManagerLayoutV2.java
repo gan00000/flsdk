@@ -39,15 +39,15 @@
 //    private View onCreateView(LayoutInflater inflater) {
 //        contentView = inflater.inflate(R.layout.okokok_haustule, null);
 //
-//        backView = contentView.findViewById(R.id.layout_head_back);
+//        backView = contentView.findViewById(R.id.mId_whilekin_domeous);
 //        backView.setOnClickListener(this);
 //
-//        TextView titleTextView = contentView.findViewById(R.id.sdk_head_title);
-//        titleTextView.setText(R.string.py_login_page_account_bind);
+//        TextView titleTextView = contentView.findViewById(R.id.mId_vovery_especiallyage);
+//        titleTextView.setText(R.string.mstr_usette_collectionfic);
 //
-//        uniqueRegBindBtn = contentView.findViewById(R.id.gama_manager_btn_guest);
-//        fbRegBindBtn = contentView.findViewById(R.id.gama_manager_btn_facebook);
-//        googleRegBindBtn = contentView.findViewById(R.id.gama_manager_btn_google);
+//        uniqueRegBindBtn = contentView.findViewById(R.id.mId_oscilluous_plos);
+//        fbRegBindBtn = contentView.findViewById(R.id.mId_deadling_commonally);
+//        googleRegBindBtn = contentView.findViewById(R.id.mId_vestform_stinguine);
 //
 //        uniqueRegBindBtn.setOnClickListener(this);
 //        fbRegBindBtn.setOnClickListener(this);

@@ -3,5 +3,5 @@
     <corners 
         android:radius="10dp"/>
 	<solid
-	    android:color="@color/white_c"/>
+	    android:color="@color/mcolor_tag_tetrice"/>
 </shape>

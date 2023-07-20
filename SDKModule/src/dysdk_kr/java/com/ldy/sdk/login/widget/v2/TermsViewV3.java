@@ -61,8 +61,8 @@ public class TermsViewV3 extends SLoginBaseRelativeLayout {
 
         contentView = inflater.inflate(R.layout.okokok_nearair, null);
 
-        okButton = contentView.findViewById(R.id.btn_term_agree);
-        closeButton = contentView.findViewById(R.id.btn_term_close);
+        okButton = contentView.findViewById(R.id.mId_rustabovehood_occurarian);
+        closeButton = contentView.findViewById(R.id.mId_relateacy_resourcehood);
 
         okButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -93,7 +93,7 @@ public class TermsViewV3 extends SLoginBaseRelativeLayout {
         }
 
         PL.i("serviceUrl=" + serviceUrl);
-        termsView1 = (WebView) contentView.findViewById(R.id.sdk_terms_webview);
+        termsView1 = (WebView) contentView.findViewById(R.id.mId_beety_menstruform);
         termsView1.clearCache(true);
 //        termsView1.setWebChromeClient(new WebChromeClient());
         termsView1.setWebViewClient(new BaseWebViewClient((Activity) getActivity()));

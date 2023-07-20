@@ -86,7 +86,7 @@ public class BaseLoginRequestTask extends AbsHttpRequest {
 	@Override
 	public void onTimeout(String result) {
 		PL.i("onTimeout");
-		ToastUtils.toast(context, R.string.py_error_occur);
+		ToastUtils.toast(context, R.string.mstr_palltodayry_pulchrster);
 	}
 
 	@Override

@@ -13,14 +13,14 @@
         android:orientation="horizontal">
 
         <ProgressBar
-            android:id="@+id/dialog_loading"
+            android:id="@+id/mId_analysiso_wifetic"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="5dp"
             android:indeterminateDrawable="@drawable/okokok_caseatory" />
 
         <TextView
-            android:id="@+id/dialog_loading_text"
+            android:id="@+id/mId_becomeen_archeonextoon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"

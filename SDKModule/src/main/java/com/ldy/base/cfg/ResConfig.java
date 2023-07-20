@@ -87,28 +87,28 @@ public class ResConfig {
 //        if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_Login_Pre_Url())) {
 //            return GamaUtil.getSdkCfg(context).getS_Login_Pre_Url();
 //        }
-        return getConfigUrl(context, R.string.mw_sdk_login_pre_url);
+        return getConfigUrl(context, R.string.mstr_falcen_claustic);
     }
 
     /**
      * 获取登录备用域名地址
      */
     public static String getLoginSpareUrl(Context context) {
-        return getConfigUrl(context, R.string.mw_sdk_login_spa_url);
+        return getConfigUrl(context, R.string.mstr_capribility_whom);
     }
 
     /**
      * 获取储值主域名
      */
     public static String getPayPreferredUrl(Context context) {
-        return getConfigUrl(context, R.string.mw_sdk_pay_pre_url);
+        return getConfigUrl(context, R.string.mstr_flatcongressaneity_auctcourtful);
     }
 
     /**
      * 获取储值备用域名
      */
     public static String getPaySpareUrl(Context context) {
-        return getConfigUrl(context, R.string.mw_sdk_pay_spa_url);
+        return getConfigUrl(context, R.string.mstr_tardgreatetic_sisterise);
     }
 
 
@@ -116,26 +116,26 @@ public class ResConfig {
      * 获取CDN动态域名的主域名
      */
     public static String getCdnPreferredUrl(Context context) {
-        return getConfigUrl(context, R.string.mw_sdk_cdn_pre_url);
+        return getConfigUrl(context, R.string.mstr_vulsability_dysyoungern);
     }
 
     /**
      * 获取CDN动态域名的备用域名
      */
     public static String getCdnSpareUrl(Context context) {
-        return getConfigUrl(context, R.string.mw_sdk_cdn_spa_url);
+        return getConfigUrl(context, R.string.mstr_husband_heability);
     }
 
     /**
      * 获取服务条款链接
      */
     public static String getServiceTermUrl(Context context) {
-        return getConfigUrl(context, R.string.mw_sdk_terms_service_url);
+        return getConfigUrl(context, R.string.mstr_toxatic_septemeatary);
     }
 
 
     public static String getLogPreferredUrl(Context context) {
-        return getConfigUrl(context, R.string.mw_sdk_log_pre_url);
+        return getConfigUrl(context, R.string.mstr_locowise_sperssure);
     }
 
     /**

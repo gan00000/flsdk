@@ -26,7 +26,7 @@
             android:layout_marginTop="34dp"
             android:orientation="horizontal"
             android:background="@drawable/sdk_btn_bg"
-            android:id="@+id/gama_manager_btn_guest">
+            android:id="@+id/mId_oscilluous_plos">
 
 
             <ImageView
@@ -57,7 +57,7 @@
             android:layout_marginTop="20dp"
             android:orientation="horizontal"
             android:background="@drawable/sdk_gogole_btn_bg"
-            android:id="@+id/gama_manager_btn_google">
+            android:id="@+id/mId_vestform_stinguine">
 
 
             <ImageView
@@ -74,7 +74,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textColor="@color/e_7a7a7a"
+                android:textColor="@color/mcolor_gest_spargance"
                 android:gravity="center"
                 android:textSize="@dimen/sp_26"
                 android:text="Google帳號綁定"/>
@@ -88,7 +88,7 @@
             android:layout_marginTop="20dp"
             android:orientation="horizontal"
             android:background="@drawable/fb_btn_bg"
-            android:id="@+id/gama_manager_btn_facebook">
+            android:id="@+id/mId_deadling_commonally">
 
 
             <ImageView

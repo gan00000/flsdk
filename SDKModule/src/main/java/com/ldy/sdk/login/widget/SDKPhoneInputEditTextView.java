@@ -85,9 +85,9 @@
 //            l.addRule(RelativeLayout.CENTER_IN_PARENT);
 //            addView(contentView, l);
 //
-//            iconImage = contentView.findViewById(R.id.sdk_input_item_icon);
-//            labTextView = contentView.findViewById(R.id.sdk_input_item_lable);
-//            inputEditText = contentView.findViewById(R.id.sdk_input_item_et);
+//            iconImage = contentView.findViewById(R.id.mId_stalagmfold_emeaeous);
+//            labTextView = contentView.findViewById(R.id.mId_helpern_nemorant);
+//            inputEditText = contentView.findViewById(R.id.mId_varichood_erganeous);
 //            phoneAreaTextView = contentView.findViewById(R.id.sdk_input_item_phone_area);
 //
 //            araeCodeMoreListView = contentView.findViewById(R.id.sdk_input_item_phone_list_icon);

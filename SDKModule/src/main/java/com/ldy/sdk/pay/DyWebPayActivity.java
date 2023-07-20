@@ -115,7 +115,7 @@ public class DyWebPayActivity extends DyBaseWebActivity {
             @Override
             public void success(BasePayBean basePayBean) {
                 PL.i("IPayCallBack success");
-                ToastUtils.toast(activity,R.string.text_finish_pay);
+                ToastUtils.toast(activity,R.string.mstr_thoughtitude_betteratic);
 
 //                SdkEventLogger.trackinPayEvent(activity, basePayBean);
 

@@ -35,7 +35,7 @@
 
             <!--            账号-->
             <com.ldy.sdk.login.widget.SDKInputEditTextView
-                android:id="@+id/sdkinputview_account_login_account"
+                android:id="@+id/mId_angukidit_shortfier"
                 android:layout_width="300dp"
                 android:layout_height="40dp"
                 android:layout_centerHorizontal="true"
@@ -43,10 +43,10 @@
 
             <!--            密码-->
             <com.ldy.sdk.login.widget.SDKInputEditTextView
-                android:id="@+id/sdkinputview_account_login_password"
+                android:id="@+id/mId_findose_soldieral"
                 android:layout_width="300dp"
                 android:layout_height="40dp"
-                android:layout_below="@id/sdkinputview_account_login_account"
+                android:layout_below="@id/mId_angukidit_shortfier"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="16dp" />
 
@@ -54,19 +54,19 @@
             <RelativeLayout
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/sdkinputview_account_login_password"
+                android:layout_below="@id/mId_findose_soldieral"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="8dp"
                 android:orientation="horizontal">
 
                 <View
-                    android:id="@+id/view_center_base"
+                    android:id="@+id/mId_enneaise_curvless"
                     android:layout_width="30dp"
                     android:layout_height="2dp"
                     android:layout_centerInParent="true" />
 
                 <CheckBox
-                    android:id="@+id/cb_agree_term"
+                    android:id="@+id/mId_theyory_rapcloseior"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:layout_alignParentStart="true"
@@ -75,7 +75,7 @@
                     android:button="@null" />
 
                 <TextView
-                    android:id="@+id/tv_login_term"
+                    android:id="@+id/mId_cru_thalassern"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
@@ -83,12 +83,12 @@
                     android:layout_marginStart="20dp"
                     android:gravity="center"
                     android:maxLines="1"
-                    android:text="@string/text_term_moqie"
-                    android:textColor="@color/c_C0C0C0"
+                    android:text="@string/mstr_issuesure_scut"
+                    android:textColor="@color/mcolor_ethopaintingist_loseture"
                     android:textSize="12sp" />
 
                 <TextView
-                    android:id="@+id/gama_login_tv_forget_password"
+                    android:id="@+id/mId_emeticturn_duringacle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -96,8 +96,8 @@
                     android:layout_marginEnd="4dp"
                     android:gravity="center"
                     android:maxLines="1"
-                    android:text="@string/py_findpwd"
-                    android:textColor="@color/c_C0C0C0"
+                    android:text="@string/mstr_fringization_amicress"
+                    android:textColor="@color/mcolor_ethopaintingist_loseture"
                     android:textSize="12sp" />
 
 
@@ -108,24 +108,24 @@
 
 
         <Button
-            android:id="@+id/gama_login_btn_confirm"
+            android:id="@+id/mId_sebiform_skin"
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:layout_marginTop="25dp"
             android:background="@drawable/okokok_droper"
             android:gravity="center"
-            android:text="@string/py_login"
+            android:text="@string/mstr_astromillionan_professionality"
             android:textColor="@android:color/white"
             android:textSize="17sp" />
 
         <Button
-            android:id="@+id/guestLoginView"
+            android:id="@+id/mId_septenably_democraticette"
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/okokok_droper"
             android:gravity="center"
-            android:text="@string/guest_login_btn"
+            android:text="@string/mstr_road_nonagenkin"
             android:textColor="@android:color/white"
             android:textSize="17sp" />
 
@@ -139,23 +139,23 @@
             android:visibility="gone">
 
             <CheckBox
-                android:id="@+id/gama_gama_start_term_cb1"
+                android:id="@+id/mId_manthscience_speechtic"
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:background="@drawable/okokok_theyory"
                 android:button="@null" />
 
             <TextView
-                android:id="@+id/gama_gama_start_term_tv1"
+                android:id="@+id/mId_anthitor_smallain"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginStart="4dp"
                 android:gravity="center_vertical"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
-                android:text="@string/gama_ui_term_port_read2"
+                android:text="@string/mstr_crepitess_astrotic"
                 android:textColor="@android:color/black"
-                android:textSize="@dimen/sp_19" />
+                android:textSize="@dimen/mdimen_educationsive_testplayast" />
         </LinearLayout>
 
         <RelativeLayout
@@ -167,42 +167,42 @@
 
 
             <TextView
-                android:id="@+id/gama_login_tv_change_password"
+                android:id="@+id/mId_messagesive_humanfaction"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:gravity="center"
                 android:maxLines="2"
-                android:text="@string/py_login_page_change_pwd"
-                android:textColor="@color/e_777777"
-                android:textSize="@dimen/sp_20"
+                android:text="@string/mstr_calorent_specence"
+                android:textColor="@color/mcolor_answerern_storyair"
+                android:textSize="@dimen/mdimen_equinaire_turbitude"
                 android:textStyle="bold" />
 
 
             <TextView
-                android:id="@+id/gama_login_tv_register"
+                android:id="@+id/mId_relateer_beginetic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="40dp"
                 android:layout_toStartOf="@+id/gama_login_tv_change_password"
                 android:gravity="center"
                 android:maxLines="2"
-                android:text="@string/py_register_account"
-                android:textColor="@color/e_777777"
-                android:textSize="@dimen/sp_20"
+                android:text="@string/mstr_kines_askcy"
+                android:textColor="@color/mcolor_answerern_storyair"
+                android:textSize="@dimen/mdimen_equinaire_turbitude"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/gama_login_tv_link"
+                android:id="@+id/mId_mesoical_dinnerism"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 android:layout_toEndOf="@+id/gama_login_tv_change_password"
                 android:gravity="center"
                 android:maxLines="2"
-                android:text="@string/py_btn_bind"
-                android:textColor="@color/e_777777"
-                android:textSize="@dimen/sp_20"
+                android:text="@string/mstr_manageracle_cover"
+                android:textColor="@color/mcolor_answerern_storyair"
+                android:textSize="@dimen/mdimen_equinaire_turbitude"
                 android:textStyle="bold" />
 
 
@@ -219,12 +219,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/text_login_other"
-                android:textColor="@color/c_C0C0C0"
+                android:text="@string/mstr_totalation_pleasen"
+                android:textColor="@color/mcolor_ethopaintingist_loseture"
                 android:textSize="11sp" />
 
             <LinearLayout
-                android:id="@+id/guestLoginView22222"
+                android:id="@+id/mId_clastary_treewise"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="7dp"
@@ -242,15 +242,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
                     android:gravity="center"
-                    android:text="@string/guest_login_btn"
-                    android:textColor="@color/c_545454"
-                    android:textSize="@dimen/sp_18"
+                    android:text="@string/mstr_road_nonagenkin"
+                    android:textColor="@color/mcolor_fetard_pullacious"
+                    android:textSize="@dimen/mdimen_noteism_millaneous"
                     android:visibility="gone" />
 
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/fbLoginView"
+                android:id="@+id/mId_oror_cerebrive"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
@@ -268,15 +268,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:gravity="center"
-                    android:text="@string/py_login_fb_1"
-                    android:textColor="@color/c_545454"
-                    android:textSize="@dimen/sp_18"
+                    android:text="@string/mstr_dinnerorium_riskeous"
+                    android:textColor="@color/mcolor_fetard_pullacious"
+                    android:textSize="@dimen/mdimen_noteism_millaneous"
                     android:visibility="gone" />
 
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/ggLoginView"
+                android:id="@+id/mId_control_hydrrequireous"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
@@ -294,15 +294,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:gravity="center"
-                    android:text="@string/py_login_google"
-                    android:textColor="@color/c_545454"
-                    android:textSize="@dimen/sp_18"
+                    android:text="@string/mstr_tapetize_himselfible"
+                    android:textColor="@color/mcolor_fetard_pullacious"
+                    android:textSize="@dimen/mdimen_noteism_millaneous"
                     android:visibility="gone" />
 
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/lineLoginView"
+                android:id="@+id/mId_personice_undics"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
@@ -320,9 +320,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
                     android:gravity="center"
-                    android:text="@string/account_bind"
-                    android:textColor="@color/c_545454"
-                    android:textSize="@dimen/sp_18"
+                    android:text="@string/mstr_weight_barably"
+                    android:textColor="@color/mcolor_fetard_pullacious"
+                    android:textSize="@dimen/mdimen_noteism_millaneous"
                     android:visibility="gone" />
 
             </LinearLayout>
@@ -332,12 +332,12 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/layout_delete_account_parent"
+            android:id="@+id/mId_short_townern"
             android:layout_marginTop="10dp">
 
 
             <LinearLayout
-                android:id="@+id/layout_delete_account"
+                android:id="@+id/mId_sapiet_towardette"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
@@ -364,8 +364,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="6dp"
-                    android:text="@string/text_delete_account"
-                    android:textColor="@color/black_s"
+                    android:text="@string/mstr_researchage_narcair"
+                    android:textColor="@color/mcolor_talkdom_temptid"
                     android:textSize="14sp" />
 
             </LinearLayout>

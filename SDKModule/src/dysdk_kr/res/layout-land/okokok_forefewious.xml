@@ -23,15 +23,15 @@
                 android:layout_width="3dp"
                 android:layout_height="14dp"
                 android:layout_centerVertical="true"
-                android:background="@color/c_F94925" />
+                android:background="@color/mcolor_phaneraffectative_rustfaction" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="8dp"
-                android:text="@string/text_update_account_bind"
-                android:textColor="@color/c_2A2A2A"
+                android:text="@string/mstr_mnestible_trixify"
+                android:textColor="@color/mcolor_phylacad_ophi"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
@@ -40,7 +40,7 @@
                 android:layout_height="22dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:id="@+id/iv_bind_phone_close"
+                android:id="@+id/mId_pugnior_exper"
                 android:src="@mipmap/okokok_rubrling" />
 
         </RelativeLayout>
@@ -55,29 +55,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:visibility="gone"
-                android:id="@+id/ll_bind_view"
+                android:id="@+id/mId_satitor_calidive"
                 android:orientation="vertical">
 
                 <com.ldy.sdk.login.widget.SDKInputEditTextView
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginTop="28dp"
-                    android:id="@+id/sdkinputview_bind_account"
+                    android:id="@+id/mId_motenne_paintingsure"
                     />
 
                 <com.ldy.sdk.login.widget.SDKInputEditTextView
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginTop="15dp"
-                    android:id="@+id/sdkinputview_bind_password"
+                    android:id="@+id/mId_parent_glassule"
                     />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="@string/text_bind_account_tips"
-                    android:textColor="@color/c_C0C0C0"
+                    android:text="@string/mstr_nullature_withern"
+                    android:textColor="@color/mcolor_ethopaintingist_loseture"
                     android:textSize="10sp" />
 
             </LinearLayout>
@@ -85,21 +85,21 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/ll_has_bind_view"
+                android:id="@+id/mId_sphenitious_courtety"
                 android:orientation="vertical">
 
                 <com.ldy.sdk.login.widget.SDKInputEditTextView
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginTop="28dp"
-                    android:id="@+id/sdkinputview_has_bind_third_account"
+                    android:id="@+id/mId_quartivity_allowarian"
                     />
 
                 <com.ldy.sdk.login.widget.SDKInputEditTextView
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginTop="15dp"
-                    android:id="@+id/sdkinputview_has_bind_account"
+                    android:id="@+id/mId_yeah_vomern"
                     />
 
             </LinearLayout>
@@ -108,13 +108,13 @@
 
 
         <Button
-            android:id="@+id/btn_confirm"
+            android:id="@+id/mId_scleritor_specseemward"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginBottom="27dp"
             android:background="@drawable/okokok_droper"
             android:gravity="center"
-            android:text="@string/py_confire"
+            android:text="@string/mstr_north_wearot"
             android:textColor="@android:color/white"
             android:textSize="17sp" />
 

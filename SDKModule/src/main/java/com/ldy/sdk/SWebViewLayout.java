@@ -89,15 +89,15 @@ public class SWebViewLayout extends SBaseRelativeLayout {
 ////        closeImageView.setBackgroundResource(R.drawable.okokok_hedraad);
 //        closeImageView.setImageDrawable(getResources().getDrawable(R.drawable.okokok_hedraad));
 
-        closeImageView = contentView.findViewById(R.id.iv_s_web_close);
-        titleTv = contentView.findViewById(R.id.tv_s_web_title);
-        backImageView = contentView.findViewById(R.id.iv_s_web_back);
+        closeImageView = contentView.findViewById(R.id.mId_odorlike_fandit);
+        titleTv = contentView.findViewById(R.id.mId_exterain_nameial);
+        backImageView = contentView.findViewById(R.id.mId_carcin_variousature);
 
-        rl_sdk_sweb_header = contentView.findViewById(R.id.rl_sdk_sweb_header);
+        rl_sdk_sweb_header = contentView.findViewById(R.id.mId_symose_cystid);
         initTitle("");
 
-        progressBar = (ProgressBar) contentView.findViewById(R.id.s_webview_pager_loading_percent);
-        sWebView = (SWebView) contentView.findViewById(R.id.s_webview_id);
+        progressBar = (ProgressBar) contentView.findViewById(R.id.mId_tentage_design);
+        sWebView = (SWebView) contentView.findViewById(R.id.mId_tradeon_butacle);
 
         sWebView.setBaseWebChromeClient(new MyWebChromeClient(progressBar, activity));
         sWebView.setWebViewClient(new BaseWebViewClient(activity));

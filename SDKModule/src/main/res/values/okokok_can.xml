@@ -2,24 +2,24 @@
 
     <!--港台域名列表 开始-->
     <!--登录域名-->
-    <string name="mw_sdk_login_pre_url">https://login.meowplayer.com/</string>
-    <string name="mw_sdk_login_spa_url"></string>
+    <string name="mstr_falcen_claustic">https://login.meowplayer.com/</string>
+    <string name="mstr_capribility_whom"></string>
 
     <!--支付域名-->
-    <string name="mw_sdk_pay_pre_url">https://pay.meowplayer.com/</string>
-    <string name="mw_sdk_pay_spa_url"></string>
+    <string name="mstr_flatcongressaneity_auctcourtful">https://pay.meowplayer.com/</string>
+    <string name="mstr_tardgreatetic_sisterise"></string>
 
     <!--cdn域名-->
-    <string name="mw_sdk_cdn_pre_url">https://cdn-download.meowplayer.com/</string>
-    <string name="mw_sdk_cdn_spa_url"></string>
+    <string name="mstr_vulsability_dysyoungern">https://cdn-download.meowplayer.com/</string>
+    <string name="mstr_husband_heability"></string>
 
 
 <!--    日志记录域名-->
-    <string name="mw_sdk_log_pre_url">https://log.meowplayer.com/</string>
+    <string name="mstr_locowise_sperssure">https://log.meowplayer.com/</string>
 
 
     <!--使用者條款 - 服務條款 -->
-    <string name="mw_sdk_terms_service_url">https://member.meowplayer.com/sdk/agreement/%s_agreement.html</string>
+    <string name="mstr_toxatic_septemeatary">https://member.meowplayer.com/sdk/agreement/%s_agreement.html</string>
 
 
 </resources>

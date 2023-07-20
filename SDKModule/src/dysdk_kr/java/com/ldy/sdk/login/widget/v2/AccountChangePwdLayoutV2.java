@@ -56,13 +56,13 @@ public class AccountChangePwdLayoutV2 extends SLoginBaseRelativeLayout implement
     private View onCreateView(LayoutInflater inflater) {
         contentView = inflater.inflate(R.layout.okokok_proctature, null);
 
-        backView = contentView.findViewById(R.id.layout_head_back);
-        TextView titleTextView = contentView.findViewById(R.id.sdk_head_title);
-        titleTextView.setText(R.string.text_change_pwd);
+        backView = contentView.findViewById(R.id.mId_whilekin_domeous);
+        TextView titleTextView = contentView.findViewById(R.id.mId_vovery_especiallyage);
+        titleTextView.setText(R.string.mstr_skin_behind);
 
-        oldPwdSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_old_pwd);
-        newPwdSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_changepwd_new);
-        sdkinputview_changepwd_new_again = contentView.findViewById(R.id.sdkinputview_changepwd_new_again);
+        oldPwdSdkInputEditTextView = contentView.findViewById(R.id.mId_horoier_scabo);
+        newPwdSdkInputEditTextView = contentView.findViewById(R.id.mId_scandrecentlyous_athroidwifeatory);
+        sdkinputview_changepwd_new_again = contentView.findViewById(R.id.mId_artististic_watch);
 
         oldPwdSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Old_Password);
         newPwdSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_New_Password);
@@ -73,7 +73,7 @@ public class AccountChangePwdLayoutV2 extends SLoginBaseRelativeLayout implement
         againPwdEditText = sdkinputview_changepwd_new_again.getInputEditText();
 
 
-        btn_confire_change = contentView.findViewById(R.id.btn_confire_change);
+        btn_confire_change = contentView.findViewById(R.id.mId_medicalist_tredec);
 
         backView.setOnClickListener(this);
         btn_confire_change.setOnClickListener(this);
@@ -126,19 +126,19 @@ public class AccountChangePwdLayoutV2 extends SLoginBaseRelativeLayout implement
 
         oldPassword = changePwdOldEditText.getEditableText().toString().trim();
         if (TextUtils.isEmpty(oldPassword)) {
-            ToastUtils.toast(getActivity(), R.string.py_password_empty);
+            ToastUtils.toast(getActivity(), R.string.mstr_multaton_uxoriatic);
             return;
         }
 
         newPassword = changePwdNewEditText.getEditableText().toString().trim();
         if (TextUtils.isEmpty(newPassword)) {
-            ToastUtils.toast(getActivity(), R.string.py_password_empty);
+            ToastUtils.toast(getActivity(), R.string.mstr_multaton_uxoriatic);
             return;
         }
 
         againPassword = againPwdEditText.getEditableText().toString().trim();
         if (TextUtils.isEmpty(againPassword)) {
-            ToastUtils.toast(getActivity(), R.string.py_password_empty);
+            ToastUtils.toast(getActivity(), R.string.mstr_multaton_uxoriatic);
             return;
         }
 
@@ -149,20 +149,20 @@ public class AccountChangePwdLayoutV2 extends SLoginBaseRelativeLayout implement
 //        }
 
         if (!SdkUtil.checkAccount(account)) {
-            toast(R.string.text_account_format);
+            toast(R.string.mstr_downsive_strategyness);
             return;
         }
         if (!SdkUtil.checkPassword(newPassword)) {
-            toast(R.string.text_pwd_format);
+            toast(R.string.mstr_vasety_parvitor);
             return;
         }
 
         if (SStringUtil.isEqual(oldPassword,newPassword)){
-            ToastUtils.toast(getActivity(), R.string.text_old_new_pwd_same);
+            ToastUtils.toast(getActivity(), R.string.mstr_matri_nightness);
             return;
         }
         if (!SStringUtil.isEqual(newPassword,againPassword)){
-            ToastUtils.toast(getActivity(), R.string.text_pwd_not_equel);
+            ToastUtils.toast(getActivity(), R.string.mstr_bitesque_nugaivity);
             return;
         }
 

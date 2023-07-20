@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/c_sdk_bg">
+    android:background="@color/mcolor_supin_situationar">
 
     <LinearLayout
         android:layout_width="375dp"
@@ -19,7 +19,7 @@
             android:layout_marginTop="20dp" />
 
         <com.ldy.sdk.login.widget.SDKInputEditTextView
-            android:id="@+id/sdkinputview_welcome_account"
+            android:id="@+id/mId_hundredency_odonaneity"
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:layout_marginTop="25dp" />
@@ -34,16 +34,16 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tv_account_update_tips"
+                android:id="@+id/mId_testit_doloroeous"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/text_update_account_tips"
-                android:textColor="@color/c_C0C0C0"
+                android:text="@string/mstr_buyesque_nowoon"
+                android:textColor="@color/mcolor_ethopaintingist_loseture"
                 android:textSize="10sp" />
 
 
             <ImageView
-                android:id="@+id/iv_update_account_icon"
+                android:id="@+id/mId_himer_bad"
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:layout_marginStart="3dp"
@@ -54,30 +54,30 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/btn_login_game"
+            android:id="@+id/mId_stalactness_onerarriveatic"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_marginTop="17dp"
             android:background="@drawable/okokok_kinity"
             android:gravity="center"
-            android:text="@string/text_go_game"
+            android:text="@string/mstr_verular_phlegor"
             android:textColor="@android:color/white"
             android:textSize="17sp" />
 
         <Button
-            android:id="@+id/btn_swith_account3"
+            android:id="@+id/mId_octavsubjectmost_leitreatment"
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/okokok_matterture"
             android:gravity="center"
-            android:text="@string/text_switch_account"
+            android:text="@string/mstr_stichen_loqufollowor"
             android:textColor="@android:color/white"
             android:textSize="15sp" />
 
 
         <LinearLayout
-            android:id="@+id/layout_need_update_account"
+            android:id="@+id/mId_take_patiential"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="15dp"
@@ -85,30 +85,30 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btn_update_account"
+                android:id="@+id/mId_yeahian_saurary"
                 android:layout_width="142dp"
                 android:layout_height="40dp"
                 android:background="@drawable/okokok_matterture"
                 android:gravity="center"
-                android:text="@string/text_update_account_bind"
+                android:text="@string/mstr_mnestible_trixify"
                 android:textColor="@android:color/white"
                 android:textSize="15sp" />
 
             <Button
-                android:id="@+id/btn_swith_account"
+                android:id="@+id/mId_stenforet_jectify"
                 android:layout_width="142dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="15dp"
                 android:background="@drawable/okokok_matterture"
                 android:gravity="center"
-                android:text="@string/text_switch_account"
+                android:text="@string/mstr_stichen_loqufollowor"
                 android:textColor="@android:color/white"
                 android:textSize="15sp" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/layout_has_update_account"
+            android:id="@+id/mId_majority_centrfaction"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="15dp"
@@ -117,23 +117,23 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btn_change_pwd"
+                android:id="@+id/mId_yourselfetic_orecticsion"
                 android:layout_width="142dp"
                 android:layout_height="40dp"
                 android:background="@drawable/okokok_matterture"
                 android:gravity="center"
-                android:text="@string/py_login_page_change_pwd"
+                android:text="@string/mstr_calorent_specence"
                 android:textColor="@android:color/white"
                 android:textSize="15sp" />
 
             <Button
-                android:id="@+id/btn_swith_account2"
+                android:id="@+id/mId_bankier_singleitor"
                 android:layout_width="142dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="15dp"
                 android:background="@drawable/okokok_matterture"
                 android:gravity="center"
-                android:text="@string/text_switch_account"
+                android:text="@string/mstr_stichen_loqufollowor"
                 android:textColor="@android:color/white"
                 android:textSize="15sp" />
 
@@ -155,7 +155,7 @@
                 android:orientation="horizontal"
                 android:visibility="visible"
                 android:background="@drawable/okokok_tergiish"
-                android:id="@+id/layout_delete_account"
+                android:id="@+id/mId_sapiet_towardette"
                 android:paddingLeft="13dp"
                 android:paddingRight="13dp"
                 android:paddingTop="5dp"
@@ -174,8 +174,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="6dp"
-                    android:text="@string/text_delete_account"
-                    android:textColor="@color/black_s"
+                    android:text="@string/mstr_researchage_narcair"
+                    android:textColor="@color/mcolor_talkdom_temptid"
                     android:textSize="14sp" />
 
             </LinearLayout>

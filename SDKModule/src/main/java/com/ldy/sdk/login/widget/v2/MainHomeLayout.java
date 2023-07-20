@@ -49,16 +49,16 @@
 //
 //        contentView = inflater.inflate(R.layout.okokok_rhynchlet, null);
 //
-//        guestLoginView = contentView.findViewById(R.id.layout_guest_login);
-//        layout_go_account_login = contentView.findViewById(R.id.layout_go_account_login);
-//        iv_login_google = contentView.findViewById(R.id.iv_login_google);
-//        iv_login_fb = contentView.findViewById(R.id.iv_login_fb);
-//        iv_login_line = contentView.findViewById(R.id.iv_login_line);
+//        guestLoginView = contentView.findViewById(R.id.mId_perilikeary_docuful);
+//        layout_go_account_login = contentView.findViewById(R.id.mId_hygrette_scendistic);
+//        iv_login_google = contentView.findViewById(R.id.mId_corauthorityar_involvetion);
+//        iv_login_fb = contentView.findViewById(R.id.mId_easyic_scopeary);
+//        iv_login_line = contentView.findViewById(R.id.mId_felinwise_partneritor);
 //
-//        cb_agree_term = contentView.findViewById(R.id.cb_agree_term);
-//        layout_go_term = contentView.findViewById(R.id.layout_go_term);
-//        iv_logo = contentView.findViewById(R.id.iv_logo);
-//        layout_term = contentView.findViewById(R.id.layout_term);
+//        cb_agree_term = contentView.findViewById(R.id.mId_theyory_rapcloseior);
+//        layout_go_term = contentView.findViewById(R.id.mId_newics_regionful);
+//        iv_logo = contentView.findViewById(R.id.mId_optimice_duacity);
+//        layout_term = contentView.findViewById(R.id.mId_spirarea_reachorium);
 //
 //        guestLoginView.setOnClickListener(this);
 //        layout_go_account_login.setOnClickListener(this);
@@ -69,7 +69,7 @@
 //
 //        cb_agree_term.setChecked(true);
 //
-////        String ssText = getContext().getString(R.string.gama_ui_term_port_read2);
+////        String ssText = getContext().getString(R.string.mstr_crepitess_astrotic);
 ////        SpannableString ss = new SpannableString(ssText);
 ////        ss.setSpan(new UnderlineSpan(), ssText.length() - 5, ssText.length(), Paint.UNDERLINE_TEXT_FLAG);
 ////        ss.setSpan(new ForegroundColorSpan(), ssText.length() - 5, ssText.length(), Paint.UNDERLINE_TEXT_FLAG);
@@ -139,7 +139,7 @@
 //        if (cb_agree_term.isChecked()){
 //            return true;
 //        }
-//        toast(R.string.gama_ui_term_not_read);
+//        toast(R.string.mstr_honorise_certainlyition);
 //        return false;
 //    }
 //}

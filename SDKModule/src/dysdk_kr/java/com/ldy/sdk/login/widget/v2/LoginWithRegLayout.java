@@ -72,15 +72,15 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
     public View onCreateView(LayoutInflater inflater) {
 
         contentView = inflater.inflate(R.layout.okokok_again, null);
-        iv_login_reg_back = contentView.findViewById(R.id.iv_login_reg_back);
-        loginTabView = contentView.findViewById(R.id.loginTabView);
-        regTabView = contentView.findViewById(R.id.regTabView);
-        login_bottom_line = contentView.findViewById(R.id.loginTabView_bottom_line);
-        register_bottom_line = contentView.findViewById(R.id.regTabView_bottom_line);
+        iv_login_reg_back = contentView.findViewById(R.id.mId_remainice_stageing);
+        loginTabView = contentView.findViewById(R.id.mId_manymost_joc);
+        regTabView = contentView.findViewById(R.id.mId_takearian_sugmritious);
+        login_bottom_line = contentView.findViewById(R.id.mId_wantard_sipiair);
+        register_bottom_line = contentView.findViewById(R.id.mId_agonation_opofactar);
 
-        ll_reg_login_title = contentView.findViewById(R.id.ll_reg_login_title);
-        mAccountLoginV2 = contentView.findViewById(R.id.pyAccountLoginV2Id);
-        mAccountRegisterLayoutV2 = contentView.findViewById(R.id.accountRegisterLayoutV2Id);
+        ll_reg_login_title = contentView.findViewById(R.id.mId_canceria_shortaster);
+        mAccountLoginV2 = contentView.findViewById(R.id.mId_syward_threat);
+        mAccountRegisterLayoutV2 = contentView.findViewById(R.id.mId_funct_phatdirectionship);
 
         loginTabView.setOnClickListener(this);
         regTabView.setOnClickListener(this);
@@ -257,8 +257,8 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
 //            loginTabView.setBackgroundResource(R.drawable.login_tab_red_left_cons_bg);
 //            regTabView.setBackgroundResource(R.drawable.login_tab_white_right_cons_bg);
 
-            loginTabView.setTextColor(getContext().getResources().getColor(R.color.c_F94925));
-            regTabView.setTextColor(getContext().getResources().getColor(R.color.white_c));
+            loginTabView.setTextColor(getContext().getResources().getColor(R.color.mcolor_phaneraffectative_rustfaction));
+            regTabView.setTextColor(getContext().getResources().getColor(R.color.mcolor_tag_tetrice));
 
             login_bottom_line.setVisibility(View.VISIBLE);
             register_bottom_line.setVisibility(View.INVISIBLE);
@@ -278,8 +278,8 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
 //            loginTabView.setBackgroundResource(R.drawable.login_tab_white_left_cons_bg);
 //            regTabView.setBackgroundResource(R.drawable.login_tab_red_right_cons_bg);
 
-            loginTabView.setTextColor(getContext().getResources().getColor(R.color.white_c));
-            regTabView.setTextColor(getContext().getResources().getColor(R.color.c_F94925));
+            loginTabView.setTextColor(getContext().getResources().getColor(R.color.mcolor_tag_tetrice));
+            regTabView.setTextColor(getContext().getResources().getColor(R.color.mcolor_phaneraffectative_rustfaction));
 
             login_bottom_line.setVisibility(View.INVISIBLE);
             register_bottom_line.setVisibility(View.VISIBLE);

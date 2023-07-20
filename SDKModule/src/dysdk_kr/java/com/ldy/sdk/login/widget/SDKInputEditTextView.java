@@ -112,14 +112,14 @@ public class SDKInputEditTextView extends RelativeLayout {
             l.addRule(RelativeLayout.CENTER_IN_PARENT);
             addView(contentView, l);
 
-            iconImageView = contentView.findViewById(R.id.sdk_input_item_icon);
-            labTextView = contentView.findViewById(R.id.sdk_input_item_lable);
-            eyeImageView = contentView.findViewById(R.id.sdk_input_item_eye);
-            eyeImageViewLayout = contentView.findViewById(R.id.sdk_input_item_eye_layout);
-            inputEditText = contentView.findViewById(R.id.sdk_input_item_et);
-            line1View = contentView.findViewById(R.id.sdk_input_item_line1);
-            bottomLine = contentView.findViewById(R.id.sdk_input_item_bottom_line);
-            iv_account_history = contentView.findViewById(R.id.iv_account_history);
+            iconImageView = contentView.findViewById(R.id.mId_stalagmfold_emeaeous);
+            labTextView = contentView.findViewById(R.id.mId_helpern_nemorant);
+            eyeImageView = contentView.findViewById(R.id.mId_changeth_passment);
+            eyeImageViewLayout = contentView.findViewById(R.id.mId_identifyform_issue);
+            inputEditText = contentView.findViewById(R.id.mId_varichood_erganeous);
+            line1View = contentView.findViewById(R.id.mId_behavior_sub);
+            bottomLine = contentView.findViewById(R.id.mId_unguilet_voiceature);
+            iv_account_history = contentView.findViewById(R.id.mId_environmentaler_bitory);
 
 
             eyeImageViewLayout.setOnClickListener(new OnClickListener() {
@@ -160,16 +160,16 @@ public class SDKInputEditTextView extends RelativeLayout {
 
             case SDKInputType_Account:
                 iconId = R.mipmap.okokok_dodec;
-                labName = getResources().getString(R.string.py_account);
-                hint = getResources().getString(R.string.py_register_account_hit);
+                labName = getResources().getString(R.string.mstr_soonature_vagwatchan);
+                hint = getResources().getString(R.string.mstr_thalamdetail_experieven);
                 eyeImageViewLayout.setVisibility(View.GONE);
                 adjustTvTextSize();
                 break;
 
             case SDKInputType_Password:
                 iconId = R.mipmap.okokok_nausing;
-                labName = getResources().getString(R.string.py_password);
-                hint = getResources().getString(R.string.py_register_password_hit);
+                labName = getResources().getString(R.string.mstr_population_ooally);
+                hint = getResources().getString(R.string.mstr_veracieur_thalamarium);
                 eyeImageViewLayout.setVisibility(View.VISIBLE);
                 editTextInputType = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD;
                 adjustTvTextSize();
@@ -177,8 +177,8 @@ public class SDKInputEditTextView extends RelativeLayout {
 
             case SDKInputType_Password_Again:
                 iconId = R.mipmap.okokok_nausing;
-                labName = getResources().getString(R.string.py_password);
-                hint = getResources().getString(R.string.text_input_new_pwd_confire);
+                labName = getResources().getString(R.string.mstr_population_ooally);
+                hint = getResources().getString(R.string.mstr_squarrositious_dead);
                 eyeImageViewLayout.setVisibility(View.VISIBLE);
                 editTextInputType = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD;
                 adjustTvTextSize();
@@ -186,16 +186,16 @@ public class SDKInputEditTextView extends RelativeLayout {
 
             case SDKInputType_Old_Password:
                 iconId = R.mipmap.okokok_nausing;
-                labName = getResources().getString(R.string.py_old_pwd);
-                hint = getResources().getString(R.string.py_input_old_password);
+                labName = getResources().getString(R.string.mstr_simibest_volatperform);
+                hint = getResources().getString(R.string.mstr_movieatic_flyite);
                 eyeImageViewLayout.setVisibility(View.VISIBLE);
                 editTextInputType = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD;
                 adjustTvTextSize();
                 break;
             case SDKInputType_New_Password:
                 iconId = R.mipmap.okokok_nausing;
-                labName = getResources().getString(R.string.py_new_pwd);
-                hint = getResources().getString(R.string.text_input_new_pwd);
+                labName = getResources().getString(R.string.mstr_defensead_halflike);
+                hint = getResources().getString(R.string.mstr_damnery_song);
                 eyeImageViewLayout.setVisibility(View.VISIBLE);
                 editTextInputType = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD;
                 adjustTvTextSize();
@@ -208,8 +208,8 @@ public class SDKInputEditTextView extends RelativeLayout {
                 iconImageView.setVisibility(View.GONE);
                 line1View.setVisibility(View.GONE);
                 bottomLine.setVisibility(View.GONE);
-                labName = getResources().getString(R.string.py_vfcode);
-                hint = getResources().getString(R.string.py_msg_vfcode_hint);
+                labName = getResources().getString(R.string.mstr_genuical_sororern);
+                hint = getResources().getString(R.string.mstr_nausing_extraet);
                 adjustTvTextSize();
                 break;
 
@@ -230,7 +230,7 @@ public class SDKInputEditTextView extends RelativeLayout {
             inputEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
             inputEditText.setTypeface(Typeface.DEFAULT);
             inputEditText.setEnabled(true);
-            inputEditText.setTextColor(getContext().getResources().getColor(R.color.white_c));
+            inputEditText.setTextColor(getContext().getResources().getColor(R.color.mcolor_tag_tetrice));
             iconImageView.setImageResource(R.mipmap.okokok_nausing);
             eyeImageView.setVisibility(VISIBLE);
 
@@ -241,7 +241,7 @@ public class SDKInputEditTextView extends RelativeLayout {
             inputEditText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
             inputEditText.setTypeface(Typeface.DEFAULT);
             inputEditText.setEnabled(false);
-            inputEditText.setTextColor(getContext().getResources().getColor(R.color.c_848484));
+            inputEditText.setTextColor(getContext().getResources().getColor(R.color.mcolor_bromoan_undecimeer));
             iconImageView.setImageResource(R.mipmap.okokok_wishacy);
 
             eyeImageView.setVisibility(GONE);
@@ -289,11 +289,11 @@ public class SDKInputEditTextView extends RelativeLayout {
 
         String account = this.getInputEditText().getEditableText().toString().trim();
         if (TextUtils.isEmpty(account)) {
-            ToastUtils.toast(getContext(), R.string.py_account_empty);
+            ToastUtils.toast(getContext(), R.string.mstr_egri_sacceur);
             return false;
         }
         if (!GamaUtil.checkAccount(account)) {
-            ToastUtils.toast(getContext(), R.string.text_account_format, Toast.LENGTH_LONG);
+            ToastUtils.toast(getContext(), R.string.mstr_downsive_strategyness, Toast.LENGTH_LONG);
             return false;
         }
         return  true;
@@ -302,12 +302,12 @@ public class SDKInputEditTextView extends RelativeLayout {
    /* public boolean checkPassword(){
         String password = this.getInputEditText().getEditableText().toString().trim();
         if (TextUtils.isEmpty(password)) {
-            ToastUtils.toast(getContext(), R.string.py_password_empty);
+            ToastUtils.toast(getContext(), R.string.mstr_multaton_uxoriatic);
             return false;
         }
         if (!GamaUtil.checkPassword(password)) {
             String passwordError1 = getContext().getResources().getString(R.string.py_password_error) + ":";
-            String passwordError2 = getContext().getResources().getString(R.string.py_register_password_hit);
+            String passwordError2 = getContext().getResources().getString(R.string.mstr_veracieur_thalamarium);
             String errorStrPassword = passwordError1 + passwordError2;
             ToastUtils.toast(getContext(), errorStrPassword, Toast.LENGTH_LONG);
             return false;
@@ -320,7 +320,7 @@ public class SDKInputEditTextView extends RelativeLayout {
 
         String vf = this.getInputEditText().getEditableText().toString().trim();
         if (TextUtils.isEmpty(vf)) {
-            ToastUtils.toast(getContext(), R.string.py_vfcode_empty);
+            ToastUtils.toast(getContext(), R.string.mstr_chryso_expectition);
             return false;
         }
         return  true;

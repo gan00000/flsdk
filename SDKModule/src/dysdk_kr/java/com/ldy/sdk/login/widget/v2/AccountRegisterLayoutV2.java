@@ -57,8 +57,8 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
     private View onCreateView(LayoutInflater inflater) {
         contentView = inflater.inflate(R.layout.okokok_flexior, null);
 
-        accountSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_account_login_account);
-        pwdSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_account_login_password);
+        accountSdkInputEditTextView = contentView.findViewById(R.id.mId_angukidit_shortfier);
+        pwdSdkInputEditTextView = contentView.findViewById(R.id.mId_findose_soldieral);
 
         //設置類型
         accountSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Account);
@@ -68,7 +68,7 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
         registerAccountEditText = accountSdkInputEditTextView.getInputEditText();
         registerPasswordEditText = pwdSdkInputEditTextView.getInputEditText();
 
-        registerConfirm = contentView.findViewById(R.id.gama_register_btn_confirm);
+        registerConfirm = contentView.findViewById(R.id.mId_plasmuchia_felicade);
 
         registerConfirm.setOnClickListener(this);
 
@@ -103,23 +103,23 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
 
         account = registerAccountEditText.getEditableText().toString().trim();
         if (TextUtils.isEmpty(account)) {
-            ToastUtils.toast(getActivity(), R.string.py_account_empty);
+            ToastUtils.toast(getActivity(), R.string.mstr_egri_sacceur);
             return;
         }
 
         if (!SdkUtil.checkAccount(account)) {
-            toast(R.string.text_account_format);
+            toast(R.string.mstr_downsive_strategyness);
             return;
         }
 
         password = registerPasswordEditText.getEditableText().toString().trim();
         if (TextUtils.isEmpty(password)) {
-            ToastUtils.toast(getActivity(), R.string.py_password_empty);
+            ToastUtils.toast(getActivity(), R.string.mstr_multaton_uxoriatic);
             return;
         }
 
         if (!SdkUtil.checkPassword(password)) {
-            toast(R.string.text_pwd_format);
+            toast(R.string.mstr_vasety_parvitor);
             return;
         }
 

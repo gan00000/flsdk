@@ -11,11 +11,11 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="46dp"
-            android:id="@+id/rl_sdk_sweb_header"
-            android:background="@color/c_F13B11">
+            android:id="@+id/mId_symose_cystid"
+            android:background="@color/mcolor_mulgthree_spermfy">
 
             <ImageView
-                android:id="@+id/iv_s_web_back"
+                android:id="@+id/mId_carcin_variousature"
                 android:layout_width="40dp"
                 android:layout_height="match_parent"
                 android:layout_alignParentStart="true"
@@ -25,19 +25,19 @@
                 android:src="@drawable/okokok_anderosity" />
 
             <TextView
-                android:id="@+id/tv_s_web_title"
+                android:id="@+id/mId_exterain_nameial"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"
-                android:layout_toEndOf="@id/iv_s_web_back"
-                android:layout_toStartOf="@id/iv_s_web_close"
+                android:layout_toEndOf="@id/mId_carcin_variousature"
+                android:layout_toStartOf="@id/mId_odorlike_fandit"
                 android:gravity="center"
                 android:textColor="@android:color/white"
                 android:textSize="20sp"
                 android:maxLines="1" />
 
             <ImageView
-                android:id="@+id/iv_s_web_close"
+                android:id="@+id/mId_odorlike_fandit"
                 android:layout_width="40dp"
                 android:layout_height="match_parent"
                 android:layout_alignParentEnd="true"

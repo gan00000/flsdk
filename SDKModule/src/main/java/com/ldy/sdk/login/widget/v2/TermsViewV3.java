@@ -52,10 +52,10 @@
 //
 //        contentView = inflater.inflate(R.layout.okokok_nearair, null);
 //
-//        TextView titleTextView = contentView.findViewById(R.id.sdk_head_title);
-//        titleTextView.setText(R.string.sdk_terms_title);
+//        TextView titleTextView = contentView.findViewById(R.id.mId_vovery_especiallyage);
+//        titleTextView.setText(R.string.mstr_err_naucould);
 //
-//        backView = contentView.findViewById(R.id.layout_head_back);
+//        backView = contentView.findViewById(R.id.mId_whilekin_domeous);
 //        backView.setOnClickListener(new OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -74,8 +74,8 @@
 //        });
 //
 ///*
-//        goTermView = contentView.findViewById(R.id.gama_gama_start_term_tv1);//跳轉服務條款
-//        agreeCheckBox = contentView.findViewById(R.id.gama_gama_start_term_cb1);//跳轉服務條款
+//        goTermView = contentView.findViewById(R.id.mId_anthitor_smallain);//跳轉服務條款
+//        agreeCheckBox = contentView.findViewById(R.id.mId_manthscience_speechtic);//跳轉服務條款
 //        okButton = contentView.findViewById(R.id.sdk_terms_btn_confirm);
 //
 //        if (GamaUtil.getStartTermRead(getContext())){
@@ -95,7 +95,7 @@
 //        serviceUrl = String.format(serviceUrl, ResConfig.getGameCode(getContext()));
 ////        String privateUrl = ResConfig.getPrivateTermUrl(getContext());
 //
-//        termsView1 = (WebView) contentView.findViewById(R.id.sdk_terms_webview);
+//        termsView1 = (WebView) contentView.findViewById(R.id.mId_beety_menstruform);
 //        termsView1.clearCache(true);
 ////        termsView1.setWebChromeClient(new WebChromeClient());
 //        termsView1.setWebViewClient(new BaseWebViewClient((Activity) getActivity()));
@@ -106,7 +106,7 @@
 //            public void onClick(View v) {
 //
 //                if(!agreeCheckBox.isChecked()) {
-//                    ToastUtils.toast(getContext(), R.string.gama_ui_term_not_read);
+//                    ToastUtils.toast(getContext(), R.string.mstr_honorise_certainlyition);
 //                    return;
 //                }
 //                GamaUtil.saveStartTermRead(getContext(), true);

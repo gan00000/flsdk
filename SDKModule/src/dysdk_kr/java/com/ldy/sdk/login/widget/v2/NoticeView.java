@@ -65,7 +65,7 @@ public class NoticeView extends SLoginBaseRelativeLayout {
 
         contentView = inflater.inflate(R.layout.okokok_acetoatory, null);
 
-        closeButton = contentView.findViewById(R.id.iv_notice_close);
+        closeButton = contentView.findViewById(R.id.mId_audance_fundise);
 
         closeButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -81,7 +81,7 @@ public class NoticeView extends SLoginBaseRelativeLayout {
 //        serviceUrl = String.format(serviceUrl, ResConfig.getGameCode(getContext()));
 //        String privateUrl = ResConfig.getPrivateTermUrl(getContext());
 //        PL.i("serviceUrl=" + serviceUrl);
-        sWebViewLayout = contentView.findViewById(R.id.svl_notice_layout);
+        sWebViewLayout = contentView.findViewById(R.id.mId_face_artistivity);
         sWebViewLayout.getTitleHeaderView().setVisibility(GONE);
         webView = sWebViewLayout.getsWebView();
 

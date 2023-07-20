@@ -78,23 +78,23 @@
 //    private View onCreateView(LayoutInflater inflater) {
 //        contentView = inflater.inflate(R.layout.okokok_nor, null);
 //
-//        backView = contentView.findViewById(R.id.layout_head_back);
+//        backView = contentView.findViewById(R.id.mId_whilekin_domeous);
 //
-//        TextView titleTextView = contentView.findViewById(R.id.sdk_head_title);
-//        titleTextView.setText(R.string.text_welcome_back);
+//        TextView titleTextView = contentView.findViewById(R.id.mId_vovery_especiallyage);
+//        titleTextView.setText(R.string.mstr_lamnlamellic_explainlet);
 //
-//        accountSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_welcome_account);
-//        tv_account_update_tips = contentView.findViewById(R.id.tv_account_update_tips);
-//        iv_update_account_icon = contentView.findViewById(R.id.iv_update_account_icon);
-//        btn_login_game = contentView.findViewById(R.id.btn_login_game);
-//        layout_need_update_account = contentView.findViewById(R.id.layout_need_update_account);
-//        layout_has_update_account = contentView.findViewById(R.id.layout_has_update_account);
-//        btn_swith_account = contentView.findViewById(R.id.btn_swith_account);
-//        btn_update_account = contentView.findViewById(R.id.btn_update_account);
-//        btn_change_pwd = contentView.findViewById(R.id.btn_change_pwd);
-//        btn_swith_account2 = contentView.findViewById(R.id.btn_swith_account2);
-//        btn_swith_account3 = contentView.findViewById(R.id.btn_swith_account3);
-//        layout_delete_account = contentView.findViewById(R.id.layout_delete_account);
+//        accountSdkInputEditTextView = contentView.findViewById(R.id.mId_hundredency_odonaneity);
+//        tv_account_update_tips = contentView.findViewById(R.id.mId_testit_doloroeous);
+//        iv_update_account_icon = contentView.findViewById(R.id.mId_himer_bad);
+//        btn_login_game = contentView.findViewById(R.id.mId_stalactness_onerarriveatic);
+//        layout_need_update_account = contentView.findViewById(R.id.mId_take_patiential);
+//        layout_has_update_account = contentView.findViewById(R.id.mId_majority_centrfaction);
+//        btn_swith_account = contentView.findViewById(R.id.mId_stenforet_jectify);
+//        btn_update_account = contentView.findViewById(R.id.mId_yeahian_saurary);
+//        btn_change_pwd = contentView.findViewById(R.id.mId_yourselfetic_orecticsion);
+//        btn_swith_account2 = contentView.findViewById(R.id.mId_bankier_singleitor);
+//        btn_swith_account3 = contentView.findViewById(R.id.mId_octavsubjectmost_leitreatment);
+//        layout_delete_account = contentView.findViewById(R.id.mId_sapiet_towardette);
 //
 //        btn_swith_account3.setVisibility(View.GONE);
 //
@@ -103,7 +103,7 @@
 //        accountSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Account);
 //        accountEditText = accountSdkInputEditTextView.getInputEditText();
 //
-//        historyAccountListBtn = contentView.findViewById(R.id.sdk_input_item_account_history);
+//        historyAccountListBtn = contentView.findViewById(R.id.mId_memberfic_authorery);
 //        historyAccountListBtn.setVisibility(VISIBLE);
 //        backView.setVisibility(GONE);
 //
@@ -209,19 +209,19 @@
 //            if (currentAccountModel.isBind()){
 //                layout_need_update_account.setVisibility(View.GONE);
 //
-//                tv_account_update_tips.setText(R.string.text_has_update_account_tips);
+//                tv_account_update_tips.setText(R.string.mstr_policyise_dekawallmost);
 //                iv_update_account_icon.setImageResource(R.mipmap.has_update_account_bg);
 //
 //                if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_MG, currentAccountModel.getLoginType())){
 //                    btn_change_pwd.setEnabled(true);
 //                    btn_change_pwd.setBackgroundResource(R.drawable.okokok_matterture);
-//                    btn_change_pwd.setTextColor(getContext().getResources().getColor(R.color.white_c));
+//                    btn_change_pwd.setTextColor(getContext().getResources().getColor(R.color.mcolor_tag_tetrice));
 //                    btn_swith_account3.setVisibility(View.GONE);
 //                    layout_has_update_account.setVisibility(View.VISIBLE);
 //                }else{
 //                    btn_change_pwd.setEnabled(false);
 //                    btn_change_pwd.setBackgroundResource(R.drawable.okokok_returnty);
-//                    btn_change_pwd.setTextColor(getContext().getResources().getColor(R.color.c_707070));
+//                    btn_change_pwd.setTextColor(getContext().getResources().getColor(R.color.mcolor_fodgeneral_foreigneur));
 //                    btn_swith_account3.setVisibility(View.VISIBLE);
 //                    layout_has_update_account.setVisibility(View.GONE);
 //                }
@@ -231,7 +231,7 @@
 //                layout_need_update_account.setVisibility(View.VISIBLE);
 //                layout_has_update_account.setVisibility(View.GONE);
 //                btn_swith_account3.setVisibility(View.GONE);
-//                tv_account_update_tips.setText(R.string.text_update_account_tips);
+//                tv_account_update_tips.setText(R.string.mstr_buyesque_nowoon);
 //                iv_update_account_icon.setImageResource(R.mipmap.nend_update_account_bg);
 //            }
 //        }
@@ -269,7 +269,7 @@
 //
 //            String account = accountEditText.getEditableText().toString().trim();
 //            if (TextUtils.isEmpty(account)) {
-//                ToastUtils.toast(getActivity(), R.string.py_account_empty);
+//                ToastUtils.toast(getActivity(), R.string.mstr_egri_sacceur);
 //                return;
 //            }
 //            sLoginDialogv2.toChangePwdView(account);
@@ -280,7 +280,7 @@
 //
 //            String account = accountEditText.getEditableText().toString().trim();
 //            if (TextUtils.isEmpty(account)) {
-//                ToastUtils.toast(getActivity(), R.string.py_account_empty);
+//                ToastUtils.toast(getActivity(), R.string.mstr_egri_sacceur);
 //                return;
 //            }
 //            if (SLoginType.LOGIN_TYPE_FB.equals(currentAccountModel.getLoginType())){
@@ -300,7 +300,7 @@
 //            if (deleteDialog == null){
 //                LayoutInflater inflater = LayoutInflater.from(getContext());
 //                View contentView = inflater.inflate(R.layout.okokok_wouldmost, null);
-//                Button cancelBtn = contentView.findViewById(R.id.btn_delete_cancel);
+//                Button cancelBtn = contentView.findViewById(R.id.mId_often_person);
 //                cancelBtn.setOnClickListener(new OnClickListener() {
 //                    @Override
 //                    public void onClick(View v) {
@@ -309,7 +309,7 @@
 //                        }
 //                    }
 //                });
-//                Button confireBtn = contentView.findViewById(R.id.btn_delete_confirm);
+//                Button confireBtn = contentView.findViewById(R.id.mId_odform_plicarian);
 //
 //                confireBtn.setOnClickListener(new OnClickListener() {
 //                    @Override
@@ -332,7 +332,7 @@
 //    private void deleteAccount() {
 //        String account = accountEditText.getEditableText().toString().trim();
 //        if (TextUtils.isEmpty(account)) {
-//            ToastUtils.toast(getActivity(), R.string.py_account_empty);
+//            ToastUtils.toast(getActivity(), R.string.mstr_egri_sacceur);
 //            return;
 //        }
 //
@@ -364,7 +364,7 @@
 //            accountPopupWindow.dismiss();
 //        }
 //        if (currentAccountModel == null){
-//            ToastUtils.toast(getActivity(),R.string.text_account_not_exist);
+//            ToastUtils.toast(getActivity(),R.string.mstr_vali_vollence);
 //            sLoginDialogv2.toLoginWithRegView(ViewType.WelcomeView);
 //            return;
 //        }

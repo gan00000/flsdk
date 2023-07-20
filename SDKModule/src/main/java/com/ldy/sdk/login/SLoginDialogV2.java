@@ -129,7 +129,7 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 //        rootView = new FrameLayout(context);
 //        rootView.addView(contentFrameLayout);
         rootView = this.activity.getLayoutInflater().inflate(R.layout.okokok_dipsyesque, null);
-        contentFrameLayout = rootView.findViewById(R.id.sdk_fl_content_layout);
+        contentFrameLayout = rootView.findViewById(R.id.mId_greater_babylike);
         setContentView(rootView);
 
         viewPageList = new ArrayList<>();

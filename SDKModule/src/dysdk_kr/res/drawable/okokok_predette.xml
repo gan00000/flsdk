@@ -5,7 +5,7 @@
         android:bottomLeftRadius="5dp"
         android:bottomRightRadius="5dp"/>
     <!-- 图形的填充颜色 -->
-    <solid android:color="@color/white_c" >
+    <solid android:color="@color/mcolor_tag_tetrice" >
     </solid>
 
 </shape>

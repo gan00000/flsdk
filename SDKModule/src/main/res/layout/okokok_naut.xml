@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/py_title_layout_id"
+    android:id="@+id/mId_indeedule_militaryaneous"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 <!--
@@ -9,7 +9,7 @@
         android:layout_height="@dimen/px_100">
 
         <LinearLayout
-            android:id="@+id/py_back_button"
+            android:id="@+id/mId_choreible_felinoon"
             android:layout_width="@dimen/px_100"
             android:layout_height="match_parent"
             android:layout_centerVertical="true"
@@ -24,18 +24,18 @@
 
 
         <TextView
-            android:id="@+id/py_title_id"
+            android:id="@+id/mId_officeacity_condigetive"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:text="@string/py_account_login"
+            android:text="@string/mstr_nightile_voiceness"
             android:textColor="@android:color/black"
             android:textSize="@dimen/sp_30"
             android:textStyle="bold" />
 
         <LinearLayout
-            android:id="@+id/py_title_right_button"
+            android:id="@+id/mId_ofent_superetic"
             android:layout_width="@dimen/px_100"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"

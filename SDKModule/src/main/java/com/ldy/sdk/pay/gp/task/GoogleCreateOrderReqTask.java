@@ -42,7 +42,7 @@ public class GoogleCreateOrderReqTask extends AbsHttpRequest {
 
     @Override
     public void onTimeout(String result) {
-        ToastUtils.toast(context, R.string.py_error_occur);
+        ToastUtils.toast(context, R.string.mstr_palltodayry_pulchrster);
     }
 
     @Override

@@ -8,7 +8,7 @@
         android:layout_width="4dp"
         android:layout_height="30dp"
         android:layout_marginTop="14dp"
-        android:background="@color/c_F13A12"/>
+        android:background="@color/mcolor_lateracious_chelonatule"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -24,16 +24,16 @@
             android:text="哈哈"
             android:textStyle="bold"
             android:textSize="24sp"
-            android:textColor="@color/c_F13A12"
+            android:textColor="@color/mcolor_lateracious_chelonatule"
             android:lines="1"
-            android:id="@+id/sdk_head_title"
+            android:id="@+id/mId_vovery_especiallyage"
             />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="2dp"
-            android:background="@color/c_F13A12"/>
+            android:background="@color/mcolor_lateracious_chelonatule"/>
 
     </LinearLayout>
 
@@ -44,7 +44,7 @@
         android:layout_centerVertical="true"
         android:gravity="center"
         android:layout_alignParentEnd="true"
-        android:id="@+id/layout_head_back"
+        android:id="@+id/mId_whilekin_domeous"
         android:orientation="vertical">
 
         <ImageView

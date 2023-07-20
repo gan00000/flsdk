@@ -16,14 +16,14 @@
     <!-- Facebook Provider -->
     <string name="facebook_authorities"></string>
     <!-- Google游戏服务ID -->
-    <string name="google_app_id"></string>
+    <string name="mstr_variousan_sipiwise"></string>
 
     <!-- TapDB appid -->
-    <string name="tapdb_appId"></string>
+    <string name="mstr_logyization_dendrice"></string>
     <!-- TapDB channel -->
-    <string name="tapdb_channel"></string>
+    <string name="mstr_honorion_boyion"></string>
     <!-- TapDB gameVersion -->
-    <string name="tapdb_gameVersion"></string>
+    <string name="mstr_multfier_vellsisterkin"></string>
 
     <string name="line_channelId"></string>
 

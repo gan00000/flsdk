@@ -91,13 +91,13 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
 
         contentView = inflater.inflate(R.layout.okokok_forefewious, null);
 
-        bind_view = contentView.findViewById(R.id.ll_bind_view);
-        has_bind_view = contentView.findViewById(R.id.ll_has_bind_view);
+        bind_view = contentView.findViewById(R.id.mId_satitor_calidive);
+        has_bind_view = contentView.findViewById(R.id.mId_sphenitious_courtety);
 
-        accountSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_bind_account);
-        pwdSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_bind_password);
+        accountSdkInputEditTextView = contentView.findViewById(R.id.mId_motenne_paintingsure);
+        pwdSdkInputEditTextView = contentView.findViewById(R.id.mId_parent_glassule);
 
-        bindConfirm = contentView.findViewById(R.id.btn_confirm);
+        bindConfirm = contentView.findViewById(R.id.mId_scleritor_specseemward);
 
         accountSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Account);
         pwdSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Password);
@@ -109,25 +109,25 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
         pwdSdkInputEditTextView.getIconImageView().setImageResource(R.mipmap.okokok_nausing);
 
         registerAccountEditText = accountSdkInputEditTextView.getInputEditText();
-        registerAccountEditText.setHintTextColor(getResources().getColor(R.color.c_B8B8B8));
-        registerAccountEditText.setTextColor(getResources().getColor(R.color.white_c));
+        registerAccountEditText.setHintTextColor(getResources().getColor(R.color.mcolor_filmaneous_lotion));
+        registerAccountEditText.setTextColor(getResources().getColor(R.color.mcolor_tag_tetrice));
         registerPasswordEditText = pwdSdkInputEditTextView.getInputEditText();
-        registerPasswordEditText.setHintTextColor(getResources().getColor(R.color.c_B8B8B8));
-        registerPasswordEditText.setTextColor(getResources().getColor(R.color.white_c));
+        registerPasswordEditText.setHintTextColor(getResources().getColor(R.color.mcolor_filmaneous_lotion));
+        registerPasswordEditText.setTextColor(getResources().getColor(R.color.mcolor_tag_tetrice));
 
-        iv_bind_phone_close = contentView.findViewById(R.id.iv_bind_phone_close);
+        iv_bind_phone_close = contentView.findViewById(R.id.mId_pugnior_exper);
 
-        thirdAccountSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_has_bind_third_account);
-        hasBindAccountSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_has_bind_account);
+        thirdAccountSdkInputEditTextView = contentView.findViewById(R.id.mId_quartivity_allowarian);
+        hasBindAccountSdkInputEditTextView = contentView.findViewById(R.id.mId_yeah_vomern);
         thirdAccountSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Account);
         hasBindAccountSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Account);
 
         thirdAccountSdkInputEditTextView.getContentView().setBackgroundResource(R.drawable.okokok_lotic);
         hasBindAccountSdkInputEditTextView.getContentView().setBackgroundResource(R.drawable.okokok_lotic);
-        thirdAccountSdkInputEditTextView.getInputEditText().setHintTextColor(getResources().getColor(R.color.c_B8B8B8));
-        thirdAccountSdkInputEditTextView.getInputEditText().setTextColor(getResources().getColor(R.color.white_c));
-        hasBindAccountSdkInputEditTextView.getInputEditText().setHintTextColor(getResources().getColor(R.color.c_B8B8B8));
-        hasBindAccountSdkInputEditTextView.getInputEditText().setTextColor(getResources().getColor(R.color.white_c));
+        thirdAccountSdkInputEditTextView.getInputEditText().setHintTextColor(getResources().getColor(R.color.mcolor_filmaneous_lotion));
+        thirdAccountSdkInputEditTextView.getInputEditText().setTextColor(getResources().getColor(R.color.mcolor_tag_tetrice));
+        hasBindAccountSdkInputEditTextView.getInputEditText().setHintTextColor(getResources().getColor(R.color.mcolor_filmaneous_lotion));
+        hasBindAccountSdkInputEditTextView.getInputEditText().setTextColor(getResources().getColor(R.color.mcolor_tag_tetrice));
 
         hasBindAccountSdkInputEditTextView.getIconImageView().setImageResource(R.mipmap.okokok_dodec);
 
@@ -207,13 +207,13 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
 
         account = registerAccountEditText.getEditableText().toString().trim();
         if (TextUtils.isEmpty(account)) {
-            ToastUtils.toast(getActivity(), R.string.py_account_empty);
+            ToastUtils.toast(getActivity(), R.string.mstr_egri_sacceur);
             return;
         }
 
         password = registerPasswordEditText.getEditableText().toString().trim();
         if (TextUtils.isEmpty(password)) {
-            ToastUtils.toast(getActivity(), R.string.py_password_empty);
+            ToastUtils.toast(getActivity(), R.string.mstr_multaton_uxoriatic);
             return;
         }
 
@@ -224,18 +224,18 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
 //        }
 
         if (!SdkUtil.checkAccount(account)) {
-            toast(R.string.text_account_format);
+            toast(R.string.mstr_downsive_strategyness);
             return;
         }
         if (!SdkUtil.checkPassword(password)) {
-            toast(R.string.text_pwd_format);
+            toast(R.string.mstr_vasety_parvitor);
             return;
         }
 
         Request.bindAcountInGame(getActivity(), true, SdkUtil.getPreviousLoginType(getContext()), account, password, new SFCallBack() {
             @Override
             public void success(Object result, String msg) {
-                toast(R.string.text_account_bind_success2);
+                toast(R.string.mstr_geni_bulbship);
 
                 if (sfCallBack != null) {
                     sfCallBack.success(SdkUtil.getCurrentUserLoginResponse(getContext()),"");
@@ -286,21 +286,21 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
         String showName = "";
         if (SLoginType.LOGIN_TYPE_FB.equals(accountModel.getLoginType())){
             imageResId = R.mipmap.okokok_lotose;
-            showName = getContext().getResources().getString(R.string.text_has_bind_tips_fb);
+            showName = getContext().getResources().getString(R.string.mstr_uxori_thusably);
 
         }else  if (SLoginType.LOGIN_TYPE_GOOGLE.equals(accountModel.getLoginType())){
             imageResId = R.mipmap.okokok_occureer;
-            showName = getContext().getResources().getString(R.string.text_has_bind_tips_google);
+            showName = getContext().getResources().getString(R.string.mstr_turbinetic_secreous);
 
         }else  if (SLoginType.LOGIN_TYPE_GUEST.equals(accountModel.getLoginType())){
             imageResId = R.mipmap.okokok_veteracity;
-            showName = getContext().getResources().getString(R.string.text_has_bind_tips_guest);
+            showName = getContext().getResources().getString(R.string.mstr_scrupdiseasearium_taxful);
         }else if (SLoginType.LOGIN_TYPE_LINE.equals(accountModel.getLoginType())){
             imageResId = R.mipmap.okokok_piece;
-            showName = getContext().getResources().getString(R.string.text_has_bind_tips_line);
+            showName = getContext().getResources().getString(R.string.mstr_factorful_omenable);
         }else if (SLoginType.LOGIN_TYPE_MG.equals(accountModel.getLoginType())){
             imageResId = R.mipmap.okokok_dodec;
-            showName = getContext().getResources().getString(R.string.text_has_bind_tips_mw);
+            showName = getContext().getResources().getString(R.string.mstr_needward_hormate);
         }
 
         imageView.setImageResource(imageResId);

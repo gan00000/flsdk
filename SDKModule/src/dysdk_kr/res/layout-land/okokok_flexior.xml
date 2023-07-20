@@ -15,14 +15,14 @@
         <com.ldy.sdk.login.widget.SDKInputEditTextView
             android:layout_width="300dp"
             android:layout_height="40dp"
-            android:id="@+id/sdkinputview_account_login_account"
+            android:id="@+id/mId_angukidit_shortfier"
             />
 
         <com.ldy.sdk.login.widget.SDKInputEditTextView
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:layout_marginTop="16dp"
-            android:id="@+id/sdkinputview_account_login_password"
+            android:id="@+id/mId_findose_soldieral"
             />
 
         <LinearLayout
@@ -36,7 +36,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:id="@+id/sdkinputview_account_login_vf"
+                android:id="@+id/mId_mesocollectiontic_chrysful"
                 android:layout_marginRight="10dp"
                 />
 
@@ -46,10 +46,10 @@
                 android:layout_weight="1"
                 android:background="@drawable/okokok_pecuexperienceair"
                 android:gravity="center"
-                android:id="@+id/gama_register_btn_get_vfcode"
-                android:text="@string/py_register_account_get_vfcode"
-                android:textColor="@color/e_ff3e37"
-                android:textSize="@dimen/sp_18" />
+                android:id="@+id/mId_durlike_coronwhetherize"
+                android:text="@string/mstr_appear_agog"
+                android:textColor="@color/mcolor_archa_plumbia"
+                android:textSize="@dimen/mdimen_noteism_millaneous" />
 
 
         </LinearLayout>
@@ -63,23 +63,23 @@
             >
 
             <TextView
-                android:id="@+id/gama_register_tv_limit_hint"
+                android:id="@+id/mId_ranviewfic_tribist"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/text_reg_tips"
-                android:textColor="@color/c_C0C0C0"
+                android:text="@string/mstr_cratcy_teleomost"
+                android:textColor="@color/mcolor_ethopaintingist_loseture"
                 android:textSize="10sp" />
 
         </LinearLayout>
 
         <Button
-            android:id="@+id/gama_register_btn_confirm"
+            android:id="@+id/mId_plasmuchia_felicade"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_marginTop="34dp"
             android:background="@drawable/okokok_mulgitor"
             android:gravity="center"
-            android:text="@string/text_confire_reg"
+            android:text="@string/mstr_cingor_philo"
             android:textColor="@android:color/white"
             android:textSize="17sp"/>
 

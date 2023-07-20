@@ -385,7 +385,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                                 sLoginResponse.getData().getTimestamp(),
                                 thirdLoginRegRequestBean.getThirdPlatId(),
                                 thirdLoginRegRequestBean.getThirdAccount(),true,sLoginResponse.getData().isBind());
-//                        ToastUtils.toast(getActivity(), R.string.py_login_success);
+//                        ToastUtils.toast(getActivity(), R.string.mstr_less_teamial);
                         handleRegisteOrLoginSuccess(sLoginResponse,rawResult, thirdLoginRegRequestBean.getRegistPlatform());
                         return;
                     } else {
@@ -398,7 +398,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         }
                     }
                 } else {
-                    ToastUtils.toast(getActivity(), R.string.py_error_occur);
+                    ToastUtils.toast(getActivity(), R.string.mstr_palltodayry_pulchrster);
                 }
             }
 
@@ -547,7 +547,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 if (sLoginResponse != null) {
                     if (sLoginResponse.isRequestSuccess()) {
 
-//                        ToastUtils.toast(getActivity(), R.string.text_account_change_pwd_success);
+//                        ToastUtils.toast(getActivity(), R.string.mstr_libr_gelette);
 
                         iLoginView.changePwdSuccess(sLoginResponse);
                         SdkUtil.saveAccountModel(activity,account,newPwd,sLoginResponse.getData().getUserId(),sLoginResponse.getData().getToken(), sLoginResponse.getData().getTimestamp(),true);
@@ -559,7 +559,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     }
 
                 } else {
-                    ToastUtils.toast(getActivity(), R.string.py_error_occur);
+                    ToastUtils.toast(getActivity(), R.string.mstr_palltodayry_pulchrster);
                 }
             }
 
@@ -589,7 +589,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             public void success(SLoginResult sLoginResponse, String rawResult) {
                 if (sLoginResponse != null) {
                     if (sLoginResponse.isRequestSuccess()) {
-//                        ToastUtils.toast(getActivity(), R.string.text_account_bind_success);
+//                        ToastUtils.toast(getActivity(), R.string.mstr_askorium_eosoesque);
 
 //                        handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GAMA);
 
@@ -616,7 +616,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     }
 
                 } else {
-                    ToastUtils.toast(getActivity(), R.string.py_error_occur);
+                    ToastUtils.toast(getActivity(), R.string.mstr_palltodayry_pulchrster);
                 }
             }
 
@@ -646,7 +646,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             public void success(SLoginResult sLoginResponse, String rawResult) {
                 if (sLoginResponse != null) {
                     if (sLoginResponse.isRequestSuccess()) {
-//                        ToastUtils.toast(getActivity(), R.string.py_login_success);
+//                        ToastUtils.toast(getActivity(), R.string.mstr_less_teamial);
                         SdkUtil.saveAccountModel(getContext(), SLoginType.LOGIN_TYPE_GUEST,"","",
                                 sLoginResponse.getData().getUserId(),
                                 sLoginResponse.getData().getToken(),
@@ -664,7 +664,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     }
 
                 } else {
-                    ToastUtils.toast(getActivity(), R.string.py_error_occur);
+                    ToastUtils.toast(getActivity(), R.string.mstr_palltodayry_pulchrster);
                 }
             }
 
@@ -683,11 +683,11 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 //    private void cteateUserImage(Context context, String freeRegisterName, String freeRegisterPwd) {
 //        try {
 //            String appName = ApkInfoUtil.getApplicationName(context);
-//            String text = String.format(context.getResources().getString(R.string.py_login_mac_tips), appName, freeRegisterName, freeRegisterPwd);
+//            String text = String.format(context.getResources().getString(R.string.mstr_measureast_manthence), appName, freeRegisterName, freeRegisterPwd);
 //            PL.i("cteateUserImage:" + text);
 //            Bitmap bitmap = BitmapUtil.bitmapAddText(BitmapFactory.decodeResource(context.getResources(),R.drawable.v2_mac_pwd_bg),text);
 //            String m = BitmapUtil.saveImageToGallery(getContext(),bitmap);
-//            ToastUtils.toast(context, context.getResources().getString(R.string.py_login_mac_saveimage_tips));
+//            ToastUtils.toast(context, context.getResources().getString(R.string.mstr_vicenprove_hair));
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
@@ -765,7 +765,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 if (sLoginResponse != null) {
 
                     if (sLoginResponse.isRequestSuccess()){
-//                        ToastUtils.toast(getActivity(), R.string.py_login_success);
+//                        ToastUtils.toast(getActivity(), R.string.mstr_less_teamial);
                         SdkUtil.saveAccountModel(getContext(), SLoginType.LOGIN_TYPE_FB,"","",
                                 sLoginResponse.getData().getUserId(),
                                 sLoginResponse.getData().getToken(),
@@ -785,7 +785,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         }
                     }
                 } else {
-                    ToastUtils.toast(getActivity(), R.string.py_error_occur);
+                    ToastUtils.toast(getActivity(), R.string.mstr_palltodayry_pulchrster);
                 }
 //                showLoginWithRegView();
             }
@@ -816,7 +816,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             public void success(SLoginResult sLoginResponse, String rawResult) {
                 if (sLoginResponse != null) {
                     if (sLoginResponse.isRequestSuccess()) {
-//                        ToastUtils.toast(getActivity(), R.string.py_register_success);
+//                        ToastUtils.toast(getActivity(), R.string.mstr_herselfan_easyite);
 
                         SdkUtil.saveAccountModel(activity,account,password,sLoginResponse.getData().getUserId(),sLoginResponse.getData().getToken(),
                                 sLoginResponse.getData().getTimestamp(),true);
@@ -828,7 +828,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     }
 
                 } else {
-                    ToastUtils.toast(getActivity(), R.string.py_error_occur);
+                    ToastUtils.toast(getActivity(), R.string.mstr_palltodayry_pulchrster);
                 }
             }
 
@@ -872,18 +872,18 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         startTimer();
                     }
                 } else {
-                    ToastUtils.toast(getActivity(), R.string.py_error_occur);
+                    ToastUtils.toast(getActivity(), R.string.mstr_palltodayry_pulchrster);
                 }
             }
 
             @Override
             public void timeout(String code) {
-                ToastUtils.toast(getActivity(), R.string.py_error_occur);
+                ToastUtils.toast(getActivity(), R.string.mstr_palltodayry_pulchrster);
             }
 
             @Override
             public void noData() {
-                ToastUtils.toast(getActivity(), R.string.py_error_occur);
+                ToastUtils.toast(getActivity(), R.string.mstr_palltodayry_pulchrster);
             }
 
             @Override
@@ -904,7 +904,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 if (sLoginResponse != null) {
 
                     if (sLoginResponse.isRequestSuccess()) {
-                        ToastUtils.toast(getActivity(), R.string.text_send_vf_code_success);
+                        ToastUtils.toast(getActivity(), R.string.mstr_quartivity_hospit);
                         if(callbackList != null && callbackList.size() > 0) {
                             for(SBaseRelativeLayout.OperationCallback callback : callbackList) {
                                 callback.statusCallback(SBaseRelativeLayout.OperationCallback.TIME_LIMIT);
@@ -918,18 +918,18 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         }
                     }
                 } else {
-                    ToastUtils.toast(getActivity(), R.string.py_error_occur);
+                    ToastUtils.toast(getActivity(), R.string.mstr_palltodayry_pulchrster);
                 }
             }
 
             @Override
             public void timeout(String code) {
-                ToastUtils.toast(getActivity(), R.string.py_error_occur);
+                ToastUtils.toast(getActivity(), R.string.mstr_palltodayry_pulchrster);
             }
 
             @Override
             public void noData() {
-                ToastUtils.toast(getActivity(), R.string.py_error_occur);
+                ToastUtils.toast(getActivity(), R.string.mstr_palltodayry_pulchrster);
             }
 
             @Override
@@ -962,10 +962,10 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 //                showLoginView();
 //                return;
 //            }
-            autoLoginText = account;//String.format(activity.getResources().getString(R.string.py_login_autologin_tips),account);
+            autoLoginText = account;//String.format(activity.getResources().getString(R.string.mstr_suchibility_quassagainst),account);
 
         } else {
-            String autoLoginTips = activity.getResources().getString(R.string.py_login_autologin_logining_tips);
+            String autoLoginTips = activity.getResources().getString(R.string.mstr_cept_misoy);
             if (registPlatform.equals(SLoginType.LOGIN_TYPE_FB)){
                 autoLoginTips = "Facebook" + autoLoginTips;
             } else if (registPlatform.equals(SLoginType.LOGIN_TYPE_GOOGLE)){
@@ -1146,7 +1146,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
         }*/
 
-//        ToastUtils.toast(mActivity, R.string.py_login_success);
+//        ToastUtils.toast(mActivity, R.string.mstr_less_teamial);
 
         if (iLoginView != null){
             iLoginView.loginSuccess(loginResponse);
@@ -1170,7 +1170,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             public void success(SLoginResult sLoginResponse, String rawResult) {
                 if (sLoginResponse != null) {
                     if (sLoginResponse.isRequestSuccess()) {
-//                        ToastUtils.toast(getActivity(), R.string.text_account_change_pwd_success);
+//                        ToastUtils.toast(getActivity(), R.string.mstr_libr_gelette);
 
                         if (iLoginView != null){
                             iLoginView.findPwdSuccess(sLoginResponse);
@@ -1185,7 +1185,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     }
 
                 } else {
-                    ToastUtils.toast(getActivity(), R.string.py_error_occur);
+                    ToastUtils.toast(getActivity(), R.string.mstr_palltodayry_pulchrster);
                 }
             }
 
@@ -1448,21 +1448,21 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         this.mActivity = activity;
 
         if (TextUtils.isEmpty(account)) {
-            ToastUtils.toast(getContext(), R.string.py_account_empty);
+            ToastUtils.toast(getContext(), R.string.mstr_egri_sacceur);
             return;
         }
         account = account.trim();
         if (!SdkUtil.checkAccount(account)) {
-            ToastUtils.toast(activity,R.string.text_account_format);
+            ToastUtils.toast(activity,R.string.mstr_downsive_strategyness);
             return;
         }
         if (TextUtils.isEmpty(password)) {
-            ToastUtils.toast(getActivity(), R.string.py_password_empty);
+            ToastUtils.toast(getActivity(), R.string.mstr_multaton_uxoriatic);
             return;
         }
         password = password.trim();
         if (!SdkUtil.checkPassword(password)) {
-            ToastUtils.toast(activity,R.string.text_pwd_format);
+            ToastUtils.toast(activity,R.string.mstr_vasety_parvitor);
             return;
         }
 
@@ -1484,7 +1484,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                             SdkUtil.saveAccountModel(activity,account,password,sLoginResponse.getData().getUserId(),sLoginResponse.getData().getToken(),
                                     sLoginResponse.getData().getTimestamp(),true);
                         }
-//                        ToastUtils.toast(getActivity(), R.string.py_login_success);
+//                        ToastUtils.toast(getActivity(), R.string.mstr_less_teamial);
                         handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_MG);
                     }else{
                         ToastUtils.toast(getActivity(),sLoginResponse.getMessage());
@@ -1495,7 +1495,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 //                        }
                     }
                 }else{
-                    ToastUtils.toast(getActivity(),R.string.py_error_occur);
+                    ToastUtils.toast(getActivity(),R.string.mstr_palltodayry_pulchrster);
 //                    if(isAutoLogin) {
 //                        showLoginView();
 //                    } else {
@@ -1552,7 +1552,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         ToastUtils.toast(getActivity(),sLoginResponse.getMessage());
                     }
                 }else{
-                    ToastUtils.toast(getActivity(),R.string.py_error_occur);
+                    ToastUtils.toast(getActivity(),R.string.mstr_palltodayry_pulchrster);
                 }
             }
 
@@ -1590,7 +1590,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         }
                     }
                 }else{
-                    ToastUtils.toast(getActivity(),R.string.py_error_occur);
+                    ToastUtils.toast(getActivity(),R.string.mstr_palltodayry_pulchrster);
                 }
             }
 
@@ -1636,7 +1636,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     }
 
                 } else {
-                    ToastUtils.toast(getActivity(), R.string.py_error_occur);
+                    ToastUtils.toast(getActivity(), R.string.mstr_palltodayry_pulchrster);
                     if (sfCallBack != null){
                         sfCallBack.success(rawResult,rawResult);
                     }

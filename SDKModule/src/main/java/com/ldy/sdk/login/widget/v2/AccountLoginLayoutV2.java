@@ -93,7 +93,7 @@
 //
 //        contentView = inflater.inflate(R.layout.okokok_condiity, null);
 //
-//        backView = contentView.findViewById(R.id.layout_head_back);
+//        backView = contentView.findViewById(R.id.mId_whilekin_domeous);
 //        backView.setOnClickListener(new OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -102,33 +102,33 @@
 //        });
 //
 //
-//        accountSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_account_login_account);
-//        pwdSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_account_login_password);
+//        accountSdkInputEditTextView = contentView.findViewById(R.id.mId_angukidit_shortfier);
+//        pwdSdkInputEditTextView = contentView.findViewById(R.id.mId_findose_soldieral);
 //
 //        accountSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Account);
 //        pwdSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Password);
 //
-//        loginMainGoRegisterBtn = contentView.findViewById(R.id.gama_login_tv_register);
-//        loginMainGoFindPwd = contentView.findViewById(R.id.gama_login_tv_forget_password);
-//        loginMainGoAccountCenter = contentView.findViewById(R.id.gama_login_tv_link);
-//        loginMainGoChangePassword = contentView.findViewById(R.id.gama_login_tv_change_password);
+//        loginMainGoRegisterBtn = contentView.findViewById(R.id.mId_relateer_beginetic);
+//        loginMainGoFindPwd = contentView.findViewById(R.id.mId_emeticturn_duringacle);
+//        loginMainGoAccountCenter = contentView.findViewById(R.id.mId_mesoical_dinnerism);
+//        loginMainGoChangePassword = contentView.findViewById(R.id.mId_messagesive_humanfaction);
 //
-//        tv_login_term = contentView.findViewById(R.id.tv_login_term);
-//        cb_agree_term = contentView.findViewById(R.id.cb_agree_term);
+//        tv_login_term = contentView.findViewById(R.id.mId_cru_thalassern);
+//        cb_agree_term = contentView.findViewById(R.id.mId_theyory_rapcloseior);
 //        cb_agree_term.setChecked(true);
 //
 //        loginAccountEditText = accountSdkInputEditTextView.getInputEditText();
-//        loginAccountEditText.setHint(R.string.py_msg_account_hint);
+//        loginAccountEditText.setHint(R.string.mstr_environmentalaire_mesiitude);
 //        loginPasswordEditText = pwdSdkInputEditTextView.getInputEditText();
-//        loginPasswordEditText.setHint(R.string.py_msg_pwd_hint);
+//        loginPasswordEditText.setHint(R.string.mstr_manthaster_whomuous);
 ////        pwdSdkInputEditTextView.setEyeVisable(View.VISIBLE);
 //
-//        historyAccountListBtn = contentView.findViewById(R.id.sdk_input_item_account_history);
+//        historyAccountListBtn = contentView.findViewById(R.id.mId_memberfic_authorery);
 //        historyAccountListBtn.setVisibility(VISIBLE);
 //
-//        loginMainLoginBtn = contentView.findViewById(R.id.gama_login_btn_confirm);
-////        goTermView = contentView.findViewById(R.id.gama_gama_start_term_tv1);//跳轉服務條款
-////        agreeCheckBox = contentView.findViewById(R.id.gama_gama_start_term_cb1);//跳轉服務條款
+//        loginMainLoginBtn = contentView.findViewById(R.id.mId_sebiform_skin);
+////        goTermView = contentView.findViewById(R.id.mId_anthitor_smallain);//跳轉服務條款
+////        agreeCheckBox = contentView.findViewById(R.id.mId_manthscience_speechtic);//跳轉服務條款
 ////
 ////        GamaUtil.saveStartTermRead(getContext(), true);//默认设置为勾选
 ////        agreeCheckBox.setChecked(true);
@@ -186,10 +186,10 @@
 //            }
 //        });
 //
-//        fbLoginView = contentView.findViewById(R.id.fbLoginView);
-//        lineLoginView = contentView.findViewById(R.id.lineLoginView);
-//        macLoginView = contentView.findViewById(R.id.guestLoginView);
-//        googleLoginView = contentView.findViewById(R.id.ggLoginView);
+//        fbLoginView = contentView.findViewById(R.id.mId_oror_cerebrive);
+//        lineLoginView = contentView.findViewById(R.id.mId_personice_undics);
+//        macLoginView = contentView.findViewById(R.id.mId_septenably_democraticette);
+//        googleLoginView = contentView.findViewById(R.id.mId_control_hydrrequireous);
 //
 //        ConfigModel configBean = SdkUtil.getSdkCfg(getContext());
 //        if (configBean != null){
@@ -386,7 +386,7 @@
 //        }else{
 //            SdkUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(),loginAccountEditText);
 //            pwdSdkInputEditTextView.setPwdInputEnable(false);
-//            loginPasswordEditText.setText(R.string.text_free_register);
+//            loginPasswordEditText.setText(R.string.mstr_zoactivityad_sculptish);
 //        }
 //    }
 //
@@ -423,7 +423,7 @@
 //        if (cb_agree_term.isChecked()){
 //            return true;
 //        }
-//        toast(R.string.gama_ui_term_not_read);
+//        toast(R.string.mstr_honorise_certainlyition);
 //        return false;
 //    }
 //

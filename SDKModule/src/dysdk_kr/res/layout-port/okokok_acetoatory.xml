@@ -23,13 +23,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="@string/text_notice"
-                android:textColor="@color/white_c"
+                android:text="@string/mstr_opoteran_glassress"
+                android:textColor="@color/mcolor_tag_tetrice"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:layout_centerInParent="true"
 
-                android:id="@+id/tv_notice_title"
+                android:id="@+id/mId_clavresponsibilityic_man"
 
                 />
 
@@ -51,7 +51,7 @@
 
 
             <ImageView
-                android:id="@+id/iv_notice_close"
+                android:id="@+id/mId_audance_fundise"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:layout_alignParentEnd="true"
@@ -68,7 +68,7 @@
             android:orientation="vertical">
 
             <com.ldy.sdk.SWebViewLayout
-                android:id="@+id/svl_notice_layout"
+                android:id="@+id/mId_face_artistivity"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 

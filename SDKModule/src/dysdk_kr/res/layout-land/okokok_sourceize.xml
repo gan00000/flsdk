@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/c_sdk_bg">
+    android:background="@color/mcolor_supin_situationar">
 
     <LinearLayout
         android:layout_width="375dp"
@@ -24,14 +24,14 @@
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:layout_marginTop="25dp"
-            android:id="@+id/sdkinputview_findpwd_account"
+            android:id="@+id/mId_lessitor_legous"
             />
 
         <com.ldy.sdk.login.widget.SDKInputEditTextView
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:layout_marginTop="15dp"
-            android:id="@+id/sdkinputview_findpwd_new"
+            android:id="@+id/mId_annage_whoseette"
             />
 
         <com.ldy.sdk.login.widget.SDKInputEditTextView
@@ -39,7 +39,7 @@
             android:layout_height="40dp"
             android:layout_marginTop="15dp"
             android:visibility="gone"
-            android:id="@+id/sdkinputview_findpwd_new_again"
+            android:id="@+id/mId_cause_homalsion"
             />
 
         <LinearLayout
@@ -53,7 +53,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:id="@+id/sdkinputview_findpwd_vf"
+                android:id="@+id/mId_eyeistic_shotan"
                 android:layout_marginRight="16dp"
                 />
 
@@ -62,22 +62,22 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/okokok_adultism"
                 android:gravity="center"
-                android:id="@+id/btn_find_get_vfcode"
-                android:text="@string/py_register_account_get_vfcode"
-                android:textColor="@color/c_F94925"
+                android:id="@+id/mId_federalaneous_receiveality"
+                android:text="@string/mstr_appear_agog"
+                android:textColor="@color/mcolor_phaneraffectative_rustfaction"
                 android:textSize="14sp" />
 
 
         </LinearLayout>
 
         <Button
-            android:id="@+id/gama_find_btn_confirm"
+            android:id="@+id/mId_sequless_rhagwise"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/okokok_mulgitor"
             android:gravity="center"
-            android:text="@string/py_confire"
+            android:text="@string/mstr_north_wearot"
             android:textColor="@android:color/white"
             android:textSize="17sp" />
 
