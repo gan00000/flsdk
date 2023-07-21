@@ -175,15 +175,15 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 @Override
                 public void success(String id, String mFullName, String mEmail, String idTokenString) {
                     PL.i("twitter login : " + id);
-                    PL.i("google sign in : " + id);
                     if (SStringUtil.isNotEmpty(id)) {
                         SdkUtil.saveTwitterId(activity,id);
                         ThirdLoginRegRequestBean thirdLoginRegRequestBean = new ThirdLoginRegRequestBean(activity);
                         thirdLoginRegRequestBean.setThirdPlatId(id);
                         thirdLoginRegRequestBean.setRegistPlatform(SLoginType.LOGIN_TYPE_TWITTER);
+                        thirdLoginRegRequestBean.setThirdAccount(mFullName);
 //                        thirdLoginRegRequestBean.setGoogleClientId(ResConfig.getGoogleClientId(activity));
 //                        thirdLoginRegRequestBean.setGoogleIdToken(idTokenString);
-//                        thirdPlatLogin(activity, thirdLoginRegRequestBean);
+                        thirdPlatLogin(activity, thirdLoginRegRequestBean);
                     }
                 }
 

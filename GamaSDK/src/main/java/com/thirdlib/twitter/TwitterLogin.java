@@ -30,7 +30,7 @@ public class TwitterLogin {
     /**
      * 开始登陆
      */
-    public void startLogin(Activity activity, final TwitterLoginCallBack callBack) {
+    public void startLogin(Activity activity, TwitterLoginCallBack callBack) {
         if(activity == null || activity.isFinishing()) {
             Log.e(TAG, "activity in illegal state");
             return;
@@ -50,11 +50,18 @@ public class TwitterLogin {
                                 PL.d("startActivityForSignInWithProvider twitter success");
                                 // User is signed in.
                                 // IdP data available in
-                                // authResult.getAdditionalUserInfo().getProfile().
+//                                 authResult.getAdditionalUserInfo().getProfile()
                                 // The OAuth access token can also be retrieved:
                                 // ((OAuthCredential)authResult.getCredential()).getAccessToken().
                                 // The OAuth secret can be retrieved by calling:
                                 // ((OAuthCredential)authResult.getCredential()).getSecret().
+                                String fullName = authResult.getAdditionalUserInfo().getUsername();
+                                String uid = authResult.getUser().getUid();
+
+
+                                if (callBack != null){
+                                    callBack.success(uid, fullName, "" ,"");
+                                }
                             }
                         })
                 .addOnFailureListener( new OnFailureListener() {
@@ -63,6 +70,9 @@ public class TwitterLogin {
                                 // Handle failure.
                                 PL.d("startActivityForSignInWithProvider twitter onFailure");
                                 e.printStackTrace();
+                                if (callBack != null){
+                                    callBack.failure(e.getMessage());
+                                }
                             }
                         });
 
