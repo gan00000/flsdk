@@ -9,12 +9,12 @@ import com.mw.base.bean.SLoginType;
 import com.mw.sdk.R;
 import com.mw.sdk.login.model.AccountModel;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
-
+import com.mw.sdk.version.BaseSdkVersion;
 /**
  * Created by gan on 2017/2/7.
  */
 
-public class SdkVersionUtil {
+public class SdkVersionUtil extends BaseSdkVersion{
 
 
     public static void setAccountWithIcon(AccountModel accountModel, ImageView imageView, EditText editText){

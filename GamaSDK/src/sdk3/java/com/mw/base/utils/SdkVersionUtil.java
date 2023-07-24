@@ -42,7 +42,7 @@ import java.util.UUID;
  * Created by gan on 2017/2/7.
  */
 
-public class SdkVersionUtil {
+public class SdkVersionUtil extends BaseSdkVersion{
 
 
     public static void setAccountWithIcon(AccountModel accountModel, ImageView imageView, EditText editText){
