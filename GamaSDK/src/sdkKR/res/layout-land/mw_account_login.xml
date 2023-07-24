@@ -290,6 +290,37 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/twitterLoginView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+
+                <ImageView
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:src="@mipmap/icon_twitter_1" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/naverLoginView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:src="@mipmap/icon_naver" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/lineLoginView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -302,16 +333,6 @@
                     android:layout_width="34dp"
                     android:layout_height="34dp"
                     android:src="@mipmap/icon_line_bg_1" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:gravity="center"
-                    android:text="@string/account_bind"
-                    android:textColor="@color/c_545454"
-                    android:textSize="@dimen/sp_18"
-                    android:visibility="gone" />
 
             </LinearLayout>
 
@@ -353,7 +374,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="6dp"
                     android:text="@string/text_delete_account"
-                    android:textColor="@color/black_s"
+                    android:textColor="@color/e_ff0000"
                     android:textSize="14sp" />
 
             </LinearLayout>

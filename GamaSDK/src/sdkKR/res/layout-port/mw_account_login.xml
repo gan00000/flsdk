@@ -374,7 +374,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="6dp"
                     android:text="@string/text_delete_account"
-                    android:textColor="@color/black_s"
+                    android:textColor="@color/e_ff0000"
                     android:textSize="14sp" />
 
             </LinearLayout>

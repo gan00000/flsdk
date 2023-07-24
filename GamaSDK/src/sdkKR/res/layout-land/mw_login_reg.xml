@@ -36,15 +36,15 @@
                 >
 
                 <TextView
+                    android:id="@+id/loginTabView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:text="@string/py_login"
                     android:gravity="center"
                     android:lines="1"
+                    android:text="@string/py_login"
                     android:textColor="@color/c_F94925"
-                    android:textSize="24sp"
-                    android:id="@+id/loginTabView"/>
+                    android:textSize="24sp" />
 
                 <View
                     android:layout_width="wrap_content"
