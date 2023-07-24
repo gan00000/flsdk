@@ -79,7 +79,7 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
     private View onCreateView(LayoutInflater inflater) {
         contentView = inflater.inflate(R.layout.mw_welcome_back, null);
 
-        backView = contentView.findViewById(R.id.layout_head_back);
+        /*backView = contentView.findViewById(R.id.layout_head_back);
 
         TextView titleTextView = contentView.findViewById(R.id.sdk_head_title);
         titleTextView.setText(R.string.text_welcome_back);
@@ -191,13 +191,13 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
                     layout_delete_account.setVisibility(View.GONE);
                 }
             }
-        }
+        }*/
 
         return contentView;
     }
 
     private void setViewStatue() {
-        if (currentAccountModel != null){ //显示记住的密码，待修改
+  /*      if (currentAccountModel != null){ //显示记住的密码，待修改
 //                account = currentAccountModel.getAccount();
 //            String password = lastAccountModel.getPassword();
 //                accountSdkInputEditTextView.getInputEditText().setText(account);
@@ -235,7 +235,7 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
                 tv_account_update_tips.setText(R.string.text_update_account_tips);
                 iv_update_account_icon.setImageResource(R.mipmap.img_warn_del);
             }
-        }
+        }*/
     }
 
     @Override
@@ -262,7 +262,7 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
     @Override
     public void onClick(View v) {
 
-        if (v == btn_login_game) {
+        /*if (v == btn_login_game) {
             login();
         } else if (v == backView) {//返回键
 
@@ -300,12 +300,12 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
 
             showDeleteDialog();
 
-        }
+        }*/
 
     }
 
     private void showDeleteDialog() {
-        if (deleteDialog == null){
+        /*if (deleteDialog == null){
             LayoutInflater inflater = LayoutInflater.from(getContext());
             View contentView = inflater.inflate(R.layout.mw_delete_account_alert, null);
             Button cancelBtn = contentView.findViewById(R.id.btn_delete_cancel);
@@ -331,11 +331,11 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
         }else{
 
             deleteDialog.show();
-        }
+        }*/
     }
 
     private void deleteAccount() {
-        String account = accountEditText.getEditableText().toString().trim();
+      /*  String account = accountEditText.getEditableText().toString().trim();
         if (TextUtils.isEmpty(account)) {
             ToastUtils.toast(getActivity(), R.string.py_account_empty);
             return;
@@ -360,12 +360,12 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
                             deleteDialog.dismiss();
                         }
                     }
-                });
+                });*/
     }
 
     private void login() {
 
-        if (accountPopupWindow != null && accountPopupWindow.isShowing()) {
+        /*if (accountPopupWindow != null && accountPopupWindow.isShowing()) {
             accountPopupWindow.dismiss();
         }
         if (currentAccountModel == null){
@@ -386,18 +386,18 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
             String account = currentAccountModel.getAccount();
             String pwd = currentAccountModel.getPassword();
             sLoginDialogv2.getLoginPresenter().starpyAccountLogin(sLoginDialogv2.getActivity(),account,pwd,"",true);
-        }
+        }*/
     }
 
 
     private void checkLocalAccount(){
-        List<AccountModel> accountModels = SdkUtil.getAccountModels(getActivity());
+        /*List<AccountModel> accountModels = SdkUtil.getAccountModels(getActivity());
         if (accountModels == null || accountModels.isEmpty()){
             sLoginDialogv2.toLoginWithRegView(ViewType.WelcomeView);
             return;
         }
         currentAccountModel = accountModels.get(0);
-        setViewStatue();
+        setViewStatue();*/
     }
 
     @Override
@@ -428,16 +428,16 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
     @Override
     public void onViewGone() {
         super.onViewGone();
-        if (accountPopupWindow != null && accountPopupWindow.isShowing()) {
+       /* if (accountPopupWindow != null && accountPopupWindow.isShowing()) {
             accountPopupWindow.dismiss();
-        }
+        }*/
     }
 
     @Override
     public void onViewRemove() {
         super.onViewRemove();
-        if (accountPopupWindow != null && accountPopupWindow.isShowing()) {
-            accountPopupWindow.dismiss();
-        }
+//        if (accountPopupWindow != null && accountPopupWindow.isShowing()) {
+//            accountPopupWindow.dismiss();
+//        }
     }
 }
