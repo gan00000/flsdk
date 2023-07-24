@@ -304,6 +304,9 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
         }else if (SLoginType.LOGIN_TYPE_MG.equals(accountModel.getLoginType())){
             imageResId = R.mipmap.img_persion;
             showName = getContext().getResources().getString(R.string.text_has_bind_tips_mw);
+        }else if (SLoginType.LOGIN_TYPE_NAVER.equals(accountModel.getLoginType())){
+            imageResId = R.mipmap.icon_naver;
+            showName = getContext().getResources().getString(R.string.text_has_upgrade_account);
         }
 
         imageView.setImageResource(imageResId);

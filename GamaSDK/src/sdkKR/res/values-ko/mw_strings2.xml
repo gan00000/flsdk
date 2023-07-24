@@ -19,5 +19,6 @@
     <string name="text_age_up14">14세 이상입니다</string>
     <string name="text_age_is_up14">14세 미만입니까?</string>
     <string name="text_age_up14_can_useapp">주의: 14세 미만이라면 빠르게 로그아웃하세요. 14세 미만 사용자는 이 앱을 사용할 수 없습니다.</string>
+    <string name="text_has_upgrade_account">회원 계정으로 업그레이드됨</string>
 
 </resources>

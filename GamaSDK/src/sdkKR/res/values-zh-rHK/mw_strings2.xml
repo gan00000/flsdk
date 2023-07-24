@@ -19,5 +19,6 @@
     <string name="text_age_up14">已滿14周歲</string>
     <string name="text_age_is_up14">你是否已滿14周歲</string>
     <string name="text_age_up14_can_useapp">注：如果您未滿14周歲，請盡快退出，該應用不對14周歲以下用戶開放</string>
+    <string name="text_has_upgrade_account">已升級為會員帳號</string>
 
 </resources>

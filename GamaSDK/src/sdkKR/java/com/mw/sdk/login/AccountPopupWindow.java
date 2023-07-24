@@ -148,6 +148,8 @@ public class AccountPopupWindow extends PopupWindow {
                     imageResId = R.mipmap.icon_line_2;
                 }else if (SLoginType.LOGIN_TYPE_TWITTER.equals(accountModel.getLoginType())){
                     imageResId = R.mipmap.icon_twitter_2;
+                }else if (SLoginType.LOGIN_TYPE_NAVER.equals(accountModel.getLoginType())){
+                    imageResId = R.mipmap.icon_naver;
                 }else if (SLoginType.LOGIN_TYPE_MG.equals(accountModel.getLoginType())){
                     imageResId = R.mipmap.img_persion_bg;
                     showName = accountModel.getAccount();
