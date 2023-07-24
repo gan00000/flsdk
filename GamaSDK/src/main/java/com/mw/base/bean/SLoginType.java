@@ -31,4 +31,5 @@ public class SLoginType {
 	 */
 //	public static final String LOGIN_TYPE_UNIQUE = "visitor";
 
+	public static final String LOGIN_TYPE_NAVER = "naver";
 }

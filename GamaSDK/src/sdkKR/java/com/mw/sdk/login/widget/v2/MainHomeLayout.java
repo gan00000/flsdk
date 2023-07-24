@@ -24,7 +24,7 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
     private View contentView;
 
     private View layout_go_account_login, guestLoginView;
-    private ImageView iv_login_google,iv_login_fb,iv_login_line, iv_login_twitter;
+    private ImageView iv_login_google,iv_login_fb,iv_login_line, iv_login_twitter, iv_login_naver;
     private CheckBox cb_agree_term;
     private View layout_go_term;
     private View layout_term;
@@ -57,6 +57,7 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
         iv_login_fb = contentView.findViewById(R.id.iv_login_fb);
         iv_login_line = contentView.findViewById(R.id.iv_login_line);
         iv_login_twitter = contentView.findViewById(R.id.iv_login_twitter);
+        iv_login_naver = contentView.findViewById(R.id.iv_login_naver);
 
         cb_agree_term = contentView.findViewById(R.id.cb_agree_term);
         layout_go_term = contentView.findViewById(R.id.layout_go_term);
@@ -69,6 +70,7 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
         iv_login_fb.setOnClickListener(this);
         iv_login_line.setOnClickListener(this);
         iv_login_twitter.setOnClickListener(this);
+        iv_login_naver.setOnClickListener(this);
         layout_go_term.setOnClickListener(this);
 
         cb_agree_term.setChecked(true);
@@ -106,6 +108,11 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
                     iv_login_twitter.setVisibility(View.GONE);
                 }else {
                     iv_login_twitter.setVisibility(View.VISIBLE);
+                }
+                if(!versionData.isNaverLogin()){
+                    iv_login_naver.setVisibility(View.GONE);
+                }else {
+                    iv_login_naver.setVisibility(View.VISIBLE);
                 }
                 if(!versionData.isShowContract()){
                     layout_term.setVisibility(View.GONE);
@@ -156,6 +163,12 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
             //twitter登录
             if (checkAgreeTerm()){
                 sLoginDialogv2.getLoginPresenter().twitterLogin(sLoginDialogv2.getActivity());
+            }
+
+        }else if (v == iv_login_naver){
+            //twitter登录
+            if (checkAgreeTerm()){
+                sLoginDialogv2.getLoginPresenter().naverLogin(sLoginDialogv2.getActivity());
             }
 
         }

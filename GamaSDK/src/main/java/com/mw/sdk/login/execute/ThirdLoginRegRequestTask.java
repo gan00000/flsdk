@@ -41,6 +41,7 @@ public class ThirdLoginRegRequestTask extends BaseLoginRequestTask {
         thirdLoginRegRequestBean.setApps(fbApps);
         thirdLoginRegRequestBean.setTokenBusiness(fbTokenBusiness);
         thirdLoginRegRequestBean.setFb_oauthToken(accessTokenString);
+        thirdLoginRegRequestBean.setThirdAccessToken(accessTokenString);
 
 
         thirdLoginRegRequestBean.setRequestMethod(ApiRequestMethod.GS_REQUEST_METHOD_THIRD_LOGIN);

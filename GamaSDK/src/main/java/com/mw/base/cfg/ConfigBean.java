@@ -30,15 +30,16 @@ public class ConfigBean {
 
     public VersionData getSdkConfigLoginData(Context context){
         VersionData versionData = getVersionDataData(context);
-//        versionData.setVisitorLogin(true);
-//        versionData.setFbLogin(true);
-//        versionData.setGoogleLogin(true);
+        versionData.setVisitorLogin(true);
+        versionData.setFbLogin(true);
+        versionData.setGoogleLogin(true);
 //        versionData.setLineLogin(true);
-//        versionData.setShowContract(true);
-//        versionData.setDeleteAccount(true);
-//        versionData.setShowRegPage(false);
-//        versionData.setHuaweiData();
+        versionData.setShowContract(true);
+        versionData.setDeleteAccount(true);
+        versionData.setShowRegPage(false);
+//        versionData.setHuaweiData(context);
 //        versionData.setTwitterLogin(true);
+        versionData.setNaverLogin(true);
         return versionData;
     }
 
@@ -106,6 +107,7 @@ public class ConfigBean {
 
         private boolean twitterLogin = false;
         private boolean lineLogin = false;
+        private boolean naverLogin = false;
         private boolean huaweiLogin = true; //华为登录
         private boolean deleteAccount = false;
         private boolean showContract = true;
@@ -251,6 +253,14 @@ public class ConfigBean {
 
         public void setTwitterLogin(boolean twitterLogin) {
             this.twitterLogin = twitterLogin;
+        }
+
+        public boolean isNaverLogin() {
+            return naverLogin;
+        }
+
+        public void setNaverLogin(boolean naverLogin) {
+            this.naverLogin = naverLogin;
         }
 
         //华为登录，下面的不需要显示

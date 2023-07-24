@@ -2,20 +2,16 @@ package com.mw.sdk.login.widget.v2;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Canvas;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.PL;
@@ -26,7 +22,6 @@ import com.mw.base.utils.SdkUtil;
 import com.mw.base.utils.SdkVersionUtil;
 import com.mw.sdk.SBaseDialog;
 import com.mw.sdk.login.AccountPopupWindow;
-import com.mw.sdk.login.constant.ViewType;
 import com.mw.sdk.login.model.AccountModel;
 import com.mw.sdk.login.widget.SDKInputEditTextView;
 import com.mw.sdk.login.widget.SDKInputType;
@@ -76,7 +71,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
 
     View historyAccountListBtn;
 
-    private View fbLoginView, macLoginView, googleLoginView, lineLoginView, twitterLoginView;
+    private View fbLoginView, macLoginView, googleLoginView, lineLoginView, twitterLoginView, naverLoginView;
 
     private AccountPopupWindow accountPopupWindow;
     private AccountModel currentAccountModel;
@@ -258,6 +253,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
         macLoginView = contentView.findViewById(R.id.guestLoginView);
         googleLoginView = contentView.findViewById(R.id.ggLoginView);
         twitterLoginView = contentView.findViewById(R.id.twitterLoginView);
+        naverLoginView = contentView.findViewById(R.id.naverLoginView);
 
         ConfigBean configBean = SdkUtil.getSdkCfg(getContext());
         if (configBean != null){
@@ -287,6 +283,11 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
                     lineLoginView.setVisibility(View.GONE);
                 }else {
                     lineLoginView.setVisibility(View.VISIBLE);
+                }
+                if(!versionData.isNaverLogin()){
+                    naverLoginView.setVisibility(View.GONE);
+                }else {
+                    naverLoginView.setVisibility(View.VISIBLE);
                 }
                 if(!versionData.isShowContract()){
                     cb_agree_term.setVisibility(View.GONE);
@@ -366,6 +367,15 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
                 }
                 //twitter登录
                 sLoginDialogv2.getLoginPresenter().twitterLogin(sLoginDialogv2.getActivity());
+            }
+        });
+        naverLoginView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!checkAgreeTerm()) {
+                    return;
+                }
+                sLoginDialogv2.getLoginPresenter().naverLogin(sLoginDialogv2.getActivity());
             }
         });
         accountModels = new ArrayList<>();
@@ -529,6 +539,9 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
                return;
            }else if (SLoginType.LOGIN_TYPE_TWITTER.equals(currentAccountModel.getLoginType())){
                twitterLoginView.performClick();
+               return;
+           }else if (SLoginType.LOGIN_TYPE_NAVER.equals(currentAccountModel.getLoginType())){
+               naverLoginView.performClick();
                return;
            }
         }

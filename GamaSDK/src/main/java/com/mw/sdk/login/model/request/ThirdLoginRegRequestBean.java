@@ -47,6 +47,8 @@ public class ThirdLoginRegRequestBean extends AdsRequestBean {
 
 	private String lineAccessToken;
 
+	private String thirdAccessToken;
+
 	public String getRegistPlatform() {
 		return registPlatform;
 	}
@@ -121,4 +123,10 @@ public class ThirdLoginRegRequestBean extends AdsRequestBean {
 	public void setLineAccessToken(String lineAccessToken) {
 		this.lineAccessToken = lineAccessToken;
 	}
+
+
+	public void setThirdAccessToken(String thirdAccessToken) {
+		this.thirdAccessToken = thirdAccessToken;
+	}
+
 }

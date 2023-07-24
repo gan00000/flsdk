@@ -91,6 +91,8 @@ public class LoginContract {
          */
         void twitterLogin(Activity activity);
 
+        void naverLogin(Activity activity);
+
         /**
          * 需要验证码的登入
          */

@@ -303,15 +303,20 @@
                     android:layout_height="34dp"
                     android:src="@mipmap/icon_twitter_1" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:gravity="center"
-                    android:text="@string/py_login_google"
-                    android:textColor="@color/c_545454"
-                    android:textSize="@dimen/sp_18"
-                    android:visibility="gone" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/naverLoginView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:src="@mipmap/icon_naver" />
 
             </LinearLayout>
 
@@ -328,16 +333,6 @@
                     android:layout_width="34dp"
                     android:layout_height="34dp"
                     android:src="@mipmap/icon_line_bg_1" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:gravity="center"
-                    android:text="@string/account_bind"
-                    android:textColor="@color/c_545454"
-                    android:textSize="@dimen/sp_18"
-                    android:visibility="gone" />
 
             </LinearLayout>
 

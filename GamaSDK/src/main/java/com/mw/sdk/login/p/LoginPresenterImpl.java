@@ -21,6 +21,7 @@ import com.mw.base.bean.SLoginType;
 import com.mw.base.cfg.ConfigBean;
 import com.mw.base.cfg.ResConfig;
 import com.mw.base.utils.SdkUtil;
+import com.mw.base.utils.SdkVersionUtil;
 import com.mw.sdk.ads.EventConstant;
 import com.mw.sdk.constant.SdkInnerVersion;
 import com.mw.sdk.utils.DataManager;
@@ -43,6 +44,8 @@ import com.mw.sdk.ads.SdkEventLogger;
 import com.mw.sdk.login.LoginContract;
 import com.mw.sdk.login.model.AccountModel;
 import com.mw.sdk.utils.DialogUtil;
+import com.thirdlib.IThirdHelper;
+import com.thirdlib.ThirdCallBack;
 import com.thirdlib.facebook.FaceBookUser;
 import com.thirdlib.facebook.FbSp;
 import com.thirdlib.facebook.SFacebookProxy;
@@ -119,6 +122,12 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
     private HuaweiSignIn huaweiSignIn;
 
+    private IThirdHelper naverHelper;
+
+    public IThirdHelper getNaverHelper() {
+        return naverHelper;
+    }
+
     public void setFragment(Fragment fragment) {
         this.fragment = fragment;
     }
@@ -173,7 +182,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         if(twitterLogin != null) {
             twitterLogin.startLogin(activity,new TwitterLogin.TwitterLoginCallBack() {
                 @Override
-                public void success(String id, String mFullName, String mEmail, String idTokenString) {
+                public void success(String id, String mFullName, String mEmail, String token) {
                     PL.i("twitter login : " + id);
                     if (SStringUtil.isNotEmpty(id)) {
                         SdkUtil.saveTwitterId(activity,id);
@@ -181,8 +190,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         thirdLoginRegRequestBean.setThirdPlatId(id);
                         thirdLoginRegRequestBean.setRegistPlatform(SLoginType.LOGIN_TYPE_TWITTER);
                         thirdLoginRegRequestBean.setThirdAccount(mFullName);
-//                        thirdLoginRegRequestBean.setGoogleClientId(ResConfig.getGoogleClientId(activity));
-//                        thirdLoginRegRequestBean.setGoogleIdToken(idTokenString);
+                        thirdLoginRegRequestBean.setThirdAccessToken(token);
                         thirdPlatLogin(activity, thirdLoginRegRequestBean);
                     }
                 }
@@ -193,6 +201,39 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 }
             });
         }
+    }
+
+    @Override
+    public void naverLogin(Activity activity) {
+        if (naverHelper == null){
+            SdkVersionUtil sdkVersionUtil = new SdkVersionUtil();
+            naverHelper = sdkVersionUtil.newNaverHelper();
+            if (naverHelper == null){
+                return;
+            }
+            naverHelper.init(activity);
+        }
+        naverHelper.startLogin(activity, new ThirdCallBack() {
+            @Override
+            public void success(String thirdId, String mFullName, String mEmail, String token) {
+
+                PL.i("naver login : " + thirdId);
+                if (SStringUtil.isNotEmpty(thirdId)) {
+                    SdkUtil.saveTwitterId(activity,thirdId);
+                    ThirdLoginRegRequestBean thirdLoginRegRequestBean = new ThirdLoginRegRequestBean(activity);
+                    thirdLoginRegRequestBean.setThirdPlatId(thirdId);
+                    thirdLoginRegRequestBean.setRegistPlatform(SLoginType.LOGIN_TYPE_NAVER);
+                    thirdLoginRegRequestBean.setThirdAccount(mFullName);
+                    thirdLoginRegRequestBean.setThirdAccessToken(token);
+                    thirdPlatLogin(activity, thirdLoginRegRequestBean);
+                }
+            }
+
+            @Override
+            public void failure(String msg) {
+
+            }
+        });
     }
 
     @Override
@@ -335,6 +376,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     thirdLoginRegRequestBean.setRegistPlatform(SLoginType.LOGIN_TYPE_GOOGLE);
                     thirdLoginRegRequestBean.setGoogleClientId(ResConfig.getGoogleClientId(activity));
                     thirdLoginRegRequestBean.setGoogleIdToken(idTokenString);
+                    thirdLoginRegRequestBean.setThirdAccessToken(idTokenString);
 
                     thirdLoginRegRequestBean.setThirdAccount(mEmail);
                     thirdPlatLogin(activity, thirdLoginRegRequestBean);
@@ -372,6 +414,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 thirdLoginRegRequestBean.setRegistPlatform(SLoginType.LOGIN_TYPE_LINE);
                 thirdLoginRegRequestBean.setThirdAccount("");
                 thirdLoginRegRequestBean.setLineAccessToken(idTokenString);
+                thirdLoginRegRequestBean.setThirdAccessToken(idTokenString);
                 thirdPlatLogin(activity, thirdLoginRegRequestBean);
             }
 
@@ -978,6 +1021,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         task.excute();
     }
 
+/*
 
     private void startAutoLogin(final Activity activity, final String registPlatform, final String account, final String password) {
         isAutoLogin = true;
@@ -1041,12 +1085,14 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                                 starpyAccountLogin(activity,account,password, "", true);
 
                             }else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_FB, registPlatform)){//fb自动的登录
-                                /*String fbScopeId = FbSp.getFbId(activity);
+                                */
+/*String fbScopeId = FbSp.getFbId(activity);
                                 String fbApps = FbSp.getAppsBusinessId(activity);
                                 if(TextUtils.isEmpty(fbApps)) {
                                     fbApps = fbScopeId + "_" + FbResUtil.findStringByName(activity,"facebook_app_id");
                                 }
-                                fbThirdLogin(fbScopeId, fbApps,FbSp.getTokenForBusiness(activity));*/
+                                fbThirdLogin(fbScopeId, fbApps,FbSp.getTokenForBusiness(activity));*//*
+
                                 fbLogin(mActivity);
 
                             } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GOOGLE, registPlatform)) {//Google登录
@@ -1064,6 +1110,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                                 thirdLoginRegRequestBean.setRegistPlatform(SLoginType.LOGIN_TYPE_TWITTER);
                                 thirdLoginRegRequestBean.setGoogleClientId(ResConfig.getGoogleClientId(activity));
                                 thirdLoginRegRequestBean.setGoogleIdToken(SdkUtil.getGoogleIdToken(activity));
+                                thirdLoginRegRequestBean.setThirdAccessToken(SdkUtil.getGoogleIdToken(activity));
                                 thirdPlatLogin(activity, thirdLoginRegRequestBean);
                             }
 
@@ -1077,6 +1124,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             }
         },300,1000);
     }
+*/
 
     /**
      * 顯示登入頁面,自动登录状态重置为false

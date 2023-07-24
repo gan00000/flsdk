@@ -137,6 +137,12 @@
                 android:layout_height="34dp"
                 android:layout_marginStart="27dp"
                 android:src="@mipmap/icon_twitter_1" />
+            <ImageView
+                android:id="@+id/iv_login_naver"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_marginStart="27dp"
+                android:src="@mipmap/icon_naver" />
 
 
         </LinearLayout>
