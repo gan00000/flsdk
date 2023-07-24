@@ -84,7 +84,7 @@ public class NeverLogin implements IThirdHelper {
                         PL.d("uid=%s,name=%s,email=%s,nickname=%s", uid, name, email, nickname);
 
                         if (thirdCallBack != null){
-                            thirdCallBack.success(uid, nickname, "","");
+                            thirdCallBack.success(uid, nickname, "",tvAccessToken);
                         }
                     }
 
