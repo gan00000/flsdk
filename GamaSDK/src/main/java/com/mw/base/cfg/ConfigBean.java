@@ -30,16 +30,16 @@ public class ConfigBean {
 
     public VersionData getSdkConfigLoginData(Context context){
         VersionData versionData = getVersionDataData(context);
-        versionData.setVisitorLogin(true);
-        versionData.setFbLogin(true);
-        versionData.setGoogleLogin(true);
+//        versionData.setVisitorLogin(true);
+//        versionData.setFbLogin(true);
+//        versionData.setGoogleLogin(true);
 //        versionData.setLineLogin(true);
-        versionData.setShowContract(true);
-        versionData.setDeleteAccount(true);
-        versionData.setShowRegPage(false);
+//        versionData.setShowContract(true);
+//        versionData.setDeleteAccount(true);
+//        versionData.setShowRegPage(false);
 //        versionData.setHuaweiData(context);
 //        versionData.setTwitterLogin(true);
-        versionData.setNaverLogin(true);
+//        versionData.setNaverLogin(true);
         return versionData;
     }
 
@@ -101,6 +101,9 @@ public class ConfigBean {
         private String version = "";
         private String packageName = "";
         private String platform = "";
+        //=============================
+        //登录方式start
+        //=============================
         private boolean visitorLogin = true;
         private boolean fbLogin = true;
         private boolean googleLogin = true;
@@ -108,7 +111,12 @@ public class ConfigBean {
         private boolean twitterLogin = false;
         private boolean lineLogin = false;
         private boolean naverLogin = false;
-        private boolean huaweiLogin = true; //华为登录
+        private boolean huaweiLogin = true; //华为登录，只有华为sdk用
+
+        //=============================
+        //登录方式end
+        //=============================
+
         private boolean deleteAccount = false;
         private boolean showContract = true;
         private boolean showLogo = false;
@@ -232,7 +240,7 @@ public class ConfigBean {
         }
 
         public boolean isHiden_Guest_Fb_Gg_Line(){
-            return !visitorLogin && !fbLogin && !googleLogin && !lineLogin;
+            return !visitorLogin && !fbLogin && !googleLogin && !lineLogin && !naverLogin && !twitterLogin;
         }
 
         public boolean isFB_GOGOLE_LINE_LoginTypeHiden(){
