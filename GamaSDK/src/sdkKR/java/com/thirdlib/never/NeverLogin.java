@@ -33,8 +33,8 @@ public class NeverLogin implements IThirdHelper {
 
     @Override
     public void init(Context context) {
-        String clientId = context.getResources().getString(R.id.naver_client_id);//"rax8xuw2CP1HFvQsdIJC";
-        String clientSecret = context.getResources().getString(R.id.naver_client_secret);//"2hzM7vADCF";
+        String clientId = context.getResources().getString(R.string.naver_client_id);//"rax8xuw2CP1HFvQsdIJC";
+        String clientSecret = context.getResources().getString(R.string.naver_client_secret);//"2hzM7vADCF";
         String clientName = ApkInfoUtil.getApplicationName(context);
 
         NaverIdLoginSDK.INSTANCE.initialize(context, clientId, clientSecret, clientName);
