@@ -8,14 +8,9 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.core.base.utils.ApkInfoUtil;
-import com.core.base.utils.AppUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.ToastUtils;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.OAuthProvider;
+import com.mw.sdk.R;
 import com.navercorp.nid.NaverIdLoginSDK;
 import com.navercorp.nid.oauth.NidOAuthLogin;
 import com.navercorp.nid.oauth.OAuthLoginCallback;
@@ -38,8 +33,8 @@ public class NeverLogin implements IThirdHelper {
 
     @Override
     public void init(Context context) {
-        String clientId = "rax8xuw2CP1HFvQsdIJC";
-        String clientSecret = "2hzM7vADCF";
+        String clientId = context.getResources().getString(R.id.naver_client_id);//"rax8xuw2CP1HFvQsdIJC";
+        String clientSecret = context.getResources().getString(R.id.naver_client_secret);//"2hzM7vADCF";
         String clientName = ApkInfoUtil.getApplicationName(context);
 
         NaverIdLoginSDK.INSTANCE.initialize(context, clientId, clientSecret, clientName);

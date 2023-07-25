@@ -340,6 +340,8 @@ android {
             versionName "1.0"
             flavorDimensions "1"
             resValue "string", "scheme", "vnmxw"
+            resValue "string", "naver_client_id", "rax8xuw2CP1HFvQsdIJC"
+            resValue "string", "naver_client_secret", "2hzM7vADCF"
             resValue "string", "facebook_app_id", "948331946321316"
             resValue "string", "facebook_client_token", "544fc9b2685b5ed2e7ce7235a50ea268"
             resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider948331946321316" //启用分析

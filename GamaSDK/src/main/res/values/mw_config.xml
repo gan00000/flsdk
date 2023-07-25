@@ -26,4 +26,8 @@
 
     <string name="channel_platform">google</string>
 
+    <!-- naver  -->
+    <string name="naver_client_id"></string>
+    <string name="naver_client_secret"></string>
+
 </resources>
