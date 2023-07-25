@@ -19,6 +19,6 @@
     <string name="text_age_up14">已满14周岁</string>
     <string name="text_age_is_up14">你是否已满14周岁</string>
     <string name="text_age_up14_can_useapp">注：如果您未满14周岁，请尽快退出，该应用不对14周岁以下用户开放</string>
-    <string name="text_has_upgrade_account">已升級為會員帳號</string>
+    <string name="text_has_upgrade_account">已升级为会员账号</string>
 
 </resources>
