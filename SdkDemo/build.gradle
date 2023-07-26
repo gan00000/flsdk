@@ -83,21 +83,21 @@ android {
             applicationId "com.adventure.go"
             minSdkVersion 21
             targetSdkVersion 33
-            versionCode 10
+            versionCode 1
             versionName "1.0"
             flavorDimensions "1"
 
 
             resValue "string", "sdk_game_code", "adve"
-            resValue "string", "sdk_app_key", "xxxxx"
+            resValue "string", "sdk_app_key", "5551640dbb752ae59b4af1b71e3f7083"
             resValue "string", "sdk_more_language", "false"
-            resValue "string", "sdk_af_dev_key", "ajeMeU52PzvwVU5tCtLHxG"
+            resValue "string", "sdk_af_dev_key", "dzmTvXXU3W86VoCdJrsohc"
             resValue "string", "sdk_default_server_language", "ko_KR"
 
-            resValue "string", "facebook_app_id", "2658276144450920"
-            resValue "string", "facebook_client_token", "0a8e2080cba4d5aa1fe9d9dd65c04e58"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider2658276144450920" //启用分析
-            resValue "string", "fb_login_protocol_scheme", "fb2658276144450920"
+            resValue "string", "facebook_app_id", "269799692331048"
+            resValue "string", "facebook_client_token", "8df9e34733141f65e5fba5592e23976b"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider269799692331048" //启用分析
+            resValue "string", "fb_login_protocol_scheme", "fb269799692331048"
             resValue "string", "facebook_app_name", "adve"
             resValue "string", "line_channelId", ""
             resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow"
