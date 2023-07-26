@@ -140,7 +140,7 @@ def getReleaseTime() {
 //apply plugin: 'com.google.firebase.crashlytics'
 //huawei
 //apply plugin: 'com.huawei.agconnect'
-
+/*
 boolean isHuaweiFlavor(){
     for (String s in gradle.startParameter.taskNames) {
         println("taskName ==== " + s)
@@ -167,6 +167,9 @@ if (isHuaweiFlavor()){
 
 }else {
     //Google包，第三方包设置
-//    apply plugin: 'com.google.gms.google-services'
-//    apply plugin: 'com.google.firebase.crashlytics'
-}
+    apply plugin: 'com.google.gms.google-services'
+    apply plugin: 'com.google.firebase.crashlytics'
+}*/
+
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
