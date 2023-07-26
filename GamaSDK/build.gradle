@@ -3,7 +3,7 @@ apply plugin: 'com.android.library'
 android {
     compileSdkVersion 33
 
-    def sdk_version = "1.9.1"
+    def sdk_version = "1.9.2"
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 33
@@ -183,7 +183,7 @@ dependencies {
     QooAppImplementation(name: 'qooapp-opensdk-2.0.6', ext: 'aar')
 
     //naver
-    implementation("com.navercorp.nid:oauth:5.6.0") // jdk 11
+    sdkKRImplementation("com.navercorp.nid:oauth:5.6.0") // jdk 11
 }
 
 
