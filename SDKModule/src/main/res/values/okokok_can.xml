@@ -2,24 +2,24 @@
 
     <!--港台域名列表 开始-->
     <!--登录域名-->
-    <string name="mstr_falcen_claustic">https://login.meowplayer.com/</string>
+    <string name="mstr_falcen_claustic">https://login.tiangwl.com/</string>
     <string name="mstr_capribility_whom"></string>
 
     <!--支付域名-->
-    <string name="mstr_flatcongressaneity_auctcourtful">https://pay.meowplayer.com/</string>
+    <string name="mstr_flatcongressaneity_auctcourtful">https://pay.tiangwl.com/</string>
     <string name="mstr_tardgreatetic_sisterise"></string>
 
     <!--cdn域名-->
-    <string name="mstr_vulsability_dysyoungern">https://cdn-download.meowplayer.com/</string>
+    <string name="mstr_vulsability_dysyoungern">https://cdn-download.tiangwl.com/</string>
     <string name="mstr_husband_heability"></string>
 
 
 <!--    日志记录域名-->
-    <string name="mstr_locowise_sperssure">https://log.meowplayer.com/</string>
+    <string name="mstr_locowise_sperssure">https://log.tiangwl.com/</string>
 
 
     <!--使用者條款 - 服務條款 -->
-    <string name="mstr_toxatic_septemeatary">https://member.meowplayer.com/sdk/agreement/%s_agreement.html</string>
+    <string name="mstr_toxatic_septemeatary">https://member.tiangwl.com/sdk/agreement/%s_agreement.html</string>
 
 
 </resources>
