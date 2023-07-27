@@ -258,12 +258,7 @@ public class SimpleSdkImpl implements IDYSDK {
                 }
                 //ads
                 SdkEventLogger.onResume(activity);
-//                Android 13 中引入了用于显示通知的新运行时权限。该项引入会影响在 Android 13 或更高版本上使用 FCM 通知的所有应用。
-//                默认情况下，FCM SDK（23.0.6 或更高版本）中包含清单中定义的 POST_NOTIFICATIONS 权限。不过，您的应用还需要通过常量 android.permission.POST_NOTIFICATIONS 请求此权限的运行时版本。
-//                在用户授予此权限之前，您的应用将无法显示通知。
-                if (Build.VERSION.SDK_INT >= 33) {
-                    PermissionUtil.requestPermission(activity, "android.permission.POST_NOTIFICATIONS",RequestCode.RequestCode_Permission_POST_NOTIFICATIONS);
-                }
+
             }
         });
     }
@@ -627,6 +622,12 @@ public class SimpleSdkImpl implements IDYSDK {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
+//                Android 13 中引入了用于显示通知的新运行时权限。该项引入会影响在 Android 13 或更高版本上使用 FCM 通知的所有应用。
+//                默认情况下，FCM SDK（23.0.6 或更高版本）中包含清单中定义的 POST_NOTIFICATIONS 权限。不过，您的应用还需要通过常量 android.permission.POST_NOTIFICATIONS 请求此权限的运行时版本。
+//                在用户授予此权限之前，您的应用将无法显示通知。
+                if (Build.VERSION.SDK_INT >= 33) {
+                    PermissionUtil.requestPermission(activity, "android.permission.POST_NOTIFICATIONS",RequestCode.RequestCode_Permission_POST_NOTIFICATIONS);
+                }
 
                 if (iLogin == null){
                     iLogin = new DialogLoginImpl(activity);
