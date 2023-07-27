@@ -28,12 +28,14 @@ import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.MarketUtil;
 import com.core.base.utils.PL;
+import com.core.base.utils.PermissionUtil;
 import com.core.base.utils.TimeUtil;
 import com.core.base.utils.ToastUtils;
 import com.mw.base.bean.SPayType;
 import com.mw.base.utils.SLog;
 import com.mw.base.utils.SdkUtil;
 import com.mw.sdk.callback.IPayListener;
+import com.mw.sdk.constant.RequestCode;
 import com.mw.sdk.demo.R;
 import com.mw.sdk.login.ILoginCallBack;
 import com.mw.sdk.login.model.response.SLoginResponse;
@@ -389,12 +391,7 @@ public class MainActivity extends Activity {
             @RequiresApi(api = Build.VERSION_CODES.P)
             @Override
             public void onClick(View view) {
-
                 sendNotification("tests觉得基督教", "kdkkdk好的哈哈哈哈");
-
-                Date ydate = TimeUtil.getYesterday(Long.parseLong(tempSLoginResponse.getData().getTimestamp()));
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                PL.i(sdf.format(ydate));
             }
         });
 
