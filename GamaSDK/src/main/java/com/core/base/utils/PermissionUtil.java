@@ -44,7 +44,7 @@ public class PermissionUtil {
 			return;
 		}
 
-		String permissionKey = permission.replace(".","_");
+		String permissionKey = permission.replace(".","_").toLowerCase();
 		boolean isFirstRequest = true;
 		if (SStringUtil.isEmpty(SPUtil.getSimpleString(activity, per_file, permissionKey))){
 			isFirstRequest = true;
@@ -52,16 +52,19 @@ public class PermissionUtil {
 			isFirstRequest = false;
 		}
 		boolean shouldShow = ActivityCompat.shouldShowRequestPermissionRationale(activity, permission);
+		PL.d("shouldShowRequestPermissionRationale=" + shouldShow);
 		String[] p = new String[]{permission};
 		if(!shouldShow && isFirstRequest){
 			//1、从来没有申请过，第一次申请
+			PL.d("first request permission=" + permission);
 			ActivityCompat.requestPermissions(activity, p, requestCode);
 			SPUtil.saveSimpleInfo(activity, per_file, permissionKey,"1000");
 			return ;
 		}
 
 		if(shouldShow){
-			//2、拒绝后，再申请提示,【注意：鸿蒙系统没有这步】
+			//2、拒绝后，再申请提示,【注意：鸿蒙系统没有这步,google手机也没这步，首次拒绝后后面直接返回false了。。。】
+			PL.d("shouldShow true request permission=" + permission);
 			ActivityCompat.requestPermissions(activity, p, requestCode);
 			SPUtil.saveSimpleInfo(activity, per_file, permissionKey,"1000");
 			return ;
