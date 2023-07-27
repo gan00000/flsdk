@@ -262,8 +262,8 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
             @Override
             public void onQueryPurchasesResponse(@NonNull BillingResult billingResult, @NonNull List<Purchase> list) {
                 PL.i("startQueryPurchase onQueryPurchasesResponse success");
-                if (list != null) {
-                    PL.i("startQueryPurchase onQueryPurchasesResponse success, purchase size:" + list.size());
+                if (list == null) {
+                    PL.i("startQueryPurchase onQueryPurchasesResponse success, purchase list is null");
                     return;
                 }
                 if (list.isEmpty()){
