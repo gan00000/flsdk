@@ -3,7 +3,7 @@ apply plugin: 'com.android.library'
 android {
     compileSdkVersion 33
 
-    def sdk_version = "1.9.3"
+    def sdk_version = "1.9.4"
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 33
@@ -163,8 +163,8 @@ dependencies {
     //line
     implementation 'com.linecorp:linesdk:5.0.1'
 
-    implementation 'com.github.bumptech.glide:glide:4.11.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+//    implementation 'com.github.bumptech.glide:glide:4.11.0'
+//    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     //af
     implementation 'com.appsflyer:af-android-sdk:6.9.0'
     implementation 'com.android.installreferrer:installreferrer:2.2'
