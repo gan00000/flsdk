@@ -30,6 +30,7 @@ public class ConfigModel {
 
     public VersionData getSdkConfigLoginData(Context context){
         VersionData versionData = getVersionDataData(context);
+        versionData.setDeleteAccount(false);
 //        versionData.setVisitorLogin(true);
 //        versionData.setFbLogin(true);
 //        versionData.setGoogleLogin(true);
