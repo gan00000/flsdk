@@ -18,6 +18,7 @@ import com.core.base.utils.SStringUtil;
 import com.mw.sdk.BuildConfig;
 import com.mw.sdk.R;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -109,24 +110,7 @@ public class AdjustHelper {
             return;
         }
 
-        String eventNameToken = "";
-        try {
-            if (adjustInfoJsonObject != null) {
-                eventNameToken = adjustInfoJsonObject.optString(eventName,"");
-            }
-            if (SStringUtil.isEmpty(eventNameToken)){
-
-                String adjustInfo = FileUtil.readAssetsTxtFile(context, "mwsdk/adjustInfo");
-                if (SStringUtil.isEmpty(adjustInfo)){
-                    return;
-                }
-                adjustInfoJsonObject = new JSONObject(adjustInfo);
-                eventNameToken = adjustInfoJsonObject.optString(eventName,"");
-            }
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        String eventNameToken = getEventToken(context, eventName);
         if (SStringUtil.isEmpty(eventNameToken)){
             PL.e("AdjustHelper trackEvent error eventNameToken empty, eventName=%s", eventName);
             return;
@@ -153,4 +137,43 @@ public class AdjustHelper {
     }
 
 
+    public static String getEventToken(Context context, String eventName){
+
+        String eventNameToken = "";
+        try {
+            if (adjustInfoJsonObject != null){
+
+                eventNameToken = findJsonToken(adjustInfoJsonObject, eventName);
+            }
+            if (SStringUtil.isEmpty(eventNameToken)){
+
+                String adjustInfo = FileUtil.readAssetsTxtFile(context, "mwsdk/adjustInfo");
+                if (SStringUtil.isEmpty(adjustInfo)){
+                    return eventNameToken;
+                }
+                adjustInfoJsonObject = new JSONObject(adjustInfo);
+                eventNameToken = findJsonToken(adjustInfoJsonObject, eventName);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return eventNameToken;
+    }
+
+    private static String findJsonToken(JSONObject jsonObject, String eventName){
+        String eventNameToken = "";
+        JSONArray eventsArray = jsonObject.optJSONArray("events");
+        if (eventsArray != null){
+            for (int i = 0; i < eventsArray.length(); i++) {
+                JSONObject eventObj = eventsArray.optJSONObject(i);
+                String eName = eventObj.optString("name","");
+                if (eventName.equals(eName)){
+                    eventNameToken = eventObj.optString("token","");
+                    return eventNameToken;
+                }
+            }
+        }
+        return eventNameToken;
+    }
 }
