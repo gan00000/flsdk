@@ -225,7 +225,7 @@ public class SdkEventLogger {
             payEventValues.put("orderId", orderId);
             payEventValues.put("userId", uid);
             payEventValues.put("roleId", SdkUtil.getRoleId(context));
-            payEventValues.put("loginTimestamp", payBean.getServerTimestamp() + "");
+            payEventValues.put("serverTimestamp", payBean.getServerTimestamp() + "");
             addEventParameterName(context, payEventValues);
             AdjustHelper.trackEvent(context, "AJ_Purchase", payEventValues, usdPrice, orderId);
 
