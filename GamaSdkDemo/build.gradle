@@ -258,20 +258,6 @@ android {
         vn {
 
             signingConfig signingConfigs.release_vn
-//            applicationId "com.snmxw.vntest"
-//            minSdkVersion 21
-//            targetSdkVersion 33
-//            versionCode 10
-//            versionName "1.0"
-//            flavorDimensions "1"
-//            resValue "string", "scheme", "vnmxw"
-//            resValue "string", "facebook_app_id", "948331946321316"
-//            resValue "string", "facebook_client_token", "544fc9b2685b5ed2e7ce7235a50ea268"
-//            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider948331946321316" //启用分析
-//            resValue "string", "fb_login_protocol_scheme", "fb948331946321316"
-//            resValue "string", "facebook_app_name", "vnDemo"
-//            resValue "string", "line_channelId", "1660819297"
-//            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow"
 
             applicationId "com.wanxi.mxwvn"
             minSdkVersion 21
@@ -287,6 +273,8 @@ android {
             resValue "string", "facebook_app_name", "这里写游戏名称"
             resValue "string", "line_channelId", ""
             resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow"
+            //adjust
+            resValue "string", "adjust_app_token", "532wtpjybw8w"
 
             //每个游戏的demo设置 test
             resValue "string", "sdk_name", "vnDemo"
