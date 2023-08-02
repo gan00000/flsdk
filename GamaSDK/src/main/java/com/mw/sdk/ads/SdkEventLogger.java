@@ -28,6 +28,7 @@ import com.mw.sdk.BuildConfig;
 import com.mw.sdk.R;
 import com.mw.sdk.api.Request;
 import com.mw.sdk.login.model.response.SLoginResponse;
+import com.thirdlib.adjust.AdjustHelper;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.google.SGoogleProxy;
 
@@ -216,10 +217,18 @@ public class SdkEventLogger {
             SGoogleProxy.firebaseAnalytics(context, FirebaseAnalytics.Event.PURCHASE, b);
 
 
-            if(!SdkUtil.getFirstPay(context)) {//检查是否首次充值
-//                trackingWithEventName(context, EventConstant.EventName.FIRST_PAY.name(), eventValues, EventConstant.AdType.AdTypeAllChannel);
-                SdkUtil.saveFirstPay(context);
-            }
+            //adjust
+            Map<String, Object> payEventValues = new HashMap<>();
+            payEventValues.put("usdPrice", usdPrice);
+            payEventValues.put("currency", "USD");
+            payEventValues.put("productId", productId);
+            payEventValues.put("orderId", orderId);
+            payEventValues.put("userId", uid);
+            payEventValues.put("roleId", SdkUtil.getRoleId(context));
+            payEventValues.put("loginTimestamp", payBean.getServerTimestamp() + "");
+            addEventParameterName(context, payEventValues);
+            AdjustHelper.trackEvent(context, "AJ_Purchase", payEventValues, usdPrice, orderId);
+
 
             SUserInfo sUserInfo = SdkUtil.getSUserInfo(context, uid);
             if (sUserInfo != null){
@@ -318,6 +327,9 @@ public class SdkEventLogger {
 //                    GamaAj.trackEvent(context, eventName, map);
 //                }
             }
+
+            //adjust
+            AdjustHelper.trackEvent(context, eventName, map);
         } catch (Exception e) {
             e.printStackTrace();
         }

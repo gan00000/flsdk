@@ -784,25 +784,6 @@ public class SdkUtil {
         return SPUtil.getSimpleLong(context, SdkUtil.SDK_SP_FILE, userid);
     }
 
-    private static final String PREFIX_FIRSTPAY_ = "GAMA_FIRSTPAY_";
-
-    /**
-     * 保存用户首储状态
-     * @param context
-     */
-    public static void saveFirstPay(Context context) {
-        SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE, PREFIX_FIRSTPAY_ + getUid(context), true);
-    }
-
-    /**
-     * 获取用户首储状态
-     * @param context
-     * @return
-     */
-    public static boolean getFirstPay(Context context) {
-        return SPUtil.getSimpleBoolean(context, SdkUtil.SDK_SP_FILE, PREFIX_FIRSTPAY_ + getUid(context));
-    }
-
     private static final String SP_KEY_USER_INFO = "SP_KEY_USER_INFO_";
     public static SUserInfo getSUserInfo(Context context, String userId) {
         if (SStringUtil.isEmpty(userId)){

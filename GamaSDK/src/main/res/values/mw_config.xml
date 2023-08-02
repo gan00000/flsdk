@@ -30,4 +30,7 @@
     <string name="naver_client_id"></string>
     <string name="naver_client_secret"></string>
 
+    <!-- adjust  -->
+    <string name="adjust_app_token"></string>
+
 </resources>

@@ -169,6 +169,9 @@ dependencies {
     implementation 'com.appsflyer:af-android-sdk:6.9.0'
     implementation 'com.android.installreferrer:installreferrer:2.2'
 
+    implementation 'com.adjust.sdk:adjust-android:4.33.5'
+//    implementation 'com.android.installreferrer:installreferrer:2.2'
+
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.2'
     // Because RxAndroid releases are few and far between, it is recommended you also
     // explicitly depend on RxJava's latest version for bug fixes and new features.

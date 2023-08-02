@@ -1,6 +1,7 @@
 package com.mw.sdk.out;
 
 import android.app.Activity;
+import android.app.Application;
 
 import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.IGameLifeCycle;
@@ -25,6 +26,8 @@ public interface IMWSDK extends IGameLifeCycle {
 //    void initSDK(Activity activity, SGameLanguage language);
 
 //    void setGameLanguage(Activity activity,SGameLanguage gameLanguage);
+
+    void applicationOnCreate(Application application);
 
     /**
      * 设置角色信息  在游戏获得角色信息的时候调用，每次登陆，切换账号等角色变化时调用

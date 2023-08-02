@@ -131,17 +131,8 @@ public class ResUtil {
 	 * @param filaName
 	 * @return
 	 */
-	public static String getStringFromAssets(Context ctx, String filaName, String format) {
-		try {
-			InputStream is = ctx.getAssets().open(filaName + "." + format);
-			int size = is.available();
-			byte[] buffer = new byte[size];
-			is.read(buffer);
-			is.close();
-			return (new String(buffer)).trim();
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
+	public static String getStringFromAssets(Context ctx, String filaName) {
+		return FileUtil.readAssetsTxtFile(ctx, filaName);
 	}
 
 	/**

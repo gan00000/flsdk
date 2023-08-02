@@ -1,6 +1,7 @@
 package com.mw.sdk.out;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -57,6 +58,7 @@ import com.mw.sdk.login.ILoginCallBack;
 import com.mw.sdk.login.widget.v2.AccountBindPhoneLayout;
 import com.mw.sdk.login.widget.v2.ThirdPlatBindAccountLayoutV2;
 import com.mw.sdk.social.share.ShareUtil;
+import com.thirdlib.adjust.AdjustHelper;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.huawei.HuaweiPayImpl;
 
@@ -95,7 +97,13 @@ public class BaseSdkImpl implements IMWSDK {
         PL.i("BaseSdkImpl 构造函数");
     }
 
-//    @Deprecated
+    @Override
+    public void applicationOnCreate(Application application) {
+        PL.i("BaseSdkImpl applicationOnCreate");
+        AdjustHelper.init(application);
+    }
+
+    //    @Deprecated
 //    @Override
 //    public void initSDK(final Activity activity) {
 //        initSDK(activity, SGameLanguage.zh_TW);
