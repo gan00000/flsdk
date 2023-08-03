@@ -58,3 +58,4 @@
 -keep public class com.zhy.** { *; }
 -keep public class org.spongycastle.** { *; }
 -keep public class javax.** { *; }
+-keep public class com.adjust.** { *; }
