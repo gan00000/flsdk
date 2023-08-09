@@ -3,6 +3,7 @@ package com.mybase.bean;
 import android.content.Context;
 import androidx.annotation.NonNull;
 
+import com.ldy.sdk.BuildConfig;
 import com.mybase.utils.ApkInfoUtil;
 import com.mybase.utils.SStringUtil;
 
@@ -29,6 +30,8 @@ public class BaseReqModel extends AbsReqModel {
     private String packageName = "";
     private String versionCode = "";
     private String versionName = "";
+
+    private String sdkVer = BuildConfig.JAR_VERSION;
 
     public String getAndroidId() {
         return androidId;
