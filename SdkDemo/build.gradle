@@ -89,7 +89,7 @@ android {
 
 
             resValue "string", "sdk_game_code", "adve"
-            resValue "string", "sdk_app_key", "5551640dbb752ae59b4af1b71e3f7083"
+            resValue "string", "sdk_app_key", "3086655495706af3dc480278c32a7acd"
             resValue "string", "sdk_more_language", "false"
             resValue "string", "sdk_af_dev_key", "dzmTvXXU3W86VoCdJrsohc"
             resValue "string", "sdk_default_server_language", "ko_KR"
