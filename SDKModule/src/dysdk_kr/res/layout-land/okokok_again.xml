@@ -36,15 +36,15 @@
                 >
 
                 <TextView
+                    android:id="@+id/mId_manymost_joc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:text="@string/mstr_astromillionan_professionality"
                     android:gravity="center"
                     android:lines="1"
+                    android:text="@string/mstr_astromillionan_professionality"
                     android:textColor="@color/mcolor_phaneraffectative_rustfaction"
-                    android:textSize="24sp"
-                    android:id="@+id/mId_manymost_joc"/>
+                    android:textSize="24sp" />
 
                 <View
                     android:layout_width="wrap_content"

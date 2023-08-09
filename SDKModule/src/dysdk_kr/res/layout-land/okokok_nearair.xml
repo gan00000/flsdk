@@ -80,7 +80,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="32dp"
                 android:layout_marginStart="12dp"
-                android:background="@drawable/okokok_noct"
+                android:background="@drawable/okokok_droper"
                 android:text="@string/mstr_fovesoundics_economymost"
                 android:textColor="@color/mcolor_tag_tetrice"
                 android:textSize="15sp" />

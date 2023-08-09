@@ -2,13 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/mcolor_supin_situationar"
+    >
 
     <LinearLayout
         android:layout_width="330dp"
         android:layout_height="265dp"
         android:layout_centerInParent="true"
-        android:background="@drawable/okokok_chrysanyone"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:paddingStart="15dp"
@@ -31,16 +32,16 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="8dp"
                 android:text="@string/mstr_trecentious_turbine"
-                android:textColor="@color/mcolor_phylacad_ophi"
+                android:textColor="@color/mcolor_lateracious_chelonatule"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
             <ImageView
+                android:id="@+id/mId_pugnior_exper"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:id="@+id/mId_pugnior_exper"
                 android:src="@mipmap/okokok_rubrling" />
 
         </RelativeLayout>
@@ -78,7 +79,7 @@
                             android:layout_marginStart="18dp"
                             android:gravity="center"
                             android:text="@string/mstr_remember_marketo"
-                            android:textColor="@color/mcolor_fragacious_almosty"
+                            android:textColor="@color/mcolor_tag_tetrice"
                             android:textSize="14sp" />
 
                         <ImageView
@@ -106,7 +107,7 @@
                         android:maxLines="1"
                         android:paddingStart="16dp"
                         android:paddingEnd="16dp"
-                        android:textColor="@color/mcolor_fragacious_almosty"
+                        android:textColor="@color/mcolor_tag_tetrice"
                         android:textColorHint="@color/mcolor_filmaneous_lotion"
                         android:textSize="14sp"
                         android:imeOptions="flagNoExtractUi"/>
@@ -133,7 +134,7 @@
                         android:maxLines="1"
                         android:paddingStart="12dp"
                         android:paddingEnd="12dp"
-                        android:textColor="@color/mcolor_fragacious_almosty"
+                        android:textColor="@color/mcolor_tag_tetrice"
                         android:textColorHint="@color/mcolor_filmaneous_lotion"
                         android:textSize="14sp"
                         android:imeOptions="flagNoExtractUi"/>
@@ -185,7 +186,6 @@
                             android:text="@string/mstr_remember_marketo"
                             android:textColor="@color/mcolor_fragacious_almosty"
                             android:textSize="14sp" />
-
 
                     </LinearLayout>
 

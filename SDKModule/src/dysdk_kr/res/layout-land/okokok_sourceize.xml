@@ -8,61 +8,55 @@
     <LinearLayout
         android:layout_width="375dp"
         android:layout_height="375dp"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
         android:layout_centerInParent="true"
-        >
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
         <include
             layout="@layout/okokok_vollence"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="50dp"
-            android:layout_marginTop="20dp"
-            />
+            android:layout_marginTop="20dp" />
 
         <com.ldy.sdk.login.widget.SDKInputEditTextView
-            android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="25dp"
             android:id="@+id/mId_lessitor_legous"
-            />
-
-        <com.ldy.sdk.login.widget.SDKInputEditTextView
             android:layout_width="300dp"
             android:layout_height="40dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="25dp" />
+
+        <com.ldy.sdk.login.widget.SDKInputEditTextView
             android:id="@+id/mId_annage_whoseette"
-            />
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="15dp" />
 
         <com.ldy.sdk.login.widget.SDKInputEditTextView
+            android:id="@+id/mId_cause_homalsion"
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:layout_marginTop="15dp"
-            android:visibility="gone"
-            android:id="@+id/mId_cause_homalsion"
-            />
+            android:visibility="gone" />
 
         <LinearLayout
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:layout_marginTop="15dp"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
             <com.ldy.sdk.login.widget.SDKInputEditTextView
+                android:id="@+id/mId_eyeistic_shotan"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:id="@+id/mId_eyeistic_shotan"
                 android:layout_marginRight="16dp"
-                />
+                android:layout_weight="1" />
 
             <Button
+                android:id="@+id/mId_federalaneous_receiveality"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:background="@drawable/okokok_adultism"
                 android:gravity="center"
-                android:id="@+id/mId_federalaneous_receiveality"
                 android:text="@string/mstr_appear_agog"
                 android:textColor="@color/mcolor_phaneraffectative_rustfaction"
                 android:textSize="14sp" />

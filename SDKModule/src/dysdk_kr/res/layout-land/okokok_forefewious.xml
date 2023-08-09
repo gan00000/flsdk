@@ -2,13 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/mcolor_supin_situationar">
 
     <LinearLayout
         android:layout_width="330dp"
         android:layout_height="265dp"
         android:layout_centerInParent="true"
-        android:background="@drawable/okokok_chrysanyone"
+
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:paddingStart="15dp"
@@ -31,16 +32,16 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="8dp"
                 android:text="@string/mstr_mnestible_trixify"
-                android:textColor="@color/mcolor_phylacad_ophi"
+                android:textColor="@color/mcolor_lateracious_chelonatule"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
             <ImageView
+                android:id="@+id/mId_pugnior_exper"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:id="@+id/mId_pugnior_exper"
                 android:src="@mipmap/okokok_rubrling" />
 
         </RelativeLayout>
@@ -52,25 +53,23 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/mId_satitor_calidive"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="gone"
-                android:id="@+id/mId_satitor_calidive"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <com.ldy.sdk.login.widget.SDKInputEditTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="28dp"
                     android:id="@+id/mId_motenne_paintingsure"
-                    />
-
-                <com.ldy.sdk.login.widget.SDKInputEditTextView
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="28dp" />
+
+                <com.ldy.sdk.login.widget.SDKInputEditTextView
                     android:id="@+id/mId_parent_glassule"
-                    />
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="15dp" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -83,24 +82,22 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/mId_sphenitious_courtety"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/mId_sphenitious_courtety"
                 android:orientation="vertical">
 
                 <com.ldy.sdk.login.widget.SDKInputEditTextView
+                    android:id="@+id/mId_quartivity_allowarian"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_marginTop="28dp"
-                    android:id="@+id/mId_quartivity_allowarian"
-                    />
+                    android:layout_marginTop="28dp" />
 
                 <com.ldy.sdk.login.widget.SDKInputEditTextView
+                    android:id="@+id/mId_yeah_vomern"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_marginTop="15dp"
-                    android:id="@+id/mId_yeah_vomern"
-                    />
+                    android:layout_marginTop="15dp" />
 
             </LinearLayout>
 
