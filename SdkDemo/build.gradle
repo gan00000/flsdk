@@ -57,6 +57,13 @@ android {
             keyAlias 'dysdk'
             keyPassword 'sdk111000'
         }
+
+        release_2 {
+            storeFile file('../signkey/dysdk_key2.jks') //正式签名，以后使用
+            storePassword 'dysdk2'
+            keyAlias 'key_dysdk2'
+            keyPassword 'dysdk2'
+        }
     }
 
     buildTypes {
@@ -77,10 +84,40 @@ android {
     }
     productFlavors {
 
+//        dysdk_kr {
+//
+//            signingConfig signingConfigs.release_1
+//            applicationId "com.adventure.go"
+//            minSdkVersion 21
+//            targetSdkVersion 33
+//            versionCode 1
+//            versionName "1.0"
+//            flavorDimensions "1"
+//
+//
+//            resValue "string", "sdk_game_code", "adve"
+//            resValue "string", "sdk_app_key", "3086655495706af3dc480278c32a7acd"
+//            resValue "string", "sdk_more_language", "false"
+//            resValue "string", "sdk_af_dev_key", "dzmTvXXU3W86VoCdJrsohc"
+//            resValue "string", "sdk_default_server_language", "ko_KR"
+//
+//            resValue "string", "facebook_app_id", "269799692331048"
+//            resValue "string", "facebook_client_token", "8df9e34733141f65e5fba5592e23976b"
+//            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider269799692331048" //启用分析
+//            resValue "string", "fb_login_protocol_scheme", "fb269799692331048"
+//            resValue "string", "facebook_app_name", "adve"
+//            resValue "string", "line_channelId", ""
+//            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow"
+//
+//            //每个游戏的demo设置 test
+//            resValue "string", "sdk_name", "sdkdemo"
+//
+//        }
+
         dysdk_kr {
 
-            signingConfig signingConfigs.release_1
-            applicationId "com.adventure.go"
+            signingConfig signingConfigs.release_2
+            applicationId "com.koudaildhx.go"
             minSdkVersion 21
             targetSdkVersion 33
             versionCode 1
@@ -88,22 +125,22 @@ android {
             flavorDimensions "1"
 
 
-            resValue "string", "sdk_game_code", "adve"
-            resValue "string", "sdk_app_key", "3086655495706af3dc480278c32a7acd"
+            resValue "string", "sdk_game_code", "bbwg"
+            resValue "string", "sdk_app_key", "07dbe3faee44b6b6afcac31eeb3dea06"
             resValue "string", "sdk_more_language", "false"
             resValue "string", "sdk_af_dev_key", "dzmTvXXU3W86VoCdJrsohc"
             resValue "string", "sdk_default_server_language", "ko_KR"
 
-            resValue "string", "facebook_app_id", "269799692331048"
-            resValue "string", "facebook_client_token", "8df9e34733141f65e5fba5592e23976b"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider269799692331048" //启用分析
-            resValue "string", "fb_login_protocol_scheme", "fb269799692331048"
-            resValue "string", "facebook_app_name", "adve"
+            resValue "string", "facebook_app_id", "614313920589173"
+            resValue "string", "facebook_client_token", "1eafa7a5371d36e96f538cc3f2c3179d"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider614313920589173" //启用分析
+            resValue "string", "fb_login_protocol_scheme", "fb614313920589173"
+            resValue "string", "facebook_app_name", "bbwg"
             resValue "string", "line_channelId", ""
             resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow"
 
             //每个游戏的demo设置 test
-            resValue "string", "sdk_name", "sdkdemo"
+            resValue "string", "sdk_name", "sdkdemo2"
 
         }
     }

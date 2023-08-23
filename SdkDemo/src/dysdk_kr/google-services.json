@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "119861350320",
-    "project_id": "qymxgo-93b94",
-    "storage_bucket": "qymxgo-93b94.appspot.com"
+    "project_number": "330265613971",
+    "project_id": "koudaildhx",
+    "storage_bucket": "koudaildhx.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:119861350320:android:b6dc93ac3db98ac709d075",
+        "mobilesdk_app_id": "1:330265613971:android:6f5c46f8531e8bc4c95f66",
         "android_client_info": {
-          "package_name": "com.adventure.go"
+          "package_name": "com.koudaildhx.go"
         }
       },
       "oauth_client": [
         {
-          "client_id": "119861350320-bgil2fk4aca32aof0uiid6dt8nbisb3v.apps.googleusercontent.com",
+          "client_id": "330265613971-do339irnphcqbrmlafcnt5cfg4ifg38r.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAvBGaZN9zDOYefgbrDegAzEJyBOwD9IVE"
+          "current_key": "AIzaSyB0vygnQIjWX3NJU1Q2f7LSp6KjLzksxwY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "119861350320-bgil2fk4aca32aof0uiid6dt8nbisb3v.apps.googleusercontent.com",
+              "client_id": "330265613971-6pb2aegces5vphe400uidqe5es8rkkkb.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
