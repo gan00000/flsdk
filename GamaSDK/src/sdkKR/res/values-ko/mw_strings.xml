@@ -106,7 +106,7 @@
     <string name="py_error_occur">네트워크 이상, 확인 후 다시 시도하세요.</string>
     <string name="text_i_agree_tips">이미 읽고 동의합니다.</string>
     <string name="text_i_read_agree">읽고 동의하기</string>
-    <string name="text_term_moqie"><u>약관</u></string>
+    <string name="text_term_moqie"><u>이용약관</u></string>
     <string name="sdk_terms_title">약관</string>
     <string name="text_switch_account">계정 변경</string>
     <string name="text_update_account_bind">계정 업그레이드</string>
@@ -124,5 +124,6 @@
     <string name="text_finish_pay">결제 완료</string>
     <string name="text_account_not_exist">계정이 존재하지 않습니다.</string>
     <string name="text_close">닫기</string>
+    <string name="text_personal_clause"><u>개인정보</u></string>
 
 </resources>

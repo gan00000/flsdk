@@ -270,13 +270,13 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             showMainHomeView();
         }*/
 
-        if (SdkUtil.getSdkInnerVersion(activity).equals(SdkInnerVersion.KR.getSdkVeriosnName()) && !SdkUtil.getAgeQua14(activity)){
-
-            if (iLoginView != null){
-                iLoginView.showSdkView(ViewType.AgeQualifiedView, null, "",1);
-            }
-            return;
-        }
+//        if (SdkUtil.getSdkInnerVersion(activity).equals(SdkInnerVersion.KR.getSdkVeriosnName()) && !SdkUtil.getAgeQua14(activity)){
+//
+//            if (iLoginView != null){
+//                iLoginView.showSdkView(ViewType.AgeQualifiedView, null, "",1);
+//            }
+//            return;
+//        }
 
         ConfigBean configBean = SdkUtil.getSdkCfg(getContext());
         if (configBean != null) {
@@ -1218,10 +1218,10 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 //        ToastUtils.toast(mActivity, R.string.py_login_success);
 
         //针对韩国sdk，没有同意14周岁，登录成功后重新回到SDK页面
-        if (SdkUtil.getSdkInnerVersion(getActivity()).equals(SdkInnerVersion.KR.getSdkVeriosnName()) && !SdkUtil.getAgeQua14(getActivity())){
-            autoLogin(getActivity());
-            return;
-        }
+//        if (SdkUtil.getSdkInnerVersion(getActivity()).equals(SdkInnerVersion.KR.getSdkVeriosnName()) && !SdkUtil.getAgeQua14(getActivity())){
+//            autoLogin(getActivity());
+//            return;
+//        }
 
         if (iLoginView != null){
             iLoginView.loginSuccess(loginResponse);

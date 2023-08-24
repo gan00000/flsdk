@@ -106,7 +106,7 @@
     <string name="py_error_occur">网络异常，请检查重试</string>
     <string name="text_i_agree_tips">我已阅读并同意</string>
     <string name="text_i_read_agree">阅读并同意</string>
-    <string name="text_term_moqie"><u>定型化契约</u></string>
+    <string name="text_term_moqie"><u>隐私政策</u></string>
     <string name="sdk_terms_title">定型化契约</string>
     <string name="text_switch_account">切换账号</string>
     <string name="text_update_account_bind">升级账号</string>
@@ -124,5 +124,6 @@
     <string name="text_finish_pay">支付完成</string>
     <string name="text_account_not_exist">账号不存在</string>
     <string name="text_close">关闭</string>
+    <string name="text_personal_clause"><u>个人条款</u></string>
 
 </resources>
