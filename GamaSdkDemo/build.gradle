@@ -266,10 +266,10 @@ android {
             versionName "1.0"
             flavorDimensions "1"
             resValue "string", "scheme", "mxwvn"
-            resValue "string", "facebook_app_id", "1372835859958438"
+            resValue "string", "facebook_app_id", "183738678011380"
             resValue "string", "facebook_client_token", "4c7d1e1d2ad407d5e092d51df0265346"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1372835859958438" //启用分析
-            resValue "string", "fb_login_protocol_scheme", "fb1372835859958438"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider183738678011380" //启用分析
+            resValue "string", "fb_login_protocol_scheme", "fb183738678011380"
             resValue "string", "facebook_app_name", "这里写游戏名称"
             resValue "string", "line_channelId", ""
             resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow"
@@ -306,36 +306,22 @@ android {
         sdkKR {
 
             signingConfig signingConfigs.release_v6
-//            applicationId "com.wxgy.sshx"
-//            minSdkVersion 21
-//            targetSdkVersion 33
-//            versionCode 10
-//            versionName "1.0"
-//            flavorDimensions "1"
-//            resValue "string", "scheme", "sshx"
-//            resValue "string", "facebook_app_id", "958518928627930"
-//            resValue "string", "facebook_client_token", "70dee7e2899286d3b410c2af8530b899"
-//            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider958518928627930" //启用分析
-//            resValue "string", "fb_login_protocol_scheme", "fb958518928627930"
-//            resValue "string", "facebook_app_name", "v6demo"
-//            resValue "string", "line_channelId", "1661047084"
-//            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,第三方充值渠道apk包设置"meow"
 
-            applicationId "com.snmxw.vntest"
+            applicationId "com.tgswkr.koda"
             minSdkVersion 21
             targetSdkVersion 33
             versionCode 10
             versionName "1.0"
             flavorDimensions "1"
-            resValue "string", "scheme", "vnmxw"
+            resValue "string", "scheme", "tgsw"
             resValue "string", "naver_client_id", "rax8xuw2CP1HFvQsdIJC"
             resValue "string", "naver_client_secret", "2hzM7vADCF"
-            resValue "string", "facebook_app_id", "948331946321316"
-            resValue "string", "facebook_client_token", "544fc9b2685b5ed2e7ce7235a50ea268"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider948331946321316" //启用分析
-            resValue "string", "fb_login_protocol_scheme", "fb948331946321316"
+            resValue "string", "facebook_app_id", "812990310317949"
+            resValue "string", "facebook_client_token", "5d9f338ab935730c7c190cd0210c712a"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider812990310317949" //启用分析
+            resValue "string", "fb_login_protocol_scheme", "fb812990310317949"
             resValue "string", "facebook_app_name", "krDemo"
-            resValue "string", "line_channelId", "1660819297"
+            resValue "string", "line_channelId", ""
             resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow"
 
             //每个游戏的demo设置 test
