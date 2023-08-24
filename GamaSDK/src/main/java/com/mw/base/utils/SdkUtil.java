@@ -80,7 +80,7 @@ public class SdkUtil {
                 e.printStackTrace();
             }
         }
-        return null;
+        return new ConfigBean();
     }
 
     public static void saveAccountModel(Context context, String account, String password,String userId,  String loginAccessToken,
