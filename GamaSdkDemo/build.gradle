@@ -97,6 +97,13 @@ android {
             keyAlias 'wxvn'
             keyPassword 'wxvn999'
         }
+
+        release_vn1 {
+            storeFile file('../signkey/key_kr.jks') //正式签名，以后使用
+            storePassword 'mwkr88888'
+            keyAlias 'mwkr'
+            keyPassword 'mwkr88888'
+        }
     }
 
     buildTypes {
@@ -112,7 +119,7 @@ android {
         }
 
         debug {
-            signingConfig signingConfigs.release_v6
+            signingConfig signingConfigs.release_vn1
         }
     }
     productFlavors {
@@ -305,7 +312,7 @@ android {
 
         sdkKR {
 
-            signingConfig signingConfigs.release_v6
+            signingConfig signingConfigs.release_vn1
 
             applicationId "com.tgswkr.koda"
             minSdkVersion 21
