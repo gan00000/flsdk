@@ -45,6 +45,8 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
 
     private CheckBox cb_agree_term;
     private View tv_login_term;
+    private View rl_agree_term;
+    private View tv_login_term33;
 
     /**
      * 眼睛、保存密码、验证码
@@ -175,7 +177,9 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
             }
         });
 
+        rl_agree_term = contentView.findViewById(R.id.rl_agree_term);
         tv_login_term = contentView.findViewById(R.id.tv_login_term);
+        tv_login_term33 = contentView.findViewById(R.id.tv_login_term33);
         cb_agree_term = contentView.findViewById(R.id.cb_agree_term);
         cb_agree_term.setChecked(true);
 
@@ -290,11 +294,11 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
                     naverLoginView.setVisibility(View.VISIBLE);
                 }
                 if(!versionData.isShowContract()){
-                    cb_agree_term.setVisibility(View.GONE);
-                    tv_login_term.setVisibility(View.GONE);
+//                    cb_agree_term.setVisibility(View.GONE);
+                    rl_agree_term.setVisibility(View.GONE);
                 }else {
-                    cb_agree_term.setVisibility(View.VISIBLE);
-                    tv_login_term.setVisibility(View.VISIBLE);
+//                    cb_agree_term.setVisibility(View.VISIBLE);
+                    rl_agree_term.setVisibility(View.VISIBLE);
                 }
                 if(versionData.isDeleteAccount()){
                     layout_delete_account.setVisibility(View.VISIBLE);
@@ -321,6 +325,15 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
             }
         });
         tv_login_term.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                sLoginDialogv2.showTermView(ViewType.LoginWithRegView);
+
+                showTermDialog();
+
+            }
+        });
+        tv_login_term33.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
 //                sLoginDialogv2.showTermView(ViewType.LoginWithRegView);
