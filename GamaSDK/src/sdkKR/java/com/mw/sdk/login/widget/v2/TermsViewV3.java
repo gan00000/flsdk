@@ -41,7 +41,11 @@ public class TermsViewV3 extends SLoginBaseRelativeLayout {
     private Button okButton;
     private Button closeButton;
     private WebView termsView1;
-    String serviceUrl;
+    String serviceUrl;//服务条款
+    String privacyPolicyUrl;//隐私政策
+
+    private TextView tv_privacy_policy;
+    private TextView tv_sdk_terms_title;
 
     public TermsViewV3(Context context) {
         super(context);
@@ -67,6 +71,8 @@ public class TermsViewV3 extends SLoginBaseRelativeLayout {
 
         okButton = contentView.findViewById(R.id.btn_term_agree);
         closeButton = contentView.findViewById(R.id.btn_term_close);
+        tv_privacy_policy = contentView.findViewById(R.id.tv_privacy_policy);
+        tv_sdk_terms_title = contentView.findViewById(R.id.tv_sdk_terms_title);
 
         okButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -87,13 +93,47 @@ public class TermsViewV3 extends SLoginBaseRelativeLayout {
 
             }
         });
+        tv_privacy_policy.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tv_privacy_policy.setTextColor(getResources().getColor(R.color.c_F13A12));
+                tv_sdk_terms_title.setTextColor(getResources().getColor(R.color.c_C0C0C0));
+
+                if (SStringUtil.isNotEmpty(privacyPolicyUrl) && termsView1!= null){
+                    termsView1.loadUrl(privacyPolicyUrl);
+                }
+            }
+        });
+        tv_sdk_terms_title.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                tv_sdk_terms_title.setTextColor(getResources().getColor(R.color.c_F13A12));
+                tv_privacy_policy.setTextColor(getResources().getColor(R.color.c_C0C0C0));
+                if (SStringUtil.isNotEmpty(serviceUrl) && termsView1!= null){
+                    termsView1.loadUrl(serviceUrl);
+                }
+            }
+        });
+
         ConfigBean configBean = SdkUtil.getSdkCfg(getContext());
         if (configBean != null && configBean.getUrl() != null && SStringUtil.isNotEmpty(configBean.getUrl().getAgreementUrl())) {
-            serviceUrl = configBean.getUrl().getAgreementUrl();
+            String serviceUrlTemp = configBean.getUrl().getAgreementUrl();
+            if (serviceUrlTemp.contains(",")){
+                String[] urls = serviceUrlTemp.split(",");
+                if (urls.length > 1){
+                    serviceUrl = urls[0];
+                    privacyPolicyUrl = urls[1];
+                }
+            }else {
+                serviceUrl = serviceUrlTemp;
+            }
+
         }else{
             serviceUrl = ResConfig.getServiceTermUrl(getContext());
             serviceUrl = String.format(serviceUrl, ResConfig.getGameCode(getContext()));
 //          String privateUrl = ResConfig.getPrivateTermUrl(getContext());
+            privacyPolicyUrl = serviceUrl;
         }
 
         PL.i("serviceUrl=" + serviceUrl);

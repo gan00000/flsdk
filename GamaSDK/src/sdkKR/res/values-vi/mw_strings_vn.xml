@@ -106,7 +106,7 @@
     <string name="py_error_occur">Lỗi mạng, hãy kiểm tra lại</string>
     <string name="text_i_agree_tips">Tôi đã đọc và đồng ý</string>
     <string name="text_i_read_agree">Đọc và đồng ý</string>
-    <string name="text_term_moqie"><u>Khế ước định hình hóa</u></string>
+    <string name="text_term_moqie"><u>Chính sách bảo mật</u></string>
     <string name="sdk_terms_title">Khế ước định hình hóa</string>
     <string name="text_switch_account">Chuyển tài khoản</string>
     <string name="text_update_account_bind">Nâng cấp tài khoản</string>
@@ -124,6 +124,7 @@
     <string name="text_finish_pay">Thanh toán xong</string>
     <string name="text_account_not_exist">Tài khoản không tồn tại</string>
     <string name="text_close">Đóng</string>
-    <string name="text_personal_clause"><u>điều khoản cá nhân</u></string>
+    <string name="text_personal_clause"><u>Khế ước định hình hóa</u></string>
+    <string name="text_privacy_policy">Chính sách bảo mật</string>
 
 </resources>
