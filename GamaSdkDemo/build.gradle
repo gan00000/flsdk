@@ -98,7 +98,7 @@ android {
             keyPassword 'wxvn999'
         }
 
-        release_vn1 {
+        release_kr1 {
             storeFile file('../signkey/key_kr.jks') //正式签名，以后使用
             storePassword 'mwkr88888'
             keyAlias 'mwkr'
@@ -119,7 +119,7 @@ android {
         }
 
         debug {
-            signingConfig signingConfigs.release_vn1
+            signingConfig signingConfigs.release_kr1
         }
     }
     productFlavors {
@@ -312,7 +312,7 @@ android {
 
         sdkKR {
 
-            signingConfig signingConfigs.release_vn1
+            signingConfig signingConfigs.release_kr1
 
             applicationId "com.tgswkr.koda"
             minSdkVersion 21
@@ -321,8 +321,8 @@ android {
             versionName "1.0"
             flavorDimensions "1"
             resValue "string", "scheme", "tgsw"
-            resValue "string", "naver_client_id", "rax8xuw2CP1HFvQsdIJC"
-            resValue "string", "naver_client_secret", "2hzM7vADCF"
+            resValue "string", "naver_client_id", "QJErv0qFAdSfJ14QDRpA"
+            resValue "string", "naver_client_secret", "IV8BGmeW14"
             resValue "string", "facebook_app_id", "812990310317949"
             resValue "string", "facebook_client_token", "5d9f338ab935730c7c190cd0210c712a"
             resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider812990310317949" //启用分析
@@ -330,6 +330,7 @@ android {
             resValue "string", "facebook_app_name", "krDemo"
             resValue "string", "line_channelId", ""
             resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow"
+            resValue "string", "adjust_app_token", ""
 
             //每个游戏的demo设置 test
             resValue "string", "sdk_name", "krDemo"
