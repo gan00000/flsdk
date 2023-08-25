@@ -122,7 +122,7 @@ public class TermsViewV3 extends SLoginBaseRelativeLayout {
             if (serviceUrlTemp.contains(",")){
                 String[] urls = serviceUrlTemp.split(",");
                 if (urls.length > 1){
-                    serviceUrl = urls[0];
+                    serviceUrl = urls[0];//第一个服务条款
                     privacyPolicyUrl = urls[1];
                 }
             }else {
@@ -141,7 +141,7 @@ public class TermsViewV3 extends SLoginBaseRelativeLayout {
         termsView1.clearCache(true);
 //        termsView1.setWebChromeClient(new WebChromeClient());
         termsView1.setWebViewClient(new BaseWebViewClient((Activity) getActivity()));
-        termsView1.loadUrl(serviceUrl);
+        termsView1.loadUrl(privacyPolicyUrl);
 
         return contentView;
     }
