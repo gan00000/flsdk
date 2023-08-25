@@ -40,6 +40,12 @@
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
+            <View
+                android:layout_width="1dp"
+                android:layout_height="14dp"
+                android:background="@color/c_707070"
+                />
+
             <TextView
                 android:id="@+id/tv_sdk_terms_title"
                 android:layout_width="0dp"
