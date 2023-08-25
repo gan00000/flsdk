@@ -710,6 +710,7 @@ public class BaseSdkImpl implements IMWSDK {
             public void run() {
                 SdkUtil.saveRoleInfo(activity, roleId, roleName, roleLevel, vipLevel, severCode, serverName);//保存角色信息
                 startPay(activity, payType, cpOrderId, productId, extra, listener);
+                trackEvent(activity, EventConstant.EventName.Initiate_Checkout);
             }
         });
     }
