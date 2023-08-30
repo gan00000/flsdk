@@ -125,6 +125,11 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
                 }else {
                     layout_term.setVisibility(View.VISIBLE);
                 }
+                if(versionData.isShowSdkCsCenter()){
+                    ll_cs.setVisibility(View.VISIBLE);
+                }else {
+                    ll_cs.setVisibility(View.GONE);
+                }
                 if (versionData.isShowLogo()){
 //                    iv_logo.setVisibility(View.VISIBLE);
                 }

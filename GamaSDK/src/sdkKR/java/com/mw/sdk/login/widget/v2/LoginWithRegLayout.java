@@ -178,6 +178,12 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
                     titleLayoutParams.topMargin = titleLayoutParams.topMargin / 2 + titleLayoutParams.topMargin;
                     ll_reg_login_title.setLayoutParams(titleLayoutParams);
                 }
+
+                if(versionData.isShowSdkCsCenter()){
+                    ll_cs.setVisibility(View.VISIBLE);
+                }else {
+                    ll_cs.setVisibility(View.GONE);
+                }
             }
         }
 

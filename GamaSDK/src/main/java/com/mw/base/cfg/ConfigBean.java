@@ -127,6 +127,9 @@ public class ConfigBean {
         //越南调整审核按钮是否显示
         private boolean vnIsReview = true;
 
+        //是否显示登录页面的客服按钮(kr用到)
+        private boolean showSdkCsCenter = true;
+
         public String getPlatform() {
             return platform;
         }
@@ -269,6 +272,14 @@ public class ConfigBean {
 
         public void setNaverLogin(boolean naverLogin) {
             this.naverLogin = naverLogin;
+        }
+
+        public boolean isShowSdkCsCenter() {
+            return showSdkCsCenter;
+        }
+
+        public void setShowSdkCsCenter(boolean showSdkCsCenter) {
+            this.showSdkCsCenter = showSdkCsCenter;
         }
 
         //华为登录，下面的不需要显示
