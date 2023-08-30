@@ -18,6 +18,7 @@ import com.mw.sdk.login.constant.ViewType;
 import com.mw.sdk.login.model.AccountModel;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.mw.sdk.R;
+import com.mw.sdk.out.MWSdkFactory;
 
 import java.util.List;
 
@@ -32,6 +33,7 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
     private View login_bottom_line,register_bottom_line,iv_login_reg_back;
 
     private LinearLayout ll_reg_login_title;
+    private View ll_cs;
 
     public AccountLoginLayoutV2 getmAccountLoginV2() {
         return mAccountLoginV2;
@@ -84,9 +86,12 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
         mAccountLoginV2 = contentView.findViewById(R.id.pyAccountLoginV2Id);
         mAccountRegisterLayoutV2 = contentView.findViewById(R.id.accountRegisterLayoutV2Id);
 
+        ll_cs = contentView.findViewById(R.id.ll_cs);
+
         loginTabView.setOnClickListener(this);
         regTabView.setOnClickListener(this);
         iv_login_reg_back.setOnClickListener(this);
+        ll_cs.setOnClickListener(this);
 
         login_out_animation = AnimationUtils.loadAnimation(getContext(),R.anim.mw_login_out);
         login_out_animation.setAnimationListener(new Animation.AnimationListener() {
@@ -217,6 +222,11 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
 
             }
             sLoginDialogv2.distoryView(this);
+        }else if (v == ll_cs){
+            //sdk登录页面的客服按钮
+            if (sLoginDialogv2 != null && sLoginDialogv2.getActivity() != null) {
+                MWSdkFactory.create().openCs(sLoginDialogv2.getActivity());
+            }
         }
     }
 

@@ -126,5 +126,6 @@
     <string name="text_close">Close</string>
     <string name="text_personal_clause"><u>personal clause</u></string>
     <string name="text_privacy_policy">Privacy policy</string>
+    <string name="text_customer">CS Center</string>
 
 </resources>

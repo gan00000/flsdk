@@ -14,6 +14,7 @@ import com.mw.sdk.login.constant.ViewType;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.mw.sdk.R;
 import com.mw.sdk.out.ISdkCallBack;
+import com.mw.sdk.out.MWSdkFactory;
 
 /**
  * Created by GanYuanrong on 2017/2/6.
@@ -29,6 +30,8 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
     private View layout_go_term;
     private View layout_term;
     private ImageView iv_logo;
+
+    private View ll_cs;//sdk登录页面的客服按钮
 
     public MainHomeLayout(Context context) {
         super(context);
@@ -64,6 +67,8 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
         iv_logo = contentView.findViewById(R.id.iv_logo);
         layout_term = contentView.findViewById(R.id.layout_term);
 
+        ll_cs = contentView.findViewById(R.id.ll_cs);
+
         guestLoginView.setOnClickListener(this);
         layout_go_account_login.setOnClickListener(this);
         iv_login_google.setOnClickListener(this);
@@ -72,6 +77,7 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
         iv_login_twitter.setOnClickListener(this);
         iv_login_naver.setOnClickListener(this);
         layout_go_term.setOnClickListener(this);
+        ll_cs.setOnClickListener(this);
 
         cb_agree_term.setChecked(true);
 
@@ -171,6 +177,11 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
                 sLoginDialogv2.getLoginPresenter().naverLogin(sLoginDialogv2.getActivity());
             }
 
+        }else if (v == ll_cs){
+            //sdk登录页面的客服按钮
+            if (sLoginDialogv2 != null && sLoginDialogv2.getActivity() != null) {
+                MWSdkFactory.create().openCs(sLoginDialogv2.getActivity());
+            }
         }
 
     }
