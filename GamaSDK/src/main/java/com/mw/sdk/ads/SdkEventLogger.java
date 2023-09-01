@@ -260,6 +260,13 @@ public class SdkEventLogger {
                     SdkUtil.updateUserInfo(context, sUserInfo);
                 }
 
+                if (usdPrice > 4) {
+                    String curPayTime = System.currentTimeMillis() + "";
+                    if (TimeUtil.getDateStr(curPayTime,"yyyy-MM-dd").equals(TimeUtil.getDateStr(sUserInfo.getRegTime(),"yyyy-MM-dd"))){
+                        SdkEventLogger.trackingWithEventName(context, EventConstant.EventName.purchase_over4.name());
+                    }
+                }
+
             }
 
         } catch (Exception e1) {
