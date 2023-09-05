@@ -5,9 +5,12 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 
+import androidx.annotation.NonNull;
+
 import com.appsflyer.AFInAppEventParameterName;
 import com.appsflyer.AFInAppEventType;
 import com.appsflyer.AppsFlyerLib;
+import com.appsflyer.attribution.AppsFlyerRequestListener;
 import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.ISReqCallBack;
 import com.core.base.request.SimpleHttpRequest;
@@ -263,7 +266,7 @@ public class SdkEventLogger {
                 if (usdPrice > 4) {
                     String curPayTime = System.currentTimeMillis() + "";
                     if (TimeUtil.getDateStr(curPayTime,"yyyy-MM-dd").equals(TimeUtil.getDateStr(sUserInfo.getRegTime(),"yyyy-MM-dd"))){
-                        SdkEventLogger.trackingWithEventName(context, EventConstant.EventName.purchase_over4.name());
+                        SdkEventLogger.trackingWithEventName(context, EventConstant.EventName.purchase_over4.name(), payEventValues);
                     }
                 }
 
@@ -302,7 +305,17 @@ public class SdkEventLogger {
                 PL.i("上报全部媒体");
                 //AppsFlyer上报
 
-                AppsFlyerLib.getInstance().logEvent(context.getApplicationContext(), eventName, map);
+                AppsFlyerLib.getInstance().logEvent(context.getApplicationContext(), eventName, map, new AppsFlyerRequestListener() {
+                    @Override
+                    public void onSuccess() {
+                        PL.i("af logEvent onSuccess");
+                    }
+
+                    @Override
+                    public void onError(int i, @NonNull String s) {
+                        PL.i("af logEvent onError:" + s);
+                    }
+                });
 
                 //Facebook上报
                 SFacebookProxy.trackingEvent(context, eventName, null, b);
@@ -326,7 +339,17 @@ public class SdkEventLogger {
                 if((adType & EventConstant.AdType.AdTypeAppsflyer)==EventConstant.AdType.AdTypeAppsflyer) {
                     PL.i("上报媒体AdTypeAppsflyer");
                     //AppsFlyer上报
-                    AppsFlyerLib.getInstance().logEvent(context.getApplicationContext(), eventName, map);
+                    AppsFlyerLib.getInstance().logEvent(context.getApplicationContext(), eventName, map, new AppsFlyerRequestListener() {
+                        @Override
+                        public void onSuccess() {
+                            PL.i("af logEvent onSuccess");
+                        }
+
+                        @Override
+                        public void onError(int i, @NonNull String s) {
+                            PL.i("af logEvent onError:" + s);
+                        }
+                    });
                 }
 //                if(mediaSet.contains(EventConstant.EventReportChannel.EventReportAdjust)) {
 //                    PL.i("上报媒体4");
