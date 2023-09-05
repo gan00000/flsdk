@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import com.appsflyer.AppsFlyerLib;
 import com.core.base.utils.ApkInfoUtil;
 import com.core.base.utils.SStringUtil;
+import com.mw.base.utils.SdkUtil;
+import com.mw.sdk.BuildConfig;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
@@ -31,6 +33,8 @@ public class BaseReqeustBean extends AbsReqeustBean {
     private String versionCode = "";
     private String versionName = "";
     private String appsflyerId = "";
+
+    private String sdkJarVersion = "";
 
     public String getAndroidId() {
         return androidId;
@@ -94,6 +98,8 @@ public class BaseReqeustBean extends AbsReqeustBean {
             versionCode = ApkInfoUtil.getVersionCode(context);
             versionName = ApkInfoUtil.getVersionName(context);
             appsflyerId = AppsFlyerLib.getInstance().getAppsFlyerUID(context);
+
+            sdkJarVersion = SdkUtil.getSdkInnerVersion(context) + "_" + BuildConfig.JAR_VERSION;
         }
     }
 
