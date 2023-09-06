@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.core.base.utils.ApkInfoUtil;
 import com.mw.sdk.R;
+import com.mw.sdk.constant.ChannelPlatform;
 import com.mw.sdk.constant.SdkInnerVersion;
 
 import java.util.List;
@@ -58,7 +59,7 @@ public class ConfigBean {
                 if (versionData != null && packageName.equals(versionData.getPackageName()) && versionCode.equals(versionData.getVersion())
                     && channel_platform.equals(versionData.getPlatform())){
 
-                    if (channel_platform.equals(SdkInnerVersion.HUAWEI.getSdkVeriosnName())){//设置一下特殊不需要显示的
+                    if (channel_platform.equals(ChannelPlatform.HUAWEI.getChannel_platform())){//设置一下特殊不需要显示的
                         versionData.setHuaweiData(context);
                     }
                     return versionData;
@@ -79,7 +80,7 @@ public class ConfigBean {
                 if (versionData != null && packageName.equals(versionData.getPackageName())
                         && channel_platform.equals(versionData.getPlatform())){
 
-                    if (channel_platform.equals(SdkInnerVersion.HUAWEI.getSdkVeriosnName())){//设置一下特殊不需要显示的
+                    if (channel_platform.equals(ChannelPlatform.HUAWEI.getChannel_platform())){//设置一下特殊不需要显示的
                         versionData.setHuaweiData(context);
                     }
                     return versionData;
@@ -89,7 +90,7 @@ public class ConfigBean {
         }
 
         VersionData xxVersionData = new VersionData();
-        if (channel_platform.equals(SdkInnerVersion.HUAWEI.getSdkVeriosnName())){//设置一下特殊不需要显示的
+        if (channel_platform.equals(ChannelPlatform.HUAWEI.getChannel_platform())){//设置一下特殊不需要显示的
             xxVersionData.setHuaweiData(context);
         }
         return xxVersionData;
