@@ -3,7 +3,7 @@ apply plugin: 'com.android.library'
 android {
     compileSdkVersion 33
 
-    def sdk_version = "1.9.5"
+    def sdk_version = "1.9.6"
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 33
@@ -45,8 +45,8 @@ android {
 //            multiDexEnabled true //Add this
 //            shrinkResources true  //压缩资源
             minifyEnabled true
-//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules-kr.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules-kr.pro'
         }
 
         debug {
