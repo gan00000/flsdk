@@ -18,7 +18,9 @@ import com.core.base.utils.PermissionUtil;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.SignatureUtil;
 import com.core.base.utils.ToastUtils;
+import com.mw.sdk.constant.ChannelPlatform;
 import com.mw.sdk.login.model.response.SLoginResponse;
+import com.mw.sdk.pay.gp.bean.res.TogglePayRes;
 import com.mw.sdk.utils.DataManager;
 import com.mw.sdk.pay.IPay;
 import com.mw.sdk.pay.IPayCallBack;
@@ -718,17 +720,16 @@ public class BaseSdkImpl implements IMWSDK {
         googlePayCreateOrderIdReqBean.setProductId(productId);
         googlePayCreateOrderIdReqBean.setExtra(extra);
 
-        if (payType == SPayType.GOOGLE) {
-            doGooglePay(activity, googlePayCreateOrderIdReqBean);
+        String channel_platform = activity.getResources().getString(R.string.channel_platform);
 
-        } else if(payType == SPayType.WEB) {
+        if(payType == SPayType.WEB || ChannelPlatform.MEOW.getChannel_platform().equals(channel_platform)) {
             doWebPay(activity,googlePayCreateOrderIdReqBean);
-        } else if(payType == SPayType.HUAWEI) {
+        } else if(payType == SPayType.HUAWEI || ChannelPlatform.HUAWEI.getChannel_platform().equals(channel_platform)) {
             doHuaweiPay(activity,googlePayCreateOrderIdReqBean);
-        } else if(payType == SPayType.QooApp) {
+        } else if(payType == SPayType.QooApp || ChannelPlatform.QOOAPP.getChannel_platform().equals(channel_platform)) {
             doQooAppPay(activity,googlePayCreateOrderIdReqBean);
         } else {//默认Google储值
-            PL.i("不支持當前類型： " + payType.name());
+            checkGoogleOrWebPay(activity, googlePayCreateOrderIdReqBean);
         }
     }
     protected void doQooAppPay(Activity activity, GooglePayCreateOrderIdReqBean googlePayCreateOrderIdReqBean) {
@@ -767,12 +768,34 @@ public class BaseSdkImpl implements IMWSDK {
         huaweiPay.startPay(activity, googlePayCreateOrderIdReqBean);
     }
 
+    private void checkGoogleOrWebPay(Activity activity, GooglePayCreateOrderIdReqBean googlePayCreateOrderIdReqBean) {
 
+        ConfigBean configBean = SdkUtil.getSdkCfg(activity);
+        if (configBean != null) {
+            ConfigBean.VersionData versionData = configBean.getSdkConfigLoginData(activity);
+            if (versionData != null && versionData.isTogglePay()){//检查是否需要切换支付，总开关
+
+                Request.togglePayRequest(activity, googlePayCreateOrderIdReqBean, new SFCallBack<TogglePayRes>() {
+                    @Override
+                    public void success(TogglePayRes result, String msg) {
+                        if (result != null && result.isRequestSuccess() && result.getData() != null && "third".equals(result.getData().getChannel())){
+                            doWebPay(activity,googlePayCreateOrderIdReqBean);
+                        }else {
+                            doGooglePay(activity, googlePayCreateOrderIdReqBean);
+                        }
+                    }
+
+                    @Override
+                    public void fail(TogglePayRes result, String msg) {
+                        doGooglePay(activity, googlePayCreateOrderIdReqBean);
+                    }
+                });
+                return;
+            }
+        }
+        doGooglePay(activity, googlePayCreateOrderIdReqBean);
+    }
     private void doGooglePay(Activity activity, GooglePayCreateOrderIdReqBean googlePayCreateOrderIdReqBean) {
-        //            googlePay(activity, cpOrderId, productId, extra);
-//        Intent i = new Intent(activity, GooglePayActivity2.class);
-//        i.putExtra(GooglePayActivity2.GooglePayReqBean_Extra_Key, googlePayCreateOrderIdReqBean);
-//        activity.startActivityForResult(i, GooglePayActivity2.GooglePayReqeustCode);
 
         //设置Google储值的回调
         iPay.setIPayCallBack(new IPayCallBack() {

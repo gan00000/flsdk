@@ -22,6 +22,8 @@ import com.mw.sdk.ads.EventConstant;
 import com.mw.sdk.ads.SdkEventLogger;
 import com.mw.sdk.constant.ApiRequestMethod;
 import com.mw.sdk.constant.RequestCode;
+import com.mw.sdk.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
+import com.mw.sdk.pay.gp.bean.res.TogglePayRes;
 import com.mw.sdk.utils.DataManager;
 import com.mw.sdk.login.execute.BaseLoginRequestTask;
 import com.mw.sdk.login.model.request.AccountBindInGameRequestBean;
@@ -357,5 +359,51 @@ public class Request {
             PL.i("获取不到客服地址");
         }
 
+    }
+
+
+    public static void togglePayRequest(Context context, GooglePayCreateOrderIdReqBean googlePayCreateOrderIdReqBean, SFCallBack<TogglePayRes> sfCallBack) {
+
+        googlePayCreateOrderIdReqBean.setRequestMethod(ApiRequestMethod.API_PAYMENT_CHANNEL);
+        BaseLoginRequestTask baseLoginRequestTask = new BaseLoginRequestTask(context);
+        baseLoginRequestTask.setSdkBaseRequestBean(googlePayCreateOrderIdReqBean);
+
+        baseLoginRequestTask.setLoadDialog(DialogUtil.createLoadingDialog(context, "Loading..."));
+        baseLoginRequestTask.setReqCallBack(new ISReqCallBack<TogglePayRes>() {
+            @Override
+            public void success(TogglePayRes togglePayRes, String rawResult) {
+
+                if (togglePayRes != null && togglePayRes.isRequestSuccess()) {
+
+                    if (sfCallBack != null){
+                        sfCallBack.success(togglePayRes,rawResult);
+                    }
+
+                } else {
+                    if (sfCallBack != null){
+                        sfCallBack.fail(null,rawResult);
+                    }
+                }
+            }
+
+            @Override
+            public void timeout(String code) {
+                if (sfCallBack != null){
+                    sfCallBack.fail(null,"");
+                }
+            }
+
+            @Override
+            public void noData() {
+                if (sfCallBack != null){
+                    sfCallBack.fail(null,"");
+                }
+            }
+
+            @Override
+            public void cancel() {}
+
+        });
+        baseLoginRequestTask.excute(TogglePayRes.class);
     }
 }

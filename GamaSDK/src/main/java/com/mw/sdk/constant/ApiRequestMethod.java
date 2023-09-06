@@ -61,6 +61,8 @@ public class ApiRequestMethod {
     public final static String API_PAYMENT_HW = "api/huawei/payment";
     public final static String API_PAYMENT_QOOAPP = "api/qooapp/payment";
 
+    public final static String API_PAYMENT_CHANNEL = "api/payment/channel";
+
     public enum RequestVfcodeInterface {
         register("1"),
         bind("2"),
