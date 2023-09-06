@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import com.mw.base.cfg.ConfigBean;
 import com.mw.base.utils.SdkUtil;
 import com.mw.sdk.SBaseDialog;
+import com.mw.sdk.api.Request;
+import com.mw.sdk.constant.RequestCode;
 import com.mw.sdk.login.constant.ViewType;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.mw.sdk.R;
@@ -185,7 +187,7 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
         }else if (v == ll_cs){
             //sdk登录页面的客服按钮
             if (sLoginDialogv2 != null && sLoginDialogv2.getActivity() != null) {
-                MWSdkFactory.create().openCs(sLoginDialogv2.getActivity());
+                Request.openCs(sLoginDialogv2.getActivity(), RequestCode.RequestCode_CS_LOGIN);
             }
         }
 

@@ -1,6 +1,8 @@
 package com.mw.sdk.api;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 
 import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.ISReqCallBack;
@@ -11,12 +13,15 @@ import com.core.base.utils.SPUtil;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
 import com.mw.base.bean.SGameBaseRequestBean;
+import com.mw.base.cfg.ConfigBean;
 import com.mw.base.cfg.ResConfig;
 import com.mw.base.utils.SdkUtil;
+import com.mw.sdk.MWBaseWebActivity;
 import com.mw.sdk.R;
 import com.mw.sdk.ads.EventConstant;
 import com.mw.sdk.ads.SdkEventLogger;
 import com.mw.sdk.constant.ApiRequestMethod;
+import com.mw.sdk.constant.RequestCode;
 import com.mw.sdk.utils.DataManager;
 import com.mw.sdk.login.execute.BaseLoginRequestTask;
 import com.mw.sdk.login.model.request.AccountBindInGameRequestBean;
@@ -333,5 +338,24 @@ public class Request {
             }
         });
         simpleHttpRequest.excute();
+    }
+
+    public static void openCs(Activity activity, int requestCode){
+        PL.i("sdk .. openCs");
+        ConfigBean configBean = SdkUtil.getSdkCfg(activity.getApplicationContext());
+        if (configBean != null && configBean.getUrl() != null && SStringUtil.isNotEmpty(configBean.getUrl().getCsUrl())) {
+
+            SGameBaseRequestBean sGameBaseRequestBean = new SGameBaseRequestBean(activity);
+            if (requestCode > 0){
+                sGameBaseRequestBean.setRequest_code(requestCode);
+            }
+            sGameBaseRequestBean.setCompleteUrl(configBean.getUrl().getCsUrl());
+
+            Intent csIntent = MWBaseWebActivity.create(activity,"", sGameBaseRequestBean.createPreRequestUrl());
+            activity.startActivity(csIntent);
+        }else {
+            PL.i("获取不到客服地址");
+        }
+
     }
 }

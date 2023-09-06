@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import com.mw.base.cfg.ConfigBean;
 import com.mw.base.utils.SdkUtil;
+import com.mw.sdk.api.Request;
+import com.mw.sdk.constant.RequestCode;
 import com.mw.sdk.login.SLoginDialogV2;
 import com.mw.sdk.login.constant.ViewType;
 import com.mw.sdk.login.model.AccountModel;
@@ -231,7 +233,7 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
         }else if (v == ll_cs){
             //sdk登录页面的客服按钮
             if (sLoginDialogv2 != null && sLoginDialogv2.getActivity() != null) {
-                MWSdkFactory.create().openCs(sLoginDialogv2.getActivity());
+                Request.openCs(sLoginDialogv2.getActivity(), RequestCode.RequestCode_CS_LOGIN);
             }
         }
     }

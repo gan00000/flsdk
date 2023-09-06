@@ -197,19 +197,7 @@ public class BaseSdkImpl implements IMWSDK {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-
-                ConfigBean configBean = SdkUtil.getSdkCfg(activity.getApplicationContext());
-                if (configBean != null && configBean.getUrl() != null && SStringUtil.isNotEmpty(configBean.getUrl().getCsUrl())) {
-
-                    SGameBaseRequestBean sGameBaseRequestBean = new SGameBaseRequestBean(activity);
-                    sGameBaseRequestBean.setCompleteUrl(configBean.getUrl().getCsUrl());
-
-                    Intent csIntent = MWBaseWebActivity.create(activity,"", sGameBaseRequestBean.createPreRequestUrl());
-                    activity.startActivity(csIntent);
-                }else {
-                    PL.i("获取不到客服地址");
-                }
-
+                Request.openCs(activity, 0);
             }
         });
     }

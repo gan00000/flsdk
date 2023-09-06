@@ -48,6 +48,7 @@ public class SSdkBaseRequestBean extends BaseReqeustBean {
 //    private String spy_advertiser = "";//渠道包-所属广告
     private String referrer = "";
 
+    private int request_code = 0;
 
     public SSdkBaseRequestBean(Context context) {
         super(context);
@@ -210,5 +211,13 @@ public class SSdkBaseRequestBean extends BaseReqeustBean {
 
     public void setPlatform(String platform) {
         this.platform = platform;
+    }
+
+    public int getRequest_code() {
+        return request_code;
+    }
+
+    public void setRequest_code(int request_code) {
+        this.request_code = request_code;
     }
 }
