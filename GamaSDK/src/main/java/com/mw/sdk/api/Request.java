@@ -7,6 +7,7 @@ import android.content.Intent;
 import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.ISReqCallBack;
 import com.core.base.callback.SFCallBack;
+import com.core.base.request.AbsHttpRequest;
 import com.core.base.request.SimpleHttpRequest;
 import com.core.base.utils.PL;
 import com.core.base.utils.SPUtil;
@@ -24,6 +25,7 @@ import com.mw.sdk.constant.ApiRequestMethod;
 import com.mw.sdk.constant.RequestCode;
 import com.mw.sdk.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
 import com.mw.sdk.pay.gp.bean.res.TogglePayRes;
+import com.mw.sdk.pay.gp.util.PayHelper;
 import com.mw.sdk.utils.DataManager;
 import com.mw.sdk.login.execute.BaseLoginRequestTask;
 import com.mw.sdk.login.model.request.AccountBindInGameRequestBean;
@@ -362,14 +364,15 @@ public class Request {
     }
 
 
-    public static void togglePayRequest(Context context, GooglePayCreateOrderIdReqBean googlePayCreateOrderIdReqBean, SFCallBack<TogglePayRes> sfCallBack) {
+    public static void togglePayRequest(Context context, GooglePayCreateOrderIdReqBean checkPayTypeReqBean, SFCallBack<TogglePayRes> sfCallBack) {
 
-        googlePayCreateOrderIdReqBean.setRequestMethod(ApiRequestMethod.API_PAYMENT_CHANNEL);
-        BaseLoginRequestTask baseLoginRequestTask = new BaseLoginRequestTask(context);
-        baseLoginRequestTask.setSdkBaseRequestBean(googlePayCreateOrderIdReqBean);
+        checkPayTypeReqBean.setRequestMethod(ApiRequestMethod.API_PAYMENT_CHANNEL);
+        checkPayTypeReqBean.setRequestUrl(PayHelper.getPreferredUrl(context));
+        SimpleHttpRequest simpleHttpRequest = new SimpleHttpRequest();
+        simpleHttpRequest.setBaseReqeustBean(checkPayTypeReqBean);
 
-        baseLoginRequestTask.setLoadDialog(DialogUtil.createLoadingDialog(context, "Loading..."));
-        baseLoginRequestTask.setReqCallBack(new ISReqCallBack<TogglePayRes>() {
+        simpleHttpRequest.setLoadDialog(DialogUtil.createLoadingDialog(context, "Loading..."));
+        simpleHttpRequest.setReqCallBack(new ISReqCallBack<TogglePayRes>() {
             @Override
             public void success(TogglePayRes togglePayRes, String rawResult) {
 
@@ -404,6 +407,6 @@ public class Request {
             public void cancel() {}
 
         });
-        baseLoginRequestTask.excute(TogglePayRes.class);
+        simpleHttpRequest.excute(TogglePayRes.class);
     }
 }

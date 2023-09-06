@@ -775,7 +775,12 @@ public class BaseSdkImpl implements IMWSDK {
             ConfigBean.VersionData versionData = configBean.getSdkConfigLoginData(activity);
             if (versionData != null && versionData.isTogglePay()){//检查是否需要切换支付，总开关
 
-                Request.togglePayRequest(activity, googlePayCreateOrderIdReqBean, new SFCallBack<TogglePayRes>() {
+                GooglePayCreateOrderIdReqBean checkPayTypeReqBean = new GooglePayCreateOrderIdReqBean(activity);
+                checkPayTypeReqBean.setCpOrderId(googlePayCreateOrderIdReqBean.getCpOrderId());
+                checkPayTypeReqBean.setProductId(checkPayTypeReqBean.getProductId());
+                checkPayTypeReqBean.setExtra(checkPayTypeReqBean.getExtra());
+
+                Request.togglePayRequest(activity, checkPayTypeReqBean, new SFCallBack<TogglePayRes>() {
                     @Override
                     public void success(TogglePayRes result, String msg) {
                         if (result != null && result.isRequestSuccess() && result.getData() != null && "third".equals(result.getData().getChannel())){
