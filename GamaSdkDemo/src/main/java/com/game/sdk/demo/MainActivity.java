@@ -63,6 +63,7 @@ public class MainActivity extends Activity {
     String vipLevel = "5"; //角色vip等级
     String serverCode = "1"; //角色伺服器id
     String serverName = "S1"; //角色伺服器名称
+    String extra = "extra_xxxx";
 
     SLoginResponse tempSLoginResponse;
 
@@ -115,7 +116,7 @@ public class MainActivity extends Activity {
 //                com.game.superand.2usd
 //                String skuId = "com.miaoou.6jin";
                 String skuId = "com.yuewan.tgvn.99";
-                mIMWSDK.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(),skuId, "xxxx","role_id_1","role_name","role_level","vipLevel",serverCode, serverName, new IPayListener() {
+                mIMWSDK.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(),skuId, extra,roleId,roleName,roleLevel, vipLevel,serverCode, serverName, new IPayListener() {
 
                     @Override
                     public void onPaySuccess(String productId, String cpOrderId) {
@@ -148,7 +149,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 String skuId = "com.miaoou.6jin";
-                mIMWSDK.pay(MainActivity.this, SPayType.HUAWEI, "" + System.currentTimeMillis(),skuId, "xxxx", "role_id_1","role_name","role_level","vipLevel",serverCode, serverName, new IPayListener() {
+                mIMWSDK.pay(MainActivity.this, SPayType.HUAWEI, "" + System.currentTimeMillis(),skuId, extra,roleId,roleName,roleLevel, vipLevel, serverCode, serverName, new IPayListener() {
 
                     @Override
                     public void onPaySuccess(String productId, String cpOrderId) {
@@ -168,7 +169,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 String skuId = "com.miaoou.6jin";
-                mIMWSDK.pay(MainActivity.this, SPayType.QooApp, "" + System.currentTimeMillis(),skuId, "xxxx", "role_id_1","role_name","role_level","vipLevel",serverCode, serverName, new IPayListener() {
+                mIMWSDK.pay(MainActivity.this, SPayType.QooApp, "" + System.currentTimeMillis(),skuId, extra,roleId,roleName,roleLevel, vipLevel,serverCode, serverName, new IPayListener() {
 
                     @Override
                     public void onPaySuccess(String productId, String cpOrderId) {
@@ -189,7 +190,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 String skuId = "com.yuewan.tgvn.99";
-                mIMWSDK.pay(MainActivity.this, SPayType.WEB, "" + System.currentTimeMillis(),skuId, "xxxx", "role_id_1","role_name","role_level","vipLevel","1001", serverName, new IPayListener() {
+                mIMWSDK.pay(MainActivity.this, SPayType.WEB, "" + System.currentTimeMillis(),skuId, extra,roleId,roleName,roleLevel, vipLevel,serverCode, serverName, new IPayListener() {
 
                     @Override
                     public void onPaySuccess(String productId, String cpOrderId) {
