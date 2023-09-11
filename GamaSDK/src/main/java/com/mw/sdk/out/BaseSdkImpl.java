@@ -20,6 +20,7 @@ import com.core.base.utils.SignatureUtil;
 import com.core.base.utils.ToastUtils;
 import com.mw.sdk.constant.ChannelPlatform;
 import com.mw.sdk.login.model.response.SLoginResponse;
+import com.mw.sdk.login.widget.v2.SelectPayChannelLayout;
 import com.mw.sdk.pay.gp.bean.res.TogglePayRes;
 import com.mw.sdk.utils.DataManager;
 import com.mw.sdk.pay.IPay;
@@ -773,18 +774,53 @@ public class BaseSdkImpl implements IMWSDK {
         ConfigBean configBean = SdkUtil.getSdkCfg(activity);
         if (configBean != null) {
             ConfigBean.VersionData versionData = configBean.getSdkConfigLoginData(activity);
+//            versionData.setTogglePay(true);//test
             if (versionData != null && versionData.isTogglePay()){//检查是否需要切换支付，总开关
 
                 GooglePayCreateOrderIdReqBean checkPayTypeReqBean = new GooglePayCreateOrderIdReqBean(activity);
                 checkPayTypeReqBean.setCpOrderId(googlePayCreateOrderIdReqBean.getCpOrderId());
-                checkPayTypeReqBean.setProductId(checkPayTypeReqBean.getProductId());
-                checkPayTypeReqBean.setExtra(checkPayTypeReqBean.getExtra());
+                checkPayTypeReqBean.setProductId(googlePayCreateOrderIdReqBean.getProductId());
+                checkPayTypeReqBean.setExtra(googlePayCreateOrderIdReqBean.getExtra());
 
                 Request.togglePayRequest(activity, checkPayTypeReqBean, new SFCallBack<TogglePayRes>() {
                     @Override
                     public void success(TogglePayRes result, String msg) {
-                        if (result != null && result.isRequestSuccess() && result.getData() != null && "third".equals(result.getData().getChannel())){
-                            doWebPay(activity,googlePayCreateOrderIdReqBean);
+
+//                        result.getData().setTogglePay(true);
+//                        result.getData().setHideSelectChannel(true);
+                        if (result != null && result.isRequestSuccess() && result.getData() != null && result.getData().isTogglePay()){
+
+                            if (result.getData().isHideSelectChannel()) {//是否显示询问用户
+                                doWebPay(activity,googlePayCreateOrderIdReqBean);
+                            }else {//默认弹出显示询问用户
+
+                                if (commonDialog != null){
+                                    commonDialog.dismiss();
+                                }
+                                commonDialog = new SBaseDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
+                                SelectPayChannelLayout selectPayChannelLayout = new SelectPayChannelLayout(activity);
+                                selectPayChannelLayout.setsBaseDialog(commonDialog);
+                                selectPayChannelLayout.setSfCallBack(new SFCallBack() {
+                                    @Override
+                                    public void success(Object result, String msg) {//google
+                                        doGooglePay(activity, googlePayCreateOrderIdReqBean);
+                                        if (commonDialog != null){
+                                            commonDialog.dismiss();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void fail(Object result, String msg) {//第三方
+                                        doWebPay(activity,googlePayCreateOrderIdReqBean);
+                                        if (commonDialog != null){
+                                            commonDialog.dismiss();
+                                        }
+                                    }
+                                });
+                                commonDialog.setContentView(selectPayChannelLayout);
+                                commonDialog.show();
+                            }
+
                         }else {
                             doGooglePay(activity, googlePayCreateOrderIdReqBean);
                         }

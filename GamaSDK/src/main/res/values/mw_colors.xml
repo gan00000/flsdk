@@ -78,6 +78,13 @@
     <color name="black_s">#ff000000</color>
 
     <color name="colorPush">#9c0000</color>
+    <color name="c_b8ccd5">#b8ccd5</color>
+
+    <color name="c_78cee8">#78cee8</color>
+    <color name="c_5791d5">#5791d5</color>
+
+    <color name="c_f0a051">#f0a051</color>
+    <color name="c_f5cd72">#f5cd72</color>
 
 </resources>
 

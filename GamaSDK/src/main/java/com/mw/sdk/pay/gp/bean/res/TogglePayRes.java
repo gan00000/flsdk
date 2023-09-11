@@ -25,14 +25,23 @@ public class TogglePayRes extends BaseResponseModel {
 
     public static class Data{
 
-        private String channel;
+        private boolean isTogglePay;//是否切支付
+        private boolean hideSelectChannel;//1000不显示选择页面
 
-        public String getChannel() {
-            return channel;
+        public boolean isTogglePay() {
+            return isTogglePay;
         }
 
-        public void setChannel(String channel) {
-            this.channel = channel;
+        public void setTogglePay(boolean togglePay) {
+            isTogglePay = togglePay;
+        }
+
+        public boolean isHideSelectChannel() {
+            return hideSelectChannel;
+        }
+
+        public void setHideSelectChannel(boolean hideSelectChannel) {
+            this.hideSelectChannel = hideSelectChannel;
         }
     }
 }

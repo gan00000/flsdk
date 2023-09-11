@@ -124,5 +124,7 @@
     <string name="text_finish_pay">支付完成</string>
     <string name="text_account_not_exist">账号不存在</string>
     <string name="text_close">关闭</string>
+    <string name="text_select_pay_channel">选择付款方式</string>
+    <string name="text_other">其它</string>
 
 </resources>

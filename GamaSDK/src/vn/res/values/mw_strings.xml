@@ -124,6 +124,7 @@
     <string name="text_finish_pay">Thanh toán xong</string>
     <string name="text_account_not_exist">Tài khoản không tồn tại</string>
     <string name="text_close">Đóng</string>
-
+    <string name="text_select_pay_channel">Chọn phương thức thanh toán</string>
+    <string name="text_other">Khác</string>
 
 </resources>
