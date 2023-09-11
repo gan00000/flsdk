@@ -1,21 +1,5 @@
 <resources>
 
-    <string name="text_phone_bind">휴대전화 연동</string>
-    <string name="text_phone_area_code">지역번호</string>
-    <string name="text_phone_input_hint">휴대전화 번호를 입력하세요.</string>
-    <string name="text_phone_hasbind_tips">이미 연동했습니다. 현재 연동된 휴대전화 번호는 다음과 같습니다.</string>
-    <string name="text_area_code_not_empty">휴대전화 지역 번호를 입력하세요.</string>
-    <string name="text_phone_not_empty">휴대전화 번호를 입력하세요.</string>
-    <string name="text_phone_not_match">휴대전화 번호 형식이 올바르지 않습니다.</string>
-    <string name="text_vfcode_has_send">인증번호를 발송했습니다.</string>
-    <string name="text_phone_bind_success">휴대전화 연동 성공</string>
-    <string name="text_has_bind_tips_google">구글을 회원 계정으로 업그레이드했습니다.</string>
-    <string name="text_has_bind_tips_fb">페이스북을 회원 계정으로 업그레이드했습니다.</string>
-    <string name="text_has_bind_tips_guest">게스트 로그인을 회원 계정으로 업그레이드했습니다.</string>
-    <string name="text_has_bind_tips_line">라인을 회원 계정으로 업그레이드했습니다.</string>
-    <string name="text_has_bind_tips_twitter">회원 계정으로 업그레이드했습니다.</string>
-    <string name="text_has_bind_tips_mw">회원 계정</string>
-    <string name="text_notice">공지</string>
     <string name="text_age_up14">14세 이상입니다</string>
     <string name="text_age_is_up14">14세 미만입니까?</string>
     <string name="text_age_up14_can_useapp">주의: 14세 미만이라면 빠르게 로그아웃하세요. 14세 미만 사용자는 이 앱을 사용할 수 없습니다.</string>
