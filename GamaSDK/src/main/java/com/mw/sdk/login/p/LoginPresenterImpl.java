@@ -13,6 +13,7 @@ import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.ISReqCallBack;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.PL;
+import com.core.base.utils.ResUtil;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
 import com.facebook.internal.ImageRequest;
@@ -1173,6 +1174,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
 //        SdkUtil.saveSdkLoginData(getContext(), loginResponse.getRawResponse());
         loginResponse.getData().setLoginType(loginType);
+        loginResponse.getData().setGameCode(ResConfig.getGameCode(getContext()));
         SdkUtil.updateLoginData(getContext(), loginResponse);
         DataManager.getInstance().setLogin(true);
         if (SStringUtil.isNotEmpty(loginType)) {//loginType为空时是账号注入登录，不能空时是其他普通登入
