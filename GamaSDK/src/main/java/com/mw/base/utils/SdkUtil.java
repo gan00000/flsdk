@@ -755,12 +755,12 @@ public class SdkUtil {
         return sdkUUID;
     }
 
-    private static final String GAMA_START_TERM_STATUS = "GAMA_START_TERM_STATUS";
-    public static void saveStartTermRead(Context context, boolean isRead){
-        SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE,GAMA_START_TERM_STATUS, isRead);
+    private static final String SDK_SHOW_TERM = "sdk_show_term";
+    public static void saveShowTerm(Context context, boolean isRead){
+        SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE,SDK_SHOW_TERM, isRead);
     }
-    public static boolean getStartTermRead(Context context){
-        return SPUtil.getSimpleBoolean(context, SdkUtil.SDK_SP_FILE, GAMA_START_TERM_STATUS);
+    public static boolean getShowTerm(Context context){
+        return SPUtil.getSimpleBoolean(context, SdkUtil.SDK_SP_FILE, SDK_SHOW_TERM);
     }
 
     private static final String MW_AGE_QUA = "MW_SDK_AGE_QUA";

@@ -10,15 +10,19 @@ import com.facebook.internal.CallbackManagerImpl;
 import com.mw.base.bean.SLoginType;
 import com.mw.base.cfg.ConfigBean;
 import com.mw.base.utils.SdkUtil;
+import com.mw.sdk.R;
+import com.mw.sdk.SBaseDialog;
 import com.mw.sdk.SWebViewDialog;
+import com.mw.sdk.constant.SdkInnerVersion;
 import com.mw.sdk.login.widget.v2.NoticeView;
+import com.mw.sdk.out.ISdkCallBack;
 import com.mw.sdk.utils.DialogUtil;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.google.SGoogleSignIn;
 import com.thirdlib.huawei.HuaweiSignIn;
 import com.thirdlib.line.SLineSignIn;
 import com.thirdlib.twitter.TwitterLogin;
-
+import com.mw.sdk.login.widget.v2.TermsViewV3;
 /**
  * Created by gan on 2017/4/12.
  */
@@ -87,6 +91,16 @@ public class DialogLoginImpl implements ILogin {
         huaweiSignIn = new HuaweiSignIn(activity, DialogUtil.createLoadingDialog(activity, "Loading..."));
         twitterLogin = new TwitterLogin();
 
+        if (SdkInnerVersion.KR.getSdkVeriosnName().equals(SdkUtil.getSdkInnerVersion(activity)) && !SdkUtil.getShowTerm(activity)){
+            showTermDialog(activity, iLoginCallBack);
+            return;
+        }
+
+        commonStartLogin(activity, iLoginCallBack);
+    }
+
+    private void commonStartLogin(Activity activity, ILoginCallBack iLoginCallBack) {
+
         if (!SdkUtil.isVersion1(activity)) {
             ConfigBean configBean = SdkUtil.getSdkCfg(activity);
             if (configBean != null) {
@@ -95,7 +109,7 @@ public class DialogLoginImpl implements ILogin {
 //                versionData.setShowNotice(true);
                 if (versionData != null && versionData.isShowNotice()) { //显示dialog web公告
                     NoticeView noticeView = new NoticeView(activity);
-                    SWebViewDialog webViewDialog = new SWebViewDialog(activity, com.mw.sdk.R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen,noticeView,noticeView.getSWebView(),null);
+                    SWebViewDialog webViewDialog = new SWebViewDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen,noticeView,noticeView.getSWebView(),null);
                     if (configBean.getUrl() != null) {
                         webViewDialog.setWebUrl(configBean.getUrl().getNoticeUrl());
                     }
@@ -161,5 +175,41 @@ public class DialogLoginImpl implements ILogin {
     @Override
     public void initFacebookPro(Activity activity, SFacebookProxy sFacebookProxy) {
         this.sFacebookProxy = sFacebookProxy;
+    }
+
+    private SBaseDialog termBaseDialog;
+    private TermsViewV3 termsViewV3;
+    private void showTermDialog(Activity activity, ILoginCallBack iLoginCallBack) {
+
+        SdkUtil.saveShowTerm(activity,true);
+        if (termBaseDialog != null && termsViewV3 != null){
+            termBaseDialog.show();
+            termsViewV3.reloadUrl();
+            return;
+        }
+
+        termBaseDialog = new SBaseDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
+
+        termsViewV3 = new TermsViewV3(activity);
+        termsViewV3.setiSdkCallBack(new ISdkCallBack() {
+            @Override
+            public void success() {
+                if (termBaseDialog != null) {
+                    termBaseDialog.dismiss();
+                }
+                commonStartLogin(activity, iLoginCallBack);
+            }
+
+            @Override
+            public void failure() {
+                if (termBaseDialog != null) {
+                    termBaseDialog.dismiss();
+                }
+                commonStartLogin(activity, iLoginCallBack);
+            }
+        });
+        termBaseDialog.setContentView(termsViewV3);
+        termBaseDialog.getWindow().setWindowAnimations(R.style.dialog_animation);
+        termBaseDialog.show();
     }
 }
