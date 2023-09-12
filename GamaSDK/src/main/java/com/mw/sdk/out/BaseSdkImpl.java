@@ -206,6 +206,13 @@ public class BaseSdkImpl implements IMWSDK {
     }
 
     @Override
+    public void openCs(Activity activity, String roleId, String roleName, String roleLevel, String vipLevel, String severCode, String serverName) {
+        PL.i("roleId:" + roleId + ",roleName:" + roleName + ",roleLevel:" + roleLevel + ",vipLevel:" + vipLevel + ",severCode:" + severCode + ",serverName:" + serverName);
+        SdkUtil.saveRoleInfo(activity, roleId, roleName, roleLevel, vipLevel, severCode, serverName);//保存角色信息
+        openCs(activity);
+    }
+
+    @Override
     public void onCreate(final Activity activity) {
         PL.i("sdk onCreate");
         PL.i("the aar version info:" + SdkUtil.getSdkInnerVersion(activity) + "_" + BuildConfig.JAR_VERSION);//打印版本号
