@@ -104,6 +104,7 @@ android {
         sdkKR {//韩国
             flavorDimensions "1"
             resValue "string", "sdk_inner_version", "kr"
+            proguardFile 'flavor-rules-kr.pro'
         }
     }
 }
