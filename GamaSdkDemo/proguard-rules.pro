@@ -59,3 +59,7 @@
 -keep public class org.spongycastle.** { *; }
 -keep public class javax.** { *; }
 -keep public class com.adjust.** { *; }
+
+-keep public class com.mw.** { *; }
+-keep public class com.core.** { *; }
+-keep public class com.thirdlib.** { *; }
