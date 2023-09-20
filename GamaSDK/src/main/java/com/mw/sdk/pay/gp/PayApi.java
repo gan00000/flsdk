@@ -251,4 +251,65 @@ public class PayApi {
         });
         googleExchangeReqTask.excute(GPExchangeRes.class);
     }
+
+    public static void requestCommonPaySendStone(Context context, GoogleExchangeReqBean exchangeReqBean, SFCallBack<GPExchangeRes> sfCallBack) {
+
+
+        exchangeReqBean.setRequestUrl(PayHelper.getPreferredUrl(context));
+        exchangeReqBean.setRequestSpaUrl(PayHelper.getSpareUrl(context));
+
+//        exchangeReqBean.setRequestMethod(ApiRequestMethod.API_PAYMENT_GOOGLE);
+
+        GoogleExchangeReqTask googleExchangeReqTask = new GoogleExchangeReqTask(context, exchangeReqBean);
+        googleExchangeReqTask.setReqCallBack(new ISReqCallBack<GPExchangeRes>() {
+
+            @Override
+            public void success(GPExchangeRes gpExchangeRes, String rawResult) {
+                if (gpExchangeRes != null && gpExchangeRes.isRequestSuccess()) {
+                    PL.i("pay GoogleExchangeReqTask finish");
+                    if (sfCallBack != null){
+                        sfCallBack.success(gpExchangeRes,rawResult);
+                    }
+                    if (gpExchangeRes.getData() != null && SStringUtil.isNotEmpty(gpExchangeRes.getData().getOrderId())) {
+                        BasePayBean basePayBean = new BasePayBean();
+                        basePayBean.setOrderId(gpExchangeRes.getData().getOrderId());
+                        basePayBean.setProductId(gpExchangeRes.getData().getProductId());
+                        basePayBean.setServerTimestamp(gpExchangeRes.getData().getTimestamp());
+                        basePayBean.setUsdPrice(gpExchangeRes.getData().getAmount());
+
+                        SdkEventLogger.trackinPayEvent(context.getApplicationContext(), basePayBean);
+                    }
+
+                } else {
+//                    if (gpExchangeRes!=null && !TextUtils.isEmpty(gpExchangeRes.getMessage())){
+//                        ToastUtils.toast(activity,gpExchangeRes.getMessage());
+//                    }
+                    PL.i("exchangeReqTask failed");
+                    if (sfCallBack != null){
+                        sfCallBack.fail(gpExchangeRes,rawResult);
+                    }
+                }
+            }
+
+            @Override
+            public void timeout(String code) {
+                if (sfCallBack != null){
+                    sfCallBack.fail(null,"");
+                }
+            }
+
+            @Override
+            public void noData() {
+                if (sfCallBack != null){
+                    sfCallBack.fail(null,"");
+                }
+            }
+
+            @Override
+            public void cancel() {
+            }
+        });
+        googleExchangeReqTask.excute(GPExchangeRes.class);
+    }
+
 }

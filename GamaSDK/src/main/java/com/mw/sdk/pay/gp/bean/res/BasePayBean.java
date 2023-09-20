@@ -6,7 +6,7 @@ public class BasePayBean implements Serializable {
 
     private String mItemType;  // ITEM_TYPE_INAPP or ITEM_TYPE_SUBS
     private String mToken;
-    private String orderId;
+    private String orderId;//平台订单号，不是Google等
     private String packageName;
     private String productId;
     private long purchaseTime;
