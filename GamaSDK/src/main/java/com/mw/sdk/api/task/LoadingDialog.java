@@ -97,7 +97,8 @@ public class LoadingDialog {
                     AlertDialog.Builder bld = new AlertDialog.Builder(mActivity);
                     bld.setMessage(message);
                     bld.setCancelable(false);
-                    bld.setNeutralButton("OK", listener);
+                    bld.setPositiveButton("OK", listener);
+
                     bld.create().show();
                 }
             });
