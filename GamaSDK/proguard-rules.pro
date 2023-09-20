@@ -47,6 +47,7 @@
 -keep public class com.mw.base.bean.SUserInfo { *; }
 -keep public class com.mw.sdk.pay.gp.bean.res.TogglePayRes { *; }
 -keep public class com.mw.sdk.pay.gp.bean.res.TogglePayRes$Data { *; }
+-keep public class **$Data { *; }
 
 # -keep public interface mypackage.MyInterface
 # -keep public class * implements mypackage.MyInterface

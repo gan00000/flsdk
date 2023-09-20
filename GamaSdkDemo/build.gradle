@@ -2,18 +2,20 @@ apply plugin: 'com.android.application'
 
 android {
 
-    compileSdkVersion 33
+    compileSdkVersion rootProject.ext.compileSdkVersion
 
-//    错误原因：这是因为java8才支持静态接口方法的原因
-//    解决办法：可以通过在app的build.gradle文件中配置使用java8编译
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility rootProject.ext.javaVersion
+        targetCompatibility rootProject.ext.javaVersion
     }
 
+//    kotlinOptions {
+//        jvmTarget = rootProject.ext.jvmTarget
+//    }
+
     defaultConfig {
-        minSdkVersion 18
-        targetSdkVersion 33
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
 //        ndk {
 //            abiFilters "armeabi", "armeabi-v7a", "x86"  // 指定要ndk需要兼容的架构(这样其他依赖包里mips之类的.so会被过滤掉)
 //        }
