@@ -12,11 +12,11 @@ import android.widget.TextView;
 
 import com.core.base.utils.PL;
 import com.core.base.utils.ToastUtils;
-import com.mw.sdk.SBaseDialog;
-import com.mw.sdk.SBaseRelativeLayout;
-import com.mw.base.utils.Localization;
+import com.mw.sdk.widget.SBaseDialog;
+import com.mw.sdk.widget.SBaseRelativeLayout;
+import com.mw.sdk.utils.Localization;
 import com.mw.sdk.login.SLoginDialogV2;
-import com.mw.sdk.login.constant.ViewType;
+import com.mw.sdk.constant.ViewType;
 
 /**
  * Created by gan on 2017/4/12.

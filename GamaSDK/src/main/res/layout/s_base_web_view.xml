@@ -8,10 +8,10 @@
         android:layout_height="match_parent"
         android:background="@android:color/white">
 
-        <com.mw.base.widget.SWebView
+        <com.mw.sdk.widget.SWebView
             android:id="@+id/s_webview_id"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></com.mw.base.widget.SWebView>
+            android:layout_height="match_parent"></com.mw.sdk.widget.SWebView>
 
         <ProgressBar
             android:id="@+id/s_webview_pager_loading_percent"

@@ -67,7 +67,7 @@
             android:background="@drawable/mw_bg_notice_web"
             android:orientation="vertical">
 
-            <com.mw.sdk.SWebViewLayout
+            <com.mw.sdk.widget.SWebViewLayout
                 android:id="@+id/svl_notice_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />

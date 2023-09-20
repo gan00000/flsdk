@@ -5,12 +5,12 @@ import android.content.Context;
 import android.view.View;
 
 import com.core.base.callback.SFCallBack;
-import com.mw.sdk.login.constant.BindType;
-import com.mw.sdk.login.constant.ViewType;
-import com.mw.sdk.login.model.AccountModel;
-import com.mw.sdk.login.model.request.ThirdLoginRegRequestBean;
+import com.mw.sdk.constant.BindType;
+import com.mw.sdk.constant.ViewType;
+import com.mw.sdk.bean.AccountModel;
+import com.mw.sdk.bean.req.ThirdLoginRegRequestBean;
 import com.mw.sdk.login.model.response.SLoginResponse;
-import com.mw.sdk.SBaseRelativeLayout;
+import com.mw.sdk.widget.SBaseRelativeLayout;
 import com.thirdlib.google.SGoogleSignIn;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.huawei.HuaweiSignIn;

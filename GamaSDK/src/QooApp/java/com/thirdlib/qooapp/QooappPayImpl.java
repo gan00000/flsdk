@@ -13,7 +13,7 @@ import com.google.gson.Gson;
 import com.mw.sdk.constant.ApiRequestMethod;
 import com.mw.sdk.pay.IPayCallBack;
 import com.mw.sdk.pay.gp.PayApi;
-import com.mw.sdk.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
+import com.mw.sdk.bean.req.PayCreateOrderReqBean;
 import com.mw.sdk.pay.gp.bean.res.BasePayBean;
 import com.mw.sdk.pay.gp.bean.res.GPCreateOrderIdRes;
 import com.mw.sdk.pay.gp.bean.res.GPExchangeRes;

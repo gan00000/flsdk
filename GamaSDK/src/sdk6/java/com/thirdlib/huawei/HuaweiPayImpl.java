@@ -5,7 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 
 import com.mw.sdk.pay.IPayCallBack;
-import com.mw.sdk.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
+import com.mw.sdk.bean.req.PayCreateOrderReqBean;
 
 public class HuaweiPayImpl {
 
@@ -31,7 +31,7 @@ public class HuaweiPayImpl {
 
     }
 
-    public void startPay(Activity activity, GooglePayCreateOrderIdReqBean createOrderIdReqBean) {
+    public void startPay(Activity activity, PayCreateOrderReqBean createOrderIdReqBean) {
 
     }
 

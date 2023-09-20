@@ -21,26 +21,24 @@ import com.core.base.utils.SPUtil;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.TimeUtil;
 import com.facebook.appevents.AppEventsConstants;
-import com.mw.base.bean.SUserInfo;
-import com.mw.sdk.pay.gp.bean.res.BasePayBean;
+import com.mw.sdk.bean.SUserInfo;
+import com.mw.sdk.bean.res.BasePayBean;
 import com.google.firebase.analytics.FirebaseAnalytics;
-import com.mw.base.bean.AdsRequestBean;
-import com.mw.base.cfg.ResConfig;
-import com.mw.base.utils.SdkUtil;
+import com.mw.sdk.bean.AdsRequestBean;
+import com.mw.sdk.utils.ResConfig;
+import com.mw.sdk.utils.SdkUtil;
 import com.mw.sdk.BuildConfig;
 import com.mw.sdk.R;
 import com.mw.sdk.api.Request;
+import com.mw.sdk.constant.EventConstant;
 import com.mw.sdk.login.model.response.SLoginResponse;
 import com.thirdlib.adjust.AdjustHelper;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.google.SGoogleProxy;
 
 import java.math.BigDecimal;
-import java.sql.Time;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 /**

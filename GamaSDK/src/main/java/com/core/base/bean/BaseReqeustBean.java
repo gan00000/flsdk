@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import com.appsflyer.AppsFlyerLib;
 import com.core.base.utils.ApkInfoUtil;
 import com.core.base.utils.SStringUtil;
-import com.mw.base.utils.SdkUtil;
+import com.mw.sdk.utils.SdkUtil;
 import com.mw.sdk.BuildConfig;
 
 import java.lang.reflect.Field;

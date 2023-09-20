@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Handler;
 import android.text.TextUtils;
 
-import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -23,23 +22,21 @@ import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ThreadUtil;
 import com.core.base.utils.ToastUtils;
-import com.mw.base.utils.SdkUtil;
+import com.mw.sdk.bean.req.PayCreateOrderReqBean;
+import com.mw.sdk.utils.SdkUtil;
+import com.mw.sdk.api.PayApi;
 import com.mw.sdk.out.ISdkCallBack;
 import com.mw.sdk.pay.IPay;
 import com.mw.sdk.pay.IPayCallBack;
-import com.mw.sdk.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
-import com.mw.sdk.pay.gp.bean.req.PayReqBean;
-import com.mw.sdk.pay.gp.bean.res.GPCreateOrderIdRes;
-import com.mw.sdk.pay.gp.bean.res.GPExchangeRes;
-import com.mw.sdk.pay.gp.task.LoadingDialog;
+import com.mw.sdk.bean.req.PayReqBean;
+import com.mw.sdk.bean.res.GPCreateOrderIdRes;
+import com.mw.sdk.bean.res.GPExchangeRes;
+import com.mw.sdk.api.task.LoadingDialog;
 import com.mw.sdk.pay.gp.util.GBillingHelper;
-import com.mw.sdk.pay.gp.util.PayHelper;
-import com.mw.sdk.pay.gp.bean.res.BasePayBean;
+import com.mw.sdk.utils.PayHelper;
+import com.mw.sdk.bean.res.BasePayBean;
 import com.mw.sdk.BuildConfig;
-import com.mw.sdk.R;
 import com.mw.sdk.constant.ApiRequestMethod;
-
-import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,7 +67,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
     /**
      * 创单的请求参数Bean
      */
-    private GooglePayCreateOrderIdReqBean createOrderIdReqBean;
+    private PayCreateOrderReqBean createOrderIdReqBean;
 
     private Activity mActivity;
 //    private Context mContext;
@@ -229,7 +226,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
         isPaying = true;
 
         //由GooglePayActivity2传入
-        this.createOrderIdReqBean = (GooglePayCreateOrderIdReqBean) payReqBean;
+        this.createOrderIdReqBean = (PayCreateOrderReqBean) payReqBean;
         //设置储值主域名
         this.createOrderIdReqBean.setRequestUrl(PayHelper.getPreferredUrl(activity));
         //设置储值备用域名

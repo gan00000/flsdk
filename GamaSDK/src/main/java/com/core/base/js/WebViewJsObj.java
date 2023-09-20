@@ -6,12 +6,8 @@ import android.webkit.JavascriptInterface;
 
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
-import com.mw.sdk.ads.EventConstant;
+import com.mw.sdk.constant.EventConstant;
 import com.mw.sdk.ads.SdkEventLogger;
-import com.mw.sdk.pay.MWWebPayActivity;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 public class WebViewJsObj {
 

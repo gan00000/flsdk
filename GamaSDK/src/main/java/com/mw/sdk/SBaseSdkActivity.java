@@ -3,7 +3,7 @@ package com.mw.sdk;
 import android.os.Bundle;
 
 import com.core.base.SBaseActivity;
-import com.mw.base.utils.Localization;
+import com.mw.sdk.utils.Localization;
 
 /**
  * Created by gan on 2017/2/7.

@@ -21,21 +21,21 @@ import com.gaa.sdk.iap.ProductDetailsListener;
 import com.gaa.sdk.iap.PurchaseClient;
 import com.gaa.sdk.iap.PurchaseData;
 import com.gaa.sdk.iap.PurchaseFlowParams;
-import com.mw.base.utils.SdkUtil;
 import com.mw.sdk.BuildConfig;
+import com.mw.sdk.api.PayApi;
+import com.mw.sdk.api.task.LoadingDialog;
+import com.mw.sdk.bean.req.PayCreateOrderReqBean;
+import com.mw.sdk.bean.req.PayExchangeReqBean;
+import com.mw.sdk.bean.req.PayReqBean;
+import com.mw.sdk.bean.res.BasePayBean;
+import com.mw.sdk.bean.res.GPCreateOrderIdRes;
+import com.mw.sdk.bean.res.GPExchangeRes;
 import com.mw.sdk.constant.ApiRequestMethod;
 import com.mw.sdk.out.ISdkCallBack;
 import com.mw.sdk.pay.IPay;
 import com.mw.sdk.pay.IPayCallBack;
-import com.mw.sdk.pay.gp.PayApi;
-import com.mw.sdk.pay.gp.bean.req.GoogleExchangeReqBean;
-import com.mw.sdk.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
-import com.mw.sdk.pay.gp.bean.req.PayReqBean;
-import com.mw.sdk.pay.gp.bean.res.BasePayBean;
-import com.mw.sdk.pay.gp.bean.res.GPCreateOrderIdRes;
-import com.mw.sdk.pay.gp.bean.res.GPExchangeRes;
-import com.mw.sdk.pay.gp.task.LoadingDialog;
-import com.mw.sdk.pay.gp.util.PayHelper;
+import com.mw.sdk.utils.PayHelper;
+import com.mw.sdk.utils.SdkUtil;
 
 import org.json.JSONObject;
 
@@ -67,7 +67,7 @@ public class OnestorePayImpl implements IPay, PurchaseManager.Callback {
     /**
      * 创单的请求参数Bean
      */
-    private GooglePayCreateOrderIdReqBean createOrderIdReqBean;
+    private PayCreateOrderReqBean createOrderIdReqBean;
 
     private Activity mActivity;
 
@@ -225,7 +225,7 @@ public class OnestorePayImpl implements IPay, PurchaseManager.Callback {
             authManager = new AuthManager(activity);
         }
 
-        this.createOrderIdReqBean = (GooglePayCreateOrderIdReqBean) payReqBean;
+        this.createOrderIdReqBean = (PayCreateOrderReqBean) payReqBean;
         this.createOrderIdReqBean.setMode("onestore");
         //设置储值主域名
         this.createOrderIdReqBean.setRequestUrl(PayHelper.getPreferredUrl(activity));
@@ -404,7 +404,7 @@ public class OnestorePayImpl implements IPay, PurchaseManager.Callback {
         for (PurchaseData purchaseData: purchases) {
             //补发币
 
-            GoogleExchangeReqBean exchangeReqBean = new GoogleExchangeReqBean(mActivity);
+            PayExchangeReqBean exchangeReqBean = new PayExchangeReqBean(mActivity);
             exchangeReqBean.setDataSignature(purchaseData.getSignature());
             exchangeReqBean.setPurchaseData(purchaseData.getOriginalJson());
             exchangeReqBean.setReissue("no");
@@ -451,7 +451,7 @@ public class OnestorePayImpl implements IPay, PurchaseManager.Callback {
         for (PurchaseData purchaseData: purchases) {
             //补发币
 
-            GoogleExchangeReqBean exchangeReqBean = new GoogleExchangeReqBean(mActivity);
+            PayExchangeReqBean exchangeReqBean = new PayExchangeReqBean(mActivity);
             exchangeReqBean.setDataSignature(purchaseData.getSignature());
             exchangeReqBean.setPurchaseData(purchaseData.getOriginalJson());
             exchangeReqBean.setReissue("yes");
@@ -496,7 +496,7 @@ public class OnestorePayImpl implements IPay, PurchaseManager.Callback {
         for (PurchaseData purchaseData: purchases) {//正在购买的时候消耗
             //补发币
 
-            GoogleExchangeReqBean exchangeReqBean = new GoogleExchangeReqBean(mActivity);
+            PayExchangeReqBean exchangeReqBean = new PayExchangeReqBean(mActivity);
             exchangeReqBean.setDataSignature(purchaseData.getSignature());
             exchangeReqBean.setPurchaseData(purchaseData.getOriginalJson());
             exchangeReqBean.setReissue("yes");

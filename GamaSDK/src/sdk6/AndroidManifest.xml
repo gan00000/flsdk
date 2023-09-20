@@ -47,7 +47,7 @@
     <application>
 
         <activity
-            android:name="com.mw.sdk.pay.MWWebPayActivity"
+            android:name="com.mw.sdk.MWWebPayActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|fontScale"
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:screenOrientation="sensorPortrait"
@@ -61,7 +61,7 @@
             android:theme="@style/Sdk.Theme.AppCompat.Light.NoActionBar.FullScreen"/>
 
         <activity
-            android:name="com.mw.sdk.pay.gp.GooglePayActivity2"
+            android:name="com.mw.sdk.GooglePayActivity2"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|fontScale"
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:theme="@style/Sdk.Theme.AppCompat.Light.NoActionBar.FullScreen.Translucent"/>

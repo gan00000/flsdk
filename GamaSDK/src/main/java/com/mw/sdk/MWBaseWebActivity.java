@@ -9,7 +9,8 @@ import android.view.View;
 import com.core.base.js.WebViewJsObj;
 import com.core.base.utils.PL;
 import com.core.base.utils.ToastUtils;
-import com.mw.base.widget.SWebView;
+import com.mw.sdk.widget.SWebView;
+import com.mw.sdk.widget.SWebViewLayout;
 
 /**
  * Created by GanYuanrong on 2016/12/1.

@@ -4,9 +4,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.core.base.utils.SStringUtil;
-import com.mw.base.bean.SLoginType;
+import com.mw.sdk.constant.SLoginType;
 import com.mw.sdk.R;
-import com.mw.sdk.login.model.AccountModel;
+import com.mw.sdk.bean.AccountModel;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.mw.sdk.version.BaseSdkVersion;
 import android.content.Context;

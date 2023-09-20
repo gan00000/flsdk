@@ -7,28 +7,26 @@ import android.content.Intent;
 import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.ISReqCallBack;
 import com.core.base.callback.SFCallBack;
-import com.core.base.request.AbsHttpRequest;
 import com.core.base.request.SimpleHttpRequest;
 import com.core.base.utils.PL;
 import com.core.base.utils.SPUtil;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
-import com.mw.base.bean.SGameBaseRequestBean;
-import com.mw.base.cfg.ConfigBean;
-import com.mw.base.cfg.ResConfig;
-import com.mw.base.utils.SdkUtil;
+import com.mw.sdk.bean.SGameBaseRequestBean;
+import com.mw.sdk.bean.res.ConfigBean;
+import com.mw.sdk.utils.ResConfig;
+import com.mw.sdk.utils.SdkUtil;
 import com.mw.sdk.MWBaseWebActivity;
 import com.mw.sdk.R;
-import com.mw.sdk.ads.EventConstant;
+import com.mw.sdk.constant.EventConstant;
 import com.mw.sdk.ads.SdkEventLogger;
 import com.mw.sdk.constant.ApiRequestMethod;
-import com.mw.sdk.constant.RequestCode;
-import com.mw.sdk.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
-import com.mw.sdk.pay.gp.bean.res.TogglePayRes;
-import com.mw.sdk.pay.gp.util.PayHelper;
+import com.mw.sdk.bean.req.PayCreateOrderReqBean;
+import com.mw.sdk.bean.res.TogglePayRes;
+import com.mw.sdk.utils.PayHelper;
 import com.mw.sdk.utils.DataManager;
-import com.mw.sdk.login.execute.BaseLoginRequestTask;
-import com.mw.sdk.login.model.request.AccountBindInGameRequestBean;
+import com.mw.sdk.api.task.BaseLoginRequestTask;
+import com.mw.sdk.bean.req.AccountBindInGameRequestBean;
 import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.utils.DialogUtil;
 
@@ -364,7 +362,7 @@ public class Request {
     }
 
 
-    public static void togglePayRequest(Context context, GooglePayCreateOrderIdReqBean checkPayTypeReqBean, SFCallBack<TogglePayRes> sfCallBack) {
+    public static void togglePayRequest(Context context, PayCreateOrderReqBean checkPayTypeReqBean, SFCallBack<TogglePayRes> sfCallBack) {
 
         checkPayTypeReqBean.setRequestMethod(ApiRequestMethod.API_PAYMENT_CHANNEL);
         checkPayTypeReqBean.setRequestUrl(PayHelper.getPreferredUrl(context));

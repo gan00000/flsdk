@@ -13,11 +13,11 @@ import android.widget.TextView;
 import com.core.base.BaseWebViewClient;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
-import com.mw.base.cfg.ConfigBean;
-import com.mw.base.cfg.ResConfig;
-import com.mw.base.utils.SdkUtil;
+import com.mw.sdk.bean.res.ConfigBean;
+import com.mw.sdk.utils.ResConfig;
+import com.mw.sdk.utils.SdkUtil;
 import com.mw.sdk.R;
-import com.mw.sdk.login.constant.ViewType;
+import com.mw.sdk.constant.SLoginType;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
 
 /**

@@ -17,13 +17,13 @@ import com.core.base.utils.SPUtil;
 import com.core.base.utils.SStringUtil;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-import com.mw.base.bean.PhoneInfo;
+import com.mw.sdk.bean.PhoneInfo;
 import com.mw.base.bean.SGameLanguage;
-import com.mw.base.bean.SLoginType;
-import com.mw.base.cfg.ConfigBean;
-import com.mw.base.cfg.ResConfig;
+import com.mw.sdk.constant.SLoginType;
+import com.mw.sdk.bean.res.ConfigBean;
+import com.mw.sdk.utils.ResConfig;
 import com.mw.sdk.R;
-import com.mw.sdk.login.model.AccountModel;
+import com.mw.sdk.bean.AccountModel;
 import com.mw.sdk.login.model.response.SLoginResponse;
 
 import org.json.JSONArray;

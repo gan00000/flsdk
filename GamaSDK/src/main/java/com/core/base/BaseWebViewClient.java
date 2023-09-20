@@ -7,21 +7,17 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Build;
-import androidx.annotation.RequiresApi;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Toast;
 
-import com.core.base.utils.AppUtil;
+import androidx.annotation.RequiresApi;
+
 import com.core.base.utils.MarketUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
-
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 
 /**
  * Created by gan on 2016/12/2.

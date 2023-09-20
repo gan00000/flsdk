@@ -18,17 +18,16 @@ import com.core.base.utils.PermissionUtil;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.SignatureUtil;
 import com.core.base.utils.ToastUtils;
-import com.mw.base.utils.SdkVersionUtil;
+import com.mw.sdk.bean.req.PayCreateOrderReqBean;
 import com.mw.sdk.constant.ChannelPlatform;
 import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.login.widget.v2.SelectPayChannelLayout;
-import com.mw.sdk.pay.gp.bean.res.TogglePayRes;
+import com.mw.sdk.bean.res.TogglePayRes;
 import com.mw.sdk.utils.DataManager;
 import com.mw.sdk.pay.IPay;
 import com.mw.sdk.pay.IPayCallBack;
 import com.mw.sdk.pay.IPayFactory;
-import com.mw.sdk.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
-import com.mw.sdk.pay.gp.bean.res.BasePayBean;
+import com.mw.sdk.bean.res.BasePayBean;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -36,22 +35,20 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.play.core.review.ReviewInfo;
 import com.google.android.play.core.review.ReviewManager;
 import com.google.android.play.core.review.ReviewManagerFactory;
-import com.mw.base.bean.PhoneInfo;
-import com.mw.base.bean.SGameBaseRequestBean;
-import com.mw.base.bean.SGameLanguage;
-import com.mw.base.bean.SPayType;
-import com.mw.base.cfg.ConfigBean;
-import com.mw.base.cfg.ConfigRequest;
-import com.mw.base.cfg.ResConfig;
-import com.mw.base.utils.SdkUtil;
+import com.mw.sdk.bean.PhoneInfo;
+import com.mw.sdk.constant.SGameLanguage;
+import com.mw.sdk.constant.SPayType;
+import com.mw.sdk.bean.res.ConfigBean;
+import com.mw.sdk.api.ConfigRequest;
+import com.mw.sdk.utils.ResConfig;
+import com.mw.sdk.utils.SdkUtil;
 import com.mw.sdk.BuildConfig;
 import com.mw.sdk.R;
-import com.mw.sdk.SBaseDialog;
+import com.mw.sdk.widget.SBaseDialog;
 import com.mw.sdk.constant.ResultCode;
-import com.mw.sdk.MWBaseWebActivity;
-import com.mw.sdk.pay.MWWebPayActivity;
-import com.mw.sdk.SWebViewDialog;
-import com.mw.sdk.ads.EventConstant;
+import com.mw.sdk.MWWebPayActivity;
+import com.mw.sdk.widget.SWebViewDialog;
+import com.mw.sdk.constant.EventConstant;
 import com.mw.sdk.ads.SdkEventLogger;
 import com.mw.sdk.api.Request;
 import com.mw.sdk.callback.IPayListener;
@@ -61,8 +58,7 @@ import com.mw.sdk.login.ILogin;
 import com.mw.sdk.login.ILoginCallBack;
 import com.mw.sdk.login.widget.v2.AccountBindPhoneLayout;
 import com.mw.sdk.login.widget.v2.ThirdPlatBindAccountLayoutV2;
-import com.mw.sdk.social.share.ShareUtil;
-import com.mw.sdk.version.BaseSdkVersion;
+import com.mw.sdk.utils.ShareUtil;
 import com.thirdlib.adjust.AdjustHelper;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.huawei.HuaweiPayImpl;
@@ -726,27 +722,27 @@ public class BaseSdkImpl implements IMWSDK {
         this.cpOrderId = cpOrderId;
         this.extra = extra;
 
-        GooglePayCreateOrderIdReqBean googlePayCreateOrderIdReqBean = new GooglePayCreateOrderIdReqBean(activity);
-        googlePayCreateOrderIdReqBean.setCpOrderId(cpOrderId);
-        googlePayCreateOrderIdReqBean.setProductId(productId);
-        googlePayCreateOrderIdReqBean.setExtra(extra);
+        PayCreateOrderReqBean payCreateOrderReqBean = new PayCreateOrderReqBean(activity);
+        payCreateOrderReqBean.setCpOrderId(cpOrderId);
+        payCreateOrderReqBean.setProductId(productId);
+        payCreateOrderReqBean.setExtra(extra);
 
         String channel_platform = activity.getResources().getString(R.string.channel_platform);
 
         if(payType == SPayType.WEB || ChannelPlatform.MEOW.getChannel_platform().equals(channel_platform)) {
-            doWebPay(activity,googlePayCreateOrderIdReqBean);
+            doWebPay(activity, payCreateOrderReqBean);
         } else if(payType == SPayType.HUAWEI || ChannelPlatform.HUAWEI.getChannel_platform().equals(channel_platform)) {
-            doHuaweiPay(activity,googlePayCreateOrderIdReqBean);
+            doHuaweiPay(activity, payCreateOrderReqBean);
         } else if(payType == SPayType.QooApp || ChannelPlatform.QOOAPP.getChannel_platform().equals(channel_platform)) {
-            doQooAppPay(activity,googlePayCreateOrderIdReqBean);
+            doQooAppPay(activity, payCreateOrderReqBean);
         } else {//默认Google储值
-            checkGoogleOrWebPay(activity, googlePayCreateOrderIdReqBean);
+            checkGoogleOrWebPay(activity, payCreateOrderReqBean);
         }
     }
-    protected void doQooAppPay(Activity activity, GooglePayCreateOrderIdReqBean googlePayCreateOrderIdReqBean) {
+    protected void doQooAppPay(Activity activity, PayCreateOrderReqBean payCreateOrderReqBean) {
 
     }
-    private void doHuaweiPay(Activity activity, GooglePayCreateOrderIdReqBean googlePayCreateOrderIdReqBean) {
+    private void doHuaweiPay(Activity activity, PayCreateOrderReqBean payCreateOrderReqBean) {
 
         if (huaweiPay == null){
             huaweiPay = new HuaweiPayImpl(activity);
@@ -776,10 +772,10 @@ public class BaseSdkImpl implements IMWSDK {
                 }
             });
         }
-        huaweiPay.startPay(activity, googlePayCreateOrderIdReqBean);
+        huaweiPay.startPay(activity, payCreateOrderReqBean);
     }
 
-    private void checkGoogleOrWebPay(Activity activity, GooglePayCreateOrderIdReqBean googlePayCreateOrderIdReqBean) {
+    private void checkGoogleOrWebPay(Activity activity, PayCreateOrderReqBean payCreateOrderReqBean) {
 
         ConfigBean configBean = SdkUtil.getSdkCfg(activity);
         if (configBean != null) {
@@ -787,10 +783,10 @@ public class BaseSdkImpl implements IMWSDK {
 //            versionData.setTogglePay(true);//test
             if (versionData != null && versionData.isTogglePay()){//检查是否需要切换支付，总开关
 
-                GooglePayCreateOrderIdReqBean checkPayTypeReqBean = new GooglePayCreateOrderIdReqBean(activity);
-                checkPayTypeReqBean.setCpOrderId(googlePayCreateOrderIdReqBean.getCpOrderId());
-                checkPayTypeReqBean.setProductId(googlePayCreateOrderIdReqBean.getProductId());
-                checkPayTypeReqBean.setExtra(googlePayCreateOrderIdReqBean.getExtra());
+                PayCreateOrderReqBean checkPayTypeReqBean = new PayCreateOrderReqBean(activity);
+                checkPayTypeReqBean.setCpOrderId(payCreateOrderReqBean.getCpOrderId());
+                checkPayTypeReqBean.setProductId(payCreateOrderReqBean.getProductId());
+                checkPayTypeReqBean.setExtra(payCreateOrderReqBean.getExtra());
 
                 Request.togglePayRequest(activity, checkPayTypeReqBean, new SFCallBack<TogglePayRes>() {
                     @Override
@@ -801,7 +797,7 @@ public class BaseSdkImpl implements IMWSDK {
                         if (result != null && result.isRequestSuccess() && result.getData() != null && result.getData().isTogglePay()){
 
                             if (result.getData().isHideSelectChannel()) {//是否显示询问用户
-                                doWebPay(activity,googlePayCreateOrderIdReqBean);
+                                doWebPay(activity, payCreateOrderReqBean);
                             }else {//默认弹出显示询问用户
 
                                 if (commonDialog != null){
@@ -813,7 +809,7 @@ public class BaseSdkImpl implements IMWSDK {
                                 selectPayChannelLayout.setSfCallBack(new SFCallBack() {
                                     @Override
                                     public void success(Object result, String msg) {//google
-                                        doGooglePay(activity, googlePayCreateOrderIdReqBean);
+                                        doGooglePay(activity, payCreateOrderReqBean);
                                         if (commonDialog != null){
                                             commonDialog.dismiss();
                                         }
@@ -821,7 +817,7 @@ public class BaseSdkImpl implements IMWSDK {
 
                                     @Override
                                     public void fail(Object result, String msg) {//第三方
-                                        doWebPay(activity,googlePayCreateOrderIdReqBean);
+                                        doWebPay(activity, payCreateOrderReqBean);
                                         if (commonDialog != null){
                                             commonDialog.dismiss();
                                         }
@@ -832,21 +828,21 @@ public class BaseSdkImpl implements IMWSDK {
                             }
 
                         }else {
-                            doGooglePay(activity, googlePayCreateOrderIdReqBean);
+                            doGooglePay(activity, payCreateOrderReqBean);
                         }
                     }
 
                     @Override
                     public void fail(TogglePayRes result, String msg) {
-                        doGooglePay(activity, googlePayCreateOrderIdReqBean);
+                        doGooglePay(activity, payCreateOrderReqBean);
                     }
                 });
                 return;
             }
         }
-        doGooglePay(activity, googlePayCreateOrderIdReqBean);
+        doGooglePay(activity, payCreateOrderReqBean);
     }
-    private void doGooglePay(Activity activity, GooglePayCreateOrderIdReqBean googlePayCreateOrderIdReqBean) {
+    private void doGooglePay(Activity activity, PayCreateOrderReqBean payCreateOrderReqBean) {
 
         //设置Google储值的回调
         iPay.setIPayCallBack(new IPayCallBack() {
@@ -880,7 +876,7 @@ public class BaseSdkImpl implements IMWSDK {
             }
         });
 
-        iPay.startPay(activity, googlePayCreateOrderIdReqBean);
+        iPay.startPay(activity, payCreateOrderReqBean);
     }
 
     public void requestStoreReview(Activity activity, SFCallBack sfCallBack){
@@ -1095,7 +1091,7 @@ public class BaseSdkImpl implements IMWSDK {
         });
     }
 
-    private void doWebPay(Activity activity, GooglePayCreateOrderIdReqBean bean) {
+    private void doWebPay(Activity activity, PayCreateOrderReqBean bean) {
 
         String payThirdUrl = ResConfig.getPayPreferredUrl(activity) + activity.getResources().getString(R.string.api_pay_web_payment);//"api/web/payment.page";
         bean.setCompleteUrl(payThirdUrl);

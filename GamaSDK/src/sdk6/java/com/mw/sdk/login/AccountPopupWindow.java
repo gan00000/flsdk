@@ -14,10 +14,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.mw.base.bean.SLoginType;
-import com.mw.base.utils.SdkUtil;
 import com.mw.sdk.R;
-import com.mw.sdk.login.model.AccountModel;
+import com.mw.sdk.bean.AccountModel;
+import com.mw.sdk.constant.SLoginType;
+import com.mw.sdk.utils.SdkUtil;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 

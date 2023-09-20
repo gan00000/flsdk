@@ -11,11 +11,11 @@ import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.mw.base.cfg.ConfigBean;
-import com.mw.base.utils.SdkUtil;
+import com.mw.sdk.bean.res.ConfigBean;
+import com.mw.sdk.utils.SdkUtil;
 import com.mw.sdk.login.SLoginDialogV2;
-import com.mw.sdk.login.constant.ViewType;
-import com.mw.sdk.login.model.AccountModel;
+import com.mw.sdk.constant.SLoginType;
+import com.mw.sdk.bean.AccountModel;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.mw.sdk.R;
 

@@ -5,7 +5,7 @@ import android.content.Context;
 
 import com.core.base.callback.IGameLifeCycle;
 import com.mw.sdk.out.ISdkCallBack;
-import com.mw.sdk.pay.gp.bean.req.PayReqBean;
+import com.mw.sdk.bean.req.PayReqBean;
 
 /**
  * Created by gan on 2017/2/23.

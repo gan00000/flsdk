@@ -1,7 +1,7 @@
 package com.mw.sdk.pay;
 
 import com.core.base.callback.ISCallBack;
-import com.mw.sdk.pay.gp.bean.res.BasePayBean;
+import com.mw.sdk.bean.res.BasePayBean;
 
 /**
  * Created by gan on 2017/2/23.

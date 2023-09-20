@@ -1,6 +1,6 @@
 package com.mw.sdk.login;
 
-import com.mw.sdk.login.constant.ViewType;
+import com.mw.sdk.constant.SLoginType;
 import com.mw.sdk.login.model.response.SLoginResponse;
 
 public class QooAppLoginView implements LoginContract.ILoginView{

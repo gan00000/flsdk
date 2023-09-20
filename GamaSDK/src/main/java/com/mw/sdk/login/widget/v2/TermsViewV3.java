@@ -11,8 +11,8 @@
 //import android.widget.TextView;
 //
 //import com.core.base.BaseWebViewClient;
-//import com.mw.base.cfg.ResConfig;
-//import com.mw.sdk.login.constant.ViewType;
+//import com.mw.sdk.utils.ResConfig;
+//import com.mw.sdk.constant.ViewType;
 //import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
 //import com.mw.sdk.R;
 //

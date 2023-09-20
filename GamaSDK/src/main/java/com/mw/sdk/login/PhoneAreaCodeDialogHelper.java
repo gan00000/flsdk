@@ -4,8 +4,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 
-import com.mw.base.bean.PhoneInfo;
-import com.mw.base.utils.SdkUtil;
+import com.mw.sdk.bean.PhoneInfo;
+import com.mw.sdk.utils.SdkUtil;
 
 import java.util.List;
 

@@ -11,8 +11,8 @@ import android.widget.TextView;
 
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
-import com.mw.base.utils.SdkUtil;
-import com.mw.sdk.SBaseRelativeLayout;
+import com.mw.sdk.utils.SdkUtil;
+import com.mw.sdk.widget.SBaseRelativeLayout;
 import com.mw.sdk.R;
 import com.mw.sdk.login.widget.SDKInputEditTextView;
 import com.mw.sdk.login.widget.SDKInputType;

@@ -13,12 +13,12 @@
 //import android.widget.PopupWindow;
 //
 //import com.core.base.utils.PL;
-//import com.mw.base.bean.SLoginType;
-//import com.mw.base.cfg.ConfigBean;
-//import com.mw.base.utils.SdkUtil;
+//import com.mw.sdk.constant.SLoginType;
+//import com.mw.sdk.bean.res.ConfigBean;
+//import com.mw.sdk.utils.SdkUtil;
 //import com.mw.sdk.login.AccountPopupWindow;
-//import com.mw.sdk.login.constant.ViewType;
-//import com.mw.sdk.login.model.AccountModel;
+//import com.mw.sdk.constant.ViewType;
+//import com.mw.sdk.bean.AccountModel;
 //import com.mw.sdk.login.widget.SDKInputEditTextView;
 //import com.mw.sdk.login.widget.SDKInputType;
 //import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;

@@ -7,10 +7,10 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 
-import com.mw.base.cfg.ConfigBean;
-import com.mw.base.utils.SdkUtil;
+import com.mw.sdk.bean.res.ConfigBean;
+import com.mw.sdk.utils.SdkUtil;
 import com.mw.sdk.R;
-import com.mw.sdk.login.constant.ViewType;
+import com.mw.sdk.constant.SLoginType;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
 
 /**

@@ -11,11 +11,11 @@ import android.widget.TextView;
 
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
-import com.mw.base.utils.SdkUtil;
 import com.mw.sdk.R;
 import com.mw.sdk.login.widget.SDKInputEditTextView;
 import com.mw.sdk.login.widget.SDKInputType;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
+import com.mw.sdk.utils.SdkUtil;
 
 
 public class AccountChangePwdLayoutV2 extends SLoginBaseRelativeLayout implements View.OnClickListener {

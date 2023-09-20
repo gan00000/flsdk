@@ -11,14 +11,14 @@ import com.core.base.utils.ToastUtils;
 import com.mw.sdk.pay.IPay;
 import com.mw.sdk.pay.IPayCallBack;
 import com.mw.sdk.pay.IPayFactory;
-import com.mw.sdk.pay.gp.bean.req.GooglePayCreateOrderIdReqBean;
+import com.mw.sdk.pay.gp.bean.req.PayCreateOrderReqBean;
 import com.mw.sdk.pay.gp.bean.req.WebPayReqBean;
 import com.mw.sdk.pay.gp.bean.res.BasePayBean;
-import com.mw.sdk.pay.gp.util.PayHelper;
-import com.mw.base.bean.SPayType;
-import com.mw.base.cfg.ResConfig;
+import com.mw.sdk.utils.PayHelper;
+import com.mw.sdk.constant.SPayType;
+import com.mw.sdk.utils.ResConfig;
 import com.mw.sdk.R;
-import com.mw.sdk.SWebViewDialog;
+import com.mw.sdk.widget.SWebViewDialog;
 import com.mw.sdk.ads.SdkEventLogger;
 import com.mw.sdk.callback.IPayListener;
 import com.mw.sdk.constant.GsSdkImplConstant;
@@ -63,7 +63,7 @@ public class SdkImpl {
         super.startPay(activity, payType, cpOrderId, productId, extra,listener);
         if (payType == SPayType.GOOGLE) {
 //            googlePay(activity, cpOrderId, productId, extra);
-            GooglePayCreateOrderIdReqBean googlePayCreateOrderIdReqBean = new GooglePayCreateOrderIdReqBean(activity);
+            PayCreateOrderReqBean googlePayCreateOrderIdReqBean = new PayCreateOrderReqBean(activity);
             googlePayCreateOrderIdReqBean.setCpOrderId(cpOrderId);
             googlePayCreateOrderIdReqBean.setProductId(productId);
             googlePayCreateOrderIdReqBean.setExtra(extra);

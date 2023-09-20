@@ -7,13 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.core.base.BaseWebViewClient;
-import com.core.base.utils.PL;
-import com.mw.base.cfg.ResConfig;
-import com.mw.base.widget.SWebView;
 import com.mw.sdk.R;
-import com.mw.sdk.SWebViewLayout;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.mw.sdk.out.ISdkCallBack;
+import com.mw.sdk.widget.SWebView;
+import com.mw.sdk.widget.SWebViewLayout;
 
 /**
  * Created by GanYuanrong on 2017/2/6.

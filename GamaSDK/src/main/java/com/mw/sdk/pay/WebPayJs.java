@@ -1,12 +1,10 @@
 package com.mw.sdk.pay;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.webkit.JavascriptInterface;
 
 import com.core.base.utils.PL;
-import com.mw.base.bean.SPayType;
-import com.mw.sdk.out.BaseSdkImpl;
+import com.mw.sdk.MWWebPayActivity;
 
 public class WebPayJs {
 

@@ -2,7 +2,6 @@ package com.mw.sdk.pay;
 
 import android.content.Context;
 
-import com.mw.base.bean.SPayType;
 import com.mw.base.utils.SdkVersionUtil;
 import com.mw.sdk.R;
 import com.mw.sdk.constant.ChannelPlatform;

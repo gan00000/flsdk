@@ -5,14 +5,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 
 import com.core.base.utils.PL;
-import com.core.base.utils.SStringUtil;
-import com.facebook.internal.CallbackManagerImpl;
-import com.mw.base.bean.SLoginType;
-import com.mw.base.cfg.ConfigBean;
-import com.mw.base.utils.SdkUtil;
+import com.mw.sdk.bean.res.ConfigBean;
+import com.mw.sdk.utils.SdkUtil;
 import com.mw.sdk.R;
-import com.mw.sdk.SBaseDialog;
-import com.mw.sdk.SWebViewDialog;
+import com.mw.sdk.widget.SBaseDialog;
+import com.mw.sdk.widget.SWebViewDialog;
 import com.mw.sdk.constant.SdkInnerVersion;
 import com.mw.sdk.login.widget.v2.NoticeView;
 import com.mw.sdk.out.ISdkCallBack;

@@ -12,13 +12,13 @@ import android.widget.ImageView;
 
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.ToastUtils;
-import com.mw.base.bean.SLoginType;
-import com.mw.sdk.SBaseRelativeLayout;
-import com.mw.base.utils.SdkUtil;
+import com.mw.sdk.constant.SLoginType;
+import com.mw.sdk.widget.SBaseRelativeLayout;
+import com.mw.sdk.utils.SdkUtil;
 import com.mw.sdk.R;
 import com.mw.sdk.api.Request;
-import com.mw.sdk.login.constant.BindType;
-import com.mw.sdk.login.model.AccountModel;
+import com.mw.sdk.constant.BindType;
+import com.mw.sdk.bean.AccountModel;
 import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.login.widget.SDKInputEditTextView;
 import com.mw.sdk.login.widget.SDKInputType;

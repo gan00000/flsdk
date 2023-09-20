@@ -8,10 +8,10 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 
 import com.huawei.hms.support.hwid.ui.HuaweiIdAuthButton;
-import com.mw.base.cfg.ConfigBean;
-import com.mw.base.utils.SdkUtil;
-import com.mw.sdk.SBaseDialog;
-import com.mw.sdk.login.constant.ViewType;
+import com.mw.sdk.bean.res.ConfigBean;
+import com.mw.sdk.utils.SdkUtil;
+import com.mw.sdk.widget.SBaseDialog;
+import com.mw.sdk.constant.SLoginType;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.mw.sdk.R;
 import com.mw.sdk.out.ISdkCallBack;
