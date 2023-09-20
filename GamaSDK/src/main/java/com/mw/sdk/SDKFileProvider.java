@@ -1,4 +1,4 @@
-package com.core.base.fileprovider;
+package com.mw.sdk;
 
 import androidx.core.content.FileProvider;
 

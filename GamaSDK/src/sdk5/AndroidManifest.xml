@@ -145,7 +145,7 @@
 
         <provider
             android:authorities="${applicationId}.MWSDKProvider"
-            android:name="com.core.base.fileprovider.SDKFileProvider"
+            android:name="com.mw.sdk.SDKFileProvider"
             android:exported="false"
             android:grantUriPermissions="true">
 
