@@ -37,6 +37,7 @@ import com.mw.sdk.pay.IPayCallBack;
 import com.mw.sdk.utils.PayHelper;
 import com.mw.sdk.utils.SdkUtil;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -70,6 +71,7 @@ public class OnestorePayImpl implements IPay, PurchaseManager.Callback {
     private PayCreateOrderReqBean createOrderIdReqBean;
 
     private Activity mActivity;
+    private Context mContext;
 
     private IPayCallBack iPayCallBack;
     /**
@@ -201,6 +203,7 @@ public class OnestorePayImpl implements IPay, PurchaseManager.Callback {
             return;
         }
         this.mActivity = activity;
+        mContext = activity.getApplicationContext();
         if (payReqBean == null) {
             PL.w("payReqBean is null");
             return;
@@ -239,6 +242,7 @@ public class OnestorePayImpl implements IPay, PurchaseManager.Callback {
         if (this.createOrderIdReqBean.isInitOk()) {
             //开始储值,先查询有没有未消耗的商品
 //            onePayInActivity(activity);
+            loadingDialog.showProgressDialog();
             purchaseManager.queryPurchasesAsync(true, PurchaseClient.ProductType.INAPP);
 
         } else {
@@ -257,6 +261,7 @@ public class OnestorePayImpl implements IPay, PurchaseManager.Callback {
             return;
         }
         PL.i("startQueryPurchase onQueryPurchasesResponse");
+        mContext = mContext.getApplicationContext();
         purchaseManager.queryPurchasesAsync(false, PurchaseClient.ProductType.INAPP);
 
     }
@@ -268,7 +273,7 @@ public class OnestorePayImpl implements IPay, PurchaseManager.Callback {
     @Override
     public void onCreate(Activity activity) {
         PL.i( "onCreate");
-
+        mContext = activity.getApplicationContext();
         if (purchaseManager == null){
             purchaseManager = new PurchaseManager(activity.getApplicationContext(), this);
         }
@@ -313,7 +318,7 @@ public class OnestorePayImpl implements IPay, PurchaseManager.Callback {
      */
     private void onePayInActivity(Activity activity) {
 
-        loadingDialog.showProgressDialog();
+//        loadingDialog.showProgressDialog();
 
         List productList = new ArrayList<>();
         productList.add(this.createOrderIdReqBean.getProductId());
@@ -321,7 +326,6 @@ public class OnestorePayImpl implements IPay, PurchaseManager.Callback {
             @Override
             public void onProductDetailsResponse(IapResult iapResult, List<ProductDetail> productDetailList) {
 
-                loadingDialog.dismissProgressDialog();
                 if (iapResult != null && iapResult.isSuccess() && productDetailList != null && !productDetailList.isEmpty()){
                     ProductDetail productDetail = productDetailList.get(0);
 
@@ -350,6 +354,10 @@ public class OnestorePayImpl implements IPay, PurchaseManager.Callback {
                                     .build();
 
                             purchaseManager.launchPurchaseFlow(activity, purchaseFlowParams);
+
+                            if (loadingDialog != null) {
+                                loadingDialog.dismissProgressDialog();
+                            }
                         }
 
                         @Override
@@ -398,7 +406,8 @@ public class OnestorePayImpl implements IPay, PurchaseManager.Callback {
     public void onPurchaseSucceed(@NonNull List<? extends PurchaseData> purchases) {
         PL.i("onPurchaseSucceed");
         if (purchases == null || purchases.isEmpty()){
-            PL.i("onQueryPurchaseSucceed empty");
+            PL.i("onPurchaseSucceed empty");
+            callbackFail("PurchaseData empty");
             return;
         }
         for (PurchaseData purchaseData: purchases) {
@@ -411,6 +420,18 @@ public class OnestorePayImpl implements IPay, PurchaseManager.Callback {
 
             exchangeReqBean.setGoogleOrderId(purchaseData.getOrderId());
             exchangeReqBean.setRequestMethod(ApiRequestMethod.API_PAYMENT_ONESTORE);
+
+            try {
+                JSONObject payLoadJsonObject = new JSONObject(purchaseData.getDeveloperPayload());
+                String userId = payLoadJsonObject.optString("userId");
+                String orderId = payLoadJsonObject.optString("orderId");
+                String roleId = payLoadJsonObject.optString("roleId");
+                exchangeReqBean.setUserId(userId);
+                exchangeReqBean.setOrderId(orderId);
+                exchangeReqBean.setRoleId(roleId);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
             PayApi.requestCommonPaySendStone(mActivity, exchangeReqBean, new SFCallBack<GPExchangeRes>() {
                 @Override
@@ -444,6 +465,7 @@ public class OnestorePayImpl implements IPay, PurchaseManager.Callback {
     @Override
     public void onQueryPurchaseSucceed(@NonNull List<? extends PurchaseData> purchases) {//默默查询是使用
         PL.i("onQueryPurchaseSucceed");
+
         if (purchases == null || purchases.isEmpty()){
             PL.i("onQueryPurchaseSucceed empty");
             return;
@@ -451,15 +473,26 @@ public class OnestorePayImpl implements IPay, PurchaseManager.Callback {
         for (PurchaseData purchaseData: purchases) {
             //补发币
 
-            PayExchangeReqBean exchangeReqBean = new PayExchangeReqBean(mActivity);
+            PayExchangeReqBean exchangeReqBean = new PayExchangeReqBean(this.mContext);
             exchangeReqBean.setDataSignature(purchaseData.getSignature());
             exchangeReqBean.setPurchaseData(purchaseData.getOriginalJson());
             exchangeReqBean.setReissue("yes");
 
             exchangeReqBean.setGoogleOrderId(purchaseData.getOrderId());
             exchangeReqBean.setRequestMethod(ApiRequestMethod.API_PAYMENT_ONESTORE);
+            try {
+                JSONObject payLoadJsonObject = new JSONObject(purchaseData.getDeveloperPayload());
+                String userId = payLoadJsonObject.optString("userId");
+                String orderId = payLoadJsonObject.optString("orderId");
+                String roleId = payLoadJsonObject.optString("roleId");
+                exchangeReqBean.setUserId(userId);
+                exchangeReqBean.setOrderId(orderId);
+                exchangeReqBean.setRoleId(roleId);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
-            PayApi.requestCommonPaySendStone(mActivity, exchangeReqBean, new SFCallBack<GPExchangeRes>() {
+            PayApi.requestCommonPaySendStone(this.mContext, exchangeReqBean, new SFCallBack<GPExchangeRes>() {
                 @Override
                 public void success(GPExchangeRes result, String msg) {
                     PL.i("startQueryPurchase requestSendStone success => " + msg);
@@ -503,6 +536,17 @@ public class OnestorePayImpl implements IPay, PurchaseManager.Callback {
 
             exchangeReqBean.setGoogleOrderId(purchaseData.getOrderId());
             exchangeReqBean.setRequestMethod(ApiRequestMethod.API_PAYMENT_ONESTORE);
+            try {
+                JSONObject payLoadJsonObject = new JSONObject(purchaseData.getDeveloperPayload());
+                String userId = payLoadJsonObject.optString("userId");
+                String orderId = payLoadJsonObject.optString("orderId");
+                String roleId = payLoadJsonObject.optString("roleId");
+                exchangeReqBean.setUserId(userId);
+                exchangeReqBean.setOrderId(orderId);
+                exchangeReqBean.setRoleId(roleId);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
             PayApi.requestCommonPaySendStone(mActivity, exchangeReqBean, new SFCallBack<GPExchangeRes>() {
                 @Override
@@ -555,6 +599,10 @@ public class OnestorePayImpl implements IPay, PurchaseManager.Callback {
                     ToastUtils.toast(mActivity,"Please start buying again");
                 }
             });
+
+            if (loadingDialog != null) {
+                loadingDialog.dismissProgressDialog();
+            }
         }
     }
 
@@ -571,6 +619,9 @@ public class OnestorePayImpl implements IPay, PurchaseManager.Callback {
                 }
             });
 
+            if (loadingDialog != null) {
+                loadingDialog.dismissProgressDialog();
+            }
         }
     }
 
@@ -579,6 +630,7 @@ public class OnestorePayImpl implements IPay, PurchaseManager.Callback {
         PL.i("onError:" + message);
         if (mActivity != null && this.createOrderIdReqBean != null){//此时用户正在购买
             callbackFail("" + message);
+
         }
     }
 }
