@@ -5,6 +5,7 @@ public enum ChannelPlatform {
     QOOAPP("qooapp"),
     HUAWEI("huawei"),
     GOOGLE("google"),
+    ONESTORE("onestore"),
     MEOW("meow");
 
     private String channel_platform;

@@ -29,7 +29,7 @@ public class GooglePayActivity2 extends SBaseActivity {
 
 		activity = this;
 
-		iPay = IPayFactory.create(IPayFactory.PAY_GOOGLE);
+		iPay = IPayFactory.create(activity);
 		iPay.onCreate(this);
 		//设置Google储值的回调
 //		iPay.setIPayCallBack(new IPayCallBack() {

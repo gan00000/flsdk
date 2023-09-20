@@ -74,7 +74,7 @@ public class MWWebPayActivity extends MWBaseWebActivity {
             sWebView.loadUrl(webUrl);
 //            sWebView.loadUrl("https://play.google.com/store/apps/details?id=tw.com.iwplay.tlbbhk&hl=zh-CN");
         }
-        iPay = IPayFactory.create(IPayFactory.PAY_GOOGLE);
+        iPay = IPayFactory.create(this);
         iPay.onCreate(this);
     }
 

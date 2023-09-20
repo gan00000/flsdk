@@ -344,7 +344,7 @@ android {
             resValue "string", "fb_login_protocol_scheme", "fb812990310317949"
             resValue "string", "facebook_app_name", "krDemo"
             resValue "string", "line_channelId", ""
-            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow"
+            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
             resValue "string", "adjust_app_token", ""
 
             //每个游戏的demo设置 test

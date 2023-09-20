@@ -18,6 +18,7 @@ import com.core.base.utils.PermissionUtil;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.SignatureUtil;
 import com.core.base.utils.ToastUtils;
+import com.mw.base.utils.SdkVersionUtil;
 import com.mw.sdk.constant.ChannelPlatform;
 import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.login.widget.v2.SelectPayChannelLayout;
@@ -61,6 +62,7 @@ import com.mw.sdk.login.ILoginCallBack;
 import com.mw.sdk.login.widget.v2.AccountBindPhoneLayout;
 import com.mw.sdk.login.widget.v2.ThirdPlatBindAccountLayoutV2;
 import com.mw.sdk.social.share.ShareUtil;
+import com.mw.sdk.version.BaseSdkVersion;
 import com.thirdlib.adjust.AdjustHelper;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.huawei.HuaweiPayImpl;
@@ -86,6 +88,7 @@ public class BaseSdkImpl implements IMWSDK {
     protected SBaseDialog commonDialog;
 
     protected IPay iPay;
+    protected IPay iPayOneStore;
     protected IPayListener iPayListener;
     protected Activity activity;
 
@@ -243,7 +246,7 @@ public class BaseSdkImpl implements IMWSDK {
         if (iLogin != null) {
             iLogin.onCreate(activity);
         }
-        iPay = IPayFactory.create(IPayFactory.PAY_GOOGLE);
+        iPay = IPayFactory.create(activity);
         iPay.onCreate(activity);
 
     }

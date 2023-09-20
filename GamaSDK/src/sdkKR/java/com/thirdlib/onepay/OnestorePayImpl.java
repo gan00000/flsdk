@@ -49,7 +49,7 @@ import kotlin.jvm.functions.Function0;
  * Created by gan on 2017/2/23.
  */
 
-public class PayOnestoreManger implements IPay, PurchaseManager.Callback {
+public class OnestorePayImpl implements IPay, PurchaseManager.Callback {
 
     public static final String TAG_USER_CANCEL = "TAG_PAY_USER_CANCEL";
     private PurchaseManager purchaseManager;
@@ -410,7 +410,7 @@ public class PayOnestoreManger implements IPay, PurchaseManager.Callback {
             exchangeReqBean.setReissue("no");
 
             exchangeReqBean.setGoogleOrderId(purchaseData.getOrderId());
-            exchangeReqBean.setRequestMethod(ApiRequestMethod.API_PAYMENT_GOOGLE);
+            exchangeReqBean.setRequestMethod(ApiRequestMethod.API_PAYMENT_ONESTORE);
 
             PayApi.requestCommonPaySendStone(mActivity, exchangeReqBean, new SFCallBack<GPExchangeRes>() {
                 @Override
@@ -457,7 +457,7 @@ public class PayOnestoreManger implements IPay, PurchaseManager.Callback {
             exchangeReqBean.setReissue("yes");
 
             exchangeReqBean.setGoogleOrderId(purchaseData.getOrderId());
-            exchangeReqBean.setRequestMethod(ApiRequestMethod.API_PAYMENT_GOOGLE);
+            exchangeReqBean.setRequestMethod(ApiRequestMethod.API_PAYMENT_ONESTORE);
 
             PayApi.requestCommonPaySendStone(mActivity, exchangeReqBean, new SFCallBack<GPExchangeRes>() {
                 @Override
@@ -502,7 +502,7 @@ public class PayOnestoreManger implements IPay, PurchaseManager.Callback {
             exchangeReqBean.setReissue("yes");
 
             exchangeReqBean.setGoogleOrderId(purchaseData.getOrderId());
-            exchangeReqBean.setRequestMethod(ApiRequestMethod.API_PAYMENT_GOOGLE);
+            exchangeReqBean.setRequestMethod(ApiRequestMethod.API_PAYMENT_ONESTORE);
 
             PayApi.requestCommonPaySendStone(mActivity, exchangeReqBean, new SFCallBack<GPExchangeRes>() {
                 @Override

@@ -10,9 +10,11 @@ import com.mw.sdk.R;
 import com.mw.sdk.login.model.AccountModel;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.mw.sdk.login.widget.v2.AgeQuaLayoutV2;
+import com.mw.sdk.pay.IPay;
 import com.mw.sdk.version.BaseSdkVersion;
 import com.thirdlib.IThirdHelper;
 import com.thirdlib.never.NeverLogin;
+import com.thirdlib.onepay.OnestorePayImpl;
 
 /**
  * Created by gan on 2017/2/7.
@@ -67,5 +69,10 @@ public class SdkVersionUtil extends BaseSdkVersion {
     @Override
     public IThirdHelper newNaverHelper() {
         return new NeverLogin();
+    }
+
+    @Override
+    public IPay newOneStorePay() {
+        return new OnestorePayImpl();
     }
 }

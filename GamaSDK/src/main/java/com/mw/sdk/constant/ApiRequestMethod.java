@@ -60,6 +60,7 @@ public class ApiRequestMethod {
     public final static String API_PAYMENT_GOOGLE = "api/google/payment";
     public final static String API_PAYMENT_HW = "api/huawei/payment";
     public final static String API_PAYMENT_QOOAPP = "api/qooapp/payment";
+    public final static String API_PAYMENT_ONESTORE = "api/onestore/payment";
 
     public final static String API_PAYMENT_CHANNEL = "api/payment/channel";
 
