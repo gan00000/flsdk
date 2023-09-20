@@ -6,7 +6,7 @@ import android.webkit.JavascriptInterface;
 
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
-import com.mw.sdk.constant.EventConstant;
+import com.mw.sdk.ads.EventConstant;
 import com.mw.sdk.ads.SdkEventLogger;
 
 public class WebViewJsObj {

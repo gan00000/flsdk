@@ -1,4 +1,4 @@
-package com.mw.sdk.constant;
+package com.mw.base.bean;
 
 /**
  * Created by gan on 2017/2/15.

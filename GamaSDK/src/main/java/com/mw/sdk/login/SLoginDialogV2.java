@@ -15,7 +15,7 @@ import com.mw.sdk.utils.Localization;
 import com.mw.base.utils.SdkVersionUtil;
 import com.mw.sdk.R;
 import com.mw.sdk.widget.SBaseDialog;
-import com.mw.sdk.constant.EventConstant;
+import com.mw.sdk.ads.EventConstant;
 import com.mw.sdk.ads.SdkEventLogger;
 import com.mw.sdk.constant.BindType;
 import com.mw.sdk.constant.ViewType;

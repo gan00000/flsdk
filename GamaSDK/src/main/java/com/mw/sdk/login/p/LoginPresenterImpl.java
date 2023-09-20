@@ -22,7 +22,7 @@ import com.mw.sdk.bean.res.ConfigBean;
 import com.mw.sdk.utils.ResConfig;
 import com.mw.sdk.utils.SdkUtil;
 import com.mw.base.utils.SdkVersionUtil;
-import com.mw.sdk.constant.EventConstant;
+import com.mw.sdk.ads.EventConstant;
 import com.mw.sdk.utils.DataManager;
 import com.mw.sdk.constant.BindType;
 import com.mw.sdk.constant.ViewType;

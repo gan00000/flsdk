@@ -1,4 +1,4 @@
-package com.mw.sdk.constant;
+package com.mw.sdk.ads;
 
 public class EventConstant {
 

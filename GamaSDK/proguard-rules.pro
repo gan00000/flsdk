@@ -29,11 +29,11 @@
 -keep public class com.mw.sdk.login.model.response.SLoginResponse$Data { *; }
 -keep public class com.mw.sdk.login.ILoginCallBack { *; }
 -keep public class com.mw.sdk.callback.IPayListener { *; }
--keep public class com.mw.sdk.constant.SPayType { *; }
+-keep public class com.mw.base.bean.SPayType { *; }
 -keep public class com.core.base.callback.SFCallBack { *; }
 -keep public class com.mw.sdk.pay.WebPayJs { *; }
 -keep public class com.core.base.utils.PL { *; }
--keep public class com.mw.sdk.constant.EventConstant { *; }
+-keep public class com.mw.sdk.ads.EventConstant { *; }
 -keep public class com.core.base.bean.BaseResponseModel { *; }
 -keep public class com.core.base.bean.AbsReqeustBean { *; }
 -keep public class com.mw.sdk.bean.res.GPExchangeRes$Data { *; }
@@ -48,6 +48,8 @@
 -keep public class com.mw.sdk.bean.res.TogglePayRes { *; }
 -keep public class com.mw.sdk.bean.res.TogglePayRes$Data { *; }
 -keep public class **$Data { *; }
+
+-dontwarn java.lang.invoke.StringConcatFactory
 
 # -keep public interface mypackage.MyInterface
 # -keep public class * implements mypackage.MyInterface

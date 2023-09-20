@@ -30,7 +30,6 @@ import com.mw.sdk.utils.SdkUtil;
 import com.mw.sdk.BuildConfig;
 import com.mw.sdk.R;
 import com.mw.sdk.api.Request;
-import com.mw.sdk.constant.EventConstant;
 import com.mw.sdk.login.model.response.SLoginResponse;
 import com.thirdlib.adjust.AdjustHelper;
 import com.thirdlib.facebook.SFacebookProxy;

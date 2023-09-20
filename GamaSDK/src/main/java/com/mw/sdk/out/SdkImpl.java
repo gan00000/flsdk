@@ -15,7 +15,7 @@ import com.mw.sdk.pay.gp.bean.req.PayCreateOrderReqBean;
 import com.mw.sdk.pay.gp.bean.req.WebPayReqBean;
 import com.mw.sdk.pay.gp.bean.res.BasePayBean;
 import com.mw.sdk.utils.PayHelper;
-import com.mw.sdk.constant.SPayType;
+import com.mw.base.bean.SPayType;
 import com.mw.sdk.utils.ResConfig;
 import com.mw.sdk.R;
 import com.mw.sdk.widget.SWebViewDialog;

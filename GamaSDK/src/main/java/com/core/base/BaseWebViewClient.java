@@ -42,6 +42,7 @@ public class BaseWebViewClient extends WebViewClient {
      * @deprecated
      */
     @Override
+    @Deprecated
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
         return overrideUrlLoading(view,url);
 //        return true;

@@ -18,7 +18,7 @@ import com.mw.sdk.utils.ResConfig;
 import com.mw.sdk.utils.SdkUtil;
 import com.mw.sdk.MWBaseWebActivity;
 import com.mw.sdk.R;
-import com.mw.sdk.constant.EventConstant;
+import com.mw.sdk.ads.EventConstant;
 import com.mw.sdk.ads.SdkEventLogger;
 import com.mw.sdk.constant.ApiRequestMethod;
 import com.mw.sdk.bean.req.PayCreateOrderReqBean;
