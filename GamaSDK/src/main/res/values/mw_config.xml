@@ -1,5 +1,11 @@
 <resources>
 
+    <string name="sdk_game_code"></string>
+    <string name="sdk_app_key"></string>
+    <string name="sdk_more_language"></string>
+    <string name="sdk_default_server_language"></string>
+    <string name="sdk_appflyer_dev_key"></string>
+
     <!-- Facebook应用名 -->
     <string name="facebook_app_name"></string>
     <!-- Facebook应用ID -->
@@ -12,12 +18,12 @@
     <!-- Google游戏服务ID -->
     <string name="google_app_id"></string>
 
-    <!-- TapDB appid -->
-    <string name="tapdb_appId"></string>
-    <!-- TapDB channel -->
-    <string name="tapdb_channel"></string>
-    <!-- TapDB gameVersion -->
-    <string name="tapdb_gameVersion"></string>
+<!--    &lt;!&ndash; TapDB appid &ndash;&gt;-->
+<!--    <string name="tapdb_appId"></string>-->
+<!--    &lt;!&ndash; TapDB channel &ndash;&gt;-->
+<!--    <string name="tapdb_channel"></string>-->
+<!--    &lt;!&ndash; TapDB gameVersion &ndash;&gt;-->
+<!--    <string name="tapdb_gameVersion"></string>-->
 
     <string name="line_channelId"></string>
 

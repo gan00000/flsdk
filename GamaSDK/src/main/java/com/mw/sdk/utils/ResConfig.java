@@ -6,13 +6,12 @@ import com.core.base.utils.FileUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.ResUtil;
 import com.core.base.utils.SStringUtil;
-import com.mw.sdk.constant.SGameLanguage;
 import com.mw.sdk.R;
+import com.mw.sdk.constant.SGameLanguage;
 
 import java.util.Properties;
 
 public class ResConfig {
-    private static final String TAG = ResConfig.class.getSimpleName();
 
     //===========================================参数配置start===============================================
     //===========================================每個遊戲每個渠道都可能不一樣=======================================
@@ -22,19 +21,29 @@ public class ResConfig {
      * 获取gameCode
      */
     public static String getGameCode(Context context) {
-//        if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_GameCode())) {
-//            return GamaUtil.getSdkCfg(context).getS_GameCode();
-//        }
-//		return getResStringByName(context, "star_game_code");
+
+        String mmValue = context.getResources().getString(R.string.sdk_game_code);
+        if (SStringUtil.isNotEmpty(mmValue)){
+            return mmValue;
+        }
         return getConfigInAssetsProperties(context, "sdk_game_code");
     }
 
     public static boolean isMoreLanguage(Context context) {
+
+        String mmValue = context.getResources().getString(R.string.sdk_more_language);
+        if (SStringUtil.isNotEmpty(mmValue)){
+            return SStringUtil.isEqual("true",mmValue);
+        }
         String more = getConfigInAssetsProperties(context, "sdk_more_language");
         return SStringUtil.isEqual("true",more);
     }
 
     public static String getDefaultServerLanguage(Context context) {
+        String mmValue = context.getResources().getString(R.string.sdk_default_server_language);
+        if (SStringUtil.isNotEmpty(mmValue)){
+            return mmValue;
+        }
         return getConfigInAssetsProperties(context, "sdk_default_server_language");
     }
 
@@ -42,10 +51,19 @@ public class ResConfig {
      * 获取秘钥
      */
     public static String getAppKey(Context context) {
-//        if (GamaUtil.getSdkCfg(context) != null && !TextUtils.isEmpty(GamaUtil.getSdkCfg(context).getS_AppKey())) {
-//            return GamaUtil.getSdkCfg(context).getS_AppKey();
-//        }
+        String mmValue = context.getResources().getString(R.string.sdk_app_key);
+        if (SStringUtil.isNotEmpty(mmValue)){
+            return mmValue;
+        }
         return getConfigInAssetsProperties(context, "sdk_app_key");
+    }
+
+    public static String getAfDevKey(Context context) {
+        String mmValue = context.getResources().getString(R.string.sdk_appflyer_dev_key);
+        if (SStringUtil.isNotEmpty(mmValue)){
+            return mmValue;
+        }
+        return getConfigInAssetsProperties(context, "sdk_ads_appflyer_dev_key");
     }
 
     /**
@@ -190,45 +208,22 @@ public class ResConfig {
         return xmlSchemaContent;
     }
 
-    private static String gameConfig = "";
-
-   /* public static String getConfigInAssets(Context context, String key) {
-
-        if (SStringUtil.isEmpty(gameConfig)) {
-            gameConfig = FileUtil.readAssetsTxtFile(context, "mwsdk/game_config");
-            PL.i("gameConfig:" + gameConfig);
-        }
-        String mVaule = "";
-        if (SStringUtil.isNotEmpty(gameConfig)) {
-            mVaule = JsonUtil.getValueByKey(context, gameConfig, key, "");
-        }
-        if (SStringUtil.isEmpty(mVaule)) {
-            mVaule = getResStringByName(context, key);
-        }
-        return mVaule;
-    }*/
-
-
     private static Properties properties;
 
     /**
      * 从assets/gama/gama_gameconfig.properties中获取游戏配置信息
      */
-    public static String getConfigInAssetsProperties(Context context, String key) {
+    private static String getConfigInAssetsProperties(Context context, String key) {
 
         if (properties == null) {
             properties = FileUtil.readAssetsPropertiestFile(context, "mwsdk/gameconfig.properties");
-            PL.i(TAG, "获取游戏assets配置文件: " + (properties != null ? properties.toString() : "失败"));
+            PL.i("获取游戏assets配置文件: " + (properties != null ? properties.toString() : "失败"));
         }
         if (properties == null) {
-            PL.e(TAG, "获取游戏assets配置文件失败");
+            PL.e("获取游戏assets配置文件失败");
             return "";
         }
         return properties.getProperty(key, "");
     }
 
-//    public static String getStringWithLocal(Context context, String xmlSchemaName) {
-//        String localSchemaName = getLocalSchemaName(context, xmlSchemaName);
-//        return getResStringByName(context, localSchemaName);
-//    }
 }
