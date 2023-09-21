@@ -125,6 +125,7 @@ android {
             signingConfig signingConfigs.release_v6
         }
     }
+    flavorDimensions "1"
     productFlavors {
 
         QooApp {
@@ -135,7 +136,7 @@ android {
             targetSdkVersion 33
             versionCode 10
             versionName "1.0"
-            flavorDimensions "1"
+            dimension "1"
             resValue "string", "scheme", "gwsg"
 //            resValue "string", "facebook_app_id", "1362551254507553"
 //            resValue "string", "facebook_client_token", "0a8e2080cba4d5aa1fe9d9dd65c04e58"
@@ -158,7 +159,7 @@ android {
             targetSdkVersion 33
             versionCode 10
             versionName "1.0"
-            flavorDimensions "1"
+            dimension "1"
             resValue "string", "scheme", "mzxq"
             resValue "string", "facebook_app_id", "855035868795821"
             resValue "string", "facebook_client_token", "0872345a71b6e76c9247438a3f27b0b8"
@@ -181,7 +182,7 @@ android {
             targetSdkVersion 33
             versionCode 16
             versionName "2.3.16"
-            flavorDimensions "1"
+            dimension "1"
             resValue "string", "scheme", "wlzhs"
             resValue "string", "facebook_app_id", "1137481690478934"
             resValue "string", "facebook_client_token", "9457e9f00d7e1c0a9869c451326b15a9"
@@ -204,7 +205,7 @@ android {
             targetSdkVersion 33
             versionCode 1
             versionName "1.0"
-            flavorDimensions "1"
+            dimension "1"
             resValue "string", "scheme", "chmxt"
             resValue "string", "facebook_app_id", "656701765898240"
             resValue "string", "facebook_client_token", "bb38401adb12a4615d1a0c8dad838e61"
@@ -227,7 +228,7 @@ android {
             targetSdkVersion 33
             versionCode 10
             versionName "1.0"
-            flavorDimensions "1"
+            dimension "1"
             resValue "string", "scheme", "gwsg"
             resValue "string", "facebook_app_id", "1362551254507553"
             resValue "string", "facebook_client_token", "0a8e2080cba4d5aa1fe9d9dd65c04e58"
@@ -250,7 +251,7 @@ android {
             targetSdkVersion 33
             versionCode 10
             versionName "1.0"
-            flavorDimensions "1"
+            dimension "1"
             resValue "string", "scheme", "gwsg"
             resValue "string", "facebook_app_id", "1362551254507553"
             resValue "string", "facebook_client_token", "0a8e2080cba4d5aa1fe9d9dd65c04e58"
@@ -273,7 +274,7 @@ android {
             targetSdkVersion 33
             versionCode 10
             versionName "1.0"
-            flavorDimensions "1"
+            dimension "1"
 //            applicationId "com.wanxi.mxwvn"
 //            resValue "string", "scheme", "mxwvn"
 //            resValue "string", "facebook_app_id", "183738678011380"
@@ -310,7 +311,7 @@ android {
             targetSdkVersion 33
             versionCode 10
             versionName "1.0"
-            flavorDimensions "1"
+            dimension "1"
             resValue "string", "scheme", "sshx"
             resValue "string", "facebook_app_id", "958518928627930"
             resValue "string", "facebook_client_token", "70dee7e2899286d3b410c2af8530b899"
@@ -335,7 +336,7 @@ android {
             targetSdkVersion 33
             versionCode 10
             versionName "1.0"
-            flavorDimensions "1"
+            dimension "1"
 
             //=======================================sdk config==========================
             //base
