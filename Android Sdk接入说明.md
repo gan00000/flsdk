@@ -37,13 +37,12 @@
 		 jcenter()
     }
     dependencies {
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
         
-        classpath 'com.android.tools.build:gradle:7.2.2'
-        classpath 'com.google.gms:google-services:4.3.14'// google-services plugin
+        classpath 'com.android.tools.build:gradle:8.0.2'
+        // google-services plugin
+        classpath 'com.google.gms:google-services:4.4.0'
         // Add the Crashlytics Gradle plugin.
-        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.2'
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.9'
 
     	}
 	}
@@ -72,10 +71,10 @@
 	
 	    compileSdkVersion 33
 	
-		//使用java8编译,支持静态接口
+		//使用java 17编译
 	    compileOptions {
-	        sourceCompatibility JavaVersion.VERSION_1_8
-	        targetCompatibility JavaVersion.VERSION_1_8
+	        sourceCompatibility JavaVersion.VERSION_17
+	        targetCompatibility JavaVersion.VERSION_17
 	    }
 	
 	    defaultConfig {
@@ -88,25 +87,47 @@
 	    productFlavors {
 	
 	
-	        superand {
-	            
-	            applicationId "com.game.xxxx"
-	            minSdkVersion 21 //设置支持的最低版本系统
-	            targetSdkVersion 33  //与Google最新版本同步
-	            versionCode 2
-	            versionName "2.0"
-	            
-	            //设置参数，参数值由对接人员提供
-	            resValue "string", "scheme", "对接人员提供"
-	            resValue "string", "facebook_app_id", "对接人员提供"
-	            resValue "string", "facebook_client_token", "对接人员提供"
-	            resValue "string", "facebook_authorities", "对接人员提供"
-	            resValue "string", "fb_login_protocol_scheme", "对接人员提供"
-	            resValue "string", "line_channelId", "对接人员提供"
-	            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow"
+	        tgsw_google {
+	        
+            signingConfig signingConfigs.release_kr  //签名sdk提供
+            applicationId "com.xxx.xxx"  //包名sdk提供	
+            minSdkVersion 21
+            targetSdkVersion 33
+            versionCode 1
+            versionName "1.0."
+            flavorDimensions "1"
+
+            //=======================================sdk config==========================
+            //以下参数对接SDK的时候提供
+            //base
+            resValue "string", "sdk_game_code", "xxxxx"
+            resValue "string", "sdk_app_key", "xxxxx"
+            resValue "string", "sdk_more_language", "xxxxx"
+            resValue "string", "sdk_default_server_language", "zh_TW"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
+            resValue "string", "scheme", "xxxxx"
+            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
+            //facebook
+            resValue "string", "facebook_app_id", "xxxxx"
+            resValue "string", "facebook_client_token", "xxxxx"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider xxxxx" //启用分析
+            resValue "string", "fb_login_protocol_scheme", "fb xxxxx"
+            resValue "string", "facebook_app_name", "xxxxx" //游戏名字
+            //ad
+            resValue "string", "adjust_app_token", "xxxxx"
+            resValue "string", "sdk_appflyer_dev_key", "xxxxx"
+            //line
+            resValue "string", "line_channelId", ""
+            //naver
+            resValue "string", "naver_client_id", "xxxxx"
+            resValue "string", "naver_client_secret", "xxxxx"
+            //=======================================sdk config end==========================
 
 
-	        }
+
+            //每个游戏的demo设置 test 不需要设置
+            resValue "string", "sdk_name", "SdkDemo"
+
+        	}
 	
 	    }
 	}
@@ -182,8 +203,6 @@
 
 	```
 
-
-* 添加游戏配置文件，在您的项目中，打开 your_app | **assets下创建mwsdk目录并添加 gameconfig.propertie（该文件SDK对接人员提供）**
 
 *   添加游戏配置文件，在您的项目中，打开 your_app根目录下添加**google-services.json配置文件（该文件SDK对接人员提供）**
 

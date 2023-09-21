@@ -12,7 +12,7 @@
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
         >
-
+        <property android:name="REQUIRE_SECURE_ENV" android:value="1" />
        <!-- <activity
             android:name="com.game.sdk.demo.DoPermissionReq"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|fontScale"
