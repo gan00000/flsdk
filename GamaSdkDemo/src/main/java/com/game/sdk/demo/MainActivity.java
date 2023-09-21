@@ -28,24 +28,16 @@ import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.MarketUtil;
 import com.core.base.utils.PL;
-import com.core.base.utils.PermissionUtil;
-import com.core.base.utils.TimeUtil;
 import com.core.base.utils.ToastUtils;
 import com.mw.base.bean.SPayType;
-import com.mw.base.utils.SLog;
-import com.mw.base.utils.SdkUtil;
+import com.mw.sdk.utils.SdkUtil;
 import com.mw.sdk.callback.IPayListener;
-import com.mw.sdk.constant.RequestCode;
 import com.mw.sdk.demo.R;
 import com.mw.sdk.login.ILoginCallBack;
 import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.out.IMWSDK;
 import com.mw.sdk.out.ISdkCallBack;
 import com.mw.sdk.out.MWSdkFactory;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 public class MainActivity extends Activity {
 
@@ -72,7 +64,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         activity = this;
-        SLog.enableDebug(true);
 
         loginButton = findViewById(R.id.demo_login);
         demo_language = findViewById(R.id.demo_language);
@@ -115,7 +106,7 @@ public class MainActivity extends Activity {
 //                com.game.superand.1usd
 //                com.game.superand.2usd
 //                String skuId = "com.miaoou.6jin";
-                String skuId = "com.yuewan.tgvn.99";
+                String skuId = "com.tgswkr.koda.499";
                 mIMWSDK.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(),skuId, extra,roleId,roleName,roleLevel, vipLevel,serverCode, serverName, new IPayListener() {
 
                     @Override
