@@ -329,29 +329,33 @@ android {
 
             signingConfig signingConfigs.release_kr1
 
-            applicationId "com.tgswkr.koda"
-//            applicationId "com.tgswkrone.koda"
+//            applicationId "com.tgswkr.koda"
+            applicationId "com.tgswkrone.koda"
             minSdkVersion 21
             targetSdkVersion 33
             versionCode 10
             versionName "1.0"
             flavorDimensions "1"
 
+            //base
             resValue "string", "sdk_game_code", "tgsw"
             resValue "string", "sdk_app_key", "0990e662f62887cfc317d8a74b588691"
             resValue "string", "sdk_more_language", "true"
             resValue "string", "sdk_default_server_language", "ko_KR"
-
             resValue "string", "scheme", "tgsw"
+            resValue "string", "channel_platform", "onestore"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
+            //naver
             resValue "string", "naver_client_id", "QJErv0qFAdSfJ14QDRpA"
             resValue "string", "naver_client_secret", "IV8BGmeW14"
+            //facebook
             resValue "string", "facebook_app_id", "812990310317949"
             resValue "string", "facebook_client_token", "5d9f338ab935730c7c190cd0210c712a"
             resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider812990310317949" //启用分析
             resValue "string", "fb_login_protocol_scheme", "fb812990310317949"
             resValue "string", "facebook_app_name", "krDemo"
+            //line
             resValue "string", "line_channelId", ""
-            resValue "string", "channel_platform", "onestore"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
+
             //ad
             resValue "string", "adjust_app_token", ""
             resValue "string", "sdk_appflyer_dev_key", "dxJqEmrTQawvV2o7zQ3gAj"
