@@ -9,8 +9,8 @@ buildscript {
         minSdkVersion = 21
         targetSdkVersion = 33
 
-        javaVersion = JavaVersion.VERSION_17
-        jvmTarget = '17'
+        javaVersion = JavaVersion.VERSION_11
+        jvmTarget = '11'
 
     }
     repositories {
