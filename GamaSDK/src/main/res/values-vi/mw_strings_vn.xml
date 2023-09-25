@@ -126,5 +126,6 @@
     <string name="text_close">Đóng</string>
     <string name="text_select_pay_channel">Chọn phương thức thanh toán</string>
     <string name="text_other">Khác</string>
+    <string name="text_pay_pay">Nạp tiền</string>
 
 </resources>

@@ -5,16 +5,17 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
-        android:layout_width="330dp"
-        android:layout_height="260dp"
+        android:layout_width="251dp"
+        android:layout_height="209dp"
         android:layout_centerInParent="true"
-        android:gravity="center_horizontal"
         android:orientation="vertical">
 
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="15dp"
+            android:layout_width="227dp"
+            android:layout_height="185dp"
+            android:layout_centerInParent="true"
+            android:id="@+id/ll_select_channel_content"
+            android:gravity="center_horizontal"
             android:background="@drawable/bg_select_pay_channel">
 
 
@@ -22,40 +23,55 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="10dp"
                 android:gravity="center"
                 android:id="@+id/ll_select_channel"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
 
                 <LinearLayout
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
+                    android:layout_width="206dp"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="6dp"
+                    android:id="@+id/iv_select_channel_gg"
                     android:background="@drawable/sdk_bg_select_pay_channel_2"
                     android:gravity="center">
 
                     <ImageView
-                        android:id="@+id/iv_select_channel_gg"
-                        android:layout_width="116dp"
-                        android:layout_height="38dp"
-                        android:text="@string/py_confire"
-                        android:background="@drawable/bg_pay_gg"
-                        android:textColor="@android:color/white"
-                        android:textSize="17sp" />
+
+                        android:layout_width="110dp"
+                        android:layout_height="23dp"
+                        android:background="@drawable/bg_pay_gg" />
 
                 </LinearLayout>
 
-
-                <Button
-                    android:id="@+id/iv_select_channel_other"
-                    android:layout_width="116dp"
-                    android:layout_height="38dp"
-                    android:layout_marginStart="8dp"
+                <RelativeLayout
+                    android:layout_width="206dp"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="8dp"
                     android:background="@drawable/sdk_bg_select_pay_channel_1"
-                    android:gravity="center"
-                    android:text="@string/text_other"
-                    android:textColor="@android:color/white"
-                    android:textSize="17sp" />
+                    >
+
+                    <Button
+                        android:id="@+id/iv_select_channel_other"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:gravity="center"
+                        android:text="@string/text_pay_pay"
+                        android:textColor="@android:color/white"
+                        android:textSize="17sp"/>
+
+
+                    <ImageView
+                        android:layout_width="42dp"
+                        android:layout_height="35dp"
+                        android:id="@+id/iv_select_channel_rebate"
+                        android:layout_alignParentEnd="true"
+                        />
+
+                </RelativeLayout>
+
 
             </LinearLayout>
 
@@ -64,10 +80,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_above="@id/ll_select_channel"
-                android:layout_marginStart="26dp"
-                android:layout_marginEnd="26dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/mw_bg_select_channel_tips"
                 android:gravity="center"
                 android:padding="10dp"
@@ -76,6 +92,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/black_s"
                     android:text="@string/text_select_pay_channel" />
 
             </LinearLayout>
@@ -84,13 +101,14 @@
 
 
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
 
             <ImageView
                 android:id="@+id/iv_select_channel_close"
-                android:layout_width="33dp"
-                android:layout_height="33dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:src="@drawable/bg_select_channel_close" />

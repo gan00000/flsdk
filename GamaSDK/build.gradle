@@ -184,6 +184,9 @@ dependencies {
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.2'
     implementation 'io.reactivex.rxjava3:rxjava:3.1.5'
 
+    implementation 'com.github.bumptech.glide:glide:4.16.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.16.0'
+
     //huawei sdk
     huaweiImplementation 'com.huawei.hms:hwid:6.9.0.301'
     huaweiImplementation 'com.huawei.hms:iap:6.4.0.301'

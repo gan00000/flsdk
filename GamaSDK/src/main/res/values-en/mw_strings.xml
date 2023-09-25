@@ -126,5 +126,6 @@
     <string name="text_close">Close</string>
     <string name="text_select_pay_channel">Select payment method</string>
     <string name="text_other">Other</string>
+    <string name="text_pay_pay">top up</string>
 
 </resources>

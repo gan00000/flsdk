@@ -1,14 +1,26 @@
 package com.mw.sdk.login.widget.v2;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.PL;
 import com.mw.sdk.R;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
+import com.mw.sdk.utils.ResConfig;
+import com.thirdlib.glide.GlideApp;
 
 /**
  * Created by GanYuanrong on 2017/2/6.
@@ -19,6 +31,8 @@ public class SelectPayChannelLayout extends SLoginBaseRelativeLayout {
     private View contentView;
 
     protected View ggPayView, otherPayView;
+
+    private ImageView iv_select_channel_rebate;
 
     private SFCallBack sfCallBack;
 
@@ -58,6 +72,7 @@ public class SelectPayChannelLayout extends SLoginBaseRelativeLayout {
         backView = contentView.findViewById(R.id.iv_select_channel_close);
         ggPayView = contentView.findViewById(R.id.iv_select_channel_gg);
         otherPayView = contentView.findViewById(R.id.iv_select_channel_other);
+        iv_select_channel_rebate = contentView.findViewById(R.id.iv_select_channel_rebate);
 
         backView.setOnClickListener(new OnClickListener() {
             @Override
@@ -88,6 +103,20 @@ public class SelectPayChannelLayout extends SLoginBaseRelativeLayout {
             }
         });
 
+        try {
+            String gameCode = ResConfig.getGameCode(getContext().getApplicationContext());
+            String channel_platform = getContext().getResources().getString(R.string.channel_platform);
+            String rebate_url = String.format("%simage/sdk/%s/rebate_%s.png", ResConfig.getCdnPreferredUrl(getContext()), gameCode, channel_platform);
+
+//            rebate_url = "https://cdn-download.tthplay.com/image/sdk/mxwvn/rebate_google.png";//test
+            GlideApp.with(this)
+                    .load(rebate_url)
+                    .centerCrop()
+//                    .placeholder(R.drawable.bg_pay_gg)
+                    .into(iv_select_channel_rebate);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return contentView;
     }

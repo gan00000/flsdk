@@ -126,5 +126,6 @@
     <string name="text_close">닫기</string>
     <string name="text_select_pay_channel">충전 방법 선택</string>
     <string name="text_other">기타</string>
+    <string name="text_pay_pay">충전</string>
 
 </resources>
