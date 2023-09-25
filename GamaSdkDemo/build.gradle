@@ -391,7 +391,8 @@ dependencies {
 //    implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
     QooAppImplementation(name: 'qooapp-opensdk-2.0.6', ext: 'aar')
     implementation project(':GamaSDK')
-
+    implementation 'com.github.bumptech.glide:glide:4.16.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.16.0'
 }
 
 

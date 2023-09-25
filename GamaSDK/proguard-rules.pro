@@ -49,6 +49,13 @@
 -keep public class com.mw.sdk.bean.res.TogglePayRes$Data { *; }
 -keep public class **$Data { *; }
 
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep public class * extends com.bumptech.glide.module.AppGlideModule
+-keep public enum com.bumptech.glide.load.ImageHeaderParser$** {
+  **[] $VALUES;
+  public *;
+}
+
 -dontwarn java.lang.invoke.StringConcatFactory
 
 # -keep public interface mypackage.MyInterface
