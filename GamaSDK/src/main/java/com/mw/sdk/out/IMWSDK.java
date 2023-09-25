@@ -8,6 +8,7 @@ import com.core.base.callback.IGameLifeCycle;
 import com.core.base.callback.SFCallBack;
 import com.mw.base.bean.SPayType;
 import com.mw.sdk.ads.EventConstant;
+import com.mw.sdk.bean.req.PayCreateOrderReqBean;
 import com.mw.sdk.callback.IPayListener;
 import com.mw.sdk.login.ILoginCallBack;
 import com.mw.sdk.login.model.response.SLoginResponse;
@@ -174,4 +175,6 @@ public interface IMWSDK extends IGameLifeCycle {
     public void openFbUrl(Activity activity, String url);
 
     public void checkPreRegData(Activity activity, ISdkCallBack iSdkCallBack);
+
+    public void showTogglePayDialog(Activity activity, PayCreateOrderReqBean payCreateOrderReqBean);
 }

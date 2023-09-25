@@ -800,31 +800,7 @@ public class BaseSdkImpl implements IMWSDK {
                                 doWebPay(activity, payCreateOrderReqBean);
                             }else {//默认弹出显示询问用户
 
-                                if (commonDialog != null){
-                                    commonDialog.dismiss();
-                                }
-                                commonDialog = new SBaseDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
-                                SelectPayChannelLayout selectPayChannelLayout = new SelectPayChannelLayout(activity);
-                                selectPayChannelLayout.setsBaseDialog(commonDialog);
-                                selectPayChannelLayout.setSfCallBack(new SFCallBack() {
-                                    @Override
-                                    public void success(Object result, String msg) {//google
-                                        doGooglePay(activity, payCreateOrderReqBean);
-                                        if (commonDialog != null){
-                                            commonDialog.dismiss();
-                                        }
-                                    }
-
-                                    @Override
-                                    public void fail(Object result, String msg) {//第三方
-                                        doWebPay(activity, payCreateOrderReqBean);
-                                        if (commonDialog != null){
-                                            commonDialog.dismiss();
-                                        }
-                                    }
-                                });
-                                commonDialog.setContentView(selectPayChannelLayout);
-                                commonDialog.show();
+                                showTogglePayDialog(activity, payCreateOrderReqBean);
                             }
 
                         }else {
@@ -842,6 +818,36 @@ public class BaseSdkImpl implements IMWSDK {
         }
         doGooglePay(activity, payCreateOrderReqBean);
     }
+
+    public void showTogglePayDialog(Activity activity, PayCreateOrderReqBean payCreateOrderReqBean) {
+
+        if (commonDialog != null){
+            commonDialog.dismiss();
+        }
+        commonDialog = new SBaseDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
+        SelectPayChannelLayout selectPayChannelLayout = new SelectPayChannelLayout(activity);
+        selectPayChannelLayout.setsBaseDialog(commonDialog);
+        selectPayChannelLayout.setSfCallBack(new SFCallBack() {
+            @Override
+            public void success(Object result, String msg) {//google
+                doGooglePay(activity, payCreateOrderReqBean);
+                if (commonDialog != null){
+                    commonDialog.dismiss();
+                }
+            }
+
+            @Override
+            public void fail(Object result, String msg) {//第三方
+                doWebPay(activity, payCreateOrderReqBean);
+                if (commonDialog != null){
+                    commonDialog.dismiss();
+                }
+            }
+        });
+        commonDialog.setContentView(selectPayChannelLayout);
+        commonDialog.show();
+    }
+
     private void doGooglePay(Activity activity, PayCreateOrderReqBean payCreateOrderReqBean) {
 
         //设置Google储值的回调
