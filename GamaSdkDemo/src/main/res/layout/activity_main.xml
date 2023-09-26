@@ -127,6 +127,12 @@
                     android:layout_height="wrap_content"
                     android:text="手动发送推送测试图标" />
 
+                <Button
+                    android:id="@+id/showTogDialog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="testPay切换" />
+
 
             </LinearLayout>
 

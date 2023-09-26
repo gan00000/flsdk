@@ -30,6 +30,7 @@ import com.core.base.utils.MarketUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.ToastUtils;
 import com.mw.base.bean.SPayType;
+import com.mw.sdk.bean.req.PayCreateOrderReqBean;
 import com.mw.sdk.utils.SdkUtil;
 import com.mw.sdk.callback.IPayListener;
 import com.mw.sdk.demo.R;
@@ -384,6 +385,13 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View view) {
                 sendNotification("tests觉得基督教", "kdkkdk好的哈哈哈哈");
+            }
+        });
+        findViewById(R.id.showTogDialog).setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.P)
+            @Override
+            public void onClick(View view) {
+                mIMWSDK.showTogglePayDialog(MainActivity.this, new PayCreateOrderReqBean(MainActivity.this));
             }
         });
 

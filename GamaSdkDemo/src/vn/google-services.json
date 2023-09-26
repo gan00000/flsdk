@@ -1,66 +1,66 @@
+
 //{
 //  "project_info": {
-//    "project_number": "350907234499",
-//    "project_id": "snmxw-vn-and",
-//    "storage_bucket": "snmxw-vn-and.appspot.com"
+//    "project_number": "102249150551",
+//    "project_id": "vn-tgfml-and",
+//    "storage_bucket": "vn-tgfml-and.appspot.com"
 //  },
 //  "client": [
 //    {
 //      "client_info": {
-//        "mobilesdk_app_id": "1:350907234499:android:2e0a3d36112dbf1cec4a76",
+//        "mobilesdk_app_id": "1:102249150551:android:4d607d39efeb9cd4500b12",
 //        "android_client_info": {
-//          "package_name": "com.wanxi.mxwvn"
+//          "package_name": "com.yuewan.tgvn"
 //        }
 //      },
-//      "oauth_client": [],
+//      "oauth_client": [
+//        {
+//          "client_id": "102249150551-92ah7dcr4p64boe6j7uqpu6j0fjgnpsk.apps.googleusercontent.com",
+//          "client_type": 3
+//        }
+//      ],
 //      "api_key": [
 //        {
-//          "current_key": "AIzaSyDxiD6Sy_mvQQpS-aXzzBoOn8Dn41s6fkE"
+//          "current_key": "AIzaSyCKptcWPeNaLeO0RlTtvWY0JYy20TcUY5I"
 //        }
 //      ],
 //      "services": {
 //        "appinvite_service": {
-//          "other_platform_oauth_client": []
+//          "other_platform_oauth_client": [
+//            {
+//              "client_id": "102249150551-92ah7dcr4p64boe6j7uqpu6j0fjgnpsk.apps.googleusercontent.com",
+//              "client_type": 3
+//            }
+//          ]
 //        }
 //      }
 //    }
 //  ],
 //  "configuration_version": "1"
 //}
-
 {
   "project_info": {
-    "project_number": "102249150551",
-    "project_id": "vn-tgfml-and",
-    "storage_bucket": "vn-tgfml-and.appspot.com"
+    "project_number": "350907234499",
+    "project_id": "snmxw-vn-and",
+    "storage_bucket": "snmxw-vn-and.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:102249150551:android:4d607d39efeb9cd4500b12",
+        "mobilesdk_app_id": "1:350907234499:android:2e0a3d36112dbf1cec4a76",
         "android_client_info": {
-          "package_name": "com.yuewan.tgvn"
+          "package_name": "com.wanxi.mxwvn"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "102249150551-92ah7dcr4p64boe6j7uqpu6j0fjgnpsk.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCKptcWPeNaLeO0RlTtvWY0JYy20TcUY5I"
+          "current_key": "AIzaSyDxiD6Sy_mvQQpS-aXzzBoOn8Dn41s6fkE"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "102249150551-92ah7dcr4p64boe6j7uqpu6j0fjgnpsk.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }
