@@ -7,11 +7,13 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.PL;
 import com.mw.sdk.R;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.mw.sdk.utils.ResConfig;
+import com.mw.sdk.utils.SdkUtil;
 
 /**
  * Created by GanYuanrong on 2017/2/6.
@@ -96,13 +98,16 @@ public class SelectPayChannelLayout extends SLoginBaseRelativeLayout {
 
         try {
             String gameCode = ResConfig.getGameCode(getContext().getApplicationContext());
+            String loginTimestamp = SdkUtil.getSdkTimestamp(getContext());
             String channel_platform = getContext().getResources().getString(R.string.channel_platform);
-            String rebate_url = String.format("%simage/sdk/%s/rebate_%s.png", ResConfig.getCdnPreferredUrl(getContext()), gameCode, channel_platform);
+            String rebate_url = String.format("%simage/sdk/%s/rebate_%s.png?t=%s", ResConfig.getCdnPreferredUrl(getContext()), gameCode, channel_platform, loginTimestamp);
 
+            PL.d("rebate_url=" + rebate_url);
 //            rebate_url = "https://cdn-download.tthplay.com/image/sdk/mxwvn/rebate_google.png";//test
             Glide.with(this)
                     .load(rebate_url)
                     .centerCrop()
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
 //                    .placeholder(R.drawable.bg_pay_gg)
                     .into(iv_select_channel_rebate);
         } catch (Exception e) {
