@@ -52,6 +52,8 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
     Animation reg_out_animation;
     Animation reg_enter_animation;
 
+    ConfigBean.VersionData versionData;
+
     public AccountRegisterLayoutV2 getmAccountRegisterLayoutV2() {
         return mAccountRegisterLayoutV2;
     }
@@ -170,7 +172,7 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
 
         ConfigBean configBean = SdkUtil.getSdkCfg(getContext());
         if (configBean != null){
-            ConfigBean.VersionData versionData = configBean.getSdkConfigLoginData(getContext());
+            versionData = configBean.getSdkConfigLoginData(getContext());
             if (versionData != null){
 
                 if(versionData.isDeleteAccount()){
@@ -281,7 +283,9 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
             }
             mAccountLoginV2.setVisibility(VISIBLE);
             mAccountRegisterLayoutV2.setVisibility(VISIBLE);
-            layout_delete_account2.setVisibility(VISIBLE);
+            if(versionData != null && versionData.isDeleteAccount()){
+                layout_delete_account2.setVisibility(VISIBLE);
+            }
 
 //            loginTabView.setBackgroundResource(R.drawable.login_tab_red_left_cons_bg);
 //            regTabView.setBackgroundResource(R.drawable.login_tab_white_right_cons_bg);
