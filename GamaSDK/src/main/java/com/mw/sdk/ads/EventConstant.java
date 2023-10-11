@@ -21,6 +21,9 @@ public class EventConstant {
 
         purchase_over4,//用户-注册首日-单笔支付大于4 (不是累计)上报,每次都报
 
+        select_google,
+        select_other,
+
         /**
          * 首储事件
          */

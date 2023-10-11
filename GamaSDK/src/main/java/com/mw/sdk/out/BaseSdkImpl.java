@@ -831,6 +831,7 @@ public class BaseSdkImpl implements IMWSDK {
             @Override
             public void success(Object result, String msg) {//google
                 doGooglePay(activity, payCreateOrderReqBean);
+                trackEvent(activity, EventConstant.EventName.select_google.name());
                 if (commonDialog != null){
                     commonDialog.dismiss();
                 }
@@ -839,6 +840,7 @@ public class BaseSdkImpl implements IMWSDK {
             @Override
             public void fail(Object result, String msg) {//第三方
                 doWebPay(activity, payCreateOrderReqBean);
+                trackEvent(activity, EventConstant.EventName.select_other.name());
                 if (commonDialog != null){
                     commonDialog.dismiss();
                 }
