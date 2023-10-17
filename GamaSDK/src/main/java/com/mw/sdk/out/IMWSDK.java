@@ -70,6 +70,11 @@ public interface IMWSDK extends IGameLifeCycle {
 
 //    void openWebview(Activity activity);
 
+    /**
+     * 请使用 void openCs(Activity activity, String roleId,String roleName,String roleLevel,String vipLevel,String severCode,String serverName);
+     * @param activity
+     */
+    @Deprecated
     void openCs(Activity activity);
     void openCs(Activity activity, String roleId,String roleName,String roleLevel,String vipLevel,String severCode,String serverName);
 
