@@ -2,12 +2,14 @@ package com.mw.sdk.out;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 
@@ -18,16 +20,6 @@ import com.core.base.utils.PermissionUtil;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.SignatureUtil;
 import com.core.base.utils.ToastUtils;
-import com.mw.sdk.bean.req.PayCreateOrderReqBean;
-import com.mw.sdk.constant.ChannelPlatform;
-import com.mw.sdk.login.model.response.SLoginResponse;
-import com.mw.sdk.login.widget.v2.SelectPayChannelLayout;
-import com.mw.sdk.bean.res.TogglePayRes;
-import com.mw.sdk.utils.DataManager;
-import com.mw.sdk.pay.IPay;
-import com.mw.sdk.pay.IPayCallBack;
-import com.mw.sdk.pay.IPayFactory;
-import com.mw.sdk.bean.res.BasePayBean;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -35,30 +27,43 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.play.core.review.ReviewInfo;
 import com.google.android.play.core.review.ReviewManager;
 import com.google.android.play.core.review.ReviewManagerFactory;
-import com.mw.sdk.bean.PhoneInfo;
-import com.mw.sdk.constant.SGameLanguage;
 import com.mw.base.bean.SPayType;
-import com.mw.sdk.bean.res.ConfigBean;
-import com.mw.sdk.api.ConfigRequest;
-import com.mw.sdk.utils.ResConfig;
-import com.mw.sdk.utils.SdkUtil;
 import com.mw.sdk.BuildConfig;
-import com.mw.sdk.R;
-import com.mw.sdk.widget.SBaseDialog;
-import com.mw.sdk.constant.ResultCode;
 import com.mw.sdk.MWWebPayActivity;
-import com.mw.sdk.widget.SWebViewDialog;
+import com.mw.sdk.R;
 import com.mw.sdk.ads.EventConstant;
 import com.mw.sdk.ads.SdkEventLogger;
+import com.mw.sdk.api.ConfigRequest;
 import com.mw.sdk.api.Request;
+import com.mw.sdk.bean.PhoneInfo;
+import com.mw.sdk.bean.SGameBaseRequestBean;
+import com.mw.sdk.bean.req.PayCreateOrderReqBean;
+import com.mw.sdk.bean.res.BasePayBean;
+import com.mw.sdk.bean.res.ConfigBean;
+import com.mw.sdk.bean.res.TogglePayRes;
 import com.mw.sdk.callback.IPayListener;
+import com.mw.sdk.constant.ChannelPlatform;
 import com.mw.sdk.constant.RequestCode;
+import com.mw.sdk.constant.ResultCode;
+import com.mw.sdk.constant.SGameLanguage;
 import com.mw.sdk.login.DialogLoginImpl;
 import com.mw.sdk.login.ILogin;
 import com.mw.sdk.login.ILoginCallBack;
+import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.login.widget.v2.AccountBindPhoneLayout;
+import com.mw.sdk.login.widget.v2.SelectPayChannelLayout;
 import com.mw.sdk.login.widget.v2.ThirdPlatBindAccountLayoutV2;
+import com.mw.sdk.pay.IPay;
+import com.mw.sdk.pay.IPayCallBack;
+import com.mw.sdk.pay.IPayFactory;
+import com.mw.sdk.utils.DataManager;
+import com.mw.sdk.utils.ResConfig;
+import com.mw.sdk.utils.SdkUtil;
 import com.mw.sdk.utils.ShareUtil;
+import com.mw.sdk.widget.SBaseDialog;
+import com.mw.sdk.widget.SWebView;
+import com.mw.sdk.widget.SWebViewDialog;
+import com.mw.sdk.widget.SWebViewLayout;
 import com.thirdlib.adjust.AdjustHelper;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.huawei.HuaweiPayImpl;
@@ -78,7 +83,7 @@ public class BaseSdkImpl implements IMWSDK {
 
     protected SFacebookProxy sFacebookProxy;
 
-    protected SWebViewDialog csSWebViewDialog;
+    protected SWebViewDialog sWebViewDialog;
     protected SWebViewDialog otherPayWebViewDialog;
 
     protected SBaseDialog commonDialog;
@@ -284,8 +289,8 @@ public class BaseSdkImpl implements IMWSDK {
                 if (otherPayWebViewDialog != null) {
                     otherPayWebViewDialog.onActivityResult(activity, requestCode, resultCode, data);
                 }
-                if (csSWebViewDialog != null){
-                    csSWebViewDialog.onActivityResult(activity, requestCode, resultCode, data);
+                if (sWebViewDialog != null){
+                    sWebViewDialog.onActivityResult(activity, requestCode, resultCode, data);
                 }
                 if (sFacebookProxy != null) {
                     sFacebookProxy.onActivityResultForShare(activity, requestCode, resultCode, data);
@@ -998,6 +1003,54 @@ public class BaseSdkImpl implements IMWSDK {
     }
 
     @Override
+    public void showSocialView(Activity activity) {
+
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                PL.i("showSocialView");
+                if (sWebViewDialog != null){
+                    sWebViewDialog.dismiss();
+                }
+                String webUrl = activity.getString(R.string.mw_sdk_social_url);
+                if (SStringUtil.isEmpty(webUrl)){
+                    ToastUtils.toast(activity, "web url is empty");
+                    PL.i("showSocialView webUrl is empty");
+                    return;
+                }
+                SGameBaseRequestBean sGameBaseRequestBean = new SGameBaseRequestBean(activity);
+                sGameBaseRequestBean.setCompleteUrl(webUrl);
+                webUrl = sGameBaseRequestBean.createPreRequestUrl();
+
+                View bannerSwebView = activity.getLayoutInflater().inflate(R.layout.mw_social_banner, null);
+                SWebViewLayout sWebViewLayout = bannerSwebView.findViewById(R.id.svl_social_webview);
+                sWebViewLayout.getTitleHeaderView().setVisibility(View.GONE);
+                bannerSwebView.findViewById(R.id.iv_social_close).setOnClickListener(v -> {
+                    if (sWebViewDialog != null) {
+                        sWebViewDialog.dismiss();
+                    }
+                });
+
+                sWebViewDialog = new SWebViewDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen, bannerSwebView, sWebViewLayout.getsWebView(), null);
+                sWebViewDialog.setWebUrl(webUrl);
+                sWebViewDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                    }
+                });
+                sWebViewDialog.setsWebDialogCallback(new SWebViewDialog.SWebDialogCallback() {
+                    @Override
+                    public void createFinish(SWebViewDialog sWebViewDialog, SWebView sWebView) {
+                    }
+                });
+                sWebViewDialog.show();
+
+            }
+        });
+
+    }
+
+    @Override
     public void requestVfCode(Activity activity, String areaCode, String telephone, SFCallBack<BaseResponseModel> sfCallBack) {
         PL.i("requestVfCode areaCode=" + areaCode + " telephone=" + telephone);
         activity.runOnUiThread(new Runnable() {
@@ -1130,52 +1183,6 @@ public class BaseSdkImpl implements IMWSDK {
         otherPayWebViewDialog.show();*/
     }
 
- /*   @SuppressLint("JavascriptInterface")
-    @JavascriptInterface
-    public void googlePay(String productId)
-    {
-        PL.i("js googlePay productId=" + productId);
-        if (this.activity != null){
-            this.activity.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    BaseSdkImpl.this.startPay(BaseSdkImpl.this.activity,SPayType.GOOGLE,BaseSdkImpl.this.cpOrderId,BaseSdkImpl.this.productId,BaseSdkImpl.this.extra,BaseSdkImpl.this.iPayListener);
-                }
-            });
-        }
-    }
-
-    *//**
-     * 充值通知，提供给网页使用
-     * @param success  是否成功
-     * @param productId  商品id
-     *//*
-    @SuppressLint("JavascriptInterface")
-    @JavascriptInterface
-    public void onPayFinish(boolean success,String productId)
-    {
-        PL.i("js onPayFinish productId=" + productId);
-        if (this.activity != null){
-            this.activity.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    if (success){
-                        if (iPayListener != null) {
-                            iPayListener.onPaySuccess(productId, BaseSdkImpl.this.cpOrderId);
-                        }
-                    }else{
-                        if (iPayListener != null) {
-                            iPayListener.onPaySuccess(productId, BaseSdkImpl.this.cpOrderId);
-                        }
-                    }
-
-                    if (otherPayWebViewDialog != null) {
-                        otherPayWebViewDialog.finish();
-                    }
-                }
-            });
-        }
-    }*/
 
     @Override
     public void checkGooglePlayServicesAvailable(Activity activity) {

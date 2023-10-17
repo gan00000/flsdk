@@ -47,7 +47,7 @@ public class SSdkBaseRequestBean extends BaseReqeustBean {
 //    private String spy_advertiser = "";//渠道包-所属广告
     private String referrer = "";
 
-    private int request_code = 0;
+    private int request_code = 0;//区别客服打开的地方
 
     public SSdkBaseRequestBean(Context context) {
         super(context);

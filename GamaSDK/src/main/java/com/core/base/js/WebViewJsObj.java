@@ -2,6 +2,7 @@ package com.core.base.js;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Dialog;
 import android.webkit.JavascriptInterface;
 
 import com.core.base.utils.PL;
@@ -12,15 +13,26 @@ import com.mw.sdk.ads.SdkEventLogger;
 public class WebViewJsObj {
 
     Activity activity;
+    Dialog dialog;
 
     public WebViewJsObj(Activity activity) {
         this.activity = activity;
+    }
+
+    public WebViewJsObj(Activity activity, Dialog dialog) {
+        this.activity = activity;
+        this.dialog = dialog;
     }
 
     @SuppressLint("JavascriptInterface")
     @JavascriptInterface
     public void close(){
         PL.i("js close");
+
+        if (activity != null && dialog != null){//如果网页是使用dialog打开，则只关闭dialog
+            dialog.dismiss();
+            return;
+        }
         if (activity != null){
             activity.finish();
         }

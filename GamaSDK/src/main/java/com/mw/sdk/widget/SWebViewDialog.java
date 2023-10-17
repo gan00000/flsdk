@@ -14,8 +14,10 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ProgressBar;
 
+import com.core.base.js.WebViewJsObj;
 import com.core.base.utils.PL;
 import com.core.base.utils.ToastUtils;
+import com.mw.sdk.pay.WebPayJs;
 
 /**
  * 公共的Dialog WebView视窗
@@ -81,9 +83,9 @@ public class SWebViewDialog extends SBaseDialog {
 
         PL.i("Dialog onCreate");
 
-        PL.i("SWebViewActivity url:" + webUrl);
+        PL.i("SWebViewDialog url:" + webUrl);
         if (TextUtils.isEmpty(webUrl)){
-            ToastUtils.toast(getContext(),"url error");
+            ToastUtils.toast(getContext(),"url is empty");
             PL.i("webUrl is empty");
 //            dismiss();
 //            return;
@@ -112,12 +114,15 @@ public class SWebViewDialog extends SBaseDialog {
                     dismiss();
                 }
             });
-
             mContentView = sWebViewLayout;
         }
         this.setContentView(mContentView);
 
         if (sWebView != null && !TextUtils.isEmpty(webUrl)) {
+
+            WebViewJsObj webViewJsObj = new WebViewJsObj(activity, this);
+            sWebView.addJavascriptInterface(webViewJsObj,"MWSDK");
+
             sWebView.loadUrl(webUrl);
         }
 

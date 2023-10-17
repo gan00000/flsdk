@@ -43,8 +43,7 @@
     <!--区域码链接-->
     <string name="mw_sdk_area_info_url"></string>
 
-    <!--验证码开关链接-->
-    <string name="mw_sdk_vfcode_switch_url"></string>
-    <!--港台域名列表 结束-->
+    <!--社群banner-->
+    <string name="mw_sdk_social_url">https://member.kodaduck.com/sdk/social/index.html</string>
 
 </resources>
