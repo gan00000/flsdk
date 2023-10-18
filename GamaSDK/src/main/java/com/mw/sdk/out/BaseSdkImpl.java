@@ -10,9 +10,12 @@ import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebView;
 
 import androidx.annotation.NonNull;
 
+import com.core.base.BaseWebViewClient;
 import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.PL;
@@ -1025,6 +1028,20 @@ public class BaseSdkImpl implements IMWSDK {
 
                 View bannerSwebView = activity.getLayoutInflater().inflate(R.layout.mw_social_banner, null);
                 SWebViewLayout sWebViewLayout = bannerSwebView.findViewById(R.id.svl_social_webview);
+                sWebViewLayout.getsWebView().setWebViewClient(new BaseWebViewClient(activity){
+                    @Override
+                    public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                        try {
+                            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(request.getUrl().toString()));
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            activity.startActivity(intent);
+                            return true;
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        return false;
+                    }
+                });
                 sWebViewLayout.getTitleHeaderView().setVisibility(View.GONE);
                 bannerSwebView.findViewById(R.id.iv_social_close).setOnClickListener(v -> {
                     if (sWebViewDialog != null) {
