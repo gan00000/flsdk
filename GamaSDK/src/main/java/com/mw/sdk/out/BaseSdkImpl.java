@@ -31,6 +31,7 @@ import com.mw.base.bean.SPayType;
 import com.mw.sdk.BuildConfig;
 import com.mw.sdk.MWWebPayActivity;
 import com.mw.sdk.R;
+import com.mw.sdk.act.ActExpoView;
 import com.mw.sdk.ads.EventConstant;
 import com.mw.sdk.ads.SdkEventLogger;
 import com.mw.sdk.api.ConfigRequest;
@@ -1045,6 +1046,28 @@ public class BaseSdkImpl implements IMWSDK {
                 });
                 sWebViewDialog.show();
 
+            }
+        });
+
+    }
+
+    @Override
+    public void showActView(Activity activity, SFCallBack sfCallBack) {
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                if (!SdkUtil.isVersion1(activity)) {
+                    if (commonDialog != null){
+                        commonDialog.dismiss();
+                    }
+                    commonDialog = new SBaseDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
+                    ActExpoView mActExpoView = new ActExpoView(activity);
+                    mActExpoView.setsBaseDialog(commonDialog);
+//                    mActExpoView.setSFCallBack(sfCallBack);
+                    commonDialog.setContentView(mActExpoView);
+                    commonDialog.show();
+                }
             }
         });
 

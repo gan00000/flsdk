@@ -184,4 +184,6 @@ public interface IMWSDK extends IGameLifeCycle {
     public void showTogglePayDialog(Activity activity, PayCreateOrderReqBean payCreateOrderReqBean);
 
     public void showSocialView(Activity activity);
+
+    public void showActView(Activity activity, SFCallBack sfCallBack);
 }
