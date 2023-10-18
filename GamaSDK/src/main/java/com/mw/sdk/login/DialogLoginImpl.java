@@ -159,6 +159,9 @@ public class DialogLoginImpl implements ILogin {
             e.printStackTrace();
         }
         sLoginDialog = new SLoginDialogV2(activity, com.mw.sdk.R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
+        sLoginDialog.setCancelable(false);
+        sLoginDialog.setCanceledOnTouchOutside(false);
+
         sLoginDialog.setSFacebookProxy(sFacebookProxy);
         sLoginDialog.setSGoogleSignIn(sGoogleSignIn);
         sLoginDialog.setsLineSignIn(sLineSignIn);

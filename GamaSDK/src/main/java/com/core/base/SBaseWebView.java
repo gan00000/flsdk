@@ -46,6 +46,7 @@ public class SBaseWebView extends WebView {
 
         if (getContext() instanceof  Activity){
             baseWebChromeClient = new BaseWebChromeClient((Activity) getContext());
+            this.setWebViewClient(new BaseWebViewClient((Activity) getContext()));
         }else{
             baseWebChromeClient = new BaseWebChromeClient();
         }
