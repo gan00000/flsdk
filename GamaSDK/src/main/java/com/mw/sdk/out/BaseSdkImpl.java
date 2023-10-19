@@ -177,13 +177,20 @@ public class BaseSdkImpl implements IMWSDK {
 
     @Override
     public void registerRoleInfo(final Activity activity, final String roleId, final String roleName, final String roleLevel, final String vipLevel, final String severCode, final String serverName) {
+
+        PL.i("IMWSDK registerRoleInfo");
+        PL.i("roleId:" + roleId + ",roleName:" + roleName + ",roleLevel:" + roleLevel + ",vipLevel:" + vipLevel + ",severCode:" + severCode + ",serverName:" + serverName);
+
+        if (SStringUtil.isEmpty(roleId) || SStringUtil.isEmpty(severCode)){
+            return;
+        }
+        SdkUtil.saveRoleInfo(activity, roleId, roleName, roleLevel, vipLevel, severCode, serverName);//保存角色信息
+
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                PL.i("IMWSDK registerRoleInfo");
-                PL.i("roleId:" + roleId + ",roleName:" + roleName + ",roleLevel:" + roleLevel + ",vipLevel:" + vipLevel + ",severCode:" + severCode + ",serverName:" + serverName);
-                SdkUtil.saveRoleInfo(activity, roleId, roleName, roleLevel, vipLevel, severCode, serverName);//保存角色信息
-                if (iPay != null){
+
+                if (iPay != null && SStringUtil.isNotEmpty(roleId) && SStringUtil.isNotEmpty(severCode) && SStringUtil.isNotEmpty(SdkUtil.getUid(activity))){
                     iPay.startQueryPurchase(activity.getApplicationContext());
                 }
             }
@@ -191,10 +198,17 @@ public class BaseSdkImpl implements IMWSDK {
     }
 
     public void checkPreRegData(final Activity activity, ISdkCallBack iSdkCallBack) {
+
+        PL.i("IMWSDK checkPreRegData");
+        if (SStringUtil.isEmpty(SdkUtil.getUid(activity)) || SStringUtil.isEmpty(SdkUtil.getRoleId(activity)) || SStringUtil.isEmpty(SdkUtil.getServerCode(activity))){
+            PL.i("IMWSDK checkPreRegData role info empty");
+            return;
+        }
+
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                PL.i("IMWSDK checkPreRegData");
+
                 if (iPay != null){
                     iPay.queryPreRegData(activity.getApplicationContext(), iSdkCallBack);
                 }
