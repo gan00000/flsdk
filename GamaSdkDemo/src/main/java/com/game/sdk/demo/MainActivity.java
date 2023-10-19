@@ -394,6 +394,31 @@ public class MainActivity extends Activity {
                 mIMWSDK.showTogglePayDialog(MainActivity.this, new PayCreateOrderReqBean(MainActivity.this));
             }
         });
+        findViewById(R.id.showSocialBanner).setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.P)
+            @Override
+            public void onClick(View view) {
+                mIMWSDK.showSocialView(MainActivity.this);
+            }
+        });
+
+        findViewById(R.id.showActExpo).setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.P)
+            @Override
+            public void onClick(View view) {
+                mIMWSDK.showActView(MainActivity.this, new SFCallBack() {
+                    @Override
+                    public void success(Object result, String msg) {
+
+                    }
+
+                    @Override
+                    public void fail(Object result, String msg) {
+
+                    }
+                });
+            }
+        });
 
     }
 
@@ -575,15 +600,8 @@ public class MainActivity extends Activity {
 //                pendingIntent = PendingIntent.getActivity(this, 0, intent,
 //                        PendingIntent.FLAG_ONE_SHOT);
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                    pendingIntent = PendingIntent.getActivity(this,
-                            0, intent, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE);
-
-                }else {
-                    pendingIntent = PendingIntent.getActivity(this,
-                            0, intent, PendingIntent.FLAG_ONE_SHOT);
-
-                }
+                pendingIntent = PendingIntent.getActivity(this,
+                        0, intent, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE);
             }
         }
 

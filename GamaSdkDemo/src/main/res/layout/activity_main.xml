@@ -133,6 +133,17 @@
                     android:layout_height="wrap_content"
                     android:text="testPay切换" />
 
+                <Button
+                    android:id="@+id/showSocialBanner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="社群banner" />
+                <Button
+                    android:id="@+id/showActExpo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="活动曝光" />
+
 
             </LinearLayout>
 
