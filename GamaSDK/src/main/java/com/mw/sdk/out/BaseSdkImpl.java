@@ -1036,6 +1036,7 @@ public class BaseSdkImpl implements IMWSDK {
                     PL.i("showSocialView webUrl is empty");
                     return;
                 }
+                webUrl = String.format(webUrl, ResConfig.getGameCode(activity));
                 SGameBaseRequestBean sGameBaseRequestBean = new SGameBaseRequestBean(activity);
                 sGameBaseRequestBean.setCompleteUrl(webUrl);
                 webUrl = sGameBaseRequestBean.createPreRequestUrl();

@@ -170,6 +170,7 @@ public class DialogLoginImpl implements ILogin {
 
         sLoginDialog.setLoginCallBack(iLoginCallBack);
         sLoginDialog.show();
+        PL.d("login sLoginDialog show...");
     }
 
     @Override

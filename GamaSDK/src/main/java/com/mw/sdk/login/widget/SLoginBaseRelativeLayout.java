@@ -79,8 +79,9 @@ public abstract class SLoginBaseRelativeLayout extends SBaseRelativeLayout {
         Localization.updateSGameLanguage(getActivity());
 
         inflater = LayoutInflater.from(context);
+        PL.d(this.getClass().getCanonicalName() + " SLoginBaseRelativeLayout constructor initView createView start");
         View contentView = createView(this.context, inflater);
-
+        PL.d(this.getClass().getCanonicalName() + " SLoginBaseRelativeLayout constructor initView createView end");
         if (contentView != null) {
 
             LayoutParams l = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);

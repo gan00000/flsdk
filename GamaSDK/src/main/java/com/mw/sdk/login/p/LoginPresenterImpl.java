@@ -287,7 +287,9 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 return;
             }
         }
+        PL.d("SdkUtil.getAccountModels start");
         List<AccountModel> accountModels = SdkUtil.getAccountModels(this.mActivity);
+        PL.d("SdkUtil.getAccountModels end");
 //        iLoginView.showMainHomeView();
         if (accountModels.isEmpty()){
             if (iLoginView != null){

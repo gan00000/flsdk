@@ -44,6 +44,6 @@
     <string name="mw_sdk_area_info_url"></string>
 
     <!--社群banner-->
-    <string name="mw_sdk_social_url">https://member.kodaduck.com/sdk/social/index.html</string>
+    <string name="mw_sdk_social_url">https://member.kodaduck.com/sdk/social/%s/index.html</string>
 
 </resources>

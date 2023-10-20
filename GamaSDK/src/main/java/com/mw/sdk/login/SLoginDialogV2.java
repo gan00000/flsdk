@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StyleRes;
 
+import com.core.base.utils.PL;
 import com.mw.sdk.utils.Localization;
 import com.mw.base.utils.SdkVersionUtil;
 import com.mw.sdk.R;
@@ -142,11 +143,12 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
         iLoginPresenter.setSGoogleSignIn(sGoogleSignIn);
         iLoginPresenter.setTwitterLogin(twitterLogin);
         iLoginPresenter.setLineLogin(sLineSignIn);
-
+        PL.d("iLoginPresenter.autoLogin start");
         iLoginPresenter.autoLogin(activity);
-
+        PL.d("iLoginPresenter.autoLogin end");
         SdkEventLogger.sendEventToSever(activity,EventConstant.EventName.OPEN_LOGIN_SCREEN.name());
         SdkEventLogger.trackingWithEventName(getActivity(), EventConstant.EventName.OPEN_LOGIN_SCREEN.name());
+        PL.d("dialog onCreate end");
     }
 
     @Override
