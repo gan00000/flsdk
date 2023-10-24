@@ -144,6 +144,16 @@
                     android:layout_height="wrap_content"
                     android:text="活动曝光" />
 
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="zx" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="xx" />
+
 
             </LinearLayout>
 

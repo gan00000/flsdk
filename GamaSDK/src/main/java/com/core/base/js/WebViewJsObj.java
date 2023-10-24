@@ -3,6 +3,8 @@ package com.core.base.js;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.webkit.JavascriptInterface;
 
 import com.core.base.utils.PL;
@@ -54,6 +56,17 @@ public class WebViewJsObj {
                     SdkEventLogger.trackingWithEventName(activity, eventName, null, EventConstant.AdType.AdTypeAllChannel);
                 }
             });
+        }
+    }
+
+    @SuppressLint("JavascriptInterface")
+    @JavascriptInterface
+    public void openSysBrowser(String url){
+        PL.i("js openSysBrowser");
+
+        if (activity != null){
+            Intent  intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            activity.startActivity(intent);
         }
     }
 }

@@ -28,6 +28,7 @@ import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.MarketUtil;
 import com.core.base.utils.PL;
+import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
 import com.mw.base.bean.SPayType;
 import com.mw.sdk.bean.req.PayCreateOrderReqBean;
@@ -398,6 +399,10 @@ public class MainActivity extends Activity {
             @RequiresApi(api = Build.VERSION_CODES.P)
             @Override
             public void onClick(View view) {
+                if(SStringUtil.isEmpty(SdkUtil.getUid(activity))){
+                    ToastUtils.toast(activity,"请先登录");
+                    return;
+                }
                 mIMWSDK.showSocialView(MainActivity.this);
             }
         });
@@ -406,6 +411,11 @@ public class MainActivity extends Activity {
             @RequiresApi(api = Build.VERSION_CODES.P)
             @Override
             public void onClick(View view) {
+
+                if(SStringUtil.isEmpty(SdkUtil.getUid(activity))){
+                    ToastUtils.toast(activity,"请先登录");
+                    return;
+                }
                 mIMWSDK.showActView(MainActivity.this, new SFCallBack() {
                     @Override
                     public void success(Object result, String msg) {
