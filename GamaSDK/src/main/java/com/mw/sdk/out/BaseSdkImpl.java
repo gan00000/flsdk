@@ -42,6 +42,7 @@ import com.mw.sdk.api.Request;
 import com.mw.sdk.bean.PhoneInfo;
 import com.mw.sdk.bean.SGameBaseRequestBean;
 import com.mw.sdk.bean.req.PayCreateOrderReqBean;
+import com.mw.sdk.bean.res.ActData;
 import com.mw.sdk.bean.res.BasePayBean;
 import com.mw.sdk.bean.res.ConfigBean;
 import com.mw.sdk.bean.res.TogglePayRes;
@@ -72,6 +73,7 @@ import com.thirdlib.adjust.AdjustHelper;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.huawei.HuaweiPayImpl;
 
+import java.util.List;
 import java.util.Map;
 
 
@@ -1089,17 +1091,39 @@ public class BaseSdkImpl implements IMWSDK {
             @Override
             public void run() {
 
-                if (!SdkUtil.isVersion1(activity)) {
-                    if (commonDialog != null){
-                        commonDialog.dismiss();
-                    }
-                    commonDialog = new SBaseDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
-                    ActExpoView mActExpoView = new ActExpoView(activity);
-                    mActExpoView.setsBaseDialog(commonDialog);
-//                    mActExpoView.setSFCallBack(sfCallBack);
-                    commonDialog.setContentView(mActExpoView);
-                    commonDialog.show();
+//                if (!SdkUtil.isVersion1(activity)) {
+//                    if (commonDialog != null){
+//                        commonDialog.dismiss();
+//                    }
+//                    commonDialog = new SBaseDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
+//                    ActExpoView mActExpoView = new ActExpoView(activity);
+//                    mActExpoView.setsBaseDialog(commonDialog);
+////                    mActExpoView.setSFCallBack(sfCallBack);
+//                    commonDialog.setContentView(mActExpoView);
+//                    commonDialog.show();
+
+//                }
+                if (commonDialog != null){
+                    commonDialog.dismiss();
                 }
+                Request.requestActData(activity, new SFCallBack<List<ActData>>() {
+                    @Override
+                    public void success(List<ActData> result, String msg) {
+
+                        commonDialog = new SBaseDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
+                        ActExpoView mActExpoView = new ActExpoView(activity, result);
+//                        mActExpoView.refreshData(result);
+                        mActExpoView.setsBaseDialog(commonDialog);
+                        //                    mActExpoView.setSFCallBack(sfCallBack);
+                        commonDialog.setContentView(mActExpoView);
+                        commonDialog.show();
+                    }
+
+                    @Override
+                    public void fail(List<ActData> result, String msg) {
+                        ToastUtils.toast(activity, msg + "");
+                    }
+                });
             }
         });
 

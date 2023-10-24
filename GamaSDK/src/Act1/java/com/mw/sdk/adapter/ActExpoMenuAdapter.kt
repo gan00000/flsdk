@@ -24,7 +24,7 @@ import android.webkit.WebView
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.mw.sdk.R
-import com.mw.sdk.data.ActData
+import com.mw.sdk.bean.res.ActData
 
 class ActExpoMenuAdapter(val context: Context?, var actDatas:List<ActData> = arrayListOf()) : RecyclerView.Adapter<ActExpoMenuViewHolder>() {
 

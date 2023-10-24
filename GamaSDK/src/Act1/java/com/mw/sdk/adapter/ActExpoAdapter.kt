@@ -23,7 +23,8 @@ import android.view.ViewGroup
 import android.webkit.WebView
 import androidx.recyclerview.widget.RecyclerView
 import com.mw.sdk.R
-import com.mw.sdk.data.ActData
+import com.mw.sdk.bean.SGameBaseRequestBean
+import com.mw.sdk.bean.res.ActData
 
 class ActExpoAdapter(val context: Context?, val actDatas: ArrayList<ActData>) : RecyclerView.Adapter<ActExpoViewHolder>() {
 
@@ -38,7 +39,9 @@ class ActExpoAdapter(val context: Context?, val actDatas: ArrayList<ActData>) : 
     override fun onBindViewHolder(holder: ActExpoViewHolder, position: Int) {
 
         val actData = actDatas[position]
-        holder.actWebView.loadUrl(actData.contentImgUrl)
+        val sr = SGameBaseRequestBean(context)
+        sr.completeUrl = actData.contentUrl
+        holder.actWebView.loadUrl(sr.createPreRequestUrl())
         webViewMap[position] = holder.actWebView
     }
 

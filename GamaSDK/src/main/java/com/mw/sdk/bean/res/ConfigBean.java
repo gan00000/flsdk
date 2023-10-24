@@ -131,6 +131,7 @@ public class ConfigBean {
         //是否显示登录页面的客服按钮(kr用到)
         private boolean showSdkCsCenter = true;
         private boolean togglePay = false;
+        private boolean showMarket = false;//是否展示活动页
 
         public String getPlatform() {
             return platform;
@@ -290,6 +291,14 @@ public class ConfigBean {
 
         public void setTogglePay(boolean togglePay) {
             this.togglePay = togglePay;
+        }
+
+        public boolean isShowMarket() {
+            return showMarket;
+        }
+
+        public void setShowMarket(boolean showMarket) {
+            this.showMarket = showMarket;
         }
 
         //华为登录，下面的不需要显示

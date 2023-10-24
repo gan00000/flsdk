@@ -1,4 +1,4 @@
-package com.mw.sdk.data
+package com.mw.sdk.bean.res
 
 data class ActData(var menuSelectImgUrl:String = "",
                    var menuUnSelectImgUrl:String = "",

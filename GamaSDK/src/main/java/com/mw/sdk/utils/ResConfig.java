@@ -156,6 +156,13 @@ public class ResConfig {
         return getConfigUrl(context, R.string.mw_sdk_log_pre_url);
     }
 
+    public static String getMemberPreferredUrl(Context context) {
+        return getConfigUrl(context, R.string.mw_sdk_member_pre_url);
+    }
+    public static String getPlatPreferredUrl(Context context) {
+        return getConfigUrl(context, R.string.mw_sdk_plat_pre_url);
+    }
+
     /**
      * <p>Description: 先获取动态域名，然后获取本地域名，配置文件的key和本地的xml key需要一致</p>
      */

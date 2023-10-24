@@ -11,11 +11,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
+import com.bumptech.glide.Glide
 import com.core.base.utils.PL
 import com.mw.sdk.R
 import com.mw.sdk.adapter.ActExpoAdapter
-import com.mw.sdk.data.ActData
+import com.mw.sdk.bean.SGameBaseRequestBean
+import com.mw.sdk.bean.res.ActData
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout
+import com.mw.sdk.utils.SdkUtil
 import com.mw.sdk.widget.Vp2IndicatorView
 import com.zhy.adapter.recyclerview.CommonAdapter
 import com.zhy.adapter.recyclerview.base.ViewHolder
@@ -24,8 +27,22 @@ class ActExpoView : SLoginBaseRelativeLayout {
 
     var actDatas: ArrayList<ActData>? = null
 
-    var currentPageIndex = 0
-    var mActExpoAdapter:ActExpoAdapter? = null
+    private lateinit var actView:View
+
+    private var currentPageIndex = 0
+    private var mActExpoAdapter:ActExpoAdapter? = null
+    private var indicatorView:Vp2IndicatorView? = null
+    private var contentPageView:ViewPager2? = null
+
+    private var menuRecyclerView:RecyclerView? = null
+
+    constructor(context: Context?, datas: List<ActData>) : super(context)
+    {
+        actDatas = arrayListOf()
+        actDatas?.addAll(datas)
+        actDatas?.first()?.isClick = true
+        initView()
+    }
     constructor(context: Context?) : super(context)
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(
@@ -41,38 +58,47 @@ class ActExpoView : SLoginBaseRelativeLayout {
         defStyleRes: Int
     ) : super(context, attrs, defStyleAttr, defStyleRes)
 
-    override fun createView(context: Context?, layoutInflater: LayoutInflater?): View {
-        val actView = layoutInflater!!.inflate(R.layout.activity_act, null)
+    init {
+        PL.d("ActExpoView init")
+    }
+
+    fun initView(): Unit {
+        PL.d("ActExpoView initView")
+
         val titleBgIV = actView.findViewById<ImageView>(R.id.mw_act_iv_title_bg)
         val backBgIV = actView.findViewById<ImageView>(R.id.mw_act_iv_back_bg)
         val closeBgIV = actView.findViewById<ImageView>(R.id.mw_act_iv_close_bg)
         val titleTv = actView.findViewById<TextView>(R.id.mw_act_tv_title)
-        val contentPageView = actView.findViewById<ViewPager2>(R.id.mw_act_pv2_content)
+        contentPageView = actView.findViewById<ViewPager2>(R.id.mw_act_pv2_content)
 
         closeBgIV.setOnClickListener {
             this.sBaseDialog?.dismiss()
         }
 
-        actDatas = arrayListOf<ActData>()
-        for (i in 0..10) {
-            val actData = ActData()
-            actData.contentImgUrl = "https://www.baidu.com/"
-            actData.title = "title=$i"
-            if (i == 0){
-                actData.isClick = true
-            }
-            actDatas!!.add(actData)
-        }
-
-        if (contentPageView !== null){//contentPageView为空即为横版
+        if (contentPageView != null){//contentPageView为空即为横版
             //处理竖屏
-            handle_V_view(context, actView, titleBgIV, backBgIV, contentPageView, titleTv)
+            handle_V_view(context, actView, titleBgIV, backBgIV, closeBgIV,
+                contentPageView!!, titleTv)
         }else{
-
-            hand_H_view(context, actView, titleBgIV, backBgIV, titleTv)
-
+            hand_H_view(context, actView, titleBgIV, backBgIV, closeBgIV, titleTv)
         }
 
+    }
+    fun refreshData(datas: List<ActData>): Unit {
+
+        actDatas?.let {
+            it.clear()
+            it.addAll(datas)
+            actDatas?.first()?.isClick = true
+            mActExpoAdapter?.notifyDataSetChanged()
+            menuRecyclerView?.adapter?.notifyDataSetChanged()
+            indicatorView?.attachToViewPager2(contentPageView)
+        }
+
+    }
+    override fun createView(context: Context?, layoutInflater: LayoutInflater?): View {
+        PL.d("createView")
+        actView = layoutInflater!!.inflate(R.layout.activity_act, null)
         return actView
     }
 
@@ -80,16 +106,25 @@ class ActExpoView : SLoginBaseRelativeLayout {
                             actView: View,
                             titleBgIV: ImageView,
                             backBgIV: ImageView,
+                            closeBgIV: ImageView,
                             titleTv: TextView) {
 
 
         //横版
-        val menuRecyclerView = actView.findViewById<RecyclerView>(R.id.mw_act_rv_menu)
+        menuRecyclerView = actView.findViewById<RecyclerView>(R.id.mw_act_rv_menu)
         val contentWebView = actView.findViewById<WebView>(R.id.mw_act_wv_item)
-        menuRecyclerView.setLayoutManager(LinearLayoutManager(getContext()))
+        menuRecyclerView?.setLayoutManager(LinearLayoutManager(getContext()))
 
         actDatas?.let {
-            contentWebView.loadUrl(it[0].contentImgUrl)
+            if (it.isNotEmpty()) {
+                val firstData = it[0]
+                titleTv.text = firstData.title
+                loadViewImage(firstData, backBgIV, closeBgIV, titleBgIV)
+
+                val sr = SGameBaseRequestBean(context)
+                sr.completeUrl = firstData.contentUrl
+                contentWebView.loadUrl(sr.createPreRequestUrl())
+            }
         }
         val menuCommonAdapter = object : CommonAdapter<ActData>(
             this.context,
@@ -111,10 +146,24 @@ class ActExpoView : SLoginBaseRelativeLayout {
                     val mData = datas[position]
 
                     val menuIv = holder.getView<ImageView>(R.id.mw_act_iv_menu)
+                    val loginTimestamp = SdkUtil.getSdkTimestamp(activity)
+
                     if (mData.isClick){
-                        menuIv.setImageResource(R.mipmap.img_act_menu_select)
+//                        menuIv.setImageResource(R.mipmap.img_act_menu_select)
+                        Glide.with(this@ActExpoView)
+                            .load(mData.menuSelectImgUrl + "?" + loginTimestamp)
+                            .centerCrop()
+                            .placeholder(R.mipmap.img_act_menu_select)
+                            .into(menuIv)
+
                     }else{
-                        menuIv.setImageResource(R.mipmap.img_act_menu_unselect)
+//                        menuIv.setImageResource(R.mipmap.img_act_menu_unselect)
+
+                        Glide.with(this@ActExpoView)
+                            .load(mData.menuUnSelectImgUrl + "?" + loginTimestamp)
+                            .centerCrop()
+                            .placeholder(R.mipmap.img_act_menu_unselect)
+                            .into(menuIv)
                     }
 
                     menuIv.setOnClickListener {
@@ -123,16 +172,20 @@ class ActExpoView : SLoginBaseRelativeLayout {
                             return@setOnClickListener
                         }
                         titleTv.text = mData.title
-                        contentWebView.loadUrl(mData.contentImgUrl)
+                        loadViewImage(mData, backBgIV, closeBgIV, titleBgIV)
+
+                        val sr = SGameBaseRequestBean(context)
+                        sr.completeUrl = mData.contentUrl
+                        contentWebView.loadUrl(sr.createPreRequestUrl())
                         for (dataTemp:ActData in datas){
                             dataTemp.isClick = dataTemp == mData
                         }
-                        menuRecyclerView.adapter?.notifyDataSetChanged()
+                        menuRecyclerView?.adapter?.notifyDataSetChanged()
                     }
                 }
             }
         }
-        menuRecyclerView.adapter = menuCommonAdapter
+        menuRecyclerView?.adapter = menuCommonAdapter
     }
 
     private fun handle_V_view(  //竖屏
@@ -140,11 +193,12 @@ class ActExpoView : SLoginBaseRelativeLayout {
         actView: View,
         titleBgIV: ImageView,
         backBgIV: ImageView,
+        closeBgIV: ImageView,
         contentPageView: ViewPager2,
         titleTv: TextView
     ) {
         //        contentPageView.setPageTransformer(mAnimator)
-        val indicatorView = actView.findViewById<Vp2IndicatorView>(R.id.mw_act_indicatorView)
+        indicatorView = actView.findViewById<Vp2IndicatorView>(R.id.mw_act_indicatorView)
 
         backBgIV.setOnClickListener {
 
@@ -176,16 +230,48 @@ class ActExpoView : SLoginBaseRelativeLayout {
             override fun onPageSelected(position: Int) {
                 PL.d("OnPageChangeCallback onPageSelected position = $position")
                 mActExpoAdapter?.let {
+                    currentPageIndex = position
+                    indicatorView?.pageSelected(contentPageView, position)
+
                     val mData = it.actDatas[position]
                     titleTv.text = mData.title
-                    currentPageIndex = position
 
-                    indicatorView?.pageSelected(contentPageView, position)
+                    loadViewImage(mData, backBgIV, closeBgIV, titleBgIV)
+
                 }
             }
         })
 
-        indicatorView.attachToViewPager2(contentPageView)
+        indicatorView?.attachToViewPager2(contentPageView)
+    }
+
+    private fun loadViewImage(
+        mData: ActData,
+        backBgIV: ImageView,
+        closeBgIV: ImageView,
+        titleBgIV: ImageView
+    ) {
+        if (mData.titleImgUrl.isNotEmpty()) {//背景图片有的话，才一起加载
+
+            val loginTimestamp = SdkUtil.getSdkTimestamp(activity)
+            Glide.with(this@ActExpoView)
+                .load(mData.backImgUrl + "?" + loginTimestamp)
+                .centerCrop()
+                .placeholder(R.mipmap.act_title_back_bg)
+                .into(backBgIV)
+            Glide.with(this@ActExpoView)
+                .load(mData.closeImgUrl + "?" + loginTimestamp)
+                .centerCrop()
+                .placeholder(R.mipmap.act_title_close_bg)
+                .into(closeBgIV)
+
+            Glide.with(this@ActExpoView)
+                .load(mData.titleImgUrl + "?" + loginTimestamp)
+                .centerCrop()
+                .placeholder(R.mipmap.act_title_bg)
+                .into(titleBgIV)
+
+        }
     }
 
 

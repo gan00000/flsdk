@@ -195,6 +195,7 @@ public abstract class AbsHttpRequest implements ISRqeust {
                                         }
 
                                     } catch (JsonSyntaxException e) {
+                                        PL.e("fromJson error url = %s", coreHttpResponse.getRequestCompleteUrl());
                                         e.printStackTrace();
                                     }
                                 }

@@ -1,6 +1,7 @@
 package com.mw.sdk.api;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 
@@ -13,6 +14,7 @@ import com.core.base.utils.SPUtil;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
 import com.mw.sdk.bean.SGameBaseRequestBean;
+import com.mw.sdk.bean.res.ActData;
 import com.mw.sdk.bean.res.ConfigBean;
 import com.mw.sdk.utils.ResConfig;
 import com.mw.sdk.utils.SdkUtil;
@@ -31,7 +33,16 @@ import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.utils.DialogUtil;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.core.ObservableSource;
+import io.reactivex.rxjava3.core.Observer;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.functions.Function;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class Request {
 
@@ -406,5 +417,65 @@ public class Request {
 
         });
         simpleHttpRequest.excute(TogglePayRes.class);
+    }
+
+    public static void requestActData(Context context, SFCallBack<List<ActData>> sfCallBack) {
+
+        String gameCode = ResConfig.getGameCode(context);
+        SGameBaseRequestBean sGameBaseRequestBean = new SGameBaseRequestBean(context);
+        Dialog dialog = DialogUtil.createLoadingDialog(context, "Loading...");
+        dialog.show();
+        RetrofitClient.instance().build(context,URLType.PLAT).create(MWApiService.class)
+                .marketSwitch(sGameBaseRequestBean.fieldValueToMap())
+                .flatMap(new Function<BaseResponseModel, ObservableSource<List<ActData>>>() {
+                    @Override
+                    public ObservableSource<List<ActData>> apply(BaseResponseModel baseResponseModel) throws Throwable {
+                        PL.i("flatMap apply...");
+                        if (baseResponseModel.isRequestSuccess()){
+                            return RetrofitClient.instance().build(context,URLType.CDN).create(MWApiService.class)
+                                    .getMarketData(gameCode, SdkUtil.getSdkTimestamp(context));
+                        }
+                        return null;
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<List<ActData>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        PL.i("subscribe onSubscribe...");
+                    }
+
+                    @Override
+                    public void onNext(@NonNull List<ActData> actData) {
+                        PL.i("subscribe onNext...");
+                        if (dialog != null  ) {
+                            dialog.dismiss();
+                        }
+
+                        if (sfCallBack != null) {
+                            sfCallBack.success(actData, "success");
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        PL.i("subscribe onError...");
+                        if (dialog != null  ) {
+                            dialog.dismiss();
+                        }
+                        if (sfCallBack != null) {
+                            sfCallBack.fail(null, context.getString(R.string.py_error_occur));
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        PL.i("subscribe onComplete...");
+                        if (dialog != null  ) {
+                            dialog.dismiss();
+                        }
+                    }
+                });
     }
 }
