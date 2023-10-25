@@ -1,7 +1,7 @@
 package com.mw.sdk.api;
 
-import com.core.base.bean.BaseResponseModel;
 import com.mw.sdk.bean.res.ActData;
+import com.mw.sdk.bean.res.ToggleResult;
 
 import java.util.List;
 import java.util.Map;
@@ -18,7 +18,7 @@ public interface MWApiService {
 
     @POST("sdk/api/market/switch")
     @FormUrlEncoded
-    Observable<BaseResponseModel> marketSwitch(@FieldMap Map<String, String> paramMap);
+    Observable<ToggleResult> marketSwitch(@FieldMap Map<String, String> paramMap);
 
     //https://cdn-download.tthplay.com/sdk/config/vnmxw/v1/market.json
     @GET("sdk/config/{gameCode}/v1/market.json")

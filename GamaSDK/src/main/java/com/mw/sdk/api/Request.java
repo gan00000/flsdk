@@ -24,7 +24,7 @@ import com.mw.sdk.ads.EventConstant;
 import com.mw.sdk.ads.SdkEventLogger;
 import com.mw.sdk.constant.ApiRequestMethod;
 import com.mw.sdk.bean.req.PayCreateOrderReqBean;
-import com.mw.sdk.bean.res.TogglePayRes;
+import com.mw.sdk.bean.res.ToggleResult;
 import com.mw.sdk.utils.PayHelper;
 import com.mw.sdk.utils.DataManager;
 import com.mw.sdk.api.task.BaseLoginRequestTask;
@@ -373,7 +373,7 @@ public class Request {
     }
 
 
-    public static void togglePayRequest(Context context, PayCreateOrderReqBean checkPayTypeReqBean, SFCallBack<TogglePayRes> sfCallBack) {
+    public static void togglePayRequest(Context context, PayCreateOrderReqBean checkPayTypeReqBean, SFCallBack<ToggleResult> sfCallBack) {
 
         checkPayTypeReqBean.setRequestMethod(ApiRequestMethod.API_PAYMENT_CHANNEL);
         checkPayTypeReqBean.setRequestUrl(PayHelper.getPreferredUrl(context));
@@ -381,14 +381,14 @@ public class Request {
         simpleHttpRequest.setBaseReqeustBean(checkPayTypeReqBean);
 
         simpleHttpRequest.setLoadDialog(DialogUtil.createLoadingDialog(context, "Loading..."));
-        simpleHttpRequest.setReqCallBack(new ISReqCallBack<TogglePayRes>() {
+        simpleHttpRequest.setReqCallBack(new ISReqCallBack<ToggleResult>() {
             @Override
-            public void success(TogglePayRes togglePayRes, String rawResult) {
+            public void success(ToggleResult toggleResult, String rawResult) {
 
-                if (togglePayRes != null && togglePayRes.isRequestSuccess()) {
+                if (toggleResult != null && toggleResult.isRequestSuccess()) {
 
                     if (sfCallBack != null){
-                        sfCallBack.success(togglePayRes,rawResult);
+                        sfCallBack.success(toggleResult,rawResult);
                     }
 
                 } else {
@@ -416,7 +416,7 @@ public class Request {
             public void cancel() {}
 
         });
-        simpleHttpRequest.excute(TogglePayRes.class);
+        simpleHttpRequest.excute(ToggleResult.class);
     }
 
     public static void requestActData(Context context, SFCallBack<List<ActData>> sfCallBack) {
@@ -427,11 +427,11 @@ public class Request {
         dialog.show();
         RetrofitClient.instance().build(context,URLType.PLAT).create(MWApiService.class)
                 .marketSwitch(sGameBaseRequestBean.fieldValueToMap())
-                .flatMap(new Function<BaseResponseModel, ObservableSource<List<ActData>>>() {
+                .flatMap(new Function<ToggleResult, ObservableSource<List<ActData>>>() {
                     @Override
-                    public ObservableSource<List<ActData>> apply(BaseResponseModel baseResponseModel) throws Throwable {
+                    public ObservableSource<List<ActData>> apply(ToggleResult toggleResult) throws Throwable {
                         PL.i("flatMap apply...");
-                        if (baseResponseModel.isRequestSuccess()){
+                        if (toggleResult != null && toggleResult.isRequestSuccess() && toggleResult.getData() != null && toggleResult.getData().isShowMarketButton()){
                             return RetrofitClient.instance().build(context,URLType.CDN).create(MWApiService.class)
                                     .getMarketData(gameCode, SdkUtil.getSdkTimestamp(context));
                         }

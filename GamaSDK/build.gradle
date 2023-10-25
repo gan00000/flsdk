@@ -134,7 +134,6 @@ repositories {
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.9.0'
-    implementation 'androidx.viewpager2:viewpager2:1.0.0'
 
     //基础库
     api 'androidx.legacy:legacy-support-v4:1.0.0'
@@ -142,6 +141,7 @@ dependencies {
     api 'androidx.recyclerview:recyclerview:1.2.1'
     api 'androidx.constraintlayout:constraintlayout:2.1.4'
     api 'androidx.browser:browser:1.4.0'
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
 
     //mutildex
     implementation 'androidx.multidex:multidex:2.0.1'

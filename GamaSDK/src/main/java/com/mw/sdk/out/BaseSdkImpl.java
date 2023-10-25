@@ -45,7 +45,7 @@ import com.mw.sdk.bean.req.PayCreateOrderReqBean;
 import com.mw.sdk.bean.res.ActData;
 import com.mw.sdk.bean.res.BasePayBean;
 import com.mw.sdk.bean.res.ConfigBean;
-import com.mw.sdk.bean.res.TogglePayRes;
+import com.mw.sdk.bean.res.ToggleResult;
 import com.mw.sdk.callback.IPayListener;
 import com.mw.sdk.constant.ChannelPlatform;
 import com.mw.sdk.constant.RequestCode;
@@ -232,6 +232,10 @@ public class BaseSdkImpl implements IMWSDK {
     @Override
     public void openCs(Activity activity, String roleId, String roleName, String roleLevel, String vipLevel, String severCode, String serverName) {
         PL.i("roleId:" + roleId + ",roleName:" + roleName + ",roleLevel:" + roleLevel + ",vipLevel:" + vipLevel + ",severCode:" + severCode + ",serverName:" + serverName);
+        if (SStringUtil.isEmpty(roleId) || SStringUtil.isEmpty(severCode)){
+            ToastUtils.toast(activity,"roleId and severCode must not empty");
+            return;
+        }
         SdkUtil.saveRoleInfo(activity, roleId, roleName, roleLevel, vipLevel, severCode, serverName);//保存角色信息
         openCs(activity);
     }
@@ -730,6 +734,11 @@ public class BaseSdkImpl implements IMWSDK {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
+
+                if (SStringUtil.isEmpty(roleId) || SStringUtil.isEmpty(severCode)){
+                    ToastUtils.toast(activity,"roleId and severCode must not empty");
+                    return;
+                }
                 SdkUtil.saveRoleInfo(activity, roleId, roleName, roleLevel, vipLevel, severCode, serverName);//保存角色信息
                 startPay(activity, payType, cpOrderId, productId, extra, listener);
                 trackEvent(activity, EventConstant.EventName.Initiate_Checkout);
@@ -813,9 +822,9 @@ public class BaseSdkImpl implements IMWSDK {
                 checkPayTypeReqBean.setProductId(payCreateOrderReqBean.getProductId());
                 checkPayTypeReqBean.setExtra(payCreateOrderReqBean.getExtra());
 
-                Request.togglePayRequest(activity, checkPayTypeReqBean, new SFCallBack<TogglePayRes>() {
+                Request.togglePayRequest(activity, checkPayTypeReqBean, new SFCallBack<ToggleResult>() {
                     @Override
-                    public void success(TogglePayRes result, String msg) {
+                    public void success(ToggleResult result, String msg) {
 
 //                        result.getData().setTogglePay(true);
 //                        result.getData().setHideSelectChannel(true);
@@ -834,7 +843,7 @@ public class BaseSdkImpl implements IMWSDK {
                     }
 
                     @Override
-                    public void fail(TogglePayRes result, String msg) {
+                    public void fail(ToggleResult result, String msg) {
                         doGooglePay(activity, payCreateOrderReqBean);
                     }
                 });
@@ -1086,44 +1095,42 @@ public class BaseSdkImpl implements IMWSDK {
     }
 
     @Override
-    public void showActView(Activity activity, SFCallBack sfCallBack) {
+    public void showActView(Activity activity) {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
 
-//                if (!SdkUtil.isVersion1(activity)) {
-//                    if (commonDialog != null){
-//                        commonDialog.dismiss();
-//                    }
-//                    commonDialog = new SBaseDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
-//                    ActExpoView mActExpoView = new ActExpoView(activity);
-//                    mActExpoView.setsBaseDialog(commonDialog);
-////                    mActExpoView.setSFCallBack(sfCallBack);
-//                    commonDialog.setContentView(mActExpoView);
-//                    commonDialog.show();
-
-//                }
                 if (commonDialog != null){
                     commonDialog.dismiss();
                 }
-                Request.requestActData(activity, new SFCallBack<List<ActData>>() {
-                    @Override
-                    public void success(List<ActData> result, String msg) {
 
-                        commonDialog = new SBaseDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
-                        ActExpoView mActExpoView = new ActExpoView(activity, result);
+                ConfigBean configBean = SdkUtil.getSdkCfg(activity);
+                if (configBean != null) {
+                    ConfigBean.VersionData versionData = configBean.getSdkConfigLoginData(activity);
+                    if (versionData != null && versionData.isShowMarket()) {
+                        Request.requestActData(activity, new SFCallBack<List<ActData>>() {
+                            @Override
+                            public void success(List<ActData> result, String msg) {
+
+                                commonDialog = new SBaseDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
+                                ActExpoView mActExpoView = new ActExpoView(activity, result);
 //                        mActExpoView.refreshData(result);
-                        mActExpoView.setsBaseDialog(commonDialog);
-                        //                    mActExpoView.setSFCallBack(sfCallBack);
-                        commonDialog.setContentView(mActExpoView);
-                        commonDialog.show();
-                    }
+                                mActExpoView.setsBaseDialog(commonDialog);
+                                //                    mActExpoView.setSFCallBack(sfCallBack);
+                                commonDialog.setContentView(mActExpoView);
+                                commonDialog.show();
+                            }
 
-                    @Override
-                    public void fail(List<ActData> result, String msg) {
-                        ToastUtils.toast(activity, msg + "");
+                            @Override
+                            public void fail(List<ActData> result, String msg) {
+                                ToastUtils.toast(activity, msg + "");
+                            }
+                        });
+                        return;
                     }
-                });
+                }
+                ToastUtils.toast(activity,"This feature is not turned on");
+
             }
         });
 

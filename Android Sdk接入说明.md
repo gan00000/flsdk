@@ -38,12 +38,11 @@
     }
     dependencies {
         
-        classpath 'com.android.tools.build:gradle:8.0.2'
+        classpath 'com.android.tools.build:gradle:8.1.2'
         // google-services plugin
         classpath 'com.google.gms:google-services:4.4.0'
         // Add the Crashlytics Gradle plugin.
         classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.9'
-
     	}
 	}
 
@@ -144,12 +143,14 @@
 		//MWSDK-release为sdk内提供的aar库
 	    implementation(name:'MWSDK-release', ext:'aar')
 	    
-	    //基础库
+		    //基础库
 	    api 'androidx.legacy:legacy-support-v4:1.0.0'
 	    api 'androidx.appcompat:appcompat:1.5.1'
 	    api 'androidx.recyclerview:recyclerview:1.2.1'
 	    api 'androidx.constraintlayout:constraintlayout:2.1.4'
 	    api 'androidx.browser:browser:1.4.0'
+	    implementation 'androidx.viewpager2:viewpager2:1.0.0'
+	
 	    //mutildex
 	    implementation 'androidx.multidex:multidex:2.0.1'
 	    //google pay
@@ -157,7 +158,6 @@
 	    //google评分
 	    implementation 'com.google.android.play:review:2.0.1'
 	
-	    implementation 'com.google.code.gson:gson:2.8.6'
 	    implementation("com.google.guava:guava:31.1-android")
 	    implementation 'com.zhy:base-rvadapter:3.0.3'
 	
@@ -188,15 +188,22 @@
 	    //line
 	    implementation 'com.linecorp:linesdk:5.0.1'
 	
-	    implementation 'com.github.bumptech.glide:glide:4.11.0'
-	    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 	    //af
 	    implementation 'com.appsflyer:af-android-sdk:6.9.0'
 	    implementation 'com.android.installreferrer:installreferrer:2.2'
 	
+	    implementation 'com.adjust.sdk:adjust-android:4.33.5'
+	
+	    implementation 'com.google.code.gson:gson:2.8.6'
 	    implementation 'io.reactivex.rxjava3:rxandroid:3.0.2'
 	    implementation 'io.reactivex.rxjava3:rxjava:3.1.5'
-
+	    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+	    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+	    implementation 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'
+	    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
+	
+	    implementation 'com.github.bumptech.glide:glide:4.16.0'
+	    annotationProcessor 'com.github.bumptech.glide:compiler:4.16.0'
 	
 	}
 
@@ -218,7 +225,19 @@
 * <h3 id="2">Activity生命周期和初始化SDK</h3> 
 
 	```java
-	游戏Activity以下相应的声明周期方法（必须调用）:  
+	
+	1.应用Application onCreate中调用 （必须调用）
+	public class XXXApplication extends Application {
+	    @Override
+	    public void onCreate() {
+	        super.onCreate();
+	
+	        MWSdkFactory.create().applicationOnCreate(this);
+	    }
+
+  }
+	
+	2.游戏Activity以下相应的声明周期方法（必须调用）:  
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

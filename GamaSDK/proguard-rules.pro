@@ -45,8 +45,8 @@
 -keep public class com.mw.sdk.login.model.QooAppLoginModel { *; }
 -keep public class com.mw.sdk.login.model.QooAppLoginModel$UserData { *; }
 -keep public class com.mw.sdk.bean.SUserInfo { *; }
--keep public class com.mw.sdk.bean.res.TogglePayRes { *; }
--keep public class com.mw.sdk.bean.res.TogglePayRes$Data { *; }
+-keep public class com.mw.sdk.bean.res.ToggleResult { *; }
+-keep public class com.mw.sdk.bean.res.ToggleResult$Data { *; }
 -keep public class **$Data { *; }
 
 -keep public class * implements com.bumptech.glide.module.GlideModule
