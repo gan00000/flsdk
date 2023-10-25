@@ -1123,7 +1123,7 @@ public class BaseSdkImpl implements IMWSDK {
 
                             @Override
                             public void fail(List<ActData> result, String msg) {
-                                ToastUtils.toast(activity, msg + "");
+                                ToastUtils.toast(activity, "This feature is not turned on");
                             }
                         });
                         return;

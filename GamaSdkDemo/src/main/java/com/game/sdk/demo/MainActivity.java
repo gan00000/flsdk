@@ -364,7 +364,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.cs).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mIMWSDK.openCs(MainActivity.this);
+                mIMWSDK.openCs(MainActivity.this, roleId, roleName, roleLevel, vipLevel, serverCode, serverName);
             }
         });
         findViewById(R.id.checkGoogleServer).setOnClickListener(new View.OnClickListener() {
@@ -416,17 +416,7 @@ public class MainActivity extends Activity {
                     ToastUtils.toast(activity,"请先登录");
                     return;
                 }
-                mIMWSDK.showActView(MainActivity.this, new SFCallBack() {
-                    @Override
-                    public void success(Object result, String msg) {
-
-                    }
-
-                    @Override
-                    public void fail(Object result, String msg) {
-
-                    }
-                });
+                mIMWSDK.showActView(MainActivity.this);
             }
         });
 
