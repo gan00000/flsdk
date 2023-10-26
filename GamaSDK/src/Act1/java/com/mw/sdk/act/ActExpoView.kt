@@ -16,7 +16,7 @@ import com.core.base.utils.PL
 import com.mw.sdk.R
 import com.mw.sdk.adapter.ActExpoAdapter
 import com.mw.sdk.bean.SGameBaseRequestBean
-import com.mw.sdk.bean.res.ActData
+import com.mw.sdk.bean.res.ActDataModel
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout
 import com.mw.sdk.utils.SdkUtil
 import com.mw.sdk.widget.Vp2IndicatorView
@@ -25,7 +25,7 @@ import com.zhy.adapter.recyclerview.base.ViewHolder
 
 class ActExpoView : SLoginBaseRelativeLayout {
 
-    var actDatas: ArrayList<ActData>? = null
+    var actDatas: ArrayList<ActDataModel.ActData>? = null
 
     private lateinit var actView:View
 
@@ -36,7 +36,7 @@ class ActExpoView : SLoginBaseRelativeLayout {
 
     private var menuRecyclerView:RecyclerView? = null
 
-    constructor(context: Context?, datas: List<ActData>) : super(context)
+    constructor(context: Context?, datas: List<ActDataModel.ActData>) : super(context)
     {
         actDatas = arrayListOf()
         actDatas?.addAll(datas)
@@ -84,7 +84,7 @@ class ActExpoView : SLoginBaseRelativeLayout {
         }
 
     }
-    fun refreshData(datas: List<ActData>): Unit {
+    fun refreshData(datas: List<ActDataModel.ActData>): Unit {
 
         actDatas?.let {
             it.clear()
@@ -126,7 +126,7 @@ class ActExpoView : SLoginBaseRelativeLayout {
                 contentWebView.loadUrl(sr.createPreRequestUrl())
             }
         }
-        val menuCommonAdapter = object : CommonAdapter<ActData>(
+        val menuCommonAdapter = object : CommonAdapter<ActDataModel.ActData>(
             this.context,
             R.layout.activity_act_menu_item,
             actDatas
@@ -138,7 +138,7 @@ class ActExpoView : SLoginBaseRelativeLayout {
 
             override fun convert(
                 holder: ViewHolder,
-                mActData: ActData,
+                mActData: ActDataModel.ActData,
                 position: Int
             ) {
                 actDatas?.let { datas->
@@ -171,16 +171,22 @@ class ActExpoView : SLoginBaseRelativeLayout {
                         if (mData.isClick){
                             return@setOnClickListener
                         }
+
+                        for (dataTemp: ActDataModel.ActData in datas){
+                           // == 对应于Java中的 equals()
+                           // ===对应于 Java中的 ==
+                            dataTemp.isClick = dataTemp === mData
+
+                        }
+                        menuRecyclerView?.adapter?.notifyDataSetChanged()
+
                         titleTv.text = mData.title
                         loadViewImage(mData, backBgIV, closeBgIV, titleBgIV)
 
                         val sr = SGameBaseRequestBean(context)
                         sr.completeUrl = mData.contentUrl
                         contentWebView.loadUrl(sr.createPreRequestUrl())
-                        for (dataTemp:ActData in datas){
-                            dataTemp.isClick = dataTemp == mData
-                        }
-                        menuRecyclerView?.adapter?.notifyDataSetChanged()
+
                     }
                 }
             }
@@ -246,7 +252,7 @@ class ActExpoView : SLoginBaseRelativeLayout {
     }
 
     private fun loadViewImage(
-        mData: ActData,
+        mData: ActDataModel.ActData,
         backBgIV: ImageView,
         closeBgIV: ImageView,
         titleBgIV: ImageView

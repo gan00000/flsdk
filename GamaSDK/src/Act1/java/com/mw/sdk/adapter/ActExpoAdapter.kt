@@ -24,9 +24,9 @@ import android.webkit.WebView
 import androidx.recyclerview.widget.RecyclerView
 import com.mw.sdk.R
 import com.mw.sdk.bean.SGameBaseRequestBean
-import com.mw.sdk.bean.res.ActData
+import com.mw.sdk.bean.res.ActDataModel
 
-class ActExpoAdapter(val context: Context?, val actDatas: ArrayList<ActData>) : RecyclerView.Adapter<ActExpoViewHolder>() {
+class ActExpoAdapter(val context: Context?, val actDatas: ArrayList<ActDataModel.ActData>) : RecyclerView.Adapter<ActExpoViewHolder>() {
 
     val webViewMap = HashMap<Int,WebView> ()
 

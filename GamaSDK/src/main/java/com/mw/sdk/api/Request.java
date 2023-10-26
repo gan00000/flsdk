@@ -21,7 +21,7 @@ import com.mw.sdk.api.task.BaseLoginRequestTask;
 import com.mw.sdk.bean.SGameBaseRequestBean;
 import com.mw.sdk.bean.req.AccountBindInGameRequestBean;
 import com.mw.sdk.bean.req.PayCreateOrderReqBean;
-import com.mw.sdk.bean.res.ActData;
+import com.mw.sdk.bean.res.ActDataModel;
 import com.mw.sdk.bean.res.ConfigBean;
 import com.mw.sdk.bean.res.ToggleResult;
 import com.mw.sdk.constant.ApiRequestMethod;
@@ -33,7 +33,6 @@ import com.mw.sdk.utils.ResConfig;
 import com.mw.sdk.utils.SdkUtil;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -419,7 +418,7 @@ public class Request {
         simpleHttpRequest.excute(ToggleResult.class);
     }
 
-    public static void requestActData(Context context, SFCallBack<List<ActData>> sfCallBack) {
+    public static void requestActData(Context context, SFCallBack<ActDataModel> sfCallBack) {
 
         String gameCode = ResConfig.getGameCode(context);
         SGameBaseRequestBean sGameBaseRequestBean = new SGameBaseRequestBean(context);
@@ -427,9 +426,9 @@ public class Request {
         dialog.show();
         RetrofitClient.instance().build(context,URLType.PLAT).create(MWApiService.class)
                 .marketSwitch(sGameBaseRequestBean.fieldValueToMap())
-                .flatMap(new Function<ToggleResult, ObservableSource<List<ActData>>>() {
+                .flatMap(new Function<ToggleResult, ObservableSource<ActDataModel>>() {
                     @Override
-                    public ObservableSource<List<ActData>> apply(ToggleResult toggleResult) throws Throwable {
+                    public ObservableSource<ActDataModel> apply(ToggleResult toggleResult) throws Throwable {
                         PL.i("flatMap apply...");
                         if (toggleResult != null && toggleResult.isRequestSuccess() && toggleResult.getData() != null && toggleResult.getData().isShowMarketButton()){
 //                            return RetrofitClient.instance().build(context,URLType.CDN).create(MWApiService.class)
@@ -437,26 +436,28 @@ public class Request {
                             return RetrofitClient.instance().build(context,URLType.PLAT).create(MWApiService.class)
                                     .getMarketData(sGameBaseRequestBean.fieldValueToMap());
                         }
+//                        return RetrofitClient.instance().build(context,URLType.PLAT).create(MWApiService.class)
+//                                .getMarketData(sGameBaseRequestBean.fieldValueToMap());
                         return null;
                     }
                 })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<ActData>>() {
+                .subscribe(new Observer<ActDataModel>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
                         PL.i("subscribe onSubscribe...");
                     }
 
                     @Override
-                    public void onNext(@NonNull List<ActData> actData) {
+                    public void onNext(@NonNull ActDataModel actDataModel) {
                         PL.i("subscribe onNext...");
                         if (dialog != null  ) {
                             dialog.dismiss();
                         }
 
                         if (sfCallBack != null) {
-                            sfCallBack.success(actData, "success");
+                            sfCallBack.success(actDataModel, "success");
                         }
                     }
 

@@ -42,7 +42,7 @@ import com.mw.sdk.api.Request;
 import com.mw.sdk.bean.PhoneInfo;
 import com.mw.sdk.bean.SGameBaseRequestBean;
 import com.mw.sdk.bean.req.PayCreateOrderReqBean;
-import com.mw.sdk.bean.res.ActData;
+import com.mw.sdk.bean.res.ActDataModel;
 import com.mw.sdk.bean.res.BasePayBean;
 import com.mw.sdk.bean.res.ConfigBean;
 import com.mw.sdk.bean.res.ToggleResult;
@@ -73,7 +73,6 @@ import com.thirdlib.adjust.AdjustHelper;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.huawei.HuaweiPayImpl;
 
-import java.util.List;
 import java.util.Map;
 
 
@@ -1107,22 +1106,26 @@ public class BaseSdkImpl implements IMWSDK {
                 ConfigBean configBean = SdkUtil.getSdkCfg(activity);
                 if (configBean != null) {
                     ConfigBean.VersionData versionData = configBean.getSdkConfigLoginData(activity);
+                    //versionData.setShowMarket(true);
                     if (versionData != null && versionData.isShowMarket()) {
-                        Request.requestActData(activity, new SFCallBack<List<ActData>>() {
+                        Request.requestActData(activity, new SFCallBack<ActDataModel>() {
                             @Override
-                            public void success(List<ActData> result, String msg) {
+                            public void success(ActDataModel result, String msg) {
 
-                                commonDialog = new SBaseDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
-                                ActExpoView mActExpoView = new ActExpoView(activity, result);
-//                        mActExpoView.refreshData(result);
-                                mActExpoView.setsBaseDialog(commonDialog);
-                                //                    mActExpoView.setSFCallBack(sfCallBack);
-                                commonDialog.setContentView(mActExpoView);
-                                commonDialog.show();
+                                if (result != null && result.isRequestSuccess() && result.getData() != null){
+                                    commonDialog = new SBaseDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
+                                    ActExpoView mActExpoView = new ActExpoView(activity, result.getData());
+                                    mActExpoView.setsBaseDialog(commonDialog);
+                                    commonDialog.setContentView(mActExpoView);
+                                    commonDialog.show();
+                                }else {
+                                    ToastUtils.toast(activity, "" + result.getMessage());
+                                }
+
                             }
 
                             @Override
-                            public void fail(List<ActData> result, String msg) {
+                            public void fail(ActDataModel result, String msg) {
                                 ToastUtils.toast(activity, "This feature is not turned on");
                             }
                         });
