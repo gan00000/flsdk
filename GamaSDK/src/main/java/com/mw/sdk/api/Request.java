@@ -432,8 +432,10 @@ public class Request {
                     public ObservableSource<List<ActData>> apply(ToggleResult toggleResult) throws Throwable {
                         PL.i("flatMap apply...");
                         if (toggleResult != null && toggleResult.isRequestSuccess() && toggleResult.getData() != null && toggleResult.getData().isShowMarketButton()){
-                            return RetrofitClient.instance().build(context,URLType.CDN).create(MWApiService.class)
-                                    .getMarketData(gameCode, SdkUtil.getSdkTimestamp(context));
+//                            return RetrofitClient.instance().build(context,URLType.CDN).create(MWApiService.class)
+//                                    .getMarketData(gameCode, SdkUtil.getSdkTimestamp(context));
+                            return RetrofitClient.instance().build(context,URLType.PLAT).create(MWApiService.class)
+                                    .getMarketData(sGameBaseRequestBean.fieldValueToMap());
                         }
                         return null;
                     }

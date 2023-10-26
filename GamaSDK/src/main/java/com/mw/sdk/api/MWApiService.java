@@ -21,8 +21,11 @@ public interface MWApiService {
     Observable<ToggleResult> marketSwitch(@FieldMap Map<String, String> paramMap);
 
     //https://cdn-download.tthplay.com/sdk/config/vnmxw/v1/market.json
-    @GET("sdk/config/{gameCode}/v1/market.json")
-    Observable<List<ActData>> getMarketData(@Path("gameCode") String gameCode, @Query("timestamp") String timestamp);
+//    @GET("sdk/config/{gameCode}/v1/market.json")
+//    Observable<List<ActData>> getMarketData(@Path("gameCode") String gameCode, @Query("timestamp") String timestamp);
 
+    @POST("sdk/api/market/articles")
+    @FormUrlEncoded
+    Observable<List<ActData>> getMarketData(@FieldMap Map<String, String> paramMap);
 
 }
