@@ -13,7 +13,7 @@ android {
         jvmTarget = rootProject.ext.jvmTarget
     }
 
-    def sdk_version = "2.0.1"
+    def sdk_version = "2.0.2"
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
@@ -207,7 +207,7 @@ dependencies {
 
     //naver
     sdkKRImplementation("com.navercorp.nid:oauth:5.6.0") // jdk 11
-
+    //onestore
     sdkKRImplementation "com.onestorecorp.sdk:sdk-iap:21.00.00"
     sdkKRImplementation "com.onestorecorp.sdk:sdk-configuration-kr:1.0.0"
 }
