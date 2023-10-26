@@ -47,7 +47,18 @@
 -keep public class com.mw.sdk.bean.SUserInfo { *; }
 -keep public class com.mw.sdk.bean.res.ToggleResult { *; }
 -keep public class com.mw.sdk.bean.res.ToggleResult$Data { *; }
--keep public class **$Data { *; }
+
+-keep public class com.mw.**.*Data { *; }
+-keep public class com.mw.**.*Model { *; }
+-keep public class com.mw.**.*Result { *; }
+-keep public class com.mw.**.*Bean { *; }
+-keep public class com.mw.**.*Res { *; }
+
+-keep public class com.mw.**$*Data { *; }
+-keep public class com.mw.**$*Model { *; }
+-keep public class com.mw.**$*Result { *; }
+-keep public class com.mw.**$*Bean { *; }
+-keep public class com.mw.**$*Res { *; }
 
 -keep public class * implements com.bumptech.glide.module.GlideModule
 -keep public class * extends com.bumptech.glide.module.AppGlideModule
@@ -55,17 +66,28 @@
   **[] $VALUES;
   public *;
 }
+-keep public class com.bumptech.** { *; }
+
+-keep public class android.** { *; }
+-keep public class androidx.** { *; }
+-keep public class com.facebook.** { *; }
+-keep public class com.google.** { *; }
+-keep public class com.linecorp.** { *; }
+-keep public class com.appflyer.** { *; }
+-keep public class io.** { *; }
+-keep public class com.zhy.** { *; }
+-keep public class org.spongycastle.** { *; }
+-keep public class javax.** { *; }
+-keep public class com.adjust.** { *; }
+
+-keep public class retrofit2.** { *; }
+-keep public class io.jsonwebtoken.** { *; }
+-keep public class io.reactivex.** { *; }
+-keep public class okhttp3.** { *; }
+
+#-keep public class com.mw.** { *; }
+#-keep public class com.core.** { *; }
+#-keep public class com.thirdlib.** { *; }
+
 
 -dontwarn java.lang.invoke.StringConcatFactory
-
-# -keep public interface mypackage.MyInterface
-# -keep public class * implements mypackage.MyInterface
-
-
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
-
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
