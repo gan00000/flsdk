@@ -367,6 +367,7 @@ public class Request {
             activity.startActivity(csIntent);
         }else {
             PL.i("获取不到客服地址");
+            ToastUtils.toast(activity, "cs url empty");
         }
 
     }

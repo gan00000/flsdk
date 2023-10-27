@@ -70,10 +70,10 @@
 	
 	    compileSdkVersion 33
 	
-		//使用java 17编译
+		//java 11
 	    compileOptions {
-	        sourceCompatibility JavaVersion.VERSION_17
-	        targetCompatibility JavaVersion.VERSION_17
+	        sourceCompatibility JavaVersion.VERSION_11
+	        targetCompatibility JavaVersion.VERSION_11
 	    }
 	
 	    defaultConfig {
@@ -533,7 +533,9 @@
 	
 	```
 	//打开sdk内置的客服页面
-	void openCs(Activity activity);
+	 void openCs(Activity activity, String roleId,String roleName,String roleLevel,String vipLevel,String severCode,String serverName);
+
+
     
 	
 	```

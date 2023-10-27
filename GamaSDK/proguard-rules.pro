@@ -68,6 +68,8 @@
 }
 -keep public class com.bumptech.** { *; }
 
+-keep public class * extends java.lang.Enum { *; }
+
 -keep public class android.** { *; }
 -keep public class androidx.** { *; }
 -keep public class com.facebook.** { *; }
