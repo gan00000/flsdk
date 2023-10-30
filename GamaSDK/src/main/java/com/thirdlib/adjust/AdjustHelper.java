@@ -8,14 +8,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.adjust.sdk.Adjust;
-import com.adjust.sdk.AdjustConfig;
-import com.adjust.sdk.AdjustEvent;
-import com.adjust.sdk.LogLevel;
 import com.core.base.utils.FileUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
-import com.mw.sdk.BuildConfig;
 import com.mw.sdk.R;
 
 import org.json.JSONArray;
@@ -39,7 +34,8 @@ public class AdjustHelper {
             PL.e("AdjustHelper appToken empty");
             return;
         }
-        String environment = AdjustConfig.ENVIRONMENT_PRODUCTION;
+
+       /* String environment = AdjustConfig.ENVIRONMENT_PRODUCTION;
         if (BuildConfig.DEBUG) {
             environment = AdjustConfig.ENVIRONMENT_SANDBOX;
         }
@@ -49,7 +45,7 @@ public class AdjustHelper {
         Adjust.onCreate(config);
 
         PL.d("AdjustHelper init finish appToken=%s,environment=%s", appToken, environment);
-        application.registerActivityLifecycleCallbacks(new AdjustLifecycleCallbacks());
+        application.registerActivityLifecycleCallbacks(new AdjustLifecycleCallbacks());*/
     }
 
     private static final class AdjustLifecycleCallbacks implements Application.ActivityLifecycleCallbacks {
@@ -67,13 +63,13 @@ public class AdjustHelper {
         @Override
         public void onActivityResumed(Activity activity) {
             PL.e("AdjustHelper onActivityResumed");
-            Adjust.onResume();
+//            Adjust.onResume();
         }
 
         @Override
         public void onActivityPaused(Activity activity) {
             PL.e("AdjustHelper onActivityPaused");
-            Adjust.onPause();
+//            Adjust.onPause();
         }
 
         @Override
@@ -115,7 +111,7 @@ public class AdjustHelper {
             PL.e("AdjustHelper trackEvent error eventNameToken empty, eventName=%s", eventName);
             return;
         }
-
+/*
         AdjustEvent adjustEvent = new AdjustEvent(eventNameToken);
         if (revenue > 0) {
             adjustEvent.setRevenue(revenue,"USD");
@@ -133,7 +129,7 @@ public class AdjustHelper {
                 }
             }
         }
-        Adjust.trackEvent(adjustEvent);
+        Adjust.trackEvent(adjustEvent);*/
     }
 
 
