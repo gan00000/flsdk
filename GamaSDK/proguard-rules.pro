@@ -81,15 +81,19 @@
 -keep public class org.spongycastle.** { *; }
 -keep public class javax.** { *; }
 -keep public class com.adjust.** { *; }
+-keep public class com.gaa.** { *; }
+-keep public class com.gaa.** { *; }
+-keep public class com.navercorp.** { *; }
+-keep public class com.nhn.** { *; }
 
 -keep public class retrofit2.** { *; }
 -keep public class io.jsonwebtoken.** { *; }
 -keep public class io.reactivex.** { *; }
 -keep public class okhttp3.** { *; }
 
-#-keep public class com.mw.** { *; }
-#-keep public class com.core.** { *; }
-#-keep public class com.thirdlib.** { *; }
+-keep public class com.mw.** { *; }
+-keep public class com.core.** { *; }
+-keep public class com.thirdlib.** { *; }
 
 
 -dontwarn java.lang.invoke.StringConcatFactory
