@@ -18,6 +18,8 @@
 	12. [请求获取手机验证码](#15)
 	13. [请求绑定手机](#16)
 	14. [请求账号升级](#17)
+	15. [打开活动弹窗页面](#19)
+	16. [打开社群(banner)展示页面](#20)
 	9. [上架Google Play相关注意的问题](#10)
 
 
@@ -680,6 +682,30 @@
             }
         });
         
+	```
+	
+* <h3 id="19">打开活动弹窗页面</h3>   
+	
+	```
+	 /**
+	 * 游戏内设置一个按钮，触发打开活动弹窗页面
+	 * @param activity
+	 */
+	public void showActView(Activity activity);
+		
+	    
+	```
+	
+* <h3 id="20">打开社群(banner)展示页面</h3>   
+	
+	```
+	 /**
+	 * 游戏内设置一个按钮，打开社群展示页面
+	 * @param activity
+	 */
+	public void showSocialView(Activity activity);
+		
+	    
 	```
 	
 * <h3 id="10">上架Google Play相关注意的问题</h3>
