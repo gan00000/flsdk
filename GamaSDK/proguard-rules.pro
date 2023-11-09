@@ -91,9 +91,9 @@
 -keep public class io.reactivex.** { *; }
 -keep public class okhttp3.** { *; }
 
--keep public class com.mw.** { *; }
--keep public class com.core.** { *; }
--keep public class com.thirdlib.** { *; }
+#-keep public class com.mw.** { *; }
+#-keep public class com.core.** { *; }
+#-keep public class com.thirdlib.** { *; }
 
 
 -dontwarn java.lang.invoke.StringConcatFactory
