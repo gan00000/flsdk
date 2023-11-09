@@ -22,14 +22,14 @@
 <!--    <string name="mw_sdk_ads_spa_url"></string>-->
 
     <!--平台域名-->
-    <string name="mw_sdk_plat_pre_url"></string>
+    <string name="mw_sdk_plat_pre_url">https://platform.kodaduck.com/</string>
     <string name="mw_sdk_plat_spa_url"></string>
 
     <!--客服域名-->
-<!--    <string name="mw_sdk_cs_pre_url"></string>-->
-<!--    <string name="mw_sdk_cs_spa_url"></string>-->
+    <!--    <string name="mw_sdk_cs_pre_url"></string>-->
+    <!--    <string name="mw_sdk_cs_spa_url"></string>-->
 
-    <string name="mw_sdk_member_pre_url"></string>
+    <string name="mw_sdk_member_pre_url">https://member.kodaduck.com/</string>
     <string name="mw_sdk_member_spa_url"></string>
 
     <!--    日志记录域名-->
