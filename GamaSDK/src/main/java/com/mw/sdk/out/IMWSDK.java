@@ -186,4 +186,5 @@ public interface IMWSDK extends IGameLifeCycle {
     public void showSocialView(Activity activity);
 
     public void showActView(Activity activity);
+    public boolean isShowAct(Activity activity);
 }

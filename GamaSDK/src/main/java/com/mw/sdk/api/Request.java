@@ -482,4 +482,39 @@ public class Request {
                     }
                 });
     }
+
+    public static void requestMarketSwitch(Context context, SFCallBack<ToggleResult> sfCallBack) {
+
+        String gameCode = ResConfig.getGameCode(context);
+        SGameBaseRequestBean sGameBaseRequestBean = new SGameBaseRequestBean(context);
+        RetrofitClient.instance().build(context,URLType.PLAT).create(MWApiService.class)
+                .marketSwitch(sGameBaseRequestBean.fieldValueToMap())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ToggleResult>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        PL.i("subscribe onSubscribe...");
+                    }
+
+                    @Override
+                    public void onNext(@NonNull ToggleResult actDataModel) {
+                        PL.i("subscribe onNext...");
+
+                        if (sfCallBack != null) {
+                            sfCallBack.success(actDataModel, "success");
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        PL.i("subscribe onError...");
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        PL.i("subscribe onComplete...");
+                    }
+                });
+    }
 }

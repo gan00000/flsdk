@@ -2,6 +2,7 @@ package com.mw.sdk.out;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -104,6 +105,7 @@ public class BaseSdkImpl implements IMWSDK {
 
     private ReviewInfo reviewInfo;
 
+    private boolean isShowAct_M;
     public BaseSdkImpl() {
 //        iLogin = ObjFactory.create(DialogLoginImpl.class);
         PL.i("BaseSdkImpl 构造函数");
@@ -194,6 +196,7 @@ public class BaseSdkImpl implements IMWSDK {
                 if (iPay != null && SStringUtil.isNotEmpty(roleId) && SStringUtil.isNotEmpty(severCode) && SStringUtil.isNotEmpty(SdkUtil.getUid(activity))){
                     iPay.startQueryPurchase(activity.getApplicationContext());
                 }
+                showActViewSwitchRequest(activity);
             }
         });
     }
@@ -1136,6 +1139,40 @@ public class BaseSdkImpl implements IMWSDK {
 
             }
         });
+
+    }
+
+    @Override
+    public boolean isShowAct(Activity activity) {
+        return isShowAct_M;
+    }
+
+    private void showActViewSwitchRequest(Activity activity) {
+
+        if (isShowAct_M){
+            return;
+        }
+        ConfigBean configBean = SdkUtil.getSdkCfg(activity);
+        if (configBean != null) {
+            ConfigBean.VersionData versionData = configBean.getSdkConfigLoginData(activity);
+            //versionData.setShowMarket(true);
+            if (versionData != null && versionData.isShowMarket()) {
+                Request.requestMarketSwitch(activity, new SFCallBack<ToggleResult>() {
+                    @Override
+                    public void success(ToggleResult result, String msg) {
+
+                        if (result != null && result.isRequestSuccess() && result.getData() != null){
+                            isShowAct_M = true;
+                        }
+
+                    }
+
+                    @Override
+                    public void fail(ToggleResult result, String msg) {
+                    }
+                });
+            }
+        }
 
     }
 
