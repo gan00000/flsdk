@@ -106,6 +106,12 @@ android {
             keyAlias 'mwkr'
             keyPassword 'mwkr88888'
         }
+        onestore_sign_tgfm { //替换商店秘钥
+            storeFile file('../signkey/onestore_sign_tgfm.jks') //正式签名，以后使用
+            storePassword 'tgfm111222'
+            keyAlias 'tgfm'
+            keyPassword 'tgfm111222'
+        }
     }
 
     buildTypes {
