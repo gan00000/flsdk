@@ -1,10 +1,13 @@
 package com.mw.sdk.widget;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.util.AttributeSet;
 
 import com.core.base.SBaseWebView;
+import com.core.base.js.WebViewJsObj;
 import com.mw.sdk.utils.Localization;
 
 public class SWebView extends SBaseWebView {
@@ -33,7 +36,22 @@ public class SWebView extends SBaseWebView {
 	}
 
 	private void init(){
-		Localization.updateSGameLanguage(getContext());
+
+	}
+
+	public void addMWSDKJavascriptInterface(Dialog dialog){
+
+		if (getContext() instanceof Activity) {
+			Activity activity = (Activity) getContext();
+			WebViewJsObj webViewJsObj;
+			if (dialog == null) {
+				webViewJsObj = new WebViewJsObj(activity);
+			}else {
+				webViewJsObj = new WebViewJsObj(activity, dialog);
+			}
+			this.addJavascriptInterface(webViewJsObj,"MWSDK");
+		}
+
 	}
 
 }

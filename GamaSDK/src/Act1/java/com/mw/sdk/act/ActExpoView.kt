@@ -19,6 +19,8 @@ import com.mw.sdk.bean.SGameBaseRequestBean
 import com.mw.sdk.bean.res.ActDataModel
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout
 import com.mw.sdk.utils.SdkUtil
+import com.mw.sdk.widget.SBaseDialog
+import com.mw.sdk.widget.SWebView
 import com.mw.sdk.widget.Vp2IndicatorView
 import com.zhy.adapter.recyclerview.CommonAdapter
 import com.zhy.adapter.recyclerview.base.ViewHolder
@@ -36,8 +38,9 @@ class ActExpoView : SLoginBaseRelativeLayout {
 
     private var menuRecyclerView:RecyclerView? = null
 
-    constructor(context: Context?, datas: List<ActDataModel.ActData>) : super(context)
+    constructor(context: Context?, datas: List<ActDataModel.ActData>, sxDialog: SBaseDialog) : super(context)
     {
+        this.sBaseDialog = sxDialog;
         actDatas = arrayListOf()
         actDatas?.addAll(datas)
         actDatas?.first()?.isClick = true
@@ -112,8 +115,9 @@ class ActExpoView : SLoginBaseRelativeLayout {
 
         //横版
         menuRecyclerView = actView.findViewById<RecyclerView>(R.id.mw_act_rv_menu)
-        val contentWebView = actView.findViewById<WebView>(R.id.mw_act_wv_item)
+        val contentWebView = actView.findViewById<SWebView>(R.id.mw_act_wv_item)
         menuRecyclerView?.setLayoutManager(LinearLayoutManager(getContext()))
+        contentWebView.addMWSDKJavascriptInterface(getsBaseDialog())
 
         actDatas?.let {
             if (it.isNotEmpty()) {
@@ -222,7 +226,7 @@ class ActExpoView : SLoginBaseRelativeLayout {
 
         }
 
-        mActExpoAdapter = ActExpoAdapter(context, actDatas!!)
+        mActExpoAdapter = ActExpoAdapter(context, actDatas!!, getsBaseDialog())
 
         contentPageView.adapter = mActExpoAdapter
 

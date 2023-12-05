@@ -16,6 +16,7 @@
 
 package com.mw.sdk.adapter
 
+import android.app.Dialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -25,8 +26,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mw.sdk.R
 import com.mw.sdk.bean.SGameBaseRequestBean
 import com.mw.sdk.bean.res.ActDataModel
+import com.mw.sdk.widget.SWebView
 
-class ActExpoAdapter(val context: Context?, val actDatas: ArrayList<ActDataModel.ActData>) : RecyclerView.Adapter<ActExpoViewHolder>() {
+class ActExpoAdapter(val context: Context?, val actDatas: ArrayList<ActDataModel.ActData>, val mDialog: Dialog) : RecyclerView.Adapter<ActExpoViewHolder>() {
 
     val webViewMap = HashMap<Int,WebView> ()
 
@@ -41,6 +43,7 @@ class ActExpoAdapter(val context: Context?, val actDatas: ArrayList<ActDataModel
         val actData = actDatas[position]
         val sr = SGameBaseRequestBean(context)
         sr.completeUrl = actData.contentUrl
+        holder.actWebView.addMWSDKJavascriptInterface(mDialog)
         holder.actWebView.loadUrl(sr.createPreRequestUrl())
         webViewMap[position] = holder.actWebView
     }
@@ -53,6 +56,6 @@ class ActExpoAdapter(val context: Context?, val actDatas: ArrayList<ActDataModel
 class ActExpoViewHolder internal constructor(private val itemView: View) :
     RecyclerView.ViewHolder(itemView) {
 
-    val actWebView: WebView = itemView.findViewById(R.id.mw_act_wv_item)
+    val actWebView: SWebView = itemView.findViewById(R.id.mw_act_wv_item)
 
 }

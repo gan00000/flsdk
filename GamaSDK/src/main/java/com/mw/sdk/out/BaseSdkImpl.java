@@ -1117,7 +1117,7 @@ public class BaseSdkImpl implements IMWSDK {
 
                                 if (result != null && result.isRequestSuccess() && result.getData() != null){
                                     commonDialog = new SBaseDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
-                                    ActExpoView mActExpoView = new ActExpoView(activity, result.getData());
+                                    ActExpoView mActExpoView = new ActExpoView(activity, result.getData(), commonDialog);
                                     mActExpoView.setsBaseDialog(commonDialog);
                                     commonDialog.setContentView(mActExpoView);
                                     commonDialog.show();
