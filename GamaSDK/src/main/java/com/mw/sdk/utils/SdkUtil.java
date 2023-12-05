@@ -173,7 +173,7 @@ public class SdkUtil {
         newAccountModel.setLoginType(loginType);
         newAccountModel.setUserId(userId);
 
-        newAccountModel.setThirdAccount(thirdAccount);
+        newAccountModel.setThirdAccount(thirdAccount == null ? "" : thirdAccount);
         newAccountModel.setThirdId(thirdId);
         newAccountModel.setTime(System.currentTimeMillis());
         newAccountModel.setBind(isBindAccount);
@@ -281,16 +281,16 @@ public class SdkUtil {
                     JSONObject accountObject = accountArray.getJSONObject(i);
                     if (accountObject != null){
                         AccountModel accountModel = new AccountModel();
-                        accountModel.setAccount(accountObject.getString("sdk_account"));
-                        accountModel.setPassword(accountObject.getString("sdk_password"));
-                        accountModel.setTime(accountObject.getLong("sdk_time"));
-                        accountModel.setLoginType(accountObject.getString("sdk_loginType"));
-                        accountModel.setThirdId(accountObject.getString("sdk_thirdId"));
-                        accountModel.setUserId(accountObject.getString("sdk_userId"));
-                        accountModel.setThirdAccount(accountObject.getString("sdk_thirdAccount"));
-                        accountModel.setBind(accountObject.getBoolean("sdk_bindAccount"));
-                        accountModel.setLoginAccessToken(accountObject.getString("sdk_loginAccessToken"));
-                        accountModel.setLoginTimestamp(accountObject.getString("sdk_loginTimestamp"));
+                        accountModel.setAccount(accountObject.optString("sdk_account"));
+                        accountModel.setPassword(accountObject.optString("sdk_password"));
+                        accountModel.setTime(accountObject.optLong("sdk_time"));
+                        accountModel.setLoginType(accountObject.optString("sdk_loginType"));
+                        accountModel.setThirdId(accountObject.optString("sdk_thirdId"));
+                        accountModel.setUserId(accountObject.optString("sdk_userId"));
+                        accountModel.setThirdAccount(accountObject.optString("sdk_thirdAccount"));
+                        accountModel.setBind(accountObject.optBoolean("sdk_bindAccount"));
+                        accountModel.setLoginAccessToken(accountObject.optString("sdk_loginAccessToken"));
+                        accountModel.setLoginTimestamp(accountObject.optString("sdk_loginTimestamp"));
 
                         accountModels.add(accountModel);
                     }
