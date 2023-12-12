@@ -1,0 +1,21 @@
+<resources>
+
+    <string name="mstr_trecentious_turbine">手機綁定</string>
+    <string name="mstr_remember_marketo">區號</string>
+    <string name="mstr_archyfold_haurvariousery">請輸入手機號碼</string>
+    <string name="mstr_truscoachaire_specialen">您已經成功綁定，這是您當前綁定的手機號碼</string>
+    <string name="mstr_cordfic_scandrecentlyous">手機區號不能為空</string>
+    <string name="mstr_shareee_octaire">手機號碼不能為空</string>
+    <string name="mstr_ominency_wouldling">手機號碼格式不正確</string>
+    <string name="mstr_exampleitor_practice">驗證碼已發送</string>
+    <string name="mstr_transimagineation_vol">手機綁定成功</string>
+    <string name="mstr_turbinetic_secreous">Google已升級為會員帳號</string>
+    <string name="mstr_uxori_thusably">Facebook已升級為會員帳號</string>
+    <string name="mstr_scrupdiseasearium_taxful">遊客已升級為會員帳號</string>
+    <string name="mstr_factorful_omenable">LINE已升級為會員帳號</string>
+    <string name="mstr_needward_hormate">會員帳號</string>
+    <string name="mstr_opoteran_glassress">公告</string>
+    <string name="mstr_ground_boardid">等待中...</string>
+    <string name="text_account_not_login">當前沒有帳號，請先登入</string>
+
+</resources>
