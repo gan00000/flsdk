@@ -196,7 +196,7 @@ public class BaseSdkImpl implements IMWSDK {
                 if (iPay != null && SStringUtil.isNotEmpty(roleId) && SStringUtil.isNotEmpty(severCode) && SStringUtil.isNotEmpty(SdkUtil.getUid(activity))){
                     iPay.startQueryPurchase(activity.getApplicationContext());
                 }
-                showActViewSwitchRequest(activity);
+                //showActViewSwitchRequest(activity);//注释掉，先不用
             }
         });
     }
@@ -1115,7 +1115,7 @@ public class BaseSdkImpl implements IMWSDK {
                             @Override
                             public void success(ActDataModel result, String msg) {
 
-                                if (result != null && result.isRequestSuccess() && result.getData() != null){
+                                if (result != null && result.isRequestSuccess() && result.getData() != null && !result.getData().isEmpty()){
                                     commonDialog = new SBaseDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
                                     ActExpoView mActExpoView = new ActExpoView(activity, result.getData(), commonDialog);
                                     mActExpoView.setsBaseDialog(commonDialog);
