@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mcolor_supin_situationar">
+
+    <LinearLayout
+        android:layout_width="375dp"
+        android:layout_height="375dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_centerInParent="true"
+        >
+
+        <include
+            layout="@layout/okokok_vollence"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            />
+
+        <com.ldy.sdk.login.widget.SDKInputEditTextView
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="25dp"
+            android:id="@+id/mId_horoier_scabo"
+            />
+
+        <com.ldy.sdk.login.widget.SDKInputEditTextView
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="25dp"
+            android:id="@+id/mId_scandrecentlyous_athroidwifeatory"
+            />
+
+        <com.ldy.sdk.login.widget.SDKInputEditTextView
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="25dp"
+            android:id="@+id/mId_artististic_watch"
+            />
+
+        <Button
+            android:id="@+id/mId_medicalist_tredec"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/okokok_mulgitor"
+            android:gravity="center"
+            android:text="@string/mstr_public_realular"
+            android:textColor="@android:color/white"
+            android:textSize="17sp" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>

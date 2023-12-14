@@ -44,6 +44,13 @@ android {
         dysdk_kr {//....
             flavorDimensions "1"
             resValue "string", "sdk_inner_version", "vd_kr"
+            buildConfigField "Boolean", "reg_is_need_vfcode", "false"
+        }
+
+        dysdk_th {//....
+            flavorDimensions "1"
+            resValue "string", "sdk_inner_version", "vd_th"
+            buildConfigField "Boolean", "reg_is_need_vfcode", "true"
         }
     }
 }

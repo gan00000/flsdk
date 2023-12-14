@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
+
+
+    <LinearLayout
+        android:layout_width="330dp"
+        android:layout_height="300dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_centerInParent="true"
+        android:background="@drawable/okokok_forwardacity"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
+            <View
+                android:layout_width="3dp"
+                android:layout_height="14dp"
+                android:background="@color/mcolor_phaneraffectative_rustfaction"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="@string/mstr_err_naucould"
+                android:textColor="@color/mcolor_phylacad_ophi"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="9dp"
+            android:padding="7dp"
+            android:background="@drawable/okokok_cineain"
+            >
+
+            <com.ldy.base.widget.SWebView
+                android:id="@+id/mId_beety_menstruform"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </RelativeLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp"
+            >
+            <Button
+                android:id="@+id/mId_relateacy_resourcehood"
+                android:layout_width="94dp"
+                android:layout_height="32dp"
+                android:background="@drawable/okokok_ponery"
+                android:text="@string/mstr_horrsoistic_inter"
+                android:textColor="@color/mcolor_phaneraffectative_rustfaction"
+                android:textSize="15sp" />
+
+            <Button
+                android:id="@+id/mId_rustabovehood_occurarian"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_marginStart="12dp"
+                android:background="@drawable/okokok_droper"
+                android:text="@string/mstr_fovesoundics_economymost"
+                android:textColor="@color/mcolor_tag_tetrice"
+                android:textSize="15sp" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>
