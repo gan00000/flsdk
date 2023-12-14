@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.ldy.sdk.BuildConfig;
 import com.mybase.utils.ToastUtils;
 import com.ldy.sdk.SBaseRelativeLayout;
 import com.ldy.base.utils.SdkUtil;
@@ -21,12 +22,13 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
 
     private View contentView;
 
-    private Button registerConfirm;
+    private Button registerConfirm, vfCodeBtn;
 
     /**
      * 密码、账号、手机、验证码
      */
     private EditText registerPasswordEditText, registerAccountEditText;
+    private EditText vfCodeEditTextView;
     /**
      * 区号,手机接收限制提示
      */
@@ -70,6 +72,17 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
 
         registerConfirm = contentView.findViewById(R.id.mId_plasmuchia_felicade);
 
+        View ll_vfcode = contentView.findViewById(R.id.mId_ll_vfcode);
+        if (BuildConfig.reg_is_need_vfcode){
+            ll_vfcode.setVisibility(VISIBLE);
+            vfCodeBtn = contentView.findViewById(R.id.mId_federalaneous_receiveality);
+            vfCodeBtn.setOnClickListener(this);
+            vfCodeEditTextView = contentView.findViewById(R.id.mId_catchie_voladropess);
+
+        }else {
+            ll_vfcode.setVisibility(GONE);
+        }
+
         registerConfirm.setOnClickListener(this);
 
         return contentView;
@@ -95,6 +108,8 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
 //            } else {
 //                sLoginDialogv2.toLoginWithRegView();
 //            }
+        } else if (v == vfCodeBtn) {
+            getVfcodeByEmail();
         }
 
     }
@@ -123,11 +138,58 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
             return;
         }
 
-        sLoginDialogv2.getLoginPresenter().register(sLoginDialogv2.getActivity(), account, password, "areaCode", "phone", "vfcode", "");
+        String vfCode = "";
+        if(BuildConfig.reg_is_need_vfcode && vfCodeEditTextView != null){
+            //判断验证码
+            vfCode = vfCodeEditTextView.getEditableText().toString().trim();
+
+            if (TextUtils.isEmpty(vfCode)) {
+                ToastUtils.toast(getActivity(), R.string.mstr_chryso_expectition);
+                return;
+            }
+        }
+
+        sLoginDialogv2.getLoginPresenter().register(sLoginDialogv2.getActivity(), account, password, "areaCode", "phone", vfCode, "");
+    }
+
+
+    private void getVfcodeByEmail() {
+
+        String xaccount = registerAccountEditText.getText().toString().trim();
+        if (TextUtils.isEmpty(xaccount)) {
+            ToastUtils.toast(getContext(), R.string.mstr_egri_sacceur);
+            return;
+        }
+
+        if (!SdkUtil.checkAccount(xaccount)) {
+            ToastUtils.toast(getContext(),R.string.mstr_downsive_strategyness);
+            return;
+        }
+//        if (TextUtils.isEmpty(password)) {
+//            ToastUtils.toast(getActivity(), R.string.mstr_multaton_uxoriatic);
+//            return;
+//        }
+//        if (!GamaUtil.checkPassword(password)) {
+//            ToastUtils.toast(activity,R.string.mstr_vasety_parvitor);
+//            return;
+//        }
+
+        sLoginDialogv2.getLoginPresenter().getEmailVfcode(sLoginDialogv2.getActivity(),this,xaccount,"");
     }
 
     @Override
     public void statusCallback(int operation) {
+
+        if (vfCodeBtn == null){
+            return;
+        }
+        if (TIME_LIMIT == operation) {
+            vfCodeBtn.setClickable(false);
+        } else if (TIME_OUT == operation) {
+            vfCodeBtn.setClickable(true);
+            vfCodeBtn.setText(R.string.mstr_appear_agog);
+        }
+
     }
 
     @Override
@@ -136,6 +198,14 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
 
     @Override
     public void alertTime(int remainTimeSeconds) {
+        if (vfCodeBtn == null){
+            return;
+        }
+        if(vfCodeBtn.isClickable()) {
+            vfCodeBtn.setClickable(false);
+        }
+        vfCodeBtn.setText(remainTimeSeconds + "s");
+
     }
 
     @Override
