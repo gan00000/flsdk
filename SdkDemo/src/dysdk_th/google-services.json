@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "394286179112",
+    "project_id": "tgmzhan-237e5",
+    "storage_bucket": "tgmzhan-237e5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:394286179112:android:76b17643bbac3fdf36a61d",
+        "android_client_info": {
+          "package_name": "com.opcaa.th"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "394286179112-675e1fvc0grpdfb09aksr1jciemkni5t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQ6otXxtn9Xhs-gQhAG_VjSbIYp4-0Yn0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "394286179112-675e1fvc0grpdfb09aksr1jciemkni5t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

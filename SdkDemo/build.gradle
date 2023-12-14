@@ -143,6 +143,36 @@ android {
             resValue "string", "sdk_name", "sdkdemo2"
 
         }
+
+        dysdk_th {
+
+            signingConfig signingConfigs.release_2
+            applicationId "com.opcaa.th"
+            minSdkVersion 21
+            targetSdkVersion 33
+            versionCode 1
+            versionName "1.0"
+            flavorDimensions "1"
+
+
+            resValue "string", "sdk_game_code", "opcaa"
+            resValue "string", "sdk_app_key", "e8e345190cc688e36318ee1f53c033e9"
+            resValue "string", "sdk_more_language", "false"
+            resValue "string", "sdk_af_dev_key", ""
+            resValue "string", "sdk_default_server_language", "ko_KR"
+
+            resValue "string", "facebook_app_id", "390948677335844"
+            resValue "string", "facebook_client_token", "69b818563729497bdbea99b9a31a2668"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider390948677335844" //启用分析
+            resValue "string", "fb_login_protocol_scheme", "fb390948677335844"
+            resValue "string", "facebook_app_name", "opcaa"
+            resValue "string", "line_channelId", ""
+            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow"
+
+            //每个游戏的demo设置 test
+            resValue "string", "sdk_name", "sdkdemo2"
+
+        }
     }
 
     android {
