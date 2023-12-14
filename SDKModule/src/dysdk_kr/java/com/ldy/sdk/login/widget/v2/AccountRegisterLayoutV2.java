@@ -174,7 +174,7 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
 //            return;
 //        }
 
-        sLoginDialogv2.getLoginPresenter().getEmailVfcode(sLoginDialogv2.getActivity(),this,xaccount,"");
+        sLoginDialogv2.getLoginPresenter().getEmailVfcode(sLoginDialogv2.getActivity(),this,xaccount,"1");
     }
 
     @Override
@@ -211,6 +211,17 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
     @Override
     protected void onSetDialog() {
         super.onSetDialog();
+
+        if (vfCodeBtn == null){
+            return;
+        }
+        sLoginDialogv2.getLoginPresenter().setOperationCallback(this);
+        remainTimeSeconds = sLoginDialogv2.getLoginPresenter().getRemainTimeSeconds();
+        if(remainTimeSeconds > 0) {
+            vfCodeBtn.setClickable(false);
+            vfCodeBtn.setText(remainTimeSeconds + "s");
+        }
+
     }
 
 }
