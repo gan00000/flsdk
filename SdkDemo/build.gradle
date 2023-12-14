@@ -159,7 +159,7 @@ android {
             resValue "string", "sdk_app_key", "e8e345190cc688e36318ee1f53c033e9"
             resValue "string", "sdk_more_language", "false"
             resValue "string", "sdk_af_dev_key", ""
-            resValue "string", "sdk_default_server_language", "ko_KR"
+            resValue "string", "sdk_default_server_language", "th_TH"
 
             resValue "string", "facebook_app_id", "390948677335844"
             resValue "string", "facebook_client_token", "69b818563729497bdbea99b9a31a2668"

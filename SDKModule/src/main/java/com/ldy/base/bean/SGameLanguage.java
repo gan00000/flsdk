@@ -30,6 +30,9 @@ public enum SGameLanguage {
      */
     zh_CN("zh_CN"),
 
+    //泰语
+    th_TH("th_TH"),
+
     /**
      * 越南
      */
