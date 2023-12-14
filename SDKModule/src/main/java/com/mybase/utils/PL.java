@@ -8,7 +8,7 @@ import android.util.Log;
 
 public class PL {
 
-    public final static String PL_LOG = "PL_LOG";
+    public final static String PL_LOG = "DY_LOG";
 
     public static void d(String format, Object... args){
         d(PL_LOG,String.format(format, args));
