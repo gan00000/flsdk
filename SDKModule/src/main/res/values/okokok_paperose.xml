@@ -1,7 +1,7 @@
 <resources>
 
     <!--启动条款页面-->
-    <string name="mstr_crepitess_astrotic">我已閱讀並同意定型化契約</string>
+    <string name="mstr_crepitess_astrotic">我已閱讀並同意定用戶協議</string>
 
     <!--登录页面-->
     <string name="mstr_siduusatory_securitysive">記住帳號</string>
@@ -35,13 +35,13 @@
     <string name="mstr_manthaster_whomuous">請輸入密碼</string>
 
     <!--通用文本-->
-<!--    &#32; == 普通的英文半角空格-->
-<!--    &#160; == &nbsp; == &#xA0; == no-break space （普通的英文半角空格但不换行）-->
-<!--    &#12288; == 中文全角空格 （一个中文宽度）-->
-<!--    &#8194; == &ensp; == en空格 （半个中文宽度）-->
-<!--    &#8195; == &emsp; == em空格 （一个中文宽度）-->
-<!--    &#8197; == 四分之一em空格 （四分之一中文宽度）-->
-<!--    相比平时的空格（&#32;），nbsp拥有不间断（non-breaking）特性。即连续的nbsp会在同一行内显示。即使有100个连续的nbsp，浏览器也不会把它们拆成两行。-->
+    <!--    &#32; == 普通的英文半角空格-->
+    <!--    &#160; == &nbsp; == &#xA0; == no-break space （普通的英文半角空格但不换行）-->
+    <!--    &#12288; == 中文全角空格 （一个中文宽度）-->
+    <!--    &#8194; == &ensp; == en空格 （半个中文宽度）-->
+    <!--    &#8195; == &emsp; == em空格 （一个中文宽度）-->
+    <!--    &#8197; == 四分之一em空格 （四分之一中文宽度）-->
+    <!--    相比平时的空格（&#32;），nbsp拥有不间断（non-breaking）特性。即连续的nbsp会在同一行内显示。即使有100个连续的nbsp，浏览器也不会把它们拆成两行。-->
     <string name="mstr_north_wearot">確&#8195;認</string>
     <!--SDK功能提示-->
     <string name="mstr_whenard_anthraship">由於您沒有安裝%s，請先裝APP後再進行分享</string>
@@ -70,7 +70,7 @@
     <string name="mstr_rhinship_xanthel">電話</string>
     <string name="mstr_genuical_sororern">驗證碼</string>
 
-<!--    新增-->
+    <!--    新增-->
     <string name="mstr_road_nonagenkin">遊客登入</string>
     <string name="mstr_loco_cosmothoughify">已有帳號？</string>
     <string name="mstr_astromillionan_professionality">登入</string>
@@ -84,11 +84,11 @@
     <string name="mstr_nausing_extraet">請輸入驗證碼</string>
     <string name="mstr_damnery_song">請輸入新密碼</string>
     <string name="mstr_squarrositious_dead">確認新密碼</string>
-    <string name="mstr_buyesque_nowoon">建議升級帳號，提升帳號安全性</string>
+    <string name="mstr_buyesque_nowoon">建議綁定郵箱，提升帳號安全性</string>
     <string name="mstr_policyise_dekawallmost">該帳號已升級為平台帳號</string>
     <string name="mstr_researchage_narcair">刪除該帳號</string>
     <string name="mstr_public_realular">確認修改</string>
-    <string name="mstr_althoughile_salutward">確認升級</string>
+    <string name="mstr_althoughile_salutward">綁定確認</string>
     <string name="mstr_skin_behind">修改密碼</string>
     <string name="mstr_nullature_withern">*帳號信箱將會作為您找回密碼的驗證信箱，請謹慎輸入</string>
 
@@ -96,9 +96,9 @@
     <string name="mstr_simulaneous_sensal">忘記密碼</string>
     <string name="mstr_lamnlamellic_explainlet">歡迎回來</string>
     <string name="mstr_verular_phlegor">繼續遊戲</string>
-    <string name="mstr_pressureress_another">升級帳號</string>
+    <string name="mstr_pressureress_another">綁定郵箱</string>
 
-    <string name="mstr_honorise_certainlyition">請先同意「定型化契約」</string>
+    <string name="mstr_honorise_certainlyition">請先同意「用戶協議」</string>
     <string name="mstr_cingor_philo">確認註冊</string>
     <string name="mstr_vasety_parvitor">密碼只支持6~20字元</string>
     <string name="mstr_downsive_strategyness">信箱格式異常，請重新輸入</string>
@@ -106,19 +106,19 @@
     <string name="mstr_palltodayry_pulchrster">網路異常，請檢查重試</string>
     <string name="mstr_piet_tonightical">我已閱讀並同意</string>
     <string name="mstr_fovesoundics_economymost">閱讀並同意</string>
-    <string name="mstr_issuesure_scut"><u>定型化契約</u></string>
-    <string name="mstr_err_naucould">定型化契約</string>
+    <string name="mstr_issuesure_scut"><u>用戶協議</u></string>
+    <string name="mstr_err_naucould">用戶協議</string>
     <string name="mstr_stichen_loqufollowor">切換帳號</string>
-    <string name="mstr_mnestible_trixify">升級帳號</string>
+    <string name="mstr_mnestible_trixify">綁定郵箱</string>
     <string name="mstr_bitesque_nugaivity">兩次密碼不一致</string>
     <string name="mstr_movieatic_flyite">請輸入舊密碼</string>
-    <string name="mstr_zoactivityad_sculptish">免註冊登入</string>
+    <string name="mstr_zoactivityad_sculptish">遊客登入</string>
     <string name="mstr_matri_nightness">新密碼不能與舊密碼相同</string>
     <string name="mstr_topion_jungon">取消</string>
     <string name="mstr_mindo_pietaire">確認</string>
     <string name="mstr_pratia_laugh">請注意，刪除帳號將會將您的帳號從平台中徹底刪除，如果確認刪除，請點擊“確認”</string>
-    <string name="mstr_askorium_eosoesque">升級會員帳號成功，正在登入...</string>
-    <string name="mstr_geni_bulbship">升級會員帳號成功</string>
+    <string name="mstr_askorium_eosoesque">綁定郵箱帳號成功，正在登入...</string>
+    <string name="mstr_geni_bulbship">綁定郵箱帳號成功</string>
     <string name="mstr_libr_gelette">修改成功，正在登入...</string>
     <string name="mstr_quartivity_hospit">驗證碼已發送，請注意查收</string>
     <string name="mstr_thoughtitude_betteratic">支付完成</string>
