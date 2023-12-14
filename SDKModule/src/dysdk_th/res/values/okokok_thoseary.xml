@@ -1,20 +1,21 @@
 <resources>
 
-    <string name="mstr_trecentious_turbine">핸드폰 연동하기</string>
-    <string name="mstr_remember_marketo">지역 번호</string>
-    <string name="mstr_archyfold_haurvariousery">핸드폰 번호를 입력하세요</string>
-    <string name="mstr_truscoachaire_specialen">성공적으로 연동되었습니다. 현재 연동된 휴대폰 번호입니다</string>
-    <string name="mstr_cordfic_scandrecentlyous">휴대폰 지역 번호는 비워둘 수 없습니다</string>
-    <string name="mstr_shareee_octaire">휴대폰 번호는 비워둘 수 없습니다</string>
-    <string name="mstr_ominency_wouldling">휴대폰 번호 형식이 잘못되었습니다</string>
-    <string name="mstr_exampleitor_practice">인증번호 전송되었습니다</string>
-    <string name="mstr_transimagineation_vol">휴대폰 연동 성공</string>
-    <string name="mstr_turbinetic_secreous">Google은 이미 회원 계정으로 연동되었습니다</string>
-    <string name="mstr_uxori_thusably">Facebook이 회원 계정으로 연동되었습니다</string>
-    <string name="mstr_scrupdiseasearium_taxful">게스트 계정은 이미 회원 계정으로 연동되었습니다</string>
-    <string name="mstr_factorful_omenable">LINE은 이미 회원 계정으로 연동되었습니다</string>
-    <string name="mstr_needward_hormate">회원계정</string>
-    <string name="mstr_opoteran_glassress">공지</string>
-    <string name="mstr_ground_boardid">기다리는 중...</string>
+    <string name="mstr_trecentious_turbine">การผูกโทรศัพท์มือถือ</string>
+    <string name="mstr_remember_marketo">รหัสพื้นที่</string>
+    <string name="mstr_archyfold_haurvariousery">กรุณากรอกหมายเลขโทรศัพท์</string>
+    <string name="mstr_truscoachaire_specialen">คุณถูกผูกมัดเรียบร้อยแล้ว นี่คือหมายเลขโทรศัพท์มือถือที่คุณผูกไว้ในปัจจุบัน</string>
+    <string name="mstr_cordfic_scandrecentlyous">รหัสพื้นที่โทรศัพท์มือถือต้องไม่เว้นว่าง</string>
+    <string name="mstr_shareee_octaire">หมายเลขโทรศัพท์ต้องไม่เว้นว่าง</string>
+    <string name="mstr_ominency_wouldling">รูปแบบหมายเลขโทรศัพท์มือถือไม่ถูกต้อง</string>
+    <string name="mstr_exampleitor_practice">ส่งรหัสยืนยันแล้ว</string>
+    <string name="mstr_transimagineation_vol">ผูกโทรศัพท์มือถือสำเร็จ</string>
+    <string name="mstr_turbinetic_secreous">Google ได้รับการอัปเกรดเป็นบัญชีสมาชิกแล้ว</string>
+    <string name="mstr_uxori_thusably">Facebook ได้รับการอัปเกรดเป็นบัญชีสมาชิกแล้ว</string>
+    <string name="mstr_scrupdiseasearium_taxful">ผู้เยี่ยมชมได้รับการอัปเกรดเป็นบัญชีสมาชิกแล้ว</string>
+    <string name="mstr_factorful_omenable">LINE ได้รับการอัปเกรดเป็นบัญชีสมาชิกแล้ว</string>
+    <string name="mstr_needward_hormate">บัญชีสมาชิก</string>
+    <string name="mstr_opoteran_glassress">ประกาศ</string>
+    <string name="mstr_ground_boardid">ซึ่งรอคอย...</string>
+    <string name="mstr_not_login">ขณะนี้คุณไม่มีบัญชี กรุณาเข้าสู่ระบบก่อน</string>
 
 </resources>
