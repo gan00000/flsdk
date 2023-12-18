@@ -24,6 +24,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
+import com.ldy.pub.DYSdk;
 import com.ldy.pub.IDYSDK;
 import com.ldy.sdk.login.model.response.SLoginResult;
 import com.mybase.bean.BaseResultModel;
@@ -39,7 +40,6 @@ import com.ldy.callback.IPayListener;
 import com.ldy.sdk.demo.R;
 import com.ldy.callback.ILoginCallBack;
 import com.ldy.callback.ISdkCallBack;
-import com.ldy.pub.DYSdkFactory;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -76,7 +76,7 @@ public class MainActivity extends Activity {
         googlePayBtn = findViewById(R.id.demo_pay_google);
         demo_share = findViewById(R.id.demo_share);
 
-        mIDYSDK = DYSdkFactory.create();
+        mIDYSDK = DYSdk.getInstance();
 
         //在游戏Activity的onCreate生命周期中调用
         mIDYSDK.onCreate(this);

@@ -198,7 +198,7 @@
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		mIDYSDK = DYSdkFactory.create();
+		mIDYSDK = DYSdk.getInstance();//返回单例对象
        
         //在游戏Activity的onCreate生命周期中调用
         mIDYSDK.onCreate(this);
