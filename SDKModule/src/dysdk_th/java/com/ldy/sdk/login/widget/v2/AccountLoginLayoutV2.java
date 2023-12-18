@@ -253,13 +253,14 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
         macLoginView = contentView.findViewById(R.id.mId_septenably_democraticette);
         googleLoginView = contentView.findViewById(R.id.mId_control_hydrrequireous);
 
+        macLoginView.setVisibility(View.GONE);
         ConfigModel configModel = SdkUtil.getSdkCfg(getContext());
         if (configModel != null){
             ConfigModel.VersionData versionData = configModel.getSdkConfigLoginData(getContext());
             if (versionData != null){
-                if(!versionData.isVisitorLogin()){
-                    macLoginView.setVisibility(View.GONE);
-                }
+//                if(!versionData.isVisitorLogin()){
+//                    macLoginView.setVisibility(View.GONE);
+//                }
                 if(!versionData.isFbLogin()){
                     fbLoginView.setVisibility(View.GONE);
                 }
