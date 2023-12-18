@@ -21,9 +21,9 @@
 
 # Your application may contain more items that need to be preserved;
 # typically classes that are dynamically created using Class.forName:
--obfuscationdictionary android_obs_dic.txt
--classobfuscationdictionary android_obs_dic.txt
--packageobfuscationdictionary android_obs_dic.txt
+#-obfuscationdictionary android_obs_dic_kr.txt
+#-classobfuscationdictionary android_obs_dic_kr.txt
+#-packageobfuscationdictionary android_obs_dic_kr.txt
 
 -keep public class com.ldy.pub.** { *; }
 -keep public class * extends java.lang.Enum { *; }

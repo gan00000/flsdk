@@ -140,7 +140,7 @@ android {
             resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow"
 
             //每个游戏的demo设置 test
-            resValue "string", "sdk_name", "sdkdemo2"
+            resValue "string", "sdk_name", "bbwg demo"
 
         }
 
@@ -170,7 +170,7 @@ android {
             resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow"
 
             //每个游戏的demo设置 test
-            resValue "string", "sdk_name", "sdkdemo2"
+            resValue "string", "sdk_name", "opcaa demo"
 
         }
     }

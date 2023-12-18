@@ -45,12 +45,14 @@ android {
             flavorDimensions "1"
             resValue "string", "sdk_inner_version", "vd_kr"
             buildConfigField "Boolean", "reg_is_need_vfcode", "false"
+            proguardFile 'flavor-rules-kr.pro'
         }
 
         dysdk_th {//....
             flavorDimensions "1"
             resValue "string", "sdk_inner_version", "vd_th"
             buildConfigField "Boolean", "reg_is_need_vfcode", "true"
+            proguardFile 'flavor-rules-th.pro'
         }
     }
 }
