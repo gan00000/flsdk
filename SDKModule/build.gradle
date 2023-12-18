@@ -15,7 +15,7 @@ android {
             //定义一个文件
 
             if (outputFileName != null && outputFileName.contains("release") && outputFileName.endsWith('.aar')) {
-                outputFileName = "DYSdk-" + "release-" + sdk_version + ".aar"
+                outputFileName = variant.flavorName + "-Release-" + sdk_version + ".aar"
             }
         }
     }
@@ -41,14 +41,14 @@ android {
     }
     productFlavors {
 
-        dysdk_kr {//....
+        DySdkKr {//....
             flavorDimensions "1"
             resValue "string", "sdk_inner_version", "vd_kr"
             buildConfigField "Boolean", "reg_is_need_vfcode", "false"
             proguardFile 'flavor-rules-kr.pro'
         }
 
-        dysdk_th {//....
+        DySdkTh {//....
             flavorDimensions "1"
             resValue "string", "sdk_inner_version", "vd_th"
             buildConfigField "Boolean", "reg_is_need_vfcode", "true"

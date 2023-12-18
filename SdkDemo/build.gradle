@@ -114,7 +114,7 @@ android {
 //
 //        }
 
-        dysdk_kr {
+        DySdkKr {
 
             signingConfig signingConfigs.release_2
             applicationId "com.koudaildhx.go"
@@ -144,7 +144,7 @@ android {
 
         }
 
-        dysdk_th {
+        DySdkTh {
 
             signingConfig signingConfigs.release_2
             applicationId "com.opcaa.th"
