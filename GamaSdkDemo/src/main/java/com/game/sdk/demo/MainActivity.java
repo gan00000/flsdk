@@ -31,7 +31,9 @@ import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
 import com.mw.base.bean.SPayType;
+import com.mw.sdk.act.ActExpoView;
 import com.mw.sdk.bean.req.PayCreateOrderReqBean;
+import com.mw.sdk.bean.res.ActDataModel;
 import com.mw.sdk.utils.SdkUtil;
 import com.mw.sdk.callback.IPayListener;
 import com.mw.sdk.demo.R;
@@ -40,6 +42,9 @@ import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.out.IMWSDK;
 import com.mw.sdk.out.ISdkCallBack;
 import com.mw.sdk.out.MWSdkFactory;
+import com.mw.sdk.widget.SBaseDialog;
+
+import java.util.ArrayList;
 
 public class MainActivity extends Activity {
 
@@ -417,6 +422,19 @@ public class MainActivity extends Activity {
                     return;
                 }
                 mIMWSDK.showActView(MainActivity.this);
+
+//                ArrayList<ActDataModel.ActData> arrayList = new ArrayList<>();
+//                for (int i = 0; i < 10; i++) {
+//                    ActDataModel.ActData actData = new ActDataModel.ActData();
+//                    actData.setContentUrl("https://www.baidu.com/");
+//                    actData.setTitle("test=" + i);
+//                    arrayList.add(actData);
+//                }
+//                SBaseDialog commonDialog = new SBaseDialog(activity, com.mw.sdk.R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
+//                ActExpoView mActExpoView = new ActExpoView(activity, arrayList, commonDialog);
+//                mActExpoView.setsBaseDialog(commonDialog);
+//                commonDialog.setContentView(mActExpoView);
+//                commonDialog.show();
             }
         });
 
