@@ -13,13 +13,6 @@ import android.util.Log;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
-import com.linecorp.linesdk.Scope;
-import com.linecorp.linesdk.auth.LineAuthenticationParams;
-import com.linecorp.linesdk.auth.LineLoginApi;
-import com.linecorp.linesdk.auth.LineLoginResult;
-
-import java.util.Arrays;
-
 public class SLineSignIn {
 
 	private static final String TAG = "SLineSignIn";
@@ -38,38 +31,38 @@ public class SLineSignIn {
 
 	public SLineSignIn(Activity activity) {
 
-		if (activity == null) {
-			Log.e(TAG,"SGoogleSignIn activity must not null");
-			return;
-		}
-
-		this.activity = activity;
-		initxx();
+//		if (activity == null) {
+//			Log.e(TAG,"SGoogleSignIn activity must not null");
+//			return;
+//		}
+//
+//		this.activity = activity;
+//		initxx();
 	}
 
 	public SLineSignIn(Activity activity, Dialog dialog) {
 
-		if (activity == null) {
-			Log.e(TAG,"SGoogleSignIn activity must not null");
-			return;
-		}
-
-		this.activity = activity;
-		this.mConnectionProgressDialog = dialog;
-		initxx();
+//		if (activity == null) {
+//			Log.e(TAG,"SGoogleSignIn activity must not null");
+//			return;
+//		}
+//
+//		this.activity = activity;
+//		this.mConnectionProgressDialog = dialog;
+//		initxx();
 	}
 
 	public SLineSignIn(FragmentActivity fragmentActivity, Fragment fragment, Dialog dialog) {
 
-		if (fragmentActivity == null) {
-			Log.e(TAG,"SGoogleSignIn fragmentActivity must not null");
-			return;
-		}
-		this.activity = fragmentActivity;
-		this.mConnectionProgressDialog = dialog;
-
-		this.fragment = fragment;
-		initxx();
+//		if (fragmentActivity == null) {
+//			Log.e(TAG,"SGoogleSignIn fragmentActivity must not null");
+//			return;
+//		}
+//		this.activity = fragmentActivity;
+//		this.mConnectionProgressDialog = dialog;
+//
+//		this.fragment = fragment;
+//		initxx();
 	}
 
 	private void initxx(){
@@ -79,27 +72,27 @@ public class SLineSignIn {
 
 	public void startSignIn(String channelId, LineSignInCallBack googleSignInCallBack){
 
-		this.signInCallBack = googleSignInCallBack;
-		try{
-			// App-to-app login
-			Intent loginIntent = LineLoginApi.getLoginIntent(
-					this.activity,
-					channelId,
-					new LineAuthenticationParams.Builder()
-							.scopes(Arrays.asList(Scope.PROFILE))
-							// .nonce("<a randomly-generated string>") // nonce can be used to improve security
-							.build());
-			this.activity.startActivityForResult(loginIntent, LINE_LOGIN_REQUEST_CODE);
-
-		}
-		catch(Exception e) {
-			Log.e(TAG, e.toString());
-		}
+//		this.signInCallBack = googleSignInCallBack;
+//		try{
+//			// App-to-app login
+//			Intent loginIntent = LineLoginApi.getLoginIntent(
+//					this.activity,
+//					channelId,
+//					new LineAuthenticationParams.Builder()
+//							.scopes(Arrays.asList(Scope.PROFILE))
+//							// .nonce("<a randomly-generated string>") // nonce can be used to improve security
+//							.build());
+//			this.activity.startActivityForResult(loginIntent, LINE_LOGIN_REQUEST_CODE);
+//
+//		}
+//		catch(Exception e) {
+//			Log.e(TAG, e.toString());
+//		}
 
 	}
 
 	public void handleActivityResult(Context context, int requestCode, int resultCode, Intent data) {
-		Log.d(TAG,"handleActivityResult --> " + requestCode + "  --> " +  resultCode);
+		/*Log.d(TAG,"handleActivityResult --> " + requestCode + "  --> " +  resultCode);
 		if (requestCode != LINE_LOGIN_REQUEST_CODE) {
 			return;
 		}
@@ -144,7 +137,7 @@ public class SLineSignIn {
 				if (signInCallBack != null) {
 					signInCallBack.failure();
 				}
-		}
+		}*/
 
 	}
 
