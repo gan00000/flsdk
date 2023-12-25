@@ -8,7 +8,10 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,8 +21,6 @@ import com.ldy.base.bean.SLoginType;
 import com.ldy.base.utils.SdkUtil;
 import com.ldy.sdk.R;
 import com.ldy.sdk.login.model.AccountModel;
-import com.zhy.adapter.recyclerview.CommonAdapter;
-import com.zhy.adapter.recyclerview.base.ViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,7 @@ public class AccountPopupWindow extends PopupWindow {
     private RecyclerView historyAccountRv;
 
     private List<AccountModel> accountModels = new ArrayList<>();;
-    private CommonAdapter  historyAccountCommonAdapter;
+    private HisAccountAdapter  historyAccountCommonAdapter;
 
     private PopWindowListener popWindowListener;
 
@@ -95,7 +96,10 @@ public class AccountPopupWindow extends PopupWindow {
         }
 
         historyAccountRv.setLayoutManager(new LinearLayoutManager(getContext()));
-        historyAccountCommonAdapter = new CommonAdapter<AccountModel>(this.getContext(), R.layout.okokok_pel, accountModels)
+
+        historyAccountCommonAdapter = new HisAccountAdapter();
+
+       /* historyAccountCommonAdapter = new CommonAdapter<AccountModel>(this.getContext(), R.layout.okokok_pel, accountModels)
         {
 
             @Override
@@ -154,7 +158,7 @@ public class AccountPopupWindow extends PopupWindow {
                 holder.setText(R.id.mId_orexic_cingitor, showName);
             }
 
-        };
+        };*/
         historyAccountRv.setAdapter(historyAccountCommonAdapter);
     }
 
@@ -196,6 +200,95 @@ public class AccountPopupWindow extends PopupWindow {
         void onRemove(AccountModel accountModel);
         void onUse(AccountModel accountModel);
         void onEmpty();
+    }
+
+
+    class HisAccountAdapter extends RecyclerView.Adapter<HisAccountAdapter.HisAccountViewHolder>
+    {
+
+        @Override
+        public HisAccountViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+        {
+            HisAccountViewHolder holder = new HisAccountViewHolder(LayoutInflater.from(context).inflate(R.layout.okokok_pel, parent,false));
+            return holder;
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull HisAccountViewHolder holder, int position) {
+
+            AccountModel accountModel = accountModels.get(position);
+            holder.showNameTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (popWindowListener != null){
+                        popWindowListener.onUse(accountModel);
+                    }
+                    AccountPopupWindow.this.dismiss();
+                }
+            });
+            holder.delButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    removeAccountMode(position);
+                }
+            });
+
+            holder.delView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    removeAccountMode(position);
+                }
+            });
+
+
+            int imageResId = R.mipmap.okokok_rogitious;
+            String showName = accountModel.getUserId();//accountModel.getThirdAccount();
+//                if (SStringUtil.isEmpty(showName)){
+//                    showName = accountModel.getUserId();
+//                }
+            if (SLoginType.LOGIN_TYPE_FB.equals(accountModel.getLoginType())){
+                imageResId = R.mipmap.okokok_lotose;
+            }else  if (SLoginType.LOGIN_TYPE_GOOGLE.equals(accountModel.getLoginType())){
+                imageResId = R.mipmap.okokok_occureer;
+            }else  if (SLoginType.LOGIN_TYPE_GUEST.equals(accountModel.getLoginType())){
+                imageResId = R.mipmap.okokok_veteracity;
+            }else if (SLoginType.LOGIN_TYPE_LINE.equals(accountModel.getLoginType())){
+                imageResId = R.mipmap.okokok_piece;
+            }else if (SLoginType.LOGIN_TYPE_MG.equals(accountModel.getLoginType())){
+                imageResId = R.mipmap.okokok_rogitious;
+                showName = accountModel.getAccount();
+            }
+            holder.iconImageView.setImageResource(imageResId);
+            holder.showNameTextView.setText(showName);
+
+        }
+
+        @Override
+        public int getItemCount()
+        {
+            if (accountModels == null){
+                return 0;
+            }
+            return accountModels.size();
+        }
+
+        class HisAccountViewHolder extends RecyclerView.ViewHolder
+        {
+
+            TextView showNameTextView;
+            ImageView iconImageView;
+            Button delButton;
+            View delView;
+
+            public HisAccountViewHolder(@NonNull View itemView) {
+                super(itemView);
+
+                showNameTextView = (TextView) itemView.findViewById(R.id.mId_orexic_cingitor);
+                iconImageView = (ImageView) itemView.findViewById(R.id.mId_emety_wall);
+                delButton = (Button) itemView.findViewById(R.id.mId_trahan_son);
+                delView = (View) itemView.findViewById(R.id.mId_corollarm_avoidior);
+            }
+        }
     }
 
 }

@@ -187,7 +187,7 @@
 以下为sdk api使用示例,具体请查看SDK demo 
 
 * <h3 id="1">实例SDK接口对象</h3>  
-`mIDYSDK = DYSdkFactory.create(); ` 
+`mIDYSDK = DYSdk.getInstance(); ` 
  
 * <h3 id="2">Activity生命周期和初始化SDK</h3> 
 
