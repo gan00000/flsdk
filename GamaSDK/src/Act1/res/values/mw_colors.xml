@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <color name="c_indicatorView_selected">#4BACFD</color>
-    <color name="c_indicatorView_unselected">#EBEBEB</color>
-
-</resources>

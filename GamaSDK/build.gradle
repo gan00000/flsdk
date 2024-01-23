@@ -65,7 +65,7 @@ android {
         }
 
     }
-    flavorDimensions "1", 'act'
+    flavorDimensions "1"
     productFlavors {
 
         sdk1 {//第一套
@@ -117,9 +117,9 @@ android {
             proguardFile 'flavor-rules-kr.pro'
         }
 
-        Act1 {
-            dimension 'act'
-        }
+//        Act1 {
+//            dimension 'act'
+//        }
 
     }
 }
