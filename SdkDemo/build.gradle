@@ -64,6 +64,13 @@ android {
             keyAlias 'key_dysdk2'
             keyPassword 'dysdk2'
         }
+
+        release_2 {
+            storeFile file('../signkey/qw0119_key.jks')
+            storePassword 'qw0119'
+            keyAlias 'qw'
+            keyPassword 'qw0119'
+        }
     }
 
     buildTypes {
