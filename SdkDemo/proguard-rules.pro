@@ -26,7 +26,7 @@
 -keep public class * extends java.lang.Enum { *; }
 -keep public class * extends com.mybase.bean.BaseResultModel { *; }
 -keep public class * extends com.mybase.bean.AbsReqModel { *; }
--keep public class com.ldy.sdk.login.model.response.SLoginResponse$Data { *; }
+-keep public class com.ldy.sdk.login.model.response.SLoginResult$Data { *; }
 -keep public class com.ldy.callback.ILoginCallBack { *; }
 -keep public class com.ldy.callback.IPayListener { *; }
 -keep public class com.ldy.base.bean.SPayType { *; }
