@@ -1,128 +1,128 @@
 <resources>
 
     <!--启动条款页面-->
-    <string name="mstr_crepitess_astrotic">이미 이용약관을 읽고 동의하였습니다</string>
+    <string name="mstr_crepitess_astrotic">我已閱讀並同意定用戶協議</string>
 
     <!--登录页面-->
-    <string name="mstr_siduusatory_securitysive">계정 기억하기</string>
-    <string name="mstr_fringization_amicress">비밀번호 찾기?</string>
-    <string name="mstr_kines_askcy">계정등록</string>
+    <string name="mstr_siduusatory_securitysive">記住帳號</string>
+    <string name="mstr_fringization_amicress">忘記密碼?</string>
+    <string name="mstr_kines_askcy">註冊帳號</string>
 
     <!--注册页面-->
-    <string name="mstr_researchitive_itsesque">핸드폰 번호를 입력하세요</string>
+    <string name="mstr_researchitive_itsesque">請輸入手機門號</string>
 
     <!--修改密码页面-->
-    <string name="mstr_calorent_specence">비밀번호 변경</string>
+    <string name="mstr_calorent_specence">修改密碼</string>
 
     <!--绑定账号页面（通用）-->
-    <string name="mstr_usette_collectionfic">회원 계정 연동하기</string>
-    <string name="mstr_manageracle_cover">회원 연동하기</string>
+    <string name="mstr_usette_collectionfic">綁定會員帳號</string>
+    <string name="mstr_manageracle_cover">綁定會員</string>
 
-    <string name="mstr_weight_barably">계정 연동하기</string>
+    <string name="mstr_weight_barably">帳號綁定</string>
 
     <!--验证提示-->
-    <string name="mstr_egri_sacceur">계정은 비워 둘 수 없습니다</string>
-    <string name="mstr_multaton_uxoriatic">비밀번호는 비워 둘 수 없습니다</string>
-    <string name="mstr_chryso_expectition">인증번호를 입력하세요</string>
+    <string name="mstr_egri_sacceur">帳號不能為空</string>
+    <string name="mstr_multaton_uxoriatic">密碼不能為空</string>
+    <string name="mstr_chryso_expectition">請輸入驗證碼</string>
 
     <!--自动登录-->
-    <string name="mstr_cerebroical_alithing">계정 전환</string>
+    <string name="mstr_cerebroical_alithing">切換帳號</string>
 
-    <string name="mstr_suchibility_quassagainst">%1$s 계정 로그인 중</string>
+    <string name="mstr_suchibility_quassagainst">帳號 %1$s 正在登入</string>
 
     <!--预设提示-->
-    <string name="mstr_environmentalaire_mesiitude">계정을 입력하세요</string>
-    <string name="mstr_manthaster_whomuous">비밀번호를 입력하십시오</string>
+    <string name="mstr_environmentalaire_mesiitude">請輸入帳號</string>
+    <string name="mstr_manthaster_whomuous">請輸入密碼</string>
 
     <!--通用文本-->
-<!--    &#32; == 普通的英文半角空格-->
-<!--    &#160; == &nbsp; == &#xA0; == no-break space （普通的英文半角空格但不换行）-->
-<!--    &#12288; == 中文全角空格 （一个中文宽度）-->
-<!--    &#8194; == &ensp; == en空格 （半个中文宽度）-->
-<!--    &#8195; == &emsp; == em空格 （一个中文宽度）-->
-<!--    &#8197; == 四分之一em空格 （四分之一中文宽度）-->
-<!--    相比平时的空格（&#32;），nbsp拥有不间断（non-breaking）特性。即连续的nbsp会在同一行内显示。即使有100个连续的nbsp，浏览器也不会把它们拆成两行。-->
-    <string name="mstr_north_wearot">확&#8195;인</string>
+    <!--    &#32; == 普通的英文半角空格-->
+    <!--    &#160; == &nbsp; == &#xA0; == no-break space （普通的英文半角空格但不换行）-->
+    <!--    &#12288; == 中文全角空格 （一个中文宽度）-->
+    <!--    &#8194; == &ensp; == en空格 （半个中文宽度）-->
+    <!--    &#8195; == &emsp; == em空格 （一个中文宽度）-->
+    <!--    &#8197; == 四分之一em空格 （四分之一中文宽度）-->
+    <!--    相比平时的空格（&#32;），nbsp拥有不间断（non-breaking）特性。即连续的nbsp会在同一行内显示。即使有100个连续的nbsp，浏览器也不会把它们拆成两行。-->
+    <string name="mstr_north_wearot">確&#8195;認</string>
     <!--SDK功能提示-->
-    <string name="mstr_whenard_anthraship">%s을( 를) 설치하지 않았으므로 앱을 설치한 후 공유하십시오</string>
+    <string name="mstr_whenard_anthraship">由於您沒有安裝%s，請先裝APP後再進行分享</string>
 
     <!--功能提示-->
-    <string name="mstr_herselfan_easyite">회원가입 성공</string>
+    <string name="mstr_herselfan_easyite">註冊成功</string>
 
-    <string name="mstr_measureast_manthence">%1$s에 로그인한 계정과 비밀번호는 다음과 같습니다:\n계정:%2$s 비밀번호:%3$s</string>
-    <string name="mstr_vicenprove_hair">계정 비밀번호는 이미 앨범에 저장되었습니다</string>
-    <string name="mstr_cept_misoy">계정 로그인 중</string>
+    <string name="mstr_measureast_manthence">你登入 %1$s 的帳號和密碼如下:\n帳號: %2$s 密碼: %3$s</string>
+    <string name="mstr_vicenprove_hair">你的帳號密碼已經保存到相簿中</string>
+    <string name="mstr_cept_misoy">帳號正在登入</string>
 
     <!--有使用 不确定用途-->
-    <string name="mstr_nightile_voiceness">계정 로그인</string>
+    <string name="mstr_nightile_voiceness">帳號登入</string>
 
     <!--未使用-->
-    <string name="mstr_less_teamial">로그인 성공</string>
-    <string name="mstr_soonature_vagwatchan">계정</string>
-    <string name="mstr_population_ooally">비밀번호</string>
+    <string name="mstr_less_teamial">登入成功</string>
+    <string name="mstr_soonature_vagwatchan">帳號</string>
+    <string name="mstr_population_ooally">密碼</string>
 
-    <string name="mstr_free_largeenne">Facebook 로그인</string>
-    <string name="mstr_dinnerorium_riskeous">FB 로그인</string>
-    <string name="mstr_tapetize_himselfible">Google 로그인</string>
+    <string name="mstr_free_largeenne">Facebook登入</string>
+    <string name="mstr_dinnerorium_riskeous">FB登入</string>
+    <string name="mstr_tapetize_himselfible">Google登入</string>
 
-    <string name="mstr_simibest_volatperform">이전 비밀번호</string>
-    <string name="mstr_defensead_halflike">새 비밀번호</string>
-    <string name="mstr_rhinship_xanthel">전화번호</string>
-    <string name="mstr_genuical_sororern">인증 번호</string>
+    <string name="mstr_simibest_volatperform">舊密碼</string>
+    <string name="mstr_defensead_halflike">新密碼</string>
+    <string name="mstr_rhinship_xanthel">電話</string>
+    <string name="mstr_genuical_sororern">驗證碼</string>
 
-<!--    新增-->
-    <string name="mstr_road_nonagenkin">게스트 로그인</string>
-    <string name="mstr_loco_cosmothoughify">이미 계정이 있습니까?</string>
-    <string name="mstr_astromillionan_professionality">로그인</string>
-    <string name="mstr_pensbestization_phoneenne">회원가입</string>
-    <string name="mstr_totalation_pleasen">기타 로그인</string>
-    <string name="mstr_cratcy_teleomost">*계정 이메일이 비밀번호를 찾는 인증 이메일이 될 것입니다</string>
-    <string name="mstr_appear_agog">인증번호 받기</string>
+    <!--    新增-->
+    <string name="mstr_road_nonagenkin">遊客登入</string>
+    <string name="mstr_loco_cosmothoughify">已有帳號？</string>
+    <string name="mstr_astromillionan_professionality">登入</string>
+    <string name="mstr_pensbestization_phoneenne">註冊</string>
+    <string name="mstr_totalation_pleasen">其他登入</string>
+    <string name="mstr_cratcy_teleomost">*帳號信箱將會作為您找回密碼的驗證信箱，請謹慎輸入</string>
+    <string name="mstr_appear_agog">發送驗證碼</string>
 
-    <string name="mstr_thalamdetail_experieven">이메일을 입력하세요</string>
-    <string name="mstr_veracieur_thalamarium">6-20자를 입력하세요</string>
-    <string name="mstr_nausing_extraet">인증번호를 입력하세요</string>
-    <string name="mstr_damnery_song">새 비밀번호를 입력하세요</string>
-    <string name="mstr_squarrositious_dead">새 비밀번호 확인하기</string>
-    <string name="mstr_buyesque_nowoon">이메일 연동하여 계정 보안성을 높일 것을 제안합니다</string>
-    <string name="mstr_policyise_dekawallmost">그 계정은 이미 회원 계정으로 연동되었습니다</string>
-    <string name="mstr_researchage_narcair">계정 삭제</string>
-    <string name="mstr_public_realular">수정 확인</string>
-    <string name="mstr_althoughile_salutward">업그레이드 확인</string>
-    <string name="mstr_skin_behind">비밀번호 변경하기</string>
-    <string name="mstr_nullature_withern">*계정 이메일이 비밀번호를 찾는 인증 이메일이 될 것입니다</string>
+    <string name="mstr_thalamdetail_experieven">請輸入您的常用信箱</string>
+    <string name="mstr_veracieur_thalamarium">請輸入6–20字元</string>
+    <string name="mstr_nausing_extraet">請輸入驗證碼</string>
+    <string name="mstr_damnery_song">請輸入新密碼</string>
+    <string name="mstr_squarrositious_dead">確認新密碼</string>
+    <string name="mstr_buyesque_nowoon">建議綁定郵箱，提升帳號安全性</string>
+    <string name="mstr_policyise_dekawallmost">該帳號已升級為平台帳號</string>
+    <string name="mstr_researchage_narcair">刪除該帳號</string>
+    <string name="mstr_public_realular">確認修改</string>
+    <string name="mstr_althoughile_salutward">綁定確認</string>
+    <string name="mstr_skin_behind">修改密碼</string>
+    <string name="mstr_nullature_withern">*帳號信箱將會作為您找回密碼的驗證信箱，請謹慎輸入</string>
 
     <!--找回密码页面-->
-    <string name="mstr_simulaneous_sensal">비밀 번호 찾기</string>
-    <string name="mstr_lamnlamellic_explainlet">다시 돌아온 것을 환영합니다</string>
-    <string name="mstr_verular_phlegor">게임 계속하기</string>
-    <string name="mstr_pressureress_another">이메일 연동하기</string>
+    <string name="mstr_simulaneous_sensal">忘記密碼</string>
+    <string name="mstr_lamnlamellic_explainlet">歡迎回來</string>
+    <string name="mstr_verular_phlegor">繼續遊戲</string>
+    <string name="mstr_pressureress_another">綁定郵箱</string>
 
-    <string name="mstr_honorise_certainlyition">먼저 "이용약관"에 동의하십시오</string>
-    <string name="mstr_cingor_philo">등록 확인</string>
-    <string name="mstr_vasety_parvitor">비밀번호는 6~20자까지</string>
-    <string name="mstr_downsive_strategyness">이메일 형식이 이상합니다. 다시 입력해 주세요</string>
+    <string name="mstr_honorise_certainlyition">請先同意「用戶協議」</string>
+    <string name="mstr_cingor_philo">確認註冊</string>
+    <string name="mstr_vasety_parvitor">密碼只支持6~20字元</string>
+    <string name="mstr_downsive_strategyness">信箱格式異常，請重新輸入</string>
 
-    <string name="mstr_palltodayry_pulchrster">네트워크 이상입니다. 다시 시도하십시오</string>
-    <string name="mstr_piet_tonightical">이미 읽고 동의하였습니다</string>
-    <string name="mstr_fovesoundics_economymost">읽고 동의합니다</string>
-    <string name="mstr_issuesure_scut"><u>이용약관</u></string>
-    <string name="mstr_err_naucould">이용약관</string>
-    <string name="mstr_stichen_loqufollowor">계정 전환</string>
-    <string name="mstr_mnestible_trixify">이메일 연동하기</string>
-    <string name="mstr_bitesque_nugaivity">비밀번호가 두 번 일치하지 않습니다</string>
-    <string name="mstr_movieatic_flyite">이전 비밀번호를 입력하십시오</string>
-    <string name="mstr_zoactivityad_sculptish">무등록 로그인</string>
-    <string name="mstr_matri_nightness">새 비밀번호는 이전 비밀번호와 같을 수 없습니다</string>
-    <string name="mstr_topion_jungon">취소</string>
-    <string name="mstr_mindo_pietaire">확인</string>
-    <string name="mstr_pratia_laugh">계정을 삭제하면 플랫폼에서 계정이 완전히 삭제되므로, 삭제가 확인되려면 "확인"을 클릭하십시오</string>
-    <string name="mstr_askorium_eosoesque">이메일 연동 성공, 로그인 중...</string>
-    <string name="mstr_geni_bulbship">이메일 연동 성공</string>
-    <string name="mstr_libr_gelette">수정 완료, 로그인 중...</string>
-    <string name="mstr_quartivity_hospit">인증번호가 발송되었으니 확인하시기 바랍니다</string>
-    <string name="mstr_thoughtitude_betteratic">충전 완료</string>
-    <string name="mstr_vali_vollence">계정이 존재하지 않습니다</string>
-    <string name="mstr_horrsoistic_inter">닫기</string>
+    <string name="mstr_palltodayry_pulchrster">網路異常，請檢查重試</string>
+    <string name="mstr_piet_tonightical">我已閱讀並同意</string>
+    <string name="mstr_fovesoundics_economymost">閱讀並同意</string>
+    <string name="mstr_issuesure_scut"><u>用戶協議</u></string>
+    <string name="mstr_err_naucould">用戶協議</string>
+    <string name="mstr_stichen_loqufollowor">切換帳號</string>
+    <string name="mstr_mnestible_trixify">綁定郵箱</string>
+    <string name="mstr_bitesque_nugaivity">兩次密碼不一致</string>
+    <string name="mstr_movieatic_flyite">請輸入舊密碼</string>
+    <string name="mstr_zoactivityad_sculptish">遊客登入</string>
+    <string name="mstr_matri_nightness">新密碼不能與舊密碼相同</string>
+    <string name="mstr_topion_jungon">取消</string>
+    <string name="mstr_mindo_pietaire">確認</string>
+    <string name="mstr_pratia_laugh">請注意，刪除帳號將會將您的帳號從平台中徹底刪除，如果確認刪除，請點擊“確認”</string>
+    <string name="mstr_askorium_eosoesque">綁定郵箱帳號成功，正在登入...</string>
+    <string name="mstr_geni_bulbship">綁定郵箱帳號成功</string>
+    <string name="mstr_libr_gelette">修改成功，正在登入...</string>
+    <string name="mstr_quartivity_hospit">驗證碼已發送，請注意查收</string>
+    <string name="mstr_thoughtitude_betteratic">支付完成</string>
+    <string name="mstr_vali_vollence">帳號不存在</string>
+    <string name="mstr_horrsoistic_inter">關閉</string>
 
 </resources>
