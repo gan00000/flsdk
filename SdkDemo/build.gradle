@@ -180,6 +180,37 @@ android {
             resValue "string", "sdk_name", "opcaa demo"
 
         }
+
+        DySdkTW {
+
+            signingConfig signingConfigs.release_2
+            applicationId "com.asquan.tw"
+            minSdkVersion 21 //设置支持的最低版本系统
+            targetSdkVersion 34  //与Google最新版本同步
+            versionCode 1
+            versionName "1.0"
+            flavorDimensions "1"
+
+            resValue "string", "sdk_game_code", "fighter"
+            resValue "string", "sdk_app_key", "060efb5d92b60a5c23dae77f5afd34e8"
+            resValue "string", "sdk_more_language", "false"
+            resValue "string", "sdk_default_server_language", "zh_TW"  //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
+
+            resValue "string", "sdk_af_dev_key", ""
+            resValue "string", "dy_adjust_token", "7ibl4010qwow"
+
+            resValue "string", "facebook_app_id", "269799692331048"
+            resValue "string", "facebook_client_token", "8df9e34733141f65e5fba5592e23976b"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider269799692331048" //启用分析
+            resValue "string", "fb_login_protocol_scheme", "fb269799692331048"
+            resValue "string", "facebook_app_name", "fighter"
+            resValue "string", "line_channelId", ""
+            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google
+
+            //每个游戏的demo设置 test
+            resValue "string", "sdk_name", "opcaa demo"
+
+        }
     }
 
     android {
