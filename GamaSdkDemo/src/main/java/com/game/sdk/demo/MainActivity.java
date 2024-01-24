@@ -42,6 +42,7 @@ import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.out.IMWSDK;
 import com.mw.sdk.out.ISdkCallBack;
 import com.mw.sdk.out.MWSdkFactory;
+import com.mw.sdk.widget.FloatingWindowManager;
 import com.mw.sdk.widget.SBaseDialog;
 
 import java.util.ArrayList;
@@ -318,6 +319,13 @@ public class MainActivity extends Activity {
                     }
                 });
 
+            }
+        });
+
+        findViewById(R.id.open_float_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FloatingWindowManager.getInstance().initFloatingView(MainActivity.this,100, 100);
             }
         });
 

@@ -84,14 +84,6 @@ public class ScreenHelper {
     }
 
 
-    public int getScreenWidth() {
-        return screenWidth;
-    }
-
-    public int getScreenHeight() {
-        return screenHeight;
-    }
-
     public boolean isPhone() {
         return isPhone;
     }
@@ -100,6 +92,32 @@ public class ScreenHelper {
         return isPortrait;
     }*/
 
+    private static int[] getScreenWH(Context context) {
+        int wh[] = new int[]{0,0};
+        if (context == null){
+            return wh;
+        }
+        DisplayMetrics dm = context.getResources().getDisplayMetrics();
+        int widthPixel = dm.widthPixels;
+        int heightPixel = dm.heightPixels;
+        float density = dm.density;
+        Configuration c = context.getResources().getConfiguration();
+        int screenWidth = 0;
+        int screenHeight = 0;
+        screenWidth = (int) ((c.densityDpi / 160.0) * c.screenWidthDp);
+        screenHeight = (int) ((c.densityDpi / 160.0) * c.screenHeightDp);
+        PL.d("widthPixel=%s, heightPixel=%s, screenWidth=%s, screenHeight=%s", widthPixel, heightPixel, screenWidth, screenHeight);
+        wh[0] = screenWidth;
+        wh[1] = screenHeight;
+        return wh;
+    }
+
+    public static int getScreenWidth(Context context) {
+        return getScreenWH(context)[0];
+    }
+    public static int getScreenHeight(Context context) {
+        return getScreenWH(context)[1];
+    }
 
     public static boolean isLandscape(Context context) {
         return context.getResources().getConfiguration().orientation

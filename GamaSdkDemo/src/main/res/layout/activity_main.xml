@@ -147,7 +147,8 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="zx" />
+                    android:id="@+id/open_float_btn"
+                    android:text="悬浮按钮open" />
 
                 <Button
                     android:layout_width="wrap_content"
