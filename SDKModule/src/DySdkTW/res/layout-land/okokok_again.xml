@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mcolor_supin_situationar">
+
+    <LinearLayout
+        android:layout_width="375dp"
+        android:layout_height="375dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_centerInParent="true"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:id="@+id/mId_canceria_shortaster"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/mId_remainice_stageing"
+                android:layout_marginTop="2dp"
+                android:layout_marginStart="34dp"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/okokok_scalenance" />
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                >
+
+                <TextView
+                    android:id="@+id/mId_manymost_joc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:lines="1"
+                    android:text="@string/mstr_astromillionan_professionality"
+                    android:textColor="@color/mcolor_phaneraffectative_rustfaction"
+                    android:textSize="24sp" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="2dp"
+                    android:layout_toStartOf="@id/mId_manymost_joc"
+                    android:layout_toEndOf="@id/mId_manymost_joc"
+                    android:layout_below="@id/mId_manymost_joc"
+                    android:layout_marginTop="3dp"
+                    android:background="@color/mcolor_phaneraffectative_rustfaction"
+                    android:id="@+id/mId_wantard_sipiair"
+                    />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="50dp"
+                android:orientation="vertical"
+                android:layout_weight="1.0"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/mstr_pensbestization_phoneenne"
+                    android:gravity="center"
+                    android:lines="1"
+                    android:textColor="@color/mcolor_tag_tetrice"
+                    android:textSize="24sp"
+                    android:id="@+id/mId_takearian_sugmritious"/>
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="2dp"
+                    android:layout_toStartOf="@id/mId_takearian_sugmritious"
+                    android:layout_toEndOf="@id/mId_takearian_sugmritious"
+                    android:layout_below="@id/mId_takearian_sugmritious"
+                    android:layout_marginTop="3dp"
+                    android:background="@color/mcolor_phaneraffectative_rustfaction"
+                    android:id="@+id/mId_agonation_opofactar"
+                    android:visibility="invisible"
+                    />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="25dp">
+
+            <com.ldy.sdk.login.widget.v2.AccountLoginLayoutV2
+                android:id="@+id/mId_syward_threat"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <com.ldy.sdk.login.widget.v2.AccountRegisterLayoutV2
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/mId_funct_phatdirectionship"
+                android:visibility="gone"/>
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

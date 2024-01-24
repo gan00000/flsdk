@@ -48,6 +48,13 @@ android {
             proguardFile 'flavor-rules-kr.pro'
         }
 
+        DySdkTW {//....
+            flavorDimensions "1"
+            resValue "string", "sdk_inner_version", "vd_kr"
+            buildConfigField "Boolean", "reg_is_need_vfcode", "false"
+            proguardFile 'flavor-rules-kr.pro'
+        }
+
         DySdkTh {//....
             flavorDimensions "1"
             resValue "string", "sdk_inner_version", "vd_th"

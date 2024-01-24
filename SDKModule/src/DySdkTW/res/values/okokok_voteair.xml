@@ -1,0 +1,11 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!--控制dialog进出动画-->
+    <style name="dialog_animation" parent="android:Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/okokok_prinator</item>
+        <!-- 进入时的动画 -->
+        <item name="android:windowExitAnimation">@anim/okokok_philspaceive</item>
+        <!-- 退出时的动画 -->
+    </style>
+
+</resources>

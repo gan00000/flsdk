@@ -1,0 +1,6 @@
+<resources>
+
+    <!--第三方储值页面开始-->
+    <string name="mstr_pausie_earlyuous">api/web/payment.page</string>
+
+</resources>

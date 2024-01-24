@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="mcolor_lateracious_chelonatule">#00F2FE</color>
+    <color name="mcolor_phaneraffectative_rustfaction">#00F2FE</color>
+    <color name="mcolor_phylacad_ophi">#2A2A2A</color>
+    <color name="mcolor_filmaneous_lotion">#6D6D6D</color>
+    <color name="mcolor_fragacious_almosty">#606060</color>
+    <color name="mcolor_centrress_millionkin">#4B4B4B</color>
+    <color name="mcolor_hopeatic_herselfty">#00F2FE</color>
+    <color name="mcolor_decisionfic_rugsome">#4FACFE</color>
+
+</resources>
+
+    <!--透明度百分比-开头字母-->
+    <!--100% —FF-->
+    <!--95% — F2-->
+    <!--90% — E6-->
+    <!--85% — D9-->
+    <!--80% — CC-->
+    <!--75% — BF-->
+    <!--70% — B3-->
+    <!--65% — A6-->
+    <!--60% — 99-->
+    <!--55% — 8C-->
+    <!--50% — 80-->
+    <!--45% — 73-->
+    <!--40% — 66-->
+    <!--35% — 59-->
+    <!--30% — 4D-->
+    <!--25% — 40-->
+    <!--20% — 33-->
+    <!--15% — 26-->
+    <!--10% — 1A-->
+    <!--5% — 0D-->
+    <!--0% — 00-->
+
+    <!-- 全透明的颜色 #00000000-->
