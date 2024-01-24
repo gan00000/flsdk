@@ -5,6 +5,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 
+import com.allextends.adjust.AdjustHelper;
+import com.allextends.af.AFHelper;
 import com.appsflyer.AFInAppEventParameterName;
 import com.appsflyer.AFInAppEventType;
 import com.appsflyer.AppsFlyerLib;
@@ -46,19 +48,8 @@ public class SdkEventLogger {
     public static void activateApp(Activity activity){
 
         try {
-            AppsFlyerLib.getInstance().setCollectIMEI(false);
-            AppsFlyerLib.getInstance().setCollectAndroidID(false);
-            String afDevKey = activity.getResources().getString(R.string.sdk_af_dev_key);//ResConfig.getConfigInAssetsProperties(activity,"sdk_ads_appflyer_dev_key");
-            if(!TextUtils.isEmpty(afDevKey)) {
-//                AppsFlyerLib.getInstance().startTracking(activity.getApplication(), afDevKey);
-                AppsFlyerLib.getInstance().init(afDevKey,null,activity.getApplication());//应用层调用
-                AppsFlyerLib.getInstance().start(activity.getApplicationContext());
-                if (BuildConfig.DEBUG) {//debug打印日志
-                    AppsFlyerLib.getInstance().setDebugLog(true);
-                }
-            } else {
-                PL.e("af dev key empty!");
-            }
+
+            AFHelper.activateApp(activity);
 
             SFacebookProxy.initFbSdk(activity.getApplicationContext());
             sendEventToSever(activity,EventConstant.EventName.APP_OPEN.name());
@@ -223,7 +214,7 @@ public class SdkEventLogger {
 //            af_eventValues.put("platform", context.getResources().getString(R.string.channel_platform));
             addEventParameterName(context, af_eventValues);
             PL.i("trackinPay start Purchase af...");
-            AppsFlyerLib.getInstance().logEvent(context.getApplicationContext(), AFInAppEventType.PURCHASE, af_eventValues);
+            AFHelper.logEvent(context.getApplicationContext(), AFInAppEventType.PURCHASE, af_eventValues);
 //            AppsFlyerLib.getInstance().logEvent(context.getApplicationContext(), "af_purchase_hf", af_eventValues);
             PL.i("trackinPay end Purchase af... params=" + JsonUtil.map2Json(af_eventValues).toString());
 
@@ -301,7 +292,7 @@ public class SdkEventLogger {
                     }
 
                     //首次储值
-                    AppsFlyerLib.getInstance().logEvent(context.getApplicationContext(), "purchase_first_charge_hf", af_eventValues);
+                    AFHelper.logEvent(context.getApplicationContext(), "purchase_first_charge_hf", af_eventValues);
                     SGoogleProxy.firebaseAnalytics(context, "purchase_first_charge_hf", b);
                 }
                 double totalPay = sUserInfo.getPayAmount() + usdPrice;//累计金额
@@ -378,7 +369,7 @@ public class SdkEventLogger {
                 PL.i("上报全部媒体");
                 //AppsFlyer上报
 
-                AppsFlyerLib.getInstance().logEvent(context.getApplicationContext(), eventName, map);
+                AFHelper.logEvent(context.getApplicationContext(), eventName, map);
 
                 //Facebook上报
                 SFacebookProxy.trackingEvent(context, eventName, null, b);
@@ -388,6 +379,7 @@ public class SdkEventLogger {
 
                 //adjust
 //                GamaAj.trackEvent(context, eventName, map);
+
             } else {
                 if((adType & EventConstant.AdType.AdTypeFacebook)==EventConstant.AdType.AdTypeFacebook) {
                     PL.i("上报媒体EventReportFacebook");
@@ -402,7 +394,7 @@ public class SdkEventLogger {
                 if((adType & EventConstant.AdType.AdTypeAppsflyer)==EventConstant.AdType.AdTypeAppsflyer) {
                     PL.i("上报媒体AdTypeAppsflyer");
                     //AppsFlyer上报
-                    AppsFlyerLib.getInstance().logEvent(context.getApplicationContext(), eventName, map);
+                    AFHelper.logEvent(context.getApplicationContext(), eventName, map);
                 }
 //                if(mediaSet.contains(EventConstant.EventReportChannel.EventReportAdjust)) {
 //                    PL.i("上报媒体4");

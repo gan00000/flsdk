@@ -1,6 +1,7 @@
 package com.ldy.pub;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -10,6 +11,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.allextends.adjust.AdjustHelper;
 import com.ldy.base.cfg.ConfigModel;
 import com.ldy.callback.ILoginCallBack;
 import com.ldy.callback.IPayListener;
@@ -94,6 +96,12 @@ public class SimpleSdkImpl implements IDYSDK {
     public SimpleSdkImpl() {
 //        iLogin = ObjFactory.create(DialogLoginImpl.class);
         PL.i("SimpleSdkImpl 构造函数");
+    }
+
+    @Override
+    public void applicationOnCreate(Application application) {
+        PL.i("BaseSdkImpl applicationOnCreate");
+        AdjustHelper.init(application);
     }
 
 //    @Deprecated

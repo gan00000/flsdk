@@ -32,4 +32,7 @@
 
     <string name="channel_platform">google</string>
 
+    <!-- adjust  -->
+    <string name="dy_adjust_token"></string>
+
 </resources>

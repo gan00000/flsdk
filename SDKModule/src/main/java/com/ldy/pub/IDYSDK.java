@@ -1,6 +1,7 @@
 package com.ldy.pub;
 
 import android.app.Activity;
+import android.app.Application;
 
 import com.ldy.callback.ILoginCallBack;
 import com.ldy.callback.IPayListener;
@@ -27,6 +28,7 @@ public interface IDYSDK extends IGameLifeCycle {
 
 //    void setGameLanguage(Activity activity,SGameLanguage gameLanguage);
 
+    public void applicationOnCreate(Application application);
     /**
      * 设置角色信息  在游戏获得角色信息的时候调用，每次登陆，切换账号等角色变化时调用
      * @param roleId            角色id  				必传
