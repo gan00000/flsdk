@@ -106,7 +106,7 @@ public class AdjustHelper {
 
     public static void trackEvent(Context context, String eventName, Map<String,Object> params, double revenue, String orderId){
 
-        PL.i("AdjustHelper trackEvent eventName=%s", eventName);
+        PL.i("AdjustHelper trackEvent eventName=" + eventName);
         String appToken = context.getString(R.string.dy_adjust_token);//"{YourAppToken}";
         if (SStringUtil.isEmpty(appToken)){
             PL.e("AdjustHelper appToken empty");
@@ -115,7 +115,7 @@ public class AdjustHelper {
 
         String eventNameToken = getEventToken(context, eventName);
         if (SStringUtil.isEmpty(eventNameToken)){
-            PL.e("AdjustHelper trackEvent error eventNameToken empty, eventName=%s", eventName);
+            PL.e("AdjustHelper trackEvent error eventNameToken empty, eventName=" + eventName);
             return;
         }
         AdjustEvent adjustEvent = new AdjustEvent(eventNameToken);

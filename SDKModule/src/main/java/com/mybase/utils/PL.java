@@ -30,9 +30,9 @@ public class PL {
         i(PL_LOG,msg + "");
     }
 
-    public static void i(String tag, String msg){
-        Log.i(tag,msg + "");
-    }
+//    public static void i(String tag, String msg){
+//        Log.i(tag,msg + "");
+//    }
 
     public static void w(String msg){
         Log.w(PL_LOG,msg + "");
