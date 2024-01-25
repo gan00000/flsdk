@@ -173,6 +173,7 @@
 
 
 *   添加游戏配置文件，在您的项目中，打开 your_app根目录下添加**google-services.json配置文件（该文件SDK对接人员提供）**
+*   添加**adjustEvent**文件到 **assets/dysdk/**目录下面
 
 
  ------------------------------

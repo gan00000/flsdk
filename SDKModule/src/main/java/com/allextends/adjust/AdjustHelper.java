@@ -118,6 +118,7 @@ public class AdjustHelper {
             PL.e("AdjustHelper trackEvent error eventNameToken empty, eventName=" + eventName);
             return;
         }
+        PL.i("AdjustHelper trackEvent eventName=%s, token=%s", eventName, eventNameToken);
         AdjustEvent adjustEvent = new AdjustEvent(eventNameToken);
         if (revenue > 0) {
             adjustEvent.setRevenue(revenue,"USD");
