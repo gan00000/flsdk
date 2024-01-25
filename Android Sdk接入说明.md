@@ -142,70 +142,75 @@
 	//添加下列的依赖
 	dependencies {
 		
-		//MWSDK-release为sdk内提供的aar库
+		//MWSDK-release为sdk内提供的aar库，版本可能会有更改
 	    implementation(name:'MWSDK-release', ext:'aar')
 	    
-		    //基础库
-	    api 'androidx.legacy:legacy-support-v4:1.0.0'
-	    api 'androidx.appcompat:appcompat:1.5.1'
-	    api 'androidx.recyclerview:recyclerview:1.2.1'
-	    api 'androidx.constraintlayout:constraintlayout:2.1.4'
-	    api 'androidx.browser:browser:1.4.0'
-	    implementation 'androidx.viewpager2:viewpager2:1.0.0'
-	
-	    //mutildex
-	    implementation 'androidx.multidex:multidex:2.0.1'
-	    //google pay
-	    implementation "com.android.billingclient:billing:5.1.0"
-	    //google评分
-	    implementation 'com.google.android.play:review:2.0.1'
-	
-	    implementation("com.google.guava:guava:31.1-android")
-	    implementation 'com.zhy:base-rvadapter:3.0.3'
-	
-	    //Google库
-	    implementation 'com.google.android.gms:play-services-auth:20.4.0'
-	    implementation 'com.google.android.gms:play-services-base:18.1.0'
-	    implementation 'com.google.android.gms:play-services-games:23.1.0'
-	
-	    //firebase
-	    implementation platform('com.google.firebase:firebase-bom:30.1.0')
-	    implementation 'com.google.firebase:firebase-core'
-	    implementation 'com.google.firebase:firebase-messaging'
-	    implementation 'com.google.firebase:firebase-auth'
-	    // Recommended: Add the Firebase SDK for Google Analytics.
-	    implementation 'com.google.firebase:firebase-analytics'
-	    // Add the Firebase Crashlytics SDK.
-	    implementation 'com.google.firebase:firebase-crashlytics'
-	
-	    //Facebook库
-	    // Facebook Core only (Analytics)
-	    implementation 'com.facebook.android:facebook-core:15.2.0'  //latest.release
-	    // Facebook Login only
-	    implementation 'com.facebook.android:facebook-login:15.2.0'
-	    // Facebook Share only
-	    implementation 'com.facebook.android:facebook-share:15.2.0'
-	    // Facebook Messenger only
-	    implementation 'com.facebook.android:facebook-messenger:15.2.0'
-	    //line
-	    implementation 'com.linecorp:linesdk:5.0.1'
-	
-	    //af
-	    implementation 'com.appsflyer:af-android-sdk:6.9.0'
-	    implementation 'com.android.installreferrer:installreferrer:2.2'
-	
-	    implementation 'com.adjust.sdk:adjust-android:4.33.5'
-	
-	    implementation 'com.google.code.gson:gson:2.8.6'
-	    implementation 'io.reactivex.rxjava3:rxandroid:3.0.2'
-	    implementation 'io.reactivex.rxjava3:rxjava:3.1.5'
-	    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-	    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-	    implementation 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'
-	    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
-	
-	    implementation 'com.github.bumptech.glide:glide:4.16.0'
-	    annotationProcessor 'com.github.bumptech.glide:compiler:4.16.0'
+		 
+		 //基础库
+		api 'androidx.legacy:legacy-support-v4:1.0.0'
+		api 'androidx.appcompat:appcompat:1.6.1'
+		api 'androidx.recyclerview:recyclerview:1.3.2'
+		api 'androidx.constraintlayout:constraintlayout:2.1.4'
+		api 'androidx.browser:browser:1.7.0'
+		implementation 'androidx.viewpager2:viewpager2:1.0.0'
+		
+		//mutildex
+		implementation 'androidx.multidex:multidex:2.0.1'
+		//google pay
+		implementation "com.android.billingclient:billing:6.1.0"
+		//google评分
+		implementation 'com.google.android.play:review:2.0.1'
+		
+		implementation("com.google.guava:guava:31.1-android")
+		implementation 'com.zhy:base-rvadapter:3.0.3'
+		
+		//Google库
+		implementation 'com.google.android.gms:play-services-auth:20.7.0'
+		implementation 'com.google.android.gms:play-services-base:18.2.0'
+		implementation 'com.google.android.gms:play-services-games:23.1.0'
+		
+		//firebase
+		implementation platform('com.google.firebase:firebase-bom:32.3.1')
+		implementation 'com.google.firebase:firebase-messaging'
+		implementation 'com.google.firebase:firebase-auth'
+		// Recommended: Add the Firebase SDK for Google Analytics.
+		implementation 'com.google.firebase:firebase-analytics'
+		// Add the Firebase Crashlytics SDK.
+		implementation 'com.google.firebase:firebase-crashlytics'
+		
+		//Facebook库
+		// Facebook Core only (Analytics)
+		implementation 'com.facebook.android:facebook-core:16.0.0'  //latest.release
+		// Facebook Login only
+		implementation 'com.facebook.android:facebook-login:16.0.0'
+		// Facebook Share only
+		implementation 'com.facebook.android:facebook-share:16.0.0'
+		// Facebook Messenger only
+		implementation 'com.facebook.android:facebook-messenger:16.0.0'
+		//line
+		implementation 'com.linecorp:linesdk:5.0.1'
+		
+		//af
+		implementation 'com.appsflyer:af-android-sdk:6.9.0'
+		implementation 'com.android.installreferrer:installreferrer:2.2'
+		
+		
+		implementation 'com.google.code.gson:gson:2.8.6'
+		implementation 'io.reactivex.rxjava3:rxandroid:3.0.2'
+		implementation 'io.reactivex.rxjava3:rxjava:3.1.5'
+		implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+		implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+		implementation 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'
+		implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
+		
+		implementation 'com.github.bumptech.glide:glide:4.16.0'
+		annotationProcessor 'com.github.bumptech.glide:compiler:4.16.0'
+		
+		//naver
+		implementation("com.navercorp.nid:oauth:5.6.0") // jdk 11
+		//onestore
+		implementation "com.onestorecorp.sdk:sdk-iap:21.00.00"
+		implementation "com.onestorecorp.sdk:sdk-configuration-kr:1.0.0"
 	
 	}
 
