@@ -1013,7 +1013,7 @@ public class SdkUtil {
                 return SGameLanguage.en_US.getLanguage();
             }
             if (language.equals("zh") && country.equals("CN")){
-                return SGameLanguage.zh_CN.getLanguage();
+                return SGameLanguage.zh_TW.getLanguage();
             }
             if (language.equals("zh") && country.equals("TW")){
                 return SGameLanguage.zh_TW.getLanguage();
@@ -1021,9 +1021,9 @@ public class SdkUtil {
             if (language.equals("zh") && country.equals("HK")){
                 return SGameLanguage.zh_TW.getLanguage();
             }
-            if (language.equals("vi")){
-                return SGameLanguage.vi_VN.getLanguage();
-            }
+//            if (language.equals("vi")){
+//                return SGameLanguage.vi_VN.getLanguage();
+//            }
             if (language.equals("ko")){//韩语
                 return SGameLanguage.ko_KR.getLanguage();
             }
@@ -1036,7 +1036,7 @@ public class SdkUtil {
         if (SStringUtil.isNotEmpty(ResConfig.getDefaultServerLanguage(context))){
             return ResConfig.getDefaultServerLanguage(context);
         }
-        return SGameLanguage.zh_TW.getLanguage();//默认为繁体
+        return SGameLanguage.en_US.getLanguage();//默认为繁体
     }
 
 

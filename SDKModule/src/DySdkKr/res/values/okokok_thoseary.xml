@@ -16,5 +16,6 @@
     <string name="mstr_needward_hormate">회원계정</string>
     <string name="mstr_opoteran_glassress">공지</string>
     <string name="mstr_ground_boardid">기다리는 중...</string>
+    <string name="mstr_not_login">當前沒有帳號，請先登入</string>
 
 </resources>

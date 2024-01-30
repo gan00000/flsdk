@@ -1,0 +1,21 @@
+<resources>
+
+    <string name="mstr_trecentious_turbine">Mobile phone binding</string>
+    <string name="mstr_remember_marketo">Area code</string>
+    <string name="mstr_archyfold_haurvariousery">Please enter your mobile phone number</string>
+    <string name="mstr_truscoachaire_specialen">You have successfully bound, this is your currently bound mobile phone number</string>
+    <string name="mstr_cordfic_scandrecentlyous">Mobile phone area code cannot be empty</string>
+    <string name="mstr_shareee_octaire">Mobile phone number cannot be empty</string>
+    <string name="mstr_ominency_wouldling">Mobile phone number format is incorrect</string>
+    <string name="mstr_exampleitor_practice">Verification code has been sent</string>
+    <string name="mstr_transimagineation_vol">Mobile phone binding successful</string>
+    <string name="mstr_turbinetic_secreous">Google has been upgraded to a member account</string>
+    <string name="mstr_uxori_thusably">Facebook has been upgraded to a member account</string>
+    <string name="mstr_scrupdiseasearium_taxful">Visitor has been upgraded to a member account</string>
+    <string name="mstr_factorful_omenable">LINE has been upgraded to a member account</string>
+    <string name="mstr_needward_hormate">Member account</string>
+    <string name="mstr_opoteran_glassress">Announcement</string>
+    <string name="mstr_ground_boardid">Waiting....</string>
+    <string name="mstr_not_login">Currently no account, please log in first</string>
+
+</resources>
