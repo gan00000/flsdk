@@ -16,6 +16,6 @@
     <string name="mstr_needward_hormate">會員帳號</string>
     <string name="mstr_opoteran_glassress">公告</string>
     <string name="mstr_ground_boardid">等待中...</string>
-    <string name="text_account_not_login">當前沒有帳號，請先登入</string>
+    <string name="mstr_not_login">當前沒有帳號，請先登入</string>
 
 </resources>

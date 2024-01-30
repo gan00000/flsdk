@@ -1,0 +1,21 @@
+<resources>
+
+    <string name="mstr_trecentious_turbine">การผูกโทรศัพท์มือถือ</string>
+    <string name="mstr_remember_marketo">รหัสพื้นที่</string>
+    <string name="mstr_archyfold_haurvariousery">กรุณากรอกหมายเลขโทรศัพท์</string>
+    <string name="mstr_truscoachaire_specialen">คุณถูกผูกมัดเรียบร้อยแล้ว นี่คือหมายเลขโทรศัพท์มือถือที่คุณผูกไว้ในปัจจุบัน</string>
+    <string name="mstr_cordfic_scandrecentlyous">รหัสพื้นที่โทรศัพท์มือถือต้องไม่เว้นว่าง</string>
+    <string name="mstr_shareee_octaire">หมายเลขโทรศัพท์ต้องไม่เว้นว่าง</string>
+    <string name="mstr_ominency_wouldling">รูปแบบหมายเลขโทรศัพท์มือถือไม่ถูกต้อง</string>
+    <string name="mstr_exampleitor_practice">ส่งรหัสยืนยันแล้ว</string>
+    <string name="mstr_transimagineation_vol">ผูกโทรศัพท์มือถือสำเร็จ</string>
+    <string name="mstr_turbinetic_secreous">Google ได้รับการอัปเกรดเป็นบัญชีสมาชิกแล้ว</string>
+    <string name="mstr_uxori_thusably">Facebook ได้รับการอัปเกรดเป็นบัญชีสมาชิกแล้ว</string>
+    <string name="mstr_scrupdiseasearium_taxful">ผู้เยี่ยมชมได้รับการอัปเกรดเป็นบัญชีสมาชิกแล้ว</string>
+    <string name="mstr_factorful_omenable">LINE ได้รับการอัปเกรดเป็นบัญชีสมาชิกแล้ว</string>
+    <string name="mstr_needward_hormate">บัญชีสมาชิก</string>
+    <string name="mstr_opoteran_glassress">ประกาศ</string>
+    <string name="mstr_ground_boardid">ซึ่งรอคอย...</string>
+    <string name="mstr_not_login">ขณะนี้คุณไม่มีบัญชี กรุณาเข้าสู่ระบบก่อน</string>
+
+</resources>

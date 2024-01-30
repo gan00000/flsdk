@@ -1,38 +1,38 @@
 <resources>
 
-    <!--เปิดตัวหน้าเงื่อนไข-->
-    <string name="mstr_crepitess_astrotic">ฉันได้อ่านและยอมรับสัญญาแบบเหมารวมแล้ว</string>
+    <!--启动条款页面-->
+    <string name="mstr_crepitess_astrotic">I have read and agreed to the stereotyped contract</string>
 
-    <!--หน้าเข้าสู่ระบบ-->
-    <string name="mstr_siduusatory_securitysive">จำบัญชี</string>
-    <string name="mstr_fringization_amicress">ลืมรหัสผ่านเหรอ?</string>
-    <string name="mstr_kines_askcy">ลงทะเบียนบัญชี</string>
+    <!--登录页面-->
+    <string name="mstr_siduusatory_securitysive">Remember account</string>
+    <string name="mstr_fringization_amicress">Forget password?</string>
+    <string name="mstr_kines_askcy">Register an account</string>
 
-    <!--หน้าลงทะเบียน-->
-    <string name="mstr_researchitive_itsesque">กรุณากรอกหมายเลขโทรศัพท์มือถือของคุณ</string>
+    <!--注册页面-->
+    <string name="mstr_researchitive_itsesque">enter phone number</string>
 
-    <!--หน้าเปลี่ยนรหัสผ่าน-->
-    <string name="mstr_calorent_specence">เปลี่ยนรหัสผ่าน</string>
+    <!--修改密码页面-->
+    <string name="mstr_calorent_specence">Change password</string>
 
-    <!--หน้าผูกบัญชี (ทั่วไป)-->
-    <string name="mstr_usette_collectionfic">ผูกบัญชีสมาชิก</string>
-    <string name="mstr_manageracle_cover">ผูกมัดสมาชิกภาพ</string>
+    <!--绑定账号页面（通用）-->
+    <string name="mstr_usette_collectionfic">Bind member account</string>
+    <string name="mstr_manageracle_cover">Bind membership</string>
 
-    <string name="mstr_weight_barably">การผูกบัญชี</string>
+    <string name="mstr_weight_barably">Account binding</string>
 
-    <!--พร้อมท์การยืนยัน-->
-    <string name="mstr_egri_sacceur">บัญชีต้องไม่ว่างเปล่า</string>
-    <string name="mstr_multaton_uxoriatic">รหัสผ่านต้องไม่เว้นว่าง</string>
-    <string name="mstr_chryso_expectition">กรุณากรอกรหัสยืนยัน</string>
+    <!--验证提示-->
+    <string name="mstr_egri_sacceur">Account cannot be empty</string>
+    <string name="mstr_multaton_uxoriatic">Password cannot be empty</string>
+    <string name="mstr_chryso_expectition">enter verification code</string>
 
-    <!--เข้าสู่ระบบอัตโนมัติ-->
-    <string name="mstr_cerebroical_alithing">สลับบัญชี</string>
+    <!--自动登录-->
+    <string name="mstr_cerebroical_alithing">Switch account</string>
 
-    <string name="mstr_suchibility_quassagainst">บัญชี %1$s กำลังเข้าสู่ระบบ</string>
+    <string name="mstr_suchibility_quassagainst">Account %1$s is logging in</string>
 
-    <!--พรอมต์เริ่มต้น-->
-    <string name="mstr_environmentalaire_mesiitude">กรุณากรอกบัญชีของคุณ</string>
-    <string name="mstr_manthaster_whomuous">กรุณากรอกรหัสผ่าน</string>
+    <!--预设提示-->
+    <string name="mstr_environmentalaire_mesiitude">enter account name</string>
+    <string name="mstr_manthaster_whomuous">enter password</string>
 
     <!--通用文本-->
     <!--    &#32; == 普通的英文半角空格-->
@@ -42,87 +42,87 @@
     <!--    &#8195; == &emsp; == em空格 （一个中文宽度）-->
     <!--    &#8197; == 四分之一em空格 （四分之一中文宽度）-->
     <!--    相比平时的空格（&#32;），nbsp拥有不间断（non-breaking）特性。即连续的nbsp会在同一行内显示。即使有100个连续的nbsp，浏览器也不会把它们拆成两行。-->
-    <string name="mstr_north_wearot">ยืน&#8195;ยัน</string>
-    <!--SDKเคล็ดลับการทำงาน-->
-    <string name="mstr_whenard_anthraship">เนื่องจากคุณยังไม่ได้ติดตั้ง %s โปรดติดตั้ง APP ก่อนแชร์</string>
+    <string name="mstr_north_wearot">Confirm</string>
+    <!--SDK功能提示-->
+    <string name="mstr_whenard_anthraship">Since you have not installed %s, please install the APP first before sharing</string>
 
-    <!--เคล็ดลับการทำงาน-->
-    <string name="mstr_herselfan_easyite">ความสำเร็จในการลงทะเบียน</string>
+    <!--功能提示-->
+    <string name="mstr_herselfan_easyite">Registration successful</string>
 
-    <string name="mstr_measureast_manthence">หมายเลขบัญชีและรหัสผ่านของคุณเพื่อเข้าสู่ระบบ %1$s มีดังนี้:\nหมายเลขบัญชี: %2$s รหัสผ่าน: %3$s</string>
-    <string name="mstr_vicenprove_hair">รหัสผ่านบัญชีของคุณถูกบันทึกไว้ในอัลบั้มแล้ว</string>
-    <string name="mstr_cept_misoy">บัญชีกำลังเข้าสู่ระบบ</string>
+    <string name="mstr_measureast_manthence">Your account number and password to log in to %1$s are as follows:\nAccount number: %2$s Password: %3$s</string>
+    <string name="mstr_vicenprove_hair">Your account and password have been saved in the album</string>
+    <string name="mstr_cept_misoy">Account is logging in</string>
 
-    <!--ใช้แล้ว ไม่มั่นใจในการใช้งาน-->
-    <string name="mstr_nightile_voiceness">ลงชื่อเข้าใช้</string>
+    <!--有使用 不确定用途-->
+    <string name="mstr_nightile_voiceness">Account login</string>
 
-    <!--ไม่ได้ใช้-->
-    <string name="mstr_less_teamial">ลงชื่อเข้าใช้สำเร็จ</string>
-    <string name="mstr_soonature_vagwatchan">หมายเลขบัญชี</string>
-    <string name="mstr_population_ooally">รหัสผ่าน</string>
+    <!--未使用-->
+    <string name="mstr_less_teamial">Login successful</string>
+    <string name="mstr_soonature_vagwatchan">Account</string>
+    <string name="mstr_population_ooally">Password</string>
 
-    <string name="mstr_free_largeenne">เข้าสู่ระบบ Facebook</string>
-    <string name="mstr_dinnerorium_riskeous">เข้าสู่ระบบ FB</string>
-    <string name="mstr_tapetize_himselfible">เข้าสู่ระบบ Google</string>
+    <string name="mstr_free_largeenne">Facebook login</string>
+    <string name="mstr_dinnerorium_riskeous">FB login</string>
+    <string name="mstr_tapetize_himselfible">Google login</string>
 
-    <string name="mstr_simibest_volatperform">รหัสผ่านเก่า</string>
-    <string name="mstr_defensead_halflike">รหัสผ่านใหม่</string>
-    <string name="mstr_rhinship_xanthel">โทรศัพท์</string>
-    <string name="mstr_genuical_sororern">รหัสยืนยัน</string>
+    <string name="mstr_simibest_volatperform">Old password</string>
+    <string name="mstr_defensead_halflike">New password</string>
+    <string name="mstr_rhinship_xanthel">Telephone</string>
+    <string name="mstr_genuical_sororern">Verification code</string>
 
-    <!--   ใหม่-->
-    <string name="mstr_road_nonagenkin">เข้าสู่ระบบของแขก</string>
-    <string name="mstr_loco_cosmothoughify">มีบัญชีอยู่แล้ว?</string>
-    <string name="mstr_astromillionan_professionality">เข้าสู่ระบบ</string>
-    <string name="mstr_pensbestization_phoneenne">ลงทะเบียน</string>
-    <string name="mstr_totalation_pleasen">เข้าสู่ระบบอื่น ๆ</string>
-    <string name="mstr_cratcy_teleomost">*กล่องจดหมายของบัญชีจะถูกใช้เป็นกล่องจดหมายยืนยันในการรับรหัสผ่านของคุณ โปรดป้อนอย่างระมัดระวัง</string>
-    <string name="mstr_appear_agog">ส่งรหัสยืนยัน</string>
+    <!--    新增-->
+    <string name="mstr_road_nonagenkin">Guest login</string>
+    <string name="mstr_loco_cosmothoughify">Already have an account?</string>
+    <string name="mstr_astromillionan_professionality">Login</string>
+    <string name="mstr_pensbestization_phoneenne">Register</string>
+    <string name="mstr_totalation_pleasen">Other login</string>
+    <string name="mstr_cratcy_teleomost">*The account email address will be used as the verification email for you to retrieve your password, please enter it carefully</string>
+    <string name="mstr_appear_agog">Send code</string>
 
-    <string name="mstr_thalamdetail_experieven">กรุณากรอกที่อยู่อีเมลปกติของคุณ</string>
-    <string name="mstr_veracieur_thalamarium">กรุณากรอก 6–20 ตัวอักษร</string>
-    <string name="mstr_nausing_extraet">กรุณากรอกรหัสยืนยัน</string>
-    <string name="mstr_damnery_song">กรุณากรอกรหัสผ่านใหม่</string>
-    <string name="mstr_squarrositious_dead">ยืนยันรหัสผ่านใหม่</string>
-    <string name="mstr_buyesque_nowoon">ขอแนะนำให้อัปเกรดบัญชีของคุณเพื่อปรับปรุงความปลอดภัยของบัญชี</string>
-    <string name="mstr_policyise_dekawallmost">บัญชีนี้ได้รับการอัปเกรดเป็นบัญชีแพลตฟอร์มแล้ว</string>
-    <string name="mstr_researchage_narcair">ลบบัญชีนี้</string>
-    <string name="mstr_public_realular">ยืนยันการเปลี่ยนแปลง</string>
-    <string name="mstr_althoughile_salutward">ยืนยันการอัพเกรด</string>
-    <string name="mstr_skin_behind">เปลี่ยนรหัสผ่าน</string>
-    <string name="mstr_nullature_withern">*กล่องจดหมายของบัญชีจะถูกใช้เป็นกล่องจดหมายยืนยันในการรับรหัสผ่านของคุณ โปรดป้อนอย่างระมัดระวัง</string>
+    <string name="mstr_thalamdetail_experieven">enter email address</string>
+    <string name="mstr_veracieur_thalamarium">enter 6–20 characters</string>
+    <string name="mstr_nausing_extraet">enter verification code</string>
+    <string name="mstr_damnery_song">enter a new password</string>
+    <string name="mstr_squarrositious_dead">Confirm new password</string>
+    <string name="mstr_buyesque_nowoon">It is recommended to upgrade your account to improve account security</string>
+    <string name="mstr_policyise_dekawallmost">This account has been upgraded to a platform account</string>
+    <string name="mstr_researchage_narcair">Delete this account</string>
+    <string name="mstr_public_realular">Confirm modification</string>
+    <string name="mstr_althoughile_salutward">Confirm upgrade</string>
+    <string name="mstr_skin_behind">Change password</string>
+    <string name="mstr_nullature_withern">*The account email address will be used as the verification email for you to retrieve your password, please enter it carefully</string>
 
-    <!--หน้าการกู้คืนรหัสผ่าน-->
-    <string name="mstr_simulaneous_sensal">ลืมรหัสผ่าน</string>
-    <string name="mstr_lamnlamellic_explainlet">ยินดีต้อนรับกลับ</string>
-    <string name="mstr_verular_phlegor">เล่นเกมต่อ</string>
-    <string name="mstr_pressureress_another">อัปเกรดบัญชี</string>
+    <!--找回密码页面-->
+    <string name="mstr_simulaneous_sensal">Forgot Password</string>
+    <string name="mstr_lamnlamellic_explainlet">Welcome back</string>
+    <string name="mstr_verular_phlegor">Continue the game</string>
+    <string name="mstr_pressureress_another">Upgrade account</string>
 
-    <string name="mstr_honorise_certainlyition">โปรดยอมรับ "สัญญาตายตัว" ก่อน</string>
-    <string name="mstr_cingor_philo">ยืนยันการลงทะเบียน</string>
-    <string name="mstr_vasety_parvitor">รหัสผ่านรองรับเพียง 6~20 ตัวอักษรเท่านั้น</string>
-    <string name="mstr_downsive_strategyness">รูปแบบกล่องจดหมายไม่ปกติ โปรดป้อนใหม่</string>
+    <string name="mstr_honorise_certainlyition">Please agree to the "certainy contract" first</string>
+    <string name="mstr_cingor_philo">Registration</string>
+    <string name="mstr_vasety_parvitor">Password only supports 6~20 characters</string>
+    <string name="mstr_downsive_strategyness">The mailbox format is abnormal, please re-enter</string>
 
-    <string name="mstr_palltodayry_pulchrster">เครือข่ายผิดปกติ โปรดตรวจสอบและลองอีกครั้ง</string>
-    <string name="mstr_piet_tonightical">ฉันได้อ่านและเห็นด้วย</string>
-    <string name="mstr_fovesoundics_economymost">อ่านแล้วเห็นด้วย</string>
-    <string name="mstr_issuesure_scut"><u>สัญญาตายตัว</u></string>
-    <string name="mstr_err_naucould">สัญญาตายตัว</string>
-    <string name="mstr_stichen_loqufollowor">สลับบัญชี</string>
-    <string name="mstr_mnestible_trixify">อัปเกรดบัญชี</string>
-    <string name="mstr_bitesque_nugaivity">รหัสผ่านสองตัวไม่สอดคล้องกัน</string>
-    <string name="mstr_movieatic_flyite">กรุณากรอกรหัสผ่านเก่า</string>
-    <string name="mstr_zoactivityad_sculptish">เข้าสู่ระบบโดยไม่ต้องลงทะเบียน</string>
-    <string name="mstr_matri_nightness">รหัสผ่านใหม่ต้องไม่เหมือนกับรหัสผ่านเก่า</string>
-    <string name="mstr_topion_jungon">ยกเลิก</string>
-    <string name="mstr_mindo_pietaire">ยืนยัน</string>
-    <string name="mstr_pratia_laugh">โปรดทราบว่าการลบบัญชีของคุณจะเป็นการลบบัญชีของคุณออกจากแพลตฟอร์มอย่างสมบูรณ์ หากคุณยืนยันการลบ โปรดคลิก "ยืนยัน"</string>
-    <string name="mstr_askorium_eosoesque">อัปเกรดบัญชีสมาชิกสำเร็จ เข้าสู่ระบบ...</string>
-    <string name="mstr_geni_bulbship">อัปเกรดบัญชีสมาชิกสำเร็จแล้ว</string>
-    <string name="mstr_libr_gelette">แก้ไขสำเร็จ กำลังเข้าสู่ระบบ...</string>
-    <string name="mstr_quartivity_hospit">รหัสยืนยันถูกส่งไปแล้ว โปรดตรวจสอบอย่างละเอียด</string>
-    <string name="mstr_thoughtitude_betteratic">ชำระเงินเรียบร้อยแล้ว</string>
-    <string name="mstr_vali_vollence">บัญชีไม่มีอยู่</string>
-    <string name="mstr_horrsoistic_inter">ปิด</string>
+    <string name="mstr_palltodayry_pulchrster">Network abnorma, please check and try again</string>
+    <string name="mstr_piet_tonightical">I have read and agree</string>
+    <string name="mstr_fovesoundics_economymost">Read and agree</string>
+    <string name="mstr_issuesure_scut"><u>Contract</u></string>
+    <string name="mstr_err_naucould">Contract</string>
+    <string name="mstr_stichen_loqufollowor">Switch account</string>
+    <string name="mstr_mnestible_trixify">Upgrade account</string>
+    <string name="mstr_bitesque_nugaivity">Two passwords are inconsistent</string>
+    <string name="mstr_movieatic_flyite">Please enter the old password</string>
+    <string name="mstr_zoactivityad_sculptish">Login without registration</string>
+    <string name="mstr_matri_nightness">The new password cannot be the same as the old password</string>
+    <string name="mstr_topion_jungon">Cancel</string>
+    <string name="mstr_mindo_pietaire">Confirm</string>
+    <string name="mstr_pratia_laugh">Please note that deleting your account will completely delete your account from the platform. If you confirm the deletion, please click "Confirm"</string>
+    <string name="mstr_askorium_eosoesque">Upgraded membership account successfully, logging in...</string>
+    <string name="mstr_geni_bulbship">Upgraded membership account successfully</string>
+    <string name="mstr_libr_gelette">Modification successful, logging in...</string>
+    <string name="mstr_quartivity_hospit">Verification code has been sent, please check it</string>
+    <string name="mstr_thoughtitude_betteratic">Payment completed</string>
+    <string name="mstr_vali_vollence">Account does not exist</string>
+    <string name="mstr_horrsoistic_inter">Close</string>
 
 </resources>
