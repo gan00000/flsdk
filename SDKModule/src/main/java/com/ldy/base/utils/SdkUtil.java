@@ -1008,26 +1008,27 @@ public class SdkUtil {
             Locale locale = Locale.getDefault();//mw_#Hant  zh_HK_#Hant zh_CN_#Hans en_US
             String language = locale.getLanguage();//zh en
             String country = locale.getCountry();//TW US
-            PL.d("language=%s, country=%s", language, country);
-            if (language.equals("en")){
+            String supportLanguage = context.getResources().getString(R.string.sdk_supported_languages);
+            PL.d("language=%s, country=%s, supportLanguage=%s", language, country, supportLanguage);
+            if (language.equals("en") && supportLanguage.contains(language)){
                 return SGameLanguage.en_US.getLanguage();
             }
-            if (language.equals("zh") && country.equals("CN")){
+            if (language.equals("zh") && supportLanguage.contains(language)){
                 return SGameLanguage.zh_TW.getLanguage();
             }
-            if (language.equals("zh") && country.equals("TW")){
-                return SGameLanguage.zh_TW.getLanguage();
-            }
-            if (language.equals("zh") && country.equals("HK")){
-                return SGameLanguage.zh_TW.getLanguage();
-            }
+//            if (language.equals("zh") && country.equals("TW")){
+//                return SGameLanguage.zh_TW.getLanguage();
+//            }
+//            if (language.equals("zh") && country.equals("HK")){
+//                return SGameLanguage.zh_TW.getLanguage();
+//            }
 //            if (language.equals("vi")){
 //                return SGameLanguage.vi_VN.getLanguage();
 //            }
-            if (language.equals("ko")){//韩语
+            if (language.equals("ko") && supportLanguage.contains(language)){//韩语
                 return SGameLanguage.ko_KR.getLanguage();
             }
-            if (language.equals("th")){
+            if (language.equals("th") && supportLanguage.contains(language)){
                 return SGameLanguage.th_TH.getLanguage();
             }
             //return SGameLanguage.zh_TW.getLanguage();//默认为繁体
@@ -1036,7 +1037,7 @@ public class SdkUtil {
         if (SStringUtil.isNotEmpty(ResConfig.getDefaultServerLanguage(context))){
             return ResConfig.getDefaultServerLanguage(context);
         }
-        return SGameLanguage.en_US.getLanguage();//默认为繁体
+        return SGameLanguage.zh_TW.getLanguage();//默认为繁体
     }
 
 

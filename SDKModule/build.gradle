@@ -58,8 +58,10 @@ android {
         DySdkTh {//....
             flavorDimensions "1"
             resValue "string", "sdk_inner_version", "vd_th"
+            resValue "string", "sdk_supported_languages", "en-th"
             buildConfigField "Boolean", "reg_is_need_vfcode", "true"
             proguardFile 'flavor-rules-th.pro'
+//            resConfigs "en", "th"
         }
     }
 }
