@@ -7,11 +7,6 @@ import android.widget.ImageView;
 
 import com.mw.sdk.callback.FloatViewMoveListener;
 
-/**
- * 
- * @author itxuxxey
- *
- */
 public class FloatImageView extends androidx.appcompat.widget.AppCompatImageView {
 
 	private Context context;
@@ -30,11 +25,7 @@ public class FloatImageView extends androidx.appcompat.widget.AppCompatImageView
 		super(context, attrs, defStyle);
 		this.context = context;
 	}
-	
-	
-	
-	
-	
+
 	boolean move=false;//是否已经移动
 	float basex,basey;//整个移动过程中初始位置的横纵坐标
 	private long starTime;//移动开始时间
@@ -116,8 +107,9 @@ public class FloatImageView extends androidx.appcompat.widget.AppCompatImageView
 	}
 	
 	FloatViewMoveListener listener;
+
 	//设置监听事件
-	public void setOnEfunMoveListener(FloatViewMoveListener listener){
+	public void setFloatViewMoveListener(FloatViewMoveListener listener){
 		this.listener=listener;
 	}
 
@@ -131,8 +123,6 @@ public class FloatImageView extends androidx.appcompat.widget.AppCompatImageView
 	//修改windowmanager的坐标
 	public synchronized void updateWindowPosition(int x,int y,boolean isEndMove){
 		
-		
-//		updateSceenParams();
 		if(isEndMove){
 			
 				int local=0;
@@ -152,10 +142,10 @@ public class FloatImageView extends androidx.appcompat.widget.AppCompatImageView
 				}
 				endLocalUsed=false;
 			
-		}
-		else
+		}else{
 			listener.move(this,x, y,false);
-		
+		}
+
 	}
 	
 	int[] starLocal=new int[2];

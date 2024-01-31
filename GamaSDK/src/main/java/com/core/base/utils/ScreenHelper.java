@@ -107,8 +107,8 @@ public class ScreenHelper {
         screenWidth = (int) ((c.densityDpi / 160.0) * c.screenWidthDp);
         screenHeight = (int) ((c.densityDpi / 160.0) * c.screenHeightDp);
         PL.d("widthPixel=%s, heightPixel=%s, screenWidth=%s, screenHeight=%s", widthPixel, heightPixel, screenWidth, screenHeight);
-        wh[0] = screenWidth;
-        wh[1] = screenHeight;
+        wh[0] = widthPixel;
+        wh[1] = heightPixel;
         return wh;
     }
 
