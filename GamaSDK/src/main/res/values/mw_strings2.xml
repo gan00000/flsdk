@@ -17,6 +17,9 @@
     <string name="text_notice">公告</string>
     <string name="text_account_not_login">當前沒有帳號，請先登入</string>
 
+    <string name="text_has_bind_tips_twitter">Twitter已升級為會員帳號</string>
+    <string name="text_has_upgrade_account">已升級為會員帳號</string>
+
     <string name="text_game_name">遊戲名：</string>
     <string name="text_server_name">服務器：</string>
     <string name="text_role_name">角色名：</string>

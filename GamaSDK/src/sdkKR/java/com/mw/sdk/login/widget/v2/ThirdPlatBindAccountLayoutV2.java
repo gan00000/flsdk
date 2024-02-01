@@ -178,12 +178,14 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
 
-        this.sBaseDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
+        if (this.sBaseDialog != null) {
+            this.sBaseDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialog) {
 
-            }
-        });
+                }
+            });
+        }
     }
 
     @Override
