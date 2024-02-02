@@ -36,6 +36,8 @@ class FloatContentView : SLoginBaseRelativeLayout {
 
     private lateinit var contentWebView: SWebView
 
+    private lateinit var mFloatPersionCenterView: FloatPersionCenterView
+
     constructor(
         context: Context?,
         datas: List<FloatMenuDataModel.MenuData>,
@@ -78,8 +80,10 @@ class FloatContentView : SLoginBaseRelativeLayout {
     fun initView(): Unit {
         PL.d("FloatContentView initView")
 
-        menuRecyclerView = contentLayout.findViewById(R.id.id_rv_float_left)
         rightContentView = contentLayout.findViewById(R.id.id_ll_float_right_content)
+        mFloatPersionCenterView = contentLayout.findViewById(R.id.id_FloatPersionCenterView)
+
+        menuRecyclerView = contentLayout.findViewById(R.id.id_rv_float_left)
         val closeBgIV = contentLayout.findViewById<ImageView>(R.id.id_iv_float_back)
 
         contentWebView = contentLayout.findViewById(R.id.id_swv_content)

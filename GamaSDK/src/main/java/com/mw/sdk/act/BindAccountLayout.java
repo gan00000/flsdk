@@ -156,8 +156,8 @@ public class BindAccountLayout extends SLoginBaseRelativeLayout implements View.
         iv_bind_phone_close.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (sBaseDialog != null) {
-                    sBaseDialog.dismiss();
+                if (sfCallBack != null) {
+                    sfCallBack.fail(null, "back");
                 }
             }
         });

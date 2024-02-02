@@ -26,14 +26,17 @@ import androidx.core.app.NotificationCompat;
 
 import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.SFCallBack;
+import com.core.base.utils.AppUtil;
 import com.core.base.utils.MarketUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
 import com.mw.base.bean.SPayType;
 import com.mw.sdk.act.ActExpoView;
+import com.mw.sdk.act.FloatContentView;
 import com.mw.sdk.bean.req.PayCreateOrderReqBean;
 import com.mw.sdk.bean.res.ActDataModel;
+import com.mw.sdk.bean.res.FloatMenuDataModel;
 import com.mw.sdk.utils.SdkUtil;
 import com.mw.sdk.callback.IPayListener;
 import com.mw.sdk.demo.R;
@@ -66,6 +69,7 @@ public class MainActivity extends Activity {
     String extra = "extra_xxxx";
 
     SLoginResponse tempSLoginResponse;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -429,7 +433,7 @@ public class MainActivity extends Activity {
                     ToastUtils.toast(activity,"请先登录");
                     return;
                 }
-                mIMWSDK.showActView(MainActivity.this);
+//                mIMWSDK.showActView(MainActivity.this);
 
 //                ArrayList<ActDataModel.ActData> arrayList = new ArrayList<>();
 //                for (int i = 0; i < 10; i++) {
@@ -443,9 +447,23 @@ public class MainActivity extends Activity {
 //                mActExpoView.setsBaseDialog(commonDialog);
 //                commonDialog.setContentView(mActExpoView);
 //                commonDialog.show();
+
+
+                ArrayList<FloatMenuDataModel.MenuData> arrayList = new ArrayList<>();
+//                for (int i = 0; i < 10; i++) {
+//                    ActDataModel.ActData actData = new ActDataModel.ActData();
+//                    actData.setContentUrl("https://www.baidu.com/");
+//                    actData.setTitle("test=" + i);
+//                    arrayList.add(actData);
+//                }
+                SBaseDialog commonDialog = new SBaseDialog(activity, com.mw.sdk.R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
+                FloatContentView mActExpoView = new FloatContentView(activity, arrayList, commonDialog);
+                mActExpoView.setsBaseDialog(commonDialog);
+                commonDialog.setContentView(mActExpoView);
+                commonDialog.show();
             }
         });
-
+        AppUtil.hideActivityBottomBar(this);
     }
 
     private void handleLoginResponse(SLoginResponse sLoginResponse) {
@@ -569,7 +587,7 @@ public class MainActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+//        super.onBackPressed();
         PL.i("activity onBackPressed");
     }
 

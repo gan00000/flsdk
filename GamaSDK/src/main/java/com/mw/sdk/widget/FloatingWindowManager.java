@@ -38,7 +38,7 @@ public class FloatingWindowManager {
 
 	int screenWidth = 0;
 	int screenHeight = 0;
-	private int navigationBarHeight;
+	private int navigationBarHeight;//竖屏影响Y坐标，横屏影响X坐标
 	private int statusBarHeight;
 
 	WindowManager mWindowManager = null;
@@ -57,7 +57,11 @@ public class FloatingWindowManager {
 				if (mWindowParamsForFloatBtn.x == 0){
 					mWindowParamsForFloatBtn.x = -floatImageViewLayoutParams.width / 3 * 2;
 				}else {
-					mWindowParamsForFloatBtn.x = screenWidth - floatImageViewLayoutParams.width / 3;
+					if (ScreenHelper.isPortrait(activity)){
+						mWindowParamsForFloatBtn.x = screenWidth - floatImageViewLayoutParams.width / 3;
+					}else {
+						mWindowParamsForFloatBtn.x = screenWidth + navigationBarHeight - floatImageViewLayoutParams.width / 3;
+					}
 				}
 				mWindowManager.updateViewLayout(floatLayout, mWindowParamsForFloatBtn);
 				floatHiddenState = false;
@@ -210,7 +214,7 @@ public class FloatingWindowManager {
 						if (x == 0){
 							mWindowParamsForFloatBtn.x = 0;
 						}else{
-							mWindowParamsForFloatBtn.x = screenWidth- floatImageViewLayoutParams.width;
+							mWindowParamsForFloatBtn.x = screenWidth + navigationBarHeight - floatImageViewLayoutParams.width;
 						}
 
 					}
@@ -238,25 +242,27 @@ public class FloatingWindowManager {
 						mWindowParamsForFloatBtn.x = 0;
 					}
 
-					if (mWindowParamsForFloatBtn.y >= (screenHeight - navigationBarHeight)) {//竖屏y不包含导航栏
-						mWindowParamsForFloatBtn.y = screenHeight - navigationBarHeight;
+					if (mWindowParamsForFloatBtn.y >= (screenHeight + navigationBarHeight - floatImageViewLayoutParams.height)) {//竖屏y不包含导航栏
+						mWindowParamsForFloatBtn.y = screenHeight  + navigationBarHeight - floatImageViewLayoutParams.height;
+						PL.d("V Y max");
 					}
 					if(mWindowParamsForFloatBtn.y <= statusBarHeight){
 						mWindowParamsForFloatBtn.y = statusBarHeight;
 					}
 
-				}else {
+				}else {//横屏
 
-					if (mWindowParamsForFloatBtn.x >= screenWidth - floatImageViewLayoutParams.width / 2) {
-						mWindowParamsForFloatBtn.x = screenWidth - floatImageViewLayoutParams.width / 2;
+					if (mWindowParamsForFloatBtn.x >= screenWidth + navigationBarHeight - floatImageViewLayoutParams.width) {
+						mWindowParamsForFloatBtn.x = screenWidth + navigationBarHeight - floatImageViewLayoutParams.width;
 					}
 
-					if (mWindowParamsForFloatBtn.x < -floatImageViewLayoutParams.width / 2) {//限制滑出屏幕
-						mWindowParamsForFloatBtn.x = -floatImageViewLayoutParams.width / 2;
+					if (mWindowParamsForFloatBtn.x < 0) {//限制滑出屏幕
+						mWindowParamsForFloatBtn.x = 0;
 					}
 
-					if(mWindowParamsForFloatBtn.y > screenHeight - floatImageViewLayoutParams.height){
+					if(mWindowParamsForFloatBtn.y >= screenHeight - floatImageViewLayoutParams.height){
 						mWindowParamsForFloatBtn.y = screenHeight - floatImageViewLayoutParams.height;
+						PL.d("H Y max");
 					}
 
 					if(mWindowParamsForFloatBtn.y <= statusBarHeight){
@@ -266,6 +272,7 @@ public class FloatingWindowManager {
 				}
 
 				PL.d("mWindowParamsForFloatBtn:x=" + mWindowParamsForFloatBtn.x + "-- mWindowParamsForFloatBtn:y=" + mWindowParamsForFloatBtn.y);
+				PL.d("screenWidth=" + screenWidth + "-- screenHeight=" + screenHeight + "-- navigationBarHeight=" + navigationBarHeight + "--statusBarHeight=" + statusBarHeight);
 				mWindowManager.updateViewLayout(floatLayout, mWindowParamsForFloatBtn);
 
 				if (isEndMove){//2s不动的话缩小
