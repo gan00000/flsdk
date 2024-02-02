@@ -17,6 +17,7 @@ import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
 import com.mw.sdk.constant.SLoginType;
 import com.mw.sdk.bean.res.ConfigBean;
+import com.mw.sdk.constant.ViewType;
 import com.mw.sdk.utils.SdkUtil;
 import com.mw.base.utils.SdkVersionUtil;
 import com.mw.sdk.widget.SBaseRelativeLayout;
