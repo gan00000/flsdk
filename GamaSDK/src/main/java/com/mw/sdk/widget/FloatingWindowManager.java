@@ -60,7 +60,7 @@ public class FloatingWindowManager {
 					if (ScreenHelper.isPortrait(activity)){
 						mWindowParamsForFloatBtn.x = screenWidth - floatImageViewLayoutParams.width / 3;
 					}else {
-						mWindowParamsForFloatBtn.x = screenWidth + navigationBarHeight - floatImageViewLayoutParams.width / 3;
+						mWindowParamsForFloatBtn.x = screenWidth - floatImageViewLayoutParams.width / 3;
 					}
 				}
 				mWindowManager.updateViewLayout(floatLayout, mWindowParamsForFloatBtn);
@@ -214,7 +214,7 @@ public class FloatingWindowManager {
 						if (x == 0){
 							mWindowParamsForFloatBtn.x = 0;
 						}else{
-							mWindowParamsForFloatBtn.x = screenWidth + navigationBarHeight - floatImageViewLayoutParams.width;
+							mWindowParamsForFloatBtn.x = screenWidth - floatImageViewLayoutParams.width;
 						}
 
 					}
@@ -242,8 +242,8 @@ public class FloatingWindowManager {
 						mWindowParamsForFloatBtn.x = 0;
 					}
 
-					if (mWindowParamsForFloatBtn.y >= (screenHeight + navigationBarHeight - floatImageViewLayoutParams.height)) {//竖屏y不包含导航栏
-						mWindowParamsForFloatBtn.y = screenHeight  + navigationBarHeight - floatImageViewLayoutParams.height;
+					if (mWindowParamsForFloatBtn.y >= (screenHeight - floatImageViewLayoutParams.height)) {//竖屏y不包含导航栏
+						mWindowParamsForFloatBtn.y = screenHeight - floatImageViewLayoutParams.height;
 						PL.d("V Y max");
 					}
 					if(mWindowParamsForFloatBtn.y <= statusBarHeight){
@@ -252,8 +252,8 @@ public class FloatingWindowManager {
 
 				}else {//横屏
 
-					if (mWindowParamsForFloatBtn.x >= screenWidth + navigationBarHeight - floatImageViewLayoutParams.width) {
-						mWindowParamsForFloatBtn.x = screenWidth + navigationBarHeight - floatImageViewLayoutParams.width;
+					if (mWindowParamsForFloatBtn.x >= screenWidth - floatImageViewLayoutParams.width) {
+						mWindowParamsForFloatBtn.x = screenWidth - floatImageViewLayoutParams.width;
 					}
 
 					if (mWindowParamsForFloatBtn.x < 0) {//限制滑出屏幕
@@ -536,8 +536,8 @@ public class FloatingWindowManager {
 
 	public void initParams() {
 		// 屏幕宽高
-		screenWidth = ScreenHelper.getScreenWidth(activity);
-		screenHeight = ScreenHelper.getScreenHeight(activity);
+		screenWidth = activity.getWindow().getDecorView().getWidth();//ScreenHelper.getScreenWidth(activity);
+		screenHeight = activity.getWindow().getDecorView().getHeight();//ScreenHelper.getScreenHeight(activity);
 		navigationBarHeight = getNavigationBarHeight(activity);
 		statusBarHeight = 0;//getStatusHeight(activity);
 
