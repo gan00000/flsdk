@@ -10,6 +10,7 @@ import com.core.base.callback.SFCallBack;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.mw.sdk.ads.SdkEventLogger;
+import com.mw.sdk.bean.EventBean;
 import com.mw.sdk.bean.req.PayCreateOrderReqBean;
 import com.mw.sdk.constant.ApiRequestMethod;
 import com.mw.sdk.bean.req.PayExchangeReqBean;
@@ -96,13 +97,25 @@ public class PayApi {
                         sfCallBack.success(gpExchangeRes,rawResult);
                     }
                     if (gpExchangeRes.getData() != null && SStringUtil.isNotEmpty(gpExchangeRes.getData().getOrderId())) {
-                        BasePayBean basePayBean = new BasePayBean();
-                        basePayBean.setOrderId(gpExchangeRes.getData().getOrderId());
-                        basePayBean.setProductId(gpExchangeRes.getData().getProductId());
-                        basePayBean.setServerTimestamp(gpExchangeRes.getData().getTimestamp());
-                        basePayBean.setUsdPrice(gpExchangeRes.getData().getAmount());
+//                        BasePayBean basePayBean = new BasePayBean();
+//                        basePayBean.setOrderId(gpExchangeRes.getData().getOrderId());
+//                        basePayBean.setProductId(gpExchangeRes.getData().getProductId());
+//                        basePayBean.setServerTimestamp(gpExchangeRes.getData().getTimestamp());
+//                        basePayBean.setUsdPrice(gpExchangeRes.getData().getAmount());
 
-                        SdkEventLogger.trackinPayEvent(context.getApplicationContext(), basePayBean);
+                        String orderId = gpExchangeRes.getData().getOrderId() == null ? "unknow" : gpExchangeRes.getData().getOrderId();
+                        String productId = gpExchangeRes.getData().getProductId() == null ? "unknow" : gpExchangeRes.getData().getProductId();
+                        double usdPrice = gpExchangeRes.getData().getAmount();
+                        String serverTimestamp = gpExchangeRes.getData().getTimestamp();
+
+                        SdkEventLogger.trackinPayEvent(context.getApplicationContext(), "", orderId, productId, usdPrice, serverTimestamp,true);
+                        if (gpExchangeRes.getData().getEvents() != null && !gpExchangeRes.getData().getEvents().isEmpty()){
+                            for (EventBean eventBean : gpExchangeRes.getData().getEvents()) {
+                                if (SStringUtil.isNotEmpty(eventBean.getName()) && eventBean.getValue() > 0){
+                                    SdkEventLogger.trackinPayEvent(context.getApplicationContext(), eventBean.getName(), orderId, productId, eventBean.getValue(), serverTimestamp,false);
+                                }
+                            }
+                        }
                     }
 
                 } else {
@@ -271,13 +284,25 @@ public class PayApi {
                         sfCallBack.success(gpExchangeRes,rawResult);
                     }
                     if (gpExchangeRes.getData() != null && SStringUtil.isNotEmpty(gpExchangeRes.getData().getOrderId())) {
-                        BasePayBean basePayBean = new BasePayBean();
-                        basePayBean.setOrderId(gpExchangeRes.getData().getOrderId());
-                        basePayBean.setProductId(gpExchangeRes.getData().getProductId());
-                        basePayBean.setServerTimestamp(gpExchangeRes.getData().getTimestamp());
-                        basePayBean.setUsdPrice(gpExchangeRes.getData().getAmount());
+//                        BasePayBean basePayBean = new BasePayBean();
+//                        basePayBean.setOrderId(gpExchangeRes.getData().getOrderId());
+//                        basePayBean.setProductId(gpExchangeRes.getData().getProductId());
+//                        basePayBean.setServerTimestamp(gpExchangeRes.getData().getTimestamp());
+//                        basePayBean.setUsdPrice(gpExchangeRes.getData().getAmount());
 
-                        SdkEventLogger.trackinPayEvent(context.getApplicationContext(), basePayBean);
+                        String orderId = gpExchangeRes.getData().getOrderId() == null ? "unknow" : gpExchangeRes.getData().getOrderId();
+                        String productId = gpExchangeRes.getData().getProductId() == null ? "unknow" : gpExchangeRes.getData().getProductId();
+                        double usdPrice = gpExchangeRes.getData().getAmount();
+                        String serverTimestamp = gpExchangeRes.getData().getTimestamp();
+
+                        SdkEventLogger.trackinPayEvent(context.getApplicationContext(), "", orderId, productId, usdPrice, serverTimestamp,true);
+                        if (gpExchangeRes.getData().getEvents() != null && !gpExchangeRes.getData().getEvents().isEmpty()){
+                            for (EventBean eventBean : gpExchangeRes.getData().getEvents()) {
+                                if (SStringUtil.isNotEmpty(eventBean.getName()) && eventBean.getValue() > 0){
+                                    SdkEventLogger.trackinPayEvent(context.getApplicationContext(), eventBean.getName(), orderId, productId, eventBean.getValue(), serverTimestamp,false);
+                                }
+                            }
+                        }
                     }
 
                 } else {

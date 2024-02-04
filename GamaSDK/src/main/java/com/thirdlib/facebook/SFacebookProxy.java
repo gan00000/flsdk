@@ -111,36 +111,44 @@ public class SFacebookProxy {
 //		}
 //	}
 	
-	public static void trackingEvent(Activity activity,String eventName){
-		trackingEvent(activity, eventName,null,null);
-	}
-
-	public static void trackingEvent(Activity activity,String eventName,double valueToSum){
-		trackingEvent(activity, eventName,valueToSum,null);
-	}
+//	public static void trackingEvent(Activity activity,String eventName){
+//		trackingEvent(activity, eventName,null,null);
+//	}
+//
+//	public static void trackingEvent(Activity activity,String eventName,double valueToSum){
+//		trackingEvent(activity, eventName,valueToSum,null);
+//	}
 	
 	public static void trackingEvent(final Context context,final String eventName, final Double valueToSum, final Bundle parameters){
 		if (context == null || TextUtils.isEmpty(eventName)) {
 			return;
 		}
-		
-		/*FacebookSdk.sdkInitialize(activity.getApplicationContext(), new InitializeCallback() {
 
-			@Override
-			public void onInitialized() {
-				Log.d(FB_TAG, "InitializeCallback");
-				AppEventsLogger logger = AppEventsLogger.newLogger(activity);
-				if (valueToSum == null && parameters == null){
-					logger.logEvent(eventName);
-				}else if (valueToSum == null && parameters != null){
-					logger.logEvent(eventName, parameters);
-				}else if (valueToSum != null && parameters == null){
-					logger.logEvent(eventName,valueToSum);
-				}else {
-					logger.logEvent(eventName,valueToSum,parameters);
-				}
+		AppEventsLogger logger = AppEventsLogger.newLogger(context);
+		if (valueToSum == null && parameters == null){
+			logger.logEvent(eventName);
+		}else if (valueToSum == null && parameters != null){
+			logger.logEvent(eventName, parameters);
+		}else if (valueToSum != null && parameters == null){
+			logger.logEvent(eventName,valueToSum);
+		}else {
+			logger.logEvent(eventName,valueToSum,parameters);
+		}
+
+	}
+
+	public static void trackingEvent(final Context context,final String eventName, final Double valueToSum, Map<String, Object> parametersMap){
+		if (context == null || TextUtils.isEmpty(eventName)) {
+			return;
+		}
+
+		Bundle parameters = new Bundle();
+		if (parametersMap != null && !parametersMap.isEmpty()){
+			for (Map.Entry<String, Object> entry : parametersMap.entrySet()) {
+				parameters.putString(entry.getKey(), entry.getValue().toString());
 			}
-		});*/
+		}
+
 		AppEventsLogger logger = AppEventsLogger.newLogger(context);
 		if (valueToSum == null && parameters == null){
 			logger.logEvent(eventName);

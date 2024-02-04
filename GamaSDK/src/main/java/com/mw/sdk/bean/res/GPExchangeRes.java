@@ -1,6 +1,9 @@
 package com.mw.sdk.bean.res;
 
 import com.core.base.bean.BaseResponseModel;
+import com.mw.sdk.bean.EventBean;
+
+import java.util.ArrayList;
 
 /**
  * Created by ganyuanrong on 2017/2/23.
@@ -32,6 +35,8 @@ public class GPExchangeRes extends BaseResponseModel {
         private String productId;
 
         private String verification;
+
+        private ArrayList<EventBean> events;
 
         public String getVerification() {
             return verification;
@@ -73,5 +78,11 @@ public class GPExchangeRes extends BaseResponseModel {
         public void setProductId(String productId) {
             this.productId = productId;
         }
+
+        public ArrayList<EventBean> getEvents() {
+            return events;
+        }
+
     }
+
 }
