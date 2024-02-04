@@ -28,8 +28,6 @@ import java.util.TimerTask;
  */
 public class FloatingWindowManager {
 
-	public static final String plat_file_name = "gs_plat_xaa.xml";
-
 	private static FloatingWindowManager wm;
 	private Button redPointButton;
 	Timer redPointReqTimer;
