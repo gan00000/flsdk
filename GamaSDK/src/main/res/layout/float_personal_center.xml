@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:gravity="center_vertical">
+    >
 
     <LinearLayout
-        android:layout_width="324dp"
-        android:layout_height="330dp"
+        android:layout_width="290dp"
+        android:layout_height="match_parent"
+        android:id="@+id/id_ll_persion_main_center"
+        android:layout_centerHorizontal="true"
         android:orientation="vertical">
 
         <LinearLayout
@@ -114,7 +115,6 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginEnd="26dp"
             android:layout_marginTop="10dp"
             android:background="@color/c_939393"/>
 
@@ -191,7 +191,6 @@
                 android:textSize="14sp"
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp"
-                android:layout_marginEnd="26dp"
                 android:textColor="@color/white_c"
                 android:background="@drawable/pc_bg_3ba0ff_12"
                 />
@@ -242,7 +241,6 @@
                 app:layout_constraintTop_toBottomOf="@id/pc_ll_change_pwd"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="37dp"
-                android:layout_marginEnd="30dp"
                 android:text="@string/text_account_del"
                 android:id="@+id/pc_del_account"
                 android:textColor="@color/c_FF2424"
@@ -261,4 +259,17 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
-</LinearLayout>
+    <com.mw.sdk.act.BindAccountLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/id_BindAccountLayout"
+        android:visibility="gone"
+        />
+
+    <com.mw.sdk.act.FloatChangePwdLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/id_FloatChangePwdLayout"
+        android:visibility="gone"/>
+
+</RelativeLayout>

@@ -32,10 +32,8 @@ import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
 import com.mw.base.bean.SPayType;
-import com.mw.sdk.act.ActExpoView;
 import com.mw.sdk.act.FloatContentView;
 import com.mw.sdk.bean.req.PayCreateOrderReqBean;
-import com.mw.sdk.bean.res.ActDataModel;
 import com.mw.sdk.bean.res.FloatMenuDataModel;
 import com.mw.sdk.utils.SdkUtil;
 import com.mw.sdk.callback.IPayListener;
@@ -45,7 +43,7 @@ import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.out.IMWSDK;
 import com.mw.sdk.out.ISdkCallBack;
 import com.mw.sdk.out.MWSdkFactory;
-import com.mw.sdk.widget.FloatingWindowManager;
+import com.mw.sdk.act.FloatingManager;
 import com.mw.sdk.widget.SBaseDialog;
 
 import java.util.ArrayList;
@@ -329,7 +327,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.open_float_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FloatingWindowManager.getInstance().initFloatingView(MainActivity.this,100, 100);
+                FloatingManager.getInstance().initFloatingView(MainActivity.this,100, 100);
             }
         });
 

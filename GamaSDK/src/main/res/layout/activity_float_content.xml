@@ -4,37 +4,60 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:gravity="center_vertical"
     >
 
     <LinearLayout
         android:layout_width="468dp"
         android:layout_height="330dp"
-        android:background="@color/white_c"
+        android:background="@drawable/pc_float_content_bg"
         android:orientation="horizontal">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="140dp"
+            android:layout_width="116dp"
             android:layout_height="match_parent"
             android:id="@+id/id_rv_float_left"
             />
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/id_ll_float_right_content"
-            android:layout_marginStart="16dp"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/id_ll_float_right_content"
+                android:layout_marginStart="16dp"
+                android:orientation="vertical">
 
-        </LinearLayout>
+                <com.mw.sdk.act.FloatPersionCenterView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/id_FloatPersionCenterView"
+                    />
 
-        <com.mw.sdk.widget.SWebView
-            android:id="@+id/id_swv_content"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            </LinearLayout>
+
+            <com.mw.sdk.widget.SWebView
+                android:id="@+id/id_swv_content"
+                android:layout_marginEnd="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </RelativeLayout>
+
 
     </LinearLayout>
+    
+    <ImageView
+        android:layout_width="27dp"
+        android:layout_height="45dp"
+        android:src="@mipmap/float_back"
+        android:id="@+id/id_iv_float_back"
+        />
 
 </LinearLayout>

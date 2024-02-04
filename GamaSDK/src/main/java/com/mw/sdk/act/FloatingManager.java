@@ -1,4 +1,4 @@
-package com.mw.sdk.widget;
+package com.mw.sdk.act;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,12 +11,11 @@ import android.view.animation.Animation.AnimationListener;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
-import androidx.annotation.NonNull;
-
 import com.core.base.utils.PL;
 import com.core.base.utils.ScreenHelper;
 import com.mw.sdk.R;
 import com.mw.sdk.callback.FloatViewMoveListener;
+import com.mw.sdk.widget.FloatImageView;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -26,9 +25,9 @@ import java.util.TimerTask;
  * @author itxuxxey
  *
  */
-public class FloatingWindowManager {
+public class FloatingManager {
 
-	private static FloatingWindowManager wm;
+	private static FloatingManager wm;
 	private Button redPointButton;
 	Timer redPointReqTimer;
 
@@ -69,13 +68,13 @@ public class FloatingWindowManager {
 	private boolean isFullWindows = false;
 	private boolean isHasNavigationBar = false;
 
-	private FloatingWindowManager() {
+	private FloatingManager() {
 	}
 
 	// 获得实例
-	public static FloatingWindowManager getInstance() {
+	public static FloatingManager getInstance() {
 		if (wm == null) {
-			wm = new FloatingWindowManager();
+			wm = new FloatingManager();
 		}
 		return wm;
 	}
