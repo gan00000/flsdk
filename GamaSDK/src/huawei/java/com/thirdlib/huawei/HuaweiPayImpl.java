@@ -103,6 +103,8 @@ public class HuaweiPayImpl {
             }
             // 调用parsePurchaseResultInfoFromIntent方法解析支付结果数据
             PurchaseResultInfo purchaseResultInfo = Iap.getIapClient(activity).parsePurchaseResultInfoFromIntent(data);
+
+            PL.i("purchaseResultInfo.getReturnCode = " + purchaseResultInfo.getReturnCode());
             switch(purchaseResultInfo.getReturnCode()) {
                 case OrderStatusCode.ORDER_STATE_CANCEL:
                     // 用户取消
