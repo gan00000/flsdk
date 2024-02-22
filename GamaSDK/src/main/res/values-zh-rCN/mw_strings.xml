@@ -127,5 +127,6 @@
     <string name="text_select_pay_channel">选择付款方式</string>
     <string name="text_other">其它</string>
     <string name="text_pay_pay">储值</string>
+    <string name="text_account_change_pwd_success2">密码修改成功</string>
 
 </resources>

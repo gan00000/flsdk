@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.core.base.callback.SFCallBack;
+import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
 import com.mw.sdk.R;
@@ -106,18 +107,20 @@ public class FloatChangePwdLayout extends SLoginBaseRelativeLayout implements Vi
         oldPwdEditText = oldSdkInputEditTextView.getInputEditText();
         oldPwdEditText.setHintTextColor(getResources().getColor(R.color.c_B8B8B8));
         oldPwdEditText.setTextColor(getResources().getColor(R.color.black_s));
+        oldPwdEditText.setHint(R.string.py_input_old_password);
+
         newPasswordEditText = pwdSdkInputEditTextView.getInputEditText();
         newPasswordEditText.setHintTextColor(getResources().getColor(R.color.c_B8B8B8));
         newPasswordEditText.setTextColor(getResources().getColor(R.color.black_s));
+        newPasswordEditText.setHint(R.string.text_input_new_pwd);
 
         passwordAgaindEditText = pwdAgainSdkInputEditTextView.getInputEditText();
         passwordAgaindEditText.setHintTextColor(getResources().getColor(R.color.c_B8B8B8));
         passwordAgaindEditText.setTextColor(getResources().getColor(R.color.black_s));
+        passwordAgaindEditText.setHint(R.string.text_input_new_pwd_confire);
 
         iv_bind_phone_close = contentView.findViewById(R.id.iv_bind_phone_close);
 
-
-        SLoginResponse sLoginResponse = SdkUtil.getCurrentUserLoginResponse(getContext());
 
         bindConfirm.setOnClickListener(this);
 
@@ -161,23 +164,23 @@ public class FloatChangePwdLayout extends SLoginBaseRelativeLayout implements Vi
 //                }
 //                return;
 //            }
-            accountBind();
+            doChangePwd();
 
         }
 
     }
 
-    private void accountBind() {
+    private void doChangePwd() {
 
         oldPwd = oldPwdEditText.getEditableText().toString().trim();
         if (TextUtils.isEmpty(oldPwd)) {
-            ToastUtils.toast(getActivity(), R.string.py_account_empty);
+            ToastUtils.toast(getActivity(), R.string.py_input_old_password);
             return;
         }
 
         password = newPasswordEditText.getEditableText().toString().trim();
         if (TextUtils.isEmpty(password)) {
-            ToastUtils.toast(getActivity(), R.string.py_password_empty);
+            ToastUtils.toast(getActivity(), R.string.text_input_new_pwd);
             return;
         }
 
@@ -188,24 +191,29 @@ public class FloatChangePwdLayout extends SLoginBaseRelativeLayout implements Vi
         }
 
 
-        if (SStringUtil.isEqual(againPassword, password)) {
+        if (!SStringUtil.isEqual(againPassword, password)) {
             ToastUtils.toast(getActivity(), R.string.text_pwd_not_equel);
             return;
         }
 
-        if (!SdkUtil.checkAccount(oldPwd)) {
-            toast(R.string.text_account_format);
+        if (!SdkUtil.checkPassword(oldPwd)) {
+            toast(R.string.text_pwd_format);
             return;
         }
         if (!SdkUtil.checkPassword(password)) {
             toast(R.string.text_pwd_format);
             return;
         }
-
-        Request.bindAcountInGame(getActivity(), true, SdkUtil.getPreviousLoginType(getContext()), oldPwd, password, new SFCallBack() {
+        SLoginResponse sLoginResponse = SdkUtil.getCurrentUserLoginResponse(getContext());
+        if (sLoginResponse == null || sLoginResponse.getData() == null || SStringUtil.isEmpty(sLoginResponse.getData().getLoginId())){
+            PL.i("getCurrentUserLoginResponse is emypt");
+            toast(R.string.text_account_not_exist);
+            return;
+        }
+        Request.changePwd(getActivity(), sLoginResponse.getData().getLoginId(), oldPwd, password, new SFCallBack<SLoginResponse>() {
             @Override
-            public void success(Object result, String msg) {
-                toast(R.string.text_account_bind_success2);
+            public void success(SLoginResponse sLoginResponse, String msg) {
+                toast(R.string.text_account_change_pwd_success2);
 
                 if (sfCallBack != null) {
                     sfCallBack.success(SdkUtil.getCurrentUserLoginResponse(getContext()),"");
@@ -213,15 +221,12 @@ public class FloatChangePwdLayout extends SLoginBaseRelativeLayout implements Vi
             }
 
             @Override
-            public void fail(Object result, String msg) {
-                if (result != null){
-                    SLoginResponse response = (SLoginResponse)result;
-                    toast("" + response.getMessage());
-                }
-                if (sfCallBack != null){
+            public void fail(SLoginResponse sLoginResponse, String msg) {
 
-//                    sfCallBack.fail(null,"");
+                if (sLoginResponse != null && SStringUtil.isNotEmpty(sLoginResponse.getMessage())){
+                    toast(sLoginResponse.getMessage());
                 }
+
             }
         });
     }

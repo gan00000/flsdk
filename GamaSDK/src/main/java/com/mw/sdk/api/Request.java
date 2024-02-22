@@ -20,11 +20,14 @@ import com.mw.sdk.ads.SdkEventLogger;
 import com.mw.sdk.api.task.BaseLoginRequestTask;
 import com.mw.sdk.bean.SGameBaseRequestBean;
 import com.mw.sdk.bean.req.AccountBindInGameRequestBean;
+import com.mw.sdk.bean.req.AccountLoginRequestBean;
+import com.mw.sdk.bean.req.ChangePwdRequestBean;
 import com.mw.sdk.bean.req.PayCreateOrderReqBean;
 import com.mw.sdk.bean.res.ActDataModel;
 import com.mw.sdk.bean.res.ConfigBean;
 import com.mw.sdk.bean.res.ToggleResult;
 import com.mw.sdk.constant.ApiRequestMethod;
+import com.mw.sdk.constant.SLoginType;
 import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.utils.DataManager;
 import com.mw.sdk.utils.DialogUtil;
@@ -547,7 +550,7 @@ public class Request {
                     @Override
                     public void onError(@NonNull Throwable e) {
                         PL.i("getFloatConfigData onError...");
-                        SdkUtil.saveFloatCfgData(context, "");
+                        //SdkUtil.saveFloatCfgData(context, "");
                     }
 
                     @Override
@@ -585,12 +588,80 @@ public class Request {
                     @Override
                     public void onError(@NonNull Throwable e) {
                         PL.i("getFloatConfigData onError...");
-                        SdkUtil.saveFloatSwitchData(context, "");
+                        //SdkUtil.saveFloatSwitchData(context, "");
                     }
 
                     @Override
                     public void onComplete() {
 
+                    }
+                });
+    }
+
+    //修改密码，与 ChangePwdRequestTask的一致
+    public static void changePwd(Context context, String account, String oldPwd, String newPwd, SFCallBack<SLoginResponse> sfCallBack) {
+
+        if (SStringUtil.isEmpty(account) || SStringUtil.isEmpty(oldPwd) || SStringUtil.isEmpty(newPwd)){
+            return;
+        }
+
+        ChangePwdRequestBean  changePwdRequestBean = new ChangePwdRequestBean(context);
+        changePwdRequestBean.setName(account);
+        changePwdRequestBean.setOldPwd(SStringUtil.toMd5(oldPwd.trim()));
+        changePwdRequestBean.setNewPwd(SStringUtil.toMd5(newPwd.trim()));
+        changePwdRequestBean.setSignature(SStringUtil.toMd5(ResConfig.getAppKey(context) + changePwdRequestBean.getTimestamp() +
+                changePwdRequestBean.getName() + changePwdRequestBean.getGameCode()));
+
+        Dialog dialog = DialogUtil.createLoadingDialog(context, "Loading...");
+        dialog.show();
+        RetrofitClient.instance().build(context,URLType.LOGIN).create(MWApiService.class)
+                .changePassword(changePwdRequestBean.fieldValueToMap())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<SLoginResponse>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull SLoginResponse sLoginResponse) {
+                        if (dialog != null  ) {
+                            dialog.dismiss();
+                        }
+                        if (sLoginResponse != null){
+                            if (sLoginResponse.isRequestSuccess()) {
+                                sLoginResponse.getData().setLoginType(SLoginType.LOGIN_TYPE_MG);
+                                SdkUtil.updateLoginData(context, sLoginResponse);
+
+                                SdkUtil.saveAccountModel(context, account, newPwd, sLoginResponse.getData().getUserId(),sLoginResponse.getData().getToken(),
+                                        sLoginResponse.getData().getTimestamp(),true);//记住账号密码
+
+                                if (sfCallBack != null){
+                                    sfCallBack.success(sLoginResponse, "success");
+                                }
+                            }else{
+                                if (sfCallBack != null){
+                                    sfCallBack.fail(sLoginResponse, "fail");
+                                }
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        ToastUtils.toast(context, R.string.py_error_occur);
+                        if (dialog != null  ) {
+                            dialog.dismiss();
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        if (dialog != null  ) {
+                            dialog.dismiss();
+                        }
                     }
                 });
     }

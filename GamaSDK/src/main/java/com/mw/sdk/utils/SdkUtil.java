@@ -396,6 +396,7 @@ public class SdkUtil {
     public static void updateLoginData(Context context, SLoginResponse sLoginResponse){
         if (sLoginResponse != null){
             try {
+                sLoginResponse.getData().setGameCode(ResConfig.getGameCode(context));
                 Gson gson = new Gson();
                 String result = gson.toJson(sLoginResponse);
                 saveSdkLoginData(context, result);

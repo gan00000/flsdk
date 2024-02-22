@@ -1,7 +1,9 @@
 package com.mw.sdk.api;
 
+import com.core.base.bean.BaseResponseModel;
 import com.mw.sdk.bean.res.ActDataModel;
 import com.mw.sdk.bean.res.ToggleResult;
+import com.mw.sdk.login.model.response.SLoginResponse;
 
 import java.util.Map;
 
@@ -35,4 +37,9 @@ public interface MWApiService {
     @POST("sdk/api/floatBtn/initMenu")
     @FormUrlEncoded
     Observable<ResponseBody> getFloatMenus(@FieldMap Map<String, String> paramMap);
+
+//    @POST("sdk/api/floatBtn/changePassword")
+    @POST("api/pwd/changePassword")
+    @FormUrlEncoded
+    Observable<SLoginResponse> changePassword(@FieldMap Map<String, String> paramMap);
 }

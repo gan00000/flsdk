@@ -979,6 +979,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
 
     private void getEmailVfcodeRequest(Activity activity, String email, String interfaceName) {
+        email = email.toLowerCase();
         PhoneVfcodeRequestTask task = new PhoneVfcodeRequestTask(getActivity(), email, interfaceName);
         task.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(), "Loading..."));
         task.setReqCallBack(new ISReqCallBack<BaseResponseModel>() {

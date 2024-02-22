@@ -49,6 +49,7 @@ public class AccountLoginRequestBean extends AdsRequestBean {
 	}
 
 	public void setName(String name) {
+		name = name.toLowerCase();
 		this.name = name;
 		this.loginId = name;
 	}
