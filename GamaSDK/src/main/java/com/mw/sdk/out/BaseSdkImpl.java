@@ -197,6 +197,8 @@ public class BaseSdkImpl implements IMWSDK {
                     iPay.startQueryPurchase(activity.getApplicationContext());
                 }
                 //showActViewSwitchRequest(activity);//注释掉，先不用
+
+                Request.requestFloatMenus(activity.getApplicationContext(),null);
             }
         });
     }
@@ -269,6 +271,8 @@ public class BaseSdkImpl implements IMWSDK {
 
         ConfigRequest.requestBaseCfg(activity.getApplicationContext());//加载配置
         ConfigRequest.requestAreaCodeInfo(activity.getApplicationContext());
+
+        Request.requestFloatConfigData(activity.getApplicationContext(),null);
 
         if (iLogin != null) {
             iLogin.onCreate(activity);

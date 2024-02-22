@@ -11,10 +11,14 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.core.base.utils.PL
+import com.core.base.utils.SStringUtil
+import com.google.gson.Gson
 import com.mw.sdk.R
 import com.mw.sdk.bean.SGameBaseRequestBean
 import com.mw.sdk.bean.res.ActDataModel
-import com.mw.sdk.bean.res.FloatMenuDataModel
+import com.mw.sdk.bean.res.FloatSwitchRes
+import com.mw.sdk.bean.res.FloatConfigData
+import com.mw.sdk.bean.res.MenuData
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout
 import com.mw.sdk.utils.SdkUtil
 import com.mw.sdk.widget.SBaseDialog
@@ -25,7 +29,7 @@ import com.zhy.adapter.recyclerview.base.ViewHolder
 
 class FloatContentView : SLoginBaseRelativeLayout {
 
-    var menuDatas: ArrayList<FloatMenuDataModel.MenuData>? = null
+    var menuDatas: ArrayList<MenuData>? = null
 
     private lateinit var contentLayout: View
 
@@ -38,22 +42,50 @@ class FloatContentView : SLoginBaseRelativeLayout {
 
     private lateinit var mFloatPersionCenterView: FloatPersionCenterView
 
+    private lateinit var floatConfigData: FloatConfigData
+    private lateinit var floatSwitchRes: FloatSwitchRes
+
     constructor(
         context: Context?,
-        datas: List<FloatMenuDataModel.MenuData>,
+        datas: List<MenuData>,
         sxDialog: SBaseDialog
     ) : super(context) {
         this.sBaseDialog = sxDialog;
+
         menuDatas = arrayListOf()
-        menuDatas?.addAll(datas)
-        for (i in 1..10)
-        {
-           val aMenuData = FloatMenuDataModel.MenuData()
-            aMenuData.menuImgUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgiWJdCY8rMjzHhNUaOoGpAk-Eh1x0Xzfbs-TwhFo34g&s"
-            aMenuData.title = "title_$i"
-            aMenuData.contentUrl = "https://www.baidu.com/"
-            menuDatas?.add(aMenuData)
+
+        val floatCfgData = SdkUtil.getFloatCfgData(context)
+        val menuResData = SdkUtil.getFloatSwitchData(context)
+
+        if (SStringUtil.isEmpty(floatCfgData) || SStringUtil.isEmpty(menuResData)){
+            return
         }
+
+        if (SStringUtil.isNotEmpty(floatCfgData)) {
+            floatConfigData = Gson().fromJson(floatCfgData, FloatConfigData::class.java)
+        }
+
+        if (SStringUtil.isNotEmpty(menuResData)) {
+            floatSwitchRes = Gson().fromJson(menuResData, FloatSwitchRes::class.java)
+        }
+
+        for (cfgMenu in floatConfigData.menuList){
+            for (resMenu in floatSwitchRes.data.menuList){
+                if (resMenu.code.equals(cfgMenu.code) && resMenu.isDisplay){
+                    menuDatas?.add(cfgMenu)
+                }
+            }
+        }
+
+//        menuDatas?.addAll(datas)
+//        for (i in 1..10)
+//        {
+//           val aMenuData = FloatMenuDataModel.MenuData()
+//            aMenuData.menuImgUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgiWJdCY8rMjzHhNUaOoGpAk-Eh1x0Xzfbs-TwhFo34g&s"
+//            aMenuData.title = "title_$i"
+//            aMenuData.contentUrl = "https://www.baidu.com/"
+//            menuDatas?.add(aMenuData)
+//        }
         menuDatas?.first()?.isClick = true
         initView()
     }
@@ -101,7 +133,7 @@ class FloatContentView : SLoginBaseRelativeLayout {
 
     }
 
-    fun refreshData(datas: List<FloatMenuDataModel.MenuData>): Unit {
+    fun refreshData(datas: List<MenuData>): Unit {
 
         menuDatas?.let {
             it.clear()
@@ -129,11 +161,11 @@ class FloatContentView : SLoginBaseRelativeLayout {
                 val firstData = it[0]
 
                 val sr = SGameBaseRequestBean(context)
-                sr.completeUrl = firstData.contentUrl
+                sr.completeUrl = firstData.url
                 contentWebView.loadUrl(sr.createPreRequestUrl())
             }
         }
-        val menuCommonAdapter = object : CommonAdapter<FloatMenuDataModel.MenuData>(
+        val menuCommonAdapter = object : CommonAdapter<MenuData>(
             this.context,
             R.layout.float_left_menu_item,
             menuDatas
@@ -145,7 +177,7 @@ class FloatContentView : SLoginBaseRelativeLayout {
 
             override fun convert(
                 holder: ViewHolder,
-                mActData: FloatMenuDataModel.MenuData,
+                mActData: MenuData,
                 position: Int
             ) {
                 menuDatas?.let { datas ->
@@ -156,12 +188,12 @@ class FloatContentView : SLoginBaseRelativeLayout {
                     val loginTimestamp = SdkUtil.getSdkTimestamp(activity)
 
                     Glide.with(this@FloatContentView)
-                            .load(mData.menuImgUrl + "?" + loginTimestamp)
+                            .load(mData.icon + "?" + loginTimestamp)
                             .centerCrop()
                             .placeholder(R.mipmap.img_act_menu_unselect)
                             .into(menuIconIv)
 
-                    menuTitleTv.text = mData.title
+                    menuTitleTv.text = mData.name
 
                     if (mData.isClick){
                         holder.itemView.setBackgroundColor(getContext().resources.getColor(R.color.white_c))
@@ -202,7 +234,7 @@ class FloatContentView : SLoginBaseRelativeLayout {
 
                     val aMenuData  = it[i]
 
-                    for (dataTemp: FloatMenuDataModel.MenuData in it){
+                    for (dataTemp: MenuData in it){
                         // == 对应于Java中的 equals()
                         // ===对应于 Java中的 ==
                         dataTemp.isClick = dataTemp === aMenuData
@@ -217,7 +249,7 @@ class FloatContentView : SLoginBaseRelativeLayout {
                         contentWebView.visibility = View.VISIBLE
                         rightContentView.visibility = View.GONE
 
-                        contentWebView.loadUrl(aMenuData.contentUrl)
+                        contentWebView.loadUrl(aMenuData.url)
                     }
                     menuRecyclerView.adapter?.notifyDataSetChanged()
 

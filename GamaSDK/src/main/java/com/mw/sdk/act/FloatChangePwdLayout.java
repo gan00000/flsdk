@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.core.base.callback.SFCallBack;
+import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
 import com.mw.sdk.R;
 import com.mw.sdk.api.Request;
@@ -23,22 +24,15 @@ import com.mw.sdk.utils.SdkUtil;
 import com.mw.sdk.widget.SBaseRelativeLayout;
 
 
-public class FloatChangePwdLayout extends SLoginBaseRelativeLayout implements View.OnClickListener, SBaseRelativeLayout.OperationCallback {
+public class FloatChangePwdLayout extends SLoginBaseRelativeLayout implements View.OnClickListener {
 
-    private BindType bindTpye;
     private AccountModel accountModel;
-
-    public void setBindTpye(BindType bindTpye) {
-        this.bindTpye = bindTpye;
-    }
 
     public void setAccountModel(AccountModel accountModel) {
         this.accountModel = accountModel;
     }
 
     private View contentView;
-
-    private View bind_view;
 
     private Button bindConfirm;
 
@@ -86,8 +80,6 @@ public class FloatChangePwdLayout extends SLoginBaseRelativeLayout implements Vi
     private View onCreateView(LayoutInflater inflater) {
 
         contentView = inflater.inflate(R.layout.float_change_pwd, null);
-
-        bind_view = contentView.findViewById(R.id.ll_bind_view);
 
         oldSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_change_old_pwd);
         pwdSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_bind_password);
@@ -156,14 +148,6 @@ public class FloatChangePwdLayout extends SLoginBaseRelativeLayout implements Vi
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
 
-        if (this.sBaseDialog != null) {
-            this.sBaseDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                @Override
-                public void onDismiss(DialogInterface dialog) {
-
-                }
-            });
-        }
     }
 
     @Override
@@ -197,11 +181,17 @@ public class FloatChangePwdLayout extends SLoginBaseRelativeLayout implements Vi
             return;
         }
 
+        String againPassword = passwordAgaindEditText.getEditableText().toString().trim();
+        if (TextUtils.isEmpty(againPassword)) {
+            ToastUtils.toast(getActivity(), R.string.py_password_empty);
+            return;
+        }
 
-//        if (SStringUtil.isEqual(account, password)) {
-//            ToastUtils.toast(getActivity(), R.string.py_password_equal_account);
-//            return;
-//        }
+
+        if (SStringUtil.isEqual(againPassword, password)) {
+            ToastUtils.toast(getActivity(), R.string.text_pwd_not_equel);
+            return;
+        }
 
         if (!SdkUtil.checkAccount(oldPwd)) {
             toast(R.string.text_account_format);
@@ -220,10 +210,6 @@ public class FloatChangePwdLayout extends SLoginBaseRelativeLayout implements Vi
                 if (sfCallBack != null) {
                     sfCallBack.success(SdkUtil.getCurrentUserLoginResponse(getContext()),"");
                 }
-
-                if (sBaseDialog != null) {
-                    sBaseDialog.dismiss();
-                }
             }
 
             @Override
@@ -240,18 +226,6 @@ public class FloatChangePwdLayout extends SLoginBaseRelativeLayout implements Vi
         });
     }
 
-
-    @Override
-    public void statusCallback(int operation) {
-    }
-
-    @Override
-    public void alertTime(int remainTimeSeconds) {
-    }
-
-    @Override
-    public void dataCallback(Object o) {
-    }
 
     @Override
     protected void onSetDialog() {

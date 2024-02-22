@@ -32,6 +32,7 @@ import com.mw.sdk.utils.PayHelper;
 import com.mw.sdk.utils.ResConfig;
 import com.mw.sdk.utils.SdkUtil;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,6 +43,7 @@ import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import okhttp3.ResponseBody;
 
 public class Request {
 
@@ -514,6 +516,81 @@ public class Request {
                     @Override
                     public void onComplete() {
                         PL.i("subscribe onComplete...");
+                    }
+                });
+    }
+
+    public static void requestFloatConfigData(Context context, SFCallBack<String> sfCallBack) {
+
+        String gameCode = ResConfig.getGameCode(context);
+        RetrofitClient.instance().build(context,URLType.CDN).create(MWApiService.class)
+                .getFloatConfigData(gameCode)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ResponseBody>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull ResponseBody responseBody) {
+                        try {
+                            String floatCfgData = responseBody.string();
+                            PL.i("floatCfgData=" + floatCfgData);
+                            SdkUtil.saveFloatCfgData(context, floatCfgData);
+                        } catch (IOException e) {
+                            SdkUtil.saveFloatCfgData(context, "");
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        PL.i("getFloatConfigData onError...");
+                        SdkUtil.saveFloatCfgData(context, "");
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    public static void requestFloatMenus(Context context, SFCallBack<String> sfCallBack) {
+
+        String gameCode = ResConfig.getGameCode(context);
+        SGameBaseRequestBean sGameBaseRequestBean = new SGameBaseRequestBean(context);
+        RetrofitClient.instance().build(context,URLType.PLAT).create(MWApiService.class)
+                .getFloatMenus(sGameBaseRequestBean.fieldValueToMap())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ResponseBody>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull ResponseBody xResponseBody) {
+                        try {
+                            String xData = xResponseBody.string();
+                            PL.i("getFloatMenus=" + xData);
+                            SdkUtil.saveFloatSwitchData(context, xData);
+                        } catch (IOException e) {
+                            SdkUtil.saveFloatSwitchData(context, "");
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        PL.i("getFloatConfigData onError...");
+                        SdkUtil.saveFloatSwitchData(context, "");
+                    }
+
+                    @Override
+                    public void onComplete() {
+
                     }
                 });
     }

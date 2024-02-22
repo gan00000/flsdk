@@ -3,6 +3,8 @@ package com.mw.sdk.bean;
 import android.content.Context;
 
 import com.core.base.bean.BaseReqeustBean;
+import com.core.base.utils.ApkInfoUtil;
+import com.core.base.utils.AppUtil;
 import com.core.base.utils.SStringUtil;
 import com.mw.sdk.utils.ResConfig;
 import com.mw.sdk.utils.SdkUtil;
@@ -49,6 +51,8 @@ public class SSdkBaseRequestBean extends BaseReqeustBean {
 
     private int request_code = 0;//区别客服打开的地方
 
+    private String gameName;
+
     public SSdkBaseRequestBean(Context context) {
         super(context);
         initSdkField(context);
@@ -72,6 +76,8 @@ public class SSdkBaseRequestBean extends BaseReqeustBean {
 
         platform = context.getResources().getString(R.string.channel_platform);
 //        spy_advertiser = ResUtil.findStringByName(context,"spy_advertiser");
+
+        gameName = ApkInfoUtil.getApplicationName(context);
     }
 
 //    public String getAppKey() {

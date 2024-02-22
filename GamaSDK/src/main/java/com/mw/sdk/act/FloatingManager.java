@@ -461,7 +461,7 @@ public class FloatingManager {
 	    Resources resources = context.getResources();
 	    int resourceId = resources.getIdentifier("navigation_bar_height","dimen", "android");
 	    int height = 0 ;
-	    if(resourceId > 0){//过滤没有导航栏的设备
+		if(resourceId > 0){//过滤没有导航栏的设备
 	    	height = resources.getDimensionPixelSize(resourceId);
 	    }
 		PL.d( "Navi height:" + height);

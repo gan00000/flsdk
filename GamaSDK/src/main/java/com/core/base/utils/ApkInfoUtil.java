@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
@@ -33,6 +34,18 @@ public class ApkInfoUtil {
 		ApplicationInfo applicationInfo = getApplicationInfo(context);
 		String applicationName = (String) packageManager.getApplicationLabel(applicationInfo);
 		return applicationName;
+	}
+
+	// 通过包名获取对应的 Drawable 数据
+	public static Drawable getAppIcon(Context context) {
+		try {
+			PackageManager pm = context.getPackageManager();
+			ApplicationInfo info = getApplicationInfo(context);
+			return info.loadIcon(pm);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	/**

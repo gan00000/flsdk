@@ -1,14 +1,12 @@
 package com.mw.sdk.act;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.ToastUtils;
@@ -16,16 +14,14 @@ import com.mw.sdk.R;
 import com.mw.sdk.api.Request;
 import com.mw.sdk.bean.AccountModel;
 import com.mw.sdk.constant.BindType;
-import com.mw.sdk.constant.SLoginType;
 import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.login.widget.SDKInputEditTextView;
 import com.mw.sdk.login.widget.SDKInputType;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.mw.sdk.utils.SdkUtil;
-import com.mw.sdk.widget.SBaseRelativeLayout;
 
 
-public class BindAccountLayout extends SLoginBaseRelativeLayout implements View.OnClickListener, SBaseRelativeLayout.OperationCallback {
+public class FloatBindAccountLayout extends SLoginBaseRelativeLayout implements View.OnClickListener{
 
     private BindType bindTpye;
     private AccountModel accountModel;
@@ -41,7 +37,7 @@ public class BindAccountLayout extends SLoginBaseRelativeLayout implements View.
     private View contentView;
 
     private View bind_view;
-    private View has_bind_view;
+//    private View has_bind_view;
 
 
     private Button bindConfirm;
@@ -58,8 +54,8 @@ public class BindAccountLayout extends SLoginBaseRelativeLayout implements View.
     SDKInputEditTextView accountSdkInputEditTextView;
     SDKInputEditTextView pwdSdkInputEditTextView;
 
-    SDKInputEditTextView thirdAccountSdkInputEditTextView;
-    SDKInputEditTextView hasBindAccountSdkInputEditTextView;
+//    SDKInputEditTextView thirdAccountSdkInputEditTextView;
+//    SDKInputEditTextView hasBindAccountSdkInputEditTextView;
 
     private View iv_bind_phone_close;
 
@@ -69,15 +65,15 @@ public class BindAccountLayout extends SLoginBaseRelativeLayout implements View.
         this.sfCallBack = sfCallBack;
     }
 
-    public BindAccountLayout(Context context) {
+    public FloatBindAccountLayout(Context context) {
         super(context);
     }
 
-    public BindAccountLayout(Context context, AttributeSet attrs) {
+    public FloatBindAccountLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public BindAccountLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+    public FloatBindAccountLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
@@ -92,7 +88,7 @@ public class BindAccountLayout extends SLoginBaseRelativeLayout implements View.
         contentView = inflater.inflate(R.layout.float_bind_account, null);
 
         bind_view = contentView.findViewById(R.id.ll_bind_view);
-        has_bind_view = contentView.findViewById(R.id.ll_has_bind_view);
+//        has_bind_view = contentView.findViewById(R.id.ll_has_bind_view);
 
         accountSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_bind_account);
         pwdSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_bind_password);
@@ -118,37 +114,37 @@ public class BindAccountLayout extends SLoginBaseRelativeLayout implements View.
 
         iv_bind_phone_close = contentView.findViewById(R.id.iv_bind_phone_close);
 
-        thirdAccountSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_has_bind_third_account);
-        hasBindAccountSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_has_bind_account);
-        thirdAccountSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Account);
-        hasBindAccountSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Account);
+//        thirdAccountSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_has_bind_third_account);
+//        hasBindAccountSdkInputEditTextView = contentView.findViewById(R.id.sdkinputview_has_bind_account);
+//        thirdAccountSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Account);
+//        hasBindAccountSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Account);
 
-        thirdAccountSdkInputEditTextView.getContentView().setBackgroundResource(R.drawable.sdk_bg_input2);
-        hasBindAccountSdkInputEditTextView.getContentView().setBackgroundResource(R.drawable.sdk_bg_input2);
-        thirdAccountSdkInputEditTextView.getInputEditText().setHintTextColor(getResources().getColor(R.color.c_B8B8B8));
-        thirdAccountSdkInputEditTextView.getInputEditText().setTextColor(getResources().getColor(R.color.black_s));
-        hasBindAccountSdkInputEditTextView.getInputEditText().setHintTextColor(getResources().getColor(R.color.c_B8B8B8));
-        hasBindAccountSdkInputEditTextView.getInputEditText().setTextColor(getResources().getColor(R.color.black_s));
+//        thirdAccountSdkInputEditTextView.getContentView().setBackgroundResource(R.drawable.sdk_bg_input2);
+//        hasBindAccountSdkInputEditTextView.getContentView().setBackgroundResource(R.drawable.sdk_bg_input2);
+//        thirdAccountSdkInputEditTextView.getInputEditText().setHintTextColor(getResources().getColor(R.color.c_B8B8B8));
+//        thirdAccountSdkInputEditTextView.getInputEditText().setTextColor(getResources().getColor(R.color.black_s));
+//        hasBindAccountSdkInputEditTextView.getInputEditText().setHintTextColor(getResources().getColor(R.color.c_B8B8B8));
+//        hasBindAccountSdkInputEditTextView.getInputEditText().setTextColor(getResources().getColor(R.color.black_s));
 
-        hasBindAccountSdkInputEditTextView.getIconImageView().setImageResource(R.mipmap.img_persion);
+//        hasBindAccountSdkInputEditTextView.getIconImageView().setImageResource(R.mipmap.img_persion);
 
-        thirdAccountSdkInputEditTextView.getInputEditText().setEnabled(false);
-        hasBindAccountSdkInputEditTextView.getInputEditText().setEnabled(false);
+//        thirdAccountSdkInputEditTextView.getInputEditText().setEnabled(false);
+//        hasBindAccountSdkInputEditTextView.getInputEditText().setEnabled(false);
 
         SLoginResponse sLoginResponse = SdkUtil.getCurrentUserLoginResponse(getContext());
 
         if (sLoginResponse != null && sLoginResponse.getData() != null && sLoginResponse.getData().isBind()){
-            bind_view.setVisibility(GONE);
-            has_bind_view.setVisibility(VISIBLE);
-            AccountModel accountModel = new AccountModel();
-            accountModel.setLoginType(sLoginResponse.getData().getLoginType());
-            accountModel.setAccount(sLoginResponse.getData().getLoginId());
-            setAccountWithIcon2(accountModel, thirdAccountSdkInputEditTextView.getIconImageView(), thirdAccountSdkInputEditTextView.getInputEditText());
-            hasBindAccountSdkInputEditTextView.getInputEditText().setText(sLoginResponse.getData().getLoginId());
+//            bind_view.setVisibility(GONE);
+//            has_bind_view.setVisibility(VISIBLE);
+//            AccountModel accountModel = new AccountModel();
+//            accountModel.setLoginType(sLoginResponse.getData().getLoginType());
+//            accountModel.setAccount(sLoginResponse.getData().getLoginId());
+//            setAccountWithIcon2(accountModel, thirdAccountSdkInputEditTextView.getIconImageView(), thirdAccountSdkInputEditTextView.getInputEditText());
+//            hasBindAccountSdkInputEditTextView.getInputEditText().setText(sLoginResponse.getData().getLoginId());
 
         }else{
-            bind_view.setVisibility(VISIBLE);
-            has_bind_view.setVisibility(GONE);
+//            bind_view.setVisibility(VISIBLE);
+//            has_bind_view.setVisibility(GONE);
         }
 
         bindConfirm.setOnClickListener(this);
@@ -179,14 +175,6 @@ public class BindAccountLayout extends SLoginBaseRelativeLayout implements View.
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
 
-        if (this.sBaseDialog != null) {
-            this.sBaseDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                @Override
-                public void onDismiss(DialogInterface dialog) {
-
-                }
-            });
-        }
     }
 
     @Override
@@ -194,12 +182,6 @@ public class BindAccountLayout extends SLoginBaseRelativeLayout implements View.
 
         if (v == bindConfirm) {
 
-            if (has_bind_view.getVisibility() == VISIBLE){
-                if (sBaseDialog != null) {
-                    sBaseDialog.dismiss();
-                }
-                return;
-            }
             accountBind();
 
         }
@@ -244,9 +226,6 @@ public class BindAccountLayout extends SLoginBaseRelativeLayout implements View.
                     sfCallBack.success(SdkUtil.getCurrentUserLoginResponse(getContext()),"");
                 }
 
-                if (sBaseDialog != null) {
-                    sBaseDialog.dismiss();
-                }
             }
 
             @Override
@@ -265,55 +244,10 @@ public class BindAccountLayout extends SLoginBaseRelativeLayout implements View.
 
 
     @Override
-    public void statusCallback(int operation) {
-    }
-
-    @Override
-    public void alertTime(int remainTimeSeconds) {
-    }
-
-    @Override
-    public void dataCallback(Object o) {
-    }
-
-    @Override
     protected void onSetDialog() {
         super.onSetDialog();
 //        sLoginDialogv2.getLoginPresenter().setOperationCallback(this);
 //        remainTimeSeconds = sLoginDialogv2.getLoginPresenter().getRemainTimeSeconds();
-    }
-
-
-    public void setAccountWithIcon2(AccountModel accountModel,  ImageView imageView, EditText editText){
-        int imageResId = R.mipmap.img_persion;
-        String showName = "";
-        if (SLoginType.LOGIN_TYPE_FB.equals(accountModel.getLoginType())){
-            imageResId = R.mipmap.icon_fb_2;
-            showName = getContext().getResources().getString(R.string.text_has_bind_tips_fb);
-
-        }else  if (SLoginType.LOGIN_TYPE_GOOGLE.equals(accountModel.getLoginType())){
-            imageResId = R.mipmap.icon_gp_2;
-            showName = getContext().getResources().getString(R.string.text_has_bind_tips_google);
-
-        }else  if (SLoginType.LOGIN_TYPE_GUEST.equals(accountModel.getLoginType())){
-            imageResId = R.mipmap.img_guest_2;
-            showName = getContext().getResources().getString(R.string.text_has_bind_tips_guest);
-        }else if (SLoginType.LOGIN_TYPE_LINE.equals(accountModel.getLoginType())){
-            imageResId = R.mipmap.icon_line_2;
-            showName = getContext().getResources().getString(R.string.text_has_bind_tips_line);
-        }else if (SLoginType.LOGIN_TYPE_TWITTER.equals(accountModel.getLoginType())){
-            imageResId = R.mipmap.icon_twitter_2;
-            showName = getContext().getResources().getString(R.string.text_has_bind_tips_twitter);
-        }else if (SLoginType.LOGIN_TYPE_MG.equals(accountModel.getLoginType())){
-            imageResId = R.mipmap.img_persion;
-            showName = getContext().getResources().getString(R.string.text_has_bind_tips_mw);
-        }else if (SLoginType.LOGIN_TYPE_NAVER.equals(accountModel.getLoginType())){
-            imageResId = R.mipmap.icon_naver;
-            showName = getContext().getResources().getString(R.string.text_has_upgrade_account);
-        }
-
-        imageView.setImageResource(imageResId);
-        editText.setText(showName);
     }
 
 }

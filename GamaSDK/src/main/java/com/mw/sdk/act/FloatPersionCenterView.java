@@ -7,9 +7,17 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.core.base.callback.SFCallBack;
+import com.core.base.utils.ApkInfoUtil;
+import com.core.base.utils.SStringUtil;
+import com.google.gson.Gson;
 import com.mw.sdk.R;
+import com.mw.sdk.bean.res.FloatConfigData;
+import com.mw.sdk.bean.res.FloatSwitchRes;
+import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
+import com.mw.sdk.utils.SdkUtil;
 
 public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
 
@@ -21,8 +29,14 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
     private TextView accountTextView;
 
     private View persionMainView;
-    private  BindAccountLayout mBindAccountLayout;
+    private View accountLayoutView;
+    private FloatBindAccountLayout mFloatBindAccountLayout;
     private FloatChangePwdLayout mFloatChangePwdLayout;
+
+    private View updradeAccount;
+
+    private FloatConfigData floatConfigData;
+    private FloatSwitchRes floatSwitchRes;
 
     public FloatPersionCenterView(Context context) {
         super(context);
@@ -52,21 +66,23 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
         roleNameTextView = persionCenterView.findViewById(R.id.id_tv_role_name);
         accountTextView = persionCenterView.findViewById(R.id.id_tv_account);
 
-        mBindAccountLayout = persionCenterView.findViewById(R.id.id_BindAccountLayout);
+        mFloatBindAccountLayout = persionCenterView.findViewById(R.id.id_BindAccountLayout);
         mFloatChangePwdLayout = persionCenterView.findViewById(R.id.id_FloatChangePwdLayout);
 
+        accountLayoutView = persionCenterView.findViewById(R.id.pc_ll_account);
+
         persionMainView.setVisibility(View.VISIBLE);
-        mBindAccountLayout.setVisibility(View.GONE);
+        mFloatBindAccountLayout.setVisibility(View.GONE);
         mFloatChangePwdLayout.setVisibility(View.GONE);
 
         View changePwd = persionCenterView.findViewById(R.id.pc_tv_change_pwd);
-        View updradeAccount = persionCenterView.findViewById(R.id.pc_tv_upgrade_account);
+        updradeAccount = persionCenterView.findViewById(R.id.pc_tv_upgrade_account);
 
         updradeAccount.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 persionMainView.setVisibility(View.GONE);
-                mBindAccountLayout.setVisibility(View.VISIBLE);
+                mFloatBindAccountLayout.setVisibility(View.VISIBLE);
                 mFloatChangePwdLayout.setVisibility(View.GONE);
             }
         });
@@ -74,21 +90,21 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
             @Override
             public void onClick(View v) {
                 persionMainView.setVisibility(View.GONE);
-                mBindAccountLayout.setVisibility(View.GONE);
+                mFloatBindAccountLayout.setVisibility(View.GONE);
                 mFloatChangePwdLayout.setVisibility(View.VISIBLE);
             }
         });
-        mBindAccountLayout.setSFCallBack(new SFCallBack() {
+        mFloatBindAccountLayout.setSFCallBack(new SFCallBack() {
             @Override
             public void success(Object result, String msg) {
-
+                updateUserInfoView(context, floatConfigData);
             }
 
             @Override
             public void fail(Object result, String msg) {
                 if ("back".equals(msg)){
                     persionMainView.setVisibility(View.VISIBLE);
-                    mBindAccountLayout.setVisibility(View.GONE);
+                    mFloatBindAccountLayout.setVisibility(View.GONE);
                     mFloatChangePwdLayout.setVisibility(View.GONE);
                 }
             }
@@ -104,12 +120,51 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
             public void fail(Object result, String msg) {
                 if ("back".equals(msg)){
                     persionMainView.setVisibility(View.VISIBLE);
-                    mBindAccountLayout.setVisibility(View.GONE);
+                    mFloatBindAccountLayout.setVisibility(View.GONE);
                     mFloatChangePwdLayout.setVisibility(View.GONE);
                 }
             }
         });
 
+
+        String floatCfgData = SdkUtil.getFloatCfgData(context);
+        String menuResData = SdkUtil.getFloatSwitchData(context);
+
+        if (SStringUtil.isNotEmpty(floatCfgData) && SStringUtil.isNotEmpty(menuResData)){
+            floatConfigData = new Gson().fromJson(floatCfgData, FloatConfigData.class);
+            floatSwitchRes = new Gson().fromJson(menuResData, FloatSwitchRes.class);
+
+            if (floatConfigData != null && floatSwitchRes != null && floatSwitchRes.getData() != null) {
+                gameNameTextView.setText(floatSwitchRes.getData().getGameName());
+                setverNameTextView.setText(floatSwitchRes.getData().getServerName());
+                roleNameTextView.setText(floatSwitchRes.getData().getRoleName());
+                //accountTextView.setText(floatSwitchRes.getData().geta());
+                uidTextView.setText(floatSwitchRes.getData().getUserId());
+
+                updateUserInfoView(context, floatConfigData);
+            }
+
+        }
+
         return persionCenterView;
+    }
+
+    private void updateUserInfoView(Context context, FloatConfigData floatConfigData) {
+        SLoginResponse sLoginResponse = SdkUtil.getCurrentUserLoginResponse(context);
+
+        if (sLoginResponse != null && sLoginResponse.getData() != null) {
+            if (sLoginResponse.getData().isBind()){
+                accountTextView.setText(sLoginResponse.getData().getLoginId());
+                updradeAccount.setVisibility(View.GONE);
+            }else {
+                updradeAccount.setVisibility(View.VISIBLE);
+                accountLayoutView.setVisibility(View.GONE);
+            }
+            Glide.with(this)
+                    .load(floatConfigData.getGameIcon() + "?" + sLoginResponse.getData().getTimestamp())
+                    .centerCrop()
+                    .placeholder(ApkInfoUtil.getAppIcon(context))
+                    .into(persionIconImageView);
+        }
     }
 }
