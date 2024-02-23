@@ -128,7 +128,7 @@ android {
 
         debug {
 //            signingConfig signingConfigs.release_kr1
-            signingConfig signingConfigs.release_v6
+            signingConfig signingConfigs.release_v2
         }
     }
     flavorDimensions "1"
@@ -207,19 +207,35 @@ android {
 
             signingConfig signingConfigs.release_v4
             applicationId "com.xinhai.chmxt"
-            minSdkVersion 21
-            targetSdkVersion 33
+            minSdkVersion rootProject.ext.minSdkVersion
+            targetSdkVersion rootProject.ext.targetSdkVersion
             versionCode 1
             versionName "1.0"
             dimension "1"
+
+            //=======================================sdk config==========================
+            //base
+            resValue "string", "sdk_game_code", "chmxt"
+            resValue "string", "sdk_app_key", "8731a985bd4a5dbb7d84dfd801d22aa4"
+            resValue "string", "sdk_more_language", "true"
+            resValue "string", "sdk_default_server_language", "en_US"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
             resValue "string", "scheme", "chmxt"
+            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
+            //facebook
             resValue "string", "facebook_app_id", "656701765898240"
             resValue "string", "facebook_client_token", "bb38401adb12a4615d1a0c8dad838e61"
             resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider656701765898240" //启用分析
             resValue "string", "fb_login_protocol_scheme", "fb656701765898240"
-            resValue "string", "facebook_app_name", "Mushroom & Heroes RPG"
+            resValue "string", "facebook_app_name", "Mushroom & Heroes RPG" //游戏名字
+            //ad
+            resValue "string", "adjust_app_token", ""
+            resValue "string", "sdk_appflyer_dev_key", "QtrxWJpdhQVov9F8hwKD3o"
+            //line
             resValue "string", "line_channelId", "1657663563"
-            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow"
+            //naver
+            resValue "string", "naver_client_id", ""
+            resValue "string", "naver_client_secret", ""
+            //=======================================sdk config end==========================
 
             //每个游戏的demo设置 test
             resValue "string", "sdk_name", "SDK4 demo"
@@ -252,23 +268,43 @@ android {
         huawei {
 
             signingConfig signingConfigs.release_v2
-            applicationId "com.wantang.xlzsg.huawei"
-            minSdkVersion 21
-            targetSdkVersion 33
             versionCode 10
             versionName "1.0"
             dimension "1"
-            resValue "string", "scheme", "gwsg"
-            resValue "string", "facebook_app_id", "1362551254507553"
-            resValue "string", "facebook_client_token", "0a8e2080cba4d5aa1fe9d9dd65c04e58"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1362551254507553" //启用分析
-            resValue "string", "fb_login_protocol_scheme", "fb1362551254507553"
-            resValue "string", "facebook_app_name", "鬼武三國"
-//            resValue "string", "line_channelId", "1657882064"
-            resValue "string", "channel_platform", "huawei"  //渠道区分,google包设置google,apk包设置"meow"
+
+//            applicationId "com.wantang.xlzsg.huawei"
+//            minSdkVersion 21
+//            targetSdkVersion 33
+//            resValue "string", "scheme", "gwsg"
+//            resValue "string", "facebook_app_id", "1362551254507553"
+//            resValue "string", "facebook_client_token", "0a8e2080cba4d5aa1fe9d9dd65c04e58"
+//            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1362551254507553" //启用分析
+//            resValue "string", "fb_login_protocol_scheme", "fb1362551254507553"
+//            resValue "string", "facebook_app_name", "鬼武三國"
+////            resValue "string", "line_channelId", "1657882064"
+//            resValue "string", "channel_platform", "huawei"  //渠道区分,google包设置google,apk包设置"meow"
+
+
+            applicationId "com.mwyyz.huawei"
+            minSdkVersion 21
+            targetSdkVersion 34
+
+            //base
+            resValue "string", "sdk_game_code", "mxwtw"
+            resValue "string", "sdk_app_key", "7c29c30164e0c36e7bc43399bca0c570"
+            resValue "string", "sdk_more_language", "true"
+            resValue "string", "sdk_default_server_language", "zh_TW"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
+            resValue "string", "scheme", "mxwtw"
+            resValue "string", "channel_platform", "huawei"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore",huawei
+            //facebook
+            resValue "string", "facebook_app_id", "162167080205591"
+            resValue "string", "facebook_client_token", "a48a83f00864dbd713a292e2f6690317"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider16216" //启用分析
+            resValue "string", "fb_login_protocol_scheme", "fb162167080205591"
+            resValue "string", "facebook_app_name", "大魔王与菇勇者" //游戏名字
 
             //每个游戏的demo设置 test
-            resValue "string", "sdk_name", "鬼武三國demo"
+            resValue "string", "sdk_name", "huweiDemo"
 
         }
 
@@ -335,37 +371,67 @@ android {
         sdkKR {
 
             signingConfig signingConfigs.release_kr1
-
-            applicationId "com.tgswkr.koda"
-//            applicationId "com.tgswkrone.koda"
-            minSdkVersion 21
-            targetSdkVersion 34
-            versionCode 10
-            versionName "1.0"
             dimension "1"
 
             //=======================================sdk config==========================
+//            applicationId "com.tgswkr.koda"
+////            applicationId "com.tgswkrone.koda"
+//            minSdkVersion 21
+//            targetSdkVersion 34
+//            versionCode 10
+//            versionName "1.0"
+//            //base
+//            resValue "string", "sdk_game_code", "tgsw"
+//            resValue "string", "sdk_app_key", "0990e662f62887cfc317d8a74b588691"
+//            resValue "string", "sdk_more_language", "true"
+//            resValue "string", "sdk_default_server_language", "ko_KR"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
+//            resValue "string", "scheme", "tgsw"
+//            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
+//            //facebook
+//            resValue "string", "facebook_app_id", "812990310317949"
+//            resValue "string", "facebook_client_token", "5d9f338ab935730c7c190cd0210c712a"
+//            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider812990310317949" //启用分析
+//            resValue "string", "fb_login_protocol_scheme", "fb812990310317949"
+//            resValue "string", "facebook_app_name", "krDemo" //游戏名字
+//            //ad
+//            resValue "string", "adjust_app_token", ""
+//            resValue "string", "sdk_appflyer_dev_key", "dxJqEmrTQawvV2o7zQ3gAj"
+//            //line
+//            resValue "string", "line_channelId", ""
+//            //naver
+//            resValue "string", "naver_client_id", "QJErv0qFAdSfJ14QDRpA"
+//            resValue "string", "naver_client_secret", "IV8BGmeW14"
+            //=======================================sdk config end==========================
+
+
+            applicationId "com.kodatgfm.kr"
+            minSdkVersion 21
+            targetSdkVersion 33
+            versionCode 1
+            versionName "1.0"
+
+            //=======================================sdk config==========================
             //base
-            resValue "string", "sdk_game_code", "tgsw"
-            resValue "string", "sdk_app_key", "0990e662f62887cfc317d8a74b588691"
+            resValue "string", "sdk_game_code", "tgfm"
+            resValue "string", "sdk_app_key", "f8f35608e0413af7baf97956bb6707df"
             resValue "string", "sdk_more_language", "true"
             resValue "string", "sdk_default_server_language", "ko_KR"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
-            resValue "string", "scheme", "tgsw"
+            resValue "string", "scheme", "tgfm"
             resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
             //facebook
-            resValue "string", "facebook_app_id", "812990310317949"
-            resValue "string", "facebook_client_token", "5d9f338ab935730c7c190cd0210c712a"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider812990310317949" //启用分析
-            resValue "string", "fb_login_protocol_scheme", "fb812990310317949"
-            resValue "string", "facebook_app_name", "krDemo" //游戏名字
+            resValue "string", "facebook_app_id", "288427737241065"
+            resValue "string", "facebook_client_token", "8a4280708baa6e8a89635610c7a01d27"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider288427737241065" //启用分析
+            resValue "string", "fb_login_protocol_scheme", "fb8288427737241065"
+            resValue "string", "facebook_app_name", "tgfm" //游戏名字
             //ad
             resValue "string", "adjust_app_token", ""
-            resValue "string", "sdk_appflyer_dev_key", "dxJqEmrTQawvV2o7zQ3gAj"
+            resValue "string", "sdk_appflyer_dev_key", "XJD6sqYqkGwvMcaGX8twsE"
             //line
             resValue "string", "line_channelId", ""
             //naver
-            resValue "string", "naver_client_id", "QJErv0qFAdSfJ14QDRpA"
-            resValue "string", "naver_client_secret", "IV8BGmeW14"
+            resValue "string", "naver_client_id", "z4EjSRSXbhY_o9xlqpT6"
+            resValue "string", "naver_client_secret", "mar5EnDhO1"
             //=======================================sdk config end==========================
 
 

@@ -34,7 +34,7 @@ import com.core.base.utils.ToastUtils;
 import com.mw.base.bean.SPayType;
 import com.mw.sdk.act.FloatContentView;
 import com.mw.sdk.bean.req.PayCreateOrderReqBean;
-import com.mw.sdk.bean.res.FloatMenuDataModel;
+import com.mw.sdk.bean.res.MenuData;
 import com.mw.sdk.utils.SdkUtil;
 import com.mw.sdk.callback.IPayListener;
 import com.mw.sdk.demo.R;
@@ -149,7 +149,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.demo_pay_hw).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String skuId = "com.miaoou.6jin";
+                String skuId = "com_mwyyz_tw_1u";
                 mIMWSDK.pay(MainActivity.this, SPayType.HUAWEI, "" + System.currentTimeMillis(),skuId, extra,roleId,roleName,roleLevel, vipLevel, serverCode, serverName, new IPayListener() {
 
                     @Override
@@ -447,7 +447,7 @@ public class MainActivity extends Activity {
 //                commonDialog.show();
 
 
-                ArrayList<FloatMenuDataModel.MenuData> arrayList = new ArrayList<>();
+                ArrayList<MenuData> arrayList = new ArrayList<>();
 //                for (int i = 0; i < 10; i++) {
 //                    ActDataModel.ActData actData = new ActDataModel.ActData();
 //                    actData.setContentUrl("https://www.baidu.com/");
