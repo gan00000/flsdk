@@ -42,4 +42,8 @@ public interface MWApiService {
     @POST("api/pwd/changePassword")
     @FormUrlEncoded
     Observable<SLoginResponse> changePassword(@FieldMap Map<String, String> paramMap);
+
+    @POST("api/cancel/account")
+    @FormUrlEncoded
+    Observable<SLoginResponse> deleteAccout(@FieldMap Map<String, String> paramMap);
 }

@@ -33,7 +33,9 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
     private FloatBindAccountLayout mFloatBindAccountLayout;
     private FloatChangePwdLayout mFloatChangePwdLayout;
 
-    private View updradeAccount;
+    private View updradeAccountView;
+    private View changePwdView;
+    private View delAccountView;
 
     private FloatConfigData floatConfigData;
     private FloatSwitchRes floatSwitchRes;
@@ -75,10 +77,11 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
         mFloatBindAccountLayout.setVisibility(View.GONE);
         mFloatChangePwdLayout.setVisibility(View.GONE);
 
-        View changePwd = persionCenterView.findViewById(R.id.pc_tv_change_pwd);
-        updradeAccount = persionCenterView.findViewById(R.id.pc_tv_upgrade_account);
+        changePwdView = persionCenterView.findViewById(R.id.pc_tv_change_pwd);
+        updradeAccountView = persionCenterView.findViewById(R.id.pc_tv_upgrade_account);
+        delAccountView = persionCenterView.findViewById(R.id.pc_del_account);
 
-        updradeAccount.setOnClickListener(new OnClickListener() {
+        updradeAccountView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 persionMainView.setVisibility(View.GONE);
@@ -86,7 +89,7 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
                 mFloatChangePwdLayout.setVisibility(View.GONE);
             }
         });
-        changePwd.setOnClickListener(new OnClickListener() {
+        changePwdView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 persionMainView.setVisibility(View.GONE);
@@ -94,6 +97,14 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
                 mFloatChangePwdLayout.setVisibility(View.VISIBLE);
             }
         });
+
+        delAccountView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         mFloatBindAccountLayout.setSFCallBack(new SFCallBack() {
             @Override
             public void success(Object result, String msg) {
@@ -126,7 +137,6 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
             }
         });
 
-
         String floatCfgData = SdkUtil.getFloatCfgData(context);
         String menuResData = SdkUtil.getFloatSwitchData(context);
 
@@ -155,9 +165,13 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
         if (sLoginResponse != null && sLoginResponse.getData() != null) {
             if (sLoginResponse.getData().isBind()){
                 accountTextView.setText(sLoginResponse.getData().getLoginId());
-                updradeAccount.setVisibility(View.GONE);
+                updradeAccountView.setVisibility(View.GONE);
+                changePwdView.setVisibility(View.VISIBLE);
+                accountLayoutView.setVisibility(View.VISIBLE);
+
             }else {
-                updradeAccount.setVisibility(View.VISIBLE);
+                updradeAccountView.setVisibility(View.VISIBLE);
+                changePwdView.setVisibility(View.GONE);
                 accountLayoutView.setVisibility(View.GONE);
             }
             Glide.with(this)

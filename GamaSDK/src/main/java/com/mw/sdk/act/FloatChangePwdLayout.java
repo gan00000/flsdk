@@ -213,7 +213,6 @@ public class FloatChangePwdLayout extends SLoginBaseRelativeLayout implements Vi
         Request.changePwd(getActivity(), sLoginResponse.getData().getLoginId(), oldPwd, password, new SFCallBack<SLoginResponse>() {
             @Override
             public void success(SLoginResponse sLoginResponse, String msg) {
-                toast(R.string.text_account_change_pwd_success2);
 
                 if (sfCallBack != null) {
                     sfCallBack.success(SdkUtil.getCurrentUserLoginResponse(getContext()),"");
@@ -222,10 +221,6 @@ public class FloatChangePwdLayout extends SLoginBaseRelativeLayout implements Vi
 
             @Override
             public void fail(SLoginResponse sLoginResponse, String msg) {
-
-                if (sLoginResponse != null && SStringUtil.isNotEmpty(sLoginResponse.getMessage())){
-                    toast(sLoginResponse.getMessage());
-                }
 
             }
         });

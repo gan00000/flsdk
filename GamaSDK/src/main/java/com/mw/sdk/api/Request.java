@@ -22,6 +22,7 @@ import com.mw.sdk.bean.SGameBaseRequestBean;
 import com.mw.sdk.bean.req.AccountBindInGameRequestBean;
 import com.mw.sdk.bean.req.AccountLoginRequestBean;
 import com.mw.sdk.bean.req.ChangePwdRequestBean;
+import com.mw.sdk.bean.req.DeleteAccountRequestBean;
 import com.mw.sdk.bean.req.PayCreateOrderReqBean;
 import com.mw.sdk.bean.res.ActDataModel;
 import com.mw.sdk.bean.res.ConfigBean;
@@ -631,6 +632,9 @@ public class Request {
                         }
                         if (sLoginResponse != null){
                             if (sLoginResponse.isRequestSuccess()) {
+
+                                ToastUtils.toast(context, R.string.text_account_change_pwd_success2);
+
                                 sLoginResponse.getData().setLoginType(SLoginType.LOGIN_TYPE_MG);
                                 SdkUtil.updateLoginData(context, sLoginResponse);
 
@@ -641,9 +645,89 @@ public class Request {
                                     sfCallBack.success(sLoginResponse, "success");
                                 }
                             }else{
+                                ToastUtils.toast(context, sLoginResponse.getMessage() + "");
                                 if (sfCallBack != null){
                                     sfCallBack.fail(sLoginResponse, "fail");
                                 }
+                            }
+                        }else {
+                            ToastUtils.toast(context, R.string.py_error_occur);
+                            if (sfCallBack != null){
+                                sfCallBack.fail(null, "fail");
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        ToastUtils.toast(context, R.string.py_error_occur);
+                        if (dialog != null  ) {
+                            dialog.dismiss();
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        if (dialog != null  ) {
+                            dialog.dismiss();
+                        }
+                    }
+                });
+    }
+
+
+    public static void deleteAccout(Context context, String userId, String loginMode, String thirdLoginId,String loginAccessToken, String loginTimestamp, SFCallBack<SLoginResponse> sfCallBack) {
+
+        if (SStringUtil.isEmpty(userId)){
+            return;
+        }
+
+        DeleteAccountRequestBean requestBean = new DeleteAccountRequestBean(context, userId,loginMode,thirdLoginId);
+        requestBean.setLoginAccessToken(loginAccessToken);
+        requestBean.setLoginTimestamp(loginTimestamp);
+        requestBean.setSignature(SStringUtil.toMd5(ResConfig.getAppKey(context) + requestBean.getTimestamp() +
+                requestBean.getUserId() + requestBean.getGameCode()));
+
+        Dialog dialog = DialogUtil.createLoadingDialog(context, "Loading...");
+        dialog.show();
+        RetrofitClient.instance().build(context,URLType.LOGIN).create(MWApiService.class)
+                .deleteAccout(requestBean.fieldValueToMap())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<SLoginResponse>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull SLoginResponse sLoginResponse) {
+                        if (dialog != null  ) {
+                            dialog.dismiss();
+                        }
+                        if (sLoginResponse != null) {
+                            if (sLoginResponse.isRequestSuccess()) {
+                                if (SStringUtil.isNotEmpty(sLoginResponse.getMessage())){
+                                    ToastUtils.toast(context, sLoginResponse.getMessage() + "");
+                                }
+                                SdkUtil.removeAccountModelByUserId(context,userId);
+                                if (sfCallBack != null){
+                                    sfCallBack.success(sLoginResponse,"success");
+                                }
+
+                            }else{
+
+                                ToastUtils.toast(context, sLoginResponse.getMessage() + "");
+                                if (sfCallBack != null){
+                                    sfCallBack.fail(sLoginResponse,"fail");
+                                }
+                            }
+
+                        } else {
+                            ToastUtils.toast(context, R.string.py_error_occur);
+                            if (sfCallBack != null){
+                                sfCallBack.fail(null, "fail");
                             }
                         }
 
