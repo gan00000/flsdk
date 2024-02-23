@@ -18,6 +18,7 @@
             android:layout_width="116dp"
             android:layout_height="match_parent"
             android:id="@+id/id_rv_float_left"
+            android:background="@color/c_EDEDED"
             />
 
         <RelativeLayout
