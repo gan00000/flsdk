@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,6 +14,7 @@ import com.core.base.utils.ApkInfoUtil;
 import com.core.base.utils.SStringUtil;
 import com.google.gson.Gson;
 import com.mw.sdk.R;
+import com.mw.sdk.api.Request;
 import com.mw.sdk.bean.res.FloatConfigData;
 import com.mw.sdk.bean.res.FloatSwitchRes;
 import com.mw.sdk.login.model.response.SLoginResponse;
@@ -36,6 +38,9 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
     private View updradeAccountView;
     private View changePwdView;
     private View delAccountView;
+    private View delAccountLayout;
+    private Button delAccountCancelButton;
+    private Button delAccountOkButton;
 
     private FloatConfigData floatConfigData;
     private FloatSwitchRes floatSwitchRes;
@@ -81,6 +86,11 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
         updradeAccountView = persionCenterView.findViewById(R.id.pc_tv_upgrade_account);
         delAccountView = persionCenterView.findViewById(R.id.pc_del_account);
 
+        //清除账号页面
+        delAccountLayout = persionCenterView.findViewById(R.id.id_layout_del_account);
+        delAccountCancelButton = persionCenterView.findViewById(R.id.btn_delete_cancel);
+        delAccountOkButton = persionCenterView.findViewById(R.id.btn_delete_confirm);
+
         updradeAccountView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,7 +111,19 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
         delAccountView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                delAccountLayout.setVisibility(View.VISIBLE);
+            }
+        });
+        delAccountCancelButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                delAccountLayout.setVisibility(View.GONE);
+            }
+        });
+        delAccountOkButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                doDeleteAccount();
             }
         });
 
@@ -181,4 +203,29 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
                     .into(persionIconImageView);
         }
     }
+
+
+    private void doDeleteAccount() {
+        SLoginResponse sLoginResponse = SdkUtil.getCurrentUserLoginResponse(getContext());
+        if (sLoginResponse == null || sLoginResponse.getData() == null){
+            return;
+        }
+        Request.deleteAccout(getContext(), sLoginResponse.getData().getUserId(),
+                sLoginResponse.getData().getLoginType(),
+                sLoginResponse.getData().getThirdId(),
+                sLoginResponse.getData().getToken(),
+                sLoginResponse.getData().getTimestamp(), new SFCallBack<SLoginResponse>() {
+                    @Override
+                    public void success(SLoginResponse result, String msg) {
+                        //此处需要退出账号
+                        delAccountLayout.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void fail(SLoginResponse result, String msg) {
+
+                    }
+                });
+    }
+
 }

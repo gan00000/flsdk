@@ -4,7 +4,8 @@
     android:layout_width="272dp"
     android:layout_height="wrap_content"
     android:layout_centerInParent="true"
-    android:background="@drawable/delete_account_bg">
+    android:id="@+id/id_layout_del_account"
+    android:background="@color/c_delete_view_bg">
 
 
     <LinearLayout
