@@ -20,6 +20,7 @@ import com.mw.sdk.bean.res.ActDataModel
 import com.mw.sdk.bean.res.FloatSwitchRes
 import com.mw.sdk.bean.res.FloatConfigData
 import com.mw.sdk.bean.res.MenuData
+import com.mw.sdk.constant.FloatMenuType
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout
 import com.mw.sdk.utils.SdkUtil
 import com.mw.sdk.widget.SBaseDialog
@@ -147,7 +148,7 @@ class FloatContentView : SLoginBaseRelativeLayout {
 
     override fun createView(context: Context?, layoutInflater: LayoutInflater?): View {
         PL.d("createView")
-        contentLayout = layoutInflater!!.inflate(R.layout.activity_float_content, null)
+        contentLayout = layoutInflater!!.inflate(R.layout.float_content_layout, null)
         return contentLayout
     }
 
@@ -186,6 +187,7 @@ class FloatContentView : SLoginBaseRelativeLayout {
                     val mData = datas[position]
                     val menuIconIv = holder.getView<ImageView>(R.id.id_iv_menu_icon)
                     val menuTitleTv = holder.getView<TextView>(R.id.id_tv_menu_title)
+                    val menuReddotView = holder.getView<View>(R.id.id_v_menu_reddot)
                     val loginTimestamp = SdkUtil.getSdkTimestamp(activity)
 
                     Glide.with(this@FloatContentView)
@@ -198,8 +200,14 @@ class FloatContentView : SLoginBaseRelativeLayout {
 
                     if (mData.isClick){
                         holder.itemView.setBackgroundColor(getContext().resources.getColor(R.color.white_c))
+                        menuReddotView.visibility = View.GONE //被点击即消失红点
                     }else{
                         holder.itemView.setBackgroundColor(getContext().resources.getColor(R.color.c_EDEDED))
+                    }
+
+                    if (mData.isWithReddot && FloatingManager.getInstance().redDotRes != null && FloatingManager.getInstance().redDotRes.data != null &&
+                        FloatingManager.getInstance().redDotRes.data.isCs){
+                        menuReddotView.visibility = View.VISIBLE
                     }
 
 //                    menuIv.setOnClickListener {
@@ -235,6 +243,10 @@ class FloatContentView : SLoginBaseRelativeLayout {
 
                     val aMenuData  = it[i]
 
+                    if (aMenuData.isClick){//已经点了
+                        return
+                    }
+
                     for (dataTemp: MenuData in it){
                         // == 对应于Java中的 equals()
                         // ===对应于 Java中的 ==
@@ -242,7 +254,8 @@ class FloatContentView : SLoginBaseRelativeLayout {
 
                     }
 
-                    if (i == 0){
+
+                    if (FloatMenuType.MENU_TYPE_MY == aMenuData.code){//我的部分
                         contentWebView.visibility = View.GONE
                         rightContentView.visibility = View.VISIBLE
 
@@ -251,6 +264,10 @@ class FloatContentView : SLoginBaseRelativeLayout {
                         rightContentView.visibility = View.GONE
 
                         contentWebView.loadUrl(aMenuData.url)
+                    }
+                    if (FloatMenuType.MENU_TYPE_CS == aMenuData.code && FloatingManager.getInstance().redDotRes != null && FloatingManager.getInstance().redDotRes.data != null){
+                        FloatingManager.getInstance().redDotRes.data.isCs = false
+                        FloatingManager.getInstance().updateReddot(false)
                     }
                     menuRecyclerView.adapter?.notifyDataSetChanged()
 

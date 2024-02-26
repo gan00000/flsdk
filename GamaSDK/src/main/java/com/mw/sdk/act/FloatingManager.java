@@ -12,10 +12,13 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
+import com.core.base.callback.SFCallBack;
 import com.core.base.utils.ApkInfoUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.ScreenHelper;
 import com.mw.sdk.R;
+import com.mw.sdk.api.Request;
+import com.mw.sdk.bean.res.RedDotRes;
 import com.mw.sdk.callback.FloatCallback;
 import com.mw.sdk.callback.FloatViewMoveListener;
 import com.mw.sdk.widget.FloatImageView;
@@ -31,7 +34,6 @@ import java.util.TimerTask;
 public class FloatingManager {
 
 	private static FloatingManager wm;
-	private Button redPointButton;
 	Timer redPointReqTimer;
 
 	public Activity activity;
@@ -44,12 +46,23 @@ public class FloatingManager {
 	WindowManager mWindowManager = null;
 	RelativeLayout floatLayout;
 	private FloatImageView floatImageView;
+	private View floatReddotView;
 	WindowManager.LayoutParams mWindowParamsForFloatBtn = null;
 
 	RelativeLayout.LayoutParams floatImageViewLayoutParams;
 
 	private boolean floatHiddenState = false;//悬浮按钮是否正在隐藏半边状态
 	private boolean hasEndMove = true;
+
+	private RedDotRes redDotRes;
+	public RedDotRes getRedDotRes() {
+		return redDotRes;
+	}
+
+	public void setRedDotRes(RedDotRes redDotRes) {
+		this.redDotRes = redDotRes;
+	}
+
 	private Runnable suoxiaoRunnable = new Runnable() {
 		@Override
 		public void run() {
@@ -98,6 +111,7 @@ public class FloatingManager {
 
 		floatLayout = (RelativeLayout) activity.getLayoutInflater().inflate(R.layout.sdk_float_item, null);
 		floatImageView = floatLayout.findViewById(R.id.id_iv_sdk_float_item);
+		floatReddotView = floatLayout.findViewById(R.id.id_v_float_reddot);
 		floatImageViewLayoutParams = (RelativeLayout.LayoutParams) floatImageView.getLayoutParams();
 
 		floatImageView.setClickable(true);
@@ -164,6 +178,11 @@ public class FloatingManager {
 //			}
 //		}, 20 * 1000, 10 * 60 * 1000);
 
+		try {
+			requestRedPoint(ctx);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void getNotchInfo() {
@@ -556,25 +575,50 @@ public class FloatingManager {
 
 	}
 
-
-	public void requestRedPoint() throws Exception {
-
-//		PlatBaseRequest platBaseRequest = new PlatBaseRequest(activity);
-//		String mUrl = PlatformManager.getInstance().getUrlData().getPlatUrl();
-//		mUrl = UrlUtils.checkUrl(mUrl);
-//		mUrl = mUrl + "getNewRedDot.app";
-//		String result = HttpRequest.post(mUrl, platBaseRequest.fieldValueToMap());
-//		if (SStringUtil.isNotEmpty(result)){
-//
-//			JSONObject mJsonObject = new JSONObject(result);
-//			String  code = mJsonObject.optString("code");
-//			if ("1000".equals(code)){
-//				setRedPoitiVsibility(View.VISIBLE);
-//			}else {
-//				setRedPoitiVsibility(View.GONE);
-//			}
-//
-//		}
+	public void updateReddot(boolean show){
+		if (show){
+			floatReddotView.setVisibility(View.VISIBLE);
+		}else {
+			if (floatReddotView.getVisibility() == View.GONE){
+				return;
+			}
+			floatReddotView.setVisibility(View.GONE);
+			deleteRedPoint(activity.getApplicationContext());
+		}
 	}
 
+
+	public void requestRedPoint(Context context) throws Exception {
+
+		Request.getFloatBtnRedDot(context, new SFCallBack<RedDotRes>() {
+			@Override
+			public void success(RedDotRes redDotRes, String msg) {
+
+				if (redDotRes != null && redDotRes.getData() != null && redDotRes.getData().isCs() && floatReddotView != null){
+					updateReddot(true);
+					FloatingManager.this.redDotRes = redDotRes;
+				}
+			}
+
+			@Override
+			public void fail(RedDotRes result, String msg) {
+
+			}
+		});
+	}
+
+	public void deleteRedPoint(Context context) {
+
+		Request.deleteFloatBtnRedDot(context, new SFCallBack<RedDotRes>() {
+			@Override
+			public void success(RedDotRes redDotRes, String msg) {
+
+			}
+
+			@Override
+			public void fail(RedDotRes result, String msg) {
+
+			}
+		});
+	}
 }

@@ -1,5 +1,7 @@
 package com.mw.sdk.bean.res;
 
+import com.mw.sdk.constant.FloatMenuType;
+
 public class MenuData {
 
     private String name;
@@ -64,5 +66,9 @@ public class MenuData {
 
     public void setClick(boolean click) {
         isClick = click;
+    }
+
+    public boolean isWithReddot(){
+        return FloatMenuType.MENU_TYPE_CS.equals(code);
     }
 }

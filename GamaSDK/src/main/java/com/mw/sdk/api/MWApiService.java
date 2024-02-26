@@ -50,12 +50,12 @@ public interface MWApiService {
 
 //    https://platform.kodaduck.com/sdk/api/floatBtn/getFloatBtnRedDot  获取红点
 //    https://platform.kodaduck.com/sdk/api/floatBtn/deleteFloatBtnRedDot  删除红点
-    @POST("api/floatBtn/getFloatBtnRedDot")
+    @POST("sdk/api/floatBtn/getFloatBtnRedDot")
     @FormUrlEncoded
-    Observable<RedDotRes> deletgetFloatBtnRedDoteAccout(@FieldMap Map<String, String> paramMap);
+    Observable<RedDotRes> getFloatBtnRedDot(@FieldMap Map<String, String> paramMap);
 
 
-    @POST("api/floatBtn/deleteFloatBtnRedDot")
+    @POST("sdk/api/floatBtn/deleteFloatBtnRedDot")
     @FormUrlEncoded
     Observable<RedDotRes> deleteFloatBtnRedDot(@FieldMap Map<String, String> paramMap);
 }

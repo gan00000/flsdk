@@ -26,6 +26,7 @@ import com.mw.sdk.bean.req.DeleteAccountRequestBean;
 import com.mw.sdk.bean.req.PayCreateOrderReqBean;
 import com.mw.sdk.bean.res.ActDataModel;
 import com.mw.sdk.bean.res.ConfigBean;
+import com.mw.sdk.bean.res.RedDotRes;
 import com.mw.sdk.bean.res.ToggleResult;
 import com.mw.sdk.constant.ApiRequestMethod;
 import com.mw.sdk.constant.SLoginType;
@@ -598,6 +599,77 @@ public class Request {
                     }
                 });
     }
+
+
+    public static void getFloatBtnRedDot(Context context, SFCallBack<RedDotRes> sfCallBack) {
+
+//        String gameCode = ResConfig.getGameCode(context);
+        SGameBaseRequestBean sGameBaseRequestBean = new SGameBaseRequestBean(context);
+        RetrofitClient.instance().build(context,URLType.PLAT).create(MWApiService.class)
+                .getFloatBtnRedDot(sGameBaseRequestBean.fieldValueToMap())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<RedDotRes>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull RedDotRes redDotRes) {
+                        if (sfCallBack!= null && redDotRes != null){
+//                            redDotRes.getData().setCs(true);//test
+                            sfCallBack.success(redDotRes, "success");
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        PL.i("getFloatBtnRedDot onError...");
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    //删除红点
+    public static void deleteFloatBtnRedDot(Context context, SFCallBack<RedDotRes> sfCallBack) {
+
+//        String gameCode = ResConfig.getGameCode(context);
+        SGameBaseRequestBean sGameBaseRequestBean = new SGameBaseRequestBean(context);
+        RetrofitClient.instance().build(context,URLType.PLAT).create(MWApiService.class)
+                .deleteFloatBtnRedDot(sGameBaseRequestBean.fieldValueToMap())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<RedDotRes>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull RedDotRes redDotRes) {
+                        if (sfCallBack!= null && redDotRes != null){
+                            sfCallBack.success(redDotRes, "success");
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        PL.i("getFloatBtnRedDot onError...");
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+
 
     //修改密码，与 ChangePwdRequestTask的一致
     public static void changePwd(Context context, String account, String oldPwd, String newPwd, SFCallBack<SLoginResponse> sfCallBack) {
