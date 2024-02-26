@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
+import com.core.base.utils.ApkInfoUtil
 import com.core.base.utils.PL
 import com.core.base.utils.SStringUtil
 import com.google.gson.Gson
@@ -190,7 +191,7 @@ class FloatContentView : SLoginBaseRelativeLayout {
                     Glide.with(this@FloatContentView)
                             .load(mData.icon + "?" + loginTimestamp)
                             .centerCrop()
-                            .placeholder(R.mipmap.img_act_menu_unselect)
+                            .placeholder(ApkInfoUtil.getAppIcon(activity))
                             .into(menuIconIv)
 
                     menuTitleTv.text = mData.name

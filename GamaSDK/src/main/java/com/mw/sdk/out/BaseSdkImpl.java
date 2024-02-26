@@ -1385,7 +1385,7 @@ public class BaseSdkImpl implements IMWSDK {
             return;
         }
 
-        FloatingManager.getInstance().initFloatingView(activity, new FloatCallback() {
+        FloatingManager.getInstance().initFloatingView(activity,xFloatConfigData.getButtonIcon(), new FloatCallback() {
             @Override
             public void show(String msg) {
 

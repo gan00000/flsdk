@@ -11,6 +11,8 @@ import android.view.animation.Animation.AnimationListener;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
+import com.bumptech.glide.Glide;
+import com.core.base.utils.ApkInfoUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.ScreenHelper;
 import com.mw.sdk.R;
@@ -82,7 +84,7 @@ public class FloatingManager {
 		return wm;
 	}
 	// 展示
-	public void initFloatingView(final Activity ctx, FloatCallback floatCallback) {
+	public void initFloatingView(final Activity ctx, String iconUrl, FloatCallback floatCallback) {
 
 		this.activity = ctx;
 		this.floatCallback = floatCallback;
@@ -101,6 +103,11 @@ public class FloatingManager {
 		floatImageView.setClickable(true);
 		floatImageView.setSceenWidth(screenWidth);
 		floatImageView.setSceenHeight(screenHeight);
+		Glide.with(floatImageView)
+				.load(iconUrl + "?" + System.currentTimeMillis())
+				.centerCrop()
+				.placeholder(ApkInfoUtil.getAppIcon(activity))
+				.into(floatImageView);
 
 		// 生成悬浮按钮的参数
 		mWindowParamsForFloatBtn = getCricleButtonParams(0, screenHeight/3);

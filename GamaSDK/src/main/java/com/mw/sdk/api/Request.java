@@ -563,7 +563,7 @@ public class Request {
 
     public static void requestFloatMenus(Context context, SFCallBack<String> sfCallBack) {
 
-        String gameCode = ResConfig.getGameCode(context);
+//        String gameCode = ResConfig.getGameCode(context);
         SGameBaseRequestBean sGameBaseRequestBean = new SGameBaseRequestBean(context);
         RetrofitClient.instance().build(context,URLType.PLAT).create(MWApiService.class)
                 .getFloatMenus(sGameBaseRequestBean.fieldValueToMap())
