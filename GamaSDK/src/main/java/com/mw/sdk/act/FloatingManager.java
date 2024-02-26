@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import com.core.base.utils.PL;
 import com.core.base.utils.ScreenHelper;
 import com.mw.sdk.R;
+import com.mw.sdk.callback.FloatCallback;
 import com.mw.sdk.callback.FloatViewMoveListener;
 import com.mw.sdk.widget.FloatImageView;
 
@@ -68,6 +69,8 @@ public class FloatingManager {
 	private boolean isFullWindows = false;
 	private boolean isHasNavigationBar = false;
 
+	private FloatCallback floatCallback;
+
 	private FloatingManager() {
 	}
 
@@ -79,9 +82,10 @@ public class FloatingManager {
 		return wm;
 	}
 	// 展示
-	public void initFloatingView(final Activity ctx, int pointX, int pointY) {
+	public void initFloatingView(final Activity ctx, FloatCallback floatCallback) {
 
 		this.activity = ctx;
+		this.floatCallback = floatCallback;
 		if (mWindowManager != null) {
 			return;
 		}
@@ -133,25 +137,25 @@ public class FloatingManager {
 		floatLayout.postDelayed(suoxiaoRunnable, 2000);
 
 
-		if (redPointReqTimer != null){
-			redPointReqTimer.cancel();
-			redPointReqTimer = null;
-		}
-		redPointReqTimer = new Timer();
-
-		redPointReqTimer.schedule(new TimerTask() {
-			@Override
-			public void run() {
-
-				try {
-					requestRedPoint();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-
-
-			}
-		}, 20 * 1000, 10 * 60 * 1000);
+//		if (redPointReqTimer != null){
+//			redPointReqTimer.cancel();
+//			redPointReqTimer = null;
+//		}
+//		redPointReqTimer = new Timer();
+//
+//		redPointReqTimer.schedule(new TimerTask() {
+//			@Override
+//			public void run() {
+//
+//				try {
+//					requestRedPoint();
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//
+//
+//			}
+//		}, 20 * 1000, 10 * 60 * 1000);
 
 	}
 
@@ -187,6 +191,11 @@ public class FloatingManager {
 					}
 					mWindowManager.updateViewLayout(floatLayout, mWindowParamsForFloatBtn);
 					floatHiddenState = true;
+				}else {//点击按钮
+					PL.d("floatBtn click show content view");
+					if (floatCallback != null){
+						floatCallback.show("");
+					}
 				}
 			}
 		});

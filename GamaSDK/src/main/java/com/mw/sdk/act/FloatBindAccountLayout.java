@@ -171,11 +171,6 @@ public class FloatBindAccountLayout extends SLoginBaseRelativeLayout implements 
 
     }
 
-    @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
-
-    }
 
     @Override
     public void onClick(View v) {

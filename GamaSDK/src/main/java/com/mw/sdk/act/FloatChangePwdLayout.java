@@ -147,11 +147,6 @@ public class FloatChangePwdLayout extends SLoginBaseRelativeLayout implements Vi
 
     }
 
-    @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
-
-    }
 
     @Override
     public void onClick(View v) {

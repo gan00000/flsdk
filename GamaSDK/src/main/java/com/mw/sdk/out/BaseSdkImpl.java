@@ -31,11 +31,14 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.play.core.review.ReviewInfo;
 import com.google.android.play.core.review.ReviewManager;
 import com.google.android.play.core.review.ReviewManagerFactory;
+import com.google.gson.Gson;
 import com.mw.base.bean.SPayType;
 import com.mw.sdk.BuildConfig;
 import com.mw.sdk.MWWebPayActivity;
 import com.mw.sdk.R;
 import com.mw.sdk.act.ActExpoView;
+import com.mw.sdk.act.FloatContentView;
+import com.mw.sdk.act.FloatingManager;
 import com.mw.sdk.ads.EventConstant;
 import com.mw.sdk.ads.SdkEventLogger;
 import com.mw.sdk.api.ConfigRequest;
@@ -46,7 +49,11 @@ import com.mw.sdk.bean.req.PayCreateOrderReqBean;
 import com.mw.sdk.bean.res.ActDataModel;
 import com.mw.sdk.bean.res.BasePayBean;
 import com.mw.sdk.bean.res.ConfigBean;
+import com.mw.sdk.bean.res.FloatConfigData;
+import com.mw.sdk.bean.res.FloatSwitchRes;
+import com.mw.sdk.bean.res.MenuData;
 import com.mw.sdk.bean.res.ToggleResult;
+import com.mw.sdk.callback.FloatCallback;
 import com.mw.sdk.callback.IPayListener;
 import com.mw.sdk.constant.ChannelPlatform;
 import com.mw.sdk.constant.RequestCode;
@@ -74,6 +81,7 @@ import com.thirdlib.adjust.AdjustHelper;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.huawei.HuaweiPayImpl;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 
@@ -93,6 +101,8 @@ public class BaseSdkImpl implements IMWSDK {
     protected SWebViewDialog otherPayWebViewDialog;
 
     protected SBaseDialog commonDialog;
+
+    protected SBaseDialog floatViewDialog;
 
     protected IPay iPay;
     protected IPay iPayOneStore;
@@ -1349,5 +1359,49 @@ public class BaseSdkImpl implements IMWSDK {
                 }
             }
         });
+    }
+
+    @Override
+    public void showFloatView(Activity activity) {
+
+        String floatCfgData = SdkUtil.getFloatCfgData(activity);
+        String menuResData = SdkUtil.getFloatSwitchData(activity);
+
+        if (SStringUtil.isEmpty(floatCfgData) || SStringUtil.isEmpty(menuResData)){
+            PL.i("floatCfgData=" + floatCfgData + "  menuResData=" + menuResData);
+            ToastUtils.toast(activity,"float data error");
+            return;
+        }
+
+        FloatConfigData xFloatConfigData = new Gson().fromJson(floatCfgData, FloatConfigData.class);
+
+        if (!xFloatConfigData.isButtonSwitch()){
+            PL.i("float not open");
+            return;
+        }
+        FloatSwitchRes xFloatSwitchRes = new Gson().fromJson(menuResData, FloatSwitchRes.class);
+        if (xFloatSwitchRes == null || xFloatSwitchRes.getData() == null){
+            PL.i("FloatSwitchRes null error");
+            return;
+        }
+
+        FloatingManager.getInstance().initFloatingView(activity, new FloatCallback() {
+            @Override
+            public void show(String msg) {
+
+                if (floatViewDialog != null){
+                    floatViewDialog.show();
+                    return;
+                }
+                floatViewDialog = new SBaseDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
+                ArrayList<MenuData> arrayList = new ArrayList<>();
+                FloatContentView mActExpoView = new FloatContentView(activity, arrayList, floatViewDialog);
+                mActExpoView.setsBaseDialog(floatViewDialog);
+                floatViewDialog.setContentView(mActExpoView);
+                floatViewDialog.show();
+
+            }
+        });
+
     }
 }

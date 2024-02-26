@@ -1,7 +1,7 @@
 package com.mw.sdk.api;
 
-import com.core.base.bean.BaseResponseModel;
 import com.mw.sdk.bean.res.ActDataModel;
+import com.mw.sdk.bean.res.RedDotRes;
 import com.mw.sdk.bean.res.ToggleResult;
 import com.mw.sdk.login.model.response.SLoginResponse;
 
@@ -46,4 +46,16 @@ public interface MWApiService {
     @POST("api/cancel/account")
     @FormUrlEncoded
     Observable<SLoginResponse> deleteAccout(@FieldMap Map<String, String> paramMap);
+
+
+//    https://platform.kodaduck.com/sdk/api/floatBtn/getFloatBtnRedDot  获取红点
+//    https://platform.kodaduck.com/sdk/api/floatBtn/deleteFloatBtnRedDot  删除红点
+    @POST("api/floatBtn/getFloatBtnRedDot")
+    @FormUrlEncoded
+    Observable<RedDotRes> deletgetFloatBtnRedDoteAccout(@FieldMap Map<String, String> paramMap);
+
+
+    @POST("api/floatBtn/deleteFloatBtnRedDot")
+    @FormUrlEncoded
+    Observable<RedDotRes> deleteFloatBtnRedDot(@FieldMap Map<String, String> paramMap);
 }
