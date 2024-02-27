@@ -11,12 +11,14 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.ApkInfoUtil;
+import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.google.gson.Gson;
 import com.mw.sdk.R;
 import com.mw.sdk.api.Request;
 import com.mw.sdk.bean.res.FloatConfigData;
 import com.mw.sdk.bean.res.FloatSwitchRes;
+import com.mw.sdk.callback.FloatCallback;
 import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.mw.sdk.utils.SdkUtil;
@@ -38,12 +40,19 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
     private View updradeAccountView;
     private View changePwdView;
     private View delAccountView;
+    private View switchAccountView;
     private View delAccountLayout;
     private Button delAccountCancelButton;
     private Button delAccountOkButton;
 
     private FloatConfigData floatConfigData;
     private FloatSwitchRes floatSwitchRes;
+
+    private FloatCallback xFloatCallback;
+
+    public void setFloatCallback(FloatCallback xFloatCallback) {
+        this.xFloatCallback = xFloatCallback;
+    }
 
     public FloatPersionCenterView(Context context) {
         super(context);
@@ -85,6 +94,7 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
         changePwdView = persionCenterView.findViewById(R.id.pc_tv_change_pwd);
         updradeAccountView = persionCenterView.findViewById(R.id.pc_tv_upgrade_account);
         delAccountView = persionCenterView.findViewById(R.id.pc_del_account);
+        switchAccountView = persionCenterView.findViewById(R.id.pc_tv_switch_account);
 
         //清除账号页面
         delAccountLayout = persionCenterView.findViewById(R.id.id_layout_del_account);
@@ -105,6 +115,13 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
                 persionMainView.setVisibility(View.GONE);
                 mFloatBindAccountLayout.setVisibility(View.GONE);
                 mFloatChangePwdLayout.setVisibility(View.VISIBLE);
+            }
+        });
+
+        switchAccountView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchAccount();
             }
         });
 
@@ -219,6 +236,8 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
                     public void success(SLoginResponse result, String msg) {
                         //此处需要退出账号
                         delAccountLayout.setVisibility(View.GONE);
+
+                        switchAccount();
                     }
 
                     @Override
@@ -226,6 +245,14 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
 
                     }
                 });
+    }
+
+
+    private void switchAccount(){
+        PL.i("sdk switch account");
+        if (xFloatCallback != null){
+            xFloatCallback.switchAccount("");
+        }
     }
 
 }

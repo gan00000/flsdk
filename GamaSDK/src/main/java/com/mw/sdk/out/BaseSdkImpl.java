@@ -2,7 +2,6 @@ package com.mw.sdk.out;
 
 import android.app.Activity;
 import android.app.Application;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -53,6 +52,7 @@ import com.mw.sdk.bean.res.FloatConfigData;
 import com.mw.sdk.bean.res.FloatSwitchRes;
 import com.mw.sdk.bean.res.MenuData;
 import com.mw.sdk.bean.res.ToggleResult;
+import com.mw.sdk.callback.FloatButtionClickCallback;
 import com.mw.sdk.callback.FloatCallback;
 import com.mw.sdk.callback.IPayListener;
 import com.mw.sdk.constant.ChannelPlatform;
@@ -1362,7 +1362,7 @@ public class BaseSdkImpl implements IMWSDK {
     }
 
     @Override
-    public void showFloatView(Activity activity) {
+    public void showFloatView(Activity activity, FloatCallback floatCallback) {
 
         String floatCfgData = SdkUtil.getFloatCfgData(activity);
         String menuResData = SdkUtil.getFloatSwitchData(activity);
@@ -1385,7 +1385,8 @@ public class BaseSdkImpl implements IMWSDK {
             return;
         }
 
-        FloatingManager.getInstance().initFloatingView(activity,xFloatConfigData.getButtonIcon(), new FloatCallback() {
+
+        FloatingManager.getInstance().initFloatingView(activity,xFloatConfigData.getButtonIcon(), new FloatButtionClickCallback() {
             @Override
             public void show(String msg) {
 
@@ -1395,7 +1396,7 @@ public class BaseSdkImpl implements IMWSDK {
                 }
                 floatViewDialog = new SBaseDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
                 ArrayList<MenuData> arrayList = new ArrayList<>();
-                FloatContentView mActExpoView = new FloatContentView(activity, arrayList, floatViewDialog);
+                FloatContentView mActExpoView = new FloatContentView(activity, arrayList, floatViewDialog, floatCallback);
                 mActExpoView.setsBaseDialog(floatViewDialog);
                 floatViewDialog.setContentView(mActExpoView);
                 floatViewDialog.show();

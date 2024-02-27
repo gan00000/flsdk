@@ -2,5 +2,5 @@ package com.mw.sdk.callback;
 
 public interface FloatCallback {
 
-    void show(String msg);
+    void switchAccount(String msg);
 }

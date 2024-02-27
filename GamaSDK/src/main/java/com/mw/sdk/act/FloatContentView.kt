@@ -17,9 +17,10 @@ import com.google.gson.Gson
 import com.mw.sdk.R
 import com.mw.sdk.bean.SGameBaseRequestBean
 import com.mw.sdk.bean.res.ActDataModel
-import com.mw.sdk.bean.res.FloatSwitchRes
 import com.mw.sdk.bean.res.FloatConfigData
+import com.mw.sdk.bean.res.FloatSwitchRes
 import com.mw.sdk.bean.res.MenuData
+import com.mw.sdk.callback.FloatCallback
 import com.mw.sdk.constant.FloatMenuType
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout
 import com.mw.sdk.utils.SdkUtil
@@ -47,13 +48,16 @@ class FloatContentView : SLoginBaseRelativeLayout {
     private lateinit var floatConfigData: FloatConfigData
     private lateinit var floatSwitchRes: FloatSwitchRes
 
+    var xFloatCallback:FloatCallback? = null
+
     constructor(
         context: Context?,
         datas: List<MenuData>,
-        sxDialog: SBaseDialog
+        sxDialog: SBaseDialog,
+        mFloatCallback:FloatCallback
     ) : super(context) {
         this.sBaseDialog = sxDialog;
-
+        this.xFloatCallback = mFloatCallback
         menuDatas = arrayListOf()
 
         val floatCfgData = SdkUtil.getFloatCfgData(context)
@@ -116,6 +120,12 @@ class FloatContentView : SLoginBaseRelativeLayout {
 
         rightContentView = contentLayout.findViewById(R.id.id_ll_float_right_content)
         mFloatPersionCenterView = contentLayout.findViewById(R.id.id_FloatPersionCenterView)
+        mFloatPersionCenterView.setFloatCallback {
+
+            xFloatCallback?.switchAccount("")
+            this.sBaseDialog?.dismiss()
+            FloatingManager.getInstance().windowManagerFinish()
+        }
 
         menuRecyclerView = contentLayout.findViewById(R.id.id_rv_float_left)
         val closeBgIV = contentLayout.findViewById<ImageView>(R.id.id_iv_float_back)

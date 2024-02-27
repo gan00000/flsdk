@@ -6,25 +6,23 @@ import android.content.res.Resources;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.Animation.AnimationListener;
-import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.ApkInfoUtil;
 import com.core.base.utils.PL;
+import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ScreenHelper;
 import com.mw.sdk.R;
 import com.mw.sdk.api.Request;
 import com.mw.sdk.bean.res.RedDotRes;
-import com.mw.sdk.callback.FloatCallback;
+import com.mw.sdk.callback.FloatButtionClickCallback;
 import com.mw.sdk.callback.FloatViewMoveListener;
+import com.mw.sdk.utils.SdkUtil;
 import com.mw.sdk.widget.FloatImageView;
 
 import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * 
@@ -33,7 +31,7 @@ import java.util.TimerTask;
  */
 public class FloatingManager {
 
-	private static FloatingManager wm;
+	private static FloatingManager floatingManager;
 	Timer redPointReqTimer;
 
 	public Activity activity;
@@ -42,6 +40,8 @@ public class FloatingManager {
 	int screenHeight = 0;
 	private int navigationBarHeight;//竖屏影响Y坐标，横屏影响X坐标
 	private int statusBarHeight;
+
+	private String oldLoginTimestamp;
 
 	WindowManager mWindowManager = null;
 	RelativeLayout floatLayout;
@@ -84,27 +84,32 @@ public class FloatingManager {
 	private boolean isFullWindows = false;
 	private boolean isHasNavigationBar = false;
 
-	private FloatCallback floatCallback;
+	private FloatButtionClickCallback floatButtionClickCallback;
 
 	private FloatingManager() {
 	}
 
 	// 获得实例
 	public static FloatingManager getInstance() {
-		if (wm == null) {
-			wm = new FloatingManager();
+		if (floatingManager == null) {
+			floatingManager = new FloatingManager();
 		}
-		return wm;
+		return floatingManager;
 	}
 	// 展示
-	public void initFloatingView(final Activity ctx, String iconUrl, FloatCallback floatCallback) {
+	public void initFloatingView(final Activity ctx, String iconUrl, FloatButtionClickCallback floatButtionClickCallback) {
 
-		this.activity = ctx;
-		this.floatCallback = floatCallback;
-		if (mWindowManager != null) {
+		String loginTimestamp = SdkUtil.getSdkTimestamp(ctx);
+		if (mWindowManager != null && SStringUtil.isNotEmpty(oldLoginTimestamp) && loginTimestamp.equals(oldLoginTimestamp)){
+			//没有重新登陆，不用重新生成悬浮，防止造成重复
+			PL.i("没有重新登陆，不用重新生成悬浮，防止造成重复");
 			return;
 		}
+		oldLoginTimestamp = loginTimestamp;
+		windowManagerFinish();
 
+		this.activity = ctx;
+		this.floatButtionClickCallback = floatButtionClickCallback;
 		mWindowManager = ctx.getWindowManager();
 
 		initParams();
@@ -128,7 +133,7 @@ public class FloatingManager {
 
 		mWindowManager.addView(floatLayout, mWindowParamsForFloatBtn);
 
-		getNotchInfo();
+//		getNotchInfo();
 		/*floatLayout.setChangedListener(new EEEBaseRelativeLayout.ConfigurationChangedListener() {
 			@Override
 			public void onConfigurationChanged(Configuration newConfig) {
@@ -185,7 +190,7 @@ public class FloatingManager {
 		}
 	}
 
-	private void getNotchInfo() {
+//	private void getNotchInfo() {
 //		NotchScreenManager.getInstance().getNotchInfo(this.activity, new INotchScreen.NotchScreenCallback() {
 //			@Override
 //			public void onResult(INotchScreen.NotchScreenInfo notchScreenInfo) {
@@ -199,7 +204,7 @@ public class FloatingManager {
 //				}
 //			}
 //		});
-	}
+//	}
 
 	// 设置悬浮按钮的监听
 	private void addListener() {
@@ -219,8 +224,8 @@ public class FloatingManager {
 					floatHiddenState = true;
 				}else {//点击按钮
 					PL.d("floatBtn click show content view");
-					if (floatCallback != null){
-						floatCallback.show("");
+					if (floatButtionClickCallback != null){
+						floatButtionClickCallback.show("");
 					}
 				}
 			}
@@ -316,107 +321,6 @@ public class FloatingManager {
 		});
 	}
 
-	private void initInNotch() {
-
-//		int initX = 0;
-//		if (mWindowParamsForFloatBtn.x >= 0){
-//			initX = mWindowParamsForFloatBtn.x;
-//		}
-//		if (xNotchScreenInfo == null){
-//			return;
-//		}
-//		for (int i = 0; i < xNotchScreenInfo.notchRects.size(); i++) {
-//			Rect notchRect = xNotchScreenInfo.notchRects.get(i);
-//			if (mWindowParamsForFloatBtn.y + floatBtnLayoutParams.height * 0.7 >= notchRect.top &&
-//					mWindowParamsForFloatBtn.y + floatBtnLayoutParams.height * 0.3 <= notchRect.bottom &&
-//					initX >= notchRect.left &&
-//					initX <= notchRect.right){
-//
-//				mWindowParamsForFloatBtn.x = mWindowParamsForFloatBtn.x + notchRect.width();
-//				return;
-//			}
-//		}
-	}
-
-	private void updateWindowParamsInNotchNotInit() {
-
-//		NotchScreenManager.getInstance().getNotchInfo(activity, new INotchScreen.NotchScreenCallback() {
-//			@Override
-//			public void onResult(INotchScreen.NotchScreenInfo notchScreenInfo) {
-//				xNotchScreenInfo = notchScreenInfo;
-//			}
-//		});
-//		if (xNotchScreenInfo == null){
-//			return;
-//		}
-//		for (int i = 0; i < xNotchScreenInfo.notchRects.size(); i++) {
-//			Rect notchRect = xNotchScreenInfo.notchRects.get(i);
-//			if (mWindowParamsForFloatBtn.y + floatBtnLayoutParams.height * 0.7 >= notchRect.top &&
-//					mWindowParamsForFloatBtn.y + floatBtnLayoutParams.height * 0.3 <= notchRect.bottom &&
-//					mWindowParamsForFloatBtn.x >= notchRect.left &&
-//					mWindowParamsForFloatBtn.x <= notchRect.right){
-//
-//				mWindowParamsForFloatBtn.x = mWindowParamsForFloatBtn.x + notchRect.width();
-//				return;
-//			}
-//		}
-	}
-
-	public void setFloatBtnVisible() {
-//		floatBtnLayoutParams.width = (int) (logoSize * 1.3);
-//		floatBtnLayoutParams.height = (int) (logoSize * 1.3);
-//		floatBtn.setLayoutParams(floatBtnLayoutParams);
-//		floatBtn.setImageResource(R.drawable.efun_function_logo_icon);
-//		floatImageView.allowMove(false);
-//		floatImageView.setAlpha(0.6f);
-
-//		setMenuLayoutVisible();
-	}
-
-	public void setFloatBtnHide() {
-//		floatBtnLayoutParams.width = (int) (logoSize * 0.75);
-//		floatBtnLayoutParams.height = (int) (logoSize * 0.75);
-//		floatBtn.setLayoutParams(floatBtnLayoutParams);
-//		mWindowManager.updateViewLayout(floatLayout, mWindowParamsForFloatBtn);
-//		floatBtn.setImageResource(R.drawable.float_hide_left_icon);
-//		floatImageView.allowMove(true);
-//		floatImageView.setAlpha(1.0f);
-//
-//		setMenuLayoutHide();
-	}
-
-
-	private void setMenuLayoutVisible() {
-//		floatBtnLayoutParams.width = (int) (logoSize * 1.3);
-//		floatBtnLayoutParams.height = (int) (logoSize * 1.3);
-//		floatBtn.setLayoutParams(floatBtnLayoutParams);
-//		floatBtn.setImageResource(R.drawable.efun_function_logo_icon);
-//		floatBtn.allowMove(false);
-//		floatBtn.setAlpha(0.7f);
-//		mWindowManager.addView(menuViewLayout, getWindowMangerParamsForMenuLayout());
-//		menuViewLayout.setVisibility(View.VISIBLE);
-//		menuViewLayoutIsAddToWm = true;
-	}
-
-	private void setMenuLayoutHide() {
-//		floatBtnLayoutParams.width = (int) (logoSize * 0.75);
-//		floatBtnLayoutParams.height = (int) (logoSize * 0.75);
-//		floatBtn.setLayoutParams(floatBtnLayoutParams);
-//		mWindowManager.updateViewLayout(floatLayout, mWindowParamsForFloatBtn);
-//		floatBtn.setImageResource(R.drawable.efun_function_logo_icon_click);
-//		floatBtn.allowMove(true);
-//		floatBtn.setAlpha(1.0f);
-//
-
-//		menuViewLayout.setVisibility(View.GONE);
-
-//		if (mWindowManager != null && menuViewLayoutIsAddToWm) {
-//			mWindowManager.removeViewImmediate(menuViewLayout);
-//		}
-//		menuViewLayoutIsAddToWm = false;
-	}
-
-
 
 	// 悬浮按钮的属性
 	private WindowManager.LayoutParams getCricleButtonParams(int pointX, int pointY) {
@@ -442,33 +346,31 @@ public class FloatingManager {
 	public void windowManagerFinish() {
 		PL.d( "========windowManagerFinish====");
 		try {
-
 			if (redPointReqTimer != null){
 				redPointReqTimer.cancel();
 				redPointReqTimer = null;
 			}
-
 			if (mWindowManager != null) {
-				
-//				if (floatLayout != null){
-//
-//					mWindowManager.removeViewImmediate(floatLayout);
-//				}
-
-				setMenuLayoutHide();
-
-//				if (menuItemBeans != null){
-//					menuItemBeans.clear();
-//					menuItemBeans = null;
-//				}
+				if (floatLayout != null){
+					mWindowManager.removeViewImmediate(floatLayout);
+					floatLayout = null;
+				}
+				mWindowManager = null;
 			}
 			
-			if (wm != null) {
-				wm = null;
-			}
+//			if (floatingManager != null) {
+//				floatingManager = null;
+//			}
+
+			oldLoginTimestamp = null;
 			
 		} catch (Exception e) {
-
+			e.printStackTrace();
+		}finally {
+//			if (floatingManager != null) {
+//				floatingManager = null;
+//			}
+			mWindowManager = null;
 		}
 	}
 
@@ -479,8 +381,8 @@ public class FloatingManager {
 	}
 
 	public void windowManagerRestart(Context context) {
-//		if(floatCallback != null){
-//			floatCallback.callBack();
+//		if(floatButtionClickCallback != null){
+//			floatButtionClickCallback.callBack();
 //		}
 //		if (floatLayout != null)
 //			if (floatLayout.getVisibility() == View.GONE) {
@@ -507,20 +409,20 @@ public class FloatingManager {
 	 * 向左的动画	（左边）
 	 * @param context
 	 */
-	private void addGoLeftAnimation(Context context){
+//	private void addGoLeftAnimation(Context context){
 //		Animation animation = AnimationUtils.loadAnimation(context, ResUtil.findAnimIdByName(context, "efun_pd_exit_go"));
 //		animation.setAnimationListener(new GoAnimationListener());
 //		floatBtn.startAnimation(animation);
-	}
+//	}
 	
-	private void addBackLeftAnimation(Context context){
+//	private void addBackLeftAnimation(Context context){
 //		Animation animation = AnimationUtils.loadAnimation(context, ResUtil.findAnimIdByName(context, "efun_pd_exit_back"));
 //		animation.setAnimationListener(new BackAnimationListener());
 //		floatBtn.startAnimation(animation);
-	}
+//	}
 	
 	
-	
+	/*
 	private class GoAnimationListener implements AnimationListener{
 		
 		@Override
@@ -563,7 +465,7 @@ public class FloatingManager {
 			
 		}
 		
-	}
+	}*/
 
 
 	public void initParams() {
