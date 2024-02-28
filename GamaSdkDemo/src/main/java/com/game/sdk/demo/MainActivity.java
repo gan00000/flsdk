@@ -35,6 +35,7 @@ import com.mw.base.bean.SPayType;
 import com.mw.sdk.act.FloatContentView;
 import com.mw.sdk.bean.req.PayCreateOrderReqBean;
 import com.mw.sdk.bean.res.MenuData;
+import com.mw.sdk.callback.FloatCallback;
 import com.mw.sdk.utils.SdkUtil;
 import com.mw.sdk.callback.IPayListener;
 import com.mw.sdk.demo.R;
@@ -327,7 +328,26 @@ public class MainActivity extends Activity {
         findViewById(R.id.open_float_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FloatingManager.getInstance().initFloatingView(MainActivity.this,100, 100);
+                if(SStringUtil.isEmpty(SdkUtil.getUid(activity))){
+                    ToastUtils.toast(activity,"请先登录");
+                    return;
+                }
+                mIMWSDK.showFloatView(activity, new FloatCallback() {
+                    @Override
+                    public void switchAccount(String msg) {
+
+                        //研发再次需要进行切换账号，重新回到登录页面
+                        //.....研发处理游戏退出，退出后重新调用登录接口......
+
+                        /*mIMWSDK.login(MainActivity.this, new ILoginCallBack() {
+                            @Override
+                            public void onLogin(SLoginResponse sLoginResponse) {
+                                handleLoginResponse(sLoginResponse);
+                            }
+                        });*/
+                    }
+                });
+
             }
         });
 
@@ -431,7 +451,7 @@ public class MainActivity extends Activity {
                     ToastUtils.toast(activity,"请先登录");
                     return;
                 }
-//                mIMWSDK.showActView(MainActivity.this);
+                mIMWSDK.showActView(MainActivity.this);
 
 //                ArrayList<ActDataModel.ActData> arrayList = new ArrayList<>();
 //                for (int i = 0; i < 10; i++) {
@@ -446,19 +466,6 @@ public class MainActivity extends Activity {
 //                commonDialog.setContentView(mActExpoView);
 //                commonDialog.show();
 
-
-                ArrayList<MenuData> arrayList = new ArrayList<>();
-//                for (int i = 0; i < 10; i++) {
-//                    ActDataModel.ActData actData = new ActDataModel.ActData();
-//                    actData.setContentUrl("https://www.baidu.com/");
-//                    actData.setTitle("test=" + i);
-//                    arrayList.add(actData);
-//                }
-                SBaseDialog commonDialog = new SBaseDialog(activity, com.mw.sdk.R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
-                FloatContentView mActExpoView = new FloatContentView(activity, arrayList, commonDialog);
-                mActExpoView.setsBaseDialog(commonDialog);
-                commonDialog.setContentView(mActExpoView);
-                commonDialog.show();
             }
         });
         AppUtil.hideActivityBottomBar(this);
