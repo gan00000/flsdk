@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 授權提示的標題 -->
+    <string name="permission_title" translatable="false">注意</string>
+
+    <string name="permission_ok" translatable="false">確認</string>
+
+    <string name="permission_reask" translatable="false">重新授權</string>
+
+    <string name="permission_continue" translatable="false">繼續進入遊戲</string>
+
+    <!-- 拒絕授權的二次提醒 -->
+    <string name="second_confirm" translatable="false">您已拒絕授予權限，可能會影響遊戲體驗</string>
+
+    <!-- 授權描述的開頭 -->
+    <string name="permission_prefix_description" translatable="false">為確保您的遊戲檔案存取正常，請授予以下權限</string>
+
+    <!-- 讀寫SD卡的描述 -->
+    <string name="write_external_storage" translatable="false">*讀寫存儲空間:系統不會執行遊戲檔案存取以外動作</string>
+
+</resources>
