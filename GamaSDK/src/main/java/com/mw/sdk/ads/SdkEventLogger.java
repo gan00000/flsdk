@@ -159,8 +159,7 @@ public class SdkEventLogger {
 
             //下面是AppsFlyer自己的事件名
             Map<String, Object> af_eventValues = new HashMap<>();
-            af_eventValues.put(AFInAppEventParameterName.REVENUE, usdPrice);
-            af_eventValues.put(AFInAppEventParameterName.CURRENCY, "USD");
+
             af_eventValues.put(AFInAppEventParameterName.CONTENT_ID, productId);
             af_eventValues.put(AFInAppEventParameterName.ORDER_ID, orderId);
             af_eventValues.put(AFInAppEventParameterName.CUSTOMER_USER_ID, uid);
@@ -171,8 +170,12 @@ public class SdkEventLogger {
             addEventParameterName(context, af_eventValues);
             PL.i("trackinPay start Purchase af...");
             if (SStringUtil.isEmpty(eventName)){
+
+                af_eventValues.put(AFInAppEventParameterName.REVENUE, usdPrice);
+                af_eventValues.put(AFInAppEventParameterName.CURRENCY, "USD");
                 AFHelper.logEvent(context.getApplicationContext(), AFInAppEventType.PURCHASE, af_eventValues);
             }else {
+                //af除了默认AFInAppEventType.PURCHASE上报额度，别的都不上报，不然影响af后台统计
                 AFHelper.logEvent(context.getApplicationContext(), eventName, af_eventValues);
             }
 
