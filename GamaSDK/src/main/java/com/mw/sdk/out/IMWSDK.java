@@ -68,6 +68,7 @@ public interface IMWSDK extends IGameLifeCycle {
      * @param listener          充值回调              辅助回调，充值是否成功以服务端回调为准
      */
     void pay(Activity activity, SPayType payType, String cpOrderId, String productId, String extra, String roleId,String roleName,String roleLevel,String vipLevel,String severCode,String serverName, IPayListener listener);
+    void pay(Activity activity, String cpOrderId, String productId, String extra, String roleId,String roleName,String roleLevel,String vipLevel,String severCode,String serverName, IPayListener listener);
 
 //    void openWebview(Activity activity);
 

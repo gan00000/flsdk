@@ -738,6 +738,11 @@ public class BaseSdkImpl implements IMWSDK {
     }
 
     @Override
+    public void pay(Activity activity, String cpOrderId, String productId, String extra, String roleId, String roleName, String roleLevel, String vipLevel, String severCode, String serverName, IPayListener listener) {
+        pay(activity, SPayType.GOOGLE, cpOrderId, productId, extra, roleId, roleName, roleLevel, vipLevel, severCode, serverName, listener);
+    }
+
+    @Override
     public void pay(Activity activity, SPayType payType, String cpOrderId, String productId, String extra, String roleId,String roleName,String roleLevel, String vipLevel, String severCode,String serverName, IPayListener listener) {
         PL.i("sdk pay payType:" + payType.toString() + " ,cpOrderId:" + cpOrderId + ",productId:" + productId + ",extra:" + extra);
         if ((System.currentTimeMillis() - firstClickTime) < 1000) {//防止连续点击

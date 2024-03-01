@@ -156,6 +156,9 @@ public class MWSdkImpl extends BaseSdkImpl {
                 //初始化成功
                 initSuccess = true;
                 PL.i("init onSuccess");
+                if (lunqiPay == null) {
+                    lunqiPay = new LunqiPayImpl(activity);
+                }
             }
         });
 
@@ -259,8 +262,9 @@ public class MWSdkImpl extends BaseSdkImpl {
         String loginkey = "SaSvTgU7AW2Kyhx8mO";
         String ead = SStringUtil.toMd5(sitecode + t + loginkey + passport);
         if (!ck.equals(ead)){
-            ToastUtils.toast(activity,"Account verification failed");
-            return;
+            //ToastUtils.toast(activity,"Account verification failed");
+//            return;
+            PL.i("Account verification failed");
         }
 
         //登录验证
