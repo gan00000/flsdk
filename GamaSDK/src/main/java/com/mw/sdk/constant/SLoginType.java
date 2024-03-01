@@ -16,6 +16,7 @@ public class SLoginType {
 	public static final String LOGIN_TYPE_GOOGLE = "google";
 	public static final String LOGIN_TYPE_LINE = "line";
 	public static final String LOGIN_TYPE_QooApp = "qooapp";
+	public static final String LOGIN_TYPE_LUNQI = "lunqi";
 	public static final String LOGIN_TYPE_HUAWEI = "huawei";
 
 	/**

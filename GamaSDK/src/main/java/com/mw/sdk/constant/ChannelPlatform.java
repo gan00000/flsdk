@@ -3,6 +3,7 @@ package com.mw.sdk.constant;
 public enum ChannelPlatform {
 
     QOOAPP("qooapp"),
+    LUNQI("lunqi"),
     HUAWEI("huawei"),
     GOOGLE("google"),
     ONESTORE("onestore"),

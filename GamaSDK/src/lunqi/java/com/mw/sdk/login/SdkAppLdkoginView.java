@@ -1,9 +1,9 @@
 package com.mw.sdk.login;
 
-import com.mw.sdk.constant.SLoginType;
+import com.mw.sdk.constant.ViewType;
 import com.mw.sdk.login.model.response.SLoginResponse;
 
-public class QooAppLoginView implements LoginContract.ILoginView{
+public class SdkAppLdkoginView implements LoginContract.ILoginView{
 
     private ILoginCallBack iLoginCallBack;
 
@@ -71,4 +71,11 @@ public class QooAppLoginView implements LoginContract.ILoginView{
     public void showWelcomeBackView() {
 
     }
+
+    @Override
+    public void showSdkView(ViewType viewType, ViewType fromViewType, String arg1, int arg2) {
+
+    }
+
+
 }

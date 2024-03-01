@@ -19,6 +19,8 @@ public class GPCreateOrderIdRes extends BaseResponseModel {
         private String paymentId;
         private Double amount; //金额 usd
 
+        private String productName;
+
         public String getOrderId() {
             return orderId;
         }
@@ -41,6 +43,14 @@ public class GPCreateOrderIdRes extends BaseResponseModel {
 
         public void setAmount(Double amount) {
             this.amount = amount;
+        }
+
+        public String getProductName() {
+            return productName;
+        }
+
+        public void setProductName(String productName) {
+            this.productName = productName;
         }
     }
 }

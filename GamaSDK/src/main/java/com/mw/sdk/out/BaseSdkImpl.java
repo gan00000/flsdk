@@ -785,13 +785,16 @@ public class BaseSdkImpl implements IMWSDK {
             doHuaweiPay(activity, payCreateOrderReqBean);
         } else if(payType == SPayType.QooApp || ChannelPlatform.QOOAPP.getChannel_platform().equals(channel_platform)) {
             doQooAppPay(activity, payCreateOrderReqBean);
+        } else if(payType == SPayType.LUNQI || ChannelPlatform.LUNQI.getChannel_platform().equals(channel_platform)) {
+            doLunqiPay(activity, payCreateOrderReqBean);
         } else {//默认Google储值
             checkGoogleOrWebPay(activity, payCreateOrderReqBean);
         }
     }
-    protected void doQooAppPay(Activity activity, PayCreateOrderReqBean payCreateOrderReqBean) {
+    protected void doQooAppPay(Activity activity, PayCreateOrderReqBean payCreateOrderReqBean) {}
 
-    }
+    protected void doLunqiPay(Activity activity, PayCreateOrderReqBean payCreateOrderReqBean) {}
+
     private void doHuaweiPay(Activity activity, PayCreateOrderReqBean payCreateOrderReqBean) {
 
         if (huaweiPay == null){

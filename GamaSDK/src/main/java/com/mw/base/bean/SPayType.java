@@ -10,4 +10,5 @@ public enum SPayType {
     WEB,
     HUAWEI,
     QooApp,
+    LUNQI,
 }

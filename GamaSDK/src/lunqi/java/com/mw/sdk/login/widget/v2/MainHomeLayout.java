@@ -8,6 +8,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 
 import com.mw.sdk.bean.res.ConfigBean;
+import com.mw.sdk.constant.ViewType;
 import com.mw.sdk.utils.SdkUtil;
 import com.mw.sdk.widget.SBaseDialog;
 import com.mw.sdk.constant.SLoginType;

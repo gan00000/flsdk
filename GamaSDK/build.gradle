@@ -117,9 +117,10 @@ android {
             proguardFile 'flavor-rules-kr.pro'
         }
 
-//        Act1 {
-//            dimension 'act'
-//        }
+        lunqi {//lunqi
+            dimension '1'
+            resValue "string", "sdk_inner_version", "lunqi"
+        }
 
     }
 }
@@ -210,6 +211,8 @@ dependencies {
     //onestore
     sdkKRImplementation "com.onestorecorp.sdk:sdk-iap:21.00.00"
     sdkKRImplementation "com.onestorecorp.sdk:sdk-configuration-kr:1.0.0"
+
+    lunqiImplementation files('libs/xlsdk1.jar')
 }
 
 
