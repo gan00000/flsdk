@@ -2,7 +2,7 @@
 apply plugin: 'com.android.asset-pack'
 
 assetPack {
-    packName = "install_asset_pack" // Directory name for the asset pack
+    packName = "sdk_asset_pack" // Directory name for the asset pack
     dynamicDelivery {
         deliveryType = "install-time"
     }

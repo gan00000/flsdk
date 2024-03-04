@@ -156,6 +156,46 @@ android {
             resValue "string", "sdk_name", "qooapp demo"
 
         }
+        lunqi {
+
+            signingConfig signingConfigs.release_v2
+            versionCode 10
+            versionName "1.0"
+            dimension "1"
+
+            //=======================================sdk config==========================
+
+            applicationId "com.mwyyz.tw"
+            minSdkVersion 21
+            targetSdkVersion 34
+
+            //base
+            resValue "string", "sdk_game_code", "mxwtw"
+            resValue "string", "sdk_app_key", "7c29c30164e0c36e7bc43399bca0c570"
+            resValue "string", "sdk_more_language", "true"
+            resValue "string", "sdk_default_server_language", "zh_TW"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
+            resValue "string", "scheme", "mxwtw"
+            resValue "string", "channel_platform", "lunqi"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore",huawei
+            //facebook
+            resValue "string", "facebook_app_id", "1122"
+            resValue "string", "facebook_client_token", "1122"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1122" //启用分析
+            resValue "string", "fb_login_protocol_scheme", "fb1122"
+            resValue "string", "facebook_app_name", "mxwtw" //游戏名字
+            //ad
+            resValue "string", "adjust_app_token", ""
+            resValue "string", "sdk_appflyer_dev_key", ""
+            //line
+            resValue "string", "line_channelId", ""
+            //naver
+            resValue "string", "naver_client_id", ""
+            resValue "string", "naver_client_secret", ""
+
+            //=======================================sdk config end==========================
+
+            resValue "string", "sdk_name", "lunqi demo"
+
+        }
 
         sdk2 {
 
@@ -489,10 +529,10 @@ boolean isHuaweiFlavor(){
     return false
 }
 
-boolean isQooappFlavor(){
+boolean isNeedGoogleServices(){
     for (String s in gradle.startParameter.taskNames) {
         println("taskName ==== " + s)
-        if(s.toLowerCase().contains("qooapp")){
+        if(s.toLowerCase().contains("qooapp") || s.toLowerCase().contains("lunqi")){
             return true
         }
     }
@@ -501,7 +541,7 @@ boolean isQooappFlavor(){
 
 if (isHuaweiFlavor()){
     apply plugin: 'com.huawei.agconnect'  //华为需要设置
-}else if (isQooappFlavor()){
+}else if (isNeedGoogleServices()){
 
 }else {
     //Google包，第三方包设置
