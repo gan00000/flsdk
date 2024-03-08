@@ -178,7 +178,7 @@ android {
 
             //每个游戏的demo设置 test
             resValue "string", "sdk_name", "opcaa demo"
-
+            resConfigs "en", "th"
         }
 
         DySdkTW {

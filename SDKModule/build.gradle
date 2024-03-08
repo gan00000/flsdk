@@ -51,6 +51,7 @@ android {
         DySdkTW {//....
             flavorDimensions "1"
             resValue "string", "sdk_inner_version", "vd_tw"
+            resValue "string", "sdk_supported_languages", "en-zh-ko-th"
             buildConfigField "Boolean", "reg_is_need_vfcode", "false"
             proguardFile 'flavor-rules-tw.pro'
         }
