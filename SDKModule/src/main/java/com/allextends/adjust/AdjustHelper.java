@@ -48,7 +48,12 @@ public class AdjustHelper {
         }
 
         AdjustConfig config = new AdjustConfig(application.getApplicationContext(), appToken, environment);
-        config.setLogLevel(LogLevel.DEBUG);
+        if (BuildConfig.DEBUG) {
+            config.setLogLevel(LogLevel.VERBOSE);
+        }else {
+            config.setLogLevel(LogLevel.DEBUG);
+        }
+
         Adjust.onCreate(config);
 
         PL.d("AdjustHelper init finish appToken=%s,environment=%s", appToken, environment);
@@ -70,13 +75,13 @@ public class AdjustHelper {
         @Override
         public void onActivityResumed(Activity activity) {
             PL.e("AdjustHelper onActivityResumed");
-//            Adjust.onResume();
+            Adjust.onResume();//一定不能注释，否则无法上报
         }
 
         @Override
         public void onActivityPaused(Activity activity) {
             PL.e("AdjustHelper onActivityPaused");
-//            Adjust.onPause();
+            Adjust.onPause();//一定不能注释，否则无法上报
         }
 
         @Override
