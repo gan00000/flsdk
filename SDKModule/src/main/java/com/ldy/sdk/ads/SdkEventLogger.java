@@ -41,6 +41,29 @@ import java.util.Map;
 
 /**
  * Created by gan on 2017/3/3.
+ *
+ * complete_registration_hf
+ * sign_up_visitor_hf
+ * sign_up_account_hf
+ * af_login_hf
+ * login_visitor_hf
+ * login_account_hf
+ * af_purchase_hf
+ * complete_2nd_login_hf
+ * complete_3rd_login_hf
+ * complete_5th_login_hf
+ * complete_7th_login_hf
+ * purchase_first_charge_hf
+ * purchase_99_single_hf
+ * continuous_50_dollars_recharege_hf
+ * continuous_100_dollars_recharege_hf
+ * continuous_500_dollars_recharege_hf
+ * continuous_1000_dollars_recharege_hf
+ * continuous_3000_dollars_recharege_hf
+ * purchase_2rd_charge_hf
+ * purchase_3rd_charge_hf
+ * purchase_10rd_charge_hf
+ *
  */
 
 public class SdkEventLogger {
@@ -109,13 +132,13 @@ public class SdkEventLogger {
                     trackingWithEventName(activity, "complete_2nd_login_hf",eventValue,EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
                     sUserInfo.setLoginDays2(true);
                 }else if (days == 3 && !sUserInfo.isLoginDays3()){
-                    trackingWithEventName(activity, "complete_3nd_login_hf",eventValue,EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
+                    trackingWithEventName(activity, "complete_3rd_login_hf",eventValue,EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
                     sUserInfo.setLoginDays3(true);
                 }else if (days == 5 && !sUserInfo.isLoginDays5()){
-                    trackingWithEventName(activity, "complete_5nd_login_hf",eventValue,EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
+                    trackingWithEventName(activity, "complete_5th_login_hf",eventValue,EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
                     sUserInfo.setLoginDays5(true);
                 }else if (days == 7 && !sUserInfo.isLoginDays7()){
-                    trackingWithEventName(activity, "complete_7nd_login_hf",eventValue,EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
+                    trackingWithEventName(activity, "complete_7th_login_hf",eventValue,EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
                     sUserInfo.setLoginDays7(true);
                 }
                 sUserInfo.setLastLoginTime(lastTime);
@@ -146,6 +169,7 @@ public class SdkEventLogger {
 //            trackingWithEventName(activity,eventName,eventValue,EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
 //            trackingWithEventName(activity, AppEventsConstants.EVENT_NAME_COMPLETED_REGISTRATION,eventValue,EventConstant.AdType.AdTypeFacebook);
             trackingWithEventName(activity, "af_complete_registration_hf",eventValue,EventConstant.AdType.AdTypeAppsflyer);
+            trackingWithEventName(activity, "complete_registration_hf",eventValue,EventConstant.AdType.AdTypeAppsflyer);
             trackingWithEventName(activity, "sign_up_hf",eventValue,EventConstant.AdType.AdTypeFirebase);
 
             String loginType = loginResponse.getData().getLoginType();
