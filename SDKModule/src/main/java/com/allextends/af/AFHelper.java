@@ -41,6 +41,7 @@ public class AFHelper {
 
     public static void logEvent(Context context, String name, Map<String, Object> map){
 
+        //af_eventValues.put(AFInAppEventParameterName.REVENUE, usdPrice);
         AdjustHelper.trackEvent(context, name, map);//adjust后来添加，直接添加到这里
 
         String afDevKey = context.getResources().getString(R.string.sdk_af_dev_key);//ResConfig.getConfigInAssetsProperties(activity,"sdk_ads_appflyer_dev_key");

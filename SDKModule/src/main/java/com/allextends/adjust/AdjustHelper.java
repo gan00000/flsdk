@@ -13,6 +13,7 @@ import com.adjust.sdk.Adjust;
 import com.adjust.sdk.AdjustConfig;
 import com.adjust.sdk.AdjustEvent;
 import com.adjust.sdk.LogLevel;
+import com.appsflyer.AFInAppEventParameterName;
 import com.ldy.sdk.BuildConfig;
 import com.ldy.sdk.R;
 import com.mybase.utils.FileUtil;
@@ -106,7 +107,16 @@ public class AdjustHelper {
     }
 
     public static void trackEvent(Context context, String eventName, Map<String,Object> params){
-        trackEvent(context, eventName, params, -1, "");
+        //af_eventValues.put(AFInAppEventParameterName.REVENUE, usdPrice);
+        //af_eventValues.put(AFInAppEventParameterName.ORDER_ID, orderId);
+        if (params != null && !params.isEmpty() && params.containsKey(AFInAppEventParameterName.REVENUE)){
+            double amount = (double) params.get(AFInAppEventParameterName.REVENUE);
+            String orderId = (String) params.get(AFInAppEventParameterName.ORDER_ID);
+            trackEvent(context, eventName, params, amount, orderId);
+        }else {
+            trackEvent(context, eventName, params, -1, "");
+        }
+
     }
 
     public static void trackEvent(Context context, String eventName, Map<String,Object> params, double revenue, String orderId){

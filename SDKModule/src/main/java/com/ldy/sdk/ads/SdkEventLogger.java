@@ -215,6 +215,7 @@ public class SdkEventLogger {
             addEventParameterName(context, af_eventValues);
             PL.i("trackinPay start Purchase af...");
             AFHelper.logEvent(context.getApplicationContext(), AFInAppEventType.PURCHASE, af_eventValues);
+            AFHelper.logEvent(context.getApplicationContext(), "af_purchase_hf", af_eventValues);
 //            AppsFlyerLib.getInstance().logEvent(context.getApplicationContext(), "af_purchase_hf", af_eventValues);
             PL.i("trackinPay end Purchase af... params=" + JsonUtil.map2Json(af_eventValues).toString());
 
