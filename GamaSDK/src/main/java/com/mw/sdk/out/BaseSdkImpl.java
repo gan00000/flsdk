@@ -767,15 +767,15 @@ public class BaseSdkImpl implements IMWSDK {
         });
     }
 
-    protected String productId;
-    protected String cpOrderId;
-    protected String extra;
+//    protected String productId;
+//    protected String cpOrderId;
+//    protected String extra;
     protected void startPay(final Activity activity, final SPayType payType, final String cpOrderId, final String productId, final String extra, IPayListener listener) {
         this.iPayListener = listener;
         this.activity = activity;
-        this.productId = productId;
-        this.cpOrderId = cpOrderId;
-        this.extra = extra;
+//        this.productId = productId;
+//        this.cpOrderId = cpOrderId;
+//        this.extra = extra;
 
         PayCreateOrderReqBean payCreateOrderReqBean = new PayCreateOrderReqBean(activity);
         payCreateOrderReqBean.setCpOrderId(cpOrderId);

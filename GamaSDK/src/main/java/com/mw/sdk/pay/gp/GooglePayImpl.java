@@ -85,7 +85,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
 
 
     private void callbackSuccess(Purchase purchase, GPExchangeRes gpExchangeRes) {
-
+        isPaying = false;
         PL.i("google pay onConsumeResponse callbackSuccess");
         if (mActivity != null) {
             mActivity.runOnUiThread(new Runnable() {
@@ -145,7 +145,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
     }
 
     private void callbackFail(String message) {
-
+        isPaying = false;
         if (mActivity != null) {
             mActivity.runOnUiThread(new Runnable() {
 
@@ -204,26 +204,33 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
     @Override
     public void startPay(Activity activity, PayReqBean payReqBean) {
 
-        this.createOrderIdReqBean = null;
-
+        //this.createOrderIdReqBean = null;
         PL.i("the aar version info:" + SdkUtil.getSdkInnerVersion(activity) + "_" + BuildConfig.JAR_VERSION);//打印版本号
 
         if (activity == null) {
             PL.w("activity is null");
             return;
         }
-        this.mActivity = activity;
         if (payReqBean == null) {
             PL.w("payReqBean is null");
             return;
         }
-
         if (isPaying) {
             PL.w("google is paying...");
             return;
         }
         PL.w("google set paying...");
         isPaying = true;
+
+        //创建Loading窗
+        if(loadingDialog == null ||  this.mActivity != activity){
+            if (loadingDialog != null){
+                loadingDialog.dismissProgressDialog();
+            }
+            loadingDialog = new LoadingDialog(activity);
+        }
+        this.mActivity = activity;
+//        loadingDialog = new LoadingDialog(activity);
 
         //由GooglePayActivity2传入
         this.createOrderIdReqBean = (PayCreateOrderReqBean) payReqBean;
@@ -234,11 +241,6 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
         //设置储值接口名
         this.createOrderIdReqBean.setRequestMethod(ApiRequestMethod.API_ORDER_CREATE);
 
-        //创建Loading窗
-        if(loadingDialog != null){
-            loadingDialog.dismissProgressDialog();
-        }
-        loadingDialog = new LoadingDialog(activity);
         if (this.createOrderIdReqBean.isInitOk()) {
             //开始Google储值
             googlePayInActivity(activity);
@@ -246,7 +248,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
             ToastUtils.toast(activity, "please log in to the game first");
             callbackFail("can not find role info:" + this.createOrderIdReqBean.print());
         }
-        isPaying = false;
+        //isPaying = false;
         PL.w("google set not paying");
     }
 
@@ -433,6 +435,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
             @Override
             public void onQueryPurchasesResponse(@NonNull BillingResult billingResult, @NonNull List<com.android.billingclient.api.Purchase> list) {
                 PL.i("queryPurchase finish");
+                isPaying = false;
                 handleMultipleConsmeAsyncWithResend(list, activity, new ConsumeResponseListener() {
                     @Override
                     public void onConsumeResponse(@NonNull BillingResult billingResult3333, @NonNull String s) {
