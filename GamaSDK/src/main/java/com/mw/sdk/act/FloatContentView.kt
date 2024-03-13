@@ -75,10 +75,11 @@ class FloatContentView : SLoginBaseRelativeLayout {
             floatSwitchRes = Gson().fromJson(menuResData, FloatSwitchRes::class.java)
         }
 
-        for (cfgMenu in floatConfigData.menuList){
+        for (cfgMenu in floatConfigData.menuList){//以配置文件对象字段为准
             for (resMenu in floatSwitchRes.data.menuList){
                 if (resMenu.code.equals(cfgMenu.code) && resMenu.isDisplay){
                     menuDatas?.add(cfgMenu)
+                    break
                 }
             }
         }
