@@ -235,6 +235,9 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
         this.createOrderIdReqBean.setRequestMethod(ApiRequestMethod.API_ORDER_CREATE);
 
         //创建Loading窗
+        if(loadingDialog != null){
+            loadingDialog.dismissProgressDialog();
+        }
         loadingDialog = new LoadingDialog(activity);
         if (this.createOrderIdReqBean.isInitOk()) {
             //开始Google储值
