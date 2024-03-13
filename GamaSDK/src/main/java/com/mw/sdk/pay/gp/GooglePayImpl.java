@@ -130,9 +130,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
                         }
                     }
 
-                    if (loadingDialog != null) {
-                        loadingDialog.dismissProgressDialog();
-                    }
+                    dimissDialog();
 
                     if (iPayCallBack != null) {
                         iPayCallBack.success(payBean);
@@ -155,9 +153,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
                     if (mBillingHelper != null) { //关闭页面前先移除callback，否则游戏的onResume会先于 GooglePayActivity2 的onDestroy执行
 //            mBillingHelper.removeBillingHelperStatusCallback(this);
                     }
-                    if (loadingDialog != null) {
-                        loadingDialog.dismissProgressDialog();
-                    }
+                    dimissDialog();
 
                     if (!TextUtils.isEmpty(message) && TAG_USER_CANCEL.equals(message)){
                         PL.i(TAG_USER_CANCEL);
@@ -224,9 +220,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
 
         //创建Loading窗
         if(loadingDialog == null ||  this.mActivity != activity){
-            if (loadingDialog != null){
-                loadingDialog.dismissProgressDialog();
-            }
+            dimissDialog();
             loadingDialog = new LoadingDialog(activity);
         }
         this.mActivity = activity;
@@ -248,10 +242,16 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
             ToastUtils.toast(activity, "please log in to the game first");
             callbackFail("can not find role info:" + this.createOrderIdReqBean.print());
         }
-        isPaying = false;
+//        isPaying = false;
         PL.w("google set not paying");
     }
 
+    private void dimissDialog() {
+        if (loadingDialog != null) {
+            loadingDialog.dismissProgressDialog();
+        }
+        isPaying = false;
+    }
     @Override
     public void startQueryPurchase(Context mContext) {
 
@@ -404,9 +404,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
     @Override
     public void onDestroy(Activity activity) {
         PL.i( "onDestroy");
-        if (loadingDialog != null) {
-            loadingDialog.dismissProgressDialog();
-        }
+        dimissDialog();
         if (mBillingHelper != null) {
             //在销毁前再确保回调被移除，否则游戏的singletask会把支付activity杀死，导致回调没有被移除，游戏onresume时的查单会走这里的回调，导致再次创单
             mBillingHelper.removeBillingHelperStatusCallback(this);
@@ -435,7 +433,6 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
             @Override
             public void onQueryPurchasesResponse(@NonNull BillingResult billingResult, @NonNull List<com.android.billingclient.api.Purchase> list) {
                 PL.i("queryPurchasesAsync finish");
-                isPaying = false;
                 handleMultipleConsmeAsyncWithResend(list, activity, new ConsumeResponseListener() {
                     @Override
                     public void onConsumeResponse(@NonNull BillingResult billingResult3333, @NonNull String s) {
