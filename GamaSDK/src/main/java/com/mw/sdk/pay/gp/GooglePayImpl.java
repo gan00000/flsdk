@@ -248,7 +248,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
             ToastUtils.toast(activity, "please log in to the game first");
             callbackFail("can not find role info:" + this.createOrderIdReqBean.print());
         }
-        //isPaying = false;
+        isPaying = false;
         PL.w("google set not paying");
     }
 
@@ -434,7 +434,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
         mBillingHelper.queryPurchasesAsync(context, new PurchasesResponseListener() {
             @Override
             public void onQueryPurchasesResponse(@NonNull BillingResult billingResult, @NonNull List<com.android.billingclient.api.Purchase> list) {
-                PL.i("queryPurchase finish");
+                PL.i("queryPurchasesAsync finish");
                 isPaying = false;
                 handleMultipleConsmeAsyncWithResend(list, activity, new ConsumeResponseListener() {
                     @Override
