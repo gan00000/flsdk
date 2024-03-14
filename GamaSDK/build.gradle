@@ -213,6 +213,8 @@ dependencies {
     sdkKRImplementation "com.onestorecorp.sdk:sdk-configuration-kr:1.0.0"
 
     lunqiImplementation files('libs/xlsdk1.jar')
+    sdkKRImplementation(name: 'Samsung-IAP6Helper-release2', ext: 'aar')
+
 }
 
 
