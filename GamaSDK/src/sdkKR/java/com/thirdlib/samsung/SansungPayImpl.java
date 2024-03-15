@@ -6,16 +6,26 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.text.TextUtils;
 
+import com.core.base.callback.SFCallBack;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
+import com.gaa.sdk.iap.ConsumeListener;
+import com.gaa.sdk.iap.IapResult;
+import com.gaa.sdk.iap.PurchaseClient;
+import com.gaa.sdk.iap.PurchaseData;
+import com.gaa.sdk.iap.PurchaseFlowParams;
 import com.mw.sdk.BuildConfig;
+import com.mw.sdk.api.PayApi;
 import com.mw.sdk.api.task.LoadingDialog;
 import com.mw.sdk.bean.req.PayCreateOrderReqBean;
+import com.mw.sdk.bean.req.PayExchangeReqBean;
 import com.mw.sdk.bean.req.PayReqBean;
 import com.mw.sdk.bean.res.BasePayBean;
+import com.mw.sdk.bean.res.GPCreateOrderIdRes;
 import com.mw.sdk.bean.res.GPExchangeRes;
 import com.mw.sdk.constant.ApiRequestMethod;
+import com.mw.sdk.constant.ChannelPlatform;
 import com.mw.sdk.out.ISdkCallBack;
 import com.mw.sdk.pay.IPay;
 import com.mw.sdk.pay.IPayCallBack;
@@ -33,6 +43,7 @@ import com.samsung.android.sdk.iap.lib.vo.OwnedProductVo;
 import com.samsung.android.sdk.iap.lib.vo.ProductVo;
 import com.samsung.android.sdk.iap.lib.vo.PurchaseVo;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -211,11 +222,15 @@ public class SansungPayImpl implements IPay{
 
         if (mIapHelper == null){
             mIapHelper = IapHelper.getInstance( activity.getApplicationContext() );
-            mIapHelper.setOperationMode(HelperDefine.OperationMode.OPERATION_MODE_PRODUCTION);
+            if (BuildConfig.DEBUG) {
+                mIapHelper.setOperationMode(HelperDefine.OperationMode.OPERATION_MODE_TEST);
+            }else {
+                mIapHelper.setOperationMode(HelperDefine.OperationMode.OPERATION_MODE_PRODUCTION);
+            }
         }
 
         this.createOrderIdReqBean = (PayCreateOrderReqBean) payReqBean;
-        this.createOrderIdReqBean.setMode("samsung");
+        this.createOrderIdReqBean.setMode(ChannelPlatform.SAMSUNG.getChannel_platform());
         //设置储值主域名
         this.createOrderIdReqBean.setRequestUrl(PayHelper.getPreferredUrl(activity));
         //设置储值备用域名
@@ -269,7 +284,11 @@ public class SansungPayImpl implements IPay{
         mContext = activity.getApplicationContext();
         if (mIapHelper == null){
             mIapHelper = IapHelper.getInstance( activity.getApplicationContext() );
-            mIapHelper.setOperationMode(HelperDefine.OperationMode.OPERATION_MODE_PRODUCTION);
+            if (BuildConfig.DEBUG) {
+                mIapHelper.setOperationMode(HelperDefine.OperationMode.OPERATION_MODE_TEST);
+            }else {
+                mIapHelper.setOperationMode(HelperDefine.OperationMode.OPERATION_MODE_PRODUCTION);
+            }
         }
 
     }
@@ -337,12 +356,63 @@ public class SansungPayImpl implements IPay{
 //                                            else
 //                                                mConsumablePurchaseIDs = mConsumablePurchaseIDs + "," + product.getPurchaseId();
 //                                        }
-                                        if (SStringUtil.isNotEmpty(product.getPurchaseId())) {
-                                            if (mConsumablePurchaseIDs.length() == 0)
-                                                mConsumablePurchaseIDs = product.getPurchaseId();
-                                            else
-                                                mConsumablePurchaseIDs = mConsumablePurchaseIDs + "," + product.getPurchaseId();
+
+//                                        if (SStringUtil.isNotEmpty(product.getPurchaseId())) {
+//                                            if (mConsumablePurchaseIDs.length() == 0)
+//                                                mConsumablePurchaseIDs = product.getPurchaseId();
+//                                            else
+//                                                mConsumablePurchaseIDs = mConsumablePurchaseIDs + "," + product.getPurchaseId();
+//                                        }
+                                        /* ----------------------------------------------------- */
+//                                        if (mConsumablePurchaseIDs.length() > 0) {
+//                                            mIapHelper.consumePurchasedItems(mConsumablePurchaseIDs, new OnConsumePurchasedItemsListener() {
+//                                                @Override
+//                                                public void onConsumePurchasedItems(ErrorVo errorVo, ArrayList<ConsumeVo> arrayList) {
+//                                                    PL.i("onConsumePurchasedItems result");
+//                                                }
+//                                            });
+//                                            mConsumablePurchaseIDs = "";
+//                                        }
+
+                                        PayExchangeReqBean exchangeReqBean = new PayExchangeReqBean(activity);
+//                                        exchangeReqBean.setDataSignature();
+                                        exchangeReqBean.setPurchaseData(product.getJsonString());
+                                        exchangeReqBean.setReissue("yes");
+                                        exchangeReqBean.setThirdPurchaseToken(product.getPurchaseId());
+                                        exchangeReqBean.setGoogleOrderId(product.getPaymentId());
+                                        exchangeReqBean.setRequestMethod(ApiRequestMethod.API_PAYMENT_SAMSUNG);
+                                        try {
+                                            JSONObject payLoadJsonObject = new JSONObject(product.getPassThroughParam());
+                                            String userId = payLoadJsonObject.optString("userId");
+                                            String orderId = payLoadJsonObject.optString("orderId");
+                                            String roleId = payLoadJsonObject.optString("roleId");
+                                            exchangeReqBean.setUserId(userId);
+                                            exchangeReqBean.setOrderId(orderId);
+                                            exchangeReqBean.setRoleId(roleId);
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
                                         }
+
+                                        PayApi.requestCommonPaySendStone(activity, exchangeReqBean, new SFCallBack<GPExchangeRes>() {
+                                            @Override
+                                            public void success(GPExchangeRes result, String msg) {
+                                                PL.i("startQueryPurchase requestSendStone success => " + msg);
+                                                //3.消费
+                                                mIapHelper.consumePurchasedItems(product.getPurchaseId(), new OnConsumePurchasedItemsListener() {
+                                                    @Override
+                                                    public void onConsumePurchasedItems(ErrorVo errorVo, ArrayList<ConsumeVo> arrayList) {
+                                                        PL.i(  "onPayment > onConsumePurchasedItems finish");
+                                                    }
+                                                });
+                                            }
+
+                                            @Override
+                                            public void fail(GPExchangeRes result, String msg) {
+                                                PL.i("startQueryPurchase requestSendStone fail => " + msg);
+                                            }
+                                        });
+
+
 
                                     } catch (Exception e) {
                                         PL.e( "exception" + e);
@@ -352,166 +422,156 @@ public class SansungPayImpl implements IPay{
                             }
                         }
 
-                        /* ----------------------------------------------------- */
-                        if (mConsumablePurchaseIDs.length() > 0) {
-                            mIapHelper.consumePurchasedItems(mConsumablePurchaseIDs, new OnConsumePurchasedItemsListener() {
-                                @Override
-                                public void onConsumePurchasedItems(ErrorVo errorVo, ArrayList<ConsumeVo> arrayList) {
-                                    PL.i("onConsumePurchasedItems result");
-                                }
-                            });
-                            mConsumablePurchaseIDs = "";
-                        }
                     }
                     else
                     {
                         PL.i("onGetOwnedProducts ErrorCode [" + _errorVo.getErrorCode() +"]");
-                        if(_errorVo.getErrorString()!=null)
+                        if(_errorVo.getErrorString()!=null){
                             PL.i("onGetOwnedProducts ErrorString[" + _errorVo.getErrorString() + "]");
+                        }
                     }
                 }
 
                 //start pay
-                purchaseProduct(createOrderIdReqBean.getProductId());
+                createrOrderAndStartPurchaseProduct(createOrderIdReqBean.getProductId());
             }
         });
 
-       /*
-        purchaseManager.queryProductDetailAsync(productList, PurchaseClient.ProductType.INAPP, new ProductDetailsListener() {
-            @Override
-            public void onProductDetailsResponse(IapResult iapResult, List<ProductDetail> productDetailList) {
-
-                if (iapResult != null && iapResult.isSuccess() && productDetailList != null && !productDetailList.isEmpty()){
-                    ProductDetail productDetail = productDetailList.get(0);
-
-                    PayApi.requestCreateOrder(activity, createOrderIdReqBean, new SFCallBack<GPCreateOrderIdRes>() {
-                        @Override
-                        public void success(GPCreateOrderIdRes createOrderIdRes, String msg1) {
-                            PL.i("requestCreateOrder finish success");
-                            //5.开始购买
-                            JSONObject devPayload = new JSONObject();
-                            try {
-                                skuAmount = createOrderIdRes.getPayData().getAmount();
-                                devPayload.put("userId", createOrderIdReqBean.getUserId());
-                                devPayload.put("roleId", createOrderIdReqBean.getRoleId());
-                                devPayload.put("orderId", createOrderIdRes.getPayData().getOrderId());
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                                callbackFail("devPayload error");
-                                return;
-                            }
-                            PurchaseFlowParams purchaseFlowParams = PurchaseFlowParams.newBuilder()
-                                    .setProductId(productDetail.getProductId())
-                                    .setProductType(PurchaseClient.ProductType.INAPP)
-                                    .setGameUserId(createOrderIdReqBean.getUserId())
-                                    .setDeveloperPayload(devPayload.toString())
-                                    .setQuantity(1)
-                                    .build();
-
-                            purchaseManager.launchPurchaseFlow(activity, purchaseFlowParams);
-
-                            dimissDialog();
-                        }
-
-                        @Override
-                        public void fail(GPCreateOrderIdRes createOrderIdRes, String msg) {
-                            PL.i("requestCreateOrder finish fail");
-                            //创建订单失败
-                            if (createOrderIdRes != null && SStringUtil.isNotEmpty(createOrderIdRes.getMessage())) {
-                                callbackFail(createOrderIdRes.getMessage());
-                            }else{
-                                callbackFail("error");
-                            }
-                        }
-                    });
-
-
-                }else {
-                    //queryProductDetailAsync fail
-                    PL.i("queryProductDetailAsync fail " + iapResult.getMessage());
-                    purchaseManager.handleIapResultError(iapResult);
-                }
-            }
-        });
-*/
     }
 
     //=================================================================================================
     //=================================================================================================
     //=================================================================================================
 
-    protected void purchaseProduct(String itemId) {
-
-
-        if(mIapHelper != null) {
-
-//            mIapHelper.getProductsDetails(itemId, new OnGetProductsDetailsListener() {
-//                @Override
-//                public void onGetProducts(ErrorVo errorVo, ArrayList<ProductVo> arrayList) {
-//
-//                }
-//            });
-            mIapHelper.startPayment(itemId, "", new OnPaymentListener() {
-                @Override
-                public void onPayment(ErrorVo _errorVo, PurchaseVo _purchaseVo) {
-
-                    if (_errorVo != null) {
-                        if (_errorVo.getErrorCode() == IapHelper.IAP_ERROR_NONE) {
-                            if (_purchaseVo != null) {//成功
-                                // ====================================================================
-
-                                PL.i(  _purchaseVo.dump());
-                                if (_purchaseVo.getIsConsumable()) {
-                                    String mConsumedItemId = _purchaseVo.getItemId();
-                                    mIapHelper.consumePurchasedItems(_purchaseVo.getPurchaseId(), new OnConsumePurchasedItemsListener() {
-                                        @Override
-                                        public void onConsumePurchasedItems(ErrorVo errorVo, ArrayList<ConsumeVo> arrayList) {
-                                            PL.i(  "onPayment > onConsumePurchasedItems finish");
-                                        }
-                                    });
-                                }else {
-                                    PL.e(  "onPayment > getIsConsumable: false");
-                                }
-
-//                                if (_purchaseVo.getItemId().equals(ITEM_ID_NONCONSUMABLE))
-//                                    mMainActivity.setGunLevel(2);
-//                                else if (_purchaseVo.getItemId().equals(ITEM_ID_SUBSCRIPTION))
-//                                    mMainActivity.setInfiniteBullet(true);
-//                                else if (_purchaseVo.getItemId().equals(ITEM_ID_CONSUMABLE)) {
-//                                    Log.d(TAG, "onPayment consumePurchasedItems" + _purchaseVo.getPurchaseId());
-//                                }
-
-                            } else
-                                PL.e(  "onPayment > _purchaseVo: null");
-                        } else {//错误
-                            PL.e( "onPayment > ErrorCode [" + _errorVo.getErrorCode() + "]");
-                            if (_errorVo.getErrorString() != null) {
-                                PL.e(  "onPayment > ErrorString[" + _errorVo.getErrorString() + "]");
-                            }
-                            // In case of network error from GalaxyStore 4.5.20.7 version and IAP SDK 6.1 version,
-                            // IAP error popup is not displayed.
-                            // As needed, the app can display network error to users.
-                            if (_errorVo.getErrorCode() == HelperDefine.IAP_ERROR_NETWORK_NOT_AVAILABLE) {
-//                                Toast toast = Toast.makeText(mMainActivity, _errorVo.getErrorString(), Toast.LENGTH_SHORT);
-//                                toast.show();
-                                //错误提示
-                                loadingDialog.alert(_errorVo.getErrorString(), new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-
-                                        if (iPayCallBack != null) {
-                                            iPayCallBack.fail(null);
-                                        }
-                                    }
-                                });
-                            }
-                        }
-                    }else {
-                        PL.i(  "onPayment > _errorVo = null");
-                    }
+    protected void createrOrderAndStartPurchaseProduct(String itemId) {
+        PayApi.requestCreateOrder(this.mActivity, createOrderIdReqBean, new SFCallBack<GPCreateOrderIdRes>() {
+            @Override
+            public void success(GPCreateOrderIdRes createOrderIdRes, String msg1) {
+                PL.i("requestCreateOrder finish success");
+                //5.开始购买
+                JSONObject devPayload = new JSONObject();
+                try {
+                    skuAmount = createOrderIdRes.getPayData().getAmount();
+                    devPayload.put("userId", createOrderIdReqBean.getUserId());
+                    devPayload.put("roleId", createOrderIdReqBean.getRoleId());
+                    devPayload.put("orderId", createOrderIdRes.getPayData().getOrderId());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    callbackFail("devPayload error");
+                    return;
                 }
-            });
-        }
+
+                //dimissDialog();
+
+                mIapHelper.startPayment(itemId, devPayload.toString(), new OnPaymentListener() {
+                    @Override
+                    public void onPayment(ErrorVo _errorVo, PurchaseVo _purchaseVo) {
+
+                        if (_errorVo != null) {
+                            if (_errorVo.getErrorCode() == IapHelper.IAP_ERROR_NONE) {
+                                if (_purchaseVo != null) {//成功
+                                    // ====================================================================
+
+                                    PL.i(  _purchaseVo.dump());
+                                    if (_purchaseVo.getIsConsumable()) {
+                                        loadingDialog.showProgressDialog();
+                                        PayExchangeReqBean exchangeReqBean = new PayExchangeReqBean(mActivity);
+//                                        exchangeReqBean.setDataSignature();
+                                        exchangeReqBean.setPurchaseData(_purchaseVo.getJsonString());
+                                        exchangeReqBean.setReissue("no");
+
+                                        exchangeReqBean.setThirdPurchaseToken(_purchaseVo.getPurchaseId());
+                                        exchangeReqBean.setGoogleOrderId(_purchaseVo.getPaymentId());
+                                        exchangeReqBean.setRequestMethod(ApiRequestMethod.API_PAYMENT_SAMSUNG);
+                                        try {
+                                            JSONObject payLoadJsonObject = new JSONObject(_purchaseVo.getPassThroughParam());
+                                            String userId = payLoadJsonObject.optString("userId");
+                                            String orderId = payLoadJsonObject.optString("orderId");
+                                            String roleId = payLoadJsonObject.optString("roleId");
+                                            exchangeReqBean.setUserId(userId);
+                                            exchangeReqBean.setOrderId(orderId);
+                                            exchangeReqBean.setRoleId(roleId);
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+
+                                        PayApi.requestCommonPaySendStone(mActivity, exchangeReqBean, new SFCallBack<GPExchangeRes>() {
+                                            @Override
+                                            public void success(GPExchangeRes result, String msg) {
+                                                PL.i("startQueryPurchase requestSendStone success => " + msg);
+                                                //3.消费
+                                                mIapHelper.consumePurchasedItems(_purchaseVo.getPurchaseId(), new OnConsumePurchasedItemsListener() {
+                                                    @Override
+                                                    public void onConsumePurchasedItems(ErrorVo errorVo, ArrayList<ConsumeVo> arrayList) {
+                                                        PL.i(  "onPayment > onConsumePurchasedItems finish");
+                                                    }
+                                                });
+                                                callbackSuccess(_purchaseVo, result);
+                                            }
+
+                                            @Override
+                                            public void fail(GPExchangeRes result, String msg) {
+                                                PL.i("startQueryPurchase requestSendStone fail => " + msg);
+                                                callbackFail("onPayment > " + msg);
+                                            }
+                                        });
+
+                                    }else {
+                                        PL.e(  "onPayment > getIsConsumable: false");
+                                        callbackFail("onPayment > getIsConsumable: false");
+                                    }
+
+                                } else{
+                                    PL.e(  "onPayment > _purchaseVo: null");
+                                    callbackFail("onPayment > _errorVo = null");
+                                }
+                            } else {//错误
+
+                                String errMsg = "onPayment > ErrorCode [" + _errorVo.getErrorCode() + "]" ;
+                                PL.e( errMsg);
+
+                                if (_errorVo.getErrorString() != null) {
+                                    errMsg = "onPayment > ErrorString[" + _errorVo.getErrorString() + "]";
+                                    PL.e( errMsg);
+                                }
+                                callbackFail(errMsg);
+                                // In case of network error from GalaxyStore 4.5.20.7 version and IAP SDK 6.1 version,
+                                // IAP error popup is not displayed.
+                                // As needed, the app can display network error to users.
+//                            if (_errorVo.getErrorCode() == HelperDefine.IAP_ERROR_NETWORK_NOT_AVAILABLE) {
+//                                //错误提示
+//                                loadingDialog.alert(_errorVo.getErrorString(), new DialogInterface.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(DialogInterface dialog, int which) {
+//                                        dialog.dismiss();
+//
+//                                        if (iPayCallBack != null) {
+//                                            iPayCallBack.fail(null);
+//                                        }
+//                                    }
+//                                });
+//                            }else {
+//
+//                            }
+                            }
+                        }else {
+                            PL.i(  "onPayment > _errorVo = null");
+                            callbackFail("onPayment > _errorVo = null");
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void fail(GPCreateOrderIdRes createOrderIdRes, String msg) {
+                PL.i("requestCreateOrder finish fail");
+                //创建订单失败
+                if (createOrderIdRes != null && SStringUtil.isNotEmpty(createOrderIdRes.getMessage())) {
+                    callbackFail(createOrderIdRes.getMessage());
+                }else{
+                    callbackFail("error");
+                }
+            }
+        });
     }
 }

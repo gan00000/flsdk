@@ -61,6 +61,7 @@ public class ApiRequestMethod {
     public final static String API_PAYMENT_HW = "api/huawei/payment";
     public final static String API_PAYMENT_QOOAPP = "api/qooapp/payment";
     public final static String API_PAYMENT_ONESTORE = "api/onestore/payment";
+    public final static String API_PAYMENT_SAMSUNG = "api/samsung/payment";//https://pay.kodaduck.com/api/samsung/payment
 
     public final static String API_PAYMENT_CHANNEL = "api/payment/channel";
 

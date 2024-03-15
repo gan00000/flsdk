@@ -15,6 +15,7 @@ import com.mw.sdk.version.BaseSdkVersion;
 import com.thirdlib.IThirdHelper;
 import com.thirdlib.never.NeverLogin;
 import com.thirdlib.onepay.OnestorePayImpl;
+import com.thirdlib.samsung.SansungPayImpl;
 
 /**
  * Created by gan on 2017/2/7.
@@ -74,5 +75,9 @@ public class SdkVersionUtil extends BaseSdkVersion {
     @Override
     public IPay newOneStorePay() {
         return new OnestorePayImpl();
+    }
+
+    public IPay newSamsungPay() {
+        return new SansungPayImpl();
     }
 }
