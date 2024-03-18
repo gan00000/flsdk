@@ -20,7 +20,6 @@ import com.mw.sdk.ads.SdkEventLogger;
 import com.mw.sdk.api.task.BaseLoginRequestTask;
 import com.mw.sdk.bean.SGameBaseRequestBean;
 import com.mw.sdk.bean.req.AccountBindInGameRequestBean;
-import com.mw.sdk.bean.req.AccountLoginRequestBean;
 import com.mw.sdk.bean.req.ChangePwdRequestBean;
 import com.mw.sdk.bean.req.DeleteAccountRequestBean;
 import com.mw.sdk.bean.req.PayCreateOrderReqBean;
@@ -581,9 +580,9 @@ public class Request {
                         try {
                             String xData = xResponseBody.string();
                             PL.i("getFloatMenus=" + xData);
-                            SdkUtil.saveFloatSwitchData(context, xData);
+                            SdkUtil.saveFloatMenuResData(context, xData);
                         } catch (IOException e) {
-                            SdkUtil.saveFloatSwitchData(context, "");
+                            SdkUtil.saveFloatMenuResData(context, "");
                         }
                     }
 

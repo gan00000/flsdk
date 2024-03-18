@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * Created by ganyuanrong on 2017/2/23.
  */
 
-public class FloatSwitchRes extends BaseResponseModel {
+public class FloatMenuResData extends BaseResponseModel {
 
     @Override
     public boolean isRequestSuccess() {

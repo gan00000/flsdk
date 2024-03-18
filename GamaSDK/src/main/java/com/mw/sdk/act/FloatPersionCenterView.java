@@ -17,7 +17,7 @@ import com.google.gson.Gson;
 import com.mw.sdk.R;
 import com.mw.sdk.api.Request;
 import com.mw.sdk.bean.res.FloatConfigData;
-import com.mw.sdk.bean.res.FloatSwitchRes;
+import com.mw.sdk.bean.res.FloatMenuResData;
 import com.mw.sdk.callback.FloatCallback;
 import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
@@ -46,7 +46,7 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
     private Button delAccountOkButton;
 
     private FloatConfigData floatConfigData;
-    private FloatSwitchRes floatSwitchRes;
+    private FloatMenuResData floatMenuResData;
 
     private FloatCallback xFloatCallback;
 
@@ -177,18 +177,18 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
         });
 
         String floatCfgData = SdkUtil.getFloatCfgData(context);
-        String menuResData = SdkUtil.getFloatSwitchData(context);
+        String menuResData = SdkUtil.getFloatMenuResData(context);
 
         if (SStringUtil.isNotEmpty(floatCfgData) && SStringUtil.isNotEmpty(menuResData)){
             floatConfigData = new Gson().fromJson(floatCfgData, FloatConfigData.class);
-            floatSwitchRes = new Gson().fromJson(menuResData, FloatSwitchRes.class);
+            floatMenuResData = new Gson().fromJson(menuResData, FloatMenuResData.class);
 
-            if (floatConfigData != null && floatSwitchRes != null && floatSwitchRes.getData() != null) {
-                gameNameTextView.setText(floatSwitchRes.getData().getGameName());
-                setverNameTextView.setText(floatSwitchRes.getData().getServerName());
-                roleNameTextView.setText(floatSwitchRes.getData().getRoleName());
-                //accountTextView.setText(floatSwitchRes.getData().geta());
-                uidTextView.setText(floatSwitchRes.getData().getUserId());
+            if (floatConfigData != null && floatMenuResData != null && floatMenuResData.getData() != null) {
+                gameNameTextView.setText(floatMenuResData.getData().getGameName());
+                setverNameTextView.setText(floatMenuResData.getData().getServerName());
+                roleNameTextView.setText(floatMenuResData.getData().getRoleName());
+                //accountTextView.setText(floatMenuResData.getData().geta());
+                uidTextView.setText(floatMenuResData.getData().getUserId());
 
                 updateUserInfoView(context, floatConfigData);
             }

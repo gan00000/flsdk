@@ -49,7 +49,7 @@ import com.mw.sdk.bean.res.ActDataModel;
 import com.mw.sdk.bean.res.BasePayBean;
 import com.mw.sdk.bean.res.ConfigBean;
 import com.mw.sdk.bean.res.FloatConfigData;
-import com.mw.sdk.bean.res.FloatSwitchRes;
+import com.mw.sdk.bean.res.FloatMenuResData;
 import com.mw.sdk.bean.res.MenuData;
 import com.mw.sdk.bean.res.ToggleResult;
 import com.mw.sdk.callback.FloatButtionClickCallback;
@@ -1373,7 +1373,7 @@ public class BaseSdkImpl implements IMWSDK {
     public void showFloatView(Activity activity, FloatCallback floatCallback) {
 
         String floatCfgData = SdkUtil.getFloatCfgData(activity);
-        String menuResData = SdkUtil.getFloatSwitchData(activity);
+        String menuResData = SdkUtil.getFloatMenuResData(activity);
 
         if (SStringUtil.isEmpty(floatCfgData) || SStringUtil.isEmpty(menuResData)){
             PL.i("floatCfgData=" + floatCfgData + "  menuResData=" + menuResData);
@@ -1387,9 +1387,9 @@ public class BaseSdkImpl implements IMWSDK {
             PL.i("float not open");
             return;
         }
-        FloatSwitchRes xFloatSwitchRes = new Gson().fromJson(menuResData, FloatSwitchRes.class);
-        if (xFloatSwitchRes == null || xFloatSwitchRes.getData() == null){
-            PL.i("FloatSwitchRes null error");
+        FloatMenuResData xFloatMenuResData = new Gson().fromJson(menuResData, FloatMenuResData.class);
+        if (xFloatMenuResData == null || xFloatMenuResData.getData() == null){
+            PL.i("FloatMenuResData null error");
             return;
         }
 

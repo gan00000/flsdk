@@ -1028,11 +1028,11 @@ public class SdkUtil {
         return SPUtil.getSimpleString(context, SDK_SP_FILE, SDK_FLOAT_CFG_DATA);
     }
 
-    private static final String SDK_FLOAT_SWITCH_DATA = "SDK_FLOAT_SWITCH_DATA";//保存sdk配置 cdn文件
-    public static void saveFloatSwitchData(Context context, String cfg){
-        SPUtil.saveSimpleInfo(context, SDK_SP_FILE, SDK_FLOAT_SWITCH_DATA,cfg);
+    private static final String SDK_FLOAT_MENU_RES_DATA = "SDK_FLOAT_MENU_RES_DATA";//保存sdk配置 cdn文件
+    public static void saveFloatMenuResData(Context context, String cfg){
+        SPUtil.saveSimpleInfo(context, SDK_SP_FILE, SDK_FLOAT_MENU_RES_DATA,cfg);
     }
-    public static String getFloatSwitchData(Context context){
-        return SPUtil.getSimpleString(context, SDK_SP_FILE, SDK_FLOAT_SWITCH_DATA);
+    public static String getFloatMenuResData(Context context){
+        return SPUtil.getSimpleString(context, SDK_SP_FILE, SDK_FLOAT_MENU_RES_DATA);
     }
 }

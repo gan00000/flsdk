@@ -18,7 +18,7 @@ import com.mw.sdk.R
 import com.mw.sdk.bean.SGameBaseRequestBean
 import com.mw.sdk.bean.res.ActDataModel
 import com.mw.sdk.bean.res.FloatConfigData
-import com.mw.sdk.bean.res.FloatSwitchRes
+import com.mw.sdk.bean.res.FloatMenuResData
 import com.mw.sdk.bean.res.MenuData
 import com.mw.sdk.callback.FloatCallback
 import com.mw.sdk.constant.FloatMenuType
@@ -46,7 +46,7 @@ class FloatContentView : SLoginBaseRelativeLayout {
     private lateinit var mFloatPersionCenterView: FloatPersionCenterView
 
     private lateinit var floatConfigData: FloatConfigData
-    private lateinit var floatSwitchRes: FloatSwitchRes
+    private lateinit var floatMenuResData: FloatMenuResData
 
     var xFloatCallback:FloatCallback? = null
 
@@ -61,7 +61,7 @@ class FloatContentView : SLoginBaseRelativeLayout {
         menuDatas = arrayListOf()
 
         val floatCfgData = SdkUtil.getFloatCfgData(context)
-        val menuResData = SdkUtil.getFloatSwitchData(context)
+        val menuResData = SdkUtil.getFloatMenuResData(context)
 
         if (SStringUtil.isEmpty(floatCfgData) || SStringUtil.isEmpty(menuResData)){
             return
@@ -72,11 +72,11 @@ class FloatContentView : SLoginBaseRelativeLayout {
         }
 
         if (SStringUtil.isNotEmpty(menuResData)) {
-            floatSwitchRes = Gson().fromJson(menuResData, FloatSwitchRes::class.java)
+            floatMenuResData = Gson().fromJson(menuResData, FloatMenuResData::class.java)
         }
 
         for (cfgMenu in floatConfigData.menuList){//以配置文件对象字段为准
-            for (resMenu in floatSwitchRes.data.menuList){
+            for (resMenu in floatMenuResData.data.menuList){
                 if (resMenu.code.equals(cfgMenu.code) && resMenu.isDisplay){
                     menuDatas?.add(cfgMenu)
                     break
