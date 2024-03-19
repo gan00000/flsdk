@@ -40,11 +40,12 @@
     }
     dependencies {
         
-        classpath 'com.android.tools.build:gradle:8.1.2'
+        classpath 'com.android.tools.build:gradle:8.2.0'
         // google-services plugin
         classpath 'com.google.gms:google-services:4.4.0'
         // Add the Crashlytics Gradle plugin.
         classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.9'
+        
     	}
 	}
 
@@ -70,7 +71,7 @@
 
 	android {
 	
-	    compileSdkVersion 33
+	    compileSdk 34
 	
 		//java 11
 	    compileOptions {
@@ -80,7 +81,7 @@
 	
 	    defaultConfig {
 	        minSdkVersion 21
-	        targetSdkVersion 33
+	        targetSdkVersion 34
 	        multiDexEnabled true
 	    }
 	
@@ -93,7 +94,7 @@
             signingConfig signingConfigs.release_kr  //签名sdk提供
             applicationId "com.xxx.xxx"  //包名sdk提供	
             minSdkVersion 21
-            targetSdkVersion 33
+            targetSdkVersion 34
             versionCode 1
             versionName "1.0."
             flavorDimensions "1"
@@ -145,18 +146,18 @@
 		//MWSDK-release为sdk内提供的aar库
 	    implementation(name:'MWSDK-release', ext:'aar')
 	    
-		    //基础库
+			 //基础库
 	    api 'androidx.legacy:legacy-support-v4:1.0.0'
-	    api 'androidx.appcompat:appcompat:1.5.1'
-	    api 'androidx.recyclerview:recyclerview:1.2.1'
+	    api 'androidx.appcompat:appcompat:1.6.1'
+	    api 'androidx.recyclerview:recyclerview:1.3.2'
 	    api 'androidx.constraintlayout:constraintlayout:2.1.4'
-	    api 'androidx.browser:browser:1.4.0'
+	    api 'androidx.browser:browser:1.7.0'
 	    implementation 'androidx.viewpager2:viewpager2:1.0.0'
 	
 	    //mutildex
 	    implementation 'androidx.multidex:multidex:2.0.1'
 	    //google pay
-	    implementation "com.android.billingclient:billing:5.1.0"
+	    implementation "com.android.billingclient:billing:6.1.0"
 	    //google评分
 	    implementation 'com.google.android.play:review:2.0.1'
 	
@@ -164,13 +165,12 @@
 	    implementation 'com.zhy:base-rvadapter:3.0.3'
 	
 	    //Google库
-	    implementation 'com.google.android.gms:play-services-auth:20.4.0'
-	    implementation 'com.google.android.gms:play-services-base:18.1.0'
+	    implementation 'com.google.android.gms:play-services-auth:20.7.0'
+	    implementation 'com.google.android.gms:play-services-base:18.2.0'
 	    implementation 'com.google.android.gms:play-services-games:23.1.0'
 	
 	    //firebase
-	    implementation platform('com.google.firebase:firebase-bom:30.1.0')
-	    implementation 'com.google.firebase:firebase-core'
+	    implementation platform('com.google.firebase:firebase-bom:32.3.1')
 	    implementation 'com.google.firebase:firebase-messaging'
 	    implementation 'com.google.firebase:firebase-auth'
 	    // Recommended: Add the Firebase SDK for Google Analytics.
@@ -180,22 +180,20 @@
 	
 	    //Facebook库
 	    // Facebook Core only (Analytics)
-	    implementation 'com.facebook.android:facebook-core:15.2.0'  //latest.release
+	    implementation 'com.facebook.android:facebook-core:16.0.0'  //latest.release
 	    // Facebook Login only
-	    implementation 'com.facebook.android:facebook-login:15.2.0'
+	    implementation 'com.facebook.android:facebook-login:16.0.0'
 	    // Facebook Share only
-	    implementation 'com.facebook.android:facebook-share:15.2.0'
+	    implementation 'com.facebook.android:facebook-share:16.0.0'
 	    // Facebook Messenger only
-	    implementation 'com.facebook.android:facebook-messenger:15.2.0'
+	    implementation 'com.facebook.android:facebook-messenger:16.0.0'
 	    //line
 	    implementation 'com.linecorp:linesdk:5.0.1'
 	
 	    //af
 	    implementation 'com.appsflyer:af-android-sdk:6.9.0'
 	    implementation 'com.android.installreferrer:installreferrer:2.2'
-	
-	    implementation 'com.adjust.sdk:adjust-android:4.33.5'
-	
+		
 	    implementation 'com.google.code.gson:gson:2.8.6'
 	    implementation 'io.reactivex.rxjava3:rxandroid:3.0.2'
 	    implementation 'io.reactivex.rxjava3:rxjava:3.1.5'
@@ -313,7 +311,7 @@
  	
 * <h3 id="5">设置角色信息</h3> 
 	
-	在游戏获得角色信息的时候调用，每次登陆，切换账号等角色变化时调用
+	在进入游戏主界面获得角色信息的时候调用，每次登陆，切换账号等角色id变化时调用
 
  	```
  
