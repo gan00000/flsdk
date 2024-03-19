@@ -11,4 +11,8 @@ public abstract class BaseSdkVersion {
     public IPay newOneStorePay(){
         return null;
     }
+
+    public IPay newSamsungPay() {
+        return null;
+    }
 }
