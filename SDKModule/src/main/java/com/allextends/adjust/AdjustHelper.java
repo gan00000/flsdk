@@ -14,10 +14,14 @@ import com.adjust.sdk.AdjustConfig;
 import com.adjust.sdk.AdjustEvent;
 import com.adjust.sdk.LogLevel;
 import com.appsflyer.AFInAppEventParameterName;
+import com.ldy.base.cfg.ResConfig;
+import com.ldy.base.utils.SdkUtil;
 import com.ldy.sdk.BuildConfig;
 import com.ldy.sdk.R;
+import com.lhh.ptrrv.library.Res;
 import com.mybase.utils.FileUtil;
 import com.mybase.utils.PL;
+import com.mybase.utils.ResUtil;
 import com.mybase.utils.SStringUtil;
 
 import org.json.JSONArray;
@@ -165,7 +169,9 @@ public class AdjustHelper {
             }
             if (SStringUtil.isEmpty(eventNameToken)){
 
-                String adjustInfo = FileUtil.readAssetsTxtFile(context, "dysdk/adjustEvent");
+                String gameCode = ResConfig.getGameCode(context).toLowerCase();
+
+                String adjustInfo = FileUtil.readAssetsTxtFile(context, gameCode + "/adj_" + gameCode);
                 if (SStringUtil.isEmpty(adjustInfo)){
                     return eventNameToken;
                 }
