@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:id="@+id/mId_symose_cystid"
+            android:background="@color/mcolor_mulgthree_spermfy">
+
+            <ImageView
+                android:id="@+id/mId_carcin_variousature"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:src="@drawable/sady_citizenform95108" />
+
+            <TextView
+                android:id="@+id/mId_exterain_nameial"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_toEndOf="@id/mId_carcin_variousature"
+                android:layout_toStartOf="@id/mId_odorlike_fandit"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:maxLines="1" />
+
+            <ImageView
+                android:id="@+id/mId_odorlike_fandit"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:src="@drawable/sady_turnmost40531" />
+
+        </RelativeLayout>
+
+        <include layout="@layout/sady_plainics5259" />
+
+    </LinearLayout>
+
+</RelativeLayout>

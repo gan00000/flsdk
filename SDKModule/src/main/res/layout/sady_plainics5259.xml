@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white">
+
+        <com.ldy.base.widget.SWebView
+            android:id="@+id/mId_tradeon_butacle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></com.ldy.base.widget.SWebView>
+
+        <ProgressBar
+            android:id="@+id/mId_tentage_design"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@drawable/sady_dendrice1710"
+            android:indeterminate="false"
+            android:indeterminateOnly="false"
+            android:progressDrawable="@drawable/sady_dendrice1710"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

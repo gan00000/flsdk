@@ -16,21 +16,21 @@ public class SdkVersionUtil {
 
 
     public static void setAccountWithIcon(AccountModel accountModel, ImageView imageView, EditText editText){
-        int imageResId = R.mipmap.okokok_dodec;
+        int imageResId = R.mipmap.sady_claustrorium37514;
         String showName = accountModel.getUserId();//accountModel.getThirdAccount();
 //        if (SStringUtil.isEmpty(showName)){
 //            showName = accountModel.getUserId();
 //        }
         if (SLoginType.LOGIN_TYPE_FB.equals(accountModel.getLoginType())){
-            imageResId = R.mipmap.okokok_lotose;
+            imageResId = R.mipmap.sady_corticoit62999;
         }else  if (SLoginType.LOGIN_TYPE_GOOGLE.equals(accountModel.getLoginType())){
-            imageResId = R.mipmap.okokok_occureer;
+            imageResId = R.mipmap.sady_phas46359;
         }else  if (SLoginType.LOGIN_TYPE_GUEST.equals(accountModel.getLoginType())){
-            imageResId = R.mipmap.okokok_veteracity;
+            imageResId = R.mipmap.sady_lowade93455;
         }else if (SLoginType.LOGIN_TYPE_LINE.equals(accountModel.getLoginType())){
-            imageResId = R.mipmap.okokok_piece;
+            imageResId = R.mipmap.sady_panting23517;
         }else if (SLoginType.LOGIN_TYPE_MG.equals(accountModel.getLoginType())){
-            imageResId = R.mipmap.okokok_dodec;
+            imageResId = R.mipmap.sady_claustrorium37514;
             showName = accountModel.getAccount();
         }
 

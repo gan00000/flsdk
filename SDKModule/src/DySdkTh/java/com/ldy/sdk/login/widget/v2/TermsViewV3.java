@@ -59,7 +59,7 @@ public class TermsViewV3 extends SLoginBaseRelativeLayout {
 
     public View onCreateView(LayoutInflater inflater) {
 
-        contentView = inflater.inflate(R.layout.okokok_nearair, null);
+        contentView = inflater.inflate(R.layout.sady_exper56814, null);
 
         okButton = contentView.findViewById(R.id.mId_rustabovehood_occurarian);
         closeButton = contentView.findViewById(R.id.mId_relateacy_resourcehood);

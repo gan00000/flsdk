@@ -77,7 +77,7 @@ public class SWebViewLayout extends SBaseRelativeLayout {
     private void initView(){
 
 //        int closeeRadius = getCloseRadius();
-        View contentView = activity.getLayoutInflater().inflate(R.layout.okokok_sucase,null);
+        View contentView = activity.getLayoutInflater().inflate(R.layout.sady_gutturably6305,null);
         RelativeLayout.LayoutParams webviewLp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
 //        webviewLp.setMargins(closeeRadius,closeeRadius,closeeRadius,closeeRadius);
         this.addView(contentView,webviewLp);
@@ -86,8 +86,8 @@ public class SWebViewLayout extends SBaseRelativeLayout {
 //        RelativeLayout.LayoutParams colseLp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 //        colseLp.addRule(ALIGN_PARENT_RIGHT);
 //        this.addView(closeImageView,colseLp);
-////        closeImageView.setBackgroundResource(R.drawable.okokok_hedraad);
-//        closeImageView.setImageDrawable(getResources().getDrawable(R.drawable.okokok_hedraad));
+////        closeImageView.setBackgroundResource(R.drawable.sady_thousand5305);
+//        closeImageView.setImageDrawable(getResources().getDrawable(R.drawable.sady_thousand5305));
 
         closeImageView = contentView.findViewById(R.id.mId_odorlike_fandit);
         titleTv = contentView.findViewById(R.id.mId_exterain_nameial);
@@ -114,7 +114,7 @@ public class SWebViewLayout extends SBaseRelativeLayout {
     }
 
     private int getCloseRadius(){
-        return activity.getResources().getDrawable(R.drawable.okokok_hedraad).getIntrinsicWidth()/3;
+        return activity.getResources().getDrawable(R.drawable.sady_thousand5305).getIntrinsicWidth()/3;
     }
 
     private void initTitle(String webTitle) {

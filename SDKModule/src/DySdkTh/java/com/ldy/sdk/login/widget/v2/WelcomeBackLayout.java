@@ -77,7 +77,7 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
 
 
     private View onCreateView(LayoutInflater inflater) {
-        contentView = inflater.inflate(R.layout.okokok_nor, null);
+        contentView = inflater.inflate(R.layout.sady_riskatic73105, null);
 
         backView = contentView.findViewById(R.id.mId_whilekin_domeous);
 
@@ -211,17 +211,17 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
                 layout_need_update_account.setVisibility(View.GONE);
 
                 tv_account_update_tips.setText(R.string.mstr_policyise_dekawallmost);
-                iv_update_account_icon.setImageResource(R.mipmap.okokok_arthrdom);
+                iv_update_account_icon.setImageResource(R.mipmap.sady_anthraous55532);
 
                 if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_MG, currentAccountModel.getLoginType())){
                     btn_change_pwd.setEnabled(true);
-                    btn_change_pwd.setBackgroundResource(R.drawable.okokok_matterture);
+                    btn_change_pwd.setBackgroundResource(R.drawable.sady_recognize5993);
                     btn_change_pwd.setTextColor(getContext().getResources().getColor(R.color.mcolor_tag_tetrice));
                     btn_swith_account3.setVisibility(View.GONE);
                     layout_has_update_account.setVisibility(View.VISIBLE);
                 }else{
                     btn_change_pwd.setEnabled(false);
-                    btn_change_pwd.setBackgroundResource(R.drawable.okokok_returnty);
+                    btn_change_pwd.setBackgroundResource(R.drawable.sady_sarcfold18396);
                     btn_change_pwd.setTextColor(getContext().getResources().getColor(R.color.mcolor_fodgeneral_foreigneur));
                     btn_swith_account3.setVisibility(View.VISIBLE);
                     layout_has_update_account.setVisibility(View.GONE);
@@ -233,7 +233,7 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
                 layout_has_update_account.setVisibility(View.GONE);
                 btn_swith_account3.setVisibility(View.GONE);
                 tv_account_update_tips.setText(R.string.mstr_buyesque_nowoon);
-                iv_update_account_icon.setImageResource(R.mipmap.okokok_prot);
+                iv_update_account_icon.setImageResource(R.mipmap.sady_amphion14414);
             }
         }
     }
@@ -307,7 +307,7 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
     private void showDeleteDialog() {
         if (deleteDialog == null){
             LayoutInflater inflater = LayoutInflater.from(getContext());
-            View contentView = inflater.inflate(R.layout.okokok_wouldmost, null);
+            View contentView = inflater.inflate(R.layout.sady_tenta79398, null);
             Button cancelBtn = contentView.findViewById(R.id.mId_often_person);
             cancelBtn.setOnClickListener(new OnClickListener() {
                 @Override

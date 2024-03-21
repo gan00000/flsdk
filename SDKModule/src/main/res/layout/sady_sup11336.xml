@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mcolor_supin_situationar"
+    >
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
+
+        <TextView
+            android:id="@+id/mId_followance_oncoose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:lines="1"
+            android:text="@string/mstr_astromillionan_professionality"
+            android:textColor="@color/mcolor_tag_tetrice"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ProgressBar
+                android:id="@+id/mId_analysiso_wifetic"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:indeterminateDrawable="@drawable/sady_pubert88329" />
+
+            <TextView
+                android:id="@+id/mId_becomeen_archeonextoon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:text="@string/mstr_ground_boardid"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/mcolor_tag_tetrice" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/mId_nephrfic_chelonfy"
+            android:layout_centerHorizontal="true"
+            android:layout_width="266dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/sady_pariose95374"
+            android:gravity="center"
+            android:text="@string/mstr_north_wearot"
+            android:textColor="@android:color/white"
+            android:textSize="17sp" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>

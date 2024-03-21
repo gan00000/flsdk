@@ -63,7 +63,7 @@ public class NoticeView extends SLoginBaseRelativeLayout {
 
     public View onCreateView(LayoutInflater inflater) {
 
-        contentView = inflater.inflate(R.layout.okokok_acetoatory, null);
+        contentView = inflater.inflate(R.layout.sady_pur16548, null);
 
         closeButton = contentView.findViewById(R.id.mId_audance_fundise);
 

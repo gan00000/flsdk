@@ -47,7 +47,7 @@
 //
 //    public View onCreateView(LayoutInflater inflater) {
 //
-//        contentView = inflater.inflate(R.layout.okokok_rhynchlet, null);
+//        contentView = inflater.inflate(R.layout.sady_clysmistic80145, null);
 //
 //        guestLoginView = contentView.findViewById(R.id.mId_perilikeary_docuful);
 //        layout_go_account_login = contentView.findViewById(R.id.mId_hygrette_scendistic);

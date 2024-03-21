@@ -44,7 +44,7 @@ public class DyWebPayActivity extends DyBaseWebActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.okokok_stochot);
+        //setContentView(R.layout.sady_such65758);
 
         if (getIntent() != null) {
 //            webUrl = getIntent().getStringExtra(PLAT_WEBVIEW_URL);

@@ -48,7 +48,7 @@ public class AutoLoginLayoutV2 extends SLoginBaseRelativeLayout implements View.
 
 
     private View onCreateView(LayoutInflater inflater) {
-        contentView = inflater.inflate(R.layout.okokok_hitth, null);
+        contentView = inflater.inflate(R.layout.sady_sup11336, null);
 
         autoLoginSwitch = contentView.findViewById(R.id.mId_nephrfic_chelonfy);
         autoLoginTipsTV = contentView.findViewById(R.id.mId_followance_oncoose);

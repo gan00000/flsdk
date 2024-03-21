@@ -54,7 +54,7 @@
 //    }
 //
 //    private View onCreateView(LayoutInflater inflater) {
-//        contentView = inflater.inflate(R.layout.okokok_proctature, null);
+//        contentView = inflater.inflate(R.layout.sady_phys70048, null);
 //
 //        backView = contentView.findViewById(R.id.mId_whilekin_domeous);
 //        TextView titleTextView = contentView.findViewById(R.id.mId_vovery_especiallyage);

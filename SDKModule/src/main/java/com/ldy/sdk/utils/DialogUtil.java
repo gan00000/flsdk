@@ -24,7 +24,7 @@ public class DialogUtil {
      */
     public static Dialog createLoadingDialog(Context context, String msg) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View v = inflater.inflate(R.layout.okokok_creatory, null);
+        View v = inflater.inflate(R.layout.sady_roborfaction11881, null);
         TextView msgTv = (TextView) v.findViewById(R.id.mId_becomeen_archeonextoon);
         msgTv.setText(msg);
         Dialog loadingDialog = new Dialog(context, R.style.Sdk_Theme_AppCompat_Dialog_NoTitle);

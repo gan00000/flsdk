@@ -71,7 +71,7 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
 
     public View onCreateView(LayoutInflater inflater) {
 
-        contentView = inflater.inflate(R.layout.okokok_again, null);
+        contentView = inflater.inflate(R.layout.sady_cinctfailence8956, null);
         iv_login_reg_back = contentView.findViewById(R.id.mId_remainice_stageing);
         loginTabView = contentView.findViewById(R.id.mId_manymost_joc);
         regTabView = contentView.findViewById(R.id.mId_takearian_sugmritious);
@@ -86,7 +86,7 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
         regTabView.setOnClickListener(this);
         iv_login_reg_back.setOnClickListener(this);
 
-        login_out_animation = AnimationUtils.loadAnimation(getContext(),R.anim.okokok_gramform);
+        login_out_animation = AnimationUtils.loadAnimation(getContext(),R.anim.sady_startment47741);
         login_out_animation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -104,7 +104,7 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
             }
         });
 
-        login_enter_animation = AnimationUtils.loadAnimation(getContext(),R.anim.okokok_carcinable);
+        login_enter_animation = AnimationUtils.loadAnimation(getContext(),R.anim.sady_subjectivity25991);
         login_enter_animation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -122,7 +122,7 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
             }
         });
 
-        reg_enter_animation = AnimationUtils.loadAnimation(getContext(),R.anim.okokok_pensivity);
+        reg_enter_animation = AnimationUtils.loadAnimation(getContext(),R.anim.sady_phrenard73798);
         reg_enter_animation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -140,7 +140,7 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
             }
         });
 
-        reg_out_animation = AnimationUtils.loadAnimation(getContext(),R.anim.okokok_pass);
+        reg_out_animation = AnimationUtils.loadAnimation(getContext(),R.anim.sady_autols46692);
         reg_out_animation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {

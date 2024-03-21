@@ -2,9 +2,9 @@
 
     <!--控制dialog进出动画-->
     <style name="dialog_animation" parent="android:Animation.Dialog">
-        <item name="android:windowEnterAnimation">@anim/okokok_prinator</item>
+        <item name="android:windowEnterAnimation">@anim/sady_adipress33269</item>
         <!-- 进入时的动画 -->
-        <item name="android:windowExitAnimation">@anim/okokok_philspaceive</item>
+        <item name="android:windowExitAnimation">@anim/sady_exon327</item>
         <!-- 退出时的动画 -->
     </style>
 

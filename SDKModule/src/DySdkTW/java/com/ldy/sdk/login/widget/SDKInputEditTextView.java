@@ -105,7 +105,7 @@ public class SDKInputEditTextView extends RelativeLayout {
     private void initInputView(){
 
         inflater = LayoutInflater.from(getContext());
-        contentView =  inflater.inflate(R.layout.okokok_haloen, null);
+        contentView =  inflater.inflate(R.layout.sady_tricproduceia4116, null);
         if (contentView != null) {
 
             LayoutParams l = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -159,7 +159,7 @@ public class SDKInputEditTextView extends RelativeLayout {
         switch (inputType){
 
             case SDKInputType_Account:
-                iconId = R.mipmap.okokok_dodec;
+                iconId = R.mipmap.sady_claustrorium37514;
                 labName = getResources().getString(R.string.mstr_soonature_vagwatchan);
                 hint = getResources().getString(R.string.mstr_thalamdetail_experieven);
                 eyeImageViewLayout.setVisibility(View.GONE);
@@ -167,7 +167,7 @@ public class SDKInputEditTextView extends RelativeLayout {
                 break;
 
             case SDKInputType_Password:
-                iconId = R.mipmap.okokok_nausing;
+                iconId = R.mipmap.sady_center68067;
                 labName = getResources().getString(R.string.mstr_population_ooally);
                 hint = getResources().getString(R.string.mstr_veracieur_thalamarium);
                 eyeImageViewLayout.setVisibility(View.VISIBLE);
@@ -176,7 +176,7 @@ public class SDKInputEditTextView extends RelativeLayout {
                 break;
 
             case SDKInputType_Password_Again:
-                iconId = R.mipmap.okokok_nausing;
+                iconId = R.mipmap.sady_center68067;
                 labName = getResources().getString(R.string.mstr_population_ooally);
                 hint = getResources().getString(R.string.mstr_squarrositious_dead);
                 eyeImageViewLayout.setVisibility(View.VISIBLE);
@@ -185,7 +185,7 @@ public class SDKInputEditTextView extends RelativeLayout {
                 break;
 
             case SDKInputType_Old_Password:
-                iconId = R.mipmap.okokok_nausing;
+                iconId = R.mipmap.sady_center68067;
                 labName = getResources().getString(R.string.mstr_simibest_volatperform);
                 hint = getResources().getString(R.string.mstr_movieatic_flyite);
                 eyeImageViewLayout.setVisibility(View.VISIBLE);
@@ -193,7 +193,7 @@ public class SDKInputEditTextView extends RelativeLayout {
                 adjustTvTextSize();
                 break;
             case SDKInputType_New_Password:
-                iconId = R.mipmap.okokok_nausing;
+                iconId = R.mipmap.sady_center68067;
                 labName = getResources().getString(R.string.mstr_defensead_halflike);
                 hint = getResources().getString(R.string.mstr_damnery_song);
                 eyeImageViewLayout.setVisibility(View.VISIBLE);
@@ -202,7 +202,7 @@ public class SDKInputEditTextView extends RelativeLayout {
                 break;
 
             case SDKInputType_Vf_Code:
-                iconId = R.mipmap.okokok_dodec;
+                iconId = R.mipmap.sady_claustrorium37514;
                 editTextInputType = InputType.TYPE_CLASS_NUMBER;
                 eyeImageViewLayout.setVisibility(View.GONE);
                 iconImageView.setVisibility(View.GONE);
@@ -231,7 +231,7 @@ public class SDKInputEditTextView extends RelativeLayout {
             inputEditText.setTypeface(Typeface.DEFAULT);
             inputEditText.setEnabled(true);
             inputEditText.setTextColor(getContext().getResources().getColor(R.color.mcolor_tag_tetrice));
-            iconImageView.setImageResource(R.mipmap.okokok_nausing);
+            iconImageView.setImageResource(R.mipmap.sady_center68067);
             eyeImageView.setVisibility(VISIBLE);
 
         }else{
@@ -242,7 +242,7 @@ public class SDKInputEditTextView extends RelativeLayout {
             inputEditText.setTypeface(Typeface.DEFAULT);
             inputEditText.setEnabled(false);
             inputEditText.setTextColor(getContext().getResources().getColor(R.color.mcolor_bromoan_undecimeer));
-            iconImageView.setImageResource(R.mipmap.okokok_wishacy);
+            iconImageView.setImageResource(R.mipmap.sady_noistic16108);
 
             eyeImageView.setVisibility(GONE);
         }

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_centerInParent="true"
+        >
+
+        <com.ldy.sdk.login.widget.SDKInputEditTextView
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:id="@+id/mId_angukidit_shortfier"
+            />
+
+        <com.ldy.sdk.login.widget.SDKInputEditTextView
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            android:id="@+id/mId_findose_soldieral"
+            />
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="15dp"
+            android:gravity="center_vertical"
+            android:id="@+id/mId_ll_vfcode"
+            android:visibility="gone"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/mId_catchie_voladropess"
+                android:layout_width="180dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/sady_article81377"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:gravity="center"
+                android:hint="@string/mstr_nausing_extraet"
+                android:inputType="number"
+                android:maxLines="1"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:textColor="@color/mcolor_tag_tetrice"
+                android:textColorHint="@color/mcolor_filmaneous_lotion"
+                android:textSize="14sp"
+                android:imeOptions="flagNoExtractUi"/>
+
+
+            <Button
+                android:id="@+id/mId_federalaneous_receiveality"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/sady_verion18181"
+                android:gravity="center"
+                android:text="@string/mstr_appear_agog"
+                android:textColor="@color/mcolor_phaneraffectative_rustfaction"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="320dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="6dp"
+            android:visibility="gone"
+            android:orientation="horizontal">
+
+            <com.ldy.sdk.login.widget.SDKInputEditTextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:id="@+id/mId_mesocollectiontic_chrysful"
+                android:layout_marginRight="10dp"
+                />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/sady_votelike96491"
+                android:gravity="center"
+                android:id="@+id/mId_durlike_coronwhetherize"
+                android:text="@string/mstr_appear_agog"
+                android:textColor="@color/mcolor_archa_plumbia"
+                android:textSize="@dimen/mdimen_noteism_millaneous" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_marginTop="8dp"
+            >
+
+            <TextView
+                android:id="@+id/mId_ranviewfic_tribist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mstr_cratcy_teleomost"
+                android:textColor="@color/mcolor_ethopaintingist_loseture"
+                android:textSize="10sp" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/mId_plasmuchia_felicade"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="34dp"
+            android:background="@drawable/sady_seatory83117"
+            android:gravity="center"
+            android:text="@string/mstr_cingor_philo"
+            android:textColor="@android:color/white"
+            android:textSize="17sp"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

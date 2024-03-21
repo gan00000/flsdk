@@ -55,7 +55,7 @@
 //    }
 //
 //    private View onCreateView(LayoutInflater inflater) {
-//        contentView = inflater.inflate(R.layout.okokok_flexior, null);
+//        contentView = inflater.inflate(R.layout.sady_once15846, null);
 //
 //        accountSdkInputEditTextView = contentView.findViewById(R.id.mId_angukidit_shortfier);
 //        pwdSdkInputEditTextView = contentView.findViewById(R.id.mId_findose_soldieral);

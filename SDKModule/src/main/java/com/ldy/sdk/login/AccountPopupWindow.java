@@ -63,7 +63,7 @@
 //        this.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
 //
 //        LayoutInflater inflater = LayoutInflater.from(context);
-//        contentView = inflater.inflate(R.layout.okokok_suiacy, null);
+//        contentView = inflater.inflate(R.layout.sady_sternseeible59596, null);
 //        setContentView(contentView);
 //
 //        this.setOutsideTouchable(true);
@@ -95,7 +95,7 @@
 //        }
 //
 //        historyAccountRv.setLayoutManager(new LinearLayoutManager(getContext()));
-//        historyAccountCommonAdapter = new CommonAdapter<AccountModel>(this.getContext(), R.layout.okokok_pel, accountModels)
+//        historyAccountCommonAdapter = new CommonAdapter<AccountModel>(this.getContext(), R.layout.sady_teamatic7919, accountModels)
 //        {
 //
 //            @Override

@@ -54,7 +54,7 @@ public class AccountFindPwdLayoutV2 extends SLoginBaseRelativeLayout implements 
 
 
     private View onCreateView(LayoutInflater inflater) {
-        contentView = inflater.inflate(R.layout.okokok_sourceize, null);
+        contentView = inflater.inflate(R.layout.sady_pontness67210, null);
 
         backView = contentView.findViewById(R.id.mId_whilekin_domeous);
 

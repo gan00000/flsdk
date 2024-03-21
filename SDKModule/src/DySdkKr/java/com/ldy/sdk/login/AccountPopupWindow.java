@@ -64,7 +64,7 @@ public class AccountPopupWindow extends PopupWindow {
         this.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
 
         LayoutInflater inflater = LayoutInflater.from(context);
-        contentView = inflater.inflate(R.layout.okokok_suiacy, null);
+        contentView = inflater.inflate(R.layout.sady_sternseeible59596, null);
         setContentView(contentView);
 
         this.setOutsideTouchable(true);
@@ -99,7 +99,7 @@ public class AccountPopupWindow extends PopupWindow {
 
         historyAccountCommonAdapter = new HisAccountAdapter();
 
-       /* historyAccountCommonAdapter = new CommonAdapter<AccountModel>(this.getContext(), R.layout.okokok_pel, accountModels)
+       /* historyAccountCommonAdapter = new CommonAdapter<AccountModel>(this.getContext(), R.layout.sady_teamatic7919, accountModels)
         {
 
             @Override
@@ -137,21 +137,21 @@ public class AccountPopupWindow extends PopupWindow {
                     }
                 });
 
-                int imageResId = R.mipmap.okokok_rogitious;
+                int imageResId = R.mipmap.sady_recognizeably39254;
                 String showName = accountModel.getUserId();//accountModel.getThirdAccount();
 //                if (SStringUtil.isEmpty(showName)){
 //                    showName = accountModel.getUserId();
 //                }
                 if (SLoginType.LOGIN_TYPE_FB.equals(accountModel.getLoginType())){
-                    imageResId = R.mipmap.okokok_lotose;
+                    imageResId = R.mipmap.sady_corticoit62999;
                 }else  if (SLoginType.LOGIN_TYPE_GOOGLE.equals(accountModel.getLoginType())){
-                    imageResId = R.mipmap.okokok_occureer;
+                    imageResId = R.mipmap.sady_phas46359;
                 }else  if (SLoginType.LOGIN_TYPE_GUEST.equals(accountModel.getLoginType())){
-                    imageResId = R.mipmap.okokok_veteracity;
+                    imageResId = R.mipmap.sady_lowade93455;
                 }else if (SLoginType.LOGIN_TYPE_LINE.equals(accountModel.getLoginType())){
-                    imageResId = R.mipmap.okokok_piece;
+                    imageResId = R.mipmap.sady_panting23517;
                 }else if (SLoginType.LOGIN_TYPE_MG.equals(accountModel.getLoginType())){
-                    imageResId = R.mipmap.okokok_rogitious;
+                    imageResId = R.mipmap.sady_recognizeably39254;
                     showName = accountModel.getAccount();
                 }
                 holder.setImageResource(R.id.mId_emety_wall, imageResId);
@@ -209,7 +209,7 @@ public class AccountPopupWindow extends PopupWindow {
         @Override
         public HisAccountViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
         {
-            HisAccountViewHolder holder = new HisAccountViewHolder(LayoutInflater.from(context).inflate(R.layout.okokok_pel, parent,false));
+            HisAccountViewHolder holder = new HisAccountViewHolder(LayoutInflater.from(context).inflate(R.layout.sady_teamatic7919, parent,false));
             return holder;
         }
 
@@ -241,21 +241,21 @@ public class AccountPopupWindow extends PopupWindow {
             });
 
 
-            int imageResId = R.mipmap.okokok_rogitious;
+            int imageResId = R.mipmap.sady_recognizeably39254;
             String showName = accountModel.getUserId();//accountModel.getThirdAccount();
 //                if (SStringUtil.isEmpty(showName)){
 //                    showName = accountModel.getUserId();
 //                }
             if (SLoginType.LOGIN_TYPE_FB.equals(accountModel.getLoginType())){
-                imageResId = R.mipmap.okokok_lotose;
+                imageResId = R.mipmap.sady_corticoit62999;
             }else  if (SLoginType.LOGIN_TYPE_GOOGLE.equals(accountModel.getLoginType())){
-                imageResId = R.mipmap.okokok_occureer;
+                imageResId = R.mipmap.sady_phas46359;
             }else  if (SLoginType.LOGIN_TYPE_GUEST.equals(accountModel.getLoginType())){
-                imageResId = R.mipmap.okokok_veteracity;
+                imageResId = R.mipmap.sady_lowade93455;
             }else if (SLoginType.LOGIN_TYPE_LINE.equals(accountModel.getLoginType())){
-                imageResId = R.mipmap.okokok_piece;
+                imageResId = R.mipmap.sady_panting23517;
             }else if (SLoginType.LOGIN_TYPE_MG.equals(accountModel.getLoginType())){
-                imageResId = R.mipmap.okokok_rogitious;
+                imageResId = R.mipmap.sady_recognizeably39254;
                 showName = accountModel.getAccount();
             }
             holder.iconImageView.setImageResource(imageResId);

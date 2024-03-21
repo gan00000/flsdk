@@ -89,7 +89,7 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
     //new实例的时候调用
     private View onCreateView(LayoutInflater inflater) {
 
-        contentView = inflater.inflate(R.layout.okokok_forefewious, null);
+        contentView = inflater.inflate(R.layout.sady_past64449, null);
 
         bind_view = contentView.findViewById(R.id.mId_satitor_calidive);
         has_bind_view = contentView.findViewById(R.id.mId_sphenitious_courtety);
@@ -102,11 +102,11 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
         accountSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Account);
         pwdSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Password);
 
-        accountSdkInputEditTextView.getContentView().setBackgroundResource(R.drawable.okokok_lotic);
-        pwdSdkInputEditTextView.getContentView().setBackgroundResource(R.drawable.okokok_lotic);
+        accountSdkInputEditTextView.getContentView().setBackgroundResource(R.drawable.sady_article81377);
+        pwdSdkInputEditTextView.getContentView().setBackgroundResource(R.drawable.sady_article81377);
 
-        accountSdkInputEditTextView.getIconImageView().setImageResource(R.mipmap.okokok_dodec);
-        pwdSdkInputEditTextView.getIconImageView().setImageResource(R.mipmap.okokok_nausing);
+        accountSdkInputEditTextView.getIconImageView().setImageResource(R.mipmap.sady_claustrorium37514);
+        pwdSdkInputEditTextView.getIconImageView().setImageResource(R.mipmap.sady_center68067);
 
         registerAccountEditText = accountSdkInputEditTextView.getInputEditText();
         registerAccountEditText.setHintTextColor(getResources().getColor(R.color.mcolor_filmaneous_lotion));
@@ -122,14 +122,14 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
         thirdAccountSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Account);
         hasBindAccountSdkInputEditTextView.setInputType(SDKInputType.SDKInputType_Account);
 
-        thirdAccountSdkInputEditTextView.getContentView().setBackgroundResource(R.drawable.okokok_lotic);
-        hasBindAccountSdkInputEditTextView.getContentView().setBackgroundResource(R.drawable.okokok_lotic);
+        thirdAccountSdkInputEditTextView.getContentView().setBackgroundResource(R.drawable.sady_article81377);
+        hasBindAccountSdkInputEditTextView.getContentView().setBackgroundResource(R.drawable.sady_article81377);
         thirdAccountSdkInputEditTextView.getInputEditText().setHintTextColor(getResources().getColor(R.color.mcolor_filmaneous_lotion));
         thirdAccountSdkInputEditTextView.getInputEditText().setTextColor(getResources().getColor(R.color.mcolor_tag_tetrice));
         hasBindAccountSdkInputEditTextView.getInputEditText().setHintTextColor(getResources().getColor(R.color.mcolor_filmaneous_lotion));
         hasBindAccountSdkInputEditTextView.getInputEditText().setTextColor(getResources().getColor(R.color.mcolor_tag_tetrice));
 
-        hasBindAccountSdkInputEditTextView.getIconImageView().setImageResource(R.mipmap.okokok_dodec);
+        hasBindAccountSdkInputEditTextView.getIconImageView().setImageResource(R.mipmap.sady_claustrorium37514);
 
         thirdAccountSdkInputEditTextView.getInputEditText().setEnabled(false);
         hasBindAccountSdkInputEditTextView.getInputEditText().setEnabled(false);
@@ -282,24 +282,24 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
 
 
     public void setAccountWithIcon2(AccountModel accountModel,  ImageView imageView, EditText editText){
-        int imageResId = R.mipmap.okokok_dodec;
+        int imageResId = R.mipmap.sady_claustrorium37514;
         String showName = "";
         if (SLoginType.LOGIN_TYPE_FB.equals(accountModel.getLoginType())){
-            imageResId = R.mipmap.okokok_lotose;
+            imageResId = R.mipmap.sady_corticoit62999;
             showName = getContext().getResources().getString(R.string.mstr_uxori_thusably);
 
         }else  if (SLoginType.LOGIN_TYPE_GOOGLE.equals(accountModel.getLoginType())){
-            imageResId = R.mipmap.okokok_occureer;
+            imageResId = R.mipmap.sady_phas46359;
             showName = getContext().getResources().getString(R.string.mstr_turbinetic_secreous);
 
         }else  if (SLoginType.LOGIN_TYPE_GUEST.equals(accountModel.getLoginType())){
-            imageResId = R.mipmap.okokok_veteracity;
+            imageResId = R.mipmap.sady_lowade93455;
             showName = getContext().getResources().getString(R.string.mstr_scrupdiseasearium_taxful);
         }else if (SLoginType.LOGIN_TYPE_LINE.equals(accountModel.getLoginType())){
-            imageResId = R.mipmap.okokok_piece;
+            imageResId = R.mipmap.sady_panting23517;
             showName = getContext().getResources().getString(R.string.mstr_factorful_omenable);
         }else if (SLoginType.LOGIN_TYPE_MG.equals(accountModel.getLoginType())){
-            imageResId = R.mipmap.okokok_dodec;
+            imageResId = R.mipmap.sady_claustrorium37514;
             showName = getContext().getResources().getString(R.string.mstr_needward_hormate);
         }
 

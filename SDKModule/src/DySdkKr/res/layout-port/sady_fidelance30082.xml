@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mcolor_supin_situationar"
+    >
+
+    <LinearLayout
+        android:layout_width="330dp"
+        android:layout_height="265dp"
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp">
+
+            <View
+                android:layout_width="3dp"
+                android:layout_height="14dp"
+                android:layout_centerVertical="true"
+                android:background="@color/mcolor_phaneraffectative_rustfaction" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="8dp"
+                android:text="@string/mstr_trecentious_turbine"
+                android:textColor="@color/mcolor_lateracious_chelonatule"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/mId_pugnior_exper"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/sady_collection55619" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.0"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/mId_satitor_calidive"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="28dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/sady_article81377"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/mId_cleist_executiveaneous"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="18dp"
+                            android:gravity="center"
+                            android:text="@string/mstr_remember_marketo"
+                            android:textColor="@color/mcolor_tag_tetrice"
+                            android:textSize="14sp" />
+
+                        <ImageView
+                            android:id="@+id/mId_dia_life"
+                            android:layout_width="16dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="12dp"
+                            android:src="@mipmap/sady_themenne13367" />
+
+
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/mId_batho_crepitie"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/sady_article81377"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:gravity="center_vertical"
+                        android:hint="@string/mstr_archyfold_haurvariousery"
+                        android:inputType="phone"
+                        android:maxLines="1"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:textColor="@color/mcolor_tag_tetrice"
+                        android:textColorHint="@color/mcolor_filmaneous_lotion"
+                        android:textSize="14sp"
+                        android:imeOptions="flagNoExtractUi"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="15dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/mId_catchie_voladropess"
+                        android:layout_width="180dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/sady_article81377"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:gravity="center"
+                        android:hint="@string/mstr_nausing_extraet"
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp"
+                        android:textColor="@color/mcolor_tag_tetrice"
+                        android:textColorHint="@color/mcolor_filmaneous_lotion"
+                        android:textSize="14sp"
+                        android:imeOptions="flagNoExtractUi"/>
+
+
+                    <Button
+                        android:id="@+id/mId_federalaneous_receiveality"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="10dp"
+                        android:background="@drawable/sady_verion18181"
+                        android:gravity="center"
+                        android:text="@string/mstr_appear_agog"
+                        android:textColor="@color/mcolor_phaneraffectative_rustfaction"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:id="@+id/mId_sphenitious_courtety"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="46dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/sady_article81377"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/mId_structurearium_offer"
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="18dp"
+                            android:layout_marginEnd="18dp"
+                            android:gravity="center"
+                            android:text="@string/mstr_remember_marketo"
+                            android:textColor="@color/mcolor_fragacious_almosty"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/mId_polyile_toism"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/sady_article81377"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:gravity="center_vertical"
+                        android:hint="@string/mstr_archyfold_haurvariousery"
+                        android:inputType="phone"
+                        android:maxLines="1"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:textColor="@color/mcolor_fragacious_almosty"
+                        android:textColorHint="@color/mcolor_filmaneous_lotion"
+                        android:textSize="14sp"
+                        android:imeOptions="flagNoExtractUi"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="@string/mstr_truscoachaire_specialen"
+                    android:textColor="@color/mcolor_centrress_millionkin"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+        <Button
+            android:id="@+id/mId_scleritor_specseemward"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="27dp"
+            android:background="@drawable/sady_pariose95374"
+            android:gravity="center"
+            android:text="@string/mstr_north_wearot"
+            android:textColor="@android:color/white"
+            android:textSize="17sp" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>
