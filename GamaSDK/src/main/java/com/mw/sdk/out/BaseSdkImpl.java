@@ -20,6 +20,7 @@ import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.PL;
 import com.core.base.utils.PermissionUtil;
+import com.core.base.utils.SPUtil;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.SignatureUtil;
 import com.core.base.utils.ToastUtils;
@@ -125,8 +126,14 @@ public class BaseSdkImpl implements IMWSDK {
     @Override
     public void applicationOnCreate(Application application) {
         PL.i("BaseSdkImpl applicationOnCreate");
+
+        //获取Google 广告ID
+        SdkEventLogger.registerGoogleAdId(application.getApplicationContext());
+
         AFHelper.applicationOnCreate(application);
         AdjustHelper.init(application);
+
+        SPUtil.saveSimpleInfo(application.getApplicationContext(), SdkUtil.SDK_SP_FILE,"sdk_applicationOnCreate_call", true);
     }
 
     //    @Deprecated
@@ -139,8 +146,6 @@ public class BaseSdkImpl implements IMWSDK {
     public void initSDK(final Activity activity, final SGameLanguage gameLanguage) {
 
         PL.i("sdk initSDK");
-        //获取Google 广告ID
-        SdkEventLogger.registerGoogleAdId(activity);
 
 //        Localization.gameLanguage(activity, gameLanguage);
         //清除上一次登录成功的返回值
@@ -170,6 +175,11 @@ public class BaseSdkImpl implements IMWSDK {
         sFacebookProxy = new SFacebookProxy(activity.getApplicationContext());
         isInitSdk = true;
 
+        boolean isCall = SPUtil.getSimpleBoolean(activity.getApplicationContext(), SdkUtil.SDK_SP_FILE,"sdk_applicationOnCreate_call");
+        if (!isCall){
+            PL.e("sdk IMWSDK.applicationOnCreate(Application application) not call, plase call IMWSDK.applicationOnCreate(Application application) in app Application");
+            ToastUtils.toastL(activity, "Error: Plase call IMWSDK.applicationOnCreate(Application application) in app Application first");
+        }
     }
 
     /*

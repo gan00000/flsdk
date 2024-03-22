@@ -423,7 +423,7 @@ public class SdkUtil {
 
     }
 
-    public static boolean isLogin(Context context){
+    public static boolean isLogin(Context context){//次api会出现有登录记录的情况下，用户再次打开未登录成功也会返回true
         SLoginResponse sLoginResponse = getCurrentUserLoginResponse(context);
         if (sLoginResponse != null && sLoginResponse.isRequestSuccess() && sLoginResponse.getData()!= null && SStringUtil.isNotEmpty(sLoginResponse.getData().getUserId())){
             return true;
