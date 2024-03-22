@@ -688,6 +688,8 @@ public class BaseSdkImpl implements IMWSDK {
 
                     iLogin.initFacebookPro(activity, sFacebookProxy);
                     iLogin.startLogin(activity, iLoginCallBack);
+
+                    resetFiled(activity);
                 }
             }
         });
@@ -1412,5 +1414,18 @@ public class BaseSdkImpl implements IMWSDK {
             }
         });
 
+    }
+
+    private void resetFiled(Activity activity) {
+        try {
+            if(this.floatViewDialog != null){
+                this.floatViewDialog.dismiss();
+                this.floatViewDialog = null;
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -201,11 +201,29 @@ class FloatContentView : SLoginBaseRelativeLayout {
                     val menuReddotView = holder.getView<View>(R.id.id_v_menu_reddot)
                     val loginTimestamp = SdkUtil.getSdkTimestamp(activity)
 
-                    Glide.with(this@FloatContentView)
+                    if (FloatMenuType.MENU_TYPE_CS == mData.code){
+
+                        Glide.with(this@FloatContentView)
+                            .load(mData.icon + "?" + loginTimestamp)
+                            .centerCrop()
+                            .placeholder(R.mipmap.icon_float_customer)
+                            .into(menuIconIv)
+
+                    }else if (FloatMenuType.MENU_TYPE_MY == mData.code){
+
+                        Glide.with(this@FloatContentView)
+                            .load(mData.icon + "?" + loginTimestamp)
+                            .centerCrop()
+                            .placeholder(R.mipmap.icon_float_person)
+                            .into(menuIconIv)
+
+                    }else{
+                        Glide.with(this@FloatContentView)
                             .load(mData.icon + "?" + loginTimestamp)
                             .centerCrop()
                             .placeholder(ApkInfoUtil.getAppIcon(activity))
                             .into(menuIconIv)
+                    }
 
                     menuTitleTv.text = mData.name
 

@@ -164,6 +164,10 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
             @Override
             public void success(Object result, String msg) {
 
+                persionMainView.setVisibility(View.VISIBLE);
+                mFloatBindAccountLayout.setVisibility(View.GONE);
+                mFloatChangePwdLayout.setVisibility(View.GONE);
+
             }
 
             @Override
