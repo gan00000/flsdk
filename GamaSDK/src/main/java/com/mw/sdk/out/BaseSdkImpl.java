@@ -78,6 +78,7 @@ import com.mw.sdk.widget.SWebView;
 import com.mw.sdk.widget.SWebViewDialog;
 import com.mw.sdk.widget.SWebViewLayout;
 import com.thirdlib.adjust.AdjustHelper;
+import com.thirdlib.af.AFHelper;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.huawei.HuaweiPayImpl;
 
@@ -124,6 +125,7 @@ public class BaseSdkImpl implements IMWSDK {
     @Override
     public void applicationOnCreate(Application application) {
         PL.i("BaseSdkImpl applicationOnCreate");
+        AFHelper.applicationOnCreate(application);
         AdjustHelper.init(application);
     }
 

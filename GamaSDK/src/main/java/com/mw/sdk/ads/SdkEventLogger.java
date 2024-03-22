@@ -5,12 +5,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 
-import androidx.annotation.NonNull;
-
 import com.appsflyer.AFInAppEventParameterName;
 import com.appsflyer.AFInAppEventType;
-import com.appsflyer.AppsFlyerLib;
-import com.appsflyer.attribution.AppsFlyerRequestListener;
 import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.ISReqCallBack;
 import com.core.base.request.SimpleHttpRequest;
@@ -22,12 +18,10 @@ import com.core.base.utils.SStringUtil;
 import com.core.base.utils.TimeUtil;
 import com.facebook.appevents.AppEventsConstants;
 import com.mw.sdk.bean.SUserInfo;
-import com.mw.sdk.bean.res.BasePayBean;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.mw.sdk.bean.AdsRequestBean;
 import com.mw.sdk.utils.ResConfig;
 import com.mw.sdk.utils.SdkUtil;
-import com.mw.sdk.BuildConfig;
 import com.mw.sdk.R;
 import com.mw.sdk.api.Request;
 import com.mw.sdk.login.model.response.SLoginResponse;
@@ -51,7 +45,7 @@ public class SdkEventLogger {
 
         try {
 
-            AFHelper.afInit(activity);
+            AFHelper.activityOnCreate(activity);
             SFacebookProxy.initFbSdk(activity.getApplicationContext());
             sendEventToSever(activity,EventConstant.EventName.APP_OPEN.name());
             trackingWithEventName(activity, EventConstant.EventName.APP_OPEN.name(), null, EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
