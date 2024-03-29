@@ -9,7 +9,6 @@ import com.core.base.callback.SFCallBack;
 import com.mw.base.bean.SPayType;
 import com.mw.sdk.ads.EventConstant;
 import com.mw.sdk.bean.req.PayCreateOrderReqBean;
-import com.mw.sdk.callback.FloatCallback;
 import com.mw.sdk.callback.IPayListener;
 import com.mw.sdk.login.ILoginCallBack;
 import com.mw.sdk.login.model.response.SLoginResponse;
@@ -190,7 +189,11 @@ public interface IMWSDK extends IGameLifeCycle {
     public void showActView(Activity activity);
     public boolean isShowAct(Activity activity);
 
-    public void showFloatView(Activity activity, FloatCallback floatCallback);
+//    public void showFloatView(Activity activity, FloatCallback floatCallback);
 
     public void openUrlByBrowser(Activity activity,String url);
+
+    public void setSwitchAccountListener(Activity activity, ISdkCallBack sdkCallBack);
+
+//    public ISdkCallBack getSwitchAccountCallback();
 }

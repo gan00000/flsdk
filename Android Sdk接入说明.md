@@ -5,6 +5,7 @@
 	1. [实例SDK接口对象](#1)
 	2. [Activity生命周期和初始化SDK](#2)
 	3. [设置角色信息](#5)
+	4. [设置SDK请求游戏账号退出切换监听](#22)
 	4. [登录接口](#6)
 	5. [切换账号登录接口](#18)
 	5. [充值接口](#7)
@@ -247,6 +248,27 @@
        
         //在游戏Activity的onCreate生命周期中调用
         mIMWSDK.onCreate(this);
+        
+        //设置SDK请求游戏账号退出切换监听
+        mIMWSDK.setSwitchAccountListener(this, new ISdkCallBack() {
+            @Override
+            public void success() {
+
+                //研发在此需要进行游戏退出
+                // 切换账号，重新回到登录页面
+                //.....研发处理游戏退出，完成后重新调用登录接口......
+                mIMWSDK.login(MainActivity.this, new ILoginCallBack() {
+                    @Override
+                    public void onLogin(SLoginResponse sLoginResponse) {
+                        handleLoginResponse(sLoginResponse);
+                    }
+                });
+            }
+
+            @Override
+            public void failure() {
+            }
+        });
 	    
 	}
    @Override
@@ -333,6 +355,35 @@
 	
 
 	```
+	
+* <h3 id="22">设置SDK请求游戏账号退出切换监听</h3> 
+	
+	```
+	
+ 	//设置SDK请求游戏账号退出切换监听
+    mIMWSDK.setSwitchAccountListener(this, new ISdkCallBack() {
+        @Override
+        public void success() {
+
+            //研发在此需要进行游戏退出
+            // 切换账号，重新回到登录页面
+            //.....研发处理游戏退出，完成后重新调用登录接口......
+            mIMWSDK.login(MainActivity.this, new ILoginCallBack() {
+                @Override
+                public void onLogin(SLoginResponse sLoginResponse) {
+                    handleLoginResponse(sLoginResponse);
+                }
+            });
+        }
+
+        @Override
+        public void failure() {
+        }
+    });	
+    
+
+	```
+	
 
 * <h3 id="6">登录接口</h3>  
 

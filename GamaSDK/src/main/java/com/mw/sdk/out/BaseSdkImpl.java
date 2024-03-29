@@ -119,6 +119,9 @@ public class BaseSdkImpl implements IMWSDK {
     private ReviewInfo reviewInfo;
 
     private boolean isShowAct_M;
+
+    private ISdkCallBack switchAccountCallBack;
+
     public BaseSdkImpl() {
 //        iLogin = ObjFactory.create(DialogLoginImpl.class);
         PL.i("BaseSdkImpl 构造函数");
@@ -224,6 +227,8 @@ public class BaseSdkImpl implements IMWSDK {
                 Request.requestFloatMenus(activity.getApplicationContext(),null);
             }
         });
+
+        this.showFloatView(activity);
     }
 
     public void checkPreRegData(final Activity activity, ISdkCallBack iSdkCallBack) {
@@ -1384,8 +1389,8 @@ public class BaseSdkImpl implements IMWSDK {
         });
     }
 
-    @Override
-    public void showFloatView(Activity activity, FloatCallback floatCallback) {
+    //@Override
+    public void showFloatView(Activity activity) {
 
         String floatCfgData = SdkUtil.getFloatCfgData(activity);
         String menuResData = SdkUtil.getFloatMenuResData(activity);
@@ -1419,7 +1424,14 @@ public class BaseSdkImpl implements IMWSDK {
                 }
                 floatViewDialog = new SBaseDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
                 ArrayList<MenuData> arrayList = new ArrayList<>();
-                FloatContentView mActExpoView = new FloatContentView(activity, arrayList, floatViewDialog, floatCallback);
+                FloatContentView mActExpoView = new FloatContentView(activity, arrayList, floatViewDialog, new FloatCallback() {
+                    @Override
+                    public void switchAccount(String msg) {
+                        if (switchAccountCallBack != null){
+                            switchAccountCallBack.success();
+                        }
+                    }
+                });
                 mActExpoView.setsBaseDialog(floatViewDialog);
                 floatViewDialog.setContentView(mActExpoView);
                 floatViewDialog.show();
@@ -1452,4 +1464,14 @@ public class BaseSdkImpl implements IMWSDK {
         sGameBaseRequestBean.setCompleteUrl(url);
         AppUtil.openInOsWebApp(activity,sGameBaseRequestBean.createPreRequestUrl());
     }
+
+    @Override
+    public void setSwitchAccountListener(Activity activity, ISdkCallBack sdkCallBack) {
+        this.switchAccountCallBack = sdkCallBack;
+    }
+
+//    @Override
+//    public ISdkCallBack getSwitchAccountCallback() {
+//        return this.switchAccountCallBack;
+//    }
 }

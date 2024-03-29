@@ -153,7 +153,8 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="xx" />
+                    android:id="@+id/openUrl"
+                    android:text="打开链接https://activity.tthplay.com/api/redirect/page" />
 
 
             </LinearLayout>
