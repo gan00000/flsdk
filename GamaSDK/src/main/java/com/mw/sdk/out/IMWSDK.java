@@ -191,4 +191,6 @@ public interface IMWSDK extends IGameLifeCycle {
     public boolean isShowAct(Activity activity);
 
     public void showFloatView(Activity activity, FloatCallback floatCallback);
+
+    public void openUrlByBrowser(Activity activity,String url);
 }

@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import com.core.base.BaseWebViewClient;
 import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.SFCallBack;
+import com.core.base.utils.AppUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.PermissionUtil;
 import com.core.base.utils.SPUtil;
@@ -1439,5 +1440,16 @@ public class BaseSdkImpl implements IMWSDK {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void openUrlByBrowser(Activity activity, String url) {
+        if (SStringUtil.isEmpty(url)){
+            ToastUtils.toast(activity, "url empty error");
+            return;
+        }
+        SGameBaseRequestBean sGameBaseRequestBean = new SGameBaseRequestBean(activity);
+        sGameBaseRequestBean.setCompleteUrl(url);
+        AppUtil.openInOsWebApp(activity,sGameBaseRequestBean.createPreRequestUrl());
     }
 }
