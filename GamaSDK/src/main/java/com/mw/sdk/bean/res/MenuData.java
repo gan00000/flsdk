@@ -11,6 +11,7 @@ public class MenuData {
     private String code;
     private boolean display;
     private boolean isClick;
+    private boolean deleteAccount;//是否显示删除账号，只有my的时候有用
 
     public String getCode() {
         return code;
@@ -70,5 +71,13 @@ public class MenuData {
 
     public boolean isWithReddot(){
         return FloatMenuType.MENU_TYPE_CS.equals(code);
+    }
+
+    public boolean isDeleteAccount() {
+        return deleteAccount;
+    }
+
+    public void setDeleteAccount(boolean deleteAccount) {
+        this.deleteAccount = deleteAccount;
     }
 }

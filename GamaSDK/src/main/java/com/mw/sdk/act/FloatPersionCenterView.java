@@ -18,7 +18,9 @@ import com.mw.sdk.R;
 import com.mw.sdk.api.Request;
 import com.mw.sdk.bean.res.FloatConfigData;
 import com.mw.sdk.bean.res.FloatMenuResData;
+import com.mw.sdk.bean.res.MenuData;
 import com.mw.sdk.callback.FloatCallback;
+import com.mw.sdk.constant.FloatMenuType;
 import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.mw.sdk.utils.SdkUtil;
@@ -47,6 +49,8 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
 
     private FloatConfigData floatConfigData;
     private FloatMenuResData floatMenuResData;
+
+    private MenuData myMenuData;
 
     private FloatCallback xFloatCallback;
 
@@ -195,8 +199,21 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
                 uidTextView.setText(floatMenuResData.getData().getUserId());
 
                 updateUserInfoView(context, floatConfigData);
-            }
 
+                if (floatMenuResData.getData().getMenuList() != null) {
+                    for (MenuData bbMenuData:floatMenuResData.getData().getMenuList()) {
+                        if (FloatMenuType.MENU_TYPE_MY.equals(bbMenuData.getCode())){
+                            myMenuData = bbMenuData;
+                            if (myMenuData.isDeleteAccount()){
+                                delAccountView.setVisibility(View.VISIBLE);
+                            }else {
+                                delAccountView.setVisibility(View.GONE);
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
         }
 
         return persionCenterView;
