@@ -224,11 +224,20 @@ public class BaseSdkImpl implements IMWSDK {
                 }
                 //showActViewSwitchRequest(activity);//注释掉，先不用
 
-                Request.requestFloatMenus(activity.getApplicationContext(),null);
+                Request.requestFloatMenus(activity.getApplicationContext(), new SFCallBack<String>() {
+                    @Override
+                    public void success(String result, String msg) {
+                        showFloatView(activity);
+                    }
+
+                    @Override
+                    public void fail(String result, String msg) {
+
+                    }
+                });
             }
         });
 
-        this.showFloatView(activity);
     }
 
     public void checkPreRegData(final Activity activity, ISdkCallBack iSdkCallBack) {

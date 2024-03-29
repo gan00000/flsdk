@@ -581,6 +581,9 @@ public class Request {
                             String xData = xResponseBody.string();
                             PL.i("getFloatMenus=" + xData);
                             SdkUtil.saveFloatMenuResData(context, xData);
+                            if (sfCallBack != null){
+                                sfCallBack.success(xData, "");
+                            }
                         } catch (IOException e) {
                             SdkUtil.saveFloatMenuResData(context, "");
                         }
