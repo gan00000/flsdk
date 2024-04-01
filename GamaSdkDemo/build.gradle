@@ -357,17 +357,17 @@ android {
             versionCode 10
             versionName "1.0"
             dimension "1"
-            applicationId "com.wanxi.mxwvn"
-            resValue "string", "scheme", "mxwvn"
-            resValue "string", "facebook_app_id", "183738678011380"
-            resValue "string", "facebook_client_token", "4c7d1e1d2ad407d5e092d51df0265346"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider183738678011380" //启用分析
-            resValue "string", "fb_login_protocol_scheme", "fb183738678011380"
-            resValue "string", "facebook_app_name", "这里写游戏名称"
-            resValue "string", "line_channelId", ""
-            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow"
-            //adjust
-            resValue "string", "adjust_app_token", "532wtpjybw8w"
+//            applicationId "com.wanxi.mxwvn"
+//            resValue "string", "scheme", "mxwvn"
+//            resValue "string", "facebook_app_id", "183738678011380"
+//            resValue "string", "facebook_client_token", "4c7d1e1d2ad407d5e092d51df0265346"
+//            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider183738678011380" //启用分析
+//            resValue "string", "fb_login_protocol_scheme", "fb183738678011380"
+//            resValue "string", "facebook_app_name", "这里写游戏名称"
+//            resValue "string", "line_channelId", ""
+//            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow"
+//            //adjust
+//            resValue "string", "adjust_app_token", "532wtpjybw8w"
 
             //tgvn
 //            applicationId "com.yuewan.tgvn"
@@ -380,6 +380,31 @@ android {
 //            resValue "string", "line_channelId", ""
 //            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,第三方apk包设置"meow"
 
+
+            //=======================================sdk config==========================
+            applicationId "com.yuewan.tgvn"
+            //base
+            resValue "string", "sdk_game_code", "tgvn"
+            resValue "string", "sdk_app_key", "eb02cd5a2f5e1cbbdd5d315a6cb41b5f"
+            resValue "string", "sdk_more_language", "true"
+            resValue "string", "sdk_default_server_language", "vi_VN"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
+            resValue "string", "scheme", "tgvn"
+            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"、samsung
+            //facebook
+            resValue "string", "facebook_app_id", "1088087752595651"
+            resValue "string", "facebook_client_token", "fe699b0005ecf4a32149c8aa502ca470"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1088087752595651" //启用分析
+            resValue "string", "fb_login_protocol_scheme", "fb1088087752595651"
+            resValue "string", "facebook_app_name", "tgvn" //游戏名字
+            //ad
+            resValue "string", "adjust_app_token", ""
+            resValue "string", "sdk_appflyer_dev_key", "f6D2ctMkx7VYohiRWpnmGE"
+            //line
+            resValue "string", "line_channelId", ""
+            //naver
+            resValue "string", "naver_client_id", ""
+            resValue "string", "naver_client_secret", ""
+            //=======================================sdk config end==========================
 
             //每个游戏的demo设置 test
             resValue "string", "sdk_name", "vnDemo"
@@ -458,7 +483,7 @@ android {
             resValue "string", "sdk_more_language", "true"
             resValue "string", "sdk_default_server_language", "ko_KR"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
             resValue "string", "scheme", "tgfm"
-            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
+            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"、samsung
             //facebook
             resValue "string", "facebook_app_id", "288427737241065"
             resValue "string", "facebook_client_token", "8a4280708baa6e8a89635610c7a01d27"
