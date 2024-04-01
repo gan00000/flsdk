@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:background="@color/c_EDEDED"
+    >
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginStart="15dp"
+        android:id="@+id/id_iv_menu_icon"
+        android:src="@drawable/com_facebook_button_icon"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/id_tv_menu_title"
+        android:lines="1"
+        android:textSize="13sp"
+        android:textColor="@color/black_s"
+        android:text="少年冒險王"
+        android:layout_marginStart="5dp"
+        />
+
+    <View
+        android:layout_width="4dp"
+        android:layout_height="4dp"
+        android:layout_marginStart="4dp"
+        android:visibility="gone"
+        android:id="@+id/id_v_menu_reddot"
+        android:background="@drawable/mw_floatmenu_reddot_bg" />
+
+</LinearLayout>

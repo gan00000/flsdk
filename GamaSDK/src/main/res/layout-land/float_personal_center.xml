@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <LinearLayout
+        android:layout_width="290dp"
+        android:layout_height="match_parent"
+        android:id="@+id/id_ll_persion_main_center"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:id="@+id/id_iv_game_icon"
+                android:src="@mipmap/icon_gp_2"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:lines="1"
+                        android:textSize="11sp"
+                        android:textColor="@color/c_545454"
+                        android:text="@string/text_game_name"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/id_tv_game_name"
+                        android:lines="1"
+                        android:textSize="11sp"
+                        android:textColor="@color/black_s"
+                        android:textStyle="bold"
+                        android:text="少年冒險王"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:lines="1"
+                        android:textSize="11sp"
+                        android:textColor="@color/c_545454"
+                        android:text="@string/text_server_name"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/id_tv_server_name"
+                        android:lines="1"
+                        android:textSize="11sp"
+                        android:textColor="@color/black_s"
+                        android:textStyle="bold"
+                        android:text="少年冒險王"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:lines="1"
+                        android:textSize="11sp"
+                        android:textColor="@color/c_545454"
+                        android:text="@string/text_role_name"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/id_tv_role_name"
+                        android:lines="1"
+                        android:textSize="11sp"
+                        android:textColor="@color/black_s"
+                        android:textStyle="bold"
+                        android:text="少年冒險王"
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/c_939393"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:id="@+id/pc_ll_account_uid"
+                >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:id="@+id/pc_ll_account"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:lines="1"
+                        android:textSize="11sp"
+                        android:textColor="@color/c_545454"
+                        android:text="@string/text_account_name"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/id_tv_account"
+                        android:lines="1"
+                        android:textSize="11sp"
+                        android:textColor="@color/black_s"
+                        android:textStyle="bold"
+                        android:text="少年冒險王"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="4dp"
+                    android:id="@+id/pc_ll_uid"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:lines="1"
+                        android:textSize="11sp"
+                        android:textColor="@color/c_545454"
+                        android:text="@string/text_account_uid"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/id_tv_uid"
+                        android:lines="1"
+                        android:textSize="11sp"
+                        android:textColor="@color/black_s"
+                        android:textStyle="bold"
+                        android:text="少年冒險王"
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="26dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:id="@+id/pc_tv_upgrade_account"
+                android:text="@string/text_update_account_bind"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:textColor="@color/white_c"
+                android:background="@drawable/pc_bg_3ba0ff_12"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/pc_ll_change_pwd"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="45dp"
+                app:layout_constraintTop_toBottomOf="@id/pc_ll_account_uid"
+                app:layout_constraintLeft_toLeftOf="parent"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="33dp"
+                    android:text="@string/py_login_page_change_pwd"
+                    android:id="@+id/pc_tv_change_pwd"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:paddingStart="32dp"
+                    android:paddingEnd="32dp"
+                    android:textColor="@color/white_c"
+                    android:background="@drawable/pc_bg_change_pwd"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="33dp"
+                    android:layout_marginStart="10dp"
+                    android:id="@+id/pc_tv_switch_account"
+                    android:text="@string/text_switch_account"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:paddingStart="32dp"
+                    android:paddingEnd="32dp"
+                    android:textColor="@color/white_c"
+                    android:background="@drawable/pc_bg_switch_account"
+                    />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/pc_ll_change_pwd"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="37dp"
+                android:text="@string/text_account_del"
+                android:id="@+id/pc_del_account"
+                android:textColor="@color/c_FF2424"
+                android:textSize="14sp"
+                />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                app:layout_constraintTop_toBottomOf="@id/pc_del_account"
+                app:layout_constraintStart_toStartOf="@id/pc_del_account"
+                app:layout_constraintEnd_toEndOf="@id/pc_del_account"
+                android:background="@color/c_FF2424"
+                />
+
+
+        <include layout="@layout/float_delete_account_alert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="gone"
+            />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+    <com.mw.sdk.act.FloatBindAccountLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/id_BindAccountLayout"
+        android:visibility="gone"
+        />
+
+    <com.mw.sdk.act.FloatChangePwdLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/id_FloatChangePwdLayout"
+        android:visibility="gone"/>
+
+</RelativeLayout>

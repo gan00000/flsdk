@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--<uses-permission android:name="android.permission.READ_PHONE_STATE"/>-->
+
+    <application
+        android:allowBackup="true"
+        android:label="@string/sdk_name"
+        android:resizeableActivity="false"
+        android:usesCleartextTraffic="true"
+        android:supportsRtl="true">
+
+       <!-- <activity
+            android:name="com.game.sdk.demo.DoPermissionReq"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|fontScale"
+            android:screenOrientation="sensor"
+            android:theme="@style/Gama.Theme.AppCompat.Light.NoActionBar.FullScreen"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+            &lt;!&ndash;<intent-filter>&ndash;&gt;
+            &lt;!&ndash;<action android:name="android.intent.action.MAIN" />&ndash;&gt;
+
+            &lt;!&ndash;<category android:name="android.intent.category.LAUNCHER" />&ndash;&gt;
+            &lt;!&ndash;</intent-filter>&ndash;&gt;
+        </activity>-->
+
+        <activity
+            android:name="com.game.sdk.demo.MainActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|fontScale"
+            android:screenOrientation="sensor"
+            android:theme="@style/Sdk.Theme.AppCompat.Light.NoActionBar.FullScreen"
+            android:windowSoftInputMode="stateHidden|adjustResize|adjustPan"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <data android:scheme="@string/scheme" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+        </activity>
+
+<!--         Set custom default icon. This is used when no icon is set for incoming notification messages.-->
+<!--     See README(https://goo.gl/l4GJaQ) for more. -->
+<!--                <meta-data-->
+<!--                    android:name="com.google.firebase.messaging.default_notification_icon"-->
+<!--                    android:resource="@drawable/app_push_icon" />-->
+<!--&lt;!&ndash;         Set color used with incoming notification messages. This is used when no color is set for the incoming&ndash;&gt;-->
+<!--&lt;!&ndash;             notification message. See README(https://goo.gl/6BKBk7) for more.&ndash;&gt;-->
+<!--                <meta-data-->
+<!--                    android:name="com.google.firebase.messaging.default_notification_color"-->
+<!--                    android:resource="@color/colorPush" />-->
+
+
+        <meta-data
+            android:name="com.qooapp.APP_ID"
+            android:value="SANDadc84e9ab1a011ed90d4e23bc1590402"/>
+        <meta-data
+            android:name="com.qooapp.PUBLIC_KEY"
+            android:value="MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1p0wgJCX9XERkGaU3t7h
+Fvoc9tES+wDcbKu/C8BQojCX43MH7ZWjM4A7zze8sGq/41pV7v30lcf4psQN0YxH
+DtG7k97byvGVgtdgTVfpRm3i0da5tu1VqQufgsVdmT8vHrCU5oOvI+flVEEBzQrK
+io2spe+/l1QnfdYmwKf0wZ3/Z+SSc9KnLwimB6dUisrDRXNOsfYU0oT38x1Zt1V+
+lUuU6nFQjfA7AsaIOX45W7Q47P00zlRrF438KXJu81r8M9rcxFt4/t9lNXCOwI4f
+n2KzJfsp8gOZonMANyiMRNT1k0gUilGXkzyBH5OHEQidEpwBs0YnJvSPxAfXgh66
+EQIDAQAB"/>
+
+<!--        <meta-data-->
+<!--            android:name="com.qooapp.APP_ID"-->
+<!--            android:value="PRODadb40c0ab1a011eda54ce23bc1590402"/>-->
+<!--        <meta-data-->
+<!--            android:name="com.qooapp.PUBLIC_KEY"-->
+<!--            android:value="MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyxG2rnmX8Uw4X7LdSIOS-->
+<!--QG80lcTUPk6e2BgzcawH8upKzfG5CP8XmOunOZKdHszvC2IxgoUdRh6V1CPzCqB4-->
+<!--LoDRAfSD1Lf4ILL3tsrpTJAT/+0ixg2P93hzjymH9l7FNLsqgNpS5p4Hbvcqu2ti-->
+<!--i3Zofi6Whiu/RtUnoA85MbIETtipiutBz9nEWyl7NT3JWsguUWs8udozDDvnIk6c-->
+<!--MTLAu5Z+HjEwzNyPjNL2ftvj4W2VyTFG/RhqrEhCvobsFUkkLeHwfLD0P6cPbb3f-->
+<!--ARV4wmMQJ/4cgzMCRqBGxRKvFFwrepqP3bgK2LffZu0pToYTqQr573U0MRrdcoNg-->
+<!--cwIDAQAB"/>-->
+
+    </application>
+
+</manifest>

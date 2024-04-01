@@ -5,12 +5,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 
-import androidx.annotation.NonNull;
-
 import com.appsflyer.AFInAppEventParameterName;
 import com.appsflyer.AFInAppEventType;
-import com.appsflyer.AppsFlyerLib;
-import com.appsflyer.attribution.AppsFlyerRequestListener;
 import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.ISReqCallBack;
 import com.core.base.request.SimpleHttpRequest;
@@ -22,16 +18,15 @@ import com.core.base.utils.SStringUtil;
 import com.core.base.utils.TimeUtil;
 import com.facebook.appevents.AppEventsConstants;
 import com.mw.sdk.bean.SUserInfo;
-import com.mw.sdk.bean.res.BasePayBean;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.mw.sdk.bean.AdsRequestBean;
 import com.mw.sdk.utils.ResConfig;
 import com.mw.sdk.utils.SdkUtil;
-import com.mw.sdk.BuildConfig;
 import com.mw.sdk.R;
 import com.mw.sdk.api.Request;
 import com.mw.sdk.login.model.response.SLoginResponse;
 import com.thirdlib.adjust.AdjustHelper;
+import com.thirdlib.af.AFHelper;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.google.SGoogleProxy;
 
@@ -49,20 +44,8 @@ public class SdkEventLogger {
     public static void activateApp(Activity activity){
 
         try {
-            AppsFlyerLib.getInstance().setCollectIMEI(false);
-            AppsFlyerLib.getInstance().setCollectAndroidID(false);
-            String afDevKey = ResConfig.getAfDevKey(activity);
-            if(!TextUtils.isEmpty(afDevKey)) {
-//                AppsFlyerLib.getInstance().startTracking(activity.getApplication(), afDevKey);
-                AppsFlyerLib.getInstance().init(afDevKey,null,activity.getApplication());//应用层调用
-                AppsFlyerLib.getInstance().start(activity.getApplicationContext());
-                if (BuildConfig.DEBUG) {//debug打印日志
-                    AppsFlyerLib.getInstance().setDebugLog(true);
-                }
-            } else {
-                PL.e("af dev key empty!");
-            }
 
+            AFHelper.activityOnCreate(activity);
             SFacebookProxy.initFbSdk(activity.getApplicationContext());
             sendEventToSever(activity,EventConstant.EventName.APP_OPEN.name());
             trackingWithEventName(activity, EventConstant.EventName.APP_OPEN.name(), null, EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
@@ -152,17 +135,17 @@ public class SdkEventLogger {
     /**
      * 统计储值数据
      */
-    public static void trackinPayEvent(Context context, BasePayBean payBean){
-        if(payBean == null) {
-            PL.i("trackinPay bundle null");
+    public static void trackinPayEvent(Context context, String eventName, String orderId, String productId, double usdPrice, String serverTimestamp, boolean linkUser){
+        if(SStringUtil.isEmpty(orderId) || SStringUtil.isEmpty(productId)) {
+            PL.i("trackinPay orderId or productId null");
             return;
         }
-//        BasePayBean payBean = (BasePayBean) bundle.getSerializable(GamaCommonKey.PURCHASE_DATA);
 
-        PL.i("trackinPay Purchase");
-        String orderId = payBean.getOrderId() == null ? "unknow" : payBean.getOrderId();
-        String productId = payBean.getProductId() == null ? "unknow" : payBean.getProductId();
-        double usdPrice = payBean.getUsdPrice();
+        PL.i("trackinPay eventName:" + eventName);
+//        String orderId = payBean.getOrderId() == null ? "unknow" : payBean.getOrderId();
+//        String productId = payBean.getProductId() == null ? "unknow" : payBean.getProductId();
+//        double usdPrice = payBean.getUsdPrice();
+//        String serverTimestamp = payBean.getServerTimestamp();
 
         try {
 
@@ -170,18 +153,26 @@ public class SdkEventLogger {
 
             //下面是AppsFlyer自己的事件名
             Map<String, Object> af_eventValues = new HashMap<>();
-            af_eventValues.put(AFInAppEventParameterName.REVENUE, usdPrice);
-            af_eventValues.put(AFInAppEventParameterName.CURRENCY, "USD");
+
             af_eventValues.put(AFInAppEventParameterName.CONTENT_ID, productId);
             af_eventValues.put(AFInAppEventParameterName.ORDER_ID, orderId);
             af_eventValues.put(AFInAppEventParameterName.CUSTOMER_USER_ID, uid);
             af_eventValues.put(EventConstant.ParameterName.USER_ID, uid);
             af_eventValues.put(EventConstant.ParameterName.ROLE_ID, SdkUtil.getRoleId(context));
-            af_eventValues.put(EventConstant.ParameterName.SERVER_TIME, payBean.getServerTimestamp() + "");
+            af_eventValues.put(EventConstant.ParameterName.SERVER_TIME, serverTimestamp);
 //            af_eventValues.put("platform", context.getResources().getString(R.string.channel_platform));
             addEventParameterName(context, af_eventValues);
             PL.i("trackinPay start Purchase af...");
-            AppsFlyerLib.getInstance().logEvent(context.getApplicationContext(), AFInAppEventType.PURCHASE, af_eventValues);
+            if (SStringUtil.isEmpty(eventName)){
+
+                af_eventValues.put(AFInAppEventParameterName.REVENUE, usdPrice);
+                af_eventValues.put(AFInAppEventParameterName.CURRENCY, "USD");
+                AFHelper.logEvent(context.getApplicationContext(), AFInAppEventType.PURCHASE, af_eventValues);
+            }else {
+                //af除了默认AFInAppEventType.PURCHASE上报额度，别的都不上报，不然影响af后台统计
+                AFHelper.logEvent(context.getApplicationContext(), eventName, af_eventValues);
+            }
+
             PL.i("trackinPay end Purchase af... params=" + JsonUtil.map2Json(af_eventValues).toString());
 
 
@@ -195,7 +186,11 @@ public class SdkEventLogger {
             fb_eventValues.put(AppEventsConstants.EVENT_PARAM_ORDER_ID, orderId);
             fb_eventValues.put("platform", context.getResources().getString(R.string.channel_platform));
             PL.i("trackinPay Purchase fb...");
-            SFacebookProxy.logPurchase(context, new BigDecimal(usdPrice), fb_eventValues);
+            if (SStringUtil.isEmpty(eventName)){
+                SFacebookProxy.logPurchase(context, new BigDecimal(usdPrice), fb_eventValues);
+            }else {
+                SFacebookProxy.trackingEvent(context,eventName, usdPrice, fb_eventValues);
+            }
 
             //Firebase
             Map<String, Object> firebaseValues = new HashMap<>();
@@ -214,7 +209,11 @@ public class SdkEventLogger {
             b.putString(FirebaseAnalytics.Param.TRANSACTION_ID, orderId);
             b.putString("platform", context.getResources().getString(R.string.channel_platform));
             PL.i("trackinPay Purchase firebase...");
-            SGoogleProxy.firebaseAnalytics(context, FirebaseAnalytics.Event.PURCHASE, b);
+            if (SStringUtil.isEmpty(eventName)){
+                SGoogleProxy.firebaseAnalytics(context, FirebaseAnalytics.Event.PURCHASE, b);
+            }else {
+                SGoogleProxy.firebaseAnalytics(context, eventName, b);
+            }
 
 
             //adjust
@@ -225,11 +224,17 @@ public class SdkEventLogger {
             payEventValues.put("orderId", orderId);
             payEventValues.put("userId", uid);
             payEventValues.put("roleId", SdkUtil.getRoleId(context));
-            payEventValues.put("serverTimestamp", payBean.getServerTimestamp() + "");
+            payEventValues.put("serverTimestamp", serverTimestamp);
             addEventParameterName(context, payEventValues);
-            AdjustHelper.trackEvent(context, "AJ_Purchase", payEventValues, usdPrice, orderId);
+            if (SStringUtil.isEmpty(eventName)){
+                AdjustHelper.trackEvent(context, "AJ_Purchase", payEventValues, usdPrice, orderId);
+            }else {
+                AdjustHelper.trackEvent(context, eventName, payEventValues, usdPrice, orderId);
+            }
 
-
+            if (!linkUser){//不跟用户行为关联
+                return;
+            }
             SUserInfo sUserInfo = SdkUtil.getSUserInfo(context, uid);
             if (sUserInfo != null){
                 if (sUserInfo.isPay()){//判断是否付费过
@@ -301,18 +306,7 @@ public class SdkEventLogger {
             if(adType == 0 || (adType & EventConstant.AdType.AdTypeAllChannel) == EventConstant.AdType.AdTypeAllChannel) {
                 PL.i("上报全部媒体");
                 //AppsFlyer上报
-
-                AppsFlyerLib.getInstance().logEvent(context.getApplicationContext(), eventName, map, new AppsFlyerRequestListener() {
-                    @Override
-                    public void onSuccess() {
-                        PL.i("af logEvent onSuccess");
-                    }
-
-                    @Override
-                    public void onError(int i, @NonNull String s) {
-                        PL.i("af logEvent onError:" + s);
-                    }
-                });
+                AFHelper.logEvent(context, eventName, map);
 
                 //Facebook上报
                 SFacebookProxy.trackingEvent(context, eventName, null, b);
@@ -336,17 +330,7 @@ public class SdkEventLogger {
                 if((adType & EventConstant.AdType.AdTypeAppsflyer)==EventConstant.AdType.AdTypeAppsflyer) {
                     PL.i("上报媒体AdTypeAppsflyer");
                     //AppsFlyer上报
-                    AppsFlyerLib.getInstance().logEvent(context.getApplicationContext(), eventName, map, new AppsFlyerRequestListener() {
-                        @Override
-                        public void onSuccess() {
-                            PL.i("af logEvent onSuccess");
-                        }
-
-                        @Override
-                        public void onError(int i, @NonNull String s) {
-                            PL.i("af logEvent onError:" + s);
-                        }
-                    });
+                    AFHelper.logEvent(context, eventName, map);
                 }
 //                if(mediaSet.contains(EventConstant.EventReportChannel.EventReportAdjust)) {
 //                    PL.i("上报媒体4");

@@ -127,5 +127,6 @@
     <string name="text_select_pay_channel">충전 방법 선택</string>
     <string name="text_other">기타</string>
     <string name="text_pay_pay">충전</string>
+    <string name="text_account_change_pwd_success2">비밀번호가 업데이트되었습니다</string>
 
 </resources>

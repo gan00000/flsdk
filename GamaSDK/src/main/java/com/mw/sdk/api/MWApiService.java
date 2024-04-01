@@ -1,14 +1,19 @@
 package com.mw.sdk.api;
 
 import com.mw.sdk.bean.res.ActDataModel;
+import com.mw.sdk.bean.res.RedDotRes;
 import com.mw.sdk.bean.res.ToggleResult;
+import com.mw.sdk.login.model.response.SLoginResponse;
 
 import java.util.Map;
 
 import io.reactivex.rxjava3.core.Observable;
+import okhttp3.ResponseBody;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface MWApiService {
 
@@ -24,4 +29,33 @@ public interface MWApiService {
     @FormUrlEncoded
     Observable<ActDataModel> getMarketData(@FieldMap Map<String, String> paramMap);
 
+//    https://cdn-download.kodaduck.com/sdk/config/tgfm/v1/floatButton.json
+    @GET("sdk/config/{gameCode}/v1/floatButton.json")
+    Observable<ResponseBody> getFloatConfigData(@Path("gameCode") String gameCode);
+
+//    https://platform.kodaduck.com/sdk/api/floatBtn/initMenu
+    @POST("sdk/api/floatBtn/initMenu")
+    @FormUrlEncoded
+    Observable<ResponseBody> getFloatMenus(@FieldMap Map<String, String> paramMap);
+
+//    @POST("sdk/api/floatBtn/changePassword")
+    @POST("api/pwd/changePassword")
+    @FormUrlEncoded
+    Observable<SLoginResponse> changePassword(@FieldMap Map<String, String> paramMap);
+
+    @POST("api/cancel/account")
+    @FormUrlEncoded
+    Observable<SLoginResponse> deleteAccout(@FieldMap Map<String, String> paramMap);
+
+
+//    https://platform.kodaduck.com/sdk/api/floatBtn/getFloatBtnRedDot  获取红点
+//    https://platform.kodaduck.com/sdk/api/floatBtn/deleteFloatBtnRedDot  删除红点
+    @POST("sdk/api/floatBtn/getFloatBtnRedDot")
+    @FormUrlEncoded
+    Observable<RedDotRes> getFloatBtnRedDot(@FieldMap Map<String, String> paramMap);
+
+
+    @POST("sdk/api/floatBtn/deleteFloatBtnRedDot")
+    @FormUrlEncoded
+    Observable<RedDotRes> deleteFloatBtnRedDot(@FieldMap Map<String, String> paramMap);
 }

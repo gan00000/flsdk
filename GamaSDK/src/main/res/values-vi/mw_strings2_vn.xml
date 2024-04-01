@@ -1,5 +1,4 @@
 <resources>
-
     <string name="text_phone_bind">Điện thoại liên kết</string>
     <string name="text_phone_area_code">Số vùng</string>
     <string name="text_phone_input_hint">Hãy nhập số điện thoại</string>
@@ -16,5 +15,12 @@
     <string name="text_has_bind_tips_mw">Tài khoản hội viên</string>
     <string name="text_notice">Thông báo</string>
     <string name="text_account_not_login">Chưa có tài khoản, hãy đăng nhập trước</string>
-
+    <string name="text_has_bind_tips_twitter">Tài khoản đã nâng cấp</string>
+    <string name="text_has_upgrade_account">Tài khoản đã nâng cấp</string>
+    <string name="text_game_name">Tên trò chơi:</string>
+    <string name="text_server_name">Máy chủ:</string>
+    <string name="text_role_name">Tên nhân vật:</string>
+    <string name="text_account_name">Tài khoản:</string>
+    <string name="text_account_uid">uid:</string>
+    <string name="text_account_del">Xóa tài khoản</string>
 </resources>

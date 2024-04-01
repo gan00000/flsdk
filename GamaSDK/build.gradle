@@ -13,7 +13,7 @@ android {
         jvmTarget = rootProject.ext.jvmTarget
     }
 
-    def sdk_version = "2.0.4"
+    def sdk_version = "2.0.8"
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
@@ -117,9 +117,10 @@ android {
             proguardFile 'flavor-rules-kr.pro'
         }
 
-//        Act1 {
-//            dimension 'act'
-//        }
+        lunqi {//lunqi
+            dimension '1'
+            resValue "string", "sdk_inner_version", "lunqi"
+        }
 
     }
 }
@@ -181,7 +182,7 @@ dependencies {
     implementation 'com.linecorp:linesdk:5.0.1'
 
     //af
-    implementation 'com.appsflyer:af-android-sdk:6.9.0'
+    implementation 'com.appsflyer:af-android-sdk:6.13.0'
     implementation 'com.android.installreferrer:installreferrer:2.2'
 
 //    implementation 'com.adjust.sdk:adjust-android:4.33.5'
@@ -210,6 +211,10 @@ dependencies {
     //onestore
     sdkKRImplementation "com.onestorecorp.sdk:sdk-iap:21.00.00"
     sdkKRImplementation "com.onestorecorp.sdk:sdk-configuration-kr:1.0.0"
+
+    lunqiImplementation files('libs/xlsdk1.jar')
+    sdkKRImplementation(name: 'Samsung-IAP6Helper-release2', ext: 'aar')
+
 }
 
 

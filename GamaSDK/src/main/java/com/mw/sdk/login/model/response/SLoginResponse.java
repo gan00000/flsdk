@@ -84,6 +84,16 @@ public class SLoginResponse extends BaseResponseModel {
         private boolean isBindPhone;//是否绑定手机
         private String telephone;
 
+        private String area;//用户地区
+
+        public String getArea() {
+            return area;
+        }
+
+        public void setArea(String area) {
+            this.area = area;
+        }
+
         public boolean isBindPhone() {
             return isBindPhone;
         }

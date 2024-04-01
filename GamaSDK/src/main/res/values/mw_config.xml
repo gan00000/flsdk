@@ -39,4 +39,6 @@
     <!-- adjust  -->
     <string name="adjust_app_token"></string>
 
+    <string name="sdk_release_european"></string>
+
 </resources>

@@ -85,6 +85,13 @@
 
     <color name="c_f0a051">#f0a051</color>
     <color name="c_f5cd72">#f5cd72</color>
+    <color name="c_939393">#939393</color>
+    <color name="c_3BA0FF">#3BA0FF</color>
+    <color name="c_81D54A">#81D54A</color>
+    <color name="c_EF730F">#EF730F</color>
+    <color name="c_FF2424">#FF2424</color>
+    <color name="c_EDEDED">#EDEDED</color>
+    <color name="c_B20909">#B20909</color>
 
     <color name="c_indicatorView_selected">#4BACFD</color>
     <color name="c_indicatorView_unselected">#EBEBEB</color>

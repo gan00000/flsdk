@@ -18,6 +18,16 @@ public class PayExchangeReqBean extends SGameBaseRequestBean {
 	private String productPrice;
 	private String reissue;//是否是补发调用
 
+	private String thirdPurchaseToken;
+
+	public String getThirdPurchaseToken() {
+		return thirdPurchaseToken;
+	}
+
+	public void setThirdPurchaseToken(String thirdPurchaseToken) {
+		this.thirdPurchaseToken = thirdPurchaseToken;
+	}
+
 	public String getReissue() {
 		return reissue;
 	}

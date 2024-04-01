@@ -50,7 +50,7 @@
             android:background="@drawable/sdk_bg_term_content"
             >
 
-            <com.mw.base.widget.SWebView
+            <com.mw.sdk.widget.SWebView
                 android:id="@+id/sdk_terms_webview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />

@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 
 import com.core.base.utils.PL;
+import com.core.base.utils.SStringUtil;
 import com.mw.sdk.bean.res.ConfigBean;
 import com.mw.sdk.utils.SdkUtil;
 import com.mw.sdk.R;
@@ -89,6 +90,11 @@ public class DialogLoginImpl implements ILogin {
         twitterLogin = new TwitterLogin();
 
         if (SdkInnerVersion.KR.getSdkVeriosnName().equals(SdkUtil.getSdkInnerVersion(activity)) && !SdkUtil.getShowTerm(activity)){
+            showTermDialog(activity, iLoginCallBack);
+            return;
+        }
+
+        if (SdkInnerVersion.V6.getSdkVeriosnName().equals(SdkUtil.getSdkInnerVersion(activity)) && SStringUtil.isNotEmpty(activity.getString(R.string.sdk_release_european)) && !SdkUtil.getShowTerm(activity)){
             showTermDialog(activity, iLoginCallBack);
             return;
         }

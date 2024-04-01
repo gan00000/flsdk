@@ -29,7 +29,7 @@
         <activity
             android:name="com.game.sdk.demo.MainActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|fontScale"
-            android:screenOrientation="sensor"
+            android:screenOrientation="sensorLandscape"
             android:theme="@style/Sdk.Theme.AppCompat.Light.NoActionBar.FullScreen"
             android:windowSoftInputMode="stateHidden|adjustResize|adjustPan"
             android:exported="true">

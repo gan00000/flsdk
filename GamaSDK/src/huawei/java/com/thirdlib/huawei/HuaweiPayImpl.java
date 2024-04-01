@@ -31,15 +31,15 @@ import com.huawei.hms.iap.entity.PurchaseIntentResult;
 import com.huawei.hms.iap.entity.PurchaseResultInfo;
 import com.huawei.hms.iap.util.IapClientHelper;
 import com.huawei.hms.support.api.client.Status;
+import com.mw.sdk.api.PayApi;
+import com.mw.sdk.api.task.LoadingDialog;
+import com.mw.sdk.bean.req.PayCreateOrderReqBean;
+import com.mw.sdk.bean.res.BasePayBean;
+import com.mw.sdk.bean.res.GPCreateOrderIdRes;
+import com.mw.sdk.bean.res.GPExchangeRes;
 import com.mw.sdk.constant.ApiRequestMethod;
 import com.mw.sdk.pay.IPayCallBack;
-import com.mw.sdk.pay.gp.PayApi;
-import com.mw.sdk.bean.req.PayCreateOrderReqBean;
-import com.mw.sdk.pay.gp.bean.res.BasePayBean;
-import com.mw.sdk.pay.gp.bean.res.GPCreateOrderIdRes;
-import com.mw.sdk.pay.gp.bean.res.GPExchangeRes;
-import com.mw.sdk.pay.gp.task.LoadingDialog;
-import com.mw.sdk.pay.gp.util.PayHelper;
+import com.mw.sdk.utils.PayHelper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -68,7 +68,7 @@ public class HuaweiPayImpl {
     private String current_inAppPurchaseData;
 
     private ProductInfo currentProductInfo;
-    private GooglePayCreateOrderIdReqBean createOrderIdReqBean;
+    private PayCreateOrderReqBean createOrderIdReqBean;
 
     private LoadingDialog loadingDialog;
     private Double skuAmount;
@@ -103,6 +103,8 @@ public class HuaweiPayImpl {
             }
             // 调用parsePurchaseResultInfoFromIntent方法解析支付结果数据
             PurchaseResultInfo purchaseResultInfo = Iap.getIapClient(activity).parsePurchaseResultInfoFromIntent(data);
+
+            PL.i("purchaseResultInfo.getReturnCode = " + purchaseResultInfo.getReturnCode());
             switch(purchaseResultInfo.getReturnCode()) {
                 case OrderStatusCode.ORDER_STATE_CANCEL:
                     // 用户取消
@@ -134,7 +136,7 @@ public class HuaweiPayImpl {
         }
     }
 
-    public void startPay(Activity activity, GooglePayCreateOrderIdReqBean createOrderIdReqBean) {
+    public void startPay(Activity activity, PayCreateOrderReqBean createOrderIdReqBean) {
 
         if (SStringUtil.isEmpty(createOrderIdReqBean.getProductId())){
             handlePayFail("productId is empty");
@@ -264,7 +266,7 @@ public class HuaweiPayImpl {
     private void createOrder(){
 
         //由GooglePayActivity2传入
-        this.createOrderIdReqBean = new GooglePayCreateOrderIdReqBean(this.mActivity);
+        this.createOrderIdReqBean = new PayCreateOrderReqBean(this.mActivity);
         //设置储值主域名
         this.createOrderIdReqBean.setRequestUrl(PayHelper.getPreferredUrl(this.mActivity));
         //设置储值备用域名

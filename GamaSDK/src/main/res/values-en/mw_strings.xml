@@ -127,5 +127,6 @@
     <string name="text_select_pay_channel">Select payment method</string>
     <string name="text_other">Other</string>
     <string name="text_pay_pay">top up</string>
+    <string name="text_account_change_pwd_success2">password has been updated</string>
 
 </resources>

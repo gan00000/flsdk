@@ -2,7 +2,6 @@ package com.mw.sdk.out;
 
 import android.app.Activity;
 import android.app.Application;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -19,8 +18,10 @@ import androidx.annotation.NonNull;
 import com.core.base.BaseWebViewClient;
 import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.SFCallBack;
+import com.core.base.utils.AppUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.PermissionUtil;
+import com.core.base.utils.SPUtil;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.SignatureUtil;
 import com.core.base.utils.ToastUtils;
@@ -31,11 +32,14 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.play.core.review.ReviewInfo;
 import com.google.android.play.core.review.ReviewManager;
 import com.google.android.play.core.review.ReviewManagerFactory;
+import com.google.gson.Gson;
 import com.mw.base.bean.SPayType;
 import com.mw.sdk.BuildConfig;
 import com.mw.sdk.MWWebPayActivity;
 import com.mw.sdk.R;
 import com.mw.sdk.act.ActExpoView;
+import com.mw.sdk.act.FloatContentView;
+import com.mw.sdk.act.FloatingManager;
 import com.mw.sdk.ads.EventConstant;
 import com.mw.sdk.ads.SdkEventLogger;
 import com.mw.sdk.api.ConfigRequest;
@@ -46,7 +50,12 @@ import com.mw.sdk.bean.req.PayCreateOrderReqBean;
 import com.mw.sdk.bean.res.ActDataModel;
 import com.mw.sdk.bean.res.BasePayBean;
 import com.mw.sdk.bean.res.ConfigBean;
+import com.mw.sdk.bean.res.FloatConfigData;
+import com.mw.sdk.bean.res.FloatMenuResData;
+import com.mw.sdk.bean.res.MenuData;
 import com.mw.sdk.bean.res.ToggleResult;
+import com.mw.sdk.callback.FloatButtionClickCallback;
+import com.mw.sdk.callback.FloatCallback;
 import com.mw.sdk.callback.IPayListener;
 import com.mw.sdk.constant.ChannelPlatform;
 import com.mw.sdk.constant.RequestCode;
@@ -71,9 +80,11 @@ import com.mw.sdk.widget.SWebView;
 import com.mw.sdk.widget.SWebViewDialog;
 import com.mw.sdk.widget.SWebViewLayout;
 import com.thirdlib.adjust.AdjustHelper;
+import com.thirdlib.af.AFHelper;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.huawei.HuaweiPayImpl;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 
@@ -94,6 +105,8 @@ public class BaseSdkImpl implements IMWSDK {
 
     protected SBaseDialog commonDialog;
 
+    protected SBaseDialog floatViewDialog;
+
     protected IPay iPay;
     protected IPay iPayOneStore;
     protected IPayListener iPayListener;
@@ -106,6 +119,9 @@ public class BaseSdkImpl implements IMWSDK {
     private ReviewInfo reviewInfo;
 
     private boolean isShowAct_M;
+
+    private ISdkCallBack switchAccountCallBack;
+
     public BaseSdkImpl() {
 //        iLogin = ObjFactory.create(DialogLoginImpl.class);
         PL.i("BaseSdkImpl 构造函数");
@@ -114,7 +130,14 @@ public class BaseSdkImpl implements IMWSDK {
     @Override
     public void applicationOnCreate(Application application) {
         PL.i("BaseSdkImpl applicationOnCreate");
+
+        //获取Google 广告ID
+        SdkEventLogger.registerGoogleAdId(application.getApplicationContext());
+
+        AFHelper.applicationOnCreate(application);
         AdjustHelper.init(application);
+
+        SPUtil.saveSimpleInfo(application.getApplicationContext(), SdkUtil.SDK_SP_FILE,"sdk_applicationOnCreate_call", true);
     }
 
     //    @Deprecated
@@ -127,8 +150,6 @@ public class BaseSdkImpl implements IMWSDK {
     public void initSDK(final Activity activity, final SGameLanguage gameLanguage) {
 
         PL.i("sdk initSDK");
-        //获取Google 广告ID
-        SdkEventLogger.registerGoogleAdId(activity);
 
 //        Localization.gameLanguage(activity, gameLanguage);
         //清除上一次登录成功的返回值
@@ -158,6 +179,11 @@ public class BaseSdkImpl implements IMWSDK {
         sFacebookProxy = new SFacebookProxy(activity.getApplicationContext());
         isInitSdk = true;
 
+        boolean isCall = SPUtil.getSimpleBoolean(activity.getApplicationContext(), SdkUtil.SDK_SP_FILE,"sdk_applicationOnCreate_call");
+        if (!isCall){
+            PL.e("sdk IMWSDK.applicationOnCreate(Application application) not call, plase call IMWSDK.applicationOnCreate(Application application) in app Application");
+            ToastUtils.toastL(activity, "Error: Plase call IMWSDK.applicationOnCreate(Application application) in app Application first");
+        }
     }
 
     /*
@@ -197,8 +223,21 @@ public class BaseSdkImpl implements IMWSDK {
                     iPay.startQueryPurchase(activity.getApplicationContext());
                 }
                 //showActViewSwitchRequest(activity);//注释掉，先不用
+
+                Request.requestFloatMenus(activity.getApplicationContext(), new SFCallBack<String>() {
+                    @Override
+                    public void success(String result, String msg) {
+                        showFloatView(activity);
+                    }
+
+                    @Override
+                    public void fail(String result, String msg) {
+
+                    }
+                });
             }
         });
+
     }
 
     public void checkPreRegData(final Activity activity, ISdkCallBack iSdkCallBack) {
@@ -269,6 +308,8 @@ public class BaseSdkImpl implements IMWSDK {
 
         ConfigRequest.requestBaseCfg(activity.getApplicationContext());//加载配置
         ConfigRequest.requestAreaCodeInfo(activity.getApplicationContext());
+
+        Request.requestFloatConfigData(activity.getApplicationContext(),null);
 
         if (iLogin != null) {
             iLogin.onCreate(activity);
@@ -674,6 +715,8 @@ public class BaseSdkImpl implements IMWSDK {
 
                     iLogin.initFacebookPro(activity, sFacebookProxy);
                     iLogin.startLogin(activity, iLoginCallBack);
+
+                    resetFiled(activity);
                 }
             }
         });
@@ -724,9 +767,14 @@ public class BaseSdkImpl implements IMWSDK {
     }
 
     @Override
+    public void pay(Activity activity, String cpOrderId, String productId, String extra, String roleId, String roleName, String roleLevel, String vipLevel, String severCode, String serverName, IPayListener listener) {
+        pay(activity, SPayType.GOOGLE, cpOrderId, productId, extra, roleId, roleName, roleLevel, vipLevel, severCode, serverName, listener);
+    }
+
+    @Override
     public void pay(Activity activity, SPayType payType, String cpOrderId, String productId, String extra, String roleId,String roleName,String roleLevel, String vipLevel, String severCode,String serverName, IPayListener listener) {
         PL.i("sdk pay payType:" + payType.toString() + " ,cpOrderId:" + cpOrderId + ",productId:" + productId + ",extra:" + extra);
-        if ((System.currentTimeMillis() - firstClickTime) < 1000) {//防止连续点击
+        if ((System.currentTimeMillis() - firstClickTime) < 3000) {//防止连续点击
             PL.i("点击过快，无效");
             return;
         }
@@ -748,15 +796,15 @@ public class BaseSdkImpl implements IMWSDK {
         });
     }
 
-    protected String productId;
-    protected String cpOrderId;
-    protected String extra;
+//    protected String productId;
+//    protected String cpOrderId;
+//    protected String extra;
     protected void startPay(final Activity activity, final SPayType payType, final String cpOrderId, final String productId, final String extra, IPayListener listener) {
         this.iPayListener = listener;
         this.activity = activity;
-        this.productId = productId;
-        this.cpOrderId = cpOrderId;
-        this.extra = extra;
+//        this.productId = productId;
+//        this.cpOrderId = cpOrderId;
+//        this.extra = extra;
 
         PayCreateOrderReqBean payCreateOrderReqBean = new PayCreateOrderReqBean(activity);
         payCreateOrderReqBean.setCpOrderId(cpOrderId);
@@ -771,13 +819,16 @@ public class BaseSdkImpl implements IMWSDK {
             doHuaweiPay(activity, payCreateOrderReqBean);
         } else if(payType == SPayType.QooApp || ChannelPlatform.QOOAPP.getChannel_platform().equals(channel_platform)) {
             doQooAppPay(activity, payCreateOrderReqBean);
+        } else if(payType == SPayType.LUNQI || ChannelPlatform.LUNQI.getChannel_platform().equals(channel_platform)) {
+            doLunqiPay(activity, payCreateOrderReqBean);
         } else {//默认Google储值
             checkGoogleOrWebPay(activity, payCreateOrderReqBean);
         }
     }
-    protected void doQooAppPay(Activity activity, PayCreateOrderReqBean payCreateOrderReqBean) {
+    protected void doQooAppPay(Activity activity, PayCreateOrderReqBean payCreateOrderReqBean) {}
 
-    }
+    protected void doLunqiPay(Activity activity, PayCreateOrderReqBean payCreateOrderReqBean) {}
+
     private void doHuaweiPay(Activity activity, PayCreateOrderReqBean payCreateOrderReqBean) {
 
         if (huaweiPay == null){
@@ -1346,4 +1397,90 @@ public class BaseSdkImpl implements IMWSDK {
             }
         });
     }
+
+    //@Override
+    public void showFloatView(Activity activity) {
+
+        String floatCfgData = SdkUtil.getFloatCfgData(activity);
+        String menuResData = SdkUtil.getFloatMenuResData(activity);
+
+        if (SStringUtil.isEmpty(floatCfgData) || SStringUtil.isEmpty(menuResData)){
+            PL.i("floatCfgData=" + floatCfgData + "  menuResData=" + menuResData);
+            ToastUtils.toast(activity,"float data error");
+            return;
+        }
+
+        FloatConfigData xFloatConfigData = new Gson().fromJson(floatCfgData, FloatConfigData.class);
+
+        if (!xFloatConfigData.isButtonSwitch()){
+            PL.i("float not open");
+            return;
+        }
+        FloatMenuResData xFloatMenuResData = new Gson().fromJson(menuResData, FloatMenuResData.class);
+        if (xFloatMenuResData == null || xFloatMenuResData.getData() == null){
+            PL.i("FloatMenuResData null error");
+            return;
+        }
+
+
+        FloatingManager.getInstance().initFloatingView(activity,xFloatConfigData.getButtonIcon(), new FloatButtionClickCallback() {
+            @Override
+            public void show(String msg) {
+
+                if (floatViewDialog != null){
+                    floatViewDialog.show();
+                    return;
+                }
+                floatViewDialog = new SBaseDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
+                ArrayList<MenuData> arrayList = new ArrayList<>();
+                FloatContentView mActExpoView = new FloatContentView(activity, arrayList, floatViewDialog, new FloatCallback() {
+                    @Override
+                    public void switchAccount(String msg) {
+                        if (switchAccountCallBack != null){
+                            switchAccountCallBack.success();
+                        }
+                    }
+                });
+                mActExpoView.setsBaseDialog(floatViewDialog);
+                floatViewDialog.setContentView(mActExpoView);
+                floatViewDialog.show();
+
+            }
+        });
+
+    }
+
+    private void resetFiled(Activity activity) {
+        try {
+            if(this.floatViewDialog != null){
+                this.floatViewDialog.dismiss();
+                this.floatViewDialog = null;
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void openUrlByBrowser(Activity activity, String url) {
+        if (SStringUtil.isEmpty(url)){
+            ToastUtils.toast(activity, "url empty error");
+            return;
+        }
+        SGameBaseRequestBean sGameBaseRequestBean = new SGameBaseRequestBean(activity);
+        sGameBaseRequestBean.setCompleteUrl(url);
+        AppUtil.openInOsWebApp(activity,sGameBaseRequestBean.createPreRequestUrl());
+    }
+
+    @Override
+    public void setSwitchAccountListener(Activity activity, ISdkCallBack sdkCallBack) {
+        this.switchAccountCallBack = sdkCallBack;
+    }
+
+//    @Override
+//    public ISdkCallBack getSwitchAccountCallback() {
+//        return this.switchAccountCallBack;
+//    }
 }

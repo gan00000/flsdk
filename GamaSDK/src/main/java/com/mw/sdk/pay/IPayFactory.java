@@ -21,7 +21,10 @@ public class IPayFactory {
         if(ChannelPlatform.ONESTORE.getChannel_platform().equals(channel_platform)) {
             SdkVersionUtil sdkVersionUtil = new SdkVersionUtil();
             return sdkVersionUtil.newOneStorePay();
-        }else {
+        } else if (ChannelPlatform.SAMSUNG.getChannel_platform().equals(channel_platform)) {
+            SdkVersionUtil sdkVersionUtil = new SdkVersionUtil();
+            return sdkVersionUtil.newSamsungPay();
+        } else {
             return new GooglePayImpl();
         }
 

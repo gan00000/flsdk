@@ -20,11 +20,15 @@ import com.mw.sdk.ads.SdkEventLogger;
 import com.mw.sdk.api.task.BaseLoginRequestTask;
 import com.mw.sdk.bean.SGameBaseRequestBean;
 import com.mw.sdk.bean.req.AccountBindInGameRequestBean;
+import com.mw.sdk.bean.req.ChangePwdRequestBean;
+import com.mw.sdk.bean.req.DeleteAccountRequestBean;
 import com.mw.sdk.bean.req.PayCreateOrderReqBean;
 import com.mw.sdk.bean.res.ActDataModel;
 import com.mw.sdk.bean.res.ConfigBean;
+import com.mw.sdk.bean.res.RedDotRes;
 import com.mw.sdk.bean.res.ToggleResult;
 import com.mw.sdk.constant.ApiRequestMethod;
+import com.mw.sdk.constant.SLoginType;
 import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.utils.DataManager;
 import com.mw.sdk.utils.DialogUtil;
@@ -32,6 +36,7 @@ import com.mw.sdk.utils.PayHelper;
 import com.mw.sdk.utils.ResConfig;
 import com.mw.sdk.utils.SdkUtil;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,6 +47,7 @@ import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import okhttp3.ResponseBody;
 
 public class Request {
 
@@ -514,6 +520,306 @@ public class Request {
                     @Override
                     public void onComplete() {
                         PL.i("subscribe onComplete...");
+                    }
+                });
+    }
+
+    public static void requestFloatConfigData(Context context, SFCallBack<String> sfCallBack) {
+
+        String gameCode = ResConfig.getGameCode(context);
+        RetrofitClient.instance().build(context,URLType.CDN).create(MWApiService.class)
+                .getFloatConfigData(gameCode)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ResponseBody>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull ResponseBody responseBody) {
+                        try {
+                            String floatCfgData = responseBody.string();
+                            PL.i("floatCfgData=" + floatCfgData);
+                            SdkUtil.saveFloatCfgData(context, floatCfgData);
+                        } catch (IOException e) {
+                            SdkUtil.saveFloatCfgData(context, "");
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        PL.i("getFloatConfigData onError...");
+                        //SdkUtil.saveFloatCfgData(context, "");
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    public static void requestFloatMenus(Context context, SFCallBack<String> sfCallBack) {
+
+//        String gameCode = ResConfig.getGameCode(context);
+        SGameBaseRequestBean sGameBaseRequestBean = new SGameBaseRequestBean(context);
+        RetrofitClient.instance().build(context,URLType.PLAT).create(MWApiService.class)
+                .getFloatMenus(sGameBaseRequestBean.fieldValueToMap())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ResponseBody>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull ResponseBody xResponseBody) {
+                        try {
+                            String xData = xResponseBody.string();
+                            PL.i("getFloatMenus=" + xData);
+                            SdkUtil.saveFloatMenuResData(context, xData);
+                            if (sfCallBack != null){
+                                sfCallBack.success(xData, "");
+                            }
+                        } catch (IOException e) {
+                            SdkUtil.saveFloatMenuResData(context, "");
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        PL.i("getFloatConfigData onError...");
+                        //SdkUtil.saveFloatSwitchData(context, "");
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+
+    public static void getFloatBtnRedDot(Context context, SFCallBack<RedDotRes> sfCallBack) {
+
+//        String gameCode = ResConfig.getGameCode(context);
+        SGameBaseRequestBean sGameBaseRequestBean = new SGameBaseRequestBean(context);
+        RetrofitClient.instance().build(context,URLType.PLAT).create(MWApiService.class)
+                .getFloatBtnRedDot(sGameBaseRequestBean.fieldValueToMap())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<RedDotRes>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull RedDotRes redDotRes) {
+                        if (sfCallBack!= null && redDotRes != null){
+//                            redDotRes.getData().setCs(true);//test
+                            sfCallBack.success(redDotRes, "success");
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        PL.i("getFloatBtnRedDot onError...");
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    //删除红点
+    public static void deleteFloatBtnRedDot(Context context, SFCallBack<RedDotRes> sfCallBack) {
+
+//        String gameCode = ResConfig.getGameCode(context);
+        SGameBaseRequestBean sGameBaseRequestBean = new SGameBaseRequestBean(context);
+        RetrofitClient.instance().build(context,URLType.PLAT).create(MWApiService.class)
+                .deleteFloatBtnRedDot(sGameBaseRequestBean.fieldValueToMap())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<RedDotRes>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull RedDotRes redDotRes) {
+                        if (sfCallBack!= null && redDotRes != null){
+                            sfCallBack.success(redDotRes, "success");
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        PL.i("getFloatBtnRedDot onError...");
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+
+
+    //修改密码，与 ChangePwdRequestTask的一致
+    public static void changePwd(Context context, String account, String oldPwd, String newPwd, SFCallBack<SLoginResponse> sfCallBack) {
+
+        if (SStringUtil.isEmpty(account) || SStringUtil.isEmpty(oldPwd) || SStringUtil.isEmpty(newPwd)){
+            return;
+        }
+
+        ChangePwdRequestBean  changePwdRequestBean = new ChangePwdRequestBean(context);
+        changePwdRequestBean.setName(account);
+        changePwdRequestBean.setOldPwd(SStringUtil.toMd5(oldPwd.trim()));
+        changePwdRequestBean.setNewPwd(SStringUtil.toMd5(newPwd.trim()));
+        changePwdRequestBean.setSignature(SStringUtil.toMd5(ResConfig.getAppKey(context) + changePwdRequestBean.getTimestamp() +
+                changePwdRequestBean.getName() + changePwdRequestBean.getGameCode()));
+
+        Dialog dialog = DialogUtil.createLoadingDialog(context, "Loading...");
+        dialog.show();
+        RetrofitClient.instance().build(context,URLType.LOGIN).create(MWApiService.class)
+                .changePassword(changePwdRequestBean.fieldValueToMap())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<SLoginResponse>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull SLoginResponse sLoginResponse) {
+                        if (dialog != null  ) {
+                            dialog.dismiss();
+                        }
+                        if (sLoginResponse != null){
+                            if (sLoginResponse.isRequestSuccess()) {
+
+                                ToastUtils.toast(context, R.string.text_account_change_pwd_success2);
+
+                                sLoginResponse.getData().setLoginType(SLoginType.LOGIN_TYPE_MG);
+                                SdkUtil.updateLoginData(context, sLoginResponse);
+
+                                SdkUtil.saveAccountModel(context, account, newPwd, sLoginResponse.getData().getUserId(),sLoginResponse.getData().getToken(),
+                                        sLoginResponse.getData().getTimestamp(),true);//记住账号密码
+
+                                if (sfCallBack != null){
+                                    sfCallBack.success(sLoginResponse, "success");
+                                }
+                            }else{
+                                ToastUtils.toast(context, sLoginResponse.getMessage() + "");
+                                if (sfCallBack != null){
+                                    sfCallBack.fail(sLoginResponse, "fail");
+                                }
+                            }
+                        }else {
+                            ToastUtils.toast(context, R.string.py_error_occur);
+                            if (sfCallBack != null){
+                                sfCallBack.fail(null, "fail");
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        ToastUtils.toast(context, R.string.py_error_occur);
+                        if (dialog != null  ) {
+                            dialog.dismiss();
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        if (dialog != null  ) {
+                            dialog.dismiss();
+                        }
+                    }
+                });
+    }
+
+
+    public static void deleteAccout(Context context, String userId, String loginMode, String thirdLoginId,String loginAccessToken, String loginTimestamp, SFCallBack<SLoginResponse> sfCallBack) {
+
+        if (SStringUtil.isEmpty(userId)){
+            return;
+        }
+
+        DeleteAccountRequestBean requestBean = new DeleteAccountRequestBean(context, userId,loginMode,thirdLoginId);
+        requestBean.setLoginAccessToken(loginAccessToken);
+        requestBean.setLoginTimestamp(loginTimestamp);
+        requestBean.setSignature(SStringUtil.toMd5(ResConfig.getAppKey(context) + requestBean.getTimestamp() +
+                requestBean.getUserId() + requestBean.getGameCode()));
+
+        Dialog dialog = DialogUtil.createLoadingDialog(context, "Loading...");
+        dialog.show();
+        RetrofitClient.instance().build(context,URLType.LOGIN).create(MWApiService.class)
+                .deleteAccout(requestBean.fieldValueToMap())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<SLoginResponse>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull SLoginResponse sLoginResponse) {
+                        if (dialog != null  ) {
+                            dialog.dismiss();
+                        }
+                        if (sLoginResponse != null) {
+                            if (sLoginResponse.isRequestSuccess()) {
+                                if (SStringUtil.isNotEmpty(sLoginResponse.getMessage())){
+                                    ToastUtils.toast(context, sLoginResponse.getMessage() + "");
+                                }
+                                SdkUtil.removeAccountModelByUserId(context,userId);
+                                if (sfCallBack != null){
+                                    sfCallBack.success(sLoginResponse,"success");
+                                }
+
+                            }else{
+
+                                ToastUtils.toast(context, sLoginResponse.getMessage() + "");
+                                if (sfCallBack != null){
+                                    sfCallBack.fail(sLoginResponse,"fail");
+                                }
+                            }
+
+                        } else {
+                            ToastUtils.toast(context, R.string.py_error_occur);
+                            if (sfCallBack != null){
+                                sfCallBack.fail(null, "fail");
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        ToastUtils.toast(context, R.string.py_error_occur);
+                        if (dialog != null  ) {
+                            dialog.dismiss();
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        if (dialog != null  ) {
+                            dialog.dismiss();
+                        }
                     }
                 });
     }

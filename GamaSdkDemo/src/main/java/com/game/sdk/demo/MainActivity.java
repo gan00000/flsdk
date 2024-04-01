@@ -26,14 +26,13 @@ import androidx.core.app.NotificationCompat;
 
 import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.SFCallBack;
+import com.core.base.utils.AppUtil;
 import com.core.base.utils.MarketUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
 import com.mw.base.bean.SPayType;
-import com.mw.sdk.act.ActExpoView;
 import com.mw.sdk.bean.req.PayCreateOrderReqBean;
-import com.mw.sdk.bean.res.ActDataModel;
 import com.mw.sdk.utils.SdkUtil;
 import com.mw.sdk.callback.IPayListener;
 import com.mw.sdk.demo.R;
@@ -42,9 +41,6 @@ import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.out.IMWSDK;
 import com.mw.sdk.out.ISdkCallBack;
 import com.mw.sdk.out.MWSdkFactory;
-import com.mw.sdk.widget.SBaseDialog;
-
-import java.util.ArrayList;
 
 public class MainActivity extends Activity {
 
@@ -66,6 +62,7 @@ public class MainActivity extends Activity {
 
     SLoginResponse tempSLoginResponse;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +79,27 @@ public class MainActivity extends Activity {
 
         //在游戏Activity的onCreate生命周期中调用
         mIMWSDK.onCreate(this);
+
+        //设置SDK请求账号退出切换监听
+        mIMWSDK.setSwitchAccountListener(this, new ISdkCallBack() {
+            @Override
+            public void success() {
+
+                //研发在此需要进行游戏退出
+                // 切换账号，重新回到登录页面
+                //.....研发处理游戏退出，退出后重新调用登录接口......
+                mIMWSDK.login(MainActivity.this, new ILoginCallBack() {
+                    @Override
+                    public void onLogin(SLoginResponse sLoginResponse) {
+                        handleLoginResponse(sLoginResponse);
+                    }
+                });
+            }
+
+            @Override
+            public void failure() {
+            }
+        });
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,7 +131,7 @@ public class MainActivity extends Activity {
 //                com.game.superand.1usd
 //                com.game.superand.2usd
 //                String skuId = "com.miaoou.6jin";
-                String skuId = "com.tgswkr.koda.499";
+                String skuId = "com.tgkr.koda.099";
                 mIMWSDK.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(),skuId, extra,roleId,roleName,roleLevel, vipLevel,serverCode, serverName, new IPayListener() {
 
                     @Override
@@ -146,7 +164,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.demo_pay_hw).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String skuId = "com.miaoou.6jin";
+                String skuId = "com_mwyyz_tw_1u";
                 mIMWSDK.pay(MainActivity.this, SPayType.HUAWEI, "" + System.currentTimeMillis(),skuId, extra,roleId,roleName,roleLevel, vipLevel, serverCode, serverName, new IPayListener() {
 
                     @Override
@@ -321,6 +339,13 @@ public class MainActivity extends Activity {
             }
         });
 
+        findViewById(R.id.open_float_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
 //        mIMWSDK.requestVfCode(this, "86", "13622843403", new SFCallBack<BaseResponseModel>() {
 //            @Override
 //            public void success(BaseResponseModel responseModel, String result) {
@@ -435,9 +460,22 @@ public class MainActivity extends Activity {
 //                mActExpoView.setsBaseDialog(commonDialog);
 //                commonDialog.setContentView(mActExpoView);
 //                commonDialog.show();
+
             }
         });
 
+        findViewById(R.id.openUrl).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+
+                if(SStringUtil.isEmpty(SdkUtil.getUid(activity))){
+                    ToastUtils.toast(activity,"请先登录");
+                    return;
+                }
+                mIMWSDK.openUrlByBrowser(MainActivity.this, "https://activity.tthplay.com/api/redirect/page");
+            }
+        });
+
+        AppUtil.hideActivityBottomBar(this);
     }
 
     private void handleLoginResponse(SLoginResponse sLoginResponse) {
@@ -561,7 +599,7 @@ public class MainActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+//        super.onBackPressed();
         PL.i("activity onBackPressed");
     }
 

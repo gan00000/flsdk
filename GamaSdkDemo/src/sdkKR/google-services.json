@@ -1,34 +1,72 @@
-
+//{
+//  "project_info": {
+//    "project_number": "1046395251901",
+//    "project_id": "tgswkr-and",
+//    "storage_bucket": "tgswkr-and.appspot.com"
+//  },
+//  "client": [
+//    {
+//      "client_info": {
+//        "mobilesdk_app_id": "1:1046395251901:android:2b052b2c527e9da4f61bd4",
+//        "android_client_info": {
+//          "package_name": "com.tgswkr.koda"
+//        }
+//      },
+//      "oauth_client": [
+//        {
+//          "client_id": "1046395251901-vntgd12nk6833e48pnobuka75lc7g6ae.apps.googleusercontent.com",
+//          "client_type": 3
+//        }
+//      ],
+//      "api_key": [
+//        {
+//          "current_key": "AIzaSyC5Gt4HBi_rB8bt10Oh1THiYd50VZOSSqY"
+//        }
+//      ],
+//      "services": {
+//        "appinvite_service": {
+//          "other_platform_oauth_client": [
+//            {
+//              "client_id": "1046395251901-vntgd12nk6833e48pnobuka75lc7g6ae.apps.googleusercontent.com",
+//              "client_type": 3
+//            }
+//          ]
+//        }
+//      }
+//    }
+//  ],
+//  "configuration_version": "1"
+//}
 {
   "project_info": {
-    "project_number": "1046395251901",
-    "project_id": "tgswkr-and",
-    "storage_bucket": "tgswkr-and.appspot.com"
+    "project_number": "116874169821",
+    "project_id": "kr-tgmfl-and",
+    "storage_bucket": "kr-tgmfl-and.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1046395251901:android:2b052b2c527e9da4f61bd4",
+        "mobilesdk_app_id": "1:116874169821:android:a3aad8a8f1a01bd96cba34",
         "android_client_info": {
-          "package_name": "com.tgswkr.koda"
+          "package_name": "com.kodatgfm.kr"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1046395251901-vntgd12nk6833e48pnobuka75lc7g6ae.apps.googleusercontent.com",
+          "client_id": "116874169821-nrpgukebslsanerg4ov3gvck0pghumgj.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC5Gt4HBi_rB8bt10Oh1THiYd50VZOSSqY"
+          "current_key": "AIzaSyBfUtJI1GCpz-6qB4fuLfh7q3oGYXttBCs"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1046395251901-vntgd12nk6833e48pnobuka75lc7g6ae.apps.googleusercontent.com",
+              "client_id": "116874169821-nrpgukebslsanerg4ov3gvck0pghumgj.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
@@ -38,5 +76,3 @@
   ],
   "configuration_version": "1"
 }
-
-    

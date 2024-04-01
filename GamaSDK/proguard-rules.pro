@@ -97,3 +97,5 @@
 
 
 -dontwarn java.lang.invoke.StringConcatFactory
+-keep public class com.xlsdk.mediator.** { *; }
+-keep public class com.samsung.** { *; }

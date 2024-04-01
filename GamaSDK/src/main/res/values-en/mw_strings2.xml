@@ -1,5 +1,4 @@
 <resources>
-
     <string name="text_phone_bind">Binding phone</string>
     <string name="text_phone_area_code">Area code</string>
     <string name="text_phone_input_hint">Enter your phone number</string>
@@ -16,5 +15,12 @@
     <string name="text_has_bind_tips_mw">Member Account</string>
     <string name="text_notice">Announcement</string>
     <string name="text_account_not_login">You do not have an account, please login first！</string>
-
+    <string name="text_has_bind_tips_twitter">Account has been upgraded</string>
+    <string name="text_has_upgrade_account">Account has been upgraded</string>
+    <string name="text_game_name">game name：</string>
+    <string name="text_server_name">server：</string>
+    <string name="text_role_name">role name：</string>
+    <string name="text_account_name">account：</string>
+    <string name="text_account_uid">uid：</string>
+    <string name="text_account_del">delete account</string>
 </resources>

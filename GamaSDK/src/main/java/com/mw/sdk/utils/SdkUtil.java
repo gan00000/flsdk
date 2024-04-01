@@ -396,6 +396,7 @@ public class SdkUtil {
     public static void updateLoginData(Context context, SLoginResponse sLoginResponse){
         if (sLoginResponse != null){
             try {
+                sLoginResponse.getData().setGameCode(ResConfig.getGameCode(context));
                 Gson gson = new Gson();
                 String result = gson.toJson(sLoginResponse);
                 saveSdkLoginData(context, result);
@@ -422,7 +423,7 @@ public class SdkUtil {
 
     }
 
-    public static boolean isLogin(Context context){
+    public static boolean isLogin(Context context){//次api会出现有登录记录的情况下，用户再次打开未登录成功也会返回true
         SLoginResponse sLoginResponse = getCurrentUserLoginResponse(context);
         if (sLoginResponse != null && sLoginResponse.isRequestSuccess() && sLoginResponse.getData()!= null && SStringUtil.isNotEmpty(sLoginResponse.getData().getUserId())){
             return true;
@@ -1019,5 +1020,19 @@ public class SdkUtil {
         return SGameLanguage.zh_TW.getLanguage();//默认为繁体
     }
 
+    private static final String SDK_FLOAT_CFG_DATA = "SDK_FLOAT_CFG_DATA";//保存sdk配置 cdn文件
+    public static void saveFloatCfgData(Context context,String cfg){
+        SPUtil.saveSimpleInfo(context, SDK_SP_FILE, SDK_FLOAT_CFG_DATA,cfg);
+    }
+    public static String getFloatCfgData(Context context){
+        return SPUtil.getSimpleString(context, SDK_SP_FILE, SDK_FLOAT_CFG_DATA);
+    }
 
+    private static final String SDK_FLOAT_MENU_RES_DATA = "SDK_FLOAT_MENU_RES_DATA";//保存sdk配置 cdn文件
+    public static void saveFloatMenuResData(Context context, String cfg){
+        SPUtil.saveSimpleInfo(context, SDK_SP_FILE, SDK_FLOAT_MENU_RES_DATA,cfg);
+    }
+    public static String getFloatMenuResData(Context context){
+        return SPUtil.getSimpleString(context, SDK_SP_FILE, SDK_FLOAT_MENU_RES_DATA);
+    }
 }

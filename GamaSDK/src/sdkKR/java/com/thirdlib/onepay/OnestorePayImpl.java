@@ -123,9 +123,7 @@ public class OnestorePayImpl implements IPay, PurchaseManager.Callback {
                         }
                     }
 
-                    if (loadingDialog != null) {
-                        loadingDialog.dismissProgressDialog();
-                    }
+                    dimissDialog();
 
                     if (iPayCallBack != null) {
                         iPayCallBack.success(payBean);
@@ -138,16 +136,14 @@ public class OnestorePayImpl implements IPay, PurchaseManager.Callback {
     }
 
     private void callbackFail(String message) {
-
+        isPaying = false;
         if (mActivity != null) {
             mActivity.runOnUiThread(new Runnable() {
 
                 @Override
                 public void run() {
 
-                    if (loadingDialog != null) {
-                        loadingDialog.dismissProgressDialog();
-                    }
+                    dimissDialog();
 
                     if (!TextUtils.isEmpty(message) && TAG_USER_CANCEL.equals(message)){
                         PL.i(TAG_USER_CANCEL);
@@ -194,7 +190,7 @@ public class OnestorePayImpl implements IPay, PurchaseManager.Callback {
     @Override
     public void startPay(Activity activity, PayReqBean payReqBean) {
 
-        this.createOrderIdReqBean = null;
+//        this.createOrderIdReqBean = null;
 
         PL.i("the aar version info:" + SdkUtil.getSdkInnerVersion(activity) + "_" + BuildConfig.JAR_VERSION);//打印版本号
 
@@ -202,8 +198,7 @@ public class OnestorePayImpl implements IPay, PurchaseManager.Callback {
             PL.w("activity is null");
             return;
         }
-        this.mActivity = activity;
-        mContext = activity.getApplicationContext();
+
         if (payReqBean == null) {
             PL.w("payReqBean is null");
             return;
@@ -215,6 +210,14 @@ public class OnestorePayImpl implements IPay, PurchaseManager.Callback {
         }
         PL.w("google set paying...");
         isPaying = true;
+
+        //创建Loading窗
+        if(loadingDialog == null ||  this.mActivity != activity){
+            dimissDialog();
+            loadingDialog = new LoadingDialog(activity);
+        }
+        this.mActivity = activity;
+        mContext = activity.getApplicationContext();
 
 //        if(activity != mActivity && purchaseManager != null){
 //            purchaseManager.destroy();
@@ -237,8 +240,6 @@ public class OnestorePayImpl implements IPay, PurchaseManager.Callback {
         //设置储值接口名
         this.createOrderIdReqBean.setRequestMethod(ApiRequestMethod.API_ORDER_CREATE);
 
-        //创建Loading窗
-        loadingDialog = new LoadingDialog(activity);
         if (this.createOrderIdReqBean.isInitOk()) {
             //开始储值,先查询有没有未消耗的商品
 //            onePayInActivity(activity);
@@ -249,10 +250,16 @@ public class OnestorePayImpl implements IPay, PurchaseManager.Callback {
             ToastUtils.toast(activity, "please log in to the game first");
             callbackFail("can not find role info:" + this.createOrderIdReqBean.print());
         }
-        isPaying = false;
+        //isPaying = false;
         PL.w("google set not paying");
     }
 
+    private void dimissDialog() {
+        if (loadingDialog != null) {
+            loadingDialog.dismissProgressDialog();
+        }
+        isPaying = false;
+    }
 
     @Override
     public void startQueryPurchase(Context mContext) {
@@ -303,9 +310,7 @@ public class OnestorePayImpl implements IPay, PurchaseManager.Callback {
     @Override
     public void onDestroy(Activity activity) {
         PL.i( "onDestroy");
-        if (loadingDialog != null) {
-            loadingDialog.dismissProgressDialog();
-        }
+        dimissDialog();
         if (purchaseManager != null) {
             purchaseManager.destroy();
             purchaseManager = null;
@@ -355,9 +360,7 @@ public class OnestorePayImpl implements IPay, PurchaseManager.Callback {
 
                             purchaseManager.launchPurchaseFlow(activity, purchaseFlowParams);
 
-                            if (loadingDialog != null) {
-                                loadingDialog.dismissProgressDialog();
-                            }
+                            dimissDialog();
                         }
 
                         @Override
@@ -600,9 +603,7 @@ public class OnestorePayImpl implements IPay, PurchaseManager.Callback {
                 }
             });
 
-            if (loadingDialog != null) {
-                loadingDialog.dismissProgressDialog();
-            }
+            dimissDialog();
         }
     }
 
@@ -619,9 +620,7 @@ public class OnestorePayImpl implements IPay, PurchaseManager.Callback {
                 }
             });
 
-            if (loadingDialog != null) {
-                loadingDialog.dismissProgressDialog();
-            }
+            dimissDialog();
         }
     }
 
