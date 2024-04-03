@@ -16,6 +16,7 @@ import com.mw.sdk.constant.ApiRequestMethod;
 import com.mw.sdk.constant.ChannelPlatform;
 import com.mw.sdk.pay.IPayCallBack;
 import com.mw.sdk.utils.PayHelper;
+import com.mw.sdk.utils.SdkUtil;
 import com.xlsdk.mediator.XLSDK;
 import com.xlsdk.mediator.sdk.XLGameRoleInfo;
 import com.xlsdk.mediator.sdk.XLOrderInfo;
@@ -59,6 +60,7 @@ public class LunqiPayImpl {
 
     public void startPay(Activity activity, PayCreateOrderReqBean createOrderIdReqBean) {
 
+        PL.i("LunqiPayImpl startPay");
         if (SStringUtil.isEmpty(createOrderIdReqBean.getProductId())){
             handlePayFail("productId is empty");
             return;
@@ -82,7 +84,7 @@ public class LunqiPayImpl {
         //设置储值接口名
         this.createOrderIdReqBean.setRequestMethod(ApiRequestMethod.API_ORDER_CREATE);
         this.createOrderIdReqBean.setMode(ChannelPlatform.LUNQI.getChannel_platform());
-
+        PL.i("LunqiPayImpl requestCreateOrder");
         //创单
         PayApi.requestCreateOrder(this.mActivity, this.createOrderIdReqBean, new SFCallBack<GPCreateOrderIdRes>() {
             @Override
@@ -97,7 +99,7 @@ public class LunqiPayImpl {
                         devJsonObject.put("userId", createOrderIdReqBean.getUserId());
                         devJsonObject.put("orderId", orderId);
                         //devJsonObject.put("cpOrderId", createOrderIdReqBean.getCpOrderId());
-
+                        PL.i("LunqiPayImpl lunqiPurchase");
                         lunqiPurchase(mActivity, createOrderIdReqBean.getProductId(), orderId, createOrderIdReqBean.getCpOrderId(), devJsonObject.toString(),
                                 result.getPayData().getProductName(), result.getPayData().getAmount());
                     }else {
@@ -131,7 +133,14 @@ public class LunqiPayImpl {
         orderInfo.setGoodsName(productName);//商品名称，必填
         orderInfo.setGoodsDesc(productName);//商品描述，必填
         orderInfo.setPrice(price);//单个商品价格，单位：分 有就传,没有填0
-        orderInfo.setExtrasParams(this.createOrderIdReqBean.getExtra());//扩展参数，必填
+        try {
+            JSONObject extraJsonObject = new JSONObject();
+            extraJsonObject.put("userId", SdkUtil.getUid(activity));
+            extraJsonObject.put("orderId", orderId);
+            orderInfo.setExtrasParams(extraJsonObject.toString());//扩展参数，必填
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         orderInfo.setCpOrderID(orderId);//产品订单号，有就传,没有填"0"
         XLGameRoleInfo gameRoleInfo = new XLGameRoleInfo();
 
