@@ -105,6 +105,8 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
         delAccountCancelButton = persionCenterView.findViewById(R.id.btn_delete_cancel);
         delAccountOkButton = persionCenterView.findViewById(R.id.btn_delete_confirm);
 
+        switchAccountView.setVisibility(View.GONE);
+        delAccountView.setVisibility(View.GONE);
         updradeAccountView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
