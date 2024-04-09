@@ -472,7 +472,7 @@ android {
 
             applicationId "com.kodatgfm.kr"
             minSdkVersion 21
-            targetSdkVersion 33
+            targetSdkVersion 34
             versionCode 1
             versionName "1.0"
 
