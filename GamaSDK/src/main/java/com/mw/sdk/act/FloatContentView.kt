@@ -75,14 +75,17 @@ class FloatContentView : SLoginBaseRelativeLayout {
             floatMenuResData = Gson().fromJson(menuResData, FloatMenuResData::class.java)
         }
 
-        for (cfgMenu in floatConfigData.menuList){//以配置文件对象字段为准
-            for (resMenu in floatMenuResData.data.menuList){
-                if (resMenu.code.equals(cfgMenu.code) && resMenu.isDisplay){
-                    menuDatas?.add(cfgMenu)
-                    break
+        if (floatConfigData.menuList != null && floatMenuResData.data != null && floatMenuResData.data.menuList != null){
+            for (cfgMenu in floatConfigData.menuList){//以配置文件对象字段为准
+                for (resMenu in floatMenuResData.data.menuList){
+                    if (resMenu.code.equals(cfgMenu.code) && resMenu.isDisplay){
+                        menuDatas?.add(cfgMenu)
+                        break
+                    }
                 }
             }
         }
+
 
 //        menuDatas?.addAll(datas)
 //        for (i in 1..10)
@@ -93,7 +96,12 @@ class FloatContentView : SLoginBaseRelativeLayout {
 //            aMenuData.contentUrl = "https://www.baidu.com/"
 //            menuDatas?.add(aMenuData)
 //        }
-        menuDatas?.first()?.isClick = true
+
+        menuDatas?.let {
+            if (it.isNotEmpty()){
+                it.first().isClick = true
+            }
+        }
         initView()
     }
 
@@ -146,16 +154,16 @@ class FloatContentView : SLoginBaseRelativeLayout {
 
     }
 
-    fun refreshData(datas: List<MenuData>): Unit {
-
-        menuDatas?.let {
-            it.clear()
-            it.addAll(datas)
-            menuDatas?.first()?.isClick = true
-            menuRecyclerView?.adapter?.notifyDataSetChanged()
-        }
-
-    }
+//    fun refreshData(datas: List<MenuData>): Unit {
+//
+//        menuDatas?.let {
+//            it.clear()
+//            it.addAll(datas)
+//            menuDatas?.first()?.isClick = true
+//            menuRecyclerView?.adapter?.notifyDataSetChanged()
+//        }
+//
+//    }
 
     override fun createView(context: Context?, layoutInflater: LayoutInflater?): View {
         PL.d("createView")
@@ -169,15 +177,15 @@ class FloatContentView : SLoginBaseRelativeLayout {
         menuRecyclerView.layoutManager = LinearLayoutManager(getContext())
 
 
-        menuDatas?.let {
-            if (it.isNotEmpty()) {
-                val firstData = it[0]
-
-                val sr = SGameBaseRequestBean(context)
-                sr.completeUrl = firstData.url
-                contentWebView.loadUrl(sr.createPreRequestUrl())
-            }
-        }
+//        menuDatas?.let {
+//            if (it.isNotEmpty()) {
+//                val firstData = it[0]
+//
+//                val sr = SGameBaseRequestBean(context)
+//                sr.completeUrl = firstData.url
+//                contentWebView.loadUrl(sr.createPreRequestUrl())
+//            }
+//        }
         val menuCommonAdapter = object : CommonAdapter<MenuData>(
             this.context,
             R.layout.float_left_menu_item,
@@ -292,7 +300,9 @@ class FloatContentView : SLoginBaseRelativeLayout {
                         contentWebView.visibility = View.VISIBLE
                         rightContentView.visibility = View.GONE
 
-                        contentWebView.loadUrl(aMenuData.url)
+                        val sGameBaseRequestBean = SGameBaseRequestBean(activity)
+                        sGameBaseRequestBean.completeUrl = aMenuData.url
+                        contentWebView.loadUrl(sGameBaseRequestBean.createPreRequestUrl())
                     }
                     if (FloatMenuType.MENU_TYPE_CS == aMenuData.code && FloatingManager.getInstance().redDotRes != null && FloatingManager.getInstance().redDotRes.data != null){
                         FloatingManager.getInstance().redDotRes.data.isCs = false
