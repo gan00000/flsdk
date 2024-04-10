@@ -349,30 +349,13 @@ public class SansungPayImpl implements IPay{
                                 PL.i(product.dump());
                                 if (product.getIsConsumable()) {
                                     try {
-//                                        if (consumeItemMap.get(product.getPurchaseId()) == null) {
-//                                            consumeItemMap.put(product.getPurchaseId(), product.getItemId());
-//                                            if (mConsumablePurchaseIDs.length() == 0)
-//                                                mConsumablePurchaseIDs = product.getPurchaseId();
-//                                            else
-//                                                mConsumablePurchaseIDs = mConsumablePurchaseIDs + "," + product.getPurchaseId();
-//                                        }
-
-//                                        if (SStringUtil.isNotEmpty(product.getPurchaseId())) {
-//                                            if (mConsumablePurchaseIDs.length() == 0)
-//                                                mConsumablePurchaseIDs = product.getPurchaseId();
-//                                            else
-//                                                mConsumablePurchaseIDs = mConsumablePurchaseIDs + "," + product.getPurchaseId();
-//                                        }
-                                        /* ----------------------------------------------------- */
-//                                        if (mConsumablePurchaseIDs.length() > 0) {
-//                                            mIapHelper.consumePurchasedItems(mConsumablePurchaseIDs, new OnConsumePurchasedItemsListener() {
-//                                                @Override
-//                                                public void onConsumePurchasedItems(ErrorVo errorVo, ArrayList<ConsumeVo> arrayList) {
-//                                                    PL.i("onConsumePurchasedItems result");
-//                                                }
-//                                            });
-//                                            mConsumablePurchaseIDs = "";
-//                                        }
+                                        //无论如何查到都消耗掉，也补发
+                                        mIapHelper.consumePurchasedItems(product.getPurchaseId(), new OnConsumePurchasedItemsListener() {
+                                            @Override
+                                            public void onConsumePurchasedItems(ErrorVo errorVo, ArrayList<ConsumeVo> arrayList) {
+                                                PL.i(  "onGetOwnedProducts > onConsumePurchasedItems finish");
+                                            }
+                                        });
 
                                         PayExchangeReqBean exchangeReqBean = new PayExchangeReqBean(activity);
 //                                        exchangeReqBean.setDataSignature();
@@ -396,23 +379,21 @@ public class SansungPayImpl implements IPay{
                                         PayApi.requestCommonPaySendStone(activity, exchangeReqBean, new SFCallBack<GPExchangeRes>() {
                                             @Override
                                             public void success(GPExchangeRes result, String msg) {
-                                                PL.i("startQueryPurchase requestSendStone success => " + msg);
+                                                PL.i("onGetOwnedProducts requestSendStone success => " + msg);
                                                 //3.消费
-                                                mIapHelper.consumePurchasedItems(product.getPurchaseId(), new OnConsumePurchasedItemsListener() {
-                                                    @Override
-                                                    public void onConsumePurchasedItems(ErrorVo errorVo, ArrayList<ConsumeVo> arrayList) {
-                                                        PL.i(  "onPayment > onConsumePurchasedItems finish");
-                                                    }
-                                                });
+//                                                mIapHelper.consumePurchasedItems(product.getPurchaseId(), new OnConsumePurchasedItemsListener() {
+//                                                    @Override
+//                                                    public void onConsumePurchasedItems(ErrorVo errorVo, ArrayList<ConsumeVo> arrayList) {
+//                                                        PL.i(  "onPayment > onConsumePurchasedItems finish");
+//                                                    }
+//                                                });
                                             }
 
                                             @Override
                                             public void fail(GPExchangeRes result, String msg) {
-                                                PL.i("startQueryPurchase requestSendStone fail => " + msg);
+                                                PL.i("onGetOwnedProducts requestSendStone fail => " + msg);
                                             }
                                         });
-
-
 
                                     } catch (Exception e) {
                                         PL.e( "exception" + e);
