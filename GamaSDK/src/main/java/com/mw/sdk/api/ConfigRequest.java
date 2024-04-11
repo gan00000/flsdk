@@ -3,13 +3,7 @@ package com.mw.sdk.api;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.core.base.bean.BaseReqeustBean;
-import com.core.base.callback.ISReqCallBack;
-import com.core.base.request.CfgFileRequest;
 import com.core.base.utils.PL;
-import com.mw.sdk.R;
-import com.mw.sdk.bean.res.ActDataModel;
-import com.mw.sdk.bean.res.ToggleResult;
 import com.mw.sdk.utils.ResConfig;
 import com.mw.sdk.utils.SdkUtil;
 
@@ -17,10 +11,8 @@ import java.io.IOException;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
-import io.reactivex.rxjava3.core.ObservableSource;
 import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.disposables.Disposable;
-import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import okhttp3.ResponseBody;
 
