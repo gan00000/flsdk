@@ -7,8 +7,22 @@ import com.core.base.bean.BaseReqeustBean;
 import com.core.base.callback.ISReqCallBack;
 import com.core.base.request.CfgFileRequest;
 import com.core.base.utils.PL;
+import com.mw.sdk.R;
+import com.mw.sdk.bean.res.ActDataModel;
+import com.mw.sdk.bean.res.ToggleResult;
 import com.mw.sdk.utils.ResConfig;
 import com.mw.sdk.utils.SdkUtil;
+
+import java.io.IOException;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.core.ObservableSource;
+import io.reactivex.rxjava3.core.Observer;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.functions.Function;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+import okhttp3.ResponseBody;
 
 /**
  * Created by gan on 2017/2/14.
@@ -23,17 +37,9 @@ public class ConfigRequest{
 
     public static void requestBaseCfg(final Context context){
 
-        CfgFileRequest cfgFileRequest = new CfgFileRequest(context);
+      /*  CfgFileRequest cfgFileRequest = new CfgFileRequest(context);
         BaseReqeustBean baseReqeustBean = new BaseReqeustBean(context);
         final String gameCode = ResConfig.getGameCode(context.getApplicationContext());
-//        String mUrl = null;
-//        if (!ResConfig.isInfringement(context)) {
-//            mUrl = ResConfig.getCdnPreferredUrl(context) + "android/nonifm/s_sdk_config.txt";
-//        }else{
-//            mUrl =  + "android/ifm/s_sdk_config.txt";
-//        }
-
-//        https://www.meowplayer.com/sdk/config/jjcs/v1/version.json
 
         String configUrl = ResConfig.getCdnPreferredUrl(context) + "sdk/config/" + gameCode + "/v1/version.json?v=" + System.currentTimeMillis();
         baseReqeustBean.setCompleteUrl(configUrl);
@@ -66,12 +72,51 @@ public class ConfigRequest{
 
             }
         });
-        cfgFileRequest.excute();
+        cfgFileRequest.excute();*/
+
+        final String gameCode = ResConfig.getGameCode(context.getApplicationContext());
+        RetrofitClient.instance().build(context,URLType.CDN).create(MWApiService.class)
+                .getBaseConfig(gameCode, System.currentTimeMillis() + "")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ResponseBody>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull ResponseBody responseBody) {
+
+                        try {
+                            String rawResult = responseBody.string();
+                            PL.i("getBaseConfig finish > " + rawResult);
+                            if (TextUtils.isEmpty(rawResult)){
+                                return;
+                            }
+                            SdkUtil.saveSdkCfg(context, rawResult);
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
     }
 
     public static void requestAreaCodeInfo(final Context context){
 
-        CfgFileRequest cfgFileRequest = new CfgFileRequest(context);
+        /*CfgFileRequest cfgFileRequest = new CfgFileRequest(context);
         BaseReqeustBean baseReqeustBean = new BaseReqeustBean(context);
 
         String configUrl = ResConfig.getCdnPreferredUrl(context) + "sdk/config/areaCode/areaInfo.json?v=" + System.currentTimeMillis();
@@ -105,7 +150,45 @@ public class ConfigRequest{
 
             }
         });
-        cfgFileRequest.excute();
+        cfgFileRequest.excute();*/
+
+        RetrofitClient.instance().build(context,URLType.CDN).create(MWApiService.class)
+                .getPhoneInfo(System.currentTimeMillis() + "")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ResponseBody>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull ResponseBody responseBody) {
+
+                        try {
+                            String rawResult = responseBody.string();
+                            PL.i("requestAreaCodeInfo finish");
+
+                            if (TextUtils.isEmpty(rawResult)){
+                                return;
+                            }
+                            SdkUtil.saveAreaCodeInfo(context,rawResult);
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
 }
