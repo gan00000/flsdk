@@ -68,7 +68,7 @@ import java.util.TimerTask;
 
 public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
-    private static final String TAG = LoginPresenterImpl.class.getSimpleName();
+//    private static final String TAG = LoginPresenterImpl.class.getSimpleName();
     private Activity mActivity;
 
     //是否自動登入的狀態
@@ -781,13 +781,13 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
      */
     private void sFbLogin(final Activity activity, final SFacebookProxy sFacebookProxy, final FbLoginCallBack fbLoginCallBack) {
         if (sFacebookProxy == null) {
-            PL.i(TAG, "Facebook Proxy為null");
+            PL.i("Facebook Proxy為null");
             return;
         }
         SFacebookProxy.FbLoginCallBack fbLoginCallBack1 = new SFacebookProxy.FbLoginCallBack() {
             @Override
             public void onCancel() {
-                PL.d(TAG, "sFbLogin cancel");
+                PL.d("sFbLogin cancel");
 //                if(fbLoginCallBack != null) {
 //                    fbLoginCallBack.loginSuccess(null);
 //                }
@@ -795,7 +795,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
             @Override
             public void onError(String message) {
-                PL.d(TAG, "sFbLogin error: " + message);
+                PL.d("sFbLogin error: " + message);
                 if (SStringUtil.isNotEmpty(message)) {
                     ToastUtils.toast(activity,message);
                 }
