@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide
 import com.core.base.utils.ApkInfoUtil
 import com.core.base.utils.PL
 import com.core.base.utils.SStringUtil
+import com.core.base.utils.ScreenHelper
 import com.google.gson.Gson
 import com.mw.sdk.R
 import com.mw.sdk.bean.SGameBaseRequestBean
@@ -173,8 +174,12 @@ class FloatContentView : SLoginBaseRelativeLayout {
 
     private fun hand_H_view(context: Context?) {
 
-
-        menuRecyclerView.layoutManager = LinearLayoutManager(getContext())
+        val layoutManager = LinearLayoutManager(getContext())
+        menuRecyclerView.layoutManager = layoutManager
+        if (ScreenHelper.isPortrait(context)){
+            //配置布局，默认为vertical（垂直布局），下边这句将布局改为水平布局
+            layoutManager.orientation = LinearLayoutManager.HORIZONTAL;
+        }
 
 
 //        menuDatas?.let {
@@ -326,46 +331,5 @@ class FloatContentView : SLoginBaseRelativeLayout {
         })
         menuRecyclerView.adapter = menuCommonAdapter
     }
-
-    private fun handle_V_view(  //竖屏
-        context: Context?,
-        actView: View,
-        titleBgIV: ImageView,
-        backBgIV: ImageView,
-        closeBgIV: ImageView,
-        contentPageView: ViewPager2,
-        titleTv: TextView
-    ) {
-    }
-
-    private fun loadViewImage(
-        mData: ActDataModel.ActData,
-        backBgIV: ImageView,
-        closeBgIV: ImageView,
-        titleBgIV: ImageView
-    ) {
-        if (mData.titleImgUrl.isNotEmpty()) {//背景图片有的话，才一起加载
-
-            val loginTimestamp = SdkUtil.getSdkTimestamp(activity)
-            Glide.with(this@FloatContentView)
-                .load(mData.backImgUrl + "?" + loginTimestamp)
-                .centerCrop()
-                .placeholder(R.mipmap.act_title_back_bg)
-                .into(backBgIV)
-            Glide.with(this@FloatContentView)
-                .load(mData.closeImgUrl + "?" + loginTimestamp)
-                .centerCrop()
-                .placeholder(R.mipmap.act_title_close_bg)
-                .into(closeBgIV)
-
-            Glide.with(this@FloatContentView)
-                .load(mData.titleImgUrl + "?" + loginTimestamp)
-                .centerCrop()
-                .placeholder(R.mipmap.act_title_bg)
-                .into(titleBgIV)
-
-        }
-    }
-
 
 }
