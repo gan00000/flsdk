@@ -15,12 +15,6 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
-import com.linecorp.linesdk.Scope;
-import com.linecorp.linesdk.auth.LineAuthenticationParams;
-import com.linecorp.linesdk.auth.LineLoginApi;
-import com.linecorp.linesdk.auth.LineLoginResult;
-
-import java.util.Arrays;
 
 public class SLineSignIn {
 
@@ -85,21 +79,21 @@ public class SLineSignIn {
 			return;
 		}
 		this.signInCallBack = googleSignInCallBack;
-		try{
-			// App-to-app login
-			Intent loginIntent = LineLoginApi.getLoginIntent(
-					this.activity,
-					channelId,
-					new LineAuthenticationParams.Builder()
-							.scopes(Arrays.asList(Scope.PROFILE))
-							// .nonce("<a randomly-generated string>") // nonce can be used to improve security
-							.build());
-			this.activity.startActivityForResult(loginIntent, LINE_LOGIN_REQUEST_CODE);
-
-		}
-		catch(Exception e) {
-			Log.e(TAG, e.toString());
-		}
+//		try{
+//			// App-to-app login
+//			Intent loginIntent = LineLoginApi.getLoginIntent(
+//					this.activity,
+//					channelId,
+//					new LineAuthenticationParams.Builder()
+//							.scopes(Arrays.asList(Scope.PROFILE))
+//							// .nonce("<a randomly-generated string>") // nonce can be used to improve security
+//							.build());
+//			this.activity.startActivityForResult(loginIntent, LINE_LOGIN_REQUEST_CODE);
+//
+//		}
+//		catch(Exception e) {
+//			Log.e(TAG, e.toString());
+//		}
 
 	}
 
@@ -114,7 +108,7 @@ public class SLineSignIn {
 		isCancel = false;
 		dimissDialog();
 
-		LineLoginResult result = LineLoginApi.getLoginResultFromIntent(data);
+		/*LineLoginResult result = LineLoginApi.getLoginResultFromIntent(data);
 
 		switch (result.getResponseCode()) {
 
@@ -149,7 +143,7 @@ public class SLineSignIn {
 				if (signInCallBack != null) {
 					signInCallBack.failure();
 				}
-		}
+		}*/
 
 	}
 

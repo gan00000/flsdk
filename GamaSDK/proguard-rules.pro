@@ -77,7 +77,7 @@
 -keep public class com.linecorp.** { *; }
 -keep public class com.appflyer.** { *; }
 -keep public class io.** { *; }
--keep public class com.zhy.** { *; }
+#-keep public class com.zhy.** { *; }
 -keep public class org.spongycastle.** { *; }
 -keep public class javax.** { *; }
 -keep public class com.adjust.** { *; }

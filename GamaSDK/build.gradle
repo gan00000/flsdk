@@ -13,7 +13,7 @@ android {
         jvmTarget = rootProject.ext.jvmTarget
     }
 
-    def sdk_version = "2.1.1"
+    def sdk_version = "2.1.2"
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
@@ -152,7 +152,7 @@ dependencies {
     implementation 'com.google.android.play:review:2.0.1'
 
     implementation("com.google.guava:guava:31.1-android")
-    implementation 'com.zhy:base-rvadapter:3.0.3'
+//    implementation 'com.zhy:base-rvadapter:3.0.3'
 
     //Google库
     implementation 'com.google.android.gms:play-services-auth:20.7.0'
@@ -179,7 +179,7 @@ dependencies {
     // Facebook Messenger only
     implementation 'com.facebook.android:facebook-messenger:16.0.0'
     //line
-    implementation 'com.linecorp:linesdk:5.0.1'
+//    implementation 'com.linecorp:linesdk:5.0.1'
 
     //af
     implementation 'com.appsflyer:af-android-sdk:6.13.0'
