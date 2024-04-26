@@ -316,7 +316,7 @@ public class Request {
         requestParams.put("adId",sGameBaseRequestBean.getAdvertisingId());
         requestParams.put("appsflyerId",sGameBaseRequestBean.getAppsflyerId());
 
-        if (DataManager.getInstance().isLogin()) {
+        if (DataManager.getInstance().isLogin() || SdkUtil.isLogin(context)) {
             requestParams.put("userId",sGameBaseRequestBean.getUserId());
         }
 

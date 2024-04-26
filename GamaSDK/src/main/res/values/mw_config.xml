@@ -41,4 +41,7 @@
 
     <string name="sdk_release_european"></string>
 
+    <string name="mw_td_appid"></string>
+    <string name="mw_td_te_server_url"></string>
+
 </resources>

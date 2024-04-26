@@ -386,6 +386,12 @@ public class SdkUtil {
         return encryptText;
     }
 
+    public static void resetSdkLoginData(Context context){
+        SLoginResponse sLoginResponse = new SLoginResponse();
+        sLoginResponse.setData(new SLoginResponse.Data());
+        SdkUtil.updateLoginData(context, sLoginResponse);
+    }
+
     private static void saveSdkLoginData(Context context,String data){
         if (SStringUtil.isNotEmpty(data)){
             data = encryptText(data);//进行加密后保存

@@ -83,6 +83,7 @@ import com.thirdlib.adjust.AdjustHelper;
 import com.thirdlib.af.AFHelper;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.huawei.HuaweiPayImpl;
+import com.thirdlib.td.TDAnalyticsHelper;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -133,11 +134,15 @@ public class BaseSdkImpl implements IMWSDK {
 
         //获取Google 广告ID
         SdkEventLogger.registerGoogleAdId(application.getApplicationContext());
+        //充值登录数据
+        SdkUtil.resetSdkLoginData(application.getApplicationContext());
 
         AFHelper.applicationOnCreate(application);
         AdjustHelper.init(application);
+        TDAnalyticsHelper.init(application.getApplicationContext());
 
         SPUtil.saveSimpleInfo(application.getApplicationContext(), SdkUtil.SDK_SP_FILE,"sdk_applicationOnCreate_call", true);
+
     }
 
     //    @Deprecated
@@ -218,6 +223,8 @@ public class BaseSdkImpl implements IMWSDK {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
+
+                TDAnalyticsHelper.setAccountId(roleId);//shushu
 
                 if (iPay != null && SStringUtil.isNotEmpty(roleId) && SStringUtil.isNotEmpty(severCode) && SStringUtil.isNotEmpty(SdkUtil.getUid(activity))){
                     iPay.startQueryPurchase(activity.getApplicationContext());

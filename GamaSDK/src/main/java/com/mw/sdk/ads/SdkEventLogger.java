@@ -29,6 +29,8 @@ import com.thirdlib.adjust.AdjustHelper;
 import com.thirdlib.af.AFHelper;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.google.SGoogleProxy;
+import com.thirdlib.td.TDAnalyticsHelper;
+import com.thirdlib.td.TDBean;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -83,6 +85,12 @@ public class SdkEventLogger {
                     trackingWithEventName(activity,EventConstant.EventName.Paid_D2Login.name(),eventValue);
                 }
             }
+
+//            TDBean tdBean = new TDBean();
+//            tdBean.setLogin_type(loginResponse.getData().getLoginType());
+//            tdBean.setUserId(loginResponse.getData().getUserId());
+            TDAnalyticsHelper.trackEvent(EventConstant.EventName.LOGIN_SUCCESS.name());
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -107,6 +115,12 @@ public class SdkEventLogger {
             trackingWithEventName(activity,eventName,eventValue,EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
             trackingWithEventName(activity, AppEventsConstants.EVENT_NAME_COMPLETED_REGISTRATION,eventValue,EventConstant.AdType.AdTypeFacebook);
             trackingWithEventName(activity, "COMPLETE_REGISTRATION_AND",eventValue,EventConstant.AdType.AdTypeFacebook);
+
+//            TDBean tdBean = new TDBean();
+//            tdBean.setRegister_type(loginResponse.getData().getLoginType());
+//            tdBean.setUserId(loginResponse.getData().getUserId());
+            TDAnalyticsHelper.trackEvent(EventConstant.EventName.REGISTER_SUCCESS.name());
+
         } catch (Exception e) {
             e.printStackTrace();
         }
