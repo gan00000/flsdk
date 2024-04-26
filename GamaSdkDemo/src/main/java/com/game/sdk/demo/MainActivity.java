@@ -485,6 +485,9 @@ public class MainActivity extends Activity {
             userId = uid;
             String sign = sLoginResponse.getData().getSign();
             String timestamp = sLoginResponse.getData().getTimestamp();
+            String gameCode = sLoginResponse.getData().getGameCode();
+
+           // sign equals md5(signKey+ gameCode + uid + timestamp);//验证通过
 
             //检验
 //            我们这边现在登录验证没有提供接口，贵方通过加密规则检验
