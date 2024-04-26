@@ -421,7 +421,13 @@ public class SdkUtil {
         }
         try {
             Gson gson = new Gson();
-            return gson.fromJson(loginResult, SLoginResponse.class);
+            SLoginResponse sLoginResponse = gson.fromJson(loginResult, SLoginResponse.class);
+
+            if (sLoginResponse != null && sLoginResponse.isRequestSuccess() && sLoginResponse.getData()!= null && SStringUtil.isNotEmpty(sLoginResponse.getData().getUserId())){
+                return sLoginResponse;
+            }
+            return null;
+
         } catch (JsonSyntaxException e) {
             e.printStackTrace();
             return null;
@@ -481,12 +487,12 @@ public class SdkUtil {
     /**
      * 绑定手机后刷新当前账号绑定状态
      */
-    public static void setAccountLinked(Context context){
+//    public static void setAccountLinked(Context context){
 //        String newSdkLoginData = JsonUtil.setValueByKey(context, getSdkLoginData(context), "beLinked", "1");
 //        if(!TextUtils.isEmpty(newSdkLoginData)) {
 //            saveSdkLoginData(context, newSdkLoginData);
 //        }
-    }
+//    }
 
     public static final String GAMA_LOGIN_USER_ID = "GAMA_LOGIN_USER_ID";
     public static final String GAMA_LOGIN_ROLE_ID = "GAMA_LOGIN_ROLE_ID";

@@ -7,6 +7,7 @@ import com.core.base.utils.SStringUtil;
 import com.google.gson.Gson;
 import com.mw.sdk.R;
 import com.mw.sdk.bean.SGameBaseRequestBean;
+import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.utils.DataManager;
 import com.mw.sdk.utils.ResConfig;
 import com.mw.sdk.utils.SdkUtil;
@@ -87,9 +88,12 @@ public class TDAnalyticsHelper {
                 superProperties.put("roleVipLevel", sGameBaseRequestBean.getRoleVipLevel());//字符串
 
                 superProperties.put("serverCode", sGameBaseRequestBean.getServerCode());//字符串
-                superProperties.put("serverName", sGameBaseRequestBean.getServerCode());//字符串
+                superProperties.put("serverName", sGameBaseRequestBean.getServerName());//字符串
 
-                superProperties.put("loginMode", sGameBaseRequestBean.getServerCode());//字符串
+                SLoginResponse sLoginResponse = SdkUtil.getCurrentUserLoginResponse(context);
+                if (sLoginResponse != null) {
+                    superProperties.put("loginMode", sLoginResponse.getData().getLoginType());//字符串
+                }
             }
 
 //            superProperties.put("age",1);//数字

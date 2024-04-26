@@ -225,6 +225,7 @@ public class BaseSdkImpl implements IMWSDK {
             public void run() {
 
                 TDAnalyticsHelper.setAccountId(roleId);//shushu
+                TDAnalyticsHelper.setCommonProperties(activity);
 
                 if (iPay != null && SStringUtil.isNotEmpty(roleId) && SStringUtil.isNotEmpty(severCode) && SStringUtil.isNotEmpty(SdkUtil.getUid(activity))){
                     iPay.startQueryPurchase(activity.getApplicationContext());

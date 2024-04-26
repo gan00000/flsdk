@@ -147,9 +147,11 @@ public class Request {
                     if (responseModel.isRequestSuccess()) {
 
                         SLoginResponse localLoginResponse = SdkUtil.getCurrentUserLoginResponse(context);
-                        localLoginResponse.getData().setTelephone(areaCode + "-" + telephone);
-                        localLoginResponse.getData().setBindPhone(true);
-                        SdkUtil.updateLoginData(context, localLoginResponse);
+                        if (localLoginResponse != null) {
+                            localLoginResponse.getData().setTelephone(areaCode + "-" + telephone);
+                            localLoginResponse.getData().setBindPhone(true);
+                            SdkUtil.updateLoginData(context, localLoginResponse);
+                        }
 
                         if (sfCallBack != null){
                             sfCallBack.success(localLoginResponse,rawResult);

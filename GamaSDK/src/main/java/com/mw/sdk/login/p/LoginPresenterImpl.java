@@ -51,6 +51,7 @@ import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.google.SGoogleSignIn;
 import com.thirdlib.huawei.HuaweiSignIn;
 import com.thirdlib.line.SLineSignIn;
+import com.thirdlib.td.TDAnalyticsHelper;
 import com.thirdlib.twitter.TwitterLogin;
 import com.mw.sdk.R;
 
@@ -1178,17 +1179,19 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         loginResponse.getData().setGameCode(ResConfig.getGameCode(getContext()));
         SdkUtil.updateLoginData(getContext(), loginResponse);
         DataManager.getInstance().setLogin(true);
+
         if (SStringUtil.isNotEmpty(loginType)) {//loginType为空时是账号注入登录，不能空时是其他普通登入
 
             SdkUtil.savePreviousLoginType(mActivity, loginType);
             try {
                 if (loginResponse != null) {
+
+                    TDAnalyticsHelper.setCommonProperties(getContext());
                     //5001 注册成功    1000登入成功
                     if (SStringUtil.isEqual(BaseResponseModel.SUCCESS_CODE, loginResponse.getCode())) {
                         SdkEventLogger.trackinLoginEvent(mActivity, loginResponse);
                     } else if (SStringUtil.isEqual(BaseResponseModel.SUCCESS_CODE_REG, loginResponse.getCode())) {
                         SdkEventLogger.trackinRegisterEvent(mActivity, loginResponse);
-
                         SdkEventLogger.trackinLoginEvent(mActivity, loginResponse);//註冊後直接登入
                         SdkUtil.saveSUserInfo(mActivity, loginResponse);
 
@@ -1660,7 +1663,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 if (sLoginResponse != null){
                     ToastUtils.toast(getActivity(),sLoginResponse.getMessage());
                     if (sLoginResponse.isRequestSuccess()) {
-                        SdkUtil.setAccountLinked(activity);
+                        //SdkUtil.setAccountLinked(activity);
                         if(callbackList != null && callbackList.size() > 0) {
                             for (SBaseRelativeLayout.OperationCallback callback : callbackList) {
                                 callback.statusCallback(SBaseRelativeLayout.OperationCallback.BIND_OK);
