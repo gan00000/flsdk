@@ -3,11 +3,13 @@ package com.mw.sdk.out.bean;
 import com.core.base.utils.SStringUtil;
 import com.google.gson.Gson;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 
 public class EventPropertie implements Serializable {
@@ -204,10 +206,6 @@ public class EventPropertie implements Serializable {
                     if (xField.get(this) != null) {
                         value = xField.get(this);
 
-                        if (value == null){
-                            continue;
-                        }
-
                         if (xField.getType() == String.class) {
                             String smv = (String) value;
                            if (SStringUtil.isNotEmpty(xField.getName()) && SStringUtil.isNotEmpty(smv)){
@@ -217,8 +215,26 @@ public class EventPropertie implements Serializable {
                                    e.printStackTrace();
                                }
                            }
-                        } else if (xField.getType() == int.class || xField.getType() == double.class || xField.getType() == float.class) {
+                        } else if (xField.getType() == int.class) {
+                            int ma = (int) value;
+                            if (ma != -999){
+                                try {
+                                    jsonObject.put(xField.getName(), ma);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }else if (xField.getType() == double.class) {
                             double ma = (double) value;
+                            if (ma != -999){
+                                try {
+                                    jsonObject.put(xField.getName(), ma);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }else if (xField.getType() == float.class) {
+                            float ma = (float) value;
                             if (ma != -999){
                                 try {
                                     jsonObject.put(xField.getName(), value);
@@ -226,19 +242,21 @@ public class EventPropertie implements Serializable {
                                     e.printStackTrace();
                                 }
                             }
-                        } else if (xField.getType() == boolean.class || xField.getType() == Boolean.class) {
+                        }else if (xField.getType() == boolean.class || xField.getType() == Boolean.class) {
                             boolean ma = (boolean) value;
                             try {
-                                jsonObject.put(xField.getName(), ma);
+                                if (ma) {
+                                    jsonObject.put(xField.getName(), ma);
+                                }
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                        }else if (xField.getType() == Object.class){
+                        }else if (xField.getType() == List.class || xField.getType() == ArrayList.class){
                             try {
                                 Gson gson = new Gson();
                                 String objstr = gson.toJson(value);
                                 if (SStringUtil.isNotEmpty(objstr)){
-                                    jsonObject.put(xField.getName(), new JSONObject());
+                                    jsonObject.put(xField.getName(), new JSONArray(objstr));
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
