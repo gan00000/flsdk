@@ -157,6 +157,12 @@
                     android:text="打开链接https://activity.tthplay.com/api/redirect/page" />
 
 
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/track_event"
+                    android:text="event test" />
+
             </LinearLayout>
 
 

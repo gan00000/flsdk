@@ -33,6 +33,8 @@ import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
 import com.mw.base.bean.SPayType;
 import com.mw.sdk.bean.req.PayCreateOrderReqBean;
+import com.mw.sdk.out.bean.EventItemDetailBean;
+import com.mw.sdk.out.bean.EventPropertie;
 import com.mw.sdk.utils.SdkUtil;
 import com.mw.sdk.callback.IPayListener;
 import com.mw.sdk.demo.R;
@@ -41,6 +43,9 @@ import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.out.IMWSDK;
 import com.mw.sdk.out.ISdkCallBack;
 import com.mw.sdk.out.MWSdkFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends Activity {
 
@@ -474,6 +479,36 @@ public class MainActivity extends Activity {
                 mIMWSDK.openUrlByBrowser(MainActivity.this, "https://activity.tthplay.com/api/redirect/page");
             }
         });
+
+        findViewById(R.id.track_event).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                //创建事件属性
+                EventPropertie eventPropertie = new EventPropertie();
+                eventPropertie.setActivity_type("m_type");
+                eventPropertie.setActivity_id("m_id");
+                eventPropertie.setTask_id("m_task_id");
+
+                //事件属性内的对象属性
+                List<EventItemDetailBean> get_item_detail_list = new ArrayList<>();
+
+                EventItemDetailBean eventItemDetailBean_1 = new EventItemDetailBean();
+                eventItemDetailBean_1.setItem_id("item_id");
+                eventItemDetailBean_1.setItem_name("item_name");
+                eventItemDetailBean_1.setItem_num(10);
+                get_item_detail_list.add(eventItemDetailBean_1);
+
+                EventItemDetailBean eventItemDetailBean_2 = new EventItemDetailBean();
+                eventItemDetailBean_2.setItem_id("item_id2");
+                eventItemDetailBean_2.setItem_name("item_name2");
+                eventItemDetailBean_2.setItem_num(102);
+                get_item_detail_list.add(eventItemDetailBean_2);
+
+                eventPropertie.setGet_item_detail(get_item_detail_list);
+                mIMWSDK.trackEvent(MainActivity.this, "standard_activity_get_reward",eventPropertie);
+            }
+        });
+
+
 
         AppUtil.hideActivityBottomBar(this);
     }
