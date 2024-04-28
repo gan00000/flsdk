@@ -19,6 +19,7 @@ import com.core.base.BaseWebViewClient;
 import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.AppUtil;
+import com.core.base.utils.JsonUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.PermissionUtil;
 import com.core.base.utils.SPUtil;
@@ -68,6 +69,7 @@ import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.login.widget.v2.AccountBindPhoneLayout;
 import com.mw.sdk.login.widget.v2.SelectPayChannelLayout;
 import com.mw.sdk.login.widget.v2.ThirdPlatBindAccountLayoutV2;
+import com.mw.sdk.out.bean.EventPropertie;
 import com.mw.sdk.pay.IPay;
 import com.mw.sdk.pay.IPayCallBack;
 import com.mw.sdk.pay.IPayFactory;
@@ -85,8 +87,9 @@ import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.huawei.HuaweiPayImpl;
 import com.thirdlib.td.TDAnalyticsHelper;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
-import java.util.Map;
 
 
 public class BaseSdkImpl implements IMWSDK {
@@ -643,12 +646,12 @@ public class BaseSdkImpl implements IMWSDK {
 
     @Override
     public void trackEvent(Activity activity, EventConstant.EventName eventName) {
-        this.trackEvent(activity,eventName, null);
+        this.trackEvent(activity, eventName.name(), null, 0);
     }
 
     @Override
     public void trackEvent(Activity activity, String eventName) {
-        Log.i(TAG, "trackEvent eventName...");
+        /*Log.i(TAG, "trackEvent eventName...");
         if (eventName == null){
             Log.i(TAG, "trackEvent eventName is null");
             return;
@@ -659,12 +662,14 @@ public class BaseSdkImpl implements IMWSDK {
                 SdkEventLogger.sendEventToSever(activity, eventName);
                 SdkEventLogger.trackingWithEventName(activity, eventName, null, EventConstant.AdType.AdTypeAllChannel);
             }
-        });
+        });*/
+
+        this.trackEvent(activity, eventName, null, 0);
     }
 
     @Override
-    public void trackEvent(final Activity activity, EventConstant.EventName eventName, final Map<String, Object> map) {
-        Log.i(TAG, "trackEvent...");
+    public void trackEvent(Activity activity, String eventName, JSONObject propertieJsonObj, int m) {
+        Log.i(TAG, "trackEvent name = " + eventName);
         if (eventName == null){
             Log.i(TAG, "trackEvent eventName is null");
             return;
@@ -672,10 +677,23 @@ public class BaseSdkImpl implements IMWSDK {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                SdkEventLogger.sendEventToSever(activity, eventName.name());
-                SdkEventLogger.trackingWithEventName(activity, eventName.name(), map, EventConstant.AdType.AdTypeAllChannel);
+                SdkEventLogger.sendEventToSever(activity, eventName);
+                if (propertieJsonObj != null){
+                    SdkEventLogger.trackingWithEventName(activity, eventName, JsonUtil.jsonObjectToMap(propertieJsonObj), EventConstant.AdType.AdTypeAllChannel);
+                }else {
+                    SdkEventLogger.trackingWithEventName(activity, eventName, null, EventConstant.AdType.AdTypeAllChannel);
+                }
+                TDAnalyticsHelper.trackEvent(eventName, propertieJsonObj, 0);
             }
         });
+    }
+
+    public void trackEvent(Activity activity, String eventName, EventPropertie eventPropertie) {
+        if (eventPropertie == null) {
+            trackEvent(activity, eventName, null, 0);
+        }else {
+            trackEvent(activity, eventName, eventPropertie.objToJsonObj(), 0);
+        }
     }
 
   /*  @Override
@@ -966,6 +984,18 @@ public class BaseSdkImpl implements IMWSDK {
 
             @Override
             public void fail(BasePayBean basePayBean) {
+
+                EventPropertie eventPropertie = new EventPropertie();
+                if (basePayBean != null){//eventName为空才是正常的储值上报
+                    eventPropertie.setOrder_id(basePayBean.getOrderId());
+                    eventPropertie.setPayment_name(basePayBean.getProductId());
+                    eventPropertie.setPay_amount(basePayBean.getUsdPrice());
+                    eventPropertie.setPayment_id(basePayBean.getProductId());
+                    eventPropertie.setPay_method("google");
+                    eventPropertie.setCurrency_type("USD");
+                }
+                TDAnalyticsHelper.trackEvent("pay_fail",eventPropertie);
+
                 if (iPayListener != null) {
                     iPayListener.onPayFail();
                 }

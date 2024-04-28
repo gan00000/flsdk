@@ -4,10 +4,10 @@ import android.content.Context;
 
 import com.core.base.utils.ApkInfoUtil;
 import com.core.base.utils.SStringUtil;
-import com.google.gson.Gson;
 import com.mw.sdk.R;
 import com.mw.sdk.bean.SGameBaseRequestBean;
 import com.mw.sdk.login.model.response.SLoginResponse;
+import com.mw.sdk.out.bean.EventPropertie;
 import com.mw.sdk.utils.DataManager;
 import com.mw.sdk.utils.ResConfig;
 import com.mw.sdk.utils.SdkUtil;
@@ -71,28 +71,29 @@ public class TDAnalyticsHelper {
             String channel_platform = context.getResources().getString(R.string.channel_platform);
 
             JSONObject superProperties = new JSONObject();
-            superProperties.put("gameCode", ResConfig.getGameCode(context));//字符串
+            superProperties.put("game_code", ResConfig.getGameCode(context));//字符串
             superProperties.put("platform",channel_platform);//字符串
             superProperties.put("channel",channel_platform);//字符串
-            superProperties.put("packageName",context.getPackageName());//字符串
-            superProperties.put("versionCode",ApkInfoUtil.getVersionCode(context));//字符串
-            superProperties.put("versionName",ApkInfoUtil.getVersionName(context));//字符串
-            superProperties.put("uniqueId", SdkUtil.getSdkUniqueId(context));//字符串
+            superProperties.put("package_name",context.getPackageName());//字符串
+            superProperties.put("version_code",ApkInfoUtil.getVersionCode(context));//字符串
+            superProperties.put("version_name",ApkInfoUtil.getVersionName(context));//字符串
+            superProperties.put("unique_id", SdkUtil.getSdkUniqueId(context));//字符串
 
             if (DataManager.getInstance().isLogin() || SdkUtil.isLogin(context)) {//是否正在登录状态
 
                 SGameBaseRequestBean sGameBaseRequestBean = new SGameBaseRequestBean(context);
-                superProperties.put("userId", sGameBaseRequestBean.getUserId());//字符串
-                superProperties.put("roleId", sGameBaseRequestBean.getRoleId());//字符串
-                superProperties.put("roleName", sGameBaseRequestBean.getRoleName());//字符串
-                superProperties.put("roleVipLevel", sGameBaseRequestBean.getRoleVipLevel());//字符串
+                superProperties.put("user_id", sGameBaseRequestBean.getUserId());//字符串
+                superProperties.put("role_id", sGameBaseRequestBean.getRoleId());//字符串
+                superProperties.put("role_name", sGameBaseRequestBean.getRoleName());//字符串
+                superProperties.put("role_level", sGameBaseRequestBean.getRoleLevel());//字符串
+                superProperties.put("role_vip_level", sGameBaseRequestBean.getRoleVipLevel());//字符串
 
-                superProperties.put("serverCode", sGameBaseRequestBean.getServerCode());//字符串
-                superProperties.put("serverName", sGameBaseRequestBean.getServerName());//字符串
+                superProperties.put("server_code", sGameBaseRequestBean.getServerCode());//字符串
+                superProperties.put("server_name", sGameBaseRequestBean.getServerName());//字符串
 
                 SLoginResponse sLoginResponse = SdkUtil.getCurrentUserLoginResponse(context);
                 if (sLoginResponse != null) {
-                    superProperties.put("loginMode", sLoginResponse.getData().getLoginType());//字符串
+                    superProperties.put("login_mode", sLoginResponse.getData().getLoginType());//字符串
                 }
             }
 
@@ -120,17 +121,27 @@ public class TDAnalyticsHelper {
         }
     }
 
-    public static void trackEvent(String eventName, JSONObject properties){
+    public static void trackEvent(String eventName, EventPropertie propertieBean){
+        if (propertieBean != null) {
+            trackEvent(eventName, propertieBean.objToJsonObj(), 0);
+        }else {
+            trackEvent(eventName, null, 0);
+        }
+    }
 
-        // JSONObject properties = new JSONObject();
-        // properties.put("product_name","商品名");
-        trackEvent(eventName, null, properties);
+    public static void trackEvent(String eventName, JSONObject properties, int no_use){
+
+        if (properties != null) {
+            TDAnalytics.track(eventName, properties);
+        }else {
+            TDAnalytics.track(eventName);
+        }
     }
 
     public static void trackEvent(String eventName){
-        trackEvent(eventName, null, null);
+        trackEvent(eventName, null, 0);
     }
-    public static void trackEvent(String eventName, TDBean tdBean, JSONObject otherProperties){
+    /*public static void trackEvent(String eventName,  JSONObject otherProperties){
 
         try {
 
@@ -151,5 +162,5 @@ public class TDAnalyticsHelper {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }

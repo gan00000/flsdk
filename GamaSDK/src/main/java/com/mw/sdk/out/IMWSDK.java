@@ -13,6 +13,8 @@ import com.mw.sdk.callback.IPayListener;
 import com.mw.sdk.login.ILoginCallBack;
 import com.mw.sdk.login.model.response.SLoginResponse;
 
+import org.json.JSONObject;
+
 import java.util.Map;
 
 /**
@@ -128,7 +130,7 @@ public interface IMWSDK extends IGameLifeCycle {
      * @param eventName
      * @param map
      */
-    void trackEvent(Activity activity, EventConstant.EventName eventName, Map<String, Object> map);
+    void trackEvent(Activity activity, String eventName, JSONObject propertieJsonObj, int m);
 
 //    void trackCreateRoleEvent(Activity activity, String roleId,String roleName);
 

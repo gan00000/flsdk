@@ -20,6 +20,7 @@ import com.facebook.appevents.AppEventsConstants;
 import com.mw.sdk.bean.SUserInfo;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.mw.sdk.bean.AdsRequestBean;
+import com.mw.sdk.out.bean.EventPropertie;
 import com.mw.sdk.utils.ResConfig;
 import com.mw.sdk.utils.SdkUtil;
 import com.mw.sdk.R;
@@ -30,7 +31,6 @@ import com.thirdlib.af.AFHelper;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.google.SGoogleProxy;
 import com.thirdlib.td.TDAnalyticsHelper;
-import com.thirdlib.td.TDBean;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -86,7 +86,7 @@ public class SdkEventLogger {
                 }
             }
 
-//            TDBean tdBean = new TDBean();
+//            EventPropertie tdBean = new EventPropertie();
 //            tdBean.setLogin_type(loginResponse.getData().getLoginType());
 //            tdBean.setUserId(loginResponse.getData().getUserId());
             TDAnalyticsHelper.trackEvent(EventConstant.EventName.LOGIN_SUCCESS.name());
@@ -116,7 +116,7 @@ public class SdkEventLogger {
             trackingWithEventName(activity, AppEventsConstants.EVENT_NAME_COMPLETED_REGISTRATION,eventValue,EventConstant.AdType.AdTypeFacebook);
             trackingWithEventName(activity, "COMPLETE_REGISTRATION_AND",eventValue,EventConstant.AdType.AdTypeFacebook);
 
-//            TDBean tdBean = new TDBean();
+//            EventPropertie tdBean = new EventPropertie();
 //            tdBean.setRegister_type(loginResponse.getData().getLoginType());
 //            tdBean.setUserId(loginResponse.getData().getUserId());
             TDAnalyticsHelper.trackEvent(EventConstant.EventName.REGISTER_SUCCESS.name());
@@ -244,6 +244,18 @@ public class SdkEventLogger {
                 AdjustHelper.trackEvent(context, "AJ_Purchase", payEventValues, usdPrice, orderId);
             }else {
                 AdjustHelper.trackEvent(context, eventName, payEventValues, usdPrice, orderId);
+            }
+
+            //shushu
+            if (SStringUtil.isEmpty(eventName)){//eventName为空才是正常的储值上报
+                EventPropertie eventPropertie = new EventPropertie();
+                eventPropertie.setOrder_id(orderId);
+                eventPropertie.setPayment_name(productId);
+                eventPropertie.setPay_amount(usdPrice);
+                eventPropertie.setPayment_id(productId);
+                eventPropertie.setPay_method("google");
+                eventPropertie.setCurrency_type("USD");
+                TDAnalyticsHelper.trackEvent("pay_success",eventPropertie);
             }
 
             if (!linkUser){//不跟用户行为关联

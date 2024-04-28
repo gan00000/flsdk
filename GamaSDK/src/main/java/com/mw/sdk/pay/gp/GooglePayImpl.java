@@ -23,6 +23,7 @@ import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ThreadUtil;
 import com.core.base.utils.ToastUtils;
 import com.mw.sdk.bean.req.PayCreateOrderReqBean;
+import com.mw.sdk.out.bean.EventPropertie;
 import com.mw.sdk.utils.SdkUtil;
 import com.mw.sdk.api.PayApi;
 import com.mw.sdk.out.ISdkCallBack;
@@ -37,6 +38,7 @@ import com.mw.sdk.utils.PayHelper;
 import com.mw.sdk.bean.res.BasePayBean;
 import com.mw.sdk.BuildConfig;
 import com.mw.sdk.constant.ApiRequestMethod;
+import com.thirdlib.td.TDAnalyticsHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -445,6 +447,16 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
                                     @Override
                                     public void success(GPCreateOrderIdRes createOrderIdRes, String msg1) {
                                         PL.i("requestCreateOrder finish success");
+
+                                        EventPropertie eventPropertie = new EventPropertie();
+                                        eventPropertie.setOrder_id(createOrderIdRes.getPayData().getOrderId());
+                                        eventPropertie.setPayment_name(createOrderIdRes.getPayData().getProductName());
+                                        eventPropertie.setPay_amount(createOrderIdRes.getPayData().getAmount());
+                                        eventPropertie.setPayment_id(createOrderIdReqBean.getProductId());
+                                        eventPropertie.setPay_method("google");
+                                        eventPropertie.setCurrency_type("USD");
+                                        TDAnalyticsHelper.trackEvent("payment_submit",eventPropertie);
+
                                         //5.开始购买
                                         mBillingHelper.launchPurchaseFlow(activity, createOrderIdReqBean.getProductId(),createOrderIdReqBean.getUserId(),
                                                 createOrderIdRes.getPayData().getOrderId(), new PurchasesUpdatedListener() {

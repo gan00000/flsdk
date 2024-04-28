@@ -7,6 +7,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 public class JsonUtil {
@@ -130,5 +132,26 @@ public class JsonUtil {
         }
 
         return jsonObject;
+    }
+
+    public static Map<String, Object> jsonObjectToMap(JSONObject jsonObject) {
+
+        Map<String, Object> map = new HashMap<>();
+        try {
+
+            if (jsonObject == null){
+                return map;
+            }
+            Iterator<String> keys = jsonObject.keys();
+            while (keys.hasNext()) {
+                String key = keys.next();
+                Object value = jsonObject.get(key);
+                map.put(key, value.toString());
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return map;
     }
 }
