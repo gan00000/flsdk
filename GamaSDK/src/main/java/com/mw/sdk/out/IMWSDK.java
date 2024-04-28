@@ -12,6 +12,7 @@ import com.mw.sdk.bean.req.PayCreateOrderReqBean;
 import com.mw.sdk.callback.IPayListener;
 import com.mw.sdk.login.ILoginCallBack;
 import com.mw.sdk.login.model.response.SLoginResponse;
+import com.mw.sdk.out.bean.EventPropertie;
 
 import org.json.JSONObject;
 
@@ -124,6 +125,8 @@ public interface IMWSDK extends IGameLifeCycle {
     void trackEvent(Activity activity, EventConstant.EventName eventName);
 
     void trackEvent(Activity activity, String eventName);
+
+    void trackEvent(Activity activity, String eventName, EventPropertie eventPropertie);
     /**
      * 事件上报接口
      * @param activity
