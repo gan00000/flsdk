@@ -988,9 +988,9 @@ public class BaseSdkImpl implements IMWSDK {
                 EventPropertie eventPropertie = new EventPropertie();
                 if (basePayBean != null){//eventName为空才是正常的储值上报
                     eventPropertie.setOrder_id(basePayBean.getOrderId());
-                    eventPropertie.setPayment_name(basePayBean.getProductId());
+                    //eventPropertie.setPayment_name(basePayBean.getProductId());
                     eventPropertie.setPay_amount(basePayBean.getUsdPrice());
-                    eventPropertie.setPayment_id(basePayBean.getProductId());
+                    eventPropertie.setProduct_id(basePayBean.getProductId());
                     eventPropertie.setPay_method("google");
                     eventPropertie.setCurrency_type("USD");
                 }

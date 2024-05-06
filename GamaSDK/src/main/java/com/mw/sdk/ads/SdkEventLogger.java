@@ -250,9 +250,9 @@ public class SdkEventLogger {
             if (SStringUtil.isEmpty(eventName)){//eventName为空才是正常的储值上报
                 EventPropertie eventPropertie = new EventPropertie();
                 eventPropertie.setOrder_id(orderId);
-                eventPropertie.setPayment_name(productId);
+                //eventPropertie.setPayment_name(productId);
                 eventPropertie.setPay_amount(usdPrice);
-                eventPropertie.setPayment_id(productId);
+                eventPropertie.setProduct_id(productId);
                 eventPropertie.setPay_method("google");
                 eventPropertie.setCurrency_type("USD");
                 TDAnalyticsHelper.trackEvent("pay_success",eventPropertie);

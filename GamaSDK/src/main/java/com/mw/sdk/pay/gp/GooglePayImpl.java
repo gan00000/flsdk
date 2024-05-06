@@ -450,9 +450,9 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
 
                                         EventPropertie eventPropertie = new EventPropertie();
                                         eventPropertie.setOrder_id(createOrderIdRes.getPayData().getOrderId());
-                                        eventPropertie.setPayment_name(createOrderIdRes.getPayData().getProductName());
+                                        //eventPropertie.setPayment_name(createOrderIdRes.getPayData().getProductName());
                                         eventPropertie.setPay_amount(createOrderIdRes.getPayData().getAmount());
-                                        eventPropertie.setPayment_id(createOrderIdReqBean.getProductId());
+                                        eventPropertie.setProduct_id(createOrderIdReqBean.getProductId());
                                         eventPropertie.setPay_method("google");
                                         eventPropertie.setCurrency_type("USD");
                                         TDAnalyticsHelper.trackEvent("payment_submit",eventPropertie);

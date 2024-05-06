@@ -35,9 +35,9 @@ public class EventPropertie implements Serializable {
     /**支付金额  ,数值*/
     double pay_amount = -999;
     /**支付项目ID  ,数值*/
-    String payment_id;
+    String product_id;
     /**支付项目名称  ,文本*/
-    String payment_name;
+//    String payment_name;
     /**支付方式  ,文本*/
     String pay_method;
     /**是否首次  ,布尔*/
@@ -357,21 +357,21 @@ public class EventPropertie implements Serializable {
         this.pay_amount = pay_amount;
     }
 
-    public String getPayment_id() {
-        return payment_id;
+    public String getProduct_id() {
+        return product_id;
     }
 
-    public void setPayment_id(String payment_id) {
-        this.payment_id = payment_id;
+    public void setProduct_id(String product_id) {
+        this.product_id = product_id;
     }
 
-    public String getPayment_name() {
-        return payment_name;
-    }
-
-    public void setPayment_name(String payment_name) {
-        this.payment_name = payment_name;
-    }
+    //    public String getPayment_name() {
+//        return payment_name;
+//    }
+//
+//    public void setPayment_name(String payment_name) {
+//        this.payment_name = payment_name;
+//    }
 
     public String getPay_method() {
         return pay_method;
