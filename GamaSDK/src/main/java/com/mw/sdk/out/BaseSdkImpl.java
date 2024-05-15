@@ -1449,7 +1449,7 @@ public class BaseSdkImpl implements IMWSDK {
 //        FloatConfigData xFloatConfigData = new Gson().fromJson(floatCfgData, FloatConfigData.class);
 
         FloatMenuResData xFloatMenuResData = SdkUtil.getFloatMenuResDataObj(activity);
-        if (xFloatMenuResData == null || xFloatMenuResData.getData() == null || !xFloatMenuResData.isRequestSuccess()){
+        if (xFloatMenuResData == null || xFloatMenuResData.getData() == null || !xFloatMenuResData.isRequestSuccess() || xFloatMenuResData.getData().getMenuList() == null){
             PL.i("FloatMenuResData null error");
             return;
         }
