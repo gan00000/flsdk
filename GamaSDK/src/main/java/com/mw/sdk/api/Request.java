@@ -527,7 +527,7 @@ public class Request {
     }
 
     public static void requestFloatConfigData(Context context, SFCallBack<String> sfCallBack) {
-
+/*
         String gameCode = ResConfig.getGameCode(context);
         RetrofitClient.instance().build(context,URLType.CDN).create(MWApiService.class)
                 .getFloatConfigData(gameCode)
@@ -560,7 +560,7 @@ public class Request {
                     public void onComplete() {
 
                     }
-                });
+                });*/
     }
 
     public static void requestFloatMenus(Context context, SFCallBack<String> sfCallBack) {
@@ -568,7 +568,7 @@ public class Request {
 //        String gameCode = ResConfig.getGameCode(context);
         SGameBaseRequestBean sGameBaseRequestBean = new SGameBaseRequestBean(context);
         RetrofitClient.instance().build(context,URLType.PLAT).create(MWApiService.class)
-                .getFloatMenus(sGameBaseRequestBean.fieldValueToMap())
+                .getFloatMenus_V2(sGameBaseRequestBean.fieldValueToMap())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ResponseBody>() {

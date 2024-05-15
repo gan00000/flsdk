@@ -37,13 +37,17 @@ public interface MWApiService {
     Observable<ActDataModel> getMarketData(@FieldMap Map<String, String> paramMap);
 
 //    https://cdn-download.kodaduck.com/sdk/config/tgfm/v1/floatButton.json
-    @GET("sdk/config/{gameCode}/v1/floatButton.json")
-    Observable<ResponseBody> getFloatConfigData(@Path("gameCode") String gameCode);
+//    @GET("sdk/config/{gameCode}/v1/floatButton.json")
+//    Observable<ResponseBody> getFloatConfigData(@Path("gameCode") String gameCode);
 
 //    https://platform.kodaduck.com/sdk/api/floatBtn/initMenu
-    @POST("sdk/api/floatBtn/initMenu")
+//    @POST("sdk/api/floatBtn/initMenu")
+//    @FormUrlEncoded
+//    Observable<ResponseBody> getFloatMenus(@FieldMap Map<String, String> paramMap);
+
+    @POST("sdk/api/floatButton/v2/initMenu")
     @FormUrlEncoded
-    Observable<ResponseBody> getFloatMenus(@FieldMap Map<String, String> paramMap);
+    Observable<ResponseBody> getFloatMenus_V2(@FieldMap Map<String, String> paramMap);
 
 //    @POST("sdk/api/floatBtn/changePassword")
     @POST("api/pwd/changePassword")

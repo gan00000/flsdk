@@ -33,7 +33,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.play.core.review.ReviewInfo;
 import com.google.android.play.core.review.ReviewManager;
 import com.google.android.play.core.review.ReviewManagerFactory;
-import com.google.gson.Gson;
 import com.mw.base.bean.SPayType;
 import com.mw.sdk.BuildConfig;
 import com.mw.sdk.MWWebPayActivity;
@@ -51,7 +50,6 @@ import com.mw.sdk.bean.req.PayCreateOrderReqBean;
 import com.mw.sdk.bean.res.ActDataModel;
 import com.mw.sdk.bean.res.BasePayBean;
 import com.mw.sdk.bean.res.ConfigBean;
-import com.mw.sdk.bean.res.FloatConfigData;
 import com.mw.sdk.bean.res.FloatMenuResData;
 import com.mw.sdk.bean.res.MenuData;
 import com.mw.sdk.bean.res.ToggleResult;
@@ -320,7 +318,7 @@ public class BaseSdkImpl implements IMWSDK {
         ConfigRequest.requestBaseCfg(activity.getApplicationContext());//加载配置
         ConfigRequest.requestAreaCodeInfo(activity.getApplicationContext());
 
-        Request.requestFloatConfigData(activity.getApplicationContext(),null);
+//        Request.requestFloatConfigData(activity.getApplicationContext(),null);
 
         if (iLogin != null) {
             iLogin.onCreate(activity);
@@ -1439,29 +1437,29 @@ public class BaseSdkImpl implements IMWSDK {
     //@Override
     public void showFloatView(Activity activity) {
 
-        String floatCfgData = SdkUtil.getFloatCfgData(activity);
+//        String floatCfgData = SdkUtil.getFloatCfgData(activity);
         String menuResData = SdkUtil.getFloatMenuResData(activity);
 
-        if (SStringUtil.isEmpty(floatCfgData) || SStringUtil.isEmpty(menuResData)){
-            PL.i("floatCfgData=" + floatCfgData + "  menuResData=" + menuResData);
+        if (SStringUtil.isEmpty(menuResData)){
+            PL.i("float menuResData=" + menuResData);
             ToastUtils.toast(activity,"float data error");
             return;
         }
 
-        FloatConfigData xFloatConfigData = new Gson().fromJson(floatCfgData, FloatConfigData.class);
+//        FloatConfigData xFloatConfigData = new Gson().fromJson(floatCfgData, FloatConfigData.class);
 
-        if (!xFloatConfigData.isButtonSwitch()){
-            PL.i("float not open");
-            return;
-        }
-        FloatMenuResData xFloatMenuResData = new Gson().fromJson(menuResData, FloatMenuResData.class);
-        if (xFloatMenuResData == null || xFloatMenuResData.getData() == null){
+        FloatMenuResData xFloatMenuResData = SdkUtil.getFloatMenuResDataObj(activity);
+        if (xFloatMenuResData == null || xFloatMenuResData.getData() == null || !xFloatMenuResData.isRequestSuccess()){
             PL.i("FloatMenuResData null error");
             return;
         }
+        if (!xFloatMenuResData.getData().isButtonSwitch()){
+            PL.i("float not open");
+            return;
+        }
 
 
-        FloatingManager.getInstance().initFloatingView(activity,xFloatConfigData.getButtonIcon(), new FloatButtionClickCallback() {
+        FloatingManager.getInstance().initFloatingView(activity,xFloatMenuResData.getData().getButtonIcon(), new FloatButtionClickCallback() {
             @Override
             public void show(String msg) {
 

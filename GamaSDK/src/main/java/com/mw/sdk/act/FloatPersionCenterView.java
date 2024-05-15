@@ -12,11 +12,8 @@ import com.bumptech.glide.Glide;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.ApkInfoUtil;
 import com.core.base.utils.PL;
-import com.core.base.utils.SStringUtil;
-import com.google.gson.Gson;
 import com.mw.sdk.R;
 import com.mw.sdk.api.Request;
-import com.mw.sdk.bean.res.FloatConfigData;
 import com.mw.sdk.bean.res.FloatMenuResData;
 import com.mw.sdk.bean.res.MenuData;
 import com.mw.sdk.callback.FloatCallback;
@@ -47,7 +44,7 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
     private Button delAccountCancelButton;
     private Button delAccountOkButton;
 
-    private FloatConfigData floatConfigData;
+//    private FloatConfigData floatConfigData;
     private FloatMenuResData floatMenuResData;
 
     private MenuData myMenuData;
@@ -153,7 +150,7 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
         mFloatBindAccountLayout.setSFCallBack(new SFCallBack() {
             @Override
             public void success(Object result, String msg) {
-                updateUserInfoView(context, floatConfigData);
+                updateUserInfoView(context, floatMenuResData);
             }
 
             @Override
@@ -186,21 +183,21 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
             }
         });
 
-        String floatCfgData = SdkUtil.getFloatCfgData(context);
-        String menuResData = SdkUtil.getFloatMenuResData(context);
+//        String floatCfgData = SdkUtil.getFloatCfgData(context);
+        floatMenuResData = SdkUtil.getFloatMenuResDataObj(context);
 
-        if (SStringUtil.isNotEmpty(floatCfgData) && SStringUtil.isNotEmpty(menuResData)){
-            floatConfigData = new Gson().fromJson(floatCfgData, FloatConfigData.class);
-            floatMenuResData = new Gson().fromJson(menuResData, FloatMenuResData.class);
+//        if (SStringUtil.isNotEmpty(floatCfgData) && SStringUtil.isNotEmpty(menuResData)){
+//            floatConfigData = new Gson().fromJson(floatCfgData, FloatConfigData.class);
+//            floatMenuResData = new Gson().fromJson(menuResData, FloatMenuResData.class);
 
-            if (floatConfigData != null && floatMenuResData != null && floatMenuResData.getData() != null) {
-                gameNameTextView.setText(floatMenuResData.getData().getGameName());
-                setverNameTextView.setText(floatMenuResData.getData().getServerName());
-                roleNameTextView.setText(floatMenuResData.getData().getRoleName());
+            if (floatMenuResData != null && floatMenuResData.getData() != null && floatMenuResData.getData().getUserInfo() != null) {
+                gameNameTextView.setText(floatMenuResData.getData().getUserInfo().getGameName());
+                setverNameTextView.setText(floatMenuResData.getData().getUserInfo().getServerName());
+                roleNameTextView.setText(floatMenuResData.getData().getUserInfo().getRoleName());
                 //accountTextView.setText(floatMenuResData.getData().geta());
-                uidTextView.setText(floatMenuResData.getData().getUserId());
+                uidTextView.setText(floatMenuResData.getData().getUserInfo().getUserId());
 
-                updateUserInfoView(context, floatConfigData);
+                updateUserInfoView(context, floatMenuResData);
 
                 if (floatMenuResData.getData().getMenuList() != null) {
                     for (MenuData bbMenuData:floatMenuResData.getData().getMenuList()) {
@@ -216,12 +213,17 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
                     }
                 }
             }
-        }
+//        }
 
         return persionCenterView;
     }
 
-    private void updateUserInfoView(Context context, FloatConfigData floatConfigData) {
+    private void updateUserInfoView(Context context, FloatMenuResData floatConfigData) {
+
+        if (floatConfigData == null || floatConfigData.getData() == null){
+            return;
+        }
+
         SLoginResponse sLoginResponse = SdkUtil.getCurrentUserLoginResponse(context);
 
         if (sLoginResponse != null && sLoginResponse.getData() != null) {
@@ -237,7 +239,7 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
                 accountLayoutView.setVisibility(View.GONE);
             }
             Glide.with(this)
-                    .load(floatConfigData.getGameIcon() + "?" + sLoginResponse.getData().getTimestamp())
+                    .load(floatConfigData.getData().getGameIcon() + "?" + sLoginResponse.getData().getTimestamp())
                     .centerCrop()
                     .placeholder(ApkInfoUtil.getAppIcon(context))
                     .into(persionIconImageView);

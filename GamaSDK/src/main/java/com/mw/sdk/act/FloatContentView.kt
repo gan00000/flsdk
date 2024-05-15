@@ -8,7 +8,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.core.base.utils.ApkInfoUtil
 import com.core.base.utils.PL
@@ -17,8 +16,6 @@ import com.core.base.utils.ScreenHelper
 import com.google.gson.Gson
 import com.mw.sdk.R
 import com.mw.sdk.bean.SGameBaseRequestBean
-import com.mw.sdk.bean.res.ActDataModel
-import com.mw.sdk.bean.res.FloatConfigData
 import com.mw.sdk.bean.res.FloatMenuResData
 import com.mw.sdk.bean.res.MenuData
 import com.mw.sdk.callback.FloatCallback
@@ -46,7 +43,7 @@ class FloatContentView : SLoginBaseRelativeLayout {
 
     private lateinit var mFloatPersionCenterView: FloatPersionCenterView
 
-    private lateinit var floatConfigData: FloatConfigData
+//    private lateinit var floatConfigData: FloatConfigData
     private lateinit var floatMenuResData: FloatMenuResData
 
     var xFloatCallback:FloatCallback? = null
@@ -61,30 +58,32 @@ class FloatContentView : SLoginBaseRelativeLayout {
         this.xFloatCallback = mFloatCallback
         menuDatas = arrayListOf()
 
-        val floatCfgData = SdkUtil.getFloatCfgData(context)
+//        val floatCfgData = SdkUtil.getFloatCfgData(context)
         val menuResData = SdkUtil.getFloatMenuResData(context)
 
-        if (SStringUtil.isEmpty(floatCfgData) || SStringUtil.isEmpty(menuResData)){
+        if (SStringUtil.isEmpty(menuResData)){
             return
         }
 
-        if (SStringUtil.isNotEmpty(floatCfgData)) {
-            floatConfigData = Gson().fromJson(floatCfgData, FloatConfigData::class.java)
-        }
+//        if (SStringUtil.isNotEmpty(floatCfgData)) {
+//            floatConfigData = Gson().fromJson(floatCfgData, FloatConfigData::class.java)
+//        }
 
         if (SStringUtil.isNotEmpty(menuResData)) {
             floatMenuResData = Gson().fromJson(menuResData, FloatMenuResData::class.java)
         }
 
-        if (floatConfigData.menuList != null && floatMenuResData.data != null && floatMenuResData.data.menuList != null){
-            for (cfgMenu in floatConfigData.menuList){//以配置文件对象字段为准
+        if (floatMenuResData != null && floatMenuResData.data != null && floatMenuResData.data.menuList != null){
+            /*for (cfgMenu in floatConfigData.menuList){//以配置文件对象字段为准
                 for (resMenu in floatMenuResData.data.menuList){
                     if (resMenu.code.equals(cfgMenu.code) && resMenu.isDisplay){
                         menuDatas?.add(cfgMenu)
                         break
                     }
                 }
-            }
+            }*/
+
+            menuDatas?.addAll(floatMenuResData.data.menuList)
         }
 
 

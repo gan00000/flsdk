@@ -28,6 +28,57 @@ public class FloatMenuResData extends BaseResponseModel {
 
     public static class Data{
 
+        private String buttonIcon;
+        private boolean buttonSwitch;
+        private String gameIcon;
+
+        private ArrayList<MenuData> menuList;
+        private FLUserInfo userInfo;
+
+
+        public ArrayList<MenuData> getMenuList() {
+            return menuList;
+        }
+
+        public void setMenuList(ArrayList<MenuData> menuList) {
+            this.menuList = menuList;
+        }
+
+        public String getButtonIcon() {
+            return buttonIcon;
+        }
+
+        public void setButtonIcon(String buttonIcon) {
+            this.buttonIcon = buttonIcon;
+        }
+
+        public boolean isButtonSwitch() {
+            return buttonSwitch;
+        }
+
+        public void setButtonSwitch(boolean buttonSwitch) {
+            this.buttonSwitch = buttonSwitch;
+        }
+
+        public String getGameIcon() {
+            return gameIcon;
+        }
+
+        public void setGameIcon(String gameIcon) {
+            this.gameIcon = gameIcon;
+        }
+
+        public FLUserInfo getUserInfo() {
+            return userInfo;
+        }
+
+        public void setUserInfo(FLUserInfo userInfo) {
+            this.userInfo = userInfo;
+        }
+    }
+
+    public static class FLUserInfo{
+
         private String roleId;
         private String userId;
         private String roleName;
@@ -35,8 +86,6 @@ public class FloatMenuResData extends BaseResponseModel {
         private String gameCode;
         private String serverCode;
         private String serverName;
-
-        private ArrayList<MenuData> menuList;
 
 
         public String getRoleId() {
@@ -94,14 +143,5 @@ public class FloatMenuResData extends BaseResponseModel {
         public void setServerName(String serverName) {
             this.serverName = serverName;
         }
-
-        public ArrayList<MenuData> getMenuList() {
-            return menuList;
-        }
-
-        public void setMenuList(ArrayList<MenuData> menuList) {
-            this.menuList = menuList;
-        }
     }
-
 }

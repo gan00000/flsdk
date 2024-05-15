@@ -9,7 +9,7 @@ public class MenuData {
     private String url;
     private boolean isPage;//是否是网页
     private String code;
-    private boolean display;
+//    private boolean display;
     private boolean isClick;
     private boolean deleteAccount;//是否显示删除账号，只有my的时候有用
 
@@ -21,13 +21,13 @@ public class MenuData {
         this.code = code;
     }
 
-    public boolean isDisplay() {
-        return display;
-    }
-
-    public void setDisplay(boolean display) {
-        this.display = display;
-    }
+//    public boolean isDisplay() {
+//        return display;
+//    }
+//
+//    public void setDisplay(boolean display) {
+//        this.display = display;
+//    }
 
     public String getName() {
         return name;

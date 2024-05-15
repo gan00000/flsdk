@@ -17,6 +17,7 @@ import com.mw.sdk.R;
 import com.mw.sdk.bean.PhoneInfo;
 import com.mw.sdk.bean.SUserInfo;
 import com.mw.sdk.bean.res.ConfigBean;
+import com.mw.sdk.bean.res.FloatMenuResData;
 import com.mw.sdk.constant.SGameLanguage;
 import com.mw.sdk.constant.SLoginType;
 import com.mw.sdk.bean.AccountModel;
@@ -1033,12 +1034,12 @@ public class SdkUtil {
     }
 
     private static final String SDK_FLOAT_CFG_DATA = "SDK_FLOAT_CFG_DATA";//保存sdk配置 cdn文件
-    public static void saveFloatCfgData(Context context,String cfg){
-        SPUtil.saveSimpleInfo(context, SDK_SP_FILE, SDK_FLOAT_CFG_DATA,cfg);
-    }
-    public static String getFloatCfgData(Context context){
-        return SPUtil.getSimpleString(context, SDK_SP_FILE, SDK_FLOAT_CFG_DATA);
-    }
+//    public static void saveFloatCfgData(Context context,String cfg){
+//        SPUtil.saveSimpleInfo(context, SDK_SP_FILE, SDK_FLOAT_CFG_DATA,cfg);
+//    }
+//    public static String getFloatCfgData(Context context){
+//        return SPUtil.getSimpleString(context, SDK_SP_FILE, SDK_FLOAT_CFG_DATA);
+//    }
 
     private static final String SDK_FLOAT_MENU_RES_DATA = "SDK_FLOAT_MENU_RES_DATA";//保存sdk配置 cdn文件
     public static void saveFloatMenuResData(Context context, String cfg){
@@ -1047,4 +1048,13 @@ public class SdkUtil {
     public static String getFloatMenuResData(Context context){
         return SPUtil.getSimpleString(context, SDK_SP_FILE, SDK_FLOAT_MENU_RES_DATA);
     }
+    public static FloatMenuResData getFloatMenuResDataObj(Context context){
+        String dataRaw = getFloatMenuResData(context);
+        if (SStringUtil.isEmpty(dataRaw)){
+            return null;
+        }
+        FloatMenuResData xFloatMenuResData = new Gson().fromJson(dataRaw, FloatMenuResData.class);
+        return xFloatMenuResData;
+    }
+
 }
