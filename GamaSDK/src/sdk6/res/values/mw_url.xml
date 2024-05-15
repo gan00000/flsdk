@@ -42,6 +42,6 @@
     <string name="mw_sdk_social_url">https://member.hwxgame.com/sdk/social/%s/index.html</string>
 
     <!--    数数-->
-    <string name="mw_td_te_server_url">https://shushu.kodaduck.com/</string>
+    <string name="mw_td_te_server_url">https://shushu.hwxgame.com/</string>
 
 </resources>
