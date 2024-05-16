@@ -111,6 +111,7 @@ android {
             dimension "1"
             resValue "string", "sdk_inner_version", "v6"
             resValue "string", "sdk_release_european", "true" //发布欧洲地区的话要设置
+            resValue "string", "mw_td_appid", "77e4d9f75abb4baab16213a662fe4e56"
         }
         sdkKR {//韩国
             dimension "1"
