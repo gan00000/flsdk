@@ -59,6 +59,7 @@
 -keep public class com.mw.**$*Result { *; }
 -keep public class com.mw.**$*Bean { *; }
 -keep public class com.mw.**$*Res { *; }
+-keep public class com.mw.sdk.bean.res.FloatMenuResData$** { *; }
 
 -keep public class * implements com.bumptech.glide.module.GlideModule
 -keep public class * extends com.bumptech.glide.module.AppGlideModule
