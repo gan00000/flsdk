@@ -149,21 +149,19 @@ dependencies {
     //mutildex
     implementation 'androidx.multidex:multidex:2.0.1'
     //google pay
-    implementation "com.android.billingclient:billing:6.1.0"
+    implementation "com.android.billingclient:billing:7.0.0"
     //google评分
     implementation 'com.google.android.play:review:2.0.1'
 
     implementation("com.google.guava:guava:31.1-android")
-//    implementation 'com.zhy:base-rvadapter:3.0.3'
 
     //Google库
-    implementation 'com.google.android.gms:play-services-auth:20.7.0'
-    implementation 'com.google.android.gms:play-services-base:18.2.0'
+    implementation 'com.google.android.gms:play-services-auth:21.1.1'
+    implementation 'com.google.android.gms:play-services-base:18.4.0'
     implementation 'com.google.android.gms:play-services-games:23.1.0'
 
     //firebase
     implementation platform('com.google.firebase:firebase-bom:32.3.1')
-//    implementation 'com.google.firebase:firebase-core'
     implementation 'com.google.firebase:firebase-messaging'
     implementation 'com.google.firebase:firebase-auth'
     // Recommended: Add the Firebase SDK for Google Analytics.
@@ -173,13 +171,13 @@ dependencies {
 
     //Facebook库
     // Facebook Core only (Analytics)
-    implementation 'com.facebook.android:facebook-core:16.0.0'  //latest.release
+    implementation 'com.facebook.android:facebook-core:17.0.0'  //latest.release
     // Facebook Login only
-    implementation 'com.facebook.android:facebook-login:16.0.0'
+    implementation 'com.facebook.android:facebook-login:17.0.0'
     // Facebook Share only
-    implementation 'com.facebook.android:facebook-share:16.0.0'
+    implementation 'com.facebook.android:facebook-share:17.0.0'
     // Facebook Messenger only
-    implementation 'com.facebook.android:facebook-messenger:16.0.0'
+    implementation 'com.facebook.android:facebook-messenger:17.0.0'
     //line
 //    implementation 'com.linecorp:linesdk:5.0.1'
 
@@ -214,9 +212,12 @@ dependencies {
     //onestore
     sdkKRImplementation "com.onestorecorp.sdk:sdk-iap:21.00.00"
     sdkKRImplementation "com.onestorecorp.sdk:sdk-configuration-kr:1.0.0"
-
-    lunqiImplementation files('libs/xlsdk1.jar')
+    //Samsung
     sdkKRImplementation(name: 'Samsung-IAP6Helper-release2', ext: 'aar')
+
+    //伦其
+    lunqiImplementation files('libs/xlsdk1.jar')
+
 
 }
 
