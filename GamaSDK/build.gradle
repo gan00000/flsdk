@@ -13,7 +13,7 @@ android {
         jvmTarget = rootProject.ext.jvmTarget
     }
 
-    def sdk_version = "2.1.5"
+    def sdk_version = "2.1.6"
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
@@ -116,6 +116,7 @@ android {
         sdkKR {//韩国
             dimension "1"
             resValue "string", "sdk_inner_version", "kr"
+            resValue "string", "mw_td_appid", "77e4d9f75abb4baab16213a662fe4e56"
             proguardFile 'flavor-rules-kr.pro'
         }
 
