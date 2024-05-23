@@ -1442,7 +1442,7 @@ public class BaseSdkImpl implements IMWSDK {
 
         if (SStringUtil.isEmpty(menuResData)){
             PL.i("float menuResData=" + menuResData);
-            ToastUtils.toast(activity,"float data error");
+            //ToastUtils.toast(activity,"float data error");
             return;
         }
 
