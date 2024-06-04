@@ -668,7 +668,7 @@ public class BaseSdkImpl implements IMWSDK {
     @Override
     public void trackEvent(Activity activity, String eventName, JSONObject propertieJsonObj, int m) {
         Log.i(TAG, "trackEvent name = " + eventName);
-        if (eventName == null){
+        if (SStringUtil.isEmpty(eventName)){
             Log.i(TAG, "trackEvent eventName is null");
             return;
         }

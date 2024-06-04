@@ -1,8 +1,10 @@
 package com.thirdlib.td;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import com.core.base.utils.ApkInfoUtil;
+import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.mw.sdk.R;
 import com.mw.sdk.bean.SGameBaseRequestBean;
@@ -130,7 +132,10 @@ public class TDAnalyticsHelper {
     }
 
     public static void trackEvent(String eventName, JSONObject properties, int no_use){
-
+        if(TextUtils.isEmpty(eventName)) {
+            PL.e("上報事件名為空");
+            return;
+        }
         if (properties != null) {
             TDAnalytics.track(eventName, properties);
         }else {
