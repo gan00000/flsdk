@@ -281,7 +281,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
                         mHandler.post(new Runnable() {
                             @Override
                             public void run() {
-                                PayApi.requestSendStone(mContext, purchase, "yes", new SFCallBack<GPExchangeRes>() {
+                                PayApi.requestSendStone(mContext, purchase, true, new SFCallBack<GPExchangeRes>() {
                                     @Override
                                     public void success(GPExchangeRes result, String msg) {
                                         PL.i("startQueryPurchase requestSendStone success => " + msg);
@@ -508,7 +508,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        PayApi.requestSendStone(activity, purchase,"no", new SFCallBack<GPExchangeRes>() {
+                        PayApi.requestSendStone(activity, purchase,false, new SFCallBack<GPExchangeRes>() {
                             @Override
                             public void success(GPExchangeRes gpExchangeRes, String msg) {
                                 PL.i("launchPurchaseFlow requestSendStone success => " + msg);
@@ -581,7 +581,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        PayApi.requestSendStone(activity, purchase,"yes", new SFCallBack<GPExchangeRes>() {
+                        PayApi.requestSendStone(activity, purchase,true, new SFCallBack<GPExchangeRes>() {
                             @Override
                             public void success(GPExchangeRes result, String msg) {
 

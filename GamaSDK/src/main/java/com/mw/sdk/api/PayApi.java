@@ -65,12 +65,19 @@ public class PayApi {
     /**
      * 发币
      */
-    public static void requestSendStone(Context context, final Purchase mPurchase,String reissue, SFCallBack<GPExchangeRes> sfCallBack) {
+    public static void requestSendStone(Context context, final Purchase mPurchase,boolean reissue, SFCallBack<GPExchangeRes> sfCallBack) {
 
         PayExchangeReqBean exchangeReqBean = new PayExchangeReqBean(context);
+        if (reissue) {
+            if (SStringUtil.isEmpty(exchangeReqBean.getRoleId()) || SStringUtil.isEmpty(exchangeReqBean.getServerCode())){
+                PL.e("requestSendStone send error...");
+                return;
+            }
+        }
+
         exchangeReqBean.setDataSignature(mPurchase.getSignature());
         exchangeReqBean.setPurchaseData(mPurchase.getOriginalJson());
-        exchangeReqBean.setReissue(reissue);
+        exchangeReqBean.setReissue(reissue ? "yes" : "no");
         if (mPurchase.getAccountIdentifiers() != null) {
 //            if (SStringUtil.isNotEmpty(mPurchase.getAccountIdentifiers().getObfuscatedAccountId())){
 //                exchangeReqBean.setUserId(mPurchase.getAccountIdentifiers().getObfuscatedAccountId());
