@@ -567,6 +567,12 @@ public class Request {
 
 //        String gameCode = ResConfig.getGameCode(context);
         SGameBaseRequestBean sGameBaseRequestBean = new SGameBaseRequestBean(context);
+
+        if (SStringUtil.isEmpty(sGameBaseRequestBean.getRoleId()) || SStringUtil.isEmpty(sGameBaseRequestBean.getServerCode())){
+            PL.e("requestFloatMenus params error...");
+            return;
+        }
+
         RetrofitClient.instance().build(context,URLType.PLAT).create(MWApiService.class)
                 .getFloatMenus_V2(sGameBaseRequestBean.fieldValueToMap())
                 .subscribeOn(Schedulers.io())

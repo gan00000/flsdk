@@ -228,22 +228,25 @@ public class BaseSdkImpl implements IMWSDK {
                 TDAnalyticsHelper.setAccountId(roleId);//shushu
                 TDAnalyticsHelper.setCommonProperties(activity);
 
-                if (iPay != null && SStringUtil.isNotEmpty(roleId) && SStringUtil.isNotEmpty(severCode) && SStringUtil.isNotEmpty(SdkUtil.getUid(activity))){
-                    iPay.startQueryPurchase(activity.getApplicationContext());
+                if (SStringUtil.isNotEmpty(roleId) && SStringUtil.isNotEmpty(severCode) && SStringUtil.isNotEmpty(SdkUtil.getUid(activity))){
+
+                    if (iPay != null) {
+                        iPay.startQueryPurchase(activity.getApplicationContext());
+                    }
+
+                    Request.requestFloatMenus(activity.getApplicationContext(), new SFCallBack<String>() {
+                        @Override
+                        public void success(String result, String msg) {
+                            showFloatView(activity);
+                        }
+
+                        @Override
+                        public void fail(String result, String msg) {
+
+                        }
+                    });
                 }
                 //showActViewSwitchRequest(activity);//注释掉，先不用
-
-                Request.requestFloatMenus(activity.getApplicationContext(), new SFCallBack<String>() {
-                    @Override
-                    public void success(String result, String msg) {
-                        showFloatView(activity);
-                    }
-
-                    @Override
-                    public void fail(String result, String msg) {
-
-                    }
-                });
             }
         });
 
