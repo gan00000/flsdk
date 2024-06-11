@@ -126,12 +126,12 @@ public interface IMWSDK extends IGameLifeCycle {
 
     void trackEvent(Activity activity, String eventName);
 
-    void trackEvent(Activity activity, String eventName, EventPropertie eventPropertie);
+//    void trackEvent(Activity activity, String eventName, EventPropertie eventPropertie);
+
     /**
      * 事件上报接口
      * @param activity
      * @param eventName
-     * @param map
      */
     void trackEvent(Activity activity, String eventName, JSONObject propertieJsonObj, int m);
 

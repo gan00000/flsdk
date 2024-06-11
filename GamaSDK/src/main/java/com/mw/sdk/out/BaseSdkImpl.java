@@ -124,6 +124,8 @@ public class BaseSdkImpl implements IMWSDK {
 
     private ISdkCallBack switchAccountCallBack;
 
+    private long regRoleInfoTimestamp;
+
     public BaseSdkImpl() {
 //        iLogin = ObjFactory.create(DialogLoginImpl.class);
         PL.i("BaseSdkImpl 构造函数");
@@ -220,10 +222,15 @@ public class BaseSdkImpl implements IMWSDK {
             return;
         }
         SdkUtil.saveRoleInfo(activity, roleId, roleName, roleLevel, vipLevel, severCode, serverName);//保存角色信息
-
+        long curTime = System.currentTimeMillis();
+        if (curTime - this.regRoleInfoTimestamp < 1000 * 60 * 2){
+            return;
+        }
+        this.regRoleInfoTimestamp = curTime;
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
+
 
                 TDAnalyticsHelper.setAccountId(roleId);//shushu
                 TDAnalyticsHelper.setCommonProperties(activity);
@@ -302,6 +309,7 @@ public class BaseSdkImpl implements IMWSDK {
         PL.i("google sha1:" + SignatureUtil.getSignatureSHA1WithColon(activity, activity.getPackageName()));
         PL.i("app sha256:" + SignatureUtil.getSignatureSHA256WithColon(activity, activity.getPackageName()));
         this.activity = activity;
+        this.regRoleInfoTimestamp = 0;
         dataManager = DataManager.getInstance();
         activity.runOnUiThread(new Runnable() {
             @Override
@@ -689,13 +697,13 @@ public class BaseSdkImpl implements IMWSDK {
         });
     }
 
-    public void trackEvent(Activity activity, String eventName, EventPropertie eventPropertie) {
-        if (eventPropertie == null) {
-            trackEvent(activity, eventName, null, 0);
-        }else {
-            trackEvent(activity, eventName, eventPropertie.objToJsonObj(), 0);
-        }
-    }
+//    public void trackEvent(Activity activity, String eventName, EventPropertie eventPropertie) {
+//        if (eventPropertie == null) {
+//            trackEvent(activity, eventName, null, 0);
+//        }else {
+//            trackEvent(activity, eventName, eventPropertie.objToJsonObj(), 0);
+//        }
+//    }
 
   /*  @Override
     public void trackCreateRoleEvent(final Activity activity, String roleId, String roleName) {
@@ -724,6 +732,7 @@ public class BaseSdkImpl implements IMWSDK {
     public void login(final Activity activity, final ILoginCallBack iLoginCallBack) {
         PL.i("sdk login");
         this.activity = activity;
+        this.regRoleInfoTimestamp = 0;
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -759,7 +768,7 @@ public class BaseSdkImpl implements IMWSDK {
 
     @Override
     public void logout(Activity activity, ISdkCallBack iSdkCallBack) {
-
+        this.regRoleInfoTimestamp = 0;
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
