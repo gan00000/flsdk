@@ -284,7 +284,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
                                 PayApi.requestSendStone(mContext, purchase, true, new SFCallBack<GPExchangeRes>() {
                                     @Override
                                     public void success(GPExchangeRes result, String msg) {
-                                        PL.i("startQueryPurchase requestSendStone success => " + msg);
+                                        PL.i("startQueryPurchase requestSendStone success");
                                         //3.消费
                                         mBillingHelper.consumeAsync(mContext, purchase, false, new ConsumeResponseListener() {
                                             @Override
@@ -511,7 +511,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
                         PayApi.requestSendStone(activity, purchase,false, new SFCallBack<GPExchangeRes>() {
                             @Override
                             public void success(GPExchangeRes gpExchangeRes, String msg) {
-                                PL.i("launchPurchaseFlow requestSendStone success => " + msg);
+                                PL.i("launchPurchaseFlow requestSendStone success");
 
                                 mBillingHelper.consumeAsync(activity, purchase, false, new ConsumeResponseListener() {
                                     @Override

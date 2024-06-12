@@ -1,6 +1,7 @@
 package com.mw.sdk.api;
 
 import com.mw.sdk.bean.res.ActDataModel;
+import com.mw.sdk.bean.res.GPExchangeRes;
 import com.mw.sdk.bean.res.RedDotRes;
 import com.mw.sdk.bean.res.ToggleResult;
 import com.mw.sdk.login.model.response.SLoginResponse;
@@ -69,4 +70,11 @@ public interface MWApiService {
     @POST("sdk/api/floatBtn/deleteFloatBtnRedDot")
     @FormUrlEncoded
     Observable<RedDotRes> deleteFloatBtnRedDot(@FieldMap Map<String, String> paramMap);
+
+    @POST("sdk/pre/event")
+    @FormUrlEncoded
+    Observable<ResponseBody> send_event_pre(@FieldMap Map<String, String> paramMap);
+    @POST("api/google/payment")
+    @FormUrlEncoded
+    Observable<GPExchangeRes> googlePayment(@FieldMap Map<String, String> paramMap);
 }
