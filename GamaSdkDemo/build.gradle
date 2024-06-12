@@ -412,22 +412,55 @@ android {
         }
         sdk6 {
 
+            dimension "1"
             signingConfig signingConfigs.release_v6
-            applicationId "com.wxgy.sshx"
-            minSdkVersion 21
-            targetSdkVersion 33
+//            applicationId "com.wxgy.sshx"
+//            minSdkVersion 21
+//            targetSdkVersion 33
             versionCode 10
             versionName "1.0"
-            dimension "1"
-            resValue "string", "scheme", "sshx"
-            resValue "string", "facebook_app_id", "958518928627930"
-            resValue "string", "facebook_client_token", "70dee7e2899286d3b410c2af8530b899"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider958518928627930" //启用分析
-            resValue "string", "fb_login_protocol_scheme", "fb958518928627930"
-            resValue "string", "facebook_app_name", "v6demo"
-            resValue "string", "line_channelId", "1661047084"
-            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,第三方充值渠道apk包设置"meow"
+//            resValue "string", "scheme", "sshx"
+//            resValue "string", "facebook_app_id", "958518928627930"
+//            resValue "string", "facebook_client_token", "70dee7e2899286d3b410c2af8530b899"
+//            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider958518928627930" //启用分析
+//            resValue "string", "fb_login_protocol_scheme", "fb958518928627930"
+//            resValue "string", "facebook_app_name", "v6demo"
+//            resValue "string", "line_channelId", "1661047084"
+//            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,第三方充值渠道apk包设置"meow"
+//            resValue "string", "sdk_release_european", "true"
+
+            //=======================================sdk config start ==========================
+
+            signingConfig signingConfigs.release_v6
+            //base
+            applicationId "com.wanxin.tgen"
+            minSdkVersion 21
+            targetSdkVersion 34
+
+            resValue "string", "sdk_game_code", "tgen"
+            resValue "string", "sdk_app_key", "c999bd3d4cb5d1239c0c30bfc70506f2"
+            resValue "string", "sdk_more_language", "true"
+            resValue "string", "sdk_default_server_language", "en_US"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
+            resValue "string", "scheme", "tgen"
+            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
             resValue "string", "sdk_release_european", "true"
+
+            //facebook
+            resValue "string", "facebook_app_id", "412108094771737"
+            resValue "string", "facebook_client_token", "e36a0f2a998fbfec7bf6ed97e5946f7bz"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider412108094771737"
+            resValue "string", "fb_login_protocol_scheme", "fb412108094771737"
+            resValue "string", "facebook_app_name", "tgen" //游戏名字
+            //ad
+            resValue "string", "adjust_app_token", ""
+            resValue "string", "sdk_appflyer_dev_key", "mjcKspHuCucYWYs7cc4v6a"
+            //line
+            resValue "string", "line_channelId", ""
+            //naver
+            resValue "string", "naver_client_id", ""
+            resValue "string", "naver_client_secret", ""
+
+            //=======================================sdk config end==========================
 
             //每个游戏的demo设置 test
             resValue "string", "sdk_name", "v6 demo"
@@ -473,8 +506,8 @@ android {
             applicationId "com.kodatgfm.kr"
             minSdkVersion 21
             targetSdkVersion 34
-            versionCode 1
-            versionName "1.0"
+            versionCode 4
+            versionName "4.0"
 
             //=======================================sdk config==========================
             //base
@@ -533,6 +566,7 @@ dependencies {
     implementation project(':GamaSDK')
 //    implementation 'com.github.bumptech.glide:glide:4.16.0'
 //    annotationProcessor 'com.github.bumptech.glide:compiler:4.16.0'
+
 }
 
 

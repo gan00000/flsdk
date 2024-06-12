@@ -150,7 +150,7 @@ dependencies {
     //mutildex
     implementation 'androidx.multidex:multidex:2.0.1'
     //google pay
-    implementation "com.android.billingclient:billing:7.0.0"
+    api "com.android.billingclient:billing:7.0.0"
     //google评分
     implementation 'com.google.android.play:review:2.0.1'
 

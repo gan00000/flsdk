@@ -24,6 +24,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
+import com.android.billingclient.api.Purchase;
 import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.AppUtil;
@@ -32,7 +33,9 @@ import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
 import com.mw.base.bean.SPayType;
+import com.mw.sdk.api.PayApi;
 import com.mw.sdk.bean.req.PayCreateOrderReqBean;
+import com.mw.sdk.bean.res.GPExchangeRes;
 import com.mw.sdk.out.bean.EventItemDetailBean;
 import com.mw.sdk.out.bean.EventPropertie;
 import com.mw.sdk.utils.SdkUtil;
@@ -44,6 +47,7 @@ import com.mw.sdk.out.IMWSDK;
 import com.mw.sdk.out.ISdkCallBack;
 import com.mw.sdk.out.MWSdkFactory;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -59,7 +63,7 @@ public class MainActivity extends Activity {
     /**
      * 同步角色信息(以下均为测试信息)
      */
-    String roleId = "20001000402"; //角色id
+    String roleId = "1610"; //角色id
     String roleName = "貪婪聖殿"; //角色名
     String roleLevel = "106"; //角色等级
     String vipLevel = "5"; //角色vip等级
@@ -165,6 +169,31 @@ public class MainActivity extends Activity {
 //                    }
 //                });
 
+                /*for (int i = 0; i < 10; i++) {
+
+                    String jsonPurchaseInfo = "{\"packageName\":\"com.wanxin.tgen\",\"productId\":\"com.wanxin.tgen.yzcjl\",\"purchaseTime\":1715865379263,\"purchaseState\":0,\"purchaseToken\":\"eeclaafbcakomopiciokngbe.AO-J1OxgUzHtIrlLEkLhf3JZtujr0WHVJp6ZF7YVNJ2gvBFEWDGMgfo5RAn76uvI5lWCczpArlisJZVVNxId9fga2z1TiVJukg\"}";
+                    String signature = "P567QEHNHwklOTi7PyRYogUCVS1lLmnGoJ0hrJ37SnwcnS0190RpryVHHkOuPK56o4kBDlfPFLIjgRQjr88Vvfw8obmVjw9wrFS8OpPXP64jNTVXR3ZpRUxqKN+Pb01SFoy4QzjygLDbP8kNwZ75qu3EjHFxOzEWKwWaBdKrqRS9z6UOQ2yYfYyPdwkUk0PINzr5XQSMer9HcpXoAB4XoAts5pTrl6FSQkW4PsaidCXeZLgikeXzHuFRjD42ldWIJi+6O+KkDcNjOsAvd9sPw7CuS5AwmmqnAMHM5WA089hvyN/P9gzzfc1PUECadpWKK51lZPxJHLQ26t0yS6tHGw==";
+
+                    try {
+                        Purchase purchase = new Purchase(jsonPurchaseInfo, signature);
+
+                        PayApi.requestSendStone(getApplicationContext(), purchase, true, new SFCallBack<GPExchangeRes>() {
+                            @Override
+                            public void success(GPExchangeRes result, String msg) {
+
+                            }
+
+                            @Override
+                            public void fail(GPExchangeRes result, String msg) {
+
+                            }
+                        });
+
+                    } catch (JSONException e) {
+
+                    }
+                }*/
+
             }
         });
 
@@ -212,7 +241,7 @@ public class MainActivity extends Activity {
         webPayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String skuId = "com.yuewan.tgvn.99";
+                String skuId = "com.miaoou.328jin";
                 mIMWSDK.pay(MainActivity.this, SPayType.WEB, "" + System.currentTimeMillis(),skuId, extra,roleId,roleName,roleLevel, vipLevel,serverCode, serverName, new IPayListener() {
 
                     @Override
@@ -485,7 +514,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.track_event).setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 //创建事件属性
-                EventPropertie eventPropertie = new EventPropertie();
+                /*EventPropertie eventPropertie = new EventPropertie();
                 eventPropertie.setActivity_type("m_type");
                 eventPropertie.setActivity_id("m_id");
                 eventPropertie.setTask_id("m_task_id");
@@ -506,7 +535,7 @@ public class MainActivity extends Activity {
                 get_item_detail_list.add(eventItemDetailBean_2);
 
                 eventPropertie.setGet_item_detail(get_item_detail_list);
-                mIMWSDK.trackEvent(MainActivity.this, "standard_activity_get_reward",eventPropertie);
+                mIMWSDK.trackEvent(MainActivity.this, "standard_activity_get_reward",eventPropertie);*/
             }
         });
 
