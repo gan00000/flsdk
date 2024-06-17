@@ -856,7 +856,8 @@ public class BaseSdkImpl implements IMWSDK {
         } else if(payType == SPayType.QooApp || ChannelPlatform.QOOAPP.getChannel_platform().equals(channel_platform)) {
             doQooAppPay(activity, payCreateOrderReqBean);
         } else if(payType == SPayType.LUNQI || ChannelPlatform.LUNQI.getChannel_platform().equals(channel_platform)) {
-            doLunqiPay(activity, payCreateOrderReqBean);
+//            doLunqiPay(activity, payCreateOrderReqBean);
+            doWebPay(activity, payCreateOrderReqBean);
         } else {//默认Google储值
             checkGoogleOrWebPay(activity, payCreateOrderReqBean);
         }
