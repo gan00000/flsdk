@@ -712,6 +712,7 @@ public class SdkUtil {
         SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE,GAMA_GOOGLE_ADVERTISING_ID,googleAdId);
     }
     public static String getGoogleAdId(Context context){
+        PL.i("getGoogleAdId");
         return SPUtil.getSimpleString(context, SdkUtil.SDK_SP_FILE,GAMA_GOOGLE_ADVERTISING_ID);
     }
 
@@ -743,6 +744,7 @@ public class SdkUtil {
      */
     public static  String getSdkUniqueId(Context ctx){
 
+        PL.i("getSdkUniqueId");
 //        1、優先獲取谷歌ID
 //        2、獲取不到谷歌ID再獲取安卓ID
 //        3、谷歌ID和安卓ID都獲取不到，最後再自己生成一個ID

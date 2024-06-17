@@ -16,6 +16,7 @@ import android.webkit.WebView;
 import androidx.annotation.NonNull;
 
 import com.core.base.BaseWebViewClient;
+import com.core.base.bean.BaseReqeustBean;
 import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.AppUtil;
@@ -89,6 +90,13 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Observer;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.functions.Function;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+
 
 public class BaseSdkImpl implements IMWSDK {
 
@@ -135,15 +143,48 @@ public class BaseSdkImpl implements IMWSDK {
     public void applicationOnCreate(Application application) {
         PL.i("BaseSdkImpl applicationOnCreate");
 
-        //获取Google 广告ID
-        SdkEventLogger.registerGoogleAdId(application.getApplicationContext());
+        Observable.just("" + System.currentTimeMillis())
+                .map(new Function<String, String>() {
+                    @Override
+                    public String apply(String s) throws Throwable {
+                        PL.i("BaseSdkImpl applicationOnCreate async task");
+                        //获取Google 广告ID
+                        SdkEventLogger.registerGoogleAdId(application.getApplicationContext());
+                        return "";
+                    }
+                })
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+
+                               @Override
+                               public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
+
+                               }
+
+                               @Override
+                               public void onNext(@io.reactivex.rxjava3.annotations.NonNull String s) {
+
+                                   PL.i("BaseSdkImpl applicationOnCreate async onNext");
+                                   TDAnalyticsHelper.init(application.getApplicationContext());
+                               }
+
+                               @Override
+                               public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+
+                               }
+
+                               @Override
+                               public void onComplete() {
+
+                               }
+                           });
+
         //充值登录数据
         SdkUtil.resetSdkLoginData(application.getApplicationContext());
 
         AFHelper.applicationOnCreate(application);
         AdjustHelper.init(application);
-        TDAnalyticsHelper.init(application.getApplicationContext());
-
         SPUtil.saveSimpleInfo(application.getApplicationContext(), SdkUtil.SDK_SP_FILE,"sdk_applicationOnCreate_call", true);
 
     }

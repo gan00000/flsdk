@@ -9,6 +9,7 @@ import com.appsflyer.AFInAppEventParameterName;
 import com.appsflyer.AFInAppEventType;
 import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.ISReqCallBack;
+import com.core.base.callback.SFCallBack;
 import com.core.base.request.SimpleHttpRequest;
 import com.core.base.utils.ApkInfoUtil;
 import com.core.base.utils.JsonUtil;
@@ -391,14 +392,19 @@ public class SdkEventLogger {
      * 获取Google ads id，不能在主线程调用
      */
     public static void registerGoogleAdId(final Context context){
-        new  Thread(new Runnable() {
+        PL.i("start registerGoogleAdId" );
+        /*new  Thread(new Runnable() {
             @Override
             public void run() {
                 String googleAdId = SGoogleProxy.getAdvertisingId(context.getApplicationContext());
                 PL.i("get google ad id-->" + googleAdId);
                 SdkUtil.saveGoogleAdId(context,googleAdId);
             }
-        }).start();
+        }).start();*/
+
+        String googleAdId = SGoogleProxy.getAdvertisingId(context.getApplicationContext());
+        PL.i("get google ad id-->" + googleAdId);
+        SdkUtil.saveGoogleAdId(context,googleAdId);
     }
 
     //发送事件到服务器记录，只是发一次
