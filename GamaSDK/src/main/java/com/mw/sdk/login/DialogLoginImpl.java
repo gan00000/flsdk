@@ -94,7 +94,8 @@ public class DialogLoginImpl implements ILogin {
             return;
         }
 
-        if (SdkInnerVersion.V6.getSdkVeriosnName().equals(SdkUtil.getSdkInnerVersion(activity)) && SStringUtil.isNotEmpty(activity.getString(R.string.sdk_release_european)) && !SdkUtil.getShowTerm(activity)){
+        if ((SdkInnerVersion.V6.getSdkVeriosnName().equals(SdkUtil.getSdkInnerVersion(activity)) || SdkInnerVersion.V4.getSdkVeriosnName().equals(SdkUtil.getSdkInnerVersion(activity)))
+                && SStringUtil.isNotEmpty(activity.getString(R.string.sdk_release_european)) && !SdkUtil.getShowTerm(activity)){
             showTermDialog(activity, iLoginCallBack);
             return;
         }

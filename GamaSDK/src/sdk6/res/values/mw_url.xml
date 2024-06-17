@@ -36,7 +36,7 @@
     <string name="mw_sdk_log_pre_url">https://log.hwxgame.com/</string>
 
     <!--使用者條款 - 服務條款 -->
-    <string name="mw_sdk_terms_service_url">https://member.hwxgame.com/sdk/agreement/%s_agreement.html</string>
+    <string name="mw_sdk_terms_service_url">https://member.hwxgame.com/privacy/dev_privacy_en.html</string>
 
     <!--社群banner-->
     <string name="mw_sdk_social_url">https://member.hwxgame.com/sdk/social/%s/index.html</string>
