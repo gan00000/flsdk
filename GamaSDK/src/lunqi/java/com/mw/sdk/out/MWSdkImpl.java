@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 
 import com.core.base.callback.SFCallBack;
@@ -27,6 +28,8 @@ import com.xlsdk.mediator.sdk.listener.IXLLoginNotifier;
 import com.xlsdk.mediator.sdk.listener.IXLPayNotifier;
 import com.xlsdk.mediator.sdk.listener.IXLSwitchAccountNotifier;
 import com.xlsdk.mediator.sdk.user.XLUserInfo;
+
+import org.json.JSONObject;
 
 public class MWSdkImpl extends BaseSdkImpl {
 
@@ -395,5 +398,29 @@ public class MWSdkImpl extends BaseSdkImpl {
         super.onCreate_OnUi(activity);
         iPay = null;
 //        sFacebookProxy = null;
+    }
+
+    @Override
+    public void trackEvent(Activity activity, String eventName, JSONObject propertieJsonObj, int m){
+
+        Log.i(TAG, "trackEvent name = " + eventName);
+        if (eventName == null){
+            Log.i(TAG, "trackEvent eventName is null");
+            return;
+        }
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+//                SdkEventLogger.sendEventToSever(activity, eventName);
+//                if (propertieJsonObj != null){
+//                    SdkEventLogger.trackingWithEventName(activity, eventName, JsonUtil.jsonObjectToMap(propertieJsonObj), EventConstant.AdType.AdTypeAllChannel);
+//                }else {
+//                    SdkEventLogger.trackingWithEventName(activity, eventName, null, EventConstant.AdType.AdTypeAllChannel);
+//                }
+//                TDAnalyticsHelper.trackEvent(eventName, propertieJsonObj, 0);
+
+                XLSDK.getInstance().callFunctionWithParams(activity, 0, eventName);
+            }
+        });
     }
 }

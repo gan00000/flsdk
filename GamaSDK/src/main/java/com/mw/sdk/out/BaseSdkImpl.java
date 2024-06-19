@@ -16,7 +16,6 @@ import com.core.base.BaseWebViewClient;
 import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.AppUtil;
-import com.core.base.utils.JsonUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.SPUtil;
 import com.core.base.utils.SStringUtil;
@@ -43,7 +42,6 @@ import com.mw.sdk.constant.SGameLanguage;
 import com.mw.sdk.login.ILogin;
 import com.mw.sdk.login.ILoginCallBack;
 import com.mw.sdk.login.model.response.SLoginResponse;
-import com.mw.sdk.out.bean.EventPropertie;
 import com.mw.sdk.pay.IPay;
 import com.mw.sdk.pay.IPayFactory;
 import com.mw.sdk.utils.DataManager;
@@ -55,8 +53,6 @@ import com.mw.sdk.widget.SWebView;
 import com.mw.sdk.widget.SWebViewDialog;
 import com.mw.sdk.widget.SWebViewLayout;
 import com.thirdlib.huawei.HuaweiPayImpl;
-import com.thirdlib.td.TDAnalyticsHelper;
-import com.xlsdk.mediator.XLSDK;
 
 import org.json.JSONObject;
 
@@ -191,12 +187,12 @@ public class BaseSdkImpl implements IMWSDK {
             public void run() {
 
 
-                if (iPay != null && SStringUtil.isNotEmpty(roleId) && SStringUtil.isNotEmpty(severCode) && SStringUtil.isNotEmpty(SdkUtil.getUid(activity))){
-                    iPay.startQueryPurchase(activity.getApplicationContext());
-                }
+//                if (iPay != null && SStringUtil.isNotEmpty(roleId) && SStringUtil.isNotEmpty(severCode) && SStringUtil.isNotEmpty(SdkUtil.getUid(activity))){
+//                    iPay.startQueryPurchase(activity.getApplicationContext());
+//                }
                 //showActViewSwitchRequest(activity);//注释掉，先不用
 
-                Request.requestFloatMenus(activity.getApplicationContext(), new SFCallBack<String>() {
+               /* Request.requestFloatMenus(activity.getApplicationContext(), new SFCallBack<String>() {
                     @Override
                     public void success(String result, String msg) {
                         showFloatView(activity);
@@ -206,7 +202,7 @@ public class BaseSdkImpl implements IMWSDK {
                     public void fail(String result, String msg) {
 
                     }
-                });
+                });*/
             }
         });
 
@@ -214,7 +210,7 @@ public class BaseSdkImpl implements IMWSDK {
 
     public void checkPreRegData(final Activity activity, ISdkCallBack iSdkCallBack) {
 
-        PL.i("IMWSDK checkPreRegData");
+        /*PL.i("IMWSDK checkPreRegData");
         if (SStringUtil.isEmpty(SdkUtil.getUid(activity)) || SStringUtil.isEmpty(SdkUtil.getRoleId(activity)) || SStringUtil.isEmpty(SdkUtil.getServerCode(activity))){
             PL.i("IMWSDK checkPreRegData role info empty");
             return;
@@ -228,18 +224,18 @@ public class BaseSdkImpl implements IMWSDK {
                     iPay.queryPreRegData(activity.getApplicationContext(), iSdkCallBack);
                 }
             }
-        });
+        });*/
     }
 
     @Override
     public void openCs(Activity activity) {
         PL.i("sdk openCs");
-        activity.runOnUiThread(new Runnable() {
+        /*activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 Request.openCs(activity, 0);
             }
-        });
+        });*/
     }
 
     @Override
@@ -518,7 +514,6 @@ public class BaseSdkImpl implements IMWSDK {
 //                }
 //                TDAnalyticsHelper.trackEvent(eventName, propertieJsonObj, 0);
 
-                XLSDK.getInstance().callFunctionWithParams(activity, 0, eventName);
             }
         });
     }
@@ -947,7 +942,7 @@ public class BaseSdkImpl implements IMWSDK {
     @Override
     public void requestVfCode(Activity activity, String areaCode, String telephone, SFCallBack<BaseResponseModel> sfCallBack) {
         PL.i("requestVfCode areaCode=" + areaCode + " telephone=" + telephone);
-        activity.runOnUiThread(new Runnable() {
+        /*activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 BaseResponseModel errorModel = new BaseResponseModel();
@@ -981,13 +976,13 @@ public class BaseSdkImpl implements IMWSDK {
                 }
                 Request.sendVfCode(activity, false, areaCode, telephone, sfCallBack);
             }
-        });
+        });*/
     }
 
     @Override
     public void requestBindPhone(Activity activity, String areaCode, String telephone,String vfCode, SFCallBack<SLoginResponse> sfCallBack) {
         PL.i("requestBindPhone areaCode=" + areaCode + " telephone=" + telephone + " vfCode=" + vfCode);
-        activity.runOnUiThread(new Runnable() {
+       /* activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
 
@@ -1013,13 +1008,13 @@ public class BaseSdkImpl implements IMWSDK {
 
                 Request.bindPhone(activity, false, areaCode, telephone, vfCode, sfCallBack);
             }
-        });
+        });*/
     }
 
     @Override
     public void requestUpgradeAccount(Activity activity, String account, String pwd, SFCallBack<SLoginResponse> sfCallBack ) {
 
-        if (TextUtils.isEmpty(account)) {
+        /*if (TextUtils.isEmpty(account)) {
             ToastUtils.toast(activity, R.string.py_account_empty);
             return;
         }
@@ -1043,7 +1038,7 @@ public class BaseSdkImpl implements IMWSDK {
             public void run() {
                 Request.bindAcountInGame(activity,false,SdkUtil.getPreviousLoginType(activity), account_temp, pwd_temp, sfCallBack);
             }
-        });
+        });*/
     }
 
     private void doWebPay(Activity activity, PayCreateOrderReqBean bean) {
