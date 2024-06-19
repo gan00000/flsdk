@@ -12,4 +12,4 @@ public class MyApplication extends Application {
         MWSdkFactory.create().applicationOnCreate(this);
     }
 
-  }
+}

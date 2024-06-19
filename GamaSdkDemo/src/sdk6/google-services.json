@@ -1,36 +1,26 @@
 {
   "project_info": {
-    "project_number": "62082257566",
-    "project_id": "sea-sshx-and",
-    "storage_bucket": "sea-sshx-and.appspot.com"
+    "project_number": "459576761808",
+    "project_id": "en-tgen-and",
+    "storage_bucket": "en-tgen-and.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:62082257566:android:26f6d0cb64b3dba31e618f",
+        "mobilesdk_app_id": "1:459576761808:android:b2cc4985e2fd7322256dd5",
         "android_client_info": {
-          "package_name": "com.wxgy.sshx"
+          "package_name": "com.wanxin.tgen"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "62082257566-jdn61a9favr5m8ibmnnqobbjn1thctjb.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBRPFNIl_9fvvk2yAED4ehcW7gm5AOpeHk"
+          "current_key": "AIzaSyDe2Ml8VB29S48AqLjL645ZtG975-vimbI"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "62082257566-jdn61a9favr5m8ibmnnqobbjn1thctjb.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

@@ -506,7 +506,7 @@ public class MainActivity extends Activity {
                 get_item_detail_list.add(eventItemDetailBean_2);
 
                 eventPropertie.setGet_item_detail(get_item_detail_list);
-                mIMWSDK.trackEvent(MainActivity.this, "standard_activity_get_reward",eventPropertie);
+//                mIMWSDK.trackEvent(MainActivity.this, "standard_activity_get_reward",eventPropertie);
             }
         });
 
