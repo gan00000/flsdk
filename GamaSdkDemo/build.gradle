@@ -573,6 +573,47 @@ android {
             resValue "string", "sdk_name", "krDemo"
 
         }
+
+        LD {
+
+            versionCode 10
+            versionName "1.0"
+            dimension "1"
+            //=======================================sdk config start ==========================
+
+            signingConfig signingConfigs.release_v2
+            //base
+            applicationId "com.wanxin.tgenlunplay"
+            minSdkVersion 21
+            targetSdkVersion 34
+
+            resValue "string", "sdk_game_code", "tgen"
+            resValue "string", "sdk_app_key", "c999bd3d4cb5d1239c0c30bfc70506f2"
+            resValue "string", "sdk_more_language", "true"
+            resValue "string", "sdk_default_server_language", "en_US"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
+            resValue "string", "scheme", "tgen"
+            resValue "string", "channel_platform", "lunqi"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
+            //facebook
+            resValue "string", "facebook_app_id", "1a"
+            resValue "string", "facebook_client_token", "1a"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1a"
+            resValue "string", "fb_login_protocol_scheme", "fb1a"
+            resValue "string", "facebook_app_name", "tgen" //游戏名字
+            //ad
+            resValue "string", "adjust_app_token", ""
+            resValue "string", "sdk_appflyer_dev_key", ""
+            //line
+            resValue "string", "line_channelId", ""
+            //naver
+            resValue "string", "naver_client_id", ""
+            resValue "string", "naver_client_secret", ""
+
+            //=======================================sdk config end==========================
+
+
+            resValue "string", "sdk_name", "lunqi demo"
+
+        }
     }
 
     android {

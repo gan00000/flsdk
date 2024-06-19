@@ -18,6 +18,7 @@ public class SLoginType {
 	public static final String LOGIN_TYPE_QooApp = "qooapp";
 	public static final String LOGIN_TYPE_LUNQI = "lunqi";
 	public static final String LOGIN_TYPE_HUAWEI = "huawei";
+	public static final String LOGIN_TYPE_LD = "leidian";
 
 	/**
 	 * Twitter登入

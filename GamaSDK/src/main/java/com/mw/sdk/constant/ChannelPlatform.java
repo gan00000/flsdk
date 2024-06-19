@@ -8,7 +8,9 @@ public enum ChannelPlatform {
     GOOGLE("google"),
     ONESTORE("onestore"),//kr
     SAMSUNG("samsung"),//kr
-    MEOW("meow");
+    MEOW("meow"),
+
+    LD("leidian");
 
     private String channel_platform;
     ChannelPlatform(String channelPlatform) {

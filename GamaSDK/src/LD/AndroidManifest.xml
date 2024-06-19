@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+<!--    <queries>-->
+<!--        <package android:name="com.qooapp.qoohelper" />-->
+<!--    </queries>-->
+
+    <application>
+
+        <!-- ld sdk的基础配置 start-->
+        <meta-data
+            android:name="com.ld.APP_ID"
+            android:value="${APP_ID}" />
+        <meta-data
+            android:name="com.ld.APP_KEY"
+            android:value="${APP_KEY}" />
+        <meta-data
+            android:name="com.ld.CHANNEL_ID"
+            android:value="${CHANNEL_ID}"   />
+        <meta-data
+            android:name="com.ld.SUN_CHANNEL_ID"
+            android:value="${SUN_CHANNEL_ID}"   />
+        <!-- ld sdk的基础配置 end-->
+
+    </application>
+
+    <!--需要添加以下配置 end-->
+
+</manifest>
