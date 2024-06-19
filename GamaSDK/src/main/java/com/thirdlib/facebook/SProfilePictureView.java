@@ -1,9 +1,9 @@
-package com.thirdlib.facebook;
+//package com.thirdlib.facebook;
 
 import android.content.Context;
 import android.util.AttributeSet;
 
-import com.facebook.login.widget.ProfilePictureView;
+//import com.facebook.login.widget.ProfilePictureView;
 
 //public class SProfilePictureView extends ProfilePictureView {
 //

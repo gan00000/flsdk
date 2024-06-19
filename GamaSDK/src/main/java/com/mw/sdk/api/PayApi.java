@@ -4,21 +4,19 @@ import android.app.Activity;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.android.billingclient.api.Purchase;
 import com.core.base.callback.ISReqCallBack;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.mw.sdk.ads.SdkEventLogger;
-import com.mw.sdk.bean.EventBean;
-import com.mw.sdk.bean.req.PayCreateOrderReqBean;
-import com.mw.sdk.constant.ApiRequestMethod;
-import com.mw.sdk.bean.req.PayExchangeReqBean;
-import com.mw.sdk.bean.res.BasePayBean;
-import com.mw.sdk.bean.res.GPCreateOrderIdRes;
-import com.mw.sdk.bean.res.GPExchangeRes;
 import com.mw.sdk.api.task.GoogleCreateOrderReqTask;
 import com.mw.sdk.api.task.GoogleExchangeReqTask;
+import com.mw.sdk.bean.EventBean;
+import com.mw.sdk.bean.req.PayCreateOrderReqBean;
+import com.mw.sdk.bean.req.PayExchangeReqBean;
+import com.mw.sdk.bean.res.GPCreateOrderIdRes;
+import com.mw.sdk.bean.res.GPExchangeRes;
+import com.mw.sdk.constant.ApiRequestMethod;
 import com.mw.sdk.utils.PayHelper;
 
 public class PayApi {
@@ -65,9 +63,9 @@ public class PayApi {
     /**
      * 发币
      */
-    public static void requestSendStone(Context context, final Purchase mPurchase,String reissue, SFCallBack<GPExchangeRes> sfCallBack) {
+    public static void requestSendStone(Context context,String reissue, SFCallBack<GPExchangeRes> sfCallBack) {
 
-        PayExchangeReqBean exchangeReqBean = new PayExchangeReqBean(context);
+       /* PayExchangeReqBean exchangeReqBean = new PayExchangeReqBean(context);
         exchangeReqBean.setDataSignature(mPurchase.getSignature());
         exchangeReqBean.setPurchaseData(mPurchase.getOriginalJson());
         exchangeReqBean.setReissue(reissue);
@@ -147,7 +145,7 @@ public class PayApi {
             public void cancel() {
             }
         });
-        googleExchangeReqTask.excute(GPExchangeRes.class);
+        googleExchangeReqTask.excute(GPExchangeRes.class);*/
     }
 
 

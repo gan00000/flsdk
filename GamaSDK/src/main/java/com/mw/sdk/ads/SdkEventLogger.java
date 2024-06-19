@@ -5,34 +5,27 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 
-import com.appsflyer.AFInAppEventParameterName;
-import com.appsflyer.AFInAppEventType;
 import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.ISReqCallBack;
 import com.core.base.request.SimpleHttpRequest;
 import com.core.base.utils.ApkInfoUtil;
-import com.core.base.utils.JsonUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.SPUtil;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.TimeUtil;
-import com.facebook.appevents.AppEventsConstants;
-import com.mw.sdk.bean.SUserInfo;
-import com.google.firebase.analytics.FirebaseAnalytics;
-import com.mw.sdk.bean.AdsRequestBean;
-import com.mw.sdk.out.bean.EventPropertie;
-import com.mw.sdk.utils.ResConfig;
-import com.mw.sdk.utils.SdkUtil;
 import com.mw.sdk.R;
 import com.mw.sdk.api.Request;
+import com.mw.sdk.bean.AdsRequestBean;
+import com.mw.sdk.bean.SUserInfo;
 import com.mw.sdk.login.model.response.SLoginResponse;
+import com.mw.sdk.utils.ResConfig;
+import com.mw.sdk.utils.SdkUtil;
 import com.thirdlib.adjust.AdjustHelper;
 import com.thirdlib.af.AFHelper;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.google.SGoogleProxy;
 import com.thirdlib.td.TDAnalyticsHelper;
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -105,21 +98,21 @@ public class SdkEventLogger {
             if (activity == null || loginResponse == null){
                 return;
             }
-
-            String userId = loginResponse.getData().getUserId();
-            Map<String, Object> eventValue = new HashMap<String, Object>();
-            eventValue.put(EventConstant.ParameterName.USER_ID, userId);
-            eventValue.put(EventConstant.ParameterName.SERVER_TIME, SdkUtil.getSdkTimestamp(activity) + "");
-            String eventName = EventConstant.EventName.REGISTER_SUCCESS.name();
-            sendEventToSever(activity, EventConstant.EventName.REGISTER_SUCCESS.name());
-            trackingWithEventName(activity,eventName,eventValue,EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
-            trackingWithEventName(activity, AppEventsConstants.EVENT_NAME_COMPLETED_REGISTRATION,eventValue,EventConstant.AdType.AdTypeFacebook);
-            trackingWithEventName(activity, "COMPLETE_REGISTRATION_AND",eventValue,EventConstant.AdType.AdTypeFacebook);
-
-//            EventPropertie tdBean = new EventPropertie();
-//            tdBean.setRegister_type(loginResponse.getData().getLoginType());
-//            tdBean.setUserId(loginResponse.getData().getUserId());
-            TDAnalyticsHelper.trackEvent(EventConstant.EventName.REGISTER_SUCCESS.name());
+//
+//            String userId = loginResponse.getData().getUserId();
+//            Map<String, Object> eventValue = new HashMap<String, Object>();
+//            eventValue.put(EventConstant.ParameterName.USER_ID, userId);
+//            eventValue.put(EventConstant.ParameterName.SERVER_TIME, SdkUtil.getSdkTimestamp(activity) + "");
+//            String eventName = EventConstant.EventName.REGISTER_SUCCESS.name();
+//            sendEventToSever(activity, EventConstant.EventName.REGISTER_SUCCESS.name());
+//            trackingWithEventName(activity,eventName,eventValue,EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
+//            trackingWithEventName(activity, AppEventsConstants.EVENT_NAME_COMPLETED_REGISTRATION,eventValue,EventConstant.AdType.AdTypeFacebook);
+//            trackingWithEventName(activity, "COMPLETE_REGISTRATION_AND",eventValue,EventConstant.AdType.AdTypeFacebook);
+//
+////            EventPropertie tdBean = new EventPropertie();
+////            tdBean.setRegister_type(loginResponse.getData().getLoginType());
+////            tdBean.setUserId(loginResponse.getData().getUserId());
+//            TDAnalyticsHelper.trackEvent(EventConstant.EventName.REGISTER_SUCCESS.name());
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -150,7 +143,7 @@ public class SdkEventLogger {
      * 统计储值数据
      */
     public static void trackinPayEvent(Context context, String eventName, String orderId, String productId, double usdPrice, String serverTimestamp, boolean linkUser){
-        if(SStringUtil.isEmpty(orderId) || SStringUtil.isEmpty(productId)) {
+     /*   if(SStringUtil.isEmpty(orderId) || SStringUtil.isEmpty(productId)) {
             PL.i("trackinPay orderId or productId null");
             return;
         }
@@ -302,7 +295,7 @@ public class SdkEventLogger {
 
         } catch (Exception e1) {
             e1.printStackTrace();
-        }
+        }*/
     }
 
     public static void trackingWithEventName(Context context, String eventName){

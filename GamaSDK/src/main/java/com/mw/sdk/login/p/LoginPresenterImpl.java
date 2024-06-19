@@ -15,17 +15,10 @@ import com.core.base.callback.SFCallBack;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
-import com.facebook.internal.ImageRequest;
-import com.mw.sdk.bean.PhoneInfo;
-import com.mw.sdk.constant.SLoginType;
-import com.mw.sdk.bean.res.ConfigBean;
-import com.mw.sdk.utils.ResConfig;
-import com.mw.sdk.utils.SdkUtil;
 import com.mw.base.utils.SdkVersionUtil;
+import com.mw.sdk.R;
 import com.mw.sdk.ads.EventConstant;
-import com.mw.sdk.utils.DataManager;
-import com.mw.sdk.constant.BindType;
-import com.mw.sdk.constant.ViewType;
+import com.mw.sdk.ads.SdkEventLogger;
 import com.mw.sdk.api.task.AccountLoginRequestTask;
 import com.mw.sdk.api.task.AccountRegisterRequestTask;
 import com.mw.sdk.api.task.ChangePwdRequestTask;
@@ -34,15 +27,22 @@ import com.mw.sdk.api.task.FindPwdRequestTask;
 import com.mw.sdk.api.task.MacLoginRegRequestTask;
 import com.mw.sdk.api.task.PhoneVerifyRequestTask;
 import com.mw.sdk.api.task.PhoneVfcodeRequestTask;
-import com.mw.sdk.api.task.ThirdLoginRegRequestTask;
 import com.mw.sdk.api.task.ThirdAccountBindRequestTaskV2;
-import com.mw.sdk.bean.req.ThirdLoginRegRequestBean;
-import com.mw.sdk.login.model.response.SLoginResponse;
-import com.mw.sdk.widget.SBaseRelativeLayout;
-import com.mw.sdk.ads.SdkEventLogger;
-import com.mw.sdk.login.LoginContract;
+import com.mw.sdk.api.task.ThirdLoginRegRequestTask;
 import com.mw.sdk.bean.AccountModel;
+import com.mw.sdk.bean.PhoneInfo;
+import com.mw.sdk.bean.req.ThirdLoginRegRequestBean;
+import com.mw.sdk.bean.res.ConfigBean;
+import com.mw.sdk.constant.BindType;
+import com.mw.sdk.constant.SLoginType;
+import com.mw.sdk.constant.ViewType;
+import com.mw.sdk.login.LoginContract;
+import com.mw.sdk.login.model.response.SLoginResponse;
+import com.mw.sdk.utils.DataManager;
 import com.mw.sdk.utils.DialogUtil;
+import com.mw.sdk.utils.ResConfig;
+import com.mw.sdk.utils.SdkUtil;
+import com.mw.sdk.widget.SBaseRelativeLayout;
 import com.thirdlib.IThirdHelper;
 import com.thirdlib.ThirdCallBack;
 import com.thirdlib.facebook.FaceBookUser;
@@ -53,7 +53,6 @@ import com.thirdlib.huawei.HuaweiSignIn;
 import com.thirdlib.line.SLineSignIn;
 import com.thirdlib.td.TDAnalyticsHelper;
 import com.thirdlib.twitter.TwitterLogin;
-import com.mw.sdk.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -785,7 +784,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             PL.i("Facebook Proxy為null");
             return;
         }
-        SFacebookProxy.FbLoginCallBack fbLoginCallBack1 = new SFacebookProxy.FbLoginCallBack() {
+      /*  SFacebookProxy.FbLoginCallBack fbLoginCallBack1 = new SFacebookProxy.FbLoginCallBack() {
             @Override
             public void onCancel() {
                 PL.d("sFbLogin cancel");
@@ -824,7 +823,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
             sFacebookProxy.fbLogin(fragment.getActivity(), fbLoginCallBack1);
 
-        }
+        }*/
     }
 
     /**
@@ -864,7 +863,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         //如果登录出错，有可能是token后端验证错误无法通过，故signOut
                         if (SStringUtil.isEqual(sLoginResponse.getCode(), "1010")) {
                             if (sFacebookProxy != null) {
-                                sFacebookProxy.fbLogout(getActivity());
+//                                sFacebookProxy.fbLogout(getActivity());
                             }
                         }
                     }

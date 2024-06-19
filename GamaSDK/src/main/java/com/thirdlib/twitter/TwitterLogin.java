@@ -4,15 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-
-import com.core.base.utils.PL;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.OAuthProvider;
-
 public class TwitterLogin {
 
     private static final String TAG = TwitterLogin.class.getSimpleName();
@@ -21,7 +12,7 @@ public class TwitterLogin {
 
     private Activity mActivity;
 //    private volatile TwitterAuthClient authClient;
-    private FirebaseAuth mAuth;
+//    private FirebaseAuth mAuth;
 
     public TwitterLogin() {
 
@@ -37,13 +28,13 @@ public class TwitterLogin {
         }
         this.mActivity = activity;
         // Initialize Firebase Auth
-        if (mAuth == null) {
+     /*   if (mAuth == null) {
             mAuth = FirebaseAuth.getInstance();
         }
 
         OAuthProvider.Builder provider = OAuthProvider.newBuilder("twitter.com");
 
-        mAuth.startActivityForSignInWithProvider(/* activity= */ mActivity, provider.build())
+        mAuth.startActivityForSignInWithProvider(*//* activity= *//* mActivity, provider.build())
                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                             @Override
                             public void onSuccess(AuthResult authResult) {
@@ -74,7 +65,7 @@ public class TwitterLogin {
                                     callBack.failure(e.getMessage());
                                 }
                             }
-                        });
+                        });*/
 
         //twitter登入回调
        /* Callback<TwitterSession> callback = new Callback<TwitterSession>() {

@@ -259,7 +259,7 @@ public class MWSdkImpl extends BaseSdkImpl {
         String gameCode = userInfo.getGameCode();
 
 //        MD5(sitecode + t + loginkey + passport)
-        String loginkey = "SaSvTgU7AW2Kyhx8mO";
+        String loginkey = "ZztiAfFNnLYoKFaGuH";
         String ead = SStringUtil.toMd5(sitecode + t + loginkey + passport);
         if (!ck.equals(ead)){
             //ToastUtils.toast(activity,"Account verification failed");
@@ -394,6 +394,6 @@ public class MWSdkImpl extends BaseSdkImpl {
     protected void onCreate_OnUi(Activity activity) {
         super.onCreate_OnUi(activity);
         iPay = null;
-        sFacebookProxy = null;
+//        sFacebookProxy = null;
     }
 }

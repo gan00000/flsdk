@@ -1,20 +1,8 @@
 package com.thirdlib.google;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.text.TextUtils;
-
-import com.core.base.utils.ToastUtils;
-import com.google.android.gms.ads.identifier.AdvertisingIdClient;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
-import com.google.android.gms.common.GooglePlayServicesRepairableException;
-import com.google.firebase.analytics.FirebaseAnalytics;
-
-import java.io.IOException;
 
 /**
  */
@@ -72,22 +60,23 @@ public class SGoogleProxy {
 
 	public static String getAdvertisingId(Context mContext) {
 
-		if (!TextUtils.isEmpty(advertisingIdCache)) {
-			return advertisingIdCache;
-		}
-
-		try {
-			AdvertisingIdClient.Info adInfo = AdvertisingIdClient.getAdvertisingIdInfo(mContext);
-			if (null != adInfo) {
-				advertisingIdCache = adInfo.getId();
-			}
-//			boolean isLAT = adInfo.isLimitAdTrackingEnabled();
-		} catch (IllegalStateException e) {
-		} catch (GooglePlayServicesRepairableException e) {
-		} catch (IOException e) {
-		} catch (GooglePlayServicesNotAvailableException e) {
-		}
-		return advertisingIdCache;
+//		if (!TextUtils.isEmpty(advertisingIdCache)) {
+//			return advertisingIdCache;
+//		}
+//
+//		try {
+//			AdvertisingIdClient.Info adInfo = AdvertisingIdClient.getAdvertisingIdInfo(mContext);
+//			if (null != adInfo) {
+//				advertisingIdCache = adInfo.getId();
+//			}
+////			boolean isLAT = adInfo.isLimitAdTrackingEnabled();
+//		} catch (IllegalStateException e) {
+//		} catch (GooglePlayServicesRepairableException e) {
+//		} catch (IOException e) {
+//		} catch (GooglePlayServicesNotAvailableException e) {
+//		}
+//		return advertisingIdCache;
+		return "";
 	}
 
 	//=====================================Google getAdvertisingId end============================================
@@ -102,26 +91,26 @@ public class SGoogleProxy {
 	}
 */
 
-	public static int isGooglePlayServicesAvailable(Context context){
-		return GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(context);
-	}
+//	public static int isGooglePlayServicesAvailable(Context context){
+//		return GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(context);
+//	}
 
 	public static boolean showGoogleServicesErrorDialog(Activity activity){
-		int googleServicesCode = isGooglePlayServicesAvailable(activity.getApplicationContext());
-		if (googleServicesCode == ConnectionResult.SUCCESS){
-			return true;
-		}
-		Dialog errorDialog = GoogleApiAvailability.getInstance().getErrorDialog(activity,googleServicesCode,GOOGLE_SERVICES_ERROR_CODE);
-		errorDialog.show();
+//		int googleServicesCode = isGooglePlayServicesAvailable(activity.getApplicationContext());
+//		if (googleServicesCode == ConnectionResult.SUCCESS){
+//			return true;
+//		}
+//		Dialog errorDialog = GoogleApiAvailability.getInstance().getErrorDialog(activity,googleServicesCode,GOOGLE_SERVICES_ERROR_CODE);
+//		errorDialog.show();
 		return false;
 	}
 
 	public static boolean isGooglePlayServicesAvailableToast(Context context){
-		int googleServicesCode = isGooglePlayServicesAvailable(context);
-		if (googleServicesCode == ConnectionResult.SUCCESS){
-			return true;
-		}
-		ToastUtils.toast(context,"Google Services is not available for this device");
+//		int googleServicesCode = isGooglePlayServicesAvailable(context);
+//		if (googleServicesCode == ConnectionResult.SUCCESS){
+//			return true;
+//		}
+//		ToastUtils.toast(context,"Google Services is not available for this device");
 		return false;
 	}
 
@@ -137,8 +126,8 @@ public class SGoogleProxy {
 	}
 
 	public static void firebaseAnalytics(Context context, String eventName, Bundle params) {
-		FirebaseAnalytics analytics = FirebaseAnalytics.getInstance(context);
-		analytics.logEvent(eventName, params);
+//		FirebaseAnalytics analytics = FirebaseAnalytics.getInstance(context);
+//		analytics.logEvent(eventName, params);
 	}
 
 /*

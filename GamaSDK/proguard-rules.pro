@@ -23,6 +23,8 @@
 # typically classes that are dynamically created using Class.forName:
 
 -keep public class com.mw.sdk.out.** { *; }
+-keep public class com.core.base.callback.** { *; }
+
 -keep public class * extends java.lang.Enum { *; }
 -keep public class * extends com.core.base.bean.BaseResponseModel { *; }
 -keep public class * extends com.core.base.bean.AbsReqeustBean { *; }

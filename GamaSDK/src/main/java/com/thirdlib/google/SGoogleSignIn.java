@@ -10,19 +10,8 @@ import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-
-import com.core.base.utils.ResUtil;
-import com.core.base.utils.SStringUtil;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 
 public class SGoogleSignIn {
 
@@ -46,7 +35,7 @@ public class SGoogleSignIn {
 	// [END declare_auth]
 
 	GoogleSignInCallBack googleSignInCallBack;
-	private GoogleSignInClient mGoogleSignInClient;
+//	private GoogleSignInClient mGoogleSignInClient;
 
 	private String default_web_client_id = "";
 
@@ -93,24 +82,24 @@ public class SGoogleSignIn {
 	private void initxx(){
 		// [START config_signin]
 		// Configure Google Sign In
-		if (SStringUtil.isEmpty(default_web_client_id)) {
-			default_web_client_id = ResUtil.findStringByName(activity,"default_web_client_id");
-		}
-		GoogleSignInOptions gso;
-		if (SStringUtil.isNotEmpty(default_web_client_id)){
-			gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-					.requestIdToken(default_web_client_id)
-					.requestEmail()
-					.build();
-			// [END config_signin]
-
-		}else{
-
-			Log.e(TAG,"default_web_client_id为空,firebase配置不正确");
-			gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().requestId().build();
-
-		}
-		mGoogleSignInClient = GoogleSignIn.getClient(activity, gso);
+//		if (SStringUtil.isEmpty(default_web_client_id)) {
+//			default_web_client_id = ResUtil.findStringByName(activity,"default_web_client_id");
+//		}
+//		GoogleSignInOptions gso;
+//		if (SStringUtil.isNotEmpty(default_web_client_id)){
+//			gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//					.requestIdToken(default_web_client_id)
+//					.requestEmail()
+//					.build();
+//			// [END config_signin]
+//
+//		}else{
+//
+//			Log.e(TAG,"default_web_client_id为空,firebase配置不正确");
+//			gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().requestId().build();
+//
+//		}
+//		mGoogleSignInClient = GoogleSignIn.getClient(activity, gso);
 
 		// [START initialize_auth]
 		// Initialize Firebase Auth
@@ -122,7 +111,7 @@ public class SGoogleSignIn {
 	public void startSignIn(GoogleSignInCallBack googleSignInCallBack){
 
 		this.googleSignInCallBack = googleSignInCallBack;
-		if (!SGoogleProxy.isGooglePlayServicesAvailableToast(activity)){
+		/*if (!SGoogleProxy.isGooglePlayServicesAvailableToast(activity)){
 			return;
 		}
 		if (activity == null) {
@@ -161,7 +150,7 @@ public class SGoogleSignIn {
 		}else {
 			signInFirebase();
 		}
-		isCancel = false;
+		isCancel = false;*/
 
 	}
 
@@ -216,7 +205,7 @@ public class SGoogleSignIn {
 				}
 			}
 		}*/
-
+/*
 		if (requestCode == RC_SIGN_IN) {
 			Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
 			try {
@@ -255,7 +244,7 @@ public class SGoogleSignIn {
 
 				// [END_EXCLUDE]
 			}
-		}
+		}*/
 
 	}
 
@@ -286,7 +275,7 @@ public class SGoogleSignIn {
 			try {
 				mConnectionProgressDialog.dismiss();
 			} catch (Exception e) {
-				
+
 			}
 		}
 	}
@@ -329,14 +318,14 @@ public class SGoogleSignIn {
 
 	// [START signin]
 	private void signInFirebase() {
-		Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-		activity.startActivityForResult(signInIntent, RC_SIGN_IN);
+//		Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+//		activity.startActivityForResult(signInIntent, RC_SIGN_IN);
 	}
 	// [END signin]
 
 	public void signOut() {
 
-		Log.i(TAG, "Google signOut");
+	/*	Log.i(TAG, "Google signOut");
 		// Google sign out
 		if (mGoogleSignInClient != null) {
 			mGoogleSignInClient.signOut().addOnCompleteListener(activity,
@@ -346,19 +335,19 @@ public class SGoogleSignIn {
 							Log.d(TAG,"shoudong signOut onComplete");
 						}
 					});
-		}
+		}*/
 	}
 
 	private void revokeAccess() {//撤销授予当前应用程序的访问权限
 
 		// Google revoke access
-		mGoogleSignInClient.revokeAccess().addOnCompleteListener(activity,
-				new OnCompleteListener<Void>() {
-					@Override
-					public void onComplete(@NonNull Task<Void> task) {
-						Log.d(TAG,"shoudong revokeAccess onComplete");
-					}
-				});
+//		mGoogleSignInClient.revokeAccess().addOnCompleteListener(activity,
+//				new OnCompleteListener<Void>() {
+//					@Override
+//					public void onComplete(@NonNull Task<Void> task) {
+//						Log.d(TAG,"shoudong revokeAccess onComplete");
+//					}
+//				});
 	}
 
 

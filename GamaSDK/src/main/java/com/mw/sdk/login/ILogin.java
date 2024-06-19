@@ -4,7 +4,6 @@ import android.app.Activity;
 
 import com.core.base.callback.IGameLifeCycle;
 import com.thirdlib.facebook.SFacebookProxy;
-import com.thirdlib.google.SGoogleSignIn;
 
 /**
  * Created by gan on 2017/4/12.

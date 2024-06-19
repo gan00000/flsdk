@@ -13,7 +13,7 @@ android {
         jvmTarget = rootProject.ext.jvmTarget
     }
 
-    def sdk_version = "2.1.5"
+    def sdk_version = "2.1.7"
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
@@ -149,43 +149,41 @@ dependencies {
     //mutildex
     implementation 'androidx.multidex:multidex:2.0.1'
     //google pay
-    implementation "com.android.billingclient:billing:6.1.0"
+//    implementation "com.android.billingclient:billing:7.0.0"
     //google评分
-    implementation 'com.google.android.play:review:2.0.1'
+//    implementation 'com.google.android.play:review:2.0.1'
 
     implementation("com.google.guava:guava:31.1-android")
-//    implementation 'com.zhy:base-rvadapter:3.0.3'
 
     //Google库
-    implementation 'com.google.android.gms:play-services-auth:20.7.0'
-    implementation 'com.google.android.gms:play-services-base:18.2.0'
-    implementation 'com.google.android.gms:play-services-games:23.1.0'
-
-    //firebase
-    implementation platform('com.google.firebase:firebase-bom:32.3.1')
-//    implementation 'com.google.firebase:firebase-core'
-    implementation 'com.google.firebase:firebase-messaging'
-    implementation 'com.google.firebase:firebase-auth'
-    // Recommended: Add the Firebase SDK for Google Analytics.
-    implementation 'com.google.firebase:firebase-analytics'
-    // Add the Firebase Crashlytics SDK.
-    implementation 'com.google.firebase:firebase-crashlytics'
+//    implementation 'com.google.android.gms:play-services-auth:21.1.1'
+//    implementation 'com.google.android.gms:play-services-base:18.4.0'
+//    implementation 'com.google.android.gms:play-services-games:23.1.0'
+//
+//    //firebase
+//    implementation platform('com.google.firebase:firebase-bom:32.3.1')
+//    implementation 'com.google.firebase:firebase-messaging'
+//    implementation 'com.google.firebase:firebase-auth'
+//    // Recommended: Add the Firebase SDK for Google Analytics.
+//    implementation 'com.google.firebase:firebase-analytics'
+//    // Add the Firebase Crashlytics SDK.
+//    implementation 'com.google.firebase:firebase-crashlytics'
 
     //Facebook库
     // Facebook Core only (Analytics)
-    implementation 'com.facebook.android:facebook-core:16.0.0'  //latest.release
-    // Facebook Login only
-    implementation 'com.facebook.android:facebook-login:16.0.0'
-    // Facebook Share only
-    implementation 'com.facebook.android:facebook-share:16.0.0'
-    // Facebook Messenger only
-    implementation 'com.facebook.android:facebook-messenger:16.0.0'
+//    implementation 'com.facebook.android:facebook-core:17.0.0'  //latest.release
+//    // Facebook Login only
+//    implementation 'com.facebook.android:facebook-login:17.0.0'
+//    // Facebook Share only
+//    implementation 'com.facebook.android:facebook-share:17.0.0'
+//    // Facebook Messenger only
+//    implementation 'com.facebook.android:facebook-messenger:17.0.0'
     //line
 //    implementation 'com.linecorp:linesdk:5.0.1'
 
     //af
-    implementation 'com.appsflyer:af-android-sdk:6.13.0'
-    implementation 'com.android.installreferrer:installreferrer:2.2'
+//    implementation 'com.appsflyer:af-android-sdk:6.13.0'
+//    implementation 'com.android.installreferrer:installreferrer:2.2'
 
 //    implementation 'com.adjust.sdk:adjust-android:4.33.5'
 
@@ -197,26 +195,29 @@ dependencies {
     implementation 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'
     implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
 
-    implementation 'com.github.bumptech.glide:glide:4.16.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.16.0'
-    //数数埋点
-    implementation 'cn.thinkingdata.android:ThinkingAnalyticsSDK:3.0.2'
+//    implementation 'com.github.bumptech.glide:glide:4.16.0'
+//    annotationProcessor 'com.github.bumptech.glide:compiler:4.16.0'
+//    //数数埋点
+//    implementation 'cn.thinkingdata.android:ThinkingAnalyticsSDK:3.0.2'
+//
+//    //huawei sdk
+//    huaweiImplementation 'com.huawei.hms:hwid:6.9.0.301'
+//    huaweiImplementation 'com.huawei.hms:iap:6.4.0.301'
+//
+//    //qooapp sdk
+//    QooAppImplementation(name: 'qooapp-opensdk-2.0.6', ext: 'aar')
+//
+//    //naver
+//    sdkKRImplementation("com.navercorp.nid:oauth:5.6.0") // jdk 11
+//    //onestore
+//    sdkKRImplementation "com.onestorecorp.sdk:sdk-iap:21.00.00"
+//    sdkKRImplementation "com.onestorecorp.sdk:sdk-configuration-kr:1.0.0"
+//    //Samsung
+//    sdkKRImplementation(name: 'Samsung-IAP6Helper-release2', ext: 'aar')
 
-    //huawei sdk
-    huaweiImplementation 'com.huawei.hms:hwid:6.9.0.301'
-    huaweiImplementation 'com.huawei.hms:iap:6.4.0.301'
-
-    //qooapp sdk
-    QooAppImplementation(name: 'qooapp-opensdk-2.0.6', ext: 'aar')
-
-    //naver
-    sdkKRImplementation("com.navercorp.nid:oauth:5.6.0") // jdk 11
-    //onestore
-    sdkKRImplementation "com.onestorecorp.sdk:sdk-iap:21.00.00"
-    sdkKRImplementation "com.onestorecorp.sdk:sdk-configuration-kr:1.0.0"
-
+    //伦其
     lunqiImplementation files('libs/xlsdk1.jar')
-    sdkKRImplementation(name: 'Samsung-IAP6Helper-release2', ext: 'aar')
+
 
 }
 

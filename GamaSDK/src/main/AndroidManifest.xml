@@ -61,11 +61,11 @@
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Sdk.Theme.AppCompat.Light.NoActionBar.FullScreen"/>
 
-        <activity
-            android:name="com.mw.sdk.GooglePayActivity2"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|fontScale"
-            android:windowSoftInputMode="stateHidden|adjustResize"
-            android:theme="@style/Sdk.Theme.AppCompat.Light.NoActionBar.FullScreen.Translucent"/>
+<!--        <activity-->
+<!--            android:name="com.mw.sdk.GooglePayActivity2"-->
+<!--            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|fontScale"-->
+<!--            android:windowSoftInputMode="stateHidden|adjustResize"-->
+<!--            android:theme="@style/Sdk.Theme.AppCompat.Light.NoActionBar.FullScreen.Translucent"/>-->
 
 
 <!--        &lt;!&ndash; ==========================fb共同需要的配置============================ &ndash;&gt;-->
@@ -144,17 +144,17 @@
 <!--        </receiver>-->
 
 
-        <provider
-            android:authorities="${applicationId}.MWSDKProvider"
-            android:name="com.mw.sdk.SDKFileProvider"
-            android:exported="false"
-            android:grantUriPermissions="true">
+<!--        <provider-->
+<!--            android:authorities="${applicationId}.MWSDKProvider"-->
+<!--            android:name="com.mw.sdk.SDKFileProvider"-->
+<!--            android:exported="false"-->
+<!--            android:grantUriPermissions="true">-->
 
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/filepaths"/>
+<!--            <meta-data-->
+<!--                android:name="android.support.FILE_PROVIDER_PATHS"-->
+<!--                android:resource="@xml/filepaths"/>-->
 
-        </provider>
+<!--        </provider>-->
 
 <!--        &lt;!&ndash; 18：9的宽屏 &ndash;&gt;-->
 <!--        <meta-data android:name="android.max_aspect" android:value="2.4" />-->
