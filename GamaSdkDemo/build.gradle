@@ -592,7 +592,7 @@ android {
             resValue "string", "sdk_more_language", "true"
             resValue "string", "sdk_default_server_language", "en_US"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
             resValue "string", "scheme", "tgen"
-            resValue "string", "channel_platform", "lunqi"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
+            resValue "string", "channel_platform", "leidian"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
             //facebook
             resValue "string", "facebook_app_id", "1a"
             resValue "string", "facebook_client_token", "1a"

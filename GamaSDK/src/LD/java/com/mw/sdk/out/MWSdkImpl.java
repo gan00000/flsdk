@@ -141,8 +141,10 @@ public class MWSdkImpl extends BaseSdkImpl {
             public void done(Boolean status, @Nullable LDException e) {
                 if (e == null) {//使用e来判断成功还是失败
                     //成功：此时status=true
+                    PL.i("LDSdkManager init success");
                 } else {
                     //失败:此时status=false，失败原因：e.toString()
+                    PL.i("LDSdkManager init fail");
                 }
             }
         });
