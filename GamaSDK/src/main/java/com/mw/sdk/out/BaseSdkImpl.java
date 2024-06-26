@@ -130,7 +130,7 @@ public class BaseSdkImpl implements IMWSDK {
             public void run() {
                 //广告
                 SdkEventLogger.activateApp(activity);
-                SdkEventLogger.reportInstallActivation(activity.getApplicationContext());
+//                SdkEventLogger.reportInstallActivation(activity.getApplicationContext());
             }
         },200);
 
@@ -274,8 +274,8 @@ public class BaseSdkImpl implements IMWSDK {
             initSDK(activity, SGameLanguage.zh_TW);
         }
 
-        ConfigRequest.requestBaseCfg(activity.getApplicationContext());//加载配置
-        ConfigRequest.requestAreaCodeInfo(activity.getApplicationContext());
+//        ConfigRequest.requestBaseCfg(activity.getApplicationContext());//加载配置
+//        ConfigRequest.requestAreaCodeInfo(activity.getApplicationContext());
 
 //        Request.requestFloatConfigData(activity.getApplicationContext(),null);
 

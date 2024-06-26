@@ -5,7 +5,7 @@
 
         <!-- ==========================fb共同需要的配置============================ -->
 
-        <meta-data
+        <!--<meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
         <meta-data android:name="com.facebook.sdk.ClientToken"
@@ -29,7 +29,7 @@
         </activity>
 
 
-        <!--
+        &lt;!&ndash;
          The initialization ContentProvider will call FacebookSdk.sdkInitialize automatically
          with the application context. This config is merged in with the host app's manifest,
          but there can only be one provider with the same authority activated at any given
@@ -37,18 +37,18 @@
          first one will be able to use the provider. To work around this problem, we use the
          following placeholder in the authority to identify each host application as if it was
          a completely different provider.
-        -->
+        &ndash;&gt;
         <provider
             android:name="com.facebook.internal.FacebookInitProvider"
             android:authorities="${applicationId}.FacebookInitProvider"
             android:exported="false" />
 
-        <!-- 如需要从Facebook进行本地图片分享，需要开启以下两项 -->
-        <!--        <meta-data-->
-        <!--            android:name="com.facebook.sdk.ApplicationName"-->
-        <!--            android:value="@string/facebook_app_name" />-->
+        &lt;!&ndash; 如需要从Facebook进行本地图片分享，需要开启以下两项 &ndash;&gt;
+        &lt;!&ndash;        <meta-data&ndash;&gt;
+        &lt;!&ndash;            android:name="com.facebook.sdk.ApplicationName"&ndash;&gt;
+        &lt;!&ndash;            android:value="@string/facebook_app_name" />&ndash;&gt;
 
-        <!--如果要通过 Android 版 Facebook 应用分享链接、图片或视频，还需要在清单文件中声明 FacebookContentProvider-->
+        &lt;!&ndash;如果要通过 Android 版 Facebook 应用分享链接、图片或视频，还需要在清单文件中声明 FacebookContentProvider&ndash;&gt;
         <provider
             android:name="com.facebook.FacebookContentProvider"
             android:authorities="@string/facebook_authorities"
@@ -59,7 +59,7 @@
         <meta-data android:name="com.facebook.sdk.AutoInitEnabled"
             android:value="true"/>
         <meta-data android:name="com.facebook.sdk.AdvertiserIDCollectionEnabled"
-            android:value="true"/>
+            android:value="true"/>-->
         <!-- 以上 -->
 
     </application>

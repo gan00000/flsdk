@@ -427,7 +427,7 @@ android {
             //=======================================sdk config end==========================
 
 
-            applicationId "com.kodatgfm.kr"
+            applicationId "com.kodatgfm.kr.lun"
             minSdkVersion 21
             targetSdkVersion 34
             versionCode 1
@@ -440,7 +440,7 @@ android {
             resValue "string", "sdk_more_language", "true"
             resValue "string", "sdk_default_server_language", "ko_KR"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
             resValue "string", "scheme", "tgfm"
-            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"、samsung
+            resValue "string", "channel_platform", "lunqi"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"、samsung
             //facebook
             resValue "string", "facebook_app_id", "288427737241065"
             resValue "string", "facebook_client_token", "8a4280708baa6e8a89635610c7a01d27"

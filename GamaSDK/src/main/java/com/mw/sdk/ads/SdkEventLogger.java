@@ -305,7 +305,7 @@ public class SdkEventLogger {
         trackingWithEventName(context,eventName,map, EventConstant.AdType.AdTypeAllChannel);
     }
     public static void trackingWithEventName(Context context, String eventName, Map<String, Object> map, int adType) {
-        if(TextUtils.isEmpty(eventName)) {
+        /*if(TextUtils.isEmpty(eventName)) {
             PL.e("上報事件名為空");
             return;
         }
@@ -362,7 +362,7 @@ public class SdkEventLogger {
             AdjustHelper.trackEvent(context, eventName, map);
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     private static Map<String, Object> addEventParameterName(Context context, Map<String, Object> map) {
@@ -396,11 +396,11 @@ public class SdkEventLogger {
 
     //发送事件到服务器记录，只是发一次
     public static void sendEventToSever(Context context, String eventName){
-        try {
-            Request.sendEventToServer(context, eventName);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Request.sendEventToServer(context, eventName);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
     /**
      * 本地保存的安装上报标识
