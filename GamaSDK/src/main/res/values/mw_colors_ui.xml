@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+<!--    <color name="gama_color_ui_term_confirm">#FFBB00</color>-->
+<!--    <color name="gama_color_ui_term_select_bg">#FFBB66</color>-->
+
+<!--    <color name="gama_color_ui_mainpage_line_jp">#dedede</color>-->
+<!--    <color name="gama_color_ui_mainpage_bg_jp">#373737</color>-->
+<!--    <color name="gama_color_ui_mainpage_text_jp">#ffffff</color>-->
+
+<!--    <color name="gama_color_ui_age_text_jp">#C9C298</color>-->
+
+    <!--登入UI的标题颜色-->
+<!--    <color name="gama_color_ui_head_title">#50a0eb</color>-->
+    <!--登入UI字体颜色-->
+<!--    <color name="gama_color_ui_input_text">#03192a</color>-->
+    <!--登入UI按钮背景颜色-->
+<!--    <color name="gama_color_ui_btn_bg">#5891f6</color>-->
+    <!--登入UI提示文字颜色-->
+<!--    <color name="gama_color_ui_hint_text">#e60012</color>-->
+<!--    <color name="c_fc403f">#fc403f</color>-->
+
+
+</resources>

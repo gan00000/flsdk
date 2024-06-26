@@ -1,0 +1,25 @@
+<resources>
+
+    <!--港台域名列表 开始-->
+    <!--登录域名-->
+    <string name="mw_sdk_login_pre_url">https://login.meowplayer.com/</string>
+    <string name="mw_sdk_login_spa_url"></string>
+
+    <!--支付域名-->
+    <string name="mw_sdk_pay_pre_url">https://pay.meowplayer.com/</string>
+    <string name="mw_sdk_pay_spa_url"></string>
+
+    <!--cdn域名-->
+    <string name="mw_sdk_cdn_pre_url">https://cdn-download.meowplayer.com/</string>
+    <string name="mw_sdk_cdn_spa_url"></string>
+
+
+<!--    日志记录域名-->
+    <string name="mw_sdk_log_pre_url">https://log.meowplayer.com/</string>
+
+
+    <!--使用者條款 - 服務條款 -->
+    <string name="mw_sdk_terms_service_url">https://member.meowplayer.com/sdk/agreement/%s_agreement.html</string>
+
+
+</resources>

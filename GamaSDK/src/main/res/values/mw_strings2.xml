@@ -1,0 +1,27 @@
+<resources>
+    <string name="text_phone_bind">手機綁定</string>
+    <string name="text_phone_area_code">區號</string>
+    <string name="text_phone_input_hint">請輸入手機號碼</string>
+    <string name="text_phone_hasbind_tips">您已經成功綁定，這是您當前綁定的手機號碼</string>
+    <string name="text_area_code_not_empty">手機區號不能為空</string>
+    <string name="text_phone_not_empty">手機號碼不能為空</string>
+    <string name="text_phone_not_match">手機號碼格式不正確</string>
+    <string name="text_vfcode_has_send">驗證碼已發送</string>
+    <string name="text_phone_bind_success">手機綁定成功</string>
+    <string name="text_has_bind_tips_google">Google已升級為會員帳號</string>
+    <string name="text_has_bind_tips_fb">Facebook已升級為會員帳號</string>
+    <string name="text_has_bind_tips_guest">遊客已升級為會員帳號</string>
+    <string name="text_has_bind_tips_line">LINE已升級為會員帳號</string>
+    <string name="text_has_bind_tips_mw">會員帳號</string>
+    <string name="text_notice">公告</string>
+    <string name="text_account_not_login">當前沒有帳號，請先登入</string>
+    <string name="text_has_bind_tips_twitter">Twitter已升級為會員帳號</string>
+    <string name="text_has_upgrade_account">已升級為會員帳號</string>
+    <string name="text_game_name">遊戲名：</string>
+    <string name="text_server_name">伺服器：</string>
+    <string name="text_role_name">角色名：</string>
+    <string name="text_account_name">帳號：</string>
+    <string name="text_account_uid">uid：</string>
+    <string name="text_account_del">刪除帳號</string>
+
+</resources>
