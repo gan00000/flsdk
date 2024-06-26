@@ -68,41 +68,39 @@ android {
     flavorDimensions  'area',"1"
     productFlavors {
 
-
-
-        sdk1 {//第一套
-            dimension '1'
-            resValue "string", "sdk_inner_version", "v1"
-        }
-        sdk2 {//第二套
-            dimension '1'
-            resValue "string", "sdk_inner_version", "v2"
-        }
-
-        sdk3 {//第三套
-            dimension '1'
-            resValue "string", "sdk_inner_version", "v3"
-        }
+//        sdk1 {//第一套
+//            dimension '1'
+//            resValue "string", "sdk_inner_version", "v1"
+//        }
+//        sdk2 {//第二套
+//            dimension '1'
+//            resValue "string", "sdk_inner_version", "v2"
+//        }
+//
+//        sdk3 {//第三套
+//            dimension '1'
+//            resValue "string", "sdk_inner_version", "v3"
+//        }
 
         sdk4 {//第4套
-            dimension '1'
+            dimension 'area'
             resValue "string", "sdk_inner_version", "v4"
         }
 
         sdk5 {//第4套
-            dimension '1'
+            dimension 'area'
             resValue "string", "sdk_inner_version", "v5"
         }
 
-        QooApp {//Qooap
-            dimension '1'
-            resValue "string", "sdk_inner_version", "qooapp"
-        }
-
-        huawei {//华为渠道
-            dimension '1'
-            resValue "string", "sdk_inner_version", "huawei"
-        }
+//        QooApp {//Qooap
+//            dimension '1'
+//            resValue "string", "sdk_inner_version", "qooapp"
+//        }
+//
+//        huawei {//华为渠道
+//            dimension '1'
+//            resValue "string", "sdk_inner_version", "huawei"
+//        }
 
         vn {//越南专用
             dimension "area"

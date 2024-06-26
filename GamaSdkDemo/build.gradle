@@ -131,31 +131,9 @@ android {
             signingConfig signingConfigs.release_v2
         }
     }
-    flavorDimensions "1"
+    flavorDimensions  'area',"1"
     productFlavors {
 
-        QooApp {
-
-            signingConfig signingConfigs.release_v2
-            applicationId "com.wantang.xlzsg.qooapp"  //qooapp渠道包名必须qooapp结尾
-            minSdkVersion 21
-            targetSdkVersion 33
-            versionCode 10
-            versionName "1.0"
-            dimension "1"
-            resValue "string", "scheme", "gwsg"
-//            resValue "string", "facebook_app_id", "1362551254507553"
-//            resValue "string", "facebook_client_token", "0a8e2080cba4d5aa1fe9d9dd65c04e58"
-//            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1362551254507553" //启用分析
-//            resValue "string", "fb_login_protocol_scheme", "fb1362551254507553"
-//            resValue "string", "facebook_app_name", "鬼武三國：燼"
-//            resValue "string", "line_channelId", ""
-            resValue "string", "channel_platform", "qooapp"  //渠道区分,google包设置google,apk包设置"meow",qooapp渠道apk为"qooapp"
-
-            //每个游戏的demo设置 test
-            resValue "string", "sdk_name", "qooapp demo"
-
-        }
         lunqi {
 
             versionCode 10
@@ -230,51 +208,6 @@ android {
 
         }
 
-        sdk2 {
-
-            signingConfig signingConfigs.release_v2
-            applicationId "com.wanxian.mzxq"
-            minSdkVersion 21
-            targetSdkVersion 33
-            versionCode 10
-            versionName "1.0"
-            dimension "1"
-            resValue "string", "scheme", "mzxq"
-            resValue "string", "facebook_app_id", "855035868795821"
-            resValue "string", "facebook_client_token", "0872345a71b6e76c9247438a3f27b0b8"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider855035868795821" //启用分析
-            resValue "string", "fb_login_protocol_scheme", "fb855035868795821"
-            resValue "string", "facebook_app_name", "魔之序曲"
-            resValue "string", "line_channelId", "1657381968"
-            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow"
-
-            //每个游戏的demo设置 test
-            resValue "string", "sdk_name", "魔之序曲demo"
-
-        }
-
-        sdk3 {
-
-            signingConfig signingConfigs.signv3
-            applicationId "com.wanye.fszhl"
-            minSdkVersion 21
-            targetSdkVersion 33
-            versionCode 16
-            versionName "2.3.16"
-            dimension "1"
-            resValue "string", "scheme", "wlzhs"
-            resValue "string", "facebook_app_id", "1137481690478934"
-            resValue "string", "facebook_client_token", "9457e9f00d7e1c0a9869c451326b15a9"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1137481690478934" //启用分析
-            resValue "string", "fb_login_protocol_scheme", "fb1137481690478934"
-            resValue "string", "facebook_app_name", "万灵召唤师"
-            resValue "string", "line_channelId", "1657511063"
-            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow"
-
-            //每个游戏的demo设置 test
-            resValue "string", "sdk_name", "SDK3 demo"
-
-        }
 
         sdk4 {
 
@@ -284,7 +217,7 @@ android {
             targetSdkVersion rootProject.ext.targetSdkVersion
             versionCode 1
             versionName "1.0"
-            dimension "1"
+            dimension "area"
 
             //=======================================sdk config==========================
             //base
@@ -323,7 +256,7 @@ android {
             targetSdkVersion 33
             versionCode 10
             versionName "1.0"
-            dimension "1"
+            dimension "area"
             resValue "string", "scheme", "gwsg"
             resValue "string", "facebook_app_id", "1362551254507553"
             resValue "string", "facebook_client_token", "0a8e2080cba4d5aa1fe9d9dd65c04e58"
@@ -338,48 +271,6 @@ android {
 
         }
 
-        huawei {
-
-            signingConfig signingConfigs.release_v2
-            versionCode 10
-            versionName "1.0"
-            dimension "1"
-
-//            applicationId "com.wantang.xlzsg.huawei"
-//            minSdkVersion 21
-//            targetSdkVersion 33
-//            resValue "string", "scheme", "gwsg"
-//            resValue "string", "facebook_app_id", "1362551254507553"
-//            resValue "string", "facebook_client_token", "0a8e2080cba4d5aa1fe9d9dd65c04e58"
-//            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1362551254507553" //启用分析
-//            resValue "string", "fb_login_protocol_scheme", "fb1362551254507553"
-//            resValue "string", "facebook_app_name", "鬼武三國"
-////            resValue "string", "line_channelId", "1657882064"
-//            resValue "string", "channel_platform", "huawei"  //渠道区分,google包设置google,apk包设置"meow"
-
-
-            applicationId "com.mwyyz.huawei"
-            minSdkVersion 21
-            targetSdkVersion 34
-
-            //base
-            resValue "string", "sdk_game_code", "mxwtw"
-            resValue "string", "sdk_app_key", "7c29c30164e0c36e7bc43399bca0c570"
-            resValue "string", "sdk_more_language", "true"
-            resValue "string", "sdk_default_server_language", "zh_TW"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
-            resValue "string", "scheme", "mxwtw"
-            resValue "string", "channel_platform", "huawei"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore",huawei
-            //facebook
-            resValue "string", "facebook_app_id", "162167080205591"
-            resValue "string", "facebook_client_token", "a48a83f00864dbd713a292e2f6690317"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider16216" //启用分析
-            resValue "string", "fb_login_protocol_scheme", "fb162167080205591"
-            resValue "string", "facebook_app_name", "大魔王与菇勇者" //游戏名字
-
-            //每个游戏的demo设置 test
-            resValue "string", "sdk_name", "huweiDemo"
-
-        }
 
         vn {
 
@@ -389,7 +280,7 @@ android {
             targetSdkVersion 33
             versionCode 10
             versionName "1.0"
-            dimension "1"
+            dimension "area"
 //            applicationId "com.wanxi.mxwvn"
 //            resValue "string", "scheme", "mxwvn"
 //            resValue "string", "facebook_app_id", "183738678011380"
@@ -445,7 +336,7 @@ android {
         }
         sdk6 {
 
-            dimension "1"
+            dimension "area"
             signingConfig signingConfigs.release_v6
 //            applicationId "com.wxgy.sshx"
 //            minSdkVersion 21
@@ -503,7 +394,7 @@ android {
         sdkKR {
 
             signingConfig signingConfigs.release_kr1
-            dimension "1"
+            dimension "area"
 
             //=======================================sdk config==========================
 //            applicationId "com.tgswkr.koda"
@@ -636,7 +527,7 @@ repositories {
 dependencies {
 //    implementation fileTree(include: ['*.jar'], dir: 'libs')
 //    implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
-    QooAppImplementation(name: 'qooapp-opensdk-2.0.6', ext: 'aar')
+//    QooAppImplementation(name: 'qooapp-opensdk-2.0.6', ext: 'aar')
     implementation project(':GamaSDK')
 //    implementation 'com.github.bumptech.glide:glide:4.16.0'
 //    annotationProcessor 'com.github.bumptech.glide:compiler:4.16.0'
