@@ -10,6 +10,7 @@ import com.core.base.callback.SFCallBack;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.google.gson.Gson;
+import com.mw.sdk.R;
 import com.mw.sdk.constant.ApiRequestMethod;
 import com.mw.sdk.pay.IPayCallBack;
 import com.mw.sdk.pay.gp.PayApi;
@@ -92,7 +93,7 @@ public class QooappPayImpl {
         this.createOrderIdReqBean.setRequestSpaUrl(PayHelper.getSpareUrl(this.mActivity));
         //设置储值接口名
         this.createOrderIdReqBean.setRequestMethod(ApiRequestMethod.API_ORDER_CREATE);
-        this.createOrderIdReqBean.setMode("qooapp");
+        this.createOrderIdReqBean.setMode(this.mActivity.getString(R.string.channel_platform));
 
         //创单
         PayApi.requestCreateOrder(this.mActivity, this.createOrderIdReqBean, new SFCallBack<GPCreateOrderIdRes>() {

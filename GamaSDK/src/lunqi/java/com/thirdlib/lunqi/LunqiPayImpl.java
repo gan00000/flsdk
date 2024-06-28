@@ -8,6 +8,7 @@ import android.content.Intent;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
+import com.mw.sdk.R;
 import com.mw.sdk.api.PayApi;
 import com.mw.sdk.api.task.LoadingDialog;
 import com.mw.sdk.bean.req.PayCreateOrderReqBean;
@@ -83,7 +84,7 @@ public class LunqiPayImpl {
         this.createOrderIdReqBean.setRequestSpaUrl(PayHelper.getSpareUrl(this.mActivity));
         //设置储值接口名
         this.createOrderIdReqBean.setRequestMethod(ApiRequestMethod.API_ORDER_CREATE);
-        this.createOrderIdReqBean.setMode(ChannelPlatform.LUNQI.getChannel_platform());
+        this.createOrderIdReqBean.setMode(this.mActivity.getString(R.string.channel_platform));
         PL.i("LunqiPayImpl requestCreateOrder");
         //创单
         PayApi.requestCreateOrder(this.mActivity, this.createOrderIdReqBean, new SFCallBack<GPCreateOrderIdRes>() {

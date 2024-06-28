@@ -1,0 +1,8 @@
+<resources>
+
+    <string name="wm_ld_app_id"></string>
+    <string name="wm_ld_app_key"></string>
+    <string name="wm_ld_channel_id"></string>
+    <string name="wm_ld_sun_channel_id"></string>
+
+</resources>

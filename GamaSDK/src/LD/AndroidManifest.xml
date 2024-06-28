@@ -10,16 +10,16 @@
         <!-- ld sdk的基础配置 start-->
         <meta-data
             android:name="com.ld.APP_ID"
-            android:value="${APP_ID}" />
+            android:value="@string/wm_ld_app_id" />
         <meta-data
             android:name="com.ld.APP_KEY"
-            android:value="${APP_KEY}" />
+            android:value="@string/wm_ld_app_key" />
         <meta-data
             android:name="com.ld.CHANNEL_ID"
-            android:value="${CHANNEL_ID}"   />
+            android:value="@string/wm_ld_channel_id"   />
         <meta-data
             android:name="com.ld.SUN_CHANNEL_ID"
-            android:value="${SUN_CHANNEL_ID}"   />
+            android:value="@string/wm_ld_sun_channel_id"   />
         <!-- ld sdk的基础配置 end-->
 
     </application>

@@ -126,7 +126,7 @@ android {
 
         LD {//雷电
             dimension '1'
-            resValue "string", "sdk_inner_version", "lunqi"
+            resValue "string", "sdk_inner_version", "leidian"
         }
 
     }

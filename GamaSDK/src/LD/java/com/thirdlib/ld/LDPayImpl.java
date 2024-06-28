@@ -13,6 +13,7 @@ import com.ld.sdk.core.bean.LdGamePayInfo;
 import com.ld.sdk.internal.LDException;
 import com.ld.sdk.internal.LDNotLoginException;
 import com.ld.sdk.internal.LDPayCallback;
+import com.mw.sdk.R;
 import com.mw.sdk.api.PayApi;
 import com.mw.sdk.api.task.LoadingDialog;
 import com.mw.sdk.bean.req.PayCreateOrderReqBean;
@@ -85,8 +86,8 @@ public class LDPayImpl {
         this.createOrderIdReqBean.setRequestSpaUrl(PayHelper.getSpareUrl(this.mActivity));
         //设置储值接口名
         this.createOrderIdReqBean.setRequestMethod(ApiRequestMethod.API_ORDER_CREATE);
-        this.createOrderIdReqBean.setMode(ChannelPlatform.LUNQI.getChannel_platform());
-        PL.i("LunqiPayImpl requestCreateOrder");
+        this.createOrderIdReqBean.setMode(this.mActivity.getString(R.string.channel_platform));
+        PL.i("requestCreateOrder");
         //创单
         PayApi.requestCreateOrder(this.mActivity, this.createOrderIdReqBean, new SFCallBack<GPCreateOrderIdRes>() {
             @Override
@@ -135,11 +136,12 @@ public class LDPayImpl {
         //1、android.view.ViewRootImpl$CalledFromWrongThreadException: Only the original thread that created a view hierarchy can touch its views.
         //2、java.lang.IllegalArgumentException: You must call this method on the main thread
         LdGamePayInfo ldGamePayInfo = new LdGamePayInfo();
-        ldGamePayInfo.tradeName = productName;          //页面展示的商品名称
+        ldGamePayInfo.tradeName = productName + "";          //页面展示的商品名称
         ldGamePayInfo.cpOrderId = orderId;          // cp订单id 字符串类型
         ldGamePayInfo.productId = productId;            //产品id
         ldGamePayInfo.cpUserId = userId;         //cp用户id
         ldGamePayInfo.currencyType = "USD";    //当前游戏页面显示货币类型例如:TWD,USD,HKD等
+        PL.i("sku amount=" + (long) (skuAmount.doubleValue() * 100));
         ldGamePayInfo.commodityPrice = (long) (skuAmount.doubleValue() * 100);//当前游戏商品显示的价格，分为单位，long类型，例如如果是游戏显示0.99USD这里需要传99
 //该透传参数需要sdk_v2.2.0版本才支持，请注意更新sdk版本
         ldGamePayInfo.transparentParams = developerPayload;  //透传参数，该字段的值将在服务端SDK的支付成功的回调方法中返回

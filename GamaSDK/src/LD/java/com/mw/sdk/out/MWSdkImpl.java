@@ -257,32 +257,34 @@ public class MWSdkImpl extends BaseSdkImpl {
     protected void LDPay(Activity activity, PayCreateOrderReqBean payCreateOrderReqBean) {
         super.doLunqiPay(activity, payCreateOrderReqBean);
         this.createOrderIdReqBean = payCreateOrderReqBean;
-        if (payImplObj != null) {
 
-            payImplObj.setPayCallBack(new IPayCallBack() {
-                @Override
-                public void success(BasePayBean basePayBean) {
-                    if (iPayListener != null){
-                        iPayListener.onPaySuccess(basePayBean.getProductId(), basePayBean.getCpOrderId());
-                    }
-                }
-
-                @Override
-                public void fail(BasePayBean basePayBean) {
-                    if (iPayListener != null){
-                        iPayListener.onPayFail();
-                    }
-                }
-
-                @Override
-                public void cancel(String msg) {
-                    if (iPayListener != null){
-                        iPayListener.onPayFail();
-                    }
-                }
-            });
-            payImplObj.startPay(activity, createOrderIdReqBean);
+        if (payImplObj == null) {
+            payImplObj = new LDPayImpl(activity);
         }
+
+        payImplObj.setPayCallBack(new IPayCallBack() {
+            @Override
+            public void success(BasePayBean basePayBean) {
+                if (iPayListener != null) {
+                    iPayListener.onPaySuccess(basePayBean.getProductId(), basePayBean.getCpOrderId());
+                }
+            }
+
+            @Override
+            public void fail(BasePayBean basePayBean) {
+                if (iPayListener != null) {
+                    iPayListener.onPayFail();
+                }
+            }
+
+            @Override
+            public void cancel(String msg) {
+                if (iPayListener != null) {
+                    iPayListener.onPayFail();
+                }
+            }
+        });
+        payImplObj.startPay(activity, createOrderIdReqBean);
 
     }
 

@@ -31,6 +31,7 @@ import com.huawei.hms.iap.entity.PurchaseIntentResult;
 import com.huawei.hms.iap.entity.PurchaseResultInfo;
 import com.huawei.hms.iap.util.IapClientHelper;
 import com.huawei.hms.support.api.client.Status;
+import com.mw.sdk.R;
 import com.mw.sdk.api.PayApi;
 import com.mw.sdk.api.task.LoadingDialog;
 import com.mw.sdk.bean.req.PayCreateOrderReqBean;
@@ -273,7 +274,7 @@ public class HuaweiPayImpl {
         this.createOrderIdReqBean.setRequestSpaUrl(PayHelper.getSpareUrl(this.mActivity));
         //设置储值接口名
         this.createOrderIdReqBean.setRequestMethod(ApiRequestMethod.API_ORDER_CREATE);
-        this.createOrderIdReqBean.setMode("huawei");
+        this.createOrderIdReqBean.setMode(this.mActivity.getString(R.string.channel_platform));
         this.createOrderIdReqBean.setProductId(this.productId);
         this.createOrderIdReqBean.setCpOrderId(this.cpOrderId);
         this.createOrderIdReqBean.setExtra(this.extra);
