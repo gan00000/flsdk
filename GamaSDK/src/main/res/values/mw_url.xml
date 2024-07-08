@@ -21,5 +21,8 @@
     <!--使用者條款 - 服務條款 -->
     <string name="mw_sdk_terms_service_url">https://member.meowplayer.com/sdk/agreement/%s_agreement.html</string>
 
+    <!--客服-->
+    <string name="mw_sdk_customer_url">https://platform.meowplayer.com/sdk/api/customer.page</string>
+
 
 </resources>

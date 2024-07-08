@@ -107,7 +107,7 @@ public class DialogLoginImpl implements ILogin {
 
         if (!SdkUtil.isVersion1(activity)) {
             ConfigBean configBean = SdkUtil.getSdkCfg(activity);
-            if (configBean != null) {
+            if (configBean != null && configBean.getUrl() != null && SStringUtil.isNotEmpty(configBean.getUrl().getNoticeUrl())) {
                 ConfigBean.VersionData versionData = configBean.getSdkConfigLoginData(activity);
                 //test
 //                versionData.setShowNotice(true);

@@ -362,21 +362,24 @@ public class Request {
 
     public static void openCs(Activity activity, int requestCode){
         PL.i("sdk .. openCs");
+
+        String csUrl = activity.getString(R.string.mw_sdk_customer_url);
         ConfigBean configBean = SdkUtil.getSdkCfg(activity.getApplicationContext());
         if (configBean != null && configBean.getUrl() != null && SStringUtil.isNotEmpty(configBean.getUrl().getCsUrl())) {
-
-            SGameBaseRequestBean sGameBaseRequestBean = new SGameBaseRequestBean(activity);
-            if (requestCode > 0){
-                sGameBaseRequestBean.setRequest_code(requestCode);
-            }
-            sGameBaseRequestBean.setCompleteUrl(configBean.getUrl().getCsUrl());
-
-            Intent csIntent = MWBaseWebActivity.create(activity,"", sGameBaseRequestBean.createPreRequestUrl());
-            activity.startActivity(csIntent);
+            csUrl = configBean.getUrl().getCsUrl();
         }else {
-            PL.i("获取不到客服地址");
-            ToastUtils.toast(activity, "cs url empty");
+            PL.i("获取不到server客服地址");
+            //ToastUtils.toast(activity, "cs url empty");
         }
+
+        SGameBaseRequestBean sGameBaseRequestBean = new SGameBaseRequestBean(activity);
+        if (requestCode > 0){
+            sGameBaseRequestBean.setRequest_code(requestCode);
+        }
+        sGameBaseRequestBean.setCompleteUrl(csUrl);
+
+        Intent csIntent = MWBaseWebActivity.create(activity,"", sGameBaseRequestBean.createPreRequestUrl());
+        activity.startActivity(csIntent);
 
     }
 
