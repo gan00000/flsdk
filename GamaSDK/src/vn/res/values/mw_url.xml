@@ -41,4 +41,10 @@
     <!--社群banner-->
     <string name="mw_sdk_social_url">https://member.tthplay.com/sdk/social/%s/index.html</string>
 
+    <!--    数数-->
+    <string name="mw_td_te_server_url">https://shushu.tthplay.com/</string>
+
+    <!--客服-->
+    <string name="mw_sdk_customer_url">https://platform.tthplay.com/sdk/api/customer.page</string>
+
 </resources>
