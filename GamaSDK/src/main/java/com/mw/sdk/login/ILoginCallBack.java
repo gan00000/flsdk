@@ -10,5 +10,5 @@ import com.mw.sdk.login.model.response.SLoginResponse;
 public interface ILoginCallBack extends ISCallBack{
 
     void onLogin(SLoginResponse sLoginResponse);
-
+    void onLogout(String msg);
 }

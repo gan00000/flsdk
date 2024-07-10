@@ -31,6 +31,7 @@ import com.core.base.utils.AppUtil;
 import com.core.base.utils.MarketUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
+import com.core.base.utils.SignatureUtil;
 import com.core.base.utils.ToastUtils;
 import com.mw.base.bean.SPayType;
 import com.mw.sdk.api.PayApi;
@@ -104,6 +105,10 @@ public class MainActivity extends Activity {
                     public void onLogin(SLoginResponse sLoginResponse) {
                         handleLoginResponse(sLoginResponse);
                     }
+                    @Override
+                    public void onLogout(String msg) {
+                        //游戏处理退出，重新回到登录界面
+                    }
                 });
             }
 
@@ -122,8 +127,14 @@ public class MainActivity extends Activity {
                     public void onLogin(SLoginResponse sLoginResponse) {
                         handleLoginResponse(sLoginResponse);
                     }
-                });
 
+                    @Override
+                    public void onLogout(String msg) {
+                        //游戏处理退出，重新回到登录界面
+                    }
+                });
+                String sha1 = SignatureUtil.getSignatureSHA1WithColon(activity,activity.getPackageName());
+                PL.i("sha1:" + sha1);
             }
         });
 
@@ -331,6 +342,10 @@ public class MainActivity extends Activity {
                     @Override
                     public void onLogin(SLoginResponse sLoginResponse) {
                         handleLoginResponse(sLoginResponse);
+                    }
+                    @Override
+                    public void onLogout(String msg) {
+                        //游戏处理退出，重新回到登录界面
                     }
                 });
             }
