@@ -53,6 +53,20 @@ android {
 
     signingConfigs {//签名的配置
 
+        flyfun {
+            storeFile file('../signkey/flyfun.keystore') //正式签名，以后使用
+            storePassword 'flyfun999'
+            keyAlias 'flyfun'
+            keyPassword 'flyfun999'
+        }
+
+        sign_sdktw1 {
+            storeFile file('../signkey/sdk_tw1_key.jks') //正式签名，以后使用
+            storePassword 'sdktw1999'
+            keyAlias 'sdktw1'
+            keyPassword 'sdktw1999'
+        }
+
         signv3 {
             storeFile file('../signkey/mw_game') //正式签名，以后使用
             storePassword 'mw999000'
@@ -128,7 +142,6 @@ android {
 
         debug {
 //            signingConfig signingConfigs.release_kr1
-            signingConfig signingConfigs.release_v2
         }
     }
     flavorDimensions "1"
@@ -225,9 +238,9 @@ android {
             signingConfig signingConfigs.signv3
             applicationId "com.wanye.fszhl"
             minSdkVersion 21
-            targetSdkVersion 33
-            versionCode 16
-            versionName "2.3.16"
+            targetSdkVersion 34
+            versionCode 26
+            versionName "2.3.26"
             dimension "1"
             resValue "string", "scheme", "wlzhs"
             resValue "string", "facebook_app_id", "1137481690478934"
@@ -242,6 +255,29 @@ android {
             resValue "string", "sdk_name", "SDK3 demo"
 
         }
+
+//        sdk3 {
+//
+//            signingConfig signingConfigs.sign_sdktw1
+//            applicationId "com.game.superand"
+//            minSdkVersion 21
+//            targetSdkVersion 34
+//            versionCode 4
+//            versionName "4.0"
+//            dimension "1"
+//            resValue "string", "scheme", "flyfun"
+//            resValue "string", "facebook_app_id", "12"
+//            resValue "string", "facebook_client_token", "9457e9f00d7e1c0a9869c451326b15a9"
+//            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider12" //启用分析
+//            resValue "string", "fb_login_protocol_scheme", "fb12"
+//            resValue "string", "facebook_app_name", "flyfun"
+//            resValue "string", "line_channelId", ""
+//            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow"
+//
+//            //每个游戏的demo设置 test
+//            resValue "string", "sdk_name", "SDK3 demo"
+//
+//        }
 
         sdk4 {
 
