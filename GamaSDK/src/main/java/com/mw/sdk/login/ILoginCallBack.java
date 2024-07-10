@@ -11,4 +11,5 @@ public interface ILoginCallBack extends ISCallBack{
 
     void onLogin(SLoginResponse sLoginResponse);
 
+    void onLogout(String msg);
 }

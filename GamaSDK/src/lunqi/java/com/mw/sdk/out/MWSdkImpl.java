@@ -189,7 +189,10 @@ public class MWSdkImpl extends BaseSdkImpl {
             public void onLogout() {
                 //注销回调,收到此回调后需切换到游戏登录场景并再次调用login接口
                 PL.i("lunqi onLogout");
-                login(activity, iLoginCallBack);
+                //login(activity, iLoginCallBack);
+                if (iLoginCallBack != null){
+                    iLoginCallBack.onLogout("");
+                }
             }
         });
 
@@ -214,6 +217,9 @@ public class MWSdkImpl extends BaseSdkImpl {
             @Override
             public void onLogout() {
                 //注销回调,收到此回调后需切换到游戏登录场景并再次调用login接口
+                if (iLoginCallBack != null){
+                    iLoginCallBack.onLogout("");
+                }
             }
         });
 

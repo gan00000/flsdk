@@ -233,11 +233,15 @@ public class MWSdkImpl extends BaseSdkImpl {
                     @Override
                     public void onError(String error) {
                         //登录失败：其中error代表失败原因
+
                     }
 
                     @Override
                     public void onLogout() {
                         // SDK内部退出登录，需要游戏方处理返回到游戏登录界面
+                        if (iLoginCallBack != null){
+                            iLoginCallBack.onLogout("");
+                        }
                     }
                 });
 
