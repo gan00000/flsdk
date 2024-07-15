@@ -130,7 +130,7 @@ public class BaseSdkImpl implements IMWSDK {
 
     private boolean isShowAct_M;
 
-    private ISdkCallBack switchAccountCallBack;
+//    private ISdkCallBack switchAccountCallBack;
 
     private long regRoleInfoTimestamp;
 
@@ -1526,9 +1526,9 @@ public class BaseSdkImpl implements IMWSDK {
                 FloatContentView mActExpoView = new FloatContentView(activity, arrayList, floatViewDialog, new FloatCallback() {
                     @Override
                     public void switchAccount(String msg) {
-                        if (switchAccountCallBack != null){
-                            switchAccountCallBack.success();
-                        }
+//                        if (switchAccountCallBack != null){
+//                            switchAccountCallBack.success();
+//                        }
                     }
                 });
                 mActExpoView.setsBaseDialog(floatViewDialog);
@@ -1564,10 +1564,10 @@ public class BaseSdkImpl implements IMWSDK {
         AppUtil.openInOsWebApp(activity,sGameBaseRequestBean.createPreRequestUrl());
     }
 
-    @Override
-    public void setSwitchAccountListener(Activity activity, ISdkCallBack sdkCallBack) {
-        this.switchAccountCallBack = sdkCallBack;
-    }
+//    @Override
+//    public void setSwitchAccountListener(Activity activity, ISdkCallBack sdkCallBack) {
+//        this.switchAccountCallBack = sdkCallBack;
+//    }
 
 //    @Override
 //    public ISdkCallBack getSwitchAccountCallback() {

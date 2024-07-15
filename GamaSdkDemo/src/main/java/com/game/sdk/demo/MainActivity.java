@@ -92,30 +92,6 @@ public class MainActivity extends Activity {
         //在游戏Activity的onCreate生命周期中调用
         mIMWSDK.onCreate(this);
 
-        //设置SDK请求账号退出切换监听
-        mIMWSDK.setSwitchAccountListener(this, new ISdkCallBack() {
-            @Override
-            public void success() {
-
-                //研发在此需要进行游戏退出
-                // 切换账号，重新回到登录页面
-                //.....研发处理游戏退出，退出后重新调用登录接口......
-                mIMWSDK.login(MainActivity.this, new ILoginCallBack() {
-                    @Override
-                    public void onLogin(SLoginResponse sLoginResponse) {
-                        handleLoginResponse(sLoginResponse);
-                    }
-                    @Override
-                    public void onLogout(String msg) {
-                        //游戏处理退出，重新回到登录界面
-                    }
-                });
-            }
-
-            @Override
-            public void failure() {
-            }
-        });
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
