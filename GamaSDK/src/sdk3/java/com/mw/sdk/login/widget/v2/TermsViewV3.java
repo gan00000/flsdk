@@ -7,20 +7,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.TextView;
 
 import com.core.base.BaseWebViewClient;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
+import com.mw.sdk.R;
 import com.mw.sdk.bean.res.ConfigBean;
+import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
+import com.mw.sdk.out.ISdkCallBack;
 import com.mw.sdk.utils.ResConfig;
 import com.mw.sdk.utils.SdkUtil;
-import com.mw.sdk.widget.SBaseDialog;
-import com.mw.sdk.constant.SLoginType;
-import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
-import com.mw.sdk.R;
-import com.mw.sdk.out.ISdkCallBack;
 
 /**
  * Created by GanYuanrong on 2017/2/6.

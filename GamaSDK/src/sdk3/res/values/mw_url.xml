@@ -10,41 +10,38 @@
     <string name="mw_sdk_pay_spa_url"></string>
 
     <!--活动域名-->
-    <string name="mw_sdk_act_pre_url"></string>
-    <string name="mw_sdk_act_spa_url"></string>
+    <!--    <string name="mw_sdk_act_pre_url"></string>-->
+    <!--    <string name="mw_sdk_act_spa_url"></string>-->
 
     <!--cdn域名-->
     <string name="mw_sdk_cdn_pre_url">https://cdn-download.mmhyplayer.com/</string>
     <string name="mw_sdk_cdn_spa_url"></string>
 
     <!--广告域名-->
-    <string name="mw_sdk_ads_pre_url"></string>
-    <string name="mw_sdk_ads_spa_url"></string>
+    <!--    <string name="mw_sdk_ads_pre_url"></string>-->
+    <!--    <string name="mw_sdk_ads_spa_url"></string>-->
 
     <!--平台域名-->
-    <string name="mw_sdk_plat_pre_url"></string>
+    <string name="mw_sdk_plat_pre_url">https://platform.mmhyplayer.com/</string>
     <string name="mw_sdk_plat_spa_url"></string>
 
     <!--客服域名-->
-    <string name="mw_sdk_cs_pre_url"></string>
-    <string name="mw_sdk_cs_spa_url"></string>
+    <!--    <string name="mw_sdk_cs_pre_url"></string>-->
+    <!--    <string name="mw_sdk_cs_spa_url"></string>-->
+
+    <string name="mw_sdk_member_pre_url">https://member.mmhyplayer.com/</string>
+    <string name="mw_sdk_member_spa_url"></string>
 
     <!--    日志记录域名-->
-    <string name="mw_sdk_log_pre_url">https://log.mmhyplayer.com/</string>
+    <string name="mw_sdk_log_pre_url">https://log.dustyx.com/</string>
 
     <!--使用者條款 - 服務條款 -->
     <string name="mw_sdk_terms_service_url">https://member.mmhyplayer.com/sdk/agreement/%s_agreement.html</string>
 
-    <!--客服链接-->
-    <string name="mw_sdk_service_url"></string>
+    <!--社群banner-->
+    <string name="mw_sdk_social_url">https://member.mmhyplayer.com/sdk/social/%s/index.html</string>
 
-    <string name="emm_service_url"></string>
-
-    <!--区域码链接-->
-    <string name="mw_sdk_area_info_url"></string>
-
-    <!--验证码开关链接-->
-    <string name="mw_sdk_vfcode_switch_url"></string>
-    <!--港台域名列表 结束-->
+    <!--    数数-->
+    <string name="mw_td_te_server_url">https://shushu.mmhyplayer.com/</string>
 
 </resources>

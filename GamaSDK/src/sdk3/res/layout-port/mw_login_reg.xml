@@ -27,7 +27,7 @@
                 android:layout_marginTop="2dp"
                 android:layout_marginStart="34dp"
                 android:scaleType="fitCenter"
-                android:src="@mipmap/mmplaygame_back_icon" />
+                android:src="@mipmap/img_back_bg" />
 
             <RelativeLayout
                 android:layout_width="0dp"
@@ -36,15 +36,15 @@
                 >
 
                 <TextView
+                    android:id="@+id/loginTabView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:text="@string/py_login"
                     android:gravity="center"
                     android:lines="1"
+                    android:text="@string/py_login"
                     android:textColor="@color/c_F94925"
-                    android:textSize="24sp"
-                    android:id="@+id/loginTabView"/>
+                    android:textSize="24sp" />
 
                 <View
                     android:layout_width="wrap_content"

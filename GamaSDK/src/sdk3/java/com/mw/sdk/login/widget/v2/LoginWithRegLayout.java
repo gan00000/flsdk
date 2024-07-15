@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.mw.sdk.bean.res.ConfigBean;
+import com.mw.sdk.constant.ViewType;
 import com.mw.sdk.utils.SdkUtil;
 import com.mw.sdk.login.SLoginDialogV2;
 import com.mw.sdk.constant.SLoginType;

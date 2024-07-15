@@ -133,21 +133,21 @@ public class AccountPopupWindow extends PopupWindow {
                     }
                 });
 
-                int imageResId = R.mipmap.mmplaygame_ac_login;
+                int imageResId = R.mipmap.img_persion_bg;
                 String showName = accountModel.getUserId();//accountModel.getThirdAccount();
 //                if (SStringUtil.isEmpty(showName)){
 //                    showName = accountModel.getUserId();
 //                }
                 if (SLoginType.LOGIN_TYPE_FB.equals(accountModel.getLoginType())){
-                    imageResId = R.mipmap.mmplaygame_fb_img;
+                    imageResId = R.mipmap.icon_fb_2;
                 }else  if (SLoginType.LOGIN_TYPE_GOOGLE.equals(accountModel.getLoginType())){
-                    imageResId = R.mipmap.mmplaygame_gp_img;
+                    imageResId = R.mipmap.icon_gp_2;
                 }else  if (SLoginType.LOGIN_TYPE_GUEST.equals(accountModel.getLoginType())){
-                    imageResId = R.mipmap.mmplaygame_vister_login;
+                    imageResId = R.mipmap.img_guest_2;
                 }else if (SLoginType.LOGIN_TYPE_LINE.equals(accountModel.getLoginType())){
-                    imageResId = R.mipmap.mmplaygame_le_login;
+                    imageResId = R.mipmap.icon_line_2;
                 }else if (SLoginType.LOGIN_TYPE_MG.equals(accountModel.getLoginType())){
-                    imageResId = R.mipmap.mmplaygame_ac_login;
+                    imageResId = R.mipmap.img_persion_bg;
                     showName = accountModel.getAccount();
                 }
                 holder.setImageResource(R.id.history_account_item_icon, imageResId);
