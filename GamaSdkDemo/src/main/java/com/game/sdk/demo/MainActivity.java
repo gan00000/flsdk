@@ -103,7 +103,7 @@ public class MainActivity extends Activity {
 
                     @Override
                     public void onLogout(String msg) {
-
+                       // 研发处理游戏退出，退出后重新回到登录页面
                     }
                 });
             }
