@@ -34,17 +34,17 @@ public class LDPayImpl {
 
     private IPayCallBack iPayCallBack;
 
-    private String productId;
-    private String cpOrderId;
-    private String extra;
-    private String currentOrderId;
+//    private String productId;
+//    private String cpOrderId;
+//    private String extra;
+//    private String currentOrderId;
 
 //    private String current_inAppPurchaseData;
 
     private PayCreateOrderReqBean createOrderIdReqBean;
 
     private LoadingDialog loadingDialog;
-    private Double skuAmount;
+//    private Double skuAmount;
 
     public void setPayCallBack(IPayCallBack iPayCallBack) {
         this.iPayCallBack = iPayCallBack;
@@ -70,9 +70,9 @@ public class LDPayImpl {
         }
         this.mActivity = activity;
         this.createOrderIdReqBean = createOrderIdReqBean;
-        this.productId = createOrderIdReqBean.getProductId();
-        this.cpOrderId = createOrderIdReqBean.getCpOrderId();
-        this.extra = createOrderIdReqBean.getExtra();
+//        this.productId = createOrderIdReqBean.getProductId();
+//        this.cpOrderId = createOrderIdReqBean.getCpOrderId();
+//        this.extra = createOrderIdReqBean.getExtra();
         loadingDialog.showProgressDialog();
 
         createOrder();
@@ -93,18 +93,17 @@ public class LDPayImpl {
             @Override
             public void success(GPCreateOrderIdRes result, String msg) {
                 try {
-                    if (result != null && result.getPayData() != null && SStringUtil.isNotEmpty(result.getPayData().getOrderId())){
+                    if (result != null && result.getPayData() != null && SStringUtil.isNotEmpty(result.getPayData().getOrderId()) && result.getPayData().getLocalAmount() != null){
                         String orderId = result.getPayData().getOrderId();
-                        currentOrderId = orderId;
-                        skuAmount = result.getPayData().getAmount();
+//                        currentOrderId = orderId;
+//                        skuAmount = result.getPayData().getAmount();
 
                         JSONObject devJsonObject = new JSONObject();
                         devJsonObject.put("userId", createOrderIdReqBean.getUserId());
                         devJsonObject.put("orderId", orderId);
                         //devJsonObject.put("cpOrderId", createOrderIdReqBean.getCpOrderId());
                         PL.i("thirdPartyPurchase");
-                        thirdPartyPurchase(mActivity, createOrderIdReqBean.getProductId(), orderId, createOrderIdReqBean.getCpOrderId(), devJsonObject.toString(),
-                                result.getPayData().getProductName(), result.getPayData().getAmount(), createOrderIdReqBean.getUserId());
+                        thirdPartyPurchase(mActivity,  result, devJsonObject.toString());
                     }else {
                         handlePayFail("create order error");
                     }
@@ -128,7 +127,12 @@ public class LDPayImpl {
 
     }
 
-    private void thirdPartyPurchase(Activity activity, String productId, String orderId, String cpOrderId, String developerPayload, String productName, double price, String userId) {
+    private void thirdPartyPurchase(Activity activity, GPCreateOrderIdRes result, String developerPayload) {
+
+        if (result == null || result.getPayData() == null){
+            return;
+        }
+
         loadingDialog.dismissProgressDialog();
 
         //注：自从ld_sdk_v2.2.0_0530开始，SDK所有对外的方法内部已经自行切换到了主线程，不再需要游戏方关心主线程调度问题。
@@ -136,13 +140,14 @@ public class LDPayImpl {
         //1、android.view.ViewRootImpl$CalledFromWrongThreadException: Only the original thread that created a view hierarchy can touch its views.
         //2、java.lang.IllegalArgumentException: You must call this method on the main thread
         LdGamePayInfo ldGamePayInfo = new LdGamePayInfo();
-        ldGamePayInfo.tradeName = productName + "";          //页面展示的商品名称
-        ldGamePayInfo.cpOrderId = orderId;          // cp订单id 字符串类型
-        ldGamePayInfo.productId = productId;            //产品id
-        ldGamePayInfo.cpUserId = userId;         //cp用户id
-        ldGamePayInfo.currencyType = "USD";    //当前游戏页面显示货币类型例如:TWD,USD,HKD等
-        PL.i("sku amount=" + (long) (skuAmount.doubleValue() * 100));
-        ldGamePayInfo.commodityPrice = (long) (skuAmount.doubleValue() * 100);//当前游戏商品显示的价格，分为单位，long类型，例如如果是游戏显示0.99USD这里需要传99
+        ldGamePayInfo.tradeName = result.getPayData().getProductName() + "";          //页面展示的商品名称
+        ldGamePayInfo.cpOrderId = result.getPayData().getOrderId();          // cp订单id 字符串类型
+        ldGamePayInfo.productId = createOrderIdReqBean.getProductId();            //产品id
+        ldGamePayInfo.cpUserId = createOrderIdReqBean.getUserId();         //cp用户id
+        ldGamePayInfo.currencyType = result.getPayData().getLocalCurrency();    //当前游戏页面显示货币类型例如:TWD,USD,HKD等
+        //PL.i("sku amount=" + (long) (skuAmount.doubleValue() * 100));
+//        ldGamePayInfo.commodityPrice = (long) (skuAmount.doubleValue() * 100);//当前游戏商品显示的价格，分为单位，long类型，例如如果是游戏显示0.99USD这里需要传99
+        ldGamePayInfo.commodityPrice = result.getPayData().getLocalAmount().intValue();
 //该透传参数需要sdk_v2.2.0版本才支持，请注意更新sdk版本
         ldGamePayInfo.transparentParams = developerPayload;  //透传参数，该字段的值将在服务端SDK的支付成功的回调方法中返回
         LDSdkManager.getInstance().showChargeView(activity, ldGamePayInfo, new LDPayCallback() {

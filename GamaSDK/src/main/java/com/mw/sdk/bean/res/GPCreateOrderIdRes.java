@@ -20,6 +20,8 @@ public class GPCreateOrderIdRes extends BaseResponseModel {
         private Double amount; //金额 usd
 
         private String productName;
+        private Double localAmount;//本地金额
+        private String localCurrency;//本地货币
 
         public String getOrderId() {
             return orderId;
@@ -51,6 +53,22 @@ public class GPCreateOrderIdRes extends BaseResponseModel {
 
         public void setProductName(String productName) {
             this.productName = productName;
+        }
+
+        public Double getLocalAmount() {
+            return localAmount;
+        }
+
+        public void setLocalAmount(Double localAmount) {
+            this.localAmount = localAmount;
+        }
+
+        public String getLocalCurrency() {
+            return localCurrency;
+        }
+
+        public void setLocalCurrency(String localCurrency) {
+            this.localCurrency = localCurrency;
         }
     }
 }
