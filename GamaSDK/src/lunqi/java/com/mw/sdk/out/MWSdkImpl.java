@@ -429,4 +429,11 @@ public class MWSdkImpl extends BaseSdkImpl {
             }
         });
     }
+
+    @Override
+    public void openCs(Activity activity) {
+        super.openCs(activity);
+
+        XLSDK.getInstance().callFunctionWithParams(activity,2,null);
+    }
 }
