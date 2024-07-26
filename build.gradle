@@ -21,6 +21,9 @@ buildscript {
         // 配置HMS Core SDK的Maven仓地址。
         maven { url 'https://developer.huawei.com/repo/' }
         maven { url 'https://repo.onestore.co.kr/repository/onestore-sdk-public' }
+        maven {
+            url "https://artifactory-external.vkpartner.ru/artifactory/maven"
+        }
     }
     dependencies {
         // NOTE: Do not place your application dependencies here; they belong
@@ -48,6 +51,9 @@ allprojects {
         // 配置HMS Core SDK的Maven仓地址。
         maven { url 'https://developer.huawei.com/repo/' }
         maven { url 'https://repo.onestore.co.kr/repository/onestore-sdk-public' }
+        maven {
+            url "https://artifactory-external.vkpartner.ru/artifactory/maven"
+        }
     }
 }
 
