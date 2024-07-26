@@ -235,21 +235,46 @@ android {
 
         sdk3 {
 
-            signingConfig signingConfigs.signv3
-            applicationId "com.wanye.fszhl"
-            minSdkVersion 21
-            targetSdkVersion 34
             versionCode 26
             versionName "2.3.26"
             dimension "1"
-            resValue "string", "scheme", "wlzhs"
-            resValue "string", "facebook_app_id", "1137481690478934"
-            resValue "string", "facebook_client_token", "9457e9f00d7e1c0a9869c451326b15a9"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1137481690478934" //启用分析
-            resValue "string", "fb_login_protocol_scheme", "fb1137481690478934"
-            resValue "string", "facebook_app_name", "万灵召唤师"
-            resValue "string", "line_channelId", "1657511063"
-            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow"
+
+
+            //=======================================sdk config==========================
+
+            signingConfig signingConfigs.signv3
+            //base
+            applicationId "com.gan.xxa"
+            minSdkVersion 23
+            targetSdkVersion 34
+
+            resValue "string", "sdk_game_code", "xxa"
+            resValue "string", "sdk_app_key", "8472ac094980818c83c6ee27195267d3"
+            resValue "string", "sdk_more_language", "true"
+            resValue "string", "sdk_default_server_language", "en_US"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
+            resValue "string", "scheme", "xxa"
+            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
+            resValue "string", "sdk_release_european", "true"
+
+            //facebook
+            resValue "string", "facebook_app_id", "480770274418792"
+            resValue "string", "facebook_client_token", "6079e2fde7ab9a37e8ef36782d86dfa4"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider480770274418792"
+            resValue "string", "fb_login_protocol_scheme", "fb480770274418792"
+            resValue "string", "facebook_app_name", "fyden" //游戏名字
+            //ad
+            resValue "string", "adjust_app_token", ""
+            resValue "string", "sdk_appflyer_dev_key", ""
+            //line
+            resValue "string", "line_channelId", ""
+            //naver
+            resValue "string", "naver_client_id", ""
+            resValue "string", "naver_client_secret", ""
+
+            //vk渠道
+            resValue "string", "mw_vk_appid", ""
+
+            //=======================================sdk config end==========================
 
             //每个游戏的demo设置 test
             resValue "string", "sdk_name", "SDK3 demo"
