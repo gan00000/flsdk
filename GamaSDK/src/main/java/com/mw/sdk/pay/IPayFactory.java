@@ -24,7 +24,10 @@ public class IPayFactory {
         } else if (ChannelPlatform.SAMSUNG.getChannel_platform().equals(channel_platform)) {
             SdkVersionUtil sdkVersionUtil = new SdkVersionUtil();
             return sdkVersionUtil.newSamsungPay();
-        } else {
+        }  else if (ChannelPlatform.VK.getChannel_platform().equals(channel_platform)) {
+            SdkVersionUtil sdkVersionUtil = new SdkVersionUtil();
+            return sdkVersionUtil.newVKPay();
+        }else {
             return new GooglePayImpl();
         }
 

@@ -19,6 +19,7 @@ public class PayExchangeReqBean extends SGameBaseRequestBean {
 	private String reissue;//是否是补发调用
 
 	private String thirdPurchaseToken;
+	private String purchaseId;
 
 	public String getThirdPurchaseToken() {
 		return thirdPurchaseToken;
@@ -112,5 +113,11 @@ public class PayExchangeReqBean extends SGameBaseRequestBean {
 		super(context);
 	}
 
+	public String getPurchaseId() {
+		return purchaseId;
+	}
 
+	public void setPurchaseId(String purchaseId) {
+		this.purchaseId = purchaseId;
+	}
 }

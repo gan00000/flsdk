@@ -15,4 +15,8 @@ public abstract class BaseSdkVersion {
     public IPay newSamsungPay() {
         return null;
     }
+
+    public IPay newVKPay() {
+        return null;
+    }
 }
