@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.mw.sdk.R;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -42,8 +44,8 @@ public class VKPurchaseManger {
         }
         ruStoreBillingClient = RuStoreBillingClientFactory.INSTANCE.create(
                 context,
-                "184050",
-                "rustoresdkexamplescheme",
+                context.getString(R.string.mw_vk_appid),
+                context.getString(R.string.sdk_game_code),
                 null,
                 null,
                 true

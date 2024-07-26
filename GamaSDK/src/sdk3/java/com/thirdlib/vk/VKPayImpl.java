@@ -262,6 +262,8 @@ public class VKPayImpl implements IPay, VKPurchaseManger.PurchaseCallback {
 //            purchaseManager = new PurchaseManager(activity.getApplicationContext(), this);
 //        }
 
+        VKPurchaseManger.getInstance().initBillingClient(activity);
+
     }
 
     @Override
