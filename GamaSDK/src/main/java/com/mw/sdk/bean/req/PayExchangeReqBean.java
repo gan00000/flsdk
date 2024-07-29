@@ -7,7 +7,7 @@ import com.mw.sdk.bean.SGameBaseRequestBean;
 public class PayExchangeReqBean extends SGameBaseRequestBean {
 
 //	private String userId;
-	private String orderId;
+	private String orderId;//平台订单号
 	private String googleOrderId;
 	private String purchaseData;
 	private String dataSignature;
@@ -20,6 +20,8 @@ public class PayExchangeReqBean extends SGameBaseRequestBean {
 
 	private String thirdPurchaseToken;
 	private String purchaseId;
+	private String productId;
+	private String invoiceId;
 
 	public String getThirdPurchaseToken() {
 		return thirdPurchaseToken;
@@ -119,5 +121,21 @@ public class PayExchangeReqBean extends SGameBaseRequestBean {
 
 	public void setPurchaseId(String purchaseId) {
 		this.purchaseId = purchaseId;
+	}
+
+	public String getProductId() {
+		return productId;
+	}
+
+	public void setProductId(String productId) {
+		this.productId = productId;
+	}
+
+	public String getInvoiceId() {
+		return invoiceId;
+	}
+
+	public void setInvoiceId(String invoiceId) {
+		this.invoiceId = invoiceId;
 	}
 }

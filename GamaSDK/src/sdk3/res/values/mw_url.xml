@@ -33,7 +33,7 @@
     <string name="mw_sdk_member_spa_url"></string>
 
     <!--    日志记录域名-->
-    <string name="mw_sdk_log_pre_url">https://log.dustyx.com/</string>
+    <string name="mw_sdk_log_pre_url">https://log.mmhyplayer.com/</string>
 
     <!--使用者條款 - 服務條款 -->
     <string name="mw_sdk_terms_service_url">https://member.mmhyplayer.com/sdk/agreement/%s_agreement.html</string>
