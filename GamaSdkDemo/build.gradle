@@ -243,16 +243,17 @@ android {
             //=======================================sdk config==========================
 
             signingConfig signingConfigs.signv3
+
             //base
-            applicationId "com.gan.xxa"
-            minSdkVersion 23
+            applicationId "com.qcwx.fyden"
+            minSdkVersion 25
             targetSdkVersion 34
 
-            resValue "string", "sdk_game_code", "xxa"
-            resValue "string", "sdk_app_key", "8472ac094980818c83c6ee27195267d3"
+            resValue "string", "sdk_game_code", "fyden"
+            resValue "string", "sdk_app_key", "b2c4e398d7ee39c26bd74fdd04f23c96"
             resValue "string", "sdk_more_language", "true"
             resValue "string", "sdk_default_server_language", "en_US"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
-            resValue "string", "scheme", "xxa"
+            resValue "string", "scheme", "fyden"
             resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
             resValue "string", "sdk_release_european", "true"
 
@@ -270,7 +271,6 @@ android {
             //naver
             resValue "string", "naver_client_id", ""
             resValue "string", "naver_client_secret", ""
-
             //vk渠道
             resValue "string", "mw_vk_appid", ""
 
