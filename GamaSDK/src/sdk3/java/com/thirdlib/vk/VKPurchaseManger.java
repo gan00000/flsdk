@@ -28,7 +28,7 @@ public class VKPurchaseManger {
     private static RuStoreBillingClient ruStoreBillingClient;
     private boolean isPurchasesAvailability;
     private Context mContext;
-    private PurchaseCallback purchaseCallback;
+    public PurchaseCallback purchaseCallback;
 
     public static VKPurchaseManger getInstance(){
         if (vkPurchaseManger == null){

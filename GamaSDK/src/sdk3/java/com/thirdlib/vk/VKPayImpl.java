@@ -246,8 +246,8 @@ public class VKPayImpl implements IPay, VKPurchaseManger.PurchaseCallback {
             return;
         }
         PL.i("startQueryPurchase onQueryPurchasesResponse");
-        mContext = mContext.getApplicationContext();
-        VKPurchaseManger.getInstance().queryPurchasesAsync(mContext);
+        this.mContext = mContext.getApplicationContext();
+        //VKPurchaseManger.getInstance().queryPurchasesAsync(mContext);//VK启动游戏不检查
 
     }
 
@@ -262,7 +262,7 @@ public class VKPayImpl implements IPay, VKPurchaseManger.PurchaseCallback {
 //        if (purchaseManager == null){
 //            purchaseManager = new PurchaseManager(activity.getApplicationContext(), this);
 //        }
-
+        VKPurchaseManger.getInstance().purchaseCallback = this;
         VKPurchaseManger.getInstance().initBillingClient(activity);
 
     }
@@ -571,7 +571,6 @@ public class VKPayImpl implements IPay, VKPurchaseManger.PurchaseCallback {
         PL.i("onError:" + message);
         if (mActivity != null && this.createOrderIdReqBean != null){//此时用户正在购买
             callbackFail("" + message);
-
         }
     }
 
