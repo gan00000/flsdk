@@ -57,6 +57,9 @@ public class AFHelper {
 
     public static void logEvent(Context context, String eventName, Map<String, Object> map){
 
+        if (context == null || SStringUtil.isEmpty(eventName)){
+            return;
+        }
         String afDevKey = ResConfig.getAfDevKey(context);
         if(TextUtils.isEmpty(afDevKey)) {
             return;

@@ -75,7 +75,7 @@ public class PayApi {
     /**
      * 发币
      */
-    public static void requestSendStone(Context context, final Purchase mPurchase,boolean reissue, SFCallBack<GPExchangeRes> sfCallBack) {
+    public static void requestSendStone_Google(Context context, final Purchase mPurchase, boolean reissue, SFCallBack<GPExchangeRes> sfCallBack) {
 
         PayExchangeReqBean exchangeReqBean = new PayExchangeReqBean(context);
         if (reissue) {
@@ -178,6 +178,11 @@ public class PayApi {
                                         }
                                     }
                                 }
+
+                                //查询接口是否要需要上报的事件
+                                String orderId2 = gpExchangeRes.getData().getOrderId();
+                                Request.requestEventsData(context.getApplicationContext(), orderId2, usdPrice, productId, null);
+
                             }
 
                         } else {

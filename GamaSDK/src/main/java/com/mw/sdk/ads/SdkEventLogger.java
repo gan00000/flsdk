@@ -148,6 +148,7 @@ public class SdkEventLogger {
     }*/
 
     /**
+     * eventName为空，使用默认的上报收益名称，eventName不为空则使用该值
      * 统计储值数据
      */
     public static void trackinPayEvent(Context context, String eventName, String orderId, String productId, double usdPrice, String serverTimestamp, boolean linkUser){
@@ -165,6 +166,7 @@ public class SdkEventLogger {
         try {
 
             String uid = SdkUtil.getUid(context);
+            String channel_platform = context.getResources().getString(R.string.channel_platform);
 
             //下面是AppsFlyer自己的事件名
             Map<String, Object> af_eventValues = new HashMap<>();
@@ -226,6 +228,12 @@ public class SdkEventLogger {
             PL.i("trackinPay Purchase firebase...");
             if (SStringUtil.isEmpty(eventName)){
                 SGoogleProxy.firebaseAnalytics(context, FirebaseAnalytics.Event.PURCHASE, b);
+
+                SGoogleProxy.firebaseAnalytics(context, "purchase_D14", b);
+                SGoogleProxy.firebaseAnalytics(context, "purchase_D30", b);
+                SGoogleProxy.firebaseAnalytics(context, "purchase_D45", b);
+                SGoogleProxy.firebaseAnalytics(context, "purchase_D60", b);
+
             }else {
                 SGoogleProxy.firebaseAnalytics(context, eventName, b);
             }

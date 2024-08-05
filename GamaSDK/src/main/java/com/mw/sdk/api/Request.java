@@ -17,14 +17,17 @@ import com.mw.sdk.MWBaseWebActivity;
 import com.mw.sdk.R;
 import com.mw.sdk.ads.EventConstant;
 import com.mw.sdk.ads.SdkEventLogger;
+import com.mw.sdk.ads.TrackEventHelper;
 import com.mw.sdk.api.task.BaseLoginRequestTask;
 import com.mw.sdk.bean.SGameBaseRequestBean;
 import com.mw.sdk.bean.req.AccountBindInGameRequestBean;
 import com.mw.sdk.bean.req.ChangePwdRequestBean;
 import com.mw.sdk.bean.req.DeleteAccountRequestBean;
 import com.mw.sdk.bean.req.PayCreateOrderReqBean;
+import com.mw.sdk.bean.req.PayEventReqBean;
 import com.mw.sdk.bean.res.ActDataModel;
 import com.mw.sdk.bean.res.ConfigBean;
+import com.mw.sdk.bean.res.EventRes;
 import com.mw.sdk.bean.res.RedDotRes;
 import com.mw.sdk.bean.res.ToggleResult;
 import com.mw.sdk.constant.ApiRequestMethod;
@@ -831,6 +834,87 @@ public class Request {
                         if (dialog != null  ) {
                             dialog.dismiss();
                         }
+                    }
+                });
+    }
+
+
+    public static void requestEventsData(Context context, String orderId, double amount, String productId, SFCallBack<EventRes> sfCallBack) {
+
+        if (context == null || SStringUtil.isEmpty(orderId) || amount <= 0){
+            return;
+        }
+        PayEventReqBean payEventReqBean = new PayEventReqBean(context);
+        payEventReqBean.setOrderId(orderId);
+        payEventReqBean.setAmount(amount);
+//        Dialog dialog = DialogUtil.createLoadingDialog(context, "Loading...");
+//        dialog.show();
+        RetrofitClient.instance().build(context,URLType.PLAT).create(MWApiService.class)
+                .getRechargeEvent(payEventReqBean.fieldValueToMap())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<EventRes>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        PL.i("subscribe onSubscribe...");
+                    }
+
+                    @Override
+                    public void onNext(@NonNull EventRes eventRes) {
+                        PL.i("subscribe onNext...");
+//                        if (dialog != null  ) {
+//                            dialog.dismiss();
+//                        }
+
+                        if (sfCallBack != null) {
+                            sfCallBack.success(eventRes, "success");
+                        }
+
+                        if (eventRes != null && eventRes.getData() != null && !eventRes.getData().isEmpty() && eventRes.isRequestSuccess()){
+
+                            //SGameBaseRequestBean sGameBaseRequestBean = new SGameBaseRequestBean(context);
+                            String channel_platform = context.getResources().getString(R.string.channel_platform);
+
+                            //遍历事件开始上报
+                            for (EventRes.EventData eventData : eventRes.getData()) {
+                               String eventName = eventData.getEventName();
+                               if (SStringUtil.isNotEmpty(eventName) && eventData.getData() != null && !eventData.getData().isEmpty()){
+                                   //遍历需要上报的平台和值
+                                   for (EventRes.EventPlatData eventPlatData : eventData.getData()) {
+                                        if ("fb".equals(eventPlatData.getPlatform())){
+
+                                            TrackEventHelper.trackRevenueFB(context,false, eventName, eventPlatData.getValue(),eventPlatData.getCurrency(), payEventReqBean.getUserId(), payEventReqBean.getRoleId(), productId, orderId, channel_platform, null);
+
+                                        }else if ("firebase".equals(eventPlatData.getPlatform())){
+
+                                            TrackEventHelper.trackRevenueFirebase(context, eventName, eventPlatData.getValue(),eventPlatData.getCurrency(), payEventReqBean.getUserId(), payEventReqBean.getRoleId(), productId, orderId, channel_platform, null);
+
+                                       }else if ("appsflyer".equals(eventPlatData.getPlatform())){
+                                            TrackEventHelper.trackRevenueAF(context, eventName, eventPlatData.getValue(),eventPlatData.getCurrency(), payEventReqBean.getUserId(), payEventReqBean.getRoleId(), productId, orderId, channel_platform, null);
+                                       }
+                                   }
+                               }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        PL.i("subscribe onError...");
+//                        if (dialog != null  ) {
+//                            dialog.dismiss();
+//                        }
+                        if (sfCallBack != null) {
+                            sfCallBack.fail(null, context.getString(R.string.py_error_occur));
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        PL.i("subscribe onComplete...");
+//                        if (dialog != null  ) {
+//                            dialog.dismiss();
+//                        }
                     }
                 });
     }

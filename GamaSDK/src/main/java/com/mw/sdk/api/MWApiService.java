@@ -1,6 +1,7 @@
 package com.mw.sdk.api;
 
 import com.mw.sdk.bean.res.ActDataModel;
+import com.mw.sdk.bean.res.EventRes;
 import com.mw.sdk.bean.res.GPExchangeRes;
 import com.mw.sdk.bean.res.RedDotRes;
 import com.mw.sdk.bean.res.ToggleResult;
@@ -77,4 +78,9 @@ public interface MWApiService {
     @POST("api/google/payment")
     @FormUrlEncoded
     Observable<GPExchangeRes> googlePayment(@FieldMap Map<String, String> paramMap);
+
+    //sdk/api/getRechargeEvent?orderId=&userId=&gameCode=&amount=
+    @POST("sdk/api/getRechargeEvent")
+    @FormUrlEncoded
+    Observable<EventRes> getRechargeEvent(@FieldMap Map<String, String> paramMap);
 }
