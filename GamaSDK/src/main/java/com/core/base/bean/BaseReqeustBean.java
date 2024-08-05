@@ -129,6 +129,14 @@ public class BaseReqeustBean extends AbsReqeustBean {
                             postParams.put(fields[i].getName(), (String) value);
                         } else if (fields[i].getType() == int.class) {
                             postParams.put(fields[i].getName(), String.valueOf((int) value));
+                        }else if (fields[i].getType() == float.class) {
+                            postParams.put(fields[i].getName(), String.valueOf((float) value));
+                        }else if (fields[i].getType() == double.class) {
+                            postParams.put(fields[i].getName(), String.valueOf((double) value));
+                        }else if (fields[i].getType() == long.class) {
+                            postParams.put(fields[i].getName(), String.valueOf((long) value));
+                        }else if (fields[i].getType() == boolean.class) {
+                            postParams.put(fields[i].getName(), String.valueOf((boolean) value));
                         }
 
                     }

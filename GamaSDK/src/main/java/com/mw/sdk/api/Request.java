@@ -844,6 +844,7 @@ public class Request {
         if (context == null || SStringUtil.isEmpty(orderId) || amount <= 0){
             return;
         }
+        PL.i("requestEventsData start");
         PayEventReqBean payEventReqBean = new PayEventReqBean(context);
         payEventReqBean.setOrderId(orderId);
         payEventReqBean.setAmount(amount);
@@ -865,7 +866,7 @@ public class Request {
 //                        if (dialog != null  ) {
 //                            dialog.dismiss();
 //                        }
-
+                        PL.i("requestEventsData finish");
                         if (sfCallBack != null) {
                             sfCallBack.success(eventRes, "success");
                         }
