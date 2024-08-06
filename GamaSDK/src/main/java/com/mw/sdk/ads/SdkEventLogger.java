@@ -9,7 +9,6 @@ import com.appsflyer.AFInAppEventParameterName;
 import com.appsflyer.AFInAppEventType;
 import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.ISReqCallBack;
-import com.core.base.callback.SFCallBack;
 import com.core.base.request.SimpleHttpRequest;
 import com.core.base.utils.ApkInfoUtil;
 import com.core.base.utils.JsonUtil;
@@ -32,6 +31,7 @@ import com.thirdlib.af.AFHelper;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.google.SGoogleProxy;
 import com.thirdlib.td.TDAnalyticsHelper;
+import com.thirdlib.tiktok.TTSdkHelper;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -68,6 +68,9 @@ public class SdkEventLogger {
                 return;
             }
             String userId = loginResponse.getData().getUserId();
+
+            TTSdkHelper.regUserInfo(activity.getApplicationContext(),userId);
+
             Map<String, Object> eventValue = new HashMap<String, Object>();
             eventValue.put(EventConstant.ParameterName.USER_ID, userId);
             eventValue.put(EventConstant.ParameterName.SERVER_TIME, SdkUtil.getSdkTimestamp(activity) + "");
@@ -254,6 +257,14 @@ public class SdkEventLogger {
             }else {
                 AdjustHelper.trackEvent(context, eventName, payEventValues, usdPrice, orderId);
             }
+            //tt
+            if (SStringUtil.isEmpty(eventName)){
+
+                TTSdkHelper.trackPay(context, uid, SdkUtil.getRoleId(context), orderId, productId, usdPrice, productId);
+
+            }else {
+                TTSdkHelper.trackEventRevenue(context, eventName, uid, SdkUtil.getRoleId(context), orderId, productId, usdPrice);
+            }
 
             //shushu
             if (SStringUtil.isEmpty(eventName)){//eventName为空才是正常的储值上报
@@ -376,6 +387,9 @@ public class SdkEventLogger {
 
             //adjust
             AdjustHelper.trackEvent(context, eventName, map);
+            //TikTok
+            TTSdkHelper.trackEvent(context, eventName);
+
         } catch (Exception e) {
             e.printStackTrace();
         }

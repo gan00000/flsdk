@@ -24,6 +24,7 @@ buildscript {
         maven {
             url "https://artifactory-external.vkpartner.ru/artifactory/maven"
         }
+        maven { url 'https://jitpack.io' } // add this line!!
     }
     dependencies {
         // NOTE: Do not place your application dependencies here; they belong
@@ -54,6 +55,7 @@ allprojects {
         maven {
             url "https://artifactory-external.vkpartner.ru/artifactory/maven"
         }
+        maven { url 'https://jitpack.io' } // add this line!!
     }
 }
 

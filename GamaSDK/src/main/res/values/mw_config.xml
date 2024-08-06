@@ -45,4 +45,6 @@
 <!--    <string name="mw_td_te_server_url"></string>-->
 
     <string name="mw_vk_appid"></string>
+
+    <string name="mw_tt_app_id"></string>
 </resources>

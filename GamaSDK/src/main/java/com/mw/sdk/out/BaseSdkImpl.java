@@ -16,7 +16,6 @@ import android.webkit.WebView;
 import androidx.annotation.NonNull;
 
 import com.core.base.BaseWebViewClient;
-import com.core.base.bean.BaseReqeustBean;
 import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.AppUtil;
@@ -85,6 +84,7 @@ import com.thirdlib.af.AFHelper;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.huawei.HuaweiPayImpl;
 import com.thirdlib.td.TDAnalyticsHelper;
+import com.thirdlib.tiktok.TTSdkHelper;
 
 import org.json.JSONObject;
 
@@ -185,6 +185,7 @@ public class BaseSdkImpl implements IMWSDK {
 
         AFHelper.applicationOnCreate(application);
         AdjustHelper.init(application);
+        TTSdkHelper.init(application.getApplicationContext());
         SPUtil.saveSimpleInfo(application.getApplicationContext(), SdkUtil.SDK_SP_FILE,"sdk_applicationOnCreate_call", true);
 
     }

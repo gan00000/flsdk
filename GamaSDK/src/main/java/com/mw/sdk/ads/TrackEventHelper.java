@@ -11,6 +11,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.thirdlib.af.AFHelper;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.google.SGoogleProxy;
+import com.thirdlib.tiktok.TTSdkHelper;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -125,5 +126,9 @@ public class TrackEventHelper {
 //        }
 
         AFHelper.logEvent(context.getApplicationContext(), eventName, af_eventValues);
+    }
+
+    public static void trackRevenueTT(Context context, String eventName, double usdPrice, String currency, String uid,String roleId, String productId, String orderId, String channel_platform, Map<String, Object> otherParams){
+        TTSdkHelper.trackEventRevenue(context, eventName, uid, roleId, orderId, productId, usdPrice);
     }
 }
