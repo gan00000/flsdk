@@ -23,6 +23,8 @@ public class EventConstant {
 
         select_google,
         select_other,
+        DetailedLevel,
+        AchieveLevel_40,
 
         /**
          * 首储事件

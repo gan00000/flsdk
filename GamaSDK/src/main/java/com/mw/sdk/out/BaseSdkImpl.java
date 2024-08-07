@@ -274,8 +274,16 @@ public class BaseSdkImpl implements IMWSDK {
             public void run() {
 
 
-                TDAnalyticsHelper.setAccountId(roleId);//shushu
-                TDAnalyticsHelper.setCommonProperties(activity);
+                try {
+                    TDAnalyticsHelper.setAccountId(roleId);//shushu
+                    TDAnalyticsHelper.setCommonProperties(activity);
+                    trackEvent(activity, EventConstant.EventName.DetailedLevel);
+                    if (Integer.parseInt(roleLevel) >= 40){
+                        SdkEventLogger.trackingWithEventName(activity, EventConstant.EventName.AchieveLevel_40.name(), null, EventConstant.AdType.AdTypeAllChannel, true);
+                    }
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
 
                 if (SStringUtil.isNotEmpty(roleId) && SStringUtil.isNotEmpty(severCode) && SStringUtil.isNotEmpty(SdkUtil.getUid(activity))){
 
@@ -327,6 +335,7 @@ public class BaseSdkImpl implements IMWSDK {
             @Override
             public void run() {
                 Request.openCs(activity, 0);
+                trackEvent(activity, EventConstant.EventName.DetailedLevel);
             }
         });
     }
@@ -870,6 +879,7 @@ public class BaseSdkImpl implements IMWSDK {
                 SdkUtil.saveRoleInfo(activity, roleId, roleName, roleLevel, vipLevel, severCode, serverName);//保存角色信息
                 startPay(activity, payType, cpOrderId, productId, extra, listener);
                 trackEvent(activity, EventConstant.EventName.Initiate_Checkout);
+                trackEvent(activity, EventConstant.EventName.DetailedLevel);
             }
         });
     }

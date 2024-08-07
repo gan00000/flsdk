@@ -331,6 +331,22 @@ public class SdkEventLogger {
     public static void trackingWithEventName(Context context, String eventName, Map<String, Object> map){
         trackingWithEventName(context,eventName,map, EventConstant.AdType.AdTypeAllChannel);
     }
+    public static void trackingWithEventName(Context context, String eventName, Map<String, Object> map, int adType, boolean isOnce) {
+        if (SStringUtil.isEmpty(eventName)){
+            return;
+        }
+
+        if (isOnce) {
+            String sp_key_event = "ThirdPlat_SPKEY_" + eventName;
+            if (SStringUtil.isNotEmpty(SPUtil.getSimpleString(context,SdkUtil.SDK_SP_FILE,sp_key_event))){
+                PL.i("trackingWithEventName exist eventname=" + eventName);
+                return;
+            }
+            SPUtil.saveSimpleInfo(context,SdkUtil.SDK_SP_FILE, sp_key_event, "true");
+        }
+
+        trackingWithEventName(context, eventName, map, adType);
+    }
     public static void trackingWithEventName(Context context, String eventName, Map<String, Object> map, int adType) {
         if(TextUtils.isEmpty(eventName)) {
             PL.e("上報事件名為空");

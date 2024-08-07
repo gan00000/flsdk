@@ -39,6 +39,7 @@ import com.mw.sdk.bean.res.BasePayBean;
 import com.mw.sdk.BuildConfig;
 import com.mw.sdk.constant.ApiRequestMethod;
 import com.thirdlib.td.TDAnalyticsHelper;
+import com.thirdlib.tiktok.TTSdkHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -456,6 +457,8 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
                                         eventPropertie.setPay_method("google");
                                         eventPropertie.setCurrency_type("USD");
                                         TDAnalyticsHelper.trackEvent("payment_submit",eventPropertie);
+
+                                        TTSdkHelper.trackCheckout(activity.getApplicationContext(), createOrderIdRes.getPayData().getOrderId(), createOrderIdReqBean.getProductId(), createOrderIdRes.getPayData().getAmount());
 
                                         //5.开始购买
                                         mBillingHelper.launchPurchaseFlow(activity, createOrderIdReqBean.getProductId(),createOrderIdReqBean.getUserId(),
