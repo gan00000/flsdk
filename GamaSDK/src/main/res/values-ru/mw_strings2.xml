@@ -1,0 +1,27 @@
+<resources>
+    <string name="text_phone_bind">Привязать телефон</string>
+    <string name="text_phone_area_code">Код города</string>
+    <string name="text_phone_input_hint">Введите номер телефона</string>
+    <string name="text_phone_hasbind_tips">Уже привязано, это ваш нынешний номер телефона</string>
+    <string name="text_area_code_not_empty">Код города не может быть пустым</string>
+    <string name="text_phone_not_empty">Номер телефона не может быть пустым</string>
+    <string name="text_phone_not_match">Неверный формат номера телефона</string>
+    <string name="text_vfcode_has_send">Проверочный номер отправлен</string>
+    <string name="text_phone_bind_success">Телефон привязан</string>
+    <string name="text_has_bind_tips_google">Аккаунт Google был повышен до членского аккаунта</string>
+    <string name="text_has_bind_tips_fb">Аккаунт Facebook был повышен до членского аккаунта</string>
+    <string name="text_has_bind_tips_guest">Гостевой аккаунт был повышен до членского аккаунта</string>
+    <string name="text_has_bind_tips_line">Аккаунт LINE повышен до членского аккаунта</string>
+    <string name="text_has_bind_tips_mw">Членский аккаунт</string>
+    <string name="text_notice">Объявление</string>
+    <string name="text_account_not_login">В настоящее время у вас нет учетной записи, сначала войдите в систему</string>
+    <string name="text_has_bind_tips_twitter">Аккаунт Twitter был повышен до членского аккаунта</string>
+    <string name="text_has_upgrade_account">Повышен до членского аккаунта</string>
+    <string name="text_game_name">Название игры:</string>
+    <string name="text_server_name">Сервер:</string>
+    <string name="text_role_name">Имя персонажа:</string>
+    <string name="text_account_name">Аккаунт:</string>
+    <string name="text_account_uid">uid：</string>
+    <string name="text_account_del">Удалить аккаунт</string>
+
+</resources>
