@@ -126,10 +126,6 @@
             //=======================================sdk config end==========================
 
 
-
-            //每个游戏的demo设置 test 不需要设置
-            resValue "string", "sdk_name", "SdkDemo"
-
         	}
 	
 	    }
@@ -147,28 +143,28 @@
 		//MWSDK-release为sdk内提供的aar库
 	    implementation(name:'MWSDK-release', ext:'aar')
 	    
-			 //基础库
+		implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
+	    //基础库
 	    api 'androidx.legacy:legacy-support-v4:1.0.0'
-	    api 'androidx.appcompat:appcompat:1.6.1'
+	    api 'androidx.appcompat:appcompat:1.7.0'
 	    api 'androidx.recyclerview:recyclerview:1.3.2'
 	    api 'androidx.constraintlayout:constraintlayout:2.1.4'
-	    api 'androidx.browser:browser:1.7.0'
-	    implementation 'androidx.viewpager2:viewpager2:1.0.0'
+	    api 'androidx.browser:browser:1.8.0'
+	    implementation 'androidx.viewpager2:viewpager2:1.1.0'
 	
 	    //mutildex
 	    implementation 'androidx.multidex:multidex:2.0.1'
 	    //google pay
-	    implementation "com.android.billingclient:billing:6.1.0"
+	    api "com.android.billingclient:billing:7.0.0"
 	    //google评分
 	    implementation 'com.google.android.play:review:2.0.1'
 	
 	    implementation("com.google.guava:guava:31.1-android")
-	    implementation 'com.zhy:base-rvadapter:3.0.3'
 	
 	    //Google库
-	    implementation 'com.google.android.gms:play-services-auth:20.7.0'
-	    implementation 'com.google.android.gms:play-services-base:18.2.0'
-	    implementation 'com.google.android.gms:play-services-games:23.1.0'
+	    implementation 'com.google.android.gms:play-services-auth:21.2.0'
+	    implementation 'com.google.android.gms:play-services-base:18.5.0'
+	    implementation 'com.google.android.gms:play-services-games:23.2.0'
 	
 	    //firebase
 	    implementation platform('com.google.firebase:firebase-bom:32.3.1')
@@ -181,20 +177,18 @@
 	
 	    //Facebook库
 	    // Facebook Core only (Analytics)
-	    implementation 'com.facebook.android:facebook-core:16.0.0'  //latest.release
+	    implementation 'com.facebook.android:facebook-core:17.0.0'  //latest.release
 	    // Facebook Login only
-	    implementation 'com.facebook.android:facebook-login:16.0.0'
+	    implementation 'com.facebook.android:facebook-login:17.0.0'
 	    // Facebook Share only
-	    implementation 'com.facebook.android:facebook-share:16.0.0'
+	    implementation 'com.facebook.android:facebook-share:17.0.0'
 	    // Facebook Messenger only
-	    implementation 'com.facebook.android:facebook-messenger:16.0.0'
-	    //line
-	    implementation 'com.linecorp:linesdk:5.0.1'
+	    implementation 'com.facebook.android:facebook-messenger:17.0.0'
 	
 	    //af
-	    implementation 'com.appsflyer:af-android-sdk:6.9.0'
+	    implementation 'com.appsflyer:af-android-sdk:6.13.0'
 	    implementation 'com.android.installreferrer:installreferrer:2.2'
-		
+	    
 	    implementation 'com.google.code.gson:gson:2.8.6'
 	    implementation 'io.reactivex.rxjava3:rxandroid:3.0.2'
 	    implementation 'io.reactivex.rxjava3:rxjava:3.1.5'
@@ -205,7 +199,14 @@
 	
 	    implementation 'com.github.bumptech.glide:glide:4.16.0'
 	    annotationProcessor 'com.github.bumptech.glide:compiler:4.16.0'
+	    //数数埋点
+	    implementation 'cn.thinkingdata.android:ThinkingAnalyticsSDK:3.0.2'
 	
+	    //tiktok
+	    implementation 'com.github.tiktok:tiktok-business-android-sdk:1.3.3' // replace the version with the one which suits your need
+	    //to listen for app life cycle
+	    implementation 'androidx.lifecycle:lifecycle-process:2.3.1'
+	    implementation 'androidx.lifecycle:lifecycle-common-java8:2.3.1'	
 	}
 
 
@@ -431,7 +432,6 @@
  接口定义:
     /**
      * @param activity
-     * @param payType           SPayType.WEB为平台网页第三方储值，SPayType.GOOGLE为Google储值
      * @param cpOrderId         厂商订单号    必传
      * @param productId         购买的商品id   必传
      * @param extra             预留的穿透值   可选
@@ -443,7 +443,7 @@
      * @param serverName        角色伺服器名称	 	必传
      * @param listener          充值回调              辅助回调，充值是否成功以服务端回调为准
      */
-    void pay(Activity activity, SPayType payType, String cpOrderId, String productId, String extra, String roleId,String roleName,String roleLevel,String vipLevel,String severCode,String serverName, IPayListener listener);
+    void pay(Activity activity, String cpOrderId, String productId, String extra, String roleId,String roleName,String roleLevel,String vipLevel,String severCode,String serverName, IPayListener listener);
 
  
     //sample:
