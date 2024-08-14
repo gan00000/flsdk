@@ -156,6 +156,11 @@ public class TTSdkHelper {
     public static void trackCheckout(Context context, String orderId, String productId, double amount){
 //        TTCheckoutEvent.newBuilder().
         //Report using TTContentsEvent
+
+        if (!ttAppIdExist(context)){
+            return;
+        }
+
         TTContentsEvent info = TTCheckoutEvent.newBuilder()
         .setDescription(productId)//Description of the item or page.
         .setCurrency(TTContentsEventConstants.Currency.USD)//The ISO 4217 currency code.
