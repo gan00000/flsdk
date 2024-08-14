@@ -1026,6 +1026,9 @@ public class SdkUtil {
             if (language.equals("ko")){//韩语
                 return SGameLanguage.ko_KR.getLanguage();
             }
+            if (language.equals("ru")){//韩语
+                return SGameLanguage.ru_RU.getLanguage();
+            }
             //return SGameLanguage.zh_TW.getLanguage();//默认为繁体
         }
         //主动通过配置文件设置的默认语言

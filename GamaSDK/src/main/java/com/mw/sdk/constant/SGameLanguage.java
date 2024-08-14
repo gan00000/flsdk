@@ -29,6 +29,7 @@ public enum SGameLanguage {
      * 简中
      */
     zh_CN("zh_CN"),
+    ru_RU("ru_RU"),
 
     /**
      * 越南
