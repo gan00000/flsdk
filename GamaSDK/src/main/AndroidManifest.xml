@@ -61,11 +61,11 @@
             android:screenOrientation="sensorPortrait"
             android:theme="@style/Sdk.Theme.AppCompat.Light.NoActionBar.FullScreen"/>
 
-        <activity
-            android:name="com.mw.sdk.GooglePayActivity2"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|fontScale"
-            android:windowSoftInputMode="stateHidden|adjustResize"
-            android:theme="@style/Sdk.Theme.AppCompat.Light.NoActionBar.FullScreen.Translucent"/>
+<!--        <activity-->
+<!--            android:name="com.mw.sdk.GooglePayActivity2"-->
+<!--            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|fontScale"-->
+<!--            android:windowSoftInputMode="stateHidden|adjustResize"-->
+<!--            android:theme="@style/Sdk.Theme.AppCompat.Light.NoActionBar.FullScreen.Translucent"/>-->
 
 
 <!--        &lt;!&ndash; ==========================fb共同需要的配置============================ &ndash;&gt;-->
