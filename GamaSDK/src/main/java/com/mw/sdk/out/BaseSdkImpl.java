@@ -308,6 +308,7 @@ public class BaseSdkImpl implements IMWSDK {
             }
         });
 
+        SPUtil.saveSimpleInfo(activity, SdkUtil.SDK_SP_FILE,"sdk_registerRoleInfo_call", true);
     }
 
     public void checkPreRegData(final Activity activity, ISdkCallBack iSdkCallBack) {
@@ -872,6 +873,12 @@ public class BaseSdkImpl implements IMWSDK {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
+
+                boolean isCall = SPUtil.getSimpleBoolean(activity.getApplicationContext(), SdkUtil.SDK_SP_FILE,"sdk_registerRoleInfo_call");
+                if (!isCall){
+                    PL.e("sdk IMWSDK.registerRoleInfo() not call, plase call IMWSDK.registerRoleInfo() ");
+                    ToastUtils.toastL(activity, "Error: Plase call IMWSDK.registerRoleInfo() when get role info");
+                }
 
                 if (SStringUtil.isEmpty(roleId) || SStringUtil.isEmpty(severCode)){
                     ToastUtils.toast(activity,"roleId and severCode must not empty");
