@@ -2,6 +2,7 @@ package com.mw.sdk.out;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 
 import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.IGameLifeCycle;
@@ -201,4 +202,6 @@ public interface IMWSDK extends IGameLifeCycle {
 //    public void setSwitchAccountListener(Activity activity, ISdkCallBack sdkCallBack);
 
 //    public ISdkCallBack getSwitchAccountCallback();
+
+    String getSdkLanguage(Context context);
 }

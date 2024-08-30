@@ -67,7 +67,7 @@ public class BaseLoginRequestTask extends AbsHttpRequest {
 
 
 		if(SStringUtil.isEmpty(sdkBaseRequestBean.getGameLanguage())){
-			sdkBaseRequestBean.setGameLanguage(SdkUtil.getGameLanguage(context));
+			sdkBaseRequestBean.setGameLanguage(SdkUtil.getSdkServerLanguage(context));
 		}
 
 //		sdkBaseRequestBean.setReferrer(PyLoginHelper.takeReferrer(context, ""));

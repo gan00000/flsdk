@@ -1000,11 +1000,19 @@ public class SdkUtil {
         return SPUtil.getSimpleString(context, SdkUtil.SDK_SP_FILE, KEY_AREA_CODE_INFO);
     }
 
-    public static String getGameLanguage(Context context){
+    public static String getSdkLocaleLanguage(Context context){
+        if (ResConfig.isMoreLanguage(context)){
+            return getSdkServerLanguage(context);
+        }
+        Locale locale = Locale.getDefault();//mw_#Hant  zh_HK_#Hant zh_CN_#Hans en_US  language=zh, script=Hant, region=TW
+        return locale.getLanguage();
+    }
+
+    public static String getSdkServerLanguage(Context context){
 
         if (ResConfig.isMoreLanguage(context)){
 
-            Locale locale = Locale.getDefault();//mw_#Hant  zh_HK_#Hant zh_CN_#Hans en_US
+            Locale locale = Locale.getDefault();//mw_#Hant  zh_HK_#Hant zh_CN_#Hans en_US  language=zh, script=Hant, region=TW
             String language = locale.getLanguage();//zh en
             String country = locale.getCountry();//TW US
             PL.d("language=%s, country=%s", language, country);
@@ -1035,7 +1043,7 @@ public class SdkUtil {
         if (SStringUtil.isNotEmpty(ResConfig.getDefaultServerLanguage(context))){
             return ResConfig.getDefaultServerLanguage(context);
         }
-        return SGameLanguage.zh_TW.getLanguage();//默认为繁体
+        return SGameLanguage.en_US.getLanguage();//默认为繁体
     }
 
     private static final String SDK_FLOAT_CFG_DATA = "SDK_FLOAT_CFG_DATA";//保存sdk配置 cdn文件

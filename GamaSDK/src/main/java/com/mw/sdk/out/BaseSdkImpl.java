@@ -2,6 +2,7 @@ package com.mw.sdk.out;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -1584,4 +1585,10 @@ public class BaseSdkImpl implements IMWSDK {
 //    public ISdkCallBack getSwitchAccountCallback() {
 //        return this.switchAccountCallBack;
 //    }
+
+
+    @Override
+    public String getSdkLanguage(Context context) {
+        return SdkUtil.getSdkLocaleLanguage(context);
+    }
 }
