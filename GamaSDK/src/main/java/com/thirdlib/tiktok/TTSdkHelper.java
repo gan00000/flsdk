@@ -5,19 +5,7 @@ import android.content.Context;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.mw.sdk.R;
-import com.mw.sdk.ads.EventConstant;
 import com.mw.sdk.bean.SGameBaseRequestBean;
-import com.tiktok.TikTokBusinessSdk;
-import com.tiktok.appevents.base.EventName;
-import com.tiktok.appevents.base.TTBaseEvent;
-import com.tiktok.appevents.contents.TTCheckoutEvent;
-import com.tiktok.appevents.contents.TTContentParams;
-import com.tiktok.appevents.contents.TTContentsEvent;
-import com.tiktok.appevents.contents.TTContentsEventConstants;
-import com.tiktok.appevents.contents.TTPurchaseEvent;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class TTSdkHelper {
 
@@ -32,7 +20,7 @@ public class TTSdkHelper {
             return;
         }
 
-        // Set AppId & TikTok App ID in application code
+      /*  // Set AppId & TikTok App ID in application code
         TikTokBusinessSdk.TTConfig ttConfig = new TikTokBusinessSdk.TTConfig(context.getApplicationContext())
 //                .openDebugMode()
 //                .setLogLevel(TikTokBusinessSdk.LogLevel.DEBUG)
@@ -46,7 +34,7 @@ public class TTSdkHelper {
         // calling this function if you need to let the user agree to data terms
         // before actually sending the app events to TikTok.
         TikTokBusinessSdk.startTrack();
-        PL.i("tt_app_id init finish");
+        PL.i("tt_app_id init finish");*/
     }
 
     public static void regUserInfo(Context context, String userId){
@@ -58,10 +46,10 @@ public class TTSdkHelper {
         // - when the user logins in
         //- when a new user signs up
         //- when the user updates his/her profile,logout first, then identify - If the user's previous user info is remembered and the app is reopened.
-        TikTokBusinessSdk.identify(userId
+        /*TikTokBusinessSdk.identify(userId
                 ,""
                 ,""
-                ,"");
+                ,"");*/
     }
 
     public static void logout(){
@@ -69,14 +57,14 @@ public class TTSdkHelper {
         //Should be called when the user logs out
         //- when the app logs out
         // - when switching to another account, in that case, should call a subsequent identify(String, String, String, String)
-        TikTokBusinessSdk.logout();
+//        TikTokBusinessSdk.logout();
     }
     public static void trackEvent(Context context, String eventName){
 
         if (!ttAppIdExist(context)){
             return;
         }
-        eventName = findTTStandardEventName(eventName);
+        /*eventName = findTTStandardEventName(eventName);
         //Report custom events
         if (eventName.equals(EventConstant.EventName.DetailedLevel.name())){
             SGameBaseRequestBean sGameBaseRequestBean = new SGameBaseRequestBean(context);
@@ -86,7 +74,7 @@ public class TTSdkHelper {
         }else {
             TTBaseEvent ttBaseEvent = TTBaseEvent.newBuilder(eventName).build(); //event constant
             TikTokBusinessSdk.trackTTEvent(ttBaseEvent);
-        }
+        }*/
         PL.i("tt_app_id trackEvent finish eventName=" + eventName);
     }
 
@@ -104,7 +92,7 @@ public class TTSdkHelper {
         }
 
         //Report using TTContentsEvent
-        TTContentsEvent info = TTPurchaseEvent.newBuilder()
+      /*  TTContentsEvent info = TTPurchaseEvent.newBuilder()
                 .setDescription(des)//Description of the item or page.
                 .setCurrency(TTContentsEventConstants.Currency.USD)//The ISO 4217 currency code.
                 .setValue(amount)//Total value of the order basket or items sold.
@@ -117,7 +105,7 @@ public class TTSdkHelper {
                         .setContentName(productId).build())//Name of the page or product.
                 .setContentType("inapp")//The type of content in the event.
                 .build();
-        TikTokBusinessSdk.trackTTEvent(info);
+        TikTokBusinessSdk.trackTTEvent(info);*/
         PL.i("tt trackPay finish");
 
     }
@@ -135,7 +123,7 @@ public class TTSdkHelper {
 
         SGameBaseRequestBean sGameBaseRequestBean = new SGameBaseRequestBean(context);
         //Report custom events
-        TTBaseEvent ttBaseEvent = TTBaseEvent.newBuilder(eventName) //event constant
+       /* TTBaseEvent ttBaseEvent = TTBaseEvent.newBuilder(eventName) //event constant
         //If you need to add eventID:
         //TTBaseEvent testInfo = TTBaseEvent.newBuilder(EventName.IN_APP_AD_IMPR.toString(), "<event_id value>")
                 .addProperty("currency", TTContentsEventConstants.Currency.USD) //The ISO 4217 currency code
@@ -149,7 +137,7 @@ public class TTSdkHelper {
                 .addProperty("roleLevel", sGameBaseRequestBean.getRoleLevel())
                 .addProperty("orderId", orderId)
                 .build();
-        TikTokBusinessSdk.trackTTEvent(ttBaseEvent);
+        TikTokBusinessSdk.trackTTEvent(ttBaseEvent);*/
         PL.i("tt_app_id trackEventRevenue finish eventName=" + eventName);
     }
 
@@ -161,7 +149,7 @@ public class TTSdkHelper {
             return;
         }
 
-        TTContentsEvent info = TTCheckoutEvent.newBuilder()
+       /* TTContentsEvent info = TTCheckoutEvent.newBuilder()
         .setDescription(productId)//Description of the item or page.
         .setCurrency(TTContentsEventConstants.Currency.USD)//The ISO 4217 currency code.
         .setValue(amount)//Total value of the order basket or items sold.
@@ -174,7 +162,7 @@ public class TTSdkHelper {
                 .setContentName(productId).build())//Name of the page or product.
         .setContentType("inapp")//The type of content in the event.
         .build();
-        TikTokBusinessSdk.trackTTEvent(info);
+        TikTokBusinessSdk.trackTTEvent(info);*/
         PL.i("tt trackCheckout finish");
 
     }
@@ -196,7 +184,7 @@ public class TTSdkHelper {
 //        standardEventNames.add("Achieve Level");
 
         String standardEventName = "";
-        if (eventName.equals(EventConstant.EventName.START_GUIDE.name())){
+        /*if (eventName.equals(EventConstant.EventName.START_GUIDE.name())){
             standardEventName = EventName.COMPLETE_TUTORIAL.toString();//"Complete Tutorial";
         }else if (eventName.equals(EventConstant.EventName.REGISTER_SUCCESS.name())){
             standardEventName = EventName.REGISTRATION.toString();//"Registration";
@@ -219,7 +207,7 @@ public class TTSdkHelper {
         }
         if (SStringUtil.isEmpty(standardEventName)){
             return eventName;
-        }
+        }*/
         return standardEventName;
     }
 }
