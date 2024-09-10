@@ -29,7 +29,7 @@ import java.util.List;
  * 处理Google支付3.0的帮助类
  */
 public class GBillingHelper implements PurchasesUpdatedListener {
-    private BillingClient billingClient;
+    private  static BillingClient billingClient;
     private static GBillingHelper gBillingHelper;
     private ArrayList<BillingHelperStatusCallback> mBillingCallbackList = new ArrayList<>();
     private boolean isBillingInit = false;
@@ -414,6 +414,12 @@ public class GBillingHelper implements PurchasesUpdatedListener {
             @Override
             public void run() {
 
+                if (billingClient == null){
+                    if (purchasesResponseListener != null){
+                        purchasesResponseListener.onQueryPurchasesResponse(null, null);
+                    }
+                    return;
+                }
                 billingClient.queryPurchasesAsync(QueryPurchasesParams.newBuilder().setProductType(BillingClient.ProductType.INAPP).build(), new PurchasesResponseListener() {
                             public void onQueryPurchasesResponse(BillingResult billingResult, List<Purchase> purchases) {
                                 // Process the result
