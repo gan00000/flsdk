@@ -85,6 +85,12 @@ android {
         sdk4 {//第4套
             dimension 'area'
             resValue "string", "sdk_inner_version", "v4"
+
+            //雷电
+            resValue "string", "wm_ld_app_id", "100181"
+            resValue "string", "wm_ld_app_key", "04ebca14c611f36862806d25167e4faf"  //ServiceKey: 5d6a9d7d572a2283cd728513bffb4691
+            resValue "string", "wm_ld_channel_id", "100000"
+            resValue "string", "wm_ld_sun_channel_id", "100001"
         }
 
         sdk5 {//第4套
