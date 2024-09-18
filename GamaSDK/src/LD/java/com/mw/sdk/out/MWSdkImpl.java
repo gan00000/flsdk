@@ -7,6 +7,7 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 import com.core.base.callback.SFCallBack;
+import com.core.base.utils.AppUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.ld.sdk.LDSdkManager;
@@ -292,25 +293,37 @@ public class MWSdkImpl extends BaseSdkImpl {
 
     }
 
-    @Override
-    public void shareLine(Activity activity, String content, ISdkCallBack iSdkCallBack) {
-    }
-
-    @Override
-    public void shareFacebook(Activity activity, String hashTag, String message, String shareLinkUrl, ISdkCallBack iSdkCallBack) {
-    }
-
-    @Override
-    public void share(Activity activity, String hashTag, String message, String shareLinkUrl, ISdkCallBack iSdkCallBack) {
-    }
+//    @Override
+//    public void shareLine(Activity activity, String content, ISdkCallBack iSdkCallBack) {
+//    }
+//
+//    @Override
+//    public void shareFacebook(Activity activity, String hashTag, String message, String shareLinkUrl, ISdkCallBack iSdkCallBack) {
+//    }
+//
+//    @Override
+//    public void share(Activity activity, String hashTag, String message, String shareLinkUrl, ISdkCallBack iSdkCallBack) {
+//    }
 
     @Override
     public void share(Activity activity, ThirdPartyType type, String hashTag, String message, String shareLinkUrl, String picPath, ISdkCallBack iSdkCallBack) {
+        AppUtil.openInOsWebApp(activity, " https://www.facebook.com/ldgameofficial");
     }
 
     @Override
     public void requestStoreReview(Activity activity, SFCallBack sfCallBack) {
 
+        if (sfCallBack != null){
+            sfCallBack.success(null,"");
+        }
+
+    }
+
+    @Override
+    public void showUpgradeAccountView(Activity activity, SFCallBack sfCallBack) {
+        if (sfCallBack != null){
+            sfCallBack.success(null,"");
+        }
     }
 
     @Override

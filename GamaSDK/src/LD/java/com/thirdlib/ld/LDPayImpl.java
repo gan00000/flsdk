@@ -27,6 +27,8 @@ import com.mw.sdk.utils.SdkUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
+
 public class LDPayImpl {
 
 
@@ -147,7 +149,8 @@ public class LDPayImpl {
         ldGamePayInfo.currencyType = result.getPayData().getLocalCurrency();    //当前游戏页面显示货币类型例如:TWD,USD,HKD等
         //PL.i("sku amount=" + (long) (skuAmount.doubleValue() * 100));
 //        ldGamePayInfo.commodityPrice = (long) (skuAmount.doubleValue() * 100);//当前游戏商品显示的价格，分为单位，long类型，例如如果是游戏显示0.99USD这里需要传99
-        ldGamePayInfo.commodityPrice = (long) (result.getPayData().getLocalAmount() * 100);
+        BigDecimal bigDecimal = BigDecimal.valueOf(result.getPayData().getLocalAmount()).multiply(BigDecimal.valueOf(100));
+        ldGamePayInfo.commodityPrice = bigDecimal.longValue();//(long) (result.getPayData().getLocalAmount() * 100);
 //该透传参数需要sdk_v2.2.0版本才支持，请注意更新sdk版本
         ldGamePayInfo.transparentParams = developerPayload;  //透传参数，该字段的值将在服务端SDK的支付成功的回调方法中返回
         LDSdkManager.getInstance().showChargeView(activity, ldGamePayInfo, new LDPayCallback() {
