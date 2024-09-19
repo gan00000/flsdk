@@ -208,7 +208,7 @@ public class TTSdkHelper {
 //        else if (eventName.equals(EventConstant.EventName.Initiate_Checkout.name())){
 //            standardEventName = TTContentsEventConstants.ContentsEventName.EVENT_NAME_CHECK_OUT;// "Checkout";
 //        }
-        else if (eventName.equals("Join_Ally")){
+        else if (eventName.equals("Upgrade_Account")){
             standardEventName = EventName.JOIN_GROUP.toString();//"JoinGroup";
         }else if (eventName.equals("Purchase_Over9")){//单笔超过9usd
             standardEventName = EventName.UNLOCK_ACHIEVEMENT.toString();//"Unlock Achievement";
