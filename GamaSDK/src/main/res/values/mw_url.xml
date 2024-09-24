@@ -24,5 +24,7 @@
     <!--客服-->
     <string name="mw_sdk_customer_url">https://platform.meowplayer.com/sdk/api/customer.page</string>
 
+    <!--    数数-->
+    <string name="mw_td_te_server_url"></string>
 
 </resources>
