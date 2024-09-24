@@ -136,12 +136,17 @@ public class SGoogleProxy {
 //	      activity.startActivityForResult(shareIntent, GOOGLE_SHARE_CODE);
 	}
 
+	private static FirebaseAnalytics analytics;
 	public static void firebaseAnalytics(Context context, String eventName, Bundle params) {
 		if (context == null || TextUtils.isEmpty(eventName)) {
 			return;
 		}
-		FirebaseAnalytics analytics = FirebaseAnalytics.getInstance(context);
-		analytics.logEvent(eventName, params);
+		if (analytics == null){
+			analytics = FirebaseAnalytics.getInstance(context);
+		}
+		if (analytics != null){
+			analytics.logEvent(eventName, params);
+		}
 	}
 
 /*

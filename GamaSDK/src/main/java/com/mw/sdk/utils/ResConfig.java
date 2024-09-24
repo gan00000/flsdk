@@ -227,7 +227,7 @@ public class ResConfig {
             PL.i("获取游戏assets配置文件: " + (properties != null ? properties.toString() : "失败"));
         }
         if (properties == null) {
-            PL.e("获取游戏assets配置文件失败");
+//            PL.e("获取游戏assets配置文件失败");
             return "";
         }
         return properties.getProperty(key, "");
