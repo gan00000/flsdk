@@ -210,33 +210,10 @@ android {
 
         }
 
-        sdk2 {
-
-            signingConfig signingConfigs.release_v2
-            applicationId "com.wanxian.mzxq"
-            minSdkVersion 21
-            targetSdkVersion 33
-            versionCode 10
-            versionName "1.0"
-            dimension "1"
-            resValue "string", "scheme", "mzxq"
-            resValue "string", "facebook_app_id", "855035868795821"
-            resValue "string", "facebook_client_token", "0872345a71b6e76c9247438a3f27b0b8"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider855035868795821" //启用分析
-            resValue "string", "fb_login_protocol_scheme", "fb855035868795821"
-            resValue "string", "facebook_app_name", "魔之序曲"
-            resValue "string", "line_channelId", "1657381968"
-            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow"
-
-            //每个游戏的demo设置 test
-            resValue "string", "sdk_name", "魔之序曲demo"
-
-        }
-
         sdk3 {
 
-            versionCode 26
-            versionName "2.3.26"
+            versionCode 1
+            versionName "1.0"
             dimension "1"
 
 
@@ -373,45 +350,39 @@ android {
 
         huawei {
 
-            signingConfig signingConfigs.release_v2
-            versionCode 10
-            versionName "1.0"
-            dimension "1"
-
-//            applicationId "com.wantang.xlzsg.huawei"
-//            minSdkVersion 21
-//            targetSdkVersion 33
-//            resValue "string", "scheme", "gwsg"
-//            resValue "string", "facebook_app_id", "1362551254507553"
-//            resValue "string", "facebook_client_token", "0a8e2080cba4d5aa1fe9d9dd65c04e58"
-//            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1362551254507553" //启用分析
-//            resValue "string", "fb_login_protocol_scheme", "fb1362551254507553"
-//            resValue "string", "facebook_app_name", "鬼武三國"
-////            resValue "string", "line_channelId", "1657882064"
-//            resValue "string", "channel_platform", "huawei"  //渠道区分,google包设置google,apk包设置"meow"
-
-
-            applicationId "com.mwyyz.huawei"
-            minSdkVersion 21
+            signingConfig signingConfigs.signv3
+            //base
+            applicationId "com.yuewan.tgru.huawei"
+            minSdkVersion 25
             targetSdkVersion 34
 
-            //base
-            resValue "string", "sdk_game_code", "mxwtw"
-            resValue "string", "sdk_app_key", "7c29c30164e0c36e7bc43399bca0c570"
+            resValue "string", "sdk_game_code", "tgru"
+            resValue "string", "sdk_app_key", "f2cce538ec5d36b4d725eab7ea227ed1"
             resValue "string", "sdk_more_language", "true"
-            resValue "string", "sdk_default_server_language", "zh_TW"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
-            resValue "string", "scheme", "mxwtw"
-            resValue "string", "channel_platform", "huawei"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore",huawei
+            resValue "string", "sdk_default_server_language", "ru_RU"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
+            resValue "string", "scheme", "tgen"
+            resValue "string", "channel_platform", "huawei"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
             //facebook
-            resValue "string", "facebook_app_id", "162167080205591"
-            resValue "string", "facebook_client_token", "a48a83f00864dbd713a292e2f6690317"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider16216" //启用分析
-            resValue "string", "fb_login_protocol_scheme", "fb162167080205591"
-            resValue "string", "facebook_app_name", "大魔王与菇勇者" //游戏名字
+            resValue "string", "facebook_app_id", "2204564839899628"
+            resValue "string", "facebook_client_token", "af097786d9eabaf84543666cd857bce2"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider2204564839899628"
+            resValue "string", "fb_login_protocol_scheme", "fb2204564839899628"
+            resValue "string", "facebook_app_name", "tgru" //游戏名字
+            //ad
+            resValue "string", "adjust_app_token", ""
+            resValue "string", "sdk_appflyer_dev_key", ""
+            //line
+            resValue "string", "line_channelId", ""
+            //naver
+            resValue "string", "naver_client_id", ""
+            resValue "string", "naver_client_secret", ""
+            //tt
+            resValue "string", "mw_tt_app_id", ""
+            //rustore渠道
+            resValue "string", "mw_vk_appid", ""
 
-            //每个游戏的demo设置 test
-            resValue "string", "sdk_name", "huweiDemo"
-
+            //每个游戏的demo设置 test,只是测试用，接到游戏不用写
+            resValue "string", "sdk_name", "huaweiDemo"
         }
 
         vn {
@@ -601,7 +572,6 @@ android {
             resValue "string", "mw_td_appid", "77e4d9f75abb4baab16213a662fe4e56"
             //=======================================sdk config end==========================
 
-
             //每个游戏的demo设置 test,只是测试用，接到游戏不用写
             resValue "string", "sdk_name", "krDemo"
 
@@ -668,6 +638,7 @@ boolean isNeedGoogleServices(){
 }
 
 if (isHuaweiFlavor()){
+    print('isHuaweiFlavor isHuaweiFlavor isHuaweiFlavor')
     apply plugin: 'com.huawei.agconnect'  //华为需要设置
 }else if (isNeedGoogleServices()){
 

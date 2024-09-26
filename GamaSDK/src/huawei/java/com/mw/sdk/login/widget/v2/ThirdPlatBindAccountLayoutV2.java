@@ -300,7 +300,7 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
             showName = getContext().getResources().getString(R.string.text_has_bind_tips_line);
         }else if (SLoginType.LOGIN_TYPE_HUAWEI.equals(accountModel.getLoginType())){
             imageResId = R.mipmap.icon_huawei_2;
-            showName = getContext().getResources().getString(R.string.text_has_bind_account_already);
+            showName = getContext().getResources().getString(R.string.text_has_upgrade_account);
         }else if (SLoginType.LOGIN_TYPE_MG.equals(accountModel.getLoginType())){
             imageResId = R.mipmap.img_persion;
             showName = getContext().getResources().getString(R.string.text_has_bind_tips_mw);

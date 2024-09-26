@@ -54,7 +54,7 @@ android {
         release {
 //            multiDexEnabled true //Add this
 //            shrinkResources true  //压缩资源
-            minifyEnabled true
+//            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
@@ -68,14 +68,14 @@ android {
     flavorDimensions "1"
     productFlavors {
 
-        sdk1 {//第一套
-            dimension '1'
-            resValue "string", "sdk_inner_version", "v1"
-        }
-        sdk2 {//第二套
-            dimension '1'
-            resValue "string", "sdk_inner_version", "v2"
-        }
+//        sdk1 {//第一套
+//            dimension '1'
+//            resValue "string", "sdk_inner_version", "v1"
+//        }
+//        sdk2 {//第二套
+//            dimension '1'
+//            resValue "string", "sdk_inner_version", "v2"
+//        }
 
         sdk3 {//第三套
             dimension '1'
@@ -214,8 +214,10 @@ dependencies {
     //========================
 
     //huawei sdk
-    huaweiImplementation 'com.huawei.hms:hwid:6.9.0.301'
-    huaweiImplementation 'com.huawei.hms:iap:6.4.0.301'
+//    huaweiImplementation 'com.huawei.hms:hwid:6.9.0.301'
+//    huaweiImplementation 'com.huawei.hms:iap:6.4.0.301'
+    huaweiImplementation 'com.huawei.hms:hwid:6.12.0.300'
+    huaweiImplementation 'com.huawei.hms:iap:6.13.0.300'
 
     //qooapp sdk
     QooAppImplementation(name: 'qooapp-opensdk-2.0.6', ext: 'aar')

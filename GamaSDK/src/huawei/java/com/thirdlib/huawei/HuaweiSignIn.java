@@ -142,6 +142,7 @@ public class HuaweiSignIn {
 	 */
 	private void silentSignInByHwId(Activity activity, HWSignInCallBack mSignInCallBack) {
 
+		PL.d("huawei silentSignInByHwId");
 		this.signInCallBack = mSignInCallBack;
 
 		// 1、配置登录请求参数AccountAuthParams，包括请求用户id(openid、unionid)、email、profile（昵称、头像）等。
@@ -159,6 +160,7 @@ public class HuaweiSignIn {
 		task.addOnSuccessListener(new OnSuccessListener<AuthAccount>() {
 			@Override
 			public void onSuccess(AuthAccount authAccount) {
+				PL.d("huawei silentSignInByHwId onSuccess");
 				// 静默登录成功，处理返回的帐号对象AuthAccount，获取帐号信息
 				dealWithResultOfSignIn(authAccount);
 			}
@@ -166,6 +168,9 @@ public class HuaweiSignIn {
 		task.addOnFailureListener(new OnFailureListener() {
 			@Override
 			public void onFailure(Exception e) {
+
+				PL.d("huawei silentSignInByHwId onFailure");
+				e.printStackTrace();
 				// 静默登录失败，使用getSignInIntent()方法进行前台显式登录
 				if (e instanceof ApiException) {
 					ApiException apiException = (ApiException) e;

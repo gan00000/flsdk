@@ -5,7 +5,6 @@
 
     <application
         android:name="com.game.sdk.demo.MyApplication"
-        android:allowBackup="true"
         android:label="@string/sdk_name"
         android:resizeableActivity="false"
         android:usesCleartextTraffic="true"
