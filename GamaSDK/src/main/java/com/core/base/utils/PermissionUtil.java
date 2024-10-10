@@ -1,15 +1,11 @@
 package com.core.base.utils;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import androidx.core.app.ActivityCompat;
-import android.util.Log;
-
-import java.util.ArrayList;
 
 /*
 

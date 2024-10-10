@@ -772,31 +772,31 @@ public class SdkUtil {
 
     private static final String SDK_SHOW_TERM = "sdk_show_term";
     public static void saveShowTerm(Context context, boolean isRead){
-        SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE,SDK_SHOW_TERM, isRead);
+        SPUtil.saveBoolean(context, SdkUtil.SDK_SP_FILE,SDK_SHOW_TERM, isRead);
     }
     public static boolean getShowTerm(Context context){
-        return SPUtil.getSimpleBoolean(context, SdkUtil.SDK_SP_FILE, SDK_SHOW_TERM);
+        return SPUtil.getBoolean(context, SdkUtil.SDK_SP_FILE, SDK_SHOW_TERM);
     }
 
     private static final String MW_AGE_QUA = "MW_SDK_AGE_QUA";
     public static void saveAgeQua14(Context context, boolean agree){
-        SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE,MW_AGE_QUA, agree);
+        SPUtil.saveBoolean(context, SdkUtil.SDK_SP_FILE,MW_AGE_QUA, agree);
     }
     public static boolean getAgeQua14(Context context){
-        return SPUtil.getSimpleBoolean(context, SdkUtil.SDK_SP_FILE, MW_AGE_QUA);
+        return SPUtil.getBoolean(context, SdkUtil.SDK_SP_FILE, MW_AGE_QUA);
     }
 
     /**
      * 保存首次登入时间,userid为key
      */
     public static void saveFirstLoginDate(Context context, String userid){
-        SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE, userid, System.currentTimeMillis());
+        SPUtil.saveLong(context, SdkUtil.SDK_SP_FILE, userid, System.currentTimeMillis());
     }
     /**
      * 保存首次登入时间,userid为key
      */
     public static long getFirstLoginDate(Context context, String userid){
-        return SPUtil.getSimpleLong(context, SdkUtil.SDK_SP_FILE, userid);
+        return SPUtil.getLong(context, SdkUtil.SDK_SP_FILE, userid);
     }
 
     private static final String SP_KEY_USER_INFO = "SP_KEY_USER_INFO_";

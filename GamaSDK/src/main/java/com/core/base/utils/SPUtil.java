@@ -20,7 +20,7 @@ public class SPUtil {
 	 * @param key
 	 * @param info
 	 */
-	public static void saveSimpleInfo(Context ctx,String fileName,String key,String info){
+	public static void saveSimpleInfo(Context ctx, String fileName, String key, String info){
 		Map<String, String> map = new HashMap<String, String>();
 		map.put(key, info);
 		save(ctx, fileName , map);
@@ -44,7 +44,7 @@ public class SPUtil {
 	 * @param key
 	 * @param info
 	 */
-	public static void saveSimpleInfo(Context ctx,String fileName,String key,boolean info){
+	public static void saveBoolean(Context ctx, String fileName, String key, boolean info){
 		Map<String, Boolean> map = new HashMap<String, Boolean>();
 		map.put(key, info);
 		save(ctx, fileName , map);
@@ -56,7 +56,7 @@ public class SPUtil {
 	 * @param key
 	 * @return Boolean
 	 */
-	public static boolean getSimpleBoolean(Context context,String fileName,String key){
+	public static boolean getBoolean(Context context, String fileName, String key){
 		SharedPreferences shared =  context.getSharedPreferences(fileName, Activity.MODE_PRIVATE);
 		return shared.getBoolean(key,false);
 	}
@@ -67,7 +67,7 @@ public class SPUtil {
 	 * @param key
 	 * @param info
 	 */
-	public static void saveSimpleInfo(Context ctx,String fileName,String key,long info){
+	public static void saveLong(Context ctx,String fileName,String key,Long info){
 		Map<String, Long> map = new HashMap<String, Long>();
 		map.put(key, info);
 		save(ctx, fileName , map);
@@ -79,7 +79,7 @@ public class SPUtil {
 	 * @param key
 	 * @return Long
 	 */
-	public static long getSimpleLong(Context context,String fileName,String key){
+	public static long getLong(Context context,String fileName,String key){
 		SharedPreferences shared =  context.getSharedPreferences(fileName, Activity.MODE_PRIVATE);
 		return shared.getLong(key,0);
 	}
@@ -90,11 +90,11 @@ public class SPUtil {
 	 * @param key
 	 * @param info
 	 */
-	public static void saveSimpleInfo(Context ctx,String fileName,String key,double info){
-		Map<String, String> map = new HashMap<String, String>();
-		map.put(key, String.valueOf(info));
-		save(ctx, fileName , map);
-	}
+//	public static void saveDouble(Context ctx,String fileName,String key,double info){
+//		Map<String, String> map = new HashMap<String, String>();
+//		map.put(key, String.valueOf(info));
+//		save(ctx, fileName , map);
+//	}
 	/**
 	 * 获取Double类型数据
 	 * @param context
@@ -102,10 +102,10 @@ public class SPUtil {
 	 * @param key
 	 * @return Double
 	 */
-	public static double getSimpleDouble(Context context,String fileName,String key){
-		SharedPreferences shared =  context.getSharedPreferences(fileName, Activity.MODE_PRIVATE);
-		return Double.valueOf(shared.getString(key, "0"));
-	}
+//	public static double getSimpleDouble(Context context,String fileName,String key){
+//		SharedPreferences shared =  context.getSharedPreferences(fileName, Activity.MODE_PRIVATE);
+//		return Double.valueOf(shared.getString(key, "0"));
+//	}
 	
 	//=======================================整型============================================
 	/**
@@ -114,7 +114,7 @@ public class SPUtil {
 	 * @param key
 	 * @param info
 	 */
-	public static void saveSimpleInteger(Context ctx,String fileName,String key,int info){
+	public static void saveInt(Context ctx,String fileName,String key, Integer info){
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put(key, info);
 		save(ctx, fileName , map);
@@ -126,9 +126,9 @@ public class SPUtil {
 	 * @param key
 	 * @return Integer
 	 */
-	public static int getSimpleInteger(Context context,String fileName,String key){
+	public static int getInt(Context context,String fileName,String key){
 		SharedPreferences shared =  context.getSharedPreferences(fileName, Activity.MODE_PRIVATE);
-		return shared.getInt(key,0);
+		return shared.getInt(key, 0);
 	}
 	//=======================================字符型============================================
 	
@@ -138,29 +138,28 @@ public class SPUtil {
 	 * @param key
 	 * @param info
 	 */
-	public static void saveSimpleInfo(Context ctx,String fileName,String key,char info){
-		Map<String, String> map = new HashMap<String, String>();
-		map.put(key, String.valueOf(info));
-		save(ctx, fileName , map);
-	}
+//	public static void saveSimpleInfo(Context ctx,String fileName,String key,char info){
+//		Map<String, String> map = new HashMap<String, String>();
+//		map.put(key, String.valueOf(info));
+//		save(ctx, fileName , map);
+//	}
 
-	public static char getSimpleCharacter(Context context,String fileName,String key){
-		SharedPreferences shared =  context.getSharedPreferences(fileName, Activity.MODE_PRIVATE);
-		return shared.getString(key,"").charAt(0);
-	}
+//	public static char getSimpleCharacter(Context context,String fileName,String key){
+//		SharedPreferences shared =  context.getSharedPreferences(fileName, Activity.MODE_PRIVATE);
+//		return shared.getString(key,"").charAt(0);
+//	}
 
 	//=======================================Float型============================================
-	public static void saveSimpleInfo(Context ctx,String fileName,String key,Float info){
+	public static void saveFloat(Context ctx,String fileName,String key, Float info){
 		Map<String, Float> map = new HashMap<String, Float>();
 		map.put(key, info);
 		save(ctx, fileName , map);
 	}
 
-	public static float getSimpleFloat(Context ctx,String fileName,String key){
-		SharedPreferences shared =  ctx.getSharedPreferences(fileName, Activity.MODE_PRIVATE);
-		return shared.getFloat(key, 0);
+	public static float getFloat(Context context,String fileName,String key){
+		SharedPreferences shared =  context.getSharedPreferences(fileName, Activity.MODE_PRIVATE);
+		return shared.getFloat(key,0.0f);
 	}
-
 
 	//=======================================存储对象============================================
 	

@@ -187,7 +187,7 @@ public class BaseSdkImpl implements IMWSDK {
         AFHelper.applicationOnCreate(application);
         AdjustHelper.init(application);
         TTSdkHelper.init(application.getApplicationContext());
-        SPUtil.saveSimpleInfo(application.getApplicationContext(), SdkUtil.SDK_SP_FILE,"sdk_applicationOnCreate_call", true);
+        SPUtil.saveBoolean(application.getApplicationContext(), SdkUtil.SDK_SP_FILE,"sdk_applicationOnCreate_call", true);
 
     }
 
@@ -230,7 +230,7 @@ public class BaseSdkImpl implements IMWSDK {
         sFacebookProxy = new SFacebookProxy(activity.getApplicationContext());
         isInitSdk = true;
 
-        boolean isCall = SPUtil.getSimpleBoolean(activity.getApplicationContext(), SdkUtil.SDK_SP_FILE,"sdk_applicationOnCreate_call");
+        boolean isCall = SPUtil.getBoolean(activity.getApplicationContext(), SdkUtil.SDK_SP_FILE,"sdk_applicationOnCreate_call");
         if (!isCall){
             PL.e("sdk IMWSDK.applicationOnCreate(Application application) not call, plase call IMWSDK.applicationOnCreate(Application application) in app Application");
             ToastUtils.toastL(activity, "Error: Plase call IMWSDK.applicationOnCreate(Application application) in app Application first");
@@ -308,7 +308,7 @@ public class BaseSdkImpl implements IMWSDK {
             }
         });
 
-        SPUtil.saveSimpleInfo(activity, SdkUtil.SDK_SP_FILE,"sdk_registerRoleInfo_call", true);
+        SPUtil.saveBoolean(activity, SdkUtil.SDK_SP_FILE,"sdk_registerRoleInfo_call", true);
     }
 
     public void checkPreRegData(final Activity activity, ISdkCallBack iSdkCallBack) {
@@ -874,7 +874,7 @@ public class BaseSdkImpl implements IMWSDK {
             @Override
             public void run() {
 
-                boolean isCall = SPUtil.getSimpleBoolean(activity.getApplicationContext(), SdkUtil.SDK_SP_FILE,"sdk_registerRoleInfo_call");
+                boolean isCall = SPUtil.getBoolean(activity.getApplicationContext(), SdkUtil.SDK_SP_FILE,"sdk_registerRoleInfo_call");
                 if (!isCall){
                     PL.e("sdk IMWSDK.registerRoleInfo() not call, plase call IMWSDK.registerRoleInfo() ");
                     ToastUtils.toastL(activity, "Error: Plase call IMWSDK.registerRoleInfo() when get role info");
