@@ -1,7 +1,9 @@
 package com.thirdlib.vk;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -53,12 +55,18 @@ public class VKPurchaseManger {
         return ruStoreBillingClient;
     }
 
-    public void initBillingClient(Context context){
-        checkPurchaseAvailiability(context);
+    public void onCreate(Activity activity, Bundle savedInstanceState){
+        if (savedInstanceState == null) {
+            getBillingClient(activity).onNewIntent(activity.getIntent());
+        }
     }
 
-    public void onNewIntent(Context context,Intent intent) {
-        getBillingClient(context).onNewIntent(intent);
+    public void onNewIntent(Activity activity, Intent intent) {
+        getBillingClient(activity).onNewIntent(intent);
+    }
+
+    public void initBillingClient(Context context){
+        checkPurchaseAvailiability(context);
     }
 
     public void checkPurchaseAvailiability(Context context) {

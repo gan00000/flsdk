@@ -9,6 +9,7 @@ import android.content.IntentSender;
 import com.core.base.base64.Base64;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.PL;
+import com.core.base.utils.SPUtil;
 import com.core.base.utils.SStringUtil;
 import com.google.gson.Gson;
 import com.huawei.hmf.tasks.OnFailureListener;
@@ -53,6 +54,7 @@ import java.util.List;
 
 public class HuaweiPayImpl {
 
+    private static final String hw_pay_file = "hw_pay_file.xml";
     public static final int HW_IAP_REQUEST_CODE_ENVREADY = 6660;
     public static final int HW_IAP_REQUEST_CODE_PURCHASE = 6661;
 
@@ -404,7 +406,18 @@ public class HuaweiPayImpl {
                 public void fail(GPExchangeRes result, String msg) {
                     //test
                     //consumeOwnedPurchase(mActivity, inAppPurchaseDataBean);
+                    if (inAppPurchaseDataBean != null && SStringUtil.isNotEmpty(inAppPurchaseDataBean.getOrderID())) {
+                        String orderId = inAppPurchaseDataBean.getOrderID();
+                        int times = SPUtil.getInt(mActivity, hw_pay_file, orderId);
+                        if (times >= 4){//5次还没能发币直接消耗掉
+                            consumeOwnedPurchase(mActivity, inAppPurchaseDataBean);
+                            SPUtil.saveInt(mActivity, hw_pay_file, orderId, 0);
+                        }else {
+                            PL.i("requestSendStone_huawei fail times=" + times);
+                            SPUtil.saveInt(mActivity, hw_pay_file, orderId, times + 1);
+                        }
 
+                    }
                     if (result != null && SStringUtil.isNotEmpty(result.getMessage())) {
                         handlePayFail(result.getMessage());
                     }else{
