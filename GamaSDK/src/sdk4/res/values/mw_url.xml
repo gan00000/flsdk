@@ -44,5 +44,7 @@
     <!--    数数-->
     <string name="mw_td_te_server_url">https://shushu.luckyyx.com/</string>
 
+    <string name="mw_sdk_mini_game_url">https://member.luckyyx.com/sdk/jump/%s.html</string>
+
 </resources>
 

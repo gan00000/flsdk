@@ -199,6 +199,8 @@ public interface IMWSDK extends IGameLifeCycle {
 
     public void openUrlByBrowser(Activity activity,String url);
 
+    public void openSdkGame(Activity activity, ISdkCallBack iSdkCallBack);
+
 //    public void setSwitchAccountListener(Activity activity, ISdkCallBack sdkCallBack);
 
 //    public ISdkCallBack getSwitchAccountCallback();

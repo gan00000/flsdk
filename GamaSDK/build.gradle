@@ -54,7 +54,7 @@ android {
         release {
 //            multiDexEnabled true //Add this
 //            shrinkResources true  //压缩资源
-//            minifyEnabled true
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
@@ -183,6 +183,7 @@ dependencies {
     implementation 'com.facebook.android:facebook-share:17.0.0'
     // Facebook Messenger only
     implementation 'com.facebook.android:facebook-messenger:17.0.0'
+    api 'com.facebook.android:facebook-applinks:17.0.0'
     //line
 //    implementation 'com.linecorp:linesdk:5.0.1'
 

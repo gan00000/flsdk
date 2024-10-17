@@ -27,4 +27,6 @@
     <!--    数数-->
     <string name="mw_td_te_server_url"></string>
 
+    <string name="mw_sdk_mini_game_url"></string>
+
 </resources>

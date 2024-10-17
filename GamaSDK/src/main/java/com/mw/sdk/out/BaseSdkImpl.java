@@ -27,6 +27,7 @@ import com.core.base.utils.SPUtil;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.SignatureUtil;
 import com.core.base.utils.ToastUtils;
+import com.facebook.applinks.AppLinkData;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -36,6 +37,7 @@ import com.google.android.play.core.review.ReviewManager;
 import com.google.android.play.core.review.ReviewManagerFactory;
 import com.mw.base.bean.SPayType;
 import com.mw.sdk.BuildConfig;
+import com.mw.sdk.MWBaseWebActivity;
 import com.mw.sdk.MWWebPayActivity;
 import com.mw.sdk.R;
 import com.mw.sdk.act.ActExpoView;
@@ -1583,7 +1585,83 @@ public class BaseSdkImpl implements IMWSDK {
         AppUtil.openInOsWebApp(activity,sGameBaseRequestBean.createPreRequestUrl());
     }
 
-//    @Override
+    @Override
+    public void openSdkGame(Activity activity, ISdkCallBack iSdkCallBack) {
+
+        PL.i("openSdkGame...");
+
+        boolean isOpenSdkGame = SPUtil.getBoolean(activity, SdkUtil.SDK_SP_FILE, "openSdkGame_is_open");
+        if (isOpenSdkGame){
+            if (iSdkCallBack != null){
+                iSdkCallBack.success();
+            }
+            return;
+        }
+        SPUtil.saveBoolean(activity, SdkUtil.SDK_SP_FILE, "openSdkGame_is_open", true);
+        AppLinkData.fetchDeferredAppLinkData(activity, new AppLinkData.CompletionHandler() {
+            @Override
+            public void onDeferredAppLinkDataFetched(AppLinkData appLinkData) {
+
+                SLoginResponse sLoginResponse = SdkUtil.getCurrentUserLoginResponse(activity);
+                if (sLoginResponse != null && sLoginResponse.getData() != null && sLoginResponse.getData().getIsTest()){
+                    if (iSdkCallBack != null){
+                        iSdkCallBack.success();
+                    }
+                    return;
+                }
+                // Process app link data
+                if (appLinkData != null && appLinkData.getAppLinkData() != null){
+                    PL.i("onDeferredAppLinkDataFetched=" + appLinkData.getAppLinkData().toString());
+                    showSdkGame(activity, iSdkCallBack);
+                }else {
+                    PL.i("onDeferredAppLinkDataFetched is no data");
+                    if (iSdkCallBack != null){
+                        iSdkCallBack.success();
+                    }
+                }
+            }
+        });
+
+    }
+
+    private static void showSdkGame(Activity activity, ISdkCallBack iSdkCallBack) {
+
+        String miniGameUrl = activity.getString(R.string.mw_sdk_mini_game_url);
+        if (SStringUtil.isEmpty(miniGameUrl)){
+            if (iSdkCallBack != null){
+                iSdkCallBack.success();
+            }
+            return;
+        }
+
+        miniGameUrl = String.format(miniGameUrl, ResConfig.getGameCode(activity));
+        SGameBaseRequestBean sGameBaseRequestBean = new SGameBaseRequestBean(activity);
+        sGameBaseRequestBean.setCompleteUrl(miniGameUrl);
+
+//        Intent csIntent = MWBaseWebActivity.create(activity,"", sGameBaseRequestBean.createPreRequestUrl());
+//        activity.startActivity(csIntent);
+
+        SWebViewLayout sWebViewLayout = new SWebViewLayout(activity);
+        sWebViewLayout.getTitleHeaderView().setVisibility(View.GONE);
+
+        SWebViewDialog webViewDialog = new SWebViewDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen, sWebViewLayout, sWebViewLayout.getsWebView(), sWebViewLayout.getBackImageView());
+
+        webViewDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                if (iSdkCallBack != null){
+                    iSdkCallBack.success();
+                }
+            }
+        });
+
+        webViewDialog.setWebUrl(sGameBaseRequestBean.createPreRequestUrl());
+        webViewDialog.show();
+
+//        openUrlByBrowser(activity, "http://test-game.hzwxbz999.cn/unitytest0730/index.html");
+    }
+
+    //    @Override
 //    public void setSwitchAccountListener(Activity activity, ISdkCallBack sdkCallBack) {
 //        this.switchAccountCallBack = sdkCallBack;
 //    }

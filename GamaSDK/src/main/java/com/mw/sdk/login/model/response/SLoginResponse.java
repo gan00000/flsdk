@@ -85,6 +85,15 @@ public class SLoginResponse extends BaseResponseModel {
         private String telephone;
 
         private String area;//用户地区
+        private boolean isTest;//是否是测试用户
+
+        public boolean getIsTest() {
+            return isTest;
+        }
+
+        public void setIsTest(boolean isTest) {
+            this.isTest = isTest;
+        }
 
         public String getArea() {
             return area;
