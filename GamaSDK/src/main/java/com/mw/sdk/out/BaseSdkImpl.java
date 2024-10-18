@@ -27,6 +27,7 @@ import com.core.base.utils.SPUtil;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.SignatureUtil;
 import com.core.base.utils.ToastUtils;
+import com.facebook.FacebookSdk;
 import com.facebook.applinks.AppLinkData;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -380,6 +381,24 @@ public class BaseSdkImpl implements IMWSDK {
         if (!isInitSdk) {
             initSDK(activity, SGameLanguage.zh_TW);
         }
+
+        // Get user consent
+        FacebookSdk.setAutoInitEnabled(true);
+        FacebookSdk.fullyInitialize();
+        AppLinkData.fetchDeferredAppLinkData(activity, new AppLinkData.CompletionHandler() {
+            @Override
+            public void onDeferredAppLinkDataFetched(AppLinkData appLinkData) {
+
+                // Process app link data
+                if (appLinkData != null && appLinkData.getTargetUri() != null){
+                    PL.i("onDeferredAppLinkDataFetched=" + appLinkData.getTargetUri().toString());
+                    SPUtil.saveSimpleInfo(activity, SdkUtil.SDK_SP_FILE, "Sdk_DeferredAppLinkData", appLinkData.getTargetUri().toString());
+                }else {
+                    PL.i("onDeferredAppLinkDataFetched is no data");
+                    SPUtil.saveSimpleInfo(activity, SdkUtil.SDK_SP_FILE, "Sdk_DeferredAppLinkData", "");
+                }
+            }
+        });
 
         ConfigRequest.requestBaseCfg(activity.getApplicationContext());//加载配置
         ConfigRequest.requestAreaCodeInfo(activity.getApplicationContext());
@@ -1605,13 +1624,16 @@ public class BaseSdkImpl implements IMWSDK {
             return;
         }
 
+        // Get user consent
+        /*FacebookSdk.setAutoInitEnabled(true);
+        FacebookSdk.fullyInitialize();
         AppLinkData.fetchDeferredAppLinkData(activity, new AppLinkData.CompletionHandler() {
             @Override
             public void onDeferredAppLinkDataFetched(AppLinkData appLinkData) {
 
                 // Process app link data
-                if (appLinkData != null && appLinkData.getAppLinkData() != null){
-                    PL.i("onDeferredAppLinkDataFetched=" + appLinkData.getAppLinkData().toString());
+                if (appLinkData != null && appLinkData.getTargetUri() != null){
+                    PL.i("onDeferredAppLinkDataFetched=" + appLinkData.getTargetUri().toString());
                     showSdkGame(activity, iSdkCallBack);
                 }else {
                     PL.i("onDeferredAppLinkDataFetched is no data");
@@ -1620,7 +1642,17 @@ public class BaseSdkImpl implements IMWSDK {
                     }
                 }
             }
-        });
+        });*/
+
+        String deferredAppLinkDataStr = SPUtil.getSimpleString(activity, SdkUtil.SDK_SP_FILE, "Sdk_DeferredAppLinkData");
+        PL.i("onDeferredAppLinkDataFetched=" + deferredAppLinkDataStr);
+        if (SStringUtil.isNotEmpty(deferredAppLinkDataStr)){
+            showSdkGame(activity, iSdkCallBack);
+        }else {
+            if (iSdkCallBack != null){
+                iSdkCallBack.success();
+            }
+        }
 
     }
 
