@@ -1609,6 +1609,12 @@ public class BaseSdkImpl implements IMWSDK {
 
         PL.i("openSdkGame...");
 
+        SLoginResponse sLoginResponse = SdkUtil.getCurrentUserLoginResponse(activity);
+        if (sLoginResponse != null && sLoginResponse.getData() != null && sLoginResponse.getData().getIsTest()){
+            showSdkGame(activity, iSdkCallBack);//测试用户直接显示
+            return;
+        }
+
         boolean isOpenSdkGame = SPUtil.getBoolean(activity, SdkUtil.SDK_SP_FILE, "openSdkGame_is_open");
         if (isOpenSdkGame){
             if (iSdkCallBack != null){
@@ -1617,12 +1623,6 @@ public class BaseSdkImpl implements IMWSDK {
             return;
         }
         SPUtil.saveBoolean(activity, SdkUtil.SDK_SP_FILE, "openSdkGame_is_open", true);
-
-        SLoginResponse sLoginResponse = SdkUtil.getCurrentUserLoginResponse(activity);
-        if (sLoginResponse != null && sLoginResponse.getData() != null && sLoginResponse.getData().getIsTest()){
-            showSdkGame(activity, iSdkCallBack);//测试用户直接显示
-            return;
-        }
 
         // Get user consent
         /*FacebookSdk.setAutoInitEnabled(true);
