@@ -10,6 +10,7 @@ import android.content.Intent;
 public interface IGameLifeCycle {
 
     void onCreate(Activity activity);
+    void onStart(Activity activity);
 
     void onResume(Activity activity);
 

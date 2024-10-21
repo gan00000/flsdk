@@ -1,10 +1,13 @@
 package com.mw.sdk.out;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
@@ -38,7 +41,6 @@ import com.google.android.play.core.review.ReviewManager;
 import com.google.android.play.core.review.ReviewManagerFactory;
 import com.mw.base.bean.SPayType;
 import com.mw.sdk.BuildConfig;
-import com.mw.sdk.MWBaseWebActivity;
 import com.mw.sdk.MWWebPayActivity;
 import com.mw.sdk.R;
 import com.mw.sdk.act.ActExpoView;
@@ -137,6 +139,9 @@ public class BaseSdkImpl implements IMWSDK {
 //    private ISdkCallBack switchAccountCallBack;
 
     private long regRoleInfoTimestamp;
+
+    private SharedPreferences googleDeepLinkPreferences;
+    private SharedPreferences.OnSharedPreferenceChangeListener deepLinkListener;
 
     public BaseSdkImpl() {
 //        iLogin = ObjFactory.create(DialogLoginImpl.class);
@@ -382,23 +387,50 @@ public class BaseSdkImpl implements IMWSDK {
             initSDK(activity, SGameLanguage.zh_TW);
         }
 
-        // Get user consent
-        FacebookSdk.setAutoInitEnabled(true);
-        FacebookSdk.fullyInitialize();
-        AppLinkData.fetchDeferredAppLinkData(activity, new AppLinkData.CompletionHandler() {
-            @Override
-            public void onDeferredAppLinkDataFetched(AppLinkData appLinkData) {
+        //==============deep link=====================
+        SLoginResponse sLoginResponse = SdkUtil.getCurrentUserLoginResponse(activity);//启动过不在获取
+        if (sLoginResponse == null){
+            // Get user consent
+            FacebookSdk.setAutoInitEnabled(true);
+            FacebookSdk.fullyInitialize();
+            AppLinkData.fetchDeferredAppLinkData(activity, new AppLinkData.CompletionHandler() {
+                @Override
+                public void onDeferredAppLinkDataFetched(AppLinkData appLinkData) {
 
-                // Process app link data
-                if (appLinkData != null && appLinkData.getTargetUri() != null){
-                    PL.i("onDeferredAppLinkDataFetched=" + appLinkData.getTargetUri().toString());
-                    SPUtil.saveSimpleInfo(activity, SdkUtil.SDK_SP_FILE, "Sdk_DeferredAppLinkData", appLinkData.getTargetUri().toString());
-                }else {
-                    PL.i("onDeferredAppLinkDataFetched is no data");
-                    SPUtil.saveSimpleInfo(activity, SdkUtil.SDK_SP_FILE, "Sdk_DeferredAppLinkData", "");
+                    // Process app link data
+                    if (appLinkData != null && appLinkData.getTargetUri() != null){
+                        PL.i("fb onDeferredAppLinkDataFetched=" + appLinkData.getTargetUri().toString());
+                        SdkUtil.saveDeepLink(activity, appLinkData.getTargetUri().toString());
+                    }else {
+                        PL.i("fb onDeferredAppLinkDataFetched is no data");
+                        //SdkUtil.saveDeepLink(activity, "");
+                    }
                 }
+            });
+
+            googleDeepLinkPreferences = activity.getSharedPreferences("google.analytics.deferred.deeplink.prefs", MODE_PRIVATE);
+            deepLinkListener = (sharedPreferences, key) -> {
+                PL.i("Deep link changed");
+                if ("deeplink".equals(key)) {
+                    String deeplink = sharedPreferences.getString(key, null);
+                    //Double cTime = Double.longBitsToDouble(sharedPreferences.getLong("timestamp", 0));
+                    PL.i("Deep link retrieved: " + deeplink);
+                    if (SStringUtil.isEmpty(deeplink)){
+                        PL.i("The deep link retrieval failed or empty");
+                        //SdkUtil.saveDeepLink(activity, "");
+                    }else {
+                        SdkUtil.saveDeepLink(activity, deeplink);
+                    }
+                }
+            };
+
+            if (googleDeepLinkPreferences != null && deepLinkListener != null) {
+                PL.i("googleDeepLinkPreferences  registerOnSharedPreferenceChangeListener");
+                googleDeepLinkPreferences.registerOnSharedPreferenceChangeListener(deepLinkListener);
             }
-        });
+        }
+        //===========================end=======
+
 
         ConfigRequest.requestBaseCfg(activity.getApplicationContext());//加载配置
         ConfigRequest.requestAreaCodeInfo(activity.getApplicationContext());
@@ -411,6 +443,11 @@ public class BaseSdkImpl implements IMWSDK {
         iPay = IPayFactory.create(activity);
         iPay.onCreate(activity);
 
+    }
+
+    @Override
+    public void onStart(Activity activity) {
+        PL.i("IMWSDK onStart");
     }
 
     @Override
@@ -514,6 +551,11 @@ public class BaseSdkImpl implements IMWSDK {
                 if (iPay != null) {
                     iPay.onStop(activity);
                 }
+                if (googleDeepLinkPreferences != null && deepLinkListener != null){
+                    googleDeepLinkPreferences.unregisterOnSharedPreferenceChangeListener(deepLinkListener);
+                    deepLinkListener = null;
+                }
+
             }
         });
     }
@@ -1644,8 +1686,8 @@ public class BaseSdkImpl implements IMWSDK {
             }
         });*/
 
-        String deferredAppLinkDataStr = SPUtil.getSimpleString(activity, SdkUtil.SDK_SP_FILE, "Sdk_DeferredAppLinkData");
-        PL.i("onDeferredAppLinkDataFetched=" + deferredAppLinkDataStr);
+        String deferredAppLinkDataStr = SdkUtil.getDeepLink(activity);
+        PL.i("openSdkGame deferredAppLinkDataStr=" + deferredAppLinkDataStr);
         if (SStringUtil.isNotEmpty(deferredAppLinkDataStr)){
             showSdkGame(activity, iSdkCallBack);
         }else {

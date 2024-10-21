@@ -1070,4 +1070,12 @@ public class SdkUtil {
         return xFloatMenuResData;
     }
 
+    private static final String Sdk_DeferredAppLinkData = "Sdk_DeferredAppLinkData";
+    public static void saveDeepLink(Context context, String deepLink){
+        SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE, Sdk_DeferredAppLinkData, deepLink);
+    }
+    public static String getDeepLink(Context context){
+        return SPUtil.getSimpleString(context, SdkUtil.SDK_SP_FILE, Sdk_DeferredAppLinkData);
+    }
+
 }

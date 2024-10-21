@@ -385,6 +385,11 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
     }
 
     @Override
+    public void onStart(Activity activity) {
+
+    }
+
+    @Override
     public void onResume(Activity activity) {
         PL.i( "onResume");
     }

@@ -45,6 +45,11 @@ public class DialogLoginImpl implements ILogin {
     }
 
     @Override
+    public void onStart(Activity activity) {
+
+    }
+
+    @Override
     public void onResume(Activity activity) {
 
     }
