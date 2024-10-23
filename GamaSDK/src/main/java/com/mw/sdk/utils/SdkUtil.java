@@ -1078,4 +1078,14 @@ public class SdkUtil {
         return SPUtil.getSimpleString(context, SdkUtil.SDK_SP_FILE, Sdk_DeferredAppLinkData);
     }
 
+    private static final String Sdk_APP_OPEN_COUNT = "Sdk_APP_OPEN_COUNT";
+    public static void saveAppOpenCount(Context context){
+        int m = getAppOpenCount(context);
+        PL.i("getAppOpenCount=" + m);
+        SPUtil.saveInt(context, SdkUtil.SDK_SP_FILE, Sdk_APP_OPEN_COUNT, m + 1);
+    }
+    public static int getAppOpenCount(Context context){
+        return SPUtil.getInt(context, SdkUtil.SDK_SP_FILE, Sdk_APP_OPEN_COUNT);
+    }
+
 }

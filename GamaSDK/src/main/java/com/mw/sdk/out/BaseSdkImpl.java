@@ -372,6 +372,7 @@ public class BaseSdkImpl implements IMWSDK {
         this.activity = activity;
         this.regRoleInfoTimestamp = 0;
         dataManager = DataManager.getInstance();
+        SdkUtil.saveAppOpenCount(activity);
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -1657,34 +1658,14 @@ public class BaseSdkImpl implements IMWSDK {
             return;
         }
 
-        boolean isOpenSdkGame = SPUtil.getBoolean(activity, SdkUtil.SDK_SP_FILE, "openSdkGame_is_open");
-        if (isOpenSdkGame){
+        int mCount = SdkUtil.getAppOpenCount(activity);
+        PL.i("openSdkGame getAppOpenCount=" + mCount);
+        if (mCount > 2){
             if (iSdkCallBack != null){
                 iSdkCallBack.success();
             }
             return;
         }
-        SPUtil.saveBoolean(activity, SdkUtil.SDK_SP_FILE, "openSdkGame_is_open", true);
-
-        // Get user consent
-        /*FacebookSdk.setAutoInitEnabled(true);
-        FacebookSdk.fullyInitialize();
-        AppLinkData.fetchDeferredAppLinkData(activity, new AppLinkData.CompletionHandler() {
-            @Override
-            public void onDeferredAppLinkDataFetched(AppLinkData appLinkData) {
-
-                // Process app link data
-                if (appLinkData != null && appLinkData.getTargetUri() != null){
-                    PL.i("onDeferredAppLinkDataFetched=" + appLinkData.getTargetUri().toString());
-                    showSdkGame(activity, iSdkCallBack);
-                }else {
-                    PL.i("onDeferredAppLinkDataFetched is no data");
-                    if (iSdkCallBack != null){
-                        iSdkCallBack.success();
-                    }
-                }
-            }
-        });*/
 
         String deferredAppLinkDataStr = SdkUtil.getDeepLink(activity);
         PL.i("openSdkGame deferredAppLinkDataStr=" + deferredAppLinkDataStr);

@@ -87,6 +87,16 @@ public class SLoginResponse extends BaseResponseModel {
         private String area;//用户地区
         private boolean isTest;//是否是测试用户
 
+        private boolean miniGameUser = false;
+
+        public boolean isMiniGameUser() {
+            return miniGameUser;
+        }
+
+        public void setMiniGameUser(boolean miniGameUser) {
+            this.miniGameUser = miniGameUser;
+        }
+
         public boolean getIsTest() {
             return isTest;
         }

@@ -1180,6 +1180,11 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         SdkUtil.updateLoginData(getContext(), loginResponse);
         DataManager.getInstance().setLogin(true);
 
+        String deferredAppLinkDataStr = SdkUtil.getDeepLink(getContext());
+        if (SStringUtil.isNotEmpty(deferredAppLinkDataStr)){
+            loginResponse.getData().setMiniGameUser(true);
+        }
+
         if (SStringUtil.isNotEmpty(loginType)) {//loginType为空时是账号注入登录，不能空时是其他普通登入
 
             SdkUtil.savePreviousLoginType(mActivity, loginType);
