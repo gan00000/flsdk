@@ -528,6 +528,11 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         mMacLogin(activity, sfCallBack);
     }
 
+    @Override
+    public void guestLogin(Activity activity) {
+        this.mActivity = activity;
+        mMacLogin(activity, null);
+    }
 
     @Override
     public void register(Activity activity, String account, String pwd, String areaCode, String phone, String vfcode, String email) {

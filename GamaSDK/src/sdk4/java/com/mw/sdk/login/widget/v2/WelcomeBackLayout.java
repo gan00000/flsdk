@@ -378,7 +378,7 @@ public class WelcomeBackLayout extends SLoginBaseRelativeLayout implements View.
         }else  if (SLoginType.LOGIN_TYPE_GOOGLE.equals(currentAccountModel.getLoginType())){
             sLoginDialogv2.getLoginPresenter().googleLogin(sLoginDialogv2.getActivity());
         }else  if (SLoginType.LOGIN_TYPE_GUEST.equals(currentAccountModel.getLoginType())){
-            sLoginDialogv2.getLoginPresenter().guestLogin(sLoginDialogv2.getActivity(), null);
+            sLoginDialogv2.getLoginPresenter().guestLogin(sLoginDialogv2.getActivity());
         }else if (SLoginType.LOGIN_TYPE_LINE.equals(currentAccountModel.getLoginType())){
             sLoginDialogv2.getLoginPresenter().lineLogin(sLoginDialogv2.getActivity());
         }else if (SLoginType.LOGIN_TYPE_MG.equals(currentAccountModel.getLoginType())){
