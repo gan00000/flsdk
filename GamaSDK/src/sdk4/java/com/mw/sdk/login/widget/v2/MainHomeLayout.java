@@ -117,7 +117,7 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
             sLoginDialogv2.showLoginWithRegView(ViewType.HomeView);
         }else if(v == guestLoginView){
             if (checkAgreeTerm()){
-                sLoginDialogv2.getLoginPresenter().guestLogin(sLoginDialogv2.getActivity());
+                sLoginDialogv2.getLoginPresenter().guestLogin(sLoginDialogv2.getActivity(), null);
             }
         }else if (v == iv_login_google){
             //google+登录

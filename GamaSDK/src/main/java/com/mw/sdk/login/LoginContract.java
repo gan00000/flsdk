@@ -67,7 +67,7 @@ public class LoginContract {
 
         void thirdPlatLogin(Activity activity, ThirdLoginRegRequestBean thirdLoginRegRequestBean);
 
-        void guestLogin(Activity activity);
+        void guestLogin(Activity activity, SFCallBack<String> sfCallBack);
         void lineLogin(Activity activity);
         void hwLogin(Activity activity, HuaweiSignIn huaweiSignIn);
 

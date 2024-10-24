@@ -318,7 +318,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
                 if (!checkAgreeTerm()) {
                     return;
                 }
-                sLoginDialogv2.getLoginPresenter().guestLogin(sLoginDialogv2.getActivity());
+                sLoginDialogv2.getLoginPresenter().guestLogin(sLoginDialogv2.getActivity(), null);
             }
         });
         googleLoginView.setOnClickListener(new OnClickListener() {

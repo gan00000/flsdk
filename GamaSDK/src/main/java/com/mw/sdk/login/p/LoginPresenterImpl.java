@@ -297,7 +297,19 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             String silent_login = activity.getString(R.string.sdk_first_silent_login);
             if (SStringUtil.isNotEmpty(silent_login) && "true".equals(silent_login)){
                 PL.d("go sdk_first_silent_login...");
-                guestLogin(activity);
+                guestLogin(activity, new SFCallBack<String>() {
+                    @Override
+                    public void success(String result, String msg) {
+
+                    }
+
+                    @Override
+                    public void fail(String result, String msg) {
+                        if (iLoginView != null){
+                            iLoginView.showMainHomeView();
+                        }
+                    }
+                });
                 return;
             }
 
@@ -511,9 +523,9 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     }
 
     @Override
-    public void guestLogin(final Activity activity) {
+    public void guestLogin(final Activity activity, SFCallBack<String> sfCallBack) {
         this.mActivity = activity;
-        mMacLogin(activity);
+        mMacLogin(activity, sfCallBack);
     }
 
 
@@ -730,7 +742,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         bindRequestTask.excute(SLoginResponse.class);
     }
 
-    private void mMacLogin(final Activity activity) {
+    private void mMacLogin(final Activity activity, SFCallBack<String> sfCallBack) {
         MacLoginRegRequestTask macLoginRegCmd = new MacLoginRegRequestTask(getActivity());
         macLoginRegCmd.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(), "Loading..."));
         macLoginRegCmd.setReqCallBack(new ISReqCallBack<SLoginResponse>() {
@@ -745,7 +757,9 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                                 sLoginResponse.getData().getTimestamp(),
                                 macLoginRegCmd.getSdkBaseRequestBean().getUniqueId(),
                                 "",true,sLoginResponse.getData().isBind());
-
+                        if (sfCallBack != null){
+                            sfCallBack.success("","");
+                        }
                         handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GUEST);
                     }
 //                    else if (checkIsMacLoginLimit(activity, sLoginResponse, rawResult)) {
@@ -753,10 +767,16 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 //                    }
                     else {
                         ToastUtils.toast(getActivity(), sLoginResponse.getMessage());
+                        if (sfCallBack != null){
+                            sfCallBack.fail("",sLoginResponse.getMessage());
+                        }
                     }
 
                 } else {
                     ToastUtils.toast(getActivity(), R.string.py_error_occur);
+                    if (sfCallBack != null){
+                        sfCallBack.fail("","");
+                    }
                 }
             }
 

@@ -143,11 +143,14 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
         iLoginPresenter.setSGoogleSignIn(sGoogleSignIn);
         iLoginPresenter.setTwitterLogin(twitterLogin);
         iLoginPresenter.setLineLogin(sLineSignIn);
+
+        SdkEventLogger.sendEventToSever(activity,EventConstant.EventName.OPEN_LOGIN_SCREEN.name());
+        SdkEventLogger.trackingWithEventName(getActivity(), EventConstant.EventName.OPEN_LOGIN_SCREEN.name());
+
         PL.d("iLoginPresenter.autoLogin start");
         iLoginPresenter.autoLogin(activity);
         PL.d("iLoginPresenter.autoLogin end");
-        SdkEventLogger.sendEventToSever(activity,EventConstant.EventName.OPEN_LOGIN_SCREEN.name());
-        SdkEventLogger.trackingWithEventName(getActivity(), EventConstant.EventName.OPEN_LOGIN_SCREEN.name());
+
         PL.d("dialog onCreate end");
     }
 
