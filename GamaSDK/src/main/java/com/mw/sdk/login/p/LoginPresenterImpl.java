@@ -293,6 +293,14 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         PL.d("SdkUtil.getAccountModels end");
 //        iLoginView.showMainHomeView();
         if (accountModels.isEmpty()){
+            //是否需要首次静默登录(免注册)
+            String silent_login = activity.getString(R.string.sdk_first_silent_login);
+            if (SStringUtil.isNotEmpty(silent_login) && "true".equals(silent_login)){
+                PL.d("go sdk_first_silent_login...");
+                guestLogin(activity);
+                return;
+            }
+
             if (iLoginView != null){
                 iLoginView.showMainHomeView();
             }

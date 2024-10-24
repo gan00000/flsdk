@@ -5,6 +5,7 @@
     <string name="sdk_more_language"></string>
     <string name="sdk_default_server_language"></string>
     <string name="sdk_appflyer_dev_key"></string>
+    <string name="sdk_first_silent_login"></string>
 
     <!-- Facebook应用名 -->
     <string name="facebook_app_name"></string>
@@ -47,4 +48,5 @@
     <string name="mw_vk_appid"></string>
 
     <string name="mw_tt_app_id"></string>
+
 </resources>
