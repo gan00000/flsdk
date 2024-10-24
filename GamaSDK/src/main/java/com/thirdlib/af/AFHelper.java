@@ -52,7 +52,7 @@ public class AFHelper {
                 PL.i("af debug mode");
                 AppsFlyerLib.getInstance().setDebugLog(true);
             }
-
+            //AppsFlyerLib.getInstance().setMinTimeBetweenSessions(0);
             //处理af深度链接
             /*当应用程序在后台运行并且应用启动模式不是标准模式时，不会调用onDeepLinking。
             To correct this, call setIntent(intent) method to set the intent value inside the overridden method onNewIntent if the application is using a non-standard LaunchMode.
@@ -171,7 +171,11 @@ public class AFHelper {
         String afDevKey = ResConfig.getAfDevKey(activity);
         if(!TextUtils.isEmpty(afDevKey)) {
 
-            AppsFlyerLib.getInstance().start(activity.getApplicationContext());
+//            延迟SDK启动的典型场景是应用需要先请求用户授权在Main Activity中收集数据，然后在获得授权后调用start。
+//            Important notice
+//            If the app calls start from an Activity, it should pass the Activity Context to the SDK.
+//            Failing to pass the activity context will not trigger the SDK, thus losing attribution data and in-app events.
+            AppsFlyerLib.getInstance().start(activity);//在activity中调用，这里必须传activity
 
         } else {
             PL.e("af dev key empty!");
