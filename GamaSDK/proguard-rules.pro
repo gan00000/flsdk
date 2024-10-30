@@ -16,8 +16,6 @@
 #   public *;
 #}
 
-#-keep class com.appsflyer.** { *; }
-#-keep public class com.android.installreferrer.** { *; }
 
 # Your application may contain more items that need to be preserved;
 # typically classes that are dynamically created using Class.forName:
@@ -77,7 +75,6 @@
 -keep public class com.facebook.** { *; }
 -keep public class com.google.** { *; }
 -keep public class com.linecorp.** { *; }
--keep public class com.appflyer.** { *; }
 -keep public class io.** { *; }
 #-keep public class com.zhy.** { *; }
 -keep public class org.spongycastle.** { *; }
@@ -122,3 +119,9 @@
 #tiktok
 -keep class com.tiktok.** { *; }
 -keep class com.android.billingclient.api.** { *; }
+
+#af
+-keep class com.appsflyer.** { *; }
+-keep class kotlin.jvm.internal.** { *; }
+-keep public class com.android.installreferrer.** { *; }
+-keep class com.huawei.hms.**{*;}
