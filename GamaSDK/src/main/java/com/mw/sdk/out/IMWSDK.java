@@ -198,6 +198,7 @@ public interface IMWSDK extends IGameLifeCycle {
 //    public void showFloatView(Activity activity, FloatCallback floatCallback);
 
     public void openUrlByBrowser(Activity activity,String url);
+    public void openUrlBySdkWebview(Activity activity, String url);
 
     public void openSdkGame(Activity activity, ISdkCallBack iSdkCallBack);
 

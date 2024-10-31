@@ -91,9 +91,9 @@ public class BaseWebViewClient extends WebViewClient {
 
             AppUtil.openInOsWebApp(activity, url);
 
-        } else */if (url.toLowerCase().startsWith("http:") || url.toLowerCase().startsWith("https:") || url.toLowerCase().startsWith("file")) {
+        } else */if (url.toLowerCase().startsWith("http:") || url.toLowerCase().startsWith("https:") || url.toLowerCase().startsWith("file") || url.toLowerCase().startsWith("market://details")) {
 
-            if (url.startsWith("https://play.google.com/store/apps/details?id=")){
+            if (url.startsWith("https://play.google.com/store/apps/details?id=") || url.startsWith("market://details")){
                 MarketUtil.toGooglePaly(activity, url);
             }else{
                 webView.loadUrl(url);

@@ -41,6 +41,7 @@ import com.google.android.play.core.review.ReviewManager;
 import com.google.android.play.core.review.ReviewManagerFactory;
 import com.mw.base.bean.SPayType;
 import com.mw.sdk.BuildConfig;
+import com.mw.sdk.MWBaseWebActivity;
 import com.mw.sdk.MWWebPayActivity;
 import com.mw.sdk.R;
 import com.mw.sdk.act.ActExpoView;
@@ -1645,6 +1646,15 @@ public class BaseSdkImpl implements IMWSDK {
         SGameBaseRequestBean sGameBaseRequestBean = new SGameBaseRequestBean(activity);
         sGameBaseRequestBean.setCompleteUrl(url);
         AppUtil.openInOsWebApp(activity,sGameBaseRequestBean.createPreRequestUrl());
+    }
+
+    public void openUrlBySdkWebview(Activity activity, String url) {
+        if (SStringUtil.isEmpty(url)){
+            ToastUtils.toast(activity, "url empty error");
+            return;
+        }
+        Intent csIntent = MWBaseWebActivity.create(activity,"", url);
+        activity.startActivity(csIntent);
     }
 
     @Override
