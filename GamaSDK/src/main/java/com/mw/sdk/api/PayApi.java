@@ -295,6 +295,25 @@ public class PayApi {
                     if (sfCallBack != null){
                         sfCallBack.success(gpExchangeRes,rawResult);
                     }
+
+                    if (gpExchangeRes.getData() != null && SStringUtil.isNotEmpty(gpExchangeRes.getData().getOrderId())) {
+
+                        String orderId = gpExchangeRes.getData().getOrderId() == null ? "unknow" : gpExchangeRes.getData().getOrderId();
+                        String productId = gpExchangeRes.getData().getProductId() == null ? "unknow" : gpExchangeRes.getData().getProductId();
+                        double usdPrice = gpExchangeRes.getData().getAmount();
+                        String serverTimestamp = gpExchangeRes.getData().getTimestamp();
+
+                        SdkEventLogger.trackinPayEvent(context.getApplicationContext(), "", orderId, productId, usdPrice, serverTimestamp,true);
+                        if (gpExchangeRes.getData().getEvents() != null && !gpExchangeRes.getData().getEvents().isEmpty()){
+                            for (EventBean eventBean : gpExchangeRes.getData().getEvents()) {
+                                if (SStringUtil.isNotEmpty(eventBean.getName()) && eventBean.getValue() > 0){
+                                    SdkEventLogger.trackinPayEvent(context.getApplicationContext(), eventBean.getName(), orderId, productId, eventBean.getValue(), serverTimestamp,false);
+                                }
+                            }
+                        }
+                    }
+
+
                 } else {
 //                    if (gpExchangeRes!=null && !TextUtils.isEmpty(gpExchangeRes.getMessage())){
 //                        ToastUtils.toast(activity,gpExchangeRes.getMessage());
