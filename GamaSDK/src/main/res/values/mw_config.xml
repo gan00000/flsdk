@@ -49,4 +49,8 @@
 
     <string name="mw_tt_app_id"></string>
 
+<!--    ad config-->
+    <string name="sdk_app_ad_key"></string>
+    <string name="sdk_ad_unit_id"></string>
+
 </resources>

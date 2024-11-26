@@ -60,6 +60,7 @@ import com.mw.sdk.bean.res.ConfigBean;
 import com.mw.sdk.bean.res.FloatMenuResData;
 import com.mw.sdk.bean.res.MenuData;
 import com.mw.sdk.bean.res.ToggleResult;
+import com.mw.sdk.callback.AdCallback;
 import com.mw.sdk.callback.FloatButtionClickCallback;
 import com.mw.sdk.callback.FloatCallback;
 import com.mw.sdk.callback.IPayListener;
@@ -88,6 +89,7 @@ import com.mw.sdk.widget.SWebViewDialog;
 import com.mw.sdk.widget.SWebViewLayout;
 import com.thirdlib.adjust.AdjustHelper;
 import com.thirdlib.af.AFHelper;
+import com.thirdlib.applovin.ApplovinManager;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.huawei.HuaweiPayImpl;
 import com.thirdlib.td.TDAnalyticsHelper;
@@ -143,6 +145,8 @@ public class BaseSdkImpl implements IMWSDK {
 
     private SharedPreferences googleDeepLinkPreferences;
     private SharedPreferences.OnSharedPreferenceChangeListener deepLinkListener;
+
+    ApplovinManager applovinManager;
 
     public BaseSdkImpl() {
 //        iLogin = ObjFactory.create(DialogLoginImpl.class);
@@ -445,6 +449,9 @@ public class BaseSdkImpl implements IMWSDK {
         iPay = IPayFactory.create(activity);
         iPay.onCreate(activity);
 
+        //ad
+        applovinManager = new ApplovinManager();
+        applovinManager.initAd(activity);
     }
 
     @Override
@@ -578,6 +585,9 @@ public class BaseSdkImpl implements IMWSDK {
                     sFacebookProxy.onDestroy(activity);
                 }
 
+                if (applovinManager != null){
+                    applovinManager.destroy(activity);
+                }
             }
         });
     }
@@ -1740,5 +1750,13 @@ public class BaseSdkImpl implements IMWSDK {
     @Override
     public String getSdkLanguage(Context context) {
         return SdkUtil.getSdkLocaleLanguage(context);
+    }
+
+    @Override
+    public void showAd(Activity activity, AdCallback adCallback) {
+        if (applovinManager != null){
+            applovinManager.setAdCallback(adCallback);
+            applovinManager.showAdView(activity);
+        }
     }
 }
