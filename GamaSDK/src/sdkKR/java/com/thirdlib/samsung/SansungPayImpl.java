@@ -294,6 +294,11 @@ public class SansungPayImpl implements IPay{
     }
 
     @Override
+    public void onStart(Activity activity) {
+
+    }
+
+    @Override
     public void onResume(Activity activity) {
         PL.i( "onResume");
     }

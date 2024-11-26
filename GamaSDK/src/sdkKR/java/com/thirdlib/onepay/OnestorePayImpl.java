@@ -288,6 +288,11 @@ public class OnestorePayImpl implements IPay, PurchaseManager.Callback {
     }
 
     @Override
+    public void onStart(Activity activity) {
+
+    }
+
+    @Override
     public void onResume(Activity activity) {
         PL.i( "onResume");
     }
