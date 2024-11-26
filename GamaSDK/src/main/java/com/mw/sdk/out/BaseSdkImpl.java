@@ -227,6 +227,12 @@ public class BaseSdkImpl implements IMWSDK {
                 //广告
                 SdkEventLogger.activateApp(activity);
                 SdkEventLogger.reportInstallActivation(activity.getApplicationContext());
+
+
+                //ad
+                applovinManager = new ApplovinManager();
+                applovinManager.initAd(activity);
+
             }
         },200);
 
@@ -449,9 +455,6 @@ public class BaseSdkImpl implements IMWSDK {
         iPay = IPayFactory.create(activity);
         iPay.onCreate(activity);
 
-        //ad
-        applovinManager = new ApplovinManager();
-        applovinManager.initAd(activity);
     }
 
     @Override
