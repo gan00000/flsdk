@@ -1,12 +1,30 @@
 package com.thirdlib.applovin;
 
 import android.app.Activity;
+import android.os.Handler;
 
+import androidx.annotation.NonNull;
+
+import com.applovin.mediation.MaxAd;
+import com.applovin.mediation.MaxAdRevenueListener;
+import com.applovin.mediation.MaxError;
+import com.applovin.mediation.MaxReward;
+import com.applovin.mediation.MaxRewardedAdListener;
+import com.applovin.mediation.ads.MaxRewardedAd;
+import com.applovin.sdk.AppLovinMediationProvider;
+import com.applovin.sdk.AppLovinSdk;
+import com.applovin.sdk.AppLovinSdkConfiguration;
+import com.applovin.sdk.AppLovinSdkInitializationConfiguration;
+import com.core.base.utils.PL;
+import com.core.base.utils.SStringUtil;
+import com.mw.sdk.R;
 import com.mw.sdk.callback.AdCallback;
 
-public class ApplovinManager /*implements MaxRewardedAdListener, MaxAdRevenueListener*/ {
+import java.util.concurrent.TimeUnit;
 
-//    private MaxRewardedAd rewardedAd;
+public class ApplovinManager implements MaxRewardedAdListener, MaxAdRevenueListener, IMwAd {
+
+    private MaxRewardedAd rewardedAd;
     private int retryAttempt;
 
     private AdCallback adCallback;
@@ -14,6 +32,7 @@ public class ApplovinManager /*implements MaxRewardedAdListener, MaxAdRevenueLis
 //    private static ApplovinManager applovinManager;
 
 
+    @Override
     public void setAdCallback(AdCallback adCallback) {
         this.adCallback = adCallback;
     }
@@ -25,67 +44,71 @@ public class ApplovinManager /*implements MaxRewardedAdListener, MaxAdRevenueLis
 //        return applovinManager;
 //    }
 
+    @Override
     public void initAd(Activity activity) {
-//        if (activity == null) {
-//            return;
-//        }
-//        String adKey = activity.getString(R.string.sdk_app_ad_key);
-//        if (SStringUtil.isEmpty(adKey)){
-//            PL.i("initAd adKey is empty");
-//            return;
-//        }
-//        PL.i("initAd adKey=" + adKey);
-//        // Create the initialization configuration
-//        AppLovinSdkInitializationConfiguration initConfig = AppLovinSdkInitializationConfiguration.builder(adKey, activity)
-//                .setMediationProvider(AppLovinMediationProvider.MAX)
-//                .build();
-//
-//        // Initialize the SDK with the configuration
-//        AppLovinSdk.getInstance(activity).initialize(initConfig, new AppLovinSdk.SdkInitializationListener() {
-//            @Override
-//            public void onSdkInitialized(final AppLovinSdkConfiguration sdkConfig) {
-//                // Start loading ads
-//                PL.i("onSdkInitialized finish");
-//                startLoadAds(activity);
-//            }
-//        });
+        if (activity == null) {
+            return;
+        }
+        String adKey = activity.getString(R.string.sdk_app_ad_key);
+        if (SStringUtil.isEmpty(adKey)){
+            PL.i("initAd adKey is empty");
+            return;
+        }
+        PL.i("initAd adKey=" + adKey);
+        // Create the initialization configuration
+        AppLovinSdkInitializationConfiguration initConfig = AppLovinSdkInitializationConfiguration.builder(adKey, activity)
+                .setMediationProvider(AppLovinMediationProvider.MAX)
+//                .setTestDeviceAdvertisingIds(Arrays.asList(SdkUtil.getGoogleAdId(activity)))
+                .build();
+
+        // Initialize the SDK with the configuration
+        AppLovinSdk.getInstance(activity).initialize(initConfig, new AppLovinSdk.SdkInitializationListener() {
+            @Override
+            public void onSdkInitialized(final AppLovinSdkConfiguration sdkConfig) {
+                // Start loading ads
+                PL.i("AppLovinSdk onSdkInitialized finish");
+                startLoadAds(activity);
+            }
+        });
 
     }
 
     private void startLoadAds(Activity activity) {
 
-//        if (activity == null) {
-//            return;
-//        }
-//        PL.i("startLoadAds...");
-//        String adUnitId = activity.getString(R.string.sdk_ad_unit_id);
-//        if (SStringUtil.isEmpty(adUnitId)){
-//            return;
-//        }
-//        PL.i("startLoadAds adUnitId=" + adUnitId);
-//        rewardedAd = MaxRewardedAd.getInstance(adUnitId, activity);
-//
-//        rewardedAd.setListener(this);
-//        rewardedAd.setRevenueListener(this);
-//
-//        // Load the first ad.
-//        rewardedAd.loadAd();
+        if (activity == null) {
+            return;
+        }
+        PL.i("startLoadAds...");
+        String adUnitId = activity.getString(R.string.sdk_ad_unit_id);
+        if (SStringUtil.isEmpty(adUnitId)){
+            return;
+        }
+        PL.i("startLoadAds adUnitId=" + adUnitId);
+        rewardedAd = MaxRewardedAd.getInstance(adUnitId, activity);
+
+        rewardedAd.setListener(this);
+        rewardedAd.setRevenueListener(this);
+
+        // Load the first ad.
+        rewardedAd.loadAd();
     }
 
+    @Override
     public void showAdView(Activity activity) {
-//        if (activity != null && rewardedAd != null && rewardedAd.isReady()) {
-//            rewardedAd.showAd(activity);
-//        }
+        if (activity != null && rewardedAd != null && rewardedAd.isReady()) {
+            rewardedAd.showAd(activity);
+        }
     }
 
+    @Override
     public void destroy(Activity activity) {
-//        if (rewardedAd != null) {
-//            rewardedAd.setListener(null);
-//            rewardedAd.setRevenueListener(null);
-//        }
+        if (rewardedAd != null) {
+            rewardedAd.setListener(null);
+            rewardedAd.setRevenueListener(null);
+        }
     }
 
-/*
+
     @Override
     public void onUserRewarded(@NonNull MaxAd maxAd, @NonNull MaxReward maxReward) {
         // Rewarded ad was displayed and user should receive the reward
@@ -163,5 +186,5 @@ public class ApplovinManager /*implements MaxRewardedAdListener, MaxAdRevenueLis
     @Override
     public void onAdRevenuePaid(@NonNull MaxAd maxAd) {//广告收入
         PL.i("onAdRevenuePaid...");
-    }*/
+    }
 }

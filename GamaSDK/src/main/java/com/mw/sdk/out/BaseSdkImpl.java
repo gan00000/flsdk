@@ -90,6 +90,7 @@ import com.mw.sdk.widget.SWebViewLayout;
 import com.thirdlib.adjust.AdjustHelper;
 import com.thirdlib.af.AFHelper;
 import com.thirdlib.applovin.ApplovinManager;
+import com.thirdlib.applovin.IMwAd;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.huawei.HuaweiPayImpl;
 import com.thirdlib.td.TDAnalyticsHelper;
@@ -146,7 +147,7 @@ public class BaseSdkImpl implements IMWSDK {
     private SharedPreferences googleDeepLinkPreferences;
     private SharedPreferences.OnSharedPreferenceChangeListener deepLinkListener;
 
-    ApplovinManager applovinManager;
+    IMwAd iMwAd;
 
     public BaseSdkImpl() {
 //        iLogin = ObjFactory.create(DialogLoginImpl.class);
@@ -230,8 +231,8 @@ public class BaseSdkImpl implements IMWSDK {
 
 
                 //ad
-                applovinManager = new ApplovinManager();
-                applovinManager.initAd(activity);
+                iMwAd = new ApplovinManager();
+                iMwAd.initAd(activity);
 
             }
         },200);
@@ -588,8 +589,8 @@ public class BaseSdkImpl implements IMWSDK {
                     sFacebookProxy.onDestroy(activity);
                 }
 
-                if (applovinManager != null){
-                    applovinManager.destroy(activity);
+                if (iMwAd != null){
+                    iMwAd.destroy(activity);
                 }
             }
         });
@@ -1757,9 +1758,9 @@ public class BaseSdkImpl implements IMWSDK {
 
     @Override
     public void showAd(Activity activity, AdCallback adCallback) {
-        if (applovinManager != null){
-            applovinManager.setAdCallback(adCallback);
-            applovinManager.showAdView(activity);
+        if (iMwAd != null){
+            iMwAd.setAdCallback(adCallback);
+            iMwAd.showAdView(activity);
         }
     }
 }
