@@ -155,9 +155,15 @@ public class SdkEventLogger {
      * 统计储值数据
      */
     public static void trackinPayEvent(Context context, String eventName, String orderId, String productId, double usdPrice, String serverTimestamp, boolean linkUser){
-        if(SStringUtil.isEmpty(orderId) || SStringUtil.isEmpty(productId)) {
-            PL.i("trackinPay orderId or productId null");
-            return;
+
+        if(SStringUtil.isEmpty(orderId)) {
+            PL.i("trackinPay orderId null");
+            orderId = "orderId_"+System.currentTimeMillis();
+        }
+
+        if(SStringUtil.isEmpty(productId)) {
+            PL.i("trackinPay productId null");
+            productId = "productId_"+System.currentTimeMillis();
         }
 
         PL.i("trackinPay eventName:" + eventName);

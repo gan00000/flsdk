@@ -11,6 +11,7 @@ import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.mw.sdk.ads.EventConstant;
 import com.mw.sdk.ads.SdkEventLogger;
+import com.mw.sdk.utils.SdkUtil;
 
 public class WebViewJsObj {
 
@@ -54,6 +55,22 @@ public class WebViewJsObj {
                 public void run() {
                     SdkEventLogger.sendEventToSever(activity, eventName);
                     SdkEventLogger.trackingWithEventName(activity, eventName, null, EventConstant.AdType.AdTypeAllChannel);
+                }
+            });
+        }
+    }
+
+    @SuppressLint("JavascriptInterface")
+    @JavascriptInterface
+    public void trackEvent(String eventName, String orderId, String productId, double usdPrice){
+        PL.i("js trackEvent:" + eventName + ",orderId=" + orderId + ",productId=" + productId + ",usdPrice=" + usdPrice);
+        if (activity != null && SStringUtil.isNotEmpty(eventName)){
+            activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    SdkEventLogger.sendEventToSever(activity, eventName);
+                    String serverTimestamp = SdkUtil.getSdkTimestamp(activity);
+                    SdkEventLogger.trackinPayEvent(activity, eventName, orderId, productId, usdPrice,  serverTimestamp,true);
                 }
             });
         }
