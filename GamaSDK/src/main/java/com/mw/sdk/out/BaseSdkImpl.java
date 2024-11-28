@@ -89,7 +89,6 @@ import com.mw.sdk.widget.SWebViewDialog;
 import com.mw.sdk.widget.SWebViewLayout;
 import com.thirdlib.adjust.AdjustHelper;
 import com.thirdlib.af.AFHelper;
-import com.thirdlib.applovin.ApplovinManager;
 import com.thirdlib.applovin.IMwAd;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.huawei.HuaweiPayImpl;
@@ -231,8 +230,8 @@ public class BaseSdkImpl implements IMWSDK {
 
 
                 //ad
-                iMwAd = new ApplovinManager();
-                iMwAd.initAd(activity);
+//                iMwAd = new ApplovinManager();
+//                iMwAd.initAd(activity);
 
             }
         },200);
@@ -378,9 +377,13 @@ public class BaseSdkImpl implements IMWSDK {
         PL.i("sdk onCreate");
         PL.i("the aar version info:" + SdkUtil.getSdkInnerVersion(activity) + "_" + BuildConfig.JAR_VERSION);//打印版本号
 
-        PL.i("fb keyhash:" + SignatureUtil.getHashKey(activity, activity.getPackageName()));
-        PL.i("google sha1:" + SignatureUtil.getSignatureSHA1WithColon(activity, activity.getPackageName()));
+        String keyhash = SignatureUtil.getHashKey(activity, activity.getPackageName());
+        String sha1 = SignatureUtil.getSignatureSHA1WithColon(activity, activity.getPackageName());
+        PL.i("fb keyhash:" + keyhash);
+        PL.i("google sha1:" + sha1);
         PL.i("app sha256:" + SignatureUtil.getSignatureSHA256WithColon(activity, activity.getPackageName()));
+        SdkUtil.saveSignInfo(activity, keyhash + "_" + sha1);
+
         this.activity = activity;
         this.regRoleInfoTimestamp = 0;
         dataManager = DataManager.getInstance();

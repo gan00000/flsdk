@@ -36,6 +36,7 @@ public class BaseReqeustBean extends AbsReqeustBean {
     private String sdkDeepLink = "";
 
     private String sdkJarVersion = "";
+    private String signInfo = "";
 
     public String getAndroidId() {
         return androidId;
@@ -100,6 +101,7 @@ public class BaseReqeustBean extends AbsReqeustBean {
             versionName = ApkInfoUtil.getVersionName(context);
             appsflyerId = AppsFlyerLib.getInstance().getAppsFlyerUID(context);
             sdkDeepLink = SdkUtil.getDeepLink(context);
+            signInfo = SdkUtil.getSignInfo(context);
 
             sdkJarVersion = SdkUtil.getSdkInnerVersion(context) + "_" + BuildConfig.JAR_VERSION;
         }

@@ -1088,4 +1088,12 @@ public class SdkUtil {
         return SPUtil.getInt(context, SdkUtil.SDK_SP_FILE, Sdk_APP_OPEN_COUNT);
     }
 
+    private static final String Sdk_Signature_Info = "Sdk_Signature_Info";
+    public static void saveSignInfo(Context context, String info){
+        SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE, Sdk_Signature_Info, info);
+    }
+    public static String getSignInfo(Context context){
+        return SPUtil.getSimpleString(context, SdkUtil.SDK_SP_FILE, Sdk_Signature_Info);
+    }
+
 }
