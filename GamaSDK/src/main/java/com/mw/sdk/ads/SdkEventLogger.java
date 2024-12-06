@@ -193,10 +193,10 @@ public class SdkEventLogger {
 
                 af_eventValues.put(AFInAppEventParameterName.REVENUE, usdPrice);
                 af_eventValues.put(AFInAppEventParameterName.CURRENCY, "USD");
-                AFHelper.logEvent(context.getApplicationContext(), AFInAppEventType.PURCHASE, af_eventValues);
+                AFHelper.logEvent(context, AFInAppEventType.PURCHASE, af_eventValues);
             }else {
                 //af除了默认AFInAppEventType.PURCHASE上报额度，别的都不上报，不然影响af后台统计
-                AFHelper.logEvent(context.getApplicationContext(), eventName, af_eventValues);
+                AFHelper.logEvent(context, eventName, af_eventValues);
             }
 
             PL.i("trackinPay end Purchase af... params=" + JsonUtil.map2Json(af_eventValues).toString());

@@ -125,7 +125,7 @@ public class TrackEventHelper {
 //            AFHelper.logEvent(context.getApplicationContext(), eventName, af_eventValues);
 //        }
 
-        AFHelper.logEvent(context.getApplicationContext(), eventName, af_eventValues);
+        AFHelper.logEvent(context, eventName, af_eventValues);
     }
 
     public static void trackRevenueTT(Context context, String eventName, double usdPrice, String currency, String uid,String roleId, String productId, String orderId, String channel_platform, Map<String, Object> otherParams){

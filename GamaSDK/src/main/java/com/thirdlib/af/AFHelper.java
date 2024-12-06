@@ -3,6 +3,7 @@ package com.thirdlib.af;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -21,10 +22,9 @@ import com.mw.sdk.R;
 import com.mw.sdk.utils.ResConfig;
 import com.mw.sdk.utils.SdkUtil;
 
-import org.json.JSONObject;
-
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 public class AFHelper {
 
@@ -192,7 +192,7 @@ public class AFHelper {
             return;
         }
         PL.i("af logEvent start name=" + eventName);
-        AppsFlyerLib.getInstance().logEvent(context.getApplicationContext(), eventName, map, new AppsFlyerRequestListener() {
+        AppsFlyerLib.getInstance().logEvent(context, eventName, map, new AppsFlyerRequestListener() {
             @Override
             public void onSuccess() {
                 PL.i("af logEvent onSuccess");
@@ -201,8 +201,25 @@ public class AFHelper {
             @Override
             public void onError(int i, @NonNull String s) {
                 PL.i("af logEvent onError:" + s);
+                logEventAgain(context, eventName, map);
             }
         });
+
+    }
+
+    //事件上报失败的话，重新上报一次
+    public static void logEventAgain(Context context, String eventName, Map<String, Object> map){
+        if (context == null || SStringUtil.isEmpty(eventName)){
+            return;
+        }
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                PL.i("af logEventAgain start name=" + eventName);
+                AppsFlyerLib.getInstance().logEvent(context, eventName, map);
+            }
+        }, 2000);
 
     }
 }
