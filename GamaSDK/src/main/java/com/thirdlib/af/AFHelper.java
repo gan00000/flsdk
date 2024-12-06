@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.os.Handler;
+import android.os.Looper;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -19,12 +20,13 @@ import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.mw.sdk.BuildConfig;
 import com.mw.sdk.R;
+import com.mw.sdk.ads.SdkEventLogger;
 import com.mw.sdk.utils.ResConfig;
 import com.mw.sdk.utils.SdkUtil;
 
+import java.lang.ref.WeakReference;
 import java.util.Map;
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 public class AFHelper {
 
@@ -201,6 +203,7 @@ public class AFHelper {
             @Override
             public void onError(int i, @NonNull String s) {
                 PL.i("af logEvent onError:" + s);
+                //子线程
                 logEventAgain(context, eventName, map);
             }
         });
@@ -212,14 +215,41 @@ public class AFHelper {
         if (context == null || SStringUtil.isEmpty(eventName)){
             return;
         }
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                PL.i("af logEventAgain start name=" + eventName);
-                AppsFlyerLib.getInstance().logEvent(context, eventName, map);
-            }
-        }, 2000);
+        if (BuildConfig.DEBUG){
+            return;
+        }
+        if (context instanceof Activity){
+            Activity activityx = (Activity)context;
+            WeakReference<Activity> activityWeakRef = new WeakReference<>(activityx); ;
+            Handler handler = new Handler(Looper.getMainLooper());
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    PL.i("af logEventAgain start name=" + eventName);
+                    AppsFlyerLib.getInstance().logEvent(context, eventName, map, new AppsFlyerRequestListener() {
+                        @Override
+                        public void onSuccess() {
+                        }
+
+                        @Override
+                        public void onError(int i, @NonNull String s) {
+                            PL.i("af logEventAgain onError:" + s);
+                            if (activityWeakRef.get() != null){
+                                activityWeakRef.get().runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        //af发送失败，上报服务器记录
+                                        SdkEventLogger.sendEventToServer(activityWeakRef.get(), "AfSendFailed_" + eventName, false,false);
+                                    }
+                                });
+                            }
+
+                        }
+                    });
+                }
+            }, 5000);
+        }
+
 
     }
 }

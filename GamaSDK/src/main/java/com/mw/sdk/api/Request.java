@@ -290,7 +290,19 @@ public class Request {
         baseLoginRequestTask.excute(SLoginResponse.class);
     }
 
-    public static void sendEventToServer(final Context context, String eventName) throws Exception {
+//    public static void sendEventToServer(final Context context, String eventName) throws Exception {
+//        sendEventToServer(context, eventName, true, false);
+//    }
+
+    /**
+     *
+     * @param context
+     * @param eventName
+     * @param isDeviceOnce  是否对设备id报一次
+     * @param isUserOnce 是否对用户uid报一次
+     * @throws Exception
+     */
+    public static void sendEventToServer(final Context context, String eventName, boolean isDeviceOnce, boolean isUserOnce) throws Exception {
 
         if (SStringUtil.isEmpty(eventName)){
             return;
@@ -298,12 +310,25 @@ public class Request {
 
         String sp_key_event = "EVENT_KEY_" + eventName;
 
-        if (SStringUtil.isNotEmpty(SPUtil.getSimpleString(context,SdkUtil.SDK_SP_FILE,sp_key_event))){
-            PL.i("sendEventToServer exist eventname=" + eventName);
-            return;
+        if (isDeviceOnce){//对设备一次
+
+            if (SStringUtil.isNotEmpty(SPUtil.getSimpleString(context,SdkUtil.SDK_SP_FILE, sp_key_event))){
+                PL.i("sendEventToServer exist for device eventname=" + eventName);
+                return;
+            }
         }
 
         final SGameBaseRequestBean sGameBaseRequestBean = new SGameBaseRequestBean(context);
+
+        if (isUserOnce && SdkUtil.isLogin(context)){//对登录的用户一次
+
+            sp_key_event = "EVENT_KEY_" + eventName + "_" + sGameBaseRequestBean.getUserId();
+
+            if (SStringUtil.isNotEmpty(SPUtil.getSimpleString(context,SdkUtil.SDK_SP_FILE,sp_key_event))){
+                PL.i("sendEventToServer exist for uid eventname=" + eventName);
+                return;
+            }
+        }
 
         Map<String, String> requestParams = new HashMap<String, String>();
         requestParams.put("eventName", eventName);
@@ -337,11 +362,13 @@ public class Request {
         SimpleHttpRequest simpleHttpRequest = new SimpleHttpRequest();
         simpleHttpRequest.setGetMethod(true,true);
         simpleHttpRequest.setBaseReqeustBean(sGameBaseRequestBean);
+
+        String finalSp_key_event = sp_key_event;
         simpleHttpRequest.setReqCallBack(new ISReqCallBack<BaseResponseModel>() {
             @Override
             public void success(BaseResponseModel responseModel, String rawResult) {
                 PL.i("sendEventToServer success eventname=" + eventName);
-                SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE, sp_key_event, eventName);
+                SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE, finalSp_key_event, eventName);
 
             }
 
@@ -353,7 +380,7 @@ public class Request {
             @Override
             public void noData() {
                 PL.i("sendEventToServer success eventname=" + eventName);
-                SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE, sp_key_event, eventName);
+                SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE, finalSp_key_event, eventName);
             }
 
             @Override
