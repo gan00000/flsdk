@@ -85,14 +85,14 @@ public class ResConfig {
      * @param name
      * @return
      */
-    public static String getLocalSchemaName(Context context, String name) {
-        String localName;
-
-        SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
-        localName = sGameLanguage.getPrefixName() + "_" + name;
-        PL.i("local prefix : " + localName);
-        return localName;
-    }
+//    public static String getLocalSchemaName(Context context, String name) {
+//        String localName;
+//
+//        SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
+//        localName = sGameLanguage.getPrefixName() + "_" + name;
+//        PL.i("local prefix : " + localName);
+//        return localName;
+//    }
 
     //===========================================域名获取start===============================================
     //=========================================== 根据地区改变，同一地区的游戏不变===================================

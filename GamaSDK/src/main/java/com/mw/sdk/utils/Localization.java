@@ -36,7 +36,7 @@ public class Localization {
 //        }
     }
 
-    public static SGameLanguage getSGameLanguage(Context context){
+//    public static SGameLanguage getSGameLanguage(Context context){
 //        String language = ResConfig.getGameLanguage(context);
 //        if (SStringUtil.isEqual(SGameLanguage.en_US.getLanguage(), language)){
 //            return SGameLanguage.en_US;
@@ -50,8 +50,8 @@ public class Localization {
 //        if (SStringUtil.isEqual(SGameLanguage.ja_JP.getLanguage(), language)){
 //            return SGameLanguage.ja_JP;
 //        }
-        return SGameLanguage.zh_TW;//默认设置为繁体中文
-    }
+//        return SGameLanguage.zh_TW;//默认设置为繁体中文
+//    }
 
     public static void updateSGameLanguage(Context context){
 //        gameLanguage(context,getSGameLanguage(context));

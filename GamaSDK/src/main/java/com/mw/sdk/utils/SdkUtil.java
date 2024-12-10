@@ -851,60 +851,6 @@ public class SdkUtil {
     }
 
 
-    private static final String GAMA_SWITCH_JSON = "GAMA_SWITCH_JSON";
-
-    /**
-     * 保存Switch的文档
-     */
-    public static void saveSwitchJson(Context context, String switchJson){
-        SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE,GAMA_SWITCH_JSON, switchJson);
-    }
-
-    public static String getSwitchJson(Context context){
-        return SPUtil.getSimpleString(context, SdkUtil.SDK_SP_FILE, GAMA_SWITCH_JSON);
-    }
-
-    /**
-     * 登入验证码是否开启,false:登入不需要验证码；true:登入需要验证码
-     */
-    public static boolean getVfcodeSwitchStatus(Context context){
-        String json = getSwitchJson(context);
-        JSONObject jsonObject;
-        try {
-            jsonObject = new JSONObject(json);
-            JSONObject vfcodeSch = jsonObject.optJSONObject("vfcodeSch");
-            String code = vfcodeSch.optString("open");
-            // "0:关闭,1:开启"
-            if("0".equals(code)) {
-                return false;
-            } else {
-                return true;
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-            return true;
-        }
-    }
-
-    /**
-     * 获取接收手机验证码测试的提示语
-     */
-    public static String getPhoneMsgLimitHint(Context context) {
-        return JsonUtil.getValueByKey(context, getSwitchJson(context), "smsMsg", "");
-    }
-
-    /**
-     * 判断是否.app接口
-     */
-    public static boolean isInterfaceSurfixWithApp(Context context) {
-//        SGameLanguage sGameLanguage = Localization.getSGameLanguage(context);
-//        if(SGameLanguage.en_US == sGameLanguage) {
-//            return false;
-//        }
-        return true;
-    }
-
-
     /*public static void setAccountWithIcon(AccountModel accountModel, ImageView imageView, EditText editText){
         int imageResId = R.mipmap.mw_smail_icon;
         String showName = accountModel.getUserId();//accountModel.getThirdAccount();
@@ -1016,28 +962,42 @@ public class SdkUtil {
             String language = locale.getLanguage();//zh en
             String country = locale.getCountry();//TW US
             PL.d("language=%s, country=%s", language, country);
-            if (language.equals("en")){
-                return SGameLanguage.en_US.getLanguage();
-            }
+//            if (language.equals("en")){
+//                return SGameLanguage.en_US.getLanguage();
+//            }
+//            if (language.equals("zh") && country.equals("CN")){
+//                return SGameLanguage.zh_CN.getLanguage();
+//            }
+//            if (language.equals("zh") && country.equals("TW")){
+//                return SGameLanguage.zh_TW.getLanguage();
+//            }
+//            if (language.equals("zh") && country.equals("HK")){
+//                return SGameLanguage.zh_TW.getLanguage();
+//            }
+//            if (language.equals("vi")){
+//                return SGameLanguage.vi_VN.getLanguage();
+//            }
+//            if (language.equals("ko")){//韩语
+//                return SGameLanguage.ko_KR.getLanguage();
+//            }
+//            if (language.equals("ru")){//韩语
+//                return SGameLanguage.ru_RU.getLanguage();
+//            }
+
             if (language.equals("zh") && country.equals("CN")){
-                return SGameLanguage.zh_CN.getLanguage();
+                language = language + "_" + country;
             }
             if (language.equals("zh") && country.equals("TW")){
-                return SGameLanguage.zh_TW.getLanguage();
+                language = language + "_" + country;
             }
             if (language.equals("zh") && country.equals("HK")){
-                return SGameLanguage.zh_TW.getLanguage();
+                language = language + "_" + country;
             }
-            if (language.equals("vi")){
-                return SGameLanguage.vi_VN.getLanguage();
+            String langConfig = context.getString(R.string.sdk_language_map);
+            String langValue = JsonUtil.getValueByKey(context, langConfig, language,"");
+            if (SStringUtil.isNotEmpty(langValue)){
+                return langValue;
             }
-            if (language.equals("ko")){//韩语
-                return SGameLanguage.ko_KR.getLanguage();
-            }
-            if (language.equals("ru")){//韩语
-                return SGameLanguage.ru_RU.getLanguage();
-            }
-            //return SGameLanguage.zh_TW.getLanguage();//默认为繁体
         }
         //主动通过配置文件设置的默认语言
         if (SStringUtil.isNotEmpty(ResConfig.getDefaultServerLanguage(context))){

@@ -211,7 +211,7 @@ public class BaseSdkImpl implements IMWSDK {
 //    }
 
 //    @Override
-    public void initSDK(final Activity activity, final SGameLanguage gameLanguage) {
+    public void initSDK(final Activity activity) {
 
         PL.i("sdk initSDK");
 
@@ -400,7 +400,7 @@ public class BaseSdkImpl implements IMWSDK {
 
     protected void onCreate_OnUi(Activity activity) {
         if (!isInitSdk) {
-            initSDK(activity, SGameLanguage.zh_TW);
+            initSDK(activity);
         }
 
         //==============deep link=====================
