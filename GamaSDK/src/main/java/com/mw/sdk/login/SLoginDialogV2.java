@@ -759,6 +759,8 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
             });
             //blockDialog = DialogUtil.createDialog(getContext(), mwBlockUserlLayout);
             blockDialog = new SBaseDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
+            blockDialog.setCancelable(false);
+            blockDialog.setCanceledOnTouchOutside(false);
             blockDialog.setContentView(mwBlockUserlLayout);
             blockDialog.show();
         }else{
