@@ -88,6 +88,9 @@ public class SLoginResponse extends BaseResponseModel {
         private boolean isTest;//是否是测试用户
 
         private boolean miniGameUser = false;
+        private boolean block = false;
+        private int blockTime;//秒
+        private String blockMsg;
 
         public boolean isMiniGameUser() {
             return miniGameUser;
@@ -230,6 +233,30 @@ public class SLoginResponse extends BaseResponseModel {
 
         public void setLoginId(String loginId) {
             this.loginId = loginId;
+        }
+
+        public boolean isBlock() {
+            return block;
+        }
+
+        public void setBlock(boolean block) {
+            this.block = block;
+        }
+
+        public int getBlockTime() {
+            return blockTime;
+        }
+
+        public void setBlockTime(int blockTime) {
+            this.blockTime = blockTime;
+        }
+
+        public String getBlockMsg() {
+            return blockMsg;
+        }
+
+        public void setBlockMsg(String blockMsg) {
+            this.blockMsg = blockMsg;
         }
 
         @Override

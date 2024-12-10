@@ -1,17 +1,23 @@
 package com.mw.sdk.login;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StyleRes;
 
+import com.core.base.callback.SFCallBack;
 import com.core.base.utils.PL;
+import com.mw.sdk.login.widget.v2.MWBlockUserlLayout;
+import com.mw.sdk.utils.DialogUtil;
 import com.mw.sdk.utils.Localization;
 import com.mw.base.utils.SdkVersionUtil;
 import com.mw.sdk.R;
@@ -547,6 +553,17 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
 
     @Override
     public void loginSuccess(SLoginResponse sLoginResponse) {
+        //sLoginResponse.getData().setBlock(true);
+        //sLoginResponse.getData().setBlockTime(1000);
+        if (sLoginResponse != null && sLoginResponse.getData() != null && sLoginResponse.getData().isBlock()){
+            showBlockDialog(sLoginResponse);
+            return;
+        }
+
+        loginCallbackToGame(sLoginResponse);
+    }
+
+    private void loginCallbackToGame(SLoginResponse sLoginResponse) {
         if (iLoginCallBack != null){
             iLoginCallBack.onLogin(sLoginResponse);
         }
@@ -717,4 +734,36 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
         }
         return false;
     }
+
+    Dialog blockDialog;
+    private void showBlockDialog(SLoginResponse sLoginResponse) {
+        if (blockDialog == null){
+            MWBlockUserlLayout mwBlockUserlLayout = new MWBlockUserlLayout(getActivity(), sLoginResponse);
+            mwBlockUserlLayout.setSfCallBack(new SFCallBack() {
+                @Override
+                public void success(Object result, String msg) {
+
+                    if (blockDialog != null){
+                        blockDialog.dismiss();
+                    }
+                    loginCallbackToGame(sLoginResponse);
+
+                }
+
+                @Override
+                public void fail(Object result, String msg) {
+                    if (blockDialog != null){
+                        blockDialog.dismiss();
+                    }
+                }
+            });
+            //blockDialog = DialogUtil.createDialog(getContext(), mwBlockUserlLayout);
+            blockDialog = new SBaseDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
+            blockDialog.setContentView(mwBlockUserlLayout);
+            blockDialog.show();
+        }else{
+            blockDialog.show();
+        }
+    }
+
 }

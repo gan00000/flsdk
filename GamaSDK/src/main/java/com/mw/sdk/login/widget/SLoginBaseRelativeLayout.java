@@ -42,6 +42,13 @@ public abstract class SLoginBaseRelativeLayout extends SBaseRelativeLayout {
 
 //    protected String errorStrAccount, errorStrPassword;
 
+    public SLoginBaseRelativeLayout(Context context, boolean init, Object o, String s, int i) {
+        super(context);
+        if (init){
+            initView(context);
+        }
+    }
+
     public SLoginBaseRelativeLayout(Context context) {
         super(context);
 
@@ -71,6 +78,10 @@ public abstract class SLoginBaseRelativeLayout extends SBaseRelativeLayout {
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         PL.i(this.getClass().getCanonicalName() + " onAttachedToWindow");
+    }
+
+    protected void initViewManual(Context context) {
+        initView(context);
     }
 
     private void initView(Context context) {

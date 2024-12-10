@@ -23,4 +23,13 @@
     <string name="text_account_name">帳號：</string>
     <string name="text_account_uid">uid：</string>
     <string name="text_account_del">刪除帳號</string>
+    <string name="text_block_msg">亲爱的玩家：
+        \n我们检测到您的账户存在退款行为。为了确保您的账户安全和游戏体验，请您在接到通知后的24小时内通过游戏内客服联系我们进行核实和处理。
+        \n\n若在规定时间内未完成联系并确认，我们将视情况对您的账号进行封停，直至问题解决。
+        \n\n感谢您的理解与配合！</string>
+    <string name="text_blocked_msg">親愛的玩家：
+        \n\n由于您的账户涉及退款行为且未在规定时间内联系游戏客服处理，您的账户已被暂时封禁。
+        \n\n如需解除封禁，请通过游戏内客服联系我们，并提供相关说明和凭证。我们将尽快协助您完成后续处理。
+        \n\n感谢您的理解与配合！</string>
+
 </resources>
