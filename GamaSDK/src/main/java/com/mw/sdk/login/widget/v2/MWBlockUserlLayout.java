@@ -104,6 +104,7 @@ public class MWBlockUserlLayout extends SLoginBaseRelativeLayout {
             }else {
                 if (this.blockTime == 0){
                     msgTextView.setText(R.string.text_blocked_msg);//已经被阻止进入游戏
+                    titleTextView.setTextColor(getContext().getResources().getColor(R.color.e_ff3a3b));
                 }else {
                     msgTextView.setText(R.string.text_block_msg);
                 }
@@ -121,6 +122,9 @@ public class MWBlockUserlLayout extends SLoginBaseRelativeLayout {
                         blockTime = blockTime - 1;
                         String mTime = secondToTime(blockTime);
                         titleTextView.setText(mTime);
+                        if (blockTime == 0){
+                            titleTextView.setTextColor(getContext().getResources().getColor(R.color.e_ff3a3b));
+                        }
                         xHandler.postDelayed(this, 1000);
                     }
                 };

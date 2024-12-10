@@ -92,6 +92,7 @@
     <color name="c_FF2424">#FF2424</color>
     <color name="c_EDEDED">#EDEDED</color>
     <color name="c_B20909">#B20909</color>
+    <color name="c_block_view_bg">#B3000000</color>
 
     <color name="c_indicatorView_selected">#4BACFD</color>
     <color name="c_indicatorView_unselected">#EBEBEB</color>
