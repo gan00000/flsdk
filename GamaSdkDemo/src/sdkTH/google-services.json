@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "459576761808",
+    "project_id": "en-tgen-and",
+    "storage_bucket": "en-tgen-and.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:459576761808:android:b2cc4985e2fd7322256dd5",
+        "android_client_info": {
+          "package_name": "com.wanxin.tgen"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDe2Ml8VB29S48AqLjL645ZtG975-vimbI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

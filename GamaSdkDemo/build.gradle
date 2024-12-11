@@ -141,7 +141,7 @@ android {
         }
 
         debug {
-//            signingConfig signingConfigs.release_kr1
+//            signingConfig signingConfigs.release_v4
         }
     }
     flavorDimensions "1"
@@ -151,7 +151,7 @@ android {
 
             signingConfig signingConfigs.release_v2
             applicationId "com.wantang.xlzsg.qooapp"  //qooapp渠道包名必须qooapp结尾
-            minSdkVersion 21
+            minSdkVersion 25
             targetSdkVersion 33
             versionCode 10
             versionName "1.0"
@@ -179,7 +179,7 @@ android {
             //=======================================sdk config==========================
 
             applicationId "com.mwyyz.tw"
-            minSdkVersion 21
+            minSdkVersion 25
             targetSdkVersion 34
 
             //base
@@ -291,32 +291,57 @@ android {
 
             signingConfig signingConfigs.release_v4
             //base
-            applicationId "com.qcwx.fyden"
-            minSdkVersion 21
+            applicationId "com.msg.en"
+            minSdkVersion 25
             targetSdkVersion 34
 
-            resValue "string", "sdk_game_code", "fyden"
-            resValue "string", "sdk_app_key", "b2c4e398d7ee39c26bd74fdd04f23c96"
+
+            resValue "string", "sdk_game_code", "msgen"
+            resValue "string", "sdk_app_key", "fa995ce61616d9edf922d0a4615d5742"
             resValue "string", "sdk_more_language", "true"
             resValue "string", "sdk_default_server_language", "en_US"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
-            resValue "string", "scheme", "fyden"
+            resValue "string", "scheme", "msgen"
             resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
-            resValue "string", "sdk_release_european", "true"
-
             //facebook
-            resValue "string", "facebook_app_id", "480770274418792"
-            resValue "string", "facebook_client_token", "6079e2fde7ab9a37e8ef36782d86dfa4"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider480770274418792"
-            resValue "string", "fb_login_protocol_scheme", "fb480770274418792"
-            resValue "string", "facebook_app_name", "fyden" //游戏名字
+            resValue "string", "facebook_app_id", "896845048938258"
+            resValue "string", "facebook_client_token", "a0c51b07f16bee3bd7d1f5f546f73116"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider896845048938258"
+            resValue "string", "fb_login_protocol_scheme", "fb896845048938258"
+            resValue "string", "facebook_app_name", "msgen" //游戏名字
             //ad
             resValue "string", "adjust_app_token", ""
-            resValue "string", "sdk_appflyer_dev_key", ""
+            resValue "string", "sdk_appflyer_dev_key", "eLh5ePsf6TD3GkSEm4bR2X"
             //line
             resValue "string", "line_channelId", ""
             //naver
             resValue "string", "naver_client_id", ""
             resValue "string", "naver_client_secret", ""
+            resValue "string", "sdk_app_ad_key", "T1ZZ9VF_DC5bdMxRgpgSqXJLgkAw4zbpM_HckzL5tPJz2kN9pxWikTOGIaMTqQ2cCEQTpdEO4gfT_RrdeXrVgX"
+            resValue "string", "sdk_ad_unit_id", "906823fa7500702a"
+
+
+//            resValue "string", "sdk_game_code", "fyden"
+//            resValue "string", "sdk_app_key", "b2c4e398d7ee39c26bd74fdd04f23c96"
+//            resValue "string", "sdk_more_language", "true"
+//            resValue "string", "sdk_default_server_language", "en_US"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
+//            resValue "string", "scheme", "fyden"
+//            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
+//            resValue "string", "sdk_release_european", "true"
+//
+//            //facebook
+//            resValue "string", "facebook_app_id", "480770274418792"
+//            resValue "string", "facebook_client_token", "6079e2fde7ab9a37e8ef36782d86dfa4"
+//            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider480770274418792"
+//            resValue "string", "fb_login_protocol_scheme", "fb480770274418792"
+//            resValue "string", "facebook_app_name", "fyden" //游戏名字
+//            //ad
+//            resValue "string", "adjust_app_token", ""
+//            resValue "string", "sdk_appflyer_dev_key", ""
+//            //line
+//            resValue "string", "line_channelId", ""
+//            //naver
+//            resValue "string", "naver_client_id", ""
+//            resValue "string", "naver_client_secret", ""
 
             //=======================================sdk config end==========================
 
@@ -329,7 +354,7 @@ android {
 
             signingConfig signingConfigs.release_v2
             applicationId "com.wantang.xlzsg"
-            minSdkVersion 21
+            minSdkVersion 25
             targetSdkVersion 33
             versionCode 10
             versionName "1.0"
@@ -389,7 +414,7 @@ android {
 
             signingConfig signingConfigs.release_vn
 
-            minSdkVersion 21
+            minSdkVersion 25
             targetSdkVersion 33
             versionCode 10
             versionName "1.0"
@@ -471,7 +496,7 @@ android {
             signingConfig signingConfigs.release_v6
             //base
             applicationId "com.wanxin.tgen"
-            minSdkVersion 21
+            minSdkVersion 25
             targetSdkVersion 34
 
             resValue "string", "sdk_game_code", "tgen"
@@ -541,7 +566,7 @@ android {
 
 
             applicationId "com.kodatgfm.kr"
-            minSdkVersion 21
+            minSdkVersion 25
             targetSdkVersion 34
             versionCode 4
             versionName "4.0"
@@ -574,6 +599,50 @@ android {
 
             //每个游戏的demo设置 test,只是测试用，接到游戏不用写
             resValue "string", "sdk_name", "krDemo"
+
+        }
+
+        sdkTH {
+
+            dimension "1"
+            versionCode 10
+            versionName "1.0"
+
+            //=======================================sdk config start ==========================
+
+            signingConfig signingConfigs.release_v6
+            //base
+            applicationId "com.wanxin.tgen"
+            minSdkVersion 25
+            targetSdkVersion 34
+
+            resValue "string", "sdk_game_code", "tgen"
+            resValue "string", "sdk_app_key", "c999bd3d4cb5d1239c0c30bfc70506f2"
+            resValue "string", "sdk_more_language", "true"
+            resValue "string", "sdk_default_server_language", "en_US"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
+            resValue "string", "scheme", "tgen"
+            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
+            resValue "string", "sdk_release_european", "true"
+
+            //facebook
+            resValue "string", "facebook_app_id", "412108094771737"
+            resValue "string", "facebook_client_token", "e36a0f2a998fbfec7bf6ed97e5946f7bz"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider412108094771737"
+            resValue "string", "fb_login_protocol_scheme", "fb412108094771737"
+            resValue "string", "facebook_app_name", "tgen" //游戏名字
+            //ad
+            resValue "string", "adjust_app_token", ""
+            resValue "string", "sdk_appflyer_dev_key", "mjcKspHuCucYWYs7cc4v6a"
+            //line
+            resValue "string", "line_channelId", ""
+            //naver
+            resValue "string", "naver_client_id", ""
+            resValue "string", "naver_client_secret", ""
+
+            //=======================================sdk config end==========================
+
+            //每个游戏的demo设置 test
+            resValue "string", "sdk_name", "THdemo"
 
         }
     }

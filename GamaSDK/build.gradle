@@ -124,6 +124,13 @@ android {
             proguardFile 'flavor-rules-kr.pro'
         }
 
+        sdkTH {//泰国
+            dimension "1"
+            resValue "string", "sdk_inner_version", "th"
+            resValue "string", "sdk_release_european", "false" //发布欧洲地区的话要设置
+            resValue "string", "mw_td_appid", ""
+        }
+
         lunqi {//lunqi
             dimension '1'
             resValue "string", "sdk_inner_version", "lunqi"

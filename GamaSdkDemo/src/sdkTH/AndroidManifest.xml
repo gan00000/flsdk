@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--<uses-permission android:name="android.permission.READ_PHONE_STATE"/>-->
+
+    <application
+        android:allowBackup="true"
+        android:label="@string/sdk_name"
+        android:resizeableActivity="false"
+        android:usesCleartextTraffic="true"
+        android:supportsRtl="true"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        >
+        <property android:name="REQUIRE_SECURE_ENV" android:value="1" />
+       <!-- <activity
+            android:name="com.game.sdk.demo.DoPermissionReq"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|fontScale"
+            android:screenOrientation="sensor"
+            android:theme="@style/Gama.Theme.AppCompat.Light.NoActionBar.FullScreen"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+            &lt;!&ndash;<intent-filter>&ndash;&gt;
+            &lt;!&ndash;<action android:name="android.intent.action.MAIN" />&ndash;&gt;
+
+            &lt;!&ndash;<category android:name="android.intent.category.LAUNCHER" />&ndash;&gt;
+            &lt;!&ndash;</intent-filter>&ndash;&gt;
+        </activity>-->
+
+        <activity
+            android:name="com.game.sdk.demo.MainActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|fontScale"
+            android:screenOrientation="sensor"
+            android:theme="@style/Sdk.Theme.AppCompat.Light.NoActionBar.FullScreen"
+            android:windowSoftInputMode="stateHidden|adjustResize|adjustPan"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <data android:scheme="@string/scheme" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+        </activity>
+
+<!--         Set custom default icon. This is used when no icon is set for incoming notification messages.-->
+<!--     See README(https://goo.gl/l4GJaQ) for more. -->
+                <meta-data
+                    android:name="com.google.firebase.messaging.default_notification_icon"
+                    android:resource="@drawable/app_push_icon" />
+<!--         Set color used with incoming notification messages. This is used when no color is set for the incoming-->
+<!--             notification message. See README(https://goo.gl/6BKBk7) for more.-->
+                <meta-data
+                    android:name="com.google.firebase.messaging.default_notification_color"
+                    android:resource="@color/colorPush" />
+
+    </application>
+
+</manifest>
