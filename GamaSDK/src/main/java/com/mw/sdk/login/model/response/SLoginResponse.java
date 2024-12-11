@@ -88,9 +88,9 @@ public class SLoginResponse extends BaseResponseModel {
         private boolean isTest;//是否是测试用户
 
         private boolean miniGameUser = false;
-        private boolean block = false;
-        private int blockTime;//秒
-        private String blockMsg;
+        private boolean block = false;//是否需要禁止登录
+        private int blockTime;//秒。剩余可登录时间
+        private String blockMsg;//前端提示，可选，没有使用客户端预设提示
 
         public boolean isMiniGameUser() {
             return miniGameUser;
