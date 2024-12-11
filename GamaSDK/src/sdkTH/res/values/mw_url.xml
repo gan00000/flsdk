@@ -2,11 +2,11 @@
 
     <!--港台域名列表 开始-->
     <!--登录域名-->
-    <string name="mw_sdk_login_pre_url">https://login.hwxgame.com/</string>
+    <string name="mw_sdk_login_pre_url">https://login.dtzyo.com/</string>
     <string name="mw_sdk_login_spa_url"></string>
 
     <!--支付域名-->
-    <string name="mw_sdk_pay_pre_url">https://pay.hwxgame.com/</string>
+    <string name="mw_sdk_pay_pre_url">https://pay.dtzyo.com/</string>
     <string name="mw_sdk_pay_spa_url"></string>
 
     <!--活动域名-->
@@ -14,7 +14,7 @@
     <!--    <string name="mw_sdk_act_spa_url"></string>-->
 
     <!--cdn域名-->
-    <string name="mw_sdk_cdn_pre_url">https://cdn-download.hwxgame.com/</string>
+    <string name="mw_sdk_cdn_pre_url">https://cdn-download.dtzyo.com/</string>
     <string name="mw_sdk_cdn_spa_url"></string>
 
     <!--广告域名-->
@@ -22,26 +22,26 @@
     <!--    <string name="mw_sdk_ads_spa_url"></string>-->
 
     <!--平台域名-->
-    <string name="mw_sdk_plat_pre_url">https://platform.hwxgame.com/</string>
+    <string name="mw_sdk_plat_pre_url">https://platform.dtzyo.com/</string>
     <string name="mw_sdk_plat_spa_url"></string>
 
     <!--客服域名-->
     <!--    <string name="mw_sdk_cs_pre_url"></string>-->
     <!--    <string name="mw_sdk_cs_spa_url"></string>-->
 
-    <string name="mw_sdk_member_pre_url">https://member.hwxgame.com/</string>
+    <string name="mw_sdk_member_pre_url">https://member.dtzyo.com/</string>
     <string name="mw_sdk_member_spa_url"></string>
 
     <!--    日志记录域名-->
-    <string name="mw_sdk_log_pre_url">https://log.hwxgame.com/</string>
+    <string name="mw_sdk_log_pre_url">https://log.dtzyo.com/</string>
 
     <!--使用者條款 - 服務條款 -->
-    <string name="mw_sdk_terms_service_url">https://member.hwxgame.com/privacy/dev_privacy_en.html</string>
+    <string name="mw_sdk_terms_service_url">https://member.dtzyo.com/privacy/dev_privacy.html</string>
 
     <!--社群banner-->
-    <string name="mw_sdk_social_url">https://member.hwxgame.com/sdk/social/%s/index.html</string>
+    <string name="mw_sdk_social_url">https://member.dtzyo.com/sdk/social/%s/index.html</string>
 
     <!--    数数-->
-    <string name="mw_td_te_server_url">https://shushu.hwxgame.com/</string>
+    <string name="mw_td_te_server_url">https://shushu.dtzyo.com/</string>
 
 </resources>
