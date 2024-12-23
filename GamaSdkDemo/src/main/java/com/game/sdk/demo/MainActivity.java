@@ -20,11 +20,11 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.activity.result.ActivityResultCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
-import com.android.billingclient.api.Purchase;
 import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.AppUtil;
@@ -34,12 +34,8 @@ import com.core.base.utils.SStringUtil;
 import com.core.base.utils.SignatureUtil;
 import com.core.base.utils.ToastUtils;
 import com.mw.base.bean.SPayType;
-import com.mw.sdk.api.PayApi;
 import com.mw.sdk.bean.req.PayCreateOrderReqBean;
-import com.mw.sdk.bean.res.GPExchangeRes;
-import com.mw.sdk.out.bean.EventItemDetailBean;
-import com.mw.sdk.out.bean.EventPropertie;
-import com.mw.sdk.utils.SdkUtil;
+import com.mw.sdk.callback.AdCallback;
 import com.mw.sdk.callback.IPayListener;
 import com.mw.sdk.demo.R;
 import com.mw.sdk.login.ILoginCallBack;
@@ -47,12 +43,12 @@ import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.out.IMWSDK;
 import com.mw.sdk.out.ISdkCallBack;
 import com.mw.sdk.out.MWSdkFactory;
+import com.mw.sdk.utils.SdkUtil;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public class MainActivity extends Activity {
 
@@ -97,20 +93,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                //登陆接口 ILoginCallBack为登录成功后的回调
-                mIMWSDK.login(MainActivity.this, new ILoginCallBack() {
-                    @Override
-                    public void onLogin(SLoginResponse sLoginResponse) {
-                        handleLoginResponse(sLoginResponse);
-                    }
-
-                    @Override
-                    public void onLogout(String msg) {
-                        //游戏处理退出，重新回到登录界面
-                    }
-                });
-                String sha1 = SignatureUtil.getSignatureSHA1WithColon(activity,activity.getPackageName());
-                PL.i("sha1:" + sha1);
+                testLogin();
             }
         });
 
@@ -129,7 +112,7 @@ public class MainActivity extends Activity {
 //                com.game.superand.1usd
 //                com.game.superand.2usd
 //                String skuId = "com.miaoou.6jin";
-                String skuId = "com.fyd.en1499";
+                String skuId = "com.fyd.en99";
                 mIMWSDK.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(),skuId, extra,roleId,roleName,roleLevel, vipLevel,serverCode, serverName, new IPayListener() {
 
                     @Override
@@ -494,11 +477,41 @@ public class MainActivity extends Activity {
         findViewById(R.id.openUrl).setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
 
-                if(SStringUtil.isEmpty(SdkUtil.getUid(activity))){
-                    ToastUtils.toast(activity,"请先登录");
-                    return;
+//                mIMWSDK.openSdkGame(activity, new ISdkCallBack() {
+//                    @Override
+//                    public void success() {
+//                        //小游戏结束并并关闭
+//                        PL.i("openSdkGame callback success");
+//                    }
+//
+//                    @Override
+//                    public void failure() {
+//
+//                    }
+//                });
+
+//                if(SStringUtil.isEmpty(SdkUtil.getUid(activity))){
+//                    ToastUtils.toast(activity,"请先登录");
+//                    return;
+//                }
+//                mIMWSDK.openUrlByBrowser(MainActivity.this, "https://activity.tthplay.com/api/redirect/page");
+
+                try {
+                    Process process = Runtime.getRuntime().exec("ping -c 1 -w 10 101.32.104.11");
+                    if (process != null){
+                        InputStream is = process.getInputStream();
+                        BufferedReader bufferedReader =  new BufferedReader(new InputStreamReader(is));
+                        StringBuilder sb = new StringBuilder();
+                        String line;
+                        while (null != (line = bufferedReader.readLine())){
+                            sb.append(line);
+                            sb.append("\n");
+                        }
+                        PL.i(sb.toString());
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-                mIMWSDK.openUrlByBrowser(MainActivity.this, "https://activity.tthplay.com/api/redirect/page");
             }
         });
 
@@ -527,12 +540,68 @@ public class MainActivity extends Activity {
 
                 eventPropertie.setGet_item_detail(get_item_detail_list);
                 mIMWSDK.trackEvent(MainActivity.this, "standard_activity_get_reward",eventPropertie);*/
+
+//                mIMWSDK.openUrlBySdkWebview(activity, "https://msgen.onelink.me/K6og/u227mm9b");
+
             }
         });
 
+        findViewById(R.id.show_ad).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mIMWSDK.showAd(activity, new AdCallback() {
+                    @Override
+                    public void onAdClicked(String msg) {
 
+                    }
 
+                    @Override
+                    public void onAdDisplayed(String msg) {
+
+                    }
+
+                    @Override
+                    public void onAdHidden(String msg) {
+
+                    }
+
+                    @Override
+                    public void onUserRewarded(String msg) {
+
+                    }
+                });
+            }
+        });
         AppUtil.hideActivityBottomBar(this);
+    }
+
+    private void testLogin() {
+        //登陆接口 ILoginCallBack为登录成功后的回调
+        mIMWSDK.login(MainActivity.this, new ILoginCallBack() {
+            @Override
+            public void onLogin(SLoginResponse sLoginResponse) {
+                handleLoginResponse(sLoginResponse);
+            }
+
+            @Override
+            public void onLogout(String msg) {
+                //游戏处理退出，重新回到登录界面
+            }
+        });
+        String sha1 = SignatureUtil.getSignatureSHA1WithColon(activity,activity.getPackageName());
+        PL.i("sha1:" + sha1);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mIMWSDK.onStart(this);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
     }
 
     private void handleLoginResponse(SLoginResponse sLoginResponse) {
@@ -543,6 +612,7 @@ public class MainActivity extends Activity {
             String sign = sLoginResponse.getData().getSign();
             String timestamp = sLoginResponse.getData().getTimestamp();
             String gameCode = sLoginResponse.getData().getGameCode();
+            boolean isMiniGameUser = sLoginResponse.getData().isMiniGameUser();
 
            // sign equals md5(signKey+ gameCode + uid + timestamp);//验证通过
 
@@ -558,6 +628,14 @@ public class MainActivity extends Activity {
             String telephone = sLoginResponse.getData().getTelephone();
             //是否绑定账号
             boolean isBind = sLoginResponse.getData().isBind();
+
+            String lg = mIMWSDK.getSdkLanguage(activity);
+            if (lg.startsWith("zh")){
+                //中文
+            }else {
+                //英文
+            }
+
             //todo 进行验证
 
             AlertDialog.Builder builder;

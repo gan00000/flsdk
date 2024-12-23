@@ -612,24 +612,24 @@ android {
 
             signingConfig signingConfigs.release_v6
             //base
-            applicationId "com.wanxin.tgen"
+            applicationId "com.tgfm.thand"
             minSdkVersion 25
             targetSdkVersion 34
 
-            resValue "string", "sdk_game_code", "tgen"
-            resValue "string", "sdk_app_key", "c999bd3d4cb5d1239c0c30bfc70506f2"
+            resValue "string", "sdk_game_code", "tgth"
+            resValue "string", "sdk_app_key", "0b12ae79e9fabfc3131500595b76063c"
             resValue "string", "sdk_more_language", "true"
-            resValue "string", "sdk_default_server_language", "en_US"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
-            resValue "string", "scheme", "tgen"
+            resValue "string", "sdk_default_server_language", "th_TH"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR/th_TH
+            resValue "string", "scheme", "tgth"
             resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
             resValue "string", "sdk_release_european", "true"
 
             //facebook
-            resValue "string", "facebook_app_id", "412108094771737"
-            resValue "string", "facebook_client_token", "e36a0f2a998fbfec7bf6ed97e5946f7bz"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider412108094771737"
-            resValue "string", "fb_login_protocol_scheme", "fb412108094771737"
-            resValue "string", "facebook_app_name", "tgen" //游戏名字
+            resValue "string", "facebook_app_id", "1047988437079852"
+            resValue "string", "facebook_client_token", "d19bb78a845b887530c805a774a2bc0d"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1047988437079852"
+            resValue "string", "fb_login_protocol_scheme", "fb1047988437079852"
+            resValue "string", "facebook_app_name", "tgth" //游戏名字
             //ad
             resValue "string", "adjust_app_token", ""
             resValue "string", "sdk_appflyer_dev_key", "mjcKspHuCucYWYs7cc4v6a"
