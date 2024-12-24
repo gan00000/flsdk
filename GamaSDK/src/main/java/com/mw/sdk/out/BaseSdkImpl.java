@@ -60,14 +60,12 @@ import com.mw.sdk.bean.res.ConfigBean;
 import com.mw.sdk.bean.res.FloatMenuResData;
 import com.mw.sdk.bean.res.MenuData;
 import com.mw.sdk.bean.res.ToggleResult;
-import com.mw.sdk.callback.AdCallback;
 import com.mw.sdk.callback.FloatButtionClickCallback;
 import com.mw.sdk.callback.FloatCallback;
 import com.mw.sdk.callback.IPayListener;
 import com.mw.sdk.constant.ChannelPlatform;
 import com.mw.sdk.constant.RequestCode;
 import com.mw.sdk.constant.ResultCode;
-import com.mw.sdk.constant.SGameLanguage;
 import com.mw.sdk.login.DialogLoginImpl;
 import com.mw.sdk.login.ILogin;
 import com.mw.sdk.login.ILoginCallBack;
@@ -89,7 +87,6 @@ import com.mw.sdk.widget.SWebViewDialog;
 import com.mw.sdk.widget.SWebViewLayout;
 import com.thirdlib.adjust.AdjustHelper;
 import com.thirdlib.af.AFHelper;
-import com.thirdlib.applovin.IMwAd;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.huawei.HuaweiPayImpl;
 import com.thirdlib.td.TDAnalyticsHelper;
@@ -145,8 +142,6 @@ public class BaseSdkImpl implements IMWSDK {
 
     private SharedPreferences googleDeepLinkPreferences;
     private SharedPreferences.OnSharedPreferenceChangeListener deepLinkListener;
-
-    IMwAd iMwAd;
 
     public BaseSdkImpl() {
 //        iLogin = ObjFactory.create(DialogLoginImpl.class);
@@ -227,11 +222,6 @@ public class BaseSdkImpl implements IMWSDK {
                 //广告
                 SdkEventLogger.activateApp(activity);
                 SdkEventLogger.reportInstallActivation(activity.getApplicationContext());
-
-
-                //ad
-//                iMwAd = new ApplovinManager();
-//                iMwAd.initAd(activity);
 
             }
         },200);
@@ -592,9 +582,6 @@ public class BaseSdkImpl implements IMWSDK {
                     sFacebookProxy.onDestroy(activity);
                 }
 
-                if (iMwAd != null){
-                    iMwAd.destroy(activity);
-                }
             }
         });
     }
@@ -1759,11 +1746,4 @@ public class BaseSdkImpl implements IMWSDK {
         return SdkUtil.getSdkLocaleLanguage(context);
     }
 
-    @Override
-    public void showAd(Activity activity, AdCallback adCallback) {
-        if (iMwAd != null){
-            iMwAd.setAdCallback(adCallback);
-            iMwAd.showAdView(activity);
-        }
-    }
 }

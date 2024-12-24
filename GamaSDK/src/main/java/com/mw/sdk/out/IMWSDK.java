@@ -10,15 +10,11 @@ import com.core.base.callback.SFCallBack;
 import com.mw.base.bean.SPayType;
 import com.mw.sdk.ads.EventConstant;
 import com.mw.sdk.bean.req.PayCreateOrderReqBean;
-import com.mw.sdk.callback.AdCallback;
 import com.mw.sdk.callback.IPayListener;
 import com.mw.sdk.login.ILoginCallBack;
 import com.mw.sdk.login.model.response.SLoginResponse;
-import com.mw.sdk.out.bean.EventPropertie;
 
 import org.json.JSONObject;
-
-import java.util.Map;
 
 /**
  * Created by gan on 2017/2/13.
@@ -209,5 +205,5 @@ public interface IMWSDK extends IGameLifeCycle {
 
     String getSdkLanguage(Context context);
 
-    public void showAd(Activity activity, AdCallback adCallback);
+//    public void showAd(Activity activity, AdCallback adCallback);
 }

@@ -249,8 +249,6 @@ dependencies {
     sdk3Implementation platform('ru.rustore.sdk:bom:6.0.0')
     sdk3Implementation 'ru.rustore.sdk:billingclient'
 
-    //广告盈利聚合平台
-//    implementation 'com.applovin:applovin-sdk:+'
 }
 
 
