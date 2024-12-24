@@ -1,0 +1,8 @@
+<resources>
+
+<!--    ad config-->
+    <string name="sdk_app_ad_key"></string>
+    <string name="sdk_ad_unit_id"></string>
+    <string name="sdk_admob_app_id"></string>
+
+</resources>

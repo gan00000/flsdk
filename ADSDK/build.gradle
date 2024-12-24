@@ -1,0 +1,121 @@
+apply plugin: 'com.android.library'
+apply plugin: 'org.jetbrains.kotlin.android'
+
+android {
+
+    compileSdk rootProject.ext.compileSdkVersion
+
+    compileOptions {
+        sourceCompatibility rootProject.ext.javaVersion
+        targetCompatibility rootProject.ext.javaVersion
+    }
+    kotlinOptions {
+        jvmTarget = rootProject.ext.jvmTarget
+    }
+
+    def sdk_version = "2.2.4"
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        buildConfigField "String", "JAR_VERSION", "\"$sdk_version\""
+    }
+
+    android.libraryVariants.all { variant ->
+        variant.outputs.all {
+
+            if (outputFileName != null && outputFileName.contains("release") && outputFileName.endsWith('.aar')) {
+                outputFileName = "MWSDK-"  + variant.flavorName.toLowerCase() + "-release-" + sdk_version + ".aar"
+            }
+        }
+    }
+
+//    lint {
+//        abortOnError false
+//    }
+    namespace 'com.mw.sdk.ad'
+
+    buildTypes {
+        release {
+//            multiDexEnabled true //Add this
+//            shrinkResources true  //压缩资源
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+//            shrinkResources false  //压缩资源
+//            minifyEnabled false
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+    }
+    flavorDimensions "1"
+    productFlavors {
+
+        sdk3 {//第三套
+            dimension '1'
+        }
+
+        sdk4 {//第4套
+            dimension '1'
+            //msg ad
+            resValue "string", "sdk_app_ad_key", "T1ZZ9VF_DC5bdMxRgpgSqXJLgkAw4zbpM_HckzL5tPJz2kN9pxWikTOGIaMTqQ2cCEQTpdEO4gfT_RrdeXrVgX"
+            resValue "string", "sdk_ad_unit_id", "906823fa7500702a"
+            resValue "string", "sdk_admob_app_id", "ca-app-pub-3468350738432804~6705816673"
+        }
+
+        sdk5 {//第4套
+            dimension '1'
+        }
+
+        QooApp {//Qooap
+            dimension '1'
+        }
+
+        huawei {//华为渠道
+            dimension '1'
+        }
+
+        vn {//越南专用
+            dimension '1'
+        }
+
+        sdk6 {//第6套，东南亚
+            dimension "1"
+
+        }
+        sdkKR {//韩国
+            dimension "1"
+        }
+
+        sdkTH {//泰国
+            dimension "1"
+        }
+
+        lunqi {//lunqi
+            dimension '1'
+        }
+
+    }
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.12.0'
+
+    implementation project(':GamaSDK')
+    //广告盈利聚合平台
+    implementation 'com.applovin:applovin-sdk:+'
+    implementation 'com.applovin.mediation:google-adapter:+'
+}
+
+
+//./gradlew makeJar 出现env: bash\r: No such file or directory的话是由
+// 于window生成的工程gradlew文件在mac下换行符有问题

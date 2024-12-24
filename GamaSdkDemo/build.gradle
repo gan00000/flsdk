@@ -316,8 +316,6 @@ android {
             //naver
             resValue "string", "naver_client_id", ""
             resValue "string", "naver_client_secret", ""
-            resValue "string", "sdk_app_ad_key", "T1ZZ9VF_DC5bdMxRgpgSqXJLgkAw4zbpM_HckzL5tPJz2kN9pxWikTOGIaMTqQ2cCEQTpdEO4gfT_RrdeXrVgX"
-            resValue "string", "sdk_ad_unit_id", "906823fa7500702a"
 
 
 //            resValue "string", "sdk_game_code", "fyden"
@@ -669,6 +667,7 @@ dependencies {
 //    implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
     QooAppImplementation(name: 'qooapp-opensdk-2.0.6', ext: 'aar')
     implementation project(':GamaSDK')
+    implementation project(':ADSDK')
 //    implementation 'com.github.bumptech.glide:glide:4.16.0'
 //    annotationProcessor 'com.github.bumptech.glide:compiler:4.16.0'
 

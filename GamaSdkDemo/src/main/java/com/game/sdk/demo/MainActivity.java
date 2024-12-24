@@ -20,7 +20,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 
-import androidx.activity.result.ActivityResultCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
@@ -34,8 +33,9 @@ import com.core.base.utils.SStringUtil;
 import com.core.base.utils.SignatureUtil;
 import com.core.base.utils.ToastUtils;
 import com.mw.base.bean.SPayType;
+import com.mw.sdk.AdCallback;
+import com.mw.sdk.MWAdManger;
 import com.mw.sdk.bean.req.PayCreateOrderReqBean;
-import com.mw.sdk.callback.AdCallback;
 import com.mw.sdk.callback.IPayListener;
 import com.mw.sdk.demo.R;
 import com.mw.sdk.login.ILoginCallBack;
@@ -87,6 +87,7 @@ public class MainActivity extends Activity {
 
         //在游戏Activity的onCreate生命周期中调用
         mIMWSDK.onCreate(this);
+        MWAdManger.getInstance().initAd(this);
 
 
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -549,7 +550,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.show_ad).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mIMWSDK.showAd(activity, new AdCallback() {
+                MWAdManger.getInstance().showAd(activity, new AdCallback() {
                     @Override
                     public void onAdClicked(String msg) {
 
@@ -720,6 +721,7 @@ public class MainActivity extends Activity {
         super.onDestroy();
         PL.i("activity onDestroy");
         mIMWSDK.onDestroy(this);
+        MWAdManger.getInstance().destroy(this);
     }
 
     @Override
