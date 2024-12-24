@@ -553,22 +553,22 @@ public class MainActivity extends Activity {
                 MWAdManger.getInstance().showAd(activity, new AdCallback() {
                     @Override
                     public void onAdClicked(String msg) {
-
+                        //广告被点击
                     }
 
                     @Override
                     public void onAdDisplayed(String msg) {
-
+                        //广告显示
                     }
 
                     @Override
                     public void onAdHidden(String msg) {
-
+                        //广告隐藏
                     }
 
                     @Override
                     public void onUserRewarded(String msg) {
-
+                        //用户获得奖励，在此处做发奖励操作
                     }
                 });
             }

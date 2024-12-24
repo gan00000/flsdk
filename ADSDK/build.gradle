@@ -13,7 +13,7 @@ android {
         jvmTarget = rootProject.ext.jvmTarget
     }
 
-    def sdk_version = "2.2.4"
+    def sdk_version = "2.2.5"
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
@@ -24,7 +24,7 @@ android {
         variant.outputs.all {
 
             if (outputFileName != null && outputFileName.contains("release") && outputFileName.endsWith('.aar')) {
-                outputFileName = "MWSDK-"  + variant.flavorName.toLowerCase() + "-release-" + sdk_version + ".aar"
+                outputFileName = "ADSDK-"  + variant.flavorName.toLowerCase() + "-release-" + sdk_version + ".aar"
             }
         }
     }
@@ -38,7 +38,7 @@ android {
         release {
 //            multiDexEnabled true //Add this
 //            shrinkResources true  //压缩资源
-            minifyEnabled true
+//            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
@@ -110,7 +110,7 @@ dependencies {
 
     implementation 'androidx.core:core-ktx:1.12.0'
 
-    implementation project(':GamaSDK')
+//    implementation project(':GamaSDK')
     //广告盈利聚合平台
     implementation 'com.applovin:applovin-sdk:+'
     implementation 'com.applovin.mediation:google-adapter:+'
