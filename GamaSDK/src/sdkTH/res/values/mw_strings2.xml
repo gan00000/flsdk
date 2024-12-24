@@ -1,26 +1,35 @@
 <resources>
-    <string name="text_phone_bind">Binding phone</string>
-    <string name="text_phone_area_code">Area code</string>
-    <string name="text_phone_input_hint">Enter your phone number</string>
-    <string name="text_phone_hasbind_tips">You have successfully bound, this is your current bound cell phone number</string>
-    <string name="text_area_code_not_empty">Cell phone area code cannot be empty</string>
-    <string name="text_phone_not_empty">Cell phone number cannot be empty</string>
-    <string name="text_phone_not_match">Wrong format of cell phone number</string>
-    <string name="text_vfcode_has_send">Code has been sent</string>
-    <string name="text_phone_bind_success">Cell phone binding success</string>
-    <string name="text_has_bind_tips_google">Account has been upgraded</string>
-    <string name="text_has_bind_tips_fb">Account has been upgraded</string>
-    <string name="text_has_bind_tips_guest">Account has been upgraded</string>
-    <string name="text_has_bind_tips_line">Account has been upgraded</string>
-    <string name="text_has_bind_tips_mw">Member Account</string>
-    <string name="text_notice">Announcement</string>
-    <string name="text_account_not_login">You do not have an account, please login first！</string>
-    <string name="text_has_bind_tips_twitter">Account has been upgraded</string>
-    <string name="text_has_upgrade_account">Account has been upgraded</string>
-    <string name="text_game_name">game name：</string>
-    <string name="text_server_name">server：</string>
-    <string name="text_role_name">role name：</string>
-    <string name="text_account_name">account：</string>
-    <string name="text_account_uid">uid：</string>
-    <string name="text_account_del">delete account</string>
+    <string name="text_phone_bind">การผูกเบอร์โทรศัพท์</string>
+    <string name="text_phone_area_code">รหัสประเทศ</string>
+    <string name="text_phone_input_hint">กรุณากรอกหมายเลขโทรศัพท์</string>
+    <string name="text_phone_hasbind_tips">คุณได้ทำการผูกหมายเลขโทรศัพท์สำเร็จ นี่คือตัวเลขโทรศัพท์ที่คุณผูก</string>
+    <string name="text_area_code_not_empty">รหัสประเทศไม่สามารถเว้นว่างได้</string>
+    <string name="text_phone_not_empty">หมายเลขโทรศัพท์ไม่สามารถเว้นว่างได้</string>
+    <string name="text_phone_not_match">รูปแบบหมายเลขโทรศัพท์ไม่ถูกต้อง</string>
+    <string name="text_vfcode_has_send">รหัสยืนยันถูกส่งแล้ว</string>
+    <string name="text_phone_bind_success">การผูกหมายเลขโทรศัพท์สำเร็จ</string>
+    <string name="text_has_bind_tips_google">Google ได้อัปเกรดเป็นบัญชีสมาชิกแล้ว</string>
+    <string name="text_has_bind_tips_fb">Facebook ได้อัปเกรดเป็นบัญชีสมาชิกแล้ว</string>
+    <string name="text_has_bind_tips_guest">ผู้เยี่ยมชมได้อัปเกรดเป็นบัญชีสมาชิกแล้ว</string>
+    <string name="text_has_bind_tips_line">LINE ได้อัปเกรดเป็นบัญชีสมาชิกแล้ว</string>
+    <string name="text_has_bind_tips_mw">บัญชีสมาชิก</string>
+    <string name="text_notice">ประกาศ</string>
+    <string name="text_account_not_login">ขณะนี้ไม่มีบัญชี กรุณาลงชื่อเข้าใช้ก่อน</string>
+    <string name="text_has_bind_tips_twitter">Twitter ได้อัปเกรดเป็นบัญชีสมาชิกแล้ว</string>
+    <string name="text_has_upgrade_account">อัปเกรดเป็นบัญชีสมาชิกสำเร็จแล้ว</string>
+    <string name="text_game_name">ชื่อเกม:</string>
+    <string name="text_server_name">เซิร์ฟเวอร์:</string>
+    <string name="text_role_name">ชื่อบทบาท:</string>
+    <string name="text_account_name">บัญชี:</string>
+    <string name="text_account_uid">uid:</string>
+    <string name="text_account_del">ลบบัญชี</string>
+    <string name="text_block_msg">เรียนผู้เล่นที่รัก:
+        \nเราได้ตรวจพบว่าบัญชีของท่านมีการทำเรื่องขอเงินคืน เพื่อให้แน่ใจว่าบัญชีของท่านปลอดภัยและประสบการณ์ในการเล่นเกมของท่านไม่ถูกรบกวน กรุณาติดต่อฝ่ายบริการลูกค้าภายในเกมภายใน 24 ชั่วโมงหลังจากได้รับการแจ้งเตือนนี้เพื่อทำการตรวจสอบและดำเนินการ
+        \n\nหากไม่ติดต่อและยืนยันภายในเวลาที่กำหนด ทางเราจะพิจารณาการระงับบัญชีของท่าน จนกว่าปัญหาจะได้รับการแก้ไข
+        \n\nขอขอบคุณสำหรับความเข้าใจและความร่วมมือของท่าน!</string>
+    <string name="text_blocked_msg">เรียนผู้เล่นที่รัก:
+        \n\nเนื่องจากบัญชีของท่านเกี่ยวข้องกับการขอเงินคืนและไม่ได้ติดต่อฝ่ายบริการลูกค้าภายในเกมภายในเวลาที่กำหนด บัญชีของท่านจึงถูกระงับชั่วคราว
+        \n\nหากต้องการยกเลิกการระงับบัญชี กรุณาติดต่อฝ่ายบริการลูกค้าภายในเกมและให้ข้อมูลและหลักฐานที่เกี่ยวข้อง เราจะช่วยเหลือท่านในการดำเนินการต่อไป
+        \n\nขอขอบคุณสำหรับความเข้าใจและความร่วมมือของท่าน!</string>
+
 </resources>

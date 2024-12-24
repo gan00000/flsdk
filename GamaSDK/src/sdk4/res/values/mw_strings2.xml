@@ -1,5 +1,4 @@
 <resources>
-
     <string name="text_phone_bind">Binding phone</string>
     <string name="text_phone_area_code">Area code</string>
     <string name="text_phone_input_hint">Enter your phone number</string>
@@ -16,5 +15,21 @@
     <string name="text_has_bind_tips_mw">Member Account</string>
     <string name="text_notice">Announcement</string>
     <string name="text_account_not_login">You do not have an account, please login first！</string>
+    <string name="text_has_bind_tips_twitter">Account has been upgraded</string>
+    <string name="text_has_upgrade_account">Account has been upgraded</string>
+    <string name="text_game_name">game name：</string>
+    <string name="text_server_name">server：</string>
+    <string name="text_role_name">role name：</string>
+    <string name="text_account_name">account：</string>
+    <string name="text_account_uid">uid：</string>
+    <string name="text_account_del">delete account</string>
+    <string name="text_block_msg">Dear Player,
+        \nWe\'ve detected refund activity on your account. To ensure your account security and maintain a fair gaming environment, please contact our in-game customer support within 24 hours of receiving this notice for verification and resolution.
+        \n\nFailure to reach out and confirm within the specified timeframe may result in account suspension until the matter is resolved.
+        \n\nWe appreciate your understanding and cooperation.</string>
+    <string name="text_blocked_msg">Dear Player,
+        \n\nYour account has been temporarily suspended due to unresolved refund activity and failure to contact our customer support within the given timeframe.
+        \n\nTo lift the suspension, please reach out to our in-game customer support and provide any relevant information or documentation. We\'ll work with you to resolve this issue as quickly as possible.
+        \n\nWe appreciate your understanding and cooperation.</string>
 
 </resources>

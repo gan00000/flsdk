@@ -1,132 +1,132 @@
 <resources>
 
-    <!--启动条款页面-->
-    <string name="gama_ui_term_port_read2">I have read and agree to The Terms Of Service</string>
+    <!--หน้าเงื่อนไขการเริ่มต้น-->
+    <string name="gama_ui_term_port_read2">ฉันได้อ่านและยอมรับสัญญามาตรฐาน</string>
 
-    <!--登录页面-->
-    <string name="py_login_save_account">Remember account</string>
-    <string name="py_findpwd">Forgot?</string>
-    <string name="py_register_account">Sign up</string>
+    <!--หน้าเข้าสู่ระบบ-->
+    <string name="py_login_save_account">จดจำบัญชี</string>
+    <string name="py_findpwd">ลืมรหัสผ่านหรือไม่</string>
+    <string name="py_register_account">ลงทะเบียนบัญชี</string>
 
-    <!--注册页面-->
-    <string name="py_register_account_phone">Enter your phone number</string>
+    <!--หน้าลงทะเบียน-->
+    <string name="py_register_account_phone">กรุณากรอกหมายเลขโทรศัพท์</string>
 
-    <!--修改密码页面-->
-    <string name="py_login_page_change_pwd">Change password</string>
+    <!--หน้าปรับเปลี่ยนรหัสผ่าน-->
+    <string name="py_login_page_change_pwd">เปลี่ยนรหัสผ่าน</string>
 
-    <!--绑定账号页面（通用）-->
-    <string name="py_login_page_account_bind">Binding member account</string>
-    <string name="py_btn_bind">Binding</string>
+    <!--หน้าผูกบัญชี (ทั่วไป)-->
+    <string name="py_login_page_account_bind">ผูกบัญชีสมาชิก</string>
+    <string name="py_btn_bind">ผูกสมาชิก</string>
 
-    <string name="account_bind">Account Binding</string>
+    <string name="account_bind">การผูกบัญชี</string>
 
-    <!--验证提示-->
-    <string name="py_account_empty">Account cannot be empty</string>
-    <string name="py_password_empty">Password cannot be empty</string>
-    <string name="py_vfcode_empty">Enter the code</string>
+    <!--การแจ้งเตือนการยืนยัน-->
+    <string name="py_account_empty">บัญชีไม่สามารถเว้นว่างได้</string>
+    <string name="py_password_empty">รหัสผ่านไม่สามารถเว้นว่างได้</string>
+    <string name="py_vfcode_empty">กรุณากรอกรหัสยืนยัน</string>
 
-    <!--自动登录-->
-    <string name="py_auto_login_change">Switching accounts</string>
+    <!--เข้าสู่ระบบอัตโนมัติ-->
+    <string name="py_auto_login_change">สลับบัญชี</string>
 
-    <string name="py_login_autologin_tips">Accounts %1$s loading</string>
+    <string name="py_login_autologin_tips">บัญชี %1$s กำลังเข้าสู่ระบบ</string>
 
-    <!--预设提示-->
-    <string name="py_msg_account_hint">Enter your account number</string>
-    <string name="py_msg_pwd_hint">Enter your password</string>
+    <!--การแจ้งเตือนเริ่มต้น-->
+    <string name="py_msg_account_hint">กรุณากรอกบัญชี</string>
+    <string name="py_msg_pwd_hint">กรุณากรอกรหัสผ่าน</string>
 
-    <!--通用文本-->
-<!--    &#32; == 普通的英文半角空格-->
-<!--    &#160; == &nbsp; == &#xA0; == no-break space （普通的英文半角空格但不换行）-->
-<!--    &#12288; == 中文全角空格 （一个中文宽度）-->
-<!--    &#8194; == &ensp; == en空格 （半个中文宽度）-->
-<!--    &#8195; == &emsp; == em空格 （一个中文宽度）-->
-<!--    &#8197; == 四分之一em空格 （四分之一中文宽度）-->
-<!--    相比平时的空格（&#32;），nbsp拥有不间断（non-breaking）特性。即连续的nbsp会在同一行内显示。即使有100个连续的nbsp，浏览器也不会把它们拆成两行。-->
-    <string name="py_confire">Confirm</string>
-    <!--SDK功能提示-->
-    <string name="gama_toast_msg_app_not_install">Since you have not installed %s，please install the app first and then share</string>
+    <!--ข้อความทั่วไป-->
+    <!--      &#32; == ช่องว่างครึ่งความกว้างแบบปกติของภาษาอังกฤษ-->
+    <!--      &#160; == &nbsp; == &#xA0; == no-break space  (ช่องว่างครึ่งความกว้างแบบปกติของภาษาอังกฤษแต่ไม่เปลี่ยนบรรทัด)-->
+    <!--    &#12288; == ช่องว่างเต็มความกว้างแบบภาษาจีน (กว้างเท่าตัวอักษรจีนหนึ่งตัว)-->
+    <!--    &#8194; == &ensp; == ช่องว่าง en (กว้างครึ่งหนึ่งของตัวอักษรจีน)-->
+    <!--    &#8195; == &emsp; == ช่องว่าง em (กว้างเท่าตัวอักษรจีนหนึ่งตัว)-->
+    <!--    &#8197; == ช่องว่างหนึ่งในสี่ของ em (กว้างหนึ่งในสี่ของตัวอักษรจีน)-->
+    <!--    เมื่อเปรียบเทียบกับช่องว่างปกติ (&#32;)ช่องว่างแบบ nbsp มีคุณสมบัติไม่แบ่งบรรทัด (non-breaking) กล่าวคือ หากมี nbsp ต่อเนื่องกันหลายครั้ง จะยังคงแสดงอยู่ในบรรทัดเดียว แม้จะมี nbsp มากถึง 100 ครั้ง เบราว์เซอร์ก็จะไม่แบ่งเป็นสองบรรทัด-->
+    <string name="py_confire">ยืน&#8195;ยัน</string>
+    <!--การแจ้งเตือนฟังก์ชัน SDK-->
+    <string name="gama_toast_msg_app_not_install">เนื่องจากคุณไม่ได้ติดตั้ง%s โปรดติดตั้ง APP ก่อนแล้วค่อยแชร์</string>
 
-    <!--功能提示-->
-    <string name="py_register_success">successful</string>
+    <!--การแสดงฟังก์ชัน-->
+    <string name="py_register_success">ลงทะเบียนสำเร็จ</string>
 
-    <string name="py_login_mac_tips">You are logged in %1$s the account number and password are as follows:\n account: %2$s password: %3$s</string>
-    <string name="py_login_mac_saveimage_tips">Your account password has been saved to the album</string>
-    <string name="py_login_autologin_logining_tips">Account is logging</string>
+    <string name="py_login_mac_tips">ข้อมูลการเข้าสู่ระบบบัญชี %1$s ของคุณมีดังนี้:\nบัญชี: %2$s รหัสผ่าน: %3$s</string>
+    <string name="py_login_mac_saveimage_tips">ข้อมูลบัญชีและรหัสผ่านของคุณได้บันทึกลงในอัลบั้มแล้ว</string>
+    <string name="py_login_autologin_logining_tips">บัญชีกำลังเข้าสู่ระบบ</string>
 
-    <!--有使用 不确定用途-->
-    <string name="py_account_login">Account Login</string>
+    <!--ยังไม่ทราบวัตถุประสงค์การใช้งาน-->
+    <string name="py_account_login">การเข้าสู่ระบบบัญชี</string>
 
-    <!--未使用-->
-    <string name="py_login_success">successful</string>
-    <string name="py_account">Account</string>
-    <string name="py_password">Passowrd</string>
+    <!--ยังไม่ได้ใช้งาน-->
+    <string name="py_login_success">เข้าสู่ระบบสำเร็จ</string>
+    <string name="py_account">บัญชี</string>
+    <string name="py_password">รหัสผ่าน</string>
 
-    <string name="py_login_fb">Facebook Login</string>
-    <string name="py_login_fb_1">FB Login</string>
-    <string name="py_login_google">Google Login</string>
+    <string name="py_login_fb">เข้าสู่ระบบด้วย Facebook</string>
+    <string name="py_login_fb_1">เข้าสู่ระบบด้วย FB</string>
+    <string name="py_login_google">เข้าสู่ระบบด้วย Google</string>
 
-    <string name="py_old_pwd">Old Password</string>
-    <string name="py_new_pwd">New Password</string>
-    <string name="py_phone">Cell phone</string>
-    <string name="py_vfcode">Code</string>
+    <string name="py_old_pwd">รหัสผ่านเดิม</string>
+    <string name="py_new_pwd">รหัสผ่านใหม่</string>
+    <string name="py_phone">โทรศัพท์</string>
+    <string name="py_vfcode">รหัสยืนยัน</string>
 
-<!--    新增-->
-    <string name="guest_login_btn">Visitor Login</string>
-    <string name="tips_have_account">Already have an account？</string>
-    <string name="py_login">Login</string>
-    <string name="text_register">Sign up</string>
-    <string name="text_login_other">Other</string>
-    <string name="text_reg_tips">*The account email will be used as your verification email to retrieve your password, please fill in carefully</string>
-    <string name="py_register_account_get_vfcode">Send Code</string>
+    <!--เพิ่มใหม่-->
+    <string name="guest_login_btn">เข้าสู่ระบบแบบผู้เยี่ยมชม</string>
+    <string name="tips_have_account">มีบัญชีอยู่แล้วหรือไม่</string>
+    <string name="py_login">เข้าสู่ระบบ</string>
+    <string name="text_register">ลงทะเบียน</string>
+    <string name="text_login_other">การเข้าสู่ระบบแบบอื่น</string>
+    <string name="text_reg_tips">*อีเมลบัญชีของคุณจะถูกใช้เป็นอีเมลยืนยันสำหรับการกู้คืนรหัสผ่าน กรุณากรอกอย่างระมัดระวัง</string>
+    <string name="py_register_account_get_vfcode">ส่งรหัสยืนยัน</string>
 
-    <string name="py_register_account_hit">Enter your usual email address</string>
-    <string name="py_register_password_hit">Enter 6-20 characters</string>
-    <string name="py_msg_vfcode_hint">Enter the code</string>
-    <string name="text_input_new_pwd">Enter a new password</string>
-    <string name="text_input_new_pwd_confire">Confirm new password</string>
-    <string name="text_update_account_tips">It is recommended to upgrade the account to improve account security</string>
-    <string name="text_has_update_account_tips">The account has been upgraded to a platform account</string>
-    <string name="text_delete_account">Delete account</string>
-    <string name="text_confire_change">Confirm</string>
-    <string name="text_confire_update">Upgrade</string>
-    <string name="text_change_pwd">Change password</string>
-    <string name="text_bind_account_tips">*The account email will be used as your verification email to retrieve your password, please fill in carefully</string>
+    <string name="py_register_account_hit">กรุณากรอกอีเมลที่คุณใช้งานบ่อย</string>
+    <string name="py_register_password_hit">กรุณากรอกตัวอักษร 6–20 ตัว</string>
+    <string name="py_msg_vfcode_hint">กรุณากรอกรหัสยืนยัน</string>
+    <string name="text_input_new_pwd">กรุณากรอกรหัสผ่านใหม่</string>
+    <string name="text_input_new_pwd_confire">ยืนยันรหัสผ่านใหม่</string>
+    <string name="text_update_account_tips">แนะนำให้อัปเกรดบัญชี เพื่อเพิ่มความปลอดภัยของบัญชี</string>
+    <string name="text_has_update_account_tips">บัญชีนี้ได้รับการอัปเกรดเป็นบัญชีแพลตฟอร์มแล้ว</string>
+    <string name="text_delete_account">ลบบัญชีนี้</string>
+    <string name="text_confire_change">ยืนยันการแก้ไข</string>
+    <string name="text_confire_update">ยืนยันการอัปเกรด</string>
+    <string name="text_change_pwd">เปลี่ยนรหัสผ่าน</string>
+    <string name="text_bind_account_tips">*อีเมลบัญชีของคุณจะถูกใช้เป็นอีเมลยืนยันสำหรับการกู้คืนรหัสผ่าน กรุณากรอกอย่างระมัดระวัง</string>
 
-    <!--找回密码页面-->
-    <string name="py_login_page_forgot_pwd">Forgot</string>
-    <string name="text_welcome_back">Welcome</string>
-    <string name="text_go_game">Continue</string>
-    <string name="text_update_account">Upgrade</string>
+    <!--หน้ากู้คืนรหัสผ่าน-->
+    <string name="py_login_page_forgot_pwd">ลืมรหัสผ่าน</string>
+    <string name="text_welcome_back">ยินดีต้อนรับกลับมา</string>
+    <string name="text_go_game">เล่นเกมต่อ</string>
+    <string name="text_update_account">อัปเกรดบัญชี</string>
 
-    <string name="gama_ui_term_not_read">Please agree to the "The Terms Of Service" first</string>
-    <string name="text_confire_reg">Confirm</string>
-    <string name="text_pwd_format">Password only supports 6~20 characters</string>
-    <string name="text_account_format">The format of the mailbox is abnormal, please re-enter</string>
+    <string name="gama_ui_term_not_read">กรุณายอมรับ "สัญญามาตรฐาน" ก่อน</string>
+    <string name="text_confire_reg">ยืนยันการลงทะเบียน</string>
+    <string name="text_pwd_format">รหัสผ่านรองรับเพียง 6~20 ตัวอักษร</string>
+    <string name="text_account_format">รูปแบบอีเมลผิดพลาด กรุณากรอกใหม่</string>
 
-    <string name="py_error_occur">Network Anomaly</string>
-    <string name="text_i_agree_tips">I have read and agree to</string>
-    <string name="text_i_read_agree">Read and agree</string>
-    <string name="text_term_moqie"> <u>The Terms Of Service</u></string>
-    <string name="sdk_terms_title">The Terms Of Service</string>
-    <string name="text_switch_account">Switching accounts</string>
-    <string name="text_update_account_bind">Upgrade</string>
-    <string name="text_pwd_not_equel">Two inconsistent passwords</string>
-    <string name="py_input_old_password">Enter the old password</string>
-    <string name="text_free_register">No Registration Login</string>
-    <string name="text_old_new_pwd_same">The new password cannot be the same as the old one</string>
-    <string name="text_cancel">Cancellation</string>
-    <string name="text_confire">Confirm</string>
-    <string name="text_delete_account_tips">Please note that deleting your account will completely remove your account from the platform, if you want to confirm the deletion, please click "Confirm".</string>
-    <string name="text_account_bind_success">Upgrade member account successfully, login now...</string>
-    <string name="text_account_bind_success2">Upgrade member account successfully</string>
-    <string name="text_account_change_pwd_success">Modified successfully, logging in now...</string>
-    <string name="text_send_vf_code_success">Code has been sent, please pay attention to check</string>
-    <string name="text_finish_pay">Payment completed</string>
-    <string name="text_account_not_exist">Account does not exist</string>
-    <string name="text_close">Close</string>
-    <string name="text_select_pay_channel">Select payment method</string>
-    <string name="text_other">Other</string>
-    <string name="text_pay_pay">top up</string>
-    <string name="text_account_change_pwd_success2">password has been updated</string>
+    <string name="py_error_occur">เครือข่ายผิดพลาด กรุณาตรวจสอบและลองอีกครั้ง</string>
+    <string name="text_i_agree_tips">ฉันได้อ่านและยอมรับ</string>
+    <string name="text_i_read_agree">อ่านและยอมรับ</string>
+    <string name="text_term_moqie"><u>สัญญามาตรฐาน</u></string>
+    <string name="sdk_terms_title">สัญญามาตรฐาน</string>
+    <string name="text_switch_account">สลับบัญชี</string>
+    <string name="text_update_account_bind">อัปเกรดบัญชี</string>
+    <string name="text_pwd_not_equel">รหัสผ่านทั้งสองครั้งไม่ตรงกัน</string>
+    <string name="py_input_old_password">กรุณากรอกรหัสผ่านเดิม</string>
+    <string name="text_free_register">เข้าสู่ระบบโดยไม่ต้องลงทะเบียน</string>
+    <string name="text_old_new_pwd_same">รหัสผ่านใหม่ต้องไม่เหมือนกับรหัสผ่านเดิม</string>
+    <string name="text_cancel">ยกเลิก</string>
+    <string name="text_confire">ยืนยัน</string>
+    <string name="text_delete_account_tips">โปรดระวัง การลบบัญชีจะลบบัญชีของคุณออกจากแพลตฟอร์มโดยถาวร ถ้าหากยืนยันการลบ โปรดคลิก "ยืนยัน"</string>
+    <string name="text_account_bind_success">อัปเกรดบัญชีสมาชิกสำเร็จ กำลังเข้าสู่ระบบ...</string>
+    <string name="text_account_bind_success2">อัปเกรดบัญชีสมาชิกสำเร็จ</string>
+    <string name="text_account_change_pwd_success">แก้ไขสำเร็จ กำลังเข้าสู่ระบบ...</string>
+    <string name="text_send_vf_code_success">รหัสยืนยันถูกส่งแล้ว กรุณาตรวจสอบ</string>
+    <string name="text_finish_pay">การชำระเงินเสร็จสิ้น</string>
+    <string name="text_account_not_exist">บัญชีไม่พบในระบบ</string>
+    <string name="text_close">ปิด</string>
+    <string name="text_select_pay_channel">เลือกวิธีการชำระเงิน</string>
+    <string name="text_other">อื่น ๆ</string>
+    <string name="text_pay_pay">เติมเงิน</string>
+    <string name="text_account_change_pwd_success2">การเปลี่ยนรหัสผ่านสำเร็จ</string>
 
 </resources>
