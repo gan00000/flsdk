@@ -219,12 +219,13 @@ public class BaseSdkImpl implements IMWSDK {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                PL.i("sdk initSDK postDelayed");
                 //广告
                 SdkEventLogger.activateApp(activity);
                 SdkEventLogger.reportInstallActivation(activity.getApplicationContext());
 
             }
-        },200);
+        },500);//等广告id生成好
 
 
         //时间打点开始
