@@ -268,7 +268,7 @@ public class OnestorePayImpl implements IPay, PurchaseManager.Callback {
             return;
         }
         PL.i("startQueryPurchase onQueryPurchasesResponse");
-        mContext = mContext.getApplicationContext();
+        this.mContext = mContext.getApplicationContext();
         purchaseManager.queryPurchasesAsync(false, PurchaseClient.ProductType.INAPP);
 
     }

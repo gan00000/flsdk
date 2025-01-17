@@ -264,7 +264,7 @@ public class SansungPayImpl implements IPay{
             return;
         }
         PL.i("startQueryPurchase onQueryPurchasesResponse");
-        mContext = mContext.getApplicationContext();
+        this.mContext = mContext.getApplicationContext();
 //        mIapHelper.getOwnedList(IapHelper.PRODUCT_TYPE_ITEM, new OnGetOwnedListListener() {
 //            @Override
 //            public void onGetOwnedProducts(ErrorVo errorVo, ArrayList<OwnedProductVo> arrayList) {
