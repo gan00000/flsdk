@@ -27,6 +27,9 @@ public class IPayFactory {
         }  else if (ChannelPlatform.VK.getChannel_platform().equals(channel_platform)) {
             SdkVersionUtil sdkVersionUtil = new SdkVersionUtil();
             return sdkVersionUtil.newVKPay();
+        }else if (ChannelPlatform.NOWGG.getChannel_platform().equals(channel_platform)) {
+            SdkVersionUtil sdkVersionUtil = new SdkVersionUtil();
+            return sdkVersionUtil.newNowggPay();
         }else {
             return new GooglePayImpl();
         }

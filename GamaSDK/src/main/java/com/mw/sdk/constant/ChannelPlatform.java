@@ -9,6 +9,7 @@ public enum ChannelPlatform {
     ONESTORE("onestore"),//kr
     SAMSUNG("samsung"),//kr
     VK("vk"),//俄罗斯vk
+    NOWGG("nowgg"),//俄罗斯vk
     MEOW("meow");
 
     private String channel_platform;

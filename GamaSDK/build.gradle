@@ -222,6 +222,8 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-common-java8:2.3.1'
 
     //========================
+    //nowgg pay不需要的时候可以不接
+    implementation (name: 'Payments-nowgg', ext: 'aar')
 
     //huawei sdk
 //    huaweiImplementation 'com.huawei.hms:hwid:6.9.0.301'
