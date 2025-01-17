@@ -201,14 +201,17 @@ public class NowggPayImpl implements IPay, BillingManager.BillingUpdatesListener
             PL.w("google is paying...");
             return;
         }
-        PL.w("google set paying...");
-        isPaying = true;
 
         //创建Loading窗
         if(loadingDialog == null ||  this.mActivity != activity){
             dimissDialog();
             loadingDialog = new LoadingDialog(activity);
         }
+
+
+        PL.w("google set paying...");
+        isPaying = true;
+
         this.mActivity = activity;
         mContext = activity.getApplicationContext();
 
@@ -222,7 +225,7 @@ public class NowggPayImpl implements IPay, BillingManager.BillingUpdatesListener
         }
 
         this.createOrderIdReqBean = (PayCreateOrderReqBean) payReqBean;
-        this.createOrderIdReqBean.setMode("onestore");
+        this.createOrderIdReqBean.setMode("nowgg");
         //设置储值主域名
         this.createOrderIdReqBean.setRequestUrl(PayHelper.getPreferredUrl(activity));
         //设置储值备用域名
@@ -241,7 +244,7 @@ public class NowggPayImpl implements IPay, BillingManager.BillingUpdatesListener
             callbackFail("can not find role info:" + this.createOrderIdReqBean.print());
         }
         //isPaying = false;
-        PL.w("google set not paying");
+       // PL.w("google set not paying");
     }
 
     private void dimissDialog() {
@@ -271,6 +274,7 @@ public class NowggPayImpl implements IPay, BillingManager.BillingUpdatesListener
     public void onCreate(Activity activity) {
         PL.i( "onCreate");
         mContext = activity.getApplicationContext();
+        this.mActivity = activity;
         if (purchaseManager == null){
             purchaseManager = new BillingManager(activity, this);
         }
@@ -548,8 +552,15 @@ public class NowggPayImpl implements IPay, BillingManager.BillingUpdatesListener
                 public void onConsumeResponse(int i, String s) {
                     consume_index = consume_index - 1;
                     if (consume_index == 0){
-                        //全部已经消耗结束
-                        onePayInActivity(mActivity);
+
+                        mActivity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                //全部已经消耗结束
+                                onePayInActivity(mActivity);
+                            }
+                        });
+
                     }
                 }
             });
@@ -559,10 +570,13 @@ public class NowggPayImpl implements IPay, BillingManager.BillingUpdatesListener
     }
 
     @Override
-    public void onPurchaseFailed(String errorMsg) {
-        PL.i("onPurchaseFailed");
+    public void onPayError(String errorMsg) {
+        PL.i("onPayError errorMsg=" + errorMsg);
         //purchaseManager.handleIapResultError(iapResult);//处理iapResult
-        callbackFail(errorMsg);
+        PL.i("onPayError isPaying=" + isPaying);
+        if (isPaying){
+            callbackFail(errorMsg);
+        }
     }
 
 }
