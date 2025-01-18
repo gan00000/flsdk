@@ -254,7 +254,7 @@ public class GBillingHelper implements PurchasesUpdatedListener {
                                 // Process the result
                                 if (mBillingCallbackList != null && !mBillingCallbackList.isEmpty()) {
                                     for (BillingHelperStatusCallback mBillingCallback : mBillingCallbackList) {
-                                        mBillingCallback.onQuerySkuResult(context,billingResult,productDetailsList);
+                                        mBillingCallback.onQuerySkuResult(context,billingResult,productDetailsList, productId);
                                     }
                                 }
                                 if (detailsResponseListener != null){
@@ -470,7 +470,7 @@ public class GBillingHelper implements PurchasesUpdatedListener {
          *
          * @param productDetailsList
          */
-        void onQuerySkuResult(Context context, BillingResult billingResult, List<ProductDetails> productDetailsList);
+        void onQuerySkuResult(Context context, BillingResult billingResult, List<ProductDetails> productDetailsList, String productId);
 
         /**
          * 查询购买的回调

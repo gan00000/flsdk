@@ -621,7 +621,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
     }
 
     @Override
-    public void onQuerySkuResult(Context context,BillingResult billingResult, List<ProductDetails> productDetailsList) {
+    public void onQuerySkuResult(Context context,BillingResult billingResult, List<ProductDetails> productDetailsList, String productId) {
         if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && productDetailsList != null && !productDetailsList.isEmpty()) {
             skuDetails = productDetailsList.get(0);
 //            mBillingHelper.launchPurchaseFlow(activity, createOrderBean.getOrderId(), skuDetails);
@@ -631,7 +631,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
                 PL.i("Feature not supported on onQuerySkuResult");
                 callbackFail("Please update PlayStore app");
             }else {
-                callbackFail("SkuDetails not find");
+                callbackFail("SkuDetails not find:" + productId);
             }
 
         }
