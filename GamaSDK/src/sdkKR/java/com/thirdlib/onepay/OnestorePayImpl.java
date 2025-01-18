@@ -208,14 +208,16 @@ public class OnestorePayImpl implements IPay, PurchaseManager.Callback {
             PL.w("google is paying...");
             return;
         }
-        PL.w("google set paying...");
-        isPaying = true;
 
         //创建Loading窗
         if(loadingDialog == null ||  this.mActivity != activity){
             dimissDialog();
             loadingDialog = new LoadingDialog(activity);
         }
+
+        PL.w("google set paying...");
+        isPaying = true;
+
         this.mActivity = activity;
         mContext = activity.getApplicationContext();
 
