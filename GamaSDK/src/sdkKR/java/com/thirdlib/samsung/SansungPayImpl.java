@@ -82,7 +82,7 @@ public class SansungPayImpl implements IPay{
 
     private void callbackSuccess(PurchaseVo _purchaseVo, GPExchangeRes gpExchangeRes) {
 
-        PL.i("onestore pay onConsumeResponse callbackSuccess");
+        PL.i("samsung pay onConsumeResponse callbackSuccess");
         if (mActivity != null) {
             mActivity.runOnUiThread(new Runnable() {
                 @Override

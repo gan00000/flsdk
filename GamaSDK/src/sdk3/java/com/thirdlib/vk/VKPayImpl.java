@@ -66,7 +66,7 @@ public class VKPayImpl implements IPay, VKPurchaseManger.PurchaseCallback {
 
     private void callbackSuccess(Purchase purchase, GPExchangeRes gpExchangeRes) {
 
-        PL.i("onestore pay onConsumeResponse callbackSuccess");
+        PL.i("rustore pay onConsumeResponse callbackSuccess");
         if (mActivity != null) {
             mActivity.runOnUiThread(new Runnable() {
                 @Override

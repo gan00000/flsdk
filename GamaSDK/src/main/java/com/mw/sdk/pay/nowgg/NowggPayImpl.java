@@ -74,7 +74,7 @@ public class NowggPayImpl implements IPay, BillingManager.BillingUpdatesListener
 
     private void callbackSuccess(Purchase purchase, GPExchangeRes gpExchangeRes) {
 
-        PL.i("onestore pay onConsumeResponse callbackSuccess");
+        PL.i("nowgg pay onConsumeResponse callbackSuccess");
         if (mActivity != null) {
             mActivity.runOnUiThread(new Runnable() {
                 @Override
@@ -148,17 +148,19 @@ public class NowggPayImpl implements IPay, BillingManager.BillingUpdatesListener
 
                     if (!TextUtils.isEmpty(message)) {//提示错误信息
 
-                        loadingDialog.alert(message, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                        if (loadingDialog != null) {
+                            loadingDialog.alert(message, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
 
-                                dialog.dismiss();
+                                    dialog.dismiss();
 
-                                if (iPayCallBack != null) {
-                                    iPayCallBack.fail(null);
+                                    if (iPayCallBack != null) {
+                                        iPayCallBack.fail(null);
+                                    }
                                 }
-                            }
-                        });
+                            });
+                        }
 
                     } else {
 

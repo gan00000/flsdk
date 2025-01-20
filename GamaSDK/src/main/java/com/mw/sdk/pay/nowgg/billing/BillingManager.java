@@ -130,7 +130,7 @@ public class BillingManager implements PurchasesUpdatedListener {
 //            for (Purchase purchase : purchases) {
 //                handlePurchase(purchase);
 //            }
-
+                    Log.i(TAG, "billing manager onPurchasesUpdated");
                     mBillingUpdatesListener.onPurchasesUpdated(purchases);
 
                 } else {
@@ -189,6 +189,10 @@ public class BillingManager implements PurchasesUpdatedListener {
 
     public void querySkuDetailsAsync(final List<String> skuList,
                                      final SkuDetailsResponseListener listener) {
+
+        if (mBillingClient == null){
+            return;
+        }
         // Creating a runnable from the request to use it inside our connection retry policy below
         Runnable queryRequest = new Runnable() {
             @Override
@@ -231,6 +235,9 @@ public class BillingManager implements PurchasesUpdatedListener {
 //                mBillingUpdatesListener.onConsumeFinished(purchaseToken, responseCode, isPaying);
 //            }
 //        };
+        if (mBillingClient == null){
+            return;
+        }
 
         // Creating a runnable from the request to use it inside our connection retry policy below
         Runnable consumeRequest = new Runnable() {
@@ -314,19 +321,19 @@ public class BillingManager implements PurchasesUpdatedListener {
     /**
      * Handle a result from querying of purchases and report an updated list to the listener
      */
-    private void onQueryPurchasesFinished(PurchasesResult result) {
-        // Have we been disposed of in the meantime? If so, or bad result code, then quit
-        if (mBillingClient == null || result.getResponseCode() != BillingResponse.OK) {
-            Log.w(TAG, "Billing client was null or result code (" + result.getResponseCode()
-                    + ") was bad - quitting");
-            return;
-        }
-
-        Log.d(TAG, "Query inventory was successful.");
-
-        // Update the UI and purchases inventory with new list of purchases
-        onPurchasesUpdated(BillingResponse.OK, result.getPurchasesList());
-    }
+//    private void onQueryPurchasesFinished(PurchasesResult result) {
+//        // Have we been disposed of in the meantime? If so, or bad result code, then quit
+//        if (mBillingClient == null || result.getResponseCode() != BillingResponse.OK) {
+//            Log.w(TAG, "Billing client was null or result code (" + result.getResponseCode()
+//                    + ") was bad - quitting");
+//            return;
+//        }
+//
+//        Log.d(TAG, "Query inventory was successful.");
+//
+//        // Update the UI and purchases inventory with new list of purchases
+//        onPurchasesUpdated(BillingResponse.OK, result.getPurchasesList());
+//    }
 
     /**
      * Checks if subscriptions are supported for current client
@@ -345,6 +352,9 @@ public class BillingManager implements PurchasesUpdatedListener {
 
     public void queryPurchasesAsync(boolean isPaying) {
 
+        if (mBillingClient == null){
+            return;
+        }
         Runnable queryRequest = new Runnable() {
             @Override
             public void run() {
@@ -416,6 +426,7 @@ public class BillingManager implements PurchasesUpdatedListener {
     }
 
     public void startServiceConnection(final Runnable executeOnSuccess) {
+
         mBillingClient.startConnection(new BillingClientStateListener() {
             @Override
             public void onBillingSetupFinished(@BillingResponse int billingResponseCode) {
