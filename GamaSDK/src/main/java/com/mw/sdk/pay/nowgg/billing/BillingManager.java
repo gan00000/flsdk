@@ -3,7 +3,10 @@ package com.mw.sdk.pay.nowgg.billing;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.util.Log;
+
+import com.mw.sdk.R;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -40,10 +43,10 @@ public class BillingManager implements PurchasesUpdatedListener {
     // Default value of mBillingClientResponseCode until BillingManager was not yet initialized
     public static final int BILLING_MANAGER_NOT_INITIALIZED = -1;
 
-    private static final String TAG = "NowggPay";
+    private static final String TAG = "PL_LOG_NowggPay";
 
     //TODO Replace with your app's id.
-    private static final String APP_ID = "5618";
+//    private static final String APP_ID = "5618";
 
     //TODO Replace with your inGameId.
 
@@ -58,8 +61,8 @@ public class BillingManager implements PurchasesUpdatedListener {
      * want to make it easy for an attacker to replace the public key with one
      * of their own and then fake messages from the server.
      */
-    private static final String BASE_64_ENCODED_PUBLIC_KEY =
-            "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAygWG1GhaNALZ9K6O+a6QKVEuQ9EGvUz2A6Ar2B0zBGe8hHwvdrr507SUpVkxF00NfZQxjljCkOFbOA/hvM+rZGkdZem2uG0O0x2q6d3ddGbwXjKSJrZumxsrtXtH4H8cwHGnVJbK5Jj1tEDijSCU3RF/Bl493PvaA479Suv4JRpaRSCUPRn1OzxXmtJaGyj4kFT51sYfwJ2ar0O4j98Be51wu7qcf/941CaWAyYJ6+heCahOEr4+85/njbLm35R+tz1aRpKIjerSw3fBX1OkfnCaruFPVtf1llsDlt2HE+ExcG0+lNGfDuw1yP2bVNODNl1mPKXloXPlsIOR28e2zwIDAQAB";
+//    private static final String BASE_64_ENCODED_PUBLIC_KEY =
+//            "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAygWG1GhaNALZ9K6O+a6QKVEuQ9EGvUz2A6Ar2B0zBGe8hHwvdrr507SUpVkxF00NfZQxjljCkOFbOA/hvM+rZGkdZem2uG0O0x2q6d3ddGbwXjKSJrZumxsrtXtH4H8cwHGnVJbK5Jj1tEDijSCU3RF/Bl493PvaA479Suv4JRpaRSCUPRn1OzxXmtJaGyj4kFT51sYfwJ2ar0O4j98Be51wu7qcf/941CaWAyYJ6+heCahOEr4+85/njbLm35R+tz1aRpKIjerSw3fBX1OkfnCaruFPVtf1llsDlt2HE+ExcG0+lNGfDuw1yP2bVNODNl1mPKXloXPlsIOR28e2zwIDAQAB";
 
     private final BillingUpdatesListener mBillingUpdatesListener;
     private final Activity mActivity;
@@ -83,27 +86,32 @@ public class BillingManager implements PurchasesUpdatedListener {
         Log.d(TAG, "Creating Billing client.");
         mActivity = activity;
         mBillingUpdatesListener = updatesListener;
-        mBillingClient = BillingClient.newBuilder(mActivity)
-                .setAppId(APP_ID)
-                .setListener(this).build();
+        String APP_ID = activity.getString(R.string.mw_nowgg_app_id);
+        if (!TextUtils.isEmpty(APP_ID)){
 
-        Log.d(TAG, "Starting setup.");
+            mBillingClient = BillingClient.newBuilder(mActivity)
+                    .setAppId(APP_ID)
+                    .setListener(this).build();
 
-        // Start setup. This is asynchronous and the specified listener will be called
-        // once setup completes.
-        // It also starts to report all the new purchases through onPurchasesUpdated() callback.
-        startServiceConnection(new Runnable() {
-            @Override
-            public void run() {
-                // Notifying the listener that billing client is ready
-                mBillingUpdatesListener.onBillingClientSetupFinished();
-                // IAB is fully set up. Now, let's get an inventory of stuff we own.
-                if (mBillingClientResponseCode == BillingClient.BillingResponse.OK) {
-                    Log.d(TAG, "Setup successful. Querying inventory.");
+            Log.d(TAG, "Starting setup. APP_ID=" + APP_ID);
+
+            // Start setup. This is asynchronous and the specified listener will be called
+            // once setup completes.
+            // It also starts to report all the new purchases through onPurchasesUpdated() callback.
+            startServiceConnection(new Runnable() {
+                @Override
+                public void run() {
+                    // Notifying the listener that billing client is ready
+                    mBillingUpdatesListener.onBillingClientSetupFinished();
+                    // IAB is fully set up. Now, let's get an inventory of stuff we own.
+                    if (mBillingClientResponseCode == BillingClient.BillingResponse.OK) {
+                        Log.d(TAG, "Setup successful. Querying inventory.");
 //                    queryPurchasesAsync();
+                    }
                 }
-            }
-        });
+            });
+        }
+
     }
 
     /**
@@ -469,14 +477,14 @@ public class BillingManager implements PurchasesUpdatedListener {
      * replace this method with "constant true" if they decompile/rebuild your app.
      * </p>
      */
-    private boolean verifyValidSignature(String signedData, String signature) {
-        try {
-            return Security.verifyPurchase(BASE_64_ENCODED_PUBLIC_KEY, signedData, signature, mBillingClient.getStoreType());
-        } catch (IOException e) {
-            Log.e(TAG, "Got an exception trying to validate a purchase: " + e);
-            return false;
-        }
-    }
+//    private boolean verifyValidSignature(String signedData, String signature) {
+//        try {
+//            return Security.verifyPurchase(BASE_64_ENCODED_PUBLIC_KEY, signedData, signature, mBillingClient.getStoreType());
+//        } catch (IOException e) {
+//            Log.e(TAG, "Got an exception trying to validate a purchase: " + e);
+//            return false;
+//        }
+//    }
 
     /**
      * Listener to the updates that happen when purchases list was updated or consumption of the
