@@ -105,10 +105,15 @@ android {
             resValue "string", "sdk_inner_version", "huawei"
         }
 
-        vn {//越南专用
+        vn {//越南专用 ttplay
             dimension '1'
             resValue "string", "sdk_inner_version", "vn"
-            resValue "string", "mw_td_appid", "77e4d9f75abb4baab16213a662fe4e56"
+            resValue "string", "mw_td_appid", ""
+        }
+        vn2 {//越南 gllyo
+            dimension '1'
+            resValue "string", "sdk_inner_version", "vn"
+            resValue "string", "mw_td_appid", ""
         }
 
         sdk6 {//第6套，东南亚
