@@ -27,8 +27,7 @@
 ----------------
 
 * <h2 id="100">SDK接入配置</h2> 
-说明：由于Google 2015年6月不再支持Eclipse，https://developer.android.com/studio/tools/sdk/eclipse-adt.html
-，Android 24之后的版本SDK和Google play servcie库，google support v4 v7库，还有很多第三方库都已经不支持Eclipse，固本SDK不支持Eclipse，请使用AndroidStudio接入。
+说明：请使用AndroidStudio接入。
 
 *  设置项目顶层的build.gradle(可请参照demo中配置)
 
@@ -41,11 +40,9 @@
     }
     dependencies {
         
-        classpath 'com.android.tools.build:gradle:8.2.0'
-        // google-services plugin
-        classpath 'com.google.gms:google-services:4.4.0'
-        // Add the Crashlytics Gradle plugin.
-        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.9'
+        classpath 'com.android.tools.build:gradle:8.2.2'
+        classpath 'com.google.gms:google-services:4.4.2'
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:3.0.2'
         
     	}
 	}
@@ -140,73 +137,7 @@
 	//添加下列的依赖
 	dependencies {
 		
-		//MWSDK-release为sdk内提供的aar库
-	    implementation(name:'MWSDK-release', ext:'aar')
-	    
-		implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
-	    //基础库
-	    api 'androidx.legacy:legacy-support-v4:1.0.0'
-	    api 'androidx.appcompat:appcompat:1.7.0'
-	    api 'androidx.recyclerview:recyclerview:1.3.2'
-	    api 'androidx.constraintlayout:constraintlayout:2.1.4'
-	    api 'androidx.browser:browser:1.8.0'
-	    implementation 'androidx.viewpager2:viewpager2:1.1.0'
-	
-	    //mutildex
-	    implementation 'androidx.multidex:multidex:2.0.1'
-	    //google pay
-	    api "com.android.billingclient:billing:7.0.0"
-	    //google评分
-	    implementation 'com.google.android.play:review:2.0.1'
-	
-	    implementation("com.google.guava:guava:31.1-android")
-	
-	    //Google库
-	    implementation 'com.google.android.gms:play-services-auth:21.2.0'
-	    implementation 'com.google.android.gms:play-services-base:18.5.0'
-	    implementation 'com.google.android.gms:play-services-games:23.2.0'
-	
-	    //firebase
-	    implementation platform('com.google.firebase:firebase-bom:32.3.1')
-	    implementation 'com.google.firebase:firebase-messaging'
-	    implementation 'com.google.firebase:firebase-auth'
-	    // Recommended: Add the Firebase SDK for Google Analytics.
-	    implementation 'com.google.firebase:firebase-analytics'
-	    // Add the Firebase Crashlytics SDK.
-	    implementation 'com.google.firebase:firebase-crashlytics'
-	
-	    //Facebook库
-	    // Facebook Core only (Analytics)
-	    implementation 'com.facebook.android:facebook-core:17.0.0'  //latest.release
-	    // Facebook Login only
-	    implementation 'com.facebook.android:facebook-login:17.0.0'
-	    // Facebook Share only
-	    implementation 'com.facebook.android:facebook-share:17.0.0'
-	    // Facebook Messenger only
-	    implementation 'com.facebook.android:facebook-messenger:17.0.0'
-	
-	    //af
-	    implementation 'com.appsflyer:af-android-sdk:6.13.0'
-	    implementation 'com.android.installreferrer:installreferrer:2.2'
-	    
-	    implementation 'com.google.code.gson:gson:2.8.6'
-	    implementation 'io.reactivex.rxjava3:rxandroid:3.0.2'
-	    implementation 'io.reactivex.rxjava3:rxjava:3.1.5'
-	    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-	    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-	    implementation 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'
-	    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
-	
-	    implementation 'com.github.bumptech.glide:glide:4.16.0'
-	    annotationProcessor 'com.github.bumptech.glide:compiler:4.16.0'
-	    //数数埋点
-	    implementation 'cn.thinkingdata.android:ThinkingAnalyticsSDK:3.0.2'
-	
-	    //tiktok
-	    implementation 'com.github.tiktok:tiktok-business-android-sdk:1.3.3' // replace the version with the one which suits your need
-	    //to listen for app life cycle
-	    implementation 'androidx.lifecycle:lifecycle-process:2.3.1'
-	    implementation 'androidx.lifecycle:lifecycle-common-java8:2.3.1'	
+		//此处的依赖库详见SDK demo，复制demo的内容即可	
 	}
 
 
