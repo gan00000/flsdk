@@ -122,6 +122,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     private FaceBookUser faceBookUser;
 
     private HuaweiSignIn huaweiSignIn;
+    private NowggLogin nowggLogin;
 
     private IThirdHelper naverHelper;
 
@@ -176,6 +177,11 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
     public void setHuaweiSignIn(HuaweiSignIn huaweiSignIn) {
         this.huaweiSignIn = huaweiSignIn;
+    }
+
+    @Override
+    public NowggLogin getNowggLogin() {
+        return nowggLogin;
     }
 
     @Override
@@ -451,7 +457,9 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     @Override
     public void nowggLogin(Activity activity) {
 
-        NowggLogin nowggLogin = new NowggLogin();
+        if (nowggLogin == null){
+            nowggLogin = new NowggLogin();
+        }
         nowggLogin.startSign(activity, new NowggLogin.NowggSignInCallBack() {
             @Override
             public void success(String id, String mFullName, String mEmail, String idTokenString) {

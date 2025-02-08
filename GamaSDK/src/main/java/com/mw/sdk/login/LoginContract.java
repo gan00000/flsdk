@@ -15,6 +15,7 @@ import com.thirdlib.google.SGoogleSignIn;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.huawei.HuaweiSignIn;
 import com.thirdlib.line.SLineSignIn;
+import com.thirdlib.nowgg.NowggLogin;
 import com.thirdlib.twitter.TwitterLogin;
 
 /**
@@ -89,6 +90,7 @@ public class LoginContract {
         void setSFacebookProxy(SFacebookProxy sFacebookProxy);
         void setTwitterLogin(TwitterLogin twitterLogin);
         void setLineLogin(SLineSignIn sLineSignIn);
+        NowggLogin getNowggLogin();
         /**
          * Twitter登入
          */

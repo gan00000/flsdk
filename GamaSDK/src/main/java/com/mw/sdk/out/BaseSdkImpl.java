@@ -593,6 +593,9 @@ public class BaseSdkImpl implements IMWSDK {
             @Override
             public void run() {
                 PL.i("IMWSDK onRequestPermissionsResult");
+                if (iLogin != null){
+                    iLogin.onRequestPermissionsResult(activity, requestCode, permissions, grantResults);
+                }
             }
         });
     }

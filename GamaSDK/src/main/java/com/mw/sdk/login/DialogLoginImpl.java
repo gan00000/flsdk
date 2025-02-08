@@ -225,4 +225,11 @@ public class DialogLoginImpl implements ILogin {
         termBaseDialog.getWindow().setWindowAnimations(R.style.dialog_animation);
         termBaseDialog.show();
     }
+
+    @Override
+    public void onRequestPermissionsResult(Activity activity, int requestCode, String[] permissions, int[] grantResults) {
+        if (sLoginDialog !=null && sLoginDialog.getLoginPresenter() != null && sLoginDialog.getLoginPresenter().getNowggLogin() != null){
+            sLoginDialog.getLoginPresenter().getNowggLogin().onRequestPermissionsResult(activity, requestCode, permissions, grantResults);
+        }
+    }
 }

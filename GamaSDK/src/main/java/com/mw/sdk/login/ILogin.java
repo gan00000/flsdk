@@ -16,4 +16,6 @@ public interface ILogin extends IGameLifeCycle {
     public void initFacebookPro(Activity activity, SFacebookProxy sFacebookProxy);
 
     public void signOut(Activity activity);
+
+    public void onRequestPermissionsResult(Activity activity, int requestCode, String[] permissions, int[] grantResults);
 }

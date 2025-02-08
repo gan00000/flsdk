@@ -55,6 +55,7 @@ public class NowggLogin {
             ToastUtils.toast(activity,"请配置mw_nowgg_client_id");
             return;
         }
+        PL.i("nowgg CLIENT_ID=" + CLIENT_ID);
 
         if (activity.checkSelfPermission(Manifest.permission.GET_ACCOUNTS) != PackageManager.PERMISSION_GRANTED) {
             PL.i("请求授权GET_ACCOUNTS");
@@ -115,6 +116,7 @@ public class NowggLogin {
             activity.startActivity(intent);
         } catch (ActivityNotFoundException e) {
             e.printStackTrace();
+            ToastUtils.toast(activity, e.getMessage());
         }
     }
 
@@ -179,7 +181,7 @@ public class NowggLogin {
             @Override
             public void onResponse(Call < TokenVerifyResponse > call, Response< TokenVerifyResponse > response) {
                 if (response.isSuccessful()) {
-                    PL.i( "onResponse: " + response.body().toString());
+                    PL.i( "nowgg login onResponse: " + response.body().toString());
                     UserDataVerified userDataVerified = response.body().getUserDataVerified();
                     if (userDataVerified != null){
                         if (nowggSignInCallBack != null){
