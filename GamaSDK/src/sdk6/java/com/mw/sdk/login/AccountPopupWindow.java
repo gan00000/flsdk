@@ -149,6 +149,8 @@ public class AccountPopupWindow extends PopupWindow {
                 }else if (SLoginType.LOGIN_TYPE_MG.equals(accountModel.getLoginType())){
                     imageResId = R.mipmap.img_persion_bg;
                     showName = accountModel.getAccount();
+                }else if (SLoginType.LOGIN_TYPE_NOWGG.equals(accountModel.getLoginType())){
+                    imageResId = R.mipmap.icon_nowgg;
                 }
                 holder.setImageResource(R.id.history_account_item_icon, imageResId);
                 holder.setText(R.id.history_account_item_text, showName);

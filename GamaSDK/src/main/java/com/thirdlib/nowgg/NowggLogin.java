@@ -38,13 +38,17 @@ public class NowggLogin {
 
     private static final int GET_ACCOUNTS_REQUEST_CODE = 2001;
     private Activity activity;
+    private NowggSignInCallBack nowggSignInCallBack;
 
     public static final String ID_TOKEN = "id_token"; // 不要修改
     public static String CLIENT_ID = ""; // 替换为您的client id
     public static final String ACCOUNT_TYPE = "now.gg"; // 不要修改
     public static final String HOST_URL = "hostUrl"; //不要修改
 
-    public void startSign(Activity activity){
+    public void startSign(Activity activity, NowggSignInCallBack nowggSignInCallBack){
+
+        this.activity = activity;
+        this.nowggSignInCallBack = nowggSignInCallBack;
 
         CLIENT_ID = activity.getString(R.string.mw_nowgg_client_id);
         if (SStringUtil.isEmpty(CLIENT_ID)){
@@ -73,6 +77,8 @@ public class NowggLogin {
                 // 已授权，可以继续登录
                 signIn();
             }
+        }else {
+            ToastUtils.toast(activity,"Please grant GET_ACCOUNTS permission first");
         }
     }
 
@@ -154,6 +160,9 @@ public class NowggLogin {
                     // 获取令牌失败
                     // 错误时，开发者可以展示错误或者采用其它登录策略。
                     PL.i( "run: get token failed " + bundle);
+                    if (nowggSignInCallBack != null){
+                        nowggSignInCallBack.failure("get token failed");
+                    }
                 }
             } catch (AuthenticatorException | IOException | OperationCanceledException e) {
                 e.printStackTrace();
@@ -171,6 +180,18 @@ public class NowggLogin {
             public void onResponse(Call < TokenVerifyResponse > call, Response< TokenVerifyResponse > response) {
                 if (response.isSuccessful()) {
                     PL.i( "onResponse: " + response.body().toString());
+                    UserDataVerified userDataVerified = response.body().getUserDataVerified();
+                    if (userDataVerified != null){
+                        if (nowggSignInCallBack != null){
+                            nowggSignInCallBack.success(userDataVerified.userId, userDataVerified.name, userDataVerified.email, userDataVerified.tokenId);
+                        }
+                    }else {
+                        if (nowggSignInCallBack != null){
+                            nowggSignInCallBack.failure("userDataVerified is null");
+                        }
+                    }
+
+
                 } else {
                     Gson gson = new Gson();
                     TokenVerifyResponse error = gson.fromJson(response.errorBody().charStream(), TokenVerifyResponse.class);
@@ -178,11 +199,17 @@ public class NowggLogin {
                     if (!error.isSuccess() && ("EXPIRED_TOKEN".equals(error.getCode()) || "INVALID_TOKEN".equals(error.getCode()))) {
                         // retry the verify token call, after getting a new TOKEN
                     }
+                    if (nowggSignInCallBack != null){
+                        nowggSignInCallBack.failure(error.getCode() + "");
+                    }
                 }
             }
             @Override
             public void onFailure(Call call, Throwable t) {
                 PL.i( "onFailure() called with: call = [" + call + "], t = [" + t + "]");
+                if (nowggSignInCallBack != null){
+                    nowggSignInCallBack.failure("verifyToken token failed");
+                }
             }
         });
 
@@ -200,4 +227,8 @@ public class NowggLogin {
     }
 
 
+    public interface NowggSignInCallBack{
+        void success(String id, String mFullName, String mEmail, String idTokenString);
+        void failure(String msg);
+    }
 }

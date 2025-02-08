@@ -35,6 +35,8 @@ public class SdkVersionUtil extends BaseSdkVersion {
         }else if (SLoginType.LOGIN_TYPE_MG.equals(accountModel.getLoginType())){
             imageResId = R.mipmap.img_persion_bg;
             showName = accountModel.getAccount();
+        }else if (SLoginType.LOGIN_TYPE_NOWGG.equals(accountModel.getLoginType())){
+            imageResId = R.mipmap.icon_nowgg;
         }
 
         imageView.setImageResource(imageResId);

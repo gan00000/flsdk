@@ -5,9 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
@@ -16,27 +14,25 @@ import androidx.annotation.StyleRes;
 
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.PL;
-import com.mw.sdk.login.widget.v2.MWBlockUserlLayout;
-import com.mw.sdk.utils.DialogUtil;
-import com.mw.sdk.utils.Localization;
 import com.mw.base.utils.SdkVersionUtil;
 import com.mw.sdk.R;
-import com.mw.sdk.widget.SBaseDialog;
 import com.mw.sdk.ads.EventConstant;
 import com.mw.sdk.ads.SdkEventLogger;
+import com.mw.sdk.bean.AccountModel;
 import com.mw.sdk.constant.BindType;
 import com.mw.sdk.constant.ViewType;
-import com.mw.sdk.bean.AccountModel;
 import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.login.p.LoginPresenterImpl;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.mw.sdk.login.widget.v2.AccountChangePwdLayoutV2;
 import com.mw.sdk.login.widget.v2.AccountFindPwdLayoutV2;
 import com.mw.sdk.login.widget.v2.LoginWithRegLayout;
+import com.mw.sdk.login.widget.v2.MWBlockUserlLayout;
 import com.mw.sdk.login.widget.v2.MainHomeLayout;
 import com.mw.sdk.login.widget.v2.TermsViewV3;
 import com.mw.sdk.login.widget.v2.ThirdPlatBindAccountLayoutV2;
-import com.mw.sdk.login.widget.v2.WelcomeBackLayout;
+import com.mw.sdk.utils.Localization;
+import com.mw.sdk.widget.SBaseDialog;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.google.SGoogleSignIn;
 import com.thirdlib.huawei.HuaweiSignIn;
@@ -249,14 +245,14 @@ public class SLoginDialogV2 extends SBaseDialog implements LoginContract.ILoginV
     }
     public void toWelcomeBackView() {
 
-        if (welcomeBackView == null || !viewPageList.contains(welcomeBackView)){
+        /*if (welcomeBackView == null || !viewPageList.contains(welcomeBackView)){
 
             welcomeBackView = new WelcomeBackLayout(context);
             welcomeBackView.setLoginDialogV2(this);
             contentFrameLayout.addView(welcomeBackView);
             viewPageList.add(welcomeBackView);
         }
-        setViewPageVisable(welcomeBackView);
+        setViewPageVisable(welcomeBackView);*/
     }
 
     private void setViewPageVisable(SLoginBaseRelativeLayout baseRelativeLayout) {

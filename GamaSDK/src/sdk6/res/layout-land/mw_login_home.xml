@@ -127,11 +127,17 @@
             <ImageView
                 android:id="@+id/iv_login_line"
                 android:layout_width="34dp"
-
                 android:layout_height="34dp"
                 android:layout_marginStart="27dp"
                 android:src="@mipmap/icon_line_bg_1" />
 
+            <ImageView
+                android:id="@+id/iv_login_nowgg"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_marginStart="27dp"
+                android:visibility="gone"
+                android:src="@mipmap/icon_nowgg" />
 
         </LinearLayout>
 

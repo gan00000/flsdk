@@ -71,6 +71,7 @@ public class LoginContract {
         void guestLogin(Activity activity);
 
         void lineLogin(Activity activity);
+        void nowggLogin(Activity activity);
         void hwLogin(Activity activity, HuaweiSignIn huaweiSignIn);
 
         void changePwd(Activity activity, String account, String oldPwd, String newPwd);

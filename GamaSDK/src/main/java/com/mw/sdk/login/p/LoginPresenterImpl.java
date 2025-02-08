@@ -51,6 +51,7 @@ import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.google.SGoogleSignIn;
 import com.thirdlib.huawei.HuaweiSignIn;
 import com.thirdlib.line.SLineSignIn;
+import com.thirdlib.nowgg.NowggLogin;
 import com.thirdlib.td.TDAnalyticsHelper;
 import com.thirdlib.twitter.TwitterLogin;
 import com.mw.sdk.R;
@@ -448,6 +449,31 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     }
 
     @Override
+    public void nowggLogin(Activity activity) {
+
+        NowggLogin nowggLogin = new NowggLogin();
+        nowggLogin.startSign(activity, new NowggLogin.NowggSignInCallBack() {
+            @Override
+            public void success(String id, String mFullName, String mEmail, String idTokenString) {
+
+                ThirdLoginRegRequestBean thirdLoginRegRequestBean = new ThirdLoginRegRequestBean(activity);
+                thirdLoginRegRequestBean.setThirdPlatId(id);
+                thirdLoginRegRequestBean.setRegistPlatform(SLoginType.LOGIN_TYPE_NOWGG);
+                thirdLoginRegRequestBean.setThirdAccount("");
+                thirdLoginRegRequestBean.setLineAccessToken(idTokenString);
+                thirdLoginRegRequestBean.setThirdAccessToken(idTokenString);
+                thirdPlatLogin(activity, thirdLoginRegRequestBean);
+
+            }
+
+            @Override
+            public void failure(String msg) {
+
+            }
+        });
+    }
+
+    @Override
     public void hwLogin(Activity activity, HuaweiSignIn huaweiSignIn) {
 
         huaweiSignIn.startSignIn(activity, new HuaweiSignIn.HWSignInCallBack() {
@@ -469,7 +495,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         });
     }
 
-    //目前Google line twitter登录使用到，fb登录没有使用
+    //目前Google line twitter, nowgg登录使用到，fb登录没有使用
     @Override
     public void thirdPlatLogin(final Activity activity, final ThirdLoginRegRequestBean thirdLoginRegRequestBean) {
         this.mActivity = activity;

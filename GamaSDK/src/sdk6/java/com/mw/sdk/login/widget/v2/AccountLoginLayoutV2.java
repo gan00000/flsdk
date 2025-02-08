@@ -20,6 +20,7 @@ import com.mw.base.utils.SdkVersionUtil;
 import com.mw.sdk.R;
 import com.mw.sdk.bean.AccountModel;
 import com.mw.sdk.bean.res.ConfigBean;
+import com.mw.sdk.constant.ChannelPlatform;
 import com.mw.sdk.constant.SLoginType;
 import com.mw.sdk.login.AccountPopupWindow;
 import com.mw.sdk.login.widget.SDKInputEditTextView;
@@ -71,7 +72,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
 
     View historyAccountListBtn;
 
-    private View fbLoginView, macLoginView, googleLoginView, lineLoginView;
+    private View fbLoginView, macLoginView, googleLoginView, lineLoginView, nowggLoginView;
 
     private AccountPopupWindow accountPopupWindow;
     private AccountModel currentAccountModel;
@@ -252,6 +253,14 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
         lineLoginView = contentView.findViewById(R.id.lineLoginView);
         macLoginView = contentView.findViewById(R.id.guestLoginView);
         googleLoginView = contentView.findViewById(R.id.ggLoginView);
+        nowggLoginView = contentView.findViewById(R.id.nowggLoginView);
+
+        String channel_platform = getActivity().getResources().getString(R.string.channel_platform);
+        if (ChannelPlatform.NOWGG.getChannel_platform().equals(channel_platform)){
+            nowggLoginView.setVisibility(View.VISIBLE);
+        }else {
+            nowggLoginView.setVisibility(View.GONE);
+        }
 
         ConfigBean configBean = SdkUtil.getSdkCfg(getContext());
         if (configBean != null){
@@ -334,6 +343,15 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
                 }
                 //google+登录
                 sLoginDialogv2.getLoginPresenter().lineLogin(sLoginDialogv2.getActivity());
+            }
+        });
+        nowggLoginView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!checkAgreeTerm()) {
+                    return;
+                }
+                sLoginDialogv2.getLoginPresenter().nowggLogin(sLoginDialogv2.getActivity());
             }
         });
 
@@ -493,8 +511,8 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
            }else if (SLoginType.LOGIN_TYPE_GUEST.equals(currentAccountModel.getLoginType())){
                macLoginView.performClick();
                return;
-           }else if (SLoginType.LOGIN_TYPE_LINE.equals(currentAccountModel.getLoginType())){
-                lineLoginView.performClick();
+           }else if (SLoginType.LOGIN_TYPE_NOWGG.equals(currentAccountModel.getLoginType())){
+                nowggLoginView.performClick();
                return;
            }
         }
