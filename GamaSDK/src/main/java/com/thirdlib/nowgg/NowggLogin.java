@@ -77,9 +77,9 @@ public class NowggLogin {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // 已授权，可以继续登录
                 signIn();
+            }else {
+                ToastUtils.toast(activity,"Please grant GET_ACCOUNTS permission first");
             }
-        }else {
-            ToastUtils.toast(activity,"Please grant GET_ACCOUNTS permission first");
         }
     }
 
