@@ -125,3 +125,8 @@
 -keep class kotlin.jvm.internal.** { *; }
 -keep public class com.android.installreferrer.** { *; }
 -keep class com.huawei.hms.**{*;}
+
+#nowgg
+-keep public class com.thirdlib.nowgg.TokenVerifyResponse { *; }
+-keep public class com.thirdlib.nowgg.UserDataVerified { *; }
+-keep public class com.thirdlib.nowgg.TokenVerifyRequest { *; }
