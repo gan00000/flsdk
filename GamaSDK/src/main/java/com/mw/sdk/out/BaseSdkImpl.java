@@ -66,6 +66,7 @@ import com.mw.sdk.callback.IPayListener;
 import com.mw.sdk.constant.ChannelPlatform;
 import com.mw.sdk.constant.RequestCode;
 import com.mw.sdk.constant.ResultCode;
+import com.mw.sdk.log.LogViewManager;
 import com.mw.sdk.login.DialogLoginImpl;
 import com.mw.sdk.login.ILogin;
 import com.mw.sdk.login.ILoginCallBack;
@@ -150,6 +151,9 @@ public class BaseSdkImpl implements IMWSDK {
 
     @Override
     public void applicationOnCreate(Application application) {
+
+        PL.initLog(application.getApplicationContext());
+
         PL.i("BaseSdkImpl applicationOnCreate");
 
         Observable.just("" + System.currentTimeMillis())
@@ -268,8 +272,7 @@ public class BaseSdkImpl implements IMWSDK {
     @Override
     public void registerRoleInfo(final Activity activity, final String roleId, final String roleName, final String roleLevel, final String vipLevel, final String severCode, final String serverName) {
 
-        PL.i("IMWSDK registerRoleInfo");
-        PL.i("roleId:" + roleId + ",roleName:" + roleName + ",roleLevel:" + roleLevel + ",vipLevel:" + vipLevel + ",severCode:" + severCode + ",serverName:" + serverName);
+        PL.i("IMWSDK registerRoleInfo roleId:" + roleId + ",roleName:" + roleName + ",roleLevel:" + roleLevel + ",vipLevel:" + vipLevel + ",severCode:" + severCode + ",serverName:" + serverName);
 
         if (SStringUtil.isEmpty(roleId) || SStringUtil.isEmpty(severCode)){
             return;
@@ -315,6 +318,8 @@ public class BaseSdkImpl implements IMWSDK {
                     });
                 }
                 //showActViewSwitchRequest(activity);//注释掉，先不用
+
+                LogViewManager.getInstance().initFloatingView(activity);
             }
         });
 

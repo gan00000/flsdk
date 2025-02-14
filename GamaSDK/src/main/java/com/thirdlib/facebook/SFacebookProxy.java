@@ -124,6 +124,7 @@ public class SFacebookProxy {
 			return;
 		}
 
+		PL.i("-----track event facebook start name=" + eventName);
 		AppEventsLogger logger = AppEventsLogger.newLogger(context);
 		if (valueToSum == null && parameters == null){
 			logger.logEvent(eventName);
@@ -149,16 +150,7 @@ public class SFacebookProxy {
 			}
 		}
 
-		AppEventsLogger logger = AppEventsLogger.newLogger(context);
-		if (valueToSum == null && parameters == null){
-			logger.logEvent(eventName);
-		}else if (valueToSum == null && parameters != null){
-			logger.logEvent(eventName, parameters);
-		}else if (valueToSum != null && parameters == null){
-			logger.logEvent(eventName,valueToSum);
-		}else {
-			logger.logEvent(eventName,valueToSum,parameters);
-		}
+		trackingEvent(context, eventName, valueToSum, parameters);
 
 	}
 
@@ -172,6 +164,7 @@ public class SFacebookProxy {
 		for (Map.Entry<String, Object> entry : parametersMap.entrySet()) {
 			parameters.putString(entry.getKey(), entry.getValue().toString());
 		}
+		PL.i("-----track event facebook logPurchase");
 		logger.logPurchase(purchaseAmount, Currency.getInstance(Locale.US), parameters);
 	}
 

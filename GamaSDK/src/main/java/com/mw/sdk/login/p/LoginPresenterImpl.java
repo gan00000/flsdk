@@ -1284,7 +1284,6 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         }
 
 
-
     /*    if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_GAMA, loginType)) {
 
         } else if (SStringUtil.isEqual(SLoginType.LOGIN_TYPE_MAC, loginType)) {

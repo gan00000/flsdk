@@ -1,5 +1,7 @@
 package com.core.base.utils;
 
+import android.content.Context;
+import android.text.TextUtils;
 import android.util.Log;
 
 /**
@@ -8,6 +10,9 @@ import android.util.Log;
 
 public class PL {
 
+    private static Context appContext;
+    public static boolean enableLocal;
+    public final static String sdk_log_file = "mw_sdk_log_file.xml";
     public final static String PL_LOG = "PL_LOG";
 
     public static void d(String format, Object... args){
@@ -75,17 +80,46 @@ public class PL {
     }
 
     private static void print(SdkLogLevel sdkLogLevel, String Tag, String msg){
-            if (SdkLogLevel.Debug == sdkLogLevel){
-                Log.d(Tag, msg);
-            }else if (SdkLogLevel.Info == sdkLogLevel){
-                Log.i(Tag, msg);
-            }else if (SdkLogLevel.Warn == sdkLogLevel){
-                Log.w(Tag, msg);
-            }else if (SdkLogLevel.Error == sdkLogLevel){
-                Log.e(Tag, msg);
-            }else {
-                Log.d(Tag, msg);
+        if (SdkLogLevel.Debug == sdkLogLevel){
+            Log.d(Tag, msg);
+        }else if (SdkLogLevel.Info == sdkLogLevel){
+            Log.i(Tag, msg);
+        }else if (SdkLogLevel.Warn == sdkLogLevel){
+            Log.w(Tag, msg);
+        }else if (SdkLogLevel.Error == sdkLogLevel){
+            Log.e(Tag, msg);
+        }else {
+            Log.d(Tag, msg);
+        }
+
+        if (appContext != null && enableLocal) {
+            try {
+                String localLog = SPUtil.getSimpleString(appContext,sdk_log_file,"sdk_log_content");
+                if (!TextUtils.isEmpty(localLog)) {
+                    localLog = localLog + "\n" + msg;
+                }else {
+                    localLog = msg;
+                }
+                SPUtil.saveSimpleInfo(appContext,sdk_log_file,"sdk_log_content", localLog);
+            } catch (Exception e) {
+                clearLocalLog(appContext);
             }
+        }
+
+    }
+
+    public static void initLog(Context context){
+        appContext = context.getApplicationContext();
+        enableLocal = true;
+        clearLocalLog(context);
+    }
+
+    public static String getLocalLog(Context context){
+        return SPUtil.getSimpleString(context,sdk_log_file,"sdk_log_content");
+    }
+
+    public static void clearLocalLog(Context context){
+        SPUtil.saveSimpleInfo(context,sdk_log_file,"sdk_log_content", "");
     }
 
     public enum SdkLogLevel {

@@ -190,19 +190,20 @@ public class AFHelper {
             return;
         }
         String afDevKey = ResConfig.getAfDevKey(context);
+        PL.i("-----track event af afDevKey =" + afDevKey);
         if(TextUtils.isEmpty(afDevKey)) {
             return;
         }
-        PL.i("af logEvent start name=" + eventName);
+        PL.i("-----track event af start name=" + eventName);
         AppsFlyerLib.getInstance().logEvent(context, eventName, map, new AppsFlyerRequestListener() {
             @Override
             public void onSuccess() {
-                PL.i("af logEvent onSuccess");
+                PL.i("-----track event af onSuccess eventName=" + eventName);
             }
 
             @Override
             public void onError(int i, @NonNull String s) {
-                PL.i("af logEvent onError:" + s);
+                PL.i("-----track event af onError eventName=" + eventName);
                 //子线程
                 logEventAgain(context, eventName, map);
             }

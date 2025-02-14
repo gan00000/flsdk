@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 
+import com.core.base.utils.PL;
 import com.core.base.utils.ToastUtils;
 import com.google.android.gms.ads.identifier.AdvertisingIdClient;
 import com.google.android.gms.common.ConnectionResult;
@@ -145,6 +146,7 @@ public class SGoogleProxy {
 			analytics = FirebaseAnalytics.getInstance(context);
 		}
 		if (analytics != null){
+			PL.i("-----track event firebase start name=" + eventName);
 			analytics.logEvent(eventName, params);
 		}
 	}
