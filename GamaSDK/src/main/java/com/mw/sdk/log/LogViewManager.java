@@ -1,5 +1,6 @@
 package com.mw.sdk.log;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
@@ -31,10 +32,8 @@ public class LogViewManager {
 
 	private static LogViewManager floatingManager;
 
-	public Activity activity;
-
 	WindowManager mWindowManager = null;
-	TextView textView;
+	//TextView textView;
 
 	SBaseDialog commonDialog;
 
@@ -64,23 +63,23 @@ public class LogViewManager {
 			return;
 		}
 
-        if (mWindowManager != null && textView != null) {
+        if (mWindowManager != null && commonDialog != null) {
             //没有重新登陆，不用重新生成悬浮，防止造成重复
             PL.i("logview已存在");
             return;
         }
 
-		this.activity = activity;
-
         mWindowManager = activity.getWindowManager();
-		textView = new TextView(activity);
+		TextView textView = new TextView(activity);
         textView.setText("sdk debug");
         textView.setTextColor(Color.RED);
+		textView.setPadding(10,10,10,10);
+		textView.setBackgroundColor(Color.GRAY);
 
 		textView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				showLog();
+				showLog(activity);
 			}
 		});
 
@@ -99,8 +98,12 @@ public class LogViewManager {
         mWindowManager.addView(textView, mWindowParams);
     }
 
-	private void showLog() {
+	private void showLog(Activity activity) {
 
+		if (commonDialog != null){
+			commonDialog.show();
+			return;
+		}
 		commonDialog = new SBaseDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
 		SdkLogLayout sdkLogLayout = new SdkLogLayout(activity);
 		sdkLogLayout.setsBaseDialog(commonDialog);
@@ -111,6 +114,7 @@ public class LogViewManager {
 
 
 	// 悬浮按钮的属性
+	@SuppressLint("WrongConstant")
 	private WindowManager.LayoutParams getButtonParams(int pointX, int pointY) {
 		WindowManager.LayoutParams windowParams = new WindowManager.LayoutParams();
 		windowParams.x = pointX;
