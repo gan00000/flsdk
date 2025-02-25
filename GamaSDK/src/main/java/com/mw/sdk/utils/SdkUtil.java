@@ -885,7 +885,7 @@ public class SdkUtil {
         }
     }*/
 
-    public static boolean isVersion1(Context context) {//是否是第一套sdk
+    /*public static boolean isVersion1(Context context) {//是否是第一套sdk
         if ("v1".equals(getSdkInnerVersion(context))){
             return true;
         }
@@ -897,7 +897,7 @@ public class SdkUtil {
             return true;
         }
         return false;
-    }
+    }*/
 
     public static String getSdkInnerVersion(Context context) {//获取版本
         return context.getResources().getString(R.string.sdk_inner_version);

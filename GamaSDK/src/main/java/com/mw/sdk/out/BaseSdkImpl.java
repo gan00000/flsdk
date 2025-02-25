@@ -1233,17 +1233,15 @@ public class BaseSdkImpl implements IMWSDK {
             @Override
             public void run() {
 
-                if (!SdkUtil.isVersion1(activity)) {
-                    if (commonDialog != null){
-                        commonDialog.dismiss();
-                    }
-                    commonDialog = new SBaseDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
-                    AccountBindPhoneLayout accountBindPhoneLayout = new AccountBindPhoneLayout(activity);
-                    accountBindPhoneLayout.setsBaseDialog(commonDialog);
-                    accountBindPhoneLayout.setSFCallBack(sfCallBack);
-                    commonDialog.setContentView(accountBindPhoneLayout);
-                    commonDialog.show();
+                if (commonDialog != null){
+                    commonDialog.dismiss();
                 }
+                commonDialog = new SBaseDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
+                AccountBindPhoneLayout accountBindPhoneLayout = new AccountBindPhoneLayout(activity);
+                accountBindPhoneLayout.setsBaseDialog(commonDialog);
+                accountBindPhoneLayout.setSFCallBack(sfCallBack);
+                commonDialog.setContentView(accountBindPhoneLayout);
+                commonDialog.show();
             }
         });
 
@@ -1255,17 +1253,15 @@ public class BaseSdkImpl implements IMWSDK {
             @Override
             public void run() {
 
-                if (!SdkUtil.isVersion1(activity)) {
-                    if (commonDialog != null){
-                        commonDialog.dismiss();
-                    }
-                    commonDialog = new SBaseDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
-                    ThirdPlatBindAccountLayoutV2 platBindAccountLayoutV2 = new ThirdPlatBindAccountLayoutV2(activity);
-                    platBindAccountLayoutV2.setsBaseDialog(commonDialog);
-                    platBindAccountLayoutV2.setSFCallBack(sfCallBack);
-                    commonDialog.setContentView(platBindAccountLayoutV2);
-                    commonDialog.show();
+                if (commonDialog != null){
+                    commonDialog.dismiss();
                 }
+                commonDialog = new SBaseDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
+                ThirdPlatBindAccountLayoutV2 platBindAccountLayoutV2 = new ThirdPlatBindAccountLayoutV2(activity);
+                platBindAccountLayoutV2.setsBaseDialog(commonDialog);
+                platBindAccountLayoutV2.setSFCallBack(sfCallBack);
+                commonDialog.setContentView(platBindAccountLayoutV2);
+                commonDialog.show();
             }
         });
 

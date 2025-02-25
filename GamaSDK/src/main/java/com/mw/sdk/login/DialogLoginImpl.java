@@ -110,28 +110,26 @@ public class DialogLoginImpl implements ILogin {
 
     private void commonStartLogin(Activity activity, ILoginCallBack iLoginCallBack) {
 
-        if (!SdkUtil.isVersion1(activity)) {
-            ConfigBean configBean = SdkUtil.getSdkCfg(activity);
-            if (configBean != null && configBean.getUrl() != null && SStringUtil.isNotEmpty(configBean.getUrl().getNoticeUrl())) {
-                ConfigBean.VersionData versionData = configBean.getSdkConfigLoginData(activity);
-                //test
+        ConfigBean configBean = SdkUtil.getSdkCfg(activity);
+        if (configBean != null && configBean.getUrl() != null && SStringUtil.isNotEmpty(configBean.getUrl().getNoticeUrl())) {
+            ConfigBean.VersionData versionData = configBean.getSdkConfigLoginData(activity);
+            //test
 //                versionData.setShowNotice(true);
-                if (versionData != null && versionData.isShowNotice()) { //显示dialog web公告
-                    NoticeView noticeView = new NoticeView(activity);
-                    SWebViewDialog webViewDialog = new SWebViewDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen,noticeView,noticeView.getSWebView(),null);
-                    if (configBean.getUrl() != null) {
-                        webViewDialog.setWebUrl(configBean.getUrl().getNoticeUrl());
-                    }
-                    noticeView.setsBaseDialog(webViewDialog);
-                    webViewDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                        @Override
-                        public void onDismiss(DialogInterface dialog) {
-                            goDialogView(activity, iLoginCallBack);
-                        }
-                    });
-                    webViewDialog.show();
-                    return;
+            if (versionData != null && versionData.isShowNotice()) { //显示dialog web公告
+                NoticeView noticeView = new NoticeView(activity);
+                SWebViewDialog webViewDialog = new SWebViewDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen,noticeView,noticeView.getSWebView(),null);
+                if (configBean.getUrl() != null) {
+                    webViewDialog.setWebUrl(configBean.getUrl().getNoticeUrl());
                 }
+                noticeView.setsBaseDialog(webViewDialog);
+                webViewDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        goDialogView(activity, iLoginCallBack);
+                    }
+                });
+                webViewDialog.show();
+                return;
             }
         }
         goDialogView(activity, iLoginCallBack);

@@ -86,7 +86,7 @@ android {
             dimension '1'
             resValue "string", "sdk_inner_version", "v4"
             resValue "string", "sdk_release_european", "true" //发布欧洲地区的话要设置
-            resValue "string", "mw_td_appid", "77e4d9f75abb4baab16213a662fe4e56"
+            resValue "string", "mw_td_appid", ""
             resValue "string", "sdk_first_silent_login", "true"
         }
 
@@ -120,12 +120,12 @@ android {
             dimension "1"
             resValue "string", "sdk_inner_version", "v6"
             resValue "string", "sdk_release_european", "true" //发布欧洲地区的话要设置
-            resValue "string", "mw_td_appid", "77e4d9f75abb4baab16213a662fe4e56"
+            resValue "string", "mw_td_appid", ""
         }
         sdkKR {//韩国
             dimension "1"
             resValue "string", "sdk_inner_version", "kr"
-            resValue "string", "mw_td_appid", "77e4d9f75abb4baab16213a662fe4e56"
+            resValue "string", "mw_td_appid", ""
             proguardFile 'flavor-rules-kr.pro'
         }
 

@@ -325,11 +325,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             }
         }else{
             if (iLoginView != null){
-                if (!SdkUtil.isVersion1(activity)){
-                    iLoginView.showLoginWithRegView(ViewType.WelcomeView);
-                }else{
-                    iLoginView.showWelcomeBackView();
-                }
+                iLoginView.showLoginWithRegView(ViewType.WelcomeView);
             }
         }
     }
@@ -356,11 +352,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             }
         }else{
             if (iLoginView != null){
-                if (!SdkUtil.isVersion1(activity)){
-                    iLoginView.showLoginWithRegView(ViewType.WelcomeView);
-                }else{
-                    iLoginView.showWelcomeBackView();
-                }
+                iLoginView.showLoginWithRegView(ViewType.WelcomeView);
             }
         }
     }
