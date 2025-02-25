@@ -46,7 +46,7 @@ public class AFHelper {
 
 
             //是否发布欧洲，欧洲特殊处理 https://support.appsflyer.com/hc/zh-cn/articles/22310731147153-%E5%AF%B9Google%E6%AC%A7%E7%9B%9F%E6%84%8F%E8%A7%81%E5%BE%81%E6%B1%82%E6%96%B0%E6%94%BF%E7%9A%84%E6%94%AF%E6%8C%81
-            if (SStringUtil.isNotEmpty(application.getApplicationContext().getString(R.string.sdk_release_european))) {
+            if ("true".equals(application.getApplicationContext().getString(R.string.sdk_release_european))) {
                 AppsFlyerLib.getInstance().enableTCFDataCollection(true);
             }
 
