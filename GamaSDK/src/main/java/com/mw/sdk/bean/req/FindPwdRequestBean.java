@@ -17,7 +17,7 @@ public class FindPwdRequestBean extends AdsRequestBean {
 		super(context);
 	}
 
-
+	private String loginId;//新添加
 	private String name;//用户账号名
 	private String email;
 	private String interfaces = "4";
@@ -30,7 +30,8 @@ public class FindPwdRequestBean extends AdsRequestBean {
 	}
 
 	public void setName(String name) {
-		this.name = name.trim();
+		this.name = name == null ? "" : name.trim().toLowerCase();
+		this.loginId = this.name;
 	}
 
 	public String getEmail() {
@@ -38,7 +39,7 @@ public class FindPwdRequestBean extends AdsRequestBean {
 	}
 
 	public void setEmail(String email) {
-		this.email = email;
+		this.email = email== null ? "": email.toLowerCase();
 	}
 
 	public String getVfCode() {

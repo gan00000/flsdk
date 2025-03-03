@@ -49,9 +49,8 @@ public class AccountLoginRequestBean extends AdsRequestBean {
 	}
 
 	public void setName(String name) {
-		name = name.toLowerCase();
-		this.name = name;
-		this.loginId = name;
+		this.name = name == null ? "" : name.trim().toLowerCase();
+		this.loginId = this.name;
 	}
 
 	public String getPwd() {
@@ -84,7 +83,7 @@ public class AccountLoginRequestBean extends AdsRequestBean {
 	}
 
 	public void setEmail(String email) {
-		this.email = email;
+		this.email = email== null ? "": email.toLowerCase();
 	}
 
 	public void setCaptcha(String captcha) {

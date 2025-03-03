@@ -20,7 +20,7 @@ public class PhoneVerifyRequestTask extends BaseLoginRequestTask {
 		requestBean.setVfCode(vfCode);
 
 		if (TextUtils.isEmpty(area)){
-
+			//此时是邮箱
 			requestBean.setEmail(phone);
 
 		}else {

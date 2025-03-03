@@ -1228,7 +1228,7 @@ public class BaseSdkImpl implements IMWSDK {
 
     @Override
     public void showBindPhoneView(Activity activity, SFCallBack<BaseResponseModel> sfCallBack) {
-
+        PL.i("IMWSDK showBindPhoneView");
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -1249,6 +1249,7 @@ public class BaseSdkImpl implements IMWSDK {
 
     @Override
     public void showUpgradeAccountView(Activity activity, SFCallBack sfCallBack) {
+        PL.i("IMWSDK showUpgradeAccountView");
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {

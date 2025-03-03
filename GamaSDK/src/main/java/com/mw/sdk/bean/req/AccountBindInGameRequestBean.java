@@ -55,8 +55,8 @@ public class AccountBindInGameRequestBean extends SGameBaseRequestBean {
 	}
 
 	public void setName(String name) {
-		this.name = name;
-		this.loginId = name;
+		this.name = name == null ? "" : name.trim().toLowerCase();
+		this.loginId = this.name;
 	}
 
 	public String getPwd() {
