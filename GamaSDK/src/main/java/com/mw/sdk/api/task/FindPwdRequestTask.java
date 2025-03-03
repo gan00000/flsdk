@@ -27,10 +27,11 @@ public class FindPwdRequestTask extends BaseLoginRequestTask {
 
 	}
 
-	public FindPwdRequestTask(Context mContext, String userName, String newPwd, String phone, String vfCode) {
+	public FindPwdRequestTask(Context mContext, String userName, String newPwd, String mail, String vfCode) {
 		super(mContext);
 
 		userName = userName.toLowerCase();
+		mail = mail.toLowerCase();
 
 		pwdRequestBean = new FindPwdRequestBean(mContext);
 		sdkBaseRequestBean = pwdRequestBean;
@@ -49,7 +50,7 @@ public class FindPwdRequestTask extends BaseLoginRequestTask {
 //			pwdRequestBean.setPhone(phone);
 //		}
 
-		pwdRequestBean.setEmail(phone);
+		pwdRequestBean.setEmail(mail);
 
 		pwdRequestBean.setRequestMethod(ApiRequestMethod.GS_REQUEST_METHOD_FIND_PASSWORD);
 
