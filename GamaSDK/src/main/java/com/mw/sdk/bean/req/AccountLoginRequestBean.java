@@ -83,7 +83,7 @@ public class AccountLoginRequestBean extends AdsRequestBean {
 	}
 
 	public void setEmail(String email) {
-		this.email = email== null ? "": email.toLowerCase();
+		this.email = email;
 	}
 
 	public void setCaptcha(String captcha) {

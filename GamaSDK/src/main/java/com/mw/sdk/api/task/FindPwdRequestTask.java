@@ -62,7 +62,7 @@ public class FindPwdRequestTask extends BaseLoginRequestTask {
 		super.createRequestBean();
 
 		pwdRequestBean.setSignature(SStringUtil.toMd5(ResConfig.getAppKey(context) + pwdRequestBean.getTimestamp() +
-				pwdRequestBean.getName() + pwdRequestBean.getGameCode()));
+				pwdRequestBean.getEmail() + pwdRequestBean.getGameCode()));
 
 		return pwdRequestBean;
 	}

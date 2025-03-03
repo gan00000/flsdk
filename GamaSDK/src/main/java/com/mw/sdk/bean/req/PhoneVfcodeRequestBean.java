@@ -33,6 +33,6 @@ public class PhoneVfcodeRequestBean extends AdsRequestBean {
 	}
 
 	public void setEmail(String email) {
-		this.email = email== null ? "": email.toLowerCase();
+		this.email = email;
 	}
 }
