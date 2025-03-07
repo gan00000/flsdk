@@ -200,7 +200,7 @@ public class VKPayImpl implements IPay, VKPurchaseManger.PurchaseCallback {
             loadingDialog = new LoadingDialog(activity);
         }
 
-        PL.w("google set paying...");
+        PL.w("vk set paying...");
         isPaying = true;
 
         this.mActivity = activity;
@@ -231,7 +231,7 @@ public class VKPayImpl implements IPay, VKPurchaseManger.PurchaseCallback {
             callbackFail("can not find role info:" + this.createOrderIdReqBean.print());
         }
         //isPaying = false;
-        PL.w("google set not paying");
+        PL.w("vk set not paying");
     }
 
     private void dimissDialog() {
@@ -509,6 +509,7 @@ public class VKPayImpl implements IPay, VKPurchaseManger.PurchaseCallback {
             onePayInActivity(mActivity);
             return;
         }
+
         for (Purchase purchase : purchases) {
 
             String purchaseId = purchase.getPurchaseId();

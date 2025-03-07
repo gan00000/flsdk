@@ -1162,6 +1162,7 @@ public class BaseSdkImpl implements IMWSDK {
                     }else {
                         iPay_Ru = IPayFactory.create(activity, ChannelPlatform.VK);
                         iPay = iPay_Ru;
+                        iPay.onCreate(activity);
                     }
                     doGooglePay(activity, payCreateOrderReqBean);
                 }

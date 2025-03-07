@@ -129,7 +129,7 @@ public class VKPurchaseManger {
         PurchasesUseCase purchasesUseCase = getBillingClient(context).getPurchases();
 
         purchasesUseCase.getPurchases().addOnSuccessListener(purchases -> {
-
+            Log.e("RuStoreBillingClient", "calling getPurchases success");
             if (purchaseCallback != null){
                 purchaseCallback.onPayingQueryPurchaseSucceed(purchases);
             }
