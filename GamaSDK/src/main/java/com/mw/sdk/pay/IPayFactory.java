@@ -16,8 +16,15 @@ public class IPayFactory {
 //    public static final int PAY_GOOGLE = 0;
 
     public static IPay create(Context context){
+        return create(context, null);
+    }
+    public static IPay create(Context context, ChannelPlatform channelPlatform){
 
         String channel_platform = context.getResources().getString(R.string.channel_platform);
+        if (channelPlatform != null){//代码设置的为主
+            channel_platform = channelPlatform.getChannel_platform();
+        }
+
         if(ChannelPlatform.ONESTORE.getChannel_platform().equals(channel_platform)) {
             SdkVersionUtil sdkVersionUtil = new SdkVersionUtil();
             return sdkVersionUtil.newOneStorePay();

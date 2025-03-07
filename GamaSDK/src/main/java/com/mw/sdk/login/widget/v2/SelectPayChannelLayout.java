@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -23,13 +24,16 @@ public class SelectPayChannelLayout extends SLoginBaseRelativeLayout {
 
     private View contentView;
 
-    protected View ggPayView, otherPayView;
+    protected View ggPayView;
+    private Button otherPayBtn, ruPayBtn;
+
+    protected View ruPayView;
 
     private ImageView iv_select_channel_rebate;
 
-    private SFCallBack sfCallBack;
+    private SFCallBack<Integer> sfCallBack;
 
-    public void setSfCallBack(SFCallBack sfCallBack) {
+    public void setSfCallBack(SFCallBack<Integer> sfCallBack) {
         this.sfCallBack = sfCallBack;
     }
 
@@ -64,7 +68,9 @@ public class SelectPayChannelLayout extends SLoginBaseRelativeLayout {
 
         backView = contentView.findViewById(R.id.iv_select_channel_close);
         ggPayView = contentView.findViewById(R.id.iv_select_channel_gg);
-        otherPayView = contentView.findViewById(R.id.iv_select_channel_other);
+        otherPayBtn = contentView.findViewById(R.id.bt_select_channel_other);
+        ruPayView = contentView.findViewById(R.id.rl_select_channel_ru);
+        ruPayBtn = contentView.findViewById(R.id.bt_select_channel_ru);
         iv_select_channel_rebate = contentView.findViewById(R.id.iv_select_channel_rebate);
 
         backView.setOnClickListener(new OnClickListener() {
@@ -81,22 +87,39 @@ public class SelectPayChannelLayout extends SLoginBaseRelativeLayout {
             public void onClick(View v) {
 
                 if (sfCallBack != null){
-                    sfCallBack.success("","google");
+                    sfCallBack.success(100,"google");
                 }
             }
         });
 
-        otherPayView.setOnClickListener(new OnClickListener() {
+        otherPayBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if (sfCallBack != null){
-                    sfCallBack.fail("","other");
+                    sfCallBack.fail(101,"other");
+                }
+            }
+        });
+        ruPayBtn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (sfCallBack != null){
+                    sfCallBack.fail(102,"rustore");
                 }
             }
         });
 
+        String payChannel = getContext().getResources().getString(R.string.mw_local_rustore_google);
+        if("true".equals(payChannel)){
+            ruPayView.setVisibility(View.VISIBLE);
+        }else {
+            ruPayView.setVisibility(View.GONE);
+        }
+
         try {
+
             String gameCode = ResConfig.getGameCode(getContext().getApplicationContext());
             String loginTimestamp = SdkUtil.getSdkTimestamp(getContext());
             String channel_platform = getContext().getResources().getString(R.string.channel_platform);
@@ -110,6 +133,7 @@ public class SelectPayChannelLayout extends SLoginBaseRelativeLayout {
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
 //                    .placeholder(R.drawable.bg_pay_gg)
                     .into(iv_select_channel_rebate);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
