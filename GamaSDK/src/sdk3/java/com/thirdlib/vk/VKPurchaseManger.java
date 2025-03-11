@@ -71,7 +71,7 @@ public class VKPurchaseManger {
     }
 
     public void checkPurchaseAvailiability(Context context) {
-        RuStoreBillingClientExtKt.checkPurchasesAvailability(RuStoreBillingClient.Companion)
+        /*RuStoreBillingClientExtKt.checkPurchasesAvailability(RuStoreBillingClient.Companion)
                 .addOnSuccessListener(result -> {
                     if (result instanceof PurchaseAvailabilityResult.Available) {
                         Log.w("RuStoreBillingClient", "Success calling checkPurchaseAvailiability - Available: " + result);
@@ -85,7 +85,7 @@ public class VKPurchaseManger {
                 }).addOnFailureListener(error -> {
                     isPurchasesAvailability = false;
                     Log.e("RuStoreBillingClient", "Error calling checkPurchaseAvailiability: " + error);
-                });
+                });*/
     }
 
     public void getProducts(Context context) {
