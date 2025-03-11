@@ -16,6 +16,7 @@ import ru.rustore.sdk.billingclient.RuStoreBillingClient;
 import ru.rustore.sdk.billingclient.RuStoreBillingClientFactory;
 import ru.rustore.sdk.billingclient.model.purchase.PaymentResult;
 import ru.rustore.sdk.billingclient.model.purchase.Purchase;
+import ru.rustore.sdk.billingclient.model.purchase.PurchaseAvailabilityResult;
 import ru.rustore.sdk.billingclient.model.purchase.PurchaseState;
 import ru.rustore.sdk.billingclient.usecase.ProductsUseCase;
 import ru.rustore.sdk.billingclient.usecase.PurchasesUseCase;
@@ -70,14 +71,14 @@ public class VKPurchaseManger {
     }
 
     public void checkPurchaseAvailiability(Context context) {
-        RuStoreBillingClientExtKt.checkPurchasesAvailability(RuStoreBillingClient.Companion, context)
+        RuStoreBillingClientExtKt.checkPurchasesAvailability(RuStoreBillingClient.Companion)
                 .addOnSuccessListener(result -> {
-                    if (result instanceof FeatureAvailabilityResult.Available) {
+                    if (result instanceof PurchaseAvailabilityResult.Available) {
                         Log.w("RuStoreBillingClient", "Success calling checkPurchaseAvailiability - Available: " + result);
                         isPurchasesAvailability = true;
                     } else {
                         isPurchasesAvailability = false;
-                        RuStoreException exception = ((FeatureAvailabilityResult.Unavailable) result).getCause();
+                        RuStoreException exception = ((PurchaseAvailabilityResult.Unavailable) result).getCause();
                         BillingRuStoreExceptionExtKt.resolveForBilling(exception, context);
                         Log.w("RuStoreBillingClient", "Success calling checkPurchaseAvailiability - Unavailable: " + exception);
                     }

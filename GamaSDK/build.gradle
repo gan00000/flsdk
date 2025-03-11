@@ -257,7 +257,7 @@ dependencies {
     lunqiImplementation files('libs/xlsdk1.jar')
 
     //俄罗斯
-    sdk3Implementation platform('ru.rustore.sdk:bom:6.0.0')
+    sdk3Implementation platform('ru.rustore.sdk:bom:2025.02.01')
     sdk3Implementation 'ru.rustore.sdk:billingclient'
 
 }
