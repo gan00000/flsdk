@@ -35,6 +35,7 @@ import java.util.List;
 import ru.rustore.sdk.billingclient.model.purchase.PaymentResult;
 import ru.rustore.sdk.billingclient.model.purchase.Purchase;
 import ru.rustore.sdk.billingclient.model.purchase.PurchaseState;
+import ru.rustore.sdk.core.util.RuStoreUtils;
 
 /**
  * Created by gan on 2017/2/23.
@@ -222,9 +223,26 @@ public class VKPayImpl implements IPay, VKPurchaseManger.PurchaseCallback {
 
         if (this.createOrderIdReqBean.isInitOk()) {
             //开始储值,先查询有没有未消耗的商品
-//            onePayInActivity(activity);
             loadingDialog.showProgressDialog();
-            VKPurchaseManger.getInstance().queryPurchasesAsyncInPaying(activity);
+            boolean isRuStoreInstalled = RuStoreUtils.INSTANCE.isRuStoreInstalled(activity);
+            PL.d("vk isRuStoreInstalled:" + isRuStoreInstalled);
+            VKPurchaseManger.getBillingClient(activity).getUserInfo().getAuthorizationStatus()
+                    .addOnSuccessListener (status -> {
+                        PL.d("vk getAuthorizationStatus onSuccess status:" + status.getAuthorized());
+                        // Result processing
+                        if (status != null && status.getAuthorized()){//已经登录授权，先查询补发再买
+                            //getPurchases()
+                            VKPurchaseManger.getInstance().queryPurchasesAsyncInPaying(activity);
+                        }else {
+                            //直接买
+                            onePayInActivity(mActivity);
+                        }
+                    })
+                    .addOnFailureListener(throwable -> {
+                        // Error processing
+                        PL.d("vk getAuthorizationStatus onFailure");
+                        onePayInActivity(mActivity);
+                    });
 
         } else {
             ToastUtils.toast(activity, "please log in to the game first");
@@ -360,6 +378,22 @@ public class VKPayImpl implements IPay, VKPurchaseManger.PurchaseCallback {
 
     }
 
+
+//    private void checkNotConfirmedPurchases(Activity activity){
+//        VKPurchaseManger.getBillingClient(activity).getUserInfo().getAuthorizationStatus()
+//            .addOnSuccessListener (status -> {
+//                PL.d("vk getAuthorizationStatus onSuccess status:" + status.getAuthorized());
+//                // Result processing
+//                if (status != null && status.getAuthorized()){//已经登录授权，先查询补发再买
+//                    //getPurchases()
+//                    VKPurchaseManger.getInstance().queryPurchasesAsync(activity);
+//                }
+//            })
+//            .addOnFailureListener(throwable -> {
+//                // Error processing
+//                PL.d("vk getAuthorizationStatus onFailure");
+//            });
+//    }
     //=================================================================================================
     //=================================================================================================
     //=================================================================================================

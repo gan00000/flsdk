@@ -18,6 +18,8 @@ import ru.rustore.sdk.billingclient.model.purchase.PaymentResult;
 import ru.rustore.sdk.billingclient.model.purchase.Purchase;
 import ru.rustore.sdk.billingclient.model.purchase.PurchaseAvailabilityResult;
 import ru.rustore.sdk.billingclient.model.purchase.PurchaseState;
+import ru.rustore.sdk.billingclient.provider.logger.ExternalPaymentLogger;
+import ru.rustore.sdk.billingclient.provider.logger.ExternalPaymentLoggerFactory;
 import ru.rustore.sdk.billingclient.usecase.ProductsUseCase;
 import ru.rustore.sdk.billingclient.usecase.PurchasesUseCase;
 import ru.rustore.sdk.billingclient.utils.BillingRuStoreExceptionExtKt;
@@ -40,18 +42,27 @@ public class VKPurchaseManger {
         return vkPurchaseManger;
     }
 
-    private static RuStoreBillingClient getBillingClient(Context context) {
+    final static ExternalPaymentLoggerFactory externalPaymentLoggerFactory = new ExternalPaymentLoggerFactory() {
+        @Override
+        public ExternalPaymentLogger create(String tag) {
+            return new PaymentLogger(tag);
+        }
+    };
+    final static boolean debugLogs = true;
+
+    public static RuStoreBillingClient getBillingClient(Context context) {
 
         if (ruStoreBillingClient != null){
             return ruStoreBillingClient;
         }
+
         ruStoreBillingClient = RuStoreBillingClientFactory.INSTANCE.create(
                 context,
                 context.getString(R.string.mw_vk_appid),
                 context.getString(R.string.sdk_game_code),
                 null,
-                null,
-                true
+                externalPaymentLoggerFactory,
+                debugLogs
         );
         return ruStoreBillingClient;
     }
