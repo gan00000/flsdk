@@ -13,9 +13,9 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
-import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.io.IOException;
+import java.util.Map;
 
 /**
  */
@@ -26,41 +26,7 @@ public class SGoogleProxy {
 	private static final String TAG = "SGoogleProxy";
 
 
-    //===========================================================================================
-    //=====================================Google 分析============================================
-    //===========================================================================================
-
-	/*public static class SGoogleAnalytics {
-		//新版google分析
-		private static Tracker mTracker;
-
-		public synchronized static Tracker initDefaultTracker(Context context, String trackingId) {
-			if (mTracker == null) {
-				GoogleAnalytics analytics = GoogleAnalytics.getInstance(context);
-				mTracker = analytics.newTracker(trackingId);
-			}
-			return mTracker;
-		}
-
-		public static void trackEvent(String category, String action, String label) {
-
-			if (null != mTracker) {
-				mTracker.send(new HitBuilders.EventBuilder().setCategory(category).setAction(action).setLabel(label).build());
-			}
-		}
-
-		public static void stopSession(){
-
-		}
-	}*/
-
-    //===========================================================================================
-    //=====================================Google 分析  end============================================
-    //===========================================================================================
-
-
 	//=====================================Google getAdvertisingId ============================================
-
 
 	private static String advertisingIdCache = "";
 
@@ -93,15 +59,6 @@ public class SGoogleProxy {
 
 	//=====================================Google getAdvertisingId end============================================
 
-/*
-	public static void setMessageDispather(Context context,Class< ? extends MessageDispatcher> messageDispatherClazz){
-		PushSPUtil.saveDispatherClassName(context, messageDispatherClazz.getCanonicalName());
-	}
-
-	public static Map onCreateMainActivity(Activity activity){
-		return onCreateMainActivity(activity,true);
-	}
-*/
 
 	public static int isGooglePlayServicesAvailable(Context context){
 		return GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(context);
@@ -127,54 +84,51 @@ public class SGoogleProxy {
 	}
 
 
-	public void share(Activity activity,String text,String url){
-		// Launch the Google+ share dialog with attribution to your app.
-//	      Intent shareIntent = new PlusShare.Builder(activity)
-//	          .setType("text/plain")
-//	          .setText(text)
-//	          .setContentUrl(Uri.parse(url))
-//	          .getIntent();
-//	      activity.startActivityForResult(shareIntent, GOOGLE_SHARE_CODE);
-	}
-
-	private static FirebaseAnalytics analytics;
 	public static void firebaseAnalytics(Context context, String eventName, Bundle params) {
+
+		if (!existFirebaseModule()) {
+			return;
+		}
+
 		if (context == null || TextUtils.isEmpty(eventName)) {
 			return;
 		}
-		if (analytics == null){
-			analytics = FirebaseAnalytics.getInstance(context);
-		}
-		if (analytics != null){
-			PL.i("-----track event firebase start name=" + eventName);
-			analytics.logEvent(eventName, params);
-		}
-	}
 
-/*
-
-	public static class SFirebaseAnalytics {
-
-		private static FirebaseAnalytics mFirebaseAnalytics;
-
-		public static void logEvent(Context context,String eventName){
-			if (mFirebaseAnalytics == null){
-				mFirebaseAnalytics = FirebaseAnalytics.getInstance(context);
-			}
-			Bundle bundle = new Bundle();
-
-			mFirebaseAnalytics.logEvent(eventName, bundle);
-
-		}
-
-		public static void logEvent(Context context,String eventName,Bundle bundle){
-			if (mFirebaseAnalytics == null){
-				mFirebaseAnalytics = FirebaseAnalytics.getInstance(context);
-			}
-			mFirebaseAnalytics.logEvent(eventName, bundle);
-		}
+		FirebaseHelper.firebaseAnalytics(context, eventName, params);
 
 	}
-*/
+
+	public static void trackRevenueFirebase(Context context, String eventName, double usdPrice, String currency, String uid,String roleId, String productId, String orderId, String channel_platform, Map<String, Object> otherParams){
+		if (!existFirebaseModule()) {
+			return;
+		}
+		if (context == null || TextUtils.isEmpty(eventName)) {
+			return;
+		}
+
+		FirebaseHelper.trackRevenueFirebase(context, eventName, usdPrice, currency, uid, roleId, productId, orderId, channel_platform, otherParams);
+	}
+
+	public static Bundle trackPayCC(Context context, String eventName, String orderId, String productId, double usdPrice, String uid) {
+
+		if (!existFirebaseModule()) {
+			return null;
+		}
+
+		return FirebaseHelper.trackPayCC(context, eventName, orderId, productId, usdPrice, uid);
+	}
+
+	private static boolean existFirebaseModule() {
+		try {
+			Class<?> clazz = Class.forName("com.google.firebase.analytics.FirebaseAnalytics");
+			if (clazz == null){
+				return false;
+			}
+		} catch (ClassNotFoundException e) {
+			PL.w("Firebase module not exist.");
+			return false;
+		}
+		return true;
+	}
 
 }

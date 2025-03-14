@@ -1,13 +1,11 @@
 package com.mw.sdk.ads;
 
 import android.content.Context;
-import android.os.Bundle;
 
 import com.appsflyer.AFInAppEventParameterName;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.facebook.appevents.AppEventsConstants;
-import com.google.firebase.analytics.FirebaseAnalytics;
 import com.thirdlib.af.AFHelper;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.google.SGoogleProxy;
@@ -21,37 +19,7 @@ public class TrackEventHelper {
 
     public static void trackRevenueFirebase(Context context, String eventName, double usdPrice, String currency, String uid,String roleId, String productId, String orderId, String channel_platform, Map<String, Object> otherParams){
 
-        if (context == null || SStringUtil.isEmpty(eventName)){
-            return;
-        }
-        //Firebase
-//        Map<String, Object> firebaseValues = new HashMap<>();
-        //下面是自定义的事件名
-//        firebaseValues.put(EventConstant.ParameterName.USER_ID, uid);
-//        firebaseValues.put(EventConstant.ParameterName.ROLE_ID, roleId);
-
-        Bundle b = new Bundle();
-        if (otherParams != null && !otherParams.isEmpty()) {
-            for (Map.Entry<String, Object> entry : otherParams.entrySet()) {
-                b.putString(entry.getKey(), entry.getValue().toString());
-            }
-        }
-        b.putString(EventConstant.ParameterName.USER_ID,uid);
-        b.putString(EventConstant.ParameterName.ROLE_ID,roleId);
-
-        b.putString(FirebaseAnalytics.Param.ITEM_ID,productId);
-//            b.putDouble(FirebaseAnalytics.Param.PRICE,usdPrice);
-        b.putDouble(FirebaseAnalytics.Param.VALUE,usdPrice);
-        b.putString(FirebaseAnalytics.Param.CURRENCY, currency);
-        b.putString(FirebaseAnalytics.Param.TRANSACTION_ID, orderId);
-        b.putString("platform", channel_platform);
-        PL.i("trackRevenueFirebase start...name=" + eventName);
-//        if (SStringUtil.isEmpty(eventName)){
-//            SGoogleProxy.firebaseAnalytics(context, FirebaseAnalytics.Event.PURCHASE, b);
-//        }else {
-//            SGoogleProxy.firebaseAnalytics(context, eventName, b);
-//        }
-        SGoogleProxy.firebaseAnalytics(context, eventName, b);
+        SGoogleProxy.trackRevenueFirebase(context, eventName, usdPrice, currency, uid, roleId, productId, orderId, channel_platform, otherParams);
 
     }
 

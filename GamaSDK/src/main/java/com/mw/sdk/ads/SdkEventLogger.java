@@ -17,15 +17,14 @@ import com.core.base.utils.SPUtil;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.TimeUtil;
 import com.facebook.appevents.AppEventsConstants;
-import com.mw.sdk.bean.SUserInfo;
-import com.google.firebase.analytics.FirebaseAnalytics;
+import com.mw.sdk.R;
+import com.mw.sdk.api.Request;
 import com.mw.sdk.bean.AdsRequestBean;
+import com.mw.sdk.bean.SUserInfo;
+import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.out.bean.EventPropertie;
 import com.mw.sdk.utils.ResConfig;
 import com.mw.sdk.utils.SdkUtil;
-import com.mw.sdk.R;
-import com.mw.sdk.api.Request;
-import com.mw.sdk.login.model.response.SLoginResponse;
 import com.thirdlib.adjust.AdjustHelper;
 import com.thirdlib.af.AFHelper;
 import com.thirdlib.facebook.SFacebookProxy;
@@ -218,34 +217,8 @@ public class SdkEventLogger {
                 SFacebookProxy.trackingEvent(context,eventName, usdPrice, fb_eventValues);
             }
 
-            //Firebase
-            Map<String, Object> firebaseValues = new HashMap<>();
-            //下面是自定义的事件名
-            firebaseValues.put(EventConstant.ParameterName.USER_ID, uid);
-            firebaseValues.put(EventConstant.ParameterName.ROLE_ID, SdkUtil.getRoleId(context));
-
-            Bundle b = new Bundle();
-            for (Map.Entry<String, Object> entry : firebaseValues.entrySet()) {
-                b.putString(entry.getKey(), entry.getValue().toString());
-            }
-            b.putString(FirebaseAnalytics.Param.ITEM_ID,productId);
-//            b.putDouble(FirebaseAnalytics.Param.PRICE,usdPrice);
-            b.putDouble(FirebaseAnalytics.Param.VALUE,usdPrice);
-            b.putString(FirebaseAnalytics.Param.CURRENCY, "USD");
-            b.putString(FirebaseAnalytics.Param.TRANSACTION_ID, orderId);
-            b.putString("platform", context.getResources().getString(R.string.channel_platform));
-            PL.i("trackinPay Purchase firebase...");
-            if (SStringUtil.isEmpty(eventName)){
-                SGoogleProxy.firebaseAnalytics(context, FirebaseAnalytics.Event.PURCHASE, b);
-
-                SGoogleProxy.firebaseAnalytics(context, "purchase_D14", b);
-                SGoogleProxy.firebaseAnalytics(context, "purchase_D30", b);
-                SGoogleProxy.firebaseAnalytics(context, "purchase_D45", b);
-                SGoogleProxy.firebaseAnalytics(context, "purchase_D60", b);
-
-            }else {
-                SGoogleProxy.firebaseAnalytics(context, eventName, b);
-            }
+            //firebase
+            Bundle b = SGoogleProxy.trackPayCC(context, eventName, orderId, productId, usdPrice, uid);
 
 
             //adjust
