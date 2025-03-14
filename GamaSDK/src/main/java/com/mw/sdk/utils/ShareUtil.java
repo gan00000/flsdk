@@ -7,14 +7,12 @@ import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.text.TextUtils;
 
-import com.core.base.utils.ApkInstallUtil;
 import com.core.base.utils.FileUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.ToastUtils;
-import com.facebook.messenger.MessengerUtils;
 import com.mw.sdk.R;
-import com.mw.sdk.out.ThirdPartyType;
 import com.mw.sdk.out.ISdkCallBack;
+import com.mw.sdk.out.ThirdPartyType;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

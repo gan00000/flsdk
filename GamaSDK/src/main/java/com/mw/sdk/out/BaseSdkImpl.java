@@ -30,8 +30,6 @@ import com.core.base.utils.SPUtil;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.SignatureUtil;
 import com.core.base.utils.ToastUtils;
-import com.facebook.FacebookSdk;
-import com.facebook.applinks.AppLinkData;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -244,7 +242,7 @@ public class BaseSdkImpl implements IMWSDK {
 //                ConfigRequest.requestTermsCfg(activity.getApplicationContext());//下载服务条款
         // 1.初始化fb sdk
 //                SFacebookProxy.initFbSdk(activity.getApplicationContext());
-        sFacebookProxy = new SFacebookProxy(activity.getApplicationContext());
+        sFacebookProxy = SFacebookProxy.newObj(activity.getApplicationContext());
         isInitSdk = true;
 
         boolean isCall = SPUtil.getBoolean(activity.getApplicationContext(), SdkUtil.SDK_SP_FILE,"sdk_applicationOnCreate_call");
@@ -405,23 +403,8 @@ public class BaseSdkImpl implements IMWSDK {
         //==============deep link=====================
         SLoginResponse sLoginResponse = SdkUtil.getCurrentUserLoginResponse(activity);//启动过不在获取
         if (sLoginResponse == null){
-            // Get user consent
-            FacebookSdk.setAutoInitEnabled(true);
-            FacebookSdk.fullyInitialize();
-            AppLinkData.fetchDeferredAppLinkData(activity, new AppLinkData.CompletionHandler() {
-                @Override
-                public void onDeferredAppLinkDataFetched(AppLinkData appLinkData) {
-
-                    // Process app link data
-                    if (appLinkData != null && appLinkData.getTargetUri() != null){
-                        PL.i("fb onDeferredAppLinkDataFetched=" + appLinkData.getTargetUri().toString());
-                        SdkUtil.saveDeepLink(activity, appLinkData.getTargetUri().toString());
-                    }else {
-                        PL.i("fb onDeferredAppLinkDataFetched is no data");
-                        //SdkUtil.saveDeepLink(activity, "");
-                    }
-                }
-            });
+            //fb deeplink
+            SFacebookProxy.fetchDeferredAppLinkData(activity);
 
             googleDeepLinkPreferences = activity.getSharedPreferences("google.analytics.deferred.deeplink.prefs", MODE_PRIVATE);
             deepLinkListener = (sharedPreferences, key) -> {

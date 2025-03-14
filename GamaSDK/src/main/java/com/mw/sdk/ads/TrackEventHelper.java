@@ -5,8 +5,8 @@ import android.content.Context;
 import com.appsflyer.AFInAppEventParameterName;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
-import com.facebook.appevents.AppEventsConstants;
 import com.thirdlib.af.AFHelper;
+import com.thirdlib.facebook.FBEventsConstants;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.google.SGoogleProxy;
 import com.thirdlib.tiktok.TTSdkHelper;
@@ -33,9 +33,9 @@ public class TrackEventHelper {
         //下面是自定义的事件名
         fb_eventValues.put(EventConstant.ParameterName.USER_ID, uid);
         fb_eventValues.put(EventConstant.ParameterName.ROLE_ID, roleId);
-        fb_eventValues.put(AppEventsConstants.EVENT_PARAM_CURRENCY, currency);
-        fb_eventValues.put(AppEventsConstants.EVENT_PARAM_CONTENT_ID, productId);
-        fb_eventValues.put(AppEventsConstants.EVENT_PARAM_ORDER_ID, orderId);
+        fb_eventValues.put(FBEventsConstants.EVENT_PARAM_CURRENCY, currency);
+        fb_eventValues.put(FBEventsConstants.EVENT_PARAM_CONTENT_ID, productId);
+        fb_eventValues.put(FBEventsConstants.EVENT_PARAM_ORDER_ID, orderId);
         fb_eventValues.put("platform", channel_platform);
 
         if (otherParams != null && !otherParams.isEmpty()) {

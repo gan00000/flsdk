@@ -16,7 +16,6 @@ import com.core.base.utils.PL;
 import com.core.base.utils.SPUtil;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.TimeUtil;
-import com.facebook.appevents.AppEventsConstants;
 import com.mw.sdk.R;
 import com.mw.sdk.api.Request;
 import com.mw.sdk.bean.AdsRequestBean;
@@ -27,6 +26,7 @@ import com.mw.sdk.utils.ResConfig;
 import com.mw.sdk.utils.SdkUtil;
 import com.thirdlib.adjust.AdjustHelper;
 import com.thirdlib.af.AFHelper;
+import com.thirdlib.facebook.FBEventsConstants;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.google.SGoogleProxy;
 import com.thirdlib.td.TDAnalyticsHelper;
@@ -48,7 +48,7 @@ public class SdkEventLogger {
         try {
 
             AFHelper.activityOnCreate(activity);
-            SFacebookProxy.initFbSdk(activity.getApplicationContext());
+            //SFacebookProxy.initFbSdk(activity.getApplicationContext());
             sendEventToSever(activity,EventConstant.EventName.APP_OPEN.name());
             trackingWithEventName(activity, EventConstant.EventName.APP_OPEN.name(), null, EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
         } catch (Exception e) {
@@ -116,7 +116,7 @@ public class SdkEventLogger {
             String eventName = EventConstant.EventName.REGISTER_SUCCESS.name();
             sendEventToSever(activity, EventConstant.EventName.REGISTER_SUCCESS.name());
             trackingWithEventName(activity,eventName,eventValue,EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
-            trackingWithEventName(activity, AppEventsConstants.EVENT_NAME_COMPLETED_REGISTRATION,eventValue,EventConstant.AdType.AdTypeFacebook);
+            trackingWithEventName(activity, FBEventsConstants.EVENT_NAME_COMPLETED_REGISTRATION,eventValue,EventConstant.AdType.AdTypeFacebook);
             trackingWithEventName(activity, "COMPLETE_REGISTRATION_AND",eventValue,EventConstant.AdType.AdTypeFacebook);
 
 //            EventPropertie tdBean = new EventPropertie();
@@ -206,9 +206,9 @@ public class SdkEventLogger {
             //下面是自定义的事件名
             fb_eventValues.put(EventConstant.ParameterName.USER_ID, uid);
             fb_eventValues.put(EventConstant.ParameterName.ROLE_ID, SdkUtil.getRoleId(context));
-            fb_eventValues.put(AppEventsConstants.EVENT_PARAM_CURRENCY,"USD");
-            fb_eventValues.put(AppEventsConstants.EVENT_PARAM_CONTENT_ID, productId);
-            fb_eventValues.put(AppEventsConstants.EVENT_PARAM_ORDER_ID, orderId);
+            fb_eventValues.put(FBEventsConstants.EVENT_PARAM_CURRENCY,"USD");
+            fb_eventValues.put(FBEventsConstants.EVENT_PARAM_CONTENT_ID, productId);
+            fb_eventValues.put(FBEventsConstants.EVENT_PARAM_ORDER_ID, orderId);
             fb_eventValues.put("platform", context.getResources().getString(R.string.channel_platform));
             PL.i("trackinPay Purchase fb...");
             if (SStringUtil.isEmpty(eventName)){

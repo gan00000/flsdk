@@ -15,7 +15,6 @@ import com.core.base.callback.SFCallBack;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
-import com.facebook.internal.ImageRequest;
 import com.mw.sdk.bean.PhoneInfo;
 import com.mw.sdk.constant.SLoginType;
 import com.mw.sdk.bean.res.ConfigBean;
@@ -869,7 +868,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 PL.d("fb businessId:" + businessId);
                 FbSp.saveAppsBusinessId(activity, businessId);
                 user.setBusinessId(businessId);
-                user.setPictureUri(ImageRequest.getProfilePictureUri(user.getUserFbId(), 300, 300));
+                //user.setPictureUri(ImageRequest.getProfilePictureUri(user.getUserFbId(), 300, 300));
                 faceBookUser = user;
                 if (fbLoginCallBack != null) {
                     fbLoginCallBack.loginSuccess(user);

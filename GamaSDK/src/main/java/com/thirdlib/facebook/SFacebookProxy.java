@@ -11,10 +11,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.core.base.callback.ISReqCallBack;
-import com.core.base.utils.FileUtil;
 import com.core.base.utils.PL;
-import com.core.base.utils.ToastUtils;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -24,26 +21,20 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
 import com.facebook.appevents.AppEventsLogger;
+import com.facebook.applinks.AppLinkData;
 import com.facebook.internal.CallbackManagerImpl;
-import com.facebook.login.DefaultAudience;
-import com.facebook.login.LoginBehavior;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-import com.facebook.messenger.MessengerUtils;
-import com.facebook.messenger.ShareToMessengerParams;
-import com.facebook.messenger.ShareToMessengerParamsBuilder;
 import com.facebook.share.ShareApi;
 import com.facebook.share.Sharer;
-import com.facebook.share.model.GameRequestContent;
 import com.facebook.share.model.ShareHashtag;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.model.SharePhoto;
 import com.facebook.share.model.SharePhotoContent;
-import com.facebook.share.widget.GameRequestDialog;
 import com.facebook.share.widget.ShareDialog;
+import com.mw.sdk.utils.SdkUtil;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.math.BigDecimal;
@@ -59,8 +50,8 @@ public class SFacebookProxy {
 	private static final String FB_TAG = "PL_LOG_FB";
 	public static final int Request_Code_Share_Url = 9101;
 
-	private static DefaultAudience defaultAudience = DefaultAudience.FRIENDS;
-	private static LoginBehavior loginBehavior = LoginBehavior.WEB_ONLY;
+//	private static DefaultAudience defaultAudience = DefaultAudience.FRIENDS;
+//	private static LoginBehavior loginBehavior = LoginBehavior.WEB_ONLY;
 	private static List<String> permissions = Arrays.asList("public_profile");
 //	private static List<String> permissions = Arrays.asList("public_profile", "email", "user_friends");
 //	private static List<String> permissions = Collections.singletonList("public_profile");
@@ -76,7 +67,7 @@ public class SFacebookProxy {
 //	private boolean canPresentShareDialog;
     private boolean canPresentShareDialogWithPhotos;
 	
-	public SFacebookProxy(Context context) {
+	private SFacebookProxy(Context context) {
 		/*FacebookSdk.sdkInitialize(context.getApplicationContext(), new InitializeCallback() {
 			@Override
 			public void onInitialized() {
@@ -85,13 +76,57 @@ public class SFacebookProxy {
 		});*/
 	}
 
-	public static void initFbSdk(Context context){
+	public static SFacebookProxy newObj(Context context){
+		if (existFbModule()){
+			return new SFacebookProxy(context);
+		}
+		return null;
+	}
+
+	public static boolean existFbModule() {
+		try {
+			Class<?> clazz = Class.forName("com.facebook.FacebookSdk");
+			if (clazz == null){
+				return false;
+			}
+		} catch (ClassNotFoundException e) {
+			PL.w("Facebook module not exist.");
+			return false;
+		}
+		return true;
+	}
+
+	public static void fetchDeferredAppLinkData(Activity activity) {
+
+		if (!existFbModule()){
+			return;
+		}
+
+		FacebookSdk.setAutoInitEnabled(true);
+		FacebookSdk.fullyInitialize();
+		AppLinkData.fetchDeferredAppLinkData(activity, new AppLinkData.CompletionHandler() {
+			@Override
+			public void onDeferredAppLinkDataFetched(AppLinkData appLinkData) {
+
+				// Process app link data
+				if (appLinkData != null && appLinkData.getTargetUri() != null){
+					PL.i("fb onDeferredAppLinkDataFetched=" + appLinkData.getTargetUri().toString());
+					SdkUtil.saveDeepLink(activity, appLinkData.getTargetUri().toString());
+				}else {
+					PL.i("fb onDeferredAppLinkDataFetched is no data");
+					//SdkUtil.saveDeepLink(activity, "");
+				}
+			}
+		});
+	}
+
+//	public static void initFbSdk(Context context){
 //		FacebookSdk.sdkInitialize(context.getApplicationContext());
 //		FacebookSdk.setAutoLogAppEventsEnabled(true);
 //		FacebookSdk.setAdvertiserIDCollectionEnabled(true);
 //		FacebookSdk.setAutoInitEnabled(true);
 //		FacebookSdk.fullyInitialize();
-	}
+//	}
 	
 //	public static void activateApp(Context context){
 //
@@ -120,6 +155,11 @@ public class SFacebookProxy {
 //	}
 	
 	public static void trackingEvent(final Context context,final String eventName, final Double valueToSum, final Bundle parameters){
+
+		if (!existFbModule()){
+			return;
+		}
+
 		if (context == null || TextUtils.isEmpty(eventName)) {
 			return;
 		}
@@ -155,6 +195,10 @@ public class SFacebookProxy {
 	}
 
 	public static void logPurchase(Context context, BigDecimal purchaseAmount, Map<String, Object> parametersMap) {
+
+		if (context == null || !existFbModule()){
+			return;
+		}
 
 		AppEventsLogger logger = AppEventsLogger.newLogger(context);
 		if (parametersMap == null || parametersMap.isEmpty()) {
@@ -628,6 +672,10 @@ public class SFacebookProxy {
 
 	
 	public void onActivityResultForLogin(Activity activity, int requestCode, int resultCode, Intent data) {
+
+		if (!existFbModule()){
+			return;
+		}
 
 		if (!FacebookSdk.isInitialized() || requestCode != CallbackManagerImpl.RequestCodeOffset.Login.toRequestCode()){
 			return;
