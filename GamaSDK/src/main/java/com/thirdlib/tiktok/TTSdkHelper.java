@@ -16,9 +16,6 @@ import com.tiktok.appevents.contents.TTContentsEvent;
 import com.tiktok.appevents.contents.TTContentsEventConstants;
 import com.tiktok.appevents.contents.TTPurchaseEvent;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class TTSdkHelper {
 
     public static void init(Context context){
@@ -29,6 +26,10 @@ public class TTSdkHelper {
         String tt_app_id = context.getString(R.string.mw_tt_app_id);
         if (SStringUtil.isEmpty(tt_app_id)){
             PL.i("tt_app_id is empty");
+            return;
+        }
+
+        if (!existTikTokModule()){
             return;
         }
 
@@ -54,6 +55,11 @@ public class TTSdkHelper {
         if (!ttAppIdExist(context)){
             return;
         }
+
+        if (!existTikTokModule()){
+            return;
+        }
+
         //Should be called whenever the user info changes
         // - when the user logins in
         //- when a new user signs up
@@ -64,8 +70,14 @@ public class TTSdkHelper {
                 ,"");
     }
 
-    public static void logout(){
+    public static void logout(Context context){
 
+        if (!ttAppIdExist(context)){
+            return;
+        }
+        if (!existTikTokModule()){
+            return;
+        }
         //Should be called when the user logs out
         //- when the app logs out
         // - when switching to another account, in that case, should call a subsequent identify(String, String, String, String)
@@ -76,6 +88,11 @@ public class TTSdkHelper {
         if (!ttAppIdExist(context)){
             return;
         }
+
+        if (!existTikTokModule()){
+            return;
+        }
+
         eventName = findTTStandardEventName(eventName);
         //Report custom events
         if (eventName.equals(EventConstant.EventName.DetailedLevel.name())){
@@ -100,6 +117,10 @@ public class TTSdkHelper {
     public static void trackPay(Context context, String userId, String roleId, String orderId, String productId, double amount, String des){
 
         if (!ttAppIdExist(context)){
+            return;
+        }
+
+        if (!existTikTokModule()){
             return;
         }
 
@@ -128,6 +149,10 @@ public class TTSdkHelper {
         }
 
         if (SStringUtil.isEmpty(eventName)){
+            return;
+        }
+
+        if (!existTikTokModule()){
             return;
         }
 
@@ -161,6 +186,10 @@ public class TTSdkHelper {
             return;
         }
 
+        if (!existTikTokModule()){
+            return;
+        }
+
         TTContentsEvent info = TTCheckoutEvent.newBuilder()
         .setDescription(productId)//Description of the item or page.
         .setCurrency(TTContentsEventConstants.Currency.USD)//The ISO 4217 currency code.
@@ -183,6 +212,19 @@ public class TTSdkHelper {
     public static boolean ttAppIdExist(Context context){
         String tt_app_id = context.getString(R.string.mw_tt_app_id);
         return SStringUtil.isNotEmpty(tt_app_id);
+    }
+
+    public static boolean existTikTokModule() {
+        try {
+            Class<?> clazz = Class.forName("com.tiktok.TikTokBusinessSdk");
+            if (clazz == null){
+                return false;
+            }
+        } catch (ClassNotFoundException e) {
+            PL.w("TikTok module not exist.");
+            return false;
+        }
+        return true;
     }
 
     private static String findTTStandardEventName(String eventName){
