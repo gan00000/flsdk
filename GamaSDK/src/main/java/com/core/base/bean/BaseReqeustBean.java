@@ -1,13 +1,14 @@
 package com.core.base.bean;
 
 import android.content.Context;
+
 import androidx.annotation.NonNull;
 
-import com.appsflyer.AppsFlyerLib;
 import com.core.base.utils.ApkInfoUtil;
 import com.core.base.utils.SStringUtil;
-import com.mw.sdk.utils.SdkUtil;
 import com.mw.sdk.BuildConfig;
+import com.mw.sdk.utils.SdkUtil;
+import com.thirdlib.af.AFHelper;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
@@ -99,7 +100,7 @@ public class BaseReqeustBean extends AbsReqeustBean {
             packageName = context.getPackageName();
             versionCode = ApkInfoUtil.getVersionCode(context);
             versionName = ApkInfoUtil.getVersionName(context);
-            appsflyerId = AppsFlyerLib.getInstance().getAppsFlyerUID(context);
+            appsflyerId = AFHelper.getAppsFlyerUID(context);
             sdkDeepLink = SdkUtil.getDeepLink(context);
             signInfo = SdkUtil.getSignInfo(context);
 

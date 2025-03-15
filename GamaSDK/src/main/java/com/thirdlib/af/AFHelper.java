@@ -35,8 +35,19 @@ public class AFHelper {
     // already processed, and the callback functionality for deep linking can be skipped.
     // When GCD or UDL finds this flag true it MUST set it to false before skipping.
 
+    public static String getAppsFlyerUID(Context context){
+        if (!existAppsFlyerModule()){
+            return "";
+        }
+        return AppsFlyerLib.getInstance().getAppsFlyerUID(context);
+    }
+
     public static void applicationOnCreate(Application application){
         PL.i("AFHelper applicationOnCreate");
+
+        if (!existAppsFlyerModule()){
+            return;
+        }
         AppsFlyerLib.getInstance().setCollectIMEI(false);
         AppsFlyerLib.getInstance().setCollectAndroidID(false);
         String afDevKey = ResConfig.getAfDevKey(application.getApplicationContext());
@@ -170,6 +181,10 @@ public class AFHelper {
 
     public static void activityOnCreate(Activity activity){
 
+        if (!existAppsFlyerModule()){
+            return;
+        }
+
         String afDevKey = ResConfig.getAfDevKey(activity);
         if(!TextUtils.isEmpty(afDevKey)) {
 
@@ -189,6 +204,11 @@ public class AFHelper {
         if (context == null || SStringUtil.isEmpty(eventName)){
             return;
         }
+
+        if (!existAppsFlyerModule()){
+            return;
+        }
+
         String afDevKey = ResConfig.getAfDevKey(context);
         PL.i("-----track event af afDevKey =" + afDevKey);
         if(TextUtils.isEmpty(afDevKey)) {
@@ -212,7 +232,7 @@ public class AFHelper {
     }
 
     //事件上报失败的话，重新上报一次
-    public static void logEventAgain(Context context, String eventName, Map<String, Object> map){
+    private static void logEventAgain(Context context, String eventName, Map<String, Object> map){
         if (context == null || SStringUtil.isEmpty(eventName)){
             return;
         }
@@ -252,5 +272,18 @@ public class AFHelper {
         }
 
 
+    }
+
+    public static boolean existAppsFlyerModule() {
+        try {
+            Class<?> clazz = Class.forName("com.appsflyer.AppsFlyerLib");
+            if (clazz == null){
+                return false;
+            }
+        } catch (ClassNotFoundException e) {
+            PL.w("AppsFlyer module not exist.");
+            return false;
+        }
+        return true;
     }
 }
