@@ -274,7 +274,13 @@ public class AFHelper {
 
     }
 
+    private static boolean isExistAppsFlyerModule = false;
     public static boolean existAppsFlyerModule() {
+
+        if (isExistAppsFlyerModule){
+            return true;
+        }
+
         try {
             Class<?> clazz = Class.forName("com.appsflyer.AppsFlyerLib");
             if (clazz == null){
@@ -284,6 +290,7 @@ public class AFHelper {
             PL.w("AppsFlyer module not exist.");
             return false;
         }
+        isExistAppsFlyerModule = true;
         return true;
     }
 }

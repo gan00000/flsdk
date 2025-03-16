@@ -214,7 +214,13 @@ public class TTSdkHelper {
         return SStringUtil.isNotEmpty(tt_app_id);
     }
 
+    private static boolean isExistTikTokModule = false;
     public static boolean existTikTokModule() {
+
+        if (isExistTikTokModule){
+            return true;
+        }
+
         try {
             Class<?> clazz = Class.forName("com.tiktok.TikTokBusinessSdk");
             if (clazz == null){
@@ -224,6 +230,7 @@ public class TTSdkHelper {
             PL.w("TikTok module not exist.");
             return false;
         }
+        isExistTikTokModule = true;
         return true;
     }
 

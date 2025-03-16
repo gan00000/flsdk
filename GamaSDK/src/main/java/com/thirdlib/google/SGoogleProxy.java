@@ -118,7 +118,12 @@ public class SGoogleProxy {
 		return FirebaseHelper.trackPayCC(context, eventName, orderId, productId, usdPrice, uid);
 	}
 
+	private static boolean isExistFirebaseModule = false;
 	private static boolean existFirebaseModule() {
+
+		if (isExistFirebaseModule){
+			return true;
+		}
 		try {
 			Class<?> clazz = Class.forName("com.google.firebase.analytics.FirebaseAnalytics");
 			if (clazz == null){
@@ -128,6 +133,7 @@ public class SGoogleProxy {
 			PL.w("Firebase module not exist.");
 			return false;
 		}
+		isExistFirebaseModule = true;
 		return true;
 	}
 

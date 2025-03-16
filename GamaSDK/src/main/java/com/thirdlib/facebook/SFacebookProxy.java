@@ -83,7 +83,13 @@ public class SFacebookProxy {
 		return null;
 	}
 
+	private static boolean isExistFbModule = false;
 	public static boolean existFbModule() {
+
+		if (isExistFbModule){
+			return true;
+		}
+
 		try {
 			Class<?> clazz = Class.forName("com.facebook.FacebookSdk");
 			if (clazz == null){
@@ -93,6 +99,7 @@ public class SFacebookProxy {
 			PL.w("Facebook module not exist.");
 			return false;
 		}
+		isExistFbModule = true;
 		return true;
 	}
 
@@ -225,6 +232,10 @@ public class SFacebookProxy {
          */
 	public void fbLogin(final Activity activity, List<String> permissions, final FbLoginCallBack fbLoginCallBack) {
 
+		if (activity == null || !existFbModule()){
+			return;
+		}
+
 		if (fbLoginCallBack == null){
 			PL.d(FB_TAG, "fbLoginCallBack null, return");
 			return;
@@ -351,6 +362,11 @@ public class SFacebookProxy {
 
 
 	public void fbLogout(Activity activity){
+
+		if (!existFbModule()){
+			return;
+		}
+
 		if (loginManager != null) {
 			PL.d("fb logOut.....");
 			loginManager.logOut();
@@ -362,6 +378,10 @@ public class SFacebookProxy {
 //		fbShare(activity, fbShareCallBack, shareCaption, shareDescrition, shareLinkUrl, sharePictureUrl, "");
 //	}
 	public void fbShare(Activity activity, String hashTag, String quote, String shareLinkUrl, final FbShareCallBack fbShareCallBack) {
+
+		if (activity == null || !existFbModule()){
+			return;
+		}
 
 		if (TextUtils.isEmpty(shareLinkUrl)) {
 			if (fbShareCallBack != null) {
