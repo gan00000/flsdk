@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import com.mw.sdk.R;
 import com.mw.sdk.bean.res.ConfigBean;
+import com.mw.sdk.constant.ChannelPlatform;
 import com.mw.sdk.constant.ViewType;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.mw.sdk.out.ISdkCallBack;
@@ -24,7 +25,7 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
     private View contentView;
 
     private View layout_go_account_login, guestLoginView;
-    private ImageView iv_login_google,iv_login_fb,iv_login_line;
+    private ImageView iv_login_google,iv_login_fb,iv_login_line,iv_login_nowgg;
     private CheckBox cb_agree_term;
     private View layout_go_term;
     private View layout_term;
@@ -56,6 +57,7 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
         iv_login_google = contentView.findViewById(R.id.iv_login_google);
         iv_login_fb = contentView.findViewById(R.id.iv_login_fb);
         iv_login_line = contentView.findViewById(R.id.iv_login_line);
+        iv_login_nowgg = contentView.findViewById(R.id.iv_login_nowgg);
 
         cb_agree_term = contentView.findViewById(R.id.cb_agree_term);
         layout_go_term = contentView.findViewById(R.id.layout_go_term);
@@ -67,6 +69,7 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
         iv_login_google.setOnClickListener(this);
         iv_login_fb.setOnClickListener(this);
         iv_login_line.setOnClickListener(this);
+        iv_login_nowgg.setOnClickListener(this);
         layout_go_term.setOnClickListener(this);
 
         cb_agree_term.setChecked(true);
@@ -100,6 +103,13 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
                 }
             }
         }
+
+        String channel_platform = getActivity().getResources().getString(R.string.channel_platform);
+        if (ChannelPlatform.NOWGG.getChannel_platform().equals(channel_platform)){
+            iv_login_nowgg.setVisibility(View.VISIBLE);
+        }else {
+            iv_login_nowgg.setVisibility(View.GONE);
+        }
         return contentView;
     }
 
@@ -129,6 +139,12 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
             //google+登录
             if (checkAgreeTerm()){
                 sLoginDialogv2.getLoginPresenter().lineLogin(sLoginDialogv2.getActivity());
+            }
+
+        }else if (v == iv_login_nowgg){
+
+            if (checkAgreeTerm()){
+                sLoginDialogv2.getLoginPresenter().nowggLogin(sLoginDialogv2.getActivity());
             }
 
         }else if (v == layout_go_term){

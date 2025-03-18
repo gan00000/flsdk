@@ -2,38 +2,34 @@ package com.mw.sdk.login.widget.v2;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Canvas;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.PL;
 import com.core.base.utils.ToastUtils;
-import com.mw.sdk.constant.SLoginType;
-import com.mw.sdk.bean.res.ConfigBean;
-import com.mw.sdk.utils.SdkUtil;
 import com.mw.base.utils.SdkVersionUtil;
-import com.mw.sdk.widget.SBaseDialog;
-import com.mw.sdk.login.AccountPopupWindow;
-import com.mw.sdk.constant.SLoginType;
+import com.mw.sdk.R;
 import com.mw.sdk.bean.AccountModel;
+import com.mw.sdk.bean.res.ConfigBean;
+import com.mw.sdk.constant.ChannelPlatform;
+import com.mw.sdk.constant.SLoginType;
+import com.mw.sdk.login.AccountPopupWindow;
 import com.mw.sdk.login.widget.SDKInputEditTextView;
 import com.mw.sdk.login.widget.SDKInputType;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
-import com.mw.sdk.R;
 import com.mw.sdk.out.ISdkCallBack;
 import com.mw.sdk.utils.DialogUtil;
+import com.mw.sdk.utils.SdkUtil;
+import com.mw.sdk.widget.SBaseDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,7 +72,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
 
     View historyAccountListBtn;
 
-    private View fbLoginView, macLoginView, googleLoginView, lineLoginView;
+    private View fbLoginView, macLoginView, googleLoginView, lineLoginView, nowggLoginView;
 
     private AccountPopupWindow accountPopupWindow;
     private AccountModel currentAccountModel;
@@ -257,6 +253,14 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
         lineLoginView = contentView.findViewById(R.id.lineLoginView);
         macLoginView = contentView.findViewById(R.id.guestLoginView);
         googleLoginView = contentView.findViewById(R.id.ggLoginView);
+        nowggLoginView = contentView.findViewById(R.id.nowggLoginView);
+
+        String channel_platform = getActivity().getResources().getString(R.string.channel_platform);
+        if (ChannelPlatform.NOWGG.getChannel_platform().equals(channel_platform)){
+            nowggLoginView.setVisibility(View.VISIBLE);
+        }else {
+            nowggLoginView.setVisibility(View.GONE);
+        }
 
         ConfigBean configBean = SdkUtil.getSdkCfg(getContext());
         if (configBean != null){
@@ -339,6 +343,15 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
                 }
                 //google+登录
                 sLoginDialogv2.getLoginPresenter().lineLogin(sLoginDialogv2.getActivity());
+            }
+        });
+        nowggLoginView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!checkAgreeTerm()) {
+                    return;
+                }
+                sLoginDialogv2.getLoginPresenter().nowggLogin(sLoginDialogv2.getActivity());
             }
         });
 
@@ -489,19 +502,22 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
             return;
         }
         if (currentAccountModel != null){
-           if (SLoginType.LOGIN_TYPE_FB.equals(currentAccountModel.getLoginType())){
+            if (SLoginType.LOGIN_TYPE_FB.equals(currentAccountModel.getLoginType())){
                 fbLoginView.performClick();
                 return;
-           }else if (SLoginType.LOGIN_TYPE_GOOGLE.equals(currentAccountModel.getLoginType())){
-               googleLoginView.performClick();
-               return;
-           }else if (SLoginType.LOGIN_TYPE_GUEST.equals(currentAccountModel.getLoginType())){
-               macLoginView.performClick();
-               return;
-           }else if (SLoginType.LOGIN_TYPE_LINE.equals(currentAccountModel.getLoginType())){
+            }else if (SLoginType.LOGIN_TYPE_GOOGLE.equals(currentAccountModel.getLoginType())){
+                googleLoginView.performClick();
+                return;
+            }else if (SLoginType.LOGIN_TYPE_GUEST.equals(currentAccountModel.getLoginType())){
+                macLoginView.performClick();
+                return;
+            }else if (SLoginType.LOGIN_TYPE_LINE.equals(currentAccountModel.getLoginType())){
                 lineLoginView.performClick();
-               return;
-           }
+                return;
+            }else if (SLoginType.LOGIN_TYPE_NOWGG.equals(currentAccountModel.getLoginType())){
+                nowggLoginView.performClick();
+                return;
+            }
         }
 
 

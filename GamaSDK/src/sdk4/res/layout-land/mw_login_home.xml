@@ -132,6 +132,13 @@
                 android:layout_marginStart="27dp"
                 android:src="@mipmap/mmplaygame_big_le" />
 
+            <ImageView
+                android:id="@+id/iv_login_nowgg"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_marginStart="27dp"
+                android:visibility="gone"
+                android:src="@mipmap/icon_nowgg" />
 
         </LinearLayout>
 
