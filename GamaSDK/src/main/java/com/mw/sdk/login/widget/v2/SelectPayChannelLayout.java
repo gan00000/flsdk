@@ -25,7 +25,8 @@ public class SelectPayChannelLayout extends SLoginBaseRelativeLayout {
     private View contentView;
 
     protected View ggPayView;
-    private Button otherPayBtn, ruPayBtn;
+    private Button otherPayBtn;
+    private  View ruPayBtn;
 
     protected View ruPayView;
 

@@ -24,8 +24,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
                 android:layout_marginTop="24dp"
+                android:layout_marginEnd="10dp"
                 android:background="@drawable/mw_bg_select_channel_tips"
                 android:gravity="center"
                 android:orientation="vertical">
@@ -45,8 +45,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="10dp"
                 android:layout_marginBottom="20dp"
                 android:gravity="center"
                 android:orientation="vertical">
@@ -93,13 +93,13 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/rl_select_channel_ru"
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
                     android:layout_marginTop="8dp"
-                    android:id="@+id/rl_select_channel_ru"
-                    android:background="@drawable/sdk_bg_select_pay_channel_1">
+                    >
 
-                    <Button
+                    <!--<Button
                         android:id="@+id/bt_select_channel_ru"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -107,8 +107,16 @@
                         android:gravity="center"
                         android:text="@string/text_pay_ru"
                         android:textAllCaps="false"
+                        android:visibility="gone"
                         android:textColor="@android:color/white"
-                        android:textSize="17sp" />
+                        android:textSize="17sp" />-->
+
+                    <ImageView
+                        android:id="@+id/bt_select_channel_ru"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:src="@mipmap/img_select_channel_ru" />
 
 
                     <!--                    <ImageView-->
