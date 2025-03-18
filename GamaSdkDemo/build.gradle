@@ -136,12 +136,16 @@ android {
 //            shrinkResources false  //压缩资源
             // Enables code shrinking, obfuscation, and optimization for only
             // your project's release build type.
-            minifyEnabled false
+//            minifyEnabled true
+            signingConfig signingConfigs.signv3
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
         debug {
 //            signingConfig signingConfigs.release_v4
+//            minifyEnabled true
+            signingConfig signingConfigs.signv3
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
     flavorDimensions "1"
@@ -212,44 +216,44 @@ android {
 
         sdk3 {
 
-            versionCode 1
-            versionName "1.0"
+            versionCode 24
+            versionName "1.1"
             dimension "1"
 
 
-            //=======================================sdk config==========================
+            //=======================================sdk config start ==========================
 
             signingConfig signingConfigs.signv3
-
             //base
-            applicationId "com.qcwx.fyden"
+            applicationId "com.yuewan.tgru"
             minSdkVersion 25
             targetSdkVersion 34
 
-            resValue "string", "sdk_game_code", "fyden"
-            resValue "string", "sdk_app_key", "b2c4e398d7ee39c26bd74fdd04f23c96"
+            resValue "string", "sdk_game_code", "tgru"
+            resValue "string", "sdk_app_key", "f2cce538ec5d36b4d725eab7ea227ed1"
             resValue "string", "sdk_more_language", "true"
-            resValue "string", "sdk_default_server_language", "en_US"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
-            resValue "string", "scheme", "fyden"
+            resValue "string", "sdk_default_server_language", "ru_RU"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
+            resValue "string", "scheme", "tgen"
             resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
-            resValue "string", "sdk_release_european", "true"
-
             //facebook
-            resValue "string", "facebook_app_id", "480770274418792"
-            resValue "string", "facebook_client_token", "6079e2fde7ab9a37e8ef36782d86dfa4"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider480770274418792"
-            resValue "string", "fb_login_protocol_scheme", "fb480770274418792"
-            resValue "string", "facebook_app_name", "fyden" //游戏名字
+            resValue "string", "facebook_app_id", "2204564839899628"
+            resValue "string", "facebook_client_token", "af097786d9eabaf84543666cd857bce2"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider2204564839899628"
+            resValue "string", "fb_login_protocol_scheme", "fb2204564839899628"
+            resValue "string", "facebook_app_name", "tgru" //游戏名字
             //ad
             resValue "string", "adjust_app_token", ""
-            resValue "string", "sdk_appflyer_dev_key", ""
+            resValue "string", "sdk_appflyer_dev_key", "bGZEpuug4geDnZZuWzva3g"
             //line
             resValue "string", "line_channelId", ""
             //naver
             resValue "string", "naver_client_id", ""
             resValue "string", "naver_client_secret", ""
-            //vk渠道
-            resValue "string", "mw_vk_appid", ""
+            //tt
+            resValue "string", "mw_tt_app_id", ""
+            //rustore渠道
+            resValue "string", "mw_vk_appid", "2063611100"
+            resValue "string", "mw_local_rustore_google", "true"
 
             //=======================================sdk config end==========================
 
@@ -530,7 +534,7 @@ android {
 
             signingConfig signingConfigs.release_v6
             //base
-            applicationId "com.wanxin.tgen"
+            applicationId "com.wanxin.tgennow"
             minSdkVersion 25
             targetSdkVersion 34
 
@@ -539,7 +543,7 @@ android {
             resValue "string", "sdk_more_language", "true"
             resValue "string", "sdk_default_server_language", "en_US"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
             resValue "string", "scheme", "tgen"
-            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
+            resValue "string", "channel_platform", "nowgg"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
             resValue "string", "sdk_release_european", "true"
 
             //facebook
@@ -556,6 +560,8 @@ android {
             //naver
             resValue "string", "naver_client_id", ""
             resValue "string", "naver_client_secret", ""
+            resValue "string", "mw_nowgg_app_id", "10017"
+            resValue "string", "mw_nowgg_client_id", "Y1hgFVtvzwR1PNB8BKsk\$\$01JKHY3P0CTEZVFY7AJXCZBBDB"
 
             //=======================================sdk config end==========================
 
@@ -704,7 +710,7 @@ dependencies {
 //    implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
     QooAppImplementation(name: 'qooapp-opensdk-2.0.6', ext: 'aar')
     implementation project(':GamaSDK')
-    implementation project(':ADSDK')
+//    implementation project(':ADSDK')
 //    implementation 'com.github.bumptech.glide:glide:4.16.0'
 //    annotationProcessor 'com.github.bumptech.glide:compiler:4.16.0'
 
