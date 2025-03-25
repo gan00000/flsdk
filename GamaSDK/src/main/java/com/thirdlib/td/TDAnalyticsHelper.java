@@ -23,6 +23,10 @@ public class TDAnalyticsHelper {
 
     public static void init(Context context){
 
+        if (!existShuShuModule()){
+            return;
+        }
+
         if (TDAnalyticsHelper.isReady(context)){
             String td_appid = context.getString(R.string.mw_td_appid);
             String td_te_server_url = context.getString(R.string.mw_td_te_server_url);
@@ -55,12 +59,15 @@ public class TDAnalyticsHelper {
         }
     }
 
-    public static boolean isReady(Context context){
+    private static boolean isReady(Context context){
         return SStringUtil.isNotEmpty(context.getString(R.string.mw_td_appid)) && SStringUtil.isNotEmpty(context.getString(R.string.mw_td_te_server_url));
     }
 
     public static void setAccountId(String accountId){
 
+        if (!existShuShuModule()){
+            return;
+        }
         //在用户进行登录时，可调用 login 来设置用户的账号 ID， TE 平台将会以账号 ID 作为身份识别 ID，
         // 并且设置的账号 ID 将会在调用 logout 之前一直保留。多次调用 login 将覆盖先前的账号 ID 。
         // 用户的登录唯一标识，此数据对应上报数据里的#account_id，此时#account_id的值为TA
@@ -70,6 +77,13 @@ public class TDAnalyticsHelper {
     public static void setCommonProperties(Context context){
 
         try {
+            if (!existShuShuModule()){
+                return;
+            }
+            if (!TDAnalyticsHelper.isReady(context)){
+                return;
+            }
+
             String channel_platform = context.getResources().getString(R.string.channel_platform);
 
             JSONObject superProperties = new JSONObject();
@@ -133,6 +147,9 @@ public class TDAnalyticsHelper {
 
     public static void trackEvent(String eventName, JSONObject properties, int no_use){
 
+        if (!existShuShuModule()){
+            return;
+        }
         if(TextUtils.isEmpty(eventName)) {
             PL.e("上報事件名為空");
             return;
@@ -169,5 +186,26 @@ public class TDAnalyticsHelper {
             e.printStackTrace();
         }
     }*/
+
+
+    private static boolean isExistShuShuModule = false;
+    public static boolean existShuShuModule() {
+
+        if (isExistShuShuModule){
+            return true;
+        }
+
+        try {
+            Class<?> clazz = Class.forName("cn.thinkingdata.analytics.TDAnalytics");
+            if (clazz == null){
+                return false;
+            }
+        } catch (ClassNotFoundException e) {
+            PL.w("shushu module not exist.");
+            return false;
+        }
+        isExistShuShuModule = true;
+        return true;
+    }
 }
 

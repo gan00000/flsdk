@@ -223,7 +223,7 @@ dependencies {
 
     implementation 'com.github.bumptech.glide:glide:4.16.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.16.0'
-    //数数埋点
+    //数数埋点   可选
     implementation 'cn.thinkingdata.android:ThinkingAnalyticsSDK:3.0.2'
 
     //tiktok  可选
