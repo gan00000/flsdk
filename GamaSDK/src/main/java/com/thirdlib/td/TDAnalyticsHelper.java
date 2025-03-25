@@ -3,12 +3,21 @@ package com.thirdlib.td;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.core.base.utils.ApkInfoUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.mw.sdk.R;
+import com.mw.sdk.bean.SGameBaseRequestBean;
+import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.out.bean.EventPropertie;
+import com.mw.sdk.utils.DataManager;
+import com.mw.sdk.utils.ResConfig;
+import com.mw.sdk.utils.SdkUtil;
 
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import cn.thinkingdata.analytics.TDAnalytics;
 
 public class TDAnalyticsHelper {
 
@@ -22,7 +31,7 @@ public class TDAnalyticsHelper {
             }
             // 在主线程中初始化 SDK
             //方式一
-     /*       TDAnalytics.init(context, td_appid, td_te_server_url);
+            TDAnalytics.init(context, td_appid, td_te_server_url);
             //方式二
 //        TDConfig config = TDConfig.getInstance(this, APPID, TE_SERVER_URL);
 //        TDAnalytics.init(config);
@@ -41,7 +50,7 @@ public class TDAnalyticsHelper {
             TDAnalytics.enableAutoTrack(TDAnalytics.TDAutoTrackEventType.APP_START | TDAnalytics.TDAutoTrackEventType.APP_END
                     | TDAnalytics.TDAutoTrackEventType.APP_INSTALL | TDAnalytics.TDAutoTrackEventType.APP_VIEW_SCREEN | TDAnalytics.TDAutoTrackEventType.APP_CLICK
                     | TDAnalytics.TDAutoTrackEventType.APP_CRASH);
-*/
+
 
         }
     }
@@ -55,11 +64,11 @@ public class TDAnalyticsHelper {
         //在用户进行登录时，可调用 login 来设置用户的账号 ID， TE 平台将会以账号 ID 作为身份识别 ID，
         // 并且设置的账号 ID 将会在调用 logout 之前一直保留。多次调用 login 将覆盖先前的账号 ID 。
         // 用户的登录唯一标识，此数据对应上报数据里的#account_id，此时#account_id的值为TA
-//        TDAnalytics.login(accountId);
+        TDAnalytics.login(accountId);
     }
 
     public static void setCommonProperties(Context context){
-/*
+
         try {
             String channel_platform = context.getResources().getString(R.string.channel_platform);
 
@@ -111,7 +120,7 @@ public class TDAnalyticsHelper {
             TDAnalytics.setSuperProperties(superProperties);
         } catch (JSONException e) {
             e.printStackTrace();
-        }*/
+        }
     }
 
     public static void trackEvent(String eventName, EventPropertie propertieBean){
@@ -123,15 +132,16 @@ public class TDAnalyticsHelper {
     }
 
     public static void trackEvent(String eventName, JSONObject properties, int no_use){
+
         if(TextUtils.isEmpty(eventName)) {
             PL.e("上報事件名為空");
             return;
         }
-       /* if (properties != null) {
+        if (properties != null) {
             TDAnalytics.track(eventName, properties);
         }else {
             TDAnalytics.track(eventName);
-        }*/
+        }
     }
 
     public static void trackEvent(String eventName){
@@ -160,3 +170,4 @@ public class TDAnalyticsHelper {
         }
     }*/
 }
+
