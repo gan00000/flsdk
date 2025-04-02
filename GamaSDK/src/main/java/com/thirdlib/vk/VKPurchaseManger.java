@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.mw.sdk.R;
 
@@ -16,16 +15,10 @@ import ru.rustore.sdk.billingclient.RuStoreBillingClient;
 import ru.rustore.sdk.billingclient.RuStoreBillingClientFactory;
 import ru.rustore.sdk.billingclient.model.purchase.PaymentResult;
 import ru.rustore.sdk.billingclient.model.purchase.Purchase;
-import ru.rustore.sdk.billingclient.model.purchase.PurchaseAvailabilityResult;
-import ru.rustore.sdk.billingclient.model.purchase.PurchaseState;
 import ru.rustore.sdk.billingclient.provider.logger.ExternalPaymentLogger;
 import ru.rustore.sdk.billingclient.provider.logger.ExternalPaymentLoggerFactory;
 import ru.rustore.sdk.billingclient.usecase.ProductsUseCase;
 import ru.rustore.sdk.billingclient.usecase.PurchasesUseCase;
-import ru.rustore.sdk.billingclient.utils.BillingRuStoreExceptionExtKt;
-import ru.rustore.sdk.billingclient.utils.pub.RuStoreBillingClientExtKt;
-import ru.rustore.sdk.core.exception.RuStoreException;
-import ru.rustore.sdk.core.feature.model.FeatureAvailabilityResult;
 
 public class VKPurchaseManger {
 

@@ -59,7 +59,7 @@ public class SdkVersionUtil extends BaseSdkVersion{
         return null;
     }
 
-    public IPay newVKPay() {
-        return new VKPayImpl();
-    }
+//    public IPay newVKPay() {
+//        return new VKPayImpl();
+//    }
 }

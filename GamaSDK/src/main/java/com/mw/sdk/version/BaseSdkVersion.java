@@ -4,6 +4,7 @@ import com.core.base.utils.PL;
 import com.mw.sdk.pay.IPay;
 import com.mw.sdk.pay.nowgg.NowggPayImpl;
 import com.thirdlib.IThirdHelper;
+import com.thirdlib.vk.VKPayImpl;
 
 public abstract class BaseSdkVersion {
 
@@ -19,7 +20,17 @@ public abstract class BaseSdkVersion {
     }
 
     public IPay newVKPay() {
-        return null;
+
+        try {
+            Class<?> clazz = Class.forName("ru.rustore.sdk.billingclient.RuStoreBillingClient");
+            if (clazz == null){
+                return null;
+            }
+        } catch (ClassNotFoundException e) {
+            PL.w("rustore pay module not exist.");
+            return null;
+        }
+        return new VKPayImpl();
     }
 
     public IPay newNowggPay(){
