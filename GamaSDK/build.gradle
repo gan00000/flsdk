@@ -113,7 +113,7 @@ android {
         vn2 {//越南 gllyo
             dimension '1'
             resValue "string", "sdk_inner_version", "vn"
-            resValue "string", "mw_td_appid", "77e4d9f75abb4baab16213a662fe4e56"
+            resValue "string", "mw_td_appid", "be82e99387084fc4ac927264efa5ec51"
         }
 
         sdk6 {//第6套，东南亚
