@@ -282,7 +282,7 @@ public class BaseSdkImpl implements IMWSDK {
         SdkUtil.saveRoleInfo(activity, roleId, roleName, roleLevel, vipLevel, severCode, serverName);//保存角色信息
         long curTime = System.currentTimeMillis();
         if (curTime - this.regRoleInfoTimestamp < 1000 * 60 * 30){
-            Log.d("IMWSDK", "registerRoleInfo to fast");
+            PL.d("registerRoleInfo to fast");
             return;
         }
         this.regRoleInfoTimestamp = curTime;

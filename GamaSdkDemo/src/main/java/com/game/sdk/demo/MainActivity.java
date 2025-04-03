@@ -16,6 +16,7 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -33,11 +34,10 @@ import com.core.base.utils.SStringUtil;
 import com.core.base.utils.SignatureUtil;
 import com.core.base.utils.ToastUtils;
 import com.mw.base.bean.SPayType;
-import com.mw.sdk.AdCallback;
-import com.mw.sdk.MWAdManger;
 import com.mw.sdk.bean.req.PayCreateOrderReqBean;
 import com.mw.sdk.callback.IPayListener;
 import com.mw.sdk.demo.R;
+import com.mw.sdk.log.LogViewManager;
 import com.mw.sdk.login.ILoginCallBack;
 import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.out.IMWSDK;
@@ -52,7 +52,7 @@ import java.io.InputStreamReader;
 
 public class MainActivity extends Activity {
 
-    protected Button loginButton, webPayButton, googlePayBtn, shareButton, showPlatform, demo_language,
+    protected Button loginButton, webPayButton, googlePayBtn, shareButton, showPlatform, demo_regRole,
             demo_share;
     protected IMWSDK mIMWSDK;
     protected String userId;
@@ -78,7 +78,7 @@ public class MainActivity extends Activity {
         activity = this;
 
         loginButton = findViewById(R.id.demo_login);
-        demo_language = findViewById(R.id.demo_language);
+        demo_regRole = findViewById(R.id.demo_regRole);
         webPayButton = findViewById(R.id.web_pay);
         googlePayBtn = findViewById(R.id.demo_pay_google);
         demo_share = findViewById(R.id.demo_share);
@@ -87,7 +87,7 @@ public class MainActivity extends Activity {
 
         //在游戏Activity的onCreate生命周期中调用
         mIMWSDK.onCreate(this);
-        MWAdManger.getInstance().initAd(this);
+//        MWAdManger.getInstance().initAd(this);
 
 
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -95,6 +95,14 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
 
                 testLogin();
+            }
+        });
+
+        demo_regRole.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                mIMWSDK.registerRoleInfo(MainActivity.this, roleId, roleName, roleLevel, vipLevel, serverCode, serverName);
             }
         });
 
@@ -113,7 +121,7 @@ public class MainActivity extends Activity {
 //                com.game.superand.1usd
 //                com.game.superand.2usd
 //                String skuId = "com.miaoou.6jin";
-                String skuId = "com.fyd.en99";
+                String skuId = "com.wanxin.tgru.199";
                 mIMWSDK.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(),skuId, extra,roleId,roleName,roleLevel, vipLevel,serverCode, serverName, new IPayListener() {
 
                     @Override
@@ -419,6 +427,8 @@ public class MainActivity extends Activity {
                 }else {
                     ToastUtils.toast(activity,"isBackgroundRestricted false");
                 }
+
+                mIMWSDK.openUrlByBrowser(activity, "https://platform.luckyyx.com/web/api/aghanim/page");
             }
         });
 
@@ -433,7 +443,7 @@ public class MainActivity extends Activity {
             @RequiresApi(api = Build.VERSION_CODES.P)
             @Override
             public void onClick(View view) {
-                mIMWSDK.showTogglePayDialog(MainActivity.this, new PayCreateOrderReqBean(MainActivity.this));
+                mIMWSDK.showGoogleRustorePayDialog(MainActivity.this, new PayCreateOrderReqBean(MainActivity.this));
             }
         });
         findViewById(R.id.showSocialBanner).setOnClickListener(new View.OnClickListener() {
@@ -550,7 +560,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.show_ad).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MWAdManger.getInstance().showAd(activity, new AdCallback() {
+               /* MWAdManger.getInstance().showAd(activity, new AdCallback() {
                     @Override
                     public void onAdClicked(String msg) {
                         //广告被点击
@@ -570,10 +580,11 @@ public class MainActivity extends Activity {
                     public void onUserRewarded(String msg) {
                         //用户获得奖励，在此处做发奖励操作
                     }
-                });
+                });*/
             }
         });
         AppUtil.hideActivityBottomBar(this);
+
     }
 
     private void testLogin() {
@@ -591,6 +602,7 @@ public class MainActivity extends Activity {
         });
         String sha1 = SignatureUtil.getSignatureSHA1WithColon(activity,activity.getPackageName());
         PL.i("sha1:" + sha1);
+
     }
 
     @Override
@@ -721,7 +733,7 @@ public class MainActivity extends Activity {
         super.onDestroy();
         PL.i("activity onDestroy");
         mIMWSDK.onDestroy(this);
-        MWAdManger.getInstance().destroy(this);
+//        MWAdManger.getInstance().destroy(this);
     }
 
     @Override
