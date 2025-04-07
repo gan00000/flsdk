@@ -33,6 +33,7 @@ import com.facebook.share.model.SharePhoto;
 import com.facebook.share.model.SharePhotoContent;
 import com.facebook.share.widget.ShareDialog;
 import com.mw.sdk.utils.SdkUtil;
+import com.thirdlib.ThirdModuleUtil;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -77,35 +78,15 @@ public class SFacebookProxy {
 	}
 
 	public static SFacebookProxy newObj(Context context){
-		if (existFbModule()){
+		if (ThirdModuleUtil.existFbModule()){
 			return new SFacebookProxy(context);
 		}
 		return null;
 	}
 
-	private static boolean isExistFbModule = false;
-	public static boolean existFbModule() {
-
-		if (isExistFbModule){
-			return true;
-		}
-
-		try {
-			Class<?> clazz = Class.forName("com.facebook.FacebookSdk");
-			if (clazz == null){
-				return false;
-			}
-		} catch (ClassNotFoundException e) {
-			PL.w("Facebook module not exist.");
-			return false;
-		}
-		isExistFbModule = true;
-		return true;
-	}
-
 	public static void fetchDeferredAppLinkData(Activity activity) {
 
-		if (!existFbModule()){
+		if (!ThirdModuleUtil.existFbModule()){
 			return;
 		}
 
@@ -163,7 +144,7 @@ public class SFacebookProxy {
 	
 	public static void trackingEvent(final Context context,final String eventName, final Double valueToSum, final Bundle parameters){
 
-		if (!existFbModule()){
+		if (!ThirdModuleUtil.existFbModule()){
 			return;
 		}
 
@@ -203,7 +184,7 @@ public class SFacebookProxy {
 
 	public static void logPurchase(Context context, BigDecimal purchaseAmount, Map<String, Object> parametersMap) {
 
-		if (context == null || !existFbModule()){
+		if (context == null || !ThirdModuleUtil.existFbModule()){
 			return;
 		}
 
@@ -232,7 +213,7 @@ public class SFacebookProxy {
          */
 	public void fbLogin(final Activity activity, List<String> permissions, final FbLoginCallBack fbLoginCallBack) {
 
-		if (activity == null || !existFbModule()){
+		if (activity == null || !ThirdModuleUtil.existFbModule()){
 			return;
 		}
 
@@ -363,7 +344,7 @@ public class SFacebookProxy {
 
 	public void fbLogout(Activity activity){
 
-		if (!existFbModule()){
+		if (!ThirdModuleUtil.existFbModule()){
 			return;
 		}
 
@@ -379,7 +360,7 @@ public class SFacebookProxy {
 //	}
 	public void fbShare(Activity activity, String hashTag, String quote, String shareLinkUrl, final FbShareCallBack fbShareCallBack) {
 
-		if (activity == null || !existFbModule()){
+		if (activity == null || !ThirdModuleUtil.existFbModule()){
 			return;
 		}
 
@@ -693,7 +674,7 @@ public class SFacebookProxy {
 	
 	public void onActivityResultForLogin(Activity activity, int requestCode, int resultCode, Intent data) {
 
-		if (!existFbModule()){
+		if (!ThirdModuleUtil.existFbModule()){
 			return;
 		}
 

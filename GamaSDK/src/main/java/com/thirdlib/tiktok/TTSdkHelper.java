@@ -7,6 +7,7 @@ import com.core.base.utils.SStringUtil;
 import com.mw.sdk.R;
 import com.mw.sdk.ads.EventConstant;
 import com.mw.sdk.bean.SGameBaseRequestBean;
+import com.thirdlib.ThirdModuleUtil;
 import com.tiktok.TikTokBusinessSdk;
 import com.tiktok.appevents.base.EventName;
 import com.tiktok.appevents.base.TTBaseEvent;
@@ -29,7 +30,7 @@ public class TTSdkHelper {
             return;
         }
 
-        if (!existTikTokModule()){
+        if (!ThirdModuleUtil.existTikTokModule()){
             return;
         }
 
@@ -56,7 +57,7 @@ public class TTSdkHelper {
             return;
         }
 
-        if (!existTikTokModule()){
+        if (!ThirdModuleUtil.existTikTokModule()){
             return;
         }
 
@@ -75,7 +76,7 @@ public class TTSdkHelper {
         if (!ttAppIdExist(context)){
             return;
         }
-        if (!existTikTokModule()){
+        if (!ThirdModuleUtil.existTikTokModule()){
             return;
         }
         //Should be called when the user logs out
@@ -89,7 +90,7 @@ public class TTSdkHelper {
             return;
         }
 
-        if (!existTikTokModule()){
+        if (!ThirdModuleUtil.existTikTokModule()){
             return;
         }
 
@@ -120,7 +121,7 @@ public class TTSdkHelper {
             return;
         }
 
-        if (!existTikTokModule()){
+        if (!ThirdModuleUtil.existTikTokModule()){
             return;
         }
 
@@ -152,7 +153,7 @@ public class TTSdkHelper {
             return;
         }
 
-        if (!existTikTokModule()){
+        if (!ThirdModuleUtil.existTikTokModule()){
             return;
         }
 
@@ -186,7 +187,7 @@ public class TTSdkHelper {
             return;
         }
 
-        if (!existTikTokModule()){
+        if (!ThirdModuleUtil.existTikTokModule()){
             return;
         }
 
@@ -212,26 +213,6 @@ public class TTSdkHelper {
     public static boolean ttAppIdExist(Context context){
         String tt_app_id = context.getString(R.string.mw_tt_app_id);
         return SStringUtil.isNotEmpty(tt_app_id);
-    }
-
-    private static boolean isExistTikTokModule = false;
-    public static boolean existTikTokModule() {
-
-        if (isExistTikTokModule){
-            return true;
-        }
-
-        try {
-            Class<?> clazz = Class.forName("com.tiktok.TikTokBusinessSdk");
-            if (clazz == null){
-                return false;
-            }
-        } catch (ClassNotFoundException e) {
-            PL.w("TikTok module not exist.");
-            return false;
-        }
-        isExistTikTokModule = true;
-        return true;
     }
 
     private static String findTTStandardEventName(String eventName){

@@ -3,6 +3,8 @@ package com.mw.sdk.out;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 
 import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.IGameLifeCycle;
@@ -28,6 +30,9 @@ public interface IMWSDK extends IGameLifeCycle {
 //    void initSDK(Activity activity, SGameLanguage language);
 
 //    void setGameLanguage(Activity activity,SGameLanguage gameLanguage);
+
+    void onCreate(Activity activity, Bundle savedInstanceState);
+    void onNewIntent(Activity activity, Intent intent);
 
     void applicationOnCreate(Application application);
 

@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
@@ -94,6 +95,7 @@ import com.thirdlib.huawei.HuaweiPayImpl;
 import com.thirdlib.td.TDAnalyticsHelper;
 import com.thirdlib.tiktok.TTSdkHelper;
 import com.thirdlib.vk.RustoreManager;
+import com.thirdlib.vk.VKPurchaseManger;
 
 import org.json.JSONObject;
 
@@ -281,7 +283,7 @@ public class BaseSdkImpl implements IMWSDK {
         }
         SdkUtil.saveRoleInfo(activity, roleId, roleName, roleLevel, vipLevel, severCode, serverName);//保存角色信息
         long curTime = System.currentTimeMillis();
-        if (curTime - this.regRoleInfoTimestamp < 1000 * 60 * 30){
+        if (curTime - this.regRoleInfoTimestamp < 1000 * 60 * 15){
             PL.d("registerRoleInfo to fast");
             return;
         }
@@ -369,6 +371,26 @@ public class BaseSdkImpl implements IMWSDK {
         }
         SdkUtil.saveRoleInfo(activity, roleId, roleName, roleLevel, vipLevel, severCode, serverName);//保存角色信息
         openCs(activity);
+    }
+
+    @Override
+    public void onCreate(Activity activity, Bundle savedInstanceState) {
+        onCreate(activity);
+        String channel_platform = activity.getResources().getString(R.string.channel_platform);
+        if(ChannelPlatform.VK.getChannel_platform().equals(channel_platform)) {
+            VKPurchaseManger.getInstance().onCreate(activity, savedInstanceState);
+        }
+
+    }
+
+    @Override
+    public void onNewIntent(Activity activity, Intent intent) {
+
+        String channel_platform = activity.getResources().getString(R.string.channel_platform);
+
+        if(ChannelPlatform.VK.getChannel_platform().equals(channel_platform)) {
+            VKPurchaseManger.getInstance().onNewIntent(activity, intent);
+        }
     }
 
     @Override

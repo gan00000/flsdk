@@ -13,6 +13,7 @@ import com.mw.sdk.out.bean.EventPropertie;
 import com.mw.sdk.utils.DataManager;
 import com.mw.sdk.utils.ResConfig;
 import com.mw.sdk.utils.SdkUtil;
+import com.thirdlib.ThirdModuleUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,7 +24,7 @@ public class TDAnalyticsHelper {
 
     public static void init(Context context){
 
-        if (!existShuShuModule()){
+        if (!ThirdModuleUtil.existShuShuModule()){
             return;
         }
 
@@ -65,7 +66,7 @@ public class TDAnalyticsHelper {
 
     public static void setAccountId(String accountId){
 
-        if (!existShuShuModule()){
+        if (!ThirdModuleUtil.existShuShuModule()){
             return;
         }
         //在用户进行登录时，可调用 login 来设置用户的账号 ID， TE 平台将会以账号 ID 作为身份识别 ID，
@@ -77,7 +78,7 @@ public class TDAnalyticsHelper {
     public static void setCommonProperties(Context context){
 
         try {
-            if (!existShuShuModule()){
+            if (!ThirdModuleUtil.existShuShuModule()){
                 return;
             }
             if (!TDAnalyticsHelper.isReady(context)){
@@ -147,7 +148,7 @@ public class TDAnalyticsHelper {
 
     public static void trackEvent(String eventName, JSONObject properties, int no_use){
 
-        if (!existShuShuModule()){
+        if (!ThirdModuleUtil.existShuShuModule()){
             return;
         }
         if(TextUtils.isEmpty(eventName)) {
@@ -188,24 +189,6 @@ public class TDAnalyticsHelper {
     }*/
 
 
-    private static boolean isExistShuShuModule = false;
-    public static boolean existShuShuModule() {
 
-        if (isExistShuShuModule){
-            return true;
-        }
-
-        try {
-            Class<?> clazz = Class.forName("cn.thinkingdata.analytics.TDAnalytics");
-            if (clazz == null){
-                return false;
-            }
-        } catch (ClassNotFoundException e) {
-            PL.w("shushu module not exist.");
-            return false;
-        }
-        isExistShuShuModule = true;
-        return true;
-    }
 }
 

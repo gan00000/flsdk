@@ -21,6 +21,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.play.core.review.ReviewInfo;
 import com.google.android.play.core.review.ReviewManager;
 import com.google.android.play.core.review.ReviewManagerFactory;
+import com.thirdlib.ThirdModuleUtil;
 
 import java.io.IOException;
 import java.util.Map;
@@ -94,7 +95,7 @@ public class SGoogleProxy {
 
 	public static void firebaseAnalytics(Context context, String eventName, Bundle params) {
 
-		if (!existFirebaseModule()) {
+		if (!ThirdModuleUtil.existFirebaseModule()) {
 			return;
 		}
 
@@ -107,7 +108,7 @@ public class SGoogleProxy {
 	}
 
 	public static void trackRevenueFirebase(Context context, String eventName, double usdPrice, String currency, String uid,String roleId, String productId, String orderId, String channel_platform, Map<String, Object> otherParams){
-		if (!existFirebaseModule()) {
+		if (!ThirdModuleUtil.existFirebaseModule()) {
 			return;
 		}
 		if (context == null || TextUtils.isEmpty(eventName)) {
@@ -119,7 +120,7 @@ public class SGoogleProxy {
 
 	public static Bundle trackPayCC(Context context, String eventName, String orderId, String productId, double usdPrice, String uid) {
 
-		if (!existFirebaseModule()) {
+		if (!ThirdModuleUtil.existFirebaseModule()) {
 			return null;
 		}
 
@@ -128,7 +129,7 @@ public class SGoogleProxy {
 
 	public static void requestStoreReview(Activity activity, SFCallBack sfCallBack){
 
-		if (!existFirebaseModule()) {
+		if (!ThirdModuleUtil.existFirebaseModule()) {
 			return;
 		}
 
@@ -187,24 +188,5 @@ public class SGoogleProxy {
 
 	}
 
-
-	private static boolean isExistFirebaseModule = false;
-	private static boolean existFirebaseModule() {
-
-		if (isExistFirebaseModule){
-			return true;
-		}
-		try {
-			Class<?> clazz = Class.forName("com.google.firebase.analytics.FirebaseAnalytics");
-			if (clazz == null){
-				return false;
-			}
-		} catch (ClassNotFoundException e) {
-			PL.w("Firebase module not exist.");
-			return false;
-		}
-		isExistFirebaseModule = true;
-		return true;
-	}
 
 }

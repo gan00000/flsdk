@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.mw.sdk.R;
+import com.thirdlib.ThirdModuleUtil;
 
 import java.util.Arrays;
 import java.util.List;
@@ -62,11 +63,17 @@ public class VKPurchaseManger {
 
     public void onCreate(Activity activity, Bundle savedInstanceState){
         if (savedInstanceState == null) {
+            if (!ThirdModuleUtil.existRustoreModule()){
+                return;
+            }
             getBillingClient(activity).onNewIntent(activity.getIntent());
         }
     }
 
     public void onNewIntent(Activity activity, Intent intent) {
+        if (!ThirdModuleUtil.existRustoreModule()){
+            return;
+        }
         getBillingClient(activity).onNewIntent(intent);
     }
 

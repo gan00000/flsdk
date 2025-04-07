@@ -23,6 +23,7 @@ import com.mw.sdk.R;
 import com.mw.sdk.ads.SdkEventLogger;
 import com.mw.sdk.utils.ResConfig;
 import com.mw.sdk.utils.SdkUtil;
+import com.thirdlib.ThirdModuleUtil;
 
 import java.lang.ref.WeakReference;
 import java.util.Map;
@@ -36,7 +37,7 @@ public class AFHelper {
     // When GCD or UDL finds this flag true it MUST set it to false before skipping.
 
     public static String getAppsFlyerUID(Context context){
-        if (!existAppsFlyerModule()){
+        if (!ThirdModuleUtil.existAppsFlyerModule()){
             return "";
         }
         return AppsFlyerLib.getInstance().getAppsFlyerUID(context);
@@ -45,7 +46,7 @@ public class AFHelper {
     public static void applicationOnCreate(Application application){
         PL.i("AFHelper applicationOnCreate");
 
-        if (!existAppsFlyerModule()){
+        if (!ThirdModuleUtil.existAppsFlyerModule()){
             return;
         }
         AppsFlyerLib.getInstance().setCollectIMEI(false);
@@ -181,7 +182,7 @@ public class AFHelper {
 
     public static void activityOnCreate(Activity activity){
 
-        if (!existAppsFlyerModule()){
+        if (!ThirdModuleUtil.existAppsFlyerModule()){
             return;
         }
 
@@ -205,7 +206,7 @@ public class AFHelper {
             return;
         }
 
-        if (!existAppsFlyerModule()){
+        if (!ThirdModuleUtil.existAppsFlyerModule()){
             return;
         }
 
@@ -274,23 +275,4 @@ public class AFHelper {
 
     }
 
-    private static boolean isExistAppsFlyerModule = false;
-    public static boolean existAppsFlyerModule() {
-
-        if (isExistAppsFlyerModule){
-            return true;
-        }
-
-        try {
-            Class<?> clazz = Class.forName("com.appsflyer.AppsFlyerLib");
-            if (clazz == null){
-                return false;
-            }
-        } catch (ClassNotFoundException e) {
-            PL.w("AppsFlyer module not exist.");
-            return false;
-        }
-        isExistAppsFlyerModule = true;
-        return true;
-    }
 }
