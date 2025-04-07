@@ -111,10 +111,6 @@ public class SGoogleProxy {
 		if (!ThirdModuleUtil.existFirebaseModule()) {
 			return;
 		}
-		if (context == null || TextUtils.isEmpty(eventName)) {
-			return;
-		}
-
 		FirebaseHelper.trackRevenueFirebase(context, eventName, usdPrice, currency, uid, roleId, productId, orderId, channel_platform, otherParams);
 	}
 
