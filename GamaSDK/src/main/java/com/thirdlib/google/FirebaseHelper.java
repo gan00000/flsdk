@@ -66,7 +66,7 @@ public class FirebaseHelper {
     protected static Bundle trackPayCC(Context context, String eventName, String orderId, String productId, double usdPrice, String uid) {
 
         Bundle b = new Bundle();
-        if (context == null || SStringUtil.isEmpty(eventName)){
+        if (context == null){
             return b;
         }
 
