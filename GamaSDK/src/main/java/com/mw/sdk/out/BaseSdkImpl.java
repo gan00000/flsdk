@@ -1235,6 +1235,7 @@ public class BaseSdkImpl implements IMWSDK {
 
     public void requestStoreReview(Activity activity, SFCallBack sfCallBack){
 
+        PL.i("requestStoreReview...");
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
