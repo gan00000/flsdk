@@ -10,6 +10,7 @@ public enum ChannelPlatform {
     SAMSUNG("samsung"),//kr
     VK("vk"),//俄罗斯vk
     NOWGG("nowgg"),
+    Xiaomi("Xiaomi"),
     MEOW("meow");
 
     private String channel_platform;

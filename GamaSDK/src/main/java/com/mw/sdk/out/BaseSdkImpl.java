@@ -307,7 +307,7 @@ public class BaseSdkImpl implements IMWSDK {
                 if (SStringUtil.isNotEmpty(roleId) && SStringUtil.isNotEmpty(severCode) && SStringUtil.isNotEmpty(SdkUtil.getUid(activity))){
 
                     if (iPay != null) {
-                        iPay.startQueryPurchase(activity.getApplicationContext());
+                        iPay.startQueryPurchase(activity);
                     }
 
                     Request.requestFloatMenus(activity.getApplicationContext(), new SFCallBack<String>() {

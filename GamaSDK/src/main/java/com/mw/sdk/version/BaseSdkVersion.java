@@ -6,6 +6,7 @@ import com.mw.sdk.pay.nowgg.NowggPayImpl;
 import com.thirdlib.IThirdHelper;
 import com.thirdlib.ThirdModuleUtil;
 import com.thirdlib.vk.VKPayImpl;
+import com.thirdlib.xiaomi.XiaomiPayImpl;
 
 public abstract class BaseSdkVersion {
 
@@ -32,6 +33,14 @@ public abstract class BaseSdkVersion {
 
         if (ThirdModuleUtil.existNowggModule()){
             return new NowggPayImpl();
+        }
+        return null;
+    }
+
+    public IPay xiaomiPay(){
+
+        if (ThirdModuleUtil.existXiaomiModule()){
+            return new XiaomiPayImpl();
         }
         return null;
     }

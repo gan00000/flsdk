@@ -155,4 +155,25 @@ public class ThirdModuleUtil {
         isExistNowggModule = true;
         return true;
     }
+
+
+    private static boolean isExistXiaomiModule = false;
+    public static boolean existXiaomiModule(){
+
+        if (isExistXiaomiModule){
+            return true;
+        }
+
+        try {
+            Class<?> clazz = Class.forName("com.xiaomi.billingclient.api.BillingClient");
+            if (clazz == null){
+                return false;
+            }
+        } catch (ClassNotFoundException e) {
+            PL.w("Xiaomi module not exist.");
+            return false;
+        }
+        isExistXiaomiModule = true;
+        return true;
+    }
 }
