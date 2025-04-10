@@ -2,6 +2,7 @@ package com.mw.sdk.pay.gp.util;
 
 import android.app.Activity;
 import android.content.Context;
+import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,18 +23,17 @@ import com.android.billingclient.api.QueryPurchasesParams;
 import com.core.base.utils.PL;
 import com.google.common.collect.ImmutableList;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * 处理Google支付3.0的帮助类
  */
 public class GBillingHelper implements PurchasesUpdatedListener {
-    private  static BillingClient billingClient;
+    private BillingClient billingClient;
     private static GBillingHelper gBillingHelper;
-    private ArrayList<BillingHelperStatusCallback> mBillingCallbackList = new ArrayList<>();
+    //private ArrayList<BillingHelperStatusCallback> mBillingCallbackList = new ArrayList<>();
+    private BillingHelperStatusCallback billingHelperStatusCallback;
     private boolean isBillingInit = false;
-    private PurchasesUpdatedListener purchasesUpdatedListener;
 
 //    private static String TAG = GBillingHelper.class.getSimpleName();
 
@@ -53,74 +53,66 @@ public class GBillingHelper implements PurchasesUpdatedListener {
      * @param callback
      */
     public void setBillingHelperStatusCallback(BillingHelperStatusCallback callback) {
-        if (!this.mBillingCallbackList.contains(callback)) {
-            PL.i( "Add BillingCallbackList.");
-            mBillingCallbackList.add(callback);
-        } else {
-            PL.i( "Already have BillingCallbackList.");
-        }
+        this.billingHelperStatusCallback = callback;
     }
 
-    /**
-     * 移除Callback
-     * @param callback
-     */
-    public void removeBillingHelperStatusCallback(BillingHelperStatusCallback callback) {
-        if (this.mBillingCallbackList.contains(callback)) {
-            this.mBillingCallbackList.remove(callback);
-            PL.i( "Remove BillingCallbackList.");
-        } else {
-            PL.i( "No BillingCallbackList match.");
-        }
-    }
 
     @Override
     public void onPurchasesUpdated(@NonNull BillingResult billingResult, @Nullable List<Purchase> purchases) {
 
         PL.i( "billing onPurchasesUpdated.");
-//        billingClient.showInAppMessages()
-        if (purchasesUpdatedListener != null){
-            purchasesUpdatedListener.onPurchasesUpdated(billingResult,purchases);
+        if (billingResult == null){
+            if (billingHelperStatusCallback != null){
+                billingHelperStatusCallback.handleError(4, "onPurchasesUpdated billingResult null");
+            }
+            return;
         }
-        if (mBillingCallbackList != null && !mBillingCallbackList.isEmpty()) {
-            for (BillingHelperStatusCallback mBillingCallback : mBillingCallbackList) {
-                mBillingCallback.onPurchaseUpdate(billingResult, purchases);
+        PL.i( "onPurchaseUpdate response code : " + billingResult.getResponseCode());
+        PL.i( "onPurchaseUpdate response msg : " + billingResult.getDebugMessage());
+
+        if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && purchases != null) { //支付成功，进行消费
+            PL.i( "onPurchaseUpdate pay success.");
+
+            if (billingHelperStatusCallback != null){
+                billingHelperStatusCallback.onPurchaseUpdate(billingResult, purchases);
+            }
+
+        } else if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.USER_CANCELED) { //用户取消
+            // Handle an error caused by a user cancelling the purchase flow.
+            PL.i( "user cancelling the purchase flow");
+            if (billingHelperStatusCallback != null){
+                billingHelperStatusCallback.handleCancel("");
+            }
+        } else { //发生错误
+            // Handle any other error codes.
+            if (billingHelperStatusCallback != null){
+                billingHelperStatusCallback.handleError(5,  "response code=" + billingResult.getResponseCode() + ", msg=" + billingResult.getDebugMessage());
             }
         }
+
     }
 
-    private void executeRunnable(Context context, Runnable runnable) {
+    private void startBillingService(Context context, BillingSetupCallback billingSetupCallback) {
 
-        if (billingClient != null && billingClient.isReady()) {
-//            BillingResult billingResult = billingClient.isFeatureSupported(BillingClient.FeatureType.IN_APP_MESSAGING);
-//            PL.i("IN_APP_MESSAGING isFeatureSupported:" + billingResult.toString());
-//            BillingResult billingResult2 = billingClient.isFeatureSupported(BillingClient.FeatureType.PRODUCT_DETAILS);
-//            PL.i("PRODUCT_DETAILS isFeatureSupported:" + billingResult.toString());
-            runnable.run();
-        } else {
-            startServiceConnection(context, runnable);
+        if (billingClient != null && billingClient.isReady() && isBillingInit) {
+
+            if (billingSetupCallback != null){
+                billingSetupCallback.onSuccess();
+            }
+            return;
         }
-    }
-
-//    public boolean isFeatureSupported(){
-//       return billingClient.isFeatureSupported(BillingClient.FeatureType.IN_APP_MESSAGING).;
-//    }
-
-    private synchronized void startServiceConnection(Context context, final Runnable executeOnSuccess) {
-
         if (billingClient != null){
             try {
-                PL.e("startServiceConnection billingClient.endConnection()");
+                PL.d("startServiceConnection billingClient.endConnection()");
                 billingClient.endConnection();
             } catch (Exception e) {
-                PL.e("startServiceConnection billingClient.endConnection() exception");
+                PL.d("startServiceConnection billingClient.endConnection() exception");
                 e.printStackTrace();
             }
         }
         PL.i( "startServiceConnection start");
-        billingClient = BillingClient.newBuilder(context).setListener(this)
-                .enablePendingPurchases()
-                .build();
+        isBillingInit = false;
+        billingClient = BillingClient.newBuilder(context).setListener(this).build();
         billingClient.startConnection(new BillingClientStateListener() {
             @Override
             public void onBillingSetupFinished(@NonNull BillingResult billingResult) {
@@ -130,22 +122,15 @@ public class GBillingHelper implements PurchasesUpdatedListener {
                     // The BillingClient is ready. You can query purchases here.
                     isBillingInit = true;
                     PL.i( "onBillingSetupFinished -> success");
-//                    callback.onStartUp(true);
-                    if (mBillingCallbackList != null && !mBillingCallbackList.isEmpty()) {
-                        for (BillingHelperStatusCallback mBillingCallback : mBillingCallbackList) {
-                            mBillingCallback.onStartUp(true, billingResult.getDebugMessage());
-                        }
+                    if (billingSetupCallback != null){
+                        billingSetupCallback.onSuccess();
                     }
-                    if (executeOnSuccess != null) {
-                        executeOnSuccess.run();
-                    }
+
                 } else {
                     PL.i( "onBillingSetupFinished -> fail");
-//                    callback.onStartUp(false);
-                    if (mBillingCallbackList != null && !mBillingCallbackList.isEmpty()) {
-                        for (BillingHelperStatusCallback mBillingCallback : mBillingCallbackList) {
-                            mBillingCallback.onStartUp(false, billingResult.getDebugMessage());
-                        }
+                    isBillingInit = false;
+                    if (billingHelperStatusCallback != null){
+                        billingHelperStatusCallback.handleError(1, billingResult.getDebugMessage());
                     }
                 }
             }
@@ -154,10 +139,9 @@ public class GBillingHelper implements PurchasesUpdatedListener {
             public void onBillingServiceDisconnected() {
                 // Logic from ServiceConnection.onServiceDisconnected should be moved here.
                 PL.i( "onBillingServiceDisconnected -> ");
-                if (mBillingCallbackList != null && !mBillingCallbackList.isEmpty()) {
-                    for (BillingHelperStatusCallback mBillingCallback : mBillingCallbackList) {
-                        mBillingCallback.onStartUp(false, "");
-                    }
+                isBillingInit = false;
+                if (billingHelperStatusCallback != null){
+                    billingHelperStatusCallback.handleError(1, "onBillingServiceDisconnected");
                 }
             }
         });
@@ -174,15 +158,27 @@ public class GBillingHelper implements PurchasesUpdatedListener {
      * @param purchase
      * @param isReplaceConsume 是否补单的消费
      */
-    public void consumeAsync(Context context, Purchase purchase, boolean isReplaceConsume,ConsumeResponseListener consumeResponseListener) {
-        // Verify the purchase.
-        // Ensure entitlement was not already granted for this purchaseToken.
-        // Grant entitlement to the user.
-        ConsumeParams consumeParams =
-                ConsumeParams.newBuilder()
-                        .setPurchaseToken(purchase.getPurchaseToken())
-                        .build();
+    public void consumeAsync(Activity activity, Purchase purchase, boolean isReplaceConsume,ConsumeResponseListener consumeResponseListener) {
 
+        startBillingService(activity, new BillingSetupCallback() {
+            @Override
+            public void onSuccess() {
+
+                // Verify the purchase.
+                // Ensure entitlement was not already granted for this purchaseToken.
+                // Grant entitlement to the user.
+                ConsumeParams consumeParams =
+                        ConsumeParams.newBuilder()
+                                .setPurchaseToken(purchase.getPurchaseToken())
+                                .build();
+
+                PL.i( "------consumeAsync start--------");
+                billingClient.consumeAsync(consumeParams, consumeResponseListener);
+                PL.i( "------consumeAsync end--------");
+            }
+        });
+
+/*
         ConsumeResponseListener listener = new ConsumeResponseListener() {
             @Override
             public void onConsumeResponse(BillingResult billingResult, @NonNull String purchaseToken) {
@@ -217,7 +213,7 @@ public class GBillingHelper implements PurchasesUpdatedListener {
             }
         };
         PL.i( "------consumeAsync start--------");
-        billingClient.consumeAsync(consumeParams, listener);
+        billingClient.consumeAsync(consumeParams, listener);*/
     }
 
     /**
@@ -235,168 +231,103 @@ public class GBillingHelper implements PurchasesUpdatedListener {
     /**
      * 查询商品详情
      */
-    public void queryProductDetailsAsync(Context context, String productId, ProductDetailsResponseListener detailsResponseListener) {
-        Runnable queryInventoryRunnable = new Runnable() {
-            @Override
-            public void run() {
+    private void queryProductDetailsAsync(Context context, String productId, ProductDetailsResponseListener detailsResponseListener) {
+        PL.i( "start queryProductDetailsAsync productId =>" + productId);
+        ImmutableList<QueryProductDetailsParams.Product> productList = ImmutableList.of(QueryProductDetailsParams.Product.newBuilder()
+                .setProductId(productId)
+                .setProductType(BillingClient.ProductType.INAPP)
+                .build());
 
-                ImmutableList<QueryProductDetailsParams.Product> productList = ImmutableList.of(QueryProductDetailsParams.Product.newBuilder()
-                        .setProductId(productId)
-                        .setProductType(BillingClient.ProductType.INAPP)
-                        .build());
+        QueryProductDetailsParams params = QueryProductDetailsParams.newBuilder()
+                .setProductList(productList)
+                .build();
 
-                QueryProductDetailsParams params = QueryProductDetailsParams.newBuilder()
-                        .setProductList(productList)
-                        .build();
+        billingClient.queryProductDetailsAsync(params, detailsResponseListener);
 
-                billingClient.queryProductDetailsAsync(params,  new ProductDetailsResponseListener() {
-                            public void onProductDetailsResponse(BillingResult billingResult, List<ProductDetails> productDetailsList) {
-                                // Process the result
-                                if (mBillingCallbackList != null && !mBillingCallbackList.isEmpty()) {
-                                    for (BillingHelperStatusCallback mBillingCallback : mBillingCallbackList) {
-                                        mBillingCallback.onQuerySkuResult(context,billingResult,productDetailsList, productId);
-                                    }
-                                }
-                                if (detailsResponseListener != null){
-                                    detailsResponseListener.onProductDetailsResponse(billingResult,productDetailsList);
-                                }
-                            }
-                        }
-                );
-
-//                SkuDetailsParams.Builder params = SkuDetailsParams.newBuilder();
-//                params.setSkusList(skuList).setType(BillingClient.SkuType.INAPP);
-//                billingClient.querySkuDetailsAsync(params.build(),
-//                        new SkuDetailsResponseListener() {
-//                            @Override
-//                            public void onSkuDetailsResponse(BillingResult billingResult, List<SkuDetails> skuDetailsList) {
-//                                // Process the result.
-//
-//                                if (mBillingCallbackList != null && !mBillingCallbackList.isEmpty()) {
-//                                    for (BillingHelperStatusCallback mBillingCallback : mBillingCallbackList) {
-//                                        mBillingCallback.onQuerySkuResult(context,skuDetailsList);
-//                                    }
-//                                }
-//                                if (detailsResponseListener != null){
-//                                    detailsResponseListener.onSkuDetailsResponse(billingResult,skuDetailsList);
-//                                }
-//
-//                            }
-//                        }
-//                );
-            }
-        };
-        executeRunnable(context, queryInventoryRunnable);
     }
 
     /**
      * 开始购买,需要传入sku查询商品详情
      */
-    public void launchPurchaseFlow(Context context, String sku,String userId, String orderId,PurchasesUpdatedListener purchasesUpdatedListener) {
+    public void launchPurchaseFlow(Activity activity, String sku,String userId, String orderId) {
 
-        this.purchasesUpdatedListener = purchasesUpdatedListener;
-
-        queryProductDetailsAsync(context, sku, new ProductDetailsResponseListener() {
+        startBillingService(activity, new BillingSetupCallback() {
             @Override
-            public void onProductDetailsResponse(@NonNull BillingResult billingResult, @NonNull List<ProductDetails> list) {
-                PL.i( "queryProductDetailsAsync finish ");
-                if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && list != null && !list.isEmpty()) {
-                    launchPurchaseFlow(context, userId, orderId, list.get(0));
-                }else{
-                    PL.i( "queryProductDetailsAsync finish error");
-                    if (purchasesUpdatedListener != null) {
-                        purchasesUpdatedListener.onPurchasesUpdated(billingResult, null);
+            public void onSuccess() {
+
+                queryProductDetailsAsync(activity, sku, new ProductDetailsResponseListener() {
+                    @Override
+                    public void onProductDetailsResponse(@NonNull BillingResult billingResult, @NonNull List<ProductDetails> list) {
+                        PL.i( "queryProductDetailsAsync finish ");
+                        PL.i( "onQuerySkuResult error responseCode => " + billingResult.getResponseCode() + ",debugMessage => " + billingResult.getDebugMessage());
+                        if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && list != null && !list.isEmpty()) {
+
+                            if (billingHelperStatusCallback != null) {
+                                billingHelperStatusCallback.onQuerySkuResult(list, sku);
+                            }
+
+                            launchPurchaseFlow(activity, userId, orderId, list.get(0));
+
+                        }else{
+                            PL.i( "queryProductDetailsAsync finish error => " + billingResult.getDebugMessage());
+                            if (billingHelperStatusCallback != null) {
+                                billingHelperStatusCallback.handleError(2, "can not find ProductDetail=>" + sku);
+                            }
+                        }
                     }
-                }
+                });
+
             }
         });
-
-//        queryProductDetailsAsync(context, Collections.singletonList(sku), new SkuDetailsResponseListener() {
-//            @Override
-//            public void onSkuDetailsResponse(@NonNull BillingResult billingResult, @Nullable List<SkuDetails> list) {
-//                PL.i( "queryProductDetailsAsync finish ");
-//                if (list != null && !list.isEmpty()) {
-//                    launchPurchaseFlow(context, userId, orderId, list.get(0));
-//                }else{
-//                    PL.i( "queryProductDetailsAsync finish fail,SkuDetails not find");
-//                    if (purchasesUpdatedListener != null) {
-//                        purchasesUpdatedListener.onPurchasesUpdated(billingResult, null);
-//                    }
-//                }
-//            }
-//        });
-
     }
 
     /**
      * 开始购买,直接传入商品详情
      */
-    private void launchPurchaseFlow(Context context,String userId,String orderId, ProductDetails productDetails) {
+    private void launchPurchaseFlow(Activity activity, String userId, String orderId, ProductDetails productDetails) {
 
-        Runnable launchPurchaseRunnable = new Runnable() {
-            @Override
-            public void run() {
-                PL.i( "productDetails -> " + productDetails.toString());
+        PL.i( "productDetails -> " + productDetails.toString());
 
 //                queryProductDetailsAsync 的回调会返回一个 List<ProductDetails>。每个 ProductDetails 项目都包含商品的相关信息（ID、商品名、类型等）。主要区别在于，
 //                订阅商品现在还包含一个 List<ProductDetails.SubscriptionOfferDetails>，其中包含用户可以享受的所有优惠。
 //                由于以前的 Play 结算库版本不支持新对象（订阅、基础方案、优惠等），因此新系统将每个订阅 SKU 转换为单个向后兼容的基础方案和优惠。
 //                可用的一次性购买商品也改为使用 ProductDetails 对象。您可以使用 getOneTimePurchaseOfferDetails() 方法访问一次性购买商品的优惠详情。
 
-                // Retrieve a value for "productDetails" by calling queryProductDetailsAsync()
-                // Get the offerToken of the selected offer
+        // Retrieve a value for "productDetails" by calling queryProductDetailsAsync()
+        // Get the offerToken of the selected offer
 //                String offerToken = productDetails
 //                        .getSubscriptionOfferDetails()
 //                        .get(0)
 //                        .getOfferToken();
-                // Set the parameters for the offer that will be presented
-                // in the billing flow creating separate productDetailsParamsList variable
-                ImmutableList<BillingFlowParams.ProductDetailsParams> productDetailsParamsList = ImmutableList.of(
-                                BillingFlowParams.ProductDetailsParams.newBuilder()
-                                        .setProductDetails(productDetails)
+        // Set the parameters for the offer that will be presented
+        // in the billing flow creating separate productDetailsParamsList variable
+        ImmutableList<BillingFlowParams.ProductDetailsParams> productDetailsParamsList = ImmutableList.of(
+                BillingFlowParams.ProductDetailsParams.newBuilder()
+                        .setProductDetails(productDetails)
 //                                        .setOfferToken(offerToken)
-                                        .build()
-                        );
+                        .build()
+        );
 
-                BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
-                        .setProductDetailsParamsList(productDetailsParamsList)
-                        .setObfuscatedAccountId(userId)//64 个字符
-                        .setObfuscatedProfileId(orderId)
-                        .build();
+        BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
+                .setProductDetailsParamsList(productDetailsParamsList)
+                .setObfuscatedAccountId(userId)//64 个字符
+                .setObfuscatedProfileId(orderId)
+                .build();
 
+        PL.i("start launchBillingFlow");
+        BillingResult billingResult = billingClient.launchBillingFlow(activity, billingFlowParams);
+        PL.i("start launchBillingFlow return:" + billingResult.getResponseCode());
 
-                // An activity reference from which the billing flow will be launched.
-                // Retrieve a value for "skuDetails" by calling querySkuDetailsAsync().
-//                BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
-//                        .setSkuDetails(productDetails)
-//                        .setObfuscatedAccountId(userId)//64 个字符
-//                        .setObfuscatedProfileId(orderId)
-//                        .build();
-
-                if (context instanceof Activity) {
-
-                    PL.i("start launchBillingFlow");
-                    BillingResult billingResult = billingClient.launchBillingFlow((Activity) context, billingFlowParams);
-                    PL.i("start launchBillingFlow return:" + billingResult.getResponseCode());
-                    if (mBillingCallbackList != null && !mBillingCallbackList.isEmpty()) {
-                        for (BillingHelperStatusCallback mBillingCallback : mBillingCallbackList) {
-                            mBillingCallback.launchBillingFlowResult(context, billingResult);
-                        }
-                    }
-                } else {
-                    PL.i("context is not Activity error");
-                    for (BillingHelperStatusCallback mBillingCallback : mBillingCallbackList) {
-                        BillingResult billingResult = BillingResult.newBuilder().setResponseCode(BillingClient.BillingResponseCode.ERROR).build();
-                        mBillingCallback.launchBillingFlowResult(context, billingResult);
-                    }
+        if (billingResult.getResponseCode() != BillingClient.BillingResponseCode.OK) {
+            if (billingHelperStatusCallback != null){
+                String msg = billingResult.getDebugMessage();
+                if (TextUtils.isEmpty(msg)){
+                    msg = "Google play billing error, please contact customer service";
                 }
-//                            int responseCode = billingResult.getResponseCode();
-//                            String responseMessage = billingResult.getDebugMessage();
-//                            PL.i( "launchPurchaseFlow responseCode -> " + responseCode);
-//                            PL.i( "launchPurchaseFlow responseMessage -> " + responseMessage);
+                billingHelperStatusCallback.handleError(3, msg);
             }
-        };
-        executeRunnable(context, launchPurchaseRunnable);
+        }
+
     }
 
     /**
@@ -409,38 +340,29 @@ public class GBillingHelper implements PurchasesUpdatedListener {
      *
      * 一旦您验证了购买交易，您的应用就可以向用户授予权利了。授予权利后，您的应用必须确认购买交易。此确认会告知 Google Play 您已授予购买权。
      */
-    public void queryPurchasesAsync(Context context, PurchasesResponseListener purchasesResponseListener) {
-        Runnable queryPurchaseRunnable = new Runnable() {
-            @Override
-            public void run() {
+    public void queryPurchasesAsync(Activity activity, boolean isPaying) {
 
-                if (billingClient == null){
-                    if (purchasesResponseListener != null){
-                        purchasesResponseListener.onQueryPurchasesResponse(null, null);
-                    }
-                    return;
-                }
+        startBillingService(activity, new BillingSetupCallback() {
+            @Override
+            public void onSuccess() {
+
+                PL.i("start queryPurchasesAsync");
                 billingClient.queryPurchasesAsync(QueryPurchasesParams.newBuilder().setProductType(BillingClient.ProductType.INAPP).build(), new PurchasesResponseListener() {
                             public void onQueryPurchasesResponse(BillingResult billingResult, List<Purchase> purchases) {
                                 // Process the result
-                                if (purchasesResponseListener != null){
-                                    purchasesResponseListener.onQueryPurchasesResponse(billingResult,purchases);
+                                PL.i("queryPurchasesAsync end");
+                                if (billingHelperStatusCallback != null){
+                                    if (isPaying){
+                                        billingHelperStatusCallback.queryPurchaseResultInPaying(purchases);
+                                    }else {
+                                        billingHelperStatusCallback.queryPurchaseResult(purchases);
+                                    }
                                 }
                             }
                         }
                 );
-
-//                billingClient.queryPurchasesAsync(BillingClient.SkuType.INAPP, new PurchasesResponseListener() {
-//                    @Override
-//                    public void onQueryPurchasesResponse(@NonNull BillingResult billingResult, @NonNull List<Purchase> list) {
-//                        if (purchasesResponseListener != null){
-//                            purchasesResponseListener.onQueryPurchasesResponse(billingResult,list);
-//                        }
-//                    }
-//                });
             }
-        };
-        executeRunnable(context, queryPurchaseRunnable);
+        });
     }
 
     /**
@@ -459,37 +381,26 @@ public class GBillingHelper implements PurchasesUpdatedListener {
      * 功能回调
      */
     public interface BillingHelperStatusCallback {
-//        /**
-//         * BillingClient链接回调
-//         * @param isSuccess
-//         */
-        void onStartUp(boolean isSuccess, String msg);
 
-        /**
-         * 查询商品Sku回调
-         *
-         * @param productDetailsList
-         */
-        void onQuerySkuResult(Context context, BillingResult billingResult, List<ProductDetails> productDetailsList, String productId);
-
+        void onQuerySkuResult(List<ProductDetails> productDetailsList, String productId);
         /**
          * 查询购买的回调
          */
-        void queryPurchaseResult(Context context, List<Purchase> purchases);
+        void queryPurchaseResult(List<Purchase> purchases);
 
-        /**
-         * 消费的回调
-         */
-        void onConsumeResult(Context context, BillingResult billingResult, @NonNull String purchaseToken, Purchase purchase, boolean isReplaceConsume);
+        void queryPurchaseResultInPaying(List<Purchase> purchases);
 
         /**
          * 支付回调
          */
         void onPurchaseUpdate(@NonNull BillingResult billingResult, @Nullable List<Purchase> purchases);
 
-        /**
-         * 拉起支付页面的结果
-         */
-        void launchBillingFlowResult(Context context, BillingResult billingResult);
+        void handleError(int m, String msg);
+
+        void handleCancel(String msg);
+    }
+
+    public interface BillingSetupCallback{
+        void onSuccess();
     }
 }

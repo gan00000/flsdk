@@ -238,20 +238,18 @@ public class XiaomiPayImpl implements IPay, XiaoMiPayManager.PurchaseCallback {
     }
 
     @Override
-    public void startQueryPurchase(Context mContext) {
+    public void startQueryPurchase(Activity activity) {
 
-        if (mContext == null){
+        if (activity == null){
             return;
         }
         PL.i("startQueryPurchase onQueryPurchasesResponse");
-        this.mContext = mContext;
-        if (mContext instanceof Activity){
-            XiaoMiPayManager.getInstance().queryPurchasesAsync((Activity) mContext, false);
-        }
+        this.mContext = activity;
+        XiaoMiPayManager.getInstance().queryPurchasesAsync(activity, false);
 
     }
 
-    public void queryPreRegData(final Context mContext, ISdkCallBack iSdkCallBack) {
+    public void queryPreRegData(final Activity activity, ISdkCallBack iSdkCallBack) {
 
     }
 

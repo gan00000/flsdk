@@ -20,12 +20,12 @@ public interface IPay extends IGameLifeCycle{
      * 进入Google储值流程
      */
     void startPay(Activity activity,PayReqBean payReqBean);
-    void startQueryPurchase(Context mContext);
+    void startQueryPurchase(Activity activity);
 
     /**
      * 设置Google储值的回调
      */
     void setIPayCallBack(IPayCallBack iPayCallBack);
 
-    void queryPreRegData(final Context mContext, ISdkCallBack iSdkCallBack);
+    void queryPreRegData(Activity activity, ISdkCallBack iSdkCallBack);
 }

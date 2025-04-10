@@ -257,18 +257,18 @@ public class NowggPayImpl implements IPay, BillingManager.BillingUpdatesListener
     }
 
     @Override
-    public void startQueryPurchase(Context mContext) {
+    public void startQueryPurchase(Activity activity) {
 
-        if (purchaseManager == null || mContext == null){
+        if (purchaseManager == null || activity == null){
             return;
         }
         PL.i("startQueryPurchase onQueryPurchasesResponse");
-        this.mContext = mContext.getApplicationContext();
+        this.mContext = activity;
         purchaseManager.queryPurchasesAsync(false);
 
     }
 
-    public void queryPreRegData(final Context mContext, ISdkCallBack iSdkCallBack) {
+    public void queryPreRegData(final Activity activity, ISdkCallBack iSdkCallBack) {
 
     }
 

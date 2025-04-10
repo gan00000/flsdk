@@ -260,18 +260,18 @@ public class VKPayImpl implements IPay, VKPurchaseManger.PurchaseCallback {
     }
 
     @Override
-    public void startQueryPurchase(Context mContext) {
+    public void startQueryPurchase(Activity activity) {
 
-        if (mContext == null){
+        if (activity == null){
             return;
         }
         PL.i("startQueryPurchase onQueryPurchasesResponse");
-        this.mContext = mContext.getApplicationContext();
+        this.mContext = activity;
         //VKPurchaseManger.getInstance().queryPurchasesAsync(mContext);//VK启动游戏不检查
 
     }
 
-    public void queryPreRegData(final Context mContext, ISdkCallBack iSdkCallBack) {
+    public void queryPreRegData(final Activity activity, ISdkCallBack iSdkCallBack) {
 
     }
 

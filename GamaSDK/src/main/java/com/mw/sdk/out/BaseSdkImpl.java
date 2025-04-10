@@ -344,7 +344,7 @@ public class BaseSdkImpl implements IMWSDK {
             public void run() {
 
                 if (iPay != null){
-                    iPay.queryPreRegData(activity.getApplicationContext(), iSdkCallBack);
+                    iPay.queryPreRegData(activity, iSdkCallBack);
                 }
             }
         });
