@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.text.TextUtils;
 
+import androidx.annotation.NonNull;
+
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
@@ -26,6 +28,8 @@ import com.mw.sdk.pay.IPay;
 import com.mw.sdk.pay.IPayCallBack;
 import com.mw.sdk.utils.PayHelper;
 import com.mw.sdk.utils.SdkUtil;
+import com.xiaomi.billingclient.api.BillingResult;
+import com.xiaomi.billingclient.api.ConsumeResponseListener;
 import com.xiaomi.billingclient.api.Purchase;
 
 import org.json.JSONException;
@@ -53,7 +57,6 @@ public class XiaomiPayImpl implements IPay, XiaoMiPayManager.PurchaseCallback {
     private PayCreateOrderReqBean createOrderIdReqBean;
 
     private Activity mActivity;
-    private Context mContext;
 
     private IPayCallBack iPayCallBack;
     /**
@@ -63,6 +66,7 @@ public class XiaomiPayImpl implements IPay, XiaoMiPayManager.PurchaseCallback {
 
     private void callbackSuccess(Purchase purchase, GPExchangeRes gpExchangeRes) {
 
+        isPaying = false;
         PL.i("XiaomiPayImpl callbackSuccess");
         if (mActivity != null) {
             mActivity.runOnUiThread(new Runnable() {
@@ -201,7 +205,6 @@ public class XiaomiPayImpl implements IPay, XiaoMiPayManager.PurchaseCallback {
         isPaying = true;
 
         this.mActivity = activity;
-        this.mContext = activity;
 
 //        if(activity != mActivity && purchaseManager != null){
 //            purchaseManager.destroy();
@@ -226,8 +229,6 @@ public class XiaomiPayImpl implements IPay, XiaoMiPayManager.PurchaseCallback {
             ToastUtils.toast(activity, "please log in to the game first");
             callbackFail("can not find role info:" + this.createOrderIdReqBean.print());
         }
-        //isPaying = false;
-        PL.w("vk set not paying");
     }
 
     private void dimissDialog() {
@@ -243,8 +244,8 @@ public class XiaomiPayImpl implements IPay, XiaoMiPayManager.PurchaseCallback {
         if (activity == null){
             return;
         }
+        this.mActivity = activity;
         PL.i("startQueryPurchase onQueryPurchasesResponse");
-        this.mContext = activity;
         XiaoMiPayManager.getInstance().queryPurchasesAsync(activity, false);
 
     }
@@ -256,7 +257,7 @@ public class XiaomiPayImpl implements IPay, XiaoMiPayManager.PurchaseCallback {
     @Override
     public void onCreate(Activity activity) {
         PL.i( "onCreate");
-        this.mContext = activity;
+        this.mActivity = activity;
         XiaoMiPayManager.getInstance().setPurchaseCallback(this);
     }
 
@@ -357,11 +358,6 @@ public class XiaomiPayImpl implements IPay, XiaoMiPayManager.PurchaseCallback {
     //=================================================================================================
 
     @Override
-    public void onConsumeFinished() {
-
-    }
-
-    @Override
     public void onPurchaseSucceed(List<Purchase> purchases) {
         PL.i("onPurchaseSucceed");
 
@@ -405,7 +401,12 @@ public class XiaomiPayImpl implements IPay, XiaoMiPayManager.PurchaseCallback {
                         PL.i("requestCommonPaySendStone requestSendStone success => " + msg);
 
                         //3.消费
-                        XiaoMiPayManager.getInstance().onConsumePurchase(mActivity, purchase.getPurchaseToken());
+                        XiaoMiPayManager.getInstance().onConsumePurchase(mActivity, purchase.getPurchaseToken(), new ConsumeResponseListener() {
+                            @Override
+                            public void onConsumeResponse(@NonNull BillingResult billingResult, @NonNull String s) {
+                                PL.i("onConsumeResponse finsh");
+                            }
+                        });
                         callbackSuccess(purchase, result);
 
                     }
@@ -477,7 +478,12 @@ public class XiaomiPayImpl implements IPay, XiaoMiPayManager.PurchaseCallback {
                         PL.i("startQueryPurchase requestSendStone fail => " + msg);
                     }
                 });
-                XiaoMiPayManager.getInstance().onConsumePurchase(mActivity, purchase.getPurchaseToken());
+                XiaoMiPayManager.getInstance().onConsumePurchase(mActivity, purchase.getPurchaseToken(), new ConsumeResponseListener() {
+                    @Override
+                    public void onConsumeResponse(@NonNull BillingResult billingResult, @NonNull String s) {
+                        PL.i("onConsumeResponse finsh");
+                    }
+                });
 
             }
         }
@@ -545,7 +551,12 @@ public class XiaomiPayImpl implements IPay, XiaoMiPayManager.PurchaseCallback {
                         PL.i("startQueryPurchase requestSendStone fail => " + msg);
                     }
                 });
-                XiaoMiPayManager.getInstance().onConsumePurchase(mActivity, purchase.getPurchaseToken());
+                XiaoMiPayManager.getInstance().onConsumePurchase(mActivity, purchase.getPurchaseToken(), new ConsumeResponseListener() {
+                    @Override
+                    public void onConsumeResponse(@NonNull BillingResult billingResult, @NonNull String s) {
+                        PL.i("onConsumeResponse finsh");
+                    }
+                });
 
             }
         }
@@ -553,14 +564,14 @@ public class XiaomiPayImpl implements IPay, XiaoMiPayManager.PurchaseCallback {
     }
 
     @Override
-    public void onPurchaseFailed(List<com.xiaomi.billingclient.api.Purchase> purchases) {
-
+    public void onCancel(String msg) {
+        dimissDialog();
     }
 
     @Override
     public void onError(XiaoMiPayManager.ReqType type, String message){
         PL.i("onError:" + message);
-        if (mActivity != null && this.createOrderIdReqBean != null){//此时用户正在购买
+        if (isPaying){//此时用户正在购买
             callbackFail("" + message);
         }
     }

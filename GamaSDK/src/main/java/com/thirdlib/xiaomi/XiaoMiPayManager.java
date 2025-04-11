@@ -8,6 +8,7 @@ import com.xiaomi.billingclient.api.BillingClient;
 import com.xiaomi.billingclient.api.BillingClientStateListener;
 import com.xiaomi.billingclient.api.BillingFlowParams;
 import com.xiaomi.billingclient.api.BillingResult;
+import com.xiaomi.billingclient.api.ConsumeResponseListener;
 import com.xiaomi.billingclient.api.Purchase;
 import com.xiaomi.billingclient.api.PurchasesUpdatedListener;
 import com.xiaomi.billingclient.api.SkuDetailsParams;
@@ -98,10 +99,12 @@ public class XiaoMiPayManager {
                 }
             } else if (code == BillingClient.BillingResponseCode.USER_CANCELED) {
                 PL.d("XiaoMiPayManager支付取消");
+                if (purchaseCallback != null){
+                    purchaseCallback.onCancel("");
+                }
             } else {//其他失败状态  比如断网、服务异常等
                 PL.d("XiaoMiPayManager支付 error =>" + billingResult.getDebugMessage());
                 if (purchaseCallback != null){
-                    purchaseCallback.onPurchaseFailed(list);
                     purchaseCallback.onError(ReqType.PurchasesUpdated, billingResult.getDebugMessage());
                 }
             }
@@ -188,20 +191,10 @@ public class XiaoMiPayManager {
      *
      * @param token purchaseToken
      */
-    public void onConsumePurchase(Activity activity, String token) {
+    public void onConsumePurchase(Activity activity, String token, ConsumeResponseListener consumeResponseListener) {
         startConnectService(activity, () -> {
 
-            billingClient.consumeAsync(token, (billingResult, str) -> {
-//                if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
-//                    resultTv.setText("确认成功，您可再次发起购买");
-//                } else {
-//                    resultTv.setText(billingResult.getDebugMessage());
-//                }
-
-                if (purchaseCallback != null){
-                    purchaseCallback.onConsumeFinished();
-                }
-            });
+            billingClient.consumeAsync(token, consumeResponseListener);
 
         });
 
@@ -238,14 +231,12 @@ public class XiaoMiPayManager {
 
     interface PurchaseCallback {
 
-        void onConsumeFinished();
-
         void onPurchaseSucceed(List<Purchase> list);
 
         void onQueryPurchaseSucceed(List<Purchase> purchases);
         void onPayingQueryPurchaseSucceed(List<Purchase> purchases);
-        void onPurchaseFailed(List<Purchase> list);
         void onError(ReqType type, String message);
+        public void onCancel(String msg);
     }
 
     enum ReqType {
