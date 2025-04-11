@@ -901,7 +901,7 @@ public class Request {
                         if (eventRes != null && eventRes.getData() != null && !eventRes.getData().isEmpty() && eventRes.isRequestSuccess()){
 
                             //SGameBaseRequestBean sGameBaseRequestBean = new SGameBaseRequestBean(context);
-                            String channel_platform = context.getResources().getString(R.string.channel_platform);
+                            String channel_platform = ResConfig.getChannelPlatform(context);
 
                             //遍历事件开始上报
                             for (EventRes.EventData eventData : eventRes.getData()) {

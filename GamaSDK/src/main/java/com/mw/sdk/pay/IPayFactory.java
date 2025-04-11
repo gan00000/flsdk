@@ -6,6 +6,7 @@ import com.mw.base.utils.SdkVersionUtil;
 import com.mw.sdk.R;
 import com.mw.sdk.constant.ChannelPlatform;
 import com.mw.sdk.pay.gp.GooglePayImpl;
+import com.mw.sdk.utils.ResConfig;
 
 /**
  * Created by gan on 2017/2/23.
@@ -20,7 +21,7 @@ public class IPayFactory {
     }
     public static IPay create(Context context, ChannelPlatform channelPlatform){
 
-        String channel_platform = context.getResources().getString(R.string.channel_platform);
+        String channel_platform = ResConfig.getChannelPlatform(context);
         if (channelPlatform != null){//代码设置的为主
             channel_platform = channelPlatform.getChannel_platform();
         }

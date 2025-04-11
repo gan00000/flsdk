@@ -371,7 +371,7 @@ public class BaseSdkImpl implements IMWSDK {
     @Override
     public void onCreate(Activity activity, Bundle savedInstanceState) {
         onCreate(activity);
-        String channel_platform = activity.getResources().getString(R.string.channel_platform);
+        String channel_platform = ResConfig.getChannelPlatform(activity);
         if(ChannelPlatform.VK.getChannel_platform().equals(channel_platform)) {
             VKPurchaseManger.getInstance().onCreate(activity, savedInstanceState);
         }
@@ -381,7 +381,7 @@ public class BaseSdkImpl implements IMWSDK {
     @Override
     public void onNewIntent(Activity activity, Intent intent) {
 
-        String channel_platform = activity.getResources().getString(R.string.channel_platform);
+        String channel_platform = ResConfig.getChannelPlatform(activity);
 
         if(ChannelPlatform.VK.getChannel_platform().equals(channel_platform)) {
             VKPurchaseManger.getInstance().onNewIntent(activity, intent);
@@ -459,7 +459,7 @@ public class BaseSdkImpl implements IMWSDK {
         }
         iPay = IPayFactory.create(activity);
         if (iPay != null){
-            String channel_platform = activity.getResources().getString(R.string.channel_platform);
+            String channel_platform = ResConfig.getChannelPlatform(activity);
             iPayMap.put(channel_platform, iPay);
             iPay.onCreate(activity);
         }
@@ -994,7 +994,7 @@ public class BaseSdkImpl implements IMWSDK {
         payCreateOrderReqBean.setProductId(productId);
         payCreateOrderReqBean.setExtra(extra);
 
-        String channel_platform = activity.getResources().getString(R.string.channel_platform);
+        String channel_platform = ResConfig.getChannelPlatform(activity);
 
         if(payType == SPayType.WEB || ChannelPlatform.MEOW.getChannel_platform().equals(channel_platform)) {
             doWebPay(activity, payCreateOrderReqBean);
@@ -1228,7 +1228,7 @@ public class BaseSdkImpl implements IMWSDK {
             @Override
             public void run() {
 
-                String channel_platform = activity.getResources().getString(R.string.channel_platform);
+                String channel_platform = ResConfig.getChannelPlatform(activity);
 
                 if(ChannelPlatform.GOOGLE.getChannel_platform().equals(channel_platform)) {
                     SGoogleProxy.requestStoreReview(activity, sfCallBack);

@@ -11,6 +11,7 @@ import com.core.base.utils.SStringUtil;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.mw.sdk.R;
 import com.mw.sdk.ads.EventConstant;
+import com.mw.sdk.utils.ResConfig;
 import com.mw.sdk.utils.SdkUtil;
 
 import java.util.Map;
@@ -89,7 +90,7 @@ public class FirebaseHelper {
         b.putDouble(FirebaseAnalytics.Param.VALUE, usdPrice);
         b.putString(FirebaseAnalytics.Param.CURRENCY, "USD");
         b.putString(FirebaseAnalytics.Param.TRANSACTION_ID, orderId);
-        b.putString("platform", context.getResources().getString(R.string.channel_platform));
+        b.putString("platform", ResConfig.getChannelPlatform(context));
         PL.i("trackinPay Purchase firebase...");
         if (SStringUtil.isEmpty(eventName)){
             firebaseAnalytics(context, FirebaseAnalytics.Event.PURCHASE, b);

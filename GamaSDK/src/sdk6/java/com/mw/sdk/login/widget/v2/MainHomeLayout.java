@@ -13,6 +13,7 @@ import com.mw.sdk.constant.ChannelPlatform;
 import com.mw.sdk.constant.ViewType;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.mw.sdk.out.ISdkCallBack;
+import com.mw.sdk.utils.ResConfig;
 import com.mw.sdk.utils.SdkUtil;
 import com.mw.sdk.widget.SBaseDialog;
 
@@ -104,7 +105,7 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
             }
         }
 
-        String channel_platform = getActivity().getResources().getString(R.string.channel_platform);
+        String channel_platform = ResConfig.getChannelPlatform(getActivity());
         if (ChannelPlatform.NOWGG.getChannel_platform().equals(channel_platform)){
             iv_login_nowgg.setVisibility(View.VISIBLE);
         }else {

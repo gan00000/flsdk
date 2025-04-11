@@ -174,7 +174,7 @@ public class SdkEventLogger {
         try {
 
             String uid = SdkUtil.getUid(context);
-            String channel_platform = context.getResources().getString(R.string.channel_platform);
+            String channel_platform = ResConfig.getChannelPlatform(context);
 
             //下面是AppsFlyer自己的事件名
             Map<String, Object> af_eventValues = new HashMap<>();
@@ -185,7 +185,7 @@ public class SdkEventLogger {
             af_eventValues.put(EventConstant.ParameterName.USER_ID, uid);
             af_eventValues.put(EventConstant.ParameterName.ROLE_ID, SdkUtil.getRoleId(context));
             af_eventValues.put(EventConstant.ParameterName.SERVER_TIME, serverTimestamp);
-//            af_eventValues.put("platform", context.getResources().getString(R.string.channel_platform));
+//            af_eventValues.put("platform", ResConfig.getChannelPlatform(context));
             addEventParameterName(context, af_eventValues);
             PL.i("trackinPay start Purchase af...");
             if (SStringUtil.isEmpty(eventName)){
@@ -209,7 +209,7 @@ public class SdkEventLogger {
             fb_eventValues.put(FBEventsConstants.EVENT_PARAM_CURRENCY,"USD");
             fb_eventValues.put(FBEventsConstants.EVENT_PARAM_CONTENT_ID, productId);
             fb_eventValues.put(FBEventsConstants.EVENT_PARAM_ORDER_ID, orderId);
-            fb_eventValues.put("platform", context.getResources().getString(R.string.channel_platform));
+            fb_eventValues.put("platform", ResConfig.getChannelPlatform(context));
             PL.i("trackinPay Purchase fb...");
             if (SStringUtil.isEmpty(eventName)){
                 SFacebookProxy.logPurchase(context, new BigDecimal(usdPrice), fb_eventValues);
@@ -400,7 +400,7 @@ public class SdkEventLogger {
         map.put("adId", adId);
         map.put("uniqueId", uniqueId);
         map.put("androidId", androidId);
-        map.put("platform", context.getResources().getString(R.string.channel_platform));
+        map.put("platform", ResConfig.getChannelPlatform(context));
 
         return map;
     }

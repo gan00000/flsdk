@@ -6,6 +6,7 @@ import com.core.base.utils.ApkInfoUtil;
 import com.mw.sdk.R;
 import com.mw.sdk.constant.ChannelPlatform;
 import com.mw.sdk.constant.SdkInnerVersion;
+import com.mw.sdk.utils.ResConfig;
 
 import java.util.List;
 
@@ -49,7 +50,7 @@ public class ConfigBean {
         String packageName = context.getPackageName();
         String versionCode = ApkInfoUtil.getVersionCode(context);
         String versionName = ApkInfoUtil.getVersionName(context);
-        String channel_platform = context.getResources().getString(R.string.channel_platform);
+        String channel_platform = ResConfig.getChannelPlatform(context);
 
         if (subVersion != null){
 

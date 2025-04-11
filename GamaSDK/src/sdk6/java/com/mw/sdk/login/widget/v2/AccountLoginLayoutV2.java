@@ -28,6 +28,7 @@ import com.mw.sdk.login.widget.SDKInputType;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.mw.sdk.out.ISdkCallBack;
 import com.mw.sdk.utils.DialogUtil;
+import com.mw.sdk.utils.ResConfig;
 import com.mw.sdk.utils.SdkUtil;
 import com.mw.sdk.widget.SBaseDialog;
 
@@ -255,7 +256,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
         googleLoginView = contentView.findViewById(R.id.ggLoginView);
         nowggLoginView = contentView.findViewById(R.id.nowggLoginView);
 
-        String channel_platform = getActivity().getResources().getString(R.string.channel_platform);
+        String channel_platform = ResConfig.getChannelPlatform(getActivity());
         if (ChannelPlatform.NOWGG.getChannel_platform().equals(channel_platform)){
             nowggLoginView.setVisibility(View.VISIBLE);
         }else {

@@ -85,7 +85,7 @@ public class TDAnalyticsHelper {
                 return;
             }
 
-            String channel_platform = context.getResources().getString(R.string.channel_platform);
+            String channel_platform = ResConfig.getChannelPlatform(context);
 
             JSONObject superProperties = new JSONObject();
             superProperties.put("game_code", ResConfig.getGameCode(context));//字符串

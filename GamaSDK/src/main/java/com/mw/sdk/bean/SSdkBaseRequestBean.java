@@ -73,7 +73,7 @@ public class SSdkBaseRequestBean extends BaseReqeustBean {
         uniqueId = SdkUtil.getSdkUniqueId(context);
         referrer = SdkUtil.getReferrer(context);
 
-        platform = context.getResources().getString(R.string.channel_platform);
+        platform = ResConfig.getChannelPlatform(context);
 //        spy_advertiser = ResUtil.findStringByName(context,"spy_advertiser");
 
         gameName = ApkInfoUtil.getApplicationName(context);

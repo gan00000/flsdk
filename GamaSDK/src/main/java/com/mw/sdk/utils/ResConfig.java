@@ -17,6 +17,10 @@ public class ResConfig {
     //===========================================每個遊戲每個渠道都可能不一樣=======================================
     //===========================================参数配置start================================================
 
+    public static String getChannelPlatform(Context context) {
+       return context.getResources().getString(R.string.channel_platform);
+    }
+
     /**
      * 获取gameCode
      */

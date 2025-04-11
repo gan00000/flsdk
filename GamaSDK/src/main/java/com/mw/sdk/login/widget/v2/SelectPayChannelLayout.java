@@ -142,7 +142,7 @@ public class SelectPayChannelLayout extends SLoginBaseRelativeLayout {
 
             String gameCode = ResConfig.getGameCode(getContext().getApplicationContext());
             String loginTimestamp = SdkUtil.getSdkTimestamp(getContext());
-            String channel_platform = getContext().getResources().getString(R.string.channel_platform);
+            String channel_platform = ResConfig.getChannelPlatform(getContext());
             String rebate_url = String.format("%simage/sdk/%s/rebate_%s.png?t=%s", ResConfig.getCdnPreferredUrl(getContext()), gameCode, channel_platform, loginTimestamp);
 
             PL.d("rebate_url=" + rebate_url);
