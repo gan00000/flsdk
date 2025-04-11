@@ -253,7 +253,7 @@ android {
             resValue "string", "mw_tt_app_id", ""
             //rustore渠道
             resValue "string", "mw_vk_appid", "2063611100"
-            resValue "string", "mw_local_rustore_google", "true"
+            resValue "string", "mw_dialog_pay_add_type", "vk,xiaomi"
 
             //=======================================sdk config end==========================
 

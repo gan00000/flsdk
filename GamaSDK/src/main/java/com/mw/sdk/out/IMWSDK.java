@@ -191,7 +191,7 @@ public interface IMWSDK extends IGameLifeCycle {
     public void checkPreRegData(Activity activity, ISdkCallBack iSdkCallBack);
 
     public void showTogglePayDialog(Activity activity, PayCreateOrderReqBean payCreateOrderReqBean);
-    public void showGoogleRustorePayDialog(Activity activity, PayCreateOrderReqBean payCreateOrderReqBean);
+//    public void showGoogleRustorePayDialog(Activity activity, PayCreateOrderReqBean payCreateOrderReqBean);
 
     public void showSocialView(Activity activity);
 

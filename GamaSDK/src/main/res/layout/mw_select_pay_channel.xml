@@ -128,6 +128,30 @@
 
                 </RelativeLayout>
 
+                <RelativeLayout
+                    android:id="@+id/rl_select_channel_xm"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="8dp"
+                    >
+
+                    <ImageView
+                        android:id="@+id/bt_select_channel_xm"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:src="@mipmap/img_select_channel_ru" />
+
+
+                    <!--                    <ImageView-->
+                    <!--                        android:layout_width="42dp"-->
+                    <!--                        android:layout_height="35dp"-->
+                    <!--                        android:id="@+id/iv_select_channel_ru"-->
+                    <!--                        android:layout_alignParentEnd="true"-->
+                    <!--                        />-->
+
+                </RelativeLayout>
+
 
             </LinearLayout>
 

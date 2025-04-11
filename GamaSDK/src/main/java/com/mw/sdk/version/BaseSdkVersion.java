@@ -37,7 +37,7 @@ public abstract class BaseSdkVersion {
         return null;
     }
 
-    public IPay xiaomiPay(){
+    public IPay newXiaomiPay(){
 
         if (ThirdModuleUtil.existXiaomiModule()){
             return new XiaomiPayImpl();

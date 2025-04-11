@@ -18,8 +18,6 @@ import android.view.View;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 
-import androidx.annotation.NonNull;
-
 import com.core.base.BaseWebViewClient;
 import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.SFCallBack;
@@ -33,13 +31,7 @@ import com.core.base.utils.SignatureUtil;
 import com.core.base.utils.ToastUtils;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.play.core.review.ReviewInfo;
-import com.google.android.play.core.review.ReviewManager;
-import com.google.android.play.core.review.ReviewManagerFactory;
 import com.mw.base.bean.SPayType;
-import com.mw.base.utils.SdkVersionUtil;
 import com.mw.sdk.BuildConfig;
 import com.mw.sdk.MWBaseWebActivity;
 import com.mw.sdk.MWWebPayActivity;
@@ -100,6 +92,8 @@ import com.thirdlib.vk.VKPurchaseManger;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
@@ -129,9 +123,10 @@ public class BaseSdkImpl implements IMWSDK {
     protected SBaseDialog floatViewDialog;
 
     protected IPay iPay;
-    protected IPay iPay_Ru;
-    protected IPay iPay_GG;
-    protected IPay iPayOneStore;
+//    protected IPay iPay_Ru;
+//    protected IPay iPay_GG;
+//    protected IPay iPayOneStore;
+    private Map<String, IPay> iPayMap = new HashMap<>();
     protected IPayListener iPayListener;
     protected Activity activity;
 
@@ -463,7 +458,11 @@ public class BaseSdkImpl implements IMWSDK {
             iLogin.onCreate(activity);
         }
         iPay = IPayFactory.create(activity);
-        iPay.onCreate(activity);
+        if (iPay != null){
+            String channel_platform = activity.getResources().getString(R.string.channel_platform);
+            iPayMap.put(channel_platform, iPay);
+            iPay.onCreate(activity);
+        }
 
     }
 
@@ -597,7 +596,7 @@ public class BaseSdkImpl implements IMWSDK {
                 if (sFacebookProxy != null) {
                     sFacebookProxy.onDestroy(activity);
                 }
-
+                iPayMap.clear();
             }
         });
     }
@@ -1071,12 +1070,7 @@ public class BaseSdkImpl implements IMWSDK {
                             if (result.getData().isHideSelectChannel()) {//是否显示询问用户
                                 doWebPay(activity, payCreateOrderReqBean);
                             }else {//默认弹出显示询问用户
-                                String payChannel = activity.getResources().getString(R.string.mw_local_rustore_google);
-                                if("true".equals(payChannel)) {//同时支持Google和rustore充值、俄罗斯用
-                                    showGoogleRustorePayDialog(activity, payCreateOrderReqBean);
-                                }else {
-                                    showTogglePayDialog(activity, payCreateOrderReqBean);
-                                }
+                                showTogglePayDialog(activity, payCreateOrderReqBean);
                             }
 
                         }else {
@@ -1095,7 +1089,7 @@ public class BaseSdkImpl implements IMWSDK {
         doGooglePay(activity, payCreateOrderReqBean);
     }
 
-    public void showTogglePayDialog(Activity activity, PayCreateOrderReqBean payCreateOrderReqBean) {
+   /* public void showTogglePayDialog(Activity activity, PayCreateOrderReqBean payCreateOrderReqBean) {
 
         if (commonDialog != null){
             commonDialog.dismiss();
@@ -1124,54 +1118,48 @@ public class BaseSdkImpl implements IMWSDK {
         });
         commonDialog.setContentView(selectPayChannelLayout);
         commonDialog.show();
-    }
+    }*/
 
-    public void showGoogleRustorePayDialog(Activity activity, PayCreateOrderReqBean payCreateOrderReqBean) {
+    public void showTogglePayDialog(Activity activity, PayCreateOrderReqBean payCreateOrderReqBean) {
 
-        PL.i("showGoogleRustorePayDialog...");
-        if (iPay != null && iPay instanceof GooglePayImpl){
-            iPay_GG = iPay;
-        }
-
+        PL.i("showTogglePayDialog...");
         if (commonDialog != null){
             commonDialog.dismiss();
         }
         commonDialog = new SBaseDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
         SelectPayChannelLayout selectPayChannelLayout = new SelectPayChannelLayout(activity);
         selectPayChannelLayout.setsBaseDialog(commonDialog);
-        selectPayChannelLayout.setSfCallBack(new SFCallBack<Integer>() {
+        selectPayChannelLayout.setSfCallBack(new SFCallBack<ChannelPlatform>() {
             @Override
-            public void success(Integer result, String msg) {//google
+            public void success(ChannelPlatform result, String msg) {
 
-                if (iPay_GG != null){
-                    iPay = iPay_GG;
+                if(iPayMap.containsKey(result.getChannel_platform()) && iPayMap.get(result.getChannel_platform()) != null){
+                    iPay = iPayMap.get(result.getChannel_platform());
+                    PL.d("iPay already create...");
                 }else {
-                    iPay_GG = IPayFactory.create(activity, null);
-                    iPay = iPay_GG;
+                    IPay mxPay = IPayFactory.create(activity, result);
+                    if (mxPay != null){
+                        iPayMap.put(result.getChannel_platform(), mxPay);
+                        iPay = mxPay;
+                        iPay.onCreate(activity);
+                    }
                 }
 
                 doGooglePay(activity, payCreateOrderReqBean);
-                trackEvent(activity, EventConstant.EventName.select_google.name());
+                if (result == ChannelPlatform.GOOGLE){
+                    trackEvent(activity, EventConstant.EventName.select_google.name());
+                }
                 if (commonDialog != null){
                     commonDialog.dismiss();
                 }
             }
 
             @Override
-            public void fail(Integer result, String msg) {//第三方
+            public void fail(ChannelPlatform result, String msg) {//第三方
                 PL.i("setSfCallBack result = " + result);
-                if (result == 101){//第三方
-                    doWebPay(activity, payCreateOrderReqBean);
-                }else if (result == 102){//ru
 
-                    if (iPay_Ru != null){
-                        iPay = iPay_Ru;
-                    }else {
-                        iPay_Ru = IPayFactory.create(activity, ChannelPlatform.VK);
-                        iPay = iPay_Ru;
-                        iPay.onCreate(activity);
-                    }
-                    doGooglePay(activity, payCreateOrderReqBean);
+                if (result == ChannelPlatform.MEOW){//第三方
+                    doWebPay(activity, payCreateOrderReqBean);
                 }
 
                 trackEvent(activity, EventConstant.EventName.select_other.name());

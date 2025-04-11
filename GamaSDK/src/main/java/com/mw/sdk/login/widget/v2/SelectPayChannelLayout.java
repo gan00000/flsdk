@@ -12,6 +12,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.PL;
 import com.mw.sdk.R;
+import com.mw.sdk.constant.ChannelPlatform;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.mw.sdk.utils.ResConfig;
 import com.mw.sdk.utils.SdkUtil;
@@ -26,15 +27,16 @@ public class SelectPayChannelLayout extends SLoginBaseRelativeLayout {
 
     protected View ggPayView;
     private Button otherPayBtn;
-    private  View ruPayBtn;
+    //private  View ruPayBtn;
 
     protected View ruPayView;
+    protected View xmPayView;//小米
 
     private ImageView iv_select_channel_rebate;
 
-    private SFCallBack<Integer> sfCallBack;
+    private SFCallBack<ChannelPlatform> sfCallBack;
 
-    public void setSfCallBack(SFCallBack<Integer> sfCallBack) {
+    public void setSfCallBack(SFCallBack<ChannelPlatform> sfCallBack) {
         this.sfCallBack = sfCallBack;
     }
 
@@ -71,7 +73,8 @@ public class SelectPayChannelLayout extends SLoginBaseRelativeLayout {
         ggPayView = contentView.findViewById(R.id.iv_select_channel_gg);
         otherPayBtn = contentView.findViewById(R.id.bt_select_channel_other);
         ruPayView = contentView.findViewById(R.id.rl_select_channel_ru);
-        ruPayBtn = contentView.findViewById(R.id.bt_select_channel_ru);
+        //ruPayBtn = contentView.findViewById(R.id.bt_select_channel_ru);
+        xmPayView = contentView.findViewById(R.id.rl_select_channel_xm);
         iv_select_channel_rebate = contentView.findViewById(R.id.iv_select_channel_rebate);
 
         backView.setOnClickListener(new OnClickListener() {
@@ -88,7 +91,7 @@ public class SelectPayChannelLayout extends SLoginBaseRelativeLayout {
             public void onClick(View v) {
 
                 if (sfCallBack != null){
-                    sfCallBack.success(100,"google");
+                    sfCallBack.success(ChannelPlatform.GOOGLE,"");
                 }
             }
         });
@@ -98,25 +101,41 @@ public class SelectPayChannelLayout extends SLoginBaseRelativeLayout {
             public void onClick(View v) {
 
                 if (sfCallBack != null){
-                    sfCallBack.fail(101,"other");
+                    sfCallBack.fail(ChannelPlatform.MEOW,"");
                 }
             }
         });
-        ruPayBtn.setOnClickListener(new OnClickListener() {
+        ruPayView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if (sfCallBack != null){
-                    sfCallBack.fail(102,"rustore");
+                    sfCallBack.success(ChannelPlatform.VK,"");
                 }
             }
         });
 
-        String payChannel = getContext().getResources().getString(R.string.mw_local_rustore_google);
-        if("true".equals(payChannel)){
+        xmPayView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (sfCallBack != null){
+                    sfCallBack.success(ChannelPlatform.Xiaomi,"");
+                }
+            }
+        });
+
+        String payChannel = getContext().getResources().getString(R.string.mw_dialog_pay_add_type);
+        if(payChannel.contains(ChannelPlatform.VK.getChannel_platform())){
             ruPayView.setVisibility(View.VISIBLE);
         }else {
             ruPayView.setVisibility(View.GONE);
+        }
+
+        if(payChannel.contains(ChannelPlatform.Xiaomi.getChannel_platform())){
+            xmPayView.setVisibility(View.VISIBLE);
+        }else {
+            xmPayView.setVisibility(View.GONE);
         }
 
         try {

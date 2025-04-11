@@ -39,7 +39,7 @@ public class IPayFactory {
             return sdkVersionUtil.newNowggPay();
         }else if (ChannelPlatform.Xiaomi.getChannel_platform().equals(channel_platform)) {
             SdkVersionUtil sdkVersionUtil = new SdkVersionUtil();
-            return sdkVersionUtil.xiaomiPay();
+            return sdkVersionUtil.newXiaomiPay();
         }else {
             return new GooglePayImpl();
         }
