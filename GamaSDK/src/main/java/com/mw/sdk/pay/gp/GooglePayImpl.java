@@ -565,6 +565,9 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
 
                 for (Purchase purchase : purchases) {//这里其实只会有一笔
 
+                    /*注意： 只有在状态为 PURCHASED 时，您才能确认购买交易；即，在购买交易处于 PENDING 状态时，请勿确认该交易。
+                    三天内确认购买交易。在购买交易处于 PENDING 状态时，请勿确认该交易。
+                    当购买状态从“PENDING”转换为“PURCHASED”时，3 天的确认期限才会开始。*/
                     PL.i("launchPurchaseFlow onPurchasesUpdated = " + purchase.getPurchaseState());
                     if(purchase.getPurchaseState() == Purchase.PurchaseState.PURCHASED){
                         //发送到服务器,发币
@@ -613,7 +616,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
 
     @Override
     public void handleCancel(String msg) {
-        PL.i( "handleCancel");
+        PL.i( "pay handleCancel");
         dimissDialog();
     }
 }

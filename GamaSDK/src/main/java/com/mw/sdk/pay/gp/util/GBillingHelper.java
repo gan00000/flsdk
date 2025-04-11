@@ -60,7 +60,7 @@ public class GBillingHelper implements PurchasesUpdatedListener {
     @Override
     public void onPurchasesUpdated(@NonNull BillingResult billingResult, @Nullable List<Purchase> purchases) {
 
-        PL.i( "billing onPurchasesUpdated.");
+        PL.i( "billing onPurchasesUpdated.");//会被多种情况调用
         if (billingResult == null){
             if (billingHelperStatusCallback != null){
                 billingHelperStatusCallback.handleError(4, "onPurchasesUpdated billingResult null");
@@ -181,55 +181,8 @@ public class GBillingHelper implements PurchasesUpdatedListener {
             }
         });
 
-/*
-        ConsumeResponseListener listener = new ConsumeResponseListener() {
-            @Override
-            public void onConsumeResponse(BillingResult billingResult, @NonNull String purchaseToken) {
-
-                PL.i( "------consumeAsync finish--------");
-
-                if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
-                    // Handle the success of the consume operation.
-                    PL.i( "consumeAsync purchaseToken -> " + purchaseToken);
-
-                    if (consumeResponseListener != null){
-                        consumeResponseListener.onConsumeResponse(billingResult,purchaseToken);
-                    }
-
-                    if (mBillingCallbackList != null && !mBillingCallbackList.isEmpty()) {
-                        for (BillingHelperStatusCallback mBillingCallback : mBillingCallbackList) {
-                            mBillingCallback.onConsumeResult(context, billingResult, purchaseToken, purchase, isReplaceConsume);
-                        }
-                    }
-                } else {
-                    PL.i( "consumePurchase error code -> " + billingResult.getResponseCode());
-                    PL.i( "consumePurchase error message -> " + billingResult.getDebugMessage());
-                    if (consumeResponseListener != null){
-                        consumeResponseListener.onConsumeResponse(billingResult,null);
-                    }
-                    if (mBillingCallbackList != null && !mBillingCallbackList.isEmpty()) {
-                        for (BillingHelperStatusCallback mBillingCallback : mBillingCallbackList) {
-                            mBillingCallback.onConsumeResult(context, billingResult, purchaseToken, null, isReplaceConsume);
-                        }
-                    }
-                }
-            }
-        };
-        PL.i( "------consumeAsync start--------");
-        billingClient.consumeAsync(consumeParams, listener);*/
     }
 
-    /**
-     * 消费多个购买
-     *
-     * @param purchases
-     * @param isReplaceConsume 是否补单的消费
-     */
-//    public void consumePurchaseList(Context context, List<Purchase> purchases, boolean isReplaceConsume,ConsumeResponseListener consumeResponseListener) {
-//        for (Purchase purchase : purchases) {
-//            consumeAsync(context, purchase, isReplaceConsume,consumeResponseListener);
-//        }
-//    }
 
     /**
      * 查询商品详情
