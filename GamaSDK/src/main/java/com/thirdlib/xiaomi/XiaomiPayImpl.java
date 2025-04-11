@@ -201,7 +201,7 @@ public class XiaomiPayImpl implements IPay, XiaoMiPayManager.PurchaseCallback {
             loadingDialog = new LoadingDialog(activity);
         }
 
-        PL.w("vk set paying...");
+        PL.w("set paying...");
         isPaying = true;
 
         this.mActivity = activity;
@@ -212,7 +212,7 @@ public class XiaomiPayImpl implements IPay, XiaoMiPayManager.PurchaseCallback {
 //        }
 
         this.createOrderIdReqBean = (PayCreateOrderReqBean) payReqBean;
-        this.createOrderIdReqBean.setMode(ChannelPlatform.VK.getChannel_platform());
+        this.createOrderIdReqBean.setMode(ChannelPlatform.Xiaomi.getChannel_platform());
         //设置储值主域名
         this.createOrderIdReqBean.setRequestUrl(PayHelper.getPreferredUrl(activity));
         //设置储值备用域名
@@ -379,7 +379,7 @@ public class XiaomiPayImpl implements IPay, XiaoMiPayManager.PurchaseCallback {
                 exchangeReqBean.setProductId(purchase.getSkus().get(0));
                 //exchangeReqBean.setInvoiceId(purchase.getInvoiceId());
                 exchangeReqBean.setGoogleOrderId(purchaseId);
-                exchangeReqBean.setRequestMethod(ApiRequestMethod.API_PAYMENT_VK);
+                exchangeReqBean.setRequestMethod(ApiRequestMethod.API_PAYMENT_Xiaomi);
 
                 try {
 //      * obfuscatedAccountId 需要传递该用户在开发者侧的唯一Id，用于支付风控，为必传字段，最长200个字符。
@@ -451,7 +451,7 @@ public class XiaomiPayImpl implements IPay, XiaoMiPayManager.PurchaseCallback {
                 exchangeReqBean.setProductId(purchase.getSkus().get(0));
                 //exchangeReqBean.setInvoiceId(purchase.getInvoiceId());
                 exchangeReqBean.setGoogleOrderId(purchaseId);
-                exchangeReqBean.setRequestMethod(ApiRequestMethod.API_PAYMENT_VK);
+                exchangeReqBean.setRequestMethod(ApiRequestMethod.API_PAYMENT_Xiaomi);
 
                 try {
 //      * obfuscatedAccountId 需要传递该用户在开发者侧的唯一Id，用于支付风控，为必传字段，最长200个字符。
@@ -524,7 +524,7 @@ public class XiaomiPayImpl implements IPay, XiaoMiPayManager.PurchaseCallback {
                 exchangeReqBean.setProductId(purchase.getSkus().get(0));
                 //exchangeReqBean.setInvoiceId(purchase.getInvoiceId());
                 exchangeReqBean.setGoogleOrderId(purchaseId);
-                exchangeReqBean.setRequestMethod(ApiRequestMethod.API_PAYMENT_VK);
+                exchangeReqBean.setRequestMethod(ApiRequestMethod.API_PAYMENT_Xiaomi);
 
                 try {
 //      * obfuscatedAccountId 需要传递该用户在开发者侧的唯一Id，用于支付风控，为必传字段，最长200个字符。

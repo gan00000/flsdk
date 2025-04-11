@@ -63,6 +63,7 @@ public class ApiRequestMethod {
     public final static String API_PAYMENT_ONESTORE = "api/onestore/payment";
     public final static String API_PAYMENT_NOWGG = "api/nowgg/payment";
     public final static String API_PAYMENT_VK = "api/vk/payment";
+    public final static String API_PAYMENT_Xiaomi = "api/xiaomi/payment";
     public final static String API_PAYMENT_SAMSUNG = "api/samsung/payment";//https://pay.kodaduck.com/api/samsung/payment
 
     public final static String API_PAYMENT_CHANNEL = "api/payment/channel";
