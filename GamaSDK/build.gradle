@@ -265,6 +265,7 @@ dependencies {
 
     //小米
     implementation 'com.xiaomi.billingclient:billing:1.1.3'
+    implementation "com.miui.referrer:homereferrer:1.0.0.6"
 }
 
 
