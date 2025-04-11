@@ -234,7 +234,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
             callbackFail("can not find role info:" + this.createOrderIdReqBean.print());
         }
 //        isPaying = false;
-        PL.w("google set not paying");
+      //  PL.w("google set not paying");
     }
 
     private void dimissDialog() {
@@ -316,6 +316,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
     @Override
     public void onCreate(Activity activity) {
         PL.i( "onCreate");
+        this.mActivity = activity;
         GBillingHelper.getInstance().setBillingHelperStatusCallback(this);
     }
 
@@ -553,6 +554,10 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
 
         PL.i("launchPurchaseFlow onPurchasesUpdated finish...");
 
+        if (this.mActivity == null){
+            callbackFail("onPurchaseUpdate mActivity is null");
+            return;
+        }
         //支付回调
         this.mActivity.runOnUiThread(new Runnable() {
             @Override
@@ -599,8 +604,8 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
 
     @Override
     public void handleError(int m, String msg) {
-        PL.i( "handleError");
-        if (isPaying){
+        PL.i( "handleError isPaying=" +isPaying);
+        if (isPaying){//不是正在购买的时候，不提示错误弹框
             callbackFail(msg);
         }
 

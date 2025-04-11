@@ -95,7 +95,7 @@ public class GBillingHelper implements PurchasesUpdatedListener {
     private void startBillingService(Context context, BillingSetupCallback billingSetupCallback) {
 
         if (billingClient != null && billingClient.isReady() && isBillingInit) {
-
+            PL.d("startServiceConnection billingClient isReady");
             if (billingSetupCallback != null){
                 billingSetupCallback.onSuccess();
             }
@@ -112,7 +112,10 @@ public class GBillingHelper implements PurchasesUpdatedListener {
         }
         PL.i( "startServiceConnection start");
         isBillingInit = false;
-        billingClient = BillingClient.newBuilder(context).setListener(this).build();
+        billingClient = BillingClient.newBuilder(context)
+                .enablePendingPurchases()
+                .setListener(this)
+                .build();
         billingClient.startConnection(new BillingClientStateListener() {
             @Override
             public void onBillingSetupFinished(@NonNull BillingResult billingResult) {
@@ -121,13 +124,13 @@ public class GBillingHelper implements PurchasesUpdatedListener {
                 if (billingResponseCode == BillingClient.BillingResponseCode.OK) {
                     // The BillingClient is ready. You can query purchases here.
                     isBillingInit = true;
-                    PL.i( "onBillingSetupFinished -> success");
+                    PL.i( "startServiceConnection onBillingSetupFinished -> success");
                     if (billingSetupCallback != null){
                         billingSetupCallback.onSuccess();
                     }
 
                 } else {
-                    PL.i( "onBillingSetupFinished -> fail");
+                    PL.i( "startServiceConnection onBillingSetupFinished -> fail");
                     isBillingInit = false;
                     if (billingHelperStatusCallback != null){
                         billingHelperStatusCallback.handleError(1, billingResult.getDebugMessage());
@@ -138,7 +141,7 @@ public class GBillingHelper implements PurchasesUpdatedListener {
             @Override
             public void onBillingServiceDisconnected() {
                 // Logic from ServiceConnection.onServiceDisconnected should be moved here.
-                PL.i( "onBillingServiceDisconnected -> ");
+                PL.i( "startServiceConnection onBillingServiceDisconnected -> ");
                 isBillingInit = false;
                 if (billingHelperStatusCallback != null){
                     billingHelperStatusCallback.handleError(1, "onBillingServiceDisconnected");
@@ -260,18 +263,28 @@ public class GBillingHelper implements PurchasesUpdatedListener {
                     public void onProductDetailsResponse(@NonNull BillingResult billingResult, @NonNull List<ProductDetails> list) {
                         PL.i( "queryProductDetailsAsync finish ");
                         PL.i( "onQuerySkuResult error responseCode => " + billingResult.getResponseCode() + ",debugMessage => " + billingResult.getDebugMessage());
-                        if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && list != null && !list.isEmpty()) {
+                        if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
 
-                            if (billingHelperStatusCallback != null) {
-                                billingHelperStatusCallback.onQuerySkuResult(list, sku);
+                            if (list == null || list.isEmpty()){
+                                PL.i( "queryProductDetailsAsync ProductDetail list empty");
+                                if (billingHelperStatusCallback != null) {
+                                    billingHelperStatusCallback.handleError(2, "can not find ProductDetail=>" + sku);
+                                }
+
+                            }else {
+
+                                if (billingHelperStatusCallback != null) {
+                                    billingHelperStatusCallback.onQuerySkuResult(list, sku);
+                                }
+
+                                launchPurchaseFlow(activity, userId, orderId, list.get(0));
                             }
 
-                            launchPurchaseFlow(activity, userId, orderId, list.get(0));
 
                         }else{
                             PL.i( "queryProductDetailsAsync finish error => " + billingResult.getDebugMessage());
                             if (billingHelperStatusCallback != null) {
-                                billingHelperStatusCallback.handleError(2, "can not find ProductDetail=>" + sku);
+                                billingHelperStatusCallback.handleError(2, billingResult.getDebugMessage());
                             }
                         }
                     }
