@@ -115,6 +115,7 @@
                         android:id="@+id/bt_select_channel_ru"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
                         android:gravity="center"
                         android:src="@mipmap/img_select_channel_ru" />
 
@@ -133,14 +134,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
                     android:layout_marginTop="8dp"
+                    android:background="@drawable/sdk_bg_select_pay_channel_2"
+                    android:padding="4dp"
                     >
 
                     <ImageView
                         android:id="@+id/bt_select_channel_xm"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
                         android:gravity="center"
-                        android:src="@mipmap/img_select_channel_ru" />
+                        android:src="@mipmap/img_select_channel_xiaomi" />
 
 
                     <!--                    <ImageView-->
