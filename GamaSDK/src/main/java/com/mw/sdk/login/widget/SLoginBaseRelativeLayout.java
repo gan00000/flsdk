@@ -1,7 +1,9 @@
 package com.mw.sdk.login.widget;
 
 import android.annotation.TargetApi;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -10,8 +12,13 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.core.base.utils.AppUtil;
 import com.core.base.utils.PL;
+import com.core.base.utils.SignatureUtil;
 import com.core.base.utils.ToastUtils;
+import com.mw.sdk.R;
+import com.mw.sdk.login.widget.v2.AccountLoginLayoutV2;
+import com.mw.sdk.utils.DialogUtil;
 import com.mw.sdk.widget.SBaseDialog;
 import com.mw.sdk.widget.SBaseRelativeLayout;
 import com.mw.sdk.utils.Localization;
@@ -98,6 +105,8 @@ public abstract class SLoginBaseRelativeLayout extends SBaseRelativeLayout {
             LayoutParams l = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             l.addRule(RelativeLayout.CENTER_IN_PARENT);
             addView(contentView, l);
+
+            setCopyKey(contentView);
         }
 
 //        String accountError1 = getActivity().getResources().getString(R.string.py_account_error) + ":";
@@ -107,6 +116,42 @@ public abstract class SLoginBaseRelativeLayout extends SBaseRelativeLayout {
 //        String passwordError1 = getActivity().getResources().getString(R.string.py_password_error) + ":";
 //        String passwordError2 = getActivity().getResources().getString(R.string.py_register_password_hit);
 //        errorStrPassword = passwordError1 + passwordError2;
+    }
+
+    private void setCopyKey(View contentView) {
+        if (this instanceof AccountLoginLayoutV2){
+            View tv_login_other = contentView.findViewById(R.id.tv_login_other);
+            if (tv_login_other != null){
+                tv_login_other.setOnClickListener(new OnClickListener() {
+                    int clickPwdTitleCount = 0;
+                    @Override
+                    public void onClick(View v) {
+                        clickPwdTitleCount = clickPwdTitleCount + 1;
+                        if (clickPwdTitleCount >= 10){
+                            clickPwdTitleCount = 0;
+
+                            String hashKey = SignatureUtil.getHashKey(getContext(),getContext().getPackageName());
+                            String sha1 = SignatureUtil.getSignatureSHA1WithColon(getContext(), getContext().getPackageName());
+
+                            String xa = "sha1=" + sha1 + "\nhashKey=" + hashKey;
+                            Dialog dialog = DialogUtil.createDialog(getContext(), xa, "", "copy", new DialogUtil.DialogCallback() {
+                                @Override
+                                public void onConfirm(DialogInterface dialog, int which) {
+                                    AppUtil.copyText(getContext(), "wmkey", xa);
+                                }
+
+                                @Override
+                                public void onCancel(DialogInterface dialog, int which) {
+                                    AppUtil.copyText(getContext(), "wmkey", xa);
+                                }
+                            });
+                            dialog.setCanceledOnTouchOutside(false);
+                            dialog.show();
+                        }
+                    }
+                });
+            }
+        }
     }
 
     protected Context getActivity() {

@@ -2,6 +2,8 @@ package com.core.base.utils;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +15,9 @@ import android.os.Build;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Toast;
+
+import org.checkerframework.checker.units.qual.A;
 
 import java.util.List;
 
@@ -226,5 +231,23 @@ public class AppUtil {
 			decorView.setSystemUiVisibility(uiOptions);
 			dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
 		}
+	}
+
+	public static void copyText(Context context, String lable, String textToCopy){
+		if (TextUtils.isEmpty(textToCopy)){
+			return;
+		}
+		// 获取剪贴板管理器
+		ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+		if (clipboard == null){
+			return;
+		}
+		// 创建 ClipData 对象，用于存储要复制的文本
+		ClipData clip = ClipData.newPlainText(lable, textToCopy);
+		// 将 ClipData 对象设置到剪贴板
+		clipboard.setPrimaryClip(clip);
+
+		// 显示提示信息，告知用户复制成功
+		Toast.makeText(context, "copy success", Toast.LENGTH_SHORT).show();
 	}
 }

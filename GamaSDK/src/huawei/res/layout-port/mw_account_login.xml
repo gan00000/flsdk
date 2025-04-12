@@ -208,6 +208,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/text_login_other"
+                android:id="@+id/tv_login_other"
                 android:textColor="@color/c_C0C0C0"
                 android:textSize="11sp" />
 
