@@ -144,7 +144,7 @@ public abstract class AbsHttpRequest implements ISRqeust {
                 .map(new Function<String, String>() {
             @Override
             public String apply(String s) throws Throwable {
-                PL.i("apply");
+                PL.i("AbsHttpRequest map apply");
                 if(isCancel) {
                     return null;
                 }
@@ -162,12 +162,12 @@ public abstract class AbsHttpRequest implements ISRqeust {
                 .subscribe(new Observer<String>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-                        PL.i("onSubscribe");
+                        PL.i("AbsHttpRequest onSubscribe");
                     }
 
                     @Override
                     public void onNext(@NonNull String rawResponse) {
-                        PL.i("onNext");
+                        PL.i("AbsHttpRequest onNext");
 
                         if (loadDialog != null && loadDialog.isShowing()){
                             loadDialog.dismiss();
@@ -215,7 +215,7 @@ public abstract class AbsHttpRequest implements ISRqeust {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        PL.i("onError");
+                        PL.i("AbsHttpRequest onError");
                         if (loadDialog != null && loadDialog.isShowing()){
                             loadDialog.dismiss();
                         }
@@ -227,7 +227,7 @@ public abstract class AbsHttpRequest implements ISRqeust {
 
                     @Override
                     public void onComplete() {
-                        PL.i("onComplete");//onError()和onComplete()只会回调一个。
+                        PL.i("AbsHttpRequest onComplete");//onError()和onComplete()只会回调一个。
                         if (loadDialog != null && loadDialog.isShowing()){
                             loadDialog.dismiss();
                         }
