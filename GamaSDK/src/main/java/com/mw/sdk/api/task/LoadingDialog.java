@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.os.Build;
 
 import com.core.base.utils.PL;
+import com.mw.sdk.utils.DialogUtil;
 
 /**
  * Loading窗工具
@@ -79,22 +81,15 @@ public class LoadingDialog {
     }
 
 
-    /**
-     * <p>Title: complain</p>
-     * <p>Description: 弹出对话框</p>
-     * @param message
-     */
-    public void complain(String message) {
-        alert(message, null);
-    }
-
     public void alert(final String message,final DialogInterface.OnClickListener listener) {
         try{
             mActivity.runOnUiThread(new Runnable() {
 
                 @Override
                 public void run() {
-                    AlertDialog.Builder bld = new AlertDialog.Builder(mActivity);
+
+                    AlertDialog.Builder bld = DialogUtil.createBuilder(mActivity);
+
                     bld.setMessage(message);
                     bld.setCancelable(false);
                     bld.setPositiveButton("OK", listener);

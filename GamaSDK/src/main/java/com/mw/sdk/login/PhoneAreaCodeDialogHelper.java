@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 
 import com.mw.sdk.bean.PhoneInfo;
+import com.mw.sdk.utils.DialogUtil;
 import com.mw.sdk.utils.SdkUtil;
 
 import java.util.List;
@@ -50,7 +51,7 @@ public class PhoneAreaCodeDialogHelper {
             areaList[i] = areaBeanList.get(i).getText();
         }
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity)
+        AlertDialog.Builder builder = DialogUtil.createBuilder(activity)
                 .setItems(areaList, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

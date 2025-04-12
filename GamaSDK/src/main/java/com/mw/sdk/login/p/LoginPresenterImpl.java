@@ -72,9 +72,6 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 //    private static final String TAG = LoginPresenterImpl.class.getSimpleName();
     private Activity mActivity;
 
-    //是否自動登入的狀態
-    private boolean isAutoLogin = false;
-
     /**
      * SLoginDialogV2
      */
@@ -96,15 +93,6 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
      * 剩余倒数时间
      */
     private int resetTime;
-
-    //区域json
-    private String areaJson;
-    //区域bean列表
-    private PhoneInfo[] areaBeanList;
-    //已选中的区域bean
-    private PhoneInfo selectedBean;
-
-    int count = 3;
 
     private Activity getActivity(){
         return mActivity;
@@ -1564,32 +1552,6 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 //        } else {
 //            showAreaDialog();
 //        }
-    }
-
-    private void showAreaDialog() {
-        final String[] areaList = new String[areaBeanList.length];
-        for(int i = 0; i < areaBeanList.length; i++) {
-            areaList[i] = areaBeanList[i].getText();
-        }
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
-                .setItems(areaList, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        selectedBean = areaBeanList[which];
-//                        if(callback != null) {
-//                            callback.dataCallback(selectedBean);
-//                        }
-                        if(callbackList != null && callbackList.size() > 0) {
-                            for (SBaseRelativeLayout.OperationCallback callback : callbackList) {
-                                callback.dataCallback(selectedBean);
-                            }
-                        }
-                    }
-                });
-        AlertDialog d = builder.create();
-
-        d.show();
     }
 
     @Override

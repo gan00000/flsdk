@@ -376,10 +376,12 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
             callbackFail("googlePayInActivity mActivity is null");
             return;
         }
+        PL.d("start googlePayInActivity");
         this.mActivity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 //4.创建订单
+                PL.d("start googlePayInActivity PayApi.requestCreateOrder");
                 PayApi.requestCreateOrder(mActivity, createOrderIdReqBean, new SFCallBack<GPCreateOrderIdRes>() {
                     @Override
                     public void success(GPCreateOrderIdRes createOrderIdRes, String msg1) {
@@ -420,14 +422,15 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
     private int consumeFinish = 0;
     private int PurchaseState_PURCHASED_SIEZ = 0;
     private void handleMultipleConsmeAsyncWithResend(@NonNull List<Purchase> list, Activity activity, ConsumeResponseListener consumeResponseListener) {
-        PL.i("------handleMultipleConsmeAsyncWithResend-----");
+        PL.d("------handleMultipleConsmeAsyncWithResend-----");
         consumeFinish = 0;
         PurchaseState_PURCHASED_SIEZ = 0;
         if (list==null || list.isEmpty() || activity == null){
+            PL.d("------handleMultipleConsmeAsyncWithResend list empty-----");
             consumeResponseListener.onConsumeResponse(null,"");
             return;
         }
-
+        PL.d("------handleMultipleConsmeAsyncWithResend list=" + list.size());
         for (Purchase purchase : list) {
             if(purchase.getPurchaseState() == Purchase.PurchaseState.PURCHASED){
                 PurchaseState_PURCHASED_SIEZ++;
