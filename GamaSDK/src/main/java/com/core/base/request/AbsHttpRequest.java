@@ -133,6 +133,13 @@ public abstract class AbsHttpRequest implements ISRqeust {
         if (loadDialog != null && !loadDialog.isShowing()){
             loadDialog.show();
         }
+
+//        onNext 用于处理 Observable 发出的每个数据项。
+//        onError 用于处理 Observable 发出的错误。
+//        onComplete 用于表示 Observable 正常结束。
+//        在一个正确运行的事件序列中,onCompleted() 和 onError() 有且只有一个，
+//        并且是事件序列中的最后一个。需要注意的是，onCompleted() 和 onError() 二者也是互斥的，即在队列中调用了其中一个，就不应该再调用另一个。
+//        onError 和 onComplete 是互斥的，在一次数据流中只会有其中一个方法被调用，用于表示数据流的结束状态
         Observable.just("" + System.currentTimeMillis())
                 .map(new Function<String, String>() {
             @Override
@@ -165,7 +172,6 @@ public abstract class AbsHttpRequest implements ISRqeust {
                         if (loadDialog != null && loadDialog.isShowing()){
                             loadDialog.dismiss();
                         }
-
                         if(isCancel) {
                             return;
                         }
@@ -210,11 +216,21 @@ public abstract class AbsHttpRequest implements ISRqeust {
                     @Override
                     public void onError(@NonNull Throwable e) {
                         PL.i("onError");
+                        if (loadDialog != null && loadDialog.isShowing()){
+                            loadDialog.dismiss();
+                        }
+                        onNoData("");
+                        if (reqCallBack != null){
+                            reqCallBack.noData();//发生错误
+                        }
                     }
 
                     @Override
                     public void onComplete() {
                         PL.i("onComplete");//onError()和onComplete()只会回调一个。
+                        if (loadDialog != null && loadDialog.isShowing()){
+                            loadDialog.dismiss();
+                        }
                     }
                 });
        /* @SuppressLint("StaticFieldLeak") SRequestAsyncTask asyncTask = new SRequestAsyncTask() {
