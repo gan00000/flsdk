@@ -152,17 +152,19 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
 
                     if (!TextUtils.isEmpty(message)) {//提示错误信息
 
-                        loadingDialog.alert(message, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                        if (loadingDialog != null) {
+                            loadingDialog.alert(message, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
 
-                                dialog.dismiss();
+                                    dialog.dismiss();
 
-                                if (iPayCallBack != null) {
-                                    iPayCallBack.fail(null);
+                                    if (iPayCallBack != null) {
+                                        iPayCallBack.fail(null);
+                                    }
                                 }
-                            }
-                        });
+                            });
+                        }
 
                     } else {
 
@@ -611,7 +613,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
     @Override
     public void handleError(int m, String msg) {
         PL.i( "handleError isPaying=" +isPaying);
-        if (isPaying){//不是正在购买的时候，不提示错误弹框
+        if (mActivity != null && this.createOrderIdReqBean != null){//不是正在购买的时候，不提示错误弹框
             callbackFail(msg);
         }
 

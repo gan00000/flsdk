@@ -141,17 +141,19 @@ public class XiaomiPayImpl implements IPay, XiaoMiPayManager.PurchaseCallback {
 
                     if (!TextUtils.isEmpty(message)) {//提示错误信息
 
-                        loadingDialog.alert(message, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                        if (loadingDialog != null) {
+                            loadingDialog.alert(message, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
 
-                                dialog.dismiss();
+                                    dialog.dismiss();
 
-                                if (iPayCallBack != null) {
-                                    iPayCallBack.fail(null);
+                                    if (iPayCallBack != null) {
+                                        iPayCallBack.fail(null);
+                                    }
                                 }
-                            }
-                        });
+                            });
+                        }
 
                     } else {
 
@@ -389,7 +391,7 @@ public class XiaomiPayImpl implements IPay, XiaoMiPayManager.PurchaseCallback {
                     String orderId = payLoadJsonObject.optString("orderId");
                     String roleId = payLoadJsonObject.optString("roleId");
                     exchangeReqBean.setUserId(userId);
-                    exchangeReqBean.setOrderId(purchase.getOrderId());
+                    exchangeReqBean.setOrderId(orderId);
                     exchangeReqBean.setRoleId(roleId);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -461,7 +463,7 @@ public class XiaomiPayImpl implements IPay, XiaoMiPayManager.PurchaseCallback {
                     String orderId = payLoadJsonObject.optString("orderId");
                     String roleId = payLoadJsonObject.optString("roleId");
                     exchangeReqBean.setUserId(userId);
-                    exchangeReqBean.setOrderId(purchase.getOrderId());
+                    exchangeReqBean.setOrderId(orderId);
                     exchangeReqBean.setRoleId(roleId);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -491,9 +493,9 @@ public class XiaomiPayImpl implements IPay, XiaoMiPayManager.PurchaseCallback {
 
     @Override
     public void onPayingQueryPurchaseSucceed(List<Purchase> purchases) {
-
+        PL.d("onPayingQueryPurchaseSucceed");
         if (purchases == null || purchases.isEmpty()){
-            PL.i("onQueryPurchaseSucceed empty");
+            PL.d("onQueryPurchaseSucceed empty");
             onePayInActivity(mActivity);
             return;
         }
@@ -534,7 +536,7 @@ public class XiaomiPayImpl implements IPay, XiaoMiPayManager.PurchaseCallback {
                     String orderId = payLoadJsonObject.optString("orderId");
                     String roleId = payLoadJsonObject.optString("roleId");
                     exchangeReqBean.setUserId(userId);
-                    exchangeReqBean.setOrderId(purchase.getOrderId());
+                    exchangeReqBean.setOrderId(orderId);
                     exchangeReqBean.setRoleId(roleId);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -570,8 +572,8 @@ public class XiaomiPayImpl implements IPay, XiaoMiPayManager.PurchaseCallback {
 
     @Override
     public void onError(XiaoMiPayManager.ReqType type, String message){
-        PL.i("onError:" + message);
-        if (isPaying){//此时用户正在购买
+        PL.i("onError:" + message + ", isPaying=" + isPaying);
+        if (mActivity != null && this.createOrderIdReqBean != null){//此时用户正在购买
             callbackFail("" + message);
         }
     }
