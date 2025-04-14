@@ -141,6 +141,11 @@ android {
             resValue "string", "sdk_inner_version", "leidian"
         }
 
+        xiao7 {//雷电
+            dimension '1'
+            resValue "string", "sdk_inner_version", "xiao7"
+        }
+
     }
 }
 
@@ -259,6 +264,8 @@ dependencies {
     //文件下载：版本更新
     LDImplementation 'com.liulishuo.filedownloader:library:1.7.7'
 
+    //小7
+    implementation 'io.github.x7sy-sm:x7sdk-androidx:8.18.2'
 }
 
 

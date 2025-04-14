@@ -488,6 +488,11 @@ android {
 //            resValue "string", "sdk_name", "lunqi demo"
 
         }
+
+        Xiao7 {
+
+            dimension "1"
+        }
     }
 
     android {
