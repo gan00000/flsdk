@@ -281,39 +281,16 @@ android {
             versionCode 10
             versionName "1.0"
             dimension "area"
-//            applicationId "com.wanxi.mxwvn"
-//            resValue "string", "scheme", "mxwvn"
-//            resValue "string", "facebook_app_id", "183738678011380"
-//            resValue "string", "facebook_client_token", "4c7d1e1d2ad407d5e092d51df0265346"
-//            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider183738678011380" //启用分析
-//            resValue "string", "fb_login_protocol_scheme", "fb183738678011380"
-//            resValue "string", "facebook_app_name", "这里写游戏名称"
-//            resValue "string", "line_channelId", ""
-//            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow"
-//            //adjust
-//            resValue "string", "adjust_app_token", "532wtpjybw8w"
-
-            //tgvn
-//            applicationId "com.yuewan.tgvn"
-//            resValue "string", "scheme", "tgvn"
-//            resValue "string", "facebook_app_id", "1088087752595651"
-//            resValue "string", "facebook_client_token", "fe699b0005ecf4a32149c8aa502ca470"
-//            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1088087752595651" //启用分析
-//            resValue "string", "fb_login_protocol_scheme", "fb1088087752595651"
-//            resValue "string", "facebook_app_name", "这里写游戏名称"
-//            resValue "string", "line_channelId", ""
-//            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,第三方apk包设置"meow"
-
 
             //=======================================sdk config==========================
-            applicationId "com.yuewan.tgvn"
+            applicationId "com.yuewan.tgvn.ld"
             //base
             resValue "string", "sdk_game_code", "tgvn"
             resValue "string", "sdk_app_key", "eb02cd5a2f5e1cbbdd5d315a6cb41b5f"
             resValue "string", "sdk_more_language", "true"
             resValue "string", "sdk_default_server_language", "vi_VN"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
             resValue "string", "scheme", "tgvn"
-            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"、samsung
+            resValue "string", "channel_platform", "leidian"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"、samsung
             //facebook
             resValue "string", "facebook_app_id", "1088087752595651"
             resValue "string", "facebook_client_token", "fe699b0005ecf4a32149c8aa502ca470"
@@ -322,12 +299,18 @@ android {
             resValue "string", "facebook_app_name", "tgvn" //游戏名字
             //ad
             resValue "string", "adjust_app_token", ""
-            resValue "string", "sdk_appflyer_dev_key", "f6D2ctMkx7VYohiRWpnmGE"
+            resValue "string", "sdk_appflyer_dev_key", ""
             //line
             resValue "string", "line_channelId", ""
             //naver
             resValue "string", "naver_client_id", ""
             resValue "string", "naver_client_secret", ""
+
+            //雷电
+            resValue "string", "wm_ld_app_id", "100126"
+            resValue "string", "wm_ld_app_key", "9a2cfe12c10dbd6525a9d88aed0ed771"  //ServiceKey: 5d6a9d7d572a2283cd728513bffb4691
+            resValue "string", "wm_ld_channel_id", "100000"
+            resValue "string", "wm_ld_sun_channel_id", "100001"
             //=======================================sdk config end==========================
 
             //每个游戏的demo设置 test
@@ -467,42 +450,42 @@ android {
 
         LD {
 
-            versionCode 10
-            versionName "1.0"
             dimension "1"
-            //=======================================sdk config start ==========================
-
-            signingConfig signingConfigs.release_v2
-            //base
-            applicationId "com.wanxin.tgenlunplay"
-            minSdkVersion 21
-            targetSdkVersion 34
-
-            resValue "string", "sdk_game_code", "tgen"
-            resValue "string", "sdk_app_key", "c999bd3d4cb5d1239c0c30bfc70506f2"
-            resValue "string", "sdk_more_language", "true"
-            resValue "string", "sdk_default_server_language", "en_US"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
-            resValue "string", "scheme", "tgen"
-            resValue "string", "channel_platform", "leidian"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
-            //facebook
-            resValue "string", "facebook_app_id", "1a"
-            resValue "string", "facebook_client_token", "1a"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1a"
-            resValue "string", "fb_login_protocol_scheme", "fb1a"
-            resValue "string", "facebook_app_name", "tgen" //游戏名字
-            //ad
-            resValue "string", "adjust_app_token", ""
-            resValue "string", "sdk_appflyer_dev_key", ""
-            //line
-            resValue "string", "line_channelId", ""
-            //naver
-            resValue "string", "naver_client_id", ""
-            resValue "string", "naver_client_secret", ""
-
-            //=======================================sdk config end==========================
-
-
-            resValue "string", "sdk_name", "lunqi demo"
+//            versionCode 10
+//            versionName "1.0"
+//            //=======================================sdk config start ==========================
+//
+//            signingConfig signingConfigs.release_v2
+//            //base
+//            applicationId "com.wanxin.tgenlunplay"
+//            minSdkVersion 21
+//            targetSdkVersion 34
+//
+//            resValue "string", "sdk_game_code", "tgen"
+//            resValue "string", "sdk_app_key", "c999bd3d4cb5d1239c0c30bfc70506f2"
+//            resValue "string", "sdk_more_language", "true"
+//            resValue "string", "sdk_default_server_language", "en_US"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
+//            resValue "string", "scheme", "tgen"
+//            resValue "string", "channel_platform", "leidian"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
+//            //facebook
+//            resValue "string", "facebook_app_id", "1a"
+//            resValue "string", "facebook_client_token", "1a"
+//            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1a"
+//            resValue "string", "fb_login_protocol_scheme", "fb1a"
+//            resValue "string", "facebook_app_name", "tgen" //游戏名字
+//            //ad
+//            resValue "string", "adjust_app_token", ""
+//            resValue "string", "sdk_appflyer_dev_key", ""
+//            //line
+//            resValue "string", "line_channelId", ""
+//            //naver
+//            resValue "string", "naver_client_id", ""
+//            resValue "string", "naver_client_secret", ""
+//
+//            //=======================================sdk config end==========================
+//
+//
+//            resValue "string", "sdk_name", "lunqi demo"
 
         }
     }
@@ -571,6 +554,6 @@ if (isHuaweiFlavor()){
 
 }else {
     //Google包，第三方包设置
-    apply plugin: 'com.google.gms.google-services'
-    apply plugin: 'com.google.firebase.crashlytics'
+//    apply plugin: 'com.google.gms.google-services'
+//    apply plugin: 'com.google.firebase.crashlytics'
 }

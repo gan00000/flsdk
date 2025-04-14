@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 
 import com.core.base.callback.SFCallBack;
+import com.core.base.utils.AppUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
@@ -378,25 +379,31 @@ public class MWSdkImpl extends BaseSdkImpl {
 
     }
 
-    @Override
-    public void shareLine(Activity activity, String content, ISdkCallBack iSdkCallBack) {
-    }
-
-    @Override
-    public void shareFacebook(Activity activity, String hashTag, String message, String shareLinkUrl, ISdkCallBack iSdkCallBack) {
-    }
-
-    @Override
-    public void share(Activity activity, String hashTag, String message, String shareLinkUrl, ISdkCallBack iSdkCallBack) {
-    }
+//    @Override
+//    public void shareLine(Activity activity, String content, ISdkCallBack iSdkCallBack) {
+//        PL.i("shareLine");
+//    }
+//
+//    @Override
+//    public void shareFacebook(Activity activity, String hashTag, String message, String shareLinkUrl, ISdkCallBack iSdkCallBack) {
+//        PL.i("shareFacebook");
+//    }
+//
+//    @Override
+//    public void share(Activity activity, String hashTag, String message, String shareLinkUrl, ISdkCallBack iSdkCallBack) {
+//        PL.i("share");
+//    }
 
     @Override
     public void share(Activity activity, ThirdPartyType type, String hashTag, String message, String shareLinkUrl, String picPath, ISdkCallBack iSdkCallBack) {
+        PL.i("share 。。。");
+        AppUtil.openInOsWebApp(activity, " https://www.facebook.com/ldgameofficial");
     }
 
     @Override
     public void requestStoreReview(Activity activity, SFCallBack sfCallBack) {
-
+        PL.i("requestStoreReview 。。。");
+        AppUtil.openInOsWebApp(activity, " https://www.facebook.com/ldgameofficial");
     }
 
     @Override
@@ -436,4 +443,6 @@ public class MWSdkImpl extends BaseSdkImpl {
 
         XLSDK.getInstance().callFunctionWithParams(activity,2, "");
     }
+
+
 }
