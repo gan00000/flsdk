@@ -68,6 +68,26 @@ public class DialogUtil {
 
     //alert
 
+    public static void showAlert(Context context, String message) {
+        if (TextUtils.isEmpty(message)){
+            return;
+        }
+        Dialog dialog =  createDialog(context, message, "", "OK", false, new DialogCallback() {
+            @Override
+            public void onConfirm(DialogInterface dialog, int which) {
+
+            }
+
+            @Override
+            public void onCancel(DialogInterface dialog, int which) {
+
+            }
+        });
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+
+    }
+
     public static Dialog createDialog(Context context, String message, String cancelText, String confirmText, DialogCallback callback) {
         return createDialog(context,message,cancelText,confirmText,true,callback);
     }

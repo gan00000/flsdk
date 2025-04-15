@@ -4,6 +4,7 @@ import android.app.Activity;
 
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.PL;
+import com.mw.sdk.utils.DialogUtil;
 import com.thirdlib.ThirdModuleUtil;
 
 import ru.rustore.sdk.review.RuStoreReviewManager;
@@ -42,6 +43,7 @@ public class RustoreManager {
                 .addOnFailureListener(throwable -> {
                     // Handle
                     PL.w("RuStoreReviewManager requestReviewFlow error=>" + throwable.getMessage());
+                    DialogUtil.showAlert(activity, "error:" + throwable.getMessage());
                     throwable.printStackTrace();
                     if (sfCallBack != null){
                         sfCallBack.fail("","");
