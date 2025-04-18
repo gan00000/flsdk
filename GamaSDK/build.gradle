@@ -82,6 +82,11 @@ android {
             resValue "string", "sdk_inner_version", "v3"
         }
 
+        sdk3_ifg {//第三套
+            dimension '1'
+            resValue "string", "sdk_inner_version", "v3"
+        }
+
         sdk4 {//第4套
             dimension '1'
             resValue "string", "sdk_inner_version", "v4"
@@ -114,11 +119,6 @@ android {
             dimension '1'
             resValue "string", "sdk_inner_version", "vn"
             resValue "string", "mw_td_appid", "be82e99387084fc4ac927264efa5ec51"
-        }
-        vn_ifg {//越南 gllyo
-            dimension '1'
-            resValue "string", "sdk_inner_version", "vn"
-            resValue "string", "mw_td_appid", ""
         }
 
         sdk6 {//第6套，东南亚

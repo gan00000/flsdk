@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!--<uses-permission android:name="android.permission.READ_PHONE_STATE"/>-->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" tools:node="remove"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/sdk_name"
+        android:resizeableActivity="false"
+        android:usesCleartextTraffic="true"
+        android:supportsRtl="true">
+
+       <!-- <activity
+            android:name="com.game.sdk.demo.DoPermissionReq"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|fontScale"
+            android:screenOrientation="sensor"
+            android:theme="@style/Gama.Theme.AppCompat.Light.NoActionBar.FullScreen"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+            &lt;!&ndash;<intent-filter>&ndash;&gt;
+            &lt;!&ndash;<action android:name="android.intent.action.MAIN" />&ndash;&gt;
+
+            &lt;!&ndash;<category android:name="android.intent.category.LAUNCHER" />&ndash;&gt;
+            &lt;!&ndash;</intent-filter>&ndash;&gt;
+        </activity>-->
+
+        <activity
+            android:name="com.game.sdk.demo.MainActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|fontScale"
+            android:screenOrientation="sensor"
+            android:theme="@style/Sdk.Theme.AppCompat.Light.NoActionBar.FullScreen"
+            android:windowSoftInputMode="stateHidden|adjustResize|adjustPan"
+            android:launchMode="singleTask"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <!--俄罗斯vk需要-->
+            <intent-filter>
+                <data android:scheme="@string/scheme" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+
+
+        </activity>
+
+    </application>
+
+</manifest>
