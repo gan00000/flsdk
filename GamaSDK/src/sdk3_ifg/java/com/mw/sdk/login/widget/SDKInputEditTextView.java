@@ -108,7 +108,7 @@ public class SDKInputEditTextView extends RelativeLayout {
         contentView =  inflater.inflate(R.layout.sdk_input_item_et, null);
         if (contentView != null) {
 
-            LayoutParams l = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            LayoutParams l = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             l.addRule(RelativeLayout.CENTER_IN_PARENT);
             addView(contentView, l);
 

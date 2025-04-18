@@ -1,24 +1,22 @@
 package com.mw.sdk.login.widget.v2;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.mw.sdk.R;
+import com.mw.sdk.bean.AccountModel;
 import com.mw.sdk.bean.res.ConfigBean;
 import com.mw.sdk.constant.ViewType;
-import com.mw.sdk.utils.SdkUtil;
 import com.mw.sdk.login.SLoginDialogV2;
-import com.mw.sdk.constant.SLoginType;
-import com.mw.sdk.bean.AccountModel;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
-import com.mw.sdk.R;
+import com.mw.sdk.utils.SdkUtil;
 
 import java.util.List;
 
@@ -29,10 +27,13 @@ import java.util.List;
 public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View.OnClickListener {
 
     private View contentView;
+    private View regLayoutTabView;
+    private View layout_delete_account2;
     private TextView loginTabView, regTabView;
     private View login_bottom_line,register_bottom_line,iv_login_reg_back;
 
     private LinearLayout ll_reg_login_title;
+    private RelativeLayout llTabViewlogin;
 
     public AccountLoginLayoutV2 getmAccountLoginV2() {
         return mAccountLoginV2;
@@ -50,6 +51,8 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
     Animation login_enter_animation;
     Animation reg_out_animation;
     Animation reg_enter_animation;
+
+    ConfigBean.VersionData versionData;
 
     public AccountRegisterLayoutV2 getmAccountRegisterLayoutV2() {
         return mAccountRegisterLayoutV2;
@@ -76,18 +79,24 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
 
         contentView = inflater.inflate(R.layout.mw_login_reg, null);
         iv_login_reg_back = contentView.findViewById(R.id.iv_login_reg_back);
+
+        regLayoutTabView = contentView.findViewById(R.id.regLayoutTabView);
         loginTabView = contentView.findViewById(R.id.loginTabView);
         regTabView = contentView.findViewById(R.id.regTabView);
         login_bottom_line = contentView.findViewById(R.id.loginTabView_bottom_line);
         register_bottom_line = contentView.findViewById(R.id.regTabView_bottom_line);
+        llTabViewlogin = contentView.findViewById(R.id.llTabViewlogin);
 
         ll_reg_login_title = contentView.findViewById(R.id.ll_reg_login_title);
         mAccountLoginV2 = contentView.findViewById(R.id.pyAccountLoginV2Id);
         mAccountRegisterLayoutV2 = contentView.findViewById(R.id.accountRegisterLayoutV2Id);
+        layout_delete_account2 = contentView.findViewById(R.id.layout_delete_account2);
+        layout_delete_account2.setVisibility(GONE);
 
         loginTabView.setOnClickListener(this);
         regTabView.setOnClickListener(this);
         iv_login_reg_back.setOnClickListener(this);
+        layout_delete_account2.setOnClickListener(this);
 
         login_out_animation = AnimationUtils.loadAnimation(getContext(),R.anim.mw_login_out);
         login_out_animation.setAnimationListener(new Animation.AnimationListener() {
@@ -163,7 +172,7 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
 
         ConfigBean configBean = SdkUtil.getSdkCfg(getContext());
         if (configBean != null){
-            ConfigBean.VersionData versionData = configBean.getSdkConfigLoginData(getContext());
+            versionData = configBean.getSdkConfigLoginData(getContext());
             if (versionData != null){
 
                 if(versionData.isDeleteAccount()){
@@ -174,6 +183,22 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
                     titleLayoutParams.topMargin = titleLayoutParams.topMargin / 2 + titleLayoutParams.topMargin;
                     ll_reg_login_title.setLayoutParams(titleLayoutParams);
                 }
+                
+                if (!versionData.isShowRegPage()){
+                    regLayoutTabView.setVisibility(GONE);
+                    LayoutParams rlTabLoginLayoutParams = (LayoutParams) llTabViewlogin.getLayoutParams();
+                    rlTabLoginLayoutParams.removeRule(RelativeLayout.ALIGN_PARENT_END);
+                    rlTabLoginLayoutParams.setMarginEnd(0);
+                    rlTabLoginLayoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
+                    llTabViewlogin.setLayoutParams(rlTabLoginLayoutParams);
+                }
+
+                if(versionData.isDeleteAccount()){
+                    layout_delete_account2.setVisibility(View.VISIBLE);
+                }else{
+                    layout_delete_account2.setVisibility(View.GONE);
+                }
+
             }
         }
 
@@ -218,6 +243,8 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
 
             }
             sLoginDialogv2.distoryView(this);
+        }else if (v == layout_delete_account2){
+            mAccountLoginV2.showDeleteDialog();
         }
     }
 
@@ -229,7 +256,7 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
         mAccountRegisterLayoutV2.onViewVisible();
 
         if (this.fromView == ViewType.WelcomeView || this.fromView == null){
-            iv_login_reg_back.setVisibility(View.INVISIBLE);
+            iv_login_reg_back.setVisibility(View.GONE);
         }
     }
 
@@ -256,12 +283,15 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
             }
             mAccountLoginV2.setVisibility(VISIBLE);
             mAccountRegisterLayoutV2.setVisibility(VISIBLE);
+            if(versionData != null && versionData.isDeleteAccount()){
+                layout_delete_account2.setVisibility(VISIBLE);
+            }
 
 //            loginTabView.setBackgroundResource(R.drawable.login_tab_red_left_cons_bg);
 //            regTabView.setBackgroundResource(R.drawable.login_tab_white_right_cons_bg);
 
             loginTabView.setTextColor(getContext().getResources().getColor(R.color.c_F94925));
-            regTabView.setTextColor(getContext().getResources().getColor(R.color.white_c));
+            regTabView.setTextColor(getContext().getResources().getColor(R.color.c_text));
 
             login_bottom_line.setVisibility(View.VISIBLE);
             register_bottom_line.setVisibility(View.INVISIBLE);
@@ -277,11 +307,12 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
 
             mAccountLoginV2.setVisibility(VISIBLE);
             mAccountRegisterLayoutV2.setVisibility(VISIBLE);
+            layout_delete_account2.setVisibility(GONE);
 
 //            loginTabView.setBackgroundResource(R.drawable.login_tab_white_left_cons_bg);
 //            regTabView.setBackgroundResource(R.drawable.login_tab_red_right_cons_bg);
 
-            loginTabView.setTextColor(getContext().getResources().getColor(R.color.white_c));
+            loginTabView.setTextColor(getContext().getResources().getColor(R.color.c_text));
             regTabView.setTextColor(getContext().getResources().getColor(R.color.c_F94925));
 
             login_bottom_line.setVisibility(View.INVISIBLE);

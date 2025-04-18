@@ -80,7 +80,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="32dp"
                 android:layout_marginStart="12dp"
-                android:background="@drawable/sdk_btn3_corners20_bg"
+                android:background="@drawable/sdk_btn3_corners16_bg"
                 android:text="@string/text_i_read_agree"
                 android:textColor="@color/white_c"
                 android:textSize="15sp" />

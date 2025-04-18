@@ -15,21 +15,20 @@ import android.widget.TextView;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
-import com.mw.sdk.constant.SLoginType;
-import com.mw.sdk.bean.res.ConfigBean;
-import com.mw.sdk.constant.ViewType;
-import com.mw.sdk.utils.SdkUtil;
 import com.mw.base.utils.SdkVersionUtil;
-import com.mw.sdk.widget.SBaseRelativeLayout;
-import com.mw.sdk.login.AccountPopupWindow;
+import com.mw.sdk.R;
+import com.mw.sdk.bean.AccountModel;
+import com.mw.sdk.bean.res.ConfigBean;
 import com.mw.sdk.constant.BindType;
 import com.mw.sdk.constant.SLoginType;
-import com.mw.sdk.bean.AccountModel;
+import com.mw.sdk.constant.ViewType;
+import com.mw.sdk.login.AccountPopupWindow;
 import com.mw.sdk.login.widget.SDKInputEditTextView;
 import com.mw.sdk.login.widget.SDKInputType;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
-import com.mw.sdk.R;
 import com.mw.sdk.utils.DialogUtil;
+import com.mw.sdk.utils.SdkUtil;
+import com.mw.sdk.widget.SBaseRelativeLayout;
 
 import java.util.List;
 

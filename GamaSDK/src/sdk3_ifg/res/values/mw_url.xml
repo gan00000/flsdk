@@ -44,4 +44,7 @@
     <!--    数数-->
     <string name="mw_td_te_server_url">https://shushu.wulagame.com/</string>
 
+    <!--客服-->
+    <string name="mw_sdk_customer_url">https://platform.tthplay.com/sdk/api/customer.page</string>
+
 </resources>

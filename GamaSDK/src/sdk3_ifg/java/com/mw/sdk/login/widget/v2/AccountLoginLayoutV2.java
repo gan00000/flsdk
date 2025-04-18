@@ -2,6 +2,8 @@ package com.mw.sdk.login.widget.v2;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -15,6 +17,7 @@ import android.widget.PopupWindow;
 
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.PL;
+import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
 import com.mw.base.utils.SdkVersionUtil;
 import com.mw.sdk.R;
@@ -114,24 +117,6 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         super.onLayout(changed, l, t, r, b);
         PL.i("view onLayout");
-//        if (isResizeView || layout_delete_account.getVisibility() == View.VISIBLE){
-//            return;
-//        }
-//        this.post(new Runnable() {
-//            @Override
-//            public void run() {
-//                View xxView = AccountLoginLayoutV2.this;
-//                int accountViewH = xxView.getHeight();
-//                int delete_account_parent_h = layout_delete_account_parent.getHeight();
-//                accountViewH = accountViewH - delete_account_parent_h;
-//
-//                ViewGroup.LayoutParams layoutParams = xxView.getLayoutParams();
-//                layoutParams.height = accountViewH;
-//
-//                isResizeView = true;
-//                xxView.setLayoutParams(layoutParams);
-//            }
-//        });
     }
 
     @Override
@@ -166,7 +151,6 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
         layout_delete_account = contentView.findViewById(R.id.layout_delete_account);
         layout_delete_account_parent = contentView.findViewById(R.id.layout_delete_account_parent);
         layout_delete_account.setVisibility(View.GONE);
-//        layout_delete_account_parent.setVisibility(View.GONE);
 
         layout_delete_account.setOnClickListener(new OnClickListener() {
             @Override
@@ -253,6 +237,9 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
         macLoginView = contentView.findViewById(R.id.guestLoginView);
         googleLoginView = contentView.findViewById(R.id.ggLoginView);
 
+        //登录界面添加一个按钮，用来做资质跳转
+        View vnGoReviewWebView = contentView.findViewById(R.id.vnGoReviewWebView);
+
         ConfigBean configBean = SdkUtil.getSdkCfg(getContext());
         if (configBean != null){
             ConfigBean.VersionData versionData = configBean.getSdkConfigLoginData(getContext());
@@ -269,23 +256,47 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
                 if(!versionData.isLineLogin()){
                     lineLoginView.setVisibility(View.GONE);
                 }
-                if(!versionData.isShowContract()){
+                if(!versionData.isShowContract()){ //服务条款
                     cb_agree_term.setVisibility(View.GONE);
                     tv_login_term.setVisibility(View.GONE);
                 }
-                if(versionData.isDeleteAccount()){
-                    layout_delete_account.setVisibility(View.VISIBLE);
-//                    layout_delete_account_parent.setVisibility(View.VISIBLE);
-                }else{
-                    layout_delete_account.setVisibility(View.GONE);
-//                    layout_delete_account_parent.setVisibility(View.GONE);
-                }
+//                if(versionData.isDeleteAccount()){
+//                    layout_delete_account.setVisibility(View.VISIBLE);
+//                }else{
+//                    layout_delete_account.setVisibility(View.GONE);
+//                }
                 if(!versionData.isShowForgetPwd()){
                     loginMainGoFindPwd.setVisibility(View.GONE);
                     loginMainGoFindPwd.setTag(100);
                 }
 
+//                if (versionData.isVnIsReview()){
+//                    vnGoReviewWebView.setVisibility(VISIBLE);
+//                }else {
+//                    vnGoReviewWebView.setVisibility(View.GONE);
+//                }
+                vnGoReviewWebView.setVisibility(View.GONE);
+
             }
+            vnGoReviewWebView.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (configBean.getUrl() != null && SStringUtil.isNotEmpty(configBean.getUrl().getVnReviewUrl())){
+                        Uri uri = Uri.parse(configBean.getUrl().getVnReviewUrl());
+                        Intent other_intent = new Intent(Intent.ACTION_VIEW,uri);
+                        other_intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                        try {
+                            getActivity().startActivity(other_intent);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }else {
+                        ToastUtils.toast(getContext(),"Url not configured");
+                    }
+
+                }
+            });
         }
 
         fbLoginView.setOnClickListener(new OnClickListener() {
@@ -603,7 +614,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
     private View layout_delete_account;
     private View layout_delete_account_parent;
     Dialog deleteDialog;
-    private void showDeleteDialog() {
+    public void showDeleteDialog() {
         if (deleteDialog == null){
             LayoutInflater inflater = LayoutInflater.from(getContext());
             View contentView = inflater.inflate(R.layout.mw_delete_account_alert, null);

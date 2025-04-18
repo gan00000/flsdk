@@ -15,13 +15,13 @@ import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
-import com.mw.sdk.bean.PhoneInfo;
-import com.mw.sdk.utils.SdkUtil;
 import com.mw.sdk.R;
 import com.mw.sdk.api.Request;
+import com.mw.sdk.bean.PhoneInfo;
 import com.mw.sdk.login.PhoneAreaCodeDialogHelper;
 import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
+import com.mw.sdk.utils.SdkUtil;
 
 import java.util.List;
 import java.util.Timer;
@@ -262,7 +262,6 @@ public class AccountBindPhoneLayout extends SLoginBaseRelativeLayout {
                         if (result != null && SStringUtil.isNotEmpty(result.getMessage())) {
                             ToastUtils.toast(getContext(), "" + result.getMessage());
                         }
-
                         if (sfCallBack != null){
 //                            sfCallBack.fail(null,"");
                         }
