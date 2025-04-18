@@ -54,7 +54,7 @@ android {
         release {
 //            multiDexEnabled true //Add this
 //            shrinkResources true  //压缩资源
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
@@ -114,6 +114,11 @@ android {
             dimension '1'
             resValue "string", "sdk_inner_version", "vn"
             resValue "string", "mw_td_appid", "be82e99387084fc4ac927264efa5ec51"
+        }
+        vn_ifg {//越南 gllyo
+            dimension '1'
+            resValue "string", "sdk_inner_version", "vn"
+            resValue "string", "mw_td_appid", ""
         }
 
         sdk6 {//第6套，东南亚
@@ -266,6 +271,7 @@ dependencies {
     //小米
     implementation 'com.xiaomi.billingclient:billing:1.1.3'
     implementation "com.miui.referrer:homereferrer:1.0.0.6"
+
 }
 
 

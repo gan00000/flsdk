@@ -511,6 +511,44 @@ android {
             resValue "string", "sdk_name", "vnDemo"
 
         }
+        vn_ifg {
+
+            signingConfig signingConfigs.release_vn
+            dimension "1"
+            //base
+            applicationId "com.wanxin.cztxvn"
+            versionCode 1
+            versionName "1.0"
+            minSdkVersion 25
+            targetSdkVersion 34
+
+            resValue "string", "sdk_game_code", "cztxvn"
+            resValue "string", "sdk_app_key", "3c26e584a7e4a489a6d710881d06ed5e"
+            resValue "string", "sdk_more_language", "true"
+            resValue "string", "sdk_default_server_language", "vi_VN"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
+            resValue "string", "scheme", "cztxvn"
+            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
+            //facebook
+            resValue "string", "facebook_app_id", "1835617440542951"
+            resValue "string", "facebook_client_token", "a9ae050d68220508e0143c1750ba7351"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1835617440542951"
+            resValue "string", "fb_login_protocol_scheme", "fb1835617440542951"
+            resValue "string", "facebook_app_name", "cztxvn" //游戏名字
+            //ad
+            resValue "string", "adjust_app_token", ""
+            resValue "string", "sdk_appflyer_dev_key", "J6UNVC6exnX4Xx7WP4JvfZ"
+            //line
+            resValue "string", "line_channelId", ""
+            //naver
+            resValue "string", "naver_client_id", ""
+            resValue "string", "naver_client_secret", ""
+            //=======================================sdk config end==========================
+
+            //每个游戏的demo设置 test
+            resValue "string", "sdk_name", "vnDemo"
+
+        }
+
         sdk6 {
 
             dimension "1"
