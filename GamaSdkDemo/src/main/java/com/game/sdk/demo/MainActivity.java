@@ -121,7 +121,7 @@ public class MainActivity extends Activity {
 //                com.game.superand.1usd
 //                com.game.superand.2usd
 //                String skuId = "com.miaoou.6jin";
-                String skuId = "com.wanxin.tgru.199";
+                String skuId = "com.msg.en099";
                 mIMWSDK.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(),skuId, extra,roleId,roleName,roleLevel, vipLevel,serverCode, serverName, new IPayListener() {
 
                     @Override
@@ -443,7 +443,7 @@ public class MainActivity extends Activity {
             @RequiresApi(api = Build.VERSION_CODES.P)
             @Override
             public void onClick(View view) {
-                mIMWSDK.showGoogleRustorePayDialog(MainActivity.this, new PayCreateOrderReqBean(MainActivity.this));
+               // mIMWSDK.showGoogleRustorePayDialog(MainActivity.this, new PayCreateOrderReqBean(MainActivity.this));
             }
         });
         findViewById(R.id.showSocialBanner).setOnClickListener(new View.OnClickListener() {
