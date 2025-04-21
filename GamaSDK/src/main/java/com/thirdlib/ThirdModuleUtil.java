@@ -176,4 +176,25 @@ public class ThirdModuleUtil {
         isExistXiaomiModule = true;
         return true;
     }
+
+
+    private static boolean isExistSingularModule = false;
+    public static boolean existSingularModule() {
+
+        if (isExistSingularModule){
+            return true;
+        }
+
+        try {
+            Class<?> clazz = Class.forName("com.singular.sdk.Singular");
+            if (clazz == null){
+                return false;
+            }
+        } catch (ClassNotFoundException e) {
+            PL.w("Singular module not exist.");
+            return false;
+        }
+        isExistSingularModule = true;
+        return true;
+    }
 }

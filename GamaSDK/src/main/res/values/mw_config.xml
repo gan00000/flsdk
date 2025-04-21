@@ -57,4 +57,8 @@
 
     <string name="mw_dialog_pay_add_type"></string>
 
+<!--    singular-->
+    <string name="mw_singular_key"></string>
+    <string name="mw_singular_secret"></string>
+
 </resources>

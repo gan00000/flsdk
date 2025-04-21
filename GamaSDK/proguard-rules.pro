@@ -133,3 +133,8 @@
 -keep public class com.thirdlib.nowgg.TokenVerifyResponse { *; }
 -keep public class com.thirdlib.nowgg.UserDataVerified { *; }
 -keep public class com.thirdlib.nowgg.TokenVerifyRequest { *; }
+#singular
+-keep class com.singular.sdk.** { *; }
+-keep public class com.android.installreferrer.** { *; }
+# Uncomment this line in case your are calling the 'revenue' function using the Google billing library
+-keep public class com.android.** { *; }
