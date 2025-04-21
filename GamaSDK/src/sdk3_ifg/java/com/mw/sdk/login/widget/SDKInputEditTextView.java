@@ -164,6 +164,7 @@ public class SDKInputEditTextView extends RelativeLayout {
                 hint = getResources().getString(R.string.py_register_account_hit);
                 eyeImageViewLayout.setVisibility(View.GONE);
                 adjustTvTextSize();
+                editTextInputType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS;
                 break;
 
             case SDKInputType_Password:
