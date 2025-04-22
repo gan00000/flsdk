@@ -31,7 +31,7 @@ public class SingularUtil {
     深度链接（可选）：要处理深层链接（例如，启动应用的 URL），请参阅我们的《支持深层链接》文章，了解扩展设置。
     支持 META 安装 Referrer Attribution：添加config.withFacebookAppId("FacebookAppID") 配置选项，启用"元安装推荐人 "归属。
     专业提示：如果您的应用程序支持多个入口点（如深度链接），请确保在每个相关活动的onCreate() 中调用initSingularSDK() ，以保证行为一致。*/
-    public void initSingularSDK(Activity activity) {
+    public static void initSingularSDK(Activity activity) {
 
         if (!ThirdModuleUtil.existSingularModule()){
             return;
@@ -39,7 +39,7 @@ public class SingularUtil {
 
         String sdkKey = getSingularSdkKey(activity);
         String secret = getSingularSdkSecret(activity);
-        PL.d("Singular sdkKey=" + sdkKey + ", secret=" + secret);
+        PL.d("-----track even Singular sdkKey=" + sdkKey + ", secret=" + secret);
         if (SStringUtil.isNotEmpty(sdkKey) && SStringUtil.isNotEmpty(secret)){
 
             // Configure Singular with SDK key and secret
@@ -55,7 +55,7 @@ public class SingularUtil {
         }
     }
 
-    public void setCustomUserId(Activity activity, String userId) {
+    public static void setCustomUserId(Activity activity, String userId) {
 
         if (!ThirdModuleUtil.existSingularModule()){
             return;
@@ -69,15 +69,15 @@ public class SingularUtil {
         Singular.setCustomUserId(userId);
     }
 
-    private static void logEvent(Context context, String eventName, Map<String, Object> attributes){
+    public static void logEvent(Context context, String eventName, Map<String, Object> attributes){
         comTrackEvent(context, eventName, "", 0, attributes);
     }
 
-    private static void logRevenue(Context context, double amount, Map<String, Object> attributes){
+    public static void logRevenue(Context context, double amount, Map<String, Object> attributes){
         comTrackEvent(context, "", "USD", amount, attributes);
     }
 
-    private static void logCustomRevenue(Context context, String eventName, double amount, Map<String, Object> attributes){
+    public static void logCustomRevenue(Context context, String eventName, double amount, Map<String, Object> attributes){
         comTrackEvent(context, eventName, "USD", amount, attributes);
     }
 

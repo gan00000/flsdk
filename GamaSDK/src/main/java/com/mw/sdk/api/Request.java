@@ -921,6 +921,8 @@ public class Request {
                                             TrackEventHelper.trackRevenueAF(context, eventName, eventPlatData.getValue(),eventPlatData.getCurrency(), payEventReqBean.getUserId(), payEventReqBean.getRoleId(), productId, orderId, channel_platform, null);
                                        }else if ("tiktok".equals(eventPlatData.getPlatform())){
                                             TrackEventHelper.trackRevenueTT(context, eventName, eventPlatData.getValue(),eventPlatData.getCurrency(), payEventReqBean.getUserId(), payEventReqBean.getRoleId(), productId, orderId, channel_platform, null);
+                                        }else if ("singular".equals(eventPlatData.getPlatform())){
+                                            TrackEventHelper.trackRevenueSingular(context, eventName, eventPlatData.getValue(),eventPlatData.getCurrency(), payEventReqBean.getUserId(), payEventReqBean.getRoleId(), productId, orderId, channel_platform, null);
                                         }
                                    }
                                }

@@ -5,10 +5,13 @@ import android.content.Context;
 import com.appsflyer.AFInAppEventParameterName;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
+import com.mw.sdk.utils.SdkUtil;
+import com.thirdlib.adjust.AdjustHelper;
 import com.thirdlib.af.AFHelper;
 import com.thirdlib.facebook.FBEventsConstants;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.google.SGoogleProxy;
+import com.thirdlib.singular.SingularUtil;
 import com.thirdlib.tiktok.TTSdkHelper;
 
 import java.math.BigDecimal;
@@ -98,5 +101,31 @@ public class TrackEventHelper {
 
     public static void trackRevenueTT(Context context, String eventName, double usdPrice, String currency, String uid,String roleId, String productId, String orderId, String channel_platform, Map<String, Object> otherParams){
         TTSdkHelper.trackEventRevenue(context, eventName, uid, roleId, orderId, productId, usdPrice);
+    }
+
+    public static void trackRevenueSingular(Context context, String eventName, double usdPrice, String currency, String uid,String roleId, String productId, String orderId, String channel_platform, Map<String, Object> otherParams){
+
+        if (context == null || SStringUtil.isEmpty(eventName)){
+            return;
+        }
+
+        Map<String, Object> payEventValues = new HashMap<>();
+        payEventValues.put("usdPrice", usdPrice);
+        payEventValues.put("currency", "USD");
+        payEventValues.put("productId", productId);
+        payEventValues.put("orderId", orderId);
+        payEventValues.put("userId", uid);
+        payEventValues.put("roleId", SdkUtil.getRoleId(context));
+        SdkEventLogger.addEventParameterName(context, payEventValues);
+        if (otherParams != null && !otherParams.isEmpty()) {
+            for (Map.Entry<String, Object> entry : otherParams.entrySet()) {
+                payEventValues.put(entry.getKey(), entry.getValue().toString());
+            }
+        }
+        if (SStringUtil.isEmpty(eventName)){
+            SingularUtil.logRevenue(context, usdPrice, payEventValues);
+        }else {
+            SingularUtil.logCustomRevenue(context, eventName, usdPrice, payEventValues);
+        }
     }
 }

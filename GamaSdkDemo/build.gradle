@@ -302,6 +302,9 @@ android {
             //rustore渠道
             resValue "string", "mw_vk_appid", "2063611100"
             resValue "string", "mw_dialog_pay_add_type", "vk,xiaomi"
+            //singular
+            resValue "string", "mw_singular_key", "wxbz_8ce21a3e"
+            resValue "string", "mw_singular_secret", "7938d8a1aaffe99fcb7ac9d9d9dce3b5"
 
             //=======================================sdk config end==========================
 

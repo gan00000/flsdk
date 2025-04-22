@@ -29,6 +29,7 @@ import com.thirdlib.af.AFHelper;
 import com.thirdlib.facebook.FBEventsConstants;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.google.SGoogleProxy;
+import com.thirdlib.singular.SingularUtil;
 import com.thirdlib.td.TDAnalyticsHelper;
 import com.thirdlib.tiktok.TTSdkHelper;
 
@@ -48,6 +49,7 @@ public class SdkEventLogger {
         try {
 
             AFHelper.activityOnCreate(activity);
+            SingularUtil.initSingularSDK(activity);
             //SFacebookProxy.initFbSdk(activity.getApplicationContext());
             sendEventToSever(activity,EventConstant.EventName.APP_OPEN.name());
             trackingWithEventName(activity, EventConstant.EventName.APP_OPEN.name(), null, EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
@@ -233,8 +235,10 @@ public class SdkEventLogger {
             addEventParameterName(context, payEventValues);
             if (SStringUtil.isEmpty(eventName)){
                 AdjustHelper.trackEvent(context, "AJ_Purchase", payEventValues, usdPrice, orderId);
+                SingularUtil.logRevenue(context, usdPrice, payEventValues);
             }else {
                 AdjustHelper.trackEvent(context, eventName, payEventValues, usdPrice, orderId);
+                SingularUtil.logCustomRevenue(context, eventName, usdPrice, payEventValues);
             }
             //tt
             if (SStringUtil.isEmpty(eventName)){
@@ -379,7 +383,7 @@ public class SdkEventLogger {
 //                    GamaAj.trackEvent(context, eventName, map);
 //                }
             }
-
+            SingularUtil.logEvent(context, eventName, map);
             //adjust
             AdjustHelper.trackEvent(context, eventName, map);
             //TikTok
@@ -390,7 +394,7 @@ public class SdkEventLogger {
         }
     }
 
-    private static Map<String, Object> addEventParameterName(Context context, Map<String, Object> map) {
+    public static Map<String, Object> addEventParameterName(Context context, Map<String, Object> map) {
 
         String adId = SdkUtil.getGoogleAdId(context);
         String uniqueId = SdkUtil.getSdkUniqueId(context);

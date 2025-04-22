@@ -51,6 +51,7 @@ import com.thirdlib.google.SGoogleSignIn;
 import com.thirdlib.huawei.HuaweiSignIn;
 import com.thirdlib.line.SLineSignIn;
 import com.thirdlib.nowgg.NowggLogin;
+import com.thirdlib.singular.SingularUtil;
 import com.thirdlib.td.TDAnalyticsHelper;
 import com.thirdlib.twitter.TwitterLogin;
 import com.mw.sdk.R;
@@ -1225,6 +1226,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         loginResponse.getData().setGameCode(ResConfig.getGameCode(getContext()));
         SdkUtil.updateLoginData(getContext(), loginResponse);
         DataManager.getInstance().setLogin(true);
+        SingularUtil.setCustomUserId(mActivity, loginResponse.getData().getUserId());//设置userId
 
         String deferredAppLinkDataStr = SdkUtil.getDeepLink(getContext());
         if (SStringUtil.isNotEmpty(deferredAppLinkDataStr)){
