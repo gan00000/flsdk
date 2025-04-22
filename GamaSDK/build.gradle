@@ -242,8 +242,6 @@ dependencies {
     implementation (name: 'Payments-nowgg', ext: 'aar')
 
     //huawei sdk
-//    huaweiImplementation 'com.huawei.hms:hwid:6.9.0.301'
-//    huaweiImplementation 'com.huawei.hms:iap:6.4.0.301'
     huaweiImplementation 'com.huawei.hms:hwid:6.12.0.300'
     huaweiImplementation 'com.huawei.hms:iap:6.13.0.300'
     //af huawei store支持
@@ -274,7 +272,8 @@ dependencies {
 
     //singular
     implementation 'com.singular.sdk:singular_sdk:12.7.1'
-    implementation 'store.galaxy.samsung.installreferrer:samsung_galaxystore_install_referrer:4.0.0'
+    //如果你的应用程序是通过三星 Galaxy Store 发布的，请添加以下内容以支持三星 Galaxy Store 的安装引用程序
+    //implementation 'store.galaxy.samsung.installreferrer:samsung_galaxystore_install_referrer:4.0.0'
 }
 
 
