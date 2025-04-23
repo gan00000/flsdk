@@ -15,11 +15,9 @@
 
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="BIND_GET_INSTALL_REFERRER_SERVICE" />
-    <uses-permission android:name="com.android.vending.CHECK_LICENSE" />
-    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
+<!--    singular要用-->
+<!--    <uses-permission android:name="BIND_GET_INSTALL_REFERRER_SERVICE" />-->
+<!--    <uses-permission android:name="com.android.vending.CHECK_LICENSE" />-->
 
     <uses-feature
         android:name="android.hardware.microphone"
