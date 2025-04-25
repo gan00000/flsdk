@@ -489,9 +489,10 @@ android {
 
         }
 
-        Xiao7 {
+        xiao7 {
 
             dimension "1"
+            resValue "string", "sdk_xiao7_appkey", "669584c0a2056c5abdf74b2edbe0645a"
         }
     }
 
