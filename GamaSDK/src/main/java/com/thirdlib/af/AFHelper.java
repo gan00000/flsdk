@@ -263,7 +263,7 @@ public class AFHelper {
                                     public void run() {
                                         //af发送失败，上报服务器记录
                                         Map<String, String> otParams = new HashMap<String, String>();
-                                        otParams.put("afErrMsg", "Error code:" + i + ", Error msg: " + s);
+                                        otParams.put("afErrMsg", "Error code: " + i + ", Error msg: " + s);
                                         SdkEventLogger.sendEventToServer(activityWeakRef.get(), "AfSendFailed_" + eventName, otParams, false,false);
                                     }
                                 });
