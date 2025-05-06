@@ -430,12 +430,12 @@ public class SdkEventLogger {
 
     //发送事件到服务器记录，只是发一次
     public static void sendEventToSever(Context context, String eventName){
-        sendEventToServer(context, eventName, true, false);
+        sendEventToServer(context, eventName, null,true, false);
     }
 
-    public static void sendEventToServer(final Context context, String eventName, boolean isDeviceOnce, boolean isUserOnce) {
+    public static void sendEventToServer(final Context context, String eventName, Map<String, String> otherParams, boolean isDeviceOnce, boolean isUserOnce) {
         try {
-            Request.sendEventToServer(context, eventName, isDeviceOnce, isUserOnce);
+            Request.sendEventToServer(context, eventName, otherParams, isDeviceOnce, isUserOnce);
         } catch (Exception e) {
             e.printStackTrace();
         }

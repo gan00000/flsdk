@@ -26,6 +26,7 @@ import com.mw.sdk.utils.SdkUtil;
 import com.thirdlib.ThirdModuleUtil;
 
 import java.lang.ref.WeakReference;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -261,7 +262,9 @@ public class AFHelper {
                                     @Override
                                     public void run() {
                                         //af发送失败，上报服务器记录
-                                        SdkEventLogger.sendEventToServer(activityWeakRef.get(), "AfSendFailed_" + eventName, false,false);
+                                        Map<String, String> otParams = new HashMap<String, String>();
+                                        otParams.put("afErrMsg", "Error code:" + i + ", Error msg: " + s);
+                                        SdkEventLogger.sendEventToServer(activityWeakRef.get(), "AfSendFailed_" + eventName, otParams, false,false);
                                     }
                                 });
                             }

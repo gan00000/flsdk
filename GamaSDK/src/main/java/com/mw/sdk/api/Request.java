@@ -302,7 +302,7 @@ public class Request {
      * @param isUserOnce 是否对用户uid报一次
      * @throws Exception
      */
-    public static void sendEventToServer(final Context context, String eventName, boolean isDeviceOnce, boolean isUserOnce) throws Exception {
+    public static void sendEventToServer(final Context context, String eventName, Map<String, String> otherParams, boolean isDeviceOnce, boolean isUserOnce) throws Exception {
 
         if (SStringUtil.isEmpty(eventName)){
             return;
@@ -348,6 +348,9 @@ public class Request {
 
         if (DataManager.getInstance().isLogin() || SdkUtil.isLogin(context)) {
             requestParams.put("userId",sGameBaseRequestBean.getUserId());
+        }
+        if (otherParams != null && !otherParams.isEmpty()){
+            requestParams.putAll(otherParams);
         }
 
         sGameBaseRequestBean.setRequestParamsMap(requestParams);
