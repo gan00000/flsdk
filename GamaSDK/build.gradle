@@ -14,10 +14,25 @@ android {
     }
 
     def sdk_version = "2.2.9"
+    def domainUrl= "chiendemobile.vn/" //越南M2,新代理
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         buildConfigField "String", "JAR_VERSION", "\"$sdk_version\""
+
+        if (domainUrl !=null && domainUrl.length() > 0){
+            resValue "string", "mw_sdk_login_pre_url", "https://login.$domainUrl"
+            resValue "string", "mw_sdk_pay_pre_url", "https://pay.$domainUrl"
+            resValue "string", "mw_sdk_cdn_pre_url", "https://cdn-download.$domainUrl"
+            resValue "string", "mw_sdk_plat_pre_url", "https://platform.$domainUrl"
+            resValue "string", "mw_sdk_member_pre_url", "https://member.$domainUrl"
+            resValue "string", "mw_sdk_log_pre_url", "https://log.$domainUrl"
+            resValue "string", "mw_sdk_terms_service_url", "https://member.${domainUrl}sdk/agreement/%s_agreement.html"
+            resValue "string", "mw_sdk_social_url", "https://member.${domainUrl}sdk/social/%s/index.html"
+            resValue "string", "mw_td_te_server_url", "https://shushu.${domainUrl}"
+            resValue "string", "mw_sdk_customer_url", "https://platform.${domainUrl}sdk/api/customer.page"
+        }
+
     }
 
     android.libraryVariants.all { variant ->
@@ -109,7 +124,6 @@ android {
             dimension '1'
             resValue "string", "sdk_inner_version", "huawei"
         }
-
         vn {//越南专用 ttplay
             dimension '1'
             resValue "string", "sdk_inner_version", "vn"
