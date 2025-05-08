@@ -10,7 +10,8 @@ public enum ChannelPlatform {
     SAMSUNG("samsung"),//kr
     MEOW("meow"),
 
-    LD("leidian");
+    LD("leidian"),
+    X7("xiao7");
 
     private String channel_platform;
     ChannelPlatform(String channelPlatform) {

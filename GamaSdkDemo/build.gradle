@@ -340,16 +340,17 @@ android {
 
             signingConfig signingConfigs.release_v6
             //base
-            applicationId "com.wanxin.tgen"
+//            applicationId "com.wanxin.tgen"
+            applicationId "com.aste.x7sy"
             minSdkVersion 21
-            targetSdkVersion 34
+            targetSdkVersion 30
 
             resValue "string", "sdk_game_code", "tgen"
             resValue "string", "sdk_app_key", "c999bd3d4cb5d1239c0c30bfc70506f2"
             resValue "string", "sdk_more_language", "true"
             resValue "string", "sdk_default_server_language", "en_US"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
             resValue "string", "scheme", "tgen"
-            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
+            resValue "string", "channel_platform", "xiao7"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
             resValue "string", "sdk_release_european", "true"
 
             //facebook

@@ -11,6 +11,7 @@ public class PayCreateOrderReqBean extends PayReqBean {
 	private String productId;
 	private String payType = "SDK";
 	private String mode = "google";
+	private String gameGuid = "";
 
 	public PayCreateOrderReqBean(Context context) {
 		super(context);
@@ -22,6 +23,14 @@ public class PayCreateOrderReqBean extends PayReqBean {
 
 	public void setMode(String mode) {
 		this.mode = mode;
+	}
+
+	public String getGameGuid() {
+		return gameGuid;
+	}
+
+	public void setGameGuid(String gameGuid) {
+		this.gameGuid = gameGuid;
 	}
 
 	/**

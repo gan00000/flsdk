@@ -1057,4 +1057,18 @@ public class SdkUtil {
         return xFloatMenuResData;
     }
 
+
+    private static final String SDK_X7_GUID = "SDK_X7_GUID";
+    public static void saveX7Guid(Context context,String guid){
+        SPUtil.saveSimpleInfo(context, SDK_SP_FILE, SDK_X7_GUID, guid);
+    }
+
+    /**
+     * 获取登入方式
+     * @param context
+     * @return
+     */
+    public static String getX7Guid(Context context){
+        return SPUtil.getSimpleString(context, SDK_SP_FILE, SDK_X7_GUID);
+    }
 }

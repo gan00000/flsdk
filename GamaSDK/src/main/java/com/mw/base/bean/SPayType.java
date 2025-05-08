@@ -12,4 +12,5 @@ public enum SPayType {
     QooApp,
     LUNQI,
     LD,
+    X7,
 }

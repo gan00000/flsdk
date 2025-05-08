@@ -15,6 +15,7 @@ import com.core.base.callback.SFCallBack;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
+import com.google.gson.Gson;
 import com.mw.base.utils.SdkVersionUtil;
 import com.mw.sdk.R;
 import com.mw.sdk.ads.EventConstant;
@@ -38,6 +39,7 @@ import com.mw.sdk.constant.SLoginType;
 import com.mw.sdk.constant.ViewType;
 import com.mw.sdk.login.LoginContract;
 import com.mw.sdk.login.model.response.SLoginResponse;
+import com.mw.sdk.login.model.response.X7GameLoginResponse;
 import com.mw.sdk.utils.DataManager;
 import com.mw.sdk.utils.DialogUtil;
 import com.mw.sdk.utils.ResConfig;
@@ -1172,6 +1174,15 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     }*/
 
     private void handleRegisteOrLoginSuccess(SLoginResponse loginResponse, String rawResult, String loginType) {
+
+        if (SStringUtil.isNotEmpty(rawResult) && rawResult.contains("x7data")){
+
+            X7GameLoginResponse x7GameLoginResponse = new Gson().fromJson(rawResult, X7GameLoginResponse.class);
+            if (x7GameLoginResponse != null && x7GameLoginResponse.getData() != null && x7GameLoginResponse.getData().getX7data() != null){
+                SdkUtil.saveX7Guid(getContext(), x7GameLoginResponse.getData().getX7data().getGuid());
+            }
+
+        }
 
 //        SdkUtil.saveSdkLoginData(getContext(), loginResponse.getRawResponse());
         loginResponse.getData().setLoginType(loginType);

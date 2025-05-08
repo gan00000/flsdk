@@ -657,6 +657,8 @@ public class BaseSdkImpl implements IMWSDK {
             doLunqiPay(activity, payCreateOrderReqBean);
         } else if(payType == SPayType.LD || ChannelPlatform.LD.getChannel_platform().equals(channel_platform)) {
             LDPay(activity, payCreateOrderReqBean);
+        } else if(payType == SPayType.X7 || ChannelPlatform.X7.getChannel_platform().equals(channel_platform)) {
+            x7Pay(activity, payCreateOrderReqBean);
         } else {//默认Google储值
             checkGoogleOrWebPay(activity, payCreateOrderReqBean);
         }
@@ -665,6 +667,7 @@ public class BaseSdkImpl implements IMWSDK {
 
     protected void doLunqiPay(Activity activity, PayCreateOrderReqBean payCreateOrderReqBean) {}
     protected void LDPay(Activity activity, PayCreateOrderReqBean payCreateOrderReqBean) {}
+    protected void x7Pay(Activity activity, PayCreateOrderReqBean payCreateOrderReqBean) {}
 
     private void doHuaweiPay(Activity activity, PayCreateOrderReqBean payCreateOrderReqBean) {
     }

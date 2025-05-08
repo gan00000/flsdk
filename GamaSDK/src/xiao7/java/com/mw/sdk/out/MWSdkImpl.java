@@ -17,6 +17,7 @@ import com.mw.sdk.login.ILoginCallBack;
 import com.mw.sdk.login.SdkAppLdkoginView;
 import com.mw.sdk.login.p.LoginPresenterImpl;
 import com.mw.sdk.pay.IPayCallBack;
+import com.mw.sdk.utils.SdkUtil;
 import com.smwl.smsdk.abstrat.SMInitListener;
 import com.smwl.smsdk.abstrat.SMLoginListener;
 import com.smwl.smsdk.app.SMPlatformManager;
@@ -137,7 +138,7 @@ public class MWSdkImpl extends BaseSdkImpl {
             public void run() {
                 // 程序的入口执行初始化操作：一般放在游戏入口的activity里面用主线程调用
                 // 需要传入三个参数：游戏activity、appkey、SMInitListener
-
+                SdkUtil.saveX7Guid(mActivity,"");
                 SMPlatformManager.getInstance().init(mActivity,
                         mActivity.getString(R.string.sdk_xiao7_appkey), new SMInitListener() {
                             @Override
@@ -166,8 +167,8 @@ public class MWSdkImpl extends BaseSdkImpl {
         loginPresenter.setBaseView(sdkAppLdkoginView);
 
         ThirdLoginRegRequestBean thirdLoginRegRequestBean = new ThirdLoginRegRequestBean(activity);
-        thirdLoginRegRequestBean.setThirdPlatId(token);
-        thirdLoginRegRequestBean.setRegistPlatform(SLoginType.LOGIN_TYPE_LD);
+        thirdLoginRegRequestBean.setThirdPlatId("");
+        thirdLoginRegRequestBean.setRegistPlatform(SLoginType.LOGIN_TYPE_XIAO7);
         thirdLoginRegRequestBean.setThirdAccount("");
         thirdLoginRegRequestBean.setThirdAccessToken(token);
 
@@ -186,7 +187,7 @@ public class MWSdkImpl extends BaseSdkImpl {
                 RoleInfo roleInfo = new RoleInfo();
                 roleInfo.setGame_area(serverName);
                 roleInfo.setGame_area_id(severCode);
-                roleInfo.setGame_guid(roleId);
+                roleInfo.setGame_guid(SdkUtil.getX7Guid(activity));
                 roleInfo.setGame_role_id(roleId);
                 roleInfo.setGame_role_name(roleName);
                 roleInfo.setRoleLevel(roleLevel);
@@ -208,7 +209,7 @@ public class MWSdkImpl extends BaseSdkImpl {
         this.iLoginCallBack = iLoginCallBack;
         sdkAppLdkoginView = new SdkAppLdkoginView();
         sdkAppLdkoginView.setiLoginCallBack(iLoginCallBack);
-
+        SdkUtil.saveX7Guid(activity,"");
         // 登录接口代码实例
         activity.runOnUiThread(new Runnable() {
             @Override
@@ -268,7 +269,7 @@ public class MWSdkImpl extends BaseSdkImpl {
     }
 
     @Override
-    protected void LDPay(Activity activity, PayCreateOrderReqBean payCreateOrderReqBean) {
+    protected void x7Pay(Activity activity, PayCreateOrderReqBean payCreateOrderReqBean) {
         super.doLunqiPay(activity, payCreateOrderReqBean);
         this.createOrderIdReqBean = payCreateOrderReqBean;
 
