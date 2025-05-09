@@ -151,11 +151,11 @@ public class Xiao7PayImpl {
          * 4.测试账号需要找小7测试沟通添加
          */
         final PayInfo mPayInfo = new PayInfo();
-        mPayInfo.setExtends_info_data(developerPayload);
+        mPayInfo.setExtends_info_data(result.getPayData().getExtendsInfoData());
         mPayInfo.setGame_level(this.createOrderIdReqBean.getRoleLevel());
         mPayInfo.setGame_role_id(this.createOrderIdReqBean.getRoleId());
         mPayInfo.setGame_role_name(this.createOrderIdReqBean.getRoleName());
-        mPayInfo.setGame_area(this.createOrderIdReqBean.getServerName());
+        mPayInfo.setGame_area(this.createOrderIdReqBean.getServerCode());
 
         // 登录成功后，服务端会返回游戏guid
         mPayInfo.setGame_guid(SdkUtil.getX7Guid(activity));
@@ -166,12 +166,19 @@ public class Xiao7PayImpl {
 //        }
         // 商品价格，需保留小数点后两位
         mPayInfo.setGame_price(String.format(Locale.ENGLISH, "%.2f", result.getPayData().getAmount().floatValue()));
+
+        //貨幣單位，與下文game_price欄位遊戲內商品的貨幣單位一致，用於計算用戶購買商品的金額。不涉及結算貨幣單位。
+        // 可用值：CNY:人民幣,USD:美金,HKD:港幣,VND:越南盾,KRW:韓元 【game_access_version=7.98時新增，歷史版本不需要此欄位】
+        mPayInfo.setGame_currency(result.getPayData().getCurrency());
         mPayInfo.setNotify_id("-1");
-        mPayInfo.setSubject(result.getPayData().getProductName() + "");//道具簡介
+        mPayInfo.setSubject(result.getPayData().getSubject() + "");//道具簡介
         // 游戏方不可调用此方法产生game_sign字段，这个方法只是让Demo的支付接口可以跑通的临时方法
         // 游戏里面game_sign参数是根据两边服务端约定的规则产生的，由游戏的服务端返回给客户端，详见服务端的对接文档
-        mPayInfo.setGame_sign("");
+        mPayInfo.setGame_sign(result.getPayData().getGameSign());
         // 对参数做判空操作，如果有参数为空请不要传进sdk中!!!
+        if (SStringUtil.isNotEmpty(result.getPayData().getGameAccessVersion())){
+            mPayInfo.setGame_access_version(result.getPayData().getGameAccessVersion());
+        }
 
         // 支付接口使用示例
         // 保证支付接口的调用一定在主线程中

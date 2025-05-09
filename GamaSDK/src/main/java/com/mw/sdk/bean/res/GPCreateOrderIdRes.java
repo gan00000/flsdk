@@ -18,10 +18,21 @@ public class GPCreateOrderIdRes extends BaseResponseModel {
         private String orderId;
         private String paymentId;
         private Double amount; //金额 usd
+        private String currency = "USD";
 
         private String productName;
         private Double localAmount;//本地金额
         private String localCurrency;//本地货币
+
+
+        //========================X7使用=====================
+        private String extendsInfoData = "";
+
+        private String gameSign = "";
+        private String subject = "";
+        private String gameAccessVersion = "";
+        //========================X7使用 end=====================
+
 
         public String getOrderId() {
             return orderId;
@@ -69,6 +80,46 @@ public class GPCreateOrderIdRes extends BaseResponseModel {
 
         public void setLocalCurrency(String localCurrency) {
             this.localCurrency = localCurrency;
+        }
+
+        public String getCurrency() {
+            return currency;
+        }
+
+        public void setCurrency(String currency) {
+            this.currency = currency;
+        }
+
+        public String getExtendsInfoData() {
+            return extendsInfoData;
+        }
+
+        public void setExtendsInfoData(String extendsInfoData) {
+            this.extendsInfoData = extendsInfoData;
+        }
+
+        public String getGameSign() {
+            return gameSign;
+        }
+
+        public void setGameSign(String gameSign) {
+            this.gameSign = gameSign;
+        }
+
+        public String getSubject() {
+            return subject;
+        }
+
+        public void setSubject(String subject) {
+            this.subject = subject;
+        }
+
+        public String getGameAccessVersion() {
+            return gameAccessVersion;
+        }
+
+        public void setGameAccessVersion(String gameAccessVersion) {
+            this.gameAccessVersion = gameAccessVersion;
         }
     }
 }

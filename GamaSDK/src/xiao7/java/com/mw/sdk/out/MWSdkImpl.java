@@ -252,7 +252,7 @@ public class MWSdkImpl extends BaseSdkImpl {
 
                         // SDK内部退出登录，需要游戏方处理返回到游戏登录界面
                         if (iLoginCallBack != null){
-                            iLoginCallBack.onLogout("");
+                            iLoginCallBack.onLogout(String.valueOf(isSwitch));
                         }
 
                     }
