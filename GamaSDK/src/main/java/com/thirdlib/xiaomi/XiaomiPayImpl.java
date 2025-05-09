@@ -332,7 +332,7 @@ public class XiaomiPayImpl implements IPay, XiaoMiPayManager.PurchaseCallback {
                         return;
                     }
 
-                    XiaoMiPayManager.getInstance().launchBillingFlow(activity, createOrderIdReqBean.getProductId(),createOrderIdRes.getPayData().getOrderId(),devPayload.toString(), "");
+                    XiaoMiPayManager.getInstance().launchBillingFlow(activity, createOrderIdReqBean.getProductId(), createOrderIdReqBean.getUserId(), devPayload.toString(), "");
 
                 }
 
