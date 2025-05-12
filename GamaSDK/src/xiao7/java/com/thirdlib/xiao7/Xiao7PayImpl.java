@@ -94,25 +94,21 @@ public class Xiao7PayImpl {
         PayApi.requestCreateOrder(this.mActivity, this.createOrderIdReqBean, new SFCallBack<GPCreateOrderIdRes>() {
             @Override
             public void success(GPCreateOrderIdRes result, String msg) {
-                try {
-                    if (result != null && result.getPayData() != null && SStringUtil.isNotEmpty(result.getPayData().getOrderId()) && result.getPayData().getLocalAmount() != null){
-                        String orderId = result.getPayData().getOrderId();
+                if (result != null && result.getPayData() != null && SStringUtil.isNotEmpty(result.getPayData().getOrderId()) && result.getPayData().getAmount() != null){
+                    String orderId = result.getPayData().getOrderId();
 //                        currentOrderId = orderId;
 //                        skuAmount = result.getPayData().getAmount();
 
-                        JSONObject devJsonObject = new JSONObject();
-                        devJsonObject.put("userId", createOrderIdReqBean.getUserId());
-                        devJsonObject.put("orderId", orderId);
-                        //devJsonObject.put("cpOrderId", createOrderIdReqBean.getCpOrderId());
-                        PL.i("thirdPartyPurchase");
-                        thirdPartyPurchase(mActivity,  result, devJsonObject.toString());
-                    }else {
-                        handlePayFail("create order error");
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
+//                        JSONObject devJsonObject = new JSONObject();
+//                        devJsonObject.put("userId", createOrderIdReqBean.getUserId());
+//                        devJsonObject.put("orderId", orderId);
+                    //devJsonObject.put("cpOrderId", createOrderIdReqBean.getCpOrderId());
+                    PL.i("thirdPartyPurchase");
+                    thirdPartyPurchase(mActivity,  result, "");
+                }else {
+                    handlePayFail("create order error");
                 }
+
             }
 
             @Override
@@ -131,11 +127,10 @@ public class Xiao7PayImpl {
 
     private void thirdPartyPurchase(Activity activity, GPCreateOrderIdRes result, String developerPayload) {
 
-        if (result == null || result.getPayData() == null){
+        loadingDialog.dismissProgressDialog();
+        if (result == null || result.getPayData() == null || result.getPayData().getX7Data() == null){
             return;
         }
-
-        loadingDialog.dismissProgressDialog();
 
         /**
          * 支付参数示例
@@ -151,33 +146,33 @@ public class Xiao7PayImpl {
          * 4.测试账号需要找小7测试沟通添加
          */
         final PayInfo mPayInfo = new PayInfo();
-        mPayInfo.setExtends_info_data(result.getPayData().getExtendsInfoData());
-        mPayInfo.setGame_level(this.createOrderIdReqBean.getRoleLevel());
-        mPayInfo.setGame_role_id(this.createOrderIdReqBean.getRoleId());
-        mPayInfo.setGame_role_name(this.createOrderIdReqBean.getRoleName());
-        mPayInfo.setGame_area(this.createOrderIdReqBean.getServerCode());
+        mPayInfo.setExtends_info_data(result.getPayData().getX7Data().getExtends_info_data());
+        mPayInfo.setGame_level(result.getPayData().getX7Data().getGame_level());
+        mPayInfo.setGame_role_id(result.getPayData().getX7Data().getGame_role_id());
+        mPayInfo.setGame_role_name(result.getPayData().getX7Data().getGame_role_name());
+        mPayInfo.setGame_area(result.getPayData().getX7Data().getGame_area());
 
         // 登录成功后，服务端会返回游戏guid
-        mPayInfo.setGame_guid(SdkUtil.getX7Guid(activity));
+        mPayInfo.setGame_guid(result.getPayData().getX7Data().getGame_guid());
         mPayInfo.setGame_orderid(result.getPayData().getOrderId());
 //        String trim = priceEt.getText().toString().trim();
 //        if (StrUtilsSDK.isExitEmptyParameter(trim)) {
 //            Toast.makeText(DemoMainActivity.this, "请先填写价格", Toast.LENGTH_SHORT).show();
 //        }
         // 商品价格，需保留小数点后两位
-        mPayInfo.setGame_price(String.format(Locale.ENGLISH, "%.2f", result.getPayData().getAmount().floatValue()));
+        mPayInfo.setGame_price(result.getPayData().getX7Data().getGame_price());
 
         //貨幣單位，與下文game_price欄位遊戲內商品的貨幣單位一致，用於計算用戶購買商品的金額。不涉及結算貨幣單位。
         // 可用值：CNY:人民幣,USD:美金,HKD:港幣,VND:越南盾,KRW:韓元 【game_access_version=7.98時新增，歷史版本不需要此欄位】
-        mPayInfo.setGame_currency(result.getPayData().getCurrency());
-        mPayInfo.setNotify_id("-1");
-        mPayInfo.setSubject(result.getPayData().getSubject() + "");//道具簡介
+        mPayInfo.setGame_currency(result.getPayData().getX7Data().getGame_currency());
+        mPayInfo.setNotify_id(result.getPayData().getX7Data().getNotify_id());
+        mPayInfo.setSubject(result.getPayData().getX7Data().getSubject());//道具簡介
         // 游戏方不可调用此方法产生game_sign字段，这个方法只是让Demo的支付接口可以跑通的临时方法
         // 游戏里面game_sign参数是根据两边服务端约定的规则产生的，由游戏的服务端返回给客户端，详见服务端的对接文档
-        mPayInfo.setGame_sign(result.getPayData().getGameSign());
+        mPayInfo.setGame_sign(result.getPayData().getX7Data().getGame_sign());
         // 对参数做判空操作，如果有参数为空请不要传进sdk中!!!
-        if (SStringUtil.isNotEmpty(result.getPayData().getGameAccessVersion())){
-            mPayInfo.setGame_access_version(result.getPayData().getGameAccessVersion());
+        if (SStringUtil.isNotEmpty(result.getPayData().getX7Data().getGame_access_version())){
+            mPayInfo.setGame_access_version(result.getPayData().getX7Data().getGame_access_version());
         }
 
         // 支付接口使用示例

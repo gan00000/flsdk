@@ -26,11 +26,7 @@ public class GPCreateOrderIdRes extends BaseResponseModel {
 
 
         //========================X7使用=====================
-        private String extendsInfoData = "";
-
-        private String gameSign = "";
-        private String subject = "";
-        private String gameAccessVersion = "";
+        private X7OrderBean x7Data;
         //========================X7使用 end=====================
 
 
@@ -90,36 +86,12 @@ public class GPCreateOrderIdRes extends BaseResponseModel {
             this.currency = currency;
         }
 
-        public String getExtendsInfoData() {
-            return extendsInfoData;
+        public X7OrderBean getX7Data() {
+            return x7Data;
         }
 
-        public void setExtendsInfoData(String extendsInfoData) {
-            this.extendsInfoData = extendsInfoData;
-        }
-
-        public String getGameSign() {
-            return gameSign;
-        }
-
-        public void setGameSign(String gameSign) {
-            this.gameSign = gameSign;
-        }
-
-        public String getSubject() {
-            return subject;
-        }
-
-        public void setSubject(String subject) {
-            this.subject = subject;
-        }
-
-        public String getGameAccessVersion() {
-            return gameAccessVersion;
-        }
-
-        public void setGameAccessVersion(String gameAccessVersion) {
-            this.gameAccessVersion = gameAccessVersion;
+        public void setX7Data(X7OrderBean x7Data) {
+            this.x7Data = x7Data;
         }
     }
 }
