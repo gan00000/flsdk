@@ -265,6 +265,7 @@ public class MWSdkImpl extends BaseSdkImpl {
     public void switchLogin(Activity activity, ILoginCallBack iLoginCallBack) {
         this.activity = activity;
         this.iLoginCallBack = iLoginCallBack;
+        SMPlatformManager.getInstance().logout();
         login(activity, iLoginCallBack);
     }
 
@@ -357,4 +358,5 @@ public class MWSdkImpl extends BaseSdkImpl {
 //            }
 //        });
     }
+
 }
