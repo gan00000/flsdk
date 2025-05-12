@@ -55,6 +55,7 @@
 <!--    语言映射，传给服务器，根据需求设置-->
     <string name="sdk_language_map">{"zh_CN":"zh_CN", "zh_TW":"zh_TW","zh_HK":"zh_TW","en":"en_US","vi":"vi_VN","ko":"ko_KR","ru":"ru_RU","th":"th_TH"}</string>
 
+    <!--    Google包需要添加的除了第三方外的其他充值方式 -->
     <string name="mw_dialog_pay_add_type"></string>
 
 <!--    singular-->
