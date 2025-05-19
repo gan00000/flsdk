@@ -14,7 +14,7 @@ android {
     }
 
     def sdk_version = "2.3.0"
-    def domainUrl= "chiendemobile.vn" //越南M2,新代理chiendemobile.vn
+    def domainUrl= "" //越南M2,新代理chiendemobile.vn
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion

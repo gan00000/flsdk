@@ -3,22 +3,19 @@
 * [一. SDK接入配置](#100)
 * [二. SDK api说明](#101)
 	1. [实例SDK接口对象](#1)
-	2. [Activity生命周期调用和初始化SDK   **(必须设置)**](#2)
-	3. [设置角色信息  **(必接)**](#5) 
-	4. [设置SDK请求游戏账号退出切换监听   **(必接)**](#22)
-	4. [登录接口   **(必接)**](#6)
-	5. [切换账号登录接口    **(必接)**](#18)
-	5. [充值接口   **(必接)**](#7)
-	6. [事件埋点接口   **(必接)**](#8)
-	7. [应用内评分接口   **(必接)**](#9)
+	2. [应用Application设置		**(必需)**](#110)
+	2. [Activity生命周期调用和初始化SDK   **(必需)**](#2)
+	3. [设置角色信息  **(必需)**](#5) 
+	4. [登录接口   **(必需)**](#6)
+	5. [充值接口   **(必需)**](#7)
+	6. [事件埋点接口   **(必需)**](#8)
+	7. [客服接口     **(必接)**](#181)
+	7. [应用内评分接口   **(必需)**](#9)
+	8.  [切换账号登录接口    **(根据需求)**](#18)
 	8. [fb分享接口   **(按运营需求接)**](#11)
 	9. [line分享接口   **(按运营需求接)**](#12)
-	10. [客服接口     **(必接)**](#181)
 	10. [显示sdk内部绑定手机页面    **(按运营需求接)**](#13)
 	11. [显示sdk内部升级账号页面      **(按运营需求接)**](#14)
-	12. [请求获取手机验证码](#15)
-	13. [请求绑定手机](#16)
-	14. [请求账号升级](#17)
 	15. [打开活动弹窗页面     **(按运营需求接)**](#19)
 	16. [打开社群(banner)展示页面       **(按运营需求接)**](#20)
 	9. [上架Google Play相关注意的问题](#10)
@@ -78,7 +75,7 @@
 	    }
 	
 	    defaultConfig {
-	        minSdkVersion 21
+	        minSdkVersion 25
 	        targetSdkVersion 34
 	        multiDexEnabled true
 	    }
@@ -91,7 +88,7 @@
 	        
             signingConfig signingConfigs.release_kr  //签名sdk提供
             applicationId "com.xxx.xxx"  //包名sdk提供	
-            minSdkVersion 21
+            minSdkVersion 25
             targetSdkVersion 34
             versionCode 1
             versionName "1.0."
@@ -155,11 +152,10 @@
 * <h3 id="1">实例SDK接口IMWSDK对象</h3>  
 `mIMWSDK = MWSdkFactory.create(); ` 
  
-* <h3 id="2">Activity生命周期和初始化SDK</h3> 
-
-	```java
+* <h3 id="110">应用Application设置</h3> 
 	
-	1.应用Application onCreate中调用 （必须调用）
+	```
+	1.应用创建Application并在 onCreate中调用 （必须调用）
 	public class XXXApplication extends Application {
 	    @Override
 	    public void onCreate() {
@@ -169,8 +165,24 @@
 	    }
 
   }
+  
+  
+  2.AndroidManifest.xml标签中设置Application name
+  
+   <application
+        android:name="xx.xx.XXXApplication"
+        ...
+        ...
+        >
+  ```
+
+
+* <h3 id="2">Activity生命周期和初始化SDK</h3> 
+
+	```java
 	
-	2.游戏Activity以下相应的声明周期方法（必须调用）:  
+	
+	游戏Activity以下相应的声明周期方法（必须调用）:  
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -181,26 +193,6 @@
         //在游戏Activity的onCreate生命周期中调用
         mIMWSDK.onCreate(this);
         
-        //设置SDK请求游戏账号退出切换监听
-        mIMWSDK.setSwitchAccountListener(this, new ISdkCallBack() {
-            @Override
-            public void success() {
-
-                //研发在此需要进行游戏退出
-                // 切换账号，重新回到登录页面
-                //.....研发处理游戏退出，完成后重新调用登录接口......
-                mIMWSDK.login(MainActivity.this, new ILoginCallBack() {
-                    @Override
-                    public void onLogin(SLoginResponse sLoginResponse) {
-                        handleLoginResponse(sLoginResponse);
-                    }
-                });
-            }
-
-            @Override
-            public void failure() {
-            }
-        });
 	    
 	}
    @Override
@@ -285,34 +277,6 @@
   	//sample:
 	mIMWSDK.registerRoleInfo(this, "roleid_1", "roleName", "rolelevel", "vip", "s1001", "serverName");
 	
-
-	```
-	
-* <h3 id="22">设置SDK请求游戏账号退出切换监听</h3> 
-	
-	```
-	
- 	//设置SDK请求游戏账号退出切换监听
-    mIMWSDK.setSwitchAccountListener(this, new ISdkCallBack() {
-        @Override
-        public void success() {
-
-            //研发在此需要进行游戏退出
-            // 切换账号，重新回到登录页面
-            //.....研发处理游戏退出，完成后重新调用登录接口......
-            mIMWSDK.login(MainActivity.this, new ILoginCallBack() {
-                @Override
-                public void onLogin(SLoginResponse sLoginResponse) {
-                    handleLoginResponse(sLoginResponse);
-                }
-            });
-        }
-
-        @Override
-        public void failure() {
-        }
-    });	
-    
 
 	```
 	
@@ -573,96 +537,6 @@
         });	
 	```
 	
-* <h3 id="15">请求获取手机验证码</h3>   
-	
-	```
-	/**
-     * 请求获取手机验证码
-     * @param activity
-     * @param areaCode  手机区号（不带"+"，如中国：86）
-     * @param telephone 手机号码
-     * @param sfCallBack    回调
-     */
-    public void requestVfCode(Activity activity, String areaCode, String telephone,SFCallBack sfCallBack);
-    
-    示例：
-    mIMWSDK.requestVfCode(this, "86", "13622843403", new SFCallBack<BaseResponseModel>() {
-            @Override
-            public void success(BaseResponseModel responseModel, String result) {
-                //获取手机验证码成功
-                //todo
-            }
-
-            @Override
-            public void fail(BaseResponseModel responseModel, String result) {
-                if (responseModel != null){
-                    String errMsg = responseModel.getMessage();//获取验证码 错误信息
-                }
-            }
-        });
-	
-	```
-* <h3 id="16">请求绑定手机</h3>   
-	
-	```
-	/**
-     * 请求绑定手机
-     * @param activity
-     * @param areaCode 区号
-     * @param telephone 手机号码
-     * @param vfCode    验证码
-     * @param sfCallBack
-     */
-    public void requestBindPhone(Activity activity, String areaCode, String telephone,String vfCode, SFCallBack sfCallBack);
-    
-    
-    示例:
-    
-     mIMWSDK.requestBindPhone(this, "86", "13622843403", "111111", new SFCallBack<SLoginResponse>() {
-            @Override
-            public void success(SLoginResponse sLoginResponse, String result) {
-                if (sLoginResponse != null) {
-                    String tel = sLoginResponse.getData().getTelephone();//绑定的手机号码，格式：国际区号-号码，比如86-13622843403
-                }
-            }
-
-            @Override
-            public void fail(SLoginResponse sLoginResponse, String result) {
-                if (sLoginResponse != null) {
-                    String errMsg = sLoginResponse.getMessage();
-                }
-
-            }
-        });
-	
-	```
-* <h3 id="17">请求账号升级</h3>   
-	
-	```
-	 /**
-     * 请求账号升级
-     * @param activity
-     * @param account 需要绑定的新账号
-     * @param pwd 新账号的密码
-     * @param sfCallBack 回调
-     */
-    public void requestUpgradeAccount(Activity activity, String account, String pwd, SFCallBack sfCallBack);
-	
-	示例：
-	mIMWSDK.requestUpgradeAccount(this, "xxx", "pwd", new SFCallBack<SLoginResponse>() {
-
-            @Override
-            public void success(SLoginResponse result, String msg) {
-                //账号升级成功
-            }
-
-            @Override
-            public void fail(SLoginResponse result, String msg) {
-                //账号升级绑定失败
-            }
-        });
-        
-	```
 	
 * <h3 id="19">打开活动弹窗页面</h3>   
 	
@@ -694,7 +568,7 @@
 	3. 检查权限，不要添加多余的、没有使用的权限，使用到的权限越少越好；不能使用Google不建议的权限,如SYSTEM_ALERT_WINDOW and WRITE_SETTINGS 
 	相关说明:https://developer.android.com/guide/topics/permissions/requesting.html#perm-groups"
 	4. 从 2021 年 8 月起，新应用需要使用 Android App Bundle 才能在 Google Play 中发布。现在，Play Feature Delivery 或 Play Asset Delivery 支持大小超过 150 MB 的新应用,相关链接：https://developer.android.com/guide/app-bundle?hl=zh-cn
-	5. 最低版本支持：minSdkVersion 21
+	5. 最低版本支持：minSdkVersion 25
 	6. Libpng 漏洞问题，需要使用合适的版本 文档： https://support.google.com/faqs/answer/7011127
 	7. WebView SSL 错误处理 https://support.google.com/faqs/answer/7071387?hl=zh-Hans
 	8. 确保您的应用支持64位设备  https://developer.android.com/distribute/best-practices/develop/64-bit
