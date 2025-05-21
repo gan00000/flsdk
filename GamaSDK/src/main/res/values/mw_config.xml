@@ -62,4 +62,6 @@
     <string name="mw_singular_key"></string>
     <string name="mw_singular_secret"></string>
 
+    <string name="mw_select_channel_other2"></string>
+
 </resources>

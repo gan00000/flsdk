@@ -33,6 +33,7 @@ public class SelectPayChannelLayout extends SLoginBaseRelativeLayout {
     protected View xmPayView;//小米
 
     private ImageView iv_select_channel_rebate;
+    private ImageView iv_select_channel_other_2;
 
     private SFCallBack<ChannelPlatform> sfCallBack;
 
@@ -77,6 +78,10 @@ public class SelectPayChannelLayout extends SLoginBaseRelativeLayout {
         xmPayView = contentView.findViewById(R.id.rl_select_channel_xm);
         iv_select_channel_rebate = contentView.findViewById(R.id.iv_select_channel_rebate);
 
+        View select_channel_title_layout = contentView.findViewById(R.id.select_channel_title_layout);
+        iv_select_channel_other_2 = contentView.findViewById(R.id.iv_select_channel_other_2);
+        View select_channel_other1_layout = contentView.findViewById(R.id.select_channel_other1_layout);
+
         backView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,6 +110,16 @@ public class SelectPayChannelLayout extends SLoginBaseRelativeLayout {
                 }
             }
         });
+        iv_select_channel_other_2.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (sfCallBack != null){
+                    sfCallBack.fail(ChannelPlatform.MEOW,"");
+                }
+            }
+        });
+
         ruPayView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -138,6 +153,17 @@ public class SelectPayChannelLayout extends SLoginBaseRelativeLayout {
             xmPayView.setVisibility(View.GONE);
         }
 
+        boolean isShowOther2 = "true".equals(getContext().getString(R.string.mw_select_channel_other2));//添加多一个第三方，直接用图片显示，这情况隐藏title和另一个第三方
+        if (isShowOther2){
+            select_channel_title_layout.setVisibility(View.GONE);
+            select_channel_other1_layout.setVisibility(View.GONE);
+            iv_select_channel_other_2.setVisibility(View.VISIBLE);
+        }else {
+            select_channel_title_layout.setVisibility(View.VISIBLE);
+            select_channel_other1_layout.setVisibility(View.VISIBLE);
+            iv_select_channel_other_2.setVisibility(View.GONE);
+        }
+
         try {
 
             String gameCode = ResConfig.getGameCode(getContext().getApplicationContext());
@@ -153,6 +179,16 @@ public class SelectPayChannelLayout extends SLoginBaseRelativeLayout {
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
 //                    .placeholder(R.drawable.bg_pay_gg)
                     .into(iv_select_channel_rebate);
+
+            String other_channel_url = String.format("%simage/sdk/%s/other_channel.png?t=%s", ResConfig.getCdnPreferredUrl(getContext()), gameCode, loginTimestamp);
+            if (isShowOther2){
+                Glide.with(this)
+                        .load(other_channel_url)
+                        .centerCrop()
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .placeholder(R.mipmap.select_channel_other_bg2)
+                        .into(iv_select_channel_other_2);
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
