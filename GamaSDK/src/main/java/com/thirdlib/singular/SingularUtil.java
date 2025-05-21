@@ -104,7 +104,7 @@ public class SingularUtil {
             PL.i("-----track event singular onSuccess eventName=" + eventName);
         }else {//收益上报
 
-            if (SStringUtil.isEmpty(currency)){//使用默认收益事件名
+            if (SStringUtil.isEmpty(eventName)){//使用默认收益事件名
                 PL.i("-----track event revenue singular start");
                 Singular.revenue(currency, amount, attributes);
                 PL.i("-----track event revenue singular onSuccess");
