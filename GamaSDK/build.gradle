@@ -13,7 +13,7 @@ android {
         jvmTarget = rootProject.ext.jvmTarget
     }
 
-    def sdk_version = "2.3.0"
+    def sdk_version = "2.3.1"
     def domainUrl= "" //越南M2,新代理chiendemobile.vn
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
@@ -133,6 +133,7 @@ android {
             dimension '1'
             resValue "string", "sdk_inner_version", "vn"
             resValue "string", "mw_td_appid", "be82e99387084fc4ac927264efa5ec51"
+            resValue "string", "mw_select_channel_other2", "true"
         }
 
         sdk6 {//第6套，东南亚
