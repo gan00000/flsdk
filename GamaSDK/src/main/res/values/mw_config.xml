@@ -42,11 +42,13 @@
 
     <string name="sdk_release_european"></string>
 
+    <!--    数数用-->
     <string name="mw_td_appid"></string>
 <!--    <string name="mw_td_te_server_url"></string>-->
 
     <string name="mw_vk_appid"></string>
 
+    <!--    titok用-->
     <string name="mw_tt_app_id"></string>
 
     <string name="mw_nowgg_app_id"></string>
