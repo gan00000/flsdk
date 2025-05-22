@@ -188,7 +188,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
 
     @Override
     public void startPay(Activity activity, PayReqBean payReqBean) {
-
+        GBillingHelper.getInstance().setBillingHelperStatusCallback(this);
         //this.createOrderIdReqBean = null;
         PL.i("the aar version info:" + SdkUtil.getSdkInnerVersion(activity) + "_" + BuildConfig.JAR_VERSION);//打印版本号
 
@@ -250,6 +250,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
 
         this.mActivity = activity;
         PL.i("startQueryPurchase onQueryPurchasesResponse");
+        GBillingHelper.getInstance().setBillingHelperStatusCallback(this);
         GBillingHelper.getInstance().queryPurchasesAsync(activity, false);
 
     }
@@ -373,9 +374,10 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
 //        ====注意：如果您在三天内未确认购买交易，则用户会自动收到退款，并且 Google Play 会撤消该购买交易。====
 
         //1.先查询=>在提供待售商品之前，检查用户是否尚未拥有该商品。如果用户的消耗型商品仍在他们的商品库中，他们必须先消耗掉该商品，然后才能再次购买。
-
-        if (this.mActivity == null){
-            callbackFail("googlePayInActivity mActivity is null");
+        PL.d("in googlePayInActivity");
+        if (this.mActivity == null || createOrderIdReqBean == null){
+            PL.d("createOrderIdReqBean is null");
+            callbackFail("createOrderIdReqBean is null");
             return;
         }
         PL.d("start googlePayInActivity");

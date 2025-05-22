@@ -215,7 +215,7 @@ public abstract class AbsHttpRequest implements ISRqeust {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        PL.i("AbsHttpRequest onError");
+                        PL.i("AbsHttpRequest onError," + e.getMessage());
                         if (loadDialog != null && loadDialog.isShowing()){
                             loadDialog.dismiss();
                         }

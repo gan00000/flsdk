@@ -26,7 +26,7 @@ public class MWWebPayActivity extends MWBaseWebActivity {
 
     private WebPayJs webPayJs;
 
-    private IPay iPay;
+//    private IPay iPay;
     private String productId;
     private String cpOrderId;
     private String extra;
@@ -75,8 +75,8 @@ public class MWWebPayActivity extends MWBaseWebActivity {
             sWebView.loadUrl(webUrl);
 //            sWebView.loadUrl("https://play.google.com/store/apps/details?id=tw.com.iwplay.tlbbhk&hl=zh-CN");
         }
-        iPay = IPayFactory.create(this);
-        iPay.onCreate(this);
+//        iPay = IPayFactory.create(this);
+//        iPay.onCreate(this);
     }
 
     @Override
@@ -87,32 +87,32 @@ public class MWWebPayActivity extends MWBaseWebActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (iPay != null){
-            iPay.onResume(this);
-        }
+//        if (iPay != null){
+//            iPay.onResume(this);
+//        }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (iPay != null){
-            iPay.onActivityResult(this,requestCode,resultCode,data);
-        }
+//        if (iPay != null){
+//            iPay.onActivityResult(this,requestCode,resultCode,data);
+//        }
     }
 
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (iPay != null){
-            iPay.onDestroy(this);
-        }
+//        if (iPay != null){
+//            iPay.onDestroy(this);
+//        }
     }
 
     private void doGooglePay(Activity activity, PayCreateOrderReqBean payCreateOrderReqBean) {
 
         //设置Google储值的回调
-        iPay.setIPayCallBack(new IPayCallBack() {
+       /* iPay.setIPayCallBack(new IPayCallBack() {
             @Override
             public void success(BasePayBean basePayBean) {
                 PL.i("IPayCallBack success");
@@ -142,17 +142,17 @@ public class MWWebPayActivity extends MWBaseWebActivity {
             }
         });
 
-        iPay.startPay(activity, payCreateOrderReqBean);
+        iPay.startPay(activity, payCreateOrderReqBean);*/
     }
 
     public void googlePay(String productId){
 
-        PayCreateOrderReqBean payCreateOrderReqBean = new PayCreateOrderReqBean(this);
+       /* PayCreateOrderReqBean payCreateOrderReqBean = new PayCreateOrderReqBean(this);
         payCreateOrderReqBean.setCpOrderId(cpOrderId);
         payCreateOrderReqBean.setProductId(productId);
         payCreateOrderReqBean.setExtra(extra);
 
-        doGooglePay(this, payCreateOrderReqBean);
+        doGooglePay(this, payCreateOrderReqBean);*/
     }
 
     public void payFinish(boolean success,String productId){
