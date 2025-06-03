@@ -179,9 +179,11 @@ public class MWSdkImpl extends BaseSdkImpl {
     public void registerRoleInfo(Activity activity, String roleId, String roleName, String roleLevel, String vipLevel, String severCode, String serverName) {
         super.registerRoleInfo(activity, roleId, roleName, roleLevel, vipLevel, severCode, serverName);
 
-        if (SStringUtil.isEmpty(roleId) || SStringUtil.isEmpty(severCode) || SStringUtil.isEmpty(roleName)
+        if (SStringUtil.isEmpty(roleId)
+                || SStringUtil.isEmpty(severCode)
+                || SStringUtil.isEmpty(roleName)
                 || SStringUtil.isEmpty(serverName)
-                || SStringUtil.isEmpty(roleId)){
+                || SStringUtil.isEmpty(roleLevel)){
             return;
         }
         activity.runOnUiThread(new Runnable() {
