@@ -230,6 +230,7 @@ public class VKPurchaseManger {
 
 
     public void deletePurchase(Context context, String purchaseId) {
+        /*
         PurchasesUseCase purchasesUseCase = getBillingClient(context).getPurchases();
         //To cancel a purchase, use the deletePurchase method.
         purchasesUseCase.deletePurchase(purchaseId)
@@ -239,6 +240,7 @@ public class VKPurchaseManger {
                 .addOnFailureListener(throwable -> {
                     Log.e("RuStoreBillingClient", "Error calling deletePurchase cause: " + throwable);
                 });
+        */
     }
 
     interface PurchaseCallback {
