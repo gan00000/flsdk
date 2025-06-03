@@ -508,7 +508,7 @@ android {
             signingConfig signingConfigs.release_vn
             dimension "1"
             //base
-            applicationId "com.wanxin.cztxvn"
+            applicationId "com.yncz.ggl"
             versionCode 1
             versionName "1.0"
             minSdkVersion 25
@@ -534,6 +534,7 @@ android {
             //naver
             resValue "string", "naver_client_id", ""
             resValue "string", "naver_client_secret", ""
+            resValue "string", "mw_select_channel_other2", "true"
             //=======================================sdk config end==========================
 
             //每个游戏的demo设置 test

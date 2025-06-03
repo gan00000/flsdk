@@ -121,7 +121,8 @@ public class MainActivity extends Activity {
 //                com.game.superand.1usd
 //                com.game.superand.2usd
 //                String skuId = "com.miaoou.6jin";
-                String skuId = "com.msg.en099";
+//                String skuId = "com.msg.en099";
+                String skuId = "com.wmwx.sgcz.99";
                 mIMWSDK.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(),skuId, extra,roleId,roleName,roleLevel, vipLevel,serverCode, serverName, new IPayListener() {
 
                     @Override
