@@ -85,6 +85,7 @@ public class SLoginResponse extends BaseResponseModel {
         private String telephone;
 
         private String area;//用户地区
+        private String countryCode;//用户访问ip的国家编码
         private boolean isTest;//是否是测试用户
 
         private boolean miniGameUser = false;
@@ -257,6 +258,14 @@ public class SLoginResponse extends BaseResponseModel {
 
         public void setBlockMsg(String blockMsg) {
             this.blockMsg = blockMsg;
+        }
+
+        public String getCountryCode() {
+            return countryCode;
+        }
+
+        public void setCountryCode(String countryCode) {
+            this.countryCode = countryCode;
         }
 
         @Override
