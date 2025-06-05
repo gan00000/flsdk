@@ -384,20 +384,35 @@ android {
         sdk5 {
 
             signingConfig signingConfigs.release_v2
-            applicationId "com.wantang.xlzsg"
+            applicationId "com.cztx.tw"
             minSdkVersion 25
-            targetSdkVersion 33
+            targetSdkVersion 34
             versionCode 10
             versionName "1.0"
             dimension "1"
-            resValue "string", "scheme", "gwsg"
-            resValue "string", "facebook_app_id", "1362551254507553"
-            resValue "string", "facebook_client_token", "0a8e2080cba4d5aa1fe9d9dd65c04e58"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1362551254507553" //启用分析
-            resValue "string", "fb_login_protocol_scheme", "fb1362551254507553"
-            resValue "string", "facebook_app_name", "鬼武三國"
-            resValue "string", "line_channelId", "1657882064"
-            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow"
+
+            resValue "string", "sdk_game_code", "cztxtw"
+            resValue "string", "sdk_app_key", "b8dac146fbac0ccf99482bf6914d7d7d"
+            resValue "string", "sdk_more_language", "true"
+            resValue "string", "sdk_default_server_language", "zh_TW"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
+            resValue "string", "scheme", "cztxtw"
+            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
+            //facebook
+            resValue "string", "facebook_app_id", "746848097787359"
+            resValue "string", "facebook_client_token", "5a65d2d68a15dac08ecdf1bd8e86bfbb"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider746848097787359"
+            resValue "string", "fb_login_protocol_scheme", "fb746848097787359"
+            resValue "string", "facebook_app_name", "cztxtw" //游戏名字
+            //shushu
+            resValue "string", "mw_td_appid", "fbe295b32f7b46c79b0a2e963790fdc5"
+            //ad
+            resValue "string", "adjust_app_token", ""
+            resValue "string", "sdk_appflyer_dev_key", "3xd7ZNbo3EjyQfEkZZt5Sn"
+            //line
+            resValue "string", "line_channelId", ""
+            //naver
+            resValue "string", "naver_client_id", ""
+            resValue "string", "naver_client_secret", ""
 
             //每个游戏的demo设置 test
             resValue "string", "sdk_name", "鬼武三國demo"
