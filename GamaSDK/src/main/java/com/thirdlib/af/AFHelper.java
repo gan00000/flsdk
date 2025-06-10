@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.os.Handler;
-import android.os.Looper;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -26,6 +25,7 @@ import com.mw.sdk.utils.SdkUtil;
 import com.thirdlib.ThirdModuleUtil;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -36,6 +36,9 @@ public class AFHelper {
     // This boolean flag signals between the UDL and GCD callbacks that this deep_link was
     // already processed, and the callback functionality for deep linking can be skipped.
     // When GCD or UDL finds this flag true it MUST set it to false before skipping.
+
+    private static Handler handler;
+    private static final ArrayList<Integer> sendServerEventIdArr = new ArrayList<>();
 
     public static String getAppsFlyerUID(Context context){
         if (!ThirdModuleUtil.existAppsFlyerModule()){
@@ -50,6 +53,8 @@ public class AFHelper {
         if (!ThirdModuleUtil.existAppsFlyerModule()){
             return;
         }
+
+        handler = new Handler();
         AppsFlyerLib.getInstance().setCollectIMEI(false);
         AppsFlyerLib.getInstance().setCollectAndroidID(false);
         String afDevKey = ResConfig.getAfDevKey(application.getApplicationContext());
@@ -217,7 +222,9 @@ public class AFHelper {
             return;
         }
         PL.i("-----track event af start name=" + eventName);
+
         AppsFlyerLib.getInstance().logEvent(context, eventName, map, new AppsFlyerRequestListener() {
+
             @Override
             public void onSuccess() {
                 PL.i("-----track event af onSuccess eventName=" + eventName);
@@ -225,9 +232,20 @@ public class AFHelper {
 
             @Override
             public void onError(int i, @NonNull String s) {
-                PL.i("-----track event af onError eventName=" + eventName);
+                int event_id = this.hashCode();
+                PL.i("-----track event af onError eventName=" + eventName + ",event_id=" + event_id);
                 //子线程
-                logEventAgain(context, eventName, map);
+//                logEventAgain(context, eventName, map);
+                if (sendServerEventIdArr.contains(event_id)) {
+                    return;
+                }
+                if (sendServerEventIdArr.size() > 3000){
+                    sendServerEventIdArr.clear();
+                }
+                sendServerEventIdArr.add(event_id);
+                PL.i("-----track event af onError sendToServer event_id=" + event_id);
+                sendToServer(context, eventName, i, s);
+
             }
         });
 
@@ -238,13 +256,16 @@ public class AFHelper {
         if (context == null || SStringUtil.isEmpty(eventName)){
             return;
         }
-        if (BuildConfig.DEBUG){
+//        if (BuildConfig.DEBUG){
+//            return;
+//        }
+        if (handler == null){
             return;
         }
         if (context instanceof Activity){
-            Activity activityx = (Activity)context;
-            WeakReference<Activity> activityWeakRef = new WeakReference<>(activityx); ;
-            Handler handler = new Handler(Looper.getMainLooper());
+//            Activity activityx = (Activity)context;
+//            WeakReference<Activity> activityWeakRef = new WeakReference<>(activityx); ;
+
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -256,18 +277,18 @@ public class AFHelper {
 
                         @Override
                         public void onError(int i, @NonNull String s) {
-                            PL.i("af logEventAgain onError:" + s);
-                            if (activityWeakRef.get() != null){
-                                activityWeakRef.get().runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        //af发送失败，上报服务器记录
-                                        Map<String, String> otParams = new HashMap<String, String>();
-                                        otParams.put("afErrMsg", "Error code: " + i + ", Error msg: " + s);
-                                        SdkEventLogger.sendEventToServer(activityWeakRef.get(), "AfSendFailed_" + eventName, otParams, false,false);
-                                    }
-                                });
-                            }
+                            PL.i("af logEventAgain eventName=%s,onError=%s,code=%s", eventName, s , i);
+//                            if (activityWeakRef.get() != null){
+//                                activityWeakRef.get().runOnUiThread(new Runnable() {
+//                                    @Override
+//                                    public void run() {
+//                                        //af发送失败，上报服务器记录
+//                                        Map<String, String> otParams = new HashMap<String, String>();
+//                                        otParams.put("afErrMsg", "Error code: " + i + ", Error msg: " + s);
+//                                        SdkEventLogger.sendEventToServer(activityWeakRef.get(), "AfSendFailed_" + eventName, otParams, false,false);
+//                                    }
+//                                });
+//                            }
 
                         }
                     });
@@ -275,6 +296,32 @@ public class AFHelper {
             }, 5000);
         }
 
+
+    }
+
+
+    private static void sendToServer(Context context, String eventName, int errCode, String errMsg){
+        if (context == null || SStringUtil.isEmpty(eventName)){
+            return;
+        }
+//        if (BuildConfig.DEBUG){
+//            return;
+//        }
+        if (handler == null){
+            return;
+        }
+
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+
+                //af发送失败，上报服务器记录
+                Map<String, String> otParams = new HashMap<String, String>();
+                otParams.put("afErrMsg", "Error code: " + errCode + ", Error msg: " + errMsg);
+                SdkEventLogger.sendEventToServer(context.getApplicationContext(), "AfSendFailed_" + eventName, otParams, false,false);
+
+            }
+        });
 
     }
 
