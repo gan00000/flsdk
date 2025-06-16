@@ -643,6 +643,8 @@ public class MainActivity extends Activity {
             //是否绑定账号
             boolean isBind = sLoginResponse.getData().isBind();
 
+            String countryCode = sLoginResponse.getData().getCountryCode();
+
             String lg = mIMWSDK.getSdkLanguage(activity);
             if (lg.startsWith("zh")){
                 //中文
