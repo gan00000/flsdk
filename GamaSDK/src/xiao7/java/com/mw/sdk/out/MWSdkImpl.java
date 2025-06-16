@@ -20,6 +20,7 @@ import com.mw.sdk.pay.IPayCallBack;
 import com.mw.sdk.utils.SdkUtil;
 import com.smwl.smsdk.abstrat.SMInitListener;
 import com.smwl.smsdk.abstrat.SMLoginListener;
+import com.smwl.smsdk.abstrat.SMLoginOutListener;
 import com.smwl.smsdk.app.SMPlatformManager;
 import com.smwl.smsdk.bean.RoleInfo;
 import com.smwl.smsdk.bean.SMUserInfo;
@@ -264,6 +265,36 @@ public class MWSdkImpl extends BaseSdkImpl {
 
                     }
                 });
+            }
+        });
+    }
+
+    @Override
+    public void logout(Activity activity, ISdkCallBack iSdkCallBack) {
+//        super.logout(activity, iSdkCallBack);
+        SMPlatformManager.getInstance().exitApp(new SMLoginOutListener() {
+            @Override
+            public void loginOutSuccess() {
+                PL.i("loginOutSuccess");
+                if (iSdkCallBack != null){
+                    iSdkCallBack.success();
+                }
+            }
+
+            @Override
+            public void loginOutFail(String s) {
+                PL.i("loginOutFail");
+                if (iSdkCallBack != null){
+                    iSdkCallBack.failure();
+                }
+            }
+
+            @Override
+            public void loginOutCancel() {
+                PL.i("loginOutCancel");
+                if (iSdkCallBack != null){
+                    iSdkCallBack.failure();
+                }
             }
         });
     }
