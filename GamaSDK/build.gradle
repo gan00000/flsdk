@@ -15,8 +15,8 @@ android {
 
     def sdk_version = "2.3.2"
 //    def domainUrl= ""
-    def domainUrl= "kayplay.com"
-//    def domainUrl= "chiendemobile.vn" //越南M2,新代理chiendemobile.vn
+//    def domainUrl= "kayplay.com"
+    def domainUrl= "chiendemobile.vn" //越南M2,新代理chiendemobile.vn
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
@@ -71,7 +71,7 @@ android {
         release {
 //            multiDexEnabled true //Add this
 //            shrinkResources true  //压缩资源
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
