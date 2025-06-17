@@ -550,6 +550,7 @@ android {
             resValue "string", "naver_client_id", ""
             resValue "string", "naver_client_secret", ""
             resValue "string", "mw_select_channel_other2", "true"
+            resValue "string", "mw_td_appid", "be82e99387084fc4ac927264efa5ec51"
             //=======================================sdk config end==========================
 
             //每个游戏的demo设置 test
