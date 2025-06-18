@@ -1671,6 +1671,10 @@ public class BaseSdkImpl implements IMWSDK {
             ToastUtils.toast(activity, "url empty error");
             return;
         }
+        if (url.startsWith("https://www.facebook.com/")){
+            openFbUrl(activity, url);
+            return;
+        }
         SGameBaseRequestBean sGameBaseRequestBean = new SGameBaseRequestBean(activity);
         sGameBaseRequestBean.setCompleteUrl(url);
         AppUtil.openInOsWebApp(activity,sGameBaseRequestBean.createPreRequestUrl());
