@@ -87,7 +87,7 @@ public class HuaweiPayImpl {
 
     public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
 
-        PL.i("HuaweiPayImpl onActivityResult");
+        PL.i("HuaweiPayImpl onActivityResult requestCode=%s, resultCode=%s", requestCode, resultCode);
         if (requestCode == HW_IAP_REQUEST_CODE_ENVREADY) {
             if (data != null) {
                 // 使用parseRespCodeFromIntent方法获取接口请求结果
@@ -132,6 +132,7 @@ public class HuaweiPayImpl {
                     sendPayment(inAppPurchaseData, inAppPurchaseDataSignature, "no");
                     break;
                 default:
+                    handlePayFail("huawei pay purchase error code=" + purchaseResultInfo.getReturnCode());
                     break;
             }
 
@@ -342,7 +343,7 @@ public class HuaweiPayImpl {
                         PL.i("startResolutionForResult PurchaseIntentReq");
                         status.startResolutionForResult(activity, HW_IAP_REQUEST_CODE_PURCHASE);
                     } catch (IntentSender.SendIntentException exp) {
-
+                        exp.printStackTrace();
                     }
                 }
             }
