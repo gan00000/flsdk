@@ -448,7 +448,7 @@ public class VKPayImpl implements IPay, VKPurchaseManger.PurchaseCallback {
             public void success(GPExchangeRes result, String msg) {
                 PL.i("startQueryPurchase requestSendStone success => " + msg);
                 //3.消费
-                VKPurchaseManger.getInstance().confirmPurchase(mActivity, purchaseId);
+                //VKPurchaseManger.getInstance().confirmPurchase(mActivity, purchaseId);
                 callbackSuccess(null, result);
             }
 
@@ -463,6 +463,8 @@ public class VKPayImpl implements IPay, VKPurchaseManger.PurchaseCallback {
             }
         });
 
+        //3.无论发币成功是否都消费，未确认rustore会5天后自动退款
+        VKPurchaseManger.getInstance().confirmPurchase(mActivity, purchaseId);
     }
 
     @Override
