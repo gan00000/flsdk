@@ -227,7 +227,7 @@ android {
             //base
             applicationId "com.yuewan.tgru"
             minSdkVersion 25
-            targetSdkVersion 34
+            targetSdkVersion 35
 
             resValue "string", "sdk_game_code", "tgru"
             resValue "string", "sdk_app_key", "f2cce538ec5d36b4d725eab7ea227ed1"
@@ -275,7 +275,7 @@ android {
             //base
             applicationId "com.yuewan.tgru"
             minSdkVersion 25
-            targetSdkVersion 34
+            targetSdkVersion 35
 
             resValue "string", "sdk_game_code", "tgru"
             resValue "string", "sdk_app_key", "f2cce538ec5d36b4d725eab7ea227ed1"
@@ -326,7 +326,7 @@ android {
             //base
             applicationId "com.msg.en"
             minSdkVersion 25
-            targetSdkVersion 34
+            targetSdkVersion 35
 
 
             resValue "string", "sdk_game_code", "msgen"
@@ -386,7 +386,7 @@ android {
             signingConfig signingConfigs.release_v2
             applicationId "com.cztx.tw"
             minSdkVersion 25
-            targetSdkVersion 34
+            targetSdkVersion 35
             versionCode 10
             versionName "1.0"
             dimension "1"
@@ -461,7 +461,7 @@ android {
             signingConfig signingConfigs.release_vn
 
             minSdkVersion 25
-            targetSdkVersion 33
+            targetSdkVersion 35
             versionCode 10
             versionName "1.0"
             dimension "1"
@@ -527,7 +527,7 @@ android {
             versionCode 1
             versionName "1.0"
             minSdkVersion 25
-            targetSdkVersion 34
+            targetSdkVersion 35
 
             resValue "string", "sdk_game_code", "cztxvn"
             resValue "string", "sdk_app_key", "3c26e584a7e4a489a6d710881d06ed5e"
@@ -583,7 +583,7 @@ android {
             //base
             applicationId "com.wanxin.tgennow"
             minSdkVersion 25
-            targetSdkVersion 34
+            targetSdkVersion 35
 
             resValue "string", "sdk_game_code", "tgen"
             resValue "string", "sdk_app_key", "c999bd3d4cb5d1239c0c30bfc70506f2"
@@ -655,7 +655,7 @@ android {
 
             applicationId "com.kodatgfm.kr"
             minSdkVersion 25
-            targetSdkVersion 34
+            targetSdkVersion 35
             versionCode 4
             versionName "4.0"
 
@@ -702,7 +702,7 @@ android {
             //base
             applicationId "com.tgfm.thand"
             minSdkVersion 25
-            targetSdkVersion 34
+            targetSdkVersion 35
 
             resValue "string", "sdk_game_code", "tgth"
             resValue "string", "sdk_app_key", "0b12ae79e9fabfc3131500595b76063c"

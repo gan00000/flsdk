@@ -76,7 +76,7 @@
 	
 	    defaultConfig {
 	        minSdkVersion 25
-	        targetSdkVersion 34
+	        targetSdkVersion 35
 	        multiDexEnabled true
 	    }
 	
@@ -89,7 +89,7 @@
             signingConfig signingConfigs.release_kr  //签名sdk提供
             applicationId "com.xxx.xxx"  //包名sdk提供	
             minSdkVersion 25
-            targetSdkVersion 34
+            targetSdkVersion 35
             versionCode 1
             versionName "1.0."
             flavorDimensions "1"
