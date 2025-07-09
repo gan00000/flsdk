@@ -151,68 +151,6 @@ android {
     flavorDimensions "1"
     productFlavors {
 
-        QooApp {
-
-            signingConfig signingConfigs.release_v2
-            applicationId "com.wantang.xlzsg.qooapp"  //qooapp渠道包名必须qooapp结尾
-            minSdkVersion 25
-            targetSdkVersion 33
-            versionCode 10
-            versionName "1.0"
-            dimension "1"
-            resValue "string", "scheme", "gwsg"
-//            resValue "string", "facebook_app_id", "1362551254507553"
-//            resValue "string", "facebook_client_token", "0a8e2080cba4d5aa1fe9d9dd65c04e58"
-//            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1362551254507553" //启用分析
-//            resValue "string", "fb_login_protocol_scheme", "fb1362551254507553"
-//            resValue "string", "facebook_app_name", "鬼武三國：燼"
-//            resValue "string", "line_channelId", ""
-            resValue "string", "channel_platform", "qooapp"  //渠道区分,google包设置google,apk包设置"meow",qooapp渠道apk为"qooapp"
-
-            //每个游戏的demo设置 test
-            resValue "string", "sdk_name", "qooapp demo"
-
-        }
-        lunqi {
-
-            signingConfig signingConfigs.release_v2
-            versionCode 10
-            versionName "1.0"
-            dimension "1"
-
-            //=======================================sdk config==========================
-
-            applicationId "com.mwyyz.tw"
-            minSdkVersion 25
-            targetSdkVersion 34
-
-            //base
-            resValue "string", "sdk_game_code", "mxwtw"
-            resValue "string", "sdk_app_key", "7c29c30164e0c36e7bc43399bca0c570"
-            resValue "string", "sdk_more_language", "true"
-            resValue "string", "sdk_default_server_language", "zh_TW"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
-            resValue "string", "scheme", "mxwtw"
-            resValue "string", "channel_platform", "lunqi"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore",huawei
-            //facebook
-            resValue "string", "facebook_app_id", "1122"
-            resValue "string", "facebook_client_token", "1122"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1122" //启用分析
-            resValue "string", "fb_login_protocol_scheme", "fb1122"
-            resValue "string", "facebook_app_name", "mxwtw" //游戏名字
-            //ad
-            resValue "string", "adjust_app_token", ""
-            resValue "string", "sdk_appflyer_dev_key", ""
-            //line
-            resValue "string", "line_channelId", ""
-            //naver
-            resValue "string", "naver_client_id", ""
-            resValue "string", "naver_client_secret", ""
-
-            //=======================================sdk config end==========================
-
-            resValue "string", "sdk_name", "lunqi demo"
-
-        }
 
         sdk3 {
 

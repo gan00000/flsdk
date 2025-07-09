@@ -117,10 +117,10 @@ android {
             resValue "string", "sdk_inner_version", "v5"
         }
 
-        QooApp {//Qooap
-            dimension '1'
-            resValue "string", "sdk_inner_version", "qooapp"
-        }
+//        QooApp {//Qooap
+//            dimension '1'
+//            resValue "string", "sdk_inner_version", "qooapp"
+//        }
 
         huawei {//华为渠道
             dimension '1'
@@ -158,10 +158,10 @@ android {
             resValue "string", "mw_td_appid", ""
         }
 
-        lunqi {//lunqi
-            dimension '1'
-            resValue "string", "sdk_inner_version", "lunqi"
-        }
+//        lunqi {//lunqi
+//            dimension '1'
+//            resValue "string", "sdk_inner_version", "lunqi"
+//        }
 
     }
 }
@@ -267,7 +267,7 @@ dependencies {
     huaweiImplementation 'com.huawei.hms:componentverifysdk:13.3.1.301'
 
     //qooapp sdk
-    QooAppImplementation(name: 'qooapp-opensdk-2.0.6', ext: 'aar')
+    //QooAppImplementation(name: 'qooapp-opensdk-2.0.6', ext: 'aar')
 
     //naver
     sdkKRImplementation("com.navercorp.nid:oauth:5.6.0") // jdk 11
@@ -278,7 +278,7 @@ dependencies {
     sdkKRImplementation(name: 'Samsung-IAP6Helper-release2', ext: 'aar')
 
     //伦其
-    lunqiImplementation files('libs/xlsdk1.jar')
+//    lunqiImplementation files('libs/xlsdk1.jar')
 
     //俄罗斯
     implementation(platform("ru.rustore.sdk:bom:2025.05.02"))
