@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.core.base.callback.SFCallBack;
+import com.core.base.utils.AppUtil;
 import com.core.base.utils.PL;
 import com.mw.sdk.R;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
@@ -26,7 +27,7 @@ public class SdkLogLayout extends SLoginBaseRelativeLayout {
 
     private View contentView;
 
-    protected View allLogView, eventLogView;
+    protected View allLogView, eventLogView, copyLogView;
     private TextView logTextView;
 
     private SFCallBack sfCallBack;
@@ -62,6 +63,7 @@ public class SdkLogLayout extends SLoginBaseRelativeLayout {
         backView = contentView.findViewById(R.id.tv_log_close);
         allLogView = contentView.findViewById(R.id.tv_log_all);
         eventLogView = contentView.findViewById(R.id.tv_log_event);
+        copyLogView = contentView.findViewById(R.id.tv_log_copy);
         logTextView = contentView.findViewById(R.id.tv_log_content);
 
         backView.setOnClickListener(new OnClickListener() {
@@ -104,6 +106,16 @@ public class SdkLogLayout extends SLoginBaseRelativeLayout {
 
             }
         });
+
+        copyLogView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (logTextView != null) {
+                    AppUtil.copyText(getContext(), "wmLogKey", logTextView.getText().toString());
+                }
+            }
+        });
+
         logTextView.setText(PL.getLocalLog(getContext()));
         return contentView;
     }
