@@ -106,7 +106,7 @@
     <string name="py_error_occur">Lỗi mạng, hãy kiểm tra lại</string>
     <string name="text_i_agree_tips">Tôi đã đọc và đồng ý</string>
     <string name="text_i_read_agree">Đọc và đồng ý</string>
-    <string name="text_term_moqie"><u>Khế ước định hình hóa</u></string>
+    <string name="text_term_moqie"><u>Đồng ý điều khoản</u></string>
     <string name="sdk_terms_title">Khế ước định hình hóa</string>
     <string name="text_switch_account">Chuyển tài khoản</string>
     <string name="text_update_account_bind">Nâng cấp tài khoản</string>
