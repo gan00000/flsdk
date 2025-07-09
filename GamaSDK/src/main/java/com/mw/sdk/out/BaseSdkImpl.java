@@ -21,6 +21,7 @@ import android.webkit.WebView;
 import com.core.base.BaseWebViewClient;
 import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.SFCallBack;
+import com.core.base.utils.ApkInfoUtil;
 import com.core.base.utils.AppUtil;
 import com.core.base.utils.JsonUtil;
 import com.core.base.utils.PL;
@@ -395,10 +396,13 @@ public class BaseSdkImpl implements IMWSDK {
 
         String keyhash = SignatureUtil.getHashKey(activity, activity.getPackageName());
         String sha1 = SignatureUtil.getSignatureSHA1WithColon(activity, activity.getPackageName());
-        PL.i("fb keyhash:" + keyhash);
-        PL.i("google sha1:" + sha1);
+        PL.i("app fb keyhash:" + keyhash);
+        PL.i("app google sha1:" + sha1);
         PL.i("app sha256:" + SignatureUtil.getSignatureSHA256WithColon(activity, activity.getPackageName()));
         SdkUtil.saveSignInfo(activity, keyhash + "_" + sha1);
+
+        String mainActivityName = ApkInfoUtil.getLaunchActivityName(activity);
+        PL.i("app main类名:" + mainActivityName);
 
         this.activity = activity;
         this.regRoleInfoTimestamp = 0;

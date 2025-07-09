@@ -1,6 +1,7 @@
 package com.core.base.utils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -46,6 +47,20 @@ public class ApkInfoUtil {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public static String getLaunchActivityName(Context context) {
+		try {
+			PackageManager pm = context.getPackageManager();
+			Intent mainIntent = pm.getLaunchIntentForPackage(context.getPackageName());
+			if (mainIntent != null && mainIntent.getComponent() != null){
+				return  mainIntent.getComponent().getClassName();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "";
 	}
 
 	/**

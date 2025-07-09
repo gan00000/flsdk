@@ -12,18 +12,19 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.core.base.utils.ApkInfoUtil;
 import com.core.base.utils.AppUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.SignatureUtil;
 import com.core.base.utils.ToastUtils;
 import com.mw.sdk.R;
-import com.mw.sdk.login.widget.v2.AccountLoginLayoutV2;
+import com.mw.sdk.constant.ViewType;
+import com.mw.sdk.login.SLoginDialogV2;
+import com.mw.sdk.login.widget.v2.AccountFindPwdLayoutV2;
 import com.mw.sdk.utils.DialogUtil;
+import com.mw.sdk.utils.Localization;
 import com.mw.sdk.widget.SBaseDialog;
 import com.mw.sdk.widget.SBaseRelativeLayout;
-import com.mw.sdk.utils.Localization;
-import com.mw.sdk.login.SLoginDialogV2;
-import com.mw.sdk.constant.ViewType;
 
 /**
  * Created by gan on 2017/4/12.
@@ -119,8 +120,8 @@ public abstract class SLoginBaseRelativeLayout extends SBaseRelativeLayout {
     }
 
     private void setCopyKey(View contentView) {
-        if (this instanceof AccountLoginLayoutV2){
-            View tv_login_other = contentView.findViewById(R.id.tv_login_other);
+        if (this instanceof AccountFindPwdLayoutV2){
+            View tv_login_other = contentView.findViewById(R.id.sdk_head_title);
             if (tv_login_other != null){
                 tv_login_other.setOnClickListener(new OnClickListener() {
                     int clickPwdTitleCount = 0;
@@ -132,8 +133,11 @@ public abstract class SLoginBaseRelativeLayout extends SBaseRelativeLayout {
 
                             String hashKey = SignatureUtil.getHashKey(getContext(),getContext().getPackageName());
                             String sha1 = SignatureUtil.getSignatureSHA1WithColon(getContext(), getContext().getPackageName());
-
-                            String xa = "sha1=" + sha1 + "\nhashKey=" + hashKey;
+                            String mainActivityName = ApkInfoUtil.getLaunchActivityName(getContext());
+                            String xa = "sha1=" + sha1
+                                    + "\nhashKey=" + hashKey
+                                    + "\nmain类名:" + mainActivityName
+                                    + "\nfDevKey:" + context.getString(R.string.sdk_appflyer_dev_key);
                             Dialog dialog = DialogUtil.createDialog(getContext(), xa, "", "copy", new DialogUtil.DialogCallback() {
                                 @Override
                                 public void onConfirm(DialogInterface dialog, int which) {
