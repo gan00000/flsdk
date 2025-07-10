@@ -37,8 +37,8 @@ android {
 
     }
 
-    android.libraryVariants.all { variant ->
-        variant.outputs.all {
+    android.libraryVariants.configureEach { variant ->
+        variant.outputs.configureEach {
             //定义一个文件
 //            if (outputFileName != null && outputFileName.contains("release") && outputFileName.endsWith('.aar') && outputFileName.contains('sdk1')) {
 //                outputFileName = "MWSDK-sdk1-release-" + sdk_version + ".aar"
