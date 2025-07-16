@@ -4,6 +4,10 @@ ext {
 //    def domainUrl= ""
     domainUrl= "hwxgame.com"
 }
+
+//常规对象：默认覆盖整个嵌套对象
+//特定 DSL：部分属性（如 Android 的 defaultConfig、CopySpec 的 from）支持智能合并
+//自定义对象：需手动实现合并逻辑
 android {
 
     buildTypes {
@@ -54,6 +58,13 @@ android {
 
             resValue "string", "mw_tt_app_id", ""
 
+        }
+
+        sdk6 {//第6套，东南亚
+            dimension "1"
+            resValue "string", "sdk_inner_version", "v6"
+            resValue "string", "sdk_release_european", "false" //发布欧洲地区的话要设置
+            resValue "string", "mw_td_appid", "ddaaa"
         }
 
     }
