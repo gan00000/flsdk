@@ -13,7 +13,7 @@ android {
         release {
 //            multiDexEnabled true //Add this
 //            shrinkResources true  //压缩资源
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
@@ -33,34 +33,57 @@ android {
             minSdkVersion 25
             targetSdkVersion 35
 
-            resValue "string", "sdk_game_code", "tgen"
-            resValue "string", "sdk_app_key", "c999bd3d4cb5d1239c0c30bfc70506f2"
+            resValue "string", "sdk_game_code", "cztxtw"
+            resValue "string", "sdk_app_key", "b8dac146fbac0ccf99482bf6914d7d7d"
             resValue "string", "sdk_more_language", "true"
-            resValue "string", "sdk_default_server_language", "en_US"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
-            resValue "string", "scheme", "tgen"
+            resValue "string", "sdk_default_server_language", "zh_TW"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
+            resValue "string", "scheme", "cztxtw"
             resValue "string", "channel_platform", "huawei"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
             //facebook
-            resValue "string", "facebook_app_id", "412108094771737"
-            resValue "string", "facebook_client_token", "e36a0f2a998fbfec7bf6ed97e5946f7b"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider412108094771737"
-            resValue "string", "fb_login_protocol_scheme", "fb412108094771737"
-            resValue "string", "facebook_app_name", "tgen" //游戏名字
+            resValue "string", "facebook_app_id", "746848097787359"
+            resValue "string", "facebook_client_token", "5a65d2d68a15dac08ecdf1bd8e86bfbb"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider746848097787359"
+            resValue "string", "fb_login_protocol_scheme", "fb746848097787359"
+            resValue "string", "facebook_app_name", "cztxtw" //游戏名字
+            //shushu
+            resValue "string", "mw_td_appid", "fbe295b32f7b46c79b0a2e963790fdc5"
             //ad
             resValue "string", "adjust_app_token", ""
-            resValue "string", "sdk_appflyer_dev_key", "c3kBsVHu5852ySuN5WvUoh"
+            resValue "string", "sdk_appflyer_dev_key", "ck8bo3ie3SipZRE2ztdunW"
             //line
             resValue "string", "line_channelId", ""
             //naver
             resValue "string", "naver_client_id", ""
             resValue "string", "naver_client_secret", ""
-            resValue "string", "naver_client_secret", ""
-
-            resValue "string", "mw_tt_app_id", ""
 
         }
 
         sdk5 {//第6套，东南亚
             dimension "1"
+
+            resValue "string", "sdk_game_code", "cztxtw"
+            resValue "string", "sdk_app_key", "b8dac146fbac0ccf99482bf6914d7d7d"
+            resValue "string", "sdk_more_language", "true"
+            resValue "string", "sdk_default_server_language", "zh_TW"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
+            resValue "string", "scheme", "cztxtw"
+            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
+            //facebook
+            resValue "string", "facebook_app_id", "746848097787359"
+            resValue "string", "facebook_client_token", "5a65d2d68a15dac08ecdf1bd8e86bfbb"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider746848097787359"
+            resValue "string", "fb_login_protocol_scheme", "fb746848097787359"
+            resValue "string", "facebook_app_name", "cztxtw" //游戏名字
+            //shushu
+            resValue "string", "mw_td_appid", "fbe295b32f7b46c79b0a2e963790fdc5"
+            //ad
+            resValue "string", "adjust_app_token", ""
+            resValue "string", "sdk_appflyer_dev_key", "RYvG2gcUEhGiCWcXR6vaVi"
+            //line
+            resValue "string", "line_channelId", ""
+            //naver
+            resValue "string", "naver_client_id", ""
+            resValue "string", "naver_client_secret", ""
+
         }
 
     }
