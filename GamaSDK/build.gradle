@@ -13,10 +13,10 @@ android {
         jvmTarget = rootProject.ext.jvmTarget
     }
 
-    def sdk_version = "2.3.2"
-//    def domainUrl= ""
+    def sdk_version = "2.3.5"
+    def domainUrl= ""
 //    def domainUrl= "kayplay.com"
-    def domainUrl= "chiendemobile.vn" //越南M2,新代理chiendemobile.vn
+//    def domainUrl= "chiendemobile.vn" //越南M2,新代理chiendemobile.vn
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
@@ -71,7 +71,7 @@ android {
         release {
 //            multiDexEnabled true //Add this
 //            shrinkResources true  //压缩资源
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
