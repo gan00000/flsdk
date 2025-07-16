@@ -38,6 +38,8 @@ ext {
         ]
 
         println('config=' + config)
+        println "开始复制: ${sourceDir} -> ${targetDir}"
+        println "配置: ${config}"
         // 执行复制操作
         project.copy {
             // 阶段1: 清理目标目录
@@ -79,22 +81,26 @@ ext {
 
             // 覆盖策略
             overwrite = config.overwrite
+        }
 
-            // 日志记录
-//            doFirst {
-//                println "开始复制: ${sourceDir} -> ${targetDir}"
-//                println "配置: ${config}"
-//            }
-//
-//            doLast {
-//                def srcCount = sourceDir.listFiles()?.size() ?: 0
-//                def destCount = targetDir.listFiles()?.size() ?: 0
-//                println "复制完成: ${srcCount} 项复制到 ${targetDir}"
-//
-//                if (srcCount != destCount) {
-//                    println "警告: 源目录(${srcCount})和目标目录(${destCount})项目数量不一致"
-//                }
-//            }
+        def srcCount = sourceDir.listFiles(new FileFilter() {
+            @Override
+            boolean accept(File file) {
+                return !(file.name.endsWith(".DS_Store"))
+            }
+        })?.size() ?: 0
+
+        def destCount = targetDir.listFiles(new FileFilter() {
+            @Override
+            boolean accept(File file) {
+                return !(file.name.endsWith(".DS_Store"))
+            }
+        })?.size() ?: 0
+
+        println "复制完成: ${srcCount} 项复制到 ${targetDir}"
+
+        if (srcCount != destCount) {
+            println "警告: 源目录(${srcCount})和目标目录(${destCount})项目数量不一致"
         }
     }
 }

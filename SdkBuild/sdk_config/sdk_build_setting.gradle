@@ -2,5 +2,5 @@
 ext {
     gameCode = "tgen"
     sdkFlavor = 'huawei'
-    sdkLanguage = 'en'
+    sdkLanguage = 'en'//默认语言，即values的语言
 }
