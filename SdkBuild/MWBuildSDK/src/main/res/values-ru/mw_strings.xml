@@ -1,0 +1,132 @@
+<resources>
+
+    <!--启动条款页面-->
+    <string name="gama_ui_term_port_read2">Я прочитал и согласен с договором</string>
+
+    <!--登录页面-->
+    <string name="py_login_save_account">Запомнить аккаунт</string>
+    <string name="py_findpwd">Забыли пароль?</string>
+    <string name="py_register_account">Зарегистрировать аккаунт</string>
+
+    <!--注册页面-->
+    <string name="py_register_account_phone">Введите номер вашего телефона</string>
+
+    <!--修改密码页面-->
+    <string name="py_login_page_change_pwd">Изменить пароль</string>
+
+    <!--绑定账号页面（通用）-->
+    <string name="py_login_page_account_bind">Привязать членский аккаунт</string>
+    <string name="py_btn_bind">Привязать членство</string>
+
+    <string name="account_bind">Привязать аккаунт</string>
+
+    <!--验证提示-->
+    <string name="py_account_empty">Аккаунт не может быть пустым</string>
+    <string name="py_password_empty">Пароль не может быть пустым</string>
+    <string name="py_vfcode_empty">Введите код подтверждения</string>
+
+    <!--自动登录-->
+    <string name="py_auto_login_change">Поменять аккаунт</string>
+
+    <string name="py_login_autologin_tips">Аккаунт %1$s входит в систему </string>
+
+    <!--预设提示-->
+    <string name="py_msg_account_hint">Введите аккаунт</string>
+    <string name="py_msg_pwd_hint">Введите пароль</string>
+
+    <!--通用文本-->
+<!--    &#32; == 普通的英文半角空格-->
+<!--    &#160; == &nbsp; == &#xA0; == no-break space （普通的英文半角空格但不换行）-->
+<!--    &#12288; == 中文全角空格 （一个中文宽度）-->
+<!--    &#8194; == &ensp; == en空格 （半个中文宽度）-->
+<!--    &#8195; == &emsp; == em空格 （一个中文宽度）-->
+<!--    &#8197; == 四分之一em空格 （四分之一中文宽度）-->
+<!--    相比平时的空格（&#32;），nbsp拥有不间断（non-breaking）特性。即连续的nbsp会在同一行内显示。即使有100个连续的nbsp，浏览器也不会把它们拆成两行。-->
+    <string name="py_confire">Подтвердить &#8195;</string>
+    <!--SDK功能提示-->
+    <string name="gama_toast_msg_app_not_install">Поскольку вы не установили %s,  сначала установите приложение, а потом поделитесь им</string>
+
+    <!--功能提示-->
+    <string name="py_register_success">Зарегистрировано</string>
+
+    <string name="py_login_mac_tips">Ваш номер аккаунта и пароль для входа в %1$s следующие:\nНомер аккаунта: %2$s Пароль: %3$s</string>
+    <string name="py_login_mac_saveimage_tips">Пароль от вашего аккаунта сохранен в альбоме</string>
+    <string name="py_login_autologin_logining_tips">Аккаунт входит в систему</string>
+
+    <!--有使用 不确定用途-->
+    <string name="py_account_login">Вход в аккаунт</string>
+
+    <!--未使用-->
+    <string name="py_login_success">Вход выполнен</string>
+    <string name="py_account">Аккаунт</string>
+    <string name="py_password">Пароль</string>
+
+    <string name="py_login_fb">Вход в Facebook</string>
+    <string name="py_login_fb_1">Вход в FB</string>
+    <string name="py_login_google">Вход в Google</string>
+
+    <string name="py_old_pwd">Старый пароль</string>
+    <string name="py_new_pwd">Новый пароль</string>
+    <string name="py_phone">Телефон</string>
+    <string name="py_vfcode">Проверочный номер</string>
+
+<!--    新增-->
+    <string name="guest_login_btn">Гостевой вход</string>
+    <string name="tips_have_account">Уже есть аккаунт?</string>
+    <string name="py_login">Вход</string>
+    <string name="text_register">Регистр.</string>
+    <string name="text_login_other">Вход другое</string>
+    <string name="text_reg_tips">*Почта учетной записи будет использоваться для получения пароля. Вводите ее внимательно</string>
+    <string name="py_register_account_get_vfcode">Отправить код</string>
+
+    <string name="py_register_account_hit">Введите вашу почту</string>
+    <string name="py_register_password_hit">Введите 6 — 20 символов</string>
+    <string name="py_msg_vfcode_hint">Ввести код</string>
+    <string name="text_input_new_pwd">Введите новый пароль</string>
+    <string name="text_input_new_pwd_confire">Подтвердите новый пароль</string>
+    <string name="text_update_account_tips">Рекомендуется обновить свой аккаунт, чтобы повысить безопасность</string>
+    <string name="text_has_update_account_tips">Этот аккаунт был повышен до записи платформы</string>
+    <string name="text_delete_account">Этот аккаунт был удален</string>
+    <string name="text_confire_change">Подвердить изменения</string>
+    <string name="text_confire_update">Подтвердить обновления</string>
+    <string name="text_change_pwd">Изменить пароль</string>
+    <string name="text_bind_account_tips">*Почта учетной записи будет использоваться для получения пароля, будьте внимательны</string>
+
+    <!--找回密码页面-->
+    <string name="py_login_page_forgot_pwd">Забыли пароль</string>
+    <string name="text_welcome_back">С возвращением</string>
+    <string name="text_go_game">Продолжить игру</string>
+    <string name="text_update_account">Обновить аккаунт</string>
+
+    <string name="gama_ui_term_not_read">Сначала согласитесть с «Договором»</string>
+    <string name="text_confire_reg">Подтвердить регистрацию</string>
+    <string name="text_pwd_format">Пароль может содержать 6—20 символов</string>
+    <string name="text_account_format">Ошибка формата почты, попробуйте снова</string>
+
+    <string name="py_error_occur">Ошибка сети, проверьте и попробуйте снова</string>
+    <string name="text_i_agree_tips">Прочитать и согласиться</string>
+    <string name="text_i_read_agree">Прочитать и согласиться</string>
+    <string name="text_term_moqie"><u>Договор</u></string>
+    <string name="sdk_terms_title">Договор</string>
+    <string name="text_switch_account">Сменить аккаунт</string>
+    <string name="text_update_account_bind">Обновить аккаунт</string>
+    <string name="text_pwd_not_equel">Несовпадение пароля 2 раза</string>
+    <string name="py_input_old_password">Введите старый пароль</string>
+    <string name="text_free_register">Вход без регистрации</string>
+    <string name="text_old_new_pwd_same">Новый пароль должен отличаться от старого</string>
+    <string name="text_cancel">Отменить</string>
+    <string name="text_confire">Подтвердить</string>
+    <string name="text_delete_account_tips">Обратите внимание, что удаление аккаунта приведет к полному удалению аккаунта с платформы. Если вы подтверждаете удаление, нажмите «Подтвердить».</string>
+    <string name="text_account_bind_success">Обновление членского аккаунта прошло успешно, вход в систему...</string>
+    <string name="text_account_bind_success2">Изменено, вход в систему...</string>
+    <string name="text_account_change_pwd_success">Зарегистрировано, вход в систему...</string>
+    <string name="text_send_vf_code_success">Код подтверждения отправлен, проверьте</string>
+    <string name="text_finish_pay">Оплачено</string>
+    <string name="text_account_not_exist">Аккаунт не существует</string>
+    <string name="text_close">Закрыть</string>
+    <string name="text_select_pay_channel">Выбрать способ оплаты</string>
+    <string name="text_other">Другое</string>
+    <string name="text_pay_pay">Пополнить счет</string>
+    <string name="text_account_change_pwd_success2">Пароль изменен</string>
+
+</resources>

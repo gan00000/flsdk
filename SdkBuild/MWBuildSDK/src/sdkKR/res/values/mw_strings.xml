@@ -1,0 +1,132 @@
+<resources>
+
+    <!--启动条款页面-->
+    <string name="gama_ui_term_port_read2">약관을 읽고 동의합니다.</string>
+
+    <!--登录页面-->
+    <string name="py_login_save_account">계정 저장</string>
+    <string name="py_findpwd">비밀번호 찾기</string>
+    <string name="py_register_account">회원가입</string>
+
+    <!--注册页面-->
+    <string name="py_register_account_phone">휴대전화 번호를 입력하세요.</string>
+
+    <!--修改密码页面-->
+    <string name="py_login_page_change_pwd">비밀번호 수정</string>
+
+    <!--绑定账号页面（通用）-->
+    <string name="py_login_page_account_bind">회원 계정 연동</string>
+    <string name="py_btn_bind">회원 연동</string>
+
+    <string name="account_bind">계정 연동</string>
+
+    <!--验证提示-->
+    <string name="py_account_empty">계정을 입력하세요.</string>
+    <string name="py_password_empty">비밀번호를 입력하세요.</string>
+    <string name="py_vfcode_empty">인증번호를 입력하세요.</string>
+
+    <!--自动登录-->
+    <string name="py_auto_login_change">계정 변경</string>
+
+    <string name="py_login_autologin_tips">%1$s 계정으로 로그인 중</string>
+
+    <!--预设提示-->
+    <string name="py_msg_account_hint">계정을 입력하세요.</string>
+    <string name="py_msg_pwd_hint">비밀번호를 입력하세요.</string>
+
+    <!--通用文本-->
+    <!--    &#32; == 普通的英文半角空格-->
+    <!--    &#160; == &nbsp; == &#xA0; == no-break space （普通的英文半角空格但不换行）-->
+    <!--    &#12288; == 中文全角空格 （一个中文宽度）-->
+    <!--    &#8194; == &ensp; == en空格 （半个中文宽度）-->
+    <!--    &#8195; == &emsp; == em空格 （一个中文宽度）-->
+    <!--    &#8197; == 四分之一em空格 （四分之一中文宽度）-->
+    <!--    相比平时的空格（&#32;），nbsp拥有不间断（non-breaking）特性。即连续的nbsp会在同一行内显示。即使有100个连续的nbsp，浏览器也不会把它们拆成两行。-->
+    <string name="py_confire">확&#8195;인</string>
+    <!--SDK功能提示-->
+    <string name="gama_toast_msg_app_not_install">%s 앱이 설치되어 있지 않습니다. 앱을 설치한 후 다시 공유하세요.</string>
+
+    <!--功能提示-->
+    <string name="py_register_success">회원가입 성공</string>
+
+    <string name="py_login_mac_tips">%1$s에 로그인한 계정과 비밀번호는 다음과 같습니다.\n계정: %2$s 비밀번호: %3$s</string>
+    <string name="py_login_mac_saveimage_tips">계정과 비밀번호를 앨범에 저장했습니다.</string>
+    <string name="py_login_autologin_logining_tips">계정 로그인 중</string>
+
+    <!--有使用 不确定用途-->
+    <string name="py_account_login">계정 로그인</string>
+
+    <!--未使用-->
+    <string name="py_login_success">로그인 성공</string>
+    <string name="py_account">계정</string>
+    <string name="py_password">비밀번호</string>
+
+    <string name="py_login_fb">페이스북 로그인</string>
+    <string name="py_login_fb_1">페이스북 로그인</string>
+    <string name="py_login_google">구글 로그인</string>
+
+    <string name="py_old_pwd">기존 비밀번호</string>
+    <string name="py_new_pwd">새로운 비밀번호</string>
+    <string name="py_phone">전화번호</string>
+    <string name="py_vfcode">인증번호</string>
+
+    <!--    新增-->
+    <string name="guest_login_btn">게스트 로그인</string>
+    <string name="tips_have_account">계정이 있나요?</string>
+    <string name="py_login">로그인</string>
+    <string name="text_register">회원가입</string>
+    <string name="text_login_other">기타 로그인</string>
+    <string name="text_reg_tips">*계정 메일은 향후 비밀번호를 찾을 때 인증번호를 발송하는 메일입니다. 신중하게 입력하세요.</string>
+    <string name="py_register_account_get_vfcode">인증번호 발송</string>
+
+    <string name="py_register_account_hit">자주 사용하는 메일 주소를 입력하세요.</string>
+    <string name="py_register_password_hit">6~20자를 입력하세요.</string>
+    <string name="py_msg_vfcode_hint">인증번호를 입력하세요.</string>
+    <string name="text_input_new_pwd">새로운 비밀번호를 입력하세요.</string>
+    <string name="text_input_new_pwd_confire">새로운 비밀번호 확인</string>
+    <string name="text_update_account_tips">계정 보안을 위해 계정을 업그레이드하세요.</string>
+    <string name="text_has_update_account_tips">해당 계정은 이미 플랫폼 계정으로 업그레이드되었습니다.</string>
+    <string name="text_delete_account">해당 계정 삭제</string>
+    <string name="text_confire_change">수정 확인</string>
+    <string name="text_confire_update">업그레이드 확인</string>
+    <string name="text_change_pwd">비밀번호 수정</string>
+    <string name="text_bind_account_tips">*계정 메일은 향후 비밀번호를 찾을 때 인증번호를 발송하는 메일입니다. 신중하게 입력하세요.</string>
+
+    <!--找回密码页面-->
+    <string name="py_login_page_forgot_pwd">비밀번호 찾기</string>
+    <string name="text_welcome_back">돌아오신 것을 환영합니다.</string>
+    <string name="text_go_game">계속 게임하기</string>
+    <string name="text_update_account">계정 업그레이드</string>
+
+    <string name="gama_ui_term_not_read">먼저 [약관]에 동의해 주세요.</string>
+    <string name="text_confire_reg">회원가입 확인</string>
+    <string name="text_pwd_format">비밀번호는 6~20자까지만 설정할 수 있습니다</string>
+    <string name="text_account_format">메일 형식 오류, 다시 입력하세요.</string>
+
+    <string name="py_error_occur">네트워크 이상, 확인 후 다시 시도하세요.</string>
+    <string name="text_i_agree_tips">이미 읽고 동의합니다.</string>
+    <string name="text_i_read_agree">읽고 동의하기</string>
+    <string name="text_term_moqie"><u>개인정보</u></string>
+    <string name="sdk_terms_title">이용약관</string>
+    <string name="text_switch_account">계정 변경</string>
+    <string name="text_update_account_bind">계정 업그레이드</string>
+    <string name="text_pwd_not_equel">두 비밀번호가 일치하지 않습니다.</string>
+    <string name="py_input_old_password">기존 비밀번호를 입력하세요.</string>
+    <string name="text_free_register">게스트 로그인</string>
+    <string name="text_old_new_pwd_same">새로운 비밀번호는 기존 비밀번호와 같을 수 없습니다.</string>
+    <string name="text_cancel">취소</string>
+    <string name="text_confire">확인</string>
+    <string name="text_delete_account_tips">주의하세요. 계정을 삭제하면 플랫폼에서 모든 데이터가 삭제됩니다. 삭제를 원하시면 \'확인\'을 클릭하세요.</string>
+    <string name="text_account_bind_success">회원 계정으로 업그레이드 성공, 로그인 중...</string>
+    <string name="text_account_bind_success2">회원 계정으로 업그레이드 성공했습니다.</string>
+    <string name="text_account_change_pwd_success">수정 성공, 로그인 중...</string>
+    <string name="text_send_vf_code_success">인증번호를 발송했습니다. 확인해 주세요.</string>
+    <string name="text_finish_pay">결제 완료</string>
+    <string name="text_account_not_exist">계정이 존재하지 않습니다.</string>
+    <string name="text_close">닫기</string>
+    <string name="text_select_pay_channel">충전 방법 선택</string>
+    <string name="text_other">기타</string>
+    <string name="text_pay_pay">충전</string>
+    <string name="text_account_change_pwd_success2">비밀번호가 업데이트되었습니다</string>
+
+</resources>

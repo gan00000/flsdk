@@ -1,0 +1,35 @@
+<resources>
+    <string name="text_phone_bind">Привязать телефон</string>
+    <string name="text_phone_area_code">Код города</string>
+    <string name="text_phone_input_hint">Введите номер телефона</string>
+    <string name="text_phone_hasbind_tips">Уже привязано, это ваш нынешний номер телефона</string>
+    <string name="text_area_code_not_empty">Код города не может быть пустым</string>
+    <string name="text_phone_not_empty">Номер телефона не может быть пустым</string>
+    <string name="text_phone_not_match">Неверный формат номера телефона</string>
+    <string name="text_vfcode_has_send">Проверочный номер отправлен</string>
+    <string name="text_phone_bind_success">Телефон привязан</string>
+    <string name="text_has_bind_tips_google">Аккаунт Google был повышен до членского аккаунта</string>
+    <string name="text_has_bind_tips_fb">Аккаунт Facebook был повышен до членского аккаунта</string>
+    <string name="text_has_bind_tips_guest">Гостевой аккаунт был повышен до членского аккаунта</string>
+    <string name="text_has_bind_tips_line">Аккаунт LINE повышен до членского аккаунта</string>
+    <string name="text_has_bind_tips_mw">Членский аккаунт</string>
+    <string name="text_notice">Объявление</string>
+    <string name="text_account_not_login">В настоящее время у вас нет учетной записи, сначала войдите в систему</string>
+    <string name="text_has_bind_tips_twitter">Аккаунт Twitter был повышен до членского аккаунта</string>
+    <string name="text_has_upgrade_account">Повышен до членского аккаунта</string>
+    <string name="text_game_name">Название игры:</string>
+    <string name="text_server_name">Сервер:</string>
+    <string name="text_role_name">Имя персонажа:</string>
+    <string name="text_account_name">Аккаунт:</string>
+    <string name="text_account_uid">uid：</string>
+    <string name="text_account_del">Удалить аккаунт</string>
+    <string name="text_block_msg">Дорогой игрок,
+        \nВ вашем аккаунте обнаружены возвраты средств. Чтобы обеспечить безопасность вашего аккаунта и нормальный игровой опыт, свяжитесь с нами через внутриигровую службу поддержки в течение 24 часов после получения этого уведомления для проверки и решения.
+        \n\nЕсли вы не свяжетесь с нами для подтверждения информации в установленный срок, мы, в зависимости от ситуации, заморозим ваш аккаунт до решения проблемы.
+        \n\nСпасибо за ваше понимание и сотрудничество!</string>
+    <string name="text_blocked_msg">Дорогой игрок,
+        \n\nИз-за того, что ваш аккаунт был замешан в возвратах средств и вы не связались с службой поддержки в установленный срок, ваш аккаунт временно заморожен.
+        \n\nДля размораживания аккаунта, пожалуйста, свяжитесь с нами через внутриигровую службу поддержки и предоставьте соответствующие пояснения и доказательства. Мы постараемся как можно скорее завершить дальнейший процесс для вас.
+        \n\nСпасибо за ваше понимание и сотрудничество!</string>
+
+</resources>

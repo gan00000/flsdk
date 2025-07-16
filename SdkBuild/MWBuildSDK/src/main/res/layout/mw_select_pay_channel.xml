@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ll_select_channel_content"
+            android:layout_width="236dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/mw_bg_white_6"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/mw_bg_select_channel_tips"
+                android:gravity="center"
+                android:id="@+id/select_channel_title_layout"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp"
+                    android:text="@string/text_select_pay_channel"
+                    android:textColor="@color/black_s" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/iv_select_channel_other_2"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:src="@mipmap/select_channel_other_bg2" />
+
+            <LinearLayout
+                android:id="@+id/ll_select_channel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:id="@+id/iv_select_channel_gg"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:background="@drawable/sdk_bg_select_pay_channel_2"
+                    android:gravity="center">
+
+                    <ImageView
+
+                        android:layout_width="110dp"
+                        android:layout_height="23dp"
+                        android:background="@drawable/bg_pay_gg" />
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/select_channel_other1_layout"
+                    android:background="@drawable/sdk_bg_select_pay_channel_1">
+
+                    <Button
+                        android:id="@+id/bt_select_channel_other"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:gravity="center"
+                        android:text="@string/text_pay_pay"
+                        android:textColor="@android:color/white"
+                        android:textSize="17sp" />
+
+
+                    <ImageView
+                        android:id="@+id/iv_select_channel_rebate"
+                        android:layout_width="42dp"
+                        android:layout_height="35dp"
+                        android:layout_alignParentEnd="true" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_select_channel_ru"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="8dp"
+                    >
+
+                    <!--<Button
+                        android:id="@+id/bt_select_channel_ru"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:gravity="center"
+                        android:text="@string/text_pay_ru"
+                        android:textAllCaps="false"
+                        android:visibility="gone"
+                        android:textColor="@android:color/white"
+                        android:textSize="17sp" />-->
+
+                    <ImageView
+                        android:id="@+id/bt_select_channel_ru"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:src="@mipmap/img_select_channel_ru" />
+
+
+                    <!--                    <ImageView-->
+                    <!--                        android:layout_width="42dp"-->
+                    <!--                        android:layout_height="35dp"-->
+                    <!--                        android:id="@+id/iv_select_channel_ru"-->
+                    <!--                        android:layout_alignParentEnd="true"-->
+                    <!--                        />-->
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_select_channel_xm"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/sdk_bg_select_pay_channel_2"
+                    android:padding="4dp"
+                    >
+
+                    <ImageView
+                        android:id="@+id/bt_select_channel_xm"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:src="@mipmap/img_select_channel_xiaomi" />
+
+
+                    <!--                    <ImageView-->
+                    <!--                        android:layout_width="42dp"-->
+                    <!--                        android:layout_height="35dp"-->
+                    <!--                        android:id="@+id/iv_select_channel_ru"-->
+                    <!--                        android:layout_alignParentEnd="true"-->
+                    <!--                        />-->
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <ImageView
+                android:id="@+id/iv_select_channel_close"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/bg_select_channel_close" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

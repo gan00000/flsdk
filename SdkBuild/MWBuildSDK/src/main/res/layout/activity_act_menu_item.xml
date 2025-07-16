@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="156dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="16dp"
+            android:src="@mipmap/img_act_menu_unselect"
+            android:id="@+id/mw_act_iv_menu"
+            android:scaleType="centerCrop"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>

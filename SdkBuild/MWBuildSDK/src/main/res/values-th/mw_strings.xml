@@ -1,0 +1,132 @@
+<resources>
+
+    <!--หน้าเงื่อนไขการเริ่มต้น-->
+    <string name="gama_ui_term_port_read2">ฉันได้อ่านและยอมรับสัญญามาตรฐาน</string>
+
+    <!--หน้าเข้าสู่ระบบ-->
+    <string name="py_login_save_account">จดจำบัญชี</string>
+    <string name="py_findpwd">ลืมรหัสผ่านหรือไม่</string>
+    <string name="py_register_account">ลงทะเบียนบัญชี</string>
+
+    <!--หน้าลงทะเบียน-->
+    <string name="py_register_account_phone">กรุณากรอกหมายเลขโทรศัพท์</string>
+
+    <!--หน้าปรับเปลี่ยนรหัสผ่าน-->
+    <string name="py_login_page_change_pwd">เปลี่ยนรหัสผ่าน</string>
+
+    <!--หน้าผูกบัญชี (ทั่วไป)-->
+    <string name="py_login_page_account_bind">ผูกบัญชีสมาชิก</string>
+    <string name="py_btn_bind">ผูกสมาชิก</string>
+
+    <string name="account_bind">การผูกบัญชี</string>
+
+    <!--การแจ้งเตือนการยืนยัน-->
+    <string name="py_account_empty">บัญชีไม่สามารถเว้นว่างได้</string>
+    <string name="py_password_empty">รหัสผ่านไม่สามารถเว้นว่างได้</string>
+    <string name="py_vfcode_empty">กรุณากรอกรหัสยืนยัน</string>
+
+    <!--เข้าสู่ระบบอัตโนมัติ-->
+    <string name="py_auto_login_change">สลับบัญชี</string>
+
+    <string name="py_login_autologin_tips">บัญชี %1$s กำลังเข้าสู่ระบบ</string>
+
+    <!--การแจ้งเตือนเริ่มต้น-->
+    <string name="py_msg_account_hint">กรุณากรอกบัญชี</string>
+    <string name="py_msg_pwd_hint">กรุณากรอกรหัสผ่าน</string>
+
+    <!--ข้อความทั่วไป-->
+    <!--      &#32; == ช่องว่างครึ่งความกว้างแบบปกติของภาษาอังกฤษ-->
+    <!--      &#160; == &nbsp; == &#xA0; == no-break space  (ช่องว่างครึ่งความกว้างแบบปกติของภาษาอังกฤษแต่ไม่เปลี่ยนบรรทัด)-->
+    <!--    &#12288; == ช่องว่างเต็มความกว้างแบบภาษาจีน (กว้างเท่าตัวอักษรจีนหนึ่งตัว)-->
+    <!--    &#8194; == &ensp; == ช่องว่าง en (กว้างครึ่งหนึ่งของตัวอักษรจีน)-->
+    <!--    &#8195; == &emsp; == ช่องว่าง em (กว้างเท่าตัวอักษรจีนหนึ่งตัว)-->
+    <!--    &#8197; == ช่องว่างหนึ่งในสี่ของ em (กว้างหนึ่งในสี่ของตัวอักษรจีน)-->
+    <!--    เมื่อเปรียบเทียบกับช่องว่างปกติ (&#32;)ช่องว่างแบบ nbsp มีคุณสมบัติไม่แบ่งบรรทัด (non-breaking) กล่าวคือ หากมี nbsp ต่อเนื่องกันหลายครั้ง จะยังคงแสดงอยู่ในบรรทัดเดียว แม้จะมี nbsp มากถึง 100 ครั้ง เบราว์เซอร์ก็จะไม่แบ่งเป็นสองบรรทัด-->
+    <string name="py_confire">ยืน&#8195;ยัน</string>
+    <!--การแจ้งเตือนฟังก์ชัน SDK-->
+    <string name="gama_toast_msg_app_not_install">เนื่องจากคุณไม่ได้ติดตั้ง%s โปรดติดตั้ง APP ก่อนแล้วค่อยแชร์</string>
+
+    <!--การแสดงฟังก์ชัน-->
+    <string name="py_register_success">ลงทะเบียนสำเร็จ</string>
+
+    <string name="py_login_mac_tips">ข้อมูลการเข้าสู่ระบบบัญชี %1$s ของคุณมีดังนี้:\nบัญชี: %2$s รหัสผ่าน: %3$s</string>
+    <string name="py_login_mac_saveimage_tips">ข้อมูลบัญชีและรหัสผ่านของคุณได้บันทึกลงในอัลบั้มแล้ว</string>
+    <string name="py_login_autologin_logining_tips">บัญชีกำลังเข้าสู่ระบบ</string>
+
+    <!--ยังไม่ทราบวัตถุประสงค์การใช้งาน-->
+    <string name="py_account_login">การเข้าสู่ระบบบัญชี</string>
+
+    <!--ยังไม่ได้ใช้งาน-->
+    <string name="py_login_success">เข้าสู่ระบบสำเร็จ</string>
+    <string name="py_account">บัญชี</string>
+    <string name="py_password">รหัสผ่าน</string>
+
+    <string name="py_login_fb">เข้าสู่ระบบด้วย Facebook</string>
+    <string name="py_login_fb_1">เข้าสู่ระบบด้วย FB</string>
+    <string name="py_login_google">เข้าสู่ระบบด้วย Google</string>
+
+    <string name="py_old_pwd">รหัสผ่านเดิม</string>
+    <string name="py_new_pwd">รหัสผ่านใหม่</string>
+    <string name="py_phone">โทรศัพท์</string>
+    <string name="py_vfcode">รหัสยืนยัน</string>
+
+    <!--เพิ่มใหม่-->
+    <string name="guest_login_btn">เข้าสู่ระบบแบบผู้เยี่ยมชม</string>
+    <string name="tips_have_account">มีบัญชีอยู่แล้วหรือไม่</string>
+    <string name="py_login">เข้าสู่ระบบ</string>
+    <string name="text_register">ลงทะเบียน</string>
+    <string name="text_login_other">การเข้าสู่ระบบแบบอื่น</string>
+    <string name="text_reg_tips">*อีเมลบัญชีของคุณจะถูกใช้เป็นอีเมลยืนยันสำหรับการกู้คืนรหัสผ่าน กรุณากรอกอย่างระมัดระวัง</string>
+    <string name="py_register_account_get_vfcode">ส่งรหัสยืนยัน</string>
+
+    <string name="py_register_account_hit">กรุณากรอกอีเมลที่คุณใช้งานบ่อย</string>
+    <string name="py_register_password_hit">กรุณากรอกตัวอักษร 6–20 ตัว</string>
+    <string name="py_msg_vfcode_hint">กรุณากรอกรหัสยืนยัน</string>
+    <string name="text_input_new_pwd">กรุณากรอกรหัสผ่านใหม่</string>
+    <string name="text_input_new_pwd_confire">ยืนยันรหัสผ่านใหม่</string>
+    <string name="text_update_account_tips">แนะนำให้อัปเกรดบัญชี เพื่อเพิ่มความปลอดภัยของบัญชี</string>
+    <string name="text_has_update_account_tips">บัญชีนี้ได้รับการอัปเกรดเป็นบัญชีแพลตฟอร์มแล้ว</string>
+    <string name="text_delete_account">ลบบัญชีนี้</string>
+    <string name="text_confire_change">ยืนยันการแก้ไข</string>
+    <string name="text_confire_update">ยืนยันการอัปเกรด</string>
+    <string name="text_change_pwd">เปลี่ยนรหัสผ่าน</string>
+    <string name="text_bind_account_tips">*อีเมลบัญชีของคุณจะถูกใช้เป็นอีเมลยืนยันสำหรับการกู้คืนรหัสผ่าน กรุณากรอกอย่างระมัดระวัง</string>
+
+    <!--หน้ากู้คืนรหัสผ่าน-->
+    <string name="py_login_page_forgot_pwd">ลืมรหัสผ่าน</string>
+    <string name="text_welcome_back">ยินดีต้อนรับกลับมา</string>
+    <string name="text_go_game">เล่นเกมต่อ</string>
+    <string name="text_update_account">อัปเกรดบัญชี</string>
+
+    <string name="gama_ui_term_not_read">กรุณายอมรับ "สัญญามาตรฐาน" ก่อน</string>
+    <string name="text_confire_reg">ยืนยันการลงทะเบียน</string>
+    <string name="text_pwd_format">รหัสผ่านรองรับเพียง 6~20 ตัวอักษร</string>
+    <string name="text_account_format">รูปแบบอีเมลผิดพลาด กรุณากรอกใหม่</string>
+
+    <string name="py_error_occur">เครือข่ายผิดพลาด กรุณาตรวจสอบและลองอีกครั้ง</string>
+    <string name="text_i_agree_tips">ฉันได้อ่านและยอมรับ</string>
+    <string name="text_i_read_agree">อ่านและยอมรับ</string>
+    <string name="text_term_moqie"><u>สัญญามาตรฐาน</u></string>
+    <string name="sdk_terms_title">สัญญามาตรฐาน</string>
+    <string name="text_switch_account">สลับบัญชี</string>
+    <string name="text_update_account_bind">อัปเกรดบัญชี</string>
+    <string name="text_pwd_not_equel">รหัสผ่านทั้งสองครั้งไม่ตรงกัน</string>
+    <string name="py_input_old_password">กรุณากรอกรหัสผ่านเดิม</string>
+    <string name="text_free_register">เข้าสู่ระบบโดยไม่ต้องลงทะเบียน</string>
+    <string name="text_old_new_pwd_same">รหัสผ่านใหม่ต้องไม่เหมือนกับรหัสผ่านเดิม</string>
+    <string name="text_cancel">ยกเลิก</string>
+    <string name="text_confire">ยืนยัน</string>
+    <string name="text_delete_account_tips">โปรดระวัง การลบบัญชีจะลบบัญชีของคุณออกจากแพลตฟอร์มโดยถาวร ถ้าหากยืนยันการลบ โปรดคลิก "ยืนยัน"</string>
+    <string name="text_account_bind_success">อัปเกรดบัญชีสมาชิกสำเร็จ กำลังเข้าสู่ระบบ...</string>
+    <string name="text_account_bind_success2">อัปเกรดบัญชีสมาชิกสำเร็จ</string>
+    <string name="text_account_change_pwd_success">แก้ไขสำเร็จ กำลังเข้าสู่ระบบ...</string>
+    <string name="text_send_vf_code_success">รหัสยืนยันถูกส่งแล้ว กรุณาตรวจสอบ</string>
+    <string name="text_finish_pay">การชำระเงินเสร็จสิ้น</string>
+    <string name="text_account_not_exist">บัญชีไม่พบในระบบ</string>
+    <string name="text_close">ปิด</string>
+    <string name="text_select_pay_channel">เลือกวิธีการชำระเงิน</string>
+    <string name="text_other">อื่น ๆ</string>
+    <string name="text_pay_pay">เติมเงิน</string>
+    <string name="text_account_change_pwd_success2">การเปลี่ยนรหัสผ่านสำเร็จ</string>
+
+</resources>

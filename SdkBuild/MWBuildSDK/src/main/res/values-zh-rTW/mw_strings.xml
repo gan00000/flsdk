@@ -1,0 +1,132 @@
+<resources>
+
+    <!--启动条款页面-->
+    <string name="gama_ui_term_port_read2">我已閱讀並同意定型化契約</string>
+
+    <!--登录页面-->
+    <string name="py_login_save_account">記住帳號</string>
+    <string name="py_findpwd">忘記密碼?</string>
+    <string name="py_register_account">註冊帳號</string>
+
+    <!--注册页面-->
+    <string name="py_register_account_phone">請輸入手機門號</string>
+
+    <!--修改密码页面-->
+    <string name="py_login_page_change_pwd">修改密碼</string>
+
+    <!--绑定账号页面（通用）-->
+    <string name="py_login_page_account_bind">綁定會員帳號</string>
+    <string name="py_btn_bind">綁定會員</string>
+
+    <string name="account_bind">帳號綁定</string>
+
+    <!--验证提示-->
+    <string name="py_account_empty">帳號不能為空</string>
+    <string name="py_password_empty">密碼不能為空</string>
+    <string name="py_vfcode_empty">請輸入驗證碼</string>
+
+    <!--自动登录-->
+    <string name="py_auto_login_change">切換帳號</string>
+
+    <string name="py_login_autologin_tips">帳號 %1$s 正在登入</string>
+
+    <!--预设提示-->
+    <string name="py_msg_account_hint">請輸入帳號</string>
+    <string name="py_msg_pwd_hint">請輸入密碼</string>
+
+    <!--通用文本-->
+<!--    &#32; == 普通的英文半角空格-->
+<!--    &#160; == &nbsp; == &#xA0; == no-break space （普通的英文半角空格但不换行）-->
+<!--    &#12288; == 中文全角空格 （一个中文宽度）-->
+<!--    &#8194; == &ensp; == en空格 （半个中文宽度）-->
+<!--    &#8195; == &emsp; == em空格 （一个中文宽度）-->
+<!--    &#8197; == 四分之一em空格 （四分之一中文宽度）-->
+<!--    相比平时的空格（&#32;），nbsp拥有不间断（non-breaking）特性。即连续的nbsp会在同一行内显示。即使有100个连续的nbsp，浏览器也不会把它们拆成两行。-->
+    <string name="py_confire">確&#8195;認</string>
+    <!--SDK功能提示-->
+    <string name="gama_toast_msg_app_not_install">由於您沒有安裝%s，請先裝APP後再進行分享</string>
+
+    <!--功能提示-->
+    <string name="py_register_success">註冊成功</string>
+
+    <string name="py_login_mac_tips">你登入 %1$s 的帳號和密碼如下:\n帳號: %2$s 密碼: %3$s</string>
+    <string name="py_login_mac_saveimage_tips">你的帳號密碼已經保存到相簿中</string>
+    <string name="py_login_autologin_logining_tips">帳號正在登入</string>
+
+    <!--有使用 不确定用途-->
+    <string name="py_account_login">帳號登入</string>
+
+    <!--未使用-->
+    <string name="py_login_success">登入成功</string>
+    <string name="py_account">帳號</string>
+    <string name="py_password">密碼</string>
+
+    <string name="py_login_fb">Facebook登入</string>
+    <string name="py_login_fb_1">FB登入</string>
+    <string name="py_login_google">Google登入</string>
+
+    <string name="py_old_pwd">舊密碼</string>
+    <string name="py_new_pwd">新密碼</string>
+    <string name="py_phone">電話</string>
+    <string name="py_vfcode">驗證碼</string>
+
+<!--    新增-->
+    <string name="guest_login_btn">遊客登入</string>
+    <string name="tips_have_account">已有帳號？</string>
+    <string name="py_login">登入</string>
+    <string name="text_register">註冊</string>
+    <string name="text_login_other">其他登入</string>
+    <string name="text_reg_tips">*帳號信箱將會作為您找回密碼的驗證信箱，請謹慎輸入</string>
+    <string name="py_register_account_get_vfcode">發送驗證碼</string>
+
+    <string name="py_register_account_hit">請輸入您的常用信箱</string>
+    <string name="py_register_password_hit">請輸入6–20字元</string>
+    <string name="py_msg_vfcode_hint">請輸入驗證碼</string>
+    <string name="text_input_new_pwd">請輸入新密碼</string>
+    <string name="text_input_new_pwd_confire">確認新密碼</string>
+    <string name="text_update_account_tips">建議升級帳號，提升帳號安全性</string>
+    <string name="text_has_update_account_tips">該帳號已升級為平台帳號</string>
+    <string name="text_delete_account">刪除該帳號</string>
+    <string name="text_confire_change">確認修改</string>
+    <string name="text_confire_update">確認升級</string>
+    <string name="text_change_pwd">修改密碼</string>
+    <string name="text_bind_account_tips">*帳號信箱將會作為您找回密碼的驗證信箱，請謹慎輸入</string>
+
+    <!--找回密码页面-->
+    <string name="py_login_page_forgot_pwd">忘記密碼</string>
+    <string name="text_welcome_back">歡迎回來</string>
+    <string name="text_go_game">繼續遊戲</string>
+    <string name="text_update_account">升級帳號</string>
+
+    <string name="gama_ui_term_not_read">請先同意「定型化契約」</string>
+    <string name="text_confire_reg">確認註冊</string>
+    <string name="text_pwd_format">密碼只支持6~20字元</string>
+    <string name="text_account_format">信箱格式異常，請重新輸入</string>
+
+    <string name="py_error_occur">網路異常，請檢查重試</string>
+    <string name="text_i_agree_tips">我已閱讀並同意</string>
+    <string name="text_i_read_agree">閱讀並同意</string>
+    <string name="text_term_moqie"><u>定型化契約</u></string>
+    <string name="sdk_terms_title">定型化契約</string>
+    <string name="text_switch_account">切換帳號</string>
+    <string name="text_update_account_bind">升級帳號</string>
+    <string name="text_pwd_not_equel">兩次密碼不一致</string>
+    <string name="py_input_old_password">請輸入舊密碼</string>
+    <string name="text_free_register">免註冊登入</string>
+    <string name="text_old_new_pwd_same">新密碼不能與舊密碼相同</string>
+    <string name="text_cancel">取消</string>
+    <string name="text_confire">確認</string>
+    <string name="text_delete_account_tips">請注意，刪除帳號將會將您的帳號從平台中徹底刪除，如果確認刪除，請點擊“確認”</string>
+    <string name="text_account_bind_success">升級會員帳號成功，正在登入...</string>
+    <string name="text_account_bind_success2">升級會員帳號成功</string>
+    <string name="text_account_change_pwd_success">修改成功，正在登入...</string>
+    <string name="text_send_vf_code_success">驗證碼已發送，請注意查收</string>
+    <string name="text_finish_pay">支付完成</string>
+    <string name="text_account_not_exist">帳號不存在</string>
+    <string name="text_close">關閉</string>
+    <string name="text_select_pay_channel">選擇付款方式</string>
+    <string name="text_other">其它</string>
+    <string name="text_pay_pay">储值</string>
+    <string name="text_account_change_pwd_success2">密碼修改成功</string>
+
+</resources>

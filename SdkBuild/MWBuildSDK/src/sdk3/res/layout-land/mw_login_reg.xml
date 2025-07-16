@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/c_sdk_bg">
+
+    <LinearLayout
+        android:layout_width="375dp"
+        android:layout_height="375dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_centerInParent="true"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:id="@+id/ll_reg_login_title"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/iv_login_reg_back"
+                android:layout_marginTop="2dp"
+                android:layout_marginStart="34dp"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/img_back_bg" />
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/py_login"
+                    android:gravity="center"
+                    android:lines="1"
+                    android:textColor="@color/c_F94925"
+                    android:textSize="24sp"
+                    android:id="@+id/loginTabView"/>
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="2dp"
+                    android:layout_toStartOf="@id/loginTabView"
+                    android:layout_toEndOf="@id/loginTabView"
+                    android:layout_below="@id/loginTabView"
+                    android:layout_marginTop="3dp"
+                    android:background="@color/c_F94925"
+                    android:id="@+id/loginTabView_bottom_line"
+                    />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="50dp"
+                android:orientation="vertical"
+                android:layout_weight="1.0"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/text_register"
+                    android:gravity="center"
+                    android:lines="1"
+                    android:textColor="@color/white_c"
+                    android:textSize="24sp"
+                    android:id="@+id/regTabView"/>
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="2dp"
+                    android:layout_toStartOf="@id/regTabView"
+                    android:layout_toEndOf="@id/regTabView"
+                    android:layout_below="@id/regTabView"
+                    android:layout_marginTop="3dp"
+                    android:background="@color/c_F94925"
+                    android:id="@+id/regTabView_bottom_line"
+                    android:visibility="invisible"
+                    />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="25dp">
+
+            <com.mw.sdk.login.widget.v2.AccountLoginLayoutV2
+                android:id="@+id/pyAccountLoginV2Id"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <com.mw.sdk.login.widget.v2.AccountRegisterLayoutV2
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/accountRegisterLayoutV2Id"
+                android:visibility="gone"/>
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

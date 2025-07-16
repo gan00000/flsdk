@@ -1,0 +1,100 @@
+ext {
+    // 定义可重用的目录同步方法
+//    /**
+//     * 同步目录方法
+//     * @param sourceDirPath 源目录路径（绝对路径或相对工程根目录的路径）
+//     * @param targetDirPath 目标目录路径（绝对路径或相对工程根目录的路径）
+//     * @param options 配置选项（可选）:
+//     *   - cleanTarget: 是否清理目标目录（默认true）
+//     *   - includeEmptyDirs: 是否包含空目录（默认true）
+//     *   - excludePatterns: 排除文件模式数组（默认[]）
+//     *   - includePatterns: 包含文件模式数组（默认['**/*']）
+//            *   - preserveFileMode: 是否保留文件权限（默认false）
+//    *   - overwrite: 是否覆盖现有文件（默认true）
+//    */
+    syncDirectory = { sourceDirPath, targetDirPath, options = [:] ->
+        // 解析路径（支持绝对路径和相对工程根目录的路径）
+//        def resolvePath = { path ->
+//            path.startsWith('/') || path.contains(':') ?
+//                    file(path) :
+//                    file("${rootDir}/${path}")
+//        }
+//
+//        def sourceDir = resolvePath(sourceDirPath)
+//        def targetDir = resolvePath(targetDirPath)
+
+        def sourceDir = file(sourceDirPath)
+        def targetDir = file(targetDirPath)
+
+        println('options.cleanTarget=' +  options.cleanTarget)
+        // 合并默认选项
+        def config = [
+                cleanTarget: options.cleanTarget == null ? true : options.cleanTarget,
+                includeEmptyDirs: options.includeEmptyDirs == null ? true : options.includeEmptyDirs,
+                excludePatterns: options.excludePatterns ?: [],
+                includePatterns: options.includePatterns ?: ['**/*'],
+                preserveFileMode: options.preserveFileMode == null ? false : options.preserveFileMode,
+                overwrite: options.overwrite == null ? true : options.overwrite
+        ]
+
+        println('config=' + config)
+        // 执行复制操作
+        project.copy {
+            // 阶段1: 清理目标目录
+            if (config.cleanTarget) {
+                println "清理目标目录: ${targetDir}"
+                if (targetDir.exists()) {
+                    delete fileTree(targetDir) {
+                        include '**/*'
+                    }
+                } else {
+                    targetDir.mkdirs()
+                }
+            }
+
+            // 阶段2: 配置复制任务
+            from sourceDir
+            into targetDir
+
+            // 包含/排除规则
+            if (config.includePatterns) {
+                include config.includePatterns
+            }
+            if (config.excludePatterns) {
+                exclude config.excludePatterns
+            }
+
+            duplicatesStrategy = DuplicatesStrategy.INCLUDE
+
+            // 空目录处理
+            includeEmptyDirs = config.includeEmptyDirs
+
+            // 文件权限
+            if (config.preserveFileMode) {
+                eachFile { fileCopyDetails ->
+                    // 保留原始文件权限
+                    fileCopyDetails.mode = fileCopyDetails.sourceMode
+                }
+            }
+
+            // 覆盖策略
+            overwrite = config.overwrite
+
+            // 日志记录
+//            doFirst {
+//                println "开始复制: ${sourceDir} -> ${targetDir}"
+//                println "配置: ${config}"
+//            }
+//
+//            doLast {
+//                def srcCount = sourceDir.listFiles()?.size() ?: 0
+//                def destCount = targetDir.listFiles()?.size() ?: 0
+//                println "复制完成: ${srcCount} 项复制到 ${targetDir}"
+//
+//                if (srcCount != destCount) {
+//                    println "警告: 源目录(${srcCount})和目标目录(${destCount})项目数量不一致"
+//                }
+//            }
+        }
+    }
+}

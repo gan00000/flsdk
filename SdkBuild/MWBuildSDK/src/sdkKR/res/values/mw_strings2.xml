@@ -1,0 +1,35 @@
+<resources>
+    <string name="text_phone_bind">휴대전화 연동</string>
+    <string name="text_phone_area_code">지역번호</string>
+    <string name="text_phone_input_hint">휴대전화 번호를 입력하세요.</string>
+    <string name="text_phone_hasbind_tips">이미 연동했습니다. 현재 연동된 휴대전화 번호는 다음과 같습니다.</string>
+    <string name="text_area_code_not_empty">휴대전화 지역 번호를 입력하세요.</string>
+    <string name="text_phone_not_empty">휴대전화 번호를 입력하세요.</string>
+    <string name="text_phone_not_match">휴대전화 번호 형식이 올바르지 않습니다.</string>
+    <string name="text_vfcode_has_send">인증번호를 발송했습니다.</string>
+    <string name="text_phone_bind_success">휴대전화 연동 성공</string>
+    <string name="text_has_bind_tips_google">구글을 회원 계정으로 업그레이드했습니다.</string>
+    <string name="text_has_bind_tips_fb">페이스북을 회원 계정으로 업그레이드했습니다.</string>
+    <string name="text_has_bind_tips_guest">게스트 로그인을 회원 계정으로 업그레이드했습니다.</string>
+    <string name="text_has_bind_tips_line">라인을 회원 계정으로 업그레이드했습니다.</string>
+    <string name="text_has_bind_tips_mw">회원 계정</string>
+    <string name="text_notice">공지</string>
+    <string name="text_account_not_login">계정이 없습니다. 먼저 로그인하세요!</string>
+    <string name="text_has_bind_tips_twitter">회원 계정으로 업그레이드했습니다.</string>
+    <string name="text_has_upgrade_account">회원 계정으로 업그레이드됨</string>
+    <string name="text_game_name">게임 이름：</string>
+    <string name="text_server_name">서버：</string>
+    <string name="text_role_name">캐릭터 명：</string>
+    <string name="text_account_name">계정：</string>
+    <string name="text_account_uid">uid：</string>
+    <string name="text_account_del">계정 삭제</string>
+    <string name="text_block_msg">안녕하세요 유저님:
+        \n유저님의 계정에서 환불 행위가 감지되었습니다. 유저님의 계정 보안과 안전한 게임 체험을 위해 안내받은 후 24시간 이내 게임 내 고객센터로 연락하여 확인 및 처리 부탁드립니다.
+        \n\n안내해 드린 시간 내에 연락과 확인이 완료되지 않을 시 해당 문제로 인하여 계정 정지 등 조치가 이루어질 수 있는 점 참고 부탁드립니다.
+        \n\n유저님의 이해와 협조에 감사드립니다!</string>
+    <string name="text_blocked_msg">안녕하세요 유저님:
+        \n\n유저님의 계정은 환불행위 감지 및 정해진 시간 내에 고객센터로 연락하여 처리하지 않은 점으로 일시적으로 계정이 정지되었습니다.
+        \n\n계정 해제 해결을 원하실 경우 게임 내 고객센터로 연락주시고 관련 설명과 증빙서류 부탁드립니다. 최대한 빨리 후속처리 도와드리겠습니다.
+        \n\n유저님의 이해와 협조에 감사드립니다!</string>
+
+</resources>

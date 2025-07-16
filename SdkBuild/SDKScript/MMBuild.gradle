@@ -1,0 +1,33 @@
+// 在 build.gradle 中引用外部脚本
+apply from: "${project.rootDir}/SdkBuild/SDKScript/util.gradle"
+apply from: "${project.rootDir}/SdkBuild/sdk_config/sdk_build_setting.gradle"
+
+task syncMainDirectories(type: Copy) {
+    group 'ssssdk'
+    doLast {
+        def rootDir = project.rootDir
+        println "工程根目录: ${rootDir.absolutePath}"
+        // 配置源目录和目标目录
+        def main_src = file("$rootDir/GamaSDK/")   // 替换为实际源目录路径
+        def main_des = file("$rootDir/SdkBuild/MWBuildSDK/")   // 替换为实际目标目录路径
+
+        syncDirectory("$main_src/libs", "$main_des/libs")
+        syncDirectory("$main_src/src", "$main_des/src")
+//    syncDirectory(main_src, main_des, [includePatterns: ['libs/**', 'src/**']])
+
+        syncDirectory("$main_des/src/main/res/values-$sdkLanguage", "$main_des/src/$sdkFlavor/res/values", [cleanTarget: false])
+    }
+}
+
+task clearBuildDir(type: Delete) {
+    group 'ssssdk'
+    delete 'libs','src'
+}
+
+task copyAllCodeAndRes2{
+    group 'ssssdk'
+    doLast {
+
+    }
+}
+copyAllCodeAndRes2.dependsOn(syncMainDirectories)

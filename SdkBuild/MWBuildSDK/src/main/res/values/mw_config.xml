@@ -1,0 +1,69 @@
+<resources>
+
+    <string name="sdk_game_code"></string>
+    <string name="sdk_app_key"></string>
+    <string name="sdk_more_language"></string>
+    <string name="sdk_default_server_language"></string>
+    <string name="sdk_appflyer_dev_key"></string>
+    <string name="sdk_first_silent_login"></string>
+
+    <!-- Facebook应用名 -->
+    <string name="facebook_app_name"></string>
+    <!-- Facebook应用ID -->
+    <string name="facebook_app_id"></string>
+    <string name="facebook_client_token"></string>
+    <!-- 用于Facebook的自訂頁籤 -->
+    <string name="fb_login_protocol_scheme"></string>
+    <!-- Facebook Provider -->
+    <string name="facebook_authorities"></string>
+    <!-- Google游戏服务ID -->
+    <string name="google_app_id"></string>
+
+<!--    &lt;!&ndash; TapDB appid &ndash;&gt;-->
+<!--    <string name="tapdb_appId"></string>-->
+<!--    &lt;!&ndash; TapDB channel &ndash;&gt;-->
+<!--    <string name="tapdb_channel"></string>-->
+<!--    &lt;!&ndash; TapDB gameVersion &ndash;&gt;-->
+<!--    <string name="tapdb_gameVersion"></string>-->
+
+    <string name="line_channelId"></string>
+
+<!--    sdk内部版本-第几套-->
+<!--    <string name="sdk_inner_version">v1</string>-->
+
+    <string name="channel_platform">google</string>
+
+    <!-- naver  -->
+    <string name="naver_client_id"></string>
+    <string name="naver_client_secret"></string>
+
+    <!-- adjust  -->
+    <string name="adjust_app_token"></string>
+
+    <string name="sdk_release_european"></string>
+
+    <!--    数数用-->
+    <string name="mw_td_appid"></string>
+<!--    <string name="mw_td_te_server_url"></string>-->
+
+    <string name="mw_vk_appid"></string>
+
+    <!--    titok用-->
+    <string name="mw_tt_app_id"></string>
+
+    <string name="mw_nowgg_app_id"></string>
+    <string name="mw_nowgg_client_id"></string>
+
+<!--    语言映射，传给服务器，根据需求设置-->
+    <string name="sdk_language_map">{"zh_CN":"zh_CN", "zh_TW":"zh_TW","zh_HK":"zh_TW","en":"en_US","vi":"vi_VN","ko":"ko_KR","ru":"ru_RU","th":"th_TH"}</string>
+
+    <!--    Google包需要添加的除了第三方外的其他充值方式 -->
+    <string name="mw_dialog_pay_add_type"></string>
+
+<!--    singular-->
+    <string name="mw_singular_key"></string>
+    <string name="mw_singular_secret"></string>
+
+    <string name="mw_select_channel_other2"></string>
+
+</resources>

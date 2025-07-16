@@ -1,0 +1,6 @@
+
+ext {
+    gameCode = "tgen"
+    sdkFlavor = 'huawei'
+    sdkLanguage = 'en'
+}

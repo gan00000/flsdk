@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/c_sdk_bg">
+
+    <LinearLayout
+        android:layout_width="375dp"
+        android:layout_height="375dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_centerInParent="true"
+        >
+
+        <include
+            layout="@layout/sdk_ui_head_layout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            />
+
+        <com.mw.sdk.login.widget.SDKInputEditTextView
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="25dp"
+            android:id="@+id/sdkinputview_old_pwd"
+            />
+
+        <com.mw.sdk.login.widget.SDKInputEditTextView
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="25dp"
+            android:id="@+id/sdkinputview_changepwd_new"
+            />
+
+        <com.mw.sdk.login.widget.SDKInputEditTextView
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="25dp"
+            android:id="@+id/sdkinputview_changepwd_new_again"
+            />
+
+        <Button
+            android:id="@+id/btn_confire_change"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/mw_btn_bg_f23a12"
+            android:gravity="center"
+            android:text="@string/text_confire_change"
+            android:textColor="@android:color/white"
+            android:textSize="17sp" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,42 @@
+<resources>
+    <string name="text_phone_bind">绑定手机</string>
+    <string name="text_phone_area_code">区号</string>
+    <string name="text_phone_input_hint">请输入手机号码</string>
+    <string name="text_phone_hasbind_tips">您已经成功绑定，这是您当前绑定的手机号码</string>
+    <string name="text_area_code_not_empty">手机区号不能为空</string>
+    <string name="text_phone_not_empty">手机号码不能为空</string>
+    <string name="text_phone_not_match">手机号码格式有误</string>
+    <string name="text_vfcode_has_send">验证码已发送</string>
+    <string name="text_phone_bind_success">手机绑定成功</string>
+    <string name="text_has_bind_tips_google">Google已升级为会员账号</string>
+    <string name="text_has_bind_tips_fb">Facebook已升级为会员账号</string>
+    <string name="text_has_bind_tips_guest">游客已升级为会员账号</string>
+    <string name="text_has_bind_tips_line">LINE已升级为会员账号</string>
+    <string name="text_has_bind_tips_mw">会员账号</string>
+    <string name="text_notice">公告</string>
+    <string name="text_account_not_login">当前没有账号，请先登录</string>
+    <string name="text_has_bind_tips_twitter">Twitter已升級為會員帳號</string>
+    <string name="text_has_upgrade_account">已升級為會員帳號</string>
+    <string name="text_game_name">遊戲名：</string>
+    <string name="text_server_name">伺服器：</string>
+    <string name="text_role_name">角色名：</string>
+    <string name="text_account_name">帳號：</string>
+    <string name="text_account_uid">uid：</string>
+    <string name="text_account_del">刪除帳號</string>
+    <string name="text_block_msg">亲爱的玩家：
+        \n我们检测到您的账户存在退款行为。为了确保您的账户安全和游戏体验，请您在接到通知后的24小时内通过游戏内客服联系我们进行核实和处理。
+        \n\n若在规定时间内未完成联系并确认，我们将视情况对您的账号进行封停，直至问题解决。
+        \n\n感谢您的理解与配合！</string>
+    <string name="text_blocked_msg">親愛的玩家：
+        \n\n由于您的账户涉及退款行为且未在规定时间内联系游戏客服处理，您的账户已被暂时封禁。
+        \n\n如需解除封禁，请通过游戏内客服联系我们，并提供相关说明和凭证。我们将尽快协助您完成后续处理。
+        \n\n感谢您的理解与配合！</string>
+
+    <string name="text_personal_clause"><u>个人条款</u></string>
+    <string name="text_privacy_policy">隐私政策</string>
+    <string name="text_customer">客诉中心</string>
+    <string name="text_age_up14">已满14周岁</string>
+    <string name="text_age_is_up14">你是否已满14周岁</string>
+    <string name="text_age_up14_can_useapp">注：如果您未满14周岁，请尽快退出，该应用不对14周岁以下用户开放</string>
+
+</resources>

@@ -1,0 +1,50 @@
+<resources>
+
+    <!--港台域名列表 开始-->
+    <!--登录域名-->
+    <string name="mw_sdk_login_pre_url">https://login.tthplay.com/</string>
+    <string name="mw_sdk_login_spa_url"></string>
+
+    <!--支付域名-->
+    <string name="mw_sdk_pay_pre_url">https://pay.tthplay.com/</string>
+    <string name="mw_sdk_pay_spa_url"></string>
+
+    <!--活动域名-->
+<!--    <string name="mw_sdk_act_pre_url"></string>-->
+<!--    <string name="mw_sdk_act_spa_url"></string>-->
+
+    <!--cdn域名-->
+    <string name="mw_sdk_cdn_pre_url">https://cdn-download.tthplay.com/</string>
+    <string name="mw_sdk_cdn_spa_url"></string>
+
+    <!--广告域名-->
+<!--    <string name="mw_sdk_ads_pre_url"></string>-->
+<!--    <string name="mw_sdk_ads_spa_url"></string>-->
+
+    <!--平台域名-->
+    <string name="mw_sdk_plat_pre_url">https://platform.tthplay.com/</string>
+    <string name="mw_sdk_plat_spa_url"></string>
+
+    <!--客服域名-->
+<!--    <string name="mw_sdk_cs_pre_url"></string>-->
+<!--    <string name="mw_sdk_cs_spa_url"></string>-->
+
+    <string name="mw_sdk_member_pre_url">https://member.tthplay.com/</string>
+    <string name="mw_sdk_member_spa_url"></string>
+
+    <!--    日志记录域名-->
+    <string name="mw_sdk_log_pre_url">https://log.tthplay.com/</string>
+
+    <!--使用者條款 - 服務條款 -->
+    <string name="mw_sdk_terms_service_url">https://member.tthplay.com/sdk/agreement/%s_agreement.html</string>
+
+    <!--社群banner-->
+    <string name="mw_sdk_social_url">https://member.tthplay.com/sdk/social/%s/index.html</string>
+
+    <!--    数数-->
+    <string name="mw_td_te_server_url">https://shushu.tthplay.com/</string>
+
+    <!--客服-->
+    <string name="mw_sdk_customer_url">https://platform.tthplay.com/sdk/api/customer.page</string>
+
+</resources>
