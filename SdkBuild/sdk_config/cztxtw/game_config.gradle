@@ -1,7 +1,7 @@
 
 ext {
     sdk_version = "2.3.5"
-    domainUrl= "hwxgame.com"
+    domainUrl= "dustyx.com"
 }
 
 //常规对象：默认覆盖整个嵌套对象
@@ -59,7 +59,7 @@ android {
 
         }
 
-        sdk6 {//第6套，东南亚
+        sdk5 {//第6套，东南亚
             dimension "1"
         }
 
