@@ -21,46 +21,38 @@ android {
         }
 
     }
-    flavorDimensions "sdkVersion"
+
     productFlavors {
 
         huawei {
-            dimension "sdkVersion"
+            dimension "1"
 
             minSdkVersion 25
             targetSdkVersion 35
 
-//            applicationId "com.wdhd.gphk"
-
-            resValue "string", "sdk_game_code", "wdhd"
-            resValue "string", "sdk_app_key", "3cc8a6bf596833a7dda1013e20a5e062"
+            resValue "string", "sdk_game_code", "tgen"
+            resValue "string", "sdk_app_key", "c999bd3d4cb5d1239c0c30bfc70506f2"
             resValue "string", "sdk_more_language", "true"
-            resValue "string", "sdk_default_server_language", "zh_TW"  //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
-            //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
-
-            resValue "string", "sdk_af_dev_key", ""
-            resValue "string", "dy_adjust_token", "8fm8ufyldaps"
-
-            resValue "string", "facebook_app_id", "650842947515087"
-            resValue "string", "facebook_client_token", "8c70b2864007250989e09be689b91ff1"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider650842947515087"
-            //启用分析
-            resValue "string", "fb_login_protocol_scheme", "fb650842947515087"
-            resValue "string", "facebook_app_name", "wdhd"
+            resValue "string", "sdk_default_server_language", "en_US"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
+            resValue "string", "scheme", "tgen"
+            resValue "string", "channel_platform", "huawei"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
+            //facebook
+            resValue "string", "facebook_app_id", "412108094771737"
+            resValue "string", "facebook_client_token", "e36a0f2a998fbfec7bf6ed97e5946f7b"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider412108094771737"
+            resValue "string", "fb_login_protocol_scheme", "fb412108094771737"
+            resValue "string", "facebook_app_name", "tgen" //游戏名字
+            //ad
+            resValue "string", "adjust_app_token", ""
+            resValue "string", "sdk_appflyer_dev_key", "c3kBsVHu5852ySuN5WvUoh"
+            //line
             resValue "string", "line_channelId", ""
-            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google
+            //naver
+            resValue "string", "naver_client_id", ""
+            resValue "string", "naver_client_secret", ""
+            resValue "string", "naver_client_secret", ""
 
-            resValue "string", "sdk_server_languages_map", "{\"zh_CN\": \"zh_CN\", \"zh_TW\": \"zh_TW\", \"en\": \"en_US\", \"pt\": \"pt_PT\", \"th\": \"th_TH\", \"ko\": \"ko_KR\", \"in\": \"in_ID\", \"es\": \"pt_PT\"}"
-
-            resValue "string", "sdk_inner_version", "vd_tw"
-            buildConfigField "Boolean", "reg_is_need_vfcode", "false"
-
-            //用来加密请求，一般不改，改了服务器对应字段也要改
-            buildConfigField "Boolean", "http_jiami_open", "true"
-            buildConfigField "String", "http_key_data", "\"data\""
-            buildConfigField "String", "http_key_secretKey", "\"ky\""
-            buildConfigField "String", "http_key_tian", "\"m\""
-//            proguardFile 'flavor-rules-tw.pro'
+            resValue "string", "mw_tt_app_id", ""
 
         }
 

@@ -66,6 +66,74 @@ android {
 //    }
     namespace 'com.mw.sdk'
 
+    flavorDimensions "1"
+    productFlavors {
+
+//        sdk1 {//第一套
+//            dimension '1'
+//            resValue "string", "sdk_inner_version", "v1"
+//        }
+//        sdk2 {//第二套
+//            dimension '1'
+//            resValue "string", "sdk_inner_version", "v2"
+//        }
+
+        sdk3 {//第三套
+            dimension '1'
+            resValue "string", "sdk_inner_version", "v3"
+        }
+
+        sdk3_ifg {//第三套
+            dimension '1'
+            resValue "string", "sdk_inner_version", "v3"
+        }
+
+        sdk4 {//第4套
+            dimension '1'
+            resValue "string", "sdk_inner_version", "v4"
+            resValue "string", "sdk_release_european", "true" //发布欧洲地区的话要设置
+            resValue "string", "mw_td_appid", ""
+            resValue "string", "sdk_first_silent_login", "true"
+        }
+
+        sdk5 {//第4套
+            dimension '1'
+            resValue "string", "sdk_inner_version", "v5"
+        }
+
+
+        huawei {//华为渠道
+            dimension '1'
+            resValue "string", "sdk_inner_version", "huawei"
+        }
+        vn {//越南专用 ttplay
+            dimension '1'
+            resValue "string", "sdk_inner_version", "vn"
+            resValue "string", "mw_td_appid", ""
+        }
+
+        sdk6 {//第6套，东南亚
+            dimension "1"
+            resValue "string", "sdk_inner_version", "v6"
+            resValue "string", "sdk_release_european", "true" //发布欧洲地区的话要设置
+            resValue "string", "mw_td_appid", ""
+        }
+        sdkKR {//韩国
+            dimension "1"
+            resValue "string", "sdk_inner_version", "kr"
+            resValue "string", "mw_td_appid", ""
+            proguardFile 'flavor-rules-kr.pro'
+        }
+
+        sdkTH {//泰国
+            dimension "1"
+            resValue "string", "sdk_inner_version", "th"
+            resValue "string", "sdk_release_european", "false" //发布欧洲地区的话要设置
+            resValue "string", "mw_td_appid", ""
+        }
+
+
+    }
 }
 
 repositories {
@@ -163,21 +231,21 @@ dependencies {
     implementation (name: 'Payments-nowgg', ext: 'aar')
 
     //huawei sdk
-    implementation 'com.huawei.hms:hwid:6.12.0.300'
-    implementation 'com.huawei.hms:iap:6.13.0.300'
+    huaweiImplementation 'com.huawei.hms:hwid:6.12.0.300'
+    huaweiImplementation 'com.huawei.hms:iap:6.13.0.300'
     //af huawei store支持
-    implementation 'com.huawei.hms:componentverifysdk:13.3.1.301'
+    huaweiImplementation 'com.huawei.hms:componentverifysdk:13.3.1.301'
 
     //qooapp sdk
     //QooAppImplementation(name: 'qooapp-opensdk-2.0.6', ext: 'aar')
 
     //naver
-    implementation("com.navercorp.nid:oauth:5.6.0") // jdk 11
+    sdkKRImplementation("com.navercorp.nid:oauth:5.6.0") // jdk 11
     //onestore
-    implementation "com.onestorecorp.sdk:sdk-iap:21.00.00"
-    implementation "com.onestorecorp.sdk:sdk-configuration-kr:1.0.0"
+    sdkKRImplementation "com.onestorecorp.sdk:sdk-iap:21.00.00"
+    sdkKRImplementation "com.onestorecorp.sdk:sdk-configuration-kr:1.0.0"
     //Samsung
-    implementation(name: 'Samsung-IAP6Helper-release2', ext: 'aar')
+    sdkKRImplementation(name: 'Samsung-IAP6Helper-release2', ext: 'aar')
 
     //伦其
 //    lunqiImplementation files('libs/xlsdk1.jar')
