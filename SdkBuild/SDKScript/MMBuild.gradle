@@ -19,7 +19,12 @@ def syncMainDirectories() {
     syncDirectory("../sdk_config/$gameCode/main", "$main_des/src/$sdkFlavor", [cleanTarget: false])
 }
 
-task clearBuildDir(type: Delete) {
+task clearBuildDir0(type: Delete) {
+    group 'ssssdk'
+    delete 'build'
+}
+
+task clearSourceAndBuildDir1(type: Delete) {
     group 'ssssdk'
     delete 'libs','src','build'
 }
@@ -30,3 +35,30 @@ task copyAllCodeAndRes2{
         syncMainDirectories()
     }
 }
+
+task buildAAR3{
+    group 'ssssdk'
+    doLast {
+
+    }
+}
+def taska = "assemble" + "$sdkFlavor".capitalize()
+println("taskaaa===========$taska")
+buildAAR3.dependsOn(taska)
+
+
+task copyAAR4{
+    group 'ssssdk'
+    def game_code = "$gameCode"
+    doLast {
+        project.copy {
+            from "$project.rootDir/SdkBuild/MWBuildSDK/build/outputs/aar/"
+            into "$project.rootDir/sdk_history"
+            include '**release*' // 筛选 包含的 文件
+            rename { String fileName ->
+                fileName.replace('MWSDK', game_code) // 改名
+            }
+        }
+    }
+}
+
