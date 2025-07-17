@@ -1,0 +1,43 @@
+
+ext {
+    sdk_version = "2.3.5"
+    domainUrl= "kayplay.com"
+}
+
+//常规对象：默认覆盖整个嵌套对象
+//特定 DSL：部分属性（如 Android 的 defaultConfig、CopySpec 的 from）支持智能合并
+//自定义对象：需手动实现合并逻辑
+android {
+
+    buildTypes {
+        release {
+//            multiDexEnabled true //Add this
+//            shrinkResources true  //压缩资源
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+//            shrinkResources false  //压缩资源
+//            minifyEnabled false
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+    }
+
+    productFlavors {
+
+        huawei {
+            dimension "1"
+
+            minSdkVersion 25
+            targetSdkVersion 35
+
+        }
+
+        sdk3_ifg {
+            dimension "1"
+        }
+
+    }
+}
