@@ -46,6 +46,10 @@
 -keep public class com.mw.sdk.bean.SUserInfo { *; }
 -keep public class com.mw.sdk.bean.res.ToggleResult { *; }
 -keep public class com.mw.sdk.bean.res.ToggleResult$Data { *; }
+# 保留所有类的 public 方法名：
+-keepclassmembers class com.core.base.callback.IGameLifeCycle {
+    public *;
+}
 
 -keep public class com.mw.**.*Data { *; }
 -keep public class com.mw.**.*Model { *; }
