@@ -49,7 +49,21 @@ android {
 //        abortOnError false
 //    }
     namespace 'com.mw.sdk'
+    buildTypes {
+        release {
+//            multiDexEnabled true //Add this
+//            shrinkResources true  //压缩资源
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
 
+        debug {
+//            shrinkResources false  //压缩资源
+//            minifyEnabled false
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+    }
 }
 
 apply from: "${project.rootDir}/GamaSDK/sdk-build.gradle"
