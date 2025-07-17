@@ -13,12 +13,14 @@ import com.android.billingclient.api.BillingFlowParams;
 import com.android.billingclient.api.BillingResult;
 import com.android.billingclient.api.ConsumeParams;
 import com.android.billingclient.api.ConsumeResponseListener;
+import com.android.billingclient.api.PendingPurchasesParams;
 import com.android.billingclient.api.ProductDetails;
 import com.android.billingclient.api.ProductDetailsResponseListener;
 import com.android.billingclient.api.Purchase;
 import com.android.billingclient.api.PurchasesResponseListener;
 import com.android.billingclient.api.PurchasesUpdatedListener;
 import com.android.billingclient.api.QueryProductDetailsParams;
+import com.android.billingclient.api.QueryProductDetailsResult;
 import com.android.billingclient.api.QueryPurchasesParams;
 import com.core.base.utils.PL;
 import com.google.common.collect.ImmutableList;
@@ -113,8 +115,10 @@ public class GBillingHelper implements PurchasesUpdatedListener {
         PL.i( "startServiceConnection start");
         isBillingInit = false;
         billingClient = BillingClient.newBuilder(context)
-                .enablePendingPurchases()
+//                .enablePendingPurchases()
+                .enablePendingPurchases(PendingPurchasesParams.newBuilder().enableOneTimeProducts().build())
                 .setListener(this)
+                .enableAutoServiceReconnection() //如果在服务断开连接时发出 API 调用，Play 结算库现在可以自动重新建立服务连接。这可能会导致 SERVICE_DISCONNECTED 响应减少，因为重新连接是在发出 API 调用之前在内部处理的。
                 .build();
         billingClient.startConnection(new BillingClientStateListener() {
             @Override
@@ -213,10 +217,20 @@ public class GBillingHelper implements PurchasesUpdatedListener {
 
                 queryProductDetailsAsync(activity, sku, new ProductDetailsResponseListener() {
                     @Override
-                    public void onProductDetailsResponse(@NonNull BillingResult billingResult, @NonNull List<ProductDetails> list) {
+                    public void onProductDetailsResponse(@NonNull BillingResult billingResult, @NonNull QueryProductDetailsResult queryProductDetailsResult) {
+
                         PL.i( "queryProductDetailsAsync finish ");
                         PL.i( "onQuerySkuResult error responseCode => " + billingResult.getResponseCode() + ",debugMessage => " + billingResult.getDebugMessage());
                         if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
+
+//                            for (ProductDetails productDetails : queryProductDetailsResult().getProductDetailsList()) {
+//                                // Process success retrieved product details here.
+//                            }
+//
+//                            for (UnfetchedProduct unfetchedProduct : queryproductDetailsResult.getUnfetchedProductList()) {
+//                                // Handle any unfetched products as appropriate.
+//                            }
+                            List<ProductDetails> list = queryProductDetailsResult.getProductDetailsList();
 
                             if (list == null || list.isEmpty()){
                                 PL.i( "queryProductDetailsAsync ProductDetail list empty");
@@ -240,7 +254,10 @@ public class GBillingHelper implements PurchasesUpdatedListener {
                                 billingHelperStatusCallback.handleError(2, billingResult.getDebugMessage());
                             }
                         }
+
+
                     }
+
                 });
 
             }
