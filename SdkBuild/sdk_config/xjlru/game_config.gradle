@@ -1,6 +1,6 @@
 
 ext {
-    sdk_version = "2.3.5"
+    sdk_version = "2.3.6"
     domainUrl= "kayplay.com"
 }
 
