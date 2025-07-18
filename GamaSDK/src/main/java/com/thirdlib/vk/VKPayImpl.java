@@ -27,9 +27,6 @@ import com.mw.sdk.pay.IPayCallBack;
 import com.mw.sdk.utils.PayHelper;
 import com.mw.sdk.utils.SdkUtil;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.List;
 
 import ru.rustore.sdk.core.util.RuStoreUtils;
@@ -371,7 +368,7 @@ public class VKPayImpl implements IPay, VKPurchaseManger.PurchaseCallback {
                 }else {
 
                     //5.开始购买
-                    JSONObject devPayload = new JSONObject();
+                   /* JSONObject devPayload = new JSONObject();
                     try {
                         skuAmount = createOrderIdRes.getPayData().getAmount();
                         devPayload.put("userId", createOrderIdReqBean.getUserId());
@@ -381,9 +378,10 @@ public class VKPayImpl implements IPay, VKPurchaseManger.PurchaseCallback {
                         e.printStackTrace();
                         callbackFail("devPayload error");
                         return;
-                    }
+                    }*/
 
-                    VKPurchaseManger.getInstance().purchaseProduct(activity, createOrderIdReqBean.getProductId(),createOrderIdRes.getPayData().getOrderId(),devPayload.toString());
+                    String devPayloadStr = createOrderIdReqBean.getRoleId();//URLEncoder.encode(devPayload.toString());
+                    VKPurchaseManger.getInstance().purchaseProduct(activity, createOrderIdReqBean.getProductId(),createOrderIdRes.getPayData().getOrderId(), devPayloadStr, createOrderIdReqBean.getUserId());
 
                 }
 
@@ -538,15 +536,22 @@ public class VKPayImpl implements IPay, VKPurchaseManger.PurchaseCallback {
                         //purchase.getOrderId();
                         exchangeReqBean.setRequestMethod(ApiRequestMethod.API_PAYMENT_VK);
                         try {
-                            JSONObject payLoadJsonObject = new JSONObject(purchase.getDeveloperPayload().getValue());
-                            String userId = payLoadJsonObject.optString("userId");
-                            String orderId = payLoadJsonObject.optString("orderId");
-                            String roleId = payLoadJsonObject.optString("roleId");
-                            exchangeReqBean.setUserId(userId);
-                            exchangeReqBean.setOrderId(orderId);
-                            exchangeReqBean.setRoleId(roleId);
-                        } catch (JSONException e) {
+
+                            if (purchase.getDeveloperPayload() != null) {
+                                String payLoadStr = purchase.getDeveloperPayload().getValue();
+//                                payLoadStr = URLDecoder.decode(payLoadStr);
+//                                JSONObject payLoadJsonObject = new JSONObject(payLoadStr);
+//                                String userId = payLoadJsonObject.optString("userId");
+//                                String orderId = payLoadJsonObject.optString("orderId");
+//                                String roleId = payLoadJsonObject.optString("roleId");
+//                                exchangeReqBean.setUserId(userId);
+                                exchangeReqBean.setOrderId(payLoadStr);
+//                                exchangeReqBean.setRoleId(roleId);
+                            }
+
+                        } catch (Exception e) {
                             e.printStackTrace();
+                            //exchangeReqBean.setOrderId(purchase.getOrderId().getValue());
                         }
 
                         PayApi.requestCommonPaySendStone(mActivity, exchangeReqBean, new SFCallBack<GPExchangeRes>() {
@@ -577,7 +582,7 @@ public class VKPayImpl implements IPay, VKPurchaseManger.PurchaseCallback {
     public void onPayingQueryPurchaseSucceed(List<Purchase> purchases) {
 
         if (purchases == null || purchases.isEmpty()){
-            PL.i("onQueryPurchaseSucceed empty");
+            PL.i("onPayingQueryPurchaseSucceed empty");
             onePayInActivity(mActivity);
             return;
         }
@@ -607,15 +612,20 @@ public class VKPayImpl implements IPay, VKPurchaseManger.PurchaseCallback {
                         exchangeReqBean.setInvoiceId(purchase.getInvoiceId().getValue());
                         exchangeReqBean.setRequestMethod(ApiRequestMethod.API_PAYMENT_VK);
                         try {
-                            JSONObject payLoadJsonObject = new JSONObject(purchase.getDeveloperPayload().getValue());
-                            String userId = payLoadJsonObject.optString("userId");
-                            String orderId = payLoadJsonObject.optString("orderId");
-                            String roleId = payLoadJsonObject.optString("roleId");
-                            exchangeReqBean.setUserId(userId);
-                            exchangeReqBean.setOrderId(orderId);
-                            exchangeReqBean.setRoleId(roleId);
-                        } catch (JSONException e) {
+                            if (purchase.getDeveloperPayload() != null) {
+                                String payLoadStr = purchase.getDeveloperPayload().getValue();
+//                                payLoadStr = URLDecoder.decode(payLoadStr);
+//                                JSONObject payLoadJsonObject = new JSONObject(payLoadStr);
+//                                String userId = payLoadJsonObject.optString("userId");
+//                                String orderId = payLoadJsonObject.optString("orderId");
+//                                String roleId = payLoadJsonObject.optString("roleId");
+//                                exchangeReqBean.setUserId(userId);
+                                exchangeReqBean.setOrderId(payLoadStr);
+//                                exchangeReqBean.setRoleId(roleId);
+                            }
+                        } catch (Exception e) {
                             e.printStackTrace();
+                            //exchangeReqBean.setOrderId(purchase.getOrderId().getValue());
                         }
 
                         PayApi.requestCommonPaySendStone(mActivity, exchangeReqBean, new SFCallBack<GPExchangeRes>() {

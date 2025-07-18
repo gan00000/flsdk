@@ -13,6 +13,7 @@ import java.util.List;
 
 import ru.rustore.sdk.pay.PurchaseInteractor;
 import ru.rustore.sdk.pay.RuStorePayClient;
+import ru.rustore.sdk.pay.model.AppUserId;
 import ru.rustore.sdk.pay.model.DeveloperPayload;
 import ru.rustore.sdk.pay.model.OrderId;
 import ru.rustore.sdk.pay.model.ProductId;
@@ -189,13 +190,13 @@ public class VKPurchaseManger {
         );
     }
 
-    public void purchaseProduct(Context context,String productId, String orderId, String developerPayload) {
+    public void purchaseProduct(Context context,String productId, String orderId, String developerPayload, String userId) {
 
         this.mContext = context;
 
         PurchaseInteractor purchaseInteractor = getBillingClient(context).getPurchaseInteractor();
 
-        ProductPurchaseParams params = new ProductPurchaseParams(new ProductId(productId), new Quantity(1), new OrderId(orderId), new DeveloperPayload(developerPayload), null, null);
+        ProductPurchaseParams params = new ProductPurchaseParams(new ProductId(productId), new Quantity(1), new OrderId(orderId), new DeveloperPayload(developerPayload), new AppUserId(userId), null);
         purchaseInteractor.purchaseTwoStep(params)
 //        purchaseInteractor.purchase(params, PreferredPurchaseType.ONE_STEP)
                 .addOnSuccessListener(result -> {
