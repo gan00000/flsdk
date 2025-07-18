@@ -32,10 +32,11 @@ import org.json.JSONObject;
 
 import java.util.List;
 
-import ru.rustore.sdk.billingclient.model.purchase.PaymentResult;
-import ru.rustore.sdk.billingclient.model.purchase.Purchase;
-import ru.rustore.sdk.billingclient.model.purchase.PurchaseState;
 import ru.rustore.sdk.core.util.RuStoreUtils;
+import ru.rustore.sdk.pay.UserInteractor;
+import ru.rustore.sdk.pay.model.ProductPurchaseResult;
+import ru.rustore.sdk.pay.model.Purchase;
+import ru.rustore.sdk.pay.model.PurchaseStatus;
 
 /**
  * Created by gan on 2017/2/23.
@@ -226,7 +227,7 @@ public class VKPayImpl implements IPay, VKPurchaseManger.PurchaseCallback {
             loadingDialog.showProgressDialog();
             boolean isRuStoreInstalled = RuStoreUtils.INSTANCE.isRuStoreInstalled(activity);
             PL.d("vk isRuStoreInstalled:" + isRuStoreInstalled);
-            VKPurchaseManger.getBillingClient(activity).getUserInfo().getAuthorizationStatus()
+          /*  VKPurchaseManger.getBillingClient(activity).getUserInfo().getAuthorizationStatus()
                     .addOnSuccessListener (status -> {
                         PL.d("vk getAuthorizationStatus onSuccess status:" + status.getAuthorized());
                         // Result processing
@@ -240,6 +241,33 @@ public class VKPayImpl implements IPay, VKPurchaseManger.PurchaseCallback {
                     })
                     .addOnFailureListener(throwable -> {
                         // Error processing
+                        PL.d("vk getAuthorizationStatus onFailure");
+                        onePayInActivity(mActivity);
+                    });*/
+
+            UserInteractor userInteractor = VKPurchaseManger.getBillingClient(activity).getUserInteractor();
+            userInteractor.getUserAuthorizationStatus()
+                    .addOnSuccessListener(status -> {
+                        PL.d("vk getAuthorizationStatus onSuccess status:" + status.name());
+                        switch (status) {
+                            case AUTHORIZED:
+                                // Logic when the user is authorized in RuStore
+                            {
+                                //getPurchases()
+                                VKPurchaseManger.getInstance().queryPurchasesAsyncInPaying(activity);
+                            }
+                                break;
+                            case UNAUTHORIZED:
+                                // Logic when the user is NOT authorized in RuStore
+                            {
+                                //直接买
+                                onePayInActivity(mActivity);
+                            }
+                                break;
+                        }
+                    })
+                    .addOnFailureListener(throwable -> {
+                        // Error handling
                         PL.d("vk getAuthorizationStatus onFailure");
                         onePayInActivity(mActivity);
                     });
@@ -409,20 +437,27 @@ public class VKPayImpl implements IPay, VKPurchaseManger.PurchaseCallback {
     }
 
     @Override
-    public void onPurchaseSucceed(PaymentResult paymentResult) {
+    public void onPurchaseSucceed(ProductPurchaseResult paymentResult) {
         PL.i("onPurchaseSucceed");
-        String purchaseId = ((PaymentResult.Success) paymentResult).getPurchaseId();
-        String orderId = ((PaymentResult.Success) paymentResult).getOrderId();
-        String productId = ((PaymentResult.Success) paymentResult).getProductId();
-        String invoiceId = ((PaymentResult.Success) paymentResult).getInvoiceId();
-        String subscriptionToken = ((PaymentResult.Success) paymentResult).getSubscriptionToken();
-        boolean sandbox = ((PaymentResult.Success) paymentResult).getSandbox();
+        if (paymentResult == null){
+            callbackFail("ProductPurchaseResult is null");
+            return;
+        }
+        String purchaseId = paymentResult.getPurchaseId().getValue();
+        String orderId = "";
+        if (paymentResult.getOrderId() != null) {
+            orderId = paymentResult.getOrderId().getValue();
+        }
+        String productId = paymentResult.getProductId().getValue();
+        String invoiceId = paymentResult.getInvoiceId().getValue();
+        String subscriptionToken = "";
+        boolean sandbox = paymentResult.getSandbox();
 
         PayExchangeReqBean exchangeReqBean = new PayExchangeReqBean(mActivity);
 //        exchangeReqBean.setDataSignature(subscriptionToken);
 //        exchangeReqBean.setPurchaseData(purchaseData.getOriginalJson());
 //        exchangeReqBean.setGoogleOrderId(invoiceId);
-        exchangeReqBean.setThirdPurchaseToken(subscriptionToken);
+//        exchangeReqBean.setThirdPurchaseToken(subscriptionToken);
         exchangeReqBean.setReissue("no");
 
         exchangeReqBean.setPurchaseId(purchaseId);
@@ -478,31 +513,32 @@ public class VKPayImpl implements IPay, VKPurchaseManger.PurchaseCallback {
         }
         for (Purchase purchase : purchases) {
 
-            String purchaseId = purchase.getPurchaseId();
+            String purchaseId = purchase.getPurchaseId().getValue();
             if (SStringUtil.isNotEmpty(purchaseId)) {
 
-                if (purchase.getPurchaseState() != null) {
+                if (purchase.getStatus() != null) {
                     //失败
-                    if (purchase.getPurchaseState() == PurchaseState.CREATED || purchase.getPurchaseState() == PurchaseState.INVOICE_CREATED) {
-                        VKPurchaseManger.getInstance().deletePurchase(mContext, purchaseId);
-
-                    } else if (purchase.getPurchaseState() == PurchaseState.PAID) {//成功
+//                    if (purchase.getStatus() == PurchaseStatus.CREATED || purchase.getPurchaseState() == PurchaseState.INVOICE_CREATED) {
+//                        VKPurchaseManger.getInstance().deletePurchase(mContext, purchaseId);
+//
+//                    } else
+                    if (purchase.getStatus() == PurchaseStatus.PAID) {//成功
                         //confirmPurchase(context, purchaseId);
 
                         PayExchangeReqBean exchangeReqBean = new PayExchangeReqBean(mActivity);
 //                        exchangeReqBean.setDataSignature(purchase.getSubscriptionToken());
 //                        exchangeReqBean.setPurchaseData(purchaseData.getOriginalJson());
-                        exchangeReqBean.setThirdPurchaseToken(purchase.getSubscriptionToken());
+//                        exchangeReqBean.setThirdPurchaseToken(purchase.getSubscriptionToken());
                         exchangeReqBean.setReissue("yes");
 
                         exchangeReqBean.setPurchaseId(purchaseId);
-                        exchangeReqBean.setProductId(purchase.getProductId());
-                        exchangeReqBean.setInvoiceId(purchase.getInvoiceId());
+                        exchangeReqBean.setProductId(purchase.getProductId().getValue());
+                        exchangeReqBean.setInvoiceId(purchase.getInvoiceId().getValue());
                         //unique order id generated by the app (optional). If you specify this parameter in your system, you will receive it via our API. Otherwise, it will be generated automatically.
                         //purchase.getOrderId();
                         exchangeReqBean.setRequestMethod(ApiRequestMethod.API_PAYMENT_VK);
                         try {
-                            JSONObject payLoadJsonObject = new JSONObject(purchase.getDeveloperPayload());
+                            JSONObject payLoadJsonObject = new JSONObject(purchase.getDeveloperPayload().getValue());
                             String userId = payLoadJsonObject.optString("userId");
                             String orderId = payLoadJsonObject.optString("orderId");
                             String roleId = payLoadJsonObject.optString("roleId");
@@ -548,29 +584,30 @@ public class VKPayImpl implements IPay, VKPurchaseManger.PurchaseCallback {
 
         for (Purchase purchase : purchases) {
 
-            String purchaseId = purchase.getPurchaseId();
+            String purchaseId = purchase.getPurchaseId().getValue();
             if (SStringUtil.isNotEmpty(purchaseId)) {
 
-                if (purchase.getPurchaseState() != null) {
+                if (purchase.getStatus() != null) {
                     //失败
-                    if (purchase.getPurchaseState() == PurchaseState.CREATED || purchase.getPurchaseState() == PurchaseState.INVOICE_CREATED) {
-                        VKPurchaseManger.getInstance().deletePurchase(mContext, purchaseId);
-
-                    } else if (purchase.getPurchaseState() == PurchaseState.PAID) {//成功
+//                    if (purchase.getPurchaseState() == PurchaseState.CREATED || purchase.getPurchaseState() == PurchaseState.INVOICE_CREATED) {
+//                        VKPurchaseManger.getInstance().deletePurchase(mContext, purchaseId);
+//
+//                    } else
+                        if (purchase.getStatus() == PurchaseStatus.PAID) {//成功
                         //confirmPurchase(context, purchaseId);
 
                         PayExchangeReqBean exchangeReqBean = new PayExchangeReqBean(mActivity);
 //                        exchangeReqBean.setDataSignature(purchase.getSubscriptionToken());
 //                        exchangeReqBean.setPurchaseData(purchaseData.getOriginalJson());
-                        exchangeReqBean.setThirdPurchaseToken(purchase.getSubscriptionToken());
+//                        exchangeReqBean.setThirdPurchaseToken(purchase.getSubscriptionToken());
                         exchangeReqBean.setReissue("yes");
 
                         exchangeReqBean.setPurchaseId(purchaseId);
-                        exchangeReqBean.setProductId(purchase.getProductId());
-                        exchangeReqBean.setInvoiceId(purchase.getInvoiceId());
+                        exchangeReqBean.setProductId(purchase.getProductId().getValue());
+                        exchangeReqBean.setInvoiceId(purchase.getInvoiceId().getValue());
                         exchangeReqBean.setRequestMethod(ApiRequestMethod.API_PAYMENT_VK);
                         try {
-                            JSONObject payLoadJsonObject = new JSONObject(purchase.getDeveloperPayload());
+                            JSONObject payLoadJsonObject = new JSONObject(purchase.getDeveloperPayload().getValue());
                             String userId = payLoadJsonObject.optString("userId");
                             String orderId = payLoadJsonObject.optString("orderId");
                             String roleId = payLoadJsonObject.optString("roleId");
@@ -606,7 +643,7 @@ public class VKPayImpl implements IPay, VKPurchaseManger.PurchaseCallback {
     }
 
     @Override
-    public void onPurchaseFailed(PaymentResult paymentResult) {
+    public void onPurchaseFailed(ProductPurchaseResult paymentResult) {
 
     }
 

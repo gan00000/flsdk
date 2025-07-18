@@ -60,6 +60,11 @@
         <!--GA4F SDK 中启用 DDL。 为启用延迟深层链接而需添加的值 -->
         <meta-data android:name="google_analytics_deferred_deep_link_enabled" android:value="true"/>
 
+<!--        rustore use-->
+        <meta-data
+            android:name="console_app_id_value"
+            android:value="@string/mw_vk_appid" />
+
         <activity
             android:name="com.mw.sdk.MWWebPayActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|fontScale"

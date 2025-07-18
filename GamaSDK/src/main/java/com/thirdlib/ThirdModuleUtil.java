@@ -124,7 +124,7 @@ public class ThirdModuleUtil {
         }
         try {
             //Class<?> clazz = Class.forName("ru.rustore.sdk.review.RuStoreReviewManager");
-            Class<?> clazz = Class.forName("ru.rustore.sdk.billingclient.RuStoreBillingClient");
+            Class<?> clazz = Class.forName("ru.rustore.sdk.pay.RuStorePayClient");
             if (clazz == null){
                 return false;
             }
