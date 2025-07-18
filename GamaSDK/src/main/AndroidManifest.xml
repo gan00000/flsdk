@@ -62,7 +62,7 @@
 
 <!--        rustore use-->
         <meta-data
-            android:name="console_app_id_value"
+            android:name="console_app_id_key"
             android:value="@string/mw_vk_appid" />
 
         <activity
