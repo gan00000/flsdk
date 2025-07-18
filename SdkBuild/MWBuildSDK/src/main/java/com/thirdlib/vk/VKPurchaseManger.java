@@ -6,25 +6,29 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.mw.sdk.R;
+import com.core.base.utils.PL;
 import com.thirdlib.ThirdModuleUtil;
 
-import java.util.Arrays;
 import java.util.List;
 
-import ru.rustore.sdk.billingclient.RuStoreBillingClient;
-import ru.rustore.sdk.billingclient.RuStoreBillingClientFactory;
-import ru.rustore.sdk.billingclient.model.purchase.PaymentResult;
-import ru.rustore.sdk.billingclient.model.purchase.Purchase;
-import ru.rustore.sdk.billingclient.provider.logger.ExternalPaymentLogger;
-import ru.rustore.sdk.billingclient.provider.logger.ExternalPaymentLoggerFactory;
-import ru.rustore.sdk.billingclient.usecase.ProductsUseCase;
-import ru.rustore.sdk.billingclient.usecase.PurchasesUseCase;
+import ru.rustore.sdk.pay.PurchaseInteractor;
+import ru.rustore.sdk.pay.RuStorePayClient;
+import ru.rustore.sdk.pay.model.DeveloperPayload;
+import ru.rustore.sdk.pay.model.OrderId;
+import ru.rustore.sdk.pay.model.ProductId;
+import ru.rustore.sdk.pay.model.ProductPurchaseParams;
+import ru.rustore.sdk.pay.model.ProductPurchaseResult;
+import ru.rustore.sdk.pay.model.ProductType;
+import ru.rustore.sdk.pay.model.Purchase;
+import ru.rustore.sdk.pay.model.PurchaseId;
+import ru.rustore.sdk.pay.model.PurchaseStatus;
+import ru.rustore.sdk.pay.model.Quantity;
+import ru.rustore.sdk.pay.model.RuStorePaymentException;
 
 public class VKPurchaseManger {
 
     private static VKPurchaseManger vkPurchaseManger;
-    private static RuStoreBillingClient ruStoreBillingClient;
+    private static RuStorePayClient ruStoreBillingClient;
     private boolean isPurchasesAvailability;
     private Context mContext;
     public PurchaseCallback purchaseCallback;
@@ -36,28 +40,30 @@ public class VKPurchaseManger {
         return vkPurchaseManger;
     }
 
-    final static ExternalPaymentLoggerFactory externalPaymentLoggerFactory = new ExternalPaymentLoggerFactory() {
-        @Override
-        public ExternalPaymentLogger create(String tag) {
-            return new PaymentLogger(tag);
-        }
-    };
+//    final static ExternalPaymentLoggerFactory externalPaymentLoggerFactory = new ExternalPaymentLoggerFactory() {
+//        @Override
+//        public ExternalPaymentLogger create(String tag) {
+//            return new PaymentLogger(tag);
+//        }
+//    };
     final static boolean debugLogs = true;
 
-    public static RuStoreBillingClient getBillingClient(Context context) {
+    public static RuStorePayClient getBillingClient(Context context) {
 
         if (ruStoreBillingClient != null){
             return ruStoreBillingClient;
         }
-
-        ruStoreBillingClient = RuStoreBillingClientFactory.INSTANCE.create(
-                context,
-                context.getString(R.string.mw_vk_appid),
-                context.getString(R.string.sdk_game_code),
-                null,
-                externalPaymentLoggerFactory,
-                debugLogs
-        );
+//
+//        ruStoreBillingClient = RuStoreBillingClientFactory.INSTANCE.create(
+//                context,
+//                context.getString(R.string.mw_vk_appid),
+//                context.getString(R.string.sdk_game_code),
+//                null,
+//                externalPaymentLoggerFactory,
+//                debugLogs
+//        );
+//        return ruStoreBillingClient;
+        ruStoreBillingClient = RuStorePayClient.Companion.getInstance();
         return ruStoreBillingClient;
     }
 
@@ -66,7 +72,8 @@ public class VKPurchaseManger {
             if (!ThirdModuleUtil.existRustoreModule()){
                 return;
             }
-            getBillingClient(activity).onNewIntent(activity.getIntent());
+//            getBillingClient(activity).onNewIntent(activity.getIntent());
+            getBillingClient(activity).getIntentInteractor().proceedIntent(activity.getIntent());
         }
     }
 
@@ -74,7 +81,9 @@ public class VKPurchaseManger {
         if (!ThirdModuleUtil.existRustoreModule()){
             return;
         }
-        getBillingClient(activity).onNewIntent(intent);
+        //        getBillingClient(activity).onNewIntent(intent);
+        getBillingClient(activity).getIntentInteractor().proceedIntent(intent);
+
     }
 
     public void initBillingClient(Context context){
@@ -99,11 +108,11 @@ public class VKPurchaseManger {
                 });*/
     }
 
-    public void getProducts(Context context) {
+   /* public void getProducts(Context context) {
         this.mContext = context;
-        ProductsUseCase productsUseCase = getBillingClient(context).getProducts();
+        ProductInteractor productInteractor = getBillingClient(context).getProductInteractor();
 
-        productsUseCase.getProducts(
+        productInteractor.getProducts(
                 Arrays.asList(
                         "productId1",
                         "productId2",
@@ -111,9 +120,9 @@ public class VKPurchaseManger {
                 )).addOnSuccessListener(products -> {
 
         }).addOnFailureListener(throwable -> Log.e("RuStoreBillingClient", "Error calling getProducts cause: " + throwable));
-    }
+    }*/
 
-    public void queryPurchasesAsync(Context context) {
+   /* public void queryPurchasesAsync(Context context) {
 
         this.mContext = context;
         PurchasesUseCase purchasesUseCase = getBillingClient(context).getPurchases();
@@ -133,15 +142,16 @@ public class VKPurchaseManger {
 
 
         );
-    }
+    }*/
 
     public void queryPurchasesAsyncInPaying(Context context) {
 
         this.mContext = context;
-        PurchasesUseCase purchasesUseCase = getBillingClient(context).getPurchases();
+        PurchaseInteractor purchaseInteractor = getBillingClient(context).getPurchaseInteractor();
 
-        purchasesUseCase.getPurchases().addOnSuccessListener(purchases -> {
-            Log.e("RuStoreBillingClient", "calling getPurchases success");
+        purchaseInteractor.getPurchases(ProductType.CONSUMABLE_PRODUCT, PurchaseStatus.PAID).addOnSuccessListener(purchases -> {
+
+            PL.d("calling getPurchases success");
             if (purchaseCallback != null){
                 purchaseCallback.onPayingQueryPurchaseSucceed(purchases);
             }
@@ -183,25 +193,52 @@ public class VKPurchaseManger {
 
         this.mContext = context;
 
-        PurchasesUseCase purchasesUseCase = getBillingClient(context).getPurchases();
+        PurchaseInteractor purchaseInteractor = getBillingClient(context).getPurchaseInteractor();
+
+        ProductPurchaseParams params = new ProductPurchaseParams(new ProductId(productId), new Quantity(1), new OrderId(orderId), new DeveloperPayload(developerPayload), null, null);
+        purchaseInteractor.purchaseTwoStep(params)
+//        purchaseInteractor.purchase(params, PreferredPurchaseType.ONE_STEP)
+                .addOnSuccessListener(result -> {
+                    // Successful purchase result
+                    PL.e("Successful purchase result");
+                    handlePaymentResult(result);
+                })
+                .addOnFailureListener(throwable -> {
+                    if (throwable instanceof RuStorePaymentException.ProductPurchaseException) {
+                        // Handle product purchase error
+                        PL.e("Handle product purchase error");
+                    } else if (throwable instanceof RuStorePaymentException.ProductPurchaseCancelled) {
+                        // Handle product purchase cancellation
+                        PL.e("Handle product purchase cancellation");
+                    } else {
+                        // Handle other error
+                        PL.e("Handle other error:" + throwable.getMessage());
+                    }
+                    if (purchaseCallback != null){
+                        purchaseCallback.onError(throwable.getMessage());
+                    }
+                });
 
 //        String developerPayload = "your_developer_payload";
 
-        purchasesUseCase.purchaseProduct(productId, orderId, 1, developerPayload)
-                .addOnSuccessListener(this::handlePaymentResult)
-                .addOnFailureListener(throwable ->
-                        {
-                            Log.e("RuStoreBillingClient", "Error calling purchaseProduct cause: " + throwable);
-                            if (purchaseCallback != null){
-                                purchaseCallback.onError(throwable.getMessage());
-                            }
-                        }
-                );
+//        purchasesUseCase.purchaseProduct(productId, orderId, 1, developerPayload)
+//                .addOnSuccessListener(this::handlePaymentResult)
+//                .addOnFailureListener(throwable ->
+//                        {
+//                            Log.e("RuStoreBillingClient", "Error calling purchaseProduct cause: " + throwable);
+//                            if (purchaseCallback != null){
+//                                purchaseCallback.onError(throwable.getMessage());
+//                            }
+//                        }
+//                );
     }
 
 
-    private void handlePaymentResult(PaymentResult paymentResult) {
-        if (paymentResult instanceof PaymentResult.Success) {
+    private void handlePaymentResult(ProductPurchaseResult paymentResult) {
+        if (purchaseCallback != null){
+            purchaseCallback.onPurchaseSucceed(paymentResult);
+        }
+        /*if (paymentResult instanceof PaymentResult.Success) {
             //confirmPurchase(this.mContext, ((PaymentResult.Success) paymentResult).getPurchaseId());
             if (purchaseCallback != null){
                 purchaseCallback.onPurchaseSucceed(((PaymentResult.Success) paymentResult));
@@ -211,11 +248,15 @@ public class VKPurchaseManger {
             if (purchaseCallback != null){
                 purchaseCallback.onPurchaseFailed(null);
             }
-        }
+        }*/
     }
 
+
+//    Only purchases initiated using the two-stage payment scenario (i.e., with funds being held) require confirmation.
+//    Such purchases, after successful holding, will have the status PurchaseStatus.PAID.
+//    To debit funds from the buyer's card, the purchase must be confirmed. For this, you should use the confirmTwoStepPurchase method.
     public void confirmPurchase(Context context, String purchaseId) {
-        PurchasesUseCase purchasesUseCase = getBillingClient(context).getPurchases();
+     /*   PurchasesUseCase purchasesUseCase = getBillingClient(context).getPurchases();
 
         purchasesUseCase.confirmPurchase(purchaseId)
                 .addOnSuccessListener(unit -> {
@@ -225,12 +266,27 @@ public class VKPurchaseManger {
                     }
                 }).addOnFailureListener(throwable -> {
                     Log.e("RuStoreBillingClient", "Error calling confirmPurchase cause: " + throwable);
+                });*/
+
+        PurchaseInteractor purchaseInteractor = getBillingClient(context).getPurchaseInteractor();
+
+        purchaseInteractor.confirmTwoStepPurchase(new PurchaseId(purchaseId), null)
+                .addOnSuccessListener(success -> {
+                    // Process success
+                    PL.d("confirmTwoStepPurchase success");
+                    if (purchaseCallback != null) {
+                        purchaseCallback.onConsumeFinished();
+                    }
+                })
+                .addOnFailureListener(throwable -> {
+                    // Process error
+                    PL.e("confirmTwoStepPurchase failure");
                 });
     }
 
 
-    public void deletePurchase(Context context, String purchaseId) {
-        /*
+   /* public void deletePurchase(Context context, String purchaseId) {
+        *//*
         PurchasesUseCase purchasesUseCase = getBillingClient(context).getPurchases();
         //To cancel a purchase, use the deletePurchase method.
         purchasesUseCase.deletePurchase(purchaseId)
@@ -240,8 +296,29 @@ public class VKPurchaseManger {
                 .addOnFailureListener(throwable -> {
                     Log.e("RuStoreBillingClient", "Error calling deletePurchase cause: " + throwable);
                 });
-        */
-    }
+        *//*
+    }*/
+
+/*    public void CheckingUserStatus(Context context){
+
+        UserInteractor userInteractor = getBillingClient(context).getUserInteractor();
+        userInteractor.getUserAuthorizationStatus()
+                .addOnSuccessListener(status -> {
+                    switch (status) {
+                        case AUTHORIZED:
+                            // Logic when the user is authorized in RuStore
+                            break;
+                        case UNAUTHORIZED:
+                            // Logic when the user is NOT authorized in RuStore
+                            break;
+                    }
+                })
+                .addOnFailureListener(throwable -> {
+                    // Error handling
+                });
+    }*/
+
+
 
     interface PurchaseCallback {
         /**
@@ -254,11 +331,11 @@ public class VKPurchaseManger {
          */
         void onConsumeFinished();
 
-        void onPurchaseSucceed(PaymentResult paymentResult);
+        void onPurchaseSucceed(ProductPurchaseResult paymentResult);
 
         void onQueryPurchaseSucceed(List<Purchase> purchases);
         void onPayingQueryPurchaseSucceed(List<Purchase> purchases);
-        void onPurchaseFailed(PaymentResult paymentResult);
+        void onPurchaseFailed(ProductPurchaseResult paymentResult);
         void onError(String message);
     }
 }
