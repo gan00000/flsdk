@@ -64,6 +64,10 @@
         <meta-data
             android:name="console_app_id_key"
             android:value="@string/mw_vk_appid" />
+        <meta-data
+            android:name="sdk_pay_scheme_value"
+            android:value="@string/sdk_game_code" />
+        <!--        rustore use end-->
 
         <activity
             android:name="com.mw.sdk.MWWebPayActivity"
