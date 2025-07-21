@@ -260,7 +260,7 @@ public class SansungPayImpl implements IPay{
     }
 
     @Override
-    public void startQueryPurchase(Context mContext) {
+    public void startQueryPurchase(Activity mContext) {
 
         if (mIapHelper == null || mContext == null){
             return;
@@ -276,7 +276,8 @@ public class SansungPayImpl implements IPay{
 
     }
 
-    public void queryPreRegData(final Context mContext, ISdkCallBack iSdkCallBack) {
+    @Override
+    public void queryPreRegData(Activity activity, ISdkCallBack iSdkCallBack) {
 
     }
 
