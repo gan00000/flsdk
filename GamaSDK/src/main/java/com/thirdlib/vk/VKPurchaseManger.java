@@ -16,6 +16,7 @@ import ru.rustore.sdk.pay.RuStorePayClient;
 import ru.rustore.sdk.pay.model.AppUserId;
 import ru.rustore.sdk.pay.model.DeveloperPayload;
 import ru.rustore.sdk.pay.model.OrderId;
+import ru.rustore.sdk.pay.model.PreferredPurchaseType;
 import ru.rustore.sdk.pay.model.ProductId;
 import ru.rustore.sdk.pay.model.ProductPurchaseParams;
 import ru.rustore.sdk.pay.model.ProductPurchaseResult;
@@ -197,8 +198,8 @@ public class VKPurchaseManger {
         PurchaseInteractor purchaseInteractor = getBillingClient(context).getPurchaseInteractor();
 
         ProductPurchaseParams params = new ProductPurchaseParams(new ProductId(productId), new Quantity(1), new OrderId(orderId), new DeveloperPayload(developerPayload), new AppUserId(userId), null);
-        purchaseInteractor.purchaseTwoStep(params)
-//        purchaseInteractor.purchase(params, PreferredPurchaseType.ONE_STEP)
+//        purchaseInteractor.purchaseTwoStep(params)
+        purchaseInteractor.purchase(params, PreferredPurchaseType.ONE_STEP)
                 .addOnSuccessListener(result -> {
                     // Successful purchase result
                     PL.e("Successful purchase result");
@@ -269,7 +270,7 @@ public class VKPurchaseManger {
                     Log.e("RuStoreBillingClient", "Error calling confirmPurchase cause: " + throwable);
                 });*/
 
-        PurchaseInteractor purchaseInteractor = getBillingClient(context).getPurchaseInteractor();
+       /* PurchaseInteractor purchaseInteractor = getBillingClient(context).getPurchaseInteractor();
 
         purchaseInteractor.confirmTwoStepPurchase(new PurchaseId(purchaseId), null)
                 .addOnSuccessListener(success -> {
@@ -282,7 +283,7 @@ public class VKPurchaseManger {
                 .addOnFailureListener(throwable -> {
                     // Process error
                     PL.e("confirmTwoStepPurchase failure");
-                });
+                });*/
     }
 
 

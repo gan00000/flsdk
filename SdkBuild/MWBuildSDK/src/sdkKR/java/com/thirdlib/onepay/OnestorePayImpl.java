@@ -264,7 +264,7 @@ public class OnestorePayImpl implements IPay, PurchaseManager.Callback {
     }
 
     @Override
-    public void startQueryPurchase(Context mContext) {
+    public void startQueryPurchase(Activity mContext) {
 
         if (purchaseManager == null || mContext == null){
             return;
@@ -275,7 +275,8 @@ public class OnestorePayImpl implements IPay, PurchaseManager.Callback {
 
     }
 
-    public void queryPreRegData(final Context mContext, ISdkCallBack iSdkCallBack) {
+    @Override
+    public void queryPreRegData(Activity activity, ISdkCallBack iSdkCallBack) {
 
     }
 

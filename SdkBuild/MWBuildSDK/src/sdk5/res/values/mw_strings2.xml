@@ -32,11 +32,4 @@
         \n\n如需解除封禁，請透過遊戲內客服聯絡我們，並提供相關說明和憑證。我們將盡快協助您完成後續處理。
         \n\n感謝您的理解與配合！</string>
 
-    <string name="text_personal_clause"><u>个人条款</u></string>
-    <string name="text_privacy_policy">隐私政策</string>
-    <string name="text_customer">客诉中心</string>
-    <string name="text_age_up14">已滿14周歲</string>
-    <string name="text_age_is_up14">你是否已滿14周歲</string>
-    <string name="text_age_up14_can_useapp">注：如果您未滿14周歲，請盡快退出，該應用不對14周歲以下用戶開放</string>
-
 </resources>
