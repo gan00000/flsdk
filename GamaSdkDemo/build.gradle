@@ -154,7 +154,7 @@ android {
 
         sdk3 {
 
-            versionCode 24
+            versionCode 28
             versionName "1.1"
             dimension "1"
 
@@ -163,16 +163,17 @@ android {
 
             signingConfig signingConfigs.signv3
             //base
-            applicationId "com.yuewan.tgru"
+            //base
+            applicationId "com.yuewan.tgru.vk"
             minSdkVersion 25
-            targetSdkVersion 35
+            targetSdkVersion 34
 
             resValue "string", "sdk_game_code", "tgru"
             resValue "string", "sdk_app_key", "f2cce538ec5d36b4d725eab7ea227ed1"
             resValue "string", "sdk_more_language", "true"
             resValue "string", "sdk_default_server_language", "ru_RU"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
             resValue "string", "scheme", "tgen"
-            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
+            resValue "string", "channel_platform", "vk"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
             //facebook
             resValue "string", "facebook_app_id", "2204564839899628"
             resValue "string", "facebook_client_token", "af097786d9eabaf84543666cd857bce2"
@@ -181,7 +182,7 @@ android {
             resValue "string", "facebook_app_name", "tgru" //游戏名字
             //ad
             resValue "string", "adjust_app_token", ""
-            resValue "string", "sdk_appflyer_dev_key", "bGZEpuug4geDnZZuWzva3g"
+            resValue "string", "sdk_appflyer_dev_key", "pvxobfQBJfHHYtUpHHT92f"
             //line
             resValue "string", "line_channelId", ""
             //naver
@@ -190,8 +191,9 @@ android {
             //tt
             resValue "string", "mw_tt_app_id", ""
             //rustore渠道
-            resValue "string", "mw_vk_appid", "2063611100"
-            resValue "string", "mw_dialog_pay_add_type", "vk,xiaomi"
+            resValue "string", "mw_vk_appid", "2063567250"
+
+            //=======================================sdk config end==========================
 
             //=======================================sdk config end==========================
 
@@ -322,7 +324,7 @@ android {
         sdk5 {
 
             signingConfig signingConfigs.release_v2
-            applicationId "com.cztx.tw"
+            applicationId "com.cztx.andtw"
             minSdkVersion 25
             targetSdkVersion 35
             versionCode 10
@@ -345,7 +347,7 @@ android {
             resValue "string", "mw_td_appid", "fbe295b32f7b46c79b0a2e963790fdc5"
             //ad
             resValue "string", "adjust_app_token", ""
-            resValue "string", "sdk_appflyer_dev_key", "3xd7ZNbo3EjyQfEkZZt5Sn"
+            resValue "string", "sdk_appflyer_dev_key", "RYvG2gcUEhGiCWcXR6vaVi"
             //line
             resValue "string", "line_channelId", ""
             //naver
