@@ -32,7 +32,7 @@ android {
 
             minSdkVersion 25
             targetSdkVersion 35
-
+            //applicationId "com.cztx.tw.huawei"
             resValue "string", "sdk_game_code", "cztxtw"
             resValue "string", "sdk_app_key", "b8dac146fbac0ccf99482bf6914d7d7d"
             resValue "string", "sdk_more_language", "true"
