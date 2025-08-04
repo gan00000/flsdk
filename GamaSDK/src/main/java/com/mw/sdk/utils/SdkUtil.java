@@ -387,6 +387,7 @@ public class SdkUtil {
         return encryptText;
     }
 
+    //重置登录数据
     public static void resetSdkLoginData(Context context){
         SLoginResponse sLoginResponse = new SLoginResponse();
         sLoginResponse.setData(new SLoginResponse.Data());
@@ -406,15 +407,22 @@ public class SdkUtil {
                 sLoginResponse.getData().setGameCode(ResConfig.getGameCode(context));
                 Gson gson = new Gson();
                 String result = gson.toJson(sLoginResponse);
+                sLoginResponseTemp = null;//重置
                 saveSdkLoginData(context, result);
             } catch (Exception e) {
                 e.printStackTrace();
-                saveSdkLoginData(context, sLoginResponse.getRawResponse());
+                //saveSdkLoginData(context, sLoginResponse.getRawResponse());
             }
         }
     }
 
+    private static SLoginResponse sLoginResponseTemp;
     public static SLoginResponse getCurrentUserLoginResponse(Context context){
+
+        if (sLoginResponseTemp != null && sLoginResponseTemp.isRequestSuccess() && sLoginResponseTemp.getData()!= null && SStringUtil.isNotEmpty(sLoginResponseTemp.getData().getUserId())){
+            return sLoginResponseTemp;
+        }
+
         String loginResult = SPUtil.getSimpleString(context, SDK_SP_FILE, SDK_LOGIN_SERVER_RETURN_DATA);
         loginResult = decryptText(loginResult);//进行解密
         if (SStringUtil.isEmpty(loginResult)){
@@ -422,17 +430,17 @@ public class SdkUtil {
         }
         try {
             Gson gson = new Gson();
-            SLoginResponse sLoginResponse = gson.fromJson(loginResult, SLoginResponse.class);
+            sLoginResponseTemp = gson.fromJson(loginResult, SLoginResponse.class);
 
-            if (sLoginResponse != null && sLoginResponse.isRequestSuccess() && sLoginResponse.getData()!= null && SStringUtil.isNotEmpty(sLoginResponse.getData().getUserId())){
-                return sLoginResponse;
+            if (sLoginResponseTemp != null && sLoginResponseTemp.isRequestSuccess() && sLoginResponseTemp.getData()!= null && SStringUtil.isNotEmpty(sLoginResponseTemp.getData().getUserId())){
+                return sLoginResponseTemp;
             }
             return null;
 
         } catch (JsonSyntaxException e) {
             e.printStackTrace();
-            return null;
         }
+        return null;
 
     }
 
@@ -495,27 +503,31 @@ public class SdkUtil {
 //        }
 //    }
 
-    public static final String GAMA_LOGIN_USER_ID = "GAMA_LOGIN_USER_ID";
-    public static final String GAMA_LOGIN_ROLE_ID = "GAMA_LOGIN_ROLE_ID";
-    public static final String GAMA_LOGIN_ROLE_NAME = "GAMA_LOGIN_ROLE_NAME";
-    public static final String GAMA_LOGIN_ROLE_SERVER_CODE = "GAMA_LOGIN_ROLE_SERVER_CODE";
-    public static final String GAMA_LOGIN_ROLE_SERVER_NAME = "GAMA_LOGIN_ROLE_SERVER_NAME";
-    private static final String GAMA_LOGIN_ROLE_INFO = "GAMA_LOGIN_ROLE_INFO";
-    public static final String GAMA_LOGIN_ROLE_LEVEL = "GAMA_LOGIN_ROLE_LEVEL";
-    public static final String GAMA_LOGIN_ROLE_VIP = "GAMA_LOGIN_ROLE_VIP";
+//    public static final String GAMA_LOGIN_USER_ID = "GAMA_LOGIN_USER_ID";
+    public static final String GAMA_LOGIN_ROLE_ID = "LOGIN_ROLE_ID";
+    public static final String GAMA_LOGIN_ROLE_NAME = "LOGIN_ROLE_NAME";
+    public static final String GAMA_LOGIN_ROLE_SERVER_CODE = "LOGIN_ROLE_SERVER_CODE";
+    public static final String GAMA_LOGIN_ROLE_SERVER_NAME = "LOGIN_ROLE_SERVER_NAME";
+    private static final String GAMA_LOGIN_ROLE_INFO = "LOGIN_ROLE_INFO_";
+    public static final String GAMA_LOGIN_ROLE_LEVEL = "LOGIN_ROLE_LEVEL";
+    public static final String GAMA_LOGIN_ROLE_VIP = "LOGIN_ROLE_VIP";
 
     /**
      * 获取Json形式保存的角色信息
      */
     public static String getRoleInfo(Context context){
-        return SPUtil.getSimpleString(context, SDK_SP_FILE,GAMA_LOGIN_ROLE_INFO);
+        String curUid = getUid(context);
+//        if (TextUtils.isEmpty(curUid)){
+//            return;
+//        }
+        return SPUtil.getSimpleString(context, SDK_SP_FILE,GAMA_LOGIN_ROLE_INFO + curUid);
     }
 
     /**
      * 以Json形式保存角色信息
      */
-    private static void saveRoleInfoJson(Context context,String roleInfo){
-        SPUtil.saveSimpleInfo(context, SDK_SP_FILE,GAMA_LOGIN_ROLE_INFO,roleInfo);
+    private static void saveRoleInfoJson(Context context, String uid, String roleInfo){
+        SPUtil.saveSimpleInfo(context, SDK_SP_FILE,GAMA_LOGIN_ROLE_INFO + uid, roleInfo);
     }
 
     /**
@@ -557,15 +569,19 @@ public class SdkUtil {
      */
     public static void saveRoleInfo(Context context, String roleId, String roleName, String roleLevel, String vipLevel, String severCode, String serverName) {
         try {
+            String curUid = getUid(context);
+            if (TextUtils.isEmpty(curUid)){
+                return;
+            }
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put(GAMA_LOGIN_USER_ID,getUid(context));
+//            jsonObject.put(GAMA_LOGIN_USER_ID,getUid(context));
             jsonObject.put(GAMA_LOGIN_ROLE_ID,roleId);
             jsonObject.put(GAMA_LOGIN_ROLE_NAME,roleName);
             jsonObject.put(GAMA_LOGIN_ROLE_SERVER_CODE,severCode);
             jsonObject.put(GAMA_LOGIN_ROLE_SERVER_NAME,serverName);
             jsonObject.put(GAMA_LOGIN_ROLE_LEVEL, roleLevel);
             jsonObject.put(GAMA_LOGIN_ROLE_VIP, vipLevel);
-            saveRoleInfoJson(context, jsonObject.toString());
+            saveRoleInfoJson(context, curUid, jsonObject.toString());
 
         } catch (JSONException e) {
             e.printStackTrace();

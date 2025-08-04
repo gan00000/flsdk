@@ -193,7 +193,7 @@ public class BaseSdkImpl implements IMWSDK {
                                }
                            });
 
-        //充值登录数据
+        //重置登录数据
         SdkUtil.resetSdkLoginData(application.getApplicationContext());
 
         AFHelper.applicationOnCreate(application);

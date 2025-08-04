@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 
 import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.ISReqCallBack;
@@ -31,6 +32,7 @@ import com.mw.sdk.bean.res.EventRes;
 import com.mw.sdk.bean.res.RedDotRes;
 import com.mw.sdk.bean.res.ToggleResult;
 import com.mw.sdk.constant.ApiRequestMethod;
+import com.mw.sdk.constant.RequestCode;
 import com.mw.sdk.constant.SLoginType;
 import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.utils.DataManager;
@@ -406,8 +408,13 @@ public class Request {
         }
 
         SGameBaseRequestBean sGameBaseRequestBean = new SGameBaseRequestBean(activity);
-        if (requestCode > 0){
-            sGameBaseRequestBean.setRequest_code(requestCode);
+//        if (requestCode > 0){
+//            sGameBaseRequestBean.setRequest_code(requestCode);
+//        }
+        if (SdkUtil.isLogin(activity) && SStringUtil.isNotEmpty(SdkUtil.getRoleId(activity))){
+            sGameBaseRequestBean.setRequest_code(0);
+        }else {
+            sGameBaseRequestBean.setRequest_code(RequestCode.RequestCode_CS_LOGIN);
         }
         sGameBaseRequestBean.setCompleteUrl(csUrl);
 
