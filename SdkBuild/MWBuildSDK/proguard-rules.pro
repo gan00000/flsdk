@@ -44,6 +44,7 @@
 -keep public class com.mw.sdk.login.model.QooAppLoginModel { *; }
 -keep public class com.mw.sdk.login.model.QooAppLoginModel$UserData { *; }
 -keep public class com.mw.sdk.bean.SUserInfo { *; }
+-keep public class com.mw.sdk.bean.SRoleInfoBean { *; }
 -keep public class com.mw.sdk.bean.res.ToggleResult { *; }
 -keep public class com.mw.sdk.bean.res.ToggleResult$Data { *; }
 # 保留所有类的 public 方法名：
