@@ -15,6 +15,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.mw.sdk.R;
 import com.mw.sdk.bean.PhoneInfo;
+import com.mw.sdk.bean.SGameBaseRequestBean;
+import com.mw.sdk.bean.SRoleInfoBean;
 import com.mw.sdk.bean.SUserInfo;
 import com.mw.sdk.bean.res.ConfigBean;
 import com.mw.sdk.bean.res.FloatMenuResData;
@@ -504,23 +506,30 @@ public class SdkUtil {
 //    }
 
 //    public static final String GAMA_LOGIN_USER_ID = "GAMA_LOGIN_USER_ID";
-    public static final String GAMA_LOGIN_ROLE_ID = "LOGIN_ROLE_ID";
-    public static final String GAMA_LOGIN_ROLE_NAME = "LOGIN_ROLE_NAME";
-    public static final String GAMA_LOGIN_ROLE_SERVER_CODE = "LOGIN_ROLE_SERVER_CODE";
-    public static final String GAMA_LOGIN_ROLE_SERVER_NAME = "LOGIN_ROLE_SERVER_NAME";
+//    public static final String GAMA_LOGIN_ROLE_ID = "LOGIN_ROLE_ID";
+//    public static final String GAMA_LOGIN_ROLE_NAME = "LOGIN_ROLE_NAME";
+//    public static final String GAMA_LOGIN_ROLE_SERVER_CODE = "LOGIN_ROLE_SERVER_CODE";
+//    public static final String GAMA_LOGIN_ROLE_SERVER_NAME = "LOGIN_ROLE_SERVER_NAME";
     private static final String GAMA_LOGIN_ROLE_INFO = "LOGIN_ROLE_INFO_";
-    public static final String GAMA_LOGIN_ROLE_LEVEL = "LOGIN_ROLE_LEVEL";
-    public static final String GAMA_LOGIN_ROLE_VIP = "LOGIN_ROLE_VIP";
+//    public static final String GAMA_LOGIN_ROLE_LEVEL = "LOGIN_ROLE_LEVEL";
+//    public static final String GAMA_LOGIN_ROLE_VIP = "LOGIN_ROLE_VIP";
 
     /**
      * 获取Json形式保存的角色信息
      */
-    public static String getRoleInfo(Context context){
+    public static SRoleInfoBean getRoleInfo(Context context){
         String curUid = getUid(context);
 //        if (TextUtils.isEmpty(curUid)){
 //            return;
 //        }
-        return SPUtil.getSimpleString(context, SDK_SP_FILE,GAMA_LOGIN_ROLE_INFO + curUid);
+        String roleInfo = SPUtil.getSimpleString(context, SDK_SP_FILE,GAMA_LOGIN_ROLE_INFO + curUid);
+        if (SStringUtil.isEmpty(roleInfo)){
+            return new SRoleInfoBean();
+        }
+        Gson gson = new Gson();
+        SRoleInfoBean sRoleInfoBean = gson.fromJson(roleInfo, SRoleInfoBean.class);
+
+        return sRoleInfoBean;
     }
 
     /**
@@ -534,28 +543,32 @@ public class SdkUtil {
      * 获取角色id
      */
     public static String getRoleId(Context context){
-        return JsonUtil.getValueByKey(context,getRoleInfo(context), GAMA_LOGIN_ROLE_ID, "");
+        SRoleInfoBean sRoleInfoBean = getRoleInfo(context);
+        return sRoleInfoBean != null ? sRoleInfoBean.getRoleId() : "";
     }
 
     /**
      * 获取角色名
      */
     public static String getRoleName(Context context){
-        return JsonUtil.getValueByKey(context,getRoleInfo(context), GAMA_LOGIN_ROLE_NAME, "");
+        SRoleInfoBean sRoleInfoBean = getRoleInfo(context);
+        return sRoleInfoBean != null ? sRoleInfoBean.getRoleName() : "";
     }
 
     /**
      * 获取服务器id
      */
     public static String getServerCode(Context context) {
-        return JsonUtil.getValueByKey(context,getRoleInfo(context), GAMA_LOGIN_ROLE_SERVER_CODE, "");
+        SRoleInfoBean sRoleInfoBean = getRoleInfo(context);
+        return sRoleInfoBean != null ? sRoleInfoBean.getServerCode() : "";
     }
 
     /**
      * 获取服务器名
      */
     public static String getServerName(Context context){
-        return JsonUtil.getValueByKey(context,getRoleInfo(context), GAMA_LOGIN_ROLE_SERVER_NAME, "");
+        SRoleInfoBean sRoleInfoBean = getRoleInfo(context);
+        return sRoleInfoBean != null ? sRoleInfoBean.getServerName() : "";
     }
 
     /**
@@ -573,17 +586,31 @@ public class SdkUtil {
             if (TextUtils.isEmpty(curUid)){
                 return;
             }
-            JSONObject jsonObject = new JSONObject();
-//            jsonObject.put(GAMA_LOGIN_USER_ID,getUid(context));
-            jsonObject.put(GAMA_LOGIN_ROLE_ID,roleId);
-            jsonObject.put(GAMA_LOGIN_ROLE_NAME,roleName);
-            jsonObject.put(GAMA_LOGIN_ROLE_SERVER_CODE,severCode);
-            jsonObject.put(GAMA_LOGIN_ROLE_SERVER_NAME,serverName);
-            jsonObject.put(GAMA_LOGIN_ROLE_LEVEL, roleLevel);
-            jsonObject.put(GAMA_LOGIN_ROLE_VIP, vipLevel);
-            saveRoleInfoJson(context, curUid, jsonObject.toString());
+            SRoleInfoBean sRoleInfoBean = new SRoleInfoBean();
+            sRoleInfoBean.setUserId(curUid);
 
-        } catch (JSONException e) {
+            sRoleInfoBean.setRoleId(roleId);
+            sRoleInfoBean.setRoleName(roleName);
+            sRoleInfoBean.setRoleLevel(roleLevel);
+            sRoleInfoBean.setRoleVipLevel(vipLevel);
+
+            sRoleInfoBean.setServerCode(severCode);
+            sRoleInfoBean.setServerName(serverName);
+
+            Gson gson = new Gson();
+            String infoJson = gson.toJson(sRoleInfoBean);
+
+//            JSONObject jsonObject = new JSONObject();
+//            jsonObject.put(GAMA_LOGIN_USER_ID,getUid(context));
+//            jsonObject.put(GAMA_LOGIN_ROLE_ID,roleId);
+//            jsonObject.put(GAMA_LOGIN_ROLE_NAME,roleName);
+//            jsonObject.put(GAMA_LOGIN_ROLE_SERVER_CODE,severCode);
+//            jsonObject.put(GAMA_LOGIN_ROLE_SERVER_NAME,serverName);
+//            jsonObject.put(GAMA_LOGIN_ROLE_LEVEL, roleLevel);
+//            jsonObject.put(GAMA_LOGIN_ROLE_VIP, vipLevel);
+            saveRoleInfoJson(context, curUid, infoJson);
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -592,14 +619,16 @@ public class SdkUtil {
      * 获取角色等级
      */
     public static String getRoleLevel(Context context){
-        return JsonUtil.getValueByKey(context, getRoleInfo(context), GAMA_LOGIN_ROLE_LEVEL, "");
+        SRoleInfoBean sRoleInfoBean = getRoleInfo(context);
+        return sRoleInfoBean != null ? sRoleInfoBean.getRoleLevel() : "";
     }
 
     /**
      * 获取角色VIP等级
      */
     public static String getRoleVip(Context context){
-        return JsonUtil.getValueByKey(context, getRoleInfo(context), GAMA_LOGIN_ROLE_VIP, "");
+        SRoleInfoBean sRoleInfoBean = getRoleInfo(context);
+        return sRoleInfoBean != null ? sRoleInfoBean.getRoleVipLevel() : "";
     }
 
     public static String getCfgValueByKey(Context context, String key, String defaultValue) {
