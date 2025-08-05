@@ -1,8 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'org.jetbrains.kotlin.android'
 
-apply from: "${project.rootDir}/GamaSDK/sdk-build.gradle"
-
 android {
 
     compileSdk rootProject.ext.compileSdkVersion
@@ -69,7 +67,7 @@ android {
     }
 }
 
-
+apply from: "${project.rootDir}/GamaSDK/sdk-build.gradle"
 
 //./gradlew makeJar 出现env: bash\r: No such file or directory的话是由
 // 于window生成的工程gradlew文件在mac下换行符有问题

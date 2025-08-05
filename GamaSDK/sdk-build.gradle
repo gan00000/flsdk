@@ -8,12 +8,12 @@ android {
 //            shrinkResources true  //压缩资源
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            consumerProguardFiles 'proguard-rules.pro' // 添加此行 将 proguard-rules.pro 文件打包进AAR 文件
+            consumerProguardFiles 'proguard-rules.pro'  // 添加此行 将 proguard-rules.pro 文件打包进AAR 文件
         }
 
         debug {
         }
-
+    }
     productFlavors {
 
 //        sdk1 {//第一套
