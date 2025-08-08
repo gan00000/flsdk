@@ -193,7 +193,7 @@ public class BaseSdkImpl implements IMWSDK {
                                }
                            });
 
-        //充值登录数据
+        //重置登录数据
         SdkUtil.resetSdkLoginData(application.getApplicationContext());
 
         AFHelper.applicationOnCreate(application);
@@ -225,8 +225,8 @@ public class BaseSdkImpl implements IMWSDK {
             public void run() {
                 PL.i("sdk initSDK postDelayed");
                 //广告
-                SdkEventLogger.activateApp(activity);
                 SdkEventLogger.reportInstallActivation(activity.getApplicationContext());
+                SdkEventLogger.activateApp(activity);
 
             }
         },500);//等广告id生成好

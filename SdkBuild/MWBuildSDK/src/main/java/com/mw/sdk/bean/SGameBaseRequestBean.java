@@ -32,13 +32,18 @@ public class SGameBaseRequestBean extends SSdkBaseRequestBean {
     private void initGameField(Context context) {
         userId = SdkUtil.getUid(context);
 
-        serverCode = SdkUtil.getServerCode(context);
-        serverName = SdkUtil.getServerName(context);
-        roleName = SdkUtil.getRoleName(context);
-        roleId = SdkUtil.getRoleId(context);
+        SRoleInfoBean sRoleInfoBean = SdkUtil.getRoleInfo(context);
 
-        roleLevel = SdkUtil.getRoleLevel(context);
-        roleVipLevel = SdkUtil.getRoleVip(context);
+        if (sRoleInfoBean != null) {
+            serverCode = sRoleInfoBean.getServerCode();
+            serverName = sRoleInfoBean.getServerName();
+
+            roleName = sRoleInfoBean.getRoleName();
+            roleId = sRoleInfoBean.getRoleId();
+
+            roleLevel = sRoleInfoBean.getRoleLevel();
+            roleVipLevel = sRoleInfoBean.getRoleVipLevel();
+        }
     }
 
     public boolean isInitOk(){

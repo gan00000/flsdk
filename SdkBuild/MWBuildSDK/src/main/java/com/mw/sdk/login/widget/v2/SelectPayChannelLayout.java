@@ -140,18 +140,39 @@ public class SelectPayChannelLayout extends SLoginBaseRelativeLayout {
             }
         });
 
-        String payChannel = getContext().getResources().getString(R.string.mw_dialog_pay_add_type);
-        if(payChannel.contains(ChannelPlatform.VK.getChannel_platform())){
-            ruPayView.setVisibility(View.VISIBLE);
+        String channel_platform = ResConfig.getChannelPlatform(getContext());
+        if (ChannelPlatform.GOOGLE.getChannel_platform().equals(channel_platform)){
+            ggPayView.setVisibility(View.VISIBLE);
+
+            String payChannel = getContext().getResources().getString(R.string.mw_dialog_pay_add_type);
+            if(payChannel.contains(ChannelPlatform.VK.getChannel_platform())){
+                ruPayView.setVisibility(View.VISIBLE);
+            }else {
+                ruPayView.setVisibility(View.GONE);
+            }
+
+            if(payChannel.contains(ChannelPlatform.Xiaomi.getChannel_platform())){
+                xmPayView.setVisibility(View.VISIBLE);
+            }else {
+                xmPayView.setVisibility(View.GONE);
+            }
+
         }else {
-            ruPayView.setVisibility(View.GONE);
+            ggPayView.setVisibility(View.GONE);
+
+            if (ChannelPlatform.VK.getChannel_platform().equals(channel_platform)){
+                ruPayView.setVisibility(View.VISIBLE);
+            }else {
+                ruPayView.setVisibility(View.GONE);
+            }
+
+            if(ChannelPlatform.Xiaomi.getChannel_platform().equals(channel_platform)){
+                xmPayView.setVisibility(View.VISIBLE);
+            }else {
+                xmPayView.setVisibility(View.GONE);
+            }
         }
 
-        if(payChannel.contains(ChannelPlatform.Xiaomi.getChannel_platform())){
-            xmPayView.setVisibility(View.VISIBLE);
-        }else {
-            xmPayView.setVisibility(View.GONE);
-        }
 
         boolean isShowOther2 = "true".equals(getContext().getString(R.string.mw_select_channel_other2));//添加多一个第三方，直接用图片显示，这情况隐藏title和另一个第三方
         if (isShowOther2){
@@ -168,7 +189,7 @@ public class SelectPayChannelLayout extends SLoginBaseRelativeLayout {
 
             String gameCode = ResConfig.getGameCode(getContext().getApplicationContext());
             String loginTimestamp = SdkUtil.getSdkTimestamp(getContext());
-            String channel_platform = ResConfig.getChannelPlatform(getContext());
+
             String rebate_url = String.format("%simage/sdk/%s/rebate_%s.png?t=%s", ResConfig.getCdnPreferredUrl(getContext()), gameCode, channel_platform, loginTimestamp);
 
             PL.d("rebate_url=" + rebate_url);
