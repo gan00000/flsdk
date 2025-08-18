@@ -236,15 +236,16 @@ public class AFHelper {
                 PL.i("-----track event af onError eventName=" + eventName + ",event_id=" + event_id);
                 //子线程
 //                logEventAgain(context, eventName, map);
-                if (sendServerEventIdArr.contains(event_id)) {
-                    return;
-                }
-                if (sendServerEventIdArr.size() > 3000){
-                    sendServerEventIdArr.clear();
-                }
-                sendServerEventIdArr.add(event_id);
-                PL.i("-----track event af onError sendToServer event_id=" + event_id);
-                sendToServer(context, eventName, i, s);
+
+//                if (sendServerEventIdArr.contains(event_id)) {
+//                    return;
+//                }
+//                if (sendServerEventIdArr.size() > 3000){
+//                    sendServerEventIdArr.clear();
+//                }
+//                sendServerEventIdArr.add(event_id);
+//                PL.i("-----track event af onError sendToServer event_id=" + event_id);
+//                sendToServer(context, eventName, i, s);
 
             }
         });
