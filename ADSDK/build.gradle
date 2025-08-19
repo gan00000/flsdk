@@ -108,7 +108,7 @@ repositories {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.12.0'
+//    implementation 'androidx.core:core-ktx:1.12.0'
 
 //    implementation project(':GamaSDK')
     //广告盈利聚合平台

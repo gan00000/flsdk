@@ -2,8 +2,8 @@
 
 buildscript {
     ext {
-        compose_version = '1.0.1'
-        kotlin_version = '1.8.0'
+//        compose_version = '1.0.1'
+//        kotlin_version = '1.8.0'
 
         compileSdkVersion = 34
         minSdkVersion = 25
@@ -32,16 +32,16 @@ buildscript {
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
 
-        classpath 'com.android.tools.build:gradle:8.2.2'
+        classpath "com.android.tools.build:gradle:8.11.1"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:2.1.0"
+
         // google-services plugin
-        classpath 'com.google.gms:google-services:4.4.2'
+        classpath 'com.google.gms:google-services:4.4.3'
         // Add the Crashlytics Gradle plugin.
-        classpath 'com.google.firebase:firebase-crashlytics-gradle:3.0.2'
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:3.0.6'
 
         // 增加AGC插件配置，请您参见AGC插件依赖关系选择合适的AGC插件版本。
         classpath 'com.huawei.agconnect:agcp:1.9.1.301'
-
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
