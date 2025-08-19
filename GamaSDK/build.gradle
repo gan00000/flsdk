@@ -77,10 +77,10 @@ android {
 //            resValue "string", "sdk_inner_version", "v2"
 //        }
 //
-//        sdk3 {//第三套
-//            dimension '1'
-//            resValue "string", "sdk_inner_version", "v3"
-//        }
+        sdk3 {//第三套
+            dimension 'area'
+            resValue "string", "sdk_inner_version", "v3"
+        }
 
         sdk4 {//第4套
             dimension 'area'
@@ -247,25 +247,27 @@ dependencies {
     //retrofit相关
 //    api 'com.squareup.retrofit2:retrofit:2.9.0'
 
-    LDImplementation(name: 'ld_sdk_v2.2.0_061714', ext: 'aar')
+//    LDImplementation(name: 'ld_sdk_v2.2.0_061714', ext: 'aar')
+//
+//    //判断是否有谷歌服务
+//    LDImplementation 'com.google.android.gms:play-services-base:18.4.0'
+//    //阿里云文件上传
+//    LDImplementation 'com.aliyun.dpa:oss-android-sdk:2.9.13'
+//    //PictureSelector 基础库
+//    LDImplementation 'io.github.lucksiege:pictureselector:v3.11.1'
+//    //PictureSelector 图片压缩
+//    LDImplementation 'io.github.lucksiege:compress:v3.11.1'
+//    //PictureSelector 图片裁剪
+//    LDImplementation 'io.github.lucksiege:ucrop:v3.11.1'
+//    //图片加载库
+//    LDImplementation 'com.github.bumptech.glide:glide:4.16.0'
+//    //文件下载：版本更新
+//    LDImplementation 'com.liulishuo.filedownloader:library:1.7.7'
+    LDImplementation 'com.ld.android:ld-sdk:3.0.7'
 
-    //判断是否有谷歌服务
-    LDImplementation 'com.google.android.gms:play-services-base:18.4.0'
-    //阿里云文件上传
-    LDImplementation 'com.aliyun.dpa:oss-android-sdk:2.9.13'
-    //PictureSelector 基础库
-    LDImplementation 'io.github.lucksiege:pictureselector:v3.11.1'
-    //PictureSelector 图片压缩
-    LDImplementation 'io.github.lucksiege:compress:v3.11.1'
-    //PictureSelector 图片裁剪
-    LDImplementation 'io.github.lucksiege:ucrop:v3.11.1'
-    //图片加载库
-    LDImplementation 'com.github.bumptech.glide:glide:4.16.0'
-    //文件下载：版本更新
-    LDImplementation 'com.liulishuo.filedownloader:library:1.7.7'
 
     //小7
-    implementation 'io.github.x7sy-sm:x7sdk-androidx:8.18.2'
+//    Xiao7Implementation 'io.github.x7sy-sm:x7sdk-androidx:8.18.2'
 }
 
 

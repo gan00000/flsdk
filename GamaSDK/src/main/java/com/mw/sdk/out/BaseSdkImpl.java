@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
@@ -267,6 +268,16 @@ public class BaseSdkImpl implements IMWSDK {
                 onCreate_OnUi(activity);
             }
         });
+
+    }
+
+    @Override
+    public void onCreate(Activity activity, Bundle savedInstanceState) {
+        this.onCreate(activity);
+    }
+
+    @Override
+    public void onNewIntent(Activity activity, Intent intent) {
 
     }
 
