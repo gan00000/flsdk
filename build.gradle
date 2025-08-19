@@ -21,12 +21,28 @@ buildscript {
         // 配置HMS Core SDK的Maven仓地址。
         maven { url 'https://developer.huawei.com/repo/' }
         maven { url 'https://repo.onestore.co.kr/repository/onestore-sdk-public' }
+
+        //以下是雷电联运包的maven仓库地址+访问凭证
+        maven {
+            url 'https://maven.aliyun.com/repository/public'
+        }
+        maven {
+            credentials {
+                username '6445f183daafbed659eb2c18'
+                password 'oWuvewt2tR1A'
+            }
+            url 'https://packages.aliyun.com/5f05a0346207a1a8b17f4aaf/maven/cz-public-repo'
+        }
+        //以上是雷电联运包的maven仓库地址+访问凭证
+
     }
     dependencies {
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
 
-        classpath 'com.android.tools.build:gradle:8.2.0'
+        classpath 'com.android.tools.build:gradle:8.5.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+
         // google-services plugin
         classpath 'com.google.gms:google-services:4.4.0'
         // Add the Crashlytics Gradle plugin.
@@ -35,7 +51,6 @@ buildscript {
         // 增加AGC插件配置，请您参见AGC插件依赖关系选择合适的AGC插件版本。
         classpath 'com.huawei.agconnect:agcp:1.9.1.301'
 
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
@@ -48,6 +63,20 @@ allprojects {
         // 配置HMS Core SDK的Maven仓地址。
         maven { url 'https://developer.huawei.com/repo/' }
         maven { url 'https://repo.onestore.co.kr/repository/onestore-sdk-public' }
+
+        //以下是雷电联运包的maven仓库地址+访问凭证
+        maven {
+            url 'https://maven.aliyun.com/repository/public'
+        }
+        maven {
+            credentials {
+                username '6445f183daafbed659eb2c18'
+                password 'oWuvewt2tR1A'
+            }
+            url 'https://packages.aliyun.com/5f05a0346207a1a8b17f4aaf/maven/cz-public-repo'
+        }
+        //以上是雷电联运包的maven仓库地址+访问凭证
+
     }
 }
 
