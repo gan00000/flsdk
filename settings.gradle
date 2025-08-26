@@ -1,5 +1,5 @@
 include ':GamaSDK'
 include ':GamaSdkDemo'
 include ':sdk_asset_pack'
-//include ':ADSDK'
+include ':ADSDK'
 include 'SdkBuild:MWBuildSDK'

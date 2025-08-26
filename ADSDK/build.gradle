@@ -59,9 +59,12 @@ android {
         sdk4 {//第4套
             dimension '1'
             //msg ad
+//            resValue "string", "sdk_app_ad_key", "T1ZZ9VF_DC5bdMxRgpgSqXJLgkAw4zbpM_HckzL5tPJz2kN9pxWikTOGIaMTqQ2cCEQTpdEO4gfT_RrdeXrVgX"
+//            resValue "string", "sdk_ad_unit_id", "906823fa7500702a"
+//            resValue "string", "sdk_admob_app_id", "ca-app-pub-3468350738432804~6705816673"
             resValue "string", "sdk_app_ad_key", "T1ZZ9VF_DC5bdMxRgpgSqXJLgkAw4zbpM_HckzL5tPJz2kN9pxWikTOGIaMTqQ2cCEQTpdEO4gfT_RrdeXrVgX"
-            resValue "string", "sdk_ad_unit_id", "906823fa7500702a"
-            resValue "string", "sdk_admob_app_id", "ca-app-pub-3468350738432804~6705816673"
+            resValue "string", "sdk_ad_unit_id", "c622889990c74b8d"
+            resValue "string", "sdk_admob_app_id", "ca-app-pub-3468350738432804~8245206892"
         }
 
         sdk5 {//第4套
