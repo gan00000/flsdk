@@ -30,21 +30,23 @@ android {
         sdk3 {
             dimension "1"
 
-            resValue "string", "sdk_game_code", "slzhs"
+            //applicationId "com.slzhs.andru"
+
+            resValue "string", "sdk_game_code", "slzhsru"
             resValue "string", "sdk_app_key", "94449cda6773eac5295c491646d2f262"
             resValue "string", "sdk_more_language", "true"
             resValue "string", "sdk_default_server_language", "ru_RU"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
-            resValue "string", "scheme", "slzhs"
+            resValue "string", "scheme", "slzhsru"
             resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
             //facebook
             resValue "string", "facebook_app_id", "1798533844372653"
             resValue "string", "facebook_client_token", "d1da8dccb0455d8775678888732dcd85"
             resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1798533844372653"
             resValue "string", "fb_login_protocol_scheme", "fb1798533844372653"
-            resValue "string", "facebook_app_name", "slzhs"
+            resValue "string", "facebook_app_name", "slzhsru"
             //ad
             resValue "string", "adjust_app_token", ""
-            resValue "string", "sdk_appflyer_dev_key", "cgJYPuaVTyHtjfyWCQYJra"
+            resValue "string", "sdk_appflyer_dev_key", "xrAvWgw6jEZThgSuqWJaHP"
             //line
             resValue "string", "line_channelId", ""
             //naver
@@ -62,21 +64,23 @@ android {
         huawei {
             dimension "1"
 
-            resValue "string", "sdk_game_code", "slzhs"
+            //applicationId "com.slzhs.huawei"
+
+            resValue "string", "sdk_game_code", "slzhsru"
             resValue "string", "sdk_app_key", "94449cda6773eac5295c491646d2f262"
             resValue "string", "sdk_more_language", "true"
             resValue "string", "sdk_default_server_language", "ru_RU"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
-            resValue "string", "scheme", "slzhs"
+            resValue "string", "scheme", "slzhsru"
             resValue "string", "channel_platform", "huawei"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
             //facebook
             resValue "string", "facebook_app_id", "1798533844372653"
             resValue "string", "facebook_client_token", "d1da8dccb0455d8775678888732dcd85"
             resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1798533844372653"
             resValue "string", "fb_login_protocol_scheme", "fb1798533844372653"
-            resValue "string", "facebook_app_name", "slzhs"
+            resValue "string", "facebook_app_name", "slzhsru"
             //ad
             resValue "string", "adjust_app_token", ""
-            resValue "string", "sdk_appflyer_dev_key", "cgJYPuaVTyHtjfyWCQYJra"
+            resValue "string", "sdk_appflyer_dev_key", "v5itsixnL2wZqqgWZEYHuK"
             //line
             resValue "string", "line_channelId", ""
             //naver
