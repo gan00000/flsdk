@@ -1,0 +1,42 @@
+<resources>
+    <string name="text_phone_bind">اتصال تلفن</string>
+    <string name="text_phone_area_code">پیش‌شماره</string>
+    <string name="text_phone_input_hint">شماره تلفن</string>
+    <string name="text_phone_hasbind_tips">شماره شما با موفقیت ثبت شد</string>
+    <string name="text_area_code_not_empty">لطفا پیش‌شماره را وارد کنید</string>
+    <string name="text_phone_not_empty">لطفا شماره تلفن را وارد کنید</string>
+    <string name="text_phone_not_match">فرمت شماره نامعتبر است</string>
+    <string name="text_vfcode_has_send">کد ارسال شد</string>
+    <string name="text_phone_bind_success">اتصال تلفن موفق</string>
+    <string name="text_has_bind_tips_google">حساب ارتقا یافته</string>
+    <string name="text_has_bind_tips_fb">حساب ارتقا یافته</string>
+    <string name="text_has_bind_tips_guest">حساب ارتقا یافته</string>
+    <string name="text_has_bind_tips_line">حساب ارتقا یافته</string>
+    <string name="text_has_bind_tips_mw">حساب کاربری</string>
+    <string name="text_notice">اعلان</string>
+    <string name="text_account_not_login">لطفا ابتدا وارد شوید</string>
+    <string name="text_has_bind_tips_twitter">حساب ارتقا یافته</string>
+    <string name="text_has_upgrade_account">حساب ارتقا یافته</string>
+    <string name="text_game_name">نام بازی:</string>
+    <string name="text_server_name">سرور:</string>
+    <string name="text_role_name">نام شخصیت:</string>
+    <string name="text_account_name">حساب:</string>
+    <string name="text_account_uid">uid:</string>
+    <string name="text_account_del">حذف حساب</string>
+    <string name="text_block_msg">بازیکن عزیز،
+        \nبه دلیل شناسایی تراکنش بازگشتی، برای حفظ امنیت حساب و محیط بازی عادلانه، لطفا ظرف 24 ساعت با پشتیبانی تماس بگیرید.
+        \n\nدر صورت عدم پیگیری، حساب تا حل موضوع مسدود خواهد شد.
+        \n\nاز همکاری شما سپاسگزاریم.</string>
+    <string name="text_blocked_msg">بازیکن عزیز،
+        \n\nحساب شما به دلیل عدم حل موضوع تراکنش و عدم تماس با پشتیبانی، موقتاً مسدود شده است.
+        \n\nبرای رفع مسدودی، لطفا با پشتیبانی تماس گرفته و اطلاعات لازم را ارائه دهید.
+        \n\nاز همکاری شما سپاسگزاریم.</string>
+
+    <string name="text_personal_clause"><u>قوانین شخصی</u></string>
+    <string name="text_privacy_policy">حریم خصوصی</string>
+    <string name="text_customer">پشتیبانی</string>
+    <string name="text_age_up14">بالای 14 سال</string>
+    <string name="text_age_is_up14">آیا بالای 14 سال هستید؟</string>
+    <string name="text_age_up14_can_useapp">توجه: کاربران زیر 14 سال مجاز به استفاده نیستند</string>
+
+</resources>
