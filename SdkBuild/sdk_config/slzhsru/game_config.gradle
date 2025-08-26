@@ -46,7 +46,7 @@ android {
             resValue "string", "facebook_app_name", "slzhsru"
             //ad
             resValue "string", "adjust_app_token", ""
-            resValue "string", "sdk_appflyer_dev_key", "xrAvWgw6jEZThgSuqWJaHP"
+            resValue "string", "sdk_appflyer_dev_key", ""
             //line
             resValue "string", "line_channelId", ""
             //naver
@@ -55,9 +55,9 @@ android {
             //tt
             resValue "string", "mw_tt_app_id", ""
             //rustore渠道
-            resValue "string", "mw_vk_appid", "2063640445"
+            resValue "string", "mw_vk_appid", ""
             //Google包添加的额外第三方显示
-            resValue "string", "mw_dialog_pay_add_type", "vk"  //vk,xiaomi
+            resValue "string", "mw_dialog_pay_add_type", ""  //vk,xiaomi
 
         }
 
@@ -94,5 +94,87 @@ android {
             resValue "string", "mw_dialog_pay_add_type", ""  //vk,xiaomi
 
         }
+/*
+        channel_google {
+
+            flavorDimensions "1"
+
+            //==========================================start==========================
+            //base
+            applicationId "com.slzhs.andru"
+            versionCode 1
+            versionName "1.0"
+            minSdkVersion 25
+            targetSdkVersion 35
+
+            //参数配置
+            resValue "string", "sdk_appflyer_dev_key", "xrAvWgw6jEZThgSuqWJaHP"
+            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
+            resValue "string", "mw_dialog_pay_add_type", "vk"  //vk,xiaomi
+            resValue "string", "mw_vk_appid", "2063648973"
+            //==========================================end==========================
+
+        }
+
+        channel_meowApk {
+
+            flavorDimensions "1"
+
+            //==========================================start==========================
+            //base
+            applicationId "com.cztx.tw"
+            versionCode 1
+            versionName "1.0"
+            minSdkVersion 25
+            targetSdkVersion 35
+
+            //参数配置
+            resValue "string", "sdk_appflyer_dev_key", "xrAvWgw6jEZThgSuqWJaHP"
+            resValue "string", "channel_platform", "meow"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
+            resValue "string", "mw_vk_appid", ""
+            //==========================================end==========================
+
+        }
+
+        channel_vk {
+
+            flavorDimensions "1"
+
+            //==========================================start==========================
+            //base
+            applicationId "com.slzhs.vkru"
+            versionCode 1
+            versionName "1.0"
+            minSdkVersion 25
+            targetSdkVersion 35
+
+            //参数配置
+            resValue "string", "sdk_appflyer_dev_key", "uJwWyJYE7fm6LCbXiHZD5o"
+            resValue "string", "channel_platform", "vk"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
+            resValue "string", "mw_vk_appid", "2063648381"
+            //==========================================end==========================
+
+        }
+
+        channel_xiaomi {
+
+            flavorDimensions "1"
+
+            //==========================================start==========================
+            //base
+            applicationId "com.slzhs.miru"
+            versionCode 1
+            versionName "1.0"
+            minSdkVersion 25
+            targetSdkVersion 35
+
+            //参数配置
+            resValue "string", "sdk_appflyer_dev_key", "mYkfdjit2kqULULysxPgMU"
+            resValue "string", "channel_platform", "xiaomi"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
+            resValue "string", "mw_vk_appid", ""
+            //==========================================end==========================
+
+        }
+        */
     }
 }
