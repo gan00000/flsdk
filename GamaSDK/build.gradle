@@ -13,7 +13,7 @@ android {
         jvmTarget = rootProject.ext.jvmTarget
     }
 
-    def sdk_version = "2.3.6"
+    def sdk_version = "2.3.7"
     def domainUrl= ""
 //    def domainUrl= "kayplay.com"
 //    def domainUrl= "chiendemobile.vn" //越南M2,新代理chiendemobile.vn
