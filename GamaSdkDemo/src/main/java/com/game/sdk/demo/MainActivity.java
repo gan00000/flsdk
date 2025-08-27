@@ -34,6 +34,8 @@ import com.core.base.utils.SStringUtil;
 import com.core.base.utils.SignatureUtil;
 import com.core.base.utils.ToastUtils;
 import com.mw.base.bean.SPayType;
+import com.mw.sdk.AdCallback;
+import com.mw.sdk.MWAdManger;
 import com.mw.sdk.bean.req.PayCreateOrderReqBean;
 import com.mw.sdk.callback.IPayListener;
 import com.mw.sdk.demo.R;
@@ -87,7 +89,7 @@ public class MainActivity extends Activity {
 
         //在游戏Activity的onCreate生命周期中调用
         mIMWSDK.onCreate(this);
-//        MWAdManger.getInstance().initAd(this);
+        MWAdManger.getInstance().initAd(this);
 
 
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -562,7 +564,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.show_ad).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /* MWAdManger.getInstance().showAd(activity, new AdCallback() {
+               MWAdManger.getInstance().showAd(activity, new AdCallback() {
                     @Override
                     public void onAdClicked(String msg) {
                         //广告被点击
@@ -582,7 +584,7 @@ public class MainActivity extends Activity {
                     public void onUserRewarded(String msg) {
                         //用户获得奖励，在此处做发奖励操作
                     }
-                });*/
+                });
             }
         });
         AppUtil.hideActivityBottomBar(this);
@@ -737,7 +739,7 @@ public class MainActivity extends Activity {
         super.onDestroy();
         PL.i("activity onDestroy");
         mIMWSDK.onDestroy(this);
-//        MWAdManger.getInstance().destroy(this);
+        MWAdManger.getInstance().destroy(this);
     }
 
     @Override
