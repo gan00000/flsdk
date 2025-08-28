@@ -8,7 +8,6 @@ import android.util.Log;
 
 import com.mw.sdk.R;
 
-import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -26,7 +25,6 @@ import gg.now.billingclient.api.ConsumeResponseListener;
 import gg.now.billingclient.api.ProductDetails;
 import gg.now.billingclient.api.ProductDetailsResponseListener;
 import gg.now.billingclient.api.Purchase;
-import gg.now.billingclient.api.Purchase.PurchasesResult;
 import gg.now.billingclient.api.PurchasesResponseListener;
 import gg.now.billingclient.api.PurchasesUpdatedListener;
 import gg.now.billingclient.api.QueryProductDetailsParams;
@@ -120,13 +118,14 @@ public class BillingManager implements PurchasesUpdatedListener {
     @Override
     public void onPurchasesUpdated(int resultCode, List<Purchase> purchases) {
 
+        Log.i(TAG,"onPurchasesUpdated resultCode=" + resultCode + ", msg=" + Utils.getResponseString(resultCode));
         mHandler.post(new Runnable() {
             @Override
             public void run() {
                 if (resultCode == BillingResponse.OK) {
-//            if (purchases == null) {
-//                return;
-//            }
+                    if (purchases == null || purchases.isEmpty()) {
+                        return;
+                    }
 //            for (Purchase purchase : purchases) {
 //                handlePurchase(purchase);
 //            }

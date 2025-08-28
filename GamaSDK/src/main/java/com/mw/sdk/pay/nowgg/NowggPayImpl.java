@@ -46,7 +46,7 @@ import gg.now.billingclient.api.SkuDetailsResponseListener;
 
 public class NowggPayImpl implements IPay, BillingManager.BillingUpdatesListener {
 
-    public static final String TAG_USER_CANCEL = "TAG_PAY_USER_CANCEL";
+    public static final String TAG_USER_CANCEL = "USER_CANCELED";
 
     private LoadingDialog loadingDialog;
 
@@ -395,7 +395,7 @@ public class NowggPayImpl implements IPay, BillingManager.BillingUpdatesListener
         PL.i("onPurchaseSucceed");
         if (purchases == null || purchases.isEmpty()){
             PL.i("onPurchaseSucceed empty");
-            callbackFail("PurchaseData empty");
+            //callbackFail("PurchaseData empty");
             return;
         }
         for (Purchase purchaseData: purchases) {
