@@ -185,7 +185,7 @@ dependencies {
 
     //========================
     //nowgg pay不需要的时候可以不接
-    implementation (name: 'Payments-nowgg', ext: 'aar')
+    compileOnly fileTree(include: ['Payments-nowgg.aar'], dir: 'libs')
 
     //huawei sdk
     huaweiImplementation 'com.huawei.hms:hwid:6.12.0.300'

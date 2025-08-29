@@ -62,3 +62,10 @@ task copyAAR4{
     }
 }
 
+task autoAllBuildAAr8888 {
+    group 'ssssdk'
+    doLast {
+    }
+}
+autoAllBuildAAr8888.dependsOn(clearSourceAndBuildDir1, copyAllCodeAndRes2, buildAAR3, copyAAR4)
+
