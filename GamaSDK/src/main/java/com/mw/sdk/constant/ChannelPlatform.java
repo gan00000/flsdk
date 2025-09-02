@@ -11,6 +11,7 @@ public enum ChannelPlatform {
     VK("vk"),//俄罗斯vk
     NOWGG("nowgg"),
     Xiaomi("xiaomi"),
+    APKPURE("apkpure"),
     MEOW("meow");
 
     private String channel_platform;
