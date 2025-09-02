@@ -80,7 +80,7 @@ android {
             resValue "string", "facebook_app_name", "mym2ru"
             //ad
             resValue "string", "adjust_app_token", ""
-            resValue "string", "sdk_appflyer_dev_key", "gRNLrLcWDKHmM9zyjzeJDL"
+            resValue "string", "sdk_appflyer_dev_key", "HDSHU4DPP99jLVT8qaxuKd"
             //line
             resValue "string", "line_channelId", ""
             //naver
