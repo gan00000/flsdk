@@ -1000,17 +1000,17 @@ public class BaseSdkImpl implements IMWSDK {
 
         String channel_platform = ResConfig.getChannelPlatform(activity);
 
-        if(payType == SPayType.WEB || ChannelPlatform.MEOW.getChannel_platform().equals(channel_platform)
+        if(ChannelPlatform.MEOW.getChannel_platform().equals(channel_platform)
                 || ChannelPlatform.APKPURE.getChannel_platform().equals(channel_platform)) {
             doWebPay(activity, payCreateOrderReqBean);
-        } else if(payType == SPayType.HUAWEI || ChannelPlatform.HUAWEI.getChannel_platform().equals(channel_platform)) {
+        } else if(ChannelPlatform.HUAWEI.getChannel_platform().equals(channel_platform)) {
             doHuaweiPay(activity, payCreateOrderReqBean);
-        } else if(payType == SPayType.QooApp || ChannelPlatform.QOOAPP.getChannel_platform().equals(channel_platform)) {
+        } else if(ChannelPlatform.QOOAPP.getChannel_platform().equals(channel_platform)) {
             doQooAppPay(activity, payCreateOrderReqBean);
-        } else if(payType == SPayType.LUNQI || ChannelPlatform.LUNQI.getChannel_platform().equals(channel_platform)) {
+        } else if(ChannelPlatform.LUNQI.getChannel_platform().equals(channel_platform)) {
 //            doLunqiPay(activity, payCreateOrderReqBean);
             doWebPay(activity, payCreateOrderReqBean);
-        }else if (payType == SPayType.GOOGLE || ChannelPlatform.GOOGLE.getChannel_platform().equals(channel_platform)){
+        }else if (ChannelPlatform.GOOGLE.getChannel_platform().equals(channel_platform)){
             checkGoogleOrWebPay(activity, payCreateOrderReqBean);
         }else {
             doWebPay(activity, payCreateOrderReqBean);
