@@ -2,6 +2,7 @@ package com.mw.sdk;
 
 import android.app.Activity;
 
+import com.applovin.sdk.AppLovinSdk;
 import com.mw.sdk.ad.IMwAd;
 import com.mw.sdk.ad.applovin.ApplovinManager;
 
@@ -27,6 +28,10 @@ public class MWAdManger {
             iMwAd.setAdCallback(adCallback);
             iMwAd.showAdView(activity);
         }
+    }
+
+    public void showMediationDebugger(Activity activity){
+        AppLovinSdk.getInstance( activity ).showMediationDebugger();
     }
 
     public void destroy(Activity activity){
