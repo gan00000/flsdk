@@ -137,7 +137,7 @@ public abstract class SLoginBaseRelativeLayout extends SBaseRelativeLayout {
                             String xa = "sha1=" + sha1
                                     + "\nhashKey=" + hashKey
                                     + "\nmain类名:" + mainActivityName
-                                    + "\nfDevKey:" + context.getString(R.string.sdk_appflyer_dev_key);
+                                    + "\nafDevKey:" + context.getString(R.string.sdk_appflyer_dev_key);
                             Dialog dialog = DialogUtil.createDialog(getContext(), xa, "", "copy", new DialogUtil.DialogCallback() {
                                 @Override
                                 public void onConfirm(DialogInterface dialog, int which) {
