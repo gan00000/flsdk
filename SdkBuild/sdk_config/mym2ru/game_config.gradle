@@ -67,7 +67,7 @@ android {
             //applicationId "com.mym2ru.huawei"
 
             resValue "string", "sdk_game_code", "mym2ru"
-            resValue "string", "sdk_app_key", "94449cda6773eac5295c491646d2f262"
+            resValue "string", "sdk_app_key", "fe002a42c845a44123b7beba3a8ed421"
             resValue "string", "sdk_more_language", "true"
             resValue "string", "sdk_default_server_language", "ru_RU"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
             resValue "string", "scheme", "mym2ru"
