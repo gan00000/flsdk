@@ -62,23 +62,23 @@ android {
         huawei {
             dimension "1"
 
-            //applicationId "com.mym2ru.huawei"
+            //applicationId "com.dscgru.huawei"
 
-            resValue "string", "sdk_game_code", "mym2ru"
-            resValue "string", "sdk_app_key", "fe002a42c845a44123b7beba3a8ed421"
+            resValue "string", "sdk_game_code", "dscgru"
+            resValue "string", "sdk_app_key", "3caaa44ed8fcaa6cead629dc80f3959e"
             resValue "string", "sdk_more_language", "true"
             resValue "string", "sdk_default_server_language", "ru_RU"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
-            resValue "string", "scheme", "mym2ru"
+            resValue "string", "scheme", "dscgru"
             resValue "string", "channel_platform", "huawei"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
             //facebook
-            resValue "string", "facebook_app_id", "2045990125938783"
-            resValue "string", "facebook_client_token", "e50f35206e2ab63b6d2eed54dc173ef8"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider2045990125938783"
-            resValue "string", "fb_login_protocol_scheme", "fb2045990125938783"
-            resValue "string", "facebook_app_name", "mym2ru"
+            resValue "string", "facebook_app_id", "1376506443840433"
+            resValue "string", "facebook_client_token", "1d9dfe863b86128353e1758447be37be"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1376506443840433"
+            resValue "string", "fb_login_protocol_scheme", "fb1376506443840433"
+            resValue "string", "facebook_app_name", "dscgru"
             //ad
             resValue "string", "adjust_app_token", ""
-            resValue "string", "sdk_appflyer_dev_key", "HDSHU4DPP99jLVT8qaxuKd"
+            resValue "string", "sdk_appflyer_dev_key", "aAe8BXJU8AQspSugZH3Jke"
             //line
             resValue "string", "line_channelId", ""
             //naver

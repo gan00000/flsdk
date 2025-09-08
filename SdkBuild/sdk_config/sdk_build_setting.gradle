@@ -22,8 +22,13 @@ ext {
 //    sdkFlavor = 'sdk3_ifg'
 //    sdkLanguage = 'ru'//默认语言，即values的语言
 
-    gameCode = "mym2ru"
-    sdkFlavor = 'sdk3'
+//    gameCode = "mym2ru"
+//    sdkFlavor = 'sdk3'
+//    sdkLanguage = 'ru'//默认语言，即values的语言
+
+    gameCode = "dscgru"
+//    sdkFlavor = 'sdk3'
+    sdkFlavor = 'huawei'
     sdkLanguage = 'ru'//默认语言，即values的语言
 
 }
