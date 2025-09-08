@@ -117,6 +117,9 @@ dependencies {
     //广告盈利聚合平台
     implementation 'com.applovin:applovin-sdk:+'
     implementation 'com.applovin.mediation:google-adapter:+'
+    
+    //需要接入CMP才需要
+    implementation 'com.google.android.ump:user-messaging-platform:3.2.0'
 }
 
 

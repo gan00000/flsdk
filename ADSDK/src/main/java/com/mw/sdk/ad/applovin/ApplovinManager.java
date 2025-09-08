@@ -1,6 +1,7 @@
 package com.mw.sdk.ad.applovin;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
@@ -17,7 +18,9 @@ import com.applovin.sdk.AppLovinMediationProvider;
 import com.applovin.sdk.AppLovinSdk;
 import com.applovin.sdk.AppLovinSdkConfiguration;
 import com.applovin.sdk.AppLovinSdkInitializationConfiguration;
+import com.applovin.sdk.AppLovinSdkSettings;
 import com.mw.sdk.AdCallback;
+import com.mw.sdk.ad.BuildConfig;
 import com.mw.sdk.ad.IMwAd;
 import com.mw.sdk.ad.R;
 
@@ -55,6 +58,30 @@ public class ApplovinManager implements MaxRewardedAdListener, MaxAdRevenueListe
             return;
         }
         Log.i(TAG,"initAd adKey=" + adKey);
+
+
+//        AppLovinSdkSettings settings = AppLovinSdk.getInstance( activity ).getSettings();
+//        settings.getTermsAndPrivacyPolicyFlowSettings().setEnabled( true );
+//        settings.getTermsAndPrivacyPolicyFlowSettings().setPrivacyPolicyUri( Uri.parse( "«https://your-company-name.com/privacy-policy»" ) );
+//
+//        // Terms of Service URL is optional
+//        settings.getTermsAndPrivacyPolicyFlowSettings().setTermsOfServiceUri( Uri.parse( "«https://your-company-name.com/terms-of-service»" ) );
+//        // Showing Terms & Privacy Policy flow in GDPR region is optional (disabled by default)
+//        settings.getTermsAndPrivacyPolicyFlowSettings().setShowTermsAndPrivacyPolicyAlertInGdpr( true );
+
+
+        if (BuildConfig.DEBUG) {
+
+//            AppLovinPrivacySettings.setHasUserConsent(true);
+//            AppLovinPrivacySettings.setDoNotSell( false );
+
+//        如果您想在 GDPR 地区之外测试 Google CMP，请使用下方所示的方法之一，将调试用户的地理位置设为 GDPR
+//            settings.getTermsAndPrivacyPolicyFlowSettings().setDebugUserGeography( AppLovinSdkConfiguration.ConsentFlowUserGeography.GDPR );
+//            然后，在初始化 MAX SDK 之前设置测试设备的哈希 ID。
+//            当应用在设备上运行时，Google CMP SDK 会记录此测试设备的哈希 ID。 通过以下调用设置测试设备的哈希 ID
+           // settings.setExtraParameter("google_test_device_hashed_id", "«your-test-device-hashed-ID»");
+        }
+
         // Create the initialization configuration
         AppLovinSdkInitializationConfiguration initConfig = AppLovinSdkInitializationConfiguration.builder(adKey, activity)
                 .setMediationProvider(AppLovinMediationProvider.MAX)
