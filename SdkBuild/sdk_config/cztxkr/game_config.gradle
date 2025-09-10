@@ -113,7 +113,7 @@ android {
             targetSdkVersion 35
 
             //参数配置
-            resValue "string", "sdk_appflyer_dev_key", ""
+            resValue "string", "sdk_appflyer_dev_key", "UzDsu6cHSS4qWUgAWFh7FS"
             resValue "string", "channel_platform", "samsung"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
             resValue "string", "mw_vk_appid", ""
             //=======================================sdk config end==========================
@@ -134,7 +134,7 @@ android {
             targetSdkVersion 35
 
             //参数配置
-            resValue "string", "sdk_appflyer_dev_key", ""
+            resValue "string", "sdk_appflyer_dev_key", "LHhxGPxfpSqdG4zCvhAWXA"
             resValue "string", "channel_platform", "onestore"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
             resValue "string", "mw_vk_appid", ""
             //==========================================end==========================
