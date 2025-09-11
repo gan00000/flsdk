@@ -154,6 +154,26 @@ android {
 
         }
 
+        channel_xiaomi {
+
+            flavorDimensions "1"
+
+            //==========================================start==========================
+            //base
+            applicationId "com.dscg.miru"
+            versionCode 1
+            versionName "1.0"
+            minSdkVersion 25
+            targetSdkVersion 35
+
+            //参数配置
+            resValue "string", "sdk_appflyer_dev_key", "LUFbJKYWF8qzSLPcNKQfiR"
+            resValue "string", "channel_platform", "xiaomi"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
+            resValue "string", "mw_vk_appid", ""
+            //==========================================end==========================
+
+        }
+
         */
     }
 }
