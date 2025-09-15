@@ -300,6 +300,37 @@ public class MWSdkImpl extends BaseSdkImpl {
     }
 
     @Override
+    public void exitGame(Activity activity, ISdkCallBack iSdkCallBack) {
+
+        SMPlatformManager.getInstance().exitApp(new SMLoginOutListener() {
+            @Override
+            public void loginOutSuccess() {
+                PL.i("loginOutSuccess");
+                if (iSdkCallBack != null){
+                    iSdkCallBack.success();
+                }
+            }
+
+            @Override
+            public void loginOutFail(String s) {
+                PL.i("loginOutFail");
+                if (iSdkCallBack != null){
+                    iSdkCallBack.failure();
+                }
+            }
+
+            @Override
+            public void loginOutCancel() {
+                PL.i("loginOutCancel");
+                if (iSdkCallBack != null){
+                    iSdkCallBack.failure();
+                }
+            }
+        });
+
+    }
+
+    @Override
     public void switchLogin(Activity activity, ILoginCallBack iLoginCallBack) {
         this.activity = activity;
         this.iLoginCallBack = iLoginCallBack;

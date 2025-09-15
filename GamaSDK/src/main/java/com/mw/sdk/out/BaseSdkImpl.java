@@ -612,6 +612,19 @@ public class BaseSdkImpl implements IMWSDK {
     }
 
     @Override
+    public void exitGame(Activity activity, ISdkCallBack iSdkCallBack) {
+
+        if (dataManager == null){
+            dataManager = DataManager.getInstance();
+        }
+        dataManager.setLogin(false);
+        if (iSdkCallBack != null){
+            iSdkCallBack.success();
+        }
+
+    }
+
+    @Override
     public void pay(Activity activity, String cpOrderId, String productId, String extra, String roleId, String roleName, String roleLevel, String vipLevel, String severCode, String serverName, IPayListener listener) {
         pay(activity, SPayType.GOOGLE, cpOrderId, productId, extra, roleId, roleName, roleLevel, vipLevel, severCode, serverName, listener);
     }

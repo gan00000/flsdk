@@ -12,12 +12,26 @@ android {
     kotlinOptions {
         jvmTarget = rootProject.ext.jvmTarget
     }
-
+    def domainUrl= "chiendemobile.vn"
     def sdk_version = "2.2.1"
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         buildConfigField "String", "JAR_VERSION", "\"$sdk_version\""
+
+        if (domainUrl !=null && domainUrl.length() > 0){
+            resValue "string", "mw_sdk_login_pre_url", "https://login.${domainUrl}/"
+            resValue "string", "mw_sdk_pay_pre_url", "https://pay.${domainUrl}/"
+            resValue "string", "mw_sdk_cdn_pre_url", "https://cdn-download.${domainUrl}/"
+            resValue "string", "mw_sdk_plat_pre_url", "https://platform.${domainUrl}/"
+            resValue "string", "mw_sdk_member_pre_url", "https://member.${domainUrl}/"
+            resValue "string", "mw_sdk_log_pre_url", "https://log.${domainUrl}/"
+            resValue "string", "mw_sdk_terms_service_url", "https://member.${domainUrl}/sdk/agreement/%s_agreement.html"
+            resValue "string", "mw_sdk_social_url", "https://member.${domainUrl}/sdk/social/%s/index.html"
+            resValue "string", "mw_td_te_server_url", "https://shushu.${domainUrl}/"
+            resValue "string", "mw_sdk_customer_url", "https://platform.${domainUrl}/sdk/api/customer.page"
+        }
+
     }
 
     android.libraryVariants.all { variant ->
@@ -267,7 +281,7 @@ dependencies {
 
 
     //小7
-//    Xiao7Implementation 'io.github.x7sy-sm:x7sdk-androidx:8.18.2'
+    implementation 'io.github.x7sy-sm:x7sdk-androidx:8.36.0'
 }
 
 
