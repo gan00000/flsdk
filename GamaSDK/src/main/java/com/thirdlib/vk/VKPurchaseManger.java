@@ -149,7 +149,10 @@ public class VKPurchaseManger {
     public void queryPurchasesAsyncInPaying(Context context) {
 
         this.mContext = context;
-        PurchaseInteractor purchaseInteractor = getBillingClient(context).getPurchaseInteractor();
+        if (purchaseCallback != null){
+            purchaseCallback.onPayingQueryPurchaseSucceed(null);
+        }
+        /*PurchaseInteractor purchaseInteractor = getBillingClient(context).getPurchaseInteractor();
 
         purchaseInteractor.getPurchases(ProductType.CONSUMABLE_PRODUCT, PurchaseStatus.PAID).addOnSuccessListener(purchases -> {
 
@@ -157,28 +160,6 @@ public class VKPurchaseManger {
             if (purchaseCallback != null){
                 purchaseCallback.onPayingQueryPurchaseSucceed(purchases);
             }
-            /*for (Purchase purchase : purchases) {
-
-                String purchaseId = purchase.getPurchaseId();
-                if (purchaseId != null) {
-                    assert purchase.getDeveloperPayload() != null;
-                    Log.w("HOHOHO", purchase.getDeveloperPayload());
-                    if (purchase.getPurchaseState() != null) {
-                        if (purchase.getPurchaseState() == PurchaseState.CREATED ||
-                                purchase.getPurchaseState() == PurchaseState.INVOICE_CREATED) {
-                            deletePurchase(context, purchaseId);
-                        } else if (purchase.getPurchaseState() == PurchaseState.PAID) {
-                            confirmPurchase(context, purchaseId);
-                        }
-                    } else {
-                        Log.e("HOHOHO", "PurchaseState is null");
-                    }
-
-                }
-
-            }*/
-//            purchases.forEach(purchase -> {
-//            });
         }).addOnFailureListener(throwable ->
                 {
                     Log.e("RuStoreBillingClient", "Error calling getPurchases cause: " + throwable);
@@ -188,7 +169,7 @@ public class VKPurchaseManger {
                 }
 
 
-        );
+        );*/
     }
 
     public void purchaseProduct(Context context,String productId, String orderId, String developerPayload, String userId) {
