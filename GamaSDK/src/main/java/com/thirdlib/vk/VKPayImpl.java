@@ -507,7 +507,7 @@ public class VKPayImpl implements IPay, VKPurchaseManger.PurchaseCallback {
 
         PL.i("onQueryPurchaseSucceed");
 
-        if (purchases == null || purchases.isEmpty()){
+       /* if (purchases == null || purchases.isEmpty()){
             PL.i("onQueryPurchaseSucceed empty");
             return;
         }
@@ -576,7 +576,7 @@ public class VKPayImpl implements IPay, VKPurchaseManger.PurchaseCallback {
 
             }
 
-        }
+        }*/
 
     }
 
@@ -589,7 +589,7 @@ public class VKPayImpl implements IPay, VKPurchaseManger.PurchaseCallback {
             return;
         }
         //改为一次性后下面的将不再走
-        for (Purchase purchase : purchases) {
+        /*for (Purchase purchase : purchases) {
 
             String purchaseId = purchase.getPurchaseId().getValue();
             if (SStringUtil.isNotEmpty(purchaseId)) {
@@ -650,7 +650,7 @@ public class VKPayImpl implements IPay, VKPurchaseManger.PurchaseCallback {
 
             }
 
-        }
+        }*/
         onePayInActivity(mActivity);
     }
 
