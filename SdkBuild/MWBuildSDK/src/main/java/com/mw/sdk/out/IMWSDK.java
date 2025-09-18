@@ -58,6 +58,8 @@ public interface IMWSDK extends IGameLifeCycle {
 
     void logout(Activity activity, ISdkCallBack iSdkCallBack);
 
+    void exitGame(Activity activity, ISdkCallBack iSdkCallBack);
+
     /**
      * @param activity
      * @param payType           SPayType.WEB为平台网页第三方储值，SPayType.GOOGLE为Google储值

@@ -876,6 +876,7 @@ public class Request {
     }
 
 
+    //服务端不判断成功
     public static void requestEventsData(Context context, String orderId, double amount, String productId, SFCallBack<EventRes> sfCallBack) {
 
         if (context == null || SStringUtil.isEmpty(orderId) || amount <= 0){

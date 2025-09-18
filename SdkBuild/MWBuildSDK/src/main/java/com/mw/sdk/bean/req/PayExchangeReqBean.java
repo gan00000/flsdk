@@ -22,6 +22,15 @@ public class PayExchangeReqBean extends SGameBaseRequestBean {
 	private String purchaseId;
 	private String productId;
 	private String invoiceId;
+	private boolean sandbox;
+
+	public boolean isSandbox() {
+		return sandbox;
+	}
+
+	public void setSandbox(boolean sandbox) {
+		this.sandbox = sandbox;
+	}
 
 	public String getThirdPurchaseToken() {
 		return thirdPurchaseToken;

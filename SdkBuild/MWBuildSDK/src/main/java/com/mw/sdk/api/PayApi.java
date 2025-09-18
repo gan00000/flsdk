@@ -311,6 +311,12 @@ public class PayApi {
                                 }
                             }
                         }
+
+                        //查询接口是否要需要上报的事件
+                        String orderId2 = gpExchangeRes.getData().getOrderId();
+                        PL.i("requestEventsData to orderId2=" + orderId2);
+                        Request.requestEventsData(context.getApplicationContext(), orderId2, usdPrice, productId, null);
+
                     }
 
 
@@ -444,6 +450,12 @@ public class PayApi {
                                 }
                             }
                         }
+
+                        //查询接口是否要需要上报的事件
+                        String orderId2 = gpExchangeRes.getData().getOrderId();
+                        PL.i("requestEventsData to orderId2=" + orderId2);
+                        Request.requestEventsData(context.getApplicationContext(), orderId2, usdPrice, productId, null);
+
                     }
 
                 } else {

@@ -947,6 +947,25 @@ public class BaseSdkImpl implements IMWSDK {
     }
 
     @Override
+    public void exitGame(Activity activity, ISdkCallBack iSdkCallBack) {
+        this.regRoleInfoTimestamp = 0;
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                if (dataManager == null){
+                    dataManager = DataManager.getInstance();
+                }
+                dataManager.setLogin(false);
+
+                if (iSdkCallBack != null){
+                    iSdkCallBack.success();
+                }
+            }
+        });
+    }
+
+    @Override
     public void pay(Activity activity, String cpOrderId, String productId, String extra, String roleId, String roleName, String roleLevel, String vipLevel, String severCode, String serverName, IPayListener listener) {
         pay(activity, SPayType.GOOGLE, cpOrderId, productId, extra, roleId, roleName, roleLevel, vipLevel, severCode, serverName, listener);
     }
@@ -1010,7 +1029,12 @@ public class BaseSdkImpl implements IMWSDK {
         } else if(ChannelPlatform.LUNQI.getChannel_platform().equals(channel_platform)) {
 //            doLunqiPay(activity, payCreateOrderReqBean);
             doWebPay(activity, payCreateOrderReqBean);
-        }else if (ChannelPlatform.GOOGLE.getChannel_platform().equals(channel_platform)){
+        }else if (ChannelPlatform.GOOGLE.getChannel_platform().equals(channel_platform)
+                || ChannelPlatform.VK.getChannel_platform().equals(channel_platform)
+                || ChannelPlatform.ONESTORE.getChannel_platform().equals(channel_platform)
+                || ChannelPlatform.SAMSUNG.getChannel_platform().equals(channel_platform)
+                || ChannelPlatform.Xiaomi.getChannel_platform().equals(channel_platform)
+                || ChannelPlatform.NOWGG.getChannel_platform().equals(channel_platform)){
             checkGoogleOrWebPay(activity, payCreateOrderReqBean);
         }else {
             doWebPay(activity, payCreateOrderReqBean);

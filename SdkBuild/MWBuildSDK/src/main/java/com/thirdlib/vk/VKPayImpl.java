@@ -462,6 +462,7 @@ public class VKPayImpl implements IPay, VKPurchaseManger.PurchaseCallback {
         exchangeReqBean.setProductId(productId);
         exchangeReqBean.setInvoiceId(invoiceId);
         exchangeReqBean.setOrderId(orderId);//mw平台订单号
+        exchangeReqBean.setSandbox(sandbox);
         exchangeReqBean.setRequestMethod(ApiRequestMethod.API_PAYMENT_VK);
 
         /*try {
@@ -502,10 +503,11 @@ public class VKPayImpl implements IPay, VKPurchaseManger.PurchaseCallback {
 
     @Override
     public void onQueryPurchaseSucceed(List<Purchase> purchases) {
+        //改为一次性后下面的将不再走
 
         PL.i("onQueryPurchaseSucceed");
 
-        if (purchases == null || purchases.isEmpty()){
+       /* if (purchases == null || purchases.isEmpty()){
             PL.i("onQueryPurchaseSucceed empty");
             return;
         }
@@ -574,7 +576,7 @@ public class VKPayImpl implements IPay, VKPurchaseManger.PurchaseCallback {
 
             }
 
-        }
+        }*/
 
     }
 
@@ -586,8 +588,8 @@ public class VKPayImpl implements IPay, VKPurchaseManger.PurchaseCallback {
             onePayInActivity(mActivity);
             return;
         }
-
-        for (Purchase purchase : purchases) {
+        //改为一次性后下面的将不再走
+        /*for (Purchase purchase : purchases) {
 
             String purchaseId = purchase.getPurchaseId().getValue();
             if (SStringUtil.isNotEmpty(purchaseId)) {
@@ -598,7 +600,7 @@ public class VKPayImpl implements IPay, VKPurchaseManger.PurchaseCallback {
 //                        VKPurchaseManger.getInstance().deletePurchase(mContext, purchaseId);
 //
 //                    } else
-                        if (purchase.getStatus() == PurchaseStatus.PAID) {//成功
+                    if (purchase.getStatus() == PurchaseStatus.PAID) {//成功
                         //confirmPurchase(context, purchaseId);
 
                         PayExchangeReqBean exchangeReqBean = new PayExchangeReqBean(mActivity);
@@ -648,7 +650,7 @@ public class VKPayImpl implements IPay, VKPurchaseManger.PurchaseCallback {
 
             }
 
-        }
+        }*/
         onePayInActivity(mActivity);
     }
 
