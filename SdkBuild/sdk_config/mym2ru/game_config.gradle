@@ -30,7 +30,7 @@ android {
         sdk3 {
             dimension "1"
 
-            //applicationId "com.mym2ru.and"
+            //applicationId "com.m2.russia"
 
             resValue "string", "sdk_game_code", "mym2ru"
             resValue "string", "sdk_app_key", "fe002a42c845a44123b7beba3a8ed421"
@@ -101,14 +101,14 @@ android {
 
             //==========================================start==========================
             //base
-            applicationId "com.mym2ru.and"
+            applicationId "com.m2.russia"
             versionCode 1
             versionName "1.0"
             minSdkVersion 25
             targetSdkVersion 35
 
             //参数配置
-            resValue "string", "sdk_appflyer_dev_key", "XsKL6AKoTUSZR2A5e6ASb"
+            resValue "string", "sdk_appflyer_dev_key", "dqo7JKL2d8ncv7zx5CQ2YN"
             resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
             resValue "string", "mw_dialog_pay_add_type", "vk"  //vk,xiaomi
             resValue "string", "mw_vk_appid", "2063650718"
@@ -122,14 +122,14 @@ android {
 
             //==========================================start==========================
             //base
-            applicationId "com.mym2ru.and"
+            applicationId "com.m2.russia"
             versionCode 1
             versionName "1.0"
             minSdkVersion 25
             targetSdkVersion 35
 
             //参数配置
-            resValue "string", "sdk_appflyer_dev_key", "XsKL6AKoTUSZR2A5e6ASb"
+            resValue "string", "sdk_appflyer_dev_key", "dqo7JKL2d8ncv7zx5CQ2YN"
             resValue "string", "channel_platform", "meow"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
             resValue "string", "mw_vk_appid", ""
             //==========================================end==========================
