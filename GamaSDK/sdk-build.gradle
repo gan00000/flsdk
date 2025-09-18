@@ -208,7 +208,7 @@ dependencies {
 //    lunqiImplementation files('libs/xlsdk1.jar')
 
     //俄罗斯
-    implementation(platform("ru.rustore.sdk:bom:2025.05.03"))
+    implementation(platform("ru.rustore.sdk:bom:2025.06.01"))
     implementation("ru.rustore.sdk:pay")
     implementation "ru.rustore.sdk:review"
 
