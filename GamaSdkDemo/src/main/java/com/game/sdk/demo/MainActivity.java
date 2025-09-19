@@ -16,7 +16,6 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -29,28 +28,20 @@ import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.AppUtil;
 import com.core.base.utils.MarketUtil;
+import com.core.base.utils.ProcessUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.SignatureUtil;
 import com.core.base.utils.ToastUtils;
 import com.mw.base.bean.SPayType;
-import com.mw.sdk.AdCallback;
-import com.mw.sdk.MWAdManger;
-import com.mw.sdk.bean.req.PayCreateOrderReqBean;
 import com.mw.sdk.callback.IPayListener;
 import com.mw.sdk.demo.R;
-import com.mw.sdk.log.LogViewManager;
 import com.mw.sdk.login.ILoginCallBack;
 import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.out.IMWSDK;
 import com.mw.sdk.out.ISdkCallBack;
 import com.mw.sdk.out.MWSdkFactory;
 import com.mw.sdk.utils.SdkUtil;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 
 public class MainActivity extends Activity {
 
@@ -89,7 +80,7 @@ public class MainActivity extends Activity {
 
         //在游戏Activity的onCreate生命周期中调用
         mIMWSDK.onCreate(this);
-        MWAdManger.getInstance().initAd(this);
+//        MWAdManger.getInstance().initAd(this);
 
 
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -511,22 +502,8 @@ public class MainActivity extends Activity {
 //                }
 //                mIMWSDK.openUrlByBrowser(MainActivity.this, "https://activity.tthplay.com/api/redirect/page");
 
-                try {
-                    Process process = Runtime.getRuntime().exec("ping -c 1 -w 10 101.32.104.11");
-                    if (process != null){
-                        InputStream is = process.getInputStream();
-                        BufferedReader bufferedReader =  new BufferedReader(new InputStreamReader(is));
-                        StringBuilder sb = new StringBuilder();
-                        String line;
-                        while (null != (line = bufferedReader.readLine())){
-                            sb.append(line);
-                            sb.append("\n");
-                        }
-                        PL.i(sb.toString());
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                String ma = ProcessUtil.ping("101.32.104.11");
+                PL.i("ping result=" + ma);
             }
         });
 
@@ -564,27 +541,28 @@ public class MainActivity extends Activity {
         findViewById(R.id.show_ad).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               MWAdManger.getInstance().showAd(activity, new AdCallback() {
-                    @Override
-                    public void onAdClicked(String msg) {
-                        //广告被点击
-                    }
-
-                    @Override
-                    public void onAdDisplayed(String msg) {
-                        //广告显示
-                    }
-
-                    @Override
-                    public void onAdHidden(String msg) {
-                        //广告隐藏
-                    }
-
-                    @Override
-                    public void onUserRewarded(String msg) {
-                        //用户获得奖励，在此处做发奖励操作
-                    }
-                });
+//               MWAdManger.getInstance().showAd(activity, new AdCallback() {
+//                    @Override
+//                    public void onAdClicked(String msg) {
+//                        //广告被点击
+//                    }
+//
+//                    @Override
+//                    public void onAdDisplayed(String msg) {
+//                        //广告显示
+//                    }
+//
+//                    @Override
+//                    public void onAdHidden(String msg) {
+//                        //广告隐藏
+//                    }
+//
+//                    @Override
+//                    public void onUserRewarded(String msg) {
+//                        //用户获得奖励，在此处做发奖励操作
+//                    }
+//                });
+//                MWAdManger.getInstance().showMediationDebugger(activity);
             }
         });
         AppUtil.hideActivityBottomBar(this);
@@ -739,7 +717,7 @@ public class MainActivity extends Activity {
         super.onDestroy();
         PL.i("activity onDestroy");
         mIMWSDK.onDestroy(this);
-        MWAdManger.getInstance().destroy(this);
+//        MWAdManger.getInstance().destroy(this);
     }
 
     @Override
