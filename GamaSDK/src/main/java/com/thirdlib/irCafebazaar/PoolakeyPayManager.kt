@@ -55,14 +55,14 @@ class PoolakeyPayManager private constructor(){
         this.ppCallback = callback
 
         if (paymentConfiguration == null){
-            val mw_cafebazaar_rsa_public_key = ResUtil.findStringByName(activity, "mw_cafebazaar_rsa_public_key")
-            if (SStringUtil.isEmpty(mw_cafebazaar_rsa_public_key)){
-                ToastUtils.toast(activity, "mw_cafebazaar_rsa_public_key is null")
-                ppCallback?.fali("mw_cafebazaar_rsa_public_key is null")
-                return
-            }
+//            val mw_cafebazaar_rsa_public_key = ResUtil.findStringByName(activity, "mw_cafebazaar_rsa_public_key")
+//            if (SStringUtil.isEmpty(mw_cafebazaar_rsa_public_key)){
+//                ToastUtils.toast(activity, "mw_cafebazaar_rsa_public_key is null")
+//                ppCallback?.fali("mw_cafebazaar_rsa_public_key is null")
+//                return
+//            }
             paymentConfiguration = PaymentConfiguration(
-                localSecurityCheck = SecurityCheck.Enable(mw_cafebazaar_rsa_public_key)
+                localSecurityCheck = SecurityCheck.Disable
             )
         }
 
