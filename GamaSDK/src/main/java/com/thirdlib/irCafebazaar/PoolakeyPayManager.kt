@@ -15,12 +15,13 @@ import ir.cafebazaar.poolakey.config.SecurityCheck
 import ir.cafebazaar.poolakey.exception.DynamicPriceNotSupportedException
 import ir.cafebazaar.poolakey.request.PurchaseRequest
 
-class PoolakeyPayManager(val activity: AppCompatActivity){
+class PoolakeyPayManager private constructor(){
 
-    private lateinit var paymentConfiguration : PaymentConfiguration
+    private var paymentConfiguration : PaymentConfiguration? = null
+    private lateinit var activity: AppCompatActivity
 
     private val poolakeyPayment by lazy(LazyThreadSafetyMode.NONE) {
-        Payment(context = activity, config = paymentConfiguration)
+        Payment(context = activity, config = paymentConfiguration!!)
     }
 
 
@@ -28,27 +29,42 @@ class PoolakeyPayManager(val activity: AppCompatActivity){
 
     private var isConnect = false
 
-    internal var ppCallback: PPPayCallback? = null
+    private var ppCallback: PPPayCallback? = null
 
-    public fun startPurchase(activity: Activity, productId: String, payload: String, dynamicPriceToken: String?, callback: PPPayCallback) {
-
-        ppCallback = callback
-
-        var mw_cafebazaar_rsa_public_key = ResUtil.findStringByName(activity, "mw_cafebazaar_rsa_public_key")
-        if (SStringUtil.isEmpty(mw_cafebazaar_rsa_public_key)){
-            ToastUtils.toast(activity, "mw_cafebazaar_rsa_public_key is null")
-            ppCallback?.fali("mw_cafebazaar_rsa_public_key is null")
-            return
+    companion object {
+        val instance: PoolakeyPayManager by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
+            PoolakeyPayManager()
         }
+    }
+
+//    companion object {
+//        @Volatile
+//        private var instance: PoolakeyPayManager? = null
+//
+//        fun getInstance(activity: AppCompatActivity): PoolakeyPayManager {
+//            return instance ?: synchronized(this) {
+//                instance ?: PoolakeyPayManager(activity).also { instance = it }
+//            }
+//        }
+//    }
+
+
+    public fun startPurchase(activity: AppCompatActivity, productId: String, payload: String, dynamicPriceToken: String?, callback: PPPayCallback) {
+
+        this.activity = activity
+        this.ppCallback = callback
+
         if (paymentConfiguration == null){
+            val mw_cafebazaar_rsa_public_key = ResUtil.findStringByName(activity, "mw_cafebazaar_rsa_public_key")
+            if (SStringUtil.isEmpty(mw_cafebazaar_rsa_public_key)){
+                ToastUtils.toast(activity, "mw_cafebazaar_rsa_public_key is null")
+                ppCallback?.fali("mw_cafebazaar_rsa_public_key is null")
+                return
+            }
             paymentConfiguration = PaymentConfiguration(
                 localSecurityCheck = SecurityCheck.Enable(mw_cafebazaar_rsa_public_key)
             )
         }
-
-//        if (poolakeyPayment == null){
-//            poolakeyPayment = Payment(context = activity, config = paymentConfiguration)
-//        }
 
         startPaymentConnection { result ->
             if (result){

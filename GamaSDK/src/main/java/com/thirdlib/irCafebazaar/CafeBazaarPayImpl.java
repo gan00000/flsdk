@@ -39,7 +39,7 @@ import ir.cafebazaar.poolakey.entity.PurchaseInfo;
 public class CafeBazaarPayImpl implements IPay {
 
     public static final String TAG_USER_CANCEL = "TAG_PAY_USER_CANCEL";
-    private PoolakeyPayManager poolakeyPayManager;
+//    private PoolakeyPayManager poolakeyPayManager;
     private LoadingDialog loadingDialog;
 
     private Double skuAmount;
@@ -211,16 +211,13 @@ public class CafeBazaarPayImpl implements IPay {
         if (this.createOrderIdReqBean.isInitOk()) {
             //开始储值,先查询有没有未消耗的商品
             loadingDialog.showProgressDialog();
-            if (poolakeyPayManager != null){
-
-                if (activity instanceof AppCompatActivity){
-                    poolakeyPayManager = new PoolakeyPayManager((AppCompatActivity)activity);
-                }else {
-                    callbackFail("need activity AppCompatActivity");
-                    return;
-                }
-
+            if (activity instanceof AppCompatActivity){
+                //PoolakeyPayManager.Companion.getInstance().initPay((AppCompatActivity)activity);
+            }else {
+                callbackFail("need activity AppCompatActivity");
+                return;
             }
+
             onePayInActivity(activity);
 
         } else {
@@ -289,10 +286,7 @@ public class CafeBazaarPayImpl implements IPay {
     public void onDestroy(Activity activity) {
         PL.i( "onDestroy");
 
-        if (poolakeyPayManager != null){
-            poolakeyPayManager.disconnect(activity);
-            poolakeyPayManager = null;
-        }
+        PoolakeyPayManager.Companion.getInstance().disconnect(activity);
         dimissDialog();
     }
 
@@ -313,7 +307,7 @@ public class CafeBazaarPayImpl implements IPay {
 
                     String devPayloadStr = createOrderIdRes.getPayData().getOrderId();//URLEncoder.encode(devPayload.toString());
                     String dynamicPriceToken = createOrderIdReqBean.getUserId() + "_" + devPayloadStr;
-                    poolakeyPayManager.startPurchase(activity, createOrderIdReqBean.getProductId(), devPayloadStr, dynamicPriceToken, new PPPayCallback() {
+                    PoolakeyPayManager.Companion.getInstance().startPurchase((AppCompatActivity) activity, createOrderIdReqBean.getProductId(), devPayloadStr, dynamicPriceToken, new PPPayCallback() {
                         @Override
                         public void succeed(@NonNull PurchaseInfo mPurchaseInfo) {
                             PL.i("startPurchase succeed");
