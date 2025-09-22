@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.PL;
@@ -211,7 +212,14 @@ public class CafeBazaarPayImpl implements IPay {
             //开始储值,先查询有没有未消耗的商品
             loadingDialog.showProgressDialog();
             if (poolakeyPayManager != null){
-                poolakeyPayManager = new PoolakeyPayManager(activity);
+
+                if (activity instanceof AppCompatActivity){
+                    poolakeyPayManager = new PoolakeyPayManager((AppCompatActivity)activity);
+                }else {
+                    callbackFail("need activity AppCompatActivity");
+                    return;
+                }
+
             }
             onePayInActivity(activity);
 
