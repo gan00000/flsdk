@@ -220,6 +220,9 @@ dependencies {
     implementation 'com.singular.sdk:singular_sdk:12.7.1'
     //如果你的应用程序是通过三星 Galaxy Store 发布的，请添加以下内容以支持三星 Galaxy Store 的安装引用程序
     //implementation 'store.galaxy.samsung.installreferrer:samsung_galaxystore_install_referrer:4.0.0'
+
+    //伊朗cafebazaar
+    implementation "com.github.cafebazaar.Poolakey:poolakey:2.2.0"
 }
 
 

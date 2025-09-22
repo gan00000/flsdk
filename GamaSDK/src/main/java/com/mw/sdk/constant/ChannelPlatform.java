@@ -12,6 +12,7 @@ public enum ChannelPlatform {
     NOWGG("nowgg"),
     Xiaomi("xiaomi"),
     APKPURE("apkpure"),
+    BAZAAR("bazaar"),
     MEOW("meow");
 
     private String channel_platform;
