@@ -373,7 +373,9 @@ public class BaseSdkImpl implements IMWSDK {
     public void onCreate(Activity activity, Bundle savedInstanceState) {
         onCreate(activity);
         String channel_platform = ResConfig.getChannelPlatform(activity);
-        if(ChannelPlatform.VK.getChannel_platform().equals(channel_platform)) {
+        String payChannel = activity.getResources().getString(R.string.mw_dialog_pay_add_type);
+        if(ChannelPlatform.VK.getChannel_platform().equals(channel_platform)
+                || payChannel.contains(ChannelPlatform.VK.getChannel_platform())) {
             VKPurchaseManger.getInstance().onCreate(activity, savedInstanceState);
         }
 
@@ -383,8 +385,10 @@ public class BaseSdkImpl implements IMWSDK {
     public void onNewIntent(Activity activity, Intent intent) {
 
         String channel_platform = ResConfig.getChannelPlatform(activity);
+        String payChannel = activity.getResources().getString(R.string.mw_dialog_pay_add_type);
 
-        if(ChannelPlatform.VK.getChannel_platform().equals(channel_platform)) {
+        if(ChannelPlatform.VK.getChannel_platform().equals(channel_platform)
+                || payChannel.contains(ChannelPlatform.VK.getChannel_platform())) {
             VKPurchaseManger.getInstance().onNewIntent(activity, intent);
         }
     }
