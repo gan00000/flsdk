@@ -197,4 +197,18 @@ public class ThirdModuleUtil {
         isExistSingularModule = true;
         return true;
     }
+
+    public static boolean existBazaarModule() {
+
+        try {
+            Class<?> clazz = Class.forName("ir.cafebazaar.poolakey.Payment");
+            if (clazz == null){
+                return false;
+            }
+        } catch (ClassNotFoundException e) {
+            PL.w("cafebazaar module not exist.");
+            return false;
+        }
+        return true;
+    }
 }

@@ -441,6 +441,9 @@ public class VKPayImpl implements IPay, VKPurchaseManger.PurchaseCallback {
             callbackFail("ProductPurchaseResult is null");
             return;
         }
+        if (loadingDialog != null) {
+            loadingDialog.showProgressDialog();
+        }
         String purchaseId = paymentResult.getPurchaseId().getValue();
         String orderId = "";
         if (paymentResult.getOrderId() != null) {
