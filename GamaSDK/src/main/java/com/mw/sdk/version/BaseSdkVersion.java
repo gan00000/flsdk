@@ -5,6 +5,7 @@ import com.mw.sdk.pay.IPay;
 import com.mw.sdk.pay.nowgg.NowggPayImpl;
 import com.thirdlib.IThirdHelper;
 import com.thirdlib.ThirdModuleUtil;
+import com.thirdlib.irCafebazaar.CafeBazaarPayImpl;
 import com.thirdlib.vk.VKPayImpl;
 import com.thirdlib.xiaomi.XiaomiPayImpl;
 
@@ -41,6 +42,14 @@ public abstract class BaseSdkVersion {
 
         if (ThirdModuleUtil.existXiaomiModule()){
             return new XiaomiPayImpl();
+        }
+        return null;
+    }
+
+    public IPay newBazaarPay(){
+
+        if (ThirdModuleUtil.existBazaarModule()){
+            return new CafeBazaarPayImpl();
         }
         return null;
     }
