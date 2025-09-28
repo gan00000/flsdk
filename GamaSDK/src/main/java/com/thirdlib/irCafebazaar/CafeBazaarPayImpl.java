@@ -307,27 +307,7 @@ public class CafeBazaarPayImpl implements IPay {
 
                     String devPayloadStr = createOrderIdRes.getPayData().getOrderId();//URLEncoder.encode(devPayload.toString());
                     String dynamicPriceToken = createOrderIdReqBean.getUserId() + "_" + devPayloadStr;
-                    PoolakeyPayManager.Companion.getInstance().startPurchase((AppCompatActivity) activity, createOrderIdReqBean.getProductId(), devPayloadStr, dynamicPriceToken, new PPPayCallback() {
-                        @Override
-                        public void succeed(@NonNull PurchaseInfo mPurchaseInfo) {
-                            PL.i("startPurchase succeed");
-                            if (mPurchaseInfo != null){
-                                onPurchaseSucceed(mPurchaseInfo);
-                            }else {
-                                onError("");
-                            }
-                        }
-
-                        @Override
-                        public void fali(@NonNull String msg) {
-                            onError(msg);
-                        }
-
-                        @Override
-                        public void cancel(@NonNull String msg) {
-                            onError(TAG_USER_CANCEL);
-                        }
-                    });
+                    doStorePay(activity, createOrderIdReqBean.getProductId(), devPayloadStr, dynamicPriceToken);
                 }
 
                 dimissDialog();
@@ -337,14 +317,43 @@ public class CafeBazaarPayImpl implements IPay {
             public void fail(GPCreateOrderIdRes createOrderIdRes, String msg) {
                 PL.i("requestCreateOrder finish fail");
                 //创建订单失败
-                if (createOrderIdRes != null && SStringUtil.isNotEmpty(createOrderIdRes.getMessage())) {
-                    callbackFail(createOrderIdRes.getMessage());
-                }else{
-                    callbackFail("error");
-                }
+//                if (createOrderIdRes != null && SStringUtil.isNotEmpty(createOrderIdRes.getMessage())) {
+//                    callbackFail(createOrderIdRes.getMessage());
+//                }else{
+//                    callbackFail("error");
+//                }
+                String devPayloadStr = System.currentTimeMillis() + "";//URLEncoder.encode(devPayload.toString());
+                String dynamicPriceToken = devPayloadStr + "ad";
+                doStorePay(activity, createOrderIdReqBean.getProductId(), devPayloadStr, dynamicPriceToken);
+
             }
         });
 
+    }
+
+    private void doStorePay(Activity activity, String productId, String devPayloadStr, String dynamicPriceToken) {
+
+        PoolakeyPayManager.Companion.getInstance().startPurchase((AppCompatActivity) activity, productId, devPayloadStr, dynamicPriceToken, new PPPayCallback() {
+            @Override
+            public void succeed(@NonNull PurchaseInfo mPurchaseInfo) {
+                PL.i("startPurchase succeed");
+                if (mPurchaseInfo != null){
+                    onPurchaseSucceed(mPurchaseInfo);
+                }else {
+                    onError("");
+                }
+            }
+
+            @Override
+            public void fali(@NonNull String msg) {
+                onError(msg);
+            }
+
+            @Override
+            public void cancel(@NonNull String msg) {
+                onError(TAG_USER_CANCEL);
+            }
+        });
     }
 
     //=================================================================================================

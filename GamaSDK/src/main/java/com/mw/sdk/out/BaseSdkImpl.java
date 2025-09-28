@@ -1038,7 +1038,8 @@ public class BaseSdkImpl implements IMWSDK {
                 || ChannelPlatform.ONESTORE.getChannel_platform().equals(channel_platform)
                 || ChannelPlatform.SAMSUNG.getChannel_platform().equals(channel_platform)
                 || ChannelPlatform.Xiaomi.getChannel_platform().equals(channel_platform)
-                || ChannelPlatform.NOWGG.getChannel_platform().equals(channel_platform)){
+                || ChannelPlatform.NOWGG.getChannel_platform().equals(channel_platform)
+                || ChannelPlatform.BAZAAR.getChannel_platform().equals(channel_platform)){
             checkGoogleOrWebPay(activity, payCreateOrderReqBean);
         }else {
             doWebPay(activity, payCreateOrderReqBean);
