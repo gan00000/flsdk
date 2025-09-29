@@ -1,11 +1,13 @@
 package com.thirdlib.irCafebazaar
 
 import android.app.Activity
+import android.text.TextUtils
 import androidx.appcompat.app.AppCompatActivity
 import com.core.base.utils.PL
 import com.core.base.utils.ResUtil
 import com.core.base.utils.SStringUtil
 import com.core.base.utils.ToastUtils
+import com.mw.sdk.R
 import ir.cafebazaar.poolakey.Connection
 import ir.cafebazaar.poolakey.ConnectionState
 import ir.cafebazaar.poolakey.Payment
@@ -21,6 +23,7 @@ class PoolakeyPayManager private constructor(){
     private lateinit var activity: AppCompatActivity
 
     private val poolakeyPayment by lazy(LazyThreadSafetyMode.NONE) {
+        PL.d("poolakeyPayment init")
         Payment(context = activity, config = paymentConfiguration!!)
     }
 
@@ -61,9 +64,19 @@ class PoolakeyPayManager private constructor(){
 //                ppCallback?.fali("mw_cafebazaar_rsa_public_key is null")
 //                return
 //            }
-            paymentConfiguration = PaymentConfiguration(
-                localSecurityCheck = SecurityCheck.Disable
-            )
+            val rasKey = activity.getString(R.string.mw_bazaar_ras_key)
+            PL.d("rasKey=$rasKey")
+            if (TextUtils.isEmpty(rasKey)){
+                paymentConfiguration = PaymentConfiguration(
+                    localSecurityCheck = SecurityCheck.Disable
+                )
+            }else{
+                PL.d("rasKey 222")
+                paymentConfiguration = PaymentConfiguration(
+                    localSecurityCheck = SecurityCheck.Enable(rasKey)
+                )
+            }
+
         }
 
         startPaymentConnection { result ->
