@@ -1,0 +1,126 @@
+
+ext {
+    sdk_version = "2.3.7"
+    domainUrl= "luckyyx.com"
+}
+
+//常规对象：默认覆盖整个嵌套对象
+//特定 DSL：部分属性（如 Android 的 defaultConfig、CopySpec 的 from）支持智能合并
+//自定义对象：需手动实现合并逻辑
+android {
+
+    buildTypes {
+        release {
+//            multiDexEnabled true //Add this
+//            shrinkResources true  //压缩资源
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+//            shrinkResources false  //压缩资源
+//            minifyEnabled false
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+    }
+
+    productFlavors {
+
+        sdk4 {
+            dimension "1"
+
+            resValue "string", "sdk_game_code", "wgfbir"
+            resValue "string", "sdk_app_key", "f6f4d21d32dab1a6d3df37d175244a33"
+            resValue "string", "sdk_more_language", "true"
+            resValue "string", "sdk_default_server_language", "en_US"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
+            resValue "string", "scheme", "wgfbir"
+            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
+            //facebook
+            resValue "string", "facebook_app_id", "785866174422722"
+            resValue "string", "facebook_client_token", "a373118c016e885456fa540f01c0bf26"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider785866174422722"
+            resValue "string", "fb_login_protocol_scheme", "fb785866174422722"
+            resValue "string", "facebook_app_name", "wgfbir"
+            //ad
+            resValue "string", "adjust_app_token", ""
+            resValue "string", "sdk_appflyer_dev_key", ""
+            //line
+            resValue "string", "line_channelId", ""
+            //naver
+            resValue "string", "naver_client_id", ""
+            resValue "string", "naver_client_secret", ""
+            //tt
+            resValue "string", "mw_tt_app_id", ""
+            //rustore渠道
+            resValue "string", "mw_vk_appid", ""
+            //Google包添加的额外第三方显示
+            resValue "string", "mw_dialog_pay_add_type", ""  //vk,xiaomi
+
+        }
+
+/*
+        channel_google {
+
+            flavorDimensions "1"
+
+            //==========================================start==========================
+            //base
+            applicationId "com.wgfb.andir"
+            versionCode 1
+            versionName "1.0"
+            minSdkVersion 25
+            targetSdkVersion 35
+
+            //参数配置
+            resValue "string", "sdk_appflyer_dev_key", ""
+            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
+            resValue "string", "mw_dialog_pay_add_type", ""  //vk,xiaomi
+            resValue "string", "mw_vk_appid", ""
+            //==========================================end==========================
+
+        }
+
+        channel_meowApk {
+
+            flavorDimensions "1"
+
+            //==========================================start==========================
+            //base
+            applicationId "com.wgfb.andir"
+            versionCode 1
+            versionName "1.0"
+            minSdkVersion 25
+            targetSdkVersion 35
+
+            //参数配置
+            resValue "string", "sdk_appflyer_dev_key", ""
+            resValue "string", "channel_platform", "meow"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
+            resValue "string", "mw_vk_appid", ""
+            //==========================================end==========================
+
+        }
+
+        channel_bazaar {
+
+            flavorDimensions "1"
+
+            //=======================================sdk config==========================
+            applicationId "com.wgfb.bazir"
+            versionCode 1
+            versionName "1.0"
+            minSdkVersion 25
+            targetSdkVersion 35
+
+            //参数配置
+            resValue "string", "sdk_appflyer_dev_key", "EKTJkHsM5mo7harNXemFqK"
+            resValue "string", "channel_platform", "bazaar"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
+            resValue "string", "mw_vk_appid", ""
+            //=======================================sdk config end==========================
+
+        }
+
+
+        */
+    }
+}

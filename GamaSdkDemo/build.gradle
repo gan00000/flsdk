@@ -126,6 +126,14 @@ android {
             keyAlias 'tgfm'
             keyPassword 'tgfm111222'
         }
+
+        key_sign_wula {
+            storeFile file('../signkey/mym2ru_key.jks') //正式签名，以后使用
+            storePassword 'mym2ru888'
+            keyAlias 'mym2ru'
+            keyPassword 'mym2ru888'
+        }
+
     }
 
     buildTypes {
