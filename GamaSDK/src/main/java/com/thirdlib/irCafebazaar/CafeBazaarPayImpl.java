@@ -306,8 +306,8 @@ public class CafeBazaarPayImpl implements IPay {
                 }else {
 
                     String devPayloadStr = createOrderIdRes.getPayData().getOrderId();//URLEncoder.encode(devPayload.toString());
-                    String dynamicPriceToken = createOrderIdReqBean.getUserId() + "_" + devPayloadStr;
-                    doStorePay(activity, createOrderIdReqBean.getProductId(), devPayloadStr, dynamicPriceToken);
+//                    String dynamicPriceToken = createOrderIdReqBean.getUserId() + "_" + devPayloadStr;
+                    doStorePay(activity, createOrderIdReqBean.getProductId(), devPayloadStr, "");
                 }
 
                 dimissDialog();
