@@ -2,7 +2,10 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
+<!--    设置android:layoutDirection="ltr"强制从左到右布局，不然波斯语会使布局混乱-->
+
 
 <!--    <ScrollView-->
 <!--        android:layout_width="match_parent"-->
