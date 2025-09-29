@@ -56,7 +56,7 @@ android {
             resValue "string", "mw_vk_appid", ""
             //Google包添加的额外第三方显示
             resValue "string", "mw_dialog_pay_add_type", ""  //vk,xiaomi
-
+            resValue "string", "sdk_first_silent_login", "false"
         }
 
 /*

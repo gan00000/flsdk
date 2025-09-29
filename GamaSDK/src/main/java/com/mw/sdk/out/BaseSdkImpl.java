@@ -85,6 +85,7 @@ import com.thirdlib.af.AFHelper;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.google.SGoogleProxy;
 import com.thirdlib.huawei.HuaweiPayImpl;
+import com.thirdlib.irCafebazaar.BazaarPayActivity;
 import com.thirdlib.td.TDAnalyticsHelper;
 import com.thirdlib.tiktok.TTSdkHelper;
 import com.thirdlib.vk.RustoreManager;
@@ -465,11 +466,13 @@ public class BaseSdkImpl implements IMWSDK {
         if (iLogin != null) {
             iLogin.onCreate(activity);
         }
-        iPay = IPayFactory.create(activity);
-        if (iPay != null){
-            String channel_platform = ResConfig.getChannelPlatform(activity);
-            iPayMap.put(channel_platform, iPay);
-            iPay.onCreate(activity);
+        String channel_platform = ResConfig.getChannelPlatform(activity);
+        if (!ChannelPlatform.BAZAAR.getChannel_platform().equals(channel_platform)) {
+            iPay = IPayFactory.create(activity);
+            if (iPay != null){
+                iPayMap.put(channel_platform, iPay);
+                iPay.onCreate(activity);
+            }
         }
 
     }
@@ -543,6 +546,20 @@ public class BaseSdkImpl implements IMWSDK {
 
                 if (huaweiPay != null){
                     huaweiPay.onActivityResult(activity, requestCode, resultCode, data);
+                }
+
+                if (requestCode == BazaarPayActivity.Request_Code_BazaarPay && resultCode == BazaarPayActivity.Result_Code_BazaarPay){
+                    int extra_code = data.getIntExtra(BazaarPayActivity.K_Extra_Code, 1001);
+                    BasePayBean payBean = (BasePayBean)data.getSerializableExtra(BazaarPayActivity.K_Extra_Data);
+                    if (extra_code==1000 && payBean != null){
+                        if (iPayListener != null) {
+                            iPayListener.onPaySuccess(payBean.getProductId(),payBean.getCpOrderId());
+                        }
+                    }else {
+                        if (iPayListener != null) {
+                            iPayListener.onPayFail();
+                        }
+                    }
                 }
             }
         });
@@ -1038,10 +1055,15 @@ public class BaseSdkImpl implements IMWSDK {
                 || ChannelPlatform.ONESTORE.getChannel_platform().equals(channel_platform)
                 || ChannelPlatform.SAMSUNG.getChannel_platform().equals(channel_platform)
                 || ChannelPlatform.Xiaomi.getChannel_platform().equals(channel_platform)
-                || ChannelPlatform.NOWGG.getChannel_platform().equals(channel_platform)
-                || ChannelPlatform.BAZAAR.getChannel_platform().equals(channel_platform)){
+                || ChannelPlatform.NOWGG.getChannel_platform().equals(channel_platform)){
             checkGoogleOrWebPay(activity, payCreateOrderReqBean);
-        }else {
+        }else if (ChannelPlatform.BAZAAR.getChannel_platform().equals(channel_platform)){
+
+            Intent intent = new Intent(activity, BazaarPayActivity.class);
+            intent.putExtra(BazaarPayActivity.K_Extra_Data, payCreateOrderReqBean);
+            activity.startActivityForResult(intent, BazaarPayActivity.Request_Code_BazaarPay);
+
+        }else{
             doWebPay(activity, payCreateOrderReqBean);
         }
     }
