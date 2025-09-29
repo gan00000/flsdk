@@ -317,14 +317,14 @@ public class CafeBazaarPayImpl implements IPay {
             public void fail(GPCreateOrderIdRes createOrderIdRes, String msg) {
                 PL.i("requestCreateOrder finish fail");
                 //创建订单失败
-//                if (createOrderIdRes != null && SStringUtil.isNotEmpty(createOrderIdRes.getMessage())) {
-//                    callbackFail(createOrderIdRes.getMessage());
-//                }else{
-//                    callbackFail("error");
-//                }
-                String devPayloadStr = System.currentTimeMillis() + "";//URLEncoder.encode(devPayload.toString());
-                String dynamicPriceToken = devPayloadStr + "ad";
-                doStorePay(activity, createOrderIdReqBean.getProductId(), devPayloadStr, dynamicPriceToken);
+                if (createOrderIdRes != null && SStringUtil.isNotEmpty(createOrderIdRes.getMessage())) {
+                    callbackFail(createOrderIdRes.getMessage());
+                }else{
+                    callbackFail("error");
+                }
+//                String devPayloadStr = System.currentTimeMillis() + "";//URLEncoder.encode(devPayload.toString());
+//                String dynamicPriceToken = devPayloadStr + "ad";
+//                doStorePay(activity, createOrderIdReqBean.getProductId(), devPayloadStr, dynamicPriceToken);
 
             }
         });
