@@ -73,6 +73,7 @@ import com.mw.sdk.pay.IPayCallBack;
 import com.mw.sdk.pay.IPayFactory;
 import com.mw.sdk.pay.gp.GooglePayImpl;
 import com.mw.sdk.utils.DataManager;
+import com.mw.sdk.utils.DialogUtil;
 import com.mw.sdk.utils.ResConfig;
 import com.mw.sdk.utils.SdkUtil;
 import com.mw.sdk.utils.ShareUtil;
@@ -897,6 +898,10 @@ public class BaseSdkImpl implements IMWSDK {
     public void login(final Activity activity, final ILoginCallBack iLoginCallBack) {
         PL.i("sdk login");
         this.activity = activity;
+        if (!isInitSdk){
+            DialogUtil.showAlert(activity,"Not initialized, please call mIMWSDK.onCreate(this, savedInstanceState) to initialize it first");
+            return;
+        }
         this.regRoleInfoTimestamp = 0;
         activity.runOnUiThread(new Runnable() {
             @Override
