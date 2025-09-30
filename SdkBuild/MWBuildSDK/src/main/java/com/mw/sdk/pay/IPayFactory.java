@@ -41,6 +41,9 @@ public class IPayFactory {
         }else if (ChannelPlatform.Xiaomi.getChannel_platform().equals(channel_platform)) {
             SdkVersionUtil sdkVersionUtil = new SdkVersionUtil();
             return sdkVersionUtil.newXiaomiPay();
+        }else if (ChannelPlatform.BAZAAR.getChannel_platform().equals(channel_platform)) {
+            SdkVersionUtil sdkVersionUtil = new SdkVersionUtil();
+            return sdkVersionUtil.newBazaarPay();
         }else {
             return new GooglePayImpl();
         }

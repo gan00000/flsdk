@@ -1,17 +1,21 @@
 package com.thirdlib.irCafebazaar
 
 import android.app.Activity
+import android.text.TextUtils
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.core.base.utils.PL
 import com.core.base.utils.ResUtil
 import com.core.base.utils.SStringUtil
 import com.core.base.utils.ToastUtils
+import com.mw.sdk.R
 import ir.cafebazaar.poolakey.Connection
 import ir.cafebazaar.poolakey.ConnectionState
 import ir.cafebazaar.poolakey.Payment
 import ir.cafebazaar.poolakey.callback.PurchaseQueryCallback
 import ir.cafebazaar.poolakey.config.PaymentConfiguration
 import ir.cafebazaar.poolakey.config.SecurityCheck
+import ir.cafebazaar.poolakey.entity.SkuDetails
 import ir.cafebazaar.poolakey.exception.DynamicPriceNotSupportedException
 import ir.cafebazaar.poolakey.request.PurchaseRequest
 
@@ -21,6 +25,7 @@ class PoolakeyPayManager private constructor(){
     private lateinit var activity: AppCompatActivity
 
     private val poolakeyPayment by lazy(LazyThreadSafetyMode.NONE) {
+        PL.d("poolakeyPayment init")
         Payment(context = activity, config = paymentConfiguration!!)
     }
 
@@ -61,13 +66,26 @@ class PoolakeyPayManager private constructor(){
 //                ppCallback?.fali("mw_cafebazaar_rsa_public_key is null")
 //                return
 //            }
-            paymentConfiguration = PaymentConfiguration(
-                localSecurityCheck = SecurityCheck.Disable
-            )
+            val rasKey = activity.getString(R.string.mw_bazaar_ras_key)
+            PL.d("rasKey=$rasKey")
+            if (TextUtils.isEmpty(rasKey)){
+                paymentConfiguration = PaymentConfiguration(
+                    localSecurityCheck = SecurityCheck.Disable
+                )
+            }else{
+                PL.d("rasKey 222")
+                paymentConfiguration = PaymentConfiguration(
+                    localSecurityCheck = SecurityCheck.Enable(rasKey)
+                )
+            }
+
         }
 
         startPaymentConnection { result ->
             if (result){
+//                getSkuDetail(productId){
+//
+//                }
                 purchaseProduct(productId, payload, dynamicPriceToken)
             }else{
                 ppCallback?.fali("payment connect fail")
@@ -89,7 +107,7 @@ class PoolakeyPayManager private constructor(){
                 request = PurchaseRequest(
                     productId = productId,
                     payload = payload,
-                    dynamicPriceToken = dynamicPriceToken
+//                    dynamicPriceToken = dynamicPriceToken
                 )
             ) {
                 purchaseFlowBegan {
@@ -98,14 +116,16 @@ class PoolakeyPayManager private constructor(){
                 failedToBeginFlow {
                     PL.d("failedToBeginFlow")
                     // bazaar need to update, in this case we only launch purchase without discount
-                    if (it is DynamicPriceNotSupportedException) {
-                        //ToastUtils.toast(activity, "Dynamic price token not supported in this bazaar version")
-                        PL.d("failedToBeginFlow Dynamic price token not supported in this bazaar version")
-                        purchaseProduct(productId, payload, null)
-                    } else {
-                        PL.d("failedToBeginFlow Purchase failed")
-                        ppCallback?.fali("failedToBeginFlow Purchase failed")
-                    }
+//                    if (it is DynamicPriceNotSupportedException) {
+//                        //ToastUtils.toast(activity, "Dynamic price token not supported in this bazaar version")
+//                        PL.d("failedToBeginFlow Dynamic price token not supported in this bazaar version")
+//                        purchaseProduct(productId, payload, null)
+//                    } else {
+//                        PL.d("failedToBeginFlow Purchase failed")
+//                        ppCallback?.fali("failedToBeginFlow Purchase failed")
+//                    }
+
+                    ppCallback?.fali("failedToBeginFlow Purchase failed")
                 }
                 purchaseSucceed { mPurchaseInfo ->
                     PL.d("purchaseSucceed")
@@ -150,15 +170,50 @@ class PoolakeyPayManager private constructor(){
         }
     }
 
-    private fun handlePurchaseQueryCallback(): PurchaseQueryCallback.() -> Unit = {
-        querySucceed { purchasedItems ->
-//            val productId = skuValueInput.text.toString()
-//            purchasedItems.find { it.productId == productId }
-//                ?.also { toast(R.string.general_user_purchased_item_message) }
-//                ?: run { toast(R.string.general_user_did_not_purchased_item_message) }
+//    private fun handlePurchaseQueryCallback(): PurchaseQueryCallback.() -> Unit = {
+//        querySucceed { purchasedItems ->
+////            val productId = skuValueInput.text.toString()
+////            purchasedItems.find { it.productId == productId }
+////                ?.also { toast(R.string.general_user_purchased_item_message) }
+////                ?: run { toast(R.string.general_user_did_not_purchased_item_message) }
+//        }
+//        queryFailed {
+//        }
+//    }
+
+    private fun getSkuDetail(skuId:String, block: (success:Boolean) -> Unit) {
+
+        startPaymentConnection { result ->
+            if (result){
+
+                paymentConnection?.let {
+
+                    if (isConnect && it.getState() == ConnectionState.Connected) {
+                        poolakeyPayment.getInAppSkuDetails(
+                            skuIds = listOf(skuId)
+                        ) {
+                            getSkuDetailsSucceed { mSkuDetails->
+                                PL.d("getSkuDetailsSucceed")
+                                mSkuDetails.forEach { detail ->
+                                    PL.d("detail =" + detail.title)
+                                }
+                                block(true)
+                            }
+                            getSkuDetailsFailed {
+                                PL.d("getSkuDetailsFailed")
+                                block(false)
+                            }
+                        }
+                    }else{
+                        block(false)
+                    }
+                }
+
+            }else{
+                block(false)
+            }
         }
-        queryFailed {
-        }
+
     }
 
     private fun consumePurchasedItem(purchaseToken: String) {

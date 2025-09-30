@@ -42,13 +42,16 @@ public class SdkVersionUtil extends BaseSdkVersion{
         imageView.setImageResource(imageResId);
         // 使光标始终在最后位置
         try {
-            if (SStringUtil.isNotEmpty(showName)) {
-                editText.setText(showName);
+            if (editText != null){
+                if (SStringUtil.isNotEmpty(showName)) {
+                    editText.setText(showName);
 //                Editable etable = editText.getText();
 //                Selection.setSelection(etable, showName.length());
-            }else{
-                editText.setText("");
+                }else{
+                    editText.setText("");
+                }
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }

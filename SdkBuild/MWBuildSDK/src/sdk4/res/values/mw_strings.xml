@@ -1,132 +1,126 @@
 <resources>
 
     <!--启动条款页面-->
-    <string name="gama_ui_term_port_read2">I have read and agree to The Terms Of Service</string>
+    <string name="gama_ui_term_port_read2">شرایط خدمات را خوانده و موافقم</string>
 
     <!--登录页面-->
-    <string name="py_login_save_account">Remember account</string>
-    <string name="py_findpwd">Forgot?</string>
-    <string name="py_register_account">Sign up</string>
+    <string name="py_login_save_account">ذخیره حساب</string>
+    <string name="py_findpwd">فراموشی؟</string>
+    <string name="py_register_account">ثبت‌نام</string>
 
     <!--注册页面-->
-    <string name="py_register_account_phone">Enter your phone number</string>
+    <string name="py_register_account_phone">شماره تلفن</string>
 
     <!--修改密码页面-->
-    <string name="py_login_page_change_pwd">Change password</string>
+    <string name="py_login_page_change_pwd">تغییر رمز عبور</string>
 
     <!--绑定账号页面（通用）-->
-    <string name="py_login_page_account_bind">Binding member account</string>
-    <string name="py_btn_bind">Binding</string>
+    <string name="py_login_page_account_bind">اتصال حساب</string>
+    <string name="py_btn_bind">اتصال</string>
 
-    <string name="account_bind">Account Binding</string>
+    <string name="account_bind">اتصال حساب</string>
 
     <!--验证提示-->
-    <string name="py_account_empty">Account cannot be empty</string>
-    <string name="py_password_empty">Password cannot be empty</string>
-    <string name="py_vfcode_empty">Enter the code</string>
+    <string name="py_account_empty">لطفا حساب را وارد کنید</string>
+    <string name="py_password_empty">لطفا رمز عبور را وارد کنید</string>
+    <string name="py_vfcode_empty">لطفا کد را وارد کنید</string>
 
     <!--自动登录-->
-    <string name="py_auto_login_change">Switching accounts</string>
+    <string name="py_auto_login_change">تعویض حساب</string>
 
-    <string name="py_login_autologin_tips">Accounts %1$s loading</string>
+    <string name="py_login_autologin_tips">در حال بارگذاری %1$s</string>
 
     <!--预设提示-->
-    <string name="py_msg_account_hint">Enter your account number</string>
-    <string name="py_msg_pwd_hint">Enter your password</string>
+    <string name="py_msg_account_hint">شماره حساب</string>
+    <string name="py_msg_pwd_hint">رمز عبور</string>
 
     <!--通用文本-->
-<!--    &#32; == 普通的英文半角空格-->
-<!--    &#160; == &nbsp; == &#xA0; == no-break space （普通的英文半角空格但不换行）-->
-<!--    &#12288; == 中文全角空格 （一个中文宽度）-->
-<!--    &#8194; == &ensp; == en空格 （半个中文宽度）-->
-<!--    &#8195; == &emsp; == em空格 （一个中文宽度）-->
-<!--    &#8197; == 四分之一em空格 （四分之一中文宽度）-->
-<!--    相比平时的空格（&#32;），nbsp拥有不间断（non-breaking）特性。即连续的nbsp会在同一行内显示。即使有100个连续的nbsp，浏览器也不会把它们拆成两行。-->
-    <string name="py_confire">Confirm</string>
+    <string name="py_confire">تایید</string>
+
     <!--SDK功能提示-->
-    <string name="gama_toast_msg_app_not_install">Since you have not installed %s，please install the app first and then share</string>
+    <string name="gama_toast_msg_app_not_install">نصب %s برای اشتراک‌گذاری ضروری است</string>
 
     <!--功能提示-->
-    <string name="py_register_success">successful</string>
+    <string name="py_register_success">موفق</string>
 
-    <string name="py_login_mac_tips">You are logged in %1$s the account number and password are as follows:\n account: %2$s password: %3$s</string>
-    <string name="py_login_mac_saveimage_tips">Your account password has been saved to the album</string>
-    <string name="py_login_autologin_logining_tips">Account is logging</string>
+    <string name="py_login_mac_tips">حساب: %2$s\nرمز عبور: %3$s</string>
+    <string name="py_login_mac_saveimage_tips">رمز در گالری ذخیره شد</string>
+    <string name="py_login_autologin_logining_tips">در حال ورود</string>
 
     <!--有使用 不确定用途-->
-    <string name="py_account_login">Account Login</string>
+    <string name="py_account_login">ورود به حساب</string>
 
     <!--未使用-->
-    <string name="py_login_success">successful</string>
-    <string name="py_account">Account</string>
-    <string name="py_password">Passowrd</string>
+    <string name="py_login_success">موفق</string>
+    <string name="py_account">حساب</string>
+    <string name="py_password">رمز عبور</string>
 
-    <string name="py_login_fb">Facebook Login</string>
-    <string name="py_login_fb_1">FB Login</string>
-    <string name="py_login_google">Google Login</string>
+    <string name="py_login_fb">فیس‌بوک</string>
+    <string name="py_login_fb_1">FB</string>
+    <string name="py_login_google">گوگل</string>
 
-    <string name="py_old_pwd">Old Password</string>
-    <string name="py_new_pwd">New Password</string>
-    <string name="py_phone">Cell phone</string>
-    <string name="py_vfcode">Code</string>
+    <string name="py_old_pwd">رمز قبلی</string>
+    <string name="py_new_pwd">رمز جدید</string>
+    <string name="py_phone">تلفن</string>
+    <string name="py_vfcode">کد</string>
 
-<!--    新增-->
-    <string name="guest_login_btn">Visitor Login</string>
-    <string name="tips_have_account">Already have an account？</string>
-    <string name="py_login">Login</string>
-    <string name="text_register">Sign up</string>
-    <string name="text_login_other">Other</string>
-    <string name="text_reg_tips">*The account email will be used as your verification email to retrieve your password, please fill in carefully</string>
-    <string name="py_register_account_get_vfcode">Send Code</string>
+    <!--    新增-->
+    <string name="guest_login_btn">ورود مهمان</string>
+    <string name="tips_have_account">حساب دارید؟</string>
+    <string name="py_login">ورود</string>
+    <string name="text_register">ثبت‌نام</string>
+    <string name="text_login_other">سایر</string>
+    <string name="text_reg_tips">ایمیل برای بازیابی رمز استفاده می‌شود</string>
+    <string name="py_register_account_get_vfcode">ارسال کد</string>
 
-    <string name="py_register_account_hit">Enter your usual email address</string>
-    <string name="py_register_password_hit">Enter 6-20 characters</string>
-    <string name="py_msg_vfcode_hint">Enter the code</string>
-    <string name="text_input_new_pwd">Enter a new password</string>
-    <string name="text_input_new_pwd_confire">Confirm new password</string>
-    <string name="text_update_account_tips">It is recommended to upgrade the account to improve account security</string>
-    <string name="text_has_update_account_tips">The account has been upgraded to a platform account</string>
-    <string name="text_delete_account">Delete account</string>
-    <string name="text_confire_change">Confirm</string>
-    <string name="text_confire_update">Upgrade</string>
-    <string name="text_change_pwd">Change password</string>
-    <string name="text_bind_account_tips">*The account email will be used as your verification email to retrieve your password, please fill in carefully</string>
+    <string name="py_register_account_hit">ایمیل خود را وارد کنید</string>
+    <string name="py_register_password_hit">6-20 کاراکتر</string>
+    <string name="py_msg_vfcode_hint">کد تأیید</string>
+    <string name="text_input_new_pwd">رمز جدید</string>
+    <string name="text_input_new_pwd_confire">تکرار رمز جدید</string>
+    <string name="text_update_account_tips">ارتقا برای امنیت بیشتر</string>
+    <string name="text_has_update_account_tips">حساب ارتقا یافته</string>
+    <string name="text_delete_account">حذف حساب</string>
+    <string name="text_confire_change">تایید</string>
+    <string name="text_confire_update">ارتقا</string>
+    <string name="text_change_pwd">تغییر رمز</string>
+    <string name="text_bind_account_tips">ایمیل برای بازیابی رمز استفاده می‌شود</string>
 
     <!--找回密码页面-->
-    <string name="py_login_page_forgot_pwd">Forgot</string>
-    <string name="text_welcome_back">Welcome</string>
-    <string name="text_go_game">Continue</string>
-    <string name="text_update_account">Upgrade</string>
+    <string name="py_login_page_forgot_pwd">بازیابی رمز</string>
+    <string name="text_welcome_back">خوش آمدید</string>
+    <string name="text_go_game">ادامه</string>
+    <string name="text_update_account">ارتقا</string>
 
-    <string name="gama_ui_term_not_read">Please agree to the "The Terms Of Service" first</string>
-    <string name="text_confire_reg">Confirm</string>
-    <string name="text_pwd_format">Password only supports 6~20 characters</string>
-    <string name="text_account_format">The format of the mailbox is abnormal, please re-enter</string>
+    <string name="gama_ui_term_not_read">پذیرش شرایط خدمات ضروری است</string>
+    <string name="text_confire_reg">تایید</string>
+    <string name="text_pwd_format">رمز باید 6-20 کاراکتر باشد</string>
+    <string name="text_account_format">فرمت ایمیل نامعتبر است</string>
 
-    <string name="py_error_occur">Network Anomaly</string>
-    <string name="text_i_agree_tips">I have read and agree to</string>
-    <string name="text_i_read_agree">Read and agree</string>
-    <string name="text_term_moqie"> <u>The Terms Of Service</u></string>
-    <string name="sdk_terms_title">The Terms Of Service</string>
-    <string name="text_switch_account">Switching accounts</string>
-    <string name="text_update_account_bind">Upgrade</string>
-    <string name="text_pwd_not_equel">Two inconsistent passwords</string>
-    <string name="py_input_old_password">Enter the old password</string>
-    <string name="text_free_register">No Registration Login</string>
-    <string name="text_old_new_pwd_same">The new password cannot be the same as the old one</string>
-    <string name="text_cancel">Cancellation</string>
-    <string name="text_confire">Confirm</string>
-    <string name="text_delete_account_tips">Please note that deleting your account will completely remove your account from the platform, if you want to confirm the deletion, please click "Confirm".</string>
-    <string name="text_account_bind_success">Upgrade member account successfully, login now...</string>
-    <string name="text_account_bind_success2">Upgrade member account successfully</string>
-    <string name="text_account_change_pwd_success">Modified successfully, logging in now...</string>
-    <string name="text_send_vf_code_success">Code has been sent, please pay attention to check</string>
-    <string name="text_finish_pay">Payment completed</string>
-    <string name="text_account_not_exist">Account does not exist</string>
-    <string name="text_close">Close</string>
-    <string name="text_select_pay_channel">Select payment method</string>
-    <string name="text_other">Other</string>
-    <string name="text_pay_pay">top up</string>
-    <string name="text_account_change_pwd_success2">password has been updated</string>
+    <string name="py_error_occur">خطای شبکه</string>
+    <string name="text_i_agree_tips">موافقت با</string>
+    <string name="text_i_read_agree">خواندم و موافقم</string>
+    <string name="text_term_moqie"><u>شرایط خدمات</u></string>
+    <string name="sdk_terms_title">شرایط خدمات</string>
+    <string name="text_switch_account">تعویض حساب</string>
+    <string name="text_update_account_bind">ارتقا</string>
+    <string name="text_pwd_not_equel">رمزها یکسان نیستند</string>
+    <string name="py_input_old_password">رمز قبلی</string>
+    <string name="text_free_register">ورود بدون ثبت‌نام</string>
+    <string name="text_old_new_pwd_same">رمز جدید نباید تکراری باشد</string>
+    <string name="text_cancel">لغو</string>
+    <string name="text_confire">تایید</string>
+    <string name="text_delete_account_tips">حذف حساب، اطلاعات را به طور کامل پاک می‌کند</string>
+    <string name="text_account_bind_success">ارتقا موفق، در حال ورود...</string>
+    <string name="text_account_bind_success2">ارتقا موفق</string>
+    <string name="text_account_change_pwd_success">تغییر موفق، در حال ورود...</string>
+    <string name="text_send_vf_code_success">کد ارسال شد</string>
+    <string name="text_finish_pay">پرداخت تکمیل شد</string>
+    <string name="text_account_not_exist">حساب وجود ندارد</string>
+    <string name="text_close">بستن</string>
+    <string name="text_select_pay_channel">روش پرداخت</string>
+    <string name="text_other">سایر</string>
+    <string name="text_pay_pay">شارژ</string>
+    <string name="text_account_change_pwd_success2">رمز به روز شد</string>
 
 </resources>
