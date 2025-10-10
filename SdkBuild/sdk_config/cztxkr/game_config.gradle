@@ -1,6 +1,6 @@
 
 ext {
-    sdk_version = "2.3.7"
+    sdk_version = "2.4.0"
     domainUrl= "kodaduck.com"
 }
 
@@ -42,6 +42,8 @@ android {
             resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1886910495227067"
             resValue "string", "fb_login_protocol_scheme", "fb1886910495227067"
             resValue "string", "facebook_app_name", "cztxkr"
+            //shushu
+            resValue "string", "mw_td_appid", "77e4d9f75abb4baab16213a662fe4e56"
             //ad
             resValue "string", "adjust_app_token", ""
             resValue "string", "sdk_appflyer_dev_key", ""

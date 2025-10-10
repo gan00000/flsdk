@@ -50,15 +50,14 @@
             android:gravity="center_vertical">
 
             <com.mw.sdk.login.widget.SDKInputEditTextView
-                android:layout_width="0dp"
+                android:layout_width="200dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:id="@+id/sdkinputview_findpwd_vf"
-                android:layout_marginRight="16dp"
+                android:layout_marginEnd="16dp"
                 />
 
             <Button
-                android:layout_width="100dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/sdk_bg_vfcode"
                 android:gravity="center"

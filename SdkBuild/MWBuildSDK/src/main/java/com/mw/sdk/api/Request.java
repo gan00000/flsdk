@@ -240,7 +240,7 @@ public class Request {
                         Map<String, Object> eventValue = new HashMap<String, Object>();
                         eventValue.put(EventConstant.ParameterName.USER_ID, userId);
 //                        eventValue.put(EventConstant.ParameterName.SERVER_TIME, SdkUtil.getSdkTimestamp(context) + "");
-                        String eventName = EventConstant.EventName.Upgrade_Account.name();
+                        String eventName = EventConstant.EventName.Upgrade_Account_Success.name();
                         SdkEventLogger.sendEventToSever(context,eventName);
                         SdkEventLogger.trackingWithEventName(context,eventName,eventValue);
 

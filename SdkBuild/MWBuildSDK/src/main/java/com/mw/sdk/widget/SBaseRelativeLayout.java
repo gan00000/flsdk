@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 
 public class SBaseRelativeLayout extends RelativeLayout {
 
+
     public SBaseRelativeLayout(Context context) {
         super(context);
     }

@@ -1,42 +1,35 @@
 <resources>
-    <string name="text_phone_bind">اتصال تلفن</string>
-    <string name="text_phone_area_code">پیش‌شماره</string>
-    <string name="text_phone_input_hint">شماره تلفن</string>
-    <string name="text_phone_hasbind_tips">شماره شما با موفقیت ثبت شد</string>
-    <string name="text_area_code_not_empty">لطفا پیش‌شماره را وارد کنید</string>
-    <string name="text_phone_not_empty">لطفا شماره تلفن را وارد کنید</string>
-    <string name="text_phone_not_match">فرمت شماره نامعتبر است</string>
-    <string name="text_vfcode_has_send">کد ارسال شد</string>
-    <string name="text_phone_bind_success">اتصال تلفن موفق</string>
-    <string name="text_has_bind_tips_google">حساب ارتقا یافته</string>
-    <string name="text_has_bind_tips_fb">حساب ارتقا یافته</string>
-    <string name="text_has_bind_tips_guest">حساب ارتقا یافته</string>
-    <string name="text_has_bind_tips_line">حساب ارتقا یافته</string>
-    <string name="text_has_bind_tips_mw">حساب کاربری</string>
-    <string name="text_notice">اعلان</string>
-    <string name="text_account_not_login">لطفا ابتدا وارد شوید</string>
-    <string name="text_has_bind_tips_twitter">حساب ارتقا یافته</string>
-    <string name="text_has_upgrade_account">حساب ارتقا یافته</string>
-    <string name="text_game_name">نام بازی:</string>
-    <string name="text_server_name">سرور:</string>
-    <string name="text_role_name">نام شخصیت:</string>
-    <string name="text_account_name">حساب:</string>
-    <string name="text_account_uid">uid:</string>
-    <string name="text_account_del">حذف حساب</string>
-    <string name="text_block_msg">بازیکن عزیز،
-        \nبه دلیل شناسایی تراکنش بازگشتی، برای حفظ امنیت حساب و محیط بازی عادلانه، لطفا ظرف 24 ساعت با پشتیبانی تماس بگیرید.
-        \n\nدر صورت عدم پیگیری، حساب تا حل موضوع مسدود خواهد شد.
-        \n\nاز همکاری شما سپاسگزاریم.</string>
-    <string name="text_blocked_msg">بازیکن عزیز،
-        \n\nحساب شما به دلیل عدم حل موضوع تراکنش و عدم تماس با پشتیبانی، موقتاً مسدود شده است.
-        \n\nبرای رفع مسدودی، لطفا با پشتیبانی تماس گرفته و اطلاعات لازم را ارائه دهید.
-        \n\nاز همکاری شما سپاسگزاریم.</string>
-
-    <string name="text_personal_clause"><u>قوانین شخصی</u></string>
-    <string name="text_privacy_policy">حریم خصوصی</string>
-    <string name="text_customer">پشتیبانی</string>
-    <string name="text_age_up14">بالای 14 سال</string>
-    <string name="text_age_is_up14">آیا بالای 14 سال هستید؟</string>
-    <string name="text_age_up14_can_useapp">توجه: کاربران زیر 14 سال مجاز به استفاده نیستند</string>
+    <string name="text_phone_bind">Binding phone</string>
+    <string name="text_phone_area_code">Area code</string>
+    <string name="text_phone_input_hint">Enter your phone number</string>
+    <string name="text_phone_hasbind_tips">You have successfully bound, this is your current bound cell phone number</string>
+    <string name="text_area_code_not_empty">Cell phone area code cannot be empty</string>
+    <string name="text_phone_not_empty">Cell phone number cannot be empty</string>
+    <string name="text_phone_not_match">Wrong format of cell phone number</string>
+    <string name="text_vfcode_has_send">Code has been sent</string>
+    <string name="text_phone_bind_success">Cell phone binding success</string>
+    <string name="text_has_bind_tips_google">Account has been upgraded</string>
+    <string name="text_has_bind_tips_fb">Account has been upgraded</string>
+    <string name="text_has_bind_tips_guest">Account has been upgraded</string>
+    <string name="text_has_bind_tips_line">Account has been upgraded</string>
+    <string name="text_has_bind_tips_mw">Member Account</string>
+    <string name="text_notice">Announcement</string>
+    <string name="text_account_not_login">You do not have an account, please login first！</string>
+    <string name="text_has_bind_tips_twitter">Account has been upgraded</string>
+    <string name="text_has_upgrade_account">Account has been upgraded</string>
+    <string name="text_game_name">game name：</string>
+    <string name="text_server_name">server：</string>
+    <string name="text_role_name">role name：</string>
+    <string name="text_account_name">account：</string>
+    <string name="text_account_uid">uid：</string>
+    <string name="text_account_del">delete account</string>
+    <string name="text_block_msg">Dear Player,
+        \nWe\'ve detected refund activity on your account. To ensure your account security and maintain a fair gaming environment, please contact our in-game customer support within 24 hours of receiving this notice for verification and resolution.
+        \n\nFailure to reach out and confirm within the specified timeframe may result in account suspension until the matter is resolved.
+        \n\nWe appreciate your understanding and cooperation.</string>
+    <string name="text_blocked_msg">Dear Player,
+        \n\nYour account has been temporarily suspended due to unresolved refund activity and failure to contact our customer support within the given timeframe.
+        \n\nTo lift the suspension, please reach out to our in-game customer support and provide any relevant information or documentation. We\'ll work with you to resolve this issue as quickly as possible.
+        \n\nWe appreciate your understanding and cooperation.</string>
 
 </resources>

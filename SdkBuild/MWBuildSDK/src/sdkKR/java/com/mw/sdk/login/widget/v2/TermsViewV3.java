@@ -12,12 +12,17 @@ import android.widget.TextView;
 import com.core.base.BaseWebViewClient;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
+import com.mw.sdk.ads.EventConstant;
+import com.mw.sdk.ads.SdkEventLogger;
 import com.mw.sdk.bean.res.ConfigBean;
 import com.mw.sdk.utils.ResConfig;
 import com.mw.sdk.utils.SdkUtil;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.mw.sdk.R;
 import com.mw.sdk.out.ISdkCallBack;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by GanYuanrong on 2017/2/6.
@@ -74,6 +79,9 @@ public class TermsViewV3 extends SLoginBaseRelativeLayout {
         okButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                Map<String,Object> xaMap = new HashMap<>();
+                xaMap.put(EventConstant.ParameterName.standardContractType,"1");
+                SdkEventLogger.trackingWithEventName(getContext(), EventConstant.EventName.standard_contract_click.name(), xaMap);
                 if (iSdkCallBack != null){
                     iSdkCallBack.success();
                 }
@@ -83,7 +91,9 @@ public class TermsViewV3 extends SLoginBaseRelativeLayout {
         closeButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Map<String,Object> xaMap = new HashMap<>();
+                xaMap.put(EventConstant.ParameterName.standardContractType,"2");
+                SdkEventLogger.trackingWithEventName(getContext(), EventConstant.EventName.standard_contract_click.name(), xaMap);
                 if (iSdkCallBack != null){
                     iSdkCallBack.failure();
                 }

@@ -15,12 +15,18 @@ import android.widget.TextView;
 import com.core.base.utils.ApkInfoUtil;
 import com.core.base.utils.AppUtil;
 import com.core.base.utils.PL;
+import com.core.base.utils.SStringUtil;
 import com.core.base.utils.SignatureUtil;
 import com.core.base.utils.ToastUtils;
 import com.mw.sdk.R;
+import com.mw.sdk.ads.EventConstant;
+import com.mw.sdk.ads.SdkEventLogger;
 import com.mw.sdk.constant.ViewType;
 import com.mw.sdk.login.SLoginDialogV2;
 import com.mw.sdk.login.widget.v2.AccountFindPwdLayoutV2;
+import com.mw.sdk.login.widget.v2.AccountLoginLayoutV2;
+import com.mw.sdk.login.widget.v2.AccountRegisterLayoutV2;
+import com.mw.sdk.login.widget.v2.TermsViewV3;
 import com.mw.sdk.utils.DialogUtil;
 import com.mw.sdk.utils.Localization;
 import com.mw.sdk.widget.SBaseDialog;
@@ -117,6 +123,23 @@ public abstract class SLoginBaseRelativeLayout extends SBaseRelativeLayout {
 //        String passwordError1 = getActivity().getResources().getString(R.string.py_password_error) + ":";
 //        String passwordError2 = getActivity().getResources().getString(R.string.py_register_password_hit);
 //        errorStrPassword = passwordError1 + passwordError2;
+
+        String eventName = "";
+        if (this instanceof TermsViewV3){
+            eventName = EventConstant.EventName.standard_contract_view.name();
+        }else if (this instanceof AccountFindPwdLayoutV2){
+            eventName = EventConstant.EventName.find_pwd_view.name();
+        }
+        if (SStringUtil.isNotEmpty(eventName)){
+            String finalEventName = eventName;
+            this.post(new Runnable() {
+                @Override
+                public void run() {
+                    SdkEventLogger.trackingWithEventName(context, finalEventName);
+                }
+            });
+        }
+
     }
 
     private void setCopyKey(View contentView) {
