@@ -285,18 +285,18 @@ public class ThirdPlatBindAccountLayoutV2 extends SLoginBaseRelativeLayout imple
         int imageResId = R.mipmap.mmplaygame_ac;
         String showName = "";
         if (SLoginType.LOGIN_TYPE_FB.equals(accountModel.getLoginType())){
-            imageResId = R.mipmap.mmplaygame_fb_img;
+            imageResId = R.mipmap.icon_fb_2;
             showName = getContext().getResources().getString(R.string.text_has_bind_tips_fb);
 
         }else  if (SLoginType.LOGIN_TYPE_GOOGLE.equals(accountModel.getLoginType())){
-            imageResId = R.mipmap.mmplaygame_gp_img;
+            imageResId = R.mipmap.icon_gp_2;
             showName = getContext().getResources().getString(R.string.text_has_bind_tips_google);
 
         }else  if (SLoginType.LOGIN_TYPE_GUEST.equals(accountModel.getLoginType())){
-            imageResId = R.mipmap.mmplaygame_vister_login;
+            imageResId = R.mipmap.img_guest_2;
             showName = getContext().getResources().getString(R.string.text_has_bind_tips_guest);
         }else if (SLoginType.LOGIN_TYPE_LINE.equals(accountModel.getLoginType())){
-            imageResId = R.mipmap.mmplaygame_le_login;
+            imageResId = R.mipmap.icon_line_2;
             showName = getContext().getResources().getString(R.string.text_has_bind_tips_line);
         }else if (SLoginType.LOGIN_TYPE_MG.equals(accountModel.getLoginType())){
             imageResId = R.mipmap.mmplaygame_ac;
