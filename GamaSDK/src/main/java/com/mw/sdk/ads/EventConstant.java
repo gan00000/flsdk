@@ -2,19 +2,28 @@ package com.mw.sdk.ads;
 
 public class EventConstant {
 
-    public enum EventName{
+    public enum EventName {
         APP_OPEN, //打开app
-        CHECK_PERMISSIONS,//检查权限
-        CHECK_UPDATE,//检查更新
-        CHECK_RESOURCES,//检查资源
         OPEN_LOGIN_SCREEN,//打开sdk登录页面
         LOGIN_SUCCESS,//登录成功
         REGISTER_SUCCESS,//注册成功
+        Upgrade_Account_Success,//升级账号
+
+        @Deprecated
+        CHECK_PERMISSIONS,//检查权限
+        @Deprecated
+        CHECK_UPDATE,//检查更新
+        @Deprecated
+        CHECK_RESOURCES,//检查资源
+        @Deprecated
         SELECT_SERVER,//选择服务器
+        @Deprecated
         CREATE_ROLE,//创建角色
+        @Deprecated
         START_GUIDE,//新手引导
+        @Deprecated
         COMPLETE_GUIDE,//完成新手引导
-        Upgrade_Account,//升级账号
+
         second_purchase,//二次充值
         Paid_D2Login,//首日注册付费用户第二天 登录
         Initiate_Checkout,//打开付款界面
@@ -22,9 +31,23 @@ public class EventConstant {
         purchase_over4,//用户-注册首日-单笔支付大于4 (不是累计)上报,每次都报
 
         select_google,
-        select_other,
         DetailedLevel,
         AchieveLevel_40,
+
+        recharge_third_click,
+        //new 10.9
+        sdk_login_view,
+        sdk_login_click,
+        guest_login_click,
+        facebook_login_click,
+        google_login_click,
+        sdk_register_view,
+        sdk_register_click,
+        find_pwd_view,
+        find_pwd_send_code_click,
+        find_pwd_confirm_click,
+        standard_contract_view,
+        standard_contract_click,
 
         /**
          * 首储事件
@@ -73,7 +96,7 @@ public class EventConstant {
      */
     public static final String GAMA_RETENTION = "event_%dretention";
 
-    public static class ParameterName{
+    public static class ParameterName {
 
         /**
          * 角色名
@@ -112,15 +135,19 @@ public class EventConstant {
 
         public static final String TIME = "time";
         public static final String SERVER_TIME = "serverTimestamp";
+        public static final String isLoginSuccess = "isLoginSuccess";
+        public static final String isRegisterSuccess = "isRegisterSuccess";
+        public static final String isPwdModifySuccess = "isPwdModifySuccess";
+        public static final String standardContractType = "standardContractType";
 
     }
 
 
     public static class AdType {
 
-        public static final int AdTypeFacebook = 1<<1;
-        public static final int AdTypeFirebase = 1<<2;
-        public static final int AdTypeAppsflyer = 1<<3;
+        public static final int AdTypeFacebook = 1 << 1;
+        public static final int AdTypeFirebase = 1 << 2;
+        public static final int AdTypeAppsflyer = 1 << 3;
         public static final int AdTypeAllChannel = AdTypeFacebook | AdTypeFirebase | AdTypeAppsflyer;
     }
 }

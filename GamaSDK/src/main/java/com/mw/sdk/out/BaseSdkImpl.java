@@ -1225,7 +1225,7 @@ public class BaseSdkImpl implements IMWSDK {
                     doWebPay(activity, payCreateOrderReqBean);
                 }
 
-                trackEvent(activity, EventConstant.EventName.select_other.name());
+                trackEvent(activity, EventConstant.EventName.recharge_third_click.name());
                 if (commonDialog != null){
                     commonDialog.dismiss();
                 }

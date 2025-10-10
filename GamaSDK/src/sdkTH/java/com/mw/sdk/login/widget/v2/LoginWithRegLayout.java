@@ -10,6 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.mw.sdk.R;
+import com.mw.sdk.ads.EventConstant;
+import com.mw.sdk.ads.SdkEventLogger;
 import com.mw.sdk.bean.AccountModel;
 import com.mw.sdk.bean.res.ConfigBean;
 import com.mw.sdk.constant.ViewType;
@@ -173,7 +175,7 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
                 }
             }
         }
-
+        SdkEventLogger.trackingWithEventName(getContext(), EventConstant.EventName.sdk_login_view.name());
         return contentView;
     }
 
@@ -265,6 +267,7 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
 
             mAccountRegisterLayoutV2.startAnimation(reg_out_animation);
             mAccountLoginV2.startAnimation(login_enter_animation);
+            SdkEventLogger.trackingWithEventName(getContext(), EventConstant.EventName.sdk_login_view.name());
 
         }else{
 
@@ -286,6 +289,7 @@ public class LoginWithRegLayout extends SLoginBaseRelativeLayout implements View
 
             mAccountLoginV2.startAnimation(login_out_animation);
             mAccountRegisterLayoutV2.startAnimation(reg_enter_animation);
+            SdkEventLogger.trackingWithEventName(getContext(), EventConstant.EventName.sdk_register_view.name());
 
         }
 
