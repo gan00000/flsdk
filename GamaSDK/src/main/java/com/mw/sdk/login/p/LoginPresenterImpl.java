@@ -365,7 +365,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 public void fail(String msg) {
 
                     Map<String, Object> eventValue = new HashMap<String, Object>();
-                    eventValue.put(EventConstant.ParameterName.isLoginSuccess,"2");
+                    eventValue.put(EventConstant.ParameterName.isSuccess,"2");
                     SdkEventLogger.trackingWithEventName(activity, EventConstant.EventName.facebook_login_click.name(), eventValue);
                 }
             });
@@ -402,7 +402,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 //                        showLoginView();
 //                    }
                     Map<String, Object> eventValue = new HashMap<String, Object>();
-                    eventValue.put(EventConstant.ParameterName.isLoginSuccess,"2");
+                    eventValue.put(EventConstant.ParameterName.isSuccess,"2");
                     SdkEventLogger.trackingWithEventName(getContext(), EventConstant.EventName.google_login_click.name(), eventValue);
                 }
             }
@@ -517,7 +517,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 //                        ToastUtils.toast(getActivity(), R.string.py_login_success);
 
                         Map<String, Object> eventValue = new HashMap<String, Object>();
-                        eventValue.put(EventConstant.ParameterName.isLoginSuccess,"1");
+                        eventValue.put(EventConstant.ParameterName.isSuccess,"1");
                         if (SLoginType.LOGIN_TYPE_GOOGLE.equals(thirdLoginRegRequestBean.getRegistPlatform())){
                             SdkEventLogger.trackingWithEventName(getContext(), EventConstant.EventName.google_login_click.name(), eventValue);
                         }
@@ -533,7 +533,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                             }
                         }
                         Map<String, Object> eventValue = new HashMap<String, Object>();
-                        eventValue.put(EventConstant.ParameterName.isLoginSuccess,"2");
+                        eventValue.put(EventConstant.ParameterName.isSuccess,"2");
                         if (SLoginType.LOGIN_TYPE_GOOGLE.equals(thirdLoginRegRequestBean.getRegistPlatform())){
                             SdkEventLogger.trackingWithEventName(getContext(), EventConstant.EventName.google_login_click.name(), eventValue);
                         }
@@ -542,7 +542,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                     ToastUtils.toast(getActivity(), R.string.py_error_occur);
 
                     Map<String, Object> eventValue = new HashMap<String, Object>();
-                    eventValue.put(EventConstant.ParameterName.isLoginSuccess,"2");
+                    eventValue.put(EventConstant.ParameterName.isSuccess,"2");
                     if (SLoginType.LOGIN_TYPE_GOOGLE.equals(thirdLoginRegRequestBean.getRegistPlatform())){
                         SdkEventLogger.trackingWithEventName(getContext(), EventConstant.EventName.google_login_click.name(), eventValue);
                     }
@@ -556,7 +556,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             @Override
             public void noData() {
                 Map<String, Object> eventValue = new HashMap<String, Object>();
-                eventValue.put(EventConstant.ParameterName.isLoginSuccess,"2");
+                eventValue.put(EventConstant.ParameterName.isSuccess,"2");
                 if (SLoginType.LOGIN_TYPE_GOOGLE.equals(thirdLoginRegRequestBean.getRegistPlatform())){
                     SdkEventLogger.trackingWithEventName(getContext(), EventConstant.EventName.google_login_click.name(), eventValue);
                 }
@@ -760,7 +760,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         eventValue.put(EventConstant.ParameterName.USER_ID, userId);
 //                        eventValue.put(EventConstant.ParameterName.SERVER_TIME, SdkUtil.getSdkTimestamp(getActivity()) + "");
                         String eventName = EventConstant.EventName.Upgrade_Account_Success.name();
-                        SdkEventLogger.sendEventToSever(getActivity(),eventName);
+                        //SdkEventLogger.sendEventToSever(getActivity(),eventName);
                         SdkEventLogger.trackingWithEventName(getActivity(),eventName,eventValue);
 
                         SdkUtil.saveAccountModel(getActivity(), account, pwd,sLoginResponse.getData().getUserId(),sLoginResponse.getData().getToken(),
@@ -818,7 +818,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         }
 
                         Map<String, Object> eventValue = new HashMap<String, Object>();
-                        eventValue.put(EventConstant.ParameterName.isLoginSuccess,"1");
+                        eventValue.put(EventConstant.ParameterName.isSuccess,"1");
                         SdkEventLogger.trackingWithEventName(activity, EventConstant.EventName.guest_login_click.name(), eventValue);
 
                         handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_GUEST);
@@ -832,7 +832,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                             sfCallBack.fail("",sLoginResponse.getMessage());
                         }
                         Map<String, Object> eventValue = new HashMap<String, Object>();
-                        eventValue.put(EventConstant.ParameterName.isLoginSuccess,"2");
+                        eventValue.put(EventConstant.ParameterName.isSuccess,"2");
                         SdkEventLogger.trackingWithEventName(activity, EventConstant.EventName.guest_login_click.name(), eventValue);
 
                     }
@@ -843,7 +843,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         sfCallBack.fail("","");
                     }
                     Map<String, Object> eventValue = new HashMap<String, Object>();
-                    eventValue.put(EventConstant.ParameterName.isLoginSuccess,"2");
+                    eventValue.put(EventConstant.ParameterName.isSuccess,"2");
                     SdkEventLogger.trackingWithEventName(activity, EventConstant.EventName.guest_login_click.name(), eventValue);
 
                 }
@@ -958,7 +958,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                                 "",true,sLoginResponse.getData().isBind());
 
                         Map<String, Object> eventValue = new HashMap<String, Object>();
-                        eventValue.put(EventConstant.ParameterName.isLoginSuccess,"1");
+                        eventValue.put(EventConstant.ParameterName.isSuccess,"1");
                         SdkEventLogger.trackingWithEventName(getContext(), EventConstant.EventName.facebook_login_click.name(), eventValue);
 
                         handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_FB);
@@ -973,14 +973,14 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         }
 
                         Map<String, Object> eventValue = new HashMap<String, Object>();
-                        eventValue.put(EventConstant.ParameterName.isLoginSuccess,"2");
+                        eventValue.put(EventConstant.ParameterName.isSuccess,"2");
                         SdkEventLogger.trackingWithEventName(getContext(), EventConstant.EventName.facebook_login_click.name(), eventValue);
 
                     }
                 } else {
                     ToastUtils.toast(getActivity(), R.string.py_error_occur);
                     Map<String, Object> eventValue = new HashMap<String, Object>();
-                    eventValue.put(EventConstant.ParameterName.isLoginSuccess,"2");
+                    eventValue.put(EventConstant.ParameterName.isSuccess,"2");
                     SdkEventLogger.trackingWithEventName(getContext(), EventConstant.EventName.facebook_login_click.name(), eventValue);
                 }
 //                showLoginWithRegView();
@@ -995,7 +995,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             public void noData() {
 //                showLoginWithRegView();
                 Map<String, Object> eventValue = new HashMap<String, Object>();
-                eventValue.put(EventConstant.ParameterName.isLoginSuccess,"2");
+                eventValue.put(EventConstant.ParameterName.isSuccess,"2");
                 SdkEventLogger.trackingWithEventName(getContext(), EventConstant.EventName.facebook_login_click.name(), eventValue);
             }
 
@@ -1021,7 +1021,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                                 sLoginResponse.getData().getTimestamp(),true);
 
                         Map<String, Object> eventValue = new HashMap<String, Object>();
-                        eventValue.put(EventConstant.ParameterName.isRegisterSuccess,"1");
+                        eventValue.put(EventConstant.ParameterName.isSuccess,"1");
                         SdkEventLogger.trackingWithEventName(getContext(), EventConstant.EventName.sdk_register_click.name(), eventValue);
 
                         handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_MG);
@@ -1031,14 +1031,14 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         ToastUtils.toast(getActivity(), sLoginResponse.getMessage());
 
                         Map<String, Object> eventValue = new HashMap<String, Object>();
-                        eventValue.put(EventConstant.ParameterName.isRegisterSuccess,"2");
+                        eventValue.put(EventConstant.ParameterName.isSuccess,"2");
                         SdkEventLogger.trackingWithEventName(getContext(), EventConstant.EventName.sdk_register_click.name(), eventValue);
                     }
 
                 } else {
                     ToastUtils.toast(getActivity(), R.string.py_error_occur);
                     Map<String, Object> eventValue = new HashMap<String, Object>();
-                    eventValue.put(EventConstant.ParameterName.isRegisterSuccess,"2");
+                    eventValue.put(EventConstant.ParameterName.isSuccess,"2");
                     SdkEventLogger.trackingWithEventName(getContext(), EventConstant.EventName.sdk_register_click.name(), eventValue);
                 }
             }
@@ -1049,7 +1049,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             @Override
             public void noData() {
                 Map<String, Object> eventValue = new HashMap<String, Object>();
-                eventValue.put(EventConstant.ParameterName.isRegisterSuccess,"2");
+                eventValue.put(EventConstant.ParameterName.isSuccess,"2");
                 SdkEventLogger.trackingWithEventName(getContext(), EventConstant.EventName.sdk_register_click.name(), eventValue);
             }
 
@@ -1404,7 +1404,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                                 sLoginResponse.getData().getTimestamp(),true);//记住账号密码
 
                         Map<String, Object> eventValue = new HashMap<String, Object>();
-                        eventValue.put(EventConstant.ParameterName.isPwdModifySuccess,"1");
+                        eventValue.put(EventConstant.ParameterName.isSuccess,"1");
                         SdkEventLogger.trackingWithEventName(activity, EventConstant.EventName.find_pwd_confirm_click.name(), eventValue);
 
                         handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_MG);
@@ -1414,14 +1414,14 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         ToastUtils.toast(getActivity(), sLoginResponse.getMessage());
 
                         Map<String, Object> eventValue = new HashMap<String, Object>();
-                        eventValue.put(EventConstant.ParameterName.isPwdModifySuccess,"2");
+                        eventValue.put(EventConstant.ParameterName.isSuccess,"2");
                         SdkEventLogger.trackingWithEventName(activity, EventConstant.EventName.find_pwd_confirm_click.name(), eventValue);
                     }
 
                 } else {
                     ToastUtils.toast(getActivity(), R.string.py_error_occur);
                     Map<String, Object> eventValue = new HashMap<String, Object>();
-                    eventValue.put(EventConstant.ParameterName.isPwdModifySuccess,"2");
+                    eventValue.put(EventConstant.ParameterName.isSuccess,"2");
                     SdkEventLogger.trackingWithEventName(activity, EventConstant.EventName.find_pwd_confirm_click.name(), eventValue);
                 }
             }
@@ -1434,7 +1434,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             @Override
             public void noData() {
                 Map<String, Object> eventValue = new HashMap<String, Object>();
-                eventValue.put(EventConstant.ParameterName.isPwdModifySuccess,"2");
+                eventValue.put(EventConstant.ParameterName.isSuccess,"2");
                 SdkEventLogger.trackingWithEventName(activity, EventConstant.EventName.find_pwd_confirm_click.name(), eventValue);
             }
 
@@ -1704,7 +1704,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                         }
 //                        ToastUtils.toast(getActivity(), R.string.py_login_success);
                         Map<String, Object> eventValue = new HashMap<String, Object>();
-                        eventValue.put(EventConstant.ParameterName.isLoginSuccess,"1");
+                        eventValue.put(EventConstant.ParameterName.isSuccess,"1");
                         SdkEventLogger.trackingWithEventName(activity, EventConstant.EventName.sdk_login_click.name(), eventValue);
 
                         handleRegisteOrLoginSuccess(sLoginResponse,rawResult, SLoginType.LOGIN_TYPE_MG);
@@ -1717,7 +1717,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 //                            refreshVfCode();
 //                        }
                         Map<String, Object> eventValue = new HashMap<String, Object>();
-                        eventValue.put(EventConstant.ParameterName.isLoginSuccess,"2");
+                        eventValue.put(EventConstant.ParameterName.isSuccess,"2");
                         SdkEventLogger.trackingWithEventName(activity, EventConstant.EventName.sdk_login_click.name(), eventValue);
                     }
                 }else{
@@ -1728,7 +1728,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 //                        refreshVfCode();
 //                    }
                     Map<String, Object> eventValue = new HashMap<String, Object>();
-                    eventValue.put(EventConstant.ParameterName.isLoginSuccess,"2");
+                    eventValue.put(EventConstant.ParameterName.isSuccess,"2");
                     SdkEventLogger.trackingWithEventName(activity, EventConstant.EventName.sdk_login_click.name(), eventValue);
                 }
             }
@@ -1750,7 +1750,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 //                    refreshVfCode();
 //                }
                 Map<String, Object> eventValue = new HashMap<String, Object>();
-                eventValue.put(EventConstant.ParameterName.isLoginSuccess,"2");
+                eventValue.put(EventConstant.ParameterName.isSuccess,"2");
                 SdkEventLogger.trackingWithEventName(activity, EventConstant.EventName.sdk_login_click.name(), eventValue);
             }
 

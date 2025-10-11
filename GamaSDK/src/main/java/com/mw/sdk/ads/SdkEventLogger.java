@@ -34,6 +34,7 @@ import com.thirdlib.td.TDAnalyticsHelper;
 import com.thirdlib.tiktok.TTSdkHelper;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -51,7 +52,7 @@ public class SdkEventLogger {
             AFHelper.activityOnCreate(activity);
             SingularUtil.initSingularSDK(activity);
             //SFacebookProxy.initFbSdk(activity.getApplicationContext());
-            sendEventToSever(activity,EventConstant.EventName.APP_OPEN.name());
+            //sendEventToSever(activity,EventConstant.EventName.APP_OPEN.name());
             trackingWithEventName(activity, EventConstant.EventName.APP_OPEN.name(), null, EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
         } catch (Exception e) {
             e.printStackTrace();
@@ -76,7 +77,7 @@ public class SdkEventLogger {
             eventValue.put(EventConstant.ParameterName.USER_ID, userId);
             eventValue.put(EventConstant.ParameterName.SERVER_TIME, SdkUtil.getSdkTimestamp(activity) + "");
             String eventName = EventConstant.EventName.LOGIN_SUCCESS.name();
-            sendEventToSever(activity,eventName);
+            //sendEventToSever(activity,eventName);
             trackingWithEventName(activity,eventName,eventValue, EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
 
             SUserInfo sUserInfo = SdkUtil.getSUserInfo(activity, userId);
@@ -116,7 +117,7 @@ public class SdkEventLogger {
             eventValue.put(EventConstant.ParameterName.USER_ID, userId);
             eventValue.put(EventConstant.ParameterName.SERVER_TIME, SdkUtil.getSdkTimestamp(activity) + "");
             String eventName = EventConstant.EventName.REGISTER_SUCCESS.name();
-            sendEventToSever(activity, EventConstant.EventName.REGISTER_SUCCESS.name());
+            //sendEventToSever(activity, EventConstant.EventName.REGISTER_SUCCESS.name());
             trackingWithEventName(activity,eventName,eventValue,EventConstant.AdType.AdTypeAppsflyer|EventConstant.AdType.AdTypeFirebase);
             trackingWithEventName(activity, FBEventsConstants.EVENT_NAME_COMPLETED_REGISTRATION,eventValue,EventConstant.AdType.AdTypeFacebook);
             trackingWithEventName(activity, "COMPLETE_REGISTRATION_AND",eventValue,EventConstant.AdType.AdTypeFacebook);
@@ -335,6 +336,24 @@ public class SdkEventLogger {
             PL.e("上報事件名為空");
             return;
         }
+
+
+        //发送到服务器log start
+        try {
+            EventConstant.EventName temaName = EventConstant.EventName.valueOf(eventName);
+            PL.d("temaName:" + temaName.name());
+            Map<String, String> sMap = new HashMap<>();
+            if (map != null && !map.isEmpty()) {
+                for (Map.Entry<String, Object> entry : map.entrySet()) {
+                    sMap.put(entry.getKey(), entry.getValue().toString());
+                }
+            }
+            sendEventToServer(context, eventName, sMap,false,false);
+        } catch (Exception e) {
+            PL.w("not exist enum and not send to server eventName=" + eventName);
+        }
+        //发送到服务器log end
+
         try {
             PL.i("tracking EventName:" + eventName);
             if(map == null) { //appsflyer的属性列表
@@ -429,9 +448,9 @@ public class SdkEventLogger {
     }
 
     //发送事件到服务器记录，只是发一次
-    public static void sendEventToSever(Context context, String eventName){
-        sendEventToServer(context, eventName, null,true, false);
-    }
+//    public static void sendEventToSever(Context context, String eventName){
+//        sendEventToServer(context, eventName, null,false, false);
+//    }
 
     public static void sendEventToServer(final Context context, String eventName, Map<String, String> otherParams, boolean isDeviceOnce, boolean isUserOnce) {
         try {

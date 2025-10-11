@@ -73,7 +73,7 @@ public class TermsViewV3 extends SLoginBaseRelativeLayout {
             @Override
             public void onClick(View v) {
                 Map<String,Object> xaMap = new HashMap<>();
-                xaMap.put(EventConstant.ParameterName.standardContractType,"1");
+                xaMap.put(EventConstant.ParameterName.type,"1");
                 SdkEventLogger.trackingWithEventName(getContext(), EventConstant.EventName.standard_contract_click.name(), xaMap);
                 if (iSdkCallBack != null){
                     iSdkCallBack.success();
@@ -85,7 +85,7 @@ public class TermsViewV3 extends SLoginBaseRelativeLayout {
             @Override
             public void onClick(View v) {
                 Map<String,Object> xaMap = new HashMap<>();
-                xaMap.put(EventConstant.ParameterName.standardContractType,"2");
+                xaMap.put(EventConstant.ParameterName.type,"2");
                 SdkEventLogger.trackingWithEventName(getContext(), EventConstant.EventName.standard_contract_click.name(), xaMap);
                 if (iSdkCallBack != null){
                     iSdkCallBack.failure();

@@ -53,7 +53,7 @@ public class WebViewJsObj {
             activity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    SdkEventLogger.sendEventToSever(activity, eventName);
+                    //SdkEventLogger.sendEventToSever(activity, eventName);
                     SdkEventLogger.trackingWithEventName(activity, eventName, null, EventConstant.AdType.AdTypeAllChannel);
                 }
             });
@@ -68,7 +68,7 @@ public class WebViewJsObj {
             activity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    SdkEventLogger.sendEventToSever(activity, eventName);
+                    //SdkEventLogger.sendEventToSever(activity, eventName);
                     String serverTimestamp = SdkUtil.getSdkTimestamp(activity);
                     SdkEventLogger.trackinPayEvent(activity, eventName, orderId, productId, usdPrice,  serverTimestamp,true);
                 }

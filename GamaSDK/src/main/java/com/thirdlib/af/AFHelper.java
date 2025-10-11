@@ -301,7 +301,7 @@ public class AFHelper {
     }
 
 
-    private static void sendToServer(Context context, String eventName, int errCode, String errMsg){
+   /* private static void sendToServer(Context context, String eventName, int errCode, String errMsg){
         if (context == null || SStringUtil.isEmpty(eventName)){
             return;
         }
@@ -324,6 +324,6 @@ public class AFHelper {
             }
         });
 
-    }
+    }*/
 
 }

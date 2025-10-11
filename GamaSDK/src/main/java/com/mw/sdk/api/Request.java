@@ -241,7 +241,7 @@ public class Request {
                         eventValue.put(EventConstant.ParameterName.USER_ID, userId);
 //                        eventValue.put(EventConstant.ParameterName.SERVER_TIME, SdkUtil.getSdkTimestamp(context) + "");
                         String eventName = EventConstant.EventName.Upgrade_Account_Success.name();
-                        SdkEventLogger.sendEventToSever(context,eventName);
+                        //SdkEventLogger.sendEventToSever(context,eventName);
                         SdkEventLogger.trackingWithEventName(context,eventName,eventValue);
 
                         SdkUtil.updateLoginData(context, sLoginResponse);
