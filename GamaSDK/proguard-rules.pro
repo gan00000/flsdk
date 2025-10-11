@@ -33,6 +33,7 @@
 -keep public class com.mw.sdk.pay.WebPayJs { *; }
 -keep public class com.core.base.utils.PL { *; }
 -keep public class com.mw.sdk.ads.EventConstant { *; }
+-keep public class com.mw.sdk.ads.EventConstant$EventName { *; }
 -keep public class com.core.base.bean.BaseResponseModel { *; }
 -keep public class com.core.base.bean.AbsReqeustBean { *; }
 -keep public class com.mw.sdk.bean.res.GPExchangeRes$Data { *; }
