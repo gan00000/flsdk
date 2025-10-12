@@ -340,17 +340,25 @@ public class SdkEventLogger {
 
         //发送到服务器log start
         try {
-            EventConstant.EventName temaName = EventConstant.EventName.valueOf(eventName);
-            PL.d("temaName:" + temaName.name());
+//            EventConstant.EventName temaName = EventConstant.EventName.valueOf(eventName);
+//            PL.d("temaName:" + temaName.name());
             Map<String, String> sMap = new HashMap<>();
             if (map != null && !map.isEmpty()) {
                 for (Map.Entry<String, Object> entry : map.entrySet()) {
                     sMap.put(entry.getKey(), entry.getValue().toString());
                 }
             }
-            sendEventToServer(context, eventName, sMap,false,false);
+            //枚举定义存在的话，使用枚举定义的值
+            String eventName_new = EventConstant.EventName.getEventValue(eventName);
+            if (SStringUtil.isNotEmpty(eventName_new)){
+                eventName = eventName_new;
+                sendEventToServer(context, eventName_new, sMap,false,false);
+            }else {
+                PL.w("not exist enum and not send to server eventName=" + eventName);
+            }
+
         } catch (Exception e) {
-            PL.w("not exist enum and not send to server eventName=" + eventName);
+
         }
         //发送到服务器log end
 
