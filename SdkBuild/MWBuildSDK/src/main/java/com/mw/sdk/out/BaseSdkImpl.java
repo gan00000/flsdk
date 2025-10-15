@@ -852,7 +852,7 @@ public class BaseSdkImpl implements IMWSDK {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                SdkEventLogger.sendEventToSever(activity, eventName);
+                //SdkEventLogger.sendEventToSever(activity, eventName);
                 if (propertieJsonObj != null){
                     SdkEventLogger.trackingWithEventName(activity, eventName, JsonUtil.jsonObjectToMap(propertieJsonObj), EventConstant.AdType.AdTypeAllChannel);
                 }else {

@@ -32,11 +32,4 @@
         \n\n계정 해제 해결을 원하실 경우 게임 내 고객센터로 연락주시고 관련 설명과 증빙서류 부탁드립니다. 최대한 빨리 후속처리 도와드리겠습니다.
         \n\n유저님의 이해와 협조에 감사드립니다!</string>
 
-    <string name="text_personal_clause"><u>이용약관</u></string>
-    <string name="text_privacy_policy">개인정보</string>
-    <string name="text_customer">고객센터</string>
-    <string name="text_age_up14">14세 이상입니다</string>
-    <string name="text_age_is_up14">14세 미만입니까?</string>
-    <string name="text_age_up14_can_useapp">주의: 14세 미만이라면 빠르게 로그아웃하세요. 14세 미만 사용자는 이 앱을 사용할 수 없습니다.</string>
-
 </resources>

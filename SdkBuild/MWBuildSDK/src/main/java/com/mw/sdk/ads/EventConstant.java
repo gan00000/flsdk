@@ -9,21 +9,6 @@ public class EventConstant {
         REGISTER_SUCCESS,//注册成功
         Upgrade_Account_Success,//升级账号
 
-        @Deprecated
-        CHECK_PERMISSIONS,//检查权限
-        @Deprecated
-        CHECK_UPDATE,//检查更新
-        @Deprecated
-        CHECK_RESOURCES,//检查资源
-        @Deprecated
-        SELECT_SERVER,//选择服务器
-        @Deprecated
-        CREATE_ROLE,//创建角色
-        @Deprecated
-        START_GUIDE,//新手引导
-        @Deprecated
-        COMPLETE_GUIDE,//完成新手引导
-
         second_purchase,//二次充值
         Paid_D2Login,//首日注册付费用户第二天 登录
         Initiate_Checkout,//打开付款界面
@@ -53,6 +38,59 @@ public class EventConstant {
          * 首储事件
          */
 //        FIRST_PAY;
+
+        //研发
+
+        @Deprecated
+        CHECK_UPDATE,//检查更新
+        @Deprecated
+        CHECK_RESOURCES,//检查资源
+        @Deprecated
+        SELECT_SERVER,//选择服务器
+        @Deprecated
+        CREATE_ROLE,//创建角色
+
+        //new整理
+        CHECK_PERMISSIONS,//检查权限
+        START_GUIDE,//新手引导
+        COMPLETE_GUIDE,//完成新手引导
+        splashscreen_start,
+        splashscreen_end,
+        check_update_start,
+        check_update_success,
+        check_update_failure,
+        check_resources_start,
+        game_resource_check_noload,
+        game_resource_check_success,
+        game_resource_check_failure,
+        create_role_success,
+        create_role_failure,
+        server_list_load_success,
+        server_list_load_failure,
+        select_server_success,
+        select_server_failure_maintenance,
+        select_server_failure_packed,
+        select_server_failure_noserver;
+
+        // 自定义判断方法（不区分大小写）
+        public static boolean equalsIgnoreCase(String name) {
+            for (EventName eventName : values()) {
+                if (eventName.name().equalsIgnoreCase(name)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public static String getEventValue(String name) {
+            for (EventName eventName : values()) {
+                if (eventName.name().equalsIgnoreCase(name)) {
+                    return eventName.name();
+                }
+            }
+            return null;
+        }
+
     }
 
     /**
@@ -135,10 +173,8 @@ public class EventConstant {
 
         public static final String TIME = "time";
         public static final String SERVER_TIME = "serverTimestamp";
-        public static final String isLoginSuccess = "isLoginSuccess";
-        public static final String isRegisterSuccess = "isRegisterSuccess";
-        public static final String isPwdModifySuccess = "isPwdModifySuccess";
-        public static final String standardContractType = "standardContractType";
+        public static final String isSuccess = "isSuccess";
+        public static final String type = "type";
 
     }
 
