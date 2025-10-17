@@ -68,5 +68,6 @@
     <string name="mw_select_channel_other2"></string>
 
     <string name="mw_bazaar_ras_key"></string>
+    <string name="mw_event_isDeviceOnce">false</string>
 
 </resources>
