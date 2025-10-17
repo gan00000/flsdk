@@ -145,14 +145,14 @@ android {
             // Enables code shrinking, obfuscation, and optimization for only
             // your project's release build type.
 //            minifyEnabled true
-            signingConfig signingConfigs.signv3
+            signingConfig signingConfigs.key_sign_wula
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
         debug {
 //            signingConfig signingConfigs.release_v4
 //            minifyEnabled true
-            signingConfig signingConfigs.signv3
+            signingConfig signingConfigs.key_sign_wula
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -169,19 +169,19 @@ android {
 
             //=======================================sdk config start ==========================
 
-            signingConfig signingConfigs.signv3
+//            signingConfig signingConfigs.signv3
             //base
             //base
-            applicationId "com.yuewan.tgru.vk"
+            applicationId "com.wgfb.bazir"
             minSdkVersion 25
             targetSdkVersion 34
 
-            resValue "string", "sdk_game_code", "tgru"
-            resValue "string", "sdk_app_key", "f2cce538ec5d36b4d725eab7ea227ed1"
+            resValue "string", "sdk_game_code", "wgfbir"
+            resValue "string", "sdk_app_key", "f6f4d21d32dab1a6d3df37d175244a33"
             resValue "string", "sdk_more_language", "true"
             resValue "string", "sdk_default_server_language", "ru_RU"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
             resValue "string", "scheme", "tgen"
-            resValue "string", "channel_platform", "vk"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
+            resValue "string", "channel_platform", "bazaar"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
             //facebook
             resValue "string", "facebook_app_id", "2204564839899628"
             resValue "string", "facebook_client_token", "af097786d9eabaf84543666cd857bce2"
@@ -200,8 +200,7 @@ android {
             resValue "string", "mw_tt_app_id", ""
             //rustore渠道
             resValue "string", "mw_vk_appid", "2063567250"
-
-            //=======================================sdk config end==========================
+//            resValue "string", "mw_bazaar_ras_key", "MIHNMA0GCSqGSIb3DQEBAQUAA4G7ADCBtwKBrwCmMV085u3tIpsMjjlCOq42r8y3PXXWpy49QF2rsUwJOi7XmqGGj9H7kVUNL4dhkNP/nvqIyLQ7zhN/e3cz3rH0apoXPWUh7eHVGtIqbn9bJ3/VIGbSXC0VWlZMHIlMFdBSpZO3VUZ21w604kUJS1l9wwngE3Yt6U1PpvPyIpf4K4K7K9BVaPUL/reytWffKFTB53Tj1FQkI2nJewMcFOq/8Pv7vFfR9Y8fdv1wJ2UCAwEAAQ=="
 
             //=======================================sdk config end==========================
 

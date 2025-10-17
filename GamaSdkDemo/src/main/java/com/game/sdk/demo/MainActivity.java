@@ -22,6 +22,7 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 
 import com.core.base.bean.BaseResponseModel;
@@ -43,7 +44,7 @@ import com.mw.sdk.out.ISdkCallBack;
 import com.mw.sdk.out.MWSdkFactory;
 import com.mw.sdk.utils.SdkUtil;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
     protected Button loginButton, webPayButton, googlePayBtn, shareButton, showPlatform, demo_regRole,
             demo_share;
@@ -116,7 +117,8 @@ public class MainActivity extends Activity {
 //                String skuId = "com.miaoou.6jin";
 //                String skuId = "com.msg.en099";
 //                String skuId = "com.wmwx.sgcz.99";
-                String skuId = "com.wanxin.tgru.99";
+//                String skuId = "com.wanxin.tgru.99";
+                String skuId = "com.aab.sat";
                 mIMWSDK.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(),skuId, extra,roleId,roleName,roleLevel, vipLevel,serverCode, serverName, new IPayListener() {
 
                     @Override
@@ -535,6 +537,7 @@ public class MainActivity extends Activity {
 
 //                mIMWSDK.openUrlBySdkWebview(activity, "https://msgen.onelink.me/K6og/u227mm9b");
 
+                mIMWSDK.trackEvent(MainActivity.this, "standard_activity_get_reward");
             }
         });
 

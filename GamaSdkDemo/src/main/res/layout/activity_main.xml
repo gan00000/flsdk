@@ -39,7 +39,7 @@
                     android:id="@+id/demo_pay_google"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="google储值test" />
+                    android:text="test pay" />
 
                 <Button
                     android:id="@+id/demo_pay_hw"
