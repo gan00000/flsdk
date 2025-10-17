@@ -1,6 +1,6 @@
 
 ext {
-    sdk_version = "2.3.5"
+    sdk_version = "2.3.7"
     domainUrl= "dustyx.com"
 }
 
@@ -56,6 +56,8 @@ android {
             resValue "string", "naver_client_id", ""
             resValue "string", "naver_client_secret", ""
 
+            resValue "string", "mw_event_isDeviceOnce", "true" //是否对设备仅发送一次事件到SDK服务器
+
         }
 
         sdk5 {//第6套，东南亚
@@ -83,6 +85,8 @@ android {
             //naver
             resValue "string", "naver_client_id", ""
             resValue "string", "naver_client_secret", ""
+
+            resValue "string", "mw_event_isDeviceOnce", "true" //是否对设备仅发送一次事件到SDK服务器
 
         }
 
