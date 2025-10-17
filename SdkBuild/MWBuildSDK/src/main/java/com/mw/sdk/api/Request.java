@@ -311,8 +311,8 @@ public class Request {
         }
 
         String sp_key_event = "EVENT_KEY_" + eventName;
-
-        if (isDeviceOnce){//对设备一次
+        String is_server_event_once = context.getResources().getString(R.string.mw_event_isDeviceOnce);
+        if (isDeviceOnce || "true".equals(is_server_event_once)){//对设备一次
 
             if (SStringUtil.isNotEmpty(SPUtil.getSimpleString(context,SdkUtil.SDK_SP_FILE, sp_key_event))){
                 PL.i("sendEventToServer exist for device eventname=" + eventName);

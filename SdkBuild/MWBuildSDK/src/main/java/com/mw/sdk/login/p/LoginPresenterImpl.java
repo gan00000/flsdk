@@ -1058,6 +1058,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
         });
         accountRegisterCmd.excute(SLoginResponse.class);
+        SdkEventLogger.trackingWithEventName(getContext(), EventConstant.EventName.sdk_register_account_start_request.name());
     }
 
     /**
