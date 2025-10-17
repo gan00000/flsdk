@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.core.base.utils.ToastUtils;
+import com.mw.sdk.ads.EventConstant;
+import com.mw.sdk.ads.SdkEventLogger;
 import com.mw.sdk.widget.SBaseRelativeLayout;
 import com.mw.sdk.utils.SdkUtil;
 import com.mw.sdk.R;
@@ -100,6 +102,8 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
     }
 
     private void register() {
+
+        SdkEventLogger.trackingWithEventName(getContext(), EventConstant.EventName.sdk_register_account_click.name());
 
         account = registerAccountEditText.getEditableText().toString().trim();
         if (TextUtils.isEmpty(account)) {

@@ -70,7 +70,9 @@ public class EventConstant {
         select_server_success,
         select_server_failure_maintenance,
         select_server_failure_packed,
-        select_server_failure_noserver;
+        select_server_failure_noserver,
+        sdk_register_account_click,
+        sdk_register_account_start_request;
 
         // 自定义判断方法（不区分大小写）
         public static boolean equalsIgnoreCase(String name) {
