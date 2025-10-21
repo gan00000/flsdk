@@ -433,7 +433,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
                     }else {
                         //平台帐号登入界面这里，帐号输入框这里如果删除或者编辑修改过原内容，帐号类型自动变成平台帐号类型，
                         // icon也变成平台帐号icon，下方的免注册登入也自动变成可编辑状态
-                        PL.i("afterTextChanged...");
+                        //PL.i("afterTextChanged...s=" + s.toString());
                         if(!s.toString().equals(currentAccountModel.getUserId())){
                             AccountModel tempAccountModel = new AccountModel();
                             currentAccountModel = tempAccountModel;
@@ -464,7 +464,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
             }else {
                 loginMainGoFindPwd.setVisibility(VISIBLE);
             }
-            SdkVersionUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(), null);
+            SdkVersionUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(), loginAccountEditText);
             pwdSdkInputEditTextView.setVisibility(View.VISIBLE);
 //                pwdSdkInputEditTextView.setPwdInputEnable(true);
             loginPasswordEditText.setText(password);
