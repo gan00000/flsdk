@@ -444,6 +444,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
 //                            pwdSdkInputEditTextView.setPwdInputEnable(true);
 //                            pwdSdkInputEditTextView.getInputEditText().setText("");
                             setViewStatue(tempAccountModel);
+                            //此处会造成输入框光标移到最前，暂时不管
                         }
                     }
 
