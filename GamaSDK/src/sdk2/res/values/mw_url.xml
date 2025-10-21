@@ -33,7 +33,7 @@
     <string name="mw_sdk_log_pre_url">https://log.mmplaygame.com/</string>
 
     <!--使用者條款 - 服務條款 -->
-    <string name="mw_sdk_terms_service_url">https://member.mmplaygame.com/sdk/agreement/%s_agreement.html</string>
+    <string name="mw_sdk_terms_service_url">https://member.mmplaygame.com/privacy/dev_privacy.html</string>
 
     <!--客服链接-->
     <string name="mw_sdk_service_url"></string>
