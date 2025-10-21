@@ -369,23 +369,23 @@ public class Request {
         simpleHttpRequest.setBaseReqeustBean(sGameBaseRequestBean);
 
         String finalSp_key_event = sp_key_event;
-        PL.i("-----track event send to sever start, eventName=" + eventName);
+        PL.i("-----track event send to sever start name=" + eventName);
         simpleHttpRequest.setReqCallBack(new ISReqCallBack<BaseResponseModel>() {
             @Override
             public void success(BaseResponseModel responseModel, String rawResult) {
-                PL.i("-----track event send to sever success, eventName=" + eventName);
+                PL.i("-----track event send to sever success name=" + eventName);
                 SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE, finalSp_key_event, eventName);
 
             }
 
             @Override
             public void timeout(String code) {
-                PL.i("-----track event send to sever timeout eventname=" + eventName);
+                PL.i("-----track event send to sever timeout name=" + eventName);
             }
 
             @Override
             public void noData() {
-                PL.i("-----track event send to sever success eventname=" + eventName);
+                PL.i("-----track event send to sever success name=" + eventName);
                 SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE, finalSp_key_event, eventName);
             }
 
