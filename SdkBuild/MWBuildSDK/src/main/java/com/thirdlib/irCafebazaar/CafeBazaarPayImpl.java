@@ -77,6 +77,7 @@ public class CafeBazaarPayImpl implements IPay {
 //                            payBean.setPackageName(purchase.getPackageName());
                         payBean.setUsdPrice(skuAmount);
                         if (createOrderIdReqBean != null) {
+                            payBean.setCpOrderId(createOrderIdReqBean.getCpOrderId());
                             payBean.setProductId(createOrderIdReqBean.getProductId());
                         }
 //                    payBean.setmItemType(purchase.getItemType());

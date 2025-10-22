@@ -1,6 +1,6 @@
 
 ext {
-    sdk_version = "2.3.8"
+    sdk_version = "2.4.0"
     domainUrl= "luckyyx.com"
 }
 
