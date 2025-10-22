@@ -86,6 +86,7 @@ public class XiaomiPayImpl implements IPay, XiaoMiPayManager.PurchaseCallback {
                             payBean.setUsdPrice(skuAmount);
                             if (createOrderIdReqBean != null) {
                                 payBean.setProductId(createOrderIdReqBean.getProductId());
+                                payBean.setCpOrderId(createOrderIdReqBean.getCpOrderId());
                             }
 //                    payBean.setmItemType(purchase.getItemType());
 //                            payBean.setOriginPurchaseData(purchase.getOriginalJson());
