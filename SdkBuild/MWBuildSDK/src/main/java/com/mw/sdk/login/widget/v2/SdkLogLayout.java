@@ -28,6 +28,7 @@ public class SdkLogLayout extends SLoginBaseRelativeLayout {
     private View contentView;
 
     protected View allLogView, eventLogView, copyLogView;
+    private View cmsLogView;
     private TextView logTextView;
 
     private SFCallBack sfCallBack;
@@ -63,6 +64,7 @@ public class SdkLogLayout extends SLoginBaseRelativeLayout {
         backView = contentView.findViewById(R.id.tv_log_close);
         allLogView = contentView.findViewById(R.id.tv_log_all);
         eventLogView = contentView.findViewById(R.id.tv_log_event);
+        cmsLogView = contentView.findViewById(R.id.tv_log_cms_event);
         copyLogView = contentView.findViewById(R.id.tv_log_copy);
         logTextView = contentView.findViewById(R.id.tv_log_content);
 
@@ -92,6 +94,29 @@ public class SdkLogLayout extends SLoginBaseRelativeLayout {
                     String log = PL.getLocalLog(getContext());
                     String[] logSs = log.split("\n");
                     Pattern pattern = Pattern.compile("-----track event ");
+
+                    StringBuilder eventLogSb = new StringBuilder();
+                    // 遍历每一行并查找匹配的行
+                    for (String aLog : logSs) {
+                        if (pattern.matcher(aLog).find()) {
+                            eventLogSb.append(aLog).append("\n");
+                        }
+                    }
+
+                    logTextView.setText(eventLogSb.toString());
+                }
+
+            }
+        });
+
+        cmsLogView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (logTextView != null) {
+                    String log = PL.getLocalLog(getContext());
+                    String[] logSs = log.split("\n");
+                    Pattern pattern = Pattern.compile("-----track event send to sever");
 
                     StringBuilder eventLogSb = new StringBuilder();
                     // 遍历每一行并查找匹配的行

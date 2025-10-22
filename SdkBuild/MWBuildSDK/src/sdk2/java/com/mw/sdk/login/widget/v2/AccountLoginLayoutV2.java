@@ -474,7 +474,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
             }else {
                 loginMainGoFindPwd.setVisibility(VISIBLE);
             }
-            SdkVersionUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(), null);
+            SdkVersionUtil.setAccountWithIcon(accountModel,accountSdkInputEditTextView.getIconImageView(), loginAccountEditText);
             pwdSdkInputEditTextView.setVisibility(View.VISIBLE);
 //                pwdSdkInputEditTextView.setPwdInputEnable(true);
             loginPasswordEditText.setText(password);

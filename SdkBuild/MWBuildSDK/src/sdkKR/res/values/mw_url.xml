@@ -36,7 +36,7 @@
     <string name="mw_sdk_log_pre_url">https://log.kodaduck.com/</string>
 
     <!--使用者條款 - 服務條款 -->
-    <string name="mw_sdk_terms_service_url">https://member.kodaduck.com/sdk/agreement/%s_agreement.html</string>
+    <string name="mw_sdk_terms_service_url">https://member.kodaduck.com/privacy/dev_privacy.html</string>
 
     <!--社群banner-->
     <string name="mw_sdk_social_url">https://member.kodaduck.com/sdk/social/%s/index.html</string>
