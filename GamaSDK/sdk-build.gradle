@@ -213,7 +213,7 @@ dependencies {
     implementation "ru.rustore.sdk:review"
 
     //可选 小米
-    implementation 'com.xiaomi.billingclient:billing:1.2.0'
+    implementation 'com.xiaomi.billingclient:billing:1.2.1'
     implementation "com.miui.referrer:homereferrer:1.0.0.7"
 
     //可选 singular
