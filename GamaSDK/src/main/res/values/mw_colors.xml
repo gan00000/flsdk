@@ -96,6 +96,10 @@
 
     <color name="c_indicatorView_selected">#4BACFD</color>
     <color name="c_indicatorView_unselected">#EBEBEB</color>
+    <color name="c_B3B3B3">#B3B3B3</color>
+    <color name="c_F43F3F">#F43F3F</color>
+    <color name="c_2A2A2A">#2A2A2A</color>
+    <color name="c_0277ff">#0277ff</color>
 
 </resources>
 
