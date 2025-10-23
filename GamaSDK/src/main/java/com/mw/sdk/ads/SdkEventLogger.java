@@ -262,9 +262,15 @@ public class SdkEventLogger {
                 TDAnalyticsHelper.trackEvent("pay_success",eventPropertie);
             }
 
+
             if (!linkUser){//不跟用户行为关联
                 return;
             }
+
+            if (usdPrice > 9){//单笔充值超过9美金
+                SdkEventLogger.trackingWithEventName(context, EventConstant.EventName.Purchase_Over9.name(), payEventValues);
+            }
+
             SUserInfo sUserInfo = SdkUtil.getSUserInfo(context, uid);
             if (sUserInfo != null){
                 if (sUserInfo.isPay()){//判断是否付费过

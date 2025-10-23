@@ -14,7 +14,7 @@ public class EventConstant {
         Initiate_Checkout,//打开付款界面
 
         purchase_over4,//用户-注册首日-单笔支付大于4 (不是累计)上报,每次都报
-
+        Purchase_Over9,//单笔充值超过9美金
         select_google,
         DetailedLevel,
         AchieveLevel_40,
