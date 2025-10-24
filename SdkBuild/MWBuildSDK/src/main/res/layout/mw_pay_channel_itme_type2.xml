@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/ll_select_channel_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/text_select_pay_channel_other"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="@color/c_2A2A2A" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/c_B3B3B3"
+            android:layout_marginTop="15dp"
+            />
+
+        <LinearLayout
+            android:id="@+id/ll_channel_native"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:id="@+id/iv_select_channel_gg"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:background="@drawable/sdk_bg_select_pay_channel_2"
+                android:gravity="center">
+
+                <ImageView
+
+                    android:layout_width="110dp"
+                    android:layout_height="23dp"
+                    android:background="@drawable/bg_pay_gg" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_select_channel_ru"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/c_0277ff"
+                >
+
+                <!--<Button
+                    android:id="@+id/bt_select_channel_ru"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:text="@string/text_pay_ru"
+                    android:textAllCaps="false"
+                    android:visibility="gone"
+                    android:textColor="@android:color/white"
+                    android:textSize="17sp" />-->
+
+                <ImageView
+                    android:id="@+id/bt_select_channel_ru"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:src="@mipmap/img_select_channel_ru" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_select_channel_xm"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/sdk_bg_select_pay_channel_2"
+                android:padding="4dp"
+                >
+
+                <ImageView
+                    android:id="@+id/bt_select_channel_xm"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:src="@mipmap/img_select_channel_xiaomi" />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+    
+
+
+
+</RelativeLayout>

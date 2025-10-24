@@ -849,6 +849,9 @@ public class BaseSdkImpl implements IMWSDK {
             Log.i(TAG, "trackEvent eventName is null");
             return;
         }
+        if (eventName.equals(EventConstant.EventName.Purchase_Over9.name())){
+            return;
+        }
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
