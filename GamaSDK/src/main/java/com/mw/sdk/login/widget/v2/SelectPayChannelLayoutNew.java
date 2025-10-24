@@ -20,6 +20,7 @@ import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.mw.sdk.R;
 import com.mw.sdk.bean.res.PayChannelData;
+import com.mw.sdk.bean.res.ToggleResult;
 import com.mw.sdk.constant.ChannelPlatform;
 import com.mw.sdk.login.adapter.PayChannelViewAdapter;
 import com.mw.sdk.login.model.response.SLoginResponse;
@@ -43,12 +44,17 @@ public class SelectPayChannelLayoutNew extends SLoginBaseRelativeLayout {
     private TextView amountTextView;
     private RecyclerView mRecyclerView;
     private PayChannelViewAdapter payChannelViewAdapter;
+
+    private ToggleResult toggleResult;
     private List<PayChannelData> payChannelDatas;
 
-    private SFCallBack<ChannelPlatform> sfCallBack;
+    private SFCallBack<PayChannelData> sfCallBack;
 
-    public void setSfCallBack(SFCallBack<ChannelPlatform> sfCallBack) {
+    public void setSfCallBack(SFCallBack<PayChannelData> sfCallBack) {
         this.sfCallBack = sfCallBack;
+        if (payChannelViewAdapter != null){
+            payChannelViewAdapter.setSfCallBack(sfCallBack);
+        }
     }
 
     public SelectPayChannelLayoutNew(Context context) {
@@ -97,32 +103,72 @@ public class SelectPayChannelLayoutNew extends SLoginBaseRelativeLayout {
         });
 
         SLoginResponse sLoginResponse = SdkUtil.getCurrentUserLoginResponse(getContext());
-        if (sLoginResponse == null || sLoginResponse.getData() == null || SStringUtil.isEmpty(sLoginResponse.getData().getUserId())){
+        if (toggleResult == null || toggleResult.getData() == null || toggleResult.getData().getChannelList() == null
+                || sLoginResponse == null || sLoginResponse.getData() == null || SStringUtil.isEmpty(sLoginResponse.getData().getUserId())){
             return contentView;
         }
 
         uidTextView.setText("uid:" + sLoginResponse.getData().getUserId());
-        amountTextView.setText("");
+        amountTextView.setText(toggleResult.getData().getProductName());
 
-        payChannelDatas = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            PayChannelData payChannelData = new PayChannelData();
-            payChannelData.setChannelName("name=" + i);
-            payChannelDatas.add(payChannelData);
+        //测试数据==============
+//        payChannelDatas = new ArrayList<>();
+//        for (int i = 0; i < 10; i++) {
+//            PayChannelData payChannelData = new PayChannelData();
+//            payChannelData.setChannelName("name=" + i);
+//            payChannelDatas.add(payChannelData);
+//        }
+        //测试数据==============
+
+        //正式数据
+        payChannelDatas = toggleResult.getData().getChannelList();
+
+        PayChannelData payNavtiveData = new PayChannelData();
+        payNavtiveData.setViewType(2);
+        payNavtiveData.setShowPayGG(false);
+        payNavtiveData.setShowPayRutore(false);
+        payNavtiveData.setShowPayXM(false);
+
+        String channel_platform = ResConfig.getChannelPlatform(getContext());
+        if (ChannelPlatform.GOOGLE.getChannel_platform().equals(channel_platform)){
+            payNavtiveData.setShowPayGG(true);
+            String payChannel = getContext().getResources().getString(R.string.mw_dialog_pay_add_type);
+            if(payChannel.contains(ChannelPlatform.VK.getChannel_platform())){
+                payNavtiveData.setShowPayRutore(true);
+            }else {
+                payNavtiveData.setShowPayRutore(false);
+            }
+
+            if(payChannel.contains(ChannelPlatform.Xiaomi.getChannel_platform())){
+                payNavtiveData.setShowPayXM(true);
+            }else {
+                payNavtiveData.setShowPayXM(false);
+            }
+        }else {
+
+            payNavtiveData.setShowPayGG(false);
+            String payChannel = getContext().getResources().getString(R.string.mw_dialog_pay_add_type);
+            if(payChannel.contains(ChannelPlatform.VK.getChannel_platform())){
+                payNavtiveData.setShowPayRutore(true);
+            }else {
+                payNavtiveData.setShowPayRutore(false);
+            }
+
+            if(payChannel.contains(ChannelPlatform.Xiaomi.getChannel_platform())){
+                payNavtiveData.setShowPayXM(true);
+            }else {
+                payNavtiveData.setShowPayXM(false);
+            }
+
         }
 
-        PayChannelData payChannelData2 = new PayChannelData();
-        payChannelData2.setViewType(2);
-        payChannelData2.setShowPayXM(false);
-        payChannelData2.setShowPayGG(true);
-        payChannelData2.setShowPayRutore(true);
-        payChannelDatas.add(payChannelData2);
+        payChannelDatas.add(payNavtiveData);
 
         payChannelViewAdapter = new PayChannelViewAdapter(getContext(), payChannelDatas);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(payChannelViewAdapter);
 
-
+        PL.d("layout onCreateView end");
         return contentView;
     }
 }

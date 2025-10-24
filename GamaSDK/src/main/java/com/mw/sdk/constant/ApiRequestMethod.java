@@ -68,6 +68,7 @@ public class ApiRequestMethod {
     public final static String API_PAYMENT_SAMSUNG = "api/samsung/payment";//https://pay.kodaduck.com/api/samsung/payment
 
     public final static String API_PAYMENT_CHANNEL = "api/payment/channel";
+    public final static String API_PAYMENT_CHANNEL_V2 = "api/payment/v2/channel";
 
     public enum RequestVfcodeInterface {
         register("1"),

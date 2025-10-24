@@ -12,8 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.core.base.callback.SFCallBack;
 import com.mw.sdk.R;
 import com.mw.sdk.bean.res.PayChannelData;
+import com.mw.sdk.constant.ChannelPlatform;
 
 import java.util.List;
 
@@ -22,6 +24,16 @@ public class PayChannelViewAdapter extends RecyclerView.Adapter {
     private List<PayChannelData> payChannelDatas;
     private static final int ITEM_TYPE_NORMAL = 0;//普通类型
     private static final int ITEM_TYPE_SECTION = 2;//特殊类型
+
+    private SFCallBack<PayChannelData> sfCallBack;
+
+    public void setSfCallBack(SFCallBack<PayChannelData> sfCallBack) {
+        this.sfCallBack = sfCallBack;
+    }
+
+    public void setPayChannelDatas(List<PayChannelData> payChannelDatas) {
+        this.payChannelDatas = payChannelDatas;
+    }
 
     public PayChannelViewAdapter(Context context, List<PayChannelData> infos) {
         this.mContext = context;
@@ -47,7 +59,7 @@ public class PayChannelViewAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
         PayChannelData payChannelData = payChannelDatas.get(position);
 
@@ -65,25 +77,41 @@ public class PayChannelViewAdapter extends RecyclerView.Adapter {
             viewHolder.channelName.setText(payChannelData.getChannelName());
             viewHolder.channelDes.setText(payChannelData.getDescribe());
 
+            int maPos = position;
+            viewHolder.channelContentView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (sfCallBack != null){
+                        sfCallBack.success(payChannelData, "" + maPos);
+                    }
+                }
+            });
+
         } else if (holder instanceof PayNativeHolder) {//特殊类型ViewHolder
             PayNativeHolder payNativeHolder = (PayNativeHolder) holder;
 
             payNativeHolder.iv_select_channel_gg.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    if (sfCallBack != null){
+                        sfCallBack.success(null,ChannelPlatform.GOOGLE.getChannel_platform());
+                    }
                 }
             });
             payNativeHolder.rl_select_channel_ru.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    if (sfCallBack != null){
+                        sfCallBack.success(null,ChannelPlatform.VK.getChannel_platform());
+                    }
                 }
             });
             payNativeHolder.rl_select_channel_xm.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    if (sfCallBack != null){
+                        sfCallBack.success(null,ChannelPlatform.Xiaomi.getChannel_platform());
+                    }
                 }
             });
 
@@ -118,12 +146,14 @@ public class PayChannelViewAdapter extends RecyclerView.Adapter {
         ImageView channelImageView;
         TextView channelName;
         TextView channelDes;
+        View channelContentView;
 
         PayChannelHolder(@NonNull View itemView) {
             super(itemView);
             channelImageView = itemView.findViewById(R.id.iv_paychannel_icon);
             channelName = itemView.findViewById(R.id.tv_paychannel_name);
             channelDes = itemView.findViewById(R.id.tv_paychannel_des);
+            channelContentView = itemView.findViewById(R.id.ll_select_channel_rv_item);
         }
     }
 
