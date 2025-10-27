@@ -4,18 +4,14 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.ApkInfoUtil;
-import com.core.base.utils.AppUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.mw.sdk.R;
@@ -28,7 +24,6 @@ import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.mw.sdk.utils.ResConfig;
 import com.mw.sdk.utils.SdkUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -84,7 +79,7 @@ public class SelectPayChannelLayoutNew extends SLoginBaseRelativeLayout {
 
     public View onCreateView(LayoutInflater inflater) {
 
-        contentView = inflater.inflate(R.layout.mw_select_pay_channel_newa, null);
+        contentView = inflater.inflate(R.layout.mw_select_pay_channel_v2, null);
 
         backView = contentView.findViewById(R.id.iv_select_channel_close);
         mRecyclerView = contentView.findViewById(R.id.mw_rv_select_paychannel);
