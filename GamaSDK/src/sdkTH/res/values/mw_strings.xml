@@ -129,4 +129,7 @@
     <string name="text_pay_pay">เติมเงิน</string>
     <string name="text_account_change_pwd_success2">การเปลี่ยนรหัสผ่านสำเร็จ</string>
 
+    <string name="text_pay_ru">Rustore Pay</string>
+    <string name="text_select_pay_channel_other">เลือกวิธีการชำระเงินอื่น</string>
+
 </resources>

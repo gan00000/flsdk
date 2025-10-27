@@ -129,4 +129,7 @@
     <string name="text_pay_pay">储值</string>
     <string name="text_account_change_pwd_success2">密碼修改成功</string>
 
+    <string name="text_pay_ru">Rustore Pay</string>
+    <string name="text_select_pay_channel_other">選擇其他支付方式</string>
+
 </resources>

@@ -129,4 +129,7 @@
     <string name="text_pay_pay">Пополнить счет</string>
     <string name="text_account_change_pwd_success2">Пароль изменен</string>
 
+    <string name="text_pay_ru">Rustore Pay</string>
+    <string name="text_select_pay_channel_other">Выберите другой способ оплаты</string>
+
 </resources>

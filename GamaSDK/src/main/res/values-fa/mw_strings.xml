@@ -123,4 +123,7 @@
     <string name="text_pay_pay">شارژ</string>
     <string name="text_account_change_pwd_success2">رمز به روز شد</string>
 
+    <string name="text_pay_ru">Rustore Pay</string>
+    <string name="text_select_pay_channel_other">Select another payment method</string>
+
 </resources>

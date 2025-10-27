@@ -129,4 +129,7 @@
     <string name="text_pay_pay">Nạp tiền</string>
     <string name="text_account_change_pwd_success2">mật khẩu đã được cập nhật</string>
 
+    <string name="text_pay_ru">Rustore Pay</string>
+    <string name="text_select_pay_channel_other">Chọn phương thức thanh toán khác</string>
+
 </resources>
