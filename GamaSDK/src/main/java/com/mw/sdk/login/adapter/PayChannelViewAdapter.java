@@ -82,7 +82,7 @@ public class PayChannelViewAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View v) {
                     if (sfCallBack != null){
-                        sfCallBack.success(payChannelData, "" + maPos);
+                        sfCallBack.fail(payChannelData, "" + maPos);
                     }
                 }
             });

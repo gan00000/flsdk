@@ -142,14 +142,14 @@ public class SelectPayChannelLayoutNew extends SLoginBaseRelativeLayout {
         }else {
 
             payNavtiveData.setShowPayGG(false);
-            String payChannel = getContext().getResources().getString(R.string.mw_dialog_pay_add_type);
-            if(payChannel.contains(ChannelPlatform.VK.getChannel_platform())){
+
+            if (ChannelPlatform.VK.getChannel_platform().equals(channel_platform)){
                 payNavtiveData.setShowPayRutore(true);
             }else {
                 payNavtiveData.setShowPayRutore(false);
             }
 
-            if(payChannel.contains(ChannelPlatform.Xiaomi.getChannel_platform())){
+            if(ChannelPlatform.Xiaomi.getChannel_platform().equals(channel_platform)){
                 payNavtiveData.setShowPayXM(true);
             }else {
                 payNavtiveData.setShowPayXM(false);
@@ -157,7 +157,9 @@ public class SelectPayChannelLayoutNew extends SLoginBaseRelativeLayout {
 
         }
 
-        payChannelDatas.add(payNavtiveData);
+        if (payNavtiveData.isShowPayGG() || payNavtiveData.isShowPayRutore() || payNavtiveData.isShowPayXM()){
+            payChannelDatas.add(payNavtiveData);
+        }
 
         payChannelViewAdapter = new PayChannelViewAdapter(getContext(), payChannelDatas);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
