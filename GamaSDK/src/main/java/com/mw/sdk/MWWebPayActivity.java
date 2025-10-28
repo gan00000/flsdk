@@ -72,6 +72,8 @@ public class MWWebPayActivity extends MWBaseWebActivity {
             ToastUtils.toast(getApplicationContext(),"url error");
             PL.i("webUrl is empty");
         }else{
+
+            PL.d("webUrl=" + webUrl);
             sWebView.loadUrl(webUrl);
 //            sWebView.loadUrl("https://play.google.com/store/apps/details?id=tw.com.iwplay.tlbbhk&hl=zh-CN");
         }

@@ -59,6 +59,7 @@ public class MWBaseWebActivity extends SBaseSdkActivity {
                 ToastUtils.toast(getApplicationContext(),"url error");
                 PL.i("webUrl is empty");
             }else{
+                PL.d("webUrl=" + webUrl);
                 sWebView.loadUrl(webUrl);
             }
         }
