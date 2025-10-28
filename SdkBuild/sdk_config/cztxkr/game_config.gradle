@@ -50,8 +50,8 @@ android {
             //line
             resValue "string", "line_channelId", ""
             //naver
-            resValue "string", "naver_client_id", "vUGOJIyqjlzgFchNNUXC"
-            resValue "string", "naver_client_secret", "DY_Wr95TSB"
+            resValue "string", "naver_client_id", "7VtysYxrbmKodA_WsG9R"
+            resValue "string", "naver_client_secret", "Mz2hAsJoYH"
             //tt
             resValue "string", "mw_tt_app_id", ""
             //rustore渠道
