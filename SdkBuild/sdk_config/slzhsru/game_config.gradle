@@ -175,6 +175,25 @@ android {
             //==========================================end==========================
 
         }
+
+        channel_huawei {
+
+            flavorDimensions "1"
+
+            //==========================================start==========================
+            //base
+            applicationId "com.slzhs.huawei"
+            versionCode 1
+            versionName "1.0"
+            minSdkVersion 25
+            targetSdkVersion 35
+
+            //参数配置
+            resValue "string", "channel_platform", "huawei"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
+            //==========================================end==========================
+
+        }
+
         */
     }
 }
