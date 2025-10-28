@@ -57,6 +57,7 @@ import com.mw.sdk.bean.res.ToggleResult;
 import com.mw.sdk.callback.FloatButtionClickCallback;
 import com.mw.sdk.callback.FloatCallback;
 import com.mw.sdk.callback.IPayListener;
+import com.mw.sdk.constant.ApiRequestMethod;
 import com.mw.sdk.constant.ChannelPlatform;
 import com.mw.sdk.constant.RequestCode;
 import com.mw.sdk.constant.ResultCode;
@@ -1127,7 +1128,16 @@ public class BaseSdkImpl implements IMWSDK {
                 checkPayTypeReqBean.setProductId(payCreateOrderReqBean.getProductId());
                 checkPayTypeReqBean.setExtra(payCreateOrderReqBean.getExtra());
 
-                Request.togglePayRequest(activity, checkPayTypeReqBean, new SFCallBack<ToggleResult>() {
+                String mw_other_channel_v2 = activity.getResources().getString(R.string.mw_other_channel_v2);
+                boolean isChannelV2 = false;
+                if ("true".equals(mw_other_channel_v2)){
+                    isChannelV2 = true;
+                }else {
+                    isChannelV2 = false;
+                }
+
+                boolean finalIsChannelV = isChannelV2;
+                Request.togglePayRequest(activity, isChannelV2, checkPayTypeReqBean, new SFCallBack<ToggleResult>() {
                     @Override
                     public void success(ToggleResult result, String msg) {
 
@@ -1138,7 +1148,11 @@ public class BaseSdkImpl implements IMWSDK {
                             if (result.getData().isHideSelectChannel()) {//是否显示询问用户
                                 doWebPay(activity, payCreateOrderReqBean);
                             }else {//默认弹出显示询问用户
-                                showTogglePayDialog(activity, payCreateOrderReqBean);
+                                if (finalIsChannelV) {
+                                    showTogglePayDialogV2(activity, payCreateOrderReqBean, result);
+                                }else {
+                                    showTogglePayDialog(activity, payCreateOrderReqBean);
+                                }
                             }
 
                         }else {
@@ -1240,7 +1254,7 @@ public class BaseSdkImpl implements IMWSDK {
         commonDialog.show();
     }
 
-    private void showTogglePayDialogV2(Activity activity, PayCreateOrderReqBean payCreateOrderReqBean) {
+    private void showTogglePayDialogV2(Activity activity, PayCreateOrderReqBean payCreateOrderReqBean, ToggleResult toggleResult) {
 
         PL.i("showTogglePayDialog v2...");
         if (commonDialog != null){
@@ -1248,6 +1262,7 @@ public class BaseSdkImpl implements IMWSDK {
         }
         commonDialog = new SBaseDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
         SelectPayChannelLayoutNew selectPayChannelLayout = new SelectPayChannelLayoutNew(activity);
+        selectPayChannelLayout.setDatas(toggleResult);
         selectPayChannelLayout.setsBaseDialog(commonDialog);
         selectPayChannelLayout.setSfCallBack(new SFCallBack<PayChannelData>() {
             @Override

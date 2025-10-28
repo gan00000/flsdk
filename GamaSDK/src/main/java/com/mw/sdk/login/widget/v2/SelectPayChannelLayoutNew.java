@@ -57,7 +57,6 @@ public class SelectPayChannelLayoutNew extends SLoginBaseRelativeLayout {
 
     }
 
-
     public SelectPayChannelLayoutNew(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
@@ -97,10 +96,18 @@ public class SelectPayChannelLayoutNew extends SLoginBaseRelativeLayout {
             }
         });
 
+        //handleViewData();
+
+        PL.d("layout onCreateView end");
+        return contentView;
+    }
+
+    private void handleViewData() {
+
         SLoginResponse sLoginResponse = SdkUtil.getCurrentUserLoginResponse(getContext());
         if (toggleResult == null || toggleResult.getData() == null || toggleResult.getData().getChannelList() == null
                 || sLoginResponse == null || sLoginResponse.getData() == null || SStringUtil.isEmpty(sLoginResponse.getData().getUserId())){
-            return contentView;
+            return;
         }
 
         uidTextView.setText("uid:" + sLoginResponse.getData().getUserId());
@@ -165,7 +172,11 @@ public class SelectPayChannelLayoutNew extends SLoginBaseRelativeLayout {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(payChannelViewAdapter);
 
-        PL.d("layout onCreateView end");
-        return contentView;
+    }
+
+    @Override
+    public void setDatas(Object data) {
+        this.toggleResult = (ToggleResult) data;
+        handleViewData();
     }
 }

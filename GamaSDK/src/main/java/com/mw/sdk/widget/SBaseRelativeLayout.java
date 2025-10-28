@@ -30,6 +30,10 @@ public class SBaseRelativeLayout extends RelativeLayout {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
+    public void setDatas(Object data){
+
+    }
+
     public interface OperationCallback<T> {
         /**
          * 时间限制中

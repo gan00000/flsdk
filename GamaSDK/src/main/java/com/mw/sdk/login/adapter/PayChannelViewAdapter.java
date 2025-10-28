@@ -74,7 +74,7 @@ public class PayChannelViewAdapter extends RecyclerView.Adapter {
             .placeholder(R.mipmap.mw_icon_placeholder)
             .into(viewHolder.channelImageView);
 
-            viewHolder.channelName.setText(payChannelData.getChannelName());
+            viewHolder.channelName.setText(payChannelData.getName());
             viewHolder.channelDes.setText(payChannelData.getDescribe());
 
             int maPos = position;

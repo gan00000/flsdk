@@ -131,5 +131,6 @@
 
     <string name="text_pay_ru">Rustore Pay</string>
     <string name="text_select_pay_channel_other">เลือกวิธีการชำระเงินอื่น</string>
+    <string name="text_official_channel">เติมเงินทางการ</string>
 
 </resources>

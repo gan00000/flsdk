@@ -5,8 +5,7 @@ import com.mw.sdk.constant.FloatMenuType;
 public class PayChannelData {
 
     private int viewType;
-    private String channelName = "";
-    private String paymentType = "";
+    private String name = "";
     private String describe = "";
     private String icon;
     private String toUrl;
@@ -24,20 +23,12 @@ public class PayChannelData {
         this.code = code;
     }
 
-    public String getChannelName() {
-        return channelName;
+    public String getName() {
+        return name;
     }
 
-    public void setChannelName(String channelName) {
-        this.channelName = channelName;
-    }
-
-    public String getPaymentType() {
-        return paymentType;
-    }
-
-    public void setPaymentType(String paymentType) {
-        this.paymentType = paymentType;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescribe() {
