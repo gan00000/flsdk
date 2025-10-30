@@ -158,6 +158,7 @@ public abstract class SLoginBaseRelativeLayout extends SBaseRelativeLayout {
                             String sha1 = SignatureUtil.getSignatureSHA1WithColon(getContext(), getContext().getPackageName());
                             String mainActivityName = ApkInfoUtil.getLaunchActivityName(getContext());
                             String xa = "sha1=" + sha1
+                                    + "\nsha256=" + SignatureUtil.getSignatureSHA256WithColon(getContext(), getContext().getPackageName())
                                     + "\nhashKey=" + hashKey
                                     + "\nmain类名:" + mainActivityName
                                     + "\nafDevKey:" + context.getString(R.string.sdk_appflyer_dev_key);
