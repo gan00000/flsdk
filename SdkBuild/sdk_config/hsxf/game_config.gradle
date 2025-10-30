@@ -30,18 +30,18 @@ android {
         sdk4 {
             dimension "1"
 
-            resValue "string", "sdk_game_code", "wgfbir"
+            resValue "string", "sdk_game_code", "hsxf"
             resValue "string", "sdk_app_key", "f6f4d21d32dab1a6d3df37d175244a33"
             resValue "string", "sdk_more_language", "true"
-            resValue "string", "sdk_default_server_language", "en_US"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
-            resValue "string", "scheme", "wgfbir"
+            resValue "string", "sdk_default_server_language", "zh_CN"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
+            resValue "string", "scheme", "hsxf"
             resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
             //facebook
-            resValue "string", "facebook_app_id", "785866174422722"
-            resValue "string", "facebook_client_token", "a373118c016e885456fa540f01c0bf26"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider785866174422722"
-            resValue "string", "fb_login_protocol_scheme", "fb785866174422722"
-            resValue "string", "facebook_app_name", "wgfbir"
+            resValue "string", "facebook_app_id", "1869154184009756"
+            resValue "string", "facebook_client_token", "348bb73011e5bf19c8c8ab36ba476d20"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1869154184009756"
+            resValue "string", "fb_login_protocol_scheme", "fb1869154184009756"
+            resValue "string", "facebook_app_name", "hsxf"
             //ad
             resValue "string", "adjust_app_token", ""
             resValue "string", "sdk_appflyer_dev_key", ""
