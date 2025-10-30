@@ -35,14 +35,22 @@ import com.core.base.utils.SStringUtil;
 import com.core.base.utils.SignatureUtil;
 import com.core.base.utils.ToastUtils;
 import com.mw.base.bean.SPayType;
+import com.mw.sdk.ads.EventConstant;
+import com.mw.sdk.bean.res.PayChannelData;
 import com.mw.sdk.callback.IPayListener;
+import com.mw.sdk.constant.ChannelPlatform;
 import com.mw.sdk.demo.R;
 import com.mw.sdk.login.ILoginCallBack;
 import com.mw.sdk.login.model.response.SLoginResponse;
+import com.mw.sdk.login.widget.v2.SelectPayChannelLayout;
+import com.mw.sdk.login.widget.v2.SelectPayChannelLayoutNew;
 import com.mw.sdk.out.IMWSDK;
 import com.mw.sdk.out.ISdkCallBack;
 import com.mw.sdk.out.MWSdkFactory;
+import com.mw.sdk.pay.IPay;
+import com.mw.sdk.pay.IPayFactory;
 import com.mw.sdk.utils.SdkUtil;
+import com.mw.sdk.widget.SBaseDialog;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -118,7 +126,8 @@ public class MainActivity extends AppCompatActivity {
 //                String skuId = "com.msg.en099";
 //                String skuId = "com.wmwx.sgcz.99";
 //                String skuId = "com.wanxin.tgru.99";
-                String skuId = "com.aab.sat";
+//                String skuId = "com.aab.sat";
+                String skuId = "com.wxbut.vmen.1499";
                 mIMWSDK.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(),skuId, extra,roleId,roleName,roleLevel, vipLevel,serverCode, serverName, new IPayListener() {
 
                     @Override
@@ -566,6 +575,7 @@ public class MainActivity extends AppCompatActivity {
 //                    }
 //                });
 //                MWAdManger.getInstance().showMediationDebugger(activity);
+
             }
         });
         AppUtil.hideActivityBottomBar(this);
@@ -880,4 +890,5 @@ public class MainActivity extends AppCompatActivity {
         }
         return iconId;
     }
+
 }

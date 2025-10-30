@@ -295,6 +295,7 @@ android {
             //naver
             resValue "string", "naver_client_id", ""
             resValue "string", "naver_client_secret", ""
+//            resValue "string", "mw_other_channel_v2", "true"
 
 //            resValue "string", "sdk_game_code", "msgen"
 //            resValue "string", "sdk_app_key", "fa995ce61616d9edf922d0a4615d5742"

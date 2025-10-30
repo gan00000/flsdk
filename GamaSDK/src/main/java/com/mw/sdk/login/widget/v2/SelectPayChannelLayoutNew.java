@@ -43,9 +43,9 @@ public class SelectPayChannelLayoutNew extends SLoginBaseRelativeLayout {
     private ToggleResult toggleResult;
     private List<PayChannelData> payChannelDatas;
 
-    private SFCallBack<PayChannelData> sfCallBack;
+    private SFCallBack<Object> sfCallBack;
 
-    public void setSfCallBack(SFCallBack<PayChannelData> sfCallBack) {
+    public void setSfCallBack(SFCallBack<Object> sfCallBack) {
         this.sfCallBack = sfCallBack;
         if (payChannelViewAdapter != null){
             payChannelViewAdapter.setSfCallBack(sfCallBack);

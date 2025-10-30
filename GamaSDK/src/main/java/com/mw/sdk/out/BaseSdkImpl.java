@@ -1264,16 +1264,17 @@ public class BaseSdkImpl implements IMWSDK {
         SelectPayChannelLayoutNew selectPayChannelLayout = new SelectPayChannelLayoutNew(activity);
         selectPayChannelLayout.setDatas(toggleResult);
         selectPayChannelLayout.setsBaseDialog(commonDialog);
-        selectPayChannelLayout.setSfCallBack(new SFCallBack<PayChannelData>() {
+        selectPayChannelLayout.setSfCallBack(new SFCallBack<Object>() {
             @Override
-            public void success(PayChannelData result, String msg) {
+            public void success(Object result, String msg) {
                 PL.i("v2 setSfCallBack success ChannelPlatform = " + msg);
-
+                ChannelPlatform bChannelPlatform = (ChannelPlatform)result;
+                msg = bChannelPlatform.getChannel_platform();
                 if(iPayMap.containsKey(msg) && iPayMap.get(msg) != null){
                     iPay = iPayMap.get(msg);
                     PL.d("iPay already create...");
                 }else {
-                    IPay mxPay = IPayFactory.create(activity, ChannelPlatform.valueOf(msg));
+                    IPay mxPay = IPayFactory.create(activity, bChannelPlatform);
                     if (mxPay != null){
                         iPayMap.put(msg, mxPay);
                         iPay = mxPay;
@@ -1292,9 +1293,9 @@ public class BaseSdkImpl implements IMWSDK {
             }
 
             @Override
-            public void fail(PayChannelData channelData, String msg) {//第三方
+            public void fail(Object mObject, String msg) {//第三方
                 PL.i("setSfCallBack fail = " + msg);
-
+                PayChannelData channelData = (PayChannelData)mObject;
                 if (channelData != null){
                     doWebPayV2(activity, payCreateOrderReqBean,channelData);
                     trackEvent(activity, EventConstant.EventName.recharge_third_click.name());

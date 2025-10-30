@@ -25,9 +25,9 @@ public class PayChannelViewAdapter extends RecyclerView.Adapter {
     private static final int ITEM_TYPE_NORMAL = 0;//普通类型
     private static final int ITEM_TYPE_SECTION = 2;//特殊类型
 
-    private SFCallBack<PayChannelData> sfCallBack;
+    private SFCallBack<Object> sfCallBack;
 
-    public void setSfCallBack(SFCallBack<PayChannelData> sfCallBack) {
+    public void setSfCallBack(SFCallBack<Object> sfCallBack) {
         this.sfCallBack = sfCallBack;
     }
 
@@ -94,7 +94,7 @@ public class PayChannelViewAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View v) {
                     if (sfCallBack != null){
-                        sfCallBack.success(null,ChannelPlatform.GOOGLE.getChannel_platform());
+                        sfCallBack.success(ChannelPlatform.GOOGLE, ChannelPlatform.GOOGLE.getChannel_platform());
                     }
                 }
             });
@@ -102,7 +102,7 @@ public class PayChannelViewAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View v) {
                     if (sfCallBack != null){
-                        sfCallBack.success(null,ChannelPlatform.VK.getChannel_platform());
+                        sfCallBack.success(ChannelPlatform.VK, ChannelPlatform.VK.getChannel_platform());
                     }
                 }
             });
@@ -110,7 +110,7 @@ public class PayChannelViewAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View v) {
                     if (sfCallBack != null){
-                        sfCallBack.success(null,ChannelPlatform.Xiaomi.getChannel_platform());
+                        sfCallBack.success(ChannelPlatform.Xiaomi, ChannelPlatform.Xiaomi.getChannel_platform());
                     }
                 }
             });
