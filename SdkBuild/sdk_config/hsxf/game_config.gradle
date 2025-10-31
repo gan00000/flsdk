@@ -31,7 +31,7 @@ android {
             dimension "1"
 
             resValue "string", "sdk_game_code", "hsxf"
-            resValue "string", "sdk_app_key", "f6f4d21d32dab1a6d3df37d175244a33"
+            resValue "string", "sdk_app_key", "27d9d660daf85956e32269911005e2dd"
             resValue "string", "sdk_more_language", "true"
             resValue "string", "sdk_default_server_language", "zh_CN"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
             resValue "string", "scheme", "hsxf"
@@ -66,17 +66,15 @@ android {
 
             //==========================================start==========================
             //base
-            applicationId "com.wgfb.andir"
+            applicationId "com.wanxingg.hsxfjt"
             versionCode 1
             versionName "1.0"
             minSdkVersion 25
             targetSdkVersion 35
 
             //参数配置
-            resValue "string", "sdk_appflyer_dev_key", ""
+            resValue "string", "sdk_appflyer_dev_key", "juyVQVc2J6Rme97MN6LgRF"
             resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
-            resValue "string", "mw_dialog_pay_add_type", ""  //vk,xiaomi
-            resValue "string", "mw_vk_appid", ""
             //==========================================end==========================
 
         }
@@ -87,39 +85,18 @@ android {
 
             //==========================================start==========================
             //base
-            applicationId "com.wgfb.andir"
+            applicationId "com.wanxingg.hsxfjt"
             versionCode 1
             versionName "1.0"
             minSdkVersion 25
             targetSdkVersion 35
 
             //参数配置
-            resValue "string", "sdk_appflyer_dev_key", ""
+            resValue "string", "sdk_appflyer_dev_key", "juyVQVc2J6Rme97MN6LgRF"
             resValue "string", "channel_platform", "meow"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
-            resValue "string", "mw_vk_appid", ""
             //==========================================end==========================
 
         }
-
-        channel_bazaar {
-
-            flavorDimensions "1"
-
-            //=======================================sdk config==========================
-            applicationId "com.wgfb.bazir"
-            versionCode 1
-            versionName "1.0"
-            minSdkVersion 25
-            targetSdkVersion 35
-
-            //参数配置
-            resValue "string", "sdk_appflyer_dev_key", "EKTJkHsM5mo7harNXemFqK"
-            resValue "string", "channel_platform", "bazaar"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
-            resValue "string", "mw_vk_appid", ""
-            //=======================================sdk config end==========================
-
-        }
-
 
         */
     }
