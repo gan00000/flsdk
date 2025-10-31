@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "26809378149",
+    "project_id": "lsqyru-ru-and",
+    "storage_bucket": "lsqyru-ru-and.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:26809378149:android:70942277527bc74057ad8c",
+        "android_client_info": {
+          "package_name": "com.lsqyru.and"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBy2yp-nbSiI7mHP00dkUH3x3rjNFRM42s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
