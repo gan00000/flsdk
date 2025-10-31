@@ -129,4 +129,8 @@
     <string name="text_pay_pay">충전</string>
     <string name="text_account_change_pwd_success2">비밀번호가 업데이트되었습니다</string>
 
+    <string name="text_pay_ru">Rustore Pay</string>
+    <string name="text_select_pay_channel_other">기타 충전 방식을 선택합니다</string>
+    <string name="text_official_channel">공식 충전</string>
+
 </resources>

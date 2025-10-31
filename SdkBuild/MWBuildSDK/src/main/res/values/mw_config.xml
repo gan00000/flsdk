@@ -70,4 +70,7 @@
     <string name="mw_bazaar_ras_key"></string>
     <string name="mw_event_isDeviceOnce">false</string>
 
+<!--    是否使用v2版第三方充值页面-->
+    <string name="mw_other_channel_v2">false</string>
+
 </resources>

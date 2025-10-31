@@ -4,7 +4,7 @@
     android:layout_height="wrap_content">
 
     <RelativeLayout
-        android:id="@+id/ll_select_channel_content"
+        android:id="@+id/ll_select_channel_rv_item"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         >

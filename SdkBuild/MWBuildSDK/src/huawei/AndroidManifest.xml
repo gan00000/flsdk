@@ -11,7 +11,7 @@
         <meta-data android:name="com.facebook.sdk.ClientToken"
             android:value="@string/facebook_client_token"/>
 
-        <!--        appflyer的要求，别的包不要加，只加入到 onestore的包-->
+        <!--        appflyer的要求，google包不要添加-->
         <meta-data android:name="CHANNEL" android:value="Huawei"/>
 
         <activity

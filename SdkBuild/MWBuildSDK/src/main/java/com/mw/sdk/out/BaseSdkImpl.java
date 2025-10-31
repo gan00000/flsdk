@@ -52,10 +52,12 @@ import com.mw.sdk.bean.res.BasePayBean;
 import com.mw.sdk.bean.res.ConfigBean;
 import com.mw.sdk.bean.res.FloatMenuResData;
 import com.mw.sdk.bean.res.MenuData;
+import com.mw.sdk.bean.res.PayChannelData;
 import com.mw.sdk.bean.res.ToggleResult;
 import com.mw.sdk.callback.FloatButtionClickCallback;
 import com.mw.sdk.callback.FloatCallback;
 import com.mw.sdk.callback.IPayListener;
+import com.mw.sdk.constant.ApiRequestMethod;
 import com.mw.sdk.constant.ChannelPlatform;
 import com.mw.sdk.constant.RequestCode;
 import com.mw.sdk.constant.ResultCode;
@@ -66,6 +68,7 @@ import com.mw.sdk.login.ILoginCallBack;
 import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.login.widget.v2.AccountBindPhoneLayout;
 import com.mw.sdk.login.widget.v2.SelectPayChannelLayout;
+import com.mw.sdk.login.widget.v2.SelectPayChannelLayoutNew;
 import com.mw.sdk.login.widget.v2.ThirdPlatBindAccountLayoutV2;
 import com.mw.sdk.out.bean.EventPropertie;
 import com.mw.sdk.pay.IPay;
@@ -1125,7 +1128,16 @@ public class BaseSdkImpl implements IMWSDK {
                 checkPayTypeReqBean.setProductId(payCreateOrderReqBean.getProductId());
                 checkPayTypeReqBean.setExtra(payCreateOrderReqBean.getExtra());
 
-                Request.togglePayRequest(activity, checkPayTypeReqBean, new SFCallBack<ToggleResult>() {
+                String mw_other_channel_v2 = activity.getResources().getString(R.string.mw_other_channel_v2);
+                boolean isChannelV2 = false;
+                if ("true".equals(mw_other_channel_v2)){
+                    isChannelV2 = true;
+                }else {
+                    isChannelV2 = false;
+                }
+
+                boolean finalIsChannelV = isChannelV2;
+                Request.togglePayRequest(activity, isChannelV2, checkPayTypeReqBean, new SFCallBack<ToggleResult>() {
                     @Override
                     public void success(ToggleResult result, String msg) {
 
@@ -1136,7 +1148,11 @@ public class BaseSdkImpl implements IMWSDK {
                             if (result.getData().isHideSelectChannel()) {//是否显示询问用户
                                 doWebPay(activity, payCreateOrderReqBean);
                             }else {//默认弹出显示询问用户
-                                showTogglePayDialog(activity, payCreateOrderReqBean);
+                                if (finalIsChannelV) {
+                                    showTogglePayDialogV2(activity, payCreateOrderReqBean, result);
+                                }else {
+                                    showTogglePayDialog(activity, payCreateOrderReqBean);
+                                }
                             }
 
                         }else {
@@ -1186,7 +1202,7 @@ public class BaseSdkImpl implements IMWSDK {
         commonDialog.show();
     }*/
 
-    public void showTogglePayDialog(Activity activity, PayCreateOrderReqBean payCreateOrderReqBean) {
+    private void showTogglePayDialog(Activity activity, PayCreateOrderReqBean payCreateOrderReqBean) {
 
         PL.i("showTogglePayDialog...");
         if (commonDialog != null){
@@ -1229,6 +1245,61 @@ public class BaseSdkImpl implements IMWSDK {
                 }
 
                 trackEvent(activity, EventConstant.EventName.recharge_third_click.name());
+                if (commonDialog != null){
+                    commonDialog.dismiss();
+                }
+            }
+        });
+        commonDialog.setContentView(selectPayChannelLayout);
+        commonDialog.show();
+    }
+
+    private void showTogglePayDialogV2(Activity activity, PayCreateOrderReqBean payCreateOrderReqBean, ToggleResult toggleResult) {
+
+        PL.i("showTogglePayDialog v2...");
+        if (commonDialog != null){
+            commonDialog.dismiss();
+        }
+        commonDialog = new SBaseDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
+        SelectPayChannelLayoutNew selectPayChannelLayout = new SelectPayChannelLayoutNew(activity);
+        selectPayChannelLayout.setDatas(toggleResult);
+        selectPayChannelLayout.setsBaseDialog(commonDialog);
+        selectPayChannelLayout.setSfCallBack(new SFCallBack<Object>() {
+            @Override
+            public void success(Object result, String msg) {
+                PL.i("v2 setSfCallBack success ChannelPlatform = " + msg);
+                ChannelPlatform bChannelPlatform = (ChannelPlatform)result;
+                msg = bChannelPlatform.getChannel_platform();
+                if(iPayMap.containsKey(msg) && iPayMap.get(msg) != null){
+                    iPay = iPayMap.get(msg);
+                    PL.d("iPay already create...");
+                }else {
+                    IPay mxPay = IPayFactory.create(activity, bChannelPlatform);
+                    if (mxPay != null){
+                        iPayMap.put(msg, mxPay);
+                        iPay = mxPay;
+                        iPay.onCreate(activity);
+                    }
+                }
+
+                doGooglePay(activity, payCreateOrderReqBean);
+                if (ChannelPlatform.GOOGLE.getChannel_platform().equals(msg)){
+                    trackEvent(activity, EventConstant.EventName.select_google.name());
+                }
+                if (commonDialog != null){
+                    commonDialog.dismiss();
+                }
+
+            }
+
+            @Override
+            public void fail(Object mObject, String msg) {//第三方
+                PL.i("setSfCallBack fail = " + msg);
+                PayChannelData channelData = (PayChannelData)mObject;
+                if (channelData != null){
+                    doWebPayV2(activity, payCreateOrderReqBean,channelData);
+                    trackEvent(activity, EventConstant.EventName.recharge_third_click.name());
+                }
                 if (commonDialog != null){
                     commonDialog.dismiss();
                 }
@@ -1595,6 +1666,17 @@ public class BaseSdkImpl implements IMWSDK {
                 Request.bindAcountInGame(activity,false,SdkUtil.getPreviousLoginType(activity), account_temp, pwd_temp, sfCallBack);
             }
         });
+    }
+
+    private void doWebPayV2(Activity activity, PayCreateOrderReqBean bean, PayChannelData payChannelData) {
+
+        String payThirdUrl = payChannelData.getToUrl();
+        bean.setCompleteUrl(payThirdUrl);
+
+        String webUrl = bean.createPreRequestUrl();
+
+        Intent intent = MWWebPayActivity.create(activity,"",webUrl,bean.getCpOrderId(),bean.getProductId(),bean.getExtra());
+        activity.startActivityForResult(intent, RequestCode.RequestCode_Web_Pay);
     }
 
     private void doWebPay(Activity activity, PayCreateOrderReqBean bean) {

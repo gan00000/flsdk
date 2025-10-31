@@ -4,22 +4,19 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.ApkInfoUtil;
-import com.core.base.utils.AppUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.mw.sdk.R;
 import com.mw.sdk.bean.res.PayChannelData;
+import com.mw.sdk.bean.res.ToggleResult;
 import com.mw.sdk.constant.ChannelPlatform;
 import com.mw.sdk.login.adapter.PayChannelViewAdapter;
 import com.mw.sdk.login.model.response.SLoginResponse;
@@ -27,7 +24,6 @@ import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
 import com.mw.sdk.utils.ResConfig;
 import com.mw.sdk.utils.SdkUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -43,19 +39,23 @@ public class SelectPayChannelLayoutNew extends SLoginBaseRelativeLayout {
     private TextView amountTextView;
     private RecyclerView mRecyclerView;
     private PayChannelViewAdapter payChannelViewAdapter;
+
+    private ToggleResult toggleResult;
     private List<PayChannelData> payChannelDatas;
 
-    private SFCallBack<ChannelPlatform> sfCallBack;
+    private SFCallBack<Object> sfCallBack;
 
-    public void setSfCallBack(SFCallBack<ChannelPlatform> sfCallBack) {
+    public void setSfCallBack(SFCallBack<Object> sfCallBack) {
         this.sfCallBack = sfCallBack;
+        if (payChannelViewAdapter != null){
+            payChannelViewAdapter.setSfCallBack(sfCallBack);
+        }
     }
 
     public SelectPayChannelLayoutNew(Context context) {
         super(context);
 
     }
-
 
     public SelectPayChannelLayoutNew(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -78,7 +78,7 @@ public class SelectPayChannelLayoutNew extends SLoginBaseRelativeLayout {
 
     public View onCreateView(LayoutInflater inflater) {
 
-        contentView = inflater.inflate(R.layout.mw_select_pay_channel_newa, null);
+        contentView = inflater.inflate(R.layout.mw_select_pay_channel_v2, null);
 
         backView = contentView.findViewById(R.id.iv_select_channel_close);
         mRecyclerView = contentView.findViewById(R.id.mw_rv_select_paychannel);
@@ -96,33 +96,87 @@ public class SelectPayChannelLayoutNew extends SLoginBaseRelativeLayout {
             }
         });
 
+        //handleViewData();
+
+        PL.d("layout onCreateView end");
+        return contentView;
+    }
+
+    private void handleViewData() {
+
         SLoginResponse sLoginResponse = SdkUtil.getCurrentUserLoginResponse(getContext());
-        if (sLoginResponse == null || sLoginResponse.getData() == null || SStringUtil.isEmpty(sLoginResponse.getData().getUserId())){
-            return contentView;
+        if (toggleResult == null || toggleResult.getData() == null || toggleResult.getData().getChannelList() == null
+                || sLoginResponse == null || sLoginResponse.getData() == null || SStringUtil.isEmpty(sLoginResponse.getData().getUserId())){
+            return;
         }
 
         uidTextView.setText("uid:" + sLoginResponse.getData().getUserId());
-        amountTextView.setText("");
+        amountTextView.setText(toggleResult.getData().getProductName());
 
-        payChannelDatas = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            PayChannelData payChannelData = new PayChannelData();
-            payChannelData.setChannelName("name=" + i);
-            payChannelDatas.add(payChannelData);
+        //测试数据==============
+//        payChannelDatas = new ArrayList<>();
+//        for (int i = 0; i < 10; i++) {
+//            PayChannelData payChannelData = new PayChannelData();
+//            payChannelData.setChannelName("name=" + i);
+//            payChannelDatas.add(payChannelData);
+//        }
+        //测试数据==============
+
+        //正式数据
+        payChannelDatas = toggleResult.getData().getChannelList();
+
+        PayChannelData payNavtiveData = new PayChannelData();
+        payNavtiveData.setViewType(2);
+        payNavtiveData.setShowPayGG(false);
+        payNavtiveData.setShowPayRutore(false);
+        payNavtiveData.setShowPayXM(false);
+
+        String channel_platform = ResConfig.getChannelPlatform(getContext());
+        if (ChannelPlatform.GOOGLE.getChannel_platform().equals(channel_platform)){
+            payNavtiveData.setShowPayGG(true);
+            String payChannel = getContext().getResources().getString(R.string.mw_dialog_pay_add_type);
+            if(payChannel.contains(ChannelPlatform.VK.getChannel_platform())){
+                payNavtiveData.setShowPayRutore(true);
+            }else {
+                payNavtiveData.setShowPayRutore(false);
+            }
+
+            if(payChannel.contains(ChannelPlatform.Xiaomi.getChannel_platform())){
+                payNavtiveData.setShowPayXM(true);
+            }else {
+                payNavtiveData.setShowPayXM(false);
+            }
+        }else {
+
+            payNavtiveData.setShowPayGG(false);
+
+            if (ChannelPlatform.VK.getChannel_platform().equals(channel_platform)){
+                payNavtiveData.setShowPayRutore(true);
+            }else {
+                payNavtiveData.setShowPayRutore(false);
+            }
+
+            if(ChannelPlatform.Xiaomi.getChannel_platform().equals(channel_platform)){
+                payNavtiveData.setShowPayXM(true);
+            }else {
+                payNavtiveData.setShowPayXM(false);
+            }
+
         }
 
-        PayChannelData payChannelData2 = new PayChannelData();
-        payChannelData2.setViewType(2);
-        payChannelData2.setShowPayXM(false);
-        payChannelData2.setShowPayGG(true);
-        payChannelData2.setShowPayRutore(true);
-        payChannelDatas.add(payChannelData2);
+        if (payNavtiveData.isShowPayGG() || payNavtiveData.isShowPayRutore() || payNavtiveData.isShowPayXM()){
+            payChannelDatas.add(payNavtiveData);
+        }
 
         payChannelViewAdapter = new PayChannelViewAdapter(getContext(), payChannelDatas);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(payChannelViewAdapter);
 
+    }
 
-        return contentView;
+    @Override
+    public void setDatas(Object data) {
+        this.toggleResult = (ToggleResult) data;
+        handleViewData();
     }
 }

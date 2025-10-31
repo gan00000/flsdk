@@ -425,9 +425,14 @@ public class Request {
     }
 
 
-    public static void togglePayRequest(Context context, PayCreateOrderReqBean checkPayTypeReqBean, SFCallBack<ToggleResult> sfCallBack) {
+    public static void togglePayRequest(Context context, boolean isChannelV2, PayCreateOrderReqBean checkPayTypeReqBean, SFCallBack<ToggleResult> sfCallBack) {
 
-        checkPayTypeReqBean.setRequestMethod(ApiRequestMethod.API_PAYMENT_CHANNEL);
+        //是否使用新版第三方页面接口
+        if (isChannelV2){
+            checkPayTypeReqBean.setRequestMethod(ApiRequestMethod.API_PAYMENT_CHANNEL_V2);
+        }else {
+            checkPayTypeReqBean.setRequestMethod(ApiRequestMethod.API_PAYMENT_CHANNEL);
+        }
         checkPayTypeReqBean.setRequestUrl(PayHelper.getPreferredUrl(context));
         SimpleHttpRequest simpleHttpRequest = new SimpleHttpRequest();
         simpleHttpRequest.setBaseReqeustBean(checkPayTypeReqBean);
