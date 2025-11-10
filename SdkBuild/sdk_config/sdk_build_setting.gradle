@@ -40,4 +40,9 @@ ext {
 //    sdkFlavor = 'sdk4'
 //    sdkLanguage = 'fa'//默认语言，即values的语言
 
+    gameCode = "lsqyru"
+    sdkFlavor = 'sdk3'
+//    sdkFlavor = 'huawei'
+    sdkLanguage = 'ru'//默认语言，即values的语言
+
 }
