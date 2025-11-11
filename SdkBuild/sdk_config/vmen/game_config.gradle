@@ -1,0 +1,68 @@
+
+ext {
+    sdk_version = "2.4.1"
+    domainUrl= "luckyyx.com"
+}
+
+//常规对象：默认覆盖整个嵌套对象
+//特定 DSL：部分属性（如 Android 的 defaultConfig、CopySpec 的 from）支持智能合并
+//自定义对象：需手动实现合并逻辑
+android {
+
+    buildTypes {
+        release {
+//            multiDexEnabled true //Add this
+//            shrinkResources true  //压缩资源
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+//            shrinkResources false  //压缩资源
+//            minifyEnabled false
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+    }
+
+    productFlavors {
+
+        sdk4 {
+            dimension "1"
+
+            resValue "string", "sdk_game_code", "vmen"
+            resValue "string", "sdk_app_key", "bbaae95d229d27e431d7ef0bc07a3b99"
+            resValue "string", "sdk_more_language", "true"
+            resValue "string", "sdk_default_server_language", "en_US"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
+            resValue "string", "scheme", "vmen"
+            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
+            //facebook
+            resValue "string", "facebook_app_id", "1027270702707841"
+            resValue "string", "facebook_client_token", "8a70921dfbaa837213690a2536935b4f"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1027270702707841"
+            resValue "string", "fb_login_protocol_scheme", "fb1027270702707841"
+            resValue "string", "facebook_app_name", "vmen" //游戏名字
+            //shushu
+            resValue "string", "mw_td_appid", ""
+            //ad
+            resValue "string", "adjust_app_token", ""
+            resValue "string", "sdk_appflyer_dev_key", ""
+            //line
+            resValue "string", "line_channelId", ""
+            //naver
+            resValue "string", "naver_client_id", ""
+            resValue "string", "naver_client_secret", ""
+            //tt
+            resValue "string", "mw_tt_app_id", ""
+            //rustore渠道
+            resValue "string", "mw_vk_appid", ""
+            //Google包添加的额外第三方显示
+            resValue "string", "mw_dialog_pay_add_type", ""  //vk,xiaomi
+
+            resValue "string", "mw_event_isDeviceOnce", "true"
+            resValue "string", "mw_other_channel_v2", "true"
+
+        }
+
+    }
+}
