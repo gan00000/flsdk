@@ -29,7 +29,7 @@ android {
             resValue "string", "mw_sdk_plat_pre_url", "https://platform.${domainUrl}/"
             resValue "string", "mw_sdk_member_pre_url", "https://member.${domainUrl}/"
             resValue "string", "mw_sdk_log_pre_url", "https://log.${domainUrl}/"
-            resValue "string", "mw_sdk_terms_service_url", "https://member.${domainUrl}/sdk/agreement/%s_agreement.html"
+            resValue "string", "mw_sdk_terms_service_url", "https://member.${domainUrl}/privacy/dev_privacy.html"
             resValue "string", "mw_sdk_social_url", "https://member.${domainUrl}/sdk/social/%s/index.html"
             resValue "string", "mw_td_te_server_url", "https://shushu.${domainUrl}/"
             resValue "string", "mw_sdk_customer_url", "https://platform.${domainUrl}/sdk/api/customer.page"
