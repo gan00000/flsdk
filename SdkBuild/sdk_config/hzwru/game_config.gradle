@@ -1,6 +1,6 @@
 
 ext {
-    sdk_version = "2.4.0"
+    sdk_version = "2.4.1"
     domainUrl= "valorplayer.com"
 }
 
@@ -58,6 +58,7 @@ android {
             resValue "string", "mw_vk_appid", ""
             //Google包添加的额外第三方显示
             resValue "string", "mw_dialog_pay_add_type", ""  //vk,xiaomi
+            resValue "string", "mw_other_channel_v2", "true"
 
         }
 
