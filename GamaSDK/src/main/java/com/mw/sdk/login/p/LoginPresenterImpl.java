@@ -352,6 +352,11 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
             sFbLogin(activity, sFacebookProxy, new FbLoginCallBack() {
                 @Override
                 public void loginSuccess(FaceBookUser user) {
+
+                    Map<String, Object> eventValue = new HashMap<String, Object>();
+                    eventValue.put(EventConstant.ParameterName.isSuccess,"1");
+                    SdkEventLogger.trackingWithEventName(activity, EventConstant.EventName.signin_with_facebook.name(), eventValue);
+
                     if(user != null) {
                         fbThirdLogin(user);
                     } else {
@@ -366,7 +371,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
                     Map<String, Object> eventValue = new HashMap<String, Object>();
                     eventValue.put(EventConstant.ParameterName.isSuccess,"2");
-                    SdkEventLogger.trackingWithEventName(activity, EventConstant.EventName.facebook_login_click.name(), eventValue);
+                    SdkEventLogger.trackingWithEventName(activity, EventConstant.EventName.signin_with_facebook.name(), eventValue);
                 }
             });
         }
@@ -388,6 +393,11 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
                 PL.i("google sign in : " + id);
                 if (SStringUtil.isNotEmpty(id)) {
                     SdkUtil.saveGoogleId(activity,id);
+
+                    Map<String, Object> eventValue = new HashMap<String, Object>();
+                    eventValue.put(EventConstant.ParameterName.isSuccess,"1");
+                    SdkEventLogger.trackingWithEventName(getContext(), EventConstant.EventName.signin_with_google.name(), eventValue);
+
                     ThirdLoginRegRequestBean thirdLoginRegRequestBean = new ThirdLoginRegRequestBean(activity);
                     thirdLoginRegRequestBean.setThirdPlatId(id);
                     thirdLoginRegRequestBean.setRegistPlatform(SLoginType.LOGIN_TYPE_GOOGLE);
@@ -403,7 +413,7 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 //                    }
                     Map<String, Object> eventValue = new HashMap<String, Object>();
                     eventValue.put(EventConstant.ParameterName.isSuccess,"2");
-                    SdkEventLogger.trackingWithEventName(getContext(), EventConstant.EventName.google_login_click.name(), eventValue);
+                    SdkEventLogger.trackingWithEventName(getContext(), EventConstant.EventName.signin_with_google.name(), eventValue);
                 }
             }
 
@@ -414,6 +424,9 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 //                if (isAutoLogin) {
 //                    showLoginView();
 //                }
+                Map<String, Object> eventValue = new HashMap<String, Object>();
+                eventValue.put(EventConstant.ParameterName.isSuccess,"2");
+                SdkEventLogger.trackingWithEventName(getContext(), EventConstant.EventName.signin_with_google.name(), eventValue);
             }
 
             @Override
