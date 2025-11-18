@@ -105,6 +105,7 @@ public class PayApi {
 
         if (reissue && SStringUtil.isEmpty(mPurchase.getOrderId())){//预注册，无google订单号，发送日志log
 
+            PL.i("=======sdk send_event_pre start=======");
             RetrofitClient.instance().build(context,URLType.LOG).create(MWApiService.class)
                     .send_event_pre(exchangeReqBean.fieldValueToMap())
                     .subscribeOn(Schedulers.io())
@@ -120,7 +121,7 @@ public class PayApi {
 
                             try {
                                 String xData = responseBody.string();
-                                PL.i("sdk send_event_pre success:" + xData);
+                                PL.i("=======sdk send_event_pre success:" + xData);
                             } catch (IOException e) {
                             }
                             if (sfCallBack != null){
@@ -131,7 +132,7 @@ public class PayApi {
                         @Override
                         public void onError(@NonNull Throwable e) {
 
-                            PL.i("sdk send_event_pre fail");
+                            PL.i("=======sdk send_event_pre fail");
                             if (sfCallBack != null){
                                 sfCallBack.fail(null,request_google_pre);
                             }

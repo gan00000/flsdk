@@ -26,6 +26,8 @@ public class EventConstant {
         guest_login_click,
         facebook_login_click,
         google_login_click,
+        signin_with_google,
+        signin_with_facebook,
         sdk_register_view,
         sdk_register_click,
         find_pwd_view,
