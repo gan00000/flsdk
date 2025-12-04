@@ -245,7 +245,7 @@ public class HuaweiPayImpl {
                     }
                 }
 
-                handlePayFail("Product Info Empty");
+                handlePayFail("Product Info Empty,productId=" + productId);
 
             }
         }).addOnFailureListener(new OnFailureListener() {
