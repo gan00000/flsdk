@@ -73,4 +73,6 @@
 <!--    是否使用v2版第三方充值页面-->
     <string name="mw_other_channel_v2">true</string>
 
+    <string name="mw_appmetrica_api_key"></string>
+
 </resources>

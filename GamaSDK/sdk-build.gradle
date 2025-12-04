@@ -223,6 +223,9 @@ dependencies {
 
     //可选 伊朗cafebazaar
     implementation "com.github.cafebazaar.Poolakey:poolakey:2.2.0"
+
+    // AppMetrica SDK.
+    implementation("io.appmetrica.analytics:analytics:7.14.0")
 }
 
 
