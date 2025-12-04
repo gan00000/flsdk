@@ -620,6 +620,7 @@ public class MainActivity extends AppCompatActivity {
             String sign = sLoginResponse.getData().getSign();
             String timestamp = sLoginResponse.getData().getTimestamp();
             String gameCode = sLoginResponse.getData().getGameCode();
+            sLoginResponse.getData().isBind();
             boolean isMiniGameUser = sLoginResponse.getData().isMiniGameUser();
 
            // sign equals md5(signKey+ gameCode + uid + timestamp);//验证通过
