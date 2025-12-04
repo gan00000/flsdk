@@ -64,9 +64,12 @@ public class TDAnalyticsHelper {
         return SStringUtil.isNotEmpty(context.getString(R.string.mw_td_appid)) && SStringUtil.isNotEmpty(context.getString(R.string.mw_td_te_server_url));
     }
 
-    public static void setAccountId(String accountId){
+    public static void setAccountId(Context context, String accountId){
 
         if (!ThirdModuleUtil.existShuShuModule()){
+            return;
+        }
+        if (!TDAnalyticsHelper.isReady(context)){
             return;
         }
         //在用户进行登录时，可调用 login 来设置用户的账号 ID， TE 平台将会以账号 ID 作为身份识别 ID，
@@ -138,21 +141,24 @@ public class TDAnalyticsHelper {
         }
     }
 
-    public static void trackEvent(String eventName, EventPropertie propertieBean){
+    public static void trackEvent(Context context, String eventName, EventPropertie propertieBean){
         if (propertieBean != null) {
-            trackEvent(eventName, propertieBean.objToJsonObj(), 0);
+            trackEvent(context, eventName, propertieBean.objToJsonObj(), 0);
         }else {
-            trackEvent(eventName, null, 0);
+            trackEvent(context, eventName, null, 0);
         }
     }
 
-    public static void trackEvent(String eventName, JSONObject properties, int no_use){
+    public static void trackEvent(Context context, String eventName, JSONObject properties, int no_use){
 
         if (!ThirdModuleUtil.existShuShuModule()){
             return;
         }
         if(TextUtils.isEmpty(eventName)) {
             PL.e("上報事件名為空");
+            return;
+        }
+        if (!TDAnalyticsHelper.isReady(context)){
             return;
         }
         if (properties != null) {
@@ -162,8 +168,8 @@ public class TDAnalyticsHelper {
         }
     }
 
-    public static void trackEvent(String eventName){
-        trackEvent(eventName, null, 0);
+    public static void trackEvent(Context context, String eventName){
+        trackEvent(context, eventName, null, 0);
     }
     /*public static void trackEvent(String eventName,  JSONObject otherProperties){
 

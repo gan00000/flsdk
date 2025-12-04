@@ -399,7 +399,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
                         eventPropertie.setProduct_id(createOrderIdReqBean.getProductId());
                         eventPropertie.setPay_method("google");
                         eventPropertie.setCurrency_type("USD");
-                        TDAnalyticsHelper.trackEvent("payment_submit",eventPropertie);
+                        TDAnalyticsHelper.trackEvent(mActivity,"payment_submit",eventPropertie);
 
                         TTSdkHelper.trackCheckout(mActivity.getApplicationContext(), createOrderIdRes.getPayData().getOrderId(), createOrderIdReqBean.getProductId(), createOrderIdRes.getPayData().getAmount());
                         skuAmount = createOrderIdRes.getPayData().getAmount();

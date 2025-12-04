@@ -95,7 +95,7 @@ public class SdkEventLogger {
 //            EventPropertie tdBean = new EventPropertie();
 //            tdBean.setLogin_type(loginResponse.getData().getLoginType());
 //            tdBean.setUserId(loginResponse.getData().getUserId());
-            TDAnalyticsHelper.trackEvent(EventConstant.EventName.LOGIN_SUCCESS.name());
+            TDAnalyticsHelper.trackEvent(activity, EventConstant.EventName.LOGIN_SUCCESS.name());
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -125,7 +125,7 @@ public class SdkEventLogger {
 //            EventPropertie tdBean = new EventPropertie();
 //            tdBean.setRegister_type(loginResponse.getData().getLoginType());
 //            tdBean.setUserId(loginResponse.getData().getUserId());
-            TDAnalyticsHelper.trackEvent(EventConstant.EventName.REGISTER_SUCCESS.name());
+            TDAnalyticsHelper.trackEvent(activity, EventConstant.EventName.REGISTER_SUCCESS.name());
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -259,7 +259,7 @@ public class SdkEventLogger {
                 eventPropertie.setProduct_id(productId);
                 eventPropertie.setPay_method("google");
                 eventPropertie.setCurrency_type("USD");
-                TDAnalyticsHelper.trackEvent("pay_success",eventPropertie);
+                TDAnalyticsHelper.trackEvent(context, "pay_success",eventPropertie);
             }
 
 

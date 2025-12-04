@@ -864,7 +864,7 @@ public class BaseSdkImpl implements IMWSDK {
                 }else {
                     SdkEventLogger.trackingWithEventName(activity, eventName, null, EventConstant.AdType.AdTypeAllChannel);
                 }
-                TDAnalyticsHelper.trackEvent(eventName, propertieJsonObj, 0);
+                TDAnalyticsHelper.trackEvent(activity, eventName, propertieJsonObj, 0);
             }
         });
     }
@@ -1340,7 +1340,7 @@ public class BaseSdkImpl implements IMWSDK {
                     eventPropertie.setPay_method("google");
                     eventPropertie.setCurrency_type("USD");
                 }
-                TDAnalyticsHelper.trackEvent("pay_fail",eventPropertie);
+                TDAnalyticsHelper.trackEvent(activity, "pay_fail",eventPropertie);
 
                 if (iPayListener != null) {
                     iPayListener.onPayFail();
