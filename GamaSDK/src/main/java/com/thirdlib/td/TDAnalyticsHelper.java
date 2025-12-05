@@ -1,30 +1,18 @@
 package com.thirdlib.td;
 
 import android.content.Context;
-import android.text.TextUtils;
 
-import com.core.base.utils.ApkInfoUtil;
-import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.mw.sdk.R;
-import com.mw.sdk.bean.SGameBaseRequestBean;
-import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.out.bean.EventPropertie;
-import com.mw.sdk.utils.DataManager;
-import com.mw.sdk.utils.ResConfig;
-import com.mw.sdk.utils.SdkUtil;
-import com.thirdlib.ThirdModuleUtil;
 
-import org.json.JSONException;
 import org.json.JSONObject;
-
-import cn.thinkingdata.analytics.TDAnalytics;
 
 public class TDAnalyticsHelper {
 
     public static void init(Context context){
 
-        if (!ThirdModuleUtil.existShuShuModule()){
+        /*if (!ThirdModuleUtil.existShuShuModule()){
             return;
         }
 
@@ -57,7 +45,7 @@ public class TDAnalyticsHelper {
                     | TDAnalytics.TDAutoTrackEventType.APP_CRASH);
 
 
-        }
+        }*/
     }
 
     private static boolean isReady(Context context){
@@ -66,7 +54,7 @@ public class TDAnalyticsHelper {
 
     public static void setAccountId(Context context, String accountId){
 
-        if (!ThirdModuleUtil.existShuShuModule()){
+       /* if (!ThirdModuleUtil.existShuShuModule()){
             return;
         }
         if (!TDAnalyticsHelper.isReady(context)){
@@ -75,12 +63,12 @@ public class TDAnalyticsHelper {
         //在用户进行登录时，可调用 login 来设置用户的账号 ID， TE 平台将会以账号 ID 作为身份识别 ID，
         // 并且设置的账号 ID 将会在调用 logout 之前一直保留。多次调用 login 将覆盖先前的账号 ID 。
         // 用户的登录唯一标识，此数据对应上报数据里的#account_id，此时#account_id的值为TA
-        TDAnalytics.login(accountId);
+        TDAnalytics.login(accountId);*/
     }
 
     public static void setCommonProperties(Context context){
 
-        try {
+       /* try {
             if (!ThirdModuleUtil.existShuShuModule()){
                 return;
             }
@@ -138,7 +126,7 @@ public class TDAnalyticsHelper {
             TDAnalytics.setSuperProperties(superProperties);
         } catch (JSONException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     public static void trackEvent(Context context, String eventName, EventPropertie propertieBean){
@@ -151,7 +139,7 @@ public class TDAnalyticsHelper {
 
     public static void trackEvent(Context context, String eventName, JSONObject properties, int no_use){
 
-        if (!ThirdModuleUtil.existShuShuModule()){
+        /*if (!ThirdModuleUtil.existShuShuModule()){
             return;
         }
         if(TextUtils.isEmpty(eventName)) {
@@ -165,7 +153,7 @@ public class TDAnalyticsHelper {
             TDAnalytics.track(eventName, properties);
         }else {
             TDAnalytics.track(eventName);
-        }
+        }*/
     }
 
     public static void trackEvent(Context context, String eventName){

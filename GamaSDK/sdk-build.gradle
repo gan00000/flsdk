@@ -175,13 +175,13 @@ dependencies {
 
 
     //数数埋点   可选
-    implementation 'cn.thinkingdata.android:ThinkingAnalyticsSDK:3.0.2'
+//    implementation 'cn.thinkingdata.android:ThinkingAnalyticsSDK:3.0.2'
 
     //tiktok  可选
-    implementation 'com.github.tiktok:tiktok-business-android-sdk:1.3.3' // replace the version with the one which suits your need
-    //to listen for app life cycle
-    implementation 'androidx.lifecycle:lifecycle-process:2.3.1'
-    implementation 'androidx.lifecycle:lifecycle-common-java8:2.3.1'
+//    implementation 'com.github.tiktok:tiktok-business-android-sdk:1.3.3' // replace the version with the one which suits your need
+//    //to listen for app life cycle
+//    implementation 'androidx.lifecycle:lifecycle-process:2.3.1'
+//    implementation 'androidx.lifecycle:lifecycle-common-java8:2.3.1'
 
     //========================
     //可选 nowgg pay不需要的时候可以不接
@@ -217,7 +217,7 @@ dependencies {
     implementation "com.miui.referrer:homereferrer:1.0.0.7"
 
     //可选 singular
-    implementation 'com.singular.sdk:singular_sdk:12.7.1'
+//    implementation 'com.singular.sdk:singular_sdk:12.7.1'
     //如果你的应用程序是通过三星 Galaxy Store 发布的，请添加以下内容以支持三星 Galaxy Store 的安装引用程序
     //implementation 'store.galaxy.samsung.installreferrer:samsung_galaxystore_install_referrer:4.0.0'
 

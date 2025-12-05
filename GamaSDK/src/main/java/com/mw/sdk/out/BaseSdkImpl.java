@@ -295,7 +295,7 @@ public class BaseSdkImpl implements IMWSDK {
 
 
                 try {
-                    TDAnalyticsHelper.setAccountId(roleId);//shushu
+                    TDAnalyticsHelper.setAccountId(activity, roleId);//shushu
                     TDAnalyticsHelper.setCommonProperties(activity);
                     //trackEvent(activity, EventConstant.EventName.DetailedLevel);
                     //if (Integer.parseInt(roleLevel) >= 40){

@@ -8,20 +8,12 @@ import com.mw.sdk.R;
 import com.mw.sdk.ads.EventConstant;
 import com.mw.sdk.bean.SGameBaseRequestBean;
 import com.thirdlib.ThirdModuleUtil;
-import com.tiktok.TikTokBusinessSdk;
-import com.tiktok.appevents.base.EventName;
-import com.tiktok.appevents.base.TTBaseEvent;
-import com.tiktok.appevents.contents.TTCheckoutEvent;
-import com.tiktok.appevents.contents.TTContentParams;
-import com.tiktok.appevents.contents.TTContentsEvent;
-import com.tiktok.appevents.contents.TTContentsEventConstants;
-import com.tiktok.appevents.contents.TTPurchaseEvent;
 
 public class TTSdkHelper {
 
     public static void init(Context context){
 
-        if (context == null){
+        /*if (context == null){
             return;
         }
         String tt_app_id = context.getString(R.string.mw_tt_app_id);
@@ -48,12 +40,12 @@ public class TTSdkHelper {
         // calling this function if you need to let the user agree to data terms
         // before actually sending the app events to TikTok.
         TikTokBusinessSdk.startTrack();
-        PL.i("tt_app_id init finish");
+        PL.i("tt_app_id init finish");*/
     }
 
     public static void regUserInfo(Context context, String userId){
 
-        if (!ttAppIdExist(context)){
+        /*if (!ttAppIdExist(context)){
             return;
         }
 
@@ -68,12 +60,12 @@ public class TTSdkHelper {
         TikTokBusinessSdk.identify(userId
                 ,""
                 ,""
-                ,"");
+                ,"");*/
     }
 
     public static void logout(Context context){
 
-        if (!ttAppIdExist(context)){
+       /* if (!ttAppIdExist(context)){
             return;
         }
         if (!ThirdModuleUtil.existTikTokModule()){
@@ -82,11 +74,11 @@ public class TTSdkHelper {
         //Should be called when the user logs out
         //- when the app logs out
         // - when switching to another account, in that case, should call a subsequent identify(String, String, String, String)
-        TikTokBusinessSdk.logout();
+        TikTokBusinessSdk.logout();*/
     }
     public static void trackEvent(Context context, String eventName){
 
-        if (!ttAppIdExist(context)){
+        /*if (!ttAppIdExist(context)){
             return;
         }
 
@@ -105,7 +97,7 @@ public class TTSdkHelper {
             TTBaseEvent ttBaseEvent = TTBaseEvent.newBuilder(eventName).build(); //event constant
             TikTokBusinessSdk.trackTTEvent(ttBaseEvent);
         }
-        PL.i("tt_app_id trackEvent finish eventName=" + eventName);
+        PL.i("tt_app_id trackEvent finish eventName=" + eventName);*/
     }
 
 //    enum Currency {
@@ -117,7 +109,7 @@ public class TTSdkHelper {
 
     public static void trackPay(Context context, String userId, String roleId, String orderId, String productId, double amount, String des){
 
-        if (!ttAppIdExist(context)){
+        /*if (!ttAppIdExist(context)){
             return;
         }
 
@@ -140,12 +132,12 @@ public class TTSdkHelper {
                 .setContentType("inapp")//The type of content in the event.
                 .build();
         TikTokBusinessSdk.trackTTEvent(info);
-        PL.i("tt trackPay finish");
+        PL.i("tt trackPay finish");*/
 
     }
     public static void trackEventRevenue(Context context, String eventName, String userId, String roleId, String orderId, String productId, double amount){
 
-        if (!ttAppIdExist(context)){
+        /*if (!ttAppIdExist(context)){
             return;
         }
 
@@ -176,14 +168,14 @@ public class TTSdkHelper {
                 .addProperty("orderId", orderId)
                 .build();
         TikTokBusinessSdk.trackTTEvent(ttBaseEvent);
-        PL.i("tt_app_id trackEventRevenue finish eventName=" + eventName);
+        PL.i("tt_app_id trackEventRevenue finish eventName=" + eventName);*/
     }
 
     public static void trackCheckout(Context context, String orderId, String productId, double amount){
 //        TTCheckoutEvent.newBuilder().
         //Report using TTContentsEvent
 
-        if (!ttAppIdExist(context)){
+        /*if (!ttAppIdExist(context)){
             return;
         }
 
@@ -205,7 +197,7 @@ public class TTSdkHelper {
         .setContentType("inapp")//The type of content in the event.
         .build();
         TikTokBusinessSdk.trackTTEvent(info);
-        PL.i("tt trackCheckout finish");
+        PL.i("tt trackCheckout finish");*/
 
     }
 
@@ -214,7 +206,7 @@ public class TTSdkHelper {
         String tt_app_id = context.getString(R.string.mw_tt_app_id);
         return SStringUtil.isNotEmpty(tt_app_id);
     }
-
+/*
     private static String findTTStandardEventName(String eventName){
 //        List<String> standardEventNames = new ArrayList<>();
 //        standardEventNames.add("Complete Tutorial");//用户完成 新手教程/指南/攻略浏览，等游戏内指导用户的过程
@@ -251,5 +243,5 @@ public class TTSdkHelper {
             return eventName;
         }
         return standardEventName;
-    }
+    }*/
 }
