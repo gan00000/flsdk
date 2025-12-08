@@ -5,6 +5,7 @@ import android.content.Intent;
 
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.PL;
+import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
 import com.farsitel.bazaar.BazaarClientProxy;
 import com.farsitel.bazaar.BazaarResponse;
@@ -36,11 +37,6 @@ public class CafebazaarLogin {
             }
             return;
         }
-//        if (!BazaarClientProxy.INSTANCE.isNeededToUpdateBazaar(activity)){
-//            ToastUtils.toast(activity,"Please update the Bazaar app first.");
-//            return;
-//        }
-        BazaarClientProxy.INSTANCE.showInstallBazaarView(activity);
 
         BazaarSignIn.getLastSignedInAccount(activity, null, new BazaarSignInCallback() {
             @Override
@@ -50,15 +46,19 @@ public class CafebazaarLogin {
                     PL.d("Bazaar getLastSignedInAccount exist");
                     BazaarSignInAccount bazaarSignInAccount = response.getData();
                     String accountId = bazaarSignInAccount.getAccountId();
-                    if (mCallBack != null){
-                        mCallBack.success(accountId,accountId);
+                    if (SStringUtil.isNotEmpty(accountId)) {
+                        if (mCallBack != null){
+                            mCallBack.success(accountId,accountId);
+                        }
+                        return;
                     }
-                    return;
                 }
                 PL.d("Bazaar getLastSignedInAccount null");
                 startSignIn(activity);
             }
         });
+
+//        startSignIn(activity);
 
     }
 
@@ -76,7 +76,7 @@ public class CafebazaarLogin {
             return;
         }
 
-        if (resultCode == REQ_CODE_BazaarSignIn){
+        if (requestCode == REQ_CODE_BazaarSignIn){
             BazaarSignInAccount bazaarSignInAccount = BazaarSignIn.getSignedInAccountFromIntent(data);
             if (bazaarSignInAccount != null){
                 String accountId = bazaarSignInAccount.getAccountId();
