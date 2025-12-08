@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "407521169195",
-    "project_id": "en-msg-and",
-    "storage_bucket": "en-msg-and.appspot.com"
+    "project_number": "26809378149",
+    "project_id": "lsqyru-ru-and",
+    "storage_bucket": "lsqyru-ru-and.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:407521169195:android:8f13964637769747a87f6e",
+        "mobilesdk_app_id": "1:26809378149:android:70942277527bc74057ad8c",
         "android_client_info": {
-          "package_name": "com.wxbut.vmengg"
+          "package_name": "com.wgfb.bazir"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDDNdqttXV6-VQyoDbr0Wp_WTegx4Nkmyw"
+          "current_key": "AIzaSyBy2yp-nbSiI7mHP00dkUH3x3rjNFRM42s"
         }
       ],
       "services": {

@@ -1,51 +1,26 @@
 {
   "project_info": {
-    "project_number": "166447905232",
-    "project_id": "first-game-0506",
-    "storage_bucket": "first-game-0506.appspot.com"
+    "project_number": "26809378149",
+    "project_id": "lsqyru-ru-and",
+    "storage_bucket": "lsqyru-ru-and.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:166447905232:android:4460d68a1fb7357cb1e1d5",
+        "mobilesdk_app_id": "1:26809378149:android:70942277527bc74057ad8c",
         "android_client_info": {
-          "package_name": "com.wanye.fszhl"
+          "package_name": "com.wgfb.andir"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "166447905232-irdpvm0rm1p3v3591or9cqbij1gjhsdh.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.wanye.fszhl",
-            "certificate_hash": "723068ce8ea216fac2613f173ca7957324b071d3"
-          }
-        },
-        {
-          "client_id": "166447905232-7hraepme1hj92fov57ojii0ga0jhfjnr.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAauaKgU5m9xhgXNSJqsLzyrOi2fSEoRwI"
+          "current_key": "AIzaSyBy2yp-nbSiI7mHP00dkUH3x3rjNFRM42s"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "166447905232-7hraepme1hj92fov57ojii0ga0jhfjnr.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "166447905232-0430a669fr754far2h70q08nmsku9p69.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.wanye.fszhl"
-              }
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

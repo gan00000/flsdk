@@ -264,83 +264,45 @@ android {
         sdk4 {
 
             dimension "1"
+
             versionCode 1
             versionName "1.0"
+            minSdkVersion 25
+            targetSdkVersion 35
+            applicationId "com.wgfb.bazir"
+
 
             //=======================================sdk config==========================
 
             signingConfig signingConfigs.release_v4
-            //base
-            applicationId "com.wxbut.vmengg"
-            minSdkVersion 25
-            targetSdkVersion 35
 
-            resValue "string", "sdk_game_code", "vmen"
-            resValue "string", "sdk_app_key", "bbaae95d229d27e431d7ef0bc07a3b99"
+            resValue "string", "sdk_game_code", "wgfbir"
+            resValue "string", "sdk_app_key", "f6f4d21d32dab1a6d3df37d175244a33"
             resValue "string", "sdk_more_language", "true"
             resValue "string", "sdk_default_server_language", "en_US"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
-            resValue "string", "scheme", "vmen"
-            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
+            resValue "string", "scheme", "wgfbir"
+            resValue "string", "channel_platform", "bazaar"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
             //facebook
-            resValue "string", "facebook_app_id", "1027270702707841"
-            resValue "string", "facebook_client_token", "8a70921dfbaa837213690a2536935b4f"
-            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider1027270702707841"
-            resValue "string", "fb_login_protocol_scheme", "fb1027270702707841"
-            resValue "string", "facebook_app_name", "vmen" //游戏名字
+            resValue "string", "facebook_app_id", "785866174422722"
+            resValue "string", "facebook_client_token", "a373118c016e885456fa540f01c0bf26"
+            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider785866174422722"
+            resValue "string", "fb_login_protocol_scheme", "fb785866174422722"
+            resValue "string", "facebook_app_name", "wgfbir"
             //ad
             resValue "string", "adjust_app_token", ""
-            resValue "string", "sdk_appflyer_dev_key", "qJHf83ewgMExHmU8yY3MMi"
+            resValue "string", "sdk_appflyer_dev_key", ""
             //line
             resValue "string", "line_channelId", ""
             //naver
             resValue "string", "naver_client_id", ""
             resValue "string", "naver_client_secret", ""
-//            resValue "string", "mw_other_channel_v2", "true"
-
-//            resValue "string", "sdk_game_code", "msgen"
-//            resValue "string", "sdk_app_key", "fa995ce61616d9edf922d0a4615d5742"
-//            resValue "string", "sdk_more_language", "true"
-//            resValue "string", "sdk_default_server_language", "en_US"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
-//            resValue "string", "scheme", "msgen"
-//            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
-//            //facebook
-//            resValue "string", "facebook_app_id", "896845048938258"
-//            resValue "string", "facebook_client_token", "a0c51b07f16bee3bd7d1f5f546f73116"
-//            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider896845048938258"
-//            resValue "string", "fb_login_protocol_scheme", "fb896845048938258"
-//            resValue "string", "facebook_app_name", "msgen" //游戏名字
-//            //ad
-//            resValue "string", "adjust_app_token", ""
-//            resValue "string", "sdk_appflyer_dev_key", "eLh5ePsf6TD3GkSEm4bR2X"
-//            //line
-//            resValue "string", "line_channelId", ""
-//            //naver
-//            resValue "string", "naver_client_id", ""
-//            resValue "string", "naver_client_secret", ""
-
-
-//            resValue "string", "sdk_game_code", "fyden"
-//            resValue "string", "sdk_app_key", "b2c4e398d7ee39c26bd74fdd04f23c96"
-//            resValue "string", "sdk_more_language", "true"
-//            resValue "string", "sdk_default_server_language", "en_US"   //default zh_TW, en_US/zh_TW/zh_CN/vi_VN/ko_KR
-//            resValue "string", "scheme", "fyden"
-//            resValue "string", "channel_platform", "google"  //渠道区分,google包设置google,apk包设置"meow",onestore渠道使用"onestore"
-//            resValue "string", "sdk_release_european", "true"
-//
-//            //facebook
-//            resValue "string", "facebook_app_id", "480770274418792"
-//            resValue "string", "facebook_client_token", "6079e2fde7ab9a37e8ef36782d86dfa4"
-//            resValue "string", "facebook_authorities", "com.facebook.app.FacebookContentProvider480770274418792"
-//            resValue "string", "fb_login_protocol_scheme", "fb480770274418792"
-//            resValue "string", "facebook_app_name", "fyden" //游戏名字
-//            //ad
-//            resValue "string", "adjust_app_token", ""
-//            resValue "string", "sdk_appflyer_dev_key", ""
-//            //line
-//            resValue "string", "line_channelId", ""
-//            //naver
-//            resValue "string", "naver_client_id", ""
-//            resValue "string", "naver_client_secret", ""
+            //tt
+            resValue "string", "mw_tt_app_id", ""
+            //rustore渠道
+            resValue "string", "mw_vk_appid", ""
+            //Google包添加的额外第三方显示
+            resValue "string", "mw_dialog_pay_add_type", ""  //vk,xiaomi
+            resValue "string", "sdk_first_silent_login", "false"
 
             //=======================================sdk config end==========================
 

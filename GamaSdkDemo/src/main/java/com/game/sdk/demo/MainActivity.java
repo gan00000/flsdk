@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
 //                String skuId = "com.wmwx.sgcz.99";
 //                String skuId = "com.wanxin.tgru.99";
 //                String skuId = "com.aab.sat";
-                String skuId = "com.wxbut.vmen.1499";
+                String skuId = "com.wgfb.bazir.99";
                 mIMWSDK.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(),skuId, extra,roleId,roleName,roleLevel, vipLevel,serverCode, serverName, new IPayListener() {
 
                     @Override
