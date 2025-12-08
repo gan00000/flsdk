@@ -18,7 +18,7 @@ import com.mw.sdk.utils.DialogUtil;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.google.SGoogleSignIn;
 import com.thirdlib.huawei.HuaweiSignIn;
-import com.thirdlib.irCafebazaar.CafebazaarLogin;
+import com.thirdlib.irCafebazaar.CafebazaarHelper;
 import com.thirdlib.line.SLineSignIn;
 import com.thirdlib.twitter.TwitterLogin;
 import com.mw.sdk.login.widget.v2.TermsViewV3;
@@ -70,7 +70,7 @@ public class DialogLoginImpl implements ILogin {
             huaweiSignIn.handleActivityResult(activity, requestCode, resultCode, data);
         }
 
-        CafebazaarLogin.handleActivityResult(activity, requestCode, resultCode, data);
+        CafebazaarHelper.handleActivityResult(activity, requestCode, resultCode, data);
 
         PL.i("DialogLoginImpl onActivityResult");
     }

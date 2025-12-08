@@ -90,6 +90,7 @@ import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.google.SGoogleProxy;
 import com.thirdlib.huawei.HuaweiPayImpl;
 import com.thirdlib.irCafebazaar.BazaarPayActivity;
+import com.thirdlib.irCafebazaar.CafebazaarHelper;
 import com.thirdlib.td.TDAnalyticsHelper;
 import com.thirdlib.tiktok.TTSdkHelper;
 import com.thirdlib.vk.RustoreManager;
@@ -1373,6 +1374,15 @@ public class BaseSdkImpl implements IMWSDK {
                 }  else if (ChannelPlatform.VK.getChannel_platform().equals(channel_platform)) {
                     RustoreManager.launchReviewFlow(activity, sfCallBack);
                 }else if (ChannelPlatform.NOWGG.getChannel_platform().equals(channel_platform)) {
+                }else if (ChannelPlatform.BAZAAR.getChannel_platform().equals(channel_platform)) {
+                    try {
+                        CafebazaarHelper.goToReview(activity);
+                        if (sfCallBack != null){
+                            sfCallBack.success("","");
+                        }
+                    } catch (Exception e) {
+
+                    }
                 }else {
                 }
             }

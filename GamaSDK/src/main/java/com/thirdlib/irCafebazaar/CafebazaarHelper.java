@@ -2,6 +2,7 @@ package com.thirdlib.irCafebazaar;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.PL;
@@ -17,7 +18,7 @@ import com.farsitel.bazaar.core.model.BazaarSignInOptions;
 import com.farsitel.bazaar.core.model.SignInOption;
 import com.thirdlib.ThirdModuleUtil;
 
-public class CafebazaarLogin {
+public class CafebazaarHelper {
 
     public static final int REQ_CODE_BazaarSignIn = 230;
 
@@ -89,6 +90,15 @@ public class CafebazaarLogin {
                 mCallBack.fail("","");
             }
         }
+
+    }
+
+    public static void goToReview(Activity activity){
+
+        Intent intent = new Intent(Intent.ACTION_EDIT);
+        intent.setData(Uri.parse("bazaar://details?id=" + activity.getPackageName()));
+        intent.setPackage("com.farsitel.bazaar");
+        activity.startActivity(intent);
 
     }
 }
