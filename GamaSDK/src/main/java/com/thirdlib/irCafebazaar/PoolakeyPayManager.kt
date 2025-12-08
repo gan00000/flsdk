@@ -1,6 +1,7 @@
 package com.thirdlib.irCafebazaar
 
 import android.app.Activity
+import android.os.Handler
 import android.text.TextUtils
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -80,17 +81,28 @@ class PoolakeyPayManager private constructor(){
             }
 
         }
-
+        val bHandler = Handler()
+        var isOk = 0;
         startPaymentConnection { result ->
             if (result){
 //                getSkuDetail(productId){
 //
 //                }
+                isOk = 1
                 purchaseProduct(productId, payload, dynamicPriceToken)
             }else{
+                isOk = 2
                 ppCallback?.fali("payment connect fail")
             }
         }
+
+        bHandler.postDelayed({
+
+            if (isOk == 0){
+                ppCallback?.fali("payment connect fail")
+            }
+
+        }, 6000)
     }
 
 
