@@ -49,6 +49,7 @@ import com.thirdlib.facebook.FbSp;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.google.SGoogleSignIn;
 import com.thirdlib.huawei.HuaweiSignIn;
+import com.thirdlib.irCafebazaar.CafebazaarLogin;
 import com.thirdlib.line.SLineSignIn;
 import com.thirdlib.nowgg.NowggLogin;
 import com.thirdlib.singular.SingularUtil;
@@ -480,6 +481,28 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
             @Override
             public void failure(String msg) {
+
+            }
+        });
+    }
+
+    @Override
+    public void bazaarLogin(Activity activity) {
+
+        CafebazaarLogin.login(activity, new SFCallBack<String>() {
+            @Override
+            public void success(String id, String msg) {
+
+                ThirdLoginRegRequestBean thirdLoginRegRequestBean = new ThirdLoginRegRequestBean(activity);
+                thirdLoginRegRequestBean.setThirdPlatId(id);
+                thirdLoginRegRequestBean.setRegistPlatform(SLoginType.LOGIN_TYPE_BAZAAR);
+                thirdLoginRegRequestBean.setThirdAccount("");
+                thirdPlatLogin(activity, thirdLoginRegRequestBean);
+
+            }
+
+            @Override
+            public void fail(String result, String msg) {
 
             }
         });

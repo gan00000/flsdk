@@ -74,7 +74,7 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
     View historyAccountListBtn;
 
     private View fbLoginView, macLoginView, googleLoginView, lineLoginView, nowggLoginView;
-
+    private View bazaarLoginView;
     private AccountPopupWindow accountPopupWindow;
     private AccountModel currentAccountModel;
 
@@ -255,12 +255,18 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
         macLoginView = contentView.findViewById(R.id.guestLoginView);
         googleLoginView = contentView.findViewById(R.id.ggLoginView);
         nowggLoginView = contentView.findViewById(R.id.nowggLoginView);
+        bazaarLoginView = contentView.findViewById(R.id.bazaarLoginView);
 
         String channel_platform = ResConfig.getChannelPlatform(getActivity());
         if (ChannelPlatform.NOWGG.getChannel_platform().equals(channel_platform)){
             nowggLoginView.setVisibility(View.VISIBLE);
         }else {
             nowggLoginView.setVisibility(View.GONE);
+        }
+        if (ChannelPlatform.BAZAAR.getChannel_platform().equals(channel_platform)){
+            bazaarLoginView.setVisibility(View.VISIBLE);
+        }else {
+            bazaarLoginView.setVisibility(View.GONE);
         }
 
         ConfigBean configBean = SdkUtil.getSdkCfg(getContext());
@@ -353,6 +359,15 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
                     return;
                 }
                 sLoginDialogv2.getLoginPresenter().nowggLogin(sLoginDialogv2.getActivity());
+            }
+        });
+        bazaarLoginView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!checkAgreeTerm()) {
+                    return;
+                }
+                sLoginDialogv2.getLoginPresenter().bazaarLogin(sLoginDialogv2.getActivity());
             }
         });
 
@@ -517,6 +532,9 @@ public class AccountLoginLayoutV2 extends SLoginBaseRelativeLayout {
                 return;
             }else if (SLoginType.LOGIN_TYPE_NOWGG.equals(currentAccountModel.getLoginType())){
                 nowggLoginView.performClick();
+                return;
+            }else if (SLoginType.LOGIN_TYPE_BAZAAR.equals(currentAccountModel.getLoginType())){
+                bazaarLoginView.performClick();
                 return;
             }
         }

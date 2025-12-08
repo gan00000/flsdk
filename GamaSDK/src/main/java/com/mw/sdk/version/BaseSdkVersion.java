@@ -85,6 +85,8 @@ public abstract class BaseSdkVersion {
             imageResId = R.mipmap.icon_nowgg;
         }else if (SLoginType.LOGIN_TYPE_HUAWEI.equals(accountModel.getLoginType())){
             imageResId = R.mipmap.icon_huawei_2;
+        }else if (SLoginType.LOGIN_TYPE_BAZAAR.equals(accountModel.getLoginType())){
+            imageResId = R.mipmap.icon_bazaar;
         }
 
         imageView.setImageResource(imageResId);
