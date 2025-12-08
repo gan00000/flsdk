@@ -1,6 +1,6 @@
 
 ext {
-    sdk_version = "2.4.0"
+    sdk_version = "2.4.3"
     domainUrl= "luckyyx.com"
 }
 
@@ -45,6 +45,7 @@ android {
             //ad
             resValue "string", "adjust_app_token", ""
             resValue "string", "sdk_appflyer_dev_key", ""
+            resValue "string", "mw_appmetrica_api_key", "75e5d1f8-e4b3-4309-9d3c-51a2f2cefcdc"
             //line
             resValue "string", "line_channelId", ""
             //naver
