@@ -562,6 +562,10 @@ public class BaseSdkImpl implements IMWSDK {
                         if (iPayListener != null) {
                             iPayListener.onPaySuccess(payBean.getProductId(),payBean.getCpOrderId());
                         }
+                    }else if (extra_code==1002){//取消
+                        if (iPayListener != null) {
+                            iPayListener.onPayFail();
+                        }
                     }else {
                         if (iPayListener != null) {
                             iPayListener.onPayFail();

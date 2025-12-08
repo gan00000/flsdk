@@ -47,7 +47,7 @@ public class BazaarPayActivity extends SBaseActivity {
 
 			@Override
 			public void cancel(String msg) {
-                setResultForPay(1001, null);
+                setResultForPay(1002, null);
 			}
 		});
 
