@@ -584,10 +584,15 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
                             public void success(GPExchangeRes gpExchangeRes, String msg) {
                                 PL.i("launchPurchaseFlow requestSendStone success");
 
+                                //之所以消费放后面，是因为服务端也会进行消费
                                 GBillingHelper.getInstance().consumeAsync(mActivity, purchase, false, new ConsumeResponseListener() {
                                     @Override
                                     public void onConsumeResponse(@NonNull BillingResult billingResult, @NonNull String s) {
                                         PL.i("launchPurchaseFlow onConsumeResponse => " + s);
+                                        if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
+                                            // Handle the success of the consume operation.
+                                            PL.i("consumeAsync success");
+                                        }
                                         callbackSuccess(purchase, gpExchangeRes);
                                     }
                                 });
