@@ -84,6 +84,7 @@ import com.mw.sdk.widget.SBaseDialog;
 import com.mw.sdk.widget.SWebView;
 import com.mw.sdk.widget.SWebViewDialog;
 import com.mw.sdk.widget.SWebViewLayout;
+import com.thirdlib.AppMetrica.AppMetricaHelper;
 import com.thirdlib.adjust.AdjustHelper;
 import com.thirdlib.af.AFHelper;
 import com.thirdlib.facebook.SFacebookProxy;
@@ -205,6 +206,7 @@ public class BaseSdkImpl implements IMWSDK {
         AFHelper.applicationOnCreate(application);
         AdjustHelper.init(application);
         TTSdkHelper.init(application.getApplicationContext());
+        AppMetricaHelper.applicationOnCreate(application);
         SPUtil.saveBoolean(application.getApplicationContext(), SdkUtil.SDK_SP_FILE,"sdk_applicationOnCreate_call", true);
 
     }

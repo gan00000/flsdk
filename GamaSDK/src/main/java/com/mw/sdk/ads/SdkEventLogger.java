@@ -24,6 +24,7 @@ import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.out.bean.EventPropertie;
 import com.mw.sdk.utils.ResConfig;
 import com.mw.sdk.utils.SdkUtil;
+import com.thirdlib.AppMetrica.AppMetricaHelper;
 import com.thirdlib.adjust.AdjustHelper;
 import com.thirdlib.af.AFHelper;
 import com.thirdlib.facebook.FBEventsConstants;
@@ -126,6 +127,7 @@ public class SdkEventLogger {
 //            tdBean.setRegister_type(loginResponse.getData().getLoginType());
 //            tdBean.setUserId(loginResponse.getData().getUserId());
             TDAnalyticsHelper.trackEvent(activity, EventConstant.EventName.REGISTER_SUCCESS.name());
+            AppMetricaHelper.logEvent(activity, eventName, null);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -241,6 +243,11 @@ public class SdkEventLogger {
                 AdjustHelper.trackEvent(context, eventName, payEventValues, usdPrice, orderId);
                 SingularUtil.logCustomRevenue(context, eventName, usdPrice, payEventValues);
             }
+
+            if (SStringUtil.isEmpty(eventName)){
+                AppMetricaHelper.logRevenue(context, "", (int )(usdPrice * 100), "USD", productId, orderId);
+            }
+
             //tt
             if (SStringUtil.isEmpty(eventName)){
 
