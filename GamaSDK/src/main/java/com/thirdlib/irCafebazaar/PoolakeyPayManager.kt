@@ -16,6 +16,7 @@ import ir.cafebazaar.poolakey.Payment
 import ir.cafebazaar.poolakey.callback.PurchaseQueryCallback
 import ir.cafebazaar.poolakey.config.PaymentConfiguration
 import ir.cafebazaar.poolakey.config.SecurityCheck
+import ir.cafebazaar.poolakey.entity.PurchaseInfo
 import ir.cafebazaar.poolakey.entity.SkuDetails
 import ir.cafebazaar.poolakey.exception.DynamicPriceNotSupportedException
 import ir.cafebazaar.poolakey.request.PurchaseRequest
@@ -141,8 +142,7 @@ class PoolakeyPayManager private constructor(){
                 }
                 purchaseSucceed { mPurchaseInfo ->
                     PL.d("purchaseSucceed")
-                    consumePurchasedItem(mPurchaseInfo.purchaseToken)
-                    ppCallback?.succeed(mPurchaseInfo)
+                    consumePurchasedItem(mPurchaseInfo)
                 }
                 purchaseCanceled {
                     PL.d("purchaseCanceled")
@@ -228,15 +228,18 @@ class PoolakeyPayManager private constructor(){
 
     }
 
-    private fun consumePurchasedItem(purchaseToken: String) {
+    private fun consumePurchasedItem(mPurchaseInfo : PurchaseInfo) {
 
+        //不管成功还是失败，都回调发货到服务端
         if (isConnect && paymentConnection != null && paymentConnection?.getState() == ConnectionState.Connected) {
-            poolakeyPayment.consumeProduct(purchaseToken) {
+            poolakeyPayment.consumeProduct(mPurchaseInfo.purchaseToken) {
                 consumeSucceed {
                     PL.d("consumeSucceed")
+                    ppCallback?.succeed(mPurchaseInfo)
                 }
                 consumeFailed {
                     PL.d("consumeFailed")
+                    ppCallback?.succeed(mPurchaseInfo)
                 }
             }
         }
