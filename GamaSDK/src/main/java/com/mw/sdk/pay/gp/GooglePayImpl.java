@@ -712,17 +712,24 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
 
     private void removeLocalPurchase(Context context, Purchase purchase){
 
+        PL.d("tremoveLocalPurchase...");
         List<PaySuccessData> paySuccessDataList = getLocalPurchase(context);
 
         if (paySuccessDataList != null && !paySuccessDataList.isEmpty()){
             // 过滤掉匹配订单 ID 的元素，生成一个新的列表
-            List<PaySuccessData> updatedList = paySuccessDataList.stream()
+            List<PaySuccessData> removeList = paySuccessDataList.stream()
                     .filter(mPaySuccessData ->
-                            !Objects.equals(purchase.getOrderId(), mPaySuccessData.getThirdOrderId()))
+                            Objects.equals(purchase.getOrderId(), mPaySuccessData.getThirdOrderId()))
                     .collect(Collectors.toList());
 
+            if (removeList == null || removeList.isEmpty()){
+                PL.d("the purchase not in local, not need to remove");
+                return;
+            }
+            PL.d("the purchase in local, need to remove");
+            paySuccessDataList.removeAll(removeList);
             // 将新列表保存
-            updateLocalPayDatas(context, updatedList);
+            updateLocalPayDatas(context, paySuccessDataList);
         }
         // 如果 paySuccessDataList 为 null，则不需要保存任何东西，当前方法结束
     }
