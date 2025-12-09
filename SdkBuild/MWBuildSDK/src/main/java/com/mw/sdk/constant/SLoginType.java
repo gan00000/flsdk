@@ -34,4 +34,5 @@ public class SLoginType {
 
 	public static final String LOGIN_TYPE_NAVER = "naver";
 	public static final String LOGIN_TYPE_NOWGG = "nowgg";
+	public static final String LOGIN_TYPE_BAZAAR = "bazaar";
 }

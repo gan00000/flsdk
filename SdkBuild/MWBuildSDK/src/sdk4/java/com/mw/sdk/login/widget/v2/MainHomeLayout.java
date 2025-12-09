@@ -27,6 +27,7 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
 
     private View layout_go_account_login, guestLoginView;
     private ImageView iv_login_google,iv_login_fb,iv_login_line,iv_login_nowgg;
+    private ImageView iv_login_bazaar;
     private CheckBox cb_agree_term;
     private View layout_go_term;
     private View layout_term;
@@ -59,6 +60,7 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
         iv_login_fb = contentView.findViewById(R.id.iv_login_fb);
         iv_login_line = contentView.findViewById(R.id.iv_login_line);
         iv_login_nowgg = contentView.findViewById(R.id.iv_login_nowgg);
+        iv_login_bazaar = contentView.findViewById(R.id.iv_login_bazaar);
 
         cb_agree_term = contentView.findViewById(R.id.cb_agree_term);
         layout_go_term = contentView.findViewById(R.id.layout_go_term);
@@ -71,6 +73,7 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
         iv_login_fb.setOnClickListener(this);
         iv_login_line.setOnClickListener(this);
         iv_login_nowgg.setOnClickListener(this);
+        iv_login_bazaar.setOnClickListener(this);
         layout_go_term.setOnClickListener(this);
 
         cb_agree_term.setChecked(true);
@@ -111,6 +114,13 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
         }else {
             iv_login_nowgg.setVisibility(View.GONE);
         }
+
+        if (ChannelPlatform.BAZAAR.getChannel_platform().equals(channel_platform)){
+            iv_login_bazaar.setVisibility(View.VISIBLE);
+        }else {
+            iv_login_bazaar.setVisibility(View.GONE);
+        }
+
         return contentView;
     }
 
@@ -146,6 +156,12 @@ public class MainHomeLayout extends SLoginBaseRelativeLayout implements View.OnC
 
             if (checkAgreeTerm()){
                 sLoginDialogv2.getLoginPresenter().nowggLogin(sLoginDialogv2.getActivity());
+            }
+
+        }else if (v == iv_login_bazaar){
+
+            if (checkAgreeTerm()){
+                sLoginDialogv2.getLoginPresenter().bazaarLogin(sLoginDialogv2.getActivity());
             }
 
         }else if (v == layout_go_term){

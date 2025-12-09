@@ -16,6 +16,7 @@ public interface IPay extends IGameLifeCycle{
 //    int PAY_SUCCESS = 93;
 //    int PAY_FAIL = 94;
 
+    public static final String SDK_MW_PAY_FILE = "sdk_mw_pay_file.xml";
     /**
      * 进入Google储值流程
      */

@@ -19,9 +19,14 @@ import com.android.billingclient.api.PurchasesResponseListener;
 import com.android.billingclient.api.PurchasesUpdatedListener;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.PL;
+import com.core.base.utils.SPUtil;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ThreadUtil;
 import com.core.base.utils.ToastUtils;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.mw.sdk.bean.PaySuccessData;
+import com.mw.sdk.bean.SGameBaseRequestBean;
 import com.mw.sdk.bean.req.PayCreateOrderReqBean;
 import com.mw.sdk.out.bean.EventPropertie;
 import com.mw.sdk.utils.SdkUtil;
@@ -41,8 +46,14 @@ import com.mw.sdk.constant.ApiRequestMethod;
 import com.thirdlib.td.TDAnalyticsHelper;
 import com.thirdlib.tiktok.TTSdkHelper;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 import gg.now.billingclient.util.BillingHelper;
 
@@ -75,6 +86,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
      */
     private boolean isPaying = false;
 
+    private Gson gson = new Gson();
 
     private void callbackSuccess(Purchase purchase, GPExchangeRes gpExchangeRes) {
         isPaying = false;
@@ -250,8 +262,36 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
     public void startQueryPurchase(Activity activity) {
 
         this.mActivity = activity;
-        PL.i("startQueryPurchase onQueryPurchasesResponse");
+
         GBillingHelper.getInstance().setBillingHelperStatusCallback(this);
+
+        //查询本地补发
+        PL.i("startQueryPurchase local purchase");
+        List<PaySuccessData> paySuccessDataList = getLocalPurchase(activity);
+        if (paySuccessDataList != null && !paySuccessDataList.isEmpty()){
+            List<PaySuccessData> errorDataList = new ArrayList<>();
+            for (PaySuccessData mPaySuccessData : paySuccessDataList){
+                try {
+                    Purchase localPurchase = new Purchase(mPaySuccessData.getOriginalJson(), mPaySuccessData.getSignature());
+                    PL.i("startQueryPurchase local purchase sendGoodsToUser ggOrderId=" + localPurchase.getOrderId());
+                    sendGoodsToUser(localPurchase, true);
+
+                } catch (JSONException e) {
+                    PL.i("local data new purchase JSONException error");
+                    errorDataList.add(mPaySuccessData);
+                }
+            }
+
+            if (!errorDataList.isEmpty()){
+                paySuccessDataList.removeAll(errorDataList);
+                updateLocalPayDatas(activity, paySuccessDataList);
+            }
+        }else {
+            PL.i("startQueryPurchase local purchase null");
+        }
+
+        //查Google
+        PL.i("startQueryPurchase queryPurchasesAsync");
         GBillingHelper.getInstance().queryPurchasesAsync(activity, false);
 
     }
@@ -399,7 +439,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
                         eventPropertie.setProduct_id(createOrderIdReqBean.getProductId());
                         eventPropertie.setPay_method("google");
                         eventPropertie.setCurrency_type("USD");
-                        TDAnalyticsHelper.trackEvent("payment_submit",eventPropertie);
+                        TDAnalyticsHelper.trackEvent(mActivity,"payment_submit",eventPropertie);
 
                         TTSdkHelper.trackCheckout(mActivity.getApplicationContext(), createOrderIdRes.getPayData().getOrderId(), createOrderIdReqBean.getProductId(), createOrderIdRes.getPayData().getAmount());
                         skuAmount = createOrderIdRes.getPayData().getAmount();
@@ -459,25 +499,10 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
                         if (consumeFinish == PurchaseState_PURCHASED_SIEZ){
                             consumeResponseListener.onConsumeResponse(null,"");
                         }
+
+                        sendGoodsToUser(purchase, true);
                     }
                 });
-                activity.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        PayApi.requestSendStone_Google(activity, purchase,true, new SFCallBack<GPExchangeRes>() {
-                            @Override
-                            public void success(GPExchangeRes result, String msg) {
-
-                            }
-
-                            @Override
-                            public void fail(GPExchangeRes result, String msg) {
-
-                            }
-                        });
-                    }
-                });
-
             }
         }
     }
@@ -516,23 +541,14 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
                 this.mActivity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        PayApi.requestSendStone_Google(mActivity, purchase, true, new SFCallBack<GPExchangeRes>() {
-                            @Override
-                            public void success(GPExchangeRes result, String msg) {
-                                PL.i("startQueryPurchase requestSendStone success");
-                                //3.消费
-                                GBillingHelper.getInstance().consumeAsync(mActivity, purchase, true, new ConsumeResponseListener() {
-                                    @Override
-                                    public void onConsumeResponse(@NonNull BillingResult billingResult, @NonNull String s) {
-                                        PL.i("startQueryPurchase onConsumeResponse => " + s);
-                                    }
-                                });
 
-                            }
-
+                        //3.消费
+                        GBillingHelper.getInstance().consumeAsync(mActivity, purchase, true, new ConsumeResponseListener() {
                             @Override
-                            public void fail(GPExchangeRes result, String msg) {
-                                PL.i("startQueryPurchase requestSendStone fail => " + msg);
+                            public void onConsumeResponse(@NonNull BillingResult billingResult, @NonNull String s) {
+                                PL.i("startQueryPurchase onConsumeResponse => " + s);
+                                //不论消费是否成功
+                                sendGoodsToUser(purchase, true);
                             }
                         });
                     }
@@ -578,34 +594,22 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
                     当购买状态从“PENDING”转换为“PURCHASED”时，3 天的确认期限才会开始。*/
                     PL.i("launchPurchaseFlow onPurchasesUpdated = " + purchase.getPurchaseState());
                     if(purchase.getPurchaseState() == Purchase.PurchaseState.PURCHASED){
-                        //发送到服务器,发币
-                        PayApi.requestSendStone_Google(mActivity, purchase,false, new SFCallBack<GPExchangeRes>() {
+
+                        GBillingHelper.getInstance().consumeAsync(mActivity, purchase, false, new ConsumeResponseListener() {
                             @Override
-                            public void success(GPExchangeRes gpExchangeRes, String msg) {
-                                PL.i("launchPurchaseFlow requestSendStone success");
-
-                                GBillingHelper.getInstance().consumeAsync(mActivity, purchase, false, new ConsumeResponseListener() {
-                                    @Override
-                                    public void onConsumeResponse(@NonNull BillingResult billingResult, @NonNull String s) {
-                                        PL.i("launchPurchaseFlow onConsumeResponse => " + s);
-                                        callbackSuccess(purchase, gpExchangeRes);
-                                    }
-                                });
-
-                            }
-
-                            @Override
-                            public void fail(GPExchangeRes result, String msg) {
-                                PL.i("launchPurchaseFlow requestSendStone fail => " + msg);
-//
-                                if (result != null && SStringUtil.isNotEmpty(result.getMessage())){
-                                    callbackFail(result.getMessage());
+                            public void onConsumeResponse(@NonNull BillingResult billingResult, @NonNull String s) {
+                                PL.i("launchPurchaseFlow onConsumeResponse => " + s);
+                                if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
+                                    // Handle the success of the consume operation.
+                                    PL.i("consumeAsync success");
                                 }else {
-                                    callbackFail("error");
+                                    PL.i("consumeAsync fail");
                                 }
-
+                                //无论消费成功还是失败都发给服务端
+                                sendGoodsToUser(purchase, false);
                             }
                         });
+
                     }
                 }
 
@@ -627,4 +631,129 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
         PL.i( "pay handleCancel");
         dimissDialog();
     }
+
+    private void sendGoodsToUser(Purchase purchase, boolean reissue) {
+
+        mActivity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                //发送到服务器,发币
+                PayApi.requestSendStone_Google(mActivity, purchase, reissue, new SFCallBack<GPExchangeRes>() {
+                    @Override
+                    public void success(GPExchangeRes gpExchangeRes, String msg) {
+
+                        removeLocalPurchase(mActivity, purchase);
+                        if (reissue){
+                            PL.d("startQueryPurchase requestSendStone success");
+                        }else {
+                            PL.d("launchPurchaseFlow requestSendStone success");
+                            callbackSuccess(purchase, gpExchangeRes);
+                        }
+
+                    }
+
+                    @Override
+                    public void fail(GPExchangeRes result, String msg) {
+
+                        SGameBaseRequestBean sGameBaseRequestBean = new SGameBaseRequestBean(mActivity);
+                        addPurchaseToLocal(mActivity, purchase, sGameBaseRequestBean.getUserId(), sGameBaseRequestBean.getRoleId());
+                        //保存订单，后续补发，因为先消费，所以失败后一般无法在查
+
+                        if (reissue){
+                            PL.i("startQueryPurchase requestSendStone fail => " + msg);
+                        }else {
+
+                            PL.i("launchPurchaseFlow requestSendStone fail => " + msg);
+                            if (result != null && SStringUtil.isNotEmpty(result.getMessage())){
+                                callbackFail(result.getMessage());
+                            }else {
+                                callbackFail("error");
+                            }
+                        }
+
+                    }
+                });
+
+            }
+        });
+
+    }
+
+    private void addPurchaseToLocal(Context context, Purchase purchase, String userId, String roleId){
+
+        PL.d("addPurchaseToLocal=" + purchase.getOrderId());
+
+        List<PaySuccessData> paySuccessDataList = getLocalPurchase(context);
+        if (paySuccessDataList != null && !paySuccessDataList.isEmpty()){
+            for (PaySuccessData mPaySuccessData : paySuccessDataList){
+                if (Objects.equals(purchase.getOrderId(), mPaySuccessData.getThirdOrderId())){
+                    PL.d("addPurchaseToLocal already exist=" + purchase.getOrderId());
+                    return;
+                }
+            }
+        }
+        if (paySuccessDataList == null){
+            paySuccessDataList = new ArrayList<>();
+        }
+
+        PaySuccessData paySuccessData = new PaySuccessData();
+        paySuccessData.setUserId(userId);
+        paySuccessData.setRoleId(roleId);
+        paySuccessData.setOriginalJson(purchase.getOriginalJson());
+        paySuccessData.setSignature(purchase.getSignature());
+        paySuccessData.setThirdOrderId(purchase.getOrderId());
+        PL.d("---addPurchaseToLocal to list---");
+        paySuccessDataList.add(paySuccessData);
+        updateLocalPayDatas(context, paySuccessDataList);
+
+    }
+
+    private void updateLocalPayDatas(Context context, List<PaySuccessData> paySuccessDataList) {
+        if (paySuccessDataList == null){
+            return;
+        }
+        PL.d("---updateLocalPayDatas---");
+        SPUtil.saveSimpleInfo(context, SDK_MW_PAY_FILE, "mw_gg_pay", gson.toJson(paySuccessDataList));
+    }
+
+    private void removeLocalPurchase(Context context, Purchase purchase){
+
+        PL.d("tremoveLocalPurchase...");
+        List<PaySuccessData> paySuccessDataList = getLocalPurchase(context);
+
+        if (paySuccessDataList != null && !paySuccessDataList.isEmpty()){
+            // 过滤掉匹配订单 ID 的元素，生成一个新的列表
+            List<PaySuccessData> removeList = paySuccessDataList.stream()
+                    .filter(mPaySuccessData ->
+                            Objects.equals(purchase.getOrderId(), mPaySuccessData.getThirdOrderId()))
+                    .collect(Collectors.toList());
+
+            if (removeList == null || removeList.isEmpty()){
+                PL.d("the purchase not in local, not need to remove");
+                return;
+            }
+            PL.d("the purchase in local, need to remove");
+            paySuccessDataList.removeAll(removeList);
+            // 将新列表保存
+            updateLocalPayDatas(context, paySuccessDataList);
+        }
+        // 如果 paySuccessDataList 为 null，则不需要保存任何东西，当前方法结束
+    }
+
+
+    private List<PaySuccessData> getLocalPurchase(Context context){
+
+        String payInfo = SPUtil.getSimpleString(context, SDK_MW_PAY_FILE, "mw_gg_pay");
+        if (SStringUtil.isEmpty(payInfo)){
+            return null;
+        }
+
+        // 1. 定义目标类型：使用 TypeToken 来表示 List<User>
+        Type userListType = new TypeToken<List<PaySuccessData>>(){}.getType();
+        // 2. 将 JSON 字符串解析为 List<User>
+        List<PaySuccessData> purchaseList = gson.fromJson(payInfo, userListType);
+        return purchaseList;
+    }
+
 }

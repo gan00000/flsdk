@@ -84,12 +84,14 @@ import com.mw.sdk.widget.SBaseDialog;
 import com.mw.sdk.widget.SWebView;
 import com.mw.sdk.widget.SWebViewDialog;
 import com.mw.sdk.widget.SWebViewLayout;
+import com.thirdlib.AppMetrica.AppMetricaHelper;
 import com.thirdlib.adjust.AdjustHelper;
 import com.thirdlib.af.AFHelper;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.google.SGoogleProxy;
 import com.thirdlib.huawei.HuaweiPayImpl;
 import com.thirdlib.irCafebazaar.BazaarPayActivity;
+import com.thirdlib.irCafebazaar.CafebazaarHelper;
 import com.thirdlib.td.TDAnalyticsHelper;
 import com.thirdlib.tiktok.TTSdkHelper;
 import com.thirdlib.vk.RustoreManager;
@@ -204,6 +206,7 @@ public class BaseSdkImpl implements IMWSDK {
         AFHelper.applicationOnCreate(application);
         AdjustHelper.init(application);
         TTSdkHelper.init(application.getApplicationContext());
+        AppMetricaHelper.applicationOnCreate(application);
         SPUtil.saveBoolean(application.getApplicationContext(), SdkUtil.SDK_SP_FILE,"sdk_applicationOnCreate_call", true);
 
     }
@@ -295,7 +298,7 @@ public class BaseSdkImpl implements IMWSDK {
 
 
                 try {
-                    TDAnalyticsHelper.setAccountId(roleId);//shushu
+                    TDAnalyticsHelper.setAccountId(activity, roleId);//shushu
                     TDAnalyticsHelper.setCommonProperties(activity);
                     //trackEvent(activity, EventConstant.EventName.DetailedLevel);
                     //if (Integer.parseInt(roleLevel) >= 40){
@@ -558,6 +561,10 @@ public class BaseSdkImpl implements IMWSDK {
                     if (extra_code==1000 && payBean != null){
                         if (iPayListener != null) {
                             iPayListener.onPaySuccess(payBean.getProductId(),payBean.getCpOrderId());
+                        }
+                    }else if (extra_code==1002){//取消
+                        if (iPayListener != null) {
+                            iPayListener.onPayFail();
                         }
                     }else {
                         if (iPayListener != null) {
@@ -864,7 +871,7 @@ public class BaseSdkImpl implements IMWSDK {
                 }else {
                     SdkEventLogger.trackingWithEventName(activity, eventName, null, EventConstant.AdType.AdTypeAllChannel);
                 }
-                TDAnalyticsHelper.trackEvent(eventName, propertieJsonObj, 0);
+                TDAnalyticsHelper.trackEvent(activity, eventName, propertieJsonObj, 0);
             }
         });
     }
@@ -1340,7 +1347,7 @@ public class BaseSdkImpl implements IMWSDK {
                     eventPropertie.setPay_method("google");
                     eventPropertie.setCurrency_type("USD");
                 }
-                TDAnalyticsHelper.trackEvent("pay_fail",eventPropertie);
+                TDAnalyticsHelper.trackEvent(activity, "pay_fail",eventPropertie);
 
                 if (iPayListener != null) {
                     iPayListener.onPayFail();
@@ -1373,6 +1380,15 @@ public class BaseSdkImpl implements IMWSDK {
                 }  else if (ChannelPlatform.VK.getChannel_platform().equals(channel_platform)) {
                     RustoreManager.launchReviewFlow(activity, sfCallBack);
                 }else if (ChannelPlatform.NOWGG.getChannel_platform().equals(channel_platform)) {
+                }else if (ChannelPlatform.BAZAAR.getChannel_platform().equals(channel_platform)) {
+                    try {
+                        CafebazaarHelper.goToReview(activity);
+                        if (sfCallBack != null){
+                            sfCallBack.success("","");
+                        }
+                    } catch (Exception e) {
+
+                    }
                 }else {
                 }
             }

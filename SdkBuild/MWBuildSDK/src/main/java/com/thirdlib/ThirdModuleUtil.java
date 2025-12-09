@@ -211,4 +211,25 @@ public class ThirdModuleUtil {
         }
         return true;
     }
+
+    private static boolean isExistAppMetricaModule = false;
+    public static boolean existAppMetricaModule() {
+
+        if (isExistAppMetricaModule){
+            return true;
+        }
+
+        try {
+            Class<?> clazz = Class.forName("io.appmetrica.analytics.AppMetrica");
+            if (clazz == null){
+                return false;
+            }
+
+        } catch (ClassNotFoundException e) {
+            PL.w("AppMetrica module not exist.");
+            return false;
+        }
+        isExistAppMetricaModule = true;
+        return true;
+    }
 }

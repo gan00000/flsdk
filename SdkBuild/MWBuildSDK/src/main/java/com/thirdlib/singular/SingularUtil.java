@@ -2,19 +2,9 @@ package com.thirdlib.singular;
 
 import android.app.Activity;
 import android.content.Context;
-import android.text.TextUtils;
 
-import com.core.base.utils.JsonUtil;
-import com.core.base.utils.PL;
-import com.core.base.utils.SStringUtil;
 import com.mw.sdk.R;
-import com.singular.sdk.Singular;
-import com.singular.sdk.SingularConfig;
-import com.thirdlib.ThirdModuleUtil;
 
-import org.json.JSONObject;
-
-import java.util.HashMap;
 import java.util.Map;
 
 public class SingularUtil {
@@ -33,7 +23,7 @@ public class SingularUtil {
     专业提示：如果您的应用程序支持多个入口点（如深度链接），请确保在每个相关活动的onCreate() 中调用initSingularSDK() ，以保证行为一致。*/
     public static void initSingularSDK(Activity activity) {
 
-        if (!ThirdModuleUtil.existSingularModule()){
+        /*if (!ThirdModuleUtil.existSingularModule()){
             return;
         }
 
@@ -52,12 +42,12 @@ public class SingularUtil {
                 PL.d("SingularConfig SDK initialization failed: " + e.getMessage());
             }
 
-        }
+        }*/
     }
 
     public static void setCustomUserId(Activity activity, String userId) {
 
-        if (!ThirdModuleUtil.existSingularModule()){
+        /*if (!ThirdModuleUtil.existSingularModule()){
             return;
         }
         if (TextUtils.isEmpty(userId)){
@@ -66,7 +56,7 @@ public class SingularUtil {
         if (SStringUtil.isEmpty(getSingularSdkKey(activity)) || SStringUtil.isEmpty(getSingularSdkSecret(activity))){
             return;
         }
-        Singular.setCustomUserId(userId);
+        Singular.setCustomUserId(userId);*/
     }
 
     public static void logEvent(Context context, String eventName, Map<String, Object> attributes){
@@ -83,7 +73,7 @@ public class SingularUtil {
 
     private static void comTrackEvent(Context context, String eventName, String currency, double amount, Map<String, Object> attributes){
 
-        if (context == null){
+     /*   if (context == null){
             return;
         }
 
@@ -115,7 +105,7 @@ public class SingularUtil {
             }
 
         }
-
+*/
     }
 
 }

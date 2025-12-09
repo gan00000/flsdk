@@ -1,9 +1,7 @@
 package com.mw.sdk.login.p;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.text.TextUtils;
 import android.view.View;
 
@@ -15,7 +13,6 @@ import com.core.base.callback.SFCallBack;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
-import com.mw.sdk.bean.PhoneInfo;
 import com.mw.sdk.constant.SLoginType;
 import com.mw.sdk.bean.res.ConfigBean;
 import com.mw.sdk.utils.ResConfig;
@@ -49,6 +46,7 @@ import com.thirdlib.facebook.FbSp;
 import com.thirdlib.facebook.SFacebookProxy;
 import com.thirdlib.google.SGoogleSignIn;
 import com.thirdlib.huawei.HuaweiSignIn;
+import com.thirdlib.irCafebazaar.CafebazaarHelper;
 import com.thirdlib.line.SLineSignIn;
 import com.thirdlib.nowgg.NowggLogin;
 import com.thirdlib.singular.SingularUtil;
@@ -480,6 +478,28 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
 
             @Override
             public void failure(String msg) {
+
+            }
+        });
+    }
+
+    @Override
+    public void bazaarLogin(Activity activity) {
+
+        CafebazaarHelper.login(activity, new SFCallBack<String>() {
+            @Override
+            public void success(String id, String msg) {
+
+                ThirdLoginRegRequestBean thirdLoginRegRequestBean = new ThirdLoginRegRequestBean(activity);
+                thirdLoginRegRequestBean.setThirdPlatId(id);
+                thirdLoginRegRequestBean.setRegistPlatform(SLoginType.LOGIN_TYPE_BAZAAR);
+                thirdLoginRegRequestBean.setThirdAccount("");
+                thirdPlatLogin(activity, thirdLoginRegRequestBean);
+
+            }
+
+            @Override
+            public void fail(String result, String msg) {
 
             }
         });

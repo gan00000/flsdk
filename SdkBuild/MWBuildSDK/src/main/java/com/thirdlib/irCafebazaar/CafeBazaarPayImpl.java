@@ -12,6 +12,7 @@ import com.core.base.callback.SFCallBack;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
+import com.farsitel.bazaar.BazaarClientProxy;
 import com.mw.sdk.BuildConfig;
 import com.mw.sdk.api.PayApi;
 import com.mw.sdk.api.task.LoadingDialog;
@@ -172,20 +173,30 @@ public class CafeBazaarPayImpl implements IPay {
 
         if (!ThirdModuleUtil.existBazaarModule()){
             PL.w("BazaarModule is unavailable");
+            callbackFail("bazaar module error");
             return;
         }
         if (activity == null) {
             PL.w("activity is null");
+            callbackFail("activity is null");
             return;
         }
 
         if (payReqBean == null) {
             PL.w("payReqBean is null");
+            callbackFail("pay params error");
             return;
         }
 
         if (isPaying) {
             PL.w("google is paying...");
+            callbackFail("The top-up is being processed.");
+            return;
+        }
+
+        if (!BazaarClientProxy.INSTANCE.isBazaarInstalledOnDevice(activity)){
+            ToastUtils.toast(activity,"Please install the Bazaar app first.");
+            callbackFail("Please install the Bazaar app first.");
             return;
         }
 
