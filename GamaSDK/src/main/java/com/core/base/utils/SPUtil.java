@@ -161,6 +161,15 @@ public class SPUtil {
 		return shared.getFloat(key,0.0f);
 	}
 
+	/**
+	 * 清除数据
+	 */
+	public static boolean remove(Context context, String fileName, String key){
+		SharedPreferences.Editor editor = getEditor(context, fileName);
+		editor.remove(key);
+		return editor.commit();
+	}
+
 	//=======================================存储对象============================================
 	
     /**
@@ -175,31 +184,29 @@ public class SPUtil {
 	private static SharedPreferences.Editor getEditor(Context context, String fileName){
         return getSharedPreferences(context, fileName).edit();
     }
-    /**
-     * 保存数据
-     */
-    private static void save(Context context, String fileName, Map<String, ?> map){
+
+	private static boolean save(Context context, String fileName, Map<String, ?> map){
 		SharedPreferences.Editor editor = getEditor(context, fileName);
-        for (Map.Entry<String, ?> entry : map.entrySet()){
-            String key = entry.getKey();
-            Object value = entry.getValue();
-            if (value instanceof Integer){
-                editor.putInt(key, (Integer) value);
-            }
-            else if (value instanceof Long){
-                editor.putLong(key, (Long) value);
-            }
-            else if (value instanceof Boolean){
-                editor.putBoolean(key, (Boolean) value);
-            }
-            else if (value instanceof Float){
-                editor.putFloat(key, (Float) value);
-            }
-            else{
-                editor.putString(key, (String) value);
-            }
-        }
-        // 提交
-        editor.commit();
-    }
+		for (Map.Entry<String, ?> entry : map.entrySet()){
+			String key = entry.getKey();
+			Object value = entry.getValue();
+			if (value instanceof Integer){
+				editor.putInt(key, (Integer) value);
+			}
+			else if (value instanceof Long){
+				editor.putLong(key, (Long) value);
+			}
+			else if (value instanceof Boolean){
+				editor.putBoolean(key, (Boolean) value);
+			}
+			else if (value instanceof Float){
+				editor.putFloat(key, (Float) value);
+			}
+			else{
+				editor.putString(key, (String) value);
+			}
+		}
+		// 提交
+		return editor.commit();
+	}
 }
