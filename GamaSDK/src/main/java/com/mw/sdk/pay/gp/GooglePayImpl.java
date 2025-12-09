@@ -268,11 +268,12 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
         //查询本地补发
         PL.i("startQueryPurchase local purchase");
         List<PaySuccessData> paySuccessDataList = getLocalPurchase(activity);
-        List<PaySuccessData> errorDataList = new ArrayList<>();
         if (paySuccessDataList != null && !paySuccessDataList.isEmpty()){
+            List<PaySuccessData> errorDataList = new ArrayList<>();
             for (PaySuccessData mPaySuccessData : paySuccessDataList){
                 try {
                     Purchase localPurchase = new Purchase(mPaySuccessData.getOriginalJson(), mPaySuccessData.getSignature());
+                    PL.i("startQueryPurchase local purchase sendGoodsToUser ggOrderId=" + localPurchase.getOrderId());
                     sendGoodsToUser(localPurchase, true);
 
                 } catch (JSONException e) {
@@ -285,6 +286,8 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
                 paySuccessDataList.removeAll(errorDataList);
                 updateLocalPayDatas(activity, paySuccessDataList);
             }
+        }else {
+            PL.i("startQueryPurchase local purchase null");
         }
 
         //查Google
@@ -679,10 +682,13 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
 
     private void addPurchaseToLocal(Context context, Purchase purchase, String userId, String roleId){
 
+        PL.d("addPurchaseToLocal=" + purchase.getOrderId());
+
         List<PaySuccessData> paySuccessDataList = getLocalPurchase(context);
         if (paySuccessDataList != null && !paySuccessDataList.isEmpty()){
             for (PaySuccessData mPaySuccessData : paySuccessDataList){
                 if (Objects.equals(purchase.getOrderId(), mPaySuccessData.getThirdOrderId())){
+                    PL.d("addPurchaseToLocal already exist=" + purchase.getOrderId());
                     return;
                 }
             }
@@ -697,7 +703,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
         paySuccessData.setOriginalJson(purchase.getOriginalJson());
         paySuccessData.setSignature(purchase.getSignature());
         paySuccessData.setThirdOrderId(purchase.getOrderId());
-
+        PL.d("---addPurchaseToLocal to list---");
         paySuccessDataList.add(paySuccessData);
         updateLocalPayDatas(context, paySuccessDataList);
 
@@ -707,6 +713,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
         if (paySuccessDataList == null){
             return;
         }
+        PL.d("---updateLocalPayDatas---");
         SPUtil.saveSimpleInfo(context, SDK_MW_PAY_FILE, "mw_gg_pay", gson.toJson(paySuccessDataList));
     }
 
