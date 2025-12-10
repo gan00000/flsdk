@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import com.core.base.cipher.DESCipher;
 import com.core.base.utils.ApkInfoUtil;
 import com.core.base.utils.FileUtil;
+import com.core.base.utils.GsonUtil;
 import com.core.base.utils.JsonUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.SPUtil;
@@ -75,8 +76,7 @@ public class SdkUtil {
         String cfg = getSdkCfgString(context);
         if (JsonUtil.isJson(cfg)){
             try {
-                Gson gson = new Gson();
-                configBean = gson.fromJson(cfg, ConfigBean.class);
+                configBean = GsonUtil.fromJson(cfg, ConfigBean.class);
                 return configBean;
             } catch (JsonSyntaxException e) {
                 e.printStackTrace();
@@ -407,8 +407,7 @@ public class SdkUtil {
         if (sLoginResponse != null){
             try {
                 sLoginResponse.getData().setGameCode(ResConfig.getGameCode(context));
-                Gson gson = new Gson();
-                String result = gson.toJson(sLoginResponse);
+                String result = GsonUtil.toJson(sLoginResponse);
                 sLoginResponseTemp = null;//重置
                 saveSdkLoginData(context, result);
             } catch (Exception e) {
@@ -431,8 +430,7 @@ public class SdkUtil {
             return null;
         }
         try {
-            Gson gson = new Gson();
-            sLoginResponseTemp = gson.fromJson(loginResult, SLoginResponse.class);
+            sLoginResponseTemp = GsonUtil.fromJson(loginResult, SLoginResponse.class);
 
             if (sLoginResponseTemp != null && sLoginResponseTemp.isRequestSuccess() && sLoginResponseTemp.getData()!= null && SStringUtil.isNotEmpty(sLoginResponseTemp.getData().getUserId())){
                 return sLoginResponseTemp;
@@ -526,8 +524,7 @@ public class SdkUtil {
         if (SStringUtil.isEmpty(roleInfo)){
             return new SRoleInfoBean();
         }
-        Gson gson = new Gson();
-        SRoleInfoBean sRoleInfoBean = gson.fromJson(roleInfo, SRoleInfoBean.class);
+        SRoleInfoBean sRoleInfoBean = GsonUtil.fromJson(roleInfo, SRoleInfoBean.class);
 
         return sRoleInfoBean;
     }
@@ -597,8 +594,7 @@ public class SdkUtil {
             sRoleInfoBean.setServerCode(severCode);
             sRoleInfoBean.setServerName(serverName);
 
-            Gson gson = new Gson();
-            String infoJson = gson.toJson(sRoleInfoBean);
+            String infoJson = GsonUtil.toJson(sRoleInfoBean);
 
 //            JSONObject jsonObject = new JSONObject();
 //            jsonObject.put(GAMA_LOGIN_USER_ID,getUid(context));
@@ -852,8 +848,7 @@ public class SdkUtil {
         String infoJson = SPUtil.getSimpleString(context, SdkUtil.SDK_SP_FILE, SP_KEY_USER_INFO + userId);
         if (SStringUtil.isNotEmpty(infoJson)){
             try {
-                Gson gson = new Gson();
-                SUserInfo sUserInfo = gson.fromJson(infoJson, SUserInfo.class);
+                SUserInfo sUserInfo = GsonUtil.fromJson(infoJson, SUserInfo.class);
                 return sUserInfo;
             } catch (JsonSyntaxException e) {
                 e.printStackTrace();
@@ -873,8 +868,7 @@ public class SdkUtil {
             newUserInfo.setUserId(userId);
             newUserInfo.setRegTime(loginResponse.getData().getTimestamp());//使用服务器时间戳
             try {
-                Gson gson = new Gson();
-                String result = gson.toJson(newUserInfo);
+                String result = GsonUtil.toJson(newUserInfo);
                 SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE, SP_KEY_USER_INFO + userId, result);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -887,8 +881,7 @@ public class SdkUtil {
             if (sUserInfo == null){
                 return;
             }
-            Gson gson = new Gson();
-            String result = gson.toJson(sUserInfo);
+            String result = GsonUtil.toJson(sUserInfo);
             SPUtil.saveSimpleInfo(context, SdkUtil.SDK_SP_FILE, SP_KEY_USER_INFO + sUserInfo.getUserId(), result);
         } catch (Exception e) {
             e.printStackTrace();
@@ -957,8 +950,7 @@ public class SdkUtil {
         if (SStringUtil.isEmpty(areaJson)){
             return null;
         }
-        Gson gson = new Gson();
-        PhoneInfo[] areaBeanList = gson.fromJson(areaJson, PhoneInfo[].class);
+        PhoneInfo[] areaBeanList = GsonUtil.fromJson(areaJson, PhoneInfo[].class);
         List<PhoneInfo> phoneInfos = Arrays.asList(areaBeanList);
         return phoneInfos;
     }
@@ -1071,7 +1063,7 @@ public class SdkUtil {
         if (SStringUtil.isEmpty(dataRaw)){
             return null;
         }
-        FloatMenuResData xFloatMenuResData = new Gson().fromJson(dataRaw, FloatMenuResData.class);
+        FloatMenuResData xFloatMenuResData = GsonUtil.fromJson(dataRaw, FloatMenuResData.class);
         return xFloatMenuResData;
     }
 

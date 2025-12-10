@@ -18,6 +18,7 @@ import android.os.Looper;
 import android.os.Parcel;
 import android.os.ResultReceiver;
 
+import com.core.base.utils.GsonUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
@@ -195,8 +196,7 @@ public class NowggLogin {
 
 
                 } else {
-                    Gson gson = new Gson();
-                    TokenVerifyResponse error = gson.fromJson(response.errorBody().charStream(), TokenVerifyResponse.class);
+                    TokenVerifyResponse error = GsonUtil.fromJson(response.errorBody().charStream(), TokenVerifyResponse.class);
 
                     if (!error.isSuccess() && ("EXPIRED_TOKEN".equals(error.getCode()) || "INVALID_TOKEN".equals(error.getCode()))) {
                         // retry the verify token call, after getting a new TOKEN
