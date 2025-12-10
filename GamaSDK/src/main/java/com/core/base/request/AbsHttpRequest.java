@@ -10,6 +10,7 @@ import com.core.base.http.HttpRequest;
 import com.core.base.http.HttpResponse;
 import com.core.base.bean.BaseReqeustBean;
 import com.core.base.bean.BaseResponseModel;
+import com.core.base.utils.GsonUtil;
 import com.core.base.utils.JsonUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
@@ -194,8 +195,7 @@ public abstract class AbsHttpRequest implements ISRqeust {
                                 T responseModule = null;
                                 if (classOfT != null) {
                                     try {
-                                        Gson gson = new Gson();
-                                        responseModule = gson.fromJson(rawResponse, classOfT);
+                                        responseModule = GsonUtil.fromJson(rawResponse, classOfT);
                                         if (responseModule != null && (responseModule instanceof BaseResponseModel)) {
                                             ((BaseResponseModel) responseModule).setRawResponse(rawResponse);
                                         }

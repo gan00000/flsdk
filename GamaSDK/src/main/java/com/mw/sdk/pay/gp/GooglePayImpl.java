@@ -15,12 +15,11 @@ import com.android.billingclient.api.ConsumeResponseListener;
 import com.android.billingclient.api.ProductDetails;
 import com.android.billingclient.api.Purchase;
 import com.core.base.callback.SFCallBack;
+import com.core.base.utils.GsonUtil;
 import com.core.base.utils.PL;
 import com.core.base.utils.SPUtil;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.ToastUtils;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.mw.sdk.BuildConfig;
 import com.mw.sdk.api.PayApi;
 import com.mw.sdk.api.task.LoadingDialog;
@@ -44,7 +43,6 @@ import com.thirdlib.tiktok.TTSdkHelper;
 
 import org.json.JSONException;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -78,8 +76,6 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
      * 防止连续快速点击储值出现未知异常
      */
     private boolean isPaying = false;
-
-    private Gson gson = new Gson();
 
     private void callbackSuccess(Purchase purchase, GPExchangeRes gpExchangeRes) {
         isPaying = false;
@@ -709,7 +705,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
             return;
         }
         PL.d("---updateLocalPayDatas---");
-        SPUtil.saveSimpleInfo(context, SDK_MW_PAY_FILE, "mw_gg_pay", gson.toJson(paySuccessDataList));
+        SPUtil.saveSimpleInfo(context, SDK_MW_PAY_FILE, "mw_gg_pay", GsonUtil.toJson(paySuccessDataList));
     }
 
     private void removeLocalPurchase(Context context, Purchase purchase){
@@ -743,11 +739,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
         if (SStringUtil.isEmpty(payInfo)){
             return null;
         }
-
-        // 1. 定义目标类型：使用 TypeToken 来表示 List<User>
-        Type userListType = new TypeToken<List<PaySuccessData>>(){}.getType();
-        // 2. 将 JSON 字符串解析为 List<User>
-        List<PaySuccessData> purchaseList = gson.fromJson(payInfo, userListType);
+        List<PaySuccessData> purchaseList = GsonUtil.fromJsonToList(payInfo, PaySuccessData.class);
         return purchaseList;
     }
 

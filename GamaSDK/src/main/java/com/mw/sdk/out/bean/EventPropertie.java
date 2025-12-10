@@ -1,5 +1,6 @@
 package com.mw.sdk.out.bean;
 
+import com.core.base.utils.GsonUtil;
 import com.core.base.utils.SStringUtil;
 import com.google.gson.Gson;
 
@@ -253,8 +254,7 @@ public class EventPropertie implements Serializable {
                             }
                         }else if (xField.getType() == List.class || xField.getType() == ArrayList.class){
                             try {
-                                Gson gson = new Gson();
-                                String objstr = gson.toJson(value);
+                                String objstr = GsonUtil.toJson(value);
                                 if (SStringUtil.isNotEmpty(objstr)){
                                     jsonObject.put(xField.getName(), new JSONArray(objstr));
                                 }

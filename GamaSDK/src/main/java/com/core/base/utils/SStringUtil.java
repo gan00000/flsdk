@@ -245,6 +245,13 @@ public class SStringUtil {
 	public static boolean isNotEmpty(CharSequence cs) {
 		return !isEmpty(cs);
 	}
+
+	/**
+	 * 判断JSON字符串是否为空（null或空白字符）
+	 */
+	public static boolean isJsonEmpty(String json) {
+		return json == null || json.trim().isEmpty() || "null".equals(json.trim());
+	}
 	
 	public static String checkUrl(String url) {
 		if (!TextUtils.isEmpty(url) && !url.endsWith("/")) {
