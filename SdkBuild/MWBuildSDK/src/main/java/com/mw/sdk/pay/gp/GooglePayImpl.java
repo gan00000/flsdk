@@ -671,7 +671,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
 
     }
 
-    private void addPurchaseToLocal(Context context, Purchase purchase, String userId, String roleId){
+    public static void addPurchaseToLocal(Context context, Purchase purchase, String userId, String roleId){
 
         PL.d("addPurchaseToLocal=" + purchase.getOrderId());
 
@@ -700,7 +700,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
 
     }
 
-    private void updateLocalPayDatas(Context context, List<PaySuccessData> paySuccessDataList) {
+    public static void updateLocalPayDatas(Context context, List<PaySuccessData> paySuccessDataList) {
         if (paySuccessDataList == null){
             return;
         }
@@ -708,9 +708,9 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
         SPUtil.saveSimpleInfo(context, SDK_MW_PAY_FILE, "mw_gg_pay", GsonUtil.toJson(paySuccessDataList));
     }
 
-    private void removeLocalPurchase(Context context, Purchase purchase){
+    public static void removeLocalPurchase(Context context, Purchase purchase){
 
-        PL.d("tremoveLocalPurchase...");
+        PL.d("removeLocalPurchase...");
         List<PaySuccessData> paySuccessDataList = getLocalPurchase(context);
 
         if (paySuccessDataList != null && !paySuccessDataList.isEmpty()){
@@ -733,7 +733,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
     }
 
 
-    private List<PaySuccessData> getLocalPurchase(Context context){
+    public static List<PaySuccessData> getLocalPurchase(Context context){
 
         String payInfo = SPUtil.getSimpleString(context, SDK_MW_PAY_FILE, "mw_gg_pay");
         if (SStringUtil.isEmpty(payInfo)){
@@ -742,5 +742,19 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
         List<PaySuccessData> purchaseList = GsonUtil.fromJsonToList(payInfo, PaySuccessData.class);
         return purchaseList;
     }
+
+//    public static void testPayData(Context context){
+//
+//        String AA = "{\"orderId\":\"GPA.3331-5803-7052-24652\",\"packageName\":\"com.cztx.andtw\",\"productId\":\"com.wanxin.cztxtw.99\",\"purchaseTime\":1765316936557,\"purchaseState\":0,\"purchaseToken\":\"jacnpcidehkpeebjmfkjpcmn.AO-J1OzRjlzEH3roY3yEa4jCiNdBqZjrt3MJwxEUGqWk6kTcmt5FCU7ZIEga-ihUX84RmH4w9jftysrCBJsyp1HmZEC9slOMWw\",\"obfuscatedAccountId\":\"1000003033547\",\"obfuscatedProfileId\":\"CZTXTW0SHD81Y0HGH1CLGP\",\"quantity\":1,\"acknowledged\":false}";
+//        String si = "CbipK5mtihrhfU0vbJsUbMsImuJOy0hAA5oUqoF+SnrMRXsYO9n8/jOmiFyXmyBsW3PQKaHiR9lNf9QHBC1f1nVlUZZL2yqa4esA3aoZhRSV/32YiLR7LYdFPUedAwH/O3ERWQCJ7Yvgy45J81RTLZaJUAuvHiHnBvHfWh3uUre0R65I4i6LOV2PXSEQW6WA+UgUDW0v10TGHOk78pcLOcEs/YfTFdk0ZPlO97LIoTrZYpGn8I38daYDwvN6AFBGcFCZrff3m17P/LQNQ6JUW1jRHFey72nkNLFUFwkYDu/A3svSfBoUhJfJy/ynSTQAxeCy2dwSrRexa1YxPUfwQw==";
+//
+//        try {
+//            Purchase purchase = new Purchase(AA, si);
+//            SGameBaseRequestBean sGameBaseRequestBean = new SGameBaseRequestBean(context);
+//            GooglePayImpl.addPurchaseToLocal(context, purchase, sGameBaseRequestBean.getUserId(),sGameBaseRequestBean.getRoleId());
+//        } catch (JSONException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 
 }
