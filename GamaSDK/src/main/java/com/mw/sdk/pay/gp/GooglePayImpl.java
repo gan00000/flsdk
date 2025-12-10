@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Handler;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
@@ -15,47 +14,41 @@ import com.android.billingclient.api.BillingResult;
 import com.android.billingclient.api.ConsumeResponseListener;
 import com.android.billingclient.api.ProductDetails;
 import com.android.billingclient.api.Purchase;
-import com.android.billingclient.api.PurchasesResponseListener;
-import com.android.billingclient.api.PurchasesUpdatedListener;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.PL;
 import com.core.base.utils.SPUtil;
 import com.core.base.utils.SStringUtil;
-import com.core.base.utils.ThreadUtil;
 import com.core.base.utils.ToastUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.mw.sdk.BuildConfig;
+import com.mw.sdk.api.PayApi;
+import com.mw.sdk.api.task.LoadingDialog;
 import com.mw.sdk.bean.PaySuccessData;
 import com.mw.sdk.bean.SGameBaseRequestBean;
 import com.mw.sdk.bean.req.PayCreateOrderReqBean;
-import com.mw.sdk.out.bean.EventPropertie;
-import com.mw.sdk.utils.SdkUtil;
-import com.mw.sdk.api.PayApi;
-import com.mw.sdk.out.ISdkCallBack;
-import com.mw.sdk.pay.IPay;
-import com.mw.sdk.pay.IPayCallBack;
 import com.mw.sdk.bean.req.PayReqBean;
+import com.mw.sdk.bean.res.BasePayBean;
 import com.mw.sdk.bean.res.GPCreateOrderIdRes;
 import com.mw.sdk.bean.res.GPExchangeRes;
-import com.mw.sdk.api.task.LoadingDialog;
+import com.mw.sdk.constant.ApiRequestMethod;
+import com.mw.sdk.out.ISdkCallBack;
+import com.mw.sdk.out.bean.EventPropertie;
+import com.mw.sdk.pay.IPay;
+import com.mw.sdk.pay.IPayCallBack;
 import com.mw.sdk.pay.gp.util.GBillingHelper;
 import com.mw.sdk.utils.PayHelper;
-import com.mw.sdk.bean.res.BasePayBean;
-import com.mw.sdk.BuildConfig;
-import com.mw.sdk.constant.ApiRequestMethod;
+import com.mw.sdk.utils.SdkUtil;
 import com.thirdlib.td.TDAnalyticsHelper;
 import com.thirdlib.tiktok.TTSdkHelper;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-
-import gg.now.billingclient.util.BillingHelper;
 
 /**
  * Created by gan on 2017/2/23.
@@ -630,6 +623,8 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
     public void handleCancel(String msg) {
         PL.i( "pay handleCancel");
         dimissDialog();
+        //取消不回调
+        //callbackFail(TAG_USER_CANCEL);
     }
 
     private void sendGoodsToUser(Purchase purchase, boolean reissue) {
