@@ -12,6 +12,7 @@ public class MenuData {
 //    private boolean display;
     private boolean isClick;
     private boolean deleteAccount;//是否显示删除账号，只有my的时候有用
+    private int showReferCode;//是否显示推荐码view，0显示，1关闭
 
     public String getCode() {
         return code;
@@ -79,5 +80,13 @@ public class MenuData {
 
     public void setDeleteAccount(boolean deleteAccount) {
         this.deleteAccount = deleteAccount;
+    }
+
+    public int getShowReferCode() {
+        return showReferCode;
+    }
+
+    public void setShowReferCode(int showReferCode) {
+        this.showReferCode = showReferCode;
     }
 }

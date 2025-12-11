@@ -132,4 +132,6 @@
     <string name="text_pay_ru">Rustore Pay</string>
     <string name="text_select_pay_channel_other">Select another payment method</string>
 
+    <string name="text_refer_code">Referral code (optional)</string>
+
 </resources>

@@ -9,12 +9,16 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.core.base.utils.ToastUtils;
-import com.mw.sdk.widget.SBaseRelativeLayout;
-import com.mw.sdk.utils.SdkUtil;
 import com.mw.sdk.R;
 import com.mw.sdk.login.widget.SDKInputEditTextView;
 import com.mw.sdk.login.widget.SDKInputType;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
+import com.mw.sdk.utils.ResConfig;
+import com.mw.sdk.utils.SdkUtil;
+import com.mw.sdk.widget.SBaseRelativeLayout;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements View.OnClickListener, SBaseRelativeLayout.OperationCallback {
@@ -27,6 +31,8 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
      * 密码、账号、手机、验证码
      */
     private EditText registerPasswordEditText, registerAccountEditText;
+    private EditText referCodeEditText;
+    private View referCodeView;
     /**
      * 区号,手机接收限制提示
      */
@@ -69,6 +75,15 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
         registerPasswordEditText = pwdSdkInputEditTextView.getInputEditText();
 
         registerConfirm = contentView.findViewById(R.id.gama_register_btn_confirm);
+        //推荐码部分
+        referCodeView = contentView.findViewById(R.id.s_ll_refer_code);
+        referCodeEditText = contentView.findViewById(R.id.s_input_refer_code);
+
+        if (ResConfig.isShowReferCode(getContext())){
+            referCodeView.setVisibility(View.VISIBLE);
+        }else {
+            referCodeView.setVisibility(View.GONE);
+        }
 
         registerConfirm.setOnClickListener(this);
 
@@ -122,8 +137,12 @@ public class AccountRegisterLayoutV2 extends SLoginBaseRelativeLayout implements
             toast(R.string.text_pwd_format);
             return;
         }
-
-        sLoginDialogv2.getLoginPresenter().register(sLoginDialogv2.getActivity(), account, password, "areaCode", "phone", "vfcode", "");
+        Map<String, String> others = new HashMap<>();
+        if (referCodeEditText != null){
+            String referCode = referCodeEditText.getEditableText().toString().trim();
+            others.put("referCode", referCode);
+        }
+        sLoginDialogv2.getLoginPresenter().register(sLoginDialogv2.getActivity(), account, password, "areaCode", "phone", "vfcode", "", others);
     }
 
     @Override

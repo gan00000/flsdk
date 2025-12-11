@@ -75,4 +75,7 @@
 
     <string name="mw_appmetrica_api_key"></string>
 
+<!--    是否显示输入推荐码-->
+    <string name="mw_need_refer_code"></string>
+
 </resources>

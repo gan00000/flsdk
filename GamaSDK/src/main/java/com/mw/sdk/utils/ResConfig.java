@@ -43,6 +43,15 @@ public class ResConfig {
         return SStringUtil.isEqual("true",more);
     }
 
+    public static boolean isShowReferCode(Context context) {
+
+        String mmValue = context.getResources().getString(R.string.mw_need_refer_code);
+        if (SStringUtil.isNotEmpty(mmValue)){
+            return SStringUtil.isEqual("true",mmValue);
+        }
+        return false;
+    }
+
     public static String getDefaultServerLanguage(Context context) {
         String mmValue = context.getResources().getString(R.string.sdk_default_server_language);
         if (SStringUtil.isNotEmpty(mmValue)){

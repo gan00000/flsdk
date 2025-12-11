@@ -47,6 +47,7 @@ public class SSdkBaseRequestBean extends BaseReqeustBean {
     private String platform = "";//渠道包-所属平台
 //    private String spy_advertiser = "";//渠道包-所属广告
     private String referrer = "";
+    private String referCode = "";//推荐码
 
     private int request_code = 0;//区别客服打开的地方
 
@@ -223,5 +224,13 @@ public class SSdkBaseRequestBean extends BaseReqeustBean {
 
     public void setRequest_code(int request_code) {
         this.request_code = request_code;
+    }
+
+    public String getReferCode() {
+        return referCode;
+    }
+
+    public void setReferCode(String referCode) {
+        this.referCode = referCode;
     }
 }

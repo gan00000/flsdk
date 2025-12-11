@@ -93,6 +93,16 @@ public class SLoginResponse extends BaseResponseModel {
         private int blockTime;//秒。剩余可登录时间
         private String blockMsg;//前端提示，可选，没有使用客户端预设提示
 
+        private long regTime;//时间戳
+
+        public long getRegTime() {
+            return regTime;
+        }
+
+        public void setRegTime(long regTime) {
+            this.regTime = regTime;
+        }
+
         public boolean isMiniGameUser() {
             return miniGameUser;
         }

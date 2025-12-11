@@ -5,6 +5,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.ApkInfoUtil;
 import com.core.base.utils.PL;
+import com.core.base.utils.TimeUtil;
 import com.mw.sdk.R;
 import com.mw.sdk.api.Request;
 import com.mw.sdk.bean.res.FloatMenuResData;
@@ -20,6 +22,7 @@ import com.mw.sdk.callback.FloatCallback;
 import com.mw.sdk.constant.FloatMenuType;
 import com.mw.sdk.login.model.response.SLoginResponse;
 import com.mw.sdk.login.widget.SLoginBaseRelativeLayout;
+import com.mw.sdk.utils.ResConfig;
 import com.mw.sdk.utils.SdkUtil;
 
 public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
@@ -43,8 +46,11 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
     private View delAccountLayout;
     private Button delAccountCancelButton;
     private Button delAccountOkButton;
+    private View referCcodeView;
+    private EditText referCcodeEditText;
+    private TextView referCcodeOkTextView;
 
-//    private FloatConfigData floatConfigData;
+    //    private FloatConfigData floatConfigData;
     private FloatMenuResData floatMenuResData;
 
     private MenuData myMenuData;
@@ -102,6 +108,11 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
         delAccountCancelButton = persionCenterView.findViewById(R.id.btn_delete_cancel);
         delAccountOkButton = persionCenterView.findViewById(R.id.btn_delete_confirm);
 
+        //推荐码部分
+        referCcodeView = persionCenterView.findViewById(R.id.pc_ll_refer_code);
+        referCcodeEditText = persionCenterView.findViewById(R.id.pc_input_refer_code);
+        referCcodeOkTextView = persionCenterView.findViewById(R.id.pc_refer_code_ok);
+
         switchAccountView.setVisibility(View.GONE);
         delAccountView.setVisibility(View.GONE);
         updradeAccountView.setOnClickListener(new OnClickListener() {
@@ -155,7 +166,7 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
 
             @Override
             public void fail(Object result, String msg) {
-                if ("back".equals(msg)){
+                if ("back".equals(msg)) {
                     persionMainView.setVisibility(View.VISIBLE);
                     mFloatBindAccountLayout.setVisibility(View.GONE);
                     mFloatChangePwdLayout.setVisibility(View.GONE);
@@ -175,7 +186,7 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
 
             @Override
             public void fail(Object result, String msg) {
-                if ("back".equals(msg)){
+                if ("back".equals(msg)) {
                     persionMainView.setVisibility(View.VISIBLE);
                     mFloatBindAccountLayout.setVisibility(View.GONE);
                     mFloatChangePwdLayout.setVisibility(View.GONE);
@@ -186,54 +197,54 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
 //        String floatCfgData = SdkUtil.getFloatCfgData(context);
         floatMenuResData = SdkUtil.getFloatMenuResDataObj(context);
 
-//        if (SStringUtil.isNotEmpty(floatCfgData) && SStringUtil.isNotEmpty(menuResData)){
-//            floatConfigData = new Gson().fromJson(floatCfgData, FloatConfigData.class);
-//            floatMenuResData = new Gson().fromJson(menuResData, FloatMenuResData.class);
+        if (floatMenuResData != null && floatMenuResData.getData() != null && floatMenuResData.getData().getUserInfo() != null) {
+            gameNameTextView.setText(floatMenuResData.getData().getUserInfo().getGameName());
+            setverNameTextView.setText(floatMenuResData.getData().getUserInfo().getServerName());
+            roleNameTextView.setText(floatMenuResData.getData().getUserInfo().getRoleName());
+            //accountTextView.setText(floatMenuResData.getData().geta());
+            uidTextView.setText(floatMenuResData.getData().getUserInfo().getUserId());
 
-            if (floatMenuResData != null && floatMenuResData.getData() != null && floatMenuResData.getData().getUserInfo() != null) {
-                gameNameTextView.setText(floatMenuResData.getData().getUserInfo().getGameName());
-                setverNameTextView.setText(floatMenuResData.getData().getUserInfo().getServerName());
-                roleNameTextView.setText(floatMenuResData.getData().getUserInfo().getRoleName());
-                //accountTextView.setText(floatMenuResData.getData().geta());
-                uidTextView.setText(floatMenuResData.getData().getUserInfo().getUserId());
+            updateUserInfoView(context, floatMenuResData);
 
-                updateUserInfoView(context, floatMenuResData);
-
-                if (floatMenuResData.getData().getMenuList() != null) {
-                    for (MenuData bbMenuData:floatMenuResData.getData().getMenuList()) {
-                        if (FloatMenuType.MENU_TYPE_MY.equals(bbMenuData.getCode())){
-                            myMenuData = bbMenuData;
-                            if (myMenuData.isDeleteAccount()){
-                                delAccountView.setVisibility(View.VISIBLE);
-                            }else {
-                                delAccountView.setVisibility(View.GONE);
-                            }
-                            break;
+            if (floatMenuResData.getData().getMenuList() != null) {
+                for (MenuData bbMenuData : floatMenuResData.getData().getMenuList()) {
+                    if (FloatMenuType.MENU_TYPE_MY.equals(bbMenuData.getCode())) {
+                        myMenuData = bbMenuData;
+                        if (myMenuData.isDeleteAccount()) {
+                            delAccountView.setVisibility(View.VISIBLE);
+                        } else {
+                            delAccountView.setVisibility(View.GONE);
                         }
+
+                        if (myMenuData.getShowReferCode() == 1){
+                            referCcodeView.setVisibility(View.GONE);
+                        }
+
+                        break;
                     }
                 }
             }
-//        }
+        }
 
         return persionCenterView;
     }
 
     private void updateUserInfoView(Context context, FloatMenuResData floatConfigData) {
 
-        if (floatConfigData == null || floatConfigData.getData() == null){
+        if (floatConfigData == null || floatConfigData.getData() == null) {
             return;
         }
 
         SLoginResponse sLoginResponse = SdkUtil.getCurrentUserLoginResponse(context);
 
         if (sLoginResponse != null && sLoginResponse.getData() != null) {
-            if (sLoginResponse.getData().isBind()){
+            if (sLoginResponse.getData().isBind()) {
                 accountTextView.setText(sLoginResponse.getData().getLoginId());
                 updradeAccountView.setVisibility(View.GONE);
                 changePwdView.setVisibility(View.VISIBLE);
                 accountLayoutView.setVisibility(View.VISIBLE);
 
-            }else {
+            } else {
                 updradeAccountView.setVisibility(View.VISIBLE);
                 changePwdView.setVisibility(View.GONE);
                 accountLayoutView.setVisibility(View.GONE);
@@ -243,13 +254,22 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
                     .centerCrop()
                     .placeholder(ApkInfoUtil.getAppIcon(context))
                     .into(persionIconImageView);
+
+            //显示
+            if (ResConfig.isShowReferCode(context)
+                    && sLoginResponse.getData().getRegTime() > TimeUtil.getTimestamp("2025-12-28 00:00:00")){
+                referCcodeView.setVisibility(View.VISIBLE);
+            }else {
+                referCcodeView.setVisibility(View.GONE);
+            }
+
         }
     }
 
 
     private void doDeleteAccount() {
         SLoginResponse sLoginResponse = SdkUtil.getCurrentUserLoginResponse(getContext());
-        if (sLoginResponse == null || sLoginResponse.getData() == null){
+        if (sLoginResponse == null || sLoginResponse.getData() == null) {
             return;
         }
         Request.deleteAccout(getContext(), sLoginResponse.getData().getUserId(),
@@ -273,9 +293,9 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
     }
 
 
-    private void switchAccount(){
+    private void switchAccount() {
         PL.i("sdk switch account");
-        if (xFloatCallback != null){
+        if (xFloatCallback != null) {
             xFloatCallback.switchAccount("");
         }
     }

@@ -216,7 +216,7 @@ class FloatContentView : SLoginBaseRelativeLayout {
                     if (FloatMenuType.MENU_TYPE_CS == mData.code){
 
                         Glide.with(this@FloatContentView)
-                            .load(mData.icon + "?" + loginTimestamp)
+                            .load(mData.icon ?: R.mipmap.icon_float_customer)
                             .centerCrop()
                             .placeholder(R.mipmap.icon_float_customer)
                             .into(menuIconIv)
@@ -224,14 +224,14 @@ class FloatContentView : SLoginBaseRelativeLayout {
                     }else if (FloatMenuType.MENU_TYPE_MY == mData.code){
 
                         Glide.with(this@FloatContentView)
-                            .load(mData.icon + "?" + loginTimestamp)
+                            .load(mData.icon ?: R.mipmap.icon_float_person)
                             .centerCrop()
                             .placeholder(R.mipmap.icon_float_person)
                             .into(menuIconIv)
 
                     }else{
                         Glide.with(this@FloatContentView)
-                            .load(mData.icon + "?" + loginTimestamp)
+                            .load(mData.icon ?: ApkInfoUtil.getAppIcon(activity))
                             .centerCrop()
                             .placeholder(ApkInfoUtil.getAppIcon(activity))
                             .into(menuIconIv)
