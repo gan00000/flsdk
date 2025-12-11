@@ -130,7 +130,6 @@
     <string name="text_account_change_pwd_success2">password has been updated</string>
 
     <string name="text_pay_ru">Rustore Pay</string>
-    <string name="text_select_pay_channel_other">Choose other payment methods</string>
-    <string name="text_official_channel">Official Top-up</string>
+    <string name="text_select_pay_channel_other">Select another payment method</string>
 
 </resources>
