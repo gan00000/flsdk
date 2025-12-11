@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply from: "${project.rootDir}/SdkBuild/sdk_config/tgen/game_config.gradle"
+//apply from: "${project.rootDir}/SdkBuild/sdk_config/dscgru/game_config.gradle"
 
 android {
 
@@ -22,6 +23,7 @@ android {
         versionCode 1
         versionName "1.1"
         applicationId 'com.wanxin.tgen'
+//        applicationId "com.dscgru.and"
 
         resValue "string", "sdk_name", "sdkdemo"
 
@@ -239,6 +241,6 @@ if (isHuaweiFlavor()){
 
 }else {
     //Google包，第三方包设置
-    apply plugin: 'com.google.gms.google-services'
-    apply plugin: 'com.google.firebase.crashlytics'
+//    apply plugin: 'com.google.gms.google-services'
+//    apply plugin: 'com.google.firebase.crashlytics'
 }

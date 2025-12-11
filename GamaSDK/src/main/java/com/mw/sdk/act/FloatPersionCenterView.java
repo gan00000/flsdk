@@ -225,14 +225,10 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
                         } else {
                             delAccountView.setVisibility(View.GONE);
                         }
-
-                        if (myMenuData.getShowReferCode() == 1){
-                            referCcodeView.setVisibility(View.GONE);
-                        }
-
                         break;
                     }
                 }
+                initReferCodeView(context);
             }
         }
 
@@ -246,7 +242,6 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
         }
 
         SLoginResponse sLoginResponse = SdkUtil.getCurrentUserLoginResponse(context);
-        //sLoginResponse.getData().setReferCode("1111133");
 
         if (sLoginResponse != null && sLoginResponse.getData() != null) {
             if (sLoginResponse.getData().isBind()) {
@@ -266,18 +261,40 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
                     .placeholder(ApkInfoUtil.getAppIcon(context))
                     .into(persionIconImageView);
 
-            //显示
-            if (ResConfig.isShowReferCode(context)
-                    && sLoginResponse.getData().getRegTime() > TimeUtil.getTimestamp("2025-11-28 00:00:00")){
+        }
+    }
+
+    private void initReferCodeView(Context context) {
+
+        SLoginResponse sLoginResponse = SdkUtil.getCurrentUserLoginResponse(context);
+        if (sLoginResponse == null) {
+            return;
+        }
+        //sLoginResponse.getData().setReferCode("1111133");
+
+        //显示
+        if ((ResConfig.isShowReferCode(context)
+                && sLoginResponse.getData().getRegTime() > TimeUtil.getTimestamp("2025-11-28 00:00:00"))
+        ) {
+
+            int serverReferCode = 0;
+            if (myMenuData != null) {
+                serverReferCode = myMenuData.getShowReferCode();//1开，2主动关，其他不判断
+            }
+
+            if (serverReferCode == 2) {
+                referCcodeView.setVisibility(View.GONE);
+            } else {
                 referCcodeView.setVisibility(View.VISIBLE);
                 if (SStringUtil.isNotEmpty(sLoginResponse.getData().getReferCode())) {
                     setReferCodeToView(sLoginResponse.getData().getReferCode());
                 }
-            }else {
-                referCcodeView.setVisibility(View.GONE);
             }
 
+        } else {
+            referCcodeView.setVisibility(View.GONE);
         }
+
     }
 
     private void setReferCodeToView(String code) {
@@ -317,7 +334,7 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
 
     private void sendReferCode() {
         String referCode = referCcodeEditText.getText().toString().trim();
-        if (TextUtils.isEmpty(referCode)){
+        if (TextUtils.isEmpty(referCode)) {
             return;
         }
         Request.sendReferCode(getContext(), referCode, new SFCallBack<BaseResponseModel>() {

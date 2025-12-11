@@ -12,7 +12,7 @@ public class MenuData {
 //    private boolean display;
     private boolean isClick;
     private boolean deleteAccount;//是否显示删除账号，只有my的时候有用
-    private int showReferCode;//是否显示推荐码view，0显示，1关闭
+    private int showReferCode;//是否显示推荐码view，1开，2主动关，其他不判断
 
     public String getCode() {
         return code;
