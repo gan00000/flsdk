@@ -28,6 +28,7 @@ import androidx.core.app.NotificationCompat;
 import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.AppUtil;
+import com.core.base.utils.GsonUtil;
 import com.core.base.utils.MarketUtil;
 import com.core.base.utils.ProcessUtil;
 import com.core.base.utils.PL;
@@ -36,7 +37,9 @@ import com.core.base.utils.SignatureUtil;
 import com.core.base.utils.ToastUtils;
 import com.mw.base.bean.SPayType;
 import com.mw.sdk.ads.EventConstant;
+import com.mw.sdk.bean.req.PayCreateOrderReqBean;
 import com.mw.sdk.bean.res.PayChannelData;
+import com.mw.sdk.bean.res.ToggleResult;
 import com.mw.sdk.callback.IPayListener;
 import com.mw.sdk.constant.ChannelPlatform;
 import com.mw.sdk.demo.R;
@@ -576,6 +579,8 @@ public class MainActivity extends AppCompatActivity {
 //                });
 //                MWAdManger.getInstance().showMediationDebugger(activity);
 
+                showTogglePayDialogV2(activity);
+
             }
         });
         AppUtil.hideActivityBottomBar(this);
@@ -892,4 +897,27 @@ public class MainActivity extends AppCompatActivity {
         return iconId;
     }
 
+
+    private void showTogglePayDialogV2(Activity activity) {
+
+        String sd = "{\"successful\":true,\"code\":1000,\"message\":\"Success\",\"data\":{\"hideSelectChannel\":false,\"isTogglePay\":true,\"channelList\":[{\"toUrl\":\"https://payment.luckyyx.com/to.html?channel=enjoy&paymentType=enjoy&env=sea\",\"name\":\"EnjoyPay\",\"icon\":\"https://cdn-download.luckyyx.com/image/icon/enjoy.png\",\"describe\":\"Rebate\"}],\"productName\":\"USD 0.99\"}}";
+        ToggleResult toggleResult = GsonUtil.fromJson(sd, ToggleResult.class);
+        PL.i("showTogglePayDialog v2...");
+        SBaseDialog commonDialog = new SBaseDialog(activity, com.mw.sdk.R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
+        SelectPayChannelLayoutNew selectPayChannelLayout = new SelectPayChannelLayoutNew(activity);
+        selectPayChannelLayout.setDatas(toggleResult);
+        selectPayChannelLayout.setsBaseDialog(commonDialog);
+        selectPayChannelLayout.setSfCallBack(new SFCallBack<Object>() {
+            @Override
+            public void success(Object result, String msg) {
+
+            }
+
+            @Override
+            public void fail(Object mObject, String msg) {//第三方
+            }
+        });
+        commonDialog.setContentView(selectPayChannelLayout);
+        commonDialog.show();
+    }
 }
