@@ -19,6 +19,7 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 
 import com.core.base.BaseWebViewClient;
+import com.core.base.SCustomTabHelper;
 import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.ApkInfoUtil;
@@ -1691,8 +1692,11 @@ public class BaseSdkImpl implements IMWSDK {
 
         String webUrl = bean.createPreRequestUrl();
 
-        Intent intent = MWWebPayActivity.create(activity,"",webUrl,bean.getCpOrderId(),bean.getProductId(),bean.getExtra());
-        activity.startActivityForResult(intent, RequestCode.RequestCode_Web_Pay);
+        boolean success = SCustomTabHelper.startCustomTab(activity, webUrl);
+        if (!success){
+            Intent intent = MWWebPayActivity.create(activity,"",webUrl,bean.getCpOrderId(),bean.getProductId(),bean.getExtra());
+            activity.startActivityForResult(intent, RequestCode.RequestCode_Web_Pay);
+        }
     }
 
     private void doWebPay(Activity activity, PayCreateOrderReqBean bean) {

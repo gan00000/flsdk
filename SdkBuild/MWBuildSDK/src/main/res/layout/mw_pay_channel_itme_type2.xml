@@ -17,14 +17,13 @@
             android:layout_marginTop="15dp"
             android:text="@string/text_select_pay_channel_other"
             android:textSize="12sp"
-            android:textStyle="bold"
             android:textColor="@color/c_2A2A2A" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/c_B3B3B3"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             />
 
         <LinearLayout

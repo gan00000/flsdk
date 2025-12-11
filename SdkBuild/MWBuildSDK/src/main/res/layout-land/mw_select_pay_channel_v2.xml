@@ -6,8 +6,8 @@
     android:background="@android:color/transparent">
 
     <LinearLayout
-        android:layout_width="480dp"
-        android:layout_height="360dp"
+        android:layout_width="420dp"
+        android:layout_height="280dp"
         android:layout_centerInParent="true"
         android:background="@drawable/mw_bg_white_20_2"
         android:orientation="vertical">
@@ -60,8 +60,8 @@
 
             <ImageView
                 android:id="@+id/iv_select_channel_appicon"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:src="@drawable/bg_select_channel_close" />
 
             <TextView
