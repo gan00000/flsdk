@@ -55,6 +55,16 @@
         <package android:name="com.sec.android.app.samsungapps" />
     </queries>
 
+    <!--    custom tab    -->
+    <queries>
+        <intent>
+            <action android:name="android.support.customtabs.action.CustomTabsService" />
+        </intent>
+        <package android:name="com.android.chrome" />
+    </queries>
+
+    <!--    custom tab end   -->
+
     <application>
 
         <!--GA4F SDK 中启用 DDL。 为启用延迟深层链接而需添加的值 -->
