@@ -967,4 +967,75 @@ public class Request {
                     }
                 });
     }
+
+    public static void sendReferCode(Context context, String referCode, SFCallBack<BaseResponseModel> sfCallBack) {
+
+        if (SStringUtil.isEmpty(referCode)){
+            return;
+        }
+
+        SGameBaseRequestBean requestBean = new SGameBaseRequestBean(context);
+        requestBean.setReferCode(referCode);
+
+        Dialog dialog = DialogUtil.createLoadingDialog(context, "Loading...");
+        dialog.show();
+        RetrofitClient.instance().build(context,URLType.LOGIN).create(MWApiService.class)
+                .sendReferCode(requestBean.fieldValueToMap())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<BaseResponseModel>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull BaseResponseModel baseResponseModel) {
+                        if (dialog != null  ) {
+                            dialog.dismiss();
+                        }
+                        if (baseResponseModel != null) {
+                            if (baseResponseModel.isRequestSuccess()) {
+                                if (SStringUtil.isNotEmpty(baseResponseModel.getMessage())){
+                                    ToastUtils.toast(context, baseResponseModel.getMessage() + "");
+                                }
+                                if (sfCallBack != null){
+                                    sfCallBack.success(baseResponseModel,"success");
+                                }
+
+                            }else{
+
+                                ToastUtils.toast(context, baseResponseModel.getMessage() + "");
+                                if (sfCallBack != null){
+                                    sfCallBack.fail(baseResponseModel,"fail");
+                                }
+                            }
+
+                        } else {
+                            ToastUtils.toast(context, R.string.py_error_occur);
+                            if (sfCallBack != null){
+                                sfCallBack.fail(null, "fail");
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        ToastUtils.toast(context, R.string.py_error_occur);
+                        if (dialog != null  ) {
+                            dialog.dismiss();
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        if (dialog != null  ) {
+                            dialog.dismiss();
+                        }
+                    }
+                });
+    }
+
+
 }

@@ -133,4 +133,7 @@
     <string name="text_select_pay_channel_other">選擇其他支付方式</string>
     <string name="text_official_channel">官方儲值</string>
 
+    <string name="text_refer_code">推薦碼 (選填)</string>
+    <string name="text_refer_code2">推薦碼:</string>
+
 </resources>

@@ -94,6 +94,15 @@ public class SLoginResponse extends BaseResponseModel {
         private String blockMsg;//前端提示，可选，没有使用客户端预设提示
 
         private long regTime;//时间戳
+        private String referCode;//推荐码
+
+        public String getReferCode() {
+            return referCode;
+        }
+
+        public void setReferCode(String referCode) {
+            this.referCode = referCode;
+        }
 
         public long getRegTime() {
             return regTime;

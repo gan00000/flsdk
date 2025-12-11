@@ -1,6 +1,7 @@
 package com.mw.sdk.act;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +11,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.core.base.bean.BaseResponseModel;
 import com.core.base.callback.SFCallBack;
 import com.core.base.utils.ApkInfoUtil;
 import com.core.base.utils.PL;
+import com.core.base.utils.SStringUtil;
 import com.core.base.utils.TimeUtil;
 import com.mw.sdk.R;
 import com.mw.sdk.api.Request;
@@ -48,7 +51,7 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
     private Button delAccountOkButton;
     private View referCcodeView;
     private EditText referCcodeEditText;
-    private TextView referCcodeOkTextView;
+    private TextView referCcodeOkTextView, pc_refer_titleTextView;
 
     //    private FloatConfigData floatConfigData;
     private FloatMenuResData floatMenuResData;
@@ -112,6 +115,9 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
         referCcodeView = persionCenterView.findViewById(R.id.pc_ll_refer_code);
         referCcodeEditText = persionCenterView.findViewById(R.id.pc_input_refer_code);
         referCcodeOkTextView = persionCenterView.findViewById(R.id.pc_refer_code_ok);
+        pc_refer_titleTextView = persionCenterView.findViewById(R.id.pc_refer_title);
+        pc_refer_titleTextView.setVisibility(View.GONE);
+        referCcodeView.setVisibility(View.GONE);
 
         switchAccountView.setVisibility(View.GONE);
         delAccountView.setVisibility(View.GONE);
@@ -156,6 +162,10 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
             public void onClick(View v) {
                 doDeleteAccount();
             }
+        });
+
+        referCcodeOkTextView.setOnClickListener(v -> {
+            sendReferCode();
         });
 
         mFloatBindAccountLayout.setSFCallBack(new SFCallBack() {
@@ -236,6 +246,7 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
         }
 
         SLoginResponse sLoginResponse = SdkUtil.getCurrentUserLoginResponse(context);
+        //sLoginResponse.getData().setReferCode("1111133");
 
         if (sLoginResponse != null && sLoginResponse.getData() != null) {
             if (sLoginResponse.getData().isBind()) {
@@ -257,13 +268,25 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
 
             //显示
             if (ResConfig.isShowReferCode(context)
-                    && sLoginResponse.getData().getRegTime() > TimeUtil.getTimestamp("2025-12-28 00:00:00")){
+                    && sLoginResponse.getData().getRegTime() > TimeUtil.getTimestamp("2025-11-28 00:00:00")){
                 referCcodeView.setVisibility(View.VISIBLE);
+                if (SStringUtil.isNotEmpty(sLoginResponse.getData().getReferCode())) {
+                    setReferCodeToView(sLoginResponse.getData().getReferCode());
+                }
             }else {
                 referCcodeView.setVisibility(View.GONE);
             }
 
         }
+    }
+
+    private void setReferCodeToView(String code) {
+        referCcodeEditText.setText(code);
+        referCcodeEditText.setEnabled(false);
+        referCcodeEditText.setFocusable(false);
+        referCcodeEditText.setFocusableInTouchMode(false);
+        referCcodeOkTextView.setVisibility(View.GONE);
+        pc_refer_titleTextView.setVisibility(View.VISIBLE);
     }
 
 
@@ -292,6 +315,24 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
                 });
     }
 
+    private void sendReferCode() {
+        String referCode = referCcodeEditText.getText().toString().trim();
+        if (TextUtils.isEmpty(referCode)){
+            return;
+        }
+        Request.sendReferCode(getContext(), referCode, new SFCallBack<BaseResponseModel>() {
+            @Override
+            public void success(BaseResponseModel result, String msg) {
+
+                setReferCodeToView(referCode);
+            }
+
+            @Override
+            public void fail(BaseResponseModel result, String msg) {
+
+            }
+        });
+    }
 
     private void switchAccount() {
         PL.i("sdk switch account");

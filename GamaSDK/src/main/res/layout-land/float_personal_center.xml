@@ -154,7 +154,7 @@
                         android:textSize="11sp"
                         android:textColor="@color/black_s"
                         android:textStyle="bold"
-                        android:text="少年冒險王"
+                        android:text="null"
                         />
                 </LinearLayout>
 
@@ -181,7 +181,7 @@
                         android:textSize="11sp"
                         android:textColor="@color/black_s"
                         android:textStyle="bold"
-                        android:text="少年冒險王"
+                        android:text="null"
                         />
                 </LinearLayout>
 
@@ -268,10 +268,21 @@
                 android:orientation="horizontal"
                 >
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/pc_refer_title"
+                    android:lines="1"
+                    android:textSize="12sp"
+                    android:visibility="gone"
+                    android:textColor="@color/c_545454"
+                    android:text="@string/text_refer_code2"/>
+
                 <EditText
                     android:layout_width="180dp"
                     android:layout_height="30dp"
                     android:background="@drawable/mw_bg_707070_10"
+                    android:layout_marginStart="10dp"
                     android:paddingStart="9dp"
                     android:paddingEnd="9dp"
                     android:gravity="center"
