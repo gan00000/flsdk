@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "100700697590",
+    "project_id": "hzru-hz-gg",
+    "storage_bucket": "hzru-hz-gg.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:100700697590:android:863ce320510c4e02a1cdd7",
+        "android_client_info": {
+          "package_name": "com.hzru.andru"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxqJwb9CJ-9DhO-MI3W8VFZxoDGWQvnzg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

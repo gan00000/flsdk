@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "153835299402",
+    "project_id": "hzru-ru-others",
+    "storage_bucket": "hzru-ru-others.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:153835299402:android:9667e59e5e6f790e67fcb3",
+        "android_client_info": {
+          "package_name": "com.hzru.huawei"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4Qsk19MdqH1Kogv0pH-YfvghndBQsrVc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:153835299402:android:922d58b232df6f9b67fcb3",
+        "android_client_info": {
+          "package_name": "com.hzru.vkru"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4Qsk19MdqH1Kogv0pH-YfvghndBQsrVc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
