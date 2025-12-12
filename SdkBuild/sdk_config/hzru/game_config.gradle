@@ -29,6 +29,7 @@ android {
 
         sdk3 {
             dimension "1"
+            applicationId "com.hzru.andru"
 
             resValue "string", "sdk_game_code", "hzru"
             resValue "string", "sdk_app_key", "ad8e98420fdd8b94550200a4a8d79bef"
@@ -61,6 +62,7 @@ android {
 
         huawei {
             dimension "1"
+            applicationId "com.hzru.huawei"
 
             resValue "string", "sdk_game_code", "hzru"
             resValue "string", "sdk_app_key", "ad8e98420fdd8b94550200a4a8d79bef"
