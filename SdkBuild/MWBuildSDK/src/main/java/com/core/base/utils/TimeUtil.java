@@ -1,11 +1,12 @@
 package com.core.base.utils;
 
 import android.content.Context;
-import android.util.Log;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 
 public class TimeUtil {
@@ -49,25 +50,38 @@ public class TimeUtil {
         return yesterdayDate;
     }
 
-    public static String getDisplayTime(Context context) {
-        String displayTime = "";
+    public static String getCurTime(Context context) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(TIME_FORMAT);
         //获取当前时间
-        Date date = new Date(System.currentTimeMillis());
-        displayTime = simpleDateFormat.format(date);
-        Log.i(TAG, "Display time : " + displayTime);
-        return displayTime;
+        Date date = new Date();
+        return simpleDateFormat.format(date);
     }
 
-    public static String getBeiJingTime(Context context) {
-        String bjTime = "";
-        Date date = new Date(System.currentTimeMillis());
-        SimpleDateFormat dateFormat = new SimpleDateFormat(TIME_FORMAT);
-        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT+8"));
-        bjTime = dateFormat.format(date);
-        Log.i(TAG+ " beijing time: ", bjTime);
-        return bjTime;
+    public static long getTimestamp(String dateString) {
+        return getTimestamp(dateString, TIME_FORMAT);
     }
+
+    public static long getTimestamp(String dateString, String pattern) {
+
+        // 创建 SimpleDateFormat 实例
+        SimpleDateFormat sdf = new SimpleDateFormat(pattern, Locale.getDefault());
+        // 设置时区为北京时区 (Asia/Shanghai)
+        sdf.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai")); // 或 "GMT+8"
+
+        try {
+            // 解析日期字符串
+            Date date = sdf.parse(dateString);
+            // 返回毫秒级时间戳
+            return date.getTime();
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return 0; // 解析失败时返回 -1
+
+    }
+
+
 
     public static boolean isSameMonth(long startTime) {
         if(startTime == 0) {

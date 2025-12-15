@@ -39,6 +39,7 @@ import com.mw.sdk.bean.res.BasePayBean;
 import com.mw.sdk.bean.res.GPCreateOrderIdRes;
 import com.mw.sdk.bean.res.GPExchangeRes;
 import com.mw.sdk.constant.ApiRequestMethod;
+import com.mw.sdk.pay.IPay;
 import com.mw.sdk.pay.IPayCallBack;
 import com.mw.sdk.utils.PayHelper;
 
@@ -111,7 +112,7 @@ public class HuaweiPayImpl {
                 case OrderStatusCode.ORDER_STATE_CANCEL:
                     // 用户取消
                     PL.i("onActivityResult purchase 用户取消");
-                    handlePayFail("");
+                    handlePayFail(IPay.TAG_USER_CANCEL);
                     break;
                 case OrderStatusCode.ORDER_STATE_FAILED:
                 case OrderStatusCode.ORDER_STATE_DEFAULT_CODE:
@@ -539,6 +540,12 @@ public class HuaweiPayImpl {
         if (loadingDialog != null){
             loadingDialog.dismissProgressDialog();
         }
+        if (SStringUtil.isNotEmpty(msg) || msg.equals(IPay.TAG_USER_CANCEL)){
+            if (iPayCallBack != null) {
+                iPayCallBack.cancel(null);
+            }
+            return;
+        }
 
         if (SStringUtil.isEmpty(msg)){
             if (iPayCallBack != null) {
@@ -546,6 +553,7 @@ public class HuaweiPayImpl {
             }
             return;
         }
+
         loadingDialog.alert(msg, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

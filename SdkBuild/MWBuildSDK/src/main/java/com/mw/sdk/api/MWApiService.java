@@ -1,5 +1,6 @@
 package com.mw.sdk.api;
 
+import com.core.base.bean.BaseResponseModel;
 import com.mw.sdk.bean.res.ActDataModel;
 import com.mw.sdk.bean.res.EventRes;
 import com.mw.sdk.bean.res.GPExchangeRes;
@@ -83,4 +84,8 @@ public interface MWApiService {
     @POST("sdk/api/getRechargeEvent")
     @FormUrlEncoded
     Observable<EventRes> getRechargeEvent(@FieldMap Map<String, String> paramMap);
+
+    @POST("api/referCode")
+    @FormUrlEncoded
+    Observable<BaseResponseModel> sendReferCode(@FieldMap Map<String, String> paramMap);
 }

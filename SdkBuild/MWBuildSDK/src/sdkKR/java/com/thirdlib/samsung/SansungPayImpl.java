@@ -55,8 +55,6 @@ import java.util.List;
 
 public class SansungPayImpl implements IPay{
 
-    public static final String TAG_USER_CANCEL = "TAG_PAY_USER_CANCEL";
-
     private IapHelper  mIapHelper = null;
     private LoadingDialog loadingDialog;
 

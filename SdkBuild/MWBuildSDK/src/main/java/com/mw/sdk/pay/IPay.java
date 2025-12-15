@@ -17,6 +17,14 @@ public interface IPay extends IGameLifeCycle{
 //    int PAY_FAIL = 94;
 
     public static final String SDK_MW_PAY_FILE = "sdk_mw_pay_file.xml";
+
+    public static final String K_PAY_Extra_Data = "K_PAY_Extra_Data";
+    public static final String K_PAY_Extra_Code = "K_PAY_Extra_Code";
+
+    public static final String TAG_USER_CANCEL = "TAG_PAY_USER_CANCEL";
+    public static final int TAG_PAY_SUCCESS= 1000;
+    public static final int TAG_PAY_FAIL = 1001;
+    public static final int TAG_PAY_CANCEL = 1002;
     /**
      * 进入Google储值流程
      */

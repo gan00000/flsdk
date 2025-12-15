@@ -44,8 +44,6 @@ import java.util.List;
 
 public class XiaomiPayImpl implements IPay, XiaoMiPayManager.PurchaseCallback {
 
-    public static final String TAG_USER_CANCEL = "TAG_PAY_USER_CANCEL";
-
     private LoadingDialog loadingDialog;
 
     private Double skuAmount;
@@ -567,8 +565,11 @@ public class XiaomiPayImpl implements IPay, XiaoMiPayManager.PurchaseCallback {
     }
 
     @Override
-    public void onCancel(String msg) {
-        dimissDialog();
+    public void onCancel(String message) {
+        PL.i("onCancel:" + message + ", isPaying=" + isPaying);
+        if (mActivity != null && this.createOrderIdReqBean != null){//此时用户正在购买
+            callbackFail(TAG_USER_CANCEL);
+        }
     }
 
     @Override

@@ -618,7 +618,13 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
     @Override
     public void register(Activity activity, String account, String pwd, String areaCode, String phone, String vfcode, String email) {
         this.mActivity = activity;
-        registerAccout(activity, account, pwd, areaCode, phone, vfcode, email);
+        registerAccout(activity, account, pwd, areaCode, phone, vfcode, email, null);
+    }
+
+    @Override
+    public void register(Activity activity, String account, String pwd, String areaCode, String phone, String vfcode, String email, Map<String, String> others) {
+        this.mActivity = activity;
+        registerAccout(activity, account, pwd, areaCode, phone, vfcode, email, others);
     }
 
     @Override
@@ -1040,8 +1046,9 @@ public class LoginPresenterImpl implements LoginContract.ILoginPresenter {
         cmd.excute(SLoginResponse.class);
     }
 
-    private void registerAccout(final Activity activity, final String account, final String password, String areaCode, String phone, String vfcode, String email){
-        AccountRegisterRequestTask accountRegisterCmd = new AccountRegisterRequestTask(getActivity(), account, password, areaCode, phone, vfcode, email);
+    private void registerAccout(final Activity activity, final String account, final String password, String areaCode, String phone, String vfcode, String email, Map<String, String> others){
+
+        AccountRegisterRequestTask accountRegisterCmd = new AccountRegisterRequestTask(getActivity(), account, password, areaCode, phone, vfcode, email, others);
         accountRegisterCmd.setLoadDialog(DialogUtil.createLoadingDialog(getActivity(), "Loading..."));
         accountRegisterCmd.setReqCallBack(new ISReqCallBack<SLoginResponse>() {
             @Override

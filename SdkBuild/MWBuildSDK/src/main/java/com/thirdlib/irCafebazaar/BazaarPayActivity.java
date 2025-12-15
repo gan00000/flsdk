@@ -14,8 +14,6 @@ import com.mw.sdk.pay.IPayFactory;
 
 public class BazaarPayActivity extends SBaseActivity {
 
-    public static final String K_Extra_Data = "K_Extra_Data";
-    public static final String K_Extra_Code = "K_Extra_Code";
 	public static final int Result_Code_BazaarPay = 94;
 	public static final int Request_Code_BazaarPay = 95;
 
@@ -37,23 +35,23 @@ public class BazaarPayActivity extends SBaseActivity {
 		iPay.setIPayCallBack(new IPayCallBack() {
 			@Override
 			public void success(BasePayBean basePayBean) {
-                setResultForPay(1000, basePayBean);
+                setResultForPay(IPay.TAG_PAY_SUCCESS, basePayBean);
 			}
 
 			@Override
 			public void fail(BasePayBean basePayBean) {
-                setResultForPay(1001, null);
+                setResultForPay(IPay.TAG_PAY_FAIL, null);
 			}
 
 			@Override
 			public void cancel(String msg) {
-                setResultForPay(1002, null);
+                setResultForPay(IPay.TAG_PAY_CANCEL, null);
 			}
 		});
 
 		Intent intent = getIntent();
 		if (intent != null){
-			payCreateOrderReqBean = (PayCreateOrderReqBean) intent.getSerializableExtra(K_Extra_Data);
+			payCreateOrderReqBean = (PayCreateOrderReqBean) intent.getSerializableExtra(IPay.K_PAY_Extra_Data);
             if (payCreateOrderReqBean != null) {
                 iPay.startPay(this, payCreateOrderReqBean);
                 return;
@@ -64,9 +62,9 @@ public class BazaarPayActivity extends SBaseActivity {
 
 	private void setResultForPay(int code, BasePayBean payBean) {
 		Intent resultIntent = new Intent();
-        resultIntent.putExtra(K_Extra_Code, code);
+        resultIntent.putExtra(IPay.K_PAY_Extra_Code, code);
         if (payBean != null) {
-            resultIntent.putExtra(K_Extra_Data, payBean);
+            resultIntent.putExtra(IPay.K_PAY_Extra_Data, payBean);
         }
         setResult(Result_Code_BazaarPay,resultIntent);
 

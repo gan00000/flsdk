@@ -18,6 +18,8 @@ import com.thirdlib.line.SLineSignIn;
 import com.thirdlib.nowgg.NowggLogin;
 import com.thirdlib.twitter.TwitterLogin;
 
+import java.util.Map;
+
 /**
  * Created by gan on 2017/4/13.
  */
@@ -108,6 +110,7 @@ public class LoginContract {
          * 需要手机验证的注册
          */
         void register(Activity activity, String account, String pwd, String areaCode, String phone, String vfcode, String email);
+        void register(Activity activity, String account, String pwd, String areaCode, String phone, String vfcode, String email, Map<String, String> others);
 
         /**
          * 需要手机验证的找回密码

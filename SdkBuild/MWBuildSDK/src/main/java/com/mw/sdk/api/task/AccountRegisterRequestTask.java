@@ -8,13 +8,15 @@ import com.mw.sdk.utils.ResConfig;
 import com.mw.sdk.constant.ApiRequestMethod;
 import com.mw.sdk.bean.req.AccountRegRequestBean;
 
+import java.util.Map;
+
 //1000成功
 //5001註冊登入成功
 public class AccountRegisterRequestTask extends BaseLoginRequestTask {
 
     private AccountRegRequestBean regRequestBean;
 
-    public AccountRegisterRequestTask(Context context, String userName, String password, String areaCode, String phone, String vfcode, String email) {
+    public AccountRegisterRequestTask(Context context, String userName, String password, String areaCode, String phone, String vfcode, String email, Map<String, String> others) {
         super(context);
 
         userName = userName.toLowerCase();
@@ -36,6 +38,12 @@ public class AccountRegisterRequestTask extends BaseLoginRequestTask {
 
         regRequestBean.setRequestMethod(ApiRequestMethod.GS_REQUEST_METHOD_REGISTER);
 
+        if (others != null && !others.isEmpty()){
+            String referCode = others.get("referCode");
+            if (SStringUtil.isNotEmpty(referCode)){
+                regRequestBean.setReferCode(referCode);
+            }
+        }
 
     }
 

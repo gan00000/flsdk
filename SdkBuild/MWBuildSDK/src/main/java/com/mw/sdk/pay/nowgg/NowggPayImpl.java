@@ -46,8 +46,6 @@ import gg.now.billingclient.api.SkuDetailsResponseListener;
 
 public class NowggPayImpl implements IPay, BillingManager.BillingUpdatesListener {
 
-    public static final String TAG_USER_CANCEL = "USER_CANCELED";
-
     private LoadingDialog loadingDialog;
 
     private BillingManager purchaseManager;
