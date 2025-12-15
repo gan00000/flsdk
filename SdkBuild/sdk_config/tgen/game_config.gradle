@@ -89,6 +89,8 @@ android {
 
             resValue "string", "mw_tt_app_id", ""
 
+            resValue "string", "mw_need_refer_code", "true"
+
             //=======================================sdk config end==========================
 
         }
