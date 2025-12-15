@@ -131,7 +131,7 @@ public class CafeBazaarPayImpl implements IPay {
                         return;
                     }
 
-                    if (!TextUtils.isEmpty(message)) {//提示错误信息
+                    if (!TextUtils.isEmpty(message) && loadingDialog != null) {//提示错误信息
 
                         loadingDialog.alert(message, new DialogInterface.OnClickListener() {
                             @Override

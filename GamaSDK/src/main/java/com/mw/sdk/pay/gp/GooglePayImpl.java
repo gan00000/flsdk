@@ -156,21 +156,19 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
                         return;
                     }
 
-                    if (!TextUtils.isEmpty(message)) {//提示错误信息
+                    if (!TextUtils.isEmpty(message) && loadingDialog != null) {//提示错误信息
 
-                        if (loadingDialog != null) {
-                            loadingDialog.alert(message, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
+                        loadingDialog.alert(message, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
 
-                                    dialog.dismiss();
+                                dialog.dismiss();
 
-                                    if (iPayCallBack != null) {
-                                        iPayCallBack.fail(null);
-                                    }
+                                if (iPayCallBack != null) {
+                                    iPayCallBack.fail(null);
                                 }
-                            });
-                        }
+                            }
+                        });
 
                     } else {
 
