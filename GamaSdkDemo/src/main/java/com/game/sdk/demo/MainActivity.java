@@ -143,7 +143,9 @@ public class MainActivity extends AppCompatActivity {
                 mIMWSDK.pay(MainActivity.this, "" + System.currentTimeMillis(), skuId, extra, roleId, roleName, roleLevel, vipLevel, serverCode, serverName, new MXCallback() {
                     @Override
                     public void success(MXData mxData) {
-
+                        if (mxData != null){
+                            String purchaseToken = mxData.getPurchaseToken();
+                        }
                     }
 
                     @Override
