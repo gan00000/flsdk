@@ -18,14 +18,20 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import retrofit2.http.Url;
 
 public interface MWApiService {
 
+    //通用post请求，@Url优先baseUrl
+    @POST
+    @FormUrlEncoded
+    Observable<String> post(@Url String url, @FieldMap Map<String, String> paramMap);
+
     @GET("sdk/config/{gameCode}/v1/version.json")
-    Observable<ResponseBody> getBaseConfig(@Path("gameCode")String gameCode, @Query("v") String timeStamp);
+    Observable<String> getBaseConfig(@Path("gameCode")String gameCode, @Query("v") String timeStamp);
 
     @GET("sdk/config/areaCode/areaInfo.json")
-    Observable<ResponseBody> getPhoneInfo(@Query("v") String timeStamp);
+    Observable<String> getPhoneInfo(@Query("v") String timeStamp);
 
     @POST("sdk/api/market/switch")
     @FormUrlEncoded

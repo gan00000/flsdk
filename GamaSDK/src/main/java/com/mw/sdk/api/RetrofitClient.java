@@ -2,17 +2,19 @@ package com.mw.sdk.api;
 
 import android.content.Context;
 
-import androidx.annotation.NonNull;
-
 import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.mw.sdk.utils.ResConfig;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class RetrofitClient {
 
@@ -25,6 +27,8 @@ public class RetrofitClient {
     private Retrofit logRetrofit;
     private Retrofit memberRetrofit;
 
+    private Map<String, Retrofit> stringRetrofitMap = new HashMap<>();
+
     public static RetrofitClient instance(){
         if (mRetrofitClient ==null){
             mRetrofitClient = new RetrofitClient();
@@ -34,14 +38,14 @@ public class RetrofitClient {
 
     public Retrofit build(Context context, URLType URLType){
         String baseUrl = "";
-        if (URLType.CDN == URLType){
+        if (com.mw.sdk.api.URLType.CDN == URLType){
             if (cndRetrofit != null) {
                 return cndRetrofit;
             }
             baseUrl = ResConfig.getCdnPreferredUrl(context);
             cndRetrofit = build(baseUrl);
             return cndRetrofit;
-        } else if (URLType.LOGIN == URLType) {
+        } else if (com.mw.sdk.api.URLType.LOGIN == URLType) {
 
             if (loginRetrofit != null) {
                 return loginRetrofit;
@@ -49,7 +53,7 @@ public class RetrofitClient {
             baseUrl = ResConfig.getLoginPreferredUrl(context);
             loginRetrofit = build(baseUrl);
             return loginRetrofit;
-        }else if (URLType.PAY == URLType) {
+        }else if (com.mw.sdk.api.URLType.PAY == URLType) {
 
             if (payRetrofit != null) {
                 return payRetrofit;
@@ -57,7 +61,7 @@ public class RetrofitClient {
             baseUrl = ResConfig.getPayPreferredUrl(context);
             payRetrofit = build(baseUrl);
             return payRetrofit;
-        }else if (URLType.PLAT == URLType) {
+        }else if (com.mw.sdk.api.URLType.PLAT == URLType) {
 
             if (platRetrofit != null) {
                 return platRetrofit;
@@ -65,7 +69,7 @@ public class RetrofitClient {
             baseUrl = ResConfig.getPlatPreferredUrl(context);
             platRetrofit = build(baseUrl);
             return platRetrofit;
-        }else if (URLType.LOG == URLType) {
+        }else if (com.mw.sdk.api.URLType.LOG == URLType) {
 
             if (logRetrofit != null) {
                 return logRetrofit;
@@ -73,7 +77,7 @@ public class RetrofitClient {
             baseUrl = ResConfig.getLogPreferredUrl(context);
             logRetrofit = build(baseUrl);
             return logRetrofit;
-        }else if (URLType.MEMBER == URLType) {
+        }else if (com.mw.sdk.api.URLType.MEMBER == URLType) {
 
             if (memberRetrofit != null) {
                 return memberRetrofit;
@@ -85,12 +89,30 @@ public class RetrofitClient {
         return null;
     }
 
+    public Retrofit getRetrofit(String url){
+
+//        if (SStringUtil.isEmpty(url)){
+//            PL.e("baseUrl is empty");
+//            return null;
+//        }
+
+        if (SStringUtil.isNotEmpty(url) && stringRetrofitMap.get(url) != null){
+            return stringRetrofitMap.get(url);
+        }
+        Retrofit retrofit = build(url);
+        if (SStringUtil.isNotEmpty(url) && retrofit != null) {
+            stringRetrofitMap.put(url, retrofit);
+        }
+        return retrofit;
+
+    }
+
     private Retrofit build(String baseUrl){
 
-        if (SStringUtil.isEmpty(baseUrl)){
-            PL.e("baseUrl is empty");
-            return null;
-        }
+//        if (SStringUtil.isEmpty(baseUrl)){
+//            PL.e("baseUrl is empty");
+//            return null;
+//        }
 
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor(/*new HttpLoggingInterceptor.Logger() {
             @Override
@@ -101,10 +123,28 @@ public class RetrofitClient {
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient okHttpClient = new OkHttpClient.Builder().addInterceptor(interceptor).build();
 
+        //只要按「ScalarsConverterFactory 在前，GsonConverterFactory 在后」的顺序配置，
+        // Retrofit 就能根据接口声明的返回类型自动、正确地选择对应的转换器
+        //顺序不要反，不然可能会出现解析错误
+
+        if (SStringUtil.isEmpty(baseUrl)){
+            PL.e("baseUrl is empty");
+            //return null;
+            Retrofit retrofit = new Retrofit.Builder()
+                    .client(okHttpClient)
+                    //.baseUrl(baseUrl)
+                    .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+                    .addConverterFactory(ScalarsConverterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+            return retrofit;
+        }
+
         Retrofit retrofit = new Retrofit.Builder()
                 .client(okHttpClient)
                 .baseUrl(baseUrl)
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+                .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

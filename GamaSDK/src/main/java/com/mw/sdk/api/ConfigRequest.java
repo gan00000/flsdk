@@ -71,24 +71,24 @@ public class ConfigRequest{
                 .getBaseConfig(gameCode, System.currentTimeMillis() + "")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ResponseBody>() {
+                .subscribe(new Observer<String>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(@NonNull ResponseBody responseBody) {
+                    public void onNext(@NonNull String rawResult) {
 
                         try {
-                            String rawResult = responseBody.string();
+                            //String rawResult = responseBody.string();
                             PL.i("getBaseConfig finish > " + rawResult);
                             if (TextUtils.isEmpty(rawResult)){
                                 return;
                             }
                             SdkUtil.saveSdkCfg(context, rawResult);
 
-                        } catch (IOException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
@@ -148,27 +148,23 @@ public class ConfigRequest{
                 .getPhoneInfo(System.currentTimeMillis() + "")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ResponseBody>() {
+                .subscribe(new Observer<String>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(@NonNull ResponseBody responseBody) {
+                    public void onNext(@NonNull String rawResult) {
 
-                        try {
-                            String rawResult = responseBody.string();
-                            PL.i("requestAreaCodeInfo finish");
+                        //String rawResult = responseBody.string();
+                        PL.i("requestAreaCodeInfo finish");
 
-                            if (TextUtils.isEmpty(rawResult)){
-                                return;
-                            }
-                            SdkUtil.saveAreaCodeInfo(context,rawResult);
-
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                        if (TextUtils.isEmpty(rawResult)){
+                            return;
                         }
+                        SdkUtil.saveAreaCodeInfo(context,rawResult);
+
                     }
 
                     @Override
