@@ -58,6 +58,8 @@ public class CafeBazaarPayImpl implements IPay {
      */
     private boolean isPaying = false;
 
+    private PurchaseInfo successPurchaseInfo;
+
     private void callbackSuccess( GPExchangeRes gpExchangeRes) {
 
         PL.i("rustore pay onConsumeResponse callbackSuccess");
@@ -68,31 +70,17 @@ public class CafeBazaarPayImpl implements IPay {
 
                     BasePayBean payBean = new BasePayBean();
                     try {
-//                            JSONObject devPayload = new JSONObject(purchase.getDeveloperPayload());
-//                            String userId = devPayload.optString("userId","");
-//                            String roleId = devPayload.optString("roleId","");
-//                            String orderId = devPayload.optString("orderId","");
-//                            payBean.setOrderId(orderId);
-//                            payBean.setTransactionId(purchase.getOrderId());
-//                            payBean.setPackageName(purchase.getPackageName());
                         payBean.setUsdPrice(skuAmount);
                         if (createOrderIdReqBean != null) {
                             payBean.setCpOrderId(createOrderIdReqBean.getCpOrderId());
                             payBean.setProductId(createOrderIdReqBean.getProductId());
+                            payBean.setUserId(createOrderIdReqBean.getUserId());
                         }
-//                    payBean.setmItemType(purchase.getItemType());
-//                            payBean.setOriginPurchaseData(purchase.getOriginalJson());
-//                            payBean.setPurchaseState(purchase.getPurchaseState());
-//                            payBean.setPurchaseTime(purchase.getPurchaseTime());
-//                            payBean.setSignature(purchase.getSignature());
-//                            payBean.setDeveloperPayload(purchase.getDeveloperPayload());
-//                            payBean.setmToken(purchase.getPurchaseToken());
-//                            if (skuDetails != null && skuDetails.getOneTimePurchaseOfferDetails() != null) {
-//                                double price = skuDetails.getOneTimePurchaseOfferDetails().getPriceAmountMicros() / 1000000.00;
-//                                payBean.setPrice(price);
-//                                payBean.setCurrency(skuDetails.getOneTimePurchaseOfferDetails().getPriceCurrencyCode());
-//                            }
-
+                        if (successPurchaseInfo != null){
+                            payBean.setmToken(successPurchaseInfo.getPurchaseToken());
+                            payBean.setTransactionId(successPurchaseInfo.getOrderId());
+                            payBean.setProductId(successPurchaseInfo.getProductId());
+                        }
                         if (gpExchangeRes != null && gpExchangeRes.getData() != null) {
                             payBean.setServerTimestamp(gpExchangeRes.getData().getTimestamp());
                         }
@@ -207,6 +195,7 @@ public class CafeBazaarPayImpl implements IPay {
 
         PL.w("set paying...");
         isPaying = true;
+        successPurchaseInfo = null;
 
         this.mActivity = activity;
 
@@ -377,6 +366,7 @@ public class CafeBazaarPayImpl implements IPay {
             callbackFail("ProductPurchaseResult is null");
             return;
         }
+        this.successPurchaseInfo = mPurchaseInfo;
         String orderId = mPurchaseInfo.getOrderId();
         String mwOrderId = mPurchaseInfo.getPayload();
         String productId = mPurchaseInfo.getProductId();
