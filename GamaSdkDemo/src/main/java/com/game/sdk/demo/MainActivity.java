@@ -30,28 +30,23 @@ import com.core.base.callback.SFCallBack;
 import com.core.base.utils.AppUtil;
 import com.core.base.utils.GsonUtil;
 import com.core.base.utils.MarketUtil;
-import com.core.base.utils.ProcessUtil;
 import com.core.base.utils.PL;
+import com.core.base.utils.ProcessUtil;
 import com.core.base.utils.SStringUtil;
 import com.core.base.utils.SignatureUtil;
 import com.core.base.utils.ToastUtils;
 import com.mw.base.bean.SPayType;
-import com.mw.sdk.ads.EventConstant;
-import com.mw.sdk.bean.req.PayCreateOrderReqBean;
-import com.mw.sdk.bean.res.PayChannelData;
+import com.mw.sdk.bean.MXData;
 import com.mw.sdk.bean.res.ToggleResult;
 import com.mw.sdk.callback.IPayListener;
-import com.mw.sdk.constant.ChannelPlatform;
+import com.mw.sdk.callback.MXCallback;
 import com.mw.sdk.demo.R;
 import com.mw.sdk.login.ILoginCallBack;
 import com.mw.sdk.login.model.response.SLoginResponse;
-import com.mw.sdk.login.widget.v2.SelectPayChannelLayout;
 import com.mw.sdk.login.widget.v2.SelectPayChannelLayoutNew;
 import com.mw.sdk.out.IMWSDK;
 import com.mw.sdk.out.ISdkCallBack;
 import com.mw.sdk.out.MWSdkFactory;
-import com.mw.sdk.pay.IPay;
-import com.mw.sdk.pay.IPayFactory;
 import com.mw.sdk.utils.SdkUtil;
 import com.mw.sdk.widget.SBaseDialog;
 
@@ -131,19 +126,37 @@ public class MainActivity extends AppCompatActivity {
 //                String skuId = "com.wanxin.tgru.99";
 //                String skuId = "com.aab.sat";
                 String skuId = "com.wgfb.bazir.99";
-                mIMWSDK.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(),skuId, extra,roleId,roleName,roleLevel, vipLevel,serverCode, serverName, new IPayListener() {
+//                mIMWSDK.pay(MainActivity.this, SPayType.GOOGLE, "" + System.currentTimeMillis(),skuId, extra,roleId,roleName,roleLevel, vipLevel,serverCode, serverName, new IPayListener() {
+//
+//                    @Override
+//                    public void onPaySuccess(String productId, String cpOrderId) {
+//                        ToastUtils.toast(activity,"充值成功>" + skuId);
+//                    }
+//
+//                    @Override
+//                    public void onPayFail() {
+//                        ToastUtils.toast(activity,"充值失败>" + skuId);
+//                    }
+//
+//                });
 
+                mIMWSDK.pay(MainActivity.this, "" + System.currentTimeMillis(), skuId, extra, roleId, roleName, roleLevel, vipLevel, serverCode, serverName, new MXCallback() {
                     @Override
-                    public void onPaySuccess(String productId, String cpOrderId) {
-                        ToastUtils.toast(activity,"充值成功>" + skuId);
+                    public void success(MXData mxData) {
+
                     }
 
                     @Override
-                    public void onPayFail() {
-                        ToastUtils.toast(activity,"充值失败>" + skuId);
+                    public void fail(MXData mxData) {
+
                     }
 
+                    @Override
+                    public void cancel(MXData mxData) {
+
+                    }
                 });
+
 //                mIMWSDK.checkPreRegData(activity, new ISdkCallBack() {
 //                    @Override
 //                    public void success() {

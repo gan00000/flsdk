@@ -52,13 +52,6 @@
 
         </activity>
 
-        <activity
-            android:name="com.thirdlib.irCafebazaar.BazaarPayActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|fontScale"
-            android:windowSoftInputMode="stateHidden|adjustResize"
-            android:theme="@style/Sdk.Theme.AppCompat.Light.NoActionBar.FullScreen.Translucent"/>
-
-
     </application>
 
 </manifest>

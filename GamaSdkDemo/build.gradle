@@ -1,5 +1,10 @@
 apply plugin: 'com.android.application'
 
+//apply from: "${project.rootDir}/SdkBuild/sdk_config/tgen/game_config.gradle"
+//apply from: "${project.rootDir}/SdkBuild/sdk_config/dscgru/game_config.gradle"
+//apply from: "${project.rootDir}/SdkBuild/sdk_config/hzru/game_config.gradle"
+apply from: "${project.rootDir}/SdkBuild/sdk_config/wgfbir/game_config.gradle"
+
 android {
 
     compileSdk rootProject.ext.compileSdkVersion
@@ -20,7 +25,7 @@ android {
 
         versionCode 1
         versionName "1.1"
-        applicationId 'com.wanxin.tgen'
+//        applicationId 'com.wanxin.tgen'
 //        applicationId "com.dscgru.and"
 //        applicationId "com.hzru.andru"
 
@@ -184,9 +189,6 @@ android {
     namespace 'com.mw.sdk.demo'
 }
 
-//apply from: "${project.rootDir}/SdkBuild/sdk_config/tgen/game_config.gradle"
-//apply from: "${project.rootDir}/SdkBuild/sdk_config/dscgru/game_config.gradle"
-apply from: "${project.rootDir}/SdkBuild/sdk_config/hzru/game_config.gradle"
 
 repositories {
     flatDir {
