@@ -8,7 +8,7 @@ import com.mw.sdk.R;
 import com.mw.sdk.bean.AccountModel;
 import com.mw.sdk.constant.SLoginType;
 import com.mw.sdk.pay.IPay;
-import com.mw.sdk.pay.nowgg.NowggPayImpl;
+import com.thirdlib.nowgg.NowggPayImpl;
 import com.thirdlib.IThirdHelper;
 import com.thirdlib.ThirdModuleUtil;
 import com.thirdlib.irCafebazaar.CafeBazaarPayImpl;

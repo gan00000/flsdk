@@ -1,4 +1,4 @@
-package com.mw.sdk.pay.nowgg;
+package com.thirdlib.nowgg;
 
 import android.app.Activity;
 import android.content.Context;
@@ -23,7 +23,7 @@ import com.mw.sdk.constant.ApiRequestMethod;
 import com.mw.sdk.out.ISdkCallBack;
 import com.mw.sdk.pay.IPay;
 import com.mw.sdk.pay.IPayCallBack;
-import com.mw.sdk.pay.nowgg.billing.BillingManager;
+import com.thirdlib.nowgg.billing.BillingManager;
 import com.mw.sdk.utils.PayHelper;
 import com.mw.sdk.utils.SdkUtil;
 

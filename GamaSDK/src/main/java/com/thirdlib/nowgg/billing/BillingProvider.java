@@ -1,4 +1,4 @@
-package com.mw.sdk.pay.nowgg.billing;
+package com.thirdlib.nowgg.billing;
 
 /**
  * An interface that provides an access to BillingLibrary methods
