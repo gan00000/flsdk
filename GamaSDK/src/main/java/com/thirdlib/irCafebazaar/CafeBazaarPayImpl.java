@@ -39,7 +39,6 @@ import ir.cafebazaar.poolakey.entity.PurchaseInfo;
 
 public class CafeBazaarPayImpl implements IPay {
 
-    public static final String TAG_USER_CANCEL = "TAG_PAY_USER_CANCEL";
 //    private PoolakeyPayManager poolakeyPayManager;
     private LoadingDialog loadingDialog;
 

@@ -45,6 +45,7 @@ import com.mw.sdk.ads.EventConstant;
 import com.mw.sdk.ads.SdkEventLogger;
 import com.mw.sdk.api.ConfigRequest;
 import com.mw.sdk.api.Request;
+import com.mw.sdk.bean.MXData;
 import com.mw.sdk.bean.PhoneInfo;
 import com.mw.sdk.bean.SGameBaseRequestBean;
 import com.mw.sdk.bean.req.PayCreateOrderReqBean;
@@ -58,7 +59,7 @@ import com.mw.sdk.bean.res.ToggleResult;
 import com.mw.sdk.callback.FloatButtionClickCallback;
 import com.mw.sdk.callback.FloatCallback;
 import com.mw.sdk.callback.IPayListener;
-import com.mw.sdk.constant.ApiRequestMethod;
+import com.mw.sdk.callback.MXCallback;
 import com.mw.sdk.constant.ChannelPlatform;
 import com.mw.sdk.constant.RequestCode;
 import com.mw.sdk.constant.ResultCode;
@@ -75,7 +76,6 @@ import com.mw.sdk.out.bean.EventPropertie;
 import com.mw.sdk.pay.IPay;
 import com.mw.sdk.pay.IPayCallBack;
 import com.mw.sdk.pay.IPayFactory;
-import com.mw.sdk.pay.gp.GooglePayImpl;
 import com.mw.sdk.utils.DataManager;
 import com.mw.sdk.utils.DialogUtil;
 import com.mw.sdk.utils.ResConfig;
@@ -137,6 +137,7 @@ public class BaseSdkImpl implements IMWSDK {
 //    protected IPay iPayOneStore;
     private Map<String, IPay> iPayMap = new HashMap<>();
     protected IPayListener iPayListener;
+    protected MXCallback payMxCallback;
     protected Activity activity;
 
     protected HuaweiPayImpl huaweiPay;
@@ -537,19 +538,11 @@ public class BaseSdkImpl implements IMWSDK {
                 //网页充值，或者网页内Google充值回调
                 if (requestCode == RequestCode.RequestCode_Web_Pay && resultCode == ResultCode.ResultCode_Web_Pay){
                     if (data != null){
-                        String mw_productId = data.getStringExtra("mw_productId");
-                        String mw_cpOrderId = data.getStringExtra("mw_cpOrderId");
-                        PL.i("web onPaySuccess:mw_productId=" + mw_productId);
-                        PL.i("web onPaySuccess:mw_cpOrderId=" + mw_cpOrderId);
-                        if (iPayListener != null) {
-                            iPayListener.onPaySuccess(mw_productId,mw_cpOrderId);
-                        }
-                    }else{
-                        PL.i("web onPayFail");
-                        if (iPayListener != null) {
-                            iPayListener.onPayFail();
-                        }
+                        int extra_code = data.getIntExtra(IPay.K_PAY_Extra_Code, IPay.TAG_PAY_FAIL);
+                        BasePayBean payBean = (BasePayBean)data.getSerializableExtra(IPay.K_PAY_Extra_Data);
+                        handlePayCallback(activity, extra_code, payBean);
                     }
+
                 }
 
                 if (huaweiPay != null){
@@ -557,20 +550,10 @@ public class BaseSdkImpl implements IMWSDK {
                 }
 
                 if (requestCode == BazaarPayActivity.Request_Code_BazaarPay && resultCode == BazaarPayActivity.Result_Code_BazaarPay){
-                    int extra_code = data.getIntExtra(BazaarPayActivity.K_Extra_Code, 1001);
-                    BasePayBean payBean = (BasePayBean)data.getSerializableExtra(BazaarPayActivity.K_Extra_Data);
-                    if (extra_code==1000 && payBean != null){
-                        if (iPayListener != null) {
-                            iPayListener.onPaySuccess(payBean.getProductId(),payBean.getCpOrderId());
-                        }
-                    }else if (extra_code==1002){//取消
-                        if (iPayListener != null) {
-                            iPayListener.onPayFail();
-                        }
-                    }else {
-                        if (iPayListener != null) {
-                            iPayListener.onPayFail();
-                        }
+                    if (data != null) {
+                        int extra_code = data.getIntExtra(IPay.K_PAY_Extra_Code, IPay.TAG_PAY_FAIL);
+                        BasePayBean payBean = (BasePayBean)data.getSerializableExtra(IPay.K_PAY_Extra_Data);
+                        handlePayCallback(activity, extra_code, payBean);
                     }
                 }
             }
@@ -1007,47 +990,98 @@ public class BaseSdkImpl implements IMWSDK {
 
     @Override
     public void pay(Activity activity, String cpOrderId, String productId, String extra, String roleId, String roleName, String roleLevel, String vipLevel, String severCode, String serverName, IPayListener listener) {
-        pay(activity, SPayType.GOOGLE, cpOrderId, productId, extra, roleId, roleName, roleLevel, vipLevel, severCode, serverName, listener);
+        pay(activity, SPayType.GOOGLE, cpOrderId, productId, extra, roleId, roleName, roleLevel, vipLevel, severCode, serverName, listener, null);
     }
 
     @Override
     public void pay(Activity activity, SPayType payType, String cpOrderId, String productId, String extra, String roleId,String roleName,String roleLevel, String vipLevel, String severCode,String serverName, IPayListener listener) {
+        pay(activity, payType, cpOrderId, productId, extra, roleId, roleName, roleLevel, vipLevel, severCode, serverName, listener, null);
+    }
+
+    @Override
+    public void pay(Activity activity, String cpOrderId, String productId, String extra, String roleId, String roleName, String roleLevel, String vipLevel, String severCode, String serverName, MXCallback mxCallback) {
+        pay(activity, SPayType.GOOGLE, cpOrderId, productId, extra, roleId, roleName, roleLevel, vipLevel, severCode, serverName, null, mxCallback);
+    }
+
+
+    private void pay(Activity activity, SPayType payType, String cpOrderId, String productId, String extra, String roleId,String roleName,String roleLevel, String vipLevel, String severCode,String serverName, IPayListener listener, MXCallback mxCallback) {
         PL.i("sdk pay payType:" + payType.toString() + " ,cpOrderId:" + cpOrderId + ",productId:" + productId + ",extra:" + extra);
         if ((System.currentTimeMillis() - firstClickTime) < 3000) {//防止连续点击
             PL.i("点击过快，无效");
             return;
         }
-        //iPayListener = listener;
         firstClickTime = System.currentTimeMillis();
 
-        activity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
+        activity.runOnUiThread(() -> {
 
-                boolean isCall = SPUtil.getBoolean(activity.getApplicationContext(), SdkUtil.SDK_SP_FILE,"sdk_registerRoleInfo_call");
-                if (!isCall){
-                    PL.e("sdk IMWSDK.registerRoleInfo() not call, plase call IMWSDK.registerRoleInfo() ");
-                    ToastUtils.toastL(activity, "Error: Plase call IMWSDK.registerRoleInfo() when get role info");
-                }
-
-                if (SStringUtil.isEmpty(roleId) || SStringUtil.isEmpty(severCode)){
-                    ToastUtils.toast(activity,"roleId and severCode must not empty");
-                    return;
-                }
-                SdkUtil.saveRoleInfo(activity, roleId, roleName, roleLevel, vipLevel, severCode, serverName);//保存角色信息
-                startPay(activity, payType, cpOrderId, productId, extra, listener);
-                trackEvent(activity, EventConstant.EventName.Initiate_Checkout);
-                //trackEvent(activity, EventConstant.EventName.DetailedLevel);
+            boolean isCall = SPUtil.getBoolean(activity.getApplicationContext(), SdkUtil.SDK_SP_FILE,"sdk_registerRoleInfo_call");
+            if (!isCall){
+                PL.e("sdk IMWSDK.registerRoleInfo() not call, plase call IMWSDK.registerRoleInfo() ");
+                ToastUtils.toastL(activity, "Error: Plase call IMWSDK.registerRoleInfo() when get role info");
             }
+
+            if (SStringUtil.isEmpty(roleId) || SStringUtil.isEmpty(severCode)){
+                ToastUtils.toast(activity,"roleId and severCode must not empty");
+                return;
+            }
+
+            BaseSdkImpl.this.activity = activity;
+            BaseSdkImpl.this.iPayListener = listener;
+            BaseSdkImpl.this.payMxCallback = mxCallback;
+
+            SdkUtil.saveRoleInfo(activity, roleId, roleName, roleLevel, vipLevel, severCode, serverName);//保存角色信息
+            startHandleSdkPay(activity, payType, cpOrderId, productId, extra);
+            trackEvent(activity, EventConstant.EventName.Initiate_Checkout);
+            //trackEvent(activity, EventConstant.EventName.DetailedLevel);
         });
+    }
+
+
+    private void handlePayCallback(Context mContext, int state, BasePayBean basePayBean){
+
+        if (iPayListener != null){
+            if (IPay.TAG_PAY_SUCCESS == state){
+                if (basePayBean != null) {
+                    iPayListener.onPaySuccess(basePayBean.getProductId(), basePayBean.getCpOrderId());
+                }else {
+                    iPayListener.onPaySuccess("", "");
+                }
+            }else if (IPay.TAG_PAY_CANCEL == state){
+                //取消，此处保留之前的不回调
+                PL.d("TAG_PAY_CANCEL");
+            }else {
+                iPayListener.onPayFail();
+            }
+            return;
+        }
+
+        if (payMxCallback != null){
+
+            MXData mxData = new MXData();
+            if (basePayBean != null) {
+                mxData.setOrderId(basePayBean.getOrderId());
+                mxData.setCpOrderId(basePayBean.getCpOrderId());
+                mxData.setProductId(basePayBean.getProductId());
+                mxData.setUserId(basePayBean.getUserId());
+                mxData.setPurchaseToken(basePayBean.getmToken());
+            }
+
+            if (IPay.TAG_PAY_SUCCESS == state){
+                payMxCallback.success(mxData);
+            }else if (IPay.TAG_PAY_CANCEL == state){
+                payMxCallback.cancel(mxData);
+            }else {
+                payMxCallback.fail(mxData);
+            }
+        }
+
     }
 
 //    protected String productId;
 //    protected String cpOrderId;
 //    protected String extra;
-    protected void startPay(final Activity activity, final SPayType payType, final String cpOrderId, final String productId, final String extra, IPayListener listener) {
-        this.iPayListener = listener;
-        this.activity = activity;
+    protected void startHandleSdkPay(final Activity activity, final SPayType payType, final String cpOrderId, final String productId, final String extra) {
+
 //        this.productId = productId;
 //        this.cpOrderId = cpOrderId;
 //        this.extra = extra;
@@ -1075,11 +1109,11 @@ public class BaseSdkImpl implements IMWSDK {
                 || ChannelPlatform.SAMSUNG.getChannel_platform().equals(channel_platform)
                 || ChannelPlatform.Xiaomi.getChannel_platform().equals(channel_platform)
                 || ChannelPlatform.NOWGG.getChannel_platform().equals(channel_platform)){
-            checkGoogleOrWebPay(activity, payCreateOrderReqBean);
+            checkPayChannel(activity, payCreateOrderReqBean);
         }else if (ChannelPlatform.BAZAAR.getChannel_platform().equals(channel_platform)){
 
             Intent intent = new Intent(activity, BazaarPayActivity.class);
-            intent.putExtra(BazaarPayActivity.K_Extra_Data, payCreateOrderReqBean);
+            intent.putExtra(IPay.K_PAY_Extra_Data, payCreateOrderReqBean);
             activity.startActivityForResult(intent, BazaarPayActivity.Request_Code_BazaarPay);
 
         }else{
@@ -1099,31 +1133,27 @@ public class BaseSdkImpl implements IMWSDK {
                 @Override
                 public void success(BasePayBean basePayBean) {
                     PL.i("huawei IPayCallBack success");
-                    if (iPayListener != null) {
-                        iPayListener.onPaySuccess(basePayBean.getProductId(),basePayBean.getCpOrderId());
-                    }
+                    handlePayCallback(activity, IPay.TAG_PAY_SUCCESS, basePayBean);
                 }
 
                 @Override
                 public void fail(BasePayBean basePayBean) {
                     PL.i("huawei IPayCallBack fail");
-                    if (iPayListener != null) {
-                        iPayListener.onPayFail();
-                    }
+                    handlePayCallback(activity, IPay.TAG_PAY_FAIL, basePayBean);
                 }
 
                 @Override
                 public void cancel(String msg) {
-                    if (iPayListener != null) {
-                        iPayListener.onPayFail();
-                    }
+                    BasePayBean basePayBean = new BasePayBean();
+                    basePayBean.setMessage(msg);
+                    handlePayCallback(activity, IPay.TAG_PAY_CANCEL, basePayBean);
                 }
             });
         }
         huaweiPay.startPay(activity, payCreateOrderReqBean);
     }
 
-    private void checkGoogleOrWebPay(Activity activity, PayCreateOrderReqBean payCreateOrderReqBean) {
+    private void checkPayChannel(Activity activity, PayCreateOrderReqBean payCreateOrderReqBean) {
 
         ConfigBean configBean = SdkUtil.getSdkCfg(activity);
         if (configBean != null) {
@@ -1164,19 +1194,19 @@ public class BaseSdkImpl implements IMWSDK {
                             }
 
                         }else {
-                            doGooglePay(activity, payCreateOrderReqBean);
+                            doNativePay(activity, payCreateOrderReqBean);
                         }
                     }
 
                     @Override
                     public void fail(ToggleResult result, String msg) {
-                        doGooglePay(activity, payCreateOrderReqBean);
+                        doNativePay(activity, payCreateOrderReqBean);
                     }
                 });
                 return;
             }
         }
-        doGooglePay(activity, payCreateOrderReqBean);
+        doNativePay(activity, payCreateOrderReqBean);
     }
 
    /* public void showTogglePayDialog(Activity activity, PayCreateOrderReqBean payCreateOrderReqBean) {
@@ -1235,7 +1265,7 @@ public class BaseSdkImpl implements IMWSDK {
                     }
                 }
 
-                doGooglePay(activity, payCreateOrderReqBean);
+                doNativePay(activity, payCreateOrderReqBean);
                 if (result == ChannelPlatform.GOOGLE){
                     trackEvent(activity, EventConstant.EventName.select_google.name());
                 }
@@ -1290,7 +1320,7 @@ public class BaseSdkImpl implements IMWSDK {
                     }
                 }
 
-                doGooglePay(activity, payCreateOrderReqBean);
+                doNativePay(activity, payCreateOrderReqBean);
                 if (ChannelPlatform.GOOGLE.getChannel_platform().equals(msg)){
                     trackEvent(activity, EventConstant.EventName.select_google.name());
                 }
@@ -1317,7 +1347,7 @@ public class BaseSdkImpl implements IMWSDK {
         commonDialog.show();
     }
 
-    private void doGooglePay(Activity activity, PayCreateOrderReqBean payCreateOrderReqBean) {
+    private void doNativePay(Activity activity, PayCreateOrderReqBean payCreateOrderReqBean) {
 
         //设置Google储值的回调
         iPay.setIPayCallBack(new IPayCallBack() {
@@ -1329,11 +1359,7 @@ public class BaseSdkImpl implements IMWSDK {
                     otherPayWebViewDialog.dismiss();
                 }
 
-//                SdkEventLogger.trackinPayEvent(activity, basePayBean);
-
-                if (iPayListener != null) {
-                    iPayListener.onPaySuccess(basePayBean.getProductId(),basePayBean.getCpOrderId());
-                }
+                handlePayCallback(activity, IPay.TAG_PAY_SUCCESS, basePayBean);
             }
 
             @Override
@@ -1350,16 +1376,14 @@ public class BaseSdkImpl implements IMWSDK {
                 }
                 TDAnalyticsHelper.trackEvent(activity, "pay_fail",eventPropertie);
 
-                if (iPayListener != null) {
-                    iPayListener.onPayFail();
-                }
+                handlePayCallback(activity, IPay.TAG_PAY_FAIL, basePayBean);
             }
 
             @Override
             public void cancel(String msg) {
-                if (iPayListener != null) {
-                    iPayListener.onPayFail();
-                }
+                BasePayBean basePayBean = new BasePayBean();
+                basePayBean.setMessage(msg);
+                handlePayCallback(activity, IPay.TAG_PAY_CANCEL, basePayBean);
             }
         });
 
@@ -1705,29 +1729,11 @@ public class BaseSdkImpl implements IMWSDK {
         bean.setCompleteUrl(payThirdUrl);
 
         String webUrl = bean.createPreRequestUrl();
-
-        Intent intent = MWWebPayActivity.create(activity,"",webUrl,bean.getCpOrderId(),bean.getProductId(),bean.getExtra());
-        activity.startActivityForResult(intent, RequestCode.RequestCode_Web_Pay);
-
-     /*   otherPayWebViewDialog = new SWebViewDialog(activity, R.style.Sdk_Theme_AppCompat_Dialog_Notitle_Fullscreen);
-        otherPayWebViewDialog.setWebUrl(webUrl);
-        otherPayWebViewDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-//                if (iPayListener != null) {
-//                    iPayListener.onPayFinish(new Bundle());
-//                } else {
-//                    PL.i(TAG, "a null occour");
-//                }
-            }
-        });
-        otherPayWebViewDialog.setsWebDialogCallback(new SWebViewDialog.SWebDialogCallback() {
-            @Override
-            public void createFinish(SWebViewDialog sWebViewDialog, SWebView sWebView) {
-                sWebView.addJavascriptInterface(BaseSdkImpl.this,"SdkObj");
-            }
-        });
-        otherPayWebViewDialog.show();*/
+        boolean success = SCustomTabHelper.startCustomTab(activity, webUrl);
+        if (!success){
+            Intent intent = MWWebPayActivity.create(activity,"",webUrl,bean.getCpOrderId(),bean.getProductId(),bean.getExtra());
+            activity.startActivityForResult(intent, RequestCode.RequestCode_Web_Pay);
+        }
     }
 
 

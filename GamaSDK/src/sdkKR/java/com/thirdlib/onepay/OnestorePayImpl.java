@@ -52,7 +52,6 @@ import kotlin.jvm.functions.Function0;
 
 public class OnestorePayImpl implements IPay, PurchaseManager.Callback {
 
-    public static final String TAG_USER_CANCEL = "TAG_PAY_USER_CANCEL";
     private PurchaseManager purchaseManager;
     private AuthManager authManager;
 

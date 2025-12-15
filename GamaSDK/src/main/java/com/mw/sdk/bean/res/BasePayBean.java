@@ -4,17 +4,16 @@ import java.io.Serializable;
 
 public class BasePayBean implements Serializable {
 
-    private String mItemType;  // ITEM_TYPE_INAPP or ITEM_TYPE_SUBS
+    private String userId;
     private String mToken;
     private String orderId;//平台订单号，不是Google等
     private String packageName;
     private String productId;
     private long purchaseTime;
     private String developerPayload;
-    private String transactionId;
+    private String transactionId;//金流订单号
     private int purchaseState;
     private String signature;
-    private int recurringState;
     private String originPurchaseData;
     private String cpOrderId;
     private double usdPrice;
@@ -22,14 +21,24 @@ public class BasePayBean implements Serializable {
     private String currency;
 
     private String serverTimestamp;
+    private String message;
 
-    public String getmItemType() {
-        return mItemType;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setmItemType(String mItemType) {
-        this.mItemType = mItemType;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
 
     public String getmToken() {
         return mToken;
@@ -102,14 +111,6 @@ public class BasePayBean implements Serializable {
 
     public void setSignature(String signature) {
         this.signature = signature;
-    }
-
-    public int getRecurringState() {
-        return recurringState;
-    }
-
-    public void setRecurringState(int recurringState) {
-        this.recurringState = recurringState;
     }
 
     public String getOriginPurchaseData() {

@@ -17,7 +17,7 @@ import com.mw.sdk.pay.IPayFactory;
 import com.mw.sdk.pay.WebPayJs;
 
 /**
- * Created by GanYuanrong on 2016/12/1.
+ * Created by GanYuanrong on 2016/12/1.  第三方内嵌充值页面
  */
 
 public class MWWebPayActivity extends MWBaseWebActivity {
@@ -173,13 +173,16 @@ public class MWWebPayActivity extends MWBaseWebActivity {
     }
 
     private void setActivityResult(boolean success, String productId,String cpOrderId){
+        Intent resultIntent = new Intent();
         if (success) {
-            Intent resultIntent = new Intent();
-            resultIntent.putExtra("mw_productId",productId);
-            resultIntent.putExtra("mw_cpOrderId",cpOrderId);
-            setResult(ResultCode.ResultCode_Web_Pay,resultIntent);
+            resultIntent.putExtra(IPay.K_PAY_Extra_Code, IPay.TAG_PAY_SUCCESS);
+            BasePayBean payBean = new BasePayBean();
+            payBean.setCpOrderId(cpOrderId);
+            payBean.setProductId(productId);
+            resultIntent.putExtra(IPay.K_PAY_Extra_Data, payBean);
         }else{
-            setResult(ResultCode.ResultCode_Web_Pay);
+            resultIntent.putExtra(IPay.K_PAY_Extra_Code, IPay.TAG_PAY_FAIL);
         }
+        setResult(ResultCode.ResultCode_Web_Pay, resultIntent);
     }
 }

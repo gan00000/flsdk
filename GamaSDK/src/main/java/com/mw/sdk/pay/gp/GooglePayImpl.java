@@ -54,8 +54,6 @@ import java.util.stream.Collectors;
 
 public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCallback {
 
-    public static final String TAG_USER_CANCEL = "TAG_GOOGLE_PAY_USER_CANCEL";
-
     private LoadingDialog loadingDialog;
 
     /**
@@ -88,19 +86,29 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
                     BasePayBean payBean = new BasePayBean();
                     if (purchase != null) {
                         try {
-                            if (purchase.getAccountIdentifiers() != null && SStringUtil.isNotEmpty(purchase.getAccountIdentifiers().getObfuscatedProfileId())) {
-                                payBean.setOrderId(purchase.getAccountIdentifiers().getObfuscatedProfileId());
-                            }else {
-                                payBean.setOrderId(purchase.getOrderId());
-                            }
-                            payBean.setTransactionId(purchase.getOrderId());
-                            payBean.setPackageName(purchase.getPackageName());
-                            payBean.setUsdPrice(skuAmount);
+
                             if (createOrderIdReqBean != null) {
                                 payBean.setProductId(createOrderIdReqBean.getProductId());
                                 payBean.setCpOrderId(createOrderIdReqBean.getCpOrderId());
+                                payBean.setUserId(createOrderIdReqBean.getUserId());
                             }
-//                    payBean.setmItemType(purchase.getItemType());
+
+                            if (gpExchangeRes != null && gpExchangeRes.getData() != null) {
+                                payBean.setServerTimestamp(gpExchangeRes.getData().getTimestamp());
+                                payBean.setOrderId(gpExchangeRes.getData().getOrderId());
+                                payBean.setUsdPrice(gpExchangeRes.getData().getAmount());
+                            }
+
+                            if (purchase.getAccountIdentifiers() != null && SStringUtil.isNotEmpty(purchase.getAccountIdentifiers().getObfuscatedProfileId())) {
+                                payBean.setOrderId(purchase.getAccountIdentifiers().getObfuscatedProfileId());
+                            }
+                            if (purchase.getAccountIdentifiers() != null && SStringUtil.isNotEmpty(purchase.getAccountIdentifiers().getObfuscatedAccountId())) {
+                                payBean.setUserId(purchase.getAccountIdentifiers().getObfuscatedAccountId());
+                            }
+
+                            payBean.setTransactionId(purchase.getOrderId());
+                            payBean.setPackageName(purchase.getPackageName());
+                            //payBean.setUsdPrice(skuAmount);
                             payBean.setOriginPurchaseData(purchase.getOriginalJson());
                             payBean.setPurchaseState(purchase.getPurchaseState());
                             payBean.setPurchaseTime(purchase.getPurchaseTime());
@@ -111,10 +119,6 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
                                 double price = skuDetails.getOneTimePurchaseOfferDetails().getPriceAmountMicros() / 1000000.00;
                                 payBean.setPrice(price);
                                 payBean.setCurrency(skuDetails.getOneTimePurchaseOfferDetails().getPriceCurrencyCode());
-                            }
-
-                            if (gpExchangeRes != null && gpExchangeRes.getData() != null) {
-                                payBean.setServerTimestamp(gpExchangeRes.getData().getTimestamp());
                             }
 
                         } catch (Exception e) {
@@ -618,9 +622,9 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
     @Override
     public void handleCancel(String msg) {
         PL.i( "pay handleCancel");
-        dimissDialog();
+//        dimissDialog();
         //取消不回调
-        //callbackFail(TAG_USER_CANCEL);
+        callbackFail(TAG_USER_CANCEL);
     }
 
     private void sendGoodsToUser(Purchase purchase, boolean reissue) {

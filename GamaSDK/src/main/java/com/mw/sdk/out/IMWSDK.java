@@ -13,6 +13,7 @@ import com.mw.base.bean.SPayType;
 import com.mw.sdk.ads.EventConstant;
 import com.mw.sdk.bean.req.PayCreateOrderReqBean;
 import com.mw.sdk.callback.IPayListener;
+import com.mw.sdk.callback.MXCallback;
 import com.mw.sdk.login.ILoginCallBack;
 import com.mw.sdk.login.model.response.SLoginResponse;
 
@@ -74,8 +75,10 @@ public interface IMWSDK extends IGameLifeCycle {
      * @param serverName        角色伺服器名称	 	必传
      * @param listener          充值回调              辅助回调，充值是否成功以服务端回调为准
      */
+    @Deprecated
     void pay(Activity activity, SPayType payType, String cpOrderId, String productId, String extra, String roleId,String roleName,String roleLevel,String vipLevel,String severCode,String serverName, IPayListener listener);
     void pay(Activity activity, String cpOrderId, String productId, String extra, String roleId,String roleName,String roleLevel,String vipLevel,String severCode,String serverName, IPayListener listener);
+    void pay(Activity activity, String cpOrderId, String productId, String extra, String roleId,String roleName,String roleLevel,String vipLevel,String severCode,String serverName, MXCallback mxCallback);
 
 //    void openWebview(Activity activity);
 

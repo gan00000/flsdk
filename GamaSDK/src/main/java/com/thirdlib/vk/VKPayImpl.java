@@ -41,7 +41,6 @@ import ru.rustore.sdk.pay.model.PurchaseStatus;
 
 public class VKPayImpl implements IPay, VKPurchaseManger.PurchaseCallback {
 
-    public static final String TAG_USER_CANCEL = "TAG_PAY_USER_CANCEL";
 //    private VKPurchaseManger purchaseManager;
 
     private LoadingDialog loadingDialog;
@@ -659,15 +658,17 @@ public class VKPayImpl implements IPay, VKPurchaseManger.PurchaseCallback {
     }
 
     @Override
-    public void onPurchaseFailed(ProductPurchaseResult paymentResult) {
-
-    }
-
-    @Override
     public void onError(String message) {
         PL.i("onError:" + message);
         if (mActivity != null && this.createOrderIdReqBean != null){//此时用户正在购买
             callbackFail("" + message);
+        }
+    }
+
+    @Override
+    public void onCancel(String message) {
+        if (mActivity != null && this.createOrderIdReqBean != null){//此时用户正在购买
+            callbackFail(TAG_USER_CANCEL);
         }
     }
 

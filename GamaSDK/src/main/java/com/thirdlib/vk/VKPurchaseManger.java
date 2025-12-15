@@ -193,13 +193,24 @@ public class VKPurchaseManger {
                     } else if (throwable instanceof RuStorePaymentException.ProductPurchaseCancelled) {
                         // Handle product purchase cancellation
                         PL.e("Handle product purchase cancellation");
+                        if (purchaseCallback != null){
+                            purchaseCallback.onCancel(throwable.getMessage());
+                        }
                     } else {
                         // Handle other error
                         PL.e("Handle other error:" + throwable.getMessage());
                     }
-                    if (purchaseCallback != null){
-                        purchaseCallback.onError(throwable.getMessage());
+
+                    if (throwable instanceof RuStorePaymentException.ProductPurchaseCancelled) {
+                        if (purchaseCallback != null){
+                            purchaseCallback.onCancel(throwable.getMessage());
+                        }
+                    }else {
+                        if (purchaseCallback != null){
+                            purchaseCallback.onError(throwable.getMessage());
+                        }
                     }
+
                 });
 
 //        String developerPayload = "your_developer_payload";
@@ -318,7 +329,7 @@ public class VKPurchaseManger {
 
         void onQueryPurchaseSucceed(List<Purchase> purchases);
         void onPayingQueryPurchaseSucceed(List<Purchase> purchases);
-        void onPurchaseFailed(ProductPurchaseResult paymentResult);
         void onError(String message);
+        void onCancel(String message);
     }
 }
