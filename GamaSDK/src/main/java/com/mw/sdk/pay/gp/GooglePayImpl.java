@@ -210,7 +210,7 @@ public class GooglePayImpl implements IPay, GBillingHelper.BillingHelperStatusCa
         }
 
         //创建Loading窗
-        if(loadingDialog == null ||  this.mActivity != activity){
+        if(loadingDialog == null || this.mActivity != activity){
             dimissDialog();
             loadingDialog = new LoadingDialog(activity);
         }

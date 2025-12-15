@@ -170,6 +170,12 @@ public class CafeBazaarPayImpl implements IPay {
 
         PL.i("the aar version info:" + SdkUtil.getSdkInnerVersion(activity) + "_" + BuildConfig.JAR_VERSION);//打印版本号
 
+        //创建Loading窗
+        if(loadingDialog == null ||  this.mActivity != activity){
+            dimissDialog();
+            loadingDialog = new LoadingDialog(activity);
+        }
+
         if (!ThirdModuleUtil.existBazaarModule()){
             PL.w("BazaarModule is unavailable");
             callbackFail("bazaar module error");
@@ -197,12 +203,6 @@ public class CafeBazaarPayImpl implements IPay {
             ToastUtils.toast(activity,"Please install the Bazaar app first.");
             callbackFail("Please install the Bazaar app first.");
             return;
-        }
-
-        //创建Loading窗
-        if(loadingDialog == null ||  this.mActivity != activity){
-            dimissDialog();
-            loadingDialog = new LoadingDialog(activity);
         }
 
         PL.w("set paying...");
