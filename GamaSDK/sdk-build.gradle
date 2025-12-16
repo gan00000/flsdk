@@ -7,8 +7,8 @@ android {
 //            multiDexEnabled true //Add this
 //            shrinkResources true  //压缩资源
             minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            consumerProguardFiles 'proguard-rules.pro'  // 添加此行 将 proguard-rules.pro 文件打包进AAR 文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), "${project.rootDir}/GamaSDK/proguard-rules.pro"
+            consumerProguardFiles "${project.rootDir}/GamaSDK/proguard-rules.pro"  // 添加此行 将 proguard-rules.pro 文件打包进AAR 文件
         }
 
         debug {
