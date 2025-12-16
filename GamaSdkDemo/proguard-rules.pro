@@ -21,18 +21,20 @@
 # typically classes that are dynamically created using Class.forName:
 
 -keep public class com.mw.sdk.out.** { *; }
--keep public class com.thirdlib.vk.VKPurchaseManger { *; }
+#-keep public class com.thirdlib.vk.VKPurchaseManger { *; }
 -keep public class * extends java.lang.Enum { *; }
 -keep public class * extends com.core.base.bean.BaseResponseModel { *; }
 -keep public class * extends com.core.base.bean.AbsReqeustBean { *; }
 -keep public class com.mw.sdk.login.model.response.SLoginResponse$Data { *; }
 -keep public class com.mw.sdk.login.ILoginCallBack { *; }
 -keep public class com.mw.sdk.callback.IPayListener { *; }
+-keep public class com.mw.sdk.callback.MXCallback { *; }
 -keep public class com.mw.base.bean.SPayType { *; }
 -keep public class com.core.base.callback.SFCallBack { *; }
 -keep public class com.mw.sdk.pay.WebPayJs { *; }
 -keep public class com.core.base.utils.PL { *; }
 -keep public class com.mw.sdk.ads.EventConstant { *; }
+-keep public class com.mw.sdk.ads.EventConstant$EventName { *; }
 -keep public class com.core.base.bean.BaseResponseModel { *; }
 -keep public class com.core.base.bean.AbsReqeustBean { *; }
 -keep public class com.mw.sdk.bean.res.GPExchangeRes$Data { *; }
@@ -44,8 +46,14 @@
 -keep public class com.mw.sdk.login.model.QooAppLoginModel { *; }
 -keep public class com.mw.sdk.login.model.QooAppLoginModel$UserData { *; }
 -keep public class com.mw.sdk.bean.SUserInfo { *; }
+-keep public class com.mw.sdk.bean.SRoleInfoBean { *; }
 -keep public class com.mw.sdk.bean.res.ToggleResult { *; }
 -keep public class com.mw.sdk.bean.res.ToggleResult$Data { *; }
+-keep public class com.mw.sdk.bean.MXData { *; }
+# 保留所有类的 public 方法名：
+-keepclassmembers class com.core.base.callback.IGameLifeCycle {
+    public *;
+}
 
 -keep public class com.mw.**.*Data { *; }
 -keep public class com.mw.**.*Model { *; }
@@ -67,8 +75,6 @@
   public *;
 }
 -keep public class com.bumptech.** { *; }
-
--keep public class * extends java.lang.Enum { *; }
 
 -keep public class android.** { *; }
 -keep public class androidx.** { *; }
@@ -100,10 +106,10 @@
 -keep public class com.xlsdk.mediator.** { *; }
 -keep public class com.samsung.** { *; }
 
--keepattributes Signature
-# For using GSON @Expose annotation
+#保留所有与 JSON 解析相关的注解（如 @SerializedName）
 -keepattributes *Annotation*
-
+-keepattributes Signature # 保留泛型（如 List<User>）
+-keepattributes EnclosingMethod # 保留内部类
 # Prevent proguard from stripping interface information from TypeAdapter, TypeAdapterFactory,
 # JsonSerializer, JsonDeserializer instances (so they can be used in @JsonAdapter)
 -keep class * extends com.google.gson.TypeAdapter
@@ -129,8 +135,16 @@
 -keep class kotlin.jvm.internal.** { *; }
 -keep public class com.android.installreferrer.** { *; }
 -keep class com.huawei.hms.**{*;}
+#小米
+-keep public class com.miui.** {*;}
+-keep public class com.xiaomi.** {*;}
 
--dontwarn com.huawei.**
--dontwarn com.xiaomi.**
--dontwarn com.gaa.**
--dontwarn com.samsung.**
+#nowgg
+-keep public class com.thirdlib.nowgg.TokenVerifyResponse { *; }
+-keep public class com.thirdlib.nowgg.UserDataVerified { *; }
+-keep public class com.thirdlib.nowgg.TokenVerifyRequest { *; }
+#singular
+-keep class com.singular.sdk.** { *; }
+-keep public class com.android.installreferrer.** { *; }
+# Uncomment this line in case your are calling the 'revenue' function using the Google billing library
+-keep public class com.android.** { *; }

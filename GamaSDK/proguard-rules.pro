@@ -76,8 +76,6 @@
 }
 -keep public class com.bumptech.** { *; }
 
--keep public class * extends java.lang.Enum { *; }
-
 -keep public class android.** { *; }
 -keep public class androidx.** { *; }
 -keep public class com.facebook.** { *; }
@@ -108,6 +106,10 @@
 -keep public class com.xlsdk.mediator.** { *; }
 -keep public class com.samsung.** { *; }
 
+#保留所有与 JSON 解析相关的注解（如 @SerializedName）
+-keepattributes *Annotation*
+-keepattributes Signature # 保留泛型（如 List<User>）
+-keepattributes EnclosingMethod # 保留内部类
 # Prevent proguard from stripping interface information from TypeAdapter, TypeAdapterFactory,
 # JsonSerializer, JsonDeserializer instances (so they can be used in @JsonAdapter)
 -keep class * extends com.google.gson.TypeAdapter
