@@ -28,6 +28,7 @@
 -keep public class com.mw.sdk.login.model.response.SLoginResponse$Data { *; }
 -keep public class com.mw.sdk.login.ILoginCallBack { *; }
 -keep public class com.mw.sdk.callback.IPayListener { *; }
+-keep public class com.mw.sdk.callback.MXCallback { *; }
 -keep public class com.mw.base.bean.SPayType { *; }
 -keep public class com.core.base.callback.SFCallBack { *; }
 -keep public class com.mw.sdk.pay.WebPayJs { *; }
@@ -48,6 +49,7 @@
 -keep public class com.mw.sdk.bean.SRoleInfoBean { *; }
 -keep public class com.mw.sdk.bean.res.ToggleResult { *; }
 -keep public class com.mw.sdk.bean.res.ToggleResult$Data { *; }
+-keep public class com.mw.sdk.bean.MXData { *; }
 # 保留所有类的 public 方法名：
 -keepclassmembers class com.core.base.callback.IGameLifeCycle {
     public *;
