@@ -71,7 +71,7 @@ public class Request {
                     @Override
                     public void onNext(@NonNull String result) {
                         if (iSdkCallBack != null){
-                            iSdkCallBack.fail(result, "");
+                            iSdkCallBack.success(result, "");
                         }
                     }
 
