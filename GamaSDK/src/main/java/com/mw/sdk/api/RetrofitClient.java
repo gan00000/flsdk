@@ -6,10 +6,16 @@ import com.core.base.utils.PL;
 import com.core.base.utils.SStringUtil;
 import com.mw.sdk.utils.ResConfig;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
+import okhttp3.ConnectionPool;
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
@@ -114,15 +120,6 @@ public class RetrofitClient {
 //            return null;
 //        }
 
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor(/*new HttpLoggingInterceptor.Logger() {
-            @Override
-            public void log(@NonNull String s) {
-                PL.d("RetrofitLog=" + s);
-            }
-        }*/);
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient okHttpClient = new OkHttpClient.Builder().addInterceptor(interceptor).build();
-
         //只要按「ScalarsConverterFactory 在前，GsonConverterFactory 在后」的顺序配置，
         // Retrofit 就能根据接口声明的返回类型自动、正确地选择对应的转换器
         //顺序不要反，不然可能会出现解析错误
@@ -130,34 +127,64 @@ public class RetrofitClient {
         if (SStringUtil.isEmpty(baseUrl)){
             PL.e("baseUrl is empty");
             //return null;
-            Retrofit retrofit = new Retrofit.Builder()
-                    .client(okHttpClient)
+            //.baseUrl(baseUrl)
+            return new Retrofit.Builder()
+                    .client(getOkHttpClient())
                     //.baseUrl(baseUrl)
                     .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                     .addConverterFactory(ScalarsConverterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
-            return retrofit;
         }
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .client(okHttpClient)
+        return new Retrofit.Builder()
+                .client(getOkHttpClient())
                 .baseUrl(baseUrl)
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-
-        return retrofit;
     }
 
-//    private void createRetrofit() {
-//        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-//        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-//        OkHttpClient okHttpClient = new OkHttpClient.Builder().addInterceptor(interceptor).build();
 
-//        retrofit = new Retrofit.Builder().baseUrl(HOST_NAME).client(okHttpClient)
-//                .addConverterFactory(LoganSquareConverterFactory.create())
-//                .addCallAdapterFactory(RxJavaCallAdapterFactory.create()).build();
-//    }
+    // 全局唯一的 OkHttpClient（核心，复用连接池）
+    private static OkHttpClient sOkHttpClient;
+    // 初始化 OkHttpClient（配置通用网络参数）
+    private static OkHttpClient getOkHttpClient() {
+        if (sOkHttpClient == null) {
+            synchronized (RetrofitClient.class) {
+                if (sOkHttpClient == null) {
+
+                    HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor(/*new HttpLoggingInterceptor.Logger() {
+                        @Override
+                        public void log(@NonNull String s) {
+                            PL.d("RetrofitLog=" + s);
+                        }
+                    }*/);
+                    interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+                    sOkHttpClient = new OkHttpClient.Builder()
+                            .connectTimeout(20, TimeUnit.SECONDS) // 通用超时
+                            .readTimeout(20, TimeUnit.SECONDS)
+                            .writeTimeout(20, TimeUnit.SECONDS)
+                            .addInterceptor(interceptor) // 公共拦截器（如加 Header）
+                            .connectionPool(new ConnectionPool(5, 2, TimeUnit.MINUTES)) // 连接池复用
+                            .build();
+                }
+            }
+        }
+        return sOkHttpClient;
+    }
+
+    /*private static class CommonInterceptor implements Interceptor {
+        @Override
+        public Response intercept(Chain chain) throws IOException {
+            Request original = chain.request();
+            Request request = original.newBuilder()
+                    .header("Token", "your_global_token") // 全局 Token
+                    .header("Content-Type", "application/x-www-form-urlencoded")
+                    .build();
+            return chain.proceed(request);
+        }
+    }*/
 }
