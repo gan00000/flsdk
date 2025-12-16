@@ -1,4 +1,4 @@
-package com.mw.sdk.pay.gp.util;
+package com.thirdlib.google.billing.util;
 
 import android.app.Activity;
 import android.content.Context;

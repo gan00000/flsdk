@@ -56,6 +56,40 @@ import okhttp3.ResponseBody;
 
 public class Request {
 
+    public static void post(Context context, String url, String path, Map<String, String> paramMap, SFCallBack<String> iSdkCallBack) {
+
+        RetrofitClient.instance().getRetrofit(url).create(MWApiService.class)
+                .post(path, paramMap)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull String result) {
+                        if (iSdkCallBack != null){
+                            iSdkCallBack.success(result, "");
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        if (iSdkCallBack != null){
+                            iSdkCallBack.fail("", e.getMessage());
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
+    }
+
     public static void sendVfCode(Context context, boolean needDialog, String areaCode, String telephone, SFCallBack<BaseResponseModel> iSdkCallBack) {
 
         SGameBaseRequestBean sGameBaseRequestBean = new SGameBaseRequestBean(context);

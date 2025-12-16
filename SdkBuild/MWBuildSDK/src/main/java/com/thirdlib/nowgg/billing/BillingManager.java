@@ -1,4 +1,4 @@
-package com.mw.sdk.pay.nowgg.billing;
+package com.thirdlib.nowgg.billing;
 
 import android.app.Activity;
 import android.content.Context;

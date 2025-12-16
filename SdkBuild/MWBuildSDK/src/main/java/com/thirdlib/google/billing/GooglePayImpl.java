@@ -1,4 +1,4 @@
-package com.mw.sdk.pay.gp;
+package com.thirdlib.google.billing;
 
 import android.app.Activity;
 import android.content.Context;
@@ -35,7 +35,7 @@ import com.mw.sdk.out.ISdkCallBack;
 import com.mw.sdk.out.bean.EventPropertie;
 import com.mw.sdk.pay.IPay;
 import com.mw.sdk.pay.IPayCallBack;
-import com.mw.sdk.pay.gp.util.GBillingHelper;
+import com.thirdlib.google.billing.util.GBillingHelper;
 import com.mw.sdk.utils.PayHelper;
 import com.mw.sdk.utils.SdkUtil;
 import com.thirdlib.td.TDAnalyticsHelper;

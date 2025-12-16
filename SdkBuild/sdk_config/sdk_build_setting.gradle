@@ -14,10 +14,10 @@ ext {
 //    sdkFlavor = 'sdk3_ifg'
 //    sdkLanguage = 'ru'//默认语言，即values的语言
 
-    gameCode = "slzhsru"
-    sdkFlavor = 'sdk3'
-//    sdkFlavor = 'huawei'
-    sdkLanguage = 'ru'//默认语言，即values的语言
+//    gameCode = "slzhsru"
+//    sdkFlavor = 'sdk3'
+////    sdkFlavor = 'huawei'
+//    sdkLanguage = 'ru'//默认语言，即values的语言
 
 //    gameCode = "hzwru"
 //    sdkFlavor = 'sdk3_ifg'
@@ -52,5 +52,10 @@ ext {
 //    gameCode = "hsxf"
 //    sdkFlavor = 'sdk4'
 //    sdkLanguage = 'en'//默认语言，即values的语言
+
+    gameCode = "hzru"
+    sdkFlavor = 'sdk3'
+//    sdkFlavor = 'huawei'
+    sdkLanguage = 'ru'//默认语言，即values的语言
 
 }
