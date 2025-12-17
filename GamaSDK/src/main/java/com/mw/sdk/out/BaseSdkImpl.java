@@ -279,17 +279,32 @@ public class BaseSdkImpl implements IMWSDK {
 //
 //    }
 
+    private static String roleIdTemp = "";
+    private static String roleNameTemp = "";
+    private static String roleLevelTemp = "";
+    private static String serverCodeTemp = "";
     @Override
-    public void registerRoleInfo(final Activity activity, final String roleId, final String roleName, final String roleLevel, final String vipLevel, final String severCode, final String serverName) {
+    public void registerRoleInfo(final Activity activity, final String roleId, final String roleName, final String roleLevel, final String vipLevel, final String serverCode, final String serverName) {
 
-        PL.i("IMWSDK registerRoleInfo roleId:" + roleId + ",roleName:" + roleName + ",roleLevel:" + roleLevel + ",vipLevel:" + vipLevel + ",severCode:" + severCode + ",serverName:" + serverName);
+        PL.d("IMWSDK registerRoleInfo roleId:" + roleId + ",roleName:" + roleName + ",roleLevel:" + roleLevel + ",vipLevel:" + vipLevel + ",serverCode:" + serverCode + ",serverName:" + serverName);
 
-        if (SStringUtil.isEmpty(roleId) || SStringUtil.isEmpty(severCode)){
+        if (SStringUtil.isEmpty(roleId) || SStringUtil.isEmpty(serverCode)){
             return;
         }
-        SdkUtil.saveRoleInfo(activity, roleId, roleName, roleLevel, vipLevel, severCode, serverName);//保存角色信息
+
+        if (roleIdTemp.equals(roleId) && roleNameTemp.equals(roleName) && roleLevelTemp.equals(roleLevel) && serverCodeTemp.equals(serverCode)){
+            PL.d("role info same as last time");
+            return;
+        }
+
+        roleIdTemp = roleId;
+        roleNameTemp = roleName;
+        roleLevelTemp = roleLevel;
+        serverCodeTemp = serverCode;
+
+        SdkUtil.saveRoleInfo(activity, roleId, roleName, roleLevel, vipLevel, serverCode, serverName);//保存角色信息
         long curTime = System.currentTimeMillis();
-        if (curTime - this.regRoleInfoTimestamp < 1000 * 60 * 15){
+        if (curTime - this.regRoleInfoTimestamp < 1000 * 30){
             PL.d("registerRoleInfo to fast");
             return;
         }
@@ -310,7 +325,7 @@ public class BaseSdkImpl implements IMWSDK {
                     e.printStackTrace();
                 }
 
-                if (SStringUtil.isNotEmpty(roleId) && SStringUtil.isNotEmpty(severCode) && SStringUtil.isNotEmpty(SdkUtil.getUid(activity))){
+                if (SStringUtil.isNotEmpty(roleId) && SStringUtil.isNotEmpty(serverCode) && SStringUtil.isNotEmpty(SdkUtil.getUid(activity))){
 
                     if (iPay != null) {
                         iPay.startQueryPurchase(activity);

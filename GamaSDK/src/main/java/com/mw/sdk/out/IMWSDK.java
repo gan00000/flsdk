@@ -43,10 +43,10 @@ public interface IMWSDK extends IGameLifeCycle {
      * @param roleName          角色名   			必传
      * @param roleLevel         角色等级			没有传空值 ""
      * @param vipLevel          vip等级   			没有传空值 ""
-     * @param severCode         角色伺服器id 		必传
+     * @param serverCode         角色伺服器id 		必传
      * @param serverName        角色伺服器名称	 	必传
      */
-    void registerRoleInfo(Activity activity,String roleId,String roleName,String roleLevel,String vipLevel,String severCode,String serverName);
+    void registerRoleInfo(Activity activity,String roleId,String roleName,String roleLevel,String vipLevel,String serverCode,String serverName);
 
     /**
      * 登录
