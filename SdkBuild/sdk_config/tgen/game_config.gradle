@@ -1,6 +1,6 @@
 
 ext {
-    sdk_version = "2.4.1"
+    sdk_version = "2.4.2"
     domainUrl= "hwxgame.com"
 }
 
@@ -13,7 +13,7 @@ android {
         release {
 //            multiDexEnabled true //Add this
 //            shrinkResources true  //压缩资源
-            minifyEnabled true
+            minifyEnabled false
             
         }
 
@@ -88,8 +88,6 @@ android {
             resValue "string", "naver_client_secret", ""
 
             resValue "string", "mw_tt_app_id", ""
-
-            resValue "string", "mw_need_refer_code", "true"
 
             //=======================================sdk config end==========================
 

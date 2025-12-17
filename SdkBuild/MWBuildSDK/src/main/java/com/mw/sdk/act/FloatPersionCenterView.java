@@ -273,8 +273,9 @@ public class FloatPersionCenterView extends SLoginBaseRelativeLayout {
         //sLoginResponse.getData().setReferCode("1111133");
 
         //显示
+        String startTime = context.getResources().getString(R.string.mw_show_refer_reg_time);
         if ((ResConfig.isShowReferCode(context)
-                && sLoginResponse.getData().getRegTime() > TimeUtil.getTimestamp("2025-11-28 00:00:00"))
+                && SStringUtil.isNotEmpty(startTime) && sLoginResponse.getData().getRegTime() > TimeUtil.getTimestamp(startTime))
         ) {
 
             int serverReferCode = 0;
