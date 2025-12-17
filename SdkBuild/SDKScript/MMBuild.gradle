@@ -52,12 +52,42 @@ task copyAAR4{
     def game_code = "$gameCode"
     doLast {
         project.copy {
-            from "$project.rootDir/SdkBuild/MWBuildSDK/build/outputs/aar/"
-            into "$project.rootDir/sdk_history"
-            include '**release*' // 筛选 包含的 文件
-            rename { String fileName ->
-                fileName.replace('MWSDK', game_code) // 改名
+
+            // ========== 1. 拷贝 AAR 文件（源路径1） ==========
+            from ("$project.rootDir/SdkBuild/MWBuildSDK/build/outputs/aar/") {
+                include '**release*' // 筛选 release 版本的 AAR
             }
+
+            // 第二个 from：拷贝混淆映射文件（新增）
+//            from ("$project.rootDir/SdkBuild/MWBuildSDK/build/outputs/mapping/") {
+//                // **/* 匹配所有层级的目标文件，无需关心中间目录名
+//                include '**/mapping.txt',
+//                        '**/seeds.txt',
+//                        '**/usage.txt',
+//                        '**/dump.txt'
+//            }
+
+            into "$project.rootDir/sdk_history/${game_code}"
+
+            // 自定义混淆映射文件输出目录
+            //mapping.txt（核心映射）、seeds.txt（未被混淆的类 / 方法）、
+            // usage.txt（被移除的代码）、dump.txt（类结构 Dump）
+            // 重命名逻辑（区分文件类型）
+            rename { String fileName ->
+                if (fileName.endsWith('.aar')) {
+                    // AAR 文件：替换 MWSDK 为 game_code
+                    fileName.replace('MWSDK', game_code) // 改名
+                }else{
+                    // 混淆文件：直接返回原文件名（不改名）
+                    println("fileName====" + fileName)
+                    fileName
+                }
+            }
+
+            // 可选配置（避免拷贝异常）
+            duplicatesStrategy = 'INCLUDE' // 覆盖重名文件
+            includeEmptyDirs = false         // 不拷贝空目录
+            //caseSensitive = false            // 忽略大小写（兼容 Release/release 目录）
         }
     }
 }
